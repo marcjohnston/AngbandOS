@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class StoreFactory : IItemFilter, IGetKey, IToJson
+internal sealed class StoreFactory : IItemFilter, IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public StoreFactory(Game game, StoreFactoryGameConfiguration storeFactoryGameConfiguration)
     {
         Game = game;
@@ -155,26 +155,26 @@ internal class StoreFactory : IItemFilter, IGetKey, IToJson
     /// <summary>
     /// Returns true, if the store is an empty lot; false, if it is a store.  Empty lots render as either grave yards or fields.
     /// </summary>
-    public virtual bool IsEmptyLot { get; } = false;
+    public bool IsEmptyLot { get; } = false;
 
     /// <summary>
     /// Returns true, if the store (non-empty lot) is built from permanent rock.  Abandoned stores are created from inner walls and removeable rubble.
     /// </summary>
-    public virtual bool BuildingsMadeFromPermanentRock { get; } = true;
+    public bool BuildingsMadeFromPermanentRock { get; } = true;
 
     /// <summary>
     /// Returns true, if the entrances to the stores are are randomly placed.
     /// </summary>
-    public virtual bool StoreEntranceDoorsAreBlownOff { get; } = false;
+    public bool StoreEntranceDoorsAreBlownOff { get; } = false;
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     /// <summary>
     /// Returns the number of items in a page for the store.
     /// </summary>
-    public virtual int PageSize { get; } = 26;
+    public int PageSize { get; } = 26;
 
-    public virtual bool UseHomeCarry { get; } = false;
+    public bool UseHomeCarry { get; } = false;
 
     /// <summary>
     /// Returns true, if the store will accept items from the player (e.g. sell or drop).  An item matches, if any ItemFilter matches the item.
@@ -200,13 +200,13 @@ internal class StoreFactory : IItemFilter, IGetKey, IToJson
     /// Returns the names of the item matching criterion used to determine which items the store buys.  Returns an empty arrary, by default, to
     /// indicate that the store does not buy any items.
     /// </summary>
-    protected virtual string[] ItemFilterNames { get; } = new string[] { };
+    private string[] ItemFilterNames { get; } = new string[] { };
 
     /// <summary>
     /// Returns true, if the store is a home that can be bought; false, otherwise.  When true, the doors locked will return true, if the store/home 
     /// is in the correct town.  Returns false, by default.
     /// </summary>
-    public virtual bool IsHomeThatCanBeBought { get; } = false;
+    public bool IsHomeThatCanBeBought { get; } = false;
 
     /// <summary>
     /// Returns true, if the doors to the store are locked; false, if the store is open.  Returns false, by default.
@@ -234,22 +234,22 @@ internal class StoreFactory : IItemFilter, IGetKey, IToJson
     /// Returns whether or not the store should perform maintenance.  When true, the store will automatically maintain stock levels based on the 
     /// MinKeep, MaxKeep and Turnover values.  Returns true, by default.
     /// </summary>
-    public virtual bool MaintainsStockLevels { get; } = true;
+    public bool MaintainsStockLevels { get; } = true;
 
     /// <summary>
     /// Returns the maximum number of items the store should maintain.  Returns one pagesize (26), by default.
     /// </summary>
-    public virtual int MaxInventory { get; }
+    public int MaxInventory { get; }
 
     /// <summary>
     /// Returns the minimum number of items the store should maintain.  Applies only when MaintainsStockLevels returns true.  Returns 6, by default.
     /// </summary>
-    public virtual int MinInventory { get; } = 6;
+    public int MinInventory { get; } = 6;
 
     /// <summary>
     /// Returns the number of items the store should delete during maintenance.  Applies only when MaintainsStockLevels returns true.  Returns 9, by default.
     /// </summary>
-    public virtual int StoreTurnover { get; } = 9;
+    public int StoreTurnover { get; } = 9;
 
     /// <summary>
     /// Returns an array of item types that the store carries; or null, if the store does not carry items for sale or if the factory overrides the
@@ -259,26 +259,26 @@ internal class StoreFactory : IItemFilter, IGetKey, IToJson
     /// <returns></returns>
     public (ItemFactory ItemFactory, int Weight)[]? StoreStockManifests { get; private set; } = null;
 
-    protected virtual (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions { get; } = null;
+    private (string ItemFactoryName, int Weight)[]? StoreStockManifestDefinitions { get; } = null;
 
     /// <summary>
     /// Returns whether or not the store should occasionally change the owner and put items on sale.  When true, which is by default, the store will
     /// automatically perform this shuffling.
     /// </summary>
-    public virtual bool ShufflesOwnersAndPricing { get; } = true;
+    public bool ShufflesOwnersAndPricing { get; } = true;
 
-    protected virtual string[] ShopkeeperNames { get; }
+    private string[] ShopkeeperNames { get; }
 
     /// <summary>
     /// Represents a pool of possible store owners for the store.
     /// </summary>
     public Shopkeeper[] Shopkeepers { get; private set; }
 
-    protected virtual string? AdvertisedStoreCommand1Name { get; } = nameof(PurchaseStoreCommand);
-    protected virtual string? AdvertisedStoreCommand2Name { get; } = nameof(SellStoreCommand);
-    protected virtual string? AdvertisedStoreCommand3Name { get; } = nameof(ExamineStoreItemCommand);
-    protected virtual string? AdvertisedStoreCommand4Name { get; } = null;
-    protected virtual string? AdvertisedStoreCommand5Name { get; } = null;
+    private string? AdvertisedStoreCommand1Name { get; } = nameof(PurchaseStoreCommand);
+    private string? AdvertisedStoreCommand2Name { get; } = nameof(SellStoreCommand);
+    private string? AdvertisedStoreCommand3Name { get; } = nameof(ExamineStoreItemCommand);
+    private string? AdvertisedStoreCommand4Name { get; } = null;
+    private string? AdvertisedStoreCommand5Name { get; } = null;
     /// <summary>
     /// Returns the store command that should be advertised to the player @ position 42, 31; or null, if there is no command to render.
     /// </summary>
@@ -327,56 +327,56 @@ internal class StoreFactory : IItemFilter, IGetKey, IToJson
     /// <summary>
     /// Returns the width of the description column for rendering items in the store inventory.  The HomeStore defines a wider column for the description.
     /// </summary>
-    public virtual int WidthOfDescriptionColumn { get; } = 58;
+    public int WidthOfDescriptionColumn { get; } = 58;
 
     /// <summary>
     /// Returns whether the weight column should render the lb. units of measurement.  The players home has sufficient space to render, but the other stores do not.
     /// </summary>
-    public virtual bool RenderWeightUnitOfMeasurement { get; } = false;
+    public bool RenderWeightUnitOfMeasurement { get; } = false;
 
     /// <summary>
     /// The tile to use for for the door.
     /// </summary>
     public Tile Tile { get; private set; }
 
-    protected virtual string TileName { get; }
+    private string TileName { get; }
 
     /// <summary>
     /// Returns true, if the items should render as flavor aware; false, otherwise.  Stores will render their items as flavor aware.  Pawnshops and the home stores render items as
     /// they are seen in the dungeon.  Returns true, by default.  Pawnshops and the home store return false.
     /// </summary>
-    public virtual bool ItemsRenderFlavorAware { get; } = true;
+    public bool ItemsRenderFlavorAware { get; } = true;
 
     /// <summary>
     /// Returns the name of the owner of the store; or null, if the store owner should reflect the store owner.
     /// </summary>
-    public virtual string? OwnerName { get; } = null;
+    public string? OwnerName { get; } = null;
 
     /// <summary>
     /// Returns the title of the store; or null, if the store title should reflect the store owner.
     /// </summary>
-    public virtual string? Title { get; } = null;
+    public string? Title { get; } = null;
 
     /// <summary>
     /// Returns true, if the store maintains an inventory.  When false, the various buying, selling and inventory maintenace properties are ignored.
     /// Returns true, by default.  The Hall store returns false.
     /// </summary>
-    public virtual bool StoreMaintainsInventory { get; } = true;
+    public bool StoreMaintainsInventory { get; } = true;
 
     /// <summary>
     /// Returns whether or not the store should show prices with items in the inventory.  Return true, by default.  The home does not show prices.
     /// </summary>
-    public virtual bool ShowItemPricing { get; } = true;
+    public bool ShowItemPricing { get; } = true;
 
     /// <summary>
     /// Returns the rate at which the store marks up items.  Returns 1, by default.
     /// </summary>
-    public virtual int MarkupRate { get; } = 100;
+    public int MarkupRate { get; } = 100;
 
     /// <summary>
     /// Returns the rate at which the store marks down items.  Returns 1, by default.
     /// </summary>
-    public virtual int MarkdownRate { get; } = 100;
+    public int MarkdownRate { get; } = 100;
 
     public int MarkupItem(int price)
     {
@@ -388,7 +388,7 @@ internal class StoreFactory : IItemFilter, IGetKey, IToJson
         return price * MarkdownRate / 100;
     }
 
-    public virtual bool PerformsMaintenanceWhenResting { get; } = true;
+    public bool PerformsMaintenanceWhenResting { get; } = true;
 
     /// <summary>
     /// Allows the store factory the option to create a random item using the value as the base level for the item; or null, if the store should 
@@ -396,47 +396,47 @@ internal class StoreFactory : IItemFilter, IGetKey, IToJson
     /// </summary>
     /// <param name="store"></param>
     /// <returns></returns>
-    public virtual int? LevelForRandomItemCreation { get; } = null;
+    public int? LevelForRandomItemCreation { get; } = null;
 
-    public virtual int MinimumItemValue { get; } = 0;
+    public int MinimumItemValue { get; } = 0;
 
-    public virtual string NoStockMessage { get; } = "I am currently out of stock.";
-    public virtual string PurchaseMessage { get; } = "Which item are you interested in? ";
+    public string NoStockMessage { get; } = "I am currently out of stock.";
+    public string PurchaseMessage { get; } = "Which item are you interested in? ";
 
     /// <summary>
     /// Returns true, if the store sells items for gold to the player when the player retrieves items from the store.  Returns true, by default.
     /// The home does not sell items.
     /// </summary>
-    public virtual bool StoreSellsItems { get; } = true;
+    public bool StoreSellsItems { get; } = true;
 
     /// <summary>
     /// Returns true, if the store indicates that the player bought "back" the item.  False, otherwise.  Returns false, by default.  The pawnbroker
     /// store returns true.
     /// </summary>
-    public virtual bool BoughtMessageAsBoughtBack { get; } = false;
+    public bool BoughtMessageAsBoughtBack { get; } = false;
 
-    public virtual string SellPrompt { get; } = "Sell which item? ";
-    public virtual string StoreFullMessage { get; } = "I have not the room in my Stores to keep it.";
+    public string SellPrompt { get; } = "Sell which item? ";
+    public string StoreFullMessage { get; } = "I have not the room in my Stores to keep it.";
 
     /// <summary>
     /// Returns true, if the store keeps inscriptions on items it acquires.  Only the players home does this.
     /// </summary>
-    public virtual bool StoreMaintainsInscription { get; } = false;
+    public bool StoreMaintainsInscription { get; } = false;
 
     /// <summary>
     /// Returns true, if the store buys items for gold from the player.  Returns true, by default.  The home store doesn't buy items.
     /// </summary>
-    public virtual bool StoreBuysItems { get; } = true;
+    public bool StoreBuysItems { get; } = true;
 
     /// <summary>
     /// Returns the verb when the player sells or drops an item to the store.  Normally, "sold", but the home "drops" and the pawn shop "pawns".
     /// </summary>
-    public virtual string BoughtVerb { get; } = "sold";
+    public string BoughtVerb { get; } = "sold";
 
     /// <summary>
     /// Returns true, if the store identifies items when the player sells an item to the store.  Does not apply to stores that do not buy items.
     /// </summary>
-    public virtual bool StoreIdentifiesItems { get; } = true;
+    public bool StoreIdentifiesItems { get; } = true;
 
-    public virtual bool StoreAnalyzesPurchases { get; } = true;
+    public bool StoreAnalyzesPurchases { get; } = true;
 }

@@ -7,9 +7,9 @@
 namespace AngbandOS.Core.RaceGenders;
 
 [Serializable]
-internal class RaceGender : IGetKey, IToJson
+internal sealed class RaceGender : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public RaceGender(Game game, RaceGenderGameConfiguration raceGenderGameConfiguration)
     {
         Game = game;
@@ -48,8 +48,8 @@ internal class RaceGender : IGetKey, IToJson
     public Race Race { get; private set; }
     public Gender Gender { get; private set; }
     public WeightedRandom<PhysicalAttributeSet> PhysicalAttributesWeightedRandom { get; private set; }
-    protected virtual string RaceBindingKey { get; }
-    protected virtual string GenderBindingKey { get; }
-    protected virtual (string PhysicalAttributesBindingKey, int Weight)[] PhysicalAttributesWeightedRandomBindings { get; }
+    private string RaceBindingKey { get; }
+    private string GenderBindingKey { get; }
+    private (string PhysicalAttributesBindingKey, int Weight)[] PhysicalAttributesWeightedRandomBindings { get; }
 }
 

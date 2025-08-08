@@ -8,9 +8,9 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal class BoolPosFunction : IChangeTracker, IGetKey, IBoolValue, IToJson
+internal sealed class BoolPosFunction : IChangeTracker, IGetKey, IBoolValue, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public BoolPosFunction(Game game, BoolPosFunctionGameConfiguration boolPosFunctionGameConfiguration) 
     {
         Game = game;
@@ -28,7 +28,7 @@ internal class BoolPosFunction : IChangeTracker, IGetKey, IBoolValue, IToJson
     /// </summary>
     public void ClearChangedFlag() { }
 
-    protected IChangeTracker[]? Dependencies { get; private set; }
+    private IChangeTracker[]? Dependencies { get; set; }
     public string ToJson()
     {
         BoolPosFunctionGameConfiguration textWidgetGameConfiguration = new()
@@ -38,7 +38,7 @@ internal class BoolPosFunction : IChangeTracker, IGetKey, IBoolValue, IToJson
         };
         return JsonSerializer.Serialize(textWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 
@@ -54,7 +54,7 @@ internal class BoolPosFunction : IChangeTracker, IGetKey, IBoolValue, IToJson
         Enabled = conditionalList.ToArray();
     }
 
-    public virtual string[]? DependencyNames => null;
+    public string[]? DependencyNames => null;
 
     /// <summary>
     /// Returns an array of the names of the conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for 
@@ -63,7 +63,7 @@ internal class BoolPosFunction : IChangeTracker, IGetKey, IBoolValue, IToJson
     /// the conditions that make up a term.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
     /// boolean expressions into POS format.
     /// </summary>
-    protected virtual (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames { get; }
+    private (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames { get; }
 
     /// <summary>
     /// Returns an array of conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for the widget
@@ -72,7 +72,7 @@ internal class BoolPosFunction : IChangeTracker, IGetKey, IBoolValue, IToJson
     /// the conditions that make up a term using a Product-Of-Sums formula.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
     /// boolean expressions into POS format.
     /// </summary>
-    protected (IBoolValue conditional, bool valueConditionalMustBe, int productOfSumsTerm)[] Enabled { get; private set; }
+    private (IBoolValue conditional, bool valueConditionalMustBe, int productOfSumsTerm)[] Enabled { get; set; }
 
     /// <summary>
     /// Evaluates the <see cref="Enabled"/> property as a Product of Sums expression and returns true or false accordingly.

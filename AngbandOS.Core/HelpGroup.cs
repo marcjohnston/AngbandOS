@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class HelpGroup : IGetKey, IToJson
+internal sealed class HelpGroup : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public HelpGroup(Game game, HelpGroupGameConfiguration helpGroupGameConfiguration)
     {
         Game = game;
@@ -18,7 +18,7 @@ internal class HelpGroup : IGetKey, IToJson
         Title = helpGroupGameConfiguration.Title;
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind() { }
@@ -34,6 +34,6 @@ internal class HelpGroup : IGetKey, IToJson
         return JsonSerializer.Serialize(helpGroupDefinition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Title { get; }
-    public virtual int SortIndex { get; }
+    public string Title { get; }
+    public int SortIndex { get; }
 }

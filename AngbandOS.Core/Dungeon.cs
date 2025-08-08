@@ -10,9 +10,9 @@ namespace AngbandOS.Core;
 /// A dungeon that the player can explore
 /// </summary>
 [Serializable]
-internal class Dungeon : IGetKey, IToJson
+internal sealed class Dungeon : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
 
     /// <summary>
     /// Create the dungeon
@@ -104,21 +104,6 @@ internal class Dungeon : IGetKey, IToJson
         }
     }
 
-    public bool IsValid(DungeonGameConfiguration dungeonGameConfiguration)
-    {
-        if (dungeonGameConfiguration.Key == null || 
-            dungeonGameConfiguration.BaseOffset == null || 
-            dungeonGameConfiguration.MapSymbol == null || 
-            dungeonGameConfiguration.MaxLevel == null || 
-            dungeonGameConfiguration.Name == null || 
-            dungeonGameConfiguration.Shortname == null || 
-            dungeonGameConfiguration.Tower == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
     public string ToJson()
     {
         DungeonGameConfiguration dungeon = new()
@@ -188,47 +173,47 @@ internal class Dungeon : IGetKey, IToJson
     #endregion
 
     #region Light-weight virtuals
-    public virtual string Key { get; }
+    public string Key { get; }
 
     /// <summary>
     /// Returns base offset (difficulty) for the dungeon.
     /// </summary>
-    public virtual int BaseOffset { get; }
+    public int BaseOffset { get; }
 
     /// <summary>
     /// Returns the name of the monster filter to be used for a bias for generating monsters; or null, if the dungeon has no
     /// biasness.  Returns null, by default.
     /// </summary>
-    protected virtual string? BiasMonsterFilterName { get; } = null;
+    private string? BiasMonsterFilterName { get; } = null;
 
     /// <summary>
     /// Returns all of the quests associated to the dungeon.
     /// </summary>
-    protected virtual string[]? DungeonGuardianNames { get; } = null;
+    private string[]? DungeonGuardianNames { get; } = null;
 
     /// <summary>
     /// The symbol used for the dungeon on the wilderness map
     /// </summary>
-    public virtual string MapSymbol { get; }
+    public string MapSymbol { get; }
 
     /// <summary>
     /// The number of levels the dungeon has
     /// </summary>
-    public virtual int MaxLevel { get; }
+    public int MaxLevel { get; }
 
     /// <summary>
     /// The full name of the dungeon
     /// </summary>
-    public virtual string Name { get; }
+    public string Name { get; }
 
     /// <summary>
     /// The shortened name of the dungeon for display purposes
     /// </summary>
-    public virtual string Shortname { get; }
+    public string Shortname { get; }
 
     /// <summary>
     /// Returns true, if the dungeon is a tower; false, otherwise.  Returns false, by default.
     /// </summary>
-    public virtual bool Tower { get; } = false;
+    public bool Tower { get; } = false;
     #endregion
 }

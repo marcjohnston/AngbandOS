@@ -10,10 +10,10 @@ namespace AngbandOS.Core;
 /// Represents a view (or layout) of widgets used to render the UI.  Views consist of widgets and must conform to the window.
 /// </summary>
 [Serializable]
-internal class View : IGetKey, IToJson
+internal sealed class View : IGetKey, IToJson
 {
     #region State Data
-    protected readonly Game Game;
+    private readonly Game Game;
 
     /// <summary>
     /// Returns the widgets that support the ability to "poke" a character directly into a dungeon map; or null, if the pokeable widgets haven't been bound yet.  These types of 
@@ -163,8 +163,8 @@ internal class View : IGetKey, IToJson
     #endregion
 
     #region Light-weight Virtuals and Abstracts
-    public virtual string Key { get; }
-    protected virtual string[] WidgetNames { get; }
+    public string Key { get; }
+    private string[] WidgetNames { get; }
     #endregion
 }
 

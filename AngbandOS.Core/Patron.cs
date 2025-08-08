@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Patron : IGetKey, IToJson
+internal sealed class Patron : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public Patron(Game game, PatronGameConfiguration patronGameConfiguration)
     {
         Game = game;
@@ -37,7 +37,7 @@ internal class Patron : IGetKey, IToJson
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind()
@@ -46,14 +46,14 @@ internal class Patron : IGetKey, IToJson
         Rewards = Game.SingletonRepository.Get<Reward>(RewardBindingKeys);
     }
 
-    public virtual string LongName { get; }
+    public string LongName { get; }
     public bool MultiRew;
 
     public Ability? PreferredAbility { get; private set; }
-    protected virtual string? PreferredAbilityBindingKey { get; } = null;
-    protected Reward[] Rewards { get; private set; }
-    protected virtual string[] RewardBindingKeys { get; } 
-    public virtual string ShortName { get; }
+    private string? PreferredAbilityBindingKey { get; } = null;
+    private Reward[] Rewards { get; set; }
+    private string[] RewardBindingKeys { get; } 
+    public string ShortName { get; }
 
     public void GetReward()
     {

@@ -1,9 +1,9 @@
 namespace AngbandOS.Core.CharacterClassAbilities;
 
 [Serializable]
-internal class CharacterClassAbility : IGetKey, IToJson
+internal sealed class CharacterClassAbility : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public CharacterClassAbility(Game game, CharacterClassAbilityGameConfiguration characterClassAbilityGameConfiguration)
     {
         Game = game;
@@ -11,12 +11,12 @@ internal class CharacterClassAbility : IGetKey, IToJson
         CharacterClassBindingKey = characterClassAbilityGameConfiguration.CharacterClassBindingKey;
         AbilityBindingKey = characterClassAbilityGameConfiguration.AbilityBindingKey;
    }
-    public virtual int Bonus { get; } = 0;
+    public int Bonus { get; } = 0;
 
     public BaseCharacterClass CharacterClass { get; private set; }
     public Ability Ability { get; private set; }
-    public virtual string CharacterClassBindingKey { get; }
-    public virtual string AbilityBindingKey { get; }
+    public string CharacterClassBindingKey { get; }
+    public string AbilityBindingKey { get; }
     public string GetKey => $"{CharacterClassBindingKey}-{AbilityBindingKey}";
 
     public static string GetCompositeKey(BaseCharacterClass characterClass, Ability ability) => $"{characterClass.Key}-{ability.Key}";

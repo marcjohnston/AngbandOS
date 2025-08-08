@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey, IToJson
+internal sealed class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey, IToJson
 {
     public ItemFactoryWeightedRandom(Game game, ItemFactoryWeightedRandomGameConfiguration itemFactoryWeightedRandomGameConfiguration) : base(game)
     {
@@ -18,9 +18,9 @@ internal class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey,
     /// <summary>
     /// Returns the nullable names and weights.  Names can be null to support non-action weights.
     /// </summary>
-    protected (string name, int weight)[] NameAndWeightBindings { get; }
+    private (string name, int weight)[] NameAndWeightBindings { get; }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 

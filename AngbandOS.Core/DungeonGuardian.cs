@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class DungeonGuardian : IGetKey, IToJson
+internal sealed class DungeonGuardian : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public DungeonGuardian(Game game, DungeonGuardianGameConfiguration dungeonGuardianGameConfiguration)
     {
         Game = game;
@@ -18,19 +18,19 @@ internal class DungeonGuardian : IGetKey, IToJson
         LevelFound = dungeonGuardianGameConfiguration.LevelFound;
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public MonsterRace MonsterRace { get; private set; }
 
     /// <summary>
     /// The name of the race of the dungeon guardian.
     /// </summary>
-    protected virtual string MonsterRaceName { get; }
+    private string MonsterRaceName { get; }
 
     /// <summary>
     /// The level for the fixed quest.
     /// </summary>
-    public virtual int LevelFound { get; }
+    public int LevelFound { get; }
 
     public string GetKey => Key;
 

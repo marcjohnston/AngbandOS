@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class God : IGetKey, IToJson
+internal sealed class God : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public God(Game game, GodGameConfiguration godGameConfiguration)
     {
         Game = game;
@@ -19,8 +19,8 @@ internal class God : IGetKey, IToJson
         FavorDescription = godGameConfiguration.FavorDescription;
     }
 
-    public virtual string LongName { get; }
-    public virtual string ShortName { get; }
+    public string LongName { get; }
+    public string ShortName { get; }
     private const int PatronMultiplier = 2;
 
     public int AdjustedFavour
@@ -40,9 +40,9 @@ internal class God : IGetKey, IToJson
     public bool IsPatron { get; set; }
     public int RestingFavor { get; set; }
 
-    public virtual string FavorDescription { get; }
+    public string FavorDescription { get; }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 

@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class DateWidget : Widget, IGetKey, IToJson
+internal sealed class DateWidget : Widget, IGetKey, IToJson
 {
     public DateWidget(Game game, DateWidgetGameConfiguration dateWidgetGameConfiguration) : base(game)
     {
@@ -20,15 +20,15 @@ internal class DateWidget : Widget, IGetKey, IToJson
         JustificationName = dateWidgetGameConfiguration.JustificationName;
         ChangeTrackerNames = dateWidgetGameConfiguration.ChangeTrackerNames;
     }
-    public virtual string DateValueName { get; }
+    public string DateValueName { get; }
     public IDateAndTimeValue DateValue { get; private set; }
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
-    public virtual string[]? ChangeTrackerNames { get; } = null;
+    public string[]? ChangeTrackerNames { get; } = null;
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind()
@@ -41,34 +41,34 @@ internal class DateWidget : Widget, IGetKey, IToJson
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
     /// </summary>
-    public virtual ColorEnum Color { get; } = ColorEnum.White;
+    public ColorEnum Color { get; } = ColorEnum.White;
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public virtual int X { get; }
+    public int X { get; }
 
     /// <summary>
     /// Returns the y-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public virtual int Y { get; }
+    public int Y { get; }
 
     /// <summary>
     /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
     /// </summary>
-    public virtual int? Width { get; } = null;
+    public int? Width { get; } = null;
 
     /// <summary>
     /// Returns the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="LabelWidget"/>.  This property is bound using
     /// the <see cref="JustificationName"/> property during the bind phase.
     /// </summary>
-    protected Justification Justification { get; private set; }
+    private Justification Justification { get; set; }
 
     /// <summary>
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="LabelWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public virtual string JustificationName { get; } = nameof(LeftJustification);
+    public string JustificationName { get; } = nameof(LeftJustification);
 
     /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.

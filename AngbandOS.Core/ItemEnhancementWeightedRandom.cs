@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// Represents a singleton for a weighted random of nullable <see cref="ItemEnhancement"/> objects.  This weighted random supports null to allow a non-selection.
 /// </summary>
 [Serializable]
-internal class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhancement?>, IGetKey, IToJson, IItemEnhancement
+internal sealed class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhancement?>, IGetKey, IToJson, IItemEnhancement
 {
     public ItemEnhancementWeightedRandom(Game game, ItemEnhancementWeightedRandomGameConfiguration itemEnhancementWeightedRandomGameConfiguration) : base(game)
     {
@@ -21,7 +21,7 @@ internal class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhancement?>,
     /// <summary>
     /// Returns the nullable names and weights.  Names can be null to support non-action weights.
     /// </summary>
-    protected (string? name, int weight)[] NameAndWeightBindings { get; }
+    private (string? name, int weight)[] NameAndWeightBindings { get; }
 
     /// <summary>
     /// Chooses one of the available <see cref="ItemEnhancement"/> items and returns it.  This allows this <see cref="ItemEnhancementWeightedRandom"/> to be used in the <see cref="MappedItemEnhancement.ItemEnhancements"/>.
@@ -29,7 +29,7 @@ internal class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhancement?>,
     /// <returns></returns>
     public ItemEnhancement? GetItemEnhancement() => Choose();
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 

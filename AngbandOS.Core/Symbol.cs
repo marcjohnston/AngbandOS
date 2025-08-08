@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core;
 
 [Serializable]
-internal class Symbol : IGetKey, IToJson
+internal sealed class Symbol : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public Symbol(Game game, SymbolGameConfiguration symbolGameConfiguration) 
     {
         Game = game;
@@ -12,7 +12,7 @@ internal class Symbol : IGetKey, IToJson
         Name = symbolGameConfiguration.Name;
         Key = symbolGameConfiguration.Key ?? symbolGameConfiguration.GetType().Name;
     }
-    public virtual char Character { get; }
+    public char Character { get; }
 
     /// <summary>
     /// Returns the symbol that the player specifies to query the symbol; or null, if the Character property is to be used.  Returns
@@ -20,11 +20,11 @@ internal class Symbol : IGetKey, IToJson
     /// When a query charactter is specified, it works in conjuction with the character symbol; meaning, that both the character
     /// and the query character are both recognized.  The PeriodSymbol overrides this property.
     /// </summary>
-    public virtual char? QueryCharacter { get; } = null;
+    public char? QueryCharacter { get; } = null;
 
-    public virtual string Name { get; }
+    public string Name { get; }
 
-    public virtual string Key { get; }
+    public string Key { get; }
     public void Bind() { }
 
     public string GetKey => Key;

@@ -9,9 +9,9 @@ using System.Xml.Linq;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class SyllableSet : IGetKey, IToJson
+internal sealed class SyllableSet : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public SyllableSet(Game game, SyllableSetGameConfiguration syllableSetGameConfiguration)
     {
         Game = game;
@@ -21,10 +21,10 @@ internal class SyllableSet : IGetKey, IToJson
         EndingSyllables = syllableSetGameConfiguration.EndingSyllables;
     }
 
-    public virtual string[] BeginningSyllables { get; }
-    public virtual string[] MiddleSyllables { get; }
-    public virtual string[] EndingSyllables { get; }
-    public virtual string Key { get; }
+    public string[] BeginningSyllables { get; }
+    public string[] MiddleSyllables { get; }
+    public string[] EndingSyllables { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 

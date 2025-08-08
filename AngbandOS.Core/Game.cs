@@ -2359,7 +2359,7 @@ internal class Game
         // Attempt to create a non-artifact.
         if (item == null)
         {
-            ItemFactory kIdx = RandomItemType(baselevel, doNotAllowChestToBeCreated, good);
+            ItemFactory? kIdx = RandomItemType(baselevel, doNotAllowChestToBeCreated, good);
             if (kIdx == null)
             {
                 return null;
@@ -3599,7 +3599,7 @@ internal class Game
             }
             else
             {
-                Item qPtr = MakeObject(false, false, true);
+                Item? qPtr = MakeObject(false, false, true);
                 if (qPtr != null)
                 {
                     DropNear(qPtr, null, y, x);
@@ -3633,7 +3633,6 @@ internal class Game
 
     private List<Flavor>? GenerateFlavors(ItemClass itemClass)
     {
-
         if (itemClass.NumberOfFlavorsToGenerate == 0)
         {
             return itemClass.ItemFlavorRepository?.ToList();
@@ -3641,7 +3640,6 @@ internal class Game
 
         List<Flavor>? itemFlavors = new List<Flavor>();
 
-        int i, j;
         UseFixed = true;
         FixedSeed = _seedFlavor;
         WeightedRandom<string> illegibleFlavorSyllablesWeightedRandom = new WeightedRandom<string>(this, IllegibleFlavorSyllables);
@@ -3650,7 +3648,7 @@ internal class Game
             throw new Exception("No illegible syllables loaded to generate item flavors.");
         }
 
-        for (i = 0; i < itemClass.NumberOfFlavorsToGenerate; i++)
+        for (int i = 0; i < itemClass.NumberOfFlavorsToGenerate; i++)
         {
             while (true)
             {
@@ -13013,7 +13011,7 @@ internal class Game
             {
                 break;
             }
-            Tile feat = cPtr.FeatureType.MimicTile == null ? cPtr.FeatureType : cPtr.FeatureType.MimicTile;
+            Tile? feat = cPtr.FeatureType.MimicTile == null ? cPtr.FeatureType : cPtr.FeatureType.MimicTile;
             if (!cPtr.PlayerMemorized && !PlayerCanSeeBold(y, x))
             {
                 feat = null;
@@ -15845,7 +15843,7 @@ internal class Game
 
     public bool AllocHorde(int y, int x)
     {
-        MonsterRace rPtr = null;
+        MonsterRace? rPtr = null;
         int attempts = 1000;
         while (--attempts != 0)
         {

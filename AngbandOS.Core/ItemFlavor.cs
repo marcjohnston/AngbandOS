@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ItemFlavors;
 /// Represents a single flavor for a group of items that participate in the IFlavor interface.
 /// </summary>
 [Serializable]
-internal class ItemFlavor : Flavor, IGetKey, IToJson
+internal sealed class ItemFlavor : Flavor, IGetKey, IToJson
 {
     public ItemFlavor(Game game, ItemFlavorGameConfiguration readableFlavorGameConfiguration) : base(game)
     {
@@ -43,7 +43,7 @@ internal class ItemFlavor : Flavor, IGetKey, IToJson
     /// </summary>
     public override Symbol Symbol { get; protected set; }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 
@@ -55,7 +55,7 @@ internal class ItemFlavor : Flavor, IGetKey, IToJson
     /// <summary>
     /// Returns the name of the symbol to be used for rendering.  This property is used to bind the Symbol property during the bind phase.
     /// </summary>
-    protected virtual string SymbolName { get; }
+    private string SymbolName { get; }
     public override string Name { get; }
 
     public override ColorEnum Color { get; }

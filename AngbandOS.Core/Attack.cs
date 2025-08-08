@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Attack : IGetKey, IToJson
+internal sealed class Attack : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public Attack(Game game, AttackGameConfiguration attackGameConfiguration)
     {
         Game = game;
@@ -24,8 +24,7 @@ internal class Attack : IGetKey, IToJson
         RendersMissMessage = attackGameConfiguration.RendersMissMessage;
     }
 
-
-    public virtual string Key { get; }
+    public string Key { get; }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -54,46 +53,46 @@ internal class Attack : IGetKey, IToJson
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.
     /// </summary>
-    public virtual string MonsterAction { get; }
+    public string MonsterAction { get; }
 
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets the player.
     /// </summary>
     /// <param name="game"></param>
     /// <returns></returns>
-    public virtual string[]? PlayerActionMessages { get; }
+    public string[]? PlayerActionMessages { get; }
 
     /// <summary>
     /// Returns the action message to be displayed, when a description of the attack is being rendered to the player viewing
     /// their knowledge.
     /// </summary>
-    public virtual string KnowledgeAction { get; }
+    public string KnowledgeAction { get; }
 
     /// <summary>
     /// Returns true, if the attack requires touching the target; false otherwise.  Returns true, by default.  The beg, drool, gaze, insult, moan, show, spit, 
     /// spore, wail and worship attacks do not require touching the target.
     /// </summary>
-    public virtual bool AttackTouchesTarget { get; } = true;
+    public bool AttackTouchesTarget { get; } = true;
 
     /// <summary>
     /// Returns true, if the attack awakes the target; false otherwise.  Returns false, by default,  The beg, insult, moan and show attacks
     /// return true.
     /// </summary>
-    public virtual bool AttackAwakensTarget { get; } = false;
+    public bool AttackAwakensTarget { get; } = false;
 
     /// <summary>
     /// Returns true, if the attack stuns the target; false otherwise.  Returns false, by default.  The hit, punch, kick, butt and crush attacks return true.
     /// </summary>
-    public virtual bool AttackStunsTarget { get; } = false;
+    public bool AttackStunsTarget { get; } = false;
 
     /// <summary>
     /// Returns true, if the attack cuts the target; false otherwise.  Returns false, by default.  The hit, claw and bite attacks all return true.
     /// </summary>
-    public virtual bool AttackCutsTarget { get; } = false;
+    public bool AttackCutsTarget { get; } = false;
 
     /// <summary>
     /// Returns true, if the attack should render a message, if the attack touches the target and missed; false no message should be rendered.  Returns true, by default.  
     /// Only the crawl attack, requires touching the target and does not render a miss message.
     /// </summary>
-    public virtual bool RendersMissMessage { get; } = true;
+    public bool RendersMissMessage { get; } = true;
 }

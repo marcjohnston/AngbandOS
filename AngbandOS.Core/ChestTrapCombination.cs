@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ChestTrapCombination : IGetKey, IToJson
+internal sealed class ChestTrapCombination : IGetKey, IToJson
 {
-    protected Game Game;
+    private Game Game;
     public ChestTrapCombination(Game game, ChestTrapCombinationGameConfiguration chestTrapGameConfiguration)
     {
         Game = game;
@@ -31,7 +31,7 @@ internal class ChestTrapCombination : IGetKey, IToJson
         return JsonSerializer.Serialize(dateWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind()
@@ -40,7 +40,7 @@ internal class ChestTrapCombination : IGetKey, IToJson
     }
 
     public ChestTrap[] ChestTraps { get; private set; }
-    public virtual string[] ChestTrapBindingKeys { get; }
+    public string[] ChestTrapBindingKeys { get; }
     public bool NotTrapped => ChestTraps.Length == 0;
     public bool IsTrapped => ChestTraps.Length > 0;
 }

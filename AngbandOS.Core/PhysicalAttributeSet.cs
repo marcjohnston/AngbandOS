@@ -7,9 +7,9 @@
 namespace AngbandOS.Core.PhysicalAttributeSets;
 
 [Serializable]
-internal class PhysicalAttributeSet : IGetKey, IToJson
+internal sealed class PhysicalAttributeSet : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public PhysicalAttributeSet(Game game, PhysicalAttributeSetGameConfiguration physicalAttributeSetGameConfiguration)
     {
         Game = game;
@@ -37,14 +37,14 @@ internal class PhysicalAttributeSet : IGetKey, IToJson
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 
     public void Bind() { }
 
-    public virtual int BaseHeight { get; }
-    public virtual int HeightRange { get; }
-    public virtual int BaseWeight { get; }
-    public virtual int WeightRange { get; }
+    public int BaseHeight { get; }
+    public int HeightRange { get; }
+    public int BaseWeight { get; }
+    public int WeightRange { get; }
 }

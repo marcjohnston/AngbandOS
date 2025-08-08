@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Shopkeeper : IGetKey, IToJson
+internal sealed class Shopkeeper : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public Shopkeeper(Game game, ShopkeeperGameConfiguration shopkeeperGameConfiguration)
     {
         Game = game;
@@ -20,26 +20,26 @@ internal class Shopkeeper : IGetKey, IToJson
         RaceName = shopkeeperGameConfiguration.RaceName;
     }
 
-    public virtual int MaxCost { get; }
+    public int MaxCost { get; }
 
     /// <summary>
     /// Returns the minimum inflation value for this store owner.
     /// </summary>
-    public virtual int MinInflate { get; }
+    public int MinInflate { get; }
 
     /// <summary>
     /// Returns the name of the owner.  For stores with no owner, this is the name of the store.
     /// </summary>
-    public virtual string Name { get; }
+    public string Name { get; }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     /// <summary>
     /// Returns the race of the store owner.  Null, if there is no store owner.
     /// </summary>
     public Race? OwnerRace { get; private set; }
 
-    protected virtual string? RaceName { get; }
+    private string? RaceName { get; }
 
     public string GetKey => Key;
 

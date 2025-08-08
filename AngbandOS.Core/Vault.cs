@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Vault : IGetKey, IToJson
+internal sealed class Vault : IGetKey, IToJson
 {
-    protected Game Game;
+    private Game Game;
     public Vault(Game game, VaultGameConfiguration vaultGameConfiguration)
     {
         Game = game;
@@ -23,18 +23,18 @@ internal class Vault : IGetKey, IToJson
         Width = vaultGameConfiguration.Width;
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind() { }
 
-    public virtual ColorEnum Color { get; } = ColorEnum.White;
-    public virtual string Name { get; }
-    public virtual int Category { get; }
-    public virtual int Height { get; }
-    public virtual int Rating { get; }
-    public virtual string Text { get; }
-    public virtual int Width { get; }
+    public ColorEnum Color { get; } = ColorEnum.White;
+    public string Name { get; }
+    public int Category { get; }
+    public int Height { get; }
+    public int Rating { get; }
+    public string Text { get; }
+    public int Width { get; }
 
     public string ToJson()
     {

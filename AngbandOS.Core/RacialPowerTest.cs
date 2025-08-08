@@ -10,9 +10,9 @@ namespace AngbandOS.Core;
 /// Check if racial power works based on the minimum level, cost, ability and difficulty.  If the racial power works, it runs an associated script.
 /// </summary>
 [Serializable]
-internal class RacialPowerTest : IGetKey, IBoolValue, IToJson
+internal sealed class RacialPowerTest : IGetKey, IBoolValue, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public RacialPowerTest(Game game, RacialPowerTestGameConfiguration racialPowerTestGameConfiguration)
     {
         Game = game;
@@ -23,7 +23,7 @@ internal class RacialPowerTest : IGetKey, IBoolValue, IToJson
         Difficulty = racialPowerTestGameConfiguration.Difficulty;
     }
 
-    public virtual string Key { get; set; }
+    public string Key { get; set; }
     public string GetKey => Key;
 
     public void Bind()
@@ -47,11 +47,11 @@ internal class RacialPowerTest : IGetKey, IBoolValue, IToJson
 
     public Ability UseAbility { get; private set; }
     public IScript Script { get; private set; }
-    public virtual int MinLevel { get; }
-    public virtual string CostExpression { get; }
+    public int MinLevel { get; }
+    public string CostExpression { get; }
     public Expression Cost { get; private set; }
-    public virtual string UseAbilityBindingKey { get; }
-    public virtual int Difficulty { get; }
+    public string UseAbilityBindingKey { get; }
+    public int Difficulty { get; }
 
     public bool BoolValue
     {

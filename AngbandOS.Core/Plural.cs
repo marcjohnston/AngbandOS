@@ -1,9 +1,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Plural : IGetKey, IToJson
+internal sealed class Plural : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public Plural(Game game, PluralGameConfiguration pluralGameConfiguration)
     {
         Game = game;
@@ -29,12 +29,12 @@ internal class Plural : IGetKey, IToJson
     /// Returns the pluralized version of the key.
     /// the class.
     /// </summary>
-    public virtual string PluralForm { get; }
+    public string PluralForm { get; }
 
     /// <summary>
     /// Returns the capitalized singular version of the noun.
     /// </summary>
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind() { }

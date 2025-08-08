@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Gender : IGetKey, IToJson
+internal sealed class Gender : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public Gender(Game game, GenderGameConfiguration genderGameConfiguration)
     {
         Game = game;
@@ -35,13 +35,13 @@ internal class Gender : IGetKey, IToJson
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind() { }
 
-    public virtual string Title { get; }
-    public virtual string Winner { get; } // TODO ... this winner title to describe the type of winner is not rendered
+    public string Title { get; }
+    public string Winner { get; } // TODO ... this winner title to describe the type of winner is not rendered
 
-    public virtual bool CanBeRandomlySelected { get; } = true;
+    public bool CanBeRandomlySelected { get; } = true;
 }

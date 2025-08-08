@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Town : IGetKey, IToJson
+internal sealed class Town : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public Town(Game game, TownGameConfiguration townGameConfiguration)
     {
         Game = game;
@@ -46,12 +46,12 @@ internal class Town : IGetKey, IToJson
     /// <summary>
     /// Returns the name of the dungeon that is under the city.  This property is bound to the Dungeon property during the bind phase.
     /// </summary>
-    public virtual string DungeonName { get; }
+    public string DungeonName { get; }
 
-    public virtual bool AllowStartupTown { get; } = true;
-    public virtual char Char { get; }
-    public virtual int HousePrice { get; }
-    public virtual string Name { get; }
+    public bool AllowStartupTown { get; } = true;
+    public char Char { get; }
+    public int HousePrice { get; }
+    public string Name { get; }
 
     /// <summary>
     /// Returns the store factories that are used to generate the stores for the town.  This property is bound using the StoreFactoryNames property
@@ -63,21 +63,21 @@ internal class Town : IGetKey, IToJson
     /// Returns the stores that belong to the town.
     /// </summary>
     public Store[] Stores { get; private set; }
-    protected virtual string[] StoreFactoryNames { get; }
+    private string[] StoreFactoryNames { get; }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 
     /// <summary>
     /// Returns true, if unused store lots should be graveyards; false, for them to be fields.  In Kadath, unused fields are graveyards.
     /// </summary>
-    public virtual bool UnusedStoreLotsAreGraveyards => false;
+    public bool UnusedStoreLotsAreGraveyards => false;
 
     /// <summary>
     /// Returns true, if inns can escort the player to this town; false, otherwise.  Inns do not provide escort services to Kadath.
     /// </summary>
-    public virtual bool CanBeEscortedHere => true;
+    public bool CanBeEscortedHere => true;
 
     public void Bind()
     {

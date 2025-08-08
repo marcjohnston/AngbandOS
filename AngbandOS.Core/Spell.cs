@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Spell : IGetKey, IToJson
+internal sealed class Spell : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
 
     public Spell(Game game, SpellGameConfiguration spellGameConfiguration)
     {
@@ -41,7 +41,7 @@ internal class Spell : IGetKey, IToJson
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 
@@ -62,7 +62,7 @@ internal class Spell : IGetKey, IToJson
     /// <summary>
     /// Returns the name of the spell, as rendered to the Game.
     /// </summary>
-    public virtual string Name { get; }
+    public string Name { get; }
 
     /// <summary>
     /// Returns true, if the spell has been attempted to be cast; false, otherwise.  Set to false, by default.  Set to true, the first time the player attempts to cast the
@@ -337,5 +337,5 @@ internal class Spell : IGetKey, IToJson
     /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.
     /// </summary>
     /// <returns></returns>
-    protected virtual string? LearnedDetails { get; } = null;
+    private string? LearnedDetails { get; } = null;
 }

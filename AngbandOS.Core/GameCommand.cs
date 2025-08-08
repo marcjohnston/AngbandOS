@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class GameCommand : IGetKey, IToJson
+internal sealed class GameCommand : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public GameCommand(Game game, GameCommandGameConfiguration gameCommandGameConfiguration)
     {
         Game = game;
@@ -20,7 +20,7 @@ internal class GameCommand : IGetKey, IToJson
         ExecuteScriptName = gameCommandGameConfiguration.ExecuteScriptName;
     }
 
-    public virtual string Key { get; } 
+    public string Key { get; } 
 
     public string GetKey => Key;
     public void Bind()
@@ -28,22 +28,22 @@ internal class GameCommand : IGetKey, IToJson
         ExecuteScript = ExecuteScriptName == null ? null : Game.SingletonRepository.Get<IGameCommandScript>(ExecuteScriptName);
     }
 
-    public virtual char KeyChar { get; }
+    public char KeyChar { get; }
 
     /// <summary>
     /// Return 0, if the command should not be repeatable via a CommandArgument/Count; otherwise, return null, to indicate that the command allows
     /// the player to specify a CommandArgument/Count; or a value greater than 0, to indicate that the command is repeatable but if the player does not
     /// specify a CommandArgument/Count, default the count to the value being returned.
     /// </summary>
-    public virtual int? Repeat { get; } = 0;
+    public int? Repeat { get; } = 0;
 
-    public virtual bool IsEnabled { get; } = true;
+    public bool IsEnabled { get; } = true;
 
     /// <summary>
     /// Returns the name of an IRepeatableScript for the game command to execute, or null; if the game command does not do anything.  This property is used to bind the ExecuteScript 
     /// property to a script during the bind phase.  Returns null, by default.
     /// </summary>
-    protected virtual string? ExecuteScriptName { get; } = null;
+    private string? ExecuteScriptName { get; } = null;
 
     /// <summary>
     /// Returns an IRepeatableScript script for the game command to execute, or null, if the game command does not do anything.  This property is bound from the ExecuteScriptName

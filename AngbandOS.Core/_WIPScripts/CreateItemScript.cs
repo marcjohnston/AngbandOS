@@ -63,7 +63,7 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
     private ItemFactory? WizardSelectItemFactory()
     {
         char[] _head = { 'a', 'A', '0' };
-        int i, num;
+        int num;
         int col, row;
         char ch;
         int[] choice = new int[60];

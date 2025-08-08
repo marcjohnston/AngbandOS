@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class StoreCommand : IGetKey, IToJson
+internal sealed class StoreCommand : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public StoreCommand(Game game, StoreCommandGameConfiguration storeCommandGameConfiguration)
     {
         Game = game;
@@ -20,9 +20,9 @@ internal class StoreCommand : IGetKey, IToJson
         ExecuteScriptName = storeCommandGameConfiguration.ExecuteScriptName;
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
-    public virtual char KeyChar { get; }
+    public char KeyChar { get; }
 
     /// <summary>
     /// Returns the store factories that the command is valid for; or null, if the command is valid for all stores.  This property is bound to the 
@@ -33,7 +33,7 @@ internal class StoreCommand : IGetKey, IToJson
     /// </remarks>
     public StoreFactory[]? ValidStoreFactories { get; private set; }
 
-    public virtual string Description { get; }
+    public string Description { get; }
 
     public string GetKey => Key;
     public void Bind()
@@ -68,9 +68,9 @@ internal class StoreCommand : IGetKey, IToJson
     /// <summary>
     /// Returns the names of the store factories that the command is valid in; or null, for all stores.  Returns null, by default.
     /// </summary>
-    protected virtual string[]? ValidStoreFactoryNames { get; } = null;
+    private string[]? ValidStoreFactoryNames { get; } = null;
 
-    protected virtual string? ExecuteScriptName { get; } = null;
+    private string? ExecuteScriptName { get; } = null;
     public IStoreCommandScript ExecuteScript { get; private set; }
 
     public string ToJson()

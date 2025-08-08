@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TeleportSelfScript : UniversalScript, IGetKey, IToJson
+internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
 {
     public TeleportSelfScript(Game game, TeleportSelfScriptGameConfiguration teleportSelfScriptGameConfiguration) : base(game)
     {
@@ -33,7 +33,7 @@ internal class TeleportSelfScript : UniversalScript, IGetKey, IToJson
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind()
@@ -41,8 +41,8 @@ internal class TeleportSelfScript : UniversalScript, IGetKey, IToJson
         Distance = Game.ParseNumericExpression(DistanceExpression);
     }
 
-    protected string DistanceExpression { get; }
-    protected Expression Distance { get; private set; }
+    private string DistanceExpression { get; }
+    private Expression Distance { get; set; }
 
     /// <summary>
     /// Teleports the player between a specified distance from 1/2 of the distance up to a maximum of 200.

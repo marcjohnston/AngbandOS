@@ -8,9 +8,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ProjectileScript : IGetKey, IUniversalScript, IToJson
+internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public ProjectileScript(Game game, ProjectileScriptGameConfiguration projectileScriptGameConfiguration)
     {
         Game = game;
@@ -74,17 +74,17 @@ internal class ProjectileScript : IGetKey, IUniversalScript, IToJson
     public string GetKey => Key;
 
     #region Bounded Properties
-    public Expression RadiusRoll { get; protected set; }
+    public Expression RadiusRoll { get; private set; }
 
     /// <summary>
     /// Returns a roll for the amount of damage the projectile produces.  This property is bound from the <see cref="DamageRollExpression"/> property during the bind phase.
     /// </summary>
-    public Expression DamageRoll { get; protected set; }
+    public Expression DamageRoll { get; private set; }
 
     /// <summary>
     /// Returns the projectile to use.  This property is bound using the <see cref="ProjectileBindingKey"/> property during the binding phase.
     /// </summary>
-    public Projectile Projectile { get; protected set; }
+    public Projectile Projectile { get; private set; }
     #endregion
 
     #region Light-weight virtuals and abstracts for game configuration.
@@ -100,18 +100,18 @@ internal class ProjectileScript : IGetKey, IUniversalScript, IToJson
     /// <summary>
     /// Returns the binding key for the projectile.  This property is used to bind the <see cref="Projectile"/> property during the binding phase.
     /// </summary>
-    protected string ProjectileBindingKey { get; }
+    private string ProjectileBindingKey { get; }
 
     /// <summary>
     /// Returns a roll expression for the amount of damage the projectile produces.  This property is used to bind the <see cref="DamageRoll"/> property during the bind phase.
     /// </summary>
-    protected string DamageRollExpression { get; }
+    private string DamageRollExpression { get; }
 
     /// <summary>
     /// Returns a roll expression for the radius of damage the projectile produces.  A radius of 0 represents a bolt.  A radius >0 represents a ball and a radius <0 represents breathe.
     /// Returns zero by default.
     /// </summary>
-    protected string RadiusRollExpression { get; } = "0";
+    private string RadiusRollExpression { get; } = "0";
 
     /// <summary>
     /// Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.  Defaults to false;

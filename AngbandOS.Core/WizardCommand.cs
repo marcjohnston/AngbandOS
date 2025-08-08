@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class WizardCommand : IHelpCommand, IGetKey, IToJson
+internal sealed class WizardCommand : IHelpCommand, IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public WizardCommand(Game game, WizardCommandGameConfiguration wizardCommandGameConfiguration)
     {
         Game = game;
@@ -39,7 +39,7 @@ internal class WizardCommand : IHelpCommand, IGetKey, IToJson
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind() 
@@ -48,27 +48,27 @@ internal class WizardCommand : IHelpCommand, IGetKey, IToJson
         HelpGroup = HelpGroupName == null ? null : Game.SingletonRepository.Get<HelpGroup>(HelpGroupName);
     }
 
-    public virtual char KeyChar { get; }
+    public char KeyChar { get; }
 
-    public virtual bool IsEnabled { get; } = true;
+    public bool IsEnabled { get; } = true;
 
     /// <summary>
     /// Returns the name of a group when rendering the wizard help screen; or null, if the command should not be rendered on the help screen.  Returns null, by default.
     /// </summary>
     public HelpGroup? HelpGroup { get; private set; }
 
-    protected virtual string? HelpGroupName { get; } = null;
+    private string? HelpGroupName { get; } = null;
 
     /// <summary>
     /// Returns a description of the command to be rendered on the Wizard Help screen.  Returns empty by default.
     /// </summary>
-    public virtual string HelpDescription { get; } = "";
+    public string HelpDescription { get; } = "";
 
     /// <summary>
     /// Returns the name of the script to run; or null, if the command is ignored.  Returns null, by default.  This property is bound to the ExecuteScript property during
     /// the bind phase.
     /// </summary>
-    protected virtual string? ExecuteScriptName { get; } = null;
+    private string? ExecuteScriptName { get; } = null;
 
     public IScript? ExecuteScript { get; private set; }
 }

@@ -11,10 +11,10 @@ namespace AngbandOS.Core;
 /// artifact creation process.
 /// </summary>
 [Serializable]
-internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
+internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 {
     #region API
-    protected readonly Game Game;
+    private readonly Game Game;
     public ItemEnhancement(Game game) // Used by ItemFactory and FixedArtifacts // TODO: Delete
     {
         Game = game;
@@ -481,9 +481,9 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
     /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
     /// </summary>
-    protected string[]? ApplicableItemFactoryBindingKeys { get; } = null;
+    private string[]? ApplicableItemFactoryBindingKeys { get; } = null;
 
-    protected string? AdditionalItemEnhancementWeightedRandomBindingKey { get; } = null;
+    private string? AdditionalItemEnhancementWeightedRandomBindingKey { get; } = null;
 
     /// <summary>
     /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
@@ -548,7 +548,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// random artifacts may have an <see cref="Activation"/>.  Returns null, by default.  This property is used to bind the <see cref="Activation"/> property during the bind phase.
     /// </summary>
     /// <inheritdoc />
-    protected string? ActivationName { get; } = null;
+    private string? ActivationName { get; } = null;
 
     /// <inheritdoc />
     private bool Aggravate { get; } = false;
@@ -556,7 +556,7 @@ internal class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// <inheritdoc />
     private bool AntiTheft { get; } = false;
 
-    protected string? ArtifactBiasWeightedRandomBindingKey { get; } = null;
+    private string? ArtifactBiasWeightedRandomBindingKey { get; } = null;
     
     /// <inheritdoc />
     private bool Blessed { get; } = false;

@@ -1,9 +1,9 @@
 ﻿namespace AngbandOS.Core.MappedSpellScripts;
 
 [Serializable]
-internal class MappedItemEnhancement : IGetKey, IToJson
+internal sealed class MappedItemEnhancement : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public MappedItemEnhancement(Game game, MappedItemEnhancementGameConfiguration gameConfiguration)
     {
         Game = game;
@@ -31,8 +31,8 @@ internal class MappedItemEnhancement : IGetKey, IToJson
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
-    public virtual string[]? FixedArtifactBindingKeys { get; }
-    public virtual string[]? CharacterClassBindingKeys { get; }
-    protected virtual string[]? ItemEnhancementBindingKeys { get; }
+    public string[]? FixedArtifactBindingKeys { get; }
+    public string[]? CharacterClassBindingKeys { get; }
+    private string[]? ItemEnhancementBindingKeys { get; }
     public IItemEnhancement[]? ItemEnhancements { get; private set; }
 }

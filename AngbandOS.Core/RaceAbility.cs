@@ -4,12 +4,12 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.RaceAbilities;
+namespace AngbandOS.Core;
 
 [Serializable]
-internal class RaceAbility : IGetKey, IToJson
+internal sealed class RaceAbility : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public RaceAbility(Game game, RaceAbilityGameConfiguration raceAbilityGameConfiguration)
     {
         Game = game;
@@ -17,11 +17,11 @@ internal class RaceAbility : IGetKey, IToJson
         RaceBindingKey = raceAbilityGameConfiguration.RaceBindingKey;
         AbilityBindingKey = raceAbilityGameConfiguration.AbilityBindingKey;
     }
-    public virtual int Bonus { get; } = 0;
+    public int Bonus { get; } = 0;
     public Race Race { get; private set; }
     public Ability Ability { get; private set; }
-    public virtual string RaceBindingKey { get; }
-    public virtual string AbilityBindingKey { get; }
+    public string RaceBindingKey { get; }
+    public string AbilityBindingKey { get; }
     public string GetKey => $"{RaceBindingKey}-{AbilityBindingKey}";
 
     public static string GetCompositeKey(Race race, Ability ability) => $"{race.Key}-{ability.Key}";

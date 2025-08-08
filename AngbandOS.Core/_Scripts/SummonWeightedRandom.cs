@@ -6,7 +6,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUniversalScript, IToJson
+internal sealed class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUniversalScript, IToJson
 {
     public SummonWeightedRandom(Game game, SummonWeightedRandomGameConfiguration summonWeightedRandomGameConfiguration) : base(game)
     {
@@ -18,9 +18,9 @@ internal class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUn
     /// <summary>
     /// Returns the nullable names and weights.  Names can be null to support non-action weights.
     /// </summary>
-    protected (string name, int weight)[] NameAndWeightBindings { get; }
+    private (string name, int weight)[] NameAndWeightBindings { get; }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 
@@ -81,5 +81,5 @@ internal class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUn
     /// <summary>
     /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.  Returns blank, by default.
     /// </summary>
-    public virtual string LearnedDetails { get; } = ""; // TODO: This could be automated, if we knew which were pets and which were not.
+    public string LearnedDetails { get; } = ""; // TODO: This could be automated, if we knew which were pets and which were not.
 }

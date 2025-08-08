@@ -4,15 +4,13 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
-using System.Drawing;
 namespace AngbandOS.Core;
 
 /// <summary>
 /// Represents a widget that renders a dungeon map.  This widget supports the ability to "poke" a character directly into the map grid.
 /// </summary>
 [Serializable]
-internal class MapWidget : Widget, IGetKey, IToJson
+internal sealed class MapWidget : Widget, IGetKey, IToJson
 {
     public MapWidget(Game game, MapWidgetGameConfiguration mapWidgetGameConfiguration) : base(game)
     {
@@ -25,9 +23,9 @@ internal class MapWidget : Widget, IGetKey, IToJson
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
-    public virtual string[]? ChangeTrackerNames { get; } = null;
+    public string[]? ChangeTrackerNames { get; } = null;
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 
@@ -53,12 +51,12 @@ internal class MapWidget : Widget, IGetKey, IToJson
     /// <summary>
     /// Returns the x-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public virtual int X { get; }
+    public int X { get; }
 
     /// <summary>
     /// Returns the y-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public virtual int Y { get; }
+    public int Y { get; }
 
     protected override void Paint()
     {

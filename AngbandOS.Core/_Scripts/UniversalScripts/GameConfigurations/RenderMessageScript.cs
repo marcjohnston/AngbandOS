@@ -8,7 +8,7 @@ namespace AngbandOS.Core;
 
 [Serializable]
 
-internal class RenderMessageScript : UniversalScript, IGetKey, IToJson
+internal sealed class RenderMessageScript : UniversalScript, IGetKey, IToJson
 {
     public RenderMessageScript(Game game, RenderMessageScriptGameConfiguration renderMessageScriptGameConfiguration) : base(game)
     {
@@ -34,7 +34,7 @@ internal class RenderMessageScript : UniversalScript, IGetKey, IToJson
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind() { }
@@ -42,7 +42,7 @@ internal class RenderMessageScript : UniversalScript, IGetKey, IToJson
     public override bool UsesItem { get; } = false;
     public override bool IdentifiesItem { get; } = false;
 
-    public virtual string Message { get; }
+    public string Message { get; }
 
     public override void ExecuteScript()
     {

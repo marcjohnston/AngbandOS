@@ -15,8 +15,8 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class ItemFactory : IGetKey, IToJson
 {
-    protected readonly Game Game;
-    protected string? ItemEnhancementBindingKey { get; } = null;
+    private readonly Game Game;
+    private string? ItemEnhancementBindingKey { get; } = null;
 
     /// <summary>
     /// Represents the enhancements to apply to items created by this factory.
@@ -450,17 +450,17 @@ internal sealed class ItemFactory : IGetKey, IToJson
         EatScript = Game.SingletonRepository.GetNullable<IEatOrQuaffScript>(EatScriptBindingKey);
 
         // If there is no DescriptionSyntax, use the Name as the default.
-        _descriptionSyntax = DescriptionSyntax != null ? DescriptionSyntax : Name;
+        _descriptionSyntax = DescriptionSyntax ?? Name;
 
         // If there is no AlternateDescriptionSyntax, use the DescriptionSyntax as the default.
-        _alternateDescriptionSyntax = AlternateDescriptionSyntax != null ? AlternateDescriptionSyntax : _descriptionSyntax;
+        _alternateDescriptionSyntax = AlternateDescriptionSyntax ?? _descriptionSyntax;
 
         // Flavored items that are still unknown will default to using the flavorless syntaxes.
-        _flavorUnknownDescriptionSyntax = FlavorUnknownDescriptionSyntax != null ? FlavorUnknownDescriptionSyntax : _descriptionSyntax;
-        _alternateFlavorUnknownDescriptionSyntax = AlternateFlavorUnknownDescriptionSyntax != null ? AlternateFlavorUnknownDescriptionSyntax : _flavorUnknownDescriptionSyntax;
+        _flavorUnknownDescriptionSyntax = FlavorUnknownDescriptionSyntax ?? _descriptionSyntax;
+        _alternateFlavorUnknownDescriptionSyntax = AlternateFlavorUnknownDescriptionSyntax ?? _flavorUnknownDescriptionSyntax;
 
-        _flavorSuppressedDescriptionSyntax = FlavorSuppressedDescriptionSyntax != null ? FlavorSuppressedDescriptionSyntax : _descriptionSyntax;
-        _alternateFlavorSuppressedDescriptionSyntax = AlternateFlavorSuppressedDescriptionSyntax != null ? AlternateFlavorSuppressedDescriptionSyntax : _flavorSuppressedDescriptionSyntax;
+        _flavorSuppressedDescriptionSyntax = FlavorSuppressedDescriptionSyntax ?? _descriptionSyntax;
+        _alternateFlavorSuppressedDescriptionSyntax = AlternateFlavorSuppressedDescriptionSyntax ?? _flavorSuppressedDescriptionSyntax;
 
         // Bind Wands
         if (AimingBindingTuple != null)
@@ -1643,7 +1643,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the script that is used to refill the item; or null, if the item cannot be refilled.  This property is bound using the <see cref="RefillScriptBindingKey"/> property during the binding
     /// phase.
     /// </summary>
-    protected IScriptItem? RefillScript { get; private set; }
+    private IScriptItem? RefillScript { get; set; }
 
     /// <summary>
     /// Returns the symbol to use for rendering. This symbol will be initially used to set the <see cref="FlavorSymbol"/> and item
@@ -1746,13 +1746,13 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
     /// This property is used to bind the <see cref="PreassignedItemFlavor"/> property during the binding phase.
     /// </summary>
-    protected string? PreassignedItemFlavorBindingKey { get; } = null;
+    private string? PreassignedItemFlavorBindingKey { get; } = null;
 
     public bool NegativeBonusDamageRepresentsBroken { get; } = false;
     public bool NegativeBonusArmorClassRepresentsBroken { get; } = false;
     public bool NegativeBonusHitRepresentsBroken { get; } = false;
 
-    protected string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey { get; } = nameof(SlayingItemEnhancementWeightedRandom);
+    private string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey { get; } = nameof(SlayingItemEnhancementWeightedRandom);
 
     /// <summary>
     /// Returns the ceiling value for bonus armor values when creating a random artifact, or null, if no bonus should be added.  During the random artifact creation process, this ceiling determines the maximum value of a die roll that will
@@ -1779,13 +1779,13 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the key of the script that is used to refill the item; or null, if the item cannot be refilled.  Returns null, by default.  This property is used to bind the <see cref="RefillScript"/>
     /// property during the binding phase.
     /// </summary>
-    protected string? RefillScriptBindingKey { get; } = null;
+    private string? RefillScriptBindingKey { get; } = null;
 
     /// <summary>
     /// Returns the symbol to use for rendering the item.  This symbol will be initially used to set the <see cref="FlavorSymol"/> and item catagories that have flavor may the change the
     /// <see cref="FlavorCharacter"/> based on the flavor.  This property is used to bind the <see cref="Symbol"/> property during the bind phase.
     /// </summary>
-    protected string SymbolBindingKey { get; }
+    private string SymbolBindingKey { get; }
 
     public bool CanBeWeaponOfLaw { get; } = false;
 
@@ -1810,7 +1810,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the value of each staff charge.  Returns 0, by default.
     /// The amount of mana needed to consume to keep the potion.
     /// </summary>
-    protected (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple { get; } = null;
+    private (string UseScriptBindingKey, string InitialChargesRollExpression, int PerChargeValue, int ManaEquivalent)? UseBindingTuple { get; } = null;
 
     /// <summary>
     /// Returns the name of the noticeable script to run when the player quaffs the potion and the name of the smash script when the player smashes the potion; or null if the potion does
@@ -1821,13 +1821,13 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// 
     /// The amount of mana needed to consume to keep the potion.
     /// </summary>
-    protected (string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)? QuaffBindingTuple { get; } = null;
+    private (string QuaffScriptName, string? SmashScriptName, int ManaEquivalent)? QuaffBindingTuple { get; } = null;
 
     /// <summary>
     /// Returns the name of the <see cref="ItemClass"/> that is used as ammunition for this item; or null, if the item is not a ranged weapon.  This property is used to bind
     /// the <see cref="AmmunitionItemFactories"/> property during the bind phase.  Returns null, by default.
     /// </summary>
-    protected string[]? AmmunitionItemFactoryBindingKeys { get; } = null;
+    private string[]? AmmunitionItemFactoryBindingKeys { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be used to spike a door closed; false, otherwise.  Returns false, by default.
@@ -1864,7 +1864,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the name of the <see cref="IAimWandScript"/> script for wands when aimed, a roll expression to determine the number of charges to assign to new wands and the value of each charge; or null, if the 
     /// item cannot be aimed.  Returns null, by default.  This property is used to bind the <see cref="AimingTuple"/>  property during the bind phase.
     /// </summary>
-    protected (string ActivationScriptName, string InitialChargesCountRollExpression, int PerChargeValue, int ManaValue)? AimingBindingTuple { get; } = null;
+    private (string ActivationScriptName, string InitialChargesCountRollExpression, int PerChargeValue, int ManaValue)? AimingBindingTuple { get; } = null;
 
     /// <summary>
     /// Returns true, if the item is broken; false, otherwise.  Broken items have no value and will be stomped.
@@ -1895,7 +1895,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// </summary>
     public bool InitialExcellentStomp { get; } = false;
 
-    protected string? RechargeScriptBindingKey { get; } = null;
+    private string? RechargeScriptBindingKey { get; } = null;
 
     /// <summary>
     /// Returns true, if the item is ignored by monsters.  Returns false for all items, except gold.  Gold isn't picked up by monsters.
@@ -1933,14 +1933,14 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// for items of a cost value or less; or null, if no additional items should be produced based on any cost.  Returns null, by default.  This property is used
     /// to bind the <see cref="MassProduceTuples"/> property during the bind phase.  The tuples must be sorted by cost and are checked during the bind phase.
     /// </summary>
-    protected (int count, string rollExpression)[]? MassProduceBindingTuples { get; } = null;
+    private (int count, string rollExpression)[]? MassProduceBindingTuples { get; } = null;
 
     public int BonusHitRealValueMultiplier { get; } = 100;
     public int BonusDamageRealValueMultiplier { get; } = 100;
     public int BonusArmorClassRealValueMultiplier { get; } = 100;
     public int BonusDiceRealValueMultiplier { get; } = 100;
 
-    protected string? BreaksDuringEnchantmentProbabilityExpression { get; } = null;
+    private string? BreaksDuringEnchantmentProbabilityExpression { get; } = null;
 
     /// <summary>
     /// Returns the name of the IEnchantmentScript to run for enchanting items depending on the item power and whether the item is being sold in a store.
@@ -1950,26 +1950,26 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// StoreStock - True, when the enchantment applies only to items sold in a store; false, when the enchantment only applies to items not sold in a store; or null, if the enchantment applies regardless of whether the item is being sold in a store or not.;<para />
     /// ScriptNames - The names of one or more scripts that implement the IEnhancementScript interface to be run to enhance the item when the Powers and StoreStock criteria match.  An empty array will throw during binding.
     /// </returns>
-    protected (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples { get; } = null;
+    private (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples { get; } = null;
 
     /// <summary>
     /// Returns the name of the script to run, when the energy of a rechargeable item is consumed; or null, if the item does not have charges that can be consumed or those charges cannot be consumed.
     /// This property is used to bind the <see cref="EatMagicScript"/> property during the bind phase.
     /// </summary>
-    protected string? EatMagicScriptBindingKey { get; } = null;
+    private string? EatMagicScriptBindingKey { get; } = null;
 
-    protected string? GridProcessWorldScriptBindingKey { get; } = null;
-    protected string? MonsterProcessWorldScriptBindingKey { get; } = null;
-    protected string? EquipmentProcessWorldScriptBindingKey { get; } = null;
-    protected string? PackProcessWorldScriptBindingKey { get; } = null;
+    private string? GridProcessWorldScriptBindingKey { get; } = null;
+    private string? MonsterProcessWorldScriptBindingKey { get; } = null;
+    private string? EquipmentProcessWorldScriptBindingKey { get; } = null;
+    private string? PackProcessWorldScriptBindingKey { get; } = null;
 
     /// <summary>
     /// Returns an expression that represents the chance that an item that is thrown or fired will break.  Returns 10, or 10%, by default.  This
     /// property is used to bind the <see cref="BreakageChanceProbability"/> property during the bind phase.
     /// </summary>
-    protected string BreakageChanceProbabilityExpression { get; } = "10/100";
+    private string BreakageChanceProbabilityExpression { get; } = "10/100";
 
-    protected string MakeObjectCountExpression { get; } = "1";
+    private string MakeObjectCountExpression { get; } = "1";
 
     /// <summary>
     /// Returns true, if the item multiplies damages against a specific monster race.  Returns false, by default. Shots, arrows, bolts, hafted, polearms, swords and digging all return true.
@@ -2021,29 +2021,29 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the syntax for the description of the item.  The and symbol '&' is used to represent the article (a, an or a number) and the
     /// tilde symbol '~' used to place the 's', 'es', or 'ies' plural form of the noun.
     /// </summary>
-    protected string? DescriptionSyntax { get; } = null; // TODO: Books use a hard-coded realm name when the realm is set at run-time.
+    private string? DescriptionSyntax { get; } = null; // TODO: Books use a hard-coded realm name when the realm is set at run-time.
 
     /// <summary>
     /// Returns an alternate coded name for some character classes for known items; null, if there is no altername name; in which the <see cref="DescriptionSyntax"/> property will
     /// be used.  Returns null, by default.  Spellbooks have a alternate names.  Druid, Fanatic, Monk, Priest and Ranger character classes use alternate names.  Character
     /// classes will use alternate naming conventions when <see cref="BaseCharacterClass.UseAlternateItemNames"/> property returns true.
     /// </summary>
-    protected string? AlternateDescriptionSyntax { get; } = null; // TODO: This coded divine name has hard-coded realm names when realm is set at run-time.
+    private string? AlternateDescriptionSyntax { get; } = null; // TODO: This coded divine name has hard-coded realm names when realm is set at run-time.
 
-    protected string? FlavorSuppressedDescriptionSyntax { get; } = null;
-    protected string? AlternateFlavorSuppressedDescriptionSyntax { get; } = null;
+    private string? FlavorSuppressedDescriptionSyntax { get; } = null;
+    private string? AlternateFlavorSuppressedDescriptionSyntax { get; } = null;
 
-    protected string? FlavorUnknownDescriptionSyntax { get; } = null;
+    private string? FlavorUnknownDescriptionSyntax { get; } = null;
 
-    protected string? AlternateFlavorUnknownDescriptionSyntax { get; } = null;
+    private string? AlternateFlavorUnknownDescriptionSyntax { get; } = null;
 
     /// <summary>
     /// Returns the number of turns an item that can be zapped needs before it is recharged; or null, if the item cannot be zapped.  A value of zero, means the item does not need any turns to
     /// be recharged after it is used.
     /// </summary>
-    protected (string ScriptName, string TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapBindingTuple { get; } = null;
+    private (string ScriptName, string TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapBindingTuple { get; } = null;
 
-    protected string ItemClassBindingKey { get; }
+    private string ItemClassBindingKey { get; }
 
     public bool DisableStomp { get; }
 
@@ -2061,7 +2061,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the inventory slot where the item is wielded.  Items will be wielded in the first slot that is available.  Rings use multiple wield slots for left and right hands.
     /// Returns the pack, by default.  This property is used to bind the <see cref="WieldSlots"/>  property during the binding phase.
     /// </summary>
-    protected string[] WieldSlotBindingKeys { get; } = new string[] { nameof(PackWieldSlot) };
+    private string[] WieldSlotBindingKeys { get; } = new string[] { nameof(PackWieldSlot) };
 
     /// <summary>
     /// Returns true, if the destroy script should ask the player if known items from this factory should be destroyed by setting the applicable 
@@ -2107,12 +2107,12 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// <summary>
     /// Returns the initial amount of bonus search to be assigned to the item.
     /// </summary>
-    protected string InitialBonusSearchExpression { get; } = "0";
+    private string InitialBonusSearchExpression { get; } = "0";
 
     /// <summary>
     /// Returns the initial amount of bonus stealth to be assigned to the item.
     /// </summary>
-    protected string InitialBonusStealthExpression { get; } = "0";
+    private string InitialBonusStealthExpression { get; } = "0";
 
     /// <summary>
     /// Returns the initial amount of bonus tunnel to be assigned to the item.
@@ -2133,7 +2133,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the roll expression to determine the initial gold pieces that are given to the player when the item is picked up.  This property must conform to the <see cref="Roll"/> syntax for parsing.  
     /// See <see cref="Game.ParseNumericExpression"/> for syntax details.  This property is used to bind the <see cref="InitialGoldPiecesRoll"/> property during the bind phase.
     /// </summary>
-    protected string InitialGoldPiecesRollExpression { get; } = "0";
+    private string InitialGoldPiecesRollExpression { get; } = "0";
 
     /// <summary>
     /// Returns a divisor to be used to compute the amount of experience gained when an applicable character class destroys the book.  Defaults to 4.
@@ -2143,7 +2143,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// <summary>
     /// Returns the names of the spells, in order, that belong to this book; or null, if the item is not a book.  This property is used to bind the Spells property during the binding phase.
     /// </summary>
-    protected string[]? SpellBindingKeys { get; } = null;
+    private string[]? SpellBindingKeys { get; } = null;
 
     public int BonusArmorClass { get; } = 0;
     public int BonusDamage { get; } = 0;
@@ -2230,6 +2230,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// <returns>
     /// ManaValue:description Returns the amount of mana channelers can substitute instead of the scroll being used up.
     /// </returns>
-    protected (string ScriptName, int ManaValue)? ReadBindingTuple { get; } = null;
+    private (string ScriptName, int ManaValue)? ReadBindingTuple { get; } = null;
     #endregion
 }

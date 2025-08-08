@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class RacialPower : IGetKey, IScript, IToJson
+internal sealed class RacialPower : IGetKey, IScript, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public RacialPower(Game game, RacialPowerGameConfiguration racialPowerGameConfiguration)
     {
         Game = game;
@@ -19,11 +19,11 @@ internal class RacialPower : IGetKey, IScript, IToJson
     }
     public static string GetCompositeKey(Race race, BaseCharacterClass? characterClass) => Game.GetCompositeKey(race.GetKey, characterClass?.GetKey, nameof(RacialPower));
     public IScript Script { get; private set; }
-    protected virtual string ScriptBindingKey { get; }
+    private string ScriptBindingKey { get; }
     public Race Race { get; private set; }
-    protected virtual string RaceBindingKey { get; }
+    private string RaceBindingKey { get; }
     public BaseCharacterClass? CharacterClass { get; private set; }
-    protected virtual string? CharacterClassBindingKey { get; } = null;
+    private string? CharacterClassBindingKey { get; } = null;
 
     public string GetKey => Game.GetCompositeKey(RaceBindingKey, CharacterClassBindingKey, nameof(RacialPower));
 

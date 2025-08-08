@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class SummonScript : IGetKey, IUniversalScript, IToJson
+internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public SummonScript(Game game, SummonScriptGameConfiguration summonScriptGameConfiguration)
     {
         Game = game;
@@ -108,7 +108,7 @@ internal class SummonScript : IGetKey, IUniversalScript, IToJson
         IdentifiedResultEnum identifiedResult = ExecuteEatOrQuaffScript();
         return new IdentifiedAndUsedResult(identifiedResult, Used);
     }
-    protected virtual bool Used { get; } = true;
+    private bool Used { get; } = true;
     /// <summary>
     /// Returns true, if a group of monsters or pets will be summon; false, otherwise.
     /// </summary>
@@ -118,24 +118,24 @@ internal class SummonScript : IGetKey, IUniversalScript, IToJson
     /// <summary>
     /// Returns information about the spell, or blank if there is no detailed information.  Returns blank, by default.  Returns blank, by default.
     /// </summary>
-    public virtual string LearnedDetails { get; } = "";
+    public string LearnedDetails { get; } = "";
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     /// <summary>
     /// Returns true, to summon a friendly monster (a.k.a pet); false, otherwise.  Returns false, by default.
     /// </summary>
-    public virtual bool Pet { get; } = false;
+    public bool Pet { get; } = false;
 
     /// <summary>
     /// Returns a boolean expression that is computed to determine whether the summoning of the monster will produce a group of like-monsters.  Returns true, by default.
     /// </summary>
-    protected virtual string GroupBooleanExpression { get; } = "true";
+    private string GroupBooleanExpression { get; } = "true";
 
-    protected virtual string MonsterFilterBindingKey { get; }
-    protected virtual string LevelRollExpression { get; }
-    public virtual string[]? PreMessages { get; } = null;
-    public virtual string[]? SuccessMessages { get; } = null;
-    public virtual string[]? FailureMessages { get; } = null;
+    private string MonsterFilterBindingKey { get; }
+    private string LevelRollExpression { get; }
+    public string[]? PreMessages { get; } = null;
+    public string[]? SuccessMessages { get; } = null;
+    public string[]? FailureMessages { get; } = null;
     #endregion
 }

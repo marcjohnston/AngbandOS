@@ -10,9 +10,9 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a power that can be assigned to a random artifact that can be activated.  Fixed artifacts are now using this Activation.
 /// </summary>
-internal class Activation : IGetKey, IToJson
+internal sealed class Activation : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public Activation(Game game, ActivationGameConfiguration activationGameConfiguration)
     {
         Game = game;
@@ -27,23 +27,23 @@ internal class Activation : IGetKey, IToJson
     /// <summary>
     /// Returns the unique name for this activation.  This name should be capitalized appropriately.
     /// </summary>
-    public virtual string Name { get; }
+    public string Name { get; }
 
     /// <summary>
     /// Returns the message to be displayed to the player, before the activation and before a direction is requested, or null, if no message is to be rendered.  Returns null, by default.  This message also supports string interpolation:
     /// {0} - will be replaced with the associated <see cref="ItemClass.Name"/>. 
     /// </summary>
-    public virtual string? PreActivationMessage { get; } = null; // TODO: Need to accomodate proper grammar for items that use the {0} class name and a verb (e.g. your gauntlets glow vs your scale mail glows)
+    public string? PreActivationMessage { get; } = null; // TODO: Need to accomodate proper grammar for items that use the {0} class name and a verb (e.g. your gauntlets glow vs your scale mail glows)
 
     /// <summary>
     /// Returns a Roll that determines the amount of time the activation needs to recharge.  This property is bound from the <see cref="RechargeTimeRollExpression"/> property during the bind phase.
     /// </summary>
-    public Expression RechargeTimeRoll { get; protected set; }
+    public Expression RechargeTimeRoll { get; set; }
 
     /// <summary>
     /// Returns the gold value of the activation.
     /// </summary>
-    public virtual int Value { get; }
+    public int Value { get; }
 
     /// <summary>
     /// Returns the description of the activation.
@@ -90,7 +90,7 @@ internal class Activation : IGetKey, IToJson
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 
@@ -103,17 +103,17 @@ internal class Activation : IGetKey, IToJson
     /// <summary>
     /// Returns a Roll expression that determines the amount of time the activation needs to recharge.  This property is used to bind the <see cref="RechargeTimeRoll ">/> property during the bind phase.
     /// </summary>
-    protected virtual string RechargeTimeRollExpression { get; }
+    private string RechargeTimeRollExpression { get; }
 
     /// <summary>
     /// Returns the binding key for the <see cref="IActivateItemScript"/> that should be run when the activation is executed.  This property is used to bind
     /// the <see cref="ActivationCancellableScript"/> property during the binding phase.
     /// </summary>
-    protected virtual string ActivationCancellableScriptItemBindingKey { get; }
+    private string ActivationCancellableScriptItemBindingKey { get; }
 
     /// <summary>
     /// Returns the binding key for the <see cref="IActivateItemScript"/> that should be run when the activation is executed.  This property is used to bind
     /// the <see cref="ActivationCancellableScript"/> property during the binding phase.
     /// </summary>
-    public IActivateItemScript ActivationCancellableScript { get; protected set; }
+    public IActivateItemScript ActivationCancellableScript { get; set; }
 }

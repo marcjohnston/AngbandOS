@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class CharacterClassSpell : IGetKey, IToJson
+internal sealed class CharacterClassSpell : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public CharacterClassSpell(Game game, CharacterClassSpellGameConfiguration classSpellGameConfiguration)
     {
         Game = game;
@@ -39,12 +39,12 @@ internal class CharacterClassSpell : IGetKey, IToJson
         return JsonSerializer.Serialize(classSpellDefinition, Game.GetJsonSerializerOptions());
     }
 
-    protected virtual string SpellName { get; } // TODO: This is only used for the key
-    protected virtual string CharacterClassName { get; } // TODO: This is only used for the key
-    public virtual int Level { get; }
-    public virtual int ManaCost { get; }
-    public virtual int BaseFailure { get; }
-    public virtual int FirstCastExperience { get; }
+    private string SpellName { get; } // TODO: This is only used for the key
+    private string CharacterClassName { get; } // TODO: This is only used for the key
+    public int Level { get; }
+    public int ManaCost { get; }
+    public int BaseFailure { get; }
+    public int FirstCastExperience { get; }
 
     public static string GetCompositeKey(BaseCharacterClass t1, Spell t2) => Game.GetCompositeKey(t1.GetKey, t2.GetKey);
     /// <summary>

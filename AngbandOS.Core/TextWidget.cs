@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class TextWidget : Widget, IGetKey, IToJson
+internal sealed class TextWidget : Widget, IGetKey, IToJson
 {
     public TextWidget(Game game, TextWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration) : base(game)
     {
@@ -26,9 +26,9 @@ internal class TextWidget : Widget, IGetKey, IToJson
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
-    public virtual string[]? ChangeTrackerNames { get; } = null;
+    public string[]? ChangeTrackerNames { get; } = null;
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 
@@ -43,56 +43,56 @@ internal class TextWidget : Widget, IGetKey, IToJson
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
     /// </summary>
-    public virtual ColorEnum Color { get; } = ColorEnum.White;
+    public ColorEnum Color { get; } = ColorEnum.White;
 
     /// <summary>
     /// Returns the x-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public virtual int X { get; }
+    public int X { get; }
 
     /// <summary>
     /// Returns the y-coordinate on the <see cref="View"/> where the widget will be drawn.
     /// </summary>
-    public virtual int Y { get; }
+    public int Y { get; }
 
     /// <summary>
     /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
     /// </summary>
-    public virtual int Width { get; }
+    public int Width { get; }
 
     /// <summary>
     /// Returns the height of the widget.  If the height provided is less than the number of lines in the <see cref="Text"/> property, remaining lines will not be rendered.
     /// </summary>
-    public virtual int Height { get; }
+    public int Height { get; }
 
     /// <summary>
     /// Returns the <see cref="Justification"/> object to be used to justify the each line of the text within the <see cref="Width"/> of the <see cref="LabelWidget"/>.  This property
     /// is bound using the <see cref="JustificationName"/> property during the bind phase.
     /// </summary>
-    protected Justification Justification { get; private set; }
+    private Justification Justification { get; set; }
 
     /// <summary>
     /// Returns the <see cref="Alignment"/> object to be used to align the text in the <see cref="Height"/> specified.  This property is bound using the <see cref="AlignmentName"/>
     /// property during the bind phase.
     /// </summary>
-    protected Alignment Alignment { get; private set; }
+    private Alignment Alignment { get; set; }
 
     /// <summary>
     /// Returns the name of the <see cref="Alignment"/> object to be used to align the text in the <see cref="Height"/> specified.  This property is used to bind the <see cref="Alignment"/>
     /// property during the bind phase.
     /// </summary>
-    public virtual string AlignmentName { get; }
+    public string AlignmentName { get; }
 
     /// <summary>
     /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="LabelWidget" />.  This property
     /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
     /// </summary>
-    public virtual string JustificationName { get; } = nameof(LeftJustification);
+    public string JustificationName { get; } = nameof(LeftJustification);
 
     ///// <summary>
     ///// Returns the text to be rendered for the widget.
     ///// </summary>
-    //public virtual string[] Text => NullableText ?? NullText;
+    //public string[] Text => NullableText ?? NullText;
 
     /// <summary>
     /// Paint the widget on the screen.  No checks or resets of the validation status are or should be performed during this method.
@@ -119,18 +119,18 @@ internal class TextWidget : Widget, IGetKey, IToJson
     /// Returns the text to render when the value is null.  By default, returns a single line of an empty string.  The alignment will vertically add lines and the justification
     /// will horizontally add space.
     /// </summary>
-    public virtual string[] DefaultText { get; } = new string[] { String.Empty };
+    public string[] DefaultText { get; } = new string[] { String.Empty };
 
     /// <summary>
     /// Returns the binding key for an <see cref="ITextValue"> function used to generate the value to render.
     /// </summary>
-    public virtual string NullableStringsValueName { get; }
+    public string NullableStringsValueName { get; }
 
     public ITextValue NullableStringsValue { get; private set; }
     /// <summary>
     /// Returns the text to be rendered for the widget.
     /// </summary>
-    public virtual string[]? NullableText { get; }
+    public string[]? NullableText { get; }
     public string ToJson()
     {
         TextWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration = new TextWidgetGameConfiguration()

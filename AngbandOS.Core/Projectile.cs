@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Projectile : IGetKey, IToJson
+internal sealed class Projectile : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
 
     public Projectile(Game game, ProjectileGameConfiguration projectileGameConfiguration)
     {
@@ -23,7 +23,6 @@ internal class Projectile : IGetKey, IToJson
         EffectAnimationBindingKey = projectileGameConfiguration.EffectAnimationBindingKey;
         ImpactProjectileGraphicBindingKey = projectileGameConfiguration.ImpactProjectileGraphicBindingKey;
     }
-
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -45,7 +44,7 @@ internal class Projectile : IGetKey, IToJson
         return JsonSerializer.Serialize(projectileDefinition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind()
@@ -62,20 +61,20 @@ internal class Projectile : IGetKey, IToJson
     /// <summary>
     /// Returns the graphics to be used while the projectile is in motion; or null, if there is no graphic.  Returns null, by default.
     /// </summary>
-    protected ProjectileGraphic? BoltProjectileGraphic { get; private set; }
+    private ProjectileGraphic? BoltProjectileGraphic { get; set; }
 
-    protected virtual string? BoltProjectileGraphicBindingKey { get; } = null;
+    private string? BoltProjectileGraphicBindingKey { get; } = null;
 
-    protected Animation? EffectAnimation { get; private set; }
+    private Animation? EffectAnimation { get; set; }
 
-    protected virtual string? EffectAnimationBindingKey { get; } = null;
+    private string? EffectAnimationBindingKey { get; } = null;
 
     /// <summary>
     /// Returns the graphics to be used when the projectile impacts something; or null, if there is no graphic.  Returns null, by default.
     /// </summary>
-    protected ProjectileGraphic? ImpactProjectileGraphic { get; private set; }
+    private ProjectileGraphic? ImpactProjectileGraphic { get; set; }
 
-    protected virtual string? ImpactProjectileGraphicBindingKey { get; } = null;
+    private string? ImpactProjectileGraphicBindingKey { get; } = null;
 
     /// <summary>
     /// Returns true, if the projectile actually hits and affects a monster.
@@ -555,7 +554,7 @@ internal class Projectile : IGetKey, IToJson
     /// <param name="dam"></param>
     /// <param name="aRad"></param>
     /// <returns></returns>
-    protected bool CheckBounceOffPlayer(int who, int dam, int aRad)
+    private bool CheckBounceOffPlayer(int who, int dam, int aRad)
     {
         if (Game.HasReflection && aRad == 0 && Game.DieRoll(10) != 1)
         {
@@ -608,7 +607,7 @@ internal class Projectile : IGetKey, IToJson
         return '*'; // TODO: This can be a property for each projectile
     }
 
-    protected FloorEffect FloorEffect { get; private set; }
+    private FloorEffect FloorEffect { get; set; }
 
     /// <summary>
     /// Perform any effect needed on the floor and returns true, if the effect was noticed.  Does nothing and returns false, by default.
@@ -616,25 +615,25 @@ internal class Projectile : IGetKey, IToJson
     /// <param name="y"></param>
     /// <param name="x"></param>
     /// <returns></returns>
-    protected virtual string FloorEffectBindingKey { get; } = nameof(UnnoticedFloorEffect);
+    private string FloorEffectBindingKey { get; } = nameof(UnnoticedFloorEffect);
 
     /// <summary>
     /// Returns the <see cref="ItemEffect"/> that perform the effect needed on the item and returns true, if the effect was noticed.  Does nothing and return false, by default.  This property is bound
     /// from the <see cref="ItemEffectBindingKey"/> property during the binding phase.
     /// </summary>
-    protected ItemEffect ItemEffect { get; private set; }
+    private ItemEffect ItemEffect { get; set; }
 
     /// <summary>
     /// Returns the binding key for the <see cref="ItemEffect"></see> object to perform the effect needed on an item.  This property is used to bind the <see cref="ItemEffect"></see> property during the
     /// binding phase.
     /// </summary>
-    protected virtual string ItemEffectBindingKey { get; } = nameof(UnnoticedItemEffect);
+    private string ItemEffectBindingKey { get; } = nameof(UnnoticedItemEffect);
 
-    protected PlayerEffectUniversalScript PlayerEffect { get; private set; }
+    private PlayerEffectUniversalScript PlayerEffect { get; set; }
 
-    protected virtual string PlayerEffectBindingKey { get; } = nameof(NoticedPlayerEffect);
+    private string PlayerEffectBindingKey { get; } = nameof(NoticedPlayerEffect);
 
-    protected MonsterEffect MonsterEffect { get; private set; }
+    private MonsterEffect MonsterEffect { get; set; }
 
     /// <summary>
     /// Perform any effect needed on a monster and returns true, if the effect was noticed.
@@ -644,5 +643,5 @@ internal class Projectile : IGetKey, IToJson
     /// <param name="mPtr">Represents the monster to affect.</param>
     /// <param name="r">Represents the distance from the attacker.</param>
     /// <returns></returns>
-    protected virtual string MonsterEffectBindingKey { get; }
+    private string MonsterEffectBindingKey { get; }
 }

@@ -17,13 +17,7 @@ internal class UpdateScentFlaggedAction : FlaggedAction
     {
         int oldHead = _flowHead;
         GridTile cPtr = Game.Map.Grid[1][1];
-        try
-        {
-            cPtr = Game.Map.Grid[y][x];
-        }
-        catch (Exception ex)
-        {
-        }
+        cPtr = Game.Map.Grid[y][x];
         if (cPtr.ScentAge == _flowN)
         {
             return;

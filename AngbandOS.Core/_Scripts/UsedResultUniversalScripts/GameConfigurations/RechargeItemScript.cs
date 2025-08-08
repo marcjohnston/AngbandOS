@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class RechargeItemScript : UsedResultUniversalScript, IGetKey, IToJson
+internal sealed class RechargeItemScript : UsedResultUniversalScript, IGetKey, IToJson
 {
     public RechargeItemScript(Game game, RechargeItemScriptGameConfiguration rechargeItemScriptGameConfiguration) : base(game)
     {
@@ -35,7 +35,7 @@ internal class RechargeItemScript : UsedResultUniversalScript, IGetKey, IToJson
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind()
@@ -43,11 +43,11 @@ internal class RechargeItemScript : UsedResultUniversalScript, IGetKey, IToJson
         Turns = Game.ParseNumericExpression(TurnsExpression);
     }
 
-    protected virtual string TurnsExpression { get; }
-    protected Expression Turns { get; private set; }
-    protected virtual string SelectItemMessage { get; }
-    protected virtual string NonRechargeableItemMessage { get; }
-    protected virtual string NothingRechargeableMessage { get; }
+    private string TurnsExpression { get; }
+    private Expression Turns { get; set; }
+    private string SelectItemMessage { get; }
+    private string NonRechargeableItemMessage { get; }
+    private string NothingRechargeableMessage { get; }
 
     public override UsedResultEnum ExecuteUsedScript()
     {

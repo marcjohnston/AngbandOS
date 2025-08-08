@@ -10,9 +10,9 @@ namespace AngbandOS.Core;
 /// Represents an animation that occurs when a projectile is launched.
 /// </summary>
 [Serializable]
-internal class Animation : IGetKey, IToJson
+internal sealed class Animation : IGetKey, IToJson
 {
-    protected Game Game;
+    private Game Game;
     public Animation(Game game, AnimationGameConfiguration animationGameConfiguration) 
     {
         Game = game;
@@ -42,17 +42,17 @@ internal class Animation : IGetKey, IToJson
         return JsonSerializer.Serialize(animationDefinition, Game.GetJsonSerializerOptions());
     }
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 
     public void Bind() { }
 
-    public virtual char Character { get; }
-    public virtual ColorEnum Color { get; }
-    public virtual string Name { get; }
-    public virtual ColorEnum AlternateColor { get; }
-    public virtual string Sequence { get; }
+    public char Character { get; }
+    public ColorEnum Color { get; }
+    public string Name { get; }
+    public ColorEnum AlternateColor { get; }
+    public string Sequence { get; }
 
     public void Animate(int[] y, int[] x)
     {

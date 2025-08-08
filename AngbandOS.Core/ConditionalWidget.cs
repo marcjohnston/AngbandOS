@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ConditionalWidget : Widget, IGetKey, IToJson
+internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
 {
     public ConditionalWidget(Game game, ConditionalWidgetGameConfiguration conditionalWidgetGameConfiguration) : base(game)
     {
@@ -21,9 +21,9 @@ internal class ConditionalWidget : Widget, IGetKey, IToJson
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
-    public virtual string[]? ChangeTrackerNames { get; } = null;
+    public string[]? ChangeTrackerNames { get; } = null;
 
-    public virtual string Key { get; }
+    public string Key { get; }
 
     public string GetKey => Key;
 
@@ -61,7 +61,7 @@ internal class ConditionalWidget : Widget, IGetKey, IToJson
     /// the conditions that make up a term using a Product-Of-Sums formula.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
     /// boolean expressions into POS format.
     /// </summary>
-    protected (IBoolValue conditional, bool valueConditionalMustBe, int productOfSumsTerm)[] Enabled { get; private set; }
+    private (IBoolValue conditional, bool valueConditionalMustBe, int productOfSumsTerm)[] Enabled { get; set; }
 
     /// <summary>
     /// Returns an array of the names of the conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for 
@@ -70,36 +70,36 @@ internal class ConditionalWidget : Widget, IGetKey, IToJson
     /// the conditions that make up a term.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
     /// boolean expressions into POS format.
     /// </summary>
-    protected virtual (string conditionalName, bool isTrue, int term)[] EnabledNames { get; }
+    private (string conditionalName, bool isTrue, int term)[] EnabledNames { get; }
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true; or null, if no widget should be invalidated.  This 
     /// property is used to bind the <see cref="TrueWidgets"/> property during the bind phase.  Returns null, by default.
     /// </summary>
-    public virtual string[]? TrueWidgetNames { get; } = null;
+    public string[]? TrueWidgetNames { get; } = null;
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns false; or null, if no widget should be invalidated.  This 
     /// property is used to bind the <see cref="FalseWidgets"/> property during the bind phase.  Returns null, by default.
     /// </summary>
-    public virtual string[]? FalseWidgetNames { get; } = null;
+    public string[]? FalseWidgetNames { get; } = null;
 
     /// <summary>
     /// Returns the widget to invalidate when the <see cref="Enabled"/> property returns true.  This property is bound using the <see cref="TrueWidgetNames"/> property 
     /// during the bind phase.
     /// </summary>
-    protected Widget[]? TrueWidgets { get; private set; }
+    private Widget[]? TrueWidgets { get; set; }
 
     /// <summary>
     /// Returns the widget to invalidate when the <see cref="Enabled"/> property returns false.  This property is bound using the <see cref="FalseWidgetNames"/> property 
     /// during the bind phase.
     /// </summary>
-    protected Widget[]? FalseWidgets { get; private set; }
+    private Widget[]? FalseWidgets { get; set; }
 
     /// <summary>
     /// Evaluates the <see cref="Enabled"/> property as a Product of Sums expression and returns true or false accordingly.
     /// </summary>
-    protected bool EvaluateEnabledExpression
+    private bool EvaluateEnabledExpression
     {
         get
         {

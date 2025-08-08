@@ -7,9 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class RealmCharacterClass : IGetKey, IToJson
+internal sealed class RealmCharacterClass : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    private readonly Game Game;
     public RealmCharacterClass(Game game, RealmCharacterClassGameConfiguration realmCharacterClassGameConfiguration)
     {
         Game = game;
@@ -49,8 +49,8 @@ internal class RealmCharacterClass : IGetKey, IToJson
 
     public BaseCharacterClass CharacterClass { get; private set; }
     public Realm Realm { get; private set; }
-    protected virtual string CharacterClassBindingKey { get; }
-    protected virtual string RealmBindingKey { get; }
-    public virtual string? CharacterClassTitle { get; }
-    public virtual string? DeityBindingKey { get; } = null;
+    private string CharacterClassBindingKey { get; }
+    private string RealmBindingKey { get; }
+    public string? CharacterClassTitle { get; }
+    public string? DeityBindingKey { get; } = null;
 }
