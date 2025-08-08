@@ -20,19 +20,19 @@ internal abstract class FixedArtifact : IGetKey, IToJson
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
 
         // Cut and paste
-        //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override string Name => ");
-        //if (property is null)
-        //    throw new Exception("");
-        //MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
-        //MappedItemEnhancement[]? mappedItemEnhancements = allMappedItemEnhancements.Where(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(GetKey))).ToArray(); // Must match the character class
+        string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override int Dd => ");
+        if (property is null)
+            throw new Exception("");
+        MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
+        MappedItemEnhancement[]? mappedItemEnhancements = allMappedItemEnhancements.Where(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(GetKey))).ToArray(); // Must match the character class
 
-        //if (mappedItemEnhancements.Length == 0)
-        //    throw new Exception("");
-        //foreach (MappedItemEnhancement mappedItemEnhancement in mappedItemEnhancements)
-        //{
-        //    mappedItemEnhancement.Bind();
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.Key, property);
-        //}
+        if (mappedItemEnhancements.Length == 0)
+            throw new Exception("");
+        foreach (MappedItemEnhancement mappedItemEnhancement in mappedItemEnhancements)
+        {
+            mappedItemEnhancement.Bind();
+            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, property);
+        }
     }
 
     public string ToJson()
