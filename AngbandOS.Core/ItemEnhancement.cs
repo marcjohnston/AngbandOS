@@ -82,7 +82,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         ImElec = itemEnhancementGameConfiguration.ImElec;
         ImFire = itemEnhancementGameConfiguration.ImFire;
         Impact = itemEnhancementGameConfiguration.Impact;
-        KillDragon = itemEnhancementGameConfiguration.KillDragon;
         NoMagic = itemEnhancementGameConfiguration.NoMagic;
         NoTele = itemEnhancementGameConfiguration.NoTele;
         PermaCurse = itemEnhancementGameConfiguration.PermaCurse;
@@ -207,7 +206,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ImFire = ImFire,
             Impact = Impact,
             Infra = Infra,
-            KillDragon = KillDragon,
             NoMagic = NoMagic,
             NoTele = NoTele,
             PermaCurse = PermaCurse,
@@ -365,7 +363,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ImElec = ImElec,
             ImFire = ImFire,
             Impact = Impact,
-            KillDragon = KillDragon,
             NoMagic = NoMagic,
             NoTele = NoTele,
             PermaCurse = PermaCurse,
@@ -732,7 +729,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool SlayDemon { get; } = false;
     
     /// <inheritdoc />
-    private bool SlayDragon { get; } = false;
+    private int SlayDragon { get; } = 1;
     
     /// <inheritdoc />
     private bool SlayEvil { get; } = false;

@@ -746,30 +746,15 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (EffectivePropertySet.SlayDragon && rPtr.Dragon)
+            if (rPtr.Dragon)
             {
                 if (mPtr.IsVisible)
                 {
                     rPtr.Knowledge.Characteristics.Dragon = true;
                 }
-                if (mult < 3)
+                if (mult < EffectivePropertySet.SlayDragon)
                 {
-                    mult = 3;
-                }
-            }
-            if (EffectivePropertySet.KillDragon && rPtr.Dragon)
-            {
-                if (mPtr.IsVisible)
-                {
-                    rPtr.Knowledge.Characteristics.Dragon = true;
-                }
-                if (mult < 5)
-                {
-                    mult = 5;
-                }
-                if (FixedArtifact != null)
-                {
-                    mult *= FixedArtifact.KillDragonMultiplier;
+                    mult = EffectivePropertySet.SlayDragon;
                 }
             }
             if (EffectivePropertySet.BrandAcid)
@@ -1262,11 +1247,11 @@ internal sealed class Item : IComparable<Item>
         {
             info[i++] = "It is very sharp and can cut your foes.";
         }
-        if (EffectivePropertySet.KillDragon)
+        if (EffectivePropertySet.SlayDragon > 3)
         {
             info[i++] = "It is a great bane of dragons.";
         }
-        else if (EffectivePropertySet.SlayDragon)
+        else if (EffectivePropertySet.SlayDragon > 1)
         {
             info[i++] = "It is especially deadly against dragons.";
         }
@@ -1632,14 +1617,7 @@ internal sealed class Item : IComparable<Item>
         {
             value += Game.BonusSlayGiantlValue;
         }
-        if (EffectivePropertySet.SlayDragon)
-        {
-            value += Game.BonusSlayDragonValue;
-        }
-        if (EffectivePropertySet.KillDragon)
-        {
-            value += Game.BonusKillDragonValue;
-        }
+        value += EffectivePropertySet.SlayDragon * Game.BonusSlayDragonValue;
         if (EffectivePropertySet.Vorpal)
         {
             value += Game.BonusVorpalValue;

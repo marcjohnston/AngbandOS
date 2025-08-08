@@ -11,7 +11,7 @@ public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool KillDragon => true;
+    public override int SlayDragon => 5;
     public override string? BonusConstitutionRollExpression => "3";
     public override bool ResAcid => true;
     public override bool ResChaos => true;

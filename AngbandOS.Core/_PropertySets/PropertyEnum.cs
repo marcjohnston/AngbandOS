@@ -77,7 +77,6 @@ internal enum PropertyEnum
     Impact,
     Infra,
     Int,
-    KillDragon,
     NoMagic,
     NoTele,
     PermaCurse,

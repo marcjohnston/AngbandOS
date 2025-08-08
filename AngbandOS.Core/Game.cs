@@ -362,12 +362,7 @@ internal class Game
     /// <summary>
     /// Returns the additive value of items that have the slay-dragon modifier.
     /// </summary>
-    public int BonusSlayDragonValue = 3500;
-
-    /// <summary>
-    /// Returns the additive value of items that have the kill-dragon modifier.
-    /// </summary>
-    public int BonusKillDragonValue = 5500;
+    public int BonusSlayDragonValue = 1500;
 
     /// <summary>
     /// Returns the additive value of items that have the vorpal modifier.

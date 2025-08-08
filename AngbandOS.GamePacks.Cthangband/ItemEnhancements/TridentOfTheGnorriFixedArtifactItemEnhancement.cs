@@ -21,7 +21,7 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
     public override bool SlayAnimal => true;
-    public override bool SlayDragon => true;
+    public override int SlayDragon => 3;
     public override bool SlowDigest => true;
     public override bool Feather => true;
     public override int Radius => 3;

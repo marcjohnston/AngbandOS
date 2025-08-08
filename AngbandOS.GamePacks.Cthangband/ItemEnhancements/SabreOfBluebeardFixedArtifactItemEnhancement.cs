@@ -13,7 +13,7 @@ public class SabreOfBluebeardFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override string? BonusAttacksRollExpression => "1";
     public override bool ShowMods => true;
     public override bool SlayAnimal => true;
-    public override bool SlayDragon => true;
+    public override int SlayDragon => 3;
     public override bool SlayGiant => true;
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;

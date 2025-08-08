@@ -117,7 +117,6 @@ public class ItemEnhancementGameConfiguration
     public virtual bool ImElec { get; set; } = false;
     public virtual bool ImFire { get; set; } = false;
     public virtual bool Impact { get; set; } = false;
-    public virtual bool KillDragon { get; set; } = false;
     public virtual bool NoMagic { get; set; } = false;
     public virtual bool NoTele { get; set; } = false;
     public virtual bool PermaCurse { get; set; } = false;
@@ -146,7 +145,7 @@ public class ItemEnhancementGameConfiguration
     public virtual bool ShowMods { get; set; } = false;
     public virtual bool SlayAnimal { get; set; } = false;
     public virtual bool SlayDemon { get; set; } = false;
-    public virtual bool SlayDragon { get; set; } = false;
+    public virtual int SlayDragon { get; set; } = 3;
     public virtual bool SlayEvil { get; set; } = false;
     public virtual bool SlayGiant { get; set; } = false;
     public virtual bool SlayOrc { get; set; } = false;

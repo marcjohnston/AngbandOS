@@ -13,7 +13,7 @@ public class MaceThunderFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool ImElec => true;
-    public override bool KillDragon => true;
+    public override int SlayDragon => 5;
     public override bool ShowMods => true;
     public override int Weight => 80;
     public override int Cost => 50000;

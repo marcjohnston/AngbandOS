@@ -428,11 +428,11 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
             {
                 info[infoCount++] = "Your weapon is especially deadly against giants.";
             }
-            if (meleeItem.EffectivePropertySet.SlayDragon)
+            if (meleeItem.EffectivePropertySet.SlayDragon > 1)
             {
                 info[infoCount++] = "Your weapon is especially deadly against dragons.";
             }
-            if (meleeItem.EffectivePropertySet.KillDragon)
+            if (meleeItem.EffectivePropertySet.SlayDragon > 3)
             {
                 info[infoCount++] = "Your weapon is a great bane of dragons.";
             }

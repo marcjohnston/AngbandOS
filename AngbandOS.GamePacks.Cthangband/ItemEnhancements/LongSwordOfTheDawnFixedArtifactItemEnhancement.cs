@@ -27,7 +27,7 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool ResLight => true;
     public override bool ShowMods => true;
     public override bool SlayDemon => true;
-    public override bool SlayDragon => true;
+    public override int SlayDragon => 3;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
     public override bool SustCha => true;

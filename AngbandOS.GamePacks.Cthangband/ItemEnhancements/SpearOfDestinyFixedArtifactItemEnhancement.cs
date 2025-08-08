@@ -29,7 +29,7 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
     public override bool SlayDemon => true;
-    public override bool SlayDragon => true;
+    public override int SlayDragon => 3;
     public override bool SlayEvil => true;
     public override bool SlayGiant => true;
     public override bool SlayUndead => true;

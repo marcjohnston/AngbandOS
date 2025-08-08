@@ -15,7 +15,7 @@ public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGam
     public override string? BonusConstitutionRollExpression => "3";
     public override string? BonusWisdomRollExpression => "3";
     public override bool ShowMods => true;
-    public override bool SlayDragon => true;
+    public override int SlayDragon => 3;
     public override bool SlowDigest => true;
     public override bool Telepathy => true;
     public override int Cost => 40000;

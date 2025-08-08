@@ -1206,11 +1206,7 @@ internal class Monster : IItemContainer
                         bool willHurt = false;
                         string itemName = item.GetFullDescription(true);
                         string monsterName = IndefiniteWhenHiddenName;
-                        if (item.EffectivePropertySet.KillDragon && Race.Dragon)
-                        {
-                            willHurt = true;
-                        }
-                        if (item.EffectivePropertySet.SlayDragon && Race.Dragon)
+                        if (item.EffectivePropertySet.SlayDragon > 1 && Race.Dragon)
                         {
                             willHurt = true;
                         }

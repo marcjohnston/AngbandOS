@@ -48,11 +48,6 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     /// </summary>
     public int CurNum = 0; // TODO: This property should graduate into an ItemFactory as the Count property.
 
-    /// <summary>
-    /// Returns the multipler to use when being used to kill a dragon.  The SwordOfLightning returns a 3.  All other weapons return 1.
-    /// </summary>
-    public virtual int KillDragonMultiplier => 1; // TODO: Move this into the ItemCharacteristics
-
     protected abstract string BaseItemFactoryName { get; }
 
     /// <summary>

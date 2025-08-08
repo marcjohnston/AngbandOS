@@ -22,7 +22,7 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool ShowMods => true;
     public override bool SlayAnimal => true;
     public override bool SlayDemon => true;
-    public override bool SlayDragon => true;
+    public override int SlayDragon => 3;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
     public override int Cost => 111111;

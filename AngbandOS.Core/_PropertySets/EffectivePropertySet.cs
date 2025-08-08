@@ -102,7 +102,6 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.Impact);
         RegisterBoolPropertyFactory(PropertyEnum.Infra);
         RegisterBoolPropertyFactory(PropertyEnum.Int);
-        RegisterBoolPropertyFactory(PropertyEnum.KillDragon);
         RegisterBoolPropertyFactory(PropertyEnum.NoMagic);
         RegisterBoolPropertyFactory(PropertyEnum.NoTele);
         RegisterBoolPropertyFactory(PropertyEnum.PermaCurse);
@@ -132,7 +131,7 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.ShowMods);
         RegisterBoolPropertyFactory(PropertyEnum.SlayAnimal);
         RegisterBoolPropertyFactory(PropertyEnum.SlayDemon);
-        RegisterBoolPropertyFactory(PropertyEnum.SlayDragon);
+        RegisterIntPropertyFactory(PropertyEnum.SlayDragon);
         RegisterBoolPropertyFactory(PropertyEnum.SlayEvil);
         RegisterBoolPropertyFactory(PropertyEnum.SlayGiant);
         RegisterBoolPropertyFactory(PropertyEnum.SlayOrc);
@@ -1025,17 +1024,6 @@ internal class EffectivePropertySet
             SetBoolValue(PropertyEnum.Int, value);
         }
     }
-    public bool KillDragon
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.KillDragon);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.KillDragon, value);
-        }
-    }
     public bool NoMagic
     {
         get
@@ -1355,15 +1343,15 @@ internal class EffectivePropertySet
             SetBoolValue(PropertyEnum.SlayDemon, value);
         }
     }
-    public bool SlayDragon
+    public int SlayDragon
     {
         get
         {
-            return GetBoolValue(PropertyEnum.SlayDragon);
+            return GetIntValue(PropertyEnum.SlayDragon);
         }
         set
         {
-            SetBoolValue(PropertyEnum.SlayDragon, value);
+            SetIntValue(PropertyEnum.SlayDragon, value);
         }
     }
     public bool SlayEvil

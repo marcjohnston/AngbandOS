@@ -12,7 +12,7 @@ public class ExecutionersSwordOfNyarlathotepFixedArtifactItemEnhancement : ItemE
     public override bool IgnoreFire => true;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
-    public override bool SlayDragon => true;
+    public override int SlayDragon => 3;
     public override bool SlayEvil => true;
     public override bool SlayGiant => true;
     public override bool SlayOrc => true;

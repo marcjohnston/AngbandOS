@@ -27,7 +27,7 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
     public override bool ResDisen => true;
     public override bool ShowMods => true;
     public override bool SlayAnimal => true;
-    public override bool SlayDragon => true;
+    public override int SlayDragon => 3;
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
     public override bool Vampiric => true;

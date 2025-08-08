@@ -14,5 +14,5 @@ public class FriendlyAnimalSummonScript : SummonScriptGameConfiguration
     public override string LevelRollExpression => "X";
     public override bool Pet => true;
     public override string[]? FailureMessages => new string[] { "No-one ever turns up." };
-    public string LearnedDetails =>  "control 100%";
+    public override string LearnedDetails =>  "control 100%";
 }

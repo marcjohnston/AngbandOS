@@ -36,22 +36,6 @@ internal abstract class ItemTest : IGetKey
         return true;
     }
 
-    private bool TestZeroInt(bool? testValue, int actualValue)
-    {
-        if (testValue.HasValue)
-        {
-            if (testValue.Value == true && actualValue == 0)
-            {
-                return false;
-            }
-            if (testValue.Value == false && actualValue != 0)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private bool TestNullObject<T>(bool? testValue, T? actualValue)
     {
         if (testValue.HasValue)
@@ -218,10 +202,6 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(KillDragon, effectivePropertySet.KillDragon))
-        {
-            return false;
-        }
         if (!TestBoolean(NoMagic, effectivePropertySet.NoMagic))
         {
             return false;
@@ -234,7 +214,7 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestZeroInt(Radius, effectivePropertySet.Radius))
+        if (!TestBoolean(Radius, effectivePropertySet.Radius > 0))
         {
             return false;
         }
@@ -346,7 +326,7 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(SlayDragon, effectivePropertySet.SlayDragon))
+        if (!TestBoolean(SlayDragon, effectivePropertySet.SlayDragon > 1))
         {
             return false;
         }
@@ -418,7 +398,7 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestZeroInt(TreasureRating, effectivePropertySet.TreasureRating))
+        if (!TestBoolean(TreasureRating, effectivePropertySet.TreasureRating > 0))
         {
             return false;
         }
@@ -525,8 +505,6 @@ internal abstract class ItemTest : IGetKey
     public virtual bool? Infra => null;
 
     public virtual bool? Int => null;
-
-    public virtual bool? KillDragon => null;
 
     public virtual bool? NoMagic => null;
 

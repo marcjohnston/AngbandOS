@@ -11,7 +11,7 @@ public class TwoHandedSwordDragonslayerFixedArtifactItemEnhancement : ItemEnhanc
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override bool KillDragon => true;
+    public override int SlayDragon => 5;
     public override string? BonusStrengthRollExpression => "2";
     public override bool Regen => true;
     public override bool ShowMods => true;

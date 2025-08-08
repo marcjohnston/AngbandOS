@@ -12,5 +12,5 @@ public class WeaponOfSlayDragonItemEnhancement : ItemEnhancementGameConfiguratio
     public override int Value => 3500;
     public override string? FriendlyName => "of Slay Dragon";
     public override int TreasureRating => 18;
-    public override bool SlayDragon => true;
-    }
+    public override int SlayDragon => 3;
+}

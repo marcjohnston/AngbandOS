@@ -245,15 +245,14 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Slay Orc", 6, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayOrc);
         DisplayStat("Slay Troll", 7, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayTroll);
         DisplayStat("Slay Giant", 8, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayGiant);
-        DisplayStat("Slay Drag.", 9, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayDragon);
-        DisplayStat("Kill Drag.", 10, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.KillDragon);
-        DisplayStat("Sharpness", 11, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Vorpal);
-        DisplayStat("Impact", 12, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Impact);
-        DisplayStat("Poison Brd", 13, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandPois);
-        DisplayStat("Acid Brand", 14, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandAcid);
-        DisplayStat("Elec Brand", 15, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandElec);
-        DisplayStat("Fire Brand", 16, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandFire);
-        DisplayStat("Cold Brand", 17, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandCold);
+        DisplayStat("Slay Drag.", 9, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayDragon > 1);
+        DisplayStat("Sharpness", 10, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Vorpal);
+        DisplayStat("Impact", 11, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Impact);
+        DisplayStat("Poison Brd", 12, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandPois);
+        DisplayStat("Acid Brand", 13, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandAcid);
+        DisplayStat("Elec Brand", 14, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandElec);
+        DisplayStat("Fire Brand", 15, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandFire);
+        DisplayStat("Cold Brand", 16, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandCold);
 
         Game.DisplayPlayerEquippy(0, 52 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 52 + 11);
