@@ -4,4 +4,5 @@ public class DrainLifeWandItemFactoryItemEnhancement : ItemEnhancementGameConfig
 {
     public override int Weight => 10;
     public override int Cost => 1200;
+    public override int DamageDice => 1;
 }

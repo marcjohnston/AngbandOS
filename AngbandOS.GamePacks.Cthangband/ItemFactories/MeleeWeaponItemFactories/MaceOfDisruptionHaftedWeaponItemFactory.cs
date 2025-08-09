@@ -13,7 +13,6 @@ public class MaceOfDisruptionHaftedWeaponItemFactory : ItemFactoryGameConfigurat
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Mace of Disruption";
 
-    public override int DamageDice => 5;
     public override int DamageSides => 8;
     public override string? DescriptionSyntax => "Mace~ of Disruption";
     public override int LevelNormallyFound => 80;

@@ -14,4 +14,5 @@ public class PairOfHardLeatherBootsOfIthaquaFixedArtifactItemEnhancement : ItemE
     public override string? BonusSpeedRollExpression => "15";
     public override bool ResNexus => true;
     public override int Cost => 300000;
+    public override int DamageDice => 1;
 }

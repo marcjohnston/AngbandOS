@@ -23,7 +23,6 @@ public class DeflectionShieldItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Shield of Deflection";
 
     public override int ArmorClass => 10;
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? ItemEnhancementBindingKey => nameof(DeflectionShieldItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 70;

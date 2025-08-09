@@ -13,7 +13,6 @@ public class BallAndChainHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Ball-and-Chain";
 
-    public override int DamageDice => 2;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax => "Ball-and-Chain~";
     public override int LevelNormallyFound => 20;

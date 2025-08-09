@@ -32,4 +32,5 @@ public class PowerDragonScaleMailBladeturnerFixedArtifactItemEnhancement : ItemE
     public override bool ResSound => true;
     public override int Weight => 350;
     public override int Cost => 500000;
+    public override int DamageDice => 2;
 }

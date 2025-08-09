@@ -16,7 +16,6 @@ public class WoodenArrowAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Arrow";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax => "Arrow~";
     public override int LevelNormallyFound => 3;

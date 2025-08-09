@@ -28,7 +28,6 @@ public class WoodenTorchLightSourceItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override int? MaxPhlogiston => 5000;
 
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Wooden Torch~";
     public override int LevelNormallyFound => 1;

@@ -13,7 +13,6 @@ public class LeadFilledMaceHaftedWeaponItemFactory : ItemFactoryGameConfiguratio
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Lead-Filled Mace";
 
-    public override int DamageDice => 3;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax => "Lead-Filled Mace~";
     public override int LevelNormallyFound => 15;

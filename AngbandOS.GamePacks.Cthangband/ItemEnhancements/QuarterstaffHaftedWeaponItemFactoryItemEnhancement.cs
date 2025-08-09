@@ -7,4 +7,5 @@ public class QuarterstaffHaftedWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 150;
     public override int Cost => 200;
+    public override int DamageDice => 1;
 }

@@ -20,7 +20,6 @@ public class CthaatAquadingenNatureBookItemFactory : ItemFactoryGameConfiguratio
     public override string Name => "[Cthaat Aquadingen]";
     public override string? DescriptionSyntax => "Nature Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Nature Magic $Name$";
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int LevelNormallyFound => 80;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

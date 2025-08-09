@@ -8,4 +8,5 @@ public class AwlPikePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 160;
     public override int Cost => 340;
+    public override int DamageDice => 1;
 }

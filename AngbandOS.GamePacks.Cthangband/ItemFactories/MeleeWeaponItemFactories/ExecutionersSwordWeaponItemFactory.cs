@@ -13,7 +13,6 @@ public class ExecutionersSwordWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Executioner's Sword";
 
-    public override int DamageDice => 4;
     public override int DamageSides => 5;
     public override string? DescriptionSyntax => "Executioner's Sword~";
     public override int LevelNormallyFound => 40;

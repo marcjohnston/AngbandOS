@@ -8,4 +8,5 @@ public class ScythePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 250;
     public override int Cost => 800;
+    public override int DamageDice => 5;
 }

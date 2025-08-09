@@ -24,7 +24,6 @@ public class LargeLeatherShieldItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(LargeLeatherShieldItemFactoryItemEnhancement);
 
     public override int ArmorClass => 4;
-    public override int DamageDice => 1;
     public override int DamageSides => 2;
     public override string? DescriptionSyntax => "Large Leather Shield~";
     public override int LevelNormallyFound => 15;

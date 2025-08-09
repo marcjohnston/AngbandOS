@@ -23,7 +23,6 @@ public class MetalShodBootsItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Pair of Metal Shod Boots";
 
     public override int ArmorClass => 6;
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Pair~ of Metal Shod Boots";
     public override int LevelNormallyFound => 20;

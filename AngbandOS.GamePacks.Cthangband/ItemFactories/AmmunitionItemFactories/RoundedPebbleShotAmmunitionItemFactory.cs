@@ -20,7 +20,6 @@ public class RoundedPebbleShotAmmunitionItemFactory : ItemFactoryGameConfigurati
     {
         (0, 1)
     };
-    public override int DamageDice => 1;
     public override int DamageSides => 2;
     public override string? DescriptionSyntax => "Rounded Pebble~";
     public override string? ItemEnhancementBindingKey => nameof(RoundedPebbleShotAmmunitionItemFactoryItemEnhancement);

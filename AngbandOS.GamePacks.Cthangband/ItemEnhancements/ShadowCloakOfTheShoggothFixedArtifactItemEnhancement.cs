@@ -14,4 +14,5 @@ public class ShadowCloakOfTheShoggothFixedArtifactItemEnhancement : ItemEnhancem
     public override string? BonusStealthRollExpression => "4";
     public override bool SeeInvis => true;
     public override int Cost => 35000;
+    public override int DamageDice => 0;
 }

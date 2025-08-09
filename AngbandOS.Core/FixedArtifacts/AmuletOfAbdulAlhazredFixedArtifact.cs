@@ -13,7 +13,6 @@ internal class AmuletOfAbdulAlhazredFixedArtifact : FixedArtifact
     private AmuletOfAbdulAlhazredFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(IngweAmuletItemFactory);
     public override string Name => "The Amulet of Abdul Alhazred";
-    public override int Dd => 0;
     public override int Ds => 0;
     public override bool HasOwnType => true;
     public override int Level => 65;

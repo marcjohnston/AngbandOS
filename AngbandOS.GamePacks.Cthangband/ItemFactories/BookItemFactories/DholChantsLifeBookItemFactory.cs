@@ -14,7 +14,6 @@ public class DholChantsLifeBookItemFactory : ItemFactoryGameConfiguration
     public override string Name => "[Dhol Chants]";
     public override string? DescriptionSyntax => "Life Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Life Magic $Name$";
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -23,16 +23,16 @@ internal abstract class FixedArtifact : IGetKey, IToJson
         //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override int Dd => ");
         //if (property is null)
         //    throw new Exception("");
-        //MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
-        //MappedItemEnhancement[]? mappedItemEnhancements = allMappedItemEnhancements.Where(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(GetKey))).ToArray(); // Must match the character class
+        MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
+        MappedItemEnhancement[]? mappedItemEnhancements = allMappedItemEnhancements.Where(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(GetKey))).ToArray(); // Must match the character class
 
         //if (mappedItemEnhancements.Length == 0)
         //    throw new Exception("");
-        //foreach (MappedItemEnhancement mappedItemEnhancement in mappedItemEnhancements)
-        //{
+        foreach (MappedItemEnhancement mappedItemEnhancement in mappedItemEnhancements)
+        {
         //    mappedItemEnhancement.Bind();
         //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, property);
-        //}
+        }
     }
 
     public string ToJson()
@@ -70,11 +70,6 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     public virtual ColorEnum Color => ColorEnum.White; // TODO: This must be used outside of the ItemEnhancement
     public virtual bool DisableStomp => false;
     public abstract string Name { get; } // TODO: This must be used outside of the ItemEnhancement
-
-    /// <summary>
-    /// Overrides the BaseItemFactory Cost
-    /// </summary>
-    public abstract int Dd { get; } // TODO: Need to convert this to an enhancement
 
     public abstract int Ds { get; } // TODO: Need to convert this to an enhancement
 

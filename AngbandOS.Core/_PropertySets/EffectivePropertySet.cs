@@ -81,6 +81,7 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.Con);
         RegisterIntPropertyFactory(PropertyEnum.Cost);
         RegisterBoolPropertyFactory(PropertyEnum.IsCursed);
+        RegisterIntPropertyFactory(PropertyEnum.DamageDice);
         RegisterBoolPropertyFactory(PropertyEnum.Dex);
         RegisterBoolPropertyFactory(PropertyEnum.DrainExp);
         RegisterBoolPropertyFactory(PropertyEnum.DreadCurse);
@@ -241,35 +242,34 @@ internal class EffectivePropertySet
     {
         _enhancements.Remove(key);
     }
-    private void Reset(PropertyEnum propertyEnum)
-    {
-        int index = (int)propertyEnum;
-        NullablePropertyValue nullablePropertyValue = (NullablePropertyValue)_overrideProperties[index];
-        nullablePropertyValue.Reset();
-    }
 
-    private void Set(PropertyEnum propertyEnum, PropertyValue propertyValue)
+    private void Override(PropertyEnum propertyEnum, PropertyValue? propertyValue)
     {
         int index = (int)propertyEnum;
         NullablePropertyValue nullablePropertyValue = (NullablePropertyValue)_overrideProperties[index];
         nullablePropertyValue.Set(propertyValue);
     }
 
+    public void OverrideIntValue(PropertyEnum propertyEnum, int value)
+    {
+        Override(propertyEnum, new IntPropertyValue(value));
+    }
+
     public void ResetCurse()
     {
-        Reset(PropertyEnum.IsCursed);
+        Override(PropertyEnum.IsCursed, null);
     }
     public void RemoveCurse()
     {
-        Set(PropertyEnum.IsCursed, new BoolPropertyValue(false));
+        Override(PropertyEnum.IsCursed, new BoolPropertyValue(false));
     }
     public void ResetHeavyCurse()
     {
-        Reset(PropertyEnum.HeavyCurse);
+        Override(PropertyEnum.HeavyCurse, null);
     }
     public void RemoveHeavyCurse()
     {
-        Set(PropertyEnum.HeavyCurse, new BoolPropertyValue(false));
+        Override(PropertyEnum.HeavyCurse, new BoolPropertyValue(false));
     }
 
     public bool HasKeyedItemEnhancements(string key)
@@ -791,6 +791,17 @@ internal class EffectivePropertySet
         set
         {
             SetBoolValue(PropertyEnum.IsCursed, value);
+        }
+    }
+    public int DamageDice
+    {
+        get
+        {
+            return GetIntValue(PropertyEnum.DamageDice);
+        }
+        set
+        {
+            SetIntValue(PropertyEnum.DamageDice, value);
         }
     }
     public bool Dex

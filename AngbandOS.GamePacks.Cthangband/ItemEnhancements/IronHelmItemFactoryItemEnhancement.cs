@@ -5,4 +5,5 @@ public class IronHelmItemFactoryItemEnhancement : ItemEnhancementGameConfigurati
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 75;
     public override int Cost => 75;
+    public override int DamageDice => 1;
 }

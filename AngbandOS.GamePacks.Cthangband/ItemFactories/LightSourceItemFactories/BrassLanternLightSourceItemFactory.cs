@@ -28,7 +28,6 @@ public class BrassLanternLightSourceItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Brass Lantern";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? ItemEnhancementBindingKey => nameof(BrassLanternLightSourceItemFactoryItemEnhancement);
 

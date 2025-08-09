@@ -4,4 +4,5 @@ public class MetalShodBootsItemFactoryItemEnhancement : ItemEnhancementGameConfi
 {
     public override int Weight => 80;
     public override int Cost => 50;
+    public override int DamageDice => 1;
 }

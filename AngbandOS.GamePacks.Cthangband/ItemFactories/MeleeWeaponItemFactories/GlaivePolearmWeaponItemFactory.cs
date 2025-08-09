@@ -13,7 +13,6 @@ public class GlaivePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Glaive";
 
-    public override int DamageDice => 2;
     public override int DamageSides => 6;
     public override string? DescriptionSyntax => "Glaive~";
     public override int LevelNormallyFound => 20;

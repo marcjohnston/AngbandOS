@@ -8,5 +8,6 @@ public class SteelBoltAmmunitionItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 3;
     public override int Cost => 2;
+    public override int DamageDice => 1;
 }
 

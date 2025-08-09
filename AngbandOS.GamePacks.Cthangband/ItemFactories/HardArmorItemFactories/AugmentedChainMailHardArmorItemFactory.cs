@@ -23,7 +23,6 @@ public class AugmentedChainMailHardArmorItemFactory : ItemFactoryGameConfigurati
     public override string Name => "Augmented Chain Mail";
 
     public override int ArmorClass => 16;
-    public override int DamageDice => 1;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Augmented Chain Mail~";
     public override int LevelNormallyFound => 30;

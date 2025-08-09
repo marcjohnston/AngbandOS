@@ -12,4 +12,5 @@ public class SetOfGauntletsOfTheDeadFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool IgnoreFire => true;
     public override bool ResAcid => true;
     public override int Cost => 12000;
+    public override int DamageDice => 1;
 }

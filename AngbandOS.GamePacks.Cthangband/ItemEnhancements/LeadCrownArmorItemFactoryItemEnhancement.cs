@@ -5,4 +5,5 @@ public class LeadCrownArmorItemFactoryItemEnhancement : ItemEnhancementGameConfi
 {
     public override int Weight => 20;
     public override int Cost => 1000;
+    public override int DamageDice => 1;
 }

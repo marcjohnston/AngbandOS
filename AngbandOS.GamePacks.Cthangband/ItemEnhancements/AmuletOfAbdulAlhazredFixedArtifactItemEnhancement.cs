@@ -21,4 +21,5 @@ public class AmuletOfAbdulAlhazredFixedArtifactItemEnhancement : ItemEnhancement
     public override bool ResElec => true;
     public override bool SeeInvis => true;
     public override int Cost => 90000;
+    public override int DamageDice => 0;
 }

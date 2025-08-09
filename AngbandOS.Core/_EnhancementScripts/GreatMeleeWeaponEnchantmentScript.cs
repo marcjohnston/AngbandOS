@@ -149,14 +149,15 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSlayingItemEnhancement)));
                 if (Game.DieRoll(3) == 1)
                 {
-                    item.DamageDice *= 2;
+                    item.EffectivePropertySet.DamageDice *= 2;
                 }
                 else
                 {
                     do
                     {
-                        item.DamageDice++;
-                    } while (Game.DieRoll(item.DamageDice) == 1);
+                        item.EffectivePropertySet.AddIntValue(PropertyEnum.DamageDice, 1);
+
+                    } while (Game.DieRoll(item.EffectivePropertySet.DamageDice) == 1);
                     do
                     {
                         item.DamageSides++;
@@ -214,13 +215,13 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 }
                 break;
         }
-        while (Game.RandomLessThan(10 * item.DamageDice * item.DamageSides) == 0)
+        while (Game.RandomLessThan(10 * item.EffectivePropertySet.DamageDice * item.DamageSides) == 0)
         {
-            item.DamageDice++;
+            item.EffectivePropertySet.AddIntValue(PropertyEnum.DamageDice, 1);
         }
-        if (item.DamageDice > 9)
+        if (item.EffectivePropertySet.DamageDice > 9)
         {
-            item.DamageDice = 9;
+            item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DamageDice, 9);
         }
     }
 }

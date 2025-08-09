@@ -4,4 +4,5 @@ public class StoneToMudWandItemFactoryItemEnhancement : ItemEnhancementGameConfi
 {
     public override int Weight => 10;
     public override int Cost => 300;
+    public override int DamageDice => 1;
 }

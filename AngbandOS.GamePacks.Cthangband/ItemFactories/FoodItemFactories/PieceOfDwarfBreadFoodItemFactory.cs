@@ -13,7 +13,6 @@ public class PieceOfDwarfBreadFoodItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Piece of Dwarf Bread";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 6;
     public override string? DescriptionSyntax => "Piece~ of Dwarf Bread";
     public override int LevelNormallyFound => 15;

@@ -65,7 +65,7 @@ internal class FireItemScript : UniversalScript, IGetKey
         ColorEnum missileColor = individualAmmunition.FlavorColor;
         char missileCharacter = individualAmmunition.FlavorSymbol.Character;
         int shotSpeed = Game.MissileAttacksPerRound;
-        int shotDamage = Game.DiceRoll(individualAmmunition.DamageDice, individualAmmunition.DamageSides) + individualAmmunition.EffectivePropertySet.BonusDamage + missileWeapon.EffectivePropertySet.BonusDamage;
+        int shotDamage = Game.DiceRoll(individualAmmunition.EffectivePropertySet.DamageDice, individualAmmunition.DamageSides) + individualAmmunition.EffectivePropertySet.BonusDamage + missileWeapon.EffectivePropertySet.BonusDamage;
         int attackBonus = Game.Bonuses.AttackBonus + individualAmmunition.EffectivePropertySet.BonusHit + missileWeapon.EffectivePropertySet.BonusHit;
         int chanceToHit = Game.SkillRanged + (attackBonus * Constants.BthPlusAdj);
 

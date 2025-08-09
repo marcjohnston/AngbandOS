@@ -13,7 +13,6 @@ public class DwarvenShovelDiggingWeaponItemFactory : ItemFactoryGameConfiguratio
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Dwarven Shovel";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 3;
     public override string? DescriptionSyntax => "Dwarven Shovel~";
     public override int LevelNormallyFound => 40;

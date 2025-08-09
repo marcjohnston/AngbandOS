@@ -56,6 +56,7 @@ internal enum PropertyEnum
     /// </summary>
     Cost,
     IsCursed,
+    DamageDice,
     Dex,
     DrainExp,
     DreadCurse,

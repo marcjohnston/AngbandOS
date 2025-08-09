@@ -14,7 +14,6 @@ public class DragonsFrostWandItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     public override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? ItemEnhancementBindingKey => nameof(DragonsFrostWandItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;

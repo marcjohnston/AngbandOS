@@ -4,4 +4,5 @@ public class SleepMonsterWandItemFactoryItemEnhancement : ItemEnhancementGameCon
 {
     public override int Weight => 10;
     public override int Cost => 500;
+    public override int DamageDice => 1;
 }

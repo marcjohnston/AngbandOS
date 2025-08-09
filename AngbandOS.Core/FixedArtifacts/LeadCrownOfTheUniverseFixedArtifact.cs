@@ -14,7 +14,6 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LeadCrownArmorItemFactory);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Lead Crown of the Universe";
-    public override int Dd => 1;
     public override int Ds => 1;
     public override int Level => 100;
     public override int Rarity => 1;

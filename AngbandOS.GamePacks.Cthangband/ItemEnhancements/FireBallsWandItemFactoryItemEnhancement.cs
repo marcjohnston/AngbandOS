@@ -9,4 +9,5 @@ public class FireBallsWandItemFactoryItemEnhancement : ItemEnhancementGameConfig
     public override bool IgnoreFire => true;
     public override int Weight => 10;
     public override int Cost => 1800;
+    public override int DamageDice => 1;
 }

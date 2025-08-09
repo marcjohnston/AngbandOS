@@ -21,7 +21,6 @@ public class OrbLightSourceItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(OrbLightSourceItemFactoryItemEnhancement);
 
     public override bool IdentityCanBeSensed => true;
-    public override int DamageDice => 1;
 
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Orb~";

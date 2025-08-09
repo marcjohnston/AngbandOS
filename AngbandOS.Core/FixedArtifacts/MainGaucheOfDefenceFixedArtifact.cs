@@ -13,7 +13,6 @@ internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MainGaucheWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Main Gauche of Defence";
-    public override int Dd => 2;
     public override int Ds => 5;
     public override int Level => 15;
     public override int Rarity => 30;

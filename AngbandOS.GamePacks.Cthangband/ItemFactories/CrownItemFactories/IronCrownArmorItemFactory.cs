@@ -22,7 +22,6 @@ public class IronCrownArmorItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Iron Crown";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Iron Crown~";
     public override int LevelNormallyFound => 45;

@@ -20,7 +20,6 @@ public class PonapeScriptureLifeBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override int ExperienceGainDivisorForDestroying => 1;
 
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int LevelNormallyFound => 90;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

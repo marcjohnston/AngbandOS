@@ -8,4 +8,5 @@ public class BrokenDaggerWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 5;
     public override int Cost => 1;
+    public override int DamageDice => 1;
 }

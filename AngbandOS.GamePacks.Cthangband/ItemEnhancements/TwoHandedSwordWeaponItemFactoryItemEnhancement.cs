@@ -8,4 +8,5 @@ public class TwoHandedSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 200;
     public override int Cost => 775;
+    public override int DamageDice => 3;
 }

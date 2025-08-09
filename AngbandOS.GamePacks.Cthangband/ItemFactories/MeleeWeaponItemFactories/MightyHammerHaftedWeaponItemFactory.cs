@@ -14,7 +14,6 @@ public class MightyHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Mighty Hammer";
 
-    public override int DamageDice => 3;
     public override int DamageSides => 9;
     public override string? DescriptionSyntax => "Mighty Hammer~"; // TODO: This appears to cause a defect in identification
     public override int LevelNormallyFound => 15;

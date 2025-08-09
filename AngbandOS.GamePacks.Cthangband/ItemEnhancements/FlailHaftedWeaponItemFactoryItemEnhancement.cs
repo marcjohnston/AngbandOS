@@ -7,4 +7,5 @@ public class FlailHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 150;
     public override int Cost => 353;
+    public override int DamageDice => 2;
 }

@@ -23,7 +23,6 @@ public class SoftLeatherBootsItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Pair of Soft Leather Boots";
 
     public override int ArmorClass => 2;
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Pair~ of Soft Leather Boots";
     public override int LevelNormallyFound => 3;

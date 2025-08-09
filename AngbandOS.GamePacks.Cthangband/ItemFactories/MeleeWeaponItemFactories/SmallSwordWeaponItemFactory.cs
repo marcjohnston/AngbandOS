@@ -13,7 +13,6 @@ public class SmallSwordWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Small Sword";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 6;
     public override string? DescriptionSyntax => "Small Sword~";
     public override int LevelNormallyFound => 5;

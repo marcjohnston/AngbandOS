@@ -16,7 +16,6 @@ public class IronShotAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Iron Shot";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 3;
     public override string? DescriptionSyntax => "Iron Shot~";
     public override int LevelNormallyFound => 3;

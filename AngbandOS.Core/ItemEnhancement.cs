@@ -65,6 +65,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Chaotic = itemEnhancementGameConfiguration.Chaotic;
         Cost = itemEnhancementGameConfiguration.Cost;
         IsCursed = itemEnhancementGameConfiguration.IsCursed;
+        DamageDice = itemEnhancementGameConfiguration.DamageDice;
         DrainExp = itemEnhancementGameConfiguration.DrainExp;
         DreadCurse = itemEnhancementGameConfiguration.DreadCurse;
         EasyKnow = itemEnhancementGameConfiguration.EasyKnow;
@@ -187,6 +188,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Chaotic = Chaotic,
             Cost = Cost,
             IsCursed = IsCursed,
+            DamageDice = DamageDice,
             DrainExp = DrainExp,
             DreadCurse = DreadCurse,
             EasyKnow = EasyKnow,
@@ -346,6 +348,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Chaotic = Chaotic,
             Cost = Cost,
             IsCursed = IsCursed,
+            DamageDice = DamageDice,
             DrainExp = DrainExp,
             DreadCurse = DreadCurse,
             EasyKnow = EasyKnow,
@@ -583,7 +586,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     
     /// <inheritdoc />
     private bool IsCursed { get; } = false;
-   
+
+    private int DamageDice { get; } = 0;
+
     /// <inheritdoc />
     private bool DrainExp { get; } = false;
     

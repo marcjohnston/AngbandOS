@@ -13,4 +13,5 @@ public class CloakShadeFixedArtifactItemEnhancement : ItemEnhancementGameConfigu
     public override bool ResAcid => true;
     public override bool SeeInvis => true;
     public override int Cost => 8000;
+    public override int DamageDice => 0;
 }

@@ -8,4 +8,5 @@ public class PikePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 160;
     public override int Cost => 358;
+    public override int DamageDice => 2;
 }

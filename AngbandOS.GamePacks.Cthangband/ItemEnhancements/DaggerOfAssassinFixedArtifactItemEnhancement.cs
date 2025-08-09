@@ -23,4 +23,5 @@ public class DaggerOfAssassinFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool SlayTroll => true;
     public override bool SustDex => true;
     public override int Cost => 125000;
+    public override int DamageDice => 2;
 }

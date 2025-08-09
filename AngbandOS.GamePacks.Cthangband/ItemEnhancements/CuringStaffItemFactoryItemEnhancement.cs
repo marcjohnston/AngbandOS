@@ -4,4 +4,5 @@ public class CuringStaffItemFactoryItemEnhancement : ItemEnhancementGameConfigur
 {
     public override int Weight => 50;
     public override int Cost => 1000;
+    public override int DamageDice => 1;
 }

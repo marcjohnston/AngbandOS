@@ -26,4 +26,5 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool ShowMods => true;
     public override bool SlayOrc => true;
     public override int Cost => 30000;
+    public override int DamageDice => 2;
 }

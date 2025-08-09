@@ -24,4 +24,5 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool Regen => true;
     public override bool SlowDigest => true;
     public override int Cost => 0;
+    public override int DamageDice => 1;
 }

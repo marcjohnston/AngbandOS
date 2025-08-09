@@ -15,4 +15,5 @@ public class AmuletOfLobonFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override string? BonusConstitutionRollExpression => "2";
     public override bool ResFire => true;
     public override int Cost => 60000;
+    public override int DamageDice => 0;
 }

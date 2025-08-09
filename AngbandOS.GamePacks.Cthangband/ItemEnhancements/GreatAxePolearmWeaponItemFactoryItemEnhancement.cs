@@ -8,4 +8,5 @@ public class GreatAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 230;
     public override int Cost => 500;
+    public override int DamageDice => 4;
 }

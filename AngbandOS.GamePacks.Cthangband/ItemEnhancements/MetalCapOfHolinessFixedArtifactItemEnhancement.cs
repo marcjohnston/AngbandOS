@@ -13,4 +13,5 @@ public class MetalCapOfHolinessFixedArtifactItemEnhancement : ItemEnhancementGam
     public override string? BonusCharismaRollExpression => "3";
     public override string? BonusWisdomRollExpression => "3";
     public override int Cost => 22000;
+    public override int DamageDice => 1;
 }

@@ -6840,7 +6840,7 @@ internal class Game
             item.EffectivePropertySet.BonusHit = 0;
             item.EffectivePropertySet.BonusDamage = 0;
             item.ArmorClass = 0;
-            item.DamageDice = 0;
+            item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DamageDice, 0);
             item.DamageSides = 0;
             item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
@@ -6880,7 +6880,7 @@ internal class Game
             item.EffectivePropertySet.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusArmorClass = 0;
             item.ArmorClass = 0;
-            item.DamageDice = 0;
+            item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DamageDice, 0);
             item.DamageSides = 0;
             item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
@@ -7600,7 +7600,7 @@ internal class Game
                 else if (meleeItem != null)
                 {
                     // Roll damage for the weapon
-                    totalDamage = DiceRoll(meleeItem.DamageDice, meleeItem.DamageSides);
+                    totalDamage = DiceRoll(meleeItem.EffectivePropertySet.DamageDice, meleeItem.DamageSides);
                     totalDamage = meleeItem.AdjustDamageForMonsterType(totalDamage, monster);
                     // Extra damage for backstabbing
                     if (backstab)
@@ -7993,7 +7993,7 @@ internal class Game
             throwDistance = 10;
         }
         // Work out the damage done
-        int damage = DiceRoll(missile.DamageDice, missile.DamageSides) + missile.EffectivePropertySet.BonusDamage;
+        int damage = DiceRoll(missile.EffectivePropertySet.DamageDice, missile.DamageSides) + missile.EffectivePropertySet.BonusDamage;
         damage *= damageMultiplier;
         int chance = SkillThrowing + (Bonuses.AttackBonus * Constants.BthPlusAdj);
         // Throwing something always uses a full turn, even if you can make multiple missile attacks

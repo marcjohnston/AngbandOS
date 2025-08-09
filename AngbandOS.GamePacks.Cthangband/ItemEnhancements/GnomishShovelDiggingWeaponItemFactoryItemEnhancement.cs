@@ -7,4 +7,5 @@ public class GnomishShovelDiggingWeaponItemFactoryItemEnhancement : ItemEnhancem
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 60;
     public override int Cost => 100;
+    public override int DamageDice => 1;
 }

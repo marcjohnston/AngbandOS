@@ -23,7 +23,6 @@ public class LeatherScaleMailSoftArmorItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Leather Scale Mail";
 
     public override int ArmorClass => 11;
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax  => "Leather Scale Mail~";
     public override int LevelNormallyFound => 15;

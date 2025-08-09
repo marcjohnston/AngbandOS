@@ -13,7 +13,6 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BeakedAxePolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Beaked Axe of Theoden";
-    public override int Dd => 2;
     public override int Ds => 6;
     public override int Level => 20;
     public override int Rarity => 15;

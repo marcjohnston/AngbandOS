@@ -7,4 +7,5 @@ public class DeflectionShieldItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 100;
     public override int Cost => 10000;
+    public override int DamageDice => 1;
 }

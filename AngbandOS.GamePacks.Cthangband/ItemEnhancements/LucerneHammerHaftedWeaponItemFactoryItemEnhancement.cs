@@ -7,4 +7,5 @@ public class LucerneHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhanceme
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 120;
     public override int Cost => 376;
+    public override int DamageDice => 2;
 }

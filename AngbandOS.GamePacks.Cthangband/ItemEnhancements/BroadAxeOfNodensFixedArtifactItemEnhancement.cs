@@ -18,4 +18,5 @@ public class BroadAxeOfNodensFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override int Cost => 50000;
+    public override int DamageDice => 2;
 }

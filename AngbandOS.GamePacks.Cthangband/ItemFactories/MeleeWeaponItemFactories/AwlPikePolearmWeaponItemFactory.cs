@@ -13,7 +13,6 @@ public class AwlPikePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Awl-Pike";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 8;
     public override string? DescriptionSyntax => "Awl-Pike~";
     public override int LevelNormallyFound => 10;

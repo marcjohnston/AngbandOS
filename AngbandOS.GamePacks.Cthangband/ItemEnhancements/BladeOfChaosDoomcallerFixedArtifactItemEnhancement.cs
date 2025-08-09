@@ -34,4 +34,5 @@ public class BladeOfChaosDoomcallerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool Telepathy => true;
     public override bool Vorpal => true;
     public override int Cost => 250000;
+    public override int DamageDice => 6;
 }

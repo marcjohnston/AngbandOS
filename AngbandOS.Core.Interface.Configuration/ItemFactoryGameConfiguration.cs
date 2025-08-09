@@ -363,8 +363,6 @@ public class ItemFactoryGameConfiguration
     /// </summary>
     public virtual (int level, int chance)[]? DepthsFoundAndChances { get; set; } = null; // TODO: Convert the chance into a Roll object
 
-    public virtual int DamageDice { get; set; } = 0;
-
     public virtual int DamageSides { get; set; } = 0;
 
     public virtual int LevelNormallyFound { get; set; } = 0;

@@ -16,7 +16,6 @@ public class SeekerArrowAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Seeker Arrow";
 
-    public override int DamageDice => 4;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax => "Seeker Arrow~";
     public override int LevelNormallyFound => 55;

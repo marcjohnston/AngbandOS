@@ -13,7 +13,6 @@ internal class RingOfBastFixedArtifact : FixedArtifact
     private RingOfBastFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(TulkasRingItemFactory);
     public override string Name => "The Ring of Bast";
-    public override int Dd => 0;
     public override int Ds => 0;
     public override bool HasOwnType => true;
     public override int Level => 70;

@@ -24,7 +24,6 @@ public class IronHelmItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(IronHelmItemFactoryItemEnhancement);
 
     public override int ArmorClass => 5;
-    public override int DamageDice => 1;
     public override int DamageSides => 3;
     public override string? DescriptionSyntax => "Iron Helm~";
     public override int LevelNormallyFound => 20;

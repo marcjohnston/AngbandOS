@@ -23,7 +23,6 @@ public class SoftStuddedLeatherSoftArmorItemFactory : ItemFactoryGameConfigurati
     public override string Name => "Soft Studded Leather";
 
     public override int ArmorClass => 5;
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax  => "Soft Studded Leather~";
     public override int LevelNormallyFound => 3;

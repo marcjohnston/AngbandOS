@@ -19,4 +19,5 @@ public class ChainMailHeartguardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool ResNexus => true;
     public override bool ResShards => true;
     public override int Cost => 32000;
+    public override int DamageDice => 1;
 }

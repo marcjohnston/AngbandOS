@@ -13,7 +13,6 @@ public class KatanaWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Katana";
 
-    public override int DamageDice => 3;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax => "Katana~";
     public override int LevelNormallyFound => 20;

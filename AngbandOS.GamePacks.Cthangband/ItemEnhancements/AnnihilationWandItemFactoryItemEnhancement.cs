@@ -9,4 +9,5 @@ public class AnnihilationWandItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool IgnoreFire => true;
     public override int Weight => 10;
     public override int Cost => 3000;
+    public override int DamageDice => 1;
 }

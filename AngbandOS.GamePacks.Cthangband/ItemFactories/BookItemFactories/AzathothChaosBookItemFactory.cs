@@ -18,7 +18,6 @@ public class AzathothChaosBookItemFactory : ItemFactoryGameConfiguration
     public override string Name => "[The Book of Azathoth]";
     public override string? DescriptionSyntax => "Chaos Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Chaos Magic $Name$";
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? ItemEnhancementBindingKey => nameof(AzathothChaosBookItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 100;

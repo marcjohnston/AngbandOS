@@ -14,7 +14,6 @@ public class DiseaseMushroomFoodItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Mushroom~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Mushroom~";
     public override string? FlavorSuppressedDescriptionSyntax => "Mushroom~ of $Name$";
-    public override int DamageDice => 10;
     public override int DamageSides => 10;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

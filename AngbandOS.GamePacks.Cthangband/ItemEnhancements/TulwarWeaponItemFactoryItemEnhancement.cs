@@ -8,4 +8,5 @@ public class TulwarWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 100;
     public override int Cost => 200;
+    public override int DamageDice => 2;
 }

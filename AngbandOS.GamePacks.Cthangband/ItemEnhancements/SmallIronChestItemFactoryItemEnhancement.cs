@@ -4,4 +4,5 @@ public class SmallIronChestItemFactoryItemEnhancement : ItemEnhancementGameConfi
 {
     public override int Weight => 300;
     public override int Cost => 100;
+    public override int DamageDice => 2;
 }

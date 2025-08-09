@@ -4,4 +4,5 @@ public class StarlightStaffItemFactoryItemEnhancement : ItemEnhancementGameConfi
 {
     public override int Weight => 50;
     public override int Cost => 800;
+    public override int DamageDice => 1;
 }

@@ -37,4 +37,5 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool SeeInvis => true;
     public override bool Telepathy => true;
     public override int Cost => 10000000;
+    public override int DamageDice => 1;
 }

@@ -12,4 +12,5 @@ public class BlackDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override int TreasureRating => 30;
     public override int Weight => 200;
     public override int Cost => 25000;
+    public override int DamageDice => 2;
 }

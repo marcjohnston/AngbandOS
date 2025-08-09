@@ -4,4 +4,5 @@ public class RemoveCurseStaffItemFactoryItemEnhancement : ItemEnhancementGameCon
 {
     public override int Weight => 50;
     public override int Cost => 500;
+    public override int DamageDice => 1;
 }

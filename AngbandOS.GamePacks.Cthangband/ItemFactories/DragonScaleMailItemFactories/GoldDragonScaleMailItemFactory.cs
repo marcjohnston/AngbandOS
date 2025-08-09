@@ -24,7 +24,6 @@ public class GoldDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Gold Dragon Scale Mail";
 
     public override int ArmorClass => 30;
-    public override int DamageDice => 2;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Gold Dragon Scale Mail~";
     public override int LevelNormallyFound => 65;

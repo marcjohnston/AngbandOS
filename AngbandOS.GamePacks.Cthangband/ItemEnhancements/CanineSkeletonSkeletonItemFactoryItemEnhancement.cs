@@ -4,4 +4,5 @@ public class CanineSkeletonSkeletonItemFactoryItemEnhancement : ItemEnhancementG
 {
     public override bool EasyKnow => true;
     public override int Weight => 10;
+    public override int DamageDice => 1;
 }

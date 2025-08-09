@@ -17,7 +17,6 @@ public class StarEssenceElendilLightSourceItemFactory : ItemFactoryGameConfigura
 
     public override string? ItemEnhancementBindingKey => nameof(StarEssenceElendilLightSourceItemFactoryItemEnhancement);
 
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Star Essence~"; // TODO: This appears to cause a defect in identification
     public override int LevelNormallyFound => 30;

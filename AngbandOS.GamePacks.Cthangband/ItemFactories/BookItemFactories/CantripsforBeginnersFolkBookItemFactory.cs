@@ -14,7 +14,6 @@ public class CantripsForBeginnersFolkBookItemFactory : ItemFactoryGameConfigurat
     public override string Name => "[Cantrips for Beginners]";
     public override string? DescriptionSyntax => "Folk Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Folk Magic $Name$";
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

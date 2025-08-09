@@ -8,4 +8,5 @@ public class ExecutionersSwordWeaponItemFactoryItemEnhancement : ItemEnhancement
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 260;
     public override int Cost => 850;
+    public override int DamageDice => 4;
 }

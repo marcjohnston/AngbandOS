@@ -13,7 +13,6 @@ public class TwoHandedSwordWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Two-Handed Sword";
 
-    public override int DamageDice => 3;
     public override int DamageSides => 6;
     public override string? DescriptionSyntax => "Two-Handed Sword~";
     public override int LevelNormallyFound => 30;

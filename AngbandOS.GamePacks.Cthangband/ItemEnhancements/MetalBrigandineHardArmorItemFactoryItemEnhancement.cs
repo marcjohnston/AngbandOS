@@ -5,4 +5,5 @@ public class MetalBrigandineHardArmorItemFactoryItemEnhancement : ItemEnhancemen
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 290;
     public override int Cost => 1100;
+    public override int DamageDice => 1;
 }

@@ -5,4 +5,5 @@ public class DoubleChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancemen
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 250;
     public override int Cost => 850;
+    public override int DamageDice => 1;
 }

@@ -13,7 +13,6 @@ public class LargeWoodenChestItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Large wooden chest";
 
-    public override int DamageDice => 2;
     public override int DamageSides => 5;
     public override string? DescriptionSyntax => "Large wooden chest~";
     public override int LevelNormallyFound => 15;

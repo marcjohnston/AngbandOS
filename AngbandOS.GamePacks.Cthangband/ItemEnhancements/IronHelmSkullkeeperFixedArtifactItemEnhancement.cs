@@ -17,4 +17,5 @@ public class IronHelmSkullkeeperFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool ResBlind => true;
     public override bool SeeInvis => true;
     public override int Cost => 100000;
+    public override int DamageDice => 1;
 }

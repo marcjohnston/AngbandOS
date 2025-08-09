@@ -13,7 +13,6 @@ public class MorningStarHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Morning Star";
 
-    public override int DamageDice => 2;
     public override int DamageSides => 6;
     public override string? DescriptionSyntax => "Morning Star~";
     public override int LevelNormallyFound => 10;

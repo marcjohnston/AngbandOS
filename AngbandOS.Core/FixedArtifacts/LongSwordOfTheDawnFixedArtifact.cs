@@ -13,7 +13,6 @@ internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword of the Dawn";
-    public override int Dd => 3;
     public override int Ds => 5;
     public override int Level => 40;
     public override int Rarity => 120;

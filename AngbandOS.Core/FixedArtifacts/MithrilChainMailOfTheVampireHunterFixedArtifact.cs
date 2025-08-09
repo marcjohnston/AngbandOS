@@ -13,7 +13,6 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MithrilChainMailHardArmorItemFactory);
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "The Mithril Chain Mail of the Vampire Hunter";
-    public override int Dd => 1;
     public override int Ds => 4;
     public override int Level => 40;
     public override int Rarity => 3;

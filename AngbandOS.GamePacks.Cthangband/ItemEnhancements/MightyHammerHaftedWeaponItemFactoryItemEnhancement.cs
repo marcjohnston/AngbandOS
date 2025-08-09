@@ -8,4 +8,5 @@ public class MightyHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 200;
     public override int Cost => 1000;
+    public override int DamageDice => 3;
 }

@@ -14,7 +14,6 @@ public class RestoreManaPotionItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Potion~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Potion~";
     public override string? FlavorSuppressedDescriptionSyntax => "Potion~ of $Name$";
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

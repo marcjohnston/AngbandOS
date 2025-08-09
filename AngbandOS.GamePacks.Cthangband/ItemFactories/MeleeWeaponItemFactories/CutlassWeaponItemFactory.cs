@@ -13,7 +13,6 @@ public class CutlassWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Cutlass";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 7;
     public override string? DescriptionSyntax => "Cutlass~";
     public override int LevelNormallyFound => 5;

@@ -13,7 +13,6 @@ internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(HardLeatherCapHelmItemFactory);
     public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "The Hard Leather Cap of the Mindcrafter";
-    public override int Dd => 0;
     public override int Ds => 0;
     public override int Level => 20;
     public override int Rarity => 2;

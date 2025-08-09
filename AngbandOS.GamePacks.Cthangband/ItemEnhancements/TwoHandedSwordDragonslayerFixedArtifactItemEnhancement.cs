@@ -18,4 +18,5 @@ public class TwoHandedSwordDragonslayerFixedArtifactItemEnhancement : ItemEnhanc
     public override bool SlayTroll => true;
     public override bool SlowDigest => true;
     public override int Cost => 100000;
+    public override int DamageDice => 3;
 }

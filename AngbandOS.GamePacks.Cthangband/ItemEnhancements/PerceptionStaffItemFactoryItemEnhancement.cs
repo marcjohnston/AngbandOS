@@ -4,4 +4,5 @@ public class PerceptionStaffItemFactoryItemEnhancement : ItemEnhancementGameConf
 {
     public override int Weight => 50;
     public override int Cost => 400;
+    public override int DamageDice => 1;
 }

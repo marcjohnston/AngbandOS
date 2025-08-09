@@ -13,7 +13,6 @@ public class MaceHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Mace";
 
-    public override int DamageDice => 2;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax => "Mace~";
     public override int LevelNormallyFound => 5;

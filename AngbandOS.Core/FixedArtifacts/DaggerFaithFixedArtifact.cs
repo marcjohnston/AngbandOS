@@ -13,7 +13,6 @@ internal class DaggerFaithFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Faith'";
-    public override int Dd => 1;
     public override int Ds => 4;
     public override int Level => 4;
     public override int Rarity => 10;

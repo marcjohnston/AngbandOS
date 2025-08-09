@@ -4,4 +4,5 @@ public class GnomeSkeletonSkeletonItemFactoryItemEnhancement : ItemEnhancementGa
 {
     public override bool EasyKnow => true;
     public override int Weight => 30;
+    public override int DamageDice => 1;
 }

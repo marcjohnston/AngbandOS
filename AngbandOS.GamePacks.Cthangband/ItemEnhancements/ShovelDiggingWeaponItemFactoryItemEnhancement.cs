@@ -7,4 +7,5 @@ public class ShovelDiggingWeaponItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 60;
     public override int Cost => 10;
+    public override int DamageDice => 1;
 }

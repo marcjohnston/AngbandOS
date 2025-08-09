@@ -27,4 +27,5 @@ public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool ShowMods => true;
     public override int Weight => 50;
     public override int Cost => 40000;
+    public override int DamageDice => 4;
 }

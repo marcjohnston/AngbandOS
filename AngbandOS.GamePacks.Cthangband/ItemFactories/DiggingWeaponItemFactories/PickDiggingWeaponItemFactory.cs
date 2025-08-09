@@ -13,7 +13,6 @@ public class PickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Pick";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 3;
     public override string? DescriptionSyntax => "Pick~";
     public override int LevelNormallyFound => 5;

@@ -13,7 +13,6 @@ public class IronSpikeItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Iron Spike";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Iron Spike~";
     public override int LevelNormallyFound => 1;

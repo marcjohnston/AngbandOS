@@ -24,7 +24,6 @@ public class MetalCapHelmItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(MetalCapHelmItemFactoryItemEnhancement);
 
     public override int ArmorClass => 3;
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Metal Cap~";
     public override int LevelNormallyFound => 10;

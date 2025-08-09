@@ -13,7 +13,6 @@ internal class BroadSwordLightningFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BroadSwordWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Broad Sword 'Lightning'";
-    public override int Dd => 2;
     public override int Ds => 5;
 
     public override int Level => 20;

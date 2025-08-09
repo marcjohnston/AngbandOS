@@ -4,4 +4,5 @@ public class WeaknessMushroomFoodItemFactoryItemEnhancement : ItemEnhancementGam
 {
     public override bool EasyKnow => true;
     public override int Weight => 1;
+    public override int DamageDice => 5;
 }

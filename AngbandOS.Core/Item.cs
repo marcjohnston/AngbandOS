@@ -105,7 +105,6 @@ internal sealed class Item : IComparable<Item>
     public string? RandomArtifactName = null;
 
     public int ArmorClass;
-    public int DamageDice;
     public int DamageSides;
 
     /// <summary>
@@ -159,7 +158,6 @@ internal sealed class Item : IComparable<Item>
         clonedItem.GoldPieces = GoldPieces;
         clonedItem.RandomArtifactName = RandomArtifactName;
         clonedItem.ArmorClass = ArmorClass;
-        clonedItem.DamageDice = DamageDice;
         clonedItem.DamageSides = DamageSides;
         clonedItem.IsBroken = IsBroken;
 
@@ -932,10 +930,6 @@ internal sealed class Item : IComparable<Item>
             return false;
         }
         if (ArmorClass != other.ArmorClass)
-        {
-            return false;
-        }
-        if (DamageDice != other.DamageDice)
         {
             return false;
         }
@@ -1905,7 +1899,11 @@ internal sealed class Item : IComparable<Item>
         }
 
         value += TurnOfLightValue * TurnsOfLightRemaining;
-        value += _factory.GetBonusRealValue(this);
+
+        value += EffectivePropertySet.BonusHit * _factory.BonusHitRealValueMultiplier;
+        value += EffectivePropertySet.BonusArmorClass * _factory.BonusArmorClassRealValueMultiplier;
+        value += EffectivePropertySet.BonusDamage * _factory.BonusDamageRealValueMultiplier;
+        value += EffectivePropertySet.DamageDice * DamageSides * _factory.BonusDiceRealValueMultiplier;
         return value;
     }
 
@@ -2046,7 +2044,6 @@ internal sealed class Item : IComparable<Item>
         fixedArtifact.CurNum = 1;
 
         // TODO: These should be deltas on the item enhancements
-        DamageDice = fixedArtifact.Dd;
         DamageSides = fixedArtifact.Ds;
         EffectivePropertySet.BonusAttacks = fixedArtifact.ToA;
         EffectivePropertySet.BonusHit = fixedArtifact.ToH;
@@ -2395,7 +2392,6 @@ internal sealed class Item : IComparable<Item>
         EffectivePropertySet.BonusDamage = _factory.BonusDamage;
         EffectivePropertySet.BonusArmorClass = _factory.BonusArmorClass;
         ArmorClass = _factory.ArmorClass;
-        DamageDice = _factory.DamageDice;
         DamageSides = _factory.DamageSides;
         IsBroken = _factory.IsBroken;
 

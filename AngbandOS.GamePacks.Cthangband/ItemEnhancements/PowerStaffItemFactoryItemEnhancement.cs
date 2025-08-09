@@ -4,4 +4,5 @@ public class PowerStaffItemFactoryItemEnhancement : ItemEnhancementGameConfigura
 {
     public override int Weight => 50;
     public override int Cost => 4000;
+    public override int DamageDice => 1;
 }

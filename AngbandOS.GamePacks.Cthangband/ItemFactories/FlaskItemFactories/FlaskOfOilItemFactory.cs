@@ -17,7 +17,6 @@ public class FlaskOfOilItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Flask of oil";
 
-    public override int DamageDice => 2;
     public override int DamageSides => 6;
     public override string? DescriptionSyntax => "Flask~ of oil";
     public override int LevelNormallyFound => 1;

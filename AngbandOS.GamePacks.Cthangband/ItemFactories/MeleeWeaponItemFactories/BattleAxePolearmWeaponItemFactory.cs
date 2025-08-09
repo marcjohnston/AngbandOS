@@ -13,7 +13,6 @@ public class BattleAxePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Battle Axe";
 
-    public override int DamageDice => 2;
     public override int DamageSides => 8;
     public override string? DescriptionSyntax => "Battle Axe~";
     public override int LevelNormallyFound => 15;

@@ -378,7 +378,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         if (meeleeItem != null)
         {
             fighting += meeleeItem.EffectivePropertySet.BonusHit * Constants.BthPlusAdj;
-            damdice += meeleeItem.DamageDice;
+            damdice += meeleeItem.EffectivePropertySet.DamageDice;
             damsides += meeleeItem.DamageSides;
 
             if (meeleeItem.IsKnown())

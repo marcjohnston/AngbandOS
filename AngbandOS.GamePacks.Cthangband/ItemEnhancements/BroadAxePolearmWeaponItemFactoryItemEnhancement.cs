@@ -8,4 +8,5 @@ public class BroadAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 160;
     public override int Cost => 304;
+    public override int DamageDice => 2;
 }

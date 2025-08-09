@@ -6,4 +6,5 @@ public class MithrilPlateMailHardArmorItemFactoryItemEnhancement : ItemEnhanceme
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 300;
     public override int Cost => 15000;
+    public override int DamageDice => 2;
 }

@@ -35,4 +35,5 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
     public override bool Vorpal => true;
     public override int Weight => 50;
     public override int Cost => 205000;
+    public override int DamageDice => 4;
 }

@@ -4,4 +4,5 @@ public class SicklinessPotionItemFactoryItemEnhancement : ItemEnhancementGameCon
 {
     public override bool EasyKnow => true;
     public override int Weight => 4;
+    public override int DamageDice => 1;
 }

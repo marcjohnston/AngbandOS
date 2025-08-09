@@ -33,4 +33,5 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
     public override bool Vampiric => true;
     public override int Weight => 280;
     public override int Cost => 444444;
+    public override int DamageDice => 7;
 }

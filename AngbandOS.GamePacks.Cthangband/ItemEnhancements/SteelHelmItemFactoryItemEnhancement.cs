@@ -5,4 +5,5 @@ public class SteelHelmItemFactoryItemEnhancement : ItemEnhancementGameConfigurat
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 60;
     public override int Cost => 200;
+    public override int DamageDice => 1;
 }

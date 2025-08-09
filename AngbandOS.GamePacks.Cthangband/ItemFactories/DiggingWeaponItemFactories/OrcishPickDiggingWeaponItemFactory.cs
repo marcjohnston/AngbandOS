@@ -13,7 +13,6 @@ public class OrcishPickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Orcish Pick";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 3;
     public override string? DescriptionSyntax => "Orcish Pick~";
     public override int LevelNormallyFound => 30;

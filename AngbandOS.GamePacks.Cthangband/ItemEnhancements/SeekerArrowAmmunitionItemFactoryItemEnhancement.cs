@@ -8,5 +8,6 @@ public class SeekerArrowAmmunitionItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 2;
     public override int Cost => 20;
+    public override int DamageDice => 4;
 }
 

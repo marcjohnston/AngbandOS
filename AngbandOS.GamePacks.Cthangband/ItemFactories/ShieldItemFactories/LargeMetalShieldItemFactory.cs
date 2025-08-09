@@ -24,7 +24,6 @@ public class LargeMetalShieldItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(LargeMetalShieldItemFactoryItemEnhancement);
 
     public override int ArmorClass => 5;
-    public override int DamageDice => 1;
     public override int DamageSides => 3;
     public override string? DescriptionSyntax => "Large Metal Shield~";
     public override int LevelNormallyFound => 30;

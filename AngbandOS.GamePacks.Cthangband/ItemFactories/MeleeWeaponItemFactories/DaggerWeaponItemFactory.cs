@@ -13,7 +13,6 @@ public class DaggerWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Dagger";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax => "Dagger~";
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

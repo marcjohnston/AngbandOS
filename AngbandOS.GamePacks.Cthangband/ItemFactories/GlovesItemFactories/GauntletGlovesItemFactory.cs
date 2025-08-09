@@ -23,7 +23,6 @@ public class GauntletGlovesItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Set of Gauntlets";
 
     public override int ArmorClass => 2;
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Set~ of Gauntlets";
     public override int LevelNormallyFound => 10;

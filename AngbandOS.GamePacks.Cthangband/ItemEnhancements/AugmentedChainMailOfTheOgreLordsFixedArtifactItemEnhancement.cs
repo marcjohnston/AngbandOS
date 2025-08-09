@@ -19,4 +19,5 @@ public class AugmentedChainMailOfTheOgreLordsFixedArtifactItemEnhancement : Item
     public override bool ResConf => true;
     public override bool ResPois => true;
     public override int Cost => 40000;
+    public override int DamageDice => 1;
 }

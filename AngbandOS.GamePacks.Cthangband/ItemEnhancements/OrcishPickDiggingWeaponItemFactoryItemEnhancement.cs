@@ -7,4 +7,5 @@ public class OrcishPickDiggingWeaponItemFactoryItemEnhancement : ItemEnhancement
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 150;
     public override int Cost => 300;
+    public override int DamageDice => 1;
 }

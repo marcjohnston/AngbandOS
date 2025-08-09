@@ -24,7 +24,6 @@ public class SmallLeatherShieldItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(SmallLeatherShieldItemFactoryItemEnhancement);
 
     public override int ArmorClass => 2;
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Small Leather Shield~";
     public override int LevelNormallyFound => 3;

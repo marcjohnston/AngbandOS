@@ -23,7 +23,6 @@ public class HardStuddedLeatherSoftArmorItemFactory : ItemFactoryGameConfigurati
     public override string Name => "Hard Studded Leather";
 
     public override int ArmorClass => 7;
-    public override int DamageDice => 1;
     public override int DamageSides => 2;
     public override string? DescriptionSyntax  => "Hard Studded Leather~";
     public override int LevelNormallyFound => 10;

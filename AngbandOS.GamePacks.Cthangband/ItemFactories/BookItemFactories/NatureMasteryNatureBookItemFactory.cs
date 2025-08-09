@@ -14,7 +14,6 @@ public class NatureMasteryNatureBookItemFactory : ItemFactoryGameConfiguration
     public override string Name => "[Nature Mastery]";
     public override string? DescriptionSyntax => "Nature Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Nature Magic $Name$";
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

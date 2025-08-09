@@ -14,7 +14,6 @@ public class BeginnersHandbookSorceryBookItemFactory : ItemFactoryGameConfigurat
     public override string Name => "[Beginner's Handbook]";
     public override string? DescriptionSyntax => "Sorcery Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Sorcery $Name$";
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

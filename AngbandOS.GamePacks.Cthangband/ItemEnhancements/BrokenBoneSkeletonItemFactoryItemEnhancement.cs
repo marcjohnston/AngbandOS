@@ -4,4 +4,5 @@ public class BrokenBoneSkeletonItemFactoryItemEnhancement : ItemEnhancementGameC
 {
     public override bool EasyKnow => true;
     public override int Weight => 2;
+    public override int DamageDice => 1;
 }

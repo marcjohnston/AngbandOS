@@ -25,4 +25,5 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool Vorpal => true;
     public override int Weight => 20;
     public override int Cost => 250000;
+    public override int DamageDice => 5;
 }

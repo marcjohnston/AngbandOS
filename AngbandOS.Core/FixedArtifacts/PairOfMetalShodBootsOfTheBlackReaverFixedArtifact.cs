@@ -13,7 +13,6 @@ internal class PairOfMetalShodBootsOfTheBlackReaverFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MetalShodBootsItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Pair of Metal Shod Boots of the Black Reaver";
-    public override int Dd => 1;
     public override int Ds => 1;
     public override int Level => 30;
     public override int Rarity => 25;

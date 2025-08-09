@@ -4,4 +4,5 @@ public class BrokenStickJunkItemFactoryItemEnhancement : ItemEnhancementGameConf
 {
     public override bool EasyKnow => true;
     public override int Weight => 3;
+    public override int DamageDice => 1;
 }

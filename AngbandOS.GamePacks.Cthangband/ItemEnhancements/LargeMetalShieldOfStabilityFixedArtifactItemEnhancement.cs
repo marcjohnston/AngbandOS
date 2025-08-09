@@ -20,4 +20,5 @@ public class LargeMetalShieldOfStabilityFixedArtifactItemEnhancement : ItemEnhan
     public override bool SustStr => true;
     public override bool SustWis => true;
     public override int Cost => 160000;
+    public override int DamageDice => 1;
 }

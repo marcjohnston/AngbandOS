@@ -24,7 +24,6 @@ public class ChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(ChainMailHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 14;
-    public override int DamageDice => 1;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Chain Mail~";
     public override int LevelNormallyFound => 25;

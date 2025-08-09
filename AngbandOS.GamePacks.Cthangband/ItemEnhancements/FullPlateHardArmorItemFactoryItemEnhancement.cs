@@ -5,4 +5,5 @@ public class FullPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGameC
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 380;
     public override int Cost => 1350;
+    public override int DamageDice => 2;
 }

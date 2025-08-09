@@ -14,7 +14,6 @@ internal class DaggerCharityFixedArtifact : FixedArtifact
     public string DescribeActivationEffect => "lightning bolt (4d8) every 6+d6 turns";
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Charity'";
-    public override int Dd => 1;
     public override int Ds => 4;
     public override int Level => 5;
     public override int Rarity => 10;

@@ -14,7 +14,6 @@ public class ResistancePotionItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Potion~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Potion~";
     public override string? FlavorSuppressedDescriptionSyntax => "Potion~ of $Name$";
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? ItemEnhancementBindingKey => nameof(ResistancePotionItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 20;

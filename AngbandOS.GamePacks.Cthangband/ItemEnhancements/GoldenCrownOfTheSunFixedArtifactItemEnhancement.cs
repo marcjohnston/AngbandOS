@@ -35,4 +35,5 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool SlowDigest => true;
     public override bool Telepathy => true;
     public override int Cost => 125000;
+    public override int DamageDice => 1;
 }

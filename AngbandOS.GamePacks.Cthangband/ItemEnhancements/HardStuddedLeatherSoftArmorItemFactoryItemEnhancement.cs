@@ -4,4 +4,5 @@ public class HardStuddedLeatherSoftArmorItemFactoryItemEnhancement : ItemEnhance
 {
     public override int Weight => 110;
     public override int Cost => 200;
+    public override int DamageDice => 1;
 }

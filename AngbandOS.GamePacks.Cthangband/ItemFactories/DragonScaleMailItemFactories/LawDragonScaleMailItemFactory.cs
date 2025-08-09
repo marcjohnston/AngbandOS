@@ -23,7 +23,6 @@ public class LawDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Law Dragon Scale Mail";
     public override int ArmorClass => 30;
-    public override int DamageDice => 2;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Law Dragon Scale Mail~";
     public override int LevelNormallyFound => 80;

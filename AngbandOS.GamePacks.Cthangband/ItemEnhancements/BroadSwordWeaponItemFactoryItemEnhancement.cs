@@ -8,4 +8,5 @@ public class BroadSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 150;
     public override int Cost => 255;
+    public override int DamageDice => 2;
 }

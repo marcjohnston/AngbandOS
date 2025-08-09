@@ -14,7 +14,6 @@ internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MightyHammerHaftedWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Mighty Hammer of Worlds";
-    public override int Dd => 9;
     public override int Ds => 9;
     public override int Level => 100;
     public override int Rarity => 1;

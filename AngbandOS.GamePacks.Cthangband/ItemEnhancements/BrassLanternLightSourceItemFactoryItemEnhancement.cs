@@ -14,4 +14,5 @@ public class BrassLanternLightSourceItemFactoryItemEnhancement : ItemEnhancement
     public override int Radius => 2;
     public override int Weight => 50;
     public override int Cost => 35;
+    public override int DamageDice => 1;
 }

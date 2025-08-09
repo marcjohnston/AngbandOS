@@ -4,4 +4,5 @@ public class FrostBoltsWandItemFactoryItemEnhancement : ItemEnhancementGameConfi
 {
     public override int Weight => 10;
     public override int Cost => 800;
+    public override int DamageDice => 1;
 }

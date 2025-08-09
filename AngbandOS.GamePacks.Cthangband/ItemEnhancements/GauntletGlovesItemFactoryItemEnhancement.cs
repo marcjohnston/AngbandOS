@@ -4,4 +4,5 @@ public class GauntletGlovesItemFactoryItemEnhancement : ItemEnhancementGameConfi
 {
     public override int Weight => 25;
     public override int Cost => 35;
+    public override int DamageDice => 1;
 }

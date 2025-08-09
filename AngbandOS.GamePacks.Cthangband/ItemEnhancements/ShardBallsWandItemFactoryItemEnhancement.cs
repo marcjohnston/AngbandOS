@@ -9,4 +9,5 @@ public class ShardBallsWandItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override bool IgnoreFire => true;
     public override int Weight => 10;
     public override int Cost => 95000;
+    public override int DamageDice => 1;
 }

@@ -13,7 +13,6 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(GreatAxePolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Great Axe of the Trolls";
-    public override int Dd => 4;
     public override int Ds => 4;
     public override int Level => 30;
     public override int Rarity => 120;

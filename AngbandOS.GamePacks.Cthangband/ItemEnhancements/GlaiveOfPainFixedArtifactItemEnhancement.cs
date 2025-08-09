@@ -11,4 +11,5 @@ public class GlaiveOfPainFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool IgnoreFire => true;
     public override bool ShowMods => true;
     public override int Cost => 50000;
+    public override int DamageDice => 9;
 }

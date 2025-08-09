@@ -13,7 +13,6 @@ internal class PikeOfTepesFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(PikePolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Pike of Tepes";
-    public override int Dd => 2;
     public override int Ds => 5;
     public override int Level => 20;
     public override int Rarity => 15;

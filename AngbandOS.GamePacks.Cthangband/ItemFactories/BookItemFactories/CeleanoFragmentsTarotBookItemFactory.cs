@@ -19,7 +19,6 @@ public class CeleanoFragmentsTarotBookItemFactory : ItemFactoryGameConfiguration
     public override string Name => "[Celeano Fragments]";
     public override string? DescriptionSyntax => "Tarot Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Tarot Magic $Name$";
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int LevelNormallyFound => 90;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -5,4 +5,5 @@ public class CuringRodItemFactoryItemEnhancement : ItemEnhancementGameConfigurat
     public override bool EasyKnow => true;
     public override int Weight => 15;
     public override int Cost => 15000;
+    public override int DamageDice => 1;
 }

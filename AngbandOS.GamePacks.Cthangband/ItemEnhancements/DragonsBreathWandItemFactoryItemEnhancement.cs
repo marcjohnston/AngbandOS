@@ -9,4 +9,5 @@ public class DragonsBreathWandItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool IgnoreFire => true;
     public override int Weight => 10;
     public override int Cost => 2400;
+    public override int DamageDice => 1;
 }

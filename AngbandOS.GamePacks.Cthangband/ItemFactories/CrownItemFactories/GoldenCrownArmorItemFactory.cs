@@ -22,7 +22,6 @@ public class GoldenCrownArmorItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Golden Crown";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Golden Crown~";
     public override string? ItemEnhancementBindingKey => nameof(GoldenCrownArmorItemFactoryItemEnhancement);

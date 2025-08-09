@@ -10,6 +10,5 @@ namespace AngbandOS.Core;
 internal abstract class NullablePropertyValue : PropertyValue
 {
     public abstract bool IsSet { get; }
-    public abstract void Reset();
-    public abstract void Set(PropertyValue propertyValue);
+    public abstract void Set(PropertyValue? propertyValue);
 }

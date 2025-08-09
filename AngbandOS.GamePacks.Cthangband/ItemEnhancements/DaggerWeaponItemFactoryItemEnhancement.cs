@@ -8,4 +8,5 @@ public class DaggerWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 12;
     public override int Cost => 10;
+    public override int DamageDice => 1;
 }

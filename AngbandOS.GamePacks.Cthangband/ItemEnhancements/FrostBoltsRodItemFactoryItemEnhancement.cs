@@ -5,4 +5,5 @@ public class FrostBoltsRodItemFactoryItemEnhancement : ItemEnhancementGameConfig
     public override bool EasyKnow => true;
     public override int Weight => 15;
     public override int Cost => 2500;
+    public override int DamageDice => 1;
 }

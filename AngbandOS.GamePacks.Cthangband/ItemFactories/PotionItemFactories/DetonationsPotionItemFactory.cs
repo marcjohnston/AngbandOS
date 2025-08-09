@@ -14,7 +14,6 @@ public class DetonationsPotionItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Potion~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Potion~";
     public override string? FlavorSuppressedDescriptionSyntax => "Potion~ of $Name$";
-    public override int DamageDice => 25;
     public override int DamageSides => 25;
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

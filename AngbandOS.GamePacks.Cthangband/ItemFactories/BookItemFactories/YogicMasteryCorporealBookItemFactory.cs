@@ -14,7 +14,6 @@ public class YogicMasteryCorporealBookItemFactory : ItemFactoryGameConfiguration
     public override string Name => "[Yogic Mastery]";
     public override string? DescriptionSyntax => "Corporeal Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Corporeal Magic $Name$";
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

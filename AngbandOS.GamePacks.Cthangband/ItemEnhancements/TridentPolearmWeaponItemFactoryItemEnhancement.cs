@@ -8,4 +8,5 @@ public class TridentPolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 70;
     public override int Cost => 120;
+    public override int DamageDice => 1;
 }

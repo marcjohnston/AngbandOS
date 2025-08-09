@@ -19,4 +19,5 @@ public class MorningStarFirestarterFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool ResFire => true;
     public override bool ShowMods => true;
     public override int Cost => 35000;
+    public override int DamageDice => 2;
 }

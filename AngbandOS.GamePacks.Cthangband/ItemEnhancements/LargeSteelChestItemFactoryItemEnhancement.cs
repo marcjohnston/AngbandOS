@@ -4,4 +4,5 @@ public class LargeSteelChestItemFactoryItemEnhancement : ItemEnhancementGameConf
 {
     public override int Weight => 1000;
     public override int Cost => 250;
+    public override int DamageDice => 2;
 }

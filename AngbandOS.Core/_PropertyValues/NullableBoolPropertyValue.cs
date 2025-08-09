@@ -27,14 +27,13 @@ internal class NullableBoolPropertyValue : NullablePropertyValue
         throw new Exception("IsEqual mismatch.");
     }
 
-    public override void Reset()
+    public override void Set(PropertyValue? propertyValue)
     {
-        Value = null;
-    }
-
-    public override void Set(PropertyValue propertyValue)
-    {
-        if (propertyValue is BoolPropertyValue boolPropertyValue)
+        if (propertyValue is null)
+        {
+            Value = null;
+        }
+        else if (propertyValue is BoolPropertyValue boolPropertyValue)
         {
             Value = boolPropertyValue.Value;
         }

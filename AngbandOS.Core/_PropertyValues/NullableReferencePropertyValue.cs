@@ -36,14 +36,13 @@ internal class NullableReferencePropertyValue<T> : NullablePropertyValue where T
         throw new Exception($"Item property merging from {propertyValue.GetType().Name} not supported with {nameof(NullableReferencePropertyValue<T>)}");
     }
 
-    public override void Reset()
+    public override void Set(PropertyValue? propertyValue)
     {
-        Value = null;
-    }
-
-    public override void Set(PropertyValue propertyValue)
-    {
-        if (propertyValue is NullableReferencePropertyValue<T> nullableReferencePropertyValue)
+        if (propertyValue is null)
+        {
+            Value = null;
+        }
+        else if (propertyValue is NullableReferencePropertyValue<T> nullableReferencePropertyValue)
         {
             Value = nullableReferencePropertyValue.Value;
         }

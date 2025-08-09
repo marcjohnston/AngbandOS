@@ -13,7 +13,6 @@ public class SabreWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Sabre";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 7;
     public override string? DescriptionSyntax => "Sabre~";
     public override int LevelNormallyFound => 5;

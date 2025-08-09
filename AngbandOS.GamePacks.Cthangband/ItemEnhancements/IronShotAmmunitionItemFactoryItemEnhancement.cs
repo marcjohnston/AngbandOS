@@ -8,5 +8,6 @@ public class IronShotAmmunitionItemFactoryItemEnhancement : ItemEnhancementGameC
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 5;
     public override int Cost => 2;
+    public override int DamageDice => 1;
 }
 

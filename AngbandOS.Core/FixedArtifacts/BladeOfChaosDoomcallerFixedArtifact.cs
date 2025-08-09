@@ -13,7 +13,6 @@ internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BladeOfChaosWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Blade of Chaos 'Doomcaller'";
-    public override int Dd => 6;
     public override int Ds => 5;
     public override int Level => 70;
     public override int Rarity => 25;

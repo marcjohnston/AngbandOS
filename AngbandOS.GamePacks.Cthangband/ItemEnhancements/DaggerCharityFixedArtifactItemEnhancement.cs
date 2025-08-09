@@ -15,4 +15,5 @@ public class DaggerCharityFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool ResElec => true;
     public override bool ShowMods => true;
     public override int Cost => 13000;
+    public override int DamageDice => 1;
 }

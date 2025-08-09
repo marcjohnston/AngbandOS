@@ -33,4 +33,5 @@ public class RingOfElementalPowerStormFixedArtifactItemEnhancement : ItemEnhance
     public override int Radius => 3;
     public override bool Telepathy => true;
     public override int Cost => 300000;
+    public override int DamageDice => 1;
 }

@@ -4,4 +4,5 @@ public class TeleportOtherWandItemFactoryItemEnhancement : ItemEnhancementGameCo
 {
     public override int Weight => 10;
     public override int Cost => 350;
+    public override int DamageDice => 1;
 }

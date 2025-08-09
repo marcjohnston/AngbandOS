@@ -24,7 +24,6 @@ public class SmallMetalShieldItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(SmallMetalShieldItemFactoryItemEnhancement);
 
     public override int ArmorClass => 3;
-    public override int DamageDice => 1;
     public override int DamageSides => 2;
     public override string? DescriptionSyntax => "Small Metal Shield~";
     public override int LevelNormallyFound => 10;

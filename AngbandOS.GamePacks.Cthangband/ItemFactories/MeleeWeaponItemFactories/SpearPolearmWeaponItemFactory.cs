@@ -13,7 +13,6 @@ public class SpearPolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Spear";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 6;
     public override string? DescriptionSyntax => "Spear~";
     public override int LevelNormallyFound => 5;

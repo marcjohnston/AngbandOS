@@ -27,14 +27,13 @@ internal class NullableIntPropertyValue : NullablePropertyValue
         throw new Exception("IsEqual mismatch.");
     }
 
-    public override void Reset()
-    {
-        Value = null;
-    }
-
     public override void Set(PropertyValue propertyValue)
     {
-        if (propertyValue is IntPropertyValue intPropertyValue)
+        if (propertyValue is null)
+        {
+            Value = null;
+        }
+        else if (propertyValue is IntPropertyValue intPropertyValue)
         {
             Value = intPropertyValue.Value;
         }

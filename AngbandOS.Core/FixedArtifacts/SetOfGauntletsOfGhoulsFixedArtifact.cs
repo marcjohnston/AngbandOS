@@ -13,7 +13,6 @@ internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(GauntletGlovesItemFactory);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of Ghouls";
-    public override int Dd => 1;
     public override int Ds => 1;
     public override int Level => 10;
     public override int Rarity => 20;

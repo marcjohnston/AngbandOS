@@ -23,4 +23,5 @@ public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override int Cost => 150000;
+    public override int DamageDice => 4;
 }

@@ -13,7 +13,6 @@ public class ScytheOfSlicingPolearmWeaponItemFactory : ItemFactoryGameConfigurat
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Scythe of Slicing";
 
-    public override int DamageDice => 8;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax => "Scythe~ of Slicing";
     public override int LevelNormallyFound => 60;

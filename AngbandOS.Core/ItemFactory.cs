@@ -110,7 +110,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         HasQualityRatings = itemFactoryGameConfiguration.HasQualityRatings;
         ArmorClass = itemFactoryGameConfiguration.ArmorClass;
         DepthsFoundAndChances = itemFactoryGameConfiguration.DepthsFoundAndChances;
-        DamageDice = itemFactoryGameConfiguration.DamageDice;
         DamageSides = itemFactoryGameConfiguration.DamageSides;
         LevelNormallyFound = itemFactoryGameConfiguration.LevelNormallyFound;
         InitialBonusAttacks = itemFactoryGameConfiguration.InitialBonusAttacks;
@@ -302,7 +301,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             HasQualityRatings = HasQualityRatings,
             ArmorClass = ArmorClass,
             DepthsFoundAndChances = DepthsFoundAndChances,
-            DamageDice = DamageDice,
             DamageSides = DamageSides,
             LevelNormallyFound = LevelNormallyFound,
             InitialBonusAttacks = InitialBonusAttacks,
@@ -613,7 +611,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         }
         else if (IsWeapon)
         {
-            s += $" ({item.DamageDice}d{item.DamageSides})";
+            s += $" ({item.EffectivePropertySet.DamageDice}d{item.DamageSides})";
 
             if (item.IsKnown())
             {
@@ -881,21 +879,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         {
             return name;
         }
-    }
-
-    /// <summary>
-    /// Gets an additional bonus gold real value associated with the item.  Returns 0, by default.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public int GetBonusRealValue(Item item)
-    {
-        int bonusValue = item.EffectivePropertySet.BonusHit * BonusHitRealValueMultiplier + item.EffectivePropertySet.BonusArmorClass * BonusArmorClassRealValueMultiplier + item.EffectivePropertySet.BonusDamage * BonusDamageRealValueMultiplier;
-        if (item.DamageDice > DamageDice && item.DamageSides == DamageSides)
-        {
-            bonusValue += (item.DamageDice - DamageDice) * item.DamageSides * BonusDiceRealValueMultiplier;
-        }
-        return bonusValue;
     }
 
     private void ProcessWorld(Item oPtr)
@@ -2082,8 +2065,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the depth and 1-in probably for where the item can be found; or null, if the item is not found naturally.  Returns null, by default.
     /// </summary>
     public (int level, int chance)[]? DepthsFoundAndChances { get; } = null; // TODO: Convert the chance into a Roll object
-
-    public int DamageDice { get; } = 0;
 
     public int DamageSides { get; } = 0;
 

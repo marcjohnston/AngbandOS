@@ -25,4 +25,5 @@ public class BroadSwordLightningFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool SlayOrc => true;
     public override bool SlowDigest => true;
     public override int Cost => 95000;
+    public override int DamageDice => 2;
 }

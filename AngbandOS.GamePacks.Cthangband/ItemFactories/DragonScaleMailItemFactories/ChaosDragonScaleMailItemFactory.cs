@@ -24,7 +24,6 @@ public class ChaosDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Chaos Dragon Scale Mail";
 
     public override int ArmorClass => 30;
-    public override int DamageDice => 2;
     public override int DamageSides => 4;
     public override string? DescriptionSyntax  => "Chaos Dragon Scale Mail~";
     public override int LevelNormallyFound => 75;

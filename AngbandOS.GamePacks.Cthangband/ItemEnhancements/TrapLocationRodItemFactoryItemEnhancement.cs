@@ -5,4 +5,5 @@ public class TrapLocationRodItemFactoryItemEnhancement : ItemEnhancementGameConf
     public override bool EasyKnow => true;
     public override int Weight => 15;
     public override int Cost => 100;
+    public override int DamageDice => 1;
 }

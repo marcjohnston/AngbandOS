@@ -8,4 +8,5 @@ public class WarHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 120;
     public override int Cost => 225;
+    public override int DamageDice => 3;
 }

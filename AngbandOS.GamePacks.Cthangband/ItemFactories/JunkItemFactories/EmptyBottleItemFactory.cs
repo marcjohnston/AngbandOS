@@ -18,7 +18,6 @@ public class EmptyBottleItemFactory : ItemFactoryGameConfiguration
     public override bool HatesAcid => true;
     public override string Name => "Empty Bottle";
 
-    public override int DamageDice => 1;
     public override int DamageSides => 1;
     public override string? DescriptionSyntax => "Empty Bottle~";
 }
