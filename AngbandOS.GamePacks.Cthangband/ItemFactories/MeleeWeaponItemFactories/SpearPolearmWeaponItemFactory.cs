@@ -13,7 +13,6 @@ public class SpearPolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Spear";
 
-    public override int DiceSides => 6;
     public override string? DescriptionSyntax => "Spear~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

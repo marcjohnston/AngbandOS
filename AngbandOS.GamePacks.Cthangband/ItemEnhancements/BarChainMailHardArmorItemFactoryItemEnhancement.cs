@@ -7,4 +7,5 @@ public class BarChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancementGa
     public override int Weight => 280;
     public override int Cost => 950;
     public override int DamageDice => 1;
+    public override int DiceSides => 4;
 }

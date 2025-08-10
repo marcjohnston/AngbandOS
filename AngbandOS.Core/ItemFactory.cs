@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.Interface.Configuration;
-
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -110,7 +108,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         HasQualityRatings = itemFactoryGameConfiguration.HasQualityRatings;
         ArmorClass = itemFactoryGameConfiguration.ArmorClass;
         DepthsFoundAndChances = itemFactoryGameConfiguration.DepthsFoundAndChances;
-        DiceSides = itemFactoryGameConfiguration.DiceSides;
         LevelNormallyFound = itemFactoryGameConfiguration.LevelNormallyFound;
         InitialBonusAttacks = itemFactoryGameConfiguration.InitialBonusAttacks;
         InitialBonusInfravision = itemFactoryGameConfiguration.InitialBonusInfravision;
@@ -301,7 +298,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             HasQualityRatings = HasQualityRatings,
             ArmorClass = ArmorClass,
             DepthsFoundAndChances = DepthsFoundAndChances,
-            DiceSides = DiceSides,
             LevelNormallyFound = LevelNormallyFound,
             InitialBonusAttacks = InitialBonusAttacks,
             InitialBonusInfravision = InitialBonusInfravision,
@@ -411,7 +407,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         ItemEnhancement = nullableItemEnhancement ?? new ItemEnhancement(Game);
 
         //// Cut and paste
-        //string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override int DamageDice => ");
+        //string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override int DiceSides => ");
         //if (prop is not null)
         //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", ItemEnhancement.GetKey, prop);
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
@@ -611,7 +607,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         }
         else if (IsWeapon)
         {
-            s += $" ({item.EffectivePropertySet.DamageDice}d{item.DiceSides})";
+            s += $" ({item.EffectivePropertySet.DamageDice}d{item.EffectivePropertySet.DiceSides})";
 
             if (item.IsKnown())
             {
@@ -2065,8 +2061,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the depth and 1-in probably for where the item can be found; or null, if the item is not found naturally.  Returns null, by default.
     /// </summary>
     public (int level, int chance)[]? DepthsFoundAndChances { get; } = null; // TODO: Convert the chance into a Roll object
-
-    public int DiceSides { get; } = 0;
 
     public int LevelNormallyFound { get; } = 0;
 

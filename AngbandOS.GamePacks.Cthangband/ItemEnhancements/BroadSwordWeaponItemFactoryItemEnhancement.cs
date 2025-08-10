@@ -9,4 +9,5 @@ public class BroadSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Weight => 150;
     public override int Cost => 255;
     public override int DamageDice => 2;
+    public override int DiceSides => 5;
 }

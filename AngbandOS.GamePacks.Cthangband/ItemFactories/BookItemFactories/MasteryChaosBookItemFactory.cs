@@ -14,7 +14,6 @@ public class MasteryChaosBookItemFactory : ItemFactoryGameConfiguration
     public override string Name => "[Chaos Mastery]";
     public override string? DescriptionSyntax => "Chaos Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Chaos Magic $Name$";
-    public override int DiceSides => 1;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

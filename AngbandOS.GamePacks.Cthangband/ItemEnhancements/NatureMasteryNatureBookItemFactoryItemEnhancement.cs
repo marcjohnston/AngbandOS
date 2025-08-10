@@ -6,4 +6,5 @@ public class NatureMasteryNatureBookItemFactoryItemEnhancement : ItemEnhancement
     public override int Weight => 30;
     public override int Cost => 1000;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

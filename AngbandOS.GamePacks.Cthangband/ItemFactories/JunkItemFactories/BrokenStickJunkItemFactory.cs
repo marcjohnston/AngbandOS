@@ -22,7 +22,6 @@ public class BrokenStickJunkItemFactory : ItemFactoryGameConfiguration
     {
         (0, 1)
     };
-    public override int DiceSides => 1;
     public override string? DescriptionSyntax => "Broken Stick~";
     public override string ItemClassBindingKey => nameof(JunkItemClass);
     public override int PackSort => 38;

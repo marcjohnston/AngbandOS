@@ -13,4 +13,5 @@ public class WhiteDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Weight => 200;
     public override int Cost => 35000;
     public override int DamageDice => 2;
+    public override int DiceSides => 4;
 }

@@ -17,4 +17,5 @@ public class MultiHuedDragonScaleMailItemFactoryItemEnhancement : ItemEnhancemen
     public override int Weight => 200;
     public override int Cost => 145000;
     public override int DamageDice => 2;
+    public override int DiceSides => 4;
 }

@@ -13,7 +13,6 @@ public class TulwarWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Tulwar";
 
-    public override int DiceSides => 4;
     public override string? DescriptionSyntax => "Tulwar~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

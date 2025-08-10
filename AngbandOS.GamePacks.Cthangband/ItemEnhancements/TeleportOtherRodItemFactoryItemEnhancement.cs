@@ -6,4 +6,5 @@ public class TeleportOtherRodItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Weight => 15;
     public override int Cost => 1400;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

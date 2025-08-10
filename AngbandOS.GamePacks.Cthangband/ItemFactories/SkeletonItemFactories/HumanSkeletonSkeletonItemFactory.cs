@@ -18,7 +18,6 @@ public class HumanSkeletonSkeletonItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Human Skeleton";
 
-    public override int DiceSides => 2;
     public override string? DescriptionSyntax => "Human Skeleton~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

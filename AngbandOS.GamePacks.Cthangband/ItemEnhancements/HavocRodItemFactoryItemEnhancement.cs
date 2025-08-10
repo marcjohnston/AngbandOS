@@ -6,4 +6,5 @@ public class HavocRodItemFactoryItemEnhancement : ItemEnhancementGameConfigurati
     public override int Weight => 15;
     public override int Cost => 150000;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

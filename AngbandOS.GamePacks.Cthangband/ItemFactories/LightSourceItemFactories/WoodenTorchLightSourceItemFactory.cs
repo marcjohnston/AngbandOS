@@ -28,7 +28,6 @@ public class WoodenTorchLightSourceItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override int? MaxPhlogiston => 5000;
 
-    public override int DiceSides => 1;
     public override string? DescriptionSyntax => "Wooden Torch~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

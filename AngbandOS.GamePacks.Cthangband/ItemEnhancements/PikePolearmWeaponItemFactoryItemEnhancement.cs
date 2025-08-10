@@ -9,4 +9,5 @@ public class PikePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int Weight => 160;
     public override int Cost => 358;
     public override int DamageDice => 2;
+    public override int DiceSides => 5;
 }

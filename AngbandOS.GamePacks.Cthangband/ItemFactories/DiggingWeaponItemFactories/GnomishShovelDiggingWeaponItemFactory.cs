@@ -13,7 +13,6 @@ public class GnomishShovelDiggingWeaponItemFactory : ItemFactoryGameConfiguratio
     public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Gnomish Shovel";
 
-    public override int DiceSides => 2;
     public override string? DescriptionSyntax => "Gnomish Shovel~";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

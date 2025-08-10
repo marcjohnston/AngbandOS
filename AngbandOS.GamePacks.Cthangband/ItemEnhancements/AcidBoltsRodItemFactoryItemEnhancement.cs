@@ -6,4 +6,5 @@ public class AcidBoltsRodItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override int Weight => 15;
     public override int Cost => 3500;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

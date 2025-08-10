@@ -9,4 +9,5 @@ public class TwoHandedSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Weight => 200;
     public override int Cost => 775;
     public override int DamageDice => 3;
+    public override int DiceSides => 6;
 }

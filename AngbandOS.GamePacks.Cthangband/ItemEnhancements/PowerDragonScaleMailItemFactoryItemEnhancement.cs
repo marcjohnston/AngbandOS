@@ -26,4 +26,5 @@ public class PowerDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Weight => 250;
     public override int Cost => 345000;
     public override int DamageDice => 2;
+    public override int DiceSides => 4;
 }

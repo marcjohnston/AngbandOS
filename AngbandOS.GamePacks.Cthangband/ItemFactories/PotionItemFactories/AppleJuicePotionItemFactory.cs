@@ -19,7 +19,6 @@ public class AppleJuicePotionItemFactory : ItemFactoryGameConfiguration
     {
         (0, 1)
     };
-    public override int DiceSides => 1;
 
     /// <summary>
     /// Returns 250 turns of sustenance for this apply juice food item.

@@ -6,4 +6,5 @@ public class UnhealthMushroomFoodItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Weight => 1;
     public override int Cost => 50;
     public override int DamageDice => 10;
+    public override int DiceSides => 10;
 }

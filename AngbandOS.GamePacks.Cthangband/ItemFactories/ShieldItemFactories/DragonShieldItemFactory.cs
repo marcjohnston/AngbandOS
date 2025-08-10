@@ -24,7 +24,6 @@ public class DragonShieldItemFactory : ItemFactoryGameConfiguration
 
     public override string? ItemEnhancementBindingKey => nameof(DragonShieldItemFactoryItemEnhancement);
     public override int ArmorClass => 8;
-    public override int DiceSides => 3;
     public override string? DescriptionSyntax => "Dragon Shield~";
     public override int LevelNormallyFound => 70;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

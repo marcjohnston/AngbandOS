@@ -23,7 +23,6 @@ public class HardLeatherBootsItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Pair of Hard Leather Boots";
 
     public override int ArmorClass => 3;
-    public override int DiceSides => 1;
     public override string? DescriptionSyntax => "Pair~ of Hard Leather Boots";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

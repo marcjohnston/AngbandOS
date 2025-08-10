@@ -6,4 +6,5 @@ public class ResistancePotionItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Weight => 4;
     public override int Cost => 250;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

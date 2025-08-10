@@ -22,7 +22,6 @@ public class ShardOfPotteryJunkItemFactory : ItemFactoryGameConfiguration
     {
         (0, 1)
     };
-    public override int DiceSides => 1;
     public override string? DescriptionSyntax => "Shard~ of Pottery";
     public override string ItemClassBindingKey => nameof(JunkItemClass);
     public override int PackSort => 38;

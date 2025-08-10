@@ -9,4 +9,5 @@ public class LancePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Weight => 300;
     public override int Cost => 230;
     public override int DamageDice => 2;
+    public override int DiceSides => 8;
 }

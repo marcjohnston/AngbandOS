@@ -9,5 +9,6 @@ public class SeekerBoltAmmunitionItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Weight => 3;
     public override int Cost => 25;
     public override int DamageDice => 4;
+    public override int DiceSides => 5;
 }
 

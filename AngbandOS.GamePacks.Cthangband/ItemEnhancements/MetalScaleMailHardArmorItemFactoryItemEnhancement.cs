@@ -6,4 +6,5 @@ public class MetalScaleMailHardArmorItemFactoryItemEnhancement : ItemEnhancement
     public override int Weight => 250;
     public override int Cost => 550;
     public override int DamageDice => 1;
+    public override int DiceSides => 4;
 }

@@ -9,5 +9,6 @@ public class IronShotAmmunitionItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Weight => 5;
     public override int Cost => 2;
     public override int DamageDice => 1;
+    public override int DiceSides => 3;
 }
 

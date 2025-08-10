@@ -5,4 +5,5 @@ public class SoftLeatherBootsItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Weight => 20;
     public override int Cost => 7;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

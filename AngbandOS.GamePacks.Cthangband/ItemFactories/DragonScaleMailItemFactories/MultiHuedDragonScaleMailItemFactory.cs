@@ -23,7 +23,6 @@ public class MultiHuedDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Multi-Hued Dragon Scale Mail";
     public override int ArmorClass => 30;
-    public override int DiceSides => 4;
     public override string? DescriptionSyntax  => "Multi-Hued Dragon Scale Mail~";
     public override int LevelNormallyFound => 100;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

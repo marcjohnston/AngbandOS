@@ -9,4 +9,5 @@ public class ScimitarWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override int Weight => 130;
     public override int Cost => 250;
     public override int DamageDice => 2;
+    public override int DiceSides => 5;
 }

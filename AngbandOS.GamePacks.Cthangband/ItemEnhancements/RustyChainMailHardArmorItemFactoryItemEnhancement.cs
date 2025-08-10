@@ -6,4 +6,5 @@ public class RustyChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancement
     public override int Weight => 200;
     public override int Cost => 550;
     public override int DamageDice => 1;
+    public override int DiceSides => 4;
 }

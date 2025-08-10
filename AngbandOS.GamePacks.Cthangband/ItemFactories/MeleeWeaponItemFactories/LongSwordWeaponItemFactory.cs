@@ -13,7 +13,6 @@ public class LongSwordWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Long Sword";
 
-    public override int DiceSides => 5;
     public override string? DescriptionSyntax => "Long Sword~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

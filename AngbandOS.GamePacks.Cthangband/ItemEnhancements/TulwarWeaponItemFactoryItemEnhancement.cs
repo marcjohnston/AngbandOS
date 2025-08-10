@@ -9,4 +9,5 @@ public class TulwarWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override int Weight => 100;
     public override int Cost => 200;
     public override int DamageDice => 2;
+    public override int DiceSides => 4;
 }

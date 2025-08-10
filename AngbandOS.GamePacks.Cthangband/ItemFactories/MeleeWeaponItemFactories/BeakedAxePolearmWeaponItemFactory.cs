@@ -13,7 +13,6 @@ public class BeakedAxePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Beaked Axe";
 
-    public override int DiceSides => 6;
     public override string? DescriptionSyntax => "Beaked Axe~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

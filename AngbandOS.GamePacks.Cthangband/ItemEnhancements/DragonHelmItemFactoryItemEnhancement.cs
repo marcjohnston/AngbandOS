@@ -12,4 +12,5 @@ public class DragonHelmItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override int Weight => 50;
     public override int Cost => 10000;
     public override int DamageDice => 1;
+    public override int DiceSides => 3;
 }

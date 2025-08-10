@@ -9,4 +9,5 @@ public class ShortSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Weight => 80;
     public override int Cost => 90;
     public override int DamageDice => 1;
+    public override int DiceSides => 7;
 }

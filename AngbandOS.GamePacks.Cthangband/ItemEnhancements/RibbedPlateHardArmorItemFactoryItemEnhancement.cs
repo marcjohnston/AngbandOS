@@ -6,4 +6,5 @@ public class RibbedPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Weight => 380;
     public override int Cost => 1500;
     public override int DamageDice => 2;
+    public override int DiceSides => 4;
 }

@@ -9,4 +9,5 @@ public class RapierWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override int Weight => 40;
     public override int Cost => 42;
     public override int DamageDice => 1;
+    public override int DiceSides => 6;
 }

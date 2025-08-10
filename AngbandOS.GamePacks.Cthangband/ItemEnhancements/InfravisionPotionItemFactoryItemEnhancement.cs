@@ -6,4 +6,5 @@ public class InfravisionPotionItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int Weight => 4;
     public override int Cost => 20;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

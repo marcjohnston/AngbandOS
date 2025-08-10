@@ -13,7 +13,6 @@ public class MainGaucheWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Main Gauche";
 
-    public override int DiceSides => 5;
     public override string? DescriptionSyntax => "Main Gauche~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

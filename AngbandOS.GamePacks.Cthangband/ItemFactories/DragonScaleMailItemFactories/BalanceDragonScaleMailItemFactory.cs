@@ -23,7 +23,6 @@ public class BalanceDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Balance Dragon Scale Mail";
 
     public override int ArmorClass => 30;
-    public override int DiceSides => 4;
     public override string? DescriptionSyntax  => "Balance Dragon Scale Mail~";
     public override string? ItemEnhancementBindingKey => nameof(BalanceDragonScaleMailItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 90;

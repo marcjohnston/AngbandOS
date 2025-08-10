@@ -11,53 +11,53 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Game
 {
-    //public string Find(string folder, string key)
-    //{
-    //    string path = Path.Combine(folder, $"{key}.cs");
-    //    if (File.Exists(path))
-    //        return path;
-    //    foreach (string subfolder in Directory.GetDirectories(folder))
-    //    {
-    //        path = Path.Combine(subfolder, $"{key}.cs");
-    //        if (File.Exists(path))
-    //            return path;
-    //    }
-    //    throw new Exception("");
-    //}
-    //public string? CutProperty(string folder, string key, string text)
-    //{
-    //    string path = Find(folder, key);
-    //    List<string> lines = File.ReadAllLines(path).ToList();
-    //    foreach (string line in lines)
-    //    {
-    //        if (line.Contains(text))
-    //        {
-    //            lines.Remove(line);
-    //            File.WriteAllLines(path, lines);
-    //            return line;
-    //        }
-    //    }
-    //    return null;
-    //}
+    public string Find(string folder, string key)
+    {
+        string path = Path.Combine(folder, $"{key}.cs");
+        if (File.Exists(path))
+            return path;
+        foreach (string subfolder in Directory.GetDirectories(folder))
+        {
+            path = Path.Combine(subfolder, $"{key}.cs");
+            if (File.Exists(path))
+                return path;
+        }
+        throw new Exception("");
+    }
+    public string? CutProperty(string folder, string key, string text)
+    {
+        string path = Find(folder, key);
+        List<string> lines = File.ReadAllLines(path).ToList();
+        foreach (string line in lines)
+        {
+            if (line.Contains(text))
+            {
+                lines.Remove(line);
+                File.WriteAllLines(path, lines);
+                return line;
+            }
+        }
+        return null;
+    }
 
-    //public void PasteProperty(string folder, string key, string text)
-    //{
-    //    string path = Path.Combine(folder, $"{key}.cs");
-    //    List<string> lines = File.ReadAllLines(path).ToList();
-    //    if (!lines.Any(_l => _l.Contains($"class {key}")))
-    //        throw new Exception("");
-    //    for (int i = lines.Count - 1; i >= 0; i--)
-    //    {
-    //        string line = lines[i];
-    //        if (line.Contains("}"))
-    //        {
-    //            lines.Insert(i, text);
-    //            File.WriteAllLines(path, lines);
-    //            return;
-    //        }
-    //    }
-    //    throw new Exception("");
-    //}
+    public void PasteProperty(string folder, string key, string text)
+    {
+        string path = Path.Combine(folder, $"{key}.cs");
+        List<string> lines = File.ReadAllLines(path).ToList();
+        if (!lines.Any(_l => _l.Contains($"class {key}")))
+            throw new Exception("");
+        for (int i = lines.Count - 1; i >= 0; i--)
+        {
+            string line = lines[i];
+            if (line.Contains("}"))
+            {
+                lines.Insert(i, text);
+                File.WriteAllLines(path, lines);
+                return;
+            }
+        }
+        throw new Exception("");
+    }
 
     public int EnchantBonus(int bonus)
     {
@@ -6841,7 +6841,7 @@ internal class Game
             item.EffectivePropertySet.BonusDamage = 0;
             item.ArmorClass = 0;
             item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DamageDice, 0);
-            item.DiceSides = 0;
+            item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DiceSides , 0);
             item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
             item.IsBroken = true;
@@ -6881,7 +6881,7 @@ internal class Game
             item.EffectivePropertySet.BonusArmorClass = 0;
             item.ArmorClass = 0;
             item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DamageDice, 0);
-            item.DiceSides = 0;
+            item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DiceSides, 0);
             item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
             item.IsBroken = true;
@@ -7600,7 +7600,7 @@ internal class Game
                 else if (meleeItem != null)
                 {
                     // Roll damage for the weapon
-                    totalDamage = DiceRoll(meleeItem.EffectivePropertySet.DamageDice, meleeItem.DiceSides);
+                    totalDamage = DiceRoll(meleeItem.EffectivePropertySet.DamageDice, meleeItem.EffectivePropertySet.DiceSides);
                     totalDamage = meleeItem.AdjustDamageForMonsterType(totalDamage, monster);
                     // Extra damage for backstabbing
                     if (backstab)
@@ -7993,7 +7993,7 @@ internal class Game
             throwDistance = 10;
         }
         // Work out the damage done
-        int damage = DiceRoll(missile.EffectivePropertySet.DamageDice, missile.DiceSides) + missile.EffectivePropertySet.BonusDamage;
+        int damage = DiceRoll(missile.EffectivePropertySet.DamageDice, missile.EffectivePropertySet.DiceSides) + missile.EffectivePropertySet.BonusDamage;
         damage *= damageMultiplier;
         int chance = SkillThrowing + (Bonuses.AttackBonus * Constants.BthPlusAdj);
         // Throwing something always uses a full turn, even if you can make multiple missile attacks

@@ -24,7 +24,6 @@ public class DoubleChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(DoubleChainMailHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 16;
-    public override int DiceSides => 4;
     public override string? DescriptionSyntax  => "Double Chain Mail~";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

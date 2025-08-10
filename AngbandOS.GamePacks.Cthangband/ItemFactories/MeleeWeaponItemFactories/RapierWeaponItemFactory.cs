@@ -13,7 +13,6 @@ public class RapierWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Rapier";
 
-    public override int DiceSides => 6;
     public override string? DescriptionSyntax => "Rapier~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

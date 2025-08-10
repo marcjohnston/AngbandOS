@@ -17,7 +17,6 @@ public class BrokenDaggerWeaponItemFactory : ItemFactoryGameConfiguration
     {
         (0, 1)
     };
-    public override int DiceSides => 1;
     public override string? DescriptionSyntax => "Broken Dagger~";
     public override string? ItemEnhancementBindingKey => nameof(BrokenDaggerWeaponItemFactoryItemEnhancement);
     public override int BonusDamage => -4;

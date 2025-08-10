@@ -6,4 +6,5 @@ public class PieceOfDwarfBreadFoodItemFactoryItemEnhancement : ItemEnhancementGa
     public override int Weight => 3;
     public override int Cost => 16;
     public override int DamageDice => 1;
+    public override int DiceSides => 6;
 }

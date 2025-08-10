@@ -19,7 +19,6 @@ public class SlimeMoldJuicePotionItemFactory : ItemFactoryGameConfiguration
     {
         (0, 1)
     };
-    public override int DiceSides => 1;
     public override int InitialNutritionalValue => 400;
     public override (string, string?, int)? QuaffBindingTuple => (nameof(SystemScriptsEnum.SlimeMoldScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);
 

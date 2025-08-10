@@ -6,4 +6,5 @@ public class MagicksOfMasteryFolkBookItemFactoryItemEnhancement : ItemEnhancemen
     public override int Weight => 30;
     public override int Cost => 2500;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

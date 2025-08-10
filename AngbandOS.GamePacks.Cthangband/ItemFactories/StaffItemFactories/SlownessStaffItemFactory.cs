@@ -19,7 +19,6 @@ public class SlownessStaffItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Staff~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Staff~";
     public override string? FlavorSuppressedDescriptionSyntax => "Staff~ of $Name$";
-    public override int DiceSides => 2;
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

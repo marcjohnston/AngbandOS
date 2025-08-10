@@ -9,5 +9,6 @@ public class SeekerArrowAmmunitionItemFactoryItemEnhancement : ItemEnhancementGa
     public override int Weight => 2;
     public override int Cost => 20;
     public override int DamageDice => 4;
+    public override int DiceSides => 4;
 }
 

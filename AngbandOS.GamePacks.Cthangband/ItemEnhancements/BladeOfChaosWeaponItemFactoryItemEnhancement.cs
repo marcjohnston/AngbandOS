@@ -12,4 +12,5 @@ public class BladeOfChaosWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Weight => 180;
     public override int Cost => 4000;
     public override int DamageDice => 6;
+    public override int DiceSides => 5;
 }

@@ -8,4 +8,5 @@ public class FlailHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int Weight => 150;
     public override int Cost => 353;
     public override int DamageDice => 2;
+    public override int DiceSides => 6;
 }

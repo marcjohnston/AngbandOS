@@ -20,7 +20,6 @@ public class CloneMonsterWandItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     public override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
 
-    public override int DiceSides => 1;
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

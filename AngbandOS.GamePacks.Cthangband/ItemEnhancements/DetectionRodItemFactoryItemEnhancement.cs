@@ -6,4 +6,5 @@ public class DetectionRodItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override int Weight => 15;
     public override int Cost => 5000;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

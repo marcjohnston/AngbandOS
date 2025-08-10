@@ -13,7 +13,6 @@ public class BastardSwordWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Bastard Sword";
 
-    public override int DiceSides => 4;
     public override string? DescriptionSyntax => "Bastard Sword~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

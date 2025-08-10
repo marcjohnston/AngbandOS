@@ -10,4 +10,5 @@ public class AzathothChaosBookItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int Weight => 30;
     public override int Cost => 100000;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

@@ -23,7 +23,6 @@ public class AdamantitePlateMailHardArmorItemFactory : ItemFactoryGameConfigurat
     public override string Name => "Adamantite Plate Mail";
 
     public override int ArmorClass => 40;
-    public override int DiceSides => 4;
     public override string? DescriptionSyntax  => "Adamantite Plate Mail~";
     public override string? ItemEnhancementBindingKey => nameof(AdamantitePlateMailHardArmorItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 75;

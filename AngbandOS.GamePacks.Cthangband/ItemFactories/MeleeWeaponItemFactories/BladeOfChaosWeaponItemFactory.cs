@@ -13,7 +13,6 @@ public class BladeOfChaosWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Blade of Chaos";
 
-    public override int DiceSides => 5;
     public override string? DescriptionSyntax => "Blade~ of Chaos";
     public override int LevelNormallyFound => 70;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

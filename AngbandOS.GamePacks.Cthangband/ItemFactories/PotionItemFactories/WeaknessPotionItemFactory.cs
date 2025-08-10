@@ -19,7 +19,6 @@ public class WeaknessPotionItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Potion~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Potion~";
     public override string? FlavorSuppressedDescriptionSyntax => "Potion~ of $Name$";
-    public override int DiceSides => 12;
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

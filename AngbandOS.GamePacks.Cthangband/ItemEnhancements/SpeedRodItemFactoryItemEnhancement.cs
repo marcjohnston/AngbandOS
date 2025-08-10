@@ -6,4 +6,5 @@ public class SpeedRodItemFactoryItemEnhancement : ItemEnhancementGameConfigurati
     public override int Weight => 15;
     public override int Cost => 50000;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

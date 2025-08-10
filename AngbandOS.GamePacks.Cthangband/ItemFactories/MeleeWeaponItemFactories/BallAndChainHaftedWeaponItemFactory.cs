@@ -13,7 +13,6 @@ public class BallAndChainHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Ball-and-Chain";
 
-    public override int DiceSides => 4;
     public override string? DescriptionSyntax => "Ball-and-Chain~";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

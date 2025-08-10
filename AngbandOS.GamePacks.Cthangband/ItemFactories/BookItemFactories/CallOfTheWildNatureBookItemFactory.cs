@@ -14,7 +14,6 @@ public class CallOfTheWildNatureBookItemFactory : ItemFactoryGameConfiguration
     public override string Name => "[Call of the Wild]";
     public override string? DescriptionSyntax => "Nature Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Nature Magic $Name$";
-    public override int DiceSides => 1;
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

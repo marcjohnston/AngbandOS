@@ -8,4 +8,5 @@ public class OrcishPickDiggingWeaponItemFactoryItemEnhancement : ItemEnhancement
     public override int Weight => 150;
     public override int Cost => 300;
     public override int DamageDice => 1;
+    public override int DiceSides => 3;
 }

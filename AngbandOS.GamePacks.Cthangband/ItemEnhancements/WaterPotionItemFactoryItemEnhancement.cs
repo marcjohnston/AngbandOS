@@ -6,4 +6,5 @@ public class WaterPotionItemFactoryItemEnhancement : ItemEnhancementGameConfigur
     public override int Weight => 4;
     public override int Cost => 1;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

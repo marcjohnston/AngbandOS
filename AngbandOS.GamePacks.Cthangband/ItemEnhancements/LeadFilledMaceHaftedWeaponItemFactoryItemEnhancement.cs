@@ -8,4 +8,5 @@ public class LeadFilledMaceHaftedWeaponItemFactoryItemEnhancement : ItemEnhancem
     public override int Weight => 180;
     public override int Cost => 502;
     public override int DamageDice => 3;
+    public override int DiceSides => 4;
 }

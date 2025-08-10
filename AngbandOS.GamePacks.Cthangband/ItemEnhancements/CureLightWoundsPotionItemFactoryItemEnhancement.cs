@@ -6,4 +6,5 @@ public class CureLightWoundsPotionItemFactoryItemEnhancement : ItemEnhancementGa
     public override int Weight => 4;
     public override int Cost => 15;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

@@ -14,4 +14,5 @@ public class PseudoDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGa
     public override int Weight => 200;
     public override int Cost => 55000;
     public override int DamageDice => 2;
+    public override int DiceSides => 4;
 }

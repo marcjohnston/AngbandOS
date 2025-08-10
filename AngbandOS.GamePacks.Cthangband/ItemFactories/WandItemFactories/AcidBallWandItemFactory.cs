@@ -14,7 +14,6 @@ public class AcidBallWandItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Wand~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Wand~";
     public override string? FlavorSuppressedDescriptionSyntax => "Wand~ of $Name$";
-    public override int DiceSides => 1;
     public override string? ItemEnhancementBindingKey => nameof(AcidBallWandItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

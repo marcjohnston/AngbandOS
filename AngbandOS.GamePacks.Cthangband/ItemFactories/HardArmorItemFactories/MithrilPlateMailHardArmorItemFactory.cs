@@ -23,7 +23,6 @@ public class MithrilPlateMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Mithril Plate Mail";
 
     public override int ArmorClass => 35;
-    public override int DiceSides => 4;
     public override string? DescriptionSyntax  => "Mithril Plate Mail~";
     public override string? ItemEnhancementBindingKey => nameof(MithrilPlateMailHardArmorItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 60;

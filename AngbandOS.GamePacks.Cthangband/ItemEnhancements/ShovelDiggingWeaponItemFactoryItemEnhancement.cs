@@ -8,4 +8,5 @@ public class ShovelDiggingWeaponItemFactoryItemEnhancement : ItemEnhancementGame
     public override int Weight => 60;
     public override int Cost => 10;
     public override int DamageDice => 1;
+    public override int DiceSides => 2;
 }

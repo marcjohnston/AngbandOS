@@ -6,4 +6,5 @@ public class RestoreLifeLevelsPotionItemFactoryItemEnhancement : ItemEnhancement
     public override int Weight => 4;
     public override int Cost => 400;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

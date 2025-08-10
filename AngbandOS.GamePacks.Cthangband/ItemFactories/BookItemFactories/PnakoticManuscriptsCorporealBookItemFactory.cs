@@ -20,7 +20,6 @@ public class PnakoticManuscriptsCorporealBookItemFactory : ItemFactoryGameConfig
     /// </summary>
     public override int ExperienceGainDivisorForDestroying => 1;
 
-    public override int DiceSides => 1;
     public override int LevelNormallyFound => 90;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

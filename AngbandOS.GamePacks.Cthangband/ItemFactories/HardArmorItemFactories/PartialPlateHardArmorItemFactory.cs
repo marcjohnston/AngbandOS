@@ -24,7 +24,6 @@ public class PartialPlateHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(PartialPlateHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 22;
-    public override int DiceSides => 6;
     public override string? DescriptionSyntax  => "Partial Plate Armor~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

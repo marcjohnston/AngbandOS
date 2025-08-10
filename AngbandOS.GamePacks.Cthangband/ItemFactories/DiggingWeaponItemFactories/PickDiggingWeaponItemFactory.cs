@@ -13,7 +13,6 @@ public class PickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Pick";
 
-    public override int DiceSides => 3;
     public override string? DescriptionSyntax => "Pick~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

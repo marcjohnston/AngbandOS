@@ -6,4 +6,5 @@ public class DetonationsPotionItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int Weight => 4;
     public override int Cost => 10000;
     public override int DamageDice => 25;
+    public override int DiceSides => 25;
 }

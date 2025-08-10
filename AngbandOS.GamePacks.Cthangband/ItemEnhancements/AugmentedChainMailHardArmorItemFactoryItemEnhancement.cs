@@ -7,4 +7,5 @@ public class AugmentedChainMailHardArmorItemFactoryItemEnhancement : ItemEnhance
     public override int Weight => 270;
     public override int Cost => 900;
     public override int DamageDice => 1;
+    public override int DiceSides => 4;
 }

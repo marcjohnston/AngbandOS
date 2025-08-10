@@ -24,7 +24,6 @@ public class FullPlateHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(FullPlateHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 25;
-    public override int DiceSides => 4;
     public override string? DescriptionSyntax  => "Full Plate Armor~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

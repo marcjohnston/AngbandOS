@@ -13,7 +13,6 @@ public class HighMassLifeBookItemFactory : ItemFactoryGameConfiguration
     public override string Name => "[High Mass]";
     public override string? DescriptionSyntax => "Life Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Life Magic $Name$";
-    public override int DiceSides => 1;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

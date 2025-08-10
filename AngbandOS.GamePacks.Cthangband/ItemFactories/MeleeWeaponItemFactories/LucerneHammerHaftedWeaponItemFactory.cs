@@ -13,7 +13,6 @@ public class LucerneHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Lucerne Hammer";
 
-    public override int DiceSides => 5;
     public override string? DescriptionSyntax => "Lucerne Hammer~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

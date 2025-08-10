@@ -24,7 +24,6 @@ public class MetalScaleMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(MetalScaleMailHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 13;
-    public override int DiceSides => 4;
     public override string? DescriptionSyntax  => "Metal Scale Mail~";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

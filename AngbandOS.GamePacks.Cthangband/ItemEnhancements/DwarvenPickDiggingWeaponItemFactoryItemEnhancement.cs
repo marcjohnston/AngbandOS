@@ -8,4 +8,5 @@ public class DwarvenPickDiggingWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override int Weight => 200;
     public override int Cost => 600;
     public override int DamageDice => 1;
+    public override int DiceSides => 4;
 }

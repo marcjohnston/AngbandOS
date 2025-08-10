@@ -14,7 +14,6 @@ public class EnlightenmentRodItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Rod~";
     public override string? FlavorSuppressedDescriptionSyntax => "Rod~ of $Name$";
-    public override int DiceSides => 1;
     public override int LevelNormallyFound => 65;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

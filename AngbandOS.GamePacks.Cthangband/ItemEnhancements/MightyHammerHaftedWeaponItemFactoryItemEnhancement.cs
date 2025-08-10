@@ -9,4 +9,5 @@ public class MightyHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override int Weight => 200;
     public override int Cost => 1000;
     public override int DamageDice => 3;
+    public override int DiceSides => 9;
 }

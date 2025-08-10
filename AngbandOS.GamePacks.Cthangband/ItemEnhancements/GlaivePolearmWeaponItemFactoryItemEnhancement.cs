@@ -9,4 +9,5 @@ public class GlaivePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGame
     public override int Weight => 190;
     public override int Cost => 363;
     public override int DamageDice => 2;
+    public override int DiceSides => 6;
 }

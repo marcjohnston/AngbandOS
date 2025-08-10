@@ -9,4 +9,5 @@ public class ScytheOfSlicingPolearmWeaponItemFactoryItemEnhancement : ItemEnhanc
     public override int Weight => 250;
     public override int Cost => 3500;
     public override int DamageDice => 8;
+    public override int DiceSides => 4;
 }

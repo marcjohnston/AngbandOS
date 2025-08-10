@@ -105,7 +105,6 @@ internal sealed class Item : IComparable<Item>
     public string? RandomArtifactName = null;
 
     public int ArmorClass;
-    public int DiceSides;
 
     /// <summary>
     /// Returns true, if the item is broken; false, otherwise.  Broken items are considered worthless, regardless of their other properties.
@@ -158,7 +157,6 @@ internal sealed class Item : IComparable<Item>
         clonedItem.GoldPieces = GoldPieces;
         clonedItem.RandomArtifactName = RandomArtifactName;
         clonedItem.ArmorClass = ArmorClass;
-        clonedItem.DiceSides = DiceSides;
         clonedItem.IsBroken = IsBroken;
 
         return clonedItem;
@@ -930,10 +928,6 @@ internal sealed class Item : IComparable<Item>
             return false;
         }
         if (ArmorClass != other.ArmorClass)
-        {
-            return false;
-        }
-        if (DiceSides != other.DiceSides)
         {
             return false;
         }
@@ -1903,7 +1897,7 @@ internal sealed class Item : IComparable<Item>
         value += EffectivePropertySet.BonusHit * _factory.BonusHitRealValueMultiplier;
         value += EffectivePropertySet.BonusArmorClass * _factory.BonusArmorClassRealValueMultiplier;
         value += EffectivePropertySet.BonusDamage * _factory.BonusDamageRealValueMultiplier;
-        value += EffectivePropertySet.DamageDice * DiceSides * _factory.BonusDiceRealValueMultiplier;
+        value += EffectivePropertySet.DamageDice * EffectivePropertySet.DiceSides * _factory.BonusDiceRealValueMultiplier;
         return value;
     }
 
@@ -2044,7 +2038,7 @@ internal sealed class Item : IComparable<Item>
         fixedArtifact.CurNum = 1;
 
         // TODO: These should be deltas on the item enhancements
-        DiceSides = fixedArtifact.Ds;
+        EffectivePropertySet.DiceSides = fixedArtifact.Ds;
         EffectivePropertySet.BonusAttacks = fixedArtifact.ToA;
         EffectivePropertySet.BonusHit = fixedArtifact.ToH;
         EffectivePropertySet.BonusDamage = fixedArtifact.ToD;
@@ -2392,7 +2386,6 @@ internal sealed class Item : IComparable<Item>
         EffectivePropertySet.BonusDamage = _factory.BonusDamage;
         EffectivePropertySet.BonusArmorClass = _factory.BonusArmorClass;
         ArmorClass = _factory.ArmorClass;
-        DiceSides = _factory.DiceSides;
         IsBroken = _factory.IsBroken;
 
         if (_factory.AimingTuple != null)

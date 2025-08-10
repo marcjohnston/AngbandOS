@@ -9,4 +9,5 @@ public class SpearPolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Weight => 50;
     public override int Cost => 36;
     public override int DamageDice => 1;
+    public override int DiceSides => 6;
 }
