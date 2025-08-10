@@ -19,7 +19,7 @@ public class WeaknessMushroomFoodItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Mushroom~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Mushroom~";
     public override string? FlavorSuppressedDescriptionSyntax => "Mushroom~ of $Name$";
-    public override int DamageSides => 5;
+    public override int DiceSides => 5;
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

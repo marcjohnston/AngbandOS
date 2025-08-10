@@ -54,7 +54,7 @@ internal class GreatAmmoEnchantmentScript : Script, IEnhancementScript
                 item.EffectivePropertySet.AddIntValue(PropertyEnum.DamageDice, 1);
                 break;
         }
-        while (Game.RandomLessThan(10 * item.EffectivePropertySet.DamageDice * item.DamageSides) == 0)
+        while (Game.RandomLessThan(10 * item.EffectivePropertySet.DamageDice * item.DiceSides) == 0)
         {
             item.EffectivePropertySet.AddIntValue(PropertyEnum.DamageDice, 1);
         }

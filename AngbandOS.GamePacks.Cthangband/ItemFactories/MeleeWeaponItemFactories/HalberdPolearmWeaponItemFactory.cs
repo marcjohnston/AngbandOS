@@ -13,7 +13,7 @@ public class HalberdPolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Halberd";
 
-    public override int DamageSides => 5;
+    public override int DiceSides => 5;
     public override string? DescriptionSyntax => "Halberd~";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

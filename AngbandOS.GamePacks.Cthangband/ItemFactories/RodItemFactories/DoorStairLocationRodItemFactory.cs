@@ -14,7 +14,7 @@ public class DoorStairLocationRodItemFactory : ItemFactoryGameConfiguration
     public override string? DescriptionSyntax => "$Flavor$ Rod~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Rod~";
     public override string? FlavorSuppressedDescriptionSyntax => "Rod~ of $Name$";
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

@@ -13,7 +13,7 @@ public class PieceOfWarpstoneFoodItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Piece of Warpstone";
 
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override string? DescriptionSyntax => "Piece~ of Warpstone";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

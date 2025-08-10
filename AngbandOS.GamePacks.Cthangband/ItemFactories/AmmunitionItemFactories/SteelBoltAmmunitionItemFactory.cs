@@ -16,7 +16,7 @@ public class SteelBoltAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Bolt";
 
-    public override int DamageSides => 5;
+    public override int DiceSides => 5;
     public override string? DescriptionSyntax => "Bolt~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

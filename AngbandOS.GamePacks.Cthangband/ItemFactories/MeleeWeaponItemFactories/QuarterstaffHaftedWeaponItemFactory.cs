@@ -13,7 +13,7 @@ public class QuarterstaffHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Quarterstaff";
 
-    public override int DamageSides => 9;
+    public override int DiceSides => 9;
     public override string? DescriptionSyntax => "Quarterstaff~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -14,7 +14,7 @@ public class DeVermisMysteriisCorporealBookItemFactory : ItemFactoryGameConfigur
     public override string Name => "[De Vermis Mysteriis]";
     public override string? DescriptionSyntax => "Corporeal Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Corporeal Magic $Name$";
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

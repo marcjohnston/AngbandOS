@@ -13,7 +13,7 @@ public class SmallWoodenChestItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Small wooden chest";
 
-    public override int DamageSides => 3;
+    public override int DiceSides => 3;
     public override string? DescriptionSyntax => "Small wooden chest~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

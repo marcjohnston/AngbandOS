@@ -22,7 +22,7 @@ public class OrbLightSourceItemFactory : ItemFactoryGameConfiguration
 
     public override bool IdentityCanBeSensed => true;
 
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override string? DescriptionSyntax => "Orb~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

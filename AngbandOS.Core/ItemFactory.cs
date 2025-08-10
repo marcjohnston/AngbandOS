@@ -110,7 +110,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         HasQualityRatings = itemFactoryGameConfiguration.HasQualityRatings;
         ArmorClass = itemFactoryGameConfiguration.ArmorClass;
         DepthsFoundAndChances = itemFactoryGameConfiguration.DepthsFoundAndChances;
-        DamageSides = itemFactoryGameConfiguration.DamageSides;
+        DiceSides = itemFactoryGameConfiguration.DiceSides;
         LevelNormallyFound = itemFactoryGameConfiguration.LevelNormallyFound;
         InitialBonusAttacks = itemFactoryGameConfiguration.InitialBonusAttacks;
         InitialBonusInfravision = itemFactoryGameConfiguration.InitialBonusInfravision;
@@ -301,7 +301,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             HasQualityRatings = HasQualityRatings,
             ArmorClass = ArmorClass,
             DepthsFoundAndChances = DepthsFoundAndChances,
-            DamageSides = DamageSides,
+            DiceSides = DiceSides,
             LevelNormallyFound = LevelNormallyFound,
             InitialBonusAttacks = InitialBonusAttacks,
             InitialBonusInfravision = InitialBonusInfravision,
@@ -611,7 +611,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         }
         else if (IsWeapon)
         {
-            s += $" ({item.EffectivePropertySet.DamageDice}d{item.DamageSides})";
+            s += $" ({item.EffectivePropertySet.DamageDice}d{item.DiceSides})";
 
             if (item.IsKnown())
             {
@@ -2066,7 +2066,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// </summary>
     public (int level, int chance)[]? DepthsFoundAndChances { get; } = null; // TODO: Convert the chance into a Roll object
 
-    public int DamageSides { get; } = 0;
+    public int DiceSides { get; } = 0;
 
     public int LevelNormallyFound { get; } = 0;
 

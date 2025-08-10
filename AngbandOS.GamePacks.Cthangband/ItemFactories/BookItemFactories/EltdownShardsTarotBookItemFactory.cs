@@ -14,7 +14,7 @@ public class EltdownShardsTarotBookItemFactory : ItemFactoryGameConfiguration
     public override string Name => "[Eltdown Shards]";
     public override string? DescriptionSyntax => "Tarot Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Tarot Magic $Name$";
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

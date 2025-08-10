@@ -13,7 +13,7 @@ public class TwoHandedFlailHaftedWeaponItemFactory : ItemFactoryGameConfiguratio
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Two-Handed Flail";
 
-    public override int DamageSides => 6;
+    public override int DiceSides => 6;
     public override string? DescriptionSyntax => "Two-Handed Flail~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

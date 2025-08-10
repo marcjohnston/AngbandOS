@@ -13,7 +13,7 @@ public class WarHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "War Hammer";
 
-    public override int DamageSides => 3;
+    public override int DiceSides => 3;
     public override string? DescriptionSyntax => "War Hammer~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

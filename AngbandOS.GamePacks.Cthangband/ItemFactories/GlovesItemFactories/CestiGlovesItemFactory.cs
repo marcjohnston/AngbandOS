@@ -23,7 +23,7 @@ public class CestiGlovesItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Set of Cesti";
 
     public override int ArmorClass => 5;
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override string? DescriptionSyntax => "Set~ of Cesti";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

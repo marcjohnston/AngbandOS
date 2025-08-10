@@ -18,7 +18,7 @@ public class WaterPotionItemFactory : ItemFactoryGameConfiguration
     {
         (0, 1)
     };
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override int InitialNutritionalValue => 200;
 
     public override (string, string?, int)? QuaffBindingTuple => (nameof(YouFeelLessThirstyRenderMessageScript), nameof(NoProjectileMakeUnfriendlyProjectileScript), 20);

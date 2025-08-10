@@ -16,7 +16,7 @@ public class SeekerBoltAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Seeker Bolt";
 
-    public override int DamageSides => 5;
+    public override int DiceSides => 5;
     public override string? DescriptionSyntax => "Seeker Bolt~";
     public override int LevelNormallyFound => 65;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

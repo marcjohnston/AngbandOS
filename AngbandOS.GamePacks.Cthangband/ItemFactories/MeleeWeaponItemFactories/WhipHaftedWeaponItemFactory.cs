@@ -13,7 +13,7 @@ public class WhipHaftedWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Whip";
 
-    public override int DamageSides => 6;
+    public override int DiceSides => 6;
     public override string? DescriptionSyntax => "Whip~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

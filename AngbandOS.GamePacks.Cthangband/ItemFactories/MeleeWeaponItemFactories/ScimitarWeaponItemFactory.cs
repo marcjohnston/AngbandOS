@@ -13,7 +13,7 @@ public class ScimitarWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Scimitar";
 
-    public override int DamageSides => 5;
+    public override int DiceSides => 5;
     public override string? DescriptionSyntax => "Scimitar~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -160,8 +160,8 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                     } while (Game.DieRoll(item.EffectivePropertySet.DamageDice) == 1);
                     do
                     {
-                        item.DamageSides++;
-                    } while (Game.DieRoll(item.DamageSides) == 1);
+                        item.DiceSides++;
+                    } while (Game.DieRoll(item.DiceSides) == 1);
                 }
                 if (Game.DieRoll(5) == 1)
                 {
@@ -215,7 +215,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 }
                 break;
         }
-        while (Game.RandomLessThan(10 * item.EffectivePropertySet.DamageDice * item.DamageSides) == 0)
+        while (Game.RandomLessThan(10 * item.EffectivePropertySet.DamageDice * item.DiceSides) == 0)
         {
             item.EffectivePropertySet.AddIntValue(PropertyEnum.DamageDice, 1);
         }

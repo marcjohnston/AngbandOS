@@ -22,7 +22,7 @@ public class BrokenSkullSkeletonItemFactory : ItemFactoryGameConfiguration
     {
         (0, 1)
     };
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override string? DescriptionSyntax => "Broken Skull~";
     public override string ItemClassBindingKey => nameof(SkeletonsItemClass);
     public override string? ItemEnhancementBindingKey => nameof(BrokenSkullSkeletonItemFactoryItemEnhancement);

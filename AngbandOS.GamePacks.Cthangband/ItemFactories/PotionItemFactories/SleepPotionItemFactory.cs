@@ -23,7 +23,7 @@ public class SleepPotionItemFactory : ItemFactoryGameConfiguration
     {
         (0, 1)
     };
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override int InitialNutritionalValue => 100;
 
     public override (string, string?, int)? QuaffBindingTuple => (nameof(Paralysis4P1d4TimerScript), nameof(OldSleepProjectileUnfriendlyProjectileScript), 20);

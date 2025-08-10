@@ -13,7 +13,7 @@ public class LancePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Lance";
 
-    public override int DamageSides => 8;
+    public override int DiceSides => 8;
     public override string? DescriptionSyntax => "Lance~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -24,7 +24,7 @@ public class RustyChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(RustyChainMailHardArmorItemFactoryItemEnhancement);
 
     public override int ArmorClass => 14;
-    public override int DamageSides => 4;
+    public override int DiceSides => 4;
     public override string? DescriptionSyntax  => "Rusty Chain Mail~";
     public override int LevelNormallyFound => 25;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

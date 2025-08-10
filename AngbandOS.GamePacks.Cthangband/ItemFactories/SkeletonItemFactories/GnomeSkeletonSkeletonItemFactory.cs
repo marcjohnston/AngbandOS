@@ -18,7 +18,7 @@ public class GnomeSkeletonSkeletonItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Gnome Skeleton";
 
-    public override int DamageSides => 2;
+    public override int DiceSides => 2;
     public override string? DescriptionSyntax => "Gnome Skeleton~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

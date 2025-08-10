@@ -18,7 +18,7 @@ public class GemstoneLightSourceItemFactory : ItemFactoryGameConfiguration
 
     public override string? ItemEnhancementBindingKey => nameof(GemstoneLightSourceItemFactoryItemEnhancement);
 
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override string? DescriptionSyntax => "Gemstone~"; // TODO: This appears to cause a defect in identification
     public override int LevelNormallyFound => 60;
 

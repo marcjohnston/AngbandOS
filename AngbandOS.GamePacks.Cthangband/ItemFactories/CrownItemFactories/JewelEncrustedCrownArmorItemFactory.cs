@@ -22,7 +22,7 @@ public class JewelEncrustedCrownArmorItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Jewel Encrusted Crown";
 
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override string? DescriptionSyntax => "Jewel Encrusted Crown~";
     public override string? ItemEnhancementBindingKey => nameof(JewelEncrustedCrownArmorItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 50;

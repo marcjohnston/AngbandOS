@@ -14,7 +14,7 @@ public class RevelationsOfGlaakiNatureBookItemFactory : ItemFactoryGameConfigura
     public override string Name => "[Revelations of Glaaki]";
     public override string? DescriptionSyntax => "Nature Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Nature Magic $Name$";
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

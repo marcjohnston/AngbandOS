@@ -23,7 +23,7 @@ public class PowerDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Power Dragon Scale Mail";
     public override int ArmorClass => 40;
-    public override int DamageSides => 4;
+    public override int DiceSides => 4;
     public override string? DescriptionSyntax  => "Power Dragon Scale Mail~";
     public override int LevelNormallyFound => 110;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

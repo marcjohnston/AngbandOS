@@ -14,7 +14,7 @@ public class GharneFragmentsChaosBookItemFactory : ItemFactoryGameConfiguration
     public override string Name => "[G'harne Fragments]";
     public override string? DescriptionSyntax => "Chaos Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Chaos Magic $Name$";
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

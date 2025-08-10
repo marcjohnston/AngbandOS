@@ -13,7 +13,7 @@ public class DwarvenPickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Dwarven Pick";
 
-    public override int DamageSides => 4;
+    public override int DiceSides => 4;
     public override string? DescriptionSyntax => "Dwarven Pick~";
     public override int LevelNormallyFound => 50;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

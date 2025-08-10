@@ -13,7 +13,7 @@ public class PikePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Pike";
 
-    public override int DamageSides => 5;
+    public override int DiceSides => 5;
     public override string? DescriptionSyntax => "Pike~";
     public override int LevelNormallyFound => 15;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

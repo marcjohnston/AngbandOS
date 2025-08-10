@@ -13,7 +13,7 @@ public class LochaberAxePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Lochaber Axe";
 
-    public override int DamageSides => 8;
+    public override int DiceSides => 8;
     public override string? DescriptionSyntax => "Lochaber Axe~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -14,7 +14,7 @@ public class BlackMassDeathBookItemFactory : ItemFactoryGameConfiguration
     public override string Name => "[Black Mass]";
     public override string? DescriptionSyntax => "Death Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Death Magic $Name$";
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

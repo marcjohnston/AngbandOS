@@ -23,7 +23,7 @@ public class BlindnessPotionItemFactory : ItemFactoryGameConfiguration
     {
         (0, 1)
     };
-    public override int DamageSides => 1;
+    public override int DiceSides => 1;
 
     public override (string, string?, int)? QuaffBindingTuple => (nameof(Blindness1d100p100TimerScript), nameof(DarkProjectileUnfriendlyProjectileScript), 20);
  

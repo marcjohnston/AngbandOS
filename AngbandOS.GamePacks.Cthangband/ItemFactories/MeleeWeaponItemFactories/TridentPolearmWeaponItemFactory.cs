@@ -13,7 +13,7 @@ public class TridentPolearmWeaponItemFactory : ItemFactoryGameConfiguration
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Trident";
 
-    public override int DamageSides => 8;
+    public override int DiceSides => 8;
     public override string? DescriptionSyntax => "Trident~";
     public override int LevelNormallyFound => 5;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
