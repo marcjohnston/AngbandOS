@@ -27,6 +27,6 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool SlayOrc => true;
     public override int Cost => 30000;
     public override string BonusAttacksRollExpression => "8";
-    public override string BonusHitRollExpression => "10";
+    public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "6";
 }

@@ -25,6 +25,6 @@ public class DaggerOfAssassinFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override int Cost => 125000;
     public override int DamageDice => 1;
     public override string BonusAttacksRollExpression => "5";
-    public override string BonusHitRollExpression => "10";
+    public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "15";
 }

@@ -78,7 +78,7 @@ public class ItemEnhancementGameConfiguration
     public virtual string? BonusAttacksRollExpression { get; set; } = null;
     public virtual string? BonusSpeedRollExpression { get; set; } = null;
     public virtual string? BonusArmorClassRollExpression { get; set; } = null;
-    public virtual string? BonusHitRollExpression { get; set; } = null;
+    public virtual string? BonusHitsRollExpression { get; set; } = null;
     public virtual string? BonusDamageRollExpression { get; set; } = null;
 
     /// <summary>

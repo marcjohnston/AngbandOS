@@ -35,6 +35,6 @@ public class RingOfElementalPowerStormFixedArtifactItemEnhancement : ItemEnhance
     public override int Cost => 300000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override string BonusHitRollExpression => "12";
+    public override string BonusHitsRollExpression => "12";
     public override string BonusDamageRollExpression => "12";
 }

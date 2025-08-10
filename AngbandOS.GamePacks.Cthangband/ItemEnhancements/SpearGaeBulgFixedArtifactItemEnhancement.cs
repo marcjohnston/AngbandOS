@@ -19,6 +19,6 @@ public class SpearGaeBulgFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool ShowMods => true;
     public override bool SlayUndead => true;
     public override int Cost => 30000;
-    public override string BonusHitRollExpression => "11";
+    public override string BonusHitsRollExpression => "11";
     public override string BonusDamageRollExpression => "13";
 }

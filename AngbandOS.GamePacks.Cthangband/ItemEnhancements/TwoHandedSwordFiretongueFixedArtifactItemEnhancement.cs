@@ -36,6 +36,6 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
     public override int Weight => 50;
     public override int Cost => 205000;
     public override int DamageDice => 1;
-    public override string BonusHitRollExpression => "19";
+    public override string BonusHitsRollExpression => "19";
     public override string BonusDamageRollExpression => "21";
 }

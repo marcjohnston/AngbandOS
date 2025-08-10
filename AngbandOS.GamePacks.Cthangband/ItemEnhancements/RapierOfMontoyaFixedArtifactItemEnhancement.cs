@@ -19,6 +19,6 @@ public class RapierOfMontoyaFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override bool ShowMods => true;
     public override bool SlayAnimal => true;
     public override int Cost => 15000;
-    public override string BonusHitRollExpression => "12";
+    public override string BonusHitsRollExpression => "12";
     public override string BonusDamageRollExpression => "19";
 }

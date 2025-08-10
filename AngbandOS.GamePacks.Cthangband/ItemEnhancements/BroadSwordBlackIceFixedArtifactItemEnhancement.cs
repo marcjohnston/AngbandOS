@@ -22,6 +22,6 @@ public class BroadSwordBlackIceFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SlayOrc => true;
     public override bool SlowDigest => true;
     public override int Cost => 40000;
-    public override string BonusHitRollExpression => "10";
+    public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "15";
 }

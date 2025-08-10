@@ -20,6 +20,6 @@ public class MorningStarFirestarterFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool ShowMods => true;
     public override int Cost => 35000;
     public override string BonusAttacksRollExpression => "2";
-    public override string BonusHitRollExpression => "5";
+    public override string BonusHitsRollExpression => "5";
     public override string BonusDamageRollExpression => "7";
 }

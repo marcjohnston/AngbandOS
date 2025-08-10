@@ -25,6 +25,6 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool Vorpal => true;
     public override int Cost => 66666;
     public override int DamageDice => 9;
-    public override string BonusHitRollExpression => "-30";
+    public override string BonusHitsRollExpression => "-30";
     public override string BonusDamageRollExpression => "7";
 }

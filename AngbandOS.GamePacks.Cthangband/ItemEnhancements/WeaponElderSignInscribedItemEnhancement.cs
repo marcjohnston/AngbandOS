@@ -16,7 +16,7 @@ public class WeaponElderSignInscribedItemEnhancement : ItemEnhancementGameConfig
     public override string? BonusWisdomRollExpression => "1d4";
     public override string? BonusArmorClassRollExpression => "1d4";
     public override string? BonusDamageRollExpression => "1d6";
-    public override string? BonusHitRollExpression => "1d6";
+    public override string? BonusHitsRollExpression => "1d6";
     public override int TreasureRating => 30;
     public override bool ResFear => true;
     public override bool SeeInvis => true;

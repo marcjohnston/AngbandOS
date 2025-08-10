@@ -1083,12 +1083,12 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
-        if (NegativeBonusHitRepresentsBroken && EffectivePropertySet.BonusHit < 0)
+        if (NegativeBonusHitRepresentsBroken && EffectivePropertySet.BonusHits < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
 
-        if (EffectivePropertySet.BonusArmorClass > 0 || EffectivePropertySet.BonusHit + EffectivePropertySet.BonusDamage > 0)
+        if (EffectivePropertySet.BonusArmorClass > 0 || EffectivePropertySet.BonusHits + EffectivePropertySet.BonusDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1123,7 +1123,7 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
-        if (EffectivePropertySet.BonusHit + EffectivePropertySet.BonusDamage > 0)
+        if (EffectivePropertySet.BonusHits + EffectivePropertySet.BonusDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1894,7 +1894,7 @@ internal sealed class Item : IComparable<Item>
 
         value += TurnOfLightValue * TurnsOfLightRemaining;
 
-        value += EffectivePropertySet.BonusHit * _factory.BonusHitRealValueMultiplier;
+        value += EffectivePropertySet.BonusHits * _factory.BonusHitRealValueMultiplier;
         value += EffectivePropertySet.BonusArmorClass * _factory.BonusArmorClassRealValueMultiplier;
         value += EffectivePropertySet.BonusDamage * _factory.BonusDamageRealValueMultiplier;
         value += EffectivePropertySet.DamageDice * EffectivePropertySet.DiceSides * _factory.BonusDiceRealValueMultiplier;
@@ -2376,7 +2376,7 @@ internal sealed class Item : IComparable<Item>
         NutritionalValue = _factory.InitialNutritionalValue;        
         GoldPieces = Game.ComputeIntegerExpression(_factory.InitialGoldPiecesRoll).Value;
         TurnsOfLightRemaining = _factory.InitialTurnsOfLight;
-        EffectivePropertySet.BonusHit = _factory.BonusHit;
+        EffectivePropertySet.BonusHits = _factory.BonusHit;
         EffectivePropertySet.BonusDamage = _factory.BonusDamage;
         EffectivePropertySet.BonusArmorClass = _factory.BonusArmorClass;
         ArmorClass = _factory.ArmorClass;
@@ -2436,7 +2436,7 @@ internal sealed class Item : IComparable<Item>
                 IsBroken = true; // This should be manual.
             }
 
-            rareItemEffectivePropertySet.BonusHit *= goodBadMultiplier;
+            rareItemEffectivePropertySet.BonusHits *= goodBadMultiplier;
             rareItemEffectivePropertySet.BonusDamage *= goodBadMultiplier;
             rareItemEffectivePropertySet.BonusArmorClass *= goodBadMultiplier;
             rareItemEffectivePropertySet.BonusStrength *= goodBadMultiplier;

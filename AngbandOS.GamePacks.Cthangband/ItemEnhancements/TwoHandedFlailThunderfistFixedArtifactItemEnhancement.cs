@@ -27,6 +27,6 @@ public class TwoHandedFlailThunderfistFixedArtifactItemEnhancement : ItemEnhance
     public override bool SlayTroll => true;
     public override int Weight => 20;
     public override int Cost => 160000;
-    public override string BonusHitRollExpression => "5";
+    public override string BonusHitsRollExpression => "5";
     public override string BonusDamageRollExpression => "18";
 }

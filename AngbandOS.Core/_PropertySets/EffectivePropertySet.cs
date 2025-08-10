@@ -453,7 +453,7 @@ internal class EffectivePropertySet
             SetBoolValue(PropertyEnum.CanProvideSheathOfFire, value);
         }
     }
-    public int BonusHit
+    public int BonusHits
     {
         get
         {

@@ -12,7 +12,7 @@ public class BowOfExtraMightItemEnhancement : ItemEnhancementGameConfiguration
     public override int Value => 10000;
     public override string? FriendlyName => "of Extra Might";
     public override string? BonusDamageRollExpression => "1d10";
-    public override string? BonusHitRollExpression => "1d5";
+    public override string? BonusHitsRollExpression => "1d5";
     public override int TreasureRating => 20;
     public override bool XtraMight => true;
 }

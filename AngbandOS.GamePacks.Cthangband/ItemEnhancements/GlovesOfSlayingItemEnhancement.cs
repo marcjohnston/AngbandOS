@@ -12,7 +12,7 @@ public class GlovesOfSlayingItemEnhancement : ItemEnhancementGameConfiguration
     public override int Value => 1500;
     public override string? FriendlyName => "of Slaying";
     public override string? BonusDamageRollExpression => "1d6";
-    public override string? BonusHitRollExpression => "1d6";
+    public override string? BonusHitsRollExpression => "1d6";
     public override int TreasureRating => 17;
     public override bool ShowMods => true;
 }

@@ -29,6 +29,6 @@ public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancemen
     public override int Cost => 40000;
     public override int DamageDice => 1;
     public override string BonusAttacksRollExpression => "-50";
-    public override string BonusHitRollExpression => "-40";
+    public override string BonusHitsRollExpression => "-40";
     public override string BonusDamageRollExpression => "-60";
 }

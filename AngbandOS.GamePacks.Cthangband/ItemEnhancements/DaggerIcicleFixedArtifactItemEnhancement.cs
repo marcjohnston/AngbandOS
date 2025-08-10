@@ -25,6 +25,6 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool SlowDigest => true;
     public override int Cost => 50000;
     public override int DamageDice => 1;
-    public override string BonusHitRollExpression => "6";
+    public override string BonusHitsRollExpression => "6";
     public override string BonusDamageRollExpression => "9";
 }

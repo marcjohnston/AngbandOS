@@ -27,5 +27,5 @@ public class MultiHuedDragonScaleMailRazorbackFixedArtifactItemEnhancement : Ite
     public override int Weight => 300;
     public override int Cost => 400000;
     public override string BonusAttacksRollExpression => "25";
-    public override string BonusHitRollExpression => "-4";
+    public override string BonusHitsRollExpression => "-4";
 }

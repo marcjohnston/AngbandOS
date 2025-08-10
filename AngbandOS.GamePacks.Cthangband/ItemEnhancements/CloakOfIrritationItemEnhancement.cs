@@ -13,7 +13,7 @@ public class CloakOfIrritationItemEnhancement : ItemEnhancementGameConfiguration
     public override bool Valueless => true;
     public override string? FriendlyName => "of Irritation";
     public override string? BonusDamageRollExpression => "1d15";
-    public override string? BonusHitRollExpression => "1d15";
+    public override string? BonusHitsRollExpression => "1d15";
     public override int TreasureRating => 0;
     public override bool ShowMods => true;
 }

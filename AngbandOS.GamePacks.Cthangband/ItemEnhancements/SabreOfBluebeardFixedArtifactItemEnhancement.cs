@@ -18,6 +18,6 @@ public class SabreOfBluebeardFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override int Cost => 25000;
-    public override string BonusHitRollExpression => "6";
+    public override string BonusHitsRollExpression => "6";
     public override string BonusDamageRollExpression => "8";
 }

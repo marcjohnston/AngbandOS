@@ -34,6 +34,6 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool SlayGiant => true;
     public override bool SlayUndead => true;
     public override int Cost => 77777;
-    public override string BonusHitRollExpression => "15";
+    public override string BonusHitsRollExpression => "15";
     public override string BonusDamageRollExpression => "15";
 }

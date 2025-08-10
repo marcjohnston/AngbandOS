@@ -24,5 +24,5 @@ public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhanceme
     public override int Cost => 150000;
     public override int DamageDice => 1;
     public override string BonusAttacksRollExpression => "40";
-    public override string BonusHitRollExpression => "-2";
+    public override string BonusHitsRollExpression => "-2";
 }

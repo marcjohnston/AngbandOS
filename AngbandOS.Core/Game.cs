@@ -5719,23 +5719,23 @@ internal class Game
             int chance;
             if ((eflag & Constants.EnchTohit) != 0)
             {
-                if (oPtr.EffectivePropertySet.BonusHit < 0)
+                if (oPtr.EffectivePropertySet.BonusHits < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.EffectivePropertySet.BonusHit > 15)
+                else if (oPtr.EffectivePropertySet.BonusHits > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = EnchantTable[oPtr.EffectivePropertySet.BonusHit];
+                    chance = EnchantTable[oPtr.EffectivePropertySet.BonusHits];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.EffectivePropertySet.BonusHit++;
+                    oPtr.EffectivePropertySet.BonusHits++;
                     res = true;
-                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.BonusHit >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.BonusHits >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.RemoveCurse();
@@ -6837,7 +6837,7 @@ internal class Game
             item.EffectivePropertySet.RemoveEnhancement("fixed");
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(ArmorBlastedItemEnhancement)));
             item.EffectivePropertySet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
-            item.EffectivePropertySet.BonusHit = 0;
+            item.EffectivePropertySet.BonusHits = 0;
             item.EffectivePropertySet.BonusDamage = 0;
             item.ArmorClass = 0;
             item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DamageDice, 0);
@@ -6876,7 +6876,7 @@ internal class Game
             item.FixedArtifact = null;
             item.EffectivePropertySet.RemoveEnhancement("fixed");
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(WeaponShatteredItemEnhancement)));
-            item.EffectivePropertySet.BonusHit = 0 - DieRoll(5) - DieRoll(5);
+            item.EffectivePropertySet.BonusHits = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusArmorClass = 0;
             item.ArmorClass = 0;
@@ -7495,7 +7495,7 @@ internal class Game
         Item? meleeItem = GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (meleeItem != null)
         {
-            bonus += meleeItem.EffectivePropertySet.BonusHit;
+            bonus += meleeItem.EffectivePropertySet.BonusHits;
         }
         int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
         // Attacking uses a full turn
@@ -7618,7 +7618,7 @@ internal class Game
                         chaosEffect = false;
                     }
                     // Check if we did a critical
-                    totalDamage = PlayerCriticalMelee(meleeItem.EffectivePropertySet.Weight, meleeItem.EffectivePropertySet.BonusHit, totalDamage);
+                    totalDamage = PlayerCriticalMelee(meleeItem.EffectivePropertySet.Weight, meleeItem.EffectivePropertySet.BonusHits, totalDamage);
 
                     int extraDamage1InChance = meleeItem.FixedArtifact == null ? 2 : meleeItem.FixedArtifact.VorpalExtraDamage1InChance;
 
@@ -8085,7 +8085,7 @@ internal class Game
                     }
                     // Adjust the damage for the particular monster type
                     damage = missile.AdjustDamageForMonsterType(damage, monster);
-                    damage = PlayerCriticalRanged(missile.EffectivePropertySet.Weight, missile.EffectivePropertySet.BonusHit, damage);
+                    damage = PlayerCriticalRanged(missile.EffectivePropertySet.Weight, missile.EffectivePropertySet.BonusHits, damage);
                     if (damage < 0)
                     {
                         damage = 0;

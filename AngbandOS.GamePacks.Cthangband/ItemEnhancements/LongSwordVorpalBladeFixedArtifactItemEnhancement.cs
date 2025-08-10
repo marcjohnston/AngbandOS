@@ -26,6 +26,6 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override int Weight => 20;
     public override int Cost => 250000;
     public override int DamageDice => 3;
-    public override string BonusHitRollExpression => "32";
+    public override string BonusHitsRollExpression => "32";
     public override string BonusDamageRollExpression => "32";
 }

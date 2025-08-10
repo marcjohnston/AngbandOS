@@ -45,6 +45,6 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     public override int Cost => 5000000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override string BonusHitRollExpression => "15";
+    public override string BonusHitsRollExpression => "15";
     public override string BonusDamageRollExpression => "15";
 }

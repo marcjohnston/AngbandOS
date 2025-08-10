@@ -410,11 +410,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         continue;
                     }
-                    attackBonus += oPtr.EffectivePropertySet.BonusHit;
+                    attackBonus += oPtr.EffectivePropertySet.BonusHits;
                     damageBonus += oPtr.EffectivePropertySet.BonusDamage;
                     if (oPtr.IsKnown())
                     {
-                        displayedAttackBonus += oPtr.EffectivePropertySet.BonusHit;
+                        displayedAttackBonus += oPtr.EffectivePropertySet.BonusHits;
                     }
                     if (oPtr.IsKnown())
                     {

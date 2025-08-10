@@ -49,7 +49,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BonusAttacksRollExpression = itemEnhancementGameConfiguration.BonusAttacksRollExpression;
         BonusSpeedRollExpression = itemEnhancementGameConfiguration.BonusSpeedRollExpression;
         BonusArmorClassRollExpression = itemEnhancementGameConfiguration.BonusArmorClassRollExpression;
-        BonusHitsRollExpression = itemEnhancementGameConfiguration.BonusHitRollExpression;
+        BonusHitsRollExpression = itemEnhancementGameConfiguration.BonusHitsRollExpression;
         BonusDamageRollExpression = itemEnhancementGameConfiguration.BonusDamageRollExpression;
         ActivationName = itemEnhancementGameConfiguration.ActivationName;
         Aggravate = itemEnhancementGameConfiguration.Aggravate;
@@ -172,7 +172,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             BonusSpeed = BonusSpeedRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSpeedRoll).Value,
 
             BonusArmorClass = BonusArmorClassRoll == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassRoll).Value,
-            BonusHit = BonusHitRoll == null ? 0 : Game.ComputeIntegerExpression(BonusHitRoll).Value,
+            BonusHits = BonusHitsRoll == null ? 0 : Game.ComputeIntegerExpression(BonusHitsRoll).Value,
             BonusDamage = BonusDamageRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDamageRoll).Value,
 
             Activation = Activation,
@@ -296,7 +296,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BonusSpeedRoll = Game.ParseNullableNumericExpression(BonusSpeedRollExpression);
 
         BonusArmorClassRoll = Game.ParseNullableNumericExpression(BonusArmorClassRollExpression);
-        BonusHitRoll = Game.ParseNullableNumericExpression(BonusHitsRollExpression);
+        BonusHitsRoll = Game.ParseNullableNumericExpression(BonusHitsRollExpression);
         BonusDamageRoll = Game.ParseNullableNumericExpression(BonusDamageRollExpression);
 
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
@@ -333,7 +333,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             BonusAttacksRollExpression = BonusAttacksRollExpression,
             BonusSpeedRollExpression = BonusSpeedRollExpression,
             BonusArmorClassRollExpression = BonusArmorClassRollExpression,
-            BonusHitRollExpression = BonusHitsRollExpression,
+            BonusHitsRollExpression = BonusHitsRollExpression,
             BonusDamageRollExpression = BonusDamageRollExpression,
             ActivationName = ActivationName,
             Aggravate = Aggravate,
@@ -455,7 +455,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// Returns a maximum value for a random amount of additional BonusToHit when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    private Expression? BonusHitRoll { get; set; } 
+    private Expression? BonusHitsRoll { get; set; } 
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusDamage when adding magic.  If the item is cursed or broken,

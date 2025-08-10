@@ -25,6 +25,6 @@ public class BroadSwordLightningFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool SlayOrc => true;
     public override bool SlowDigest => true;
     public override int Cost => 95000;
-    public override string BonusHitRollExpression => "12";
+    public override string BonusHitsRollExpression => "12";
     public override string BonusDamageRollExpression => "16";
 }

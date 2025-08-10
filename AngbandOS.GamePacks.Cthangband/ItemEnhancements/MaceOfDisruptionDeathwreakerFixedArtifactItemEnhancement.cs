@@ -35,6 +35,6 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
     public override int Cost => 444444;
     public override int DamageDice => 5;
     public override int DiceSides => 4;
-    public override string BonusHitRollExpression => "18";
+    public override string BonusHitsRollExpression => "18";
     public override string BonusDamageRollExpression => "18";
 }

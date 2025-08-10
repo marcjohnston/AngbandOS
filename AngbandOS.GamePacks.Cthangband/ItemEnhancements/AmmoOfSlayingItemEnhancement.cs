@@ -12,6 +12,6 @@ public class AmmoOfSlayingItemEnhancement : ItemEnhancementGameConfiguration
     public override int Value => 20;
     public override string? FriendlyName => "of Slaying";
     public override string? BonusDamageRollExpression => "1d12";
-    public override string? BonusHitRollExpression => "1d12";
+    public override string? BonusHitsRollExpression => "1d12";
     public override int TreasureRating => 15;
 }

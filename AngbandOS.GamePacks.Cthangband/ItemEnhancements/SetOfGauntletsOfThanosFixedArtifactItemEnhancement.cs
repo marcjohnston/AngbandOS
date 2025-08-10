@@ -27,6 +27,6 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool ShowMods => true;
     public override bool Teleport => true;
     public override int Cost => 40000;
-    public override string BonusHitRollExpression => "-11";
+    public override string BonusHitsRollExpression => "-11";
     public override string BonusDamageRollExpression => "-12";
 }

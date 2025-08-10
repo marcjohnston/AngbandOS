@@ -20,5 +20,5 @@ public class AugmentedChainMailOfTheOgreLordsFixedArtifactItemEnhancement : Item
     public override bool ResPois => true;
     public override int Cost => 40000;
     public override string BonusAttacksRollExpression => "20";
-    public override string BonusHitRollExpression => "-2";
+    public override string BonusHitsRollExpression => "-2";
 }

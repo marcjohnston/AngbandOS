@@ -18,6 +18,6 @@ public class ShortSwordOfMerlinFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SlayAnimal => true;
     public override bool SlowDigest => true;
     public override int Cost => 35000;
-    public override string BonusHitRollExpression => "3";
+    public override string BonusHitsRollExpression => "3";
     public override string BonusDamageRollExpression => "7";
 }

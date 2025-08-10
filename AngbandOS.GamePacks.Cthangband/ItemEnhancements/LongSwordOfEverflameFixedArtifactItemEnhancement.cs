@@ -29,6 +29,6 @@ public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool SustDex => true;
     public override int Cost => 80000;
     public override string BonusAttacksRollExpression => "5";
-    public override string BonusHitRollExpression => "10";
+    public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "15";
 }

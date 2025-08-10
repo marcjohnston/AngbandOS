@@ -18,6 +18,6 @@ public class MorningStarBloodspikeFixedArtifactItemEnhancement : ItemEnhancement
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override int Cost => 30000;
-    public override string BonusHitRollExpression => "8";
+    public override string BonusHitsRollExpression => "8";
     public override string BonusDamageRollExpression => "22";
 }

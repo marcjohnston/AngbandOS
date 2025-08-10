@@ -27,6 +27,6 @@ public class SmallSwordStingFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override int Weight => -5;
     public override int Cost => 100000;
     public override int DiceSides => -1;
-    public override string BonusHitRollExpression => "7";
+    public override string BonusHitsRollExpression => "7";
     public override string BonusDamageRollExpression => "8";
 }

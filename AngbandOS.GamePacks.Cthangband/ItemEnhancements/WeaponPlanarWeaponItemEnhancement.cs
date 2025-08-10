@@ -16,7 +16,7 @@ public class WeaponPlanarWeaponItemEnhancement : ItemEnhancementGameConfiguratio
     public override string? FriendlyName => "(Planar Weapon)";
     public override string? BonusSearchRollExpression => "1d2";
     public override string? BonusDamageRollExpression => "1d4";
-    public override string? BonusHitRollExpression => "1d4";
+    public override string? BonusHitsRollExpression => "1d4";
     public override int TreasureRating => 22;
     public override bool Regen => true;
     public override bool ResNexus => true;

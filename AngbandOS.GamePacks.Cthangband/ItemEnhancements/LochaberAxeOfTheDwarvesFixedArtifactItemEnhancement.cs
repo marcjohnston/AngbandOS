@@ -20,6 +20,6 @@ public class LochaberAxeOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool SlayEvil => true;
     public override bool SlayGiant => true;
     public override int Cost => 80000;
-    public override string BonusHitRollExpression => "12";
+    public override string BonusHitsRollExpression => "12";
     public override string BonusDamageRollExpression => "17";
 }

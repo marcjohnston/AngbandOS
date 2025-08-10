@@ -16,7 +16,7 @@ public class WeaponOfKadathItemEnhancement : ItemEnhancementGameConfiguration
     public override string? BonusDexterityRollExpression => "1d2";
     public override string? BonusStrengthRollExpression => "1d2";
     public override string? BonusDamageRollExpression => "1d5";
-    public override string? BonusHitRollExpression => "1d5";
+    public override string? BonusHitsRollExpression => "1d5";
     public override int TreasureRating => 20;
     public override bool SeeInvis => true;
     public override bool SlayGiant => true;
