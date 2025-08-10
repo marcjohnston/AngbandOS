@@ -66,7 +66,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Cost = itemEnhancementGameConfiguration.Cost;
         IsCursed = itemEnhancementGameConfiguration.IsCursed;
         DamageDice = itemEnhancementGameConfiguration.DamageDice;
-        Dd = itemEnhancementGameConfiguration.DamageDice;
+        DiceSides = itemEnhancementGameConfiguration.DiceSides;
         DrainExp = itemEnhancementGameConfiguration.DrainExp;
         DreadCurse = itemEnhancementGameConfiguration.DreadCurse;
         EasyKnow = itemEnhancementGameConfiguration.EasyKnow;
@@ -190,6 +190,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Cost = Cost,
             IsCursed = IsCursed,
             DamageDice = DamageDice,
+            DiceSides = DiceSides,
             DrainExp = DrainExp,
             DreadCurse = DreadCurse,
             EasyKnow = EasyKnow,
@@ -278,7 +279,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         }
         return ApplicableItemFactories.Contains(itemFactory);
     }
-    public int Dd { get; }
     public void Bind()
     {
         Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
@@ -350,6 +350,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Cost = Cost,
             IsCursed = IsCursed,
             DamageDice = DamageDice,
+            DiceSides = DiceSides,
             DrainExp = DrainExp,
             DreadCurse = DreadCurse,
             EasyKnow = EasyKnow,
@@ -589,6 +590,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool IsCursed { get; } = false;
 
     public int DamageDice { get; } = 0;
+    public int DiceSides { get; } = 0;
 
     /// <inheritdoc />
     private bool DrainExp { get; } = false;

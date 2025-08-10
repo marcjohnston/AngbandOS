@@ -58,6 +58,7 @@ internal enum PropertyEnum
     IsCursed,
     DamageDice,
     Dex,
+    DiceSides,
     DrainExp,
     DreadCurse,
     EasyKnow,

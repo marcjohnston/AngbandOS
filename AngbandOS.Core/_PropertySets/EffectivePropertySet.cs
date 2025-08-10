@@ -83,6 +83,7 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.IsCursed);
         RegisterIntPropertyFactory(PropertyEnum.DamageDice);
         RegisterBoolPropertyFactory(PropertyEnum.Dex);
+        RegisterIntPropertyFactory(PropertyEnum.DiceSides);
         RegisterBoolPropertyFactory(PropertyEnum.DrainExp);
         RegisterBoolPropertyFactory(PropertyEnum.DreadCurse);
         RegisterBoolPropertyFactory(PropertyEnum.EasyKnow);
@@ -813,6 +814,17 @@ internal class EffectivePropertySet
         set
         {
             SetBoolValue(PropertyEnum.Dex, value);
+        }
+    }
+    public int DiceSides
+    {
+        get
+        {
+            return GetIntValue(PropertyEnum.DiceSides);
+        }
+        set
+        {
+            SetIntValue(PropertyEnum.DiceSides, value);
         }
     }
     public bool DrainExp
