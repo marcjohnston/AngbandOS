@@ -15,7 +15,4 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact
     public override string Name => "The Great Axe of the Trolls";
     public override int Level => 30;
     public override int Rarity => 120;
-    public override int ToA => 8;
-    public override int ToD => 18;
-    public override int ToH => 15;
 }

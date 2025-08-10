@@ -15,7 +15,4 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
     public override string Name => "The Long Bow of Serpents";
     public override int Level => 30;
     public override int Rarity => 20;
-    public override int ToA => 0;
-    public override int ToD => 19;
-    public override int ToH => 17;
 }

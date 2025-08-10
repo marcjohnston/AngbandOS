@@ -18,7 +18,4 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
     public override string Name => "The Long Sword 'Vorpal Blade'";
     public override int Level => 50;
     public override int Rarity => 30;
-    public override int ToA => 0;
-    public override int ToD => 32;
-    public override int ToH => 32;
 }

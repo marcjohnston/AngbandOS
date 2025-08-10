@@ -15,7 +15,4 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact
     public override bool HasOwnType => true;
     public override int Level => 50;
     public override int Rarity => 10;
-    public override int ToA => 0;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

@@ -16,4 +16,6 @@ public class LightCrossbowOfDeathFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool ShowMods => true;
     public override bool XtraMight => true;
     public override int Cost => 50000;
+    public override string BonusHitRollExpression => "10";
+    public override string BonusDamageRollExpression => "14";
 }

@@ -15,7 +15,4 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
     public override string Name => "The Multi-Hued Dragon Scale Mail 'Razorback'";
     public override int Level => 90;
     public override int Rarity => 9;
-    public override int ToA => 25;
-    public override int ToD => 0;
-    public override int ToH => -4;
 }

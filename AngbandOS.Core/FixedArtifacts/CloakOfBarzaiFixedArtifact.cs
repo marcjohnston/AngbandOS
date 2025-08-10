@@ -15,7 +15,4 @@ internal class CloakOfBarzaiFixedArtifact : FixedArtifact
     public override string Name => "The Cloak of Barzai";
     public override int Level => 5;
     public override int Rarity => 45;
-    public override int ToA => 15;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

@@ -15,7 +15,4 @@ internal class SpearGungnirFixedArtifact : FixedArtifact
     public override string Name => "The Spear 'Gungnir'";
     public override int Level => 15;
     public override int Rarity => 45;
-    public override int ToA => 5;
-    public override int ToD => 25;
-    public override int ToH => 15;
 }

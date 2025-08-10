@@ -26,4 +26,6 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool SlayEvil => true;
     public override bool SlayUndead => true;
     public override int Cost => 111111;
+    public override string BonusHitRollExpression => "9";
+    public override string BonusDamageRollExpression => "11";
 }

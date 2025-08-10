@@ -16,7 +16,4 @@ internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
     public override string Name => "The Mighty Hammer of Worlds";
     public override int Level => 100;
     public override int Rarity => 1;
-    public override int ToA => 10;
-    public override int ToD => 25;
-    public override int ToH => 5;
 }

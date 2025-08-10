@@ -15,7 +15,4 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact
     public override string Name => "The Iron Helm 'Skullkeeper'";
     public override int Level => 20;
     public override int Rarity => 5;
-    public override int ToA => 10;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

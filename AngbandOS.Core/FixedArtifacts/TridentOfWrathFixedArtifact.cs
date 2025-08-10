@@ -15,7 +15,4 @@ internal class TridentOfWrathFixedArtifact : FixedArtifact
     public override string Name => "The Trident of Wrath";
     public override int Level => 15;
     public override int Rarity => 35;
-    public override int ToA => 0;
-    public override int ToD => 18;
-    public override int ToH => 16;
 }

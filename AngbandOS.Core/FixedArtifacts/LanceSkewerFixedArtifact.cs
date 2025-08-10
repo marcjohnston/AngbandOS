@@ -15,7 +15,4 @@ internal class LanceSkewerFixedArtifact : FixedArtifact
     public override string Name => "The Lance 'Skewer'";
     public override int Level => 20;
     public override int Rarity => 23;
-    public override int ToA => 0;
-    public override int ToD => 21;
-    public override int ToH => 3;
 }

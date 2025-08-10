@@ -15,7 +15,4 @@ internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
     public override string Name => "The Large Metal Shield of Stability";
     public override int Level => 40;
     public override int Rarity => 9;
-    public override int ToA => 20;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

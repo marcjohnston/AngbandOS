@@ -15,7 +15,4 @@ internal class QuarterstaffFirestaffFixedArtifact : FixedArtifact
     public override string Name => "The Quarterstaff 'Firestaff'";
     public override int Level => 20;
     public override int Rarity => 18;
-    public override int ToA => 0;
-    public override int ToD => 20;
-    public override int ToH => 10;
 }

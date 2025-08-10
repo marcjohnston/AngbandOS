@@ -15,7 +15,4 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact
     public override string Name => "The Long Sword of Everflame";
     public override int Level => 20;
     public override int Rarity => 40;
-    public override int ToA => 5;
-    public override int ToD => 15;
-    public override int ToH => 10;
 }

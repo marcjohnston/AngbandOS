@@ -15,7 +15,4 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
     public override string Name => "The Iron Crown of Misery";
     public override int Level => 40;
     public override int Rarity => 12;
-    public override int ToA => 25;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

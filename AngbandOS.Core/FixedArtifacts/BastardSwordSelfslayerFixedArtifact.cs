@@ -15,7 +15,4 @@ internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
     public override string Name => "The Bastard Sword 'Selfslayer'";
     public override int Level => 30;
     public override int Rarity => 15;
-    public override int ToA => 0;
-    public override int ToD => 20;
-    public override int ToH => -20;
 }

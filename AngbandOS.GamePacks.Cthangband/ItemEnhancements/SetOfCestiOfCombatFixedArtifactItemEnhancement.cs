@@ -23,4 +23,7 @@ public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SlowDigest => true;
     public override bool Telepathy => true;
     public override int Cost => 110000;
+    public override string BonusAttacksRollExpression => "20";
+    public override string BonusHitRollExpression => "10";
+    public override string BonusDamageRollExpression => "10";
 }

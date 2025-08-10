@@ -15,7 +15,4 @@ internal class LucerneHammerJusticeFixedArtifact : FixedArtifact
     public override string Name => "The Lucerne Hammer 'Justice'";
     public override int Level => 20;
     public override int Rarity => 15;
-    public override int ToA => 8;
-    public override int ToD => 6;
-    public override int ToH => 10;
 }

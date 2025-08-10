@@ -15,7 +15,4 @@ internal class MetalBrigandineArmorOfSerpentsFixedArtifact : FixedArtifact
     public override string Name => "The Metal Brigandine Armor of Serpents";
     public override int Level => 30;
     public override int Rarity => 3;
-    public override int ToA => 15;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

@@ -15,7 +15,4 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
     public override string Name => "The Scimitar 'Soulsword'";
     public override int Level => 20;
     public override int Rarity => 8;
-    public override int ToA => 0;
-    public override int ToD => 11;
-    public override int ToH => 9;
 }

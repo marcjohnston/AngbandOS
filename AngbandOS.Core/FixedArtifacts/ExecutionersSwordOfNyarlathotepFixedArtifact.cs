@@ -15,7 +15,4 @@ internal class ExecutionersSwordOfNyarlathotepFixedArtifact : FixedArtifact
     public override string Name => "The Executioner's Sword of Nyarlathotep";
     public override int Level => 40;
     public override int Rarity => 15;
-    public override int ToA => 0;
-    public override int ToD => 19;
-    public override int ToH => 18;
 }

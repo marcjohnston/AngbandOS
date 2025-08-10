@@ -16,7 +16,4 @@ internal class NecklaceOfTheDwarvesFixedArtifact : FixedArtifact
     public override bool HasOwnType => true;
     public override int Level => 70;
     public override int Rarity => 50;
-    public override int ToA => 0;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

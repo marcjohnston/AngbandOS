@@ -15,7 +15,4 @@ internal class CloakDarknessFixedArtifact : FixedArtifact
     public override string Name => "The Cloak 'Darkness'";
     public override int Level => 5;
     public override int Rarity => 45;
-    public override int ToA => 4;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

@@ -28,4 +28,7 @@ public class GreatAxeOfTheTrollsFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool SlayOrc => true;
     public override bool SlayUndead => true;
     public override int Cost => 200000;
+    public override string BonusAttacksRollExpression => "8";
+    public override string BonusHitRollExpression => "15";
+    public override string BonusDamageRollExpression => "18";
 }

@@ -15,7 +15,4 @@ internal class FlailTotilaFixedArtifact : FixedArtifact
     public override string Name => "The Flail 'Totila'";
     public override int Level => 20;
     public override int Rarity => 8;
-    public override int ToA => 0;
-    public override int ToD => 8;
-    public override int ToH => 6;
 }

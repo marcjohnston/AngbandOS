@@ -15,7 +15,4 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
     public override string Name => "The Metal Scale Mail of the Orcs";
     public override int Level => 40;
     public override int Rarity => 3;
-    public override int ToA => 40;
-    public override int ToD => 0;
-    public override int ToH => -2;
 }

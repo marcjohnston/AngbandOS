@@ -15,7 +15,4 @@ internal class SpearGaeBulgFixedArtifact : FixedArtifact
     public override string Name => "The Spear 'Gae Bulg'";
     public override int Level => 15;
     public override int Rarity => 12;
-    public override int ToA => 0;
-    public override int ToD => 13;
-    public override int ToH => 11;
 }

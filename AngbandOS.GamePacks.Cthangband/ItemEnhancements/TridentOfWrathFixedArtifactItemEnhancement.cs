@@ -23,4 +23,6 @@ public class TridentOfWrathFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override int Weight => 230;
     public override int Cost => 90000;
     public override int DamageDice => 2;
+    public override string BonusHitRollExpression => "16";
+    public override string BonusDamageRollExpression => "18";
 }

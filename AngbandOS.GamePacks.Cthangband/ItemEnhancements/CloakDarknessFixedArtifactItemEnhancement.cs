@@ -18,4 +18,5 @@ public class CloakDarknessFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool ResAcid => true;
     public override bool ResDark => true;
     public override int Cost => 13000;
+    public override string BonusAttacksRollExpression => "4";
 }

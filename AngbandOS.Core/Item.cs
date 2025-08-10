@@ -2037,11 +2037,6 @@ internal sealed class Item : IComparable<Item>
 
         fixedArtifact.CurNum = 1;
 
-        // TODO: These should be deltas on the item enhancements
-        EffectivePropertySet.BonusAttacks = fixedArtifact.ToA;
-        EffectivePropertySet.BonusHit = fixedArtifact.ToH;
-        EffectivePropertySet.BonusDamage = fixedArtifact.ToD;
-
         // Retrieve all of the mapped item enhancements for the LINQ query.
         MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
 

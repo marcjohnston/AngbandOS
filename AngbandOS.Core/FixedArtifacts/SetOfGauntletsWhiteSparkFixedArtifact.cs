@@ -15,7 +15,4 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact
     public override string Name => "The Set of Gauntlets 'White Spark'";
     public override int Level => 10;
     public override int Rarity => 20;
-    public override int ToA => 15;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

@@ -15,7 +15,4 @@ internal class AugmentedChainMailOfTheOgreLordsFixedArtifact : FixedArtifact
     public override string Name => "The Augmented Chain Mail of the Ogre Lords";
     public override int Level => 25;
     public override int Rarity => 9;
-    public override int ToA => 20;
-    public override int ToD => 0;
-    public override int ToH => -2;
 }

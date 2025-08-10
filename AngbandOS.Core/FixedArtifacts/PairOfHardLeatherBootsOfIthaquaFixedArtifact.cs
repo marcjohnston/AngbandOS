@@ -15,7 +15,4 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact
     public override string Name => "The Pair of Hard Leather Boots of Ithaqua";
     public override int Level => 40;
     public override int Rarity => 120;
-    public override int ToA => 20;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

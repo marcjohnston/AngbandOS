@@ -15,7 +15,4 @@ internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
     public override string Name => "The Mace of Disruption 'Deathwreaker'";
     public override int Level => 80;
     public override int Rarity => 38;
-    public override int ToA => 0;
-    public override int ToD => 18;
-    public override int ToH => 18;
 }

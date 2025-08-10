@@ -16,4 +16,5 @@ public class SoftLeatherArmorOfTheKoboldChiefFixedArtifactItemEnhancement : Item
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override int Cost => 45000;
+    public override string BonusAttacksRollExpression => "20";
 }

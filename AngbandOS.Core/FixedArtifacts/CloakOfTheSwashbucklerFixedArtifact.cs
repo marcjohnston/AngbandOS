@@ -15,7 +15,4 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
     public override string Name => "The Cloak of the Swashbuckler";
     public override int Level => 10;
     public override int Rarity => 90;
-    public override int ToA => 18;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

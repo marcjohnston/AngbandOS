@@ -16,7 +16,4 @@ internal class DaggerCharityFixedArtifact : FixedArtifact
     public override string Name => "The Dagger 'Charity'";
     public override int Level => 5;
     public override int Rarity => 10;
-    public override int ToA => 0;
-    public override int ToD => 6;
-    public override int ToH => 4;
 }

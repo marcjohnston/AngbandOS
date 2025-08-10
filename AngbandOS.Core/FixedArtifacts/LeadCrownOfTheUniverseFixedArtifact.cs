@@ -16,7 +16,4 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
     public override string Name => "The Lead Crown of the Universe";
     public override int Level => 100;
     public override int Rarity => 1;
-    public override int ToA => 0;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

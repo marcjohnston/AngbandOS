@@ -17,4 +17,5 @@ public class SmallMetalShieldVitriolFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool ResChaos => true;
     public override bool ResSound => true;
     public override int Cost => 60000;
+    public override string BonusAttacksRollExpression => "25";
 }

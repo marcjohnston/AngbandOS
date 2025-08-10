@@ -15,7 +15,4 @@ internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
     public override string Name => "The Small Metal Shield 'Vitriol'";
     public override int Level => 30;
     public override int Rarity => 6;
-    public override int ToA => 25;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

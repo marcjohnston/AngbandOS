@@ -12,4 +12,5 @@ public class SetOfGauntletsWhiteSparkFixedArtifactItemEnhancement : ItemEnhancem
     public override bool IgnoreFire => true;
     public override bool ResElec => true;
     public override int Cost => 11000;
+    public override string BonusAttacksRollExpression => "15";
 }

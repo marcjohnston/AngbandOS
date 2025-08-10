@@ -15,7 +15,4 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact
     public override string Name => "The Battle Axe 'Spleen Slicer'";
     public override int Level => 30;
     public override int Rarity => 15;
-    public override int ToA => 0;
-    public override int ToD => 3;
-    public override int ToH => 4;
 }

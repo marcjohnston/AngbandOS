@@ -15,7 +15,4 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
     public override string Name => "The Two-Handed Sword 'Dragonslayer'";
     public override int Level => 30;
     public override int Rarity => 30;
-    public override int ToA => 0;
-    public override int ToD => 17;
-    public override int ToH => 13;
 }

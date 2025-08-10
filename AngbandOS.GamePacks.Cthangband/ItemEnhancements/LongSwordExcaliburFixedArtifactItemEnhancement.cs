@@ -31,4 +31,6 @@ public class LongSwordExcaliburFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SlowDigest => true;
     public override int Cost => 300000;
     public override int DamageDice => 2;
+    public override string BonusHitRollExpression => "22";
+    public override string BonusDamageRollExpression => "25";
 }

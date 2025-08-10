@@ -32,4 +32,7 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool SlowDigest => true;
     public override int Cost => 180000;
     public override int DamageDice => 3;
+    public override string BonusAttacksRollExpression => "5";
+    public override string BonusHitRollExpression => "15";
+    public override string BonusDamageRollExpression => "25";
 }

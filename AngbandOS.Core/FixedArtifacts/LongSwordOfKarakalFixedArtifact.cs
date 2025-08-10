@@ -16,7 +16,4 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact
     public override string Name => "The Long Sword of Karakal";
     public override int Level => 20;
     public override int Rarity => 30;
-    public override int ToA => 0;
-    public override int ToD => 12;
-    public override int ToH => 8;
 }

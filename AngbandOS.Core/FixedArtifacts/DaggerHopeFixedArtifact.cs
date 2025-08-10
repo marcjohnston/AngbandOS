@@ -15,7 +15,4 @@ internal class DaggerHopeFixedArtifact : FixedArtifact
     public override string Name => "The Dagger 'Hope'";
     public override int Level => 3;
     public override int Rarity => 10;
-    public override int ToA => 0;
-    public override int ToD => 6;
-    public override int ToH => 4;
 }

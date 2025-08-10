@@ -12,4 +12,5 @@ public class SetOfGauntletsIronfistFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool IgnoreFire => true;
     public override bool ResFire => true;
     public override int Cost => 15000;
+    public override string BonusAttacksRollExpression => "15";
 }

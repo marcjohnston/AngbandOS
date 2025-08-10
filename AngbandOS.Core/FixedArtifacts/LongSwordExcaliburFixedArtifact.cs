@@ -15,7 +15,4 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact
     public override string Name => "The Long Sword 'Excalibur'";
     public override int Level => 20;
     public override int Rarity => 120;
-    public override int ToA => 0;
-    public override int ToD => 25;
-    public override int ToH => 22;
 }

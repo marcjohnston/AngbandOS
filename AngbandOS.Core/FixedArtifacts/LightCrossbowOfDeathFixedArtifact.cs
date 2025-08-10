@@ -16,7 +16,4 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact
     public override string Name => "The Light Crossbow of Death";
     public override int Level => 50;
     public override int Rarity => 25;
-    public override int ToA => 0;
-    public override int ToD => 14;
-    public override int ToH => 10;
 }

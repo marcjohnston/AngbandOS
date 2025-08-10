@@ -15,7 +15,4 @@ internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
     public override string Name => "The Metal Cap of Holiness";
     public override int Level => 10;
     public override int Rarity => 2;
-    public override int ToA => 12;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

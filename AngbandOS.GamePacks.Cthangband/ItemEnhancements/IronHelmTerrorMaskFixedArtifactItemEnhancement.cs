@@ -27,4 +27,7 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool ShowMods => true;
     public override bool Teleport => true;
     public override int Cost => 40000;
+    public override string BonusAttacksRollExpression => "10";
+    public override string BonusHitRollExpression => "25";
+    public override string BonusDamageRollExpression => "25";
 }

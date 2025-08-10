@@ -15,7 +15,4 @@ internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
     public override string Name => "The Hard Leather Cap of the Mindcrafter";
     public override int Level => 20;
     public override int Rarity => 2;
-    public override int ToA => 10;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

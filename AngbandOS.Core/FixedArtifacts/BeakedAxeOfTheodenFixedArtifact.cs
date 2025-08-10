@@ -15,7 +15,4 @@ internal class BeakedAxeOfTheodenFixedArtifact : FixedArtifact
     public override string Name => "The Beaked Axe of Theoden";
     public override int Level => 20;
     public override int Rarity => 15;
-    public override int ToA => 0;
-    public override int ToD => 10;
-    public override int ToH => 8;
 }

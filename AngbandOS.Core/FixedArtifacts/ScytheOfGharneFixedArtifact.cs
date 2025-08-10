@@ -15,7 +15,4 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact
     public override string Name => "The Scythe of G'harne";
     public override int Level => 40;
     public override int Rarity => 8;
-    public override int ToA => 10;
-    public override int ToD => 8;
-    public override int ToH => 8;
 }

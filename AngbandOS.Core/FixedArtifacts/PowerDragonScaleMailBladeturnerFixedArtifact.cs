@@ -15,7 +15,4 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact
     public override string Name => "The Power Dragon Scale Mail 'Bladeturner'";
     public override int Level => 95;
     public override int Rarity => 3;
-    public override int ToA => 35;
-    public override int ToD => 0;
-    public override int ToH => -8;
 }

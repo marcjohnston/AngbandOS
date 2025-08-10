@@ -15,7 +15,4 @@ internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
     public override string Name => "The Shadow Cloak of the Shoggoth";
     public override int Level => 40;
     public override int Rarity => 40;
-    public override int ToA => 12;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

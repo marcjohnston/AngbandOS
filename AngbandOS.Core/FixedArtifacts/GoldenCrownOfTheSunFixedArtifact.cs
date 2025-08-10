@@ -15,7 +15,4 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
     public override string Name => "The Golden Crown of the Sun";
     public override int Level => 40;
     public override int Rarity => 40;
-    public override int ToA => 15;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

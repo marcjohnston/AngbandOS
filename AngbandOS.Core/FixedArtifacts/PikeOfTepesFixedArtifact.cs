@@ -15,7 +15,4 @@ internal class PikeOfTepesFixedArtifact : FixedArtifact
     public override string Name => "The Pike of Tepes";
     public override int Level => 20;
     public override int Rarity => 15;
-    public override int ToA => 10;
-    public override int ToD => 12;
-    public override int ToH => 10;
 }

@@ -15,7 +15,4 @@ internal class LongBowSureshotFixedArtifact : FixedArtifact
     public override string Name => "The Long Bow 'Sureshot'";
     public override int Level => 40;
     public override int Rarity => 20;
-    public override int ToA => 0;
-    public override int ToD => 22;
-    public override int ToH => 20;
 }

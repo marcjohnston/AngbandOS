@@ -21,8 +21,8 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     {
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
 
-        // Cut and paste
-        //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override int Ds => ");
+        //// Cut and paste
+        //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override int ToD => ");
         //if (property is null)
         //    throw new Exception("");
         //MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
@@ -35,8 +35,8 @@ internal abstract class FixedArtifact : IGetKey, IToJson
         //    mappedItemEnhancement.Bind();
         //    BaseItemFactory.Bind();
         //    ItemEnhancement itemEnhancement = mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement();
-        //    if (BaseItemFactory.ItemEnhancement is not null && BaseItemFactory.ItemEnhancement.DiceSides != Ds)
-        //        Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, $"    public override int DamageSides => {Ds - BaseItemFactory.ItemEnhancement.DiceSides};");
+        //    if ((BaseItemFactory.ItemEnhancement?.BonusDamageRollExpression == null ? 0 : Int32.Parse(BaseItemFactory.ItemEnhancement.BonusDamageRollExpression)) != ToD)
+        //        Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, $"    public override string BonusDamageRollExpression => \"{ToD - (BaseItemFactory.ItemEnhancement?.BonusDamageRollExpression is null ? 0 : Int32.Parse(BaseItemFactory.ItemEnhancement.BonusDamageRollExpression))}\";");
         //    //Debug.Print($"{itemEnhancement.GetKey} public override int DamageSides => {itemEnhancement.DiceSides - BaseItemFactory.ItemEnhancement.DiceSides};");
         //    //Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, property);
         //}
@@ -83,10 +83,4 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     public abstract int Level { get; } // TODO: Need to convert this to an enhancement.  This must be used outside of the ItemEnhancement
 
     public abstract int Rarity { get; } // TODO: Need to convert this to an enhancement.  This must be used outside of the ItemEnhancement
-
-    public abstract int ToA { get; } // TODO: Need to convert this to an enhancement
-
-    public abstract int ToD { get; } // TODO: Need to convert this to an enhancement
-
-    public abstract int ToH { get; } // TODO: Need to convert this to an enhancement
 }

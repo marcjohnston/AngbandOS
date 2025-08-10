@@ -15,7 +15,4 @@ internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact
     public override string Name => "The Long Sword of the Dawn";
     public override int Level => 40;
     public override int Rarity => 120;
-    public override int ToA => 0;
-    public override int ToD => 20;
-    public override int ToH => 20;
 }

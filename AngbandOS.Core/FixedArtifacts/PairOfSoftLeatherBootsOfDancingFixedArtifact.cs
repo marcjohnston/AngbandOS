@@ -15,7 +15,4 @@ internal class PairOfSoftLeatherBootsOfDancingFixedArtifact : FixedArtifact
     public override string Name => "The Pair of Soft Leather Boots of Dancing";
     public override int Level => 10;
     public override int Rarity => 25;
-    public override int ToA => 15;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

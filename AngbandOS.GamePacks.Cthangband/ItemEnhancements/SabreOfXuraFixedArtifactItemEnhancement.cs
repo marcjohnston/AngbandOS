@@ -33,4 +33,6 @@ public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool SustStr => true;
     public override int Cost => 125000;
     public override int DamageDice => 1;
+    public override string BonusHitRollExpression => "20";
+    public override string BonusDamageRollExpression => "12";
 }

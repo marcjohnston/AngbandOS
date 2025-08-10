@@ -15,7 +15,4 @@ internal class RapierOfMontoyaFixedArtifact : FixedArtifact
     public override string Name => "The Rapier of Montoya";
     public override int Level => 15;
     public override int Rarity => 8;
-    public override int ToA => 0;
-    public override int ToD => 19;
-    public override int ToH => 12;
 }

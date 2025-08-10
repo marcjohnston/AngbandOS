@@ -49,7 +49,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BonusAttacksRollExpression = itemEnhancementGameConfiguration.BonusAttacksRollExpression;
         BonusSpeedRollExpression = itemEnhancementGameConfiguration.BonusSpeedRollExpression;
         BonusArmorClassRollExpression = itemEnhancementGameConfiguration.BonusArmorClassRollExpression;
-        BonusHitRollExpression = itemEnhancementGameConfiguration.BonusHitRollExpression;
+        BonusHitsRollExpression = itemEnhancementGameConfiguration.BonusHitRollExpression;
         BonusDamageRollExpression = itemEnhancementGameConfiguration.BonusDamageRollExpression;
         ActivationName = itemEnhancementGameConfiguration.ActivationName;
         Aggravate = itemEnhancementGameConfiguration.Aggravate;
@@ -296,7 +296,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BonusSpeedRoll = Game.ParseNullableNumericExpression(BonusSpeedRollExpression);
 
         BonusArmorClassRoll = Game.ParseNullableNumericExpression(BonusArmorClassRollExpression);
-        BonusHitRoll = Game.ParseNullableNumericExpression(BonusHitRollExpression);
+        BonusHitRoll = Game.ParseNullableNumericExpression(BonusHitsRollExpression);
         BonusDamageRoll = Game.ParseNullableNumericExpression(BonusDamageRollExpression);
 
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
@@ -333,7 +333,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             BonusAttacksRollExpression = BonusAttacksRollExpression,
             BonusSpeedRollExpression = BonusSpeedRollExpression,
             BonusArmorClassRollExpression = BonusArmorClassRollExpression,
-            BonusHitRollExpression = BonusHitRollExpression,
+            BonusHitRollExpression = BonusHitsRollExpression,
             BonusDamageRollExpression = BonusDamageRollExpression,
             ActivationName = ActivationName,
             Aggravate = Aggravate,
@@ -541,9 +541,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 
     private string? BonusArmorClassRollExpression { get; } = null;
 
-    private string? BonusHitRollExpression { get; } = null;
+    private string? BonusHitsRollExpression { get; } = null;
 
-    private string? BonusDamageRollExpression { get; } = null;
+    public string? BonusDamageRollExpression { get; } = null;
 
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and
@@ -589,8 +589,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// <inheritdoc />
     private bool IsCursed { get; } = false;
 
-    public int DamageDice { get; } = 0;
-    public int DiceSides { get; } = 0;
+    private int DamageDice { get; } = 0;
+    private int DiceSides { get; } = 0;
 
     /// <inheritdoc />
     private bool DrainExp { get; } = false;

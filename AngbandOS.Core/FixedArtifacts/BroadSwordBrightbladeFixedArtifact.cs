@@ -15,7 +15,4 @@ internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
     public override string Name => "The Broad Sword 'Brightblade'";
     public override int Level => 20;
     public override int Rarity => 20;
-    public override int ToA => 0;
-    public override int ToD => 15;
-    public override int ToH => 10;
 }

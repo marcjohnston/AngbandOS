@@ -15,7 +15,4 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
     public override string Name => "The War Hammer 'Mjolnir'";
     public override int Level => 40;
     public override int Rarity => 75;
-    public override int ToA => 5;
-    public override int ToD => 21;
-    public override int ToH => 19;
 }

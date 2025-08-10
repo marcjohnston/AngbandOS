@@ -29,4 +29,7 @@ public class MightyHammerOfWorldsFixedArtifactItemEnhancement : ItemEnhancementG
     public override int Weight => 800;
     public override int Cost => 500000;
     public override int DamageDice => 6;
+    public override string BonusAttacksRollExpression => "10";
+    public override string BonusHitRollExpression => "5";
+    public override string BonusDamageRollExpression => "25";
 }

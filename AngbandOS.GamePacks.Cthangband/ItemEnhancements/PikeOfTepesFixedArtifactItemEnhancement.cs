@@ -27,4 +27,7 @@ public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool SlowDigest => true;
     public override bool SustInt => true;
     public override int Cost => 32000;
+    public override string BonusAttacksRollExpression => "10";
+    public override string BonusHitRollExpression => "10";
+    public override string BonusDamageRollExpression => "12";
 }

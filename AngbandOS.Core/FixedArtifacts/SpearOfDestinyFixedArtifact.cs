@@ -15,7 +15,4 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact
     public override string Name => "The Spear of Destiny";
     public override int Level => 15;
     public override int Rarity => 45;
-    public override int ToA => 0;
-    public override int ToD => 15;
-    public override int ToH => 15;
 }

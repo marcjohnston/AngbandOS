@@ -15,7 +15,4 @@ internal class CloakShadeFixedArtifact : FixedArtifact
     public override string Name => "The Cloak 'Shade'";
     public override int Level => 5;
     public override int Rarity => 20;
-    public override int ToA => 10;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

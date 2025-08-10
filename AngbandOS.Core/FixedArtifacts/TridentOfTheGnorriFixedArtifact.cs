@@ -15,7 +15,4 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact
     public override string Name => "The Trident of the Gnorri";
     public override int Level => 30;
     public override int Rarity => 90;
-    public override int ToA => 0;
-    public override int ToD => 19;
-    public override int ToH => 15;
 }

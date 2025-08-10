@@ -15,7 +15,4 @@ internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
     public override string Name => "The Large Leather Shield 'Rawhide'";
     public override int Level => 30;
     public override int Rarity => 3;
-    public override int ToA => 20;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

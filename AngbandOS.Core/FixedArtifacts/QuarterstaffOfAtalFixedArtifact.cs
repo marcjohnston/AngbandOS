@@ -15,7 +15,4 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
     public override string Name => "The Quarterstaff of Atal";
     public override int Level => 30;
     public override int Rarity => 105;
-    public override int ToA => 0;
-    public override int ToD => 13;
-    public override int ToH => 10;
 }

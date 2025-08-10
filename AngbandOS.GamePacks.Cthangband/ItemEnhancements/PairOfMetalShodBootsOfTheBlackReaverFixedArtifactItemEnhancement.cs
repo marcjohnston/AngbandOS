@@ -15,4 +15,5 @@ public class PairOfMetalShodBootsOfTheBlackReaverFixedArtifactItemEnhancement : 
     public override string? BonusSpeedRollExpression => "10";
     public override string? BonusStrengthRollExpression => "10";
     public override int Cost => 15000;
+    public override string BonusAttacksRollExpression => "20";
 }

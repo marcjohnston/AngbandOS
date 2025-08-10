@@ -15,7 +15,4 @@ internal class FullPlateArmorOfTheGodsFixedArtifact : FixedArtifact
     public override string Name => "The Full Plate Armor of the Gods";
     public override int Level => 30;
     public override int Rarity => 3;
-    public override int ToA => 25;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

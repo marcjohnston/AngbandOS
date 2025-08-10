@@ -15,7 +15,4 @@ internal class DaggerOfAssassinFixedArtifact : FixedArtifact
     public override string Name => "The Dagger of Assassin";
     public override int Level => 20;
     public override int Rarity => 80;
-    public override int ToA => 5;
-    public override int ToD => 15;
-    public override int ToH => 10;
 }

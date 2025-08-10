@@ -25,4 +25,6 @@ public class MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement : It
     public override bool ResPois => true;
     public override bool SeeInvis => true;
     public override int Cost => 135000;
+    public override string BonusAttacksRollExpression => "20";
+    public override string BonusHitRollExpression => "-1";
 }

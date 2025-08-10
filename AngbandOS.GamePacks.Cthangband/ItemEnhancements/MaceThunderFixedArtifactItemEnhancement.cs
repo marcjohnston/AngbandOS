@@ -18,4 +18,6 @@ public class MaceThunderFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override int Weight => 80;
     public override int Cost => 50000;
     public override int DamageDice => 1;
+    public override string BonusHitRollExpression => "12";
+    public override string BonusDamageRollExpression => "12";
 }

@@ -15,7 +15,4 @@ internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact
     public override string Name => "The Set of Gauntlets of Ghouls";
     public override int Level => 10;
     public override int Rarity => 20;
-    public override int ToA => 15;
-    public override int ToD => 0;
-    public override int ToH => 0;
 }

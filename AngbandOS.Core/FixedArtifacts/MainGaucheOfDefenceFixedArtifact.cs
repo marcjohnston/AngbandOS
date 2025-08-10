@@ -15,7 +15,4 @@ internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
     public override string Name => "The Main Gauche of Defence";
     public override int Level => 15;
     public override int Rarity => 30;
-    public override int ToA => 0;
-    public override int ToD => 15;
-    public override int ToH => 12;
 }

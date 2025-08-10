@@ -15,7 +15,4 @@ internal class MorningStarBloodspikeFixedArtifact : FixedArtifact
     public override string Name => "The Morning Star 'Bloodspike'";
     public override int Level => 20;
     public override int Rarity => 30;
-    public override int ToA => 0;
-    public override int ToD => 22;
-    public override int ToH => 8;
 }

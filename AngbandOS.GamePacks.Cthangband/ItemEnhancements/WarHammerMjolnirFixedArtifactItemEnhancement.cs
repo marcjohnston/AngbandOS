@@ -32,4 +32,7 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool Telepathy => true;
     public override int Cost => 250000;
     public override int DamageDice => 6;
+    public override string BonusAttacksRollExpression => "5";
+    public override string BonusHitRollExpression => "19";
+    public override string BonusDamageRollExpression => "21";
 }

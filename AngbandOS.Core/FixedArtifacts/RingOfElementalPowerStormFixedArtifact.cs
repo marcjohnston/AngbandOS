@@ -16,7 +16,4 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact
     public override bool HasOwnType => true;
     public override int Level => 90;
     public override int Rarity => 50;
-    public override int ToA => 0;
-    public override int ToD => 12;
-    public override int ToH => 12;
 }

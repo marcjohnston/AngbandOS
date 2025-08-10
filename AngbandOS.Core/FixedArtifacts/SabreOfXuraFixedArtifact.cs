@@ -15,7 +15,4 @@ internal class SabreOfXuraFixedArtifact : FixedArtifact
     public override string Name => "The Sabre of Xura";
     public override int Level => 20;
     public override int Rarity => 45;
-    public override int ToA => 0;
-    public override int ToD => 12;
-    public override int ToH => 20;
 }

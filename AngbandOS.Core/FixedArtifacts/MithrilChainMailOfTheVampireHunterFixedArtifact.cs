@@ -15,7 +15,4 @@ internal class MithrilChainMailOfTheVampireHunterFixedArtifact : FixedArtifact
     public override string Name => "The Mithril Chain Mail of the Vampire Hunter";
     public override int Level => 40;
     public override int Rarity => 3;
-    public override int ToA => 20;
-    public override int ToD => 0;
-    public override int ToH => -1;
 }

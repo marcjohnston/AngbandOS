@@ -15,7 +15,4 @@ internal class GreatAxeOfTheYeeksFixedArtifact : FixedArtifact
     public override string Name => "The Great Axe of the Yeeks";
     public override int Level => 30;
     public override int Rarity => 90;
-    public override int ToA => 15;
-    public override int ToD => 20;
-    public override int ToH => 10;
 }
