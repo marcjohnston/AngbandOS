@@ -209,7 +209,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ImElec = ImElec,
             ImFire = ImFire,
             Impact = Impact,
-            Infra = Infra,
             NoMagic = NoMagic,
             NoTele = NoTele,
             PermaCurse = PermaCurse,
@@ -232,7 +231,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ResPois = ResPois,
             ResShards = ResShards,
             ResSound = ResSound,
-            Search = Search,
             SeeInvis = SeeInvis,
             ShElec = ShElec,
             ShFire = ShFire,
@@ -246,8 +244,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             SlayTroll = SlayTroll,
             SlayUndead = SlayUndead,
             SlowDigest = SlowDigest,
-            Speed = Speed,
-            Stealth = Stealth,
             SustCha = SustCha,
             SustCon = SustCon,
             SustDex = SustDex,
@@ -257,7 +253,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Telepathy = Telepathy,
             Teleport = Teleport,
             TreasureRating = TreasureRating,
-            Tunnel = Tunnel,
             Value = Value,
             Valueless = Valueless,
             Vampiric = Vampiric,
@@ -642,13 +637,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     
     /// <inheritdoc />
     private bool Impact { get; } = false;
-    
-    /// <inheritdoc />
-    private bool Infra { get; } = false;
-   
-    /// <inheritdoc />
-    private bool KillDragon { get; } = false;
-    
+        
     /// <inheritdoc />
     private bool NoMagic { get; } = false;
     
@@ -714,10 +703,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     
     /// <inheritdoc />
     private bool ResSound { get; } = false;
-    
-    /// <inheritdoc />
-    private bool Search { get; } = false;
-    
+        
     /// <inheritdoc />
     private bool SeeInvis { get; } = false;
     
@@ -756,13 +742,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     
     /// <inheritdoc />
     private bool SlowDigest { get; } = false;
-    
-    /// <inheritdoc />
-    private bool Speed { get; } = false;
-    
-    /// <inheritdoc />
-    private bool Stealth { get; } = false;
-    
+        
     /// <inheritdoc />
     private bool SustCha { get; } = false;
     
@@ -789,9 +769,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 
     /// <inheritdoc />
     public int TreasureRating { get; } = 0;
-
-    /// <inheritdoc />
-    private bool Tunnel { get; } = false;
 
     /// <inheritdoc />
     private bool Valueless { get; } = false;

@@ -106,23 +106,11 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(Cha, effectivePropertySet.Cha))
-        {
-            return false;
-        }
         if (!TestBoolean(Chaotic, effectivePropertySet.Chaotic))
         {
             return false;
         }
-        if (!TestBoolean(Con, effectivePropertySet.Con))
-        {
-            return false;
-        }
         if (!TestBoolean(IsCursed, effectivePropertySet.IsCursed))
-        {
-            return false;
-        }
-        if (!TestBoolean(Dex, effectivePropertySet.Dex))
         {
             return false;
         }
@@ -191,14 +179,6 @@ internal abstract class ItemTest : IGetKey
             return false;
         }
         if (!TestBoolean(Impact, effectivePropertySet.Impact))
-        {
-            return false;
-        }
-        if (!TestBoolean(Infra, effectivePropertySet.Infra))
-        {
-            return false;
-        }
-        if (!TestBoolean(Int, effectivePropertySet.Int))
         {
             return false;
         }
@@ -290,10 +270,6 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(Search, effectivePropertySet.Search))
-        {
-            return false;
-        }
         if (!TestBoolean(SeeInvis, effectivePropertySet.SeeInvis))
         {
             return false;
@@ -354,18 +330,6 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(Speed, effectivePropertySet.Speed))
-        {
-            return false;
-        }
-        if (!TestBoolean(Stealth, effectivePropertySet.Stealth))
-        {
-            return false;
-        }
-        if (!TestBoolean(Str, effectivePropertySet.Str))
-        {
-            return false;
-        }
         if (!TestBoolean(SustCha, effectivePropertySet.SustCha))
         {
             return false;
@@ -402,19 +366,11 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(Tunnel, effectivePropertySet.Tunnel))
-        {
-            return false;
-        }
         if (!TestBoolean(Vampiric, effectivePropertySet.Vampiric))
         {
             return false;
         }
         if (!TestBoolean(Vorpal, effectivePropertySet.Vorpal))
-        {
-            return false;
-        }
-        if (!TestBoolean(Wis, effectivePropertySet.Wis))
         {
             return false;
         }
@@ -458,15 +414,9 @@ internal abstract class ItemTest : IGetKey
 
     public virtual bool? BrandPois => null;
 
-    public virtual bool? Cha => null;
-
     public virtual bool? Chaotic => null;
 
-    public virtual bool? Con => null;
-
     public virtual bool? IsCursed => null;
-
-    public virtual bool? Dex => null;
 
     public virtual bool? DrainExp => null;
 
@@ -501,10 +451,6 @@ internal abstract class ItemTest : IGetKey
     public virtual bool? ImFire => null;
 
     public virtual bool? Impact => null;
-
-    public virtual bool? Infra => null;
-
-    public virtual bool? Int => null;
 
     public virtual bool? NoMagic => null;
 
@@ -550,8 +496,6 @@ internal abstract class ItemTest : IGetKey
 
     public virtual bool? ResSound => null;
 
-    public virtual bool? Search => null;
-
     public virtual bool? SeeInvis => null;
 
     public virtual bool? FactoryAllowsShElecricity => null;
@@ -582,12 +526,6 @@ internal abstract class ItemTest : IGetKey
 
     public virtual bool? SlowDigest => null;
 
-    public virtual bool? Speed => null;
-
-    public virtual bool? Stealth => null;
-
-    public virtual bool? Str => null;
-
     public virtual bool? SustCha => null;
 
     public virtual bool? SustCon => null;
@@ -606,13 +544,9 @@ internal abstract class ItemTest : IGetKey
 
     public virtual bool? TreasureRating => null;
 
-    public virtual bool? Tunnel => null;
-
     public virtual bool? Vampiric => null;
 
     public virtual bool? Vorpal => null;
-
-    public virtual bool? Wis => null;
 
     public virtual bool? Wraith => null;
 

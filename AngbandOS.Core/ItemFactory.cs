@@ -1076,7 +1076,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 11:
                 case 12:
-                    characteristics.Cha = true;
                     characteristics.BonusCharisma = Game.EnchantBonus(characteristics.BonusCharisma);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
