@@ -14,7 +14,6 @@ internal class RingOfSetFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(PowerRingItemFactory);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Ring of Set";
-    public override int Ds => 1;
     public override bool HasOwnType => true;
     public override int Level => 100;
     public override int Rarity => 100;

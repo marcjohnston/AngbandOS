@@ -13,7 +13,6 @@ internal class GlaiveOfPainFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(GlaivePolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Glaive of Pain";
-    public override int Ds => 6;
     public override int Level => 30;
     public override int Rarity => 25;
     public override int ToA => 0;

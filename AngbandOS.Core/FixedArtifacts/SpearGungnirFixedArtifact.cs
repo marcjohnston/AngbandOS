@@ -13,7 +13,6 @@ internal class SpearGungnirFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear 'Gungnir'";
-    public override int Ds => 6;
     public override int Level => 15;
     public override int Rarity => 45;
     public override int ToA => 5;

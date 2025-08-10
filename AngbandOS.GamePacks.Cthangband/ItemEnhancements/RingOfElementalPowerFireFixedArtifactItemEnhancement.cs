@@ -28,4 +28,5 @@ public class RingOfElementalPowerFireFixedArtifactItemEnhancement : ItemEnhancem
     public override bool SustStr => true;
     public override int Cost => 100000;
     public override int DamageDice => 1;
+    public override int DiceSides => 1;
 }

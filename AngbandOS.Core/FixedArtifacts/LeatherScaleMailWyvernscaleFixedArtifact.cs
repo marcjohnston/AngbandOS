@@ -13,7 +13,6 @@ internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(LeatherScaleMailSoftArmorItemFactory);
     public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Leather Scale Mail 'Wyvernscale'";
-    public override int Ds => 1;
     public override int Level => 20;
     public override int Rarity => 3;
     public override int ToA => 25;

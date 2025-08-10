@@ -13,7 +13,6 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MetalScaleMailHardArmorItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Metal Scale Mail of the Orcs";
-    public override int Ds => 4;
     public override int Level => 40;
     public override int Rarity => 3;
     public override int ToA => 40;

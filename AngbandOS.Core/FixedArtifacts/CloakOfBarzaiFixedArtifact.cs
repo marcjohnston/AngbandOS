@@ -13,7 +13,6 @@ internal class CloakOfBarzaiFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
     public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak of Barzai";
-    public override int Ds => 0;
     public override int Level => 5;
     public override int Rarity => 45;
     public override int ToA => 15;

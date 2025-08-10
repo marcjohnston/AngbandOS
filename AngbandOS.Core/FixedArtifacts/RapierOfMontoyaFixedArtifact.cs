@@ -13,7 +13,6 @@ internal class RapierOfMontoyaFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(RapierWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Rapier of Montoya";
-    public override int Ds => 6;
     public override int Level => 15;
     public override int Rarity => 8;
     public override int ToA => 0;

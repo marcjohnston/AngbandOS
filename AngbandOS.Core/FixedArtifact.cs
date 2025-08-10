@@ -21,8 +21,8 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     {
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
 
-        //// Cut and paste
-        //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override int Dd => ");
+        // Cut and paste
+        //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override int Ds => ");
         //if (property is null)
         //    throw new Exception("");
         //MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
@@ -35,9 +35,10 @@ internal abstract class FixedArtifact : IGetKey, IToJson
         //    mappedItemEnhancement.Bind();
         //    BaseItemFactory.Bind();
         //    ItemEnhancement itemEnhancement = mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement();
-        //    if (BaseItemFactory.ItemEnhancement is not null && BaseItemFactory.ItemEnhancement.DamageDice != itemEnhancement.Dd)
-        //        Debug.Print($"{itemEnhancement.GetKey} public override int Dd => {itemEnhancement.Dd - BaseItemFactory.ItemEnhancement.DamageDice};");
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, property);
+        //    if (BaseItemFactory.ItemEnhancement is not null && BaseItemFactory.ItemEnhancement.DiceSides != Ds)
+        //        Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, $"    public override int DamageSides => {Ds - BaseItemFactory.ItemEnhancement.DiceSides};");
+        //    //Debug.Print($"{itemEnhancement.GetKey} public override int DamageSides => {itemEnhancement.DiceSides - BaseItemFactory.ItemEnhancement.DiceSides};");
+        //    //Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, property);
         //}
     }
 
@@ -76,8 +77,6 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     public virtual ColorEnum Color => ColorEnum.White; // TODO: This must be used outside of the ItemEnhancement
     public virtual bool DisableStomp => false;
     public abstract string Name { get; } // TODO: This must be used outside of the ItemEnhancement
-
-    public abstract int Ds { get; } // TODO: Need to convert this to an enhancement
 
     public virtual bool HasOwnType => false; // TODO: What is this?
 

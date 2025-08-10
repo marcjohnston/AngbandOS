@@ -13,7 +13,6 @@ internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(IronHelmItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Helm 'Terror Mask'";
-    public override int Ds => 3;
     public override int Level => 20;
     public override int Rarity => 5;
     public override int ToA => 10;

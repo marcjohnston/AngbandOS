@@ -13,7 +13,6 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger of Thoth";
-    public override int Ds => 4;
     public override int Level => 5;
     public override int Rarity => 40;
     public override int ToA => 0;

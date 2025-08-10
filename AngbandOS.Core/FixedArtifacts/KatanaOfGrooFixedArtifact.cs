@@ -13,7 +13,6 @@ internal class KatanaOfGrooFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(KatanaWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Katana of Groo";
-    public override int Ds => 4;
     public override int Level => 30;
     public override int Rarity => 25;
     public override int ToA => 0;

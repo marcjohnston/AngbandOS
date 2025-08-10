@@ -14,7 +14,6 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact
     public string DescribeActivationEffect => "a getaway every 35 turns";
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword of Karakal";
-    public override int Ds => 5;
     public override int Level => 20;
     public override int Rarity => 30;
     public override int ToA => 0;

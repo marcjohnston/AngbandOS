@@ -13,7 +13,6 @@ internal class SabreOfXuraFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(SabreWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Sabre of Xura";
-    public override int Ds => 7;
     public override int Level => 20;
     public override int Rarity => 45;
     public override int ToA => 0;

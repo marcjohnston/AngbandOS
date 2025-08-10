@@ -13,7 +13,6 @@ internal class TridentOfWrathFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(TridentPolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Trident of Wrath";
-    public override int Ds => 8;
     public override int Level => 15;
     public override int Rarity => 35;
     public override int ToA => 0;

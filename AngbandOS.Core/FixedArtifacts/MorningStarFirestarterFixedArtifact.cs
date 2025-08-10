@@ -13,7 +13,6 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MorningStarHaftedWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Morning Star 'Firestarter'";
-    public override int Ds => 6;
     public override int Level => 20;
     public override int Rarity => 15;
     public override int ToA => 2;

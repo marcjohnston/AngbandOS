@@ -12,7 +12,6 @@ internal class AmuletOfLobonFixedArtifact : FixedArtifact
     private AmuletOfLobonFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(CarlammasAmuletItemFactory);
     public override string Name => "The Amulet of Lobon";
-    public override int Ds => 0;
     public override bool HasOwnType => true;
     public override int Level => 50;
     public override int Rarity => 10;

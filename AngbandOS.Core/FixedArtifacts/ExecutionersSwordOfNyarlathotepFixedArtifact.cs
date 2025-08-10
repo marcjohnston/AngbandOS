@@ -13,7 +13,6 @@ internal class ExecutionersSwordOfNyarlathotepFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(ExecutionersSwordWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "The Executioner's Sword of Nyarlathotep";
-    public override int Ds => 5;
     public override int Level => 40;
     public override int Rarity => 15;
     public override int ToA => 0;

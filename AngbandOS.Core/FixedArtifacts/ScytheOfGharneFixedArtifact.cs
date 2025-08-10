@@ -13,7 +13,6 @@ internal class ScytheOfGharneFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(ScythePolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Scythe of G'harne";
-    public override int Ds => 3;
     public override int Level => 40;
     public override int Rarity => 8;
     public override int ToA => 10;

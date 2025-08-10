@@ -2038,7 +2038,6 @@ internal sealed class Item : IComparable<Item>
         fixedArtifact.CurNum = 1;
 
         // TODO: These should be deltas on the item enhancements
-        EffectivePropertySet.DiceSides = fixedArtifact.Ds;
         EffectivePropertySet.BonusAttacks = fixedArtifact.ToA;
         EffectivePropertySet.BonusHit = fixedArtifact.ToH;
         EffectivePropertySet.BonusDamage = fixedArtifact.ToD;

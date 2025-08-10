@@ -13,7 +13,6 @@ internal class BroadAxeOfNodensFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BroadAxePolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Broad Axe of Nodens";
-    public override int Ds => 6;
     public override int Level => 20;
     public override int Rarity => 8;
     public override int ToA => 0;

@@ -13,7 +13,6 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(BattleAxePolearmWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Battle Axe 'Spleen Slicer'";
-    public override int Ds => 8;
     public override int Level => 30;
     public override int Rarity => 15;
     public override int ToA => 0;

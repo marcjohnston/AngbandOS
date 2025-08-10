@@ -13,7 +13,6 @@ internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(MaceHaftedWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "The Mace of Disruption 'Deathwreaker'";
-    public override int Ds => 8;
     public override int Level => 80;
     public override int Rarity => 38;
     public override int ToA => 0;

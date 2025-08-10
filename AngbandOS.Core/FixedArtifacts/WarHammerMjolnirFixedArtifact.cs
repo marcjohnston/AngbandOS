@@ -13,7 +13,6 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(WarHammerHaftedWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The War Hammer 'Mjolnir'";
-    public override int Ds => 3;
     public override int Level => 40;
     public override int Rarity => 75;
     public override int ToA => 5;

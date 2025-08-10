@@ -13,7 +13,6 @@ internal class DaggerOfAssassinFixedArtifact : FixedArtifact
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
     public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger of Assassin";
-    public override int Ds => 4;
     public override int Level => 20;
     public override int Rarity => 80;
     public override int ToA => 5;
