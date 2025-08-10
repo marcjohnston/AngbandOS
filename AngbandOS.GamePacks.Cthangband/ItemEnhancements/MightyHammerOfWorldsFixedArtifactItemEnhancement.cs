@@ -28,5 +28,5 @@ public class MightyHammerOfWorldsFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool Telepathy => true;
     public override int Weight => 800;
     public override int Cost => 500000;
-    public override int DamageDice => 9;
+    public override int DamageDice => 6;
 }

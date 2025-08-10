@@ -27,5 +27,5 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int Radius => 3;
     public override bool Telepathy => true;
     public override int Cost => 120000;
-    public override int DamageDice => 4;
+    public override int DamageDice => 3;
 }

@@ -15,5 +15,4 @@ public class HardLeatherCapOfTheMindcrafterFixedArtifactItemEnhancement : ItemEn
     public override bool ResBlind => true;
     public override bool Telepathy => true;
     public override int Cost => 50000;
-    public override int DamageDice => 0;
 }

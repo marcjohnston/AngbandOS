@@ -21,5 +21,5 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool SlayEvil => true;
     public override bool SlayTroll => true;
     public override int Cost => 100000;
-    public override int DamageDice => 5;
+    public override int DamageDice => 2;
 }

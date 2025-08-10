@@ -19,5 +19,4 @@ public class DaggerFaithFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool ResFire => true;
     public override bool ShowMods => true;
     public override int Cost => 12000;
-    public override int DamageDice => 1;
 }

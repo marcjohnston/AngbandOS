@@ -26,5 +26,4 @@ public class MultiHuedDragonScaleMailRazorbackFixedArtifactItemEnhancement : Ite
     public override bool SeeInvis => true;
     public override int Weight => 300;
     public override int Cost => 400000;
-    public override int DamageDice => 2;
 }

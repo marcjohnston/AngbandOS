@@ -20,5 +20,4 @@ public class QuarterstaffFirestaffFixedArtifactItemEnhancement : ItemEnhancement
     public override bool ShowMods => true;
     public override bool SlayAnimal => true;
     public override int Cost => 70000;
-    public override int DamageDice => 1;
 }

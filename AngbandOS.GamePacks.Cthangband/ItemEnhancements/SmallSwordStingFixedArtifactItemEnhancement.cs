@@ -26,5 +26,4 @@ public class SmallSwordStingFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override bool SlayUndead => true;
     public override int Weight => -5;
     public override int Cost => 100000;
-    public override int DamageDice => 1;
 }

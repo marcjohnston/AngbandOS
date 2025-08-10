@@ -15,5 +15,4 @@ public class SetOfGauntletsOfGhoulsFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool ResCold => true;
     public override bool SustCon => true;
     public override int Cost => 33000;
-    public override int DamageDice => 1;
 }

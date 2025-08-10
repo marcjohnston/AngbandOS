@@ -14,5 +14,4 @@ public class SteelHelmOfHammerhandFixedArtifactItemEnhancement : ItemEnhancement
     public override bool ResAcid => true;
     public override bool ResNexus => true;
     public override int Cost => 45000;
-    public override int DamageDice => 1;
 }

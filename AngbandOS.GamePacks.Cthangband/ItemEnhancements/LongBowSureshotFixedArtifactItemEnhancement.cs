@@ -16,5 +16,4 @@ public class LongBowSureshotFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override bool ShowMods => true;
     public override bool XtraShots => true;
     public override int Cost => 35000;
-    public override int DamageDice => 0;
 }

@@ -16,5 +16,4 @@ public class StarEssenceOfPolarisFixedArtifactItemEnhancement : ItemEnhancementG
     /// </summary>
     public override int Radius => 1;
     public override int Cost => 10000;
-    public override int DamageDice => 1;
 }

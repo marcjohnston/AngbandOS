@@ -31,5 +31,5 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool SlayTroll => true;
     public override bool SlowDigest => true;
     public override int Cost => 180000;
-    public override int DamageDice => 4;
+    public override int DamageDice => 3;
 }

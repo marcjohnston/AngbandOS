@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Diagnostics;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -23,16 +25,20 @@ internal abstract class FixedArtifact : IGetKey, IToJson
         //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override int Dd => ");
         //if (property is null)
         //    throw new Exception("");
-        MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
-        MappedItemEnhancement[]? mappedItemEnhancements = allMappedItemEnhancements.Where(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(GetKey))).ToArray(); // Must match the character class
+        //MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
+        //MappedItemEnhancement[]? mappedItemEnhancements = allMappedItemEnhancements.Where(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(GetKey))).ToArray(); // Must match the character class
 
         //if (mappedItemEnhancements.Length == 0)
         //    throw new Exception("");
-        foreach (MappedItemEnhancement mappedItemEnhancement in mappedItemEnhancements)
-        {
+        //foreach (MappedItemEnhancement mappedItemEnhancement in mappedItemEnhancements)
+        //{
         //    mappedItemEnhancement.Bind();
+        //    BaseItemFactory.Bind();
+        //    ItemEnhancement itemEnhancement = mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement();
+        //    if (BaseItemFactory.ItemEnhancement is not null && BaseItemFactory.ItemEnhancement.DamageDice != itemEnhancement.Dd)
+        //        Debug.Print($"{itemEnhancement.GetKey} public override int Dd => {itemEnhancement.Dd - BaseItemFactory.ItemEnhancement.DamageDice};");
         //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, property);
-        }
+        //}
     }
 
     public string ToJson()

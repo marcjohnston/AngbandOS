@@ -16,5 +16,4 @@ public class DaggerHopeFixedArtifactItemEnhancement : ItemEnhancementGameConfigu
     public override bool ResCold => true;
     public override bool ShowMods => true;
     public override int Cost => 11000;
-    public override int DamageDice => 1;
 }

@@ -15,5 +15,4 @@ public class LeatherScaleMailWyvernscaleFixedArtifactItemEnhancement : ItemEnhan
     public override bool ResShards => true;
     public override int Weight => -80;
     public override int Cost => 25000;
-    public override int DamageDice => 1;
 }

@@ -20,5 +20,4 @@ public class ShadowCloakOfNyogthaFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool ResCold => true;
     public override bool ResFire => true;
     public override int Cost => 55000;
-    public override int DamageDice => 0;
 }

@@ -21,5 +21,4 @@ public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnh
     public override bool SustCon => true;
     public override int Value => 280000; // Total 300000
     public override int Cost => 300000;
-    public override int DamageDice => 2;
 }

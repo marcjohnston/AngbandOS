@@ -20,5 +20,4 @@ public class MetalBrigandineArmorOfSerpentsFixedArtifactItemEnhancement : ItemEn
     public override bool ResSound => true;
     public override int Weight => -90;
     public override int Cost => 30000;
-    public override int DamageDice => 1;
 }

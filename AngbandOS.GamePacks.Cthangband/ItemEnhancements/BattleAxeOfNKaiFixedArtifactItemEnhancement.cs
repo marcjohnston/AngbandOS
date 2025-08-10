@@ -27,5 +27,5 @@ public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override int Cost => 90000;
-    public override int DamageDice => 3;
+    public override int DamageDice => 1;
 }

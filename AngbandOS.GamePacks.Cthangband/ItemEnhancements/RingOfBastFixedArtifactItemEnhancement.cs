@@ -17,5 +17,4 @@ public class RingOfBastFixedArtifactItemEnhancement : ItemEnhancementGameConfigu
     public override string? BonusSpeedRollExpression => "4";
     public override string? BonusStrengthRollExpression => "4";
     public override int Cost => 175000;
-    public override int DamageDice => 0;
 }
