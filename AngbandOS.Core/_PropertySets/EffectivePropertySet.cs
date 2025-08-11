@@ -314,6 +314,14 @@ internal class EffectivePropertySet
         return value;
     }
 
+    public ColorEnum GetColorValue(PropertyEnum propertyEnum)
+    {
+        PropertyValue effectiveItemProperty = GetValue(propertyEnum);
+        ColorEnumPropertyValue colorPropertyValue = (ColorEnumPropertyValue)effectiveItemProperty;
+        ColorEnum value = colorPropertyValue.Value;
+        return value;
+    }
+
     public T? GetReferenceValue<T>(PropertyEnum propertyEnum) where T : class
     {
         PropertyValue effectiveItemProperty = GetValue(propertyEnum);
@@ -341,6 +349,11 @@ internal class EffectivePropertySet
     public void SetIntValue(PropertyEnum propertyEnum, int value)
     {
         SetValue(propertyEnum, new IntPropertyValue(value));
+    }
+
+    public void SetColorValue(PropertyEnum propertyEnum, ColorEnum value)
+    {
+        SetValue(propertyEnum, new ColorEnumPropertyValue(value));
     }
 
     public void AddIntValue(PropertyEnum propertyEnum, int value)
@@ -662,17 +675,6 @@ internal class EffectivePropertySet
             SetBoolValue(PropertyEnum.Blessed, value);
         }
     }
-    //public bool Blows
-    //{
-    //    get
-    //    {
-    //        return GetBoolValue(PropertyEnum.Blows);
-    //    }
-    //    set
-    //    {
-    //        SetBoolValue(PropertyEnum.Blows, value);
-    //    }
-    //}
     public bool BrandAcid
     {
         get
@@ -737,6 +739,17 @@ internal class EffectivePropertySet
         set
         {
             SetBoolValue(PropertyEnum.Chaotic, value);
+        }
+    }
+    public ColorEnum Color
+    {
+        get
+        {
+            return GetColorValue(PropertyEnum.Color);
+        }
+        set
+        {
+            SetColorValue(PropertyEnum.Color, value);
         }
     }
     public int Cost
