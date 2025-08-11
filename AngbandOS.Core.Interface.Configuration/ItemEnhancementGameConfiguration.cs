@@ -98,6 +98,13 @@ public class ItemEnhancementGameConfiguration
     public virtual bool BrandFire { get; set; } = false;
     public virtual bool BrandPois { get; set; } = false;
     public virtual bool Chaotic { get; set; } = false;
+
+    /// <summary>
+    /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
+    /// that have flavor may change the FlavorColor based on the flavor.
+    /// </summary>
+    public ColorEnum Color { get; } = ColorEnum.White;
+
     public virtual int Cost { get; set; } = 0;
     public virtual bool IsCursed { get; set; } = false;
     public virtual int DamageDice { get; set; } = 0;

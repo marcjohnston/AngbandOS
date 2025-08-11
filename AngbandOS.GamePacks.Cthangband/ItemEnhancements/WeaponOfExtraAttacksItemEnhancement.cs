@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfExtraAttacksItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Blows => true;
     public override int Value => 10000;
     public override string? FriendlyName => "of Extra Attacks";
     public override string? BonusAttacksRollExpression => "1d3";

@@ -13744,7 +13744,7 @@ internal class Game
         }
         if (BaseCharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSpeedLevel && !MartialArtistHeavyArmor())
         {
-            itemCharacteristics.Speed = true;
+            itemCharacteristics.BonusSpeed++;
         }
         if (BaseCharacterClass.InstantFreeActionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFreeActionLevel && !MartialArtistHeavyArmor())
         {
@@ -13842,7 +13842,7 @@ internal class Game
         }
         if (SpeedBonus != 0)
         {
-            itemCharacteristics.Speed = true;
+            itemCharacteristics.BonusSpeed++;
         }
         if (ElecHit)
         {

@@ -5,7 +5,6 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
 {
     // Karakal teleports you randomly
     public override string? ActivationName => nameof(ActivationsEnum.GetawayEvery35Activation);
-    public override bool Blows => true;
     public override bool BrandElec => true;
     public override bool Chaotic => true;
     public override int TreasureRating => 20;

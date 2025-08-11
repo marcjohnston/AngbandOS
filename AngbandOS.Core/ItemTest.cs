@@ -82,10 +82,6 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(Blows, effectivePropertySet.Blows))
-        {
-            return false;
-        }
         if (!TestBoolean(BrandAcid, effectivePropertySet.BrandAcid))
         {
             return false;
@@ -401,8 +397,6 @@ internal abstract class ItemTest : IGetKey
     public virtual bool? ArtifactBias => null;
 
     public virtual bool? Blessed => null;
-
-    public virtual bool? Blows => null;
 
     public virtual bool? BrandAcid => null;
 

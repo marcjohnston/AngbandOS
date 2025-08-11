@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SabreOfBluebeardFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int TreasureRating => 10;
-    public override bool Blows => true;
     public override string FriendlyName => "of Bluebeard";
     public override bool IgnoreAcid => true;
     public override bool IgnoreCold => true;

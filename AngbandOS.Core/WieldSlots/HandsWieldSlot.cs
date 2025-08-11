@@ -35,13 +35,10 @@ internal class HandsWieldSlot : EquipmentWieldSlot
             foreach (int index in InventorySlots)
             {
                 Item? oPtr = Game.GetInventoryItem(index);
-                if (oPtr != null)
+                if (oPtr != null && !oPtr.EffectivePropertySet.FreeAct && oPtr.EffectivePropertySet.BonusDexterity == 0)
                 {
-                    if (!oPtr.EffectivePropertySet.FreeAct && !oPtr.EffectivePropertySet.Dex && oPtr.EffectivePropertySet.BonusDexterity > 0)
-                    {
-                        msp = 3 * msp / 4;
-                        RestrictingGloves = true;
-                    }
+                    msp = 3 * msp / 4;
+                    RestrictingGloves = true;
                 }
             }
             if (RestrictingGloves && !previousRestrictingGloves)

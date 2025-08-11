@@ -183,34 +183,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.DexterityAbility.Bonus += oPtr.EffectivePropertySet.BonusDexterity;
                     Game.ConstitutionAbility.Bonus += oPtr.EffectivePropertySet.BonusConstitution;
                     Game.CharismaAbility.Bonus += oPtr.EffectivePropertySet.BonusCharisma;
-                    if (oPtr.EffectivePropertySet.Stealth)
-                    {
-                        Game.SkillStealth += oPtr.EffectivePropertySet.BonusStealth;
-                    }
-                    if (oPtr.EffectivePropertySet.Search)
-                    {
-                        Game.SkillSearching += oPtr.EffectivePropertySet.BonusSearch * 5;
-                    }
-                    if (oPtr.EffectivePropertySet.Search)
-                    {
-                        Game.SkillSearchFrequency += oPtr.EffectivePropertySet.BonusSearch * 5;
-                    }
-                    if (oPtr.EffectivePropertySet.Infra)
-                    {
-                        Game.InfravisionRange += oPtr.EffectivePropertySet.BonusInfravision;
-                    }
-                    if (oPtr.EffectivePropertySet.Tunnel)
-                    {
-                        Game.SkillDigging += oPtr.EffectivePropertySet.BonusTunnel * 20;
-                    }
-                    if (oPtr.EffectivePropertySet.Speed)
-                    {
-                        Game.Speed.IntValue += oPtr.EffectivePropertySet.BonusSpeed;
-                    }
-                    if (oPtr.EffectivePropertySet.Blows)
-                    {
-                        extraBlows += oPtr.EffectivePropertySet.BonusAttacks;
-                    }
+                    Game.SkillStealth += oPtr.EffectivePropertySet.BonusStealth;
+                    Game.SkillSearching += oPtr.EffectivePropertySet.BonusSearch * 5;
+                    Game.SkillSearchFrequency += oPtr.EffectivePropertySet.BonusSearch * 5;
+                    Game.InfravisionRange += oPtr.EffectivePropertySet.BonusInfravision;
+                    Game.SkillDigging += oPtr.EffectivePropertySet.BonusTunnel * 20;
+                    Game.Speed.IntValue += oPtr.EffectivePropertySet.BonusSpeed;
+                    extraBlows += oPtr.EffectivePropertySet.BonusAttacks;
                     if (oPtr.EffectivePropertySet.Impact)
                     {
                         Game.HasQuakeWeapon = true;

@@ -227,12 +227,12 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Add Cha", 7, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusCharisma > 0);
 
 
-        DisplayStat("Add Stea.", 10, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Stealth);
-        DisplayStat("Add Sear.", 11, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Search);
-        DisplayStat("Add Infra", 12, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Infra);
-        DisplayStat("Add Tun..", 13, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Tunnel);
-        DisplayStat("Add Speed", 14, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Speed);
-        DisplayStat("Add Blows", 15, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Blows);
+        DisplayStat("Add Stea.", 10, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusStealth > 0);
+        DisplayStat("Add Sear.", 11, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusSearch > 0);
+        DisplayStat("Add Infra", 12, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusInfravision > 0);
+        DisplayStat("Add Tun..", 13, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusTunnel > 0);
+        DisplayStat("Add Speed", 14, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusSpeed > 0);
+        DisplayStat("Add Blows", 15, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BonusAttacks > 0);
         DisplayStat("Chaotic", 16, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Chaotic);
         DisplayStat("Vampiric", 17, 0, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Vampiric);
 

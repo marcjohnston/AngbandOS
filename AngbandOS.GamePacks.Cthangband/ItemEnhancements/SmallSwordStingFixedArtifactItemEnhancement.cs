@@ -3,7 +3,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SmallSwordStingFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Blows => true;
+    public override string? BonusAttacksRollExpression => "1";
     public override int TreasureRating => 20;
     public override bool FreeAct => true;
     public override string FriendlyName => "'Sting'";

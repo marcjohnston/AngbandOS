@@ -180,7 +180,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             AntiTheft = AntiTheft,
             ArtifactBias = ArtifactBiasWeightedRandom?.ChooseOrDefault(),
             Blessed = Blessed,
-            Blows = Blows,
             BrandAcid = BrandAcid,
             BrandCold = BrandCold,
             BrandElec = BrandElec,

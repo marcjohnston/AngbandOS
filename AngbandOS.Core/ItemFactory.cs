@@ -1006,7 +1006,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             {
                 case 1:
                 case 2:
-                    characteristics.Str = true;
                     characteristics.BonusStrength = Game.EnchantBonus(characteristics.BonusStrength);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
@@ -1020,7 +1019,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 3:
                 case 4:
-                    characteristics.Int = true;
                     characteristics.BonusIntelligence = Game.EnchantBonus(characteristics.BonusIntelligence);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
@@ -1034,7 +1032,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 5:
                 case 6:
-                    characteristics.Wis = true;
                     characteristics.BonusWisdom = Game.EnchantBonus(characteristics.BonusWisdom);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
@@ -1048,7 +1045,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 7:
                 case 8:
-                    characteristics.Dex = true;
                     characteristics.BonusDexterity = Game.EnchantBonus(characteristics.BonusDexterity);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
@@ -1062,7 +1058,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 9:
                 case 10:
-                    characteristics.Con = true;
                     characteristics.BonusConstitution = Game.EnchantBonus(characteristics.BonusConstitution);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
@@ -1085,7 +1080,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 13:
                 case 14:
-                    characteristics.Stealth = true;
                     characteristics.BonusStealth = Game.EnchantBonus(characteristics.BonusStealth);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(3) == 1)
                     {
@@ -1095,7 +1089,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 15:
                 case 16:
-                    characteristics.Search = true;
                     characteristics.BonusSearch = Game.EnchantBonus(characteristics.BonusSearch);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                     {
@@ -1105,12 +1098,10 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 17:
                 case 18:
-                    characteristics.Infra = true;
                     characteristics.BonusInfravision = Game.EnchantBonus(characteristics.BonusInfravision);
                     break;
 
                 case 19:
-                    characteristics.Speed = true;
                     characteristics.BonusSpeed = Game.EnchantBonus(characteristics.BonusSpeed);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(11) == 1)
                     {
@@ -1120,7 +1111,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 20:
                 case 21:
-                    characteristics.Tunnel = true;
                     characteristics.BonusTunnel = Game.EnchantBonus(characteristics.BonusTunnel);
                     break;
 
@@ -1132,7 +1122,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     }
                     else
                     {
-                        characteristics.Blows = true;
                         characteristics.BonusAttacks = Game.DieRoll(2) + 1;
                         if (characteristics.BonusAttacks > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
                         {

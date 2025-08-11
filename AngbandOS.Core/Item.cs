@@ -1168,27 +1168,27 @@ internal sealed class Item : IComparable<Item>
         {
             info[i++] = "It affects your charisma.";
         }
-        if (EffectivePropertySet.Stealth)
+        if (EffectivePropertySet.BonusStealth > 0)
         {
             info[i++] = "It affects your stealth.";
         }
-        if (EffectivePropertySet.Search)
+        if (EffectivePropertySet.BonusSearch > 0)
         {
             info[i++] = "It affects your searching.";
         }
-        if (EffectivePropertySet.Infra)
+        if (EffectivePropertySet.BonusInfravision > 0)
         {
             info[i++] = "It affects your infravision.";
         }
-        if (EffectivePropertySet.Tunnel)
+        if (EffectivePropertySet.BonusTunnel > 0)
         {
             info[i++] = "It affects your ability to tunnel.";
         }
-        if (EffectivePropertySet.Speed)
+        if (EffectivePropertySet.BonusSpeed > 0)
         {
             info[i++] = "It affects your movement speed.";
         }
-        if (EffectivePropertySet.Blows)
+        if (EffectivePropertySet.BonusAttacks > 0)
         {
             info[i++] = "It affects your attack speed.";
         }
@@ -1852,30 +1852,12 @@ internal sealed class Item : IComparable<Item>
         value += EffectivePropertySet.BonusDexterity * Game.BonusDexterityValue;
         value += EffectivePropertySet.BonusConstitution * Game.BonusConstitutionValue;
         value += EffectivePropertySet.BonusCharisma * Game.BonusCharismaValue;
-        if (EffectivePropertySet.Stealth)
-        {
-            value += EffectivePropertySet.BonusStealth * Game.BonusStealthValue;
-        }
-        if (EffectivePropertySet.Search)
-        {
-            value += EffectivePropertySet.BonusSearch * Game.BonusSearchValue;
-        }
-        if (EffectivePropertySet.Infra)
-        {
-            value += EffectivePropertySet.BonusInfravision * Game.BonusInfravisionValue;
-        }
-        if (EffectivePropertySet.Tunnel)
-        {
-            value += EffectivePropertySet.BonusTunnel * Game.BonusTunnelValue;
-        }
-        if (EffectivePropertySet.Blows)
-        {
-            value += EffectivePropertySet.BonusAttacks * Game.BonusExtraBlowslValue;
-        }
-        if (EffectivePropertySet.Speed)
-        {
-            value += EffectivePropertySet.BonusSpeed * Game.BonusSpeedlValue;
-        }
+        value += EffectivePropertySet.BonusStealth * Game.BonusStealthValue;
+        value += EffectivePropertySet.BonusSearch * Game.BonusSearchValue;
+        value += EffectivePropertySet.BonusInfravision * Game.BonusInfravisionValue;
+        value += EffectivePropertySet.BonusTunnel * Game.BonusTunnelValue;
+        value += EffectivePropertySet.BonusAttacks * Game.BonusExtraBlowslValue;
+        value += EffectivePropertySet.BonusSpeed * Game.BonusSpeedlValue;
 
         if (EffectivePropertySet.Activation != null)
         {

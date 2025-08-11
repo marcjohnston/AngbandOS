@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Reflection.PortableExecutable;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -28,7 +30,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponElderSignInscribedItemEnhancement)));
                 if (Game.DieRoll(4) == 1)
                 {
-                    item.EffectivePropertySet.Blows = true;
+                    item.EffectivePropertySet.BonusAttacks++;
                     if (item.EffectivePropertySet.BonusAttacks > 2)
                     {
                         item.EffectivePropertySet.BonusAttacks -= Game.DieRoll(2);
@@ -189,7 +191,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 }
                 if (Game.DieRoll(3) == 1)
                 {
-                    item.EffectivePropertySet.Dex = true;
+                    item.EffectivePropertySet.BonusDexterity = Game.EnchantBonus(item.EffectivePropertySet.BonusDexterity);
                 }
                 if (Game.DieRoll(5) == 1)
                 {
@@ -209,7 +211,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                     item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfEarthquakesItemEnhancement)));
                     if (Game.DieRoll(3) == 1)
                     {
-                        item.EffectivePropertySet.Blows = true;
+                        item.EffectivePropertySet.BonusAttacks++;
                     }
                     item.EffectivePropertySet.BonusTunnel = item.GetBonusValue(3, level);
                 }

@@ -9,33 +9,31 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class EffectivePropertySet
 {
-    private void RegisterBoolPropertyFactory(PropertyEnum index)
+    private void RegisterPropertyFactory(PropertyEnum index, PropertyFactory propertyFactory)
     {
         int intIndex = (int)index;
         if (_propertyFactories.Length <= intIndex)
         {
             Array.Resize(ref _propertyFactories, intIndex + 1);
         }
-        _propertyFactories[intIndex] = new BoolPropertyFactory(index);
+        _propertyFactories[intIndex] = propertyFactory;
+    }
+    private void RegisterBoolPropertyFactory(PropertyEnum index)
+    {
+        RegisterPropertyFactory(index, new BoolPropertyFactory(index));
+    }
+    private void RegisterColorEnumPropertyFactory(PropertyEnum index)
+    {
+        RegisterPropertyFactory(index, new ColorEnumPropertyFactory(index));
     }
     private void RegisterIntPropertyFactory(PropertyEnum index)
     {
-        int intIndex = (int)index;
-        if (_propertyFactories.Length <= intIndex)
-        {
-            Array.Resize(ref _propertyFactories, intIndex + 1);
-        }
-        _propertyFactories[intIndex] = new IntPropertyFactory(index);
+        RegisterPropertyFactory(index, new IntPropertyFactory(index));
     }
 
     private void RegisterReferencePropertyFactory<T>(PropertyEnum index) where T : class
     {
-        int intIndex = (int)index;
-        if (_propertyFactories.Length <= intIndex)
-        {
-            Array.Resize(ref _propertyFactories, intIndex + 1);
-        }
-        _propertyFactories[intIndex] = new ReferencePropertyFactory<T>(index);
+        RegisterPropertyFactory(index, new ReferencePropertyFactory<T>(index));
     }
 
     private PropertyFactory[] _propertyFactories = new PropertyFactory[0];
@@ -50,7 +48,7 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.CanApplyBonusArmorClassMiscPower);
         RegisterBoolPropertyFactory(PropertyEnum.CanProvideSheathOfElectricity);
         RegisterBoolPropertyFactory(PropertyEnum.CanProvideSheathOfFire);
-        RegisterIntPropertyFactory(PropertyEnum.BonusHit);
+        RegisterIntPropertyFactory(PropertyEnum.BonusHits);
         RegisterIntPropertyFactory(PropertyEnum.BonusArmorClass);
         RegisterIntPropertyFactory(PropertyEnum.BonusDamage);
         RegisterIntPropertyFactory(PropertyEnum.BonusStrength);
@@ -76,13 +74,11 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.BrandElec);
         RegisterBoolPropertyFactory(PropertyEnum.BrandFire);
         RegisterBoolPropertyFactory(PropertyEnum.BrandPois);
-        RegisterBoolPropertyFactory(PropertyEnum.Cha);
         RegisterBoolPropertyFactory(PropertyEnum.Chaotic);
-        RegisterBoolPropertyFactory(PropertyEnum.Con);
+        RegisterColorEnumPropertyFactory(PropertyEnum.Color);
         RegisterIntPropertyFactory(PropertyEnum.Cost);
         RegisterBoolPropertyFactory(PropertyEnum.IsCursed);
         RegisterIntPropertyFactory(PropertyEnum.DamageDice);
-        RegisterBoolPropertyFactory(PropertyEnum.Dex);
         RegisterIntPropertyFactory(PropertyEnum.DiceSides);
         RegisterBoolPropertyFactory(PropertyEnum.DrainExp);
         RegisterBoolPropertyFactory(PropertyEnum.DreadCurse);
@@ -102,8 +98,6 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.ImElec);
         RegisterBoolPropertyFactory(PropertyEnum.ImFire);
         RegisterBoolPropertyFactory(PropertyEnum.Impact);
-        RegisterBoolPropertyFactory(PropertyEnum.Infra);
-        RegisterBoolPropertyFactory(PropertyEnum.Int);
         RegisterBoolPropertyFactory(PropertyEnum.NoMagic);
         RegisterBoolPropertyFactory(PropertyEnum.NoTele);
         RegisterBoolPropertyFactory(PropertyEnum.PermaCurse);
@@ -140,9 +134,6 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.SlayTroll);
         RegisterBoolPropertyFactory(PropertyEnum.SlayUndead);
         RegisterBoolPropertyFactory(PropertyEnum.SlowDigest);
-        RegisterBoolPropertyFactory(PropertyEnum.Speed);
-        RegisterBoolPropertyFactory(PropertyEnum.Stealth);
-        RegisterBoolPropertyFactory(PropertyEnum.Str);
         RegisterBoolPropertyFactory(PropertyEnum.SustCha);
         RegisterBoolPropertyFactory(PropertyEnum.SustCon);
         RegisterBoolPropertyFactory(PropertyEnum.SustDex);
@@ -152,13 +143,11 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.Telepathy);
         RegisterBoolPropertyFactory(PropertyEnum.Teleport);
         RegisterIntPropertyFactory(PropertyEnum.TreasureRating);
-        RegisterBoolPropertyFactory(PropertyEnum.Tunnel);
         RegisterIntPropertyFactory(PropertyEnum.Value);
         RegisterBoolPropertyFactory(PropertyEnum.Valueless);
         RegisterBoolPropertyFactory(PropertyEnum.Vampiric);
         RegisterBoolPropertyFactory(PropertyEnum.Vorpal);
         RegisterIntPropertyFactory(PropertyEnum.Weight);
-        RegisterBoolPropertyFactory(PropertyEnum.Wis);
         RegisterBoolPropertyFactory(PropertyEnum.Wraith);
         RegisterBoolPropertyFactory(PropertyEnum.XtraMight);
         RegisterBoolPropertyFactory(PropertyEnum.XtraShots);
@@ -457,11 +446,11 @@ internal class EffectivePropertySet
     {
         get
         {
-            return GetIntValue(PropertyEnum.BonusHit);
+            return GetIntValue(PropertyEnum.BonusHits);
         }
         set
         {
-            SetIntValue(PropertyEnum.BonusHit, value);
+            SetIntValue(PropertyEnum.BonusHits, value);
         }
     }
     public int BonusArmorClass
@@ -673,17 +662,17 @@ internal class EffectivePropertySet
             SetBoolValue(PropertyEnum.Blessed, value);
         }
     }
-    public bool Blows
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Blows);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Blows, value);
-        }
-    }
+    //public bool Blows
+    //{
+    //    get
+    //    {
+    //        return GetBoolValue(PropertyEnum.Blows);
+    //    }
+    //    set
+    //    {
+    //        SetBoolValue(PropertyEnum.Blows, value);
+    //    }
+    //}
     public bool BrandAcid
     {
         get
@@ -739,17 +728,6 @@ internal class EffectivePropertySet
             SetBoolValue(PropertyEnum.BrandPois, value);
         }
     }
-    public bool Cha
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Cha);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Cha, value);
-        }
-    }
     public bool Chaotic
     {
         get
@@ -759,17 +737,6 @@ internal class EffectivePropertySet
         set
         {
             SetBoolValue(PropertyEnum.Chaotic, value);
-        }
-    }
-    public bool Con
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Con);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Con, value);
         }
     }
     public int Cost
@@ -803,17 +770,6 @@ internal class EffectivePropertySet
         set
         {
             SetIntValue(PropertyEnum.DamageDice, value);
-        }
-    }
-    public bool Dex
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Dex);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Dex, value);
         }
     }
     public int DiceSides
@@ -1023,28 +979,6 @@ internal class EffectivePropertySet
         set
         {
             SetBoolValue(PropertyEnum.Impact, value);
-        }
-    }
-    public bool Infra
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Infra);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Infra, value);
-        }
-    }
-    public bool Int
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Int);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Int, value);
         }
     }
     public bool NoMagic
@@ -1289,17 +1223,6 @@ internal class EffectivePropertySet
             SetBoolValue(PropertyEnum.ResSound, value);
         }
     }
-    public bool Search
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Search);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Search, value);
-        }
-    }
     public bool SeeInvis
     {
         get
@@ -1443,39 +1366,17 @@ internal class EffectivePropertySet
             SetBoolValue(PropertyEnum.SlowDigest, value);
         }
     }
-    public bool Speed
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Speed);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Speed, value);
-        }
-    }
-    public bool Stealth
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Stealth);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Stealth, value);
-        }
-    }
-    public bool Str
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Str);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Str, value);
-        }
-    }
+    //public bool Speed
+    //{
+    //    get
+    //    {
+    //        return GetBoolValue(PropertyEnum.Speed);
+    //    }
+    //    set
+    //    {
+    //        SetBoolValue(PropertyEnum.Speed, value);
+    //    }
+    //}
     public bool SustCha
     {
         get
@@ -1575,17 +1476,6 @@ internal class EffectivePropertySet
             SetIntValue(PropertyEnum.TreasureRating, value);
         }
     }
-    public bool Tunnel
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Tunnel);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Tunnel, value);
-        }
-    }
     public int Value
     {
         get
@@ -1639,17 +1529,6 @@ internal class EffectivePropertySet
         set
         {
             SetIntValue(PropertyEnum.Weight, value);
-        }
-    }
-    public bool Wis
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.Wis);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.Wis, value);
         }
     }
     public bool Wraith

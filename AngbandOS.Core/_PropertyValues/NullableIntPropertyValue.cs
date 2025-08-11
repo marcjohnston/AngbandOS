@@ -48,3 +48,46 @@ internal class NullableIntPropertyValue : NullablePropertyValue
         Value = value;
     }
 }
+
+[Serializable]
+internal class NullableColorEnumPropertyValue : NullablePropertyValue
+{
+    public ColorEnum? Value { get; set; }
+
+    public override bool IsSet => Value.HasValue;
+
+    public override PropertyValue Clone() => new NullableColorEnumPropertyValue(Value);
+    public override PropertyValue Merge(PropertyValue itemProperty)
+    {
+        throw new Exception("Merge mismatch."); // This isn't needed because we will never merge from the nullable version.
+    }
+    public override bool IsEqual(PropertyValue itemProperty)
+    {
+        if (itemProperty is NullableColorEnumPropertyValue nullableColorEnumPropertyValue)
+        {
+            return Value == nullableColorEnumPropertyValue.Value;
+        }
+        throw new Exception("IsEqual mismatch.");
+    }
+
+    public override void Set(PropertyValue propertyValue)
+    {
+        if (propertyValue is null)
+        {
+            Value = null;
+        }
+        else if (propertyValue is NullableColorEnumPropertyValue colorEnumPropertyValue)
+        {
+            Value = colorEnumPropertyValue.Value;
+        }
+        else
+        {
+            throw new Exception("Mismatch set.");
+        }
+    }
+
+    public NullableColorEnumPropertyValue(ColorEnum? value)
+    {
+        Value = value;
+    }
+}

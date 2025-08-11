@@ -333,27 +333,27 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         {
             info[infoCount++] = "Your charisma is affected by your equipment.";
         }
-        if (inventoryCharacteristics.Stealth)
+        if (inventoryCharacteristics.BonusStealth > 0)
         {
             info[infoCount++] = "Your stealth is affected by your equipment.";
         }
-        if (inventoryCharacteristics.Search)
+        if (inventoryCharacteristics.BonusSearch > 0)
         {
             info[infoCount++] = "Your searching ability is affected by your equipment.";
         }
-        if (inventoryCharacteristics.Infra)
+        if (inventoryCharacteristics.BonusInfravision > 0)
         {
             info[infoCount++] = "Your infravision is affected by your equipment.";
         }
-        if (inventoryCharacteristics.Tunnel)
+        if (inventoryCharacteristics.BonusTunnel > 0)
         {
             info[infoCount++] = "Your digging ability is affected by your equipment.";
         }
-        if (inventoryCharacteristics.Speed)
+        if (inventoryCharacteristics.BonusSpeed > 0)
         {
             info[infoCount++] = "Your speed is affected by your equipment.";
         }
-        if (inventoryCharacteristics.Blows)
+        if (inventoryCharacteristics.BonusAttacks > 0)
         {
             info[infoCount++] = "Your attack speed is affected by your equipment.";
         }

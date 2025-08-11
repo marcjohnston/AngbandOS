@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Aggravate => true;
-    public override bool Blows => true;
     public override int TreasureRating => 20;
     public override string FriendlyName => "'Demon Blade'";
     public override bool HideType => true;

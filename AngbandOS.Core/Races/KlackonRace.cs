@@ -39,7 +39,7 @@ internal class KlackonRace : Race
     {
         if (level > 9)
         {
-            itemCharacteristics.Speed = true;
+            itemCharacteristics.BonusSpeed++;
         }
         itemCharacteristics.ResConf = true;
         itemCharacteristics.ResAcid = true;

@@ -245,16 +245,17 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         }
 
         EffectivePropertySet playerCharacteristics = Game.GetAbilitiesAsItemFlags();
-        DisplayPlayerStatWithModification(Game.StrengthBonus, playerCharacteristics.Str, row + 0, col);
-        DisplayPlayerStatWithModification(Game.IntelligenceBonus, playerCharacteristics.Int, row + 1, col);
-        DisplayPlayerStatWithModification(Game.WisdomBonus, playerCharacteristics.Wis, row + 2, col);
-        DisplayPlayerStatWithModification(Game.DexterityBonus, playerCharacteristics.Dex, row + 3, col);
-        DisplayPlayerStatWithModification(Game.ConstitutionBonus, playerCharacteristics.Con, row + 4, col);
-        DisplayPlayerStatWithModification(Game.CharismaBonus, playerCharacteristics.Cha, row + 5, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.BonusStrength, row + 0, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.BonusIntelligence, row + 1, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.BonusWisdom, row + 2, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.BonusDexterity, row + 3, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.BonusConstitution, row + 4, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.BonusCharisma, row + 5, col);
     }
 
-    private void DisplayPlayerStatWithModification(int extraModifier, bool isSet, int row, int col)
+    private void DisplayPlayerStatWithModification(int extraModifier, int row, int col)
     {
+        bool isSet = extraModifier > 0;
         ColorEnum a = ColorEnum.Grey;
         char c = '.';
         if (extraModifier != 0)

@@ -4,7 +4,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Blessed => true;
-    public override bool Blows => true;
+    public override string? BonusAttacksRollExpression => "1";
     public override int TreasureRating => 20;
     public override string FriendlyName => "'Soulsword'";
     public override bool HoldLife => true;

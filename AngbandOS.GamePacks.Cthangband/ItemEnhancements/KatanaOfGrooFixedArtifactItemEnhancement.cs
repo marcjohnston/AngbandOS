@@ -3,7 +3,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Blows => true;
     public override int TreasureRating => 20;
     public override string FriendlyName => "of Groo";
     public override bool HideType => true;

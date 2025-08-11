@@ -6,7 +6,6 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override int TreasureRating => 10;
     // Icicle shoots a cold ball
     public override string? ActivationName => nameof(ActivationsEnum.BallOfCold48r2Every5p1d5DirectionalActivation);
-    public override bool Blows => true;
     public override bool BrandCold => true;
     public override bool BrandPois => true;
     public override string FriendlyName => "'Icicle'";

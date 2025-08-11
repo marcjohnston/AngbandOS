@@ -16,7 +16,7 @@ internal enum PropertyEnum
     CanApplyBonusArmorClassMiscPower,
     CanProvideSheathOfElectricity,
     CanProvideSheathOfFire,
-    BonusHit,
+    BonusHits,
     BonusArmorClass,
     BonusDamage,
     BonusStrength,
@@ -42,13 +42,8 @@ internal enum PropertyEnum
     BrandElec,
     BrandFire,
     BrandPois,
-    Cha,
     Chaotic,
-
-    /// <summary>
-    /// 
-    /// </summary>
-    Con, // TODO: This maintains state, tracks when constitution is added randomly
+    Color,
 
     /// <summary>
     /// Returns the real cost of a standard item.  Returns 0 by default.  For wands, staffs and light-sources, this value should be the value of an item with no charges.  An empty item should
@@ -57,7 +52,6 @@ internal enum PropertyEnum
     Cost,
     IsCursed,
     DamageDice,
-    Dex,
     DiceSides,
     DrainExp,
     DreadCurse,
@@ -77,8 +71,6 @@ internal enum PropertyEnum
     ImElec,
     ImFire,
     Impact,
-    Infra,
-    Int,
     NoMagic,
     NoTele,
     PermaCurse,
@@ -115,9 +107,6 @@ internal enum PropertyEnum
     SlayTroll,
     SlayUndead,
     SlowDigest,
-    Speed,
-    Stealth,
-    Str,
     SustCha,
     SustCon,
     SustDex,
@@ -127,12 +116,10 @@ internal enum PropertyEnum
     Telepathy,
     Teleport,
     TreasureRating,
-    Tunnel,
     Value,
     Valueless,
     Vampiric,
     Vorpal,
-    Wis,
     Wraith,
     Weight,
     XtraMight,

@@ -17,7 +17,6 @@ internal class ConstitutionArtifactBias : ArtifactBias
         if (characteristics.BonusConstitution == 0)
         {
             characteristics.BonusConstitution = Game.EnchantBonus(characteristics.BonusConstitution);
-            characteristics.Con = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;
