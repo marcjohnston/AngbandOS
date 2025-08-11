@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class MetalCapHelmItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool CanReflectBoltsAndArrows => true;

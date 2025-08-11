@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class ObjectDetectionScrollItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool EasyKnow => true;

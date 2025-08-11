@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class MithrilPlateMailHardArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool IgnoreAcid => true;

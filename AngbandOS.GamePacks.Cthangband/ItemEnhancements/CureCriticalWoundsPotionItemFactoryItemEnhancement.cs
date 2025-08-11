@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class CureCriticalWoundsPotionItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool EasyKnow => true;

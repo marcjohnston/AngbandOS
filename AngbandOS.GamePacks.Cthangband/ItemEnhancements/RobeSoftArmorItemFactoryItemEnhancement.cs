@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class RobeSoftArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 20;

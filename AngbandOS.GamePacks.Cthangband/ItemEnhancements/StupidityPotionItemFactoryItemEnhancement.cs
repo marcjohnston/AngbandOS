@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class StupidityPotionItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool EasyKnow => true;

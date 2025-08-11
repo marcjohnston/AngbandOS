@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class GemstoneLightSourceItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Radius => 2;

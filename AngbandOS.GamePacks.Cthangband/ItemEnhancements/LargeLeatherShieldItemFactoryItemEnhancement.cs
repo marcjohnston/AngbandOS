@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class LargeLeatherShieldItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool CanReflectBoltsAndArrows => true;

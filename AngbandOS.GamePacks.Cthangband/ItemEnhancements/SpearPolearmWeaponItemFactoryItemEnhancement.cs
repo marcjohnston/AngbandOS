@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class SpearPolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool ShowMods => true;

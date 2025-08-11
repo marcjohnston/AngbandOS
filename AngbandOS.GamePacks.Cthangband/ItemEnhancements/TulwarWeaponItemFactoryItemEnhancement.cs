@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class TulwarWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool ShowMods => true;

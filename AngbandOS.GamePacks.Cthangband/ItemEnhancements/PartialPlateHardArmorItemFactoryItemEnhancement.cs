@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class PartialPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool CanReflectBoltsAndArrows => true;

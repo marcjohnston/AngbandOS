@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class GharneFragmentsChaosBookItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool IgnoreAcid => true;

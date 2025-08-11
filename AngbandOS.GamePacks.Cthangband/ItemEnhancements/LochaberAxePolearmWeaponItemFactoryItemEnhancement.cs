@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class LochaberAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool ShowMods => true;

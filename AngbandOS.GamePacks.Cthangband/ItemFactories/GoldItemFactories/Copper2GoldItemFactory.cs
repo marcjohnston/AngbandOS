@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class Copper2GoldItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(DollarSignSymbol);
-    public override ColorEnum Color => ColorEnum.Copper;
     public override string Name => "copper**";
 
     public override string InitialGoldPiecesRollExpression => "2d5*4";

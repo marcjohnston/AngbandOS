@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MithrilGoldItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(DollarSignSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "mithril";
 
     public override string InitialGoldPiecesRollExpression => "2d40*4";

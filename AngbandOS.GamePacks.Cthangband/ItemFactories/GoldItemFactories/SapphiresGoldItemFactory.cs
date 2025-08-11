@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SapphiresGoldItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(DollarSignSymbol);
-    public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "sapphires";
 
     public override string InitialGoldPiecesRollExpression => "2d20*4";

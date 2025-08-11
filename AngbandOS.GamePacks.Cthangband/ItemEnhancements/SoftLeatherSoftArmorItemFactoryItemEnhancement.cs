@@ -1,5 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+
+[Serializable]
 public class SoftLeatherSoftArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 80;

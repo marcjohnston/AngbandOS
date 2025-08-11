@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class OpalsGoldItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(DollarSignSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "opals";
 
     public override string InitialGoldPiecesRollExpression => "2d18*4";
