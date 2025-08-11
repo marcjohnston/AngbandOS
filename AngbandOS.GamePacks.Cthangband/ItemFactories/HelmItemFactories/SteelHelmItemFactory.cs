@@ -19,7 +19,6 @@ public class SteelHelmItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Steel Helm";
     public override string? ItemEnhancementBindingKey => nameof(SteelHelmItemFactoryItemEnhancement);
 

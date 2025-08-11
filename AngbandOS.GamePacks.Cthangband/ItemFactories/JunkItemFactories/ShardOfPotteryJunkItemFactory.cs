@@ -15,7 +15,6 @@ public class ShardOfPotteryJunkItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool InitialBrokenStomp => true;
     public override string SymbolBindingKey => nameof(TildeSymbol);
-    public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Shard of Pottery";
 
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

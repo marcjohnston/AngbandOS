@@ -33,5 +33,4 @@ public class FireBallsRodItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(FireBallsRodItemFactoryItemEnhancement);
     public override int PackSort => 13;
     public override int BaseValue => 90;
-    public override ColorEnum Color => ColorEnum.Turquoise;
 }

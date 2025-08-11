@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PieceOfDwarfBreadFoodItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(CommaSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Piece of Dwarf Bread";
 
     public override string? DescriptionSyntax => "Piece~ of Dwarf Bread";

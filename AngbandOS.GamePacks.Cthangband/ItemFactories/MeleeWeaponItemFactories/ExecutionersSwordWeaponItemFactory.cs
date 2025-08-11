@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ExecutionersSwordWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Executioner's Sword";
 
     public override string? DescriptionSyntax => "Executioner's Sword~";

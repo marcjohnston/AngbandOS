@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Pick";
 
     public override string? DescriptionSyntax => "Pick~";

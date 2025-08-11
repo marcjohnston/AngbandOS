@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ScytheOfSlicingPolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Scythe of Slicing";
 
     public override string? DescriptionSyntax => "Scythe~ of Slicing";

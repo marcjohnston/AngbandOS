@@ -49,5 +49,4 @@ public class CureLightWoundsPotionItemFactory : ItemFactoryGameConfiguration
     /// Returns true because potions are susceptible to freezing.
     /// </summary>
     public override bool HatesCold => true;
-    public override ColorEnum Color => ColorEnum.Blue;
 }

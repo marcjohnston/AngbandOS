@@ -15,7 +15,6 @@ public class OrbLightSourceItemFactory : ItemFactoryGameConfiguration
     public override bool InitialBrokenStomp => true;
 
     public override string SymbolBindingKey => nameof(TildeSymbol);
-    public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "Orb";
 
     public override string? ItemEnhancementBindingKey => nameof(OrbLightSourceItemFactoryItemEnhancement);

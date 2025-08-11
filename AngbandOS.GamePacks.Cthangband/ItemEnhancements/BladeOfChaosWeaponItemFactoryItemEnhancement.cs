@@ -13,4 +13,5 @@ public class BladeOfChaosWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Cost => 4000;
     public override int DamageDice => 6;
     public override int DiceSides => 5;
+    public override ColorEnum Color => ColorEnum.Purple;
 }

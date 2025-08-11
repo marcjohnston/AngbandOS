@@ -11,7 +11,7 @@ public class RubiesGoldItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(DollarSignSymbol);
     public override string Name => "rubies";
-
+    public override string? ItemEnhancementBindingKey => nameof(RubiesGoldItemFactoryItemEnhancement);
     public override string InitialGoldPiecesRollExpression => "2d24*4";
     public override int LevelNormallyFound => 1;
     public override string ItemClassBindingKey => nameof(GoldItemClass);

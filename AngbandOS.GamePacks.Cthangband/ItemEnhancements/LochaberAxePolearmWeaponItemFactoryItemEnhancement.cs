@@ -11,4 +11,5 @@ public class LochaberAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override int Cost => 750;
     public override int DamageDice => 3;
     public override int DiceSides => 8;
+    public override ColorEnum Color => ColorEnum.Black;
 }

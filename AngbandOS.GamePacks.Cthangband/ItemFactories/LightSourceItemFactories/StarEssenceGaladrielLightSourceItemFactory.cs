@@ -11,7 +11,6 @@ public class StarEssenceGaladrielLightSourceItemFactory : ItemFactoryGameConfigu
 {
     public override bool DisableStomp => true;
     public override string SymbolBindingKey => nameof(AsteriskSymbol);
-    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Star Essence Galadriel";
 
     public override string? ItemEnhancementBindingKey => nameof(StarEssenceGaladrielLightSourceItemFactoryItemEnhancement);

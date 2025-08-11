@@ -11,7 +11,6 @@ public class SlingRangedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey => nameof(SlayingRangedWeaponItemEnhancementWeightedRandom);
     public override string SymbolBindingKey => nameof(CloseBracketSymbol);
-    public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Sling";
 
     public override string ItemClassBindingKey => nameof(SlingItemClass);

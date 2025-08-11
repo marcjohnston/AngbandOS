@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PnakoticManuscriptsCorporealBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.BrightYellow;
     public override string Name => "[Pnakotic Manuscripts]";
     public override string? DescriptionSyntax => "Corporeal Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Corporeal Magic $Name$";

@@ -7,4 +7,5 @@ public class MagicMissileWandItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
+    public override ColorEnum Color => ColorEnum.Chartreuse;
 }

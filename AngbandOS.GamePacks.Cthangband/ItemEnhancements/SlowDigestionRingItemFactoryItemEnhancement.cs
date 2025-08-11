@@ -7,4 +7,5 @@ public class SlowDigestionRingItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool SlowDigest => true;
     public override int Weight => 2;
     public override int Cost => 250;
+    public override ColorEnum Color => ColorEnum.Gold;
 }

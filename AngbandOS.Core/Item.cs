@@ -169,7 +169,6 @@ internal sealed class Item : IComparable<Item>
     public WieldSlot[] WieldSlots => _factory.WieldSlots;
     public ColorEnum FlavorColor => _factory.FlavorColor; // TODO: Rename to represent current or assigned
     public Symbol FlavorSymbol => _factory.FlavorSymbol; // TODO: Rename to represent current or assigned
-    public ColorEnum Color => _factory.Color; // TODO: Rename to represent raw or original or base
 
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.

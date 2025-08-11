@@ -14,7 +14,6 @@ public class PowerRingItemFactory : ItemFactoryGameConfiguration
     public override bool NegativeBonusHitRepresentsBroken => true;
     public override bool NegativeBonusDamageRepresentsBroken => true;
     public override string SymbolBindingKey => nameof(EqualSignSymbol);
-    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Power";
     public override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";
     public override string? FlavorUnknownDescriptionSyntax => "$Flavor$ Ring~";

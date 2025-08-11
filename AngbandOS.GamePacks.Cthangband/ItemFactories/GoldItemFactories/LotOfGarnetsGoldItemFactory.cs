@@ -11,7 +11,7 @@ public class LotOfGarnetsGoldItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(DollarSignSymbol);
     public override string Name => "lot of garnets";
-
+    public override string? ItemEnhancementBindingKey => nameof(LotOfGarnetsGoldItemFactoryItemEnhancement);
     public override string InitialGoldPiecesRollExpression => "2d10*4";
     public override int LevelNormallyFound => 1;
     public override string ItemClassBindingKey => nameof(GoldItemClass);

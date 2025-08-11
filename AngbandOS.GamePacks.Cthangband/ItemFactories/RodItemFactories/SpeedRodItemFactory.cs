@@ -33,5 +33,4 @@ public class SpeedRodItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(SpeedRodItemFactoryItemEnhancement);
     public override int PackSort => 13;
     public override int BaseValue => 90;
-    public override ColorEnum Color => ColorEnum.Turquoise;
 }

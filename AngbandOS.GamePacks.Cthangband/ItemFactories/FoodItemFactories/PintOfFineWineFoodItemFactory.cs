@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PintOfFineWineFoodItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(CommaSymbol);
-    public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "Pint of Fine Wine";
 
     public override string? DescriptionSyntax => "Pint~ of Fine Wine";

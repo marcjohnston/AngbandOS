@@ -19,7 +19,6 @@ public class RobeSoftArmorItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
-    public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Robe";
 
     public override (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]? EnchantmentBindingTuples => new (int[]? Powers, bool? StoreStock, string[] ScriptNames)[]

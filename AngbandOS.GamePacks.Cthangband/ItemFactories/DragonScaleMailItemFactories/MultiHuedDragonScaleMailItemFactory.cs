@@ -20,7 +20,6 @@ public class MultiHuedDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string? ItemEnhancementBindingKey => nameof(MultiHuedDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
-    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Multi-Hued Dragon Scale Mail";
     public override int ArmorClass => 30;
     public override string? DescriptionSyntax  => "Multi-Hued Dragon Scale Mail~";

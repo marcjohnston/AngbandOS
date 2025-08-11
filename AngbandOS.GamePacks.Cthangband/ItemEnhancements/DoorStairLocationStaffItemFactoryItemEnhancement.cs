@@ -7,4 +7,5 @@ public class DoorStairLocationStaffItemFactoryItemEnhancement : ItemEnhancementG
     public override int Cost => 350;
     public override int DamageDice => 1;
     public override int DiceSides => 2;
+    public override ColorEnum Color => ColorEnum.Purple;
 }

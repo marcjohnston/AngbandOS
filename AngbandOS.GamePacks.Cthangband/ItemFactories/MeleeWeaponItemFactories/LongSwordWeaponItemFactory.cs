@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class LongSwordWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Long Sword";
 
     public override string? DescriptionSyntax => "Long Sword~";

@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class HardBiscuitFoodItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(CommaSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Hard Biscuit";
 
     public override string? DescriptionSyntax => "Hard Biscuit~";

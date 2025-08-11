@@ -19,7 +19,6 @@ public class FilthyRagSoftArmorItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Filthy Rag";
 
     public override int ArmorClass => 1;

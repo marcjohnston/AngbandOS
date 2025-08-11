@@ -7,4 +7,5 @@ public class SustainWisdomRingItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool SustWis => true;
     public override int Weight => 2;
     public override int Cost => 600;
+    public override ColorEnum Color => ColorEnum.Gold;
 }

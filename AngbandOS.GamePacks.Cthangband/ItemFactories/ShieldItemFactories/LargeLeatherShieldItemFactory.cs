@@ -19,7 +19,6 @@ public class LargeLeatherShieldItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseParenthesisSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Large Leather Shield";
     public override string? ItemEnhancementBindingKey => nameof(LargeLeatherShieldItemFactoryItemEnhancement);
 

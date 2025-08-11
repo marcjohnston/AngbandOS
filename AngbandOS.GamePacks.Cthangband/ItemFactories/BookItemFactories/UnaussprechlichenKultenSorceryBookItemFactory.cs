@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class UnaussprechlichenKultenSorceryBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "[Unaussprechlichen Kulten]";
     public override string? DescriptionSyntax => "Sorcery Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Sorcery $Name$";

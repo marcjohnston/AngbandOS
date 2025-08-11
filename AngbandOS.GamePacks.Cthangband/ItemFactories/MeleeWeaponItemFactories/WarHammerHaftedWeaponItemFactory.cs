@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WarHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "War Hammer";
 
     public override string? DescriptionSyntax => "War Hammer~";

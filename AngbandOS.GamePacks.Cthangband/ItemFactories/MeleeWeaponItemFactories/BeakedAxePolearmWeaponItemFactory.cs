@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class BeakedAxePolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Beaked Axe";
 
     public override string? DescriptionSyntax => "Beaked Axe~";

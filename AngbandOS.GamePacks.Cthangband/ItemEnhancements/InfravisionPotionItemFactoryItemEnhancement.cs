@@ -8,4 +8,5 @@ public class InfravisionPotionItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int Cost => 20;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
+    public override ColorEnum Color => ColorEnum.Blue;
 }

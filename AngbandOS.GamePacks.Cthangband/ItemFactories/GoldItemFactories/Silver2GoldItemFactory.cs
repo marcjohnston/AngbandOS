@@ -11,7 +11,7 @@ public class Silver2GoldItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(DollarSignSymbol);
     public override string Name => "silver**";
-
+    public override string? ItemEnhancementBindingKey => nameof(Silver2GoldItemFactoryItemEnhancement);
     public override string InitialGoldPiecesRollExpression => "2d8*4";
     public override int LevelNormallyFound => 1;
     public override string ItemClassBindingKey => nameof(GoldItemClass);

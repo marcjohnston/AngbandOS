@@ -19,7 +19,6 @@ public class LeatherGlovesItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Set of Leather Gloves";
 
     public override int ArmorClass => 1;

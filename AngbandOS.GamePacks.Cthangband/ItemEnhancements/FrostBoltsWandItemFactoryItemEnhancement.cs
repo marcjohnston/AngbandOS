@@ -7,4 +7,5 @@ public class FrostBoltsWandItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override int Cost => 800;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
+    public override ColorEnum Color => ColorEnum.Chartreuse;
 }

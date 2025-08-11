@@ -8,4 +8,5 @@ public class PerceptionRodItemFactoryItemEnhancement : ItemEnhancementGameConfig
     public override int Cost => 13000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
+    public override ColorEnum Color => ColorEnum.Turquoise;
 }

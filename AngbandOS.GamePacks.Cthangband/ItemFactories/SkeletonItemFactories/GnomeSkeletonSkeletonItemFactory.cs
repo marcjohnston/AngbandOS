@@ -15,7 +15,6 @@ public class GnomeSkeletonSkeletonItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool InitialBrokenStomp => true;
     public override string SymbolBindingKey => nameof(TildeSymbol);
-    public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Gnome Skeleton";
 
     public override string? DescriptionSyntax => "Gnome Skeleton~";

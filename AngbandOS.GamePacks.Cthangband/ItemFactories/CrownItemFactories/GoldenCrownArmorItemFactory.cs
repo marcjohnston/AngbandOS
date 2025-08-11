@@ -19,7 +19,6 @@ public class GoldenCrownArmorItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
-    public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Golden Crown";
 
     public override string? DescriptionSyntax => "Golden Crown~";

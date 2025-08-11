@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CallOfTheWildNatureBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "[Call of the Wild]";
     public override string? DescriptionSyntax => "Nature Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Nature Magic $Name$";

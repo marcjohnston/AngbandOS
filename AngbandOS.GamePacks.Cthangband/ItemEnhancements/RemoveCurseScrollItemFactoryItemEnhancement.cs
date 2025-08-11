@@ -6,4 +6,5 @@ public class RemoveCurseScrollItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool EasyKnow => true;
     public override int Weight => 5;
     public override int Cost => 100;
+    public override ColorEnum Color => ColorEnum.BrightBeige;
 }

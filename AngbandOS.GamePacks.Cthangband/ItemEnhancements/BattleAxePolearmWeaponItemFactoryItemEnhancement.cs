@@ -11,4 +11,5 @@ public class BattleAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementG
     public override int Cost => 334;
     public override int DamageDice => 2;
     public override int DiceSides => 8;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

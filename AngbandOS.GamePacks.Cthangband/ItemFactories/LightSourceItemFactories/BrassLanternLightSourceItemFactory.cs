@@ -25,7 +25,6 @@ public class BrassLanternLightSourceItemFactory : ItemFactoryGameConfiguration
     public override bool IsLanternFuel => true;
 
     public override string SymbolBindingKey => nameof(TildeSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Brass Lantern";
 
     public override string? ItemEnhancementBindingKey => nameof(BrassLanternLightSourceItemFactoryItemEnhancement);

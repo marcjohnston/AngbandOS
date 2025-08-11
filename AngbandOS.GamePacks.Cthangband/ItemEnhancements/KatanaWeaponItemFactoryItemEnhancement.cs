@@ -11,4 +11,5 @@ public class KatanaWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override int Cost => 400;
     public override int DamageDice => 3;
     public override int DiceSides => 4;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

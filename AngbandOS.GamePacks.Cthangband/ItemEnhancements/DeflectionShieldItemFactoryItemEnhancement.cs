@@ -9,4 +9,5 @@ public class DeflectionShieldItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Cost => 10000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
+    public override ColorEnum Color => ColorEnum.BrightBlue;
 }

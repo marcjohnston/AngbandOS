@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PieceOfWarpstoneFoodItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(AsteriskSymbol);
-    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Piece of Warpstone";
 
     public override string? DescriptionSyntax => "Piece~ of Warpstone";

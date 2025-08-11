@@ -33,5 +33,4 @@ public class ColdBallsRodItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(ColdBallsRodItemFactoryItemEnhancement);
     public override int PackSort => 13;
     public override int BaseValue => 90;
-    public override ColorEnum Color => ColorEnum.Turquoise;
 }

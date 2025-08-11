@@ -8,4 +8,5 @@ public class ChaosResistanceRingItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool ResConf => true;
     public override int Weight => 2;
     public override int Cost => 13000;
+    public override ColorEnum Color => ColorEnum.Gold;
 }

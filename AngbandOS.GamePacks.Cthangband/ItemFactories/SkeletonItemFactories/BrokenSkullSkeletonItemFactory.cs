@@ -15,7 +15,6 @@ public class BrokenSkullSkeletonItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool InitialBrokenStomp => true;
     public override string SymbolBindingKey => nameof(TildeSymbol);
-    public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Broken Skull";
 
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

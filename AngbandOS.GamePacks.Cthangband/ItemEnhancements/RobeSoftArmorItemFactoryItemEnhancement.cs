@@ -5,4 +5,5 @@ public class RobeSoftArmorItemFactoryItemEnhancement : ItemEnhancementGameConfig
 {
     public override int Weight => 20;
     public override int Cost => 4;
+    public override ColorEnum Color => ColorEnum.Blue;
 }

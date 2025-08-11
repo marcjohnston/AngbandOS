@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MainGaucheWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Main Gauche";
 
     public override string? DescriptionSyntax => "Main Gauche~";

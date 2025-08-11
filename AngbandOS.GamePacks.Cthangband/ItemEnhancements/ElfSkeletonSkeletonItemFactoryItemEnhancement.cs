@@ -7,4 +7,5 @@ public class ElfSkeletonSkeletonItemFactoryItemEnhancement : ItemEnhancementGame
     public override int Weight => 40;
     public override int DamageDice => 1;
     public override int DiceSides => 2;
+    public override ColorEnum Color => ColorEnum.Beige;
 }

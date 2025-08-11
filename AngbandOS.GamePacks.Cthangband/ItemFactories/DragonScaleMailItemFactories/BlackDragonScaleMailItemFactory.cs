@@ -20,7 +20,6 @@ public class BlackDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string? ItemEnhancementBindingKey => nameof(BlackDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Black Dragon Scale Mail";
 
     public override int ArmorClass => 30;

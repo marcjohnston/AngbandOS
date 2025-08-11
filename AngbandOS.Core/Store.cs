@@ -140,7 +140,7 @@ internal class Store
         {
             oName = oName.Substring(0, maxwid);
         }
-        Game.Screen.Print(oPtr.Color, oName, row, 5);
+        Game.Screen.Print(oPtr.EffectivePropertySet.Color, oName, row, 5);
         int wgt = oPtr.EffectivePropertySet.Weight;
         outVal = $"{wgt / 10,3}.{wgt % 10}{(StoreFactory.RenderWeightUnitOfMeasurement ? " lb" : "")}";
 

@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class BladeOfChaosWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Blade of Chaos";
 
     public override string? DescriptionSyntax => "Blade~ of Chaos";

@@ -7,4 +7,5 @@ public class SustainConstitutionRingItemFactoryItemEnhancement : ItemEnhancement
     public override bool SustCon => true;
     public override int Weight => 2;
     public override int Cost => 750;
+    public override ColorEnum Color => ColorEnum.Gold;
 }

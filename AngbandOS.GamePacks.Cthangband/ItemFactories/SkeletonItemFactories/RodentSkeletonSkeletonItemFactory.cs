@@ -15,7 +15,6 @@ public class RodentSkeletonSkeletonItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool InitialBrokenStomp => true;
     public override string SymbolBindingKey => nameof(TildeSymbol);
-    public override ColorEnum Color => ColorEnum.Beige;
     public override string Name => "Rodent Skeleton";
 
     public override string? DescriptionSyntax => "Rodent Skeleton~";

@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ConjuringsTricksTarotBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.BrightPink;
     public override string Name => "[Conjurings Tricks]";
     public override string? DescriptionSyntax => "Tarot Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Tarot Magic $Name$";

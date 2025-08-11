@@ -15,7 +15,6 @@ public class CeleanoFragmentsTarotBookItemFactory : ItemFactoryGameConfiguration
     public override int ExperienceGainDivisorForDestroying => 1;
 
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "[Celeano Fragments]";
     public override string? DescriptionSyntax => "Tarot Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Tarot Magic $Name$";

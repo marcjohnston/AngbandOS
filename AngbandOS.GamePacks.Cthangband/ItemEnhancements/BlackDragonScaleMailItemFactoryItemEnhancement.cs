@@ -14,4 +14,5 @@ public class BlackDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Cost => 25000;
     public override int DamageDice => 2;
     public override int DiceSides => 4;
+    public override ColorEnum Color => ColorEnum.Black;
 }

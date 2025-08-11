@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class TridentPolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Trident";
 
     public override string? DescriptionSyntax => "Trident~";

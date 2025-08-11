@@ -7,4 +7,5 @@ public class ObjectLocationStaffItemFactoryItemEnhancement : ItemEnhancementGame
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DiceSides => 2;
+    public override ColorEnum Color => ColorEnum.Purple;
 }

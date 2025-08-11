@@ -19,7 +19,6 @@ public class LargeMetalShieldItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseParenthesisSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Large Metal Shield";
     public override string? ItemEnhancementBindingKey => nameof(LargeMetalShieldItemFactoryItemEnhancement);
 

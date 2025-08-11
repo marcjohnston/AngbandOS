@@ -6,4 +6,5 @@ public class DoomAmuletItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool IsCursed => true;
     public override bool HideType => true;
     public override int Weight => 3;
+    public override ColorEnum Color => ColorEnum.Orange;
 }

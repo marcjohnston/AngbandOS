@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class GharneFragmentsChaosBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "[G'harne Fragments]";
     public override string? DescriptionSyntax => "Chaos Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Chaos Magic $Name$";

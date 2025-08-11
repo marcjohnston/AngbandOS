@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MaceOfDisruptionHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Mace of Disruption";
 
     public override string? DescriptionSyntax => "Mace~ of Disruption";

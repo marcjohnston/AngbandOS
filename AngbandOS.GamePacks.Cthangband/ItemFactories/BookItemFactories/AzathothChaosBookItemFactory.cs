@@ -14,7 +14,6 @@ public class AzathothChaosBookItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override int ExperienceGainDivisorForDestroying => 1;
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "[The Book of Azathoth]";
     public override string? DescriptionSyntax => "Chaos Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Chaos Magic $Name$";

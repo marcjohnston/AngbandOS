@@ -11,7 +11,6 @@ public class MightyHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override bool DisableStomp => true;
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Mighty Hammer";
 
     public override string? DescriptionSyntax => "Mighty Hammer~"; // TODO: This appears to cause a defect in identification

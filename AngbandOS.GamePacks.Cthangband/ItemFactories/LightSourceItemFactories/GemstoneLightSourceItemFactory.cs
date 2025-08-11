@@ -13,7 +13,6 @@ public class GemstoneLightSourceItemFactory : ItemFactoryGameConfiguration
     public override string? EquipmentProcessWorldScriptBindingKey => nameof(SystemScriptsEnum.JewelJudgementDrainLifeScript);
 
     public override string SymbolBindingKey => nameof(AsteriskSymbol);
-    public override ColorEnum Color => ColorEnum.Diamond;
     public override string Name => "Gemstone";
 
     public override string? ItemEnhancementBindingKey => nameof(GemstoneLightSourceItemFactoryItemEnhancement);

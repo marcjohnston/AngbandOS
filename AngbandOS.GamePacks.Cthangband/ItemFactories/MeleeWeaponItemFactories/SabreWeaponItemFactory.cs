@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SabreWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Sabre";
 
     public override string? DescriptionSyntax => "Sabre~";

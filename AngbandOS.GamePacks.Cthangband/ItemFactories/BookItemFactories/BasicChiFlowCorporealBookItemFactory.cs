@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class BasicChiFlowCorporealBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "[Basic Chi Flow]";
     public override string? DescriptionSyntax => "Corporeal Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Corporeal Magic $Name$";

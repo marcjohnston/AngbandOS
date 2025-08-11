@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class QuarterstaffHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Quarterstaff";
 
     public override string? DescriptionSyntax => "Quarterstaff~";

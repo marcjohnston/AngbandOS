@@ -27,4 +27,5 @@ public class PowerDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Cost => 345000;
     public override int DamageDice => 2;
     public override int DiceSides => 4;
+    public override ColorEnum Color => ColorEnum.Yellow;
 }

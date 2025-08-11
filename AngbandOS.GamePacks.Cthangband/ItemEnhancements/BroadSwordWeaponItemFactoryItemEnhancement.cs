@@ -11,4 +11,5 @@ public class BroadSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Cost => 255;
     public override int DamageDice => 2;
     public override int DiceSides => 5;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

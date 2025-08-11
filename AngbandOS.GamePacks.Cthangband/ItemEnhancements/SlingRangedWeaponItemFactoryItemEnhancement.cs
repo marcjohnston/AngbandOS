@@ -10,4 +10,5 @@ public class SlingRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 5;
     public override int Cost => 5;
+    public override ColorEnum Color => ColorEnum.Brown;
 }

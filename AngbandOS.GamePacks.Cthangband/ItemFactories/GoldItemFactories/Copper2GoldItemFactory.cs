@@ -11,7 +11,7 @@ public class Copper2GoldItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(DollarSignSymbol);
     public override string Name => "copper**";
-
+    public override string? ItemEnhancementBindingKey => nameof(Copper2GoldItemFactoryItemEnhancement);
     public override string InitialGoldPiecesRollExpression => "2d5*4";
     public override int LevelNormallyFound => 1;
     public override string ItemClassBindingKey => nameof(GoldItemClass);

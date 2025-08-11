@@ -11,7 +11,7 @@ public class EmeraldsGoldItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(DollarSignSymbol);
     public override string Name => "emeralds";
-
+    public override string? ItemEnhancementBindingKey => nameof(EmeraldsGoldItemFactoryItemEnhancement);
     public override string InitialGoldPiecesRollExpression => "2d32*4";
     public override int LevelNormallyFound => 1;
     public override string ItemClassBindingKey => nameof(GoldItemClass);

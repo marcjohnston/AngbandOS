@@ -63,6 +63,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BrandFire = itemEnhancementGameConfiguration.BrandFire;
         BrandPois = itemEnhancementGameConfiguration.BrandPois;
         Chaotic = itemEnhancementGameConfiguration.Chaotic;
+        Color = itemEnhancementGameConfiguration.Color;
         Cost = itemEnhancementGameConfiguration.Cost;
         IsCursed = itemEnhancementGameConfiguration.IsCursed;
         DamageDice = itemEnhancementGameConfiguration.DamageDice;
@@ -186,6 +187,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             BrandFire = BrandFire,
             BrandPois = BrandPois,
             Chaotic = Chaotic,
+            Color = Color,
             Cost = Cost,
             IsCursed = IsCursed,
             DamageDice = DamageDice,
@@ -341,6 +343,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             BrandFire = BrandFire,
             BrandPois = BrandPois,
             Chaotic = Chaotic,
+            Color = Color,
             Cost = Cost,
             IsCursed = IsCursed,
             DamageDice = DamageDice,
@@ -577,7 +580,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         
     /// <inheritdoc />
     private bool Chaotic { get; } = false;
-    
+
+    public ColorEnum Color { get; } = ColorEnum.White;
+
     private int Cost { get; } = 0;
     
     /// <inheritdoc />

@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ShovelDiggingWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Shovel";
 
     public override string? DescriptionSyntax => "Shovel~";

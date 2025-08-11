@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class BastardSwordWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Bastard Sword";
 
     public override string? DescriptionSyntax => "Bastard Sword~";

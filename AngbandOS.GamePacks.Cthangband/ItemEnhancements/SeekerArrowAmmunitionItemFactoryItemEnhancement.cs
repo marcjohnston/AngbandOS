@@ -10,5 +10,6 @@ public class SeekerArrowAmmunitionItemFactoryItemEnhancement : ItemEnhancementGa
     public override int Cost => 20;
     public override int DamageDice => 4;
     public override int DiceSides => 4;
+    public override ColorEnum Color => ColorEnum.BrightGreen;
 }
 

@@ -14,7 +14,6 @@ public class FlaskOfOilItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsLanternFuel => true;
     public override string SymbolBindingKey => nameof(ExclamationPointSymbol);
-    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Flask of oil";
 
     public override string? DescriptionSyntax => "Flask~ of oil";

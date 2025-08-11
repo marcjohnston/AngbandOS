@@ -11,4 +11,5 @@ public class RapierWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override int Cost => 42;
     public override int DamageDice => 1;
     public override int DiceSides => 6;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

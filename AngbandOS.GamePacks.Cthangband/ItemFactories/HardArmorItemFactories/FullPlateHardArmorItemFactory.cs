@@ -19,7 +19,6 @@ public class FullPlateHardArmorItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Full Plate Armor";
     public override string? ItemEnhancementBindingKey => nameof(FullPlateHardArmorItemFactoryItemEnhancement);
 

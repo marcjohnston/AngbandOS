@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WhipHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Whip";
 
     public override string? DescriptionSyntax => "Whip~";

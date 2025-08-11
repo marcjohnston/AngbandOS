@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class LargeSteelChestItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(TildeSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Large steel chest";
 
     public override string? DescriptionSyntax => "Large steel chest~";

@@ -42,7 +42,6 @@ public class LordlyProtectionRingItemFactory : ItemFactoryGameConfiguration
     public override int PackSort => 16;
     public override int BaseValue => 45;
     public override bool HatesElectricity => true;
-    public override ColorEnum Color => ColorEnum.Gold;
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;

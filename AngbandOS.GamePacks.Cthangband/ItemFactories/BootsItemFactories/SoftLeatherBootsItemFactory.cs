@@ -19,7 +19,6 @@ public class SoftLeatherBootsItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Pair of Soft Leather Boots";
 
     public override int ArmorClass => 2;

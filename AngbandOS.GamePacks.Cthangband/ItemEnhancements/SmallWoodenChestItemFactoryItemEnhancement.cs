@@ -7,4 +7,5 @@ public class SmallWoodenChestItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Cost => 20;
     public override int DamageDice => 2;
     public override int DiceSides => 3;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

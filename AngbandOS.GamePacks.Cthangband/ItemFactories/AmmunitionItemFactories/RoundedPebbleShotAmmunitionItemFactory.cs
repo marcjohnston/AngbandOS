@@ -13,7 +13,6 @@ public class RoundedPebbleShotAmmunitionItemFactory : ItemFactoryGameConfigurati
     public override int BonusDamageRealValueMultiplier => 5;
     public override int BonusDiceRealValueMultiplier => 5;
     public override string SymbolBindingKey => nameof(OpenBracketSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Rounded Pebble";
 
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -20,7 +20,6 @@ public class LawDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string? ItemEnhancementBindingKey => nameof(LawDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Law Dragon Scale Mail";
     public override int ArmorClass => 30;
     public override string? DescriptionSyntax  => "Law Dragon Scale Mail~";

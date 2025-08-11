@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class TwoHandedFlailHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "Two-Handed Flail";
 
     public override string? DescriptionSyntax => "Two-Handed Flail~";

@@ -19,7 +19,6 @@ public class ElvenCloakItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
-    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Elven Cloak";
 
     public override string InitialBonusSearchExpression => "1d4";

@@ -7,4 +7,5 @@ public class AggravateMonsterRingItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool IsCursed => true;
     public override bool EasyKnow => true;
     public override int Weight => 2;
+    public override ColorEnum Color => ColorEnum.Gold;
 }

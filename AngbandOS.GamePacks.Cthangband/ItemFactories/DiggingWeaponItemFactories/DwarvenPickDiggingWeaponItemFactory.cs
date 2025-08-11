@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class DwarvenPickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Blue;
     public override string Name => "Dwarven Pick";
 
     public override string? DescriptionSyntax => "Dwarven Pick~";

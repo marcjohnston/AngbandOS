@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class LeadFilledMaceHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Lead-Filled Mace";
 
     public override string? DescriptionSyntax => "Lead-Filled Mace~";

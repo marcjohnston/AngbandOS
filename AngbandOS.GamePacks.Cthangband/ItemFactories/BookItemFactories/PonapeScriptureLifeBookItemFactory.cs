@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PonapeScriptureLifeBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "[Ponape Scripture]";
     public override string? DescriptionSyntax => "Life Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Life Magic $Name$";

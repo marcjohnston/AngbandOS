@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ShortSwordWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Short Sword";
 
     public override string? DescriptionSyntax => "Short Sword~";

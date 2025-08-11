@@ -43,5 +43,4 @@ public class HasteMonstersStaffItemFactory : ItemFactoryGameConfiguration
     public override bool HatesFire => true;
     public override bool HatesAcid => true;
 
-    public override ColorEnum Color => ColorEnum.Purple;
 }

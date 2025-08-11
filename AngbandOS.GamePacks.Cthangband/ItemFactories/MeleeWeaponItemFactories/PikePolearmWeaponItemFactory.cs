@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PikePolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Pike";
 
     public override string? DescriptionSyntax => "Pike~";

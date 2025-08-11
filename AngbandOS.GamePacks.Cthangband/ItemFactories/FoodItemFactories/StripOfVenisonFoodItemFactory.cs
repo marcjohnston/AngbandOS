@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class StripOfVenisonFoodItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(CommaSymbol);
-    public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Strip of Venison";
 
     public override string? DescriptionSyntax => "Strip~ of Venison";

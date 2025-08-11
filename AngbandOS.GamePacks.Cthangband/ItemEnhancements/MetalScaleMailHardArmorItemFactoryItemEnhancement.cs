@@ -8,4 +8,5 @@ public class MetalScaleMailHardArmorItemFactoryItemEnhancement : ItemEnhancement
     public override int Cost => 550;
     public override int DamageDice => 1;
     public override int DiceSides => 4;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

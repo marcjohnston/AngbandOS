@@ -19,7 +19,6 @@ public class MithrilChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Mithril Chain Mail";
 
     public override int ArmorClass => 28;

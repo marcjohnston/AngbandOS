@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class DholChantsLifeBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "[Dhol Chants]";
     public override string? DescriptionSyntax => "Life Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Life Magic $Name$";

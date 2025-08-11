@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class TwoHandedSwordWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Two-Handed Sword";
 
     public override string? DescriptionSyntax => "Two-Handed Sword~";

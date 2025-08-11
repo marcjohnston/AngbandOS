@@ -47,7 +47,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         CanBeWeaponOfLaw = itemFactoryGameConfiguration.CanBeWeaponOfLaw;
         CanBeWeaponOfSharpness = itemFactoryGameConfiguration.CanBeWeaponOfSharpness;
         CapableOfVorpalSlaying = itemFactoryGameConfiguration.CapableOfVorpalSlaying;
-        Color = itemFactoryGameConfiguration.Color;
         UseBindingTuple = itemFactoryGameConfiguration.UseBindingTuple;
         QuaffBindingTuple = itemFactoryGameConfiguration.QuaffBindingTuple;
         AmmunitionItemFactoryBindingKeys = itemFactoryGameConfiguration.AmmunitionItemFactoryBindingKeys;
@@ -236,7 +235,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             CanBeWeaponOfLaw = CanBeWeaponOfLaw,
             CanBeWeaponOfSharpness = CanBeWeaponOfSharpness,
             CapableOfVorpalSlaying = CapableOfVorpalSlaying,
-            Color = Color,
             UseBindingTuple = UseBindingTuple,
             QuaffBindingTuple = QuaffBindingTuple,
             AmmunitionItemFactoryBindingKeys = AmmunitionItemFactoryBindingKeys,
@@ -406,14 +404,14 @@ internal sealed class ItemFactory : IGetKey, IToJson
         ItemEnhancement? nullableItemEnhancement = Game.SingletonRepository.GetNullable<ItemEnhancement>(ItemEnhancementBindingKey);
         ItemEnhancement = nullableItemEnhancement ?? new ItemEnhancement(Game);
 
-        // Cut and paste
-        string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override ColorEnum Color => ");
-        if (prop is not null)
-            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", ItemEnhancement.GetKey, prop);
+        //// Cut and paste
+        //string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override ColorEnum Color => ");
+        //if (prop is not null)
+        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", ItemEnhancement.GetKey, prop);
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
         FlavorSymbol = Symbol;
-        FlavorColor = Color;
+        FlavorColor = ItemEnhancement.Color;
 
         MakeObjectCount = Game.ParseNumericExpression(MakeObjectCountExpression);
         WieldSlots = Game.SingletonRepository.Get<WieldSlot>(WieldSlotBindingKeys);
@@ -1759,12 +1757,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     public bool CanBeWeaponOfSharpness { get; } = false;
 
     public bool CapableOfVorpalSlaying { get; } = false;
-
-    /// <summary>
-    /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
-    /// that have flavor may change the FlavorColor based on the flavor.
-    /// </summary>
-    public ColorEnum Color { get; } = ColorEnum.White;
 
     /// <summary>
     /// Returns the name of the noticeable script to run when the player uses the item ; or null if the potion does

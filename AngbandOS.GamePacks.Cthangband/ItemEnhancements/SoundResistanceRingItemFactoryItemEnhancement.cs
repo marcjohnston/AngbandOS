@@ -12,4 +12,5 @@ public class SoundResistanceRingItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool ResSound => true;
     public override int Weight => 2;
     public override int Cost => 3000;
+    public override ColorEnum Color => ColorEnum.Gold;
 }

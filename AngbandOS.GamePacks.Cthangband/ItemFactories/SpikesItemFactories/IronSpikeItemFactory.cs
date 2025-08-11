@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class IronSpikeItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(TildeSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Iron Spike";
 
     public override string? DescriptionSyntax => "Iron Spike~";

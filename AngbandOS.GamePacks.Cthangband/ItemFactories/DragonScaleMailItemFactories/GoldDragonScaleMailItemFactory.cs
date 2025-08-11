@@ -20,7 +20,6 @@ public class GoldDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string? ItemEnhancementBindingKey => nameof(GoldDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
-    public override ColorEnum Color => ColorEnum.Gold;
     public override string Name => "Gold Dragon Scale Mail";
 
     public override int ArmorClass => 30;

@@ -7,4 +7,5 @@ public class ShardResistanceRingItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool ResShards => true;
     public override int Weight => 2;
     public override int Cost => 3000;
+    public override ColorEnum Color => ColorEnum.Gold;
 }

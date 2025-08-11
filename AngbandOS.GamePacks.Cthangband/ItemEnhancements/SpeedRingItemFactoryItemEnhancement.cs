@@ -7,4 +7,5 @@ public class SpeedRingItemFactoryItemEnhancement : ItemEnhancementGameConfigurat
     public override bool HideType => true;
     public override int Weight => 2;
     public override int Cost => 100000;
+    public override ColorEnum Color => ColorEnum.Gold;
 }

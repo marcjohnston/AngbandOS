@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CutlassWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Cutlass";
 
     public override string? DescriptionSyntax => "Cutlass~";

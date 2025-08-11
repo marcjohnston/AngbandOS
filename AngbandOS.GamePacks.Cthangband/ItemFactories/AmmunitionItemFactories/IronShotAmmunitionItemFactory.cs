@@ -13,7 +13,6 @@ public class IronShotAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 5;
     public override int BonusDiceRealValueMultiplier => 5;
     public override string SymbolBindingKey => nameof(OpenBracketSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Iron Shot";
 
     public override string? DescriptionSyntax => "Iron Shot~";

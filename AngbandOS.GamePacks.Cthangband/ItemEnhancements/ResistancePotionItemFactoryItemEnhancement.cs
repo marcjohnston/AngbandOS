@@ -8,4 +8,5 @@ public class ResistancePotionItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Cost => 250;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
+    public override ColorEnum Color => ColorEnum.Blue;
 }

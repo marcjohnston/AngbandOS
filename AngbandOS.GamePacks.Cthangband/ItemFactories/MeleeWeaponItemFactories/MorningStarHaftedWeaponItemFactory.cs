@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MorningStarHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Morning Star";
 
     public override string? DescriptionSyntax => "Morning Star~";

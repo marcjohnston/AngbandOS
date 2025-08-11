@@ -12,4 +12,5 @@ public class MagiAmuletItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool SeeInvis => true;
     public override int Weight => 3;
     public override int Cost => 30000;
+    public override ColorEnum Color => ColorEnum.Orange;
 }

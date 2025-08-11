@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class LochaberAxePolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Lochaber Axe";
 
     public override string? DescriptionSyntax => "Lochaber Axe~";

@@ -20,7 +20,6 @@ public class WoodenTorchLightSourceItemFactory : ItemFactoryGameConfiguration
     public override int BurnRate => 1;
 
     public override string SymbolBindingKey => nameof(TildeSymbol);
-    public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Wooden Torch";
 
     /// <summary>

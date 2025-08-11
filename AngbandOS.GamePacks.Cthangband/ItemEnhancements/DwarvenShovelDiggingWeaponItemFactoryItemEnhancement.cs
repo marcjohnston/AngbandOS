@@ -10,4 +10,5 @@ public class DwarvenShovelDiggingWeaponItemFactoryItemEnhancement : ItemEnhancem
     public override int Cost => 200;
     public override int DamageDice => 1;
     public override int DiceSides => 3;
+    public override ColorEnum Color => ColorEnum.BrightBlue;
 }

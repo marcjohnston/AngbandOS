@@ -8,4 +8,5 @@ public class PartialPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGa
     public override int Cost => 1200;
     public override int DamageDice => 1;
     public override int DiceSides => 6;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

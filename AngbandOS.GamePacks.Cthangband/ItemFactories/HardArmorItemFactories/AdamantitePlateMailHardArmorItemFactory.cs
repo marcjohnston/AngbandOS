@@ -19,7 +19,6 @@ public class AdamantitePlateMailHardArmorItemFactory : ItemFactoryGameConfigurat
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
-    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Adamantite Plate Mail";
 
     public override int ArmorClass => 40;

@@ -38,5 +38,4 @@ public class ShardBallsWandItemFactory : ItemFactoryGameConfiguration
     public override int BaseValue => 50;
     public override bool HatesElectricity => true;
 
-    public override ColorEnum Color => ColorEnum.Chartreuse;
 }

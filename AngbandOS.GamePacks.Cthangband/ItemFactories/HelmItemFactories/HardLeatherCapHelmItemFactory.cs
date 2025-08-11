@@ -19,7 +19,6 @@ public class HardLeatherCapHelmItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
-    public override ColorEnum Color => ColorEnum.Brown;
     public override string Name => "Hard Leather Cap";
     public override string? ItemEnhancementBindingKey => nameof(HardLeatherCapHelmItemFactoryItemEnhancement);
 

@@ -20,7 +20,6 @@ public class ChaosDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string? ItemEnhancementBindingKey => nameof(ChaosDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
-    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Chaos Dragon Scale Mail";
 
     public override int ArmorClass => 30;

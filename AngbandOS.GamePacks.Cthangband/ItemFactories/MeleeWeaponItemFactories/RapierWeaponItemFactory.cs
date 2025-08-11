@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class RapierWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Rapier";
 
     public override string? DescriptionSyntax => "Rapier~";

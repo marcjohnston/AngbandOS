@@ -5,4 +5,5 @@ public class VilyaRingItemFactoryItemEnhancement : ItemEnhancementGameConfigurat
 {
      public override int Weight => 2;
     public override int Cost => 300000;
+    public override ColorEnum Color => ColorEnum.Gold;
 }

@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class BrokenSwordWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Broken Sword";
 
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

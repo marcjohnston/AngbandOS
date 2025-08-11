@@ -11,7 +11,7 @@ public class AdamantiteGoldItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(DollarSignSymbol);
     public override string Name => "adamantite";
-
+    public override string? ItemEnhancementBindingKey => nameof(AdamantiteGoldItemFactoryItemEnhancement);
     public override string InitialGoldPiecesRollExpression => "2d80*4";
     public override int LevelNormallyFound => 1;
     public override string ItemClassBindingKey => nameof(GoldItemClass);

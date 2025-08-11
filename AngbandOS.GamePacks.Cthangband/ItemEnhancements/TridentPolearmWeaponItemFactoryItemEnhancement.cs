@@ -11,4 +11,5 @@ public class TridentPolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Cost => 120;
     public override int DamageDice => 1;
     public override int DiceSides => 8;
+    public override ColorEnum Color => ColorEnum.Yellow;
 }

@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SlimeMoldFoodItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(CommaSymbol);
-    public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Slime Mold";
 
     public override string? DescriptionSyntax => "Slime Mold~";

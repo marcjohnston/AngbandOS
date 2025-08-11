@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class LucerneHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "Lucerne Hammer";
 
     public override string? DescriptionSyntax => "Lucerne Hammer~";

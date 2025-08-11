@@ -11,4 +11,5 @@ public class ExecutionersSwordWeaponItemFactoryItemEnhancement : ItemEnhancement
     public override int Cost => 850;
     public override int DamageDice => 4;
     public override int DiceSides => 5;
+    public override ColorEnum Color => ColorEnum.Red;
 }

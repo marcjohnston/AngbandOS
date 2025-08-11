@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class GreatAxePolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Great Axe";
 
     public override string? DescriptionSyntax => "Great Axe~";

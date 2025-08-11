@@ -8,4 +8,5 @@ public class SpeedPotionItemFactoryItemEnhancement : ItemEnhancementGameConfigur
     public override int Cost => 75;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
+    public override ColorEnum Color => ColorEnum.Blue;
 }

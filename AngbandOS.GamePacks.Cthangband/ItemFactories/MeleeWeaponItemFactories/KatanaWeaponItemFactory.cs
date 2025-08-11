@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class KatanaWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "Katana";
 
     public override string? DescriptionSyntax => "Katana~";

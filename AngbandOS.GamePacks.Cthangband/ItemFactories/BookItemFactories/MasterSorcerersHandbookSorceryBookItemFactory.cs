@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MasterSorcerersHandbookSorceryBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "[Master Sorcerer's Handbook]";
     public override string? DescriptionSyntax => "Sorcery Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Sorcery $Name$";

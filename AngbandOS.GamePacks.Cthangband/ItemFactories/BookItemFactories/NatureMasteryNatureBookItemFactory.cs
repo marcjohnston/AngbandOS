@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class NatureMasteryNatureBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "[Nature Mastery]";
     public override string? DescriptionSyntax => "Nature Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Nature Magic $Name$";

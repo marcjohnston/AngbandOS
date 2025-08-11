@@ -19,7 +19,6 @@ public class DragonHelmItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
-    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Dragon Helm";
 
     public override string? ItemEnhancementBindingKey => nameof(DragonHelmItemFactoryItemEnhancement);

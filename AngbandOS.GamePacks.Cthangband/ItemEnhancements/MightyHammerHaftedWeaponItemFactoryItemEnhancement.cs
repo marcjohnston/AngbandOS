@@ -10,4 +10,5 @@ public class MightyHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override int Cost => 1000;
     public override int DamageDice => 3;
     public override int DiceSides => 9;
+    public override ColorEnum Color => ColorEnum.Black;
 }

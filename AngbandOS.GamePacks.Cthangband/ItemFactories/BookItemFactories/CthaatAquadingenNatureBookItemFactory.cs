@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CthaatAquadingenNatureBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.Green;
 
     /// <summary>
     /// Returns a divisor of 1 because this is the most powerful book for this realm of magic.  Destroying this book provides the most experience.

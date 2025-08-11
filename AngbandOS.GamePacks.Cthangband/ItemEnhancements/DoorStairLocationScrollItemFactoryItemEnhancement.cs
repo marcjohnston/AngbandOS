@@ -6,4 +6,5 @@ public class DoorStairLocationScrollItemFactoryItemEnhancement : ItemEnhancement
     public override bool EasyKnow => true;
     public override int Weight => 5;
     public override int Cost => 35;
+    public override ColorEnum Color => ColorEnum.BrightBeige;
 }

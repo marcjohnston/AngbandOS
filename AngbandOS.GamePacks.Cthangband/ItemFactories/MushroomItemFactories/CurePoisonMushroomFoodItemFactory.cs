@@ -37,7 +37,6 @@ public class CurePoisonMushroomFoodItemFactory : ItemFactoryGameConfiguration
     public override int PackSort => 9;
     public override int BaseValue => 5;
 
-    public override ColorEnum Color => ColorEnum.Green;
 
     /// <summary>
     /// Returns true, if the food item is completely consumed when eaten.  Consumed food items are removed once eaten.  Returns true, by default because 

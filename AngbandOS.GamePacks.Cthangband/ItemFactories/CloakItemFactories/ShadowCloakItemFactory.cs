@@ -19,7 +19,6 @@ public class ShadowCloakItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "Shadow Cloak";
 
     public override int ArmorClass => 6;

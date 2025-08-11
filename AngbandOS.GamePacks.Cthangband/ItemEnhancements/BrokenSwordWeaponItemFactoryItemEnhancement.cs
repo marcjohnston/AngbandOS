@@ -11,4 +11,5 @@ public class BrokenSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int Cost => 2;
     public override int DamageDice => 1;
     public override int DiceSides => 2;
+    public override ColorEnum Color => ColorEnum.Black;
 }

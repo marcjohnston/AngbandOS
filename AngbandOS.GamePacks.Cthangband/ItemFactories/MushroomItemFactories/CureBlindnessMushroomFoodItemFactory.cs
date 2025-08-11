@@ -38,7 +38,6 @@ public class CureBlindnessMushroomFoodItemFactory : ItemFactoryGameConfiguration
     public override int PackSort => 9;
     public override int BaseValue => 5;
 
-    public override ColorEnum Color => ColorEnum.Green;
     public override bool VanishesWhenEatenBySkeletons => false;
 
     /// <summary>

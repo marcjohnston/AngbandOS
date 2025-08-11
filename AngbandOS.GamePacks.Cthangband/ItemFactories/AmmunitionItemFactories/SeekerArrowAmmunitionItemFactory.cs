@@ -13,7 +13,6 @@ public class SeekerArrowAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 5;
     public override int BonusDiceRealValueMultiplier => 5;
     public override string SymbolBindingKey => nameof(OpenBracketSymbol);
-    public override ColorEnum Color => ColorEnum.BrightGreen;
     public override string Name => "Seeker Arrow";
 
     public override string? DescriptionSyntax => "Seeker Arrow~";

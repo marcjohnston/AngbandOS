@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class EltdownShardsTarotBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.Pink;
     public override string Name => "[Eltdown Shards]";
     public override string? DescriptionSyntax => "Tarot Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Tarot Magic $Name$";

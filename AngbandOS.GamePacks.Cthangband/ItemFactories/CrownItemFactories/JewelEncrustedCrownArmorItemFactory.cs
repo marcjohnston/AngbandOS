@@ -19,7 +19,6 @@ public class JewelEncrustedCrownArmorItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
-    public override ColorEnum Color => ColorEnum.Purple;
     public override string Name => "Jewel Encrusted Crown";
 
     public override string? DescriptionSyntax => "Jewel Encrusted Crown~";

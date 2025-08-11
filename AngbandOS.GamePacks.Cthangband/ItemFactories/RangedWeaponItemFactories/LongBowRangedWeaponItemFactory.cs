@@ -11,7 +11,6 @@ public class LongBowRangedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey => nameof(SlayingRangedWeaponItemEnhancementWeightedRandom);
     public override string SymbolBindingKey => nameof(CloseBracketSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Long Bow";
 
     public override string ItemClassBindingKey => nameof(BowItemClass);

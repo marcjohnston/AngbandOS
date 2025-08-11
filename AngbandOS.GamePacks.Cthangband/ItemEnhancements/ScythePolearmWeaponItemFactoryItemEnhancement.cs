@@ -11,4 +11,5 @@ public class ScythePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGame
     public override int Cost => 800;
     public override int DamageDice => 5;
     public override int DiceSides => 3;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

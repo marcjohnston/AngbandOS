@@ -14684,7 +14684,7 @@ internal class Game
                     consoleRow["flavor"] = new ConsoleChar(oPtr.FlavorColor, oPtr.FlavorSymbol.Character);
                     consoleRow["usage"] = new ConsoleString(ColorEnum.White, $"{inventorySlot.MentionUse(index)}:");
 
-                    ColorEnum color = oPtr.Color;
+                    ColorEnum color = oPtr.EffectivePropertySet.Color;
                     consoleRow["description"] = new ConsoleString(color, oPtr.GetFullDescription(true));
 
                     int wgt = oPtr.EffectivePropertySet.Weight * oPtr.StackCount;

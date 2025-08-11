@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MajorMagicksFolkBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.BrightPurple;
     public override string Name => "[Major Magicks]";
     public override string? DescriptionSyntax => "Folk Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Folk Magic $Name$";

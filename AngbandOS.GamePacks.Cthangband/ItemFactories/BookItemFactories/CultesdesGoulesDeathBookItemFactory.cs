@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CultesdesGoulesDeathBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "[Cultes des Goules]";
     public override string? DescriptionSyntax => "Death Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Death Magic $Name$";

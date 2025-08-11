@@ -20,7 +20,6 @@ public class ClothCloakItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
-    public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "Cloth";
     public override string DescriptionSyntax => "Cloak~";
 

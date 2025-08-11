@@ -19,7 +19,6 @@ public class ChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Chain Mail";
     public override string? ItemEnhancementBindingKey => nameof(ChainMailHardArmorItemFactoryItemEnhancement);
 

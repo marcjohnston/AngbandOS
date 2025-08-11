@@ -19,7 +19,6 @@ public class SoftStuddedLeatherSoftArmorItemFactory : ItemFactoryGameConfigurati
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Soft Studded Leather";
 
     public override int ArmorClass => 5;

@@ -8,4 +8,5 @@ public class FlamesRingItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool ResFire => true;
     public override int Weight => 2;
     public override int Cost => 1000;
+    public override ColorEnum Color => ColorEnum.Gold;
 }

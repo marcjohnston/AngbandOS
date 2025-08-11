@@ -11,7 +11,7 @@ public class MithrilGoldItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(DollarSignSymbol);
     public override string Name => "mithril";
-
+    public override string? ItemEnhancementBindingKey => nameof(MithrilGoldItemFactoryItemEnhancement);
     public override string InitialGoldPiecesRollExpression => "2d40*4";
     public override int LevelNormallyFound => 1;
     public override string ItemClassBindingKey => nameof(GoldItemClass);

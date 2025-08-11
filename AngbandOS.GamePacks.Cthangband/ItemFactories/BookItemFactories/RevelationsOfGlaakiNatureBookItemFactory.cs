@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class RevelationsOfGlaakiNatureBookItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(QuestionMarkSymbol);
-    public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "[Revelations of Glaaki]";
     public override string? DescriptionSyntax => "Nature Spellbook~ $Name$";
     public override string? AlternateDescriptionSyntax => "Book~ of Nature Magic $Name$";

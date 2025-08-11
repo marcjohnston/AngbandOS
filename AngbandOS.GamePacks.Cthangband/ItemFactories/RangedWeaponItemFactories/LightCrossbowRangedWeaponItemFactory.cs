@@ -11,7 +11,6 @@ public class LightCrossbowRangedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey => nameof(SlayingRangedWeaponItemEnhancementWeightedRandom);
     public override string SymbolBindingKey => nameof(CloseBracketSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Light Crossbow";
 
     public override string ItemClassBindingKey => nameof(CrossbowItemClass);

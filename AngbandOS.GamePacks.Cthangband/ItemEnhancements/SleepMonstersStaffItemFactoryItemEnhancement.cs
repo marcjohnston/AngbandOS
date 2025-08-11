@@ -7,4 +7,5 @@ public class SleepMonstersStaffItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Cost => 700;
     public override int DamageDice => 1;
     public override int DiceSides => 2;
+    public override ColorEnum Color => ColorEnum.Purple;
 }

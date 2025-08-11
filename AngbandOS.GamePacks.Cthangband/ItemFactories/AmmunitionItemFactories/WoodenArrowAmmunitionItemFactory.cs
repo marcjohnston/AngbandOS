@@ -13,7 +13,6 @@ public class WoodenArrowAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override int BonusDamageRealValueMultiplier => 5;
     public override int BonusDiceRealValueMultiplier => 5;
     public override string SymbolBindingKey => nameof(OpenBracketSymbol);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "Arrow";
 
     public override string? DescriptionSyntax => "Arrow~";

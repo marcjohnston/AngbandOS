@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class AwlPikePolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "Awl-Pike";
 
     public override string? DescriptionSyntax => "Awl-Pike~";

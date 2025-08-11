@@ -5,4 +5,5 @@ public class NecklaceAmuletItemFactoryItemEnhancement : ItemEnhancementGameConfi
 {
     public override int Weight => 3;
     public override int Cost => 75000;
+    public override ColorEnum Color => ColorEnum.Orange;
 }
