@@ -68,12 +68,6 @@ public class ItemFactoryGameConfiguration
     public virtual bool CapableOfVorpalSlaying { get; set; } = false;
 
     /// <summary>
-    /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
-    /// that have flavor may change the FlavorColor based on the flavor.
-    /// </summary>
-    public virtual ColorEnum Color { get; set; } = ColorEnum.White;
-
-    /// <summary>
     /// Returns the name of the noticeable script to run when the player uses the item ; or null if the potion does
     /// not have a smash effect; if the item can be quaffed; or null, if the item cannot be quaffed.  This property is used to bind the
     /// <see cref="UseTuple"/> property during the bind phase.  Returns null, by default.
