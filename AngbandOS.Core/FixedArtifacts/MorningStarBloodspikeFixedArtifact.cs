@@ -11,7 +11,6 @@ internal class MorningStarBloodspikeFixedArtifact : FixedArtifact
 {
     private MorningStarBloodspikeFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(MorningStarHaftedWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Morning Star 'Bloodspike'";
     public override int Level => 20;
     public override int Rarity => 30;

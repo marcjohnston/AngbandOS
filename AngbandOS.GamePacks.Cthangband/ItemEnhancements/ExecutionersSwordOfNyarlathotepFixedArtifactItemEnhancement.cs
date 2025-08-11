@@ -22,4 +22,5 @@ public class ExecutionersSwordOfNyarlathotepFixedArtifactItemEnhancement : ItemE
     public override int Cost => 111000;
     public override string BonusHitsRollExpression => "18";
     public override string BonusDamageRollExpression => "19";
+    public override ColorEnum Color => ColorEnum.Red;
 }

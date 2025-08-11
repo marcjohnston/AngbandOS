@@ -14,4 +14,5 @@ public class CloakShadeFixedArtifactItemEnhancement : ItemEnhancementGameConfigu
     public override bool SeeInvis => true;
     public override int Cost => 8000;
     public override string BonusAttacksRollExpression => "10";
+    public override ColorEnum Color => ColorEnum.Green;
 }

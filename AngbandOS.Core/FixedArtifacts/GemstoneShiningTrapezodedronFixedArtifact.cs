@@ -12,7 +12,6 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact
     public override bool DisableStomp => true;
     private GemstoneShiningTrapezodedronFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(GemstoneLightSourceItemFactory);
-    public override ColorEnum Color => ColorEnum.Red;
     public override string Name => "The Gemstone 'Shining Trapezodedron'";
     public override bool HasOwnType => true;
     public override int Level => 50;

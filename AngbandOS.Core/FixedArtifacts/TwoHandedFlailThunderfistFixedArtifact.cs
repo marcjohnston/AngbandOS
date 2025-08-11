@@ -11,7 +11,6 @@ internal class TwoHandedFlailThunderfistFixedArtifact : FixedArtifact
 {
     private TwoHandedFlailThunderfistFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(TwoHandedFlailHaftedWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Two-Handed Flail 'Thunderfist'";
     public override int Level => 45;
     public override int Rarity => 38;

@@ -11,7 +11,6 @@ internal class CloakShifterFixedArtifact : FixedArtifact
 {
     private CloakShifterFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
-    public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak 'Shifter'";
     public override int Level => 3;
     public override int Rarity => 10;

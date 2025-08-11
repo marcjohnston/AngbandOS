@@ -20,4 +20,5 @@ public class CloakOfTheSwashbucklerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool ResFire => true;
     public override int Cost => 35000;
     public override string BonusAttacksRollExpression => "18";
+    public override ColorEnum Color => ColorEnum.Green;
 }

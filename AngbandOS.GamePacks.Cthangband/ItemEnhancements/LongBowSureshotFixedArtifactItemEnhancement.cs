@@ -18,4 +18,5 @@ public class LongBowSureshotFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override int Cost => 35000;
     public override string BonusHitsRollExpression => "20";
     public override string BonusDamageRollExpression => "22";
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

@@ -11,7 +11,6 @@ internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
 {
     private BastardSwordSelfSlayerFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(BastardSwordWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Bastard Sword 'Selfslayer'";
     public override int Level => 30;
     public override int Rarity => 15;

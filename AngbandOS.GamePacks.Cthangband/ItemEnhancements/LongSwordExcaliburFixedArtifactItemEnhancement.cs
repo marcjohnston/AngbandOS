@@ -33,4 +33,5 @@ public class LongSwordExcaliburFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int DamageDice => 2;
     public override string BonusHitsRollExpression => "22";
     public override string BonusDamageRollExpression => "25";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

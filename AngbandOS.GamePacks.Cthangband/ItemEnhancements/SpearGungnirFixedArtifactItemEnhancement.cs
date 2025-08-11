@@ -35,4 +35,5 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override string BonusAttacksRollExpression => "5";
     public override string BonusHitsRollExpression => "15";
     public override string BonusDamageRollExpression => "25";
+    public override ColorEnum Color => ColorEnum.Grey;
 }

@@ -29,4 +29,5 @@ public class TwoHandedFlailThunderfistFixedArtifactItemEnhancement : ItemEnhance
     public override int Cost => 160000;
     public override string BonusHitsRollExpression => "5";
     public override string BonusDamageRollExpression => "18";
+    public override ColorEnum Color => ColorEnum.Yellow;
 }

@@ -15,4 +15,5 @@ public class CloakShifterFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool ResAcid => true;
     public override int Cost => 11000;
     public override string BonusAttacksRollExpression => "15";
+    public override ColorEnum Color => ColorEnum.Green;
 }

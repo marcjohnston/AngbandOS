@@ -11,7 +11,6 @@ internal class GreatAxeOfTheYeeksFixedArtifact : FixedArtifact
 {
     private GreatAxeOfTheYeeksFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(GreatAxePolearmWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Great Axe of the Yeeks";
     public override int Level => 30;
     public override int Rarity => 90;

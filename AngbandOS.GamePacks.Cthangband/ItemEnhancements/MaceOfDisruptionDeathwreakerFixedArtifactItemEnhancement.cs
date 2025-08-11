@@ -37,4 +37,5 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
     public override int DiceSides => 4;
     public override string BonusHitsRollExpression => "18";
     public override string BonusDamageRollExpression => "18";
+    public override ColorEnum Color => ColorEnum.Purple;
 }

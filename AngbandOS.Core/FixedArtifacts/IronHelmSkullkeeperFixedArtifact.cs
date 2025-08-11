@@ -11,7 +11,6 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact
 {
     private IronHelmSkullkeeperFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(IronHelmItemFactory);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Helm 'Skullkeeper'";
     public override int Level => 20;
     public override int Rarity => 5;

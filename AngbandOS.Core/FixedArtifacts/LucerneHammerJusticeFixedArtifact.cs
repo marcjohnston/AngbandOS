@@ -11,7 +11,6 @@ internal class LucerneHammerJusticeFixedArtifact : FixedArtifact
 {
     private LucerneHammerJusticeFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(LucerneHammerHaftedWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightBlue;
     public override string Name => "The Lucerne Hammer 'Justice'";
     public override int Level => 20;
     public override int Rarity => 15;

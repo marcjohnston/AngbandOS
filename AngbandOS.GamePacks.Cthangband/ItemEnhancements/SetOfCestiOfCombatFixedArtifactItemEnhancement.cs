@@ -26,4 +26,5 @@ public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGam
     public override string BonusAttacksRollExpression => "20";
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "10";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

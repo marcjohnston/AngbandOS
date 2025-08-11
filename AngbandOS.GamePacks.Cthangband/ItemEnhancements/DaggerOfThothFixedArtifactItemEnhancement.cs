@@ -20,4 +20,5 @@ public class DaggerOfThothFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "4";
     public override string BonusDamageRollExpression => "3";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

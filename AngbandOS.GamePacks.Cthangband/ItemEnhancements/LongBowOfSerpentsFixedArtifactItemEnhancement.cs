@@ -17,4 +17,5 @@ public class LongBowOfSerpentsFixedArtifactItemEnhancement : ItemEnhancementGame
     public override int Cost => 20000;
     public override string BonusHitsRollExpression => "17";
     public override string BonusDamageRollExpression => "19";
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

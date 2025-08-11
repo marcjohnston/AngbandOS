@@ -29,4 +29,5 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
     public override string BonusAttacksRollExpression => "8";
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "6";
+    public override ColorEnum Color => ColorEnum.BrightBlue;
 }

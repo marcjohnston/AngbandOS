@@ -11,7 +11,6 @@ internal class LargeMetalShieldOfStabilityFixedArtifact : FixedArtifact
 {
     private LargeMetalShieldOfStabilityFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(LargeMetalShieldItemFactory);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Large Metal Shield of Stability";
     public override int Level => 40;
     public override int Rarity => 9;

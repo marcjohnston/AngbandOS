@@ -24,4 +24,5 @@ public class BroadSwordBlackIceFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int Cost => 40000;
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "15";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

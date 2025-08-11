@@ -28,4 +28,5 @@ public class MultiHuedDragonScaleMailRazorbackFixedArtifactItemEnhancement : Ite
     public override int Cost => 400000;
     public override string BonusAttacksRollExpression => "25";
     public override string BonusHitsRollExpression => "-4";
+    public override ColorEnum Color => ColorEnum.Purple;
 }

@@ -11,7 +11,6 @@ internal class FlailTotilaFixedArtifact : FixedArtifact
 {
     private FlailTotilaFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(FlailHaftedWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Flail 'Totila'";
     public override int Level => 20;
     public override int Rarity => 8;

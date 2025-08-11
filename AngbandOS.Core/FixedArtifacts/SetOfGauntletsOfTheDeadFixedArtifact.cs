@@ -11,7 +11,6 @@ internal class SetOfGauntletsOfTheDeadFixedArtifact : FixedArtifact
 {
     private SetOfGauntletsOfTheDeadFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(GauntletGlovesItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Set of Gauntlets of the Dead";
     public override int Level => 10;
     public override int Rarity => 20;

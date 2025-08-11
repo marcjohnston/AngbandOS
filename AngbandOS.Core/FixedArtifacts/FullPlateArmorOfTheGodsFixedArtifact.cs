@@ -11,7 +11,6 @@ internal class FullPlateArmorOfTheGodsFixedArtifact : FixedArtifact
 {
     private FullPlateArmorOfTheGodsFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(FullPlateHardArmorItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Full Plate Armor of the Gods";
     public override int Level => 30;
     public override int Rarity => 3;

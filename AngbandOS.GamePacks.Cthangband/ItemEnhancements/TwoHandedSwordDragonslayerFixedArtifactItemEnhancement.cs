@@ -20,4 +20,5 @@ public class TwoHandedSwordDragonslayerFixedArtifactItemEnhancement : ItemEnhanc
     public override int Cost => 100000;
     public override string BonusHitsRollExpression => "13";
     public override string BonusDamageRollExpression => "17";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

@@ -38,4 +38,5 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "19";
     public override string BonusDamageRollExpression => "21";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

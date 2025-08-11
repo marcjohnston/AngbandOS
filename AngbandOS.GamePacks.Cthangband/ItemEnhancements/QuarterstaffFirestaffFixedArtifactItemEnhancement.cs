@@ -22,4 +22,5 @@ public class QuarterstaffFirestaffFixedArtifactItemEnhancement : ItemEnhancement
     public override int Cost => 70000;
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "20";
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

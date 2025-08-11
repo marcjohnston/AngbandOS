@@ -26,4 +26,5 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override int DamageDice => 9;
     public override string BonusHitsRollExpression => "-30";
     public override string BonusDamageRollExpression => "7";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

@@ -20,4 +20,5 @@ public class BattleAxeSpleenSlicerFixedArtifactItemEnhancement : ItemEnhancement
     public override int Cost => 21000;
     public override string BonusHitsRollExpression => "4";
     public override string BonusDamageRollExpression => "3";
+    public override ColorEnum Color => ColorEnum.Grey;
 }

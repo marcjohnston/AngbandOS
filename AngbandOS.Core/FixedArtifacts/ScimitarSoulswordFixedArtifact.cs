@@ -11,7 +11,6 @@ internal class ScimitarSoulswordFixedArtifact : FixedArtifact
 {
     private ScimitarSoulswordFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(ScimitarWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Scimitar 'Soulsword'";
     public override int Level => 20;
     public override int Rarity => 8;

@@ -22,4 +22,5 @@ public class MainGaucheOfDefenceFixedArtifactItemEnhancement : ItemEnhancementGa
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "12";
     public override string BonusDamageRollExpression => "15";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

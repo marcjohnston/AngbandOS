@@ -22,4 +22,5 @@ public class LochaberAxeOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhanceme
     public override int Cost => 80000;
     public override string BonusHitsRollExpression => "12";
     public override string BonusDamageRollExpression => "17";
+    public override ColorEnum Color => ColorEnum.Black;
 }

@@ -11,7 +11,6 @@ internal class LanceSkewerFixedArtifact : FixedArtifact
 {
     private LanceSkewerFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(LancePolearmWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Lance 'Skewer'";
     public override int Level => 20;
     public override int Rarity => 23;

@@ -27,4 +27,5 @@ public class HalberdArmorbaneFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override int Cost => 22000;
     public override string BonusHitsRollExpression => "6";
     public override string BonusDamageRollExpression => "9";
+    public override ColorEnum Color => ColorEnum.Grey;
 }

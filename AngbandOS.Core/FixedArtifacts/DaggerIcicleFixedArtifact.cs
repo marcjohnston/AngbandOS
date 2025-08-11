@@ -11,7 +11,6 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact
 {
     private DaggerIcicleFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Icicle'";
     public override int Level => 10;
     public override int Rarity => 40;

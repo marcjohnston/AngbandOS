@@ -12,7 +12,6 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact
     public override bool DisableStomp => true;
     private StarEssenceOfXothFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(StarEssenceElendilLightSourceItemFactory);
-    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Star Essence of Xoth";
     public override bool HasOwnType => true;
     public override int Level => 30;

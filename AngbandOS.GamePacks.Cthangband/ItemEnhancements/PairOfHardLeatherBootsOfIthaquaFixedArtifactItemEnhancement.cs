@@ -15,4 +15,5 @@ public class PairOfHardLeatherBootsOfIthaquaFixedArtifactItemEnhancement : ItemE
     public override bool ResNexus => true;
     public override int Cost => 300000;
     public override string BonusAttacksRollExpression => "20";
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

@@ -19,4 +19,5 @@ public class SabreOfBluebeardFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override int Cost => 25000;
     public override string BonusHitsRollExpression => "6";
     public override string BonusDamageRollExpression => "8";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

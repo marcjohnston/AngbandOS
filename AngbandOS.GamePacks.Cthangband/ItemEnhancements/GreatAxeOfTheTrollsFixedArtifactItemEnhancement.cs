@@ -31,4 +31,5 @@ public class GreatAxeOfTheTrollsFixedArtifactItemEnhancement : ItemEnhancementGa
     public override string BonusAttacksRollExpression => "8";
     public override string BonusHitsRollExpression => "15";
     public override string BonusDamageRollExpression => "18";
+    public override ColorEnum Color => ColorEnum.Grey;
 }

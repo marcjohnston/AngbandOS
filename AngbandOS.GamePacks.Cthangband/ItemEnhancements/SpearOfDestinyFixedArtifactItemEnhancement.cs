@@ -36,4 +36,5 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override int Cost => 77777;
     public override string BonusHitsRollExpression => "15";
     public override string BonusDamageRollExpression => "15";
+    public override ColorEnum Color => ColorEnum.Grey;
 }

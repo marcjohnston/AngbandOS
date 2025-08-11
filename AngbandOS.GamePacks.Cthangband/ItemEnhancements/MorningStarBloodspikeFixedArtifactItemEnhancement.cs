@@ -20,4 +20,5 @@ public class MorningStarBloodspikeFixedArtifactItemEnhancement : ItemEnhancement
     public override int Cost => 30000;
     public override string BonusHitsRollExpression => "8";
     public override string BonusDamageRollExpression => "22";
+    public override ColorEnum Color => ColorEnum.Black;
 }

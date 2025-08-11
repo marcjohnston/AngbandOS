@@ -26,4 +26,5 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "6";
     public override string BonusDamageRollExpression => "9";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

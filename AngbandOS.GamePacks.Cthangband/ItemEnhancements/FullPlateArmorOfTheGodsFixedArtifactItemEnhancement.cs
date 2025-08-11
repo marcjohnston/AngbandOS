@@ -20,4 +20,5 @@ public class FullPlateArmorOfTheGodsFixedArtifactItemEnhancement : ItemEnhanceme
     public override int Weight => -80;
     public override int Cost => 50000;
     public override string BonusAttacksRollExpression => "25";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

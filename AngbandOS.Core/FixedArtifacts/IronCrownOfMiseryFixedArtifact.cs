@@ -11,7 +11,6 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
 {
     private IronCrownOfMiseryFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(IronCrownArmorItemFactory);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Iron Crown of Misery";
     public override int Level => 40;
     public override int Rarity => 12;

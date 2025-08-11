@@ -11,7 +11,6 @@ internal class MaceThunderFixedArtifact : FixedArtifact
 {
     private MaceThunderFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(MaceHaftedWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Mace 'Thunder'";
     public override int Level => 20;
     public override int Rarity => 15;

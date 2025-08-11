@@ -11,7 +11,6 @@ internal class LongBowSureshotFixedArtifact : FixedArtifact
 {
     private LongBowSureshotFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(LongBowRangedWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Long Bow 'Sureshot'";
     public override int Level => 40;
     public override int Rarity => 20;

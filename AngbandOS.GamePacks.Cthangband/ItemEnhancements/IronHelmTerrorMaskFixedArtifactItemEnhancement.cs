@@ -30,4 +30,5 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
     public override string BonusAttacksRollExpression => "10";
     public override string BonusHitsRollExpression => "25";
     public override string BonusDamageRollExpression => "25";
+    public override ColorEnum Color => ColorEnum.Grey;
 }

@@ -11,7 +11,6 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
 {
     private QuarterstaffOfAtalFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(QuarterstaffHaftedWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Quarterstaff of Atal";
     public override int Level => 30;
     public override int Rarity => 105;

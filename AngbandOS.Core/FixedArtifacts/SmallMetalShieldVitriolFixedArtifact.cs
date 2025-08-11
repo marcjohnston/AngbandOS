@@ -11,7 +11,6 @@ internal class SmallMetalShieldVitriolFixedArtifact : FixedArtifact
 {
     private SmallMetalShieldVitriolFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(SmallMetalShieldItemFactory);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Small Metal Shield 'Vitriol'";
     public override int Level => 30;
     public override int Rarity => 6;

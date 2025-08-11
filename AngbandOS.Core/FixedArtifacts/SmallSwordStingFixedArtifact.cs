@@ -11,7 +11,6 @@ internal class SmallSwordStingFixedArtifact : FixedArtifact
 {
     private SmallSwordStingFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(ShortSwordWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Small Sword 'Sting'";
     public override int Level => 20;
     public override int Rarity => 15;

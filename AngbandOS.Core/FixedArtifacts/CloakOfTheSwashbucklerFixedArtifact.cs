@@ -11,7 +11,6 @@ internal class CloakOfTheSwashbucklerFixedArtifact : FixedArtifact
 {
     private CloakOfTheSwashbucklerFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(ClothCloakItemFactory);
-    public override ColorEnum Color => ColorEnum.Green;
     public override string Name => "The Cloak of the Swashbuckler";
     public override int Level => 10;
     public override int Rarity => 90;

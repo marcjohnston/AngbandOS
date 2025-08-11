@@ -11,7 +11,6 @@ internal class GoldenCrownOfTheSunFixedArtifact : FixedArtifact
 {
     private GoldenCrownOfTheSunFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(GoldenCrownArmorItemFactory);
-    public override ColorEnum Color => ColorEnum.Yellow;
     public override string Name => "The Golden Crown of the Sun";
     public override int Level => 40;
     public override int Rarity => 40;

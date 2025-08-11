@@ -25,4 +25,5 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool SlowDigest => true;
     public override int Cost => 0;
     public override string BonusAttacksRollExpression => "25";
+    public override ColorEnum Color => ColorEnum.Grey;
 }

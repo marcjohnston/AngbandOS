@@ -21,4 +21,5 @@ public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int Cost => 40000;
     public override string BonusHitsRollExpression => "8";
     public override string BonusDamageRollExpression => "10";
+    public override ColorEnum Color => ColorEnum.Grey;
 }

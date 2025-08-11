@@ -11,7 +11,6 @@ internal class ChainMailHeartguardFixedArtifact : FixedArtifact
 {
     private ChainMailHeartguardFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(ChainMailHardArmorItemFactory);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Chain Mail 'Heartguard'";
     public override int Level => 20;
     public override int Rarity => 3;

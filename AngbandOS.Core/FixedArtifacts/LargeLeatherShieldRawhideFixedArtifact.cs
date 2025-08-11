@@ -11,7 +11,6 @@ internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
 {
     private LargeLeatherShieldRawhideFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(LargeLeatherShieldItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Large Leather Shield 'Rawhide'";
     public override int Level => 30;
     public override int Rarity => 3;

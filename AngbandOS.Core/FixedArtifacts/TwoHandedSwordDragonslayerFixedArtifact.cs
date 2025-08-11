@@ -11,7 +11,6 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
 {
     private TwoHandedSwordDragonslayerFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(TwoHandedSwordWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Two-Handed Sword 'Dragonslayer'";
     public override int Level => 30;
     public override int Rarity => 30;

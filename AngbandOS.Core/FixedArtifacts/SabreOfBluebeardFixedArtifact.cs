@@ -11,7 +11,6 @@ internal class SabreOfBluebeardFixedArtifact : FixedArtifact
 {
     private SabreOfBluebeardFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(SabreWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Sabre of Bluebeard";
     public override int Level => 15;
     public override int Rarity => 8;

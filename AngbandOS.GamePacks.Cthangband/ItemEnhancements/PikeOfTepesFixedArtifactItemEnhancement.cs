@@ -30,4 +30,5 @@ public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override string BonusAttacksRollExpression => "10";
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "12";
+    public override ColorEnum Color => ColorEnum.Grey;
 }

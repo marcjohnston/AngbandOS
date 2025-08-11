@@ -12,7 +12,6 @@ internal class LightCrossbowOfDeathFixedArtifact : FixedArtifact
     private LightCrossbowOfDeathFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(LightCrossbowRangedWeaponItemFactory);
     public string DescribeActivationEffect => "fire branding of bolts every 999 turns";
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Light Crossbow of Death";
     public override int Level => 50;
     public override int Rarity => 25;

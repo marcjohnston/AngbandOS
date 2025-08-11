@@ -11,7 +11,6 @@ internal class LongSwordOfEverflameFixedArtifact : FixedArtifact
 {
     private LongSwordOfEverflameFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Long Sword of Everflame";
     public override int Level => 20;
     public override int Rarity => 40;

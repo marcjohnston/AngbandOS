@@ -11,7 +11,6 @@ internal class PairOfHardLeatherBootsOfIthaquaFixedArtifact : FixedArtifact
 {
     private PairOfHardLeatherBootsOfIthaquaFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(HardLeatherBootsItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightBrown;
     public override string Name => "The Pair of Hard Leather Boots of Ithaqua";
     public override int Level => 40;
     public override int Rarity => 120;

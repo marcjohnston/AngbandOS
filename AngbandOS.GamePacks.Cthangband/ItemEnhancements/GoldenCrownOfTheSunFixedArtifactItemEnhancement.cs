@@ -36,4 +36,5 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool Telepathy => true;
     public override int Cost => 125000;
     public override string BonusAttacksRollExpression => "15";
+    public override ColorEnum Color => ColorEnum.Yellow;
 }

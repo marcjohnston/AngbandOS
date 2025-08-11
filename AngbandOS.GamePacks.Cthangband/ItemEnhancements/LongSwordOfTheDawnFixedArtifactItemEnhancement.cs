@@ -36,4 +36,5 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "20";
     public override string BonusDamageRollExpression => "20";
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

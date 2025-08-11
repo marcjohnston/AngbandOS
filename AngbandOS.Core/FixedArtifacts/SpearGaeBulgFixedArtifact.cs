@@ -11,7 +11,6 @@ internal class SpearGaeBulgFixedArtifact : FixedArtifact
 {
     private SpearGaeBulgFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(SpearPolearmWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.Grey;
     public override string Name => "The Spear 'Gae Bulg'";
     public override int Level => 15;
     public override int Rarity => 12;

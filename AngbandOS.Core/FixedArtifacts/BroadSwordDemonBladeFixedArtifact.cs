@@ -11,7 +11,6 @@ internal class BroadSwordDemonBladeFixedArtifact : FixedArtifact
 {
     private BroadSwordDemonBladeFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(BroadSwordWeaponItemFactory);
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Broad Sword 'Demon Blade'";
     public override int Level => 20;
     public override int Rarity => 15;

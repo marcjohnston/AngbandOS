@@ -12,7 +12,6 @@ internal class DaggerCharityFixedArtifact : FixedArtifact
     private DaggerCharityFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(DaggerWeaponItemFactory);
     public string DescribeActivationEffect => "lightning bolt (4d8) every 6+d6 turns";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
     public override string Name => "The Dagger 'Charity'";
     public override int Level => 5;
     public override int Rarity => 10;

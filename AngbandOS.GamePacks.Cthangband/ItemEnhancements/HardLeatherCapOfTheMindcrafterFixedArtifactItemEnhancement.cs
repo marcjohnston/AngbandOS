@@ -16,4 +16,5 @@ public class HardLeatherCapOfTheMindcrafterFixedArtifactItemEnhancement : ItemEn
     public override bool Telepathy => true;
     public override int Cost => 50000;
     public override string BonusAttacksRollExpression => "10";
+    public override ColorEnum Color => ColorEnum.Brown;
 }

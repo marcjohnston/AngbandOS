@@ -11,7 +11,6 @@ internal class ShadowCloakOfTheShoggothFixedArtifact : FixedArtifact
 {
     private ShadowCloakOfTheShoggothFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(ShadowCloakItemFactory);
-    public override ColorEnum Color => ColorEnum.Black;
     public override string Name => "The Shadow Cloak of the Shoggoth";
     public override int Level => 40;
     public override int Rarity => 40;
