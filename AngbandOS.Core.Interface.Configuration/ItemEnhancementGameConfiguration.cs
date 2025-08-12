@@ -109,6 +109,7 @@ public class ItemEnhancementGameConfiguration
     public virtual bool IsCursed { get; set; } = false;
     public virtual int DamageDice { get; set; } = 0;
     public virtual int DiceSides { get; set; } = 0;
+    public virtual bool DisableStomp { get; set; } = false;
     public virtual bool DrainExp { get; set; } = false;
     public virtual bool DreadCurse { get; set; } = false;
     public virtual bool EasyKnow { get; set; } = false;
