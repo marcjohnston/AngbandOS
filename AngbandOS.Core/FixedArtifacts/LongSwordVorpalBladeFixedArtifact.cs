@@ -11,9 +11,6 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
 {
     private LongSwordVorpalBladeFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(LongSwordWeaponItemFactory);
-    public override int VorpalExtraDamage1InChance => 3;
-    public override int VorpalExtraAttacks1InChance => 2;
-    public override bool IsVorpalBlade => true;
     public override string Name => "The Long Sword 'Vorpal Blade'";
     public override int Level => 50;
     public override int Rarity => 30;

@@ -119,7 +119,12 @@ internal enum PropertyEnum
     Value,
     Valueless,
     Vampiric,
-    Vorpal,
+    Vorpal1InChance,
+
+    /// <summary>
+    /// Returns a 1-in-chance value of the weapon doing extra vorpal attacks. Does not affect non-vorpal cutting weapons.  Default to a 1-in-4 chance.
+    /// </summary>
+    VorpalExtraAttacks1InChance,
     Wraith,
     Weight,
     XtraMight,

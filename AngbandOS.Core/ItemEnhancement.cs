@@ -131,7 +131,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         TreasureRating = itemEnhancementGameConfiguration.TreasureRating;
         Valueless = itemEnhancementGameConfiguration.Valueless;
         Vampiric = itemEnhancementGameConfiguration.Vampiric;
-        Vorpal = itemEnhancementGameConfiguration.Vorpal;
+        Vorpal1InChance = itemEnhancementGameConfiguration.Vorpal1InChance;
         Weight = itemEnhancementGameConfiguration.Weight;
         Wraith = itemEnhancementGameConfiguration.Wraith;
         XtraMight = itemEnhancementGameConfiguration.XtraMight;
@@ -257,7 +257,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Value = Value,
             Valueless = Valueless,
             Vampiric = Vampiric,
-            Vorpal = Vorpal,
+            Vorpal1InChance = Vorpal1InChance,
             Weight = Weight,
             Wraith = Wraith,
             XtraMight = XtraMight,
@@ -411,7 +411,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             TreasureRating = TreasureRating,
             Valueless = Valueless,
             Vampiric = Vampiric,
-            Vorpal = Vorpal,
+            Vorpal1InChance = Vorpal1InChance,
             Weight = Weight,
             Wraith = Wraith,
             XtraMight = XtraMight,
@@ -781,7 +781,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool Vampiric { get; } = false;
     
     /// <inheritdoc />
-    private bool Vorpal { get; } = false;
+    private int Vorpal1InChance { get; } = 0;
+    private int VorpalExtraAttacks1InChance { get; } = 0;
 
     private int Weight { get; } = 0;
     

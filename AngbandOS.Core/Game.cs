@@ -7620,21 +7620,19 @@ internal class Game
                     // Check if we did a critical
                     totalDamage = PlayerCriticalMelee(meleeItem.EffectivePropertySet.Weight, meleeItem.EffectivePropertySet.BonusHits, totalDamage);
 
-                    int extraDamage1InChance = meleeItem.FixedArtifact == null ? 2 : meleeItem.FixedArtifact.VorpalExtraDamage1InChance;
-
                     // Vorpal weapons have a chance of a deep cut.
-                    bool vorpalCut = meleeItem.EffectivePropertySet.Vorpal && DieRoll(extraDamage1InChance) == 1;
+                    bool vorpalCut = DieRoll(meleeItem.EffectivePropertySet.Vorpal1InChance) == 1;
 
                     // If we did a vorpal cut, do extra damage
                     if (vorpalCut)
                     {
                         int stepK = totalDamage;
-                        string message = meleeItem.FixedArtifact == null || !meleeItem.FixedArtifact.IsVorpalBlade ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
+                        string message = meleeItem.EffectivePropertySet.Vorpal1InChance == 0 ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
                         MsgPrint(message);
                         do
                         {
                             totalDamage += stepK;
-                        } while (DieRoll(meleeItem.FixedArtifact == null ? 4 : meleeItem.FixedArtifact.VorpalExtraAttacks1InChance) == 1);
+                        } while (DieRoll(meleeItem.EffectivePropertySet.VorpalExtraAttacks1InChance) == 1);
                     }
                     // Add bonus damage for the weapon
                     totalDamage += meleeItem.EffectivePropertySet.BonusDamage;

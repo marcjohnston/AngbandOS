@@ -9,7 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class VorpalAndWarriorArtifactBiasItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Vorpal => true;
+    public override int Vorpal1InChance => 2;
+    public override int VorpalExtraAttacks1InChance => 2;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Warrior1In9ArtifactBiasWeightedRandom);
     public override string[]? ApplicableItemFactoryBindingKeys => new string[]
     {

@@ -32,7 +32,8 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override bool SlayUndead => true;
-    public override bool Vorpal => true;
+    public override int Vorpal1InChance => 6;
+    public override int VorpalExtraAttacks1InChance => 2;
     public override int Weight => 50;
     public override int Cost => 205000;
     public override int DamageDice => 1;

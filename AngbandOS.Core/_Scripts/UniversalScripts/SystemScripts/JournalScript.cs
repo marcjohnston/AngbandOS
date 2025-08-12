@@ -246,7 +246,7 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Slay Troll", 7, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayTroll);
         DisplayStat("Slay Giant", 8, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayGiant);
         DisplayStat("Slay Drag.", 9, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.SlayDragon > 1);
-        DisplayStat("Sharpness", 10, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Vorpal);
+        DisplayStat("Sharpness", 10, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Vorpal1InChance > 0);
         DisplayStat("Impact", 11, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.Impact);
         DisplayStat("Poison Brd", 12, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandPois);
         DisplayStat("Acid Brand", 13, 26, (EffectivePropertySet itemCharacteristics) => itemCharacteristics.BrandAcid);

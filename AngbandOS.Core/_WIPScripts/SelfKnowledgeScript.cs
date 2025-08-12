@@ -372,7 +372,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
             {
                 info[infoCount++] = "The impact of your weapon can cause earthquakes.";
             }
-            if (meleeItem.EffectivePropertySet.Vorpal)
+            if (meleeItem.EffectivePropertySet.Vorpal1InChance > 0)
             {
                 info[infoCount++] = "Your weapon is very sharp.";
             }

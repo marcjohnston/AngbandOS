@@ -22,7 +22,8 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool SeeInvis => true;
     public override bool SlayEvil => true;
     public override bool SlowDigest => true;
-    public override bool Vorpal => true;
+    public override int Vorpal1InChance => 3;
+    public override int VorpalExtraAttacks1InChance => 2;
     public override int Weight => 20;
     public override int Cost => 250000;
     public override int DamageDice => 3;

@@ -63,18 +63,6 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     /// </summary>
     public ItemFactory BaseItemFactory { get; private set; }
 
-    /// <summary>
-    /// Returns a 1-in-chance value of the weapon doing extra vorpal damage.  Does not affect non-vorpal cutting weapons.  Default to a 1-in-6 chance.
-    /// </summary>
-    public virtual int VorpalExtraDamage1InChance => 6; // TODO: Move this into the ItemCharacteristics
-
-    public virtual bool IsVorpalBlade => false; // TODO: Move this into the ItemCharacteristics
-
-    /// <summary>
-    /// Returns a 1-in-chance value of the weapon doing extra vorpal attacks. Does not affect non-vorpal cutting weapons.  Default to a 1-in-4 chance.
-    /// </summary>
-    public virtual int VorpalExtraAttacks1InChance => 4; // TODO: Move this into the ItemCharacteristics
-
     public virtual bool DisableStomp => false;
     public abstract string Name { get; } // TODO: This must be used outside of the ItemEnhancement
 

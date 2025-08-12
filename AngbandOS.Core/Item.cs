@@ -1230,7 +1230,7 @@ internal sealed class Item : IComparable<Item>
             info[i++] = $"It provides light (radius {EffectivePropertySet.Radius}) {burnRate}.";
         }
 
-        if (EffectivePropertySet.Vorpal)
+        if (EffectivePropertySet.Vorpal1InChance > 0)
         {
             info[i++] = "It is very sharp and can cut your foes.";
         }
@@ -1605,7 +1605,7 @@ internal sealed class Item : IComparable<Item>
             value += Game.BonusSlayGiantlValue;
         }
         value += EffectivePropertySet.SlayDragon * Game.BonusSlayDragonValue;
-        if (EffectivePropertySet.Vorpal)
+        if (EffectivePropertySet.Vorpal1InChance > 0)
         {
             value += Game.BonusVorpalValue;
         }

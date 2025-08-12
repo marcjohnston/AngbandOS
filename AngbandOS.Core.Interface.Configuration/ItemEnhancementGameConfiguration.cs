@@ -177,7 +177,8 @@ public class ItemEnhancementGameConfiguration
     public virtual bool Valueless { get; set; } = false;
 
     public virtual bool Vampiric { get; set; } = false;
-    public virtual bool Vorpal { get; set; } = false;
+    public virtual int Vorpal1InChance { get; set; } = 0;
+    public virtual int VorpalExtraAttacks1InChance { get; set; } = 0;
     public virtual int Weight { get; set; } = 0;
     public virtual bool Wraith { get; set; } = false;   
     public virtual bool XtraMight { get; set; } = false;

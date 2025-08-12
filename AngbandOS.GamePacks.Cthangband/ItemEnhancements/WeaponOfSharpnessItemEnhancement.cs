@@ -12,5 +12,6 @@ public class WeaponOfSharpnessItemEnhancement : ItemEnhancementGameConfiguration
     public override int Value => 5000;
     public override string? FriendlyName => "of Sharpness";
     public override int TreasureRating => 20;
-    public override bool Vorpal => true;
+    public override int Vorpal1InChance => 2;
+    public override int VorpalExtraAttacks1InChance => 2;
 }

@@ -366,10 +366,6 @@ internal abstract class ItemTest : IGetKey
         {
             return false;
         }
-        if (!TestBoolean(Vorpal, effectivePropertySet.Vorpal))
-        {
-            return false;
-        }
         if (!TestBoolean(Wraith, effectivePropertySet.Wraith))
         {
             return false;

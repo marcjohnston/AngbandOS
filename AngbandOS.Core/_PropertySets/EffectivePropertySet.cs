@@ -146,7 +146,8 @@ internal class EffectivePropertySet
         RegisterIntPropertyFactory(PropertyEnum.Value);
         RegisterBoolPropertyFactory(PropertyEnum.Valueless);
         RegisterBoolPropertyFactory(PropertyEnum.Vampiric);
-        RegisterBoolPropertyFactory(PropertyEnum.Vorpal);
+        RegisterIntPropertyFactory(PropertyEnum.Vorpal1InChance);
+        RegisterIntPropertyFactory(PropertyEnum.VorpalExtraAttacks1InChance);
         RegisterIntPropertyFactory(PropertyEnum.Weight);
         RegisterBoolPropertyFactory(PropertyEnum.Wraith);
         RegisterBoolPropertyFactory(PropertyEnum.XtraMight);
@@ -1522,15 +1523,26 @@ internal class EffectivePropertySet
             SetBoolValue(PropertyEnum.Vampiric, value);
         }
     }
-    public bool Vorpal
+    public int Vorpal1InChance
     {
         get
         {
-            return GetBoolValue(PropertyEnum.Vorpal);
+            return GetIntValue(PropertyEnum.Vorpal1InChance);
         }
         set
         {
-            SetBoolValue(PropertyEnum.Vorpal, value);
+            SetIntValue(PropertyEnum.Vorpal1InChance, value);
+        }
+    }
+    public int VorpalExtraAttacks1InChance
+    {
+        get
+        {
+            return GetIntValue(PropertyEnum.VorpalExtraAttacks1InChance);
+        }
+        set
+        {
+            SetIntValue(PropertyEnum.VorpalExtraAttacks1InChance, value);
         }
     }
     public int Weight
