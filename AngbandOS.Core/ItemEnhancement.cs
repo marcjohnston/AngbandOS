@@ -68,7 +68,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         IsCursed = itemEnhancementGameConfiguration.IsCursed;
         DamageDice = itemEnhancementGameConfiguration.DamageDice;
         DiceSides = itemEnhancementGameConfiguration.DiceSides;
-        DisableStomp = itemEnhancementGameConfiguration.DisableStomp;
         DrainExp = itemEnhancementGameConfiguration.DrainExp;
         DreadCurse = itemEnhancementGameConfiguration.DreadCurse;
         EasyKnow = itemEnhancementGameConfiguration.EasyKnow;
@@ -193,7 +192,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             IsCursed = IsCursed,
             DamageDice = DamageDice,
             DiceSides = DiceSides,
-            DisableStomp = DisableStomp,
             DrainExp = DrainExp,
             DreadCurse = DreadCurse,
             EasyKnow = EasyKnow,
@@ -350,7 +348,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             IsCursed = IsCursed,
             DamageDice = DamageDice,
             DiceSides = DiceSides,
-            DisableStomp = DisableStomp,
             DrainExp = DrainExp,
             DreadCurse = DreadCurse,
             EasyKnow = EasyKnow,
@@ -595,7 +592,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private int DiceSides { get; } = 0;
 
     /// <inheritdoc />
-    private bool DisableStomp { get; } = false;
     private bool DrainExp { get; } = false;
     
     /// <inheritdoc />

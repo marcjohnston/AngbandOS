@@ -80,7 +80,6 @@ internal class EffectivePropertySet
         RegisterBoolPropertyFactory(PropertyEnum.IsCursed);
         RegisterIntPropertyFactory(PropertyEnum.DamageDice);
         RegisterIntPropertyFactory(PropertyEnum.DiceSides);
-        RegisterBoolPropertyFactory(PropertyEnum.DisableStomp);
         RegisterBoolPropertyFactory(PropertyEnum.DrainExp);
         RegisterBoolPropertyFactory(PropertyEnum.DreadCurse);
         RegisterBoolPropertyFactory(PropertyEnum.EasyKnow);
@@ -796,17 +795,6 @@ internal class EffectivePropertySet
         set
         {
             SetIntValue(PropertyEnum.DiceSides, value);
-        }
-    }
-    public bool DisableStomp
-    {
-        get
-        {
-            return GetBoolValue(PropertyEnum.DisableStomp);
-        }
-        set
-        {
-            SetBoolValue(PropertyEnum.DisableStomp, value);
         }
     }
     public bool DrainExp
