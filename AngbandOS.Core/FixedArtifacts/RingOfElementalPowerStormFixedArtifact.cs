@@ -13,7 +13,8 @@ internal class RingOfElementalPowerStormFixedArtifact : FixedArtifact
     private RingOfElementalPowerStormFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(VilyaRingItemFactory);
     public override string Name => "The Ring of Elemental Power (Storm)";
-    public override bool HasOwnType => true;
+    public override bool DisableViaEnchantment => true;
+    public override bool DisableViaRandom => true;
     public override int Level => 90;
     public override int Rarity => 50;
 }

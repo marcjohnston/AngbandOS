@@ -13,7 +13,8 @@ internal class RingOfMagicFixedArtifact : FixedArtifact
     private RingOfMagicFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(BarahirRingItemFactory);
     public override string Name => "The Ring of Magic";
-    public override bool HasOwnType => true;
+    public override bool DisableViaEnchantment => true;
+    public override bool DisableViaRandom => true;
     public override int Level => 50;
     public override int Rarity => 25;
 }

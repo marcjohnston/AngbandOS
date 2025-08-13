@@ -13,7 +13,8 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact
     private StarEssenceOfPolarisFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(StarEssenceGaladrielLightSourceItemFactory);
     public override string Name => "The Star Essence of Polaris";
-    public override bool HasOwnType => true;
+    public override bool DisableViaEnchantment => true;
+    public override bool DisableViaRandom => true;
     public override int Level => 1;
     public override int Rarity => 1;
 }

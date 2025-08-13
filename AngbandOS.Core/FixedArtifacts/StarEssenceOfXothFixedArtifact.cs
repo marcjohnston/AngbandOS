@@ -13,7 +13,8 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact
     private StarEssenceOfXothFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(StarEssenceElendilLightSourceItemFactory);
     public override string Name => "The Star Essence of Xoth";
-    public override bool HasOwnType => true;
+    public override bool DisableViaEnchantment => true;
+    public override bool DisableViaRandom => true;
     public override int Level => 30;
     public override int Rarity => 25;
 }

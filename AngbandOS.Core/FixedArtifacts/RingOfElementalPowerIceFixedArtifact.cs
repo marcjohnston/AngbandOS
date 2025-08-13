@@ -13,7 +13,8 @@ internal class RingOfElementalPowerIceFixedArtifact : FixedArtifact
     private RingOfElementalPowerIceFixedArtifact(Game game) : base(game) { }
     protected override string BaseItemFactoryName => nameof(NenyaRingItemFactory);
     public override string Name => "The Ring of Elemental Power (Ice)";
-    public override bool HasOwnType => true;
+    public override bool DisableViaEnchantment => true;
+    public override bool DisableViaRandom => true;
     public override int Level => 80;
     public override int Rarity => 40;
 }

@@ -13,7 +13,8 @@ internal class RingOfSetFixedArtifact : FixedArtifact
     public override bool DisableStomp => true;
     protected override string BaseItemFactoryName => nameof(PowerRingItemFactory);
     public override string Name => "The Ring of Set";
-    public override bool HasOwnType => true;
+    public override bool DisableViaEnchantment => true;
+    public override bool DisableViaRandom => true;
     public override int Level => 100;
     public override int Rarity => 100;
 }
