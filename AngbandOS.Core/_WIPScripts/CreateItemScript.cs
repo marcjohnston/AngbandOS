@@ -41,7 +41,7 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
         }
         Item qPtr = itemFactory.GenerateItem();
         qPtr.StackCount = Game.CommandArgument == 0 ? 1 : Game.CommandArgument;
-        if (!Game.GetBool($"Allow Fixed Artifact (0=False, 1=True)? ", out bool ok))
+        if (!Game.GetBool($"Allow Fixed Artifact (0=False, 1=True)? ", out bool allowFixedArtifact))
         {
             return;
         }
@@ -54,7 +54,7 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
             return;
         }
 
-        qPtr.EnchantItem(Game.Difficulty, ok, good, great, true);
+        qPtr.EnchantItem(Game.Difficulty, allowFixedArtifact, good, great, true);
         Game.DropNear(qPtr, null, Game.MapY.IntValue, Game.MapX.IntValue);
         Game.MsgPrint("Allocated.");
         return;

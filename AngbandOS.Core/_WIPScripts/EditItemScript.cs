@@ -40,7 +40,7 @@ internal class EditItemScript : Script, IScript, ICastSpellScript
             }
             if (int.TryParse(tmpVal, out int val))
             {
-                if (!Game.GetBool($"Ok Item (0=False, 1=True)? ", out bool ok))
+                if (!Game.GetBool($"Allow Fixed Artifact Item (0=False, 1=True)? ", out bool allowFixedArtifact))
                 {
                     return;
                 }
@@ -53,7 +53,7 @@ internal class EditItemScript : Script, IScript, ICastSpellScript
                     return;
                 }
                 item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(val));
-                item.EnchantItem(Game.Difficulty, ok, good, great, true);
+                item.EnchantItem(Game.Difficulty, allowFixedArtifact, good, great, true);
                 break;
             }
         } while (true);
