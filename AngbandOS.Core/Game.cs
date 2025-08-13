@@ -2361,7 +2361,7 @@ internal class Game
             }
             item = kIdx.GenerateItem();
         }
-        item.EnchantItem(ObjectLevel, true, good, great, true); // This applies the fixed artifact.
+        item.EnchantItem(ObjectLevel, true, good, great, true); 
         item.StackCount = item.MakeObjectCount;
         if (!item.EffectivePropertySet.IsCursed && !item.IsBroken && item.LevelNormallyFound > Difficulty)
         {
