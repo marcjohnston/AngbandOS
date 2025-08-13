@@ -66,7 +66,8 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     public virtual bool DisableStomp => false;
     public abstract string Name { get; } // TODO: This must be used outside of the ItemEnhancement
 
-    public virtual bool HasOwnType => false; // TODO: What is this?
+    public virtual bool DisableViaEnchantment => false;
+    public virtual bool DisableViaRandom => false;
 
     public abstract int Level { get; } // TODO: Need to convert this to an enhancement.  This must be used outside of the ItemEnhancement
 

@@ -2303,7 +2303,7 @@ internal class Game
         do
         {
             FixedArtifact aPtr = fixedArtifactsWeightedRandom.Choose();
-            if (!aPtr.HasOwnType)
+            if (!aPtr.DisableViaRandom)
             {
                 continue;
             }

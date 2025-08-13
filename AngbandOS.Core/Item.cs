@@ -2239,7 +2239,8 @@ internal sealed class Item : IComparable<Item>
         }
         foreach (FixedArtifact aPtr in Game.SingletonRepository.Get<FixedArtifact>()) // TODO: This needs to be random ... 
         {
-            if (aPtr.HasOwnType)
+            // Check to see if this fixed artifact supports the enchantment process.
+            if (aPtr.DisableViaEnchantment)
             {
                 continue;
             }
