@@ -26,22 +26,22 @@ internal abstract class RoomLayout : IGetKey
     public void Bind() { }
 
     /// <summary>
-    /// Returns the number of grid blocks to the left this type of room occupies.
+    /// Returns the number of grid blocks to the left of the zero-dimension center that the room occupies.
     /// </summary>
     public abstract int Dx1 { get; }
 
     /// <summary>
-    /// Returns the number of grid blocks to the right this type of room occupies.
+    /// Returns the number of grid blocks to the right of the zero-dimension center that the room occupies.
     /// </summary>
     public abstract int Dx2 { get; }
 
     /// <summary>
-    /// Returns the number of grid blocks to the top this type of room occupies.
+    /// Returns the number of grid blocks to the top of the zero-dimension center that the room occupies.
     /// </summary>
     public abstract int Dy1 { get; }
 
     /// <summary>
-    /// Returns the number of grid blocks to the bottom this type of room occupies.
+    /// Returns the number of grid blocks to the bottom of the zero-dimension center that the room occupies.
     /// </summary>
     public abstract int Dy2 { get; }
 
