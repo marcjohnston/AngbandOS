@@ -40,7 +40,7 @@ internal abstract class MonsterEffect : IGetKey
     /// <summary>
     /// Attempt to join all of the projectile affect monsters with common framework.
     /// </summary>
-    /// <param name="who"></param>
+    /// <param name="who">This is the monster index, with the Player == 0</param>
     /// <param name="mPtr"></param>
     /// <param name="dam"></param>
     /// <param name="note"></param>
