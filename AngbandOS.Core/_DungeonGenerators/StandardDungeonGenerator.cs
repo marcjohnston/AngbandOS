@@ -10,12 +10,7 @@ namespace AngbandOS.Core.DungeonGenerators;
 internal class StandardDungeonGenerator : DungeonGenerator
 {
     private const int MaximumNumberOfRooms = 100; // This is the maximum number of rooms that can be tracked when a dungeon is generated.  Any rooms generated beyond this count are not tracked as a room.
-    private GridCoordinate[] Rooms; // This is the center of each room that was generated.
-
-    /// <summary>
-    /// Returns the number of rooms that were generated.
-    /// </summary>
-    private int RoomCount;
+    private List<GridCoordinate> Rooms = new List<GridCoordinate>(); // This is the center of each room that was generated.
 
     private const int _smallLevel = 3;
     private GridCoordinate[] Door;
@@ -214,10 +209,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
         y = (y1 + y2 + 1) * _blockHgt / 2;
         x = (x1 + x2 + 1) * _blockWid / 2;
         roomType.Build(objectLevel, y, x);
-        if (RoomCount < MaximumNumberOfRooms)
+        if (Rooms.Count < MaximumNumberOfRooms)
         {
-            Rooms[RoomCount] = new GridCoordinate(x, y);
-            RoomCount++; // TODO: This is a module level variable
+            Rooms.Add(new GridCoordinate(x, y));
         }
         for (y = y1; y <= y2; y++)
         {
@@ -840,7 +834,6 @@ internal class StandardDungeonGenerator : DungeonGenerator
         bool destroyed = false;
         bool emptyLevel = false;
 
-        Rooms = new GridCoordinate[MaximumNumberOfRooms];
         Door = new GridCoordinate[DoorMax];
         Wall = new GridCoordinate[WallMax];
         Tunn = new GridCoordinate[TunnMax];
@@ -912,11 +905,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
             }
         }
         Crowded = false;
-        RoomCount = 0;
         int roomAttemptCount = 0;
 
         // Attempt to generate rooms until we have attempted a minimum number of generations and we have reached a minimum number of rooms generated.
-        while (roomAttemptCount < MinimumNumberOfRoomsToAttemptToCreate || RoomCount < MinimumRoomCount)
+        while (roomAttemptCount < MinimumNumberOfRoomsToAttemptToCreate || Rooms.Count < MinimumRoomCount)
         {
             roomAttemptCount++;
 
@@ -1008,19 +1000,19 @@ internal class StandardDungeonGenerator : DungeonGenerator
             GridTile cPtr = Game.Map.Grid[y][Game.CurWid - 1];
             cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallPermentSolidTile)));
         }
-        for (int i = 0; i < RoomCount; i++)
+        for (int i = 0; i < Rooms.Count; i++)
         {
-            int pick1 = Game.RandomLessThan(RoomCount);
-            int pick2 = Game.RandomLessThan(RoomCount);
+            int pick1 = Game.RandomLessThan(Rooms.Count);
+            int pick2 = Game.RandomLessThan(Rooms.Count);
             int y1 = Rooms[pick1].Y;
             int x1 = Rooms[pick1].X;
             Rooms[pick1] = Rooms[pick2].Clone();
             Rooms[pick2] = new GridCoordinate(x1, y1);
         }
         DoorN = 0;
-        y = Rooms[RoomCount - 1].Y;
-        x = Rooms[RoomCount - 1].X;
-        for (int i = 0; i < RoomCount; i++)
+        y = Rooms[Rooms.Count - 1].Y;
+        x = Rooms[Rooms.Count - 1].X;
+        for (int i = 0; i < Rooms.Count; i++)
         {
             BuildTunnel(Rooms[i].Y, Rooms[i].X, y, x);
             y = Rooms[i].Y;
