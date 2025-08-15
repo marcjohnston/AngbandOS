@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GreatAxePolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.GreatAxeOfTheTrollsFixedArtifact), nameof(FixedArtifactsEnum.GreatAxeOfTheYeeksFixedArtifact) };
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
     public override string Name => "Great Axe";
 

@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SpearPolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.SpearGaeBulgFixedArtifact), nameof(FixedArtifactsEnum.SpearGungnirFixedArtifact), nameof(FixedArtifactsEnum.SpearOfDestinyFixedArtifact) };
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
     public override string Name => "Spear";
 

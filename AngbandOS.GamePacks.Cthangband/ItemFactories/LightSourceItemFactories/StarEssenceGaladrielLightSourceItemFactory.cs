@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class StarEssenceGaladrielLightSourceItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.StarEssenceOfPolarisFixedArtifact) };
     public override bool DisableStomp => true;
     public override string SymbolBindingKey => nameof(AsteriskSymbol);
     public override string Name => "Star Essence Galadriel";

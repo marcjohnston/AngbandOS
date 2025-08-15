@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LongBowRangedWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.LongBowOfSerpentsFixedArtifact), nameof(FixedArtifactsEnum.LongBowSureshotFixedArtifact) };
     public override string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey => nameof(SlayingRangedWeaponItemEnhancementWeightedRandom);
     public override string SymbolBindingKey => nameof(CloseBracketSymbol);
     public override string Name => "Long Bow";

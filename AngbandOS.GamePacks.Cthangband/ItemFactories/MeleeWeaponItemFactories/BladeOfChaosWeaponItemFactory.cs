@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BladeOfChaosWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.BladeOfChaosDoomcallerFixedArtifact) };
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
     public override string Name => "Blade of Chaos";
 

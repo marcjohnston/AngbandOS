@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MainGaucheWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.MainGaucheOfDefenceFixedArtifact) };
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
     public override string Name => "Main Gauche";
 

@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class TwoHandedFlailHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.TwoHandedFlailThunderfistFixedArtifact) };
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
     public override string Name => "Two-Handed Flail";
 

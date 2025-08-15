@@ -139,6 +139,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         IsConsumedWhenEaten = itemFactoryGameConfiguration.IsConsumedWhenEaten;
         ReadBindingTuple = itemFactoryGameConfiguration.ReadBindingTuple;
         DisableStomp = itemFactoryGameConfiguration.DisableStomp;
+        EnhancementFixedArtifactFactoriesBindingKeys = itemFactoryGameConfiguration.EnhancementFixedArtifactFactoriesBindingKeys;
     }
     #endregion
 
@@ -327,6 +328,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             VanishesWhenEatenBySkeletons = VanishesWhenEatenBySkeletons,
             IsConsumedWhenEaten = IsConsumedWhenEaten,
             ReadBindingTuple = ReadBindingTuple,
+            EnhancementFixedArtifactFactoriesBindingKeys = EnhancementFixedArtifactFactoriesBindingKeys,
         };
         return JsonSerializer.Serialize(itemFactoryGameConfiguration, Game.GetJsonSerializerOptions());
     }
@@ -529,6 +531,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         BreakageChanceProbability = Game.ParseProbabilityExpression(BreakageChanceProbabilityExpression);
         SlayingRandomArtifactItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey);
         PreassignedItemFlavor = Game.SingletonRepository.GetNullable<ItemFlavor>(PreassignedItemFlavorBindingKey);
+        EnhancementFixedArtifactFactories = Game.SingletonRepository.GetNullable<FixedArtifact>(EnhancementFixedArtifactFactoriesBindingKeys);
     }
 
     /// <summary>
@@ -1594,6 +1597,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     #endregion
 
     #region Bound Concrete Properties - API Object Functionality - Set during Bind() - get; private set;
+    public FixedArtifact[]? EnhancementFixedArtifactFactories { get; private set; }
     public Expression InitialBonusSearch { get; private set; }
     public Expression InitialBonusStealth { get; private set; }
 
@@ -2186,5 +2190,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// ManaValue:description Returns the amount of mana channelers can substitute instead of the scroll being used up.
     /// </returns>
     private (string ScriptName, int ManaValue)? ReadBindingTuple { get; } = null;
+
+    private string[]? EnhancementFixedArtifactFactoriesBindingKeys { get; } = null;
     #endregion
 }

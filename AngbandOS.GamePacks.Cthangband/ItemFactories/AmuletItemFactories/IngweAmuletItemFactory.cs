@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class IngweAmuletItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.AmuletOfAbdulAlhazredFixedArtifact) };
     public override bool DisableStomp => true;
     public override bool NegativeBonusArmorClassRepresentsBroken => true;
     public override bool NegativeBonusHitRepresentsBroken => true;

@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LucerneHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.LucerneHammerJusticeFixedArtifact) };
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
     public override string Name => "Lucerne Hammer";
 

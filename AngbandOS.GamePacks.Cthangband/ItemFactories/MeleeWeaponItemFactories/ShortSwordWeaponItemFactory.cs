@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ShortSwordWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.ShortSwordOfMerlinFixedArtifact), nameof(FixedArtifactsEnum.SmallSwordStingFixedArtifact) };
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
     public override string Name => "Short Sword";
 

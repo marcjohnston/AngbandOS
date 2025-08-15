@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CutlassWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.CutlassOfBlackbeardFixedArtifact) };
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
     public override string Name => "Cutlass";
 

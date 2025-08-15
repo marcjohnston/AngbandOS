@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class QuarterstaffHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.QuarterstaffEririlFixedArtifact), nameof(FixedArtifactsEnum.QuarterstaffFirestaffFixedArtifact), nameof(FixedArtifactsEnum.QuarterstaffOfAtalFixedArtifact) };
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
     public override string Name => "Quarterstaff";
 

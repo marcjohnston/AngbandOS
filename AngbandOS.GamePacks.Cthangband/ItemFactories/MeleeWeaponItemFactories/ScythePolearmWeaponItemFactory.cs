@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ScythePolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.ScytheOfGharneFixedArtifact) };
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
     public override string Name => "Scythe";
 

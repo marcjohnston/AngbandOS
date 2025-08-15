@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.ChainMailHeartguardFixedArtifact) };
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")

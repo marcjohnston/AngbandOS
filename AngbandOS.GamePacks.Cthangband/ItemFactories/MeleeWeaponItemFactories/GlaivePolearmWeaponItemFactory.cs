@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GlaivePolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.GlaiveOfPainFixedArtifact) };
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
     public override string Name => "Glaive";
 

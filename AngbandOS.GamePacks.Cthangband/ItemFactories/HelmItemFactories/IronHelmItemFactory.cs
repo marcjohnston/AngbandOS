@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class IronHelmItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.IronHelmSkullkeeperFixedArtifact), nameof(FixedArtifactsEnum.IronHelmTerrorMaskFixedArtifact) };
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")

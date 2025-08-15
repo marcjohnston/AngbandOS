@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ScimitarWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.ScimitarSoulswordFixedArtifact) };
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
     public override string Name => "Scimitar";
 

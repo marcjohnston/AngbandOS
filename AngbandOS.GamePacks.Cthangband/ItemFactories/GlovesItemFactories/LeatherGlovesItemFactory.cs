@@ -9,10 +9,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LeatherGlovesItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.SetOfLeatherGlovesCalfskinFixedArtifact), nameof(FixedArtifactsEnum.SetOfLeatherGlovesOfLightFixedArtifact) };
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
-   {
+    {
         (100, "3d5-3")
-   };
+    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;

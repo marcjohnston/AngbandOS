@@ -14,6 +14,7 @@ public class AdamantitePlateMailHardArmorItemFactory : ItemFactoryGameConfigurat
         (100, "3d5-3")
     };
 
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.AdamantitePlateMailSoulkeeperFixedArtifact) };
     public override int? RandomArtifactBonusArmorCeiling => 19;
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;

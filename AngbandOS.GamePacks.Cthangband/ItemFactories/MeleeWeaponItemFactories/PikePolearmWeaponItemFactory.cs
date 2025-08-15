@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class PikePolearmWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.PikeOfTepesFixedArtifact) };
     public override string SymbolBindingKey => nameof(ForwardSlashSymbol);
     public override string Name => "Pike";
 

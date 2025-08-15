@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MorningStarHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.MorningStarBloodspikeFixedArtifact), nameof(FixedArtifactsEnum.MorningStarFirestarterFixedArtifact) };
     public override string SymbolBindingKey => nameof(BackSlashSymbol);
     public override string Name => "Morning Star";
 

@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LongSwordWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.LongSwordExcaliburFixedArtifact), nameof(FixedArtifactsEnum.LongSwordOfEverflameFixedArtifact), nameof(FixedArtifactsEnum.LongSwordOfKarakalFixedArtifact), nameof(FixedArtifactsEnum.LongSwordOfTheDawnFixedArtifact), nameof(FixedArtifactsEnum.LongSwordVorpalBladeFixedArtifact) };
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
     public override string Name => "Long Sword";
 

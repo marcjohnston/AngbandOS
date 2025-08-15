@@ -9,9 +9,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class ItemFactoryGameConfiguration
 {
-    #region ItemEnhancement
     public virtual string? Key { get; set; } = null;
-    #endregion
 
     public virtual string? ItemEnhancementBindingKey { get; set; } = null;
 
@@ -181,6 +179,8 @@ public class ItemFactoryGameConfiguration
     public virtual bool IsRangedWeapon { get; set; } = false;
 
     public virtual bool DisableStomp { get; set; } = false;
+
+    public virtual string[]? EnhancementFixedArtifactFactoriesBindingKeys { get; set; } = null;
 
     /// <summary>
     /// Returns a damage multiplier when the missile weapon is used.

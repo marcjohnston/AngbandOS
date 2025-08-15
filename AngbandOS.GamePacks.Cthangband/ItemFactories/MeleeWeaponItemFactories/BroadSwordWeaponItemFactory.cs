@@ -9,6 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BroadSwordWeaponItemFactory : ItemFactoryGameConfiguration
 {
+    public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.BroadSwordBlackIceFixedArtifact), nameof(FixedArtifactsEnum.BroadSwordBrightbladeFixedArtifact), nameof(FixedArtifactsEnum.BroadSwordDemonBladeFixedArtifact), nameof(FixedArtifactsEnum.BroadSwordLightningFixedArtifact) };
     public override string SymbolBindingKey => nameof(VerticalBarSymbol);
     public override string Name => "Broad Sword";
 

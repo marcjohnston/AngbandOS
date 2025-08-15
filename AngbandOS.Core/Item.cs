@@ -2095,7 +2095,41 @@ internal sealed class Item : IComparable<Item>
     /// <param name="great">Stores send false.  Monsters will have a great item count Monster.DropGreat. When true, skips the percentile roll for great objects.</param>
     /// <param name="store"></param>
     public void EnchantItem(int lev, bool allowFixedArtifact, bool good, bool great, bool usedOkay)
-    {            
+    {
+        FixedArtifact? SelectCompatibleFixedArtifact()
+        {
+            // An item that is stacked cannot be enchanted into a fixed artifact.
+            if (StackCount != 1 || _factory.EnhancementFixedArtifactFactories is null)
+            {
+                return null;
+            }
+
+            // Retrieve the list of valid fixed artifact enhancements.  We need to exclude enhancements that are not available via enchantment or when there is already a fixed artifact.
+            FixedArtifact[] availableFixedArtifacts = _factory.EnhancementFixedArtifactFactories.Where(_enhancement => !_enhancement.DisableViaEnchantment && _enhancement.CurNum == 0).ToArray();
+
+            // Select a random enhancement.
+            FixedArtifact? aPtr = new WeightedRandom<FixedArtifact>(Game, availableFixedArtifacts).ChooseOrDefault();
+            if (aPtr is null)
+            {
+                return null;
+            }
+
+            if (aPtr.Level > Game.Difficulty)
+            {
+                int d = (aPtr.Level - Game.Difficulty) * 2;
+                if (Game.RandomLessThan(d) != 0)
+                {
+                    return null;
+                }
+            }
+            if (Game.RandomLessThan(aPtr.Rarity) != 0)
+            {
+                return null;
+            }
+
+            return aPtr;
+        }
+
         if (lev > Constants.MaxDepth - 1)
         {
             lev = Constants.MaxDepth - 1;
@@ -2203,7 +2237,8 @@ internal sealed class Item : IComparable<Item>
     public bool CreateRandomArtifact(bool fromScroll)
     {
         // Create a set of random artifact characteristics.
-        EffectivePropertySet.AddEnhancement("random", _factory.CreateRandomArtifact(this, fromScroll));
+        ReadOnlyPropertySet randomArtifactPropertySet = _factory.CreateRandomArtifact(this, fromScroll);
+        EffectivePropertySet.AddEnhancement("random", randomArtifactPropertySet);
 
         ActivationRechargeTimeRemaining = 0; // TODO: If the item already had activation running, the conversion could change it? and restart the recharge?
         string newName;
@@ -2229,47 +2264,6 @@ internal sealed class Item : IComparable<Item>
         }
         RandomArtifactName = newName;
         return true;
-    }
-
-    private FixedArtifact? SelectCompatibleFixedArtifact()
-    {
-        if (StackCount != 1)
-        {
-            return null;
-        }
-        foreach (FixedArtifact aPtr in Game.SingletonRepository.Get<FixedArtifact>()) // TODO: This needs to be random ... 
-        {
-            // Check to see if this fixed artifact supports the enchantment process.
-            if (aPtr.DisableViaEnchantment)
-            {
-                continue;
-            }
-
-            // Do not create another, if there is already one in the game. 
-            if (aPtr.CurNum != 0) // TODO: This is already in the ApplyFixedArtifact
-            {
-                continue;
-            }
-
-            if (aPtr.BaseItemFactory != _factory)
-            {
-                continue;
-            }
-            if (aPtr.Level > Game.Difficulty)
-            {
-                int d = (aPtr.Level - Game.Difficulty) * 2;
-                if (Game.RandomLessThan(d) != 0)
-                {
-                    continue;
-                }
-            }
-            if (Game.RandomLessThan(aPtr.Rarity) != 0)
-            {
-                continue;
-            }
-            return aPtr;
-        }
-        return null;
     }
 
     private string GenerateRandomArtifactName()
