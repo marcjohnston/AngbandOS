@@ -15,7 +15,6 @@ internal class DisintegrateItemEffect : ItemEffect
     {
         GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
-        string oName = "";
         foreach (Item oPtr in cPtr.Items)
         {
             bool plural = false;
@@ -27,13 +26,13 @@ internal class DisintegrateItemEffect : ItemEffect
             if (oPtr.WasNoticed)
             {
                 obvious = true;
-                oName = oPtr.GetDescription(false);
             }
             if (oPtr.IsArtifact)
             {
                 if (oPtr.WasNoticed)
                 {
                     string s = plural ? "are" : "is";
+                    string oName = oPtr.GetDescription(false);
                     Game.MsgPrint($"The {oName} {s} unaffected!");
                 }
             }
@@ -41,6 +40,7 @@ internal class DisintegrateItemEffect : ItemEffect
             {
                 if (oPtr.WasNoticed && string.IsNullOrEmpty(noteKill))
                 {
+                    string oName = oPtr.GetDescription(false);
                     Game.MsgPrint($"The {oName}{noteKill}");
                 }
                 bool isPotion = oPtr.QuaffTuple != null;

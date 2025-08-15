@@ -15,7 +15,6 @@ internal class ElectricityItemEffect : ItemEffect
     {
         GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
-        string oName = "";
         foreach (Item oPtr in cPtr.Items)
         {
             bool ignore = false;
@@ -42,7 +41,6 @@ internal class ElectricityItemEffect : ItemEffect
             if (oPtr.WasNoticed)
             {
                 obvious = true;
-                oName = oPtr.GetDescription(false);
             }
             if (oPtr.IsArtifact || ignore)
             {
@@ -51,12 +49,14 @@ internal class ElectricityItemEffect : ItemEffect
                     continue;
                 }
                 string s = plural ? "are" : "is";
+                string oName = oPtr.GetDescription(false);
                 Game.MsgPrint($"The {oName} {s} unaffected!");
             }
             else
             {
                 if (oPtr.WasNoticed && string.IsNullOrEmpty(noteKill))
                 {
+                    string oName = oPtr.GetDescription(false);
                     Game.MsgPrint($"The {oName}{noteKill}");
                 }
                 bool isPotion = oPtr.QuaffTuple != null;
