@@ -16,7 +16,7 @@ internal class Type4RoomLayout : RoomLayout
     public override int Dx1 => -1;
     public override int Dx2 => 1;
     public override int Level => 3;
-    public override void Build(int yval, int xval)
+    public override void Build(int objectLevel, int yval, int xval)
     {
         int y, x;
         GridTile cPtr;
@@ -148,7 +148,7 @@ internal class Type4RoomLayout : RoomLayout
                 VaultMonsters(yval, xval, Game.DieRoll(3) + 2);
                 if (Game.RandomLessThan(100) < 80)
                 {
-                    Game.PlaceObject(yval, xval, false, false);
+                    Game.PlaceObject(objectLevel, yval, xval, false, false);
                 }
                 else
                 {
@@ -220,11 +220,11 @@ internal class Type4RoomLayout : RoomLayout
                     VaultMonsters(yval, xval + 2, Game.DieRoll(2));
                     if (Game.RandomLessThan(3) == 0)
                     {
-                        Game.PlaceObject(yval, xval - 2, false, false);
+                        Game.PlaceObject(objectLevel, yval, xval - 2, false, false);
                     }
                     if (Game.RandomLessThan(3) == 0)
                     {
-                        Game.PlaceObject(yval, xval + 2, false, false);
+                        Game.PlaceObject(objectLevel, yval, xval + 2, false, false);
                     }
                 }
                 break;
@@ -263,7 +263,7 @@ internal class Type4RoomLayout : RoomLayout
                 VaultMonsters(yval, xval + 5, Game.DieRoll(3));
                 VaultTraps(yval, xval - 3, 2, 8, Game.DieRoll(3));
                 VaultTraps(yval, xval + 3, 2, 8, Game.DieRoll(3));
-                VaultObjects(yval, xval, 3);
+                VaultObjects(objectLevel, yval, xval, 3);
                 break;
 
             case 5:
@@ -293,7 +293,7 @@ internal class Type4RoomLayout : RoomLayout
                     PlaceSecretDoor(yval + i, x2 + 1);
                     PlaceSecretDoor(yval - i, x2 + 1);
                 }
-                VaultObjects(yval, xval, 2 + Game.DieRoll(2));
+                VaultObjects(objectLevel, yval, xval, 2 + Game.DieRoll(2));
                 VaultMonsters(yval + 1, xval - 4, Game.DieRoll(4));
                 VaultMonsters(yval + 1, xval + 4, Game.DieRoll(4));
                 VaultMonsters(yval - 1, xval - 4, Game.DieRoll(4));
@@ -344,7 +344,7 @@ internal class Type4RoomLayout : RoomLayout
         cPtr.SetFeature(Game.GetUpStaircaseTile);
     }
 
-    private void VaultObjects(int y, int x, int num)
+    private void VaultObjects(int objectLevel, int y, int x, int num)
     {
         int dummy = 0;
         int j = y, k = x;
@@ -370,7 +370,7 @@ internal class Type4RoomLayout : RoomLayout
                 }
                 if (Game.RandomLessThan(100) < 75)
                 {
-                    Game.PlaceObject(j, k, false, false);
+                    Game.PlaceObject(objectLevel, j, k, false, false);
                 }
                 else
                 {

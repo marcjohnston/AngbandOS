@@ -71,7 +71,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
     /// Generates an underground level.
     /// </summary>
     /// <returns></returns>
-    public override bool GenerateDungeon()
+    public override bool GenerateDungeon(int objectLevel)
     {
         Game.DungeonDifficulty = Game.CurDungeon.Offset;
         Game.DunBias = Game.CurDungeon.BiasMonsterFilter;
@@ -120,7 +120,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         else
         {
-            MakeDungeonLevel();
+            MakeDungeonLevel(objectLevel);
         }
 
         // Generate downstairs.
@@ -170,15 +170,15 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             Game.AllocMonster(0, true);
         }
-        AllocObject(_allocSetBoth, _allocTypTrap, Game.DieRoll(k));
-        AllocObject(_allocSetCorr, _allocTypRubble, Game.DieRoll(k));
-        AllocObject(_allocSetRoom, _allocTypObject, Game.RandomNormal(_dunAmtRoom, 3));
-        AllocObject(_allocSetBoth, _allocTypObject, Game.RandomNormal(_dunAmtItem, 3));
-        AllocObject(_allocSetBoth, _allocTypGold, Game.RandomNormal(_dunAmtGold, 3));
+        AllocObject(objectLevel, _allocSetBoth, _allocTypTrap, Game.DieRoll(k));
+        AllocObject(objectLevel, _allocSetCorr, _allocTypRubble, Game.DieRoll(k));
+        AllocObject(objectLevel, _allocSetRoom, _allocTypObject, Game.RandomNormal(_dunAmtRoom, 3));
+        AllocObject(objectLevel, _allocSetBoth, _allocTypObject, Game.RandomNormal(_dunAmtItem, 3));
+        AllocObject(objectLevel, _allocSetBoth, _allocTypGold, Game.RandomNormal(_dunAmtGold, 3));
         return true;
     }
 
-    private bool RoomBuild(int y0, int x0, RoomLayout roomType, int difficulty) // TODO: This belongs to each room type
+    private bool RoomBuild(int objectLevel, int y0, int x0, RoomLayout roomType, int difficulty) // TODO: This belongs to each room type
     {
         if (difficulty < roomType.Level)
         {
@@ -214,7 +214,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         y = (y1 + y2 + 1) * _blockHgt / 2;
         x = (x1 + x2 + 1) * _blockWid / 2;
-        roomType.Build(y, x);
+        roomType.Build(objectLevel, y, x);
         if (CentN < CentMax)
         {
             Cent[CentN] = new GridCoordinate(x, y);
@@ -529,7 +529,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(RubbleTile)));
     }
 
-    private void AllocObject(int set, int typ, int num)
+    private void AllocObject(int objectLevel, int set, int typ, int num)
     {
         int y = 0;
         int x = 0;
@@ -579,7 +579,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     }
                 case _allocTypObject:
                     {
-                        Game.PlaceObject(y, x, false, false);
+                        Game.PlaceObject(objectLevel, y, x, false, false);
                         break;
                     }
             }
@@ -832,7 +832,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
     /// </summary>
     private const int MinimumRoomCount = 1;
 
-    private void MakeDungeonLevel()
+    private void MakeDungeonLevel(int objectLevel)
     {
         int k;
         int y;
@@ -933,7 +933,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
             }
             if (destroyed)
             {
-                if (RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout)), Game.Difficulty))
+                if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout)), Game.Difficulty))
                 {
                 }
                 continue;
@@ -947,7 +947,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         if (maxVaultOk > 1)
                         {
-                            if (RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type8RoomLayout)), Game.Difficulty))
+                            if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type8RoomLayout)), Game.Difficulty))
                             {
                                 continue;
                             }
@@ -957,35 +957,35 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         if (maxVaultOk > 0)
                         {
-                            if (RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type7RoomLayout)), Game.Difficulty))
+                            if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type7RoomLayout)), Game.Difficulty))
                             {
                                 continue;
                             }
                         }
                     }
-                    if (k < 40 && RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type5RoomLayout)), Game.Difficulty))
+                    if (k < 40 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type5RoomLayout)), Game.Difficulty))
                     {
                         continue;
                     }
-                    if (k < 55 && RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type6RoomLayout)), Game.Difficulty))
+                    if (k < 55 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type6RoomLayout)), Game.Difficulty))
                     {
                         continue;
                     }
                 }
-                if (k < 25 && RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type4RoomLayout)), Game.Difficulty))
+                if (k < 25 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type4RoomLayout)), Game.Difficulty))
                 {
                     continue;
                 }
-                if (k < 50 && RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type3RoomLayout)), Game.Difficulty))
+                if (k < 50 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type3RoomLayout)), Game.Difficulty))
                 {
                     continue;
                 }
-                if (k < 100 && RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type2RoomLayout)), Game.Difficulty))
+                if (k < 100 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type2RoomLayout)), Game.Difficulty))
                 {
                     continue;
                 }
             }
-            if (RoomBuild(y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout)), Game.Difficulty))
+            if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout)), Game.Difficulty))
             {
             }
         }

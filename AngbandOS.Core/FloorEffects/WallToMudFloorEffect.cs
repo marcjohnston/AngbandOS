@@ -71,7 +71,7 @@ internal class WallToMudFloorEffect : FloorEffect
                     Game.MsgPrint("There was something buried in the rubble!");
                     obvious = true;
                 }
-                Game.PlaceObject(y, x, false, false);
+                Game.PlaceObject(Game.Difficulty, y, x, false, false);
             }
         }
         else

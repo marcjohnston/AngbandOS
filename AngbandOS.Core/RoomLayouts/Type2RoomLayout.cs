@@ -16,7 +16,7 @@ internal class Type2RoomLayout : RoomLayout
     public override int Dx1 => -1;
     public override int Dx2 => 1;
     public override int Level => 1;
-    public override void Build(int yval, int xval)
+    public override void Build(int objectLevel, int yval, int xval)
     {
         int y, x;
         GridTile cPtr;

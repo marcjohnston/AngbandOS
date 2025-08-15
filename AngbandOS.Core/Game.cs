@@ -1202,7 +1202,6 @@ internal class Game
     public int MCnt;
     public int MonsterMax = 1; // This is the current number of monsters.  Monster[0] is the player.
     public int MonsterLevel;
-    public int ObjectLevel; // TODO: This is set by by rooms, monsters and chests to control the levels of items created temporarily.
 
     /// <summary>
     /// Returns the map sector.
@@ -2297,7 +2296,7 @@ internal class Game
         return !PlayerCanSeeBold(y, x);
     }
 
-    public Item? MakeObject(bool good, bool great, bool doNotAllowChestToBeCreated)
+    public Item? MakeObject(int objectLevel, bool good, bool great, bool doNotAllowChestToBeCreated)
     {
         Item? MakeFixedArtifact()
         {
@@ -2326,9 +2325,9 @@ internal class Game
                     return null;
                 }
                 ItemFactory kIdx = aPtr.BaseItemFactory;
-                if (kIdx.LevelNormallyFound > ObjectLevel)
+                if (kIdx.LevelNormallyFound > objectLevel)
                 {
-                    int d = (kIdx.LevelNormallyFound - ObjectLevel) * 5;
+                    int d = (kIdx.LevelNormallyFound - objectLevel) * 5;
                     if (RandomLessThan(d) != 0)
                     {
                         continue;
@@ -2341,7 +2340,7 @@ internal class Game
         }
 
         int prob = good ? 10 : 1000;
-        int baselevel = good ? ObjectLevel + 10 : ObjectLevel;
+        int baselevel = good ? objectLevel + 10 : objectLevel;
 
         Item? item = null;
 
@@ -2361,7 +2360,7 @@ internal class Game
             }
             item = kIdx.GenerateItem();
         }
-        item.EnchantItem(ObjectLevel, true, good, great, true); 
+        item.EnchantItem(objectLevel, true, good, great, true); 
         item.StackCount = item.MakeObjectCount;
         if (!item.EffectivePropertySet.IsCursed && !item.IsBroken && item.LevelNormallyFound > Difficulty)
         {
@@ -2375,7 +2374,7 @@ internal class Game
     /// </summary>
     /// <param name="goldType"></param>
     /// <returns></returns>
-    public Item? MakeGold()
+    public Item? MakeGold(int objectLevel)
     {
         if (GoldFactories == null)
         {
@@ -2383,12 +2382,12 @@ internal class Game
         }
 
         // The type of gold to be created depends on the level it is found.
-        int goldType = ((DieRoll(ObjectLevel + 2) + 2) / 2) - 1;
+        int goldType = ((DieRoll(objectLevel + 2) + 2) / 2) - 1;
 
         // A great find has some probability.
         if (GoldItemIsGreatProbability.Test())
         {
-            goldType += DieRoll(ObjectLevel + 1);
+            goldType += DieRoll(objectLevel + 1);
         }
 
         if (goldType >= GoldFactories.Length)
@@ -3490,7 +3489,7 @@ internal class Game
                 Quests[qIdx].Level = 0;
             }
         }
-        ObjectLevel = (Difficulty + rPtr.Level) / 2;
+        int objectLevel = (Difficulty + rPtr.Level) / 2;
         for (int j = 0; j < number; j++)
         {
             if (doGold && (!doItem || RandomLessThan(100) < 50))
@@ -3504,7 +3503,7 @@ internal class Game
             {
                 if (!quest || j > 1)
                 {
-                    Item? qPtr = this.MakeObject(good, great, false);
+                    Item? qPtr = MakeObject(objectLevel, good, great, false);
                     if (qPtr != null)
                     {
                         DropNear(qPtr, null, y, x);
@@ -3513,7 +3512,7 @@ internal class Game
                 }
                 else
                 {
-                    Item? qPtr = this.MakeObject(true, true, false);
+                    Item? qPtr = MakeObject(objectLevel, true, true, false);
                     if (qPtr != null)
                     {
                         DropNear(qPtr, null, y, x);
@@ -3522,7 +3521,6 @@ internal class Game
                 }
             }
         }
-        ObjectLevel = Difficulty;
         if (visible && (dumpItem != 0 || dumpGold != 0))
         {
             LoreTreasure(mPtr, dumpItem, dumpGold);
@@ -3581,12 +3579,12 @@ internal class Game
         {
             number = 0;
         }
-        ObjectLevel = item.LevelOfObjectsInContainer + 10;
+        int objectLevel = item.LevelOfObjectsInContainer + 10;
         for (; number > 0; --number)
         {
             if (item.IsSmall && RandomLessThan(100) < 75)
             {
-                Item? qPtr = MakeGold();
+                Item? qPtr = MakeGold(objectLevel);
                 if (qPtr != null)
                 {
                     DropNear(qPtr, null, y, x);
@@ -3594,14 +3592,13 @@ internal class Game
             }
             else
             {
-                Item? qPtr = MakeObject(false, false, true);
+                Item? qPtr = MakeObject(objectLevel, false, false, true);
                 if (qPtr != null)
                 {
                     DropNear(qPtr, null, y, x);
                 }
             }
         }
-        ObjectLevel = Difficulty;
         item.ContainerIsOpen = true;
         item.BecomeKnown();
     }
@@ -4064,7 +4061,6 @@ internal class Game
             QuestDiscovery();
         }
         MonsterLevel = Difficulty;
-        ObjectLevel = Difficulty;
         HackMind = true;
         if (CameFrom == LevelStartEnum.StartHouse)
         {
@@ -8367,7 +8363,7 @@ internal class Game
                 // 10% chance of finding something
                 if (RandomLessThan(100) < 10)
                 {
-                    PlaceObject(y, x, false, false);
+                    PlaceObject(Difficulty, y, x, false, false);
                     if (PlayerCanSeeBold(y, x))
                     {
                         MsgPrint("You have found something!");
@@ -10496,7 +10492,6 @@ internal class Game
             PanelColMin = 0;
             PanelColMax = 0;
             MonsterLevel = Difficulty;
-            ObjectLevel = Difficulty;
             SpecialTreasure = false;
             SpecialDanger = false;
             TreasureRating = 0;
@@ -10545,7 +10540,7 @@ internal class Game
             }
             else
             {
-                if (!DungeonGenerator.GenerateDungeon())
+                if (!DungeonGenerator.GenerateDungeon(Difficulty))
                 {
                     okay = false;
                 }
@@ -14729,7 +14724,7 @@ internal class Game
     {
         while (num-- != 0)
         {
-            Item? qPtr = MakeObject(true, great, false);
+            Item? qPtr = MakeObject(Difficulty, true, great, false);
             if (qPtr == null)
             {
                 continue;
@@ -15345,7 +15340,7 @@ internal class Game
         {
             return;
         }
-        Item? oPtr = MakeGold();
+        Item? oPtr = MakeGold(Difficulty);
         if (oPtr != null)
         {
             if (AddItemToGrid(oPtr, x, y))
@@ -15356,7 +15351,7 @@ internal class Game
         }
     }
 
-    public void PlaceObject(int y, int x, bool good, bool great)
+    public void PlaceObject(int objectLevel, int y, int x, bool good, bool great)
     {
         if (!InBounds(y, x))
         {
@@ -15366,7 +15361,7 @@ internal class Game
         {
             return;
         }
-        Item? qPtr = MakeObject(good, great, false);
+        Item? qPtr = MakeObject(objectLevel, good, great, false);
         if (qPtr == null)
         {
             return;

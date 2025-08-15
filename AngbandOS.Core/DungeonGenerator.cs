@@ -11,7 +11,7 @@ internal abstract class DungeonGenerator
 {
     protected readonly Game Game;
 
-    public abstract bool GenerateDungeon();
+    public abstract bool GenerateDungeon(int objectLevel);
 
     public DungeonGenerator(Game game)
     {

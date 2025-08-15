@@ -48,7 +48,7 @@ internal abstract class RoomLayout : IGetKey
     public abstract int Level { get; }
 
     public abstract int Type { get; }
-    public abstract void Build(int yval, int xval);
+    public abstract void Build(int objectLevel, int yval, int xval);
 
     /// <summary>
     /// Returns the number of grid blocks wide this type of room occupies.
@@ -60,7 +60,7 @@ internal abstract class RoomLayout : IGetKey
     /// </summary>
     public int Height => -Dy1 + Dy2 + 1;
 
-    protected void BuildVault(int yval, int xval, int ymax, int xmax, string data)
+    protected void BuildVault(int objectLevel, int yval, int xval, int ymax, int xmax, string data)
     {
         int dx, dy, x, y;
         char t;
@@ -101,7 +101,7 @@ internal abstract class RoomLayout : IGetKey
                     case '*':
                         if (Game.RandomLessThan(100) < 75)
                         {
-                            Game.PlaceObject(y, x, false, false);
+                            Game.PlaceObject(objectLevel, y, x, false, false);
                         }
                         else
                         {
@@ -153,9 +153,7 @@ internal abstract class RoomLayout : IGetKey
                             Game.MonsterLevel = Game.Difficulty + 9;
                             Game.PlaceMonster(y, x, true, true);
                             Game.MonsterLevel = Game.Difficulty;
-                            Game.ObjectLevel = Game.Difficulty + 7;
-                            Game.PlaceObject(y, x, true, false);
-                            Game.ObjectLevel = Game.Difficulty;
+                            Game.PlaceObject(Game.Difficulty + 7, y, x, true, false);
                             break;
                         }
                     case '8':
@@ -163,9 +161,7 @@ internal abstract class RoomLayout : IGetKey
                             Game.MonsterLevel = Game.Difficulty + 40;
                             Game.PlaceMonster(y, x, true, true);
                             Game.MonsterLevel = Game.Difficulty;
-                            Game.ObjectLevel = Game.Difficulty + 20;
-                            Game.PlaceObject(y, x, true, true);
-                            Game.ObjectLevel = Game.Difficulty;
+                            Game.PlaceObject(Game.Difficulty + 20, y, x, true, true);
                             break;
                         }
                     case ',':
@@ -178,17 +174,13 @@ internal abstract class RoomLayout : IGetKey
                             }
                             if (Game.RandomLessThan(100) < 50)
                             {
-                                Game.ObjectLevel = Game.Difficulty + 7;
-                                Game.PlaceObject(y, x, false, false);
-                                Game.ObjectLevel = Game.Difficulty;
+                                Game.PlaceObject(Game.Difficulty + 7, y, x, false, false);
                             }
                             break;
                         }
                     case 'A':
                         {
-                            Game.ObjectLevel = Game.Difficulty + 12;
-                            Game.PlaceObject(y, x, true, false);
-                            Game.ObjectLevel = Game.Difficulty;
+                            Game.PlaceObject(Game.Difficulty + 12, y, x, true, false);
                         }
                         break;
                 }

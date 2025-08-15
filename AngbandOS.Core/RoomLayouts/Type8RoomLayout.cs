@@ -16,7 +16,7 @@ internal class Type8RoomLayout : RoomLayout
     public override int Dx1 => -1;
     public override int Dx2 => 1;
     public override int Level => 1;
-    public override void Build(int yval, int xval)
+    public override void Build(int objectLevel, int yval, int xval)
     {
         Vault vault = Game.SingletonRepository.Get<Vault>(0);
         int dummy = 0;
@@ -45,6 +45,6 @@ internal class Type8RoomLayout : RoomLayout
         {
             Game.SpecialDanger = true;
         }
-        BuildVault(yval, xval, vault.Height, vault.Width, vault.Text);
+        BuildVault(objectLevel, yval, xval, vault.Height, vault.Width, vault.Text);
     }
 }

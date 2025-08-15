@@ -16,7 +16,7 @@ internal class Type6RoomLayout : RoomLayout
     public override int Dx1 => -1;
     public override int Dx2 => 1;
     public override int Level => 5;
-    public override void Build(int yval, int xval)
+    public override void Build(int objectLevel, int yval, int xval)
     {
         int[] what = new int[16];
         int i, y, x;

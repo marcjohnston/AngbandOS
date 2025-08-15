@@ -16,7 +16,7 @@ internal class Type3RoomLayout : RoomLayout
     public override int Dx1 => -1;
     public override int Dx2 => 1;
     public override int Level => 3;
-    public override void Build(int yval, int xval)
+    public override void Build(int objectLevel, int yval, int xval)
     {
         int y, x, wy;
         GridTile cPtr;
@@ -153,7 +153,7 @@ internal class Type3RoomLayout : RoomLayout
                             PlaceSecretDoor(yval, x2A);
                             break;
                     }
-                    Game.PlaceObject(yval, xval, false, false);
+                    Game.PlaceObject(objectLevel, yval, xval, false, false);
                     VaultMonsters(yval, xval, Game.RandomLessThan(2) + 3);
                     VaultTraps(yval, xval, 4, 4, Game.RandomLessThan(3) + 2);
                     break;
