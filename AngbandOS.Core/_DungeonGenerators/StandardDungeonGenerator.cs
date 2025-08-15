@@ -4,20 +4,24 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
-using System.Diagnostics;
 namespace AngbandOS.Core.DungeonGenerators;
 
 [Serializable]
 internal class StandardDungeonGenerator : DungeonGenerator
 {
+    private const int MaximumNumberOfRooms = 100; // This is the maximum number of rooms that can be tracked when a dungeon is generated.  Any rooms generated beyond this count are not tracked as a room.
+    private GridCoordinate[] Rooms; // This is the center of each room that was generated.
+
+    /// <summary>
+    /// Returns the number of rooms that were generated.
+    /// </summary>
+    private int RoomCount;
+
     private const int _smallLevel = 3;
-    private GridCoordinate[] Cent; // This is the center of each room that was generated.
     private GridCoordinate[] Door;
     private bool[][] RoomMap; // This is a quadrant of _blockWid wide blocks by _blockHgt blocks high map tracking if a room has been built in that quadrant.
     private GridCoordinate[] Tunn;
     private GridCoordinate[] Wall;
-    private const int CentMax = 100; // This is the maximum number of rooms that can be tracked when a dungeon is generated.  Any rooms generated beyond this count are not tracked as a room.
     private const int DoorMax = 200;
     private const int _blockHgt = 21; // This is the vertical height of a block that is used to divide the dungeon into grid blocks for room placement.
     private const int _blockWid = 11; // This is the horizontal width of a block that is used to divide the dungeon into grid blocks for room placement.
@@ -51,11 +55,6 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private const int _emptyLevel = 15;
     private const int TunnMax = 900;
     private const int WallMax = 500;
-
-    /// <summary>
-    /// Returns the number of rooms that were generated.
-    /// </summary>
-    private int CentN;
 
     private int ColRooms;
     private bool Crowded;
@@ -215,10 +214,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
         y = (y1 + y2 + 1) * _blockHgt / 2;
         x = (x1 + x2 + 1) * _blockWid / 2;
         roomType.Build(objectLevel, y, x);
-        if (CentN < CentMax)
+        if (RoomCount < MaximumNumberOfRooms)
         {
-            Cent[CentN] = new GridCoordinate(x, y);
-            CentN++; // TODO: This is a module level variable
+            Rooms[RoomCount] = new GridCoordinate(x, y);
+            RoomCount++; // TODO: This is a module level variable
         }
         for (y = y1; y <= y2; y++)
         {
@@ -841,7 +840,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         bool destroyed = false;
         bool emptyLevel = false;
 
-        Cent = new GridCoordinate[CentMax];
+        Rooms = new GridCoordinate[MaximumNumberOfRooms];
         Door = new GridCoordinate[DoorMax];
         Wall = new GridCoordinate[WallMax];
         Tunn = new GridCoordinate[TunnMax];
@@ -913,11 +912,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
             }
         }
         Crowded = false;
-        CentN = 0;
+        RoomCount = 0;
         int roomAttemptCount = 0;
 
         // Attempt to generate rooms until we have attempted a minimum number of generations and we have reached a minimum number of rooms generated.
-        while (roomAttemptCount < MinimumNumberOfRoomsToAttemptToCreate || CentN < MinimumRoomCount)
+        while (roomAttemptCount < MinimumNumberOfRoomsToAttemptToCreate || RoomCount < MinimumRoomCount)
         {
             roomAttemptCount++;
 
@@ -1009,23 +1008,23 @@ internal class StandardDungeonGenerator : DungeonGenerator
             GridTile cPtr = Game.Map.Grid[y][Game.CurWid - 1];
             cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallPermentSolidTile)));
         }
-        for (int i = 0; i < CentN; i++)
+        for (int i = 0; i < RoomCount; i++)
         {
-            int pick1 = Game.RandomLessThan(CentN);
-            int pick2 = Game.RandomLessThan(CentN);
-            int y1 = Cent[pick1].Y;
-            int x1 = Cent[pick1].X;
-            Cent[pick1] = Cent[pick2].Clone();
-            Cent[pick2] = new GridCoordinate(x1, y1);
+            int pick1 = Game.RandomLessThan(RoomCount);
+            int pick2 = Game.RandomLessThan(RoomCount);
+            int y1 = Rooms[pick1].Y;
+            int x1 = Rooms[pick1].X;
+            Rooms[pick1] = Rooms[pick2].Clone();
+            Rooms[pick2] = new GridCoordinate(x1, y1);
         }
         DoorN = 0;
-        y = Cent[CentN - 1].Y;
-        x = Cent[CentN - 1].X;
-        for (int i = 0; i < CentN; i++)
+        y = Rooms[RoomCount - 1].Y;
+        x = Rooms[RoomCount - 1].X;
+        for (int i = 0; i < RoomCount; i++)
         {
-            BuildTunnel(Cent[i].Y, Cent[i].X, y, x);
-            y = Cent[i].Y;
-            x = Cent[i].X;
+            BuildTunnel(Rooms[i].Y, Rooms[i].X, y, x);
+            y = Rooms[i].Y;
+            x = Rooms[i].X;
         }
         for (int i = 0; i < DoorN; i++)
         {
