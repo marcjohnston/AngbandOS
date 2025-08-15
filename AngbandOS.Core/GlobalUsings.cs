@@ -26,7 +26,6 @@ global using AngbandOS.Core.Interfaces;
 global using AngbandOS.Core.WieldSlots;
 global using AngbandOS.Core.ItemActions;
 global using AngbandOS.Core.ItemEffects;
-global using AngbandOS.Core.ItemTests;
 global using AngbandOS.Core.ItemMatches;
 global using AngbandOS.Core.ItemQualityRatings;
 global using AngbandOS.Core.MappedSpellScripts;

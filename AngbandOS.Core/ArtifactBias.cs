@@ -30,17 +30,17 @@ internal abstract class ArtifactBias : IGetKey
 
     public void Bind()
     {
-        (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? BindTestsAndItemEnhancements((string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? tuples)
+        (ItemFilter, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? BindTestsAndItemEnhancements((string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? tuples)
         {
             if (tuples == null)
             {
                 return null;
             }
 
-            List<(ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)> list = new();
+            List<(ItemFilter, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)> list = new();
             foreach ((string itemTestName, string itemTestProbabilityExpression, string itemAdditiveBundleName, string moreProbabilityExpression) in tuples)
             {
-                ItemTest itemTest = Game.SingletonRepository.Get<ItemTest>(itemTestName);
+                ItemFilter itemTest = Game.SingletonRepository.Get<ItemFilter>(itemTestName);
                 ProbabilityExpression itemTestProbability = Game.ParseProbabilityExpression(itemTestProbabilityExpression);
                 ItemEnhancement itemAdditiveBundle = Game.SingletonRepository.Get<ItemEnhancement>(itemAdditiveBundleName);
                 ProbabilityExpression moreProbability = Game.ParseProbabilityExpression(moreProbabilityExpression);
@@ -66,8 +66,8 @@ internal abstract class ArtifactBias : IGetKey
 
     protected virtual (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => null;
     protected virtual (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => null;
-    public (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? RandomResistances { get; private set; } = null;
-    public (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? RandomSlayings { get; private set; } = null;
+    public (ItemFilter, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? RandomResistances { get; private set; } = null;
+    public (ItemFilter, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? RandomSlayings { get; private set; } = null;
 
     /// <summary>
     /// Apply powers to the item and returns true, if additional powers can applied.  By default, no powers are applied and false is returned.

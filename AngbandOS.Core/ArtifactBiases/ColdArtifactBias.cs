@@ -14,13 +14,13 @@ internal class ColdArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseResistColdItemTest), "1", nameof(ResistColdItemEnhancement), "1/2"),
-        (nameof(FalseColdImmunityItemTest), "1/20", nameof(ColdImmunityItemEnhancement), "1/2")
+        (nameof(FalseResistColdItemFilter), "1", nameof(ResistColdItemEnhancement), "1/2"),
+        (nameof(FalseColdImmunityItemFilter), "1/20", nameof(ColdImmunityItemEnhancement), "1/2")
     };
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(CanSlayAndFalseBrandColdItemTest), "1", nameof(BrandColdItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseBrandColdItemFilter), "1", nameof(BrandColdItemEnhancement), "1/2")
     };
 
     public override Activation GetActivationPowerType()

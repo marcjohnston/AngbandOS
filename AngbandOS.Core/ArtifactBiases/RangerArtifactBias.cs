@@ -16,7 +16,7 @@ internal class RangerArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(CanSlayAndFalseSlayAnimalItemTest), "1", nameof(SlayAnimalItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseSlayAnimalItemFilter), "1", nameof(SlayAnimalItemEnhancement), "1/2")
     };
 
     public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)

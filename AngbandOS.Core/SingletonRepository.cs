@@ -286,7 +286,6 @@ internal class SingletonRepository
         RegisterInterface<ItemEffect>();
         RegisterInterface<ItemMatch>();
         RegisterInterface<ItemQualityRating>();
-        RegisterInterface<ItemTest>();
         RegisterInterface<Justification>();
         RegisterInterface<MartialArtsEffect>();
         RegisterInterface<MonsterEffect>();

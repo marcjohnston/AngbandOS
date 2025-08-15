@@ -13,12 +13,12 @@ internal class PoisonArtifactBias : ArtifactBias
     public override string AffinityName => "Poison";
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseResistPoisonItemTest), "1", nameof(ResistPoisonItemEnhancement), "1/2")
+        (nameof(FalseResistPoisonItemFilter), "1", nameof(ResistPoisonItemEnhancement), "1/2")
     };
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(CanSlayAndFalseBrandPoisonItemTest), "1", nameof(BrandPoisonItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseBrandPoisonItemFilter), "1", nameof(BrandPoisonItemEnhancement), "1/2")
     };
 
     public override Activation GetActivationPowerType()

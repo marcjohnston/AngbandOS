@@ -14,14 +14,14 @@ internal class ElectricityArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseResistElectricityItemTest), "1", nameof(ResistElectricityItemEnhancement), "1/2"),
-        (nameof(FalseSheathOfElectricityItemTest), "1", nameof(SheathOfElectricityItemEnhancement), "1/2"),
-        (nameof(FalseElectricityImmunityItemTest), "1/20", nameof(ElectricityImmunityItemEnhancement), "1/2")
+        (nameof(FalseResistElectricityItemFilter), "1", nameof(ResistElectricityItemEnhancement), "1/2"),
+        (nameof(FalseSheathOfElectricityItemFilter), "1", nameof(SheathOfElectricityItemEnhancement), "1/2"),
+        (nameof(FalseElectricityImmunityItemFilter), "1/20", nameof(ElectricityImmunityItemEnhancement), "1/2")
     };
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(CanSlayAndFalseBrandElectricityItemTest), "1", nameof(BrandElectricityItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseBrandElectricityItemFilter), "1", nameof(BrandElectricityItemEnhancement), "1/2")
     };
 
     public override Activation GetActivationPowerType()

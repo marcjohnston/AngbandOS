@@ -17,4 +17,3 @@ internal class IsWearableOrWieldableBooleanGetItemProperty : GetItemProperty<boo
         return item.IsWearableOrWieldable;
     }
 }
-

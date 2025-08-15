@@ -14,7 +14,7 @@ internal class RogueArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(CanSlayAndFalseBrandPoisonItemTest), "1", nameof(BrandPoisonItemEnhancement), "0")
+        (nameof(CanSlayAndFalseBrandPoisonItemFilter), "1", nameof(BrandPoisonItemEnhancement), "0")
     };
     public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
     {

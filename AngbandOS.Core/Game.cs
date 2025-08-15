@@ -7632,7 +7632,7 @@ internal class Game
                         do
                         {
                             totalDamage += stepK;
-                        } while (DieRoll(meleeItem.EffectivePropertySet.VorpalExtraAttacks1InChance) == 1);
+                        } while (meleeItem.EffectivePropertySet.VorpalExtraAttacks1InChance >= 1 && DieRoll(meleeItem.EffectivePropertySet.VorpalExtraAttacks1InChance) == 1);
                     }
                     // Add bonus damage for the weapon
                     totalDamage += meleeItem.EffectivePropertySet.BonusDamage;

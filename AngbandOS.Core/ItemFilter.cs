@@ -44,6 +44,88 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         AllNonMatchingItemClassNames = itemFilterGameConfiguration.AllNonMatchingItemClassNames;
         AnyMatchingItemFactoryNames = itemFilterGameConfiguration.AnyMatchingItemFactoryNames;
         AllNonMatchingItemFactoryNames = itemFilterGameConfiguration.AllNonMatchingItemFactoryNames;
+
+        CanApplyBlessedArtifactBias = itemFilterGameConfiguration.CanApplyBlessedArtifactBias;
+        CanApplyArtifactBiasSlaying = itemFilterGameConfiguration.CanApplyArtifactBiasSlaying;
+        Aggravate = itemFilterGameConfiguration.Aggravate;
+        AntiTheft = itemFilterGameConfiguration.AntiTheft;
+        ArtifactBias = itemFilterGameConfiguration.ArtifactBias;
+        Blessed = itemFilterGameConfiguration.Blessed;
+        BrandAcid = itemFilterGameConfiguration.BrandAcid;
+        BrandCold = itemFilterGameConfiguration.BrandCold;
+        BrandElec = itemFilterGameConfiguration.BrandElec;
+        BrandFire = itemFilterGameConfiguration.BrandFire;
+        BrandPois = itemFilterGameConfiguration.BrandPois;
+        Chaotic = itemFilterGameConfiguration.Chaotic;
+        IsCursed = itemFilterGameConfiguration.IsCursed;
+        DrainExp = itemFilterGameConfiguration.DrainExp;
+        DreadCurse = itemFilterGameConfiguration.DreadCurse;
+        EasyKnow = itemFilterGameConfiguration.EasyKnow;
+        Feather = itemFilterGameConfiguration.Feather;
+        FreeAct = itemFilterGameConfiguration.FreeAct;
+        HeavyCurse = itemFilterGameConfiguration.HeavyCurse;
+        HideType = itemFilterGameConfiguration.HideType;
+        HoldLife = itemFilterGameConfiguration.HoldLife;
+        IgnoreAcid = itemFilterGameConfiguration.IgnoreAcid;
+        IgnoreCold = itemFilterGameConfiguration.IgnoreCold;
+        IgnoreElec = itemFilterGameConfiguration.IgnoreElec;
+        IgnoreFire = itemFilterGameConfiguration.IgnoreFire;
+        ImAcid = itemFilterGameConfiguration.ImAcid;
+        ImCold = itemFilterGameConfiguration.ImCold;
+        ImElec = itemFilterGameConfiguration.ImElec;
+        ImFire = itemFilterGameConfiguration.ImFire;
+        Impact = itemFilterGameConfiguration.Impact;
+        NoMagic = itemFilterGameConfiguration.NoMagic;
+        NoTele = itemFilterGameConfiguration.NoTele;
+        PermaCurse = itemFilterGameConfiguration.PermaCurse;
+        Radius = itemFilterGameConfiguration.Radius;
+        Reflect = itemFilterGameConfiguration.Reflect;
+        Regen = itemFilterGameConfiguration.Regen;
+        ResAcid = itemFilterGameConfiguration.ResAcid;
+        ResBlind = itemFilterGameConfiguration.ResBlind;
+        ResChaos = itemFilterGameConfiguration.ResChaos;
+        ResCold = itemFilterGameConfiguration.ResCold;
+        ResConf = itemFilterGameConfiguration.ResConf;
+        ResDark = itemFilterGameConfiguration.ResDark;
+        ResDisen = itemFilterGameConfiguration.ResDisen;
+        ResElec = itemFilterGameConfiguration.ResElec;
+        ResFear = itemFilterGameConfiguration.ResFear;
+        ResFire = itemFilterGameConfiguration.ResFire;
+        ResLight = itemFilterGameConfiguration.ResLight;
+        ResNether = itemFilterGameConfiguration.ResNether;
+        ResNexus = itemFilterGameConfiguration.ResNexus;
+        ResPois = itemFilterGameConfiguration.ResPois;
+        ResShards = itemFilterGameConfiguration.ResShards;
+        ResSound = itemFilterGameConfiguration.ResSound;
+        SeeInvis = itemFilterGameConfiguration.SeeInvis;
+        FactoryAllowsShElecricity = itemFilterGameConfiguration.FactoryAllowsShElecricity;
+        ShElec = itemFilterGameConfiguration.ShElec;
+        FactoryAllowsShFire = itemFilterGameConfiguration.FactoryAllowsShFire;
+        ShFire = itemFilterGameConfiguration.ShFire;
+        ShowMods = itemFilterGameConfiguration.ShowMods;
+        SlayAnimal = itemFilterGameConfiguration.SlayAnimal;
+        SlayDemon = itemFilterGameConfiguration.SlayDemon;
+        SlayDragon = itemFilterGameConfiguration.SlayDragon;
+        SlayEvil = itemFilterGameConfiguration.SlayEvil;
+        SlayGiant = itemFilterGameConfiguration.SlayGiant;
+        SlayOrc = itemFilterGameConfiguration.SlayOrc;
+        SlayTroll = itemFilterGameConfiguration.SlayTroll;
+        SlayUndead = itemFilterGameConfiguration.SlayUndead;
+        SlowDigest = itemFilterGameConfiguration.SlowDigest;
+        SustCha = itemFilterGameConfiguration.SustCha;
+        SustCon = itemFilterGameConfiguration.SustCon;
+        SustDex = itemFilterGameConfiguration.SustDex;
+        SustInt = itemFilterGameConfiguration.SustInt;
+        SustStr = itemFilterGameConfiguration.SustStr;
+        SustWis = itemFilterGameConfiguration.SustWis;
+        Telepathy = itemFilterGameConfiguration.Telepathy;
+        Teleport = itemFilterGameConfiguration.Teleport;
+        TreasureRating = itemFilterGameConfiguration.TreasureRating;
+        Vampiric = itemFilterGameConfiguration.Vampiric;
+        Vorpal = itemFilterGameConfiguration.Vorpal;
+        Wraith = itemFilterGameConfiguration.Wraith;
+        XtraMight = itemFilterGameConfiguration.XtraMight;
+        XtraShots = itemFilterGameConfiguration.XtraShots;
     }
 
     private ItemMatch[] ItemMatches { get; set; }
@@ -82,6 +164,87 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
             AllNonMatchingItemClassNames = AllNonMatchingItemClassNames,
             AnyMatchingItemFactoryNames = AnyMatchingItemFactoryNames,
             AllNonMatchingItemFactoryNames = AllNonMatchingItemFactoryNames,
+            CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias,
+            CanApplyArtifactBiasSlaying = CanApplyArtifactBiasSlaying,
+            Aggravate = Aggravate,
+            AntiTheft = AntiTheft,
+            ArtifactBias = ArtifactBias,
+            Blessed = Blessed,
+            BrandAcid = BrandAcid,
+            BrandCold = BrandCold,
+            BrandElec = BrandElec,
+            BrandFire = BrandFire,
+            BrandPois = BrandPois,
+            Chaotic = Chaotic,
+            IsCursed = IsCursed,
+            DrainExp = DrainExp,
+            DreadCurse = DreadCurse,
+            EasyKnow = EasyKnow,
+            Feather = Feather,
+            FreeAct = FreeAct,
+            HeavyCurse = HeavyCurse,
+            HideType = HideType,
+            HoldLife = HoldLife,
+            IgnoreAcid = IgnoreAcid,
+            IgnoreCold = IgnoreCold,
+            IgnoreElec = IgnoreElec,
+            IgnoreFire = IgnoreFire,
+            ImAcid = ImAcid,
+            ImCold = ImCold,
+            ImElec = ImElec,
+            ImFire = ImFire,
+            Impact = Impact,
+            NoMagic = NoMagic,
+            NoTele = NoTele,
+            PermaCurse = PermaCurse,
+            Radius = Radius,
+            Reflect = Reflect,
+            Regen = Regen,
+            ResAcid = ResAcid,
+            ResBlind = ResBlind,
+            ResChaos = ResChaos,
+            ResCold = ResCold,
+            ResConf = ResConf,
+            ResDark = ResDark,
+            ResDisen = ResDisen,
+            ResElec = ResElec,
+            ResFear = ResFear,
+            ResFire = ResFire,
+            ResLight = ResLight,
+            ResNether = ResNether,
+            ResNexus = ResNexus,
+            ResPois = ResPois,
+            ResShards = ResShards,
+            ResSound = ResSound,
+            SeeInvis = SeeInvis,
+            FactoryAllowsShElecricity = FactoryAllowsShElecricity,
+            ShElec = ShElec,
+            FactoryAllowsShFire = FactoryAllowsShFire,
+            ShFire = ShFire,
+            ShowMods = ShowMods,
+            SlayAnimal = SlayAnimal,
+            SlayDemon = SlayDemon,
+            SlayDragon = SlayDragon,
+            SlayEvil = SlayEvil,
+            SlayGiant = SlayGiant,
+            SlayOrc = SlayOrc,
+            SlayTroll = SlayTroll,
+            SlayUndead = SlayUndead,
+            SlowDigest = SlowDigest,
+            SustCha = SustCha,
+            SustCon = SustCon,
+            SustDex = SustDex,
+            SustInt = SustInt,
+            SustStr = SustStr,
+            SustWis = SustWis,
+            Telepathy = Telepathy,
+            Teleport = Teleport,
+            TreasureRating = TreasureRating,
+            Vampiric = Vampiric,
+            Vorpal = Vorpal,
+            Wraith = Wraith,
+            XtraMight = XtraMight,
+            XtraShots = XtraShots,
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
@@ -119,7 +282,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
     /// <returns></returns>
     private ItemMatch[] AddBooleanMatch(bool? boolean, GetItemProperty<bool> positiveLambdaEvaluation)
     {
-        List<ItemMatch> itemMatchList = new List<ItemMatch>();
         if (boolean.HasValue)
         {
             return new ItemMatch[]
@@ -161,6 +323,87 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         itemMatchList.AddRange(AddBooleanMatch(IsWearableOrWieldable, new IsWearableOrWieldableBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddContainsMatch<ItemClass>(AnyMatchingItemClasses, AllNonMatchingItemClasses, new ItemClassGetItemProperty(Game)));
         itemMatchList.AddRange(AddContainsMatch<ItemFactory>(AnyMatchingItemFactories, AllNonMatchingItemFactories, new ItemFactoryGetItemProperty(Game)));
+
+        itemMatchList.AddRange(AddBooleanMatch(CanApplyBlessedArtifactBias, new CanApplyBlessedArtifactBiasBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(CanApplyArtifactBiasSlaying, new CanApplyArtifactBiasSlayingBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Aggravate, new AggravateBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(AntiTheft, new AntiTheftBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ArtifactBias, new ArtifactBiasBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Blessed, new BlessedBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(BrandAcid, new BrandAcidBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(BrandCold, new BrandColdBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(BrandElec, new BrandElecBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(BrandFire, new BrandFireBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(BrandPois, new BrandPoisBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Chaotic, new ChaoticBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IsCursed, new IsCursedBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(DrainExp, new DrainExpBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(DreadCurse, new DreadCurseBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(EasyKnow, new EasyKnowBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Feather, new FeatherBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(FreeAct, new FreeActBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(HeavyCurse, new HeavyCurseBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(HideType, new HideTypeBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(HoldLife, new HoldLifeBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IgnoreAcid, new IgnoreAcidBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IgnoreCold, new IgnoreColdBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IgnoreElec, new IgnoreElecBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(IgnoreFire, new IgnoreFireBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ImAcid, new ImAcidBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ImCold, new ImColdBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ImElec, new ImElecBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ImFire, new ImFireBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Impact, new ImpactBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(NoMagic, new NoMagicBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(NoTele, new NoTeleBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(PermaCurse, new PermaCurseBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Radius, new RadiusBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Reflect, new ReflectBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Regen, new RegenBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResAcid, new ResAcidBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResBlind, new ResBlindBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResChaos, new ResChaosBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResCold, new ResColdBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResConf, new ResConfBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResDark, new ResDarkBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResDisen, new ResDisenBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResElec, new ResElecBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResFear, new ResFearBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResFire, new ResFireBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResLight, new ResLightBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResNether, new ResNetherBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResNexus, new ResNexusBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResPois, new ResPoisBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResShards, new ResShardsBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ResSound, new ResSoundBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SeeInvis, new SeeInvisBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(FactoryAllowsShElecricity, new FactoryAllowsShElecricityBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ShElec, new ShElecBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(FactoryAllowsShFire, new FactoryAllowsShFireBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ShFire, new ShFireBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ShowMods, new ShowModsBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SlayAnimal, new SlayAnimalBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SlayDemon, new SlayDemonBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SlayDragon, new SlayDragonBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SlayEvil, new SlayEvilBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SlayGiant, new SlayGiantBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SlayOrc, new SlayOrcBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SlayTroll, new SlayTrollBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SlayUndead, new SlayUndeadBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SlowDigest, new SlowDigestBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SustCha, new SustChaBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SustCon, new SustConBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SustDex, new SustDexBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SustInt, new SustIntBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SustStr, new SustStrBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(SustWis, new SustWisBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Telepathy, new TelepathyBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Teleport, new TeleportBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(TreasureRating, new TreasureRatingBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Vampiric, new VampiricBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(Wraith, new WraithBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(XtraMight, new XtraMightBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(XtraShots, new XtraShotsBooleanGetItemProperty(Game)));
         ItemMatches = itemMatchList.ToArray();
     }
 
@@ -306,4 +549,164 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
     /// </summary>
     private string[]? AllNonMatchingItemFactoryNames { get; } = null;
     public ItemFactory[]? AllNonMatchingItemFactories { get; private set; }
+
+    public bool? CanApplyBlessedArtifactBias { get; } = null;
+    public bool? CanApplyArtifactBiasSlaying { get; } = null;
+    public bool? Aggravate { get; } = null;
+
+    public bool? AntiTheft { get; } = null;
+
+    public bool? ArtifactBias { get; } = null;
+
+    public bool? Blessed { get; } = null;
+
+    public bool? BrandAcid { get; } = null;
+
+    public bool? BrandCold { get; } = null;
+
+    public bool? BrandElec { get; } = null;
+
+    public bool? BrandFire { get; } = null;
+
+    public bool? BrandPois { get; } = null;
+
+    public bool? Chaotic { get; } = null;
+
+    public bool? IsCursed { get; } = null;
+
+    public bool? DrainExp { get; } = null;
+
+    public bool? DreadCurse { get; } = null;
+
+    public bool? EasyKnow { get; } = null;
+
+    public bool? Feather { get; } = null;
+
+    public bool? FreeAct { get; } = null;
+
+    public bool? HeavyCurse { get; } = null;
+
+    public bool? HideType { get; } = null;
+
+    public bool? HoldLife { get; } = null;
+
+    public bool? IgnoreAcid { get; } = null;
+
+    public bool? IgnoreCold { get; } = null;
+
+    public bool? IgnoreElec { get; } = null;
+
+    public bool? IgnoreFire { get; } = null;
+
+    public bool? ImAcid { get; } = null;
+
+    public bool? ImCold { get; } = null;
+
+    public bool? ImElec { get; } = null;
+
+    public bool? ImFire { get; } = null;
+
+    public bool? Impact { get; } = null;
+
+    public bool? NoMagic { get; } = null;
+
+    public bool? NoTele { get; } = null;
+
+    public bool? PermaCurse { get; } = null;
+
+    public bool? Radius { get; } = null;
+
+    public bool? Reflect { get; } = null;
+
+    public bool? Regen { get; } = null;
+
+    public bool? ResAcid { get; } = null;
+
+    public bool? ResBlind { get; } = null;
+
+    public bool? ResChaos { get; } = null;
+
+    public bool? ResCold { get; } = null;
+
+    public bool? ResConf { get; } = null;
+
+    public bool? ResDark { get; } = null;
+
+    public bool? ResDisen { get; } = null;
+
+    public bool? ResElec { get; } = null;
+
+    public bool? ResFear { get; } = null;
+
+    public bool? ResFire { get; } = null;
+
+    public bool? ResLight { get; } = null;
+
+    public bool? ResNether { get; } = null;
+
+    public bool? ResNexus { get; } = null;
+
+    public bool? ResPois { get; } = null;
+
+    public bool? ResShards { get; } = null;
+
+    public bool? ResSound { get; } = null;
+
+    public bool? SeeInvis { get; } = null;
+
+    public bool? FactoryAllowsShElecricity { get; } = null;
+
+    public bool? ShElec { get; } = null;
+
+    public bool? FactoryAllowsShFire { get; } = null;
+
+    public bool? ShFire { get; } = null;
+
+    public bool? ShowMods { get; } = null;
+
+    public bool? SlayAnimal { get; } = null;
+
+    public bool? SlayDemon { get; } = null;
+
+    public bool? SlayDragon { get; } = null;
+
+    public bool? SlayEvil { get; } = null;
+
+    public bool? SlayGiant { get; } = null;
+
+    public bool? SlayOrc { get; } = null;
+
+    public bool? SlayTroll { get; } = null;
+
+    public bool? SlayUndead { get; } = null;
+
+    public bool? SlowDigest { get; } = null;
+
+    public bool? SustCha { get; } = null;
+
+    public bool? SustCon { get; } = null;
+
+    public bool? SustDex { get; } = null;
+
+    public bool? SustInt { get; } = null;
+
+    public bool? SustStr { get; } = null;
+
+    public bool? SustWis { get; } = null;
+
+    public bool? Telepathy { get; } = null;
+
+    public bool? Teleport { get; } = null;
+
+    public bool? TreasureRating { get; } = null;
+
+    public bool? Vampiric { get; } = null;
+
+    public bool? Vorpal { get; } = null;
+
+    public bool? Wraith { get; } = null;
+
+    public bool? XtraMight { get; } = null;
+
+    public bool? XtraShots { get; } = null;
 }

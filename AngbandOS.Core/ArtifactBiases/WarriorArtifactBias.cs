@@ -43,9 +43,9 @@ internal class WarriorArtifactBias : ArtifactBias
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseResistFearItemTest), "2/3", nameof(ResistFearItemEnhancement), "1/2"),
-        (nameof(FalseNoMagicItemTest), "1/3", nameof(NoMagicItemEnhancement), "1/2"),
-        (nameof(FalseResistDarknessItemTest), "1", nameof(ResistDarknessItemEnhancement), "1/2")
+        (nameof(FalseResistFearItemFilter), "2/3", nameof(ResistFearItemEnhancement), "1/2"),
+        (nameof(FalseNoMagicItemFilter), "1/3", nameof(NoMagicItemEnhancement), "1/2"),
+        (nameof(FalseResistDarknessItemFilter), "1", nameof(ResistDarknessItemEnhancement), "1/2")
     };
 
     public override int ActivationPowerChance => 80;

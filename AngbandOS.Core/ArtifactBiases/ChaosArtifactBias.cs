@@ -14,14 +14,14 @@ internal class ChaosArtifactBias : ArtifactBias
     public override string AffinityName => "Chaos";
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomResistanceTuples => new (string, string, string, string)[]
     {
-        (nameof(FalseResistChaosItemTest), "1", nameof(ResistChaosItemEnhancement), "1/2"),
-        (nameof(FalseResistConfusionItemTest), "1", nameof(ResistConfusionItemEnhancement), "1/2"),
-        (nameof(FalseResistDisenchantItemTest), "1", nameof(ResistDisenchantItemEnhancement), "1/2")
+        (nameof(FalseResistChaosItemFilter), "1", nameof(ResistChaosItemEnhancement), "1/2"),
+        (nameof(FalseResistConfusionItemFilter), "1", nameof(ResistConfusionItemEnhancement), "1/2"),
+        (nameof(FalseResistDisenchantItemFilter), "1", nameof(ResistDisenchantItemEnhancement), "1/2")
     };
 
     protected override (string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? RandomSlayingTuples => new (string, string, string, string)[]
     {
-        (nameof(CanSlayAndFalseChaoticItemTest), "1", nameof(ChaoticItemEnhancement), "1/2")
+        (nameof(CanSlayAndFalseChaoticItemFilter), "1", nameof(ChaoticItemEnhancement), "1/2")
     };
 
     public override bool ApplyMiscPowers(EffectivePropertySet characteristics)

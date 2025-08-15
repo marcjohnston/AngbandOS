@@ -1406,17 +1406,17 @@ internal sealed class ItemFactory : IGetKey, IToJson
         /// Loops through an array of item tests and enhancements and based on the probability of the test, applies its associated item enhancement and returns true, if an enhancement
         /// was applied.  If all of the tests fail, false is returned.
         /// </summary>
-        bool ApplyTestsAndItemEnhancements(Item item, EffectivePropertySet characteristics, (ItemTest, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? testsAndItemEnhancements)
+        bool ApplyTestsAndItemEnhancements(Item item, EffectivePropertySet characteristics, (ItemFilter, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? testsAndItemEnhancements)
         {
             if (testsAndItemEnhancements != null)
             {
-                foreach ((ItemTest itemTest, ProbabilityExpression itemTestProbability, ItemEnhancement itemEnhancement, ProbabilityExpression moreProbability) in testsAndItemEnhancements)
+                foreach ((ItemFilter itemTest, ProbabilityExpression itemTestProbability, ItemEnhancement itemEnhancement, ProbabilityExpression moreProbability) in testsAndItemEnhancements)
                 {
                     // Test the probability and if whether the item test pass.
                     if (itemTestProbability.Test())
                     {
                         // The test only occurs on the effective properties.
-                        if (itemTest.Test(item.EffectivePropertySet))
+                        if (itemTest.Matches(item))
                         {
                             characteristics.AddEnhancement(itemEnhancement.GenerateItemCharacteristics());
                             if (moreProbability.Test())

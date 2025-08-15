@@ -11,7 +11,7 @@ internal class CanBeEatenBooleanGetItemProperty : GetItemProperty<bool>
 {
     public CanBeEatenBooleanGetItemProperty(Game game) : base(game) { }
 
-    public override string DebugDescription => "CanBeEaten";
+    public override string DebugDescription => nameof(Item.CanBeEaten);
     public override bool Get(Item item)
     {
         return item.CanBeEaten;
