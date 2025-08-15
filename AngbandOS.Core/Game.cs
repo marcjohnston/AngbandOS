@@ -2297,49 +2297,49 @@ internal class Game
         return !PlayerCanSeeBold(y, x);
     }
 
-    private Item? MakeFixedArtifact()
-    {
-        WeightedRandom<FixedArtifact> fixedArtifactsWeightedRandom = SingletonRepository.ToWeightedRandom<FixedArtifact>();
-        do
-        {
-            FixedArtifact aPtr = fixedArtifactsWeightedRandom.Choose();
-            if (!aPtr.DisableViaRandom)
-            {
-                continue;
-            }
-            if (aPtr.CurNum != 0)
-            {
-                continue;
-            }
-            if (aPtr.Level > Difficulty)
-            {
-                int d = (aPtr.Level - Difficulty) * 2;
-                if (RandomLessThan(d) != 0)
-                {
-                    continue;
-                }
-            }
-            if (RandomLessThan(aPtr.Rarity) != 0)
-            {
-                return null;
-            }
-            ItemFactory kIdx = aPtr.BaseItemFactory;
-            if (kIdx.LevelNormallyFound > ObjectLevel)
-            {
-                int d = (kIdx.LevelNormallyFound - ObjectLevel) * 5;
-                if (RandomLessThan(d) != 0)
-                {
-                    continue;
-                }
-            }
-            Item item = kIdx.GenerateItem();
-            item.ApplyFixedArtifact(aPtr);
-            return item;
-        } while (true); // TODO: This may loop forever if no fixed artifact can be created.
-    }
-
     public Item? MakeObject(bool good, bool great, bool doNotAllowChestToBeCreated)
     {
+        Item? MakeFixedArtifact()
+        {
+            WeightedRandom<FixedArtifact> fixedArtifactsWeightedRandom = SingletonRepository.ToWeightedRandom<FixedArtifact>();
+            do
+            {
+                FixedArtifact aPtr = fixedArtifactsWeightedRandom.Choose();
+                if (!aPtr.DisableViaRandom)
+                {
+                    continue;
+                }
+                if (aPtr.CurNum != 0)
+                {
+                    continue;
+                }
+                if (aPtr.Level > Difficulty)
+                {
+                    int d = (aPtr.Level - Difficulty) * 2;
+                    if (RandomLessThan(d) != 0)
+                    {
+                        continue;
+                    }
+                }
+                if (RandomLessThan(aPtr.Rarity) != 0)
+                {
+                    return null;
+                }
+                ItemFactory kIdx = aPtr.BaseItemFactory;
+                if (kIdx.LevelNormallyFound > ObjectLevel)
+                {
+                    int d = (kIdx.LevelNormallyFound - ObjectLevel) * 5;
+                    if (RandomLessThan(d) != 0)
+                    {
+                        continue;
+                    }
+                }
+                Item item = kIdx.GenerateItem();
+                item.ApplyFixedArtifact(aPtr);
+                return item;
+            } while (true); // TODO: This may loop forever if no fixed artifact can be created.
+        }
+
         int prob = good ? 10 : 1000;
         int baselevel = good ? ObjectLevel + 10 : ObjectLevel;
 
