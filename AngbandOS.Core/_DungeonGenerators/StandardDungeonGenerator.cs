@@ -10,6 +10,7 @@ namespace AngbandOS.Core.DungeonGenerators;
 internal class StandardDungeonGenerator : DungeonGenerator
 {
     private const int MaximumNumberOfRooms = 100; // This is the maximum number of rooms that can be tracked when a dungeon is generated.  Any rooms generated beyond this count are not tracked as a room.
+    private const int MinimumNumberOfRooms = 50; // The minimum number of rooms to attempt to create.
     private List<GridCoordinate> Rooms = new List<GridCoordinate>(); // This is the center of each room that was generated.
 
     private const int _smallLevel = 3;
@@ -34,7 +35,6 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private const int _dunAmtItem = 3;
     private const int _dunAmtRoom = 9;
     private const int _dunDest = 18;
-    private const int MinimumNumberOfRoomsToAttemptToCreate = 50;
     private const int _dunStrDen = 5;
     private const int _dunStrMag = 3;
     private const int _dunStrMc = 90;
@@ -908,7 +908,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         int roomAttemptCount = 0;
 
         // Attempt to generate rooms until we have attempted a minimum number of generations and we have reached a minimum number of rooms generated.
-        while (roomAttemptCount < MinimumNumberOfRoomsToAttemptToCreate || Rooms.Count < MinimumRoomCount)
+        while (roomAttemptCount < MinimumNumberOfRooms || Rooms.Count < MinimumRoomCount)
         {
             roomAttemptCount++;
 
