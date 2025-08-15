@@ -25,7 +25,7 @@ public class CreateRandomArtifactScrollItemFactory : ItemFactoryGameConfiguratio
         (70, 16)
     };
 
-    public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.CreateRandomArtifactIdentifableAndUsedScript), 10);
+    public override (string, int)? ReadBindingTuple => (nameof(SystemScriptsEnum.CreateRandomArtifactScript), 10);
     public override string ItemClassBindingKey => nameof(ScrollsItemClass);
 
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

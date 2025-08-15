@@ -68,7 +68,6 @@
         CreateGoodObjectScript,
         CreateItemScript,
         CreatePhlogistonScript,
-        CreateRandomArtifactIdentifableAndUsedScript,
         CreateRandomArtifactScript,
         CreateStairsScript,
         CreateVeryGoodObjectScript,

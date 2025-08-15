@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CreateRandomArtifactScript : Script, IScript, ICastSpellScript
+internal class CreateRandomArtifactScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
 {
     private CreateRandomArtifactScript(Game game) : base(game) { }
 
@@ -20,6 +20,16 @@ internal class CreateRandomArtifactScript : Script, IScript, ICastSpellScript
     /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.
     /// </summary>
     public string LearnedDetails => "";
+
+    /// <summary>
+    /// Executes the script and returns false.
+    /// </summary>
+    /// <returns></returns>
+    public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
+    {
+        Game.RunScript(nameof(CreateRandomArtifactScript)); // TODO: This may be cancelled?
+        return new IdentifiedAndUsedResult(true, true);
+    }
 
     /// <summary>
     /// Creates an artifact from a chosen item.
