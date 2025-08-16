@@ -10,9 +10,4 @@ namespace AngbandOS.Core.ItemEffects;
 internal class UnnoticedItemEffect : ItemEffect
 {
     private UnnoticedItemEffect(Game game) : base(game) { } // This object is a singleton.
-
-    public override bool Apply(int who, int y, int x)
-    {
-        return false;
-    }
 }

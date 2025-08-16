@@ -11,43 +11,38 @@ internal class PlasmaItemEffect : ItemEffect
 {
     private PlasmaItemEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int who, int y, int x)
+    protected override bool ApplyItem(Item oPtr, int who, int x, int y)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
-        foreach (Item oPtr in cPtr.Items)
+        bool ignore = false;
+        bool plural = false;
+        bool doKill = false;
+        string noteKill = null;
+        if (oPtr.StackCount > 1)
         {
-            bool ignore = false;
-            bool plural = false;
-            bool doKill = false;
-            string noteKill = null;
-            if (oPtr.StackCount > 1)
+            plural = true;
+        }
+        if (oPtr.HatesFire)
+        {
+            doKill = true;
+            noteKill = plural ? " burn up!" : " burns up!";
+            if (oPtr.EffectivePropertySet.IgnoreFire)
             {
-                plural = true;
+                ignore = true;
             }
-            if (oPtr.HatesFire)
+        }
+        if (oPtr.HatesElectricity)
+        {
+            ignore = false;
+            doKill = true;
+            noteKill = plural ? " are destroyed!" : " is destroyed!";
+            if (oPtr.EffectivePropertySet.IgnoreElec)
             {
-                doKill = true;
-                noteKill = plural ? " burn up!" : " burns up!";
-                if (oPtr.EffectivePropertySet.IgnoreFire)
-                {
-                    ignore = true;
-                }
+                ignore = true;
             }
-            if (oPtr.HatesElectricity)
-            {
-                ignore = false;
-                doKill = true;
-                noteKill = plural ? " are destroyed!" : " is destroyed!";
-                if (oPtr.EffectivePropertySet.IgnoreElec)
-                {
-                    ignore = true;
-                }
-            }
-            if (!doKill)
-            {
-                continue;
-            }
+        }
+        if (doKill)
+        {
             if (oPtr.WasNoticed)
             {
                 obvious = true;

@@ -18,12 +18,27 @@ internal abstract class ItemEffect : IGetKey
     public void Bind()
     {
     }
-
-
-    protected ItemEffect(Game game)
+    protected ItemEffect(Game game)
     {
         Game = game;
     }
 
-    public abstract bool Apply(int who, int y, int x);
+    protected virtual bool ApplyItem(Item item, int who, int x, int y)
+    {
+        return false;
+    }
+
+    public virtual bool Apply(int who, int y, int x)
+    {
+        GridTile cPtr = Game.Map.Grid[y][x];
+        bool obvious = false;
+        foreach (Item oPtr in cPtr.Items.ToArray()) // Prevent collection modified error
+        {
+            if (ApplyItem(oPtr, who, x, y))
+            {
+                obvious = true;
+            }
+        }
+        return obvious;
+    }
 }

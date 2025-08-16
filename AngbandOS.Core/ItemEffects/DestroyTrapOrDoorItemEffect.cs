@@ -11,23 +11,19 @@ internal class DestroyTrapOrDoorItemEffect : ItemEffect
 {
     private DestroyTrapOrDoorItemEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int who, int y, int x)
+    protected override bool ApplyItem(Item oPtr, int who, int x, int y)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
-        foreach (Item oPtr in cPtr.Items)
+        if (oPtr.IsContainer)
         {
-            if (oPtr.IsContainer)
+            if (!oPtr.ContainerIsOpen && oPtr.ContainerTraps != null)
             {
-                if (!oPtr.ContainerIsOpen && oPtr.ContainerTraps != null)
+                oPtr.ContainerTraps = null;
+                oPtr.BecomeKnown();
+                if (oPtr.WasNoticed)
                 {
-                    oPtr.ContainerTraps = null;
-                    oPtr.BecomeKnown();
-                    if (oPtr.WasNoticed)
-                    {
-                        Game.MsgPrint("Click!");
-                        obvious = true;
-                    }
+                    Game.MsgPrint("Click!");
+                    obvious = true;
                 }
             }
         }

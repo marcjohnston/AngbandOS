@@ -11,29 +11,24 @@ internal class HellfireItemEffect : ItemEffect
 {
     private HellfireItemEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int who, int y, int x)
+    protected override bool ApplyItem(Item oPtr, int who, int x, int y)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
-        foreach (Item oPtr in cPtr.Items)
+        bool plural = false;
+        bool doKill = false;
+        string noteKill = null;
+        if (oPtr.StackCount > 1)
         {
-            bool plural = false;
-            bool doKill = false;
-            string noteKill = null;
-            if (oPtr.StackCount > 1)
-            {
-                plural = true;
-            }
+            plural = true;
+        }
 
-            if (oPtr.EffectivePropertySet.IsCursed)
-            {
-                doKill = true;
-                noteKill = plural ? " are destroyed!" : " is destroyed!";
-            }
-            if (!doKill)
-            {
-                continue;
-            }
+        if (oPtr.EffectivePropertySet.IsCursed)
+        {
+            doKill = true;
+            noteKill = plural ? " are destroyed!" : " is destroyed!";
+        }
+        if (doKill)
+        {
             if (oPtr.WasNoticed)
             {
                 obvious = true;

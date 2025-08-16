@@ -11,55 +11,51 @@ internal class HolyFireItemEffect : ItemEffect
 {
     private HolyFireItemEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int who, int y, int x)
+    protected override bool ApplyItem(Item oPtr, int who, int x, int y)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
-        foreach (Item oPtr in cPtr.Items)
+        bool plural = false;
+        bool doKill = false;
+        string noteKill = null;
+        if (oPtr.StackCount > 1)
         {
-            bool plural = false;
-            bool doKill = false;
-            string noteKill = null;
-            if (oPtr.StackCount > 1)
-            {
-                plural = true;
-            }
+            plural = true;
+        }
 
-            if (oPtr.EffectivePropertySet.IsCursed)
+        if (oPtr.EffectivePropertySet.IsCursed)
+        {
+            doKill = true;
+            noteKill = plural ? " are destroyed!" : " is destroyed!";
+        }
+        if (doKill)
+        {
+            if (oPtr.WasNoticed)
             {
-                doKill = true;
-                noteKill = plural ? " are destroyed!" : " is destroyed!";
+                obvious = true;
             }
-            if (doKill)
+            if (oPtr.IsArtifact)
             {
                 if (oPtr.WasNoticed)
                 {
-                    obvious = true;
+                    string s = plural ? "are" : "is";
+                    string oName = oPtr.GetDescription(false);
+                    Game.MsgPrint($"The {oName} {s} unaffected!");
                 }
-                if (oPtr.IsArtifact)
+            }
+            else
+            {
+                if (oPtr.WasNoticed && string.IsNullOrEmpty(noteKill))
                 {
-                    if (oPtr.WasNoticed)
-                    {
-                        string s = plural ? "are" : "is";
-                        string oName = oPtr.GetDescription(false);
-                        Game.MsgPrint($"The {oName} {s} unaffected!");
-                    }
+                    string oName = oPtr.GetDescription(false);
+                    Game.MsgPrint($"The {oName}{noteKill}");
                 }
-                else
+                bool isPotion = oPtr.QuaffTuple != null;
+                Game.DeleteObject(oPtr);
+                if (isPotion)
                 {
-                    if (oPtr.WasNoticed && string.IsNullOrEmpty(noteKill))
-                    {
-                        string oName = oPtr.GetDescription(false);
-                        Game.MsgPrint($"The {oName}{noteKill}");
-                    }
-                    bool isPotion = oPtr.QuaffTuple != null;
-                    Game.DeleteObject(oPtr);
-                    if (isPotion)
-                    {
-                        oPtr.Smash(who, y, x);
-                    }
-                    Game.ConsoleView.RefreshMapLocation(y, x);
+                    oPtr.Smash(who, y, x);
                 }
+                Game.ConsoleView.RefreshMapLocation(y, x);
             }
         }
         return obvious;
