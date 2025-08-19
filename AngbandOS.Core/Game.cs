@@ -5081,12 +5081,6 @@ internal class Game
         }
     }
 
-    public IsNoticedEnum CharmMonster(int dir, int plev)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(CharmProjectile));
-        return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
     public void ColdDam(int dam, string kbStr)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;

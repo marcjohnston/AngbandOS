@@ -151,7 +151,8 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
             {
                 return;
             }
-            Game.CharmMonster(dir, Math.Min(Game.ExperienceLevel.IntValue, 20));
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(CharmProjectile));
+            projectile.TargetedFire(dir, Math.Min(Game.ExperienceLevel.IntValue, 20), 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         }
         else if (die < 101)
         {

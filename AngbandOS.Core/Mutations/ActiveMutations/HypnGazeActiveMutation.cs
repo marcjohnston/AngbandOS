@@ -19,7 +19,8 @@ internal class HypnGazeActiveMutation : Mutation
         Game.MsgPrint("Your eyes look mesmerizing...");
         if (Game.GetDirectionWithAim(out int dir))
         {
-            Game.CharmMonster(dir, Game.ExperienceLevel.IntValue);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(CharmProjectile));
+            projectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         }
     }
 
