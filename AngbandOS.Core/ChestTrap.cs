@@ -33,6 +33,6 @@ internal abstract class ChestTrap : IGetKey
     /// Activate the trap.
     /// </summary>
     /// <param name="game"></param>
-    public abstract bool Activate(int x, int y);
+    public abstract DestroysContentsEnum Activate(int x, int y);
     public abstract string Description { get; }
 }

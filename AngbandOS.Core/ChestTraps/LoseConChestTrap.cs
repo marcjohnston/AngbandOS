@@ -10,12 +10,12 @@ namespace AngbandOS.Core.ChestTraps;
 internal class LoseConChestTrap : ChestTrap
 {
     private LoseConChestTrap(Game game) : base(game) { }
-    public override bool Activate(int x, int y)
+    public override DestroysContentsEnum Activate(int x, int y)
     {
         Game.RunScript(nameof(ASmallNeedleHasPrickedYouRenderMessageScript));
         Game.TakeHit(Game.DiceRoll(1, 4), "a poison needle");
         Game.TryDecreasingAbilityScore(Game.ConstitutionAbility);
-        return false;
+        return DestroysContentsEnum.False;
     }
     public override string Description => "(Poison Needle)";
 }

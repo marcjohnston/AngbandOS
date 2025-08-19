@@ -10,14 +10,14 @@ namespace AngbandOS.Core.ChestTraps;
 internal class ParalyzeChestTrap : ChestTrap
 {
     private ParalyzeChestTrap(Game game) : base(game) { }
-    public override bool Activate(int x, int y)
+    public override DestroysContentsEnum Activate(int x, int y)
     {
         Game.RunScript(nameof(APuffOfYellowGasSurroundsYouRenderMessageScript));
         if (!Game.HasFreeAction)
         {
             Game.ParalysisTimer.AddTimer(10 + Game.DieRoll(20));
         }
-        return false;
+        return DestroysContentsEnum.False;
     }
 
     public override string Description => "(Gas Trap)";

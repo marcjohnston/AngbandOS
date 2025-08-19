@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ChestTraps;
 internal class PoisonChestTrap : ChestTrap
 {
     private PoisonChestTrap(Game game) : base(game) { }
-    public override bool Activate(int x, int y)
+    public override DestroysContentsEnum Activate(int x, int y)
     {
         Game.RunScript(nameof(APuffOfGreenGasSurroundsYouRenderMessageScript));
         if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
@@ -24,7 +24,7 @@ internal class PoisonChestTrap : ChestTrap
                 Game.PoisonTimer.AddTimer(10 + Game.DieRoll(20));
             }
         }
-        return false;
+        return DestroysContentsEnum.False;
     }
 
     public override string Description => "(Gas Trap)";

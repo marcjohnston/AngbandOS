@@ -2879,8 +2879,8 @@ internal class Game
         }
         foreach (ChestTrap trap in chestItem.ContainerTraps)
         {
-            bool destroysContents = trap.Activate(MapX.IntValue, MapY.IntValue);
-            if (destroysContents)
+            DestroysContentsEnum destroysContents = trap.Activate(MapX.IntValue, MapY.IntValue);
+            if (destroysContents == DestroysContentsEnum.True)
             {
                 MsgPrint("Everything inside the chest is destroyed!");
                 chestItem.ContainerIsOpen = true;

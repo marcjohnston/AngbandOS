@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ChestTraps;
 internal class SummonChestTrap : ChestTrap
 {
     private SummonChestTrap(Game game) : base(game) { }
-    public override bool Activate(int x, int y)
+    public override DestroysContentsEnum Activate(int x, int y)
     {
         Game.RunScript(nameof(YouAreEnvelopedInACloudOfSmokeRenderMessageScript));
         int num = 2 + Game.DieRoll(3);
@@ -25,7 +25,7 @@ internal class SummonChestTrap : ChestTrap
                 Game.SummonSpecific(y, x, Game.Difficulty, null, true, false);
             }
         }
-        return false;
+        return DestroysContentsEnum.False;
     }
 
     public override string Description => "(Summoning Runes)";
