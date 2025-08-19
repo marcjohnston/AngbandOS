@@ -4,32 +4,35 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.FloorEffects;
+namespace AngbandOS.Core.GridTileEffects;
 
 [Serializable]
-internal class DestroyTrapOrDoorFloorEffect : FloorEffect
+internal class DestroyTrapGridTileEffect : GridTileEffect
 {
-    private DestroyTrapOrDoorFloorEffect(Game game) : base(game) { } // This object is a singleton.
+    private DestroyTrapGridTileEffect(Game game) : base(game) { } // This object is a singleton.
 
     public override IsNoticedEnum Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
         IsNoticedEnum isNoticed = IsNoticedEnum.False;
-        if (cPtr.FeatureType.IsVisibleDoor || cPtr.FeatureType.IsOpenDoor || cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
+        if (cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
             if (Game.GridTileIsVisible(y, x))
             {
                 Game.MsgPrint("There is a bright flash of light!");
                 isNoticed = IsNoticedEnum.True;
-                if (cPtr.FeatureType.IsVisibleDoor)
-                {
-                    Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
-                    Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
-                    Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
-                }
             }
             cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
+        }
+        else if (cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsClosedDoor)
+        {
+            Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
+            if (Game.GridTileIsVisible(y, x))
+            {
+                Game.MsgPrint("Click!");
+                isNoticed = IsNoticedEnum.True;
+            }
         }
         return isNoticed;
     }

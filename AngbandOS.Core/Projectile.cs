@@ -52,7 +52,7 @@ internal sealed class Projectile : IGetKey, IToJson
         MonsterEffect = Game.SingletonRepository.Get<MonsterEffect>(MonsterEffectBindingKey);
         ItemEffect = Game.SingletonRepository.Get<ItemEffect>(ItemEffectBindingKey);
         PlayerEffect = Game.SingletonRepository.Get<PlayerEffectUniversalScript>(PlayerEffectBindingKey);
-        FloorEffect = Game.SingletonRepository.Get<FloorEffect>(FloorEffectBindingKey);
+        FloorEffect = Game.SingletonRepository.Get<GridTileEffect>(FloorEffectBindingKey);
         ImpactProjectileGraphic = Game.SingletonRepository.GetNullable<ProjectileGraphic>(ImpactProjectileGraphicBindingKey);
         EffectAnimation = Game.SingletonRepository.GetNullable<Animation>(EffectAnimationBindingKey);
         BoltProjectileGraphic = Game.SingletonRepository.GetNullable<ProjectileGraphic>(BoltProjectileGraphicBindingKey);
@@ -610,7 +610,7 @@ internal sealed class Projectile : IGetKey, IToJson
         return '*'; // TODO: This can be a property for each projectile
     }
 
-    private FloorEffect FloorEffect { get; set; }
+    private GridTileEffect FloorEffect { get; set; }
 
     /// <summary>
     /// Perform any effect needed on the floor and returns true, if the effect was noticed.  Does nothing and returns false, by default.
@@ -618,7 +618,7 @@ internal sealed class Projectile : IGetKey, IToJson
     /// <param name="y"></param>
     /// <param name="x"></param>
     /// <returns></returns>
-    private string FloorEffectBindingKey { get; } = nameof(UnnoticedFloorEffect);
+    private string FloorEffectBindingKey { get; } = nameof(UnnoticedGridTileEffect);
 
     /// <summary>
     /// Returns the <see cref="ItemEffect"/> that perform the effect needed on the item and returns true, if the effect was noticed.  Does nothing and return false, by default.  This property is bound

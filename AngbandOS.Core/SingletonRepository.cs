@@ -281,7 +281,7 @@ internal class SingletonRepository
         RegisterInterface<ChestTrap>();
         RegisterInterface<FixedArtifact>();
         RegisterInterface<FlaggedAction>();
-        RegisterInterface<FloorEffect>();
+        RegisterInterface<GridTileEffect>();
         RegisterInterface<ItemAction>();
         RegisterInterface<ItemEffect>();
         RegisterInterface<ItemMatch>();

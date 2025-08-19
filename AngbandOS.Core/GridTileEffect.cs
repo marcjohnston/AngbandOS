@@ -4,19 +4,23 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.FloorEffects;
+namespace AngbandOS.Core;
 
 [Serializable]
-internal class MakeTrapFloorEffect : FloorEffect
+internal abstract class GridTileEffect : IGetKey
 {
-    private MakeTrapFloorEffect(Game game) : base(game) { } // This object is a singleton.
+    protected readonly Game Game;
 
-    public override IsNoticedEnum Apply(int x, int y)
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+
+    public void Bind() { }
+
+    protected GridTileEffect(Game game)
     {
-        if (Game.GridOpenNoItemOrCreature(y, x))
-        {
-            Game.PlaceTrap(y, x);
-        }
-        return IsNoticedEnum.False;
+        Game = game;
     }
+
+    public abstract IsNoticedEnum Apply(int x, int y);
 }

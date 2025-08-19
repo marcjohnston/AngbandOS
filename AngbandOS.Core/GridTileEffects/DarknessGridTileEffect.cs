@@ -4,24 +4,24 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.FloorEffects;
+namespace AngbandOS.Core.GridTileEffects;
 
 [Serializable]
-internal class LightWeakFloorEffect : FloorEffect
+internal class DarknessGridTileEffect : GridTileEffect
 {
-    private LightWeakFloorEffect(Game game) : base(game) { } // This object is a singleton.
+    private DarknessGridTileEffect(Game game) : base(game) { } // This object is a singleton.
 
     public override IsNoticedEnum Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
-        IsNoticedEnum isNoticed = IsNoticedEnum.False;
-        cPtr.SelfLit = true;
-        Game.NoteSpot(y, x);
-        Game.ConsoleView.RefreshMapLocation(y, x);
-        if (Game.PlayerCanSeeBold(y, x))
+        IsNoticedEnum isNoticed = Game.PlayerCanSeeBold(y, x) ? IsNoticedEnum.True : IsNoticedEnum.False;
+        cPtr.SelfLit = false;
+        if (cPtr.FeatureType.IsOpenFloor)
         {
-            isNoticed = IsNoticedEnum.True;
+            cPtr.PlayerMemorized = false;
+            Game.NoteSpot(y, x);
         }
+        Game.ConsoleView.RefreshMapLocation(y, x);
         if (cPtr.MonsterIndex != 0)
         {
             Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);

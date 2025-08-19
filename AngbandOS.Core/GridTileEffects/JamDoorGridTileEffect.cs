@@ -4,33 +4,28 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.FloorEffects;
+namespace AngbandOS.Core.GridTileEffects;
 
 [Serializable]
-internal class DestroyTrapFloorEffect : FloorEffect
+internal class JamDoorGridTileEffect : GridTileEffect
 {
-    private DestroyTrapFloorEffect(Game game) : base(game) { } // This object is a singleton.
+    private JamDoorGridTileEffect(Game game) : base(game) { } // This object is a singleton.
 
     public override IsNoticedEnum Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
         IsNoticedEnum isNoticed = IsNoticedEnum.False;
-        if (cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
+        if (cPtr.FeatureType.IsVisibleDoor)
         {
-            if (Game.GridTileIsVisible(y, x))
+            Tile? jammedTile = cPtr.FeatureType.OnJammedTile;
+            if (jammedTile == null)
             {
-                Game.MsgPrint("There is a bright flash of light!");
-                isNoticed = IsNoticedEnum.True;
+                throw new Exception("No jammed door specified.");
             }
-            cPtr.PlayerMemorized = false;
-            Game.RevertTileToBackground(y, x);
-        }
-        else if (cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsClosedDoor)
-        {
-            Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
+            cPtr.SetFeature(jammedTile);
             if (Game.GridTileIsVisible(y, x))
             {
-                Game.MsgPrint("Click!");
+                Game.MsgPrint("The door seems stuck.");
                 isNoticed = IsNoticedEnum.True;
             }
         }
