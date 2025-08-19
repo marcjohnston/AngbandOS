@@ -14,7 +14,6 @@ public class GameConfiguration
     {
         List<T> singletonsList = new List<T>();
 
-        int i = 0;
         foreach (var type in assembly.GetTypes())
         {
             if (typeof(T).IsAssignableFrom(type))

@@ -13,7 +13,7 @@ public class LightWeakProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(BrightWhiteCloudAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.LightWeakFloorEffect);
+    public override string FloorEffectBindingKey => nameof(GridTileScriptsEnum.LightWeakGridTileScript);
 
     public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.LightWeakMonsterEffect);
 }

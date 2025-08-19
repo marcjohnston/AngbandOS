@@ -6,20 +6,20 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-public enum FloorEffectScriptsEnum
+public enum GridTileScriptsEnum
 {
-    DarknessFloorEffect,
-    DarknessWeakFloorEffect,
-    DestroyTrapFloorEffect,
-    DestroyTrapOrDoorFloorEffect,
-    JamDoorFloorEffect,
-    LightFloorEffect,
-    LightWeakFloorEffect,
-    MakeDoorFloorEffect,
-    MakeElderSignFloorEffect,
-    MakeTrapFloorEffect,
-    NoticedFloorEffect,
-    StoneWallFloorEffect,
-    UnnoticedFloorEffect,
-    WallToMudFloorEffect,
+    DarknessGridTileScript,
+    DarknessWeakGridTileScript,
+    DestroyTrapGridTileScript,
+    DestroyTrapOrDoorGridTileScript,
+    JamDoorGridTileScript,
+    LightGridTileScript,
+    LightWeakGridTileScript,
+    MakeDoorGridTileScript,
+    MakeElderSignGridTileScript,
+    MakeTrapGridTileScript,
+    NoticedGridTileScript,
+    StoneWallGridTileScript,
+    UnnoticedGridTileScript,
+    WallToMudGridTileScript,
 }

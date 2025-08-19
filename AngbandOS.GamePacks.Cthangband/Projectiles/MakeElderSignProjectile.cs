@@ -11,7 +11,7 @@ public class MakeElderSignProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(BrightGreenSparkleAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.MakeElderSignFloorEffect);
+    public override string FloorEffectBindingKey => nameof(GridTileScriptsEnum.MakeElderSignGridTileScript);
 
     public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.MakeElderSignMonsterEffect);
 }

@@ -11,7 +11,7 @@ public class StoneWallProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(BrightGreySparkleAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.StoneWallFloorEffect);
+    public override string FloorEffectBindingKey => nameof(GridTileScriptsEnum.StoneWallGridTileScript);
 
     public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.StoneWallMonsterEffect);
 }

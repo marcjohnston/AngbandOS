@@ -15,7 +15,7 @@ public class ChaosProjectile : ProjectileGameConfiguration
 
     public override string? EffectAnimationBindingKey => nameof(PinkPurpleFlashAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.NoticedFloorEffect);
+    public override string FloorEffectBindingKey => nameof(GridTileScriptsEnum.NoticedGridTileScript);
 
     public override string ItemEffectBindingKey => nameof(ItemEffectScriptsEnum.ChaosItemEffect);
 

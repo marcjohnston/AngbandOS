@@ -7,9 +7,15 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class GridTileScript
+internal abstract class GridTileScript : IGetKey
 {
     protected readonly Game Game;
+
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
+
+    public void Bind() { }
 
     protected GridTileScript(Game game)
     {

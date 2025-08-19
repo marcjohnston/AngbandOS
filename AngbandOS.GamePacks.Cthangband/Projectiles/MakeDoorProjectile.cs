@@ -11,7 +11,7 @@ public class MakeDoorProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(BrightBrownSparkleAnimation);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.MakeDoorFloorEffect);
+    public override string FloorEffectBindingKey => nameof(GridTileScriptsEnum.MakeDoorGridTileScript);
 
     public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.MakeDoorMonsterEffect);
 }

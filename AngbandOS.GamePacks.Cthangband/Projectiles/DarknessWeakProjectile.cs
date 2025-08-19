@@ -13,7 +13,7 @@ public class DarknessWeakProjectile : ProjectileGameConfiguration
 
     public override string? ImpactProjectileGraphicBindingKey => nameof(GreySplatProjectileGraphic);
 
-    public override string FloorEffectBindingKey => nameof(FloorEffectScriptsEnum.DarknessWeakFloorEffect);
+    public override string FloorEffectBindingKey => nameof(GridTileScriptsEnum.DarknessWeakGridTileScript);
 
     public override string MonsterEffectBindingKey => nameof(MonsterEffectScriptsEnum.DarknessWeakMonsterEffect);
 }
