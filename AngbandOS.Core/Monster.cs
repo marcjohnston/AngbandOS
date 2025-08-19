@@ -1000,7 +1000,7 @@ internal class Monster : IItemContainer
                 // update the view if the player can see it
                 tile.PlayerMemorized = false;
                 Game.RevertTileToBackground(newY, newX);
-                if (Game.PlayerHasLosBold(newY, newX))
+                if (Game.GridTileIsVisible(newY, newX))
                 {
                     doView = true;
                 }
@@ -1055,7 +1055,7 @@ internal class Monster : IItemContainer
                         Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Get<Tile>(nameof(OpenDoorTile)));
                     }
                     // If the player can see, remind ourselves to update the view later
-                    if (Game.PlayerHasLosBold(newY, newX))
+                    if (Game.GridTileIsVisible(newY, newX))
                     {
                         doView = true;
                     }
@@ -1244,7 +1244,7 @@ internal class Monster : IItemContainer
                             if (Race.TakeItem)
                             {
                                 didTakeItem = true;
-                                if (IsVisible && Game.PlayerHasLosBold(newY, newX))
+                                if (IsVisible && Game.GridTileIsVisible(newY, newX))
                                 {
                                     Game.MsgPrint($"{monsterName} tries to pick up {itemName}, but fails.");
                                 }
@@ -1254,7 +1254,7 @@ internal class Monster : IItemContainer
                         else if (Race.TakeItem)
                         {
                             didTakeItem = true;
-                            if (Game.PlayerHasLosBold(newY, newX))
+                            if (Game.GridTileIsVisible(newY, newX))
                             {
                                 Game.MsgPrint($"{monsterName} picks up {itemName}.");
                             }
@@ -1271,7 +1271,7 @@ internal class Monster : IItemContainer
                             // We can't pick up the item, so just stomp on it
                             didKillItem = true;
                             // If the player saw us, let them know
-                            if (Game.PlayerHasLosBold(newY, newX))
+                            if (Game.GridTileIsVisible(newY, newX))
                             {
                                 Game.MsgPrint($"{monsterName} crushes {itemName}.");
                             }
@@ -2650,7 +2650,7 @@ internal class Monster : IItemContainer
             return;
         }
         // If we can actually see the player then don't change where we are going
-        if (Game.PlayerHasLosBold(y1, x1))
+        if (Game.GridTileIsVisible(y1, x1))
         {
             return;
         }

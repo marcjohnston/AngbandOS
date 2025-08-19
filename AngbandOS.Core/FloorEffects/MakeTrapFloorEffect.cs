@@ -11,13 +11,12 @@ internal class MakeTrapFloorEffect : FloorEffect
 {
     private MakeTrapFloorEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int x, int y)
+    public override IsNoticedEnum Apply(int x, int y)
     {
-        if (!Game.GridOpenNoItemOrCreature(y, x))
+        if (Game.GridOpenNoItemOrCreature(y, x))
         {
-            return false;
+            Game.PlaceTrap(y, x);
         }
-        Game.PlaceTrap(y, x);
-        return false;
+        return IsNoticedEnum.False;
     }
 }

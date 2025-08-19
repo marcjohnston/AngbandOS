@@ -5006,7 +5006,7 @@ internal class Game
                     sleep = true;
                 }
             }
-            if (PlayerHasLosBold(mPtr.MapY, mPtr.MapX))
+            if (GridTileIsVisible(mPtr.MapY, mPtr.MapX))
             {
                 if (mPtr.Speed < rPtr.Speed + 10)
                 {
@@ -5081,13 +5081,13 @@ internal class Game
         }
     }
 
-    public bool CharmMonster(int dir, int plev)
+    public IsNoticedEnum CharmMonster(int dir, int plev)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(CharmProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
-    public bool CloneMonster(int dir)
+    public IsNoticedEnum CloneMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldCloneProjectile));
         return projectile.TargetedFire(dir, 0, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
@@ -5123,7 +5123,7 @@ internal class Game
         }
     }
 
-    public bool ConfuseMonster(int dir, int plev)
+    public IsNoticedEnum ConfuseMonster(int dir, int plev)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
@@ -5201,7 +5201,7 @@ internal class Game
         RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget.  In this case, the grid was modified.
     }
 
-    public bool DestroyTrapOrDoor(int dir)
+    public IsNoticedEnum DestroyTrapOrDoor(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
         return projectile.TargetedFire(dir, 0, 0, beam: true, grid: true, item: true, jump: false, stop: false, kill: false, thru: true, hide: false);
@@ -5402,7 +5402,7 @@ internal class Game
     /// <param name="dir"></param>
     /// <param name="dam"></param>
     /// <returns></returns>
-    public bool DrainLife(int dir, int dam)
+    public IsNoticedEnum DrainLife(int dir, int dam)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldDrainLifeProjectile));
         return projectile.TargetedFire(dir, dam, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
@@ -5851,7 +5851,7 @@ internal class Game
         return true;
     }
 
-    public bool ScareMonster(int dir, int plev)
+    public IsNoticedEnum ScareMonster(int dir, int plev)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile));
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
@@ -5865,7 +5865,7 @@ internal class Game
     /// <param name="dam"></param>
     /// <param name="rad"></param>
     /// <returns></returns>
-    public bool FireBall(Projectile projectile, int dir, int dam, int rad)
+    public IsNoticedEnum FireBall(Projectile projectile, int dir, int dam, int rad)
     {
         return projectile.TargetedFire(dir, dam, rad, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
     }
@@ -5922,7 +5922,7 @@ internal class Game
         }
     }
 
-    public bool HealMonster(int dir)
+    public IsNoticedEnum HealMonster(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldHealProjectile));
         return projectile.TargetedFire(dir, DiceRoll(4, 6), 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
@@ -5940,7 +5940,7 @@ internal class Game
         return true;
     }
 
-    public bool LightLine(int dir)
+    public IsNoticedEnum LightLine(int dir)
     {
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
         return projectile.TargetedFire(dir, DiceRoll(6, 8), 0, beam: true, grid: true, kill: true, jump: false, stop: false, item: false, thru: true, hide: false);
@@ -6019,7 +6019,7 @@ internal class Game
             {
                 continue;
             }
-            if (!PlayerHasLosBold(mPtr.MapY, mPtr.MapX))
+            if (!GridTileIsVisible(mPtr.MapY, mPtr.MapX))
             {
                 continue;
             }
@@ -6440,9 +6440,9 @@ internal class Game
     /// <param name="projectile"></param>
     /// <param name="dam"></param>
     /// <returns></returns>
-    public bool ProjectAtAllInLos(Projectile projectile, int dam)
+    public IsNoticedEnum ProjectAtAllInLos(Projectile projectile, int dam)
     {
-        bool obvious = false;
+        IsNoticedEnum isNoticed = IsNoticedEnum.False;
         for (int i = 1; i < MonsterMax; i++)
         {
             Monster mPtr = Monsters[i];
@@ -6452,16 +6452,16 @@ internal class Game
             }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
-            if (!PlayerHasLosBold(y, x))
+            if (!GridTileIsVisible(y, x))
             {
                 continue;
             }
-            if (projectile.Fire(0, 0, y, x, dam, kill: true, jump: true, hide: true, beam: false, thru: false, grid: false, item: false, stop: false))
+            if (projectile.Fire(0, 0, y, x, dam, kill: true, jump: true, hide: true, beam: false, thru: false, grid: false, item: false, stop: false) == IsNoticedEnum.True)
             {
-                obvious = true;
+                isNoticed = IsNoticedEnum.True;
             }
         }
-        return obvious;
+        return isNoticed;
     }
 
     public bool RemoveCurseAux(bool alsoRemoveHeavyCurse)
@@ -8206,7 +8206,7 @@ internal class Game
             }
             // Check the line of sight if needed
             tile = Map.Grid[targetY][targetX];
-            if (requireLos && !PlayerHasLosBold(targetY, targetX))
+            if (requireLos && !GridTileIsVisible(targetY, targetX))
             {
                 MsgPrint("You have no direct line of sight to that location.");
                 return;
@@ -8762,7 +8762,7 @@ internal class Game
                 test = true;
             }
             // 2) We're aggravating
-            else if (monster.DistanceFromPlayer <= Constants.MaxSight && (PlayerHasLosBold(monsterY, monsterX) || HasAggravation))
+            else if (monster.DistanceFromPlayer <= Constants.MaxSight && (GridTileIsVisible(monsterY, monsterX) || HasAggravation))
             {
                 test = true;
             }
@@ -13044,7 +13044,7 @@ internal class Game
             for (x = PanelColMin; x <= PanelColMax; x++)
             {
                 GridTile cPtr = Map.Grid[y][x];
-                if (!PlayerHasLosBold(y, x))
+                if (!GridTileIsVisible(y, x))
                 {
                     continue;
                 }
@@ -15405,7 +15405,7 @@ internal class Game
         {
             return true;
         }
-        if (!PlayerHasLosBold(y, x))
+        if (!GridTileIsVisible(y, x))
         {
             return false;
         }
@@ -15422,7 +15422,7 @@ internal class Game
         return Map.Grid[yy][xx].SelfLit;
     }
 
-    public bool PlayerHasLosBold(int y, int x)
+    public bool GridTileIsVisible(int y, int x)
     {
         return Map.Grid[y][x].IsVisible;
     }

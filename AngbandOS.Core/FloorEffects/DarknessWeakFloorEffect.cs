@@ -11,10 +11,10 @@ internal class DarknessWeakFloorEffect : FloorEffect
 {
     private DarknessWeakFloorEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int x, int y)
+    public override IsNoticedEnum Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = Game.PlayerCanSeeBold(y, x);
+        IsNoticedEnum isNoticed = Game.PlayerCanSeeBold(y, x) ? IsNoticedEnum.True : IsNoticedEnum.False;
         cPtr.SelfLit = false;
         if (cPtr.FeatureType.IsOpenFloor)
         {
@@ -26,6 +26,6 @@ internal class DarknessWeakFloorEffect : FloorEffect
         {
             Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
         }
-        return obvious;
+        return isNoticed;
     }
 }

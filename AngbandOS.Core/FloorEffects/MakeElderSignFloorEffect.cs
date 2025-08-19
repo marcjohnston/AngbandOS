@@ -11,13 +11,12 @@ internal class MakeElderSignFloorEffect : FloorEffect
 {
     private MakeElderSignFloorEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int x, int y)
+    public override IsNoticedEnum Apply(int x, int y)
     {
-        if (!Game.GridOpenNoItemOrCreature(y, x))
+        if (Game.GridOpenNoItemOrCreature(y, x))
         {
-            return false;
+            Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(ElderSignSigilTile)));
         }
-        Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(ElderSignSigilTile)));
-        return false;
+        return IsNoticedEnum.False;
     }
 }

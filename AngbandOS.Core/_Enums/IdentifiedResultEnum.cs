@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents whether or not something has been identified or "noticed" by the player.
+/// Represents whether or not an item was identified.
 /// </summary>
 public enum IdentifiedResultEnum
 {

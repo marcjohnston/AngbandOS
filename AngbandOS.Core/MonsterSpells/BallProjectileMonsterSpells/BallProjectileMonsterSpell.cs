@@ -22,7 +22,7 @@ internal abstract class BallProjectileMonsterSpell : ProjectileMonsterSpell
     protected override bool ItemProjectionFlag => true; // Ball projectiles affect items.
     protected override bool StopProjectionFlag => false; // Ball projectiles do not stop.
 
-    protected override bool Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, bool grid, bool stop, bool item, bool kill)
+    protected override IsNoticedEnum Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, bool grid, bool stop, bool item, bool kill)
     {
         // A ball injects a radius.
         int radius = Radius;

@@ -11,22 +11,22 @@ internal class MakeDoorFloorEffect : FloorEffect
 {
     private MakeDoorFloorEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int x, int y)
+    public override IsNoticedEnum Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
+        IsNoticedEnum isNoticed = IsNoticedEnum.False;
         if (!Game.GridOpenNoItemOrCreature(y, x))
         {
-            return false;
+            return IsNoticedEnum.False;
         }
         Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
         if (cPtr.PlayerMemorized)
         {
-            obvious = true;
+            isNoticed = IsNoticedEnum.True;
         }
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
-        return obvious;
+        return isNoticed;
     }
 }

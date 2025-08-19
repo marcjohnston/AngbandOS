@@ -11,21 +11,21 @@ internal class LightFloorEffect : FloorEffect
 {
     private LightFloorEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int x, int y)
+    public override IsNoticedEnum Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
+        IsNoticedEnum isNoticed = IsNoticedEnum.False;
         cPtr.SelfLit = true;
         Game.NoteSpot(y, x);
         Game.ConsoleView.RefreshMapLocation(y, x);
         if (Game.PlayerCanSeeBold(y, x))
         {
-            obvious = true;
+            isNoticed = IsNoticedEnum.True;
         }
         if (cPtr.MonsterIndex != 0)
         {
             Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
         }
-        return obvious;
+        return isNoticed;
     }
 }

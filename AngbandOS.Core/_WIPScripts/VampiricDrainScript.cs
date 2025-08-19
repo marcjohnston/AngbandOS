@@ -27,7 +27,8 @@ internal class VampiricDrainScript : Script, IScript, ICastSpellScript
             return;
         }
         int dummy = Game.ExperienceLevel.IntValue + (Game.DieRoll(Game.ExperienceLevel.IntValue) * Math.Max(1, Game.ExperienceLevel.IntValue / 10));
-        if (!Game.DrainLife(dir, dummy))
+        IsNoticedEnum isNoticed = Game.DrainLife(dir, dummy);
+        if (isNoticed == IsNoticedEnum.False)
         {
             return;
         }

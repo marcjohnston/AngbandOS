@@ -130,7 +130,7 @@ internal class UpdateLightFlaggedAction : FlaggedAction
                     {
                         continue;
                     }
-                    if (Game.PlayerHasLosBold(y, x))
+                    if (Game.GridTileIsVisible(y, x))
                     {
                         CaveLightHack(y, x);
                     }

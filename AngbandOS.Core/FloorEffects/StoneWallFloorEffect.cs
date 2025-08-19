@@ -11,13 +11,12 @@ internal class StoneWallFloorEffect : FloorEffect
 {
     private StoneWallFloorEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int x, int y)
+    public override IsNoticedEnum Apply(int x, int y)
     {
         if (!Game.GridOpenNoItemOrCreature(y, x))
         {
-            return false;
+            Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(WallBasicTile)));
         }
-        Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(WallBasicTile)));
-        return false;
+        return IsNoticedEnum.False;
     }
 }

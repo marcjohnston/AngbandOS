@@ -64,7 +64,7 @@ internal sealed class Animation : IGetKey, IToJson
         {
             for (int j = 0; j < grids; j++)
             {
-                if (Game.PlayerHasLosBold(y[j], x[j]) && Game.PanelContains(y[j], x[j]))
+                if (Game.GridTileIsVisible(y[j], x[j]) && Game.PanelContains(y[j], x[j]))
                 {
                     ColorEnum color = oddFrame ? Color : AlternateColor;
                     Game.ConsoleView.PutCharAtMapLocation(character, color, y[j], x[j]);
@@ -82,7 +82,7 @@ internal sealed class Animation : IGetKey, IToJson
         {
             for (int j = 0; j < grids; j++)
             {
-                if (Game.PlayerHasLosBold(y[j], x[j]) && Game.PanelContains(y[j], x[j]))
+                if (Game.GridTileIsVisible(y[j], x[j]) && Game.PanelContains(y[j], x[j]))
                 {
                     Game.ConsoleView.RefreshMapLocation(y[j], x[j]);
                 }

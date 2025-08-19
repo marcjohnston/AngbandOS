@@ -20,7 +20,8 @@ internal class VampireRacialPowerScript : Script, IScript
             {
                 Game.MsgPrint("You grin and bare your fangs...");
                 int dummy = Game.ExperienceLevel.IntValue + (Game.DieRoll(Game.ExperienceLevel.IntValue) * Math.Max(1, Game.ExperienceLevel.IntValue / 10));
-                if (Game.DrainLife(direction, dummy))
+                IsNoticedEnum isNoticed = Game.DrainLife(direction, dummy);
+                if (isNoticed == IsNoticedEnum.True)
                 {
                     if (Game.Food.IntValue < Constants.PyFoodFull)
                     {

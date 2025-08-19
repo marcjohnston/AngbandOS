@@ -41,7 +41,7 @@ internal class MeteorStormScript : Script, IScript, ICastSpellScript
                 int dx = Game.MapX.IntValue > x ? Game.MapX.IntValue - x : x - Game.MapX.IntValue;
                 int dy = Game.MapY.IntValue > y ? Game.MapY.IntValue - y : y - Game.MapY.IntValue;
                 d = dy > dx ? dy + (dx >> 1) : dx + (dy >> 1);
-            } while (d > 5 || !Game.PlayerHasLosBold(y, x));
+            } while (d > 5 || !Game.GridTileIsVisible(y, x));
             if (count > 1000)
             {
                 break;

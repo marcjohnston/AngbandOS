@@ -11,17 +11,13 @@ internal class WallToMudFloorEffect : FloorEffect
 {
     private WallToMudFloorEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int x, int y)
+    public override IsNoticedEnum Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
-        if (Game.GridPassable(y, x))
+        IsNoticedEnum isNoticed = IsNoticedEnum.False;
+        if (!Game.GridPassable(y, x) || cPtr.FeatureType.IsPermanent)
         {
-            return false;
-        }
-        if (cPtr.FeatureType.IsPermanent)
-        {
-            return false;
+            return IsNoticedEnum.False;
         }
         if (cPtr.FeatureType.IsTreasure)
         {
@@ -29,7 +25,7 @@ internal class WallToMudFloorEffect : FloorEffect
             {
                 Game.MsgPrint("The vein turns into mud!");
                 Game.MsgPrint("You have found something!");
-                obvious = true;
+                isNoticed = IsNoticedEnum.True;
             }
             cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
@@ -40,7 +36,7 @@ internal class WallToMudFloorEffect : FloorEffect
             if (cPtr.PlayerMemorized)
             {
                 Game.MsgPrint("The vein turns into mud!");
-                obvious = true;
+                isNoticed = IsNoticedEnum.True;
             }
             cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
@@ -50,7 +46,7 @@ internal class WallToMudFloorEffect : FloorEffect
             if (cPtr.PlayerMemorized)
             {
                 Game.MsgPrint("The wall turns into mud!");
-                obvious = true;
+                isNoticed = IsNoticedEnum.True;
             }
             cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
@@ -60,7 +56,7 @@ internal class WallToMudFloorEffect : FloorEffect
             if (cPtr.PlayerMemorized)
             {
                 Game.MsgPrint("The rubble turns into mud!");
-                obvious = true;
+                isNoticed = IsNoticedEnum.True;
             }
             cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
@@ -69,7 +65,7 @@ internal class WallToMudFloorEffect : FloorEffect
                 if (Game.PlayerCanSeeBold(y, x))
                 {
                     Game.MsgPrint("There was something buried in the rubble!");
-                    obvious = true;
+                    isNoticed = IsNoticedEnum.True;
                 }
                 Game.PlaceObject(Game.Difficulty, y, x, false, false);
             }
@@ -79,7 +75,7 @@ internal class WallToMudFloorEffect : FloorEffect
             if (cPtr.PlayerMemorized)
             {
                 Game.MsgPrint("The door turns into mud!");
-                obvious = true;
+                isNoticed = IsNoticedEnum.True;
             }
             cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
@@ -88,6 +84,6 @@ internal class WallToMudFloorEffect : FloorEffect
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
-        return obvious;
+        return isNoticed;
     }
 }

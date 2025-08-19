@@ -235,8 +235,8 @@ internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson
     {
         int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
         int radius = Game.ComputeIntegerExpression(RadiusRoll).Value;
-        bool affectsMonster = Projectile.Fire(who, radius, y, x, damage, kill: Kill, jump: Jump, hide: Hide, beam: Beam, thru: Thru, grid: Grid, item: Item, stop: Stop);
-        return SmashingOnPetsTurnsUnfriendly;
+        IsNoticedEnum isNoticed = Projectile.Fire(who, radius, y, x, damage, kill: Kill, jump: Jump, hide: Hide, beam: Beam, thru: Thru, grid: Grid, item: Item, stop: Stop);
+        return SmashingOnPetsTurnsUnfriendly; // Doesn't matter whether the action was noticed.
     }
 
     /// <summary>
@@ -316,12 +316,12 @@ internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson
                         }
                         int y = mPtr.MapY;
                         int x = mPtr.MapX;
-                        if (!Game.PlayerHasLosBold(y, x))
+                        if (!Game.GridTileIsVisible(y, x))
                         {
                             continue;
                         }
-                        bool affectsMonster = Projectile.Fire(0, radius, y, x, damage, kill: Kill, jump: Jump, hide: Hide, beam: Beam, thru: Thru, grid: Grid, item: Item, stop: Stop);
-                        bool identified = Identified ?? affectsMonster;
+                        IsNoticedEnum isNoticed = Projectile.Fire(0, radius, y, x, damage, kill: Kill, jump: Jump, hide: Hide, beam: Beam, thru: Thru, grid: Grid, item: Item, stop: Stop);
+                        bool identified = Identified ?? isNoticed == IsNoticedEnum.True;
                         if (identified)
                         {
                             anyIdentified = true;
@@ -335,9 +335,9 @@ internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson
                     int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
                     int radius = Game.ComputeIntegerExpression(RadiusRoll).Value;
                     RenderPreMessage();
-                    bool affectsMonster = Projectile.Fire(0, radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, kill: Kill, jump: Jump, hide: Hide, beam: Beam, thru: Thru, grid: Grid, item: Item, stop: Stop);
+                    IsNoticedEnum isNoticed = Projectile.Fire(0, radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, kill: Kill, jump: Jump, hide: Hide, beam: Beam, thru: Thru, grid: Grid, item: Item, stop: Stop);
                     RenderPostMessage();
-                    bool identified = Identified ?? affectsMonster;
+                    bool identified = Identified ?? isNoticed == IsNoticedEnum.True;
                     return new IdentifiedAndUsedResult(identified, true);
                 }
             default:
@@ -350,8 +350,8 @@ internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson
         RenderPreMessage();
         int radius = Game.ComputeIntegerExpression(RadiusRoll).Value;
         int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
-        bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
-        bool isIdentified = Identified ?? hitSuccess;
+        IsNoticedEnum isNoticed = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
+        bool isIdentified = Identified ?? isNoticed == IsNoticedEnum.True;
         RenderPostMessage();
         return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
@@ -360,8 +360,8 @@ internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson
     {
         int radius = Game.ComputeIntegerExpression(RadiusRoll).Value;
         int damage = Game.ComputeIntegerExpression(DamageRoll).Value;
-        bool hitSuccess = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
-        bool isIdentified = Identified ?? hitSuccess;
+        IsNoticedEnum isNoticed = Projectile.TargetedFire(direction, damage, radius, grid: Grid, item: Item, kill: Kill, jump: Jump, beam: Beam, thru: Thru, hide: Hide, stop: Stop);
+        bool isIdentified = Identified ?? isNoticed == IsNoticedEnum.True;
         return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
     #endregion

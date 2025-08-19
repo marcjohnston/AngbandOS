@@ -11,10 +11,10 @@ internal class JamDoorFloorEffect : FloorEffect
 {
     private JamDoorFloorEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int x, int y)
+    public override IsNoticedEnum Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
-        bool obvious = false;
+        IsNoticedEnum isNoticed = IsNoticedEnum.False;
         if (cPtr.FeatureType.IsVisibleDoor)
         {
             Tile? jammedTile = cPtr.FeatureType.OnJammedTile;
@@ -23,12 +23,12 @@ internal class JamDoorFloorEffect : FloorEffect
                 throw new Exception("No jammed door specified.");
             }
             cPtr.SetFeature(jammedTile);
-            if (Game.PlayerHasLosBold(y, x))
+            if (Game.GridTileIsVisible(y, x))
             {
                 Game.MsgPrint("The door seems stuck.");
-                obvious = true;
+                isNoticed = IsNoticedEnum.True;
             }
         }
-        return obvious;
+        return isNoticed;
     }
 }

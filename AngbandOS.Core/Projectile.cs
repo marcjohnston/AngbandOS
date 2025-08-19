@@ -84,7 +84,7 @@ internal sealed class Projectile : IGetKey, IToJson
     /// <param name="dam"></param>
     /// <param name="flg"></param>
     /// <returns></returns>
-    public bool TargetedFire(int dir, int dam, int rad, bool jump, bool beam, bool stop, bool kill, bool grid, bool item, bool thru, bool hide)
+    public IsNoticedEnum TargetedFire(int dir, int dam, int rad, bool jump, bool beam, bool stop, bool kill, bool grid, bool item, bool thru, bool hide)
     {
         int tx = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         int ty = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
@@ -105,7 +105,7 @@ internal sealed class Projectile : IGetKey, IToJson
     }
 
     /// <summary>
-    /// Returns true, if the projectile actally hits and affects a monster.
+    /// Returns true, if the projectile actally hits and affects a monster, an item, a grid tile or the player in a manner that the player notices.
     /// </summary>
     /// <param name="who"></param>
     /// <param name="rad"></param>
@@ -121,13 +121,13 @@ internal sealed class Projectile : IGetKey, IToJson
     /// <param name="kill">Permits the projectile or spell to affect monsters or entities in its path, enabling damage or other targeted effects.</param>
     /// <param name="stop">Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.</param>
     /// <returns></returns>
-    public bool Fire(int who, int rad, int y, int x, int dam, bool jump, bool beam, bool thru, bool hide, bool grid, bool item, bool kill, bool stop)
+    public IsNoticedEnum Fire(int who, int rad, int y, int x, int dam, bool jump, bool beam, bool thru, bool hide, bool grid, bool item, bool kill, bool stop)
     {
         int i, dist;
         int y1, x1;
         int msec = Constants.DelayFactorInMilliseconds; // TODO: This can be per projectile
         GridTile cPtr;
-        bool notice = false;
+        IsNoticedEnum isNoticed = IsNoticedEnum.False;
         bool visual = false;
         bool drawn = false;
         bool breath = false;
@@ -185,7 +185,7 @@ internal sealed class Projectile : IGetKey, IToJson
                 gx[grids] = x;
                 grids++;
             }
-            if (!blind && !hide && dist != 0 && beam && Game.PanelContains(y, x) && Game.PlayerHasLosBold(y, x))
+            if (!blind && !hide && dist != 0 && beam && Game.PanelContains(y, x) && Game.GridTileIsVisible(y, x))
             {
                 if (ImpactProjectileGraphic != null)
                 {
@@ -217,7 +217,7 @@ internal sealed class Projectile : IGetKey, IToJson
             }
             if (!blind && !hide)
             {
-                if (Game.PlayerHasLosBold(y9, x9) && Game.PanelContains(y9, x9))
+                if (Game.GridTileIsVisible(y9, x9) && Game.PanelContains(y9, x9))
                 {
                     if (BoltProjectileGraphic != null)
                     {
@@ -351,10 +351,13 @@ internal sealed class Projectile : IGetKey, IToJson
                 }
             }
         }
+
+        // Check to see how many grid tiles the projectile affects.
         if (grids == 0)
         {
-            return false;
+            return IsNoticedEnum.False;
         }
+
         if (!blind && !hide)
         {
             for (int t = 0; t <= gmRad; t++)
@@ -363,7 +366,7 @@ internal sealed class Projectile : IGetKey, IToJson
                 {
                     y = gy[i];
                     x = gx[i];
-                    if (Game.PlayerHasLosBold(y, x) && Game.PanelContains(y, x))
+                    if (Game.GridTileIsVisible(y, x) && Game.PanelContains(y, x))
                     {
                         if (ImpactProjectileGraphic != null)
                         {
@@ -388,7 +391,7 @@ internal sealed class Projectile : IGetKey, IToJson
                 {
                     y = gy[i];
                     x = gx[i];
-                    if (Game.PlayerHasLosBold(y, x) && Game.PanelContains(y, x))
+                    if (Game.GridTileIsVisible(y, x) && Game.PanelContains(y, x))
                     {
                         Game.ConsoleView.RefreshMapLocation(y, x);
                     }
@@ -414,9 +417,9 @@ internal sealed class Projectile : IGetKey, IToJson
                 }
                 y = gy[i];
                 x = gx[i];
-                if (FloorEffect.Apply(x, y))
+                if (FloorEffect.Apply(x, y) == IsNoticedEnum.True)
                 {
-                    notice = true;
+                    isNoticed = IsNoticedEnum.True;
                 }
             }
         }
@@ -433,7 +436,7 @@ internal sealed class Projectile : IGetKey, IToJson
                 x = gx[i];
                 if (ItemEffect.Apply(who, y, x))
                 {
-                    notice = true;
+                    isNoticed = IsNoticedEnum.True;
                 }
             }
         }
@@ -455,7 +458,7 @@ internal sealed class Projectile : IGetKey, IToJson
                 {
                     if (MonsterEffect.Apply(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy) == IdentifiedResultEnum.True)
                     {
-                        notice = true;
+                        isNoticed = IsNoticedEnum.True;
                     }
                 }
                 else
@@ -491,7 +494,7 @@ internal sealed class Projectile : IGetKey, IToJson
                     {
                         if (MonsterEffect.Apply(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy) == IdentifiedResultEnum.True)
                         {
-                            notice = true;
+                            isNoticed = IsNoticedEnum.True;
                         }
                     }
                 }
@@ -536,13 +539,13 @@ internal sealed class Projectile : IGetKey, IToJson
                             Game.Disturb(true);
 
                             // The effects were noticed.
-                            notice = true;
+                            isNoticed = IsNoticedEnum.True;
                         }
                     }
                 }
             }
         }
-        return notice;
+        return isNoticed;
     }
 
     /// <summary>
@@ -569,7 +572,7 @@ internal sealed class Projectile : IGetKey, IToJson
                 tY = Game.Monsters[who].MapY - 1 + Game.DieRoll(3);
                 tX = Game.Monsters[who].MapX - 1 + Game.DieRoll(3);
                 maxAttempts--;
-            } while (maxAttempts > 0 && Game.InBounds2(tY, tX) && !Game.PlayerHasLosBold(tY, tX));
+            } while (maxAttempts > 0 && Game.InBounds2(tY, tX) && !Game.GridTileIsVisible(tY, tX));
             if (maxAttempts < 1)
             {
                 tY = Game.Monsters[who].MapY;

@@ -56,7 +56,7 @@ internal abstract class ProjectileMonsterSpell : MonsterSpell
     /// <param name="projectile"></param>
     /// <param name="flg"></param>
     /// <returns></returns>
-    protected virtual bool Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, bool grid, bool stop, bool item, bool kill)
+    protected virtual IsNoticedEnum Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, bool grid, bool stop, bool item, bool kill)
     {
         return projectile.Fire(monster.GetMonsterIndex(), rad, Game.MapY.IntValue, Game.MapX.IntValue, dam, grid: grid, stop: stop, item: item, kill: kill, jump: false, beam: false, thru: false, hide: false);
     }

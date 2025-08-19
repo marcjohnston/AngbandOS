@@ -15,15 +15,12 @@ internal abstract class FloorEffect : IGetKey
 
     public string GetKey => Key;
 
-    public void Bind()
-    {
-    }
-
+    public void Bind() { }
 
     protected FloorEffect(Game game)
     {
         Game = game;
     }
 
-    public abstract bool Apply(int x, int y);
+    public abstract IsNoticedEnum Apply(int x, int y);
 }

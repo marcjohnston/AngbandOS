@@ -11,8 +11,8 @@ internal class NoticedFloorEffect : FloorEffect
 {
     private NoticedFloorEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int x, int y)
+    public override IsNoticedEnum Apply(int x, int y)
     {
-        return true;
+        return IsNoticedEnum.True;
     }
 }
