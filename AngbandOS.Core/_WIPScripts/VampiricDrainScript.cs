@@ -22,21 +22,22 @@ internal class VampiricDrainScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        if (!Game.GetDirectionWithAim(out int dir))
+        if (!Game.GetDirectionWithAim(out int direction))
         {
             return;
         }
-        int dummy = Game.ExperienceLevel.IntValue + (Game.DieRoll(Game.ExperienceLevel.IntValue) * Math.Max(1, Game.ExperienceLevel.IntValue / 10));
-        IsNoticedEnum isNoticed = Game.DrainLife(dir, dummy);
+        int damage = Game.ExperienceLevel.IntValue + (Game.DieRoll(Game.ExperienceLevel.IntValue) * Math.Max(1, Game.ExperienceLevel.IntValue / 10));
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(OldDrainLifeProjectile));
+        IsNoticedEnum isNoticed = projectile.TargetedFire(direction, damage, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         if (isNoticed == IsNoticedEnum.False)
         {
             return;
         }
-        Game.RestoreHealth(dummy);
-        dummy = Game.Food.IntValue + Math.Min(5000, 100 * dummy);
+        Game.RestoreHealth(damage);
+        damage = Game.Food.IntValue + Math.Min(5000, 100 * damage);
         if (Game.Food.IntValue < Constants.PyFoodMax)
         {
-            Game.SetFood(dummy >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : dummy);
+            Game.SetFood(damage >= Constants.PyFoodMax ? Constants.PyFoodMax - 1 : damage);
         }
     }
     public string LearnedDetails => $"dam {Math.Max(1, Game.ExperienceLevel.IntValue / 10)}d{Game.ExperienceLevel.IntValue}+{Game.ExperienceLevel.IntValue}";

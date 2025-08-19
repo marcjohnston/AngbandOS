@@ -5201,12 +5201,6 @@ internal class Game
         RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget.  In this case, the grid was modified.
     }
 
-    public IsNoticedEnum DestroyTrapOrDoor(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
-        return projectile.TargetedFire(dir, 0, 0, beam: true, grid: true, item: true, jump: false, stop: false, kill: false, thru: true, hide: false);
-    }
-
     public bool DetectDoors()
     {
         bool detect = false;
@@ -5394,18 +5388,6 @@ internal class Game
             MsgPrint("You sense the presence of buried treasure!");
         }
         return anyTreasureRevealed;
-    }
-
-    /// <summary>
-    /// Returns true, if the drain life actally hits and affects a monster.
-    /// </summary>
-    /// <param name="dir"></param>
-    /// <param name="dam"></param>
-    /// <returns></returns>
-    public IsNoticedEnum DrainLife(int dir, int dam)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldDrainLifeProjectile));
-        return projectile.TargetedFire(dir, dam, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
     public void Earthquake(int cy, int cx, int r)

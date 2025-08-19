@@ -26,7 +26,8 @@ internal class TrapAndDoorDestructionScript : Script, IScript, ICastSpellScript
         {
             return;
         }
-        Game.DestroyTrapOrDoor(dir);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
+        projectile.TargetedFire(dir, 0, 0, beam: true, grid: true, item: true, jump: false, stop: false, kill: false, thru: true, hide: false);
     }
     public string LearnedDetails => "";
 }
