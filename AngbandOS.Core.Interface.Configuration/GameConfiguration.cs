@@ -106,6 +106,7 @@ public class GameConfiguration
         gameConfiguration.RechargeItemScripts = LoadFromAssembly<RechargeItemScriptGameConfiguration>(assembly);
         gameConfiguration.TeleportSelfScripts = LoadFromAssembly<TeleportSelfScriptGameConfiguration>(assembly);
         gameConfiguration.MappedItemEnhancements = LoadFromAssembly<MappedItemEnhancementGameConfiguration>(assembly);
+        gameConfiguration.ChestTraps = LoadFromAssembly<ChestTrapGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -252,6 +253,7 @@ public class GameConfiguration
     public virtual RechargeItemScriptGameConfiguration[]? RechargeItemScripts { get; set; } = null;
     public virtual TeleportSelfScriptGameConfiguration[]? TeleportSelfScripts { get; set; } = null;
     public virtual MappedItemEnhancementGameConfiguration[]? MappedItemEnhancements { get; set; } = null;
+    public virtual ChestTrapGameConfiguration[]? ChestTraps { get; set; } = null;
 
     public virtual int[] RequiredExperiencePerLevel => new int[] // TODO: Need defaults removed.
     {

@@ -7,15 +7,8 @@
 namespace AngbandOS.Core.ChestTraps;
 
 [Serializable]
-internal class LoseConChestTrap : ChestTrap
+public class LoseConChestTrap : ChestTrapGameConfiguration
 {
-    private LoseConChestTrap(Game game) : base(game) { }
-    public override DestroysContentsEnum Activate(int x, int y)
-    {
-        Game.RunScript(nameof(ASmallNeedleHasPrickedYouRenderMessageScript));
-        Game.TakeHit(Game.DiceRoll(1, 4), "a poison needle");
-        Game.TryDecreasingAbilityScore(Game.ConstitutionAbility);
-        return DestroysContentsEnum.False;
-    }
+    public override string ActivationGridTileScriptBindingKey => nameof(GridTileScriptsEnum.LoseConGridTileScript);
     public override string Description => "(Poison Needle)";
 }

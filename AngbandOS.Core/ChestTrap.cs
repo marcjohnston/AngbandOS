@@ -11,28 +11,44 @@ namespace AngbandOS.Core;
 /// need concern themselves with their own implementation and not sub-traps.
 /// </summary>
 [Serializable]
-internal abstract class ChestTrap : IGetKey
+internal class ChestTrap : IGetKey, IToJson
 {
     protected readonly Game Game;
-    protected ChestTrap(Game game)
+    public ChestTrap(Game game, ChestTrapGameConfiguration chestTrapGameConfiguration)
     {
         Game = game;
+        Key = chestTrapGameConfiguration.Key ?? chestTrapGameConfiguration.GetType().Name;
+        Description = chestTrapGameConfiguration.Description;
+        ActivationGridTileScriptBindingKey = chestTrapGameConfiguration.ActivationGridTileScriptBindingKey;
     }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
-    /// <returns></returns>
+    /// <returns></returns>    public string ToJson()
+    {
+        ChestTrapGameConfiguration definition = new()
+        {
+            Key = Key,
+            Description = Description,
+            ActivationGridTileScriptBindingKey = ActivationGridTileScriptBindingKey,
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
+    }
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; set; }
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind()
+    {
+        ActivationGridTileScript = Game.SingletonRepository.Get<GridTileScript>(ActivationGridTileScriptBindingKey);
+    }
 
+    private string ActivationGridTileScriptBindingKey { get; }
+    public GridTileScript ActivationGridTileScript { get; private set; }
     /// <summary>
     /// Activate the trap.
     /// </summary>
     /// <param name="game"></param>
-    public abstract DestroysContentsEnum Activate(int x, int y);
-    public abstract string Description { get; }
+    public virtual string Description { get; }
 }

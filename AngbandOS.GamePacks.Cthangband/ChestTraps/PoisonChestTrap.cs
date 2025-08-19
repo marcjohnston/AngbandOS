@@ -7,18 +7,9 @@
 namespace AngbandOS.Core.ChestTraps;
 
 [Serializable]
-internal class ParalyzeChestTrap : ChestTrap
+public class PoisonChestTrap : ChestTrapGameConfiguration
 {
-    private ParalyzeChestTrap(Game game) : base(game) { }
-    public override DestroysContentsEnum Activate(int x, int y)
-    {
-        Game.RunScript(nameof(APuffOfYellowGasSurroundsYouRenderMessageScript));
-        if (!Game.HasFreeAction)
-        {
-            Game.ParalysisTimer.AddTimer(10 + Game.DieRoll(20));
-        }
-        return DestroysContentsEnum.False;
-    }
+    public override string ActivationGridTileScriptBindingKey => nameof(GridTileScriptsEnum.PoisonGridTileScript);
 
     public override string Description => "(Gas Trap)";
 }

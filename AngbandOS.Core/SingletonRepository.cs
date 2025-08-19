@@ -278,7 +278,6 @@ internal class SingletonRepository
         RegisterInterface<AttackEffect>();
         RegisterInterface<BaseCharacterClass>();
         RegisterInterface<BirthStage>();
-        RegisterInterface<ChestTrap>();
         RegisterInterface<FixedArtifact>();
         RegisterInterface<FlaggedAction>();
         RegisterInterface<GridTileScript>();
@@ -319,6 +318,7 @@ internal class SingletonRepository
         LoadFromConfiguration<BoolPosFunction, BoolPosFunctionGameConfiguration>(gameConfiguration.BoolPosFunctions);
         LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities);
         LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells);
+        LoadFromConfiguration<ChestTrap, ChestTrapGameConfiguration>(gameConfiguration.ChestTraps);
         LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations);
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration>(gameConfiguration.ConditionalWidgets);
         LoadFromConfiguration<ConditionalScript, ConditionalScriptGameConfiguration>(gameConfiguration.ConditionalScripts);

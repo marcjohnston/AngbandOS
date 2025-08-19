@@ -4,13 +4,14 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.ChestTraps;
+namespace AngbandOS.Core.GridTileEffects;
 
 [Serializable]
-internal class PoisonChestTrap : ChestTrap
+internal class PoisonGridTileScript : GridTileScript
 {
-    private PoisonChestTrap(Game game) : base(game) { }
-    public override DestroysContentsEnum Activate(int x, int y)
+    private PoisonGridTileScript(Game game) : base(game) { } // This object is a singleton.
+
+    public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         Game.RunScript(nameof(APuffOfGreenGasSurroundsYouRenderMessageScript));
         if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))
@@ -24,8 +25,6 @@ internal class PoisonChestTrap : ChestTrap
                 Game.PoisonTimer.AddTimer(10 + Game.DieRoll(20));
             }
         }
-        return DestroysContentsEnum.False;
+        return (IsNoticedEnum.True, DestroysContentsEnum.False);
     }
-
-    public override string Description => "(Gas Trap)";
 }
