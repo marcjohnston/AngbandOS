@@ -25,5 +25,5 @@ internal abstract class FloorEffect : IGetKey
         Game = game;
     }
 
-    public abstract bool Apply(int y, int x);
+    public abstract bool Apply(int x, int y);
 }

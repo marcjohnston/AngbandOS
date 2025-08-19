@@ -414,7 +414,7 @@ internal sealed class Projectile : IGetKey, IToJson
                 }
                 y = gy[i];
                 x = gx[i];
-                if (FloorEffect.Apply(y, x))
+                if (FloorEffect.Apply(x, y))
                 {
                     notice = true;
                 }

@@ -11,7 +11,7 @@ internal class MakeDoorFloorEffect : FloorEffect
 {
     private MakeDoorFloorEffect(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Apply(int y, int x)
+    public override bool Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
         bool obvious = false;
