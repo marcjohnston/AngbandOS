@@ -5087,12 +5087,6 @@ internal class Game
         return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
-    public IsNoticedEnum CloneMonster(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldCloneProjectile));
-        return projectile.TargetedFire(dir, 0, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
     public void ColdDam(int dam, string kbStr)
     {
         int inv = dam < 30 ? 1 : dam < 60 ? 2 : 3;

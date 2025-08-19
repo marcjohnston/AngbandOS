@@ -48,7 +48,8 @@ internal class SpellOfWonderScript : Script, IScript, ICastSpellScript
         }
         if (die < 8)
         {
-            Game.CloneMonster(dir);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(OldCloneProjectile));
+            projectile.TargetedFire(dir, 0, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         }
         else if (die < 14)
         {
