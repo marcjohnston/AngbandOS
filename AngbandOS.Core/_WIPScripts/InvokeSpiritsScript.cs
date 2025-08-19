@@ -73,7 +73,8 @@ internal class InvokeSpiritsScript : Script, IScript, ICastSpellScript
         }
         if (die < 41)
         {
-            Game.ConfuseMonster(dir, Game.ExperienceLevel.IntValue);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile));
+            projectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         }
         if (die < 46)
         {

@@ -5123,12 +5123,6 @@ internal class Game
         }
     }
 
-    public IsNoticedEnum ConfuseMonster(int dir, int plev)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile));
-        return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
     public void DestroyArea(int y1, int x1, int r)
     {
         int y, x;

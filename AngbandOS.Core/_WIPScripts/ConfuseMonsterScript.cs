@@ -26,7 +26,8 @@ internal class ConfuseMonsterScript : Script, IScript, ICastSpellScript
         {
             return;
         }
-        Game.ConfuseMonster(dir, Game.ExperienceLevel.IntValue * 3 / 2);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile));
+        projectile.TargetedFire(dir, Game.ExperienceLevel.IntValue * 3 / 2, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
     public string LearnedDetails => "";
 }
