@@ -7,16 +7,16 @@
 namespace AngbandOS.Core.GridTileEffects;
 
 [Serializable]
-internal class MakeElderSignGridTileEffect : GridTileEffect
+internal class MakeElderSignGridTileScript : GridTileScript
 {
-    private MakeElderSignGridTileEffect(Game game) : base(game) { } // This object is a singleton.
+    private MakeElderSignGridTileScript(Game game) : base(game) { } // This object is a singleton.
 
-    public override IsNoticedEnum Apply(int x, int y)
+    public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         if (Game.GridOpenNoItemOrCreature(y, x))
         {
             Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(ElderSignSigilTile)));
         }
-        return IsNoticedEnum.False;
+        return (IsNoticedEnum.False, DestroysContentsEnum.False);
     }
 }

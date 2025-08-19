@@ -7,20 +7,14 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class GridTileEffect : IGetKey
+internal abstract class GridTileScript
 {
     protected readonly Game Game;
 
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-
-    public void Bind() { }
-
-    protected GridTileEffect(Game game)
+    protected GridTileScript(Game game)
     {
         Game = game;
     }
 
-    public abstract IsNoticedEnum Apply(int x, int y);
+    public abstract (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y);
 }

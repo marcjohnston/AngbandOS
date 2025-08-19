@@ -7,16 +7,16 @@
 namespace AngbandOS.Core.GridTileEffects;
 
 [Serializable]
-internal class StoneWallGridTileEffect : GridTileEffect
+internal class MakeTrapGridTileScript : GridTileScript
 {
-    private StoneWallGridTileEffect(Game game) : base(game) { } // This object is a singleton.
+    private MakeTrapGridTileScript(Game game) : base(game) { } // This object is a singleton.
 
-    public override IsNoticedEnum Apply(int x, int y)
+    public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
-        if (!Game.GridOpenNoItemOrCreature(y, x))
+        if (Game.GridOpenNoItemOrCreature(y, x))
         {
-            Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(WallBasicTile)));
+            Game.PlaceTrap(y, x);
         }
-        return IsNoticedEnum.False;
+        return (IsNoticedEnum.False, DestroysContentsEnum.False);
     }
 }

@@ -7,25 +7,25 @@
 namespace AngbandOS.Core.GridTileEffects;
 
 [Serializable]
-internal class LightWeakGridTileEffect : GridTileEffect
+internal class DarknessWeakGridTileScript : GridTileScript
 {
-    private LightWeakGridTileEffect(Game game) : base(game) { } // This object is a singleton.
+    private DarknessWeakGridTileScript(Game game) : base(game) { } // This object is a singleton.
 
-    public override IsNoticedEnum Apply(int x, int y)
+    public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
-        IsNoticedEnum isNoticed = IsNoticedEnum.False;
-        cPtr.SelfLit = true;
-        Game.NoteSpot(y, x);
-        Game.ConsoleView.RefreshMapLocation(y, x);
-        if (Game.PlayerCanSeeBold(y, x))
+        IsNoticedEnum isNoticed = Game.PlayerCanSeeBold(y, x) ? IsNoticedEnum.True : IsNoticedEnum.False;
+        cPtr.SelfLit = false;
+        if (cPtr.FeatureType.IsOpenFloor)
         {
-            isNoticed = IsNoticedEnum.True;
+            cPtr.PlayerMemorized = false;
+            Game.NoteSpot(y, x);
         }
+        Game.ConsoleView.RefreshMapLocation(y, x);
         if (cPtr.MonsterIndex != 0)
         {
             Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
         }
-        return isNoticed;
+        return (isNoticed, DestroysContentsEnum.False);
     }
 }

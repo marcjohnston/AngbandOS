@@ -7,30 +7,33 @@
 namespace AngbandOS.Core.GridTileEffects;
 
 [Serializable]
-internal class DestroyTrapOrDoorGridTileEffect : GridTileEffect
+internal class DestroyTrapGridTileScript : GridTileScript
 {
-    private DestroyTrapOrDoorGridTileEffect(Game game) : base(game) { } // This object is a singleton.
+    private DestroyTrapGridTileScript(Game game) : base(game) { } // This object is a singleton.
 
-    public override IsNoticedEnum Apply(int x, int y)
+    public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
         IsNoticedEnum isNoticed = IsNoticedEnum.False;
-        if (cPtr.FeatureType.IsVisibleDoor || cPtr.FeatureType.IsOpenDoor || cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
+        if (cPtr.FeatureType.IsUnidentifiedTrap || cPtr.FeatureType.IsTrap)
         {
             if (Game.GridTileIsVisible(y, x))
             {
                 Game.MsgPrint("There is a bright flash of light!");
                 isNoticed = IsNoticedEnum.True;
-                if (cPtr.FeatureType.IsVisibleDoor)
-                {
-                    Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
-                    Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
-                    Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
-                }
             }
             cPtr.PlayerMemorized = false;
             Game.RevertTileToBackground(y, x);
         }
-        return isNoticed;
+        else if (cPtr.FeatureType.IsSecretDoor || cPtr.FeatureType.IsClosedDoor)
+        {
+            Game.CaveSetFeat(y, x, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
+            if (Game.GridTileIsVisible(y, x))
+            {
+                Game.MsgPrint("Click!");
+                isNoticed = IsNoticedEnum.True;
+            }
+        }
+        return (isNoticed, DestroysContentsEnum.False);
     }
 }

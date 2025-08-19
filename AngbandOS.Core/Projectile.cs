@@ -15,7 +15,7 @@ internal sealed class Projectile : IGetKey, IToJson
     {
         Game = game;
         Key = projectileGameConfiguration.Key ?? projectileGameConfiguration.GetType().Name;
-        FloorEffectBindingKey = projectileGameConfiguration.FloorEffectBindingKey;
+        GridTileScriptBindingKey = projectileGameConfiguration.FloorEffectBindingKey;
         ItemEffectBindingKey = projectileGameConfiguration.ItemEffectBindingKey;
         PlayerEffectBindingKey = projectileGameConfiguration.PlayerEffectBindingKey;
         MonsterEffectBindingKey = projectileGameConfiguration.MonsterEffectBindingKey;
@@ -33,7 +33,7 @@ internal sealed class Projectile : IGetKey, IToJson
         ProjectileGameConfiguration projectileDefinition = new ProjectileGameConfiguration()
         {
             Key = Key,
-            FloorEffectBindingKey = FloorEffectBindingKey,
+            FloorEffectBindingKey = GridTileScriptBindingKey,
             MonsterEffectBindingKey = MonsterEffectBindingKey,
             ItemEffectBindingKey = ItemEffectBindingKey,
             PlayerEffectBindingKey = PlayerEffectBindingKey,
@@ -52,7 +52,7 @@ internal sealed class Projectile : IGetKey, IToJson
         MonsterEffect = Game.SingletonRepository.Get<MonsterEffect>(MonsterEffectBindingKey);
         ItemEffect = Game.SingletonRepository.Get<ItemEffect>(ItemEffectBindingKey);
         PlayerEffect = Game.SingletonRepository.Get<PlayerEffectUniversalScript>(PlayerEffectBindingKey);
-        FloorEffect = Game.SingletonRepository.Get<GridTileEffect>(FloorEffectBindingKey);
+        GridTileScript = Game.SingletonRepository.Get<GridTileScript>(GridTileScriptBindingKey);
         ImpactProjectileGraphic = Game.SingletonRepository.GetNullable<ProjectileGraphic>(ImpactProjectileGraphicBindingKey);
         EffectAnimation = Game.SingletonRepository.GetNullable<Animation>(EffectAnimationBindingKey);
         BoltProjectileGraphic = Game.SingletonRepository.GetNullable<ProjectileGraphic>(BoltProjectileGraphicBindingKey);
@@ -417,7 +417,8 @@ internal sealed class Projectile : IGetKey, IToJson
                 }
                 y = gy[i];
                 x = gx[i];
-                if (FloorEffect.Apply(x, y) == IsNoticedEnum.True)
+                (IsNoticedEnum gridTileIsNoticed, DestroysContentsEnum destroysContents) = GridTileScript.Apply(x, y);
+                if (gridTileIsNoticed == IsNoticedEnum.True)
                 {
                     isNoticed = IsNoticedEnum.True;
                 }
@@ -610,7 +611,7 @@ internal sealed class Projectile : IGetKey, IToJson
         return '*'; // TODO: This can be a property for each projectile
     }
 
-    private GridTileEffect FloorEffect { get; set; }
+    private GridTileScript GridTileScript { get; set; }
 
     /// <summary>
     /// Perform any effect needed on the floor and returns true, if the effect was noticed.  Does nothing and returns false, by default.
@@ -618,7 +619,7 @@ internal sealed class Projectile : IGetKey, IToJson
     /// <param name="y"></param>
     /// <param name="x"></param>
     /// <returns></returns>
-    private string FloorEffectBindingKey { get; } = nameof(UnnoticedGridTileEffect);
+    private string GridTileScriptBindingKey { get; } = nameof(UnnoticedGridTileScript);
 
     /// <summary>
     /// Returns the <see cref="ItemEffect"/> that perform the effect needed on the item and returns true, if the effect was noticed.  Does nothing and return false, by default.  This property is bound

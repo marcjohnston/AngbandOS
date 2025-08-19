@@ -7,11 +7,11 @@
 namespace AngbandOS.Core.GridTileEffects;
 
 [Serializable]
-internal class JamDoorGridTileEffect : GridTileEffect
+internal class JamDoorGridTileScript : GridTileScript
 {
-    private JamDoorGridTileEffect(Game game) : base(game) { } // This object is a singleton.
+    private JamDoorGridTileScript(Game game) : base(game) { } // This object is a singleton.
 
-    public override IsNoticedEnum Apply(int x, int y)
+    public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];
         IsNoticedEnum isNoticed = IsNoticedEnum.False;
@@ -29,6 +29,6 @@ internal class JamDoorGridTileEffect : GridTileEffect
                 isNoticed = IsNoticedEnum.True;
             }
         }
-        return isNoticed;
+        return (isNoticed, DestroysContentsEnum.False);
     }
 }

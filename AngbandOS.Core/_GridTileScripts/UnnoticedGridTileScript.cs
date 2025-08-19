@@ -7,16 +7,12 @@
 namespace AngbandOS.Core.GridTileEffects;
 
 [Serializable]
-internal class MakeTrapGridTileEffect : GridTileEffect
+internal class UnnoticedGridTileScript : GridTileScript
 {
-    private MakeTrapGridTileEffect(Game game) : base(game) { } // This object is a singleton.
+    private UnnoticedGridTileScript(Game game) : base(game) { } // This object is a singleton.
 
-    public override IsNoticedEnum Apply(int x, int y)
+    public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
-        if (Game.GridOpenNoItemOrCreature(y, x))
-        {
-            Game.PlaceTrap(y, x);
-        }
-        return IsNoticedEnum.False;
+        return (IsNoticedEnum.False, DestroysContentsEnum.False);
     }
 }

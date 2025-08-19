@@ -7,12 +7,12 @@
 namespace AngbandOS.Core.GridTileEffects;
 
 [Serializable]
-internal class NoticedGridTileEffect : GridTileEffect
+internal class NoticedGridTileScript : GridTileScript
 {
-    private NoticedGridTileEffect(Game game) : base(game) { } // This object is a singleton.
+    private NoticedGridTileScript(Game game) : base(game) { } // This object is a singleton.
 
-    public override IsNoticedEnum Apply(int x, int y)
+    public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
-        return IsNoticedEnum.True;
+        return (IsNoticedEnum.True, DestroysContentsEnum.False);
     }
 }
