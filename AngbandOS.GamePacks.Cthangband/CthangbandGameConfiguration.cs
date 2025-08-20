@@ -57,7 +57,7 @@ public class CthangbandGameConfiguration : GameConfiguration
     };
 
 
-    public override string? ConsoleViewBindingKey => nameof(ConsoleView);
+    public override string? DungeonViewBindingKey => nameof(DungeonView);
 
     public override string[]? GoldFactoriesBindingKeys => new string[]
     {

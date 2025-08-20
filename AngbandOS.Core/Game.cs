@@ -1458,7 +1458,7 @@ internal class Game
         SuperheroismTimer = (SuperheroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.SuperheroismTimer));
         TelepathyTimer = (TelepathyTimer)SingletonRepository.Get<Timer>(nameof(Timers.TelepathyTimer));
 
-        View? consoleView = SingletonRepository.GetNullable<View>(gameConfiguration.ConsoleViewBindingKey);
+        View? consoleView = SingletonRepository.GetNullable<View>(gameConfiguration.DungeonViewBindingKey);
         if (consoleView is null)
         {
             // Check to see if there is only one view.

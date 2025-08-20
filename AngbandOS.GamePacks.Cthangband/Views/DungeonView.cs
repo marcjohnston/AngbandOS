@@ -7,7 +7,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class ConsoleView : ViewGameConfiguration
+public class DungeonView : ViewGameConfiguration
 {
     public override string[] WidgetNames => new string[]
     {
