@@ -776,7 +776,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusAttacks, item.EffectivePropertySet.BonusAttacks > 1 ? "attacks" : "attack");
+            value = (item.EffectivePropertySet.BonusAttacks, Game.Pluralize("attack", item.EffectivePropertySet.BonusAttacks));
         }
         if (item.EffectivePropertySet.BonusStealth != 0)
         {
