@@ -8,10 +8,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class PlayerNameStringWidget : StringWidgetGameConfiguration
+public class DungeonGameMessageWidget : GameMessageWidgetGameConfiguration
 {
     public override int X => 0;
-    public override int Y => 1;
-    public override string StringValueName => nameof(PropertiesEnum.PlayerNameStringProperty);
-    public override string[]? ChangeTrackerNames => new string[] { nameof(PropertiesEnum.PlayerNameStringProperty) };
+    public override int Y => 0;
 }
