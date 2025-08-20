@@ -14632,6 +14632,7 @@ internal class Game
         consoleTable.Column("flavor").IsVisible = ShowFlavorColumn;
         consoleTable.Column("usage").IsVisible = ShowFlavorColumn;
         consoleTable.Column("weight").Alignment = new ConsoleTopRightAlignment();
+        int maximumDescriptionWidth = Screen.Width - 3 - 8;
         foreach (WieldSlot inventorySlot in inventorySlots)
         {
             bool slotIsEmpty = true;
@@ -14648,7 +14649,12 @@ internal class Game
                     consoleRow["usage"] = new ConsoleString(ColorEnum.White, $"{inventorySlot.MentionUse(index)}:");
 
                     ColorEnum color = oPtr.EffectivePropertySet.Color;
-                    consoleRow["description"] = new ConsoleString(color, oPtr.GetFullDescription(true));
+                    string description = oPtr.GetFullDescription(true);
+                    if (description.Length > maximumDescriptionWidth)
+                    {
+                        description = description.Substring(0, maximumDescriptionWidth);
+                    }
+                    consoleRow["description"] = new ConsoleString(color, description);
 
                     int wgt = oPtr.EffectivePropertySet.Weight * oPtr.StackCount;
                     consoleRow["weight"] = new ConsoleString(ColorEnum.White, $"{wgt / 10}.{wgt % 10} lb");
