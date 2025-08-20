@@ -1586,9 +1586,9 @@ internal class Game
     private GameMessage[] PreviousMessages;
 
     /// <summary>
-    /// Returns the current X position of the cursor when rendering messages.
+    /// Returns the property that maintains the game message.
     /// </summary>
-    private GameMessageStringProperty GameMessage;
+    public GameMessageStringProperty GameMessage;
 
     /// <summary>
     /// Returns the unique index of the first message in the MessageLog.  When messages drop out of the list due to the size of the MessageLog, this index is incremented
