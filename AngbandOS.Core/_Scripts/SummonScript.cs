@@ -59,18 +59,18 @@ internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson
 
     public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
-        if (PreMessages != null)
+        if (PreMessages is not null)
         {
             Game.MsgPrint(PreMessages);
         }
         IntegerExpression levelResult = Game.ComputeIntegerExpression(LevelRoll);
         BooleanExpression summonGroup = Group.Compute<BooleanExpression>();
         bool success = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, levelResult.Value, MonsterFilter, summonGroup.Value, Pet);
-        if (success && SuccessMessages != null)
+        if (success && SuccessMessages is not null)
         {
             Game.MsgPrint(SuccessMessages);
         }
-        else if (FailureMessages != null)
+        else if (FailureMessages is not null)
         {
             Game.MsgPrint(FailureMessages);
         }

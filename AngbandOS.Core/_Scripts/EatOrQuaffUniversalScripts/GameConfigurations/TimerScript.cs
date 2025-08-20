@@ -66,7 +66,7 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
     }
     public override IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
-        if (PreMessage != null)
+        if (PreMessage is not null)
         {
             Game.MsgPrint(PreMessage);
         }

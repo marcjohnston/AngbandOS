@@ -252,7 +252,7 @@ internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson
     #region Privates - Implement the functionality.
     private void RenderPreMessage()
     {
-        if (PreMessage != null)
+        if (PreMessage is not null)
         {
             Game.MsgPrint(PreMessage);
         }
@@ -260,7 +260,7 @@ internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson
 
     private void RenderPostMessage()
     {
-        if (PostMessage != null)
+        if (PostMessage is not null)
         {
             Game.MsgPrint(PostMessage);
         }
