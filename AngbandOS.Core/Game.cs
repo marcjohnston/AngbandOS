@@ -883,7 +883,7 @@ internal class Game
 
     public readonly SpareSpellSlotsIntProperty SpareSpellSlots;
 
-    public readonly View ConsoleView;
+    public View ConsoleView { get; private set; }
 
     public readonly HealthPointsIntProperty Health;
 
@@ -1458,25 +1458,19 @@ internal class Game
         SuperheroismTimer = (SuperheroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.SuperheroismTimer));
         TelepathyTimer = (TelepathyTimer)SingletonRepository.Get<Timer>(nameof(Timers.TelepathyTimer));
 
-        View? consoleView = SingletonRepository.GetNullable<View>(gameConfiguration.DungeonViewBindingKey);
-        if (consoleView is null)
+        if (String.IsNullOrEmpty(gameConfiguration.DungeonViewBindingKey))
         {
-            // Check to see if there is only one view.
-            if (SingletonRepository.Count<View>() == 1)
-            {
-                ConsoleView = SingletonRepository.Get<View>(0);
-            }
-            else
-            {
-                throw new Exception("View not defined.");
-            }
+            throw new Exception($"No {nameof(gameConfiguration.DungeonViewBindingKey)} provided.");
         }
-        else
-        {
-            ConsoleView = consoleView;
-        }
+        View consoleView = SingletonRepository.Get<View>(gameConfiguration.DungeonViewBindingKey);
+        RenderView(consoleView);
 
         InitializeAllocationTables();
+    }
+
+    public void RenderView(View view)
+    {
+        ConsoleView = view;
     }
 
     /// <summary>
