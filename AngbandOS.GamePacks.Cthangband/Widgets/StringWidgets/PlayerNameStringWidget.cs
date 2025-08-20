@@ -15,3 +15,4 @@ public class PlayerNameStringWidget : StringWidgetGameConfiguration
     public override string StringValueName => nameof(PropertiesEnum.PlayerNameStringProperty);
     public override string[]? ChangeTrackerNames => new string[] { nameof(PropertiesEnum.PlayerNameStringProperty) };
 }
+

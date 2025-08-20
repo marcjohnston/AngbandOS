@@ -38,3 +38,4 @@ public class StringWidgetGameConfiguration
     public virtual string? Key { get; set; } = null;
 }
 
+
