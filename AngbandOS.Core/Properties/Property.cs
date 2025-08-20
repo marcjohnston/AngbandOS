@@ -34,7 +34,10 @@ internal abstract class Property : IGetKey, IChangeTracker
         IsChanged = false;
     }
 
-    public bool IsChanged { get; private set; }
+    /// <summary>
+    /// Returns true, when the value has changed.  Use the <see cref="ClearChangedFlag"/> to reset the flag.
+    /// </summary>
+    public virtual bool IsChanged { get; private set; }
 
     public virtual string Key => GetType().Name;
 

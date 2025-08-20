@@ -24,5 +24,6 @@ public class GameMessageWidgetGameConfiguration
     public virtual int? Width { get; set; } = null;
 
     public virtual string? Key { get; set; } = null;
+    public virtual string MorePrompt { get; set; } = "-more-";
 }
 

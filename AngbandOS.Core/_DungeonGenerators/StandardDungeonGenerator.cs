@@ -11,7 +11,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
 {
     private const int MaximumNumberOfRooms = 100; // This is the maximum number of rooms that can be tracked when a dungeon is generated.  Any rooms generated beyond this count are not tracked as a room.
     private const int MinimumNumberOfRooms = 50; // The minimum number of rooms to attempt to create.
-    private List<GridCoordinate> Rooms = new List<GridCoordinate>(); // This is the center of each room that was generated.
+    private List<GridCoordinate> Rooms; // This is the center of each room that was generated.
 
     private const int _smallLevel = 3;
     private GridCoordinate[] Door;
@@ -839,6 +839,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         Tunn = new GridCoordinate[TunnMax];
 
         // Compute the number of grid blocks for this size of dungeon.
+        Rooms = new List<GridCoordinate>();
         RowRooms = Game.CurHgt / _blockHgt;
         ColRooms = Game.CurWid / _blockWid;
 

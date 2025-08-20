@@ -76,6 +76,7 @@ public class GameConfiguration
         gameConfiguration.MaxRangedWidgets = LoadFromAssembly<MaxRangedWidgetGameConfiguration>(assembly);
         gameConfiguration.RangedWidgets = LoadFromAssembly<RangedWidgetGameConfiguration>(assembly);
         gameConfiguration.StringWidgets = LoadFromAssembly<StringWidgetGameConfiguration>(assembly);
+        gameConfiguration.GameMessageWidgets = LoadFromAssembly<GameMessageWidgetGameConfiguration>(assembly);
         gameConfiguration.LabelWidgets = LoadFromAssembly<LabelWidgetGameConfiguration>(assembly);
         gameConfiguration.TimeWidgets = LoadFromAssembly<TimeWidgetGameConfiguration>(assembly);
         gameConfiguration.NullableStringsTextAreaWidgets = LoadFromAssembly<TextWidgetGameConfiguration>(assembly);
@@ -222,6 +223,7 @@ public class GameConfiguration
     public virtual MaxRangedWidgetGameConfiguration[]? MaxRangedWidgets { get; set; } = null;
     public virtual RangedWidgetGameConfiguration[]? RangedWidgets { get; set; } = null;
     public virtual StringWidgetGameConfiguration[]? StringWidgets { get; set; } = null;
+    public virtual GameMessageWidgetGameConfiguration[]? GameMessageWidgets { get; set; } = null;
     public virtual LabelWidgetGameConfiguration[]? LabelWidgets { get; set; } = null;
     public virtual TimeWidgetGameConfiguration[]? TimeWidgets { get; set; } = null;
     public virtual TextWidgetGameConfiguration[]? NullableStringsTextAreaWidgets { get; set; } = null;

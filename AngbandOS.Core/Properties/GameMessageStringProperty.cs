@@ -9,13 +9,23 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class GameMessageStringProperty : StringProperty
 {
-    private List<string?> MessageQueue = new List<string?>();
+    public Queue<string?> MessageQueue = new Queue<string?>();
     protected GameMessageStringProperty(Game game) : base(game)
     {
         StringValue = string.Empty;
     }
+
+    /// <summary>
+    /// Returns true, when there are messages that need to be rendered.
+    /// </summary>
+    public override bool IsChanged => MessageQueue.Count > 0;
+
     public void Add(params string?[] messages)
     {
-        MessageQueue.AddRange(messages);
+        // There is no ability to enqueue multiple items.
+        foreach (string? message in messages)
+        {
+            MessageQueue.Enqueue(message);
+        }
     }
 }

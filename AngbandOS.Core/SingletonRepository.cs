@@ -303,7 +303,7 @@ internal class SingletonRepository
         RegisterInterface<Talent>();
         RegisterInterface<Timer>();
         RegisterInterface<WieldSlot>();
-        RegisterInterface<Widget>();
+        RegisterInterface<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
 
         // Load system singletons.
         LoadAllAssemblyTypes<IGetKey>();
@@ -326,6 +326,7 @@ internal class SingletonRepository
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration>(gameConfiguration.DungeonGuardians);
         LoadFromConfiguration<Dungeon, DungeonGameConfiguration>(gameConfiguration.Dungeons);
         LoadFromConfiguration<GameCommand, GameCommandGameConfiguration>(gameConfiguration.GameCommands);
+        LoadFromConfiguration<GameMessageWidget, GameMessageWidgetGameConfiguration>(gameConfiguration.GameMessageWidgets);
         LoadFromConfiguration<Gender, GenderGameConfiguration>(gameConfiguration.Genders);
         LoadFromConfiguration<God, GodGameConfiguration>(gameConfiguration.Gods);
         LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration>(gameConfiguration.HelpGroups);

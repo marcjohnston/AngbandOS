@@ -22,7 +22,7 @@ internal abstract class Widget
     /// <summary>
     /// Returns the property that participates in change tracking.  This property is bound from the <see cref="ChangeTrackerNames"/> property during the bind phase.
     /// </summary>
-    public IChangeTracker[]? ChangeTrackers { get; protected set; }
+    protected IChangeTracker[]? ChangeTrackers { get; set; }
 
     public virtual bool CanPoke => false;
 
