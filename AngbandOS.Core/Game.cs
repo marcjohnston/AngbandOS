@@ -5662,9 +5662,9 @@ internal class Game
         }
     }
 
-    public bool Enchant(Item oPtr, int n, int eflag)
+    public bool Enchant(Item oPtr, int n, int eflag) // TODO: This needs to be refactored
     {
-        int[] EnchantTable = {0, 10, 50, 100, 200, 300, 400, 500, 650, 800, 950, 987, 993, 995, 998, 1000};
+        int[] chanceIn1000 = {0, 10, 50, 100, 200, 300, 400, 500, 650, 800, 950, 987, 993, 995, 998, 1000};
 
         bool res = false;
         bool isArtifact = oPtr.IsArtifact;
@@ -5689,7 +5689,7 @@ internal class Game
                 }
                 else
                 {
-                    chance = EnchantTable[oPtr.EffectivePropertySet.BonusHits];
+                    chance = chanceIn1000[oPtr.EffectivePropertySet.BonusHits];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
@@ -5717,7 +5717,7 @@ internal class Game
                 }
                 else
                 {
-                    chance = EnchantTable[oPtr.EffectivePropertySet.BonusDamage];
+                    chance = chanceIn1000[oPtr.EffectivePropertySet.BonusDamage];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
@@ -5745,7 +5745,7 @@ internal class Game
                 }
                 else
                 {
-                    chance = EnchantTable[oPtr.EffectivePropertySet.BonusArmorClass];
+                    chance = chanceIn1000[oPtr.EffectivePropertySet.BonusArmorClass];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
