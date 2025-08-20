@@ -9,8 +9,13 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class GameMessageStringProperty : StringProperty
 {
+    private List<string?> MessageQueue = new List<string?>();
     protected GameMessageStringProperty(Game game) : base(game)
     {
         StringValue = string.Empty;
+    }
+    public void Add(params string?[] messages)
+    {
+        MessageQueue.AddRange(messages);
     }
 }
