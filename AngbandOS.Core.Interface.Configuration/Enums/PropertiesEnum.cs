@@ -17,6 +17,7 @@ public enum PropertiesEnum
     ExperienceMultiplierIntProperty,
     ExperiencePointsIntProperty,
     FoodIntProperty,
+    GameMessageStringProperty,
     GoldIntProperty,
     HealthPointsIntProperty,
     HighestExperiencePointsAchievedIntProperty,
