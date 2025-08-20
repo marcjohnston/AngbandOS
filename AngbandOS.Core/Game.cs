@@ -14536,6 +14536,10 @@ internal class Game
         consoleTable.Column("usage").IsVisible = ShowFlavorColumn;
         consoleTable.Column("weight").Alignment = new ConsoleTopRightAlignment();
         int maximumDescriptionWidth = Screen.Width - 3 - 8;
+        if (ShowUsageColumn)
+        {
+            maximumDescriptionWidth -= 17;
+        }
         foreach (WieldSlot inventorySlot in inventorySlots)
         {
             bool slotIsEmpty = true;
@@ -14555,7 +14559,7 @@ internal class Game
                     string description = oPtr.GetFullDescription(true);
                     if (description.Length > maximumDescriptionWidth)
                     {
-                        description = description.Substring(0, maximumDescriptionWidth);
+                        description = $"{description.Substring(0, maximumDescriptionWidth - 3)}...";
                     }
                     consoleRow["description"] = new ConsoleString(color, description);
 
