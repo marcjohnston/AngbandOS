@@ -1,10 +1,8 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class StringWidgetGameConfiguration
+public class GameMessageWidgetGameConfiguration
 {
-    public virtual string StringValueName { get; set; }
-
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
     /// </summary>
@@ -25,16 +23,6 @@ public class StringWidgetGameConfiguration
     /// </summary>
     public virtual int? Width { get; set; } = null;
 
-    /// <summary>
-    /// Returns the name of the <see cref="Justification"/> object to be used to justify the text within the <see cref="Width"/> of the <see cref="TextWidget" />.  This property
-    /// is used to bind the <see cref="Justification"/> property.  Defaults to <see cref="LeftJustification"/>.
-    /// </summary>
-    public virtual string JustificationName { get; set; } = nameof(JustificationsEnum.LeftJustification);
-
-    /// <summary>
-    /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
-    /// </summary>
-    public virtual string[]? ChangeTrackerNames { get; set; }
     public virtual string? Key { get; set; } = null;
 }
 

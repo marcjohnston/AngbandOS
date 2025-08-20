@@ -1292,7 +1292,7 @@ internal class Game
     }
 
 //    private static string SuffixIf(string? value, string suffix) => String.IsNullOrEmpty(value) ? "" : $"{value}{suffix}";
-    private static string DelimitIf(string? prefix, string delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
+    public static string DelimitIf(string? prefix, string delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
     private static string DelimitIf(string? prefix, char delimiter, char? suffix) => String.IsNullOrEmpty(prefix) || suffix is null ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
     private static string DelimitIf(string? prefix, char delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
 
@@ -1754,110 +1754,13 @@ internal class Game
     /// <param name="messages">Any number of messages to be rendered or null to force clear the display.  Any empty string will force a --more-- prompt (if there is text the player hasn't seen), then reset the line for new message.  Any null value will clear the message without a -more- prompt.</param>
     public void MsgPrint(params string?[]? messages)
     {
-        const string MorePrompt = "-more-";
-
-        /// <summary>
-        /// Renders the -more- prompt and waits for a key input.  Keys in the input buffer are preserved.
-        /// </summary>
-        /// <param name="cursorXPosition"></param>
-        void ShowMorePrompt()
-        {
-            if (GameMessage.StringValue.Length > 0)
-            {
-                Screen.Print(ColorEnum.BrightBlue, MorePrompt, 0, GameMessage.StringValue.Length + 1);
-                while (!Shutdown)
-                {
-                    Inkey(true);
-                    break;
-                }
-            }
-            Screen.Erase(0, 0);
-            GameMessage.StringValue = "";
-        }
-
-        void Render(string message)
-        {
-            // Capitalize the first letter.
-            if (message.Length > 2)
-            {
-                message = message.Substring(0, 1).ToUpper() + message.Substring(1);
-            }
-            if (!IsDead)
-            {
-                MessageAdd(message);
-            }
-
-            // Check to see if the message being rendered is longer than one screen width.  If so, it will need to be split.  Compute the amount of space available.
-            int lengthOfMore = MorePrompt.Length;
-            int maxWidth = Screen.Width - lengthOfMore - 1;
-
-            // Check to see if we need to -more- the current line.  Any form of the current message exceeding the current line will force a -more-.
-            if (GameMessage.StringValue.Length + message.Length + 1 > maxWidth)
-            {
-                // Close the current line to prepare for the current message.
-                ShowMorePrompt();
-            }
-
-            // At this point, either the msg fits within the screen, or msg itself is longer than one screen width and the message line is blank.
-            // Determine if the message is too long for a line by itself.
-            while (message.Length > maxWidth)
-            {
-                // Find a place to break 
-                int check = maxWidth;
-                while (check > 0 && message[check] != ' ')
-                {
-                    check--;
-                }
-
-                // Check to see if there were any spaces to break on.
-                if (check == 0)
-                {
-                    // There were none.  Force break on non-breaking character.
-                    check = maxWidth;
-                }
-                else
-                {
-                    // Extract the first message.
-                    GameMessage.StringValue = message.Substring(0, check);
-
-                    // Remove the first message.
-                    message = message.Substring(check + 1);
-
-                    // Render the first message.
-                    Screen.Print(ColorEnum.White, GameMessage.StringValue, 0, 0);
-
-                    // Render more prompt to clear for next message.
-                    ShowMorePrompt();
-                }
-            }
-
-            GameMessage.StringValue = DelimitIf(GameMessage.StringValue, " ", message);
-            Screen.Print(ColorEnum.White, GameMessage.StringValue, 0, 0);
-        }
-
         // Allow the parameters to specify NULL as a single null string.
         if (messages is null)
         {
             messages = new string?[] { null };
         }
 
-        foreach (string? message in messages)
-        {
-            if (message is null)
-            {
-                // Erases the message line and prepares the next message to be rendered at column 0.
-                Screen.PrintLine("", 0, 0);
-                GameMessage.StringValue = "";
-            }
-            else if (message == string.Empty)
-            {
-                ShowMorePrompt();
-            }
-            else
-            {
-                Render(message);
-            }
-        }
+        GameMessage.Add(messages);
     }
 
     public byte Elevation(int wildY, int wildX, int y, int x)
@@ -4393,7 +4296,7 @@ internal class Game
             }
             else if (CommandRepeat != 0)
             {
-                CommandRepeat--;
+                CommandRepeat--;                
                 SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
                 RedrawStuff();
                 MsgPrint(null);

@@ -42,6 +42,7 @@ public class DungeonView : ViewGameConfiguration
         nameof(StudyBoolWidget),
         nameof(StunnedRangedWidget),
         nameof(TrackedMonsterConditionalWidget),
-        nameof(TrapDetectionConditionalWidget)
+        nameof(TrapDetectionConditionalWidget),
+        nameof(DungeonGameMessageWidget),
     };
 }
