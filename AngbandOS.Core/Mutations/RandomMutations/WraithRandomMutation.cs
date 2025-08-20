@@ -23,7 +23,7 @@ internal class WraithRandomMutation : Mutation
         }
         Game.Disturb(false);
         Game.MsgPrint("You feel insubstantial!");
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         Game.EtherealnessTimer.AddTimer(Game.DieRoll(Game.ExperienceLevel.IntValue / 2) + Game.ExperienceLevel.IntValue / 2);
     }
 }

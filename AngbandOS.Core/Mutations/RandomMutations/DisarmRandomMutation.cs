@@ -24,7 +24,7 @@ internal class DisarmRandomMutation : Mutation
         Game.Disturb(false);
         Game.MsgPrint("You trip over your own feet!");
         Game.TakeHit(base.Game.DieRoll(Game.Weight / 6), "tripping");
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         Item? oPtr = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (oPtr == null)
         {

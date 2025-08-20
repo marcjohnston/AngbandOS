@@ -27,7 +27,7 @@ internal class RteleportRandomMutation : Mutation
         }
         Game.Disturb(false);
         Game.MsgPrint("Your position suddenly seems very uncertain...");
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         Game.RunScript(nameof(TeleportSelf40TeleportSelfScript));
     }
 }

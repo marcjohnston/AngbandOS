@@ -94,7 +94,7 @@ internal class PurchaseStoreItemScript : Script, IStoreCommandScript
             {
                 oName = jPtr.GetFullDescription(true);
                 Game.MsgPrint($"Buying {oName} ({letterIndex.IndexToLetter()}).");
-                Game.MsgPrint(null);
+                Game.MsgPrint(string.Empty);
                 choice = PurchaseHaggle(storeCommandEvent.Store, jPtr, out price);
             }
             if (!choice)
@@ -203,7 +203,7 @@ internal class PurchaseStoreItemScript : Script, IStoreCommandScript
     private bool PurchaseHaggle(Store store, Item oPtr, out int price)
     {
         Game.MsgPrint("You quickly agree upon the price.");
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         price = BestPricePerItem(store, oPtr) * oPtr.StackCount;
         string outVal = $"Final Offer : {price}";
         Game.Screen.Print(outVal, 1, 0);

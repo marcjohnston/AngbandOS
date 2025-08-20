@@ -49,7 +49,7 @@ internal class RetireScript : UniversalScript, IGetKey
                 // long-running character
                 Game.Screen.PrintLine("Type the '@' sign to give up (this character will no longer be playable): ", 0, 0);
                 int i = Game.Inkey();
-                Game.MsgClear();
+                Game.MsgPrint(null);
                 if (i != '@')
                 {
                     return;

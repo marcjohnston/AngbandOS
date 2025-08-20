@@ -376,7 +376,7 @@ internal class Store
     public bool GetStock(out int comVal, string pmt, int i, int j)
     {
         char command;
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         comVal = -1;
         string outVal = $"(Items {i.IndexToLetter()}-{j.IndexToLetter()}, ESC to exit) {pmt}";
         while (Game.GetCom(outVal, out command))
@@ -388,7 +388,7 @@ internal class Store
                 break;
             }
         }
-        Game.MsgClear();
+        Game.MsgPrint(null);
         return command != '\x1b';
     }
 
@@ -661,7 +661,7 @@ internal class Store
         Game.EnergyUse = 0;
         Game.FullScreenOverlay = false;
         Game.ViewingItemList = false;
-        Game.MsgPrint(null); // TODO: This is a PrWipeRedrawAction
+        Game.MsgPrint(string.Empty); // TODO: This is a PrWipeRedrawAction
         Game.SetBackground(BackgroundImageEnum.Overhead);
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();

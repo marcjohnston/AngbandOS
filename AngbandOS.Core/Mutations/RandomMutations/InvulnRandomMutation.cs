@@ -21,7 +21,7 @@ internal class InvulnRandomMutation : Mutation
         {
             Game.Disturb(false);
             Game.MsgPrint("You feel invincible!");
-            Game.MsgPrint(null);
+            Game.MsgPrint(string.Empty);
             Game.InvulnerabilityTimer.AddTimer(base.Game.DieRoll(8) + 8);
         }
     }

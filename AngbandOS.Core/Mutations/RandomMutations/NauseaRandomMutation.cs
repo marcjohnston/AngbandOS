@@ -23,7 +23,7 @@ internal class NauseaRandomMutation : Mutation
         }
         Game.Disturb(false);
         Game.MsgPrint("Your stomach roils, and you lose your lunch!");
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         Game.SetFood(Constants.PyFoodWeak);
     }
 }

@@ -30,7 +30,7 @@ internal class PanicHitActiveMutation : Mutation
         else
         {
             Game.MsgPrint("You don't see any monster in this direction");
-            Game.MsgPrint(null);
+            Game.MsgPrint(string.Empty);
         }
     }
 

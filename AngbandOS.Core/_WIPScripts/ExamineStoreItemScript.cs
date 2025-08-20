@@ -43,7 +43,7 @@ internal class ExamineStoreItemScript : Script, IStoreCommandScript
             {
                 ScreenBuffer savedScreen = Game.Screen.Clone();
                 Game.PrintSpells(oPtr.Spells.ToArray(), 1, 20);
-                Game.MsgClear();
+                Game.MsgPrint(null);
                 Game.Screen.Print("[Press any key to continue]", 0, 23);
                 Game.Inkey();
                 Game.Screen.Restore(savedScreen);

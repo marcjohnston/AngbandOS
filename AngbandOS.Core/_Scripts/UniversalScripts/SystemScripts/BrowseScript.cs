@@ -54,7 +54,7 @@ internal class BrowseScript : UniversalScript, IGetKey
         // Save the screen and overprint the spells in the book
         ScreenBuffer savedScreen = Game.Screen.Clone();
         Game.PrintSpells(item.Spells.ToArray(), 1, 20);
-        Game.MsgClear();
+        Game.MsgPrint(null);
         // Wait for a keypress and re-load the screen
         Game.Screen.Print("[Press any key to continue]", 0, 23);
         Game.Inkey();

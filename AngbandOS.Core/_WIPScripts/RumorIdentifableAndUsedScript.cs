@@ -18,7 +18,7 @@ internal class RumorIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScri
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
         Game.MsgPrint("There is message on the scroll. It says:");
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         Game.RunScript(nameof(GetRumorScript));
         return new IdentifiedAndUsedResult(true, true);
     }

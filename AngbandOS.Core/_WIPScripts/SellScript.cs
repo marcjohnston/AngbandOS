@@ -94,7 +94,7 @@ internal class SellScript : Script, IStoreCommandScript
         if (storeCommandEvent.Store.StoreFactory.StoreBuysItems)
         {
             Game.MsgPrint($"Selling {oName} ({oPtr.Label}).");
-            Game.MsgPrint(null);
+            Game.MsgPrint(string.Empty);
             bool accepted = SellHaggle(storeCommandEvent.Store, qPtr, out int price);
             if (!accepted)
             {
@@ -181,13 +181,13 @@ internal class SellScript : Script, IStoreCommandScript
         if (finalAsk >= purse)
         {
             Game.MsgPrint("You instantly agree upon the price.");
-            Game.MsgPrint(null);
+            Game.MsgPrint(string.Empty);
             finalAsk = purse;
         }
         else
         {
             Game.MsgPrint("You quickly agree upon the price.");
-            Game.MsgPrint(null);
+            Game.MsgPrint(string.Empty);
             finalAsk -= finalAsk / 10;
         }
         const string pmt = "Final Offer";

@@ -50,7 +50,7 @@ internal class ViewCharacterScript : UniversalScript, IGetKey
             {
                 Game.InputPlayerName();
             }
-            Game.MsgPrint(null);
+            Game.MsgPrint(string.Empty);
         }
         // Restore the screen
         Game.SetBackground(BackgroundImageEnum.Overhead);

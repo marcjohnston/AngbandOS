@@ -44,7 +44,7 @@ internal class SpeedFluxRandomMutation : Mutation
                     Game.HasteTimer.AddTimer(base.Game.DieRoll(30) + 10);
                 }
             }
-            Game.MsgPrint(null);
+            Game.MsgPrint(string.Empty);
         }
     }
 }

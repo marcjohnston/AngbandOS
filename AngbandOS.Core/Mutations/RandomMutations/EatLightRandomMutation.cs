@@ -22,7 +22,7 @@ internal class EatLightRandomMutation : Mutation
             return;
         }
         Game.MsgPrint("A shadow passes over you.");
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         if (Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue].SelfLit)
         {
             Game.RestoreHealth(10);

@@ -23,7 +23,7 @@ internal class ProdManaRandomMutation : Mutation
         }
         Game.Disturb(false);
         Game.MsgPrint("Magical energy flows through you! You must release it!");
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
 
         // Get a direction.  We do not care if the player cancels the direction, we will release the energy anyway.
         Game.GetDirectionWithAim(out int dire);

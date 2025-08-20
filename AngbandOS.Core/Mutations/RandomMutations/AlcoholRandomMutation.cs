@@ -30,7 +30,7 @@ internal class AlcoholRandomMutation : Mutation
         Game.MsgPrint("You feel a SSSCHtupor cOmINg over yOu... *HIC*!");
         if (base.Game.DieRoll(20) == 1)
         {
-            Game.MsgPrint(null);
+            Game.MsgPrint(string.Empty);
             if (base.Game.DieRoll(3) == 1)
             {
                 Game.LoseAllInfo();

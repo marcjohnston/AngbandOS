@@ -20,7 +20,7 @@ internal class SpecialEnlightenmentScript : Script, IEatOrQuaffScript
         // *Enlightenment* shows you the whole level, increases your intelligence and
         // wisdom, identifies all your items, and detects everything
         Game.MsgPrint("You begin to feel more enlightened...");
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         Game.RunScript(nameof(LightScript));
         Game.TryIncreasingAbilityScore(Game.IntelligenceAbility);
         Game.TryIncreasingAbilityScore(Game.WisdomAbility);

@@ -62,7 +62,7 @@ internal class ResearchSpellScript : Script, IScript, ICastSpellScript, IStoreCo
         }
         string plural = Game.SpareSpellSlots.IntValue == 1 ? "" : "s";
         Game.MsgPrint($"You can learn {Game.SpareSpellSlots.IntValue} new {spellType}{plural}.");
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         // Get the spell books we have
         if (!Game.SelectItem(out Item? item, "Study which book? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(IsUsableSpellBookItemFilter))))
         {

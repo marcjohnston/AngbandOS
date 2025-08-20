@@ -82,7 +82,7 @@ internal sealed class View : IGetKey, IToJson
     public void Invalidate()
     {
         // Clear the screen.
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         Game.Screen.Clear();
 
         // Force all of the widgets to redraw.

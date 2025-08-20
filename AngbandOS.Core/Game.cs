@@ -1519,7 +1519,7 @@ internal class Game
     {
         int finalAsk = serviceCost;
         MsgPrint("You quickly agree upon the price.");
-        MsgPrint(null);
+        MsgPrint(string.Empty);
         finalAsk += finalAsk / 10;
         price = finalAsk;
         const string pmt = "Final Offer";
@@ -1747,21 +1747,12 @@ internal class Game
     }
 
     /// <summary>
-    /// Erases the message line and prepares the next message to be rendered at column 0.
-    /// </summary>
-    public void MsgClear()
-    {
-        Screen.PrintLine("", 0, 0);
-        GameMessage.StringValue = "";
-    }
-
-    /// <summary>
     /// Renders a message on the same line, if MessageAppendNextMessage is not set to false; otherwise, a -more- prompt will be rendered and the key input buffer
     /// is cleared prior to rendering the message on a new line.  If the message is null, any previous message is forced to render and the key input buffer is
     /// cleared.
     /// </summary>
-    /// <param name="messages">Set to NULL to force a --more-- prompt (if there is text the player hasn't seen), then reset the line for new message starting at 0, 0.</param>
-    public void MsgPrint(params string[]? messages)
+    /// <param name="messages">Any number of messages to be rendered or null to force clear the display.  Any empty string will force a --more-- prompt (if there is text the player hasn't seen), then reset the line for new message.  Any null value will clear the message without a -more- prompt.</param>
+    public void MsgPrint(params string?[]? messages)
     {
         const string MorePrompt = "-more-";
 
@@ -1847,13 +1838,25 @@ internal class Game
             Screen.Print(ColorEnum.White, GameMessage.StringValue, 0, 0);
         }
 
+        // Allow the parameters to specify NULL as a single null string.
         if (messages is null)
         {
-            ShowMorePrompt();
+            messages = new string?[] { null };
         }
-        else
+
+        foreach (string? message in messages)
         {
-            foreach (string message in messages)
+            if (message is null)
+            {
+                // Erases the message line and prepares the next message to be rendered at column 0.
+                Screen.PrintLine("", 0, 0);
+                GameMessage.StringValue = "";
+            }
+            else if (message == string.Empty)
+            {
+                ShowMorePrompt();
+            }
+            else
             {
                 Render(message);
             }
@@ -2734,7 +2737,7 @@ internal class Game
         }
         ConsoleViewPort.GameStarted();
         //MessageAppendNextMessage = false;
-        MsgPrint(null);
+        MsgPrint(string.Empty);
         UpdateScreen();
         FullScreenOverlay = false;
         SetBackground(BackgroundImageEnum.Overhead);
@@ -2767,7 +2770,7 @@ internal class Game
                 }
                 _petList = GetPets();
                 WipeMList();
-                MsgPrint(null);
+                MsgPrint(string.Empty);
                 if (IsDead)
                 {
                     ConsoleViewPort.PlayerDied(PlayerName.StringValue, DiedFrom, ExperienceLevel.IntValue);
@@ -3007,7 +3010,7 @@ internal class Game
         {
             Disturb(true);
         }
-        MsgPrint(null);
+        MsgPrint(string.Empty);
         HandleStuff();
         UpdateScreen();
         DiedFrom = "(saved)";
@@ -3081,7 +3084,7 @@ internal class Game
     {
         GridTile tile = Map.Grid[MapY.IntValue][MapX.IntValue];
         bool allowFloor = false;
-        MsgPrint(null);
+        MsgPrint(string.Empty);
         bool done = false;
         bool item = false;
         itemIndex = null;
@@ -3331,7 +3334,7 @@ internal class Game
             Screen.Restore(savedScreen);
         }
         ViewingItemList = false;
-        MsgClear();
+        MsgPrint(null);
         return item;
     }
 
@@ -3765,7 +3768,7 @@ internal class Game
     private void CloseGame()
     {
         HandleStuff();
-        MsgPrint(null);
+        MsgPrint(string.Empty);
         FullScreenOverlay = true;
         if (IsDead)
         {
@@ -4037,7 +4040,7 @@ internal class Game
         }
         RecenterScreenAroundPlayer();
         PanelBoundsCenter();
-        MsgPrint(null);
+        MsgPrint(string.Empty);
         CharacterXtra = true;
 
         // Invalidate the main screen.
@@ -4395,7 +4398,7 @@ internal class Game
                 CommandRepeat--;
                 SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
                 RedrawStuff();
-                MsgClear();
+                MsgPrint(null);
                 ProcessCommand(true);
             }
             else
@@ -8935,7 +8938,7 @@ internal class Game
     public bool GetCheck(string prompt)
     {
         int i = 0;
-        MsgPrint(null);
+        MsgPrint(string.Empty);
         string buf = $"{prompt}[Y/n]";
         Screen.PrintLine(buf, 0, 0);
         while (!Shutdown)
@@ -8956,20 +8959,20 @@ internal class Game
             }
             break;
         }
-        MsgClear();
+        MsgPrint(null);
         return i == 'Y' || i == 'y' || i == 13;
     }
 
     public bool GetCom(string prompt, out char command)
     {
-        MsgPrint(null);
+        MsgPrint(string.Empty);
         if (prompt.Length > 1)
         {
             prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
         }
         Screen.PrintLine(prompt, 0, 0);
         command = Inkey();
-        MsgClear();
+        MsgPrint(null);
         return command != '\x1b';
     }
 
@@ -9048,11 +9051,11 @@ internal class Game
 
     public bool GetString(string prompt, out string buf, string initial, int len)
     {
-        MsgPrint(null);
+        MsgPrint(string.Empty);
         Screen.PrintLine(prompt, 0, 0);
         string? buffer = AskforAux(initial, len);
         buf = buffer;
-        MsgClear();
+        MsgPrint(null);
         if (buffer == null)
         {
             return false;
@@ -9108,7 +9111,7 @@ internal class Game
             char cmd;
             HideCursorOnFullScreenInkey = true;
             cmd = Inkey();
-            MsgClear();
+            MsgPrint(null);
             if (cmd == '0')
             {
                 int oldArg = CommandArgument;
@@ -9175,7 +9178,7 @@ internal class Game
             CurrentCommand = cmd;
             break;
         }
-        MsgClear();
+        MsgPrint(null);
     }
 
     public void ShowManual() // TODO: Needs to be deleted
@@ -12650,7 +12653,7 @@ internal class Game
             }
         }
         TempN = 0;
-        MsgClear();
+        MsgPrint(null);
         return TargetWho != null;
     }
 
@@ -13310,7 +13313,7 @@ internal class Game
         string name = rPtr.FriendlyName;
         int qNum = Quests[qIdx].ToKill;
         MsgPrint(new WeightedRandom<string>(this, FindQuests).ChooseOrDefault());
-        MsgPrint(null);
+        MsgPrint(string.Empty);
         if (qNum == 1)
         {
             MsgPrint($"Beware, this level is protected by {name}!");
@@ -14254,7 +14257,7 @@ internal class Game
                 {
                     PlaySound(SoundEffectEnum.PlayerDeath);
                     MsgPrint("You die.");
-                    MsgPrint(null);
+                    MsgPrint(string.Empty);
                     DiedFrom = hitFrom;
                     if (HallucinationsTimer.Value != 0)
                     {
@@ -14270,7 +14273,7 @@ internal class Game
         {
             PlaySound(SoundEffectEnum.HealthWarning);
             MsgPrint("*** LOW HITPOINT WARNING! ***");
-            MsgPrint(null);
+            MsgPrint(string.Empty);
         }
     }
 

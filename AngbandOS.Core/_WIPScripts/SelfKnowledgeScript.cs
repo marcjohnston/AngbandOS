@@ -470,7 +470,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
     {
         // Self knowledge gives you information about yourself
         Game.MsgPrint("You begin to know yourself a little better...");
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         ExecuteScript();
         return IdentifiedResultEnum.True;
     }

@@ -42,7 +42,7 @@ internal class MonsterKnowledge
 
     public void Display()
     {
-        Game.MsgPrint(null);
+        Game.MsgPrint(string.Empty);
         Game.Screen.Erase(1, 0);
         DisplayBody(ColorEnum.White);
         DisplayHeader();
