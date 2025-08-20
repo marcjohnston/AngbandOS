@@ -17,7 +17,7 @@ internal class ScrollStoreInventoryScript : Script, IStoreCommandScript
     /// <returns></returns>
     public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
-        char ch = Game.Inkey(true);
+        char ch = Game.Inkey(false, true); // TODO: Why is this non-blocking?
         switch (ch)
         {
             case '9':

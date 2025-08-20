@@ -1767,10 +1767,7 @@ internal class Game
                 Screen.Print(ColorEnum.BrightBlue, MorePrompt, 0, GameMessage.StringValue.Length + 1);
                 while (!Shutdown)
                 {
-                    string save = _artificialKeyBuffer;
-                    _artificialKeyBuffer = "";
-                    Inkey();
-                    _artificialKeyBuffer = save;
+                    Inkey(true);
                     break;
                 }
             }
@@ -4346,7 +4343,8 @@ internal class Game
         }
         if (Running != 0 || CommandRepeat != 0 || (Resting != 0 && (Resting & 0x0F) == 0))
         {
-            if (Inkey(true) != 0)
+            // We need a non-blocking inkey.
+            if (Inkey(false, true) != 0)
             {
                 Disturb(false);
                 MsgPrint("Cancelled.");
@@ -9326,10 +9324,10 @@ internal class Game
     /// keystrokes are retrieved.
     /// </summary>
     /// <returns>The next key pressed.</returns>
-    public char Inkey(bool doNotWaitOnInkey = false) // TODO: Change the signature to return null when Shutdown == true
+    public char Inkey(bool disableArtificialKeybuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
     {
         char ch = '\0';
-        if (_artificialKeyBuffer.Length > 0)
+        if (!disableArtificialKeybuffer && _artificialKeyBuffer.Length > 0)
         {
             ch = _artificialKeyBuffer[0];
             _artificialKeyBuffer = _artificialKeyBuffer.Remove(0, 1);
@@ -9337,7 +9335,7 @@ internal class Game
             return ch;
         }
         bool v = Screen.CursorVisible;
-        if (!doNotWaitOnInkey && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
+        if (!nonBlocking && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
         {
             Screen.CursorVisible = true;
         }
@@ -9347,12 +9345,12 @@ internal class Game
         }
         while (ch == 0 && !Shutdown)
         {
-            if (doNotWaitOnInkey && GetKeypress(out char kk, false, false))
+            if (nonBlocking && GetKeypress(out char kk, false, false))
             {
                 ch = kk;
                 break;
             }
-            if (doNotWaitOnInkey)
+            if (nonBlocking)
             {
                 break;
             }
