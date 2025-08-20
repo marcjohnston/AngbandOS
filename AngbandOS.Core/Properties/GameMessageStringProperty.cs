@@ -7,13 +7,10 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal class PlayerNameStringProperty : StringProperty
+internal class GameMessageStringProperty : StringProperty
 {
-    protected PlayerNameStringProperty(Game game) : base(game) { } // This object is a singleton.
-
-    protected override void OnAfterSet()
+    protected GameMessageStringProperty(Game game) : base(game)
     {
-        // Send a message to the attached view port so that the consuming application knows that the gold value has been updated.
-        Game.ConsoleViewPort.CharacterRenamed(StringValue);
+        StringValue = string.Empty;
     }
 }

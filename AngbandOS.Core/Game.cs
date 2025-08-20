@@ -1410,6 +1410,7 @@ internal class Game
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
         Quests = new List<Quest>();
+        GameMessage = (GameMessageStringProperty)SingletonRepository.Get<Property>(nameof(GameMessageStringProperty));
         Gold = (GoldIntProperty)SingletonRepository.Get<Property>(nameof(GoldIntProperty));
         Mana = (ManaIntProperty)SingletonRepository.Get<Property>(nameof(ManaIntProperty));
         MaxMana = (MaxManaIntProperty)SingletonRepository.Get<Property>(nameof(MaxManaIntProperty));
@@ -1587,7 +1588,7 @@ internal class Game
     /// <summary>
     /// Returns the current X position of the cursor when rendering messages.
     /// </summary>
-    private int MessageXCursorPos;
+    private GameMessageStringProperty GameMessage;
 
     /// <summary>
     /// Returns the unique index of the first message in the MessageLog.  When messages drop out of the list due to the size of the MessageLog, this index is incremented
@@ -1746,6 +1747,15 @@ internal class Game
     }
 
     /// <summary>
+    /// Erases the message line and prepares the next message to be rendered at column 0.
+    /// </summary>
+    public void MsgClear()
+    {
+        Screen.PrintLine("", 0, 0);
+        GameMessage.StringValue = "";
+    }
+
+    /// <summary>
     /// Renders a message on the same line, if MessageAppendNextMessage is not set to false; otherwise, a -more- prompt will be rendered and the key input buffer
     /// is cleared prior to rendering the message on a new line.  If the message is null, any previous message is forced to render and the key input buffer is
     /// cleared.
@@ -1753,35 +1763,60 @@ internal class Game
     /// <param name="messages">Set to NULL to force a --more-- prompt (if there is text the player hasn't seen), then reset the line for new message starting at 0, 0.</param>
     public void MsgPrint(params string[]? messages)
     {
-        void Render(string msg)
+        const string MorePrompt = "-more-";
+
+        /// <summary>
+        /// Renders the -more- prompt and waits for a key input.  Keys in the input buffer are preserved.
+        /// </summary>
+        /// <param name="cursorXPosition"></param>
+        void ShowMorePrompt()
+        {
+            if (GameMessage.StringValue.Length > 0)
+            {
+                Screen.Print(ColorEnum.BrightBlue, MorePrompt, 0, GameMessage.StringValue.Length + 1);
+                while (!Shutdown)
+                {
+                    string save = _artificialKeyBuffer;
+                    _artificialKeyBuffer = "";
+                    Inkey();
+                    _artificialKeyBuffer = save;
+                    break;
+                }
+            }
+            Screen.Erase(0, 0);
+            GameMessage.StringValue = "";
+        }
+
+        void Render(string message)
         {
             // Capitalize the first letter.
-            if (msg.Length > 2)
+            if (message.Length > 2)
             {
-                msg = msg.Substring(0, 1).ToUpper() + msg.Substring(1);
+                message = message.Substring(0, 1).ToUpper() + message.Substring(1);
             }
             if (!IsDead)
             {
-                MessageAdd(msg);
+                MessageAdd(message);
             }
 
             // Check to see if the message being rendered is longer than one screen width.  If so, it will need to be split.  Compute the amount of space available.
             int lengthOfMore = MorePrompt.Length;
-            int maxWidth = Screen.Width - lengthOfMore;
+            int maxWidth = Screen.Width - lengthOfMore - 1;
 
             // Check to see if we need to -more- the current line.  Any form of the current message exceeding the current line will force a -more-.
-            if (MessageXCursorPos + msg.Length > maxWidth)
+            if (GameMessage.StringValue.Length + message.Length + 1 > maxWidth)
             {
                 // Close the current line to prepare for the current message.
                 ShowMorePrompt();
             }
 
+            // At this point, either the msg fits within the screen, or msg itself is longer than one screen width and the message line is blank.
             // Determine if the message is too long for a line by itself.
-            while (msg.Length > maxWidth)
+            while (message.Length > maxWidth)
             {
                 // Find a place to break 
                 int check = maxWidth;
-                while (check > 0 && msg[check] != ' ')
+                while (check > 0 && message[check] != ' ')
                 {
                     check--;
                 }
@@ -1794,50 +1829,35 @@ internal class Game
                 }
                 else
                 {
-                    string splitMessage = msg.Substring(0, check);
-                    msg = msg.Substring(check + 1);
-                    Screen.Print(ColorEnum.White, splitMessage, 0, 0);
+                    // Extract the first message.
+                    GameMessage.StringValue = message.Substring(0, check);
+
+                    // Remove the first message.
+                    message = message.Substring(check + 1);
+
+                    // Render the first message.
+                    Screen.Print(ColorEnum.White, GameMessage.StringValue, 0, 0);
+
+                    // Render more prompt to clear for next message.
                     ShowMorePrompt();
                 }
             }
-            Screen.Print(ColorEnum.White, msg, 0, MessageXCursorPos);
-            MessageXCursorPos += msg.Length + 1;
+
+            GameMessage.StringValue = DelimitIf(GameMessage.StringValue, " ", message);
+            Screen.Print(ColorEnum.White, GameMessage.StringValue, 0, 0);
         }
 
-        if (messages == null)
+        if (messages is null)
         {
             ShowMorePrompt();
-            return;
         }
-
-        foreach (string message in messages)
+        else
         {
-            Render(message);
-        }
-    }
-
-    public const string MorePrompt = "-more-";
-
-    /// <summary>
-    /// Renders the -more- prompt and waits for a key input.  Keys in the input buffer are preserved.
-    /// </summary>
-    /// <param name="cursorXPosition"></param>
-    private void ShowMorePrompt()
-    {
-        if (MessageXCursorPos > 0)
-        {
-            Screen.Print(ColorEnum.BrightBlue, MorePrompt, 0, MessageXCursorPos);
-            while (!Shutdown)
+            foreach (string message in messages)
             {
-                string save = _artificialKeyBuffer;
-                _artificialKeyBuffer = "";
-                Inkey();
-                _artificialKeyBuffer = save;
-                break;
+                Render(message);
             }
         }
-        Screen.Erase(0, 0);
-        MessageXCursorPos = 0;
     }
 
     public byte Elevation(int wildY, int wildX, int y, int x)
@@ -9156,15 +9176,6 @@ internal class Game
             break;
         }
         MsgClear();
-    }
-
-    /// <summary>
-    /// Erases the message line and prepares the next message to be rendered at column 0.
-    /// </summary>
-    public void MsgClear()
-    {
-        Screen.PrintLine("", 0, 0);
-        MessageXCursorPos = 0;
     }
 
     public void ShowManual() // TODO: Needs to be deleted
