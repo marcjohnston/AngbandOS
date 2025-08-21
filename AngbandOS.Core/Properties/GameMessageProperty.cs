@@ -10,24 +10,12 @@ namespace AngbandOS.Core.Properties;
 internal class GameMessageProperty : Property
 {
     protected GameMessageProperty(Game game) : base(game) { }
-    private string _value = "";
     public Queue<string?> MessageQueue = new Queue<string?>();
-    public string StringValue
-    {
-        get
-        {
-            return _value;
-        }
-        set
-        {
-            _value = value;
-        }
-    }
-
+    public string StringValue { get; set; } = "";
 
     public override string ToString()
     {
-        return _value;
+        return StringValue;
     }
 
     public void Add(params string?[] messages)
