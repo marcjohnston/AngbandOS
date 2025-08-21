@@ -241,7 +241,7 @@ internal class SingletonRepository
     /// collection--if the ExcludeFromRepository property returns false.  If the ExcludeFromRepository is true, the singleton object will be discarded.
     /// </summary>
     /// <param name="game"></param>
-    public void Load(GameConfiguration gameConfiguration)
+    public void LoadAndBind(GameConfiguration gameConfiguration)
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
         RegisterInterface<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.

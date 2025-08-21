@@ -1374,7 +1374,7 @@ internal class Game
 
         // Load all of the predefined objects.  The singleton repository must already be created.
         DateTime startTime = DateTime.Now;
-        SingletonRepository.Load(gameConfiguration);
+        SingletonRepository.LoadAndBind(gameConfiguration);
         TimeSpan elapsedTime = DateTime.Now - startTime;
         if (gameConfiguration.MaxMessageLogLength != null)
         {
