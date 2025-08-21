@@ -7,6 +7,17 @@
 namespace AngbandOS.Core;
 
 /// <summary>
+/// Represents a set of properties where the value for each property is determined from many sources including a built-in writable property.  An additonal override value can also be applied to each property.
+/// This is similar to a CSS style layering.  Each property type uses a different algorithm to determine the effective value.
+/// Booleans are ORed together.  Any source with a true value will result in a true effective value.  The writable property defaults to false and can be set to true.
+/// Integers are summed.  The writable property defaults to 0 and can be set to any integer value.
+/// Reference properties only return the last reference with the writable property having the last say.  The writable property defaults to null and can be set to any reference value.
+/// Properties that support override are nullable and writable.  A null value indicates that the effective property value will be be overriden.
+/// 
+/// Enhancements can be added to the effective property set.  Enhancements are always immutable through the use of the ReadOnlyPropertySet and can be keyed by a string.  Multiple enhancements can be added for the same key.
+/// Keyed enhancements allow the enhancement to be removed.  Non-keyed enhancements cannot be removed.
+/// Cloning is supported through immutability because the read-only property sets are immutable.
+/// </summary>
 [Serializable]
 internal class EffectivePropertySet
 {
@@ -173,6 +184,11 @@ internal class EffectivePropertySet
     private Dictionary<string, List<ReadOnlyPropertySet>> _enhancements = new Dictionary<string, List<ReadOnlyPropertySet>>();
     private PropertyValue[] _writeProperties;
     private PropertyValue[] _overrideProperties;
+
+    /// <summary>
+    /// Returns a clone of the effective property set.  The clone will have the same enhancements, writable properties, and override properties as the original.
+    /// </summary>
+    /// <returns></returns>
     public EffectivePropertySet Clone()
     {
         // Build a writable property set.
@@ -187,14 +203,6 @@ internal class EffectivePropertySet
             }
         }
 
-        // Clone the override properties.
-        effectivePropertySet._overrideProperties = new PropertyValue[_propertyFactories.Length];
-        foreach (PropertyFactory itemPropertyFactory in _propertyFactories)
-        {
-            int index = (int)itemPropertyFactory.Index;
-            effectivePropertySet._overrideProperties[index] = _overrideProperties[index].Clone();
-        }
-
         // Clone the writable properties.
         effectivePropertySet._writeProperties = new PropertyValue[_propertyFactories.Length];
         foreach (PropertyFactory itemPropertyFactory in _propertyFactories)
@@ -203,8 +211,21 @@ internal class EffectivePropertySet
             effectivePropertySet._writeProperties[index] = _writeProperties[index].Clone();
         }
 
+        // Clone the override properties.
+        effectivePropertySet._overrideProperties = new PropertyValue[_propertyFactories.Length];
+        foreach (PropertyFactory itemPropertyFactory in _propertyFactories)
+        {
+            int index = (int)itemPropertyFactory.Index;
+            effectivePropertySet._overrideProperties[index] = _overrideProperties[index].Clone();
+        }
+
         return effectivePropertySet;
     }
+
+    /// <summary>
+    /// Return a read-only version of the effective property set.
+    /// </summary>
+    /// <returns></returns>
     public ReadOnlyPropertySet ToReadOnly()
     {
         PropertyValue[] newProperties = new PropertyValue[_propertyFactories.Length];
