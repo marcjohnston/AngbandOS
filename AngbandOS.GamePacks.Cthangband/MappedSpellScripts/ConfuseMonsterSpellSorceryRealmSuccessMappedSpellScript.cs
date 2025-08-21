@@ -5,5 +5,5 @@ internal class ConfuseMonsterSpellSorceryRealmSuccessMappedSpellScript : MappedS
 {
     public override string SpellBindingKey => nameof(ConfuseMonsterSorcerySpell);
     public override string? RealmBindingKey => nameof(SorceryRealm);
-    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.ConfuseMonsterScript) };
+    public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(OldConfuse3xO2ProjectileScript) };
 }

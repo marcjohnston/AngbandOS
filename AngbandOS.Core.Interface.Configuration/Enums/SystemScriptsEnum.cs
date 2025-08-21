@@ -61,7 +61,6 @@
         ChestEnchantmentScript,
         ClairvoyanceScript,
         CloseScript,
-        ConfuseMonsterScript,
         ConstitutionDartScript,
         CreateDimensionDoorScript,
         CreateFixedArtifactScript,

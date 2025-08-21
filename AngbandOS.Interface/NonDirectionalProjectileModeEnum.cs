@@ -1,5 +1,8 @@
 ﻿namespace AngbandOS.Core.Interface;
 
+/// <summary>
+/// Represents the mode for a projectile that is launched using a script interface that does not accept a directional parameter.
+/// </summary>
 public enum NonDirectionalProjectileModeEnum
 {
     /// <summary>

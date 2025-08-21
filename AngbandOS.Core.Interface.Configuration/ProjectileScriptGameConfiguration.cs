@@ -21,7 +21,7 @@ public class ProjectileScriptGameConfiguration
     public virtual string DamageRollExpression { get; set; }
 
     /// <summary>
-    /// Returns a roll expression for the radius of damage the projectile produces.  A radius of 0 represents a bolt.  A radius >0 represents a ball and a radius <0 represents breathe.
+    /// Returns a roll expression for the radius of damage the projectile produces.  A radius of 0 represents a bolt.  A radius greater than zero represents a ball and a radius less than zero represents breathe.
     /// Returns zero by default.
     /// </summary>
     public virtual string RadiusRollExpression { get; set; } = "0";
@@ -88,7 +88,7 @@ public class ProjectileScriptGameConfiguration
     public virtual bool SmashingOnPetsTurnsUnfriendly { get; set; } = true;
 
     /// <summary>
-    /// Returns the mode that the projectile will use when it is launched using a script interface that does not accept a directional parameter.
+    /// Returns the mode that the projectile will use when it is launched using a script interface that does not accept a directional parameter.  Returns <see cref="NonDirectionalProjectileModeEnum.Default"/> by default, which is for the player to specify a direction.
     /// </summary>
     public virtual NonDirectionalProjectileModeEnum NonDirectionalProjectileMode { get; set; } = NonDirectionalProjectileModeEnum.Default;
 }
