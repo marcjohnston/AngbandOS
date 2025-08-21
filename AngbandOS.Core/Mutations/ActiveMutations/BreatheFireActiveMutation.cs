@@ -4,27 +4,13 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
 [Serializable]
-internal class BrFireActiveMutation : Mutation
+internal class BreatheFireActiveMutation : Mutation
 {
-    private BrFireActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(20, Game.ExperienceLevel.IntValue, Game.ConstitutionAbility, 18))
-        {
-            return;
-        }
-        Game.MsgPrint("You breathe fire...");
-        if (Game.GetDirectionWithAim(out int dir))
-        {
-            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile));
-            projectile.TargetedFire(dir, Game.ExperienceLevel.IntValue * 2, -(1 + (Game.ExperienceLevel.IntValue / 20)), grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
-        }
-    }
+    private BreatheFireActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(BrFireMutationScript), 20, "X", nameof(ConstitutionAbility), 18);
 
     public override string ActivationSummary(int lvl)
     {

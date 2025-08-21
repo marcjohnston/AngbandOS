@@ -12,16 +12,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class ShriekActiveMutation : Mutation
 {
     private ShriekActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(4, 4, Game.ConstitutionAbility, 6))
-        {
-            return;
-        }
-        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile));
-        projectile.TargetedFire(0, 4 * Game.ExperienceLevel.IntValue, 8, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
-        Game.AggravateMonsters();
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(ShriekMutationScript), 4, "4", nameof(ConstitutionAbility), 6);
 
     public override string ActivationSummary(int lvl)
     {

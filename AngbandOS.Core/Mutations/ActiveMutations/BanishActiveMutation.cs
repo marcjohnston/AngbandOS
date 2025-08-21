@@ -10,36 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class BanishActiveMutation : Mutation
 {
     private BanishActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(25, 25, Game.WisdomAbility, 18))
-        {
-            return;
-        }
-        if (!Game.GetDirectionNoAim(out int dir))
-        {
-            return;
-        }
-        int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
-        int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-        GridTile cPtr = Game.Map.Grid[y][x];
-        if (cPtr.MonsterIndex == 0)
-        {
-            Game.MsgPrint("You sense no evil there!");
-            return;
-        }
-        Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
-        MonsterRace rPtr = mPtr.Race;
-        if (rPtr.Evil)
-        {
-            Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
-            Game.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
-        }
-        else
-        {
-            Game.MsgPrint("Your invocation is ineffectual!");
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(BanishMutationScript), 25, "25", nameof(WisdomAbility), 18);
 
     public override string ActivationSummary(int lvl)
     {

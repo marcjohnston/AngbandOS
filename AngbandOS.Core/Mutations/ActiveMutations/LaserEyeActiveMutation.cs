@@ -12,19 +12,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class LaserEyeActiveMutation : Mutation
 {
     private LaserEyeActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(7, 10, Game.WisdomAbility, 9))
-        {
-            return;
-        }
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(LightProjectile));
-        projectile.TargetedFire(dir, 2 * Game.ExperienceLevel.IntValue, 0, beam: true, kill: true, jump: false, stop: false, grid: false, item: false, thru: true, hide: false);
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(LaserEyeMutationScript), 7, "10", nameof(WisdomAbility), 9);
 
     public override string ActivationSummary(int lvl)
     {

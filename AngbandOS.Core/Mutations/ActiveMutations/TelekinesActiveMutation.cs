@@ -10,18 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class TelekinesActiveMutation : Mutation
 {
     private TelekinesActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(9, 9, Game.WisdomAbility, 14))
-        {
-            return;
-        }
-        Game.MsgPrint("You concentrate...");
-        if (Game.GetDirectionWithAim(out int dir))
-        {
-            Game.SummonItem(dir, Game.ExperienceLevel.IntValue * 10, true);
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(TelekinesMutationScript), 9, "9", nameof(WisdomAbility), 14);
 
     public override string ActivationSummary(int lvl)
     {

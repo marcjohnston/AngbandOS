@@ -10,29 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class PanicHitActiveMutation : Mutation
 {
     private PanicHitActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(10, 12, Game.DexterityAbility, 14))
-        {
-            return;
-        }
-        if (!Game.GetDirectionNoAim(out int dir))
-        {
-            return;
-        }
-        int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
-        int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-        if (Game.Map.Grid[y][x].MonsterIndex != 0)
-        {
-            Game.PlayerAttackMonster(y, x);
-            Game.RunScript(nameof(TeleportSelf30TeleportSelfScript));
-        }
-        else
-        {
-            Game.MsgPrint("You don't see any monster in this direction");
-            Game.MsgPrint(string.Empty);
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(PanicHitMutationScript), 10, "12", nameof(DexterityAbility), 14);
 
     public override string ActivationSummary(int lvl)
     {

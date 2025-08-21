@@ -10,21 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class VampirismActiveMutation : Mutation
 {
     private VampirismActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(13, Game.ExperienceLevel.IntValue, Game.ConstitutionAbility, 14))
-        {
-            return;
-        }
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        if (Game.RunIdentifiedScript(nameof(OldDrainLife2xProjectileScript)))
-        {
-            Game.RestoreHealth(Game.ExperienceLevel.IntValue + base.Game.DieRoll(Game.ExperienceLevel.IntValue));
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(VampirismMutationScript), 13, "X", nameof(ConstitutionAbility), 14);
 
     public override string ActivationSummary(int lvl)
     {

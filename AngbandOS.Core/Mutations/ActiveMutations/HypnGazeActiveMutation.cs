@@ -10,19 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class HypnGazeActiveMutation : Mutation
 {
     private HypnGazeActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(12, 12, Game.CharismaAbility, 18))
-        {
-            return;
-        }
-        Game.MsgPrint("Your eyes look mesmerizing...");
-        if (Game.GetDirectionWithAim(out int dir))
-        {
-            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(CharmProjectile));
-            projectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(HypnGazeMutationScript), 12, "12", nameof(CharismaAbility), 18);
 
     public override string ActivationSummary(int lvl)
     {

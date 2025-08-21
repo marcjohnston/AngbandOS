@@ -12,16 +12,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class RadiationActiveMutation : Mutation
 {
     private RadiationActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(15, 15, Game.ConstitutionAbility, 14))
-        {
-            return;
-        }
-        Game.MsgPrint("Radiation flows from your body!");
-        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(NukeProjectile));
-        projectile.TargetedFire(0, Game.ExperienceLevel.IntValue * 2, 3 + (Game.ExperienceLevel.IntValue / 20), grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(RadiationMutationScript), 15, "15", nameof(ConstitutionAbility), 14);
 
     public override string ActivationSummary(int lvl)
     {

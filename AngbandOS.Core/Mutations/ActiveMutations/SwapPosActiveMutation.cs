@@ -10,18 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class SwapPosActiveMutation : Mutation
 {
     private SwapPosActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(15, 12, Game.DexterityAbility, 16))
-        {
-            return;
-        }
-        if (!Game.GetDirectionWithAim(out int dir))
-        {
-            return;
-        }
-        Game.TeleportSwap(dir);
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(SwapPosMutationScript), 15, "12", nameof(DexterityAbility), 16);
 
     public override string ActivationSummary(int lvl)
     {

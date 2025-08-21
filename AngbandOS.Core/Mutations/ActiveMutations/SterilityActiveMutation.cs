@@ -10,16 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class SterilityActiveMutation : Mutation
 {
     private SterilityActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(20, 40, Game.CharismaAbility, 18))
-        {
-            return;
-        }
-        Game.MsgPrint("You suddenly have a headache!");
-        Game.TakeHit(base.Game.DieRoll(30) + 30, "the strain of forcing abstinence");
-        Game.NumRepro += Constants.MaxRepro;
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(SterilityMutationScript), 20, "40", nameof(CharismaAbility), 18);
 
     public override string ActivationSummary(int lvl)
     {

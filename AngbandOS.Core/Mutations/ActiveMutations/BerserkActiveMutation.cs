@@ -10,16 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class BerserkActiveMutation : Mutation
 {
     private BerserkActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(8, 8, Game.StrengthAbility, 14))
-        {
-            return;
-        }
-        Game.SuperheroismTimer.AddTimer(base.Game.DieRoll(25) + 25);
-        Game.RestoreHealth(30);
-        Game.FearTimer.ResetTimer();
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(BerserkMutationScript), 8, "8", nameof(StrengthAbility), 14);
 
     public override string ActivationSummary(int lvl)
     {

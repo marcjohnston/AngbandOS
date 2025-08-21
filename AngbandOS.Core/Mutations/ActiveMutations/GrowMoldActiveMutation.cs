@@ -10,17 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class GrowMoldActiveMutation : Mutation
 {
     private GrowMoldActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(1, 6, Game.ConstitutionAbility, 14))
-        {
-            return;
-        }
-        for (int i = 0; i < 8; i++)
-        {
-            Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre1MonsterRaceFilter)), false, true);
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(GrowMoldMutationScript), 1, "6", nameof(ConstitutionAbility), 14);
 
     public override string ActivationSummary(int lvl)
     {

@@ -10,14 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class LauncherActiveMutation : Mutation
 {
     private LauncherActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(1, Game.ExperienceLevel.IntValue, Game.StrengthAbility, 6))
-        {
-            return;
-        }
-        Game.DoCmdThrow(2 + (Game.ExperienceLevel.IntValue / 16));
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(LauncherMutationScript), 1, "X", nameof(StrengthAbility), 6);
 
     public override string ActivationSummary(int lvl)
     {

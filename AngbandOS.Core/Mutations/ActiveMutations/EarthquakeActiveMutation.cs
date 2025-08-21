@@ -10,17 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class EarthquakeActiveMutation : Mutation
 {
     private EarthquakeActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(12, 12, Game.StrengthAbility, 16))
-        {
-            return;
-        }
-        if (!Game.IsQuest(Game.CurrentDepth) && Game.CurrentDepth != 0)
-        {
-            Game.Earthquake(Game.MapY.IntValue, Game.MapX.IntValue, 10);
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(EarthquakeMutationScript), 12, "12", nameof(StrengthAbility), 16);
 
     public override string ActivationSummary(int lvl)
     {

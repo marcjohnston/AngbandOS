@@ -10,15 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class VteleportActiveMutation : Mutation
 {
     private VteleportActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(7, 7, Game.WisdomAbility, 15))
-        {
-            return;
-        }
-        Game.MsgPrint("You concentrate...");
-        Game.RunScript(nameof(TeleportSelf10P4xTeleportSelfScript));
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(VteleportMutationScript), 7, "7", nameof(WisdomAbility), 15);
 
     public override string ActivationSummary(int lvl)
     {

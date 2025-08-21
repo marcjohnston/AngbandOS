@@ -22,7 +22,19 @@ internal abstract class Mutation : IGetKey
     /// <returns></returns>
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind()
+    {
+        // Check to see if there is an activation that needs binding.
+        if (ActivationBinding is not null)
+        {
+            IScript activationScript = Game.SingletonRepository.Get<IScript>(ActivationBinding.Value.ActivationScriptBindingKey);
+            Ability ability = Game.SingletonRepository.Get<Ability>(ActivationBinding.Value.AbilityBindingKey);
+            Expression costExpression = Game.ParseNumericExpression(ActivationBinding.Value.CostExpression);
+            Activation = (activationScript, ActivationBinding.Value.MinLevel, costExpression, ability, ActivationBinding.Value.Difficulty);
+        }
+    }
+    private (IScript ActivationScript, int MinLevel, Expression Cost, Ability Ability, int Difficulty)? Activation;
+    protected virtual (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding { get; } = null;
 
     public virtual string AttackDescription => "";
     public virtual int DamageDiceNumber => 0;
@@ -35,7 +47,17 @@ internal abstract class Mutation : IGetKey
     public abstract string LoseMessage { get; }
     public virtual MutationAttackTypeEnum MutationAttackType => MutationAttackTypeEnum.Physical;
 
-    public virtual void Activate() { }
+    public void Activate()
+    {
+        if (Activation is not null)
+        {
+            int cost = Game.ComputeIntegerExpression(Activation.Value.Cost).Value;
+            if (Game.CheckIfRacialPowerWorks(Activation.Value.MinLevel, cost, Activation.Value.Ability, Activation.Value.Difficulty))
+            {
+                Activation.Value.ActivationScript.ExecuteScript();
+            }
+        }
+    }
 
     public virtual string ActivationSummary(int lvl)
     {

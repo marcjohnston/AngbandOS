@@ -10,13 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class BlinkActiveMutation : Mutation
 {
     private BlinkActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (Game.CheckIfRacialPowerWorks(3, 3, Game.WisdomAbility, 12))
-        {
-            Game.RunScript(nameof(TeleportSelf10TeleportSelfScript));
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(TeleportSelf10TeleportSelfScript), 3, "3", nameof(WisdomAbility), 12);
 
     public override string ActivationSummary(int lvl)
     {

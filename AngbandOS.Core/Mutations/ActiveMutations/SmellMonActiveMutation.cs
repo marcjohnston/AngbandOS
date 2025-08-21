@@ -10,13 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class SmellMonActiveMutation : Mutation
 {
     private SmellMonActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (Game.CheckIfRacialPowerWorks(5, 4, Game.IntelligenceAbility, 15))
-        {
-            Game.RunScript(nameof(DetectNormalMonstersScript));
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(DetectNormalMonstersScript), 5, "4", nameof(IntelligenceAbility), 15);
 
     public override string ActivationSummary(int lvl)
     {

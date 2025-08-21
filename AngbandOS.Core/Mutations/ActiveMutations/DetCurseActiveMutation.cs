@@ -10,29 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class DetCurseActiveMutation : Mutation
 {
     private DetCurseActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(7, 14, Game.WisdomAbility, 14))
-        {
-            return;
-        }
-
-        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
-        {
-            foreach (int slot in inventorySlot.InventorySlots)
-            {
-                Item? oPtr = Game.GetInventoryItem(slot);
-
-                if (oPtr != null)                    
-                {
-                    if (oPtr.EffectivePropertySet.IsCursed)
-                    {
-                        oPtr.Inscription = "cursed";
-                    }
-                }
-            }
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(DetCurseMutationScript), 7, "14", nameof(WisdomAbility), 14);
 
     public override string ActivationSummary(int lvl)
     {

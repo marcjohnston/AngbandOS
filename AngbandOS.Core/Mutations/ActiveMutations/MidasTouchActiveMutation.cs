@@ -7,16 +7,10 @@
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
 [Serializable]
-internal class MidasTchActiveMutation : Mutation
+internal class MidasTouchActiveMutation : Mutation
 {
-    private MidasTchActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (Game.CheckIfRacialPowerWorks(10, 5, Game.IntelligenceAbility, 12))
-        {
-            Game.RunScript(nameof(AlchemyScript));
-        }
-    }
+    private MidasTouchActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(AlchemyScript), 10, "5", nameof(IntelligenceAbility), 12);
 
     public override string ActivationSummary(int lvl)
     {

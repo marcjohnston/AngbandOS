@@ -12,19 +12,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class SpitAcidActiveMutation : Mutation
 {
     private SpitAcidActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(9, 9, Game.DexterityAbility, 15))
-        {
-            return;
-        }
-        Game.MsgPrint("You spit acid...");
-        if (Game.GetDirectionWithAim(out int dir))
-        {
-            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile));
-            projectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 1 + (Game.ExperienceLevel.IntValue / 30), grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(SpitAcidMutationScript), 9, "9", nameof(DexterityAbility), 15);
 
     public override string ActivationSummary(int lvl)
     {

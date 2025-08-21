@@ -10,13 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class WeighMagActiveMutation : Mutation
 {
     private WeighMagActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (Game.CheckIfRacialPowerWorks(6, 6, Game.IntelligenceAbility, 10))
-        {
-            Game.RunScript(nameof(ReportMagicsScript));
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(ReportMagicsScript), 6, "6", nameof(IntelligenceAbility), 10);
 
     public override string ActivationSummary(int lvl)
     {

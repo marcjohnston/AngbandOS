@@ -17068,7 +17068,7 @@ internal class Game
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BanishActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BerserkActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BlinkActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BrFireActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BreatheFireActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ColdTouchActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(DazzleActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(DetCurseActiveMutation)));
@@ -17080,7 +17080,7 @@ internal class Game
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(IllumineActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(LaserEyeActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(LauncherActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MidasTchActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MidasTouchActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MindBlastActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PanicHitActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PolymorphActiveMutation)));

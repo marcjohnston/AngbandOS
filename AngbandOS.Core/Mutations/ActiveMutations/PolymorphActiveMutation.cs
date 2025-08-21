@@ -10,13 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class PolymorphActiveMutation : Mutation
 {
     private PolymorphActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (Game.CheckIfRacialPowerWorks(18, 20, Game.ConstitutionAbility, 18))
-        {
-            Game.RunScript(nameof(PolymorphSelfScript));
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(PolymorphSelfScript), 18, "20", nameof(ConstitutionAbility), 18);
 
     public override string ActivationSummary(int lvl)
     {

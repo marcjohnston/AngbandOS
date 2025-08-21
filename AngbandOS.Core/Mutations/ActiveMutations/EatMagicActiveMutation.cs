@@ -10,37 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class EatMagicActiveMutation : Mutation
 {
     private EatMagicActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.SelectItem(out Item? oPtr, "Drain which item? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeRechargedItemFilter))))
-        {
-            Game.MsgPrint("You have nothing appropriate to eat.");
-            return;
-        }
-        if (!Game.CheckIfRacialPowerWorks(17, 1, Game.WisdomAbility, 15))
-        {
-            return;
-        }
-        if (oPtr == null)
-        {
-            return;
-        }
-
-        // Make sure the item is actually edible
-        if (oPtr.EatMagicScript == null)
-        {
-            Game.MsgPrint("That is not a rod!");
-            return;
-        }
-
-        int lev = oPtr.LevelNormallyFound;
-        oPtr.EatMagicScript.ExecuteScriptItem(oPtr);
-        if (Game.Mana.IntValue > Game.MaxMana.IntValue)
-        {
-            Game.Mana.IntValue = Game.MaxMana.IntValue;
-        }
-        base.Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(EatMagicMutationScript), 17, "1", nameof(WisdomAbility), 15);
 
     public override string ActivationSummary(int lvl)
     {

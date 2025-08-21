@@ -10,13 +10,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class IllumineActiveMutation : Mutation
 {
     private IllumineActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (Game.CheckIfRacialPowerWorks(3, 2, Game.IntelligenceAbility, 10))
-        {
-            Game.LightArea(base.Game.DiceRoll(2, Game.ExperienceLevel.IntValue / 2), (Game.ExperienceLevel.IntValue / 10) + 1);
-        }
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(IllumineMutationScript), 3, "2", nameof(IntelligenceAbility), 10);
 
     public override string ActivationSummary(int lvl)
     {

@@ -12,27 +12,7 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class ColdTouchActiveMutation : Mutation
 {
     private ColdTouchActiveMutation(Game game) : base(game) { }
-    public override void Activate()
-    {
-        if (!Game.CheckIfRacialPowerWorks(2, 2, Game.ConstitutionAbility, 11))
-        {
-            return;
-        }
-        if (!Game.GetDirectionNoAim(out int dir))
-        {
-            return;
-        }
-        int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
-        int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-        GridTile cPtr = Game.Map.Grid[y][x];
-        if (cPtr.MonsterIndex == 0)
-        {
-            Game.MsgPrint("You wave your hands in the air.");
-            return;
-        }
-        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile));
-        projectile.TargetedFire(dir, 2 * Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(ColdTouchMutationScript), 2, "2", nameof(ConstitutionAbility), 11);
 
     public override string ActivationSummary(int lvl)
     {
