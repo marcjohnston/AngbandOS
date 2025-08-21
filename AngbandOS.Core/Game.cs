@@ -5733,19 +5733,6 @@ internal class Game
         return true;
     }
 
-    /// <summary>
-    /// Returns true, if the projectile actally hits and affects a monster.
-    /// </summary>
-    /// <param name="projectile"></param>
-    /// <param name="dir"></param>
-    /// <param name="dam"></param>
-    /// <param name="rad"></param>
-    /// <returns></returns>
-    public IsNoticedEnum FireBall(Projectile projectile, int dir, int dam, int rad)
-    {
-        return projectile.TargetedFire(dir, dam, rad, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
-    }
-
     public void FireBoltOrBeam(int prob, Projectile projectile, int dir, int dam)
     {
         if (RandomLessThan(100) < prob)

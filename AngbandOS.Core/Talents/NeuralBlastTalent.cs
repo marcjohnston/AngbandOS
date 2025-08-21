@@ -30,8 +30,8 @@ internal class NeuralBlastTalent : Talent
         }
         else
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), dir,
-                Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 4), 3 + (Game.ExperienceLevel.IntValue / 15)), 0);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile));
+            projectile.TargetedFire(dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 4), 3 + (Game.ExperienceLevel.IntValue / 15)), 0, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         }
     }
 

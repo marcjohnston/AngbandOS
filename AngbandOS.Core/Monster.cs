@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -1095,7 +1097,8 @@ internal class Monster : IItemContainer
                         if (newY == Game.MapY.IntValue && newX == Game.MapX.IntValue)
                         {
                             Game.MsgPrint("The rune explodes!");
-                            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), 0, 2 * ((Game.ExperienceLevel.IntValue / 2) + Game.DiceRoll(7, 7)), 2);
+                            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile));
+                            projectile.TargetedFire(0, 2 * ((Game.ExperienceLevel.IntValue / 2) + Game.DiceRoll(7, 7)), 2, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
                         }
                         else
                         {

@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -17,7 +19,8 @@ internal class FireIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScrip
     /// <returns></returns>
     public IdentifiedAndUsedResult ExecuteReadScrollOrUseStaffScript()
     {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), 0, 150, 4);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile));
+        projectile.TargetedFire(0, 150, 4, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         if (!(Game.FireResistanceTimer.Value != 0 || Game.HasFireResistance || Game.HasFireImmunity))
         {
             Game.TakeHit(50 + Game.DieRoll(50), "a Scroll of Fire");

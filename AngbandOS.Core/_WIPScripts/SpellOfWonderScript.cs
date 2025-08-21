@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -74,7 +76,8 @@ internal class SpellOfWonderScript : Script, IScript, ICastSpellScript
         }
         else if (die < 46)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile)), dir, 20 + (Game.ExperienceLevel.IntValue / 2), 3);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
+            projectile.TargetedFire(dir, 20 + (Game.ExperienceLevel.IntValue / 2), 3, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         }
         else if (die < 51)
         {
@@ -102,19 +105,23 @@ internal class SpellOfWonderScript : Script, IScript, ICastSpellScript
         }
         else if (die < 81)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile)), dir, 30 + (Game.ExperienceLevel.IntValue / 2), 2);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile));
+            projectile.TargetedFire(dir, 30 + (Game.ExperienceLevel.IntValue / 2), 2, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         }
         else if (die < 86)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile)), dir, 40 + Game.ExperienceLevel.IntValue, 2);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(AcidProjectile));
+            projectile.TargetedFire(dir, 40 + Game.ExperienceLevel.IntValue, 2, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         }
         else if (die < 91)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(IceProjectile)), dir, 70 + Game.ExperienceLevel.IntValue, 3);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(IceProjectile));
+            projectile.TargetedFire(dir, 70 + Game.ExperienceLevel.IntValue, 3, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         }
         else if (die < 96)
         {
-            Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), dir, 80 + Game.ExperienceLevel.IntValue, 3);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile));
+            projectile.TargetedFire(dir, 80 + Game.ExperienceLevel.IntValue, 3, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         }
         else if (die < 101)
         {

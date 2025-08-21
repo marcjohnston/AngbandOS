@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -26,7 +28,8 @@ internal class ManaStormScript : Script, IScript, ICastSpellScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), dir, 300 + (Game.ExperienceLevel.IntValue * 2), 4);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile));
+        projectile.TargetedFire(dir, 300 + (Game.ExperienceLevel.IntValue * 2), 4, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
     }
     public string LearnedDetails => $"dam {300 + (Game.ExperienceLevel.IntValue * 2)}";
 }

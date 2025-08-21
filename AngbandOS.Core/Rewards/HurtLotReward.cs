@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Rewards;
 
 [Serializable]
@@ -15,7 +17,8 @@ internal class HurtLotReward : Reward
         string wrathReason = $"the Wrath of {patron.ShortName}";
         Game.MsgPrint($"The voice of {patron.ShortName} booms out:");
         Game.MsgPrint("'Suffer, pathetic fool!'");
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(DisintegrateProjectile)), 0, Game.ExperienceLevel.IntValue * 4, 4);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DisintegrateProjectile));
+        projectile.TargetedFire(0, Game.ExperienceLevel.IntValue * 4, 4, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         Game.TakeHit(Game.ExperienceLevel.IntValue * 4, wrathReason);
     }
 }

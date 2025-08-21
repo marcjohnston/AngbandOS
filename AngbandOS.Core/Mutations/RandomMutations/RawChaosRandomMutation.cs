@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Mutations.RandomMutations;
 
 [Serializable]
@@ -24,6 +26,7 @@ internal class RawChaosRandomMutation : Mutation
         Game.Disturb(false);
         Game.MsgPrint("You feel the world warping around you!");
         Game.MsgPrint(string.Empty);
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile)), 0, Game.ExperienceLevel.IntValue, 8);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ChaosProjectile));
+        projectile.TargetedFire(0, Game.ExperienceLevel.IntValue, 8, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
     }
 }

@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
@@ -22,7 +24,8 @@ internal class PsychicDrainTalent : Talent
             return;
         }
         int i = Game.DiceRoll(Game.ExperienceLevel.IntValue / 2, 6);
-        IsNoticedEnum isNoticed = Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(PsiDrainProjectile)), dir, i, 0 + ((Game.ExperienceLevel.IntValue - 25) / 10));
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(PsiDrainProjectile));
+        IsNoticedEnum isNoticed = projectile.TargetedFire(dir, i, 0 + ((Game.ExperienceLevel.IntValue - 25) / 10), grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         if (isNoticed == IsNoticedEnum.True) // TODO: Need to determine if the return hit success from the fireball is what was intended
         {
             Game.Energy -= Game.DieRoll(150);

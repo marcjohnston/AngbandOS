@@ -29,7 +29,8 @@ internal class MaledictionScript : Script, IScript, ICastSpellScript
         {
             return;
         }
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(HellfireProjectile)), dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 5), 3), 0);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
+        projectile.TargetedFire(dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 5), 3), 0, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         if (Game.DieRoll(5) != 1)
         {
             return;

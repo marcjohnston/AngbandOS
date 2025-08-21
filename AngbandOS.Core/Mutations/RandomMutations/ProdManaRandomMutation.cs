@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Mutations.RandomMutations;
 
 [Serializable]
@@ -26,7 +28,8 @@ internal class ProdManaRandomMutation : Mutation
         Game.MsgPrint(string.Empty);
 
         // Get a direction.  We do not care if the player cancels the direction, we will release the energy anyway.
-        Game.GetDirectionWithAim(out int dire);
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile)), dire, Game.ExperienceLevel.IntValue * 2, 3);
+        Game.GetDirectionWithAim(out int direction);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile));
+        projectile.TargetedFire(direction, Game.ExperienceLevel.IntValue * 2, 3, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
     }
 }

@@ -15,7 +15,7 @@ internal class ImpRacialPowerScript : Script, IScript
             if (Game.ExperienceLevel.IntValue >= 30)
             {
                 Game.MsgPrint("You cast a ball of fire.");
-                Game.FireBall(projectile, direction, Game.ExperienceLevel.IntValue, 2);
+                projectile.TargetedFire(direction, Game.ExperienceLevel.IntValue, 2, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
             }
             else
             {

@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -22,7 +24,8 @@ internal class CallSunlightScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(LightProjectile)), 0, 150, 8);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(LightProjectile));
+        projectile.TargetedFire(0, 150, 8, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         Game.RunScript(nameof(LightScript));
         if (!Game.Race.IsBurnedBySunlight || Game.HasLightResistance)
         {

@@ -19,7 +19,7 @@ internal class KlackonRacialPowerScript : Script, IScript
             }
             else
             {
-                Game.FireBall(projectile, direction, Game.ExperienceLevel.IntValue, 2);
+                projectile.TargetedFire(direction, Game.ExperienceLevel.IntValue, 2, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
             }
         }
     }
