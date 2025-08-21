@@ -10,7 +10,8 @@ internal class YeekRacialPowerScript : Script, IScript
         if (Game.GetDirectionWithAim(out int direction))
         {
             Game.MsgPrint("You make a horrible scream!");
-            Game.ScareMonster(direction, Game.ExperienceLevel.IntValue);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile));
+            projectile.TargetedFire(direction, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         }
     }
 }

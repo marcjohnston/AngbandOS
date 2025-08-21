@@ -26,7 +26,8 @@ internal class HorrifyScript : Script, IScript, ICastSpellScript
         {
             return;
         }
-        Game.ScareMonster(dir, Game.ExperienceLevel.IntValue);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile));
+        projectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         Game.RunScript(nameof(Stun1xProjectileScript));
     }
     public string LearnedDetails => "";

@@ -10,7 +10,8 @@ internal class SpectreRacialPowerScript : Script, IScript
         Game.MsgPrint("You emit an eldritch howl!");
         if (Game.GetDirectionWithAim(out int direction))
         {
-            Game.ScareMonster(direction, Game.ExperienceLevel.IntValue);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile));
+            projectile.TargetedFire(direction, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         }
     }
 }

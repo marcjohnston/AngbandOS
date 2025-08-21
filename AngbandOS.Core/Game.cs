@@ -5733,12 +5733,6 @@ internal class Game
         return true;
     }
 
-    public IsNoticedEnum ScareMonster(int dir, int plev)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile));
-        return projectile.TargetedFire(dir, plev, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
     /// <summary>
     /// Returns true, if the projectile actally hits and affects a monster.
     /// </summary>
