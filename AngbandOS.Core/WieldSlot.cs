@@ -4,7 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
 using System.Collections;
 namespace AngbandOS.Core;
 
@@ -23,12 +22,19 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     /// </summary>
     public virtual int MaximumItemSlots => 1;
 
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
+    //public Item[] Items
+    //{
+    //    get
+    //    {
+    //        List<Item> itemList = new List<Item>();
+    //        foreach (int inventorySlot in InventorySlots)
+    //        {
+    //            Item? item = Game.GetInventoryItem(inventorySlot);
+    //        }
+    //        return itemList.ToArray();
+    //    }
+    //}
 
-    //  private List<Item> Items = new List<Item>();
     public abstract int[] InventorySlots { get; }
     public virtual string TakeOffMessage(Item oPtr) => "You were wearing";
 
