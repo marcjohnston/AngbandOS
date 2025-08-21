@@ -88,7 +88,6 @@
         CurseWeaponIdentifableAndUsedScript,
         DarknessIdentifableAndUsedScript,
         DarkScript,
-        DeathRayScript,
         DestroyAdjacentDoorsScript,
         DestroyAllWorthlessItemsScript,
         DestroyAreaR15Script,
