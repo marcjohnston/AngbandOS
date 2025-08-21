@@ -5752,11 +5752,6 @@ internal class Game
         return projectile.TargetedFire(dir, dam, rad, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
     }
 
-    public void FireBolt(Projectile projectile, int dir, int dam)
-    {
-        projectile.TargetedFire(dir, dam, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
     public void FireBoltOrBeam(int prob, Projectile projectile, int dir, int dam)
     {
         if (RandomLessThan(100) < prob)
@@ -5765,7 +5760,7 @@ internal class Game
         }
         else
         {
-            FireBolt(projectile, dir, dam);
+            projectile.TargetedFire(dir, dam, 0, beam: false, kill: true, jump: false, stop: true, grid: false, item: false, thru: true, hide: false);
         }
     }
 
@@ -17117,7 +17112,7 @@ internal class Game
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(LaserEyeActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(LauncherActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MidasTchActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MindBlstActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MindBlastActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PanicHitActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PolymorphActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RadiationActiveMutation)));

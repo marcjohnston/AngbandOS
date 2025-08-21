@@ -1,3 +1,5 @@
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Scripts;
 
 // Imps can cast fire bolt/ball
@@ -9,15 +11,16 @@ internal class ImpRacialPowerScript : Script, IScript
     {
         if (Game.GetDirectionWithAim(out int direction))
         {
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile));
             if (Game.ExperienceLevel.IntValue >= 30)
             {
                 Game.MsgPrint("You cast a ball of fire.");
-                Game.FireBall(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, Game.ExperienceLevel.IntValue, 2);
+                Game.FireBall(projectile, direction, Game.ExperienceLevel.IntValue, 2);
             }
             else
             {
                 Game.MsgPrint("You cast a bolt of fire.");
-                Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile)), direction, Game.ExperienceLevel.IntValue);
+                projectile.TargetedFire(direction, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
             }
         }
     }

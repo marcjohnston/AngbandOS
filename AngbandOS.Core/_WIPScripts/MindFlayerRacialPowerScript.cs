@@ -1,3 +1,5 @@
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Scripts;
 
 // Mind Flayers can shoot psychic bolts
@@ -10,7 +12,8 @@ internal class MindFlayerRacialPowerScript : Script, IScript
         if (Game.GetDirectionWithAim(out int direction))
         {
             Game.MsgPrint("You concentrate and your eyes glow red...");
-            Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), direction, Game.ExperienceLevel.IntValue);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile));
+            projectile.TargetedFire(direction, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         }
     }
 }

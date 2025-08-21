@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
 [Serializable]
@@ -28,7 +30,8 @@ internal class ColdTouchActiveMutation : Mutation
             Game.MsgPrint("You wave your hands in the air.");
             return;
         }
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile)), dir, 2 * Game.ExperienceLevel.IntValue);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ColdProjectile));
+        projectile.TargetedFire(dir, 2 * Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
 
     public override string ActivationSummary(int lvl)

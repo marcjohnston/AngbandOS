@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -35,17 +37,21 @@ internal class MaledictionScript : Script, IScript, ICastSpellScript
         int dummy = Game.DieRoll(1000);
         if (dummy == 666)
         {
-            Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(DeathRayProjectile)), dir, Game.ExperienceLevel.IntValue);
+            Projectile deathRayProjectile = Game.SingletonRepository.Get<Projectile>(nameof(DeathRayProjectile));
+            deathRayProjectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         }
         if (dummy < 500)
         {
-            Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile)), dir, Game.ExperienceLevel.IntValue);
+            Projectile turnAllProjectile = Game.SingletonRepository.Get<Projectile>(nameof(TurnAllProjectile));
+            turnAllProjectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         }
         if (dummy < 800)
         {
-            Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile)), dir, Game.ExperienceLevel.IntValue);
+            Projectile oldConfuseProjectile = Game.SingletonRepository.Get<Projectile>(nameof(OldConfuseProjectile));
+            oldConfuseProjectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         }
-        Game.FireBolt(Game.SingletonRepository.Get<Projectile>(nameof(StunProjectile)), dir, Game.ExperienceLevel.IntValue);
+        Projectile stunProjectile = Game.SingletonRepository.Get<Projectile>(nameof(StunProjectile));
+        stunProjectile.TargetedFire(dir, Game.ExperienceLevel.IntValue, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
     }
     public string LearnedDetails => $"dam {3 + ((Game.ExperienceLevel.IntValue - 1) / 5)}d3";
 }
