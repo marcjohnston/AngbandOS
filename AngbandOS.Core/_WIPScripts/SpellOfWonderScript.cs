@@ -82,7 +82,8 @@ internal class SpellOfWonderScript : Script, IScript, ICastSpellScript
         }
         else if (die < 51)
         {
-            Game.LightLine(dir);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
+            projectile.TargetedFire(dir, Game.DiceRoll(6, 8), 0, beam: true, grid: true, kill: true, jump: false, stop: false, item: false, thru: true, hide: false);
         }
         else if (die < 56)
         {

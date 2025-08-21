@@ -21,7 +21,8 @@ internal class StarlightScript : Script, IReadScrollOrUseStaffScript
         }
         for (int k = 0; k < 8; k++)
         {
-            Game.LightLine(Game.OrderedDirection[k]);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
+            projectile.TargetedFire(Game.OrderedDirection[k], Game.DiceRoll(6, 8), 0, beam: true, grid: true, kill: true, jump: false, stop: false, item: false, thru: true, hide: false);
         }
         return new IdentifiedAndUsedResult(true, true);
     }

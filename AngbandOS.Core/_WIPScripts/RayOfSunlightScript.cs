@@ -27,7 +27,8 @@ internal class RayOfSunlightScript : Script, IScript, ICastSpellScript
             return;
         }
         Game.MsgPrint("A line of sunlight appears.");
-        Game.LightLine(dir);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
+        projectile.TargetedFire(dir, Game.DiceRoll(6, 8), 0, beam: true, grid: true, kill: true, jump: false, stop: false, item: false, thru: true, hide: false);
     }
     public string LearnedDetails => "dam 6d8";
 }

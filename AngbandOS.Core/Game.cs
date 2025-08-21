@@ -5787,12 +5787,6 @@ internal class Game
         return true;
     }
 
-    public IsNoticedEnum LightLine(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
-        return projectile.TargetedFire(dir, DiceRoll(6, 8), 0, beam: true, grid: true, kill: true, jump: false, stop: false, item: false, thru: true, hide: false);
-    }
-
     public bool LoseAllInfo()
     {
         for (int i = 0; i < InventorySlotEnum.Total; i++)
