@@ -1410,7 +1410,7 @@ internal class Game
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
 
         Quests = new List<Quest>();
-        GameMessage = (GameMessageStringProperty)SingletonRepository.Get<Property>(nameof(GameMessageStringProperty));
+        GameMessage = (GameMessageProperty)SingletonRepository.Get<Property>(nameof(GameMessageProperty));
         Gold = (GoldIntProperty)SingletonRepository.Get<Property>(nameof(GoldIntProperty));
         Mana = (ManaIntProperty)SingletonRepository.Get<Property>(nameof(ManaIntProperty));
         MaxMana = (MaxManaIntProperty)SingletonRepository.Get<Property>(nameof(MaxManaIntProperty));
@@ -1588,7 +1588,7 @@ internal class Game
     /// <summary>
     /// Returns the property that maintains the game message.
     /// </summary>
-    public GameMessageStringProperty GameMessage;
+    public GameMessageProperty GameMessage;
 
     /// <summary>
     /// Returns the unique index of the first message in the MessageLog.  When messages drop out of the list due to the size of the MessageLog, this index is incremented

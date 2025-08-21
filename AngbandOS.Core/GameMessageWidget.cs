@@ -25,7 +25,7 @@ internal sealed class GameMessageWidget : Widget, IGetKey, IToJson
 
     public void Bind()
     {
-        ChangeTrackers = new IChangeTracker[] { Game.SingletonRepository.Get<IChangeTracker>(nameof(GameMessageStringProperty)) };
+        ChangeTrackers = new IChangeTracker[] { Game.SingletonRepository.Get<IChangeTracker>(nameof(GameMessageProperty)) };
     }
 
     /// <summary>

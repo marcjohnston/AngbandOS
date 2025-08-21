@@ -7,18 +7,28 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal class GameMessageStringProperty : StringProperty
+internal class GameMessageProperty : Property
 {
+    protected GameMessageProperty(Game game) : base(game) { }
+    private string _value = "";
     public Queue<string?> MessageQueue = new Queue<string?>();
-    protected GameMessageStringProperty(Game game) : base(game)
+    public string StringValue
     {
-        StringValue = string.Empty;
+        get
+        {
+            return _value;
+        }
+        set
+        {
+            _value = value;
+        }
     }
 
-    /// <summary>
-    /// Returns true, when there are messages that need to be rendered.
-    /// </summary>
-    public override bool IsChanged => MessageQueue.Count > 0;
+
+    public override string ToString()
+    {
+        return _value;
+    }
 
     public void Add(params string?[] messages)
     {
@@ -26,6 +36,7 @@ internal class GameMessageStringProperty : StringProperty
         foreach (string? message in messages)
         {
             MessageQueue.Enqueue(message);
+            SetChangedFlag();
         }
     }
 }
