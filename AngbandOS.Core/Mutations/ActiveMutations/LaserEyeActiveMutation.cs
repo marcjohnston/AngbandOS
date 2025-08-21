@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
 [Serializable]
@@ -20,7 +22,8 @@ internal class LaserEyeActiveMutation : Mutation
         {
             return;
         }
-        Game.FireBeam(Game.SingletonRepository.Get<Projectile>(nameof(LightProjectile)), dir, 2 * Game.ExperienceLevel.IntValue);
+        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(LightProjectile));
+        projectile.TargetedFire(dir, 2 * Game.ExperienceLevel.IntValue, 0, beam: true, kill: true, jump: false, stop: false, grid: false, item: false, thru: true, hide: false);
     }
 
     public override string ActivationSummary(int lvl)

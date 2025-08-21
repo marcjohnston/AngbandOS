@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Talents;
 
 [Serializable]
@@ -23,8 +25,8 @@ internal class NeuralBlastTalent : Talent
         }
         if (Game.DieRoll(100) < Game.ExperienceLevel.IntValue * 2)
         {
-            Game.FireBeam(Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile)), dir,
-                Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 4), 3 + (Game.ExperienceLevel.IntValue / 15)));
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile));
+            projectile.TargetedFire(dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 4), 3 + (Game.ExperienceLevel.IntValue / 15)), 0, beam: true, kill: true, jump: false, stop: false, grid: false, item: false, thru: true, hide: false);
         }
         else
         {

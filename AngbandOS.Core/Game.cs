@@ -5752,11 +5752,6 @@ internal class Game
         return projectile.TargetedFire(dir, dam, rad, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
     }
 
-    public void FireBeam(Projectile projectile, int dir, int dam)
-    {
-        projectile.TargetedFire(dir, dam, 0, beam: true, kill: true, jump: false, stop: false, grid: false, item: false, thru: true, hide: false);
-    }
-
     public void FireBolt(Projectile projectile, int dir, int dam)
     {
         projectile.TargetedFire(dir, dam, 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
@@ -5766,7 +5761,7 @@ internal class Game
     {
         if (RandomLessThan(100) < prob)
         {
-            FireBeam(projectile, dir, dam);
+            projectile.TargetedFire(dir, dam, 0, beam: true, kill: true, jump: false, stop: false, grid: false, item: false, thru: true, hide: false);
         }
         else
         {
