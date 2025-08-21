@@ -59,7 +59,8 @@ internal class SpellOfWonderScript : Script, IScript, ICastSpellScript
         }
         else if (die < 26)
         {
-            Game.HealMonster(dir);
+            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(OldHealProjectile));
+            projectile.TargetedFire(dir, Game.DiceRoll(4, 6), 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
         }
         else if (die < 31)
         {

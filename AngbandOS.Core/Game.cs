@@ -5775,12 +5775,6 @@ internal class Game
         }
     }
 
-    public IsNoticedEnum HealMonster(int dir)
-    {
-        Projectile projectile = SingletonRepository.Get<Projectile>(nameof(OldHealProjectile));
-        return projectile.TargetedFire(dir, DiceRoll(4, 6), 0, stop: true, kill: true, jump: false, beam: false, grid: false, item: false, thru: true, hide: false);
-    }
-
     public bool LightArea(int dam, int rad)
     {
         if (BlindnessTimer.Value == 0)
