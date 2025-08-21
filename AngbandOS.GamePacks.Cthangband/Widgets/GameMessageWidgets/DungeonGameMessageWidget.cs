@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class DungeonGameMessageWidget : GameMessageWidgetGameConfiguration
 {
-    public override int X => 5;
-    public override int Y => 44;
-    public override int? Width => 40;
+    public override int X => 0;
+    public override int Y => 0;
 }
