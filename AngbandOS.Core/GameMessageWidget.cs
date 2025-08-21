@@ -58,32 +58,35 @@ internal sealed class GameMessageWidget : Widget, IGetKey, IToJson
     {
         if (Game.GameMessage.StringValue.Length > 0)
         {
-            Game.Screen.Print(ColorEnum.BrightBlue, MorePrompt, 0, Game.GameMessage.StringValue.Length + 1);
+            Game.Screen.Print(ColorEnum.BrightBlue, MorePrompt, Y, X + Game.GameMessage.StringValue.Length + 1);
             while (!Game.Shutdown)
             {
                 Game.Inkey(true);
                 break;
             }
         }
-        Game.Screen.Erase(0, 0);
+        int width = Width ?? Game.Screen.Width;
+        Game.Screen.Erase(Y, X, width);
         Game.GameMessage.StringValue = "";
     }
 
     private void Render(string message)
     {
+        int width = Width ?? Game.Screen.Width;
+
         // Capitalize the first letter.
-        if (message.Length > 2)
+        if (message.Length > 2) // TODO: Configurable?
         {
             message = message.Substring(0, 1).ToUpper() + message.Substring(1);
         }
-        if (!Game.IsDead)
+        if (!Game.IsDead) // TODO: Why
         {
             Game.MessageAdd(message);
         }
 
         // Check to see if the message being rendered is longer than one screen width.  If so, it will need to be split.  Compute the amount of space available.
         int lengthOfMore = MorePrompt.Length;
-        int maxWidth = Game.Screen.Width - lengthOfMore - 1;
+        int maxWidth = width - lengthOfMore - 1 - X;
 
         // Check to see if we need to -more- the current line.  Any form of the current message exceeding the current line will force a -more-.
         if (Game.GameMessage.StringValue.Length + message.Length + 1 > maxWidth)
@@ -118,7 +121,7 @@ internal sealed class GameMessageWidget : Widget, IGetKey, IToJson
                 message = message.Substring(check + 1);
 
                 // Render the first message.
-                Game.Screen.Print(ColorEnum.White, Game.GameMessage.StringValue, 0, 0);
+                Game.Screen.Print(ColorEnum.White, Game.GameMessage.StringValue, Y, X);
 
                 // Render more prompt to clear for next message.
                 ShowMorePrompt();
@@ -126,7 +129,7 @@ internal sealed class GameMessageWidget : Widget, IGetKey, IToJson
         }
 
         Game.GameMessage.StringValue = Game.DelimitIf(Game.GameMessage.StringValue, " ", message);
-        Game.Screen.Print(ColorEnum.White, Game.GameMessage.StringValue, 0, 0);
+        Game.Screen.Print(ColorEnum.White, Game.GameMessage.StringValue, Y, X);
     }
 
     /// <summary>
@@ -140,7 +143,7 @@ internal sealed class GameMessageWidget : Widget, IGetKey, IToJson
             if (message is null)
             {
                 // Erases the message line and prepares the next message to be rendered at column 0.
-                Game.Screen.PrintLine("", 0, 0);
+                Game.Screen.PrintLine("", Y, X);
                 Game.GameMessage.StringValue = "";
             }
             else if (message == string.Empty)

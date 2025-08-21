@@ -19,7 +19,7 @@ public class GameMessageWidgetGameConfiguration
     public virtual int Y { get; set; }
 
     /// <summary>
-    /// Returns the width of the widget.  A width that is equal to the length of the <see cref="Text"/> property is returned by default.
+    /// Returns the width of the widget, or null for the remaining width of the screen.
     /// </summary>
     public virtual int? Width { get; set; } = null;
 
