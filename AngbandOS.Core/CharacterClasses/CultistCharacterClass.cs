@@ -4,12 +4,15 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.CharacterClasses;
 
 [Serializable]
 internal class CultistCharacterClass : BaseCharacterClass
 {
     private CultistCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(CultistCharacterClassItemEnhancement);
     public override int ID => 12;
     public override string Title => "Cultist";
     public override bool ReceivesLevelRewards => true;

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class ChosenOneCharacterClass : BaseCharacterClass
 {
     private ChosenOneCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(ChosenOneCharacterClassItemEnhancement);
     public override int ID => 14;
     public override string Title => "Chosen One";
     public override int? InstantConfusionResistanceLevel => 2;

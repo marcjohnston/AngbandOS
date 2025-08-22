@@ -11,6 +11,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class MindcrafterCharacterClass : BaseCharacterClass
 {
     private MindcrafterCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(MindcrafterCharacterClassItemEnhancement);
     public override int ID => 9;
     public override string Title => "Mindcrafter";
     public override int? InstantFearResistanceLevel => 10;

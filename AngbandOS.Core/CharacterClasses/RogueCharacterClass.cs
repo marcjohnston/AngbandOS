@@ -10,6 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class RogueCharacterClass : BaseCharacterClass
 {
     private RogueCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(RogueCharacterClassItemEnhancement);
     public override int ID => 3;
     public override bool CanBackstab => true;
     public override string Title => "Rogue";

@@ -14,6 +14,7 @@ internal abstract class BaseCharacterClass : IGetKey
     {
         Game = game;
     }
+    protected abstract string EnhancementBindingKey { get; }
 
     public virtual Bonuses? GetBonusesForMeleeWeapon(Item? oPtr) => null;
 
@@ -368,6 +369,7 @@ internal abstract class BaseCharacterClass : IGetKey
     /// <returns></returns>
 
     public string GetKey => Key;
+    public ItemEnhancement Enhancement { get; private set; }
     public void Bind()
     {
         List<ItemFactory> outfitItemFactories = new();
@@ -378,6 +380,23 @@ internal abstract class BaseCharacterClass : IGetKey
         OutfitItemFactories = outfitItemFactories.ToArray();
         ItemActions = Game.SingletonRepository.GetNullable<ItemAction>(ItemActionNames);
         MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);
+        Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
+        //        foreach (string ability in new string[] { "Strength", "Charisma", "Constitution", "Wisdom", "Intelligence", "Dexterity" })
+        //        {
+        //            string? property = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\CharacterClassAbilities\", $"{GetType().Name}{ability}Ability", "Bonus =>");
+        //            if (property is null)
+        //                throw new Exception();
+        //            property = $"    public override string Bonus{ability}RollExpression => \"{property.Split("=>")[1].Split(";")[0].Trim()}\";";
+        //            string newProperty = @$"
+        //namespace AngbandOS.GamePacks.Cthangband;
+
+        //[Serializable]
+        //public class {GetType().Name}ItemEnhancement : ItemEnhancementGameConfiguration
+        //{{
+        //}}
+        //";
+        //            Game.PasteProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements\", $"{GetType().Name}ItemEnhancement", property, newProperty);
+        //        }
     }
 
     /// <summary>

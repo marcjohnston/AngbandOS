@@ -10,6 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class WarriorMageCharacterClass : BaseCharacterClass
 {
     private WarriorMageCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(WarriorMageCharacterClassItemEnhancement);
     public override int ID => 6;
     public override string Title => "Warrior-Mage";
     public override int BaseDisarmBonus => 30;

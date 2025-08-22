@@ -10,6 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class FanaticCharacterClass : BaseCharacterClass
 {
     private FanaticCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(FanaticCharacterClassItemEnhancement);
     public override int ID => 7;
     public override string Title => "Fanatic";
     public override int? InstantFearResistanceLevel => 40;

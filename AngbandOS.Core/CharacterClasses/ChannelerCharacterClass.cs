@@ -10,6 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class ChannelerCharacterClass : BaseCharacterClass
 {
     private ChannelerCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(ChannelerCharacterClassItemEnhancement);
     public override int ID => 13;
     public override string Title => "Channeler";
     public override int BaseDisarmBonus => 40;

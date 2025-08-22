@@ -10,6 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class HighMageCharacterClass : BaseCharacterClass
 {
     private HighMageCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(HighMageCharacterClassItemEnhancement);
     public override int ID => 10;
     public override int FriendsUpkeepDivider => 12;
     public override string Title => "High-Mage";

@@ -54,9 +54,11 @@ internal class Game
     //    return null;
     //}
 
-    //public void PasteProperty(string folder, string filename, string text)
+    //public void PasteProperty(string folder, string filename, string text, string newProperty)
     //{
     //    string path = Path.Combine(folder, $"{filename}.cs");
+    //    if (!File.Exists(path))
+    //        File.WriteAllText(path, newProperty);
     //    List<string> lines = File.ReadAllLines(path).ToList();
     //    if (!lines.Any(_l => _l.Contains($"class {filename}")))
     //        throw new Exception("");
@@ -72,7 +74,7 @@ internal class Game
     //    }
     //    throw new Exception("");
     //}
-
+    public EffectivePropertySet EffectivePropertySet;
     public int EnchantBonus(int bonus)
     {
         do

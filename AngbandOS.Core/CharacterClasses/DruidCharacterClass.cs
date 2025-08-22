@@ -10,6 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class DruidCharacterClass : BaseCharacterClass
 {
     private DruidCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(DruidCharacterClassItemEnhancement);
     public override int ID => 11;
     public override string Title => "Druid";
     public override int BaseDisarmBonus => 30;

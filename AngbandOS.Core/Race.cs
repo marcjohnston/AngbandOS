@@ -28,18 +28,10 @@ internal abstract class Race : IGetKey
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
-        //foreach (string ability in new string[] {"Strength", "Charisma", "Constitution", "Wisdom", "Intelligence", "Dexterity" })
-        //{
-        //    string? property = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\RaceAbilities\", $"{GetType().Name}{ability}Ability", "Bonus =>");
-        //    if (property is null)
-        //        throw new Exception();
-        //    property = $"    public override string Bonus{ability}RollExpression => \"{property.Split("=>")[1].Split(";")[0].Trim()}\";";
-        //    Game.PasteProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements\", $"{GetType().Name}ItemEnhancement", property);
-        //}
     }
 
     protected abstract string EnhancementBindingKey { get; }
-    protected ItemEnhancement Enhancement { get; private set; }
+    public ItemEnhancement Enhancement { get; private set; }
 
     public abstract int AgeRange { get; }
     public abstract int BaseAge { get; }

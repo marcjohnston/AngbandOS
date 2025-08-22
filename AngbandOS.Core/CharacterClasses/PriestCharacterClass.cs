@@ -10,6 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class PriestCharacterClass : BaseCharacterClass
 {
     private PriestCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(PriestCharacterClassItemEnhancement);
     public override int ID => 2;
     public override string Title => "Priest";
     public override int BaseDisarmBonus => 25;

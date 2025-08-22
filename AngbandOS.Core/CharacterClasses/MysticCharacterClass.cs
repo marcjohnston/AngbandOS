@@ -10,6 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class MysticCharacterClass : BaseCharacterClass
 {
     private MysticCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(MysticCharacterClassItemEnhancement);
     public override int ID => 15;
     public override string Title => "Mystic";
     public override int? InstantSpeedLevel => 10;

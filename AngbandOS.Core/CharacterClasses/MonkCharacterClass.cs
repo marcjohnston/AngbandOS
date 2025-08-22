@@ -10,6 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class MonkCharacterClass : BaseCharacterClass
 {
     private MonkCharacterClass(Game savedGame) : base(savedGame) { }
+    protected override string EnhancementBindingKey => nameof(MonkCharacterClassItemEnhancement);
     public override int ID => 8;
     public override string Title => "Monk";
     public override int? InstantSpeedLevel => 10;

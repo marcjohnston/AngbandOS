@@ -15,6 +15,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private UpdateBonusesFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
+        Game.EffectivePropertySet = new EffectivePropertySet();
+        Game.EffectivePropertySet.AddEnhancement(Game.Race.Enhancement.GenerateItemCharacteristics());
+        Game.EffectivePropertySet.AddEnhancement(Game.BaseCharacterClass.Enhancement.GenerateItemCharacteristics());
+
         List<Bonuses> bonusesToMerge = new List<Bonuses>();
         int baseArmorClass = 0;
         int attackBonus = 0;
@@ -177,6 +181,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
+                    Game.EffectivePropertySet.AddEnhancement(oPtr.EffectivePropertySet.ToReadOnly());
+
                     Game.StrengthAbility.Bonus += oPtr.EffectivePropertySet.BonusStrength;
                     Game.IntelligenceAbility.Bonus += oPtr.EffectivePropertySet.BonusIntelligence;
                     Game.WisdomAbility.Bonus += oPtr.EffectivePropertySet.BonusWisdom;
