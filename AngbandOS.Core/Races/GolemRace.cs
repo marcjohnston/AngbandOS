@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Races;
 internal class GolemRace : Race
 {
     private GolemRace(Game game) : base(game) { }
+    protected override string EnhancementBindingKey => nameof(GolemRaceItemEnhancement);
     public override string Title => "Golem";
     public override int BaseDisarmBonus => -5;
     public override int BaseDeviceBonus => -5;

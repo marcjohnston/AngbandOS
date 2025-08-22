@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Races;
 internal class GnomeRace : Race
 {
     private GnomeRace(Game game) : base(game) { }
+    protected override string EnhancementBindingKey => nameof(GnomeRaceItemEnhancement);
     public override string Title => "Gnome";
     public override int BaseDisarmBonus => 10;
     public override int BaseDeviceBonus => 12;

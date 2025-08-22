@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Races;
 internal class VampireRace : Race
 {
     private VampireRace(Game game) : base(game) { }
+    protected override string EnhancementBindingKey => nameof(VampireRaceItemEnhancement);
     public override string Title => "Vampire";
     public override int BaseDisarmBonus => 4;
     public override int BaseDeviceBonus => 10;

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Races;
 internal class YeekRace : Race
 {
     private YeekRace(Game game) : base(game) { }
+    protected override string EnhancementBindingKey => nameof(YeekRaceItemEnhancement);
     public override string Title => "Yeek";
     public override int BaseDisarmBonus => 2;
     public override int BaseDeviceBonus => 4;

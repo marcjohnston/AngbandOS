@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Races;
 internal class DwarfRace : Race
 {
     private DwarfRace(Game game) : base(game) { }
+    protected override string EnhancementBindingKey => nameof(DwarfRaceItemEnhancement);
     public override string Title => "Dwarf";
     public override int BaseDisarmBonus => 2;
     public override int BaseDeviceBonus => 9;

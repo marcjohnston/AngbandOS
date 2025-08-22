@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Races;
 internal class ImpRace : Race
 {
     private ImpRace(Game game) : base(game) { }
+    protected override string EnhancementBindingKey => nameof(ImpRaceItemEnhancement);
     public override string Title => "Imp";
     public override int BaseDisarmBonus => -3;
     public override int BaseDeviceBonus => 2;

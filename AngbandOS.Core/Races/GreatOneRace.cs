@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Races;
 internal class GreatOneRace : Race
 {
     private GreatOneRace(Game game) : base(game) { }
+    protected override string EnhancementBindingKey => nameof(GreatOneRaceItemEnhancement);
     public override string Title => "Great One";
     public override int BaseDisarmBonus => 4;
     public override int BaseDeviceBonus => 5;

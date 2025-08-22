@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Races;
 internal class MindFlayerRace : Race
 {
     private MindFlayerRace(Game game) : base(game) { }
+    protected override string EnhancementBindingKey => nameof(MindFlayerRaceItemEnhancement);
     public override string Title => "Mind Flayer";
     public override int BaseDisarmBonus => 10;
     public override int BaseDeviceBonus => 25;

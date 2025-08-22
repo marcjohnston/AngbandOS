@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Races;
 internal class MiriNigriRace : Race
 {
     private MiriNigriRace(Game game) : base(game) { }
+    protected override string EnhancementBindingKey => nameof(MiriNigriRaceItemEnhancement);
     public override string Title => "Miri Nigri";
     public override int BaseDisarmBonus => -5;
     public override int BaseDeviceBonus => -2;

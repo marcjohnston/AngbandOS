@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Races;
 internal class CyclopsRace : Race
 {
     private CyclopsRace(Game game) : base(game) { }
+    protected override string EnhancementBindingKey => nameof(CyclopsRaceItemEnhancement);
     public override string Title => "Cyclops";
     public override int BaseDisarmBonus => -4;
     public override int BaseDeviceBonus => -5;

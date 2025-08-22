@@ -27,7 +27,11 @@ internal abstract class Race : IGetKey
     {
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
+        Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
     }
+
+    protected abstract string EnhancementBindingKey { get; }
+    protected ItemEnhancement Enhancement { get; private set; }
 
     public abstract int AgeRange { get; }
     public abstract int BaseAge { get; }

@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Races;
 internal class TchoTchoRace : Race
 {
     private TchoTchoRace(Game game) : base(game) { }
+    protected override string EnhancementBindingKey => nameof(TchoTchoRaceItemEnhancement);
     public override string Title => "Tcho-Tcho";
     public override int BaseDisarmBonus => -2;
     public override int BaseDeviceBonus => -10;
