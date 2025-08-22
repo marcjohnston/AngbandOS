@@ -15,10 +15,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 {
     #region API
     private readonly Game Game;
-    public ItemEnhancement(Game game) // Used by ItemFactory and FixedArtifacts // TODO: Delete
-    {
-        Game = game;
-    }
 
     public ItemEnhancement(Game game, ItemEnhancementGameConfiguration itemEnhancementGameConfiguration)
     {

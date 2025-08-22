@@ -14,7 +14,7 @@ namespace AngbandOS.Core;
 internal sealed class ItemFactory : IGetKey, IToJson
 {
     private readonly Game Game;
-    private string? ItemEnhancementBindingKey { get; } = null;
+    private string ItemEnhancementBindingKey { get; }
 
     /// <summary>
     /// Represents the enhancements to apply to items created by this factory.
@@ -402,9 +402,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     }
     public void Bind()
     {
-        // TODO: We require an object but not from the game config
-        ItemEnhancement? nullableItemEnhancement = Game.SingletonRepository.GetNullable<ItemEnhancement>(ItemEnhancementBindingKey);
-        ItemEnhancement = nullableItemEnhancement ?? new ItemEnhancement(Game);
+        ItemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
 
         //// Cut and paste
         //string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override ColorEnum Color => ");
