@@ -11,22 +11,22 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Game
 {
-    //public string Find(string folder, string key)
+    //public string Find(string folder, string filename)
     //{
-    //    string path = Path.Combine(folder, $"{key}.cs");
+    //    string path = Path.Combine(folder, $"{filename}.cs");
     //    if (File.Exists(path))
     //        return path;
     //    foreach (string subfolder in Directory.GetDirectories(folder))
     //    {
-    //        path = Path.Combine(subfolder, $"{key}.cs");
+    //        path = Path.Combine(subfolder, $"{filename}.cs");
     //        if (File.Exists(path))
     //            return path;
     //    }
     //    throw new Exception("");
     //}
-    //public string? CutProperty(string folder, string key, string text)
+    //public string? CutProperty(string folder, string filename, string text)
     //{
-    //    string path = Find(folder, key);
+    //    string path = Find(folder, filename);
     //    List<string> lines = File.ReadAllLines(path).ToList();
     //    foreach (string line in lines)
     //    {
@@ -39,12 +39,26 @@ internal class Game
     //    }
     //    return null;
     //}
-
-    //public void PasteProperty(string folder, string key, string text)
+    //public string? GetProperty(string folder, string filename, string text)
     //{
-    //    string path = Path.Combine(folder, $"{key}.cs");
+    //    string path = Find(folder, filename);
     //    List<string> lines = File.ReadAllLines(path).ToList();
-    //    if (!lines.Any(_l => _l.Contains($"class {key}")))
+    //    foreach (string line in lines)
+    //    {
+    //        if (line.Contains(text))
+    //        {
+    //            lines.Remove(line);
+    //            return line;
+    //        }
+    //    }
+    //    return null;
+    //}
+
+    //public void PasteProperty(string folder, string filename, string text)
+    //{
+    //    string path = Path.Combine(folder, $"{filename}.cs");
+    //    List<string> lines = File.ReadAllLines(path).ToList();
+    //    if (!lines.Any(_l => _l.Contains($"class {filename}")))
     //        throw new Exception("");
     //    for (int i = lines.Count - 1; i >= 0; i--)
     //    {
