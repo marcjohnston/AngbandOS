@@ -165,14 +165,6 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.XtraMight);
         RegisterBoolPropertyFactory(AttributeEnum.XtraShots);
 
-        // Generate a writable property values.
-        _writeProperties = new AttributeValue[_propertyFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _propertyFactories)
-        {
-            int index = (int)itemPropertyFactory.Index;
-            _writeProperties[index] = itemPropertyFactory.Instantiate();
-        }
-
         // Generate the override property values.
         _overrideProperties = new AttributeValue[_propertyFactories.Length];
         foreach (AttributeFactory itemPropertyFactory in _propertyFactories)
@@ -182,7 +174,6 @@ internal class EffectiveAttributeSet
         }
     }
     private Dictionary<string, List<ReadOnlyAttributeSet>> _enhancements = new Dictionary<string, List<ReadOnlyAttributeSet>>();
-    private AttributeValue[] _writeProperties;
     private AttributeValue[] _overrideProperties;
 
     /// <summary>
@@ -201,14 +192,6 @@ internal class EffectiveAttributeSet
             {
                 effectivePropertySet.AddEnhancement(enhancement.Key, readOnlyPropertySet);
             }
-        }
-
-        // Clone the writable properties.
-        effectivePropertySet._writeProperties = new AttributeValue[_propertyFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _propertyFactories)
-        {
-            int index = (int)itemPropertyFactory.Index;
-            effectivePropertySet._writeProperties[index] = _writeProperties[index].Clone();
         }
 
         // Clone the override properties.
@@ -311,9 +294,6 @@ internal class EffectiveAttributeSet
             }
         }
 
-        // Merge the writable enhancements.
-        itemProperty = itemProperty.Merge(_writeProperties[index]);
-
         // Override the enhancements.
         itemProperty = itemProperty.Merge(_overrideProperties[index]);
 
@@ -358,15 +338,12 @@ internal class EffectiveAttributeSet
         // Retrieve the index for the property.
         int index = (int)propertyEnum;
 
-        _writeProperties[index] = propertyValue;
+        _overrideProperties[index] = propertyValue;
     }
 
     public void SetReferenceValue<T>(AttributeEnum propertyEnum, T? propertyValue) where T : class
     {
-        // Retrieve the index for the property.
-        int index = (int)propertyEnum;
-
-        _writeProperties[index] = new NullableReferenceAttributeValue<T>(propertyValue);
+        SetValue(propertyEnum, new NullableReferenceAttributeValue<T>(propertyValue));
     }
 
     public void SetIntValue(AttributeEnum propertyEnum, int value)
