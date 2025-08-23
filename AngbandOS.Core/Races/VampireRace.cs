@@ -36,7 +36,7 @@ internal class VampireRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 2 ? "drain life         (racial, unusable until level 2)" : "drain life         (racial, cost 1 + lvl/3, based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectivePropertySet itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
         itemCharacteristics.HoldLife = true;
         itemCharacteristics.ResDark = true;

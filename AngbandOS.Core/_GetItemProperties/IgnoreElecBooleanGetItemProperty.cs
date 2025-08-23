@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class IgnoreElecBooleanGetItemProperty : GetItemProperty<bool>
 {
     public IgnoreElecBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(EffectivePropertySet.IgnoreElec);
+    public override string DebugDescription => nameof(EffectiveAttributeSet.IgnoreElec);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.IgnoreElec;

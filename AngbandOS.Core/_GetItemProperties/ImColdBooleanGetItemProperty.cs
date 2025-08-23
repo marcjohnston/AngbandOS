@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class ImColdBooleanGetItemProperty : GetItemProperty<bool>
 {
     public ImColdBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(EffectivePropertySet.ImCold);
+    public override string DebugDescription => nameof(EffectiveAttributeSet.ImCold);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.ImCold;

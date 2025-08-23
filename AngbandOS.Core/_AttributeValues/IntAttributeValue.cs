@@ -7,31 +7,31 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class IntPropertyValue : PropertyValue
+internal class IntAttributeValue : AttributeValue
 {
     public int Value { get; set; }
-    public IntPropertyValue(int value)
+    public IntAttributeValue(int value)
     {
         Value = value;
     }
-    public override PropertyValue Clone() => new IntPropertyValue(Value);
+    public override AttributeValue Clone() => new IntAttributeValue(Value);
 
-    public override PropertyValue Merge(PropertyValue itemProperty)
+    public override AttributeValue Merge(AttributeValue itemProperty)
     {
-        if (itemProperty is IntPropertyValue intPropertyValue)
+        if (itemProperty is IntAttributeValue intPropertyValue)
         {
-            return new IntPropertyValue(Value + intPropertyValue.Value);
+            return new IntAttributeValue(Value + intPropertyValue.Value);
         }
-        else if (itemProperty is NullableIntPropertyValue nullableIntPropertyValue)
+        else if (itemProperty is NullableIntAttributeValue nullableIntPropertyValue)
         {
-            return new IntPropertyValue(nullableIntPropertyValue.Value.HasValue ? nullableIntPropertyValue.Value.Value : Value);
+            return new IntAttributeValue(nullableIntPropertyValue.Value.HasValue ? nullableIntPropertyValue.Value.Value : Value);
         }
         throw new Exception("Merge mismatch.");
     }
 
-    public override bool IsEqual(PropertyValue itemProperty)
+    public override bool IsEqual(AttributeValue itemProperty)
     {
-        if (itemProperty is IntPropertyValue intPropertyValue)
+        if (itemProperty is IntAttributeValue intPropertyValue)
         {
             return Value == intPropertyValue.Value;
         }

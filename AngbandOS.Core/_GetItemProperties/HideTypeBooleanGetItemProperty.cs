@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class HideTypeBooleanGetItemProperty : GetItemProperty<bool>
 {
     public HideTypeBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(EffectivePropertySet.HideType);
+    public override string DebugDescription => nameof(EffectiveAttributeSet.HideType);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.HideType;

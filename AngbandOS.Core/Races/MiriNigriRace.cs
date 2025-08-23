@@ -33,7 +33,7 @@ internal class MiriNigriRace : Race
     /// </summary>
     public override int Chart => 129;
 
-    public override void UpdateRacialAbilities(int level, EffectivePropertySet itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
         itemCharacteristics.ResSound = true;
         itemCharacteristics.ResConf = true;

@@ -7,32 +7,32 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class BoolPropertyValue : PropertyValue
+internal class BoolAttributeValue : AttributeValue
 {
     public bool Value { get; set; }
-    public BoolPropertyValue(bool value)
+    public BoolAttributeValue(bool value)
     {
         Value = value;
     }
 
-    public override PropertyValue Clone() => new BoolPropertyValue(Value);
+    public override AttributeValue Clone() => new BoolAttributeValue(Value);
 
-    public override PropertyValue Merge(PropertyValue itemProperty)
+    public override AttributeValue Merge(AttributeValue itemProperty)
     {
-        if (itemProperty is BoolPropertyValue boolPropertyValue)
+        if (itemProperty is BoolAttributeValue boolPropertyValue)
         {
-            return new BoolPropertyValue(Value || boolPropertyValue.Value);
+            return new BoolAttributeValue(Value || boolPropertyValue.Value);
         }
-        else if (itemProperty is NullableBoolPropertyValue nullableBoolPropertyValue)
+        else if (itemProperty is NullableBoolAttributeValue nullableBoolPropertyValue)
         {
-            return new BoolPropertyValue(nullableBoolPropertyValue.Value.HasValue ? nullableBoolPropertyValue.Value.Value : Value);
+            return new BoolAttributeValue(nullableBoolPropertyValue.Value.HasValue ? nullableBoolPropertyValue.Value.Value : Value);
         }
         throw new Exception("Merge mismatch.");
     }
 
-    public override bool IsEqual(PropertyValue itemProperty)
+    public override bool IsEqual(AttributeValue itemProperty)
     {
-        if (itemProperty is BoolPropertyValue boolPropertyValue)
+        if (itemProperty is BoolAttributeValue boolPropertyValue)
         {
             return Value == boolPropertyValue.Value;
         }

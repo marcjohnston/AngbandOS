@@ -7,31 +7,31 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ColorEnumPropertyValue : PropertyValue
+internal class ColorEnumAttributeValue : AttributeValue
 {
     public ColorEnum Value { get; set; }
-    public ColorEnumPropertyValue(ColorEnum value)
+    public ColorEnumAttributeValue(ColorEnum value)
     {
         Value = value;
     }
-    public override PropertyValue Clone() => new ColorEnumPropertyValue(Value);
+    public override AttributeValue Clone() => new ColorEnumAttributeValue(Value);
 
-    public override PropertyValue Merge(PropertyValue itemProperty)
+    public override AttributeValue Merge(AttributeValue itemProperty)
     {
-        if (itemProperty is ColorEnumPropertyValue colorEnumPropertyValue)
+        if (itemProperty is ColorEnumAttributeValue colorEnumPropertyValue)
         {
-            return new ColorEnumPropertyValue(colorEnumPropertyValue.Value);
+            return new ColorEnumAttributeValue(colorEnumPropertyValue.Value);
         }
         else if (itemProperty is NullableColorEnumPropertyValue nullableColorEnumPropertyValue)
         {
-            return new ColorEnumPropertyValue(nullableColorEnumPropertyValue.Value.HasValue ? nullableColorEnumPropertyValue.Value.Value : Value);
+            return new ColorEnumAttributeValue(nullableColorEnumPropertyValue.Value.HasValue ? nullableColorEnumPropertyValue.Value.Value : Value);
         }
         throw new Exception("Merge mismatch.");
     }
 
-    public override bool IsEqual(PropertyValue itemProperty)
+    public override bool IsEqual(AttributeValue itemProperty)
     {
-        if (itemProperty is ColorEnumPropertyValue colorEnumPropertyValue)
+        if (itemProperty is ColorEnumAttributeValue colorEnumPropertyValue)
         {
             return Value == colorEnumPropertyValue.Value;
         }

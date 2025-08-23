@@ -12,7 +12,7 @@ internal class MageArtifactBias : ArtifactBias
     private MageArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Mages";
 
-    public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
+    public override bool ApplyRandomArtifactBonuses(EffectiveAttributeSet characteristics)
     {
         if (characteristics.BonusIntelligence == 0)
         {

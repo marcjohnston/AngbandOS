@@ -232,7 +232,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
                 else
                 {
                     // Only extract known bonuses, not full bonuses
-                    EffectivePropertySet itemCharacteristics = item.ObjectFlagsKnown();
+                    EffectiveAttributeSet itemCharacteristics = item.ObjectFlagsKnown();
                     ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.BonusStrength > 0, item.EffectivePropertySet.BonusStrength, row + 0, col);
                     ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.BonusIntelligence > 0, item.EffectivePropertySet.BonusIntelligence, row + 1, col);
                     ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.BonusWisdom > 0, item.EffectivePropertySet.BonusWisdom, row + 2, col);
@@ -244,7 +244,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
             }
         }
 
-        EffectivePropertySet playerCharacteristics = Game.GetAbilitiesAsItemFlags();
+        EffectiveAttributeSet playerCharacteristics = Game.GetAbilitiesAsItemFlags();
         DisplayPlayerStatWithModification(playerCharacteristics.BonusStrength, row + 0, col);
         DisplayPlayerStatWithModification(playerCharacteristics.BonusIntelligence, row + 1, col);
         DisplayPlayerStatWithModification(playerCharacteristics.BonusWisdom, row + 2, col);

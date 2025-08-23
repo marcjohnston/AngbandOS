@@ -11,22 +11,22 @@ namespace AngbandOS.Core;
 /// operations are handled.
 /// </summary>
 [Serializable]
-internal abstract class PropertyValue
+internal abstract class AttributeValue
 {
     /// <summary>
     /// Returns a new instance of the item property with a copy/clone of the value.
     /// </summary>
     /// <returns></returns>
-    public abstract PropertyValue Clone();
+    public abstract AttributeValue Clone();
 
-    public abstract PropertyValue Merge(PropertyValue itemProperty);
+    public abstract AttributeValue Merge(AttributeValue itemProperty);
 
-    public abstract bool IsEqual(PropertyValue itemProperty);
+    public abstract bool IsEqual(AttributeValue itemProperty);
 
     #region Equality
     public override bool Equals(object? obj)
     {
-        if (obj is not PropertyValue other)
+        if (obj is not AttributeValue other)
         {
             return false;
         }
@@ -34,7 +34,7 @@ internal abstract class PropertyValue
         return IsEqual(other);
     }
 
-    public static bool operator ==(PropertyValue? left, PropertyValue? right)
+    public static bool operator ==(AttributeValue? left, AttributeValue? right)
     {
         if (ReferenceEquals(left, right))
         {
@@ -48,7 +48,7 @@ internal abstract class PropertyValue
         return left.Equals(right);
     }
 
-    public static bool operator !=(PropertyValue? left, PropertyValue? right)
+    public static bool operator !=(AttributeValue? left, AttributeValue? right)
     {
         return !(left == right);
     }

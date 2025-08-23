@@ -37,7 +37,7 @@ internal class DraconianRace : Race
     protected override string? RacialPowerScriptBindingKey => nameof(DraconianRacialPowerScript);
     public override bool HasRacialPowers => true;
 
-    public override void UpdateRacialAbilities(int level, EffectivePropertySet itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
         itemCharacteristics.Feather = true;
         if (level > 4)

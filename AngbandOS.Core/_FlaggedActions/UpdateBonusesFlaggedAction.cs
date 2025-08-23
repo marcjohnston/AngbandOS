@@ -15,7 +15,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private UpdateBonusesFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        Game.EffectivePropertySet = new EffectivePropertySet();
+        Game.EffectivePropertySet = new EffectiveAttributeSet();
         Game.EffectivePropertySet.AddEnhancement(Game.Race.Enhancement.GenerateItemCharacteristics());
         Game.EffectivePropertySet.AddEnhancement(Game.BaseCharacterClass.Enhancement.GenerateItemCharacteristics());
 

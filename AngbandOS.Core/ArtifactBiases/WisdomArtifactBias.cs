@@ -12,7 +12,7 @@ internal class WisdomArtifactBias : ArtifactBias
     private WisdomArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Wisdom";
 
-    public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
+    public override bool ApplyRandomArtifactBonuses(EffectiveAttributeSet characteristics)
     {
         if (characteristics.BonusWisdom == 0)
         {
@@ -25,7 +25,7 @@ internal class WisdomArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(EffectivePropertySet characteristics)
+    public override bool ApplyMiscPowers(EffectiveAttributeSet characteristics)
     {
         if (!characteristics.SustWis)
         {

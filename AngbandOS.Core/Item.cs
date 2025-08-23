@@ -1533,11 +1533,11 @@ internal sealed class Item : IComparable<Item>
 
     public bool IsRare => EffectivePropertySet.HasKeyedItemEnhancements("rare");
 
-    public EffectivePropertySet ObjectFlagsKnown()
+    public EffectiveAttributeSet ObjectFlagsKnown()
     {
         if (!IsKnown())
         {
-            return new EffectivePropertySet();
+            return new EffectiveAttributeSet();
         }
         return EffectivePropertySet;
     }
@@ -2059,7 +2059,7 @@ internal sealed class Item : IComparable<Item>
         }
 
         // Check to see if we found an applicable mapped item enhancement and check to see if there are any attached item enhancements.
-        EffectivePropertySet fixedArtifactItemPropertySet = new EffectivePropertySet();
+        EffectiveAttributeSet fixedArtifactItemPropertySet = new EffectiveAttributeSet();
         if (mappedItemEnhancement is not null && mappedItemEnhancement.ItemEnhancements is not null)
         {
             // Merge all of the applicable item enhancements.
@@ -2237,7 +2237,7 @@ internal sealed class Item : IComparable<Item>
     public bool CreateRandomArtifact(bool fromScroll)
     {
         // Create a set of random artifact characteristics.
-        ReadOnlyPropertySet randomArtifactPropertySet = _factory.CreateRandomArtifact(this, fromScroll);
+        ReadOnlyAttributeSet randomArtifactPropertySet = _factory.CreateRandomArtifact(this, fromScroll);
         EffectivePropertySet.AddEnhancement("random", randomArtifactPropertySet);
 
         ActivationRechargeTimeRemaining = 0; // TODO: If the item already had activation running, the conversion could change it? and restart the recharge?
@@ -2342,8 +2342,8 @@ internal sealed class Item : IComparable<Item>
 
         // Generate the read-only item characteristics from the factory.
         _factory = factory;
-        EffectivePropertySet = new EffectivePropertySet();
-        ReadOnlyPropertySet factoryPropertySet = factory.ItemEnhancement.GenerateItemCharacteristics();
+        EffectivePropertySet = new EffectiveAttributeSet();
+        ReadOnlyAttributeSet factoryPropertySet = factory.ItemEnhancement.GenerateItemCharacteristics();
         EffectivePropertySet.AddEnhancement("factory", factoryPropertySet);
 
         StackCount = 1;
@@ -2373,7 +2373,7 @@ internal sealed class Item : IComparable<Item>
     #region Item Properties Management
     public FixedArtifact? FixedArtifact = null;
 
-    public EffectivePropertySet EffectivePropertySet;
+    public EffectiveAttributeSet EffectivePropertySet;
 
     /// <summary>
     /// Returns the factory that created this item.  All of the initial state data is retrieved from the <see cref="ItemFactory"/>when the <see cref="Item"/> is created.  We preserve this <see cref="ItemFactory"/>
@@ -2403,7 +2403,7 @@ internal sealed class Item : IComparable<Item>
             // Check to see if we are enchanting a cursed or broken item.
             int goodBadMultiplier = EffectivePropertySet.IsCursed || IsBroken ? -1 : 1;
 
-            EffectivePropertySet? rareItemEffectivePropertySet = new EffectivePropertySet();
+            EffectiveAttributeSet? rareItemEffectivePropertySet = new EffectiveAttributeSet();
             rareItemEffectivePropertySet.AddEnhancement(rareItem.GenerateItemCharacteristics());
 
             // If the rare item has no value, consider it broken.

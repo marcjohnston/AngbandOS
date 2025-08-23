@@ -989,10 +989,10 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// </summary>
     public bool CanBeRead => ReadTuple != null;
 
-    public ReadOnlyPropertySet CreateRandomArtifact(Item item, bool fromScroll)
+    public ReadOnlyAttributeSet CreateRandomArtifact(Item item, bool fromScroll)
     {
 
-        void ApplyRandomBonuses(EffectivePropertySet characteristics)
+        void ApplyRandomBonuses(EffectiveAttributeSet characteristics)
         {
             if (characteristics.ArtifactBias != null)
             {
@@ -1135,7 +1135,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             }
         }
 
-        void CurseRandart(EffectivePropertySet characteristics)
+        void CurseRandart(EffectiveAttributeSet characteristics)
         {
             if (characteristics.BonusStrength != 0)
             {
@@ -1230,7 +1230,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             characteristics.IsCursed = true;
         }
 
-        void ApplyMiscPowerForRandomArtifactCreation(EffectivePropertySet characteristics)
+        void ApplyMiscPowerForRandomArtifactCreation(EffectiveAttributeSet characteristics)
         {
             if (characteristics.ArtifactBias != null)
             {
@@ -1375,7 +1375,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             }
         }
 
-        void ApplySlayingForRandomArtifactCreation(Item item, EffectivePropertySet characteristics)
+        void ApplySlayingForRandomArtifactCreation(Item item, EffectiveAttributeSet characteristics)
         {
             /// <summary>
             /// Apply slaying to the item and returns true, if additional slaying can applied.  By default, no slaying is applied and false is returned.
@@ -1407,7 +1407,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         /// Loops through an array of item tests and enhancements and based on the probability of the test, applies its associated item enhancement and returns true, if an enhancement
         /// was applied.  If all of the tests fail, false is returned.
         /// </summary>
-        bool ApplyTestsAndItemEnhancements(Item item, EffectivePropertySet characteristics, (ItemFilter, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? testsAndItemEnhancements)
+        bool ApplyTestsAndItemEnhancements(Item item, EffectiveAttributeSet characteristics, (ItemFilter, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? testsAndItemEnhancements)
         {
             if (testsAndItemEnhancements != null)
             {
@@ -1431,7 +1431,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             return false;
         }
 
-        EffectivePropertySet characteristics = new EffectivePropertySet();
+        EffectiveAttributeSet characteristics = new EffectiveAttributeSet();
         const int ArtifactCurseChance = 13;
         int powers = Game.DieRoll(5) + 1;
         bool aCursed = false;

@@ -36,7 +36,7 @@ internal class HalfGiantRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 20 ? "stone to mud       (racial, unusable until level 20)" : "stone to mud       (racial, cost 10, STR based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectivePropertySet itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
         itemCharacteristics.ResShards = true;
         itemCharacteristics.SustStr = true;

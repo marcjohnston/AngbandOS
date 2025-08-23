@@ -12,7 +12,7 @@ internal class IntelligenceArtifactBias : ArtifactBias
     private IntelligenceArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Intelligence";
 
-    public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
+    public override bool ApplyRandomArtifactBonuses(EffectiveAttributeSet characteristics)
     {
         if (characteristics.BonusIntelligence == 0)
         {
@@ -25,7 +25,7 @@ internal class IntelligenceArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(EffectivePropertySet characteristics)
+    public override bool ApplyMiscPowers(EffectiveAttributeSet characteristics)
     {
         if (!characteristics.SustInt)
         {

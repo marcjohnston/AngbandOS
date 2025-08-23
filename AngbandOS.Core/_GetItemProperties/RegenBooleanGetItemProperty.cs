@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class RegenBooleanGetItemProperty : GetItemProperty<bool>
 {
     public RegenBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(EffectivePropertySet.Regen);
+    public override string DebugDescription => nameof(EffectiveAttributeSet.Regen);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.Regen;

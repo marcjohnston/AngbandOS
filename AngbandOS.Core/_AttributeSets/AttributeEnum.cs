@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal enum PropertyEnum
+internal enum AttributeEnum
 {
     CanApplyBlessedArtifactBias,
     CanApplyArtifactBiasSlaying,

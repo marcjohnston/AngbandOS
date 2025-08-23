@@ -7,33 +7,33 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class NullableBoolPropertyValue : NullablePropertyValue
+internal class NullableBoolAttributeValue : NullableAttributeValue
 {
     public bool? Value { get; set; }
 
     public override bool IsSet => Value.HasValue;
 
-    public override PropertyValue Clone() => new NullableBoolPropertyValue(Value);
-    public override PropertyValue Merge(PropertyValue itemProperty)
+    public override AttributeValue Clone() => new NullableBoolAttributeValue(Value);
+    public override AttributeValue Merge(AttributeValue itemProperty)
     {
         throw new Exception("Merge mismatch."); // This isn't needed because we will never merge from the nullable version.
     }
-    public override bool IsEqual(PropertyValue itemProperty)
+    public override bool IsEqual(AttributeValue itemProperty)
     {
-        if (itemProperty is NullableBoolPropertyValue nullableBoolPropertyValue)
+        if (itemProperty is NullableBoolAttributeValue nullableBoolPropertyValue)
         {
             return Value == nullableBoolPropertyValue.Value;
         }
         throw new Exception("IsEqual mismatch.");
     }
 
-    public override void Set(PropertyValue? propertyValue)
+    public override void Set(AttributeValue? propertyValue)
     {
         if (propertyValue is null)
         {
             Value = null;
         }
-        else if (propertyValue is BoolPropertyValue boolPropertyValue)
+        else if (propertyValue is BoolAttributeValue boolPropertyValue)
         {
             Value = boolPropertyValue.Value;
         }
@@ -43,7 +43,7 @@ internal class NullableBoolPropertyValue : NullablePropertyValue
         }
     }
 
-    public NullableBoolPropertyValue(bool? value)
+    public NullableBoolAttributeValue(bool? value)
     {
         Value = value;
     }

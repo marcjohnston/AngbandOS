@@ -12,7 +12,7 @@ internal class StrengthArtifactBias : ArtifactBias
     private StrengthArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Strength";
 
-    public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
+    public override bool ApplyRandomArtifactBonuses(EffectiveAttributeSet characteristics)
     {
         if (characteristics.BonusStrength == 0)
         {
@@ -25,7 +25,7 @@ internal class StrengthArtifactBias : ArtifactBias
         return false;
     }
 
-    public override bool ApplyMiscPowers(EffectivePropertySet characteristics)
+    public override bool ApplyMiscPowers(EffectiveAttributeSet characteristics)
     {
         if (!characteristics.SustStr)
         {

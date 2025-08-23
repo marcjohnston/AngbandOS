@@ -74,7 +74,7 @@ internal class Game
     //    }
     //    throw new Exception("");
     //}
-    public EffectivePropertySet EffectivePropertySet;
+    public EffectiveAttributeSet EffectivePropertySet;
     public int EnchantBonus(int bonus)
     {
         do
@@ -6693,8 +6693,8 @@ internal class Game
             item.EffectivePropertySet.BonusHits = 0;
             item.EffectivePropertySet.BonusDamage = 0;
             item.ArmorClass = 0;
-            item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DamageDice, 0);
-            item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DiceSides , 0);
+            item.EffectivePropertySet.OverrideIntValue(AttributeEnum.DamageDice, 0);
+            item.EffectivePropertySet.OverrideIntValue(AttributeEnum.DiceSides , 0);
             item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
             item.IsBroken = true;
@@ -6733,8 +6733,8 @@ internal class Game
             item.EffectivePropertySet.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusArmorClass = 0;
             item.ArmorClass = 0;
-            item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DamageDice, 0);
-            item.EffectivePropertySet.OverrideIntValue(PropertyEnum.DiceSides, 0);
+            item.EffectivePropertySet.OverrideIntValue(AttributeEnum.DamageDice, 0);
+            item.EffectivePropertySet.OverrideIntValue(AttributeEnum.DiceSides, 0);
             item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
             item.IsBroken = true;
@@ -13560,9 +13560,9 @@ internal class Game
         CheckExperience();
     }
 
-    public EffectivePropertySet GetAbilitiesAsItemFlags()
+    public EffectiveAttributeSet GetAbilitiesAsItemFlags()
     {
-        EffectivePropertySet itemCharacteristics = new EffectivePropertySet();
+        EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet();
         if (BaseCharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFearResistanceLevel)
         {
             itemCharacteristics.ResFear = true;

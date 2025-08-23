@@ -24,7 +24,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
     {
         int infoCount = 0;
         string[] info = new string[128];
-        EffectivePropertySet inventoryCharacteristics = new EffectivePropertySet();
+        EffectiveAttributeSet inventoryCharacteristics = new EffectiveAttributeSet();
         for (int k = InventorySlotEnum.MeleeWeapon; k < InventorySlotEnum.Total; k++)
         {
             Item? oPtr = Game.GetInventoryItem(k);

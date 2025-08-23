@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class ResElecBooleanGetItemProperty : GetItemProperty<bool>
 {
     public ResElecBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(EffectivePropertySet.ResElec);
+    public override string DebugDescription => nameof(EffectiveAttributeSet.ResElec);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.ResElec;

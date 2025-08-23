@@ -6,17 +6,19 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-/// <summary>
-/// Represents a factory for creating an <see cref="PropertyValue"/> property.
-/// </summary>
 [Serializable]
-internal abstract class PropertyFactory
+internal class ReadOnlyAttributeSet
 {
-    public abstract PropertyValue Instantiate();
-    public abstract NullablePropertyValue InstantiateNullable();
-    public readonly PropertyEnum Index;
-    protected PropertyFactory(PropertyEnum index)
+    private AttributeValue[] _properties;
+
+    public AttributeValue GetValue(AttributeEnum propertyEnum)
     {
-        Index = index;
+        int index = (int)propertyEnum;
+        return _properties[index];
+    }
+
+    public ReadOnlyAttributeSet(AttributeValue[] properties)
+    {
+        _properties = properties;
     }
 }

@@ -6,10 +6,17 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents a factory for creating an <see cref="AttributeValue"/> property.
+/// </summary>
 [Serializable]
-internal class IntPropertyFactory : PropertyFactory
+internal abstract class AttributeFactory
 {
-    public override PropertyValue Instantiate() => new IntPropertyValue(0);
-    public override NullablePropertyValue InstantiateNullable() => new NullableIntPropertyValue(null);
-    public IntPropertyFactory(PropertyEnum index) : base(index) { }
+    public abstract AttributeValue Instantiate();
+    public abstract NullableAttributeValue InstantiateNullable();
+    public readonly AttributeEnum Index;
+    protected AttributeFactory(AttributeEnum index)
+    {
+        Index = index;
+    }
 }

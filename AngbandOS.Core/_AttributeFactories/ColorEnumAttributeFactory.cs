@@ -7,18 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ReadOnlyPropertySet
+internal class ColorEnumAttributeFactory : AttributeFactory
 {
-    private PropertyValue[] _properties;
-
-    public PropertyValue GetValue(PropertyEnum propertyEnum)
-    {
-        int index = (int)propertyEnum;
-        return _properties[index];
-    }
-
-    public ReadOnlyPropertySet(PropertyValue[] properties)
-    {
-        _properties = properties;
-    }
+    public override AttributeValue Instantiate() => new ColorEnumAttributeValue(ColorEnum.White);
+    public override NullableAttributeValue InstantiateNullable() => new NullableColorEnumPropertyValue(null);
+    public ColorEnumAttributeFactory(AttributeEnum index) : base(index) { }
 }

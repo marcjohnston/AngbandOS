@@ -12,7 +12,7 @@ internal class WarriorArtifactBias : ArtifactBias
     private WarriorArtifactBias(Game game) : base(game) { }
     public override string AffinityName => "Warriors";
 
-    public override bool ApplyRandomArtifactBonuses(EffectivePropertySet characteristics)
+    public override bool ApplyRandomArtifactBonuses(EffectiveAttributeSet characteristics)
     {
         if (characteristics.BonusStrength == 0)
         {

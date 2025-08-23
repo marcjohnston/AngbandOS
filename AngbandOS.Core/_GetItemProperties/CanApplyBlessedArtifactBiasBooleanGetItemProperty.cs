@@ -4,7 +4,7 @@ internal class CanApplyBlessedArtifactBiasBooleanGetItemProperty : GetItemProper
 {
     public CanApplyBlessedArtifactBiasBooleanGetItemProperty(Game game) : base(game) { }
 
-    public override string DebugDescription => nameof(EffectivePropertySet.CanApplyBlessedArtifactBias);
+    public override string DebugDescription => nameof(EffectiveAttributeSet.CanApplyBlessedArtifactBias);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.CanApplyBlessedArtifactBias;

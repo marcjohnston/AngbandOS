@@ -7,9 +7,8 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class BoolPropertyFactory : PropertyFactory
+internal abstract class NullableAttributeValue : AttributeValue
 {
-    public override PropertyValue Instantiate() => new BoolPropertyValue(false);
-    public override NullablePropertyValue InstantiateNullable() => new NullableBoolPropertyValue(null);
-    public BoolPropertyFactory(PropertyEnum index) : base(index) { } 
+    public abstract bool IsSet { get; }
+    public abstract void Set(AttributeValue? propertyValue);
 }

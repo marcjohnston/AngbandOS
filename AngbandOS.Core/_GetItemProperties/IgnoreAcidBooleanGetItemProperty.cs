@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class IgnoreAcidBooleanGetItemProperty : GetItemProperty<bool>
 {
     public IgnoreAcidBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(EffectivePropertySet.IgnoreAcid);
+    public override string DebugDescription => nameof(EffectiveAttributeSet.IgnoreAcid);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.IgnoreAcid;

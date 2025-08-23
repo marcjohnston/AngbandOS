@@ -33,7 +33,7 @@ internal class ElfRace : Race
     /// </summary>
     public override int Chart => 7;
 
-    public override void UpdateRacialAbilities(int level, EffectivePropertySet itemCharacteristics)
+    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
         itemCharacteristics.ResLight = true;
     }
