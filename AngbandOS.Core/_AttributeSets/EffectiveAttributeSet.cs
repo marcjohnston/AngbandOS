@@ -256,33 +256,33 @@ internal class EffectiveAttributeSet
         _enhancements.Remove(key);
     }
 
-    private void Override(AttributeEnum propertyEnum, AttributeValue? propertyValue)
+    public void OverrideBoolValue(AttributeEnum propertyEnum, bool? value)
     {
         int index = (int)propertyEnum;
-        NullableAttributeValue nullablePropertyValue = (NullableAttributeValue)_overrideProperties[index];
-        nullablePropertyValue.Set(propertyValue);
+        _overrideProperties[index] = new NullableBoolAttributeValue(value.HasValue ? value.Value : null);
     }
 
-    public void OverrideIntValue(AttributeEnum propertyEnum, int value)
+    public void OverrideIntValue(AttributeEnum propertyEnum, int? value)
     {
-        Override(propertyEnum, new IntAttributeValue(value));
+        int index = (int)propertyEnum;
+        _overrideProperties[index] = new NullableIntAttributeValue(value.HasValue ? value.Value : null);
     }
 
     public void ResetCurse()
     {
-        Override(AttributeEnum.IsCursed, null);
+        OverrideBoolValue(AttributeEnum.IsCursed, null);
     }
     public void RemoveCurse()
     {
-        Override(AttributeEnum.IsCursed, new BoolAttributeValue(false));
+        OverrideBoolValue(AttributeEnum.IsCursed, false);
     }
     public void ResetHeavyCurse()
     {
-        Override(AttributeEnum.HeavyCurse, null);
+        OverrideBoolValue(AttributeEnum.HeavyCurse, null);
     }
     public void RemoveHeavyCurse()
     {
-        Override(AttributeEnum.HeavyCurse, new BoolAttributeValue(false));
+        OverrideBoolValue(AttributeEnum.HeavyCurse, false);
     }
 
     public bool HasKeyedItemEnhancements(string key)

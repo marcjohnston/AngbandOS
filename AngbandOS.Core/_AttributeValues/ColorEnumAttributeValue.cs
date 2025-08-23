@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ColorEnumAttributeValue : AttributeValue
 {
-    public ColorEnum Value { get; set; }
+    public ColorEnum Value { get; }
     public ColorEnumAttributeValue(ColorEnum value)
     {
         Value = value;

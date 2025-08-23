@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents the shell for a single item characteristic.  There are 6 variations of item characteristics that determine how the internal data type is defined and how the clone, merge and equals
+/// Represents the shell for an immutable single item attribute.  There are 6 variations of item characteristics that determine how the internal data type is defined and how the clone, merge and equals
 /// operations are handled.
 /// </summary>
 [Serializable]

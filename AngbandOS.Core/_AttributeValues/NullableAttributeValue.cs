@@ -10,5 +10,4 @@ namespace AngbandOS.Core;
 internal abstract class NullableAttributeValue : AttributeValue
 {
     public abstract bool IsSet { get; }
-    public abstract void Set(AttributeValue? propertyValue);
 }

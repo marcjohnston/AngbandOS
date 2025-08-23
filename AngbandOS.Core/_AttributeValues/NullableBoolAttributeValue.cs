@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class NullableBoolAttributeValue : NullableAttributeValue
 {
-    public bool? Value { get; set; }
+    public bool? Value { get; }
 
     public override bool IsSet => Value.HasValue;
 
@@ -25,22 +25,6 @@ internal class NullableBoolAttributeValue : NullableAttributeValue
             return Value == nullableBoolPropertyValue.Value;
         }
         throw new Exception("IsEqual mismatch.");
-    }
-
-    public override void Set(AttributeValue? propertyValue)
-    {
-        if (propertyValue is null)
-        {
-            Value = null;
-        }
-        else if (propertyValue is BoolAttributeValue boolPropertyValue)
-        {
-            Value = boolPropertyValue.Value;
-        }
-        else
-        {
-            throw new Exception("Mismatch set.");
-        }
     }
 
     public NullableBoolAttributeValue(bool? value)

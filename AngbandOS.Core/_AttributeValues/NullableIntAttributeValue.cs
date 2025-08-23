@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class NullableIntAttributeValue : NullableAttributeValue
 {
-    public int? Value { get; set; }
+    public int? Value { get; }
 
     public override bool IsSet => Value.HasValue;
 
@@ -25,22 +25,6 @@ internal class NullableIntAttributeValue : NullableAttributeValue
             return Value == nullableIntPropertyValue.Value;
         }
         throw new Exception("IsEqual mismatch.");
-    }
-
-    public override void Set(AttributeValue propertyValue)
-    {
-        if (propertyValue is null)
-        {
-            Value = null;
-        }
-        else if (propertyValue is IntAttributeValue intPropertyValue)
-        {
-            Value = intPropertyValue.Value;
-        }
-        else
-        {
-            throw new Exception("Mismatch set.");
-        }
     }
 
     public NullableIntAttributeValue(int? value)
@@ -68,22 +52,6 @@ internal class NullableColorEnumPropertyValue : NullableAttributeValue
             return Value == nullableColorEnumPropertyValue.Value;
         }
         throw new Exception("IsEqual mismatch.");
-    }
-
-    public override void Set(AttributeValue propertyValue)
-    {
-        if (propertyValue is null)
-        {
-            Value = null;
-        }
-        else if (propertyValue is NullableColorEnumPropertyValue colorEnumPropertyValue)
-        {
-            Value = colorEnumPropertyValue.Value;
-        }
-        else
-        {
-            throw new Exception("Mismatch set.");
-        }
     }
 
     public NullableColorEnumPropertyValue(ColorEnum? value)

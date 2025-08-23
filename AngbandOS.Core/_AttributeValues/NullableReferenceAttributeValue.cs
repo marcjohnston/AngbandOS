@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class NullableReferenceAttributeValue<T> : NullableAttributeValue where T : class
 {
-    public T? Value { get; set; }
+    public T? Value { get; }
 
     public override bool IsSet => Value is not null;
 
@@ -34,22 +34,6 @@ internal class NullableReferenceAttributeValue<T> : NullableAttributeValue where
             return new NullableReferenceAttributeValue<T>(nullableReferencePropertyValue.Value ?? Value);
         }
         throw new Exception($"Item property merging from {propertyValue.GetType().Name} not supported with {nameof(NullableReferenceAttributeValue<T>)}");
-    }
-
-    public override void Set(AttributeValue? propertyValue)
-    {
-        if (propertyValue is null)
-        {
-            Value = null;
-        }
-        else if (propertyValue is NullableReferenceAttributeValue<T> nullableReferencePropertyValue)
-        {
-            Value = nullableReferencePropertyValue.Value;
-        }
-        else
-        {
-            throw new Exception("Mismatch set.");
-        }
     }
 
     public NullableReferenceAttributeValue(T? value)

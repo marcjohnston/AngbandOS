@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class IntAttributeValue : AttributeValue
 {
-    public int Value { get; set; }
+    public int Value { get; }
     public IntAttributeValue(int value)
     {
         Value = value;

@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class BoolAttributeValue : AttributeValue
 {
-    public bool Value { get; set; }
+    public bool Value { get; }
     public BoolAttributeValue(bool value)
     {
         Value = value;
