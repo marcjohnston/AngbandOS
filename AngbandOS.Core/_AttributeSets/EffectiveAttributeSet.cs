@@ -309,6 +309,11 @@ internal class EffectiveAttributeSet
         return value;
     }
 
+    /// <summary>
+    /// I like these comments.
+    /// </summary>
+    /// <param name="propertyEnum"></param>
+    /// <returns></returns>
     public int GetIntValue(AttributeEnum propertyEnum)
     {
         AttributeValue effectiveItemProperty = GetValue(propertyEnum);
