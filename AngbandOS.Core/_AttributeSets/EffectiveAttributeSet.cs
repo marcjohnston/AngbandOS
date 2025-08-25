@@ -1580,20 +1580,12 @@ internal class EffectiveAttributeSet
         {
             return GetIntValue(AttributeEnum.Weight);
         }
-        set
-        {
-            SetIntValue(AttributeEnum.Weight, value);
-        }
     }
     public bool Wraith
     {
         get
         {
             return GetBoolValue(AttributeEnum.Wraith);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.Wraith, value);
         }
     }
     public bool XtraMight
@@ -1602,20 +1594,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.XtraMight);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.XtraMight, value);
-        }
     }
     public bool XtraShots
     {
         get
         {
             return GetBoolValue(AttributeEnum.XtraShots);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.XtraShots, value);
         }
     }
     #endregion
