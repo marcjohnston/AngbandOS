@@ -142,10 +142,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.SkillSavingThrow += 15 + (Game.ExperienceLevel.IntValue / 5);
         }
-        if (Game.SuppressRegen)
-        {
-            Game.HasRegeneration = false;
-        }
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
             ability.OverrideUpdateBonuses();
@@ -419,6 +415,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.DisplayedArmorClassBonus += bareArmorBonus;
                 }
             }
+        }
+        if (Game.SuppressRegen)
+        {
+            Game.HasRegeneration = false;
         }
         if (Game.HasFireSheath)
         {
