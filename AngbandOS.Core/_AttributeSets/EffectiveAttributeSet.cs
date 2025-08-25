@@ -1408,17 +1408,6 @@ internal class EffectiveAttributeSet
             SetBoolValue(AttributeEnum.SlowDigest, value);
         }
     }
-    //public bool Speed
-    //{
-    //    get
-    //    {
-    //        return GetBoolValue(PropertyEnum.Speed);
-    //    }
-    //    set
-    //    {
-    //        SetBoolValue(PropertyEnum.Speed, value);
-    //    }
-    //}
     public bool SustCha
     {
         get
