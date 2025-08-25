@@ -241,13 +241,13 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             SlayTroll = SlayTroll,
             SlayUndead = SlayUndead,
             SlowDigest = SlowDigest,
-            SustCha = SustCha,
-            SustCon = SustCon,
-            SustDex = SustDex,
-            SustInt = SustInt,
-            SustStr = SustStr,
-            SustWis = SustWis,
         };
+        itemCharacteristics.SetBoolValue(AttributeEnum.SustCha, SustCha);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SustCon, SustCon);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SustDex, SustDex);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SustInt, SustInt);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SustStr, SustStr);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SustWis, SustWis);
         itemCharacteristics.SetBoolValue(AttributeEnum.Telepathy, Telepathy);
         itemCharacteristics.SetBoolValue(AttributeEnum.Teleport, Teleport);
         itemCharacteristics.SetIntValue(AttributeEnum.TreasureRating, TreasureRating);

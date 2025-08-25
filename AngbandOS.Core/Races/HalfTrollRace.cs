@@ -39,7 +39,7 @@ internal class HalfTrollRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SustStr = true;
+        itemCharacteristics.SetBoolValue(AttributeEnum.SustStr, true);
         if (level > 14)
         {
             itemCharacteristics.Regen = true;

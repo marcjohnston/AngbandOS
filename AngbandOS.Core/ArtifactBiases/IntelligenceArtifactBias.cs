@@ -29,7 +29,7 @@ internal class IntelligenceArtifactBias : ArtifactBias
     {
         if (!characteristics.SustInt)
         {
-            characteristics.SustInt = true;
+            characteristics.SetBoolValue(AttributeEnum.SustInt, true);
             if (Game.DieRoll(2) == 1)
             {
                 return true;

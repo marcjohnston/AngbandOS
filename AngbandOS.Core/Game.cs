@@ -13573,7 +13573,7 @@ internal class Game
         }
         if (BaseCharacterClass.InstantSustainWisdomLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainWisdomLevel)
         {
-            itemCharacteristics.SustWis = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.SustWis, true);
         }
         if (BaseCharacterClass.InstantConfusionResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantConfusionResistanceLevel)
         {
@@ -13609,7 +13609,7 @@ internal class Game
         }
         if (BaseCharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainConstitutionLevel)
         {
-            itemCharacteristics.SustCon = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.SustCon, true);
         }
         if (BaseCharacterClass.InstantPoisonResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantPoisonResistanceLevel)
         {
@@ -13617,11 +13617,11 @@ internal class Game
         }
         if (BaseCharacterClass.InstantSustainDexterityLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainDexterityLevel)
         {
-            itemCharacteristics.SustDex = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.SustDex, true);
         }
         if (BaseCharacterClass.InstantSustainStrengthLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainStrengthLevel)
         {
-            itemCharacteristics.SustStr = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.SustStr, true);
         }
         if (BaseCharacterClass.InstantHoldLifeLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantHoldLifeLevel)
         {
@@ -13637,7 +13637,7 @@ internal class Game
         }
         if (BaseCharacterClass.InstantSustainCharismaLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainCharismaLevel)
         {
-            itemCharacteristics.SustCha = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.SustCha, true);
         }
         if (BaseCharacterClass.InstantSoundResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSoundResistanceLevel)
         {
@@ -13653,7 +13653,7 @@ internal class Game
         }
         if (BaseCharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainIntelligenceLevel)
         {
-            itemCharacteristics.SustInt = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.SustInt, true);
         }
         if (BaseCharacterClass.InstantNexusResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantNexusResistanceLevel)
         {
@@ -13712,26 +13712,26 @@ internal class Game
         }
         if (SustainAll)
         {
-            itemCharacteristics.SustCon = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.SustCon, true);
             if (ExperienceLevel.IntValue > 9)
             {
-                itemCharacteristics.SustStr = true;
+                itemCharacteristics.SetBoolValue(AttributeEnum.SustStr, true);
             }
             if (ExperienceLevel.IntValue > 19)
             {
-                itemCharacteristics.SustDex = true;
+                itemCharacteristics.SetBoolValue(AttributeEnum.SustDex, true);
             }
             if (ExperienceLevel.IntValue > 29)
             {
-                itemCharacteristics.SustWis = true;
+                itemCharacteristics.SetBoolValue(AttributeEnum.SustWis, true);
             }
             if (ExperienceLevel.IntValue > 39)
             {
-                itemCharacteristics.SustInt = true;
+                itemCharacteristics.SetBoolValue(AttributeEnum.SustInt, true);
             }
             if (ExperienceLevel.IntValue > 49)
             {
-                itemCharacteristics.SustCha = true;
+                itemCharacteristics.SetBoolValue(AttributeEnum.SustCha, true);
             }
         }
         return itemCharacteristics;

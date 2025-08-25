@@ -1239,7 +1239,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             switch (Game.DieRoll(31))
             {
                 case 1:
-                    characteristics.SustStr = true;
+                    characteristics.SetBoolValue(AttributeEnum.SustStr, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
@@ -1247,7 +1247,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 2:
-                    characteristics.SustInt = true;
+                    characteristics.SetBoolValue(AttributeEnum.SustInt, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
@@ -1255,7 +1255,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 3:
-                    characteristics.SustWis = true;
+                    characteristics.SetBoolValue(AttributeEnum.SustWis, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
@@ -1263,7 +1263,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 4:
-                    characteristics.SustDex = true;
+                    characteristics.SetBoolValue(AttributeEnum.SustDex, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
@@ -1271,7 +1271,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 5:
-                    characteristics.SustCon = true;
+                    characteristics.SetBoolValue(AttributeEnum.SustCon, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
@@ -1279,7 +1279,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 6:
-                    characteristics.SustCha = true;
+                    characteristics.SetBoolValue(AttributeEnum.SustCha, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));

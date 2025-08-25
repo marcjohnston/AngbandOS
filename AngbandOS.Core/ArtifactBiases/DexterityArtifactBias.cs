@@ -29,7 +29,7 @@ internal class DexterityArtifactBias : ArtifactBias
     {
         if (!characteristics.SustDex)
         {
-            characteristics.SustDex = true;
+            characteristics.SetBoolValue(AttributeEnum.SustDex, true);
             if (Game.DieRoll(2) == 1)
             {
                 return true;
