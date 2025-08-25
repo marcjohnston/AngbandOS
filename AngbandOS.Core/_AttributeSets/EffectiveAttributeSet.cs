@@ -1491,10 +1491,6 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.Telepathy);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.Telepathy, value);
-        }
     }
     public bool Teleport
     {

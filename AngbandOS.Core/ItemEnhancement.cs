@@ -247,8 +247,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             SustInt = SustInt,
             SustStr = SustStr,
             SustWis = SustWis,
-            Telepathy = Telepathy,
         };
+        itemCharacteristics.SetBoolValue(AttributeEnum.Telepathy, Telepathy);
         itemCharacteristics.SetBoolValue(AttributeEnum.Teleport, Teleport);
         itemCharacteristics.SetIntValue(AttributeEnum.TreasureRating, TreasureRating);
         itemCharacteristics.SetBoolValue(AttributeEnum.Valueless, Valueless);

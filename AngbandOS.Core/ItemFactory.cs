@@ -1321,7 +1321,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 18:
-                    characteristics.Telepathy = true;
+                    characteristics.SetBoolValue(AttributeEnum.Telepathy, true);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
