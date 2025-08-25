@@ -43,7 +43,7 @@ internal class MindFlayerRace : Race
         itemCharacteristics.SetBoolValue(AttributeEnum.SustWis, true);
         if (level > 14)
         {
-            itemCharacteristics.SeeInvis = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.SeeInvis, true);
         }
         if (level > 29)
         {

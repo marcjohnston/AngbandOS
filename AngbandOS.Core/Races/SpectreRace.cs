@@ -38,11 +38,11 @@ internal class SpectreRace : Race
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.ResCold = true;
-        itemCharacteristics.SeeInvis = true;
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResCold, true);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SeeInvis, true);
         itemCharacteristics.HoldLife = true;
-        itemCharacteristics.ResNether = true;
-        itemCharacteristics.ResPois = true;
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResNether, true);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResPois, true);
         itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
         if (level > 34)
         {

@@ -42,7 +42,7 @@ internal class HalfTrollRace : Race
         itemCharacteristics.SetBoolValue(AttributeEnum.SustStr, true);
         if (level > 14)
         {
-            itemCharacteristics.Regen = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.Regen, true);
             itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
         }
     }

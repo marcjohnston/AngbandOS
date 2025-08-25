@@ -35,8 +35,8 @@ internal class MiriNigriRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.ResSound = true;
-        itemCharacteristics.ResConf = true;
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResSound, true);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResConf, true);
     }
     protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
     public override void CalcBonuses()

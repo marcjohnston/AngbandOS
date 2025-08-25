@@ -42,8 +42,8 @@ internal class KlackonRace : Race
         {
             itemCharacteristics.BonusSpeed++;
         }
-        itemCharacteristics.ResConf = true;
-        itemCharacteristics.ResAcid = true;
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResConf, true);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResAcid, true);
     }
     protected override string GenerateNameSyllableSetName => nameof(KlackonSyllableSet);
     public override string[]? SelfKnowledge(int level)

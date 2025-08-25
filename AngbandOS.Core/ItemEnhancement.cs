@@ -146,93 +146,89 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// <returns></returns>
     public ReadOnlyAttributeSet GenerateItemCharacteristics()
     {
-        EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet()
-        {
-            CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias,
-            CanApplyArtifactBiasSlaying = CanApplyArtifactBiasSlaying,
-            CanApplyBlowsBonus = CanApplyBlowsBonus,
-            CanReflectBoltsAndArrows = CanReflectBoltsAndArrows,
-            CanApplySlayingBonus = CanApplySlayingBonus,
-            CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower,
+        EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet();
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusStrength, BonusStrengthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStrengthRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusIntelligence, BonusIntelligenceRoll == null ? 0 : Game.ComputeIntegerExpression(BonusIntelligenceRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusWisdom, BonusWisdomRoll == null ? 0 : Game.ComputeIntegerExpression(BonusWisdomRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusDexterity, BonusDexterityRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDexterityRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusConstitution, BonusConstitutionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusConstitutionRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusCharisma, BonusCharismaRoll == null ? 0 : Game.ComputeIntegerExpression(BonusCharismaRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusStealth, BonusStealthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStealthRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusSearch, BonusSearchRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSearchRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusInfravision, BonusInfravisionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusInfravisionRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusTunnel, BonusTunnelRoll == null ? 0 : Game.ComputeIntegerExpression(BonusTunnelRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusAttacks, BonusAttacksRoll == null ? 0 : Game.ComputeIntegerExpression(BonusAttacksRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusSpeed, BonusSpeedRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSpeedRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusArmorClass, BonusArmorClassRoll == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusHits, BonusHitsRoll == null ? 0 : Game.ComputeIntegerExpression(BonusHitsRoll).Value);
+        itemCharacteristics.SetIntValue(AttributeEnum.BonusDamage, BonusDamageRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDamageRoll).Value);
+        itemCharacteristics.SetReferenceValue(AttributeEnum.ArtifactBias, ArtifactBiasWeightedRandom?.ChooseOrDefault());
 
-            BonusStrength = BonusStrengthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStrengthRoll).Value,
-            BonusIntelligence = BonusIntelligenceRoll == null ? 0 : Game.ComputeIntegerExpression(BonusIntelligenceRoll).Value,
-            BonusWisdom = BonusWisdomRoll == null ? 0 : Game.ComputeIntegerExpression(BonusWisdomRoll).Value,
-            BonusDexterity = BonusDexterityRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDexterityRoll).Value,
-            BonusConstitution = BonusConstitutionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusConstitutionRoll).Value,
-            BonusCharisma = BonusCharismaRoll == null ? 0 : Game.ComputeIntegerExpression(BonusCharismaRoll).Value,
-            BonusStealth = BonusStealthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStealthRoll).Value,
-            BonusSearch = BonusSearchRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSearchRoll).Value,
-            BonusInfravision = BonusInfravisionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusInfravisionRoll).Value,
-            BonusTunnel = BonusTunnelRoll == null ? 0 : Game.ComputeIntegerExpression(BonusTunnelRoll).Value,
-            BonusAttacks = BonusAttacksRoll == null ? 0 : Game.ComputeIntegerExpression(BonusAttacksRoll).Value,
-            BonusSpeed = BonusSpeedRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSpeedRoll).Value,
-
-            BonusArmorClass = BonusArmorClassRoll == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassRoll).Value,
-            BonusHits = BonusHitsRoll == null ? 0 : Game.ComputeIntegerExpression(BonusHitsRoll).Value,
-            BonusDamage = BonusDamageRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDamageRoll).Value,
-
-            Activation = Activation,
-            Aggravate = Aggravate,
-            AntiTheft = AntiTheft,
-            ArtifactBias = ArtifactBiasWeightedRandom?.ChooseOrDefault(),
-            Blessed = Blessed,
-            BrandAcid = BrandAcid,
-            BrandCold = BrandCold,
-            BrandElec = BrandElec,
-            BrandFire = BrandFire,
-            BrandPois = BrandPois,
-            Chaotic = Chaotic,
-            Color = Color,
-            Cost = Cost,
-            IsCursed = IsCursed,
-            DamageDice = DamageDice,
-            DiceSides = DiceSides,
-            DrainExp = DrainExp,
-            DreadCurse = DreadCurse,
-            EasyKnow = EasyKnow,
-            Feather = Feather,
-            FreeAct = FreeAct,
-            FriendlyName = FriendlyName,
-            HeavyCurse = HeavyCurse,
-            HideType = HideType,
-            HoldLife = HoldLife,
-            IgnoreAcid = IgnoreAcid,
-            IgnoreCold = IgnoreCold,
-            IgnoreElec = IgnoreElec,
-            IgnoreFire = IgnoreFire,
-            ImAcid = ImAcid,
-            ImCold = ImCold,
-            ImElec = ImElec,
-            ImFire = ImFire,
-            Impact = Impact,
-            NoMagic = NoMagic,
-            NoTele = NoTele,
-            PermaCurse = PermaCurse,
-            Radius = Radius,
-            Reflect = Reflect,
-            Regen = Regen,
-            ResAcid = ResAcid,
-            ResBlind = ResBlind,
-            ResChaos = ResChaos,
-            ResCold = ResCold,
-            ResConf = ResConf,
-            ResDark = ResDark,
-            ResDisen = ResDisen,
-            ResElec = ResElec,
-            ResFear = ResFear,
-            ResFire = ResFire,
-            ResLight = ResLight,
-            ResNether = ResNether,
-            ResNexus = ResNexus,
-            ResPois = ResPois,
-            ResShards = ResShards,
-            ResSound = ResSound,
-            SeeInvis = SeeInvis,
-            ShElec = ShElec,
-            ShFire = ShFire,
-            ShowMods = ShowMods,
-        };
+        itemCharacteristics.SetBoolValue(AttributeEnum.CanApplyBlessedArtifactBias, CanApplyBlessedArtifactBias);
+        itemCharacteristics.SetBoolValue(AttributeEnum.CanApplyArtifactBiasSlaying, CanApplyArtifactBiasSlaying);
+        itemCharacteristics.SetBoolValue(AttributeEnum.CanApplyBlowsBonus, CanApplyBlowsBonus);
+        itemCharacteristics.SetBoolValue(AttributeEnum.CanReflectBoltsAndArrows, CanReflectBoltsAndArrows);
+        itemCharacteristics.SetBoolValue(AttributeEnum.CanApplySlayingBonus, CanApplySlayingBonus);
+        itemCharacteristics.SetBoolValue(AttributeEnum.CanApplyBonusArmorClassMiscPower, CanApplyBonusArmorClassMiscPower);
+        itemCharacteristics.SetReferenceValue(AttributeEnum.Activation, Activation);
+        itemCharacteristics.SetBoolValue(AttributeEnum.Aggravate, Aggravate);
+        itemCharacteristics.SetBoolValue(AttributeEnum.AntiTheft, AntiTheft);
+        itemCharacteristics.SetBoolValue(AttributeEnum.Blessed, Blessed);
+        itemCharacteristics.SetBoolValue(AttributeEnum.BrandAcid, BrandAcid);
+        itemCharacteristics.SetBoolValue(AttributeEnum.BrandCold, BrandCold);
+        itemCharacteristics.SetBoolValue(AttributeEnum.BrandElec, BrandElec);
+        itemCharacteristics.SetBoolValue(AttributeEnum.BrandFire, BrandFire);
+        itemCharacteristics.SetBoolValue(AttributeEnum.BrandPois, BrandPois);
+        itemCharacteristics.SetBoolValue(AttributeEnum.Chaotic, Chaotic);
+        itemCharacteristics.SetColorValue(AttributeEnum.Color, Color);
+        itemCharacteristics.SetIntValue(AttributeEnum.Cost, Cost);
+        itemCharacteristics.SetBoolValue(AttributeEnum.IsCursed, IsCursed);
+        itemCharacteristics.SetIntValue(AttributeEnum.DamageDice, DamageDice);
+        itemCharacteristics.SetIntValue(AttributeEnum.DiceSides, DiceSides);
+        itemCharacteristics.SetBoolValue(AttributeEnum.DrainExp, DrainExp);
+        itemCharacteristics.SetBoolValue(AttributeEnum.DreadCurse, DreadCurse);
+        itemCharacteristics.SetBoolValue(AttributeEnum.EasyKnow, EasyKnow);
+        itemCharacteristics.SetBoolValue(AttributeEnum.Feather, Feather);
+        itemCharacteristics.SetBoolValue(AttributeEnum.FreeAct, FreeAct);
+        itemCharacteristics.SetReferenceValue(AttributeEnum.FriendlyName, FriendlyName);
+        itemCharacteristics.SetBoolValue(AttributeEnum.HeavyCurse, HeavyCurse);
+        itemCharacteristics.SetBoolValue(AttributeEnum.HideType, HideType);
+        itemCharacteristics.SetBoolValue(AttributeEnum.HoldLife, HoldLife);
+        itemCharacteristics.SetBoolValue(AttributeEnum.IgnoreAcid, IgnoreAcid);
+        itemCharacteristics.SetBoolValue(AttributeEnum.IgnoreCold, IgnoreCold);
+        itemCharacteristics.SetBoolValue(AttributeEnum.IgnoreElec, IgnoreElec);
+        itemCharacteristics.SetBoolValue(AttributeEnum.IgnoreFire, IgnoreFire);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ImAcid, ImAcid);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ImCold, ImCold);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ImElec, ImElec);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ImFire, ImFire);
+        itemCharacteristics.SetBoolValue(AttributeEnum.Impact, Impact);
+        itemCharacteristics.SetBoolValue(AttributeEnum.NoMagic, NoMagic);
+        itemCharacteristics.SetBoolValue(AttributeEnum.NoTele, NoTele);
+        itemCharacteristics.SetBoolValue(AttributeEnum.PermaCurse, PermaCurse);
+        itemCharacteristics.SetIntValue(AttributeEnum.Radius, Radius);
+        itemCharacteristics.SetBoolValue(AttributeEnum.Reflect, Reflect);
+        itemCharacteristics.SetBoolValue(AttributeEnum.Regen, Regen);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResAcid, ResAcid);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResBlind, ResBlind);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResChaos, ResChaos);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResCold, ResCold);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResConf, ResConf);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResDark, ResDark);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResDisen, ResDisen);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResElec, ResElec);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResFear, ResFear);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResFire, ResFire);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResLight, ResLight);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResNether, ResNether);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResNexus, ResNexus);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResPois, ResPois);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResShards, ResShards);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResSound, ResSound);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SeeInvis, SeeInvis);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ShElec, ShElec);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ShFire, ShFire);
+        itemCharacteristics.SetBoolValue(AttributeEnum.ShowMods, ShowMods);
         itemCharacteristics.SetBoolValue(AttributeEnum.SlayAnimal, SlayAnimal);
         itemCharacteristics.SetBoolValue(AttributeEnum.SlayDemon, SlayDemon);
         itemCharacteristics.SetIntValue(AttributeEnum.SlayDragon, SlayDragon);

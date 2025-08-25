@@ -38,10 +38,10 @@ internal class ImpRace : Race
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.ResFire = true;
+        itemCharacteristics.SetBoolValue(AttributeEnum.ResFire, true);
         if (level > 9)
         {
-            itemCharacteristics.SeeInvis = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.SeeInvis, true);
         }
         if (level > 19)
         {

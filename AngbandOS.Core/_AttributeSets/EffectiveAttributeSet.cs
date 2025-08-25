@@ -1073,20 +1073,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.Reflect);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.Reflect, value);
-        }
     }
     public bool Regen
     {
         get
         {
             return GetBoolValue(AttributeEnum.Regen);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.Regen, value);
         }
     }
     public bool ResAcid
@@ -1095,20 +1087,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.ResAcid);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResAcid, value);
-        }
     }
     public bool ResBlind
     {
         get
         {
             return GetBoolValue(AttributeEnum.ResBlind);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResBlind, value);
         }
     }
     public bool ResChaos
@@ -1117,20 +1101,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.ResChaos);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResChaos, value);
-        }
     }
     public bool ResCold
     {
         get
         {
             return GetBoolValue(AttributeEnum.ResCold);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResCold, value);
         }
     }
     public bool ResConf
@@ -1139,20 +1115,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.ResConf);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResConf, value);
-        }
     }
     public bool ResDark
     {
         get
         {
             return GetBoolValue(AttributeEnum.ResDark);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResDark, value);
         }
     }
     public bool ResDisen
@@ -1161,20 +1129,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.ResDisen);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResDisen, value);
-        }
     }
     public bool ResElec
     {
         get
         {
             return GetBoolValue(AttributeEnum.ResElec);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResElec, value);
         }
     }
     public bool ResFear
@@ -1183,20 +1143,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.ResFear);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResFear, value);
-        }
     }
     public bool ResFire
     {
         get
         {
             return GetBoolValue(AttributeEnum.ResFire);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResFire, value);
         }
     }
     public bool ResLight
@@ -1205,20 +1157,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.ResLight);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResLight, value);
-        }
     }
     public bool ResNether
     {
         get
         {
             return GetBoolValue(AttributeEnum.ResNether);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResNether, value);
         }
     }
     public bool ResNexus
@@ -1227,20 +1171,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.ResNexus);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResNexus, value);
-        }
     }
     public bool ResPois
     {
         get
         {
             return GetBoolValue(AttributeEnum.ResPois);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResPois, value);
         }
     }
     public bool ResShards
@@ -1249,20 +1185,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.ResShards);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResShards, value);
-        }
     }
     public bool ResSound
     {
         get
         {
             return GetBoolValue(AttributeEnum.ResSound);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.ResSound, value);
         }
     }
     public bool SeeInvis
@@ -1271,20 +1199,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.SeeInvis);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.SeeInvis, value);
-        }
     }
     public bool ShElec
     {
         get
         {
             return GetBoolValue(AttributeEnum.ShElec);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.ShElec, value);
         }
     }
     public bool ShFire
@@ -1293,20 +1213,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.ShFire);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.ShFire, value);
-        }
     }
     public bool ShowMods
     {
         get
         {
             return GetBoolValue(AttributeEnum.ShowMods);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.ShowMods, value);
         }
     }
     public bool SlayAnimal

@@ -1317,7 +1317,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 case 15:
                 case 16:
                 case 17:
-                    characteristics.SeeInvis = true;
+                    characteristics.SetBoolValue(AttributeEnum.SeeInvis, true);
                     break;
 
                 case 18:
@@ -1335,7 +1335,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 21:
                 case 22:
-                    characteristics.Regen = true;
+                    characteristics.SetBoolValue(AttributeEnum.Regen, true);
                     break;
 
                 case 23:
@@ -1352,7 +1352,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     }
                     else
                     {
-                        characteristics.ShowMods = true;
+                        characteristics.SetBoolValue(AttributeEnum.ShowMods, true);
                         characteristics.BonusArmorClass = 4 + Game.DieRoll(11);
                     }
                     break;
@@ -1360,7 +1360,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 case 27:
                 case 28:
                 case 29:
-                    characteristics.ShowMods = true;
+                    characteristics.SetBoolValue(AttributeEnum.ShowMods, true);
                     characteristics.BonusHits += 4 + Game.DieRoll(11);
                     characteristics.BonusDamage += 4 + Game.DieRoll(11);
                     break;
