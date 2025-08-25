@@ -317,11 +317,6 @@ internal class EffectiveAttributeSet
         return value;
     }
 
-    /// <summary>
-    /// Here are my color comments.
-    /// </summary>
-    /// <param name="propertyEnum"></param>
-    /// <returns></returns>
     public ColorEnum GetColorValue(AttributeEnum propertyEnum)
     {
         AttributeValue effectiveItemProperty = GetValue(propertyEnum);
