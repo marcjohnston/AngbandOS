@@ -42,7 +42,7 @@ internal class ZombieRace : Race
         itemCharacteristics.HoldLife = true;
         itemCharacteristics.ResNether = true;
         itemCharacteristics.ResPois = true;
-        itemCharacteristics.SlowDigest = true;
+        itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
         if (level > 4)
         {
             itemCharacteristics.ResCold = true;

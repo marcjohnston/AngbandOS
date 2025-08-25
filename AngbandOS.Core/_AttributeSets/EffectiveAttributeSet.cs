@@ -1403,20 +1403,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.SlowDigest);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.SlowDigest, value);
-        }
     }
     public bool SustCha
     {
         get
         {
             return GetBoolValue(AttributeEnum.SustCha);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.SustCha, value);
         }
     }
     public bool SustCon
@@ -1425,20 +1417,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.SustCon);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.SustCon, value);
-        }
     }
     public bool SustDex
     {
         get
         {
             return GetBoolValue(AttributeEnum.SustDex);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.SustDex, value);
         }
     }
     public bool SustInt
@@ -1447,10 +1431,6 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.SustInt);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.SustInt, value);
-        }
     }
     public bool SustStr
     {
@@ -1458,20 +1438,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.SustStr);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.SustStr, value);
-        }
     }
     public bool SustWis
     {
         get
         {
             return GetBoolValue(AttributeEnum.SustWis);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.SustWis, value);
         }
     }
     public bool Telepathy

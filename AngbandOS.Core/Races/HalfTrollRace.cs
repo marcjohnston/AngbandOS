@@ -43,7 +43,7 @@ internal class HalfTrollRace : Race
         if (level > 14)
         {
             itemCharacteristics.Regen = true;
-            itemCharacteristics.SlowDigest = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);

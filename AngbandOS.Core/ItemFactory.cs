@@ -1330,7 +1330,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 19:
                 case 20:
-                    characteristics.SlowDigest = true;
+                    characteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
                     break;
 
                 case 21:

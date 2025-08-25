@@ -240,8 +240,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             SlayOrc = SlayOrc,
             SlayTroll = SlayTroll,
             SlayUndead = SlayUndead,
-            SlowDigest = SlowDigest,
         };
+        itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, SlowDigest);
         itemCharacteristics.SetBoolValue(AttributeEnum.SustCha, SustCha);
         itemCharacteristics.SetBoolValue(AttributeEnum.SustCon, SustCon);
         itemCharacteristics.SetBoolValue(AttributeEnum.SustDex, SustDex);

@@ -42,7 +42,7 @@ internal class GolemRace : Race
         itemCharacteristics.SeeInvis = true;
         itemCharacteristics.FreeAct = true;
         itemCharacteristics.ResPois = true;
-        itemCharacteristics.SlowDigest = true;
+        itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
         if (level > 34)
         {
             itemCharacteristics.HoldLife = true;

@@ -13605,7 +13605,7 @@ internal class Game
         }
         if (BaseCharacterClass.InstantSlowDigestionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSlowDigestionLevel)
         {
-            itemCharacteristics.SlowDigest = true;
+            itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
         }
         if (BaseCharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainConstitutionLevel)
         {

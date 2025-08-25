@@ -43,7 +43,7 @@ internal class SpectreRace : Race
         itemCharacteristics.HoldLife = true;
         itemCharacteristics.ResNether = true;
         itemCharacteristics.ResPois = true;
-        itemCharacteristics.SlowDigest = true;
+        itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
         if (level > 34)
         {
             itemCharacteristics.SetBoolValue(AttributeEnum.Telepathy, true);
