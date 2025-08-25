@@ -250,7 +250,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Telepathy = Telepathy,
             Teleport = Teleport,
             TreasureRating = TreasureRating,
-            Value = Value,
         };
         itemCharacteristics.SetBoolValue(AttributeEnum.Valueless, Valueless);
         itemCharacteristics.SetBoolValue(AttributeEnum.Vampiric, Vampiric);

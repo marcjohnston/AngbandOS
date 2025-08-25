@@ -157,7 +157,6 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.Telepathy);
         RegisterBoolPropertyFactory(AttributeEnum.Teleport);
         RegisterIntPropertyFactory(AttributeEnum.TreasureRating);
-        RegisterIntPropertyFactory(AttributeEnum.Value);
         RegisterBoolPropertyFactory(AttributeEnum.Valueless);
         RegisterBoolPropertyFactory(AttributeEnum.Vampiric);
         RegisterIntPropertyFactory(AttributeEnum.Vorpal1InChance);
@@ -1517,17 +1516,6 @@ internal class EffectiveAttributeSet
         set
         {
             SetIntValue(AttributeEnum.TreasureRating, value);
-        }
-    }
-    public int Value
-    {
-        get
-        {
-            return GetIntValue(AttributeEnum.Value);
-        }
-        set
-        {
-            SetIntValue(AttributeEnum.Value, value);
         }
     }
     public bool Valueless

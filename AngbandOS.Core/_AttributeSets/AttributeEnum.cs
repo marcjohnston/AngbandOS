@@ -116,7 +116,6 @@ internal enum AttributeEnum
     Telepathy,
     Teleport,
     TreasureRating,
-    Value,
     Valueless,
     Vampiric,
     Vorpal1InChance,
