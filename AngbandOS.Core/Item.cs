@@ -2395,7 +2395,7 @@ internal sealed class Item : IComparable<Item>
             if (IsRare)
             {
                 Game.TreasureRating -= rareItem.TreasureRating;
-                EffectivePropertySet.RemoveEnhancement("rare");
+                EffectivePropertySet.RemoveEnhancements("rare");
             }
         }
         else

@@ -6687,7 +6687,7 @@ internal class Game
             // Completely remake the armor into a set of blasted armor
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.EffectivePropertySet.RemoveEnhancement("fixed");
+            item.EffectivePropertySet.RemoveEnhancements("fixed");
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(ArmorBlastedItemEnhancement)));
             item.EffectivePropertySet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusHits = 0;
@@ -6727,7 +6727,7 @@ internal class Game
             // Completely remake the item into a shattered weapon
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.EffectivePropertySet.RemoveEnhancement("fixed");
+            item.EffectivePropertySet.RemoveEnhancements("fixed");
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(WeaponShatteredItemEnhancement)));
             item.EffectivePropertySet.BonusHits = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusDamage = 0 - DieRoll(5) - DieRoll(5);

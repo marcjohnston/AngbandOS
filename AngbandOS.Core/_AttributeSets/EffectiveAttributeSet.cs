@@ -21,37 +21,39 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class EffectiveAttributeSet
 {
-    private void RegisterPropertyFactory(AttributeEnum index, AttributeFactory propertyFactory)
-    {
-        int intIndex = (int)index;
-        if (_propertyFactories.Length <= intIndex)
-        {
-            Array.Resize(ref _propertyFactories, intIndex + 1);
-        }
-        _propertyFactories[intIndex] = propertyFactory;
-    }
-    private void RegisterBoolPropertyFactory(AttributeEnum index)
-    {
-        RegisterPropertyFactory(index, new BoolAttributeFactory(index));
-    }
-    private void RegisterColorEnumPropertyFactory(AttributeEnum index)
-    {
-        RegisterPropertyFactory(index, new ColorEnumAttributeFactory(index));
-    }
-    private void RegisterIntPropertyFactory(AttributeEnum index)
-    {
-        RegisterPropertyFactory(index, new IntAttributeFactory(index));
-    }
-
-    private void RegisterReferencePropertyFactory<T>(AttributeEnum index) where T : class
-    {
-        RegisterPropertyFactory(index, new ReferenceAttributeFactory<T>(index));
-    }
-
+    private Dictionary<string, List<ReadOnlyAttributeSet>> _enhancements = new Dictionary<string, List<ReadOnlyAttributeSet>>();
+    private AttributeValue[] _writeProperties;
+    private AttributeValue[] _overrideProperties;
     private AttributeFactory[] _propertyFactories = new AttributeFactory[0];
 
     public EffectiveAttributeSet()
     {
+        void RegisterPropertyFactory(AttributeEnum index, AttributeFactory propertyFactory)
+        {
+            int intIndex = (int)index;
+            if (_propertyFactories.Length <= intIndex)
+            {
+                Array.Resize(ref _propertyFactories, intIndex + 1);
+            }
+            _propertyFactories[intIndex] = propertyFactory;
+        }
+        void RegisterBoolPropertyFactory(AttributeEnum index)
+        {
+            RegisterPropertyFactory(index, new BoolAttributeFactory(index));
+        }
+        void RegisterColorEnumPropertyFactory(AttributeEnum index)
+        {
+            RegisterPropertyFactory(index, new ColorEnumAttributeFactory(index));
+        }
+        void RegisterIntPropertyFactory(AttributeEnum index)
+        {
+            RegisterPropertyFactory(index, new IntAttributeFactory(index));
+        }
+        void RegisterReferencePropertyFactory<T>(AttributeEnum index) where T : class
+        {
+            RegisterPropertyFactory(index, new ReferenceAttributeFactory<T>(index));
+        }
+
         RegisterBoolPropertyFactory(AttributeEnum.CanApplyBlessedArtifactBias);
         RegisterBoolPropertyFactory(AttributeEnum.CanApplyArtifactBiasSlaying);
         RegisterBoolPropertyFactory(AttributeEnum.CanApplyBlowsBonus);
@@ -181,9 +183,6 @@ internal class EffectiveAttributeSet
             _overrideProperties[index] = itemPropertyFactory.InstantiateNullable();
         }
     }
-    private Dictionary<string, List<ReadOnlyAttributeSet>> _enhancements = new Dictionary<string, List<ReadOnlyAttributeSet>>();
-    private AttributeValue[] _writeProperties;
-    private AttributeValue[] _overrideProperties;
 
     /// <summary>
     /// Returns a clone of the effective property set.  The clone will have the same enhancements, writable properties, and override properties as the original.
@@ -240,6 +239,10 @@ internal class EffectiveAttributeSet
 
     public void AddEnhancement(string key, ReadOnlyAttributeSet readOnlyPropertySet) 
     {
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new Exception($"Cannot specify a blank or null key for {nameof(AddEnhancement)}");
+        }
         if (!_enhancements.TryGetValue(key, out List<ReadOnlyAttributeSet>? readOnlyPropertySetList))
         {
             readOnlyPropertySetList = new List<ReadOnlyAttributeSet>();
@@ -249,10 +252,14 @@ internal class EffectiveAttributeSet
     }
     public void AddEnhancement(ReadOnlyAttributeSet readOnlyPropertySet)
     {
-        AddEnhancement(Guid.NewGuid().ToString(), readOnlyPropertySet);
+        AddEnhancement("", readOnlyPropertySet);
     }
-    public void RemoveEnhancement(string key)
+    public void RemoveEnhancements(string key)
     {
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new Exception($"Cannot specify a blank or null key for {nameof(RemoveEnhancements)}");
+        }
         _enhancements.Remove(key);
     }
 
