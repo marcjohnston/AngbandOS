@@ -301,6 +301,11 @@ internal class EffectiveAttributeSet
         return itemProperty;
     }
 
+    /// <summary>
+    /// This are new bool comments.
+    /// </summary>
+    /// <param name="propertyEnum"></param>
+    /// <returns></returns>
     public bool GetBoolValue(AttributeEnum propertyEnum)
     {
         AttributeValue effectiveItemProperty = GetValue(propertyEnum);
