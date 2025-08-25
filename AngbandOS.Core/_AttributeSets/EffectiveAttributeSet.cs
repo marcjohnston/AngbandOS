@@ -1536,20 +1536,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.Valueless);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.Valueless, value);
-        }
     }
     public bool Vampiric
     {
         get
         {
             return GetBoolValue(AttributeEnum.Vampiric);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.Vampiric, value);
         }
     }
     public int Vorpal1InChance
