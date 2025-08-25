@@ -23,19 +23,19 @@ internal class EffectiveAttributeSet
 {
     private Dictionary<string, List<ReadOnlyAttributeSet>> _enhancements = new Dictionary<string, List<ReadOnlyAttributeSet>>();
     private AttributeValue[] _writeProperties;
-    private AttributeValue[] _overrideProperties;
-    private AttributeFactory[] _propertyFactories = new AttributeFactory[0];
+    private (bool trueIsSetFalseIsDefault, AttributeValue attributeValue)[] _overrideProperties;
+    private AttributeFactory[] _attributeFactories = new AttributeFactory[0];
 
     public EffectiveAttributeSet()
     {
         void RegisterPropertyFactory(AttributeEnum index, AttributeFactory propertyFactory)
         {
             int intIndex = (int)index;
-            if (_propertyFactories.Length <= intIndex)
+            if (_attributeFactories.Length <= intIndex)
             {
-                Array.Resize(ref _propertyFactories, intIndex + 1);
+                Array.Resize(ref _attributeFactories, intIndex + 1);
             }
-            _propertyFactories[intIndex] = propertyFactory;
+            _attributeFactories[intIndex] = propertyFactory;
         }
         void RegisterBoolPropertyFactory(AttributeEnum index)
         {
@@ -167,19 +167,19 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.XtraShots);
 
         // Generate a writable property values.
-        _writeProperties = new AttributeValue[_propertyFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _propertyFactories)
+        _writeProperties = new AttributeValue[_attributeFactories.Length];
+        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
         {
             int index = (int)itemPropertyFactory.Index;
             _writeProperties[index] = itemPropertyFactory.Instantiate();
         }
 
         // Generate the override property values.
-        _overrideProperties = new AttributeValue[_propertyFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _propertyFactories)
+        _overrideProperties = new (bool, AttributeValue)[_attributeFactories.Length];
+        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
         {
             int index = (int)itemPropertyFactory.Index;
-            _overrideProperties[index] = itemPropertyFactory.InstantiateNullable();
+            _overrideProperties[index] = (false, itemPropertyFactory.Instantiate());
         }
     }
 
@@ -202,19 +202,20 @@ internal class EffectiveAttributeSet
         }
 
         // Clone the writable properties.
-        effectivePropertySet._writeProperties = new AttributeValue[_propertyFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _propertyFactories)
+        effectivePropertySet._writeProperties = new AttributeValue[_attributeFactories.Length];
+        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
         {
             int index = (int)itemPropertyFactory.Index;
             effectivePropertySet._writeProperties[index] = _writeProperties[index].Clone();
         }
 
         // Clone the override properties.
-        effectivePropertySet._overrideProperties = new AttributeValue[_propertyFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _propertyFactories)
+        effectivePropertySet._overrideProperties = new (bool, AttributeValue)[_attributeFactories.Length];
+        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
         {
             int index = (int)itemPropertyFactory.Index;
-            effectivePropertySet._overrideProperties[index] = _overrideProperties[index].Clone();
+            (bool trueIsSetFalseIsDefault, AttributeValue attributeValue) = _overrideProperties[index];
+            effectivePropertySet._overrideProperties[index] = (trueIsSetFalseIsDefault, attributeValue.Clone());
         }
 
         return effectivePropertySet;
@@ -226,9 +227,9 @@ internal class EffectiveAttributeSet
     /// <returns></returns>
     public ReadOnlyAttributeSet ToReadOnly()
     {
-        AttributeValue[] newProperties = new AttributeValue[_propertyFactories.Length];
+        AttributeValue[] newProperties = new AttributeValue[_attributeFactories.Length];
 
-        foreach (AttributeFactory itemPropertyFactory in _propertyFactories)
+        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
         {
             int index = (int)itemPropertyFactory.Index;
             newProperties[index] = GetValue(itemPropertyFactory.Index);
@@ -236,12 +237,8 @@ internal class EffectiveAttributeSet
         return new ReadOnlyAttributeSet(newProperties);
     }
 
-    public void AddEnhancement(string key, ReadOnlyAttributeSet readOnlyPropertySet) 
+    private void AddEnhancementToDictionary(string key, ReadOnlyAttributeSet readOnlyPropertySet) 
     {
-        if (String.IsNullOrEmpty(key))
-        {
-            throw new Exception($"Cannot specify a blank or null key for {nameof(AddEnhancement)}");
-        }
         if (!_enhancements.TryGetValue(key, out List<ReadOnlyAttributeSet>? readOnlyPropertySetList))
         {
             readOnlyPropertySetList = new List<ReadOnlyAttributeSet>();
@@ -249,9 +246,17 @@ internal class EffectiveAttributeSet
         }
         readOnlyPropertySetList.Add(readOnlyPropertySet);
     }
+    public void AddEnhancement(string key, ReadOnlyAttributeSet readOnlyPropertySet)
+    {
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new Exception($"Cannot specify a blank or null key for {nameof(AddEnhancement)}");
+        }
+        AddEnhancementToDictionary(key, readOnlyPropertySet);
+    }
     public void AddEnhancement(ReadOnlyAttributeSet readOnlyPropertySet)
     {
-        AddEnhancement("", readOnlyPropertySet);
+        AddEnhancementToDictionary("", readOnlyPropertySet);
     }
     public void RemoveEnhancements(string key)
     {
@@ -265,13 +270,27 @@ internal class EffectiveAttributeSet
     public void OverrideBoolValue(AttributeEnum propertyEnum, bool? value)
     {
         int index = (int)propertyEnum;
-        _overrideProperties[index] = new NullableBoolAttributeValue(value.HasValue ? value.Value : null);
+        if (value.HasValue)
+        {
+            _overrideProperties[index] = (true, new BoolAttributeValue(value.Value));
+        }
+        else
+        {
+            _overrideProperties[index] = (false, _attributeFactories[index].Instantiate());
+        }
     }
 
     public void OverrideIntValue(AttributeEnum propertyEnum, int? value)
     {
         int index = (int)propertyEnum;
-        _overrideProperties[index] = new NullableIntAttributeValue(value.HasValue ? value.Value : null);
+        if (value.HasValue)
+        {
+            _overrideProperties[index] = (true, new IntAttributeValue(value.Value));
+        }
+        else
+        {
+            _overrideProperties[index] = (false, _attributeFactories[index].Instantiate());
+        }
     }
 
     public void ResetCurse()
@@ -301,11 +320,15 @@ internal class EffectiveAttributeSet
         // Retrieve the index for the property.
         int index = (int)propertyEnum;
 
-        // Retrieve the factory.
-        AttributeFactory itemPropertyFactory = _propertyFactories[index];
+        // Determine if the value has been overriden.
+        (bool trueIsSetFalseIsDefault, AttributeValue attributeValue) = _overrideProperties[index];
+        if (trueIsSetFalseIsDefault)
+        {
+            return attributeValue;
+        }
 
-        // Retrieve a default value from the factory.
-        AttributeValue itemProperty = itemPropertyFactory.Instantiate();
+        // Since the value has not been overriden, the value is the default value for us to start with.
+        AttributeValue itemProperty = attributeValue;
 
         // Merge all of the immutable enhancements across all of the keys.
         foreach (List<ReadOnlyAttributeSet> readOnlyPropertySetList in _enhancements.Values)
@@ -319,9 +342,6 @@ internal class EffectiveAttributeSet
 
         // Merge the writable enhancements.
         itemProperty = itemProperty.Merge(_writeProperties[index]);
-
-        // Override the enhancements.
-        itemProperty = itemProperty.Merge(_overrideProperties[index]);
 
         // Return the value.
         return itemProperty;
