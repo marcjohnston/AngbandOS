@@ -1502,10 +1502,6 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.Teleport);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.Teleport, value);
-        }
     }
     public int TreasureRating
     {
