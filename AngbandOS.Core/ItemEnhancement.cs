@@ -253,8 +253,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Value = Value,
             Valueless = Valueless,
             Vampiric = Vampiric,
-            Vorpal1InChance = Vorpal1InChance,
         };
+        itemCharacteristics.SetIntValue(AttributeEnum.Vorpal1InChance, Vorpal1InChance);
+        itemCharacteristics.SetIntValue(AttributeEnum.VorpalExtraAttacks1InChance, VorpalExtraAttacks1InChance);
         itemCharacteristics.SetIntValue(AttributeEnum.Weight, Weight);
         itemCharacteristics.SetBoolValue(AttributeEnum.Wraith, Wraith);
         itemCharacteristics.SetBoolValue(AttributeEnum.XtraMight, XtraMight);

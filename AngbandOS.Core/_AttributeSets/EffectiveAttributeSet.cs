@@ -1558,20 +1558,12 @@ internal class EffectiveAttributeSet
         {
             return GetIntValue(AttributeEnum.Vorpal1InChance);
         }
-        set
-        {
-            SetIntValue(AttributeEnum.Vorpal1InChance, value);
-        }
     }
     public int VorpalExtraAttacks1InChance
     {
         get
         {
             return GetIntValue(AttributeEnum.VorpalExtraAttacks1InChance);
-        }
-        set
-        {
-            SetIntValue(AttributeEnum.VorpalExtraAttacks1InChance, value);
         }
     }
     public int Weight

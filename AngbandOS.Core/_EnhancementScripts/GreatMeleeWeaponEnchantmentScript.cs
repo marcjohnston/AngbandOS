@@ -171,7 +171,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 }
                 if (item.CapableOfVorpalSlaying && Game.DieRoll(3) == 1)
                 {
-                    item.EffectivePropertySet.Vorpal1InChance = 2;
+                    item.EffectivePropertySet.SetIntValue(AttributeEnum.Vorpal1InChance, 2);
                 }
                 break;
             case 38:
