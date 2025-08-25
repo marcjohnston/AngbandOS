@@ -569,6 +569,7 @@
         WinnerScript,
         WizardBoltScript,
         WizardGainExperienceScript,
+        WizardGainMutationScript,
         WizardHelpScript,
         WordOfDestructionScript,
         WordOfRecallIdentifableAndUsedScript,

@@ -15,5 +15,5 @@ public class GainMutationWizardCommand : WizardCommandGameConfiguration
 
     public override string? HelpGroupName => nameof(WizardCharacterEditingHelpGroup);
 
-    public override string? ExecuteScriptName => nameof(SystemScriptsEnum.GainMutationScript);
+    public override string? ExecuteScriptName => nameof(SystemScriptsEnum.WizardGainMutationScript);
 }

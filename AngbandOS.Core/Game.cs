@@ -75,6 +75,35 @@ internal class Game
     //    throw new Exception("");
     //}
     public EffectiveAttributeSet EffectivePropertySet;
+    public void GainMutation(Mutation mutation)
+    {
+        MutationsNotPossessed.Remove(mutation);
+        if (MutationsPossessed.Count > 0 && mutation.Group != MutationGroupEnum.None)
+        {
+            int i = 0;
+            do
+            {
+                if (MutationsPossessed[i].Group == mutation.Group)
+                {
+                    Mutation other = MutationsPossessed[i];
+                    MutationsPossessed.RemoveAt(i);
+                    other.OnLose();
+                    MsgPrint(other.LoseMessage);
+                    MutationsNotPossessed.Add(other);
+                }
+                else
+                {
+                    i++;
+                }
+            } while (i < MutationsPossessed.Count);
+        }
+        MutationsPossessed.Add(mutation);
+        mutation.OnGain();
+        MsgPrint(mutation.GainMessage);
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        HandleStuff();
+    }
+
     public int EnchantBonus(int bonus)
     {
         do

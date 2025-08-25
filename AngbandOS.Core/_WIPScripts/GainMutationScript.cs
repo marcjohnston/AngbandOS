@@ -35,7 +35,7 @@ internal class GainMutationScript : Script, IScript, ICastSpellScript
         int total = 0;
         foreach (Mutation mutation in Game.MutationsNotPossessed)
         {
-            total += mutation.Frequency;
+            total += mutation.Frequency; // This here simulates the weighted random but uses frequency as the weight.
         }
         int roll = Game.DieRoll(total);
         for (int i = 0; i < Game.MutationsNotPossessed.Count; i++)
@@ -46,33 +46,10 @@ internal class GainMutationScript : Script, IScript, ICastSpellScript
                 continue;
             }
             Mutation mutation = Game.MutationsNotPossessed[i];
-            Game.MutationsNotPossessed.RemoveAt(i);
-            if (Game.MutationsPossessed.Count > 0 && mutation.Group != MutationGroupEnum.None)
-            {
-                int j = 0;
-                do
-                {
-                    if (Game.MutationsPossessed[j].Group == mutation.Group)
-                    {
-                        Mutation other = Game.MutationsPossessed[j];
-                        Game.MutationsPossessed.RemoveAt(j);
-                        other.OnLose();
-                        Game.MsgPrint(other.LoseMessage);
-                        Game.MutationsNotPossessed.Add(other);
-                    }
-                    else
-                    {
-                        j++;
-                    }
-                } while (j < Game.MutationsPossessed.Count);
-            }
-            Game.MutationsPossessed.Add(mutation);
-            mutation.OnGain();
-            Game.MsgPrint(mutation.GainMessage);
-            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-            Game.HandleStuff();
+            Game.GainMutation(mutation);
             return;
         }
         Game.MsgPrint("Oops! Fell out of mutation list!");
     }
 }
+
