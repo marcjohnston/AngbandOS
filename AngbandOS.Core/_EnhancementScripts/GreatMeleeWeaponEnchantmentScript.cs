@@ -180,7 +180,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
                 if (Game.DieRoll(5) == 1)
                 {
-                    item.EffectivePropertySet.SlayDemon = true;
+                    item.EffectivePropertySet.SetBoolValue(AttributeEnum.SlayDemon, true);
                 }
                 break;
             case 40:

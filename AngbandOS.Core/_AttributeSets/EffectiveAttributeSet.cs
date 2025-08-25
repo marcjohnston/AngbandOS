@@ -1315,20 +1315,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.SlayAnimal);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.SlayAnimal, value);
-        }
     }
     public bool SlayDemon
     {
         get
         {
             return GetBoolValue(AttributeEnum.SlayDemon);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.SlayDemon, value);
         }
     }
     public int SlayDragon
@@ -1337,20 +1329,12 @@ internal class EffectiveAttributeSet
         {
             return GetIntValue(AttributeEnum.SlayDragon);
         }
-        set
-        {
-            SetIntValue(AttributeEnum.SlayDragon, value);
-        }
     }
     public bool SlayEvil
     {
         get
         {
             return GetBoolValue(AttributeEnum.SlayEvil);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.SlayEvil, value);
         }
     }
     public bool SlayGiant
@@ -1359,20 +1343,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.SlayGiant);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.SlayGiant, value);
-        }
     }
     public bool SlayOrc
     {
         get
         {
             return GetBoolValue(AttributeEnum.SlayOrc);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.SlayOrc, value);
         }
     }
     public bool SlayTroll
@@ -1381,20 +1357,12 @@ internal class EffectiveAttributeSet
         {
             return GetBoolValue(AttributeEnum.SlayTroll);
         }
-        set
-        {
-            SetBoolValue(AttributeEnum.SlayTroll, value);
-        }
     }
     public bool SlayUndead
     {
         get
         {
             return GetBoolValue(AttributeEnum.SlayUndead);
-        }
-        set
-        {
-            SetBoolValue(AttributeEnum.SlayUndead, value);
         }
     }
     public bool SlowDigest

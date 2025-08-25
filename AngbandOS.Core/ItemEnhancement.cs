@@ -232,15 +232,15 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ShElec = ShElec,
             ShFire = ShFire,
             ShowMods = ShowMods,
-            SlayAnimal = SlayAnimal,
-            SlayDemon = SlayDemon,
-            SlayDragon = SlayDragon,
-            SlayEvil = SlayEvil,
-            SlayGiant = SlayGiant,
-            SlayOrc = SlayOrc,
-            SlayTroll = SlayTroll,
-            SlayUndead = SlayUndead,
         };
+        itemCharacteristics.SetBoolValue(AttributeEnum.SlayAnimal, SlayAnimal);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SlayDemon, SlayDemon);
+        itemCharacteristics.SetIntValue(AttributeEnum.SlayDragon, SlayDragon);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SlayEvil, SlayEvil);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SlayGiant, SlayGiant);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SlayOrc, SlayOrc);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SlayTroll, SlayTroll);
+        itemCharacteristics.SetBoolValue(AttributeEnum.SlayUndead, SlayUndead);
         itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, SlowDigest);
         itemCharacteristics.SetBoolValue(AttributeEnum.SustCha, SustCha);
         itemCharacteristics.SetBoolValue(AttributeEnum.SustCon, SustCon);
