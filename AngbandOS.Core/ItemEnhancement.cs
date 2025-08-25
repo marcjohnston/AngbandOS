@@ -249,8 +249,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             SustWis = SustWis,
             Telepathy = Telepathy,
             Teleport = Teleport,
-            TreasureRating = TreasureRating,
         };
+        itemCharacteristics.SetIntValue(AttributeEnum.TreasureRating, TreasureRating);
         itemCharacteristics.SetBoolValue(AttributeEnum.Valueless, Valueless);
         itemCharacteristics.SetBoolValue(AttributeEnum.Vampiric, Vampiric);
         itemCharacteristics.SetIntValue(AttributeEnum.Vorpal1InChance, Vorpal1InChance);

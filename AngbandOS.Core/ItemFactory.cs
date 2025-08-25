@@ -1569,7 +1569,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         characteristics.IgnoreElec = true;
         characteristics.IgnoreFire = true;
         characteristics.IgnoreCold = true;
-        characteristics.TreasureRating = 40;
+        characteristics.SetIntValue(AttributeEnum.TreasureRating, 40);
 
         if (aCursed)
         {

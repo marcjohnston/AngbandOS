@@ -1513,10 +1513,6 @@ internal class EffectiveAttributeSet
         {
             return GetIntValue(AttributeEnum.TreasureRating);
         }
-        set
-        {
-            SetIntValue(AttributeEnum.TreasureRating, value);
-        }
     }
     public bool Valueless
     {
