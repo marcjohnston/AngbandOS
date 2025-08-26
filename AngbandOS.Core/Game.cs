@@ -204,6 +204,8 @@ internal class Game
     [NonSerialized]
     private Random _fixed;
 
+    public int TreasureFeeling;
+
     public Random UseRandom => UseFixed ? _fixed : _mainSequence;
 
     /// <summary>
@@ -1235,12 +1237,12 @@ internal class Game
     public readonly int[] TempY = new int[Constants.TempMax]; // TODO: These are shared privates??? what a hack
 
     /// <summary>
-    /// Appears to be the height of the level.
+    /// Returns the number of rows for the current dungeon.
     /// </summary>
     public int CurHgt;
 
     /// <summary>
-    /// Appears to be the width of the level.
+    /// Returns the number of columns for the current dungeon.
     /// </summary>
     public int CurWid;
 
@@ -1283,10 +1285,8 @@ internal class Game
     public int PanelRowMin;
 
     public bool SpecialDanger;
-    public bool SpecialTreasure;
+
     public int TempN;
-    public int TreasureFeeling;
-    public int TreasureRating;
 
     private const string _imageMonsterHack = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private const string _imageObjectHack = "?/|\\\"!$()_-=[]{},~";
@@ -2329,10 +2329,6 @@ internal class Game
         }
         item.EnchantItem(objectLevel, true, good, great, true); 
         item.StackCount = item.MakeObjectCount;
-        if (!item.EffectivePropertySet.IsCursed && !item.EffectivePropertySet.Valueless && item.LevelNormallyFound > Difficulty)
-        {
-            TreasureRating += item.LevelNormallyFound - Difficulty;
-        }
         return item;
     }
 
@@ -10364,9 +10360,7 @@ internal class Game
             PanelColMin = 0;
             PanelColMax = 0;
             MonsterLevel = Difficulty;
-            SpecialTreasure = false;
             SpecialDanger = false;
-            TreasureRating = 0;
             DangerRating = 0;
             if (CurrentDepth == 0)
             {
@@ -10417,46 +10411,6 @@ internal class Game
                     okay = false;
                 }
             }
-            if (TreasureRating > 100)
-            {
-                TreasureFeeling = 2;
-            }
-            else if (TreasureRating > 80)
-            {
-                TreasureFeeling = 3;
-            }
-            else if (TreasureRating > 60)
-            {
-                TreasureFeeling = 4;
-            }
-            else if (TreasureRating > 40)
-            {
-                TreasureFeeling = 5;
-            }
-            else if (TreasureRating > 30)
-            {
-                TreasureFeeling = 6;
-            }
-            else if (TreasureRating > 20)
-            {
-                TreasureFeeling = 7;
-            }
-            else if (TreasureRating > 10)
-            {
-                TreasureFeeling = 8;
-            }
-            else if (TreasureRating > 0)
-            {
-                TreasureFeeling = 9;
-            }
-            else
-            {
-                TreasureFeeling = 10;
-            }
-            if (SpecialTreasure)
-            {
-                TreasureRating = 1;
-            }
             if (DangerRating > 100)
             {
                 DangerFeeling = 2;
@@ -10499,9 +10453,9 @@ internal class Game
             }
             if (CurrentDepth <= 0)
             {
-                TreasureFeeling = 0;
                 DangerFeeling = 0;
             }
+            TreasureFeeling = ComputeTreasureFeelingIndex();
             if (MonsterMax >= Constants.MaxMIdx)
             {
                 okay = false;
@@ -10509,11 +10463,7 @@ internal class Game
             if (generateAttemptNumber < 100)
             {
                 int totalFeeling = TreasureFeeling + DangerFeeling;
-                if (totalFeeling > 18 ||
-                    (Difficulty >= 5 && totalFeeling > 16) ||
-                    (Difficulty >= 10 && totalFeeling > 14) ||
-                    (Difficulty >= 20 && totalFeeling > 12) ||
-                    (Difficulty >= 40 && totalFeeling > 10))
+                if (totalFeeling > 18 || (Difficulty >= 5 && totalFeeling > 16) || (Difficulty >= 10 && totalFeeling > 14) || (Difficulty >= 20 && totalFeeling > 12) || (Difficulty >= 40 && totalFeeling > 10))
                 {
                     okay = false;
                 }
@@ -10527,6 +10477,67 @@ internal class Game
             WipeMList();
         }
         MarkLevelEntry();
+    }
+
+    public int ComputeTreasureFeelingIndex()
+    {
+        int treasureRating = 0;
+        for (int y = 0; y < CurHgt; y++)
+        {
+            for (int x = 0; x < CurWid; x++)
+            {
+                GridTile cPtr = Map.Grid[y][x];
+                foreach (Item item in cPtr.Items)
+                {
+                    if (item.EffectivePropertySet.HasKeyedItemEnhancements("fixed"))
+                    {
+                        return 1;
+                    }
+                    if (!item.EffectivePropertySet.IsCursed && !item.EffectivePropertySet.Valueless && item.LevelNormallyFound > Difficulty)
+                    {
+                        treasureRating += item.LevelNormallyFound - Difficulty;
+                    }
+                    treasureRating += item.EffectivePropertySet.TreasureRating;
+                }
+            }
+        }
+
+        if (treasureRating > 100)
+        {
+            return 2;
+        }
+        else if (treasureRating > 80)
+        {
+            return 3;
+        }
+        else if (treasureRating > 60)
+        {
+            return 4;
+        }
+        else if (treasureRating > 40)
+        {
+            return 5;
+        }
+        else if (treasureRating > 30)
+        {
+            return 6;
+        }
+        else if (treasureRating > 20)
+        {
+            return 7;
+        }
+        else if (treasureRating > 10)
+        {
+            return 8;
+        }
+        else if (treasureRating > 0)
+        {
+            return 9;
+        }
+        else
+        {
+            return 10;
+        }
     }
 
     private void BuildField(int yy, int xx)

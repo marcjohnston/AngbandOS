@@ -11,7 +11,6 @@ public class HatOfTeleportationItemEnhancement : ItemEnhancementGameConfiguratio
 {
     public override bool Valueless => true;
     public override string? FriendlyName => "of Teleportation";
-    public override int TreasureRating => 0;
     public override bool Teleport => true;
     public override int Value => 250;
 }

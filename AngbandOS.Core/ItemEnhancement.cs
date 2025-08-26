@@ -531,7 +531,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 
     private string? BonusHitsRollExpression { get; }
 
-    public string? BonusDamageRollExpression { get; }
+    private string? BonusDamageRollExpression { get; }
 
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and
@@ -762,7 +762,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool Teleport { get; }
 
     /// <inheritdoc />
-    public int TreasureRating { get; }
+    private int TreasureRating { get; }
 
     /// <inheritdoc />
     private bool Valueless { get; }

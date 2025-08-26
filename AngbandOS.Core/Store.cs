@@ -717,10 +717,6 @@ internal class Store
             return;
         }
 
-        // We need to preserve the treasure rating for the level because we will be creating items that will alter the treasure rating state.  We will restore
-        // this treasure rating when we are done.
-        int oldRating = Game.TreasureRating;
-
         // First phase, is to delete some items from the store.  Get the number of inventory items and alter this count by the turnover rate.
         int desiredTurnOverInventoryCount = StoreInventoryList.Count;
         desiredTurnOverInventoryCount -= Game.DieRoll(StoreFactory.StoreTurnover);
@@ -777,9 +773,6 @@ internal class Store
         {
             StoreCreate();
         }
-
-        // Restore the level treasure rating.
-        Game.TreasureRating = oldRating;
     }
 
     public void StoreShuffle()

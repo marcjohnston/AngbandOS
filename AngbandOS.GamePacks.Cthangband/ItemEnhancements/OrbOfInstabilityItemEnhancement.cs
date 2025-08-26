@@ -15,7 +15,6 @@ public class OrbOfInstabilityItemEnhancement : ItemEnhancementGameConfiguration
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int TreasureRating => 0;
         public override bool Teleport => true;
     public override int Value => 650;
 }

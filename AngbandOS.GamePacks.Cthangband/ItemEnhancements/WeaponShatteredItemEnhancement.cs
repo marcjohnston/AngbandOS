@@ -13,5 +13,4 @@ public class WeaponShatteredItemEnhancement : ItemEnhancementGameConfiguration
     public override string? FriendlyName => "(Shattered)";
     public override string? BonusDamageRollExpression => "1d5";
     public override string? BonusHitsRollExpression => "1d5";
-    public override int TreasureRating => 0;
 }

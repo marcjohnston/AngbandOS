@@ -1756,8 +1756,6 @@ internal sealed class Item : IComparable<Item>
         }
         FixedArtifact = fixedArtifact;
         EffectivePropertySet.AddEnhancement("fixed", fixedArtifactItemPropertySet.ToReadOnly());
-        Game.TreasureRating += fixedArtifactItemPropertySet.TreasureRating;
-        Game.SpecialTreasure = true;
         return true;
     }
 
@@ -1883,12 +1881,6 @@ internal sealed class Item : IComparable<Item>
                 }
             }
         }
-
-        Game.TreasureRating += _factory.ItemEnhancement.TreasureRating; // TODO: This only pulls from the ItemFactory and not generated characteristcs
-        if (IsRandomArtifact) 
-        {
-            Game.TreasureRating += EffectivePropertySet.TreasureRating;
-        }
     }
 
     public void ApplyRandomResistance(WeightedRandom<ItemEnhancement> itemAdditiveBundleWeightedRandom)
@@ -2010,9 +2002,9 @@ internal sealed class Item : IComparable<Item>
     public Item(Game game, ItemFactory factory)
     {
         Game = game;
+        _factory = factory;
 
         // Generate the read-only item characteristics from the factory.
-        _factory = factory;
         EffectivePropertySet = new EffectiveAttributeSet();
         ReadOnlyAttributeSet factoryPropertySet = factory.ItemEnhancement.GenerateItemCharacteristics();
         EffectivePropertySet.AddEnhancement(FactoryAttributeKey, factoryPropertySet);
@@ -2064,7 +2056,6 @@ internal sealed class Item : IComparable<Item>
             // Check to see if we need to remove properties.
             if (IsRare)
             {
-                Game.TreasureRating -= rareItem.TreasureRating;
                 EffectivePropertySet.RemoveEnhancements("rare");
             }
         }
@@ -2090,7 +2081,6 @@ internal sealed class Item : IComparable<Item>
             rareItemEffectivePropertySet.BonusTunnel *= goodBadMultiplier;
             rareItemEffectivePropertySet.BonusAttacks *= goodBadMultiplier;
             rareItemEffectivePropertySet.BonusSpeed *= goodBadMultiplier;
-            Game.TreasureRating += rareItem.TreasureRating;
             EffectivePropertySet.AddEnhancement("rare", rareItemEffectivePropertySet.ToReadOnly());
         }
     }

@@ -12,6 +12,5 @@ public class BootsOfSlownessItemEnhancement : ItemEnhancementGameConfiguration
     public override bool Valueless => true;
     public override string? FriendlyName => "of Slowness";
     public override string? BonusSpeedRollExpression => "1d5";
-    public override int TreasureRating => 0;
     public override int Value => 99000;
 }

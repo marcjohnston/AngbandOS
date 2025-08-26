@@ -68,19 +68,12 @@ internal class SayFeelingScript : UniversalScript, IGetKey
             {
                 Game.DangerFeeling = 10;
             }
-            if (Game.TreasureFeeling < 0)
-            {
-                Game.TreasureFeeling = 0;
-            }
-            if (Game.TreasureFeeling > 10)
-            {
-                Game.TreasureFeeling = 10;
-            }
+
             // Special feeling overrides the normal two-part feeling
-            if (Game.DangerFeeling == 1 || Game.TreasureFeeling == 1)
+            string message;
+            if(Game.DangerFeeling == 1 || Game.TreasureFeeling == 1)
             {
-                string message = DangerFeelingText[1];
-                Game.MsgPrint(Game.LevelFeel ? message : DangerFeelingText[0]);
+                 message = DangerFeelingText[1];
             }
             else
             {
@@ -90,9 +83,9 @@ internal class SayFeelingScript : UniversalScript, IGetKey
                 {
                     conjunction = ", but ";
                 }
-                string message = DangerFeelingText[Game.DangerFeeling] + conjunction + TreasureFeelingText[Game.TreasureFeeling];
-                Game.MsgPrint(Game.LevelFeel ? message : DangerFeelingText[0]);
+                message = DangerFeelingText[Game.DangerFeeling] + conjunction + TreasureFeelingText[Game.TreasureFeeling];
             }
+            Game.MsgPrint(Game.LevelFeel ? message : DangerFeelingText[0]);
         }
     }
 }

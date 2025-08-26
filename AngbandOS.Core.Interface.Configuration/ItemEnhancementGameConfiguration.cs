@@ -163,6 +163,10 @@ public class ItemEnhancementGameConfiguration
     public virtual bool SustWis { get; set; } = false;
     public virtual bool Telepathy { get; set; } = false;
     public virtual bool Teleport { get; set; } = false;
+
+    /// <summary>
+    /// Returns an additional treasure rating to apply to the item.  This treasure rating will be added to the out-of-level delta that is automatically added.
+    /// </summary>
     public virtual int TreasureRating { get; set; } = 0;
 
     /// <summary>

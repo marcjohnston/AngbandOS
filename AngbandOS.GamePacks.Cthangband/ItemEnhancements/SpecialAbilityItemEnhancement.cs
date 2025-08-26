@@ -11,5 +11,4 @@ public class SpecialAbilityItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Valueless => true;
     public override string? FriendlyName => "";
-    public override int TreasureRating => 0;
 }

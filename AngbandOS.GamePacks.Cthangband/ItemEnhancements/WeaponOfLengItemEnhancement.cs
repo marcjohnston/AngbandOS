@@ -17,7 +17,6 @@ public class WeaponOfLengItemEnhancement : ItemEnhancementGameConfiguration
     public override string? BonusArmorClassRollExpression => "1d10";
     public override string? BonusDamageRollExpression => "1d20";
     public override string? BonusHitsRollExpression => "1d20";
-    public override int TreasureRating => 0;
     public override bool SeeInvis => true;
     public override int Value => -25500;
 }

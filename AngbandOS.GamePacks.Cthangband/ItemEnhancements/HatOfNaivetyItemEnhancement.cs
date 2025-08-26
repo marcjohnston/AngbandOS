@@ -12,6 +12,5 @@ public class HatOfNaivetyItemEnhancement : ItemEnhancementGameConfiguration
     public override bool Valueless => true;
     public override string? FriendlyName => "of Naivety";
     public override string? BonusWisdomRollExpression => "1d5";
-    public override int TreasureRating => 0;
     public override int Value => 3600;
 }

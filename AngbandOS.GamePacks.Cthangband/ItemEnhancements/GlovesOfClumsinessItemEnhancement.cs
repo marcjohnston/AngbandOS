@@ -12,5 +12,4 @@ public class GlovesOfClumsinessItemEnhancement : ItemEnhancementGameConfiguratio
     public override bool Valueless => true;
     public override string? FriendlyName => "of Clumsiness";
     public override string? BonusDexterityRollExpression => "1d10";
-    public override int TreasureRating => 0;
 }

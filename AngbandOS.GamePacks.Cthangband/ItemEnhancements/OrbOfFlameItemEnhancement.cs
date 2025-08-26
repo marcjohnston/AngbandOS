@@ -15,6 +15,5 @@ public class OrbOfFlameItemEnhancement : ItemEnhancementGameConfiguration
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
-    public override int TreasureRating => 0;
     public override bool ResFire => true;
     }
