@@ -14,7 +14,7 @@ public class SummonUndeadScrollItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsMagical => true;
 
-    public override bool IsBroken => true;
+    public override bool Valueless => true;
     /// <summary>
     /// Returns true because this is a broken item. 
     /// </summary>

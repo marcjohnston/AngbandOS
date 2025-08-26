@@ -16,7 +16,7 @@ public class WoeRingItemFactory : ItemFactoryGameConfiguration
     /// Returns true because this is a broken item. 
     /// </summary>
     public override bool InitialBrokenStomp => true;
-    public override bool IsBroken => true;
+    public override bool Valueless => true;
     public override string SymbolBindingKey => nameof(EqualSignSymbol);
     public override string Name => "Woe";
     public override string? DescriptionSyntax => "$Flavor$ Ring~ of $Name$";

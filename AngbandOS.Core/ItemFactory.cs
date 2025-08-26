@@ -57,7 +57,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         IsMagical = itemFactoryGameConfiguration.IsMagical;
         ValuePerTurnOfLight = itemFactoryGameConfiguration.ValuePerTurnOfLight;
         AimingBindingTuple = itemFactoryGameConfiguration.AimingBindingTuple;
-        IsBroken = itemFactoryGameConfiguration.IsBroken;
+        Valueless = itemFactoryGameConfiguration.Valueless;
         InitialBrokenStomp = itemFactoryGameConfiguration.InitialBrokenStomp;
         InitialAverageStomp = itemFactoryGameConfiguration.InitialAverageStomp;
         InitialGoodStomp = itemFactoryGameConfiguration.InitialGoodStomp;
@@ -246,7 +246,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             IsMagical = IsMagical,
             ValuePerTurnOfLight = ValuePerTurnOfLight,
             AimingBindingTuple = AimingBindingTuple,
-            IsBroken = IsBroken,
+            Valueless = Valueless,
             InitialBrokenStomp = InitialBrokenStomp,
             InitialAverageStomp = InitialAverageStomp,
             InitialGoodStomp = InitialGoodStomp,
@@ -1830,7 +1830,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// <summary>
     /// Returns true, if the item is broken; false, otherwise.  Broken items have no value and will be stomped.
     /// </summary>
-    public bool IsBroken { get; } = false;
+    public bool Valueless { get; } = false;
 
     /// <summary>
     /// Returns true, if items of this factory that have a broken quality that should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.  

@@ -135,7 +135,7 @@ public class ItemFactoryGameConfiguration
     /// <summary>
     /// Returns true, if the item is broken; false, otherwise.  Broken items have no value and will be stomped.
     /// </summary>
-    public virtual bool IsBroken { get; set; } = false;
+    public virtual bool Valueless { get; set; } = false;
 
     /// <summary>
     /// Returns true, if items of this factory that have a broken quality that should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.  
