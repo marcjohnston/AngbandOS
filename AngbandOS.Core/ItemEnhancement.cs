@@ -13,24 +13,20 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 {
-    #region API
-    private readonly Game Game;
-
+    #region Constructors
     public ItemEnhancement(Game game, ItemEnhancementGameConfiguration itemEnhancementGameConfiguration)
     {
         Game = game;
-
-        CanApplyBlessedArtifactBias = itemEnhancementGameConfiguration.CanApplyBlessedArtifactBias;
-        CanApplyArtifactBiasSlaying = itemEnhancementGameConfiguration.CanApplyArtifactBiasSlaying;
-        CanApplyBlowsBonus = itemEnhancementGameConfiguration.CanApplyBlowsBonus;
-        CanReflectBoltsAndArrows = itemEnhancementGameConfiguration.CanReflectBoltsAndArrows;
-        CanApplySlayingBonus = itemEnhancementGameConfiguration.CanApplySlayingBonus;
-        CanApplyBonusArmorClassMiscPower = itemEnhancementGameConfiguration.CanApplyBonusArmorClassMiscPower;
-
         Key = itemEnhancementGameConfiguration.Key ?? itemEnhancementGameConfiguration.GetType().Name;
-        ApplicableItemFactoryBindingKeys = itemEnhancementGameConfiguration.ApplicableItemFactoryBindingKeys;
+
+        ActivationName = itemEnhancementGameConfiguration.ActivationName;
         AdditionalItemEnhancementWeightedRandomBindingKey = itemEnhancementGameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
-        FriendlyName = itemEnhancementGameConfiguration.FriendlyName;
+        Aggravate = itemEnhancementGameConfiguration.Aggravate;
+        AntiTheft = itemEnhancementGameConfiguration.AntiTheft;
+        ApplicableItemFactoryBindingKeys = itemEnhancementGameConfiguration.ApplicableItemFactoryBindingKeys;
+        ArtifactBiasWeightedRandomBindingKey = itemEnhancementGameConfiguration.ArtifactBiasWeightedRandomBindingKey;
+        Blessed = itemEnhancementGameConfiguration.Blessed;
+        Blows = itemEnhancementGameConfiguration.Blows;
         BonusStrengthRollExpression = itemEnhancementGameConfiguration.BonusStrengthRollExpression;
         BonusIntelligenceRollExpression = itemEnhancementGameConfiguration.BonusIntelligenceRollExpression;
         BonusWisdomRollExpression = itemEnhancementGameConfiguration.BonusWisdomRollExpression;
@@ -46,20 +42,19 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BonusArmorClassRollExpression = itemEnhancementGameConfiguration.BonusArmorClassRollExpression;
         BonusHitsRollExpression = itemEnhancementGameConfiguration.BonusHitsRollExpression;
         BonusDamageRollExpression = itemEnhancementGameConfiguration.BonusDamageRollExpression;
-        ActivationName = itemEnhancementGameConfiguration.ActivationName;
-        Aggravate = itemEnhancementGameConfiguration.Aggravate;
-        AntiTheft = itemEnhancementGameConfiguration.AntiTheft;
-        ArtifactBiasWeightedRandomBindingKey = itemEnhancementGameConfiguration.ArtifactBiasWeightedRandomBindingKey;
-        Blessed = itemEnhancementGameConfiguration.Blessed;
-        Blows = itemEnhancementGameConfiguration.Blows;
         BrandAcid = itemEnhancementGameConfiguration.BrandAcid;
         BrandCold = itemEnhancementGameConfiguration.BrandCold;
         BrandElec = itemEnhancementGameConfiguration.BrandElec;
         BrandFire = itemEnhancementGameConfiguration.BrandFire;
         BrandPois = itemEnhancementGameConfiguration.BrandPois;
+        CanApplyBlessedArtifactBias = itemEnhancementGameConfiguration.CanApplyBlessedArtifactBias;
+        CanApplyArtifactBiasSlaying = itemEnhancementGameConfiguration.CanApplyArtifactBiasSlaying;
+        CanApplyBlowsBonus = itemEnhancementGameConfiguration.CanApplyBlowsBonus;
+        CanReflectBoltsAndArrows = itemEnhancementGameConfiguration.CanReflectBoltsAndArrows;
+        CanApplySlayingBonus = itemEnhancementGameConfiguration.CanApplySlayingBonus;
+        CanApplyBonusArmorClassMiscPower = itemEnhancementGameConfiguration.CanApplyBonusArmorClassMiscPower;
         Chaotic = itemEnhancementGameConfiguration.Chaotic;
         Color = itemEnhancementGameConfiguration.Color;
-        IsCursed = itemEnhancementGameConfiguration.IsCursed;
         DamageDice = itemEnhancementGameConfiguration.DamageDice;
         DiceSides = itemEnhancementGameConfiguration.DiceSides;
         DrainExp = itemEnhancementGameConfiguration.DrainExp;
@@ -67,6 +62,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         EasyKnow = itemEnhancementGameConfiguration.EasyKnow;
         Feather = itemEnhancementGameConfiguration.Feather;
         FreeAct = itemEnhancementGameConfiguration.FreeAct;
+        FriendlyName = itemEnhancementGameConfiguration.FriendlyName;
         HeavyCurse = itemEnhancementGameConfiguration.HeavyCurse;
         HideType = itemEnhancementGameConfiguration.HideType;
         HoldLife = itemEnhancementGameConfiguration.HoldLife;
@@ -79,6 +75,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         ImElec = itemEnhancementGameConfiguration.ImElec;
         ImFire = itemEnhancementGameConfiguration.ImFire;
         Impact = itemEnhancementGameConfiguration.Impact;
+        IsCursed = itemEnhancementGameConfiguration.IsCursed;
         NoMagic = itemEnhancementGameConfiguration.NoMagic;
         NoTele = itemEnhancementGameConfiguration.NoTele;
         PermaCurse = itemEnhancementGameConfiguration.PermaCurse;
@@ -132,6 +129,10 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         XtraMight = itemEnhancementGameConfiguration.XtraMight;
         XtraShots = itemEnhancementGameConfiguration.XtraShots;
     }
+    #endregion
+
+    #region API
+    private readonly Game Game;
 
     /// <summary>
     /// Returns this <see cref="ItemEnhancement"/> object itself.  This method allows the <see cref="ItemEnhancement"/> and <see cref="ItemEnhancementWeightedRandom"/> to be specified in the <see cref="MappedItemEnhancement.ItemEnhancements"/>.
@@ -462,325 +463,327 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private string Key { get; }
 
     /// <summary>
-    /// Returns the value of the enhancement.  Returns 0, by default.
-    /// </summary>
-    private int Value { get; } = 0;
-
-    /// <summary>
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
     /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
     /// </summary>
     private string[]? ApplicableItemFactoryBindingKeys { get; } = null;
 
     private string? AdditionalItemEnhancementWeightedRandomBindingKey { get; } = null;
-
-    /// <summary>
-    /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
-    /// </summary>
-    private string? FriendlyName { get; } = null;
     #endregion
 
     #region ItemPropertySet Light-weight & Abstract Properties
     /// <summary>
+    /// Returns the value of the enhancement.  Returns 0, by default.
+    /// </summary>
+    private int Value { get; }
+
+    /// <summary>
+    /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
+    /// </summary>
+    private string? FriendlyName { get; }
+
+    /// <summary>
     /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
     /// </summary>
-    private bool CanApplyBonusArmorClassMiscPower { get; } = false;
+    private bool CanApplyBonusArmorClassMiscPower { get; }
 
     /// <summary>
     /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
     /// </summary>
-    private bool CanReflectBoltsAndArrows { get; } = false;
+    private bool CanReflectBoltsAndArrows { get; }
 
     /// <summary>
     /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns true, for all items except bows; which return false.
     /// </summary>
-    private bool CanApplyArtifactBiasSlaying { get; } = true;
+    private bool CanApplyArtifactBiasSlaying { get; }
 
     /// <summary>
     /// Returns true, if an item of this factory can have be blessed for priestly biased artifacts.  Returns false, for all items except swords and polearms; which return false.
     /// </summary>
-    private bool CanApplyBlessedArtifactBias { get; } = false;
+    private bool CanApplyBlessedArtifactBias { get; }
 
     /// <summary>
     /// Returns true, if the item can apply a blows bonus.  Returns false, by default. Bows, return true.
     /// </summary>
-    private bool CanApplyBlowsBonus { get; } = false;
+    private bool CanApplyBlowsBonus { get; }
 
     /// <summary>
     /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    private bool CanApplySlayingBonus { get; } = false;
+    private bool CanApplySlayingBonus { get; }
 
-    private string? BonusStrengthRollExpression { get; } = null;
-    private string? BonusIntelligenceRollExpression { get; } = null;
-    private string? BonusWisdomRollExpression { get; } = null;
-    private string? BonusDexterityRollExpression { get; } = null;
-    private string? BonusConstitutionRollExpression { get; } = null;
-    private string? BonusCharismaRollExpression { get; } = null;
-    private string? BonusStealthRollExpression { get; } = null;
-    private string? BonusSearchRollExpression { get; } = null;
-    private string? BonusInfravisionRollExpression { get; } = null;
-    private string? BonusTunnelRollExpression { get; } = null;
-    private string? BonusAttacksRollExpression { get; } = null;
-    private string? BonusSpeedRollExpression { get; } = null;
+    private string? BonusStrengthRollExpression { get; }
+    private string? BonusIntelligenceRollExpression { get; }
+    private string? BonusWisdomRollExpression { get; }
+    private string? BonusDexterityRollExpression { get; }
+    private string? BonusConstitutionRollExpression { get; }
+    private string? BonusCharismaRollExpression { get; }
+    private string? BonusStealthRollExpression { get; }
+    private string? BonusSearchRollExpression { get; }
+    private string? BonusInfravisionRollExpression { get; }
+    private string? BonusTunnelRollExpression { get; }
+    private string? BonusAttacksRollExpression { get; }
+    private string? BonusSpeedRollExpression { get; }
 
-    private string? BonusArmorClassRollExpression { get; } = null;
+    private string? BonusArmorClassRollExpression { get; } 
 
-    private string? BonusHitsRollExpression { get; } = null;
+    private string? BonusHitsRollExpression { get; }
 
-    public string? BonusDamageRollExpression { get; } = null;
+    public string? BonusDamageRollExpression { get; }
 
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and
     /// random artifacts may have an <see cref="Activation"/>.  Returns null, by default.  This property is used to bind the <see cref="Activation"/> property during the bind phase.
     /// </summary>
     /// <inheritdoc />
-    private string? ActivationName { get; } = null;
+    private string? ActivationName { get; }
 
     /// <inheritdoc />
-    private bool Aggravate { get; } = false;
+    private bool Aggravate { get; }
     
     /// <inheritdoc />
-    private bool AntiTheft { get; } = false;
+    private bool AntiTheft { get; }
 
-    private string? ArtifactBiasWeightedRandomBindingKey { get; } = null;
+    private string? ArtifactBiasWeightedRandomBindingKey { get; }
     
     /// <inheritdoc />
-    private bool Blessed { get; } = false;
+    private bool Blessed { get; }
 
     /// <inheritdoc/>
-    private bool Blows { get; } = false;
+    private bool Blows { get; }
     
     /// <inheritdoc />
-    private bool BrandAcid { get; } = false;
+    private bool BrandAcid { get; }
     
     /// <inheritdoc />
-    private bool BrandCold { get; } = false;
+    private bool BrandCold { get; }
     
     /// <inheritdoc />
-    private bool BrandElec { get; } = false;
+    private bool BrandElec { get; }
     
     /// <inheritdoc />
-    private bool BrandFire { get; } = false;
+    private bool BrandFire { get; }
     
     /// <inheritdoc />
-    private bool BrandPois { get; } = false;
+    private bool BrandPois { get; }
         
     /// <inheritdoc />
-    private bool Chaotic { get; } = false;
+    private bool Chaotic { get; }
 
-    public ColorEnum Color { get; } = ColorEnum.White;
+    public ColorEnum Color { get; }
    
     /// <inheritdoc />
-    private bool IsCursed { get; } = false;
+    private bool IsCursed { get; }
 
-    private int DamageDice { get; } = 0;
-    private int DiceSides { get; } = 0;
+    private int DamageDice { get; }
+
+    private int DiceSides { get; }
 
     /// <inheritdoc />
-    private bool DrainExp { get; } = false;
+    private bool DrainExp { get; }
     
     /// <inheritdoc />
-    private bool DreadCurse { get; } = false;
+    private bool DreadCurse { get; }
     
     /// <inheritdoc />
-    private bool EasyKnow { get; } = false;
+    private bool EasyKnow { get; }
     
     /// <inheritdoc />
-    private bool Feather { get; } = false;
+    private bool Feather { get; }
     
     /// <inheritdoc />
-    private bool FreeAct { get; } = false;
+    private bool FreeAct { get; }
     
     /// <inheritdoc />
-    private bool HeavyCurse { get; } = false;
+    private bool HeavyCurse { get; }
     
     /// <inheritdoc />
-    private bool HideType { get; } = false;
+    private bool HideType { get; }
     
     /// <inheritdoc />
-    private bool HoldLife { get; } = false;
+    private bool HoldLife { get; }
     
     /// <inheritdoc />
-    private bool IgnoreAcid { get; } = false;
+    private bool IgnoreAcid { get; }
     
     /// <inheritdoc />
-    private bool IgnoreCold { get; } = false;
+    private bool IgnoreCold { get; }
     
     /// <inheritdoc />
-    private bool IgnoreElec { get; } = false;
+    private bool IgnoreElec { get; }
     
     /// <inheritdoc />
-    private bool IgnoreFire { get; } = false;
+    private bool IgnoreFire { get; }
     
     /// <inheritdoc />
-    private bool ImAcid { get; } = false;
+    private bool ImAcid { get; }
     
     /// <inheritdoc />
-    private bool ImCold { get; } = false;
+    private bool ImCold { get; }
     
     /// <inheritdoc />
-    private bool ImElec { get; } = false;
+    private bool ImElec { get; }
     
     /// <inheritdoc />
-    private bool ImFire { get; } = false;
+    private bool ImFire { get; }
     
     /// <inheritdoc />
-    private bool Impact { get; } = false;
+    private bool Impact { get; }
         
     /// <inheritdoc />
-    private bool NoMagic { get; } = false;
+    private bool NoMagic { get; }
     
     /// <inheritdoc />
-    private bool NoTele { get; } = false;
+    private bool NoTele { get; }
     
     /// <inheritdoc />
-    private bool PermaCurse { get; } = false;
+    private bool PermaCurse { get; }
     
     /// <inheritdoc />
-    private int Radius { get; } = 0;
+    private int Radius { get; }
     
     /// <inheritdoc />
-    private bool Reflect { get; } = false;
+    private bool Reflect { get; }
     
     /// <inheritdoc />
-    private bool Regen { get; } = false;
+    private bool Regen { get; }
     
     /// <inheritdoc />
-    private bool ResAcid { get; } = false;
+    private bool ResAcid { get; }
     
     /// <inheritdoc />
-    private bool ResBlind { get; } = false;
+    private bool ResBlind { get; }
     
     /// <inheritdoc />
-    private bool ResChaos { get; } = false;
+    private bool ResChaos { get; }
     
     /// <inheritdoc />
-    private bool ResCold { get; } = false;
+    private bool ResCold { get; }
     
     /// <inheritdoc />
-    private bool ResConf { get; } = false;
+    private bool ResConf { get; }
     
     /// <inheritdoc />
-    private bool ResDark { get; } = false;
+    private bool ResDark { get; }
     
     /// <inheritdoc />
-    private bool ResDisen { get; } = false;
+    private bool ResDisen { get; }
     
     /// <inheritdoc />
-    private bool ResElec { get; } = false;
+    private bool ResElec { get; }
     
     /// <inheritdoc />
-    private bool ResFear { get; } = false;
+    private bool ResFear { get; }
     
     /// <inheritdoc />
-    private bool ResFire { get; } = false;
+    private bool ResFire { get; }
     
     /// <inheritdoc />
-    private bool ResLight { get; } = false;
+    private bool ResLight { get; }
     
     /// <inheritdoc />
-    private bool ResNether { get; } = false;
+    private bool ResNether { get; }
     
     /// <inheritdoc />
-    private bool ResNexus { get; } = false;
+    private bool ResNexus { get; }
     
     /// <inheritdoc />
-    private bool ResPois { get; } = false;
+    private bool ResPois { get; }
     
     /// <inheritdoc />
-    private bool ResShards { get; } = false;
+    private bool ResShards { get; }
     
     /// <inheritdoc />
-    private bool ResSound { get; } = false;
+    private bool ResSound { get; }
         
     /// <inheritdoc />
-    private bool SeeInvis { get; } = false;
+    private bool SeeInvis { get; }
     
     /// <inheritdoc />
-    private bool ShElec { get; } = false;
+    private bool ShElec { get; }
     
     /// <inheritdoc />
-    private bool ShFire { get; } = false;
+    private bool ShFire { get; }
     
     /// <inheritdoc />
-    private bool ShowMods { get; } = false;
+    private bool ShowMods { get; }
     
     /// <inheritdoc />
-    private bool SlayAnimal { get; } = false;
+    private bool SlayAnimal { get; }
     
     /// <inheritdoc />
-    private bool SlayDemon { get; } = false;
+    private bool SlayDemon { get; }
     
     /// <inheritdoc />
-    private int SlayDragon { get; } = 1;
+    private int SlayDragon { get; }
     
     /// <inheritdoc />
-    private bool SlayEvil { get; } = false;
+    private bool SlayEvil { get; }
     
     /// <inheritdoc />
-    private bool SlayGiant { get; } = false;
+    private bool SlayGiant { get; }
     
     /// <inheritdoc />
-    private bool SlayOrc { get; } = false;
+    private bool SlayOrc { get; }
     
     /// <inheritdoc />
-    private bool SlayTroll { get; } = false;
+    private bool SlayTroll { get; }
     
     /// <inheritdoc />
-    private bool SlayUndead { get; } = false;
+    private bool SlayUndead { get; }
     
     /// <inheritdoc />
-    private bool SlowDigest { get; } = false;
+    private bool SlowDigest { get; }
         
     /// <inheritdoc />
-    private bool SustCha { get; } = false;
+    private bool SustCha { get; }
     
     /// <inheritdoc />
-    private bool SustCon { get; } = false;
+    private bool SustCon { get; }
     
     /// <inheritdoc />
-    private bool SustDex { get; } = false;
+    private bool SustDex { get; }
     
     /// <inheritdoc />
-    private bool SustInt { get; } = false;
+    private bool SustInt { get; }
     
     /// <inheritdoc />
-    private bool SustStr { get; } = false;
+    private bool SustStr { get; }
     
     /// <inheritdoc />
-    private bool SustWis { get; } = false;
+    private bool SustWis { get; }
     
     /// <inheritdoc />
-    private bool Telepathy { get; } = false;
+    private bool Telepathy { get; }
     
     /// <inheritdoc />
-    private bool Teleport { get; } = false;
+    private bool Teleport { get; }
 
     /// <inheritdoc />
-    public int TreasureRating { get; } = 0;
+    public int TreasureRating { get; }
 
     /// <inheritdoc />
-    private bool Valueless { get; } = false;
+    private bool Valueless { get; }
 
     /// <inheritdoc />
-    private bool Vampiric { get; } = false;
+    private bool Vampiric { get; }
     
     /// <inheritdoc />
-    private int Vorpal1InChance { get; } = 0;
-    private int VorpalExtraAttacks1InChance { get; } = 0;
+    private int Vorpal1InChance { get; }
+
+    private int VorpalExtraAttacks1InChance { get; }
 
     private int Weight { get; } = 0;
     
     /// <inheritdoc />
-    private bool Wraith { get; } = false;
+    private bool Wraith { get; }
     
     /// <inheritdoc />
-    private bool XtraMight { get; } = false;
+    private bool XtraMight { get; }
     
     /// <inheritdoc />
-    private bool XtraShots { get; } = false;
+    private bool XtraShots { get; }
     #endregion
 }
