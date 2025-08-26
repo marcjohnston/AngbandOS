@@ -1545,7 +1545,7 @@ internal sealed class Item : IComparable<Item>
     /// Returns the actual value of the item.  This real value may not be known, if the item is unknown.  This real value is also used by the Alchemy script to convert the item into gold.
     /// </summary>
     /// <returns></returns>
-    public int GetRealUncursedValue()
+    public int GetUncursedValue()
     {
         // If the factory reports the item as valueless, then the item is valueless.
         if (EffectivePropertySet.Valueless)
@@ -1656,7 +1656,7 @@ internal sealed class Item : IComparable<Item>
             {
                 return 0;
             }
-            value = GetRealUncursedValue();
+            value = GetUncursedValue();
         }
         else
         {

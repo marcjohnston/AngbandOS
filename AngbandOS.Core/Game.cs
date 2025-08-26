@@ -6895,7 +6895,7 @@ internal class Game
     public bool DoCmdChannel(Item item, int manaValue)
     {
         int manaNeeded;
-        int itemCost = item.GetRealUncursedValue();
+        int itemCost = item.GetUncursedValue();
 
         // Never channel worthless items
         if (itemCost <= 0)

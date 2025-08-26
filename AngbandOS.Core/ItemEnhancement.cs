@@ -594,11 +594,11 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         ArtifactBiasWeightedRandom = Game.SingletonRepository.GetNullable<ArtifactBiasWeightedRandom>(ArtifactBiasWeightedRandomBindingKey);
         ApplicableItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(ApplicableItemFactoryBindingKeys);
 
-        //if (Value == 0)
-        //{
-        //    int value = GetValue();
-        //    Game.PasteProperty(
-        //}
+        if (Value == 0)
+        {
+            int value = GetValue();
+            Game.PasteProperty(
+        }
     }
 
     public string ToJson()

@@ -73,7 +73,7 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IActivateItemS
             Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
             return UsedResultEnum.True;
         }
-        int price = oPtr.GetRealUncursedValue();
+        int price = oPtr.GetUncursedValue();
         if (price <= 0)
         {
             Game.MsgPrint($"You turn {oName} to fool's gold.");
