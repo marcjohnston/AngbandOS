@@ -8,4 +8,5 @@ public class IgnoreElementsTreasureItemFactoryItemEnhancement : ItemEnhancementG
     public override bool IgnoreCold => true;
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
+    public override int Value => 400;
 }

@@ -5,4 +5,5 @@ public class IgnoreFireItemFactoryItemEnhancement : ItemEnhancementGameConfigura
 {
     public override bool IgnoreFire => true;
     public override bool EasyKnow => true;
+    public override int Value => 100;
 }

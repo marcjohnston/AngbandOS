@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -11,4 +11,5 @@ public class ResistAcidAndAcidBiasItemEnhancement : ItemEnhancementGameConfigura
 {
     public override bool ResAcid => true;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Acid1In1ArtifactBiasWeightedRandom);
+    public override int Value => 1250;
 }

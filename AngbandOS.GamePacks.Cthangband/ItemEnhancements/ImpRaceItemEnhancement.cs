@@ -8,4 +8,5 @@ public class ImpRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusWisdomRollExpression => "-1";
     public override string BonusIntelligenceRollExpression => "-1";
     public override string BonusDexterityRollExpression => "1";
+    public override int Value => -1350;
 }

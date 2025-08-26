@@ -8,4 +8,5 @@ public class SpriteRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusWisdomRollExpression => "3";
     public override string BonusIntelligenceRollExpression => "3";
     public override string BonusDexterityRollExpression => "3";
+    public override int Value => 4500;
 }

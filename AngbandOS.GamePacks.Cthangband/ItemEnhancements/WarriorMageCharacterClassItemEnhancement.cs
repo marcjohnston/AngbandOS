@@ -10,4 +10,5 @@ public class WarriorMageCharacterClassItemEnhancement : ItemEnhancementGameConfi
     public override string BonusWisdomRollExpression => "0";
     public override string BonusIntelligenceRollExpression => "2";
     public override string BonusDexterityRollExpression => "1";
+    public override int Value => 6450;
 }

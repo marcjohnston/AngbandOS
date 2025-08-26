@@ -8,4 +8,5 @@ public class GolemRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusWisdomRollExpression => "-5";
     public override string BonusIntelligenceRollExpression => "-5";
     public override string BonusDexterityRollExpression => "0";
+    public override int Value => -4200;
 }

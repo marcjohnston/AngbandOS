@@ -53,27 +53,31 @@ internal class Game
     //    }
     //    return null;
     //}
+    //public void PasteProperty(string folder, string filenameWithoutExtension, string text, string? newProperty = null)
+    //{
+    //    string path = Path.Combine(folder, $"{filenameWithoutExtension}.cs");
+    //    if (!File.Exists(path))
+    //    {
+    //        if (newProperty is null)
+    //            throw new Exception("");
+    //        File.WriteAllText(path, newProperty);
+    //    }
+    //    List<string> lines = File.ReadAllLines(path).ToList();
+    //    if (!lines.Any(_l => _l.Contains($"class {filenameWithoutExtension}")))
+    //        throw new Exception("");
+    //    for (int i = lines.Count - 1; i >= 0; i--)
+    //    {
+    //        string line = lines[i];
+    //        if (line.Contains("}"))
+    //        {
+    //            lines.Insert(i, text);
+    //            File.WriteAllLines(path, lines);
+    //            return;
+    //        }
+    //    }
+    //    throw new Exception("");
+    //}
 
-    public void PasteProperty(string folder, string filename, string text, string newProperty)
-    {
-        string path = Path.Combine(folder, $"{filename}.cs");
-        if (!File.Exists(path))
-            File.WriteAllText(path, newProperty);
-        List<string> lines = File.ReadAllLines(path).ToList();
-        if (!lines.Any(_l => _l.Contains($"class {filename}")))
-            throw new Exception("");
-        for (int i = lines.Count - 1; i >= 0; i--)
-        {
-            string line = lines[i];
-            if (line.Contains("}"))
-            {
-                lines.Insert(i, text);
-                File.WriteAllLines(path, lines);
-                return;
-            }
-        }
-        throw new Exception("");
-    }
     public EffectiveAttributeSet EffectivePropertySet;
     public void GainMutation(Mutation mutation)
     {
@@ -1390,6 +1394,7 @@ internal class Game
     /// </remarks>
     public Game(GameConfiguration gameConfiguration, string? serializedGameReplay)
     {
+        _mainSequence = new Random();
         // Restore the game replay, if needed.
         if (!string.IsNullOrEmpty(serializedGameReplay))
         {
@@ -2550,8 +2555,6 @@ internal class Game
 
         Generation = 1;
 
-
-
         if (ExPlayer == null)
         {
             _prevSex = SingletonRepository.Get<Gender>(nameof(FemaleGender));
@@ -2647,16 +2650,8 @@ internal class Game
     public void Play(IConsoleViewPort consoleViewPort, ICorePersistentStorage? persistentStorage)
     {
         // If this game is to be replayed, we need to initialize the non-fixed random with the same value that was used to construct the game.
-        if (ReplayQueueIndex == 0)
-        {
-            // This is a new game or we are replaying a game.
-            _mainSequence = new Random(MainSequenceRandomSeed);
-        }
-        else
-        {
-            // Restore an existing game to continue playing.
-            _mainSequence = new Random(CurrentSequenceRandomSeed);
-        }
+        int randomSeed = ReplayQueueIndex == 0 ? MainSequenceRandomSeed : CurrentSequenceRandomSeed;
+        _mainSequence = new Random(randomSeed);
 
         // Reset the last keystroke date and time.  This ensures the time offline isn't recorded as wait time.
         LastKeystrokeDateTime = DateTime.Now;

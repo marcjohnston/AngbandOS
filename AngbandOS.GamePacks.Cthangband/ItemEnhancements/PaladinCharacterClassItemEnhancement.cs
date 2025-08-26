@@ -10,4 +10,5 @@ public class PaladinCharacterClassItemEnhancement : ItemEnhancementGameConfigura
     public override string BonusWisdomRollExpression => "1";
     public override string BonusIntelligenceRollExpression => "-3";
     public override string BonusDexterityRollExpression => "0";
+    public override int Value => 4500;
 }

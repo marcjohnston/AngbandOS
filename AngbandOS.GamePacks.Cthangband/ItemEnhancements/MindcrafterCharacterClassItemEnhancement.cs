@@ -10,4 +10,5 @@ public class MindcrafterCharacterClassItemEnhancement : ItemEnhancementGameConfi
     public override string BonusWisdomRollExpression => "3";
     public override string BonusIntelligenceRollExpression => "0";
     public override string BonusDexterityRollExpression => "-1";
+    public override int Value => 900;
 }

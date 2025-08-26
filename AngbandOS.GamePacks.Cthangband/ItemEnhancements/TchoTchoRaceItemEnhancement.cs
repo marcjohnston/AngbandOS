@@ -8,4 +8,5 @@ public class TchoTchoRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusWisdomRollExpression => "-1";
     public override string BonusIntelligenceRollExpression => "-2";
     public override string BonusDexterityRollExpression => "1";
+    public override int Value => 2700;
 }

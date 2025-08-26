@@ -8,4 +8,5 @@ public class EasyKnowIgnoreElementsItemFactoryItemEnhancement : ItemEnhancementG
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool EasyKnow => true;
+    public override int Value => 400;
 }

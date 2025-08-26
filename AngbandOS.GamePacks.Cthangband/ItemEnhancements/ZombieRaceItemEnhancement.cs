@@ -8,4 +8,5 @@ public class ZombieRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusWisdomRollExpression => "-6";
     public override string BonusIntelligenceRollExpression => "-6";
     public override string BonusDexterityRollExpression => "1";
+    public override int Value => -8250;
 }

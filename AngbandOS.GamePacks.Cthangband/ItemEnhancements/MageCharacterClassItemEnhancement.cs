@@ -10,4 +10,5 @@ public class MageCharacterClassItemEnhancement : ItemEnhancementGameConfiguratio
     public override string BonusWisdomRollExpression => "0";
     public override string BonusIntelligenceRollExpression => "3";
     public override string BonusDexterityRollExpression => "1";
+    public override int Value => -3150;
 }

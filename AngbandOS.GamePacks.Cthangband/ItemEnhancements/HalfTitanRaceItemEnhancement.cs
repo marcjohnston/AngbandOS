@@ -8,4 +8,5 @@ public class HalfTitanRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusWisdomRollExpression => "1";
     public override string BonusIntelligenceRollExpression => "1";
     public override string BonusDexterityRollExpression => "-2";
+    public override int Value => 10050;
 }

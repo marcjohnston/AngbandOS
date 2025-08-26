@@ -10,4 +10,5 @@ public class MonkCharacterClassItemEnhancement : ItemEnhancementGameConfiguratio
     public override string BonusWisdomRollExpression => "1";
     public override string BonusIntelligenceRollExpression => "-1";
     public override string BonusDexterityRollExpression => "3";
+    public override int Value => 8850;
 }

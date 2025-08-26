@@ -10,4 +10,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class VampiricItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool Vampiric => true;
+    public override int Value => 13000;
 }

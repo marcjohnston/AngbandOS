@@ -8,4 +8,5 @@ public class KoboldRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusWisdomRollExpression => "0";
     public override string BonusIntelligenceRollExpression => "-1";
     public override string BonusDexterityRollExpression => "1";
+    public override int Value => -600;
 }
