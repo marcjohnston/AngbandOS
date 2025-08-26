@@ -7,7 +7,7 @@ public class SeekerArrowAmmunitionItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 2;
-    public override int Cost => 20;
+    public override int Value => 20;
     public override int DamageDice => 4;
     public override int DiceSides => 4;
     public override ColorEnum Color => ColorEnum.BrightGreen;

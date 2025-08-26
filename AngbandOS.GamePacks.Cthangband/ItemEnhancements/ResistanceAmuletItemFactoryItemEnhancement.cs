@@ -12,6 +12,6 @@ public class ResistanceAmuletItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override int Weight => 3;
-    public override int Cost => 25000;
+    public override int Value => 25000;
     public override ColorEnum Color => ColorEnum.Orange;
 }

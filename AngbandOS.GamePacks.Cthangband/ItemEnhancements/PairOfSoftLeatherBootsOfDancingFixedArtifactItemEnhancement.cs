@@ -19,7 +19,7 @@ public class PairOfSoftLeatherBootsOfDancingFixedArtifactItemEnhancement : ItemE
     public override bool ResNether => true;
     public override bool SustCha => true;
     public override bool SustCon => true;
-    public override int Cost => 40000;
+    public override int Value => 40000;
     public override string BonusAttacksRollExpression => "15";
     public override ColorEnum Color => ColorEnum.BrightBrown;
 }

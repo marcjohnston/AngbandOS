@@ -10,7 +10,7 @@ public class GlaiveOfPainFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool ShowMods => true;
-    public override int Cost => 50000;
+    public override int Value => 50000;
     public override int DamageDice => 7;
     public override string BonusDamageRollExpression => "30";
     public override ColorEnum Color => ColorEnum.Grey;

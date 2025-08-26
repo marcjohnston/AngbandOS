@@ -7,6 +7,6 @@ public class ResistAcidAmuletItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool IgnoreAcid => true;
     public override bool ResAcid => true;
     public override int Weight => 3;
-    public override int Cost => 300;
+    public override int Value => 300;
     public override ColorEnum Color => ColorEnum.Orange;
 }

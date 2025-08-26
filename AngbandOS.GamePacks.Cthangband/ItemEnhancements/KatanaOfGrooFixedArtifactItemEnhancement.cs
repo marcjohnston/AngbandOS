@@ -18,7 +18,7 @@ public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override int Vorpal1InChance => 6;
     public override int VorpalExtraAttacks1InChance => 2;
     public override int Weight => -70;
-    public override int Cost => 75000;
+    public override int Value => 75000;
     public override int DamageDice => 5;
     public override ColorEnum Color => ColorEnum.BrightWhite;
 }

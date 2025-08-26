@@ -6,6 +6,6 @@ public class SustainCharismaRingItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool EasyKnow => true;
     public override bool SustCha => true;
     public override int Weight => 2;
-    public override int Cost => 500;
+    public override int Value => 500;
     public override ColorEnum Color => ColorEnum.Gold;
 }

@@ -6,6 +6,6 @@ public class NexusResistanceRingItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool EasyKnow => true;
     public override bool ResNexus => true;
     public override int Weight => 2;
-    public override int Cost => 3000;
+    public override int Value => 3000;
     public override ColorEnum Color => ColorEnum.Gold;
 }

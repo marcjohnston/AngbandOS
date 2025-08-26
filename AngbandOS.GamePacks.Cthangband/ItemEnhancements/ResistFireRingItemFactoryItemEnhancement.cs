@@ -7,6 +7,6 @@ public class ResistFireRingItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override bool IgnoreFire => true;
     public override bool ResFire => true;
     public override int Weight => 2;
-    public override int Cost => 250;
+    public override int Value => 250;
     public override ColorEnum Color => ColorEnum.Gold;
 }

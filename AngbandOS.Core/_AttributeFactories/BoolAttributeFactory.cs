@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class BoolAttributeFactory : AttributeFactory
 {
-    public override AttributeValue Instantiate() => new BoolAttributeValue(false);
-    public override NullableAttributeValue InstantiateNullable() => new NullableBoolAttributeValue(null);
+    public override AttributeValue Instantiate() => new BoolAttributeValue(this, false);
     public BoolAttributeFactory(AttributeEnum index) : base(index) { } 
 }

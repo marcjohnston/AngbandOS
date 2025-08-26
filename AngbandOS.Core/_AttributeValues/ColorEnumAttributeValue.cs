@@ -10,21 +10,17 @@ namespace AngbandOS.Core;
 internal class ColorEnumAttributeValue : AttributeValue
 {
     public ColorEnum Value { get; }
-    public ColorEnumAttributeValue(ColorEnum value)
+    public ColorEnumAttributeValue(AttributeFactory factory, ColorEnum value) : base(factory)
     {
         Value = value;
     }
-    public override AttributeValue Clone() => new ColorEnumAttributeValue(Value);
+    public override AttributeValue Clone() => new ColorEnumAttributeValue(Factory, Value);
 
     public override AttributeValue Merge(AttributeValue itemProperty)
     {
         if (itemProperty is ColorEnumAttributeValue colorEnumPropertyValue)
         {
-            return new ColorEnumAttributeValue(colorEnumPropertyValue.Value);
-        }
-        else if (itemProperty is NullableColorEnumPropertyValue nullableColorEnumPropertyValue)
-        {
-            return new ColorEnumAttributeValue(nullableColorEnumPropertyValue.Value.HasValue ? nullableColorEnumPropertyValue.Value.Value : Value);
+            return new ColorEnumAttributeValue(Factory, colorEnumPropertyValue.Value);
         }
         throw new Exception("Merge mismatch.");
     }
@@ -36,5 +32,9 @@ internal class ColorEnumAttributeValue : AttributeValue
             return Value == colorEnumPropertyValue.Value;
         }
         throw new Exception("IsEqual mismatch.");
+    }
+    public override string ToString()
+    {
+        return $"{base.ToString()}={Value}";
     }
 }

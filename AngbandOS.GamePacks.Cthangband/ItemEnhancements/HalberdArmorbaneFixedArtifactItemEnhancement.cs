@@ -24,7 +24,7 @@ public class HalberdArmorbaneFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool ShowMods => true;
     public override bool SlayGiant => true;
     public override bool SlayUndead => true;
-    public override int Cost => 22000;
+    public override int Value => 22000;
     public override string BonusHitsRollExpression => "6";
     public override string BonusDamageRollExpression => "9";
     public override ColorEnum Color => ColorEnum.Grey;

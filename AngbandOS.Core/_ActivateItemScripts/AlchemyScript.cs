@@ -64,7 +64,7 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IActivateItemS
         {
             string feel = "special";
             Game.MsgPrint($"You fail to turn {oName} to gold!");
-            if (oPtr.EffectivePropertySet.IsCursed || oPtr.IsBroken)
+            if (oPtr.EffectivePropertySet.IsCursed || oPtr.EffectivePropertySet.Valueless)
             {
                 feel = "terrible";
             }
@@ -73,7 +73,7 @@ internal class AlchemyScript : Script, IScript, ICastSpellScript, IActivateItemS
             Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Set();
             return UsedResultEnum.True;
         }
-        int price = oPtr.GetRealValue();
+        int price = oPtr.GetRealUncursedValue();
         if (price <= 0)
         {
             Game.MsgPrint($"You turn {oName} to fool's gold.");

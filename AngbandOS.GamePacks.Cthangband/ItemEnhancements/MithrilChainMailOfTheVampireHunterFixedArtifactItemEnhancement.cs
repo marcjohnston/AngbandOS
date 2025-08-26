@@ -24,7 +24,7 @@ public class MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement : It
     public override bool ResNether => true;
     public override bool ResPois => true;
     public override bool SeeInvis => true;
-    public override int Cost => 135000;
+    public override int Value => 135000;
     public override string BonusAttacksRollExpression => "20";
     public override string BonusHitsRollExpression => "-1";
     public override ColorEnum Color => ColorEnum.BrightBlue;

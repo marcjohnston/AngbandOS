@@ -18,7 +18,7 @@ public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int SlayDragon => 3;
     public override bool SlowDigest => true;
     public override bool Telepathy => true;
-    public override int Cost => 40000;
+    public override int Value => 40000;
     public override string BonusHitsRollExpression => "8";
     public override string BonusDamageRollExpression => "10";
     public override ColorEnum Color => ColorEnum.Grey;

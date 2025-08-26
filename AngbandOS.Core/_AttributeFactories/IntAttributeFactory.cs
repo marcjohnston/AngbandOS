@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class IntAttributeFactory : AttributeFactory
 {
-    public override AttributeValue Instantiate() => new IntAttributeValue(0);
-    public override NullableAttributeValue InstantiateNullable() => new NullableIntAttributeValue(null);
+    public override AttributeValue Instantiate() => new IntAttributeValue(this, 0);
     public IntAttributeFactory(AttributeEnum index) : base(index) { }
 }

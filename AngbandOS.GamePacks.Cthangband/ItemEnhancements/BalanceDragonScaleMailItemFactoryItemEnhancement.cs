@@ -14,7 +14,7 @@ public class BalanceDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementG
     public override bool ResSound => true;
     public override int TreasureRating => 30;
     public override int Weight => 200;
-    public override int Cost => 90000;
+    public override int Value => 90000;
     public override int DamageDice => 2;
     public override int DiceSides => 4;
     public override ColorEnum Color => ColorEnum.Silver;

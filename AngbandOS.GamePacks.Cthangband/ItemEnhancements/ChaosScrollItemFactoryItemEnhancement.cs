@@ -5,6 +5,6 @@ public class ChaosScrollItemFactoryItemEnhancement : ItemEnhancementGameConfigur
 {
     public override bool EasyKnow => true;
     public override int Weight => 5;
-    public override int Cost => 10000;
+    public override int Value => 10000;
     public override ColorEnum Color => ColorEnum.BrightBeige;
 }

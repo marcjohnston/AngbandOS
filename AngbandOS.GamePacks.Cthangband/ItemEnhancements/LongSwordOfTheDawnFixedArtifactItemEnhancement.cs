@@ -33,7 +33,7 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SustCha => true;
     public override int Vorpal1InChance => 6;
     public override int VorpalExtraAttacks1InChance => 2;
-    public override int Cost => 250000;
+    public override int Value => 250000;
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "20";
     public override string BonusDamageRollExpression => "20";

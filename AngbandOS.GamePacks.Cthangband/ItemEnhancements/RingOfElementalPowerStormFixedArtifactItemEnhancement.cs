@@ -32,7 +32,7 @@ public class RingOfElementalPowerStormFixedArtifactItemEnhancement : ItemEnhance
     public override bool SustWis => true;
     public override int Radius => 3;
     public override bool Telepathy => true;
-    public override int Cost => 300000;
+    public override int Value => 300000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
     public override string BonusHitsRollExpression => "12";

@@ -7,7 +7,7 @@ public class MorningStarHaftedWeaponItemFactoryItemEnhancement : ItemEnhancement
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 150;
-    public override int Cost => 396;
+    public override int Value => 396;
     public override int DamageDice => 2;
     public override int DiceSides => 6;
     public override ColorEnum Color => ColorEnum.Black;

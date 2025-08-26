@@ -12,7 +12,7 @@ public class PseudoDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool ResLight => true;
     public override int TreasureRating => 30;
     public override int Weight => 200;
-    public override int Cost => 55000;
+    public override int Value => 55000;
     public override int DamageDice => 2;
     public override int DiceSides => 4;
     public override ColorEnum Color => ColorEnum.Pink;

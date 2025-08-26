@@ -23,7 +23,7 @@ public class BroadSwordBrightbladeFixedArtifactItemEnhancement : ItemEnhancement
     public override bool SlayEvil => true;
     public override bool SlayOrc => true;
     public override bool SlowDigest => true;
-    public override int Cost => 40000;
+    public override int Value => 40000;
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "15";
     public override ColorEnum Color => ColorEnum.BrightWhite;

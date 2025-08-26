@@ -5,7 +5,7 @@ public class DrainLifeRodItemFactoryItemEnhancement : ItemEnhancementGameConfigu
 {
     public override bool EasyKnow => true;
     public override int Weight => 15;
-    public override int Cost => 3600;
+    public override int Value => 3600;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
     public override ColorEnum Color => ColorEnum.Turquoise;

@@ -8,7 +8,7 @@ public class BrokenSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 30;
-    public override int Cost => 2;
+    public override int Value => 2;
     public override int DamageDice => 1;
     public override int DiceSides => 2;
     public override ColorEnum Color => ColorEnum.Black;

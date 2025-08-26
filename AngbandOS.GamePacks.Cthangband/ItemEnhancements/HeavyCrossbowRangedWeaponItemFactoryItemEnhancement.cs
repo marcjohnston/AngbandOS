@@ -9,6 +9,6 @@ public class HeavyCrossbowRangedWeaponItemFactoryItemEnhancement : ItemEnhanceme
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 200;
-    public override int Cost => 300;
+    public override int Value => 300;
     public override ColorEnum Color => ColorEnum.Grey;
 }

@@ -19,7 +19,7 @@ public class MetalBrigandineArmorOfSerpentsFixedArtifactItemEnhancement : ItemEn
     public override bool ResFire => true;
     public override bool ResSound => true;
     public override int Weight => -90;
-    public override int Cost => 30000;
+    public override int Value => 30000;
     public override string BonusAttacksRollExpression => "15";
     public override ColorEnum Color => ColorEnum.Grey;
 }

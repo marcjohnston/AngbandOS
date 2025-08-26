@@ -8,7 +8,7 @@ public class LancePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 300;
-    public override int Cost => 230;
+    public override int Value => 230;
     public override int DamageDice => 2;
     public override int DiceSides => 8;
     public override ColorEnum Color => ColorEnum.Grey;

@@ -17,7 +17,7 @@ public class LanceSkewerFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override int Weight => 60;
-    public override int Cost => 55000;
+    public override int Value => 55000;
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "3";
     public override string BonusDamageRollExpression => "21";

@@ -16,7 +16,7 @@ public class CloakOfBarzaiFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool ResElec => true;
     public override bool ResFire => true;
     public override bool ResPois => true;
-    public override int Cost => 10000;
+    public override int Value => 10000;
     public override string BonusAttacksRollExpression => "15";
     public override ColorEnum Color => ColorEnum.Green;
 }

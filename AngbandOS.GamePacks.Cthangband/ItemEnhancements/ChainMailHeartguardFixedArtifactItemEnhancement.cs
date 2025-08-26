@@ -18,7 +18,7 @@ public class ChainMailHeartguardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool ResFire => true;
     public override bool ResNexus => true;
     public override bool ResShards => true;
-    public override int Cost => 32000;
+    public override int Value => 32000;
     public override string BonusAttacksRollExpression => "15";
     public override string BonusHitsRollExpression => "-2";
     public override ColorEnum Color => ColorEnum.Grey;

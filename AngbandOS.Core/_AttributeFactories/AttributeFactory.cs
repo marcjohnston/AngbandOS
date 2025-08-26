@@ -13,7 +13,6 @@ namespace AngbandOS.Core;
 internal abstract class AttributeFactory
 {
     public abstract AttributeValue Instantiate();
-    public abstract NullableAttributeValue InstantiateNullable();
     public readonly AttributeEnum Index;
     protected AttributeFactory(AttributeEnum index)
     {

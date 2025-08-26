@@ -10,7 +10,7 @@ public class BladeOfChaosWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 180;
-    public override int Cost => 4000;
+    public override int Value => 4000;
     public override int DamageDice => 6;
     public override int DiceSides => 5;
     public override ColorEnum Color => ColorEnum.Purple;

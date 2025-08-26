@@ -20,7 +20,7 @@ public class CutlassOfBlackbeardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool ResFire => true;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
-    public override int Cost => 28000;
+    public override int Value => 28000;
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "11";
     public override ColorEnum Color => ColorEnum.BrightWhite;

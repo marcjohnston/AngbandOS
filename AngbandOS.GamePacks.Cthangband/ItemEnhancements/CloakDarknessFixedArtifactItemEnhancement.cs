@@ -17,7 +17,7 @@ public class CloakDarknessFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override string? BonusWisdomRollExpression => "2";
     public override bool ResAcid => true;
     public override bool ResDark => true;
-    public override int Cost => 13000;
+    public override int Value => 13000;
     public override string BonusAttacksRollExpression => "4";
     public override ColorEnum Color => ColorEnum.Green;
 }

@@ -6,7 +6,7 @@ public class DeflectionShieldItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool IgnoreAcid => true;
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 100;
-    public override int Cost => 10000;
+    public override int Value => 10000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
     public override ColorEnum Color => ColorEnum.BrightBlue;

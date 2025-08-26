@@ -54,26 +54,26 @@ internal class Game
     //    return null;
     //}
 
-    //public void PasteProperty(string folder, string filename, string text, string newProperty)
-    //{
-    //    string path = Path.Combine(folder, $"{filename}.cs");
-    //    if (!File.Exists(path))
-    //        File.WriteAllText(path, newProperty);
-    //    List<string> lines = File.ReadAllLines(path).ToList();
-    //    if (!lines.Any(_l => _l.Contains($"class {filename}")))
-    //        throw new Exception("");
-    //    for (int i = lines.Count - 1; i >= 0; i--)
-    //    {
-    //        string line = lines[i];
-    //        if (line.Contains("}"))
-    //        {
-    //            lines.Insert(i, text);
-    //            File.WriteAllLines(path, lines);
-    //            return;
-    //        }
-    //    }
-    //    throw new Exception("");
-    //}
+    public void PasteProperty(string folder, string filename, string text, string newProperty)
+    {
+        string path = Path.Combine(folder, $"{filename}.cs");
+        if (!File.Exists(path))
+            File.WriteAllText(path, newProperty);
+        List<string> lines = File.ReadAllLines(path).ToList();
+        if (!lines.Any(_l => _l.Contains($"class {filename}")))
+            throw new Exception("");
+        for (int i = lines.Count - 1; i >= 0; i--)
+        {
+            string line = lines[i];
+            if (line.Contains("}"))
+            {
+                lines.Insert(i, text);
+                File.WriteAllLines(path, lines);
+                return;
+            }
+        }
+        throw new Exception("");
+    }
     public EffectiveAttributeSet EffectivePropertySet;
     public void GainMutation(Mutation mutation)
     {
@@ -695,7 +695,7 @@ internal class Game
     public int BonusBlessedValue = 750;
 
     /// <summary>
-    /// Returns the additive value of items that have the cursed modifier.
+    /// Returns the additive value of items that have the cursed modifier.  This should be set to a negative value a little higher than the value of a scroll of uncurse.
     /// </summary>
     public int BonusIsCursedValue = -5000;
 
@@ -2324,7 +2324,7 @@ internal class Game
         }
         item.EnchantItem(objectLevel, true, good, great, true); 
         item.StackCount = item.MakeObjectCount;
-        if (!item.EffectivePropertySet.IsCursed && !item.IsBroken && item.LevelNormallyFound > Difficulty)
+        if (!item.EffectivePropertySet.IsCursed && !item.EffectivePropertySet.Valueless && item.LevelNormallyFound > Difficulty)
         {
             TreasureRating += item.LevelNormallyFound - Difficulty;
         }
@@ -6726,7 +6726,7 @@ internal class Game
             item.EffectivePropertySet.OverrideIntValue(AttributeEnum.DiceSides , 0);
             item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
-            item.IsBroken = true;
+            item.EffectivePropertySet.SetBoolValue(AttributeEnum.Valueless, true);
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
@@ -6766,7 +6766,7 @@ internal class Game
             item.EffectivePropertySet.OverrideIntValue(AttributeEnum.DiceSides, 0);
             item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
-            item.IsBroken = true;
+            item.EffectivePropertySet.SetBoolValue(AttributeEnum.Valueless, true);
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
@@ -6895,7 +6895,7 @@ internal class Game
     public bool DoCmdChannel(Item item, int manaValue)
     {
         int manaNeeded;
-        int itemCost = item.GetRealValue();
+        int itemCost = item.GetRealUncursedValue();
 
         // Never channel worthless items
         if (itemCost <= 0)

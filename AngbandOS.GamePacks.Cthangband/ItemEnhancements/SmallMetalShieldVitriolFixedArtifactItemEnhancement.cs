@@ -16,7 +16,7 @@ public class SmallMetalShieldVitriolFixedArtifactItemEnhancement : ItemEnhanceme
     public override string? BonusStrengthRollExpression => "4";
     public override bool ResChaos => true;
     public override bool ResSound => true;
-    public override int Cost => 60000;
+    public override int Value => 60000;
     public override string BonusAttacksRollExpression => "25";
     public override ColorEnum Color => ColorEnum.Grey;
 }

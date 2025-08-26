@@ -5,6 +5,6 @@ public class InvocationScrollItemFactoryItemEnhancement : ItemEnhancementGameCon
 {
     public override bool EasyKnow => true;
     public override int Weight => 5;
-    public override int Cost => 200;
+    public override int Value => 200;
     public override ColorEnum Color => ColorEnum.BrightBeige;
 }

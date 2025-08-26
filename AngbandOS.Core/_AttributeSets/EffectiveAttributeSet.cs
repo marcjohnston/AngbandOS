@@ -4,6 +4,9 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System;
+using System.Reflection;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -90,7 +93,6 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.BrandPois);
         RegisterBoolPropertyFactory(AttributeEnum.Chaotic);
         RegisterColorEnumPropertyFactory(AttributeEnum.Color);
-        RegisterIntPropertyFactory(AttributeEnum.Cost);
         RegisterBoolPropertyFactory(AttributeEnum.IsCursed);
         RegisterIntPropertyFactory(AttributeEnum.DamageDice);
         RegisterIntPropertyFactory(AttributeEnum.DiceSides);
@@ -157,6 +159,7 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.Telepathy);
         RegisterBoolPropertyFactory(AttributeEnum.Teleport);
         RegisterIntPropertyFactory(AttributeEnum.TreasureRating);
+        RegisterIntPropertyFactory(AttributeEnum.Value);
         RegisterBoolPropertyFactory(AttributeEnum.Valueless);
         RegisterBoolPropertyFactory(AttributeEnum.Vampiric);
         RegisterIntPropertyFactory(AttributeEnum.Vorpal1InChance);
@@ -272,7 +275,7 @@ internal class EffectiveAttributeSet
         int index = (int)propertyEnum;
         if (value.HasValue)
         {
-            _overrideProperties[index] = (true, new BoolAttributeValue(value.Value));
+            _overrideProperties[index] = (true, new BoolAttributeValue(_attributeFactories[index], value.Value));
         }
         else
         {
@@ -285,7 +288,7 @@ internal class EffectiveAttributeSet
         int index = (int)propertyEnum;
         if (value.HasValue)
         {
-            _overrideProperties[index] = (true, new IntAttributeValue(value.Value));
+            _overrideProperties[index] = (true, new IntAttributeValue(_attributeFactories[index], value.Value));
         }
         else
         {
@@ -347,6 +350,33 @@ internal class EffectiveAttributeSet
         return itemProperty;
     }
 
+    /// <summary>
+    /// Returns an attribute set for a specific key.  This is used to retrieve the value of an item factory for items that are not yet known.
+    /// No override or writeable properties are applied.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public AttributeValue GetKeyedValue(AttributeEnum propertyEnum, string key)
+    {
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new Exception($"Cannot specify a blank or null key for {nameof(GetValue)}");
+        }
+
+        // Retrieve the index for the property.
+        int index = (int)propertyEnum;
+
+        // Get the factory default value.
+        AttributeValue itemProperty = _attributeFactories[index].Instantiate();
+
+        // For each key, there may be multiple item enhancements.
+        foreach (ReadOnlyAttributeSet readOnlyPropertySet in _enhancements[key])
+        {
+            itemProperty = itemProperty.Merge(readOnlyPropertySet.GetValue(propertyEnum));
+        }
+        return itemProperty;
+    }
+
     public bool GetBoolValue(AttributeEnum propertyEnum)
     {
         AttributeValue effectiveItemProperty = GetValue(propertyEnum);
@@ -374,7 +404,7 @@ internal class EffectiveAttributeSet
     public T? GetReferenceValue<T>(AttributeEnum propertyEnum) where T : class
     {
         AttributeValue effectiveItemProperty = GetValue(propertyEnum);
-        NullableReferenceAttributeValue<T> referencePropertyValue = (NullableReferenceAttributeValue<T>)effectiveItemProperty;
+        ReferenceAttributeValue<T> referencePropertyValue = (ReferenceAttributeValue<T>)effectiveItemProperty;
         T? value = referencePropertyValue.Value;
         return value;
     }
@@ -392,27 +422,31 @@ internal class EffectiveAttributeSet
         // Retrieve the index for the property.
         int index = (int)propertyEnum;
 
-        _writeProperties[index] = new NullableReferenceAttributeValue<T>(propertyValue);
+        _writeProperties[index] = new ReferenceAttributeValue<T>(_attributeFactories[index], propertyValue);
     }
 
     public void SetIntValue(AttributeEnum propertyEnum, int value)
     {
-        SetValue(propertyEnum, new IntAttributeValue(value));
+        int index = (int)propertyEnum;
+        SetValue(propertyEnum, new IntAttributeValue(_attributeFactories[index], value));
     }
 
     public void SetColorValue(AttributeEnum propertyEnum, ColorEnum value)
     {
-        SetValue(propertyEnum, new ColorEnumAttributeValue(value));
+        int index = (int)propertyEnum;
+        SetValue(propertyEnum, new ColorEnumAttributeValue(_attributeFactories[index], value));
     }
 
     public void AddIntValue(AttributeEnum propertyEnum, int value)
     {
-        SetValue(propertyEnum, new IntAttributeValue(GetIntValue(propertyEnum) + value));
+        int index = (int)propertyEnum;
+        SetValue(propertyEnum, new IntAttributeValue(_attributeFactories[index], GetIntValue(propertyEnum) + value));
     }
 
     public void SetBoolValue(AttributeEnum propertyEnum, bool value)
     {
-        SetValue(propertyEnum, new BoolAttributeValue(value));
+        int index = (int)propertyEnum;
+        SetValue(propertyEnum, new BoolAttributeValue(_attributeFactories[index], value));
     }
 
     #region Properties
@@ -799,17 +833,6 @@ internal class EffectiveAttributeSet
         set
         {
             SetColorValue(AttributeEnum.Color, value);
-        }
-    }
-    public int Cost
-    {
-        get
-        {
-            return GetIntValue(AttributeEnum.Cost);
-        }
-        set
-        {
-            SetIntValue(AttributeEnum.Cost, value);
         }
     }
     public bool IsCursed
@@ -1365,6 +1388,17 @@ internal class EffectiveAttributeSet
         get
         {
             return GetIntValue(AttributeEnum.TreasureRating);
+        }
+    }
+    public int Value
+    {
+        get
+        {
+            return GetIntValue(AttributeEnum.Value);
+        }
+        set
+        {
+            SetIntValue(AttributeEnum.Value, value);
         }
     }
     public bool Valueless

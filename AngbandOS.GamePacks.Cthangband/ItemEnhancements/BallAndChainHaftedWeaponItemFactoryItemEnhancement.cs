@@ -7,7 +7,7 @@ public class BallAndChainHaftedWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 150;
-    public override int Cost => 200;
+    public override int Value => 200;
     public override int DamageDice => 2;
     public override int DiceSides => 4;
     public override ColorEnum Color => ColorEnum.Black;

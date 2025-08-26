@@ -105,11 +105,6 @@ internal sealed class Item : IComparable<Item>
     public string? RandomArtifactName = null;
 
     public int ArmorClass;
-
-    /// <summary>
-    /// Returns true, if the item is broken; false, otherwise.  Broken items are considered worthless, regardless of their other properties.
-    /// </summary>
-    public bool IsBroken; // TODO: This needs to be moved into IItemCharacteristics
     #endregion
 
     #region API Methods
@@ -157,7 +152,6 @@ internal sealed class Item : IComparable<Item>
         clonedItem.GoldPieces = GoldPieces;
         clonedItem.RandomArtifactName = RandomArtifactName;
         clonedItem.ArmorClass = ArmorClass;
-        clonedItem.IsBroken = IsBroken;
 
         return clonedItem;
     }
@@ -934,10 +928,6 @@ internal sealed class Item : IComparable<Item>
         {
             return false;
         }
-        if (IsBroken != other.IsBroken)
-        {
-            return false;
-        }
         if (Inscription != other.Inscription)
         {
             return false;
@@ -1050,7 +1040,7 @@ internal sealed class Item : IComparable<Item>
 
         if (IsArtifact)
         {
-            if (EffectivePropertySet.IsCursed || IsBroken)
+            if (EffectivePropertySet.IsCursed || EffectivePropertySet.Valueless)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(TerribleItemQualityRating));
             }
@@ -1058,7 +1048,7 @@ internal sealed class Item : IComparable<Item>
         }
         if (IsRare)
         {
-            if (EffectivePropertySet.IsCursed || IsBroken)
+            if (EffectivePropertySet.IsCursed || EffectivePropertySet.Valueless)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(WorthlessItemQualityRating));
             }
@@ -1070,7 +1060,7 @@ internal sealed class Item : IComparable<Item>
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
 
-        if (IsBroken)
+        if (EffectivePropertySet.Valueless)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
@@ -1106,7 +1096,7 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
-        if (IsBroken)
+        if (EffectivePropertySet.Valueless)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
@@ -1555,7 +1545,7 @@ internal sealed class Item : IComparable<Item>
     /// Returns the actual value of the item.  This real value may not be known, if the item is unknown.  This real value is also used by the Alchemy script to convert the item into gold.
     /// </summary>
     /// <returns></returns>
-    public int GetRealValue()
+    public int GetRealUncursedValue()
     {
         // If the factory reports the item as valueless, then the item is valueless.
         if (EffectivePropertySet.Valueless)
@@ -1563,322 +1553,8 @@ internal sealed class Item : IComparable<Item>
             return 0;
         }
 
-        int value = EffectivePropertySet.Cost;
-        if (EffectivePropertySet.Chaotic)
-        {
-            value += Game.BonusChaoticValue;
-        }
-        if (EffectivePropertySet.Vampiric)
-        {
-            value += Game.BonusVampiricValue;
-        }
-        if (EffectivePropertySet.AntiTheft)
-        {
-            value += Game.BonusAntiTheftValue;
-        }
-        if (EffectivePropertySet.SlayAnimal)
-        {
-            value += Game.BonusSlayAnimalValue;
-        }
-        if (EffectivePropertySet.SlayEvil)
-        {
-            value += Game.BonusSlayEvilValue;
-        }
-        if (EffectivePropertySet.SlayUndead)
-        {
-            value += Game.BonusSlayUndeadValue;
-        }
-        if (EffectivePropertySet.SlayDemon)
-        {
-            value += Game.BonusSlayDemonValue;
-        }
-        if (EffectivePropertySet.SlayOrc)
-        {
-            value += Game.BonusSlayOrcValue;
-        }
-        if (EffectivePropertySet.SlayTroll)
-        {
-            value += Game.BonusSlayTrollValue;
-        }
-        if (EffectivePropertySet.SlayGiant)
-        {
-            value += Game.BonusSlayGiantlValue;
-        }
-        value += EffectivePropertySet.SlayDragon * Game.BonusSlayDragonValue;
-        if (EffectivePropertySet.Vorpal1InChance > 0)
-        {
-            value += Game.BonusVorpalValue;
-        }
-        if (EffectivePropertySet.Impact)
-        {
-            value += Game.BonusImpactValue;
-        }
-        if (EffectivePropertySet.BrandPois)
-        {
-            value += Game.BonusBrandPoisValue;
-        }
-        if (EffectivePropertySet.BrandAcid)
-        {
-            value += Game.BonusBrandAcidValue;
-        }
-        if (EffectivePropertySet.BrandElec)
-        {
-            value += Game.BonusBrandElecValue;
-        }
-        if (EffectivePropertySet.BrandFire)
-        {
-            value += Game.BonusBrandFireValue;
-        }
-        if (EffectivePropertySet.BrandCold)
-        {
-            value += Game.BonusBrandColdValue;
-        }
-        if (EffectivePropertySet.SustStr)
-        {
-            value += Game.BonusSustStrValue;
-        }
-        if (EffectivePropertySet.SustInt)
-        {
-            value += Game.BonusSustIntValue;
-        }
-        if (EffectivePropertySet.SustWis)
-        {
-            value += Game.BonusSustWisValue;
-        }
-        if (EffectivePropertySet.SustDex)
-        {
-            value += Game.BonusSustDexValue;
-        }
-        if (EffectivePropertySet.SustCon)
-        {
-            value += Game.BonusSustConValue;
-        }
-        if (EffectivePropertySet.SustCha)
-        {
-            value += Game.BonusSustChaValue;
-        }
-        if (EffectivePropertySet.ImAcid)
-        {
-            value += Game.BonusImAcidValue;
-        }
-        if (EffectivePropertySet.ImElec)
-        {
-            value += Game.BonusImElecValue;
-        }
-        if (EffectivePropertySet.ImFire)
-        {
-            value += Game.BonusImFireValue;
-        }
-        if (EffectivePropertySet.ImCold)
-        {
-            value += Game.BonusImColdValue;
-        }
-        if (EffectivePropertySet.Reflect)
-        {
-            value += Game.BonusReflectValue;
-        }
-        if (EffectivePropertySet.FreeAct)
-        {
-            value += Game.BonusFreeActValue;
-        }
-        if (EffectivePropertySet.HoldLife)
-        {
-            value += Game.BonusHoldLifeValue;
-        }
-        if (EffectivePropertySet.ResAcid)
-        {
-            value += Game.BonusResAcidValue;
-        }
-        if (EffectivePropertySet.ResElec)
-        {
-            value += Game.BonusResElecValue;
-        }
-        if (EffectivePropertySet.ResFire)
-        {
-            value += Game.BonusResFireValue;
-        }
-        if (EffectivePropertySet.ResCold)
-        {
-            value += Game.BonusResColdValue;
-        }
-        if (EffectivePropertySet.ResPois)
-        {
-            value += Game.BonusResPoisValue;
-        }
-        if (EffectivePropertySet.ResFear)
-        {
-            value += Game.BonusResFearValue;
-        }
-        if (EffectivePropertySet.ResLight)
-        {
-            value += Game.BonusResLightValue;
-        }
-        if (EffectivePropertySet.ResDark)
-        {
-            value += Game.BonusResDarkValue;
-        }
-        if (EffectivePropertySet.ResBlind)
-        {
-            value += Game.BonusResBlindValue;
-        }
-        if (EffectivePropertySet.ResConf)
-        {
-            value += Game.BonusResConfValue;
-        }
-        if (EffectivePropertySet.ResSound)
-        {
-            value += Game.BonusResSoundValue;
-        }
-        if (EffectivePropertySet.ResShards)
-        {
-            value += Game.BonusResShardsValue;
-        }
-        if (EffectivePropertySet.ResNether)
-        {
-            value += Game.BonusResNetherValue;
-        }
-        if (EffectivePropertySet.ResNexus)
-        {
-            value += Game.BonusResNexusValue;
-        }
-        if (EffectivePropertySet.ResChaos)
-        {
-            value += Game.BonusResChaosValue;
-        }
-        if (EffectivePropertySet.ResDisen)
-        {
-            value += Game.BonusResDisenValue;
-        }
-        if (EffectivePropertySet.ShFire)
-        {
-            value += Game.BonusShFireValue;
-        }
-        if (EffectivePropertySet.ShElec)
-        {
-            value += Game.BonusShElecValue;
-        }
-        if (EffectivePropertySet.NoTele)
-        {
-            value += Game.BonusNoTeleValue;
-        }
-        if (EffectivePropertySet.NoMagic)
-        {
-            value += Game.BonusNoMagicValue;
-        }
-        if (EffectivePropertySet.Wraith)
-        {
-            value += Game.BonusWraithValue;
-        }
-        if (EffectivePropertySet.DreadCurse)
-        {
-            value += Game.BonusDreadCurseValue;
-        }
-        if (EffectivePropertySet.Feather)
-        {
-            value += Game.BonusFeatherValue;
-        }
-        if (EffectivePropertySet.SeeInvis)
-        {
-            value += Game.BonusSeeInvisValue;
-        }
-        if (EffectivePropertySet.Telepathy)
-        {
-            value += Game.BonusTelepathyValue;
-        }
-        if (EffectivePropertySet.SlowDigest)
-        {
-            value += Game.BonusSlowDigestValue;
-        }
-        if (EffectivePropertySet.Regen)
-        {
-            value += Game.BonusRegenValue;
-        }
-        if (EffectivePropertySet.XtraMight)
-        {
-            value += Game.BonusXtraMightValue;
-        }
-        if (EffectivePropertySet.XtraShots)
-        {
-            value += Game.BonusXtraShotsValue;
-        }
-        if (EffectivePropertySet.IgnoreAcid)
-        {
-            value += Game.BonusIgnoreAcidValue;
-        }
-        if (EffectivePropertySet.IgnoreElec)
-        {
-            value += Game.BonusIgnoreElecValue;
-        }
-        if (EffectivePropertySet.IgnoreFire)
-        {
-            value += Game.BonusIgnoreFireValue;
-        }
-        if (EffectivePropertySet.IgnoreCold)
-        {
-            value += Game.BonusIgnoreColdValue;
-        }
-        if (EffectivePropertySet.DrainExp)
-        {
-            value += Game.BonusDrainExpValue;
-        }
-        if (EffectivePropertySet.Teleport)
-        {
-            value += Game.BonusTeleportValue;
-        }
-        if (EffectivePropertySet.Aggravate)
-        {
-            value += Game.BonusAggravateValue;
-        }
-        if (EffectivePropertySet.Blessed)
-        {
-            value += Game.BonusBlessedValue;
-        }
-        if (EffectivePropertySet.IsCursed)
-        {
-            value += Game.BonusIsCursedValue;
-        }
-        if (EffectivePropertySet.HeavyCurse)
-        {
-            value += Game.BonusHeavyCurseValue;
-        }
-        if (EffectivePropertySet.PermaCurse)
-        {
-            value += Game.BonusPermaCurseValue;
-        }
-        value += EffectivePropertySet.BonusStrength * Game.BonusStrengthValue;
-        value += EffectivePropertySet.BonusIntelligence * Game.BonusIntelligenceValue;
-        value += EffectivePropertySet.BonusWisdom * Game.BonusWisdomValue;
-        value += EffectivePropertySet.BonusDexterity * Game.BonusDexterityValue;
-        value += EffectivePropertySet.BonusConstitution * Game.BonusConstitutionValue;
-        value += EffectivePropertySet.BonusCharisma * Game.BonusCharismaValue;
-        value += EffectivePropertySet.BonusStealth * Game.BonusStealthValue;
-        value += EffectivePropertySet.BonusSearch * Game.BonusSearchValue;
-        value += EffectivePropertySet.BonusInfravision * Game.BonusInfravisionValue;
-        value += EffectivePropertySet.BonusTunnel * Game.BonusTunnelValue;
-        value += EffectivePropertySet.BonusAttacks * Game.BonusExtraBlowslValue;
-        value += EffectivePropertySet.BonusSpeed * Game.BonusSpeedlValue;
+        int value = EffectivePropertySet.Value;
 
-        if (EffectivePropertySet.Activation != null)
-        {
-            value += EffectivePropertySet.Activation.Value;
-        }
-
-        if (AimingTuple != null)
-        {
-            value += AimingTuple.Value.PerChargeValue * WandChargesRemaining;
-        }
-
-        if (UseTuple != null)
-        {
-            value += UseTuple.Value.PerChargeValue * StaffChargesRemaining;
-        }
-
-        value += TurnOfLightValue * TurnsOfLightRemaining;
-
-        value += EffectivePropertySet.BonusHits * _factory.BonusHitRealValueMultiplier;
-        value += EffectivePropertySet.BonusArmorClass * _factory.BonusArmorClassRealValueMultiplier;
-        value += EffectivePropertySet.BonusDamage * _factory.BonusDamageRealValueMultiplier;
-        value += EffectivePropertySet.DamageDice * EffectivePropertySet.DiceSides * _factory.BonusDiceRealValueMultiplier;
         return value;
     }
 
@@ -1975,36 +1651,40 @@ internal sealed class Item : IComparable<Item>
         int value;
         if (IsKnown())
         {
-            if (IsBroken)
-            {
-                return 0;
-            }
+            // We only need to check to see if the item is cursed.  The <see cref="GetRealValue"/> method checks to see if the item is valueless.
             if (EffectivePropertySet.IsCursed)
             {
                 return 0;
             }
-            value = GetRealValue();
+            value = GetRealUncursedValue();
         }
         else
         {
-            if (IdentSense && IsBroken)
+            // Check to see if the player has identified the item via a sense ability.  If so, we can sense if the item has no value.
+            if (IdentSense && (EffectivePropertySet.Valueless || EffectivePropertySet.IsCursed))
             {
                 return 0;
             }
-            if (IdentSense && EffectivePropertySet.IsCursed)
-            {
-                return 0;
-            }
+
+            // Check to see if we identified the flavor of the item.
             if (IsFlavorAware)
             {
-                return EffectivePropertySet.Cost;
+                // Return the value of the item factory.
+                AttributeValue attributeValue = EffectivePropertySet.GetKeyedValue(AttributeEnum.Value, FactoryAttributeKey);
+                IntAttributeValue intAttributeValue = (IntAttributeValue)attributeValue;
+                return intAttributeValue.Value;
             }
+
+            // We do not know what the item is, so return the base value of the factory.
             return BaseValue;
         }
+
+        // Check to see if the item was bought from a store and discounted at the time of the sale.  This prevents "item flipping" exploits.
         if (Discount != 0)
         {
             value -= value * Discount / 100;
         }
+
         return value;
     }
 
@@ -2076,11 +1756,6 @@ internal sealed class Item : IComparable<Item>
         }
         FixedArtifact = fixedArtifact;
         EffectivePropertySet.AddEnhancement("fixed", fixedArtifactItemPropertySet.ToReadOnly());
-
-        if (EffectivePropertySet.Cost <= 0) // TODO: This was the fixedartifiact cost == 0, then isbroken = true.  should be enumerated out into the enhancements.
-        {
-            IsBroken = true;
-        }
         Game.TreasureRating += fixedArtifactItemPropertySet.TreasureRating;
         Game.SpecialTreasure = true;
         return true;
@@ -2214,10 +1889,6 @@ internal sealed class Item : IComparable<Item>
         {
             Game.TreasureRating += EffectivePropertySet.TreasureRating;
         }
-        if (EffectivePropertySet.Cost == 0)
-        {
-            IsBroken = true;
-        }
     }
 
     public void ApplyRandomResistance(WeightedRandom<ItemEnhancement> itemAdditiveBundleWeightedRandom)
@@ -2334,7 +2005,7 @@ internal sealed class Item : IComparable<Item>
         return t;
     }
     #endregion
-
+    private const string FactoryAttributeKey = "factory";
     #region Constructors
     public Item(Game game, ItemFactory factory)
     {
@@ -2344,7 +2015,7 @@ internal sealed class Item : IComparable<Item>
         _factory = factory;
         EffectivePropertySet = new EffectiveAttributeSet();
         ReadOnlyAttributeSet factoryPropertySet = factory.ItemEnhancement.GenerateItemCharacteristics();
-        EffectivePropertySet.AddEnhancement("factory", factoryPropertySet);
+        EffectivePropertySet.AddEnhancement(FactoryAttributeKey, factoryPropertySet);
 
         StackCount = 1;
 
@@ -2356,7 +2027,6 @@ internal sealed class Item : IComparable<Item>
         EffectivePropertySet.BonusDamage = _factory.BonusDamage;
         EffectivePropertySet.BonusArmorClass = _factory.BonusArmorClass;
         ArmorClass = _factory.ArmorClass;
-        IsBroken = _factory.IsBroken;
 
         if (_factory.AimingTuple != null)
         {
@@ -2401,17 +2071,10 @@ internal sealed class Item : IComparable<Item>
         else
         {
             // Check to see if we are enchanting a cursed or broken item.
-            int goodBadMultiplier = EffectivePropertySet.IsCursed || IsBroken ? -1 : 1;
+            int goodBadMultiplier = EffectivePropertySet.IsCursed || EffectivePropertySet.Valueless ? -1 : 1;
 
             EffectiveAttributeSet? rareItemEffectivePropertySet = new EffectiveAttributeSet();
             rareItemEffectivePropertySet.AddEnhancement(rareItem.GenerateItemCharacteristics());
-
-            // If the rare item has no value, consider it broken.
-            if (rareItemEffectivePropertySet.Valueless)
-            {
-                IsBroken = true; // This should be manual.
-            }
-
             rareItemEffectivePropertySet.BonusHits *= goodBadMultiplier;
             rareItemEffectivePropertySet.BonusDamage *= goodBadMultiplier;
             rareItemEffectivePropertySet.BonusArmorClass *= goodBadMultiplier;

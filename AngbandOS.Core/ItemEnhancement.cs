@@ -16,6 +16,310 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     #region API
     private readonly Game Game;
 
+    private int GetValue()
+    {
+        int value = 0;
+        if (Chaotic)
+        {
+            value += Game.BonusChaoticValue;
+        }
+        if (Vampiric)
+        {
+            value += Game.BonusVampiricValue;
+        }
+        if (AntiTheft)
+        {
+            value += Game.BonusAntiTheftValue;
+        }
+        if (SlayAnimal)
+        {
+            value += Game.BonusSlayAnimalValue;
+        }
+        if (SlayEvil)
+        {
+            value += Game.BonusSlayEvilValue;
+        }
+        if (SlayUndead)
+        {
+            value += Game.BonusSlayUndeadValue;
+        }
+        if (SlayDemon)
+        {
+            value += Game.BonusSlayDemonValue;
+        }
+        if (SlayOrc)
+        {
+            value += Game.BonusSlayOrcValue;
+        }
+        if (SlayTroll)
+        {
+            value += Game.BonusSlayTrollValue;
+        }
+        if (SlayGiant)
+        {
+            value += Game.BonusSlayGiantlValue;
+        }
+        value += SlayDragon * Game.BonusSlayDragonValue;
+        if (Vorpal1InChance > 0)
+        {
+            value += Game.BonusVorpalValue;
+        }
+        if (Impact)
+        {
+            value += Game.BonusImpactValue;
+        }
+        if (BrandPois)
+        {
+            value += Game.BonusBrandPoisValue;
+        }
+        if (BrandAcid)
+        {
+            value += Game.BonusBrandAcidValue;
+        }
+        if (BrandElec)
+        {
+            value += Game.BonusBrandElecValue;
+        }
+        if (BrandFire)
+        {
+            value += Game.BonusBrandFireValue;
+        }
+        if (BrandCold)
+        {
+            value += Game.BonusBrandColdValue;
+        }
+        if (SustStr)
+        {
+            value += Game.BonusSustStrValue;
+        }
+        if (SustInt)
+        {
+            value += Game.BonusSustIntValue;
+        }
+        if (SustWis)
+        {
+            value += Game.BonusSustWisValue;
+        }
+        if (SustDex)
+        {
+            value += Game.BonusSustDexValue;
+        }
+        if (SustCon)
+        {
+            value += Game.BonusSustConValue;
+        }
+        if (SustCha)
+        {
+            value += Game.BonusSustChaValue;
+        }
+        if (ImAcid)
+        {
+            value += Game.BonusImAcidValue;
+        }
+        if (ImElec)
+        {
+            value += Game.BonusImElecValue;
+        }
+        if (ImFire)
+        {
+            value += Game.BonusImFireValue;
+        }
+        if (ImCold)
+        {
+            value += Game.BonusImColdValue;
+        }
+        if (Reflect)
+        {
+            value += Game.BonusReflectValue;
+        }
+        if (FreeAct)
+        {
+            value += Game.BonusFreeActValue;
+        }
+        if (HoldLife)
+        {
+            value += Game.BonusHoldLifeValue;
+        }
+        if (ResAcid)
+        {
+            value += Game.BonusResAcidValue;
+        }
+        if (ResElec)
+        {
+            value += Game.BonusResElecValue;
+        }
+        if (ResFire)
+        {
+            value += Game.BonusResFireValue;
+        }
+        if (ResCold)
+        {
+            value += Game.BonusResColdValue;
+        }
+        if (ResPois)
+        {
+            value += Game.BonusResPoisValue;
+        }
+        if (ResFear)
+        {
+            value += Game.BonusResFearValue;
+        }
+        if (ResLight)
+        {
+            value += Game.BonusResLightValue;
+        }
+        if (ResDark)
+        {
+            value += Game.BonusResDarkValue;
+        }
+        if (ResBlind)
+        {
+            value += Game.BonusResBlindValue;
+        }
+        if (ResConf)
+        {
+            value += Game.BonusResConfValue;
+        }
+        if (ResSound)
+        {
+            value += Game.BonusResSoundValue;
+        }
+        if (ResShards)
+        {
+            value += Game.BonusResShardsValue;
+        }
+        if (ResNether)
+        {
+            value += Game.BonusResNetherValue;
+        }
+        if (ResNexus)
+        {
+            value += Game.BonusResNexusValue;
+        }
+        if (ResChaos)
+        {
+            value += Game.BonusResChaosValue;
+        }
+        if (ResDisen)
+        {
+            value += Game.BonusResDisenValue;
+        }
+        if (ShFire)
+        {
+            value += Game.BonusShFireValue;
+        }
+        if (ShElec)
+        {
+            value += Game.BonusShElecValue;
+        }
+        if (NoTele)
+        {
+            value += Game.BonusNoTeleValue;
+        }
+        if (NoMagic)
+        {
+            value += Game.BonusNoMagicValue;
+        }
+        if (Wraith)
+        {
+            value += Game.BonusWraithValue;
+        }
+        if (DreadCurse)
+        {
+            value += Game.BonusDreadCurseValue;
+        }
+        if (Feather)
+        {
+            value += Game.BonusFeatherValue;
+        }
+        if (SeeInvis)
+        {
+            value += Game.BonusSeeInvisValue;
+        }
+        if (Telepathy)
+        {
+            value += Game.BonusTelepathyValue;
+        }
+        if (SlowDigest)
+        {
+            value += Game.BonusSlowDigestValue;
+        }
+        if (Regen)
+        {
+            value += Game.BonusRegenValue;
+        }
+        if (XtraMight)
+        {
+            value += Game.BonusXtraMightValue;
+        }
+        if (XtraShots)
+        {
+            value += Game.BonusXtraShotsValue;
+        }
+        if (IgnoreAcid)
+        {
+            value += Game.BonusIgnoreAcidValue;
+        }
+        if (IgnoreElec)
+        {
+            value += Game.BonusIgnoreElecValue;
+        }
+        if (IgnoreFire)
+        {
+            value += Game.BonusIgnoreFireValue;
+        }
+        if (IgnoreCold)
+        {
+            value += Game.BonusIgnoreColdValue;
+        }
+        if (DrainExp)
+        {
+            value += Game.BonusDrainExpValue;
+        }
+        if (Teleport)
+        {
+            value += Game.BonusTeleportValue;
+        }
+        if (Aggravate)
+        {
+            value += Game.BonusAggravateValue;
+        }
+        if (Blessed)
+        {
+            value += Game.BonusBlessedValue;
+        }
+        if (IsCursed)
+        {
+            value += Game.BonusIsCursedValue;
+        }
+        if (HeavyCurse)
+        {
+            value += Game.BonusHeavyCurseValue;
+        }
+        if (PermaCurse)
+        {
+            value += Game.BonusPermaCurseValue;
+        }
+        value += Game.ComputeIntegerExpression(BonusStrengthRoll).Value * Game.BonusStrengthValue;
+        value += Game.ComputeIntegerExpression(BonusIntelligenceRoll).Value * Game.BonusIntelligenceValue;
+        value += Game.ComputeIntegerExpression(BonusWisdomRoll).Value * Game.BonusWisdomValue;
+        value += Game.ComputeIntegerExpression(BonusDexterityRoll).Value * Game.BonusDexterityValue;
+        value += Game.ComputeIntegerExpression(BonusConstitutionRoll).Value * Game.BonusConstitutionValue;
+        value += Game.ComputeIntegerExpression(BonusCharismaRoll).Value * Game.BonusCharismaValue;
+        value += Game.ComputeIntegerExpression(BonusStealthRoll).Value * Game.BonusStealthValue;
+        value += Game.ComputeIntegerExpression(BonusSearchRoll).Value * Game.BonusSearchValue;
+        value += Game.ComputeIntegerExpression(BonusInfravisionRoll).Value * Game.BonusInfravisionValue;
+        value += Game.ComputeIntegerExpression(BonusTunnelRoll).Value * Game.BonusTunnelValue;
+        value += Game.ComputeIntegerExpression(BonusAttacksRoll).Value * Game.BonusExtraBlowslValue;
+        value += Game.ComputeIntegerExpression(BonusSpeedRoll).Value * Game.BonusSpeedlValue;
+
+        if (Activation != null)
+        {
+            value += Activation.Value;
+        }
+
+        return value;
+    }
     public ItemEnhancement(Game game, ItemEnhancementGameConfiguration itemEnhancementGameConfiguration)
     {
         Game = game;
@@ -28,7 +332,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         CanApplyBonusArmorClassMiscPower = itemEnhancementGameConfiguration.CanApplyBonusArmorClassMiscPower;
 
         Key = itemEnhancementGameConfiguration.Key ?? itemEnhancementGameConfiguration.GetType().Name;
-        Value = itemEnhancementGameConfiguration.Value;
         ApplicableItemFactoryBindingKeys = itemEnhancementGameConfiguration.ApplicableItemFactoryBindingKeys;
         AdditionalItemEnhancementWeightedRandomBindingKey = itemEnhancementGameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
         FriendlyName = itemEnhancementGameConfiguration.FriendlyName;
@@ -60,7 +363,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BrandPois = itemEnhancementGameConfiguration.BrandPois;
         Chaotic = itemEnhancementGameConfiguration.Chaotic;
         Color = itemEnhancementGameConfiguration.Color;
-        Cost = itemEnhancementGameConfiguration.Cost;
         IsCursed = itemEnhancementGameConfiguration.IsCursed;
         DamageDice = itemEnhancementGameConfiguration.DamageDice;
         DiceSides = itemEnhancementGameConfiguration.DiceSides;
@@ -125,6 +427,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Telepathy = itemEnhancementGameConfiguration.Telepathy;
         Teleport = itemEnhancementGameConfiguration.Teleport;
         TreasureRating = itemEnhancementGameConfiguration.TreasureRating;
+        Value = itemEnhancementGameConfiguration.Value;
         Valueless = itemEnhancementGameConfiguration.Valueless;
         Vampiric = itemEnhancementGameConfiguration.Vampiric;
         Vorpal1InChance = itemEnhancementGameConfiguration.Vorpal1InChance;
@@ -181,7 +484,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         itemCharacteristics.SetBoolValue(AttributeEnum.BrandPois, BrandPois);
         itemCharacteristics.SetBoolValue(AttributeEnum.Chaotic, Chaotic);
         itemCharacteristics.SetColorValue(AttributeEnum.Color, Color);
-        itemCharacteristics.SetIntValue(AttributeEnum.Cost, Cost);
         itemCharacteristics.SetBoolValue(AttributeEnum.IsCursed, IsCursed);
         itemCharacteristics.SetIntValue(AttributeEnum.DamageDice, DamageDice);
         itemCharacteristics.SetIntValue(AttributeEnum.DiceSides, DiceSides);
@@ -247,6 +549,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         itemCharacteristics.SetBoolValue(AttributeEnum.Telepathy, Telepathy);
         itemCharacteristics.SetBoolValue(AttributeEnum.Teleport, Teleport);
         itemCharacteristics.SetIntValue(AttributeEnum.TreasureRating, TreasureRating);
+        itemCharacteristics.SetIntValue(AttributeEnum.Value, Value);
         itemCharacteristics.SetBoolValue(AttributeEnum.Valueless, Valueless);
         itemCharacteristics.SetBoolValue(AttributeEnum.Vampiric, Vampiric);
         itemCharacteristics.SetIntValue(AttributeEnum.Vorpal1InChance, Vorpal1InChance);
@@ -290,6 +593,12 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
         ArtifactBiasWeightedRandom = Game.SingletonRepository.GetNullable<ArtifactBiasWeightedRandom>(ArtifactBiasWeightedRandomBindingKey);
         ApplicableItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(ApplicableItemFactoryBindingKeys);
+
+        //if (Value == 0)
+        //{
+        //    int value = GetValue();
+        //    Game.PasteProperty(
+        //}
     }
 
     public string ToJson()
@@ -304,7 +613,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower,
 
             Key = Key,
-            Value = Value,
             ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
             AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,
             FriendlyName = FriendlyName,
@@ -336,7 +644,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             BrandPois = BrandPois,
             Chaotic = Chaotic,
             Color = Color,
-            Cost = Cost,
             IsCursed = IsCursed,
             DamageDice = DamageDice,
             DiceSides = DiceSides,
@@ -401,6 +708,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Telepathy = Telepathy,
             Teleport = Teleport,
             TreasureRating = TreasureRating,
+            Value = Value,
             Valueless = Valueless,
             Vampiric = Vampiric,
             Vorpal1InChance = Vorpal1InChance,
@@ -574,9 +882,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool Chaotic { get; } = false;
 
     public ColorEnum Color { get; } = ColorEnum.White;
-
-    private int Cost { get; } = 0;
-    
+   
     /// <inheritdoc />
     private bool IsCursed { get; } = false;
 

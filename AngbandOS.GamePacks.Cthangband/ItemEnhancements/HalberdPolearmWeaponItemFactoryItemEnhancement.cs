@@ -8,7 +8,7 @@ public class HalberdPolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 190;
-    public override int Cost => 430;
+    public override int Value => 430;
     public override int DamageDice => 3;
     public override int DiceSides => 5;
     public override ColorEnum Color => ColorEnum.Grey;

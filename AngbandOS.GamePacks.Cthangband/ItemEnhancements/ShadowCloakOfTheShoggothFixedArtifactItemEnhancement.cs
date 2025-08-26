@@ -13,7 +13,7 @@ public class ShadowCloakOfTheShoggothFixedArtifactItemEnhancement : ItemEnhancem
     public override bool ImAcid => true;
     public override string? BonusStealthRollExpression => "4";
     public override bool SeeInvis => true;
-    public override int Cost => 35000;
+    public override int Value => 35000;
     public override string BonusAttacksRollExpression => "12";
     public override ColorEnum Color => ColorEnum.Black;
 }

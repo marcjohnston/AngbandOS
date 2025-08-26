@@ -14,7 +14,7 @@ public class LeatherScaleMailWyvernscaleFixedArtifactItemEnhancement : ItemEnhan
     public override bool ResAcid => true;
     public override bool ResShards => true;
     public override int Weight => -80;
-    public override int Cost => 25000;
+    public override int Value => 25000;
     public override string BonusAttacksRollExpression => "25";
     public override string BonusHitsRollExpression => "-1";
     public override ColorEnum Color => ColorEnum.BrightBrown;

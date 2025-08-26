@@ -15,7 +15,7 @@ public class LightCrossbowOfDeathFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool ResFire => true;
     public override bool ShowMods => true;
     public override bool XtraMight => true;
-    public override int Cost => 50000;
+    public override int Value => 50000;
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "14";
     public override ColorEnum Color => ColorEnum.Grey;

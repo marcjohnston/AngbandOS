@@ -19,7 +19,7 @@ public class LargeMetalShieldOfStabilityFixedArtifactItemEnhancement : ItemEnhan
     public override bool SustInt => true;
     public override bool SustStr => true;
     public override bool SustWis => true;
-    public override int Cost => 160000;
+    public override int Value => 160000;
     public override string BonusAttacksRollExpression => "20";
     public override ColorEnum Color => ColorEnum.Grey;
 }

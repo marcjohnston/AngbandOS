@@ -34,7 +34,7 @@ public class BladeOfChaosDoomcallerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool Telepathy => true;
     public override int Vorpal1InChance => 6;
     public override int VorpalExtraAttacks1InChance => 2;
-    public override int Cost => 250000;
+    public override int Value => 250000;
     public override string BonusAttacksRollExpression => "-50";
     public override string BonusHitsRollExpression => "18";
     public override string BonusDamageRollExpression => "28";

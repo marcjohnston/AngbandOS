@@ -20,7 +20,7 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool SlayDemon => true;
     public override bool SlayEvil => true;
     public override bool SlayTroll => true;
-    public override int Cost => 100000;
+    public override int Value => 100000;
     public override int DamageDice => 2;
     public override string BonusHitsRollExpression => "-20";
     public override string BonusDamageRollExpression => "20";

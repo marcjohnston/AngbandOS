@@ -5,6 +5,6 @@ public class IdentifyScrollItemFactoryItemEnhancement : ItemEnhancementGameConfi
 {
     public override bool EasyKnow => true;
     public override int Weight => 5;
-    public override int Cost => 50;
+    public override int Value => 50;
     public override ColorEnum Color => ColorEnum.BrightBeige;
 }

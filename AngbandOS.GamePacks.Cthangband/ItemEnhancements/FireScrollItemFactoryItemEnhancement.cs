@@ -6,6 +6,6 @@ public class FireScrollItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool IgnoreFire=> true;
     public override bool EasyKnow => true;
     public override int Weight => 5;
-    public override int Cost => 1000;
+    public override int Value => 1000;
     public override ColorEnum Color => ColorEnum.BrightBeige;
 }

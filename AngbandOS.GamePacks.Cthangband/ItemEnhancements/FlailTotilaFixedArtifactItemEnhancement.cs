@@ -22,7 +22,7 @@ public class FlailTotilaFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool ResFire => true;
     public override bool ShowMods => true;
     public override bool SlayEvil => true;
-    public override int Cost => 55000;
+    public override int Value => 55000;
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "6";
     public override string BonusDamageRollExpression => "8";

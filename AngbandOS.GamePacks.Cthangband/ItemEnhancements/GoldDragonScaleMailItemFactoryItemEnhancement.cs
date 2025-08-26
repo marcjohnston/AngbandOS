@@ -11,7 +11,7 @@ public class GoldDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool ResSound => true;
     public override int TreasureRating => 30;
     public override int Weight => 200;
-    public override int Cost => 35000;
+    public override int Value => 35000;
     public override int DamageDice => 2;
     public override int DiceSides => 4;
     public override ColorEnum Color => ColorEnum.Gold;

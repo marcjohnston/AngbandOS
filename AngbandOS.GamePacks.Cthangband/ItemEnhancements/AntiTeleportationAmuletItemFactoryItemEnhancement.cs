@@ -9,6 +9,6 @@ public class AntiTeleportationAmuletItemFactoryItemEnhancement : ItemEnhancement
     public override bool IgnoreFire => true;
     public override bool NoTele => true;
     public override int Weight => 3;
-    public override int Cost => 15000;
+    public override int Value => 15000;
     public override ColorEnum Color => ColorEnum.Orange;
 }

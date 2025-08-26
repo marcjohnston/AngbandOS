@@ -18,7 +18,7 @@ public class MainGaucheOfDefenceFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool ShowMods => true;
     public override bool SlayGiant => true;
     public override bool SlayTroll => true;
-    public override int Cost => 22500;
+    public override int Value => 22500;
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "12";
     public override string BonusDamageRollExpression => "15";

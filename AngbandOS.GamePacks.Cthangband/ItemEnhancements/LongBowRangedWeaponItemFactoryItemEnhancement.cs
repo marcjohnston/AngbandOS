@@ -9,6 +9,6 @@ public class LongBowRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 40;
-    public override int Cost => 120;
+    public override int Value => 120;
     public override ColorEnum Color => ColorEnum.BrightBrown;
 }

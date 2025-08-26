@@ -5,6 +5,6 @@ public class RestoringMushroomFoodItemFactoryItemEnhancement : ItemEnhancementGa
 {
     public override bool EasyKnow => true;
     public override int Weight => 1;
-    public override int Cost => 1000;
+    public override int Value => 1000;
     public override ColorEnum Color => ColorEnum.Green;
 }

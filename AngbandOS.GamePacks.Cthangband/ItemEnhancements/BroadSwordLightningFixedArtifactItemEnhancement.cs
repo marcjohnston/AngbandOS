@@ -24,7 +24,7 @@ public class BroadSwordLightningFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool ShowMods => true;
     public override bool SlayOrc => true;
     public override bool SlowDigest => true;
-    public override int Cost => 95000;
+    public override int Value => 95000;
     public override string BonusHitsRollExpression => "12";
     public override string BonusDamageRollExpression => "16";
     public override ColorEnum Color => ColorEnum.BrightWhite;

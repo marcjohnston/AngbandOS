@@ -13,7 +13,7 @@ public class SteelHelmOfHammerhandFixedArtifactItemEnhancement : ItemEnhancement
     public override string? BonusDexterityRollExpression => "3";
     public override bool ResAcid => true;
     public override bool ResNexus => true;
-    public override int Cost => 45000;
+    public override int Value => 45000;
     public override string BonusAttacksRollExpression => "20";
     public override ColorEnum Color => ColorEnum.BrightWhite;
 }

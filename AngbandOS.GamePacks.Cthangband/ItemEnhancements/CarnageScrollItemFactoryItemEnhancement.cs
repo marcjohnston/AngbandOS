@@ -5,6 +5,6 @@ public class CarnageScrollItemFactoryItemEnhancement : ItemEnhancementGameConfig
 {
     public override bool EasyKnow => true;
     public override int Weight => 5;
-    public override int Cost => 750;
+    public override int Value => 750;
     public override ColorEnum Color => ColorEnum.BrightBeige;
 }

@@ -13,7 +13,7 @@ public class BrassLanternLightSourceItemFactoryItemEnhancement : ItemEnhancement
     public override bool IgnoreFire => true;
     public override int Radius => 2;
     public override int Weight => 50;
-    public override int Cost => 35;
+    public override int Value => 35;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
     public override ColorEnum Color => ColorEnum.BrightBrown;

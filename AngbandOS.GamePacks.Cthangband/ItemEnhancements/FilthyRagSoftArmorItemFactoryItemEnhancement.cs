@@ -4,6 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class FilthyRagSoftArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 20;
-    public override int Cost => 1;
+    public override int Value => 1;
     public override ColorEnum Color => ColorEnum.Black;
 }

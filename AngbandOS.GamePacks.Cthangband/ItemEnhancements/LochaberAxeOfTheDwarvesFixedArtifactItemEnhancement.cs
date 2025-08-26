@@ -19,7 +19,7 @@ public class LochaberAxeOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool ShowMods => true;
     public override bool SlayEvil => true;
     public override bool SlayGiant => true;
-    public override int Cost => 80000;
+    public override int Value => 80000;
     public override string BonusHitsRollExpression => "12";
     public override string BonusDamageRollExpression => "17";
     public override ColorEnum Color => ColorEnum.Black;

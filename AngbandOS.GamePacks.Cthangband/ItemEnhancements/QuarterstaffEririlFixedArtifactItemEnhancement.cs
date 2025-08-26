@@ -23,7 +23,7 @@ public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
     public override bool SlayEvil => true;
-    public override int Cost => 20000;
+    public override int Value => 20000;
     public override string BonusHitsRollExpression => "3";
     public override string BonusDamageRollExpression => "5";
     public override ColorEnum Color => ColorEnum.BrightBrown;

@@ -18,7 +18,7 @@ public class AugmentedChainMailOfTheOgreLordsFixedArtifactItemEnhancement : Item
     public override bool ResAcid => true;
     public override bool ResConf => true;
     public override bool ResPois => true;
-    public override int Cost => 40000;
+    public override int Value => 40000;
     public override string BonusAttacksRollExpression => "20";
     public override string BonusHitsRollExpression => "-2";
     public override ColorEnum Color => ColorEnum.Grey;

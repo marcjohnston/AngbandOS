@@ -17,7 +17,7 @@ public class SetOfLeatherGlovesOfLightFixedArtifactItemEnhancement : ItemEnhance
     public override int Radius => 3;
     public override bool ResLight => true;
     public override bool SustCon => true;
-    public override int Cost => 30000;
+    public override int Value => 30000;
     public override string BonusAttacksRollExpression => "10";
     public override ColorEnum Color => ColorEnum.BrightBrown;
 }

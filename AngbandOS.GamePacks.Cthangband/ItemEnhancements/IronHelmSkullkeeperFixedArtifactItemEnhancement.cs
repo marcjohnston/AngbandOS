@@ -16,7 +16,7 @@ public class IronHelmSkullkeeperFixedArtifactItemEnhancement : ItemEnhancementGa
     public override string? BonusWisdomRollExpression => "2";
     public override bool ResBlind => true;
     public override bool SeeInvis => true;
-    public override int Cost => 100000;
+    public override int Value => 100000;
     public override string BonusAttacksRollExpression => "10";
     public override ColorEnum Color => ColorEnum.Grey;
 }

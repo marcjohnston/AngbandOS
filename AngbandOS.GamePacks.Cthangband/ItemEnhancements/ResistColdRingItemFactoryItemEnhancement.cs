@@ -7,6 +7,6 @@ public class ResistColdRingItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override bool IgnoreCold => true;
     public override bool ResCold => true;
     public override int Weight => 2;
-    public override int Cost => 250;
+    public override int Value => 250;
     public override ColorEnum Color => ColorEnum.Gold;
 }

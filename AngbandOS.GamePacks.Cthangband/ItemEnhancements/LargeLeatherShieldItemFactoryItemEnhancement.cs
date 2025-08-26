@@ -5,7 +5,7 @@ public class LargeLeatherShieldItemFactoryItemEnhancement : ItemEnhancementGameC
 {
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 100;
-    public override int Cost => 120;
+    public override int Value => 120;
     public override int DamageDice => 1;
     public override int DiceSides => 2;
     public override ColorEnum Color => ColorEnum.BrightBrown;

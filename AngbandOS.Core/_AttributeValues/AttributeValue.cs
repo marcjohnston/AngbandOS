@@ -13,6 +13,11 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class AttributeValue
 {
+    protected AttributeFactory Factory { get; }
+    protected AttributeValue(AttributeFactory factory)
+    {
+        Factory = factory;
+    }
     /// <summary>
     /// Returns a new instance of the item property with a copy/clone of the value.
     /// </summary>
@@ -22,6 +27,10 @@ internal abstract class AttributeValue
     public abstract AttributeValue Merge(AttributeValue itemProperty);
 
     public abstract bool IsEqual(AttributeValue itemProperty);
+    public override string ToString()
+    {
+        return Enum.GetName(typeof(AttributeEnum), Factory.Index) ?? "";
+    }
 
     #region Equality
     public override bool Equals(object? obj)

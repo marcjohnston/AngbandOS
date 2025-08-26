@@ -10,7 +10,7 @@ public class DragonShieldItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override bool IgnoreFire => true;
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 100;
-    public override int Cost => 10000;
+    public override int Value => 10000;
     public override int DamageDice => 1;
     public override int DiceSides => 3;
     public override ColorEnum Color => ColorEnum.BrightGreen;

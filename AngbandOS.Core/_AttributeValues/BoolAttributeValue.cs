@@ -10,22 +10,18 @@ namespace AngbandOS.Core;
 internal class BoolAttributeValue : AttributeValue
 {
     public bool Value { get; }
-    public BoolAttributeValue(bool value)
+    public BoolAttributeValue(AttributeFactory factory, bool value) : base(factory)
     {
         Value = value;
     }
 
-    public override AttributeValue Clone() => new BoolAttributeValue(Value);
+    public override AttributeValue Clone() => new BoolAttributeValue(Factory, Value);
 
     public override AttributeValue Merge(AttributeValue itemProperty)
     {
         if (itemProperty is BoolAttributeValue boolPropertyValue)
         {
-            return new BoolAttributeValue(Value || boolPropertyValue.Value);
-        }
-        else if (itemProperty is NullableBoolAttributeValue nullableBoolPropertyValue)
-        {
-            return new BoolAttributeValue(nullableBoolPropertyValue.Value.HasValue ? nullableBoolPropertyValue.Value.Value : Value);
+            return new BoolAttributeValue(Factory, Value || boolPropertyValue.Value);
         }
         throw new Exception("Merge mismatch.");
     }
@@ -37,5 +33,9 @@ internal class BoolAttributeValue : AttributeValue
             return Value == boolPropertyValue.Value;
         }
         throw new Exception("IsEqual mismatch.");
+    }
+    public override string ToString()
+    {
+        return $"{base.ToString()}={Value}";
     }
 }

@@ -11,7 +11,7 @@ public class SetOfGauntletsOfTheDeadFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool IgnoreElec => true;
     public override bool IgnoreFire => true;
     public override bool ResAcid => true;
-    public override int Cost => 12000;
+    public override int Value => 12000;
     public override string BonusAttacksRollExpression => "15";
     public override ColorEnum Color => ColorEnum.BrightBrown;
 }

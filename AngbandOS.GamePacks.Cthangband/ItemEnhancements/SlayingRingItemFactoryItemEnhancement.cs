@@ -5,6 +5,6 @@ public class SlayingRingItemFactoryItemEnhancement : ItemEnhancementGameConfigur
 {
     public override bool ShowMods => true;
     public override int Weight => 2;
-    public override int Cost => 1000;
+    public override int Value => 1000;
     public override ColorEnum Color => ColorEnum.Gold;
 }

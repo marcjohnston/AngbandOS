@@ -5,6 +5,6 @@ public class SatisfyHungerScrollItemFactoryItemEnhancement : ItemEnhancementGame
 {
     public override bool EasyKnow => true;
     public override int Weight => 5;
-    public override int Cost => 10;
+    public override int Value => 10;
     public override ColorEnum Color => ColorEnum.BrightBeige;
 }

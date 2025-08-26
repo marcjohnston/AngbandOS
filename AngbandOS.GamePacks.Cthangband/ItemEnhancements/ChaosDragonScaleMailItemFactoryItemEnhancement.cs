@@ -12,7 +12,7 @@ public class ChaosDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool ResDisen => true;
     public override int TreasureRating => 30;
     public override int Weight => 200;
-    public override int Cost => 65000;
+    public override int Value => 65000;
     public override int DamageDice => 2;
     public override int DiceSides => 4;
     public override ColorEnum Color => ColorEnum.Purple;

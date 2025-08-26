@@ -26,7 +26,7 @@ public class ScytheOfGharneFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool ResLight => true;
     public override bool SeeInvis => true;
     public override bool ShowMods => true;
-    public override int Cost => 18000;
+    public override int Value => 18000;
     public override string BonusAttacksRollExpression => "10";
     public override string BonusHitsRollExpression => "8";
     public override string BonusDamageRollExpression => "8";

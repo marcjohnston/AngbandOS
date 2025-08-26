@@ -18,6 +18,6 @@ public class GemstoneShiningTrapezodedronFixedArtifactItemEnhancement : ItemEnha
     public override string? BonusWisdomRollExpression => "3";
     public override bool ResChaos => true;
     public override bool SeeInvis => true;
-    public override int Cost => 150000;
+    public override int Value => 150000;
     public override ColorEnum Color => ColorEnum.Red;
 }

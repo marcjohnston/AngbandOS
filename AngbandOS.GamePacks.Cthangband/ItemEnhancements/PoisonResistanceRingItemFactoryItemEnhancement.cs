@@ -6,6 +6,6 @@ public class PoisonResistanceRingItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool EasyKnow => true;
     public override bool ResPois => true;
     public override int Weight => 2;
-    public override int Cost => 16000;
+    public override int Value => 16000;
     public override ColorEnum Color => ColorEnum.Gold;
 }

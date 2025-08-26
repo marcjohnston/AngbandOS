@@ -17,7 +17,7 @@ public class BroadAxeOfNodensFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool SlayGiant => true;
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
-    public override int Cost => 50000;
+    public override int Value => 50000;
     public override string BonusHitsRollExpression => "13";
     public override string BonusDamageRollExpression => "19";
     public override ColorEnum Color => ColorEnum.Grey;

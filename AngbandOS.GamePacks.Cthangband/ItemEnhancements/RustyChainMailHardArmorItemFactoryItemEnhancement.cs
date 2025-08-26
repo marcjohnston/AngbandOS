@@ -5,7 +5,7 @@ public class RustyChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancement
 {
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 200;
-    public override int Cost => 550;
+    public override int Value => 550;
     public override int DamageDice => 1;
     public override int DiceSides => 4;
     public override ColorEnum Color => ColorEnum.Red;

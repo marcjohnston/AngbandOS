@@ -9,7 +9,7 @@ public class AntiMagicAmuletItemFactoryItemEnhancement : ItemEnhancementGameConf
     public override bool IgnoreFire => true;
     public override bool NoMagic => true;
     public override int Weight => 3;
-    public override int Cost => 30000;
+    public override int Value => 30000;
     public override ColorEnum Color => ColorEnum.Orange;
 }
 

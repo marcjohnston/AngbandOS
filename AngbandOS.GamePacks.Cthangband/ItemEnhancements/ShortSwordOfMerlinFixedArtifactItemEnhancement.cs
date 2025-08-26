@@ -16,7 +16,7 @@ public class ShortSwordOfMerlinFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool ShowMods => true;
     public override bool SlayAnimal => true;
     public override bool SlowDigest => true;
-    public override int Cost => 35000;
+    public override int Value => 35000;
     public override string BonusHitsRollExpression => "3";
     public override string BonusDamageRollExpression => "7";
     public override ColorEnum Color => ColorEnum.BrightWhite;

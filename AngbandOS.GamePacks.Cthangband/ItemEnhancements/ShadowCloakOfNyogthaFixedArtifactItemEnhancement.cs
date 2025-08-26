@@ -19,7 +19,7 @@ public class ShadowCloakOfNyogthaFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool ResAcid => true;
     public override bool ResCold => true;
     public override bool ResFire => true;
-    public override int Cost => 55000;
+    public override int Value => 55000;
     public override string BonusAttacksRollExpression => "20";
     public override ColorEnum Color => ColorEnum.Black;
 }

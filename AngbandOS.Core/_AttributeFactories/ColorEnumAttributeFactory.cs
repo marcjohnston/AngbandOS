@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ColorEnumAttributeFactory : AttributeFactory
 {
-    public override AttributeValue Instantiate() => new ColorEnumAttributeValue(ColorEnum.White);
-    public override NullableAttributeValue InstantiateNullable() => new NullableColorEnumPropertyValue(null);
+    public override AttributeValue Instantiate() => new ColorEnumAttributeValue(this, ColorEnum.White);
     public ColorEnumAttributeFactory(AttributeEnum index) : base(index) { }
 }

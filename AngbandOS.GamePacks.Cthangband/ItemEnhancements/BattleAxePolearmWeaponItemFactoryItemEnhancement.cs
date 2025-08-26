@@ -8,7 +8,7 @@ public class BattleAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementG
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 170;
-    public override int Cost => 334;
+    public override int Value => 334;
     public override int DamageDice => 2;
     public override int DiceSides => 8;
     public override ColorEnum Color => ColorEnum.Grey;

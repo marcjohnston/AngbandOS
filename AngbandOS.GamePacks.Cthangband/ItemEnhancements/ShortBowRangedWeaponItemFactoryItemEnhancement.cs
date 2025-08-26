@@ -9,6 +9,6 @@ public class ShortBowRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 30;
-    public override int Cost => 50;
+    public override int Value => 50;
     public override ColorEnum Color => ColorEnum.BrightBrown;
 }

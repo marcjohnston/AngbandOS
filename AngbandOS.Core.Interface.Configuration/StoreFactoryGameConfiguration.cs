@@ -143,14 +143,14 @@ public class StoreFactoryGameConfiguration
     public virtual bool ShowItemPricing { get; set; } = true;
 
     /// <summary>
-    /// Returns the rate at which the store marks up items.  Returns 1, by default.
+    /// Returns the rate at which the store marks up items.  Returns 100, by default.
     /// </summary>
-    public virtual int MarkupRate { get; set; } = 1;
+    public virtual int MarkupRate { get; set; } = 100;
 
     /// <summary>
-    /// Returns the rate at which the store marks down items.  Returns 1, by default.
+    /// Returns the rate at which the store marks down items.  Returns 100, by default.
     /// </summary>
-    public virtual int MarkdownRate { get; set; } = 1;
+    public virtual int MarkdownRate { get; set; } = 100;
 
     public virtual bool PerformsMaintenanceWhenResting { get; set; } = true;
 

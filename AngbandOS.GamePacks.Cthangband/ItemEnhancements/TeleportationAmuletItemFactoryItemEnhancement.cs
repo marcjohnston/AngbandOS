@@ -7,6 +7,6 @@ public class TeleportationAmuletItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool EasyKnow => true;
     public override bool Teleport => true;
     public override int Weight => 3;
-    public override int Cost => 250;
+    public override int Value => 250;
     public override ColorEnum Color => ColorEnum.Orange;
 }

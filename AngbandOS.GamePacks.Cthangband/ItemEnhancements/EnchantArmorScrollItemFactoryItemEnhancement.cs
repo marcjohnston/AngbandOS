@@ -5,6 +5,6 @@ public class EnchantArmorScrollItemFactoryItemEnhancement : ItemEnhancementGameC
 {
     public override bool EasyKnow => true;
     public override int Weight => 5;
-    public override int Cost => 125;
+    public override int Value => 125;
     public override ColorEnum Color => ColorEnum.BrightBeige;
 }

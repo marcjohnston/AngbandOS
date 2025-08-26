@@ -16,11 +16,6 @@ public class ItemEnhancementGameConfiguration
     public virtual string? Key { get; set; } = null;
 
     /// <summary>
-    /// Returns the additional value of the enhancement.  Returns 0, by default.
-    /// </summary>
-    public virtual int Value { get; set; } = 0;
-
-    /// <summary>
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
     /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
     /// </summary>
@@ -105,7 +100,6 @@ public class ItemEnhancementGameConfiguration
     /// </summary>
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;
 
-    public virtual int Cost { get; set; } = 0;
     public virtual bool IsCursed { get; set; } = false;
     public virtual int DamageDice { get; set; } = 0;
     public virtual int DiceSides { get; set; } = 0;
@@ -154,7 +148,7 @@ public class ItemEnhancementGameConfiguration
     public virtual bool ShowMods { get; set; } = false;
     public virtual bool SlayAnimal { get; set; } = false;
     public virtual bool SlayDemon { get; set; } = false;
-    public virtual int SlayDragon { get; set; } = 3;
+    public virtual int SlayDragon { get; set; } = 0;
     public virtual bool SlayEvil { get; set; } = false;
     public virtual bool SlayGiant { get; set; } = false;
     public virtual bool SlayOrc { get; set; } = false;
@@ -170,6 +164,11 @@ public class ItemEnhancementGameConfiguration
     public virtual bool Telepathy { get; set; } = false;
     public virtual bool Teleport { get; set; } = false;
     public virtual int TreasureRating { get; set; } = 0;
+
+    /// <summary>
+    /// Returns the additional value of the enhancement.  Returns 0, by default.
+    /// </summary>
+    public virtual int Value { get; set; } = 0;
 
     /// <summary>
     /// Returns true, if the enhancement causes the item to become valueless; false, if the item retains its value.  Returns false, by default.

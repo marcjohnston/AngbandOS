@@ -10,21 +10,17 @@ namespace AngbandOS.Core;
 internal class IntAttributeValue : AttributeValue
 {
     public int Value { get; }
-    public IntAttributeValue(int value)
+    public IntAttributeValue(AttributeFactory factory, int value) : base(factory)
     {
         Value = value;
     }
-    public override AttributeValue Clone() => new IntAttributeValue(Value);
+    public override AttributeValue Clone() => new IntAttributeValue(Factory, Value);
 
     public override AttributeValue Merge(AttributeValue itemProperty)
     {
         if (itemProperty is IntAttributeValue intPropertyValue)
         {
-            return new IntAttributeValue(Value + intPropertyValue.Value);
-        }
-        else if (itemProperty is NullableIntAttributeValue nullableIntPropertyValue)
-        {
-            return new IntAttributeValue(nullableIntPropertyValue.Value.HasValue ? nullableIntPropertyValue.Value.Value : Value);
+            return new IntAttributeValue(Factory, Value + intPropertyValue.Value);
         }
         throw new Exception("Merge mismatch.");
     }
@@ -36,5 +32,9 @@ internal class IntAttributeValue : AttributeValue
             return Value == intPropertyValue.Value;
         }
         throw new Exception("IsEqual mismatch.");
+    }
+    public override string ToString()
+    {
+        return $"{base.ToString()}={Value}";
     }
 }

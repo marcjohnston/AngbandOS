@@ -5,6 +5,6 @@ public class WordOfRecallScrollItemFactoryItemEnhancement : ItemEnhancementGameC
 {
     public override bool EasyKnow => true;
     public override int Weight => 5;
-    public override int Cost => 150;
+    public override int Value => 150;
     public override ColorEnum Color => ColorEnum.BrightBeige;
 }

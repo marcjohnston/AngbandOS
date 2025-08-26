@@ -5,7 +5,7 @@ public class ChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancementGameC
 {
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 220;
-    public override int Cost => 750;
+    public override int Value => 750;
     public override int DamageDice => 1;
     public override int DiceSides => 4;
     public override ColorEnum Color => ColorEnum.Grey;

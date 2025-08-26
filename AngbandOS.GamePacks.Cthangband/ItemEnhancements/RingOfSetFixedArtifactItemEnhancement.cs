@@ -42,7 +42,7 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     public override int Radius => 3;
     public override bool SlowDigest => true;
     public override bool Telepathy => true;
-    public override int Cost => 5000000;
+    public override int Value => 5000000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
     public override string BonusHitsRollExpression => "15";

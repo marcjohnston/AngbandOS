@@ -22,7 +22,7 @@ public class DaggerOfAssassinFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool SlayOrc => true;
     public override bool SlayTroll => true;
     public override bool SustDex => true;
-    public override int Cost => 125000;
+    public override int Value => 125000;
     public override int DamageDice => 1;
     public override string BonusAttacksRollExpression => "5";
     public override string BonusHitsRollExpression => "10";

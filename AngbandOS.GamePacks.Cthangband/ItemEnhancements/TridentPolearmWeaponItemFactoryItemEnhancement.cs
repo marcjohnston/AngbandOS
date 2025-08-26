@@ -8,7 +8,7 @@ public class TridentPolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool CanApplySlayingBonus => true;
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 70;
-    public override int Cost => 120;
+    public override int Value => 120;
     public override int DamageDice => 1;
     public override int DiceSides => 8;
     public override ColorEnum Color => ColorEnum.Yellow;

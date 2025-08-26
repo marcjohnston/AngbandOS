@@ -19,5 +19,5 @@ public class NecklaceOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhancementG
     public override string? BonusStrengthRollExpression => "3";
     public override bool Regen => true;
     public override bool SeeInvis => true;
-    public override int Cost => 75000;
+    public override int Value => 75000;
 }

@@ -21,7 +21,7 @@ public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool ResDisen => true;
     public override bool ResElec => true;
     public override bool ResFire => true;
-    public override int Cost => 150000;
+    public override int Value => 150000;
     public override int DamageDice => 1;
     public override string BonusAttacksRollExpression => "40";
     public override string BonusHitsRollExpression => "-2";

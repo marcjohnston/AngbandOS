@@ -34,7 +34,7 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool Regen => true;
     public override bool SlowDigest => true;
     public override bool Telepathy => true;
-    public override int Cost => 140000;
+    public override int Value => 140000;
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "13";

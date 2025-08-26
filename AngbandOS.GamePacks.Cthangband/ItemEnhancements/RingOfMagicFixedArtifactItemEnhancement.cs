@@ -22,5 +22,5 @@ public class RingOfMagicFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override string? BonusStrengthRollExpression => "1";
     public override bool ResPois => true;
     public override bool SeeInvis => true;
-    public override int Cost => 75000;
+    public override int Value => 75000;
 }

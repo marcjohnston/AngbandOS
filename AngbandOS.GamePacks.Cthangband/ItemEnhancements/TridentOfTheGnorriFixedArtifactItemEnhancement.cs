@@ -26,7 +26,7 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool Feather => true;
     public override int Radius => 3;
     public override bool Telepathy => true;
-    public override int Cost => 120000;
+    public override int Value => 120000;
     public override int DamageDice => 3;
     public override string BonusHitsRollExpression => "15";
     public override string BonusDamageRollExpression => "19";

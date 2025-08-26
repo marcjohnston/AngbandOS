@@ -82,7 +82,7 @@ internal class DestroyItemScript : UniversalScript, IGetKey
             string feel = "special";
             Game.EnergyUse = 0;
             Game.MsgPrint($"You cannot destroy {itemName}.");
-            if (item.EffectivePropertySet.IsCursed || item.IsBroken)
+            if (item.EffectivePropertySet.IsCursed || item.EffectivePropertySet.Valueless)
             {
                 feel = "terrible";
             }

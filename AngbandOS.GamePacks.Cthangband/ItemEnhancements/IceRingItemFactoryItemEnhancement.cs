@@ -7,6 +7,6 @@ public class IceRingItemFactoryItemEnhancement : ItemEnhancementGameConfiguratio
     public override bool IgnoreCold => true;
     public override bool ResCold => true;
     public override int Weight => 2;
-    public override int Cost => 3000;
+    public override int Value => 3000;
     public override ColorEnum Color => ColorEnum.Gold;
 }
