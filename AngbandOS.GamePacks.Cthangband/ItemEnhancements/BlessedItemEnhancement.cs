@@ -1,4 +1,4 @@
-// AngbandOS: 2022 Marc Johnston
+﻿// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -7,7 +7,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class VampiricItemEnhancement : ItemEnhancementGameConfiguration
+public class BlessedItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Vampiric => true;
+    public override bool Blessed => true;
+    public override int Value => 13000;
 }
