@@ -8,5 +8,4 @@ public class LightAndDarknessResistanceRingItemFactoryItemEnhancement : ItemEnha
     public override bool ResLight => true;
     public override int Weight => 2;
     public override int Value => 3000;
-    public override ColorEnum Color => ColorEnum.Gold;
 }

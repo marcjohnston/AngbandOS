@@ -152,17 +152,15 @@ internal sealed class ItemFactory : IGetKey, IToJson
     public bool IsFlavorAware;
 
     /// <summary>
-    /// Returns the character that is used to display items of this type.  This character is initially set from the BaseItemCategory, but item categories
+    /// Returns the character that is used to display items of this type.  This character is initially set from the BaseItemCategory, but item classes
     /// that have flavor may override this character and replace it with a different character from the flavor.
     /// </summary>
-    [Obsolete("This property is available via the IFlavor.Flavor property.")]
     public Symbol FlavorSymbol;
 
     /// <summary>
     /// Returns the color to be used for items of this type.  This color is initially set from the BaseItemCategory, but item categories
     /// that have flavor may override this color and replace it with a different color from the flavor.
     /// </summary>
-    [Obsolete("This property is available via the IFlavor.Flavor property.")]
     public ColorEnum FlavorColor;
 
     /// <summary>
@@ -1613,8 +1611,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     private IScriptItem? RefillScript { get; set; }
 
     /// <summary>
-    /// Returns the symbol to use for rendering. This symbol will be initially used to set the <see cref="FlavorSymbol"/> and item
-    /// categories that have flavor may change the FlavorCharacter based on the flavor.  This property is bound from the <see cref="SymbolBindingKey"/> property during the bind phase.
+    /// Returns the symbol to use for rendering.  This property is bound from the <see cref="SymbolBindingKey"/> property during the bind phase.
     /// </summary>
     public Symbol Symbol { get; private set; }
 

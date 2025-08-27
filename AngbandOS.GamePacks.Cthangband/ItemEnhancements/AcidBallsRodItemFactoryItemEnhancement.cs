@@ -8,5 +8,4 @@ public class AcidBallsRodItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override int Value => 5500;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.Turquoise;
 }

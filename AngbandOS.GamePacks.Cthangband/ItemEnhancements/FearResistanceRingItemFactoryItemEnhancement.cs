@@ -7,5 +7,4 @@ public class FearResistanceRingItemFactoryItemEnhancement : ItemEnhancementGameC
     public override bool ResFear => true;
     public override int Weight => 2;
     public override int Value => 300;
-    public override ColorEnum Color => ColorEnum.Gold;
 }

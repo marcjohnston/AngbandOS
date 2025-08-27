@@ -6,5 +6,4 @@ public class CureParanoiaMushroomFoodItemFactoryItemEnhancement : ItemEnhancemen
     public override bool EasyKnow => true;
     public override int Weight => 1;
     public override int Value => 25;
-    public override ColorEnum Color => ColorEnum.Green;
 }

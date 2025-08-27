@@ -7,5 +7,4 @@ public class TrapLocationStaffItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int Value => 350;
     public override int DamageDice => 1;
     public override int DiceSides => 2;
-    public override ColorEnum Color => ColorEnum.Purple;
 }

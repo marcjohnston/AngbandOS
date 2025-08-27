@@ -6,5 +6,4 @@ public class SearchingAmuletItemFactoryItemEnhancement : ItemEnhancementGameConf
     public override bool HideType => true;
     public override int Weight => 3;
     public override int Value => 600;
-    public override ColorEnum Color => ColorEnum.Orange;
 }

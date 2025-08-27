@@ -7,5 +7,4 @@ public class WeaknessMushroomFoodItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Weight => 1;
     public override int DamageDice => 5;
     public override int DiceSides => 5;
-    public override ColorEnum Color => ColorEnum.Green;
 }

@@ -13,7 +13,7 @@ public class ItemFlavorGameConfiguration
     public virtual string? Key { get; set; } = null;
     /// <foreign-collection-name>Symbols</foreign-collection-name>
     public virtual string SymbolName { get; set; }
-    public virtual ColorEnum Color { get; set; }
+    public virtual ColorEnum Color { get; set; } = ColorEnum.White;
     public virtual string Name { get; set; }
     public virtual bool CanBeAssigned { get; set; }
 }

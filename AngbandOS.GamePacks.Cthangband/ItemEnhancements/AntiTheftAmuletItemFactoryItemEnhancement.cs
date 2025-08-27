@@ -11,5 +11,4 @@ public class AntiTheftAmuletItemFactoryItemEnhancement : ItemEnhancementGameConf
     public override bool AntiTheft => true;
     public override int Weight => 3;
     public override int Value => 1000;
-    public override ColorEnum Color => ColorEnum.Orange;
 }

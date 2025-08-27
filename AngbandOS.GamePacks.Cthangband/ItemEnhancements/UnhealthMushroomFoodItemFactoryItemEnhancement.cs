@@ -8,5 +8,4 @@ public class UnhealthMushroomFoodItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Value => 50;
     public override int DamageDice => 10;
     public override int DiceSides => 10;
-    public override ColorEnum Color => ColorEnum.Green;
 }

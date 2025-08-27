@@ -6,5 +6,4 @@ public class TeleportLevelScrollItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool EasyKnow => true;
     public override int Weight => 5;
     public override int Value => 50;
-    public override ColorEnum Color => ColorEnum.BrightBeige;
 }

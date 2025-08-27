@@ -6,6 +6,5 @@ public class StupidityRingItemFactoryItemEnhancement : ItemEnhancementGameConfig
     public override bool IsCursed => true;
     public override bool HideType => true;
     public override int Weight => 2;
-    public override ColorEnum Color => ColorEnum.Gold;
     public override int Value => -5000;
 }

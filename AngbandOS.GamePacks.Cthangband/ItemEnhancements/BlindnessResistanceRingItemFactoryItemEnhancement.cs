@@ -7,5 +7,4 @@ public class BlindnessResistanceRingItemFactoryItemEnhancement : ItemEnhancement
     public override bool ResBlind => true;
     public override int Weight => 2;
     public override int Value => 7500;
-    public override ColorEnum Color => ColorEnum.Gold;
 }
