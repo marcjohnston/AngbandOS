@@ -3580,7 +3580,7 @@ internal class Game
     {
         if (itemClass.NumberOfFlavorsToGenerate == 0)
         {
-            return itemClass.ItemFlavorRepository?.ToList();
+            return itemClass.ItemFlavors?.ToList();
         }
 
         List<Flavor>? itemFlavors = new List<Flavor>();
@@ -3626,8 +3626,8 @@ internal class Game
                 if (okay)
                 {
                     // Select a random flavor from the repository.
-                    int index = RandomLessThan(itemClass.ItemFlavorRepository.Length);
-                    Flavor baseFlavor = itemClass.ItemFlavorRepository[index];
+                    int index = RandomLessThan(itemClass.ItemFlavors.Length);
+                    Flavor baseFlavor = itemClass.ItemFlavors[index];
 
                     // Generate an item flavor.
                     Flavor flavor = new IllegibleItemFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);

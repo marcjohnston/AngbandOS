@@ -28,7 +28,7 @@ internal sealed class ItemClass : IGetKey, IToJson
     /// </summary>
     public bool AllowStomp { get; } = true;
 
-    public bool HasFlavor => (ItemFlavorRepository != null);
+    public bool HasFlavor => (ItemFlavors != null);
 
     public int NumberOfFlavorsToGenerate { get; } = 0;
 
@@ -38,7 +38,7 @@ internal sealed class ItemClass : IGetKey, IToJson
     /// </summary>
     private string[]? ItemFlavorBindingKeys { get; } = null;
 
-    public Flavor[]? ItemFlavorRepository { get; private set; }
+    public Flavor[]? ItemFlavors { get; private set; }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -62,7 +62,7 @@ internal sealed class ItemClass : IGetKey, IToJson
     public string GetKey => Key;
     public void Bind()
     {
-        ItemFlavorRepository = Game.SingletonRepository.GetNullable<ItemFlavor>(ItemFlavorBindingKeys);
+        ItemFlavors = Game.SingletonRepository.GetNullable<ItemFlavor>(ItemFlavorBindingKeys);
     }
 }
 
