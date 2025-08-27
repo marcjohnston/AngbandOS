@@ -29,5 +29,5 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override int DamageDice => 3;
     public override string BonusHitsRollExpression => "32";
     public override string BonusDamageRollExpression => "32";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

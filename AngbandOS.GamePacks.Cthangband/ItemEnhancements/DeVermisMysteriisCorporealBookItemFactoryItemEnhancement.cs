@@ -12,5 +12,5 @@ public class DeVermisMysteriisCorporealBookItemFactoryItemEnhancement : ItemEnha
     public override int Value => 25000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.BrightYellow;
+    public override ColorEnum? Color => ColorEnum.BrightYellow;
 }

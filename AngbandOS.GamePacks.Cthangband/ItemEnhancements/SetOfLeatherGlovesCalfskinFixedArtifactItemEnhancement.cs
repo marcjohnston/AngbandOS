@@ -18,5 +18,5 @@ public class SetOfLeatherGlovesCalfskinFixedArtifactItemEnhancement : ItemEnhanc
     public override string BonusAttacksRollExpression => "15";
     public override string BonusHitsRollExpression => "8";
     public override string BonusDamageRollExpression => "8";
-    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

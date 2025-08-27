@@ -28,5 +28,5 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
     public override int Value => 111111;
     public override string BonusHitsRollExpression => "9";
     public override string BonusDamageRollExpression => "11";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

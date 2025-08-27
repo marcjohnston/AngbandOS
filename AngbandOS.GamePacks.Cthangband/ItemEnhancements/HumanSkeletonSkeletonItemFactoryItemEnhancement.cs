@@ -7,5 +7,5 @@ public class HumanSkeletonSkeletonItemFactoryItemEnhancement : ItemEnhancementGa
     public override int Weight => 60;
     public override int DamageDice => 1;
     public override int DiceSides => 2;
-    public override ColorEnum Color => ColorEnum.Beige;
+    public override ColorEnum? Color => ColorEnum.Beige;
 }

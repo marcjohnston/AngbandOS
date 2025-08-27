@@ -8,5 +8,5 @@ public class MagicksOfMasteryFolkBookItemFactoryItemEnhancement : ItemEnhancemen
     public override int Value => 2500;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.BrightPurple;
+    public override ColorEnum? Color => ColorEnum.BrightPurple;
 }

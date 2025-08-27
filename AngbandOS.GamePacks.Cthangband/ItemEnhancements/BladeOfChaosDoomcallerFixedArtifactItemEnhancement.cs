@@ -38,5 +38,5 @@ public class BladeOfChaosDoomcallerFixedArtifactItemEnhancement : ItemEnhancemen
     public override string BonusAttacksRollExpression => "-50";
     public override string BonusHitsRollExpression => "18";
     public override string BonusDamageRollExpression => "28";
-    public override ColorEnum Color => ColorEnum.Purple;
+    public override ColorEnum? Color => ColorEnum.Purple;
 }

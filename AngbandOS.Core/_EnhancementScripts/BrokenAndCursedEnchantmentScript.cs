@@ -21,7 +21,7 @@ internal class BrokenAndCursedEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.SetBoolValue(AttributeEnum.Valueless, true);
+        item.EffectivePropertySet.SetBoolAttributeValue(AttributeEnum.Valueless, true);
         item.EffectivePropertySet.IsCursed = true;
     }
 }

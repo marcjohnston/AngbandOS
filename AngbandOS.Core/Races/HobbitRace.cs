@@ -39,7 +39,7 @@ internal class HobbitRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolValue(AttributeEnum.SustDex, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustDex, true);
     }
     protected override string GenerateNameSyllableSetName => nameof(HobbitSyllableSet);
 

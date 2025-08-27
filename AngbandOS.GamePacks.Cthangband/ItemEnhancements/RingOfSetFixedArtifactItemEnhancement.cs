@@ -47,5 +47,5 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     public override int DiceSides => 1;
     public override string BonusHitsRollExpression => "15";
     public override string BonusDamageRollExpression => "15";
-    public override ColorEnum Color => ColorEnum.Yellow;
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

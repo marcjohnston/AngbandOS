@@ -20,5 +20,5 @@ public class BroadAxeOfNodensFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override int Value => 50000;
     public override string BonusHitsRollExpression => "13";
     public override string BonusDamageRollExpression => "19";
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

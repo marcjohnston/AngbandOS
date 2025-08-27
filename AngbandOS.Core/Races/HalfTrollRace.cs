@@ -39,11 +39,11 @@ internal class HalfTrollRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolValue(AttributeEnum.SustStr, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustStr, true);
         if (level > 14)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.Regen, true);
-            itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Regen, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SlowDigest, true);
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);

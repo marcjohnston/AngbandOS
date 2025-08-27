@@ -38,5 +38,5 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "13";
-    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

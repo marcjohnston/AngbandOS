@@ -35,5 +35,5 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override string BonusAttacksRollExpression => "5";
     public override string BonusHitsRollExpression => "19";
     public override string BonusDamageRollExpression => "21";
-    public override ColorEnum Color => ColorEnum.Black;
+    public override ColorEnum? Color => ColorEnum.Black;
 }

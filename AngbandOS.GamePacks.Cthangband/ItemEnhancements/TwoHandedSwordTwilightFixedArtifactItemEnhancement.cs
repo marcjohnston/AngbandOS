@@ -31,5 +31,5 @@ public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancemen
     public override string BonusAttacksRollExpression => "-50";
     public override string BonusHitsRollExpression => "-40";
     public override string BonusDamageRollExpression => "-60";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

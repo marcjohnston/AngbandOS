@@ -35,8 +35,8 @@ internal class HalfElfRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolValue(AttributeEnum.ResLight, true);
-        itemCharacteristics.SetBoolValue(AttributeEnum.SeeInvis, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResLight, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SeeInvis, true);
     }
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
     public override void CalcBonuses()

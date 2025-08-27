@@ -10,5 +10,5 @@ public class QuarterstaffHaftedWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override int Value => 200;
     public override int DamageDice => 1;
     public override int DiceSides => 9;
-    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

@@ -29,5 +29,5 @@ public class SmallSwordStingFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override int DiceSides => -1;
     public override string BonusHitsRollExpression => "7";
     public override string BonusDamageRollExpression => "8";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

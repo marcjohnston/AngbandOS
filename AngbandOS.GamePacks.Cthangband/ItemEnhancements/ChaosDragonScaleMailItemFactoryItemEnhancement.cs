@@ -15,5 +15,5 @@ public class ChaosDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Value => 65000;
     public override int DamageDice => 2;
     public override int DiceSides => 4;
-    public override ColorEnum Color => ColorEnum.Purple;
+    public override ColorEnum? Color => ColorEnum.Purple;
 }

@@ -16,5 +16,5 @@ public class BrassLanternLightSourceItemFactoryItemEnhancement : ItemEnhancement
     public override int Value => 35;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

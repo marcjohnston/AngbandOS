@@ -23,5 +23,5 @@ public class CutlassOfBlackbeardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override int Value => 28000;
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "11";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

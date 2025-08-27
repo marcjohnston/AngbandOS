@@ -11,5 +11,5 @@ public class HalberdPolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Value => 430;
     public override int DamageDice => 3;
     public override int DiceSides => 5;
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

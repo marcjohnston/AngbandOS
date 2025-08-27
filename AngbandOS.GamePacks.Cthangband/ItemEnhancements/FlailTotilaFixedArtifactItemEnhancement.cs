@@ -26,5 +26,5 @@ public class FlailTotilaFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "6";
     public override string BonusDamageRollExpression => "8";
-    public override ColorEnum Color => ColorEnum.Black;
+    public override ColorEnum? Color => ColorEnum.Black;
 }

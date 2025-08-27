@@ -6,5 +6,5 @@ public class PintOfFineAleFoodItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool EasyKnow => true;
     public override int Weight => 5;
     public override int Value => 1;
-    public override ColorEnum Color => ColorEnum.Yellow;
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

@@ -31,5 +31,5 @@ public class DragonHelmOfPowerFixedArtifactItemEnhancement : ItemEnhancementGame
     public override int Weight => 25;
     public override int Value => 300000;
     public override string BonusAttacksRollExpression => "20";
-    public override ColorEnum Color => ColorEnum.BrightGreen;
+    public override ColorEnum? Color => ColorEnum.BrightGreen;
 }

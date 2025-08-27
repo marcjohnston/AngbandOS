@@ -11,5 +11,5 @@ public class TwoHandedSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override int Value => 775;
     public override int DamageDice => 3;
     public override int DiceSides => 6;
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

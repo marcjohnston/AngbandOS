@@ -16,10 +16,10 @@ internal sealed class ItemFactory : IGetKey, IToJson
     private readonly Game Game;
     private string ItemEnhancementBindingKey { get; }
 
-    /// <summary>
-    /// Represents the enhancements to apply to items created by this factory.
-    /// </summary>
-    public ItemEnhancement ItemEnhancement { get; private set; }
+    ///// <summary>
+    ///// Represents the enhancements to apply to items created by this factory.
+    ///// </summary>
+    //private ItemEnhancement ItemEnhancement { get; set; }
 
     public override string ToString()
     {
@@ -398,9 +398,12 @@ internal sealed class ItemFactory : IGetKey, IToJson
         EquipmentProcessWorldScript?.ExecuteScriptItem(item);
         ProcessWorld(item);
     }
+    public EffectiveAttributeSet EffectiveAttributeSet = new EffectiveAttributeSet();
+
     public void Bind()
     {
-        ItemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
+        ItemEnhancement itemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
+        EffectiveAttributeSet.AddEnhancement(itemEnhancement.GenerateItemCharacteristics());
 
         //// Cut and paste
         //string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override ColorEnum Color => ");
@@ -409,7 +412,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
         FlavorSymbol = Symbol;
-        FlavorColor = ItemEnhancement.Color;
 
         MakeObjectCount = Game.ParseNumericExpression(MakeObjectCountExpression);
         WieldSlots = Game.SingletonRepository.Get<WieldSlot>(WieldSlotBindingKeys);
@@ -1215,7 +1217,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             }
             if (Game.DieRoll(2) == 1)
             {
-                characteristics.SetBoolValue(AttributeEnum.Teleport, true);
+                characteristics.SetBoolAttributeValue(AttributeEnum.Teleport, true);
             }
             else if (Game.DieRoll(3) == 1)
             {
@@ -1237,7 +1239,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             switch (Game.DieRoll(31))
             {
                 case 1:
-                    characteristics.SetBoolValue(AttributeEnum.SustStr, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.SustStr, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
@@ -1245,7 +1247,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 2:
-                    characteristics.SetBoolValue(AttributeEnum.SustInt, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.SustInt, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
@@ -1253,7 +1255,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 3:
-                    characteristics.SetBoolValue(AttributeEnum.SustWis, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.SustWis, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
@@ -1261,7 +1263,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 4:
-                    characteristics.SetBoolValue(AttributeEnum.SustDex, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.SustDex, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
@@ -1269,7 +1271,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 5:
-                    characteristics.SetBoolValue(AttributeEnum.SustCon, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.SustCon, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
@@ -1277,7 +1279,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 6:
-                    characteristics.SetBoolValue(AttributeEnum.SustCha, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.SustCha, true);
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
@@ -1315,11 +1317,11 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 case 15:
                 case 16:
                 case 17:
-                    characteristics.SetBoolValue(AttributeEnum.SeeInvis, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.SeeInvis, true);
                     break;
 
                 case 18:
-                    characteristics.SetBoolValue(AttributeEnum.Telepathy, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.Telepathy, true);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
@@ -1328,16 +1330,16 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 19:
                 case 20:
-                    characteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.SlowDigest, true);
                     break;
 
                 case 21:
                 case 22:
-                    characteristics.SetBoolValue(AttributeEnum.Regen, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.Regen, true);
                     break;
 
                 case 23:
-                    characteristics.SetBoolValue(AttributeEnum.Teleport, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.Teleport, true);
                     break;
 
                 case 24:
@@ -1350,7 +1352,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     }
                     else
                     {
-                        characteristics.SetBoolValue(AttributeEnum.ShowMods, true);
+                        characteristics.SetBoolAttributeValue(AttributeEnum.ShowMods, true);
                         characteristics.BonusArmorClass = 4 + Game.DieRoll(11);
                     }
                     break;
@@ -1358,7 +1360,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 case 27:
                 case 28:
                 case 29:
-                    characteristics.SetBoolValue(AttributeEnum.ShowMods, true);
+                    characteristics.SetBoolAttributeValue(AttributeEnum.ShowMods, true);
                     characteristics.BonusHits += 4 + Game.DieRoll(11);
                     characteristics.BonusDamage += 4 + Game.DieRoll(11);
                     break;
@@ -1567,7 +1569,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         characteristics.IgnoreElec = true;
         characteristics.IgnoreFire = true;
         characteristics.IgnoreCold = true;
-        characteristics.SetIntValue(AttributeEnum.TreasureRating, 40);
+        characteristics.SetIntAttributeValue(AttributeEnum.TreasureRating, 40);
 
         if (aCursed)
         {

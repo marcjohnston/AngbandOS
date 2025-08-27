@@ -9,5 +9,5 @@ public class MithrilChainMailHardArmorItemFactoryItemEnhancement : ItemEnhanceme
     public override int Value => 7000;
     public override int DamageDice => 1;
     public override int DiceSides => 4;
-    public override ColorEnum Color => ColorEnum.BrightBlue;
+    public override ColorEnum? Color => ColorEnum.BrightBlue;
 }

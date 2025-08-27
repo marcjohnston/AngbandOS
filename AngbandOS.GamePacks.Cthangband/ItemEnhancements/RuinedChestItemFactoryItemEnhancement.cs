@@ -4,5 +4,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class RuinedChestItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int Weight => 250;
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

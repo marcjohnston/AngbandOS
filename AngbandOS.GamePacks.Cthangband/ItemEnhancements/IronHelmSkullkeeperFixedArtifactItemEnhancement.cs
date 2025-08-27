@@ -18,5 +18,5 @@ public class IronHelmSkullkeeperFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool SeeInvis => true;
     public override int Value => 100000;
     public override string BonusAttacksRollExpression => "10";
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

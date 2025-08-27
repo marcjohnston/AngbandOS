@@ -13,5 +13,5 @@ public class SetOfGauntletsIronfistFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool ResFire => true;
     public override int Value => 15000;
     public override string BonusAttacksRollExpression => "15";
-    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

@@ -35,7 +35,7 @@ internal class ElfRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolValue(AttributeEnum.ResLight, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResLight, true);
     }
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
 

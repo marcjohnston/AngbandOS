@@ -12,5 +12,5 @@ public class CthaatAquadingenNatureBookItemFactoryItemEnhancement : ItemEnhancem
     public override int Value => 100000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.Green;
+    public override ColorEnum? Color => ColorEnum.Green;
 }

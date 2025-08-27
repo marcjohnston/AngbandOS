@@ -10,5 +10,5 @@ public class BallAndChainHaftedWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override int Value => 200;
     public override int DamageDice => 2;
     public override int DiceSides => 4;
-    public override ColorEnum Color => ColorEnum.Black;
+    public override ColorEnum? Color => ColorEnum.Black;
 }

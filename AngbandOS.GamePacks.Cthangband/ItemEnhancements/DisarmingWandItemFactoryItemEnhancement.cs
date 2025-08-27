@@ -7,5 +7,5 @@ public class DisarmingWandItemFactoryItemEnhancement : ItemEnhancementGameConfig
     public override int Value => 700;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.Chartreuse;
+    public override ColorEnum? Color => ColorEnum.Chartreuse;
 }

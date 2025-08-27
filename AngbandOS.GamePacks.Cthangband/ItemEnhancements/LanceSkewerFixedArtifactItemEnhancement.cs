@@ -21,5 +21,5 @@ public class LanceSkewerFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "3";
     public override string BonusDamageRollExpression => "21";
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -16,5 +16,5 @@ public class StarEssenceOfPolarisFixedArtifactItemEnhancement : ItemEnhancementG
     /// </summary>
     public override int Radius => 1;
     public override int Value => 10000;
-    public override ColorEnum Color => ColorEnum.Yellow;
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

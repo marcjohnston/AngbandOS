@@ -8,5 +8,5 @@ public class GemstoneLightSourceItemFactoryItemEnhancement : ItemEnhancementGame
     public override int Value => 60000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.Diamond;
+    public override ColorEnum? Color => ColorEnum.Diamond;
 }

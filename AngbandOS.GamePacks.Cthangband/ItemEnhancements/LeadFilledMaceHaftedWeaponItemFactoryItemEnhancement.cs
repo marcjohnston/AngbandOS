@@ -10,5 +10,5 @@ public class LeadFilledMaceHaftedWeaponItemFactoryItemEnhancement : ItemEnhancem
     public override int Value => 502;
     public override int DamageDice => 3;
     public override int DiceSides => 4;
-    public override ColorEnum Color => ColorEnum.Black;
+    public override ColorEnum? Color => ColorEnum.Black;
 }

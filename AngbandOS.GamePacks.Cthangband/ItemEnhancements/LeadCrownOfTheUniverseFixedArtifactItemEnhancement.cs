@@ -37,5 +37,5 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool SeeInvis => true;
     public override bool Telepathy => true;
     public override int Value => 10000000;
-    public override ColorEnum Color => ColorEnum.Black;
+    public override ColorEnum? Color => ColorEnum.Black;
 }

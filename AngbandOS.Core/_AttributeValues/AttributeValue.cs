@@ -18,11 +18,6 @@ internal abstract class AttributeValue
     {
         Factory = factory;
     }
-    /// <summary>
-    /// Returns a new instance of the item property with a copy/clone of the value.
-    /// </summary>
-    /// <returns></returns>
-    public abstract AttributeValue Clone();
 
     public abstract AttributeValue Merge(AttributeValue itemProperty);
 

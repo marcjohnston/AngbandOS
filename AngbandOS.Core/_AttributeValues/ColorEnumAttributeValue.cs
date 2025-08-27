@@ -14,13 +14,11 @@ internal class ColorEnumAttributeValue : AttributeValue
     {
         Value = value;
     }
-    public override AttributeValue Clone() => new ColorEnumAttributeValue(Factory, Value);
-
     public override AttributeValue Merge(AttributeValue itemProperty)
     {
         if (itemProperty is ColorEnumAttributeValue colorEnumPropertyValue)
         {
-            return new ColorEnumAttributeValue(Factory, colorEnumPropertyValue.Value);
+            return colorEnumPropertyValue;
         }
         throw new Exception("Merge mismatch.");
     }

@@ -42,23 +42,23 @@ internal class DraconianRace : Race
         itemCharacteristics.Feather = true;
         if (level > 4)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResFire, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResFire, true);
         }
         if (level > 9)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResCold, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResCold, true);
         }
         if (level > 14)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResAcid, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResAcid, true);
         }
         if (level > 19)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResElec, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResElec, true);
         }
         if (level > 34)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResPois, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResPois, true);
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(GnomishSyllableSet);

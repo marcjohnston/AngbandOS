@@ -17,5 +17,5 @@ public class SoftLeatherArmorOfTheKoboldChiefFixedArtifactItemEnhancement : Item
     public override bool ResFire => true;
     public override int Value => 45000;
     public override string BonusAttacksRollExpression => "20";
-    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

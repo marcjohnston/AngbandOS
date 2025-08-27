@@ -20,5 +20,5 @@ public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override int Weight => -70;
     public override int Value => 75000;
     public override int DamageDice => 5;
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

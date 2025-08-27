@@ -6,5 +6,5 @@ public class StripOfVenisonFoodItemFactoryItemEnhancement : ItemEnhancementGameC
     public override bool EasyKnow => true;
     public override int Weight => 2;
     public override int Value => 2;
-    public override ColorEnum Color => ColorEnum.Brown;
+    public override ColorEnum? Color => ColorEnum.Brown;
 }

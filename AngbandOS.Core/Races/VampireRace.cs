@@ -39,10 +39,10 @@ internal class VampireRace : Race
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
         itemCharacteristics.HoldLife = true;
-        itemCharacteristics.SetBoolValue(AttributeEnum.ResDark, true);
-        itemCharacteristics.SetBoolValue(AttributeEnum.ResNether, true);
-        itemCharacteristics.SetBoolValue(AttributeEnum.ResPois, true);
-        itemCharacteristics.SetBoolValue(AttributeEnum.ResCold, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResDark, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResNether, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResPois, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResCold, true);
     }
     protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
 

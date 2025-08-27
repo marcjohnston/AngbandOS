@@ -98,7 +98,7 @@ public class ItemEnhancementGameConfiguration
     /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
     /// that have flavor may change the FlavorColor based on the flavor.
     /// </summary>
-    public virtual ColorEnum Color { get; set; } = ColorEnum.White;
+    public virtual ColorEnum? Color { get; set; } = null;
 
     public virtual bool IsCursed { get; set; } = false;
     public virtual int DamageDice { get; set; } = 0;

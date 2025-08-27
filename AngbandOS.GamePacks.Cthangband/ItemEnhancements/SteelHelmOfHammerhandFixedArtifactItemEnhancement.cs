@@ -15,5 +15,5 @@ public class SteelHelmOfHammerhandFixedArtifactItemEnhancement : ItemEnhancement
     public override bool ResNexus => true;
     public override int Value => 45000;
     public override string BonusAttacksRollExpression => "20";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

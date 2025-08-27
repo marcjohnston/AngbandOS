@@ -21,5 +21,5 @@ public class SpearGaeBulgFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override int Value => 30000;
     public override string BonusHitsRollExpression => "11";
     public override string BonusDamageRollExpression => "13";
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

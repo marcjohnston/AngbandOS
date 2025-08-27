@@ -11,5 +11,5 @@ public class AnnihilationWandItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Value => 3000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.Chartreuse;
+    public override ColorEnum? Color => ColorEnum.Chartreuse;
 }

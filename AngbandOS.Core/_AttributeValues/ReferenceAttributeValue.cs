@@ -11,27 +11,29 @@ internal class ReferenceAttributeValue<T> : AttributeValue where T : class
 {
     public T? Value { get; }
 
-    public override AttributeValue Clone() => new ReferenceAttributeValue<T>(Factory, Value);
-
-    public override bool IsEqual(AttributeValue itemProperty)
+    public override bool IsEqual(AttributeValue attributeValue)
     {
-        if (itemProperty is ReferenceAttributeValue<T> roNullableReferenceItemProperty)
+        if (attributeValue is ReferenceAttributeValue<T> roNullableReferenceItemProperty)
         {
             return Value == roNullableReferenceItemProperty.Value;
         }
         else
         {
-            throw new Exception($"Item property equality from {itemProperty.GetType().Name} not supported with {nameof(ReferenceAttributeValue<T>)}");
+            throw new Exception($"Item property equality from {attributeValue.GetType().Name} not supported with {nameof(ReferenceAttributeValue<T>)}");
         }
     }
 
-    public override AttributeValue Merge(AttributeValue propertyValue)
+    public override AttributeValue Merge(AttributeValue attributeValue)
     {
-        if (propertyValue is ReferenceAttributeValue<T> nullableReferencePropertyValue)
+        if (attributeValue is null)
+        {
+            return this;
+        }
+        if (attributeValue is ReferenceAttributeValue<T> nullableReferencePropertyValue)
         {
             return new ReferenceAttributeValue<T>(Factory, nullableReferencePropertyValue.Value ?? Value);
         }
-        throw new Exception($"Item property merging from {propertyValue.GetType().Name} not supported with {nameof(ReferenceAttributeValue<T>)}");
+        throw new Exception($"Item property merging from {attributeValue.GetType().Name} not supported with {nameof(ReferenceAttributeValue<T>)}");
     }
 
     public ReferenceAttributeValue(AttributeFactory factory, T? value) : base(factory)

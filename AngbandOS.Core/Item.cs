@@ -161,7 +161,6 @@ internal sealed class Item : IComparable<Item>
     public bool CanBeWeaponOfLaw => _factory.CanBeWeaponOfLaw;
 
     public WieldSlot[] WieldSlots => _factory.WieldSlots;
-    public ColorEnum FlavorColor => _factory.FlavorColor; // TODO: Rename to represent current or assigned
     public Symbol FlavorSymbol => _factory.FlavorSymbol; // TODO: Rename to represent current or assigned
 
     /// <summary>
@@ -2006,7 +2005,11 @@ internal sealed class Item : IComparable<Item>
 
         // Generate the read-only item characteristics from the factory.
         EffectivePropertySet = new EffectiveAttributeSet();
-        ReadOnlyAttributeSet factoryPropertySet = factory.ItemEnhancement.GenerateItemCharacteristics();
+
+        // Generate the factory attribute set.
+        ReadOnlyAttributeSet factoryPropertySet = factory.EffectiveAttributeSet.ToReadOnly();
+
+        // Add it to the item.
         EffectivePropertySet.AddEnhancement(FactoryAttributeKey, factoryPropertySet);
 
         StackCount = 1;

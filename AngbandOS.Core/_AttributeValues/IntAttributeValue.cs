@@ -14,8 +14,6 @@ internal class IntAttributeValue : AttributeValue
     {
         Value = value;
     }
-    public override AttributeValue Clone() => new IntAttributeValue(Factory, Value);
-
     public override AttributeValue Merge(AttributeValue itemProperty)
     {
         if (itemProperty is IntAttributeValue intPropertyValue)

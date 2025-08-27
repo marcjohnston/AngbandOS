@@ -12,5 +12,5 @@ public class PonapeScriptureLifeBookItemFactoryItemEnhancement : ItemEnhancement
     public override int Value => 100000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

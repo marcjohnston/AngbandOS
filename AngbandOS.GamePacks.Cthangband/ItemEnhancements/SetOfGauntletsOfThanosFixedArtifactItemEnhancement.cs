@@ -29,5 +29,5 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
     public override int Value => 40000;
     public override string BonusHitsRollExpression => "-11";
     public override string BonusDamageRollExpression => "-12";
-    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

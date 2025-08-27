@@ -8,5 +8,5 @@ public class CallOfTheWildNatureBookItemFactoryItemEnhancement : ItemEnhancement
     public override int Value => 100;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.BrightGreen;
+    public override ColorEnum? Color => ColorEnum.BrightGreen;
 }

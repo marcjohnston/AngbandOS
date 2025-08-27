@@ -25,5 +25,5 @@ public class TridentOfWrathFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override int DamageDice => 2;
     public override string BonusHitsRollExpression => "16";
     public override string BonusDamageRollExpression => "18";
-    public override ColorEnum Color => ColorEnum.Yellow;
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

@@ -29,7 +29,7 @@ internal class ConstitutionArtifactBias : ArtifactBias
     {
         if (!characteristics.SustCon)
         {
-            characteristics.SetBoolValue(AttributeEnum.SustCon, true);
+            characteristics.SetBoolAttributeValue(AttributeEnum.SustCon, true);
             if (Game.DieRoll(2) == 1)
             {
                 return true;

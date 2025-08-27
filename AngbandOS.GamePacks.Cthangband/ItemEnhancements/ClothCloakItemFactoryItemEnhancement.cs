@@ -6,5 +6,5 @@ public class ClothCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool CanReflectBoltsAndArrows => true;
     public override int Weight => 10;
     public override int Value => 3;
-    public override ColorEnum Color => ColorEnum.Green;
+    public override ColorEnum? Color => ColorEnum.Green;
 }

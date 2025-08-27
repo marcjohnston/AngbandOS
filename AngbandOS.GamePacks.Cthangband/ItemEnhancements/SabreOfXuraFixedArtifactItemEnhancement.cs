@@ -35,5 +35,5 @@ public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override int DamageDice => 1;
     public override string BonusHitsRollExpression => "20";
     public override string BonusDamageRollExpression => "12";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

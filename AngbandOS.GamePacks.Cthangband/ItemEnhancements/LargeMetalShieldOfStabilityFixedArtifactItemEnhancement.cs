@@ -21,5 +21,5 @@ public class LargeMetalShieldOfStabilityFixedArtifactItemEnhancement : ItemEnhan
     public override bool SustWis => true;
     public override int Value => 160000;
     public override string BonusAttacksRollExpression => "20";
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

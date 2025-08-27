@@ -24,5 +24,5 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
     public override int DamageDice => 2;
     public override string BonusHitsRollExpression => "-20";
     public override string BonusDamageRollExpression => "20";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

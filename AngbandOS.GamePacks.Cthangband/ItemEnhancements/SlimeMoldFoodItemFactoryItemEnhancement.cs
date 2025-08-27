@@ -6,5 +6,5 @@ public class SlimeMoldFoodItemFactoryItemEnhancement : ItemEnhancementGameConfig
     public override bool EasyKnow => true;
     public override int Weight => 5;
     public override int Value => 2;
-    public override ColorEnum Color => ColorEnum.Green;
+    public override ColorEnum? Color => ColorEnum.Green;
 }

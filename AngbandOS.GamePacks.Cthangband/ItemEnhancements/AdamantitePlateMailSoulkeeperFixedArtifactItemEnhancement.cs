@@ -22,5 +22,5 @@ public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnh
     public override int Value => 280000; // Total 300000
     public override string BonusAttacksRollExpression => "20";
     public override string BonusHitsRollExpression => "-4";
-    public override ColorEnum Color => ColorEnum.BrightGreen;
+    public override ColorEnum? Color => ColorEnum.BrightGreen;
 }

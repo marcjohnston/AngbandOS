@@ -8,5 +8,5 @@ public class PieceOfDwarfBreadFoodItemFactoryItemEnhancement : ItemEnhancementGa
     public override int Value => 16;
     public override int DamageDice => 1;
     public override int DiceSides => 6;
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

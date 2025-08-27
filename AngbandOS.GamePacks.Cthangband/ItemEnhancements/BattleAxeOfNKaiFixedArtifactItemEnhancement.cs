@@ -31,5 +31,5 @@ public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override string BonusAttacksRollExpression => "5";
     public override string BonusHitsRollExpression => "8";
     public override string BonusDamageRollExpression => "11";
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

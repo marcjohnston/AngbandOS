@@ -3696,7 +3696,7 @@ internal class Game
                 }
 
                 kPtr.FlavorSymbol = kPtr.Flavor.Symbol;
-                kPtr.FlavorColor = kPtr.Flavor.Color;
+                kPtr.EffectiveAttributeSet.Color = kPtr.Flavor.Color;
             }
         }
     }
@@ -6713,11 +6713,11 @@ internal class Game
             item.EffectivePropertySet.BonusHits = 0;
             item.EffectivePropertySet.BonusDamage = 0;
             item.ArmorClass = 0;
-            item.EffectivePropertySet.OverrideIntValue(AttributeEnum.DamageDice, 0);
-            item.EffectivePropertySet.OverrideIntValue(AttributeEnum.DiceSides , 0);
+            item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DamageDice, 0);
+            item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DiceSides , 0);
             item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
-            item.EffectivePropertySet.SetBoolValue(AttributeEnum.Valueless, true);
+            item.EffectivePropertySet.SetBoolAttributeValue(AttributeEnum.Valueless, true);
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
@@ -6753,11 +6753,11 @@ internal class Game
             item.EffectivePropertySet.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusArmorClass = 0;
             item.ArmorClass = 0;
-            item.EffectivePropertySet.OverrideIntValue(AttributeEnum.DamageDice, 0);
-            item.EffectivePropertySet.OverrideIntValue(AttributeEnum.DiceSides, 0);
+            item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DamageDice, 0);
+            item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DiceSides, 0);
             item.EffectivePropertySet.IsCursed = true;
             item.ResetCurse();
-            item.EffectivePropertySet.SetBoolValue(AttributeEnum.Valueless, true);
+            item.EffectivePropertySet.SetBoolAttributeValue(AttributeEnum.Valueless, true);
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
@@ -7853,7 +7853,7 @@ internal class Game
         }
         item.ItemOptimize();
         string missileName = missile.GetFullDescription(false);
-        ColorEnum missileColor = missile.FlavorColor;
+        ColorEnum missileColor = missile.EffectivePropertySet.Color;
         char missileCharacter = missile.FlavorSymbol.Character;
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
@@ -13296,7 +13296,7 @@ internal class Game
                 // Only print items that exist
                 if (item != null)
                 {
-                    color = item.FlavorColor;
+                    color = item.EffectivePropertySet.Color;
                     character = item.FlavorSymbol.Character;
                 }
                 Screen.Print(color, character, screenRow, screenCol + column);
@@ -13600,23 +13600,23 @@ internal class Game
         EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet();
         if (BaseCharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFearResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResFear, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResFear, true);
         }
         if (BaseCharacterClass.InstantChaosResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantChaosResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResChaos, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResChaos, true);
         }
         if (BaseCharacterClass.InstantSustainWisdomLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainWisdomLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.SustWis, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustWis, true);
         }
         if (BaseCharacterClass.InstantConfusionResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantConfusionResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResConf, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResConf, true);
         }
         if (BaseCharacterClass.InstantTelepathyLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantTelepathyLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.Telepathy, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Telepathy, true);
         }
         if (BaseCharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSpeedLevel && !MartialArtistHeavyArmor())
         {
@@ -13628,7 +13628,7 @@ internal class Game
         }
         if (BaseCharacterClass.InstantBlindnessResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantBlindnessResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResBlind, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResBlind, true);
         }
         if (BaseCharacterClass.InstantFeatherFallingLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFeatherFallingLevel)
         {
@@ -13636,27 +13636,27 @@ internal class Game
         }
         if (BaseCharacterClass.InstantSeeInvisibilityLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSeeInvisibilityLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.SeeInvis, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SeeInvis, true);
         }
         if (BaseCharacterClass.InstantSlowDigestionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSlowDigestionLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SlowDigest, true);
         }
         if (BaseCharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainConstitutionLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.SustCon, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustCon, true);
         }
         if (BaseCharacterClass.InstantPoisonResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantPoisonResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResPois, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResPois, true);
         }
         if (BaseCharacterClass.InstantSustainDexterityLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainDexterityLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.SustDex, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustDex, true);
         }
         if (BaseCharacterClass.InstantSustainStrengthLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainStrengthLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.SustStr, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustStr, true);
         }
         if (BaseCharacterClass.InstantHoldLifeLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantHoldLifeLevel)
         {
@@ -13664,43 +13664,43 @@ internal class Game
         }
         if (BaseCharacterClass.InstantDarknessResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantDarknessResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResDark, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResDark, true);
         }
         if (BaseCharacterClass.InstantLightResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantLightResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResLight, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResLight, true);
         }
         if (BaseCharacterClass.InstantSustainCharismaLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainCharismaLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.SustCha, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustCha, true);
         }
         if (BaseCharacterClass.InstantSoundResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSoundResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResSound, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResSound, true);
         }
         if (BaseCharacterClass.InstantDisenchantmentResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantDisenchantmentResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResDisen, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResDisen, true);
         }
         if (BaseCharacterClass.InstantRegenerationLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantRegenerationLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.Regen, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Regen, true);
         }
         if (BaseCharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainIntelligenceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.SustInt, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustInt, true);
         }
         if (BaseCharacterClass.InstantNexusResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantNexusResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResNexus, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResNexus, true);
         }
         if (BaseCharacterClass.InstantShardsResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantShardsResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResShards, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResShards, true);
         }
         if (BaseCharacterClass.InstantNetherResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantNetherResistanceLevel)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResNether, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResNether, true);
         }
         if (BaseCharacterClass.ItemRadiusOverride.HasValue)
         {
@@ -13710,20 +13710,20 @@ internal class Game
         Race.UpdateRacialAbilities(ExperienceLevel.IntValue, itemCharacteristics);
         if (Regen)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.Regen, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Regen, true);
         }
-        itemCharacteristics.OverrideBoolValue(AttributeEnum.Regen, SuppressRegen ? false : null);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Regen, SuppressRegen ? false : null);
         if (SpeedBonus != 0)
         {
             itemCharacteristics.BonusSpeed++;
         }
         if (ElecHit)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ShElec, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ShElec, true);
         }
         if (FireHit)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ShFire, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ShFire, true);
             itemCharacteristics.Radius = 2;
         }
         if (FeatherFall)
@@ -13732,11 +13732,11 @@ internal class Game
         }
         if (ResFear)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.ResFear, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResFear, true);
         }
         if (Esp)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.Telepathy, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Telepathy, true);
         }
         if (FreeAction)
         {
@@ -13744,26 +13744,26 @@ internal class Game
         }
         if (SustainAll)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.SustCon, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustCon, true);
             if (ExperienceLevel.IntValue > 9)
             {
-                itemCharacteristics.SetBoolValue(AttributeEnum.SustStr, true);
+                itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustStr, true);
             }
             if (ExperienceLevel.IntValue > 19)
             {
-                itemCharacteristics.SetBoolValue(AttributeEnum.SustDex, true);
+                itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustDex, true);
             }
             if (ExperienceLevel.IntValue > 29)
             {
-                itemCharacteristics.SetBoolValue(AttributeEnum.SustWis, true);
+                itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustWis, true);
             }
             if (ExperienceLevel.IntValue > 39)
             {
-                itemCharacteristics.SetBoolValue(AttributeEnum.SustInt, true);
+                itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustInt, true);
             }
             if (ExperienceLevel.IntValue > 49)
             {
-                itemCharacteristics.SetBoolValue(AttributeEnum.SustCha, true);
+                itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustCha, true);
             }
         }
         return itemCharacteristics;
@@ -14559,7 +14559,7 @@ internal class Game
                     consoleRow["label"] = new ConsoleString(ColorEnum.White, $"{index.IndexToLabel()})");
 
                     // Apply flavor visuals
-                    consoleRow["flavor"] = new ConsoleChar(oPtr.FlavorColor, oPtr.FlavorSymbol.Character);
+                    consoleRow["flavor"] = new ConsoleChar(oPtr.EffectivePropertySet.Color, oPtr.FlavorSymbol.Character);
                     consoleRow["usage"] = new ConsoleString(ColorEnum.White, $"{inventorySlot.MentionUse(index)}:");
 
                     ColorEnum color = oPtr.EffectivePropertySet.Color;
@@ -15621,7 +15621,7 @@ internal class Game
             if (oPtr.WasNoticed)
             {
                 character = oPtr.FlavorSymbol.Character;
-                color = oPtr.FlavorColor;
+                color = oPtr.EffectivePropertySet.Color;
                 if (HallucinationsTimer.Value != 0)
                 {
                     ImageObject(out color, out character);

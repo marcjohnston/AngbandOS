@@ -10,5 +10,5 @@ public class LightCrossbowRangedWeaponItemFactoryItemEnhancement : ItemEnhanceme
     public override bool CanApplyBonusArmorClassMiscPower => true;
     public override int Weight => 110;
     public override int Value => 140;
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

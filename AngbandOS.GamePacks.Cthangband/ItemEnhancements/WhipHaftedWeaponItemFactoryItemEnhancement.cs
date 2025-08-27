@@ -9,5 +9,5 @@ public class WhipHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int Value => 30;
     public override int DamageDice => 1;
     public override int DiceSides => 6;
-    public override ColorEnum Color => ColorEnum.Black;
+    public override ColorEnum? Color => ColorEnum.Black;
 }

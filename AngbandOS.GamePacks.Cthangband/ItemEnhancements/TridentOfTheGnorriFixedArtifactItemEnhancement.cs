@@ -30,5 +30,5 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int DamageDice => 3;
     public override string BonusHitsRollExpression => "15";
     public override string BonusDamageRollExpression => "19";
-    public override ColorEnum Color => ColorEnum.Yellow;
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

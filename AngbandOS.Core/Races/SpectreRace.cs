@@ -38,15 +38,15 @@ internal class SpectreRace : Race
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolValue(AttributeEnum.ResCold, true);
-        itemCharacteristics.SetBoolValue(AttributeEnum.SeeInvis, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResCold, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SeeInvis, true);
         itemCharacteristics.HoldLife = true;
-        itemCharacteristics.SetBoolValue(AttributeEnum.ResNether, true);
-        itemCharacteristics.SetBoolValue(AttributeEnum.ResPois, true);
-        itemCharacteristics.SetBoolValue(AttributeEnum.SlowDigest, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResNether, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResPois, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SlowDigest, true);
         if (level > 34)
         {
-            itemCharacteristics.SetBoolValue(AttributeEnum.Telepathy, true);
+            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Telepathy, true);
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);

@@ -15,8 +15,6 @@ internal class BoolAttributeValue : AttributeValue
         Value = value;
     }
 
-    public override AttributeValue Clone() => new BoolAttributeValue(Factory, Value);
-
     public override AttributeValue Merge(AttributeValue itemProperty)
     {
         if (itemProperty is BoolAttributeValue boolPropertyValue)

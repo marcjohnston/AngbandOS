@@ -6,5 +6,5 @@ public class RationFoodItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool EasyKnow => true;
     public override int Weight => 10;
     public override int Value => 3;
-    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

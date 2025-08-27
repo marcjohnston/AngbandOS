@@ -19,5 +19,5 @@ public class StarEssenceOfXothFixedArtifactItemEnhancement : ItemEnhancementGame
     /// </summary>
     public override int Radius => 1;
     public override int Value => 32500;
-    public override ColorEnum Color => ColorEnum.Yellow;
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

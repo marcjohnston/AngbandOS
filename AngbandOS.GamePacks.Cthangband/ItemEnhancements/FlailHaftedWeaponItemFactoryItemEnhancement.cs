@@ -10,5 +10,5 @@ public class FlailHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int Value => 353;
     public override int DamageDice => 2;
     public override int DiceSides => 6;
-    public override ColorEnum Color => ColorEnum.Black;
+    public override ColorEnum? Color => ColorEnum.Black;
 }

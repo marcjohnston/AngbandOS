@@ -42,5 +42,5 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int Value => 150000;
     public override string BonusHitsRollExpression => "8";
     public override string BonusDamageRollExpression => "12";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

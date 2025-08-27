@@ -11,5 +11,5 @@ public class GreatAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGa
     public override int Value => 500;
     public override int DamageDice => 4;
     public override int DiceSides => 4;
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

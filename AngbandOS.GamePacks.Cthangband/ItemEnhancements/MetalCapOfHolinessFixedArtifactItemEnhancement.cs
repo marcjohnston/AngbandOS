@@ -14,5 +14,5 @@ public class MetalCapOfHolinessFixedArtifactItemEnhancement : ItemEnhancementGam
     public override string? BonusWisdomRollExpression => "3";
     public override int Value => 22000;
     public override string BonusAttacksRollExpression => "12";
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

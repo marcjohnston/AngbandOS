@@ -11,5 +11,5 @@ public class SpearPolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Value => 36;
     public override int DamageDice => 1;
     public override int DiceSides => 6;
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

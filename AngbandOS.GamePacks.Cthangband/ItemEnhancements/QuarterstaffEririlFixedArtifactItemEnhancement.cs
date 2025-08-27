@@ -26,5 +26,5 @@ public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int Value => 20000;
     public override string BonusHitsRollExpression => "3";
     public override string BonusDamageRollExpression => "5";
-    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

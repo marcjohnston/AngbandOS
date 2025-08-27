@@ -131,7 +131,7 @@ internal class Store
         Item oPtr = StoreInventoryList[itemIndex];
         string outVal = $"{letter}) ";
         Game.Screen.PrintLine(outVal, row, 0);
-        ColorEnum a = oPtr.FlavorColor;
+        ColorEnum a = oPtr.EffectivePropertySet.Color;
         char c = oPtr.FlavorSymbol.Character;
         Game.Screen.Print(a, c.ToString(), row, 3);
         string oName = oPtr.GetFullDescription(true);

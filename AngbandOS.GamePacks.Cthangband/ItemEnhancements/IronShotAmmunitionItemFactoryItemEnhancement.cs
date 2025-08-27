@@ -10,6 +10,6 @@ public class IronShotAmmunitionItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Value => 2;
     public override int DamageDice => 1;
     public override int DiceSides => 3;
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }
 

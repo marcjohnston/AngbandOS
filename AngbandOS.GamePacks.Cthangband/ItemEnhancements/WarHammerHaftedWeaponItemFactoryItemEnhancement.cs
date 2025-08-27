@@ -10,5 +10,5 @@ public class WarHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGa
     public override int Value => 225;
     public override int DamageDice => 3;
     public override int DiceSides => 3;
-    public override ColorEnum Color => ColorEnum.Black;
+    public override ColorEnum? Color => ColorEnum.Black;
 }

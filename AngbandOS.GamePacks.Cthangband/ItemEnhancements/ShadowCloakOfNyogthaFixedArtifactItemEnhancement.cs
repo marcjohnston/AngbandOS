@@ -21,5 +21,5 @@ public class ShadowCloakOfNyogthaFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool ResFire => true;
     public override int Value => 55000;
     public override string BonusAttacksRollExpression => "20";
-    public override ColorEnum Color => ColorEnum.Black;
+    public override ColorEnum? Color => ColorEnum.Black;
 }

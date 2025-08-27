@@ -38,7 +38,7 @@ internal class SpriteRace : Race
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolValue(AttributeEnum.ResLight, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResLight, true);
         itemCharacteristics.Feather = true;
         if (level > 9)
         {

@@ -8,5 +8,5 @@ public class LargeLeatherShieldItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Value => 120;
     public override int DamageDice => 1;
     public override int DiceSides => 2;
-    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

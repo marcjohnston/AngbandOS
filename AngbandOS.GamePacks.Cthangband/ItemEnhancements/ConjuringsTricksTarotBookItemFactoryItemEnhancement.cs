@@ -8,5 +8,5 @@ public class ConjuringsTricksTarotBookItemFactoryItemEnhancement : ItemEnhanceme
     public override int Value => 100;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.BrightPink;
+    public override ColorEnum? Color => ColorEnum.BrightPink;
 }

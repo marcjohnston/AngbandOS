@@ -8,5 +8,5 @@ public class RustyChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancement
     public override int Value => 550;
     public override int DamageDice => 1;
     public override int DiceSides => 4;
-    public override ColorEnum Color => ColorEnum.Red;
+    public override ColorEnum? Color => ColorEnum.Red;
 }

@@ -13,5 +13,5 @@ public class SetOfGauntletsWhiteSparkFixedArtifactItemEnhancement : ItemEnhancem
     public override bool ResElec => true;
     public override int Value => 11000;
     public override string BonusAttacksRollExpression => "15";
-    public override ColorEnum Color => ColorEnum.BrightBrown;
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

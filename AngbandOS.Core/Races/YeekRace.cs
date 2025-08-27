@@ -38,7 +38,7 @@ internal class YeekRace : Race
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolValue(AttributeEnum.ResAcid, true);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResAcid, true);
         if (level > 19)
         {
             itemCharacteristics.ImAcid = true;

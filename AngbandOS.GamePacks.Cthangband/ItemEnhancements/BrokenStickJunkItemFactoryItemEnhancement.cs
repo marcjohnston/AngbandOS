@@ -7,5 +7,5 @@ public class BrokenStickJunkItemFactoryItemEnhancement : ItemEnhancementGameConf
     public override int Weight => 3;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.Red;
+    public override ColorEnum? Color => ColorEnum.Red;
 }

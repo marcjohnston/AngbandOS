@@ -18,5 +18,5 @@ public class LightCrossbowOfDeathFixedArtifactItemEnhancement : ItemEnhancementG
     public override int Value => 50000;
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "14";
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

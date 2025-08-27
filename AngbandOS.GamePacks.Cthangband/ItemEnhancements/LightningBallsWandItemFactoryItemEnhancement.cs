@@ -8,5 +8,5 @@ public class LightningBallsWandItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Value => 1200;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.Chartreuse;
+    public override ColorEnum? Color => ColorEnum.Chartreuse;
 }

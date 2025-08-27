@@ -10,5 +10,5 @@ public class ShovelDiggingWeaponItemFactoryItemEnhancement : ItemEnhancementGame
     public override int Value => 10;
     public override int DamageDice => 1;
     public override int DiceSides => 2;
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -26,5 +26,5 @@ public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGam
     public override string BonusAttacksRollExpression => "15";
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "20";
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

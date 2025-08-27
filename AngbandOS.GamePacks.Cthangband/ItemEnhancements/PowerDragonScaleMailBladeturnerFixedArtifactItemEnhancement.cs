@@ -34,6 +34,6 @@ public class PowerDragonScaleMailBladeturnerFixedArtifactItemEnhancement : ItemE
     public override int Value => 500000;
     public override string BonusAttacksRollExpression => "35";
     public override string BonusHitsRollExpression => "-8";
-    public override ColorEnum Color => ColorEnum.Purple;
+    public override ColorEnum? Color => ColorEnum.Purple;
     public override bool HideType => true;
 }

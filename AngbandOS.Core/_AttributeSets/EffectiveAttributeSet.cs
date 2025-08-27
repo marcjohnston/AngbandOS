@@ -22,8 +22,9 @@ namespace AngbandOS.Core;
 internal class EffectiveAttributeSet
 {
     private Dictionary<string, List<ReadOnlyAttributeSet>> _enhancements = new Dictionary<string, List<ReadOnlyAttributeSet>>();
-    private AttributeValue[] _writeProperties;
-    private (bool trueIsSetFalseIsDefault, AttributeValue attributeValue)[] _overrideProperties;
+    private AttributeValue[] _defaultAttributeValues;
+    private AttributeValue?[] _additiveAttributeValues;
+    private AttributeValue?[] _fixedAttributeValues;
     private AttributeFactory[] _attributeFactories = new AttributeFactory[0];
 
     public EffectiveAttributeSet()
@@ -166,20 +167,28 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.XtraMight);
         RegisterBoolPropertyFactory(AttributeEnum.XtraShots);
 
-        // Generate a writable property values.
-        _writeProperties = new AttributeValue[_attributeFactories.Length];
+        // Generate the default property values.
+        _defaultAttributeValues = new AttributeValue[_attributeFactories.Length];
         foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
         {
             int index = (int)itemPropertyFactory.Index;
-            _writeProperties[index] = itemPropertyFactory.Instantiate();
+            _defaultAttributeValues[index] = itemPropertyFactory.Instantiate();
+        }
+
+        // Generate a writable property values.
+        _additiveAttributeValues = new AttributeValue[_attributeFactories.Length];
+        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
+        {
+            int index = (int)itemPropertyFactory.Index;
+            _additiveAttributeValues[index] = null;
         }
 
         // Generate the override property values.
-        _overrideProperties = new (bool, AttributeValue)[_attributeFactories.Length];
+        _fixedAttributeValues = new AttributeValue[_attributeFactories.Length];
         foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
         {
             int index = (int)itemPropertyFactory.Index;
-            _overrideProperties[index] = (false, itemPropertyFactory.Instantiate());
+            _fixedAttributeValues[index] = null;
         }
     }
 
@@ -192,7 +201,10 @@ internal class EffectiveAttributeSet
         // Build a writable property set.
         EffectiveAttributeSet effectivePropertySet = new EffectiveAttributeSet();
 
-        // Copy the enhancements.  These are immutable, so we can simply reference them.
+        // Clone the default attributes.  Since the array doesn't change and the values are immutable, we only need a reference to the entire array.
+        effectivePropertySet._defaultAttributeValues = _defaultAttributeValues;
+
+        // Copy the enhancements.  These are immutable, so we can simply add references to them.
         foreach (KeyValuePair<string, List<ReadOnlyAttributeSet>> enhancement in _enhancements)
         {
             foreach (ReadOnlyAttributeSet readOnlyPropertySet in enhancement.Value)
@@ -201,21 +213,20 @@ internal class EffectiveAttributeSet
             }
         }
 
-        // Clone the writable properties.
-        effectivePropertySet._writeProperties = new AttributeValue[_attributeFactories.Length];
+        // Clone the writable properties.  We will need a new array, but immutability allows us to simply reference the values.
+        effectivePropertySet._additiveAttributeValues = new AttributeValue?[_attributeFactories.Length];
         foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
         {
             int index = (int)itemPropertyFactory.Index;
-            effectivePropertySet._writeProperties[index] = _writeProperties[index].Clone();
+            effectivePropertySet._additiveAttributeValues[index] = _additiveAttributeValues[index];
         }
 
-        // Clone the override properties.
-        effectivePropertySet._overrideProperties = new (bool, AttributeValue)[_attributeFactories.Length];
+        // Clone the override properties.  We will need a new array, but immutability allows us to simply reference the values.
+        effectivePropertySet._fixedAttributeValues = new AttributeValue?[_attributeFactories.Length];
         foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
         {
             int index = (int)itemPropertyFactory.Index;
-            (bool trueIsSetFalseIsDefault, AttributeValue attributeValue) = _overrideProperties[index];
-            effectivePropertySet._overrideProperties[index] = (trueIsSetFalseIsDefault, attributeValue.Clone());
+            effectivePropertySet._fixedAttributeValues[index] = _fixedAttributeValues[index];
         }
 
         return effectivePropertySet;
@@ -232,20 +243,11 @@ internal class EffectiveAttributeSet
         foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
         {
             int index = (int)itemPropertyFactory.Index;
-            newProperties[index] = GetValue(itemPropertyFactory.Index);
+            newProperties[index] = GetValue(index);
         }
         return new ReadOnlyAttributeSet(newProperties);
     }
 
-    private void AddEnhancementToDictionary(string key, ReadOnlyAttributeSet readOnlyPropertySet) 
-    {
-        if (!_enhancements.TryGetValue(key, out List<ReadOnlyAttributeSet>? readOnlyPropertySetList))
-        {
-            readOnlyPropertySetList = new List<ReadOnlyAttributeSet>();
-            _enhancements.Add(key, readOnlyPropertySetList);
-        }
-        readOnlyPropertySetList.Add(readOnlyPropertySet);
-    }
     public void AddEnhancement(string key, ReadOnlyAttributeSet readOnlyPropertySet)
     {
         if (String.IsNullOrEmpty(key))
@@ -267,84 +269,26 @@ internal class EffectiveAttributeSet
         _enhancements.Remove(key);
     }
 
-    public void OverrideBoolValue(AttributeEnum propertyEnum, bool? value)
-    {
-        int index = (int)propertyEnum;
-        if (value.HasValue)
-        {
-            _overrideProperties[index] = (true, new BoolAttributeValue(_attributeFactories[index], value.Value));
-        }
-        else
-        {
-            _overrideProperties[index] = (false, _attributeFactories[index].Instantiate());
-        }
-    }
-
-    public void OverrideIntValue(AttributeEnum propertyEnum, int? value)
-    {
-        int index = (int)propertyEnum;
-        if (value.HasValue)
-        {
-            _overrideProperties[index] = (true, new IntAttributeValue(_attributeFactories[index], value.Value));
-        }
-        else
-        {
-            _overrideProperties[index] = (false, _attributeFactories[index].Instantiate());
-        }
-    }
-
     public void ResetCurse()
     {
-        OverrideBoolValue(AttributeEnum.IsCursed, null);
+        SetBoolAttributeValue(AttributeEnum.IsCursed, null);
     }
     public void RemoveCurse()
     {
-        OverrideBoolValue(AttributeEnum.IsCursed, false);
+        SetBoolAttributeValue(AttributeEnum.IsCursed, false);
     }
     public void ResetHeavyCurse()
     {
-        OverrideBoolValue(AttributeEnum.HeavyCurse, null);
+        SetBoolAttributeValue(AttributeEnum.HeavyCurse, null);
     }
     public void RemoveHeavyCurse()
     {
-        OverrideBoolValue(AttributeEnum.HeavyCurse, false);
+        SetBoolAttributeValue(AttributeEnum.HeavyCurse, false);
     }
 
     public bool HasKeyedItemEnhancements(string key)
     {
         return _enhancements.ContainsKey(key);
-    }
-
-    private AttributeValue GetValue(AttributeEnum propertyEnum)
-    {
-        // Retrieve the index for the property.
-        int index = (int)propertyEnum;
-
-        // Determine if the value has been overriden.
-        (bool trueIsSetFalseIsDefault, AttributeValue attributeValue) = _overrideProperties[index];
-        if (trueIsSetFalseIsDefault)
-        {
-            return attributeValue;
-        }
-
-        // Since the value has not been overriden, the value is the default value for us to start with.
-        AttributeValue itemProperty = attributeValue;
-
-        // Merge all of the immutable enhancements across all of the keys.
-        foreach (List<ReadOnlyAttributeSet> readOnlyPropertySetList in _enhancements.Values)
-        {
-            // For each key, there may be multiple item enhancements.
-            foreach (ReadOnlyAttributeSet readOnlyPropertySet in readOnlyPropertySetList)
-            {
-                itemProperty = itemProperty.Merge(readOnlyPropertySet.GetValue(propertyEnum));
-            }
-        }
-
-        // Merge the writable enhancements.
-        itemProperty = itemProperty.Merge(_writeProperties[index]);
-
-        // Return the value.
-        return itemProperty;
     }
 
     /// <summary>
@@ -353,7 +297,7 @@ internal class EffectiveAttributeSet
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    public AttributeValue GetKeyedValue(AttributeEnum propertyEnum, string key)
+    public AttributeValue GetKeyedValue(AttributeEnum attributeEnum, string key)
     {
         if (String.IsNullOrEmpty(key))
         {
@@ -361,7 +305,7 @@ internal class EffectiveAttributeSet
         }
 
         // Retrieve the index for the property.
-        int index = (int)propertyEnum;
+        int index = (int)attributeEnum;
 
         // Get the factory default value.
         AttributeValue itemProperty = _attributeFactories[index].Instantiate();
@@ -369,81 +313,151 @@ internal class EffectiveAttributeSet
         // For each key, there may be multiple item enhancements.
         foreach (ReadOnlyAttributeSet readOnlyPropertySet in _enhancements[key])
         {
-            itemProperty = itemProperty.Merge(readOnlyPropertySet.GetValue(propertyEnum));
+            itemProperty = itemProperty.Merge(readOnlyPropertySet.GetValue(index));
         }
         return itemProperty;
     }
 
-    public bool GetBoolValue(AttributeEnum propertyEnum)
+    public bool GetBoolAttributeValue(AttributeEnum attributeEnum)
     {
-        AttributeValue effectiveItemProperty = GetValue(propertyEnum);
+        int index = (int)attributeEnum;
+        AttributeValue effectiveItemProperty = GetValue(index);
         BoolAttributeValue boolPropertyValue = (BoolAttributeValue)effectiveItemProperty;
         bool value = boolPropertyValue.Value;
         return value;
     }
 
-    public int GetIntValue(AttributeEnum propertyEnum)
+    public int GetIntAttributeValue(AttributeEnum attributeEnum)
     {
-        AttributeValue effectiveItemProperty = GetValue(propertyEnum);
+        int index = (int)attributeEnum;
+        AttributeValue effectiveItemProperty = GetValue(index);
         IntAttributeValue intPropertyValue = (IntAttributeValue)effectiveItemProperty;
         int value = intPropertyValue.Value;
         return value;
     }
 
-    public ColorEnum GetColorValue(AttributeEnum propertyEnum)
+    public ColorEnum GetColorAttributeValue(AttributeEnum attributeEnum)
     {
-        AttributeValue effectiveItemProperty = GetValue(propertyEnum);
+        int index = (int)attributeEnum;
+        AttributeValue effectiveItemProperty = GetValue(index);
         ColorEnumAttributeValue colorPropertyValue = (ColorEnumAttributeValue)effectiveItemProperty;
         ColorEnum value = colorPropertyValue.Value;
         return value;
     }
 
-    public T? GetReferenceValue<T>(AttributeEnum propertyEnum) where T : class
+    public T? GetReferenceAttributeValue<T>(AttributeEnum attributeEnum) where T : class
     {
-        AttributeValue effectiveItemProperty = GetValue(propertyEnum);
+        int index = (int)attributeEnum;
+        AttributeValue effectiveItemProperty = GetValue(index);
         ReferenceAttributeValue<T> referencePropertyValue = (ReferenceAttributeValue<T>)effectiveItemProperty;
         T? value = referencePropertyValue.Value;
         return value;
     }
 
-    private void SetValue(AttributeEnum propertyEnum, AttributeValue propertyValue)
+    /// <summary>
+    /// Sets an attribute to a fixed value or; when null, reverts the attribute to the effective computed value.  This is done by setting the fixed attribute value.
+    /// </summary>
+    /// <param name="attributeEnum"></param>
+    /// <param name="value"></param>
+    public void SetReferenceAttributeValue<T>(AttributeEnum attributeEnum, T? propertyValue) where T : class
     {
         // Retrieve the index for the property.
-        int index = (int)propertyEnum;
-
-        _writeProperties[index] = propertyValue;
+        int index = (int)attributeEnum;
+        _fixedAttributeValues[index] = propertyValue is null ? null : new ReferenceAttributeValue<T>(_attributeFactories[index], propertyValue);
     }
 
-    public void SetReferenceValue<T>(AttributeEnum propertyEnum, T? propertyValue) where T : class
+    /// <summary>
+    /// Sets an attribute to a fixed value or; when null, reverts the attribute to the effective computed value.  This is done by setting the fixed attribute value.
+    /// </summary>
+    /// <param name="attributeEnum"></param>
+    /// <param name="value"></param>
+    public void SetIntAttributeValue(AttributeEnum attributeEnum, int? value)
     {
-        // Retrieve the index for the property.
-        int index = (int)propertyEnum;
-
-        _writeProperties[index] = new ReferenceAttributeValue<T>(_attributeFactories[index], propertyValue);
+        int index = (int)attributeEnum;
+        _fixedAttributeValues[index] = !value.HasValue ? null : new IntAttributeValue(_attributeFactories[index], value.Value);
     }
 
-    public void SetIntValue(AttributeEnum propertyEnum, int value)
+    /// <summary>
+    /// Sets an attribute to a fixed value or; when null, reverts the attribute to the effective computed value.  This is done by setting the fixed attribute value.
+    /// </summary>
+    /// <param name="attributeEnum"></param>
+    /// <param name="value"></param>
+    public void SetColorAttributeValue(AttributeEnum attributeEnum, ColorEnum? value)
     {
-        int index = (int)propertyEnum;
-        SetValue(propertyEnum, new IntAttributeValue(_attributeFactories[index], value));
+        int index = (int)attributeEnum;
+        _fixedAttributeValues[index] = !value.HasValue ? null : new ColorEnumAttributeValue(_attributeFactories[index], value.Value);
     }
 
-    public void SetColorValue(AttributeEnum propertyEnum, ColorEnum value)
+    /// <summary>
+    /// Sets an attribute to a fixed value or; when null, reverts the attribute to the effective computed value.  This is done by setting the fixed attribute value.
+    /// </summary>
+    /// <param name="attributeEnum"></param>
+    /// <param name="value"></param>
+    public void SetBoolAttributeValue(AttributeEnum attributeEnum, bool? value)
     {
-        int index = (int)propertyEnum;
-        SetValue(propertyEnum, new ColorEnumAttributeValue(_attributeFactories[index], value));
+        int index = (int)attributeEnum;
+        _fixedAttributeValues[index] = !value.HasValue ? null : new BoolAttributeValue(_attributeFactories[index], value.Value);
     }
 
-    public void AddIntValue(AttributeEnum propertyEnum, int value)
+    /// <summary>
+    /// Adds a quantity to an unfixed attribute.  This is done by incrementing the writable attribute value by 1.
+    /// </summary>
+    /// <param name="attributeEnum"></param>
+    /// <param name="value"></param>
+    public void AddIntAttributeValue(AttributeEnum attributeEnum, int value)
     {
-        int index = (int)propertyEnum;
-        SetValue(propertyEnum, new IntAttributeValue(_attributeFactories[index], GetIntValue(propertyEnum) + value));
+        int index = (int)attributeEnum;
+        IntAttributeValue? intAttributeValue = (IntAttributeValue?)_additiveAttributeValues[index];
+        int currentValue = intAttributeValue?.Value ?? 0;
+        _additiveAttributeValues[index] = new IntAttributeValue(_attributeFactories[index], currentValue + value);
     }
 
-    public void SetBoolValue(AttributeEnum propertyEnum, bool value)
+    private void AddEnhancementToDictionary(string key, ReadOnlyAttributeSet readOnlyPropertySet)
     {
-        int index = (int)propertyEnum;
-        SetValue(propertyEnum, new BoolAttributeValue(_attributeFactories[index], value));
+        if (!_enhancements.TryGetValue(key, out List<ReadOnlyAttributeSet>? readOnlyPropertySetList))
+        {
+            readOnlyPropertySetList = new List<ReadOnlyAttributeSet>();
+            _enhancements.Add(key, readOnlyPropertySetList);
+        }
+        readOnlyPropertySetList.Add(readOnlyPropertySet);
+    }
+
+    private AttributeValue GetValue(int index)
+    {
+        // Determine if the value has been overriden.
+        AttributeValue? overrideAttributeValue = _fixedAttributeValues[index];
+        if (overrideAttributeValue is not null)
+        {
+            // It was, returnt the override value.
+            return overrideAttributeValue;
+        }
+
+        // Start with the default value for us to start with.
+        AttributeValue itemProperty = _defaultAttributeValues[index];
+
+        // Merge all of the immutable enhancements across all of the keys.
+        foreach (List<ReadOnlyAttributeSet> readOnlyPropertySetList in _enhancements.Values)
+        {
+            // For each key, there may be multiple item enhancements.
+            foreach (ReadOnlyAttributeSet readOnlyPropertySet in readOnlyPropertySetList)
+            {
+                AttributeValue? attributeValue = readOnlyPropertySet.GetValue(index);
+                if (attributeValue is not null)
+                {
+                    itemProperty = itemProperty.Merge(attributeValue);
+                }
+            }
+        }
+
+        // Merge the writable enhancements.
+        AttributeValue? additiveAttributeValue = _additiveAttributeValues[index];
+        if (additiveAttributeValue is not null)
+        {
+            itemProperty = itemProperty.Merge(additiveAttributeValue);
+        }
+
+        // Return the value.
+        return itemProperty;
     }
 
     #region Properties
@@ -451,1007 +465,1007 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return GetBoolValue(AttributeEnum.CanApplyBlessedArtifactBias);
+            return GetBoolAttributeValue(AttributeEnum.CanApplyBlessedArtifactBias);
         }
         set
         {
-            SetBoolValue(AttributeEnum.CanApplyBlessedArtifactBias, value);
+            SetBoolAttributeValue(AttributeEnum.CanApplyBlessedArtifactBias, value);
         }
     }
     public bool CanApplyArtifactBiasSlaying
     {
         get
         {
-            return GetBoolValue(AttributeEnum.CanApplyArtifactBiasSlaying);
+            return GetBoolAttributeValue(AttributeEnum.CanApplyArtifactBiasSlaying);
         }
         set
         {
-            SetBoolValue(AttributeEnum.CanApplyArtifactBiasSlaying, value);
+            SetBoolAttributeValue(AttributeEnum.CanApplyArtifactBiasSlaying, value);
         }
     }
     public bool CanApplyBlowsBonus
     {
         get
         {
-            return GetBoolValue(AttributeEnum.CanApplyBlowsBonus);
+            return GetBoolAttributeValue(AttributeEnum.CanApplyBlowsBonus);
         }
         set
         {
-            SetBoolValue(AttributeEnum.CanApplyBlowsBonus, value);
+            SetBoolAttributeValue(AttributeEnum.CanApplyBlowsBonus, value);
         }
     }
     public bool CanReflectBoltsAndArrows
     {
         get
         {
-            return GetBoolValue(AttributeEnum.CanReflectBoltsAndArrows);
+            return GetBoolAttributeValue(AttributeEnum.CanReflectBoltsAndArrows);
         }
         set
         {
-            SetBoolValue(AttributeEnum.CanReflectBoltsAndArrows, value);
+            SetBoolAttributeValue(AttributeEnum.CanReflectBoltsAndArrows, value);
         }
     }
     public bool CanApplySlayingBonus
     {
         get
         {
-            return GetBoolValue(AttributeEnum.CanApplySlayingBonus);
+            return GetBoolAttributeValue(AttributeEnum.CanApplySlayingBonus);
         }
         set
         {
-            SetBoolValue(AttributeEnum.CanApplySlayingBonus, value);
+            SetBoolAttributeValue(AttributeEnum.CanApplySlayingBonus, value);
         }
     }
     public bool CanApplyBonusArmorClassMiscPower
     {
         get
         {
-            return GetBoolValue(AttributeEnum.CanApplyBonusArmorClassMiscPower);
+            return GetBoolAttributeValue(AttributeEnum.CanApplyBonusArmorClassMiscPower);
         }
         set
         {
-            SetBoolValue(AttributeEnum.CanApplyBonusArmorClassMiscPower, value);
+            SetBoolAttributeValue(AttributeEnum.CanApplyBonusArmorClassMiscPower, value);
         }
     }
     public bool CanProvideSheathOfElectricity
     {
         get
         {
-            return GetBoolValue(AttributeEnum.CanProvideSheathOfElectricity);
+            return GetBoolAttributeValue(AttributeEnum.CanProvideSheathOfElectricity);
         }
         set
         {
-            SetBoolValue(AttributeEnum.CanProvideSheathOfElectricity, value);
+            SetBoolAttributeValue(AttributeEnum.CanProvideSheathOfElectricity, value);
         }
     }
     public bool CanProvideSheathOfFire
     {
         get
         {
-            return GetBoolValue(AttributeEnum.CanProvideSheathOfFire);
+            return GetBoolAttributeValue(AttributeEnum.CanProvideSheathOfFire);
         }
         set
         {
-            SetBoolValue(AttributeEnum.CanProvideSheathOfFire, value);
+            SetBoolAttributeValue(AttributeEnum.CanProvideSheathOfFire, value);
         }
     }
     public int BonusHits
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusHits);
+            return GetIntAttributeValue(AttributeEnum.BonusHits);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusHits, value);
+            SetIntAttributeValue(AttributeEnum.BonusHits, value);
         }
     }
     public int BonusArmorClass
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusArmorClass);
+            return GetIntAttributeValue(AttributeEnum.BonusArmorClass);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusArmorClass, value);
+            SetIntAttributeValue(AttributeEnum.BonusArmorClass, value);
         }
     }
     public int BonusDamage
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusDamage);
+            return GetIntAttributeValue(AttributeEnum.BonusDamage);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusDamage, value);
+            SetIntAttributeValue(AttributeEnum.BonusDamage, value);
         }
     }
     public int BonusStrength
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusStrength);
+            return GetIntAttributeValue(AttributeEnum.BonusStrength);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusStrength, value);
+            SetIntAttributeValue(AttributeEnum.BonusStrength, value);
         }
     }
     public int BonusIntelligence
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusIntelligence);
+            return GetIntAttributeValue(AttributeEnum.BonusIntelligence);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusIntelligence, value);
+            SetIntAttributeValue(AttributeEnum.BonusIntelligence, value);
         }
     }
     public int BonusWisdom
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusWisdom);
+            return GetIntAttributeValue(AttributeEnum.BonusWisdom);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusWisdom, value);
+            SetIntAttributeValue(AttributeEnum.BonusWisdom, value);
         }
     }
     public int BonusDexterity
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusDexterity);
+            return GetIntAttributeValue(AttributeEnum.BonusDexterity);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusDexterity, value);
+            SetIntAttributeValue(AttributeEnum.BonusDexterity, value);
         }
     }
     public int BonusConstitution
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusConstitution);
+            return GetIntAttributeValue(AttributeEnum.BonusConstitution);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusConstitution, value);
+            SetIntAttributeValue(AttributeEnum.BonusConstitution, value);
         }
     }
     public int BonusCharisma
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusCharisma);
+            return GetIntAttributeValue(AttributeEnum.BonusCharisma);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusCharisma, value);
+            SetIntAttributeValue(AttributeEnum.BonusCharisma, value);
         }
     }
     public int BonusStealth
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusStealth);
+            return GetIntAttributeValue(AttributeEnum.BonusStealth);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusStealth, value);
+            SetIntAttributeValue(AttributeEnum.BonusStealth, value);
         }
     }
     public int BonusSearch
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusSearch);
+            return GetIntAttributeValue(AttributeEnum.BonusSearch);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusSearch, value);
+            SetIntAttributeValue(AttributeEnum.BonusSearch, value);
         }
     }
     public int BonusInfravision
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusInfravision);
+            return GetIntAttributeValue(AttributeEnum.BonusInfravision);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusInfravision, value);
+            SetIntAttributeValue(AttributeEnum.BonusInfravision, value);
         }
     }
     public int BonusTunnel
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusTunnel);
+            return GetIntAttributeValue(AttributeEnum.BonusTunnel);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusTunnel, value);
+            SetIntAttributeValue(AttributeEnum.BonusTunnel, value);
         }
     }
     public int BonusAttacks
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusAttacks);
+            return GetIntAttributeValue(AttributeEnum.BonusAttacks);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusAttacks, value);
+            SetIntAttributeValue(AttributeEnum.BonusAttacks, value);
         }
     }
     public int BonusSpeed
     {
         get
         {
-            return GetIntValue(AttributeEnum.BonusSpeed);
+            return GetIntAttributeValue(AttributeEnum.BonusSpeed);
         }
         set
         {
-            SetIntValue(AttributeEnum.BonusSpeed, value);
+            SetIntAttributeValue(AttributeEnum.BonusSpeed, value);
         }
     }
     public Activation? Activation
     {
         get
         {
-            return GetReferenceValue<Activation>(AttributeEnum.Activation);
+            return GetReferenceAttributeValue<Activation>(AttributeEnum.Activation);
         }
         set
         {
-            SetReferenceValue<Activation>(AttributeEnum.Activation, value);
+            SetReferenceAttributeValue<Activation>(AttributeEnum.Activation, value);
         }
     }
     public bool Aggravate
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Aggravate);
+            return GetBoolAttributeValue(AttributeEnum.Aggravate);
         }
         set
         {
-            SetBoolValue(AttributeEnum.Aggravate, value);
+            SetBoolAttributeValue(AttributeEnum.Aggravate, value);
         }
     }
     public bool AntiTheft
     {
         get
         {
-            return GetBoolValue(AttributeEnum.AntiTheft);
+            return GetBoolAttributeValue(AttributeEnum.AntiTheft);
         }
         set
         {
-            SetBoolValue(AttributeEnum.AntiTheft, value);
+            SetBoolAttributeValue(AttributeEnum.AntiTheft, value);
         }
     }
     public ArtifactBias? ArtifactBias
     {
         get
         {
-            return GetReferenceValue<ArtifactBias>(AttributeEnum.ArtifactBias);
+            return GetReferenceAttributeValue<ArtifactBias>(AttributeEnum.ArtifactBias);
         }
         set
         {
-            SetReferenceValue<ArtifactBias>(AttributeEnum.ArtifactBias, value);
+            SetReferenceAttributeValue<ArtifactBias>(AttributeEnum.ArtifactBias, value);
         }
     }
     public bool Blessed
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Blessed);
+            return GetBoolAttributeValue(AttributeEnum.Blessed);
         }
         set
         {
-            SetBoolValue(AttributeEnum.Blessed, value);
+            SetBoolAttributeValue(AttributeEnum.Blessed, value);
         }
     }
     public bool BrandAcid
     {
         get
         {
-            return GetBoolValue(AttributeEnum.BrandAcid);
+            return GetBoolAttributeValue(AttributeEnum.BrandAcid);
         }
         set
         {
-            SetBoolValue(AttributeEnum.BrandAcid, value);
+            SetBoolAttributeValue(AttributeEnum.BrandAcid, value);
         }
     }
     public bool BrandCold
     {
         get
         {
-            return GetBoolValue(AttributeEnum.BrandCold);
+            return GetBoolAttributeValue(AttributeEnum.BrandCold);
         }
         set
         {
-            SetBoolValue(AttributeEnum.BrandCold, value);
+            SetBoolAttributeValue(AttributeEnum.BrandCold, value);
         }
     }
     public bool BrandElec
     {
         get
         {
-            return GetBoolValue(AttributeEnum.BrandElec);
+            return GetBoolAttributeValue(AttributeEnum.BrandElec);
         }
         set
         {
-            SetBoolValue(AttributeEnum.BrandElec, value);
+            SetBoolAttributeValue(AttributeEnum.BrandElec, value);
         }
     }
     public bool BrandFire
     {
         get
         {
-            return GetBoolValue(AttributeEnum.BrandFire);
+            return GetBoolAttributeValue(AttributeEnum.BrandFire);
         }
         set
         {
-            SetBoolValue(AttributeEnum.BrandFire, value);
+            SetBoolAttributeValue(AttributeEnum.BrandFire, value);
         }
     }
     public bool BrandPois
     {
         get
         {
-            return GetBoolValue(AttributeEnum.BrandPois);
+            return GetBoolAttributeValue(AttributeEnum.BrandPois);
         }
         set
         {
-            SetBoolValue(AttributeEnum.BrandPois, value);
+            SetBoolAttributeValue(AttributeEnum.BrandPois, value);
         }
     }
     public bool Chaotic
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Chaotic);
+            return GetBoolAttributeValue(AttributeEnum.Chaotic);
         }
         set
         {
-            SetBoolValue(AttributeEnum.Chaotic, value);
+            SetBoolAttributeValue(AttributeEnum.Chaotic, value);
         }
     }
     public ColorEnum Color
     {
         get
         {
-            return GetColorValue(AttributeEnum.Color);
+            return GetColorAttributeValue(AttributeEnum.Color);
         }
         set
         {
-            SetColorValue(AttributeEnum.Color, value);
+            SetColorAttributeValue(AttributeEnum.Color, value);
         }
     }
     public bool IsCursed
     {
         get
         {
-            return GetBoolValue(AttributeEnum.IsCursed);
+            return GetBoolAttributeValue(AttributeEnum.IsCursed);
         }
         set
         {
-            SetBoolValue(AttributeEnum.IsCursed, value);
+            SetBoolAttributeValue(AttributeEnum.IsCursed, value);
         }
     }
     public int DamageDice
     {
         get
         {
-            return GetIntValue(AttributeEnum.DamageDice);
+            return GetIntAttributeValue(AttributeEnum.DamageDice);
         }
         set
         {
-            SetIntValue(AttributeEnum.DamageDice, value);
+            SetIntAttributeValue(AttributeEnum.DamageDice, value);
         }
     }
     public int DiceSides
     {
         get
         {
-            return GetIntValue(AttributeEnum.DiceSides);
+            return GetIntAttributeValue(AttributeEnum.DiceSides);
         }
         set
         {
-            SetIntValue(AttributeEnum.DiceSides, value);
+            SetIntAttributeValue(AttributeEnum.DiceSides, value);
         }
     }
     public bool DrainExp
     {
         get
         {
-            return GetBoolValue(AttributeEnum.DrainExp);
+            return GetBoolAttributeValue(AttributeEnum.DrainExp);
         }
         set
         {
-            SetBoolValue(AttributeEnum.DrainExp, value);
+            SetBoolAttributeValue(AttributeEnum.DrainExp, value);
         }
     }
     public bool DreadCurse
     {
         get
         {
-            return GetBoolValue(AttributeEnum.DreadCurse);
+            return GetBoolAttributeValue(AttributeEnum.DreadCurse);
         }
         set
         {
-            SetBoolValue(AttributeEnum.DreadCurse, value);
+            SetBoolAttributeValue(AttributeEnum.DreadCurse, value);
         }
     }
     public bool EasyKnow
     {
         get
         {
-            return GetBoolValue(AttributeEnum.EasyKnow);
+            return GetBoolAttributeValue(AttributeEnum.EasyKnow);
         }
         set
         {
-            SetBoolValue(AttributeEnum.EasyKnow, value);
+            SetBoolAttributeValue(AttributeEnum.EasyKnow, value);
         }
     }
     public bool Feather
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Feather);
+            return GetBoolAttributeValue(AttributeEnum.Feather);
         }
         set
         {
-            SetBoolValue(AttributeEnum.Feather, value);
+            SetBoolAttributeValue(AttributeEnum.Feather, value);
         }
     }
     public bool FreeAct
     {
         get
         {
-            return GetBoolValue(AttributeEnum.FreeAct);
+            return GetBoolAttributeValue(AttributeEnum.FreeAct);
         }
         set
         {
-            SetBoolValue(AttributeEnum.FreeAct, value);
+            SetBoolAttributeValue(AttributeEnum.FreeAct, value);
         }
     }
     public string? FriendlyName
     {
         get
         {
-            return GetReferenceValue<string>(AttributeEnum.FriendlyName);
+            return GetReferenceAttributeValue<string>(AttributeEnum.FriendlyName);
         }
         set
         {
-            SetReferenceValue<string>(AttributeEnum.FriendlyName, value);
+            SetReferenceAttributeValue<string>(AttributeEnum.FriendlyName, value);
         }
     }
     public bool HeavyCurse
     {
         get
         {
-            return GetBoolValue(AttributeEnum.HeavyCurse);
+            return GetBoolAttributeValue(AttributeEnum.HeavyCurse);
         }
         set
         {
-            SetBoolValue(AttributeEnum.HeavyCurse, value);
+            SetBoolAttributeValue(AttributeEnum.HeavyCurse, value);
         }
     }
     public bool HideType
     {
         get
         {
-            return GetBoolValue(AttributeEnum.HideType);
+            return GetBoolAttributeValue(AttributeEnum.HideType);
         }
         set
         {
-            SetBoolValue(AttributeEnum.HideType, value);
+            SetBoolAttributeValue(AttributeEnum.HideType, value);
         }
     }
     public bool HoldLife
     {
         get
         {
-            return GetBoolValue(AttributeEnum.HoldLife);
+            return GetBoolAttributeValue(AttributeEnum.HoldLife);
         }
         set
         {
-            SetBoolValue(AttributeEnum.HoldLife, value);
+            SetBoolAttributeValue(AttributeEnum.HoldLife, value);
         }
     }
     public bool IgnoreAcid
     {
         get
         {
-            return GetBoolValue(AttributeEnum.IgnoreAcid);
+            return GetBoolAttributeValue(AttributeEnum.IgnoreAcid);
         }
         set
         {
-            SetBoolValue(AttributeEnum.IgnoreAcid, value);
+            SetBoolAttributeValue(AttributeEnum.IgnoreAcid, value);
         }
     }
     public bool IgnoreCold
     {
         get
         {
-            return GetBoolValue(AttributeEnum.IgnoreCold);
+            return GetBoolAttributeValue(AttributeEnum.IgnoreCold);
         }
         set
         {
-            SetBoolValue(AttributeEnum.IgnoreCold, value);
+            SetBoolAttributeValue(AttributeEnum.IgnoreCold, value);
         }
     }
     public bool IgnoreElec
     {
         get
         {
-            return GetBoolValue(AttributeEnum.IgnoreElec);
+            return GetBoolAttributeValue(AttributeEnum.IgnoreElec);
         }
         set
         {
-            SetBoolValue(AttributeEnum.IgnoreElec, value);
+            SetBoolAttributeValue(AttributeEnum.IgnoreElec, value);
         }
     }
     public bool IgnoreFire
     {
         get
         {
-            return GetBoolValue(AttributeEnum.IgnoreFire);
+            return GetBoolAttributeValue(AttributeEnum.IgnoreFire);
         }
         set
         {
-            SetBoolValue(AttributeEnum.IgnoreFire, value);
+            SetBoolAttributeValue(AttributeEnum.IgnoreFire, value);
         }
     }
     public bool ImAcid
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ImAcid);
+            return GetBoolAttributeValue(AttributeEnum.ImAcid);
         }
         set
         {
-            SetBoolValue(AttributeEnum.ImAcid, value);
+            SetBoolAttributeValue(AttributeEnum.ImAcid, value);
         }
     }
     public bool ImCold
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ImCold);
+            return GetBoolAttributeValue(AttributeEnum.ImCold);
         }
         set
         {
-            SetBoolValue(AttributeEnum.ImCold, value);
+            SetBoolAttributeValue(AttributeEnum.ImCold, value);
         }
     }
     public bool ImElec
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ImElec);
+            return GetBoolAttributeValue(AttributeEnum.ImElec);
         }
         set
         {
-            SetBoolValue(AttributeEnum.ImElec, value);
+            SetBoolAttributeValue(AttributeEnum.ImElec, value);
         }
     }
     public bool ImFire
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ImFire);
+            return GetBoolAttributeValue(AttributeEnum.ImFire);
         }
         set
         {
-            SetBoolValue(AttributeEnum.ImFire, value);
+            SetBoolAttributeValue(AttributeEnum.ImFire, value);
         }
     }
     public bool Impact
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Impact);
+            return GetBoolAttributeValue(AttributeEnum.Impact);
         }
         set
         {
-            SetBoolValue(AttributeEnum.Impact, value);
+            SetBoolAttributeValue(AttributeEnum.Impact, value);
         }
     }
     public bool NoMagic
     {
         get
         {
-            return GetBoolValue(AttributeEnum.NoMagic);
+            return GetBoolAttributeValue(AttributeEnum.NoMagic);
         }
         set
         {
-            SetBoolValue(AttributeEnum.NoMagic, value);
+            SetBoolAttributeValue(AttributeEnum.NoMagic, value);
         }
     }
     public bool NoTele
     {
         get
         {
-            return GetBoolValue(AttributeEnum.NoTele);
+            return GetBoolAttributeValue(AttributeEnum.NoTele);
         }
         set
         {
-            SetBoolValue(AttributeEnum.NoTele, value);
+            SetBoolAttributeValue(AttributeEnum.NoTele, value);
         }
     }
     public bool PermaCurse
     {
         get
         {
-            return GetBoolValue(AttributeEnum.PermaCurse);
+            return GetBoolAttributeValue(AttributeEnum.PermaCurse);
         }
         set
         {
-            SetBoolValue(AttributeEnum.PermaCurse, value);
+            SetBoolAttributeValue(AttributeEnum.PermaCurse, value);
         }
     }
     public int Radius
     {
         get
         {
-            return GetIntValue(AttributeEnum.Radius);
+            return GetIntAttributeValue(AttributeEnum.Radius);
         }
         set
         {
-            SetIntValue(AttributeEnum.Radius, value);
+            SetIntAttributeValue(AttributeEnum.Radius, value);
         }
     }
     public bool Reflect
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Reflect);
+            return GetBoolAttributeValue(AttributeEnum.Reflect);
         }
     }
     public bool Regen
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Regen);
+            return GetBoolAttributeValue(AttributeEnum.Regen);
         }
     }
     public bool ResAcid
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResAcid);
+            return GetBoolAttributeValue(AttributeEnum.ResAcid);
         }
     }
     public bool ResBlind
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResBlind);
+            return GetBoolAttributeValue(AttributeEnum.ResBlind);
         }
     }
     public bool ResChaos
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResChaos);
+            return GetBoolAttributeValue(AttributeEnum.ResChaos);
         }
     }
     public bool ResCold
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResCold);
+            return GetBoolAttributeValue(AttributeEnum.ResCold);
         }
     }
     public bool ResConf
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResConf);
+            return GetBoolAttributeValue(AttributeEnum.ResConf);
         }
     }
     public bool ResDark
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResDark);
+            return GetBoolAttributeValue(AttributeEnum.ResDark);
         }
     }
     public bool ResDisen
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResDisen);
+            return GetBoolAttributeValue(AttributeEnum.ResDisen);
         }
     }
     public bool ResElec
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResElec);
+            return GetBoolAttributeValue(AttributeEnum.ResElec);
         }
     }
     public bool ResFear
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResFear);
+            return GetBoolAttributeValue(AttributeEnum.ResFear);
         }
     }
     public bool ResFire
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResFire);
+            return GetBoolAttributeValue(AttributeEnum.ResFire);
         }
     }
     public bool ResLight
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResLight);
+            return GetBoolAttributeValue(AttributeEnum.ResLight);
         }
     }
     public bool ResNether
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResNether);
+            return GetBoolAttributeValue(AttributeEnum.ResNether);
         }
     }
     public bool ResNexus
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResNexus);
+            return GetBoolAttributeValue(AttributeEnum.ResNexus);
         }
     }
     public bool ResPois
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResPois);
+            return GetBoolAttributeValue(AttributeEnum.ResPois);
         }
     }
     public bool ResShards
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResShards);
+            return GetBoolAttributeValue(AttributeEnum.ResShards);
         }
     }
     public bool ResSound
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ResSound);
+            return GetBoolAttributeValue(AttributeEnum.ResSound);
         }
     }
     public bool SeeInvis
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SeeInvis);
+            return GetBoolAttributeValue(AttributeEnum.SeeInvis);
         }
     }
     public bool ShElec
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ShElec);
+            return GetBoolAttributeValue(AttributeEnum.ShElec);
         }
     }
     public bool ShFire
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ShFire);
+            return GetBoolAttributeValue(AttributeEnum.ShFire);
         }
     }
     public bool ShowMods
     {
         get
         {
-            return GetBoolValue(AttributeEnum.ShowMods);
+            return GetBoolAttributeValue(AttributeEnum.ShowMods);
         }
     }
     public bool SlayAnimal
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SlayAnimal);
+            return GetBoolAttributeValue(AttributeEnum.SlayAnimal);
         }
     }
     public bool SlayDemon
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SlayDemon);
+            return GetBoolAttributeValue(AttributeEnum.SlayDemon);
         }
     }
     public int SlayDragon
     {
         get
         {
-            return GetIntValue(AttributeEnum.SlayDragon);
+            return GetIntAttributeValue(AttributeEnum.SlayDragon);
         }
     }
     public bool SlayEvil
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SlayEvil);
+            return GetBoolAttributeValue(AttributeEnum.SlayEvil);
         }
     }
     public bool SlayGiant
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SlayGiant);
+            return GetBoolAttributeValue(AttributeEnum.SlayGiant);
         }
     }
     public bool SlayOrc
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SlayOrc);
+            return GetBoolAttributeValue(AttributeEnum.SlayOrc);
         }
     }
     public bool SlayTroll
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SlayTroll);
+            return GetBoolAttributeValue(AttributeEnum.SlayTroll);
         }
     }
     public bool SlayUndead
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SlayUndead);
+            return GetBoolAttributeValue(AttributeEnum.SlayUndead);
         }
     }
     public bool SlowDigest
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SlowDigest);
+            return GetBoolAttributeValue(AttributeEnum.SlowDigest);
         }
     }
     public bool SustCha
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SustCha);
+            return GetBoolAttributeValue(AttributeEnum.SustCha);
         }
     }
     public bool SustCon
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SustCon);
+            return GetBoolAttributeValue(AttributeEnum.SustCon);
         }
     }
     public bool SustDex
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SustDex);
+            return GetBoolAttributeValue(AttributeEnum.SustDex);
         }
     }
     public bool SustInt
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SustInt);
+            return GetBoolAttributeValue(AttributeEnum.SustInt);
         }
     }
     public bool SustStr
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SustStr);
+            return GetBoolAttributeValue(AttributeEnum.SustStr);
         }
     }
     public bool SustWis
     {
         get
         {
-            return GetBoolValue(AttributeEnum.SustWis);
+            return GetBoolAttributeValue(AttributeEnum.SustWis);
         }
     }
     public bool Telepathy
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Telepathy);
+            return GetBoolAttributeValue(AttributeEnum.Telepathy);
         }
     }
     public bool Teleport
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Teleport);
+            return GetBoolAttributeValue(AttributeEnum.Teleport);
         }
     }
     public int TreasureRating
     {
         get
         {
-            return GetIntValue(AttributeEnum.TreasureRating);
+            return GetIntAttributeValue(AttributeEnum.TreasureRating);
         }
     }
     public int Value
     {
         get
         {
-            return GetIntValue(AttributeEnum.Value);
+            return GetIntAttributeValue(AttributeEnum.Value);
         }
         set
         {
-            SetIntValue(AttributeEnum.Value, value);
+            SetIntAttributeValue(AttributeEnum.Value, value);
         }
     }
     public bool Valueless
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Valueless);
+            return GetBoolAttributeValue(AttributeEnum.Valueless);
         }
     }
     public bool Vampiric
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Vampiric);
+            return GetBoolAttributeValue(AttributeEnum.Vampiric);
         }
     }
     public int Vorpal1InChance
     {
         get
         {
-            return GetIntValue(AttributeEnum.Vorpal1InChance);
+            return GetIntAttributeValue(AttributeEnum.Vorpal1InChance);
         }
     }
     public int VorpalExtraAttacks1InChance
     {
         get
         {
-            return GetIntValue(AttributeEnum.VorpalExtraAttacks1InChance);
+            return GetIntAttributeValue(AttributeEnum.VorpalExtraAttacks1InChance);
         }
     }
     public int Weight
     {
         get
         {
-            return GetIntValue(AttributeEnum.Weight);
+            return GetIntAttributeValue(AttributeEnum.Weight);
         }
     }
     public bool Wraith
     {
         get
         {
-            return GetBoolValue(AttributeEnum.Wraith);
+            return GetBoolAttributeValue(AttributeEnum.Wraith);
         }
     }
     public bool XtraMight
     {
         get
         {
-            return GetBoolValue(AttributeEnum.XtraMight);
+            return GetBoolAttributeValue(AttributeEnum.XtraMight);
         }
     }
     public bool XtraShots
     {
         get
         {
-            return GetBoolValue(AttributeEnum.XtraShots);
+            return GetBoolAttributeValue(AttributeEnum.XtraShots);
         }
     }
     #endregion

@@ -25,5 +25,5 @@ public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhanceme
     public override int DamageDice => 1;
     public override string BonusAttacksRollExpression => "40";
     public override string BonusHitsRollExpression => "-2";
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

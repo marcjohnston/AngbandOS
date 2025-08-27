@@ -8,5 +8,5 @@ public class BlackMassDeathBookItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Value => 1000;
     public override int DamageDice => 1;
     public override int DiceSides => 1;
-    public override ColorEnum Color => ColorEnum.Grey;
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

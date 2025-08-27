@@ -21,5 +21,5 @@ public class DaggerFaithFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override int Value => 12000;
     public override string BonusHitsRollExpression => "4";
     public override string BonusDamageRollExpression => "6";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

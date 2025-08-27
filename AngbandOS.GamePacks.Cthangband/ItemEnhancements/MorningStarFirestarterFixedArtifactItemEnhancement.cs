@@ -22,5 +22,5 @@ public class MorningStarFirestarterFixedArtifactItemEnhancement : ItemEnhancemen
     public override string BonusAttacksRollExpression => "2";
     public override string BonusHitsRollExpression => "5";
     public override string BonusDamageRollExpression => "7";
-    public override ColorEnum Color => ColorEnum.Black;
+    public override ColorEnum? Color => ColorEnum.Black;
 }

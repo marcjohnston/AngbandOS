@@ -14,5 +14,5 @@ public class RedDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int Value => 100000;
     public override int DamageDice => 2;
     public override int DiceSides => 4;
-    public override ColorEnum Color => ColorEnum.Red;
+    public override ColorEnum? Color => ColorEnum.Red;
 }

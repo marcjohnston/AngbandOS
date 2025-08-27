@@ -5,5 +5,5 @@ public class FilthyRagSoftArmorItemFactoryItemEnhancement : ItemEnhancementGameC
 {
     public override int Weight => 20;
     public override int Value => 1;
-    public override ColorEnum Color => ColorEnum.Black;
+    public override ColorEnum? Color => ColorEnum.Black;
 }

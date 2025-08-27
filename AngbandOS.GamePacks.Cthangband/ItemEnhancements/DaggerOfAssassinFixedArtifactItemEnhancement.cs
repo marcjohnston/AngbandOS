@@ -27,5 +27,5 @@ public class DaggerOfAssassinFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override string BonusAttacksRollExpression => "5";
     public override string BonusHitsRollExpression => "10";
     public override string BonusDamageRollExpression => "15";
-    public override ColorEnum Color => ColorEnum.BrightWhite;
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }
