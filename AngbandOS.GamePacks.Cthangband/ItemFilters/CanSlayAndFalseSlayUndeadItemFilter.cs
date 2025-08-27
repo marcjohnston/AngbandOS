@@ -11,5 +11,5 @@ public class CanSlayAndFalseSlayUndeadItemFilter : ItemFilterGameConfiguration
 {
 
     public override bool? SlayUndead => false;
-    public override bool? CanApplyArtifactBiasSlaying => true;
+    public override bool? ArtifactBiasSlayingDisabled => false;
 }

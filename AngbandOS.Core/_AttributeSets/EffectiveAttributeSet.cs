@@ -56,7 +56,7 @@ internal class EffectiveAttributeSet
         }
 
         RegisterBoolPropertyFactory(AttributeEnum.CanApplyBlessedArtifactBias);
-        RegisterBoolPropertyFactory(AttributeEnum.CanApplyArtifactBiasSlaying);
+        RegisterBoolPropertyFactory(AttributeEnum.ArtifactBiasSlayingDisabled);
         RegisterBoolPropertyFactory(AttributeEnum.CanApplyBlowsBonus);
         RegisterBoolPropertyFactory(AttributeEnum.CanReflectBoltsAndArrows);
         RegisterBoolPropertyFactory(AttributeEnum.CanApplySlayingBonus);
@@ -472,15 +472,15 @@ internal class EffectiveAttributeSet
             SetBoolAttributeValue(AttributeEnum.CanApplyBlessedArtifactBias, value);
         }
     }
-    public bool CanApplyArtifactBiasSlaying
+    public bool ArtifactBiasSlayingDisabled
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.CanApplyArtifactBiasSlaying);
+            return GetBoolAttributeValue(AttributeEnum.ArtifactBiasSlayingDisabled);
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.CanApplyArtifactBiasSlaying, value);
+            SetBoolAttributeValue(AttributeEnum.ArtifactBiasSlayingDisabled, value);
         }
     }
     public bool CanApplyBlowsBonus

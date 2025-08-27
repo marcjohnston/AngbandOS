@@ -46,7 +46,7 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         AllNonMatchingItemFactoryNames = itemFilterGameConfiguration.AllNonMatchingItemFactoryNames;
 
         CanApplyBlessedArtifactBias = itemFilterGameConfiguration.CanApplyBlessedArtifactBias;
-        CanApplyArtifactBiasSlaying = itemFilterGameConfiguration.CanApplyArtifactBiasSlaying;
+        ArtifactBiasSlayingDisabled = itemFilterGameConfiguration.ArtifactBiasSlayingDisabled;
         Aggravate = itemFilterGameConfiguration.Aggravate;
         AntiTheft = itemFilterGameConfiguration.AntiTheft;
         ArtifactBias = itemFilterGameConfiguration.ArtifactBias;
@@ -165,7 +165,7 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
             AnyMatchingItemFactoryNames = AnyMatchingItemFactoryNames,
             AllNonMatchingItemFactoryNames = AllNonMatchingItemFactoryNames,
             CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias,
-            CanApplyArtifactBiasSlaying = CanApplyArtifactBiasSlaying,
+            ArtifactBiasSlayingDisabled = ArtifactBiasSlayingDisabled,
             Aggravate = Aggravate,
             AntiTheft = AntiTheft,
             ArtifactBias = ArtifactBias,
@@ -325,7 +325,7 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         itemMatchList.AddRange(AddContainsMatch<ItemFactory>(AnyMatchingItemFactories, AllNonMatchingItemFactories, new ItemFactoryGetItemProperty(Game)));
 
         itemMatchList.AddRange(AddBooleanMatch(CanApplyBlessedArtifactBias, new CanApplyBlessedArtifactBiasBooleanGetItemProperty(Game)));
-        itemMatchList.AddRange(AddBooleanMatch(CanApplyArtifactBiasSlaying, new CanApplyArtifactBiasSlayingBooleanGetItemProperty(Game)));
+        itemMatchList.AddRange(AddBooleanMatch(ArtifactBiasSlayingDisabled, new ArtifactBiasSlayingDisabledBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(Aggravate, new AggravateBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(AntiTheft, new AntiTheftBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(ArtifactBias, new ArtifactBiasBooleanGetItemProperty(Game)));
@@ -551,7 +551,7 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
     public ItemFactory[]? AllNonMatchingItemFactories { get; private set; }
 
     public bool? CanApplyBlessedArtifactBias { get; } = null;
-    public bool? CanApplyArtifactBiasSlaying { get; } = null;
+    public bool? ArtifactBiasSlayingDisabled { get; } = null;
     public bool? Aggravate { get; } = null;
 
     public bool? AntiTheft { get; } = null;

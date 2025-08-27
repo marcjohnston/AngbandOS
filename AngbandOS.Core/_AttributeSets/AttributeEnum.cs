@@ -35,7 +35,7 @@ internal enum AttributeEnum
     BrandFire,
     BrandPois,
     CanApplyBlessedArtifactBias,
-    CanApplyArtifactBiasSlaying,
+    ArtifactBiasSlayingDisabled,
     CanApplyBlowsBonus,
     CanReflectBoltsAndArrows,
     CanApplySlayingBonus,

@@ -41,7 +41,7 @@ public class ItemEnhancementGameConfiguration
     /// <summary>
     /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns true, for all items except bows; which return false.
     /// </summary>
-    public virtual bool CanApplyArtifactBiasSlaying { get; set; } = true;
+    public virtual bool ArtifactBiasSlayingDisabled { get; set; } = false;
 
     /// <summary>
     /// Returns true, if the item can apply a blows bonus.  Returns false, by default. Bows, return true.

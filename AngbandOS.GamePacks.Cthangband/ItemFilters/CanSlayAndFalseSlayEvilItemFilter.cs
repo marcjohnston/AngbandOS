@@ -11,5 +11,5 @@ public class CanSlayAndFalseSlayEvilItemFilter : ItemFilterGameConfiguration
 {
 
     public override bool? SlayEvil => false;
-    public override bool? CanApplyArtifactBiasSlaying => true;
+    public override bool? ArtifactBiasSlayingDisabled => false;
 }

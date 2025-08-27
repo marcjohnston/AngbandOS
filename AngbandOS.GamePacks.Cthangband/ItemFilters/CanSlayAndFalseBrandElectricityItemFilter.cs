@@ -11,5 +11,5 @@ public class CanSlayAndFalseBrandElectricityItemFilter : ItemFilterGameConfigura
 {
 
     public override bool? BrandElec => false;
-    public override bool? CanApplyArtifactBiasSlaying => true;
+    public override bool? ArtifactBiasSlayingDisabled => false;
 }
