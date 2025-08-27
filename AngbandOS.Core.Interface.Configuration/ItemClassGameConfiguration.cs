@@ -19,7 +19,7 @@ public class ItemClassGameConfiguration
     public virtual int NumberOfFlavorsToGenerate { get; set; } = 0;
 
     /// <summary>
-    /// Returns the repository to use for the issuance of the flavors or null, if the factory shouldn't be issued a flavor.  Null is returned
+    /// Returns the names of all of the flavors to be assigned to items of this item class;or null, if items should use the <see cref="EffectiveAttributeSet"/>.  Null is returned
     /// when an item has a predefined flavor.  Apple juice, water and slime-mold item factories use pre-defined flavors. 
     /// </summary>
     public virtual string[]? ItemFlavorBindingKeys { get; set; } = null;
