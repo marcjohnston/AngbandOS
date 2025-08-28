@@ -406,9 +406,16 @@ internal class EffectiveAttributeSet
     /// <param name="value"></param>
     public void AddIntAttributeValue(AttributeEnum attributeEnum, int value)
     {
+        // Compute the index of the attribute.
         int index = (int)attributeEnum;
+
+        // Retrieve the current writable value.
         IntAttributeValue? intAttributeValue = (IntAttributeValue?)_additiveAttributeValues[index];
+
+        // Apply a zero value, if there is no current writable value.
         int currentValue = intAttributeValue?.Value ?? 0;
+
+        // Add the value to the current writable value.
         _additiveAttributeValues[index] = new IntAttributeValue(_attributeFactories[index], currentValue + value);
     }
 
@@ -442,8 +449,11 @@ internal class EffectiveAttributeSet
             foreach (ReadOnlyAttributeSet readOnlyPropertySet in readOnlyPropertySetList)
             {
                 AttributeValue? attributeValue = readOnlyPropertySet.GetValue(index);
+
+                // Check to see if there is a modifier specified.
                 if (attributeValue is not null)
                 {
+                    // Merge the attribute value.
                     itemProperty = itemProperty.Merge(attributeValue);
                 }
             }
