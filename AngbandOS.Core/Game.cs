@@ -249,7 +249,7 @@ internal class Game
         }
     }
 
-    public readonly ExpressionParser ExpressionParser;
+    private readonly ExpressionParser ExpressionParser; // This is encapsulated via the Parse* methods.
     public readonly ParseLanguage ParseLanguage;
     public readonly IntegerToDecimalExpressionTypeConverter IntegerToDecimalExpressionTypeConverter;
     public readonly DecimalToIntegerExpressionTypeConverter DecimalToIntegerExpressionTypeConverter;
@@ -1340,7 +1340,7 @@ internal class Game
         return expression.Compute<IntegerExpression>(DecimalToIntegerExpressionTypeConverter);
     }
 
-//    private static string SuffixIf(string? value, string suffix) => String.IsNullOrEmpty(value) ? "" : $"{value}{suffix}";
+    //    private static string SuffixIf(string? value, string suffix) => String.IsNullOrEmpty(value) ? "" : $"{value}{suffix}";
     public static string DelimitIf(string? prefix, string delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
     private static string DelimitIf(string? prefix, char delimiter, char? suffix) => String.IsNullOrEmpty(prefix) || suffix is null ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
     private static string DelimitIf(string? prefix, char delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
@@ -17349,6 +17349,17 @@ internal class Game
             var decrement = Math.Max((max / DecayRate), 1);
             AddFavor(isMax, -decrement);
         }
+    }
+
+    /// <summary>
+    /// Parses an expression and returns a <see cref="Expression"/> expression.
+    /// </summary>
+    /// <param name="expressionText"></param>
+    /// <returns></returns>
+    public Expression ParseAnyExpression(string expressionText)
+    {
+        Expression expression = ExpressionParser.ParseExpression(expressionText);
+        return expression;
     }
 
     /// <summary>
