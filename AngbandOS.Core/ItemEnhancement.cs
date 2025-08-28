@@ -486,34 +486,34 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// <summary>
     /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
     /// </summary>
-    private bool CanApplyBonusArmorClassMiscPower { get; }
+    private bool? CanApplyBonusArmorClassMiscPower { get; }
 
     /// <summary>
     /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
     /// </summary>
-    private bool CanReflectBoltsAndArrows { get; }
+    private bool? CanReflectBoltsAndArrows { get; }
 
     /// <summary>
     /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns true, for all items except bows; which return false.
     /// </summary>
-    private bool ArtifactBiasSlayingDisabled { get; }
+    private bool? ArtifactBiasSlayingDisabled { get; }
 
     /// <summary>
     /// Returns true, if an item of this factory can have be blessed for priestly biased artifacts.  Returns false, for all items except swords and polearms; which return false.
     /// </summary>
-    private bool CanApplyBlessedArtifactBias { get; }
+    private bool? CanApplyBlessedArtifactBias { get; }
 
     /// <summary>
     /// Returns true, if the item can apply a blows bonus.  Returns false, by default. Bows, return true.
     /// </summary>
-    private bool CanApplyBlowsBonus { get; }
+    private bool? CanApplyBlowsBonus { get; }
 
     /// <summary>
     /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    private bool CanApplySlayingBonus { get; }
+    private bool? CanApplySlayingBonus { get; }
 
     private string? BonusStrengthRollExpression { get; }
     private string? BonusIntelligenceRollExpression { get; }
@@ -542,234 +542,234 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private string? ActivationName { get; }
 
     /// <inheritdoc />
-    private bool Aggravate { get; }
+    private bool? Aggravate { get; }
     
     /// <inheritdoc />
-    private bool AntiTheft { get; }
+    private bool? AntiTheft { get; }
 
     private string? ArtifactBiasWeightedRandomBindingKey { get; }
     
     /// <inheritdoc />
-    private bool Blessed { get; }
+    private bool? Blessed { get; }
 
     /// <inheritdoc/>
-    private bool Blows { get; }
+    private bool? Blows { get; }
     
     /// <inheritdoc />
-    private bool BrandAcid { get; }
+    private bool? BrandAcid { get; }
     
     /// <inheritdoc />
-    private bool BrandCold { get; }
+    private bool? BrandCold { get; }
     
     /// <inheritdoc />
-    private bool BrandElec { get; }
+    private bool? BrandElec { get; }
     
     /// <inheritdoc />
-    private bool BrandFire { get; }
+    private bool? BrandFire { get; }
     
     /// <inheritdoc />
-    private bool BrandPois { get; }
+    private bool? BrandPois { get; }
         
     /// <inheritdoc />
-    private bool Chaotic { get; }
+    private bool? Chaotic { get; }
 
     public ColorEnum? Color { get; }
    
     /// <inheritdoc />
-    private bool IsCursed { get; }
+    private bool? IsCursed { get; }
 
     private int DamageDice { get; }
 
     private int DiceSides { get; }
 
     /// <inheritdoc />
-    private bool DrainExp { get; }
+    private bool? DrainExp { get; }
     
     /// <inheritdoc />
-    private bool DreadCurse { get; }
+    private bool? DreadCurse { get; }
     
     /// <inheritdoc />
-    private bool EasyKnow { get; }
+    private bool? EasyKnow { get; }
     
     /// <inheritdoc />
-    private bool Feather { get; }
+    private bool? Feather { get; }
     
     /// <inheritdoc />
-    private bool FreeAct { get; }
+    private bool? FreeAct { get; }
     
     /// <inheritdoc />
-    private bool HeavyCurse { get; }
+    private bool? HeavyCurse { get; }
     
     /// <inheritdoc />
-    private bool HideType { get; }
+    private bool? HideType { get; }
     
     /// <inheritdoc />
-    private bool HoldLife { get; }
+    private bool? HoldLife { get; }
     
     /// <inheritdoc />
-    private bool IgnoreAcid { get; }
+    private bool? IgnoreAcid { get; }
     
     /// <inheritdoc />
-    private bool IgnoreCold { get; }
+    private bool? IgnoreCold { get; }
     
     /// <inheritdoc />
-    private bool IgnoreElec { get; }
+    private bool? IgnoreElec { get; }
     
     /// <inheritdoc />
-    private bool IgnoreFire { get; }
+    private bool? IgnoreFire { get; }
     
     /// <inheritdoc />
-    private bool ImAcid { get; }
+    private bool? ImAcid { get; }
     
     /// <inheritdoc />
-    private bool ImCold { get; }
+    private bool? ImCold { get; }
     
     /// <inheritdoc />
-    private bool ImElec { get; }
+    private bool? ImElec { get; }
     
     /// <inheritdoc />
-    private bool ImFire { get; }
+    private bool? ImFire { get; }
     
     /// <inheritdoc />
-    private bool Impact { get; }
+    private bool? Impact { get; }
         
     /// <inheritdoc />
-    private bool NoMagic { get; }
+    private bool? NoMagic { get; }
     
     /// <inheritdoc />
-    private bool NoTele { get; }
+    private bool? NoTele { get; }
     
     /// <inheritdoc />
-    private bool PermaCurse { get; }
+    private bool? PermaCurse { get; }
     
     /// <inheritdoc />
     private int Radius { get; }
     
     /// <inheritdoc />
-    private bool Reflect { get; }
+    private bool? Reflect { get; }
     
     /// <inheritdoc />
-    private bool Regen { get; }
+    private bool? Regen { get; }
     
     /// <inheritdoc />
-    private bool ResAcid { get; }
+    private bool? ResAcid { get; }
     
     /// <inheritdoc />
-    private bool ResBlind { get; }
+    private bool? ResBlind { get; }
     
     /// <inheritdoc />
-    private bool ResChaos { get; }
+    private bool? ResChaos { get; }
     
     /// <inheritdoc />
-    private bool ResCold { get; }
+    private bool? ResCold { get; }
     
     /// <inheritdoc />
-    private bool ResConf { get; }
+    private bool? ResConf { get; }
     
     /// <inheritdoc />
-    private bool ResDark { get; }
+    private bool? ResDark { get; }
     
     /// <inheritdoc />
-    private bool ResDisen { get; }
+    private bool? ResDisen { get; }
     
     /// <inheritdoc />
-    private bool ResElec { get; }
+    private bool? ResElec { get; }
     
     /// <inheritdoc />
-    private bool ResFear { get; }
+    private bool? ResFear { get; }
     
     /// <inheritdoc />
-    private bool ResFire { get; }
+    private bool? ResFire { get; }
     
     /// <inheritdoc />
-    private bool ResLight { get; }
+    private bool? ResLight { get; }
     
     /// <inheritdoc />
-    private bool ResNether { get; }
+    private bool? ResNether { get; }
     
     /// <inheritdoc />
-    private bool ResNexus { get; }
+    private bool? ResNexus { get; }
     
     /// <inheritdoc />
-    private bool ResPois { get; }
+    private bool? ResPois { get; }
     
     /// <inheritdoc />
-    private bool ResShards { get; }
+    private bool? ResShards { get; }
     
     /// <inheritdoc />
-    private bool ResSound { get; }
+    private bool? ResSound { get; }
         
     /// <inheritdoc />
-    private bool SeeInvis { get; }
+    private bool? SeeInvis { get; }
     
     /// <inheritdoc />
-    private bool ShElec { get; }
+    private bool? ShElec { get; }
     
     /// <inheritdoc />
-    private bool ShFire { get; }
+    private bool? ShFire { get; }
     
     /// <inheritdoc />
-    private bool ShowMods { get; }
+    private bool? ShowMods { get; }
     
     /// <inheritdoc />
-    private bool SlayAnimal { get; }
+    private bool? SlayAnimal { get; }
     
     /// <inheritdoc />
-    private bool SlayDemon { get; }
+    private bool? SlayDemon { get; }
     
     /// <inheritdoc />
     private int SlayDragon { get; }
     
     /// <inheritdoc />
-    private bool SlayEvil { get; }
+    private bool? SlayEvil { get; }
     
     /// <inheritdoc />
-    private bool SlayGiant { get; }
+    private bool? SlayGiant { get; }
     
     /// <inheritdoc />
-    private bool SlayOrc { get; }
+    private bool? SlayOrc { get; }
     
     /// <inheritdoc />
-    private bool SlayTroll { get; }
+    private bool? SlayTroll { get; }
     
     /// <inheritdoc />
-    private bool SlayUndead { get; }
+    private bool? SlayUndead { get; }
     
     /// <inheritdoc />
-    private bool SlowDigest { get; }
+    private bool? SlowDigest { get; }
         
     /// <inheritdoc />
-    private bool SustCha { get; }
+    private bool? SustCha { get; }
     
     /// <inheritdoc />
-    private bool SustCon { get; }
+    private bool? SustCon { get; }
     
     /// <inheritdoc />
-    private bool SustDex { get; }
+    private bool? SustDex { get; }
     
     /// <inheritdoc />
-    private bool SustInt { get; }
+    private bool? SustInt { get; }
     
     /// <inheritdoc />
-    private bool SustStr { get; }
+    private bool? SustStr { get; }
     
     /// <inheritdoc />
-    private bool SustWis { get; }
+    private bool? SustWis { get; }
     
     /// <inheritdoc />
-    private bool Telepathy { get; }
+    private bool? Telepathy { get; }
     
     /// <inheritdoc />
-    private bool Teleport { get; }
+    private bool? Teleport { get; }
 
     /// <inheritdoc />
     private int TreasureRating { get; }
 
     /// <inheritdoc />
-    private bool Valueless { get; }
+    private bool? Valueless { get; }
 
     /// <inheritdoc />
-    private bool Vampiric { get; }
+    private bool? Vampiric { get; }
     
     /// <inheritdoc />
     private int Vorpal1InChance { get; }
@@ -779,12 +779,12 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private int Weight { get; } = 0;
     
     /// <inheritdoc />
-    private bool Wraith { get; }
+    private bool? Wraith { get; }
     
     /// <inheritdoc />
-    private bool XtraMight { get; }
+    private bool? XtraMight { get; }
     
     /// <inheritdoc />
-    private bool XtraShots { get; }
+    private bool? XtraShots { get; }
     #endregion
 }
