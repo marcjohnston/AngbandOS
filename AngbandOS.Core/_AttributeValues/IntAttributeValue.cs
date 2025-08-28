@@ -16,11 +16,11 @@ internal class IntAttributeValue : AttributeValue
     }
     public override AttributeValue Merge(AttributeValue itemProperty)
     {
-        if (itemProperty is IntAttributeValue intPropertyValue)
+        if (itemProperty is not IntAttributeValue intPropertyValue)
         {
-            return new IntAttributeValue(Factory, Value + intPropertyValue.Value);
+            throw new Exception("Merge mismatch.");
         }
-        throw new Exception("Merge mismatch.");
+        return new IntAttributeValue(Factory, Value + intPropertyValue.Value);
     }
 
     public override bool IsEqual(AttributeValue itemProperty)

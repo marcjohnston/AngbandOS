@@ -13,14 +13,11 @@ internal class ReferenceAttributeValue<T> : AttributeValue where T : class
 
     public override bool IsEqual(AttributeValue attributeValue)
     {
-        if (attributeValue is ReferenceAttributeValue<T> roNullableReferenceItemProperty)
-        {
-            return Value == roNullableReferenceItemProperty.Value;
-        }
-        else
+        if (attributeValue is not ReferenceAttributeValue<T> roNullableReferenceItemProperty)
         {
             throw new Exception($"Item property equality from {attributeValue.GetType().Name} not supported with {nameof(ReferenceAttributeValue<T>)}");
         }
+        return Value == roNullableReferenceItemProperty.Value;
     }
 
     public override AttributeValue Merge(AttributeValue attributeValue)

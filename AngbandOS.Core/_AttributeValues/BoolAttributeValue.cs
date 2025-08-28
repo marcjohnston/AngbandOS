@@ -17,11 +17,11 @@ internal class BoolAttributeValue : AttributeValue
 
     public override AttributeValue Merge(AttributeValue itemProperty)
     {
-        if (itemProperty is BoolAttributeValue boolPropertyValue)
+        if (itemProperty is not BoolAttributeValue boolPropertyValue)
         {
-            return new BoolAttributeValue(Factory, Value || boolPropertyValue.Value);
+            throw new Exception("Merge mismatch.");
         }
-        throw new Exception("Merge mismatch.");
+        return new BoolAttributeValue(Factory, Value || boolPropertyValue.Value);
     }
 
     public override bool IsEqual(AttributeValue itemProperty)

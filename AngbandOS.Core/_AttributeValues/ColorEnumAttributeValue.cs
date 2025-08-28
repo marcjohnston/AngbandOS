@@ -16,11 +16,11 @@ internal class ColorEnumAttributeValue : AttributeValue
     }
     public override AttributeValue Merge(AttributeValue itemProperty)
     {
-        if (itemProperty is ColorEnumAttributeValue colorEnumPropertyValue)
+        if (itemProperty is not ColorEnumAttributeValue colorEnumPropertyValue)
         {
-            return colorEnumPropertyValue;
+            throw new Exception("Merge mismatch.");
         }
-        throw new Exception("Merge mismatch.");
+        return colorEnumPropertyValue;
     }
 
     public override bool IsEqual(AttributeValue itemProperty)
