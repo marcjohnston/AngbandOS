@@ -26,8 +26,10 @@ internal class BoolAttributeValue : AttributeValue
 
     public override bool IsEqual(AttributeValue itemProperty)
     {
-        if (itemProperty is BoolAttributeValue boolPropertyValue)
+        if (itemProperty is not BoolAttributeValue boolPropertyValue)
         {
+            throw new Exception("IsEqual mismatch.");
+       }
             return Value == boolPropertyValue.Value;
         }
         throw new Exception("IsEqual mismatch.");

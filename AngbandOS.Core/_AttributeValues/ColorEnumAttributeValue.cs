@@ -25,11 +25,11 @@ internal class ColorEnumAttributeValue : AttributeValue
 
     public override bool IsEqual(AttributeValue itemProperty)
     {
-        if (itemProperty is ColorEnumAttributeValue colorEnumPropertyValue)
+        if (itemProperty is not ColorEnumAttributeValue colorEnumPropertyValue)
         {
-            return Value == colorEnumPropertyValue.Value;
+            throw new Exception("IsEqual mismatch.");
         }
-        throw new Exception("IsEqual mismatch.");
+        return Value == colorEnumPropertyValue.Value;
     }
     public override string ToString()
     {

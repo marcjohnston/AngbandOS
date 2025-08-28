@@ -25,11 +25,11 @@ internal class IntAttributeValue : AttributeValue
 
     public override bool IsEqual(AttributeValue itemProperty)
     {
-        if (itemProperty is IntAttributeValue intPropertyValue)
+        if (itemProperty is not IntAttributeValue intPropertyValue)
         {
-            return Value == intPropertyValue.Value;
+            throw new Exception("IsEqual mismatch.");
         }
-        throw new Exception("IsEqual mismatch.");
+        return Value == intPropertyValue.Value;
     }
     public override string ToString()
     {
