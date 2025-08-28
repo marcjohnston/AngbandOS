@@ -9,8 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BootsOfStealthItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 500;
+    public override int? Value => 500;
     public override string? FriendlyName => "of Stealth";
     public override string? BonusStealthRollExpression => "1d3";
-    public override int TreasureRating => 16;
+    public override int? TreasureRating => 16;
 }

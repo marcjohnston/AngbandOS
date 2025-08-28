@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistPoisonAndRogueBiasItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResPois => true;
+    public override bool? ResPois => true;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Rogue1In1ArtifactBiasWeightedRandom);
-    public override int Value => 2500;
+    public override int? Value => 2500;
 }

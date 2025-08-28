@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SheathOfElectricityItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ShElec => true;
-    public override int Value => 5000;
+    public override bool? ShElec => true;
+    public override int? Value => 5000;
 }

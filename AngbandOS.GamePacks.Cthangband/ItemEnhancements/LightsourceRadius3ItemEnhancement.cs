@@ -9,5 +9,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LightsourceRadius3ItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Radius => 3;
+    public override int? Radius => 3;
 }

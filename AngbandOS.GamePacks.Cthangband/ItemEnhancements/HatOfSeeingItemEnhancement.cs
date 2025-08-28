@@ -9,10 +9,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfSeeingItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 1000;
+    public override int? Value => 1000;
     public override string? FriendlyName => "of Seeing";
     public override string? BonusSearchRollExpression => "1d5";
-    public override int TreasureRating => 8;
-    public override bool ResBlind => true;
-    public override bool SeeInvis => true;
+    public override int? TreasureRating => 8;
+    public override bool? ResBlind => true;
+    public override bool? SeeInvis => true;
 }

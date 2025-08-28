@@ -9,8 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfStupidityItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Valueless => true;
+    public override bool? Valueless => true;
     public override string? FriendlyName => "of Stupidity";
     public override string? BonusIntelligenceRollExpression => "1d5";
-    public override int Value => 3600;
+    public override int? Value => 3600;
 }

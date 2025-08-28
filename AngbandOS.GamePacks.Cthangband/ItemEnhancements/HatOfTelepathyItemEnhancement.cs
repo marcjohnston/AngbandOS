@@ -9,8 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfTelepathyItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 50000;
+    public override int? Value => 50000;
     public override string? FriendlyName => "of Telepathy";
-    public override int TreasureRating => 20;
-        public override bool Telepathy => true;
+    public override int? TreasureRating => 20;
+        public override bool? Telepathy => true;
 }

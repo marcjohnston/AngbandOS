@@ -9,8 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfRegenerationItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 1500;
+    public override int? Value => 1500;
     public override string? FriendlyName => "of Regeneration";
-    public override int TreasureRating => 10;
-    public override bool Regen => true;
+    public override int? TreasureRating => 10;
+    public override bool? Regen => true;
     }

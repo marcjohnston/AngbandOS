@@ -8,5 +8,5 @@ public class MiriNigriRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusWisdomRollExpression => "-1";
     public override string BonusIntelligenceRollExpression => "-2";
     public override string BonusDexterityRollExpression => "-1";
-    public override int Value => -1800;
+    public override int? Value => -1800;
 }

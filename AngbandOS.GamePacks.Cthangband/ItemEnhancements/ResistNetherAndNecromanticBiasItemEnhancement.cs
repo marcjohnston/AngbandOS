@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistNetherAndNecromanticBiasItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResNether => true;
+    public override bool? ResNether => true;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Necromantic1In1ArtifactBiasWeightedRandom);
-    public override int Value => 2000;
+    public override int? Value => 2000;
 }

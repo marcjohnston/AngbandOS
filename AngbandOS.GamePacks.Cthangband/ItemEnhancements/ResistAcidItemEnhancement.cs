@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistAcidItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResAcid => true;
-    public override int Value => 1250;
+    public override bool? ResAcid => true;
+    public override int? Value => 1250;
 }

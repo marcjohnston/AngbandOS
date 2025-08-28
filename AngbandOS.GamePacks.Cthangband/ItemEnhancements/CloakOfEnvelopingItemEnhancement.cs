@@ -9,9 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CloakOfEnvelopingItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Valueless => true;
+    public override bool? Valueless => true;
     public override string? FriendlyName => "of Enveloping";
     public override string? BonusDamageRollExpression => "1d10";
     public override string? BonusHitsRollExpression => "1d10";
-    public override bool ShowMods => true;
+    public override bool? ShowMods => true;
 }

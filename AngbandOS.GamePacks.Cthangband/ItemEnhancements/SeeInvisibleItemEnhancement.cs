@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SeeInvisibleItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool SeeInvis => true;
-    public override int Value => 2000;
+    public override bool? SeeInvis => true;
+    public override int? Value => 2000;
 }

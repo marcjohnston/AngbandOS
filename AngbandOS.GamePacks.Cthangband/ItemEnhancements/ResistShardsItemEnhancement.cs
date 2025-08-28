@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistShardsItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResShards => true;
-    public override int Value => 2000;
+    public override bool? ResShards => true;
+    public override int? Value => 2000;
 }

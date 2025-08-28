@@ -9,9 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ShieldOfResistAcidItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 1000;
+    public override int? Value => 1000;
     public override string? FriendlyName => "of Resist Acid";
-    public override bool IgnoreAcid => true;
-    public override int TreasureRating => 16;
-    public override bool ResAcid => true;
+    public override bool? IgnoreAcid => true;
+    public override int? TreasureRating => 16;
+    public override bool? ResAcid => true;
 }

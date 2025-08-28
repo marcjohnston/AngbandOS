@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BrandAcidItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool BrandAcid => true;
-    public override int Value => 7500;
+    public override bool? BrandAcid => true;
+    public override int? Value => 7500;
 }

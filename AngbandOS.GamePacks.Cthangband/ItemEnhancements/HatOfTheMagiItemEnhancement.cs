@@ -10,17 +10,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class HatOfTheMagiItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(AbilityItemEnhancementWeightedRandom);
-    public override int Value => 7500;
+    public override int? Value => 7500;
     public override string? FriendlyName => "of the Magi";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
+    public override bool? IgnoreAcid => true;
+    public override bool? IgnoreCold => true;
+    public override bool? IgnoreElec => true;
+    public override bool? IgnoreFire => true;
     public override string? BonusIntelligenceRollExpression => "1d3";
-    public override int TreasureRating => 15;
-    public override bool ResAcid => true;
-    public override bool ResCold => true;
-    public override bool ResElec => true;
-    public override bool ResFire => true;
-    public override bool SustInt => true;
+    public override int? TreasureRating => 15;
+    public override bool? ResAcid => true;
+    public override bool? ResCold => true;
+    public override bool? ResElec => true;
+    public override bool? ResFire => true;
+    public override bool? SustInt => true;
 }

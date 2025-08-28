@@ -10,9 +10,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaponBlessedItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(AbilityItemEnhancementWeightedRandom);
-    public override bool Blessed => true;
-    public override int Value => 5000;
+    public override bool? Blessed => true;
+    public override int? Value => 5000;
     public override string? FriendlyName => "(Blessed)";
     public override string? BonusWisdomRollExpression => "1d3";
-    public override int TreasureRating => 20;
+    public override int? TreasureRating => 20;
 }

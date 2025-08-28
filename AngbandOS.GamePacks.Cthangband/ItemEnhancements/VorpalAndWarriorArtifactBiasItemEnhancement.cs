@@ -9,8 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class VorpalAndWarriorArtifactBiasItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Vorpal1InChance => 2;
-    public override int VorpalExtraAttacks1InChance => 2;
+    public override int? Vorpal1InChance => 2;
+    public override int? VorpalExtraAttacks1InChance => 2;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Warrior1In9ArtifactBiasWeightedRandom);
     public override string[]? ApplicableItemFactoryBindingKeys => new string[]
     {
@@ -33,5 +33,5 @@ public class VorpalAndWarriorArtifactBiasItemEnhancement : ItemEnhancementGameCo
         nameof(TulwarWeaponItemFactory),
         nameof(TwoHandedSwordWeaponItemFactory)
     };
-    public override int Value => 5000;
+    public override int? Value => 5000;
 }

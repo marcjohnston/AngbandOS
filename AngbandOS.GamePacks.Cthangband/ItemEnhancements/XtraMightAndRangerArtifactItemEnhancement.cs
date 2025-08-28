@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class XtraMightAndRangerArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool XtraMight => true;
+    public override bool? XtraMight => true;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Ranger1In9ArtifactBiasWeightedRandom);
-    public override int Value => 2250;
+    public override int? Value => 2250;
 }

@@ -3,7 +3,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MassCarnageScrollItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool EasyKnow => true;
-    public override int Weight => 5;
-    public override int Value => 1000;
+    public override bool? EasyKnow => true;
+    public override int? Weight => 5;
+    public override int? Value => 1000;
 }

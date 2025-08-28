@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SoundResistanceRingItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResSound => true;
-    public override int Weight => 2;
-    public override int Value => 3000;
+    public override bool? ResSound => true;
+    public override int? Weight => 2;
+    public override int? Value => 3000;
 }

@@ -9,13 +9,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfMightItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 2000;
-    public override bool FreeAct => true;
+    public override int? Value => 2000;
+    public override bool? FreeAct => true;
     public override string? FriendlyName => "of Might";
     public override string? BonusStrengthRollExpression => "1d3";
     public override string? BonusWisdomRollExpression => "1d3";
-    public override int TreasureRating => 19;
-    public override bool SustCon => true;
-    public override bool SustDex => true;
-    public override bool SustStr => true;
+    public override int? TreasureRating => 19;
+    public override bool? SustCon => true;
+    public override bool? SustDex => true;
+    public override bool? SustStr => true;
 }

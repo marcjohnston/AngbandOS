@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SustainDexterityItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool SustDex => true;
-    public override int Value => 850;
+    public override bool? SustDex => true;
+    public override int? Value => 850;
 }

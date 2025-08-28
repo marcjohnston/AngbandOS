@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SheathOfFireItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ShFire => true;
-    public override int Value => 5000;
+    public override bool? ShFire => true;
+    public override int? Value => 5000;
 }

@@ -9,9 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfLightItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 500;
+    public override int? Value => 500;
     public override string? FriendlyName => "of Light";
-    public override int Radius => 3;
-    public override int TreasureRating => 6;
-    public override bool ResLight => true;
+    public override int? Radius => 3;
+    public override int? TreasureRating => 6;
+    public override bool? ResLight => true;
     }

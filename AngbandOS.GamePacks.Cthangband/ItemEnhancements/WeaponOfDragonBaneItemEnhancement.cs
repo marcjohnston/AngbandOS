@@ -9,9 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfDragonBaneItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 6000;
+    public override int? Value => 6000;
     public override string? FriendlyName => "of Dragon Bane";
-    public override int SlayDragon => 5;
+    public override int? SlayDragon => 5;
     public override string? BonusConstitutionRollExpression => "1d1";
-    public override int TreasureRating => 24;
+    public override int? TreasureRating => 24;
 }

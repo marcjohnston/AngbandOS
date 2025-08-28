@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistFireItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResFire => true;
-    public override int Value => 1250;
+    public override bool? ResFire => true;
+    public override int? Value => 1250;
 }

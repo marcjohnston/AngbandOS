@@ -9,8 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ColdImmunityItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ImCold => true;
+    public override bool? ImCold => true;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Cold1In1ArtifactBiasWeightedRandom);
 
-    public override int Value => 10000;
+    public override int? Value => 10000;
 }

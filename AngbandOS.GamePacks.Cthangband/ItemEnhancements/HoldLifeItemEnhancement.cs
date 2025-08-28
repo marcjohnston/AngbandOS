@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HoldLifeItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool HoldLife => true;
-    public override int Value => 8500;
+    public override bool? HoldLife => true;
+    public override int? Value => 8500;
 }

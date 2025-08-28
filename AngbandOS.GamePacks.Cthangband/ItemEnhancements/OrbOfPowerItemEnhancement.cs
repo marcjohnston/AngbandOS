@@ -9,10 +9,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class OrbOfPowerItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 10000;
+    public override int? Value => 10000;
     public override string? FriendlyName => "of Power";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
+    public override bool? IgnoreAcid => true;
+    public override bool? IgnoreCold => true;
+    public override bool? IgnoreElec => true;
+    public override bool? IgnoreFire => true;
     }

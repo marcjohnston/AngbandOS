@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistDarknessItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResDark => true;
-    public override int Value => 1750;
+    public override bool? ResDark => true;
+    public override int? Value => 1750;
 }

@@ -10,5 +10,5 @@ public class HighMageCharacterClassItemEnhancement : ItemEnhancementGameConfigur
     public override string BonusWisdomRollExpression => "0";
     public override string BonusIntelligenceRollExpression => "4";
     public override string BonusDexterityRollExpression => "0";
-    public override int Value => -3150;
+    public override int? Value => -3150;
 }

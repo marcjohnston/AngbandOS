@@ -9,9 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ArmorOfResistFireItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 800;
+    public override int? Value => 800;
     public override string? FriendlyName => "of Resist Fire";
-    public override bool IgnoreFire => true;
-    public override int TreasureRating => 14;
-    public override bool ResFire => true;
+    public override bool? IgnoreFire => true;
+    public override int? TreasureRating => 14;
+    public override bool? ResFire => true;
     }

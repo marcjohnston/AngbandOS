@@ -9,10 +9,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfVitriolItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool BrandAcid => true;
-    public override int Value => 8000;
+    public override bool? BrandAcid => true;
+    public override int? Value => 8000;
     public override string? FriendlyName => "of Vitriol";
-    public override bool IgnoreAcid => true;
-    public override int TreasureRating => 15;
-    public override bool ResAcid => true;
+    public override bool? IgnoreAcid => true;
+    public override int? TreasureRating => 15;
+    public override bool? ResAcid => true;
     }

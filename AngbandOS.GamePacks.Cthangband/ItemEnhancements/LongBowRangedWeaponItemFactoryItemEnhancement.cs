@@ -3,12 +3,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LongBowRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ShowMods => true;
-    public override bool ArtifactBiasSlayingDisabled => true;
-    public override bool CanApplyBlowsBonus => true;
-    public override bool CanApplySlayingBonus => true;
-    public override bool CanApplyBonusArmorClassMiscPower => true;
-    public override int Weight => 40;
-    public override int Value => 120;
+    public override bool? ShowMods => true;
+    public override bool? ArtifactBiasSlayingDisabled => true;
+    public override bool? CanApplyBlowsBonus => true;
+    public override bool? CanApplySlayingBonus => true;
+    public override bool? CanApplyBonusArmorClassMiscPower => true;
+    public override int? Weight => 40;
+    public override int? Value => 120;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

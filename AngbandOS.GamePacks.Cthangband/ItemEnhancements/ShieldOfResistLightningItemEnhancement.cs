@@ -9,9 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ShieldOfResistLightningItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 400;
+    public override int? Value => 400;
     public override string? FriendlyName => "of Resist Lightning";
-    public override bool IgnoreElec => true;
-    public override int TreasureRating => 10;
-    public override bool ResElec => true;
+    public override bool? IgnoreElec => true;
+    public override int? TreasureRating => 10;
+    public override bool? ResElec => true;
 }

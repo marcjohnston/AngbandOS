@@ -10,23 +10,23 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaponDefenderItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(SustainItemEnhancementWeightedRandom);
-    public override int Value => 15000;
-    public override bool Feather => true;
-    public override bool FreeAct => true;
+    public override int? Value => 15000;
+    public override bool? Feather => true;
+    public override bool? FreeAct => true;
     public override string? FriendlyName => "(Defender)";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
+    public override bool? IgnoreAcid => true;
+    public override bool? IgnoreCold => true;
+    public override bool? IgnoreElec => true;
+    public override bool? IgnoreFire => true;
     public override string? BonusStealthRollExpression => "1d4";
     public override string? BonusArmorClassRollExpression => "1d8";
     public override string? BonusDamageRollExpression => "1d4";
     public override string? BonusHitsRollExpression => "1d4";
-    public override int TreasureRating => 25;
-    public override bool Regen => true;
-    public override bool ResAcid => true;
-    public override bool ResCold => true;
-    public override bool ResElec => true;
-    public override bool ResFire => true;
-    public override bool SeeInvis => true;
+    public override int? TreasureRating => 25;
+    public override bool? Regen => true;
+    public override bool? ResAcid => true;
+    public override bool? ResCold => true;
+    public override bool? ResElec => true;
+    public override bool? ResFire => true;
+    public override bool? SeeInvis => true;
 }

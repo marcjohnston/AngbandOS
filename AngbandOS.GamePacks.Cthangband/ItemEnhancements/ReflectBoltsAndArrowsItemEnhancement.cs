@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ReflectBoltsAndArrowsItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Reflect => true;
-    public override int Value => 10000;
+    public override bool? Reflect => true;
+    public override int? Value => 10000;
 }

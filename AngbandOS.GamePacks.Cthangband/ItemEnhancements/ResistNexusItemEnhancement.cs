@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistNexusItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResNexus => true;
-    public override int Value => 2000;
+    public override bool? ResNexus => true;
+    public override int? Value => 2000;
 }

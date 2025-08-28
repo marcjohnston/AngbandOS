@@ -9,12 +9,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GlovesOfPowerItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 2500;
+    public override int? Value => 2500;
     public override string? FriendlyName => "of Power";
-    public override bool HideType => true;
+    public override bool? HideType => true;
     public override string? BonusStrengthRollExpression => "1d5";
     public override string? BonusDamageRollExpression => "1d5";
     public override string? BonusHitsRollExpression => "1d5";
-    public override int TreasureRating => 22;
-    public override bool ShowMods => true;
+    public override int? TreasureRating => 22;
+    public override bool? ShowMods => true;
 }

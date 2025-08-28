@@ -9,8 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class AmmoOfHurtAnimalItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 25;
+    public override int? Value => 25;
     public override string? FriendlyName => "of Hurt Animal";
-    public override int TreasureRating => 10;
-    public override bool SlayAnimal => true;
+    public override int? TreasureRating => 10;
+    public override bool? SlayAnimal => true;
     }

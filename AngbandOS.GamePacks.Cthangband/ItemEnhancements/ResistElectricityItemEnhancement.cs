@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistElectricityItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResElec => true;
-    public override int Value => 1250;
+    public override bool? ResElec => true;
+    public override int? Value => 1250;
 }

@@ -9,12 +9,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CloakOfProtectionItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 500;
+    public override int? Value => 500;
     public override string? FriendlyName => "of Protection";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
+    public override bool? IgnoreAcid => true;
+    public override bool? IgnoreCold => true;
+    public override bool? IgnoreElec => true;
+    public override bool? IgnoreFire => true;
     public override string? BonusArmorClassRollExpression => "1d10";
-    public override int TreasureRating => 10;
+    public override int? TreasureRating => 10;
 }

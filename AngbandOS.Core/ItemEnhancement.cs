@@ -476,7 +476,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// <summary>
     /// Returns the value of the enhancement.  Returns 0, by default.
     /// </summary>
-    private int Value { get; }
+    private int? Value { get; }
 
     /// <summary>
     /// Returns the name of the rare item characteristics to append to the description of the original item, or null, to not modify the name.  Returns null, by default.
@@ -578,9 +578,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// <inheritdoc />
     private bool? IsCursed { get; }
 
-    private int DamageDice { get; }
+    private int? DamageDice { get; }
 
-    private int DiceSides { get; }
+    private int? DiceSides { get; }
 
     /// <inheritdoc />
     private bool? DrainExp { get; }
@@ -643,7 +643,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool? PermaCurse { get; }
     
     /// <inheritdoc />
-    private int Radius { get; }
+    private int? Radius { get; }
     
     /// <inheritdoc />
     private bool? Reflect { get; }
@@ -718,7 +718,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool? SlayDemon { get; }
     
     /// <inheritdoc />
-    private int SlayDragon { get; }
+    private int? SlayDragon { get; }
     
     /// <inheritdoc />
     private bool? SlayEvil { get; }
@@ -763,7 +763,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool? Teleport { get; }
 
     /// <inheritdoc />
-    private int TreasureRating { get; }
+    private int? TreasureRating { get; }
 
     /// <inheritdoc />
     private bool? Valueless { get; }
@@ -772,11 +772,11 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool? Vampiric { get; }
     
     /// <inheritdoc />
-    private int Vorpal1InChance { get; }
+    private int? Vorpal1InChance { get; }
 
-    private int VorpalExtraAttacks1InChance { get; }
+    private int? VorpalExtraAttacks1InChance { get; }
 
-    private int Weight { get; } = 0;
+    private int? Weight { get; } = 0;
     
     /// <inheritdoc />
     private bool? Wraith { get; }

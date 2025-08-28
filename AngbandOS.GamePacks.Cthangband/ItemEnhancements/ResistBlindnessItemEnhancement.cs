@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistBlindnessItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResBlind => true;
-    public override int Value => 2000;
+    public override bool? ResBlind => true;
+    public override int? Value => 2000;
 }

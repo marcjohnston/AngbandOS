@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BrandColdAndColdArtifactBiasItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool BrandCold => true;
+    public override bool? BrandCold => true;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Cold1In1ArtifactBiasWeightedRandom);
-    public override int Value => 5000;
+    public override int? Value => 5000;
 }

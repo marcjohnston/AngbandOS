@@ -10,17 +10,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaponElderSignInscribedItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(SustainItemEnhancementWeightedRandom);
-    public override bool Blessed => true;
-    public override int Value => 20000;
+    public override bool? Blessed => true;
+    public override int? Value => 20000;
     public override string? FriendlyName => "(Elder Sign Inscribed)";
     public override string? BonusWisdomRollExpression => "1d4";
     public override string? BonusArmorClassRollExpression => "1d4";
     public override string? BonusDamageRollExpression => "1d6";
     public override string? BonusHitsRollExpression => "1d6";
-    public override int TreasureRating => 30;
-    public override bool ResFear => true;
-    public override bool SeeInvis => true;
-    public override bool SlayDemon => true;
-    public override bool SlayEvil => true;
-    public override bool SlayUndead => true;
+    public override int? TreasureRating => 30;
+    public override bool? ResFear => true;
+    public override bool? SeeInvis => true;
+    public override bool? SlayDemon => true;
+    public override bool? SlayEvil => true;
+    public override bool? SlayUndead => true;
 }

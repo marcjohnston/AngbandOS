@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BrandFireItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool BrandFire => true;
-    public override int Value => 5000;
+    public override bool? BrandFire => true;
+    public override int? Value => 5000;
 }

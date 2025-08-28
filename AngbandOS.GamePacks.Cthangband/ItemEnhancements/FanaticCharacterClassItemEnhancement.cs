@@ -10,5 +10,5 @@ public class FanaticCharacterClassItemEnhancement : ItemEnhancementGameConfigura
     public override string BonusWisdomRollExpression => "0";
     public override string BonusIntelligenceRollExpression => "1";
     public override string BonusDexterityRollExpression => "1";
-    public override int Value => 6300;
+    public override int? Value => 6300;
 }

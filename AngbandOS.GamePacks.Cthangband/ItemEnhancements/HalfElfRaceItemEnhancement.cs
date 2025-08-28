@@ -8,5 +8,5 @@ public class HalfElfRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusWisdomRollExpression => "1";
     public override string BonusIntelligenceRollExpression => "1";
     public override string BonusDexterityRollExpression => "1";
-    public override int Value => 1650;
+    public override int? Value => 1650;
 }

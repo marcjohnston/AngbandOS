@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SlayUndeadItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool SlayUndead => true;
-    public override int Value => 3500;
+    public override bool? SlayUndead => true;
+    public override int? Value => 3500;
 }

@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistDisenchantItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResDisen => true;
-    public override int Value => 10000;
+    public override bool? ResDisen => true;
+    public override int? Value => 10000;
 }

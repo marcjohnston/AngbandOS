@@ -10,5 +10,5 @@ public class DruidCharacterClassItemEnhancement : ItemEnhancementGameConfigurati
     public override string BonusWisdomRollExpression => "4";
     public override string BonusIntelligenceRollExpression => "-3";
     public override string BonusDexterityRollExpression => "-2";
-    public override int Value => -1050;
+    public override int? Value => -1050;
 }

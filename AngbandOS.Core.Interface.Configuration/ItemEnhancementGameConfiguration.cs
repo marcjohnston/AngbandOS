@@ -31,34 +31,34 @@ public class ItemEnhancementGameConfiguration
     /// <summary>
     /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
     /// </summary>
-    public virtual bool? CanApplyBonusArmorClassMiscPower { get; set; } = false;
+    public virtual bool? CanApplyBonusArmorClassMiscPower { get; set; } = null;
 
     /// <summary>
     /// Returns true, if an item of this factory can have be blessed for priestly biased artifacts.  Returns false, for all items except swords and polearms; which return false.
     /// </summary>
-    public virtual bool? CanApplyBlessedArtifactBias { get; set; } = false;
+    public virtual bool? CanApplyBlessedArtifactBias { get; set; } = null;
 
     /// <summary>
     /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns true, for all items except bows; which return false.
     /// </summary>
-    public virtual bool? ArtifactBiasSlayingDisabled { get; set; } = false;
+    public virtual bool? ArtifactBiasSlayingDisabled { get; set; } = null;
 
     /// <summary>
     /// Returns true, if the item can apply a blows bonus.  Returns false, by default. Bows, return true.
     /// </summary>
-    public virtual bool? CanApplyBlowsBonus { get; set; } = false;
+    public virtual bool? CanApplyBlowsBonus { get; set; } = null;
 
     /// <summary>
     /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
     /// </summary>
-    public virtual bool? CanReflectBoltsAndArrows { get; set; } = false;
+    public virtual bool? CanReflectBoltsAndArrows { get; set; } = null;
 
     /// <summary>
     /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    public virtual bool? CanApplySlayingBonus { get; set; } = false;
+    public virtual bool? CanApplySlayingBonus { get; set; } = null;
 
     public virtual string? BonusStrengthRollExpression { get; set; } = null;
     public virtual string? BonusIntelligenceRollExpression { get; set; } = null;
@@ -82,17 +82,17 @@ public class ItemEnhancementGameConfiguration
     /// </summary>
     /// <inheritdoc />
     public virtual string? ActivationName { get; set; }
-    public virtual bool? Aggravate { get; set; } = false;
-    public virtual bool? AntiTheft { get; set; } = false;
+    public virtual bool? Aggravate { get; set; } = null;
+    public virtual bool? AntiTheft { get; set; } = null;
     public virtual string? ArtifactBiasWeightedRandomBindingKey { get; set; } = null;
-    public virtual bool? Blessed { get; set; } = false;
-    public virtual bool? Blows { get; set; } = false;
-    public virtual bool? BrandAcid { get; set; } = false;
-    public virtual bool? BrandCold { get; set; } = false;
-    public virtual bool? BrandElec { get; set; } = false;
-    public virtual bool? BrandFire { get; set; } = false;
-    public virtual bool? BrandPois { get; set; } = false;
-    public virtual bool? Chaotic { get; set; } = false;
+    public virtual bool? Blessed { get; set; } = null;
+    public virtual bool? Blows { get; set; } = null;
+    public virtual bool? BrandAcid { get; set; } = null;
+    public virtual bool? BrandCold { get; set; } = null;
+    public virtual bool? BrandElec { get; set; } = null;
+    public virtual bool? BrandFire { get; set; } = null;
+    public virtual bool? BrandPois { get; set; } = null;
+    public virtual bool? Chaotic { get; set; } = null;
 
     /// <summary>
     /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
@@ -100,90 +100,90 @@ public class ItemEnhancementGameConfiguration
     /// </summary>
     public virtual ColorEnum? Color { get; set; } = null;
 
-    public virtual bool? IsCursed { get; set; } = false;
-    public virtual int DamageDice { get; set; } = 0;
-    public virtual int DiceSides { get; set; } = 0;
-    public virtual bool? DrainExp { get; set; } = false;
-    public virtual bool? DreadCurse { get; set; } = false;
-    public virtual bool? EasyKnow { get; set; } = false;
-    public virtual bool? Feather { get; set; } = false;
-    public virtual bool? FreeAct { get; set; } = false;
-    public virtual bool? HeavyCurse { get; set; } = false;
-    public virtual bool? HideType { get; set; } = false;
-    public virtual bool? HoldLife { get; set; } = false;
-    public virtual bool? IgnoreAcid { get; set; } = false;
-    public virtual bool? IgnoreCold { get; set; } = false;
-    public virtual bool? IgnoreElec { get; set; } = false;
-    public virtual bool? IgnoreFire { get; set; } = false;
-    public virtual bool? ImAcid { get; set; } = false;
-    public virtual bool? ImCold { get; set; } = false;
-    public virtual bool? ImElec { get; set; } = false;
-    public virtual bool? ImFire { get; set; } = false;
-    public virtual bool? Impact { get; set; } = false;
-    public virtual bool? NoMagic { get; set; } = false;
-    public virtual bool? NoTele { get; set; } = false;
-    public virtual bool? PermaCurse { get; set; } = false;
-    public virtual int Radius { get; set; } = 0;
-    public virtual bool? Reflect { get; set; } = false;
-    public virtual bool? Regen { get; set; } = false;
-    public virtual bool? ResAcid { get; set; } = false;
-    public virtual bool? ResBlind { get; set; } = false;
-    public virtual bool? ResChaos { get; set; } = false;
-    public virtual bool? ResCold { get; set; } = false;
-    public virtual bool? ResConf { get; set; } = false;
-    public virtual bool? ResDark { get; set; } = false;
-    public virtual bool? ResDisen { get; set; } = false;
-    public virtual bool? ResElec { get; set; } = false;
-    public virtual bool? ResFear { get; set; } = false;
-    public virtual bool? ResFire { get; set; } = false;
-    public virtual bool? ResLight { get; set; } = false;
-    public virtual bool? ResNether { get; set; } = false;
-    public virtual bool? ResNexus { get; set; } = false;
-    public virtual bool? ResPois { get; set; } = false;
-    public virtual bool? ResShards { get; set; } = false;
-    public virtual bool? ResSound { get; set; } = false;
-    public virtual bool? SeeInvis { get; set; } = false;
-    public virtual bool? ShElec { get; set; } = false;
-    public virtual bool? ShFire { get; set; } = false;
-    public virtual bool? ShowMods { get; set; } = false;
-    public virtual bool? SlayAnimal { get; set; } = false;
-    public virtual bool? SlayDemon { get; set; } = false;
-    public virtual int SlayDragon { get; set; } = 0;
-    public virtual bool? SlayEvil { get; set; } = false;
-    public virtual bool? SlayGiant { get; set; } = false;
-    public virtual bool? SlayOrc { get; set; } = false;
-    public virtual bool? SlayTroll { get; set; } = false;
-    public virtual bool? SlayUndead { get; set; } = false;
-    public virtual bool? SlowDigest { get; set; } = false;
-    public virtual bool? SustCha { get; set; } = false;
-    public virtual bool? SustCon { get; set; } = false;
-    public virtual bool? SustDex { get; set; } = false;
-    public virtual bool? SustInt { get; set; } = false;
-    public virtual bool? SustStr { get; set; } = false;
-    public virtual bool? SustWis { get; set; } = false;
-    public virtual bool? Telepathy { get; set; } = false;
-    public virtual bool? Teleport { get; set; } = false;
+    public virtual bool? IsCursed { get; set; } = null;
+    public virtual int? DamageDice { get; set; } = null;
+    public virtual int? DiceSides { get; set; } = null;
+    public virtual bool? DrainExp { get; set; } = null;
+    public virtual bool? DreadCurse { get; set; } = null;
+    public virtual bool? EasyKnow { get; set; } = null;
+    public virtual bool? Feather { get; set; } = null;
+    public virtual bool? FreeAct { get; set; } = null;
+    public virtual bool? HeavyCurse { get; set; } = null;
+    public virtual bool? HideType { get; set; } = null;
+    public virtual bool? HoldLife { get; set; } = null;
+    public virtual bool? IgnoreAcid { get; set; } = null;
+    public virtual bool? IgnoreCold { get; set; } = null;
+    public virtual bool? IgnoreElec { get; set; } = null;
+    public virtual bool? IgnoreFire { get; set; } = null;
+    public virtual bool? ImAcid { get; set; } = null;
+    public virtual bool? ImCold { get; set; } = null;
+    public virtual bool? ImElec { get; set; } = null;
+    public virtual bool? ImFire { get; set; } = null;
+    public virtual bool? Impact { get; set; } = null;
+    public virtual bool? NoMagic { get; set; } = null;
+    public virtual bool? NoTele { get; set; } = null;
+    public virtual bool? PermaCurse { get; set; } = null;
+    public virtual int? Radius { get; set; } = null;
+    public virtual bool? Reflect { get; set; } = null;
+    public virtual bool? Regen { get; set; } = null;
+    public virtual bool? ResAcid { get; set; } = null;
+    public virtual bool? ResBlind { get; set; } = null;
+    public virtual bool? ResChaos { get; set; } = null;
+    public virtual bool? ResCold { get; set; } = null;
+    public virtual bool? ResConf { get; set; } = null;
+    public virtual bool? ResDark { get; set; } = null;
+    public virtual bool? ResDisen { get; set; } = null;
+    public virtual bool? ResElec { get; set; } = null;
+    public virtual bool? ResFear { get; set; } = null;
+    public virtual bool? ResFire { get; set; } = null;
+    public virtual bool? ResLight { get; set; } = null;
+    public virtual bool? ResNether { get; set; } = null;
+    public virtual bool? ResNexus { get; set; } = null;
+    public virtual bool? ResPois { get; set; } = null;
+    public virtual bool? ResShards { get; set; } = null;
+    public virtual bool? ResSound { get; set; } = null;
+    public virtual bool? SeeInvis { get; set; } = null;
+    public virtual bool? ShElec { get; set; } = null;
+    public virtual bool? ShFire { get; set; } = null;
+    public virtual bool? ShowMods { get; set; } = null;
+    public virtual bool? SlayAnimal { get; set; } = null;
+    public virtual bool? SlayDemon { get; set; } = null;
+    public virtual int? SlayDragon { get; set; } = null;
+    public virtual bool? SlayEvil { get; set; } = null;
+    public virtual bool? SlayGiant { get; set; } = null;
+    public virtual bool? SlayOrc { get; set; } = null;
+    public virtual bool? SlayTroll { get; set; } = null;
+    public virtual bool? SlayUndead { get; set; } = null;
+    public virtual bool? SlowDigest { get; set; } = null;
+    public virtual bool? SustCha { get; set; } = null;
+    public virtual bool? SustCon { get; set; } = null;
+    public virtual bool? SustDex { get; set; } = null;
+    public virtual bool? SustInt { get; set; } = null;
+    public virtual bool? SustStr { get; set; } = null;
+    public virtual bool? SustWis { get; set; } = null;
+    public virtual bool? Telepathy { get; set; } = null;
+    public virtual bool? Teleport { get; set; } = null;
 
     /// <summary>
     /// Returns an additional treasure rating to apply to the item.  This treasure rating will be added to the out-of-level delta that is automatically added.
     /// </summary>
-    public virtual int TreasureRating { get; set; } = 0;
+    public virtual int? TreasureRating { get; set; } = null;
 
     /// <summary>
     /// Returns the additional value of the enhancement.  Returns 0, by default.
     /// </summary>
-    public virtual int Value { get; set; } = 0;
+    public virtual int? Value { get; set; } = null;
 
     /// <summary>
     /// Returns true, if the enhancement causes the item to become valueless; false, if the item retains its value.  Returns false, by default.
     /// </summary>
-    public virtual bool? Valueless { get; set; } = false;
+    public virtual bool? Valueless { get; set; } = null;
 
-    public virtual bool? Vampiric { get; set; } = false;
-    public virtual int Vorpal1InChance { get; set; } = 0;
-    public virtual int VorpalExtraAttacks1InChance { get; set; } = 0;
-    public virtual int Weight { get; set; } = 0;
-    public virtual bool? Wraith { get; set; } = false;   
-    public virtual bool? XtraMight { get; set; } = false;
-    public virtual bool? XtraShots { get; set; } = false;
+    public virtual bool? Vampiric { get; set; } = null;
+    public virtual int? Vorpal1InChance { get; set; } = null;
+    public virtual int? VorpalExtraAttacks1InChance { get; set; } = null;
+    public virtual int? Weight { get; set; } = null;
+    public virtual bool? Wraith { get; set; } = null;   
+    public virtual bool? XtraMight { get; set; } = null;
+    public virtual bool? XtraShots { get; set; } = null;
 }

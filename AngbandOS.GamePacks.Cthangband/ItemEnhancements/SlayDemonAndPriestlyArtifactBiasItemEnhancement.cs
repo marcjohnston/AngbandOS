@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SlayDemonAndPriestlyArtifactBiasItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool SlayDemon => true;
+    public override bool? SlayDemon => true;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Priestly1In9ArtifactBiasWeightedRandom);
-    public override int Value => 3500;
+    public override int? Value => 3500;
 }

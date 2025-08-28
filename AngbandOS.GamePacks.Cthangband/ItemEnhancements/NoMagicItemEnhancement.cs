@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class NoMagicItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool NoMagic => true;
-    public override int Value => 2500;
+    public override bool? NoMagic => true;
+    public override int? Value => 2500;
 }

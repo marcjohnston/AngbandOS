@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class KillDragonItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int SlayDragon => 3;
-    public override int Value => 4500;
+    public override int? SlayDragon => 3;
+    public override int? Value => 4500;
 }

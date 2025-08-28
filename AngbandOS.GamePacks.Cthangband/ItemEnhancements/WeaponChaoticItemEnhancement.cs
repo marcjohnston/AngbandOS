@@ -9,12 +9,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponChaoticItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Chaotic => true;
-    public override int Value => 10000;
+    public override bool? Chaotic => true;
+    public override int? Value => 10000;
     public override string? FriendlyName => "(Chaotic)";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
-    public override int TreasureRating => 28;
-    public override bool ResChaos => true;
+    public override bool? IgnoreAcid => true;
+    public override bool? IgnoreElec => true;
+    public override bool? IgnoreFire => true;
+    public override int? TreasureRating => 28;
+    public override bool? ResChaos => true;
     }

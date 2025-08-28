@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BlessedItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Blessed => true;
-    public override int Value => 13000;
+    public override bool? Blessed => true;
+    public override int? Value => 13000;
 }

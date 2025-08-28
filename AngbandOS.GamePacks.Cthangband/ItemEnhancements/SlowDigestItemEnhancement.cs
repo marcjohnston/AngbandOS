@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SlowDigestItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool SlowDigest => true;
-    public override int Value => 750;
+    public override bool? SlowDigest => true;
+    public override int? Value => 750;
 }

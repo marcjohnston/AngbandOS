@@ -9,12 +9,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class OrbOfInstabilityItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Valueless => true;
+    public override bool? Valueless => true;
     public override string? FriendlyName => "of Instability";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
-        public override bool Teleport => true;
-    public override int Value => 650;
+    public override bool? IgnoreAcid => true;
+    public override bool? IgnoreCold => true;
+    public override bool? IgnoreElec => true;
+    public override bool? IgnoreFire => true;
+        public override bool? Teleport => true;
+    public override int? Value => 650;
 }

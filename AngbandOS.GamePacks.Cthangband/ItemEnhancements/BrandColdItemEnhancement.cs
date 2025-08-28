@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BrandColdItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool BrandCold => true;
-    public override int Value => 5000;
+    public override bool? BrandCold => true;
+    public override int? Value => 5000;
 }

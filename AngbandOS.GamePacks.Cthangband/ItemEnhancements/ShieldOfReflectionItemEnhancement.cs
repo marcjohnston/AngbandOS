@@ -9,13 +9,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ShieldOfReflectionItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 15000;
+    public override int? Value => 15000;
     public override string? FriendlyName => "of Reflection";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
+    public override bool? IgnoreAcid => true;
+    public override bool? IgnoreCold => true;
+    public override bool? IgnoreElec => true;
+    public override bool? IgnoreFire => true;
     public override string? BonusArmorClassRollExpression => "1d5";
-    public override int TreasureRating => 20;
-    public override bool Reflect => true;
+    public override int? TreasureRating => 20;
+    public override bool? Reflect => true;
 }

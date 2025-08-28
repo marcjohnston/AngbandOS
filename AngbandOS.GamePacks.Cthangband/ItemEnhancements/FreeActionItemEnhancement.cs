@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FreeActionItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool FreeAct => true;
-    public override int Value => 4500;
+    public override bool? FreeAct => true;
+    public override int? Value => 4500;
 }

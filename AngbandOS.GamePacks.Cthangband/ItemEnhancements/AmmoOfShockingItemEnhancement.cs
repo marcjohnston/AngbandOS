@@ -9,9 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class AmmoOfShockingItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool BrandElec => true;
-    public override int Value => 30;
+    public override bool? BrandElec => true;
+    public override int? Value => 30;
     public override string? FriendlyName => "of Shocking";
-    public override bool IgnoreElec => true;
-    public override int TreasureRating => 10;
+    public override bool? IgnoreElec => true;
+    public override int? TreasureRating => 10;
     }

@@ -9,10 +9,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfEvilBaneItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Blessed => true;
-    public override int Value => 5000;
+    public override bool? Blessed => true;
+    public override int? Value => 5000;
     public override string? FriendlyName => "of Evil Bane";
     public override string? BonusWisdomRollExpression => "1d2";
-    public override int TreasureRating => 20;
-    public override bool SlayEvil => true;
+    public override int? TreasureRating => 20;
+    public override bool? SlayEvil => true;
 }

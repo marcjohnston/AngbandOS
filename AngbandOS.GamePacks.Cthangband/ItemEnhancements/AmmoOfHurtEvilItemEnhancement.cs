@@ -9,8 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class AmmoOfHurtEvilItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 25;
+    public override int? Value => 25;
     public override string? FriendlyName => "of Hurt Evil";
-    public override int TreasureRating => 10;
-    public override bool SlayEvil => true;
+    public override int? TreasureRating => 10;
+    public override bool? SlayEvil => true;
     }

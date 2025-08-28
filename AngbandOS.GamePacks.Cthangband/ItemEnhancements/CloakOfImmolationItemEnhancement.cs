@@ -9,12 +9,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CloakOfImmolationItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 4000;
+    public override int? Value => 4000;
     public override string? FriendlyName => "of Immolation";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreFire => true;
+    public override bool? IgnoreAcid => true;
+    public override bool? IgnoreFire => true;
     public override string? BonusArmorClassRollExpression => "1d4";
-    public override int TreasureRating => 16;
-    public override bool ResFire => true;
-    public override bool ShFire => true;
+    public override int? TreasureRating => 16;
+    public override bool? ResFire => true;
+    public override bool? ShFire => true;
 }

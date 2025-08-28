@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ChaoticAndChaosArtifactBiasItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Chaotic => true;
+    public override bool? Chaotic => true;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Chaos1In1ArtifactBiasWeightedRandom);
-    public override int Value => 10000;
+    public override int? Value => 10000;
 }

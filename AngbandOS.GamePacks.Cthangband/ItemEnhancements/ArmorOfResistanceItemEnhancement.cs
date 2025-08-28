@@ -9,16 +9,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ArmorOfResistanceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 12500;
+    public override int? Value => 12500;
     public override string? FriendlyName => "of Resistance";
-    public override bool IgnoreAcid => true;
-    public override bool IgnoreCold => true;
-    public override bool IgnoreElec => true;
-    public override bool IgnoreFire => true;
+    public override bool? IgnoreAcid => true;
+    public override bool? IgnoreCold => true;
+    public override bool? IgnoreElec => true;
+    public override bool? IgnoreFire => true;
     public override string? BonusArmorClassRollExpression => "1d10";
-    public override int TreasureRating => 20;
-    public override bool ResAcid => true;
-    public override bool ResCold => true;
-    public override bool ResElec => true;
-    public override bool ResFire => true;
+    public override int? TreasureRating => 20;
+    public override bool? ResAcid => true;
+    public override bool? ResCold => true;
+    public override bool? ResElec => true;
+    public override bool? ResFire => true;
 }

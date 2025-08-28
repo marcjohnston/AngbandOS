@@ -9,9 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BowOfVelocityItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 1000;
+    public override int? Value => 1000;
     public override string? FriendlyName => "of Velocity";
     public override string? BonusDamageRollExpression => "1d15";
     public override string? BonusHitsRollExpression => "1d5";
-    public override int TreasureRating => 10;
+    public override int? TreasureRating => 10;
 }

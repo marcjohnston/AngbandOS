@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SlayOrcItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool SlayOrc => true;
-    public override int Value => 3000;
+    public override bool? SlayOrc => true;
+    public override int? Value => 3000;
 }

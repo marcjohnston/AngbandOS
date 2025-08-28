@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistAcidAndAcidBiasItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool ResAcid => true;
+    public override bool? ResAcid => true;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Acid1In1ArtifactBiasWeightedRandom);
-    public override int Value => 1250;
+    public override int? Value => 1250;
 }

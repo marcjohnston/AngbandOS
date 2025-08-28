@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BrandFireAndFireArtifactBiasItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool BrandFire => true;
+    public override bool? BrandFire => true;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Fire1In1ArtifactBiasWeightedRandom);
-    public override int Value => 5000;
+    public override int? Value => 5000;
 }

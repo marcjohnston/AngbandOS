@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class VampiricAndNecromanticArtifactBiasItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Vampiric => true;
+    public override bool? Vampiric => true;
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Necromantic1In1ArtifactBiasWeightedRandom);
-    public override int Value => 13000;
+    public override int? Value => 13000;
 }

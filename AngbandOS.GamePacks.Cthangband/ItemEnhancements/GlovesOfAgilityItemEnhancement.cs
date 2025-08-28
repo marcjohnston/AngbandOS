@@ -9,9 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GlovesOfAgilityItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 1000;
+    public override int? Value => 1000;
     public override string? FriendlyName => "of Agility";
-    public override bool HideType => true;
+    public override bool? HideType => true;
     public override string? BonusDexterityRollExpression => "1d5";
-    public override int TreasureRating => 14;
+    public override int? TreasureRating => 14;
 }

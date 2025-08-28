@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class RegenerationItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Regen => true;
-    public override int Value => 2500;
+    public override bool? Regen => true;
+    public override int? Value => 2500;
 }

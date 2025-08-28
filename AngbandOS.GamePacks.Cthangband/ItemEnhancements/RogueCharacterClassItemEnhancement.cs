@@ -10,5 +10,5 @@ public class RogueCharacterClassItemEnhancement : ItemEnhancementGameConfigurati
     public override string BonusWisdomRollExpression => "-2";
     public override string BonusIntelligenceRollExpression => "1";
     public override string BonusDexterityRollExpression => "3";
-    public override int Value => 5550;
+    public override int? Value => 5550;
 }

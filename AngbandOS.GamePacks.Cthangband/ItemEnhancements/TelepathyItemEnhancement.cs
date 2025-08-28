@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class TelepathyItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Telepathy => true;
-    public override int Value => 12500;
+    public override bool? Telepathy => true;
+    public override int? Value => 12500;
 }

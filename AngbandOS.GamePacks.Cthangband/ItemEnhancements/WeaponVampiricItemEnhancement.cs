@@ -9,9 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponVampiricItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int Value => 10000;
+    public override int? Value => 10000;
     public override string? FriendlyName => "(Vampiric)";
-    public override bool HoldLife => true;
-    public override int TreasureRating => 25;
-        public override bool Vampiric => true;
+    public override bool? HoldLife => true;
+    public override int? TreasureRating => 25;
+        public override bool? Vampiric => true;
 }

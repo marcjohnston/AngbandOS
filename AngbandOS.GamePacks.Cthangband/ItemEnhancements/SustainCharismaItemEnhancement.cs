@@ -9,6 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SustainCharismaItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool SustCha => true;
-    public override int Value => 250;
+    public override bool? SustCha => true;
+    public override int? Value => 250;
 }

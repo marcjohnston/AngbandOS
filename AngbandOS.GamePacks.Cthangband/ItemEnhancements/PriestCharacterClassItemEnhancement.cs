@@ -10,5 +10,5 @@ public class PriestCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
     public override string BonusWisdomRollExpression => "3";
     public override string BonusIntelligenceRollExpression => "-3";
     public override string BonusDexterityRollExpression => "-1";
-    public override int Value => -1500;
+    public override int? Value => -1500;
 }

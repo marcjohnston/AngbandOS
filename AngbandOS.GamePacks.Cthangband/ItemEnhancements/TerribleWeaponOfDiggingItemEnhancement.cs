@@ -9,7 +9,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class TerribleWeaponOfDiggingItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool Valueless => true;
+    public override bool? Valueless => true;
     public override string? BonusTunnelRollExpression => "-1d5+5";
-    public override int Value => 1125;
+    public override int? Value => 1125;
 }
