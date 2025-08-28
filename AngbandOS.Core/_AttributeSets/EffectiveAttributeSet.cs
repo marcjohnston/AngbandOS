@@ -349,7 +349,7 @@ internal class EffectiveAttributeSet
     {
         int index = (int)attributeEnum;
         AttributeValue effectiveItemProperty = GetValue(index);
-        ReferenceAttributeValue<T> referencePropertyValue = (ReferenceAttributeValue<T>)effectiveItemProperty;
+        NullableReferenceAttributeValue<T> referencePropertyValue = (NullableReferenceAttributeValue<T>)effectiveItemProperty;
         T? value = referencePropertyValue.Value;
         return value;
     }
@@ -363,7 +363,7 @@ internal class EffectiveAttributeSet
     {
         // Retrieve the index for the property.
         int index = (int)attributeEnum;
-        _fixedAttributeValues[index] = propertyValue is null ? null : new ReferenceAttributeValue<T>(_attributeFactories[index], propertyValue);
+        _fixedAttributeValues[index] = propertyValue is null ? null : new NullableReferenceAttributeValue<T>(_attributeFactories[index], propertyValue);
     }
 
     /// <summary>

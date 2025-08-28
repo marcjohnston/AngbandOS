@@ -7,15 +7,15 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ReferenceAttributeValue<T> : AttributeValue where T : class
+internal class NullableReferenceAttributeValue<T> : AttributeValue where T : class
 {
     public T? Value { get; }
 
     public override bool IsEqual(AttributeValue attributeValue)
     {
-        if (attributeValue is not ReferenceAttributeValue<T> roNullableReferenceItemProperty)
+        if (attributeValue is not NullableReferenceAttributeValue<T> roNullableReferenceItemProperty)
         {
-            throw new Exception($"Item property equality from {attributeValue.GetType().Name} not supported with {nameof(ReferenceAttributeValue<T>)}");
+            throw new Exception($"Item property equality from {attributeValue.GetType().Name} not supported with {nameof(NullableReferenceAttributeValue<T>)}");
         }
         return Value == roNullableReferenceItemProperty.Value;
     }
@@ -26,14 +26,14 @@ internal class ReferenceAttributeValue<T> : AttributeValue where T : class
         {
             return this;
         }
-        if (attributeValue is ReferenceAttributeValue<T> nullableReferencePropertyValue)
+        if (attributeValue is NullableReferenceAttributeValue<T> nullableReferencePropertyValue)
         {
-            return new ReferenceAttributeValue<T>(Factory, nullableReferencePropertyValue.Value ?? Value);
+            return new NullableReferenceAttributeValue<T>(Factory, nullableReferencePropertyValue.Value ?? Value);
         }
-        throw new Exception($"Item property merging from {attributeValue.GetType().Name} not supported with {nameof(ReferenceAttributeValue<T>)}");
+        throw new Exception($"Item property merging from {attributeValue.GetType().Name} not supported with {nameof(NullableReferenceAttributeValue<T>)}");
     }
 
-    public ReferenceAttributeValue(AttributeFactory factory, T? value) : base(factory)
+    public NullableReferenceAttributeValue(AttributeFactory factory, T? value) : base(factory)
     {
         Value = value;
     }

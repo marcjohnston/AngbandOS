@@ -9,6 +9,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ReferenceAttributeFactory<T> : AttributeFactory where T : class
 {
-    public override AttributeValue Instantiate() => new ReferenceAttributeValue<T>(this, null); // This would normally be the non-nullable version, but there is no such thing for a reference type.
+    public override AttributeValue Instantiate() => new NullableReferenceAttributeValue<T>(this, null); // This would normally be the non-nullable version, but there is no such thing for a reference type.
     public ReferenceAttributeFactory(AttributeEnum index) : base(index) { }
 }
