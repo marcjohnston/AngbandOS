@@ -29,10 +29,8 @@ internal class BoolAttributeValue : AttributeValue
         if (itemProperty is not BoolAttributeValue boolPropertyValue)
         {
             throw new Exception("IsEqual mismatch.");
-       }
-            return Value == boolPropertyValue.Value;
         }
-        throw new Exception("IsEqual mismatch.");
+        return Value == boolPropertyValue.Value;
     }
     public override string ToString()
     {
