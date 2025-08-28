@@ -22,15 +22,20 @@ internal class NullableReferenceAttributeValue<T> : AttributeValue where T : cla
 
     public override AttributeValue Merge(AttributeValue attributeValue)
     {
-        if (attributeValue is null)
+        if (attributeValue is not NullableReferenceAttributeValue<T> nullableReferencePropertyValue)
         {
-            return this;
+            throw new Exception($"Item property merging from {attributeValue.GetType().Name} not supported with {nameof(NullableReferenceAttributeValue<T>)}");
         }
-        if (attributeValue is NullableReferenceAttributeValue<T> nullableReferencePropertyValue)
+
+        // Check to see if the incoming value is not null.
+        if (nullableReferencePropertyValue.Value is not null)
         {
-            return new NullableReferenceAttributeValue<T>(Factory, nullableReferencePropertyValue.Value ?? Value);
+            // It is not null, so return it.
+            return nullableReferencePropertyValue;
         }
-        throw new Exception($"Item property merging from {attributeValue.GetType().Name} not supported with {nameof(NullableReferenceAttributeValue<T>)}");
+
+        // Keep our existing value.
+        return this;
     }
 
     public NullableReferenceAttributeValue(AttributeFactory factory, T? value) : base(factory)
