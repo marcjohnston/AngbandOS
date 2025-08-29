@@ -17,10 +17,10 @@ internal abstract class Race : IGetKey
         Game = game;
     }
 
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
+    public void Refresh()
+    {
+        EffectiveAttributeSet = Enhancement.GenerateItemCharacteristics();
+    }
 
     public virtual string Key => GetType().Name;
 
@@ -30,10 +30,8 @@ internal abstract class Race : IGetKey
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
-
-        EffectiveAttributeSet = Enhancement.GenerateItemCharacteristics();
     }
-    public ReadOnlyAttributeSet EffectiveAttributeSet;
+    public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
 
     protected abstract string EnhancementBindingKey { get; }
     public ItemEnhancement Enhancement { get; private set; }

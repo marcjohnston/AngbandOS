@@ -370,6 +370,10 @@ internal abstract class BaseCharacterClass : IGetKey
 
     public string GetKey => Key;
     public ItemEnhancement Enhancement { get; private set; }
+    public void Refresh()
+    {
+        EffectiveAttributeSet = Enhancement.GenerateItemCharacteristics();
+    }
     public void Bind()
     {
         List<ItemFactory> outfitItemFactories = new();
@@ -381,7 +385,6 @@ internal abstract class BaseCharacterClass : IGetKey
         ItemActions = Game.SingletonRepository.GetNullable<ItemAction>(ItemActionNames);
         MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
-        EffectiveAttributeSet = Enhancement.GenerateItemCharacteristics();
 
         //        foreach (string ability in new string[] { "Strength", "Charisma", "Constitution", "Wisdom", "Intelligence", "Dexterity" })
         //        {
@@ -400,7 +403,7 @@ internal abstract class BaseCharacterClass : IGetKey
         //            Game.PasteProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements\", $"{GetType().Name}ItemEnhancement", property, newProperty);
         //        }
     }
-    public ReadOnlyAttributeSet EffectiveAttributeSet;
+    public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
 
     /// <summary>
     /// Returns true, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.

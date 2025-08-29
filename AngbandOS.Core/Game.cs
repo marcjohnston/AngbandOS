@@ -2572,6 +2572,16 @@ internal class Game
             _prevGeneration = ExPlayer.Generation;
         }
 
+        // Refresh all of the race and character class enhancements.
+        foreach (Race race in SingletonRepository.Get<Race>())
+        {
+            race.Refresh();
+        }
+        foreach (BaseCharacterClass characterClass in SingletonRepository.Get<BaseCharacterClass>())
+        {
+            characterClass.Refresh();
+        }
+
         Screen.Clear();
 
         BirthStage? birthStage = SingletonRepository.Get<BirthStage>(nameof(IntroductionBirthStage));
