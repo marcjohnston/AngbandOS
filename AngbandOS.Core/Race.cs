@@ -46,7 +46,7 @@ internal abstract class Race : IGetKey
     public abstract uint Choice { get; }
     public abstract int ExperienceFactor { get; }
     public abstract int HitDieBonus { get; }
-    public abstract int Infravision { get; }
+    public abstract int Infravision { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
     public abstract string Title { get; }
     public string IndefiniteArticleForTitle
     {
