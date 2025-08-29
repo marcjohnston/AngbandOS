@@ -78,7 +78,11 @@ internal class Game
     //    throw new Exception("");
     //}
 
+    /// <summary>
+    /// Represents the players effective attribute values.
+    /// </summary>
     public EffectiveAttributeSet EffectivePropertySet;
+
     public void GainMutation(Mutation mutation)
     {
         MutationsNotPossessed.Remove(mutation);
