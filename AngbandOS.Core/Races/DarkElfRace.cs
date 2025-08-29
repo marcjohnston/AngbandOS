@@ -24,6 +24,7 @@ internal class DarkElfRace : Race
     public override int ExperienceFactor => 150;
     public override int BaseAge => 75;
     public override int AgeRange => 75;
+    public override int Infravision => 5;
     public override uint Choice => 0xBFDF;
     public override string Description => "Dark elves are underground elves who have a kinship with\nfungi the way that surface elves have a kinship with trees.\nThe innately magical nature of dark elves lets them learn\nto fire magical missiles at their opponents (at lvl 2).\nThey also resist dark-based attacks and can learn to see\ninvisible creatures (at lvl 20).";
 

@@ -24,6 +24,7 @@ internal class SpectreRace : Race
     public override int ExperienceFactor => 180;
     public override int BaseAge => 100;
     public override int AgeRange => 30;
+    public override int Infravision => 5;
     public override uint Choice => 0x5F4E;
     public override string Description => "Spectres are ethereal and they can pass through walls and\nother obstacles. They resist nether, attacks, poison, and\ncold; and they need little food. They also resist having\ntheir life force drained and can see invisible creatures.\nFinally, they glow with their own light, can learn to\nscare monsters (at lvl 4) and gain telepathy (at lvl 35).";
 
