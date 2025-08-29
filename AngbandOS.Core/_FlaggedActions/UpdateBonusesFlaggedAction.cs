@@ -16,9 +16,14 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private void BuildEffectiveAttributeSetForPlayer()
     {
         Game.EffectivePropertySet = new EffectiveAttributeSet();
+
+        // Apply the race enhancements.
         Game.EffectivePropertySet.AddEnhancement(Game.Race.Enhancement.GenerateItemCharacteristics());
+
+        // Apply the character class enhancements.
         Game.EffectivePropertySet.AddEnhancement(Game.BaseCharacterClass.Enhancement.GenerateItemCharacteristics());
 
+        // Apply all of the items that the player is wielding.
         foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
         {
             foreach (int i in inventorySlot.InventorySlots)
@@ -30,6 +35,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
             }
         }
+
+        // Apply all of the mutations that the player has.
     }
 
     protected override void Execute()
