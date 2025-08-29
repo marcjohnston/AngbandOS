@@ -13,11 +13,28 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private bool MartialArtistNotifyAux;
 
     private UpdateBonusesFlaggedAction(Game game) : base(game) { }
-    protected override void Execute()
+    private void BuildEffectiveAttributeSetForPlayer()
     {
         Game.EffectivePropertySet = new EffectiveAttributeSet();
         Game.EffectivePropertySet.AddEnhancement(Game.Race.Enhancement.GenerateItemCharacteristics());
         Game.EffectivePropertySet.AddEnhancement(Game.BaseCharacterClass.Enhancement.GenerateItemCharacteristics());
+
+        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
+        {
+            foreach (int i in inventorySlot.InventorySlots)
+            {
+                Item? oPtr = Game.GetInventoryItem(i);
+                if (oPtr != null)
+                {
+                    Game.EffectivePropertySet.AddEnhancement(oPtr.EffectivePropertySet.ToReadOnly());
+                }
+            }
+        }
+    }
+
+    protected override void Execute()
+    {
+        BuildEffectiveAttributeSetForPlayer(); // TODO: This isn't being used yet.
 
         List<Bonuses> bonusesToMerge = new List<Bonuses>();
         int baseArmorClass = 0;
@@ -177,8 +194,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    Game.EffectivePropertySet.AddEnhancement(oPtr.EffectivePropertySet.ToReadOnly());
-
                     Game.StrengthAbility.Bonus += oPtr.EffectivePropertySet.BonusStrength;
                     Game.IntelligenceAbility.Bonus += oPtr.EffectivePropertySet.BonusIntelligence;
                     Game.WisdomAbility.Bonus += oPtr.EffectivePropertySet.BonusWisdom;
