@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace AngbandOS.Core.Interface.Configuration;
 
@@ -10,6 +9,13 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class GameConfiguration
 {
+    public GameConfiguration()
+    {
+        // Dynamically load the game configuration with all singletons found in the containing assembly.
+        Assembly assembly = GetType().Assembly;
+        MergeAllSingletonsFromAssembly(this, assembly);
+    }
+
     private static T[] LoadFromAssembly<T>(Assembly assembly) where T : new()
     {
         List<T> singletonsList = new List<T>();

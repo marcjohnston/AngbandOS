@@ -234,9 +234,6 @@ public partial class MainWindow : Window, IConsoleViewPort
             GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
             Assembly assembly = typeof(AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration).Assembly;
 
-            // Dynamically load the game configuration with all singletons found in the assembly.
-            GameConfiguration.MergeAllSingletonsFromAssembly(gameConfiguration, assembly);
-
             GameResults gameResults = gameServer.PlayNewGame(this, persistentStorage, gameConfiguration, gameReplay);
             File.WriteAllText(replayFilename, gameResults.Replay);
         }
