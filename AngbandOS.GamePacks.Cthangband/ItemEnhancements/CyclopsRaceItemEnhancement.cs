@@ -9,4 +9,5 @@ public class CyclopsRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "-3";
     public override string BonusDexterityRollExpression => "-3";
     public override int? Value => -3900;
+    public override string? BonusInfravisionRollExpression => "1";
 }

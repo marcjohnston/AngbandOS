@@ -9,4 +9,5 @@ public class VampireRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "3";
     public override string BonusDexterityRollExpression => "-1";
     public override int? Value => 6900;
+    public override string? BonusInfravisionRollExpression => "5";
 }

@@ -9,4 +9,5 @@ public class ElfRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "2";
     public override string BonusDexterityRollExpression => "1";
     public override int? Value => 3300;
+    public override string? BonusInfravisionRollExpression => "3";
 }

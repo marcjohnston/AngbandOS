@@ -9,4 +9,5 @@ public class NibelungRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "-1";
     public override string BonusDexterityRollExpression => "0";
     public override int? Value => 3000;
+    public override string? BonusInfravisionRollExpression => "5";
 }

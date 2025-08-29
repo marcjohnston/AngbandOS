@@ -9,4 +9,5 @@ public class HalfOrcRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "-1";
     public override string BonusDexterityRollExpression => "0";
     public override int? Value => 600;
+    public override string? BonusInfravisionRollExpression => "3";
 }

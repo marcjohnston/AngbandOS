@@ -9,4 +9,5 @@ public class HalfTrollRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "-4";
     public override string BonusDexterityRollExpression => "-4";
     public override int? Value => -1500;
+    public override string? BonusInfravisionRollExpression => "3";
 }

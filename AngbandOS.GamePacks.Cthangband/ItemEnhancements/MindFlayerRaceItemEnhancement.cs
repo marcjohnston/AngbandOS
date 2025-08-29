@@ -9,4 +9,5 @@ public class MindFlayerRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "4";
     public override string BonusDexterityRollExpression => "0";
     public override int? Value => 1350;
+    public override string? BonusInfravisionRollExpression => "4";
 }

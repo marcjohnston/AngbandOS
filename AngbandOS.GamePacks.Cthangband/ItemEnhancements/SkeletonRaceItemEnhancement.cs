@@ -9,4 +9,5 @@ public class SkeletonRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "-2";
     public override string BonusDexterityRollExpression => "0";
     public override int? Value => -5400;
+    public override string? BonusInfravisionRollExpression => "2";
 }

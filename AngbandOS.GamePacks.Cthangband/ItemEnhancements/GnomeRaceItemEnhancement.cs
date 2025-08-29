@@ -9,4 +9,5 @@ public class GnomeRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "2";
     public override string BonusDexterityRollExpression => "2";
     public override int? Value => 3900;
+    public override string? BonusInfravisionRollExpression => "4";
 }

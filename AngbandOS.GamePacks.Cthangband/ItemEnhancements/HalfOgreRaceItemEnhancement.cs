@@ -9,4 +9,5 @@ public class HalfOgreRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "-1";
     public override string BonusDexterityRollExpression => "-1";
     public override int? Value => 2250;
+    public override string? BonusInfravisionRollExpression => "3";
 }

@@ -9,4 +9,5 @@ public class KlackonRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "-1";
     public override string BonusDexterityRollExpression => "1";
     public override int? Value => 2700;
+    public override string? BonusInfravisionRollExpression => "2";
 }

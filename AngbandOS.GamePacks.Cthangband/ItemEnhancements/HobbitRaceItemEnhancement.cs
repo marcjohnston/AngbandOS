@@ -9,4 +9,5 @@ public class HobbitRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string BonusIntelligenceRollExpression => "2";
     public override string BonusDexterityRollExpression => "3";
     public override int? Value => 7650;
+    public override string? BonusInfravisionRollExpression => "4";
 }
