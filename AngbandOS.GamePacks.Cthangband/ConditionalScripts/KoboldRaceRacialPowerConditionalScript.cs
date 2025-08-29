@@ -7,5 +7,5 @@ public class KoboldRaceRacialPowerConditionalScript : ConditionalScriptGameConfi
     {
         (nameof(KoboldRaceRacialPowerTest), true, 0)
     };
-    public override string[]? TrueScriptBindingKeys => new string[] { nameof(SystemScriptsEnum.KoboldRacialPowerScript) };
+    public override string[]? TrueScriptBindingKeys => new string[] { nameof(KoboldRacialPowerScript) };
 }

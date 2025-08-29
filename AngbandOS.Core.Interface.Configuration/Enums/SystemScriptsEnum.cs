@@ -281,7 +281,6 @@
         JournalScript,
         JumpToLevelScript,
         KlackonRacialPowerScript,
-        KoboldRacialPowerScript,
         LaserEyeMutationScript,
         LauncherMutationScript,
         LearnScript,
