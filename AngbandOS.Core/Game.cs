@@ -17037,10 +17037,10 @@ internal class Game
     }
 
     /// <summary>
-    /// Returns a random number greater than or equal to min and less than or equal to max
+    /// Returns a random number greater than or equal to min and less than or equal to max.
     /// </summary>
-    /// <param name="min"> The lower limit (inclusive) </param>
-    /// <param name="max"> The upper limit (inclusive) </param>
+    /// <param name="min"> The lower limit (inclusive).</param>
+    /// <param name="max"> The upper limit (inclusive).</param>
     /// <returns> A random number </returns>
     public int RandomBetween(int min, int max)
     {
