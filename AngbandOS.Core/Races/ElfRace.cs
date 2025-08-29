@@ -24,7 +24,6 @@ internal class ElfRace : Race
     public override int ExperienceFactor => 120;
     public override int BaseAge => 75;
     public override int AgeRange => 75;
-    public override int Infravision => 3;
     public override uint Choice => 0xFF5F;
     public override string Description => "Elves are creatures of the woods, and cultivate a symbiotic\nrelationship with trees. While not the sturdiest of races,\nthey are dextrous and have excellent mental faculties.\nBecause they are partially photosynthetic, elves are able\nto resist light based attacks.";
 

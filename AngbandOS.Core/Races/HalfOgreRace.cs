@@ -24,7 +24,6 @@ internal class HalfOgreRace : Race
     public override int ExperienceFactor => 130;
     public override int BaseAge => 40;
     public override int AgeRange => 10;
-    public override int Infravision => 3;
     public override uint Choice => 0x0C07;
     public override string Description => "Half-Ogres are both strong and naturally magical, although\nthey don't usually have the intelligence to make the most\nof their magic. They resist darkness and can't have their\nstrength reduced. They can also can enter a berserk\nrage (at lvl 8).";
 

@@ -24,7 +24,6 @@ internal class HobbitRace : Race
     public override int ExperienceFactor => 110;
     public override int BaseAge => 21;
     public override int AgeRange => 12;
-    public override int Infravision => 4;
     public override uint Choice => 0xBC0B;
     public override string Description => "Hobbits are small and surprisingly dextrous given their\npropensity for plumpness. They make excellent burglars\nand are adept at spell casting too. Hobbits can't have\ntheir dexterity reduced, and they can learn to put together\nnourishing meals from the barest scraps (at lvl 15).";
 

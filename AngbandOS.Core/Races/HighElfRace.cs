@@ -24,7 +24,6 @@ internal class HighElfRace : Race
     public override int ExperienceFactor => 200;
     public override int BaseAge => 100;
     public override int AgeRange => 30;
-    public override int Infravision => 4;
     public override uint Choice => 0xBF5F;
     public override string Description => "High-Elves are the leaders of the elven race. They are\nmore magical than their lesser cousins, but retain their\naffinity with nature. High-elves resist light based attacks\nand their acute senses are able to see invisible creatures.";
 
