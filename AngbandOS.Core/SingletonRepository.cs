@@ -308,6 +308,9 @@ internal class SingletonRepository
         // Load system singletons.
         LoadAllAssemblyTypes<IGetKey>();
 
+        // Validate the system scripts exist, before we load the user configurable ones.
+        ValidateSystemScriptsEnum();
+
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
         LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts);
         LoadFromConfiguration<Activation, ActivationGameConfiguration>(gameConfiguration.Activations);
@@ -382,7 +385,6 @@ internal class SingletonRepository
 
         //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
         //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
-        ValidateSystemScriptsEnum(); // TODO: This is development validation
 
         // Monsters must be sorted by the LevelFound property; otherwise, the game doesn't work properly.
         MonsterRace[] monsterRaces = Get<MonsterRace>();
