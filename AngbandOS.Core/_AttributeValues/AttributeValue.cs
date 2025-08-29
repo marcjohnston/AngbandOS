@@ -22,9 +22,10 @@ internal abstract class AttributeValue
     public abstract AttributeValue Merge(AttributeValue itemProperty);
 
     public abstract bool IsEqual(AttributeValue itemProperty);
+    public virtual string DebugDescription => Enum.GetName(typeof(AttributeEnum), Factory.Index) ?? "";
     public override string ToString()
     {
-        return Enum.GetName(typeof(AttributeEnum), Factory.Index) ?? "";
+        return DebugDescription;
     }
 
     #region Equality

@@ -31,8 +31,5 @@ internal class ColorEnumAttributeValue : AttributeValue
         }
         return Value == colorEnumPropertyValue.Value;
     }
-    public override string ToString()
-    {
-        return $"{base.ToString()}={Value}";
-    }
+    public override string DebugDescription => $"{base.ToString()}={Value}";
 }

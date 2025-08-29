@@ -42,8 +42,5 @@ internal class NullableReferenceAttributeValue<T> : AttributeValue where T : cla
     {
         Value = value;
     }
-    public override string ToString()
-    {
-        return $"{base.ToString()}={Value}";
-    }
+    public override string DebugDescription => $"{base.ToString()}={Value}";
 }

@@ -31,8 +31,5 @@ internal class IntAttributeValue : AttributeValue
         }
         return Value == intPropertyValue.Value;
     }
-    public override string ToString()
-    {
-        return $"{base.ToString()}={Value}";
-    }
+    public override string DebugDescription => $"{base.ToString()}={Value}";
 }

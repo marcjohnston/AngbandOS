@@ -32,8 +32,5 @@ internal class BoolAttributeValue : AttributeValue
         }
         return Value == boolPropertyValue.Value;
     }
-    public override string ToString()
-    {
-        return $"{base.ToString()}={Value}";
-    }
+    public override string DebugDescription => $"{base.ToString()}={Value}";
 }
