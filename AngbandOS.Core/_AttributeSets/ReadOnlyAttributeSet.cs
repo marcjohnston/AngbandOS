@@ -9,14 +9,18 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ReadOnlyAttributeSet
 {
-    private AttributeValue?[] _properties;
+    private AttributeValue[] _properties;
 
     public AttributeValue? GetValue(int index)
     {
         return _properties[index];
     }
-
-    public ReadOnlyAttributeSet(AttributeValue?[] properties)
+    public T GetValue<T>(AttributeEnum attributeEnum) where T : AttributeValue
+    {
+        int index = (int)attributeEnum;
+        return (T)_properties[index];
+    }
+    public ReadOnlyAttributeSet(AttributeValue[] properties)
     {
         _properties = properties;
     }

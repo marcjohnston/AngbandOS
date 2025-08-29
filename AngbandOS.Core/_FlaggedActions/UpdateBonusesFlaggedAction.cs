@@ -18,10 +18,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.EffectivePropertySet = new EffectiveAttributeSet();
 
         // Apply the race enhancements.
-        Game.EffectivePropertySet.AddEnhancement(Game.Race.Enhancement.GenerateItemCharacteristics());
+        Game.EffectivePropertySet.AddEnhancement(Game.Race.EffectiveAttributeSet);
 
         // Apply the character class enhancements.
-        Game.EffectivePropertySet.AddEnhancement(Game.BaseCharacterClass.Enhancement.GenerateItemCharacteristics());
+        Game.EffectivePropertySet.AddEnhancement(Game.BaseCharacterClass.EffectiveAttributeSet);
 
         // Apply all of the items that the player is wielding.
         foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))

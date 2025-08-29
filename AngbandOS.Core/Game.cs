@@ -2573,6 +2573,7 @@ internal class Game
         }
 
         Screen.Clear();
+
         BirthStage? birthStage = SingletonRepository.Get<BirthStage>(nameof(IntroductionBirthStage));
         while (birthStage != null && !Shutdown)
         {

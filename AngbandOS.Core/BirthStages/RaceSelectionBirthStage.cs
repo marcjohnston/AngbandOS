@@ -56,6 +56,7 @@ internal class RaceSelectionBirthStage : BirthStage
             .OrderBy((Race race) => race.Title)
             .ToArray();
         Race race = races[index];
+
         Game.Screen.Print(ColorEnum.Purple, "STR:", 36, 21);
         Game.Screen.Print(ColorEnum.Purple, "INT:", 37, 21);
         Game.Screen.Print(ColorEnum.Purple, "WIS:", 38, 21);
@@ -91,13 +92,14 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.DisplayAPlusB(67, 41, Game.BaseCharacterClass.BaseRangedAttackBonus + race.BaseRangedAttackBonus, Game.BaseCharacterClass.RangedAttackBonusPerLevel);
         Game.Screen.Print(ColorEnum.Black, race.ExperienceFactor + Game.BaseCharacterClass.ExperienceFactor + "%", 36, 45);
         Game.Screen.Print(ColorEnum.Black, "1d" + (race.HitDieBonus + Game.BaseCharacterClass.HitDieBonus), 37, 45);
-        if (race.Infravision == 0)
+        int bonusInfravision = race.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.BonusInfravision).Value;
+        if (bonusInfravision == 0)
         {
             Game.Screen.Print(ColorEnum.Black, "nil", 38, 45);
         }
         else
         {
-            Game.Screen.Print(ColorEnum.Green, race.Infravision + "0 feet", 38, 45);
+            Game.Screen.Print(ColorEnum.Green, bonusInfravision + "0 feet", 38, 45); // TODO: This assumes a 10 foot per unit of infravision conversion that should be configurable.
         }
         Game.Screen.Print(ColorEnum.Black, $"{race.BaseSearchBonus + Game.BaseCharacterClass.BaseSearchBonus:00}%", 39, 45);
         Game.Screen.Print(ColorEnum.Black, $"{race.BaseSearchFrequency + Game.BaseCharacterClass.BaseSearchFrequency:00}%", 40, 45);
