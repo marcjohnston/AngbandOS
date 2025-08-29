@@ -6,7 +6,7 @@ using System.Text.Json;
 namespace AngbandOS.PersistentStorage
 {
     /// <summary>
-    /// Represents a Sql driver for AngbandOS to read and write saved games to a Sql database.  
+    /// Represents a Sql driver for AngbandOS to read and write saved games to a Sql database.  This driver supports multi-user and multi-game.
     /// Also supports the ability for a front-end to retrieve SavedGameDetails for a user.
     /// </summary>
     public class SqlCorePersistentStorage : ICorePersistentStorage
@@ -103,49 +103,6 @@ namespace AngbandOS.PersistentStorage
                 .ToArray();
         }
 
-        /// <inheritdoc />
-        /// <param name="repositoryName"></param>
-        /// <param name="jsonEntities"></param>
-        public void PersistEntities(string repositoryName, KeyValuePair<string, string>[] jsonEntities)
-        {
-            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
-
-            using var transaction = context.Database.BeginTransaction();
-            try
-            {
-                context.Database.ExecuteSqlRaw("DELETE FROM [RepositoryEntities] WHERE [RepositoryName]=@RepositoryName", new SqlParameter("@RepositoryName", repositoryName));
-                foreach (KeyValuePair<string, string> jsonEntity in jsonEntities)
-                {
-                    // Check to see if there is any json data to save.
-                    if (jsonEntity.Value.Length > 0)
-                    {
-                        string key = jsonEntity.Key;
-                        context.RepositoryEntities.Add(new RepositoryEntity()
-                        {
-                            RepositoryName = repositoryName,
-                            Key = key,
-                            JsonData = jsonEntity.Value
-                        });
-                    }
-                }
-                context.SaveChanges();
-                transaction.Commit();
-            }
-            catch
-            {
-                transaction.Rollback();
-            }
-        }
-
-        /// <inheritdoc />
-        /// <param name="repositoryName"></param>
-        /// <param name="json"></param>
-        /// <remarks>Non-keyed entities share the same primary key PK as keyed entities but use the empty string as the key value.</remarks>
-        public void PersistEntity(string repositoryName, string json)
-        {
-            PersistEntities(repositoryName, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("", json) });
-        }
-
         public string RetrieveEntity(string repositoryName)
         {
             using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
@@ -162,7 +119,7 @@ namespace AngbandOS.PersistentStorage
         /// <param name="configurationName"></param>
         /// <param name="overwrite"></param>
         /// <returns>False, if the configuration exists and the <param "overwrite"/> parameter is false; true, if the operation completes successfully.</returns>
-        public bool PersistGameConfiguration(Core.Interface.Configuration.GameConfiguration gameConfiguration, string configurationName, bool overwrite)
+        public bool PersistGameConfiguration(GameConfiguration gameConfiguration, string configurationName, bool overwrite)
         {
             using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
 
@@ -197,9 +154,52 @@ namespace AngbandOS.PersistentStorage
             return true;
         }
 
-        public Core.Interface.Configuration.GameConfiguration LoadConfiguration()
+        public GameConfiguration LoadConfiguration()
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        /// <param name="repositoryName"></param>
+        /// <param name="jsonEntities"></param>
+        public void PersistEntities(string configurationName, string repositoryName, KeyValuePair<string, string>[] jsonEntities)
+        {
+            using AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString);
+
+            using var transaction = context.Database.BeginTransaction();
+            try
+            {
+                context.Database.ExecuteSqlRaw("DELETE FROM [RepositoryEntities] WHERE [RepositoryName]=@RepositoryName", new SqlParameter("@RepositoryName", repositoryName));
+                foreach (KeyValuePair<string, string> jsonEntity in jsonEntities)
+                {
+                    // Check to see if there is any json data to save.
+                    if (jsonEntity.Value.Length > 0)
+                    {
+                        string key = jsonEntity.Key;
+                        context.RepositoryEntities.Add(new RepositoryEntity()
+                        {
+                            RepositoryName = repositoryName,
+                            Key = key,
+                            JsonData = jsonEntity.Value
+                        });
+                    }
+                }
+                context.SaveChanges();
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="repositoryName"></param>
+        /// <param name="json"></param>
+        /// <remarks>Non-keyed entities share the same primary key PK as keyed entities but use the empty string as the key value.</remarks>
+        public void PersistEntity(string configurationName, string repositoryName, string json)
+        {
+            PersistEntities(configurationName, repositoryName, new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("", json) });
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface;
 
 /// <summary>
-/// Represents an interface that provides core read and write functionality for saved games.
+/// Represents an interface that provides core read and write functionality for saved games.  This interface is based on a single user and a single game guid.
 /// </summary>
 public interface ICorePersistentStorage
 {

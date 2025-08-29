@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace AngbandOS.PersistentStorage
 {
     /// <summary>
-    /// Represents a Sql driver for AngbandOS to read and write saved games to a Sql database.  
+    /// Represents a Sql driver for AngbandOS to read and write saved games to a Sql database.   This driver supports multi-user and multi-game.
     /// Also supports the ability for a front-end to retrieve SavedGameDetails for a user.
     /// </summary>
     public class MySqlCorePersistentStorage : ICorePersistentStorage
@@ -112,16 +112,6 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
-        public void PersistEntities(string repositoryName, KeyValuePair<string, string>[] jsonEntities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void PersistEntity(string repositoryName, string json)
-        {
-            throw new NotImplementedException();
-        }
-
         public string RetrieveEntity(string repositoryName)
         {
             throw new NotImplementedException();
@@ -133,6 +123,16 @@ namespace AngbandOS.PersistentStorage
         }
 
         public GameConfiguration LoadConfiguration()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PersistEntities(string configurationName, string repositoryName, KeyValuePair<string, string>[] jsonEntities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PersistEntity(string configurationName, string repositoryName, string json)
         {
             throw new NotImplementedException();
         }
