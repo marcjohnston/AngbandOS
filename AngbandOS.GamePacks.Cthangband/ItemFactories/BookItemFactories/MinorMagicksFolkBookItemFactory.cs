@@ -32,7 +32,6 @@ public class MinorMagicksFolkBookItemFactory : ItemFactoryGameConfiguration
     };
     public override string ItemClassBindingKey => nameof(FolkSpellBooksItemClass);
     public override int PackSort => 2;
-    public override bool HatesFire => true;
 
     /// <summary>
     /// Returns true, because books are magical and should be detected with the detect magic scroll.

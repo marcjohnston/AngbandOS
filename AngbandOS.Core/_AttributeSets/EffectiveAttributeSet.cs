@@ -101,6 +101,10 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.Feather);
         RegisterReferencePropertyFactory<string>(AttributeEnum.FriendlyName);
         RegisterBoolPropertyFactory(AttributeEnum.FreeAct);
+        RegisterBoolPropertyFactory(AttributeEnum.HatesElectricity);
+        RegisterBoolPropertyFactory(AttributeEnum.HatesAcid);
+        RegisterBoolPropertyFactory(AttributeEnum.HatesCold);
+        RegisterBoolPropertyFactory(AttributeEnum.HatesFire);
         RegisterBoolPropertyFactory(AttributeEnum.HeavyCurse);
         RegisterBoolPropertyFactory(AttributeEnum.HideType);
         RegisterBoolPropertyFactory(AttributeEnum.HoldLife);
@@ -965,6 +969,50 @@ internal class EffectiveAttributeSet
         set
         {
             SetReferenceAttributeValue<string>(AttributeEnum.FriendlyName, value);
+        }
+    }
+    public bool HatesElectricity
+    {
+        get
+        {
+            return GetBoolAttributeValue(AttributeEnum.HatesElectricity);
+        }
+        set
+        {
+            SetBoolAttributeValue(AttributeEnum.HatesElectricity, value);
+        }
+    }
+    public bool HatesAcid
+    {
+        get
+        {
+            return GetBoolAttributeValue(AttributeEnum.HatesAcid);
+        }
+        set
+        {
+            SetBoolAttributeValue(AttributeEnum.HatesAcid, value);
+        }
+    }
+    public bool HatesCold
+    {
+        get
+        {
+            return GetBoolAttributeValue(AttributeEnum.HatesCold);
+        }
+        set
+        {
+            SetBoolAttributeValue(AttributeEnum.HatesCold, value);
+        }
+    }
+    public bool HatesFire
+    {
+        get
+        {
+            return GetBoolAttributeValue(AttributeEnum.HatesFire);
+        }
+        set
+        {
+            SetBoolAttributeValue(AttributeEnum.HatesFire, value);
         }
     }
     public bool HeavyCurse

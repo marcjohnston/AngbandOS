@@ -33,7 +33,6 @@ public class RustyChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;
-    public override bool HatesAcid => true;
     public override bool CanProvideSheathOfElectricity => true;
     public override bool CanProvideSheathOfFire => true;
     public override bool CanApplyArtifactBiasResistance => true;

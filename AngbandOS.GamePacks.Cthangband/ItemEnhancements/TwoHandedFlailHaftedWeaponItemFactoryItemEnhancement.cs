@@ -11,4 +11,6 @@ public class TwoHandedFlailHaftedWeaponItemFactoryItemEnhancement : ItemEnhancem
     public override int? DamageDice => 3;
     public override int? DiceSides => 6;
     public override ColorEnum? Color => ColorEnum.Yellow;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

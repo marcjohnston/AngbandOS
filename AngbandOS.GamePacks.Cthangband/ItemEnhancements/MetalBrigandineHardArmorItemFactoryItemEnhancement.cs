@@ -10,4 +10,5 @@ public class MetalBrigandineHardArmorItemFactoryItemEnhancement : ItemEnhancemen
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.Grey;
     public override string? BaseArmorClass => "19";
+    public override string? HatesAcid => "true";
 }

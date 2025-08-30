@@ -15,4 +15,5 @@ public class WhiteDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override int? DamageDice => 2;
     public override int? DiceSides => 4;
     public override string? BaseArmorClass => "30";
+    public override string? HatesAcid => "true";
 }

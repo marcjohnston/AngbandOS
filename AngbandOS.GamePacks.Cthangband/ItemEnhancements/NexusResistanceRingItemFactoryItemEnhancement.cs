@@ -7,4 +7,5 @@ public class NexusResistanceRingItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool? ResNexus => true;
     public override int? Weight => 2;
     public override int? Value => 3000;
+    public override string? HatesElectricity => "true";
 }

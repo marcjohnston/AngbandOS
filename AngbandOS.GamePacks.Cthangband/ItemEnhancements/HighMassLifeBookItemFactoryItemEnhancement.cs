@@ -8,4 +8,5 @@ public class HighMassLifeBookItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int? Value => 1000;
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
+    public override string? HatesFire => "true";
 }

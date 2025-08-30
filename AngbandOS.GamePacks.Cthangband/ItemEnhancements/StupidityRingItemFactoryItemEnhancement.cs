@@ -7,4 +7,5 @@ public class StupidityRingItemFactoryItemEnhancement : ItemEnhancementGameConfig
     public override bool? HideType => true;
     public override int? Weight => 2;
     public override int? Value => -5000;
+    public override string? HatesElectricity => "true";
 }

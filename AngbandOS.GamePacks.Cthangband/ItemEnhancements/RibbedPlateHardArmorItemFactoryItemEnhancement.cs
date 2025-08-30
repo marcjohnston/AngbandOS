@@ -10,4 +10,5 @@ public class RibbedPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGam
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.BrightWhite;
     public override string? BaseArmorClass => "28";
+    public override string? HatesAcid => "true";
 }

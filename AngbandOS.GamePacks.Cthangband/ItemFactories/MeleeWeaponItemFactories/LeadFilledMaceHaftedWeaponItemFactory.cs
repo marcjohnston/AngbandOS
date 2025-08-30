@@ -27,8 +27,6 @@ public class LeadFilledMaceHaftedWeaponItemFactory : ItemFactoryGameConfiguratio
 
     public override string ItemClassBindingKey => nameof(HaftedWeaponsItemClass);
     public override int PackSort => 30;
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
 
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.MeleeWeaponWieldSlot) };
     public override bool GetsDamageMultiplier => true;

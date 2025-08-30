@@ -11,4 +11,6 @@ public class MightyHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override int? DamageDice => 3;
     public override int? DiceSides => 9;
     public override ColorEnum? Color => ColorEnum.Black;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

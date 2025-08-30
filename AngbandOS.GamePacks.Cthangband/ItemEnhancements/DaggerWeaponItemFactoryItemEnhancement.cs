@@ -12,4 +12,5 @@ public class DaggerWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override int? DamageDice => 1;
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.BrightWhite;
+    public override string? HatesAcid => "true";
 }

@@ -8,4 +8,5 @@ public class EnlightenmentPotionItemFactoryItemEnhancement : ItemEnhancementGame
     public override int? Value => 800;
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
+    public override string? HatesCold => "true";
 }

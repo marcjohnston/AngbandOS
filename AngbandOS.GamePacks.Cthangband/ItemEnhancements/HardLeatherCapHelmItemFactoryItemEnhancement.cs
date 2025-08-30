@@ -8,4 +8,5 @@ public class HardLeatherCapHelmItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int? Value => 12;
     public override ColorEnum? Color => ColorEnum.Brown;
     public override string? BaseArmorClass => "2";
+    public override string? HatesAcid => "true";
 }

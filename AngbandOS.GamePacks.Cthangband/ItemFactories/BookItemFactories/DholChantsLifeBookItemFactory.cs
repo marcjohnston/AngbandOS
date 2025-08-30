@@ -31,7 +31,6 @@ public class DholChantsLifeBookItemFactory : ItemFactoryGameConfiguration
         nameof(SpellsEnum.WardingTrueLifeSpell)
     };
     public override string ItemClassBindingKey => nameof(LifeSpellBooksItemClass);
-    public override bool HatesFire => true;
     public override int PackSort => 8;
 
     /// <summary>

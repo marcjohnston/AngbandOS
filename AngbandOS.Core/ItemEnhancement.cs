@@ -65,6 +65,10 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         FreeAct = itemEnhancementGameConfiguration.FreeAct;
         FriendlyName = itemEnhancementGameConfiguration.FriendlyName;
         HeavyCurse = itemEnhancementGameConfiguration.HeavyCurse;
+        HatesAcid = itemEnhancementGameConfiguration.HatesAcid;
+        HatesCold = itemEnhancementGameConfiguration.HatesCold;
+        HatesElectricity = itemEnhancementGameConfiguration.HatesElectricity;
+        HatesFire = itemEnhancementGameConfiguration.HatesFire;
         HideType = itemEnhancementGameConfiguration.HideType;
         HoldLife = itemEnhancementGameConfiguration.HoldLife;
         IgnoreAcid = itemEnhancementGameConfiguration.IgnoreAcid;
@@ -193,6 +197,10 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Feather, Feather);
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.FreeAct, FreeAct);
         itemCharacteristics.SetReferenceAttributeValue(AttributeEnum.FriendlyName, FriendlyName);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.HatesAcid, HatesAcidExpression == null ? false : Game.ComputeBooleanExpression(HatesAcidExpression).Value);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.HatesCold, HatesColdExpression == null ? false : Game.ComputeBooleanExpression(HatesColdExpression).Value);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.HatesElectricity, HatesElectricityExpression == null ? false : Game.ComputeBooleanExpression(HatesElectricityExpression).Value);
+        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.HatesFire, HatesFireExpression == null ? false : Game.ComputeBooleanExpression(HatesFireExpression).Value);
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.HeavyCurse, HeavyCurse);
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.HideType, HideType);
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.HoldLife, HoldLife);
@@ -287,6 +295,11 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BonusSpeedRoll = Game.ParseNullableNumericExpression(BonusSpeedRollExpression);
         BaseArmorClassExpression = Game.ParseNullableNumericExpression(BaseArmorClass);
 
+        HatesAcidExpression = Game.ParseNullableBooleanExpression(HatesAcid);
+        HatesColdExpression = Game.ParseNullableBooleanExpression(HatesCold);
+        HatesElectricityExpression = Game.ParseNullableBooleanExpression(HatesElectricity);
+        HatesFireExpression = Game.ParseNullableBooleanExpression(HatesFire);
+
         BonusArmorClassRoll = Game.ParseNullableNumericExpression(BonusArmorClassRollExpression);
         BonusHitsRoll = Game.ParseNullableNumericExpression(BonusHitsRollExpression);
         BonusDamageRoll = Game.ParseNullableNumericExpression(BonusDamageRollExpression);
@@ -349,6 +362,10 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Feather = Feather,
             FreeAct = FreeAct,
             HeavyCurse = HeavyCurse,
+            HatesAcid = HatesAcid,
+            HatesCold = HatesCold,
+            HatesElectricity = HatesElectricity,
+            HatesFire = HatesFire,
             HideType = HideType,
             HoldLife = HoldLife,
             IgnoreAcid = IgnoreAcid,
@@ -456,7 +473,12 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// this maximum value will be subtracted from the item
     /// </summary>
     private Expression? BonusDamageRoll { get; set; }
-    
+
+    private Expression? HatesAcidExpression { get; set; }
+    private Expression? HatesFireExpression { get; set; }
+    private Expression? HatesColdExpression { get; set; }
+    private Expression? HatesElectricityExpression { get; set; }
+
     private ItemEnhancementWeightedRandom? AdditionalItemEnhancementWeightedRandom { get; set; }
 
     /// <inheritdoc />
@@ -478,6 +500,19 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     #endregion
 
     #region ItemPropertySet Light-weight & Abstract Properties
+    public string? HatesFire { get; }
+    public string? HatesElectricity { get; }
+
+    /// <summary>
+    /// Returns true, if the item is susceptible to acid.  Returns false, by default.
+    /// </summary>
+    public string? HatesAcid { get; }
+
+    /// <summary>
+    /// Returns true, if the item is susceptible to cold.  Returns false, by default.
+    /// </summary>
+    public string? HatesCold { get; }
+
     /// <summary>
     /// Returns the value of the enhancement.  Returns 0, by default.
     /// </summary>

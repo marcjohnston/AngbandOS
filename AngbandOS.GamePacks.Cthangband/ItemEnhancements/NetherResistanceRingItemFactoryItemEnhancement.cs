@@ -8,4 +8,5 @@ public class NetherResistanceRingItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool? ResNether => true;
     public override int? Weight => 2;
     public override int? Value => 14500;
+    public override string? HatesElectricity => "true";
 }

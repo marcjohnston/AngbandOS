@@ -32,7 +32,6 @@ public class YogicMasteryCorporealBookItemFactory : ItemFactoryGameConfiguration
     };
     public override string ItemClassBindingKey => nameof(CorporealSpellBooksItemClass);
     public override int PackSort => 1;
-    public override bool HatesFire => true;
 
     /// <summary>
     /// Returns true, because books are magical and should be detected with the detect magic scroll.

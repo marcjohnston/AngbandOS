@@ -9,4 +9,5 @@ public class MinorMagicksFolkBookItemFactoryItemEnhancement : ItemEnhancementGam
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.BrightPurple;
+    public override string? HatesFire => "true";
 }

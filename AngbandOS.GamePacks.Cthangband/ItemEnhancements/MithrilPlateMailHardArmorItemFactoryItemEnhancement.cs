@@ -11,4 +11,5 @@ public class MithrilPlateMailHardArmorItemFactoryItemEnhancement : ItemEnhanceme
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.BrightBlue;
     public override string? BaseArmorClass => "35";
+    public override string? HatesAcid => "true";
 }

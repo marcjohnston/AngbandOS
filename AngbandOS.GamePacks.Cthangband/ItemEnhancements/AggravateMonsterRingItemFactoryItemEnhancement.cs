@@ -8,4 +8,5 @@ public class AggravateMonsterRingItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool? EasyKnow => true;
     public override int? Weight => 2;
     public override int? Value => -15000;
+    public override string? HatesElectricity => "true";
 }

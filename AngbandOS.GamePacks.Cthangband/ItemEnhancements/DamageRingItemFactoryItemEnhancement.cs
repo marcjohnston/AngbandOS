@@ -5,4 +5,5 @@ public class DamageRingItemFactoryItemEnhancement : ItemEnhancementGameConfigura
 {
     public override int? Weight => 2;
     public override int? Value => 500;
+    public override string? HatesElectricity => "true";
 }

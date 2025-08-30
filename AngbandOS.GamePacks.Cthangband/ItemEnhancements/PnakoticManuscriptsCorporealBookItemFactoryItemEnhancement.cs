@@ -13,4 +13,5 @@ public class PnakoticManuscriptsCorporealBookItemFactoryItemEnhancement : ItemEn
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.BrightYellow;
+    public override string? HatesFire => "true";
 }

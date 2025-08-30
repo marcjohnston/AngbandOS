@@ -1343,6 +1343,10 @@ internal class Game
     {
         return expression.Compute<IntegerExpression>(DecimalToIntegerExpressionTypeConverter);
     }
+    public BooleanExpression ComputeBooleanExpression(Expression expression)
+    {
+        return expression.Compute<BooleanExpression>();
+    }
 
     //    private static string SuffixIf(string? value, string suffix) => String.IsNullOrEmpty(value) ? "" : $"{value}{suffix}";
     public static string DelimitIf(string? prefix, string delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
@@ -5935,7 +5939,7 @@ internal class Game
 
     public bool SetAcidDestroy(Item oPtr)
     {
-        if (!oPtr.HatesAcid)
+        if (!oPtr.EffectivePropertySet.HatesAcid)
         {
             return false;
         }
@@ -5948,7 +5952,7 @@ internal class Game
 
     public bool SetColdDestroy(Item oPtr)
     {
-        if (!oPtr.HatesCold)
+        if (!oPtr.EffectivePropertySet.HatesCold)
         {
             return false;
         }
@@ -5961,7 +5965,7 @@ internal class Game
 
     public bool SetElecDestroy(Item oPtr)
     {
-        if (!oPtr.HatesElectricity)
+        if (!oPtr.EffectivePropertySet.HatesElectricity)
         {
             return false;
         }
@@ -5974,7 +5978,7 @@ internal class Game
 
     public bool SetFireDestroy(Item oPtr)
     {
-        if (!oPtr.HatesFire)
+        if (!oPtr.EffectivePropertySet.HatesFire)
         {
             return false;
         }
@@ -17422,6 +17426,16 @@ internal class Game
         }
 
         return ParseNumericExpression(expressionText);
+    }
+
+    public Expression? ParseNullableBooleanExpression(string? expressionText)
+    {
+        if (expressionText == null)
+        {
+            return null;
+        }
+
+        return ParseBooleanExpression(expressionText);
     }
 
     /// <summary>

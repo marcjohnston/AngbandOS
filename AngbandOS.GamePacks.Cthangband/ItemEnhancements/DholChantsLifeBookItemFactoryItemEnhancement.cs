@@ -13,4 +13,5 @@ public class DholChantsLifeBookItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.BrightWhite;
+    public override string? HatesFire => "true";
 }

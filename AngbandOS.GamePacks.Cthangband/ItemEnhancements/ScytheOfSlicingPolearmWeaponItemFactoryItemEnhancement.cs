@@ -12,4 +12,6 @@ public class ScytheOfSlicingPolearmWeaponItemFactoryItemEnhancement : ItemEnhanc
     public override int? DamageDice => 8;
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.Red;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

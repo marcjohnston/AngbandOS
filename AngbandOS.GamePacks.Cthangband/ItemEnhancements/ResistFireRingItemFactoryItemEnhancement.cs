@@ -8,4 +8,5 @@ public class ResistFireRingItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override bool? ResFire => true;
     public override int? Weight => 2;
     public override int? Value => 250;
+    public override string? HatesElectricity => "true";
 }

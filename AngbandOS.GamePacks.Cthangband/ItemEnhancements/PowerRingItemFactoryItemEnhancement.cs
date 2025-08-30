@@ -5,4 +5,5 @@ public class PowerRingItemFactoryItemEnhancement : ItemEnhancementGameConfigurat
 {
     public override int? Weight => 2;
     public override int? Value => 5000000;
+    public override string? HatesElectricity => "true";
 }

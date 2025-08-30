@@ -8,4 +8,5 @@ public class BrokenBoneSkeletonItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.Beige;
+    public override string? HatesAcid => "true";
 }

@@ -12,4 +12,6 @@ public class AwlPikePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override int? DamageDice => 1;
     public override int? DiceSides => 8;
     public override ColorEnum? Color => ColorEnum.Grey;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

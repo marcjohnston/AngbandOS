@@ -39,7 +39,5 @@ public class MagicMappingScrollItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(MagicMappingScrollItemFactoryItemEnhancement);
     public override int PackSort => 12;
     public override int BaseValue => 20;
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
 
 }

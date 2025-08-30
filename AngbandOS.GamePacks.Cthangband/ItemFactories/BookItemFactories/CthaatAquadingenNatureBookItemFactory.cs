@@ -39,7 +39,6 @@ public class CthaatAquadingenNatureBookItemFactory : ItemFactoryGameConfiguratio
     public override string ItemClassBindingKey => nameof(NatureSpellBooksItemClass);
 
     public override int PackSort => 6;
-    public override bool HatesFire => true;
 
     /// <summary>
     /// Returns true, because books are magical and should be detected with the detect magic scroll.

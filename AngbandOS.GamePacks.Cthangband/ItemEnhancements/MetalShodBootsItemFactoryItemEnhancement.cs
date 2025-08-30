@@ -9,4 +9,6 @@ public class MetalShodBootsItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.Grey;
     public override string? BaseArmorClass => "6";
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

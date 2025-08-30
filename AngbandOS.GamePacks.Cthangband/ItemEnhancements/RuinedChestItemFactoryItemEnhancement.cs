@@ -5,4 +5,6 @@ public class RuinedChestItemFactoryItemEnhancement : ItemEnhancementGameConfigur
 {
     public override int? Weight => 250;
     public override ColorEnum? Color => ColorEnum.Grey;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

@@ -7,4 +7,5 @@ public class LevitationRingItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override bool? Feather => true;
     public override int? Weight => 2;
     public override int? Value => 200;
+    public override string? HatesElectricity => "true";
 }

@@ -9,4 +9,6 @@ public class GauntletGlovesItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
     public override string? BaseArmorClass => "2";
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

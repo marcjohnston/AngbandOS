@@ -8,4 +8,5 @@ public class WeaknessRingItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override string? Strength => "-5";
     public override int? Weight => 2;
     public override int? Value => -11000;
+    public override string? HatesElectricity => "true";
 }

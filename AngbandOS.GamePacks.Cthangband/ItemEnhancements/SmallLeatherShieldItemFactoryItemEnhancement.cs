@@ -10,4 +10,5 @@ public class SmallLeatherShieldItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
     public override string? BaseArmorClass => "2";
+    public override string? HatesAcid => "true";
 }

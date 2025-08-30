@@ -27,5 +27,4 @@ public class BrokenBoneSkeletonItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(BrokenBoneSkeletonItemFactoryItemEnhancement);
     public override int PackSort => 40;
     public override string BreakageChanceProbabilityExpression => "50/100";
-    public override bool HatesAcid => true;
 }

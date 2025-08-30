@@ -21,7 +21,7 @@ internal class ForceItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.HatesCold)
+        if (oPtr.EffectivePropertySet.HatesCold)
         {
             noteKill = plural ? " shatter!" : " shatters!";
             doKill = true;

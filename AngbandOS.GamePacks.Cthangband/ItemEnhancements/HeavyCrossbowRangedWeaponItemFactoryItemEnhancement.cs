@@ -11,4 +11,6 @@ public class HeavyCrossbowRangedWeaponItemFactoryItemEnhancement : ItemEnhanceme
     public override int? Weight => 200;
     public override int? Value => 300;
     public override ColorEnum? Color => ColorEnum.Grey;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

@@ -7,4 +7,5 @@ public class SeeInvisibleRingItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool? SeeInvis => true;
     public override int? Weight => 2;
     public override int? Value => 340;
+    public override string? HatesElectricity => "true";
 }

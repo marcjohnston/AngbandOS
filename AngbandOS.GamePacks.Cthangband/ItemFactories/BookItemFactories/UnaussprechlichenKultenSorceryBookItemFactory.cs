@@ -32,7 +32,6 @@ public class UnaussprechlichenKultenSorceryBookItemFactory : ItemFactoryGameConf
     };
 
     public override string ItemClassBindingKey => nameof(SorcerySpellBooksItemClass);
-    public override bool HatesFire => true;
     public override int PackSort => 7;
 
     /// <summary>

@@ -30,8 +30,6 @@ public class WoodenArrowAmmunitionItemFactory : ItemFactoryGameConfiguration
     };
 
     public override int PackSort => 34;
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
     public override string MakeObjectCountExpression => "6d7";
     public override string BreakageChanceProbabilityExpression => "25/100";
 

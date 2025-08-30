@@ -30,7 +30,6 @@ public class SteelBoltAmmunitionItemFactory : ItemFactoryGameConfiguration
     {
         (500, "5d5-5")
     };
-    public override bool HatesAcid => true;
     public override string MakeObjectCountExpression => "6d7";
     public override string BreakageChanceProbabilityExpression => "25/100";
 

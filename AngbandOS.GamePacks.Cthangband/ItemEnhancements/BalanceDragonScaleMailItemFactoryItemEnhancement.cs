@@ -19,4 +19,5 @@ public class BalanceDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementG
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.Silver;
     public override string? BaseArmorClass => "30";
+    public override string? HatesAcid => "true";
 }

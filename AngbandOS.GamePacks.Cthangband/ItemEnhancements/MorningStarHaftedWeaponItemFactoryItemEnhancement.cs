@@ -11,4 +11,6 @@ public class MorningStarHaftedWeaponItemFactoryItemEnhancement : ItemEnhancement
     public override int? DamageDice => 2;
     public override int? DiceSides => 6;
     public override ColorEnum? Color => ColorEnum.Black;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

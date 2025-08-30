@@ -8,4 +8,5 @@ public class DetonationsPotionItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int? Value => 10000;
     public override int? DamageDice => 25;
     public override int? DiceSides => 25;
+    public override string? HatesCold => "true";
 }

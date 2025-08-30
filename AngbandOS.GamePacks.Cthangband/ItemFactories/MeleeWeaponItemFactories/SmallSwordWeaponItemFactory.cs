@@ -28,7 +28,6 @@ public class SmallSwordWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool CanBeWeaponOfSharpness => true;
     public override bool CapableOfVorpalSlaying => true;
     public override string ItemClassBindingKey => nameof(SwordsItemClass);
-    public override bool HatesAcid => true;
     public override int PackSort => 28;
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.MeleeWeaponWieldSlot) };
     public override bool GetsDamageMultiplier => true;

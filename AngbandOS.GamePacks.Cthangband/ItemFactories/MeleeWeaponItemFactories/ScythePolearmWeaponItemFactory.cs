@@ -26,9 +26,7 @@ public class ScythePolearmWeaponItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string ItemClassBindingKey => nameof(PolearmsItemClass);
-    public override bool HatesFire => true;
     public override int PackSort => 29;
-    public override bool HatesAcid => true;
 
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.MeleeWeaponWieldSlot) };
     public override bool GetsDamageMultiplier => true;

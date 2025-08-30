@@ -27,5 +27,4 @@ public class ElfSkeletonSkeletonItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(ElfSkeletonSkeletonItemFactoryItemEnhancement);
     public override int PackSort => 40;
     public override string BreakageChanceProbabilityExpression => "50/100";
-    public override bool HatesAcid => true;
 }

@@ -8,4 +8,5 @@ public class WisdomPotionItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override int? Value => 8000;
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
+    public override string? HatesCold => "true";
 }

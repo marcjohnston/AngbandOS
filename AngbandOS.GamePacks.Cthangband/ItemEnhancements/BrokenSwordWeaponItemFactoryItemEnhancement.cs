@@ -12,4 +12,5 @@ public class BrokenSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int? DamageDice => 1;
     public override int? DiceSides => 2;
     public override ColorEnum? Color => ColorEnum.Black;
+    public override string? HatesAcid => "true";
 }

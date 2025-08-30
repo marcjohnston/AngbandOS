@@ -40,7 +40,6 @@ public class LiberIvonisSorceryBookItemFactory : ItemFactoryGameConfiguration
     /// Returns just the realm name because Sorcery automatically assumes magic--so we omit the "Magic" suffix from the divine title.
     /// </summary>
     public override string ItemClassBindingKey => nameof(SorcerySpellBooksItemClass);
-    public override bool HatesFire => true;
     public override int PackSort => 7;
 
     /// <summary>

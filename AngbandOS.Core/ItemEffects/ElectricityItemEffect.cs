@@ -22,7 +22,7 @@ internal class ElectricityItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.HatesElectricity)
+        if (oPtr.EffectivePropertySet.HatesElectricity)
         {
             doKill = true;
             noteKill = plural ? " are destroyed!" : " is destroyed!";

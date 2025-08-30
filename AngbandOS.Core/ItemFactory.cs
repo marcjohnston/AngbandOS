@@ -123,10 +123,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         BonusHit = itemFactoryGameConfiguration.BonusHit;
         IsSmall = itemFactoryGameConfiguration.IsSmall;
         BaseValue = itemFactoryGameConfiguration.BaseValue;
-        HatesElectricity = itemFactoryGameConfiguration.HatesElectricity;
-        HatesFire = itemFactoryGameConfiguration.HatesFire;
-        HatesAcid = itemFactoryGameConfiguration.HatesAcid;
-        HatesCold = itemFactoryGameConfiguration.HatesCold;
         CanProvideSheathOfElectricity = itemFactoryGameConfiguration.CanProvideSheathOfElectricity;
         CanProvideSheathOfFire = itemFactoryGameConfiguration.CanProvideSheathOfFire;
         RandartActivationChance = itemFactoryGameConfiguration.RandartActivationChance;
@@ -310,10 +306,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             BonusHit = BonusHit,
             IsSmall = IsSmall,
             BaseValue = BaseValue,
-            HatesElectricity = HatesElectricity,
-            HatesFire = HatesFire,
-            HatesAcid = HatesAcid,
-            HatesCold = HatesCold,
             CanProvideSheathOfElectricity = CanProvideSheathOfElectricity,
             CanProvideSheathOfFire = CanProvideSheathOfFire,
             RandartActivationChance = RandartActivationChance,
@@ -404,9 +396,9 @@ internal sealed class ItemFactory : IGetKey, IToJson
         EffectiveAttributeSet.AddEnhancement(itemEnhancement.GenerateItemCharacteristics());
 
         //// Cut and paste
-        //string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override int ArmorClass => ");
-        //if (prop is not null)
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", itemEnhancement.GetKey, $"    public override string? BaseArmorClass => \"{prop.Split("=> ")[1].Replace(";", "").Trim()}\";");
+        //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override bool HatesElectricity => ");
+        //if (prop1 is not null)
+        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", itemEnhancement.GetKey, $"    public override string? HatesElectricity => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
         FlavorSymbol = Symbol;
@@ -2110,26 +2102,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the base value for a non flavor-aware item.  Returns 0, by default.
     /// </summary>
     public int BaseValue { get; } = 0;
-
-    /// <summary>
-    /// Returns true, if the item is susceptible to electricity.  Returns false, by default.
-    /// </summary>
-    public bool HatesElectricity { get; } = false;
-
-    /// <summary>
-    /// Returns true, if the item is susceptible to fire.  Returns false, by default.
-    /// </summary>
-    public bool HatesFire { get; } = false;
-
-    /// <summary>
-    /// Returns true, if the item is susceptible to acid.  Returns false, by default.
-    /// </summary>
-    public bool HatesAcid { get; } = false;
-
-    /// <summary>
-    /// Returns true, if the item is susceptible to cold.  Returns false, by default.
-    /// </summary>
-    public bool HatesCold { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can provide a sheath of electricity.  Returns false, by default.  Cloaks, soft and hard armor return true.

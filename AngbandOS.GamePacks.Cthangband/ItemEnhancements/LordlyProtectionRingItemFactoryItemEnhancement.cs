@@ -10,4 +10,5 @@ public class LordlyProtectionRingItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool? ResPois => true;
     public override int? Weight => 2;
     public override int? Value => 100000;
+    public override string? HatesElectricity => "true";
 }

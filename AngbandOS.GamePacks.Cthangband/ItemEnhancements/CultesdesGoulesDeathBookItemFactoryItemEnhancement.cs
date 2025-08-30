@@ -13,4 +13,5 @@ public class CultesdesGoulesDeathBookItemFactoryItemEnhancement : ItemEnhancemen
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.Black;
+    public override string? HatesFire => "true";
 }

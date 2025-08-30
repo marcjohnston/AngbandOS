@@ -7,4 +7,5 @@ public class SustainDexterityRingItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool? SustDex => true;
     public override int? Weight => 2;
     public override int? Value => 750;
+    public override string? HatesElectricity => "true";
 }

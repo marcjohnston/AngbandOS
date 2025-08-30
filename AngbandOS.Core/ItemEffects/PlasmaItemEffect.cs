@@ -22,7 +22,7 @@ internal class PlasmaItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.HatesFire)
+        if (oPtr.EffectivePropertySet.HatesFire)
         {
             doKill = true;
             noteKill = plural ? " burn up!" : " burns up!";
@@ -31,7 +31,7 @@ internal class PlasmaItemEffect : ItemEffect
                 ignore = true;
             }
         }
-        if (oPtr.HatesElectricity)
+        if (oPtr.EffectivePropertySet.HatesElectricity)
         {
             ignore = false;
             doKill = true;

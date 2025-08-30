@@ -10,4 +10,5 @@ public class LargeMetalShieldItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override int? DiceSides => 3;
     public override ColorEnum? Color => ColorEnum.Grey;
     public override string? BaseArmorClass => "5";
+    public override string? HatesAcid => "true";
 }

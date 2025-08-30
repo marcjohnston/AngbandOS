@@ -7,4 +7,5 @@ public class PoisonResistanceRingItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool? ResPois => true;
     public override int? Weight => 2;
     public override int? Value => 16000;
+    public override string? HatesElectricity => "true";
 }

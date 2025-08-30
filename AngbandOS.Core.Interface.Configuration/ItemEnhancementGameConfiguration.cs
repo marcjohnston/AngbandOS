@@ -16,6 +16,26 @@ public class ItemEnhancementGameConfiguration
     public virtual string? Key { get; set; } = null;
 
     /// <summary>
+    /// Returns true, if the item is susceptible to electricity.  Returns false, by default.
+    /// </summary>
+    public virtual string? HatesElectricity { get; set; } = null;
+
+    /// <summary>
+    /// Returns true, if the item is susceptible to fire.  Returns false, by default.
+    /// </summary>
+    public virtual string? HatesFire { get; set; } = null;
+
+    /// <summary>
+    /// Returns true, if the item is susceptible to acid.  Returns false, by default.
+    /// </summary>
+    public virtual string? HatesAcid { get; set; } = null;
+
+    /// <summary>
+    /// Returns true, if the item is susceptible to cold.  Returns false, by default.
+    /// </summary>
+    public virtual string? HatesCold { get; set; } = null;
+
+    /// <summary>
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
     /// be applied to all <see cref="ItemFactory"/> objects.  This property is used to bind the <see cref="ApplicableItemFactories"/> property.
     /// </summary>

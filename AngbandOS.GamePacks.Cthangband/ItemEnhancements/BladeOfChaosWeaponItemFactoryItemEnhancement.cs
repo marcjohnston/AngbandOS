@@ -14,4 +14,5 @@ public class BladeOfChaosWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int? DamageDice => 6;
     public override int? DiceSides => 5;
     public override ColorEnum? Color => ColorEnum.Purple;
+    public override string? HatesAcid => "true";
 }

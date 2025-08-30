@@ -15,4 +15,5 @@ public class DragonShieldItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override int? DiceSides => 3;
     public override ColorEnum? Color => ColorEnum.BrightGreen;
     public override string? BaseArmorClass => "8";
+    public override string? HatesAcid => "true";
 }

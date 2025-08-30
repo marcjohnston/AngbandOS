@@ -7,4 +7,5 @@ public class SpeedRingItemFactoryItemEnhancement : ItemEnhancementGameConfigurat
     public override bool? HideType => true;
     public override int? Weight => 2;
     public override int? Value => 100000;
+    public override string? HatesElectricity => "true";
 }

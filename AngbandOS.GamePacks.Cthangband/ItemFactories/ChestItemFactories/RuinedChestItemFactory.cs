@@ -30,8 +30,6 @@ public class RuinedChestItemFactory : ItemFactoryGameConfiguration
         (null, null, new string[] { nameof(SystemScriptsEnum.ChestEnchantmentScript) }),
     };
     public override string ItemClassBindingKey => nameof(ChestsItemClass);
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
 
     /// <summary>
     /// Returns false, because the player shouldn't be asked to stomp all Chests. 

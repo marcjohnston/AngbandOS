@@ -10,4 +10,5 @@ public class FullPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.BrightWhite;
     public override string? BaseArmorClass => "25";
+    public override string? HatesAcid => "true";
 }

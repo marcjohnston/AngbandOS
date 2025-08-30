@@ -8,4 +8,6 @@ public class SmallIronChestItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override int? DamageDice => 2;
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.Grey;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

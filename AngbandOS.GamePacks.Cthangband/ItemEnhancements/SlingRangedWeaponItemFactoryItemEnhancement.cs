@@ -11,4 +11,6 @@ public class SlingRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int? Weight => 5;
     public override int? Value => 5;
     public override ColorEnum? Color => ColorEnum.Brown;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

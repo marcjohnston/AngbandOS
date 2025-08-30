@@ -37,7 +37,6 @@ public class CeleanoFragmentsTarotBookItemFactory : ItemFactoryGameConfiguration
     };
     public override string ItemClassBindingKey => nameof(TarotSpellBooksItemClass);
     public override int PackSort => 3;
-    public override bool HatesFire => true;
 
     /// <summary>
     /// Returns true, because books are magical and should be detected with the detect magic scroll.

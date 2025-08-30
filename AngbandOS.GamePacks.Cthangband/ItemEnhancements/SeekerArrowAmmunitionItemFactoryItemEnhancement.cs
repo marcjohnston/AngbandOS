@@ -11,5 +11,7 @@ public class SeekerArrowAmmunitionItemFactoryItemEnhancement : ItemEnhancementGa
     public override int? DamageDice => 4;
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.BrightGreen;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }
 

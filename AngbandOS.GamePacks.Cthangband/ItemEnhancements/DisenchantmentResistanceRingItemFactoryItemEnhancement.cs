@@ -7,4 +7,5 @@ public class DisenchantmentResistanceRingItemFactoryItemEnhancement : ItemEnhanc
     public override bool? ResDisen => true;
     public override int? Weight => 2;
     public override int? Value => 15000;
+    public override string? HatesElectricity => "true";
 }

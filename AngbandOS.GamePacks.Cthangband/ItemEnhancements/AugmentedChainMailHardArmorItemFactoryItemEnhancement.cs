@@ -10,4 +10,5 @@ public class AugmentedChainMailHardArmorItemFactoryItemEnhancement : ItemEnhance
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.Grey;
     public override string? BaseArmorClass => "16";
+    public override string? HatesAcid => "true";
 }

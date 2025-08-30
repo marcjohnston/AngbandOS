@@ -9,4 +9,6 @@ public class SoftStuddedLeatherSoftArmorItemFactoryItemEnhancement : ItemEnhance
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
     public override string? BaseArmorClass => "5";
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

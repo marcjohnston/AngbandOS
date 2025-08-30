@@ -31,6 +31,5 @@ public class FlaskOfOilItemFactory : ItemFactoryGameConfiguration
     };
 
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override bool HatesCold => true;
     public override int PackSort => 10;
 }

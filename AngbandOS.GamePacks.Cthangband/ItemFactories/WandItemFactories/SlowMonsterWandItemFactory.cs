@@ -37,6 +37,5 @@ public class SlowMonsterWandItemFactory : ItemFactoryGameConfiguration
     public override string BreakageChanceProbabilityExpression => "25/100";
     public override int PackSort => 14;
     public override int BaseValue => 50;
-    public override bool HatesElectricity => true;
 
 }

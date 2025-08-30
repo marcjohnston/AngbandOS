@@ -38,7 +38,6 @@ public class LeadCrownArmorItemFactory : ItemFactoryGameConfiguration
     };
     
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.HeadWieldSlot) };
-    public override bool HatesAcid => true;
 
     public override int PackSort => 24;
 

@@ -31,7 +31,6 @@ public class BlackPrayersDeathBookItemFactory : ItemFactoryGameConfiguration
         nameof(SpellsEnum.EnslaveUndeadDeathSpell)
     };
     public override string ItemClassBindingKey => nameof(DeathSpellBooksItemClass);
-    public override bool HatesFire => true;
     public override int PackSort => 4;
 
     /// <summary>

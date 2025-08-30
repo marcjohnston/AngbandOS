@@ -33,8 +33,6 @@ public class CestiGlovesItemFactory : ItemFactoryGameConfiguration
 
     public override int PackSort => 26;
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.HandsWieldSlot) };
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
 
     /// <summary>
     /// Returns true because broken armor should be stomped automatically. 

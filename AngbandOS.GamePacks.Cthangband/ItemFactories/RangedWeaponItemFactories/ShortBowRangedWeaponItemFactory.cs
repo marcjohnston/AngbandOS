@@ -46,8 +46,6 @@ public class ShortBowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.RangedWeaponWieldSlot) };
     public override int PackSort => 32;
     public override bool CanProjectArrows => true;
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
     public override int? RandomArtifactBonusDamageCeiling => 19;
     public override int? RandomArtifactBonusHitCeiling => 19;
 

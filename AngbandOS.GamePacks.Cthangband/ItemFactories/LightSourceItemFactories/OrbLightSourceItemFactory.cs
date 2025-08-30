@@ -52,7 +52,6 @@ public class OrbLightSourceItemFactory : ItemFactoryGameConfiguration
 
     public override string BreakageChanceProbabilityExpression => "50/100";
     public override int PackSort => 18;
-    public override bool HatesFire => true;
 
     /// <summary>
     /// Returns true, because all light sources can be worn/wielded.

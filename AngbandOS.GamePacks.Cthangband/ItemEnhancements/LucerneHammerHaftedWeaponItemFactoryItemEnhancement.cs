@@ -11,4 +11,6 @@ public class LucerneHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhanceme
     public override int? DamageDice => 2;
     public override int? DiceSides => 5;
     public override ColorEnum? Color => ColorEnum.BrightBlue;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

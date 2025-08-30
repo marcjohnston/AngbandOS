@@ -10,4 +10,6 @@ public class ShadowCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigur
     public override int? Value => 7500;
     public override ColorEnum? Color => ColorEnum.Black;
     public override string? BaseArmorClass => "6";
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

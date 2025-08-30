@@ -34,8 +34,6 @@ public class HardStuddedLeatherSoftArmorItemFactory : ItemFactoryGameConfigurati
     public override string ItemClassBindingKey => nameof(SoftArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 21;
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
 
     public override bool CanProvideSheathOfElectricity => true;
 

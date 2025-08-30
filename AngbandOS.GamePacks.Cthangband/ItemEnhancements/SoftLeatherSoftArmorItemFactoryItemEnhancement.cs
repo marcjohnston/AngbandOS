@@ -7,4 +7,6 @@ public class SoftLeatherSoftArmorItemFactoryItemEnhancement : ItemEnhancementGam
     public override int? Value => 18;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
     public override string? BaseArmorClass => "4";
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

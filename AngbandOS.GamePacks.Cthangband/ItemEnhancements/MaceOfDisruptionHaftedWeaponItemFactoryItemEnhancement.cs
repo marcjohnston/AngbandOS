@@ -12,4 +12,6 @@ public class MaceOfDisruptionHaftedWeaponItemFactoryItemEnhancement : ItemEnhanc
     public override int? DamageDice => 5;
     public override int? DiceSides => 8;
     public override ColorEnum? Color => ColorEnum.Purple;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

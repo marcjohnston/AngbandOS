@@ -43,8 +43,6 @@ public class ElvenCloakItemFactory : ItemFactoryGameConfiguration
 
     public override string ItemClassBindingKey => nameof(CloaksItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.AboutBodyWieldSlot) };
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
 
     public override int PackSort => 22;
 

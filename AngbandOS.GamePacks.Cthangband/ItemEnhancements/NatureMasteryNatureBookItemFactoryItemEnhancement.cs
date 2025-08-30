@@ -9,4 +9,5 @@ public class NatureMasteryNatureBookItemFactoryItemEnhancement : ItemEnhancement
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.BrightGreen;
+    public override string? HatesFire => "true";
 }

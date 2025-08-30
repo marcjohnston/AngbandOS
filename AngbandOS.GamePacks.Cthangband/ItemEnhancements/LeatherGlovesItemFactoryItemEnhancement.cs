@@ -7,4 +7,6 @@ public class LeatherGlovesItemFactoryItemEnhancement : ItemEnhancementGameConfig
     public override int? Value => 3;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
     public override string? BaseArmorClass => "1";
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

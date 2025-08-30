@@ -11,4 +11,6 @@ public class ShortBowRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override int? Weight => 30;
     public override int? Value => 50;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

@@ -7,4 +7,5 @@ public class WeaknessPotionItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override int? Weight => 4;
     public override int? DamageDice => 3;
     public override int? DiceSides => 12;
+    public override string? HatesCold => "true";
 }

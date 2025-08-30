@@ -31,7 +31,6 @@ public class BlackMassDeathBookItemFactory : ItemFactoryGameConfiguration
         nameof(SpellsEnum.RestoreLifeDeathSpell)
     };
     public override string ItemClassBindingKey => nameof(DeathSpellBooksItemClass);
-    public override bool HatesFire => true;
     public override int PackSort => 4;
 
     /// <summary>

@@ -13,9 +13,7 @@ public class EmptyBottleItemFactory : ItemFactoryGameConfiguration
     public override string ItemClassBindingKey => nameof(BottlesItemClass);
     public override string? ItemEnhancementBindingKey => nameof(EmptyBottleItemFactoryItemEnhancement);
     public override int PackSort => 39;
-    public override bool HatesCold => true;
     public override string BreakageChanceProbabilityExpression => "100/100";
-    public override bool HatesAcid => true;
     public override string Name => "Empty Bottle";
 
     public override string? DescriptionSyntax => "Empty Bottle~";

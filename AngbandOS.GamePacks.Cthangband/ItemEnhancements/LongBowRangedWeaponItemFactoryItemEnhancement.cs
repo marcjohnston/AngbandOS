@@ -11,4 +11,6 @@ public class LongBowRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGame
     public override int? Weight => 40;
     public override int? Value => 120;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
+    public override string? HatesAcid => "true";
+    public override string? HatesFire => "true";
 }

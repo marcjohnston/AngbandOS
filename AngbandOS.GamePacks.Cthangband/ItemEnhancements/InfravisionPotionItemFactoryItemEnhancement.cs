@@ -8,4 +8,5 @@ public class InfravisionPotionItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override int? Value => 20;
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
+    public override string? HatesCold => "true";
 }

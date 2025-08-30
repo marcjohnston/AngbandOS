@@ -7,4 +7,5 @@ public class HealMonsterWandItemFactoryItemEnhancement : ItemEnhancementGameConf
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.Chartreuse;
+    public override string? HatesElectricity => "true";
 }

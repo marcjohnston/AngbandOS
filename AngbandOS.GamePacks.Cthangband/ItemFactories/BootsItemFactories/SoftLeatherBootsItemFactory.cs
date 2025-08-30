@@ -40,8 +40,6 @@ public class SoftLeatherBootsItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(SoftLeatherBootsItemFactoryItemEnhancement);
     public override string ItemClassBindingKey => nameof(BootsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.FeetWieldSlot) };
-    public override bool HatesFire => true;
-    public override bool HatesAcid => true;
     public override int PackSort => 27;
 
     /// <summary>

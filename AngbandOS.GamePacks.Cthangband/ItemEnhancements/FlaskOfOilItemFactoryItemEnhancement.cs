@@ -9,4 +9,5 @@ public class FlaskOfOilItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override int? DamageDice => 2;
     public override int? DiceSides => 6;
     public override ColorEnum? Color => ColorEnum.Yellow;
+    public override string? HatesCold => "true";
 }

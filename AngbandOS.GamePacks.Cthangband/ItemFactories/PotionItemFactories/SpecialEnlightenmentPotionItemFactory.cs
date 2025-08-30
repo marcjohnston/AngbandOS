@@ -46,5 +46,4 @@ public class SpecialEnlightenmentPotionItemFactory : ItemFactoryGameConfiguratio
     /// <summary>
     /// Returns true because potions are susceptible to freezing.
     /// </summary>
-    public override bool HatesCold => true;
 }

@@ -37,7 +37,6 @@ public class PonapeScriptureLifeBookItemFactory : ItemFactoryGameConfiguration
         nameof(SpellsEnum.HolyInvulnerabilityLifeSpell)
     };
     public override string ItemClassBindingKey => nameof(LifeSpellBooksItemClass);
-    public override bool HatesFire => true;
     public override int PackSort => 8;
 
     /// <summary>
