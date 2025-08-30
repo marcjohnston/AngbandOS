@@ -22,7 +22,6 @@ public class AugmentedChainMailHardArmorItemFactory : ItemFactoryGameConfigurati
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "Augmented Chain Mail";
 
-    public override int ArmorClass => 16;
     public override string? DescriptionSyntax  => "Augmented Chain Mail~";
     public override int LevelNormallyFound => 30;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

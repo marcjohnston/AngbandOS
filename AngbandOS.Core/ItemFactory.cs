@@ -105,7 +105,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         WieldSlotBindingKeys = itemFactoryGameConfiguration.WieldSlotBindingKeys;
         AskDestroyAll = itemFactoryGameConfiguration.AskDestroyAll;
         HasQualityRatings = itemFactoryGameConfiguration.HasQualityRatings;
-        ArmorClass = itemFactoryGameConfiguration.ArmorClass;
         DepthsFoundAndChances = itemFactoryGameConfiguration.DepthsFoundAndChances;
         LevelNormallyFound = itemFactoryGameConfiguration.LevelNormallyFound;
         InitialBonusAttacks = itemFactoryGameConfiguration.InitialBonusAttacks;
@@ -293,7 +292,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             WieldSlotBindingKeys = WieldSlotBindingKeys,
             AskDestroyAll = AskDestroyAll,
             HasQualityRatings = HasQualityRatings,
-            ArmorClass = ArmorClass,
             DepthsFoundAndChances = DepthsFoundAndChances,
             LevelNormallyFound = LevelNormallyFound,
             InitialBonusAttacks = InitialBonusAttacks,
@@ -408,7 +406,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         //// Cut and paste
         //string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override int ArmorClass => ");
         //if (prop is not null)
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", ItemEnhancement.GetKey, prop);
+        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", itemEnhancement.GetKey, $"    public override string? BaseArmorClass => \"{prop.Split("=> ")[1].Replace(";", "").Trim()}\";");
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
         FlavorSymbol = Symbol;
@@ -588,10 +586,10 @@ internal sealed class ItemFactory : IGetKey, IToJson
             {
                 s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHits)},{GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
 
-                if (item.ArmorClass != 0)
+                if (item.EffectivePropertySet.BaseArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.ArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
+                    s += $" [{item.EffectivePropertySet.BaseArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
                 }
                 else if (item.EffectivePropertySet.BonusArmorClass != 0)
                 {
@@ -599,9 +597,9 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     s += $" [{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
                 }
             }
-            else if (item.ArmorClass != 0)
+            else if (item.EffectivePropertySet.BaseArmorClass != 0)
             {
-                s += $" [{item.ArmorClass}]";
+                s += $" [{item.EffectivePropertySet.BaseArmorClass}]";
             }
         }
         else if (IsWeapon)
@@ -612,10 +610,10 @@ internal sealed class ItemFactory : IGetKey, IToJson
             {
                 s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHits)},{GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
 
-                if (item.ArmorClass != 0)
+                if (item.EffectivePropertySet.BaseArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.ArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
+                    s += $" [{item.EffectivePropertySet.BaseArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
                 }
                 else if (item.EffectivePropertySet.BonusArmorClass != 0)
                 {
@@ -623,9 +621,9 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     s += $" [{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
                 }
             }
-            else if (item.ArmorClass != 0)
+            else if (item.EffectivePropertySet.BaseArmorClass != 0)
             {
-                s += $" [{item.ArmorClass}]";
+                s += $" [{item.EffectivePropertySet.BaseArmorClass}]";
             }
         }
         else if (IsArmor)
@@ -646,11 +644,11 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 }
 
                 // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                s += $" [{item.ArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
+                s += $" [{item.EffectivePropertySet.BaseArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
             }
-            else if (item.ArmorClass != 0)
+            else if (item.EffectivePropertySet.BaseArmorClass != 0)
             {
-                s += $" [{item.ArmorClass}]";
+                s += $" [{item.EffectivePropertySet.BaseArmorClass}]";
             }
         }
         else
@@ -670,10 +668,10 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     s += $" ({GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
                 }
 
-                if (item.ArmorClass != 0)
+                if (item.EffectivePropertySet.BaseArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.ArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
+                    s += $" [{item.EffectivePropertySet.BaseArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
                 }
                 else if (item.EffectivePropertySet.BonusArmorClass != 0)
                 {
@@ -2035,8 +2033,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// item properties to determine their quality.
     /// </summary>
     public bool HasQualityRatings { get; } = false;
-
-    public int ArmorClass { get; } = 0;
 
     /// <summary>
     /// Returns the depth and 1-in probably for where the item can be found; or null, if the item is not found naturally.  Returns null, by default.

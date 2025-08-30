@@ -22,7 +22,6 @@ public class MultiHuedDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(MultiHuedDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "Multi-Hued Dragon Scale Mail";
-    public override int ArmorClass => 30;
     public override string? DescriptionSyntax  => "Multi-Hued Dragon Scale Mail~";
     public override int LevelNormallyFound => 100;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

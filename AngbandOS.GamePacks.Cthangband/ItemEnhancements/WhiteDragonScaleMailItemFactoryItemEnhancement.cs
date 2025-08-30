@@ -14,4 +14,5 @@ public class WhiteDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override int? Value => 35000;
     public override int? DamageDice => 2;
     public override int? DiceSides => 4;
+    public override string? BaseArmorClass => "30";
 }

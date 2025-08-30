@@ -23,7 +23,6 @@ public class SteelHelmItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Steel Helm";
     public override string? ItemEnhancementBindingKey => nameof(SteelHelmItemFactoryItemEnhancement);
 
-    public override int ArmorClass => 6;
     public override string? DescriptionSyntax => "Steel Helm~";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

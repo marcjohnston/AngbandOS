@@ -9,4 +9,5 @@ public class MetalBrigandineHardArmorItemFactoryItemEnhancement : ItemEnhancemen
     public override int? DamageDice => 1;
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.Grey;
+    public override string? BaseArmorClass => "19";
 }

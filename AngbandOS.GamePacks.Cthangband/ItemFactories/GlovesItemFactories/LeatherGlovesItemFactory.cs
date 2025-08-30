@@ -22,7 +22,6 @@ public class LeatherGlovesItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override string Name => "Set of Leather Gloves";
 
-    public override int ArmorClass => 1;
     public override string? DescriptionSyntax => "Set~ of Leather Gloves";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

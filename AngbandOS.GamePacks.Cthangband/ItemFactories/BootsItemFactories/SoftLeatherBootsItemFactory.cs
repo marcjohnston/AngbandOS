@@ -22,7 +22,6 @@ public class SoftLeatherBootsItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override string Name => "Pair of Soft Leather Boots";
 
-    public override int ArmorClass => 2;
     public override string? DescriptionSyntax => "Pair~ of Soft Leather Boots";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -29,7 +29,6 @@ public class RobeSoftArmorItemFactory : ItemFactoryGameConfiguration
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatRobeSoftArmorEnchantmentScript) })
     };
 
-    public override int ArmorClass => 2;
     public override string? DescriptionSyntax => "Robe~";
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

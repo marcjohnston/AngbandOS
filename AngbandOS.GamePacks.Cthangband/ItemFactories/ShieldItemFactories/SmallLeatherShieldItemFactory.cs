@@ -22,7 +22,6 @@ public class SmallLeatherShieldItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Small Leather Shield";
     public override string? ItemEnhancementBindingKey => nameof(SmallLeatherShieldItemFactoryItemEnhancement);
 
-    public override int ArmorClass => 2;
     public override string? DescriptionSyntax => "Small Leather Shield~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

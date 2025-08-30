@@ -22,7 +22,6 @@ public class MetalLamellarHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Metal Lamellar Armor";
     public override string? ItemEnhancementBindingKey => nameof(MetalLamellarHardArmorItemFactoryItemEnhancement);
 
-    public override int ArmorClass => 23;
     public override string? DescriptionSyntax  => "Metal Lamellar Armor~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

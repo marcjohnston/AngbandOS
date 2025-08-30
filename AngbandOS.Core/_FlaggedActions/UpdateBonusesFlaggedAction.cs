@@ -402,8 +402,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasSustainCharisma = true;
                     }
-                    baseArmorClass += oPtr.ArmorClass;
-                    Game.DisplayedBaseArmorClass += oPtr.ArmorClass;
+                    baseArmorClass += oPtr.EffectivePropertySet.BaseArmorClass;
+                    Game.DisplayedBaseArmorClass += oPtr.EffectivePropertySet.BaseArmorClass;
                     Game.ArmorClassBonus += oPtr.EffectivePropertySet.BonusArmorClass;
                     if (oPtr.IsKnown())
                     {

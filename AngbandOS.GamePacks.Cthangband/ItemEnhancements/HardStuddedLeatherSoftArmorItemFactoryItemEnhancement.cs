@@ -8,4 +8,5 @@ public class HardStuddedLeatherSoftArmorItemFactoryItemEnhancement : ItemEnhance
     public override int? DamageDice => 1;
     public override int? DiceSides => 2;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
+    public override string? BaseArmorClass => "7";
 }

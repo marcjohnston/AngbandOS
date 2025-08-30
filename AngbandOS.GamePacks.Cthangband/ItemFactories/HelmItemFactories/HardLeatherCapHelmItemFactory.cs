@@ -23,7 +23,6 @@ public class HardLeatherCapHelmItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Hard Leather Cap";
     public override string? ItemEnhancementBindingKey => nameof(HardLeatherCapHelmItemFactoryItemEnhancement);
 
-    public override int ArmorClass => 2;
     public override string? DescriptionSyntax => "Hard Leather Cap~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

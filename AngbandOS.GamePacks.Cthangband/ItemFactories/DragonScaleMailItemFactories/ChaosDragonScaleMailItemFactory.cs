@@ -22,7 +22,6 @@ public class ChaosDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "Chaos Dragon Scale Mail";
 
-    public override int ArmorClass => 30;
     public override string? DescriptionSyntax  => "Chaos Dragon Scale Mail~";
     public override int LevelNormallyFound => 75;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

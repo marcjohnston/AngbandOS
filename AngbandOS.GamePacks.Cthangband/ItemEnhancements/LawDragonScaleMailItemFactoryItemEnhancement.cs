@@ -16,4 +16,5 @@ public class LawDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int? DamageDice => 2;
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.Grey;
+    public override string? BaseArmorClass => "30";
 }

@@ -22,7 +22,6 @@ public class MetalShodBootsItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override string Name => "Pair of Metal Shod Boots";
 
-    public override int ArmorClass => 6;
     public override string? DescriptionSyntax => "Pair~ of Metal Shod Boots";
     public override int LevelNormallyFound => 20;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

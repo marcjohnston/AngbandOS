@@ -22,7 +22,6 @@ public class BarChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Bar Chain Mail";
     public override string? ItemEnhancementBindingKey => nameof(BarChainMailHardArmorItemFactoryItemEnhancement);
 
-    public override int ArmorClass => 18;
     public override string? DescriptionSyntax  => "Bar Chain Mail~";
     public override int LevelNormallyFound => 35;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

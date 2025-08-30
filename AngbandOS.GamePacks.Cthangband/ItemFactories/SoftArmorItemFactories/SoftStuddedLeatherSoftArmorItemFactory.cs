@@ -21,7 +21,6 @@ public class SoftStuddedLeatherSoftArmorItemFactory : ItemFactoryGameConfigurati
     public override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
     public override string Name => "Soft Studded Leather";
 
-    public override int ArmorClass => 5;
     public override string? DescriptionSyntax  => "Soft Studded Leather~";
     public override int LevelNormallyFound => 3;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

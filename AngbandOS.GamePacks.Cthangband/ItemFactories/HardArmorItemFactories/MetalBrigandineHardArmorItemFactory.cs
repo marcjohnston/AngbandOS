@@ -23,7 +23,6 @@ public class MetalBrigandineHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Metal Brigandine Armor";
     public override string? ItemEnhancementBindingKey => nameof(MetalBrigandineHardArmorItemFactoryItemEnhancement);
 
-    public override int ArmorClass => 19;
     public override string? DescriptionSyntax  => "Metal Brigandine Armor~";
     public override int LevelNormallyFound => 35;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

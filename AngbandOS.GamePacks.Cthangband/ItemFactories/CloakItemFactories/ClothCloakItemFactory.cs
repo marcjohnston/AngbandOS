@@ -24,7 +24,6 @@ public class ClothCloakItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Cloth";
     public override string DescriptionSyntax => "Cloak~";
 
-    public override int ArmorClass => 1;
     public override int LevelNormallyFound => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {

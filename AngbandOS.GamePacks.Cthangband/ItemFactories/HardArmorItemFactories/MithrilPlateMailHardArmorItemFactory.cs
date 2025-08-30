@@ -21,7 +21,6 @@ public class MithrilPlateMailHardArmorItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "Mithril Plate Mail";
 
-    public override int ArmorClass => 35;
     public override string? DescriptionSyntax  => "Mithril Plate Mail~";
     public override string? ItemEnhancementBindingKey => nameof(MithrilPlateMailHardArmorItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 60;

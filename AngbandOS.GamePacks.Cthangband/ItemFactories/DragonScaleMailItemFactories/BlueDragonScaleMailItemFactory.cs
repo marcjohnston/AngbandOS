@@ -21,7 +21,6 @@ public class BlueDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(BlueDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "Blue Dragon Scale Mail";
-    public override int ArmorClass => 30;
     public override string? DescriptionSyntax  => "Blue Dragon Scale Mail~";
     public override int LevelNormallyFound => 40;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

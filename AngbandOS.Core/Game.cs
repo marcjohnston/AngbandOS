@@ -6310,7 +6310,7 @@ internal class Game
         {
             return false;
         }
-        if (oPtr.ArmorClass + oPtr.EffectivePropertySet.BonusArmorClass <= 0)
+        if (oPtr.EffectivePropertySet.BaseArmorClass + oPtr.EffectivePropertySet.BonusArmorClass <= 0)
         {
             return false;
         }
@@ -6727,7 +6727,7 @@ internal class Game
             item.EffectivePropertySet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusHits = 0;
             item.EffectivePropertySet.BonusDamage = 0;
-            item.ArmorClass = 0;
+            item.EffectivePropertySet.BaseArmorClass = 0;
             item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DamageDice, 0);
             item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DiceSides , 0);
             item.EffectivePropertySet.IsCursed = true;
@@ -6767,7 +6767,7 @@ internal class Game
             item.EffectivePropertySet.BonusHits = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusArmorClass = 0;
-            item.ArmorClass = 0;
+            item.EffectivePropertySet.BaseArmorClass = 0;
             item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DamageDice, 0);
             item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DiceSides, 0);
             item.EffectivePropertySet.IsCursed = true;

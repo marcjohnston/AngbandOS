@@ -21,7 +21,6 @@ public class DeflectionShieldItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "Shield of Deflection";
 
-    public override int ArmorClass => 10;
     public override string? ItemEnhancementBindingKey => nameof(DeflectionShieldItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 70;
     public override string? DescriptionSyntax => "Shield~ of Deflection";

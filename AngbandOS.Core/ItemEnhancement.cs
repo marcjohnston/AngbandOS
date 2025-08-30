@@ -42,6 +42,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BonusArmorClassRollExpression = itemEnhancementGameConfiguration.BonusArmorClassRollExpression;
         BonusHitsRollExpression = itemEnhancementGameConfiguration.BonusHitsRollExpression;
         BonusDamageRollExpression = itemEnhancementGameConfiguration.BonusDamageRollExpression;
+        BaseArmorClass = itemEnhancementGameConfiguration.BaseArmorClass;
         BrandAcid = itemEnhancementGameConfiguration.BrandAcid;
         BrandCold = itemEnhancementGameConfiguration.BrandCold;
         BrandElec = itemEnhancementGameConfiguration.BrandElec;
@@ -160,6 +161,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusTunnel, BonusTunnelRoll == null ? 0 : Game.ComputeIntegerExpression(BonusTunnelRoll).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusAttacks, BonusAttacksRoll == null ? 0 : Game.ComputeIntegerExpression(BonusAttacksRoll).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusSpeed, BonusSpeedRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSpeedRoll).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BaseArmorClass, BaseArmorClassExpression == null ? 0 : Game.ComputeIntegerExpression(BaseArmorClassExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusArmorClass, BonusArmorClassRoll == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassRoll).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusHits, BonusHitsRoll == null ? 0 : Game.ComputeIntegerExpression(BonusHitsRoll).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusDamage, BonusDamageRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDamageRoll).Value);
@@ -283,6 +285,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BonusTunnelRoll = Game.ParseNullableNumericExpression(BonusTunnelRollExpression);
         BonusAttacksRoll = Game.ParseNullableNumericExpression(BonusAttacksRollExpression);
         BonusSpeedRoll = Game.ParseNullableNumericExpression(BonusSpeedRollExpression);
+        BaseArmorClassExpression = Game.ParseNullableNumericExpression(BaseArmorClass);
 
         BonusArmorClassRoll = Game.ParseNullableNumericExpression(BonusArmorClassRollExpression);
         BonusHitsRoll = Game.ParseNullableNumericExpression(BonusHitsRollExpression);
@@ -323,6 +326,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             BonusArmorClassRollExpression = BonusArmorClassRollExpression,
             BonusHitsRollExpression = BonusHitsRollExpression,
             BonusDamageRollExpression = BonusDamageRollExpression,
+            BaseArmorClass = BaseArmorClass,
             ActivationName = ActivationName,
             Aggravate = Aggravate,
             AntiTheft = AntiTheft,
@@ -433,6 +437,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private Expression? BonusTunnelRoll { get; set; } = null;
     private Expression? BonusAttacksRoll { get; set; } = null;
     private Expression? BonusSpeedRoll { get; set; } = null;
+    private Expression? BaseArmorClassExpression { get; set; } = null;
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
@@ -533,6 +538,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private string? BonusHitsRollExpression { get; }
 
     private string? BonusDamageRollExpression { get; }
+    private string? BaseArmorClass { get; }
 
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and

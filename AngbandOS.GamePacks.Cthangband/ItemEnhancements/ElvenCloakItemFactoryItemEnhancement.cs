@@ -11,4 +11,5 @@ public class ElvenCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override int? Weight => 5;
     public override int? Value => 1500;
     public override ColorEnum? Color => ColorEnum.BrightGreen;
+    public override string? BaseArmorClass => "4";
 }

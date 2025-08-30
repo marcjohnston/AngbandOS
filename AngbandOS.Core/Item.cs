@@ -103,8 +103,6 @@ internal sealed class Item : IComparable<Item>
     /// Returns the name the player provided when this item was converted into a random artifact, including an empty string; or null, if the item was never converted into a random artifact.
     /// </summary>
     public string? RandomArtifactName = null;
-
-    public int ArmorClass;
     #endregion
 
     #region API Methods
@@ -151,7 +149,6 @@ internal sealed class Item : IComparable<Item>
         clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
         clonedItem.GoldPieces = GoldPieces;
         clonedItem.RandomArtifactName = RandomArtifactName;
-        clonedItem.ArmorClass = ArmorClass;
 
         return clonedItem;
     }
@@ -916,10 +913,6 @@ internal sealed class Item : IComparable<Item>
             return false;
         }
         if (RodRechargeTimeRemaining != 0 || other.RodRechargeTimeRemaining != 0)
-        {
-            return false;
-        }
-        if (ArmorClass != other.ArmorClass)
         {
             return false;
         }
@@ -2021,7 +2014,6 @@ internal sealed class Item : IComparable<Item>
         EffectivePropertySet.BonusHits = _factory.BonusHit;
         EffectivePropertySet.BonusDamage = _factory.BonusDamage;
         EffectivePropertySet.BonusArmorClass = _factory.BonusArmorClass;
-        ArmorClass = _factory.ArmorClass;
 
         if (_factory.AimingTuple != null)
         {

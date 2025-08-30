@@ -23,7 +23,6 @@ public class DragonHelmItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Dragon Helm";
 
     public override string? ItemEnhancementBindingKey => nameof(DragonHelmItemFactoryItemEnhancement);
-    public override int ArmorClass => 8;
     public override string? DescriptionSyntax => "Dragon Helm~";
     public override int LevelNormallyFound => 45;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

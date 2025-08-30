@@ -22,7 +22,6 @@ public class BronzeDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "Bronze Dragon Scale Mail";
 
-    public override int ArmorClass => 30;
     public override string? DescriptionSyntax  => "Bronze Dragon Scale Mail~";
     public override int LevelNormallyFound => 55;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

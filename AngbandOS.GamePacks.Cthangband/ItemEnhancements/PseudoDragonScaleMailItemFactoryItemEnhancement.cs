@@ -16,4 +16,5 @@ public class PseudoDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGa
     public override int? DamageDice => 2;
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.Pink;
+    public override string? BaseArmorClass => "30";
 }

@@ -7,4 +7,5 @@ public class HardLeatherCapHelmItemFactoryItemEnhancement : ItemEnhancementGameC
     public override int? Weight => 15;
     public override int? Value => 12;
     public override ColorEnum? Color => ColorEnum.Brown;
+    public override string? BaseArmorClass => "2";
 }

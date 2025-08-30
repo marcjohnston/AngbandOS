@@ -32,7 +32,6 @@ public class ElvenCloakItemFactory : ItemFactoryGameConfiguration
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatCloakEnchantmentScript) })
     };
 
-    public override int ArmorClass => 4;
     public override string? DescriptionSyntax => "Elven Cloak~";
     public override string? ItemEnhancementBindingKey => nameof(ElvenCloakItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 30;

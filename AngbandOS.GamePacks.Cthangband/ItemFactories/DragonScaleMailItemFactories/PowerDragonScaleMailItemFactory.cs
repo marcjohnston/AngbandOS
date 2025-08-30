@@ -22,7 +22,6 @@ public class PowerDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(PowerDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "Power Dragon Scale Mail";
-    public override int ArmorClass => 40;
     public override string? DescriptionSyntax  => "Power Dragon Scale Mail~";
     public override int LevelNormallyFound => 110;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

@@ -14,4 +14,5 @@ public class DragonHelmItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override int? DamageDice => 1;
     public override int? DiceSides => 3;
     public override ColorEnum? Color => ColorEnum.BrightGreen;
+    public override string? BaseArmorClass => "8";
 }

@@ -22,7 +22,6 @@ public class ShadowCloakItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
     public override string Name => "Shadow Cloak";
 
-    public override int ArmorClass => 6;
     public override string? DescriptionSyntax => "Shadow Cloak~";
     public override int LevelNormallyFound => 60;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

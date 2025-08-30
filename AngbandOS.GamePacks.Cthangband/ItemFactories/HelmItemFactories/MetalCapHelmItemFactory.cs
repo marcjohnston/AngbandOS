@@ -23,7 +23,6 @@ public class MetalCapHelmItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Metal Cap";
     public override string? ItemEnhancementBindingKey => nameof(MetalCapHelmItemFactoryItemEnhancement);
 
-    public override int ArmorClass => 3;
     public override string? DescriptionSyntax => "Metal Cap~";
     public override int LevelNormallyFound => 10;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]

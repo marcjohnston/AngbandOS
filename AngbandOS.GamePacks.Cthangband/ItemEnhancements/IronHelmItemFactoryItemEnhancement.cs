@@ -9,4 +9,5 @@ public class IronHelmItemFactoryItemEnhancement : ItemEnhancementGameConfigurati
     public override int? DamageDice => 1;
     public override int? DiceSides => 3;
     public override ColorEnum? Color => ColorEnum.Grey;
+    public override string? BaseArmorClass => "5";
 }

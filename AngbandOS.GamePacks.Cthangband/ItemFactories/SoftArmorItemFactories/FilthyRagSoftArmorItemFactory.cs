@@ -21,7 +21,6 @@ public class FilthyRagSoftArmorItemFactory : ItemFactoryGameConfiguration
     public override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
     public override string Name => "Filthy Rag";
 
-    public override int ArmorClass => 1;
     public override (int level, int chance)[]? DepthsFoundAndChances => new (int, int)[]
     {
         (0, 1)

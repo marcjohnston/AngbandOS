@@ -28,4 +28,5 @@ public class PowerDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override int? DamageDice => 2;
     public override int? DiceSides => 4;
     public override ColorEnum? Color => ColorEnum.Yellow;
+    public override string? BaseArmorClass => "40";
 }

@@ -76,6 +76,8 @@ public class ItemEnhancementGameConfiguration
     public virtual string? BonusHitsRollExpression { get; set; } = null;
     public virtual string? BonusDamageRollExpression { get; set; } = null;
 
+    public virtual string? BaseArmorClass { get; set; } = null;
+
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and
     /// random artifacts may have an <see cref="Activation"/>.  Returns null, by default.  This property is used to bind the <see cref="Activation"/> property during the bind phase.

@@ -9,4 +9,5 @@ public class ShadowCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigur
     public override int? Weight => 5;
     public override int? Value => 7500;
     public override ColorEnum? Color => ColorEnum.Black;
+    public override string? BaseArmorClass => "6";
 }
