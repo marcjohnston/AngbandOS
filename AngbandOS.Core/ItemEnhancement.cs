@@ -27,21 +27,21 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         ArtifactBiasWeightedRandomBindingKey = itemEnhancementGameConfiguration.ArtifactBiasWeightedRandomBindingKey;
         Blessed = itemEnhancementGameConfiguration.Blessed;
         Blows = itemEnhancementGameConfiguration.Blows;
-        BonusStrengthRollExpression = itemEnhancementGameConfiguration.Strength;
-        BonusIntelligenceRollExpression = itemEnhancementGameConfiguration.Intelligence;
-        BonusWisdomRollExpression = itemEnhancementGameConfiguration.Wisdom;
-        BonusDexterityRollExpression = itemEnhancementGameConfiguration.Dexterity;
-        BonusConstitutionRollExpression = itemEnhancementGameConfiguration.Constitution;
-        BonusCharismaRollExpression = itemEnhancementGameConfiguration.Charisma;
-        BonusStealthRollExpression = itemEnhancementGameConfiguration.Stealth;
-        BonusSearchRollExpression = itemEnhancementGameConfiguration.Search;
-        BonusInfravisionRollExpression = itemEnhancementGameConfiguration.Infravision;
-        BonusTunnelRollExpression = itemEnhancementGameConfiguration.Tunnel;
-        BonusAttacksRollExpression = itemEnhancementGameConfiguration.Attacks;
-        BonusSpeedRollExpression = itemEnhancementGameConfiguration.Speed;
-        BonusArmorClassRollExpression = itemEnhancementGameConfiguration.BonusArmorClass;
-        BonusHitsRollExpression = itemEnhancementGameConfiguration.Hits;
-        BonusDamageRollExpression = itemEnhancementGameConfiguration.Damage;
+        Strength = itemEnhancementGameConfiguration.Strength;
+        Intelligence = itemEnhancementGameConfiguration.Intelligence;
+        Wisdom = itemEnhancementGameConfiguration.Wisdom;
+        Dexterity = itemEnhancementGameConfiguration.Dexterity;
+        Constitution = itemEnhancementGameConfiguration.Constitution;
+        Charisma = itemEnhancementGameConfiguration.Charisma;
+        Stealth = itemEnhancementGameConfiguration.Stealth;
+        Search = itemEnhancementGameConfiguration.Search;
+        Infravision = itemEnhancementGameConfiguration.Infravision;
+        Tunnel = itemEnhancementGameConfiguration.Tunnel;
+        Attacks = itemEnhancementGameConfiguration.Attacks;
+        Speed = itemEnhancementGameConfiguration.Speed;
+        BonusArmorClass = itemEnhancementGameConfiguration.BonusArmorClass;
+        Hits = itemEnhancementGameConfiguration.Hits;
+        Damage = itemEnhancementGameConfiguration.Damage;
         BaseArmorClass = itemEnhancementGameConfiguration.BaseArmorClass;
         BrandAcid = itemEnhancementGameConfiguration.BrandAcid;
         BrandCold = itemEnhancementGameConfiguration.BrandCold;
@@ -153,22 +153,22 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     {
         // Since we are squashing all of the values into a read-only set, we can use the Set.
         EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet();
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusStrength, BonusStrengthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStrengthRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusIntelligence, BonusIntelligenceRoll == null ? 0 : Game.ComputeIntegerExpression(BonusIntelligenceRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusWisdom, BonusWisdomRoll == null ? 0 : Game.ComputeIntegerExpression(BonusWisdomRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusDexterity, BonusDexterityRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDexterityRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusConstitution, BonusConstitutionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusConstitutionRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusCharisma, BonusCharismaRoll == null ? 0 : Game.ComputeIntegerExpression(BonusCharismaRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusStealth, BonusStealthRoll == null ? 0 : Game.ComputeIntegerExpression(BonusStealthRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusSearch, BonusSearchRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSearchRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusInfravision, BonusInfravisionRoll == null ? 0 : Game.ComputeIntegerExpression(BonusInfravisionRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusTunnel, BonusTunnelRoll == null ? 0 : Game.ComputeIntegerExpression(BonusTunnelRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusAttacks, BonusAttacksRoll == null ? 0 : Game.ComputeIntegerExpression(BonusAttacksRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusSpeed, BonusSpeedRoll == null ? 0 : Game.ComputeIntegerExpression(BonusSpeedRoll).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusStrength, StrengthExpression == null ? 0 : Game.ComputeIntegerExpression(StrengthExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusIntelligence, IntelligenceExpression == null ? 0 : Game.ComputeIntegerExpression(IntelligenceExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusWisdom, WisdomExpression == null ? 0 : Game.ComputeIntegerExpression(WisdomExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusDexterity, DexterityExpression == null ? 0 : Game.ComputeIntegerExpression(DexterityExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusConstitution, ConstitutionExpression == null ? 0 : Game.ComputeIntegerExpression(ConstitutionExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusCharisma, CharismaExpression == null ? 0 : Game.ComputeIntegerExpression(CharismaExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusStealth, StealthExpression == null ? 0 : Game.ComputeIntegerExpression(StealthExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusSearch, SearchExpression == null ? 0 : Game.ComputeIntegerExpression(SearchExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusInfravision, InfravisionExpression == null ? 0 : Game.ComputeIntegerExpression(InfravisionExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusTunnel, TunnelExpression == null ? 0 : Game.ComputeIntegerExpression(TunnelExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusAttacks, AttacksExpression == null ? 0 : Game.ComputeIntegerExpression(AttacksExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusSpeed, SpeedExpression == null ? 0 : Game.ComputeIntegerExpression(SpeedExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BaseArmorClass, BaseArmorClassExpression == null ? 0 : Game.ComputeIntegerExpression(BaseArmorClassExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusArmorClass, BonusArmorClassRoll == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusHits, BonusHitsRoll == null ? 0 : Game.ComputeIntegerExpression(BonusHitsRoll).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusDamage, BonusDamageRoll == null ? 0 : Game.ComputeIntegerExpression(BonusDamageRoll).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusArmorClass, BonusArmorClassExpression == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusHits, BonusHitsExpression == null ? 0 : Game.ComputeIntegerExpression(BonusHitsExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusDamage, BonusDamageExpression == null ? 0 : Game.ComputeIntegerExpression(BonusDamageExpression).Value);
         itemCharacteristics.SetReferenceAttributeValue(AttributeEnum.ArtifactBias, ArtifactBiasWeightedRandom?.ChooseOrDefault());
 
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.CanApplyBlessedArtifactBias, CanApplyBlessedArtifactBias);
@@ -281,18 +281,18 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     public void Bind()
     {
         Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
-        BonusStrengthRoll = Game.ParseNullableNumericExpression(BonusStrengthRollExpression);
-        BonusIntelligenceRoll = Game.ParseNullableNumericExpression(BonusIntelligenceRollExpression);
-        BonusWisdomRoll = Game.ParseNullableNumericExpression(BonusWisdomRollExpression);
-        BonusDexterityRoll = Game.ParseNullableNumericExpression(BonusDexterityRollExpression);
-        BonusConstitutionRoll = Game.ParseNullableNumericExpression(BonusConstitutionRollExpression);
-        BonusCharismaRoll = Game.ParseNullableNumericExpression(BonusCharismaRollExpression);
-        BonusStealthRoll = Game.ParseNullableNumericExpression(BonusStealthRollExpression);
-        BonusSearchRoll = Game.ParseNullableNumericExpression(BonusSearchRollExpression);
-        BonusInfravisionRoll = Game.ParseNullableNumericExpression(BonusInfravisionRollExpression);
-        BonusTunnelRoll = Game.ParseNullableNumericExpression(BonusTunnelRollExpression);
-        BonusAttacksRoll = Game.ParseNullableNumericExpression(BonusAttacksRollExpression);
-        BonusSpeedRoll = Game.ParseNullableNumericExpression(BonusSpeedRollExpression);
+        StrengthExpression = Game.ParseNullableNumericExpression(Strength);
+        IntelligenceExpression = Game.ParseNullableNumericExpression(Intelligence);
+        WisdomExpression = Game.ParseNullableNumericExpression(Wisdom);
+        DexterityExpression = Game.ParseNullableNumericExpression(Dexterity);
+        ConstitutionExpression = Game.ParseNullableNumericExpression(Constitution);
+        CharismaExpression = Game.ParseNullableNumericExpression(Charisma);
+        StealthExpression = Game.ParseNullableNumericExpression(Stealth);
+        SearchExpression = Game.ParseNullableNumericExpression(Search);
+        InfravisionExpression = Game.ParseNullableNumericExpression(Infravision);
+        TunnelExpression = Game.ParseNullableNumericExpression(Tunnel);
+        AttacksExpression = Game.ParseNullableNumericExpression(Attacks);
+        SpeedExpression = Game.ParseNullableNumericExpression(Speed);
         BaseArmorClassExpression = Game.ParseNullableNumericExpression(BaseArmorClass);
 
         HatesAcidExpression = Game.ParseNullableBooleanExpression(HatesAcid);
@@ -300,9 +300,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         HatesElectricityExpression = Game.ParseNullableBooleanExpression(HatesElectricity);
         HatesFireExpression = Game.ParseNullableBooleanExpression(HatesFire);
 
-        BonusArmorClassRoll = Game.ParseNullableNumericExpression(BonusArmorClassRollExpression);
-        BonusHitsRoll = Game.ParseNullableNumericExpression(BonusHitsRollExpression);
-        BonusDamageRoll = Game.ParseNullableNumericExpression(BonusDamageRollExpression);
+        BonusArmorClassExpression = Game.ParseNullableNumericExpression(BonusArmorClass);
+        BonusHitsExpression = Game.ParseNullableNumericExpression(Hits);
+        BonusDamageExpression = Game.ParseNullableNumericExpression(Damage);
 
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
         ArtifactBiasWeightedRandom = Game.SingletonRepository.GetNullable<ArtifactBiasWeightedRandom>(ArtifactBiasWeightedRandomBindingKey);
@@ -324,21 +324,21 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
             AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,
             FriendlyName = FriendlyName,
-            Strength = BonusStrengthRollExpression,
-            Intelligence = BonusIntelligenceRollExpression,
-            Wisdom = BonusWisdomRollExpression,
-            Dexterity = BonusDexterityRollExpression,
-            Constitution = BonusConstitutionRollExpression,
-            Charisma = BonusCharismaRollExpression,
-            Stealth = BonusStealthRollExpression,
-            Search = BonusSearchRollExpression,
-            Infravision = BonusInfravisionRollExpression,
-            Tunnel = BonusTunnelRollExpression,
-            Attacks = BonusAttacksRollExpression,
-            Speed = BonusSpeedRollExpression,
-            BonusArmorClass = BonusArmorClassRollExpression,
-            Hits = BonusHitsRollExpression,
-            Damage = BonusDamageRollExpression,
+            Strength = Strength,
+            Intelligence = Intelligence,
+            Wisdom = Wisdom,
+            Dexterity = Dexterity,
+            Constitution = Constitution,
+            Charisma = Charisma,
+            Stealth = Stealth,
+            Search = Search,
+            Infravision = Infravision,
+            Tunnel = Tunnel,
+            Attacks = Attacks,
+            Speed = Speed,
+            BonusArmorClass = BonusArmorClass,
+            Hits = Hits,
+            Damage = Damage,
             BaseArmorClass = BaseArmorClass,
             ActivationName = ActivationName,
             Aggravate = Aggravate,
@@ -442,37 +442,37 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// Returns a maximum value for a random amount of additional strength when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item.  Returns 0, by default.
     /// </summary>
-    private Expression? BonusStrengthRoll { get; set; } = null;
-    private Expression? BonusIntelligenceRoll { get; set; } = null;
-    private Expression? BonusWisdomRoll { get; set; } = null;
-    private Expression? BonusDexterityRoll { get; set; } = null;
-    private Expression? BonusConstitutionRoll { get; set; } = null;
-    private Expression? BonusCharismaRoll { get; set; } = null;
-    private Expression? BonusStealthRoll { get; set; } = null;
-    private Expression? BonusSearchRoll { get; set; } = null;
-    private Expression? BonusInfravisionRoll { get; set; } = null;
-    private Expression? BonusTunnelRoll { get; set; } = null;
-    private Expression? BonusAttacksRoll { get; set; } = null;
-    private Expression? BonusSpeedRoll { get; set; } = null;
+    private Expression? StrengthExpression { get; set; } = null;
+    private Expression? IntelligenceExpression { get; set; } = null;
+    private Expression? WisdomExpression { get; set; } = null;
+    private Expression? DexterityExpression { get; set; } = null;
+    private Expression? ConstitutionExpression { get; set; } = null;
+    private Expression? CharismaExpression { get; set; } = null;
+    private Expression? StealthExpression { get; set; } = null;
+    private Expression? SearchExpression { get; set; } = null;
+    private Expression? InfravisionExpression { get; set; } = null;
+    private Expression? TunnelExpression { get; set; } = null;
+    private Expression? AttacksExpression { get; set; } = null;
+    private Expression? SpeedExpression { get; set; } = null;
     private Expression? BaseArmorClassExpression { get; set; } = null;
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    private Expression? BonusArmorClassRoll { get; set; }
+    private Expression? BonusArmorClassExpression { get; set; }
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusToHit when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    private Expression? BonusHitsRoll { get; set; } 
+    private Expression? BonusHitsExpression { get; set; } 
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusDamage when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    private Expression? BonusDamageRoll { get; set; }
+    private Expression? BonusDamageExpression { get; set; }
 
     private Expression? HatesAcidExpression { get; set; }
     private Expression? HatesFireExpression { get; set; }
@@ -555,24 +555,24 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// <returns></returns>
     private bool? CanApplySlayingBonus { get; }
 
-    private string? BonusStrengthRollExpression { get; }
-    private string? BonusIntelligenceRollExpression { get; }
-    private string? BonusWisdomRollExpression { get; }
-    private string? BonusDexterityRollExpression { get; }
-    private string? BonusConstitutionRollExpression { get; }
-    private string? BonusCharismaRollExpression { get; }
-    private string? BonusStealthRollExpression { get; }
-    private string? BonusSearchRollExpression { get; }
-    private string? BonusInfravisionRollExpression { get; }
-    private string? BonusTunnelRollExpression { get; }
-    private string? BonusAttacksRollExpression { get; }
-    private string? BonusSpeedRollExpression { get; }
+    private string? Strength { get; }
+    private string? Intelligence { get; }
+    private string? Wisdom { get; }
+    private string? Dexterity { get; }
+    private string? Constitution { get; }
+    private string? Charisma { get; }
+    private string? Stealth { get; }
+    private string? Search { get; }
+    private string? Infravision { get; }
+    private string? Tunnel { get; }
+    private string? Attacks { get; }
+    private string? Speed { get; }
 
-    private string? BonusArmorClassRollExpression { get; } 
+    private string? BonusArmorClass { get; } 
 
-    private string? BonusHitsRollExpression { get; }
+    private string? Hits { get; }
 
-    private string? BonusDamageRollExpression { get; }
+    private string? Damage { get; }
     private string? BaseArmorClass { get; }
 
     /// <summary>
