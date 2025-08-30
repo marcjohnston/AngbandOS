@@ -13,7 +13,7 @@ public class DungeonView : ViewGameConfiguration
     {
         nameof(AfraidRangedWidget),
         nameof(ArmorClassLabelWidget),
-        nameof(ArmorClassIntWidget),
+        nameof(CombinedArmorClassIntWidget),
         nameof(BlindnessRangedWidget),
         nameof(CharacterSubclassNameStringWidget),
         nameof(ConfusedRangedWidget),

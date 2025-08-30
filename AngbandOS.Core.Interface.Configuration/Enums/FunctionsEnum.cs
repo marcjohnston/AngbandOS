@@ -27,7 +27,7 @@ public enum FunctionsEnum
 
     RefreshMapFunction,
 
-    ArmorClassIntFunction,
+    CombinedArmorClassIntFunction,
     ExperiencePointsForNextLevelIntFunction,
     TrackedMonsterHealthIntFunction,
     TrackedMonsterMaxHealthIntFunction,
