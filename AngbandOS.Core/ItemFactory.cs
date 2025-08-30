@@ -406,7 +406,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         EffectiveAttributeSet.AddEnhancement(itemEnhancement.GenerateItemCharacteristics());
 
         //// Cut and paste
-        //string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override ColorEnum Color => ");
+        //string? prop = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override int ArmorClass => ");
         //if (prop is not null)
         //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", ItemEnhancement.GetKey, prop);
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
