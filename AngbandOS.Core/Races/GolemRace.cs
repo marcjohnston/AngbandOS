@@ -69,7 +69,7 @@ internal class GolemRace : Race
         Game.HasSeeInvisibility = true;
         Game.HasPoisonResistance = true;
         Game.ArmorClassBonus += 20 + (Game.ExperienceLevel.IntValue / 5);
-        Game.DisplayedArmorClassBonus += 20 + (Game.ExperienceLevel.IntValue / 5);
+        Game.KnownBonusArmorClass += 20 + (Game.ExperienceLevel.IntValue / 5);
     }
 
     public override void Eat(Item item)

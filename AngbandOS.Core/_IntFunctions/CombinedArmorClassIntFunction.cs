@@ -17,11 +17,11 @@ internal class CombinedArmorClassIntFunction : IChangeTracker, IGetKey, IIntValu
         Game = game;
     }
 
-    public bool IsChanged => !OldValue.HasValue || OldValue.Value != Game.DisplayedBaseArmorClass + Game.DisplayedArmorClassBonus;
+    public bool IsChanged => !OldValue.HasValue || OldValue.Value != Game.DisplayedBaseArmorClass + Game.KnownBonusArmorClass;
 
     public string GetKey => GetType().Name;
 
-    public int IntValue => Game.DisplayedBaseArmorClass + Game.DisplayedArmorClassBonus;
+    public int IntValue => Game.DisplayedBaseArmorClass + Game.KnownBonusArmorClass;
 
     public void Bind() {  }
 

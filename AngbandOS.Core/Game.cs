@@ -926,7 +926,7 @@ internal class Game
     public readonly ManaIntProperty Mana;
     public readonly MaxManaIntProperty MaxMana;
     public readonly ExperiencePointsIntProperty ExperiencePoints;
-    public int DisplayedArmorClassBonus;
+    public int KnownBonusArmorClass;
     public int DisplayedBaseArmorClass;
     public readonly StringProperty PlayerName;
 
