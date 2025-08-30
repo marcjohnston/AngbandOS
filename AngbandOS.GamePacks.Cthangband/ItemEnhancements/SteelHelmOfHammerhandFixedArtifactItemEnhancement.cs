@@ -10,10 +10,10 @@ public class SteelHelmOfHammerhandFixedArtifactItemEnhancement : ItemEnhancement
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusDexterityRollExpression => "3";
+    public override string? Dexterity => "3";
     public override bool? ResAcid => true;
     public override bool? ResNexus => true;
     public override int? Value => 45000;
-    public override string BonusAttacksRollExpression => "20";
+    public override string Attacks => "20";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

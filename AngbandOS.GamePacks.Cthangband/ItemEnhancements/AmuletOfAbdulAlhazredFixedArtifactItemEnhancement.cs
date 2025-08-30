@@ -13,9 +13,9 @@ public class AmuletOfAbdulAlhazredFixedArtifactItemEnhancement : ItemEnhancement
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusCharismaRollExpression => "3";
-    public override string? BonusInfravisionRollExpression => "3";
-    public override string? BonusWisdomRollExpression => "3";
+    public override string? Charisma => "3";
+    public override string? Infravision => "3";
+    public override string? Wisdom => "3";
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
     public override bool? ResElec => true;

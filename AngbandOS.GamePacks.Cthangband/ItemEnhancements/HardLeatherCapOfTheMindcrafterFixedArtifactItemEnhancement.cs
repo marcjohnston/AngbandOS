@@ -10,11 +10,11 @@ public class HardLeatherCapOfTheMindcrafterFixedArtifactItemEnhancement : ItemEn
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusIntelligenceRollExpression => "2";
-    public override string? BonusWisdomRollExpression => "2";
+    public override string? Intelligence => "2";
+    public override string? Wisdom => "2";
     public override bool? ResBlind => true;
     public override bool? Telepathy => true;
     public override int? Value => 50000;
-    public override string BonusAttacksRollExpression => "10";
+    public override string Attacks => "10";
     public override ColorEnum? Color => ColorEnum.Brown;
 }

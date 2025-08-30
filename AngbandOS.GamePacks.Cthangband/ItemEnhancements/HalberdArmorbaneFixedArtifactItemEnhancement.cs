@@ -17,7 +17,7 @@ public class HalberdArmorbaneFixedArtifactItemEnhancement : ItemEnhancementGameC
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusCharismaRollExpression => "3";
+    public override string? Charisma => "3";
     public override bool? ResFire => true;
     public override bool? ResSound => true;
     public override bool? SeeInvis => true;
@@ -25,7 +25,7 @@ public class HalberdArmorbaneFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool? SlayGiant => true;
     public override bool? SlayUndead => true;
     public override int? Value => 22000;
-    public override string BonusHitsRollExpression => "6";
-    public override string BonusDamageRollExpression => "9";
+    public override string Hits => "6";
+    public override string Damage => "9";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

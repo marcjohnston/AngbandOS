@@ -10,7 +10,7 @@ public class BroadAxeOfNodensFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusConstitutionRollExpression => "3";
+    public override string? Constitution => "3";
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
     public override bool? SlayEvil => true;
@@ -18,7 +18,7 @@ public class BroadAxeOfNodensFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool? SlayOrc => true;
     public override bool? SlayTroll => true;
     public override int? Value => 50000;
-    public override string BonusHitsRollExpression => "13";
-    public override string BonusDamageRollExpression => "19";
+    public override string Hits => "13";
+    public override string Damage => "19";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -17,14 +17,14 @@ public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGam
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusIntelligenceRollExpression => "4";
-    public override string? BonusWisdomRollExpression => "4";
+    public override string? Intelligence => "4";
+    public override string? Wisdom => "4";
     public override bool? ResLight => true;
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
     public override bool? SlayEvil => true;
     public override int? Value => 20000;
-    public override string BonusHitsRollExpression => "3";
-    public override string BonusDamageRollExpression => "5";
+    public override string Hits => "3";
+    public override string Damage => "5";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

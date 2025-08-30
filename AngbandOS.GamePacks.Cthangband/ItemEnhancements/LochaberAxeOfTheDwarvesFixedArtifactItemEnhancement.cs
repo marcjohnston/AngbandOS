@@ -9,8 +9,8 @@ public class LochaberAxeOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusInfravisionRollExpression => "10";
-    public override string? BonusTunnelRollExpression => "10";
+    public override string? Infravision => "10";
+    public override string? Tunnel => "10";
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
     public override bool? ResElec => true;
@@ -20,7 +20,7 @@ public class LochaberAxeOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool? SlayEvil => true;
     public override bool? SlayGiant => true;
     public override int? Value => 80000;
-    public override string BonusHitsRollExpression => "12";
-    public override string BonusDamageRollExpression => "17";
+    public override string Hits => "12";
+    public override string Damage => "17";
     public override ColorEnum? Color => ColorEnum.Black;
 }

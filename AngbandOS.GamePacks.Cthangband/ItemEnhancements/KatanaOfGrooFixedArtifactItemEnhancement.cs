@@ -10,9 +10,9 @@ public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusAttacksRollExpression => "3";
-    public override string? BonusDexterityRollExpression => "3";
-    public override string? BonusSpeedRollExpression => "3";
+    public override string? Attacks => "3";
+    public override string? Dexterity => "3";
+    public override string? Speed => "3";
     public override bool? ShowMods => true;
     public override bool? SustDex => true;
     public override int? Vorpal1InChance => 6;

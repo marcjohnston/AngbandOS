@@ -12,6 +12,6 @@ public class WeaponOfEarthquakesItemEnhancement : ItemEnhancementGameConfigurati
     public override int? Value => 4000;
     public override string? FriendlyName => "of Earthquakes";
     public override bool? Impact => true;
-    public override string? BonusTunnelRollExpression => "1d3";
+    public override string? Tunnel => "1d3";
     public override int? TreasureRating => 20;
 }

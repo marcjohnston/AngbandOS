@@ -13,9 +13,9 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusConstitutionRollExpression => "-25";
-    public override string? BonusDexterityRollExpression => "-25";
-    public override string? BonusStrengthRollExpression => "-25";
+    public override string? Constitution => "-25";
+    public override string? Dexterity => "-25";
+    public override string? Strength => "-25";
     public override bool? SeeInvis => true;
     public override bool? Telepathy => true;
     public override bool? Feather => true;
@@ -23,7 +23,7 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
     public override int? Radius => 3;
     public override bool? Regen => true;
     public override bool? SlowDigest => true;
-    public override string BonusAttacksRollExpression => "25";
+    public override string Attacks => "25";
     public override ColorEnum? Color => ColorEnum.Grey;
     public override int? Value => 112400;
 }

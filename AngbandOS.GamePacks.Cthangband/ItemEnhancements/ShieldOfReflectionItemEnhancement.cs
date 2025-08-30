@@ -15,7 +15,7 @@ public class ShieldOfReflectionItemEnhancement : ItemEnhancementGameConfiguratio
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusArmorClassRollExpression => "1d5";
+    public override string? BonusArmorClass => "1d5";
     public override int? TreasureRating => 20;
     public override bool? Reflect => true;
 }

@@ -12,8 +12,8 @@ public class TridentOfWrathFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusDexterityRollExpression => "2";
-    public override string? BonusStrengthRollExpression => "2";
+    public override string? Dexterity => "2";
+    public override string? Strength => "2";
     public override bool? ResDark => true;
     public override bool? ResLight => true;
     public override bool? SeeInvis => true;
@@ -23,7 +23,7 @@ public class TridentOfWrathFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override int? Weight => 230;
     public override int? Value => 90000;
     public override int? DamageDice => 2;
-    public override string BonusHitsRollExpression => "16";
-    public override string BonusDamageRollExpression => "18";
+    public override string Hits => "16";
+    public override string Damage => "18";
     public override ColorEnum? Color => ColorEnum.Yellow;
 }

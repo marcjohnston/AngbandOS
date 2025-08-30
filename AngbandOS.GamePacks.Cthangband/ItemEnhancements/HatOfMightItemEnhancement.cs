@@ -12,8 +12,8 @@ public class HatOfMightItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => 2000;
     public override bool? FreeAct => true;
     public override string? FriendlyName => "of Might";
-    public override string? BonusStrengthRollExpression => "1d3";
-    public override string? BonusWisdomRollExpression => "1d3";
+    public override string? Strength => "1d3";
+    public override string? Wisdom => "1d3";
     public override int? TreasureRating => 19;
     public override bool? SustCon => true;
     public override bool? SustDex => true;

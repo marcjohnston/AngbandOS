@@ -12,7 +12,7 @@ public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusDexterityRollExpression => "4";
+    public override string? Dexterity => "4";
     public override bool? ResAcid => true;
     public override bool? ShowMods => true;
     public override bool? Feather => true;
@@ -23,8 +23,8 @@ public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? SlowDigest => true;
     public override bool? Telepathy => true;
     public override int? Value => 110000;
-    public override string BonusAttacksRollExpression => "20";
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "10";
+    public override string Attacks => "20";
+    public override string Hits => "10";
+    public override string Damage => "10";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

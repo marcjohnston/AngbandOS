@@ -10,7 +10,7 @@ public class StarEssenceOfPolarisFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusSearchRollExpression => "1";
+    public override string? Search => "1";
     /// <summary>
     /// Returns a value of 1 to add to the radius of light for a star of essence which provides no light.
     /// </summary>

@@ -11,7 +11,7 @@ public class AmmoOfWoundingItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int? Value => 20;
     public override string? FriendlyName => "of Wounding";
-    public override string? BonusDamageRollExpression => "1d6";
-    public override string? BonusHitsRollExpression => "1d6";
+    public override string? Damage => "1d6";
+    public override string? Hits => "1d6";
     public override int? TreasureRating => 5;
 }

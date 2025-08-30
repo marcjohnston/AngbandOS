@@ -17,10 +17,10 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusConstitutionRollExpression => "3";
-    public override string? BonusSpeedRollExpression => "3";
-    public override string? BonusStrengthRollExpression => "3";
-    public override string? BonusWisdomRollExpression => "3";
+    public override string? Constitution => "3";
+    public override string? Speed => "3";
+    public override string? Strength => "3";
+    public override string? Wisdom => "3";
     public override bool? Regen => true;
     public override bool? ResBlind => true;
     public override bool? ResChaos => true;
@@ -35,6 +35,6 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool? SlowDigest => true;
     public override bool? Telepathy => true;
     public override int? Value => 125000;
-    public override string BonusAttacksRollExpression => "15";
+    public override string Attacks => "15";
     public override ColorEnum? Color => ColorEnum.Yellow;
 }

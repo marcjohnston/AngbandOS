@@ -5,7 +5,7 @@ public class WeaknessRingItemFactoryItemEnhancement : ItemEnhancementGameConfigu
 {
     public override bool? IsCursed => true;
     public override bool? HideType => true;
-    public override string? BonusStrengthRollExpression => "-5";
+    public override string? Strength => "-5";
     public override int? Weight => 2;
     public override int? Value => -11000;
 }

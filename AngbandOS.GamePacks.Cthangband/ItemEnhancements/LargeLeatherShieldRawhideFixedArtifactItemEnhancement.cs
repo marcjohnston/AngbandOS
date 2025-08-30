@@ -17,6 +17,6 @@ public class LargeLeatherShieldRawhideFixedArtifactItemEnhancement : ItemEnhance
     public override bool? ResLight => true;
     public override int? Weight => -40;
     public override int? Value => 12000;
-    public override string BonusAttacksRollExpression => "20";
+    public override string Attacks => "20";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

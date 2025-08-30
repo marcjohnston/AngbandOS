@@ -12,6 +12,6 @@ public class GlovesOfAgilityItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => 1000;
     public override string? FriendlyName => "of Agility";
     public override bool? HideType => true;
-    public override string? BonusDexterityRollExpression => "1d5";
+    public override string? Dexterity => "1d5";
     public override int? TreasureRating => 14;
 }

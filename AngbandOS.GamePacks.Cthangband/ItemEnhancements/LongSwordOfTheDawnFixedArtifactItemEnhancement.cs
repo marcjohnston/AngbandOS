@@ -18,8 +18,8 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusCharismaRollExpression => "3";
-    public override string? BonusInfravisionRollExpression => "3";
+    public override string? Charisma => "3";
+    public override string? Infravision => "3";
     public override bool? Regen => true;
     public override bool? ResBlind => true;
     public override bool? ResFear => true;
@@ -35,7 +35,7 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
     public override int? VorpalExtraAttacks1InChance => 2;
     public override int? Value => 250000;
     public override int? DamageDice => 1;
-    public override string BonusHitsRollExpression => "20";
-    public override string BonusDamageRollExpression => "20";
+    public override string Hits => "20";
+    public override string Damage => "20";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

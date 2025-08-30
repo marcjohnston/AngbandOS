@@ -20,10 +20,10 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusAttacksRollExpression => "2";
-    public override string? BonusConstitutionRollExpression => "2";
-    public override string? BonusSpeedRollExpression => "2";
-    public override string? BonusStrengthRollExpression => "2";
+    public override string? Attacks => "2";
+    public override string? Constitution => "2";
+    public override string? Speed => "2";
+    public override string? Strength => "2";
     public override bool? Regen => true;
     public override bool? ResDark => true;
     public override bool? ResDisen => true;
@@ -40,7 +40,7 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? SustStr => true;
     public override bool? SustWis => true;
     public override int? Value => 150000;
-    public override string BonusHitsRollExpression => "8";
-    public override string BonusDamageRollExpression => "12";
+    public override string Hits => "8";
+    public override string Damage => "12";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -15,12 +15,12 @@ public class QuarterstaffFirestaffFixedArtifactItemEnhancement : ItemEnhancement
     /// Returns a value of 3 to add to the radius of light for a quarterstaff which provides no light.
     /// </summary>
     public override int? Radius => 3;
-    public override string? BonusIntelligenceRollExpression => "3";
+    public override string? Intelligence => "3";
     public override bool? ResFire => true;
     public override bool? ShowMods => true;
     public override bool? SlayAnimal => true;
     public override int? Value => 70000;
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "20";
+    public override string Hits => "10";
+    public override string Damage => "20";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

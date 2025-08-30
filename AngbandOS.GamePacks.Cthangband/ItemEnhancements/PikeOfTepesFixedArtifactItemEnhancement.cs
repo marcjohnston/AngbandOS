@@ -17,7 +17,7 @@ public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusIntelligenceRollExpression => "2";
+    public override string? Intelligence => "2";
     public override bool? ResCold => true;
     public override bool? ResFire => true;
     public override bool? ShowMods => true;
@@ -27,8 +27,8 @@ public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool? SlowDigest => true;
     public override bool? SustInt => true;
     public override int? Value => 32000;
-    public override string BonusAttacksRollExpression => "10";
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "12";
+    public override string Attacks => "10";
+    public override string Hits => "10";
+    public override string Damage => "12";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -13,7 +13,7 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override int? SlayDragon => 5;
-    public override string? BonusWisdomRollExpression => "4";
+    public override string? Wisdom => "4";
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
     public override bool? ResElec => true;
@@ -32,8 +32,8 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool? Telepathy => true;
     public override int? Value => 250000;
     public override int? DamageDice => 6;
-    public override string BonusAttacksRollExpression => "5";
-    public override string BonusHitsRollExpression => "19";
-    public override string BonusDamageRollExpression => "21";
+    public override string Attacks => "5";
+    public override string Hits => "19";
+    public override string Damage => "21";
     public override ColorEnum? Color => ColorEnum.Black;
 }

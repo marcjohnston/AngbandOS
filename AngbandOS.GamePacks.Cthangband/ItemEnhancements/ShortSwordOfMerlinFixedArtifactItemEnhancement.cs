@@ -9,7 +9,7 @@ public class ShortSwordOfMerlinFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusAttacksRollExpression => "2";
+    public override string? Attacks => "2";
     public override bool? Regen => true;
     public override bool? ResDisen => true;
     public override bool? SeeInvis => true;
@@ -17,7 +17,7 @@ public class ShortSwordOfMerlinFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? SlayAnimal => true;
     public override bool? SlowDigest => true;
     public override int? Value => 35000;
-    public override string BonusHitsRollExpression => "3";
-    public override string BonusDamageRollExpression => "7";
+    public override string Hits => "3";
+    public override string Damage => "7";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -11,7 +11,7 @@ public class HatOfSicklinessItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Valueless => true;
     public override string? FriendlyName => "of Sickliness";
-    public override string? BonusStrengthRollExpression => "1d5";
-    public override string? BonusDexterityRollExpression => "1d5";
+    public override string? Strength => "1d5";
+    public override string? Dexterity => "1d5";
     public override int? Value => 4800;
 }

@@ -13,6 +13,6 @@ public class WeaponBlessedItemEnhancement : ItemEnhancementGameConfiguration
     public override bool? Blessed => true;
     public override int? Value => 5000;
     public override string? FriendlyName => "(Blessed)";
-    public override string? BonusWisdomRollExpression => "1d3";
+    public override string? Wisdom => "1d3";
     public override int? TreasureRating => 20;
 }

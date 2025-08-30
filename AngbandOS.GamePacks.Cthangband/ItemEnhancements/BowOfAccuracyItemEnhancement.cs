@@ -11,7 +11,7 @@ public class BowOfAccuracyItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int? Value => 1000;
     public override string? FriendlyName => "of Accuracy";
-    public override string? BonusDamageRollExpression => "1d5";
-    public override string? BonusHitsRollExpression => "1d15";
+    public override string? Damage => "1d5";
+    public override string? Hits => "1d15";
     public override int? TreasureRating => 10;
 }

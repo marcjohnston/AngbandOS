@@ -14,9 +14,9 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusAttacksRollExpression => "2";
-    public override string? BonusDexterityRollExpression => "2";
-    public override string? BonusSpeedRollExpression => "2";
+    public override string? Attacks => "2";
+    public override string? Dexterity => "2";
+    public override string? Speed => "2";
     public override bool? Regen => true;
     public override bool? ResCold => true;
     public override bool? SeeInvis => true;
@@ -24,7 +24,7 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool? SlowDigest => true;
     public override int? Value => 50000;
     public override int? DamageDice => 1;
-    public override string BonusHitsRollExpression => "6";
-    public override string BonusDamageRollExpression => "9";
+    public override string Hits => "6";
+    public override string Damage => "9";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

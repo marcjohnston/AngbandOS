@@ -29,8 +29,8 @@ public class MightyHammerOfWorldsFixedArtifactItemEnhancement : ItemEnhancementG
     public override int? Weight => 800;
     public override int? Value => 500000;
     public override int? DamageDice => 6;
-    public override string BonusAttacksRollExpression => "10";
-    public override string BonusHitsRollExpression => "5";
-    public override string BonusDamageRollExpression => "25";
+    public override string Attacks => "10";
+    public override string Hits => "5";
+    public override string Damage => "25";
     public override ColorEnum? Color => ColorEnum.Black;
 }

@@ -12,13 +12,13 @@ public class TwoHandedSwordDragonslayerFixedArtifactItemEnhancement : ItemEnhanc
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override int? SlayDragon => 5;
-    public override string? BonusStrengthRollExpression => "2";
+    public override string? Strength => "2";
     public override bool? Regen => true;
     public override bool? ShowMods => true;
     public override bool? SlayTroll => true;
     public override bool? SlowDigest => true;
     public override int? Value => 100000;
-    public override string BonusHitsRollExpression => "13";
-    public override string BonusDamageRollExpression => "17";
+    public override string Hits => "13";
+    public override string Damage => "17";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

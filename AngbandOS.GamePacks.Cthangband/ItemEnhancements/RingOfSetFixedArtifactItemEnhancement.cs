@@ -21,13 +21,13 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     public override bool? ImElec => true;
     public override bool? ImFire => true;
     public override bool? PermaCurse => true;
-    public override string? BonusCharismaRollExpression => "5";
-    public override string? BonusConstitutionRollExpression => "5";
-    public override string? BonusDexterityRollExpression => "5";
-    public override string? BonusIntelligenceRollExpression => "5";
-    public override string? BonusSpeedRollExpression => "5";
-    public override string? BonusStrengthRollExpression => "5";
-    public override string? BonusWisdomRollExpression => "5";
+    public override string? Charisma => "5";
+    public override string? Constitution => "5";
+    public override string? Dexterity => "5";
+    public override string? Intelligence => "5";
+    public override string? Speed => "5";
+    public override string? Strength => "5";
+    public override string? Wisdom => "5";
     public override bool? Regen => true;
     public override bool? SeeInvis => true;
     public override bool? SustCha => true;
@@ -45,7 +45,7 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     public override int? Value => 5000000;
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
-    public override string BonusHitsRollExpression => "15";
-    public override string BonusDamageRollExpression => "15";
+    public override string Hits => "15";
+    public override string Damage => "15";
     public override ColorEnum? Color => ColorEnum.Yellow;
 }

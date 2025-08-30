@@ -15,7 +15,7 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? ImAcid => true;
-    public override string? BonusDexterityRollExpression => "4";
+    public override string? Dexterity => "4";
     public override bool? Regen => true;
     public override bool? ResNether => true;
     public override bool? SeeInvis => true;
@@ -28,7 +28,7 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? Telepathy => true;
     public override int? Value => 120000;
     public override int? DamageDice => 3;
-    public override string BonusHitsRollExpression => "15";
-    public override string BonusDamageRollExpression => "19";
+    public override string Hits => "15";
+    public override string Damage => "19";
     public override ColorEnum? Color => ColorEnum.Yellow;
 }

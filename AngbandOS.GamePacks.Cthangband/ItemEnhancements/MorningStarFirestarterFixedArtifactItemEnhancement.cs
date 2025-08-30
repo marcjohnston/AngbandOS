@@ -19,8 +19,8 @@ public class MorningStarFirestarterFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? ResFire => true;
     public override bool? ShowMods => true;
     public override int? Value => 35000;
-    public override string BonusAttacksRollExpression => "2";
-    public override string BonusHitsRollExpression => "5";
-    public override string BonusDamageRollExpression => "7";
+    public override string Attacks => "2";
+    public override string Hits => "5";
+    public override string Damage => "7";
     public override ColorEnum? Color => ColorEnum.Black;
 }

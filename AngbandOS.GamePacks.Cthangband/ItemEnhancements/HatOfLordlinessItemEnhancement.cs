@@ -11,8 +11,8 @@ public class HatOfLordlinessItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int? Value => 2000;
     public override string? FriendlyName => "of Lordliness";
-    public override string? BonusCharismaRollExpression => "1d3";
-    public override string? BonusWisdomRollExpression => "1d3";
+    public override string? Charisma => "1d3";
+    public override string? Wisdom => "1d3";
     public override int? TreasureRating => 17;
     public override bool? SustCha => true;
     public override bool? SustWis => true;

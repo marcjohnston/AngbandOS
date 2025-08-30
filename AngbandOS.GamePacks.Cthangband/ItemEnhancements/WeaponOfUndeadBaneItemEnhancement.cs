@@ -11,7 +11,7 @@ public class WeaponOfUndeadBaneItemEnhancement : ItemEnhancementGameConfiguratio
 {
     public override int? Value => 8000;
     public override string? FriendlyName => "of Undead Bane";
-    public override string? BonusWisdomRollExpression => "1d2";
+    public override string? Wisdom => "1d2";
     public override int? TreasureRating => 24;
     public override bool? SeeInvis => true;
     public override bool? SlayUndead => true;

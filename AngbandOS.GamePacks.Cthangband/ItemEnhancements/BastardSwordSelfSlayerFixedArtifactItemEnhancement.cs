@@ -14,7 +14,7 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override int? SlayDragon => 5;
-    public override string? BonusConstitutionRollExpression => "5";
+    public override string? Constitution => "5";
     public override bool? ResDisen => true;
     public override bool? ShowMods => true;
     public override bool? SlayDemon => true;
@@ -22,7 +22,7 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? SlayTroll => true;
     public override int? Value => 100000;
     public override int? DamageDice => 2;
-    public override string BonusHitsRollExpression => "-20";
-    public override string BonusDamageRollExpression => "20";
+    public override string Hits => "-20";
+    public override string Damage => "20";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

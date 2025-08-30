@@ -19,9 +19,9 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusCharismaRollExpression => "4";
-    public override string? BonusIntelligenceRollExpression => "4";
-    public override string? BonusWisdomRollExpression => "4";
+    public override string? Charisma => "4";
+    public override string? Intelligence => "4";
+    public override string? Wisdom => "4";
     public override bool? ResFire => true;
     public override bool? ResNether => true;
     public override bool? SeeInvis => true;
@@ -36,7 +36,7 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? Telepathy => true;
     public override int? Value => 140000;
     public override int? DamageDice => 1;
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "13";
+    public override string Hits => "10";
+    public override string Damage => "13";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

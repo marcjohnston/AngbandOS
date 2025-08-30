@@ -2,12 +2,12 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class ZombieRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string BonusStrengthRollExpression => "2";
-    public override string BonusCharismaRollExpression => "-5";
-    public override string BonusConstitutionRollExpression => "4";
-    public override string BonusWisdomRollExpression => "-6";
-    public override string BonusIntelligenceRollExpression => "-6";
-    public override string BonusDexterityRollExpression => "1";
+    public override string Strength => "2";
+    public override string Charisma => "-5";
+    public override string Constitution => "4";
+    public override string Wisdom => "-6";
+    public override string Intelligence => "-6";
+    public override string Dexterity => "1";
     public override int? Value => -8250;
-    public override string? BonusInfravisionRollExpression => "2";
+    public override string? Infravision => "2";
 }

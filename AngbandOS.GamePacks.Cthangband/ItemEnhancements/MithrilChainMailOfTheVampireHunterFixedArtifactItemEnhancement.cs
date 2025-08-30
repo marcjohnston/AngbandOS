@@ -12,9 +12,9 @@ public class MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement : It
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusIntelligenceRollExpression => "4";
-    public override string? BonusStealthRollExpression => "4";
-    public override string? BonusWisdomRollExpression => "4";
+    public override string? Intelligence => "4";
+    public override string? Stealth => "4";
+    public override string? Wisdom => "4";
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
     public override bool? ResDark => true;
@@ -25,7 +25,7 @@ public class MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement : It
     public override bool? ResPois => true;
     public override bool? SeeInvis => true;
     public override int? Value => 135000;
-    public override string BonusAttacksRollExpression => "20";
-    public override string BonusHitsRollExpression => "-1";
+    public override string Attacks => "20";
+    public override string Hits => "-1";
     public override ColorEnum? Color => ColorEnum.BrightBlue;
 }

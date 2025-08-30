@@ -11,8 +11,8 @@ public class CutlassOfBlackbeardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusDexterityRollExpression => "3";
-    public override string? BonusStealthRollExpression => "3";
+    public override string? Dexterity => "3";
+    public override string? Stealth => "3";
     public override bool? Regen => true;
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
@@ -21,7 +21,7 @@ public class CutlassOfBlackbeardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
     public override int? Value => 28000;
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "11";
+    public override string Hits => "10";
+    public override string Damage => "11";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -4,7 +4,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PowerDragonScaleMailBladeturnerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     //Bladeturner heals you and gives you timed resistances
-    public override string? BonusArmorClassRollExpression => "10"; // 40 => 50;
+    public override string? BonusArmorClass => "10"; // 40 => 50;
     public override string? ActivationName => nameof(ActivationsEnum.PowerDragonEvery400DirectionalActivation);
     public override int? TreasureRating => 20;
     public override bool? Feather => true;
@@ -32,8 +32,8 @@ public class PowerDragonScaleMailBladeturnerFixedArtifactItemEnhancement : ItemE
     public override bool? ResSound => true;
     public override int? Weight => 350;
     public override int? Value => 500000;
-    public override string BonusAttacksRollExpression => "35";
-    public override string BonusHitsRollExpression => "-8";
+    public override string Attacks => "35";
+    public override string Hits => "-8";
     public override ColorEnum? Color => ColorEnum.Purple;
     public override bool? HideType => true;
 }

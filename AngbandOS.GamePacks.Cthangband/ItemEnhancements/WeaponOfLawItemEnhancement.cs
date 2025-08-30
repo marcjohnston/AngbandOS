@@ -12,10 +12,10 @@ public class WeaponOfLawItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => 25000;
     public override bool? FreeAct => true;
     public override string? FriendlyName => "(Weapon of Law)";
-    public override string? BonusConstitutionRollExpression => "1d2";
-    public override string? BonusStrengthRollExpression => "1d2";
-    public override string? BonusDamageRollExpression => "1d6";
-    public override string? BonusHitsRollExpression => "1d6";
+    public override string? Constitution => "1d2";
+    public override string? Strength => "1d2";
+    public override string? Damage => "1d6";
+    public override string? Hits => "1d6";
     public override int? TreasureRating => 26;
     public override bool? SeeInvis => true;
     public override bool? SlayDemon => true;

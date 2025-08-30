@@ -11,7 +11,7 @@ public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnh
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusConstitutionRollExpression => "2";
+    public override string? Constitution => "2";
     public override bool? ResAcid => true;
     public override bool? ResChaos => true;
     public override bool? ResCold => true;
@@ -20,7 +20,7 @@ public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnh
     public override bool? ResNexus => true;
     public override bool? SustCon => true;
     public override int? Value => 280000; // Total 300000
-    public override string BonusAttacksRollExpression => "20";
-    public override string BonusHitsRollExpression => "-4";
+    public override string Attacks => "20";
+    public override string Hits => "-4";
     public override ColorEnum? Color => ColorEnum.BrightGreen;
 }

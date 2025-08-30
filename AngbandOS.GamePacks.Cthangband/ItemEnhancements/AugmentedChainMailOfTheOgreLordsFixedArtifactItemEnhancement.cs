@@ -12,14 +12,14 @@ public class AugmentedChainMailOfTheOgreLordsFixedArtifactItemEnhancement : Item
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusConstitutionRollExpression => "3";
-    public override string? BonusIntelligenceRollExpression => "3";
-    public override string? BonusWisdomRollExpression => "3";
+    public override string? Constitution => "3";
+    public override string? Intelligence => "3";
+    public override string? Wisdom => "3";
     public override bool? ResAcid => true;
     public override bool? ResConf => true;
     public override bool? ResPois => true;
     public override int? Value => 40000;
-    public override string BonusAttacksRollExpression => "20";
-    public override string BonusHitsRollExpression => "-2";
+    public override string Attacks => "20";
+    public override string Hits => "-2";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

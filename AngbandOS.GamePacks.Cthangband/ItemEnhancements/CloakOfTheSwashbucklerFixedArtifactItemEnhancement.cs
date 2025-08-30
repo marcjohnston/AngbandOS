@@ -13,12 +13,12 @@ public class CloakOfTheSwashbucklerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusCharismaRollExpression => "3";
-    public override string? BonusDexterityRollExpression => "3";
+    public override string? Charisma => "3";
+    public override string? Dexterity => "3";
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
     public override bool? ResFire => true;
     public override int? Value => 35000;
-    public override string BonusAttacksRollExpression => "18";
+    public override string Attacks => "18";
     public override ColorEnum? Color => ColorEnum.Green;
 }

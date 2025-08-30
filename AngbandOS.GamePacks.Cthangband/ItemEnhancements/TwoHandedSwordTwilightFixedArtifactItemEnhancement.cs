@@ -20,7 +20,7 @@ public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancemen
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusSpeedRollExpression => "10";
+    public override string? Speed => "10";
     public override bool? ResDisen => true;
     public override bool? ResFear => true;
     public override bool? ResFire => true;
@@ -28,8 +28,8 @@ public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancemen
     public override int? Weight => 50;
     public override int? Value => 40000;
     public override int? DamageDice => 1;
-    public override string BonusAttacksRollExpression => "-50";
-    public override string BonusHitsRollExpression => "-40";
-    public override string BonusDamageRollExpression => "-60";
+    public override string Attacks => "-50";
+    public override string Hits => "-40";
+    public override string Damage => "-60";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

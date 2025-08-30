@@ -11,8 +11,8 @@ public class BowOfExtraShotsItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override int? Value => 10000;
     public override string? FriendlyName => "of Extra Shots";
-    public override string? BonusDamageRollExpression => "1d5";
-    public override string? BonusHitsRollExpression => "1d10";
+    public override string? Damage => "1d5";
+    public override string? Hits => "1d10";
     public override int? TreasureRating => 20;
     public override bool? XtraShots => true;
 }

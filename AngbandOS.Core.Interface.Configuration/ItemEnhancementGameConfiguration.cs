@@ -60,21 +60,21 @@ public class ItemEnhancementGameConfiguration
     /// <returns></returns>
     public virtual bool? CanApplySlayingBonus { get; set; } = null;
 
-    public virtual string? BonusStrengthRollExpression { get; set; } = null;
-    public virtual string? BonusIntelligenceRollExpression { get; set; } = null;
-    public virtual string? BonusWisdomRollExpression { get; set; } = null;
-    public virtual string? BonusDexterityRollExpression { get; set; } = null;
-    public virtual string? BonusConstitutionRollExpression { get; set; } = null;
-    public virtual string? BonusCharismaRollExpression { get; set; } = null;
-    public virtual string? BonusStealthRollExpression { get; set; } = null;
-    public virtual string? BonusSearchRollExpression { get; set; } = null;
-    public virtual string? BonusInfravisionRollExpression { get; set; } = null;
-    public virtual string? BonusTunnelRollExpression { get; set; } = null;
-    public virtual string? BonusAttacksRollExpression { get; set; } = null;
-    public virtual string? BonusSpeedRollExpression { get; set; } = null;
-    public virtual string? BonusArmorClassRollExpression { get; set; } = null;
-    public virtual string? BonusHitsRollExpression { get; set; } = null;
-    public virtual string? BonusDamageRollExpression { get; set; } = null;
+    public virtual string? Strength { get; set; } = null;
+    public virtual string? Intelligence { get; set; } = null;
+    public virtual string? Wisdom { get; set; } = null;
+    public virtual string? Dexterity { get; set; } = null;
+    public virtual string? Constitution { get; set; } = null;
+    public virtual string? Charisma { get; set; } = null;
+    public virtual string? Stealth { get; set; } = null;
+    public virtual string? Search { get; set; } = null;
+    public virtual string? Infravision { get; set; } = null;
+    public virtual string? Tunnel { get; set; } = null;
+    public virtual string? Attacks { get; set; } = null;
+    public virtual string? Speed { get; set; } = null;
+    public virtual string? BonusArmorClass { get; set; } = null;
+    public virtual string? Hits { get; set; } = null;
+    public virtual string? Damage { get; set; } = null;
 
     public virtual string? BaseArmorClass { get; set; } = null;
 

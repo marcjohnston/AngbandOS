@@ -17,8 +17,8 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? IgnoreFire => true;
     public override bool? ImCold => true;
     public override bool? ImFire => true;
-    public override string? BonusDexterityRollExpression => "2";
-    public override string? BonusStrengthRollExpression => "2";
+    public override string? Dexterity => "2";
+    public override string? Strength => "2";
     public override bool? ResChaos => true;
     public override bool? ResDisen => true;
     public override bool? ResNether => true;
@@ -27,7 +27,7 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? ShowMods => true;
     public override bool? Teleport => true;
     public override int? Value => 40000;
-    public override string BonusHitsRollExpression => "-11";
-    public override string BonusDamageRollExpression => "-12";
+    public override string Hits => "-11";
+    public override string Damage => "-12";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

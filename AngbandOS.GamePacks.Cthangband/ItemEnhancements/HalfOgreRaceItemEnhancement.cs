@@ -2,12 +2,12 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class HalfOgreRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string BonusStrengthRollExpression => "3";
-    public override string BonusCharismaRollExpression => "-3";
-    public override string BonusConstitutionRollExpression => "3";
-    public override string BonusWisdomRollExpression => "-1";
-    public override string BonusIntelligenceRollExpression => "-1";
-    public override string BonusDexterityRollExpression => "-1";
+    public override string Strength => "3";
+    public override string Charisma => "-3";
+    public override string Constitution => "3";
+    public override string Wisdom => "-1";
+    public override string Intelligence => "-1";
+    public override string Dexterity => "-1";
     public override int? Value => 2250;
-    public override string? BonusInfravisionRollExpression => "3";
+    public override string? Infravision => "3";
 }

@@ -18,10 +18,10 @@ public class WeaponDefenderItemEnhancement : ItemEnhancementGameConfiguration
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusStealthRollExpression => "1d4";
-    public override string? BonusArmorClassRollExpression => "1d8";
-    public override string? BonusDamageRollExpression => "1d4";
-    public override string? BonusHitsRollExpression => "1d4";
+    public override string? Stealth => "1d4";
+    public override string? BonusArmorClass => "1d8";
+    public override string? Damage => "1d4";
+    public override string? Hits => "1d4";
     public override int? TreasureRating => 25;
     public override bool? Regen => true;
     public override bool? ResAcid => true;

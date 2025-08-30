@@ -2,12 +2,12 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class HighElfRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string BonusStrengthRollExpression => "1";
-    public override string BonusCharismaRollExpression => "5";
-    public override string BonusConstitutionRollExpression => "1";
-    public override string BonusWisdomRollExpression => "2";
-    public override string BonusIntelligenceRollExpression => "3";
-    public override string BonusDexterityRollExpression => "3";
+    public override string Strength => "1";
+    public override string Charisma => "5";
+    public override string Constitution => "1";
+    public override string Wisdom => "2";
+    public override string Intelligence => "3";
+    public override string Dexterity => "3";
     public override int? Value => 14250;
-    public override string? BonusInfravisionRollExpression => "4";
+    public override string? Infravision => "4";
 }

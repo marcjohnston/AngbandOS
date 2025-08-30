@@ -10,8 +10,8 @@ public class MetalBrigandineArmorOfSerpentsFixedArtifactItemEnhancement : ItemEn
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusDexterityRollExpression => "2";
-    public override string? BonusStrengthRollExpression => "2";
+    public override string? Dexterity => "2";
+    public override string? Strength => "2";
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
     public override bool? ResConf => true;
@@ -20,6 +20,6 @@ public class MetalBrigandineArmorOfSerpentsFixedArtifactItemEnhancement : ItemEn
     public override bool? ResSound => true;
     public override int? Weight => -90;
     public override int? Value => 30000;
-    public override string BonusAttacksRollExpression => "15";
+    public override string Attacks => "15";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

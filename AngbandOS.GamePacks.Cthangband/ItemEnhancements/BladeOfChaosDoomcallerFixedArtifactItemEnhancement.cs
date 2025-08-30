@@ -35,8 +35,8 @@ public class BladeOfChaosDoomcallerFixedArtifactItemEnhancement : ItemEnhancemen
     public override int? Vorpal1InChance => 6;
     public override int? VorpalExtraAttacks1InChance => 2;
     public override int? Value => 250000;
-    public override string BonusAttacksRollExpression => "-50";
-    public override string BonusHitsRollExpression => "18";
-    public override string BonusDamageRollExpression => "28";
+    public override string Attacks => "-50";
+    public override string Hits => "18";
+    public override string Damage => "28";
     public override ColorEnum? Color => ColorEnum.Purple;
 }

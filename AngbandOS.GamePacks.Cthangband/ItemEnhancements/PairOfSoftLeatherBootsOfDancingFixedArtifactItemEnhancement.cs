@@ -13,13 +13,13 @@ public class PairOfSoftLeatherBootsOfDancingFixedArtifactItemEnhancement : ItemE
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusCharismaRollExpression => "5";
-    public override string? BonusDexterityRollExpression => "5";
+    public override string? Charisma => "5";
+    public override string? Dexterity => "5";
     public override bool? ResChaos => true;
     public override bool? ResNether => true;
     public override bool? SustCha => true;
     public override bool? SustCon => true;
     public override int? Value => 40000;
-    public override string BonusAttacksRollExpression => "15";
+    public override string Attacks => "15";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

@@ -12,7 +12,7 @@ public class AmuletOfLobonFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusConstitutionRollExpression => "2";
+    public override string? Constitution => "2";
     public override bool? ResFire => true;
     public override int? Value => 60000;
 }

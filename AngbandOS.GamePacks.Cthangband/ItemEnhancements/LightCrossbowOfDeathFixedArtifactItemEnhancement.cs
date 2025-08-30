@@ -11,12 +11,12 @@ public class LightCrossbowOfDeathFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusSpeedRollExpression => "10";
+    public override string? Speed => "10";
     public override bool? ResFire => true;
     public override bool? ShowMods => true;
     public override bool? XtraMight => true;
     public override int? Value => 50000;
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "14";
+    public override string Hits => "10";
+    public override string Damage => "14";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

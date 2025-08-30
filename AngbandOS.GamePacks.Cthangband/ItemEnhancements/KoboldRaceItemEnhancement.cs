@@ -2,12 +2,12 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class KoboldRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string BonusStrengthRollExpression => "1";
-    public override string BonusCharismaRollExpression => "-4";
-    public override string BonusConstitutionRollExpression => "0";
-    public override string BonusWisdomRollExpression => "0";
-    public override string BonusIntelligenceRollExpression => "-1";
-    public override string BonusDexterityRollExpression => "1";
+    public override string Strength => "1";
+    public override string Charisma => "-4";
+    public override string Constitution => "0";
+    public override string Wisdom => "0";
+    public override string Intelligence => "-1";
+    public override string Dexterity => "1";
     public override int? Value => -600;
-    public override string? BonusInfravisionRollExpression => "3";
+    public override string? Infravision => "3";
 }

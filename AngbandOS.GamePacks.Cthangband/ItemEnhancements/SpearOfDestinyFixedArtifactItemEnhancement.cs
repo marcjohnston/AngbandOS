@@ -20,9 +20,9 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusInfravisionRollExpression => "4";
-    public override string? BonusIntelligenceRollExpression => "4";
-    public override string? BonusWisdomRollExpression => "4";
+    public override string? Infravision => "4";
+    public override string? Intelligence => "4";
+    public override string? Wisdom => "4";
     public override bool? ResFear => true;
     public override bool? ResFire => true;
     public override bool? ResLight => true;
@@ -34,7 +34,7 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
     public override bool? SlayGiant => true;
     public override bool? SlayUndead => true;
     public override int? Value => 77777;
-    public override string BonusHitsRollExpression => "15";
-    public override string BonusDamageRollExpression => "15";
+    public override string Hits => "15";
+    public override string Damage => "15";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

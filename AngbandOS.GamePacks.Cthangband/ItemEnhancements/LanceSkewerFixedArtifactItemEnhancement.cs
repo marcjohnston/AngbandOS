@@ -10,7 +10,7 @@ public class LanceSkewerFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusDexterityRollExpression => "2";
+    public override string? Dexterity => "2";
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
     public override bool? SlayEvil => true;
@@ -19,7 +19,7 @@ public class LanceSkewerFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override int? Weight => 60;
     public override int? Value => 55000;
     public override int? DamageDice => 1;
-    public override string BonusHitsRollExpression => "3";
-    public override string BonusDamageRollExpression => "21";
+    public override string Hits => "3";
+    public override string Damage => "21";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

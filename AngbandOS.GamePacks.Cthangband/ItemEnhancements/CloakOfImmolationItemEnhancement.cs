@@ -13,7 +13,7 @@ public class CloakOfImmolationItemEnhancement : ItemEnhancementGameConfiguration
     public override string? FriendlyName => "of Immolation";
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusArmorClassRollExpression => "1d4";
+    public override string? BonusArmorClass => "1d4";
     public override int? TreasureRating => 16;
     public override bool? ResFire => true;
     public override bool? ShFire => true;

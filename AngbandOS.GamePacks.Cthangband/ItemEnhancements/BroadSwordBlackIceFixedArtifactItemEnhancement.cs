@@ -15,14 +15,14 @@ public class BroadSwordBlackIceFixedArtifactItemEnhancement : ItemEnhancementGam
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusStealthRollExpression => "3";
+    public override string? Stealth => "3";
     public override bool? ResCold => true;
     public override bool? ShowMods => true;
     public override bool? SlayEvil => true;
     public override bool? SlayOrc => true;
     public override bool? SlowDigest => true;
     public override int? Value => 40000;
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "15";
+    public override string Hits => "10";
+    public override string Damage => "15";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

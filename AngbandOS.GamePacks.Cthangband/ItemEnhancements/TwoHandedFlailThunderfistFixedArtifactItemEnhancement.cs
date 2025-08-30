@@ -17,7 +17,7 @@ public class TwoHandedFlailThunderfistFixedArtifactItemEnhancement : ItemEnhance
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusStrengthRollExpression => "4";
+    public override string? Strength => "4";
     public override bool? ResDark => true;
     public override bool? ResElec => true;
     public override bool? ResFire => true;
@@ -27,7 +27,7 @@ public class TwoHandedFlailThunderfistFixedArtifactItemEnhancement : ItemEnhance
     public override bool? SlayTroll => true;
     public override int? Weight => 20;
     public override int? Value => 160000;
-    public override string BonusHitsRollExpression => "5";
-    public override string BonusDamageRollExpression => "18";
+    public override string Hits => "5";
+    public override string Damage => "18";
     public override ColorEnum? Color => ColorEnum.Yellow;
 }

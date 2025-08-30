@@ -12,6 +12,6 @@ public class GlaiveOfPainFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool? ShowMods => true;
     public override int? Value => 50000;
     public override int? DamageDice => 7;
-    public override string BonusDamageRollExpression => "30";
+    public override string Damage => "30";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

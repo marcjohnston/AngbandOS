@@ -17,14 +17,14 @@ public class FlailTotilaFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusStealthRollExpression => "2";
+    public override string? Stealth => "2";
     public override bool? ResConf => true;
     public override bool? ResFire => true;
     public override bool? ShowMods => true;
     public override bool? SlayEvil => true;
     public override int? Value => 55000;
     public override int? DamageDice => 1;
-    public override string BonusHitsRollExpression => "6";
-    public override string BonusDamageRollExpression => "8";
+    public override string Hits => "6";
+    public override string Damage => "8";
     public override ColorEnum? Color => ColorEnum.Black;
 }

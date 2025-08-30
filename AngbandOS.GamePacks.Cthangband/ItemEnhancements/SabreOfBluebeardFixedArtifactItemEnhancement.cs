@@ -9,7 +9,7 @@ public class SabreOfBluebeardFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusAttacksRollExpression => "1";
+    public override string? Attacks => "1";
     public override bool? ShowMods => true;
     public override bool? SlayAnimal => true;
     public override int? SlayDragon => 3;
@@ -17,7 +17,7 @@ public class SabreOfBluebeardFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool? SlayOrc => true;
     public override bool? SlayTroll => true;
     public override int? Value => 25000;
-    public override string BonusHitsRollExpression => "6";
-    public override string BonusDamageRollExpression => "8";
+    public override string Hits => "6";
+    public override string Damage => "8";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

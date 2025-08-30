@@ -19,16 +19,16 @@ public class ScytheOfGharneFixedArtifactItemEnhancement : ItemEnhancementGameCon
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusCharismaRollExpression => "3";
-    public override string? BonusDexterityRollExpression => "3";
+    public override string? Charisma => "3";
+    public override string? Dexterity => "3";
     public override bool? ResCold => true;
     public override bool? ResFire => true;
     public override bool? ResLight => true;
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
     public override int? Value => 18000;
-    public override string BonusAttacksRollExpression => "10";
-    public override string BonusHitsRollExpression => "8";
-    public override string BonusDamageRollExpression => "8";
+    public override string Attacks => "10";
+    public override string Hits => "8";
+    public override string Damage => "8";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

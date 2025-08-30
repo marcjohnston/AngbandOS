@@ -11,9 +11,9 @@ public class PairOfHardLeatherBootsOfIthaquaFixedArtifactItemEnhancement : ItemE
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusSpeedRollExpression => "15";
+    public override string? Speed => "15";
     public override bool? ResNexus => true;
     public override int? Value => 300000;
-    public override string BonusAttacksRollExpression => "20";
+    public override string Attacks => "20";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

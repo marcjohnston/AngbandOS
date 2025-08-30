@@ -14,13 +14,13 @@ public class RingOfElementalPowerFireFixedArtifactItemEnhancement : ItemEnhancem
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? ImFire => true;
-    public override string? BonusCharismaRollExpression => "1";
-    public override string? BonusConstitutionRollExpression => "1";
-    public override string? BonusDexterityRollExpression => "1";
-    public override string? BonusIntelligenceRollExpression => "1";
-    public override string? BonusSpeedRollExpression => "1";
-    public override string? BonusStrengthRollExpression => "1";
-    public override string? BonusWisdomRollExpression => "1";
+    public override string? Charisma => "1";
+    public override string? Constitution => "1";
+    public override string? Dexterity => "1";
+    public override string? Intelligence => "1";
+    public override string? Speed => "1";
+    public override string? Strength => "1";
+    public override string? Wisdom => "1";
     public override bool? Regen => true;
     public override bool? SeeInvis => true;
     public override bool? SlowDigest => true;
@@ -29,6 +29,6 @@ public class RingOfElementalPowerFireFixedArtifactItemEnhancement : ItemEnhancem
     public override int? Value => 100000;
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "10";
+    public override string Hits => "10";
+    public override string Damage => "10";
 }

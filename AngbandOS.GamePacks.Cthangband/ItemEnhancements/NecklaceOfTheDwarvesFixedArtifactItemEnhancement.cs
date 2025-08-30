@@ -16,7 +16,7 @@ public class NecklaceOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhancementG
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusStrengthRollExpression => "3";
+    public override string? Strength => "3";
     public override bool? Regen => true;
     public override bool? SeeInvis => true;
     public override int? Value => 75000;

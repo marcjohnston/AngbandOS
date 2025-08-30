@@ -12,7 +12,7 @@ public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override int? SlayDragon => 5;
-    public override string? BonusConstitutionRollExpression => "3";
+    public override string? Constitution => "3";
     public override bool? ResAcid => true;
     public override bool? ResChaos => true;
     public override bool? ResDark => true;
@@ -23,8 +23,8 @@ public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? SlayOrc => true;
     public override bool? SlayTroll => true;
     public override int? Value => 150000;
-    public override string BonusAttacksRollExpression => "15";
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "20";
+    public override string Attacks => "15";
+    public override string Hits => "10";
+    public override string Damage => "20";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

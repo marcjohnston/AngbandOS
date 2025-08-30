@@ -12,9 +12,9 @@ public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusConstitutionRollExpression => "3";
-    public override string? BonusStealthRollExpression => "3";
-    public override string? BonusStrengthRollExpression => "3";
+    public override string? Constitution => "3";
+    public override string? Stealth => "3";
+    public override string? Strength => "3";
     public override bool? Regen => true;
     public override bool? ResAcid => true;
     public override bool? ResBlind => true;
@@ -28,8 +28,8 @@ public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override bool? SlayTroll => true;
     public override int? Value => 90000;
     public override int? DamageDice => 1;
-    public override string BonusAttacksRollExpression => "5";
-    public override string BonusHitsRollExpression => "8";
-    public override string BonusDamageRollExpression => "11";
+    public override string Attacks => "5";
+    public override string Hits => "8";
+    public override string Damage => "11";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -17,7 +17,7 @@ public class ArmorOfPermanenceItemEnhancement : ItemEnhancementGameConfiguration
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusArmorClassRollExpression => "1d10";
+    public override string? BonusArmorClass => "1d10";
     public override int? TreasureRating => 30;
     public override bool? ResAcid => true;
     public override bool? ResCold => true;

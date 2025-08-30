@@ -12,9 +12,9 @@ public class DaggerOfAssassinFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusDexterityRollExpression => "4";
-    public override string? BonusSearchRollExpression => "4";
-    public override string? BonusStealthRollExpression => "4";
+    public override string? Dexterity => "4";
+    public override string? Search => "4";
+    public override string? Stealth => "4";
     public override bool? ResDark => true;
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
@@ -24,8 +24,8 @@ public class DaggerOfAssassinFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool? SustDex => true;
     public override int? Value => 125000;
     public override int? DamageDice => 1;
-    public override string BonusAttacksRollExpression => "5";
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "15";
+    public override string Attacks => "5";
+    public override string Hits => "10";
+    public override string Damage => "15";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

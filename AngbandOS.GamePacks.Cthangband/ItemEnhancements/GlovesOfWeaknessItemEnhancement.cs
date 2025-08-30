@@ -11,5 +11,5 @@ public class GlovesOfWeaknessItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Valueless => true;
     public override string? FriendlyName => "of Weakness";
-    public override string? BonusStrengthRollExpression => "1d10";
+    public override string? Strength => "1d10";
 }

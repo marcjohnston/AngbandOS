@@ -11,6 +11,6 @@ public class WeaponOfExtraAttacksItemEnhancement : ItemEnhancementGameConfigurat
 {
     public override int? Value => 10000;
     public override string? FriendlyName => "of Extra Attacks";
-    public override string? BonusAttacksRollExpression => "1d3";
+    public override string? Attacks => "1d3";
     public override int? TreasureRating => 20;
 }

@@ -4,11 +4,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class RogueCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string BonusStrengthRollExpression => "2";
-    public override string BonusCharismaRollExpression => "-1";
-    public override string BonusConstitutionRollExpression => "1";
-    public override string BonusWisdomRollExpression => "-2";
-    public override string BonusIntelligenceRollExpression => "1";
-    public override string BonusDexterityRollExpression => "3";
+    public override string Strength => "2";
+    public override string Charisma => "-1";
+    public override string Constitution => "1";
+    public override string Wisdom => "-2";
+    public override string Intelligence => "1";
+    public override string Dexterity => "3";
     public override int? Value => 5550;
 }

@@ -11,6 +11,6 @@ public class HatOfUglinessItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Valueless => true;
     public override string? FriendlyName => "of Ugliness";
-    public override string? BonusCharismaRollExpression => "1d5";
+    public override string? Charisma => "1d5";
     public override int? Value => 1350;
 }

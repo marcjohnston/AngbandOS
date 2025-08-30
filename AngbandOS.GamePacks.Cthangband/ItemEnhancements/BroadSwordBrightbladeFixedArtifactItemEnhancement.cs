@@ -16,7 +16,7 @@ public class BroadSwordBrightbladeFixedArtifactItemEnhancement : ItemEnhancement
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusSearchRollExpression => "1";
+    public override string? Search => "1";
     public override bool? ResFire => true;
     public override bool? ResLight => true;
     public override bool? ShowMods => true;
@@ -24,7 +24,7 @@ public class BroadSwordBrightbladeFixedArtifactItemEnhancement : ItemEnhancement
     public override bool? SlayOrc => true;
     public override bool? SlowDigest => true;
     public override int? Value => 40000;
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "15";
+    public override string Hits => "10";
+    public override string Damage => "15";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

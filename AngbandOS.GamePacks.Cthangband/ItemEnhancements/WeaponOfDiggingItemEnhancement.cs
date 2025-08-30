@@ -16,6 +16,6 @@ public class WeaponOfDiggingItemEnhancement : ItemEnhancementGameConfiguration
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusTunnelRollExpression => "1d5";
+    public override string? Tunnel => "1d5";
     public override int? TreasureRating => 4;
 }

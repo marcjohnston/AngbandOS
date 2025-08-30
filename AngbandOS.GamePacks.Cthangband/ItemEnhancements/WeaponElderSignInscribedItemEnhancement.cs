@@ -13,10 +13,10 @@ public class WeaponElderSignInscribedItemEnhancement : ItemEnhancementGameConfig
     public override bool? Blessed => true;
     public override int? Value => 20000;
     public override string? FriendlyName => "(Elder Sign Inscribed)";
-    public override string? BonusWisdomRollExpression => "1d4";
-    public override string? BonusArmorClassRollExpression => "1d4";
-    public override string? BonusDamageRollExpression => "1d6";
-    public override string? BonusHitsRollExpression => "1d6";
+    public override string? Wisdom => "1d4";
+    public override string? BonusArmorClass => "1d4";
+    public override string? Damage => "1d6";
+    public override string? Hits => "1d6";
     public override int? TreasureRating => 30;
     public override bool? ResFear => true;
     public override bool? SeeInvis => true;

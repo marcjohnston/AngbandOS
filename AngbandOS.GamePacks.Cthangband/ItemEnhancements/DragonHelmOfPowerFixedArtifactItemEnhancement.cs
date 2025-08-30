@@ -17,9 +17,9 @@ public class DragonHelmOfPowerFixedArtifactItemEnhancement : ItemEnhancementGame
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusConstitutionRollExpression => "4";
-    public override string? BonusDexterityRollExpression => "4";
-    public override string? BonusStrengthRollExpression => "4";
+    public override string? Constitution => "4";
+    public override string? Dexterity => "4";
+    public override string? Strength => "4";
     public override bool? ResAcid => true;
     public override bool? ResBlind => true;
     public override bool? ResCold => true;
@@ -30,6 +30,6 @@ public class DragonHelmOfPowerFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool? Telepathy => true;
     public override int? Weight => 25;
     public override int? Value => 300000;
-    public override string BonusAttacksRollExpression => "20";
+    public override string Attacks => "20";
     public override ColorEnum? Color => ColorEnum.BrightGreen;
 }

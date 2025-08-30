@@ -18,7 +18,7 @@ public class MaceThunderFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override int? Weight => 80;
     public override int? Value => 50000;
     public override int? DamageDice => 1;
-    public override string BonusHitsRollExpression => "12";
-    public override string BonusDamageRollExpression => "12";
+    public override string Hits => "12";
+    public override string Damage => "12";
     public override ColorEnum? Color => ColorEnum.Black;
 }

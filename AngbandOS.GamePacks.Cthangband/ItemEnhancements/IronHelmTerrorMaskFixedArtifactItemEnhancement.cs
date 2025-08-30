@@ -15,9 +15,9 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? IgnoreFire => true;
     public override bool? ImCold => true;
     public override bool? NoMagic => true;
-    public override string? BonusIntelligenceRollExpression => "-1";
-    public override string? BonusSearchRollExpression => "-1";
-    public override string? BonusWisdomRollExpression => "-1";
+    public override string? Intelligence => "-1";
+    public override string? Search => "-1";
+    public override string? Wisdom => "-1";
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
     public override bool? ResDisen => true;
@@ -27,8 +27,8 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? ShowMods => true;
     public override bool? Teleport => true;
     public override int? Value => 40000;
-    public override string BonusAttacksRollExpression => "10";
-    public override string BonusHitsRollExpression => "25";
-    public override string BonusDamageRollExpression => "25";
+    public override string Attacks => "10";
+    public override string Hits => "25";
+    public override string Damage => "25";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

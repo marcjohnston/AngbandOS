@@ -10,9 +10,9 @@ public class MetalCapOfHolinessFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusCharismaRollExpression => "3";
-    public override string? BonusWisdomRollExpression => "3";
+    public override string? Charisma => "3";
+    public override string? Wisdom => "3";
     public override int? Value => 22000;
-    public override string BonusAttacksRollExpression => "12";
+    public override string Attacks => "12";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

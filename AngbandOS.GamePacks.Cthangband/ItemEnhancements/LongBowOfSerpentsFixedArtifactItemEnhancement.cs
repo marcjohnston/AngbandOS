@@ -11,11 +11,11 @@ public class LongBowOfSerpentsFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusDexterityRollExpression => "3";
+    public override string? Dexterity => "3";
     public override bool? ShowMods => true;
     public override bool? XtraMight => true;
     public override int? Value => 20000;
-    public override string BonusHitsRollExpression => "17";
-    public override string BonusDamageRollExpression => "19";
+    public override string Hits => "17";
+    public override string Damage => "19";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

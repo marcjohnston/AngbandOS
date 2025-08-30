@@ -12,11 +12,11 @@ public class SmallMetalShieldVitriolFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? ImAcid => true;
-    public override string? BonusConstitutionRollExpression => "4";
-    public override string? BonusStrengthRollExpression => "4";
+    public override string? Constitution => "4";
+    public override string? Strength => "4";
     public override bool? ResChaos => true;
     public override bool? ResSound => true;
     public override int? Value => 60000;
-    public override string BonusAttacksRollExpression => "25";
+    public override string Attacks => "25";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

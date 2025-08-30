@@ -20,8 +20,8 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
     public override int? Radius => 3;
 
     public override bool? NoTele => true;
-    public override string? BonusTunnelRollExpression => "6";
-    public override string? BonusStrengthRollExpression => "6";
+    public override string? Tunnel => "6";
+    public override string? Strength => "6";
     public override bool? ResChaos => true;
     public override bool? ResDark => true;
     public override bool? ResDisen => true;
@@ -35,7 +35,7 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
     public override int? Value => 444444;
     public override int? DamageDice => 5;
     public override int? DiceSides => 4;
-    public override string BonusHitsRollExpression => "18";
-    public override string BonusDamageRollExpression => "18";
+    public override string Hits => "18";
+    public override string Damage => "18";
     public override ColorEnum? Color => ColorEnum.Purple;
 }

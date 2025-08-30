@@ -16,13 +16,13 @@ public class RingOfElementalPowerIceFixedArtifactItemEnhancement : ItemEnhanceme
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? ImCold => true;
-    public override string? BonusCharismaRollExpression => "2";
-    public override string? BonusConstitutionRollExpression => "2";
-    public override string? BonusIntelligenceRollExpression => "2";
-    public override string? BonusDexterityRollExpression => "2";
-    public override string? BonusSpeedRollExpression => "2";
-    public override string? BonusStrengthRollExpression => "2";
-    public override string? BonusWisdomRollExpression => "2";
+    public override string? Charisma => "2";
+    public override string? Constitution => "2";
+    public override string? Intelligence => "2";
+    public override string? Dexterity => "2";
+    public override string? Speed => "2";
+    public override string? Strength => "2";
+    public override string? Wisdom => "2";
     public override bool? Regen => true;
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
@@ -34,6 +34,6 @@ public class RingOfElementalPowerIceFixedArtifactItemEnhancement : ItemEnhanceme
     public override int? Value => 200000;
     public override int? DamageDice => 1;
     public override int? DiceSides => 1;
-    public override string BonusHitsRollExpression => "11";
-    public override string BonusDamageRollExpression => "11";
+    public override string Hits => "11";
+    public override string Damage => "11";
 }

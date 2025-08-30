@@ -12,14 +12,14 @@ public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusConstitutionRollExpression => "3";
-    public override string? BonusWisdomRollExpression => "3";
+    public override string? Constitution => "3";
+    public override string? Wisdom => "3";
     public override bool? ShowMods => true;
     public override int? SlayDragon => 3;
     public override bool? SlowDigest => true;
     public override bool? Telepathy => true;
     public override int? Value => 40000;
-    public override string BonusHitsRollExpression => "8";
-    public override string BonusDamageRollExpression => "10";
+    public override string Hits => "8";
+    public override string Damage => "10";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

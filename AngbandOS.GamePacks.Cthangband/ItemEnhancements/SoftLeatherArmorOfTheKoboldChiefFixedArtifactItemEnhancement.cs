@@ -9,13 +9,13 @@ public class SoftLeatherArmorOfTheKoboldChiefFixedArtifactItemEnhancement : Item
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusStealthRollExpression => "4";
+    public override string? Stealth => "4";
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
     public override bool? ResDark => true;
     public override bool? ResElec => true;
     public override bool? ResFire => true;
     public override int? Value => 45000;
-    public override string BonusAttacksRollExpression => "20";
+    public override string Attacks => "20";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

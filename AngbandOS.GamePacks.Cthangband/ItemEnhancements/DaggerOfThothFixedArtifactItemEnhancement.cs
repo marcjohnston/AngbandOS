@@ -18,7 +18,7 @@ public class DaggerOfThothFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool? SlayOrc => true;
     public override int? Value => 35000;
     public override int? DamageDice => 1;
-    public override string BonusHitsRollExpression => "4";
-    public override string BonusDamageRollExpression => "3";
+    public override string Hits => "4";
+    public override string Damage => "3";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

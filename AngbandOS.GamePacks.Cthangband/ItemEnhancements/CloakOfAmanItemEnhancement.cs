@@ -16,7 +16,7 @@ public class CloakOfAmanItemEnhancement : ItemEnhancementGameConfiguration
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusStealthRollExpression => "1d3";
-    public override string? BonusArmorClassRollExpression => "1d20";
+    public override string? Stealth => "1d3";
+    public override string? BonusArmorClass => "1d20";
     public override int? TreasureRating => 20;
 }

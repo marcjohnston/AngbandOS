@@ -18,16 +18,16 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusInfravisionRollExpression => "4";
-    public override string? BonusWisdomRollExpression => "4";
+    public override string? Infravision => "4";
+    public override string? Wisdom => "4";
     public override bool? Regen => true;
     public override bool? ResCold => true;
     public override bool? ResLight => true;
     public override bool? ShowMods => true;
     public override bool? SlayOrc => true;
     public override int? Value => 30000;
-    public override string BonusAttacksRollExpression => "8";
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "6";
+    public override string Attacks => "8";
+    public override string Hits => "10";
+    public override string Damage => "6";
     public override ColorEnum? Color => ColorEnum.BrightBlue;
 }

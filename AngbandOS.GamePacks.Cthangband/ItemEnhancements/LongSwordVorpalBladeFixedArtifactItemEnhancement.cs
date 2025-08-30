@@ -15,9 +15,9 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusDexterityRollExpression => "2";
-    public override string? BonusSpeedRollExpression => "2";
-    public override string? BonusStrengthRollExpression => "2";
+    public override string? Dexterity => "2";
+    public override string? Speed => "2";
+    public override string? Strength => "2";
     public override bool? Regen => true;
     public override bool? SeeInvis => true;
     public override bool? SlayEvil => true;
@@ -27,7 +27,7 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override int? Weight => 20;
     public override int? Value => 250000;
     public override int? DamageDice => 3;
-    public override string BonusHitsRollExpression => "32";
-    public override string BonusDamageRollExpression => "32";
+    public override string Hits => "32";
+    public override string Damage => "32";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -19,7 +19,7 @@ public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementG
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusStrengthRollExpression => "4";
+    public override string? Strength => "4";
     public override bool? ResFire => true;
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
@@ -28,8 +28,8 @@ public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool? SlayTroll => true;
     public override bool? SustDex => true;
     public override int? Value => 80000;
-    public override string BonusAttacksRollExpression => "5";
-    public override string BonusHitsRollExpression => "10";
-    public override string BonusDamageRollExpression => "15";
+    public override string Attacks => "5";
+    public override string Hits => "10";
+    public override string Damage => "15";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

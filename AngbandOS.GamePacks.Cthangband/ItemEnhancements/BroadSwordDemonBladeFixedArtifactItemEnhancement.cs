@@ -11,11 +11,11 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusAttacksRollExpression => "2";
-    public override string? BonusCharismaRollExpression => "2";
-    public override string? BonusDexterityRollExpression => "2";
-    public override string? BonusSpeedRollExpression => "2";
-    public override string? BonusStealthRollExpression => "2";
+    public override string? Attacks => "2";
+    public override string? Charisma => "2";
+    public override string? Dexterity => "2";
+    public override string? Speed => "2";
+    public override string? Stealth => "2";
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
     public override bool? SlayOrc => true;
@@ -25,7 +25,7 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
     public override int? VorpalExtraAttacks1InChance => 2;
     public override int? Value => 66666;
     public override int? DamageDice => 9;
-    public override string BonusHitsRollExpression => "-30";
-    public override string BonusDamageRollExpression => "7";
+    public override string Hits => "-30";
+    public override string Damage => "7";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

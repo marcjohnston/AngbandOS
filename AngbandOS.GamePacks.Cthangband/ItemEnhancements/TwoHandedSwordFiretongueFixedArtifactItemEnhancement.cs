@@ -19,8 +19,8 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusCharismaRollExpression => "4";
-    public override string? BonusStrengthRollExpression => "4";
+    public override string? Charisma => "4";
+    public override string? Strength => "4";
     public override bool? ResChaos => true;
     public override bool? ResFire => true;
     public override bool? SeeInvis => true;
@@ -37,7 +37,7 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
     public override int? Weight => 50;
     public override int? Value => 205000;
     public override int? DamageDice => 1;
-    public override string BonusHitsRollExpression => "19";
-    public override string BonusDamageRollExpression => "21";
+    public override string Hits => "19";
+    public override string Damage => "21";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -3,7 +3,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SmallSwordStingFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string? BonusAttacksRollExpression => "1";
+    public override string? Attacks => "1";
     public override int? TreasureRating => 20;
     public override bool? FreeAct => true;
     public override string FriendlyName => "'Sting'";
@@ -16,8 +16,8 @@ public class SmallSwordStingFixedArtifactItemEnhancement : ItemEnhancementGameCo
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusDexterityRollExpression => "2";
-    public override string? BonusStrengthRollExpression => "2";
+    public override string? Dexterity => "2";
+    public override string? Strength => "2";
     public override bool? ResLight => true;
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
@@ -27,7 +27,7 @@ public class SmallSwordStingFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override int? Weight => -5;
     public override int? Value => 100000;
     public override int? DiceSides => -1;
-    public override string BonusHitsRollExpression => "7";
-    public override string BonusDamageRollExpression => "8";
+    public override string Hits => "7";
+    public override string Damage => "8";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

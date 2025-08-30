@@ -11,10 +11,10 @@ public class PairOfMetalShodBootsOfTheBlackReaverFixedArtifactItemEnhancement : 
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusConstitutionRollExpression => "10";
-    public override string? BonusSpeedRollExpression => "10";
-    public override string? BonusStrengthRollExpression => "10";
+    public override string? Constitution => "10";
+    public override string? Speed => "10";
+    public override string? Strength => "10";
     public override int? Value => 15000;
-    public override string BonusAttacksRollExpression => "20";
+    public override string Attacks => "20";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -16,7 +16,7 @@ public class BroadSwordLightningFixedArtifactItemEnhancement : ItemEnhancementGa
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusSearchRollExpression => "4";
+    public override string? Search => "4";
     public override bool? ResElec => true;
     public override bool? ResFear => true;
     public override bool? ResFire => true;
@@ -25,7 +25,7 @@ public class BroadSwordLightningFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool? SlayOrc => true;
     public override bool? SlowDigest => true;
     public override int? Value => 95000;
-    public override string BonusHitsRollExpression => "12";
-    public override string BonusDamageRollExpression => "16";
+    public override string Hits => "12";
+    public override string Damage => "16";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

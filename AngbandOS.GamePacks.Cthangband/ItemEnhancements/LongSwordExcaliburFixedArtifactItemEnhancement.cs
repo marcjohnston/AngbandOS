@@ -18,7 +18,7 @@ public class LongSwordExcaliburFixedArtifactItemEnhancement : ItemEnhancementGam
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusSpeedRollExpression => "10";
+    public override string? Speed => "10";
     public override bool? Regen => true;
     public override bool? ResCold => true;
     public override bool? ResLight => true;
@@ -31,7 +31,7 @@ public class LongSwordExcaliburFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? SlowDigest => true;
     public override int? Value => 300000;
     public override int? DamageDice => 2;
-    public override string BonusHitsRollExpression => "22";
-    public override string BonusDamageRollExpression => "25";
+    public override string Hits => "22";
+    public override string Damage => "25";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -14,9 +14,9 @@ public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusConstitutionRollExpression => "4";
-    public override string? BonusDexterityRollExpression => "4";
-    public override string? BonusStrengthRollExpression => "4";
+    public override string? Constitution => "4";
+    public override string? Dexterity => "4";
+    public override string? Strength => "4";
     public override bool? Regen => true;
     public override bool? ResChaos => true;
     public override bool? ResCold => true;
@@ -33,7 +33,7 @@ public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool? SustStr => true;
     public override int? Value => 125000;
     public override int? DamageDice => 1;
-    public override string BonusHitsRollExpression => "20";
-    public override string BonusDamageRollExpression => "12";
+    public override string Hits => "20";
+    public override string Damage => "12";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

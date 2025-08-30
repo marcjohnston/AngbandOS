@@ -11,5 +11,5 @@ public class ArmorBlastedItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Valueless => true;
     public override string? FriendlyName => "(Blasted)";
-    public override string? BonusArmorClassRollExpression => "1d10";
+    public override string? BonusArmorClass => "1d10";
 }

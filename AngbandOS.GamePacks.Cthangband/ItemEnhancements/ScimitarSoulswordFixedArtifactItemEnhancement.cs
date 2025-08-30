@@ -4,7 +4,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Blessed => true;
-    public override string? BonusAttacksRollExpression => "1";
+    public override string? Attacks => "1";
     public override int? TreasureRating => 20;
     public override string FriendlyName => "'Soulsword'";
     public override bool? HoldLife => true;
@@ -12,8 +12,8 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? BonusIntelligenceRollExpression => "2";
-    public override string? BonusWisdomRollExpression => "2";
+    public override string? Intelligence => "2";
+    public override string? Wisdom => "2";
     public override bool? ResChaos => true;
     public override bool? ResDisen => true;
     public override bool? ResNether => true;
@@ -26,7 +26,7 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool? SlayEvil => true;
     public override bool? SlayUndead => true;
     public override int? Value => 111111;
-    public override string BonusHitsRollExpression => "9";
-    public override string BonusDamageRollExpression => "11";
+    public override string Hits => "9";
+    public override string Damage => "11";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

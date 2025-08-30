@@ -20,8 +20,8 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     /// </summary>
     public override int? Radius => 3;
 
-    public override string? BonusIntelligenceRollExpression => "4";
-    public override string? BonusWisdomRollExpression => "4";
+    public override string? Intelligence => "4";
+    public override string? Wisdom => "4";
     public override bool? ResElec => true;
     public override bool? ResFire => true;
     public override bool? ResLight => true;
@@ -32,8 +32,8 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool? SlowDigest => true;
     public override int? Value => 180000;
     public override int? DamageDice => 3;
-    public override string BonusAttacksRollExpression => "5";
-    public override string BonusHitsRollExpression => "15";
-    public override string BonusDamageRollExpression => "25";
+    public override string Attacks => "5";
+    public override string Hits => "15";
+    public override string Damage => "25";
     public override ColorEnum? Color => ColorEnum.Grey;
 }
