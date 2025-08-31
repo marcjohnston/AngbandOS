@@ -9,4 +9,5 @@ public class WoeRingItemFactoryItemEnhancement : ItemEnhancementGameConfiguratio
     public override int? Weight => 2;
     public override int? Value => -4750;
     public override string? HatesElectricity => "true";
+    public override bool? Valueless => true;
 }

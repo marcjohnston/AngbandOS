@@ -7,4 +7,5 @@ public class AggravateMonsterScrollItemFactoryItemEnhancement : ItemEnhancementG
     public override int? Weight => 5;
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
+    public override bool? Valueless => true;
 }

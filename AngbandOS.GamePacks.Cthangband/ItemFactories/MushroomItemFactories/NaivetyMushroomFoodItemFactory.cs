@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class NaivetyMushroomFoodItemFactory : ItemFactoryGameConfiguration
 {
-    public override bool Valueless => true;
     /// <summary>
     /// Returns true because this is a broken item. 
     /// </summary>

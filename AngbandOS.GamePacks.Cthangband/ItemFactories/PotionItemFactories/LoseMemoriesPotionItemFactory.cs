@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LoseMemoriesPotionItemFactory : ItemFactoryGameConfiguration
 {
-    public override bool Valueless => true;
     /// <summary>
     /// Returns true because this is a broken item. 
     /// </summary>

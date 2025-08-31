@@ -57,7 +57,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         IsMagical = itemFactoryGameConfiguration.IsMagical;
         ValuePerTurnOfLight = itemFactoryGameConfiguration.ValuePerTurnOfLight;
         AimingBindingTuple = itemFactoryGameConfiguration.AimingBindingTuple;
-        Valueless = itemFactoryGameConfiguration.Valueless;
         InitialBrokenStomp = itemFactoryGameConfiguration.InitialBrokenStomp;
         InitialAverageStomp = itemFactoryGameConfiguration.InitialAverageStomp;
         InitialGoodStomp = itemFactoryGameConfiguration.InitialGoodStomp;
@@ -239,7 +238,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             IsMagical = IsMagical,
             ValuePerTurnOfLight = ValuePerTurnOfLight,
             AimingBindingTuple = AimingBindingTuple,
-            Valueless = Valueless,
             InitialBrokenStomp = InitialBrokenStomp,
             InitialAverageStomp = InitialAverageStomp,
             InitialGoodStomp = InitialGoodStomp,
@@ -396,9 +394,9 @@ internal sealed class ItemFactory : IGetKey, IToJson
         EffectiveAttributeSet.AddEnhancement(itemEnhancement.GenerateItemCharacteristics());
 
         //// Cut and paste
-        //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override bool HatesElectricity => ");
+        //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override bool Valueless => ");
         //if (prop1 is not null)
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", itemEnhancement.GetKey, $"    public override string? HatesElectricity => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
+        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", itemEnhancement.GetKey, prop1.Replace("bool", "bool?"));
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
         FlavorSymbol = Symbol;
@@ -1815,11 +1813,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// item cannot be aimed.  Returns null, by default.  This property is used to bind the <see cref="AimingTuple"/>  property during the bind phase.
     /// </summary>
     private (string ActivationScriptName, string InitialChargesCountRollExpression, int PerChargeValue, int ManaValue)? AimingBindingTuple { get; } = null;
-
-    /// <summary>
-    /// Returns true, if the item is broken; false, otherwise.  Broken items have no value and will be stomped.
-    /// </summary>
-    public bool Valueless { get; } = false;
 
     /// <summary>
     /// Returns true, if items of this factory that have a broken quality that should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.  

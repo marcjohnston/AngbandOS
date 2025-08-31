@@ -12,7 +12,6 @@ public class WeaknessRingItemFactory : ItemFactoryGameConfiguration
     public override bool NegativeBonusArmorClassRepresentsBroken => true;
     public override bool NegativeBonusHitRepresentsBroken => true;
     public override bool NegativeBonusDamageRepresentsBroken => true;
-    public override bool Valueless => true;
     /// <summary>
     /// Returns true because this is a broken item. 
     /// </summary>

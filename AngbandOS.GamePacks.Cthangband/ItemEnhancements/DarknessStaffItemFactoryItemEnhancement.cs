@@ -8,4 +8,5 @@ public class DarknessStaffItemFactoryItemEnhancement : ItemEnhancementGameConfig
     public override int? DiceSides => 2;
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
+    public override bool? Valueless => true;
 }
