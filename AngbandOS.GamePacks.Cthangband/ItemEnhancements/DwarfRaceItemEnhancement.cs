@@ -10,4 +10,5 @@ public class DwarfRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Dexterity => "-2";
     public override int? Value => 1050;
     public override string? Infravision => "5";
+    public override string? DisarmTraps => "2";
 }

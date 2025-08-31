@@ -9,4 +9,5 @@ public class MiriNigriRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Intelligence => "-2";
     public override string Dexterity => "-1";
     public override int? Value => -1800;
+    public override string? DisarmTraps => "-5";
 }

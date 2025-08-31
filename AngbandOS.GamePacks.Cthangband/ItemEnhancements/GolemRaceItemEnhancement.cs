@@ -10,4 +10,5 @@ public class GolemRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Dexterity => "0";
     public override int? Value => -4200;
     public override string? Infravision => "4";
+    public override string? DisarmTraps => "-5";
 }

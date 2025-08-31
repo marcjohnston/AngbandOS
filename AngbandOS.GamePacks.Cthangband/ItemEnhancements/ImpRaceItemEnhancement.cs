@@ -10,4 +10,5 @@ public class ImpRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Dexterity => "1";
     public override int? Value => -1350;
     public override string? Infravision => "3";
+    public override string? DisarmTraps => "-3";
 }

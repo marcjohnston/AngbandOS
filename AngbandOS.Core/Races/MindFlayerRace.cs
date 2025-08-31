@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -12,7 +12,6 @@ internal class MindFlayerRace : Race
     private MindFlayerRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(MindFlayerRaceItemEnhancement);
     public override string Title => "Mind Flayer";
-    public override int BaseDisarmBonus => 10;
     public override int BaseDeviceBonus => 25;
     public override int BaseSaveBonus => 15;
     public override int BaseStealthBonus => 2;

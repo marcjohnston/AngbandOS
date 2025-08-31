@@ -9,4 +9,5 @@ public class HalfTitanRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Intelligence => "1";
     public override string Dexterity => "-2";
     public override int? Value => 10050;
+    public override string? DisarmTraps => "-5";
 }

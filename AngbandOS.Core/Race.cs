@@ -30,6 +30,11 @@ internal abstract class Race : IGetKey
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
+
+        // Cut and paste
+        string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\Races\", Key, "public override int BaseDisarmBonus => ");
+        if (prop1 is not null)
+            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? DisarmTraps => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
     }
     public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
 
@@ -39,7 +44,6 @@ internal abstract class Race : IGetKey
     public abstract int AgeRange { get; }
     public abstract int BaseAge { get; }
     public abstract int BaseDeviceBonus { get; }
-    public abstract int BaseDisarmBonus { get; }
     public abstract int BaseMeleeAttackBonus { get; }
     public abstract int BaseRangedAttackBonus { get; }
     public abstract int BaseSaveBonus { get; }

@@ -10,4 +10,5 @@ public class DarkElfRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Dexterity => "2";
     public override int? Value => 5250;
     public override string? Infravision => "5";
+    public override string? DisarmTraps => "5";
 }

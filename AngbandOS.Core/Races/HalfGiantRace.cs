@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -12,7 +12,6 @@ internal class HalfGiantRace : Race
     private HalfGiantRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(HalfGiantRaceItemEnhancement);
     public override string Title => "Half Giant";
-    public override int BaseDisarmBonus => -6;
     public override int BaseDeviceBonus => -8;
     public override int BaseSaveBonus => -6;
     public override int BaseStealthBonus => -2;

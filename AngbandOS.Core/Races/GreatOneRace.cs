@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -12,7 +12,6 @@ internal class GreatOneRace : Race
     private GreatOneRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(GreatOneRaceItemEnhancement);
     public override string Title => "Great One";
-    public override int BaseDisarmBonus => 4;
     public override int BaseDeviceBonus => 5;
     public override int BaseSaveBonus => 5;
     public override int BaseStealthBonus => 2;

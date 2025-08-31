@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -12,7 +12,6 @@ internal class ElfRace : Race
     private ElfRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(ElfRaceItemEnhancement);
     public override string Title => "Elf";
-    public override int BaseDisarmBonus => 5;
     public override int BaseDeviceBonus => 6;
     public override int BaseSaveBonus => 6;
     public override int BaseStealthBonus => 2;

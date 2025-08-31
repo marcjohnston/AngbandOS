@@ -10,4 +10,5 @@ public class ZombieRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Dexterity => "1";
     public override int? Value => -8250;
     public override string? Infravision => "2";
+    public override string? DisarmTraps => "-5";
 }

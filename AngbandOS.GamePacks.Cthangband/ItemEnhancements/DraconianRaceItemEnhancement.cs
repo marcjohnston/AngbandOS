@@ -10,4 +10,5 @@ public class DraconianRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Dexterity => "1";
     public override int? Value => 7050;
     public override string? Infravision => "2";
+    public override string? DisarmTraps => "-2";
 }

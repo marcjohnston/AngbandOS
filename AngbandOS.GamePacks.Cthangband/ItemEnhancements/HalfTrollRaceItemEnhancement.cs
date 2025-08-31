@@ -10,4 +10,5 @@ public class HalfTrollRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Dexterity => "-4";
     public override int? Value => -1500;
     public override string? Infravision => "3";
+    public override string? DisarmTraps => "-5";
 }

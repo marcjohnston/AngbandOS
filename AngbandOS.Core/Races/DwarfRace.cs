@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -12,7 +12,6 @@ internal class DwarfRace : Race
     private DwarfRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(DwarfRaceItemEnhancement);
     public override string Title => "Dwarf";
-    public override int BaseDisarmBonus => 2;
     public override int BaseDeviceBonus => 9;
     public override int BaseSaveBonus => 10;
     public override int BaseStealthBonus => -1;

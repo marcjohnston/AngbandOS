@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -12,7 +12,6 @@ internal class SpriteRace : Race
     private SpriteRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(SpriteRaceItemEnhancement);
     public override string Title => "Sprite";
-    public override int BaseDisarmBonus => 10;
     public override int BaseDeviceBonus => 10;
     public override int BaseSaveBonus => 10;
     public override int BaseStealthBonus => 4;

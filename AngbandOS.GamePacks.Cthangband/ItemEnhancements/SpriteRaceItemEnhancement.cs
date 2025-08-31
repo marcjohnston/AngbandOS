@@ -10,4 +10,5 @@ public class SpriteRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Dexterity => "3";
     public override int? Value => 4500;
     public override string? Infravision => "4";
+    public override string? DisarmTraps => "10";
 }

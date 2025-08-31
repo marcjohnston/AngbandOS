@@ -9,4 +9,5 @@ public class TchoTchoRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Intelligence => "-2";
     public override string Dexterity => "1";
     public override int? Value => 2700;
+    public override string? DisarmTraps => "-2";
 }
