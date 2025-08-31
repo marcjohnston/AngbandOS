@@ -51,10 +51,6 @@ public class MightyHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 
     public override bool HasQualityRatings => true;
 
-    public override int BonusHitRealValueMultiplier => 100;
-    public override int BonusDamageRealValueMultiplier => 100;
-    public override int BonusArmorClassRealValueMultiplier => 100;
-    public override int BonusDiceRealValueMultiplier => 100;
 
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;

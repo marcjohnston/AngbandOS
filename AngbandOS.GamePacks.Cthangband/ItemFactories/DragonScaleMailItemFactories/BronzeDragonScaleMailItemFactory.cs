@@ -15,9 +15,6 @@ public class BronzeDragonScaleMailItemFactory : ItemFactoryGameConfiguration
    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
-    public override int BonusHitRealValueMultiplier => 100;
-    public override int BonusDamageRealValueMultiplier => 100;
-    public override int BonusArmorClassRealValueMultiplier => 100;
     public override string? ItemEnhancementBindingKey => nameof(BronzeDragonScaleMailItemFactoryItemEnhancement);
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "Bronze Dragon Scale Mail";

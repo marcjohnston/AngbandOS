@@ -17,9 +17,6 @@ public class ClothCloakItemFactory : ItemFactoryGameConfiguration
 
     public override string? ItemEnhancementBindingKey => nameof(ClothCloakItemFactoryItemEnhancement);
     public override int? RandomArtifactBonusArmorCeiling => 19;
-    public override int BonusHitRealValueMultiplier => 100;
-    public override int BonusDamageRealValueMultiplier => 100;
-    public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenParenthesisSymbol);
     public override string Name => "Cloth";
     public override string DescriptionSyntax => "Cloak~";

@@ -200,11 +200,6 @@ public class ItemFactoryGameConfiguration
     /// </summary>
     public virtual (int count, string rollExpression)[]? MassProduceBindingTuples { get; set; } = null;
 
-    public virtual int BonusHitRealValueMultiplier { get; set; } = 100;
-    public virtual int BonusDamageRealValueMultiplier { get; set; } = 100;
-    public virtual int BonusArmorClassRealValueMultiplier { get; set; } = 100;
-    public virtual int BonusDiceRealValueMultiplier { get; set; } = 100;
-
     public virtual string? BreaksDuringEnchantmentProbabilityExpression { get; set; } = null;
 
     /// <summary>

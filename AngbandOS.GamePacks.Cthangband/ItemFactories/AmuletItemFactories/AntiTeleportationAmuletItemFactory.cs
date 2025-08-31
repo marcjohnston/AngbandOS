@@ -39,8 +39,6 @@ public class AntiTeleportationAmuletItemFactory : ItemFactoryGameConfiguration
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.NeckWieldSlot) };
     public override int PackSort => 17;
     public override int BaseValue => 45;
-    public override int BonusHitRealValueMultiplier => 100;
-    public override int BonusDamageRealValueMultiplier => 100;
-    public override int BonusArmorClassRealValueMultiplier => 100;
+
     public override bool IsGood => true;
 }

@@ -16,9 +16,6 @@ public class LargeLeatherShieldItemFactory : ItemFactoryGameConfiguration
     };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
-    public override int BonusHitRealValueMultiplier => 100;
-    public override int BonusDamageRealValueMultiplier => 100;
-    public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseParenthesisSymbol);
     public override string Name => "Large Leather Shield";
     public override string? ItemEnhancementBindingKey => nameof(LargeLeatherShieldItemFactoryItemEnhancement);

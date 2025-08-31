@@ -70,10 +70,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         MaxPhlogiston = itemFactoryGameConfiguration.MaxPhlogiston;
         BurnRate = itemFactoryGameConfiguration.BurnRate;
         MassProduceBindingTuples = itemFactoryGameConfiguration.MassProduceBindingTuples;
-        BonusHitRealValueMultiplier = itemFactoryGameConfiguration.BonusHitRealValueMultiplier;
-        BonusDamageRealValueMultiplier = itemFactoryGameConfiguration.BonusDamageRealValueMultiplier;
-        BonusArmorClassRealValueMultiplier = itemFactoryGameConfiguration.BonusArmorClassRealValueMultiplier;
-        BonusDiceRealValueMultiplier = itemFactoryGameConfiguration.BonusDiceRealValueMultiplier;
         BreaksDuringEnchantmentProbabilityExpression = itemFactoryGameConfiguration.BreaksDuringEnchantmentProbabilityExpression;
         EnchantmentBindingTuples = itemFactoryGameConfiguration.EnchantmentBindingTuples;
         EatMagicScriptBindingKey = itemFactoryGameConfiguration.EatMagicScriptBindingKey;
@@ -250,10 +246,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             MaxPhlogiston = MaxPhlogiston,
             BurnRate = BurnRate,
             MassProduceBindingTuples = MassProduceBindingTuples,
-            BonusHitRealValueMultiplier = BonusHitRealValueMultiplier,
-            BonusDamageRealValueMultiplier = BonusDamageRealValueMultiplier,
-            BonusArmorClassRealValueMultiplier = BonusArmorClassRealValueMultiplier,
-            BonusDiceRealValueMultiplier = BonusDiceRealValueMultiplier,
             BreaksDuringEnchantmentProbabilityExpression = BreaksDuringEnchantmentProbabilityExpression,
             EnchantmentBindingTuples = EnchantmentBindingTuples,
             EatMagicScriptBindingKey = EatMagicScriptBindingKey,
@@ -1878,11 +1870,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// to bind the <see cref="MassProduceTuples"/> property during the bind phase.  The tuples must be sorted by cost and are checked during the bind phase.
     /// </summary>
     private (int count, string rollExpression)[]? MassProduceBindingTuples { get; } = null;
-
-    public int BonusHitRealValueMultiplier { get; } = 100;
-    public int BonusDamageRealValueMultiplier { get; } = 100;
-    public int BonusArmorClassRealValueMultiplier { get; } = 100;
-    public int BonusDiceRealValueMultiplier { get; } = 100;
 
     private string? BreaksDuringEnchantmentProbabilityExpression { get; } = null;
 

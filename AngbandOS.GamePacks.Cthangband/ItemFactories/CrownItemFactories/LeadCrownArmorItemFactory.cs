@@ -17,9 +17,6 @@ public class LeadCrownArmorItemFactory : ItemFactoryGameConfiguration
 
     public override bool DisableStomp => true;
     public override int? RandomArtifactBonusArmorCeiling => 19;
-    public override int BonusHitRealValueMultiplier => 100;
-    public override int BonusDamageRealValueMultiplier => 100;
-    public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override string Name => "Lead Crown";
 

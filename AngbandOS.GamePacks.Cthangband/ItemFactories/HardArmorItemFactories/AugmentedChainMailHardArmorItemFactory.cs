@@ -16,9 +16,6 @@ public class AugmentedChainMailHardArmorItemFactory : ItemFactoryGameConfigurati
    };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
-    public override int BonusHitRealValueMultiplier => 100;
-    public override int BonusDamageRealValueMultiplier => 100;
-    public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(OpenBraceSymbol);
     public override string Name => "Augmented Chain Mail";
 

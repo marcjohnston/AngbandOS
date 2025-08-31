@@ -9,9 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WoodenArrowAmmunitionItemFactory : ItemFactoryGameConfiguration
 {
-    public override int BonusHitRealValueMultiplier => 5;
-    public override int BonusDamageRealValueMultiplier => 5;
-    public override int BonusDiceRealValueMultiplier => 5;
     public override string SymbolBindingKey => nameof(OpenBracketSymbol);
     public override string Name => "Arrow";
 
@@ -61,7 +58,6 @@ public class WoodenArrowAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override int BonusArmorClassRealValueMultiplier => 100;
     public override bool IsWearableOrWieldable => true;
     public override bool IsGood => true;
 }

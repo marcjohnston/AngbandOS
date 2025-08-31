@@ -16,9 +16,6 @@ public class MetalShodBootsItemFactory : ItemFactoryGameConfiguration
     };
 
     public override int? RandomArtifactBonusArmorCeiling => 19;
-    public override int BonusHitRealValueMultiplier => 100;
-    public override int BonusDamageRealValueMultiplier => 100;
-    public override int BonusArmorClassRealValueMultiplier => 100;
     public override string SymbolBindingKey => nameof(CloseBraceSymbol);
     public override string Name => "Pair of Metal Shod Boots";
 
