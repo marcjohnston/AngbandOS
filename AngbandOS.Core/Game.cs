@@ -1100,7 +1100,7 @@ internal class Game
     public bool Studies(string realmName) => (PrimaryRealm != null && PrimaryRealm.Key == realmName) || (SecondaryRealm != null && SecondaryRealm.Key == realmName); // TODO: This relies on the realm key.
 
     public int SkillDigging;
-    public int SkillDisarmTraps;
+    public int ComputedDisarmTraps;
     public int SkillMelee;
     public int SkillRanged;
     public int SkillSavingThrow;
@@ -6794,7 +6794,7 @@ internal class Game
         bool allowAdditionalDisarmAttempts = false;
         // Disarming a chest takes a turn
         EnergyUse = 100;
-        int i = SkillDisarmTraps;
+        int i = ComputedDisarmTraps;
         // Disarming is tricky when you can't see
         if (BlindnessTimer.Value != 0 || NoLight())
         {
@@ -6856,7 +6856,7 @@ internal class Game
         EnergyUse = 100;
         GridTile tile = Map.Grid[y][x];
         string trapName = tile.FeatureType.Description;
-        int i = SkillDisarmTraps;
+        int i = ComputedDisarmTraps;
         // Difficult, but possible, to disarm by feel
         if (BlindnessTimer.Value != 0 || NoLight())
         {
@@ -8311,7 +8311,7 @@ internal class Game
         // Most doors are locked, so try to pick the lock
         else if (tile.FeatureType.IsClosedDoor && tile.FeatureType.LockLevel == 0)
         {
-            int skill = SkillDisarmTraps;
+            int skill = ComputedDisarmTraps;
             // Lockpicking is hard in the dark
             if (BlindnessTimer.Value != 0 || NoLight())
             {

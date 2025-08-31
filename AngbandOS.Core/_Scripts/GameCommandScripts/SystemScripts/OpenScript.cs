@@ -66,7 +66,7 @@ internal class OpenScript : GameCommandUniversalScript, IGetKey
                 {
                     openedSuccessfully = false;
                     // Our disable traps skill also doubles up as a lockpicking skill
-                    int i = Game.SkillDisarmTraps;
+                    int i = Game.ComputedDisarmTraps;
                     // Hard to pick locks in the dark
                     if (Game.BlindnessTimer.Value != 0 || Game.NoLight())
                     {

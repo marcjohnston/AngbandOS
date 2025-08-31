@@ -116,7 +116,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasFireImmunity = false;
         Game.HasColdImmunity = false;
         Game.InfravisionRange = Game.Race.Infravision;
-        Game.SkillDisarmTraps = Game.Race.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value + Game.BaseCharacterClass.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value;
+        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value + Game.BaseCharacterClass.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value;
         Game.SkillUseDevice = Game.Race.BaseDeviceBonus + Game.BaseCharacterClass.BaseDeviceBonus;
         Game.SkillSavingThrow = Game.Race.BaseSaveBonus + Game.BaseCharacterClass.BaseSaveBonus;
         Game.SkillStealth = Game.Race.BaseStealthBonus + Game.BaseCharacterClass.BaseStealthBonus;
@@ -770,12 +770,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
 
         Game.SkillStealth++;
-        Game.SkillDisarmTraps += Game.DexterityAbility.DexDisarmBonus;
-        Game.SkillDisarmTraps += Game.IntelligenceAbility.IntDisarmBonus;
+        Game.ComputedDisarmTraps += Game.DexterityAbility.DexDisarmBonus;
+        Game.ComputedDisarmTraps += Game.IntelligenceAbility.IntDisarmBonus;
         Game.SkillUseDevice += Game.IntelligenceAbility.IntUseDeviceBonus;
         Game.SkillSavingThrow += Game.WisdomAbility.WisSavingThrowBonus;
         Game.SkillDigging += Game.StrengthAbility.StrDiggingBonus;
-        Game.SkillDisarmTraps += (Game.BaseCharacterClass.DisarmBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.ComputedDisarmTraps += (Game.BaseCharacterClass.DisarmBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillUseDevice += (Game.BaseCharacterClass.DeviceBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillSavingThrow += (Game.BaseCharacterClass.SaveBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillStealth += (Game.BaseCharacterClass.StealthBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;

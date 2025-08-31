@@ -397,7 +397,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         }
 
         int attacksPerRound = Game.MeleeAttacksPerRound;
-        int disarmTraps = Game.SkillDisarmTraps;
+        int disarmTraps = Game.ComputedDisarmTraps;
         int useDevice = Game.SkillUseDevice;
         int savingThrow = Game.SkillSavingThrow;
         int stealth = Game.SkillStealth;
