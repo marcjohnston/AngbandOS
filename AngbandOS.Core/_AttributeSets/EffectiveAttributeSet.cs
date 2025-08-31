@@ -139,7 +139,6 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.ResPois);
         RegisterBoolPropertyFactory(AttributeEnum.ResShards);
         RegisterBoolPropertyFactory(AttributeEnum.ResSound);
-        RegisterBoolPropertyFactory(AttributeEnum.Search);
         RegisterBoolPropertyFactory(AttributeEnum.SeeInvis);
         RegisterBoolPropertyFactory(AttributeEnum.ShElec);
         RegisterBoolPropertyFactory(AttributeEnum.ShFire);

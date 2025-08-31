@@ -92,7 +92,6 @@ internal enum AttributeEnum
     ResPois,
     ResShards,
     ResSound,
-    Search,
     SeeInvis,
     ShElec,
     ShFire,
