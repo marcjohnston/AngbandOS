@@ -29,7 +29,6 @@ public class MithrilChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     {
         (55, 4)
     };
-    public override int BonusHit => -1;
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;

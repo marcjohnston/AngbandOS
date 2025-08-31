@@ -11,4 +11,5 @@ public class LeatherScaleMailSoftArmorItemFactoryItemEnhancement : ItemEnhanceme
     public override string? BaseArmorClass => "11";
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
+    public override string? Hits => "-1";
 }

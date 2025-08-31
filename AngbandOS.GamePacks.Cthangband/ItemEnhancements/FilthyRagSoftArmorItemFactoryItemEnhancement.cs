@@ -9,4 +9,5 @@ public class FilthyRagSoftArmorItemFactoryItemEnhancement : ItemEnhancementGameC
     public override string? BaseArmorClass => "1";
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
+    public override string? BonusArmorClass => "-1";
 }

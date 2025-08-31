@@ -28,7 +28,6 @@ public class RibbedPlateHardArmorItemFactory : ItemFactoryGameConfiguration
     {
         (50, 1)
     };
-    public override int BonusHit => -3;
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;

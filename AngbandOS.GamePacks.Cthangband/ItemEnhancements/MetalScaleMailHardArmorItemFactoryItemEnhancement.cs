@@ -11,4 +11,5 @@ public class MetalScaleMailHardArmorItemFactoryItemEnhancement : ItemEnhancement
     public override ColorEnum? Color => ColorEnum.Grey;
     public override string? BaseArmorClass => "13";
     public override string? HatesAcid => "true";
+    public override string? Hits => "-2";
 }

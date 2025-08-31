@@ -28,8 +28,6 @@ public class RustyChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     {
         (25, 1)
     };
-    public override int BonusArmorClass => -8;
-    public override int BonusHit => -5;
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;

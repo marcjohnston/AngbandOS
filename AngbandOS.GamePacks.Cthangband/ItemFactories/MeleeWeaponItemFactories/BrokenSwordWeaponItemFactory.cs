@@ -18,8 +18,6 @@ public class BrokenSwordWeaponItemFactory : ItemFactoryGameConfiguration
     };
     public override string? DescriptionSyntax => "Broken Sword~";
     public override string? ItemEnhancementBindingKey => nameof(BrokenSwordWeaponItemFactoryItemEnhancement);
-    public override int BonusDamage => -4;
-    public override int BonusHit => -2;
     public override bool CanBeWeaponOfLaw => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {

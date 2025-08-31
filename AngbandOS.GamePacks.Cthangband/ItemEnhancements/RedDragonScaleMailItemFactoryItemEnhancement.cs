@@ -17,4 +17,6 @@ public class RedDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGameC
     public override ColorEnum? Color => ColorEnum.Red;
     public override string? BaseArmorClass => "30";
     public override string? HatesAcid => "true";
+    public override string? BonusArmorClass => "10";
+    public override string? Hits => "-2";
 }

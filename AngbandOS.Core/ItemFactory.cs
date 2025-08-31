@@ -118,9 +118,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         InitialGoldPiecesRollExpression = itemFactoryGameConfiguration.InitialGoldPiecesRollExpression;
         ExperienceGainDivisorForDestroying = itemFactoryGameConfiguration.ExperienceGainDivisorForDestroying;
         SpellBindingKeys = itemFactoryGameConfiguration.SpellBindingKeys;
-        BonusArmorClass = itemFactoryGameConfiguration.BonusArmorClass;
-        BonusDamage = itemFactoryGameConfiguration.BonusDamage;
-        BonusHit = itemFactoryGameConfiguration.BonusHit;
         IsSmall = itemFactoryGameConfiguration.IsSmall;
         BaseValue = itemFactoryGameConfiguration.BaseValue;
         CanProvideSheathOfElectricity = itemFactoryGameConfiguration.CanProvideSheathOfElectricity;
@@ -301,9 +298,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             InitialGoldPiecesRollExpression = InitialGoldPiecesRollExpression,
             ExperienceGainDivisorForDestroying = ExperienceGainDivisorForDestroying,
             SpellBindingKeys = SpellBindingKeys,
-            BonusArmorClass = BonusArmorClass,
-            BonusDamage = BonusDamage,
-            BonusHit = BonusHit,
             IsSmall = IsSmall,
             BaseValue = BaseValue,
             CanProvideSheathOfElectricity = CanProvideSheathOfElectricity,
@@ -395,10 +389,10 @@ internal sealed class ItemFactory : IGetKey, IToJson
         ItemEnhancement itemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
         EffectiveAttributeSet.AddEnhancement(itemEnhancement.GenerateItemCharacteristics());
 
-        // Cut and paste
-        //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override bool Valueless => ");
+        //// Cut and paste
+        //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override int BonusDamage => ");
         //if (prop1 is not null)
-        //            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", itemEnhancement.GetKey, $"    public override bool IsGood => {BonusArmorClass >= 0 && BonusHit >= 0 && BonusDamage >= 0}");
+        //            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", itemEnhancement.GetKey, $"    public override string? Damage => \"{prop1.Split("=> ")[1].Replace(";","").Trim()}\";");
         //bool isGood = BonusArmorClass >= 0 && BonusHit >= 0 && BonusDamage >= 0;
         //if (isGood)
         //    Game.PasteProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, $"    public override bool IsGood => {isGood.ToString().ToLower()};");
@@ -2088,10 +2082,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the names of the spells, in order, that belong to this book; or null, if the item is not a book.  This property is used to bind the Spells property during the binding phase.
     /// </summary>
     private string[]? SpellBindingKeys { get; } = null;
-
-    public int BonusArmorClass { get; } = 0;
-    public int BonusDamage { get; } = 0;
-    public int BonusHit { get; } = 0;
 
     /// <summary>
     /// Returns whether or not the chest is small.  Small chests have a 75% chance that the items in the chest are gold.  Large chest always return items.

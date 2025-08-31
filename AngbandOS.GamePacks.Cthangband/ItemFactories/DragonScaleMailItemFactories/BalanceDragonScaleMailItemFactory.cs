@@ -28,8 +28,6 @@ public class BalanceDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     {
         (90, 16)
     };
-    public override int BonusArmorClass => 10;
-    public override int BonusHit => -2;
 
 
     public override string ItemClassBindingKey => nameof(DragonScaleMailsItemClass);

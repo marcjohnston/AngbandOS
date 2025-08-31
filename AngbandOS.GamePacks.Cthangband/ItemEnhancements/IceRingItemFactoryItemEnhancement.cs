@@ -9,4 +9,5 @@ public class IceRingItemFactoryItemEnhancement : ItemEnhancementGameConfiguratio
     public override int? Weight => 2;
     public override int? Value => 3000;
     public override string? HatesElectricity => "true";
+    public override string? BonusArmorClass => "15";
 }

@@ -27,7 +27,6 @@ public class FlamesRingItemFactory : ItemFactoryGameConfiguration
     {
         (50, 1)
     };
-    public override int BonusArmorClass => 15;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>

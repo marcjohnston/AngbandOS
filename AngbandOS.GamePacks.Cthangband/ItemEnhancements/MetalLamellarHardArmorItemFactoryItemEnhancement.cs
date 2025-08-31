@@ -11,4 +11,5 @@ public class MetalLamellarHardArmorItemFactoryItemEnhancement : ItemEnhancementG
     public override ColorEnum? Color => ColorEnum.BrightWhite;
     public override string? BaseArmorClass => "23";
     public override string? HatesAcid => "true";
+    public override string? Hits => "-3";
 }

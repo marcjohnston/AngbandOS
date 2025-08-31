@@ -28,7 +28,6 @@ public class DeflectionShieldItemFactory : ItemFactoryGameConfiguration
     {
         (70, 8)
     };
-    public override int BonusArmorClass => 10;
 
     public override string ItemClassBindingKey => nameof(ShieldsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.ArmWieldSlot) };

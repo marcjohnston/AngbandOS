@@ -29,7 +29,6 @@ public class ChainMailHardArmorItemFactory : ItemFactoryGameConfiguration
     {
         (25, 1)
     };
-    public override int BonusHit => -2;
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };
     public override int PackSort => 20;

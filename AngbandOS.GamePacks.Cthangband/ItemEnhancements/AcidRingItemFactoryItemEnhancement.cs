@@ -9,4 +9,5 @@ public class AcidRingItemFactoryItemEnhancement : ItemEnhancementGameConfigurati
     public override int? Weight => 2;
     public override int? Value => 2000;
     public override string? HatesElectricity => "true";
+    public override string? BonusArmorClass => "15";
 }

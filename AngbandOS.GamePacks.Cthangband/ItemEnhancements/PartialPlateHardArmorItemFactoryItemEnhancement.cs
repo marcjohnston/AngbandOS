@@ -11,4 +11,5 @@ public class PartialPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGa
     public override ColorEnum? Color => ColorEnum.BrightWhite;
     public override string? BaseArmorClass => "22";
     public override string? HatesAcid => "true";
+    public override string? Hits => "-3";
 }

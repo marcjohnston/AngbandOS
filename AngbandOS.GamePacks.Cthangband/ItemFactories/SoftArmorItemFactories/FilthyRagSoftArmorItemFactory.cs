@@ -26,7 +26,6 @@ public class FilthyRagSoftArmorItemFactory : ItemFactoryGameConfiguration
         (0, 1)
     };
     public override string? DescriptionSyntax => "Filthy Rag~";
-    public override int BonusArmorClass => -1;
     public override string? ItemEnhancementBindingKey => nameof(FilthyRagSoftArmorItemFactoryItemEnhancement);
 
 

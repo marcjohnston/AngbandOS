@@ -17,4 +17,6 @@ public class BlackDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override ColorEnum? Color => ColorEnum.Black;
     public override string? BaseArmorClass => "30";
     public override string? HatesAcid => "true";
+    public override string? BonusArmorClass => "10";
+    public override string? Hits => "-2";
 }

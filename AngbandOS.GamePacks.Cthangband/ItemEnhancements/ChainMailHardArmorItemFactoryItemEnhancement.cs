@@ -11,4 +11,5 @@ public class ChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancementGameC
     public override ColorEnum? Color => ColorEnum.Grey;
     public override string? BaseArmorClass => "14";
     public override string? HatesAcid => "true";
+    public override string? Hits => "-2";
 }

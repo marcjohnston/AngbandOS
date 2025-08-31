@@ -28,7 +28,6 @@ public class LeatherScaleMailSoftArmorItemFactory : ItemFactoryGameConfiguration
     {
         (15, 1)
     };
-    public override int BonusHit => -1;
     public override string? ItemEnhancementBindingKey => nameof(LeatherScaleMailSoftArmorItemFactoryItemEnhancement);
 
 

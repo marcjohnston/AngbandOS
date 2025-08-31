@@ -2007,9 +2007,6 @@ internal sealed class Item : IComparable<Item>
         NutritionalValue = _factory.InitialNutritionalValue;        
         GoldPieces = Game.ComputeIntegerExpression(_factory.InitialGoldPiecesRoll).Value;
         TurnsOfLightRemaining = _factory.InitialTurnsOfLight;
-        EffectivePropertySet.BonusHits = _factory.BonusHit;
-        EffectivePropertySet.BonusDamage = _factory.BonusDamage;
-        EffectivePropertySet.BonusArmorClass = _factory.BonusArmorClass;
 
         if (_factory.AimingTuple != null)
         {

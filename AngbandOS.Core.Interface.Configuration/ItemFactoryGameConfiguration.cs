@@ -412,10 +412,6 @@ public class ItemFactoryGameConfiguration
     /// </summary>
     public virtual string[]? SpellBindingKeys { get; set; } = null;
 
-    public virtual int BonusArmorClass { get; set; } = 0;
-    public virtual int BonusDamage { get; set; } = 0;
-    public virtual int BonusHit { get; set; } = 0;
-
     /// <summary>
     /// Returns whether or not this factory generates "good" items.
     /// </summary>

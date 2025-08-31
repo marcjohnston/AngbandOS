@@ -29,7 +29,6 @@ public class AdamantitePlateMailHardArmorItemFactory : ItemFactoryGameConfigurat
     {
         (75, 8)
     };
-    public override int BonusHit => -4;
 
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

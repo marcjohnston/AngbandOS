@@ -27,7 +27,6 @@ public class HardLeatherSoftArmorItemFactory : ItemFactoryGameConfiguration
     {
         (5, 1)
     };
-    public override int BonusHit => -1;
     public override string? ItemEnhancementBindingKey => nameof(HardLeatherSoftArmorItemFactoryItemEnhancement);
 
 

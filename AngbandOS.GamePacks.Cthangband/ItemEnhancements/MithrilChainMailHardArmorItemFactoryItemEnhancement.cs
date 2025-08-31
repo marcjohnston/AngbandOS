@@ -12,4 +12,5 @@ public class MithrilChainMailHardArmorItemFactoryItemEnhancement : ItemEnhanceme
     public override ColorEnum? Color => ColorEnum.BrightBlue;
     public override string? BaseArmorClass => "28";
     public override string? HatesAcid => "true";
+    public override string? Hits => "-1";
 }

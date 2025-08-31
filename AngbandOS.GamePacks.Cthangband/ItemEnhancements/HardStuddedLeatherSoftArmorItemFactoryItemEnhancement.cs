@@ -11,4 +11,5 @@ public class HardStuddedLeatherSoftArmorItemFactoryItemEnhancement : ItemEnhance
     public override string? BaseArmorClass => "7";
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
+    public override string? Hits => "-1";
 }

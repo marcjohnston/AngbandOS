@@ -16,4 +16,5 @@ public class DragonShieldItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override ColorEnum? Color => ColorEnum.BrightGreen;
     public override string? BaseArmorClass => "8";
     public override string? HatesAcid => "true";
+    public override string? BonusArmorClass => "10";
 }

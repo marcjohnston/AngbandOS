@@ -12,4 +12,5 @@ public class DeflectionShieldItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override ColorEnum? Color => ColorEnum.BrightBlue;
     public override string? BaseArmorClass => "10";
     public override string? HatesAcid => "true";
+    public override string? BonusArmorClass => "10";
 }

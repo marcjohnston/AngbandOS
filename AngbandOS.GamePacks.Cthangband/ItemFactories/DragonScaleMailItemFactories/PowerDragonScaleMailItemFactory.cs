@@ -28,8 +28,6 @@ public class PowerDragonScaleMailItemFactory : ItemFactoryGameConfiguration
     {
         (110, 64)
     };
-    public override int BonusArmorClass => 15;
-    public override int BonusHit => -3;
 
     public override string ItemClassBindingKey => nameof(DragonScaleMailsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.OnBodyWieldSlot) };

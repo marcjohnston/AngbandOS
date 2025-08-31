@@ -30,4 +30,6 @@ public class PowerDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override ColorEnum? Color => ColorEnum.Yellow;
     public override string? BaseArmorClass => "40";
     public override string? HatesAcid => "true";
+    public override string? BonusArmorClass => "15";
+    public override string? Hits => "-3";
 }

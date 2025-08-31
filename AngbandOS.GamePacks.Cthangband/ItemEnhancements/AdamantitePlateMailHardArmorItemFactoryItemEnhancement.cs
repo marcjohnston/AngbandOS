@@ -12,4 +12,5 @@ public class AdamantitePlateMailHardArmorItemFactoryItemEnhancement : ItemEnhanc
     public override ColorEnum? Color => ColorEnum.BrightGreen;
     public override string? BaseArmorClass => "40";
     public override string? HatesAcid => "true";
+    public override string? Hits => "-4";
 }

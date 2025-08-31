@@ -28,7 +28,6 @@ public class AugmentedChainMailHardArmorItemFactory : ItemFactoryGameConfigurati
     {
         (30, 1)
     };
-    public override int BonusHit => -2;
     public override string? ItemEnhancementBindingKey => nameof(AugmentedChainMailHardArmorItemFactoryItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(HardArmorsItemClass);

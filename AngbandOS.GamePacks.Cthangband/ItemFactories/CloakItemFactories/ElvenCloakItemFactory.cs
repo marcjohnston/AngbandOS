@@ -39,7 +39,6 @@ public class ElvenCloakItemFactory : ItemFactoryGameConfiguration
     {
         (30, 4)
     };
-    public override int BonusArmorClass => 4;
 
     public override string ItemClassBindingKey => nameof(CloaksItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.AboutBodyWieldSlot) };

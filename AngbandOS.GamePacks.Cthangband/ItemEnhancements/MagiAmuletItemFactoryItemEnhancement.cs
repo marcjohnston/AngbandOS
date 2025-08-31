@@ -12,4 +12,5 @@ public class MagiAmuletItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool? SeeInvis => true;
     public override int? Weight => 3;
     public override int? Value => 30000;
+    public override string? BonusArmorClass => "3";
 }

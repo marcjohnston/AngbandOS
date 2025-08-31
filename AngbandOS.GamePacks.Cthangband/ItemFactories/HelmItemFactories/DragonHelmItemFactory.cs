@@ -29,7 +29,6 @@ public class DragonHelmItemFactory : ItemFactoryGameConfiguration
     {
         (80, 4)
     };
-    public override int BonusArmorClass => 10;
 
     public override string ItemClassBindingKey => nameof(HelmsItemClass);
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.HeadWieldSlot) };

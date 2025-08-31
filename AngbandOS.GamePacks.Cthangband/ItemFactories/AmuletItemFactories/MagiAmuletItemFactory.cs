@@ -31,7 +31,6 @@ public class MagiAmuletItemFactory : ItemFactoryGameConfiguration
         (50, 4),
         (80, 3)
     };
-    public override int BonusArmorClass => 3;
     public override bool IsWearableOrWieldable => true;
 
     /// <summary>
