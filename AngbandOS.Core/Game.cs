@@ -11,14 +11,14 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Game
 {
-    public string Find(string folder, string filename)
+    public string Find(string folder, string filenameWithoutExtension)
     {
-        string path = Path.Combine(folder, $"{filename}.cs");
+        string path = Path.Combine(folder, $"{filenameWithoutExtension}.cs");
         if (File.Exists(path))
             return path;
         foreach (string subfolder in Directory.GetDirectories(folder))
         {
-            path = Path.Combine(subfolder, $"{filename}.cs");
+            path = Path.Combine(subfolder, $"{filenameWithoutExtension}.cs");
             if (File.Exists(path))
                 return path;
         }
@@ -55,11 +55,11 @@ internal class Game
     }
     public void PasteProperty(string folder, string filenameWithoutExtension, string text, string? newProperty = null)
     {
-        string path = Path.Combine(folder, $"{filenameWithoutExtension}.cs");
+        string path = Find(folder, filenameWithoutExtension);
         if (!File.Exists(path))
         {
             if (newProperty is null)
-                throw new Exception("");
+                throw new Exception($"{path} file doesnt exist with no newProperty specified.");
             File.WriteAllText(path, newProperty);
         }
         List<string> lines = File.ReadAllLines(path).ToList();
