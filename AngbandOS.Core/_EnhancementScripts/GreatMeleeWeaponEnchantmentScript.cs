@@ -30,10 +30,10 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponElderSignInscribedItemEnhancement)));
                 if (Game.DieRoll(4) == 1)
                 {
-                    item.EffectivePropertySet.BonusAttacks++;
-                    if (item.EffectivePropertySet.BonusAttacks > 2)
+                    item.EffectivePropertySet.Attacks++;
+                    if (item.EffectivePropertySet.Attacks > 2)
                     {
-                        item.EffectivePropertySet.BonusAttacks -= Game.DieRoll(2);
+                        item.EffectivePropertySet.Attacks -= Game.DieRoll(2);
                     }
                 }
                 break;
@@ -191,7 +191,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 }
                 if (Game.DieRoll(3) == 1)
                 {
-                    item.EffectivePropertySet.BonusDexterity = Game.EnchantBonus(item.EffectivePropertySet.BonusDexterity);
+                    item.EffectivePropertySet.Dexterity = Game.EnchantBonus(item.EffectivePropertySet.Dexterity);
                 }
                 if (Game.DieRoll(5) == 1)
                 {
@@ -204,16 +204,16 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 if (item.CanBeWeaponOfSharpness)
                 {
                     item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfSharpnessItemEnhancement)));
-                    item.EffectivePropertySet.BonusTunnel = item.GetBonusValue(5, level) + 1;
+                    item.EffectivePropertySet.Tunnel = item.GetBonusValue(5, level) + 1;
                 }
                 else
                 {
                     item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfEarthquakesItemEnhancement)));
                     if (Game.DieRoll(3) == 1)
                     {
-                        item.EffectivePropertySet.BonusAttacks++;
+                        item.EffectivePropertySet.Attacks++;
                     }
-                    item.EffectivePropertySet.BonusTunnel = item.GetBonusValue(3, level);
+                    item.EffectivePropertySet.Tunnel = item.GetBonusValue(3, level);
                 }
                 break;
         }

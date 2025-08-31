@@ -38,7 +38,7 @@ internal class ApplyDisenchantScript : EatOrQuaffUniversalScript, IGetKey
         {
             return IdentifiedResultEnum.False;
         }
-        if (oPtr.EffectivePropertySet.BonusHits <= 0 && oPtr.EffectivePropertySet.BonusDamage <= 0 && oPtr.EffectivePropertySet.BonusArmorClass <= 0)
+        if (oPtr.EffectivePropertySet.ToHit <= 0 && oPtr.EffectivePropertySet.ToDamage <= 0 && oPtr.EffectivePropertySet.BonusArmorClass <= 0)
         {
             return IdentifiedResultEnum.False;
         }
@@ -50,21 +50,21 @@ internal class ApplyDisenchantScript : EatOrQuaffUniversalScript, IGetKey
             Game.MsgPrint($"Your {oName} ({inventorySlot.Label(oPtr)}) resist{s} disenchantment!");
             return IdentifiedResultEnum.True;
         }
-        if (oPtr.EffectivePropertySet.BonusHits > 0)
+        if (oPtr.EffectivePropertySet.ToHit > 0)
         {
-            oPtr.EffectivePropertySet.BonusHits--;
+            oPtr.EffectivePropertySet.ToHit--;
         }
-        if (oPtr.EffectivePropertySet.BonusHits > 5 && Game.RandomLessThan(100) < 20)
+        if (oPtr.EffectivePropertySet.ToHit > 5 && Game.RandomLessThan(100) < 20)
         {
-            oPtr.EffectivePropertySet.BonusHits--;
+            oPtr.EffectivePropertySet.ToHit--;
         }
-        if (oPtr.EffectivePropertySet.BonusDamage > 0)
+        if (oPtr.EffectivePropertySet.ToDamage > 0)
         {
-            oPtr.EffectivePropertySet.BonusDamage--;
+            oPtr.EffectivePropertySet.ToDamage--;
         }
-        if (oPtr.EffectivePropertySet.BonusDamage > 5 && Game.RandomLessThan(100) < 20)
+        if (oPtr.EffectivePropertySet.ToDamage > 5 && Game.RandomLessThan(100) < 20)
         {
-            oPtr.EffectivePropertySet.BonusDamage--;
+            oPtr.EffectivePropertySet.ToDamage--;
         }
         if (oPtr.EffectivePropertySet.BonusArmorClass > 0)
         {

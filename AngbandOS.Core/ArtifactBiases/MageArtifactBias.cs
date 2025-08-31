@@ -14,9 +14,9 @@ internal class MageArtifactBias : ArtifactBias
 
     public override bool ApplyRandomArtifactBonuses(EffectiveAttributeSet characteristics)
     {
-        if (characteristics.BonusIntelligence == 0)
+        if (characteristics.Intelligence == 0)
         {
-            characteristics.BonusIntelligence = Game.EnchantBonus(characteristics.BonusIntelligence);
+            characteristics.Intelligence = Game.EnchantBonus(characteristics.Intelligence);
             if (Game.DieRoll(2) == 1)
             {
                 return true;

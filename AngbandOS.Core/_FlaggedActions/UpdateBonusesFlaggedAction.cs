@@ -201,19 +201,19 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    Game.StrengthAbility.Bonus += oPtr.EffectivePropertySet.BonusStrength;
-                    Game.IntelligenceAbility.Bonus += oPtr.EffectivePropertySet.BonusIntelligence;
-                    Game.WisdomAbility.Bonus += oPtr.EffectivePropertySet.BonusWisdom;
-                    Game.DexterityAbility.Bonus += oPtr.EffectivePropertySet.BonusDexterity;
-                    Game.ConstitutionAbility.Bonus += oPtr.EffectivePropertySet.BonusConstitution;
-                    Game.CharismaAbility.Bonus += oPtr.EffectivePropertySet.BonusCharisma;
-                    Game.SkillStealth += oPtr.EffectivePropertySet.BonusStealth;
-                    Game.SkillSearching += oPtr.EffectivePropertySet.BonusSearch * 5;
-                    Game.SkillSearchFrequency += oPtr.EffectivePropertySet.BonusSearch * 5;
-                    Game.InfravisionRange += oPtr.EffectivePropertySet.BonusInfravision;
-                    Game.SkillDigging += oPtr.EffectivePropertySet.BonusTunnel * 20;
-                    Game.Speed.IntValue += oPtr.EffectivePropertySet.BonusSpeed;
-                    extraBlows += oPtr.EffectivePropertySet.BonusAttacks;
+                    Game.StrengthAbility.Bonus += oPtr.EffectivePropertySet.Strength;
+                    Game.IntelligenceAbility.Bonus += oPtr.EffectivePropertySet.Intelligence;
+                    Game.WisdomAbility.Bonus += oPtr.EffectivePropertySet.Wisdom;
+                    Game.DexterityAbility.Bonus += oPtr.EffectivePropertySet.Dexterity;
+                    Game.ConstitutionAbility.Bonus += oPtr.EffectivePropertySet.Constitution;
+                    Game.CharismaAbility.Bonus += oPtr.EffectivePropertySet.Charisma;
+                    Game.SkillStealth += oPtr.EffectivePropertySet.Stealth;
+                    Game.SkillSearching += oPtr.EffectivePropertySet.Search * 5;
+                    Game.SkillSearchFrequency += oPtr.EffectivePropertySet.Search * 5;
+                    Game.InfravisionRange += oPtr.EffectivePropertySet.Infravision;
+                    Game.SkillDigging += oPtr.EffectivePropertySet.Tunnel * 20;
+                    Game.Speed.IntValue += oPtr.EffectivePropertySet.Speed;
+                    extraBlows += oPtr.EffectivePropertySet.Attacks;
                     if (oPtr.EffectivePropertySet.Impact)
                     {
                         Game.HasQuakeWeapon = true;
@@ -413,15 +413,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         continue;
                     }
-                    attackBonus += oPtr.EffectivePropertySet.BonusHits;
-                    damageBonus += oPtr.EffectivePropertySet.BonusDamage;
+                    attackBonus += oPtr.EffectivePropertySet.ToHit;
+                    damageBonus += oPtr.EffectivePropertySet.ToDamage;
                     if (oPtr.IsKnown())
                     {
-                        displayedAttackBonus += oPtr.EffectivePropertySet.BonusHits;
+                        displayedAttackBonus += oPtr.EffectivePropertySet.ToHit;
                     }
                     if (oPtr.IsKnown())
                     {
-                        displayedDamageBonus += oPtr.EffectivePropertySet.BonusDamage;
+                        displayedDamageBonus += oPtr.EffectivePropertySet.ToDamage;
                     }
                 }
             }

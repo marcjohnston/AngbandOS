@@ -233,24 +233,24 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
                 {
                     // Only extract known bonuses, not full bonuses
                     EffectiveAttributeSet itemCharacteristics = item.ObjectFlagsKnown();
-                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.BonusStrength > 0, item.EffectivePropertySet.BonusStrength, row + 0, col);
-                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.BonusIntelligence > 0, item.EffectivePropertySet.BonusIntelligence, row + 1, col);
-                    ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.BonusWisdom > 0, item.EffectivePropertySet.BonusWisdom, row + 2, col);
-                    ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.BonusDexterity > 0, item.EffectivePropertySet.BonusDexterity, row + 3, col);
-                    ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.BonusConstitution > 0, item.EffectivePropertySet.BonusConstitution, row + 4, col);
-                    ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.BonusCharisma > 0, item.EffectivePropertySet.BonusCharisma, row + 5, col);
+                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Strength > 0, item.EffectivePropertySet.Strength, row + 0, col);
+                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.Intelligence > 0, item.EffectivePropertySet.Intelligence, row + 1, col);
+                    ShowBonus(itemCharacteristics.SustWis, itemCharacteristics.Wisdom > 0, item.EffectivePropertySet.Wisdom, row + 2, col);
+                    ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.Dexterity > 0, item.EffectivePropertySet.Dexterity, row + 3, col);
+                    ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.Constitution > 0, item.EffectivePropertySet.Constitution, row + 4, col);
+                    ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.Charisma > 0, item.EffectivePropertySet.Charisma, row + 5, col);
                 }
                 col++;
             }
         }
 
         EffectiveAttributeSet playerCharacteristics = Game.GetAbilitiesAsItemFlags();
-        DisplayPlayerStatWithModification(playerCharacteristics.BonusStrength, row + 0, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.BonusIntelligence, row + 1, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.BonusWisdom, row + 2, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.BonusDexterity, row + 3, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.BonusConstitution, row + 4, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.BonusCharisma, row + 5, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.Strength, row + 0, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.Intelligence, row + 1, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.Wisdom, row + 2, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.Dexterity, row + 3, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.Constitution, row + 4, col);
+        DisplayPlayerStatWithModification(playerCharacteristics.Charisma, row + 5, col);
     }
 
     private void DisplayPlayerStatWithModification(int extraModifier, int row, int col)
@@ -298,8 +298,8 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         // Only show bonuses if we know them
         if (item != null && item.IsKnown())
         {
-            showTohit += item.EffectivePropertySet.BonusHits;
-            showTodam += item.EffectivePropertySet.BonusDamage;
+            showTohit += item.EffectivePropertySet.ToHit;
+            showTodam += item.EffectivePropertySet.ToDamage;
         }
         // Print some basics
         PrintBonus("+ To Hit    ", showTohit, 30, 1, ColorEnum.Brown);
@@ -378,13 +378,13 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         int fighting = Game.SkillMelee + (Game.Bonuses.AttackBonus * Constants.BthPlusAdj);
         if (meeleeItem != null)
         {
-            fighting += meeleeItem.EffectivePropertySet.BonusHits * Constants.BthPlusAdj;
+            fighting += meeleeItem.EffectivePropertySet.ToHit * Constants.BthPlusAdj;
             damdice += meeleeItem.EffectivePropertySet.DamageDice;
             damsides += meeleeItem.EffectivePropertySet.DiceSides;
 
             if (meeleeItem.IsKnown())
             {
-                dambonus += meeleeItem.EffectivePropertySet.BonusDamage;
+                dambonus += meeleeItem.EffectivePropertySet.ToDamage;
             }
         }
 
@@ -393,7 +393,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         int shooting = Game.SkillRanged + (Game.Bonuses.AttackBonus * Constants.BthPlusAdj);
         if (rangedItem != null)
         {
-            shooting += rangedItem.EffectivePropertySet.BonusHits * Constants.BthPlusAdj;
+            shooting += rangedItem.EffectivePropertySet.ToHit * Constants.BthPlusAdj;
         }
 
         int attacksPerRound = Game.MeleeAttacksPerRound;

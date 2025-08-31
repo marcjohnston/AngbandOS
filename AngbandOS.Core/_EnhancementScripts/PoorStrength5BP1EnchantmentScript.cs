@@ -22,6 +22,6 @@ internal class PoorStrength5BP1EnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.BonusStrength = 0 - (1 + item.GetBonusValue(5, level));
+        item.EffectivePropertySet.Strength = 0 - (1 + item.GetBonusValue(5, level));
     }
 }

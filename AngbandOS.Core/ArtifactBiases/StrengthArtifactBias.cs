@@ -14,9 +14,9 @@ internal class StrengthArtifactBias : ArtifactBias
 
     public override bool ApplyRandomArtifactBonuses(EffectiveAttributeSet characteristics)
     {
-        if (characteristics.BonusStrength == 0)
+        if (characteristics.Strength == 0)
         {
-            characteristics.BonusStrength = Game.EnchantBonus(characteristics.BonusStrength);
+            characteristics.Strength = Game.EnchantBonus(characteristics.Strength);
             if (Game.DieRoll(2) == 1) // 50% chance of being a "free" power
             {
                 return true;

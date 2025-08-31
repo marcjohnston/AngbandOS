@@ -219,20 +219,20 @@ internal class JournalScript : UniversalScript, IGetKey
 
         Game.DisplayPlayerEquippy(0, 0 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 0 + 11);
-        DisplayStat("Add Str", 2, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusStrength > 0);
-        DisplayStat("Add Int", 3, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusIntelligence > 0);
-        DisplayStat("Add Wis", 4, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusWisdom > 0);
-        DisplayStat("Add Dex", 5, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusDexterity > 0);
-        DisplayStat("Add Con", 6, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusConstitution > 0);
-        DisplayStat("Add Cha", 7, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusCharisma > 0);
+        DisplayStat("Add Str", 2, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Strength > 0);
+        DisplayStat("Add Int", 3, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Intelligence > 0);
+        DisplayStat("Add Wis", 4, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Wisdom > 0);
+        DisplayStat("Add Dex", 5, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Dexterity > 0);
+        DisplayStat("Add Con", 6, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Constitution > 0);
+        DisplayStat("Add Cha", 7, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Charisma > 0);
 
 
-        DisplayStat("Add Stea.", 10, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusStealth > 0);
-        DisplayStat("Add Sear.", 11, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusSearch > 0);
-        DisplayStat("Add Infra", 12, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusInfravision > 0);
-        DisplayStat("Add Tun..", 13, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusTunnel > 0);
-        DisplayStat("Add Speed", 14, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusSpeed > 0);
-        DisplayStat("Add Blows", 15, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BonusAttacks > 0);
+        DisplayStat("Add Stea.", 10, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Stealth > 0);
+        DisplayStat("Add Sear.", 11, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Search > 0);
+        DisplayStat("Add Infra", 12, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Infravision > 0);
+        DisplayStat("Add Tun..", 13, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Tunnel > 0);
+        DisplayStat("Add Speed", 14, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Speed > 0);
+        DisplayStat("Add Blows", 15, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Attacks > 0);
         DisplayStat("Chaotic", 16, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Chaotic);
         DisplayStat("Vampiric", 17, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Vampiric);
 

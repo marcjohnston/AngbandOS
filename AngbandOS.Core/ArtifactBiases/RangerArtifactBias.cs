@@ -21,25 +21,25 @@ internal class RangerArtifactBias : ArtifactBias
 
     public override bool ApplyRandomArtifactBonuses(EffectiveAttributeSet characteristics)
     {
-        if (characteristics.BonusConstitution == 0)
+        if (characteristics.Constitution == 0)
         {
-            characteristics.BonusConstitution = Game.EnchantBonus(characteristics.BonusConstitution);
+            characteristics.Constitution = Game.EnchantBonus(characteristics.Constitution);
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (characteristics.BonusDexterity == 0)
+        else if (characteristics.Dexterity == 0)
         {
-            characteristics.BonusDexterity = Game.EnchantBonus(characteristics.BonusDexterity);
+            characteristics.Dexterity = Game.EnchantBonus(characteristics.Dexterity);
             if (Game.DieRoll(2) == 1)
             {
                 return true;
             }
         }
-        else if (characteristics.BonusStrength == 0)
+        else if (characteristics.Strength == 0)
         {
-            characteristics.BonusStrength = Game.EnchantBonus(characteristics.BonusStrength);
+            characteristics.Strength = Game.EnchantBonus(characteristics.Strength);
             if (Game.DieRoll(2) == 1)
             {
                 return true;

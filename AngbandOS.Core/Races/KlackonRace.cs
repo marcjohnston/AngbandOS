@@ -40,7 +40,7 @@ internal class KlackonRace : Race
     {
         if (level > 9)
         {
-            itemCharacteristics.BonusSpeed++;
+            itemCharacteristics.Speed++;
         }
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResConf, true);
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResAcid, true);

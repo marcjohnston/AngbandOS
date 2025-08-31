@@ -1052,7 +1052,7 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
-        if (NegativeBonusDamageRepresentsBroken && EffectivePropertySet.BonusDamage < 0)
+        if (NegativeBonusDamageRepresentsBroken && EffectivePropertySet.ToDamage < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
@@ -1060,12 +1060,12 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
-        if (NegativeBonusHitRepresentsBroken && EffectivePropertySet.BonusHits < 0)
+        if (NegativeBonusHitRepresentsBroken && EffectivePropertySet.ToHit < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
 
-        if (EffectivePropertySet.BonusArmorClass > 0 || EffectivePropertySet.BonusHits + EffectivePropertySet.BonusDamage > 0)
+        if (EffectivePropertySet.BonusArmorClass > 0 || EffectivePropertySet.ToHit + EffectivePropertySet.ToDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1100,7 +1100,7 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
-        if (EffectivePropertySet.BonusHits + EffectivePropertySet.BonusDamage > 0)
+        if (EffectivePropertySet.ToHit + EffectivePropertySet.ToDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1121,51 +1121,51 @@ internal sealed class Item : IComparable<Item>
         {
             info[i++] = $"It has an affinity for {EffectivePropertySet.ArtifactBias.AffinityName.ToLower()}.";
         }
-        if (EffectivePropertySet.BonusStrength > 0)
+        if (EffectivePropertySet.Strength > 0)
         {
             info[i++] = "It affects your strength.";
         }
-        if (EffectivePropertySet.BonusIntelligence > 0)
+        if (EffectivePropertySet.Intelligence > 0)
         {
             info[i++] = "It affects your intelligence.";
         }
-        if (EffectivePropertySet.BonusWisdom > 0)
+        if (EffectivePropertySet.Wisdom > 0)
         {
             info[i++] = "It affects your wisdom.";
         }
-        if (EffectivePropertySet.BonusDexterity > 0)
+        if (EffectivePropertySet.Dexterity > 0)
         {
             info[i++] = "It affects your dexterity.";
         }
-        if (EffectivePropertySet.BonusConstitution > 0)
+        if (EffectivePropertySet.Constitution > 0)
         {
             info[i++] = "It affects your constitution.";
         }
-        if (EffectivePropertySet.BonusCharisma > 0)
+        if (EffectivePropertySet.Charisma > 0)
         {
             info[i++] = "It affects your charisma.";
         }
-        if (EffectivePropertySet.BonusStealth > 0)
+        if (EffectivePropertySet.Stealth > 0)
         {
             info[i++] = "It affects your stealth.";
         }
-        if (EffectivePropertySet.BonusSearch > 0)
+        if (EffectivePropertySet.Search > 0)
         {
             info[i++] = "It affects your searching.";
         }
-        if (EffectivePropertySet.BonusInfravision > 0)
+        if (EffectivePropertySet.Infravision > 0)
         {
             info[i++] = "It affects your infravision.";
         }
-        if (EffectivePropertySet.BonusTunnel > 0)
+        if (EffectivePropertySet.Tunnel > 0)
         {
             info[i++] = "It affects your ability to tunnel.";
         }
-        if (EffectivePropertySet.BonusSpeed > 0)
+        if (EffectivePropertySet.Speed > 0)
         {
             info[i++] = "It affects your movement speed.";
         }
-        if (EffectivePropertySet.BonusAttacks > 0)
+        if (EffectivePropertySet.Attacks > 0)
         {
             info[i++] = "It affects your attack speed.";
         }
@@ -2054,21 +2054,21 @@ internal sealed class Item : IComparable<Item>
 
             EffectiveAttributeSet? rareItemEffectivePropertySet = new EffectiveAttributeSet();
             rareItemEffectivePropertySet.AddEnhancement(rareItem.GenerateItemCharacteristics());
-            rareItemEffectivePropertySet.BonusHits *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusDamage *= goodBadMultiplier;
+            rareItemEffectivePropertySet.ToHit *= goodBadMultiplier;
+            rareItemEffectivePropertySet.ToDamage *= goodBadMultiplier;
             rareItemEffectivePropertySet.BonusArmorClass *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusStrength *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusIntelligence *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusWisdom *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusDexterity *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusConstitution *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusCharisma *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusStealth *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusSearch *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusInfravision *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusTunnel *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusAttacks *= goodBadMultiplier;
-            rareItemEffectivePropertySet.BonusSpeed *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Strength *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Intelligence *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Wisdom *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Dexterity *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Constitution *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Charisma *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Stealth *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Search *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Infravision *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Tunnel *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Attacks *= goodBadMultiplier;
+            rareItemEffectivePropertySet.Speed *= goodBadMultiplier;
             EffectivePropertySet.AddEnhancement("rare", rareItemEffectivePropertySet.ToReadOnly());
         }
     }

@@ -42,7 +42,7 @@ internal class SpriteRace : Race
         itemCharacteristics.Feather = true;
         if (level > 9)
         {
-            itemCharacteristics.BonusSpeed++;
+            itemCharacteristics.Speed++;
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);

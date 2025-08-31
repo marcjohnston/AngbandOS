@@ -573,7 +573,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHits)},{GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
+                s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
 
                 if (item.EffectivePropertySet.BaseArmorClass != 0)
                 {
@@ -597,7 +597,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHits)},{GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
+                s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
 
                 if (item.EffectivePropertySet.BaseArmorClass != 0)
                 {
@@ -619,17 +619,17 @@ internal sealed class ItemFactory : IGetKey, IToJson
         {
             if (item.IsKnown())
             {
-                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.BonusHits != 0 && item.EffectivePropertySet.BonusDamage != 0)
+                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.ToHit != 0 && item.EffectivePropertySet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHits)},{GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
                 }
-                else if (item.EffectivePropertySet.BonusHits != 0)
+                else if (item.EffectivePropertySet.ToHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHits)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)})";
                 }
-                else if (item.EffectivePropertySet.BonusDamage != 0)
+                else if (item.EffectivePropertySet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToDamage)})";
                 }
 
                 // Add base armor class for all types of armor and when the base armor class is greater than zero.
@@ -644,17 +644,17 @@ internal sealed class ItemFactory : IGetKey, IToJson
         {
             if (item.IsKnown())
             {
-                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.BonusHits != 0 && item.EffectivePropertySet.BonusDamage != 0)
+                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.ToHit != 0 && item.EffectivePropertySet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHits)},{GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
                 }
-                else if (item.EffectivePropertySet.BonusHits != 0)
+                else if (item.EffectivePropertySet.ToHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusHits)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)})";
                 }
-                else if (item.EffectivePropertySet.BonusDamage != 0)
+                else if (item.EffectivePropertySet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.BonusDamage)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToDamage)})";
                 }
 
                 if (item.EffectivePropertySet.BaseArmorClass != 0)
@@ -747,101 +747,101 @@ internal sealed class ItemFactory : IGetKey, IToJson
     private (int bonusValue, string priorityBonusName)? CommonBonusValue(Item item)
     {
         (int bonusValue, string priorityBonusName)? value = null;
-        if (item.EffectivePropertySet.BonusSpeed != 0)
+        if (item.EffectivePropertySet.Speed != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusSpeed != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Speed != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusSpeed, "speed");
+            value = (item.EffectivePropertySet.Speed, "speed");
         }
-        if (item.EffectivePropertySet.BonusAttacks != 0)
+        if (item.EffectivePropertySet.Attacks != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusAttacks != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Attacks != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusAttacks, Game.Pluralize("attack", item.EffectivePropertySet.BonusAttacks));
+            value = (item.EffectivePropertySet.Attacks, Game.Pluralize("attack", item.EffectivePropertySet.Attacks));
         }
-        if (item.EffectivePropertySet.BonusStealth != 0)
+        if (item.EffectivePropertySet.Stealth != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusStealth != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Stealth != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusStealth, "stealth");
+            value = (item.EffectivePropertySet.Stealth, "stealth");
         }
-        if (item.EffectivePropertySet.BonusSearch != 0)
+        if (item.EffectivePropertySet.Search != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusSearch != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Search != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusSearch, "searching");
+            value = (item.EffectivePropertySet.Search, "searching");
         }
-        if (item.EffectivePropertySet.BonusInfravision != 0)
+        if (item.EffectivePropertySet.Infravision != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusInfravision != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Infravision != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusInfravision, "infravision");
+            value = (item.EffectivePropertySet.Infravision, "infravision");
         }
-        if (item.EffectivePropertySet.BonusCharisma != 0)
+        if (item.EffectivePropertySet.Charisma != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusCharisma != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Charisma != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusCharisma, "");
+            value = (item.EffectivePropertySet.Charisma, "");
         }
-        if (item.EffectivePropertySet.BonusConstitution != 0)
+        if (item.EffectivePropertySet.Constitution != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusConstitution != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Constitution != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusConstitution, "");
+            value = (item.EffectivePropertySet.Constitution, "");
         }
-        if (item.EffectivePropertySet.BonusDexterity != 0)
+        if (item.EffectivePropertySet.Dexterity != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusDexterity != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Dexterity != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusDexterity, "");
+            value = (item.EffectivePropertySet.Dexterity, "");
         }
-        if (item.EffectivePropertySet.BonusIntelligence != 0)
+        if (item.EffectivePropertySet.Intelligence != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusIntelligence != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Intelligence != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusIntelligence, "");
+            value = (item.EffectivePropertySet.Intelligence, "");
         }
-        if (item.EffectivePropertySet.BonusStrength != 0)
+        if (item.EffectivePropertySet.Strength != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusStrength != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Strength != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusStrength, "");
+            value = (item.EffectivePropertySet.Strength, "");
         }
-        if (item.EffectivePropertySet.BonusWisdom != 0)
+        if (item.EffectivePropertySet.Wisdom != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusWisdom != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Wisdom != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusWisdom, "");
+            value = (item.EffectivePropertySet.Wisdom, "");
         }
-        if (item.EffectivePropertySet.BonusTunnel != 0)
+        if (item.EffectivePropertySet.Tunnel != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.BonusTunnel != value.Value.bonusValue)
+            if (value.HasValue && item.EffectivePropertySet.Tunnel != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.BonusTunnel, "");
+            value = (item.EffectivePropertySet.Tunnel, "");
         }
         if (!value.HasValue)
         {
@@ -992,7 +992,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             {
                 case 1:
                 case 2:
-                    characteristics.BonusStrength = Game.EnchantBonus(characteristics.BonusStrength);
+                    characteristics.Strength = Game.EnchantBonus(characteristics.Strength);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
@@ -1005,7 +1005,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 3:
                 case 4:
-                    characteristics.BonusIntelligence = Game.EnchantBonus(characteristics.BonusIntelligence);
+                    characteristics.Intelligence = Game.EnchantBonus(characteristics.Intelligence);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
@@ -1018,7 +1018,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 5:
                 case 6:
-                    characteristics.BonusWisdom = Game.EnchantBonus(characteristics.BonusWisdom);
+                    characteristics.Wisdom = Game.EnchantBonus(characteristics.Wisdom);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
@@ -1031,7 +1031,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 7:
                 case 8:
-                    characteristics.BonusDexterity = Game.EnchantBonus(characteristics.BonusDexterity);
+                    characteristics.Dexterity = Game.EnchantBonus(characteristics.Dexterity);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
@@ -1044,7 +1044,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 9:
                 case 10:
-                    characteristics.BonusConstitution = Game.EnchantBonus(characteristics.BonusConstitution);
+                    characteristics.Constitution = Game.EnchantBonus(characteristics.Constitution);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
@@ -1057,7 +1057,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 11:
                 case 12:
-                    characteristics.BonusCharisma = Game.EnchantBonus(characteristics.BonusCharisma);
+                    characteristics.Charisma = Game.EnchantBonus(characteristics.Charisma);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(13) != 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
@@ -1066,7 +1066,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 13:
                 case 14:
-                    characteristics.BonusStealth = Game.EnchantBonus(characteristics.BonusStealth);
+                    characteristics.Stealth = Game.EnchantBonus(characteristics.Stealth);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(3) == 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
@@ -1075,7 +1075,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 15:
                 case 16:
-                    characteristics.BonusSearch = Game.EnchantBonus(characteristics.BonusSearch);
+                    characteristics.Search = Game.EnchantBonus(characteristics.Search);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
@@ -1084,11 +1084,11 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 17:
                 case 18:
-                    characteristics.BonusInfravision = Game.EnchantBonus(characteristics.BonusInfravision);
+                    characteristics.Infravision = Game.EnchantBonus(characteristics.Infravision);
                     break;
 
                 case 19:
-                    characteristics.BonusSpeed = Game.EnchantBonus(characteristics.BonusSpeed);
+                    characteristics.Speed = Game.EnchantBonus(characteristics.Speed);
                     if (characteristics.ArtifactBias == null && Game.DieRoll(11) == 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
@@ -1097,7 +1097,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 20:
                 case 21:
-                    characteristics.BonusTunnel = Game.EnchantBonus(characteristics.BonusTunnel);
+                    characteristics.Tunnel = Game.EnchantBonus(characteristics.Tunnel);
                     break;
 
                 case 22:
@@ -1108,10 +1108,10 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     }
                     else
                     {
-                        characteristics.BonusAttacks = Game.DieRoll(2) + 1;
-                        if (characteristics.BonusAttacks > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
+                        characteristics.Attacks = Game.DieRoll(2) + 1;
+                        if (characteristics.Attacks > 4 && Game.DieRoll(Constants.WeirdLuck) != 1)
                         {
-                            characteristics.BonusAttacks = 4;
+                            characteristics.Attacks = 4;
                         }
                         if (characteristics.ArtifactBias == null && Game.DieRoll(11) == 1)
                         {
@@ -1124,65 +1124,65 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
         void CurseRandart(EffectiveAttributeSet characteristics)
         {
-            if (characteristics.BonusStrength != 0)
+            if (characteristics.Strength != 0)
             {
-                characteristics.BonusStrength = 0 - (characteristics.BonusStrength + Game.DieRoll(4));
+                characteristics.Strength = 0 - (characteristics.Strength + Game.DieRoll(4));
             }
-            if (characteristics.BonusIntelligence != 0)
+            if (characteristics.Intelligence != 0)
             {
-                characteristics.BonusIntelligence = 0 - (characteristics.BonusIntelligence + Game.DieRoll(4));
+                characteristics.Intelligence = 0 - (characteristics.Intelligence + Game.DieRoll(4));
             }
-            if (characteristics.BonusWisdom != 0)
+            if (characteristics.Wisdom != 0)
             {
-                characteristics.BonusWisdom = 0 - (characteristics.BonusWisdom + Game.DieRoll(4));
+                characteristics.Wisdom = 0 - (characteristics.Wisdom + Game.DieRoll(4));
             }
-            if (characteristics.BonusDexterity != 0)
+            if (characteristics.Dexterity != 0)
             {
-                characteristics.BonusDexterity = 0 - (characteristics.BonusDexterity + Game.DieRoll(4));
+                characteristics.Dexterity = 0 - (characteristics.Dexterity + Game.DieRoll(4));
             }
-            if (characteristics.BonusConstitution != 0)
+            if (characteristics.Constitution != 0)
             {
-                characteristics.BonusConstitution = 0 - (characteristics.BonusConstitution + Game.DieRoll(4));
+                characteristics.Constitution = 0 - (characteristics.Constitution + Game.DieRoll(4));
             }
-            if (characteristics.BonusCharisma != 0)
+            if (characteristics.Charisma != 0)
             {
-                characteristics.BonusCharisma = 0 - (characteristics.BonusCharisma + Game.DieRoll(4));
+                characteristics.Charisma = 0 - (characteristics.Charisma + Game.DieRoll(4));
             }
-            if (characteristics.BonusStealth != 0)
+            if (characteristics.Stealth != 0)
             {
-                characteristics.BonusStealth = 0 - (characteristics.BonusStealth + Game.DieRoll(4));
+                characteristics.Stealth = 0 - (characteristics.Stealth + Game.DieRoll(4));
             }
-            if (characteristics.BonusSearch != 0)
+            if (characteristics.Search != 0)
             {
-                characteristics.BonusSearch = 0 - (characteristics.BonusSearch + Game.DieRoll(4));
+                characteristics.Search = 0 - (characteristics.Search + Game.DieRoll(4));
             }
-            if (characteristics.BonusInfravision != 0)
+            if (characteristics.Infravision != 0)
             {
-                characteristics.BonusInfravision = 0 - (characteristics.BonusInfravision + Game.DieRoll(4));
+                characteristics.Infravision = 0 - (characteristics.Infravision + Game.DieRoll(4));
             }
-            if (characteristics.BonusTunnel != 0)
+            if (characteristics.Tunnel != 0)
             {
-                characteristics.BonusTunnel = 0 - (characteristics.BonusTunnel + Game.DieRoll(4));
+                characteristics.Tunnel = 0 - (characteristics.Tunnel + Game.DieRoll(4));
             }
-            if (characteristics.BonusAttacks != 0)
+            if (characteristics.Attacks != 0)
             {
-                characteristics.BonusAttacks = 0 - (characteristics.BonusAttacks + Game.DieRoll(4));
+                characteristics.Attacks = 0 - (characteristics.Attacks + Game.DieRoll(4));
             }
-            if (characteristics.BonusSpeed != 0)
+            if (characteristics.Speed != 0)
             {
-                characteristics.BonusSpeed = 0 - (characteristics.BonusSpeed + Game.DieRoll(4));
+                characteristics.Speed = 0 - (characteristics.Speed + Game.DieRoll(4));
             }
             if (characteristics.BonusArmorClass != 0)
             {
                 characteristics.BonusArmorClass = 0 - (characteristics.BonusArmorClass + Game.DieRoll(4));
             }
-            if (characteristics.BonusHits != 0)
+            if (characteristics.ToHit != 0)
             {
-                characteristics.BonusHits = 0 - (characteristics.BonusHits + Game.DieRoll(4));
+                characteristics.ToHit = 0 - (characteristics.ToHit + Game.DieRoll(4));
             }
-            if (characteristics.BonusDamage != 0)
+            if (characteristics.ToDamage != 0)
             {
-                characteristics.BonusDamage = 0 - (characteristics.BonusDamage + Game.DieRoll(4));
+                characteristics.ToDamage = 0 - (characteristics.ToDamage + Game.DieRoll(4));
             }
             characteristics.HeavyCurse = true;
             characteristics.IsCursed = true;
@@ -1348,8 +1348,8 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 case 28:
                 case 29:
                     characteristics.SetBoolAttributeValue(AttributeEnum.ShowMods, true);
-                    characteristics.BonusHits += 4 + Game.DieRoll(11);
-                    characteristics.BonusDamage += 4 + Game.DieRoll(11);
+                    characteristics.ToHit += 4 + Game.DieRoll(11);
+                    characteristics.ToDamage += 4 + Game.DieRoll(11);
                     break;
 
                 case 30:
@@ -1545,11 +1545,11 @@ internal sealed class ItemFactory : IGetKey, IToJson
         }
         if (RandomArtifactBonusHitCeiling != null)
         { 
-            characteristics.BonusHits += Game.DieRoll(characteristics.BonusHits > RandomArtifactBonusHitCeiling.Value ? 1 : RandomArtifactBonusHitCeiling.Value + 1 - characteristics.BonusArmorClass);
+            characteristics.ToHit += Game.DieRoll(characteristics.ToHit > RandomArtifactBonusHitCeiling.Value ? 1 : RandomArtifactBonusHitCeiling.Value + 1 - characteristics.BonusArmorClass);
         }
         if (RandomArtifactBonusDamageCeiling != null)
         {
-            characteristics.BonusDamage += Game.DieRoll(characteristics.BonusDamage > RandomArtifactBonusDamageCeiling.Value ? 1 : RandomArtifactBonusDamageCeiling.Value + 1 - characteristics.BonusArmorClass);
+            characteristics.ToDamage += Game.DieRoll(characteristics.ToDamage > RandomArtifactBonusDamageCeiling.Value ? 1 : RandomArtifactBonusDamageCeiling.Value + 1 - characteristics.BonusArmorClass);
         }
 
         characteristics.IgnoreAcid = true;

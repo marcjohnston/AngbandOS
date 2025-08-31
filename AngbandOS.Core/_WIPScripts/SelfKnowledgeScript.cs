@@ -309,51 +309,51 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         {
             info[infoCount++] = "Your charisma is sustained.";
         }
-        if (inventoryCharacteristics.BonusStrength > 0)
+        if (inventoryCharacteristics.Strength > 0)
         {
             info[infoCount++] = "Your strength is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusIntelligence > 0)
+        if (inventoryCharacteristics.Intelligence > 0)
         {
             info[infoCount++] = "Your intelligence is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusWisdom > 0)
+        if (inventoryCharacteristics.Wisdom > 0)
         {
             info[infoCount++] = "Your wisdom is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusDexterity > 0)
+        if (inventoryCharacteristics.Dexterity > 0)
         {
             info[infoCount++] = "Your dexterity is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusConstitution > 0)
+        if (inventoryCharacteristics.Constitution > 0)
         {
             info[infoCount++] = "Your constitution is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusCharisma > 0)
+        if (inventoryCharacteristics.Charisma > 0)
         {
             info[infoCount++] = "Your charisma is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusStealth > 0)
+        if (inventoryCharacteristics.Stealth > 0)
         {
             info[infoCount++] = "Your stealth is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusSearch > 0)
+        if (inventoryCharacteristics.Search > 0)
         {
             info[infoCount++] = "Your searching ability is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusInfravision > 0)
+        if (inventoryCharacteristics.Infravision > 0)
         {
             info[infoCount++] = "Your infravision is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusTunnel > 0)
+        if (inventoryCharacteristics.Tunnel > 0)
         {
             info[infoCount++] = "Your digging ability is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusSpeed > 0)
+        if (inventoryCharacteristics.Speed > 0)
         {
             info[infoCount++] = "Your speed is affected by your equipment.";
         }
-        if (inventoryCharacteristics.BonusAttacks > 0)
+        if (inventoryCharacteristics.Attacks > 0)
         {
             info[infoCount++] = "Your attack speed is affected by your equipment.";
         }

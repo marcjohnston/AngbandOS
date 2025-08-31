@@ -5651,23 +5651,23 @@ internal class Game
             int chance;
             if ((eflag & Constants.EnchTohit) != 0)
             {
-                if (oPtr.EffectivePropertySet.BonusHits < 0)
+                if (oPtr.EffectivePropertySet.ToHit < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.EffectivePropertySet.BonusHits > 15)
+                else if (oPtr.EffectivePropertySet.ToHit > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = chanceIn1000[oPtr.EffectivePropertySet.BonusHits];
+                    chance = chanceIn1000[oPtr.EffectivePropertySet.ToHit];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.EffectivePropertySet.BonusHits++;
+                    oPtr.EffectivePropertySet.ToHit++;
                     res = true;
-                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.BonusHits >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.ToHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.RemoveCurse();
@@ -5679,23 +5679,23 @@ internal class Game
             }
             if ((eflag & Constants.EnchTodam) != 0)
             {
-                if (oPtr.EffectivePropertySet.BonusDamage < 0)
+                if (oPtr.EffectivePropertySet.ToDamage < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.EffectivePropertySet.BonusDamage > 15)
+                else if (oPtr.EffectivePropertySet.ToDamage > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = chanceIn1000[oPtr.EffectivePropertySet.BonusDamage];
+                    chance = chanceIn1000[oPtr.EffectivePropertySet.ToDamage];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.EffectivePropertySet.BonusDamage++;
+                    oPtr.EffectivePropertySet.ToDamage++;
                     res = true;
-                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.BonusDamage >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.ToDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.RemoveCurse();
@@ -6728,8 +6728,8 @@ internal class Game
             item.EffectivePropertySet.RemoveEnhancements("fixed");
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(ArmorBlastedItemEnhancement)));
             item.EffectivePropertySet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
-            item.EffectivePropertySet.BonusHits = 0;
-            item.EffectivePropertySet.BonusDamage = 0;
+            item.EffectivePropertySet.ToHit = 0;
+            item.EffectivePropertySet.ToDamage = 0;
             item.EffectivePropertySet.BaseArmorClass = 0;
             item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DamageDice, 0);
             item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DiceSides , 0);
@@ -6767,8 +6767,8 @@ internal class Game
             item.FixedArtifact = null;
             item.EffectivePropertySet.RemoveEnhancements("fixed");
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(WeaponShatteredItemEnhancement)));
-            item.EffectivePropertySet.BonusHits = 0 - DieRoll(5) - DieRoll(5);
-            item.EffectivePropertySet.BonusDamage = 0 - DieRoll(5) - DieRoll(5);
+            item.EffectivePropertySet.ToHit = 0 - DieRoll(5) - DieRoll(5);
+            item.EffectivePropertySet.ToDamage = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusArmorClass = 0;
             item.EffectivePropertySet.BaseArmorClass = 0;
             item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DamageDice, 0);
@@ -7386,7 +7386,7 @@ internal class Game
         Item? meleeItem = GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (meleeItem != null)
         {
-            bonus += meleeItem.EffectivePropertySet.BonusHits;
+            bonus += meleeItem.EffectivePropertySet.ToHit;
         }
         int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
         // Attacking uses a full turn
@@ -7509,7 +7509,7 @@ internal class Game
                         chaosEffect = false;
                     }
                     // Check if we did a critical
-                    totalDamage = PlayerCriticalMelee(meleeItem.EffectivePropertySet.Weight, meleeItem.EffectivePropertySet.BonusHits, totalDamage);
+                    totalDamage = PlayerCriticalMelee(meleeItem.EffectivePropertySet.Weight, meleeItem.EffectivePropertySet.ToHit, totalDamage);
 
                     // Vorpal weapons have a chance of a deep cut.
                     bool vorpalCut = DieRoll(meleeItem.EffectivePropertySet.Vorpal1InChance) == 1;
@@ -7526,7 +7526,7 @@ internal class Game
                         } while (meleeItem.EffectivePropertySet.VorpalExtraAttacks1InChance >= 1 && DieRoll(meleeItem.EffectivePropertySet.VorpalExtraAttacks1InChance) == 1);
                     }
                     // Add bonus damage for the weapon
-                    totalDamage += meleeItem.EffectivePropertySet.BonusDamage;
+                    totalDamage += meleeItem.EffectivePropertySet.ToDamage;
                 }
                 // Add bonus damage for strength etc.
                 totalDamage += Bonuses.DamageBonus;
@@ -7882,7 +7882,7 @@ internal class Game
             throwDistance = 10;
         }
         // Work out the damage done
-        int damage = DiceRoll(missile.EffectivePropertySet.DamageDice, missile.EffectivePropertySet.DiceSides) + missile.EffectivePropertySet.BonusDamage;
+        int damage = DiceRoll(missile.EffectivePropertySet.DamageDice, missile.EffectivePropertySet.DiceSides) + missile.EffectivePropertySet.ToDamage;
         damage *= damageMultiplier;
         int chance = SkillThrowing + (Bonuses.AttackBonus * Constants.BthPlusAdj);
         // Throwing something always uses a full turn, even if you can make multiple missile attacks
@@ -7974,7 +7974,7 @@ internal class Game
                     }
                     // Adjust the damage for the particular monster type
                     damage = missile.AdjustDamageForMonsterType(damage, monster);
-                    damage = PlayerCriticalRanged(missile.EffectivePropertySet.Weight, missile.EffectivePropertySet.BonusHits, damage);
+                    damage = PlayerCriticalRanged(missile.EffectivePropertySet.Weight, missile.EffectivePropertySet.ToHit, damage);
                     if (damage < 0)
                     {
                         damage = 0;
@@ -13638,7 +13638,7 @@ internal class Game
         }
         if (BaseCharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSpeedLevel && !MartialArtistHeavyArmor())
         {
-            itemCharacteristics.BonusSpeed++;
+            itemCharacteristics.Speed++;
         }
         if (BaseCharacterClass.InstantFreeActionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFreeActionLevel && !MartialArtistHeavyArmor())
         {
@@ -13733,7 +13733,7 @@ internal class Game
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Regen, SuppressRegen ? false : null);
         if (SpeedBonus != 0)
         {
-            itemCharacteristics.BonusSpeed++;
+            itemCharacteristics.Speed++;
         }
         if (ElecHit)
         {

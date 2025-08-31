@@ -22,10 +22,10 @@ internal class BonusSpeed1D5P5BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.BonusSpeed = Game.DieRoll(5) + item.GetBonusValue(5, level);
+        item.EffectivePropertySet.Speed = Game.DieRoll(5) + item.GetBonusValue(5, level);
         while (Game.RandomLessThan(100) < 50)
         {
-            item.EffectivePropertySet.BonusSpeed++;
+            item.EffectivePropertySet.Speed++;
         }
     }
 }

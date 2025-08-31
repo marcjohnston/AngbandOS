@@ -63,22 +63,22 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.CanApplyBonusArmorClassMiscPower);
         RegisterBoolPropertyFactory(AttributeEnum.CanProvideSheathOfElectricity);
         RegisterBoolPropertyFactory(AttributeEnum.CanProvideSheathOfFire);
-        RegisterIntPropertyFactory(AttributeEnum.BonusHits);
+        RegisterIntPropertyFactory(AttributeEnum.ToHit);
         RegisterIntPropertyFactory(AttributeEnum.BaseArmorClass);
         RegisterIntPropertyFactory(AttributeEnum.BonusArmorClass);
-        RegisterIntPropertyFactory(AttributeEnum.BonusDamage);
-        RegisterIntPropertyFactory(AttributeEnum.BonusStrength);
-        RegisterIntPropertyFactory(AttributeEnum.BonusIntelligence);
-        RegisterIntPropertyFactory(AttributeEnum.BonusWisdom);
-        RegisterIntPropertyFactory(AttributeEnum.BonusDexterity);
-        RegisterIntPropertyFactory(AttributeEnum.BonusConstitution);
-        RegisterIntPropertyFactory(AttributeEnum.BonusCharisma);
-        RegisterIntPropertyFactory(AttributeEnum.BonusStealth);
-        RegisterIntPropertyFactory(AttributeEnum.BonusSearch);
-        RegisterIntPropertyFactory(AttributeEnum.BonusInfravision);
-        RegisterIntPropertyFactory(AttributeEnum.BonusTunnel);
-        RegisterIntPropertyFactory(AttributeEnum.BonusAttacks);
-        RegisterIntPropertyFactory(AttributeEnum.BonusSpeed);
+        RegisterIntPropertyFactory(AttributeEnum.ToDamage);
+        RegisterIntPropertyFactory(AttributeEnum.Strength);
+        RegisterIntPropertyFactory(AttributeEnum.Intelligence);
+        RegisterIntPropertyFactory(AttributeEnum.Wisdom);
+        RegisterIntPropertyFactory(AttributeEnum.Dexterity);
+        RegisterIntPropertyFactory(AttributeEnum.Constitution);
+        RegisterIntPropertyFactory(AttributeEnum.Charisma);
+        RegisterIntPropertyFactory(AttributeEnum.Stealth);
+        RegisterIntPropertyFactory(AttributeEnum.Search);
+        RegisterIntPropertyFactory(AttributeEnum.Infravision);
+        RegisterIntPropertyFactory(AttributeEnum.Tunnel);
+        RegisterIntPropertyFactory(AttributeEnum.Attacks);
+        RegisterIntPropertyFactory(AttributeEnum.Speed);
         RegisterReferencePropertyFactory<Activation>(AttributeEnum.Activation);
         RegisterBoolPropertyFactory(AttributeEnum.Aggravate);
         RegisterBoolPropertyFactory(AttributeEnum.AntiTheft);
@@ -563,15 +563,15 @@ internal class EffectiveAttributeSet
             SetBoolAttributeValue(AttributeEnum.CanProvideSheathOfFire, value);
         }
     }
-    public int BonusHits
+    public int ToHit
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusHits);
+            return GetIntAttributeValue(AttributeEnum.ToHit);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusHits, value);
+            SetIntAttributeValue(AttributeEnum.ToHit, value);
         }
     }
     public int BaseArmorClass
@@ -596,147 +596,147 @@ internal class EffectiveAttributeSet
             SetIntAttributeValue(AttributeEnum.BonusArmorClass, value);
         }
     }
-    public int BonusDamage
+    public int ToDamage
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusDamage);
+            return GetIntAttributeValue(AttributeEnum.ToDamage);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusDamage, value);
+            SetIntAttributeValue(AttributeEnum.ToDamage, value);
         }
     }
-    public int BonusStrength
+    public int Strength
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusStrength);
+            return GetIntAttributeValue(AttributeEnum.Strength);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusStrength, value);
+            SetIntAttributeValue(AttributeEnum.Strength, value);
         }
     }
-    public int BonusIntelligence
+    public int Intelligence
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusIntelligence);
+            return GetIntAttributeValue(AttributeEnum.Intelligence);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusIntelligence, value);
+            SetIntAttributeValue(AttributeEnum.Intelligence, value);
         }
     }
-    public int BonusWisdom
+    public int Wisdom
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusWisdom);
+            return GetIntAttributeValue(AttributeEnum.Wisdom);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusWisdom, value);
+            SetIntAttributeValue(AttributeEnum.Wisdom, value);
         }
     }
-    public int BonusDexterity
+    public int Dexterity
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusDexterity);
+            return GetIntAttributeValue(AttributeEnum.Dexterity);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusDexterity, value);
+            SetIntAttributeValue(AttributeEnum.Dexterity, value);
         }
     }
-    public int BonusConstitution
+    public int Constitution
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusConstitution);
+            return GetIntAttributeValue(AttributeEnum.Constitution);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusConstitution, value);
+            SetIntAttributeValue(AttributeEnum.Constitution, value);
         }
     }
-    public int BonusCharisma
+    public int Charisma
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusCharisma);
+            return GetIntAttributeValue(AttributeEnum.Charisma);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusCharisma, value);
+            SetIntAttributeValue(AttributeEnum.Charisma, value);
         }
     }
-    public int BonusStealth
+    public int Stealth
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusStealth);
+            return GetIntAttributeValue(AttributeEnum.Stealth);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusStealth, value);
+            SetIntAttributeValue(AttributeEnum.Stealth, value);
         }
     }
-    public int BonusSearch
+    public int Search
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusSearch);
+            return GetIntAttributeValue(AttributeEnum.Search);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusSearch, value);
+            SetIntAttributeValue(AttributeEnum.Search, value);
         }
     }
-    public int BonusInfravision
+    public int Infravision
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusInfravision);
+            return GetIntAttributeValue(AttributeEnum.Infravision);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusInfravision, value);
+            SetIntAttributeValue(AttributeEnum.Infravision, value);
         }
     }
-    public int BonusTunnel
+    public int Tunnel
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusTunnel);
+            return GetIntAttributeValue(AttributeEnum.Tunnel);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusTunnel, value);
+            SetIntAttributeValue(AttributeEnum.Tunnel, value);
         }
     }
-    public int BonusAttacks
+    public int Attacks
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusAttacks);
+            return GetIntAttributeValue(AttributeEnum.Attacks);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusAttacks, value);
+            SetIntAttributeValue(AttributeEnum.Attacks, value);
         }
     }
-    public int BonusSpeed
+    public int Speed
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusSpeed);
+            return GetIntAttributeValue(AttributeEnum.Speed);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusSpeed, value);
+            SetIntAttributeValue(AttributeEnum.Speed, value);
         }
     }
     public Activation? Activation

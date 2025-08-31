@@ -62,23 +62,23 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
         {
             bool disHappened = false;
             Game.MsgPrint("The artifact resists your blessing!");
-            if (oPtr.EffectivePropertySet.BonusHits > 0)
+            if (oPtr.EffectivePropertySet.ToHit > 0)
             {
-                oPtr.EffectivePropertySet.BonusHits--;
+                oPtr.EffectivePropertySet.ToHit--;
                 disHappened = true;
             }
-            if (oPtr.EffectivePropertySet.BonusHits > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.EffectivePropertySet.ToHit > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.EffectivePropertySet.BonusHits--;
+                oPtr.EffectivePropertySet.ToHit--;
             }
-            if (oPtr.EffectivePropertySet.BonusDamage > 0)
+            if (oPtr.EffectivePropertySet.ToDamage > 0)
             {
-                oPtr.EffectivePropertySet.BonusDamage--;
+                oPtr.EffectivePropertySet.ToDamage--;
                 disHappened = true;
             }
-            if (oPtr.EffectivePropertySet.BonusDamage > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.EffectivePropertySet.ToDamage > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.EffectivePropertySet.BonusDamage--;
+                oPtr.EffectivePropertySet.ToDamage--;
             }
             if (oPtr.EffectivePropertySet.BonusArmorClass > 0)
             {

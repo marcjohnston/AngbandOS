@@ -40,8 +40,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Attacks = itemEnhancementGameConfiguration.Attacks;
         Speed = itemEnhancementGameConfiguration.Speed;
         BonusArmorClass = itemEnhancementGameConfiguration.BonusArmorClass;
-        Hits = itemEnhancementGameConfiguration.Hits;
-        Damage = itemEnhancementGameConfiguration.Damage;
+        ToHit = itemEnhancementGameConfiguration.Hits;
+        ToDamage = itemEnhancementGameConfiguration.Damage;
         BaseArmorClass = itemEnhancementGameConfiguration.BaseArmorClass;
         BrandAcid = itemEnhancementGameConfiguration.BrandAcid;
         BrandCold = itemEnhancementGameConfiguration.BrandCold;
@@ -153,22 +153,22 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     {
         // Since we are squashing all of the values into a read-only set, we can use the Set.
         EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet();
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusStrength, StrengthExpression == null ? 0 : Game.ComputeIntegerExpression(StrengthExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusIntelligence, IntelligenceExpression == null ? 0 : Game.ComputeIntegerExpression(IntelligenceExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusWisdom, WisdomExpression == null ? 0 : Game.ComputeIntegerExpression(WisdomExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusDexterity, DexterityExpression == null ? 0 : Game.ComputeIntegerExpression(DexterityExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusConstitution, ConstitutionExpression == null ? 0 : Game.ComputeIntegerExpression(ConstitutionExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusCharisma, CharismaExpression == null ? 0 : Game.ComputeIntegerExpression(CharismaExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusStealth, StealthExpression == null ? 0 : Game.ComputeIntegerExpression(StealthExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusSearch, SearchExpression == null ? 0 : Game.ComputeIntegerExpression(SearchExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusInfravision, InfravisionExpression == null ? 0 : Game.ComputeIntegerExpression(InfravisionExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusTunnel, TunnelExpression == null ? 0 : Game.ComputeIntegerExpression(TunnelExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusAttacks, AttacksExpression == null ? 0 : Game.ComputeIntegerExpression(AttacksExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusSpeed, SpeedExpression == null ? 0 : Game.ComputeIntegerExpression(SpeedExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Strength, StrengthExpression == null ? 0 : Game.ComputeIntegerExpression(StrengthExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Intelligence, IntelligenceExpression == null ? 0 : Game.ComputeIntegerExpression(IntelligenceExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Wisdom, WisdomExpression == null ? 0 : Game.ComputeIntegerExpression(WisdomExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Dexterity, DexterityExpression == null ? 0 : Game.ComputeIntegerExpression(DexterityExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Constitution, ConstitutionExpression == null ? 0 : Game.ComputeIntegerExpression(ConstitutionExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Charisma, CharismaExpression == null ? 0 : Game.ComputeIntegerExpression(CharismaExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Stealth, StealthExpression == null ? 0 : Game.ComputeIntegerExpression(StealthExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Search, SearchExpression == null ? 0 : Game.ComputeIntegerExpression(SearchExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Infravision, InfravisionExpression == null ? 0 : Game.ComputeIntegerExpression(InfravisionExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Tunnel, TunnelExpression == null ? 0 : Game.ComputeIntegerExpression(TunnelExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Attacks, AttacksExpression == null ? 0 : Game.ComputeIntegerExpression(AttacksExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.Speed, SpeedExpression == null ? 0 : Game.ComputeIntegerExpression(SpeedExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BaseArmorClass, BaseArmorClassExpression == null ? 0 : Game.ComputeIntegerExpression(BaseArmorClassExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusArmorClass, BonusArmorClassExpression == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusHits, BonusHitsExpression == null ? 0 : Game.ComputeIntegerExpression(BonusHitsExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusDamage, BonusDamageExpression == null ? 0 : Game.ComputeIntegerExpression(BonusDamageExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.ToHit, BonusHitsExpression == null ? 0 : Game.ComputeIntegerExpression(BonusHitsExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.ToDamage, BonusDamageExpression == null ? 0 : Game.ComputeIntegerExpression(BonusDamageExpression).Value);
         itemCharacteristics.SetReferenceAttributeValue(AttributeEnum.ArtifactBias, ArtifactBiasWeightedRandom?.ChooseOrDefault());
 
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.CanApplyBlessedArtifactBias, CanApplyBlessedArtifactBias);
@@ -301,8 +301,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         HatesFireExpression = Game.ParseNullableBooleanExpression(HatesFire);
 
         BonusArmorClassExpression = Game.ParseNullableNumericExpression(BonusArmorClass);
-        BonusHitsExpression = Game.ParseNullableNumericExpression(Hits);
-        BonusDamageExpression = Game.ParseNullableNumericExpression(Damage);
+        BonusHitsExpression = Game.ParseNullableNumericExpression(ToHit);
+        BonusDamageExpression = Game.ParseNullableNumericExpression(ToDamage);
 
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
         ArtifactBiasWeightedRandom = Game.SingletonRepository.GetNullable<ArtifactBiasWeightedRandom>(ArtifactBiasWeightedRandomBindingKey);
@@ -337,8 +337,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Attacks = Attacks,
             Speed = Speed,
             BonusArmorClass = BonusArmorClass,
-            Hits = Hits,
-            Damage = Damage,
+            Hits = ToHit,
+            Damage = ToDamage,
             BaseArmorClass = BaseArmorClass,
             ActivationName = ActivationName,
             Aggravate = Aggravate,
@@ -570,9 +570,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 
     private string? BonusArmorClass { get; } 
 
-    private string? Hits { get; }
+    private string? ToHit { get; }
 
-    private string? Damage { get; }
+    private string? ToDamage { get; }
     private string? BaseArmorClass { get; }
 
     /// <summary>

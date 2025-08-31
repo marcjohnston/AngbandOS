@@ -14,9 +14,9 @@ internal class WisdomArtifactBias : ArtifactBias
 
     public override bool ApplyRandomArtifactBonuses(EffectiveAttributeSet characteristics)
     {
-        if (characteristics.BonusWisdom == 0)
+        if (characteristics.Wisdom == 0)
         {
-            characteristics.BonusWisdom = Game.EnchantBonus(characteristics.BonusWisdom);
+            characteristics.Wisdom = Game.EnchantBonus(characteristics.Wisdom);
             if (Game.DieRoll(2) == 1)
             {
                 return true;

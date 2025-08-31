@@ -35,7 +35,7 @@ internal class BrandWeaponWithAstraScript : Script, IScript, ICastSpellScript
                 // Make it a planar weapon
                 act = "seems very unstable now.";
                 item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponPlanarWeaponItemEnhancement)));
-                item.EffectivePropertySet.BonusSearch = Game.DieRoll(2);
+                item.EffectivePropertySet.Search = Game.DieRoll(2);
 
                 // Let the player know what happened
                 Game.MsgPrint($"Your {itemName} {act}");

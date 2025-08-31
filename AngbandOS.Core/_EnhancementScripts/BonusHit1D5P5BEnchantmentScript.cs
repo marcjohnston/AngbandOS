@@ -22,6 +22,6 @@ internal class BonusHit1D5P5BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.BonusHits += Game.DieRoll(5) + item.GetBonusValue(5, level);
+        item.EffectivePropertySet.ToHit += Game.DieRoll(5) + item.GetBonusValue(5, level);
     }
 }

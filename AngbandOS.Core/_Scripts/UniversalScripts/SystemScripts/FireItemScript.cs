@@ -65,8 +65,8 @@ internal class FireItemScript : UniversalScript, IGetKey
         ColorEnum missileColor = individualAmmunition.EffectivePropertySet.Color;
         char missileCharacter = individualAmmunition.FlavorSymbol.Character;
         int shotSpeed = Game.MissileAttacksPerRound;
-        int shotDamage = Game.DiceRoll(individualAmmunition.EffectivePropertySet.DamageDice, individualAmmunition.EffectivePropertySet.DiceSides) + individualAmmunition.EffectivePropertySet.BonusDamage + missileWeapon.EffectivePropertySet.BonusDamage;
-        int attackBonus = Game.Bonuses.AttackBonus + individualAmmunition.EffectivePropertySet.BonusHits + missileWeapon.EffectivePropertySet.BonusHits;
+        int shotDamage = Game.DiceRoll(individualAmmunition.EffectivePropertySet.DamageDice, individualAmmunition.EffectivePropertySet.DiceSides) + individualAmmunition.EffectivePropertySet.ToDamage + missileWeapon.EffectivePropertySet.ToDamage;
+        int attackBonus = Game.Bonuses.AttackBonus + individualAmmunition.EffectivePropertySet.ToHit + missileWeapon.EffectivePropertySet.ToHit;
         int chanceToHit = Game.SkillRanged + (attackBonus * Constants.BthPlusAdj);
 
         // Damage multiplier depends on weapon
@@ -170,7 +170,7 @@ internal class FireItemScript : UniversalScript, IGetKey
                     }
                     // Work out the damage done
                     shotDamage = individualAmmunition.AdjustDamageForMonsterType(shotDamage, monster);
-                    shotDamage = Game.PlayerCriticalRanged(individualAmmunition.EffectivePropertySet.Weight, individualAmmunition.EffectivePropertySet.BonusHits, shotDamage);
+                    shotDamage = Game.PlayerCriticalRanged(individualAmmunition.EffectivePropertySet.Weight, individualAmmunition.EffectivePropertySet.ToHit, shotDamage);
                     if (shotDamage < 0)
                     {
                         shotDamage = 0;
