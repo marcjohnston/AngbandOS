@@ -11,4 +11,5 @@ public class WarriorCharacterClassItemEnhancement : ItemEnhancementGameConfigura
     public override string Intelligence => "-2";
     public override string Dexterity => "2";
     public override int? Value => 5550;
+    public override string? DisarmTraps => "25";
 }

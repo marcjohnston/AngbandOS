@@ -11,4 +11,5 @@ public class CultistCharacterClassItemEnhancement : ItemEnhancementGameConfigura
     public override string Intelligence => "4";
     public override string Dexterity => "1";
     public override int? Value => -3300;
+    public override string? DisarmTraps => "30";
 }

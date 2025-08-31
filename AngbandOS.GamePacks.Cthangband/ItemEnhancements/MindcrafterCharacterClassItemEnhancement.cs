@@ -11,4 +11,5 @@ public class MindcrafterCharacterClassItemEnhancement : ItemEnhancementGameConfi
     public override string Intelligence => "0";
     public override string Dexterity => "-1";
     public override int? Value => 900;
+    public override string? DisarmTraps => "30";
 }

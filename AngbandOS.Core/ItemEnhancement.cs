@@ -19,6 +19,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Game = game;
         Key = itemEnhancementGameConfiguration.Key ?? itemEnhancementGameConfiguration.GetType().Name;
 
+        DisarmTraps = itemEnhancementGameConfiguration.DisarmTraps;
         ActivationName = itemEnhancementGameConfiguration.ActivationName;
         AdditionalItemEnhancementWeightedRandomBindingKey = itemEnhancementGameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
         Aggravate = itemEnhancementGameConfiguration.Aggravate;
@@ -153,6 +154,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     {
         // Since we are squashing all of the values into a read-only set, we can use the Set.
         EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet();
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.DisarmTraps, DisarmTrapsExpression == null ? 0 : Game.ComputeIntegerExpression(DisarmTrapsExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.Strength, StrengthExpression == null ? 0 : Game.ComputeIntegerExpression(StrengthExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.Intelligence, IntelligenceExpression == null ? 0 : Game.ComputeIntegerExpression(IntelligenceExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.Wisdom, WisdomExpression == null ? 0 : Game.ComputeIntegerExpression(WisdomExpression).Value);
@@ -294,6 +296,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         AttacksExpression = Game.ParseNullableNumericExpression(Attacks);
         SpeedExpression = Game.ParseNullableNumericExpression(Speed);
         BaseArmorClassExpression = Game.ParseNullableNumericExpression(BaseArmorClass);
+        DisarmTrapsExpression = Game.ParseNullableNumericExpression(DisarmTraps);
 
         HatesAcidExpression = Game.ParseNullableBooleanExpression(HatesAcid);
         HatesColdExpression = Game.ParseNullableBooleanExpression(HatesCold);
@@ -321,6 +324,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower,
 
             Key = Key,
+            DisarmTraps = DisarmTraps,
             ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
             AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,
             FriendlyName = FriendlyName,
@@ -478,6 +482,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private Expression? HatesFireExpression { get; set; }
     private Expression? HatesColdExpression { get; set; }
     private Expression? HatesElectricityExpression { get; set; }
+    private Expression? DisarmTrapsExpression { get; set; }
 
     private ItemEnhancementWeightedRandom? AdditionalItemEnhancementWeightedRandom { get; set; }
 
@@ -502,6 +507,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     #region ItemPropertySet Light-weight & Abstract Properties
     public string? HatesFire { get; }
     public string? HatesElectricity { get; }
+    private string? DisarmTraps { get; }
 
     /// <summary>
     /// Returns true, if the item is susceptible to acid.  Returns false, by default.

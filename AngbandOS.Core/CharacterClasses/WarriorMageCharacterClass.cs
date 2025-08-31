@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -13,7 +13,6 @@ internal class WarriorMageCharacterClass : BaseCharacterClass
     protected override string EnhancementBindingKey => nameof(WarriorMageCharacterClassItemEnhancement);
     public override int ID => 6;
     public override string Title => "Warrior-Mage";
-    public override int BaseDisarmBonus => 30;
     public override int BaseDeviceBonus => 30;
     public override int BaseSaveBonus => 28;
     public override int BaseStealthBonus => 2;

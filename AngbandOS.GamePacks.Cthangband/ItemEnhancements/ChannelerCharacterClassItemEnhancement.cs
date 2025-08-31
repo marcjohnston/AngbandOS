@@ -11,4 +11,5 @@ public class ChannelerCharacterClassItemEnhancement : ItemEnhancementGameConfigu
     public override string Intelligence => "0";
     public override string Dexterity => "-1";
     public override int? Value => 150;
+    public override string? DisarmTraps => "40";
 }

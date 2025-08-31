@@ -8,6 +8,7 @@ namespace AngbandOS.Core;
 
 internal enum AttributeEnum
 {
+    DisarmTraps,
     BaseArmorClass,
     ToHit,
     BonusArmorClass,

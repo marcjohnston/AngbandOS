@@ -63,6 +63,7 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.CanApplyBonusArmorClassMiscPower);
         RegisterBoolPropertyFactory(AttributeEnum.CanProvideSheathOfElectricity);
         RegisterBoolPropertyFactory(AttributeEnum.CanProvideSheathOfFire);
+        RegisterIntPropertyFactory(AttributeEnum.DisarmTraps);
         RegisterIntPropertyFactory(AttributeEnum.ToHit);
         RegisterIntPropertyFactory(AttributeEnum.BaseArmorClass);
         RegisterIntPropertyFactory(AttributeEnum.BonusArmorClass);
@@ -594,6 +595,17 @@ internal class EffectiveAttributeSet
         set
         {
             SetIntAttributeValue(AttributeEnum.BonusArmorClass, value);
+        }
+    }
+    public int DisarmTraps
+    {
+        get
+        {
+            return GetIntAttributeValue(AttributeEnum.DisarmTraps);
+        }
+        set
+        {
+            SetIntAttributeValue(AttributeEnum.DisarmTraps, value);
         }
     }
     public int ToDamage

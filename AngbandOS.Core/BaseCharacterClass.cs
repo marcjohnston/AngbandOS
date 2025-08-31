@@ -386,6 +386,11 @@ internal abstract class BaseCharacterClass : IGetKey
         MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
 
+        //// Cut and paste
+        //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\CharacterClasses\", Key, "public override int BaseDisarmBonus => ");
+        //if (prop1 is not null)
+        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? DisarmTraps => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
+
         //        foreach (string ability in new string[] { "Strength", "Charisma", "Constitution", "Wisdom", "Intelligence", "Dexterity" })
         //        {
         //            string? property = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\CharacterClassAbilities\", $"{GetType().Name}{ability}Ability", "Bonus =>");
@@ -568,8 +573,6 @@ internal abstract class BaseCharacterClass : IGetKey
     public virtual bool OutfitsWithScrollsOfLight => false;
 
     public abstract int BaseDeviceBonus { get; }
-
-    public abstract int BaseDisarmBonus { get; }
 
     public abstract int BaseMeleeAttackBonus { get; }
 

@@ -11,4 +11,5 @@ public class MonkCharacterClassItemEnhancement : ItemEnhancementGameConfiguratio
     public override string Intelligence => "-1";
     public override string Dexterity => "3";
     public override int? Value => 8850;
+    public override string? DisarmTraps => "45";
 }

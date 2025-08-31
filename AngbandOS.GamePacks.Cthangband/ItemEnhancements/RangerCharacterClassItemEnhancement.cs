@@ -11,4 +11,5 @@ public class RangerCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
     public override string Intelligence => "2";
     public override string Dexterity => "1";
     public override int? Value => 7650;
+    public override string? DisarmTraps => "30";
 }

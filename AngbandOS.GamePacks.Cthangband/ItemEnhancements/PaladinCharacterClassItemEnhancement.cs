@@ -11,4 +11,5 @@ public class PaladinCharacterClassItemEnhancement : ItemEnhancementGameConfigura
     public override string Intelligence => "-3";
     public override string Dexterity => "0";
     public override int? Value => 4500;
+    public override string? DisarmTraps => "20";
 }

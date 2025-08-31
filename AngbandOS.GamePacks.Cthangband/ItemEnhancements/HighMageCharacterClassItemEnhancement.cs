@@ -11,4 +11,5 @@ public class HighMageCharacterClassItemEnhancement : ItemEnhancementGameConfigur
     public override string Intelligence => "4";
     public override string Dexterity => "0";
     public override int? Value => -3150;
+    public override string? DisarmTraps => "30";
 }

@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -16,7 +16,6 @@ internal class FanaticCharacterClass : BaseCharacterClass
     public override int? InstantFearResistanceLevel => 40;
     public override int? InstantChaosResistanceLevel => 30;
     public override bool ReceivesLevelRewards => true;
-    public override int BaseDisarmBonus => 20;
     public override int BaseDeviceBonus => 24;
     public override int BaseSaveBonus => 30;
     public override int BaseStealthBonus => 1;

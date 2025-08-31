@@ -11,4 +11,5 @@ public class MysticCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
     public override string Intelligence => "-1";
     public override string Dexterity => "2";
     public override int? Value => 8400;
+    public override string? DisarmTraps => "40";
 }

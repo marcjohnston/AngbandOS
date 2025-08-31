@@ -11,4 +11,5 @@ public class ChosenOneCharacterClassItemEnhancement : ItemEnhancementGameConfigu
     public override string Intelligence => "-2";
     public override string Dexterity => "2";
     public override int? Value => 3150;
+    public override string? DisarmTraps => "25";
 }

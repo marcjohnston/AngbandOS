@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -15,7 +15,6 @@ internal class MonkCharacterClass : BaseCharacterClass
     public override string Title => "Monk";
     public override int? InstantSpeedLevel => 10;
     public override int? InstantFreeActionLevel => 25;
-    public override int BaseDisarmBonus => 45;
     public override int BaseDeviceBonus => 32;
     public override int BaseSaveBonus => 28;
     public override int BaseStealthBonus => 5;

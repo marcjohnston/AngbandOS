@@ -11,4 +11,5 @@ public class DruidCharacterClassItemEnhancement : ItemEnhancementGameConfigurati
     public override string Intelligence => "-3";
     public override string Dexterity => "-2";
     public override int? Value => -1050;
+    public override string? DisarmTraps => "30";
 }

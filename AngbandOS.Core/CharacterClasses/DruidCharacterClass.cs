@@ -1,4 +1,4 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
@@ -13,7 +13,6 @@ internal class DruidCharacterClass : BaseCharacterClass
     protected override string EnhancementBindingKey => nameof(DruidCharacterClassItemEnhancement);
     public override int ID => 11;
     public override string Title => "Druid";
-    public override int BaseDisarmBonus => 30;
     public override int BaseDeviceBonus => 30;
     public override int BaseSaveBonus => 32;
     public override int BaseStealthBonus => 3;
