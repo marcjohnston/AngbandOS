@@ -417,6 +417,11 @@ public class ItemFactoryGameConfiguration
     public virtual int BonusHit { get; set; } = 0;
 
     /// <summary>
+    /// Returns whether or not this factory generates "good" items.
+    /// </summary>
+    public virtual bool IsGood { get; set; } = false;
+
+    /// <summary>
     /// Returns whether or not the chest is small.  Small chests have a 75% chance that the items in the chest are gold.  Large chest always return items.
     /// </summary>
     public virtual bool IsSmall { get; set; } = false; // TODO: This property is only valid when IsContainer.  The data type is horrible.

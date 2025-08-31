@@ -26,4 +26,5 @@ public class RodentSkeletonSkeletonItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(RodentSkeletonSkeletonItemFactoryItemEnhancement);
     public override int PackSort => 40;
     public override string BreakageChanceProbabilityExpression => "50/100";
+    public override bool IsGood => true;
 }

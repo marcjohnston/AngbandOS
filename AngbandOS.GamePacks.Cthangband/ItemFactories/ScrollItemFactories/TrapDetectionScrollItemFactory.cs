@@ -41,4 +41,5 @@ public class TrapDetectionScrollItemFactory : ItemFactoryGameConfiguration
     public override int PackSort => 12;
     public override int BaseValue => 20;
 
+    public override bool IsGood => true;
 }

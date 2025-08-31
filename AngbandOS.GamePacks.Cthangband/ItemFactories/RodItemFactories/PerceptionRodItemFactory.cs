@@ -34,4 +34,5 @@ public class PerceptionRodItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(PerceptionRodItemFactoryItemEnhancement);
     public override int PackSort => 13;
     public override int BaseValue => 90;
+    public override bool IsGood => true;
 }

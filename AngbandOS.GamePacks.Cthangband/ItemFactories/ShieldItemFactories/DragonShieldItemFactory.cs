@@ -57,4 +57,5 @@ public class DragonShieldItemFactory : ItemFactoryGameConfiguration
         (new int[] { 1, 2 }, null, new string[] { nameof(SystemScriptsEnum.GoodShieldEnchantmentScript) }),
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatShieldEnchantmentScript) })
     };
+    public override bool IsGood => true;
 }

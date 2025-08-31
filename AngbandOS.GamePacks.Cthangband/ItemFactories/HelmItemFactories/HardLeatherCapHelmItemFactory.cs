@@ -55,4 +55,5 @@ public class HardLeatherCapHelmItemFactory : ItemFactoryGameConfiguration
         (new int[] { 1, 2 }, null, new string[] { nameof(SystemScriptsEnum.GoodHelmEnchantmentScript) }),
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatHelmEnchantmentScript) })
     };
+    public override bool IsGood => true;
 }

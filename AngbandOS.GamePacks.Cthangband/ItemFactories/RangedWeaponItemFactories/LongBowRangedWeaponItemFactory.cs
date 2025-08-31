@@ -70,4 +70,5 @@ public class LongBowRangedWeaponItemFactory : ItemFactoryGameConfiguration
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;
     public override bool IsWearableOrWieldable => true;
+    public override bool IsGood => true;
 }

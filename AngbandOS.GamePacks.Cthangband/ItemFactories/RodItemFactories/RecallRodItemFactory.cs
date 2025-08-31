@@ -33,4 +33,5 @@ public class RecallRodItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(RecallRodItemFactoryItemEnhancement);
     public override int PackSort => 13;
     public override int BaseValue => 90;
+    public override bool IsGood => true;
 }

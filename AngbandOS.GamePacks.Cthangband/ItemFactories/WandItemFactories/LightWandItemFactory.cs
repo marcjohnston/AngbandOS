@@ -37,4 +37,5 @@ public class LightWandItemFactory : ItemFactoryGameConfiguration
     public override int PackSort => 14;
     public override int BaseValue => 50;
 
+    public override bool IsGood => true;
 }

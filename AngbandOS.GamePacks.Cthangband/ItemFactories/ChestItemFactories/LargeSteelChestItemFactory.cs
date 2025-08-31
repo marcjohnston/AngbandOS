@@ -35,4 +35,5 @@ public class LargeSteelChestItemFactory : ItemFactoryGameConfiguration
     public override bool IsContainer => true;
 
     public override int PackSort => 36;
+    public override bool IsGood => true;
 }

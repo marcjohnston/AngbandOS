@@ -47,4 +47,5 @@ public class BlackMassDeathBookItemFactory : ItemFactoryGameConfiguration
     };
 
     public override int ExperienceGainDivisorForDestroying => 4;
+    public override bool IsGood => true;
 }

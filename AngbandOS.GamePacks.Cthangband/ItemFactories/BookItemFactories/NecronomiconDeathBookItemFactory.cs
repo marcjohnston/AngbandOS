@@ -51,4 +51,5 @@ public class NecronomiconDeathBookItemFactory : ItemFactoryGameConfiguration
         (50, "2d3-2"),
         (500, "1d3-1")
     };
+    public override bool IsGood => true;
 }

@@ -33,4 +33,5 @@ public class CuringRodItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(CuringRodItemFactoryItemEnhancement);
     public override int PackSort => 13;
     public override int BaseValue => 90;
+    public override bool IsGood => true;
 }

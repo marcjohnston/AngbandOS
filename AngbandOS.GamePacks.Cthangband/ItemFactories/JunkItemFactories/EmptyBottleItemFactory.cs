@@ -17,4 +17,5 @@ public class EmptyBottleItemFactory : ItemFactoryGameConfiguration
     public override string Name => "Empty Bottle";
 
     public override string? DescriptionSyntax => "Empty Bottle~";
+    public override bool IsGood => true;
 }

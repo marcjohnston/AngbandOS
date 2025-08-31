@@ -56,4 +56,5 @@ public class GauntletGlovesItemFactory : ItemFactoryGameConfiguration
         (new int[] { 1, 2 }, null, new string[] { nameof(SystemScriptsEnum.GoodGlovesEnchantmentScript) }),
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatGlovesEnchantmentScript) })
     };
+    public override bool IsGood => true;
 }

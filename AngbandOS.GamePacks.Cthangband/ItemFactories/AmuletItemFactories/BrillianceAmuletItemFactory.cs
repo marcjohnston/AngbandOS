@@ -43,4 +43,5 @@ public class BrillianceAmuletItemFactory : ItemFactoryGameConfiguration
     public override int BonusHitRealValueMultiplier => 100;
     public override int BonusDamageRealValueMultiplier => 100;
     public override int BonusArmorClassRealValueMultiplier => 100;
+    public override bool IsGood => true;
 }

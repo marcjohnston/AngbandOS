@@ -2412,8 +2412,7 @@ internal class Game
             }
 
             // Determine the final probability.  If only good objects are requested and the object is not good, then set it to 0.
-            bool isGood = kPtr.BonusArmorClass >= 0 && kPtr.BonusHit >= 0 && kPtr.BonusDamage >= 0;
-            table[i].FinalProbability = good && !isGood ? 0 : table[i].BaseProbability;
+            table[i].FinalProbability = good && !kPtr.IsGood ? 0 : table[i].BaseProbability;
 
             total += table[i].FinalProbability;
         }

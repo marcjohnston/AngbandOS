@@ -60,4 +60,5 @@ public class PoisonMushroomFoodItemFactory : ItemFactoryGameConfiguration
     /// Returns true, because food items can be eaten by the player.
     /// </summary>
     public override bool CanBeEaten => true;
+    public override bool IsGood => true;
 }

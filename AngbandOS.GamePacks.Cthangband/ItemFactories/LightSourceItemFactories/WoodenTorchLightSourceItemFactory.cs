@@ -61,4 +61,5 @@ public class WoodenTorchLightSourceItemFactory : ItemFactoryGameConfiguration
     /// Returns true, because all light sources can be worn/wielded.
     /// </summary>
     public override bool IsWearableOrWieldable => true;
+    public override bool IsGood => true;
 }

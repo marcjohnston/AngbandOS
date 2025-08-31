@@ -62,4 +62,5 @@ public class SeekerBoltAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override bool HasQualityRatings => true;
     public override int BonusArmorClassRealValueMultiplier => 100;
     public override bool IsWearableOrWieldable => true;
+    public override bool IsGood => true;
 }

@@ -47,4 +47,5 @@ public class DeVermisMysteriisCorporealBookItemFactory : ItemFactoryGameConfigur
     };
 
     public override int ExperienceGainDivisorForDestroying => 4;
+    public override bool IsGood => true;
 }

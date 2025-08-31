@@ -29,4 +29,5 @@ public class IronSpikeItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(IronSpikeItemFactoryItemEnhancement);
     public override bool CanSpikeDoorClosed => true;
     public override int PackSort => 37;
+    public override bool IsGood => true;
 }

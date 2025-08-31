@@ -34,4 +34,5 @@ public class DoorStairLocationRodItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(DoorStairLocationRodItemFactoryItemEnhancement);
     public override int PackSort => 13;
     public override int BaseValue => 90;
+    public override bool IsGood => true;
 }

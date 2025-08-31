@@ -64,6 +64,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         RechargeScriptBindingKey = itemFactoryGameConfiguration.RechargeScriptBindingKey;
         IsIgnoredByMonsters = itemFactoryGameConfiguration.IsIgnoredByMonsters;
         IsContainer = itemFactoryGameConfiguration.IsContainer;
+        IsGood = itemFactoryGameConfiguration.IsGood;
         IsRangedWeapon = itemFactoryGameConfiguration.IsRangedWeapon;
         MissileDamageMultiplier = itemFactoryGameConfiguration.MissileDamageMultiplier;
         MaxPhlogiston = itemFactoryGameConfiguration.MaxPhlogiston;
@@ -245,6 +246,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             RechargeScriptBindingKey = RechargeScriptBindingKey,
             IsIgnoredByMonsters = IsIgnoredByMonsters,
             IsContainer = IsContainer,
+            IsGood = IsGood,
             DisableStomp = DisableStomp,
             IsRangedWeapon = IsRangedWeapon,
             MissileDamageMultiplier = MissileDamageMultiplier,
@@ -393,10 +395,13 @@ internal sealed class ItemFactory : IGetKey, IToJson
         ItemEnhancement itemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
         EffectiveAttributeSet.AddEnhancement(itemEnhancement.GenerateItemCharacteristics());
 
-        //// Cut and paste
+        // Cut and paste
         //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override bool Valueless => ");
         //if (prop1 is not null)
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", itemEnhancement.GetKey, prop1.Replace("bool", "bool?"));
+        //            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", itemEnhancement.GetKey, $"    public override bool IsGood => {BonusArmorClass >= 0 && BonusHit >= 0 && BonusDamage >= 0}");
+        //bool isGood = BonusArmorClass >= 0 && BonusHit >= 0 && BonusDamage >= 0;
+        //if (isGood)
+        //    Game.PasteProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, $"    public override bool IsGood => {isGood.ToString().ToLower()};");
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
         FlavorSymbol = Symbol;
@@ -1831,6 +1836,8 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns false, by default.
     /// </summary>
     public bool InitialGoodStomp { get; } = false;
+
+    public bool IsGood { get; }
 
     /// <summary>
     /// Returns true, if items of this factory that have a broken quality should default to being stomped; false, otherwise.  This value is used to initially set the stomp type for broken items of this factory.
