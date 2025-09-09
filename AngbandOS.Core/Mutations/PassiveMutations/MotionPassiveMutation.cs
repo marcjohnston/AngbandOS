@@ -18,12 +18,12 @@ internal class MotionPassiveMutation : Mutation
     public override void OnGain()
     {
         Game.StealthBonus += 1;
-        Game.FreeAction = true;
+        Game.MutationFreeAction = true;
     }
 
     public override void OnLose()
     {
         Game.StealthBonus -= 1;
-        Game.FreeAction = false;
+        Game.MutationFreeAction = false;
     }
 }

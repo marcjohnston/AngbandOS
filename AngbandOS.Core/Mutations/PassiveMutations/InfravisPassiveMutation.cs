@@ -17,11 +17,11 @@ internal class InfravisPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        Game.InfravisionBonus += 3;
+        Game.MutationInfravisionBonus += 3;
     }
 
     public override void OnLose()
     {
-        Game.InfravisionBonus -= 3;
+        Game.MutationInfravisionBonus -= 3;
     }
 }

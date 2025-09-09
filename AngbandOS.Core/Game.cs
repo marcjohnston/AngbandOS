@@ -184,8 +184,8 @@ internal class Game
     public bool Esp;
     public bool FeatherFall;
     public bool FireHit;
-    public bool FreeAction;
-    public int InfravisionBonus;
+    public bool MutationFreeAction;
+    public int MutationInfravisionBonus;
     public int IntelligenceBonus;
     public bool MagicResistance;
     public bool Regen;
@@ -13756,7 +13756,7 @@ internal class Game
         {
             itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Telepathy, true);
         }
-        if (FreeAction)
+        if (HasFreeAction)
         {
             itemCharacteristics.FreeAct = true;
         }

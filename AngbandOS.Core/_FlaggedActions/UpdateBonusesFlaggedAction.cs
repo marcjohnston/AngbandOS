@@ -148,7 +148,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasRegeneration |= Game.Regen;
         Game.SkillSearchFrequency += Game.SearchBonus;
         Game.SkillSearching += Game.SearchBonus;
-        Game.InfravisionRange += Game.InfravisionBonus;
+        Game.InfravisionRange += Game.MutationInfravisionBonus;
         Game.HasElectricitySheath |= Game.ElecHit;
         Game.HasFireSheath |= Game.FireHit;
         if (Game.GlowInTheDarkRadius == 0 && Game.FireHit)
@@ -162,7 +162,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasTimeResistance |= Game.ResTime;
         Game.HasTelepathy |= Game.Esp;
         Game.SkillStealth += Game.StealthBonus;
-        Game.HasFreeAction |= Game.FreeAction;
+        Game.HasFreeAction |= Game.MutationFreeAction;
         Game.HasElementalVulnerability |= Game.Vulnerable;
         if (Game.MagicResistance)
         {
