@@ -13,15 +13,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private bool MartialArtistNotifyAux;
 
     private UpdateBonusesFlaggedAction(Game game) : base(game) { }
-    private void BuildEffectiveAttributeSetForPlayer()
+    private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
     {
-        Game.EffectivePropertySet = new EffectiveAttributeSet();
+        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet();
 
         // Apply the race enhancements.
-        Game.EffectivePropertySet.AddEnhancement(Game.Race.EffectiveAttributeSet);
+        effectiveAttributeSet.AddEnhancement(Game.Race.EffectiveAttributeSet);
 
         // Apply the character class enhancements.
-        Game.EffectivePropertySet.AddEnhancement(Game.BaseCharacterClass.EffectiveAttributeSet);
+        effectiveAttributeSet.AddEnhancement(Game.BaseCharacterClass.EffectiveAttributeSet);
 
         // Apply the genome.
 
@@ -33,17 +33,18 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    Game.EffectivePropertySet.AddEnhancement(oPtr.EffectivePropertySet.ToReadOnly());
+                    effectiveAttributeSet.AddEnhancement(oPtr.EffectivePropertySet.ToReadOnly());
                 }
             }
         }
 
         // Apply all of the mutations that the player has.
+        return effectiveAttributeSet;
     }
 
     protected override void Execute()
     {
-        BuildEffectiveAttributeSetForPlayer(); // TODO: This isn't being used yet.
+        Game.EffectiveAttributeSet = BuildEffectiveAttributeSetForPlayer().ToReadOnly(); // TODO: This isn't being used yet.
 
         List<Bonuses> bonusesToMerge = new List<Bonuses>();
         int baseArmorClass = 0;
@@ -70,7 +71,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasAggravation = false;
         Game.HasRandomTeleport = false;
         Game.HasExperienceDrain = false;
-        Game.HasBlessedBlade = false; // TODO: This is local
+        Game.HasBlessedBlade = false;
         Game.HasExtraMight = false;
         Game.HasQuakeWeapon = false;
         Game.HasSeeInvisibility = false;

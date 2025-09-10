@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
@@ -81,7 +82,7 @@ internal class Game
     /// <summary>
     /// Represents the players effective attribute values.
     /// </summary>
-    public EffectiveAttributeSet EffectivePropertySet;
+    public ReadOnlyAttributeSet EffectiveAttributeSet;
 
     public void GainMutation(Mutation mutation)
     {
