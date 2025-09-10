@@ -13,4 +13,6 @@ public class HighElfRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "4";
     public override string? UseDevice => "20";
     public override string? SavingThrow => "20";
+    public override string? Stealth => "4";
+    public override string? Search => "3";
 }

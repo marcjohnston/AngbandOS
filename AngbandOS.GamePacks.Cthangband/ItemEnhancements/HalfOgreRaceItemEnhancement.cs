@@ -13,4 +13,6 @@ public class HalfOgreRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "-3";
     public override string? UseDevice => "-5";
     public override string? SavingThrow => "-5";
+    public override string? Stealth => "-2";
+    public override string? Search => "-1";
 }

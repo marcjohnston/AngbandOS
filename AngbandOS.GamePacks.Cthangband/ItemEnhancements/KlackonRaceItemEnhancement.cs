@@ -13,4 +13,6 @@ public class KlackonRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "10";
     public override string? UseDevice => "5";
     public override string? SavingThrow => "5";
+    public override string? Stealth => "0";
+    public override string? Search => "-1";
 }

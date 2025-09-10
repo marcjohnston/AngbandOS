@@ -13,4 +13,6 @@ public class CyclopsRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "-4";
     public override string? UseDevice => "-5";
     public override string? SavingThrow => "-5";
+    public override string? Stealth => "-2";
+    public override string? Search => "-2";
 }

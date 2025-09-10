@@ -13,4 +13,6 @@ public class ZombieRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "-5";
     public override string? UseDevice => "-5";
     public override string? SavingThrow => "8";
+    public override string? Stealth => "-1";
+    public override string? Search => "-1";
 }

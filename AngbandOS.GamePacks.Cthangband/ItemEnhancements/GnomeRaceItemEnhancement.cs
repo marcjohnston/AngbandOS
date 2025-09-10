@@ -13,4 +13,6 @@ public class GnomeRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "10";
     public override string? UseDevice => "12";
     public override string? SavingThrow => "12";
+    public override string? Stealth => "3";
+    public override string? Search => "6";
 }

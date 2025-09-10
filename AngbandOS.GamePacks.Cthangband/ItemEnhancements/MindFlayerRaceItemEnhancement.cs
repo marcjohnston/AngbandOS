@@ -13,4 +13,6 @@ public class MindFlayerRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "10";
     public override string? UseDevice => "25";
     public override string? SavingThrow => "15";
+    public override string? Stealth => "2";
+    public override string? Search => "5";
 }

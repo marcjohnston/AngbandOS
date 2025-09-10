@@ -13,4 +13,6 @@ public class KoboldRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "-2";
     public override string? UseDevice => "-3";
     public override string? SavingThrow => "-2";
+    public override string? Stealth => "-1";
+    public override string? Search => "1";
 }

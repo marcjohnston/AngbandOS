@@ -13,4 +13,6 @@ public class YeekRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "2";
     public override string? UseDevice => "4";
     public override string? SavingThrow => "10";
+    public override string? Stealth => "3";
+    public override string? Search => "5";
 }

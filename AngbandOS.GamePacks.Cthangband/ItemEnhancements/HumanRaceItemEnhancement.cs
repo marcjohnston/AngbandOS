@@ -11,4 +11,6 @@ public class HumanRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "0";
     public override string? UseDevice => "0";
     public override string? SavingThrow => "0";
+    public override string? Stealth => "0";
+    public override string? Search => "0";
 }

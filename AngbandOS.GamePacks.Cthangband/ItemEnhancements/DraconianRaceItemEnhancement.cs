@@ -13,4 +13,6 @@ public class DraconianRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "-2";
     public override string? UseDevice => "5";
     public override string? SavingThrow => "3";
+    public override string? Stealth => "0";
+    public override string? Search => "1";
 }

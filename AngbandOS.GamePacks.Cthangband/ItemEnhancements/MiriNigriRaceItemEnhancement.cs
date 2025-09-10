@@ -12,4 +12,6 @@ public class MiriNigriRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? DisarmTraps => "-5";
     public override string? UseDevice => "-2";
     public override string? SavingThrow => "-1";
+    public override string? Stealth => "-1";
+    public override string? Search => "-1";
 }
