@@ -12,12 +12,12 @@ internal class VampireRace : Race
     private VampireRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(VampireRaceItemEnhancement);
     public override string Title => "Vampire";
-    public override int BaseDeviceBonus => 10;
+    public override int UseDevice => 10;
     public override int BaseSaveBonus => 10;
     public override int BaseStealthBonus => 4;
     public override int BaseSearchBonus => 1;
     public override int BaseSearchFrequency => 8;
-    public override int BaseMeleeAttackBonus => 5;
+    public override int MeleeToHit => 5;
     public override int BaseRangedAttackBonus => 0;
     public override int HitDieBonus => 11;
     public override int ExperienceFactor => 200;

@@ -12,12 +12,12 @@ internal class CyclopsRace : Race
     private CyclopsRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(CyclopsRaceItemEnhancement);
     public override string Title => "Cyclops";
-    public override int BaseDeviceBonus => -5;
+    public override int UseDevice => -5;
     public override int BaseSaveBonus => -5;
     public override int BaseStealthBonus => -2;
     public override int BaseSearchBonus => -2;
     public override int BaseSearchFrequency => 5;
-    public override int BaseMeleeAttackBonus => 20;
+    public override int MeleeToHit => 20;
     public override int BaseRangedAttackBonus => 12;
     public override int HitDieBonus => 13;
     public override int ExperienceFactor => 130;

@@ -12,12 +12,12 @@ internal class HalfElfRace : Race
     private HalfElfRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(HalfElfRaceItemEnhancement);
     public override string Title => "Half Elf";
-    public override int BaseDeviceBonus => 3;
+    public override int UseDevice => 3;
     public override int BaseSaveBonus => 3;
     public override int BaseStealthBonus => 1;
     public override int BaseSearchBonus => 6;
     public override int BaseSearchFrequency => 11;
-    public override int BaseMeleeAttackBonus => -1;
+    public override int MeleeToHit => -1;
     public override int BaseRangedAttackBonus => 5;
     public override int HitDieBonus => 9;
     public override int ExperienceFactor => 110;

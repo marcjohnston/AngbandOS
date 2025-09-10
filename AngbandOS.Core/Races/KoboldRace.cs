@@ -12,12 +12,12 @@ internal class KoboldRace : Race
     private KoboldRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(KoboldRaceItemEnhancement);
     public override string Title => "Kobold";
-    public override int BaseDeviceBonus => -3;
+    public override int UseDevice => -3;
     public override int BaseSaveBonus => -2;
     public override int BaseStealthBonus => -1;
     public override int BaseSearchBonus => 1;
     public override int BaseSearchFrequency => 8;
-    public override int BaseMeleeAttackBonus => 10;
+    public override int MeleeToHit => 10;
     public override int BaseRangedAttackBonus => -8;
     public override int HitDieBonus => 9;
     public override int ExperienceFactor => 125;

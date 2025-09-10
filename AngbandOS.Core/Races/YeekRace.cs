@@ -12,12 +12,12 @@ internal class YeekRace : Race
     private YeekRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(YeekRaceItemEnhancement);
     public override string Title => "Yeek";
-    public override int BaseDeviceBonus => 4;
+    public override int UseDevice => 4;
     public override int BaseSaveBonus => 10;
     public override int BaseStealthBonus => 3;
     public override int BaseSearchBonus => 5;
     public override int BaseSearchFrequency => 15;
-    public override int BaseMeleeAttackBonus => -5;
+    public override int MeleeToHit => -5;
     public override int BaseRangedAttackBonus => -5;
     public override int HitDieBonus => 7;
     public override int ExperienceFactor => 100;

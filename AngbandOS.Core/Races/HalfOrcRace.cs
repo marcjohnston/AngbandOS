@@ -12,12 +12,12 @@ internal class HalfOrcRace : Race
     private HalfOrcRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(HalfOrcRaceItemEnhancement);
     public override string Title => "Half Orc";
-    public override int BaseDeviceBonus => -3;
+    public override int UseDevice => -3;
     public override int BaseSaveBonus => -3;
     public override int BaseStealthBonus => -1;
     public override int BaseSearchBonus => 0;
     public override int BaseSearchFrequency => 7;
-    public override int BaseMeleeAttackBonus => 12;
+    public override int MeleeToHit => 12;
     public override int BaseRangedAttackBonus => -5;
     public override int HitDieBonus => 10;
     public override int ExperienceFactor => 110;

@@ -12,12 +12,12 @@ internal class HalfGiantRace : Race
     private HalfGiantRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(HalfGiantRaceItemEnhancement);
     public override string Title => "Half Giant";
-    public override int BaseDeviceBonus => -8;
+    public override int UseDevice => -8;
     public override int BaseSaveBonus => -6;
     public override int BaseStealthBonus => -2;
     public override int BaseSearchBonus => -1;
     public override int BaseSearchFrequency => 5;
-    public override int BaseMeleeAttackBonus => 25;
+    public override int MeleeToHit => 25;
     public override int BaseRangedAttackBonus => 5;
     public override int HitDieBonus => 13;
     public override int ExperienceFactor => 150;

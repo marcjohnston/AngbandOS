@@ -12,12 +12,12 @@ internal class GnomeRace : Race
     private GnomeRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(GnomeRaceItemEnhancement);
     public override string Title => "Gnome";
-    public override int BaseDeviceBonus => 12;
+    public override int UseDevice => 12;
     public override int BaseSaveBonus => 12;
     public override int BaseStealthBonus => 3;
     public override int BaseSearchBonus => 6;
     public override int BaseSearchFrequency => 13;
-    public override int BaseMeleeAttackBonus => -8;
+    public override int MeleeToHit => -8;
     public override int BaseRangedAttackBonus => 12;
     public override int HitDieBonus => 8;
     public override int ExperienceFactor => 135;

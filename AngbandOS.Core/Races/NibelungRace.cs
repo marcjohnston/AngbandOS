@@ -12,12 +12,12 @@ internal class NibelungRace : Race
     private NibelungRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(NibelungRaceItemEnhancement);
     public override string Title => "Nibelung";
-    public override int BaseDeviceBonus => 5;
+    public override int UseDevice => 5;
     public override int BaseSaveBonus => 10;
     public override int BaseStealthBonus => 1;
     public override int BaseSearchBonus => 5;
     public override int BaseSearchFrequency => 10;
-    public override int BaseMeleeAttackBonus => 9;
+    public override int MeleeToHit => 9;
     public override int BaseRangedAttackBonus => 0;
     public override int HitDieBonus => 11;
     public override int ExperienceFactor => 135;

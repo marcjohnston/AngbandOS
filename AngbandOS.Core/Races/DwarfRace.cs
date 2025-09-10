@@ -12,12 +12,12 @@ internal class DwarfRace : Race
     private DwarfRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(DwarfRaceItemEnhancement);
     public override string Title => "Dwarf";
-    public override int BaseDeviceBonus => 9;
+    public override int UseDevice => 9;
     public override int BaseSaveBonus => 10;
     public override int BaseStealthBonus => -1;
     public override int BaseSearchBonus => 7;
     public override int BaseSearchFrequency => 10;
-    public override int BaseMeleeAttackBonus => 15;
+    public override int MeleeToHit => 15;
     public override int BaseRangedAttackBonus => 0;
     public override int HitDieBonus => 11;
     public override int ExperienceFactor => 125;

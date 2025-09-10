@@ -12,12 +12,12 @@ internal class ZombieRace : Race
     private ZombieRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(ZombieRaceItemEnhancement);
     public override string Title => "Zombie";
-    public override int BaseDeviceBonus => -5;
+    public override int UseDevice => -5;
     public override int BaseSaveBonus => 8;
     public override int BaseStealthBonus => -1;
     public override int BaseSearchBonus => -1;
     public override int BaseSearchFrequency => 5;
-    public override int BaseMeleeAttackBonus => 15;
+    public override int MeleeToHit => 15;
     public override int BaseRangedAttackBonus => 0;
     public override int HitDieBonus => 13;
     public override int ExperienceFactor => 135;

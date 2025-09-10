@@ -12,12 +12,12 @@ internal class DarkElfRace : Race
     private DarkElfRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(DarkElfRaceItemEnhancement);
     public override string Title => "Dark Elf";
-    public override int BaseDeviceBonus => 15;
+    public override int UseDevice => 15;
     public override int BaseSaveBonus => 20;
     public override int BaseStealthBonus => 3;
     public override int BaseSearchBonus => 8;
     public override int BaseSearchFrequency => 12;
-    public override int BaseMeleeAttackBonus => -5;
+    public override int MeleeToHit => -5;
     public override int BaseRangedAttackBonus => 10;
     public override int HitDieBonus => 9;
     public override int ExperienceFactor => 150;

@@ -12,12 +12,12 @@ internal class TchoTchoRace : Race
     private TchoTchoRace(Game game) : base(game) { }
     protected override string EnhancementBindingKey => nameof(TchoTchoRaceItemEnhancement);
     public override string Title => "Tcho-Tcho";
-    public override int BaseDeviceBonus => -10;
+    public override int UseDevice => -10;
     public override int BaseSaveBonus => 2;
     public override int BaseStealthBonus => -1;
     public override int BaseSearchBonus => 1;
     public override int BaseSearchFrequency => 7;
-    public override int BaseMeleeAttackBonus => 12;
+    public override int MeleeToHit => 12;
     public override int BaseRangedAttackBonus => 10;
     public override int HitDieBonus => 11;
     public override int ExperienceFactor => 120;

@@ -41,8 +41,8 @@ internal abstract class Race : IGetKey
 
     public abstract int AgeRange { get; }
     public abstract int BaseAge { get; }
-    public abstract int BaseDeviceBonus { get; }
-    public abstract int BaseMeleeAttackBonus { get; }
+    public abstract int UseDevice { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
+    public abstract int MeleeToHit { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
     public abstract int BaseRangedAttackBonus { get; }
     public abstract int BaseSaveBonus { get; }
     public abstract int BaseSearchBonus { get; }
@@ -106,9 +106,7 @@ internal abstract class Race : IGetKey
     /// <returns></returns>
     public virtual string[]? SelfKnowledge(int level) => null;
 
-    public virtual void CalcBonuses()
-    {
-    }
+    public virtual void CalcBonuses() { }
 
     /// <summary>
     /// Returns true, if the race rests until dusk instead of dawn.  Vampires, zombies, spectres and skeletons return true.  Returns false, by default.
