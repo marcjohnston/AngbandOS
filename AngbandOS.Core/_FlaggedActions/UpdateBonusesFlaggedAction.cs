@@ -116,8 +116,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasLightningImmunity = false;
         Game.HasFireImmunity = false;
         Game.HasColdImmunity = false;
-        Game.InfravisionRange = Game.Race.Infravision;
-        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value + Game.BaseCharacterClass.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value;
+        Game.InfravisionRange = Game.Race.Infravision; // done
+        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value + Game.BaseCharacterClass.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value; // done
         Game.SkillUseDevice = Game.Race.BaseDeviceBonus + Game.BaseCharacterClass.BaseDeviceBonus;
         Game.SkillSavingThrow = Game.Race.BaseSaveBonus + Game.BaseCharacterClass.BaseSaveBonus;
         Game.SkillStealth = Game.Race.BaseStealthBonus + Game.BaseCharacterClass.BaseStealthBonus;
