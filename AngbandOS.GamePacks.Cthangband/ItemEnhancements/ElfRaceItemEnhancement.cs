@@ -11,4 +11,5 @@ public class ElfRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => 3300;
     public override string? Infravision => "3";
     public override string? DisarmTraps => "5";
+    public override string? UseDevice => "6";
 }

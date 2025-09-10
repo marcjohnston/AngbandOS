@@ -110,10 +110,12 @@ internal class EffectiveAttributeSet
         RegisterIntPropertyFactory(AttributeEnum.Infravision);
         RegisterIntPropertyFactory(AttributeEnum.Intelligence);
         RegisterBoolPropertyFactory(AttributeEnum.IsCursed);
+        RegisterIntPropertyFactory(AttributeEnum.MeleeToHit);
         RegisterBoolPropertyFactory(AttributeEnum.NoMagic);
         RegisterBoolPropertyFactory(AttributeEnum.NoTele);
         RegisterBoolPropertyFactory(AttributeEnum.PermaCurse);
         RegisterIntPropertyFactory(AttributeEnum.Radius);
+        RegisterIntPropertyFactory(AttributeEnum.RangedToHit);
         RegisterBoolPropertyFactory(AttributeEnum.Reflect);
         RegisterBoolPropertyFactory(AttributeEnum.Regen);
         RegisterBoolPropertyFactory(AttributeEnum.ResAcid);
@@ -132,7 +134,9 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.ResPois);
         RegisterBoolPropertyFactory(AttributeEnum.ResShards);
         RegisterBoolPropertyFactory(AttributeEnum.ResSound);
+        RegisterIntPropertyFactory(AttributeEnum.SavingThrow);
         RegisterIntPropertyFactory(AttributeEnum.Search);
+        RegisterIntPropertyFactory(AttributeEnum.SearchFrequency);
         RegisterBoolPropertyFactory(AttributeEnum.SeeInvis);
         RegisterBoolPropertyFactory(AttributeEnum.ShElec);
         RegisterBoolPropertyFactory(AttributeEnum.ShFire);
@@ -157,10 +161,11 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.SustWis);
         RegisterBoolPropertyFactory(AttributeEnum.Telepathy);
         RegisterBoolPropertyFactory(AttributeEnum.Teleport);
+        RegisterIntPropertyFactory(AttributeEnum.ThrowingToHit);
         RegisterIntPropertyFactory(AttributeEnum.ToDamage);
-        RegisterIntPropertyFactory(AttributeEnum.MeleeToHit);
         RegisterIntPropertyFactory(AttributeEnum.TreasureRating);
         RegisterIntPropertyFactory(AttributeEnum.Tunnel);
+        RegisterIntPropertyFactory(AttributeEnum.UseDevice);
         RegisterIntPropertyFactory(AttributeEnum.Value);
         RegisterBoolPropertyFactory(AttributeEnum.Valueless);
         RegisterBoolPropertyFactory(AttributeEnum.Vampiric);

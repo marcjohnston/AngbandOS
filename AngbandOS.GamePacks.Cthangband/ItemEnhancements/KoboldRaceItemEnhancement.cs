@@ -11,4 +11,5 @@ public class KoboldRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => -600;
     public override string? Infravision => "3";
     public override string? DisarmTraps => "-2";
+    public override string? UseDevice => "-3";
 }

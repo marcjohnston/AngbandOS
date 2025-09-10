@@ -11,4 +11,5 @@ public class YeekRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => -4350;
     public override string? Infravision => "2";
     public override string? DisarmTraps => "2";
+    public override string? UseDevice => "4";
 }

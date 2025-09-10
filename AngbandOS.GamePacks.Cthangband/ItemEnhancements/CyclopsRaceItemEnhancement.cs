@@ -11,4 +11,5 @@ public class CyclopsRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => -3900;
     public override string? Infravision => "1";
     public override string? DisarmTraps => "-4";
+    public override string? UseDevice => "-5";
 }

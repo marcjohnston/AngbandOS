@@ -126,6 +126,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Telepathy = itemEnhancementGameConfiguration.Telepathy;
         Teleport = itemEnhancementGameConfiguration.Teleport;
         TreasureRating = itemEnhancementGameConfiguration.TreasureRating;
+        UseDevice = itemEnhancementGameConfiguration.UseDevice;
         Value = itemEnhancementGameConfiguration.Value;
         Valueless = itemEnhancementGameConfiguration.Valueless;
         Vampiric = itemEnhancementGameConfiguration.Vampiric;
@@ -171,6 +172,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusArmorClass, BonusArmorClassExpression == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.MeleeToHit, BonusHitsExpression == null ? 0 : Game.ComputeIntegerExpression(BonusHitsExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.ToDamage, BonusDamageExpression == null ? 0 : Game.ComputeIntegerExpression(BonusDamageExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.UseDevice, UseDeviceExpression == null ? 0 : Game.ComputeIntegerExpression(UseDeviceExpression).Value);
         itemCharacteristics.SetReferenceAttributeValue(AttributeEnum.ArtifactBias, ArtifactBiasWeightedRandom?.ChooseOrDefault());
 
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.CanApplyBlessedArtifactBias, CanApplyBlessedArtifactBias);
@@ -297,6 +299,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         SpeedExpression = Game.ParseNullableNumericExpression(Speed);
         BaseArmorClassExpression = Game.ParseNullableNumericExpression(BaseArmorClass);
         DisarmTrapsExpression = Game.ParseNullableNumericExpression(DisarmTraps);
+        UseDeviceExpression = Game.ParseNullableNumericExpression(UseDevice);
 
         HatesAcidExpression = Game.ParseNullableBooleanExpression(HatesAcid);
         HatesColdExpression = Game.ParseNullableBooleanExpression(HatesCold);
@@ -425,6 +428,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Telepathy = Telepathy,
             Teleport = Teleport,
             TreasureRating = TreasureRating,
+            UseDevice = UseDevice,
             Value = Value,
             Valueless = Valueless,
             Vampiric = Vampiric,
@@ -459,6 +463,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private Expression? AttacksExpression { get; set; } = null;
     private Expression? SpeedExpression { get; set; } = null;
     private Expression? BaseArmorClassExpression { get; set; } = null;
+    private Expression? UseDeviceExpression { get; set; } = null;
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
@@ -811,6 +816,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 
     /// <inheritdoc />
     private int? TreasureRating { get; }
+    private string? UseDevice { get; }
 
     /// <inheritdoc />
     private bool? Valueless { get; }

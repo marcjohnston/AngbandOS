@@ -11,4 +11,5 @@ public class HalfOrcRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => 600;
     public override string? Infravision => "3";
     public override string? DisarmTraps => "-3";
+    public override string? UseDevice => "-3";
 }

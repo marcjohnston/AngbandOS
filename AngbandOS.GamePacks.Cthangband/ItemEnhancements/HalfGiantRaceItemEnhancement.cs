@@ -11,4 +11,5 @@ public class HalfGiantRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => -150;
     public override string? Infravision => "3";
     public override string? DisarmTraps => "-6";
+    public override string? UseDevice => "-8";
 }

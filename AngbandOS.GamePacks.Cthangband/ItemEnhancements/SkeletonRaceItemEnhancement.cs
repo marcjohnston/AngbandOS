@@ -11,4 +11,5 @@ public class SkeletonRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => -5400;
     public override string? Infravision => "2";
     public override string? DisarmTraps => "-5";
+    public override string? UseDevice => "-5";
 }

@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Diagnostics;
-
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -32,9 +30,9 @@ internal abstract class Race : IGetKey
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
 
         // Cut and paste
-        string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\Races\", Key, "public override int BaseDisarmBonus => ");
-        if (prop1 is not null)
-            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? DisarmTraps => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
+        //string? prop1 = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\Races\", Key, "public override int BaseDeviceBonus => ");
+        //if (prop1 is not null)
+        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? UseDevice => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
     }
     public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
 

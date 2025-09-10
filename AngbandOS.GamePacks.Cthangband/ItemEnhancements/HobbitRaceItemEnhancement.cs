@@ -11,4 +11,5 @@ public class HobbitRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => 7650;
     public override string? Infravision => "4";
     public override string? DisarmTraps => "15";
+    public override string? UseDevice => "18";
 }

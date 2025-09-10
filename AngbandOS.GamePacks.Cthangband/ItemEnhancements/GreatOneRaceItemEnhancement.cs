@@ -10,4 +10,5 @@ public class GreatOneRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string Dexterity => "2";
     public override int? Value => 12900;
     public override string? DisarmTraps => "4";
+    public override string? UseDevice => "5";
 }

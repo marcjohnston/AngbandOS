@@ -11,4 +11,5 @@ public class KlackonRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => 2700;
     public override string? Infravision => "2";
     public override string? DisarmTraps => "10";
+    public override string? UseDevice => "5";
 }

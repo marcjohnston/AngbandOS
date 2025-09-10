@@ -11,4 +11,5 @@ public class SpectreRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => -300;
     public override string? Infravision => "5";
     public override string? DisarmTraps => "10";
+    public override string? UseDevice => "25";
 }
