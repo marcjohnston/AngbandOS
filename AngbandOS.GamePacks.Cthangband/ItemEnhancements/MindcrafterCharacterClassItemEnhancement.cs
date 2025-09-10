@@ -12,4 +12,6 @@ public class MindcrafterCharacterClassItemEnhancement : ItemEnhancementGameConfi
     public override string Dexterity => "-1";
     public override int? Value => 900;
     public override string? DisarmTraps => "30";
+    public override string? UseDevice => "30";
+    public override string? SavingThrow => "30";
 }

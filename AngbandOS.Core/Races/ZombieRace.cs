@@ -13,12 +13,12 @@ internal class ZombieRace : Race
     protected override string EnhancementBindingKey => nameof(ZombieRaceItemEnhancement);
     public override string Title => "Zombie";
     public override int UseDevice => -5;
-    public override int BaseSaveBonus => 8;
-    public override int BaseStealthBonus => -1;
-    public override int BaseSearchBonus => -1;
+    public override int SavingThrow => 8;
+    public override int Stealth => -1;
+    public override int Search => -1;
     public override int BaseSearchFrequency => 5;
     public override int MeleeToHit => 15;
-    public override int BaseRangedAttackBonus => 0;
+    public override int RangedToHit => 0;
     public override int HitDieBonus => 13;
     public override int ExperienceFactor => 135;
     public override int BaseAge => 100;

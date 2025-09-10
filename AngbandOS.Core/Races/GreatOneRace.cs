@@ -13,12 +13,12 @@ internal class GreatOneRace : Race
     protected override string EnhancementBindingKey => nameof(GreatOneRaceItemEnhancement);
     public override string Title => "Great One";
     public override int UseDevice => 5;
-    public override int BaseSaveBonus => 5;
-    public override int BaseStealthBonus => 2;
-    public override int BaseSearchBonus => 3;
+    public override int SavingThrow => 5;
+    public override int Stealth => 2;
+    public override int Search => 3;
     public override int BaseSearchFrequency => 13;
     public override int MeleeToHit => 15;
-    public override int BaseRangedAttackBonus => 10;
+    public override int RangedToHit => 10;
     public override int HitDieBonus => 10;
     public override int ExperienceFactor => 225;
     public override int BaseAge => 50;

@@ -12,4 +12,6 @@ public class FanaticCharacterClassItemEnhancement : ItemEnhancementGameConfigura
     public override string Dexterity => "1";
     public override int? Value => 6300;
     public override string? DisarmTraps => "20";
+    public override string? UseDevice => "24";
+    public override string? SavingThrow => "30";
 }

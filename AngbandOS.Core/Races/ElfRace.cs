@@ -13,12 +13,12 @@ internal class ElfRace : Race
     protected override string EnhancementBindingKey => nameof(ElfRaceItemEnhancement);
     public override string Title => "Elf";
     public override int UseDevice => 6;
-    public override int BaseSaveBonus => 6;
-    public override int BaseStealthBonus => 2;
-    public override int BaseSearchBonus => 8;
+    public override int SavingThrow => 6;
+    public override int Stealth => 2;
+    public override int Search => 8;
     public override int BaseSearchFrequency => 12;
     public override int MeleeToHit => -5;
-    public override int BaseRangedAttackBonus => 15;
+    public override int RangedToHit => 15;
     public override int HitDieBonus => 8;
     public override int ExperienceFactor => 120;
     public override int BaseAge => 75;

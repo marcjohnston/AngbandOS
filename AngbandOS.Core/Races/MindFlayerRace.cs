@@ -13,12 +13,12 @@ internal class MindFlayerRace : Race
     protected override string EnhancementBindingKey => nameof(MindFlayerRaceItemEnhancement);
     public override string Title => "Mind Flayer";
     public override int UseDevice => 25;
-    public override int BaseSaveBonus => 15;
-    public override int BaseStealthBonus => 2;
-    public override int BaseSearchBonus => 5;
+    public override int SavingThrow => 15;
+    public override int Stealth => 2;
+    public override int Search => 5;
     public override int BaseSearchFrequency => 12;
     public override int MeleeToHit => -10;
-    public override int BaseRangedAttackBonus => -5;
+    public override int RangedToHit => -5;
     public override int HitDieBonus => 9;
     public override int ExperienceFactor => 140;
     public override int BaseAge => 100;

@@ -118,14 +118,14 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasColdImmunity = false;
         Game.InfravisionRange = Game.Race.Infravision; // done
         Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value + Game.BaseCharacterClass.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value; // done
-        Game.SkillUseDevice = Game.Race.UseDevice + Game.BaseCharacterClass.BaseDeviceBonus; // done
-        Game.SkillSavingThrow = Game.Race.BaseSaveBonus + Game.BaseCharacterClass.BaseSaveBonus; // done
-        Game.SkillStealth = Game.Race.BaseStealthBonus + Game.BaseCharacterClass.BaseStealthBonus; // done
-        Game.SkillSearching = Game.Race.BaseSearchBonus + Game.BaseCharacterClass.BaseSearchBonus; // done
+        Game.SkillUseDevice = Game.Race.UseDevice + Game.BaseCharacterClass.UseDevice; // done
+        Game.SkillSavingThrow = Game.Race.SavingThrow + Game.BaseCharacterClass.SavingThrow; // done
+        Game.SkillStealth = Game.Race.Stealth + Game.BaseCharacterClass.Stealth; // done .. need to copy
+        Game.SkillSearching = Game.Race.Search + Game.BaseCharacterClass.Search; // done .. need to copy
         Game.SkillSearchFrequency = Game.Race.BaseSearchFrequency + Game.BaseCharacterClass.BaseSearchFrequency; // added to attributes
-        Game.SkillMelee = Game.Race.MeleeToHit + Game.BaseCharacterClass.BaseMeleeAttackBonus; // this appears to be tohit
-        Game.SkillRanged = Game.Race.BaseRangedAttackBonus + Game.BaseCharacterClass.BaseRangedAttackBonus; // added rangedtohit
-        Game.SkillThrowing = Game.Race.BaseRangedAttackBonus + Game.BaseCharacterClass.BaseRangedAttackBonus; // added throwingtohit
+        Game.SkillMelee = Game.Race.MeleeToHit + Game.BaseCharacterClass.MeleeToHit; // this appears to be tohit
+        Game.SkillRanged = Game.Race.RangedToHit + Game.BaseCharacterClass.RangedToHit; // added rangedtohit
+        Game.SkillThrowing = Game.Race.RangedToHit + Game.BaseCharacterClass.RangedToHit; // added throwingtohit
         Game.SkillDigging = 0;
         Game.BaseCharacterClass.CalcBonuses();
         Game.Race.CalcBonuses();

@@ -13,12 +13,12 @@ internal class SpriteRace : Race
     protected override string EnhancementBindingKey => nameof(SpriteRaceItemEnhancement);
     public override string Title => "Sprite";
     public override int UseDevice => 10;
-    public override int BaseSaveBonus => 10;
-    public override int BaseStealthBonus => 4;
-    public override int BaseSearchBonus => 10;
+    public override int SavingThrow => 10;
+    public override int Stealth => 4;
+    public override int Search => 10;
     public override int BaseSearchFrequency => 10;
     public override int MeleeToHit => -12;
-    public override int BaseRangedAttackBonus => 0;
+    public override int RangedToHit => 0;
     public override int HitDieBonus => 7;
     public override int ExperienceFactor => 175;
     public override int BaseAge => 50;

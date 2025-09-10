@@ -13,12 +13,12 @@ internal class DraconianRace : Race
     protected override string EnhancementBindingKey => nameof(DraconianRaceItemEnhancement);
     public override string Title => "Draconian";
     public override int UseDevice => 5;
-    public override int BaseSaveBonus => 3;
-    public override int BaseStealthBonus => 0;
-    public override int BaseSearchBonus => 1;
+    public override int SavingThrow => 3;
+    public override int Stealth => 0;
+    public override int Search => 1;
     public override int BaseSearchFrequency => 10;
     public override int MeleeToHit => 5;
-    public override int BaseRangedAttackBonus => 5;
+    public override int RangedToHit => 5;
     public override int HitDieBonus => 11;
     public override int ExperienceFactor => 250;
     public override int BaseAge => 75;

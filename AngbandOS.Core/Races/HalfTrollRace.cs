@@ -13,12 +13,12 @@ internal class HalfTrollRace : Race
     protected override string EnhancementBindingKey => nameof(HalfTrollRaceItemEnhancement);
     public override string Title => "Half Troll";
     public override int UseDevice => -8;
-    public override int BaseSaveBonus => -8;
-    public override int BaseStealthBonus => -2;
-    public override int BaseSearchBonus => -1;
+    public override int SavingThrow => -8;
+    public override int Stealth => -2;
+    public override int Search => -1;
     public override int BaseSearchFrequency => 5;
     public override int MeleeToHit => 20;
-    public override int BaseRangedAttackBonus => -10;
+    public override int RangedToHit => -10;
     public override int HitDieBonus => 12;
     public override int ExperienceFactor => 137;
     public override int BaseAge => 20;

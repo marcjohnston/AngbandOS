@@ -13,12 +13,12 @@ internal class GolemRace : Race
     protected override string EnhancementBindingKey => nameof(GolemRaceItemEnhancement);
     public override string Title => "Golem";
     public override int UseDevice => -5;
-    public override int BaseSaveBonus => 10;
-    public override int BaseStealthBonus => -1;
-    public override int BaseSearchBonus => -1;
+    public override int SavingThrow => 10;
+    public override int Stealth => -1;
+    public override int Search => -1;
     public override int BaseSearchFrequency => 8;
     public override int MeleeToHit => 20;
-    public override int BaseRangedAttackBonus => 0;
+    public override int RangedToHit => 0;
     public override int HitDieBonus => 12;
     public override int ExperienceFactor => 200;
     public override int BaseAge => 1;

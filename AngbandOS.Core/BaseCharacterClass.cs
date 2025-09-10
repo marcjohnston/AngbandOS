@@ -386,10 +386,10 @@ internal abstract class BaseCharacterClass : IGetKey
         MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
 
-        //// Cut and paste
-        //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\CharacterClasses\", Key, "public override int BaseDisarmBonus => ");
+        // Cut and paste
+        //string? prop1 = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\CharacterClasses\", Key, "public override int BaseSaveBonus => ");
         //if (prop1 is not null)
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? DisarmTraps => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
+        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? SavingThrow => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
 
         //        foreach (string ability in new string[] { "Strength", "Charisma", "Constitution", "Wisdom", "Intelligence", "Dexterity" })
         //        {
@@ -572,19 +572,19 @@ internal abstract class BaseCharacterClass : IGetKey
     /// </summary>
     public virtual bool OutfitsWithScrollsOfLight => false;
 
-    public abstract int BaseDeviceBonus { get; }
+    public abstract int UseDevice { get; }
 
-    public abstract int BaseMeleeAttackBonus { get; }
+    public abstract int MeleeToHit { get; }
 
-    public abstract int BaseRangedAttackBonus { get; }
+    public abstract int RangedToHit { get; }
 
-    public abstract int BaseSaveBonus { get; }
+    public abstract int SavingThrow { get; }
 
-    public abstract int BaseSearchBonus { get; }
+    public abstract int Search { get; }
 
     public abstract int BaseSearchFrequency { get; }
 
-    public abstract int BaseStealthBonus { get; }
+    public abstract int Stealth { get; }
 
     public abstract int DeviceBonusPerLevel { get; }
 

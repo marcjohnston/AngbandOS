@@ -13,12 +13,12 @@ internal class HalfOgreRace : Race
     protected override string EnhancementBindingKey => nameof(HalfOgreRaceItemEnhancement);
     public override string Title => "Half Ogre";
     public override int UseDevice => -5;
-    public override int BaseSaveBonus => -5;
-    public override int BaseStealthBonus => -2;
-    public override int BaseSearchBonus => -1;
+    public override int SavingThrow => -5;
+    public override int Stealth => -2;
+    public override int Search => -1;
     public override int BaseSearchFrequency => 5;
     public override int MeleeToHit => 20;
-    public override int BaseRangedAttackBonus => 0;
+    public override int RangedToHit => 0;
     public override int HitDieBonus => 12;
     public override int ExperienceFactor => 130;
     public override int BaseAge => 40;

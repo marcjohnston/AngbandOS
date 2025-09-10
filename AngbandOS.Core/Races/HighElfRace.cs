@@ -13,12 +13,12 @@ internal class HighElfRace : Race
     protected override string EnhancementBindingKey => nameof(HighElfRaceItemEnhancement);
     public override string Title => "High Elf";
     public override int UseDevice => 20;
-    public override int BaseSaveBonus => 20;
-    public override int BaseStealthBonus => 4;
-    public override int BaseSearchBonus => 3;
+    public override int SavingThrow => 20;
+    public override int Stealth => 4;
+    public override int Search => 3;
     public override int BaseSearchFrequency => 14;
     public override int MeleeToHit => 10;
-    public override int BaseRangedAttackBonus => 25;
+    public override int RangedToHit => 25;
     public override int HitDieBonus => 10;
     public override int ExperienceFactor => 200;
     public override int BaseAge => 100;

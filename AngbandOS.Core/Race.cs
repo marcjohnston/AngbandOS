@@ -30,9 +30,9 @@ internal abstract class Race : IGetKey
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
 
         // Cut and paste
-        string? prop1 = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\Races\", Key, "public override int BaseSearchBonus => ");
-        if (prop1 is not null)
-            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? Search => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
+        //string? prop1 = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\Races\", Key, "public override int BaseSearchBonus => ");
+        //if (prop1 is not null)
+        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? Search => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
     }
     public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
 
@@ -43,11 +43,11 @@ internal abstract class Race : IGetKey
     public abstract int BaseAge { get; }
     public abstract int UseDevice { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
     public abstract int MeleeToHit { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
-    public abstract int BaseRangedAttackBonus { get; }
-    public abstract int BaseSaveBonus { get; }
-    public abstract int BaseSearchBonus { get; }
+    public abstract int RangedToHit { get; }
+    public abstract int SavingThrow { get; }
+    public abstract int Search { get; }
     public abstract int BaseSearchFrequency { get; }
-    public abstract int BaseStealthBonus { get; }
+    public abstract int Stealth { get; }
     public abstract uint Choice { get; }
     public abstract int ExperienceFactor { get; }
     public abstract int HitDieBonus { get; }

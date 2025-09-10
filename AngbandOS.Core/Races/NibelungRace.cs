@@ -13,12 +13,12 @@ internal class NibelungRace : Race
     protected override string EnhancementBindingKey => nameof(NibelungRaceItemEnhancement);
     public override string Title => "Nibelung";
     public override int UseDevice => 5;
-    public override int BaseSaveBonus => 10;
-    public override int BaseStealthBonus => 1;
-    public override int BaseSearchBonus => 5;
+    public override int SavingThrow => 10;
+    public override int Stealth => 1;
+    public override int Search => 5;
     public override int BaseSearchFrequency => 10;
     public override int MeleeToHit => 9;
-    public override int BaseRangedAttackBonus => 0;
+    public override int RangedToHit => 0;
     public override int HitDieBonus => 11;
     public override int ExperienceFactor => 135;
     public override int BaseAge => 40;

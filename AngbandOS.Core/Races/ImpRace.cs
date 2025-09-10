@@ -13,12 +13,12 @@ internal class ImpRace : Race
     protected override string EnhancementBindingKey => nameof(ImpRaceItemEnhancement);
     public override string Title => "Imp";
     public override int UseDevice => 2;
-    public override int BaseSaveBonus => -1;
-    public override int BaseStealthBonus => 1;
-    public override int BaseSearchBonus => -1;
+    public override int SavingThrow => -1;
+    public override int Stealth => 1;
+    public override int Search => -1;
     public override int BaseSearchFrequency => 10;
     public override int MeleeToHit => 5;
-    public override int BaseRangedAttackBonus => -5;
+    public override int RangedToHit => -5;
     public override int HitDieBonus => 10;
     public override int ExperienceFactor => 110;
     public override int BaseAge => 13;

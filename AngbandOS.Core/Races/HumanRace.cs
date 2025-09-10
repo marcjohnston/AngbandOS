@@ -13,12 +13,12 @@ internal class HumanRace : Race
     protected override string EnhancementBindingKey => nameof(HumanRaceItemEnhancement);
     public override string Title => "Human";
     public override int UseDevice => 0;
-    public override int BaseSaveBonus => 0;
-    public override int BaseStealthBonus => 0;
-    public override int BaseSearchBonus => 0;
+    public override int SavingThrow => 0;
+    public override int Stealth => 0;
+    public override int Search => 0;
     public override int BaseSearchFrequency => 10;
     public override int MeleeToHit => 0;
-    public override int BaseRangedAttackBonus => 0;
+    public override int RangedToHit => 0;
     public override int HitDieBonus => 10;
     public override int ExperienceFactor => 100;
     public override int BaseAge => 14;

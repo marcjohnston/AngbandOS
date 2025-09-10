@@ -13,12 +13,12 @@ internal class YeekRace : Race
     protected override string EnhancementBindingKey => nameof(YeekRaceItemEnhancement);
     public override string Title => "Yeek";
     public override int UseDevice => 4;
-    public override int BaseSaveBonus => 10;
-    public override int BaseStealthBonus => 3;
-    public override int BaseSearchBonus => 5;
+    public override int SavingThrow => 10;
+    public override int Stealth => 3;
+    public override int Search => 5;
     public override int BaseSearchFrequency => 15;
     public override int MeleeToHit => -5;
-    public override int BaseRangedAttackBonus => -5;
+    public override int RangedToHit => -5;
     public override int HitDieBonus => 7;
     public override int ExperienceFactor => 100;
     public override int BaseAge => 14;

@@ -12,4 +12,6 @@ public class HighMageCharacterClassItemEnhancement : ItemEnhancementGameConfigur
     public override string Dexterity => "0";
     public override int? Value => -3150;
     public override string? DisarmTraps => "30";
+    public override string? UseDevice => "38";
+    public override string? SavingThrow => "30";
 }

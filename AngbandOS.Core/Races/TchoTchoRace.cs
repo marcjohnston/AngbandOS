@@ -13,12 +13,12 @@ internal class TchoTchoRace : Race
     protected override string EnhancementBindingKey => nameof(TchoTchoRaceItemEnhancement);
     public override string Title => "Tcho-Tcho";
     public override int UseDevice => -10;
-    public override int BaseSaveBonus => 2;
-    public override int BaseStealthBonus => -1;
-    public override int BaseSearchBonus => 1;
+    public override int SavingThrow => 2;
+    public override int Stealth => -1;
+    public override int Search => 1;
     public override int BaseSearchFrequency => 7;
     public override int MeleeToHit => 12;
-    public override int BaseRangedAttackBonus => 10;
+    public override int RangedToHit => 10;
     public override int HitDieBonus => 11;
     public override int ExperienceFactor => 120;
     public override int BaseAge => 14;

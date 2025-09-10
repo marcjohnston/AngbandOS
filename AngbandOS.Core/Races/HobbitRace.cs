@@ -13,12 +13,12 @@ internal class HobbitRace : Race
     protected override string EnhancementBindingKey => nameof(HobbitRaceItemEnhancement);
     public override string Title => "Hobbit";
     public override int UseDevice => 18;
-    public override int BaseSaveBonus => 18;
-    public override int BaseStealthBonus => 5;
-    public override int BaseSearchBonus => 12;
+    public override int SavingThrow => 18;
+    public override int Stealth => 5;
+    public override int Search => 12;
     public override int BaseSearchFrequency => 15;
     public override int MeleeToHit => -10;
-    public override int BaseRangedAttackBonus => 20;
+    public override int RangedToHit => 20;
     public override int HitDieBonus => 7;
     public override int ExperienceFactor => 110;
     public override int BaseAge => 21;

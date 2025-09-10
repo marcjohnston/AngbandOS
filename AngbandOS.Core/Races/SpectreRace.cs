@@ -13,12 +13,12 @@ internal class SpectreRace : Race
     protected override string EnhancementBindingKey => nameof(SpectreRaceItemEnhancement);
     public override string Title => "Spectre";
     public override int UseDevice => 25;
-    public override int BaseSaveBonus => 20;
-    public override int BaseStealthBonus => 5;
-    public override int BaseSearchBonus => 5;
+    public override int SavingThrow => 20;
+    public override int Stealth => 5;
+    public override int Search => 5;
     public override int BaseSearchFrequency => 14;
     public override int MeleeToHit => -15;
-    public override int BaseRangedAttackBonus => -5;
+    public override int RangedToHit => -5;
     public override int HitDieBonus => 7;
     public override int ExperienceFactor => 180;
     public override int BaseAge => 100;

@@ -85,11 +85,11 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "Searching   :", 39, 31);
         Game.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
         Game.DisplayAPlusB(67, 36, Game.BaseCharacterClass.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value + race.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value, Game.BaseCharacterClass.DisarmBonusPerLevel);
-        Game.DisplayAPlusB(67, 37, Game.BaseCharacterClass.BaseDeviceBonus + race.UseDevice, Game.BaseCharacterClass.DeviceBonusPerLevel);
-        Game.DisplayAPlusB(67, 38, Game.BaseCharacterClass.BaseSaveBonus + race.BaseSaveBonus, Game.BaseCharacterClass.SaveBonusPerLevel);
-        Game.DisplayAPlusB(67, 39, (Game.BaseCharacterClass.BaseStealthBonus * 4) + (race.BaseStealthBonus * 4), Game.BaseCharacterClass.StealthBonusPerLevel * 4);
-        Game.DisplayAPlusB(67, 40, Game.BaseCharacterClass.BaseMeleeAttackBonus + race.MeleeToHit, Game.BaseCharacterClass.MeleeAttackBonusPerLevel);
-        Game.DisplayAPlusB(67, 41, Game.BaseCharacterClass.BaseRangedAttackBonus + race.BaseRangedAttackBonus, Game.BaseCharacterClass.RangedAttackBonusPerLevel);
+        Game.DisplayAPlusB(67, 37, Game.BaseCharacterClass.UseDevice + race.UseDevice, Game.BaseCharacterClass.DeviceBonusPerLevel);
+        Game.DisplayAPlusB(67, 38, Game.BaseCharacterClass.SavingThrow + race.SavingThrow, Game.BaseCharacterClass.SaveBonusPerLevel);
+        Game.DisplayAPlusB(67, 39, (Game.BaseCharacterClass.Stealth * 4) + (race.Stealth * 4), Game.BaseCharacterClass.StealthBonusPerLevel * 4);
+        Game.DisplayAPlusB(67, 40, Game.BaseCharacterClass.MeleeToHit + race.MeleeToHit, Game.BaseCharacterClass.MeleeAttackBonusPerLevel);
+        Game.DisplayAPlusB(67, 41, Game.BaseCharacterClass.RangedToHit + race.RangedToHit, Game.BaseCharacterClass.RangedAttackBonusPerLevel);
         Game.Screen.Print(ColorEnum.Black, race.ExperienceFactor + Game.BaseCharacterClass.ExperienceFactor + "%", 36, 45);
         Game.Screen.Print(ColorEnum.Black, "1d" + (race.HitDieBonus + Game.BaseCharacterClass.HitDieBonus), 37, 45);
         int bonusInfravision = race.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.Infravision).Value;
@@ -101,7 +101,7 @@ internal class RaceSelectionBirthStage : BirthStage
         {
             Game.Screen.Print(ColorEnum.Green, bonusInfravision + "0 feet", 38, 45); // TODO: This assumes a 10 foot per unit of infravision conversion that should be configurable.
         }
-        Game.Screen.Print(ColorEnum.Black, $"{race.BaseSearchBonus + Game.BaseCharacterClass.BaseSearchBonus:00}%", 39, 45);
+        Game.Screen.Print(ColorEnum.Black, $"{race.Search + Game.BaseCharacterClass.Search:00}%", 39, 45);
         Game.Screen.Print(ColorEnum.Black, $"{race.BaseSearchFrequency + Game.BaseCharacterClass.BaseSearchFrequency:00}%", 40, 45);
 
         // Retrieve the description for the race and split the description into lines.

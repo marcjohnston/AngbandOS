@@ -12,4 +12,6 @@ public class PriestCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
     public override string Dexterity => "-1";
     public override int? Value => -1500;
     public override string? DisarmTraps => "25";
+    public override string? UseDevice => "30";
+    public override string? SavingThrow => "32";
 }

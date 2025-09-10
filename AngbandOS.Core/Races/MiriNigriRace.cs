@@ -13,12 +13,12 @@ internal class MiriNigriRace : Race
     protected override string EnhancementBindingKey => nameof(MiriNigriRaceItemEnhancement);
     public override string Title => "Miri Nigri";
     public override int UseDevice => -2;
-    public override int BaseSaveBonus => -1;
-    public override int BaseStealthBonus => -1;
-    public override int BaseSearchBonus => -1;
+    public override int SavingThrow => -1;
+    public override int Stealth => -1;
+    public override int Search => -1;
     public override int BaseSearchFrequency => 5;
     public override int MeleeToHit => 12;
-    public override int BaseRangedAttackBonus => 5;
+    public override int RangedToHit => 5;
     public override int HitDieBonus => 11;
     public override int ExperienceFactor => 140;
     public override int BaseAge => 14;
