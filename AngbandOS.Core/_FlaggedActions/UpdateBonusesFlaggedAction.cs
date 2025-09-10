@@ -150,8 +150,8 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillSearching += Game.SearchBonus;
         Game.InfravisionRange += Game.MutationInfravisionBonus;
         Game.HasElectricitySheath |= Game.ElecHit;
-        Game.HasFireSheath |= Game.FireHit;
-        if (Game.GlowInTheDarkRadius == 0 && Game.FireHit)
+        Game.HasFireSheath |= Game.MutationFireHit;
+        if (Game.GlowInTheDarkRadius == 0 && Game.HasFireSheath)
         {
             Game.GlowInTheDarkRadius = 1;
         }

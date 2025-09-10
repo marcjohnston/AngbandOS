@@ -183,7 +183,7 @@ internal class Game
     public bool ElecHit;
     public bool Esp;
     public bool FeatherFall;
-    public bool FireHit;
+    public bool MutationFireHit;
     public bool MutationFreeAction;
     public int MutationInfravisionBonus;
     public int IntelligenceBonus;
@@ -13739,7 +13739,7 @@ internal class Game
         {
             itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ShElec, true);
         }
-        if (FireHit)
+        if (HasFireSheath)
         {
             itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ShFire, true);
             itemCharacteristics.Radius = 2;

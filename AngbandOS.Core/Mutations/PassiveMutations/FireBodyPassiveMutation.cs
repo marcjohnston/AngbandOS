@@ -17,11 +17,11 @@ internal class FireBodyPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        Game.FireHit = true;
+        Game.MutationFireHit = true;
     }
 
     public override void OnLose()
     {
-        Game.FireHit = false;
+        Game.MutationFireHit = false;
     }
 }
