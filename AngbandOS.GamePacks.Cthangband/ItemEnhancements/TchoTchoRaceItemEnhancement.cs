@@ -11,4 +11,5 @@ public class TchoTchoRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => 2700;
     public override string? DisarmTraps => "-2";
     public override string? UseDevice => "-10";
+    public override string? SavingThrow => "2";
 }

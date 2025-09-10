@@ -30,9 +30,9 @@ internal abstract class Race : IGetKey
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
 
         // Cut and paste
-        //string? prop1 = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\Races\", Key, "public override int BaseDeviceBonus => ");
+        //string? prop1 = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\Races\", Key, "public override int BaseSaveBonus => ");
         //if (prop1 is not null)
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? UseDevice => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
+        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? SavingThrow => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
     }
     public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
 

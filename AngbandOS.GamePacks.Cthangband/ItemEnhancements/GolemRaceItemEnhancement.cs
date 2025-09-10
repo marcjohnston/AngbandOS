@@ -12,4 +12,5 @@ public class GolemRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? Infravision => "4";
     public override string? DisarmTraps => "-5";
     public override string? UseDevice => "-5";
+    public override string? SavingThrow => "10";
 }

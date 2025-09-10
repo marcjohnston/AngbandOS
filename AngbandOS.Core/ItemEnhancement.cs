@@ -20,6 +20,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Key = itemEnhancementGameConfiguration.Key ?? itemEnhancementGameConfiguration.GetType().Name;
 
         DisarmTraps = itemEnhancementGameConfiguration.DisarmTraps;
+        SavingThrow = itemEnhancementGameConfiguration.SavingThrow;
         ActivationName = itemEnhancementGameConfiguration.ActivationName;
         AdditionalItemEnhancementWeightedRandomBindingKey = itemEnhancementGameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
         Aggravate = itemEnhancementGameConfiguration.Aggravate;
@@ -173,6 +174,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.MeleeToHit, MeleeToHitExpression == null ? 0 : Game.ComputeIntegerExpression(MeleeToHitExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.ToDamage, BonusDamageExpression == null ? 0 : Game.ComputeIntegerExpression(BonusDamageExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.UseDevice, UseDeviceExpression == null ? 0 : Game.ComputeIntegerExpression(UseDeviceExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.SavingThrow, SavingThrowExpression == null ? 0 : Game.ComputeIntegerExpression(SavingThrowExpression).Value);
         itemCharacteristics.SetReferenceAttributeValue(AttributeEnum.ArtifactBias, ArtifactBiasWeightedRandom?.ChooseOrDefault());
 
         itemCharacteristics.SetBoolAttributeValue(AttributeEnum.CanApplyBlessedArtifactBias, CanApplyBlessedArtifactBias);
@@ -300,6 +302,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BaseArmorClassExpression = Game.ParseNullableNumericExpression(BaseArmorClass);
         DisarmTrapsExpression = Game.ParseNullableNumericExpression(DisarmTraps);
         UseDeviceExpression = Game.ParseNullableNumericExpression(UseDevice);
+        SavingThrowExpression = Game.ParseNullableNumericExpression(SavingThrow);
 
         HatesAcidExpression = Game.ParseNullableBooleanExpression(HatesAcid);
         HatesColdExpression = Game.ParseNullableBooleanExpression(HatesCold);
@@ -319,61 +322,52 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     {
         ItemEnhancementGameConfiguration itemEnhancementDefinition = new()
         {
-            CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias,
-            ArtifactBiasSlayingDisabled = ArtifactBiasSlayingDisabled,
-            CanApplyBlowsBonus = CanApplyBlowsBonus,
-            CanReflectBoltsAndArrows = CanReflectBoltsAndArrows,
-            CanApplySlayingBonus = CanApplySlayingBonus,
-            CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower,
-
             Key = Key,
-            DisarmTraps = DisarmTraps,
-            ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
-            AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,
-            FriendlyName = FriendlyName,
-            Strength = Strength,
-            Intelligence = Intelligence,
-            Wisdom = Wisdom,
-            Dexterity = Dexterity,
-            Constitution = Constitution,
-            Charisma = Charisma,
-            Stealth = Stealth,
-            Search = Search,
-            Infravision = Infravision,
-            Tunnel = Tunnel,
-            Attacks = Attacks,
-            Speed = Speed,
-            BonusArmorClass = BonusArmorClass,
-            Hits = MeleeToHit,
-            Damage = ToDamage,
-            BaseArmorClass = BaseArmorClass,
+
             ActivationName = ActivationName,
+            AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,
             Aggravate = Aggravate,
             AntiTheft = AntiTheft,
+            ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
+            ArtifactBiasSlayingDisabled = ArtifactBiasSlayingDisabled,
             ArtifactBiasWeightedRandomBindingKey = ArtifactBiasWeightedRandomBindingKey,
+            Attacks = Attacks,
+            BaseArmorClass = BaseArmorClass,
             Blessed = Blessed,
             Blows = Blows,
+            BonusArmorClass = BonusArmorClass,
             BrandAcid = BrandAcid,
             BrandCold = BrandCold,
             BrandElec = BrandElec,
             BrandFire = BrandFire,
             BrandPois = BrandPois,
+            CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias,
+            CanApplyBlowsBonus = CanApplyBlowsBonus,
+            CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower,
+            CanApplySlayingBonus = CanApplySlayingBonus,
+            CanReflectBoltsAndArrows = CanReflectBoltsAndArrows,
             Chaotic = Chaotic,
+            Charisma = Charisma,
             Color = Color,
-            IsCursed = IsCursed,
+            Constitution = Constitution,
+            Damage = ToDamage,
             DamageDice = DamageDice,
+            Dexterity = Dexterity,
             DiceSides = DiceSides,
+            DisarmTraps = DisarmTraps,
             DrainExp = DrainExp,
             DreadCurse = DreadCurse,
             EasyKnow = EasyKnow,
             Feather = Feather,
             FreeAct = FreeAct,
-            HeavyCurse = HeavyCurse,
+            FriendlyName = FriendlyName,
             HatesAcid = HatesAcid,
             HatesCold = HatesCold,
             HatesElectricity = HatesElectricity,
             HatesFire = HatesFire,
+            HeavyCurse = HeavyCurse,
             HideType = HideType,
+            Hits = MeleeToHit,
             HoldLife = HoldLife,
             IgnoreAcid = IgnoreAcid,
             IgnoreCold = IgnoreCold,
@@ -384,6 +378,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ImElec = ImElec,
             ImFire = ImFire,
             Impact = Impact,
+            Infravision = Infravision,
+            Intelligence = Intelligence,
+            IsCursed = IsCursed,
             NoMagic = NoMagic,
             NoTele = NoTele,
             PermaCurse = PermaCurse,
@@ -406,6 +403,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ResPois = ResPois,
             ResShards = ResShards,
             ResSound = ResSound,
+            SavingThrow = SavingThrow,
+            Search = Search,
             SeeInvis = SeeInvis,
             ShElec = ShElec,
             ShFire = ShFire,
@@ -419,6 +418,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             SlayTroll = SlayTroll,
             SlayUndead = SlayUndead,
             SlowDigest = SlowDigest,
+            Speed = Speed,
+            Stealth = Stealth,
+            Strength = Strength,
             SustCha = SustCha,
             SustCon = SustCon,
             SustDex = SustDex,
@@ -428,12 +430,14 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Telepathy = Telepathy,
             Teleport = Teleport,
             TreasureRating = TreasureRating,
+            Tunnel = Tunnel,
             UseDevice = UseDevice,
             Value = Value,
             Valueless = Valueless,
             Vampiric = Vampiric,
             Vorpal1InChance = Vorpal1InChance,
             Weight = Weight,
+            Wisdom = Wisdom,
             Wraith = Wraith,
             XtraMight = XtraMight,
             XtraShots = XtraShots,
@@ -464,6 +468,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private Expression? SpeedExpression { get; set; } = null;
     private Expression? BaseArmorClassExpression { get; set; } = null;
     private Expression? UseDeviceExpression { get; set; } = null;
+    private Expression? SavingThrowExpression { get; set; } = null;
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusArmorClass when adding magic.  If the item is cursed or broken,
@@ -513,6 +518,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     public string? HatesFire { get; }
     public string? HatesElectricity { get; }
     private string? DisarmTraps { get; }
+
+    private string? SavingThrow { get; }
 
     /// <summary>
     /// Returns true, if the item is susceptible to acid.  Returns false, by default.

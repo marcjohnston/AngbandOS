@@ -12,4 +12,5 @@ public class VampireRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? Infravision => "5";
     public override string? DisarmTraps => "4";
     public override string? UseDevice => "10";
+    public override string? SavingThrow => "10";
 }

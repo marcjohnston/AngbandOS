@@ -12,4 +12,5 @@ public class HalfOgreRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? Infravision => "3";
     public override string? DisarmTraps => "-3";
     public override string? UseDevice => "-5";
+    public override string? SavingThrow => "-5";
 }

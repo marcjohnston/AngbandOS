@@ -11,4 +11,5 @@ public class HalfTitanRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => 10050;
     public override string? DisarmTraps => "-5";
     public override string? UseDevice => "5";
+    public override string? SavingThrow => "2";
 }

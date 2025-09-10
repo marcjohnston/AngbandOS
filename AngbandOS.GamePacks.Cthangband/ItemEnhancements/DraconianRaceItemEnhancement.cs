@@ -12,4 +12,5 @@ public class DraconianRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? Infravision => "2";
     public override string? DisarmTraps => "-2";
     public override string? UseDevice => "5";
+    public override string? SavingThrow => "3";
 }

@@ -12,4 +12,5 @@ public class DwarfRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? Infravision => "5";
     public override string? DisarmTraps => "2";
     public override string? UseDevice => "9";
+    public override string? SavingThrow => "10";
 }

@@ -11,4 +11,5 @@ public class MiriNigriRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override int? Value => -1800;
     public override string? DisarmTraps => "-5";
     public override string? UseDevice => "-2";
+    public override string? SavingThrow => "-1";
 }

@@ -12,4 +12,5 @@ public class NibelungRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? Infravision => "5";
     public override string? DisarmTraps => "3";
     public override string? UseDevice => "5";
+    public override string? SavingThrow => "10";
 }

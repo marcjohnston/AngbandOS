@@ -18,6 +18,8 @@ public class ItemEnhancementGameConfiguration
     public virtual string? DisarmTraps { get; set; } = null;
     public virtual string? UseDevice { get; set; } = null;
 
+    public virtual string? SavingThrow { get; set; } = null;
+
     /// <summary>
     /// Returns true, if the item is susceptible to electricity.  Returns false, by default.
     /// </summary>

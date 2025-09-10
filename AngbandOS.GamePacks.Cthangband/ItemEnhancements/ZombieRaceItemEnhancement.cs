@@ -12,4 +12,5 @@ public class ZombieRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? Infravision => "2";
     public override string? DisarmTraps => "-5";
     public override string? UseDevice => "-5";
+    public override string? SavingThrow => "8";
 }

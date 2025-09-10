@@ -12,4 +12,5 @@ public class DarkElfRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override string? Infravision => "5";
     public override string? DisarmTraps => "5";
     public override string? UseDevice => "15";
+    public override string? SavingThrow => "20";
 }
