@@ -158,7 +158,7 @@ internal class EffectiveAttributeSet
         RegisterBoolPropertyFactory(AttributeEnum.Telepathy);
         RegisterBoolPropertyFactory(AttributeEnum.Teleport);
         RegisterIntPropertyFactory(AttributeEnum.ToDamage);
-        RegisterIntPropertyFactory(AttributeEnum.ToHit);
+        RegisterIntPropertyFactory(AttributeEnum.MeleeToHit);
         RegisterIntPropertyFactory(AttributeEnum.TreasureRating);
         RegisterIntPropertyFactory(AttributeEnum.Tunnel);
         RegisterIntPropertyFactory(AttributeEnum.Value);
@@ -564,15 +564,15 @@ internal class EffectiveAttributeSet
             SetBoolAttributeValue(AttributeEnum.CanProvideSheathOfFire, value);
         }
     }
-    public int ToHit
+    public int MeleeToHit
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.ToHit);
+            return GetIntAttributeValue(AttributeEnum.MeleeToHit);
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.ToHit, value);
+            SetIntAttributeValue(AttributeEnum.MeleeToHit, value);
         }
     }
     public int BaseArmorClass

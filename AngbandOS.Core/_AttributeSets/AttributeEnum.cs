@@ -123,7 +123,7 @@ internal enum AttributeEnum
     Teleport,
     ThrowingToHit,
     ToDamage,
-    ToHit,
+    MeleeToHit,
     TreasureRating,
     Tunnel,
     UseDevice,

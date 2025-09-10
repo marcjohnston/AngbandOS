@@ -1060,12 +1060,12 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
-        if (NegativeBonusHitRepresentsBroken && EffectivePropertySet.ToHit < 0)
+        if (NegativeBonusHitRepresentsBroken && EffectivePropertySet.MeleeToHit < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
 
-        if (EffectivePropertySet.BonusArmorClass > 0 || EffectivePropertySet.ToHit + EffectivePropertySet.ToDamage > 0)
+        if (EffectivePropertySet.BonusArmorClass > 0 || EffectivePropertySet.MeleeToHit + EffectivePropertySet.ToDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1100,7 +1100,7 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
-        if (EffectivePropertySet.ToHit + EffectivePropertySet.ToDamage > 0)
+        if (EffectivePropertySet.MeleeToHit + EffectivePropertySet.ToDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -2054,7 +2054,7 @@ internal sealed class Item : IComparable<Item>
 
             EffectiveAttributeSet? rareItemEffectivePropertySet = new EffectiveAttributeSet();
             rareItemEffectivePropertySet.AddEnhancement(rareItem.GenerateItemCharacteristics());
-            rareItemEffectivePropertySet.ToHit *= goodBadMultiplier;
+            rareItemEffectivePropertySet.MeleeToHit *= goodBadMultiplier;
             rareItemEffectivePropertySet.ToDamage *= goodBadMultiplier;
             rareItemEffectivePropertySet.BonusArmorClass *= goodBadMultiplier;
             rareItemEffectivePropertySet.Strength *= goodBadMultiplier;

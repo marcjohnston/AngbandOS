@@ -565,7 +565,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
+                s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
 
                 if (item.EffectivePropertySet.BaseArmorClass != 0)
                 {
@@ -589,7 +589,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
+                s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
 
                 if (item.EffectivePropertySet.BaseArmorClass != 0)
                 {
@@ -611,13 +611,13 @@ internal sealed class ItemFactory : IGetKey, IToJson
         {
             if (item.IsKnown())
             {
-                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.ToHit != 0 && item.EffectivePropertySet.ToDamage != 0)
+                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.MeleeToHit != 0 && item.EffectivePropertySet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
                 }
-                else if (item.EffectivePropertySet.ToHit != 0)
+                else if (item.EffectivePropertySet.MeleeToHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)})";
                 }
                 else if (item.EffectivePropertySet.ToDamage != 0)
                 {
@@ -636,13 +636,13 @@ internal sealed class ItemFactory : IGetKey, IToJson
         {
             if (item.IsKnown())
             {
-                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.ToHit != 0 && item.EffectivePropertySet.ToDamage != 0)
+                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.MeleeToHit != 0 && item.EffectivePropertySet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
                 }
-                else if (item.EffectivePropertySet.ToHit != 0)
+                else if (item.EffectivePropertySet.MeleeToHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToHit)})";
+                    s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)})";
                 }
                 else if (item.EffectivePropertySet.ToDamage != 0)
                 {
@@ -1168,9 +1168,9 @@ internal sealed class ItemFactory : IGetKey, IToJson
             {
                 characteristics.BonusArmorClass = 0 - (characteristics.BonusArmorClass + Game.DieRoll(4));
             }
-            if (characteristics.ToHit != 0)
+            if (characteristics.MeleeToHit != 0)
             {
-                characteristics.ToHit = 0 - (characteristics.ToHit + Game.DieRoll(4));
+                characteristics.MeleeToHit = 0 - (characteristics.MeleeToHit + Game.DieRoll(4));
             }
             if (characteristics.ToDamage != 0)
             {
@@ -1340,7 +1340,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 case 28:
                 case 29:
                     characteristics.SetBoolAttributeValue(AttributeEnum.ShowMods, true);
-                    characteristics.ToHit += 4 + Game.DieRoll(11);
+                    characteristics.MeleeToHit += 4 + Game.DieRoll(11);
                     characteristics.ToDamage += 4 + Game.DieRoll(11);
                     break;
 
@@ -1537,7 +1537,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         }
         if (RandomArtifactBonusHitCeiling != null)
         { 
-            characteristics.ToHit += Game.DieRoll(characteristics.ToHit > RandomArtifactBonusHitCeiling.Value ? 1 : RandomArtifactBonusHitCeiling.Value + 1 - characteristics.BonusArmorClass);
+            characteristics.MeleeToHit += Game.DieRoll(characteristics.MeleeToHit > RandomArtifactBonusHitCeiling.Value ? 1 : RandomArtifactBonusHitCeiling.Value + 1 - characteristics.BonusArmorClass);
         }
         if (RandomArtifactBonusDamageCeiling != null)
         {

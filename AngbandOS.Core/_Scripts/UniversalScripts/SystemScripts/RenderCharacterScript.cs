@@ -298,7 +298,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         // Only show bonuses if we know them
         if (item != null && item.IsKnown())
         {
-            showTohit += item.EffectivePropertySet.ToHit;
+            showTohit += item.EffectivePropertySet.MeleeToHit;
             showTodam += item.EffectivePropertySet.ToDamage;
         }
         // Print some basics
@@ -378,7 +378,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         int fighting = Game.SkillMelee + (Game.Bonuses.AttackBonus * Constants.BthPlusAdj);
         if (meeleeItem != null)
         {
-            fighting += meeleeItem.EffectivePropertySet.ToHit * Constants.BthPlusAdj;
+            fighting += meeleeItem.EffectivePropertySet.MeleeToHit * Constants.BthPlusAdj;
             damdice += meeleeItem.EffectivePropertySet.DamageDice;
             damsides += meeleeItem.EffectivePropertySet.DiceSides;
 
@@ -393,7 +393,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         int shooting = Game.SkillRanged + (Game.Bonuses.AttackBonus * Constants.BthPlusAdj);
         if (rangedItem != null)
         {
-            shooting += rangedItem.EffectivePropertySet.ToHit * Constants.BthPlusAdj;
+            shooting += rangedItem.EffectivePropertySet.MeleeToHit * Constants.BthPlusAdj;
         }
 
         int attacksPerRound = Game.MeleeAttacksPerRound;
