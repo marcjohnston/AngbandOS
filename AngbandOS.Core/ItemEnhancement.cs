@@ -41,7 +41,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Attacks = itemEnhancementGameConfiguration.Attacks;
         Speed = itemEnhancementGameConfiguration.Speed;
         BonusArmorClass = itemEnhancementGameConfiguration.BonusArmorClass;
-        ToHit = itemEnhancementGameConfiguration.Hits;
+        MeleeToHit = itemEnhancementGameConfiguration.Hits;
         ToDamage = itemEnhancementGameConfiguration.Damage;
         BaseArmorClass = itemEnhancementGameConfiguration.BaseArmorClass;
         BrandAcid = itemEnhancementGameConfiguration.BrandAcid;
@@ -170,7 +170,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.Speed, SpeedExpression == null ? 0 : Game.ComputeIntegerExpression(SpeedExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BaseArmorClass, BaseArmorClassExpression == null ? 0 : Game.ComputeIntegerExpression(BaseArmorClassExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.BonusArmorClass, BonusArmorClassExpression == null ? 0 : Game.ComputeIntegerExpression(BonusArmorClassExpression).Value);
-        itemCharacteristics.SetIntAttributeValue(AttributeEnum.MeleeToHit, BonusHitsExpression == null ? 0 : Game.ComputeIntegerExpression(BonusHitsExpression).Value);
+        itemCharacteristics.SetIntAttributeValue(AttributeEnum.MeleeToHit, MeleeToHitExpression == null ? 0 : Game.ComputeIntegerExpression(MeleeToHitExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.ToDamage, BonusDamageExpression == null ? 0 : Game.ComputeIntegerExpression(BonusDamageExpression).Value);
         itemCharacteristics.SetIntAttributeValue(AttributeEnum.UseDevice, UseDeviceExpression == null ? 0 : Game.ComputeIntegerExpression(UseDeviceExpression).Value);
         itemCharacteristics.SetReferenceAttributeValue(AttributeEnum.ArtifactBias, ArtifactBiasWeightedRandom?.ChooseOrDefault());
@@ -307,7 +307,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         HatesFireExpression = Game.ParseNullableBooleanExpression(HatesFire);
 
         BonusArmorClassExpression = Game.ParseNullableNumericExpression(BonusArmorClass);
-        BonusHitsExpression = Game.ParseNullableNumericExpression(ToHit);
+        MeleeToHitExpression = Game.ParseNullableNumericExpression(MeleeToHit);
         BonusDamageExpression = Game.ParseNullableNumericExpression(ToDamage);
 
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
@@ -344,7 +344,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Attacks = Attacks,
             Speed = Speed,
             BonusArmorClass = BonusArmorClass,
-            Hits = ToHit,
+            Hits = MeleeToHit,
             Damage = ToDamage,
             BaseArmorClass = BaseArmorClass,
             ActivationName = ActivationName,
@@ -475,7 +475,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// Returns a maximum value for a random amount of additional BonusToHit when adding magic.  If the item is cursed or broken,
     /// this maximum value will be subtracted from the item
     /// </summary>
-    private Expression? BonusHitsExpression { get; set; } 
+    private Expression? MeleeToHitExpression { get; set; } 
 
     /// <summary>
     /// Returns a maximum value for a random amount of additional BonusDamage when adding magic.  If the item is cursed or broken,
@@ -581,7 +581,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 
     private string? BonusArmorClass { get; } 
 
-    private string? ToHit { get; }
+    private string? MeleeToHit { get; }
 
     private string? ToDamage { get; }
     private string? BaseArmorClass { get; }
