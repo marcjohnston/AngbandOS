@@ -445,7 +445,7 @@ internal class EffectiveAttributeSet
         AttributeValue? overrideAttributeValue = _fixedAttributeValues[index];
         if (overrideAttributeValue is not null)
         {
-            // It was, returnt the override value.
+            // It was, return the override value.
             return overrideAttributeValue;
         }
 
