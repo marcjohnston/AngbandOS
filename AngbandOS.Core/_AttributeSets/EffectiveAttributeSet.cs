@@ -253,7 +253,7 @@ internal class EffectiveAttributeSet
         foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
         {
             int index = (int)itemPropertyFactory.Index;
-            newProperties[index] = GetValue(index);
+            newProperties[index] = ComputeEffectiveValue(index);
         }
         return new ReadOnlyAttributeSet(newProperties);
     }
@@ -311,7 +311,7 @@ internal class EffectiveAttributeSet
     {
         if (String.IsNullOrEmpty(key))
         {
-            throw new Exception($"Cannot specify a blank or null key for {nameof(GetValue)}");
+            throw new Exception($"Cannot specify a blank or null key for {nameof(ComputeEffectiveValue)}");
         }
 
         // Retrieve the index for the property.
@@ -331,7 +331,7 @@ internal class EffectiveAttributeSet
     public bool GetBoolAttributeValue(AttributeEnum attributeEnum)
     {
         int index = (int)attributeEnum;
-        AttributeValue effectiveItemProperty = GetValue(index);
+        AttributeValue effectiveItemProperty = ComputeEffectiveValue(index);
         BoolAttributeValue boolPropertyValue = (BoolAttributeValue)effectiveItemProperty;
         bool value = boolPropertyValue.Value;
         return value;
@@ -340,7 +340,7 @@ internal class EffectiveAttributeSet
     public int GetIntAttributeValue(AttributeEnum attributeEnum)
     {
         int index = (int)attributeEnum;
-        AttributeValue effectiveItemProperty = GetValue(index);
+        AttributeValue effectiveItemProperty = ComputeEffectiveValue(index);
         IntAttributeValue intPropertyValue = (IntAttributeValue)effectiveItemProperty;
         int value = intPropertyValue.Value;
         return value;
@@ -349,7 +349,7 @@ internal class EffectiveAttributeSet
     public ColorEnum GetColorAttributeValue(AttributeEnum attributeEnum)
     {
         int index = (int)attributeEnum;
-        AttributeValue effectiveItemProperty = GetValue(index);
+        AttributeValue effectiveItemProperty = ComputeEffectiveValue(index);
         ColorEnumAttributeValue colorPropertyValue = (ColorEnumAttributeValue)effectiveItemProperty;
         ColorEnum value = colorPropertyValue.Value;
         return value;
@@ -358,7 +358,7 @@ internal class EffectiveAttributeSet
     public T? GetReferenceAttributeValue<T>(AttributeEnum attributeEnum) where T : class
     {
         int index = (int)attributeEnum;
-        AttributeValue effectiveItemProperty = GetValue(index);
+        AttributeValue effectiveItemProperty = ComputeEffectiveValue(index);
         NullableReferenceAttributeValue<T> referencePropertyValue = (NullableReferenceAttributeValue<T>)effectiveItemProperty;
         T? value = referencePropertyValue.Value;
         return value;
@@ -439,7 +439,7 @@ internal class EffectiveAttributeSet
         readOnlyPropertySetList.Add(readOnlyPropertySet);
     }
 
-    private AttributeValue GetValue(int index)
+    private AttributeValue ComputeEffectiveValue(int index)
     {
         // Determine if the value has been overriden.
         AttributeValue? overrideAttributeValue = _fixedAttributeValues[index];
