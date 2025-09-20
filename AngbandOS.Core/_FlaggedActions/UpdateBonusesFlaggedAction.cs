@@ -23,7 +23,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         // Apply the character class enhancements.
         effectiveAttributeSet.AddEnhancement(Game.BaseCharacterClass.EffectiveAttributeSet);
 
-        // Apply the genome.
+        // Apply all of the mutations that the player has.
 
         // Apply all of the items that the player is wielding.
         foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
@@ -38,7 +38,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
         }
 
-        // Apply all of the mutations that the player has.
         return effectiveAttributeSet;
     }
 
