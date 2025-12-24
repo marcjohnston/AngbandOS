@@ -36,6 +36,25 @@ namespace AngbandOS.Web.Hubs
             Configuration = configuration;
         }
 
+        public async Task DeleteMessage(int messageId)
+        {
+            // Ensure there is a user and that the message is not empty.
+            if (Context.User == null)
+            {
+                return;
+            }
+
+            // Restricted to admins.
+            string customRoleClaimType = Configuration["CustomRoleClaimType"];
+            if (Context.User.HasClaim(customRoleClaimType, "administrator"))
+            {
+                await WebPersistentStorage.DeleteMessagesAsync(messageId);
+                //ChatMessage[] chatMessages = await GameService.GetChatMessagesAsync(Context.ConnectionId, endingId);
+                //IChatHub chatHub = Clients.Client(Context.ConnectionId);
+                //await chatHub.ChatRefreshed(chatMessages.ToArray());
+            }
+        }
+
         public async Task SendMessage(string? toUsername, string message)
         {
             // Ensure there is a user and that the message is not empty.

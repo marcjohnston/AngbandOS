@@ -3,10 +3,14 @@ using AngbandOS.Web.Models;
 
 namespace AngbandOS.Web.Hubs
 {
+    /// <summary>
+    ///  Represents a chat recipient for an administrator user.
+    /// </summary>
     public class AdministatorChatRecipient : ChatRecipient
     {
         private readonly string UserId;
         private readonly IChatHub ChatHub;
+        public bool IncludeDeletedMessages { get; set; } = false;
 
         public AdministatorChatRecipient(IChatHub chatHub, string userId, string username) : base(username)
         {
@@ -22,7 +26,7 @@ namespace AngbandOS.Web.Hubs
 
         public override async Task<MessageDetails[]> GetMessagesAsync(IWebPersistentStorage webPersistentStorage, int? endingId)
         {
-            return await webPersistentStorage.GetMessagesAsync(UserId, endingId, null);
+            return await webPersistentStorage.GetMessagesAsync(UserId, endingId, null, IncludeDeletedMessages);
         }
     }
 }

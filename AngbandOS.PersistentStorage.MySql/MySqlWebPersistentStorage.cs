@@ -176,7 +176,7 @@ namespace AngbandOS.PersistentStorage
         }
 
         /// <inheritdoc/>
-        public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types)
+        public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types, bool includeDeleted)
         {
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
@@ -200,11 +200,27 @@ namespace AngbandOS.PersistentStorage
                         Id = _message.Id,
                         Message = _message.Content,
                         SentDateTime = _message.SentDateTime,
-                        Type = (MessageTypeEnum)_message.Type
+                        Type = (MessageTypeEnum)_message.Type,
+
                     })
                     .Reverse(); // The list needs to be reverse for rendering.
                 MessageDetails[] messages = await messageDetailsQuery.ToArrayAsync();
                 return messages;
+            }
+        }
+
+        public async Task<bool> DeleteMessagesAsync(int messageId)
+        {
+            using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
+            {
+                Message? message = context.Messages.SingleOrDefault(_message => _message.Id == messageId);
+                if (message is null)
+                {
+                    return false;
+                }
+                //message.IsDeleted = true;
+                await context.SaveChangesAsync();
+                return true;
             }
         }
     }

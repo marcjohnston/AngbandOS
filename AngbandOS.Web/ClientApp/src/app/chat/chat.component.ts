@@ -49,6 +49,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
   }
 
+  public deleteMessage(message: ChatMessage) {
+    if (this._chatConnection !== undefined) {
+      this._chatConnection.send("DeleteMessage", message.id);
+    }
+  }
+
   public input(event: Event) {
     if (this._chatConnection !== undefined) {
       const inputElement: HTMLTextAreaElement = event.currentTarget as HTMLTextAreaElement;

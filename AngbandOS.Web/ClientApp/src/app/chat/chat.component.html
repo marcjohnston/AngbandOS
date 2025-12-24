@@ -7,6 +7,9 @@
             <div class="card-subtitle">
               <span>{{card.fromUsername}}</span>
               <span>{{formatDate(card.sentDateTime)}}</span>
+              <span *ngIf="isAdministrator">
+                <mat-icon aria-hidden="false" title="Delete This Message" aria-label="Delete Message" fontIcon="clear" (click)="deleteMessage(card)">clear</mat-icon>
+              </span>
             </div>
           </mat-card-subtitle>
           <mat-card-content>

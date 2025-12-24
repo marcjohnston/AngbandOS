@@ -3,6 +3,10 @@ using AngbandOS.Web.Models;
 
 namespace AngbandOS.Web.Hubs
 {
+    /// <summary>
+    /// Represents a chat recipient for a logged in user.  History messages are filtered for logged in users.
+    /// </summary>
+
     public class UserChatRecipient : ChatRecipient
     {
         private readonly string UserId;
@@ -24,7 +28,9 @@ namespace AngbandOS.Web.Hubs
         public override async Task<MessageDetails[]> GetMessagesAsync(IWebPersistentStorage webPersistentStorage, int? endingId)
         {
             MessageTypeEnum[] messageTypes = new MessageTypeEnum[] { MessageTypeEnum.UserMessage, MessageTypeEnum.CharacterDied };
-            return await webPersistentStorage.GetMessagesAsync(UserId, endingId, messageTypes);
+
+            // Deleted messages are not available to normal users.
+            return await webPersistentStorage.GetMessagesAsync(UserId, endingId, messageTypes, false);
         }
     }
 }
