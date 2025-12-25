@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 namespace AngbandOS.PersistentStorage.Sql.Entities
 {
     public partial class UserGameConfiguration

@@ -2,6 +2,9 @@
 using AngbandOS.Web.Models;
 namespace AngbandOS.Web.Hubs
 {
+    /// <summary>
+    /// Represents a chat recipient for an anonymous user.  History messages are filtered for anonymous users.  Anonymous users are limited to character died and all non-private messages.
+    /// </summary>
     public class AnonymousChatRecipient : ChatRecipient
     {
         private readonly IServiceHub ServiceHub;
@@ -23,7 +26,9 @@ namespace AngbandOS.Web.Hubs
         public override async Task<MessageDetails[]> GetMessagesAsync(IWebPersistentStorage webPersistentStorage, int? endingId)
         {
             MessageTypeEnum[] messageTypes = new MessageTypeEnum[] { MessageTypeEnum.UserMessage, MessageTypeEnum.CharacterDied };
-            return await webPersistentStorage.GetMessagesAsync(null, endingId, messageTypes);
+
+            // Deleted messages are available to anonymous users.
+            return await webPersistentStorage.GetMessagesAsync(null, endingId, messageTypes, false);
         }
     }
 }

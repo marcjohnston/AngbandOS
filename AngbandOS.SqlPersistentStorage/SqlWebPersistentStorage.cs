@@ -183,7 +183,7 @@ namespace AngbandOS.PersistentStorage
         }
 
         /// <inheritdoc/>
-        public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types)
+        public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types, bool includeDeleted)
         {
             await EnsureCreated();
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
@@ -200,6 +200,7 @@ namespace AngbandOS.PersistentStorage
                 }
                 IQueryable<MessageDetails> messageDetailsQuery = messagesQuery
                     .OrderByDescending(_message => _message.Id) // We will use the clustered index for sorting.
+                    .Where(_message => includeDeleted || !_message.IsDeleted)
                     .Take(50) // We are only providing 50 messages.  The user will need to scroll for more.
                     .Select(_message => new MessageDetails // We need to build MessageDetails objects to be returned.
                     {
@@ -212,6 +213,21 @@ namespace AngbandOS.PersistentStorage
                     .Reverse(); // The list needs to be reverse for rendering.
                 MessageDetails[] messages = await messageDetailsQuery.ToArrayAsync();
                 return messages;
+            }
+        }
+
+        public async Task<bool> DeleteMessagesAsync(int messageId)
+        {
+            using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+            {
+                Message? message = context.Messages.SingleOrDefault(_message => _message.Id == messageId);
+                if (message is null)
+                {
+                    return false;
+                }
+                message.IsDeleted = true;
+                await context.SaveChangesAsync();
+                return true;
             }
         }
     }

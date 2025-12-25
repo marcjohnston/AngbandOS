@@ -1,6 +1,9 @@
-﻿namespace AngbandOS.PersistentStorage.MySql.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace AngbandOS.PersistentStorage.MySql.Entities
 {
-    public partial class DeviceCode
+    public partial class Devicecode
     {
         public string UserCode { get; set; } = null!;
         public string DeviceCode1 { get; set; } = null!;

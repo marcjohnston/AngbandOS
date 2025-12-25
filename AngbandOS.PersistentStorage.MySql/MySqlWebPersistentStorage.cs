@@ -24,7 +24,7 @@ namespace AngbandOS.PersistentStorage
         {
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
-                UserSetting? userSetting = await context.UserSettings.SingleOrDefaultAsync(_userSetting => _userSetting.UserId == userId);
+                Usersetting? userSetting = await context.Usersettings.SingleOrDefaultAsync(_userSetting => _userSetting.UserId == userId);
                 if (userSetting == null)
                     return null;
                 return new UserSettingsDetails
@@ -51,12 +51,12 @@ namespace AngbandOS.PersistentStorage
         {
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
-                UserSetting? userSetting = await context.UserSettings.SingleOrDefaultAsync(_userSetting => _userSetting.UserId == userId);
+                Usersetting? userSetting = await context.Usersettings.SingleOrDefaultAsync(_userSetting => _userSetting.UserId == userId);
                 if (userSetting == null)
                 {
-                    userSetting = new UserSetting();
+                    userSetting = new Usersetting();
                     userSetting.UserId = userId;
-                    context.UserSettings.Add(userSetting);
+                    context.Usersettings.Add(userSetting);
                 }
                 userSetting.FontName = userSettingsDetails.FontName;
                 userSetting.FontSize = userSettingsDetails.FontSize;
@@ -102,11 +102,11 @@ namespace AngbandOS.PersistentStorage
             Guid guid = Guid.Parse(id);
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
-                SavedGame? savedGame = await context.SavedGames.SingleOrDefaultAsync(_savedGame => _savedGame.Username == username && _savedGame.Guid == guid);
+                Savedgame? savedGame = await context.Savedgames.SingleOrDefaultAsync(_savedGame => _savedGame.Username == username && _savedGame.Guid == guid);
                 if (savedGame == null)
                     return false;
-                context.SavedGames.Remove(savedGame);
-                context.SavedGameContents.Remove(new SavedGameContent
+                context.Savedgames.Remove(savedGame);
+                context.Savedgamecontents.Remove(new Savedgamecontent
                 {
                     Id = savedGame.SavedGameContentId
                 });
@@ -120,7 +120,7 @@ namespace AngbandOS.PersistentStorage
         {
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
-                SavedGameDetails[] savedGames = await context.SavedGames
+                SavedGameDetails[] savedGames = await context.Savedgames
                     .Where(_savedGame => _savedGame.Username == username)
                     .Select(_savedGame => new SavedGameDetails()
                     {
@@ -175,7 +175,7 @@ namespace AngbandOS.PersistentStorage
         }
 
         /// <inheritdoc/>
-        public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types)
+        public async Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types, bool includeDeleted)
         {
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
@@ -199,11 +199,27 @@ namespace AngbandOS.PersistentStorage
                         Id = _message.Id,
                         Message = _message.Content,
                         SentDateTime = _message.SentDateTime,
-                        Type = (MessageTypeEnum)_message.Type
+                        Type = (MessageTypeEnum)_message.Type,
+
                     })
                     .Reverse(); // The list needs to be reverse for rendering.
                 MessageDetails[] messages = await messageDetailsQuery.ToArrayAsync();
                 return messages;
+            }
+        }
+
+        public async Task<bool> DeleteMessagesAsync(int messageId)
+        {
+            using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
+            {
+                Message? message = context.Messages.SingleOrDefault(_message => _message.Id == messageId);
+                if (message is null)
+                {
+                    return false;
+                }
+                //message.IsDeleted = true;
+                await context.SaveChangesAsync();
+                return true;
             }
         }
     }

@@ -62,7 +62,7 @@ namespace AngbandOS.PersistentStorage
         {
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
-                SavedGame? savedGame = context.SavedGames
+                Savedgame? savedGame = context.Savedgames
                     .Include(_savedGame => _savedGame.SavedGameContent)
                     .SingleOrDefault(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
                 if (savedGame == null)
@@ -77,15 +77,15 @@ namespace AngbandOS.PersistentStorage
         {
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
-                SavedGame? savedGame = context.SavedGames.SingleOrDefault(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
+                Savedgame? savedGame = context.Savedgames.SingleOrDefault(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
                 if (savedGame == null)
                 {
-                    savedGame = new SavedGame()
+                    savedGame = new Savedgame()
                     {
                         Username = Username,
                         Guid = Guid.Parse(GameGuid),
                     };
-                    context.SavedGames.Add(savedGame);
+                    context.Savedgames.Add(savedGame);
                 }
                 savedGame.CharacterName = gameDetails.CharacterName;
                 savedGame.Comments = gameDetails.Comments;
@@ -95,7 +95,7 @@ namespace AngbandOS.PersistentStorage
                 savedGame.IsAlive = gameDetails.IsAlive;
                 if (savedGame.SavedGameContent == null)
                 {
-                    savedGame.SavedGameContent = new SavedGameContent();
+                    savedGame.SavedGameContent = new Savedgamecontent();
                 }
                 savedGame.SavedGameContent.Data = value;
 
@@ -108,7 +108,7 @@ namespace AngbandOS.PersistentStorage
         {
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
-                return context.SavedGames.Any(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
+                return context.Savedgames.Any(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
             }
         }
 

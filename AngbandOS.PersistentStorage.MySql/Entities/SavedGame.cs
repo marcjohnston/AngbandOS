@@ -1,6 +1,9 @@
-﻿namespace AngbandOS.PersistentStorage.MySql.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace AngbandOS.PersistentStorage.MySql.Entities
 {
-    public partial class SavedGame
+    public partial class Savedgame
     {
         public Guid Guid { get; set; }
         public string Username { get; set; } = null!;
@@ -12,6 +15,6 @@
         public DateTime DateTime { get; set; }
         public int SavedGameContentId { get; set; }
 
-        public virtual SavedGameContent SavedGameContent { get; set; } = null!;
+        public virtual Savedgamecontent SavedGameContent { get; set; } = null!;
     }
 }

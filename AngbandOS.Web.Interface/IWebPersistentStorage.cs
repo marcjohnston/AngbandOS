@@ -43,6 +43,13 @@
         /// <param name="mostRecentMessageId">The most recent ID of the message to return.  Only messages prior to this ID will be returned.  Used for scrolling.</param>
         /// <param name="types">List of message types that the user should receive or null for ALL.</param>
         /// <returns></returns>
-        Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types);
+        Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types, bool includeDeleted);
+
+        /// <summary>
+        /// Deletes a message from the database.
+        /// </summary>
+        /// <param name="messageId">The id of the message.</param>
+        /// <returns></returns>
+        Task<bool> DeleteMessagesAsync(int messageId);
     }
 }

@@ -1,12 +1,15 @@
-﻿namespace AngbandOS.PersistentStorage.MySql.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace AngbandOS.PersistentStorage.MySql.Entities
 {
-    public partial class AspNetUser
+    public partial class Aspnetuser
     {
-        public AspNetUser()
+        public Aspnetuser()
         {
-            AspNetUserClaims = new HashSet<AspNetUserClaim>();
-            AspNetUserLogins = new HashSet<AspNetUserLogin>();
-            AspNetUserTokens = new HashSet<AspNetUserToken>();
+            Aspnetuserclaims = new HashSet<Aspnetuserclaim>();
+            Aspnetuserlogins = new HashSet<Aspnetuserlogin>();
+            Aspnetusertokens = new HashSet<Aspnetusertoken>();
             MessageFromUsers = new HashSet<Message>();
             MessageToUsers = new HashSet<Message>();
         }
@@ -23,13 +26,13 @@
         public string? PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }
-        public DateTimeOffset? LockoutEnd { get; set; }
+        public DateTime? LockoutEnd { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
 
-        public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; set; }
+        public virtual ICollection<Aspnetuserclaim> Aspnetuserclaims { get; set; }
+        public virtual ICollection<Aspnetuserlogin> Aspnetuserlogins { get; set; }
+        public virtual ICollection<Aspnetusertoken> Aspnetusertokens { get; set; }
         public virtual ICollection<Message> MessageFromUsers { get; set; }
         public virtual ICollection<Message> MessageToUsers { get; set; }
     }
