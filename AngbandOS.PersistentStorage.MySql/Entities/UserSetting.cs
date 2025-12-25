@@ -1,6 +1,9 @@
-﻿namespace AngbandOS.PersistentStorage.MySql.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace AngbandOS.PersistentStorage.MySql.Entities
 {
-    public partial class UserSetting
+    public partial class Usersetting
     {
         public string UserId { get; set; } = null!;
         public string? FontName { get; set; }

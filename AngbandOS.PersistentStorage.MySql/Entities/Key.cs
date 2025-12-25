@@ -1,4 +1,7 @@
-﻿namespace AngbandOS.PersistentStorage.MySql.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace AngbandOS.PersistentStorage.MySql.Entities
 {
     public partial class Key
     {

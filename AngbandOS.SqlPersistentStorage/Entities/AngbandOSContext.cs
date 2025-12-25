@@ -30,6 +30,7 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public virtual DbSet<RepositoryEntity> RepositoryEntities { get; set; } = null!;
         public virtual DbSet<SavedGame> SavedGames { get; set; } = null!;
         public virtual DbSet<SavedGameContent> SavedGameContents { get; set; } = null!;
+        public virtual DbSet<UserGameConfiguration> UserGameConfigurations { get; set; } = null!;
         public virtual DbSet<UserSetting> UserSettings { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -270,6 +271,21 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                     .HasForeignKey(d => d.SavedGameContentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SavedGames_SavedGameContents");
+            });
+
+            modelBuilder.Entity<UserGameConfiguration>(entity =>
+            {
+                entity.HasKey(e => new { e.Name, e.Username });
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JsonData).IsUnicode(false);
             });
 
             modelBuilder.Entity<UserSetting>(entity =>

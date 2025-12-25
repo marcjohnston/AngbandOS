@@ -3,12 +3,12 @@
 1. Update the connection string as needed.  This is stored as a user secret.
 
 SQL:
-"ConnectionString": "Server=192.168.1.3;Database=AngbandOS;user=;password=",
+"ConnectionString": "Server=;Database=AngbandOS;user=;password=",
 
 or 
 
 MySQL:
-"ConnectionString": "Server=192.168.1.3;Database=AngbandOS;user=;password=",
+"ConnectionString": "Server=;Database=AngbandOS;user=;password=",
 
 2. Update the dependency injection service for the desired WebPersistentStorage:
 

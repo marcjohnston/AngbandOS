@@ -1,12 +1,15 @@
-﻿namespace AngbandOS.PersistentStorage.MySql.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace AngbandOS.PersistentStorage.MySql.Entities
 {
-    public partial class AspNetUserLogin
+    public partial class Aspnetuserlogin
     {
         public string LoginProvider { get; set; } = null!;
         public string ProviderKey { get; set; } = null!;
         public string? ProviderDisplayName { get; set; }
         public string UserId { get; set; } = null!;
 
-        public virtual AspNetUser User { get; set; } = null!;
+        public virtual Aspnetuser User { get; set; } = null!;
     }
 }

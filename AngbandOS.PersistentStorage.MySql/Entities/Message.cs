@@ -1,4 +1,7 @@
-﻿namespace AngbandOS.PersistentStorage.MySql.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace AngbandOS.PersistentStorage.MySql.Entities
 {
     public partial class Message
     {
@@ -9,8 +12,9 @@
         public DateTime SentDateTime { get; set; }
         public int Type { get; set; }
         public string? GameId { get; set; }
+        public ulong? IsDeleted { get; set; }
 
-        public virtual AspNetUser FromUser { get; set; } = null!;
-        public virtual AspNetUser? ToUser { get; set; }
+        public virtual Aspnetuser FromUser { get; set; } = null!;
+        public virtual Aspnetuser? ToUser { get; set; }
     }
 }

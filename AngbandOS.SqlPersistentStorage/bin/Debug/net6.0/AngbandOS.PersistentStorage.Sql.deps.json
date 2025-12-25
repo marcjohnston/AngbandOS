@@ -481,12 +481,18 @@
       },
       "AngbandOS.Core.Interface/1.0.0": {
         "runtime": {
-          "AngbandOS.Core.Interface.dll": {}
+          "AngbandOS.Core.Interface.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "AngbandOS.Web.Interface/1.0.0": {
         "runtime": {
-          "AngbandOS.Web.Interface.dll": {}
+          "AngbandOS.Web.Interface.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
