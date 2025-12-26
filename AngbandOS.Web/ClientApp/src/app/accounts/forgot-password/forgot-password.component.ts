@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, NgZone, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
 import { ForgotPasswordDialogFormGroup } from './forgot-password-dialog-form-group';
 

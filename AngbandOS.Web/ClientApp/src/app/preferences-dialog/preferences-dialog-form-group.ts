@@ -1,65 +1,65 @@
-import { FormControl, FormGroup } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 
-export class PreferencesDialogFormGroup extends FormGroup {
+export class PreferencesDialogFormGroup extends UntypedFormGroup {
   constructor() {
     super({
-      fontName: new FormControl(""),
-      fontSize: new FormControl(""),
-      f1Macro: new FormControl(""),
-      f2Macro: new FormControl(""),
-      f3Macro: new FormControl(""),
-      f4Macro: new FormControl(""),
-      f5Macro: new FormControl(""),
-      f6Macro: new FormControl(""),
-      f7Macro: new FormControl(""),
-      f8Macro: new FormControl(""),
-      f9Macro: new FormControl(""),
-      f10Macro: new FormControl(""),
-      f11Macro: new FormControl(""),
-      f12Macro: new FormControl("")
+      fontName: new UntypedFormControl(""),
+      fontSize: new UntypedFormControl(""),
+      f1Macro: new UntypedFormControl(""),
+      f2Macro: new UntypedFormControl(""),
+      f3Macro: new UntypedFormControl(""),
+      f4Macro: new UntypedFormControl(""),
+      f5Macro: new UntypedFormControl(""),
+      f6Macro: new UntypedFormControl(""),
+      f7Macro: new UntypedFormControl(""),
+      f8Macro: new UntypedFormControl(""),
+      f9Macro: new UntypedFormControl(""),
+      f10Macro: new UntypedFormControl(""),
+      f11Macro: new UntypedFormControl(""),
+      f12Macro: new UntypedFormControl("")
     });
   }
 
-  public get fontName(): FormControl {
-    return this.controls.fontName as FormControl;
+  public get fontName(): UntypedFormControl {
+    return this.controls.fontName as UntypedFormControl;
   }
-  public get fontSize(): FormControl {
-    return this.controls.fontSize as FormControl;
+  public get fontSize(): UntypedFormControl {
+    return this.controls.fontSize as UntypedFormControl;
   }
-  public get f1Macro(): FormControl {
-    return this.controls.f1Macro as FormControl;
+  public get f1Macro(): UntypedFormControl {
+    return this.controls.f1Macro as UntypedFormControl;
   }
-  public get f2Macro(): FormControl {
-    return this.controls.f2Macro as FormControl;
+  public get f2Macro(): UntypedFormControl {
+    return this.controls.f2Macro as UntypedFormControl;
   }
-  public get f3Macro(): FormControl {
-    return this.controls.f3Macro as FormControl;
+  public get f3Macro(): UntypedFormControl {
+    return this.controls.f3Macro as UntypedFormControl;
   }
-  public get f4Macro(): FormControl {
-    return this.controls.f4Macro as FormControl;
+  public get f4Macro(): UntypedFormControl {
+    return this.controls.f4Macro as UntypedFormControl;
   }
-  public get f5Macro(): FormControl {
-    return this.controls.f5Macro as FormControl;
+  public get f5Macro(): UntypedFormControl {
+    return this.controls.f5Macro as UntypedFormControl;
   }
-  public get f6Macro(): FormControl {
-    return this.controls.f6Macro as FormControl;
+  public get f6Macro(): UntypedFormControl {
+    return this.controls.f6Macro as UntypedFormControl;
   }
-  public get f7Macro(): FormControl {
-    return this.controls.f7Macro as FormControl;
+  public get f7Macro(): UntypedFormControl {
+    return this.controls.f7Macro as UntypedFormControl;
   }
-  public get f8Macro(): FormControl {
-    return this.controls.f8Macro as FormControl;
+  public get f8Macro(): UntypedFormControl {
+    return this.controls.f8Macro as UntypedFormControl;
   }
-  public get f9Macro(): FormControl {
-    return this.controls.f9Macro as FormControl;
+  public get f9Macro(): UntypedFormControl {
+    return this.controls.f9Macro as UntypedFormControl;
   }
-  public get f10Macro(): FormControl {
-    return this.controls.f10Macro as FormControl;
+  public get f10Macro(): UntypedFormControl {
+    return this.controls.f10Macro as UntypedFormControl;
   }
-  public get f11Macro(): FormControl {
-    return this.controls.f11Macro as FormControl;
+  public get f11Macro(): UntypedFormControl {
+    return this.controls.f11Macro as UntypedFormControl;
   }
-  public get f12Macro(): FormControl {
-    return this.controls.f12Macro as FormControl;
+  public get f12Macro(): UntypedFormControl {
+    return this.controls.f12Macro as UntypedFormControl;
   }
 }

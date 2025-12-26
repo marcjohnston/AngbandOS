@@ -76,11 +76,11 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AngbandOS.Web:build:production"
+              "buildTarget": "AngbandOS.Web:build:production"
             },
             "development": {
-              "browserTarget": "AngbandOS.Web:build:development",
-              "proxyConfig": "proxy.conf.js"
+              "proxyConfig": "proxy.conf.js",
+              "buildTarget": "AngbandOS.Web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AngbandOS.Web:build"
+            "buildTarget": "AngbandOS.Web:build"
           }
         },
         "test": {
@@ -123,7 +123,8 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": true
+              "vendorChunk": true,
+              "buildOptimizer": true
             },
             "production": {
               "optimization": true,
@@ -131,12 +132,12 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false
+              "vendorChunk": false,
+              "buildOptimizer": true
             }
           }
         }
       }
     }
-  },
-  "defaultProject": "AngbandOS.Web"
+  }
 }

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { ProfileFormGroup } from './profile-form-group';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
 import { UpdateAccountRequest } from '../change-password/update-account-request';
 

@@ -1,4 +1,4 @@
-import { FormControl, FormGroup, Validators, ValidatorFn, ValidationErrors, AbstractControl } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators, ValidatorFn, ValidationErrors, AbstractControl } from "@angular/forms";
 
 export function passwordsMatch(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -9,20 +9,20 @@ export function passwordsMatch(): ValidatorFn {
   }
 }
 
-export class ChangePasswordFormGroup extends FormGroup {
+export class ChangePasswordFormGroup extends UntypedFormGroup {
   constructor() {
     super({
-      currentPassword: new FormControl("", Validators.required),
-      newPassword: new FormControl("", Validators.required),
-      confirmPassword: new FormControl("", Validators.required),
+      currentPassword: new UntypedFormControl("", Validators.required),
+      newPassword: new UntypedFormControl("", Validators.required),
+      confirmPassword: new UntypedFormControl("", Validators.required),
     }, { validators: passwordsMatch });
   }
 
-  public get currentPassword(): FormControl {
-    return this.controls.currentPassword as FormControl;
+  public get currentPassword(): UntypedFormControl {
+    return this.controls.currentPassword as UntypedFormControl;
   }
 
-  public get newPassword(): FormControl {
-    return this.controls.newPassword as FormControl;
+  public get newPassword(): UntypedFormControl {
+    return this.controls.newPassword as UntypedFormControl;
   }
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatSlider, MatSliderChange } from '@angular/material/slider';
+import { MatLegacySlider as MatSlider, MatLegacySliderChange as MatSliderChange } from '@angular/material/legacy-slider';
 import { ColorEnum } from '../modules/color-enum/color-enum.module';
 import { ColorsMap } from '../modules/colors-map/colors-map.module';
 import { HtmlConsole } from '../modules/html-console/html-console.module';

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CanDeactivate } from '@angular/router';
+
 import { PlayComponent } from '../play/play.component';
 
 @Injectable()
-export class CanDeactivatePlay implements CanDeactivate<PlayComponent> {
+export class CanDeactivatePlay  {
 
   canDeactivate(target: PlayComponent) {
     if (target.GameInProgress) {

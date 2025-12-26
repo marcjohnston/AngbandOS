@@ -1,13 +1,13 @@
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 
-export class ForgotPasswordDialogFormGroup extends FormGroup {
+export class ForgotPasswordDialogFormGroup extends UntypedFormGroup {
   constructor() {
     super({
-      emailAddress: new FormControl("", Validators.required)
+      emailAddress: new UntypedFormControl("", Validators.required)
     });
   }
 
-  public get emailAddress(): FormControl {
-    return this.controls.emailAddress as FormControl;
+  public get emailAddress(): UntypedFormControl {
+    return this.controls.emailAddress as UntypedFormControl;
   }
 }

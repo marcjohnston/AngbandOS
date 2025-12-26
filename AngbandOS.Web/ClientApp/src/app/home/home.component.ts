@@ -6,7 +6,7 @@ import { Observable, Subscription, timer } from 'rxjs';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
 import { SavedGameDetails } from './saved-game-details';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { ErrorMessages } from '../modules/error-messages/error-messages.module';
 import { ActiveGameDetails } from './active-game-details';
 

@@ -6,7 +6,7 @@ import { AuthenticationService } from '../authentication-service/authentication.
 import { AccountConfirmationFormGroup } from './account-confirmation-form-group';
 import { PutUser } from './put-user';
 import { UserDetails } from '../authentication-service/user-details';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
 
 @Component({
