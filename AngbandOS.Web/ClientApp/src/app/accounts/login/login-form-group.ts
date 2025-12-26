@@ -1,28 +1,28 @@
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 
-export class LoginFormGroup extends FormGroup {
+export class LoginFormGroup extends UntypedFormGroup {
   constructor() {
     super({
-      emailAddress: new FormControl("", Validators.required),
-      password: new FormControl("", Validators.required),
-      rememberMe: new FormControl(true),
-      keepLoggedIn: new FormControl(true)
+      emailAddress: new UntypedFormControl("", Validators.required),
+      password: new UntypedFormControl("", Validators.required),
+      rememberMe: new UntypedFormControl(true),
+      keepLoggedIn: new UntypedFormControl(true)
     });
   }
 
-  public get emailAddress(): FormControl {
-    return this.controls.emailAddress as FormControl;
+  public get emailAddress(): UntypedFormControl {
+    return this.controls.emailAddress as UntypedFormControl;
   }
 
-  public get password(): FormControl {
-    return this.controls.password as FormControl;
+  public get password(): UntypedFormControl {
+    return this.controls.password as UntypedFormControl;
   }
 
-  public get rememberMe(): FormControl {
-    return this.controls.rememberMe as FormControl;
+  public get rememberMe(): UntypedFormControl {
+    return this.controls.rememberMe as UntypedFormControl;
   }
 
-  public get keepLoggedIn(): FormControl {
-    return this.controls.keepLoggedIn as FormControl;
+  public get keepLoggedIn(): UntypedFormControl {
+    return this.controls.keepLoggedIn as UntypedFormControl;
   }
 }

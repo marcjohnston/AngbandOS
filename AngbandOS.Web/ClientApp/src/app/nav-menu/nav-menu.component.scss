@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 @import '../../theme.scss';
 
 nav {
@@ -39,9 +39,9 @@ a.navbar-brand {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
   }
 
-  #logo {
-    font-size: 6pt;
-    color: mat-color($primary, 100);
-    font-weight: bold;
-    white-space: nowrap;
-  }
+#logo {
+  font-size: 6pt;
+  color: mat.get-color-from-palette($primary, 100);
+  font-weight: bold;
+  white-space: nowrap;
+}

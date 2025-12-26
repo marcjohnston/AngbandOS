@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatSlider, MatSliderChange } from '@angular/material/slider';
+import { MatSlider } from '@angular/material/slider';
 import { ColorEnum } from '../modules/color-enum/color-enum.module';
 import { ColorsMap } from '../modules/colors-map/colors-map.module';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
@@ -28,20 +28,54 @@ export class UiComponent implements OnInit {
     return this._htmlConsole!.configuration.charSize;
   }
 
+  public set charSize(value: number) {
+    if (value !== null) {
+      this._htmlConsole!.configuration.charSize = value;
+      this.refresh();
+    }
+  }
   public get xSpacing(): number {
     return this._htmlConsole!.configuration.xSpacing;
+  }
+
+  public set xSpacing(value: number) {
+    if (value !== null) {
+      this._htmlConsole!.configuration.xSpacing = value;
+      this.refresh();
+    }
   }
 
   public get ySpacing(): number {
     return this._htmlConsole!.configuration.ySpacing;
   }
 
+  public set ySpacing(value: number) {
+    if (value !== null) {
+      this._htmlConsole!.configuration.ySpacing = value;
+      this.refresh();
+    }
+  }
+
   public get windowWidth(): number {
     return this._htmlConsole!.configuration.width;
   }
 
+  public set windowWidth(value: number) {
+    if (value !== null) {
+      this._htmlConsole!.configuration.width = value;
+      this.refresh();
+    }
+  }
+
   public get windowHeight(): number {
     return this._htmlConsole!.configuration.height;
+  }
+
+  public set windowHeight(value: number) {
+    if (value !== null) {
+      this._htmlConsole!.configuration.height = value;
+      this.refresh();
+    }
   }
 
   public getColor(index: number): string {
@@ -51,41 +85,6 @@ export class UiComponent implements OnInit {
   public setColor(index: number, color: string) {
     if (this._htmlConsole !== undefined && this._htmlConsole.configuration.colors !== undefined) {
       this._htmlConsole!.configuration.colors[index] = color;
-      this.refresh();
-    }
-  }
-
-  public setCharSize(value: number | null) {
-    if (value !== null) {
-      this._htmlConsole!.configuration.charSize = value;
-      this.refresh();
-    }
-  }
-
-  public setXSpacing(value: number | null) {
-    if (value !== null) {
-      this._htmlConsole!.configuration.xSpacing = value;
-      this.refresh();
-    }
-  }
-
-  public setYSpacing(value: number | null) {
-    if (value !== null) {
-      this._htmlConsole!.configuration.ySpacing = value;
-      this.refresh();
-    }
-  }
-
-  public setWindowWidth(value: number | null) {
-    if (value !== null) {
-      this._htmlConsole!.configuration.width = value;
-      this.refresh();
-    }
-  }
-
-  public setWindowHeight(value: number | null) {
-    if (value !== null) {
-      this._htmlConsole!.configuration.height = value;
       this.refresh();
     }
   }

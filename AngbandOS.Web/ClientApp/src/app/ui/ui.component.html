@@ -8,10 +8,8 @@
               Character Size
             </td>
             <td>
-              <mat-slider [min]="1"
-                          [max]="32"
-                          [value]="charSize"
-                          (input)="setCharSize($event.value)">
+              <mat-slider [min]="1" [max]="32">
+                <input matSliderThumb [(ngModel)]="charSize"/>
               </mat-slider>
               <label>{{charSize}}</label>
             </td>
@@ -21,10 +19,8 @@
               Horizontal Spacing
             </td>
             <td>
-              <mat-slider [min]="1"
-                          [max]="32"
-                          [value]="xSpacing"
-                          (input)="setXSpacing($event.value)">
+              <mat-slider [min]="1" [max]="32">
+                <input matSliderThumb [(ngModel)]="xSpacing" />
               </mat-slider>
               <label>{{xSpacing}}</label>
             </td>
@@ -34,10 +30,8 @@
               Vertical Spacing
             </td>
             <td>
-              <mat-slider [min]="1"
-                          [max]="32"
-                          [value]="ySpacing"
-                          (input)="setYSpacing($event.value)">
+              <mat-slider [min]="1" [max]="32">
+                <input matSliderThumb [(ngModel)]="ySpacing" />
               </mat-slider>
               <label>{{ySpacing}}</label>
             </td>
@@ -47,10 +41,8 @@
               Window Width
             </td>
             <td>
-              <mat-slider [min]="30"
-                          [max]="200"
-                          [value]="windowWidth"
-                          (input)="setWindowWidth($event.value)">
+              <mat-slider [min]="30" [max]="200">
+                <input matSliderThumb [(ngModel)]="windowWidth" />
               </mat-slider>
               <label>{{windowWidth}}</label>
             </td>
@@ -60,10 +52,8 @@
               Window Height
             </td>
             <td>
-              <mat-slider [min]="20"
-                          [max]="100"
-                          [value]="windowHeight"
-                          (input)="setWindowHeight($event.value)">
+              <mat-slider [min]="20" [max]="100">
+                <input matSliderThumb [(ngModel)]="windowHeight" />
               </mat-slider>
               <label>{{windowHeight}}</label>
             </td>

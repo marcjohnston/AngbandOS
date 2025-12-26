@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl, FormGroup, Validators, ValidatorFn, ValidationErrors } from "@angular/forms";
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators, ValidatorFn, ValidationErrors } from "@angular/forms";
 
 export function passwordsMatch(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -9,18 +9,18 @@ export function passwordsMatch(): ValidatorFn {
   }
 }
 
-export class RegistrationFormGroup extends FormGroup {
+export class RegistrationFormGroup extends UntypedFormGroup {
   constructor() {
     super({
-      username: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z]{1}[a-zA-Z0-9]*$"), Validators.minLength(5), Validators.maxLength(15)]),
-      emailAddress: new FormControl("", [ Validators.required, Validators.email ]),
-      password: new FormControl("", Validators.required),
-      confirmPassword: new FormControl("", Validators.required),
+      username: new UntypedFormControl("", [Validators.required, Validators.pattern("^[a-zA-Z]{1}[a-zA-Z0-9]*$"), Validators.minLength(5), Validators.maxLength(15)]),
+      emailAddress: new UntypedFormControl("", [ Validators.required, Validators.email ]),
+      password: new UntypedFormControl("", Validators.required),
+      confirmPassword: new UntypedFormControl("", Validators.required),
     }, { validators: passwordsMatch });
   }
 
-  public get username(): FormControl {
-    return this.controls.username as FormControl;
+  public get username(): UntypedFormControl {
+    return this.controls.username as UntypedFormControl;
   }
 
   public get usernameError(): string {
@@ -43,8 +43,8 @@ export class RegistrationFormGroup extends FormGroup {
     return '';
   }
 
-  public get emailAddress(): FormControl {
-    return this.controls.emailAddress as FormControl;
+  public get emailAddress(): UntypedFormControl {
+    return this.controls.emailAddress as UntypedFormControl;
   }
 
   public get emailError(): string {
@@ -55,16 +55,16 @@ export class RegistrationFormGroup extends FormGroup {
     return this.emailAddress.hasError('email') ? 'Invalid email address.' : '';
   }
 
-  public get password(): FormControl {
-    return this.controls.password as FormControl;
+  public get password(): UntypedFormControl {
+    return this.controls.password as UntypedFormControl;
   }
 
   public get passwordError(): string {
     return this.password.hasError('required') ? "This field is required." : "";
   }
 
-  public get confirmPassword(): FormControl {
-    return this.controls.confirmPassword as FormControl;
+  public get confirmPassword(): UntypedFormControl {
+    return this.controls.confirmPassword as UntypedFormControl;
   }
 
   public get confirmError(): string {

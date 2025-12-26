@@ -1,18 +1,18 @@
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 
-export class ProfileFormGroup extends FormGroup {
+export class ProfileFormGroup extends UntypedFormGroup {
   constructor() {
     super({
-      emailAddress: new FormControl("", [ Validators.required, Validators.email ]),
-      username: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{4}$") ])
+      emailAddress: new UntypedFormControl("", [ Validators.required, Validators.email ]),
+      username: new UntypedFormControl("", [Validators.required, Validators.pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{4}$") ])
     });
   }
 
-  public get emailAddress(): FormControl {
-    return this.controls.emailAddress as FormControl;
+  public get emailAddress(): UntypedFormControl {
+    return this.controls.emailAddress as UntypedFormControl;
   }
 
-  public get username(): FormControl {
-    return this.controls.username as FormControl;
+  public get username(): UntypedFormControl {
+    return this.controls.username as UntypedFormControl;
   }
 }
