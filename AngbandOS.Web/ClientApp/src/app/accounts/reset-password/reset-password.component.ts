@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ResetPasswordFormGroup } from './reset-password-form-group';
 import { ResetPasswordRequest } from './reset-password-request';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
 
 @Component({

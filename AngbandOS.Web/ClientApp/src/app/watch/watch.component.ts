@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChi
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import * as SignalR from "@microsoft/signalr";
 import { Subscription } from 'rxjs';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
 import { ColorEnum } from '../modules/color-enum/color-enum.module';
 import { PrintLine } from '../modules/html-console/print-line';

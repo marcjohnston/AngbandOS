@@ -6,7 +6,7 @@ import { PageOfGameMessages } from './page-of-game-messages';
 import { GameMessage } from './game-message';
 import { JsonPageOfGameMessages } from './json-page-of-game-messages';
 import { JsonGameMessage } from './json-game-message';
-import { MatLegacyRow as MatRow } from '@angular/material/legacy-table';
+import { MatRow } from '@angular/material/table';
 
 @Component({
   selector: 'app-messages-window',

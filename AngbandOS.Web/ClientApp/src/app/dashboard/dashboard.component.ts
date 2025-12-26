@@ -5,7 +5,7 @@ import * as SignalR from "@microsoft/signalr";
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActiveUserDetails } from './active-user-details';
 import { HubConnections } from './HubConnections';
 

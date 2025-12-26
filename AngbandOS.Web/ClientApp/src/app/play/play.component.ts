@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChi
 import { ActivatedRoute, Router } from '@angular/router';
 import * as SignalR from "@microsoft/signalr";
 import { Subscription } from 'rxjs';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
@@ -10,7 +10,7 @@ import { PrintLine } from '../modules/html-console/print-line';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { GetUserPreferences } from './get-user-preferences';
 import { ErrorMessages } from '../modules/error-messages/error-messages.module';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PreferencesDialogComponent } from '../preferences-dialog/preferences-dialog.component';
 import { PreferencesDialogData } from '../preferences-dialog/preferences-dialog-data';
 import { Preferences } from './preferences';

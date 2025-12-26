@@ -1,5 +1,5 @@
 import { AfterViewChecked, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as SignalR from "@microsoft/signalr";
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
