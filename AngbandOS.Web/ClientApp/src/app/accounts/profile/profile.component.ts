@@ -1,17 +1,27 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { ProfileFormGroup } from './profile-form-group';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
 import { UpdateAccountRequest } from '../change-password/update-account-request';
+import { NgIf } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    RouterLink,
+    ReactiveFormsModule,
+    MatFormField
+  ]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   public formGroup = new ProfileFormGroup();

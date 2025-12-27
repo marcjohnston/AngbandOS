@@ -1,22 +1,20 @@
 import { Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import * as SignalR from "@microsoft/signalr";
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
-import { ColorEnum } from '../modules/color-enum/color-enum.module';
 import { PrintLine } from '../modules/html-console/print-line';
 
 @Component({
   selector: 'app-watch',
   templateUrl: './watch.component.html',
-  styleUrls: [
-    './watch.component.scss'
-  ]
+  styleUrls: ['./watch.component.scss'],
+  standalone: true
 })
 export class WatchComponent implements OnInit, OnDestroy {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;
-  private connection: SignalR.HubConnection | undefined;
+  private connection: HubConnection | undefined;
   public connectionId: string | null = null;
   public gameGuid: string | null | undefined = undefined; // Represents the unique identifier for the game to play; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
   private _initSubscriptions = new Subscription();
@@ -36,7 +34,7 @@ export class WatchComponent implements OnInit, OnDestroy {
     }
 
     // Create the signal-r connection object.
-    this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/spectators-hub").build();
+    this.connection = new HubConnectionBuilder().withUrl("/apiv1/spectators-hub").build();
 
     // Retrieve the game guid from the query.
     this._initSubscriptions.add(this._activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {

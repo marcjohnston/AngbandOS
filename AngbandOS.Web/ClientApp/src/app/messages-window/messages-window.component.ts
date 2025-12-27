@@ -1,17 +1,22 @@
 import { Component, ElementRef, NgZone, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import * as SignalR from "@microsoft/signalr";
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { PageOfGameMessages } from './page-of-game-messages';
-import { GameMessage } from './game-message';
 import { JsonPageOfGameMessages } from './json-page-of-game-messages';
 import { JsonGameMessage } from './json-game-message';
-import { MatRow } from '@angular/material/table';
+import { MatRow, MatTableModule } from '@angular/material/table';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-messages-window',
   templateUrl: './messages-window.component.html',
-  styleUrls: ['./messages-window.component.scss']
+  styleUrls: ['./messages-window.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    MatTableModule
+  ]
 })
 export class MessagesWindowComponent implements OnInit {
   @ViewChildren(MatRow, { read: ElementRef }) tableRows!: QueryList<ElementRef<HTMLTableRowElement>>;
@@ -24,7 +29,7 @@ export class MessagesWindowComponent implements OnInit {
   public gameConnectionId: string | null | undefined = undefined;
 
   /** Returns the Signal-R connection to the MessagesHub. */
-  private connection: SignalR.HubConnection | undefined;
+  private connection: HubConnection | undefined;
 
   /** Returns the active Signal-R connection ID. */
   public connectionId: string | null = null;
@@ -121,7 +126,7 @@ export class MessagesWindowComponent implements OnInit {
 
   ngOnInit(): void {
     // Connect to the messages hub.
-    this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/game-messages-hub").build();
+    this.connection = new HubConnectionBuilder().withUrl("/apiv1/game-messages-hub").build();
 
     // Retrieve the game guid from the query.
     this._initSubscriptions.add(this._activatedRoute.paramMap.subscribe((paramMap) => {

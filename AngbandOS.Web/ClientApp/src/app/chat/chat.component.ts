@@ -1,15 +1,25 @@
-import { AfterViewChecked, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as SignalR from "@microsoft/signalr";
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
 import { ChatMessage } from './chat-message';
+import { NgFor, NgIf } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  styleUrls: ['./chat.component.scss'],
+  standalone: true,
+  imports: [
+    NgFor,
+    NgIf,
+    MatIconModule,
+    MatCardModule
+  ]
 })
 export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   public history: ChatMessage[] | undefined;
@@ -19,15 +29,15 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('scrollDiv', { static: true }) private scrollDivRef: ElementRef | undefined;
   private scrollToBottomOfChatAfterViewChecked = false;
   private _initSubscriptions = new Subscription();
-  private _chatConnection: SignalR.HubConnection | undefined; // Initialized only as needed due to two different authentication channels.
-  private _serviceConnection: SignalR.HubConnection | undefined; // Initialized only as needed due to two different authentication channels.
+  private _chatConnection: HubConnection | undefined; // Initialized only as needed due to two different authentication channels.
+  private _serviceConnection: HubConnection | undefined; // Initialized only as needed due to two different authentication channels.
 
   constructor(
     private _authenticationService: AuthenticationService,
     private _snackBar: MatSnackBar,
     private _ngZone: NgZone
   ) {
- }
+  }
 
   public formatDate(dateString: string | undefined) {
     if (dateString === undefined) {
@@ -45,7 +55,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     } else {
       // Show the date and the time.
       return date.toLocaleDateString();
-   ;
+      ;
     }
   }
 
@@ -101,7 +111,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     // Since we bounce back and forth between the chat and service hubs depending on the authentication of the user, we will initialize the
     // connection only as needed.
     console.log("Connecting to service hub.");
-    this._serviceConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
+    this._serviceConnection = new HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
     this._serviceConnection.start().then(() => {
       this.connectionId = `Service: ${this._serviceConnection?.connectionId!}`;
       if (this._serviceConnection !== undefined) {
@@ -122,7 +132,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     // Since we bounce back and forth between the chat and service hubs depending on the authentication of the user, we will initialize the
     // connection only as needed.
     console.log("Connecting to chat hub.");
-    this._chatConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/chat-hub", {
+    this._chatConnection = new HubConnectionBuilder().withUrl("/apiv1/chat-hub", {
       accessTokenFactory: () => accessToken
     }).build();
     this._chatConnection.start().then(() => {
@@ -202,7 +212,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       this._chatConnection.off("ChatRefreshed");
       this._chatConnection.stop();
       this._chatConnection = undefined;
-   }
+    }
   }
 
   ngOnDestroy() {

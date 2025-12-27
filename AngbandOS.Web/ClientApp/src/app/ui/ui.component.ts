@@ -3,12 +3,21 @@ import { MatSlider } from '@angular/material/slider';
 import { ColorEnum } from '../modules/color-enum/color-enum.module';
 import { ColorsMap } from '../modules/colors-map/colors-map.module';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
-//import { UiConfiguration } from './ui-configuration';
+import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @Component({
   selector: 'app-ui',
   templateUrl: './ui.component.html',
-  styleUrls: ['./ui.component.scss']
+  styleUrls: ['./ui.component.scss'],
+  standalone: true,
+  imports: [
+    NgFor,
+    MatSlider,
+    FormsModule,
+    ColorPickerModule
+  ]
 })
 export class UiComponent implements OnInit {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;

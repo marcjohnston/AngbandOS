@@ -3,11 +3,21 @@ import { PropertyMetadataAndConfiguration } from '../property-metadata-and-confi
 import { PropertyMetadata } from '../property-metadata';
 import { getEntityName as importedGetEntityName } from '../game-designer-library.module';
 import { SelectOption } from '../select-option';
+import { NgFor, NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-type.component';
 
 @Component({
   selector: 'app-game-designer-property',
   templateUrl: './game-designer-property.component.html',
-  styleUrls: ['./game-designer-property.component.scss']
+  styleUrls: ['./game-designer-property.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    MatIconModule,
+    GameDesignerTypeComponent
+  ]
 })
 export class GameDesignerPropertyComponent implements OnInit {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.

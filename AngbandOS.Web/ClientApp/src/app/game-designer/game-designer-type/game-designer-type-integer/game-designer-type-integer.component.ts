@@ -1,10 +1,19 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
+import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-game-designer-type-integer',
   templateUrl: './game-designer-type-integer.component.html',
-  styleUrls: ['./game-designer-type-integer.component.scss']
+  styleUrls: ['./game-designer-type-integer.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    FormsModule,
+    MatIconModule
+  ]
 })
 export class GameDesignerTypeIntegerComponent implements OnInit {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads it.

@@ -1,14 +1,26 @@
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { LoginFormGroup } from './login-form-group';
+import { NgIf } from '@angular/common';
+import { MatFormField } from '@angular/material/form-field';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  standalone: true,
+  imports: [
+    RouterLink,
+    NgIf,
+    MatFormField,
+    MatCheckbox,
+    ReactiveFormsModule,
+  ]
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public formGroup = new LoginFormGroup();

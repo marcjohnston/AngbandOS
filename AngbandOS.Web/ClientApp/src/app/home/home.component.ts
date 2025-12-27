@@ -1,22 +1,37 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import * as SignalR from "@microsoft/signalr";
-import { Observable, Subscription, timer } from 'rxjs';
+import { HubConnectionBuilder } from '@microsoft/signalr';
+import { Subscription, timer } from 'rxjs';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
 import { SavedGameDetails } from './saved-game-details';
 import { MatSnackBar as MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../modules/error-messages/error-messages.module';
 import { ActiveGameDetails } from './active-game-details';
+import { DatePipe, NgClass, NgIf } from '@angular/common';
+import { ChatComponent } from '../chat/chat.component';
+import { FooterComponent } from '../footer/footer.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 
 const idleTimeIntervalInMilliseconds = 5000;
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: [
-    './home.component.scss'
+  styleUrls: ['./home.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    ChatComponent,
+    FooterComponent,
+    NgClass,
+    MatIconModule,
+    DatePipe,
+    MatTableModule,
+    NavMenuComponent
   ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
@@ -31,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public isAuthenticated: boolean = false;
   public isAdministrator: boolean = false;
   private readonly _initSubscriptions = new Subscription();
-  private readonly _serviceConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
+  private readonly _serviceConnection = new HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
 
   constructor(
     private _httpClient: HttpClient,
