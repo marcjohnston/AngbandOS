@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@import '../../theme.scss';
+@use 'src/theme' as theme;
 
 nav {
   margin: 0 !important; // Override the margins for the nav to allow the logo to consume and become the margin space
@@ -40,7 +40,7 @@ a.navbar-brand {
 
 #logo {
   font-size: 6pt;
-  color: mat.m2-get-color-from-palette($primary, 100);
+  color: mat.m2-get-color-from-palette(theme.$primary, 100);
   font-weight: bold;
   white-space: nowrap;
 }

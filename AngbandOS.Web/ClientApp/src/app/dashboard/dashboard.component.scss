@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@import "src/theme.scss";
+@use 'src/theme' as theme;
 
 #container {
   width: 100%;
@@ -29,7 +29,7 @@
     }
 
     & [mat-row]:hover {
-      background-color: mat.m2-get-color-from-palette($primary, darker);
+      background-color: mat.m2-get-color-from-palette(theme.$primary, darker);
     }
   }
 
