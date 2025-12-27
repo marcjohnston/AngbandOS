@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
-import { LoginComponent } from '../accounts/login/login.component';
 import { LoginMenuComponent } from '../login-menu/login-menu.component';
 import { NgClass } from '@angular/common';
 
@@ -11,7 +10,6 @@ import { NgClass } from '@angular/common';
   standalone: true,
   imports: [
     RouterLink,
-    LoginComponent,
     LoginMenuComponent,
     NgClass
   ]

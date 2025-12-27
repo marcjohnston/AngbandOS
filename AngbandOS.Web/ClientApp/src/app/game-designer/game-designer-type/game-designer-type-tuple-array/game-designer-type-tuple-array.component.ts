@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, forwardRef } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
 import { PropertyMetadata } from '../../property-metadata';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +14,7 @@ import { GameDesignerTypeComponent } from '../game-designer-type.component';
     NgIf,
     NgFor,
     MatIconModule,
-    GameDesignerTypeComponent
+    forwardRef(() => GameDesignerTypeComponent) /** This is needed to break the circular reference */
   ]
 })
 export class GameDesignerTypeTupleArrayComponent implements OnInit {

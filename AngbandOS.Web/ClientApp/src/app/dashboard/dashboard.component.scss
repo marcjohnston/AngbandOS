@@ -6,38 +6,35 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  #active-games-span, #saved-games-span
 
-{
-  margin-top: 25px;
-}
+  #active-games-span, #saved-games-span {
+    margin-top: 25px;
+  }
 
-table {
-  width: 100%;
-  & .right-most-column
+  table {
+    width: 100%;
 
-{
-  text-align: right;
-}
+    & .right-most-column {
+      text-align: right;
+    }
 
-& [mat-cell] {
-  vertical-align: top;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
+    & [mat-cell] {
+      vertical-align: top;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
 
-& .highlight {
-  background-color: lightgray;
-}
+    & .highlight {
+      background-color: lightgray;
+    }
 
-& [mat-row]:hover {
-  background-color: mat.m2-get-color-from-palette($primary, darker);
-}
+    & [mat-row]:hover {
+      background-color: mat.m2-get-color-from-palette($primary, darker);
+    }
+  }
 
-}
-
-button {
-  margin-top: 25px;
-  width: 200px;
-}
+  button {
+    margin-top: 25px;
+    width: 200px;
+  }
 }
