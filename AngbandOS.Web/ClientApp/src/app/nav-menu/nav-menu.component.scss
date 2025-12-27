@@ -41,7 +41,7 @@ a.navbar-brand {
 
 #logo {
   font-size: 6pt;
-  color: mat.get-color-from-palette($primary, 100);
+  color: mat.m2-get-color-from-palette($primary, 100);
   font-weight: bold;
   white-space: nowrap;
 }

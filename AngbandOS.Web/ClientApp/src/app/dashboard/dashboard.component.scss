@@ -31,7 +31,7 @@ table {
 }
 
 & [mat-row]:hover {
-  background-color: mat.get-color-from-palette($primary, darker);
+  background-color: mat.m2-get-color-from-palette($primary, darker);
 }
 
 }
