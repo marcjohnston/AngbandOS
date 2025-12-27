@@ -10,8 +10,7 @@
 //  you can delete this line and instead use:
 //    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
 @include mat.all-component-typographies();
-@include mat.elevation-classes();
-@include mat.app-background();
+@include mat.core();
 @include mat.all-component-themes($theme);
 
 html, body {
