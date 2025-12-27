@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -57,89 +57,77 @@ import { GameDesignerTypeCharacterComponent } from './game-designer/game-designe
 import { GameDesignerTypeForeignKeyComponent } from './game-designer/game-designer-type/game-designer-type-foreign-key/game-designer-type-foreign-key.component';
 import { GameDesignerTypeColorComponent } from './game-designer/game-designer-type/game-designer-type-color/game-designer-type-color.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    PlayComponent,
-    WatchComponent,
-
-    LoginComponent,
-    RegistrationComponent,
-    LoginMenuComponent,
-    ForgotPasswordComponent,
-    ProfileComponent,
-    AccountConfirmationComponent,
-    LogoutComponent,
-    ResetPasswordComponent,
-    ChangePasswordComponent,
-
-    UiComponent,
-    ChatComponent,
-    DashboardComponent,
-    PreferencesDialogComponent,
-    GameDesignerComponent,
-    MessagesWindowComponent,
-    FooterComponent,
-    GameDesignerPropertyComponent,
-    GameDesignerTypeComponent,
-    GameDesignerTypeBooleanComponent,
-    GameDesignerTypeStringArrayComponent,
-    GameDesignerTypeStringComponent,
-    GameDesignerTypeTupleArrayComponent,
-    GameDesignerTypeIntegerComponent,
-    GameDesignerTypeCharacterComponent,
-    GameDesignerTypeForeignKeyComponent,
-    GameDesignerTypeColorComponent,
-  ],
-  imports: [
-    MatTableModule,
-    MatSnackBarModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSliderModule,
-    MatIconModule,
-    MatCardModule,
-    DragDropModule,
-    MatSelectModule,
-
-    ColorPickerModule,
-
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'play', component: PlayComponent, canDeactivate: [CanDeactivatePlay] },
-      { path: 'play/:guid', component: PlayComponent, canDeactivate: [CanDeactivatePlay] },
-      { path: 'watch/:guid', component: WatchComponent },
-      { path: 'watch/:guid/messages', component: MessagesWindowComponent },
-
-      { path: 'ui', component: UiComponent },
-      { path: 'game-designer', component: GameDesignerComponent },
-      { path: 'dashboard', component: DashboardComponent },
-
-      { path: 'accounts/login', component: LoginComponent },
-      { path: 'accounts/logout', component: LogoutComponent },
-      { path: 'accounts/profile', component: ProfileComponent },
-      { path: 'accounts/confirm', component: AccountConfirmationComponent },
-      { path: 'accounts/register', component: RegistrationComponent },
-      { path: 'accounts/forgot-password', component: ForgotPasswordComponent },
-      { path: 'accounts/reset-password', component: ResetPasswordComponent },
-      { path: 'accounts/change-password', component: ChangePasswordComponent }
-    ])
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
-    CanDeactivatePlay
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        NavMenuComponent,
+        HomeComponent,
+        PlayComponent,
+        WatchComponent,
+        LoginComponent,
+        RegistrationComponent,
+        LoginMenuComponent,
+        ForgotPasswordComponent,
+        ProfileComponent,
+        AccountConfirmationComponent,
+        LogoutComponent,
+        ResetPasswordComponent,
+        ChangePasswordComponent,
+        UiComponent,
+        ChatComponent,
+        DashboardComponent,
+        PreferencesDialogComponent,
+        GameDesignerComponent,
+        MessagesWindowComponent,
+        FooterComponent,
+        GameDesignerPropertyComponent,
+        GameDesignerTypeComponent,
+        GameDesignerTypeBooleanComponent,
+        GameDesignerTypeStringArrayComponent,
+        GameDesignerTypeStringComponent,
+        GameDesignerTypeTupleArrayComponent,
+        GameDesignerTypeIntegerComponent,
+        GameDesignerTypeCharacterComponent,
+        GameDesignerTypeForeignKeyComponent,
+        GameDesignerTypeColorComponent,
+    ],
+    bootstrap: [AppComponent], imports: [MatTableModule,
+        MatSnackBarModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        MatInputModule,
+        MatButtonModule,
+        MatSliderModule,
+        MatIconModule,
+        MatCardModule,
+        DragDropModule,
+        MatSelectModule,
+        ColorPickerModule,
+        BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot([
+            { path: '', component: HomeComponent, pathMatch: 'full' },
+            { path: 'play', component: PlayComponent, canDeactivate: [CanDeactivatePlay] },
+            { path: 'play/:guid', component: PlayComponent, canDeactivate: [CanDeactivatePlay] },
+            { path: 'watch/:guid', component: WatchComponent },
+            { path: 'watch/:guid/messages', component: MessagesWindowComponent },
+            { path: 'ui', component: UiComponent },
+            { path: 'game-designer', component: GameDesignerComponent },
+            { path: 'dashboard', component: DashboardComponent },
+            { path: 'accounts/login', component: LoginComponent },
+            { path: 'accounts/logout', component: LogoutComponent },
+            { path: 'accounts/profile', component: ProfileComponent },
+            { path: 'accounts/confirm', component: AccountConfirmationComponent },
+            { path: 'accounts/register', component: RegistrationComponent },
+            { path: 'accounts/forgot-password', component: ForgotPasswordComponent },
+            { path: 'accounts/reset-password', component: ResetPasswordComponent },
+            { path: 'accounts/change-password', component: ChangePasswordComponent }
+        ])], providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptorService, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
+        CanDeactivatePlay,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
