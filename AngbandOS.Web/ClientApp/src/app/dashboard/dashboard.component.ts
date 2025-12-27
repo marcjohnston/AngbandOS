@@ -1,7 +1,6 @@
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Subscription } from 'rxjs';
-import { FormsModule } from '@angular/forms';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
 import { ActiveUserDetails } from './active-user-details';
@@ -17,8 +16,6 @@ import { MatTableModule } from '@angular/material/table';
   standalone: true,
   imports: [
     NgIf,
-    NgFor,
-    FormsModule,
     MatButtonModule,
     MatTableModule
   ]

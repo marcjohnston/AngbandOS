@@ -13,6 +13,8 @@ a.navbar-brand {
 
 .container {
   display: flex;
+  width: 100%;
+  max-width: 100%;
 
   @media (min-width: 768px) {
     margin: 0 15px 0 15px; // We need left and right margins
@@ -24,9 +26,6 @@ a.navbar-brand {
         padding: 0;
     }
   }
-
-  width: 100%;
-  max-width: 100%;
 }
 
   @media (min-width: 768px) {

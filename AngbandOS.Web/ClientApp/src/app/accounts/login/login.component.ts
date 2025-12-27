@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     // Get the query params
     this._activatedRoute.queryParams.subscribe((params: Params) => {
       // Get the return URL, if one was specified.
-      this._return = params['return']
+      this._return = params['return'];
 
       // Setup the formgroup values.
       const emailAddress = localStorage.getItem('email-address');
@@ -67,24 +67,24 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public onLoginClick() {
     this._authenticationService.login(this.formGroup.emailAddress.value, this.formGroup.password.value).then(() => {
-      if (this._return !== null) {
-        if (this.formGroup.rememberMe.value) {
-          this._authenticationService.storeCredentialsLocally(this.formGroup.emailAddress.value, this.formGroup.password.value, this.formGroup.keepLoggedIn.value);
-        } else {
-          this._authenticationService.removeLocallyStoredCredentials();
-        }
+      if (this.formGroup.rememberMe.value) {
+        this._authenticationService.storeCredentialsLocally(this.formGroup.emailAddress.value, this.formGroup.password.value, this.formGroup.keepLoggedIn.value);
+      } else {
+        this._authenticationService.removeLocallyStoredCredentials();
+      }
 
+      if (this._return !== undefined && this._return !== null) {
         // This is running outside of the Angular zone.
         this._zone.run(() => this._router.navigate([this._return]));
       } else {
         this._zone.run(() => { this.message = "" });
       }
     }, () => {
-        // Erase the password.  We need to do this before the setting the message because we have a subscription that will erase the message.
-        this.formGroup.password.setValue("");
+      // Erase the password.  We need to do this before the setting the message because we have a subscription that will erase the message.
+      this.formGroup.password.setValue("");
 
-        // Now set the message.
-        this.message = "Login failed.";
+      // Now set the message.
+      this.message = "Login failed.";
     });
   }
 }

@@ -5,8 +5,6 @@ using AngbandOS.Web.Interface;
 using AngbandOS.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.IdentityModel.Tokens;
-using System;
 using System.Collections.Concurrent;
 using System.Security.Claims;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
