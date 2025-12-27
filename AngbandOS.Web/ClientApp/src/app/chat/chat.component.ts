@@ -6,8 +6,8 @@ import { AuthenticationService } from '../accounts/authentication-service/authen
 import { UserDetails } from '../accounts/authentication-service/user-details';
 import { ChatMessage } from './chat-message';
 import { NgFor, NgIf } from '@angular/common';
-import { MatCard, MatCardContent, MatCardSubtitle } from '@angular/material/card';
-import { MatIcon } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-chat',
@@ -17,10 +17,8 @@ import { MatIcon } from '@angular/material/icon';
   imports: [
     NgFor,
     NgIf,
-    MatIcon,
-    MatCard,
-    MatCardContent,
-    MatCardSubtitle
+    MatIconModule,
+    MatCardModule
   ]
 })
 export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {

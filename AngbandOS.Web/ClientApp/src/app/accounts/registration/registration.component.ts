@@ -1,14 +1,26 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { PostAccount } from './post-account';
 import { RegistrationFormGroup } from './registration-form-group';
+import { NgClass, NgIf } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatError, MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    ReactiveFormsModule,
+    MatFormField,
+    MatError,
+    NgClass,
+    RouterLink
+  ]
 })
 export class RegistrationComponent {
   public formGroup = new RegistrationFormGroup();

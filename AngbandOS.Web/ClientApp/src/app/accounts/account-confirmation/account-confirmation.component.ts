@@ -8,11 +8,20 @@ import { PutUser } from './put-user';
 import { UserDetails } from '../authentication-service/user-details';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
+import { NgIf } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-account-confirmation',
   templateUrl: './account-confirmation.component.html',
-  styleUrls: ['./account-confirmation.component.scss']
+  styleUrls: ['./account-confirmation.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    ReactiveFormsModule,
+    MatFormField
+  ]
 })
 export class AccountConfirmationComponent implements OnInit, OnDestroy {
   private _initSubscriptions = new Subscription();

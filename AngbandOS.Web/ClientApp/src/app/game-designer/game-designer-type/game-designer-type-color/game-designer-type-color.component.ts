@@ -4,7 +4,7 @@ import { SelectOption } from '../../select-option';
 import { ColorEnum } from '../../../modules/color-enum/color-enum.module';
 import { convertToTitleCase } from '../../../modules/strings-library/strings-library.module';
 import { NgFor, NgIf } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     NgIf,
     NgFor,
-    MatIcon,
+    MatIconModule,
     FormsModule
   ]
 })

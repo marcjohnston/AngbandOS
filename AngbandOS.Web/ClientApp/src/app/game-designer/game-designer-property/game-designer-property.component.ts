@@ -4,7 +4,7 @@ import { PropertyMetadata } from '../property-metadata';
 import { getEntityName as importedGetEntityName } from '../game-designer-library.module';
 import { SelectOption } from '../select-option';
 import { NgFor, NgIf } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-type.component';
 
 @Component({
@@ -15,7 +15,7 @@ import { GameDesignerTypeComponent } from '../game-designer-type/game-designer-t
   imports: [
     NgIf,
     NgFor,
-    MatIcon,
+    MatIconModule,
     GameDesignerTypeComponent
   ]
 })

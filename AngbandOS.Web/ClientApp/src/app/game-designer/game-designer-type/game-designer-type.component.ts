@@ -10,7 +10,7 @@ import { GameDesignerTypeForeignKeyComponent } from './game-designer-type-foreig
 import { GameDesignerTypeTupleArrayComponent } from './game-designer-type-tuple-array/game-designer-type-tuple-array.component';
 import { GameDesignerTypeStringArrayComponent } from './game-designer-type-string-array/game-designer-type-string-array.component';
 import { GameDesignerTypeStringComponent } from './game-designer-type-string/game-designer-type-string.component';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { NgFor, NgIf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -22,7 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
   imports: [
     NgIf,
     NgFor,
-    MatIcon,
+    MatIconModule,
     MatSelectModule,
     GameDesignerTypeCharacterComponent,
     GameDesignerTypeIntegerComponent,

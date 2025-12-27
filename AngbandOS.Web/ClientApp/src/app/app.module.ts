@@ -29,7 +29,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { ResetPasswordComponent } from './accounts/reset-password/reset-password.component';
 import { LoginComponent } from './accounts/login/login.component';
-import { LoginMenuComponent } from './login-menu/login-menu.component';
 import { ForgotPasswordComponent } from './accounts/forgot-password/forgot-password.component';
 import { RegistrationComponent } from './accounts/registration/registration.component';
 import { AuthenticationInterceptor } from './accounts/authentication-interceptor/authentication-interceptor';
@@ -39,39 +38,15 @@ import { UnauthorizedInterceptorService } from './accounts/unauthorized-intercep
 import { AccountConfirmationComponent } from './accounts/account-confirmation/account-confirmation.component';
 import { ChangePasswordComponent } from './accounts/change-password/change-password.component';
 
-import { ChatComponent } from './chat/chat.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PreferencesDialogComponent } from './preferences-dialog/preferences-dialog.component';
 import { GameDesignerComponent } from './game-designer/game-designer.component';
 import { CanDeactivatePlay } from './can-deactivate-play/can-deactivate-play';
 import { MessagesWindowComponent } from './messages-window/messages-window.component';
-import { FooterComponent } from './footer/footer.component';
-import { GameDesignerPropertyComponent } from './game-designer/game-designer-property/game-designer-property.component';
-import { GameDesignerTypeComponent } from './game-designer/game-designer-type/game-designer-type.component';
-import { GameDesignerTypeBooleanComponent } from './game-designer/game-designer-type/game-designer-type-boolean/game-designer-type-boolean.component';
-import { GameDesignerTypeStringArrayComponent } from './game-designer/game-designer-type/game-designer-type-string-array/game-designer-type-string-array.component';
-import { GameDesignerTypeStringComponent } from './game-designer/game-designer-type/game-designer-type-string/game-designer-type-string.component';
-import { GameDesignerTypeTupleArrayComponent } from './game-designer/game-designer-type/game-designer-type-tuple-array/game-designer-type-tuple-array.component';
-import { GameDesignerTypeIntegerComponent } from './game-designer/game-designer-type/game-designer-type-integer/game-designer-type-integer.component';
-import { GameDesignerTypeCharacterComponent } from './game-designer/game-designer-type/game-designer-type-character/game-designer-type-character.component';
-import { GameDesignerTypeForeignKeyComponent } from './game-designer/game-designer-type/game-designer-type-foreign-key/game-designer-type-foreign-key.component';
-import { GameDesignerTypeColorComponent } from './game-designer/game-designer-type/game-designer-type-color/game-designer-type-color.component';
 
-@NgModule({ declarations: [
-        AppComponent,
-        WatchComponent,
-        RegistrationComponent,
-        ForgotPasswordComponent,
-        ProfileComponent,
-        AccountConfirmationComponent,
-        LogoutComponent,
-        ResetPasswordComponent,
-        ChangePasswordComponent,
-        UiComponent,
-        PreferencesDialogComponent,
-        MessagesWindowComponent
-    ],
-    bootstrap: [AppComponent], imports: [MatTableModule,
+@NgModule({
+  bootstrap: [AppComponent],
+  imports: [MatTableModule,
         MatSnackBarModule,
         MatCheckboxModule,
         MatFormFieldModule,

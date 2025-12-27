@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
 import { PropertyMetadata } from '../../property-metadata';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { NgFor, NgIf } from '@angular/common';
 import { GameDesignerTypeComponent } from '../game-designer-type.component';
 
@@ -13,7 +13,7 @@ import { GameDesignerTypeComponent } from '../game-designer-type.component';
   imports: [
     NgIf,
     NgFor,
-    MatIcon,
+    MatIconModule,
     GameDesignerTypeComponent
   ]
 })

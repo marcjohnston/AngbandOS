@@ -6,11 +6,20 @@ import { ResetPasswordFormGroup } from './reset-password-form-group';
 import { ResetPasswordRequest } from './reset-password-request';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
+import { NgIf } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  styleUrls: ['./reset-password.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    ReactiveFormsModule,
+    MatFormField
+  ]
 })
 export class ResetPasswordComponent implements OnInit {
   private _resetToken: string | null = null;

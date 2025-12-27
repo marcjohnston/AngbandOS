@@ -12,8 +12,8 @@ import { ActiveGameDetails } from './active-game-details';
 import { DatePipe, NgClass, NgIf } from '@angular/common';
 import { ChatComponent } from '../chat/chat.component';
 import { FooterComponent } from '../footer/footer.component';
-import { MatIcon } from '@angular/material/icon';
-import { MatTable } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 
 const idleTimeIntervalInMilliseconds = 5000;
@@ -28,9 +28,9 @@ const idleTimeIntervalInMilliseconds = 5000;
     ChatComponent,
     FooterComponent,
     NgClass,
-    MatIcon,
+    MatIconModule,
     DatePipe,
-    MatTable,
+    MatTableModule,
     NavMenuComponent
   ]
 })

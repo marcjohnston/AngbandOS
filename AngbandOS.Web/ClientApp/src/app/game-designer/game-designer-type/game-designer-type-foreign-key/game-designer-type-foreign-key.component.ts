@@ -3,7 +3,7 @@ import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-co
 import { SelectOption } from '../../select-option';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-game-designer-type-foreign-key',
@@ -14,7 +14,7 @@ import { MatIcon } from '@angular/material/icon';
     NgFor,
     NgIf,
     FormsModule,
-    MatIcon
+    MatIconModule
   ]
 })
 export class GameDesignerTypeForeignKeyComponent implements OnInit {

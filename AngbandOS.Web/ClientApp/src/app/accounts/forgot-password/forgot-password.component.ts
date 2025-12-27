@@ -1,13 +1,21 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, Inject, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../../modules/error-messages/error-messages.module';
 import { ForgotPasswordDialogFormGroup } from './forgot-password-dialog-form-group';
+import { MatError, MatFormField } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  styleUrls: ['./forgot-password.component.scss'],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatFormField,
+    MatError
+  ]
 })
 export class ForgotPasswordComponent {
   public formGroup = new ForgotPasswordDialogFormGroup();

@@ -1,12 +1,20 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PreferencesDialogData } from './preferences-dialog-data';
 import { PreferencesDialogFormGroup } from './preferences-dialog-form-group';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-preferences-dialog',
   templateUrl: './preferences-dialog.component.html',
-  styleUrls: ['./preferences-dialog.component.scss']
+  styleUrls: ['./preferences-dialog.component.scss'],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDialogModule
+  ]
 })
 export class PreferencesDialogComponent implements OnInit {
   public formGroup = new PreferencesDialogFormGroup();

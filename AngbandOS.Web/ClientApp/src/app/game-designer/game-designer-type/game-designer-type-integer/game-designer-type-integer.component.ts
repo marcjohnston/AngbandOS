@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-game-designer-type-integer',
@@ -12,7 +12,7 @@ import { MatIcon } from '@angular/material/icon';
   imports: [
     NgIf,
     FormsModule,
-    MatIcon
+    MatIconModule
   ]
 })
 export class GameDesignerTypeIntegerComponent implements OnInit {
