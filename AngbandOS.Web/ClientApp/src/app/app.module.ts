@@ -74,7 +74,6 @@ import { GameDesignerTypeColorComponent } from './game-designer/game-designer-ty
         ChangePasswordComponent,
         UiComponent,
         ChatComponent,
-        DashboardComponent,
         PreferencesDialogComponent,
         GameDesignerComponent,
         MessagesWindowComponent,

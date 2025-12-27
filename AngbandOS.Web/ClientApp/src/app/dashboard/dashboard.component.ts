@@ -1,21 +1,30 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import * as SignalR from "@microsoft/signalr";
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActiveUserDetails } from './active-user-details';
 import { HubConnections } from './HubConnections';
+import { NgIf, NgFor } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    FormsModule,
+    MatButtonModule,
+    MatTableModule
+  ]
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  private adminConnection: SignalR.HubConnection | undefined;
+  private adminConnection: HubConnection | undefined;
   public chatHubConnections: ActiveUserDetails[] | undefined = undefined;
   public adminHubConnections: ActiveUserDetails[] | undefined = undefined;
   public gameHubConnections: ActiveUserDetails[] | undefined = undefined;
@@ -39,7 +48,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     if (this._accessToken !== undefined) {
-      this.adminConnection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/admin-hub", {
+      this.adminConnection = new HubConnectionBuilder().withUrl("/apiv1/admin-hub", {
         accessTokenFactory: () => this._accessToken as string
       }).build();
 
