@@ -2,7 +2,7 @@ import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
@@ -58,8 +58,8 @@ const providers = [
   ]),
   provideHttpClient(withInterceptorsFromDi()),
   CanDeactivatePlay,
-  UnauthorizedInterceptorService,
-  AuthenticationInterceptor
+  { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptorService, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
 ];
 
 if (environment.production) {
