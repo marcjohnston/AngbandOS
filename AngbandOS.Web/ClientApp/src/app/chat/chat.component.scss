@@ -1,10 +1,10 @@
 #container {
   display: flex;
-  flex-direction: column;
-  min-width: 325px;
-  max-width: 500px;
-  height: 100%;
-  border: 1px solid darkgrey;
+  flex-direction: column; // Chat messages are rendered using cards in a column.
+  min-width: 325px; // The chat has a minimum width.
+  max-width: 500px; // The chat box has a maximum width.
+  height: 100%; // The container fills the area provided by the parent component.
+  border: 1px solid darkgrey; // Single line of border.
   @media (min-width: 768px) {
     margin-left: 20px; // If the chat is in a row orientation, enforce a margin.
   }
@@ -15,7 +15,7 @@
   }
 
   & .card-subtitle {
-    display: flex;
+    display: flex;  
     flex-direction: row;
 
     & span {
@@ -23,8 +23,8 @@
       font-size: 8pt;
 
       & .mat-icon {
-          font-size: 15px; // Render the X about the same size as the card-header 
-          padding-left: 5px; // The X needs a bit of space to the right of the date/time
+        font-size: 15px; // Render the X about the same size as the card-header
+        padding-left: 5px; // The X needs a bit of space to the right of the date/time
       }
     }
 
@@ -35,10 +35,12 @@
 
   & mat-card-subtitle {
     margin-bottom: 5px;
+    height: 15px;
   }
 
   & mat-card-content {
-      word-wrap: break-word; // Content in the chat needs to word-wrap and force words to break, if the word itself is too long.
+    word-wrap: break-word; // Content in the chat needs to word-wrap and force words to break, if the word itself is too long.
+    height: 15px;
   }
 
   & #history-area {
