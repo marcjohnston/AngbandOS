@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { ChatMessage } from './chat-message';
 import { NgFor, NgIf } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
@@ -35,7 +36,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   constructor(
     private _authenticationService: AuthenticationService,
     private _snackBar: MatSnackBar,
-    private _ngZone: NgZone
+    private _changeDetectorRef: ChangeDetectorRef
   ) {
   }
 
@@ -93,18 +94,16 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   private updateHistory(history: ChatMessage[]) {
     console.log("Chat updated.")
-    this._ngZone.run(() => {
-      this.history = history;
-      this.scrollToBottomOfChatAfterViewChecked = true;
-    });
+    this.history = history;
+    this.scrollToBottomOfChatAfterViewChecked = true;
+    this._changeDetectorRef.detectChanges();
   }
 
   private appendHistory(message: ChatMessage) {
     console.log("Chat message received.");
-    this._ngZone.run(() => {
-      this.history?.push(message);
-      this.scrollToBottomOfChatAfterViewChecked = true;
-    });
+    this.history?.push(message);
+    this.scrollToBottomOfChatAfterViewChecked = true;
+    this._changeDetectorRef.detectChanges();
   }
 
   private connectServiceHub() {
@@ -145,11 +144,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
           this.appendHistory(_message);
         });
         this._chatConnection.on("MessageFailed", () => {
-          this._ngZone.run(() => {
-            this._snackBar.open("Unable to send message.", "", {
-              duration: 5000
-            });
-          })
+          this._snackBar.open("Unable to send message.", "", {
+            duration: 5000
+          });
+          this._changeDetectorRef.detectChanges();
         });
         this._chatConnection.send("RefreshChat", null);
       }
@@ -159,11 +157,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   private showMessage(message: string) {
-    this._ngZone.run(() => {
-      this._snackBar.open(message, "", {
-        duration: 5000
-      });
+    this._snackBar.open(message, "", {
+      duration: 5000
     });
+    this._changeDetectorRef.detectChanges();
   }
 
   private handleAuthenticationChange() {

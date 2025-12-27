@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import { Subscription, timer } from 'rxjs';
@@ -15,6 +15,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { NavMenuComponent } from '../nav-menu/nav-menu.component';
+import { ChangeDetectorRef } from '@angular/core';
 
 const idleTimeIntervalInMilliseconds = 5000;
 
@@ -45,6 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public selectedSavedGame: SavedGameDetails | null = null;
   public isAuthenticated: boolean = false;
   public isAdministrator: boolean = false;
+
   private readonly _initSubscriptions = new Subscription();
   private readonly _serviceConnection = new HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
 
@@ -53,7 +55,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
     private _authenticationService: AuthenticationService,
     private _router: Router,
-    private _ngZone: NgZone
+    private _changeDetectorRef: ChangeDetectorRef
   ) {
   }
 
@@ -180,12 +182,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._serviceConnection.start().then(() => {
       if (this._serviceConnection !== undefined) {
         this._serviceConnection.on("ActiveGamesUpdated", (_activeGames: ActiveGameDetails[]) => {
-          this._ngZone.run(() => {
-            this.activeGames = _activeGames;
-            if (this.activeGames.length > 0) {
-              setTimeout(() => this.updateIdleTimes(), idleTimeIntervalInMilliseconds);
-            }
-          })
+          this.activeGames = _activeGames;
+          if (this.activeGames.length > 0) {
+            setTimeout(() => this.updateIdleTimes(), idleTimeIntervalInMilliseconds);
+          }
+          this._changeDetectorRef.detectChanges();
         });
         this._serviceConnection.send("RefreshActiveGames");
       }
@@ -198,10 +199,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       if (_userDetails !== null && _userDetails.username !== null) {
         this.isAuthenticated = true;
         this.isAdministrator = (_userDetails.isAdmin === true);
+        this._changeDetectorRef.detectChanges();
         this._httpClient.get<SavedGameDetails[]>(`/apiv1/saved-games`).toPromise().then((_savedGames) => {
-          this._ngZone.run(() => {
-            this.savedGames = _savedGames;
-          });
+          this.savedGames = _savedGames; 
+          this._changeDetectorRef.detectChanges();
         }, (_errorResponse: HttpErrorResponse) => {
           this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
             duration: 5000
@@ -210,6 +211,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       } else {
         this.isAuthenticated = false;
         this._authenticationService.autoLogin();
+        this._changeDetectorRef.detectChanges();
       }
     });
 
@@ -218,18 +220,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private showMessage(message: string) {
-    this._ngZone.run(() => {
-      this._snackBar.open(message, "", {
-        duration: 5000
-      });
+    this._snackBar.open(message, "", {
+      duration: 5000
     });
+    this._changeDetectorRef.detectChanges();
   }
 
   public killActiveGame(activeGame: ActiveGameDetails) {
     this._httpClient.delete(`/apiv1/games/${activeGame.connectionId}`).toPromise().then((_savedGames) => {
       this.showMessage("Game killed.");
     }, (_errorResponse: HttpErrorResponse) => {
-      // No ngZone needed here.
       this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
         duration: 5000
       });
@@ -258,9 +258,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   public deleteSavedGame(savedGame: SavedGameDetails) {
     if (window.confirm('Are you sure you want to delete this game?')) {
       this._httpClient.delete<SavedGameDetails[]>(`/apiv1/saved-games/${savedGame.guid}`).toPromise().then((_savedGames) => {
-        this._ngZone.run(() => {
-          this.savedGames = _savedGames;
-        });
+        this.savedGames = _savedGames;
+        this._changeDetectorRef.detectChanges();
       }, (_errorResponse: HttpErrorResponse) => {
         this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
           duration: 5000

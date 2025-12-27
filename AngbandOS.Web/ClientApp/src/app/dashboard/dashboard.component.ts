@@ -1,4 +1,4 @@
-import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
@@ -8,6 +8,7 @@ import { HubConnections } from './HubConnections';
 import { NgIf, NgFor } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,7 +36,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private _authenticationService: AuthenticationService,
-    private _ngZone: NgZone
+    private _changeDetectorRef: ChangeDetectorRef
   ) {
   }
 
@@ -53,13 +54,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.adminConnection.start().then(() => {
         if (this.adminConnection !== undefined) {
           this.adminConnection.on("HubConnectionsUpdated", (_hubConnections: HubConnections) => {
-            this._ngZone.run(() => {
-              this.chatHubConnections = _hubConnections.chatHubConnections;
-              this.adminHubConnections = _hubConnections.adminHubConnections;
-              this.serviceHubConnections = _hubConnections.serviceHubConnections;
-              this.gameHubConnections = _hubConnections.gameHubConnections;
-              this.spectatorsHubConnections = _hubConnections.spectatorsHubConnections;
-            })
+            this.chatHubConnections = _hubConnections.chatHubConnections;
+            this.adminHubConnections = _hubConnections.adminHubConnections;
+            this.serviceHubConnections = _hubConnections.serviceHubConnections;
+            this.gameHubConnections = _hubConnections.gameHubConnections;
+            this.spectatorsHubConnections = _hubConnections.spectatorsHubConnections;
+            this._changeDetectorRef.detectChanges();
           });
           this.adminConnection.send("UpdateHubConnections");
         }

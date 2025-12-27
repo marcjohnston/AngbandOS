@@ -54,7 +54,7 @@
           <tr mat-row *matRowDef="let activeGame; columns: activeGamesDisplayedColumns" [ngClass]="{'highlight': activeGame === selectedActiveGame}"></tr>
         </table>
       </ng-container>
-      <ng-container *ngIf="isAuthenticated">
+      <ng-container *ngIf="isAuthenticated === true">
         <ng-container *ngIf="savedGames !== undefined">
           <h6 id="saved-games-span">Your Saved Games</h6>
           <table mat-table [dataSource]="savedGames">
@@ -115,7 +115,7 @@
         </ng-container>
         <button mat-flat-button (click)="onNewGame()">Play New Game</button>
       </ng-container>
-      <ng-container *ngIf="(isAuthenticated) === false">
+      <ng-container *ngIf="isAuthenticated === false">
         Welcome to AngbandOS.  You must login to play.
       </ng-container>
     </div>
