@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@import "src/theme.scss";
+@use 'src/theme' as theme;
 
 // TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
 //  The following line adds:
@@ -12,7 +12,7 @@
 @include mat.all-component-typographies();
 @include mat.elevation-classes();
 @include mat.app-background();
-@include mat.all-component-themes($theme);
+@include mat.all-component-themes(theme.$theme);
 
 html, body {
   width: 100%;
