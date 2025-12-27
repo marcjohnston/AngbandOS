@@ -3,11 +3,21 @@ import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-co
 import { SelectOption } from '../../select-option';
 import { ColorEnum } from '../../../modules/color-enum/color-enum.module';
 import { convertToTitleCase } from '../../../modules/strings-library/strings-library.module';
+import { NgFor, NgIf } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-game-designer-type-color',
   templateUrl: './game-designer-type-color.component.html',
-  styleUrls: ['./game-designer-type-color.component.scss']
+  styleUrls: ['./game-designer-type-color.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    MatIcon,
+    FormsModule
+  ]
 })
 export class GameDesignerTypeColorComponent implements OnInit {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads the parameters.

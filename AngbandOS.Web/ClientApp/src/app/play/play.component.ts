@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as SignalR from "@microsoft/signalr";
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
@@ -16,18 +16,27 @@ import { PreferencesDialogData } from '../preferences-dialog/preferences-dialog-
 import { Preferences } from './preferences';
 import { GameConfiguration } from "./game-configuration";
 import { PutUserPreferences } from './put-user-preferences';
+import { NgIf } from '@angular/common';
+import { FooterComponent } from '../footer/footer.component';
+import { ChatComponent } from '../chat/chat.component';
+import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
-  styleUrls: [
-    './play.component.scss'
+  styleUrls: ['./play.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    FooterComponent,
+    ChatComponent,
+    NavMenuComponent
   ]
 })
 export class PlayComponent implements OnInit, OnDestroy {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;
   @ViewChild('inGameMenu', { static: true }) private inGameMenuRef: ElementRef | undefined;
-  private connection: SignalR.HubConnection | undefined;
+  private connection: HubConnection | undefined;
   public connectionId: string | null = null;
   public gameGuid: string | null | undefined = undefined; // Represents the unique identifier for the game to play; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
   private _initSubscriptions = new Subscription();
@@ -452,7 +461,7 @@ export class PlayComponent implements OnInit, OnDestroy {
         // Ensure there is an access token and that the connection has been established already.
         if (this._accessToken !== undefined) {
           // Create the signal-r connection object.
-          this.connection = new SignalR.HubConnectionBuilder().withUrl("/apiv1/game-hub", {
+          this.connection = new HubConnectionBuilder().withUrl("/apiv1/game-hub", {
             accessTokenFactory: () => this._accessToken as string,
           }).build();
           this.check();

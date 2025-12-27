@@ -2,12 +2,20 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { Subscription } from 'rxjs';
 import { UserDetails } from '../accounts/authentication-service/user-details';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login-menu',
   templateUrl: './login-menu.component.html',
-  styleUrls: ['./login-menu.component.scss']
+  styleUrls: ['./login-menu.component.scss'],
+  standalone: true,
+  imports: [
+    RouterLink,
+    MatButtonModule,
+    NgIf
+  ]
 })
 export class LoginMenuComponent implements OnInit, OnDestroy {
   public username: string | null = null;

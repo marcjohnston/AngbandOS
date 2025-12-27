@@ -8,12 +8,24 @@ import { PropertyMetadataAndConfiguration } from './property-metadata-and-config
 import { JsonPropertyMetadata } from './json-property-metadata';
 import { getEntityName } from './game-designer-library.module';
 import { SelectOption } from './select-option';
-
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { GameDesignerPropertyComponent } from './game-designer-property/game-designer-property.component';
+import { FooterComponent } from '../footer/footer.component';
+import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 
 @Component({
   selector: 'app-game-designer',
   templateUrl: './game-designer.component.html',
-  styleUrls: ['./game-designer.component.scss']
+  styleUrls: ['./game-designer.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    GameDesignerPropertyComponent,
+    FooterComponent,
+    JsonPipe,
+    NavMenuComponent
+  ]
 })
 
 export class GameDesignerComponent implements OnInit {

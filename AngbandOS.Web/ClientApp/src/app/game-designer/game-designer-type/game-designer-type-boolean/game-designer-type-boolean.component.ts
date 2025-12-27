@@ -1,10 +1,21 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PropertyMetadataAndConfiguration } from '../../property-metadata-and-configuration';
+import { NgIf } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIcon } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-game-designer-type-boolean',
   templateUrl: './game-designer-type-boolean.component.html',
-  styleUrls: ['./game-designer-type-boolean.component.scss']
+  styleUrls: ['./game-designer-type-boolean.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    MatSelectModule,
+    MatIcon,
+    FormsModule
+  ]
 })
 export class GameDesignerTypeBooleanComponent implements OnInit {
   @Input() activePropertyMetadataAndConfiguration: PropertyMetadataAndConfiguration | undefined = undefined; // Undefined until Angular loads it.
