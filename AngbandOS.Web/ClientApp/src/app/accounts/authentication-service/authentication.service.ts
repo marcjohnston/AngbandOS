@@ -110,7 +110,7 @@ export class AuthenticationService {
       }, (reason: any) => {
         this.currentUser.next(null);
         localStorage.setItem('keep-logged-in', "");
-        reject()
+        reject(reason)
       }).catch(() => {
         this.currentUser.next(null);
         localStorage.setItem('keep-logged-in', "");

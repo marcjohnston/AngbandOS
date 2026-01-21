@@ -40,11 +40,11 @@ namespace AngbandOS.Web.Controllers
         /// <param name="loggingProvider"></param>
         /// <param name="mailService"></param>
         public AccountsCollectionController(IConfiguration config,
-          UserManager<ApplicationUser> userManager,
-          TemplateProcessor templateProcessor,
-          SignInManager<ApplicationUser> signInManager,
-          IWebPersistentStorage webPersistentStorage,
-          IEmailSender emailSender)
+            UserManager<ApplicationUser> userManager,
+            TemplateProcessor templateProcessor,
+            SignInManager<ApplicationUser> signInManager,
+            IWebPersistentStorage webPersistentStorage,
+            IEmailSender emailSender)
         {
             Configuration = config;
             UserManager = userManager;
@@ -76,25 +76,25 @@ namespace AngbandOS.Web.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<string[]>> RegisterAsync([FromBody] PostAccount postUser)
         {
-            if (postUser == null)
-                return BadRequest("The user to post was not supplied or did not parse correctly.");
-
-            if (postUser.Username.Length < 5 || postUser.Username.Length > 15 || !char.IsLetter(postUser.Username[0]) || !postUser.Username.Substring(1).All(char.IsLetterOrDigit))
-                return BadRequest("Invalid username.");
-
-            if (!IsValidEmailAddress(postUser.EmailAddress))
-                return BadRequest("Invalid email address.");
-
-            // Create a user to add to the ASP.NET Core Identity.
-            ApplicationUser newUser = new ApplicationUser()
-            {
-                UserName = postUser.Username,
-                Email = postUser.EmailAddress
-            };
-
-            // Create the user.
             try
             {
+                if (postUser == null)
+                    return BadRequest("The user to post was not supplied or did not parse correctly.");
+
+                if (postUser.Username.Length < 5 || postUser.Username.Length > 15 || !char.IsLetter(postUser.Username[0]) || !postUser.Username.Substring(1).All(char.IsLetterOrDigit))
+                    return BadRequest("Invalid username.");
+
+                if (!IsValidEmailAddress(postUser.EmailAddress))
+                    return BadRequest("Invalid email address.");
+
+                // Create a user to add to the ASP.NET Core Identity.
+                ApplicationUser newUser = new ApplicationUser()
+                {
+                    UserName = postUser.Username,
+                    Email = postUser.EmailAddress
+                };
+
+                // Create the user.
                 IdentityResult result = await UserManager.CreateAsync(newUser, postUser.Password);
 
                 // If it failed, throw.
@@ -112,9 +112,9 @@ namespace AngbandOS.Web.Controllers
 
                 return Ok(new string[] { });
             }
-            catch (Exception ex)
+            catch
             {
-                return new StatusCodeResult(500);
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
             }
         }
 
@@ -144,34 +144,47 @@ namespace AngbandOS.Web.Controllers
             return jwtSecurityTokenHandler.WriteToken(token);
         }
 
+        /// <summary>
+        /// Accepts login requests from the client browser and returns the JSON web token upon success.
+        /// </summary>
+        /// <param name="emailAddress">The email address for the user account.</param>
+        /// <param name="postAuthentication">Model that accepts the password from the request body.</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [Route("{emailAddress}/authentication")]
         [Produces("application/json")]
         public async Task<ActionResult<LoginResponse>> LoginAsync([FromRoute] string emailAddress, [FromBody] PostAuthentication postAuthentication)
         {
-            if (postAuthentication == null)
-                return BadRequest("The authentication request to post was not supplied or did not parse correctly.");
-
-            if (postAuthentication.Password != null)
+            try
             {
-                ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
-                if (appUser != null)
+                if (postAuthentication == null)
+                    return BadRequest("The authentication request to post was not supplied or did not parse correctly.");
+
+                if (postAuthentication.Password != null)
                 {
-                    await SignInManager.SignOutAsync();
-                    Microsoft.AspNetCore.Identity.SignInResult result = await SignInManager.PasswordSignInAsync(appUser, postAuthentication.Password, false, false);
-                    if (result.Succeeded)
+                    ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+                    if (appUser != null)
                     {
-                        string tokenString = GenerateJSONWebToken(appUser);
-                        await WebPersistentStorage.WriteMessageAsync(appUser.Id, null, "User logged in.", MessageTypeEnum.Login, null);
-                        return Ok(new LoginResponse()
+                        await SignInManager.SignOutAsync();
+                        Microsoft.AspNetCore.Identity.SignInResult result = await SignInManager.PasswordSignInAsync(appUser, postAuthentication.Password, false, false);
+                        if (result.Succeeded)
                         {
-                            JwtToken = tokenString
-                        });
+                            string tokenString = GenerateJSONWebToken(appUser);
+                            await WebPersistentStorage.WriteMessageAsync(appUser.Id, null, "User logged in.", MessageTypeEnum.Login, null);
+                            return Ok(new LoginResponse()
+                            {
+                                JwtToken = tokenString
+                            });
+                        }
                     }
                 }
+                return NotFound();
             }
-            return NotFound();
+            catch
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            }
         }
 
         [HttpGet]
@@ -180,25 +193,32 @@ namespace AngbandOS.Web.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> SendConfirmationEmailAsync()
         {
-            string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
-            if (emailAddress == null)
-                return Unauthorized();
+            try
+            {
+                string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+                if (emailAddress == null)
+                    return Unauthorized();
 
-            ApplicationUser currentUser = await UserManager.FindByEmailAsync(emailAddress);
+                ApplicationUser currentUser = await UserManager.FindByEmailAsync(emailAddress);
 
-            // Create an email confirmation token and send it to the user.
-            string token = await UserManager.GenerateEmailConfirmationTokenAsync(currentUser);
+                // Create an email confirmation token and send it to the user.
+                string token = await UserManager.GenerateEmailConfirmationTokenAsync(currentUser);
 
-            // Create an email to send to the user.
-            string confirmationLink = $"{Request.Scheme}://{Request.Host}/accounts/confirm?token={WebUtility.UrlEncode(token)}&emailAddress={WebUtility.UrlEncode(emailAddress)}";
-            Dictionary<string, string> macros = new Dictionary<string, string>();
-            macros.Add("email-confirmation-url", confirmationLink);
-            string htmlDocument = TemplateProcessor.GenerateContent("ConfirmEmail", macros);
+                // Create an email to send to the user.
+                string confirmationLink = $"{Request.Scheme}://{Request.Host}/accounts/confirm?token={WebUtility.UrlEncode(token)}&emailAddress={WebUtility.UrlEncode(emailAddress)}";
+                Dictionary<string, string> macros = new Dictionary<string, string>();
+                macros.Add("email-confirmation-url", confirmationLink);
+                string htmlDocument = TemplateProcessor.GenerateContent("ConfirmEmail", macros);
 
-            await EmailSender.SendEmailAsync(currentUser.Email, "AngbandOS Confirm Email", htmlDocument);
+                await EmailSender.SendEmailAsync(currentUser.Email, "AngbandOS Confirm Email", htmlDocument);
 
-            // The account was created and there was no error sending email.
-            return Ok();
+                // The account was created and there was no error sending email.
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            }
         }
 
         [HttpPut]
@@ -207,23 +227,30 @@ namespace AngbandOS.Web.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<string[]?>> VerifyAccountAsync([FromBody] VerifyAccount verifyAccount)
         {
-            if (verifyAccount == null)
-                return BadRequest("The user verification to put was not supplied or did not parse correctly.");
+            try
+            {
+                if (verifyAccount == null)
+                    return BadRequest("The user verification to put was not supplied or did not parse correctly.");
 
-            // Ensure the user performing the confirmation is the currently logged on user.
-            if (User == null)
-                return base.StatusCode((int)HttpStatusCode.Forbidden);
+                // Ensure the user performing the confirmation is the currently logged on user.
+                if (User == null)
+                    return base.StatusCode((int)HttpStatusCode.Forbidden);
 
-            string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
-            if (emailAddress == null)
-                return Unauthorized();
-            ApplicationUser user = await UserManager.FindByEmailAsync(emailAddress);
+                string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+                if (emailAddress == null)
+                    return Unauthorized();
+                ApplicationUser user = await UserManager.FindByEmailAsync(emailAddress);
 
-            IdentityResult result = await UserManager.ConfirmEmailAsync(user, verifyAccount.Token);
-            if (!result.Succeeded)
-                return BadRequest(new string?[] { result.Errors.FirstOrDefault()?.Description });
+                IdentityResult result = await UserManager.ConfirmEmailAsync(user, verifyAccount.Token);
+                if (!result.Succeeded)
+                    return BadRequest(new string?[] { result.Errors.FirstOrDefault()?.Description });
 
-            return Ok();
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            }
         }
 
         [HttpGet]
@@ -232,23 +259,30 @@ namespace AngbandOS.Web.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> SendPasswordRecoveryToken([FromRoute] string emailAddress)
         {
-            ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+            try
+            {
+                ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
 
-            // If the user does not exist, do not inform the client.  This is an anonymous call.
-            if (appUser == null)
+                // If the user does not exist, do not inform the client.  This is an anonymous call.
+                if (appUser == null)
+                    return Ok();
+
+                string token = await UserManager.GeneratePasswordResetTokenAsync(appUser);
+
+                // Create an email to send to the user.
+                string resetPasswordLink = $"{Request.Scheme}://{Request.Host}/accounts/reset-password?token={WebUtility.UrlEncode(token)}&emailAddress={WebUtility.UrlEncode(emailAddress)}";
+                Dictionary<string, string> macros = new Dictionary<string, string>();
+                macros.Add("reset-password-url", resetPasswordLink);
+                string htmlDocument = TemplateProcessor.GenerateContent("ResetPassword", macros);
+                await EmailSender.SendEmailAsync(appUser.Email, "AngbandOS Reset Password", htmlDocument);
+
+                // The account was created and there was no error sending email.
                 return Ok();
-
-            string token = await UserManager.GeneratePasswordResetTokenAsync(appUser);
-
-            // Create an email to send to the user.
-            string resetPasswordLink = $"{Request.Scheme}://{Request.Host}/accounts/reset-password?token={WebUtility.UrlEncode(token)}&emailAddress={WebUtility.UrlEncode(emailAddress)}";
-            Dictionary<string, string> macros = new Dictionary<string, string>();
-            macros.Add("reset-password-url", resetPasswordLink);
-            string htmlDocument = TemplateProcessor.GenerateContent("ResetPassword", macros);
-            await EmailSender.SendEmailAsync(appUser.Email, "AngbandOS Reset Password", htmlDocument);
-
-            // The account was created and there was no error sending email.
-            return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            }
         }
 
         /// <summary>
@@ -263,18 +297,25 @@ namespace AngbandOS.Web.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> ResetPassword([FromRoute] string emailAddress, [FromBody] ResetPassword resetPasswordRequest)
         {
-            if (resetPasswordRequest == null)
-                return BadRequest("The password reset request to post was not supplied or did not parsed correctly.");
-            else
+            try
             {
-                ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
-                if (appUser != null)
+                if (resetPasswordRequest == null)
+                    return BadRequest("The password reset request to post was not supplied or did not parsed correctly.");
+                else
                 {
-                    IdentityResult result = await UserManager.ResetPasswordAsync(appUser, resetPasswordRequest.ResetPasswordToken, resetPasswordRequest.NewPassword);
-                    if (result.Succeeded)
-                        return Ok();
+                    ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+                    if (appUser != null)
+                    {
+                        IdentityResult result = await UserManager.ResetPasswordAsync(appUser, resetPasswordRequest.ResetPasswordToken, resetPasswordRequest.NewPassword);
+                        if (result.Succeeded)
+                            return Ok();
+                    }
+                    return base.StatusCode((int)HttpStatusCode.Forbidden);
                 }
-                return base.StatusCode((int)HttpStatusCode.Forbidden);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
             }
         }
 
@@ -284,20 +325,27 @@ namespace AngbandOS.Web.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> ChangePassword([FromBody] ChangePassword changePasswordRequest)
         {
-            if (changePasswordRequest == null)
-                return BadRequest("The change password request to put was not supplied or did not parse correctly.");
-            else
+            try
             {
-                string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
-                if (emailAddress == null)
-                    return Unauthorized();
-
-                ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
-                IdentityResult result = await UserManager.ChangePasswordAsync(appUser, changePasswordRequest.CurrentPassword, changePasswordRequest.NewPassword);
-                if (result.Succeeded)
-                    return Ok();
+                if (changePasswordRequest == null)
+                    return BadRequest("The change password request to put was not supplied or did not parse correctly.");
                 else
-                    return base.StatusCode((int)HttpStatusCode.Forbidden);
+                {
+                    string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+                    if (emailAddress == null)
+                        return Unauthorized();
+
+                    ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+                    IdentityResult result = await UserManager.ChangePasswordAsync(appUser, changePasswordRequest.CurrentPassword, changePasswordRequest.NewPassword);
+                    if (result.Succeeded)
+                        return Ok();
+                    else
+                        return base.StatusCode((int)HttpStatusCode.Forbidden);
+                }
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
             }
         }
 
@@ -307,33 +355,40 @@ namespace AngbandOS.Web.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> UpdateAccount([FromBody] UpdateAccount updateAccountRequest)
         {
-            if (updateAccountRequest == null)
-                return BadRequest("The update account request to put was not supplied or did not parse correctly.");
-            else
+            try
             {
-                string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
-                if (emailAddress == null)
-                    return Unauthorized();
-
-                ApplicationUser? currentUser = await UserManager.FindByEmailAsync(emailAddress);
-                IdentityResult result = await UserManager.SetUserNameAsync(currentUser, updateAccountRequest.Username);
-                if (updateAccountRequest.EmailAddress != currentUser.Email)
-                {
-                    // Create an email confirmation token and send it to the user.
-                    string token = await UserManager.GenerateChangeEmailTokenAsync(currentUser, updateAccountRequest.EmailAddress);
-
-                    // Create an email to send to the user.
-                    string confirmationLink = $"{Request.Scheme}://{Request.Host}/accounts/confirm?token={WebUtility.UrlEncode(token)}&emailAddress={WebUtility.UrlEncode(emailAddress)}";
-                    Dictionary<string, string> macros = new Dictionary<string, string>();
-                    macros.Add("email-confirmation-url", confirmationLink);
-                    string htmlDocument = TemplateProcessor.GenerateContent("ConfirmEmail", macros);
-
-                    await EmailSender.SendEmailAsync(currentUser.Email, "AngbandOS Confirm Email", htmlDocument);
-                }
-                if (result.Succeeded)
-                    return Ok();
+                if (updateAccountRequest == null)
+                    return BadRequest("The update account request to put was not supplied or did not parse correctly.");
                 else
-                    return base.StatusCode((int)HttpStatusCode.Forbidden);
+                {
+                    string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+                    if (emailAddress == null)
+                        return Unauthorized();
+
+                    ApplicationUser? currentUser = await UserManager.FindByEmailAsync(emailAddress);
+                    IdentityResult result = await UserManager.SetUserNameAsync(currentUser, updateAccountRequest.Username);
+                    if (updateAccountRequest.EmailAddress != currentUser.Email)
+                    {
+                        // Create an email confirmation token and send it to the user.
+                        string token = await UserManager.GenerateChangeEmailTokenAsync(currentUser, updateAccountRequest.EmailAddress);
+
+                        // Create an email to send to the user.
+                        string confirmationLink = $"{Request.Scheme}://{Request.Host}/accounts/confirm?token={WebUtility.UrlEncode(token)}&emailAddress={WebUtility.UrlEncode(emailAddress)}";
+                        Dictionary<string, string> macros = new Dictionary<string, string>();
+                        macros.Add("email-confirmation-url", confirmationLink);
+                        string htmlDocument = TemplateProcessor.GenerateContent("ConfirmEmail", macros);
+
+                        await EmailSender.SendEmailAsync(currentUser.Email, "AngbandOS Confirm Email", htmlDocument);
+                    }
+                    if (result.Succeeded)
+                        return Ok();
+                    else
+                        return base.StatusCode((int)HttpStatusCode.Forbidden);
+                }
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
             }
         }
 
@@ -343,32 +398,39 @@ namespace AngbandOS.Web.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<GetUserPreferences>> GetUserPreferences()
         {
-            string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
-            if (emailAddress == null)
-                return Unauthorized();
-
-            ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
-            if (appUser == null)
-                return base.StatusCode((int)HttpStatusCode.Forbidden);
-
-            UserSettingsDetails? userSettings = await WebPersistentStorage.GetPreferences(appUser.Id);
-            return new GetUserPreferences()
+            try
             {
-                FontName = userSettings == null ? null : userSettings.FontName,
-                FontSize = userSettings == null ? null : userSettings.FontSize,
-                F1Macro = userSettings == null ? null : userSettings.F1Macro,
-                F2Macro = userSettings == null ? null : userSettings.F2Macro,
-                F3Macro = userSettings == null ? null : userSettings.F3Macro,
-                F4Macro = userSettings == null ? null : userSettings.F4Macro,
-                F5Macro = userSettings == null ? null : userSettings.F5Macro,
-                F6Macro = userSettings == null ? null : userSettings.F6Macro,
-                F7Macro = userSettings == null ? null : userSettings.F7Macro,
-                F8Macro = userSettings == null ? null : userSettings.F8Macro,
-                F9Macro = userSettings == null ? null : userSettings.F9Macro,
-                F10Macro = userSettings == null ? null : userSettings.F10Macro,
-                F11Macro = userSettings == null ? null : userSettings.F11Macro,
-                F12Macro = userSettings == null ? null : userSettings.F12Macro
-            };
+                string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+                if (emailAddress == null)
+                    return Unauthorized();
+
+                ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+                if (appUser == null)
+                    return base.StatusCode((int)HttpStatusCode.Forbidden);
+
+                UserSettingsDetails? userSettings = await WebPersistentStorage.GetPreferences(appUser.Id);
+                return new GetUserPreferences()
+                {
+                    FontName = userSettings == null ? null : userSettings.FontName,
+                    FontSize = userSettings == null ? null : userSettings.FontSize,
+                    F1Macro = userSettings == null ? null : userSettings.F1Macro,
+                    F2Macro = userSettings == null ? null : userSettings.F2Macro,
+                    F3Macro = userSettings == null ? null : userSettings.F3Macro,
+                    F4Macro = userSettings == null ? null : userSettings.F4Macro,
+                    F5Macro = userSettings == null ? null : userSettings.F5Macro,
+                    F6Macro = userSettings == null ? null : userSettings.F6Macro,
+                    F7Macro = userSettings == null ? null : userSettings.F7Macro,
+                    F8Macro = userSettings == null ? null : userSettings.F8Macro,
+                    F9Macro = userSettings == null ? null : userSettings.F9Macro,
+                    F10Macro = userSettings == null ? null : userSettings.F10Macro,
+                    F11Macro = userSettings == null ? null : userSettings.F11Macro,
+                    F12Macro = userSettings == null ? null : userSettings.F12Macro
+                };
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            }
         }
 
         [HttpPut]
@@ -377,50 +439,57 @@ namespace AngbandOS.Web.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<GetUserPreferences>> PutUserPreferences([FromBody] PutUserPreferences userSettings)
         {
-            string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
-            if (emailAddress == null)
-                return Unauthorized();
-
-            ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
-            if (appUser == null)
-                return base.StatusCode((int)HttpStatusCode.Forbidden);
-
-            UserSettingsDetails userSettingsDetails = new UserSettingsDetails()
+            try
             {
-                FontName = userSettings.FontName,
-                FontSize = userSettings.FontSize,
-                F1Macro = userSettings.F1Macro,
-                F2Macro = userSettings.F2Macro,
-                F3Macro = userSettings.F3Macro,
-                F4Macro = userSettings.F4Macro,
-                F5Macro = userSettings.F5Macro,
-                F6Macro = userSettings.F6Macro,
-                F7Macro = userSettings.F7Macro,
-                F8Macro = userSettings.F8Macro,
-                F9Macro = userSettings.F9Macro,
-                F10Macro = userSettings.F10Macro,
-                F11Macro = userSettings.F11Macro,
-                F12Macro = userSettings.F12Macro
-            };
+                string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+                if (emailAddress == null)
+                    return Unauthorized();
 
-            UserSettingsDetails? updatedUserSettings = await WebPersistentStorage.WritePreferencesAsync(appUser.Id, userSettingsDetails);
-            return new GetUserPreferences()
+                ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
+                if (appUser == null)
+                    return base.StatusCode((int)HttpStatusCode.Forbidden);
+
+                UserSettingsDetails userSettingsDetails = new UserSettingsDetails()
+                {
+                    FontName = userSettings.FontName,
+                    FontSize = userSettings.FontSize,
+                    F1Macro = userSettings.F1Macro,
+                    F2Macro = userSettings.F2Macro,
+                    F3Macro = userSettings.F3Macro,
+                    F4Macro = userSettings.F4Macro,
+                    F5Macro = userSettings.F5Macro,
+                    F6Macro = userSettings.F6Macro,
+                    F7Macro = userSettings.F7Macro,
+                    F8Macro = userSettings.F8Macro,
+                    F9Macro = userSettings.F9Macro,
+                    F10Macro = userSettings.F10Macro,
+                    F11Macro = userSettings.F11Macro,
+                    F12Macro = userSettings.F12Macro
+                };
+
+                UserSettingsDetails? updatedUserSettings = await WebPersistentStorage.WritePreferencesAsync(appUser.Id, userSettingsDetails);
+                return new GetUserPreferences()
+                {
+                    FontName = userSettings.FontName,
+                    FontSize = userSettings.FontSize,
+                    F1Macro = userSettings.F1Macro,
+                    F2Macro = userSettings.F2Macro,
+                    F3Macro = userSettings.F3Macro,
+                    F4Macro = userSettings.F4Macro,
+                    F5Macro = userSettings.F5Macro,
+                    F6Macro = userSettings.F6Macro,
+                    F7Macro = userSettings.F7Macro,
+                    F8Macro = userSettings.F8Macro,
+                    F9Macro = userSettings.F9Macro,
+                    F10Macro = userSettings.F10Macro,
+                    F11Macro = userSettings.F11Macro,
+                    F12Macro = userSettings.F12Macro
+                };
+            }
+            catch
             {
-                FontName = userSettings.FontName,
-                FontSize = userSettings.FontSize,
-                F1Macro = userSettings.F1Macro,
-                F2Macro = userSettings.F2Macro,
-                F3Macro = userSettings.F3Macro,
-                F4Macro = userSettings.F4Macro,
-                F5Macro = userSettings.F5Macro,
-                F6Macro = userSettings.F6Macro,
-                F7Macro = userSettings.F7Macro,
-                F8Macro = userSettings.F8Macro,
-                F9Macro = userSettings.F9Macro,
-                F10Macro = userSettings.F10Macro,
-                F11Macro = userSettings.F11Macro,
-                F12Macro = userSettings.F12Macro
-            };
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            }
         }
     }
 }

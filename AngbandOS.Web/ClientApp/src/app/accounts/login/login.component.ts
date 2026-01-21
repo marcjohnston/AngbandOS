@@ -8,6 +8,11 @@ import { NgIf } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
+import { NavMenuComponent } from '../../nav-menu/nav-menu.component';
+import { ChatComponent } from '../../chat/chat.component';
+import { FooterComponent } from '../../footer/footer.component';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +22,12 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     RouterLink,
     NgIf,
+    ChatComponent,
     MatFormField,
     MatCheckbox,
     ReactiveFormsModule,
+    FooterComponent,
+    NavMenuComponent
   ]
 })
 export class LoginComponent implements OnInit, OnDestroy {
@@ -30,6 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private _forgotPasswordDialog: MatDialog,
+    private _snackBar: MatSnackBar,
     private _authenticationService: AuthenticationService,
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
@@ -67,6 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public onLoginClick() {
     this._authenticationService.login(this.formGroup.emailAddress.value, this.formGroup.password.value).then(() => {
+      // Check for the remember me checkbox functionality.  This only works for successful logins.
       if (this.formGroup.rememberMe.value) {
         this._authenticationService.storeCredentialsLocally(this.formGroup.emailAddress.value, this.formGroup.password.value, this.formGroup.keepLoggedIn.value);
       } else {
@@ -77,14 +87,30 @@ export class LoginComponent implements OnInit, OnDestroy {
         // This is running outside of the Angular zone.
         this._zone.run(() => this._router.navigate([this._return]));
       } else {
-        this._zone.run(() => { this.message = "" });
+        this._router.navigate(['/']);
       }
-    }, () => {
+    }, (reason: any) => {
       // Erase the password.  We need to do this before the setting the message because we have a subscription that will erase the message.
       this.formGroup.password.setValue("");
 
       // Now set the message.
-      this.message = "Login failed.";
+      var errorMessage: string | undefined = "Error";
+      if (reason instanceof HttpErrorResponse) {
+        const httpErrorResponse: HttpErrorResponse = reason;
+        switch (httpErrorResponse.status) {
+          case 200:
+            errorMessage = undefined;
+            break;
+          case 404:
+            errorMessage = "Login failed.";
+            break;
+          case 503:
+            errorMessage = "Service unavailable";
+            break;
+        }
+      }
+      if (errorMessage != undefined)
+        this._snackBar.open(errorMessage, "", { duration: 5000 });
     });
   }
 }

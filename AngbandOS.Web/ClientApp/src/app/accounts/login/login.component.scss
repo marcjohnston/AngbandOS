@@ -1,29 +1,69 @@
-.hide {
-  display: none;
-}
+@use '@angular/material' as mat;
+@use 'src/theme' as theme;
 
-form {
-  display: flex; // Use flex to render the form-fields.
-  flex-direction: column; // Arrange the form-fields straight down.
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
-  & #email-address, & #password {
-    width: 250px;
+  @media (min-width: 768px) {
+    & #component-window {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 100%;
+      padding: 0 25px 25px 25px;
+
+      & #main-component {
+        width: 100%;
+      }
+    }
   }
 
-  & mat-form-field, & mat-checkbox {
-    display: block;
+  @media (max-width: 767px) {
+    & #component-window {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+
+      & #main-component {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
   }
 
-  & span {
-    color: red;
-    margin-top: 10px;
+  & #component-window {
+    #chat {
+      max-width: 25%; // We do not want the width of the chat window to consume more than 25% of the screen.
+    }
   }
 
-  & button {
-    width: 70px;
+  & .hide {
+    display: none;
   }
 
-  & a {
-    margin-top: 10px;
+  & form {
+    display: flex; // Use flex to render the form-fields.
+    flex-direction: column; // Arrange the form-fields straight down.
+
+    & #email-address, & #password {
+      width: 250px; // Set the width of the email address and password fields.
+    }
+
+    & span {
+      color: red;
+      margin-top: 10px;
+    }
+
+    & button {
+      width: 70px;
+    }
+
+    & a {
+      margin-top: 10px;
+    }
   }
 }
