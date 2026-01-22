@@ -11,6 +11,31 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.app-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  /* Use material theme colors but allow overrides if needed */
+  background-color: #303030;
+}
+
+/* Brand anchor */
+a.brand {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Container alignment inside toolbar */
+.spacer {
+  flex: 1 1 auto;
+}
+
 .container {
   display: flex;
   width: 100%;
@@ -22,9 +47,6 @@ a.navbar-brand {
 
   @media (max-width: 767px) {
     padding: 0; // We need left and right margins
-    & .navbar-toggler {
-        padding: 0;
-    }
   }
 }
 
@@ -38,7 +60,12 @@ a.navbar-brand {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
   }
 
+mat-toolbar {
+    height: 96px;
+}
+
 #logo {
+  line-height: 8pt;
   font-size: 6pt;
   color: mat.m2-get-color-from-palette(theme.$primary, 100);
   font-weight: bold;

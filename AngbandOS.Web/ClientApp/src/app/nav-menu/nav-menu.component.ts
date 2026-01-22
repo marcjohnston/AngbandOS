@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { LoginMenuComponent } from '../login-menu/login-menu.component';
-import { NgClass } from '@angular/common';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-nav-menu',
@@ -11,7 +13,9 @@ import { NgClass } from '@angular/common';
   imports: [
     RouterLink,
     LoginMenuComponent,
-    NgClass
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule
   ]
 })
 export class NavMenuComponent {

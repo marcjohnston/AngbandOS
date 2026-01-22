@@ -3,7 +3,7 @@
   <div id="component-window">
     <div id="main-component">
       <ng-container *ngIf="activeGames !== undefined">
-        <h6 id="active-games-span">Active Games</h6>
+        <div id="active-games-span">Active Games</div>
         <table mat-table [dataSource]="activeGames">
           <ng-container matColumnDef="username">
             <th mat-header-cell *matHeaderCellDef>
@@ -33,13 +33,13 @@
             <th mat-header-cell *matHeaderCellDef>
               Idle
             </th>
-            <td mat-cell class="idle-time-span" *matCellDef="let activeGame">{{activeGame.idleTimeSpan}}</td>
+            <td mat-cell class="time-span" *matCellDef="let activeGame">{{activeGame.idleTimeSpan}}</td>
           </ng-container>
           <ng-container matColumnDef="game-time">
             <th mat-header-cell *matHeaderCellDef>
               Game Time
             </th>
-            <td mat-cell class="game-time-span" *matCellDef="let activeGame">{{timeSpanAsString(activeGame.elapsedGameTime)}}</td>
+            <td mat-cell class="time-span" *matCellDef="let activeGame">{{timeSpanAsString(activeGame.elapsedGameTime)}}</td>
           </ng-container>
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef class="right-most-column">
@@ -51,12 +51,12 @@
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="activeGamesDisplayedColumns"></tr>
-          <tr mat-row *matRowDef="let activeGame; columns: activeGamesDisplayedColumns" [ngClass]="{'highlight': activeGame === selectedActiveGame}"></tr>
+          <tr mat-row *matRowDef="let activeGame; columns: activeGamesDisplayedColumns"></tr>
         </table>
       </ng-container>
       <ng-container *ngIf="isAuthenticated === true">
         <ng-container *ngIf="savedGames !== undefined">
-          <h6 id="saved-games-span">Your Saved Games</h6>
+          <div id="saved-games-span">Your Saved Games</div>
           <table mat-table [dataSource]="savedGames">
             <ng-container matColumnDef="guid">
               <th mat-header-cell *matHeaderCellDef>
@@ -113,7 +113,7 @@
             <tr mat-row *matRowDef="let savedGame; columns: savedGamesDisplayedColumns" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></tr>
           </table>
         </ng-container>
-        <button mat-flat-button (click)="onNewGame()">Play New Game</button>
+        <button mat-button mat-flat-button (click)="onNewGame()">Play New Game</button>
       </ng-container>
       <ng-container *ngIf="isAuthenticated === false">
         Welcome to AngbandOS.  You must login to play.

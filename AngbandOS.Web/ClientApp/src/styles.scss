@@ -9,20 +9,23 @@
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
 //    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
-@include mat.all-component-typographies();
-@include mat.elevation-classes();
-@include mat.app-background();
+//@include mat.all-component-typographies();
+//@include mat.elevation-classes();
+//@include mat.app-background();
 @include mat.all-component-themes(theme.$theme);
 
 html, body {
-  width: 100%;
-  height: 100%;
+  width: 100%; // The UI uses the entire width.
+  height: 100%; // The UI uses the entire height.
   font-size: 12px; // Define 1rem
+  font-family: Roboto, Helvetica Neue, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box; // We need to set border-box throughout the entire UI.
 }
 
 body {
-  margin: 0;
-  font-family: "Arial";
 }
 
 .game-designer-undo-icon {

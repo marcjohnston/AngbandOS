@@ -1,24 +1,16 @@
-<header>
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">
-        <div id="logo" title="AngbandOS - Why OS?  What does the OS stand for?  The OS stands for 'Open System'.">
-          ┏━━━┓━━━━━━━━┏┓━━━━━━━━━━━━━┏┓┏━━━┓┏━━━┓<br />
-          ┃┏━┓┃━━━━━━━━┃┃━━━━━━━━━━━━━┃┃┃┏━┓┃┃┏━┓┃<br />
-          ┃┃━┃┃┏━┓━┏━━┓┃┗━┓┏━━┓━┏━┓━┏━┛┃┃┃━┃┃┃┗━━┓<br />
-          ┃┗━┛┃┃┏┓┓┃┏┓┃┃┏┓┃┗━┓┃━┃┏┓┓┃┏┓┃┃┃━┃┃┗━━┓┃<br />
-          ┃┏━┓┃┃┃┃┃┃┗┛┃┃┗┛┃┃┗┛┗┓┃┃┃┃┃┗┛┃┃┗━┛┃┃┗━┛┃<br />
-          ┗┛━┗┛┗┛┗┛┗━┓┃┗━━┛┗━━━┛┗┛┗┛┗━━┛┗━━━┛┗━━━┛<br />
-          ━━━━━━━━━┏━┛┃━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
-          ━━━━━━━━━┗━━┛━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
-        </div>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
-        <app-login-menu></app-login-menu>
-      </div>
+<mat-toolbar class="app-toolbar">
+  <a class="brand" routerLink="/">
+    <div id="logo" title="AngbandOS - Why OS?  What does the OS stand for?  The OS stands for 'Open System'.">
+      ┏━━━┓━━━━━━━━┏┓━━━━━━━━━━━━━┏┓┏━━━┓┏━━━┓<br />
+      ┃┏━┓┃━━━━━━━━┃┃━━━━━━━━━━━━━┃┃┃┏━┓┃┃┏━┓┃<br />
+      ┃┃━┃┃┏━┓━┏━━┓┃┗━┓┏━━┓━┏━┓━┏━┛┃┃┃━┃┃┃┗━━┓<br />
+      ┃┗━┛┃┃┏┓┓┃┏┓┃┃┏┓┃┗━┓┃━┃┏┓┓┃┏┓┃┃┃━┃┃┗━━┓┃<br />
+      ┃┏━┓┃┃┃┃┃┃┗┛┃┃┗┛┃┃┗┛┗┓┃┃┃┃┃┗┛┃┃┗━┛┃┃┗━┛┃<br />
+      ┗┛━┗┛┗┛┗┛┗━┓┃┗━━┛┗━━━┛┗┛┗┛┗━━┛┗━━━┛┗━━━┛<br />
+      ━━━━━━━━━┏━┛┃━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
+      ━━━━━━━━━┗━━┛━━━━━━━━━━━━━━━━━━━━━━━━━━━<br />
     </div>
-  </nav>
-</header>
+  </a>
+  <span class="spacer"></span>
+  <app-login-menu></app-login-menu>
+</mat-toolbar>

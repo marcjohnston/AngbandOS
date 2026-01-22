@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 import { ChangeDetectorRef } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 
 const idleTimeIntervalInMilliseconds = 5000;
 
@@ -32,7 +33,8 @@ const idleTimeIntervalInMilliseconds = 5000;
     MatIconModule,
     DatePipe,
     MatTableModule,
-    NavMenuComponent
+    NavMenuComponent,
+    MatButtonModule
   ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
@@ -41,7 +43,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   public savedGamesDisplayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved", "actions"];
   public activeGamesDisplayedColumns: string[] = ["username", "character-name", "gold", "level", "last-input-received", "game-time", "actions"];
   public activeUsersDisplayedColumns: string[] = ["username", "connectionId", "actions"];
-  public selectedActiveGame: ActiveGameDetails | null = null;
   public selectedActiveUser: UserDetails | null = null;
   public selectedSavedGame: SavedGameDetails | null = null;
   public isAuthenticated: boolean = false;
