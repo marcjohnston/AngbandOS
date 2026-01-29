@@ -13,6 +13,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NavMenuComponent } from '../../nav-menu/nav-menu.component';
 import { ChatComponent } from '../../chat/chat.component';
 import { FooterComponent } from '../../footer/footer.component';
+import { MasterLayoutComponent } from '../../master-layout/master-layout.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-login',
@@ -25,9 +28,12 @@ import { FooterComponent } from '../../footer/footer.component';
     ChatComponent,
     MatFormField,
     MatCheckbox,
+    MatInputModule,
     ReactiveFormsModule,
     FooterComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    MasterLayoutComponent,
+    MatButtonModule
   ]
 })
 export class LoginComponent implements OnInit, OnDestroy {

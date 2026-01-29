@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 import { ChangeDetectorRef } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MasterLayoutComponent } from '../master-layout/master-layout.component';
 
 const idleTimeIntervalInMilliseconds = 5000;
 
@@ -34,7 +35,8 @@ const idleTimeIntervalInMilliseconds = 5000;
     DatePipe,
     MatTableModule,
     NavMenuComponent,
-    MatButtonModule
+    MatButtonModule,
+    MasterLayoutComponent
   ]
 })
 export class HomeComponent implements OnInit, OnDestroy {

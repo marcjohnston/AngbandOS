@@ -17,16 +17,15 @@
 html, body {
   width: 100%; // The UI uses the entire width.
   height: 100%; // The UI uses the entire height.
-  font-size: 12px; // Define 1rem
-  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-size: 16px; // Define 1rem
+  font-family: Roboto, Helvetica Neue, sans-serif; // This is the default font.
+  margin: 0; // The browser defaults to a margin of 8.  We need to override it so that the screen doesn't render scroll-bars.
 }
 
 *, *::before, *::after {
   box-sizing: border-box; // We need to set border-box throughout the entire UI.
 }
 
-body {
-}
 
 .game-designer-undo-icon {
   color: green; // The modified will be a green color.
@@ -62,4 +61,11 @@ body {
 
 .window-left-right-margins {
     margin: 0 15px 0 15px;
+}
+
+.header-title {
+  font-size: 1rem;
+  padding-top: 25px; // Each section gets a bit of additional padding on top.
+  padding-bottom: 5px;
+  font-weight: 500; // Bold
 }

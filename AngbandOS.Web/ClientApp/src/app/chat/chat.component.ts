@@ -123,7 +123,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
         this._serviceConnection.send("RefreshChat", null);
       }
     }, (reason: any) => {
-      console.log(`Service hub connection rejected for reason '${reason}'`);
+      this._snackBar.open(`Cannot connect to service '${reason}'`, "", {
+        duration: 5000
+      });
     });
   }
 
@@ -152,7 +154,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
         this._chatConnection.send("RefreshChat", null);
       }
     }, (reason: any) => {
-      console.log(`Chat hub connection rejected for reason '${reason}'`);
+      this._snackBar.open(`Cannot connect to chat '${reason}'`, "", {
+        duration: 5000
+      });
     });
   }
 

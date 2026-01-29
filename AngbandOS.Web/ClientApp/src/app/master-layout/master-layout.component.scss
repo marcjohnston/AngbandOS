@@ -1,0 +1,41 @@
+#full-screen-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; // We need to set border-box throughout the entire UI.
+
+  @media (min-width: 768px) { // Desktop
+    & #component-body {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 100%;
+      padding: 0 25px 25px 25px;
+
+      & #content-component {
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 767px) { // Mobile
+    & #component-body {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+
+      & #content-component {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  & #component-body {
+    #chat {
+      max-width: 25%; // We do not want the width of the chat window to consume more than 25% of the screen.
+    }
+  }
+}

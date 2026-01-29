@@ -45,13 +45,20 @@ namespace AngbandOS.Web.Hubs
 
         public async Task RefreshChat(int? endingId)
         {
-            ChatMessage[] chatMessages = await GameService.GetChatMessagesAsync(Context.ConnectionId, endingId);
-
             // Get the hub for the currently connected client.
             IServiceHub serviceHub = Clients.Client(Context.ConnectionId);
+            try
+            {
+                ChatMessage[] chatMessages = await GameService.GetChatMessagesAsync(Context.ConnectionId, endingId);
 
-            // Send the response.
-            await serviceHub.ChatRefreshed(chatMessages);
+                // Send the response.
+                await serviceHub.ChatRefreshed(chatMessages);
+            }
+            catch (Exception ex)
+            {
+                // If the database is down, we can send a single chat message to the UI.
+                await serviceHub.ChatRefreshed(new ChatMessage[] { new ChatMessage { Id = 0, FromUsername = "Chat System", SentDateTime = DateTime.Now, Message = "Error loading chat." } });
+            }
         }
 
         /// <summary>

@@ -1,56 +1,39 @@
 @use '@angular/material' as mat;
 @use 'src/theme' as theme;
 
-#container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 0 25px 0 25px; // This is the left and right margins for the entire UI.
+.my-header-row {
+  height: 10px;
+}
 
-  & #component-window {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row; // We render the main components and then chat.
+.mat-mdc-header-cell {
+    height: 10px;
+}
+.mat-column-actions {
+  justify-content: right; // The icons should be right aligned.
+}
 
-    & #main-component {
-      width: 100%;
-    }
+table {
+  width: 100%; // Applies to the active games and saved games
 
-    & #active-games-span, #saved-games-span {
-      font-size: 1.4rem; // Controls the size of the title
-      padding-top: 25px; // Each section gets a bit of additional padding on top.
-    }
-
-    & table {
-      width: 100%; // Applies to the active games and saved games
-
-      & .right-most-column {
-        text-align: right; // The icons should be right aligned
-      }
-
-      & [mat-cell] {
-        vertical-align: middle; // Vertically center align the cell content
-        padding: 10px 16px; // Make the table rows larger with padding between columns.
-      }
-
-      & .time-span, .time-span {
-        white-space: nowrap; // Do not allow the time to be wrapped.
-      }
-
-      & [mat-row]:hover {
-        background-color: mat.m2-get-color-from-palette(theme.$primary, darker); // When a row is hovered, we highlight it.
-      }
-    }
-
-    & #chat {
-      max-width: 25%; // We do not want the width of the chat window to consume more than 25% of the screen.
-    }
-
-    & button {
-      margin-top: 25px; // The Play New Game button needs some margin at the top.
-      width: 200px; // Make the button fairly wide.
-    }
+  & th {
+    font-weight: 500;
   }
+
+  & [mat-cell] {
+    vertical-align: middle; // Vertically center align the cell content
+    padding: 10px 16px; // Make the table rows larger with padding between columns.
+  }
+
+  & .time-span {
+    white-space: nowrap; // Do not allow the time to be wrapped.
+  }
+
+  & [mat-row]:hover {
+    background-color: mat.m2-get-color-from-palette(theme.$primary, darker); // When a row is hovered, we highlight it.
+  }
+}
+
+button {
+  margin-top: 25px; // The Play New Game button needs some margin at the top.
+  width: 200px; // Make the button fairly wide.
 }
