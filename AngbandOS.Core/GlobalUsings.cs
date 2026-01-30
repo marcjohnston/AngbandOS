@@ -36,7 +36,7 @@ global using AngbandOS.Core.Mutations.PassiveMutations;
 global using AngbandOS.Core.Mutations.RandomMutations;
 global using AngbandOS.Core.PlayerEffects;
 global using AngbandOS.Core.Properties;
-global using AngbandOS.Core.PropertyFormatters;
+global using AngbandOS.Core.Justifications;
 global using AngbandOS.Core.PhysicalAttributeSets;
 global using AngbandOS.Core.Races;
 global using AngbandOS.Core.RaceGenders;
