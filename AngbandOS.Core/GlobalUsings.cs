@@ -7,6 +7,7 @@
 
 global using AngbandOS.Core;
 global using AngbandOS.Core.ActivationWeightRandoms;
+global using AngbandOS.Core.Alignments;
 global using AngbandOS.Core.ArtifactBiases;
 global using AngbandOS.Core.BirthStages;
 global using AngbandOS.Core.CharacterClasses;
