@@ -16,7 +16,7 @@ public class GameConfiguration
         MergeAllSingletonsFromAssembly(this, assembly);
     }
 
-    private static T[] LoadFromAssembly<T>(Assembly assembly) where T : new()
+    private static T[] LoadFromAssembly<T>(Assembly assembly) where T : class, new()
     {
         List<T> singletonsList = new List<T>();
 
