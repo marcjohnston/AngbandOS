@@ -2019,7 +2019,6 @@ internal sealed class Item : IComparable<Item>
         }
     }
     #endregion
-
     #region Item Properties Management
     public FixedArtifact? FixedArtifact = null;
 
