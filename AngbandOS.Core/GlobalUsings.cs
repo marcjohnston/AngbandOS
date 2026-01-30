@@ -5,9 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 
-global using AngbandOS.Core;
 global using AngbandOS.Core.ActivationWeightRandoms;
-global using AngbandOS.Core.Alignments;
 global using AngbandOS.Core.ArtifactBiases;
 global using AngbandOS.Core.BirthStages;
 global using AngbandOS.Core.CharacterClasses;
@@ -48,7 +46,6 @@ global using AngbandOS.Core.SpellResistantDetections;
 global using AngbandOS.Core.Timers;
 
 global using static AngbandOS.Core.Extensions;
-global using Timer = AngbandOS.Core.Timer;
 global using AngbandOS.Core.Interface;
 global using AngbandOS.Core.Interface.Configuration;
 global using AngbandOS.GamePacks.Cthangband; // TODO: This can be deleted when the Cthangband game pack is complete.  We can also drop the Project Reference.

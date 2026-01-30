@@ -4,7 +4,445 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System;
+
 namespace AngbandOS.Core;
+
+[Serializable]
+internal abstract class Attribute2
+{
+    public abstract int Index { get; }
+
+    /// <summary>
+    /// Returns the default value for this attribute.
+    /// </summary>
+    public abstract AttributeValue2 DefaultAttributeValue { get; }
+
+    private readonly Game Game;
+
+    protected Attribute2(Game game)
+    {
+        Game = game;
+    }
+}
+
+[Serializable]
+internal abstract class BoolAttribute2 : Attribute2, IGetKey
+{
+    public BoolAttribute2(Game game) : base(game) { }
+    public override AttributeValue2 DefaultAttributeValue => new BoolAttributeValue2(false);
+    public string GetKey => Index.ToString();
+    public void Bind() { }
+}
+
+[Serializable]
+internal abstract class ColorAttribute2 : Attribute2, IGetKey
+{
+    public ColorAttribute2(Game game) : base(game) { }
+    public override AttributeValue2 DefaultAttributeValue => new ColorEnumAttributeValue2(ColorEnum.White);
+    public string GetKey => Index.ToString();
+    public void Bind() { }
+}
+
+[Serializable]
+internal abstract class IntAttribute2 : Attribute2, IGetKey
+{
+    public IntAttribute2(Game game) : base(game) { }
+    public override AttributeValue2 DefaultAttributeValue => new IntAttributeValue2(0);
+    public string GetKey => Index.ToString();
+    public void Bind() { }
+}
+
+[Serializable]
+internal abstract class NullableReferenceAttribute2<T> : Attribute2, IGetKey where T : class
+{
+    public NullableReferenceAttribute2(Game game) : base(game) { }
+    public sealed override AttributeValue2 DefaultAttributeValue => new NullableReferenceAttributeValue2<T>(null);
+    public string GetKey => Index.ToString();
+    public void Bind() { }
+}
+
+[Serializable]
+internal abstract class AttributeValue2
+{
+    /// <summary>
+    /// Returns true, if two attribute values are equal.
+    /// </summary>
+    /// <param name="itemProperty"></param>
+    /// <returns></returns>
+    public abstract bool IsEqual(AttributeValue2 itemProperty);
+    public abstract AttributeValue2 Merge(AttributeValue2 attributeValue);
+}
+
+[Serializable]
+internal class BoolAttributeValue2 : AttributeValue2
+{
+    public bool Value { get; }
+    public BoolAttributeValue2(bool value)
+    {
+        Value = value;
+    }
+
+    public override AttributeValue2 Merge(AttributeValue2 itemProperty)
+    {
+        if (itemProperty is not BoolAttributeValue2 boolPropertyValue)
+        {
+            throw new Exception("Merge mismatch.");
+        }
+        return new BoolAttributeValue2(Value || boolPropertyValue.Value);
+    }
+
+    public override bool IsEqual(AttributeValue2 itemProperty)
+    {
+        if (itemProperty is not BoolAttributeValue2 boolPropertyValue)
+        {
+            throw new Exception("IsEqual mismatch.");
+        }
+        return Value == boolPropertyValue.Value;
+    }
+}
+
+[Serializable]
+internal class ColorEnumAttributeValue2 : AttributeValue2
+{
+    public ColorEnum Value { get; }
+    public ColorEnumAttributeValue2(ColorEnum value)
+    {
+        Value = value;
+    }
+    public override AttributeValue2 Merge(AttributeValue2 itemProperty)
+    {
+        if (itemProperty is not ColorEnumAttributeValue2 colorEnumPropertyValue)
+        {
+            throw new Exception("Merge mismatch.");
+        }
+        return colorEnumPropertyValue;
+    }
+
+    public override bool IsEqual(AttributeValue2 itemProperty)
+    {
+        if (itemProperty is not ColorEnumAttributeValue2 colorEnumPropertyValue)
+        {
+            throw new Exception("IsEqual mismatch.");
+        }
+        return Value == colorEnumPropertyValue.Value;
+    }
+}
+
+[Serializable]
+internal class IntAttributeValue2 : AttributeValue2
+{
+    public int Value { get; }
+    public IntAttributeValue2(int value)
+    {
+        Value = value;
+    }
+    public override AttributeValue2 Merge(AttributeValue2 itemProperty)
+    {
+        if (itemProperty is not IntAttributeValue2 intPropertyValue)
+        {
+            throw new Exception("Merge mismatch.");
+        }
+        return new IntAttributeValue2(Value + intPropertyValue.Value);
+    }
+
+    public override bool IsEqual(AttributeValue2 itemProperty)
+    {
+        if (itemProperty is not IntAttributeValue2 intPropertyValue)
+        {
+            throw new Exception("IsEqual mismatch.");
+        }
+        return Value == intPropertyValue.Value;
+    }
+}
+
+[Serializable]
+internal class NullableReferenceAttributeValue2<T> : AttributeValue2 where T : class
+{
+    public T? Value { get; }
+    public override bool IsEqual(AttributeValue2 attributeValue)
+    {
+        if (attributeValue is not NullableReferenceAttributeValue2<T> roReferenceItemProperty)
+        {
+            throw new Exception($"Item property equality from {attributeValue.GetType().Name} not supported with {nameof(NullableReferenceAttributeValue2<T>)}");
+        }
+        return Value == roReferenceItemProperty.Value;
+    }
+    public override AttributeValue2 Merge(AttributeValue2 attributeValue)
+    {
+        if (attributeValue is not NullableReferenceAttributeValue2<T> referencePropertyValue)
+        {
+            throw new Exception($"Item property merging from {attributeValue.GetType().Name} not supported with {nameof(NullableReferenceAttributeValue2<T>)}");
+        }
+        // Always take the incoming value.
+        return referencePropertyValue;
+    }
+    public NullableReferenceAttributeValue2(T? value)
+    {
+        Value = value;
+    }
+}
+
+[Serializable]
+internal class ActivationAttribute : NullableReferenceAttribute2<Activation>
+{
+    private ActivationAttribute(Game game) : base(game) { }
+    public override int Index => (int)AttributeEnum.Activation;
+}
+
+[Serializable]
+internal class AggravateAttribute : BoolAttribute2
+{
+    private AggravateAttribute(Game game) : base(game) { }
+    public override int Index => (int)AttributeEnum.Aggravate;
+}
+
+[Serializable]
+internal class AttributeRepository
+{
+    private AttributeFactory[] _attributeFactories = new AttributeFactory[0];
+    private AttributeValue[] _defaultAttributeValues;
+    public AttributeRepository()
+    {
+        void RegisterPropertyFactory(AttributeEnum index, AttributeFactory propertyFactory)
+        {
+            int intIndex = (int)index;
+            if (_attributeFactories.Length <= intIndex)
+            {
+                Array.Resize(ref _attributeFactories, intIndex + 1);
+            }
+            _attributeFactories[intIndex] = propertyFactory;
+        }
+        void RegisterBoolPropertyFactory(AttributeEnum index)
+        {
+            RegisterPropertyFactory(index, new BoolAttributeFactory(index));
+        }
+        void RegisterColorEnumPropertyFactory(AttributeEnum index)
+        {
+            RegisterPropertyFactory(index, new ColorEnumAttributeFactory(index));
+        }
+        void RegisterIntPropertyFactory(AttributeEnum index)
+        {
+            RegisterPropertyFactory(index, new IntAttributeFactory(index));
+        }
+        void RegisterReferencePropertyFactory<T>(AttributeEnum index) where T : class
+        {
+            RegisterPropertyFactory(index, new ReferenceAttributeFactory<T>(index));
+        }
+
+        RegisterReferencePropertyFactory<Activation>(AttributeEnum.Activation);
+        RegisterBoolPropertyFactory(AttributeEnum.Aggravate);
+        RegisterBoolPropertyFactory(AttributeEnum.AntiTheft);
+        RegisterReferencePropertyFactory<ArtifactBias>(AttributeEnum.ArtifactBias);
+        RegisterBoolPropertyFactory(AttributeEnum.ArtifactBiasSlayingDisabled);
+        RegisterIntPropertyFactory(AttributeEnum.Attacks);
+        RegisterIntPropertyFactory(AttributeEnum.BaseArmorClass);
+        RegisterBoolPropertyFactory(AttributeEnum.Blessed);
+        RegisterBoolPropertyFactory(AttributeEnum.Blows);
+        RegisterIntPropertyFactory(AttributeEnum.BonusArmorClass);
+        RegisterBoolPropertyFactory(AttributeEnum.BrandAcid);
+        RegisterBoolPropertyFactory(AttributeEnum.BrandCold);
+        RegisterBoolPropertyFactory(AttributeEnum.BrandElec);
+        RegisterBoolPropertyFactory(AttributeEnum.BrandFire);
+        RegisterBoolPropertyFactory(AttributeEnum.BrandPois);
+        RegisterBoolPropertyFactory(AttributeEnum.CanApplyBlessedArtifactBias);
+        RegisterBoolPropertyFactory(AttributeEnum.CanApplyBlowsBonus);
+        RegisterBoolPropertyFactory(AttributeEnum.CanApplyBonusArmorClassMiscPower);
+        RegisterBoolPropertyFactory(AttributeEnum.CanApplySlayingBonus);
+        RegisterBoolPropertyFactory(AttributeEnum.CanProvideSheathOfElectricity);
+        RegisterBoolPropertyFactory(AttributeEnum.CanProvideSheathOfFire);
+        RegisterBoolPropertyFactory(AttributeEnum.CanReflectBoltsAndArrows);
+        RegisterBoolPropertyFactory(AttributeEnum.Chaotic);
+        RegisterIntPropertyFactory(AttributeEnum.Charisma);
+        RegisterColorEnumPropertyFactory(AttributeEnum.Color);
+        RegisterIntPropertyFactory(AttributeEnum.Constitution);
+        RegisterIntPropertyFactory(AttributeEnum.DamageDice);
+        RegisterIntPropertyFactory(AttributeEnum.Dexterity);
+        RegisterIntPropertyFactory(AttributeEnum.DiceSides);
+        RegisterIntPropertyFactory(AttributeEnum.DisarmTraps);
+        RegisterBoolPropertyFactory(AttributeEnum.DrainExp);
+        RegisterBoolPropertyFactory(AttributeEnum.DreadCurse);
+        RegisterBoolPropertyFactory(AttributeEnum.EasyKnow);
+        RegisterBoolPropertyFactory(AttributeEnum.Feather);
+        RegisterBoolPropertyFactory(AttributeEnum.FreeAct);
+        RegisterReferencePropertyFactory<string>(AttributeEnum.FriendlyName);
+        RegisterBoolPropertyFactory(AttributeEnum.HatesAcid);
+        RegisterBoolPropertyFactory(AttributeEnum.HatesCold);
+        RegisterBoolPropertyFactory(AttributeEnum.HatesElectricity);
+        RegisterBoolPropertyFactory(AttributeEnum.HatesFire);
+        RegisterBoolPropertyFactory(AttributeEnum.HeavyCurse);
+        RegisterBoolPropertyFactory(AttributeEnum.HideType);
+        RegisterBoolPropertyFactory(AttributeEnum.HoldLife);
+        RegisterBoolPropertyFactory(AttributeEnum.IgnoreAcid);
+        RegisterBoolPropertyFactory(AttributeEnum.IgnoreCold);
+        RegisterBoolPropertyFactory(AttributeEnum.IgnoreElec);
+        RegisterBoolPropertyFactory(AttributeEnum.IgnoreFire);
+        RegisterBoolPropertyFactory(AttributeEnum.ImAcid);
+        RegisterBoolPropertyFactory(AttributeEnum.ImCold);
+        RegisterBoolPropertyFactory(AttributeEnum.ImElec);
+        RegisterBoolPropertyFactory(AttributeEnum.ImFire);
+        RegisterBoolPropertyFactory(AttributeEnum.Impact);
+        RegisterIntPropertyFactory(AttributeEnum.Infravision);
+        RegisterIntPropertyFactory(AttributeEnum.Intelligence);
+        RegisterBoolPropertyFactory(AttributeEnum.IsCursed);
+        RegisterIntPropertyFactory(AttributeEnum.MeleeToHit);
+        RegisterBoolPropertyFactory(AttributeEnum.NoMagic);
+        RegisterBoolPropertyFactory(AttributeEnum.NoTele);
+        RegisterBoolPropertyFactory(AttributeEnum.PermaCurse);
+        RegisterIntPropertyFactory(AttributeEnum.Radius);
+        RegisterIntPropertyFactory(AttributeEnum.RangedToHit);
+        RegisterBoolPropertyFactory(AttributeEnum.Reflect);
+        RegisterBoolPropertyFactory(AttributeEnum.Regen);
+        RegisterBoolPropertyFactory(AttributeEnum.ResAcid);
+        RegisterBoolPropertyFactory(AttributeEnum.ResBlind);
+        RegisterBoolPropertyFactory(AttributeEnum.ResChaos);
+        RegisterBoolPropertyFactory(AttributeEnum.ResCold);
+        RegisterBoolPropertyFactory(AttributeEnum.ResConf);
+        RegisterBoolPropertyFactory(AttributeEnum.ResDark);
+        RegisterBoolPropertyFactory(AttributeEnum.ResDisen);
+        RegisterBoolPropertyFactory(AttributeEnum.ResElec);
+        RegisterBoolPropertyFactory(AttributeEnum.ResFear);
+        RegisterBoolPropertyFactory(AttributeEnum.ResFire);
+        RegisterBoolPropertyFactory(AttributeEnum.ResLight);
+        RegisterBoolPropertyFactory(AttributeEnum.ResNether);
+        RegisterBoolPropertyFactory(AttributeEnum.ResNexus);
+        RegisterBoolPropertyFactory(AttributeEnum.ResPois);
+        RegisterBoolPropertyFactory(AttributeEnum.ResShards);
+        RegisterBoolPropertyFactory(AttributeEnum.ResSound);
+        RegisterIntPropertyFactory(AttributeEnum.SavingThrow);
+        RegisterIntPropertyFactory(AttributeEnum.Search);
+        RegisterIntPropertyFactory(AttributeEnum.SearchFrequency);
+        RegisterBoolPropertyFactory(AttributeEnum.SeeInvis);
+        RegisterBoolPropertyFactory(AttributeEnum.ShElec);
+        RegisterBoolPropertyFactory(AttributeEnum.ShFire);
+        RegisterBoolPropertyFactory(AttributeEnum.ShowMods);
+        RegisterBoolPropertyFactory(AttributeEnum.SlayAnimal);
+        RegisterBoolPropertyFactory(AttributeEnum.SlayDemon);
+        RegisterIntPropertyFactory(AttributeEnum.SlayDragon);
+        RegisterBoolPropertyFactory(AttributeEnum.SlayEvil);
+        RegisterBoolPropertyFactory(AttributeEnum.SlayGiant);
+        RegisterBoolPropertyFactory(AttributeEnum.SlayOrc);
+        RegisterBoolPropertyFactory(AttributeEnum.SlayTroll);
+        RegisterBoolPropertyFactory(AttributeEnum.SlayUndead);
+        RegisterBoolPropertyFactory(AttributeEnum.SlowDigest);
+        RegisterIntPropertyFactory(AttributeEnum.Speed);
+        RegisterIntPropertyFactory(AttributeEnum.Stealth);
+        RegisterIntPropertyFactory(AttributeEnum.Strength);
+        RegisterBoolPropertyFactory(AttributeEnum.SustCha);
+        RegisterBoolPropertyFactory(AttributeEnum.SustCon);
+        RegisterBoolPropertyFactory(AttributeEnum.SustDex);
+        RegisterBoolPropertyFactory(AttributeEnum.SustInt);
+        RegisterBoolPropertyFactory(AttributeEnum.SustStr);
+        RegisterBoolPropertyFactory(AttributeEnum.SustWis);
+        RegisterBoolPropertyFactory(AttributeEnum.Telepathy);
+        RegisterBoolPropertyFactory(AttributeEnum.Teleport);
+        RegisterIntPropertyFactory(AttributeEnum.ThrowingToHit);
+        RegisterIntPropertyFactory(AttributeEnum.ToDamage);
+        RegisterIntPropertyFactory(AttributeEnum.TreasureRating);
+        RegisterIntPropertyFactory(AttributeEnum.Tunnel);
+        RegisterIntPropertyFactory(AttributeEnum.UseDevice);
+        RegisterIntPropertyFactory(AttributeEnum.Value);
+        RegisterBoolPropertyFactory(AttributeEnum.Valueless);
+        RegisterBoolPropertyFactory(AttributeEnum.Vampiric);
+        RegisterIntPropertyFactory(AttributeEnum.Vorpal1InChance);
+        RegisterIntPropertyFactory(AttributeEnum.VorpalExtraAttacks1InChance);
+        RegisterIntPropertyFactory(AttributeEnum.Weight);
+        RegisterIntPropertyFactory(AttributeEnum.Wisdom);
+        RegisterBoolPropertyFactory(AttributeEnum.Wraith);
+        RegisterBoolPropertyFactory(AttributeEnum.XtraMight);
+        RegisterBoolPropertyFactory(AttributeEnum.XtraShots);
+
+        // Generate the default property values.
+        _defaultAttributeValues = new AttributeValue[_attributeFactories.Length];
+        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
+        {
+            int index = (int)itemPropertyFactory.Index;
+            _defaultAttributeValues[index] = itemPropertyFactory.Instantiate();
+        }
+    }
+}
+
+[Serializable]
+internal class AttributeLedger
+{
+    private AttributeValue _defaultAttributeValue { get; }
+    private Dictionary<string, AttributeValue> _transactionAttributeValues = new Dictionary<string, AttributeValue>();
+    public AttributeLedger(AttributeValue defaultAttributeValue)
+    {
+        _defaultAttributeValue = defaultAttributeValue;
+    }
+
+    public AttributeValue ComputeEffectiveValue()
+    {
+        AttributeValue computedAttributeValue = _defaultAttributeValue;
+        foreach (AttributeValue attributeValue in _transactionAttributeValues.Values)
+        {
+            computedAttributeValue = computedAttributeValue.Merge(attributeValue);
+        }
+        return computedAttributeValue;
+    }
+    public void AddTransaction(AttributeValue attributeValue)
+    {
+        AddTransaction("", attributeValue);
+    }
+
+    public void AddTransaction(string key, AttributeValue attributeValue)
+    {
+        _transactionAttributeValues.Add(key, attributeValue);
+    }
+
+    public void RemoveByKey(string key)
+    {
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new Exception($"Cannot specify a blank or null key for {nameof(RemoveByKey)}");
+        }
+        _transactionAttributeValues.Remove(key);
+    }
+}
+
+//[Serializable]
+//internal class EffectiveAttributeSet2
+//{
+//    private AttributeLedger[] _attributeValues = new AttributeLedger[];
+//    public void RemoveEnhancements(string key)
+//    {
+//        _enhancements.Remove(key);
+//    }
+//    private AttributeValue ComputeEffectiveValue(int index)
+//    {
+//        // Start with the default value for us to start with.
+//        AttributeValue itemProperty = _defaultAttributeValues[index];
+
+//        // Merge all of the immutable enhancements across all of the keys.
+//        foreach (List<ReadOnlyAttributeSet> readOnlyPropertySetList in _enhancements.Values)
+//        {
+//            // For each key, there may be multiple item enhancements.
+//            foreach (ReadOnlyAttributeSet readOnlyPropertySet in readOnlyPropertySetList)
+//            {
+//                AttributeValue? attributeValue = readOnlyPropertySet.GetValue(index);
+
+//                // Check to see if there is a modifier specified.
+//                if (attributeValue is not null)
+//                {
+//                    // Merge the attribute value.
+//                    itemProperty = itemProperty.Merge(attributeValue);
+//                }
+//            }
+//        }
+
+//        // Merge the writable enhancements.
+//        AttributeValue? additiveAttributeValue = _additiveAttributeValues[index];
+//        if (additiveAttributeValue is not null)
+//        {
+//            itemProperty = itemProperty.Merge(additiveAttributeValue);
+//        }
+
+//        // Return the value.
+//        return itemProperty;
+//    }
+
+//}
 
 /// <summary>
 /// Represents a set of properties where the value for each property is determined from many sources including a built-in writable property.  An additonal override value can also be applied to each property.
