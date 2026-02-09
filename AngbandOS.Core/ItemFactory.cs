@@ -31,6 +31,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     public ItemFactory(Game game, ItemFactoryGameConfiguration itemFactoryGameConfiguration) 
     {
         Game = game;
+        EffectiveAttributeSet = new EffectiveAttributeSet(Game);
         Key = itemFactoryGameConfiguration.Key ?? itemFactoryGameConfiguration.GetType().Name;
         ItemEnhancementBindingKey = itemFactoryGameConfiguration.ItemEnhancementBindingKey;
 
@@ -374,12 +375,12 @@ internal sealed class ItemFactory : IGetKey, IToJson
         EquipmentProcessWorldScript?.ExecuteScriptItem(item);
         ProcessWorld(item);
     }
-    public EffectiveAttributeSet EffectiveAttributeSet = new EffectiveAttributeSet();
+    public EffectiveAttributeSet EffectiveAttributeSet;
 
     public void Bind()
     {
         ItemEnhancement itemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
-        EffectiveAttributeSet.AddEnhancement(itemEnhancement.GenerateItemCharacteristics());
+        EffectiveAttributeSet.MergeAttributeSet(itemEnhancement.GenerateItemCharacteristics());
 
         //// Cut and paste
         //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override int BonusDamage => ");
@@ -1196,7 +1197,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             }
             if (Game.DieRoll(2) == 1)
             {
-                characteristics.SetBoolAttributeValue(AttributeEnum.Teleport, true);
+                characteristics.Teleport = true;
             }
             else if (Game.DieRoll(3) == 1)
             {
@@ -1218,7 +1219,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             switch (Game.DieRoll(31))
             {
                 case 1:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.SustStr, true);
+                    characteristics.SustStr = true;
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
@@ -1226,7 +1227,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 2:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.SustInt, true);
+                    characteristics.SustInt = true;
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
@@ -1234,7 +1235,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 3:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.SustWis, true);
+                    characteristics.SustWis = true;
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
@@ -1242,7 +1243,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 4:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.SustDex, true);
+                    characteristics.SustDex = true;
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
@@ -1250,7 +1251,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 5:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.SustCon, true);
+                    characteristics.SustCon = true;
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
@@ -1258,7 +1259,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 6:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.SustCha, true);
+                    characteristics.SustCha = true;
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
@@ -1296,11 +1297,11 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 case 15:
                 case 16:
                 case 17:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.SeeInvis, true);
+                    characteristics.SeeInvis = true;
                     break;
 
                 case 18:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.Telepathy, true);
+                    characteristics.Telepathy = true;
                     if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
@@ -1309,16 +1310,16 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 19:
                 case 20:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.SlowDigest, true);
+                    characteristics.SlowDigest = true;
                     break;
 
                 case 21:
                 case 22:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.Regen, true);
+                    characteristics.Regen = true;
                     break;
 
                 case 23:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.Teleport, true);
+                    characteristics.Teleport = true;
                     break;
 
                 case 24:
@@ -1331,7 +1332,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     }
                     else
                     {
-                        characteristics.SetBoolAttributeValue(AttributeEnum.ShowMods, true);
+                        characteristics.ShowMods = true;
                         characteristics.BonusArmorClass = 4 + Game.DieRoll(11);
                     }
                     break;
@@ -1339,7 +1340,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 case 27:
                 case 28:
                 case 29:
-                    characteristics.SetBoolAttributeValue(AttributeEnum.ShowMods, true);
+                    characteristics.ShowMods = true;
                     characteristics.MeleeToHit += 4 + Game.DieRoll(11);
                     characteristics.ToDamage += 4 + Game.DieRoll(11);
                     break;
@@ -1379,7 +1380,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             } while (slayingItemEnhancement != null && !slayingItemEnhancement.AppliesTo(this));
 
             // Apply the item enhancement.  This supports a null choice.
-            characteristics.AddEnhancement(slayingItemEnhancement?.GenerateItemCharacteristics());
+            characteristics.MergeAttributeSet(slayingItemEnhancement?.GenerateItemCharacteristics());
         }
 
         /// <summary>
@@ -1398,7 +1399,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                         // The test only occurs on the effective properties.
                         if (itemTest.Matches(item))
                         {
-                            characteristics.AddEnhancement(itemEnhancement.GenerateItemCharacteristics());
+                            characteristics.MergeAttributeSet(itemEnhancement.GenerateItemCharacteristics());
                             if (moreProbability.Test())
                             {
                                 return true;
@@ -1410,7 +1411,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             return false;
         }
 
-        EffectiveAttributeSet characteristics = new EffectiveAttributeSet();
+        EffectiveAttributeSet characteristics = new EffectiveAttributeSet(Game);
         const int ArtifactCurseChance = 13;
         int powers = Game.DieRoll(5) + 1;
         bool aCursed = false;
@@ -1512,7 +1513,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                         ItemEnhancement? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
                         if (itemAdditiveBundle != null)
                         {
-                            characteristics.AddEnhancement(itemAdditiveBundle.GenerateItemCharacteristics());
+                            characteristics.MergeAttributeSet(itemAdditiveBundle.GenerateItemCharacteristics());
                         }
                     }
                     break;
@@ -1548,7 +1549,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         characteristics.IgnoreElec = true;
         characteristics.IgnoreFire = true;
         characteristics.IgnoreCold = true;
-        characteristics.SetIntAttributeValue(AttributeEnum.TreasureRating, 40);
+        characteristics.TreasureRating = 40;
 
         if (aCursed)
         {

@@ -35,7 +35,7 @@ internal class HighElfRace : Race
     {
         if (level > 19)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SeeInvis, true);
+            itemCharacteristics.SeeInvis = true;
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);

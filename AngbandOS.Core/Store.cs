@@ -472,7 +472,7 @@ internal class Store
                 continue;
             }
         }
-        StoreInventoryList.Insert(slot, oPtr.Clone()); // Clone is different
+        StoreInventoryList.Insert(slot, new Item(oPtr)); // Clone is different
         return slot;
     }
 
@@ -638,7 +638,7 @@ internal class Store
                 else
                 {
                     Game.MsgPrint("Your pack overflows!");
-                    Item qPtr = oPtr.Clone();
+                    Item qPtr = new Item(oPtr);
                     string oName = qPtr.GetFullDescription(true);
                     Game.MsgPrint($"You drop {oName} ({itemIndex.IndexToLabel()}).");
                     oPtr.ModifyStackCount(-255);

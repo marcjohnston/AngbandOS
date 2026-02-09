@@ -38,15 +38,15 @@ internal class MindFlayerRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustInt, true);
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustWis, true);
+        itemCharacteristics.SustInt = true;
+        itemCharacteristics.SustWis = true;
         if (level > 14)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SeeInvis, true);
+            itemCharacteristics.SeeInvis = true;
         }
         if (level > 29)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Telepathy, true);
+            itemCharacteristics.Telepathy = true;
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);

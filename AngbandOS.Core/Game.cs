@@ -4,7 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
@@ -12,6 +11,11 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Game
 {
+    public const string FactoryAttributeKey = "factory";
+    public const string RandomAttributeKey = "random";
+    public const string RareAttributeKey = "rare";
+    public const string FixedAttributeKey = "fixed";
+
     public string Find(string folder, string filenameWithoutExtension)
     {
         string path = Path.Combine(folder, $"{filenameWithoutExtension}.cs");
@@ -5671,8 +5675,8 @@ internal class Game
                     if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.MeleeToHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.RemoveCurse();
-                        oPtr.RemoveHeavyCurse();
+                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Reset();
+                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.HeavyCurse).Reset();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -5699,8 +5703,8 @@ internal class Game
                     if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.ToDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.RemoveCurse();
-                        oPtr.RemoveHeavyCurse();
+                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Reset();
+                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.HeavyCurse).Reset();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -5728,8 +5732,8 @@ internal class Game
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.RemoveCurse();
-                        oPtr.RemoveHeavyCurse();
+                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Reset();
+                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.HeavyCurse).Reset();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -6366,24 +6370,32 @@ internal class Game
         for (int i = InventorySlotEnum.MeleeWeapon; i < InventorySlotEnum.Total; i++)
         {
             Item? oPtr = GetInventoryItem(i);
+
+            // Ensure there is an item.
             if (oPtr == null)
             {
                 continue;
             }
+
+            // If it is not cursed, skip it.
             if (!oPtr.EffectivePropertySet.IsCursed)
             {
                 continue;
             }
+
+            // If it is heavy cursed, and we did not ask to remove the heavy curse, skip it.
             if (!alsoRemoveHeavyCurse && oPtr.EffectivePropertySet.HeavyCurse)
             {
                 continue;
             }
+
+            // Permacurse cannot be removed.
             if (oPtr.EffectivePropertySet.PermaCurse)
             {
                 continue;
             }
-            oPtr.RemoveCurse();
-            oPtr.RemoveHeavyCurse();
+            oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Reset();
+            oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.HeavyCurse).Reset();
             oPtr.IdentSense = true;
             oPtr.Inscription = "uncursed";
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -6726,17 +6738,16 @@ internal class Game
             // Completely remake the armor into a set of blasted armor
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.EffectivePropertySet.RemoveEnhancements("fixed");
+            item.EffectivePropertySet.RemoveKeyedEnhancements(Game.FixedAttributeKey);
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(ArmorBlastedItemEnhancement)));
             item.EffectivePropertySet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.MeleeToHit = 0;
             item.EffectivePropertySet.ToDamage = 0;
             item.EffectivePropertySet.BaseArmorClass = 0;
-            item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DamageDice, 0);
-            item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DiceSides , 0);
-            item.EffectivePropertySet.IsCursed = true;
-            item.ResetCurse();
-            item.EffectivePropertySet.SetBoolAttributeValue(AttributeEnum.Valueless, true);
+            item.EffectivePropertySet.DamageDice = 0;
+            item.EffectivePropertySet.DiceSides = 0;
+            item.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Set();
+            item.EffectivePropertySet.Valueless = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
@@ -6766,17 +6777,16 @@ internal class Game
             // Completely remake the item into a shattered weapon
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.EffectivePropertySet.RemoveEnhancements("fixed");
+            item.EffectivePropertySet.RemoveKeyedEnhancements(Game.FixedAttributeKey);
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(WeaponShatteredItemEnhancement)));
             item.EffectivePropertySet.MeleeToHit = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.ToDamage = 0 - DieRoll(5) - DieRoll(5);
             item.EffectivePropertySet.BonusArmorClass = 0;
             item.EffectivePropertySet.BaseArmorClass = 0;
-            item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DamageDice, 0);
-            item.EffectivePropertySet.SetIntAttributeValue(AttributeEnum.DiceSides, 0);
-            item.EffectivePropertySet.IsCursed = true;
-            item.ResetCurse();
-            item.EffectivePropertySet.SetBoolAttributeValue(AttributeEnum.Valueless, true);
+            item.EffectivePropertySet.DamageDice = 0;
+            item.EffectivePropertySet.DiceSides = 0;
+            item.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Set();
+            item.EffectivePropertySet.Valueless = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
@@ -7317,7 +7327,7 @@ internal class Game
                 else
                 {
                     // Actually pick up the item
-                    Item? inventoryItem = InventoryCarry(item.Clone(item.StackCount));
+                    Item? inventoryItem = InventoryCarry(new Item(item, item.StackCount));
                     if (inventoryItem == null)
                     {
                         throw new Exception("Unable to locate picked up item in the inventory."); // TODO: Clean this up
@@ -10508,7 +10518,7 @@ internal class Game
                 GridTile cPtr = Map.Grid[y][x];
                 foreach (Item item in cPtr.Items)
                 {
-                    if (item.EffectivePropertySet.HasKeyedItemEnhancements("fixed"))
+                    if (item.EffectivePropertySet.HasKeyedItemEnhancements(Game.FixedAttributeKey))
                     {
                         return 1;
                     }
@@ -13475,10 +13485,8 @@ internal class Game
             {
                 changed = true;
             }
-            oPtr.EffectivePropertySet.IsCursed = true;
-            oPtr.EffectivePropertySet.HeavyCurse = true;
-            oPtr.ResetCurse();
-            oPtr.ResetHeavyCurse();
+            oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Set();
+            oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.HeavyCurse).Set();
         }
         else
         {
@@ -13486,8 +13494,7 @@ internal class Game
             {
                 changed = true;
             }
-            oPtr.EffectivePropertySet.IsCursed = true;
-            oPtr.ResetCurse();
+            oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Set();
         }
         if (changed)
         {
@@ -13616,26 +13623,26 @@ internal class Game
 
     public EffectiveAttributeSet GetAbilitiesAsItemFlags()
     {
-        EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet();
+        EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet(this);
         if (BaseCharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFearResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResFear, true);
+            itemCharacteristics.ResFear = true;
         }
         if (BaseCharacterClass.InstantChaosResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantChaosResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResChaos, true);
+            itemCharacteristics.ResChaos = true;
         }
         if (BaseCharacterClass.InstantSustainWisdomLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainWisdomLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustWis, true);
+            itemCharacteristics.SustWis = true;
         }
         if (BaseCharacterClass.InstantConfusionResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantConfusionResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResConf, true);
+            itemCharacteristics.ResConf = true;
         }
         if (BaseCharacterClass.InstantTelepathyLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantTelepathyLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Telepathy, true);
+            itemCharacteristics.Telepathy = true;
         }
         if (BaseCharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSpeedLevel && !MartialArtistHeavyArmor())
         {
@@ -13647,7 +13654,7 @@ internal class Game
         }
         if (BaseCharacterClass.InstantBlindnessResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantBlindnessResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResBlind, true);
+            itemCharacteristics.ResBlind = true;
         }
         if (BaseCharacterClass.InstantFeatherFallingLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFeatherFallingLevel)
         {
@@ -13655,27 +13662,27 @@ internal class Game
         }
         if (BaseCharacterClass.InstantSeeInvisibilityLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSeeInvisibilityLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SeeInvis, true);
+            itemCharacteristics.SeeInvis = true;
         }
         if (BaseCharacterClass.InstantSlowDigestionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSlowDigestionLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SlowDigest, true);
+            itemCharacteristics.SlowDigest = true;
         }
         if (BaseCharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainConstitutionLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustCon, true);
+            itemCharacteristics.SustCon = true;
         }
         if (BaseCharacterClass.InstantPoisonResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantPoisonResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResPois, true);
+            itemCharacteristics.ResPois = true;
         }
         if (BaseCharacterClass.InstantSustainDexterityLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainDexterityLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustDex, true);
+            itemCharacteristics.SustDex = true;
         }
         if (BaseCharacterClass.InstantSustainStrengthLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainStrengthLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustStr, true);
+            itemCharacteristics.SustStr = true;
         }
         if (BaseCharacterClass.InstantHoldLifeLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantHoldLifeLevel)
         {
@@ -13683,43 +13690,43 @@ internal class Game
         }
         if (BaseCharacterClass.InstantDarknessResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantDarknessResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResDark, true);
+            itemCharacteristics.ResDark = true;
         }
         if (BaseCharacterClass.InstantLightResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantLightResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResLight, true);
+            itemCharacteristics.ResLight = true;
         }
         if (BaseCharacterClass.InstantSustainCharismaLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainCharismaLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustCha, true);
+            itemCharacteristics.SustCha = true;
         }
         if (BaseCharacterClass.InstantSoundResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSoundResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResSound, true);
+            itemCharacteristics.ResSound = true;
         }
         if (BaseCharacterClass.InstantDisenchantmentResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantDisenchantmentResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResDisen, true);
+            itemCharacteristics.ResDisen = true;
         }
         if (BaseCharacterClass.InstantRegenerationLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantRegenerationLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Regen, true);
+            itemCharacteristics.Regen = true;
         }
         if (BaseCharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainIntelligenceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustInt, true);
+            itemCharacteristics.SustInt = true;
         }
         if (BaseCharacterClass.InstantNexusResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantNexusResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResNexus, true);
+            itemCharacteristics.ResNexus = true;
         }
         if (BaseCharacterClass.InstantShardsResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantShardsResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResShards, true);
+            itemCharacteristics.ResShards = true;
         }
         if (BaseCharacterClass.InstantNetherResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantNetherResistanceLevel)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResNether, true);
+            itemCharacteristics.ResNether = true;
         }
         if (BaseCharacterClass.ItemRadiusOverride.HasValue)
         {
@@ -13727,22 +13734,21 @@ internal class Game
         }
 
         Race.UpdateRacialAbilities(ExperienceLevel.IntValue, itemCharacteristics);
-        if (Regen)
+        if (Regen && !SuppressRegen)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Regen, true);
+            itemCharacteristics.Regen = true;
         }
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Regen, SuppressRegen ? false : null);
         if (SpeedBonus != 0)
         {
             itemCharacteristics.Speed++;
         }
         if (ElecHit)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ShElec, true);
+            itemCharacteristics.ShElec = true;
         }
         if (HasFireSheath)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ShFire, true);
+            itemCharacteristics.ShFire = true;
             itemCharacteristics.Radius = 2;
         }
         if (FeatherFall)
@@ -13751,11 +13757,11 @@ internal class Game
         }
         if (ResFear)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResFear, true);
+            itemCharacteristics.ResFear = true;
         }
         if (Esp)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.Telepathy, true);
+            itemCharacteristics.Telepathy = true;
         }
         if (HasFreeAction)
         {
@@ -13763,26 +13769,26 @@ internal class Game
         }
         if (SustainAll)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustCon, true);
+            itemCharacteristics.SustCon = true;
             if (ExperienceLevel.IntValue > 9)
             {
-                itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustStr, true);
+                itemCharacteristics.SustStr = true;
             }
             if (ExperienceLevel.IntValue > 19)
             {
-                itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustDex, true);
+                itemCharacteristics.SustDex = true;
             }
             if (ExperienceLevel.IntValue > 29)
             {
-                itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustWis, true);
+                itemCharacteristics.SustWis = true;
             }
             if (ExperienceLevel.IntValue > 39)
             {
-                itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustInt, true);
+                itemCharacteristics.SustInt = true;
             }
             if (ExperienceLevel.IntValue > 49)
             {
-                itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustCha, true);
+                itemCharacteristics.SustCha = true;
             }
         }
         return itemCharacteristics;

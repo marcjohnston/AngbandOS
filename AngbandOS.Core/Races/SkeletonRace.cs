@@ -36,13 +36,13 @@ internal class SkeletonRace : Race
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SeeInvis, true);
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResShards, true);
+        itemCharacteristics.SeeInvis = true;
+        itemCharacteristics.ResShards = true;
         itemCharacteristics.HoldLife = true;
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResPois, true);
+        itemCharacteristics.ResPois = true;
         if (level > 9)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResCold, true);
+            itemCharacteristics.ResCold = true;
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);

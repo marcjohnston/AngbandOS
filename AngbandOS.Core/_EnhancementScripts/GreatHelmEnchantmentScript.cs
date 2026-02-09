@@ -44,7 +44,7 @@ internal class GreatHelmEnchantmentScript : Script, IEnhancementScript
                     item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfSeeingItemEnhancement)));
                     if (Game.DieRoll(7) == 1)
                     {
-                        item.EffectivePropertySet.SetBoolAttributeValue(AttributeEnum.Telepathy, true);
+                        item.EffectivePropertySet.Telepathy = true;
                     }
                     break;
                 case 9:

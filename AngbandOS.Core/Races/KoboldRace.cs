@@ -38,7 +38,7 @@ internal class KoboldRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResPois, true);
+        itemCharacteristics.ResPois = true;
     }
     protected override string GenerateNameSyllableSetName => nameof(HobbitSyllableSet);
     public override string[]? SelfKnowledge(int level)

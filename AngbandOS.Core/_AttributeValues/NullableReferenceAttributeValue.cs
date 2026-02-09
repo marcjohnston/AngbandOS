@@ -7,40 +7,23 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class NullableReferenceAttributeValue<T> : AttributeValue where T : class
+internal class NullableReferenceAttributeValue<T> : SetEffectiveAttributeValue<T?>
 {
-    public T? Value { get; }
+    public NullableReferenceAttributeValue(Game game, T? defaultValue) : base(game, defaultValue) { }
 
-    public override bool IsEqual(AttributeValue attributeValue)
+    public override EffectiveAttributeValue Clone()
     {
-        if (attributeValue is not NullableReferenceAttributeValue<T> roNullableReferenceItemProperty)
-        {
-            throw new Exception($"Item property equality from {attributeValue.GetType().Name} not supported with {nameof(NullableReferenceAttributeValue<T>)}");
-        }
-        return Value == roNullableReferenceItemProperty.Value;
+        NullableReferenceAttributeValue<T> clone = new NullableReferenceAttributeValue<T>(Game, InitialValue);
+        clone._attributeModifiers.AddRange(_attributeModifiers);
+        return (EffectiveAttributeValue)clone;
     }
 
-    public override AttributeValue Merge(AttributeValue attributeValue)
+    /// <summary>
+    /// Computes a value to append to the modifiers so that the effective value equals the specified value.
+    /// </summary>
+    /// <param name="value"></param>
+    public void Set(T? value)
     {
-        if (attributeValue is not NullableReferenceAttributeValue<T> nullableReferencePropertyValue)
-        {
-            throw new Exception($"Item property merging from {attributeValue.GetType().Name} not supported with {nameof(NullableReferenceAttributeValue<T>)}");
-        }
-
-        // Check to see if the incoming value is not null.
-        if (nullableReferencePropertyValue.Value is not null)
-        {
-            // It is not null, so return it.
-            return nullableReferencePropertyValue;
-        }
-
-        // Keep our existing value.
-        return this;
+        _attributeModifiers.Add(("", value));
     }
-
-    public NullableReferenceAttributeValue(AttributeFactory factory, T? value) : base(factory)
-    {
-        Value = value;
-    }
-    public override string DebugDescription => $"{base.ToString()}={Value}";
 }

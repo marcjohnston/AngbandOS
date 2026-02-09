@@ -29,7 +29,7 @@ internal class StrengthArtifactBias : ArtifactBias
     {
         if (!characteristics.SustStr)
         {
-            characteristics.SetBoolAttributeValue(AttributeEnum.SustStr, true);
+            characteristics.SustStr = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

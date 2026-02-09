@@ -37,7 +37,7 @@ internal class DwarfRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResBlind, true);
+        itemCharacteristics.ResBlind = true;
     }
     protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);
     public override string[]? SelfKnowledge(int level)

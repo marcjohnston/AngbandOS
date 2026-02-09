@@ -38,8 +38,8 @@ internal class HalfOgreRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SustStr, true);
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResDark, true);
+        itemCharacteristics.SustStr = true;
+        itemCharacteristics.ResDark = true;
     }
     protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);
 

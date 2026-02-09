@@ -28,7 +28,7 @@ internal class ChaosArtifactBias : ArtifactBias
     {
         if (!characteristics.Teleport)
         {
-            characteristics.SetBoolAttributeValue(AttributeEnum.Teleport, true);
+            characteristics.Teleport = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

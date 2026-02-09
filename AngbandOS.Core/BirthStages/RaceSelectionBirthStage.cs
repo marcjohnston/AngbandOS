@@ -84,7 +84,7 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "Infravision :", 38, 31);
         Game.Screen.Print(ColorEnum.Purple, "Searching   :", 39, 31);
         Game.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
-        Game.DisplayAPlusB(67, 36, Game.BaseCharacterClass.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value + race.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value, Game.BaseCharacterClass.DisarmBonusPerLevel);
+        Game.DisplayAPlusB(67, 36, Game.BaseCharacterClass.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value + race.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value, Game.BaseCharacterClass.DisarmBonusPerLevel);
         Game.DisplayAPlusB(67, 37, Game.BaseCharacterClass.UseDevice + race.UseDevice, Game.BaseCharacterClass.DeviceBonusPerLevel);
         Game.DisplayAPlusB(67, 38, Game.BaseCharacterClass.SavingThrow + race.SavingThrow, Game.BaseCharacterClass.SaveBonusPerLevel);
         Game.DisplayAPlusB(67, 39, (Game.BaseCharacterClass.Stealth * 4) + (race.Stealth * 4), Game.BaseCharacterClass.StealthBonusPerLevel * 4);
@@ -92,7 +92,7 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.DisplayAPlusB(67, 41, Game.BaseCharacterClass.RangedToHit + race.RangedToHit, Game.BaseCharacterClass.RangedAttackBonusPerLevel);
         Game.Screen.Print(ColorEnum.Black, race.ExperienceFactor + Game.BaseCharacterClass.ExperienceFactor + "%", 36, 45);
         Game.Screen.Print(ColorEnum.Black, "1d" + (race.HitDieBonus + Game.BaseCharacterClass.HitDieBonus), 37, 45);
-        int bonusInfravision = race.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.Infravision).Value;
+        int bonusInfravision = race.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.Infravision).Value;
         if (bonusInfravision == 0)
         {
             Game.Screen.Print(ColorEnum.Black, "nil", 38, 45);

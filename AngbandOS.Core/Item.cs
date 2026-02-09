@@ -108,49 +108,9 @@ internal sealed class Item : IComparable<Item>
     #region API Methods
     public Item TakeFromStack(int count)
     {
-        Item retrievedItem = Clone(count); // This will not take the items from the stack yet.
+        Item retrievedItem = new Item(this, count); // This will not take the items from the stack yet.
         ModifyStackCount(-count);
         return retrievedItem;
-    }
-
-    /// <summary>
-    /// Clone an item and set the stack size.  Used during the purchasing of items from a store to detect if the player can carry the item before it is removed
-    /// from inventory.
-    /// </summary>
-    /// <param name="newCount"></param>
-    /// <returns></returns>
-    public Item Clone(int? newCount = null) // TODO: Can this be a constructor?
-    {
-        Item clonedItem = _factory.GenerateItem();
-        clonedItem.StackCount = newCount.HasValue ? newCount.Value : 1;
-
-        // TODO: There is no way to ensure a cloned gets all of the properties
-        clonedItem.IdentSense = IdentSense;
-        clonedItem.IdentFixed = IdentFixed;
-        clonedItem.IdentEmpty = IdentEmpty;
-        clonedItem.IdentityIsKnown = IdentityIsKnown;
-        clonedItem.IdentityIsStoreBought = IdentityIsStoreBought;
-        clonedItem.IdentMental = IdentMental;
-        clonedItem.EffectivePropertySet = EffectivePropertySet.Clone();
-        clonedItem.FixedArtifact = FixedArtifact;
-        clonedItem.Discount = Discount;
-        clonedItem.HoldingMonsterIndex = HoldingMonsterIndex;
-        clonedItem.Inscription = Inscription;
-        clonedItem.WasNoticed = WasNoticed;
-        clonedItem.ActivationRechargeTimeRemaining = ActivationRechargeTimeRemaining;
-        clonedItem.ContainerTraps = ContainerTraps;
-        clonedItem.LevelOfObjectsInContainer = LevelOfObjectsInContainer;
-        clonedItem.ContainerIsOpen = ContainerIsOpen;
-        clonedItem.StaffChargesRemaining = StaffChargesRemaining;
-        clonedItem.WandChargesRemaining = WandChargesRemaining;
-        clonedItem.RodRechargeTimeRemaining = RodRechargeTimeRemaining;
-        clonedItem.X = X;
-        clonedItem.Y = Y;
-        clonedItem.TurnsOfLightRemaining = TurnsOfLightRemaining;
-        clonedItem.GoldPieces = GoldPieces;
-        clonedItem.RandomArtifactName = RandomArtifactName;
-
-        return clonedItem;
     }
 
     public bool CanBeWeaponOfSharpness => _factory.CanBeWeaponOfSharpness;
@@ -1509,13 +1469,13 @@ internal sealed class Item : IComparable<Item>
         return false;
     }
 
-    public bool IsRare => EffectivePropertySet.HasKeyedItemEnhancements("rare");
+    public bool IsRare => EffectivePropertySet.HasKeyedItemEnhancements(Game.RareAttributeKey);
 
     public EffectiveAttributeSet ObjectFlagsKnown()
     {
         if (!IsKnown())
         {
-            return new EffectiveAttributeSet();
+            return new EffectiveAttributeSet(Game);
         }
         return EffectivePropertySet;
     }
@@ -1658,9 +1618,7 @@ internal sealed class Item : IComparable<Item>
             if (IsFlavorAware)
             {
                 // Return the value of the item factory.
-                AttributeValue attributeValue = EffectivePropertySet.GetKeyedValue(AttributeEnum.Value, FactoryAttributeKey);
-                IntAttributeValue intAttributeValue = (IntAttributeValue)attributeValue;
-                return intAttributeValue.Value;
+                return EffectivePropertySet.Get<AdditionEffectiveAttributeValue>(AttributeEnum.Value).Get(Game.FactoryAttributeKey);
             }
 
             // We do not know what the item is, so return the base value of the factory.
@@ -1727,7 +1685,7 @@ internal sealed class Item : IComparable<Item>
         }
 
         // Check to see if we found an applicable mapped item enhancement and check to see if there are any attached item enhancements.
-        EffectiveAttributeSet fixedArtifactItemPropertySet = new EffectiveAttributeSet();
+        EffectiveAttributeSet fixedArtifactItemPropertySet = new EffectiveAttributeSet(Game);
         if (mappedItemEnhancement is not null && mappedItemEnhancement.ItemEnhancements is not null)
         {
             // Merge all of the applicable item enhancements.
@@ -1738,12 +1696,12 @@ internal sealed class Item : IComparable<Item>
                 // If it was a weighted random, no item enhancement might have been selected because null item enhancements can be assigned weights.
                 if (itemEnhancement is not null)
                 {
-                    fixedArtifactItemPropertySet.AddEnhancement(itemEnhancement.GenerateItemCharacteristics());
+                    fixedArtifactItemPropertySet.MergeAttributeSet(itemEnhancement.GenerateItemCharacteristics());
                 }
             }
         }
         FixedArtifact = fixedArtifact;
-        EffectivePropertySet.AddEnhancement("fixed", fixedArtifactItemPropertySet.ToReadOnly());
+        EffectivePropertySet.MergeAttributeSet(Game.FixedAttributeKey, fixedArtifactItemPropertySet.ToReadOnly());
         return true;
     }
 
@@ -1876,7 +1834,7 @@ internal sealed class Item : IComparable<Item>
         ItemEnhancement? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
         if (itemAdditiveBundle != null)
         {
-            EffectivePropertySet.AddEnhancement(itemAdditiveBundle.GenerateItemCharacteristics());
+            EffectivePropertySet.MergeAttributeSet(itemAdditiveBundle.GenerateItemCharacteristics());
         }
     }
 
@@ -1889,7 +1847,7 @@ internal sealed class Item : IComparable<Item>
     {
         // Create a set of random artifact characteristics.
         ReadOnlyAttributeSet randomArtifactPropertySet = _factory.CreateRandomArtifact(this, fromScroll);
-        EffectivePropertySet.AddEnhancement("random", randomArtifactPropertySet);
+        EffectivePropertySet.MergeAttributeSet(Game.RandomAttributeKey, randomArtifactPropertySet);
 
         ActivationRechargeTimeRemaining = 0; // TODO: If the item already had activation running, the conversion could change it? and restart the recharge?
         string newName;
@@ -1985,21 +1943,26 @@ internal sealed class Item : IComparable<Item>
         return t;
     }
     #endregion
-    private const string FactoryAttributeKey = "factory";
+
     #region Constructors
+    /// <summary>
+    /// Create a new item.  Items must be associated with a factory.
+    /// </summary>
+    /// <param name="game"></param>
+    /// <param name="factory"></param>
     public Item(Game game, ItemFactory factory)
     {
         Game = game;
         _factory = factory;
 
         // Generate the read-only item characteristics from the factory.
-        EffectivePropertySet = new EffectiveAttributeSet();
+        EffectivePropertySet = new EffectiveAttributeSet(Game);
 
         // Generate the factory attribute set.
         ReadOnlyAttributeSet factoryPropertySet = factory.EffectiveAttributeSet.ToReadOnly();
 
         // Add it to the item.
-        EffectivePropertySet.AddEnhancement(FactoryAttributeKey, factoryPropertySet);
+        EffectivePropertySet.MergeAttributeSet(Game.FactoryAttributeKey, factoryPropertySet);
 
         StackCount = 1;
 
@@ -2018,11 +1981,55 @@ internal sealed class Item : IComparable<Item>
             StaffChargesRemaining = Game.ComputeIntegerExpression(_factory.UseTuple.Value.InitialCharges).Value;
         }
     }
+
+    /// <summary>
+    /// Clone an item and set the stack size.  Used during the purchasing of items from a store to detect if the player can carry the item before it is removed
+    /// from inventory.
+    /// </summary>
+    /// <param name="newCount"></param>
+    /// <returns></returns>
+    public Item(Item cloneFrom, int? newCount = null)
+    {
+        Game = cloneFrom.Game;
+        _factory = cloneFrom._factory;
+        EffectivePropertySet = cloneFrom.EffectivePropertySet.Clone();
+
+        StackCount = newCount.HasValue ? newCount.Value : 1;
+        NutritionalValue = cloneFrom.NutritionalValue;
+        GoldPieces = cloneFrom.GoldPieces;
+        TurnsOfLightRemaining  = cloneFrom.TurnsOfLightRemaining;
+        WandChargesRemaining = cloneFrom.WandChargesRemaining;
+        StaffChargesRemaining = cloneFrom.StaffChargesRemaining;
+
+        IdentSense = cloneFrom.IdentSense;
+        IdentFixed = cloneFrom.IdentFixed;
+        IdentEmpty = cloneFrom.IdentEmpty;
+        IdentityIsKnown = cloneFrom.IdentityIsKnown;
+        IdentityIsStoreBought = cloneFrom.IdentityIsStoreBought;
+        IdentMental = cloneFrom.IdentMental;
+        FixedArtifact = cloneFrom.FixedArtifact;
+        Discount = cloneFrom.Discount;
+        HoldingMonsterIndex = cloneFrom.HoldingMonsterIndex;
+        Inscription = cloneFrom.Inscription;
+        WasNoticed = cloneFrom.WasNoticed;
+        ActivationRechargeTimeRemaining = cloneFrom.ActivationRechargeTimeRemaining;
+        ContainerTraps = cloneFrom.ContainerTraps;
+        LevelOfObjectsInContainer = cloneFrom.LevelOfObjectsInContainer;
+        ContainerIsOpen = cloneFrom.ContainerIsOpen;
+        StaffChargesRemaining = cloneFrom.StaffChargesRemaining;
+        WandChargesRemaining = cloneFrom.WandChargesRemaining;
+        RodRechargeTimeRemaining = cloneFrom.RodRechargeTimeRemaining;
+        X = cloneFrom.X;
+        Y = cloneFrom.Y;
+        TurnsOfLightRemaining = cloneFrom.TurnsOfLightRemaining;
+        GoldPieces = cloneFrom.GoldPieces;
+        RandomArtifactName = cloneFrom.RandomArtifactName;
+    }
     #endregion
     #region Item Properties Management
     public FixedArtifact? FixedArtifact = null;
 
-    public EffectiveAttributeSet EffectivePropertySet;
+    public readonly EffectiveAttributeSet EffectivePropertySet;
 
     /// <summary>
     /// Returns the factory that created this item.  All of the initial state data is retrieved from the <see cref="ItemFactory"/>when the <see cref="Item"/> is created.  We preserve this <see cref="ItemFactory"/>
@@ -2043,7 +2050,7 @@ internal sealed class Item : IComparable<Item>
             // Check to see if we need to remove properties.
             if (IsRare)
             {
-                EffectivePropertySet.RemoveEnhancements("rare");
+                EffectivePropertySet.RemoveKeyedEnhancements(Game.RareAttributeKey);
             }
         }
         else
@@ -2051,8 +2058,8 @@ internal sealed class Item : IComparable<Item>
             // Check to see if we are enchanting a cursed or broken item.
             int goodBadMultiplier = EffectivePropertySet.IsCursed || EffectivePropertySet.Valueless ? -1 : 1;
 
-            EffectiveAttributeSet? rareItemEffectivePropertySet = new EffectiveAttributeSet();
-            rareItemEffectivePropertySet.AddEnhancement(rareItem.GenerateItemCharacteristics());
+            EffectiveAttributeSet? rareItemEffectivePropertySet = new EffectiveAttributeSet(Game);
+            rareItemEffectivePropertySet.MergeAttributeSet(rareItem.GenerateItemCharacteristics());
             rareItemEffectivePropertySet.MeleeToHit *= goodBadMultiplier;
             rareItemEffectivePropertySet.ToDamage *= goodBadMultiplier;
             rareItemEffectivePropertySet.BonusArmorClass *= goodBadMultiplier;
@@ -2068,38 +2075,8 @@ internal sealed class Item : IComparable<Item>
             rareItemEffectivePropertySet.Tunnel *= goodBadMultiplier;
             rareItemEffectivePropertySet.Attacks *= goodBadMultiplier;
             rareItemEffectivePropertySet.Speed *= goodBadMultiplier;
-            EffectivePropertySet.AddEnhancement("rare", rareItemEffectivePropertySet.ToReadOnly());
+            EffectivePropertySet.MergeAttributeSet(Game.RareAttributeKey, rareItemEffectivePropertySet.ToReadOnly());
         }
     }
-
-    public void ResetCurse()
-    {
-        EffectivePropertySet.ResetCurse();
-    }
-
-    /// <summary>
-    /// Removes the curse from an item.  This overrides the curse state of an item; as false.
-    /// </summary>
-    public void RemoveCurse()
-    {
-        EffectivePropertySet.RemoveCurse();
-    }
-
-    /// <summary>
-    /// Resets the heavy curse removed state back to default.  This is used when applying a heavy curse on an item so that the item shows as cursed.
-    /// </summary>
-    public void ResetHeavyCurse()
-    {
-        EffectivePropertySet.ResetHeavyCurse();
-    }
-
-    /// <summary>
-    /// Removes the heavy curse from an item.  This overrides the heavy curse state of an item; as false.
-    /// </summary>
-    public void RemoveHeavyCurse()
-    {
-        EffectivePropertySet.RemoveHeavyCurse();
-    }
-
     #endregion
 }

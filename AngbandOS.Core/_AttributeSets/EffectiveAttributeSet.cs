@@ -4,918 +4,116 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System;
-
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Attribute2
-{
-    public abstract int Index { get; }
-
-    /// <summary>
-    /// Returns the default value for this attribute.
-    /// </summary>
-    public abstract AttributeValue2 DefaultAttributeValue { get; }
-
-    private readonly Game Game;
-
-    protected Attribute2(Game game)
-    {
-        Game = game;
-    }
-}
-
-[Serializable]
-internal abstract class BoolAttribute2 : Attribute2, IGetKey
-{
-    public BoolAttribute2(Game game) : base(game) { }
-    public override AttributeValue2 DefaultAttributeValue => new BoolAttributeValue2(false);
-    public string GetKey => Index.ToString();
-    public void Bind() { }
-}
-
-[Serializable]
-internal abstract class ColorAttribute2 : Attribute2, IGetKey
-{
-    public ColorAttribute2(Game game) : base(game) { }
-    public override AttributeValue2 DefaultAttributeValue => new ColorEnumAttributeValue2(ColorEnum.White);
-    public string GetKey => Index.ToString();
-    public void Bind() { }
-}
-
-[Serializable]
-internal abstract class IntAttribute2 : Attribute2, IGetKey
-{
-    public IntAttribute2(Game game) : base(game) { }
-    public override AttributeValue2 DefaultAttributeValue => new IntAttributeValue2(0);
-    public string GetKey => Index.ToString();
-    public void Bind() { }
-}
-
-[Serializable]
-internal abstract class NullableReferenceAttribute2<T> : Attribute2, IGetKey where T : class
-{
-    public NullableReferenceAttribute2(Game game) : base(game) { }
-    public sealed override AttributeValue2 DefaultAttributeValue => new NullableReferenceAttributeValue2<T>(null);
-    public string GetKey => Index.ToString();
-    public void Bind() { }
-}
-
-[Serializable]
-internal abstract class AttributeValue2
-{
-    /// <summary>
-    /// Returns true, if two attribute values are equal.
-    /// </summary>
-    /// <param name="itemProperty"></param>
-    /// <returns></returns>
-    public abstract bool IsEqual(AttributeValue2 itemProperty);
-    public abstract AttributeValue2 Merge(AttributeValue2 attributeValue);
-}
-
-[Serializable]
-internal class BoolAttributeValue2 : AttributeValue2
-{
-    public bool Value { get; }
-    public BoolAttributeValue2(bool value)
-    {
-        Value = value;
-    }
-
-    public override AttributeValue2 Merge(AttributeValue2 itemProperty)
-    {
-        if (itemProperty is not BoolAttributeValue2 boolPropertyValue)
-        {
-            throw new Exception("Merge mismatch.");
-        }
-        return new BoolAttributeValue2(Value || boolPropertyValue.Value);
-    }
-
-    public override bool IsEqual(AttributeValue2 itemProperty)
-    {
-        if (itemProperty is not BoolAttributeValue2 boolPropertyValue)
-        {
-            throw new Exception("IsEqual mismatch.");
-        }
-        return Value == boolPropertyValue.Value;
-    }
-}
-
-[Serializable]
-internal class ColorEnumAttributeValue2 : AttributeValue2
-{
-    public ColorEnum Value { get; }
-    public ColorEnumAttributeValue2(ColorEnum value)
-    {
-        Value = value;
-    }
-    public override AttributeValue2 Merge(AttributeValue2 itemProperty)
-    {
-        if (itemProperty is not ColorEnumAttributeValue2 colorEnumPropertyValue)
-        {
-            throw new Exception("Merge mismatch.");
-        }
-        return colorEnumPropertyValue;
-    }
-
-    public override bool IsEqual(AttributeValue2 itemProperty)
-    {
-        if (itemProperty is not ColorEnumAttributeValue2 colorEnumPropertyValue)
-        {
-            throw new Exception("IsEqual mismatch.");
-        }
-        return Value == colorEnumPropertyValue.Value;
-    }
-}
-
-[Serializable]
-internal class IntAttributeValue2 : AttributeValue2
-{
-    public int Value { get; }
-    public IntAttributeValue2(int value)
-    {
-        Value = value;
-    }
-    public override AttributeValue2 Merge(AttributeValue2 itemProperty)
-    {
-        if (itemProperty is not IntAttributeValue2 intPropertyValue)
-        {
-            throw new Exception("Merge mismatch.");
-        }
-        return new IntAttributeValue2(Value + intPropertyValue.Value);
-    }
-
-    public override bool IsEqual(AttributeValue2 itemProperty)
-    {
-        if (itemProperty is not IntAttributeValue2 intPropertyValue)
-        {
-            throw new Exception("IsEqual mismatch.");
-        }
-        return Value == intPropertyValue.Value;
-    }
-}
-
-[Serializable]
-internal class NullableReferenceAttributeValue2<T> : AttributeValue2 where T : class
-{
-    public T? Value { get; }
-    public override bool IsEqual(AttributeValue2 attributeValue)
-    {
-        if (attributeValue is not NullableReferenceAttributeValue2<T> roReferenceItemProperty)
-        {
-            throw new Exception($"Item property equality from {attributeValue.GetType().Name} not supported with {nameof(NullableReferenceAttributeValue2<T>)}");
-        }
-        return Value == roReferenceItemProperty.Value;
-    }
-    public override AttributeValue2 Merge(AttributeValue2 attributeValue)
-    {
-        if (attributeValue is not NullableReferenceAttributeValue2<T> referencePropertyValue)
-        {
-            throw new Exception($"Item property merging from {attributeValue.GetType().Name} not supported with {nameof(NullableReferenceAttributeValue2<T>)}");
-        }
-        // Always take the incoming value.
-        return referencePropertyValue;
-    }
-    public NullableReferenceAttributeValue2(T? value)
-    {
-        Value = value;
-    }
-}
-
-[Serializable]
-internal class ActivationAttribute : NullableReferenceAttribute2<Activation>
-{
-    private ActivationAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.Activation;
-}
-
-[Serializable]
-internal class AggravateAttribute : BoolAttribute2
-{
-    private AggravateAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.Aggravate;
-}
-
-[Serializable]
-internal class AttributeRepository
-{
-    private AttributeFactory[] _attributeFactories = new AttributeFactory[0];
-    private AttributeValue[] _defaultAttributeValues;
-    public AttributeRepository()
-    {
-        void RegisterPropertyFactory(AttributeEnum index, AttributeFactory propertyFactory)
-        {
-            int intIndex = (int)index;
-            if (_attributeFactories.Length <= intIndex)
-            {
-                Array.Resize(ref _attributeFactories, intIndex + 1);
-            }
-            _attributeFactories[intIndex] = propertyFactory;
-        }
-        void RegisterBoolPropertyFactory(AttributeEnum index)
-        {
-            RegisterPropertyFactory(index, new BoolAttributeFactory(index));
-        }
-        void RegisterColorEnumPropertyFactory(AttributeEnum index)
-        {
-            RegisterPropertyFactory(index, new ColorEnumAttributeFactory(index));
-        }
-        void RegisterIntPropertyFactory(AttributeEnum index)
-        {
-            RegisterPropertyFactory(index, new IntAttributeFactory(index));
-        }
-        void RegisterReferencePropertyFactory<T>(AttributeEnum index) where T : class
-        {
-            RegisterPropertyFactory(index, new ReferenceAttributeFactory<T>(index));
-        }
-
-        RegisterReferencePropertyFactory<Activation>(AttributeEnum.Activation);
-        RegisterBoolPropertyFactory(AttributeEnum.Aggravate);
-        RegisterBoolPropertyFactory(AttributeEnum.AntiTheft);
-        RegisterReferencePropertyFactory<ArtifactBias>(AttributeEnum.ArtifactBias);
-        RegisterBoolPropertyFactory(AttributeEnum.ArtifactBiasSlayingDisabled);
-        RegisterIntPropertyFactory(AttributeEnum.Attacks);
-        RegisterIntPropertyFactory(AttributeEnum.BaseArmorClass);
-        RegisterBoolPropertyFactory(AttributeEnum.Blessed);
-        RegisterBoolPropertyFactory(AttributeEnum.Blows);
-        RegisterIntPropertyFactory(AttributeEnum.BonusArmorClass);
-        RegisterBoolPropertyFactory(AttributeEnum.BrandAcid);
-        RegisterBoolPropertyFactory(AttributeEnum.BrandCold);
-        RegisterBoolPropertyFactory(AttributeEnum.BrandElec);
-        RegisterBoolPropertyFactory(AttributeEnum.BrandFire);
-        RegisterBoolPropertyFactory(AttributeEnum.BrandPois);
-        RegisterBoolPropertyFactory(AttributeEnum.CanApplyBlessedArtifactBias);
-        RegisterBoolPropertyFactory(AttributeEnum.CanApplyBlowsBonus);
-        RegisterBoolPropertyFactory(AttributeEnum.CanApplyBonusArmorClassMiscPower);
-        RegisterBoolPropertyFactory(AttributeEnum.CanApplySlayingBonus);
-        RegisterBoolPropertyFactory(AttributeEnum.CanProvideSheathOfElectricity);
-        RegisterBoolPropertyFactory(AttributeEnum.CanProvideSheathOfFire);
-        RegisterBoolPropertyFactory(AttributeEnum.CanReflectBoltsAndArrows);
-        RegisterBoolPropertyFactory(AttributeEnum.Chaotic);
-        RegisterIntPropertyFactory(AttributeEnum.Charisma);
-        RegisterColorEnumPropertyFactory(AttributeEnum.Color);
-        RegisterIntPropertyFactory(AttributeEnum.Constitution);
-        RegisterIntPropertyFactory(AttributeEnum.DamageDice);
-        RegisterIntPropertyFactory(AttributeEnum.Dexterity);
-        RegisterIntPropertyFactory(AttributeEnum.DiceSides);
-        RegisterIntPropertyFactory(AttributeEnum.DisarmTraps);
-        RegisterBoolPropertyFactory(AttributeEnum.DrainExp);
-        RegisterBoolPropertyFactory(AttributeEnum.DreadCurse);
-        RegisterBoolPropertyFactory(AttributeEnum.EasyKnow);
-        RegisterBoolPropertyFactory(AttributeEnum.Feather);
-        RegisterBoolPropertyFactory(AttributeEnum.FreeAct);
-        RegisterReferencePropertyFactory<string>(AttributeEnum.FriendlyName);
-        RegisterBoolPropertyFactory(AttributeEnum.HatesAcid);
-        RegisterBoolPropertyFactory(AttributeEnum.HatesCold);
-        RegisterBoolPropertyFactory(AttributeEnum.HatesElectricity);
-        RegisterBoolPropertyFactory(AttributeEnum.HatesFire);
-        RegisterBoolPropertyFactory(AttributeEnum.HeavyCurse);
-        RegisterBoolPropertyFactory(AttributeEnum.HideType);
-        RegisterBoolPropertyFactory(AttributeEnum.HoldLife);
-        RegisterBoolPropertyFactory(AttributeEnum.IgnoreAcid);
-        RegisterBoolPropertyFactory(AttributeEnum.IgnoreCold);
-        RegisterBoolPropertyFactory(AttributeEnum.IgnoreElec);
-        RegisterBoolPropertyFactory(AttributeEnum.IgnoreFire);
-        RegisterBoolPropertyFactory(AttributeEnum.ImAcid);
-        RegisterBoolPropertyFactory(AttributeEnum.ImCold);
-        RegisterBoolPropertyFactory(AttributeEnum.ImElec);
-        RegisterBoolPropertyFactory(AttributeEnum.ImFire);
-        RegisterBoolPropertyFactory(AttributeEnum.Impact);
-        RegisterIntPropertyFactory(AttributeEnum.Infravision);
-        RegisterIntPropertyFactory(AttributeEnum.Intelligence);
-        RegisterBoolPropertyFactory(AttributeEnum.IsCursed);
-        RegisterIntPropertyFactory(AttributeEnum.MeleeToHit);
-        RegisterBoolPropertyFactory(AttributeEnum.NoMagic);
-        RegisterBoolPropertyFactory(AttributeEnum.NoTele);
-        RegisterBoolPropertyFactory(AttributeEnum.PermaCurse);
-        RegisterIntPropertyFactory(AttributeEnum.Radius);
-        RegisterIntPropertyFactory(AttributeEnum.RangedToHit);
-        RegisterBoolPropertyFactory(AttributeEnum.Reflect);
-        RegisterBoolPropertyFactory(AttributeEnum.Regen);
-        RegisterBoolPropertyFactory(AttributeEnum.ResAcid);
-        RegisterBoolPropertyFactory(AttributeEnum.ResBlind);
-        RegisterBoolPropertyFactory(AttributeEnum.ResChaos);
-        RegisterBoolPropertyFactory(AttributeEnum.ResCold);
-        RegisterBoolPropertyFactory(AttributeEnum.ResConf);
-        RegisterBoolPropertyFactory(AttributeEnum.ResDark);
-        RegisterBoolPropertyFactory(AttributeEnum.ResDisen);
-        RegisterBoolPropertyFactory(AttributeEnum.ResElec);
-        RegisterBoolPropertyFactory(AttributeEnum.ResFear);
-        RegisterBoolPropertyFactory(AttributeEnum.ResFire);
-        RegisterBoolPropertyFactory(AttributeEnum.ResLight);
-        RegisterBoolPropertyFactory(AttributeEnum.ResNether);
-        RegisterBoolPropertyFactory(AttributeEnum.ResNexus);
-        RegisterBoolPropertyFactory(AttributeEnum.ResPois);
-        RegisterBoolPropertyFactory(AttributeEnum.ResShards);
-        RegisterBoolPropertyFactory(AttributeEnum.ResSound);
-        RegisterIntPropertyFactory(AttributeEnum.SavingThrow);
-        RegisterIntPropertyFactory(AttributeEnum.Search);
-        RegisterIntPropertyFactory(AttributeEnum.SearchFrequency);
-        RegisterBoolPropertyFactory(AttributeEnum.SeeInvis);
-        RegisterBoolPropertyFactory(AttributeEnum.ShElec);
-        RegisterBoolPropertyFactory(AttributeEnum.ShFire);
-        RegisterBoolPropertyFactory(AttributeEnum.ShowMods);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayAnimal);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayDemon);
-        RegisterIntPropertyFactory(AttributeEnum.SlayDragon);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayEvil);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayGiant);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayOrc);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayTroll);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayUndead);
-        RegisterBoolPropertyFactory(AttributeEnum.SlowDigest);
-        RegisterIntPropertyFactory(AttributeEnum.Speed);
-        RegisterIntPropertyFactory(AttributeEnum.Stealth);
-        RegisterIntPropertyFactory(AttributeEnum.Strength);
-        RegisterBoolPropertyFactory(AttributeEnum.SustCha);
-        RegisterBoolPropertyFactory(AttributeEnum.SustCon);
-        RegisterBoolPropertyFactory(AttributeEnum.SustDex);
-        RegisterBoolPropertyFactory(AttributeEnum.SustInt);
-        RegisterBoolPropertyFactory(AttributeEnum.SustStr);
-        RegisterBoolPropertyFactory(AttributeEnum.SustWis);
-        RegisterBoolPropertyFactory(AttributeEnum.Telepathy);
-        RegisterBoolPropertyFactory(AttributeEnum.Teleport);
-        RegisterIntPropertyFactory(AttributeEnum.ThrowingToHit);
-        RegisterIntPropertyFactory(AttributeEnum.ToDamage);
-        RegisterIntPropertyFactory(AttributeEnum.TreasureRating);
-        RegisterIntPropertyFactory(AttributeEnum.Tunnel);
-        RegisterIntPropertyFactory(AttributeEnum.UseDevice);
-        RegisterIntPropertyFactory(AttributeEnum.Value);
-        RegisterBoolPropertyFactory(AttributeEnum.Valueless);
-        RegisterBoolPropertyFactory(AttributeEnum.Vampiric);
-        RegisterIntPropertyFactory(AttributeEnum.Vorpal1InChance);
-        RegisterIntPropertyFactory(AttributeEnum.VorpalExtraAttacks1InChance);
-        RegisterIntPropertyFactory(AttributeEnum.Weight);
-        RegisterIntPropertyFactory(AttributeEnum.Wisdom);
-        RegisterBoolPropertyFactory(AttributeEnum.Wraith);
-        RegisterBoolPropertyFactory(AttributeEnum.XtraMight);
-        RegisterBoolPropertyFactory(AttributeEnum.XtraShots);
-
-        // Generate the default property values.
-        _defaultAttributeValues = new AttributeValue[_attributeFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
-        {
-            int index = (int)itemPropertyFactory.Index;
-            _defaultAttributeValues[index] = itemPropertyFactory.Instantiate();
-        }
-    }
-}
-
-[Serializable]
-internal class AttributeLedger
-{
-    private AttributeValue _defaultAttributeValue { get; }
-    private Dictionary<string, AttributeValue> _transactionAttributeValues = new Dictionary<string, AttributeValue>();
-    public AttributeLedger(AttributeValue defaultAttributeValue)
-    {
-        _defaultAttributeValue = defaultAttributeValue;
-    }
-
-    public AttributeValue ComputeEffectiveValue()
-    {
-        AttributeValue computedAttributeValue = _defaultAttributeValue;
-        foreach (AttributeValue attributeValue in _transactionAttributeValues.Values)
-        {
-            computedAttributeValue = computedAttributeValue.Merge(attributeValue);
-        }
-        return computedAttributeValue;
-    }
-    public void AddTransaction(AttributeValue attributeValue)
-    {
-        AddTransaction("", attributeValue);
-    }
-
-    public void AddTransaction(string key, AttributeValue attributeValue)
-    {
-        _transactionAttributeValues.Add(key, attributeValue);
-    }
-
-    public void RemoveByKey(string key)
-    {
-        if (String.IsNullOrEmpty(key))
-        {
-            throw new Exception($"Cannot specify a blank or null key for {nameof(RemoveByKey)}");
-        }
-        _transactionAttributeValues.Remove(key);
-    }
-}
-
-//[Serializable]
-//internal class EffectiveAttributeSet2
-//{
-//    private AttributeLedger[] _attributeValues = new AttributeLedger[];
-//    public void RemoveEnhancements(string key)
-//    {
-//        _enhancements.Remove(key);
-//    }
-//    private AttributeValue ComputeEffectiveValue(int index)
-//    {
-//        // Start with the default value for us to start with.
-//        AttributeValue itemProperty = _defaultAttributeValues[index];
-
-//        // Merge all of the immutable enhancements across all of the keys.
-//        foreach (List<ReadOnlyAttributeSet> readOnlyPropertySetList in _enhancements.Values)
-//        {
-//            // For each key, there may be multiple item enhancements.
-//            foreach (ReadOnlyAttributeSet readOnlyPropertySet in readOnlyPropertySetList)
-//            {
-//                AttributeValue? attributeValue = readOnlyPropertySet.GetValue(index);
-
-//                // Check to see if there is a modifier specified.
-//                if (attributeValue is not null)
-//                {
-//                    // Merge the attribute value.
-//                    itemProperty = itemProperty.Merge(attributeValue);
-//                }
-//            }
-//        }
-
-//        // Merge the writable enhancements.
-//        AttributeValue? additiveAttributeValue = _additiveAttributeValues[index];
-//        if (additiveAttributeValue is not null)
-//        {
-//            itemProperty = itemProperty.Merge(additiveAttributeValue);
-//        }
-
-//        // Return the value.
-//        return itemProperty;
-//    }
-
-//}
-
-/// <summary>
-/// Represents a set of properties where the value for each property is determined from many sources including a built-in writable property.  An additonal override value can also be applied to each property.
-/// This is similar to a CSS style layering.  Each property type uses a different algorithm to determine the effective value.
-/// Booleans are ORed together.  Any source with a true value will result in a true effective value.  The writable property defaults to false and can be set to true.
-/// Integers are summed.  The writable property defaults to 0 and can be set to any integer value.
-/// Reference properties only return the last reference with the writable property having the last say.  The writable property defaults to null and can be set to any reference value.
-/// Properties that support override are nullable and writable.  A null value indicates that the effective property value will be be overriden.
-/// 
-/// Enhancements can be added to the effective property set.  Enhancements are always immutable through the use of the ReadOnlyPropertySet and can be keyed by a string.  Multiple enhancements can be added for the same key.
-/// Keyed enhancements allow the enhancement to be removed.  Non-keyed enhancements cannot be removed.
-/// Cloning is supported through immutability because the read-only property sets are immutable.
-/// </summary>
-[Serializable]
 internal class EffectiveAttributeSet
 {
-    private Dictionary<string, List<ReadOnlyAttributeSet>> _enhancements = new Dictionary<string, List<ReadOnlyAttributeSet>>();
-    private AttributeValue[] _defaultAttributeValues;
-    private AttributeValue?[] _additiveAttributeValues;
-    private AttributeValue?[] _fixedAttributeValues;
-    private AttributeFactory[] _attributeFactories = new AttributeFactory[0];
-
-    public EffectiveAttributeSet()
+    private readonly Game Game;
+    private readonly EffectiveAttributeValue[] _effectiveAttributeValues;
+    public EffectiveAttributeSet(Game game)
     {
-        void RegisterPropertyFactory(AttributeEnum index, AttributeFactory propertyFactory)
+        Game = game;
+        _effectiveAttributeValues = new EffectiveAttributeValue[Game.SingletonRepository.Count<Attribute>()];
+        foreach (Attribute attribute in Game.SingletonRepository.Get<Attribute>())
         {
-            int intIndex = (int)index;
-            if (_attributeFactories.Length <= intIndex)
-            {
-                Array.Resize(ref _attributeFactories, intIndex + 1);
-            }
-            _attributeFactories[intIndex] = propertyFactory;
+            EffectiveAttributeValue effectiveAttributeValue = attribute.CreateEffectiveAttributeValue();
+            _effectiveAttributeValues[attribute.Index] = effectiveAttributeValue;
         }
-        void RegisterBoolPropertyFactory(AttributeEnum index)
-        {
-            RegisterPropertyFactory(index, new BoolAttributeFactory(index));
-        }
-        void RegisterColorEnumPropertyFactory(AttributeEnum index)
-        {
-            RegisterPropertyFactory(index, new ColorEnumAttributeFactory(index));
-        }
-        void RegisterIntPropertyFactory(AttributeEnum index)
-        {
-            RegisterPropertyFactory(index, new IntAttributeFactory(index));
-        }
-        void RegisterReferencePropertyFactory<T>(AttributeEnum index) where T : class
-        {
-            RegisterPropertyFactory(index, new ReferenceAttributeFactory<T>(index));
-        }
+    }
 
-        RegisterReferencePropertyFactory<Activation>(AttributeEnum.Activation);
-        RegisterBoolPropertyFactory(AttributeEnum.Aggravate);
-        RegisterBoolPropertyFactory(AttributeEnum.AntiTheft);
-        RegisterReferencePropertyFactory<ArtifactBias>(AttributeEnum.ArtifactBias);
-        RegisterBoolPropertyFactory(AttributeEnum.ArtifactBiasSlayingDisabled);
-        RegisterIntPropertyFactory(AttributeEnum.Attacks);
-        RegisterIntPropertyFactory(AttributeEnum.BaseArmorClass);
-        RegisterBoolPropertyFactory(AttributeEnum.Blessed);
-        RegisterBoolPropertyFactory(AttributeEnum.Blows);
-        RegisterIntPropertyFactory(AttributeEnum.BonusArmorClass);
-        RegisterBoolPropertyFactory(AttributeEnum.BrandAcid);
-        RegisterBoolPropertyFactory(AttributeEnum.BrandCold);
-        RegisterBoolPropertyFactory(AttributeEnum.BrandElec);
-        RegisterBoolPropertyFactory(AttributeEnum.BrandFire);
-        RegisterBoolPropertyFactory(AttributeEnum.BrandPois);
-        RegisterBoolPropertyFactory(AttributeEnum.CanApplyBlessedArtifactBias);
-        RegisterBoolPropertyFactory(AttributeEnum.CanApplyBlowsBonus);
-        RegisterBoolPropertyFactory(AttributeEnum.CanApplyBonusArmorClassMiscPower);
-        RegisterBoolPropertyFactory(AttributeEnum.CanApplySlayingBonus);
-        RegisterBoolPropertyFactory(AttributeEnum.CanProvideSheathOfElectricity);
-        RegisterBoolPropertyFactory(AttributeEnum.CanProvideSheathOfFire);
-        RegisterBoolPropertyFactory(AttributeEnum.CanReflectBoltsAndArrows);
-        RegisterBoolPropertyFactory(AttributeEnum.Chaotic);
-        RegisterIntPropertyFactory(AttributeEnum.Charisma);
-        RegisterColorEnumPropertyFactory(AttributeEnum.Color);
-        RegisterIntPropertyFactory(AttributeEnum.Constitution);
-        RegisterIntPropertyFactory(AttributeEnum.DamageDice);
-        RegisterIntPropertyFactory(AttributeEnum.Dexterity);
-        RegisterIntPropertyFactory(AttributeEnum.DiceSides);
-        RegisterIntPropertyFactory(AttributeEnum.DisarmTraps);
-        RegisterBoolPropertyFactory(AttributeEnum.DrainExp);
-        RegisterBoolPropertyFactory(AttributeEnum.DreadCurse);
-        RegisterBoolPropertyFactory(AttributeEnum.EasyKnow);
-        RegisterBoolPropertyFactory(AttributeEnum.Feather);
-        RegisterBoolPropertyFactory(AttributeEnum.FreeAct);
-        RegisterReferencePropertyFactory<string>(AttributeEnum.FriendlyName);
-        RegisterBoolPropertyFactory(AttributeEnum.HatesAcid);
-        RegisterBoolPropertyFactory(AttributeEnum.HatesCold);
-        RegisterBoolPropertyFactory(AttributeEnum.HatesElectricity);
-        RegisterBoolPropertyFactory(AttributeEnum.HatesFire);
-        RegisterBoolPropertyFactory(AttributeEnum.HeavyCurse);
-        RegisterBoolPropertyFactory(AttributeEnum.HideType);
-        RegisterBoolPropertyFactory(AttributeEnum.HoldLife);
-        RegisterBoolPropertyFactory(AttributeEnum.IgnoreAcid);
-        RegisterBoolPropertyFactory(AttributeEnum.IgnoreCold);
-        RegisterBoolPropertyFactory(AttributeEnum.IgnoreElec);
-        RegisterBoolPropertyFactory(AttributeEnum.IgnoreFire);
-        RegisterBoolPropertyFactory(AttributeEnum.ImAcid);
-        RegisterBoolPropertyFactory(AttributeEnum.ImCold);
-        RegisterBoolPropertyFactory(AttributeEnum.ImElec);
-        RegisterBoolPropertyFactory(AttributeEnum.ImFire);
-        RegisterBoolPropertyFactory(AttributeEnum.Impact);
-        RegisterIntPropertyFactory(AttributeEnum.Infravision);
-        RegisterIntPropertyFactory(AttributeEnum.Intelligence);
-        RegisterBoolPropertyFactory(AttributeEnum.IsCursed);
-        RegisterIntPropertyFactory(AttributeEnum.MeleeToHit);
-        RegisterBoolPropertyFactory(AttributeEnum.NoMagic);
-        RegisterBoolPropertyFactory(AttributeEnum.NoTele);
-        RegisterBoolPropertyFactory(AttributeEnum.PermaCurse);
-        RegisterIntPropertyFactory(AttributeEnum.Radius);
-        RegisterIntPropertyFactory(AttributeEnum.RangedToHit);
-        RegisterBoolPropertyFactory(AttributeEnum.Reflect);
-        RegisterBoolPropertyFactory(AttributeEnum.Regen);
-        RegisterBoolPropertyFactory(AttributeEnum.ResAcid);
-        RegisterBoolPropertyFactory(AttributeEnum.ResBlind);
-        RegisterBoolPropertyFactory(AttributeEnum.ResChaos);
-        RegisterBoolPropertyFactory(AttributeEnum.ResCold);
-        RegisterBoolPropertyFactory(AttributeEnum.ResConf);
-        RegisterBoolPropertyFactory(AttributeEnum.ResDark);
-        RegisterBoolPropertyFactory(AttributeEnum.ResDisen);
-        RegisterBoolPropertyFactory(AttributeEnum.ResElec);
-        RegisterBoolPropertyFactory(AttributeEnum.ResFear);
-        RegisterBoolPropertyFactory(AttributeEnum.ResFire);
-        RegisterBoolPropertyFactory(AttributeEnum.ResLight);
-        RegisterBoolPropertyFactory(AttributeEnum.ResNether);
-        RegisterBoolPropertyFactory(AttributeEnum.ResNexus);
-        RegisterBoolPropertyFactory(AttributeEnum.ResPois);
-        RegisterBoolPropertyFactory(AttributeEnum.ResShards);
-        RegisterBoolPropertyFactory(AttributeEnum.ResSound);
-        RegisterIntPropertyFactory(AttributeEnum.SavingThrow);
-        RegisterIntPropertyFactory(AttributeEnum.Search);
-        RegisterIntPropertyFactory(AttributeEnum.SearchFrequency);
-        RegisterBoolPropertyFactory(AttributeEnum.SeeInvis);
-        RegisterBoolPropertyFactory(AttributeEnum.ShElec);
-        RegisterBoolPropertyFactory(AttributeEnum.ShFire);
-        RegisterBoolPropertyFactory(AttributeEnum.ShowMods);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayAnimal);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayDemon);
-        RegisterIntPropertyFactory(AttributeEnum.SlayDragon);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayEvil);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayGiant);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayOrc);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayTroll);
-        RegisterBoolPropertyFactory(AttributeEnum.SlayUndead);
-        RegisterBoolPropertyFactory(AttributeEnum.SlowDigest);
-        RegisterIntPropertyFactory(AttributeEnum.Speed);
-        RegisterIntPropertyFactory(AttributeEnum.Stealth);
-        RegisterIntPropertyFactory(AttributeEnum.Strength);
-        RegisterBoolPropertyFactory(AttributeEnum.SustCha);
-        RegisterBoolPropertyFactory(AttributeEnum.SustCon);
-        RegisterBoolPropertyFactory(AttributeEnum.SustDex);
-        RegisterBoolPropertyFactory(AttributeEnum.SustInt);
-        RegisterBoolPropertyFactory(AttributeEnum.SustStr);
-        RegisterBoolPropertyFactory(AttributeEnum.SustWis);
-        RegisterBoolPropertyFactory(AttributeEnum.Telepathy);
-        RegisterBoolPropertyFactory(AttributeEnum.Teleport);
-        RegisterIntPropertyFactory(AttributeEnum.ThrowingToHit);
-        RegisterIntPropertyFactory(AttributeEnum.ToDamage);
-        RegisterIntPropertyFactory(AttributeEnum.TreasureRating);
-        RegisterIntPropertyFactory(AttributeEnum.Tunnel);
-        RegisterIntPropertyFactory(AttributeEnum.UseDevice);
-        RegisterIntPropertyFactory(AttributeEnum.Value);
-        RegisterBoolPropertyFactory(AttributeEnum.Valueless);
-        RegisterBoolPropertyFactory(AttributeEnum.Vampiric);
-        RegisterIntPropertyFactory(AttributeEnum.Vorpal1InChance);
-        RegisterIntPropertyFactory(AttributeEnum.VorpalExtraAttacks1InChance);
-        RegisterIntPropertyFactory(AttributeEnum.Weight);
-        RegisterIntPropertyFactory(AttributeEnum.Wisdom);
-        RegisterBoolPropertyFactory(AttributeEnum.Wraith);
-        RegisterBoolPropertyFactory(AttributeEnum.XtraMight);
-        RegisterBoolPropertyFactory(AttributeEnum.XtraShots);
+    public void RemoveKeyedEnhancements(string key)
+    {
+        foreach (EffectiveAttributeValue attributeLedger in _effectiveAttributeValues)
+            attributeLedger.RemoveModifiers(key);
+    }
 
-        // Generate the default property values.
-        _defaultAttributeValues = new AttributeValue[_attributeFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
+    /// <summary>
+    /// Merge a set of read-only attribute values with a specific key.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    public void MergeAttributeSet(ReadOnlyAttributeSet readOnlyPropertySet)
+    {
+        foreach (Attribute attribute in Game.SingletonRepository.Get<Attribute>())
         {
-            int index = (int)itemPropertyFactory.Index;
-            _defaultAttributeValues[index] = itemPropertyFactory.Instantiate();
-        }
-
-        // Generate a writable property values.
-        _additiveAttributeValues = new AttributeValue[_attributeFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
-        {
-            int index = (int)itemPropertyFactory.Index;
-            _additiveAttributeValues[index] = null;
-        }
-
-        // Generate the override property values.
-        _fixedAttributeValues = new AttributeValue[_attributeFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
-        {
-            int index = (int)itemPropertyFactory.Index;
-            _fixedAttributeValues[index] = null;
+            _effectiveAttributeValues[attribute.Index].Merge(readOnlyPropertySet[attribute.Index]);
         }
     }
 
     /// <summary>
-    /// Returns a clone of the effective property set.  The clone will have the same enhancements, writable properties, and override properties as the original.
+    /// Merge a set of read-only attribute values with a specific key.
     /// </summary>
-    /// <returns></returns>
-    public EffectiveAttributeSet Clone()
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    public void MergeAttributeSet(string key, ReadOnlyAttributeSet readOnlyPropertySet)
     {
-        // Build a writable property set.
-        EffectiveAttributeSet effectivePropertySet = new EffectiveAttributeSet();
-
-        // Clone the default attributes.  Since the array doesn't change and the values are immutable, we only need a reference to the entire array.
-        effectivePropertySet._defaultAttributeValues = _defaultAttributeValues;
-
-        // Copy the enhancements.  These are immutable, so we can simply add references to them.
-        foreach (KeyValuePair<string, List<ReadOnlyAttributeSet>> enhancement in _enhancements)
+        if (String.IsNullOrEmpty(key))
         {
-            foreach (ReadOnlyAttributeSet readOnlyPropertySet in enhancement.Value)
-            {
-                effectivePropertySet.AddEnhancement(enhancement.Key, readOnlyPropertySet);
-            }
+            throw new ArgumentException("Invalid key specified for enhancements.");
         }
-
-        // Clone the writable properties.  We will need a new array, but immutability allows us to simply reference the values.
-        effectivePropertySet._additiveAttributeValues = new AttributeValue?[_attributeFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
+        foreach (Attribute attribute in Game.SingletonRepository.Get<Attribute>())
         {
-            int index = (int)itemPropertyFactory.Index;
-            effectivePropertySet._additiveAttributeValues[index] = _additiveAttributeValues[index];
+            _effectiveAttributeValues[attribute.Index].Merge(key, readOnlyPropertySet[attribute.Index]);
         }
-
-        // Clone the override properties.  We will need a new array, but immutability allows us to simply reference the values.
-        effectivePropertySet._fixedAttributeValues = new AttributeValue?[_attributeFactories.Length];
-        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
-        {
-            int index = (int)itemPropertyFactory.Index;
-            effectivePropertySet._fixedAttributeValues[index] = _fixedAttributeValues[index];
-        }
-
-        return effectivePropertySet;
     }
 
-    /// <summary>
-    /// Return a read-only version of the effective property set.
-    /// </summary>
-    /// <returns></returns>
     public ReadOnlyAttributeSet ToReadOnly()
     {
-        AttributeValue[] newProperties = new AttributeValue[_attributeFactories.Length];
-
-        foreach (AttributeFactory itemPropertyFactory in _attributeFactories)
+        AttributeValue[] attributeModifiers = new AttributeValue[Game.SingletonRepository.Count<Attribute>()];
+        foreach (Attribute attribute in Game.SingletonRepository.Get<Attribute>())
         {
-            int index = (int)itemPropertyFactory.Index;
-            newProperties[index] = ComputeEffectiveValue(index);
+            attributeModifiers[attribute.Index] = _effectiveAttributeValues[attribute.Index].ToReadOnly();
         }
-        return new ReadOnlyAttributeSet(newProperties);
-    }
-
-    public void AddEnhancement(string key, ReadOnlyAttributeSet readOnlyPropertySet)
-    {
-        if (String.IsNullOrEmpty(key))
-        {
-            throw new Exception($"Cannot specify a blank or null key for {nameof(AddEnhancement)}");
-        }
-        AddEnhancementToDictionary(key, readOnlyPropertySet);
-    }
-    public void AddEnhancement(ReadOnlyAttributeSet readOnlyPropertySet)
-    {
-        AddEnhancementToDictionary("", readOnlyPropertySet);
-    }
-    public void RemoveEnhancements(string key)
-    {
-        if (String.IsNullOrEmpty(key))
-        {
-            throw new Exception($"Cannot specify a blank or null key for {nameof(RemoveEnhancements)}");
-        }
-        _enhancements.Remove(key);
-    }
-
-    public void ResetCurse()
-    {
-        SetBoolAttributeValue(AttributeEnum.IsCursed, null);
-    }
-    public void RemoveCurse()
-    {
-        SetBoolAttributeValue(AttributeEnum.IsCursed, false);
-    }
-    public void ResetHeavyCurse()
-    {
-        SetBoolAttributeValue(AttributeEnum.HeavyCurse, null);
-    }
-    public void RemoveHeavyCurse()
-    {
-        SetBoolAttributeValue(AttributeEnum.HeavyCurse, false);
-    }
-
-    public bool HasKeyedItemEnhancements(string key)
-    {
-        return _enhancements.ContainsKey(key);
+        return new ReadOnlyAttributeSet(attributeModifiers);
     }
 
     /// <summary>
-    /// Returns an attribute set for a specific key.  This is used to retrieve the value of an item factory for items that are not yet known.
-    /// No override or writeable properties are applied.
+    /// Returns true if any of the effective attribute values have keyed item enhancements for the specified key.
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    public AttributeValue GetKeyedValue(AttributeEnum attributeEnum, string key)
+    public bool HasKeyedItemEnhancements(string key)
     {
-        if (String.IsNullOrEmpty(key))
+        foreach (EffectiveAttributeValue attributeLedger in _effectiveAttributeValues)
         {
-            throw new Exception($"Cannot specify a blank or null key for {nameof(ComputeEffectiveValue)}");
-        }
-
-        // Retrieve the index for the property.
-        int index = (int)attributeEnum;
-
-        // Get the factory default value.
-        AttributeValue itemProperty = _attributeFactories[index].Instantiate();
-
-        // For each key, there may be multiple item enhancements.
-        foreach (ReadOnlyAttributeSet readOnlyPropertySet in _enhancements[key])
-        {
-            itemProperty = itemProperty.Merge(readOnlyPropertySet.GetValue(index));
-        }
-        return itemProperty;
-    }
-
-    public bool GetBoolAttributeValue(AttributeEnum attributeEnum)
-    {
-        int index = (int)attributeEnum;
-        AttributeValue effectiveItemProperty = ComputeEffectiveValue(index);
-        BoolAttributeValue boolPropertyValue = (BoolAttributeValue)effectiveItemProperty;
-        bool value = boolPropertyValue.Value;
-        return value;
-    }
-
-    public int GetIntAttributeValue(AttributeEnum attributeEnum)
-    {
-        int index = (int)attributeEnum;
-        AttributeValue effectiveItemProperty = ComputeEffectiveValue(index);
-        IntAttributeValue intPropertyValue = (IntAttributeValue)effectiveItemProperty;
-        int value = intPropertyValue.Value;
-        return value;
-    }
-
-    public ColorEnum GetColorAttributeValue(AttributeEnum attributeEnum)
-    {
-        int index = (int)attributeEnum;
-        AttributeValue effectiveItemProperty = ComputeEffectiveValue(index);
-        ColorEnumAttributeValue colorPropertyValue = (ColorEnumAttributeValue)effectiveItemProperty;
-        ColorEnum value = colorPropertyValue.Value;
-        return value;
-    }
-
-    public T? GetReferenceAttributeValue<T>(AttributeEnum attributeEnum) where T : class
-    {
-        int index = (int)attributeEnum;
-        AttributeValue effectiveItemProperty = ComputeEffectiveValue(index);
-        NullableReferenceAttributeValue<T> referencePropertyValue = (NullableReferenceAttributeValue<T>)effectiveItemProperty;
-        T? value = referencePropertyValue.Value;
-        return value;
-    }
-
-    /// <summary>
-    /// Sets an attribute to a fixed value or; when null, reverts the attribute to the effective computed value.  This is done by setting the fixed attribute value.
-    /// </summary>
-    /// <param name="attributeEnum"></param>
-    /// <param name="value"></param>
-    public void SetReferenceAttributeValue<T>(AttributeEnum attributeEnum, T? propertyValue) where T : class
-    {
-        // Retrieve the index for the property.
-        int index = (int)attributeEnum;
-        _fixedAttributeValues[index] = propertyValue is null ? null : new NullableReferenceAttributeValue<T>(_attributeFactories[index], propertyValue);
-    }
-
-    /// <summary>
-    /// Sets an attribute to a fixed value or; when null, reverts the attribute to the effective computed value.  This is done by setting the fixed attribute value.
-    /// </summary>
-    /// <param name="attributeEnum"></param>
-    /// <param name="value"></param>
-    public void SetIntAttributeValue(AttributeEnum attributeEnum, int? value)
-    {
-        int index = (int)attributeEnum;
-        _fixedAttributeValues[index] = !value.HasValue ? null : new IntAttributeValue(_attributeFactories[index], value.Value);
-    }
-
-    /// <summary>
-    /// Sets an attribute to a fixed value or; when null, reverts the attribute to the effective computed value.  This is done by setting the fixed attribute value.
-    /// </summary>
-    /// <param name="attributeEnum"></param>
-    /// <param name="value"></param>
-    public void SetColorAttributeValue(AttributeEnum attributeEnum, ColorEnum? value)
-    {
-        int index = (int)attributeEnum;
-        _fixedAttributeValues[index] = !value.HasValue ? null : new ColorEnumAttributeValue(_attributeFactories[index], value.Value);
-    }
-
-    /// <summary>
-    /// Sets an attribute to a fixed value or; when null, reverts the attribute to the effective computed value.  This is done by setting the fixed attribute value.
-    /// </summary>
-    /// <param name="attributeEnum"></param>
-    /// <param name="value"></param>
-    public void SetBoolAttributeValue(AttributeEnum attributeEnum, bool? value)
-    {
-        int index = (int)attributeEnum;
-        _fixedAttributeValues[index] = !value.HasValue ? null : new BoolAttributeValue(_attributeFactories[index], value.Value);
-    }
-
-    /// <summary>
-    /// Adds a quantity to an unfixed attribute.  This is done by incrementing the writable attribute value by 1.
-    /// </summary>
-    /// <param name="attributeEnum"></param>
-    /// <param name="value"></param>
-    public void AddIntAttributeValue(AttributeEnum attributeEnum, int value)
-    {
-        // Compute the index of the attribute.
-        int index = (int)attributeEnum;
-
-        // Retrieve the current writable value.
-        IntAttributeValue? intAttributeValue = (IntAttributeValue?)_additiveAttributeValues[index];
-
-        // Apply a zero value, if there is no current writable value.
-        int currentValue = intAttributeValue?.Value ?? 0;
-
-        // Add the value to the current writable value.
-        _additiveAttributeValues[index] = new IntAttributeValue(_attributeFactories[index], currentValue + value);
-    }
-
-    private void AddEnhancementToDictionary(string key, ReadOnlyAttributeSet readOnlyPropertySet)
-    {
-        if (!_enhancements.TryGetValue(key, out List<ReadOnlyAttributeSet>? readOnlyPropertySetList))
-        {
-            readOnlyPropertySetList = new List<ReadOnlyAttributeSet>();
-            _enhancements.Add(key, readOnlyPropertySetList);
-        }
-        readOnlyPropertySetList.Add(readOnlyPropertySet);
-    }
-
-    private AttributeValue ComputeEffectiveValue(int index)
-    {
-        // Determine if the value has been overriden.
-        AttributeValue? overrideAttributeValue = _fixedAttributeValues[index];
-        if (overrideAttributeValue is not null)
-        {
-            // It was, return the override value.
-            return overrideAttributeValue;
-        }
-
-        // Start with the default value for us to start with.
-        AttributeValue itemProperty = _defaultAttributeValues[index];
-
-        // Merge all of the immutable enhancements across all of the keys.
-        foreach (List<ReadOnlyAttributeSet> readOnlyPropertySetList in _enhancements.Values)
-        {
-            // For each key, there may be multiple item enhancements.
-            foreach (ReadOnlyAttributeSet readOnlyPropertySet in readOnlyPropertySetList)
+            if (attributeLedger.HasKeyedItemEnhancements(key))
             {
-                AttributeValue? attributeValue = readOnlyPropertySet.GetValue(index);
-
-                // Check to see if there is a modifier specified.
-                if (attributeValue is not null)
-                {
-                    // Merge the attribute value.
-                    itemProperty = itemProperty.Merge(attributeValue);
-                }
+                return true;
             }
         }
+        return false;
+    }
 
-        // Merge the writable enhancements.
-        AttributeValue? additiveAttributeValue = _additiveAttributeValues[index];
-        if (additiveAttributeValue is not null)
+    /// <summary>
+    /// Retrieves the effective attribute value associated with the specified attribute and casts it to the specified type T.
+    /// </summary>
+    /// <typeparam name="T">The type of the effective attribute value to return. Must inherit from EffectiveAttributeValue.</typeparam>
+    /// <param name="attribute">The attribute for which to retrieve the effective value.</param>
+    /// <returns>The effective attribute value of type T corresponding to the specified attribute.</returns>
+    public T Get<T>(AttributeEnum attribute) where T : EffectiveAttributeValue
+    {
+        int index = (int)attribute;
+        return (T)_effectiveAttributeValues[index];
+    }
+
+    /// <summary>
+    /// Creates a new instance of <see cref="EffectiveAttributeSet"/> that is a deep copy of the current set and its attribute values.
+    /// </summary>
+    /// <remarks>
+    /// The cloned set is independent of the original; changes to attribute values in the clone do not affect the original set, and vice versa.
+    /// </remarks>
+    /// <returns>
+    /// A new <see cref="EffectiveAttributeSet"/> containing copies of all effective attribute values from the current set.
+    /// </returns>
+    public EffectiveAttributeSet Clone()
+    {
+        EffectiveAttributeSet clone = new EffectiveAttributeSet(Game);
+        foreach (Attribute attribute in Game.SingletonRepository.Get<Attribute>())
         {
-            itemProperty = itemProperty.Merge(additiveAttributeValue);
+            clone._effectiveAttributeValues[attribute.Index] = _effectiveAttributeValues[attribute.Index].Clone();
         }
-
-        // Return the value.
-        return itemProperty;
+        return clone;
     }
 
     #region Properties
@@ -923,1073 +121,1552 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.CanApplyBlessedArtifactBias);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBlessedArtifactBias).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.CanApplyBlessedArtifactBias, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBlessedArtifactBias).Set();
+            }
         }
     }
     public bool ArtifactBiasSlayingDisabled
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ArtifactBiasSlayingDisabled);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ArtifactBiasSlayingDisabled).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.ArtifactBiasSlayingDisabled, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ArtifactBiasSlayingDisabled).Set();
+            }
         }
     }
     public bool CanApplyBlowsBonus
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.CanApplyBlowsBonus);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBlowsBonus).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.CanApplyBlowsBonus, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBlowsBonus).Set();
+            }
         }
     }
     public bool CanReflectBoltsAndArrows
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.CanReflectBoltsAndArrows);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanReflectBoltsAndArrows).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.CanReflectBoltsAndArrows, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.CanReflectBoltsAndArrows).Set();
+            }
         }
     }
     public bool CanApplySlayingBonus
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.CanApplySlayingBonus);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplySlayingBonus).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.CanApplySlayingBonus, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplySlayingBonus).Set();
+            }
         }
     }
     public bool CanApplyBonusArmorClassMiscPower
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.CanApplyBonusArmorClassMiscPower);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBonusArmorClassMiscPower).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.CanApplyBonusArmorClassMiscPower, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBonusArmorClassMiscPower).Set();
+            }
         }
     }
     public bool CanProvideSheathOfElectricity
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.CanProvideSheathOfElectricity);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanProvideSheathOfElectricity).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.CanProvideSheathOfElectricity, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.CanProvideSheathOfElectricity).Set();
+            }
         }
     }
     public bool CanProvideSheathOfFire
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.CanProvideSheathOfFire);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanProvideSheathOfFire).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.CanProvideSheathOfFire, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.CanProvideSheathOfFire).Set();
+            }
         }
     }
     public int MeleeToHit
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.MeleeToHit);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.MeleeToHit).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.MeleeToHit, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.MeleeToHit).Append(value);
         }
     }
     public int BaseArmorClass
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BaseArmorClass);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.BaseArmorClass).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BaseArmorClass, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.BaseArmorClass).Append(value);
         }
     }
     public int BonusArmorClass
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.BonusArmorClass);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.BonusArmorClass).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.BonusArmorClass, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.BonusArmorClass).Append(value);
         }
     }
     public int DisarmTraps
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.DisarmTraps);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.DisarmTraps).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.DisarmTraps, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.DisarmTraps).Append(value);
         }
     }
     public int ToDamage
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.ToDamage);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.ToDamage).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.ToDamage, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.ToDamage).Append(value);
         }
     }
     public int Strength
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Strength);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Strength).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Strength, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Strength).Append(value);
         }
     }
     public int Intelligence
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Intelligence);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Intelligence).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Intelligence, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Intelligence).Append(value);
         }
     }
     public int Wisdom
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Wisdom);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Wisdom).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Wisdom, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Wisdom).Append(value);
         }
     }
     public int Dexterity
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Dexterity);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Dexterity).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Dexterity, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Dexterity).Append(value);
         }
     }
     public int Constitution
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Constitution);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Constitution).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Constitution, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Constitution).Append(value);
         }
     }
     public int Charisma
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Charisma);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Charisma).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Charisma, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Charisma).Append(value);
         }
     }
     public int Stealth
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Stealth);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Stealth).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Stealth, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Stealth).Append(value);
         }
     }
     public int Search
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Search);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Search).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Search, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Search).Append(value);
         }
     }
     public int Infravision
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Infravision);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Infravision).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Infravision, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Infravision).Append(value);
         }
     }
     public int Tunnel
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Tunnel);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Tunnel).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Tunnel, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Tunnel).Append(value);
         }
     }
     public int Attacks
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Attacks);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Attacks).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Attacks, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Attacks).Append(value);
         }
     }
     public int Speed
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Speed);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Speed).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Speed, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Speed).Append(value);
         }
     }
     public Activation? Activation
     {
         get
         {
-            return GetReferenceAttributeValue<Activation>(AttributeEnum.Activation);
+            return Get<NullableReferenceAttributeValue<Activation>>(AttributeEnum.Activation).Get();
         }
         set
         {
-            SetReferenceAttributeValue<Activation>(AttributeEnum.Activation, value);
+            Get<NullableReferenceAttributeValue<Activation>>(AttributeEnum.Activation).Set(value);
         }
     }
     public bool Aggravate
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Aggravate);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Aggravate).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.Aggravate, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Aggravate).Set();
+            }
         }
     }
     public bool AntiTheft
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.AntiTheft);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.AntiTheft).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.AntiTheft, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.AntiTheft).Set();
+            }
         }
     }
     public ArtifactBias? ArtifactBias
     {
         get
         {
-            return GetReferenceAttributeValue<ArtifactBias>(AttributeEnum.ArtifactBias);
+            return Get<NullableReferenceAttributeValue<ArtifactBias>>(AttributeEnum.ArtifactBias).Get();
         }
         set
         {
-            SetReferenceAttributeValue<ArtifactBias>(AttributeEnum.ArtifactBias, value);
+            Get<NullableReferenceAttributeValue<ArtifactBias>>(AttributeEnum.ArtifactBias).Set(value);
         }
     }
     public bool Blessed
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Blessed);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Blessed).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.Blessed, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Blessed).Set();
+            }
         }
     }
     public bool BrandAcid
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.BrandAcid);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.BrandAcid).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.BrandAcid, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.BrandAcid).Set();
+            }
         }
     }
     public bool BrandCold
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.BrandCold);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.BrandCold).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.BrandCold, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.BrandCold).Set();
+            }
         }
     }
     public bool BrandElec
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.BrandElec);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.BrandElec).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.BrandElec, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.BrandElec).Set();
+            }
         }
     }
     public bool BrandFire
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.BrandFire);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.BrandFire).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.BrandFire, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.BrandFire).Set();
+            }
         }
     }
     public bool BrandPois
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.BrandPois);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.BrandPois).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.BrandPois, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.BrandPois).Set();
+            }
         }
     }
     public bool Chaotic
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Chaotic);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Chaotic).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.Chaotic, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Chaotic).Set();
+            }
         }
     }
     public ColorEnum Color
     {
         get
         {
-            return GetColorAttributeValue(AttributeEnum.Color);
+            return Get<ColorEnumEffectiveAttributeValue>(AttributeEnum.Color).Get();
         }
         set
         {
-            SetColorAttributeValue(AttributeEnum.Color, value);
+            Get<ColorEnumEffectiveAttributeValue>(AttributeEnum.Color).Set(value);
         }
     }
     public bool IsCursed
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.IsCursed);
+            bool? isCursed = Get<BoolAttributeValue>(AttributeEnum.IsCursed).Get();
+            return isCursed.HasValue && isCursed.Value;
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.IsCursed, value);
+            if (value)
+            {
+                Get<BoolAttributeValue>(AttributeEnum.IsCursed).Set();
+            }
+            else if (!value)
+            {
+                Get<BoolAttributeValue>(AttributeEnum.IsCursed).Reset();
+            }
         }
     }
     public int DamageDice
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.DamageDice);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.DamageDice).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.DamageDice, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.DamageDice).Append(value);
         }
     }
     public int DiceSides
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.DiceSides);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.DiceSides).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.DiceSides, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.DiceSides).Append(value);
         }
     }
     public bool DrainExp
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.DrainExp);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.DrainExp).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.DrainExp, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.DrainExp).Set();
+            }
         }
     }
     public bool DreadCurse
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.DreadCurse);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.DreadCurse).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.DreadCurse, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.DreadCurse).Set();
+            }
         }
     }
     public bool EasyKnow
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.EasyKnow);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.EasyKnow).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.EasyKnow, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.EasyKnow).Set();
+            }
         }
     }
     public bool Feather
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Feather);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Feather).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.Feather, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Feather).Set();
+            }
         }
     }
     public bool FreeAct
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.FreeAct);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.FreeAct).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.FreeAct, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.FreeAct).Set();
+            }
         }
     }
     public string? FriendlyName
     {
         get
         {
-            return GetReferenceAttributeValue<string>(AttributeEnum.FriendlyName);
+            return Get<NullableReferenceAttributeValue<string>>(AttributeEnum.FriendlyName).Get();
         }
         set
         {
-            SetReferenceAttributeValue<string>(AttributeEnum.FriendlyName, value);
+            Get<NullableReferenceAttributeValue<string>>(AttributeEnum.FriendlyName).Set(value);
         }
     }
     public bool HatesElectricity
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.HatesElectricity);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.HatesElectricity).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.HatesElectricity, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.HatesElectricity).Set();
+            }
         }
     }
     public bool HatesAcid
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.HatesAcid);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.HatesAcid).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.HatesAcid, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.HatesAcid).Set();
+            }
         }
     }
     public bool HatesCold
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.HatesCold);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.HatesCold).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.HatesCold, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.HatesCold).Set();
+            }
         }
     }
     public bool HatesFire
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.HatesFire);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.HatesFire).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.HatesFire, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.HatesFire).Set();
+            }
         }
     }
     public bool HeavyCurse
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.HeavyCurse);
+            bool? heavyCurse = Get<BoolAttributeValue>(AttributeEnum.HeavyCurse).Get();
+            return heavyCurse.HasValue && heavyCurse.Value;
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.HeavyCurse, value);
+            if (value)
+            {
+                Get<BoolAttributeValue>(AttributeEnum.IsCursed).Set();
+            }
+            else if (!value)
+            {
+                Get<BoolAttributeValue>(AttributeEnum.IsCursed).Reset();
+            }
         }
     }
     public bool HideType
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.HideType);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.HideType).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.HideType, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.HideType).Set();
+            }
         }
     }
     public bool HoldLife
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.HoldLife);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.HoldLife).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.HoldLife, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.HoldLife).Set();
+            }
         }
     }
     public bool IgnoreAcid
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.IgnoreAcid);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreAcid).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.IgnoreAcid, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreAcid).Set();
+            }
         }
     }
     public bool IgnoreCold
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.IgnoreCold);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreCold).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.IgnoreCold, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreCold).Set();
+            }
         }
     }
     public bool IgnoreElec
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.IgnoreElec);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreElec).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.IgnoreElec, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreElec).Set();
+            }
         }
     }
     public bool IgnoreFire
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.IgnoreFire);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreFire).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.IgnoreFire, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreFire).Set();
+            }
         }
     }
     public bool ImAcid
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ImAcid);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ImAcid).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.ImAcid, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ImAcid).Set();
+            }
         }
     }
     public bool ImCold
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ImCold);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ImCold).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.ImCold, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ImCold).Set();
+            }
         }
     }
     public bool ImElec
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ImElec);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ImElec).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.ImElec, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ImElec).Set();
+            }
         }
     }
     public bool ImFire
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ImFire);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ImFire).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.ImFire, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ImFire).Set();
+            }
         }
     }
     public bool Impact
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Impact);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Impact).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.Impact, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Impact).Set();
+            }
         }
     }
     public bool NoMagic
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.NoMagic);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.NoMagic).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.NoMagic, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.NoMagic).Set();
+            }
         }
     }
     public bool NoTele
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.NoTele);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.NoTele).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.NoTele, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.NoTele).Set();
+            }
         }
     }
     public bool PermaCurse
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.PermaCurse);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.PermaCurse).Get();
         }
         set
         {
-            SetBoolAttributeValue(AttributeEnum.PermaCurse, value);
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.PermaCurse).Set();
+            }
         }
     }
     public int Radius
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Radius);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Radius).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Radius, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Radius).Append(value);
         }
     }
     public bool Reflect
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Reflect);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Reflect).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Reflect).Set();
+            }
         }
     }
     public bool Regen
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Regen);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Regen).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Regen).Set();
+            }
         }
     }
     public bool ResAcid
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResAcid);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResAcid).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResAcid).Set();
+            }
         }
     }
     public bool ResBlind
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResBlind);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResBlind).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResBlind).Set();
+            }
         }
     }
     public bool ResChaos
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResChaos);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResChaos).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResChaos).Set();
+            }
         }
     }
     public bool ResCold
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResCold);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResCold).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResCold).Set();
+            }
         }
     }
     public bool ResConf
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResConf);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResConf).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResConf).Set();
+            }
         }
     }
     public bool ResDark
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResDark);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResDark).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResDark).Set();
+            }
         }
     }
     public bool ResDisen
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResDisen);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResDisen).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResDisen).Set();
+            }
         }
     }
     public bool ResElec
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResElec);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResElec).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResElec).Set();
+            }
         }
     }
     public bool ResFear
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResFear);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResFear).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResFear).Set();
+            }
         }
     }
     public bool ResFire
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResFire);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResFire).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResFire).Set();
+            }
         }
     }
     public bool ResLight
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResLight);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResLight).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResLight).Set();
+            }
         }
     }
     public bool ResNether
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResNether);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResNether).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResNether).Set();
+            }
         }
     }
     public bool ResNexus
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResNexus);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResNexus).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResNexus).Set();
+            }
         }
     }
     public bool ResPois
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResPois);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResPois).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResPois).Set();
+            }
         }
     }
     public bool ResShards
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResShards);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResShards).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResShards).Set();
+            }
         }
     }
     public bool ResSound
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ResSound);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResSound).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ResSound).Set();
+            }
+        }
+    }
+    public int SavingThrow
+    {
+        get
+        {
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.SavingThrow).Get();
+        }
+        set
+        {
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.SavingThrow).Set(value);
         }
     }
     public bool SeeInvis
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SeeInvis);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SeeInvis).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SeeInvis).Set();
+            }
         }
     }
     public bool ShElec
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ShElec);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ShElec).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ShElec).Set();
+            }
         }
     }
     public bool ShFire
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ShFire);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ShFire).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ShFire).Set();
+            }
         }
     }
     public bool ShowMods
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.ShowMods);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.ShowMods).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.ShowMods).Set();
+            }
         }
     }
     public bool SlayAnimal
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SlayAnimal);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayAnimal).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayAnimal).Set();
+            }
         }
     }
     public bool SlayDemon
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SlayDemon);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayDemon).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayDemon).Set();
+            }
         }
     }
     public int SlayDragon
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.SlayDragon);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.SlayDragon).Get();
+        }
+        set
+        {
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.SlayDragon).Set(value);
         }
     }
     public bool SlayEvil
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SlayEvil);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayEvil).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayEvil).Set();
+            }
         }
     }
     public bool SlayGiant
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SlayGiant);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayGiant).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayGiant).Set();
+            }
         }
     }
     public bool SlayOrc
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SlayOrc);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayOrc).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayOrc).Set();
+            }
         }
     }
     public bool SlayTroll
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SlayTroll);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayTroll).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayTroll).Set();
+            }
         }
     }
     public bool SlayUndead
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SlayUndead);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayUndead).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayUndead).Set();
+            }
         }
     }
     public bool SlowDigest
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SlowDigest);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlowDigest).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SlowDigest).Set();
+            }
         }
     }
     public bool SustCha
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SustCha);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustCha).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SustCha).Set();
+            }
         }
     }
     public bool SustCon
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SustCon);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustCon).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SustCon).Set();
+            }
         }
     }
     public bool SustDex
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SustDex);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustDex).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SustDex).Set();
+            }
         }
     }
     public bool SustInt
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SustInt);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustInt).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SustInt).Set();
+            }
         }
     }
     public bool SustStr
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SustStr);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustStr).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SustStr).Set();
+            }
         }
     }
     public bool SustWis
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.SustWis);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustWis).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.SustWis).Set();
+            }
         }
     }
     public bool Telepathy
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Telepathy);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Telepathy).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Telepathy).Set();
+            }
         }
     }
     public bool Teleport
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Teleport);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Teleport).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Teleport).Set();
+            }
         }
     }
     public int TreasureRating
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.TreasureRating);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.TreasureRating).Get();
+        }
+        set
+        {
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.TreasureRating).Set(value);
+        }
+    }
+    public int UseDevice
+    {
+        get
+        {
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.UseDevice).Get();
+        }
+        set
+        {
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.UseDevice).Set(value);
         }
     }
     public int Value
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Value);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Value).Get();
         }
         set
         {
-            SetIntAttributeValue(AttributeEnum.Value, value);
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Value).Append(value);
         }
     }
     public bool Valueless
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Valueless);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Valueless).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Valueless).Set();
+            }
         }
     }
     public bool Vampiric
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Vampiric);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Vampiric).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Vampiric).Set();
+            }
         }
     }
     public int Vorpal1InChance
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Vorpal1InChance);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Vorpal1InChance).Get();
+        }
+        set
+        {
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Vorpal1InChance).Set(value);
         }
     }
     public int VorpalExtraAttacks1InChance
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.VorpalExtraAttacks1InChance);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.VorpalExtraAttacks1InChance).Get();
+        }
+        set
+        {
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.VorpalExtraAttacks1InChance).Set(value);
         }
     }
     public int Weight
     {
         get
         {
-            return GetIntAttributeValue(AttributeEnum.Weight);
+            return Get<AdditionEffectiveAttributeValue>(AttributeEnum.Weight).Get();
+        }
+        set
+        {
+            Get<AdditionEffectiveAttributeValue>(AttributeEnum.Weight).Set(value);
         }
     }
     public bool Wraith
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.Wraith);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.Wraith).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.Wraith).Set();
+            }
         }
     }
     public bool XtraMight
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.XtraMight);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.XtraMight).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.XtraMight).Set();
+            }
         }
     }
     public bool XtraShots
     {
         get
         {
-            return GetBoolAttributeValue(AttributeEnum.XtraShots);
+            return Get<OrEffectiveAttributeValue>(AttributeEnum.XtraShots).Get();
+        }
+        set
+        {
+            if (value)
+            {
+                Get<OrEffectiveAttributeValue>(AttributeEnum.XtraShots).Set();
+            }
         }
     }
     #endregion

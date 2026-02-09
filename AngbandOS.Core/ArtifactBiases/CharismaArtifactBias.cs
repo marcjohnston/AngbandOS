@@ -29,7 +29,7 @@ internal class CharismaArtifactBias : ArtifactBias
     {
         if (!characteristics.SustCha)
         {
-            characteristics.SetBoolAttributeValue(AttributeEnum.SustCha, true);
+            characteristics.SustCha = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

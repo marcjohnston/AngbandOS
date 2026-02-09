@@ -42,7 +42,7 @@ internal class PurchaseStoreItemScript : Script, IStoreCommandScript
         int amt = 1;
 
         // Check to see if we can even carry one item.
-        Item jPtr = oPtr.Clone(amt); // Do not take the items yet.
+        Item jPtr = new Item(oPtr, amt); // Do not take the items yet.
         if (!jPtr.CanCarry())
         {
             Game.MsgPrint("You cannot carry that many different items.");
@@ -74,7 +74,7 @@ internal class PurchaseStoreItemScript : Script, IStoreCommandScript
         }
 
         // Check to see if we can carry the requested number of items.
-        jPtr = oPtr.Clone(amt); // Do not take the items yet.
+        jPtr = new Item(oPtr, amt); // Do not take the items yet.
         if (!jPtr.CanCarry())
         {
             Game.MsgPrint("You cannot carry that many items.");

@@ -37,14 +37,14 @@ internal class ZombieRace : Race
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SeeInvis, true);
+        itemCharacteristics.SeeInvis = true;
         itemCharacteristics.HoldLife = true;
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResNether, true);
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResPois, true);
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.SlowDigest, true);
+        itemCharacteristics.ResNether = true;
+        itemCharacteristics.ResPois = true;
+        itemCharacteristics.SlowDigest = true;
         if (level > 4)
         {
-            itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResCold, true);
+            itemCharacteristics.ResCold = true;
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);

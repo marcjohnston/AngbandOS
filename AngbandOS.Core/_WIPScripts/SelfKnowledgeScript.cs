@@ -24,13 +24,13 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
     {
         int infoCount = 0;
         string[] info = new string[128];
-        EffectiveAttributeSet inventoryCharacteristics = new EffectiveAttributeSet();
+        EffectiveAttributeSet inventoryCharacteristics = new EffectiveAttributeSet(Game);
         for (int k = InventorySlotEnum.MeleeWeapon; k < InventorySlotEnum.Total; k++)
         {
             Item? oPtr = Game.GetInventoryItem(k);
             if (oPtr != null)
             {
-                inventoryCharacteristics.AddEnhancement(oPtr.EffectivePropertySet.ToReadOnly());
+                inventoryCharacteristics.MergeAttributeSet(oPtr.EffectivePropertySet.ToReadOnly());
             }
         }
         string[]? selfKnowledgeInfo = Game.Race.SelfKnowledge(Game.ExperienceLevel.IntValue);

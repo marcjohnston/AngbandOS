@@ -95,7 +95,7 @@ internal enum AttributeEnum
     ResPois,
     ResShards,
     ResSound,
-    SavingThrow ,
+    SavingThrow,
     Search,
     SearchFrequency,
     SeeInvis,

@@ -79,7 +79,7 @@ internal class SellScript : Script, IStoreCommandScript
                 return;
             }
         }
-        Item qPtr = oPtr.Clone();
+        Item qPtr = new Item(oPtr);
         qPtr.StackCount = amt;
         string oName = qPtr.GetFullDescription(true);
         if (!storeCommandEvent.Store.StoreFactory.StoreMaintainsInscription)
@@ -111,7 +111,7 @@ internal class SellScript : Script, IStoreCommandScript
                 oPtr.BecomeKnown();
             }
             Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
-            qPtr = oPtr.Clone();
+            qPtr = new Item(oPtr);
             qPtr.StackCount = amt;
             int value;
             if (!storeCommandEvent.Store.StoreFactory.StoreAnalyzesPurchases)

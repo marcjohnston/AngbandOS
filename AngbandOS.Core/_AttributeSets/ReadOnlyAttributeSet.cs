@@ -7,21 +7,14 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ReadOnlyAttributeSet
+internal sealed class ReadOnlyAttributeSet
 {
-    private AttributeValue[] _properties;
-
-    public AttributeValue? GetValue(int index)
+    public AttributeValue[] Value { get; }
+    public ReadOnlyAttributeSet(AttributeValue[] value) => Value = value;
+    public AttributeValue this[int index] => Value[(int)index];
+    public T Get<T>(AttributeEnum attribute) where T : AttributeValue
     {
-        return _properties[index];
-    }
-    public T GetValue<T>(AttributeEnum attributeEnum) where T : AttributeValue
-    {
-        int index = (int)attributeEnum;
-        return (T)_properties[index];
-    }
-    public ReadOnlyAttributeSet(AttributeValue[] properties)
-    {
-        _properties = properties;
+        int index = (int)attribute;
+        return (T)Value[index];
     }
 }

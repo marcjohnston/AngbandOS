@@ -15,13 +15,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private UpdateBonusesFlaggedAction(Game game) : base(game) { }
     private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
     {
-        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet();
+        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
 
         // Apply the race enhancements.
-        effectiveAttributeSet.AddEnhancement(Game.Race.EffectiveAttributeSet);
+        effectiveAttributeSet.MergeAttributeSet(Game.Race.EffectiveAttributeSet);
 
         // Apply the character class enhancements.
-        effectiveAttributeSet.AddEnhancement(Game.BaseCharacterClass.EffectiveAttributeSet);
+        effectiveAttributeSet.MergeAttributeSet(Game.BaseCharacterClass.EffectiveAttributeSet);
 
         // Apply all of the mutations that the player has.
 
@@ -33,7 +33,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    effectiveAttributeSet.AddEnhancement(oPtr.EffectivePropertySet.ToReadOnly());
+                    effectiveAttributeSet.MergeAttributeSet(oPtr.EffectivePropertySet.ToReadOnly());
                 }
             }
         }
@@ -116,7 +116,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasFireImmunity = false;
         Game.HasColdImmunity = false;
         Game.InfravisionRange = Game.Race.Infravision; // done
-        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value + Game.BaseCharacterClass.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value; // done
+        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value + Game.BaseCharacterClass.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value; // done
         Game.SkillUseDevice = Game.Race.UseDevice + Game.BaseCharacterClass.UseDevice; // done
         Game.SkillSavingThrow = Game.Race.SavingThrow + Game.BaseCharacterClass.SavingThrow; // done
         Game.SkillStealth = Game.Race.Stealth + Game.BaseCharacterClass.Stealth; // done .. need to copy

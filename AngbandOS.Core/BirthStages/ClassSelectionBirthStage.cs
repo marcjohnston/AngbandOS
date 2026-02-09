@@ -89,7 +89,7 @@ internal class ClassSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "Infravision :", 38, 31);
         Game.Screen.Print(ColorEnum.Purple, "Searching   :", 39, 31);
         Game.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
-        Game.DisplayAPlusB(67, 36, characterClass.EffectiveAttributeSet.GetValue<IntAttributeValue>(AttributeEnum.DisarmTraps).Value, characterClass.DisarmBonusPerLevel);
+        Game.DisplayAPlusB(67, 36, characterClass.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value, characterClass.DisarmBonusPerLevel);
         Game.DisplayAPlusB(67, 37, characterClass.UseDevice, characterClass.DeviceBonusPerLevel);
         Game.DisplayAPlusB(67, 38, characterClass.SavingThrow, characterClass.SaveBonusPerLevel);
         Game.DisplayAPlusB(67, 39, characterClass.Stealth * 4, characterClass.StealthBonusPerLevel * 4);

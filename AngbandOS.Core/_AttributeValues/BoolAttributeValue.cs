@@ -7,30 +7,31 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class BoolAttributeValue : AttributeValue
+internal class BoolAttributeValue : SetEffectiveAttributeValue<bool?>
 {
-    public bool Value { get; }
-    public BoolAttributeValue(AttributeFactory factory, bool value) : base(factory)
+    public BoolAttributeValue(Game game, bool? defaultValue) : base(game, defaultValue) { }
+
+    public override EffectiveAttributeValue Clone()
     {
-        Value = value;
+        BoolAttributeValue clone = new BoolAttributeValue(Game, InitialValue);
+        clone._attributeModifiers.AddRange(_attributeModifiers);
+        return (EffectiveAttributeValue)clone;
     }
 
-    public override AttributeValue Merge(AttributeValue itemProperty)
+    /// <summary>
+    /// Computes a value to append to the modifiers so that the effective value equals the specified value.
+    /// </summary>
+    /// <param name="value"></param>
+    public void Set()
     {
-        if (itemProperty is not BoolAttributeValue boolPropertyValue)
-        {
-            throw new Exception("Merge mismatch.");
-        }
-        return new BoolAttributeValue(Factory, Value || boolPropertyValue.Value);
+        _attributeModifiers.Add(("", true));
     }
 
-    public override bool IsEqual(AttributeValue itemProperty)
+    /// <summary>
+    /// Appends a false modifier to the list of modifiers--effectively making the attribute value false.
+    /// </summary>
+    public void Reset()
     {
-        if (itemProperty is not BoolAttributeValue boolPropertyValue)
-        {
-            throw new Exception("IsEqual mismatch.");
-        }
-        return Value == boolPropertyValue.Value;
+        _attributeModifiers.Add(("", false));
     }
-    public override string DebugDescription => $"{base.ToString()}={Value}";
 }

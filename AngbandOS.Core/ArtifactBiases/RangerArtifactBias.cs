@@ -53,7 +53,7 @@ internal class RangerArtifactBias : ArtifactBias
     {
         if (!characteristics.SustCon)
         {
-            characteristics.SetBoolAttributeValue(AttributeEnum.SustCon, true);
+            characteristics.SustCon = true;
             if (Game.DieRoll(2) == 1)
             {
                 return true;

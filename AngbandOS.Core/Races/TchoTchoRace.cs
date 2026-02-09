@@ -38,7 +38,7 @@ internal class TchoTchoRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SetBoolAttributeValue(AttributeEnum.ResFear, true);
+        itemCharacteristics.ResFear = true;
     }
     protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
     public override string[]? SelfKnowledge(int level)
