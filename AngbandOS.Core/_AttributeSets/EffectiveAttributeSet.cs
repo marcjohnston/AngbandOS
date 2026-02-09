@@ -11,11 +11,16 @@ internal class EffectiveAttributeSet
 {
     private readonly Game Game;
     private readonly EffectiveAttributeValue[] _effectiveAttributeValues;
+    private static Attribute[]? CachedAttributes = null;
     public EffectiveAttributeSet(Game game)
     {
         Game = game;
-        _effectiveAttributeValues = new EffectiveAttributeValue[Game.SingletonRepository.Count<Attribute>()];
-        foreach (Attribute attribute in Game.SingletonRepository.Get<Attribute>())
+        if (CachedAttributes == null)
+        {
+            CachedAttributes = Game.SingletonRepository.Get<Attribute>();
+        }
+        _effectiveAttributeValues = new EffectiveAttributeValue[CachedAttributes.Length];
+        foreach (Attribute attribute in CachedAttributes)
         {
             EffectiveAttributeValue effectiveAttributeValue = attribute.CreateEffectiveAttributeValue();
             _effectiveAttributeValues[attribute.Index] = effectiveAttributeValue;
