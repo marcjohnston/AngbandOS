@@ -17,7 +17,10 @@ internal class HighMageCharacterClass : BaseCharacterClass
     public override int UseDevice => 38;
     public override int SavingThrow => 30;
     public override int Stealth => 2;
+    public override string InvokeSpiritsBeamProbabilityRollExpression => "X+10";
+    public override string SpellOfWonderBeamProbabilityRollExpression => "X+10";
     public override string TarotDrawRollExpression => "1d110+X/5";
+    public override double ManaFactor => 1.25;
     public override int? SpellMinFailChance => 5;
     public override int Search => 16;
     public override int BaseSearchFrequency => 20;

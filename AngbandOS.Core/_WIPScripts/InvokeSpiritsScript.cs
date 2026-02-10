@@ -24,21 +24,8 @@ internal class InvokeSpiritsScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int beam;
-        switch (Game.BaseCharacterClass.ID)
-        {
-            case CharacterClassEnum.Mage:
-                beam = Game.ExperienceLevel.IntValue;
-                break;
-
-            case CharacterClassEnum.HighMage:
-                beam = Game.ExperienceLevel.IntValue + 10;
-                break;
-
-            default:
-                beam = Game.ExperienceLevel.IntValue / 2;
-                break;
-        }
+        IntegerExpression roll = Game.ComputeIntegerExpression(Game.BaseCharacterClass.InvokeSpiritsBeamProbabilityRoll);
+        int beam = roll.Value;
         int die = Game.DieRoll(100) + (Game.ExperienceLevel.IntValue / 5);
         if (!Game.GetDirectionWithAim(out int dir))
         {

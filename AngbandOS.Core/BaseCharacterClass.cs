@@ -28,6 +28,11 @@ internal abstract class BaseCharacterClass : IGetKey
     public virtual int NonMagicRandomArtifact1InChance => 3;
     public virtual string TarotDrawRollExpression => "1d120";
     public Expression? TarotDrawRoll { get; private set; }
+    public virtual string InvokeSpiritsBeamProbabilityRollExpression => "X/2";
+    public Expression? InvokeSpiritsBeamProbabilityRoll { get; private set; }
+    public virtual string SpellOfWonderBeamProbabilityRollExpression => "X/2";
+    public virtual double ManaFactor => 1;
+    public Expression? SpellOfWonderBeamProbabilityRoll { get; private set; }
     public virtual bool RenderSpellsPerLevel => true;
     public virtual bool RenderChaosMessageForWieldingUnpriestlyWeapon => false;
     public virtual bool HasPatron => false;
@@ -400,6 +405,8 @@ internal abstract class BaseCharacterClass : IGetKey
         MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
         TarotDrawRoll = Game.ParseNumericExpression(TarotDrawRollExpression);
+        SpellOfWonderBeamProbabilityRoll = Game.ParseNumericExpression(SpellOfWonderBeamProbabilityRollExpression);
+        InvokeSpiritsBeamProbabilityRoll = Game.ParseNumericExpression(InvokeSpiritsBeamProbabilityRollExpression);
 
         // Cut and paste
         //string? prop1 = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\CharacterClasses\", Key, "public override int BaseSaveBonus => ");

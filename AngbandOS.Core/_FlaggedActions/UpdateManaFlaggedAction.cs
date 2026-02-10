@@ -28,10 +28,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
         {
             msp++;
         }
-        if (msp != 0 && Game.BaseCharacterClass.ID == CharacterClassEnum.HighMage)
-        {
-            msp += msp / 4;
-        }
+        msp = (int)(msp * Game.BaseCharacterClass.ManaFactor);
 
         // Allow wield slots to access to the CalcMana process.
         foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())

@@ -20,6 +20,8 @@ internal class MageCharacterClass : BaseCharacterClass
     public override int Search => 16;
     public override int? SpellMinFailChance => 5;
     public override int BaseSearchFrequency => 20;
+    public override string InvokeSpiritsBeamProbabilityRollExpression => "X";
+    public override string SpellOfWonderBeamProbabilityRollExpression => "X";
     public override int MeleeToHit => 34;
     public override int RangedToHit => 20;
     public override int DisarmBonusPerLevel => 7;
