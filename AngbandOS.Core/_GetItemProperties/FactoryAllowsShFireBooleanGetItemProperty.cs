@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class FactoryAllowsShFireBooleanGetItemProperty : GetItemProperty<bool>
 {
     public FactoryAllowsShFireBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(EffectiveAttributeSet.CanProvideSheathOfFire);
+    public override string DebugDescription => nameof(AttributeEnum.CanProvideSheathOfFire);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.CanProvideSheathOfFire;

@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class ResPoisBooleanGetItemProperty : GetItemProperty<bool>
 {
     public ResPoisBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(EffectiveAttributeSet.ResPois);
+    public override string DebugDescription => nameof(AttributeEnum.ResPois);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.ResPois;

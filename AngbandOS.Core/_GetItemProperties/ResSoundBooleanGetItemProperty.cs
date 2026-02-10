@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class ResSoundBooleanGetItemProperty : GetItemProperty<bool>
 {
     public ResSoundBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(EffectiveAttributeSet.ResSound);
+    public override string DebugDescription => nameof(AttributeEnum.ResSound);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.ResSound;

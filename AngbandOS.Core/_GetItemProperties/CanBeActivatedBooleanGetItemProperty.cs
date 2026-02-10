@@ -11,7 +11,7 @@ internal class CanBeActivatedBooleanGetItemProperty : GetItemProperty<bool>
 {
     public CanBeActivatedBooleanGetItemProperty(Game game) : base(game) { }
 
-    public override string DebugDescription => nameof(EffectiveAttributeSet.Activation);
+    public override string DebugDescription => nameof(AttributeEnum.Activation);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.Activation != null;
