@@ -5675,8 +5675,8 @@ internal class Game
                     if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.MeleeToHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Reset();
-                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.HeavyCurse).Reset();
+                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Reset();
+                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.HeavyCurse).Reset();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -5703,8 +5703,8 @@ internal class Game
                     if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.ToDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Reset();
-                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.HeavyCurse).Reset();
+                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Reset();
+                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.HeavyCurse).Reset();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -5732,8 +5732,8 @@ internal class Game
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Reset();
-                        oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.HeavyCurse).Reset();
+                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Reset();
+                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.HeavyCurse).Reset();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -6394,8 +6394,8 @@ internal class Game
             {
                 continue;
             }
-            oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Reset();
-            oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.HeavyCurse).Reset();
+            oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Reset();
+            oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.HeavyCurse).Reset();
             oPtr.IdentSense = true;
             oPtr.Inscription = "uncursed";
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -6746,7 +6746,7 @@ internal class Game
             item.EffectivePropertySet.BaseArmorClass = 0;
             item.EffectivePropertySet.DamageDice = 0;
             item.EffectivePropertySet.DiceSides = 0;
-            item.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Set();
+            item.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Set();
             item.EffectivePropertySet.Valueless = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -6785,7 +6785,7 @@ internal class Game
             item.EffectivePropertySet.BaseArmorClass = 0;
             item.EffectivePropertySet.DamageDice = 0;
             item.EffectivePropertySet.DiceSides = 0;
-            item.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Set();
+            item.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Set();
             item.EffectivePropertySet.Valueless = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -13485,8 +13485,8 @@ internal class Game
             {
                 changed = true;
             }
-            oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Set();
-            oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.HeavyCurse).Set();
+            oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Set();
+            oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.HeavyCurse).Set();
         }
         else
         {
@@ -13494,7 +13494,7 @@ internal class Game
             {
                 changed = true;
             }
-            oPtr.EffectivePropertySet.Get<BoolAttributeValue>(AttributeEnum.IsCursed).Set();
+            oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Set();
         }
         if (changed)
         {

@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 internal abstract class NullableReferenceAttribute<T> : Attribute, IGetKey where T : class
 {
     public NullableReferenceAttribute(Game game) : base(game) { }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new NullableReferenceAttributeValue<T>(Game, null);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new NullableSetEffectiveReferenceAttributeValue<T>(Game, null);
     public string GetKey => Index.ToString();
     public void Bind() { }
 }

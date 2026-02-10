@@ -7,13 +7,13 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class BoolAttributeValue : SetEffectiveAttributeValue<bool?>
+internal class ColorEnumSetEffectiveAttributeValue : SetEffectiveAttributeValue<ColorEnum>
 {
-    public BoolAttributeValue(Game game, bool? defaultValue) : base(game, defaultValue) { }
+    public ColorEnumSetEffectiveAttributeValue(Game game, ColorEnum defaultColor) : base(game, defaultColor) { }
 
     public override EffectiveAttributeValue Clone()
     {
-        BoolAttributeValue clone = new BoolAttributeValue(Game, InitialValue);
+        ColorEnumSetEffectiveAttributeValue clone = new ColorEnumSetEffectiveAttributeValue(Game, InitialValue);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }
@@ -22,16 +22,8 @@ internal class BoolAttributeValue : SetEffectiveAttributeValue<bool?>
     /// Computes a value to append to the modifiers so that the effective value equals the specified value.
     /// </summary>
     /// <param name="value"></param>
-    public void Set()
+    public void Set(ColorEnum color)
     {
-        _attributeModifiers.Add(("", true));
-    }
-
-    /// <summary>
-    /// Appends a false modifier to the list of modifiers--effectively making the attribute value false.
-    /// </summary>
-    public void Reset()
-    {
-        _attributeModifiers.Add(("", false));
+        _attributeModifiers.Add(("", color));
     }
 }

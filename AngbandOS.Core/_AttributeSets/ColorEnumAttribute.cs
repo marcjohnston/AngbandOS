@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 internal abstract class ColorEnumAttribute : Attribute, IGetKey
 {
     public ColorEnumAttribute(Game game) : base(game) { }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ColorEnumEffectiveAttributeValue(Game, ColorEnum.White);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ColorEnumSetEffectiveAttributeValue(Game, ColorEnum.White);
     public string GetKey => Index.ToString();
     public void Bind() { }
 }

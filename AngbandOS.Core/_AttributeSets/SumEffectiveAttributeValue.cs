@@ -7,18 +7,18 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class AdditionEffectiveAttributeValue : EffectiveAttributeValue
+internal class SumEffectiveAttributeValue : EffectiveAttributeValue
 {
     /// <summary>
     /// Represents the modifiers that are combined to create the effective value.
     /// </summary>
     private readonly List<(string Key, int Modifier)> _attributeModifiers = new List<(string, int)>();
 
-    public AdditionEffectiveAttributeValue(Game game) : base(game) { }
+    public SumEffectiveAttributeValue(Game game) : base(game) { }
 
     public override EffectiveAttributeValue Clone()
     {
-        AdditionEffectiveAttributeValue clone = new AdditionEffectiveAttributeValue(Game);
+        SumEffectiveAttributeValue clone = new SumEffectiveAttributeValue(Game);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }

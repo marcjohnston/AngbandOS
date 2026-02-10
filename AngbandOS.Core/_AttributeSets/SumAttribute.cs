@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 internal abstract class SumAttribute : Attribute, IGetKey
 {
     public SumAttribute(Game game) : base(game) { }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new AdditionEffectiveAttributeValue(Game);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new SumEffectiveAttributeValue(Game);
     public string GetKey => Index.ToString();
     public void Bind() { }
 }

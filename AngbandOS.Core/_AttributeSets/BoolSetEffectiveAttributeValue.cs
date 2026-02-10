@@ -7,13 +7,13 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class NullableReferenceAttributeValue<T> : SetEffectiveAttributeValue<T?>
+internal class BoolSetEffectiveAttributeValue : SetEffectiveAttributeValue<bool?>
 {
-    public NullableReferenceAttributeValue(Game game, T? defaultValue) : base(game, defaultValue) { }
+    public BoolSetEffectiveAttributeValue(Game game, bool? defaultValue) : base(game, defaultValue) { }
 
     public override EffectiveAttributeValue Clone()
     {
-        NullableReferenceAttributeValue<T> clone = new NullableReferenceAttributeValue<T>(Game, InitialValue);
+        BoolSetEffectiveAttributeValue clone = new BoolSetEffectiveAttributeValue(Game, InitialValue);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }
@@ -22,8 +22,16 @@ internal class NullableReferenceAttributeValue<T> : SetEffectiveAttributeValue<T
     /// Computes a value to append to the modifiers so that the effective value equals the specified value.
     /// </summary>
     /// <param name="value"></param>
-    public void Set(T? value)
+    public void Set()
     {
-        _attributeModifiers.Add(("", value));
+        _attributeModifiers.Add(("", true));
+    }
+
+    /// <summary>
+    /// Appends a false modifier to the list of modifiers--effectively making the attribute value false.
+    /// </summary>
+    public void Reset()
+    {
+        _attributeModifiers.Add(("", false));
     }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 internal abstract class BoolAttribute : Attribute, IGetKey
 {
     public BoolAttribute(Game game) : base(game) { }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new BoolAttributeValue(Game, null);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new BoolSetEffectiveAttributeValue(Game, null);
     public string GetKey => Index.ToString();
     public void Bind() { }
 }
