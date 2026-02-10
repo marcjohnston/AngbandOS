@@ -19,6 +19,7 @@ internal class RogueCharacterClass : BaseCharacterClass
     public override int Stealth => 5;
     public override int Search => 32;
     public override int BaseSearchFrequency => 24;
+    public override string TarotDrawRollExpression => "1d110+X/5";
     public override int MeleeToHit => 60;
     public override int RangedToHit => 66;
     public override int DisarmBonusPerLevel => 15;

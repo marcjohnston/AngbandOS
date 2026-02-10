@@ -1203,10 +1203,14 @@ internal sealed class ItemFactory : IGetKey, IToJson
             {
                 characteristics.NoTele = true;
             }
-            if (Game.BaseCharacterClass.ID != CharacterClassEnum.Warrior && Game.DieRoll(3) == 1)
+            if (Game.BaseCharacterClass.NonMagicRandomArtifact1InChance > 0)
             {
-                characteristics.NoMagic = true;
+                if (Game.DieRoll(Game.BaseCharacterClass.NonMagicRandomArtifact1InChance) == 1)
+                {
+                    characteristics.NoMagic = true;
+                }
             }
+
             characteristics.IsCursed = true;
         }
 

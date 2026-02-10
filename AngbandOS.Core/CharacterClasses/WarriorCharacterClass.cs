@@ -24,6 +24,7 @@ internal class WarriorCharacterClass : BaseCharacterClass
     public override int MeleeToHit => 70;
     public override int RangedToHit => 60;
     public override int DisarmBonusPerLevel => 12;
+    public override int NonMagicRandomArtifact1InChance => 0;
     public override int DeviceBonusPerLevel => 7;
     public override int SaveBonusPerLevel => 10;
     public override int StealthBonusPerLevel => 0;

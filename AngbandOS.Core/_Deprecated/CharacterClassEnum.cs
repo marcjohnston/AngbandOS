@@ -23,8 +23,8 @@ internal static class CharacterClassEnum
     public const int Mystic = 15; // done
     public const int Paladin = 5; // done
     public const int Priest = 2; // done
-    public const int Ranger = 4;
+    public const int Ranger = 4; // done
     public const int Rogue = 3;
-    public const int Warrior = 0;
+    public const int Warrior = 0; // done
     public const int WarriorMage = 6; // done
 }

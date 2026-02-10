@@ -22,6 +22,12 @@ internal abstract class BaseCharacterClass : IGetKey
     public Expression? MeleeAttacksPerRoundBonus { get; private set; }
 
     public virtual bool RenderMinFail => true;
+    /// <summary>
+    /// Returns a 1 in chance that random artifacts created by this character class will be non-magical.  Returns 3, by default, which means that there is a 1 in 3 chance that random artifacts created by this character class will be non-magical.  Warriors return 0.
+    /// </summary>
+    public virtual int NonMagicRandomArtifact1InChance => 3;
+    public virtual string TarotDrawRollExpression => "1d120";
+    public Expression? TarotDrawRoll { get; private set; }
     public virtual bool RenderSpellsPerLevel => true;
     public virtual bool RenderChaosMessageForWieldingUnpriestlyWeapon => false;
     public virtual bool HasPatron => false;
@@ -393,6 +399,7 @@ internal abstract class BaseCharacterClass : IGetKey
         ItemActions = Game.SingletonRepository.GetNullable<ItemAction>(ItemActionNames);
         MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
+        TarotDrawRoll = Game.ParseNumericExpression(TarotDrawRollExpression);
 
         // Cut and paste
         //string? prop1 = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\CharacterClasses\", Key, "public override int BaseSaveBonus => ");

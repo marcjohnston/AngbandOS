@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
@@ -25,11 +23,8 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
     public void ExecuteScript()
     {
         bool noneCame = false;
-        int die = Game.DieRoll(120);
-        if (Game.BaseCharacterClass.ID == CharacterClassEnum.Rogue || Game.BaseCharacterClass.ID == CharacterClassEnum.HighMage)
-        {
-            die = Game.DieRoll(110) + (Game.ExperienceLevel.IntValue / 5);
-        }
+        IntegerExpression roll = Game.ComputeIntegerExpression(Game.BaseCharacterClass.TarotDrawRoll);
+        int die = Game.DieRoll(roll.Value);
         Game.MsgPrint("You shuffle your Tarot deck and draw a card...");
         if (die < 7)
         {
