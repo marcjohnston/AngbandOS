@@ -17,6 +17,7 @@ internal class WarriorCharacterClass : BaseCharacterClass
     public override int? InstantFearResistanceLevel => 30;
     public override int UseDevice => 18;
     public override int SavingThrow => 18;
+    public override int? AttackAndDamageBonusPerExperienceLevelDivisor => 5;
     public override int Stealth => 1;
     public override int Search => 14;
     public override int BaseSearchFrequency => 2;

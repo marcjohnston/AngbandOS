@@ -597,13 +597,18 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         displayedAttackBonus += Game.DexterityAbility.DexAttackBonus;
         displayedAttackBonus += Game.StrengthAbility.StrAttackBonus;
         int hold = Game.StrengthAbility.StrMaxWeaponWeight;
+
+        // Enumerate all of the ranged weapon slots.
         foreach (WieldSlot rangedWeaponInventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
         {
+            // Enumerate all of the items in the slow.
             foreach (int index in rangedWeaponInventorySlot.InventorySlots)
             {
+                // Retrieve the item.
                 Item? oPtr = Game.GetInventoryItem(index);
                 if (oPtr != null)
                 {
+                    // Determine if the ranged weapon is too heavy.
                     if (hold < oPtr.EffectivePropertySet.Weight / 10)
                     {
                         attackBonus += 2 * (hold - (oPtr.EffectivePropertySet.Weight / 10));
@@ -612,31 +617,17 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     else
                     {
-                        // Since this came from the ranged weapon, we know it is a missile weapon type/bow.
-                        ItemFactory[]? ammunitionItemFactories = oPtr.AmmunitionItemFactories;
+                        RangedWeaponBonus[] table = Game.SingletonRepository.Get<RangedWeaponBonus>(); // TODO: This will be slow because the GenericRepository is type casting every record.
 
-                        // Rangers get a bonus for using ranged weapons that use arrows for ammunition.
-                        if (Game.BaseCharacterClass.ID == CharacterClassEnum.Ranger && oPtr.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(BowItemClass)))
+                        // Retrieve all of the records that apply.
+                        RangedWeaponBonus[] matchingBonuses = table.Where(_rangedWeaponBonus => 
+                            (_rangedWeaponBonus.CharacterClassBindingKey is null || _rangedWeaponBonus.CharacterClassBindingKey == Game.BaseCharacterClass.GetKey) &&
+                            (_rangedWeaponBonus.ItemClassBindingKey is null || _rangedWeaponBonus.ItemClassBindingKey ==oPtr.ItemClass.GetKey) &&
+                            (_rangedWeaponBonus.ExperienceLevel is null || _rangedWeaponBonus.ExperienceLevel.Value <= Game.ExperienceLevel.IntValue)).ToArray();
+
+                        foreach (RangedWeaponBonus rangedWeaponBonus in matchingBonuses)
                         {
-                            if (Game.ExperienceLevel.IntValue >= 20)
-                            {
-                                Game.MissileAttacksPerRound++;
-                            }
-                            if (Game.ExperienceLevel.IntValue >= 40)
-                            {
-                                Game.MissileAttacksPerRound++;
-                            }
-                        }
-                        if (Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior)
-                        {
-                            if (Game.ExperienceLevel.IntValue >= 25)
-                            {
-                                Game.MissileAttacksPerRound++;
-                            }
-                            if (Game.ExperienceLevel.IntValue >= 50)
-                            {
-                                Game.MissileAttacksPerRound++;
-                            }
+                            Game.MissileAttacksPerRound += rangedWeaponBonus.BonusMissileAttacksPerRound;
                         }
                         Game.MissileAttacksPerRound += extraShots;
                         if (Game.MissileAttacksPerRound < 1)
@@ -739,20 +730,21 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
 
                 MartialArtistArmorAux = false;
-                if (Game.BaseCharacterClass.ID == CharacterClassEnum.Warrior)
+                if (Game.BaseCharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor is not null)
                 {
-                    attackBonus += Game.ExperienceLevel.IntValue / 5;
-                    damageBonus += Game.ExperienceLevel.IntValue / 5;
-                    displayedAttackBonus += Game.ExperienceLevel.IntValue / 5;
-                    displayedDamageBonus += Game.ExperienceLevel.IntValue / 5;
+                    int divisor = Game.BaseCharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor.Value;
+                    attackBonus += Game.ExperienceLevel.IntValue / divisor;
+                    damageBonus += Game.ExperienceLevel.IntValue / divisor;
+                    displayedAttackBonus += Game.ExperienceLevel.IntValue / divisor;
+                    displayedDamageBonus += Game.ExperienceLevel.IntValue / divisor;
                 }
                 
-                if ((Game.BaseCharacterClass.ID == CharacterClassEnum.Priest || Game.BaseCharacterClass.ID == CharacterClassEnum.Druid) && !Game.HasBlessedBlade && oPtr != null && (oPtr.ItemClass==Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) || oPtr.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass))))
+                if (Game.BaseCharacterClass.AttackAndDamageBonusForUnpriestlyWeapon is not null && !Game.HasBlessedBlade && oPtr != null && (oPtr.ItemClass==Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) || oPtr.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass))))
                 {
-                    attackBonus -= 2;
-                    damageBonus -= 2;
-                    displayedAttackBonus -= 2;
-                    displayedDamageBonus -= 2;
+                    attackBonus += Game.BaseCharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    damageBonus += Game.BaseCharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    displayedAttackBonus += Game.BaseCharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    displayedDamageBonus += Game.BaseCharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
                     hasUnpriestlyWeapon = true;
                 }
 
@@ -866,7 +858,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             if (newBonuses.HasUnpriestlyWeapon)
             {
-                Game.MsgPrint(Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist ? "Your weapon restricts the flow of chaos through you." : "You do not feel comfortable with your weapon.");
+                Game.MsgPrint(Game.BaseCharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Your weapon restricts the flow of chaos through you." : "You do not feel comfortable with your weapon.");
             }
             else if (Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon) != null)
             {
@@ -874,7 +866,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
             else
             {
-                Game.MsgPrint(Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist ? "Chaos flows freely through you again." : "You feel more comfortable after removing your weapon.");
+                Game.MsgPrint(Game.BaseCharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Chaos flows freely through you again." : "You feel more comfortable after removing your weapon.");
             }
         }
         if (Game.BaseCharacterClass.IsMartialArtist && MartialArtistArmorAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action

@@ -54,7 +54,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
             // Casting abilities only have one or two inherent bonuses, so it's safe to start at three
             bonus3 = mana % 2 == 0 ? $", {mana / 2} SP/lvl" : $", {mana / 2}.5 SP/lvl";
             // Not all casting classes have actual spells
-            if (Game.BaseCharacterClass.ID != CharacterClassEnum.Mindcrafter && Game.BaseCharacterClass.ID != CharacterClassEnum.Mystic && Game.BaseCharacterClass.ID != CharacterClassEnum.Channeler)
+            if (Game.BaseCharacterClass.RenderSpellsPerLevel)
             {
                 int spells = ability.HalfSpellsPerLevel;
                 if (spells == 2)
@@ -71,7 +71,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
                 }
             }
             // Almost all casting classes have a failure chance
-            if (Game.BaseCharacterClass.ID != CharacterClassEnum.Channeler)
+            if (Game.BaseCharacterClass.RenderMinFail)
             {
                 int fail = ability.SpellMinFailChance;
                 bonus5 = $", {fail}% min fail";
@@ -465,7 +465,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
             Game.Screen.Print(ColorEnum.Brown, realmBuff, 6, 15);
         }
         // Fanatics and Cultists get a patron
-        if (Game.BaseCharacterClass.ID == CharacterClassEnum.Fanatic || Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist)
+        if (Game.BaseCharacterClass.HasPatron)
         {
             Game.Screen.Print(ColorEnum.Blue, "Patron      :", 7, 1);
             Game.Screen.Print(ColorEnum.Brown, Game.GooPatron.LongName, 7, 15);

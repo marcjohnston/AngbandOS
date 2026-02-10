@@ -18,6 +18,8 @@ internal class PriestCharacterClass : BaseCharacterClass
     public override int Stealth => 2;
     public override int Search => 16;
     public override int BaseSearchFrequency => 8;
+    public override int UnpriestlyWeaponAdditionalFailureChance => 25;
+    public override int? AttackAndDamageBonusForUnpriestlyWeapon => -2;
     public override int MeleeToHit => 48;
     public override int RangedToHit => 36;
     public override int DisarmBonusPerLevel => 7;

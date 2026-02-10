@@ -18,6 +18,8 @@ internal class ChannelerCharacterClass : BaseCharacterClass
     public override int Stealth => 2;
     public override int Search => 16;
     public override int BaseSearchFrequency => 20;
+    public override bool RenderMinFail => false;
+    public override bool RenderSpellsPerLevel => false;
     public override int MeleeToHit => 40;
     public override int RangedToHit => 30;
     public override int DisarmBonusPerLevel => 12;

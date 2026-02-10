@@ -11,20 +11,20 @@ namespace AngbandOS.Core;
 /// </summary>
 internal static class CharacterClassEnum
 {
-    public const int Channeler = 13;
-    public const int ChosenOne = 14;
-    public const int Cultist = 12;
-    public const int Druid = 11;
-    public const int Fanatic = 7;
+    public const int Channeler = 13; // done
+    public const int ChosenOne = 14; // done
+    public const int Cultist = 12; // done
+    public const int Druid = 11; // done
+    public const int Fanatic = 7; // done
     public const int HighMage = 10;
     public const int Mage = 1;
-    public const int Mindcrafter = 9;
-    public const int Monk = 8;
-    public const int Mystic = 15;
-    public const int Paladin = 5;
-    public const int Priest = 2;
+    public const int Mindcrafter = 9; // done
+    public const int Monk = 8; // done
+    public const int Mystic = 15; // done
+    public const int Paladin = 5; // done
+    public const int Priest = 2; // done
     public const int Ranger = 4;
     public const int Rogue = 3;
     public const int Warrior = 0;
-    public const int WarriorMage = 6;
+    public const int WarriorMage = 6; // done
 }

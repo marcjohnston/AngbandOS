@@ -17,6 +17,7 @@ internal class MysticCharacterClass : BaseCharacterClass
     public override int? InstantFearResistanceLevel => 25;
     public override int? InstantTelepathyLevel => 40;
     public override int? InstantFreeActionLevel => 30;
+    public override bool RenderSpellsPerLevel => false;
     public override int? InstantConfusionResistanceLevel => 10;
     public override int UseDevice => 30;
     public override int SavingThrow => 30;

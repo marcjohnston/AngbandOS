@@ -105,6 +105,7 @@ public class GameConfiguration
         gameConfiguration.RacialPowerTests = LoadFromAssembly<RacialPowerTestGameConfiguration>(assembly);
         gameConfiguration.RaceAbilities = LoadFromAssembly<RaceAbilityGameConfiguration>(assembly);
         gameConfiguration.RacialPowers = LoadFromAssembly<RacialPowerGameConfiguration>(assembly);
+        gameConfiguration.RangedWeaponBonuses = LoadFromAssembly<RangedWeaponBonusGameConfiguration>(assembly);
         gameConfiguration.ConditionalScripts = LoadFromAssembly<ConditionalScriptGameConfiguration>(assembly);
         gameConfiguration.CharacterClassAbilities = LoadFromAssembly<CharacterClassAbilityGameConfiguration>(assembly);
         gameConfiguration.Activations = LoadFromAssembly<ActivationGameConfiguration>(assembly);
@@ -228,6 +229,7 @@ public class GameConfiguration
     public virtual MapWidgetGameConfiguration[]? MapWidgets { get; set; } = null;
     public virtual MaxRangedWidgetGameConfiguration[]? MaxRangedWidgets { get; set; } = null;
     public virtual RangedWidgetGameConfiguration[]? RangedWidgets { get; set; } = null;
+    public virtual RangedWeaponBonusGameConfiguration[]? RangedWeaponBonuses { get; set; } = null;
     public virtual StringWidgetGameConfiguration[]? StringWidgets { get; set; } = null;
     public virtual GameMessageWidgetGameConfiguration[]? GameMessageWidgets { get; set; } = null;
     public virtual LabelWidgetGameConfiguration[]? LabelWidgets { get; set; } = null;

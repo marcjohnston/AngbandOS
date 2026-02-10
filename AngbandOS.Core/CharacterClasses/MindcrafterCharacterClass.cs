@@ -16,6 +16,7 @@ internal class MindcrafterCharacterClass : BaseCharacterClass
     public override string Title => "Mindcrafter";
     public override int? InstantFearResistanceLevel => 10;
     public override int? InstantSustainWisdomLevel => 20;
+    public override bool RenderSpellsPerLevel => false;
     public override int? InstantConfusionResistanceLevel => 30;
     public override int? InstantTelepathyLevel => 40;
     public override int UseDevice => 30;

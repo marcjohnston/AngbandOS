@@ -17,6 +17,9 @@ internal class CultistCharacterClass : BaseCharacterClass
     public override string Title => "Cultist";
     public override bool ReceivesLevelRewards => true;
     public override int? InstantChaosResistanceLevel => 20;
+    public override bool RenderChaosMessageForWieldingUnpriestlyWeapon => true;
+    public override int UnpriestlyWeaponAdditionalFailureChance => 25;
+    public override bool HasPatron => true;
     public override int UseDevice => 36;
     public override int? SpellMinFailChance => 5;
     public override int SavingThrow => 32;

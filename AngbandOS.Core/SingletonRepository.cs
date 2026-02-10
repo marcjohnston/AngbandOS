@@ -360,6 +360,7 @@ internal class SingletonRepository
         LoadFromConfiguration<RacialPower, RacialPowerGameConfiguration>(gameConfiguration.RacialPowers);
         LoadFromConfiguration<RacialPowerTest, RacialPowerTestGameConfiguration>(gameConfiguration.RacialPowerTests);
         LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration>(gameConfiguration.RangedWidgets);
+        LoadFromConfiguration<RangedWeaponBonus, RangedWeaponBonusGameConfiguration>(gameConfiguration.RangedWeaponBonuses);
         LoadFromConfiguration<Realm, RealmGameConfiguration>(gameConfiguration.Realms);
         LoadFromConfiguration<RechargeItemScript, RechargeItemScriptGameConfiguration>(gameConfiguration.RechargeItemScripts);
         LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration>(gameConfiguration.RealmCharacterClasses);

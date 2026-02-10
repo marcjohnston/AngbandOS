@@ -21,6 +21,14 @@ internal abstract class BaseCharacterClass : IGetKey
     protected virtual string? MeleeAttacksPerRoundBonusExpression => null;
     public Expression? MeleeAttacksPerRoundBonus { get; private set; }
 
+    public virtual bool RenderMinFail => true;
+    public virtual bool RenderSpellsPerLevel => true;
+    public virtual bool RenderChaosMessageForWieldingUnpriestlyWeapon => false;
+    public virtual bool HasPatron => false;
+    public virtual int UnpriestlyWeaponAdditionalFailureChance => 0;
+    public virtual int? AttackAndDamageBonusPerExperienceLevelDivisor => null;
+    public virtual int? AttackAndDamageBonusForUnpriestlyWeapon => null;
+
     /// <summary>
     /// Returns the minimum spell failure chance for the character class.  Spell failure chances that are lower than this value will be set to this value; or null, if there is no
     /// minimum.  Priests, mages, high-mages, cultists and druids have a minimum 5% failure chance.

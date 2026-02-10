@@ -245,13 +245,9 @@ internal sealed class Spell : IGetKey, IToJson
         {
             minfail = characterClassMinimumSpellFailureChance;
         }
-        if ((Game.BaseCharacterClass.ID == CharacterClassEnum.Priest || Game.BaseCharacterClass.ID == CharacterClassEnum.Druid) && Game.Bonuses.HasUnpriestlyWeapon)
+        if (Game.Bonuses.HasUnpriestlyWeapon)
         {
-            chance += 25;
-        }
-        if (Game.BaseCharacterClass.ID == CharacterClassEnum.Cultist && Game.Bonuses.HasUnpriestlyWeapon)
-        {
-            chance += 25;
+            chance += Game.BaseCharacterClass.UnpriestlyWeaponAdditionalFailureChance;
         }
         if (chance < minfail)
         {
