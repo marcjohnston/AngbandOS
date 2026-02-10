@@ -85,4 +85,11 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
     {
         _attributeModifiers.Add(("", true));
     }
+    public void Set(bool? value)
+    {
+        if (value.HasValue)
+        {
+            Set();
+        }
+    }
 }

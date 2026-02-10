@@ -102,4 +102,21 @@ internal class AdditionEffectiveAttributeValue : EffectiveAttributeValue
     {
         _attributeModifiers.Add(("", Get() - value));
     }
+
+    public void Set(int? value)
+    {
+        if (value.HasValue)
+        {
+            Set(value.Value);
+        }
+    }
+
+    public void Set(Expression? value)
+    {
+        if (value is not null)
+        {
+            int intValue = Game.ComputeIntegerExpression(value).Value;
+            Set(intValue);
+        }
+    }
 }
