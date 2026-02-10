@@ -146,7 +146,7 @@ internal class SingletonRepository
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public T[] Get<T>() where T : class // TODO: WHY CANT THIS BE where T: IGETKEY
+    public T[] Get<T>() where T : class // TODO: WHY CANT THIS BE where T: IGETKEY (BECAUSE WE DO THINGS LIKE .Get<ICHANGETRACKER>
     {
         string typeName = typeof(T).Name;
         return _allGenericRepositoriesDictionary[typeName].Get<T>();
