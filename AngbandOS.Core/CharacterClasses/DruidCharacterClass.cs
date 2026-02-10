@@ -17,6 +17,7 @@ internal class DruidCharacterClass : BaseCharacterClass
     public override int SavingThrow => 32;
     public override int Stealth => 3;
     public override int Search => 20;
+    public override int? SpellMinFailChance => 5;
     public override int BaseSearchFrequency => 8;
     public override int MeleeToHit => 48;
     public override int RangedToHit => 36;

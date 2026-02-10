@@ -31,6 +31,7 @@ internal class PriestCharacterClass : BaseCharacterClass
     public override int HitDieBonus => 2;
     public override int ExperienceFactor => 20;
     public override Ability PrimeStat => Game.WisdomAbility;
+    public override int? SpellMinFailChance => 5;
     public override string[] Info => new string[] {
         "Devout followers of the Great Ones, Priests use WIS based",
         "spell casting. They may choose either Life or Death magic,",

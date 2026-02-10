@@ -18,6 +18,7 @@ internal class MageCharacterClass : BaseCharacterClass
     public override int SavingThrow => 30;
     public override int Stealth => 2;
     public override int Search => 16;
+    public override int? SpellMinFailChance => 5;
     public override int BaseSearchFrequency => 20;
     public override int MeleeToHit => 34;
     public override int RangedToHit => 20;

@@ -18,6 +18,7 @@ internal class CultistCharacterClass : BaseCharacterClass
     public override bool ReceivesLevelRewards => true;
     public override int? InstantChaosResistanceLevel => 20;
     public override int UseDevice => 36;
+    public override int? SpellMinFailChance => 5;
     public override int SavingThrow => 32;
     public override int Stealth => 1;
     public override int Search => 16;
