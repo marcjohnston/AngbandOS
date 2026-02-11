@@ -115,6 +115,7 @@ public class GameConfiguration
         gameConfiguration.TeleportSelfScripts = LoadFromAssembly<TeleportSelfScriptGameConfiguration>(assembly);
         gameConfiguration.MappedItemEnhancements = LoadFromAssembly<MappedItemEnhancementGameConfiguration>(assembly);
         gameConfiguration.ChestTraps = LoadFromAssembly<ChestTrapGameConfiguration>(assembly);
+        gameConfiguration.OutfitManifests = LoadFromAssembly<OutfitManifestGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -153,6 +154,7 @@ public class GameConfiguration
     public virtual HelpGroupGameConfiguration[]? HelpGroups { get; set; } = null;
 
     public virtual MonsterRaceGameConfiguration[]? MonsterRaces { get; set; } = null;
+    public virtual OutfitManifestGameConfiguration[]? OutfitManifests { get; set; } = null;
 
     public virtual SymbolGameConfiguration[]? Symbols { get; set; } = null;
 
@@ -239,7 +241,6 @@ public class GameConfiguration
     public virtual LabelWidgetGameConfiguration[]? LabelWidgets { get; set; } = null;
     public virtual TimeWidgetGameConfiguration[]? TimeWidgets { get; set; } = null;
     public virtual TextWidgetGameConfiguration[]? NullableStringsTextAreaWidgets { get; set; } = null;
-
     public virtual RaceGenderGameConfiguration[]? RaceGenders { get; set; } = null;
     public virtual GenderGameConfiguration[]? Genders { get; set; } = null;
     public virtual PhysicalAttributeSetGameConfiguration[]? PhysicalAttributeSets { get; set; } = null;

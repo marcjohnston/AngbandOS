@@ -24,7 +24,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         {
             return;
         }
-        string p = Game.BaseCharacterClass.SpellNoun;
+        string p = Game.CharacterClass.SpellNoun;
         if (!Game.CanCastSpells)
         {
             return;
@@ -37,7 +37,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         {
             return;
         }
-        int numAllowed = Game.BaseCharacterClass.SpellStat.HalfSpellsPerLevel * Game.HalfLevelsOfSpellcraft() / 2;
+        int numAllowed = Game.CharacterClass.SpellStat.HalfSpellsPerLevel * Game.HalfLevelsOfSpellcraft() / 2;
 
         // Count the number of spells that were learned.
         int numKnown = 0;

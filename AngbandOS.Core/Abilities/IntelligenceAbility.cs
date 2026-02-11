@@ -19,7 +19,7 @@ internal class IntelligenceAbility : Ability
     public override string NameReduced => "int: ";
     public override void FlagActions()
     {
-        if (Game.BaseCharacterClass.SpellStat == this)
+        if (Game.CharacterClass.SpellStat == this)
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();

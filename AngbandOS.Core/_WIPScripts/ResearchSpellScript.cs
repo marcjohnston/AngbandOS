@@ -36,7 +36,7 @@ internal class ResearchSpellScript : Script, IScript, ICastSpellScript, IStoreCo
     /// <returns></returns>
     public void ExecuteScript()
     {
-        string spellType = Game.BaseCharacterClass.SpellNoun;
+        string spellType = Game.CharacterClass.SpellNoun;
         // If we don't have a realm then we can't do anything
         if (!Game.CanCastSpells)
         {
@@ -85,7 +85,7 @@ internal class ResearchSpellScript : Script, IScript, ICastSpellScript, IStoreCo
 
         // Arcane casters can choose their spell
         Spell? spell = null;
-        if (Game.BaseCharacterClass.CanChooseSpellToStudy)
+        if (Game.CharacterClass.CanChooseSpellToStudy)
         {
             // Allow the user to select a spell.
             if (!Game.GetSpell(out spell, "study", item, false))

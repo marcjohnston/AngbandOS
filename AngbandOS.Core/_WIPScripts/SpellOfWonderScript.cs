@@ -22,7 +22,7 @@ internal class SpellOfWonderScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        IntegerExpression roll = Game.ComputeIntegerExpression(Game.BaseCharacterClass.SpellOfWonderBeamProbabilityRoll);
+        IntegerExpression roll = Game.ComputeIntegerExpression(Game.CharacterClass.SpellOfWonderBeamProbabilityRoll);
         int beam = roll.Value;
         int die = Game.DieRoll(100) + (Game.ExperienceLevel.IntValue / 5);
         if (!Game.GetDirectionWithAim(out int dir))

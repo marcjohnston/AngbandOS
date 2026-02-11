@@ -18,10 +18,10 @@ internal class RangedWeaponBonus : IGetKey, IToJson
         ExperienceLevel = missileAttacksPerRoundGameConfiguration.ExperienceLevel;
         BonusMissileAttacksPerRound = missileAttacksPerRoundGameConfiguration.BonusMissileAttacksPerRound;
     }
-    public virtual string? CharacterClassBindingKey { get; } = null;
-    public virtual string? ItemClassBindingKey { get; } = null;
-    public virtual int? ExperienceLevel { get; } = null;
-    public virtual int BonusMissileAttacksPerRound { get; } = 0;
+    public string? CharacterClassBindingKey { get; private set; } = null;
+    public string? ItemClassBindingKey { get; private set; } = null;
+    public int? ExperienceLevel { get; private set; } = null;
+    public int BonusMissileAttacksPerRound { get; private set; } = 0;
 
     public string GetKey => Game.GetCompositeKey(CharacterClassBindingKey, ItemClassBindingKey, ExperienceLevel == null ? null : ExperienceLevel.Value.ToString());
 

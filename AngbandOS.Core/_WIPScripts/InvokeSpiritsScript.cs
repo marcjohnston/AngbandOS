@@ -24,7 +24,7 @@ internal class InvokeSpiritsScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        IntegerExpression roll = Game.ComputeIntegerExpression(Game.BaseCharacterClass.InvokeSpiritsBeamProbabilityRoll);
+        IntegerExpression roll = Game.ComputeIntegerExpression(Game.CharacterClass.InvokeSpiritsBeamProbabilityRoll);
         int beam = roll.Value;
         int die = Game.DieRoll(100) + (Game.ExperienceLevel.IntValue / 5);
         if (!Game.GetDirectionWithAim(out int dir))

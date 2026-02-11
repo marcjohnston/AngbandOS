@@ -19,7 +19,7 @@ internal class WisdomAbility : Ability
     public override string NameReduced => "wis: ";
     public override void FlagActions()
     {
-        if (Game.BaseCharacterClass.SpellStat == this)
+        if (Game.CharacterClass.SpellStat == this)
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();

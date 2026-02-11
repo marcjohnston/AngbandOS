@@ -54,12 +54,6 @@ internal class PaladinCharacterClass : CharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(DeathRealm))
     };
 
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(BroadSwordWeaponItemFactory),
-        nameof(ProtectionFromEvilScrollItemFactory)
-    };
-
     public override void CalcBonuses()
     {
         if (Game.ExperienceLevel.IntValue > 39)

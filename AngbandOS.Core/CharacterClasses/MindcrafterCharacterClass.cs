@@ -53,12 +53,6 @@ internal class MindcrafterCharacterClass : CharacterClass
     public override ArtifactBias? ArtifactBias => (Game.DieRoll(5) > 2 ? Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias)) : null);
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(55000 / ((level * level) + 40)));
 
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(SmallSwordWeaponItemFactory),
-        nameof(RestoreManaPotionItemFactory),
-        nameof(SoftLeatherSoftArmorItemFactory)
-    };
     public override void CalcBonuses()
     {
         if (Game.ExperienceLevel.IntValue > 9)

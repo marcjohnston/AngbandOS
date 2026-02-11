@@ -75,10 +75,4 @@ internal class HighMageCharacterClass : CharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(FolkRealm)),
         Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
     };
-
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(DaggerWeaponItemFactory),
-        nameof(SustainIntelligenceRingItemFactory)
-    };
 }

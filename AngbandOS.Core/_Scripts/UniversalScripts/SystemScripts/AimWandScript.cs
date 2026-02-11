@@ -95,7 +95,7 @@ internal class AimWandScript : UniversalScript, IGetKey
         }
         // If we're a channeler then we should be using mana instead of charges
         bool channeled = false;
-        if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
+        if (Game.CharacterClass.CanUseManaInsteadOfConsumingItem)
         {
             channeled = Game.DoCmdChannel(item, item.AimingTuple.Value.ManaValue);
         }

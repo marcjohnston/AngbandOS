@@ -14,16 +14,16 @@ internal class Realm2SelectionBirthStage : BirthStage
     public override BirthStage? Render()
     {
         DisplayPartialCharacter();
-        string[]? menuItems = Game.BaseCharacterClass.AvailableSecondaryRealms
+        string[]? menuItems = Game.CharacterClass.AvailableSecondaryRealms
             .Where(_realm => _realm != Game.PrimaryRealm)
             .Select(_realm => _realm.Name)
             .ToArray(); ;
         Game.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
 
         // The index might be out of range if the user switches between classes.
-        if (currentSelection >= Game.BaseCharacterClass.AvailablePrimaryRealms.Length)
+        if (currentSelection >= Game.CharacterClass.AvailablePrimaryRealms.Length)
         {
-            currentSelection = Game.BaseCharacterClass.AvailablePrimaryRealms.Length - 1;
+            currentSelection = Game.CharacterClass.AvailablePrimaryRealms.Length - 1;
         }
 
         while (!Game.Shutdown)
@@ -59,22 +59,22 @@ internal class Realm2SelectionBirthStage : BirthStage
 
     private bool RenderSelection(int index)
     {
-        Realm[] remainingRealms = Game.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Game.PrimaryRealm).ToArray();
+        Realm[] remainingRealms = Game.CharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Game.PrimaryRealm).ToArray();
         Realm realm = remainingRealms[index];
         Game.DisplayRealmInfo(realm);
         return true;
     }
     private BirthStage? GoForward(int index)
     {
-        Realm[] remainingRealms = Game.BaseCharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Game.PrimaryRealm).ToArray();
+        Realm[] remainingRealms = Game.CharacterClass.AvailableSecondaryRealms.Where(_realm => _realm != Game.PrimaryRealm).ToArray();
         Game.SecondaryRealm = remainingRealms[index];
-        Game.God = Game.BaseCharacterClass.DefaultDeity(Game.SecondaryRealm);
+        Game.God = Game.CharacterClass.DefaultDeity(Game.SecondaryRealm);
         return Game.SingletonRepository.Get<BirthStage>(nameof(GenderSelectionBirthStage));
     }
 
     private BirthStage? GoBack()
     {
-        int availablePrimaryRealmCount = Game.BaseCharacterClass.AvailablePrimaryRealms.Length;
+        int availablePrimaryRealmCount = Game.CharacterClass.AvailablePrimaryRealms.Length;
         if (availablePrimaryRealmCount <= 1)
         {
             return Game.SingletonRepository.Get<BirthStage>(nameof(RaceSelectionBirthStage));

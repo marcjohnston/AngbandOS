@@ -81,7 +81,7 @@ internal abstract class CharacterClass : IGetKey
     /// </summary>
     protected void CastSpell()
     {
-        string prayer = Game.BaseCharacterClass.SpellNoun;
+        string prayer = Game.CharacterClass.SpellNoun;
         if (!Game.CanCastSpells)
         {
             Game.MsgPrint("You cannot cast spells!");
@@ -109,7 +109,7 @@ internal abstract class CharacterClass : IGetKey
         Game.HandleStuff();
 
         // Allow the player to select the spell.
-        if (!Game.GetSpell(out Spell? spell, Game.BaseCharacterClass.CastVerb, oPtr, true))
+        if (!Game.GetSpell(out Spell? spell, Game.CharacterClass.CastVerb, oPtr, true))
         {
             Game.MsgPrint($"You don't know any {prayer}s in that book.");
             return;
@@ -123,7 +123,7 @@ internal abstract class CharacterClass : IGetKey
 
         if (spell.CharacterClassSpell.ManaCost > Game.Mana.IntValue)
         {
-            string cast = Game.BaseCharacterClass.CastVerb;
+            string cast = Game.CharacterClass.CastVerb;
             Game.MsgPrint($"You do not have enough mana to {cast} this {prayer}.");
             if (!Game.GetCheck("Attempt it anyway? "))
             {
@@ -395,40 +395,12 @@ internal abstract class CharacterClass : IGetKey
     }
     public void Bind()
     {
-        List<ItemFactory> outfitItemFactories = new();
-        foreach (string outfitItemFactoryName in OutfitItemFactoryNames)
-        {
-            outfitItemFactories.Add(Game.SingletonRepository.Get<ItemFactory>(outfitItemFactoryName));
-        }
-        OutfitItemFactories = outfitItemFactories.ToArray();
         ItemActions = Game.SingletonRepository.GetNullable<ItemAction>(ItemActionNames);
         MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
         TarotDrawRoll = Game.ParseNumericExpression(TarotDrawRollExpression);
         SpellOfWonderBeamProbabilityRoll = Game.ParseNumericExpression(SpellOfWonderBeamProbabilityRollExpression);
         InvokeSpiritsBeamProbabilityRoll = Game.ParseNumericExpression(InvokeSpiritsBeamProbabilityRollExpression);
-
-        // Cut and paste
-        //string? prop1 = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\CharacterClasses\", Key, "public override int BaseSaveBonus => ");
-        //if (prop1 is not null)
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? SavingThrow => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
-
-        //        foreach (string ability in new string[] { "Strength", "Charisma", "Constitution", "Wisdom", "Intelligence", "Dexterity" })
-        //        {
-        //            string? property = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\CharacterClassAbilities\", $"{GetType().Name}{ability}Ability", "Bonus =>");
-        //            if (property is null)
-        //                throw new Exception();
-        //            property = $"    public override string Bonus{ability}RollExpression => \"{property.Split("=>")[1].Split(";")[0].Trim()}\";";
-        //            string newProperty = @$"
-        //namespace AngbandOS.GamePacks.Cthangband;
-
-        //[Serializable]
-        //public class {GetType().Name}ItemEnhancement : ItemEnhancementGameConfiguration
-        //{{
-        //}}
-        //";
-        //            Game.PasteProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements\", $"{GetType().Name}ItemEnhancement", property, newProperty);
-        //        }
     }
     public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
 
@@ -718,40 +690,4 @@ internal abstract class CharacterClass : IGetKey
     public virtual void ItemDestroyed(Item item, int amount)
     {
     }
-
-    /// <summary>
-    /// Outfits a new player with a starting inventory.
-    /// </summary>
-    public virtual void OutfitPlayer()
-    {
-        // An an item for each item that the character classes designates the player to be outfitted with.
-        foreach (ItemFactory itemFactory in OutfitItemFactories)
-        {
-            // Allow the race to modify the item as the race sees fit.
-            ItemFactory outfitItemFactory = Game.Race.OutfitItemClass(itemFactory);
-
-            // Create an item from the factory.
-            Item item = outfitItemFactory.GenerateItem();
-            if (outfitItemFactory.AimingTuple != null)
-            {
-                item.WandChargesRemaining = 1;
-            }
-            Game.OutfitPlayerWithItem(item);
-
-            // Allow the character class a chance to modify the item.
-            OutfitItem(item);
-        }
-    }
-
-    /// <summary>
-    /// Represents the class of items a new player should be outfitted with.
-    /// </summary>
-    protected ItemFactory[] OutfitItemFactories { get; private set; }
-    protected abstract string[] OutfitItemFactoryNames { get; }
-
-    /// <summary>
-    /// During the outfit process, derived character classes can modify outfitted items.  Does nothing by default.
-    /// </summary>
-    /// <param name="item"></param>
-    protected virtual void OutfitItem(Item item) { }
 }

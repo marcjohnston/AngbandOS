@@ -87,12 +87,6 @@ internal class MonkCharacterClass : CharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
     };
 
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(HealingPotionItemFactory),
-        nameof(SoftLeatherSoftArmorItemFactory)
-    };
-
     public override void CalcBonuses()
     {
         if (Game.ExperienceLevel.IntValue > 24 && !Game.MartialArtistHeavyArmor())

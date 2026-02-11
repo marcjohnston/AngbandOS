@@ -42,7 +42,7 @@ internal abstract class BirthStage : IGetKey
         Game.Screen.Print(ColorEnum.Blue, "Race        :", 4, 1);
         Game.Screen.Print(ColorEnum.Brown, Game.Race?.Title ?? spaces, 4, 15);
         Game.Screen.Print(ColorEnum.Blue, "Class       :", 5, 1);
-        Game.Screen.Print(ColorEnum.Brown, Game.BaseCharacterClass?.Title ?? spaces, 5, 15);
+        Game.Screen.Print(ColorEnum.Brown, Game.CharacterClass?.Title ?? spaces, 5, 15);
         if (Game.CanCastSpells)
         {
             Game.Screen.Print(ColorEnum.Blue, "Magic       :", 6, 1);
@@ -83,12 +83,12 @@ internal abstract class BirthStage : IGetKey
         Game.Screen.Print(ColorEnum.Grey, "..............", 26, 45);
         Game.Screen.Print(ColorEnum.Grey, "..............", 27, 45);
         Game.Screen.Print(ColorEnum.Blue, "Modifications", 28, 45);
-        if (Game.BaseCharacterClass is not null)
+        if (Game.CharacterClass is not null)
         {
             int i = 0;
             foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
             {
-                string compositeKey = CharacterClassAbility.GetCompositeKey(Game.BaseCharacterClass, ability);
+                string compositeKey = CharacterClassAbility.GetCompositeKey(Game.CharacterClass, ability);
                 CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
                 string characterClassAbilityBonus = characterClassAbility.Bonus.ToString("+0;-0;+0").PadLeft(3) ?? "   ";
                 Game.Screen.Print(ColorEnum.Brown, characterClassAbilityBonus, 22 + i, 20);

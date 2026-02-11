@@ -132,7 +132,7 @@ internal class ZapRodScript : Script, IScript, ICastSpellScript, IGameCommandScr
 
         // Channelers can spend mana instead of a charge
         bool channeled = false;
-        if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
+        if (Game.CharacterClass.CanUseManaInsteadOfConsumingItem)
         {
             channeled = Game.DoCmdChannel(item, item.ZapTuple.Value.ManaEquivalent);
             if (channeled)

@@ -59,12 +59,6 @@ internal class MysticCharacterClass : CharacterClass
     /// Returns true, because characters of this class study martial arts.
     /// </summary>
     public override bool IsMartialArtist => true;
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(SustainWisdomRingItemFactory),
-        nameof(HealingPotionItemFactory),
-        nameof(SoftLeatherSoftArmorItemFactory)
-    };
 
     public override void CalcBonuses()
     {

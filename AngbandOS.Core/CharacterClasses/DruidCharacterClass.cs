@@ -76,10 +76,4 @@ internal class DruidCharacterClass : CharacterClass
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
         Game.SingletonRepository.Get<Realm>(nameof(NatureRealm))
     };
-
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(QuarterstaffHaftedWeaponItemFactory),
-        nameof(SustainWisdomRingItemFactory)
-    };
 }

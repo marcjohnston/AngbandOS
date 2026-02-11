@@ -10,3 +10,4 @@ public class AbilityScoreScriptGameConfiguration
     public virtual string AbilityBindingKey { get; set; }
     public virtual bool TrueToIncreaseFalseToDecrease { get; set; }
 }
+

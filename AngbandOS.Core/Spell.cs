@@ -91,7 +91,7 @@ internal sealed class Spell : IGetKey, IToJson
         MappedSpellScript[]? matching = table.Where(_mappedSpellScript =>
             (_mappedSpellScript.Spell is null || _mappedSpellScript.Spell == this) &&
             (_mappedSpellScript.Realm is null || _mappedSpellScript.Realm == SpellBookItemFactory.Realm) &&
-            (_mappedSpellScript.CharacterClass is null || _mappedSpellScript.CharacterClass == Game.BaseCharacterClass) &&
+            (_mappedSpellScript.CharacterClass is null || _mappedSpellScript.CharacterClass == Game.CharacterClass) &&
             (_mappedSpellScript.MinimumExperienceLevel is null || _mappedSpellScript.MinimumExperienceLevel < Game.ExperienceLevel.IntValue) &&
             _mappedSpellScript.Success == successScript)
             .OrderByDescending(_mappedSpellScript => _mappedSpellScript.MinimumExperienceLevel) // NULL values are treated as the lowest values in LINQ
@@ -186,7 +186,7 @@ internal sealed class Spell : IGetKey, IToJson
         {
             return zeroMatching.CastSpellScripts;
         }
-        throw new Exception($"No {(successScript ? "success" : "failure")} mapping found for {SpellBookItemFactory.Realm.GetKey}, {this.GetKey}, {Game.BaseCharacterClass.GetKey}.");
+        throw new Exception($"No {(successScript ? "success" : "failure")} mapping found for {SpellBookItemFactory.Realm.GetKey}, {this.GetKey}, {Game.CharacterClass.GetKey}.");
     }
 
     private ICastSpellScript[]? CastSpellScripts => GetMappedSpellScripts(true);
@@ -234,20 +234,20 @@ internal sealed class Spell : IGetKey, IToJson
         }
         int chance = CharacterClassSpell.BaseFailure;
         chance -= 3 * (Game.ExperienceLevel.IntValue - CharacterClassSpell.Level);
-        chance -= 3 * (Game.BaseCharacterClass.SpellStat.SpellFailureReduction - 1);
+        chance -= 3 * (Game.CharacterClass.SpellStat.SpellFailureReduction - 1);
         if (CharacterClassSpell.ManaCost > Game.Mana.IntValue)
         {
             chance += 5 * (CharacterClassSpell.ManaCost - Game.Mana.IntValue);
         }
-        int minfail = Game.BaseCharacterClass.SpellStat.SpellMinFailChance;
-        int characterClassMinimumSpellFailureChance = Game.BaseCharacterClass.SpellMinFailChance ?? 0;
+        int minfail = Game.CharacterClass.SpellStat.SpellMinFailChance;
+        int characterClassMinimumSpellFailureChance = Game.CharacterClass.SpellMinFailChance ?? 0;
         if (minfail < characterClassMinimumSpellFailureChance)
         {
             minfail = characterClassMinimumSpellFailureChance;
         }
         if (Game.Bonuses.HasUnpriestlyWeapon)
         {
-            chance += Game.BaseCharacterClass.UnpriestlyWeaponAdditionalFailureChance;
+            chance += Game.CharacterClass.UnpriestlyWeaponAdditionalFailureChance;
         }
         if (chance < minfail)
         {
@@ -270,7 +270,7 @@ internal sealed class Spell : IGetKey, IToJson
 
     public void Initialize(ItemFactory itemFactory, int spellIndex) // TODO: This can be a game event for "CharacterClass_Changed"
     {
-        CharacterClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(Game.BaseCharacterClass, this));
+        CharacterClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(Game.CharacterClass, this));
         SpellIndex = spellIndex;
         SpellBookItemFactory = itemFactory;
         //CastSpellScripts = GetMappedSpellScripts(true);

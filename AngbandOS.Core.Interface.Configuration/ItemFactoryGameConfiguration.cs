@@ -194,8 +194,8 @@ public class ItemFactoryGameConfiguration
     public virtual int BurnRate { get; set; } = 0;
 
     /// <summary>
-    /// Returns an array of tuples that define the mass produce for items of this factory.  These tuples define a Roll that is applied for additional items to be produced
-    /// for items of a cost value or less; or null, if no additional items should be produced based on any cost.  Returns null, by default.  This property is used
+    /// Returns an array of tuples that define the mass produce for items of this factory when they are sold in a store.  These tuples define a Roll that is applied for additional items to be produced
+    /// for items of a cost value or less; or null, if no additional items should be produced based on any cost.  Costs are determined after enhancements are applied.  Returns null, by default.  This property is used
     /// to bind the <see cref="MassProduceTuples"/> property during the bind phase.  The tuples must be sorted by cost and are checked during the bind phase.
     /// </summary>
     public virtual (int count, string rollExpression)[]? MassProduceBindingTuples { get; set; } = null;

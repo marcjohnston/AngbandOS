@@ -48,13 +48,13 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         (string bonus1, string bonus2, string bonus3, string bonus4, string bonus5) = ability.GetBonuses();
 
         // Add the bonus text for spell casting abilities
-        if (Game.BaseCharacterClass.SpellStat == ability && ability != Game.StrengthAbility)
+        if (Game.CharacterClass.SpellStat == ability && ability != Game.StrengthAbility)
         {
             int mana = ability.ManaBonus;
             // Casting abilities only have one or two inherent bonuses, so it's safe to start at three
             bonus3 = mana % 2 == 0 ? $", {mana / 2} SP/lvl" : $", {mana / 2}.5 SP/lvl";
             // Not all casting classes have actual spells
-            if (Game.BaseCharacterClass.RenderSpellsPerLevel)
+            if (Game.CharacterClass.RenderSpellsPerLevel)
             {
                 int spells = ability.HalfSpellsPerLevel;
                 if (spells == 2)
@@ -71,7 +71,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
                 }
             }
             // Almost all casting classes have a failure chance
-            if (Game.BaseCharacterClass.RenderMinFail)
+            if (Game.CharacterClass.RenderMinFail)
             {
                 int fail = ability.SpellMinFailChance;
                 bonus5 = $", {fail}% min fail";
@@ -187,7 +187,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
             }
             // Take out the bonuses we got for our our race and profession
             RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Game.Race, ability));
-            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.BaseCharacterClass, ability);
+            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.CharacterClass, ability);
             CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
             equipmentBonuses -= raceAbility.Bonus;
             equipmentBonuses -= characterClassAbility.Bonus;
@@ -457,7 +457,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         Game.Screen.Print(ColorEnum.Brown, Game.PlayerName.StringValue, 2, 15);
         Game.Screen.Print(ColorEnum.Brown, Game.Gender.Title, 3, 15);
         Game.Screen.Print(ColorEnum.Brown, Game.Race.Title, 4, 15);
-        Game.Screen.Print(ColorEnum.Brown, Game.BaseCharacterClass.ClassSubName(Game.PrimaryRealm), 5, 15);
+        Game.Screen.Print(ColorEnum.Brown, Game.CharacterClass.ClassSubName(Game.PrimaryRealm), 5, 15);
         // Only print realms if we have them
         if (Game.PrimaryRealm != null)
         {
@@ -465,7 +465,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
             Game.Screen.Print(ColorEnum.Brown, realmBuff, 6, 15);
         }
         // Fanatics and Cultists get a patron
-        if (Game.BaseCharacterClass.HasPatron)
+        if (Game.CharacterClass.HasPatron)
         {
             Game.Screen.Print(ColorEnum.Blue, "Patron      :", 7, 1);
             Game.Screen.Print(ColorEnum.Brown, Game.GooPatron.LongName, 7, 15);

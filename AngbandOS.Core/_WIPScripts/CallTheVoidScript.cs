@@ -60,8 +60,8 @@ internal class CallTheVoidScript : Script, IScript, ICastSpellScript
         else
         {
             // We were too close to a wall, so earthquake instead
-            string cast = Game.BaseCharacterClass.CastVerb;
-            string spell = Game.BaseCharacterClass.SpellNoun;
+            string cast = Game.CharacterClass.CastVerb;
+            string spell = Game.CharacterClass.SpellNoun;
             Game.MsgPrint($"You {cast} the {spell} too close to a wall!");
             Game.MsgPrint("There is a loud explosion!");
             Game.DestroyArea(Game.MapY.IntValue, Game.MapX.IntValue, 20 + Game.ExperienceLevel.IntValue);

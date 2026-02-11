@@ -50,20 +50,6 @@ internal sealed class Realm : IGetKey, IToJson
     }
 
     /// <summary>
-    /// Adds the first book to the players inventory to outfit players that choose this realm with a starting book.
-    /// </summary>
-    public void OutfitPlayer()
-    {
-        // Get the first level book.
-        ItemFactory outfitItem = SpellBooks[0];
-
-        // Create an item from the factory.
-        Item item = outfitItem.GenerateItem();
-
-        Game.OutfitPlayerWithItem(item);
-    }
-
-    /// <summary>
     /// Initialize the spells for the character that the player has chosen.  This process occurs during the confirmation birth stage.  Only the
     /// spells that belong to the primary and secondary realms are initialized.
     /// </summary>

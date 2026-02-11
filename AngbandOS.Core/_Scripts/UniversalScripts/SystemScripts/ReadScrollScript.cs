@@ -76,7 +76,7 @@ internal class ReadScrollScript : UniversalScript, IGetKey
         }
         bool channeled = false;
         // Channelers can use mana instead of the scroll being used up
-        if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
+        if (Game.CharacterClass.CanUseManaInsteadOfConsumingItem)
         {
             channeled = Game.DoCmdChannel(item, item.ReadTuple.Value.ManaValue);
         }

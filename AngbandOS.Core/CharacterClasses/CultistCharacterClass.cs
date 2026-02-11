@@ -81,11 +81,6 @@ internal class CultistCharacterClass : CharacterClass
     };
     public override bool WorshipsADeity => true;
 
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(SustainIntelligenceRingItemFactory),
-    };
-
     public override Bonuses? GetBonusesForMeleeWeapon(Item? oPtr)
     {
         // Cultists that are NOT wielding the a blade of chaos lose bonuses for being an unpriestly weapon.

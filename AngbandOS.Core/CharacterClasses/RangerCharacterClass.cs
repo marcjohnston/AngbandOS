@@ -83,11 +83,4 @@ internal class RangerCharacterClass : CharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
     };
     public override bool WorshipsADeity => true;
-
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(CallOfTheWildNatureBookItemFactory),
-        nameof(BroadSwordWeaponItemFactory),
-        nameof(BlackPrayersDeathBookItemFactory)
-    };
 }

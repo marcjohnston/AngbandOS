@@ -841,7 +841,7 @@ internal class Game
     public int HalfLevelsOfSpellcraft()
     {
         int levels = ExperienceLevel.IntValue;
-        if (BaseCharacterClass.DoesNotGainSpellLevelsUntilFirstSpellLevel && LevelOfFirstSpell != null)
+        if (CharacterClass.DoesNotGainSpellLevelsUntilFirstSpellLevel && LevelOfFirstSpell != null)
         {
             levels = levels - LevelOfFirstSpell.Value + 1;
             if (levels < 0)
@@ -1071,7 +1071,7 @@ internal class Game
     /// <summary>
     /// Represents the character class of the player.  Will be null prior to the character class birth selection.
     /// </summary>
-    public CharacterClass BaseCharacterClass;
+    public CharacterClass CharacterClass;
 
     /// <summary>
     /// Returns the current race of the character.  Will be null before the player is birthed.
@@ -1100,7 +1100,7 @@ internal class Game
     /// </summary>
     public bool CanCastSpells => PrimaryRealm != null || SecondaryRealm != null;
 
-    public bool UsesMana => CanCastSpells || BaseCharacterClass.CanUseManaInsteadOfConsumingItem;
+    public bool UsesMana => CanCastSpells || CharacterClass.CanUseManaInsteadOfConsumingItem;
 
     /// <summary>
     /// Returns true, if the player has chosen the realm <T> for either the primary or secondary realms to study.
@@ -2743,7 +2743,7 @@ internal class Game
                     ConsoleViewPort.PlayerDied(PlayerName.StringValue, DiedFrom, ExperienceLevel.IntValue);
 
                     // Store the player info
-                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, BaseCharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.StringValue, ExperienceLevel.IntValue, Generation);
+                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, CharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.StringValue, ExperienceLevel.IntValue, Generation);
                     break;
                 }
                 GenerateNewLevel();
@@ -4266,7 +4266,7 @@ internal class Game
                 buf += " the Magnificent";
             }
             Screen.Print(buf, 39, 1);
-            buf = $"Level {ExperienceLevel.IntValue} {BaseCharacterClass.ClassSubName(PrimaryRealm)}";
+            buf = $"Level {ExperienceLevel.IntValue} {CharacterClass.ClassSubName(PrimaryRealm)}";
             Screen.Print(buf, 40, 1);
             string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
             Screen.Print(tmp, 39, 34);
@@ -4660,7 +4660,7 @@ internal class Game
         int upkeepFactor = 0;
         if (TotalFriends != 0)
         {
-            int upkeepDivider = BaseCharacterClass.FriendsUpkeepDivider;
+            int upkeepDivider = CharacterClass.FriendsUpkeepDivider;
             if (TotalFriends > 1 + (ExperienceLevel.IntValue / upkeepDivider))
             {
                 upkeepFactor = TotalFriendLevels;
@@ -7368,7 +7368,7 @@ internal class Game
         bool noExtra = false;
         Disturb(false);
         // If we're a rogue then we can backstab monsters
-        if (BaseCharacterClass.CanBackstab)
+        if (CharacterClass.CanBackstab)
         {
             if (monster.SleepLevel != 0 && monster.IsVisible)
             {
@@ -7814,7 +7814,7 @@ internal class Game
         {
             return false;
         }
-        string spellNoun = BaseCharacterClass.SpellNoun;
+        string spellNoun = CharacterClass.SpellNoun;
         ScreenBuffer? savedScreen = null;
         string outVal = $"({spellNoun}s {0.IndexToLetter()}-{(okaySpells.Length - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {spellNoun}? ";
         while (selectedSpell == null && GetCom(outVal, out char choice) && !Shutdown)
@@ -9587,8 +9587,8 @@ internal class Game
         int i;
         MaxLevelGained = 1;
         ExperienceLevel.IntValue = 1;
-        ExperienceMultiplier.IntValue = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
-        HitDie = Race.HitDieBonus + BaseCharacterClass.HitDieBonus;
+        ExperienceMultiplier.IntValue = Race.ExperienceFactor + CharacterClass.ExperienceFactor;
+        HitDie = Race.HitDieBonus + CharacterClass.HitDieBonus;
         MaxHealth.IntValue = HitDie;
         PlayerHp[0] = HitDie;
         int lastroll = HitDie;
@@ -9655,12 +9655,12 @@ internal class Game
                 maxList.RemoveAt(maxIndex);
                 ability.InnateMax = max;
                 RaceAbility raceAbility = SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Race, ability));
-                CharacterClassAbility characterClassAbility = SingletonRepository.Get<CharacterClassAbility>(CharacterClassAbility.GetCompositeKey(BaseCharacterClass, ability));
+                CharacterClassAbility characterClassAbility = SingletonRepository.Get<CharacterClassAbility>(CharacterClassAbility.GetCompositeKey(CharacterClass, ability));
                 int bonus = raceAbility.Bonus + characterClassAbility.Bonus;
                 ability.Innate = ability.InnateMax;
                 ability.Adjusted = ability.ModifyStatValue(ability.InnateMax, bonus);
             }
-            if (BaseCharacterClass.PrimeStat.InnateMax > 13)
+            if (CharacterClass.PrimeStat.InnateMax > 13)
             {
                 break;
             }
@@ -9692,7 +9692,7 @@ internal class Game
         {
             ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.Get<ItemFactory>(nameof(SatisfyHungerScrollItemFactory));
             Item item = scrollSatisfyHungerItemClass.GenerateItem();
-            item.StackCount = (char)RandomBetween(2, 5);
+            item.StackCount = RandomBetween(2, 5);
             item.IsFlavorAware = true;
             item.BecomeKnown();
             item.IdentityIsStoreBought = true;
@@ -9707,7 +9707,7 @@ internal class Game
             item.BecomeKnown();
             InventoryCarry(item);
         }
-        if (Race.OutfitsWithScrollsOfLight || BaseCharacterClass.OutfitsWithScrollsOfLight)
+        if (Race.OutfitsWithScrollsOfLight || CharacterClass.OutfitsWithScrollsOfLight)
         {
             ItemFactory scrollLightItemClass = SingletonRepository.Get<ItemFactory>(nameof(LightScrollItemFactory));
             Item item = scrollLightItemClass.GenerateItem();
@@ -9731,33 +9731,57 @@ internal class Game
             SetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault(), carried);
             WeightCarried += carried.EffectivePropertySet.Weight;
         }
-        BaseCharacterClass.OutfitPlayer();
 
-        // If the character chosen has religion, outfit the player with books.
-        if (PrimaryRealm != null)
+        // Retrieve the tables to select from.
+        OutfitManifest[] characterClassAndRaceOutfitItemsTable = SingletonRepository.Get<OutfitManifest>(); // Get the table to select from.
+
+        // Select the outfit items that match the character class and/or the race.
+        OutfitManifest[] characterClassAndRaceOutfitItems = characterClassAndRaceOutfitItemsTable.Where(_characterClassAndRaceOutfitItems =>
+            // All three match
+            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey == CharacterClass.GetKey && _characterClassAndRaceOutfitItems.RaceBindingKey == Race.GetKey && (_characterClassAndRaceOutfitItems.RealmBindingKey == PrimaryRealm?.GetKey || _characterClassAndRaceOutfitItems.RealmBindingKey == SecondaryRealm?.GetKey)) || // Character class, race and either realm
+
+            // Two match with one wildcard
+            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey is null && _characterClassAndRaceOutfitItems.RaceBindingKey == Race.GetKey && (_characterClassAndRaceOutfitItems.RealmBindingKey == PrimaryRealm?.GetKey || _characterClassAndRaceOutfitItems.RealmBindingKey == SecondaryRealm?.GetKey)) || // Wilcard character class
+            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey == CharacterClass.GetKey && _characterClassAndRaceOutfitItems.RaceBindingKey is null && (_characterClassAndRaceOutfitItems.RealmBindingKey == PrimaryRealm?.GetKey || _characterClassAndRaceOutfitItems.RealmBindingKey == SecondaryRealm?.GetKey)) || // Wildcard race
+            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey == CharacterClass.GetKey && _characterClassAndRaceOutfitItems.RaceBindingKey == Race.GetKey && _characterClassAndRaceOutfitItems.RealmBindingKey is null) || // Wildcard realms
+
+            // One matches with two wildcards
+            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey == CharacterClass.GetKey && _characterClassAndRaceOutfitItems.RaceBindingKey is null && _characterClassAndRaceOutfitItems.RealmBindingKey is null) || // Character class matches
+            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey is null && _characterClassAndRaceOutfitItems.RaceBindingKey == Race.GetKey && _characterClassAndRaceOutfitItems.RealmBindingKey is null) || // Race matches
+            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey is null && _characterClassAndRaceOutfitItems.RaceBindingKey is null && (_characterClassAndRaceOutfitItems.RealmBindingKey == PrimaryRealm?.GetKey || _characterClassAndRaceOutfitItems.RealmBindingKey == SecondaryRealm?.GetKey)) || // Either realm matches
+
+            // All wildcards
+            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey is null && _characterClassAndRaceOutfitItems.RaceBindingKey is null && _characterClassAndRaceOutfitItems.RealmBindingKey is null)).ToArray();
+
+        // Outfit the player with all of the applicable items.
+        foreach (OutfitManifest characterClassAndRaceOutfitItemsEntry in characterClassAndRaceOutfitItems)
         {
-            PrimaryRealm.OutfitPlayer();
-            if (SecondaryRealm != null)
+            foreach ((ItemFactory itemFactory, ItemEnhancement[] itemEnhancements) in characterClassAndRaceOutfitItemsEntry.ItemFactoryAndEnhancements)
             {
-                SecondaryRealm.OutfitPlayer();
+                // Create an item from the factory.
+                Item item = itemFactory.GenerateItem();
+                if (itemFactory.AimingTuple != null)
+                {
+                    item.WandChargesRemaining = 1;
+                }
+
+                if (itemEnhancements is not null)
+                {
+                    foreach (ItemEnhancement itemEnhancement in itemEnhancements)
+                    {
+                        item.SetRareItem(itemEnhancement);
+                    }
+                }
+
+                item.IdentityIsStoreBought = true;
+                item.IsFlavorAware = true;
+                item.BecomeKnown();
+
+                if (!item.Wield())
+                {
+                    throw new Exception($"The {item.GetDescription(false)} cannot be outfit because the all of the wield slots are currently in use.");
+                }
             }
-        }
-    }
-
-    /// <summary>
-    /// Adds an item to the players inventory.
-    /// </summary>
-    /// <param name="item"></param>
-
-    public void OutfitPlayerWithItem(Item item)
-    {
-        item.IdentityIsStoreBought = true;
-        item.IsFlavorAware = true;
-        item.BecomeKnown();
-
-        if (!item.Wield())
-        {
-            throw new Exception($"The {item.GetDescription(false)} cannot be outfit because the all of the wield slots are currently in use.");
         }
     }
 
@@ -12997,13 +13021,13 @@ internal class Game
 
     public bool IsMartialArtistAndNotWieldingAMeleeWeapon()
     {
-        return BaseCharacterClass.IsMartialArtist && GetInventoryItem(InventorySlotEnum.MeleeWeapon) == null;
+        return CharacterClass.IsMartialArtist && GetInventoryItem(InventorySlotEnum.MeleeWeapon) == null;
     }
 
     public bool MartialArtistHeavyArmor()
     {
         int martialArtistArmWgt = 0;
-        if (!BaseCharacterClass.IsMartialArtist)
+        if (!CharacterClass.IsMartialArtist)
         {
             return false;
         }
@@ -13380,7 +13404,7 @@ internal class Game
     public void ChangeRace(Race newRace)
     {
         Race = newRace;
-        ExperienceMultiplier.IntValue = Race.ExperienceFactor + BaseCharacterClass.ExperienceFactor;
+        ExperienceMultiplier.IntValue = Race.ExperienceFactor + CharacterClass.ExperienceFactor;
         RefreshHeightAndWeight();
         CheckExperience();
         MaxLevelGained = ExperienceLevel.IntValue;
@@ -13431,7 +13455,7 @@ internal class Game
             if (ExperienceLevel.IntValue > MaxLevelGained)
             {
                 MaxLevelGained = ExperienceLevel.IntValue;
-                if (BaseCharacterClass.ReceivesLevelRewards)
+                if (CharacterClass.ReceivesLevelRewards)
                 {
                     levelReward = true;
                 }
@@ -13632,113 +13656,113 @@ internal class Game
     public EffectiveAttributeSet GetAbilitiesAsItemFlags()
     {
         EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet(this);
-        if (BaseCharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFearResistanceLevel)
+        if (CharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFearResistanceLevel)
         {
             itemCharacteristics.ResFear = true;
         }
-        if (BaseCharacterClass.InstantChaosResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantChaosResistanceLevel)
+        if (CharacterClass.InstantChaosResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantChaosResistanceLevel)
         {
             itemCharacteristics.ResChaos = true;
         }
-        if (BaseCharacterClass.InstantSustainWisdomLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainWisdomLevel)
+        if (CharacterClass.InstantSustainWisdomLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainWisdomLevel)
         {
             itemCharacteristics.SustWis = true;
         }
-        if (BaseCharacterClass.InstantConfusionResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantConfusionResistanceLevel)
+        if (CharacterClass.InstantConfusionResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantConfusionResistanceLevel)
         {
             itemCharacteristics.ResConf = true;
         }
-        if (BaseCharacterClass.InstantTelepathyLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantTelepathyLevel)
+        if (CharacterClass.InstantTelepathyLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantTelepathyLevel)
         {
             itemCharacteristics.Telepathy = true;
         }
-        if (BaseCharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSpeedLevel && !MartialArtistHeavyArmor())
+        if (CharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSpeedLevel && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.Speed++;
         }
-        if (BaseCharacterClass.InstantFreeActionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFreeActionLevel && !MartialArtistHeavyArmor())
+        if (CharacterClass.InstantFreeActionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFreeActionLevel && !MartialArtistHeavyArmor())
         {
             itemCharacteristics.FreeAct = true;
         }
-        if (BaseCharacterClass.InstantBlindnessResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantBlindnessResistanceLevel)
+        if (CharacterClass.InstantBlindnessResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantBlindnessResistanceLevel)
         {
             itemCharacteristics.ResBlind = true;
         }
-        if (BaseCharacterClass.InstantFeatherFallingLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantFeatherFallingLevel)
+        if (CharacterClass.InstantFeatherFallingLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFeatherFallingLevel)
         {
             itemCharacteristics.Feather = true;
         }
-        if (BaseCharacterClass.InstantSeeInvisibilityLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSeeInvisibilityLevel)
+        if (CharacterClass.InstantSeeInvisibilityLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSeeInvisibilityLevel)
         {
             itemCharacteristics.SeeInvis = true;
         }
-        if (BaseCharacterClass.InstantSlowDigestionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSlowDigestionLevel)
+        if (CharacterClass.InstantSlowDigestionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSlowDigestionLevel)
         {
             itemCharacteristics.SlowDigest = true;
         }
-        if (BaseCharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainConstitutionLevel)
+        if (CharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainConstitutionLevel)
         {
             itemCharacteristics.SustCon = true;
         }
-        if (BaseCharacterClass.InstantPoisonResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantPoisonResistanceLevel)
+        if (CharacterClass.InstantPoisonResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantPoisonResistanceLevel)
         {
             itemCharacteristics.ResPois = true;
         }
-        if (BaseCharacterClass.InstantSustainDexterityLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainDexterityLevel)
+        if (CharacterClass.InstantSustainDexterityLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainDexterityLevel)
         {
             itemCharacteristics.SustDex = true;
         }
-        if (BaseCharacterClass.InstantSustainStrengthLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainStrengthLevel)
+        if (CharacterClass.InstantSustainStrengthLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainStrengthLevel)
         {
             itemCharacteristics.SustStr = true;
         }
-        if (BaseCharacterClass.InstantHoldLifeLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantHoldLifeLevel)
+        if (CharacterClass.InstantHoldLifeLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantHoldLifeLevel)
         {
             itemCharacteristics.HoldLife = true;
         }
-        if (BaseCharacterClass.InstantDarknessResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantDarknessResistanceLevel)
+        if (CharacterClass.InstantDarknessResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantDarknessResistanceLevel)
         {
             itemCharacteristics.ResDark = true;
         }
-        if (BaseCharacterClass.InstantLightResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantLightResistanceLevel)
+        if (CharacterClass.InstantLightResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantLightResistanceLevel)
         {
             itemCharacteristics.ResLight = true;
         }
-        if (BaseCharacterClass.InstantSustainCharismaLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainCharismaLevel)
+        if (CharacterClass.InstantSustainCharismaLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainCharismaLevel)
         {
             itemCharacteristics.SustCha = true;
         }
-        if (BaseCharacterClass.InstantSoundResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSoundResistanceLevel)
+        if (CharacterClass.InstantSoundResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSoundResistanceLevel)
         {
             itemCharacteristics.ResSound = true;
         }
-        if (BaseCharacterClass.InstantDisenchantmentResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantDisenchantmentResistanceLevel)
+        if (CharacterClass.InstantDisenchantmentResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantDisenchantmentResistanceLevel)
         {
             itemCharacteristics.ResDisen = true;
         }
-        if (BaseCharacterClass.InstantRegenerationLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantRegenerationLevel)
+        if (CharacterClass.InstantRegenerationLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantRegenerationLevel)
         {
             itemCharacteristics.Regen = true;
         }
-        if (BaseCharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantSustainIntelligenceLevel)
+        if (CharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainIntelligenceLevel)
         {
             itemCharacteristics.SustInt = true;
         }
-        if (BaseCharacterClass.InstantNexusResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantNexusResistanceLevel)
+        if (CharacterClass.InstantNexusResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantNexusResistanceLevel)
         {
             itemCharacteristics.ResNexus = true;
         }
-        if (BaseCharacterClass.InstantShardsResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantShardsResistanceLevel)
+        if (CharacterClass.InstantShardsResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantShardsResistanceLevel)
         {
             itemCharacteristics.ResShards = true;
         }
-        if (BaseCharacterClass.InstantNetherResistanceLevel.HasValue && ExperienceLevel.IntValue >= BaseCharacterClass.InstantNetherResistanceLevel)
+        if (CharacterClass.InstantNetherResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantNetherResistanceLevel)
         {
             itemCharacteristics.ResNether = true;
         }
-        if (BaseCharacterClass.ItemRadiusOverride.HasValue)
+        if (CharacterClass.ItemRadiusOverride.HasValue)
         {
-            itemCharacteristics.Radius = BaseCharacterClass.ItemRadiusOverride.Value;
+            itemCharacteristics.Radius = CharacterClass.ItemRadiusOverride.Value;
         }
 
         Race.UpdateRacialAbilities(ExperienceLevel.IntValue, itemCharacteristics);

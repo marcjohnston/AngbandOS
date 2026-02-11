@@ -32,11 +32,11 @@ internal class SenseInventoryScript : Script, IScript, ICastSpellScript
         {
             return;
         }
-        if (!Game.BaseCharacterClass.SenseInventoryTest(Game.ExperienceLevel.IntValue))
+        if (!Game.CharacterClass.SenseInventoryTest(Game.ExperienceLevel.IntValue))
         {
             return;
         }
-        bool detailed = Game.BaseCharacterClass.DetailedSenseInventory;
+        bool detailed = Game.CharacterClass.DetailedSenseInventory;
 
         // Enumerate each of the inventory slots.
         foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())

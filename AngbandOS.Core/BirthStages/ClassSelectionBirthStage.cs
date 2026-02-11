@@ -119,7 +119,7 @@ internal class ClassSelectionBirthStage : BirthStage
             .OrderBy(_characterClass => _characterClass.Title)
             .ToArray();
 
-        Game.BaseCharacterClass = classes[index];
+        Game.CharacterClass = classes[index];
         return Game.SingletonRepository.Get<BirthStage>(nameof(RaceSelectionBirthStage));
     }
 

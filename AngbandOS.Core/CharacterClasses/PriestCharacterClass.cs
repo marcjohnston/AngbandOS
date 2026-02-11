@@ -84,9 +84,4 @@ internal class PriestCharacterClass : CharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
     };
     public override bool WorshipsADeity => true;
-
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(MaceHaftedWeaponItemFactory),
-    };
 }

@@ -10,7 +10,7 @@ internal class UseRacialPowerScript : Script, IScript
     public void ExecuteScript()
     {
         // Check for an overriding race/character class racial power first.
-        string raceAndCharacterClassCompositeKey = RacialPower.GetCompositeKey(Game.Race, Game.BaseCharacterClass);
+        string raceAndCharacterClassCompositeKey = RacialPower.GetCompositeKey(Game.Race, Game.CharacterClass);
         RacialPower? raceAndCharacterClassRacialPower = Game.SingletonRepository.GetNullable<RacialPower>(raceAndCharacterClassCompositeKey);
         if (raceAndCharacterClassRacialPower is not null)
         {

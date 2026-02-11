@@ -23,7 +23,7 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
     public void ExecuteScript()
     {
         bool noneCame = false;
-        IntegerExpression roll = Game.ComputeIntegerExpression(Game.BaseCharacterClass.TarotDrawRoll);
+        IntegerExpression roll = Game.ComputeIntegerExpression(Game.CharacterClass.TarotDrawRoll);
         int die = Game.DieRoll(roll.Value);
         Game.MsgPrint("You shuffle your Tarot deck and draw a card...");
         if (die < 7)

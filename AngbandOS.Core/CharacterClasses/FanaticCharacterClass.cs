@@ -81,12 +81,6 @@ internal class FanaticCharacterClass : CharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm))
     };
 
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(BroadSwordWeaponItemFactory),
-        nameof(MetalScaleMailHardArmorItemFactory)
-    };
-
     public override void CalcBonuses()
     {
         if (Game.ExperienceLevel.IntValue > 29)

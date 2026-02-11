@@ -53,13 +53,4 @@ internal class TchoTchoRace : Race
     {
         Game.HasFearResistance = true;
     }
-
-    public override ItemFactory OutfitItemClass(ItemFactory itemClass)
-    {
-        if (itemClass is FearResistanceRingItemFactory)
-        {
-            return Game.SingletonRepository.Get<ItemFactory>(nameof(SustainStrengthRingItemFactory));
-        }
-        return itemClass;
-    }
 }

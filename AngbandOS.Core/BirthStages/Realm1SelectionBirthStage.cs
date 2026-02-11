@@ -16,15 +16,15 @@ internal class Realm1SelectionBirthStage : BirthStage
     public override BirthStage? Render()
     {
         DisplayPartialCharacter();
-        string[]? menuItems = Game.BaseCharacterClass.AvailablePrimaryRealms
+        string[]? menuItems = Game.CharacterClass.AvailablePrimaryRealms
             .Select(_availablePrimaryRealms => _availablePrimaryRealms.Name)
             .ToArray();
         Game.Screen.Print(ColorEnum.Orange, "[Use up and down to select an option, right to confirm, or left to go back.]", 43, 1);
 
         // The index might be out of range if the user switches between classes.
-        if (currentSelection >= Game.BaseCharacterClass.AvailablePrimaryRealms.Length)
+        if (currentSelection >= Game.CharacterClass.AvailablePrimaryRealms.Length)
         {
-            currentSelection = Game.BaseCharacterClass.AvailablePrimaryRealms.Length - 1;
+            currentSelection = Game.CharacterClass.AvailablePrimaryRealms.Length - 1;
         }
 
         while (!Game.Shutdown)
@@ -59,15 +59,15 @@ internal class Realm1SelectionBirthStage : BirthStage
     }
     private bool RenderSelection(int index)
     {
-        Realm realm = Game.BaseCharacterClass.AvailablePrimaryRealms[index];
+        Realm realm = Game.CharacterClass.AvailablePrimaryRealms[index];
         Game.DisplayRealmInfo(realm);
         return true;
     }
     private BirthStage? GoForward(int index)
     {
-        Realm realm = Game.BaseCharacterClass.AvailablePrimaryRealms[index];
+        Realm realm = Game.CharacterClass.AvailablePrimaryRealms[index];
         Game.PrimaryRealm = realm;
-        Realm[] remainingAvailableSecondaryRealms = Game.BaseCharacterClass.RemainingAvailableSecondaryRealms();
+        Realm[] remainingAvailableSecondaryRealms = Game.CharacterClass.RemainingAvailableSecondaryRealms();
         int remainingAvailableSecondaryRealmCount = remainingAvailableSecondaryRealms.Length;
         if (remainingAvailableSecondaryRealmCount == 0)
         {

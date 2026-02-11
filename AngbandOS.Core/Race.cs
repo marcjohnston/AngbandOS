@@ -221,14 +221,4 @@ internal abstract class Race : IGetKey
     /// Returns true, if the race can be stunned.  Returns false, by default.  Only golems return false.
     /// </summary>
     public virtual bool CanBeStunned => true;
-
-    /// <summary>
-    /// Allows the race to modify an item class when the character is being outfitted.  Returns the original item class, by default.  Only the tcho-tcho
-    /// race upgrades a ring of resist fear to a ring of sustain strength.
-    /// </summary>
-    /// <param name="item"></param>
-    public virtual ItemFactory OutfitItemClass(ItemFactory item)
-    {
-        return item;
-    }
 }

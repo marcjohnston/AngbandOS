@@ -23,12 +23,12 @@ internal class UpdateManaFlaggedAction : FlaggedAction
         {
             return;
         }
-        int msp = Game.BaseCharacterClass.SpellStat.ManaBonus * Game.HalfLevelsOfSpellcraft() / 2;
+        int msp = Game.CharacterClass.SpellStat.ManaBonus * Game.HalfLevelsOfSpellcraft() / 2;
         if (msp != 0)
         {
             msp++;
         }
-        msp = (int)(msp * Game.BaseCharacterClass.ManaFactor);
+        msp = (int)(msp * Game.CharacterClass.ManaFactor);
 
         // Allow wield slots to access to the CalcMana process.
         foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
@@ -37,7 +37,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
             msp = inventorySlot.CalcMana(Game, msp);
         }
 
-        if (Game.BaseCharacterClass.WeightEncumbersMovement)
+        if (Game.CharacterClass.WeightEncumbersMovement)
         {
             int curWgt = 0;
             foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
@@ -54,7 +54,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
                     }
                 }
             }
-            int maxWgt = Game.BaseCharacterClass.SpellWeight;
+            int maxWgt = Game.CharacterClass.SpellWeight;
             if ((curWgt - maxWgt) / 10 > 0)
             {
                 msp -= (curWgt - maxWgt) / 10;

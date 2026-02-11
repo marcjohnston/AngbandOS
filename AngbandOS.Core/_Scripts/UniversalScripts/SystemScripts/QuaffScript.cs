@@ -69,7 +69,7 @@ internal class QuaffScript : UniversalScript, IGetKey
 
         bool channeled = false;
         // If we're a channeler, we might be able to spend mana instead of using it up
-        if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
+        if (Game.CharacterClass.CanUseManaInsteadOfConsumingItem)
         {
             channeled = Game.DoCmdChannel(item, item.QuaffTuple.Value.ManaEquivalent);
         }

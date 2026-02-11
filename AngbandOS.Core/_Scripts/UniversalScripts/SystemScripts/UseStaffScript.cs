@@ -98,7 +98,7 @@ internal class UseStaffScript : UniversalScript, IGetKey
         }
         // Channelers can use mana instead of a charge
         bool channeled = false;
-        if (Game.BaseCharacterClass.CanUseManaInsteadOfConsumingItem)
+        if (Game.CharacterClass.CanUseManaInsteadOfConsumingItem)
         {
             channeled = Game.DoCmdChannel(item, item.ZapTuple.Value.ManaEquivalent);
         }

@@ -62,8 +62,8 @@ internal class GenderSelectionBirthStage : BirthStage
 
     private BirthStage? GoBack()
     {
-        int availablePrimaryRealmCount = Game.BaseCharacterClass.AvailablePrimaryRealms.Length;
-        int remainingAvailableSecondaryRealmCount = Game.BaseCharacterClass.RemainingAvailableSecondaryRealms().Length;
+        int availablePrimaryRealmCount = Game.CharacterClass.AvailablePrimaryRealms.Length;
+        int remainingAvailableSecondaryRealmCount = Game.CharacterClass.RemainingAvailableSecondaryRealms().Length;
         if (remainingAvailableSecondaryRealmCount <= 1 && availablePrimaryRealmCount <= 1)
         {
             return Game.SingletonRepository.Get<BirthStage>(nameof(RaceSelectionBirthStage));

@@ -21,7 +21,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         effectiveAttributeSet.MergeAttributeSet(Game.Race.EffectiveAttributeSet);
 
         // Apply the character class enhancements.
-        effectiveAttributeSet.MergeAttributeSet(Game.BaseCharacterClass.EffectiveAttributeSet);
+        effectiveAttributeSet.MergeAttributeSet(Game.CharacterClass.EffectiveAttributeSet);
 
         // Apply all of the mutations that the player has.
 
@@ -116,17 +116,17 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasFireImmunity = false;
         Game.HasColdImmunity = false;
         Game.InfravisionRange = Game.Race.Infravision; // done
-        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value + Game.BaseCharacterClass.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value; // done
-        Game.SkillUseDevice = Game.Race.UseDevice + Game.BaseCharacterClass.UseDevice; // done
-        Game.SkillSavingThrow = Game.Race.SavingThrow + Game.BaseCharacterClass.SavingThrow; // done
-        Game.SkillStealth = Game.Race.Stealth + Game.BaseCharacterClass.Stealth; // done .. need to copy
-        Game.SkillSearching = Game.Race.Search + Game.BaseCharacterClass.Search; // done .. need to copy
-        Game.SkillSearchFrequency = Game.Race.BaseSearchFrequency + Game.BaseCharacterClass.BaseSearchFrequency; // added to attributes
-        Game.SkillMelee = Game.Race.MeleeToHit + Game.BaseCharacterClass.MeleeToHit; // this appears to be tohit
-        Game.SkillRanged = Game.Race.RangedToHit + Game.BaseCharacterClass.RangedToHit; // added rangedtohit
-        Game.SkillThrowing = Game.Race.RangedToHit + Game.BaseCharacterClass.RangedToHit; // added throwingtohit
+        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value + Game.CharacterClass.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value; // done
+        Game.SkillUseDevice = Game.Race.UseDevice + Game.CharacterClass.UseDevice; // done
+        Game.SkillSavingThrow = Game.Race.SavingThrow + Game.CharacterClass.SavingThrow; // done
+        Game.SkillStealth = Game.Race.Stealth + Game.CharacterClass.Stealth; // done .. need to copy
+        Game.SkillSearching = Game.Race.Search + Game.CharacterClass.Search; // done .. need to copy
+        Game.SkillSearchFrequency = Game.Race.BaseSearchFrequency + Game.CharacterClass.BaseSearchFrequency; // added to attributes
+        Game.SkillMelee = Game.Race.MeleeToHit + Game.CharacterClass.MeleeToHit; // this appears to be tohit
+        Game.SkillRanged = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added rangedtohit
+        Game.SkillThrowing = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added throwingtohit
         Game.SkillDigging = 0;
-        Game.BaseCharacterClass.CalcBonuses();
+        Game.CharacterClass.CalcBonuses();
         Game.Race.CalcBonuses();
         Game.Speed.IntValue = 110;
         Game.MeleeAttacksPerRound = 1;
@@ -134,7 +134,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
             RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Game.Race, ability));
-            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.BaseCharacterClass, ability);
+            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.CharacterClass, ability);
             CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
             ability.Bonus += raceAbility.Bonus + characterClassAbility.Bonus;
         }
@@ -428,7 +428,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
             }
         }
-        if (Game.BaseCharacterClass.IsMartialArtist && !Game.MartialArtistHeavyArmor())
+        if (Game.CharacterClass.IsMartialArtist && !Game.MartialArtistHeavyArmor())
         {
             foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
             {
@@ -535,7 +535,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.Speed.IntValue -= 10;
         }
-        if (Game.BaseCharacterClass.IsMartialArtist && !Game.MartialArtistHeavyArmor())
+        if (Game.CharacterClass.IsMartialArtist && !Game.MartialArtistHeavyArmor())
         {
             Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
         }
@@ -621,7 +621,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
 
                         // Retrieve all of the records that apply.
                         RangedWeaponBonus[] matchingBonuses = table.Where(_rangedWeaponBonus => 
-                            (_rangedWeaponBonus.CharacterClassBindingKey is null || _rangedWeaponBonus.CharacterClassBindingKey == Game.BaseCharacterClass.GetKey) &&
+                            (_rangedWeaponBonus.CharacterClassBindingKey is null || _rangedWeaponBonus.CharacterClassBindingKey == Game.CharacterClass.GetKey) &&
                             (_rangedWeaponBonus.ItemClassBindingKey is null || _rangedWeaponBonus.ItemClassBindingKey ==oPtr.ItemClass.GetKey) &&
                             (_rangedWeaponBonus.ExperienceLevel is null || _rangedWeaponBonus.ExperienceLevel.Value <= Game.ExperienceLevel.IntValue)).ToArray();
 
@@ -653,9 +653,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
                 if (oPtr != null && !hasHeavyWeapon)
                 {
-                    int num = Game.BaseCharacterClass.MaximumMeleeAttacksPerRound(Game.ExperienceLevel.IntValue);
-                    int wgt = Game.BaseCharacterClass.MaximumWeight;
-                    int mul = Game.BaseCharacterClass.AttackSpeedMultiplier;
+                    int num = Game.CharacterClass.MaximumMeleeAttacksPerRound(Game.ExperienceLevel.IntValue);
+                    int wgt = Game.CharacterClass.MaximumWeight;
+                    int mul = Game.CharacterClass.AttackSpeedMultiplier;
                     int div = oPtr.EffectivePropertySet.Weight < wgt ? wgt : oPtr.EffectivePropertySet.Weight;
                     int strIndex = Game.StrengthAbility.StrAttackSpeedComponent * mul / div;
                     if (strIndex > 11)
@@ -673,9 +673,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                         Game.MeleeAttacksPerRound = num;
                     }
                     Game.MeleeAttacksPerRound += extraBlows;
-                    if (Game.BaseCharacterClass.MeleeAttacksPerRoundBonus is not null)
+                    if (Game.CharacterClass.MeleeAttacksPerRoundBonus is not null)
                     {
-                        int meleeAttacksPerRound = Game.ComputeIntegerExpression(Game.BaseCharacterClass.MeleeAttacksPerRoundBonus).Value;
+                        int meleeAttacksPerRound = Game.ComputeIntegerExpression(Game.CharacterClass.MeleeAttacksPerRoundBonus).Value;
                         Game.MeleeAttacksPerRound += meleeAttacksPerRound;
                     }
                     if (Game.MeleeAttacksPerRound < 1)
@@ -730,25 +730,25 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
 
                 MartialArtistArmorAux = false;
-                if (Game.BaseCharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor is not null)
+                if (Game.CharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor is not null)
                 {
-                    int divisor = Game.BaseCharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor.Value;
+                    int divisor = Game.CharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor.Value;
                     attackBonus += Game.ExperienceLevel.IntValue / divisor;
                     damageBonus += Game.ExperienceLevel.IntValue / divisor;
                     displayedAttackBonus += Game.ExperienceLevel.IntValue / divisor;
                     displayedDamageBonus += Game.ExperienceLevel.IntValue / divisor;
                 }
                 
-                if (Game.BaseCharacterClass.AttackAndDamageBonusForUnpriestlyWeapon is not null && !Game.HasBlessedBlade && oPtr != null && (oPtr.ItemClass==Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) || oPtr.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass))))
+                if (Game.CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon is not null && !Game.HasBlessedBlade && oPtr != null && (oPtr.ItemClass==Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) || oPtr.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass))))
                 {
-                    attackBonus += Game.BaseCharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
-                    damageBonus += Game.BaseCharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
-                    displayedAttackBonus += Game.BaseCharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
-                    displayedDamageBonus += Game.BaseCharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    attackBonus += Game.CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    damageBonus += Game.CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    displayedAttackBonus += Game.CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    displayedDamageBonus += Game.CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
                     hasUnpriestlyWeapon = true;
                 }
 
-                Bonuses? characterClassMeleeWeaponBonuses = Game.BaseCharacterClass.GetBonusesForMeleeWeapon(oPtr);
+                Bonuses? characterClassMeleeWeaponBonuses = Game.CharacterClass.GetBonusesForMeleeWeapon(oPtr);
                 if (characterClassMeleeWeaponBonuses is not null)
                 {
                     bonusesToMerge.Add(characterClassMeleeWeaponBonuses);
@@ -767,15 +767,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillUseDevice += Game.IntelligenceAbility.IntUseDeviceBonus;
         Game.SkillSavingThrow += Game.WisdomAbility.WisSavingThrowBonus;
         Game.SkillDigging += Game.StrengthAbility.StrDiggingBonus;
-        Game.ComputedDisarmTraps += (Game.BaseCharacterClass.DisarmBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
-        Game.SkillUseDevice += (Game.BaseCharacterClass.DeviceBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
-        Game.SkillSavingThrow += (Game.BaseCharacterClass.SaveBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
-        Game.SkillStealth += (Game.BaseCharacterClass.StealthBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
-        Game.SkillSearching += (Game.BaseCharacterClass.SearchBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
-        Game.SkillSearchFrequency += (Game.BaseCharacterClass.SearchFrequencyPerLevel * Game.ExperienceLevel.IntValue) / 10;
-        Game.SkillMelee += (Game.BaseCharacterClass.MeleeAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
-        Game.SkillRanged += (Game.BaseCharacterClass.RangedAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
-        Game.SkillThrowing += (Game.BaseCharacterClass.RangedAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.ComputedDisarmTraps += (Game.CharacterClass.DisarmBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillUseDevice += (Game.CharacterClass.DeviceBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillSavingThrow += (Game.CharacterClass.SaveBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillStealth += (Game.CharacterClass.StealthBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillSearching += (Game.CharacterClass.SearchBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillSearchFrequency += (Game.CharacterClass.SearchFrequencyPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillMelee += (Game.CharacterClass.MeleeAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillRanged += (Game.CharacterClass.RangedAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
+        Game.SkillThrowing += (Game.CharacterClass.RangedAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         if (Game.SkillStealth > 30)
         {
             Game.SkillStealth = 30;
@@ -858,7 +858,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             if (newBonuses.HasUnpriestlyWeapon)
             {
-                Game.MsgPrint(Game.BaseCharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Your weapon restricts the flow of chaos through you." : "You do not feel comfortable with your weapon.");
+                Game.MsgPrint(Game.CharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Your weapon restricts the flow of chaos through you." : "You do not feel comfortable with your weapon.");
             }
             else if (Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon) != null)
             {
@@ -866,10 +866,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             }
             else
             {
-                Game.MsgPrint(Game.BaseCharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Chaos flows freely through you again." : "You feel more comfortable after removing your weapon.");
+                Game.MsgPrint(Game.CharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Chaos flows freely through you again." : "You feel more comfortable after removing your weapon.");
             }
         }
-        if (Game.BaseCharacterClass.IsMartialArtist && MartialArtistArmorAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
+        if (Game.CharacterClass.IsMartialArtist && MartialArtistArmorAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
         {
             Game.MsgPrint(Game.MartialArtistHeavyArmor() ? "The weight of your armor disrupts your balance." : "You regain your balance.");
             MartialArtistNotifyAux = MartialArtistArmorAux;

@@ -1653,7 +1653,7 @@ internal sealed class Item : IComparable<Item>
         // Query for the applicable item enhancement.
         MappedItemEnhancement? mappedItemEnhancement = allMappedItemEnhancements
             .SingleOrDefault(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(fixedArtifact.GetKey)) && // Must match the fixed artifact
-                                                       (_mappedItemEnhancement.CharacterClassBindingKeys is not null && _mappedItemEnhancement.CharacterClassBindingKeys.Contains(Game.BaseCharacterClass.GetKey))); // Must match the character class
+                                                       (_mappedItemEnhancement.CharacterClassBindingKeys is not null && _mappedItemEnhancement.CharacterClassBindingKeys.Contains(Game.CharacterClass.GetKey))); // Must match the character class
 
         if (mappedItemEnhancement is null)
         {
@@ -1664,11 +1664,11 @@ internal sealed class Item : IComparable<Item>
 
             MappedItemEnhancement? bMappedItemEnhancement = allMappedItemEnhancements
                 .SingleOrDefault(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is null) && // Wilcard match for the fixed artifact
-                                                           (_mappedItemEnhancement.CharacterClassBindingKeys is not null && _mappedItemEnhancement.CharacterClassBindingKeys.Contains(Game.BaseCharacterClass.GetKey))); // Must match the character class
+                                                           (_mappedItemEnhancement.CharacterClassBindingKeys is not null && _mappedItemEnhancement.CharacterClassBindingKeys.Contains(Game.CharacterClass.GetKey))); // Must match the character class
 
             if (aMappedItemEnhancement is not null && bMappedItemEnhancement is not null)
             {
-                throw new Exception($"Ambigious mapped item enhancement for fixed artifact {fixedArtifact.GetKey} and character class {Game.BaseCharacterClass.GetKey}.");
+                throw new Exception($"Ambigious mapped item enhancement for fixed artifact {fixedArtifact.GetKey} and character class {Game.CharacterClass.GetKey}.");
             }
             else if (aMappedItemEnhancement is not null)
             {
@@ -1925,22 +1925,6 @@ internal sealed class Item : IComparable<Item>
             return max;
         }
         return value;
-    }
-
-    /// <summary>
-    /// Returns a random number similar to a dice roll diceDsides but this mass roll uses 
-    /// </summary>
-    /// <param name="num"></param>
-    /// <param name="max"></param>
-    /// <returns></returns>
-    public int MassRoll(int num, int max)
-    {
-        int t = 0;
-        for (int i = 0; i < num; i++)
-        {
-            t += Game.RandomLessThan(max);
-        }
-        return t;
     }
     #endregion
 

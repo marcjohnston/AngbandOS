@@ -52,7 +52,7 @@ internal class IntroductionBirthStage : BirthStage
         Game.PlayerName.StringValue = Game._prevName;
         Game.Gender = Game._prevSex;
         Game.Race = Game._prevRace;
-        Game.BaseCharacterClass = Game._prevCharacterClass;
+        Game.CharacterClass = Game._prevCharacterClass;
         Game.PrimaryRealm = Game._prevPrimaryRealm;
         Game.SecondaryRealm = Game._prevSecondaryRealm;
 
@@ -89,23 +89,23 @@ internal class IntroductionBirthStage : BirthStage
         Game.God = null;
         if (index == 1) // Random
         {
-            Game.BaseCharacterClass = Game.SingletonRepository.ToWeightedRandom<CharacterClass>().ChooseOrDefault();
+            Game.CharacterClass = Game.SingletonRepository.ToWeightedRandom<CharacterClass>().ChooseOrDefault();
             do
             {
                 int raceIndex = Game.RandomLessThan(Game.SingletonRepository.Count<Race>());
                 Game.Race = Game.SingletonRepository.Get<Race>(raceIndex);
                 Game.GetFirstLevelMutation = Game.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
             }
-            while ((Game.Race.Choice & (1L << Game.BaseCharacterClass.ID)) == 0);
+            while ((Game.Race.Choice & (1L << Game.CharacterClass.ID)) == 0);
 
             // Use a weighted random to choose a the realms.
-            Game.PrimaryRealm = new WeightedRandom<Realm>(Game, Game.BaseCharacterClass.AvailablePrimaryRealms).ChooseOrDefault();
+            Game.PrimaryRealm = new WeightedRandom<Realm>(Game, Game.CharacterClass.AvailablePrimaryRealms).ChooseOrDefault();
 
             // We need to get the available secondary realms.  Note that we need to exclude the primary realm.
-            Game.SecondaryRealm = new WeightedRandom<Realm>(Game, Game.BaseCharacterClass.RemainingAvailableSecondaryRealms()).ChooseOrDefault();
-            if (Game.BaseCharacterClass.WorshipsADeity)
+            Game.SecondaryRealm = new WeightedRandom<Realm>(Game, Game.CharacterClass.RemainingAvailableSecondaryRealms()).ChooseOrDefault();
+            if (Game.CharacterClass.WorshipsADeity)
             {
-                Game.God = Game.BaseCharacterClass.DefaultDeity(Game.SecondaryRealm);
+                Game.God = Game.CharacterClass.DefaultDeity(Game.SecondaryRealm);
             }
 
             Gender[] availableRandomGenders = Game.SingletonRepository.Get<Gender>().Where(_gender => _gender.CanBeRandomlySelected).ToArray();
@@ -117,12 +117,12 @@ internal class IntroductionBirthStage : BirthStage
         }
         else if (index == 2) // Previous
         {
-            Game.BaseCharacterClass = Game._prevCharacterClass;
+            Game.CharacterClass = Game._prevCharacterClass;
             Game.Race = Game._prevRace;
             Game.GetFirstLevelMutation = Game.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
             Game.PrimaryRealm = Game._prevPrimaryRealm;
             Game.SecondaryRealm = Game._prevSecondaryRealm;
-            Game.God = Game.BaseCharacterClass.DefaultDeity(Game.SecondaryRealm);
+            Game.God = Game.CharacterClass.DefaultDeity(Game.SecondaryRealm);
             Game.Gender = Game._prevSex;
             Game.PlayerName.StringValue = Game._prevName;
             Game.Generation = Game._prevGeneration + 1;
@@ -133,7 +133,7 @@ internal class IntroductionBirthStage : BirthStage
             Game.PlayerName.StringValue = "";
             Game.Generation = 1;
             Game.Gender = null; // Wait until the player has selected the gender.
-            Game.BaseCharacterClass = null; // Wait until the player has selected the character class.
+            Game.CharacterClass = null; // Wait until the player has selected the character class.
             Game.Race = null; // Wait until the player has selected the race.
             Game.PrimaryRealm = null; // Wait until the player has selected a primary realm.
             Game.SecondaryRealm = null; // Wait until the player has selected secondary realm.

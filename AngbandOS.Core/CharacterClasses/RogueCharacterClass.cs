@@ -68,18 +68,4 @@ internal class RogueCharacterClass : CharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
         Game.SingletonRepository.Get<Realm>(nameof(FolkRealm))
     };
-
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(DaggerWeaponItemFactory),
-        nameof(SoftLeatherSoftArmorItemFactory)
-    };
-
-    protected override void OutfitItem(Item item)
-    {
-        if (item.ItemClass == Game.SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) && Game.Studies(nameof(DeathRealm)))
-        {
-            item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfPoisoningItemEnhancement)));
-        }
-    }
 }

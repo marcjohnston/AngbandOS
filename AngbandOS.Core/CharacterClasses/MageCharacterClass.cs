@@ -83,9 +83,4 @@ internal class MageCharacterClass : CharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
     };
     public override bool WorshipsADeity => true;
-
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(DaggerWeaponItemFactory),
-    };
 }

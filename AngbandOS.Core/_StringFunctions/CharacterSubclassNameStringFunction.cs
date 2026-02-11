@@ -10,5 +10,5 @@ namespace AngbandOS.Core.Functions;
 internal class CharacterSubclassNameStringFunction : StringFunction
 {
     private CharacterSubclassNameStringFunction(Game game) : base(game) { } // This object is a singleton.
-    public override string StringValue => Game.BaseCharacterClass.ClassSubName(Game.PrimaryRealm);
+    public override string StringValue => Game.CharacterClass.ClassSubName(Game.PrimaryRealm);
 }

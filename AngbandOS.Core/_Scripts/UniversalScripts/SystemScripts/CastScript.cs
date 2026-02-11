@@ -28,13 +28,13 @@ internal class CastScript : UniversalScript, IGetKey
     {
         if (Game.HasAntiMagic)
         {
-            string whichMagicType = Game.BaseCharacterClass.MagicType;
+            string whichMagicType = Game.CharacterClass.MagicType;
             Game.MsgPrint($"An anti-magic shell disrupts your {whichMagicType}!");
             Game.EnergyUse = 5;
         }
         else
         {
-            Game.BaseCharacterClass.Cast();
+            Game.CharacterClass.Cast();
         }
     }
 }

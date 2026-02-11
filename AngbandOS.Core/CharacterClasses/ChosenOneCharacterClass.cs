@@ -67,13 +67,6 @@ internal class ChosenOneCharacterClass : CharacterClass
     public override bool DetailedSenseInventory => true;
     public override bool OutfitsWithScrollsOfLight => true;
 
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(SmallSwordWeaponItemFactory),
-        nameof(HealingPotionItemFactory),
-        nameof(SoftLeatherSoftArmorItemFactory)
-    };
-
     public override void CalcBonuses()
     {
         Game.GlowInTheDarkRadius = 1;

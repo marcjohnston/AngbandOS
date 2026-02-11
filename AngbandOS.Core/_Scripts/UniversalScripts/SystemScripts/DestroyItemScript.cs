@@ -94,10 +94,10 @@ internal class DestroyItemScript : UniversalScript, IGetKey
         }
         Game.MsgPrint($"You destroy {itemName}.");
 
-        if (Game.BaseCharacterClass.ItemActions != null)
+        if (Game.CharacterClass.ItemActions != null)
         {
             // Test each of the item filters.
-            foreach (ItemAction itemAction in Game.BaseCharacterClass.ItemActions)
+            foreach (ItemAction itemAction in Game.CharacterClass.ItemActions)
             {
                 // Loop through all of the associated item filters.
                 foreach (ItemFilter itemFilter in itemAction.ItemFilters)

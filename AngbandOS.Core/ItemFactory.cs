@@ -901,7 +901,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             if (item.IdentityIsStoreBought)
             {
                 // The item was bought from the store or if we need to suppress flavors because we are in a store.
-                descriptionSyntax = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateFlavorSuppressedDescriptionSyntax : _flavorSuppressedDescriptionSyntax;
+                descriptionSyntax = Game.CharacterClass.UseAlternateItemNames ? _alternateFlavorSuppressedDescriptionSyntax : _flavorSuppressedDescriptionSyntax;
 
                 // This syntax is allowed to use the Name macro but not the Flavor macro.
                 descriptionSyntax = descriptionSyntax.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
@@ -909,7 +909,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             else if (!IsFlavorAware)
             {
                 // The flavor for this item is still unknown.
-                descriptionSyntax = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateFlavorUnknownDescriptionSyntax : _flavorUnknownDescriptionSyntax;
+                descriptionSyntax = Game.CharacterClass.UseAlternateItemNames ? _alternateFlavorUnknownDescriptionSyntax : _flavorUnknownDescriptionSyntax;
 
                 // This syntax is allowed to use the flavor macro.
                 descriptionSyntax = descriptionSyntax.Replace("$Flavor$", Flavor.Name, StringComparison.OrdinalIgnoreCase);
@@ -917,7 +917,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             else
             {
                 // This item has a known flavor.
-                descriptionSyntax = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateDescriptionSyntax : _descriptionSyntax;
+                descriptionSyntax = Game.CharacterClass.UseAlternateItemNames ? _alternateDescriptionSyntax : _descriptionSyntax;
 
                 // This syntax is allowed to use the name and flavor macros.
                 descriptionSyntax = descriptionSyntax.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
@@ -927,7 +927,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         else
         {
             // This item is flavorless.
-            descriptionSyntax = Game.BaseCharacterClass.UseAlternateItemNames ? _alternateDescriptionSyntax : _descriptionSyntax;
+            descriptionSyntax = Game.CharacterClass.UseAlternateItemNames ? _alternateDescriptionSyntax : _descriptionSyntax;
 
             // This syntax is allowed to use the name macro.
             descriptionSyntax = descriptionSyntax.Replace("$Name$", Name, StringComparison.OrdinalIgnoreCase);
@@ -1203,9 +1203,9 @@ internal sealed class ItemFactory : IGetKey, IToJson
             {
                 characteristics.NoTele = true;
             }
-            if (Game.BaseCharacterClass.NonMagicRandomArtifact1InChance > 0)
+            if (Game.CharacterClass.NonMagicRandomArtifact1InChance > 0)
             {
-                if (Game.DieRoll(Game.BaseCharacterClass.NonMagicRandomArtifact1InChance) == 1)
+                if (Game.DieRoll(Game.CharacterClass.NonMagicRandomArtifact1InChance) == 1)
                 {
                     characteristics.NoMagic = true;
                 }
@@ -1422,8 +1422,8 @@ internal sealed class ItemFactory : IGetKey, IToJson
         int warriorArtifactBias = 0;
         if (fromScroll && Game.DieRoll(4) == 1)
         {
-            characteristics.ArtifactBias = Game.BaseCharacterClass.ArtifactBias;
-            warriorArtifactBias = Game.BaseCharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
+            characteristics.ArtifactBias = Game.CharacterClass.ArtifactBias;
+            warriorArtifactBias = Game.CharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
         }
         if (Game.DieRoll(100) <= warriorArtifactBias && fromScroll)
         {

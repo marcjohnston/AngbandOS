@@ -53,11 +53,4 @@ internal class ChannelerCharacterClass : CharacterClass
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
-
-    protected override string[] OutfitItemFactoryNames => new string[]
-    {
-        nameof(MagicMissileWandItemFactory),
-        nameof(DaggerWeaponItemFactory),
-        nameof(SustainCharismaRingItemFactory)
-   };
 }

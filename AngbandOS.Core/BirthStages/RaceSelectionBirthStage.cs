@@ -67,7 +67,7 @@ internal class RaceSelectionBirthStage : BirthStage
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
             RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(race, ability));
-            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.BaseCharacterClass, ability);
+            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.CharacterClass, ability);
             CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
             int bonus = raceAbility.Bonus + characterClassAbility.Bonus;
             Game.DisplayStatBonus(26, 36 + i, bonus);
@@ -84,14 +84,14 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "Infravision :", 38, 31);
         Game.Screen.Print(ColorEnum.Purple, "Searching   :", 39, 31);
         Game.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
-        Game.DisplayAPlusB(67, 36, Game.BaseCharacterClass.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value + race.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value, Game.BaseCharacterClass.DisarmBonusPerLevel);
-        Game.DisplayAPlusB(67, 37, Game.BaseCharacterClass.UseDevice + race.UseDevice, Game.BaseCharacterClass.DeviceBonusPerLevel);
-        Game.DisplayAPlusB(67, 38, Game.BaseCharacterClass.SavingThrow + race.SavingThrow, Game.BaseCharacterClass.SaveBonusPerLevel);
-        Game.DisplayAPlusB(67, 39, (Game.BaseCharacterClass.Stealth * 4) + (race.Stealth * 4), Game.BaseCharacterClass.StealthBonusPerLevel * 4);
-        Game.DisplayAPlusB(67, 40, Game.BaseCharacterClass.MeleeToHit + race.MeleeToHit, Game.BaseCharacterClass.MeleeAttackBonusPerLevel);
-        Game.DisplayAPlusB(67, 41, Game.BaseCharacterClass.RangedToHit + race.RangedToHit, Game.BaseCharacterClass.RangedAttackBonusPerLevel);
-        Game.Screen.Print(ColorEnum.Black, race.ExperienceFactor + Game.BaseCharacterClass.ExperienceFactor + "%", 36, 45);
-        Game.Screen.Print(ColorEnum.Black, "1d" + (race.HitDieBonus + Game.BaseCharacterClass.HitDieBonus), 37, 45);
+        Game.DisplayAPlusB(67, 36, Game.CharacterClass.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value + race.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value, Game.CharacterClass.DisarmBonusPerLevel);
+        Game.DisplayAPlusB(67, 37, Game.CharacterClass.UseDevice + race.UseDevice, Game.CharacterClass.DeviceBonusPerLevel);
+        Game.DisplayAPlusB(67, 38, Game.CharacterClass.SavingThrow + race.SavingThrow, Game.CharacterClass.SaveBonusPerLevel);
+        Game.DisplayAPlusB(67, 39, (Game.CharacterClass.Stealth * 4) + (race.Stealth * 4), Game.CharacterClass.StealthBonusPerLevel * 4);
+        Game.DisplayAPlusB(67, 40, Game.CharacterClass.MeleeToHit + race.MeleeToHit, Game.CharacterClass.MeleeAttackBonusPerLevel);
+        Game.DisplayAPlusB(67, 41, Game.CharacterClass.RangedToHit + race.RangedToHit, Game.CharacterClass.RangedAttackBonusPerLevel);
+        Game.Screen.Print(ColorEnum.Black, race.ExperienceFactor + Game.CharacterClass.ExperienceFactor + "%", 36, 45);
+        Game.Screen.Print(ColorEnum.Black, "1d" + (race.HitDieBonus + Game.CharacterClass.HitDieBonus), 37, 45);
         int bonusInfravision = race.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.Infravision).Value;
         if (bonusInfravision == 0)
         {
@@ -101,8 +101,8 @@ internal class RaceSelectionBirthStage : BirthStage
         {
             Game.Screen.Print(ColorEnum.Green, bonusInfravision + "0 feet", 38, 45); // TODO: This assumes a 10 foot per unit of infravision conversion that should be configurable.
         }
-        Game.Screen.Print(ColorEnum.Black, $"{race.Search + Game.BaseCharacterClass.Search:00}%", 39, 45);
-        Game.Screen.Print(ColorEnum.Black, $"{race.BaseSearchFrequency + Game.BaseCharacterClass.BaseSearchFrequency:00}%", 40, 45);
+        Game.Screen.Print(ColorEnum.Black, $"{race.Search + Game.CharacterClass.Search:00}%", 39, 45);
+        Game.Screen.Print(ColorEnum.Black, $"{race.BaseSearchFrequency + Game.CharacterClass.BaseSearchFrequency:00}%", 40, 45);
 
         // Retrieve the description for the race and split the description into lines.
         string[] description = race.Description.Split("\n");
@@ -124,8 +124,8 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.GetFirstLevelMutation = Game.Race.AutomaticallyGainsFirstLevelMutationAtBirth;
 
         // Check to see how many realms the player can study.
-        int availablePrimaryRealmCount = Game.BaseCharacterClass.AvailablePrimaryRealms.Length;
-        Realm[] remainingAvailableSecondaryRealms = Game.BaseCharacterClass.RemainingAvailableSecondaryRealms();
+        int availablePrimaryRealmCount = Game.CharacterClass.AvailablePrimaryRealms.Length;
+        Realm[] remainingAvailableSecondaryRealms = Game.CharacterClass.RemainingAvailableSecondaryRealms();
         int remainingAvailableSecondaryRealmCount = remainingAvailableSecondaryRealms.Length;
         if (availablePrimaryRealmCount == 0)
         {
@@ -137,7 +137,7 @@ internal class RaceSelectionBirthStage : BirthStage
         else if (availablePrimaryRealmCount == 1)
         {
             // There is only one realm, auto select it.
-            Game.PrimaryRealm = Game.BaseCharacterClass.AvailablePrimaryRealms[0];
+            Game.PrimaryRealm = Game.CharacterClass.AvailablePrimaryRealms[0];
 
             // Check the secondary realm selection.
             if (remainingAvailableSecondaryRealmCount == 0)
