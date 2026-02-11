@@ -380,7 +380,7 @@ internal sealed class Item : IComparable<Item>
     }
 
     /// <summary>
-    /// Attempts to wield the item in the first available wield slot and return true, if successful; false, otherwise.
+    /// Attempts to wield the item in the first available wield slot and return true, if successful; false, otherwise.  If there is more than one item in the stack, only one is removed from the stack and wielded.
     /// </summary>
     /// <returns></returns>
     public bool Wield()
