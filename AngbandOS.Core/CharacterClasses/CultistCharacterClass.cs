@@ -9,7 +9,7 @@ using AngbandOS.GamePacks.Cthangband;
 namespace AngbandOS.Core.CharacterClasses;
 
 [Serializable]
-internal class CultistCharacterClass : BaseCharacterClass
+internal class CultistCharacterClass : CharacterClass
 {
     private CultistCharacterClass(Game savedGame) : base(savedGame) { }
     protected override string EnhancementBindingKey => nameof(CultistCharacterClassItemEnhancement);

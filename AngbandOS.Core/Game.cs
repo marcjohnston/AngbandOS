@@ -1071,7 +1071,7 @@ internal class Game
     /// <summary>
     /// Represents the character class of the player.  Will be null prior to the character class birth selection.
     /// </summary>
-    public BaseCharacterClass BaseCharacterClass;
+    public CharacterClass BaseCharacterClass;
 
     /// <summary>
     /// Returns the current race of the character.  Will be null before the player is birthed.
@@ -2575,7 +2575,7 @@ internal class Game
         {
             _prevSex = SingletonRepository.Get<Gender>(nameof(FemaleGender));
             _prevRace = SingletonRepository.Get<Race>(nameof(HumanRace));
-            _prevCharacterClass = SingletonRepository.Get<BaseCharacterClass>(nameof(WarriorCharacterClass));
+            _prevCharacterClass = SingletonRepository.Get<CharacterClass>(nameof(WarriorCharacterClass));
             _prevPrimaryRealm = null;
             _prevSecondaryRealm = null;
             _prevName = "Xena";
@@ -2585,7 +2585,7 @@ internal class Game
         {
             _prevSex = ExPlayer.Gender;
             _prevRace = ExPlayer.RaceAtBirth;
-            _prevCharacterClass = SingletonRepository.Get<BaseCharacterClass>(ExPlayer.CharacterClassName);
+            _prevCharacterClass = SingletonRepository.Get<CharacterClass>(ExPlayer.CharacterClassName);
             _prevPrimaryRealm = ExPlayer.PrimaryRealm;
             _prevSecondaryRealm = ExPlayer.SecondaryRealm;
             _prevName = ExPlayer.Name;
@@ -2597,7 +2597,7 @@ internal class Game
         {
             race.Refresh();
         }
-        foreach (BaseCharacterClass characterClass in SingletonRepository.Get<BaseCharacterClass>())
+        foreach (CharacterClass characterClass in SingletonRepository.Get<CharacterClass>())
         {
             characterClass.Refresh();
         }
@@ -9335,7 +9335,7 @@ internal class Game
     /// <summary>
     /// Represents the previous character class.
     /// </summary>
-    public BaseCharacterClass _prevCharacterClass;
+    public CharacterClass _prevCharacterClass;
 
     public int _prevGeneration;
     public string _prevName;

@@ -1962,7 +1962,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// <summary>
     /// Returns an alternate coded name for some character classes for known items; null, if there is no altername name; in which the <see cref="DescriptionSyntax"/> property will
     /// be used.  Returns null, by default.  Spellbooks have a alternate names.  Druid, Fanatic, Monk, Priest and Ranger character classes use alternate names.  Character
-    /// classes will use alternate naming conventions when <see cref="BaseCharacterClass.UseAlternateItemNames"/> property returns true.
+    /// classes will use alternate naming conventions when <see cref="CharacterClass.UseAlternateItemNames"/> property returns true.
     /// </summary>
     private string? AlternateDescriptionSyntax { get; } = null; // TODO: This coded divine name has hard-coded realm names when realm is set at run-time.
 

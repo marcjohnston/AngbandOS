@@ -7,10 +7,10 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class BaseCharacterClass : IGetKey
+internal abstract class CharacterClass : IGetKey
 {
     protected readonly Game Game;
-    protected BaseCharacterClass(Game game)
+    protected CharacterClass(Game game)
     {
         Game = game;
     }
@@ -52,13 +52,13 @@ internal abstract class BaseCharacterClass : IGetKey
     public virtual int FriendsUpkeepDivider => 20;
 
     /// <summary>
-    /// Returns the names of the <see cref="ItemAction"/> objects that are associated with this <see cref="BaseCharacterClass"/> or null, if this <see cref="BaseCharacterClass"/> doesn't have any
+    /// Returns the names of the <see cref="ItemAction"/> objects that are associated with this <see cref="CharacterClass"/> or null, if this <see cref="CharacterClass"/> doesn't have any
     /// special item action handling.  This property is used to bind the <see cref="ItemActions"/> property using the bind phase.
     /// </summary>
     protected virtual string[]? ItemActionNames => null;
 
     /// <summary>
-    /// Returns the <see cref="ItemAction"/> objects that are associated with this <see cref="BaseCharacterClass"/> or null, if this <see cref="BaseCharacterClass"/> doesn't have any
+    /// Returns the <see cref="ItemAction"/> objects that are associated with this <see cref="CharacterClass"/> or null, if this <see cref="CharacterClass"/> doesn't have any
     /// special item action handling.  This property is bound using the <see cref="ItemActionNames"/> property during the bind phase.
     /// </summary>
     public ItemAction[]? ItemActions { get; private set; } = null;

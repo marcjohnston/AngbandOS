@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.CharacterClasses;
 
 [Serializable]
-internal class DruidCharacterClass : BaseCharacterClass
+internal class DruidCharacterClass : CharacterClass
 {
     private DruidCharacterClass(Game savedGame) : base(savedGame) { }
     protected override string EnhancementBindingKey => nameof(DruidCharacterClassItemEnhancement);

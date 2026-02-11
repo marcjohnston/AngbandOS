@@ -46,7 +46,7 @@ internal sealed class CharacterClassSpell : IGetKey, IToJson
     public int BaseFailure { get; }
     public int FirstCastExperience { get; }
 
-    public static string GetCompositeKey(BaseCharacterClass t1, Spell t2) => Game.GetCompositeKey(t1.GetKey, t2.GetKey);
+    public static string GetCompositeKey(CharacterClass t1, Spell t2) => Game.GetCompositeKey(t1.GetKey, t2.GetKey);
     /// <summary>
     /// Returns the a composite key created from the character class name and spell name with a period between them.
     /// </summary>

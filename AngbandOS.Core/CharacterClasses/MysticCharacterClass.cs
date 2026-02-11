@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.CharacterClasses;
 
 [Serializable]
-internal class MysticCharacterClass : BaseCharacterClass
+internal class MysticCharacterClass : CharacterClass
 {
     private MysticCharacterClass(Game savedGame) : base(savedGame) { }
     protected override string EnhancementBindingKey => nameof(MysticCharacterClassItemEnhancement);

@@ -277,7 +277,7 @@ internal class SingletonRepository
         RegisterInterface<ArtifactBias>();
         RegisterInterface<AttackEffect>();
         RegisterInterface<Attribute>();
-        RegisterInterface<BaseCharacterClass>();
+        RegisterInterface<CharacterClass>();
         RegisterInterface<BirthStage>();
         RegisterInterface<FixedArtifact>();
         RegisterInterface<FlaggedAction>();

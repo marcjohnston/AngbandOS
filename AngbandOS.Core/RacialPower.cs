@@ -17,12 +17,12 @@ internal sealed class RacialPower : IGetKey, IScript, IToJson
         RaceBindingKey = racialPowerGameConfiguration.RaceBindingKey;
         CharacterClassBindingKey = racialPowerGameConfiguration.CharacterClassBindingKey;
     }
-    public static string GetCompositeKey(Race race, BaseCharacterClass? characterClass) => Game.GetCompositeKey(race.GetKey, characterClass?.GetKey, nameof(RacialPower));
+    public static string GetCompositeKey(Race race, CharacterClass? characterClass) => Game.GetCompositeKey(race.GetKey, characterClass?.GetKey, nameof(RacialPower));
     public IScript Script { get; private set; }
     private string ScriptBindingKey { get; }
     public Race Race { get; private set; }
     private string RaceBindingKey { get; }
-    public BaseCharacterClass? CharacterClass { get; private set; }
+    public CharacterClass? CharacterClass { get; private set; }
     private string? CharacterClassBindingKey { get; } = null;
 
     public string GetKey => Game.GetCompositeKey(RaceBindingKey, CharacterClassBindingKey, nameof(RacialPower));
@@ -31,7 +31,7 @@ internal sealed class RacialPower : IGetKey, IScript, IToJson
     {
         Script = Game.SingletonRepository.Get<IScript>(ScriptBindingKey);
         Race = Game.SingletonRepository.Get<Race>(RaceBindingKey);
-        CharacterClass = Game.SingletonRepository.GetNullable<BaseCharacterClass>(CharacterClassBindingKey);
+        CharacterClass = Game.SingletonRepository.GetNullable<CharacterClass>(CharacterClassBindingKey);
     }
 
     public string ToJson()

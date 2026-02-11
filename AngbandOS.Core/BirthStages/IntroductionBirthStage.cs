@@ -89,7 +89,7 @@ internal class IntroductionBirthStage : BirthStage
         Game.God = null;
         if (index == 1) // Random
         {
-            Game.BaseCharacterClass = Game.SingletonRepository.ToWeightedRandom<BaseCharacterClass>().ChooseOrDefault();
+            Game.BaseCharacterClass = Game.SingletonRepository.ToWeightedRandom<CharacterClass>().ChooseOrDefault();
             do
             {
                 int raceIndex = Game.RandomLessThan(Game.SingletonRepository.Count<Race>());

@@ -23,7 +23,7 @@ internal sealed class MappedSpellScript : IGetKey, IToJson
     {
         Spell = Game.SingletonRepository.GetNullable<Spell>(SpellBindingKey);
         Realm = Game.SingletonRepository.GetNullable<Realm>(RealmBindingKey);
-        CharacterClass = Game.SingletonRepository.GetNullable<BaseCharacterClass>(CharacterClassBindingKey);
+        CharacterClass = Game.SingletonRepository.GetNullable<CharacterClass>(CharacterClassBindingKey);
         CastSpellScripts = Game.SingletonRepository.GetNullable<ICastSpellScript>(CastSpellScriptBindingKeys);
     }
     public string ToJson()
@@ -43,7 +43,7 @@ internal sealed class MappedSpellScript : IGetKey, IToJson
 
     public int? MinimumExperienceLevel { get; }
     public Realm? Realm { get; private set; }
-    public BaseCharacterClass? CharacterClass { get; private set; }
+    public CharacterClass? CharacterClass { get; private set; }
     public Spell? Spell { get; private set; }
     public ICastSpellScript[]? CastSpellScripts { get; set; }
 

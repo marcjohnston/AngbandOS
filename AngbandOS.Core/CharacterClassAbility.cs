@@ -13,16 +13,16 @@ internal sealed class CharacterClassAbility : IGetKey, IToJson
    }
     public int Bonus { get; } = 0;
 
-    public BaseCharacterClass CharacterClass { get; private set; }
+    public CharacterClass CharacterClass { get; private set; }
     public Ability Ability { get; private set; }
     public string CharacterClassBindingKey { get; }
     public string AbilityBindingKey { get; }
     public string GetKey => $"{CharacterClassBindingKey}-{AbilityBindingKey}";
 
-    public static string GetCompositeKey(BaseCharacterClass characterClass, Ability ability) => $"{characterClass.Key}-{ability.Key}";
+    public static string GetCompositeKey(CharacterClass characterClass, Ability ability) => $"{characterClass.Key}-{ability.Key}";
     public void Bind()
     {
-        CharacterClass = Game.SingletonRepository.Get<BaseCharacterClass>(CharacterClassBindingKey);
+        CharacterClass = Game.SingletonRepository.Get<CharacterClass>(CharacterClassBindingKey);
         Ability = Game.SingletonRepository.Get<Ability>(AbilityBindingKey);
     }
 

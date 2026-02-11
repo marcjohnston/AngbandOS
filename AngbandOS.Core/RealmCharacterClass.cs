@@ -39,15 +39,15 @@ internal sealed class RealmCharacterClass : IGetKey, IToJson
 
     public void Bind()
     {
-        CharacterClass = Game.SingletonRepository.Get<BaseCharacterClass>(CharacterClassBindingKey);
+        CharacterClass = Game.SingletonRepository.Get<CharacterClass>(CharacterClassBindingKey);
         Realm = Game.SingletonRepository.Get<Realm>(RealmBindingKey);
         Deity = Game.SingletonRepository.GetNullable<God>(DeityBindingKey);
     }
 
-    public static string GetCompositeKey(Realm t1, BaseCharacterClass t2) => $"{t1.GetKey}-{t2.GetKey}";
+    public static string GetCompositeKey(Realm t1, CharacterClass t2) => $"{t1.GetKey}-{t2.GetKey}";
     public God? Deity { get; private set; }
 
-    public BaseCharacterClass CharacterClass { get; private set; }
+    public CharacterClass CharacterClass { get; private set; }
     public Realm Realm { get; private set; }
     private string CharacterClassBindingKey { get; }
     private string RealmBindingKey { get; }

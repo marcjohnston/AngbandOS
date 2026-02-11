@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.CharacterClasses;
 
 [Serializable]
-internal class PaladinCharacterClass : BaseCharacterClass
+internal class PaladinCharacterClass : CharacterClass
 {
     private PaladinCharacterClass(Game savedGame) : base(savedGame) { }
     protected override string EnhancementBindingKey => nameof(PaladinCharacterClassItemEnhancement);
