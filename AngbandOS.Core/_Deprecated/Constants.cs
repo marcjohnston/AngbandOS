@@ -13,7 +13,6 @@ internal static class Constants
     public const int EnchToac = 0x04;
     public const int EnchTodam = 0x02;
     public const int EnchTohit = 0x01;
-    public const int FollowDistance = 4;
     public const int FuelLamp = 15000;
     public const int FuelTorch = 5000;
     public const int GreatObj = 20; // This is a 1-in-chance of getting great gold or a great object.

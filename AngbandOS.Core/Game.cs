@@ -11,11 +11,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Game
 {
-    public const string FactoryAttributeKey = "factory";
-    public const string RandomAttributeKey = "random";
-    public const string RareAttributeKey = "rare";
-    public const string FixedAttributeKey = "fixed";
-
     public string Find(string folder, string filenameWithoutExtension)
     {
         string path = Path.Combine(folder, $"{filenameWithoutExtension}.cs");
@@ -164,9 +159,29 @@ internal class Game
     public bool PreviousInPopupMenu = false;
     #endregion
 
+    #region Configuration Properties
+    /// <summary>
+    /// Returns the distance at which a pet will move closer to the player.
+    /// </summary>
+    public readonly int FollowDistance;
+    private readonly int DecayRate;
+    public readonly string[] ShopkeeperAcceptedComments;
+    public readonly string[] IllegibleFlavorSyllables;
+    public readonly string[] FindQuests;
+    public readonly string[] ElvishTexts;
+    public readonly string[] FunnyDescriptions;
+    public readonly string[] FunnyComments;
+    public readonly string[] HorrificDescriptions;
     public readonly int[][] BlowsTable;
     public readonly int[] RequiredExperiencePerLevel;
     public readonly int[] ExtractEnergy;
+    private readonly int PatronRestingFavour;
+    #endregion
+
+    public const string FactoryAttributeKey = "factory";
+    public const string RandomAttributeKey = "random";
+    public const string RareAttributeKey = "rare";
+    public const string FixedAttributeKey = "fixed";
 
     public Ability StrengthAbility; // TODO: These are still hardcoded into the framework
     public Ability IntelligenceAbility; // TODO: These are still hardcoded into the framework
@@ -175,8 +190,6 @@ internal class Game
     public Ability ConstitutionAbility; // TODO: These are still hardcoded into the framework
     public Ability CharismaAbility; // TODO: These are still hardcoded into the framework
 
-    private const int DecayRate = 10;
-    private const int PatronRestingFavour = 30;
     public God? God;
 
     public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
@@ -262,14 +275,6 @@ internal class Game
     public readonly ParseLanguage ParseLanguage;
     public readonly IntegerToDecimalExpressionTypeConverter IntegerToDecimalExpressionTypeConverter;
     public readonly DecimalToIntegerExpressionTypeConverter DecimalToIntegerExpressionTypeConverter;
-
-    public readonly string[] ShopkeeperAcceptedComments;
-    public readonly string[] IllegibleFlavorSyllables;
-    public readonly string[] FindQuests;
-    public readonly string[] ElvishTexts;
-    public readonly string[] FunnyDescriptions;
-    public readonly string[] FunnyComments;
-    public readonly string[] HorrificDescriptions;
 
     public readonly RefreshMapProperty RefreshMap;
     public readonly TrackedMonsterChangedProperty TrackedMonsterChanged;
@@ -1461,6 +1466,9 @@ internal class Game
         RequiredExperiencePerLevel = gameConfiguration.RequiredExperiencePerLevel;
         ExtractEnergy = gameConfiguration.ExtractEnergy;
         BlowsTable = gameConfiguration.BlowsTable;
+        FollowDistance = gameConfiguration.FollowDistance;
+        DecayRate = gameConfiguration.DecayRate;
+        PatronRestingFavour = gameConfiguration.PatronRestingFavour;
 
         ElvishTexts = gameConfiguration.ElvishTexts ?? new string[] { };
         HorrificDescriptions = gameConfiguration.HorrificDescriptions ?? new string[] { };

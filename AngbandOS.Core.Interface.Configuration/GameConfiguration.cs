@@ -122,6 +122,10 @@ public class GameConfiguration
     /// </summary>    
     public virtual int? MaxMessageLogLength { get; set; } = 2048;
 
+    public virtual int FollowDistance { get; set; } = 4;
+    public virtual int DecayRate { get; set; } = 10;
+    public virtual int PatronRestingFavour { get; set; } = 30;
+
     public virtual string? DungeonViewBindingKey { get; set; } = null;
 
     /// <summary>

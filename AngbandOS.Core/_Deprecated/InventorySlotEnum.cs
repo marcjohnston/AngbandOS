@@ -23,7 +23,7 @@ internal static class InventorySlotEnum
     public const int RangedWeapon = 28; // DONE
 
     //WIP
-    public const int MeleeWeapon = 27; // This is start inventory slot where the equipment items are stored.
-    public const int PackCount = 26; // This is the last pack item slot.
-    public const int Total = 40; // This is the end of the inventory slots.  This slot is not used.
+    public const int MeleeWeapon = 27; // 21 LEFT // This is start inventory slot where the equipment items are stored. 
+    public const int PackCount = 26; // 20 LEFT // This is the last pack item slot.
+    public const int Total = 40; // 8 LEFT // This is the end of the inventory slots.  This slot is not used.
 }

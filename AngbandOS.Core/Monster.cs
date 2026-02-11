@@ -908,7 +908,7 @@ internal class Monster : IItemContainer
         // If we're the player's friend and we're too far away, add sensible moves to our matrix
         else if (IsPet)
         {
-            if (DistanceFromPlayer > Constants.FollowDistance)
+            if (DistanceFromPlayer > Game.FollowDistance)
             {
                 GetMovesTowardsPlayer(potentialMoves);
             }
