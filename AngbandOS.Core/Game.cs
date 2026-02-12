@@ -9762,8 +9762,13 @@ internal class Game
         // Retrieve the tables to select from.
         OutfitManifest[] characterClassAndRaceOutfitItemsTable = SingletonRepository.Get<OutfitManifest>(); // Get the table to select from.
 
-        // Build a list of filters that will be used to select the appropriate outfit items for the player.
-        List<Func<OutfitManifest, bool>> filters = new List<Func<OutfitManifest, bool>>();
+        ///
+        /// (string[]? MatchValues, bool IsEqual)?
+        /// A null value is a wildcard, to match any null and non-null value.  OutfitManifests validate against null because character classes, races and realms are not null.
+        /// A non-null value has an IsEqual for an equality test.  True for == (Contains), false for != (Does not contain).
+        /// The MatchValues can be null to detect for null values.  This is generic and not applicable for OutfitManifests.
+        /// Otherwise a non-null and non-empty list of matching values is used for the contains.
+        /// 
 
         // The match values for the character class, races and realms were validated to ensure null and empty values were not specified.
         // Generate the character class match function based on the equality operator.
