@@ -79,7 +79,7 @@ internal class SingletonRepository
     }
 
     /// <summary>
-    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterRepository"/> for more information) of type <typeparamref name="T"/> and returns null, if it isn't found.
+    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterInterface"/> for more information) of type <typeparamref name="T"/> and returns null, if it isn't found.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -106,7 +106,7 @@ internal class SingletonRepository
     }
 
     /// <summary>
-    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterRepository"/> for more information) of type <typeparamref name="T"/> and throws an exception if it isn't found.
+    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterInterface"/> for more information) of type <typeparamref name="T"/> and throws an exception if it isn't found.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -153,7 +153,7 @@ internal class SingletonRepository
     }
 
     /// <summary>
-    /// Returns the number of API Objects in a registered repository (see <see cref="RegisterRepository"/> for more information).
+    /// Returns the number of API Objects in a registered repository (see <see cref="RegisterInterface"/> for more information).
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
@@ -164,7 +164,7 @@ internal class SingletonRepository
     }
 
     /// <summary>
-    /// Returns an array of API Objects from the registered repository (see <see cref="RegisterRepository"/> for more information) of type <typeparamref name="T"/> by their unique key 
+    /// Returns an array of API Objects from the registered repository (see <see cref="RegisterInterface"/> for more information) of type <typeparamref name="T"/> by their unique key 
     /// identifiers <paramref name="keys"/>.  If any the singletons do not exist, an exception is thrown.  Empty arrays are supported and will return an empty array.
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -400,13 +400,6 @@ internal class SingletonRepository
         {
             singleton.Bind();
         }
-        //foreach (FixedArtifact fixedArtifact in Get<FixedArtifact>())
-        //{
-        //    if (fixedArtifact.Dd != fixedArtifact.BaseItemFactory.DamageDice)
-        //    {
-        //        throw new Exception();
-        //    }
-        //}
     }
 
     private void ValidateSystemScriptsEnum()
@@ -450,7 +443,7 @@ internal class SingletonRepository
 
     private void RegisterInterface<T>()
     {
-        RegisterRepository<T>(false);
+        RegisterInterface<T>(false);
     }
 
     /// <summary>
@@ -458,7 +451,7 @@ internal class SingletonRepository
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <exception cref="Exception"></exception>
-    private void RegisterRepository<T>(bool enablePersistance = true)
+    private void RegisterInterface<T>(bool enablePersistance = true)
     {
         string typeName = typeof(T).Name;
         if (_allGenericRepositoriesDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
@@ -477,6 +470,16 @@ internal class SingletonRepository
     /// <exception cref="Exception"></exception>
     private void RegisterSingleton(IGetKey singleton)
     {
+        // Add the singleton to the list of singletons so that they can be bound.  Only add the singleton once.
+        if (!_allSingletonsList.Contains(singleton))
+        {
+            _allSingletonsList.Add(singleton);
+        }
+        else
+        {
+            throw new Exception($"The singleton {singleton.GetType().Name} has already been registered.  This may be the result of a the json deserialization or a public ctor(Game game) still available for a singleton that no longer supports system loading.");
+        }
+
         // Enumerate all of the interfaces that the singleton implements.
         Type? type = singleton.GetType();
         string name = type.Name;
@@ -502,17 +505,12 @@ internal class SingletonRepository
                     throw new Exception($"The singleton {singleton.GetType().Name} has a null key value.  This may be the result of a the json deserialization or a public ctor(Game game) still available for a singleton that no longer supports system loading.");
                 }
 
-                // Add the singleton to the list of singletons so that they can be bound.  Only add the singleton once.
-                if (!_allSingletonsList.Contains(singleton))
-                {
-                    _allSingletonsList.Add(singleton);
-                }
-
                 // If the singleton hasn't been registered, register it now.  The singleton may belong to many repositories.
-                if (!genericRepository.Dictionary.TryGetValue(key, out _))
+                if (genericRepository.Dictionary.TryGetValue(key, out object? existing))
                 {
-                    genericRepository.Add(key, singleton);
+                    throw new Exception($"The singleton key {key} has already been registered in the {typeName} repository and is conflicting with {existing.GetType().Name}.");
                 }
+                genericRepository.Add(key, singleton);
             }
         }
     }
@@ -556,7 +554,7 @@ internal class SingletonRepository
         }
 
         // Register the repository with persistance.
-        RegisterRepository<T>();
+        RegisterInterface<T>();
 
         string typeName = typeof(T).Name;
         if (entityConfigurations != null)

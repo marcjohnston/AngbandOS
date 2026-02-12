@@ -22,7 +22,7 @@ internal sealed class RaceAbility : IGetKey, IToJson
     public Ability Ability { get; private set; }
     public string RaceBindingKey { get; }
     public string AbilityBindingKey { get; }
-    public string GetKey => $"{RaceBindingKey}-{AbilityBindingKey}";
+    public string GetKey => Game.GetCompositeKey(RaceBindingKey, AbilityBindingKey);
 
     public static string GetCompositeKey(Race race, Ability ability) => $"{race.Key}-{ability.Key}";
     public void Bind()
