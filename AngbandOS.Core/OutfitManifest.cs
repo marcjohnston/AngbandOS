@@ -19,15 +19,25 @@ internal class OutfitManifest : IGetKey, IToJson
         ItemFactoryAndEnhancementsBindings = characterClassAndRaceOutfitGameConfiguration.ItemFactoryAndEnhancementsBindings;
     }
     
-    public string? CharacterClassBindingKey { get; private set; }
-    public string? RaceBindingKey { get; private set; }
-    public string? RealmBindingKey { get; private set; }
+    public (string? MatchValue, bool IsEqual)? CharacterClassBindingKey { get; private set; }
+    public (string? MatchValue, bool IsEqual)? RaceBindingKey { get; private set; }
+    public (string? MatchValue, bool IsEqual)? RealmBindingKey { get; private set; }
     private (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKeys, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings { get; set; }
     public (ItemFactory, ItemEnhancement[]?, Expression, bool, bool)[] ItemFactoryAndEnhancements { get; private set; }
     public string GetKey => Game.GetCompositeKey(CharacterClassBindingKey, RaceBindingKey, RealmBindingKey);
 
     public void Bind()
     {
+        // Validate.
+        //if (CharacterClassBindingKey.MatchValue == null && CharacterClassBindingKey.Equal)
+        //{
+        //    throw new Exception($"The CharacterClassBindingKey {nameof(OutfitManifest)} with key {GetKey} has a null match value and equal set to true, which is not valid because the player character classes will never be null.");
+        //}
+        //if (RaceBindingKey.MatchValue == null && RaceBindingKey.Equal)
+        //{
+        //    throw new Exception($"The RaceBindingKey {nameof(OutfitManifest)} with key {GetKey} has a null match value and equal set to true, which is not valid because the player reace will never be null.");
+        //}
+
         List<(ItemFactory, ItemEnhancement[]?, Expression, bool, bool)> itemFactoriesAndEnhancementsList = new();
         foreach ((string itemFactoryBindingKey, string[]? itemEnhancementBindingKeys, string stackCountExpression, bool makeKnown, bool wieldOne) in ItemFactoryAndEnhancementsBindings)
         {

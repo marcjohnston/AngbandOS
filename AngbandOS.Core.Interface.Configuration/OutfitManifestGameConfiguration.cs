@@ -3,9 +3,12 @@
 [Serializable]
 public class OutfitManifestGameConfiguration
 {
-    public virtual string? CharacterClassBindingKey { get; set; } = null;
-    public virtual string? RaceBindingKey { get; set; } = null;
-    public virtual string? RealmBindingKey { get; set; } = null;
+    /// <summary>
+    /// Returns null to match all values (null and non-null); or a MatchValue (null or non-null) and an equality operator.
+    /// </summary>
+    public virtual (string? MatchValue, bool IsEqual)? CharacterClassBindingKey { get; set; } = null;
+    public virtual (string? MatchValue, bool IsEqual)? RaceBindingKey { get; set; } = null;
+    public virtual (string? MatchValue, bool IsEqual)? RealmBindingKey { get; set; } = null;
     public virtual (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings { get; set; }
 }
 

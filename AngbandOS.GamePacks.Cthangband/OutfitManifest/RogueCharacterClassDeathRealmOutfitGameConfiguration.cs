@@ -2,8 +2,8 @@ namespace AngbandOS.GamePacks.Cthangband
 {
     public class RogueCharacterClassDeathRealmOutfitGameConfiguration : OutfitManifestGameConfiguration
     {
-        public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.RogueCharacterClass);
-        public override string? RealmBindingKey => nameof(DeathRealm);
+        public override (string?, bool)? CharacterClassBindingKey => (nameof(CharacterClassesEnum.RogueCharacterClass), true);
+        public override (string?, bool)? RealmBindingKey => (nameof(DeathRealm), true);
         public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
             (nameof(DaggerWeaponItemFactory), new string[] { nameof(WeaponOfPoisoningItemEnhancement) }, "1", true, true),

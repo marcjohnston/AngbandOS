@@ -1391,6 +1391,48 @@ internal class Game
         return compositeKey;
     }
 
+    public static string GetCompositeKey(params (string? value, bool isEqual)?[] keys)
+    {
+        const string nullToken = "";
+        const string wildCardToken = "~";
+        const string keyDelimiter = "_";
+        string compositeKey = "";
+        string currentDelimiter = "";
+        foreach ((string? MatchValue, bool IsEqual)? key in keys)
+        {
+            compositeKey = $"{compositeKey}{currentDelimiter}";
+            currentDelimiter = keyDelimiter;
+
+            // Check to see if the key represents a wildcard--match both null and all non-null values.
+            if (key is null)
+            {
+                compositeKey = $"{compositeKey}{wildCardToken}";
+            }
+            else
+            {
+                // Test to ensure compliance for the unique key.
+                //if (key.Value == "")
+                //{
+                //    throw new Exception($"Blank singleton key value are not supported for composite generation.");
+                //}
+                //if (keyDelimiter != "" && value.Contains(keyDelimiter) || wildCardToken != "" && value.Contains(wildCardToken) || nullToken != "" && value.Contains(nullToken))
+                //{
+                //    throw new Exception($"The singleton key value {value} presented for composite generation is invalid.");
+                //}
+                if (key.Value.IsEqual)
+                {
+                    compositeKey = $"{compositeKey}{key.Value.MatchValue}";
+                }
+                else
+                {
+                    compositeKey = $"{compositeKey}-{key.Value.MatchValue}";
+                }
+            }
+
+        }
+        return compositeKey;
+    }
+
     /// <summary>
     /// Returns an <see cref="DecimalExpression"/> from an expression computation.  A type-conversion from a integer result to an decimal result is performed as needed.  If the result is not
     /// a valid <see cref="DecimalExpression"/> an exception is thrown.
@@ -9738,23 +9780,16 @@ internal class Game
         // Build a list of filters that will be used to select the appropriate outfit items for the player.
         List<Func<OutfitManifest, bool>> filters = new List<Func<OutfitManifest, bool>>();
 
-        // All three match.
-        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey == CharacterClass.GetKey && _outfitManifest.RaceBindingKey == Race.GetKey && (_outfitManifest.RealmBindingKey == PrimaryRealm?.GetKey || _outfitManifest.RealmBindingKey == SecondaryRealm?.GetKey));
+        // Generate the character class match function based on the equality operator.
+        Func<OutfitManifest, bool> characterClassMatch = p => !p.CharacterClassBindingKey.HasValue || (p.CharacterClassBindingKey.Value.IsEqual ? p.CharacterClassBindingKey.Value.MatchValue == CharacterClass.GetKey : p.CharacterClassBindingKey.Value.MatchValue != CharacterClass.GetKey);
 
-        // Two match with one wildcard.
-        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey is null && _outfitManifest.RaceBindingKey == Race.GetKey && (_outfitManifest.RealmBindingKey == PrimaryRealm?.GetKey || _outfitManifest.RealmBindingKey == SecondaryRealm?.GetKey)); // Wilcard character class
-        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey == CharacterClass.GetKey && _outfitManifest.RaceBindingKey is null && (_outfitManifest.RealmBindingKey == PrimaryRealm?.GetKey || _outfitManifest.RealmBindingKey == SecondaryRealm?.GetKey)); // Wildcard race
-        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey == CharacterClass.GetKey && _outfitManifest.RaceBindingKey == Race.GetKey && _outfitManifest.RealmBindingKey is null); // Wildcard realms
+        // Generate the race match function based on the equality operator.
+        Func<OutfitManifest, bool> raceMatch = p => !p.RaceBindingKey.HasValue || (p.RaceBindingKey.Value.IsEqual ? p.RaceBindingKey.Value.MatchValue == Race.GetKey : p.RaceBindingKey.Value.MatchValue != Race.GetKey);
 
-        // One matches with two wildcards.
-        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey == CharacterClass.GetKey && _outfitManifest.RaceBindingKey is null && _outfitManifest.RealmBindingKey is null); // Character class matches
-        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey is null && _outfitManifest.RaceBindingKey == Race.GetKey && _outfitManifest.RealmBindingKey is null); // Race matches
-        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey is null && _outfitManifest.RaceBindingKey is null && (_outfitManifest.RealmBindingKey == PrimaryRealm?.GetKey || _outfitManifest.RealmBindingKey == SecondaryRealm?.GetKey)); // Either realm matches
+        // Generate the realm match function based on the equality operator.
+        Func<OutfitManifest, bool> realmMatch = p => !p.RealmBindingKey.HasValue || (p.RealmBindingKey.Value.IsEqual ? p.RealmBindingKey.Value.MatchValue == PrimaryRealm?.GetKey || p.RealmBindingKey.Value.MatchValue == SecondaryRealm?.GetKey : p.RealmBindingKey.Value.MatchValue != PrimaryRealm?.GetKey || p.RealmBindingKey.Value.MatchValue != SecondaryRealm?.GetKey);
 
-        // All wildcards.
-        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey is null && _outfitManifest.RaceBindingKey is null && _outfitManifest.RealmBindingKey is null);
-
-        OutfitManifest[] characterClassAndRaceOutfitItems = characterClassAndRaceOutfitItemsTable.Where(_outfitManifest => filters.Any(_filter => _filter(_outfitManifest))).ToArray();
+        OutfitManifest[] characterClassAndRaceOutfitItems = characterClassAndRaceOutfitItemsTable.Where(_outfitManifest => characterClassMatch(_outfitManifest) && raceMatch(_outfitManifest) && realmMatch(_outfitManifest)).ToArray();
 
         // Outfit the player with all of the applicable items.
         foreach (OutfitManifest characterClassAndRaceOutfitItemsEntry in characterClassAndRaceOutfitItems)
