@@ -9786,8 +9786,8 @@ internal class Game
         // Generate the race match function based on the equality operator.
         Func<OutfitManifest, bool> raceMatch = p => !p.RaceBindingKey.HasValue || (p.RaceBindingKey.Value.IsEqual ? p.RaceBindingKey.Value.MatchValue == Race.GetKey : p.RaceBindingKey.Value.MatchValue != Race.GetKey);
 
-        // Generate the realm match function based on the equality operator.
-        Func<OutfitManifest, bool> realmMatch = p => !p.RealmBindingKey.HasValue || (p.RealmBindingKey.Value.IsEqual ? p.RealmBindingKey.Value.MatchValue == PrimaryRealm?.GetKey || p.RealmBindingKey.Value.MatchValue == SecondaryRealm?.GetKey : p.RealmBindingKey.Value.MatchValue != PrimaryRealm?.GetKey || p.RealmBindingKey.Value.MatchValue != SecondaryRealm?.GetKey);
+        // Generate the realm match function based on the equality operator.  The logic here is that with equality, either the primary or secondary must match, but for inequality, neither the primary nor to secondary can match.
+        Func<OutfitManifest, bool> realmMatch = p => !p.RealmBindingKey.HasValue || (p.RealmBindingKey.Value.IsEqual ? p.RealmBindingKey.Value.MatchValue == PrimaryRealm?.GetKey || p.RealmBindingKey.Value.MatchValue == SecondaryRealm?.GetKey : p.RealmBindingKey.Value.MatchValue != PrimaryRealm?.GetKey && p.RealmBindingKey.Value.MatchValue != SecondaryRealm?.GetKey);
 
         OutfitManifest[] characterClassAndRaceOutfitItems = characterClassAndRaceOutfitItemsTable.Where(_outfitManifest => characterClassMatch(_outfitManifest) && raceMatch(_outfitManifest) && realmMatch(_outfitManifest)).ToArray();
 
