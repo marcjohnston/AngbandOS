@@ -78,7 +78,6 @@ internal class VampireRace : Race
             Game.MsgPrint("Your hunger can only be satisfied with fresh blood!");
         }
     }
-    public override bool OutfitsWithScrollsOfSatisfyHunger => true;
     public override bool OutfitsWithScrollsOfLight => true;
     public override int ChanceOfSanityBlastImmunity(int level) => level + 25;
 

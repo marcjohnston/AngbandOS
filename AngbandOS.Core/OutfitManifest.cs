@@ -19,9 +19,9 @@ internal class OutfitManifest : IGetKey, IToJson
         ItemFactoryAndEnhancementsBindings = characterClassAndRaceOutfitGameConfiguration.ItemFactoryAndEnhancementsBindings;
     }
     
-    public (string? MatchValue, bool IsEqual)? CharacterClassBindingKey { get; private set; }
-    public (string? MatchValue, bool IsEqual)? RaceBindingKey { get; private set; }
-    public (string? MatchValue, bool IsEqual)? RealmBindingKey { get; private set; }
+    public (string[]? MatchValues, bool IsEqual)? CharacterClassBindingKey { get; private set; }
+    public (string[]? MatchValues, bool IsEqual)? RaceBindingKey { get; private set; }
+    public (string[]? MatchValues, bool IsEqual)? RealmBindingKey { get; private set; }
     private (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKeys, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings { get; set; }
     public (ItemFactory, ItemEnhancement[]?, Expression, bool, bool)[] ItemFactoryAndEnhancements { get; private set; }
     public string GetKey => Game.GetCompositeKey(CharacterClassBindingKey, RaceBindingKey, RealmBindingKey);
@@ -29,14 +29,20 @@ internal class OutfitManifest : IGetKey, IToJson
     public void Bind()
     {
         // Validate.
-        //if (CharacterClassBindingKey.MatchValue == null && CharacterClassBindingKey.Equal)
-        //{
-        //    throw new Exception($"The CharacterClassBindingKey {nameof(OutfitManifest)} with key {GetKey} has a null match value and equal set to true, which is not valid because the player character classes will never be null.");
-        //}
-        //if (RaceBindingKey.MatchValue == null && RaceBindingKey.Equal)
-        //{
-        //    throw new Exception($"The RaceBindingKey {nameof(OutfitManifest)} with key {GetKey} has a null match value and equal set to true, which is not valid because the player reace will never be null.");
-        //}
+        if (CharacterClassBindingKey.HasValue && (CharacterClassBindingKey.Value.MatchValues is null || CharacterClassBindingKey.Value.MatchValues.Contains("")))
+        {
+            throw new Exception($"The {nameof(CharacterClassBindingKey)} {nameof(OutfitManifest)} with key {GetKey} cannot match a null or empty character class value with or without equality.");
+        }
+
+        if (RaceBindingKey.HasValue && (RaceBindingKey.Value.MatchValues is null || RaceBindingKey.Value.MatchValues.Contains("")))
+        {
+            throw new Exception($"The {nameof(RaceBindingKey)} {nameof(OutfitManifest)} with key {GetKey} cannot match a null or empty race value with or without equality.");
+        }
+
+        if (RealmBindingKey.HasValue && (RealmBindingKey.Value.MatchValues is null || RealmBindingKey.Value.MatchValues.Contains("")))
+        {
+            throw new Exception($"The {nameof(RealmBindingKey)} {nameof(OutfitManifest)} with key {GetKey} cannot match a null or empty realm value with or without equality.");
+        }
 
         List<(ItemFactory, ItemEnhancement[]?, Expression, bool, bool)> itemFactoriesAndEnhancementsList = new();
         foreach ((string itemFactoryBindingKey, string[]? itemEnhancementBindingKeys, string stackCountExpression, bool makeKnown, bool wieldOne) in ItemFactoryAndEnhancementsBindings)

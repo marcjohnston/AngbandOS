@@ -94,6 +94,5 @@ internal class SkeletonRace : Race
         }
     }
     public override bool CanBleed(int level) => false;
-    public override bool OutfitsWithScrollsOfSatisfyHunger => true;
     public override int ChanceOfSanityBlastImmunity(int level) => level + 25;
 }

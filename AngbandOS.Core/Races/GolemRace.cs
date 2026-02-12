@@ -80,7 +80,5 @@ internal class GolemRace : Race
 
     public override bool CanBleed(int level) => false;
 
-    public override bool OutfitsWithScrollsOfSatisfyHunger => true;
-
     public override bool CanBeStunned => false;
 }

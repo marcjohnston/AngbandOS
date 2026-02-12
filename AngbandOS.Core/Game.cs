@@ -1391,14 +1391,14 @@ internal class Game
         return compositeKey;
     }
 
-    public static string GetCompositeKey(params (string? value, bool isEqual)?[] keys)
+    public static string GetCompositeKey(params (string[]? value, bool isEqual)?[] keys)
     {
         const string nullToken = "";
         const string wildCardToken = "~";
         const string keyDelimiter = "_";
         string compositeKey = "";
         string currentDelimiter = "";
-        foreach ((string? MatchValue, bool IsEqual)? key in keys)
+        foreach ((string[]? MatchValues, bool IsEqual)? key in keys)
         {
             compositeKey = $"{compositeKey}{currentDelimiter}";
             currentDelimiter = keyDelimiter;
@@ -1419,13 +1419,17 @@ internal class Game
                 //{
                 //    throw new Exception($"The singleton key value {value} presented for composite generation is invalid.");
                 //}
-                if (key.Value.IsEqual)
+                if (key.Value.MatchValues is null)
                 {
-                    compositeKey = $"{compositeKey}{key.Value.MatchValue}";
+                    compositeKey = $"{compositeKey}{nullToken}";
                 }
                 else
                 {
-                    compositeKey = $"{compositeKey}-{key.Value.MatchValue}";
+                    compositeKey = $"{compositeKey}{(key.Value.IsEqual ? "+" : "-")}";
+                    foreach (string matchValue in key.Value.MatchValues)
+                    {
+                        compositeKey = $"{compositeKey}{matchValue}";
+                    }
                 }
             }
 
@@ -9730,25 +9734,6 @@ internal class Game
 
     private void PlayerOutfit()
     {
-        if (Race.OutfitsWithScrollsOfSatisfyHunger)
-        {
-            ItemFactory scrollSatisfyHungerItemClass = SingletonRepository.Get<ItemFactory>(nameof(SatisfyHungerScrollItemFactory));
-            Item item = scrollSatisfyHungerItemClass.GenerateItem();
-            item.StackCount = RandomBetween(2, 5);
-            item.IsFlavorAware = true;
-            item.BecomeKnown();
-            item.IdentityIsStoreBought = true;
-            InventoryCarry(item);
-        }
-        else
-        {
-            ItemFactory rationFoodItemClass = SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
-            Item item = rationFoodItemClass.GenerateItem();
-            item.StackCount = RandomBetween(3, 7);
-            item.IsFlavorAware = true;
-            item.BecomeKnown();
-            InventoryCarry(item);
-        }
         if (Race.OutfitsWithScrollsOfLight || CharacterClass.OutfitsWithScrollsOfLight)
         {
             ItemFactory scrollLightItemClass = SingletonRepository.Get<ItemFactory>(nameof(LightScrollItemFactory));
@@ -9780,14 +9765,24 @@ internal class Game
         // Build a list of filters that will be used to select the appropriate outfit items for the player.
         List<Func<OutfitManifest, bool>> filters = new List<Func<OutfitManifest, bool>>();
 
+        // The match values for the character class, races and realms were validated to ensure null and empty values were not specified.
         // Generate the character class match function based on the equality operator.
-        Func<OutfitManifest, bool> characterClassMatch = p => !p.CharacterClassBindingKey.HasValue || (p.CharacterClassBindingKey.Value.IsEqual ? p.CharacterClassBindingKey.Value.MatchValue == CharacterClass.GetKey : p.CharacterClassBindingKey.Value.MatchValue != CharacterClass.GetKey);
+        Func<OutfitManifest, bool> characterClassMatch = p =>
+            !p.CharacterClassBindingKey.HasValue || // The outfit manifest defined a wildcard
+            p.CharacterClassBindingKey.Value.MatchValues is not null && p.CharacterClassBindingKey.Value.IsEqual && p.CharacterClassBindingKey.Value.MatchValues.Contains(CharacterClass?.GetKey) || // One of the outfit manifest matches the character class
+            p.CharacterClassBindingKey.Value.MatchValues is not null && !p.CharacterClassBindingKey.Value.IsEqual && !p.CharacterClassBindingKey.Value.MatchValues.Contains(CharacterClass?.GetKey); // None of the outfit manifest values match the character class
 
         // Generate the race match function based on the equality operator.
-        Func<OutfitManifest, bool> raceMatch = p => !p.RaceBindingKey.HasValue || (p.RaceBindingKey.Value.IsEqual ? p.RaceBindingKey.Value.MatchValue == Race.GetKey : p.RaceBindingKey.Value.MatchValue != Race.GetKey);
+        Func<OutfitManifest, bool> raceMatch = p =>
+            !p.RaceBindingKey.HasValue || // The outfit manifest defined a wildcard
+            p.RaceBindingKey.Value.MatchValues is not null && p.RaceBindingKey.Value.IsEqual && p.RaceBindingKey.Value.MatchValues.Contains(Race?.GetKey) || // One of the outfit manifest matches the race
+            p.RaceBindingKey.Value.MatchValues is not null && !p.RaceBindingKey.Value.IsEqual && !p.RaceBindingKey.Value.MatchValues.Contains(Race?.GetKey); // None of the outfit manifest values match the race
 
         // Generate the realm match function based on the equality operator.  The logic here is that with equality, either the primary or secondary must match, but for inequality, neither the primary nor to secondary can match.
-        Func<OutfitManifest, bool> realmMatch = p => !p.RealmBindingKey.HasValue || (p.RealmBindingKey.Value.IsEqual ? p.RealmBindingKey.Value.MatchValue == PrimaryRealm?.GetKey || p.RealmBindingKey.Value.MatchValue == SecondaryRealm?.GetKey : p.RealmBindingKey.Value.MatchValue != PrimaryRealm?.GetKey && p.RealmBindingKey.Value.MatchValue != SecondaryRealm?.GetKey);
+        Func<OutfitManifest, bool> realmMatch = p =>
+            !p.RealmBindingKey.HasValue || // The outfit manifest defined a wildcard
+            p.RealmBindingKey.Value.MatchValues is not null && p.RealmBindingKey.Value.IsEqual && (p.RealmBindingKey.Value.MatchValues.Contains(PrimaryRealm?.GetKey) || p.RealmBindingKey.Value.MatchValues.Contains(SecondaryRealm?.GetKey)) || // One of the outfit manifest matches the race
+            p.RealmBindingKey.Value.MatchValues is not null && !p.RealmBindingKey.Value.IsEqual && !p.RealmBindingKey.Value.MatchValues.Contains(PrimaryRealm?.GetKey) && !p.RealmBindingKey.Value.MatchValues.Contains(SecondaryRealm?.GetKey); // None of the outfit manifest values match the race
 
         OutfitManifest[] characterClassAndRaceOutfitItems = characterClassAndRaceOutfitItemsTable.Where(_outfitManifest => characterClassMatch(_outfitManifest) && raceMatch(_outfitManifest) && realmMatch(_outfitManifest)).ToArray();
 

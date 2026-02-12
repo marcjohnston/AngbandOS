@@ -194,11 +194,6 @@ internal abstract class Race : IGetKey
         }
     }
 
-    /// <summary>
-    /// Returns true, if characters are automatically outfitted with scrolls of satisfy hunger.  Golems, skeletons, zombies, vampires and spectres return 
-    /// true.  Returns false by default.
-    /// </summary>
-    public virtual bool OutfitsWithScrollsOfSatisfyHunger => false;
 
     /// <summary>
     /// Returns true, if characters are automatically outfitted with scrolls of light.  Vampires and spectres return 
