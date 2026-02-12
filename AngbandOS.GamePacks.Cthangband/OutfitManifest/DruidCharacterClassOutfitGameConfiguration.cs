@@ -4,10 +4,10 @@ namespace AngbandOS.GamePacks.Cthangband
     public class DruidCharacterClassOutfitGameConfiguration : OutfitManifestGameConfiguration
     {
         public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.DruidCharacterClass);
-        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey)[] ItemFactoryAndEnhancementsBindings => new (string, string[]?)[]
+        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(QuarterstaffHaftedWeaponItemFactory), null),
-            (nameof(SustainWisdomRingItemFactory), null),
+            (nameof(QuarterstaffHaftedWeaponItemFactory), null, "1", true, true),
+            (nameof(SustainWisdomRingItemFactory), null, "1", true, true),
         };
     }
 }

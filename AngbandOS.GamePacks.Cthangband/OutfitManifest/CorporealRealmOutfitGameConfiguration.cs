@@ -4,9 +4,9 @@ namespace AngbandOS.GamePacks.Cthangband
     public class CorporealRealmOutfitGameConfiguration : OutfitManifestGameConfiguration
     {
         public override string? RealmBindingKey => nameof(CorporealRealm);
-        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey)[] ItemFactoryAndEnhancementsBindings => new (string, string[]?)[]
+        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(BasicChiFlowCorporealBookItemFactory), null),
+            (nameof(BasicChiFlowCorporealBookItemFactory), null, "1", true, false),
         };
     }
 

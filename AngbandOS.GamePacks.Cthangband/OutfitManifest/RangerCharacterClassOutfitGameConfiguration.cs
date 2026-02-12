@@ -4,11 +4,9 @@ namespace AngbandOS.GamePacks.Cthangband
     public class RangerCharacterClassOutfitGameConfiguration : OutfitManifestGameConfiguration
     {
         public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.RangerCharacterClass);
-        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey)[] ItemFactoryAndEnhancementsBindings => new (string, string[]?)[]
+        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(CallOfTheWildNatureBookItemFactory), null),
-            (nameof(BroadSwordWeaponItemFactory), null),
-            (nameof(BlackPrayersDeathBookItemFactory), null)
+            (nameof(BroadSwordWeaponItemFactory), null, "1", true, true),
         };
     }
 }

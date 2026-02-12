@@ -4,11 +4,11 @@ namespace AngbandOS.GamePacks.Cthangband
     public class MysticCharacterClassOutfitGameConfiguration : OutfitManifestGameConfiguration
     {
         public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.MysticCharacterClass);
-        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey)[] ItemFactoryAndEnhancementsBindings => new (string, string[]?)[]
+        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(SustainWisdomRingItemFactory), null),
-            (nameof(HealingPotionItemFactory), null),
-            (nameof(SoftLeatherSoftArmorItemFactory), null)
+            (nameof(SustainWisdomRingItemFactory), null, "1", true, true),
+            (nameof(HealingPotionItemFactory), null, "1", true, true),
+            (nameof(SoftLeatherSoftArmorItemFactory), null, "1", true, true)
         };
     }
 }

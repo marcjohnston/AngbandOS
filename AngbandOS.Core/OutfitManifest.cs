@@ -22,18 +22,19 @@ internal class OutfitManifest : IGetKey, IToJson
     public string? CharacterClassBindingKey { get; private set; }
     public string? RaceBindingKey { get; private set; }
     public string? RealmBindingKey { get; private set; }
-    protected (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey)[] ItemFactoryAndEnhancementsBindings { get; private set; }
-    public (ItemFactory, ItemEnhancement[]?)[] ItemFactoryAndEnhancements { get; private set; }
+    private (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKeys, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings { get; set; }
+    public (ItemFactory, ItemEnhancement[]?, Expression, bool, bool)[] ItemFactoryAndEnhancements { get; private set; }
     public string GetKey => Game.GetCompositeKey(CharacterClassBindingKey, RaceBindingKey, RealmBindingKey);
 
     public void Bind()
     {
-        List<(ItemFactory, ItemEnhancement[]?)> itemFactoriesAndEnhancementsList = new();
-        foreach ((string itemFactoryBindingKey, string[]? itemEnhancementBindingKeys) in ItemFactoryAndEnhancementsBindings)
+        List<(ItemFactory, ItemEnhancement[]?, Expression, bool, bool)> itemFactoriesAndEnhancementsList = new();
+        foreach ((string itemFactoryBindingKey, string[]? itemEnhancementBindingKeys, string stackCountExpression, bool makeKnown, bool wieldOne) in ItemFactoryAndEnhancementsBindings)
         {
             ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(itemFactoryBindingKey);
             ItemEnhancement[]? itemEnhancements = Game.SingletonRepository.GetNullable<ItemEnhancement>(itemEnhancementBindingKeys);
-            itemFactoriesAndEnhancementsList.Add((itemFactory, itemEnhancements));
+            Expression stackCount = Game.ParseNumericExpression(stackCountExpression);
+            itemFactoriesAndEnhancementsList.Add((itemFactory, itemEnhancements, stackCount, makeKnown, wieldOne));
         }
         ItemFactoryAndEnhancements = itemFactoriesAndEnhancementsList.ToArray();
     }

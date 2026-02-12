@@ -4,10 +4,10 @@ namespace AngbandOS.GamePacks.Cthangband
     public class PaladinCharacterClassOutfitGameConfiguration : OutfitManifestGameConfiguration
     {
         public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.PaladinCharacterClass);
-        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey)[] ItemFactoryAndEnhancementsBindings => new (string, string[]?)[]
+        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(BroadSwordWeaponItemFactory), null),
-            (nameof(ProtectionFromEvilScrollItemFactory), null),
+            (nameof(BroadSwordWeaponItemFactory), null, "1", true, true),
+            (nameof(ProtectionFromEvilScrollItemFactory), null, "1", true, true),
         };
     }
 }

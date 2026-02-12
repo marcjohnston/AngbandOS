@@ -9735,31 +9735,36 @@ internal class Game
         // Retrieve the tables to select from.
         OutfitManifest[] characterClassAndRaceOutfitItemsTable = SingletonRepository.Get<OutfitManifest>(); // Get the table to select from.
 
-        // Select the outfit items that match the character class and/or the race.
-        OutfitManifest[] characterClassAndRaceOutfitItems = characterClassAndRaceOutfitItemsTable.Where(_characterClassAndRaceOutfitItems =>
-            // All three match
-            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey == CharacterClass.GetKey && _characterClassAndRaceOutfitItems.RaceBindingKey == Race.GetKey && (_characterClassAndRaceOutfitItems.RealmBindingKey == PrimaryRealm?.GetKey || _characterClassAndRaceOutfitItems.RealmBindingKey == SecondaryRealm?.GetKey)) || // Character class, race and either realm
+        // Build a list of filters that will be used to select the appropriate outfit items for the player.
+        List<Func<OutfitManifest, bool>> filters = new List<Func<OutfitManifest, bool>>();
 
-            // Two match with one wildcard
-            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey is null && _characterClassAndRaceOutfitItems.RaceBindingKey == Race.GetKey && (_characterClassAndRaceOutfitItems.RealmBindingKey == PrimaryRealm?.GetKey || _characterClassAndRaceOutfitItems.RealmBindingKey == SecondaryRealm?.GetKey)) || // Wilcard character class
-            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey == CharacterClass.GetKey && _characterClassAndRaceOutfitItems.RaceBindingKey is null && (_characterClassAndRaceOutfitItems.RealmBindingKey == PrimaryRealm?.GetKey || _characterClassAndRaceOutfitItems.RealmBindingKey == SecondaryRealm?.GetKey)) || // Wildcard race
-            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey == CharacterClass.GetKey && _characterClassAndRaceOutfitItems.RaceBindingKey == Race.GetKey && _characterClassAndRaceOutfitItems.RealmBindingKey is null) || // Wildcard realms
+        // All three match.
+        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey == CharacterClass.GetKey && _outfitManifest.RaceBindingKey == Race.GetKey && (_outfitManifest.RealmBindingKey == PrimaryRealm?.GetKey || _outfitManifest.RealmBindingKey == SecondaryRealm?.GetKey));
 
-            // One matches with two wildcards
-            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey == CharacterClass.GetKey && _characterClassAndRaceOutfitItems.RaceBindingKey is null && _characterClassAndRaceOutfitItems.RealmBindingKey is null) || // Character class matches
-            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey is null && _characterClassAndRaceOutfitItems.RaceBindingKey == Race.GetKey && _characterClassAndRaceOutfitItems.RealmBindingKey is null) || // Race matches
-            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey is null && _characterClassAndRaceOutfitItems.RaceBindingKey is null && (_characterClassAndRaceOutfitItems.RealmBindingKey == PrimaryRealm?.GetKey || _characterClassAndRaceOutfitItems.RealmBindingKey == SecondaryRealm?.GetKey)) || // Either realm matches
+        // Two match with one wildcard.
+        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey is null && _outfitManifest.RaceBindingKey == Race.GetKey && (_outfitManifest.RealmBindingKey == PrimaryRealm?.GetKey || _outfitManifest.RealmBindingKey == SecondaryRealm?.GetKey)); // Wilcard character class
+        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey == CharacterClass.GetKey && _outfitManifest.RaceBindingKey is null && (_outfitManifest.RealmBindingKey == PrimaryRealm?.GetKey || _outfitManifest.RealmBindingKey == SecondaryRealm?.GetKey)); // Wildcard race
+        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey == CharacterClass.GetKey && _outfitManifest.RaceBindingKey == Race.GetKey && _outfitManifest.RealmBindingKey is null); // Wildcard realms
 
-            // All wildcards
-            (_characterClassAndRaceOutfitItems.CharacterClassBindingKey is null && _characterClassAndRaceOutfitItems.RaceBindingKey is null && _characterClassAndRaceOutfitItems.RealmBindingKey is null)).ToArray();
+        // One matches with two wildcards.
+        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey == CharacterClass.GetKey && _outfitManifest.RaceBindingKey is null && _outfitManifest.RealmBindingKey is null); // Character class matches
+        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey is null && _outfitManifest.RaceBindingKey == Race.GetKey && _outfitManifest.RealmBindingKey is null); // Race matches
+        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey is null && _outfitManifest.RaceBindingKey is null && (_outfitManifest.RealmBindingKey == PrimaryRealm?.GetKey || _outfitManifest.RealmBindingKey == SecondaryRealm?.GetKey)); // Either realm matches
+
+        // All wildcards.
+        filters.Add(_outfitManifest => _outfitManifest.CharacterClassBindingKey is null && _outfitManifest.RaceBindingKey is null && _outfitManifest.RealmBindingKey is null);
+
+        OutfitManifest[] characterClassAndRaceOutfitItems = characterClassAndRaceOutfitItemsTable.Where(_outfitManifest => filters.Any(_filter => _filter(_outfitManifest))).ToArray();
 
         // Outfit the player with all of the applicable items.
         foreach (OutfitManifest characterClassAndRaceOutfitItemsEntry in characterClassAndRaceOutfitItems)
         {
-            foreach ((ItemFactory itemFactory, ItemEnhancement[] itemEnhancements) in characterClassAndRaceOutfitItemsEntry.ItemFactoryAndEnhancements)
+            foreach ((ItemFactory itemFactory, ItemEnhancement[]? itemEnhancements, Expression StackCount, bool MakeKnown, bool WieldOne) in characterClassAndRaceOutfitItemsEntry.ItemFactoryAndEnhancements)
             {
                 // Create an item from the factory.
                 Item item = itemFactory.GenerateItem();
+                item.StackCount = ComputeIntegerExpression(StackCount).Value;
+
                 if (itemFactory.AimingTuple != null)
                 {
                     item.WandChargesRemaining = 1;
@@ -9773,13 +9778,24 @@ internal class Game
                     }
                 }
 
-                item.IdentityIsStoreBought = true;
-                item.IsFlavorAware = true;
-                item.BecomeKnown();
-
-                if (!item.Wield())
+                if (MakeKnown)
                 {
-                    throw new Exception($"The {item.GetDescription(false)} cannot be outfit because the all of the wield slots are currently in use.");
+                    item.IdentityIsStoreBought = true;
+                    item.IsFlavorAware = true;
+                    item.BecomeKnown();
+                }
+
+                if (WieldOne)
+                {
+                    bool wieldFailed = !item.Wield();
+                    if (wieldFailed)
+                    {
+                        throw new Exception($"The {item.GetDescription(false)} cannot be outfit because the all of the wield slots are currently in use.");
+                    }
+                }
+                else
+                {
+                    InventoryCarry(item);
                 }
             }
         }

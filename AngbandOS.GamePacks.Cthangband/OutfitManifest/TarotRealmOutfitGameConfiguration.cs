@@ -4,9 +4,9 @@ namespace AngbandOS.GamePacks.Cthangband
     public class TarotRealmOutfitGameConfiguration : OutfitManifestGameConfiguration
     {
         public override string? RealmBindingKey => nameof(TarotRealm);
-        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey)[] ItemFactoryAndEnhancementsBindings => new (string, string[]?)[]
+        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(ConjuringsTricksTarotBookItemFactory), null),
+            (nameof(ConjuringsTricksTarotBookItemFactory), null, "1", true, false),
         };
     }
 

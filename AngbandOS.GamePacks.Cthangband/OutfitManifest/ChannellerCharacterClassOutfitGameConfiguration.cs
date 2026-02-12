@@ -4,12 +4,11 @@ namespace AngbandOS.GamePacks.Cthangband
     public class ChannellerCharacterClassOutfitGameConfiguration : OutfitManifestGameConfiguration
     {
         public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.ChannelerCharacterClass);
-        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey)[] ItemFactoryAndEnhancementsBindings => new (string, string[]?)[]
+        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(MagicMissileWandItemFactory), null),
-            (nameof(DaggerWeaponItemFactory), null),
-            (nameof(SustainCharismaRingItemFactory), null)
+            (nameof(MagicMissileWandItemFactory), null, "1", true, false),
+            (nameof(DaggerWeaponItemFactory), null, "1", true, true),
+            (nameof(SustainCharismaRingItemFactory), null, "1", true, true)
         };
     }
-
 }

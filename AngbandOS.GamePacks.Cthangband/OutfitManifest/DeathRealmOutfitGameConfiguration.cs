@@ -4,9 +4,9 @@ namespace AngbandOS.GamePacks.Cthangband
     public class DeathRealmOutfitGameConfiguration : OutfitManifestGameConfiguration
     {
         public override string? RealmBindingKey => nameof(DeathRealm);
-        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey)[] ItemFactoryAndEnhancementsBindings => new (string, string[]?)[]
+        public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(BlackPrayersDeathBookItemFactory), null),
+            (nameof(BlackPrayersDeathBookItemFactory), null, "1", true, false),
         };
     }
 

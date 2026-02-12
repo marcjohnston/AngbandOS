@@ -1930,7 +1930,7 @@ internal sealed class Item : IComparable<Item>
 
     #region Constructors
     /// <summary>
-    /// Create a new item.  Items must be associated with a factory.
+    /// Create a new item with a stackcount of 1.  Items must be associated with a factory.
     /// </summary>
     /// <param name="game"></param>
     /// <param name="factory"></param>
