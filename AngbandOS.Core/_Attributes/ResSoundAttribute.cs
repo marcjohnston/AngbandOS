@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ResSoundAttribute : OrAttribute
 {
     private ResSoundAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ImpactAttribute : OrAttribute
 {
     private ImpactAttribute(Game game) : base(game) { }

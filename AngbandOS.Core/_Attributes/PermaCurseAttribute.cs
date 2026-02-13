@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class PermaCurseAttribute : OrAttribute
 {
     private PermaCurseAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ImElecAttribute : OrAttribute
 {
     private ImElecAttribute(Game game) : base(game) { }

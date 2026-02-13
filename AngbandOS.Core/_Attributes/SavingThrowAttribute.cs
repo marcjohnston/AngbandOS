@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class SavingThrowAttribute : SumAttribute
 {
     private SavingThrowAttribute(Game game) : base(game) { }

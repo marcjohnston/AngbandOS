@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class XtraShotsAttribute : OrAttribute
 {
     private XtraShotsAttribute(Game game) : base(game) { }

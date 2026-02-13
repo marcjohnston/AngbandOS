@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class SlayOrcAttribute : OrAttribute
 {
     private SlayOrcAttribute(Game game) : base(game) { }

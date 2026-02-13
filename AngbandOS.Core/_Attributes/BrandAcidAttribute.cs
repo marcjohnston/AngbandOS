@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class BrandAcidAttribute : OrAttribute
 {
     private BrandAcidAttribute(Game game) : base(game) { }

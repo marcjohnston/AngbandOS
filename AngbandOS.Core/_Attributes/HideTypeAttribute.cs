@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class HideTypeAttribute : OrAttribute
 {
     private HideTypeAttribute(Game game) : base(game) { }

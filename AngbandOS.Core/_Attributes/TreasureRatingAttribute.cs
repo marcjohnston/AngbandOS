@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class TreasureRatingAttribute : SumAttribute
 {
     private TreasureRatingAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ResPoisAttribute : OrAttribute
 {
     private ResPoisAttribute(Game game) : base(game) { }

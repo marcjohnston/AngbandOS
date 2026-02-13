@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class AggravateAttribute : OrAttribute
 {
     private AggravateAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class IgnoreColdAttribute : OrAttribute
 {
     private IgnoreColdAttribute(Game game) : base(game) { }

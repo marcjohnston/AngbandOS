@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class DreadCurseAttribute : OrAttribute
 {
     private DreadCurseAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class CanReflectBoltsAndArrowsAttribute : OrAttribute
 {
     private CanReflectBoltsAndArrowsAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class SlowDigestAttribute : OrAttribute
 {
     private SlowDigestAttribute(Game game) : base(game) { }

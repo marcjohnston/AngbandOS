@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ChaoticAttribute : OrAttribute
 {
     private ChaoticAttribute(Game game) : base(game) { }

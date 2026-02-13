@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ConstitutionAttribute : SumAttribute
 {
     private ConstitutionAttribute(Game game) : base(game) { }

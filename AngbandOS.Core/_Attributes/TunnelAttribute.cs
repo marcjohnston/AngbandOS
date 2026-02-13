@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class TunnelAttribute : SumAttribute
 {
     private TunnelAttribute(Game game) : base(game) { }

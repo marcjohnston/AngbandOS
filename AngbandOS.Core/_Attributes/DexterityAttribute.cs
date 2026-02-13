@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class DexterityAttribute : SumAttribute
 {
     private DexterityAttribute(Game game) : base(game) { }

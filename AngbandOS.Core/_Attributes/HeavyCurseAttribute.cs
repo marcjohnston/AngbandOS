@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class HeavyCurseAttribute : BoolAttribute
 {
     private HeavyCurseAttribute(Game game) : base(game) { }

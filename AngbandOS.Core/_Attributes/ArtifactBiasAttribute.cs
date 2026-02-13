@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ArtifactBiasAttribute : ArtifactBiasNullableReferenceAttribute
 {
     private ArtifactBiasAttribute(Game game) : base(game) { }

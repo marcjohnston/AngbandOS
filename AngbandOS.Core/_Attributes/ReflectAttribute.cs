@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ReflectAttribute : OrAttribute
 {
     private ReflectAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ValuelessAttribute : OrAttribute
 {
     private ValuelessAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ShElecAttribute : OrAttribute
 {
     private ShElecAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class IsCursedAttribute : BoolAttribute
 {
     private IsCursedAttribute(Game game) : base(game) { }

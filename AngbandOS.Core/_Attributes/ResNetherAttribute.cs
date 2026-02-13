@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ResNetherAttribute : OrAttribute
 {
     private ResNetherAttribute(Game game) : base(game) { }

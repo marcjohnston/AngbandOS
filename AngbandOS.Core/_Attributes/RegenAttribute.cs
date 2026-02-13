@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class RegenAttribute : OrAttribute
 {
     private RegenAttribute(Game game) : base(game) { }

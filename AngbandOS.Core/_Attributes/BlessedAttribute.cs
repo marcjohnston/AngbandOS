@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class BlessedAttribute : OrAttribute
 {
     private BlessedAttribute(Game game) : base(game) { }

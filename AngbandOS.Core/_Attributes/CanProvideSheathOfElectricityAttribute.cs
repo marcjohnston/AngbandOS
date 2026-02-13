@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class CanProvideSheathOfElectricityAttribute : OrAttribute
 {
     private CanProvideSheathOfElectricityAttribute(Game game) : base(game) { }

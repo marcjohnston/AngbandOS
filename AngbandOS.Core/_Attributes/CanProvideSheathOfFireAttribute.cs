@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class CanProvideSheathOfFireAttribute : OrAttribute
 {
     private CanProvideSheathOfFireAttribute(Game game) : base(game) { }

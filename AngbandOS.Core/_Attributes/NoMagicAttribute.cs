@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class NoMagicAttribute : OrAttribute
 {
     private NoMagicAttribute(Game game) : base(game) { }

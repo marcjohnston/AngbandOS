@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class FreeActAttribute : OrAttribute
 {
     private FreeActAttribute(Game game) : base(game) { }

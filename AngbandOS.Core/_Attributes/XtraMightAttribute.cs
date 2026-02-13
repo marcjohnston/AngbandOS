@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class XtraMightAttribute : OrAttribute
 {
     private XtraMightAttribute(Game game) : base(game) { }

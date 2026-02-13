@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class TeleportAttribute : OrAttribute
 {
     private TeleportAttribute(Game game) : base(game) { }

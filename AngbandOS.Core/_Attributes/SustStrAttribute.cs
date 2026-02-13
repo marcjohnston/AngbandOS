@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class SustStrAttribute : OrAttribute
 {
     private SustStrAttribute(Game game) : base(game) { }

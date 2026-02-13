@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class CanApplyBlowsBonusAttribute : OrAttribute
 {
     private CanApplyBlowsBonusAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class FeatherAttribute : OrAttribute
 {
     private FeatherAttribute(Game game) : base(game) { }

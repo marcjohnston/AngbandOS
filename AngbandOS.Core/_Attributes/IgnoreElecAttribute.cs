@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class IgnoreElecAttribute : OrAttribute
 {
     private IgnoreElecAttribute(Game game) : base(game) { }

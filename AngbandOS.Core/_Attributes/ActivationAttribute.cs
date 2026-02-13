@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ActivationAttribute : ActivationNullableReferenceAttribute
 {
     private ActivationAttribute(Game game) : base(game) { }

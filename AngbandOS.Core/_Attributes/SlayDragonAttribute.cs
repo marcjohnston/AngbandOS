@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class SlayDragonAttribute : SumAttribute
 {
     private SlayDragonAttribute(Game game) : base(game) { }

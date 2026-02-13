@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class BrandPoisAttribute : OrAttribute
 {
     private BrandPoisAttribute(Game game) : base(game) { }

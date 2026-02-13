@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class UseDeviceAttribute : SumAttribute
 {
     private UseDeviceAttribute(Game game) : base(game) { }

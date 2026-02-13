@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ImColdAttribute : OrAttribute
 {
     private ImColdAttribute(Game game) : base(game) { }

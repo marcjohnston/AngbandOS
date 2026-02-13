@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class WraithAttribute : OrAttribute
 {
     private WraithAttribute(Game game) : base(game) { }

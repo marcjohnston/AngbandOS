@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ResFireAttribute : OrAttribute
 {
     private ResFireAttribute(Game game) : base(game) { }

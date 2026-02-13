@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class StealthAttribute : SumAttribute
 {
     private StealthAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class CharismaAttribute : SumAttribute
 {
     private CharismaAttribute(Game game) : base(game) { }

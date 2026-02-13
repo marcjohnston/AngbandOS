@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class SustDexAttribute : OrAttribute
 {
     private SustDexAttribute(Game game) : base(game) { }

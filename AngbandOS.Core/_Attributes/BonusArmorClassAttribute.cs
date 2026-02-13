@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class BonusArmorClassAttribute : SumAttribute
 {
     private BonusArmorClassAttribute(Game game) : base(game) { }

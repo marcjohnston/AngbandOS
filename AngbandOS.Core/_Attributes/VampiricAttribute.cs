@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class VampiricAttribute : OrAttribute
 {
     private VampiricAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ShowModsAttribute : OrAttribute
 {
     private ShowModsAttribute(Game game) : base(game) { }

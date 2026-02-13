@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class DisarmTrapsAttribute : SumAttribute
 {
     private DisarmTrapsAttribute(Game game) : base(game) { }

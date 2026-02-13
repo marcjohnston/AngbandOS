@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class StrengthAttribute : SumAttribute
 {
     private StrengthAttribute(Game game) : base(game) { }

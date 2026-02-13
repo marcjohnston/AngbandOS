@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class EasyKnowAttribute : OrAttribute
 {
     private EasyKnowAttribute(Game game) : base(game) { }

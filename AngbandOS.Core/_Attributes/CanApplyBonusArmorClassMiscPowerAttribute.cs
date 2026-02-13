@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class CanApplyBonusArmorClassMiscPowerAttribute : OrAttribute
 {
     private CanApplyBonusArmorClassMiscPowerAttribute(Game game) : base(game) { }

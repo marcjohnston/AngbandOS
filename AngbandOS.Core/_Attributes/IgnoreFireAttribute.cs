@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class IgnoreFireAttribute : OrAttribute
 {
     private IgnoreFireAttribute(Game game) : base(game) { }

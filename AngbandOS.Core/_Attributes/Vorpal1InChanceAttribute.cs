@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class Vorpal1InChanceAttribute : SumAttribute
 {
     private Vorpal1InChanceAttribute(Game game) : base(game) { }

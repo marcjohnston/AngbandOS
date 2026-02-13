@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class DiceSidesAttribute : SumAttribute
 {
     private DiceSidesAttribute(Game game) : base(game) { }

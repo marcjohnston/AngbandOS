@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ResNexusAttribute : OrAttribute
 {
     private ResNexusAttribute(Game game) : base(game) { }

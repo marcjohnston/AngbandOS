@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ImAcidAttribute : OrAttribute
 {
     private ImAcidAttribute(Game game) : base(game) { }

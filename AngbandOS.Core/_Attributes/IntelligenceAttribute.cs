@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class IntelligenceAttribute : SumAttribute
 {
     private IntelligenceAttribute(Game game) : base(game) { }

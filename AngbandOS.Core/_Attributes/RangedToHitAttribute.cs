@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class RangedToHitAttribute : SumAttribute
 {
     private RangedToHitAttribute(Game game) : base(game) { }

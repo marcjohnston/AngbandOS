@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class AntiTheftAttribute : OrAttribute
 {
     private AntiTheftAttribute(Game game) : base(game) { }

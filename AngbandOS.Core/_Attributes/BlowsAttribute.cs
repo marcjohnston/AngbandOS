@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class BlowsAttribute : OrAttribute
 {
     private BlowsAttribute(Game game) : base(game) { }

@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class IgnoreAcidAttribute : OrAttribute
 {
     private IgnoreAcidAttribute(Game game) : base(game) { }

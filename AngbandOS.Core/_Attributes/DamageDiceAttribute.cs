@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class DamageDiceAttribute : SumAttribute
 {
     private DamageDiceAttribute(Game game) : base(game) { }

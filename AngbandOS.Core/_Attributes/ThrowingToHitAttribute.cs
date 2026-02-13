@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class ThrowingToHitAttribute : SumAttribute
 {
     private ThrowingToHitAttribute(Game game) : base(game) { }

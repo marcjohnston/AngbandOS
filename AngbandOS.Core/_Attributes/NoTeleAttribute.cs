@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class NoTeleAttribute : OrAttribute
 {
     private NoTeleAttribute(Game game) : base(game) { }

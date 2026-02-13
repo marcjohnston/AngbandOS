@@ -1,5 +1,6 @@
 namespace AngbandOS.Core;
-    [Serializable]
+
+[Serializable]
 internal class SearchAttribute : SumAttribute
 {
     private SearchAttribute(Game game) : base(game) { }
