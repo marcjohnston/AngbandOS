@@ -3,4 +3,5 @@
 [Serializable]
 public class OrAttributeGameConfiguration
 {
+    public virtual string? Key { get; set; } = null;
 }

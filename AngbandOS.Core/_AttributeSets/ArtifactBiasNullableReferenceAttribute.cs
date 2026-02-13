@@ -7,11 +7,18 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class ArtifactBiasNullableReferenceAttribute : NullableReferenceAttribute<ArtifactBias?>, IGetKey
+internal class ArtifactBiasNullableReferenceAttribute : NullableReferenceAttribute<ArtifactBias?>, IGetKey, IToJson
 {
-    public ArtifactBiasNullableReferenceAttribute(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
+    public ArtifactBiasNullableReferenceAttribute(Game game, ArtifactBiasNullableReferenceAttributeGameConfiguration gameConfiguration) : base(game)
+    {
+        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
+    }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind() { }
+    public string ToJson()
+    {
+        return "";
+    }
 }

@@ -7,11 +7,18 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class StringNullableReferenceAttribute : NullableReferenceAttribute<string>, IGetKey
+internal class StringNullableReferenceAttribute : NullableReferenceAttribute<string>, IGetKey, IToJson
 {
-    public StringNullableReferenceAttribute(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
+    public StringNullableReferenceAttribute(Game game, StringNullableReferenceAttributeGameConfiguration gameConfiguration) : base(game)
+    {
+        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
+    }
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind() { }
+    public string ToJson()
+    {
+        return "";
+    }
 }

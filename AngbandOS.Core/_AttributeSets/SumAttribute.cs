@@ -7,12 +7,19 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class SumAttribute : Attribute, IGetKey
+internal class SumAttribute : Attribute, IGetKey, IToJson
 {
-    public SumAttribute(Game game) : base(game) { }
+    public SumAttribute(Game game, SumAttributeGameConfiguration gameConfiguration) : base(game)
+    {
+        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
+    }
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new SumEffectiveAttributeValue(Game);
-    public virtual string Key => GetType().Name;
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind() { }
+    public string ToJson()
+    {
+        return "";
+    }
 }

@@ -4,15 +4,25 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface.Configuration;
+
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class OrAttribute : Attribute, IGetKey
+internal class OrAttribute : Attribute, IGetKey, IToJson
 {
-    public OrAttribute(Game game) : base(game) { }
+    public OrAttribute(Game game, OrAttributeGameConfiguration gameConfiguration) : base(game)
+    {
+        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
+    }
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new OrEffectiveAttributeValue(Game);
-    public virtual string Key => GetType().Name;
+    public string Key { get; }
 
     public string GetKey => Key;
     public void Bind() { }
+
+    public string ToJson()
+    {
+        return "";
+    }
 }

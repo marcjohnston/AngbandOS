@@ -116,6 +116,14 @@ public class GameConfiguration
         gameConfiguration.MappedItemEnhancements = LoadFromAssembly<MappedItemEnhancementGameConfiguration>(assembly);
         gameConfiguration.ChestTraps = LoadFromAssembly<ChestTrapGameConfiguration>(assembly);
         gameConfiguration.OutfitManifests = LoadFromAssembly<OutfitManifestGameConfiguration>(assembly);
+
+        gameConfiguration.OrAttributes = LoadFromAssembly<OrAttributeGameConfiguration>(assembly);
+        gameConfiguration.SumAttributes = LoadFromAssembly<SumAttributeGameConfiguration>(assembly);
+        gameConfiguration.ColorEnumAttributes = LoadFromAssembly<ColorEnumAttributeGameConfiguration>(assembly);
+        gameConfiguration.BoolAttributes = LoadFromAssembly<BoolAttributeGameConfiguration>(assembly);
+        gameConfiguration.ActivationAttributes = LoadFromAssembly<ActivationNullableReferenceAttributeGameConfiguration>(assembly);
+        gameConfiguration.ArtifactBiasAttributes = LoadFromAssembly<ArtifactBiasNullableReferenceAttributeGameConfiguration>(assembly);
+        gameConfiguration.StringAttributes = LoadFromAssembly<StringNullableReferenceAttributeGameConfiguration>(assembly);
     }
 
     /// <summary>
@@ -208,6 +216,14 @@ public class GameConfiguration
     public virtual PluralGameConfiguration[]? Plurals { get; set; } = null;
 
     public virtual AttackGameConfiguration[]? Attacks { get; set; } = null;
+
+    public virtual OrAttributeGameConfiguration[]? OrAttributes { get; set; } = null;
+    public virtual SumAttributeGameConfiguration[]? SumAttributes { get; set; } = null;
+    public virtual ColorEnumAttributeGameConfiguration[]? ColorEnumAttributes { get; set; } = null;
+    public virtual BoolAttributeGameConfiguration[]? BoolAttributes { get; set; } = null;
+    public virtual ActivationNullableReferenceAttributeGameConfiguration[]? ActivationAttributes { get; set; } = null;
+    public virtual ArtifactBiasNullableReferenceAttributeGameConfiguration[]? ArtifactBiasAttributes { get; set; } = null;
+    public virtual StringNullableReferenceAttributeGameConfiguration[]? StringAttributes { get; set; } = null;
 
     public virtual GodGameConfiguration[]? Gods { get; set; } = null;
     public virtual SyllableSetGameConfiguration[]? SyllableSets { get; set; } = null;

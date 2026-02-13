@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface.Configuration;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -270,13 +271,16 @@ internal class SingletonRepository
         RegisterInterface<IUsedScript>();
         RegisterInterface<IZapRodScript>();
 
+        // Base preload
+        RegisterInterface<Attribute>();
+
+        // Not configurable yet
         RegisterInterface<Ability>();
         RegisterInterface<ActivationWeightedRandom>();
         RegisterInterface<Alignment>();
         RegisterInterface<AlterAction>();
         RegisterInterface<ArtifactBias>();
         RegisterInterface<AttackEffect>();
-        RegisterInterface<Attribute>();
         RegisterInterface<CharacterClass>();
         RegisterInterface<BirthStage>();
         RegisterInterface<FixedArtifact>();
@@ -311,6 +315,15 @@ internal class SingletonRepository
 
         // Validate the system scripts exist, before we load the user configurable ones.
         ValidateSystemScriptsEnum();
+
+        // Preload
+        LoadFromConfiguration<OrAttribute, OrAttributeGameConfiguration>(gameConfiguration.OrAttributes);
+        LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes);
+        LoadFromConfiguration<ColorEnumAttribute, ColorEnumAttributeGameConfiguration>(gameConfiguration.ColorEnumAttributes);
+        LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes);
+        LoadFromConfiguration<ActivationNullableReferenceAttribute, ActivationNullableReferenceAttributeGameConfiguration>(gameConfiguration.ActivationAttributes);
+        LoadFromConfiguration<ArtifactBiasNullableReferenceAttribute, ArtifactBiasNullableReferenceAttributeGameConfiguration>(gameConfiguration.ArtifactBiasAttributes);
+        LoadFromConfiguration<StringNullableReferenceAttribute, StringNullableReferenceAttributeGameConfiguration>(gameConfiguration.StringAttributes);
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
         LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts);
