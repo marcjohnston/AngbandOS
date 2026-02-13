@@ -1,12 +1,13 @@
 namespace AngbandOS.GamePacks.Cthangband
 {
     [Serializable]
-    public class PriestCharacterClassOutfitGameConfiguration : OutfitManifestGameConfiguration
+    public class DeathRealmOutfitManifestGameConfiguration : OutfitManifestGameConfiguration
     {
-        public override (string[]?, bool)? CharacterClassBindingKey => (new string[] { nameof(CharacterClassesEnum.PriestCharacterClass) }, true);
+        public override (string[], bool)? RealmBindingKey => (new string[] { nameof(DeathRealm) }, true);
         public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(MaceHaftedWeaponItemFactory), null, "1", true, true),
+            (nameof(BlackPrayersDeathBookItemFactory), null, "1", true, false),
         };
     }
+
 }

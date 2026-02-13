@@ -1,13 +1,12 @@
 namespace AngbandOS.GamePacks.Cthangband
 {
     [Serializable]
-    public class FolkRealmOutfitGameConfiguration : OutfitManifestGameConfiguration
+    public class WarriorMageCharacterClassOutfitManifestGameConfiguration : OutfitManifestGameConfiguration
     {
-        public override (string[]?, bool)? RealmBindingKey => (new string[] { nameof(FolkRealm) }, true);
+        public override (string[], bool)? CharacterClassBindingKey => (new string[] { nameof(CharacterClassesEnum.WarriorMageCharacterClass) }, true);
         public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(CantripsForBeginnersFolkBookItemFactory), null, "1", true, false),
+            (nameof(ShortSwordWeaponItemFactory), null, "1", true, true),
         };
     }
-
 }

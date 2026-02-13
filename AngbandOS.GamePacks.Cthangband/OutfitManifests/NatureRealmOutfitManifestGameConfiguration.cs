@@ -1,12 +1,12 @@
 namespace AngbandOS.GamePacks.Cthangband
 {
     [Serializable]
-    public class SorceryRealmOutfitGameConfiguration : OutfitManifestGameConfiguration
+    public class NatureRealmOutfitManifestGameConfiguration : OutfitManifestGameConfiguration
     {
-        public override (string[]?, bool)? RealmBindingKey => (new string[] { nameof(SorceryRealm) }, true);
+        public override (string[], bool)? RealmBindingKey => (new string[] { nameof(NatureRealm) }, true);
         public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(BeginnersHandbookSorceryBookItemFactory), null, "1", true, false),
+            (nameof(CallOfTheWildNatureBookItemFactory), null, "1", true, false),
         };
     }
 

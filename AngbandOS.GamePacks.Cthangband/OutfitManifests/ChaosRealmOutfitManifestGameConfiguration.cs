@@ -1,12 +1,12 @@
 namespace AngbandOS.GamePacks.Cthangband
 {
     [Serializable]
-    public class CultistCharacterClassOutfitGameConfiguration : OutfitManifestGameConfiguration
+    public class ChaosRealmOutfitManifestGameConfiguration : OutfitManifestGameConfiguration
     {
-        public override (string[]?, bool)? CharacterClassBindingKey => (new string[] { nameof(CharacterClassesEnum.CultistCharacterClass) }, true);
+        public override (string[], bool)? RealmBindingKey => (new string[] { nameof(ChaosRealm) }, true);
         public override (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKey, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings => new(string, string[]?, string, bool, bool)[]
         {
-            (nameof(SustainIntelligenceRingItemFactory), null, "1", true, true),
+            (nameof(SignOfChaosChaosBookItemFactory), null, "1", true, false),
         };
     }
 }

@@ -8,7 +8,7 @@ internal class HobbitRacialPowerScript : Script, IScript
     public void ExecuteScript()
     {
         ItemFactory foodItemFactory = Game.SingletonRepository.Get<ItemFactory>(nameof(RationFoodItemFactory));
-        Item item = foodItemFactory.GenerateItem();
+        Item item = new Item(Game, foodItemFactory);
         Game.DropNear(item, null, Game.MapY.IntValue, Game.MapX.IntValue);
         Game.MsgPrint("You cook some food.");
     }

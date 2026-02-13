@@ -2367,7 +2367,7 @@ internal class Game
                         continue;
                     }
                 }
-                Item item = kIdx.GenerateItem();
+                Item item = new Item(this, kIdx);
                 item.ApplyFixedArtifact(aPtr);
                 return item;
             } while (true); // TODO: This may loop forever if no fixed artifact can be created.
@@ -2392,9 +2392,9 @@ internal class Game
             {
                 return null;
             }
-            item = kIdx.GenerateItem();
+            item = new Item(this, kIdx);
         }
-        item.EnchantItem(objectLevel, true, good, great, true); 
+        item.EnchantItem(objectLevel, true, good, great, false); 
         item.StackCount = item.MakeObjectCount;
         return item;
     }
@@ -2425,7 +2425,7 @@ internal class Game
             goldType = GoldFactories.Length - 1;
         }
         ItemFactory itemFactory = GoldFactories[goldType];
-        return itemFactory.GenerateItem();
+        return new Item(this, itemFactory);
     }
 
     private void ResetUniqueOnlyGuardianStatus()
@@ -3472,7 +3472,7 @@ internal class Game
         if (mPtr.StolenGold > 0)
         {
 
-            Item oPtr = rPtr.GoldItemFactory.GenerateItem();
+            Item oPtr = new Item(this, rPtr.GoldItemFactory);
             oPtr.GoldPieces = mPtr.StolenGold;
             DropNear(oPtr, null, y, x);
         }
@@ -3525,7 +3525,7 @@ internal class Game
             if (doGold && (!doItem || RandomLessThan(100) < 50))
             {
                 // Make gold to drop near the monster.
-                Item qPtr = rPtr.GoldItemFactory.GenerateItem();
+                Item qPtr = new Item(this, rPtr.GoldItemFactory);
                 DropNear(qPtr, null, y, x);
                 dumpGold++;
             }
@@ -9737,7 +9737,7 @@ internal class Game
         if (Race.OutfitsWithScrollsOfLight || CharacterClass.OutfitsWithScrollsOfLight)
         {
             ItemFactory scrollLightItemClass = SingletonRepository.Get<ItemFactory>(nameof(LightScrollItemFactory));
-            Item item = scrollLightItemClass.GenerateItem();
+            Item item = new Item(this, scrollLightItemClass);
             item.StackCount = RandomBetween(3, 7);
             item.IsFlavorAware = true;
             item.BecomeKnown();
@@ -9747,7 +9747,7 @@ internal class Game
         else
         {
             ItemFactory woodenTorchItemClass = SingletonRepository.Get<ItemFactory>(nameof(WoodenTorchLightSourceItemFactory));
-            Item item = woodenTorchItemClass.GenerateItem();
+            Item item = new Item(this, woodenTorchItemClass);
             item.StackCount = RandomBetween(3, 7);
             item.TurnsOfLightRemaining = RandomBetween(3, 7) * 500;
             item.IsFlavorAware = true;
@@ -9763,7 +9763,7 @@ internal class Game
         OutfitManifest[] characterClassAndRaceOutfitItemsTable = SingletonRepository.Get<OutfitManifest>(); // Get the table to select from.
 
         ///
-        /// (string[]? MatchValues, bool IsEqual)?
+        /// (string[] MatchValues, bool IsEqual)?
         /// A null value is a wildcard, to match any null and non-null value.  OutfitManifests validate against null because character classes, races and realms are not null.
         /// A non-null value has an IsEqual for an equality test.  True for == (Contains), false for != (Does not contain).
         /// The MatchValues can be null to detect for null values.  This is generic and not applicable for OutfitManifests.
@@ -9797,7 +9797,7 @@ internal class Game
             foreach ((ItemFactory itemFactory, ItemEnhancement[]? itemEnhancements, Expression StackCount, bool MakeKnown, bool WieldOne) in characterClassAndRaceOutfitItemsEntry.ItemFactoryAndEnhancements)
             {
                 // Create an item from the factory.
-                Item item = itemFactory.GenerateItem();
+                Item item = new Item(this, itemFactory);
                 item.StackCount = ComputeIntegerExpression(StackCount).Value;
 
                 if (itemFactory.AimingTuple != null)

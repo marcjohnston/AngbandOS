@@ -53,7 +53,7 @@ internal class EditItemScript : Script, IScript, ICastSpellScript
                     return;
                 }
                 item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(val));
-                item.EnchantItem(Game.Difficulty, allowFixedArtifact, good, great, true);
+                item.EnchantItem(Game.Difficulty, allowFixedArtifact, good, great, false);
                 break;
             }
         } while (true);

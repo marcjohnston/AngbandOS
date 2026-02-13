@@ -308,11 +308,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         return JsonSerializer.Serialize(itemFactoryGameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public Item GenerateItem()
-    {
-        return new Item(Game, this);
-    }
-
     public void Refill(Item item)
     {
         if (RefillScript == null)

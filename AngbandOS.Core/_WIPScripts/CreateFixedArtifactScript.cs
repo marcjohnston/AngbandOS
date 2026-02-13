@@ -37,7 +37,7 @@ internal class CreateFixedArtifactScript : Script, IScript, ICastSpellScript
         FixedArtifact aPtr = Game.SingletonRepository.Get<FixedArtifact>(aIdx);
 
         // Create a compatible item.
-        Item qPtr = aPtr.BaseItemFactory.GenerateItem();
+        Item qPtr = new Item(Game, aPtr.BaseItemFactory);
 
         // Apply the fixed artifact.
         if (qPtr.ApplyFixedArtifact(aPtr))
