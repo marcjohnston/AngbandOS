@@ -128,8 +128,17 @@ public class ItemEnhancementGameConfiguration
     public virtual ColorEnum? Color { get; set; } = null;
 
     public virtual bool? IsCursed { get; set; } = null;
+
+    /// <summary>
+    /// Returns the number of damage dice to apply to the item.
+    /// </summary>
     public virtual int? DamageDice { get; set; } = null;
+
+    /// <summary>
+    /// Returns the number of dice sides to apply to the item.
+    /// </summary>
     public virtual int? DiceSides { get; set; } = null;
+
     public virtual bool? DrainExp { get; set; } = null;
     public virtual bool? DreadCurse { get; set; } = null;
     public virtual bool? EasyKnow { get; set; } = null;

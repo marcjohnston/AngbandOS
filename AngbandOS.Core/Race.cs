@@ -17,7 +17,7 @@ internal abstract class Race : IGetKey
 
     public void Refresh()
     {
-        EffectiveAttributeSet = Enhancement.GenerateItemCharacteristics();
+        EffectiveAttributeSet = Enhancement.GenerateAttributeSet();
     }
 
     public virtual string Key => GetType().Name;

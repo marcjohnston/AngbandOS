@@ -391,7 +391,7 @@ internal abstract class CharacterClass : IGetKey
     public ItemEnhancement Enhancement { get; private set; }
     public void Refresh()
     {
-        EffectiveAttributeSet = Enhancement.GenerateItemCharacteristics();
+        EffectiveAttributeSet = Enhancement.GenerateAttributeSet();
     }
     public void Bind()
     {

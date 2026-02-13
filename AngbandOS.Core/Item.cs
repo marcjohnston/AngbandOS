@@ -1696,7 +1696,7 @@ internal sealed class Item : IComparable<Item>
                 // If it was a weighted random, no item enhancement might have been selected because null item enhancements can be assigned weights.
                 if (itemEnhancement is not null)
                 {
-                    fixedArtifactItemPropertySet.MergeAttributeSet(itemEnhancement.GenerateItemCharacteristics());
+                    fixedArtifactItemPropertySet.MergeAttributeSet(itemEnhancement.GenerateAttributeSet());
                 }
             }
         }
@@ -1833,7 +1833,7 @@ internal sealed class Item : IComparable<Item>
         ItemEnhancement? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
         if (itemAdditiveBundle != null)
         {
-            EffectivePropertySet.MergeAttributeSet(itemAdditiveBundle.GenerateItemCharacteristics());
+            EffectivePropertySet.MergeAttributeSet(itemAdditiveBundle.GenerateAttributeSet());
         }
     }
 
@@ -2042,7 +2042,7 @@ internal sealed class Item : IComparable<Item>
             int goodBadMultiplier = EffectivePropertySet.IsCursed || EffectivePropertySet.Valueless ? -1 : 1;
 
             EffectiveAttributeSet? rareItemEffectivePropertySet = new EffectiveAttributeSet(Game);
-            rareItemEffectivePropertySet.MergeAttributeSet(rareItem.GenerateItemCharacteristics());
+            rareItemEffectivePropertySet.MergeAttributeSet(rareItem.GenerateAttributeSet());
             rareItemEffectivePropertySet.MeleeToHit *= goodBadMultiplier;
             rareItemEffectivePropertySet.ToDamage *= goodBadMultiplier;
             rareItemEffectivePropertySet.BonusArmorClass *= goodBadMultiplier;

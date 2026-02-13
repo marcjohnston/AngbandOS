@@ -375,7 +375,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     public void Bind()
     {
         ItemEnhancement itemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
-        EffectiveAttributeSet.MergeAttributeSet(itemEnhancement.GenerateItemCharacteristics());
+        EffectiveAttributeSet.MergeAttributeSet(itemEnhancement.GenerateAttributeSet());
 
         //// Cut and paste
         //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override int BonusDamage => ");
@@ -1379,7 +1379,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             } while (slayingItemEnhancement != null && !slayingItemEnhancement.AppliesTo(this));
 
             // Apply the item enhancement.  This supports a null choice.
-            characteristics.MergeAttributeSet(slayingItemEnhancement?.GenerateItemCharacteristics());
+            characteristics.MergeAttributeSet(slayingItemEnhancement?.GenerateAttributeSet());
         }
 
         /// <summary>
@@ -1398,7 +1398,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                         // The test only occurs on the effective properties.
                         if (itemTest.Matches(item))
                         {
-                            characteristics.MergeAttributeSet(itemEnhancement.GenerateItemCharacteristics());
+                            characteristics.MergeAttributeSet(itemEnhancement.GenerateAttributeSet());
                             if (moreProbability.Test())
                             {
                                 return true;
@@ -1512,7 +1512,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                         ItemEnhancement? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
                         if (itemAdditiveBundle != null)
                         {
-                            characteristics.MergeAttributeSet(itemAdditiveBundle.GenerateItemCharacteristics());
+                            characteristics.MergeAttributeSet(itemAdditiveBundle.GenerateAttributeSet());
                         }
                     }
                     break;

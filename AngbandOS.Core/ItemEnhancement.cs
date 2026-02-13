@@ -152,7 +152,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// Returns an immutable and fixed value set of item characteristics specified by this <see cref="ItemEnhancement"/> by computing fixed values from the expressions defined in these enhancements.
     /// </summary>
     /// <returns></returns>
-    public ReadOnlyAttributeSet GenerateItemCharacteristics()
+    public ReadOnlyAttributeSet GenerateAttributeSet()
     {
         // Since we are squashing all of the values into a read-only set, we can use the Set.
         EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet(Game);
