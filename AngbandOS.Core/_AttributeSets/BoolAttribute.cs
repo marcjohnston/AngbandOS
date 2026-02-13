@@ -11,6 +11,8 @@ internal abstract class BoolAttribute : Attribute, IGetKey
 {
     public BoolAttribute(Game game) : base(game) { }
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new BoolSetEffectiveAttributeValue(Game, null);
-    public string GetKey => Index.ToString();
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
     public void Bind() { }
 }

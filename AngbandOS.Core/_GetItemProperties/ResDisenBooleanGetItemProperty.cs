@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class ResDisenBooleanGetItemProperty : GetItemProperty<bool>
 {
     public ResDisenBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AttributeEnum.ResDisen);
+    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.ResDisen;

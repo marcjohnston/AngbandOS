@@ -116,7 +116,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasFireImmunity = false;
         Game.HasColdImmunity = false;
         Game.InfravisionRange = Game.Race.Infravision; // done
-        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value + Game.CharacterClass.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(AttributeEnum.DisarmTraps).Value; // done
+        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(nameof(DisarmTrapsAttribute)).Value + Game.CharacterClass.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(nameof(DisarmTrapsAttribute)).Value; // done
         Game.SkillUseDevice = Game.Race.UseDevice + Game.CharacterClass.UseDevice; // done
         Game.SkillSavingThrow = Game.Race.SavingThrow + Game.CharacterClass.SavingThrow; // done
         Game.SkillStealth = Game.Race.Stealth + Game.CharacterClass.Stealth; // done .. need to copy

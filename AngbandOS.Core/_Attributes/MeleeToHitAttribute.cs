@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class MeleeToHitAttribute : SumAttribute
 {
     private MeleeToHitAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.MeleeToHit;
 }

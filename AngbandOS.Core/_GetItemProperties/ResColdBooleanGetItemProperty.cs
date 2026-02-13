@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class ResColdBooleanGetItemProperty : GetItemProperty<bool>
 {
     public ResColdBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AttributeEnum.ResCold);
+    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.ResCold;

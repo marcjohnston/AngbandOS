@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class ValuelessAttribute : OrAttribute
 {
     private ValuelessAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.Valueless;
 }

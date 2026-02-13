@@ -9,7 +9,12 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class Attribute
 {
-    public abstract int Index { get; }
+    private static int Count = 0;
+
+    /// <summary>
+    /// Returns the unique index of the attribute.  
+    /// </summary>
+    public int Index { get; private set; }
 
     protected readonly Game Game;
 
@@ -18,5 +23,7 @@ internal abstract class Attribute
     protected Attribute(Game game)
     {
         Game = game;
+        Index = Count;
+        Count++;
     }
 }

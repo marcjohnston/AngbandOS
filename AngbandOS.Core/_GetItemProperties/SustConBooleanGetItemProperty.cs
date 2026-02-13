@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class SustConBooleanGetItemProperty : GetItemProperty<bool>
 {
     public SustConBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AttributeEnum.SustCon);
+    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.SustCon;

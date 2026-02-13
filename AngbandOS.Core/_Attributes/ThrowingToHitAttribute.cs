@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class ThrowingToHitAttribute : SumAttribute
 {
     private ThrowingToHitAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.ThrowingToHit;
 }

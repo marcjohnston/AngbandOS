@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class ImColdAttribute : OrAttribute
 {
     private ImColdAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.ImCold;
 }

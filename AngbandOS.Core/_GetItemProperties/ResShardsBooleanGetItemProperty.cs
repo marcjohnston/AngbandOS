@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class ResShardsBooleanGetItemProperty : GetItemProperty<bool>
 {
     public ResShardsBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AttributeEnum.ResShards);
+    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.ResShards;

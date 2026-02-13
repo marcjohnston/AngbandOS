@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class IgnoreColdAttribute : OrAttribute
 {
     private IgnoreColdAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.IgnoreCold;
 }

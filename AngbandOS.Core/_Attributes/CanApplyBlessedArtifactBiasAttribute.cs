@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class CanApplyBlessedArtifactBiasAttribute : OrAttribute
 {
     private CanApplyBlessedArtifactBiasAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.CanApplyBlessedArtifactBias;
 }

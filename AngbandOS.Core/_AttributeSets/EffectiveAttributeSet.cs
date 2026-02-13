@@ -77,7 +77,7 @@ internal class EffectiveAttributeSet
         {
             attributeModifiers[attribute.Index] = _effectiveAttributeValues[attribute.Index].ToReadOnly();
         }
-        return new ReadOnlyAttributeSet(attributeModifiers);
+        return new ReadOnlyAttributeSet(Game, attributeModifiers);
     }
 
     /// <summary>
@@ -103,9 +103,17 @@ internal class EffectiveAttributeSet
     /// <typeparam name="T">The type of the effective attribute value to return. Must inherit from EffectiveAttributeValue.</typeparam>
     /// <param name="attribute">The attribute for which to retrieve the effective value.</param>
     /// <returns>The effective attribute value of type T corresponding to the specified attribute.</returns>
-    public T Get<T>(AttributeEnum attribute) where T : EffectiveAttributeValue
+    [Obsolete("Use Get<T>(Attribute attribute) instead to avoid unnecessary lookups of the Attribute by name.")]
+    public T Get<T>(string attributeName) where T : EffectiveAttributeValue
     {
-        int index = (int)attribute;
+        Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+        int index = attribute.Index;
+        return (T)_effectiveAttributeValues[index];
+    }
+
+    public T Get<T>(Attribute attribute) where T : EffectiveAttributeValue
+    {
+        int index = attribute.Index;
         return (T)_effectiveAttributeValues[index];
     }
 
@@ -134,13 +142,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBlessedArtifactBias).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(CanApplyBlessedArtifactBiasAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBlessedArtifactBias).Set();
+                Get<OrEffectiveAttributeValue>(nameof(CanApplyBlessedArtifactBiasAttribute)).Set();
             }
         }
     }
@@ -148,13 +156,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ArtifactBiasSlayingDisabled).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ArtifactBiasSlayingDisabledAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ArtifactBiasSlayingDisabled).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ArtifactBiasSlayingDisabledAttribute)).Set();
             }
         }
     }
@@ -162,13 +170,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBlowsBonus).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(CanApplyBlowsBonusAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBlowsBonus).Set();
+                Get<OrEffectiveAttributeValue>(nameof(CanApplyBlowsBonusAttribute)).Set();
             }
         }
     }
@@ -176,13 +184,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanReflectBoltsAndArrows).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(CanReflectBoltsAndArrowsAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.CanReflectBoltsAndArrows).Set();
+                Get<OrEffectiveAttributeValue>(nameof(CanReflectBoltsAndArrowsAttribute)).Set();
             }
         }
     }
@@ -190,13 +198,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplySlayingBonus).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(CanApplySlayingBonusAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplySlayingBonus).Set();
+                Get<OrEffectiveAttributeValue>(nameof(CanApplySlayingBonusAttribute)).Set();
             }
         }
     }
@@ -204,13 +212,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBonusArmorClassMiscPower).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(CanApplyBonusArmorClassMiscPowerAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.CanApplyBonusArmorClassMiscPower).Set();
+                Get<OrEffectiveAttributeValue>(nameof(CanApplyBonusArmorClassMiscPowerAttribute)).Set();
             }
         }
     }
@@ -218,13 +226,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanProvideSheathOfElectricity).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(CanProvideSheathOfElectricityAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.CanProvideSheathOfElectricity).Set();
+                Get<OrEffectiveAttributeValue>(nameof(CanProvideSheathOfElectricityAttribute)).Set();
             }
         }
     }
@@ -232,13 +240,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.CanProvideSheathOfFire).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(CanProvideSheathOfFireAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.CanProvideSheathOfFire).Set();
+                Get<OrEffectiveAttributeValue>(nameof(CanProvideSheathOfFireAttribute)).Set();
             }
         }
     }
@@ -246,211 +254,211 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.MeleeToHit).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(MeleeToHitAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.MeleeToHit).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(MeleeToHitAttribute)).Append(value);
         }
     }
     public int BaseArmorClass
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.BaseArmorClass).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.BaseArmorClass).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Append(value);
         }
     }
     public int BonusArmorClass
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.BonusArmorClass).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(BonusArmorClassAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.BonusArmorClass).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(BonusArmorClassAttribute)).Append(value);
         }
     }
     public int DisarmTraps
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.DisarmTraps).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(DisarmTrapsAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.DisarmTraps).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(DisarmTrapsAttribute)).Append(value);
         }
     }
     public int ToDamage
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.ToDamage).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(ToDamageAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.ToDamage).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(ToDamageAttribute)).Append(value);
         }
     }
     public int Strength
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Strength).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(StrengthAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Strength).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(StrengthAttribute)).Append(value);
         }
     }
     public int Intelligence
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Intelligence).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(IntelligenceAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Intelligence).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(IntelligenceAttribute)).Append(value);
         }
     }
     public int Wisdom
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Wisdom).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(WisdomAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Wisdom).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(WisdomAttribute)).Append(value);
         }
     }
     public int Dexterity
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Dexterity).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(DexterityAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Dexterity).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(DexterityAttribute)).Append(value);
         }
     }
     public int Constitution
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Constitution).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(ConstitutionAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Constitution).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(ConstitutionAttribute)).Append(value);
         }
     }
     public int Charisma
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Charisma).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(CharismaAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Charisma).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(CharismaAttribute)).Append(value);
         }
     }
     public int Stealth
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Stealth).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(StealthAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Stealth).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(StealthAttribute)).Append(value);
         }
     }
     public int Search
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Search).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(SearchAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Search).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(SearchAttribute)).Append(value);
         }
     }
     public int Infravision
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Infravision).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(InfravisionAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Infravision).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(InfravisionAttribute)).Append(value);
         }
     }
     public int Tunnel
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Tunnel).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(TunnelAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Tunnel).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(TunnelAttribute)).Append(value);
         }
     }
     public int Attacks
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Attacks).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(AttacksAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Attacks).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(AttacksAttribute)).Append(value);
         }
     }
     public int Speed
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Speed).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(SpeedAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Speed).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(SpeedAttribute)).Append(value);
         }
     }
     public Activation? Activation
     {
         get
         {
-            return Get<NullableSetEffectiveReferenceAttributeValue<Activation>>(AttributeEnum.Activation).Get();
+            return Get<NullableSetEffectiveReferenceAttributeValue<Activation>>(nameof(ActivationAttribute)).Get();
         }
         set
         {
-            Get<NullableSetEffectiveReferenceAttributeValue<Activation>>(AttributeEnum.Activation).Set(value);
+            Get<NullableSetEffectiveReferenceAttributeValue<Activation>>(nameof(ActivationAttribute)).Set(value);
         }
     }
     public bool Aggravate
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Aggravate).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(AggravateAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Aggravate).Set();
+                Get<OrEffectiveAttributeValue>(nameof(AggravateAttribute)).Set();
             }
         }
     }
@@ -458,13 +466,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.AntiTheft).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(AntiTheftAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.AntiTheft).Set();
+                Get<OrEffectiveAttributeValue>(nameof(AntiTheftAttribute)).Set();
             }
         }
     }
@@ -472,24 +480,24 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<NullableSetEffectiveReferenceAttributeValue<ArtifactBias>>(AttributeEnum.ArtifactBias).Get();
+            return Get<NullableSetEffectiveReferenceAttributeValue<ArtifactBias>>(nameof(ArtifactBiasAttribute)).Get();
         }
         set
         {
-            Get<NullableSetEffectiveReferenceAttributeValue<ArtifactBias>>(AttributeEnum.ArtifactBias).Set(value);
+            Get<NullableSetEffectiveReferenceAttributeValue<ArtifactBias>>(nameof(ArtifactBiasAttribute)).Set(value);
         }
     }
     public bool Blessed
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Blessed).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Blessed).Set();
+                Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Set();
             }
         }
     }
@@ -497,13 +505,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.BrandAcid).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(BrandAcidAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.BrandAcid).Set();
+                Get<OrEffectiveAttributeValue>(nameof(BrandAcidAttribute)).Set();
             }
         }
     }
@@ -511,13 +519,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.BrandCold).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(BrandColdAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.BrandCold).Set();
+                Get<OrEffectiveAttributeValue>(nameof(BrandColdAttribute)).Set();
             }
         }
     }
@@ -525,13 +533,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.BrandElec).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(BrandElecAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.BrandElec).Set();
+                Get<OrEffectiveAttributeValue>(nameof(BrandElecAttribute)).Set();
             }
         }
     }
@@ -539,13 +547,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.BrandFire).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(BrandFireAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.BrandFire).Set();
+                Get<OrEffectiveAttributeValue>(nameof(BrandFireAttribute)).Set();
             }
         }
     }
@@ -553,13 +561,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.BrandPois).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(BrandPoisAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.BrandPois).Set();
+                Get<OrEffectiveAttributeValue>(nameof(BrandPoisAttribute)).Set();
             }
         }
     }
@@ -567,13 +575,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Chaotic).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Chaotic).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Set();
             }
         }
     }
@@ -581,29 +589,29 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<ColorEnumSetEffectiveAttributeValue>(AttributeEnum.Color).Get();
+            return Get<ColorEnumSetEffectiveAttributeValue>(nameof(ColorAttribute)).Get();
         }
         set
         {
-            Get<ColorEnumSetEffectiveAttributeValue>(AttributeEnum.Color).Set(value);
+            Get<ColorEnumSetEffectiveAttributeValue>(nameof(ColorAttribute)).Set(value);
         }
     }
     public bool IsCursed
     {
         get
         {
-            bool? isCursed = Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Get();
+            bool? isCursed = Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Get();
             return isCursed.HasValue && isCursed.Value;
         }
         set
         {
             if (value)
             {
-                Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Set();
+                Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
             }
             else if (!value)
             {
-                Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Reset();
+                Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
             }
         }
     }
@@ -611,35 +619,35 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.DamageDice).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(DamageDiceAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.DamageDice).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(DamageDiceAttribute)).Append(value);
         }
     }
     public int DiceSides
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.DiceSides).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(DiceSidesAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.DiceSides).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(DiceSidesAttribute)).Append(value);
         }
     }
     public bool DrainExp
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.DrainExp).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(DrainExpAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.DrainExp).Set();
+                Get<OrEffectiveAttributeValue>(nameof(DrainExpAttribute)).Set();
             }
         }
     }
@@ -647,13 +655,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.DreadCurse).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(DreadCurseAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.DreadCurse).Set();
+                Get<OrEffectiveAttributeValue>(nameof(DreadCurseAttribute)).Set();
             }
         }
     }
@@ -661,13 +669,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.EasyKnow).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(EasyKnowAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.EasyKnow).Set();
+                Get<OrEffectiveAttributeValue>(nameof(EasyKnowAttribute)).Set();
             }
         }
     }
@@ -675,13 +683,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Feather).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(FeatherAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Feather).Set();
+                Get<OrEffectiveAttributeValue>(nameof(FeatherAttribute)).Set();
             }
         }
     }
@@ -689,13 +697,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.FreeAct).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(FreeActAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.FreeAct).Set();
+                Get<OrEffectiveAttributeValue>(nameof(FreeActAttribute)).Set();
             }
         }
     }
@@ -703,24 +711,24 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<NullableSetEffectiveReferenceAttributeValue<string>>(AttributeEnum.FriendlyName).Get();
+            return Get<NullableSetEffectiveReferenceAttributeValue<string>>(nameof(FriendlyNameAttribute)).Get();
         }
         set
         {
-            Get<NullableSetEffectiveReferenceAttributeValue<string>>(AttributeEnum.FriendlyName).Set(value);
+            Get<NullableSetEffectiveReferenceAttributeValue<string>>(nameof(FriendlyNameAttribute)).Set(value);
         }
     }
     public bool HatesElectricity
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.HatesElectricity).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(HatesElectricityAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.HatesElectricity).Set();
+                Get<OrEffectiveAttributeValue>(nameof(HatesElectricityAttribute)).Set();
             }
         }
     }
@@ -728,13 +736,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.HatesAcid).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(HatesAcidAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.HatesAcid).Set();
+                Get<OrEffectiveAttributeValue>(nameof(HatesAcidAttribute)).Set();
             }
         }
     }
@@ -742,13 +750,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.HatesCold).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(HatesColdAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.HatesCold).Set();
+                Get<OrEffectiveAttributeValue>(nameof(HatesColdAttribute)).Set();
             }
         }
     }
@@ -756,13 +764,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.HatesFire).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(HatesFireAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.HatesFire).Set();
+                Get<OrEffectiveAttributeValue>(nameof(HatesFireAttribute)).Set();
             }
         }
     }
@@ -770,18 +778,18 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            bool? heavyCurse = Get<BoolSetEffectiveAttributeValue>(AttributeEnum.HeavyCurse).Get();
+            bool? heavyCurse = Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Get();
             return heavyCurse.HasValue && heavyCurse.Value;
         }
         set
         {
             if (value)
             {
-                Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Set();
+                Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
             }
             else if (!value)
             {
-                Get<BoolSetEffectiveAttributeValue>(AttributeEnum.IsCursed).Reset();
+                Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
             }
         }
     }
@@ -789,13 +797,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.HideType).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(HideTypeAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.HideType).Set();
+                Get<OrEffectiveAttributeValue>(nameof(HideTypeAttribute)).Set();
             }
         }
     }
@@ -803,13 +811,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.HoldLife).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(HoldLifeAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.HoldLife).Set();
+                Get<OrEffectiveAttributeValue>(nameof(HoldLifeAttribute)).Set();
             }
         }
     }
@@ -817,13 +825,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreAcid).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreAcid).Set();
+                Get<OrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Set();
             }
         }
     }
@@ -831,13 +839,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreCold).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(IgnoreColdAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreCold).Set();
+                Get<OrEffectiveAttributeValue>(nameof(IgnoreColdAttribute)).Set();
             }
         }
     }
@@ -845,13 +853,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreElec).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreElec).Set();
+                Get<OrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Set();
             }
         }
     }
@@ -859,13 +867,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreFire).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.IgnoreFire).Set();
+                Get<OrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Set();
             }
         }
     }
@@ -873,13 +881,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ImAcid).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ImAcidAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ImAcid).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ImAcidAttribute)).Set();
             }
         }
     }
@@ -887,13 +895,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ImCold).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ImColdAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ImCold).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ImColdAttribute)).Set();
             }
         }
     }
@@ -901,13 +909,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ImElec).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ImElecAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ImElec).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ImElecAttribute)).Set();
             }
         }
     }
@@ -915,13 +923,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ImFire).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ImFireAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ImFire).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ImFireAttribute)).Set();
             }
         }
     }
@@ -929,13 +937,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Impact).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ImpactAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Impact).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ImpactAttribute)).Set();
             }
         }
     }
@@ -943,13 +951,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.NoMagic).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(NoMagicAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.NoMagic).Set();
+                Get<OrEffectiveAttributeValue>(nameof(NoMagicAttribute)).Set();
             }
         }
     }
@@ -957,13 +965,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.NoTele).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(NoTeleAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.NoTele).Set();
+                Get<OrEffectiveAttributeValue>(nameof(NoTeleAttribute)).Set();
             }
         }
     }
@@ -971,13 +979,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.PermaCurse).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.PermaCurse).Set();
+                Get<OrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Set();
             }
         }
     }
@@ -985,24 +993,24 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Radius).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(RadiusAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Radius).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(RadiusAttribute)).Append(value);
         }
     }
     public bool Reflect
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Reflect).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ReflectAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Reflect).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ReflectAttribute)).Set();
             }
         }
     }
@@ -1010,13 +1018,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Regen).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Regen).Set();
+                Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
             }
         }
     }
@@ -1024,13 +1032,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResAcid).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResAcid).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Set();
             }
         }
     }
@@ -1038,13 +1046,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResBlind).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResBlind).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Set();
             }
         }
     }
@@ -1052,13 +1060,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResChaos).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResChaos).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set();
             }
         }
     }
@@ -1066,13 +1074,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResCold).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResCold).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Set();
             }
         }
     }
@@ -1080,13 +1088,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResConf).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResConf).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
             }
         }
     }
@@ -1094,13 +1102,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResDark).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResDark).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
             }
         }
     }
@@ -1108,13 +1116,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResDisen).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResDisen).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Set();
             }
         }
     }
@@ -1122,13 +1130,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResElec).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResElecAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResElec).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResElecAttribute)).Set();
             }
         }
     }
@@ -1136,13 +1144,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResFear).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResFear).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
             }
         }
     }
@@ -1150,13 +1158,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResFire).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResFireAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResFire).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResFireAttribute)).Set();
             }
         }
     }
@@ -1164,13 +1172,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResLight).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResLight).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
             }
         }
     }
@@ -1178,13 +1186,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResNether).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResNether).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
             }
         }
     }
@@ -1192,13 +1200,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResNexus).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResNexus).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Set();
             }
         }
     }
@@ -1206,13 +1214,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResPois).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResPois).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
             }
         }
     }
@@ -1220,13 +1228,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResShards).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResShards).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Set();
             }
         }
     }
@@ -1234,13 +1242,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ResSound).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ResSound).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Set();
             }
         }
     }
@@ -1248,24 +1256,24 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.SavingThrow).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(SavingThrowAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.SavingThrow).Set(value);
+            Get<SumEffectiveAttributeValue>(nameof(SavingThrowAttribute)).Set(value);
         }
     }
     public bool SeeInvis
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SeeInvis).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SeeInvis).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
             }
         }
     }
@@ -1273,13 +1281,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ShElec).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ShElecAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ShElec).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ShElecAttribute)).Set();
             }
         }
     }
@@ -1287,13 +1295,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ShFire).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ShFireAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ShFire).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ShFireAttribute)).Set();
             }
         }
     }
@@ -1301,13 +1309,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.ShowMods).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.ShowMods).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Set();
             }
         }
     }
@@ -1315,13 +1323,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayAnimal).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayAnimal).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Set();
             }
         }
     }
@@ -1329,13 +1337,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayDemon).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SlayDemonAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayDemon).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SlayDemonAttribute)).Set();
             }
         }
     }
@@ -1343,24 +1351,24 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.SlayDragon).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.SlayDragon).Set(value);
+            Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Set(value);
         }
     }
     public bool SlayEvil
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayEvil).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayEvil).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Set();
             }
         }
     }
@@ -1368,13 +1376,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayGiant).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayGiant).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Set();
             }
         }
     }
@@ -1382,13 +1390,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayOrc).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayOrc).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Set();
             }
         }
     }
@@ -1396,13 +1404,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayTroll).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayTroll).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Set();
             }
         }
     }
@@ -1410,13 +1418,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlayUndead).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SlayUndead).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Set();
             }
         }
     }
@@ -1424,13 +1432,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SlowDigest).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SlowDigest).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
             }
         }
     }
@@ -1438,13 +1446,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustCha).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SustCha).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
             }
         }
     }
@@ -1452,13 +1460,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustCon).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SustCon).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
             }
         }
     }
@@ -1466,13 +1474,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustDex).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SustDex).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
             }
         }
     }
@@ -1480,13 +1488,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustInt).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SustInt).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
             }
         }
     }
@@ -1494,13 +1502,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustStr).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SustStr).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
             }
         }
     }
@@ -1508,13 +1516,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.SustWis).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.SustWis).Set();
+                Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
             }
         }
     }
@@ -1522,13 +1530,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Telepathy).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Telepathy).Set();
+                Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
             }
         }
     }
@@ -1536,13 +1544,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Teleport).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Teleport).Set();
+                Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Set();
             }
         }
     }
@@ -1550,46 +1558,46 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.TreasureRating).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.TreasureRating).Set(value);
+            Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Set(value);
         }
     }
     public int UseDevice
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.UseDevice).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(UseDeviceAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.UseDevice).Set(value);
+            Get<SumEffectiveAttributeValue>(nameof(UseDeviceAttribute)).Set(value);
         }
     }
     public int Value
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Value).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(ValueAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Value).Append(value);
+            Get<SumEffectiveAttributeValue>(nameof(ValueAttribute)).Append(value);
         }
     }
     public bool Valueless
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Valueless).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ValuelessAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Valueless).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ValuelessAttribute)).Set();
             }
         }
     }
@@ -1597,13 +1605,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Vampiric).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Vampiric).Set();
+                Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Set();
             }
         }
     }
@@ -1611,46 +1619,46 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Vorpal1InChance).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Vorpal1InChance).Set(value);
+            Get<SumEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Set(value);
         }
     }
     public int VorpalExtraAttacks1InChance
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.VorpalExtraAttacks1InChance).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(VorpalExtraAttacks1InChanceAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.VorpalExtraAttacks1InChance).Set(value);
+            Get<SumEffectiveAttributeValue>(nameof(VorpalExtraAttacks1InChanceAttribute)).Set(value);
         }
     }
     public int Weight
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(AttributeEnum.Weight).Get();
+            return Get<SumEffectiveAttributeValue>(nameof(WeightAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(AttributeEnum.Weight).Set(value);
+            Get<SumEffectiveAttributeValue>(nameof(WeightAttribute)).Set(value);
         }
     }
     public bool Wraith
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.Wraith).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(WraithAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.Wraith).Set();
+                Get<OrEffectiveAttributeValue>(nameof(WraithAttribute)).Set();
             }
         }
     }
@@ -1658,13 +1666,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.XtraMight).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.XtraMight).Set();
+                Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Set();
             }
         }
     }
@@ -1672,13 +1680,13 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(AttributeEnum.XtraShots).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(AttributeEnum.XtraShots).Set();
+                Get<OrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Set();
             }
         }
     }

@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class NoTeleBooleanGetItemProperty : GetItemProperty<bool>
 {
     public NoTeleBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AttributeEnum.NoTele);
+    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.NoTele;

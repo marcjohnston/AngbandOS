@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class PermaCurseBooleanGetItemProperty : GetItemProperty<bool>
 {
     public PermaCurseBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AttributeEnum.PermaCurse);
+    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.PermaCurse;

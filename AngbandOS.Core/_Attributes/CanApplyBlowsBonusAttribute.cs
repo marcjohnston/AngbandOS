@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class CanApplyBlowsBonusAttribute : OrAttribute
 {
     private CanApplyBlowsBonusAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.CanApplyBlowsBonus;
 }

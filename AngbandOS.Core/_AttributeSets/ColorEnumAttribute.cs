@@ -11,6 +11,8 @@ internal abstract class ColorEnumAttribute : Attribute, IGetKey
 {
     public ColorEnumAttribute(Game game) : base(game) { }
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ColorEnumSetEffectiveAttributeValue(Game, ColorEnum.White);
-    public string GetKey => Index.ToString();
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
     public void Bind() { }
 }

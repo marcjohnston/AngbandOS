@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class CanProvideSheathOfElectricityAttribute : OrAttribute
 {
     private CanProvideSheathOfElectricityAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.CanProvideSheathOfElectricity;
 }

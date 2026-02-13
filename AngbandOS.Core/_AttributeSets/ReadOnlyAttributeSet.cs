@@ -9,12 +9,18 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class ReadOnlyAttributeSet
 {
+    private readonly Game Game;
     public AttributeValue[] Value { get; }
-    public ReadOnlyAttributeSet(AttributeValue[] value) => Value = value;
-    public AttributeValue this[int index] => Value[(int)index];
-    public T Get<T>(AttributeEnum attribute) where T : AttributeValue
+    public ReadOnlyAttributeSet(Game game, AttributeValue[] value)
     {
-        int index = (int)attribute;
+        Game = game;
+        Value = value;
+    }
+    public AttributeValue this[int index] => Value[(int)index];
+    public T Get<T>(string attributeName) where T : AttributeValue
+    {
+        Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+        int index = attribute.Index;
         return (T)Value[index];
     }
 }

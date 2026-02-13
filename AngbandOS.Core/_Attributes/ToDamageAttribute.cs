@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class ToDamageAttribute : SumAttribute
 {
     private ToDamageAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.ToDamage;
 }

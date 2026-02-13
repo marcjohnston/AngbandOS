@@ -4,7 +4,7 @@ internal class ArtifactBiasSlayingDisabledBooleanGetItemProperty : GetItemProper
 {
     public ArtifactBiasSlayingDisabledBooleanGetItemProperty(Game game) : base(game) { }
 
-    public override string DebugDescription => nameof(AttributeEnum.ArtifactBiasSlayingDisabled);
+    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.ArtifactBiasSlayingDisabled;

@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class ConstitutionAttribute : SumAttribute
 {
     private ConstitutionAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.Constitution;
 }

@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class DexterityAttribute : SumAttribute
 {
     private DexterityAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.Dexterity;
 }

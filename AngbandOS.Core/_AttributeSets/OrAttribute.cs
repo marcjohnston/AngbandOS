@@ -11,6 +11,8 @@ internal abstract class OrAttribute : Attribute, IGetKey
 {
     public OrAttribute(Game game) : base(game) { }
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new OrEffectiveAttributeValue(Game);
-    public string GetKey => Index.ToString();
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
     public void Bind() { }
 }

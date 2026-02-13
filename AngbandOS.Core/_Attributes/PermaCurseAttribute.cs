@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class PermaCurseAttribute : OrAttribute
 {
     private PermaCurseAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.PermaCurse;
 }

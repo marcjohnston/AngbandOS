@@ -1618,7 +1618,7 @@ internal sealed class Item : IComparable<Item>
             if (IsFlavorAware)
             {
                 // Return the value of the item factory.
-                return EffectivePropertySet.Get<SumEffectiveAttributeValue>(AttributeEnum.Value).Get(Game.FactoryAttributeKey);
+                return EffectivePropertySet.Get<SumEffectiveAttributeValue>(nameof(ValueAttribute)).Get(Game.FactoryAttributeKey);
             }
 
             // We do not know what the item is, so return the base value of the factory.

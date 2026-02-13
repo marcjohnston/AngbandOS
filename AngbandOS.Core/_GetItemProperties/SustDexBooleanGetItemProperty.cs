@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class SustDexBooleanGetItemProperty : GetItemProperty<bool>
 {
     public SustDexBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AttributeEnum.SustDex);
+    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.SustDex;

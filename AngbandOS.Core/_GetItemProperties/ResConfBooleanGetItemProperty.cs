@@ -3,7 +3,7 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class ResConfBooleanGetItemProperty : GetItemProperty<bool>
 {
     public ResConfBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AttributeEnum.ResConf);
+    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.ResConf;

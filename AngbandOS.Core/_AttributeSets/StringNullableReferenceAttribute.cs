@@ -10,6 +10,8 @@ namespace AngbandOS.Core;
 internal abstract class StringNullableReferenceAttribute : NullableReferenceAttribute<string>, IGetKey
 {
     public StringNullableReferenceAttribute(Game game) : base(game) { }
-    public string GetKey => Index.ToString();
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
     public void Bind() { }
 }

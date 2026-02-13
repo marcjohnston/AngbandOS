@@ -3,5 +3,4 @@ namespace AngbandOS.Core;
 internal class SlayDemonAttribute : OrAttribute
 {
     private SlayDemonAttribute(Game game) : base(game) { }
-    public override int Index => (int)AttributeEnum.SlayDemon;
 }
