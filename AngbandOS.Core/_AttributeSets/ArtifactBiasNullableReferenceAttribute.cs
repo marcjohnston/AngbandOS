@@ -7,8 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class NullableReferenceAttribute<T> : Attribute where T : class
+internal abstract class ArtifactBiasNullableReferenceAttribute : NullableReferenceAttribute<ArtifactBias?>, IGetKey
 {
-    public NullableReferenceAttribute(Game game) : base(game) { }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new NullableSetEffectiveReferenceAttributeValue<T>(Game, null);
+    public ArtifactBiasNullableReferenceAttribute(Game game) : base(game) { }
+    public string GetKey => Index.ToString();
+    public void Bind() { }
 }
