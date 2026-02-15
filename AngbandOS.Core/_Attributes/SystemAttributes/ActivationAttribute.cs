@@ -7,8 +7,11 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class NullableReferenceAttribute<T> : Attribute where T : class
+internal class ActivationAttribute : Attribute, IGetKey
 {
-    public NullableReferenceAttribute(Game game) : base(game) { }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new NullableSetEffectiveReferenceAttributeValue<T>(Game, null);
+    private ActivationAttribute(Game game) : base(game) { }
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new NullableSetEffectiveReferenceAttributeValue<Activation>(Game, null);
+
+    public string GetKey => GetType().Name;
+    public void Bind() { }
 }

@@ -321,9 +321,6 @@ internal class SingletonRepository
         LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes);
         LoadFromConfiguration<ColorEnumAttribute, ColorEnumAttributeGameConfiguration>(gameConfiguration.ColorEnumAttributes);
         LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes);
-        LoadFromConfiguration<ActivationNullableReferenceAttribute, ActivationNullableReferenceAttributeGameConfiguration>(gameConfiguration.ActivationAttributes);
-        LoadFromConfiguration<ArtifactBiasNullableReferenceAttribute, ArtifactBiasNullableReferenceAttributeGameConfiguration>(gameConfiguration.ArtifactBiasAttributes);
-        LoadFromConfiguration<StringNullableReferenceAttribute, StringNullableReferenceAttributeGameConfiguration>(gameConfiguration.StringAttributes);
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
         LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts);
