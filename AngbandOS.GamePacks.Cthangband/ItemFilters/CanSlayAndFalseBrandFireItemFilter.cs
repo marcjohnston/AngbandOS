@@ -11,5 +11,5 @@ public class CanSlayAndFalseBrandFireItemFilter : ItemFilterGameConfiguration
 {
 
     public override bool? BrandFire => false;
-    public override bool? ArtifactBiasSlayingDisabled => false;
+    public override bool? ArtifactBiasCanSlay => true;
 }

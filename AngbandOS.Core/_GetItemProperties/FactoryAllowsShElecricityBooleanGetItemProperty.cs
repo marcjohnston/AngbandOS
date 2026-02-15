@@ -3,7 +3,6 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class FactoryAllowsShElecricityBooleanGetItemProperty : GetItemProperty<bool>
 {
     public FactoryAllowsShElecricityBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.CanProvideSheathOfElectricity;

@@ -51,7 +51,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         BrandFire = itemEnhancementGameConfiguration.BrandFire;
         BrandPois = itemEnhancementGameConfiguration.BrandPois;
         CanApplyBlessedArtifactBias = itemEnhancementGameConfiguration.CanApplyBlessedArtifactBias;
-        ArtifactBiasSlayingDisabled = itemEnhancementGameConfiguration.ArtifactBiasSlayingDisabled;
+        ArtifactBiasCanSlay = itemEnhancementGameConfiguration.ArtifactBiasCanSlay;
         CanApplyBlowsBonus = itemEnhancementGameConfiguration.CanApplyBlowsBonus;
         CanReflectBoltsAndArrows = itemEnhancementGameConfiguration.CanReflectBoltsAndArrows;
         CanApplySlayingBonus = itemEnhancementGameConfiguration.CanApplySlayingBonus;
@@ -178,7 +178,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         itemCharacteristics.ArtifactBias = ArtifactBiasWeightedRandom?.ChooseOrDefault();
 
         itemCharacteristics.CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias.HasValue ? CanApplyBlessedArtifactBias.Value : false;
-        itemCharacteristics.ArtifactBiasSlayingDisabled = ArtifactBiasSlayingDisabled.HasValue ? ArtifactBiasSlayingDisabled.Value : false;
+        itemCharacteristics.ArtifactBiasCanSlay = ArtifactBiasCanSlay.HasValue ? ArtifactBiasCanSlay.Value : false;
         itemCharacteristics.CanApplyBlowsBonus = CanApplyBlowsBonus.HasValue ? CanApplyBlowsBonus.Value : false;
         itemCharacteristics.CanReflectBoltsAndArrows = CanReflectBoltsAndArrows.HasValue ? CanReflectBoltsAndArrows.Value : false;
         itemCharacteristics.CanApplySlayingBonus = CanApplySlayingBonus.HasValue ? CanApplySlayingBonus.Value : false;
@@ -335,7 +335,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Aggravate = Aggravate,
             AntiTheft = AntiTheft,
             ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
-            ArtifactBiasSlayingDisabled = ArtifactBiasSlayingDisabled,
+            ArtifactBiasCanSlay = ArtifactBiasCanSlay,
             ArtifactBiasWeightedRandomBindingKey = ArtifactBiasWeightedRandomBindingKey,
             Attacks = Attacks,
             BaseArmorClass = BaseArmorClass,
@@ -558,9 +558,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     private bool? CanReflectBoltsAndArrows { get; }
 
     /// <summary>
-    /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns true, for all items except bows; which return false.
+    /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns false, for all items except bows; which return true.
     /// </summary>
-    private bool? ArtifactBiasSlayingDisabled { get; }
+    private bool? ArtifactBiasCanSlay { get; }
 
     /// <summary>
     /// Returns true, if an item of this factory can have be blessed for priestly biased artifacts.  Returns false, for all items except swords and polearms; which return false.

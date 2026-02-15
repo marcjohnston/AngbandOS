@@ -15,7 +15,7 @@ internal abstract class GetItemProperty<T> : IDebugDescription
         Game = game;
     }
 
-    public abstract string DebugDescription { get; }
+    public virtual string DebugDescription => GetType().Name;
     public abstract T Get(Item item);
 }
 

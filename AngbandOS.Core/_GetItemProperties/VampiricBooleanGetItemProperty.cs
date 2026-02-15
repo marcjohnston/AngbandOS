@@ -3,7 +3,6 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class VampiricBooleanGetItemProperty : GetItemProperty<bool>
 {
     public VampiricBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.Vampiric;

@@ -11,7 +11,6 @@ internal class CanBeAimedBooleanGetItemProperty : GetItemProperty<bool>
 {
     public CanBeAimedBooleanGetItemProperty(Game game) : base(game) { }
 
-    public override string DebugDescription => nameof(Item.AimingTuple);
     public override bool Get(Item item)
     {
         return item.AimingTuple != null;

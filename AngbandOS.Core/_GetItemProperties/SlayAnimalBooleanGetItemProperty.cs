@@ -3,7 +3,6 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class SlayAnimalBooleanGetItemProperty : GetItemProperty<bool>
 {
     public SlayAnimalBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.SlayAnimal;

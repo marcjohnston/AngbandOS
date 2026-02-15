@@ -11,5 +11,5 @@ public class CanSlayAndFalseVampiricItemFilter : ItemFilterGameConfiguration
 {
 
     public override bool? Vampiric => false;
-    public override bool? ArtifactBiasSlayingDisabled => false;
+    public override bool? ArtifactBiasCanSlay => true;
 }

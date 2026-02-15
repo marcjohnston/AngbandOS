@@ -4,7 +4,6 @@ internal class BrandFireBooleanGetItemProperty : GetItemProperty<bool>
 {
     public BrandFireBooleanGetItemProperty(Game game) : base(game) { }
 
-    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.BrandFire;

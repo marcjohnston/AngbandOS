@@ -152,17 +152,17 @@ internal class EffectiveAttributeSet
             }
         }
     }
-    public bool ArtifactBiasSlayingDisabled
+    public bool ArtifactBiasCanSlay
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(ArtifactBiasSlayingDisabledAttribute)).Get();
+            return Get<OrEffectiveAttributeValue>(nameof(ArtifactBiasCanSlayAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(ArtifactBiasSlayingDisabledAttribute)).Set();
+                Get<OrEffectiveAttributeValue>(nameof(ArtifactBiasCanSlayAttribute)).Set();
             }
         }
     }

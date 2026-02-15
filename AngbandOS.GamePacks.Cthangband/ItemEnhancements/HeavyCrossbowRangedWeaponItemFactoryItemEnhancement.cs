@@ -4,7 +4,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class HeavyCrossbowRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? ShowMods => true;
-    public override bool? ArtifactBiasSlayingDisabled => true;
     public override bool? CanApplyBlowsBonus => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;

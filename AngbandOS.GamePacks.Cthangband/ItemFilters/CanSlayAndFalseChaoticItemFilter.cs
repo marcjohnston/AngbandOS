@@ -11,5 +11,5 @@ public class CanSlayAndFalseChaoticItemFilter : ItemFilterGameConfiguration
 {
 
     public override bool? Chaotic => false;
-    public override bool? ArtifactBiasSlayingDisabled => false;
+    public override bool? ArtifactBiasCanSlay => true;
 }

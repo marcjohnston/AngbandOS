@@ -3,7 +3,6 @@ namespace AngbandOS.Core.GetItemProperties;
 internal class SustWisBooleanGetItemProperty : GetItemProperty<bool>
 {
     public SustWisBooleanGetItemProperty(Game game) : base(game) { }
-    public override string DebugDescription => nameof(AggravateAttribute);
     public override bool Get(Item item)
     {
         return item.EffectivePropertySet.SustWis;

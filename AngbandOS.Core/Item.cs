@@ -1840,17 +1840,17 @@ internal sealed class Item : IComparable<Item>
     /// <summary>
     /// Converts this item into a random artifact.
     /// </summary>
-    /// <param name="fromScroll"></param>
+    /// <param name="alsoIdentifyItem"></param>
     /// <returns></returns>
-    public bool CreateRandomArtifact(bool fromScroll)
+    public bool CreateRandomArtifact(bool alsoIdentifyItem)
     {
         // Create a set of random artifact characteristics.
-        ReadOnlyAttributeSet randomArtifactPropertySet = _factory.CreateRandomArtifact(this, fromScroll);
+        ReadOnlyAttributeSet randomArtifactPropertySet = _factory.CreateRandomArtifact(this, alsoIdentifyItem);
         EffectivePropertySet.MergeAttributeSet(Game.RandomAttributeKey, randomArtifactPropertySet);
 
         ActivationRechargeTimeRemaining = 0; // TODO: If the item already had activation running, the conversion could change it? and restart the recharge?
         string newName;
-        if (fromScroll)
+        if (alsoIdentifyItem)
         {
             IdentifyFully();
             IdentityIsStoreBought = true;

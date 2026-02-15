@@ -30,7 +30,7 @@ public class ItemFilterGameConfiguration
     public virtual string[]? AnyMatchingItemFactoryNames { get; set; } = null;
     public virtual string[]? AllNonMatchingItemFactoryNames { get; set; } = null;
     public virtual bool? CanApplyBlessedArtifactBias { get; set; } = null;
-    public virtual bool? ArtifactBiasSlayingDisabled { get; set; } = null;
+    public virtual bool? ArtifactBiasCanSlay { get; set; } = null;
 
     public virtual bool? Aggravate { get; set; } = null;
 
