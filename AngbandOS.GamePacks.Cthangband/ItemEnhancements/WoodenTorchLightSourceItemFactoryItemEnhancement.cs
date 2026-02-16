@@ -17,4 +17,10 @@ public class WoodenTorchLightSourceItemFactoryItemEnhancement : ItemEnhancementG
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.Brown;
     public override string? HatesFire => "true";
+
+    /// <summary>
+    /// Returns 1 because wooden torches consume a single turn of light for every world turn.
+    /// </summary>
+    public override int? BurnRate => 1;
+
 }

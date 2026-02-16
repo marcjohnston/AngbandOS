@@ -18,4 +18,9 @@ public class BrassLanternLightSourceItemFactoryItemEnhancement : ItemEnhancement
     public override int? DiceSides => 1;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
     public override string? HatesFire => "true";
+
+    /// <summary>
+    /// Returns 1 because a latern consumes a turn of light for every world turn.
+    /// </summary>
+    public override int? BurnRate => 1;
 }

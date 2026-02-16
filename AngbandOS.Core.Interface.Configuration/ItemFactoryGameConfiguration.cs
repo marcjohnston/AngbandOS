@@ -188,12 +188,6 @@ public class ItemFactoryGameConfiguration
     public virtual int? MaxPhlogiston { get; set; } = null;
 
     /// <summary>
-    /// Returns the number of turns of light that is consumed per turn.  Defaults to zero; which means there is no consumption and that the light source lasts forever.
-    /// Torches and laterns have burn rates greater than zero.
-    /// </summary>
-    public virtual int BurnRate { get; set; } = 0;
-
-    /// <summary>
     /// Returns an array of tuples that define the mass produce for items of this factory when they are sold in a store.  These tuples define a Roll that is applied for additional items to be produced
     /// for items of a cost value or less; or null, if no additional items should be produced based on any cost.  Costs are determined after enhancements are applied.  Returns null, by default.  This property is used
     /// to bind the <see cref="MassProduceTuples"/> property during the bind phase.  The tuples must be sorted by cost and are checked during the bind phase.

@@ -14,11 +14,6 @@ public class WoodenTorchLightSourceItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override bool IsFuelForTorch => true;
 
-    /// <summary>
-    /// Returns 1 because wooden torches consume a single turn of light for every world turn.
-    /// </summary>
-    public override int BurnRate => 1;
-
     public override string SymbolBindingKey => nameof(TildeSymbol);
     public override string Name => "Wooden Torch";
 

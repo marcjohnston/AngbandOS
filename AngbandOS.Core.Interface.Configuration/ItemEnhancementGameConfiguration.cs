@@ -15,6 +15,8 @@ public class ItemEnhancementGameConfiguration
 {
     public virtual string? Key { get; set; } = null;
 
+    public virtual int? BurnRate { get; set; } = null;
+
     public virtual string? DisarmTraps { get; set; } = null;
     public virtual string? UseDevice { get; set; } = null;
 

@@ -36,7 +36,7 @@ internal class EatLightRandomMutation : Mutation
         Item? oPtr = Game.GetInventoryItem(index);
         if (oPtr != null)
         {
-            if (oPtr.BurnRate > 0 && oPtr.TurnsOfLightRemaining > 0)
+            if (oPtr.EffectivePropertySet.BurnRate > 0 && oPtr.TurnsOfLightRemaining > 0)
             {
                 Game.RestoreHealth(oPtr.TurnsOfLightRemaining / 20);
                 oPtr.TurnsOfLightRemaining /= 2;

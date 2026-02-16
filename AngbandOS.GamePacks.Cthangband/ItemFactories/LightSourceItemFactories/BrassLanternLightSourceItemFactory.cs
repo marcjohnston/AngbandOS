@@ -10,11 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class BrassLanternLightSourceItemFactory : ItemFactoryGameConfiguration
 {
     /// <summary>
-    /// Returns 1 because a latern consumes a turn of light for every world turn.
-    /// </summary>
-    public override int BurnRate => 1;
-
-    /// <summary>
     /// Returns 15000 because it is the maximum amount of fuel that can be used for a phlogiston.
     /// </summary>
     public override int? MaxPhlogiston => 15000;

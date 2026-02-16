@@ -143,7 +143,6 @@ internal sealed class Item : IComparable<Item>
     public bool IsLanternFuel => _factory.IsLanternFuel;
     public ItemFactory[]? AmmunitionItemFactories => _factory.AmmunitionItemFactories;
     public bool CanTunnel => _factory.CanTunnel;
-    public int BurnRate => _factory.BurnRate;
     public bool IsWearableOrWieldable => _factory.IsWearableOrWieldable;
     public bool ProvidesSunlight => _factory.ProvidesSunlight;
     public bool CanBeEaten => _factory.CanBeEaten;
@@ -1164,7 +1163,7 @@ internal sealed class Item : IComparable<Item>
 
         if (EffectivePropertySet.Radius > 0)
         {
-            string burnRate = BurnRate == 0 ? "forever" : "when fueled";
+            string burnRate = EffectivePropertySet.BurnRate == 0 ? "forever" : "when fueled";
             info[i++] = $"It provides light (radius {EffectivePropertySet.Radius}) {burnRate}.";
         }
 
@@ -1328,7 +1327,7 @@ internal sealed class Item : IComparable<Item>
         {
             info[i++] = "It allows you to levitate.";
         }
-        if (EffectivePropertySet.Radius > 0 && BurnRate == 0)
+        if (EffectivePropertySet.Radius > 0 && EffectivePropertySet.BurnRate == 0)
         {
             info[i++] = "It provides permanent light.";
         }

@@ -69,7 +69,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         IsRangedWeapon = itemFactoryGameConfiguration.IsRangedWeapon;
         MissileDamageMultiplier = itemFactoryGameConfiguration.MissileDamageMultiplier;
         MaxPhlogiston = itemFactoryGameConfiguration.MaxPhlogiston;
-        BurnRate = itemFactoryGameConfiguration.BurnRate;
         MassProduceBindingTuples = itemFactoryGameConfiguration.MassProduceBindingTuples;
         BreaksDuringEnchantmentProbabilityExpression = itemFactoryGameConfiguration.BreaksDuringEnchantmentProbabilityExpression;
         EnchantmentBindingTuples = itemFactoryGameConfiguration.EnchantmentBindingTuples;
@@ -245,7 +244,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             IsRangedWeapon = IsRangedWeapon,
             MissileDamageMultiplier = MissileDamageMultiplier,
             MaxPhlogiston = MaxPhlogiston,
-            BurnRate = BurnRate,
             MassProduceBindingTuples = MassProduceBindingTuples,
             BreaksDuringEnchantmentProbabilityExpression = BreaksDuringEnchantmentProbabilityExpression,
             EnchantmentBindingTuples = EnchantmentBindingTuples,
@@ -697,7 +695,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             s += $" ({item.WandChargesRemaining} {Game.Pluralize("charge", item.WandChargesRemaining)})";
         }
 
-        if (BurnRate > 0)
+        if (EffectiveAttributeSet.BurnRate > 0)
         {
             s += $" (with {item.TurnsOfLightRemaining} {Game.Pluralize("turn", item.TurnsOfLightRemaining)} of light)";
         }
@@ -871,7 +869,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// <returns></returns>
     public int CalculateTorch(Item item)
     {
-        if (BurnRate > 0 && item.TurnsOfLightRemaining <= 0)
+        if (EffectiveAttributeSet.BurnRate > 0 && item.TurnsOfLightRemaining <= 0)
         {
             return 0;
         }
@@ -1857,12 +1855,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns the maximum fuel that can be used for phlogiston.  Returns null, by default, meaning that the light source cannot be used to create a phlogiston.
     /// </summary>
     public int? MaxPhlogiston { get; } = null;
-
-    /// <summary>
-    /// Returns the number of turns of light that is consumed per turn.  Defaults to zero; which means there is no consumption and that the light source lasts forever.
-    /// Torches and laterns have burn rates greater than zero.
-    /// </summary>
-    public int BurnRate { get; } = 0;
 
     /// <summary>
     /// Returns an array of tuples that define the mass produce for items of this factory.  These tuples define a Roll that is applied for additional items to be produced

@@ -19,6 +19,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Game = game;
         Key = itemEnhancementGameConfiguration.Key ?? itemEnhancementGameConfiguration.GetType().Name;
 
+        BurnRate = itemEnhancementGameConfiguration.BurnRate;
         DisarmTraps = itemEnhancementGameConfiguration.DisarmTraps;
         SavingThrow = itemEnhancementGameConfiguration.SavingThrow;
         ActivationName = itemEnhancementGameConfiguration.ActivationName;
@@ -177,6 +178,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         itemCharacteristics.SavingThrow = SavingThrowExpression == null ? 0 : Game.ComputeIntegerExpression(SavingThrowExpression).Value;
         itemCharacteristics.ArtifactBias = ArtifactBiasWeightedRandom?.ChooseOrDefault();
 
+        itemCharacteristics.BurnRate = BurnRate.HasValue ? BurnRate.Value : 0;
         itemCharacteristics.CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias.HasValue ? CanApplyBlessedArtifactBias.Value : false;
         itemCharacteristics.ArtifactBiasCanSlay = ArtifactBiasCanSlay.HasValue ? ArtifactBiasCanSlay.Value : false;
         itemCharacteristics.CanApplyBlowsBonus = CanApplyBlowsBonus.HasValue ? CanApplyBlowsBonus.Value : false;
@@ -347,6 +349,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             BrandElec = BrandElec,
             BrandFire = BrandFire,
             BrandPois = BrandPois,
+            BurnRate = BurnRate,
             CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias,
             CanApplyBlowsBonus = CanApplyBlowsBonus,
             CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower,
@@ -709,7 +712,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     
     /// <inheritdoc />
     private int? Radius { get; }
-    
+
+    private int? BurnRate { get; }
+
     /// <inheritdoc />
     private bool? Reflect { get; }
     
