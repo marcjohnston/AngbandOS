@@ -12,17 +12,16 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
     /// <summary>
     /// Represents the modifiers that are combined to create the effective value.
     /// </summary>
-    private readonly List<(string Key, int Modifier)> _attributeModifiers = new List<(string, int)>();
+    protected readonly List<(string Key, int Modifier)> _attributeModifiers = new List<(string, int)>();
 
-    public SumEffectiveAttributeValue(Game game) : base(game) { }
-
+    public SumEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
     public override EffectiveAttributeValue Clone()
     {
-        SumEffectiveAttributeValue clone = new SumEffectiveAttributeValue(Game);
+        SumEffectiveAttributeValue clone = new SumEffectiveAttributeValue(Game, Attribute);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }
-
+    public override string RenderForItemIdentification => Get().ToString();
     public override AttributeValue ToReadOnly() => new ReadOnlyAttributeValue<int>(Get());
 
     public override bool HasKeyedItemEnhancements(string key)

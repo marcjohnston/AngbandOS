@@ -13,13 +13,16 @@ internal class ColorEnumAttribute : Attribute, IGetKey, IToJson
     {
         Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
     }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ColorEnumSetEffectiveAttributeValue(Game, ColorEnum.White);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ColorEnumSetEffectiveAttributeValue(Game, this, ColorEnum.White);
     public string Key { get; }
-
     public string GetKey => Key;
     public void Bind() { }
     public string ToJson()
     {
-        return "";
+        ColorEnumAttributeGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

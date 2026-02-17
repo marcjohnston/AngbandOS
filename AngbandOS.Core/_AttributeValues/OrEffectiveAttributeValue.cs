@@ -17,11 +17,12 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
     /// </summary>
     private readonly List<(string Key, bool Modifier)> _attributeModifiers = new List<(string, bool)>();
 
-    public OrEffectiveAttributeValue(Game game) : base(game) { }
+    public OrEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
+    public override string RenderForItemIdentification => Get().ToString();
 
     public override EffectiveAttributeValue Clone()
     {
-        OrEffectiveAttributeValue clone = new OrEffectiveAttributeValue(Game);
+        OrEffectiveAttributeValue clone = new OrEffectiveAttributeValue(Game, Attribute);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }

@@ -1,5 +1,4 @@
-﻿
-namespace AngbandOS.Core.Interface.Configuration;
+﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
 public class BoolAttributeGameConfiguration

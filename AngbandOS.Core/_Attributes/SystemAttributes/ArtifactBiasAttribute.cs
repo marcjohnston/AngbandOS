@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 internal class ArtifactBiasAttribute : Attribute, IGetKey
 {
     private ArtifactBiasAttribute(Game game) : base(game) { }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new NullableSetEffectiveReferenceAttributeValue<ArtifactBias>(Game, null);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ArtifactBiasEffectiveAttributeValue(Game, this);
     public string GetKey => GetType().Name;
     public void Bind() { }
 }

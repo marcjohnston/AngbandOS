@@ -8,7 +8,7 @@ public class DragonHelmItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override bool? CanReflectBoltsAndArrows => true;
+    public override bool? Reflect => true;
     public override int? Weight => 50;
     public override int? Value => 10000;
     public override int? DamageDice => 1;

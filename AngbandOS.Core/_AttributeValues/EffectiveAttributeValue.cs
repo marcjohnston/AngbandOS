@@ -13,11 +13,13 @@ namespace AngbandOS.Core;
 internal abstract class EffectiveAttributeValue : AttributeValue
 {
     protected readonly Game Game;
-    public EffectiveAttributeValue(Game game)
+    protected readonly Attribute Attribute;
+    public EffectiveAttributeValue(Game game, Attribute attribute)
     {
         Game = game;
+        Attribute = attribute;
     }
-
+    public abstract string RenderForItemIdentification { get; }
     public abstract EffectiveAttributeValue Clone();
 
     public abstract AttributeValue ToReadOnly();

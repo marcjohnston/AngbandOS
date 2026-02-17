@@ -4,10 +4,12 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Collections;
+
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class EffectiveAttributeSet
+internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
 {
     private readonly Game Game;
     private readonly EffectiveAttributeValue[] _effectiveAttributeValues;
@@ -117,6 +119,12 @@ internal class EffectiveAttributeSet
         return (T)_effectiveAttributeValues[index];
     }
 
+    public EffectiveAttributeValue Get(Attribute attribute)
+    {
+        int index = attribute.Index;
+        return _effectiveAttributeValues[index];
+    }
+
     /// <summary>
     /// Creates a new instance of <see cref="EffectiveAttributeSet"/> that is a deep copy of the current set and its attribute values.
     /// </summary>
@@ -135,6 +143,16 @@ internal class EffectiveAttributeSet
             clone._effectiveAttributeValues[attribute.Index] = _effectiveAttributeValues[attribute.Index].Clone();
         }
         return clone;
+    }
+
+    public IEnumerator<EffectiveAttributeValue> GetEnumerator()
+    {
+        return _effectiveAttributeValues.AsEnumerable<EffectiveAttributeValue>().GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 
     #region Properties
@@ -177,20 +195,6 @@ internal class EffectiveAttributeSet
             if (value)
             {
                 Get<OrEffectiveAttributeValue>(nameof(CanApplyBlowsBonusAttribute)).Set();
-            }
-        }
-    }
-    public bool CanReflectBoltsAndArrows
-    {
-        get
-        {
-            return Get<OrEffectiveAttributeValue>(nameof(CanReflectBoltsAndArrowsAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(CanReflectBoltsAndArrowsAttribute)).Set();
             }
         }
     }
@@ -441,11 +445,11 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<NullableSetEffectiveReferenceAttributeValue<Activation>>(nameof(ActivationAttribute)).Get();
+            return Get<NullableReferenceSetEffectiveAttributeValue<Activation>>(nameof(ActivationAttribute)).Get();
         }
         set
         {
-            Get<NullableSetEffectiveReferenceAttributeValue<Activation>>(nameof(ActivationAttribute)).Set(value);
+            Get<NullableReferenceSetEffectiveAttributeValue<Activation>>(nameof(ActivationAttribute)).Set(value);
         }
     }
     public bool Aggravate
@@ -480,11 +484,11 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<NullableSetEffectiveReferenceAttributeValue<ArtifactBias>>(nameof(ArtifactBiasAttribute)).Get();
+            return Get<NullableReferenceSetEffectiveAttributeValue<ArtifactBias>>(nameof(ArtifactBiasAttribute)).Get();
         }
         set
         {
-            Get<NullableSetEffectiveReferenceAttributeValue<ArtifactBias>>(nameof(ArtifactBiasAttribute)).Set(value);
+            Get<NullableReferenceSetEffectiveAttributeValue<ArtifactBias>>(nameof(ArtifactBiasAttribute)).Set(value);
         }
     }
     public bool Blessed
@@ -711,11 +715,11 @@ internal class EffectiveAttributeSet
     {
         get
         {
-            return Get<NullableSetEffectiveReferenceAttributeValue<string>>(nameof(FriendlyNameAttribute)).Get();
+            return Get<NullableReferenceSetEffectiveAttributeValue<string>>(nameof(FriendlyNameAttribute)).Get();
         }
         set
         {
-            Get<NullableSetEffectiveReferenceAttributeValue<string>>(nameof(FriendlyNameAttribute)).Set(value);
+            Get<NullableReferenceSetEffectiveAttributeValue<string>>(nameof(FriendlyNameAttribute)).Set(value);
         }
     }
     public bool HatesElectricity

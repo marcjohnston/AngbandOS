@@ -9,14 +9,15 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class BoolSetEffectiveAttributeValue : SetEffectiveAttributeValue<bool?>
 {
-    public BoolSetEffectiveAttributeValue(Game game, bool? defaultValue) : base(game, defaultValue) { }
+    public BoolSetEffectiveAttributeValue(Game game, Attribute attribute, bool? defaultValue) : base(game, attribute, defaultValue) { }
 
     public override EffectiveAttributeValue Clone()
     {
-        BoolSetEffectiveAttributeValue clone = new BoolSetEffectiveAttributeValue(Game, InitialValue);
+        BoolSetEffectiveAttributeValue clone = new BoolSetEffectiveAttributeValue(Game, Attribute, InitialValue);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }
+    public override string RenderForItemIdentification => Get().ToString();
 
     /// <summary>
     /// Computes a value to append to the modifiers so that the effective value equals the specified value.

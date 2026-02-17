@@ -75,10 +75,6 @@ public class ItemEnhancementGameConfiguration
     /// </summary>
     public virtual bool? CanApplyBlowsBonus { get; set; } = null;
 
-    /// <summary>
-    /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
-    /// </summary>
-    public virtual bool? CanReflectBoltsAndArrows { get; set; } = null;
 
     /// <summary>
     /// Returns true, if the item is capable of having slaying bonuses applied.  Only weapons return true.  Returns false by default.
@@ -162,6 +158,9 @@ public class ItemEnhancementGameConfiguration
     public virtual bool? NoTele { get; set; } = null;
     public virtual bool? PermaCurse { get; set; } = null;
     public virtual int? Radius { get; set; } = null;
+    /// <summary>
+    /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
+    /// </summary>
     public virtual bool? Reflect { get; set; } = null;
     public virtual bool? Regen { get; set; } = null;
     public virtual bool? ResAcid { get; set; } = null;

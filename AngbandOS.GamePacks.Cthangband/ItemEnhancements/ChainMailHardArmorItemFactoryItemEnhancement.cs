@@ -3,7 +3,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? CanReflectBoltsAndArrows => true;
+    public override bool? Reflect => true;
     public override int? Weight => 220;
     public override int? Value => 750;
     public override int? DamageDice => 1;

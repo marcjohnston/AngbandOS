@@ -15,7 +15,7 @@ internal class OrAttribute : Attribute, IGetKey, IToJson
     {
         Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
     }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new OrEffectiveAttributeValue(Game);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new OrEffectiveAttributeValue(Game, this);
     public string Key { get; }
 
     public string GetKey => Key;
@@ -23,6 +23,10 @@ internal class OrAttribute : Attribute, IGetKey, IToJson
 
     public string ToJson()
     {
-        return "";
+        OrAttributeGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

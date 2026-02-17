@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Xml.Linq;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -13,13 +15,17 @@ internal class SumAttribute : Attribute, IGetKey, IToJson
     {
         Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
     }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new SumEffectiveAttributeValue(Game);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new SumEffectiveAttributeValue(Game, this);
     public string Key { get; }
 
     public string GetKey => Key;
     public void Bind() { }
     public string ToJson()
     {
-        return "";
+        SumAttributeGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 }

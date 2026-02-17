@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 internal class ActivationAttribute : Attribute, IGetKey
 {
     private ActivationAttribute(Game game) : base(game) { }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new NullableSetEffectiveReferenceAttributeValue<Activation>(Game, null);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ActivationEffectiveAttributeValue(Game, this);
 
     public string GetKey => GetType().Name;
     public void Bind() { }

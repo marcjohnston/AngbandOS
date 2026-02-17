@@ -54,7 +54,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         CanApplyBlessedArtifactBias = itemEnhancementGameConfiguration.CanApplyBlessedArtifactBias;
         ArtifactBiasCanSlay = itemEnhancementGameConfiguration.ArtifactBiasCanSlay;
         CanApplyBlowsBonus = itemEnhancementGameConfiguration.CanApplyBlowsBonus;
-        CanReflectBoltsAndArrows = itemEnhancementGameConfiguration.CanReflectBoltsAndArrows;
         CanApplySlayingBonus = itemEnhancementGameConfiguration.CanApplySlayingBonus;
         CanApplyBonusArmorClassMiscPower = itemEnhancementGameConfiguration.CanApplyBonusArmorClassMiscPower;
         Chaotic = itemEnhancementGameConfiguration.Chaotic;
@@ -182,7 +181,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         itemCharacteristics.CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias.HasValue ? CanApplyBlessedArtifactBias.Value : false;
         itemCharacteristics.ArtifactBiasCanSlay = ArtifactBiasCanSlay.HasValue ? ArtifactBiasCanSlay.Value : false;
         itemCharacteristics.CanApplyBlowsBonus = CanApplyBlowsBonus.HasValue ? CanApplyBlowsBonus.Value : false;
-        itemCharacteristics.CanReflectBoltsAndArrows = CanReflectBoltsAndArrows.HasValue ? CanReflectBoltsAndArrows.Value : false;
         itemCharacteristics.CanApplySlayingBonus = CanApplySlayingBonus.HasValue ? CanApplySlayingBonus.Value : false;
         itemCharacteristics.CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower.HasValue ? CanApplyBonusArmorClassMiscPower.Value : false;
         if (Activation is not null)
@@ -354,7 +352,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             CanApplyBlowsBonus = CanApplyBlowsBonus,
             CanApplyBonusArmorClassMiscPower = CanApplyBonusArmorClassMiscPower,
             CanApplySlayingBonus = CanApplySlayingBonus,
-            CanReflectBoltsAndArrows = CanReflectBoltsAndArrows,
             Chaotic = Chaotic,
             Charisma = Charisma,
             Color = Color,
@@ -554,11 +551,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// Returns true, if the item can apply a bonus armor class for miscellaneous power.  Only weapons return true.  Returns false, by default.
     /// </summary>
     private bool? CanApplyBonusArmorClassMiscPower { get; }
-
-    /// <summary>
-    /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
-    /// </summary>
-    private bool? CanReflectBoltsAndArrows { get; }
 
     /// <summary>
     /// Returns true, if an item of this factory can have slaying bonus applied for biased artifacts.  Returns false, for all items except bows; which return true.

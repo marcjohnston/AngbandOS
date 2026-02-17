@@ -73,6 +73,7 @@ public class GameConfiguration
         gameConfiguration.ItemEnhancements = LoadFromAssembly<ItemEnhancementGameConfiguration>(assembly);
         gameConfiguration.ItemEnhancementWeightedRandoms = LoadFromAssembly<ItemEnhancementWeightedRandomGameConfiguration>(assembly);
         gameConfiguration.ItemFactories = LoadFromAssembly<ItemFactoryGameConfiguration>(assembly);
+        gameConfiguration.ItemIdentifications = LoadFromAssembly<ItemIdentificationGameConfiguration>(assembly);
         gameConfiguration.ProjectileWeightedRandomScripts = LoadFromAssembly<ProjectileScriptWeightedRandomGameConfiguration>(assembly);
         gameConfiguration.BoolWidgets = LoadFromAssembly<BoolWidgetGameConfiguration>(assembly);
         gameConfiguration.ConditionalWidgets = LoadFromAssembly<ConditionalWidgetGameConfiguration>(assembly);
@@ -241,6 +242,8 @@ public class GameConfiguration
     public virtual ItemClassGameConfiguration[]? ItemClasses { get; set; } = null;
     public virtual ItemEnhancementGameConfiguration[]? ItemEnhancements { get; set; } = null;
     public virtual ItemEnhancementWeightedRandomGameConfiguration[]? ItemEnhancementWeightedRandoms { get; set; } = null;
+    public virtual ItemIdentificationGameConfiguration[]? ItemIdentifications { get; set; } = null;
+    
     public virtual ItemFactoryGameConfiguration[]? ItemFactories { get; set; } = null;
     public virtual ProjectileScriptWeightedRandomGameConfiguration[]? ProjectileWeightedRandomScripts { get; set; } = null;
 

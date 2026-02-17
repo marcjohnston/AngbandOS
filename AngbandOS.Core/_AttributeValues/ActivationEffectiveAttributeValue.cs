@@ -7,23 +7,14 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ColorEnumSetEffectiveAttributeValue : SetEffectiveAttributeValue<ColorEnum>
+internal class ActivationEffectiveAttributeValue : NullableReferenceSetEffectiveAttributeValue<Activation>
 {
-    public ColorEnumSetEffectiveAttributeValue(Game game, ColorEnum defaultColor) : base(game, defaultColor) { }
-
+    public ActivationEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute, null) { }
+    public override string RenderForItemIdentification => Get()?.Description ?? "nothing";
     public override EffectiveAttributeValue Clone()
     {
-        ColorEnumSetEffectiveAttributeValue clone = new ColorEnumSetEffectiveAttributeValue(Game, InitialValue);
+        ActivationEffectiveAttributeValue clone = new ActivationEffectiveAttributeValue(Game, Attribute);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
-    }
-
-    /// <summary>
-    /// Computes a value to append to the modifiers so that the effective value equals the specified value.
-    /// </summary>
-    /// <param name="value"></param>
-    public void Set(ColorEnum color)
-    {
-        _attributeModifiers.Add(("", color));
     }
 }

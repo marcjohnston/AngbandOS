@@ -1502,7 +1502,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                             itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(SheathOfFireAndFireBiasItemEnhancement)));
                         }
 
-                        if (characteristics.CanReflectBoltsAndArrows)
+                        if (characteristics.Reflect)
                         {
                             itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ReflectBoltsAndArrowsItemEnhancement)));
                         }

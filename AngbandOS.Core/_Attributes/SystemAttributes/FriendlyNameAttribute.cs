@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 internal class FriendlyNameAttribute : Attribute, IGetKey
 {
     private FriendlyNameAttribute(Game game) : base(game) { }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new NullableSetEffectiveReferenceAttributeValue<string>(Game, null);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new FriendlyNameEffectiveAttributeValue(Game, this);
     public string GetKey => GetType().Name;
     public void Bind() { }
 }

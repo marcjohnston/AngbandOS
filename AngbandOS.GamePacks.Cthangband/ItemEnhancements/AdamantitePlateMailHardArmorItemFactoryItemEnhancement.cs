@@ -4,7 +4,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class AdamantitePlateMailHardArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? IgnoreAcid => true;
-    public override bool? CanReflectBoltsAndArrows => true;
+    public override bool? Reflect => true;
     public override int? Weight => 420;
     public override int? Value => 20000;
     public override int? DamageDice => 2;

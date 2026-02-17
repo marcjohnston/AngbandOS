@@ -15,7 +15,7 @@ internal abstract class SetEffectiveAttributeValue<T> : EffectiveAttributeValue
     protected readonly List<(string Key, T Modifier)> _attributeModifiers = new List<(string, T)>();
     protected readonly T InitialValue;
 
-    public SetEffectiveAttributeValue(Game game, T initialValue) : base(game)
+    public SetEffectiveAttributeValue(Game game, Attribute attribute, T initialValue) : base(game, attribute)
     {
         InitialValue = initialValue;
         _attributeModifiers.Add(("", initialValue));
