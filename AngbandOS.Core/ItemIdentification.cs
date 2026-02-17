@@ -51,13 +51,13 @@ internal class ItemIdentification : IGetKey, IToJson
 
     public void Bind()
     {
-        List<(BoolAttribute, bool?)> boolAttributeList = new List<(BoolAttribute, bool?)>();
+        List<(BoolAttribute, bool?[])> boolAttributeList = new List<(BoolAttribute, bool?[])>();
         if (BoolAttributeFiltersBindings is not null)
         {
-            foreach ((string attributeKey, bool? value) in BoolAttributeFiltersBindings)
+            foreach ((string attributeKey, bool?[] values) in BoolAttributeFiltersBindings)
             {
                 BoolAttribute attribute = Game.SingletonRepository.Get<BoolAttribute>(attributeKey);
-                boolAttributeList.Add((attribute, value));
+                boolAttributeList.Add((attribute, values));
             }
         }
         BoolAttributeFilters = boolAttributeList.ToArray();
@@ -88,8 +88,8 @@ internal class ItemIdentification : IGetKey, IToJson
     }
     public bool? ActivationAttributeNonNull { get; }
     public bool? ArtifactBiasAttributeNonNull { get; }
-    private (string AttributeKey, bool? Value)[]? BoolAttributeFiltersBindings { get; }
-    public (BoolAttribute Attribute, bool? Value)[] BoolAttributeFilters { get; private set;}
+    private (string AttributeKey, bool?[] Value)[]? BoolAttributeFiltersBindings { get; }
+    public (BoolAttribute Attribute, bool?[] Value)[] BoolAttributeFilters { get; private set;}
     private (string AttributeKey, bool Value)[]? OrAttributeFiltersBindings { get; }
     public (OrAttribute Attribute, bool Value)[] OrAttributeFilters { get; private set; }
     private (string AttributeKey, int? StartingValue, int? EndingValue)[]? SumAttributeFilterBindings { get; }
@@ -124,10 +124,10 @@ internal class ItemIdentification : IGetKey, IToJson
             }
         }
 
-        foreach ((BoolAttribute attribute, bool? value) in BoolAttributeFilters)
+        foreach ((BoolAttribute attribute, bool?[] values) in BoolAttributeFilters)
         {
             bool? effectiveAttributeSetValue = effectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(attribute).Get();
-            if (effectiveAttributeSetValue != value)
+            if (!values.Any(_value => _value == effectiveAttributeSetValue))
             {
                 return false;
             }

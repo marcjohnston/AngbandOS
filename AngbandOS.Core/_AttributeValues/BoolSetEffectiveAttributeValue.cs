@@ -23,6 +23,15 @@ internal class BoolSetEffectiveAttributeValue : SetEffectiveAttributeValue<bool?
     /// Computes a value to append to the modifiers so that the effective value equals the specified value.
     /// </summary>
     /// <param name="value"></param>
+    public void Set(bool value)
+    {
+        _attributeModifiers.Add(("", value));
+    }
+
+    /// <summary>
+    /// Computes a value to append to the modifiers so that the effective value equals the specified value.
+    /// </summary>
+    /// <param name="value"></param>
     public void Set()
     {
         _attributeModifiers.Add(("", true));

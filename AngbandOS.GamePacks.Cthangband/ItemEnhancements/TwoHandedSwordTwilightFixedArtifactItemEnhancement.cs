@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
@@ -17,10 +22,8 @@ public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancemen
     };
     public override bool? Aggravate => true;
     public override bool? BrandFire => true;
-    public override bool? IsCursed => true;
     public override bool? DreadCurse => true;
     public override string FriendlyName => "'Twilight'";
-    public override bool? HeavyCurse => true;
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;

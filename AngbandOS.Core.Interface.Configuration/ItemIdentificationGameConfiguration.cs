@@ -11,7 +11,7 @@ public class ItemIdentificationGameConfiguration
 {
     public virtual string Key { get; set; }
     public virtual (string AttributeKey, bool DesiredValue)[]? OrAttributeFilterBindings { get; set; } = null;
-    public virtual (string AttributeKey, bool? DesiredValue)[]? BoolAttributeFilterBindings { get; set; } = null;
+    public virtual (string AttributeKey, bool?[] DesiredValue)[]? BoolAttributeFilterBindings { get; set; } = null;
     public virtual (string AttributeKey, int? StartingValue, int? EndingValue)[]? SumAttributeFilterBindings { get; set; } = null;
     public virtual bool? ActivationAttributeNonNull { get; set; } = null;
     public virtual bool? ArtifactBiasAttributeNonNull { get; set; } = null;

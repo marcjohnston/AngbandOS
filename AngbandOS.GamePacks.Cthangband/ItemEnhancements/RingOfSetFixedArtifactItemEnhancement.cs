@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
+    };
     public override string? ActivationName => nameof(ActivationsEnum.BizarreThingsEvery1d450p450DirectionalActivation);
     public override bool? Aggravate => true;
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
@@ -22,11 +27,9 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
         (nameof(CharismaAttribute), "5"),
         (nameof(StrengthAttribute), "5"),
     };
-    public override bool? IsCursed => true;
     public override bool? DrainExp => true;
     public override bool? DreadCurse => true;
     public override string FriendlyName => "of Set";
-    public override bool? HeavyCurse => true;
     public override bool? HideType => true;
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;

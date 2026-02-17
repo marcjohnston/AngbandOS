@@ -3,8 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class IronHelmTerrorMaskNonWarriorFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? IsCursed => true;
-    public override bool? HeavyCurse => true;
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
+    };
     public override bool? Aggravate => true;
     public override bool? DreadCurse => true;
     public override bool? Valueless => true;

@@ -20,6 +20,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Key = itemEnhancementGameConfiguration.Key ?? itemEnhancementGameConfiguration.GetType().Name;
 
         SumAttributeAndExpressionBindings = itemEnhancementGameConfiguration.SumAttributeAndExpressionBindings;
+        BoolAttributeAndExpressionBindings = itemEnhancementGameConfiguration.BoolAttributeAndExpressionBindings;
 
         ActivationName = itemEnhancementGameConfiguration.ActivationName;
         AdditionalItemEnhancementWeightedRandomBindingKey = itemEnhancementGameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
@@ -47,7 +48,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         Feather = itemEnhancementGameConfiguration.Feather;
         FreeAct = itemEnhancementGameConfiguration.FreeAct;
         FriendlyName = itemEnhancementGameConfiguration.FriendlyName;
-        HeavyCurse = itemEnhancementGameConfiguration.HeavyCurse;
         HatesAcid = itemEnhancementGameConfiguration.HatesAcid;
         HatesCold = itemEnhancementGameConfiguration.HatesCold;
         HatesElectricity = itemEnhancementGameConfiguration.HatesElectricity;
@@ -63,7 +63,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         ImElec = itemEnhancementGameConfiguration.ImElec;
         ImFire = itemEnhancementGameConfiguration.ImFire;
         Impact = itemEnhancementGameConfiguration.Impact;
-        IsCursed = itemEnhancementGameConfiguration.IsCursed;
         NoMagic = itemEnhancementGameConfiguration.NoMagic;
         NoTele = itemEnhancementGameConfiguration.NoTele;
         PermaCurse = itemEnhancementGameConfiguration.PermaCurse;
@@ -124,6 +123,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 
     private (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings { get; }
     public (Attribute Attribute, Expression Expression)[] SumAttributeAndExpressions { get; private set; }
+    private (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings { get; }
+    public (Attribute Attribute, Expression BooleanExpression)[] BoolAttributeAndExpressions { get; private set; }
 
     /// <summary>
     /// Returns an immutable and fixed value set of item characteristics specified by this <see cref="ItemEnhancement"/> by computing fixed values from the expressions defined in these enhancements.
@@ -137,6 +138,11 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         {
             int appendValue = Game.ComputeIntegerExpression(expression).Value;
             itemCharacteristics.Get<SumEffectiveAttributeValue>(attribute).Append(appendValue);
+        }
+        foreach ((Attribute attribute, Expression expression) in BoolAttributeAndExpressions)
+        {
+            bool setValue = Game.ComputeBooleanExpression(expression).Value;
+            itemCharacteristics.Get<BoolSetEffectiveAttributeValue>(attribute).Set(setValue);
         }
 
         itemCharacteristics.ArtifactBias = ArtifactBiasWeightedRandom?.ChooseOrDefault();
@@ -163,7 +169,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         {
             itemCharacteristics.Color = Color.Value;
         }
-        itemCharacteristics.IsCursed = IsCursed.HasValue ? IsCursed.Value : false;
         itemCharacteristics.DrainExp = DrainExp.HasValue ? DrainExp.Value : false;
         itemCharacteristics.DreadCurse = DreadCurse.HasValue ? DreadCurse.Value : false;
         itemCharacteristics.EasyKnow = EasyKnow.HasValue ? EasyKnow.Value : false;
@@ -174,7 +179,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         itemCharacteristics.HatesCold = HatesColdExpression == null ? false : Game.ComputeBooleanExpression(HatesColdExpression).Value;
         itemCharacteristics.HatesElectricity = HatesElectricityExpression == null ? false : Game.ComputeBooleanExpression(HatesElectricityExpression).Value;
         itemCharacteristics.HatesFire = HatesFireExpression == null ? false : Game.ComputeBooleanExpression(HatesFireExpression).Value;
-        itemCharacteristics.HeavyCurse = HeavyCurse.HasValue ? HeavyCurse.Value : false;
         itemCharacteristics.HideType = HideType.HasValue ? HideType.Value : false;
         itemCharacteristics.HoldLife = HoldLife.HasValue ? HoldLife.Value : false;
         itemCharacteristics.IgnoreAcid = IgnoreAcid.HasValue ? IgnoreAcid.Value : false;
@@ -247,17 +251,31 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     public void Bind()
     {
         // We are using a dictionary because we do not want to support duplicate attributes.
-        Dictionary<Attribute, Expression> attributeAndExpressionList = new Dictionary<Attribute, Expression>();
+        Dictionary<Attribute, Expression> sumAttributeAndExpressionList = new Dictionary<Attribute, Expression>();
         if (SumAttributeAndExpressionBindings is not null)
         {
             foreach ((string attributeName, string expression) in SumAttributeAndExpressionBindings)
             {
                 Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
                 Expression numericExpression = Game.ParseNumericExpression(expression);
-                attributeAndExpressionList.Add(attribute, numericExpression);
+                sumAttributeAndExpressionList.Add(attribute, numericExpression);
             }
         }
-        SumAttributeAndExpressions = attributeAndExpressionList.Select(_attributeAndExpression => (_attributeAndExpression.Key, _attributeAndExpression.Value)).ToArray();
+        SumAttributeAndExpressions = sumAttributeAndExpressionList.Select(_attributeAndExpression => (_attributeAndExpression.Key, _attributeAndExpression.Value)).ToArray();
+
+        // We are using a dictionary because we do not want to support duplicate attributes.
+        Dictionary<Attribute, Expression> boolAttributeAndExpressionList = new Dictionary<Attribute, Expression>();
+        if (BoolAttributeAndExpressionBindings is not null)
+        {
+            foreach ((string attributeName, string expression) in BoolAttributeAndExpressionBindings)
+            {
+                Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+                Expression numericExpression = Game.ParseBooleanExpression(expression);
+                boolAttributeAndExpressionList.Add(attribute, numericExpression);
+            }
+        }
+        BoolAttributeAndExpressions = boolAttributeAndExpressionList.Select(_attributeAndExpression => (_attributeAndExpression.Key, _attributeAndExpression.Value)).ToArray();
+
 
         Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
 
@@ -278,6 +296,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             Key = Key,
 
             SumAttributeAndExpressionBindings = SumAttributeAndExpressionBindings,
+            BoolAttributeAndExpressionBindings = BoolAttributeAndExpressionBindings,
 
             ActivationName = ActivationName,
             AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,
@@ -309,7 +328,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             HatesCold = HatesCold,
             HatesElectricity = HatesElectricity,
             HatesFire = HatesFire,
-            HeavyCurse = HeavyCurse,
             HideType = HideType,
             HoldLife = HoldLife,
             IgnoreAcid = IgnoreAcid,
@@ -321,7 +339,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             ImElec = ImElec,
             ImFire = ImFire,
             Impact = Impact,
-            IsCursed = IsCursed,
             NoMagic = NoMagic,
             NoTele = NoTele,
             PermaCurse = PermaCurse,
@@ -490,9 +507,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     public ColorEnum? Color { get; }
    
     /// <inheritdoc />
-    private bool? IsCursed { get; }
-
-    /// <inheritdoc />
     private bool? DrainExp { get; }
     
     /// <inheritdoc />
@@ -506,9 +520,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     
     /// <inheritdoc />
     private bool? FreeAct { get; }
-    
-    /// <inheritdoc />
-    private bool? HeavyCurse { get; }
     
     /// <inheritdoc />
     private bool? HideType { get; }

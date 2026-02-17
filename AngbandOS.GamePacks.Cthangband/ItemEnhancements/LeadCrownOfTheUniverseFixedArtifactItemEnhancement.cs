@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
@@ -16,9 +21,7 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(RadiusAttribute), "3"),
         (nameof(StrengthAttribute), "125"),
     };
-    public override bool? IsCursed => true;
     public override string FriendlyName => "of the Universe";
-    public override bool? HeavyCurse => true;
     public override bool? HideType => true;
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;

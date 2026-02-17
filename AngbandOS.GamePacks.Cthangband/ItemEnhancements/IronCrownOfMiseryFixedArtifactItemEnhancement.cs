@@ -3,6 +3,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(IsCursedAttribute), "true"),
+    };
     public override bool? Valueless => true;
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
@@ -14,7 +18,6 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(ConstitutionAttribute), "-25"),
         (nameof(StrengthAttribute), "-25"),
     };
-    public override bool? IsCursed => true;
     public override bool? FreeAct => true;
     public override string FriendlyName => "of Misery";
     public override bool? HideType => true;

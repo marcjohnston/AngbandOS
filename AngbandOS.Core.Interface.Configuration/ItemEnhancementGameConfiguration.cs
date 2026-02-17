@@ -15,6 +15,7 @@ public class ItemEnhancementGameConfiguration
 {
     public virtual string? Key { get; set; } = null;
     public virtual (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings { get; set; } = null;
+    public virtual (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings { get; set; } = null;
 
     /// <summary>
     /// Returns true, if the item is susceptible to electricity.  Returns false, by default.
@@ -101,14 +102,11 @@ public class ItemEnhancementGameConfiguration
     /// </summary>
     public virtual ColorEnum? Color { get; set; } = null;
 
-    public virtual bool? IsCursed { get; set; } = null;
-
     public virtual bool? DrainExp { get; set; } = null;
     public virtual bool? DreadCurse { get; set; } = null;
     public virtual bool? EasyKnow { get; set; } = null;
     public virtual bool? Feather { get; set; } = null;
     public virtual bool? FreeAct { get; set; } = null;
-    public virtual bool? HeavyCurse { get; set; } = null;
     public virtual bool? HideType { get; set; } = null;
     public virtual bool? HoldLife { get; set; } = null;
     public virtual bool? IgnoreAcid { get; set; } = null;

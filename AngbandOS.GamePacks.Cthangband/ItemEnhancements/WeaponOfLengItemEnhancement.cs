@@ -3,11 +3,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfLengItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
+    };
     public override bool? Aggravate => true;
     public override bool? Valueless => true;
-    public override bool? IsCursed => true;
     public override string? FriendlyName => "of Leng";
-    public override bool? HeavyCurse => true;
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(BonusArmorClassAttribute), "1d10"),

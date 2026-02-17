@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
@@ -14,9 +19,7 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(ToDamageAttribute), "20"),
     };
     public override bool? Aggravate => true;
-    public override bool? IsCursed => true;
     public override string FriendlyName => "'Selfslayer'";
-    public override bool? HeavyCurse => true;
     public override bool? HideType => true;
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;

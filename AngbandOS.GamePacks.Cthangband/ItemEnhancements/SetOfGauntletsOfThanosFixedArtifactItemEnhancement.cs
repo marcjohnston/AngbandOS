@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
@@ -13,10 +18,8 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(StrengthAttribute), "2"),
     };
     public override bool? Aggravate => true;
-    public override bool? IsCursed => true;
     public override bool? DreadCurse => true;
     public override string FriendlyName => "of Thanos";
-    public override bool? HeavyCurse => true;
     public override bool? HideType => true;
     public override bool? HoldLife => true;
     public override bool? IgnoreAcid => true;
