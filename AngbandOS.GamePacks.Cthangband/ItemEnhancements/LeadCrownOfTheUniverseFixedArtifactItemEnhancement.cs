@@ -3,7 +3,19 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ValueAttribute), "10000000"),
+        (nameof(WisdomAttribute), "125"),
+        (nameof(InfravisionAttribute), "125"),
+        (nameof(IntelligenceAttribute), "125"),
+        (nameof(DexterityAttribute), "125"),
+        (nameof(ConstitutionAttribute), "125"),
+        (nameof(CharismaAttribute), "125"),
+        (nameof(RadiusAttribute), "3"),
+        (nameof(StrengthAttribute), "125"),
+    };
     public override bool? IsCursed => true;
     public override string FriendlyName => "of the Universe";
     public override bool? HeavyCurse => true;
@@ -12,19 +24,8 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a lead crown which provides no light.
-    /// </summary>
-    public override int? Radius => 3;
     public override bool? NoTele => true;
     public override bool? PermaCurse => true;
-    public override string? Charisma => "125";
-    public override string? Constitution => "125";
-    public override string? Dexterity => "125";
-    public override string? Intelligence => "125";
-    public override string? Infravision => "125";
-    public override string? Strength => "125";
-    public override string? Wisdom => "125";
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
     public override bool? ResConf => true;
@@ -36,6 +37,5 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? ResPois => true;
     public override bool? SeeInvis => true;
     public override bool? Telepathy => true;
-    public override int? Value => 10000000;
     public override ColorEnum? Color => ColorEnum.Black;
 }

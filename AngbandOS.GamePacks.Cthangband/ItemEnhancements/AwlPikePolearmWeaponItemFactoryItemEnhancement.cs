@@ -7,10 +7,13 @@ public class AwlPikePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool? CanApplyBlessedArtifactBias => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 160;
-    public override int? Value => 340;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 8;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "160"),
+        (nameof(ValueAttribute), "340"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "8"),
+    };
     public override ColorEnum? Color => ColorEnum.Grey;
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";

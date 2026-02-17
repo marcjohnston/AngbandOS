@@ -7,10 +7,13 @@ public class MaceOfDisruptionHaftedWeaponItemFactoryItemEnhancement : ItemEnhanc
     public override bool? SlayUndead => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 400;
-    public override int? Value => 4300;
-    public override int? DamageDice => 5;
-    public override int? DiceSides => 8;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "400"),
+        (nameof(ValueAttribute), "4300"),
+        (nameof(DamageDiceAttribute), "5"),
+        (nameof(DiceSidesAttribute), "8"),
+    };
     public override ColorEnum? Color => ColorEnum.Purple;
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";

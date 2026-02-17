@@ -2,17 +2,20 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class HalfOrcRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "2";
-    public override string Charisma => "-4";
-    public override string Constitution => "1";
-    public override string Wisdom => "0";
-    public override string Intelligence => "-1";
-    public override string Dexterity => "0";
-    public override int? Value => 600;
-    public override string? Infravision => "3";
-    public override string? DisarmTraps => "-3";
-    public override string? UseDevice => "-3";
-    public override string? SavingThrow => "-3";
-    public override string? Stealth => "-1";
-    public override string? Search => "0";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(CharismaAttribute), "-4"),
+        (nameof(ConstitutionAttribute), "1"),
+        (nameof(WisdomAttribute), "0"),
+        (nameof(IntelligenceAttribute), "-1"),
+        (nameof(DexterityAttribute), "0"),
+        (nameof(ValueAttribute), "600"),
+        (nameof(InfravisionAttribute), "3"),
+        (nameof(DisarmTrapsAttribute), "-3"),
+        (nameof(UseDeviceAttribute), "-3"),
+        (nameof(SavingThrowAttribute), "-3"),
+        (nameof(StealthAttribute), "-1"),
+        (nameof(SearchAttribute), "0"),
+        (nameof(StrengthAttribute), "2")
+    };
 }

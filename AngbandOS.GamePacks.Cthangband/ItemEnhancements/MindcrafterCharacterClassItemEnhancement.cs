@@ -4,14 +4,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MindcrafterCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "-1";
-    public override string Charisma => "2";
-    public override string Constitution => "-1";
-    public override string Wisdom => "3";
-    public override string Intelligence => "0";
-    public override string Dexterity => "-1";
-    public override int? Value => 900;
-    public override string? DisarmTraps => "30";
-    public override string? UseDevice => "30";
-    public override string? SavingThrow => "30";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(CharismaAttribute), "2"),
+        (nameof(ConstitutionAttribute), "-1"),
+        (nameof(WisdomAttribute), "3"),
+        (nameof(IntelligenceAttribute), "0"),
+        (nameof(DexterityAttribute), "-1"),
+        (nameof(ValueAttribute), "900"),
+        (nameof(DisarmTrapsAttribute), "30"),
+        (nameof(UseDeviceAttribute), "30"),
+        (nameof(SavingThrowAttribute), "30"),
+        (nameof(StrengthAttribute), "-1"),
+    };
 }

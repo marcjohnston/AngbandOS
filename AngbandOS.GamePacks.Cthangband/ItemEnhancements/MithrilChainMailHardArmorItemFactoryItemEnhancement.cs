@@ -5,12 +5,15 @@ public class MithrilChainMailHardArmorItemFactoryItemEnhancement : ItemEnhanceme
 {
     public override bool? IgnoreAcid => true;
     public override bool? Reflect => true;
-    public override int? Weight => 150;
-    public override int? Value => 7000;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 4;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "150"),
+        (nameof(ValueAttribute), "7000"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "4"),
+        (nameof(MeleeToHitAttribute), "-1"),
+        (nameof(BaseArmorClassAttribute), "28"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightBlue;
-    public override string? BaseArmorClass => "28";
     public override string? HatesAcid => "true";
-    public override string? Hits => "-1";
 }

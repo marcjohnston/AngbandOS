@@ -3,8 +3,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CloakDarknessFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
-    // Darkness sends monsters to sleep
     public override string? ActivationName => nameof(ActivationsEnum.SleepActivation);
     public override string FriendlyName => "'Darkness'";
     public override bool? HideType => true;
@@ -12,12 +10,16 @@ public class CloakDarknessFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? Stealth => "2";
-    public override string? Intelligence => "2";
-    public override string? Wisdom => "2";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(StealthAttribute), "2"),
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(ValueAttribute), "13000"),
+        (nameof(IntelligenceAttribute), "2"),
+        (nameof(WisdomAttribute), "2"),
+        (nameof(AttacksAttribute), "4"),
+    };
     public override bool? ResAcid => true;
     public override bool? ResDark => true;
-    public override int? Value => 13000;
-    public override string Attacks => "4";
     public override ColorEnum? Color => ColorEnum.Green;
 }

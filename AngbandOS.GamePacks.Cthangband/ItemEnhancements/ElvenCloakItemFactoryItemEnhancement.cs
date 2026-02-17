@@ -8,11 +8,14 @@ public class ElvenCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigura
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? Reflect => true;
-    public override int? Weight => 5;
-    public override int? Value => 1500;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "5"),
+        (nameof(ValueAttribute), "1500"),
+        (nameof(BonusArmorClassAttribute), "4"),
+        (nameof(BaseArmorClassAttribute), "4"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightGreen;
-    public override string? BaseArmorClass => "4";
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
-    public override string? BonusArmorClass => "4";
 }

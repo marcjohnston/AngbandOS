@@ -3,10 +3,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SoftLeatherSoftArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Weight => 80;
-    public override int? Value => 18;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "80"),
+        (nameof(ValueAttribute), "18"),
+        (nameof(BaseArmorClassAttribute), "4"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightBrown;
-    public override string? BaseArmorClass => "4";
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
 }

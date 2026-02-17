@@ -9,6 +9,9 @@ public class ReflectionAmuletItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? Reflect => true;
-    public override int? Weight => 3;
-    public override int? Value => 30000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "30000"),
+    };
 }

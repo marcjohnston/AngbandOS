@@ -4,6 +4,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class RestoringMushroomFoodItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 1;
-    public override int? Value => 1000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "1"),
+        (nameof(ValueAttribute), "1000"),
+    };
 }

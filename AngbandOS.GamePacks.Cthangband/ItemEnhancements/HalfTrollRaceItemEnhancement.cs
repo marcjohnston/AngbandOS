@@ -2,17 +2,20 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class HalfTrollRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "4";
-    public override string Charisma => "-6";
-    public override string Constitution => "3";
-    public override string Wisdom => "2";
-    public override string Intelligence => "-4";
-    public override string Dexterity => "-4";
-    public override int? Value => -1500;
-    public override string? Infravision => "3";
-    public override string? DisarmTraps => "-5";
-    public override string? UseDevice => "-8";
-    public override string? SavingThrow => "-8";
-    public override string? Stealth => "-2";
-    public override string? Search => "-1";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(CharismaAttribute), "-6"),
+        (nameof(ConstitutionAttribute), "3"),
+        (nameof(WisdomAttribute), "2"),
+        (nameof(IntelligenceAttribute), "-4"),
+        (nameof(DexterityAttribute), "-4"),
+        (nameof(ValueAttribute), "-1500"),
+        (nameof(InfravisionAttribute), "3"),
+        (nameof(DisarmTrapsAttribute), "-5"),
+        (nameof(UseDeviceAttribute), "-8"),
+        (nameof(SavingThrowAttribute), "-8"),
+        (nameof(StealthAttribute), "-2"),
+        (nameof(SearchAttribute), "-1"),
+        (nameof(StrengthAttribute), "4")
+    };
 }

@@ -6,7 +6,10 @@ public class ChaosResistanceRingItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool? EasyKnow => true;
     public override bool? ResChaos => true;
     public override bool? ResConf => true;
-    public override int? Weight => 2;
-    public override int? Value => 13000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "2"),
+        (nameof(ValueAttribute), "13000"),
+    };
     public override string? HatesElectricity => "true";
 }

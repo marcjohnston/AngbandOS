@@ -3,8 +3,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
-    // Justice drains life
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(RadiusAttribute), "3"),
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(InfravisionAttribute), "4"),
+        (nameof(ToDamageAttribute), "6"),
+        (nameof(MeleeToHitAttribute), "10"),
+        (nameof(AttacksAttribute), "8"),
+        (nameof(ValueAttribute), "30000"),
+        (nameof(WisdomAttribute), "4"),
+    };
     public override string? ActivationName => nameof(ActivationsEnum.DrainLife90Every70DirectionalActivation);
     public override bool? BrandCold => true;
     public override string FriendlyName => "'Justice'";
@@ -13,21 +22,10 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a lucrene hammer which provides no light.
-    /// </summary>
-    public override int? Radius => 3;
-
-    public override string? Infravision => "4";
-    public override string? Wisdom => "4";
     public override bool? Regen => true;
     public override bool? ResCold => true;
     public override bool? ResLight => true;
     public override bool? ShowMods => true;
     public override bool? SlayOrc => true;
-    public override int? Value => 30000;
-    public override string Attacks => "8";
-    public override string Hits => "10";
-    public override string Damage => "6";
     public override ColorEnum? Color => ColorEnum.BrightBlue;
 }

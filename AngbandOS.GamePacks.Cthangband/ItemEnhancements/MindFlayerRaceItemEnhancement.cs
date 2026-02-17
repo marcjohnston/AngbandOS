@@ -2,17 +2,20 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class MindFlayerRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "-3";
-    public override string Charisma => "-5";
-    public override string Constitution => "-2";
-    public override string Wisdom => "4";
-    public override string Intelligence => "4";
-    public override string Dexterity => "0";
-    public override int? Value => 1350;
-    public override string? Infravision => "4";
-    public override string? DisarmTraps => "10";
-    public override string? UseDevice => "25";
-    public override string? SavingThrow => "15";
-    public override string? Stealth => "2";
-    public override string? Search => "5";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(StrengthAttribute), "-3"),
+        (nameof(CharismaAttribute), "-5"),
+        (nameof(ConstitutionAttribute), "-2"),
+        (nameof(WisdomAttribute), "4"),
+        (nameof(IntelligenceAttribute), "4"),
+        (nameof(DexterityAttribute), "0"),
+        (nameof(ValueAttribute), "1350"),
+        (nameof(InfravisionAttribute), "4"),
+        (nameof(DisarmTrapsAttribute), "10"),
+        (nameof(UseDeviceAttribute), "25"),
+        (nameof(SavingThrowAttribute), "15"),
+        (nameof(StealthAttribute), "2"),
+        (nameof(SearchAttribute), "5"),
+    };
 }

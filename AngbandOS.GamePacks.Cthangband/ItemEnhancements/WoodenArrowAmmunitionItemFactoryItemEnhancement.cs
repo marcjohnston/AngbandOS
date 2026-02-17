@@ -6,10 +6,13 @@ public class WoodenArrowAmmunitionItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool? ShowMods => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 2;
-    public override int? Value => 1;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 4;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "2"),
+        (nameof(ValueAttribute), "1"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "4"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightBrown;
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";

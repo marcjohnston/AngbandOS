@@ -9,10 +9,13 @@ public class BladeOfChaosWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
     public override bool? CanApplyBlessedArtifactBias => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 180;
-    public override int? Value => 4000;
-    public override int? DamageDice => 6;
-    public override int? DiceSides => 5;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "180"),
+        (nameof(ValueAttribute), "4000"),
+        (nameof(DamageDiceAttribute), "6"),
+        (nameof(DiceSidesAttribute), "5"),
+    };
     public override ColorEnum? Color => ColorEnum.Purple;
     public override string? HatesAcid => "true";
 }

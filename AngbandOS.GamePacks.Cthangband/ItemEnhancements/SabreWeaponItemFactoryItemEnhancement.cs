@@ -7,10 +7,13 @@ public class SabreWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigur
     public override bool? CanApplyBlessedArtifactBias => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 50;
-    public override int? Value => 50;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 7;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "50"),
+        (nameof(ValueAttribute), "50"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "7"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightWhite;
     public override string? HatesAcid => "true";
 }

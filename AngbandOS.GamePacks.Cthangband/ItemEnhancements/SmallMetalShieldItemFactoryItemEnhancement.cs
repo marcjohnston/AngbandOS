@@ -4,11 +4,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SmallMetalShieldItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Reflect => true;
-    public override int? Weight => 65;
-    public override int? Value => 50;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 2;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "65"),
+        (nameof(ValueAttribute), "50"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "2"),
+        (nameof(BaseArmorClassAttribute), "3"),
+    };
     public override ColorEnum? Color => ColorEnum.Grey;
-    public override string? BaseArmorClass => "3";
     public override string? HatesAcid => "true";
 }

@@ -3,11 +3,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class AcidBallWandItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? IgnoreAcid => true;
-    public override int? Weight => 10;
-    public override int? Value => 1650;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "10"),
+        (nameof(ValueAttribute), "1650"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1")
+    };
     public override ColorEnum? Color => ColorEnum.Chartreuse;
+    public override bool? IgnoreAcid => true;
     public override string? HatesElectricity => "true";
 }

@@ -4,7 +4,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class AggravateMonsterScrollItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 5;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "5"),
+    };
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
     public override bool? Valueless => true;

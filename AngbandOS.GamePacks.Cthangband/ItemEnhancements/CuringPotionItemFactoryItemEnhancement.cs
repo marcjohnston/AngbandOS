@@ -4,9 +4,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CuringPotionItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 4;
-    public override int? Value => 250;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "4"),
+        (nameof(ValueAttribute), "250"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1"),
+    };
     public override string? HatesCold => "true";
 }

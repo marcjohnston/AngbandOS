@@ -14,13 +14,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 public class ItemEnhancementGameConfiguration
 {
     public virtual string? Key { get; set; } = null;
-
-    public virtual int? BurnRate { get; set; } = null;
-
-    public virtual string? DisarmTraps { get; set; } = null;
-    public virtual string? UseDevice { get; set; } = null;
-
-    public virtual string? SavingThrow { get; set; } = null;
+    public virtual (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings { get; set; } = null;
 
     /// <summary>
     /// Returns true, if the item is susceptible to electricity.  Returns false, by default.
@@ -83,24 +77,6 @@ public class ItemEnhancementGameConfiguration
     /// <returns></returns>
     public virtual bool? CanApplySlayingBonus { get; set; } = null;
 
-    public virtual string? Strength { get; set; } = null;
-    public virtual string? Intelligence { get; set; } = null;
-    public virtual string? Wisdom { get; set; } = null;
-    public virtual string? Dexterity { get; set; } = null;
-    public virtual string? Constitution { get; set; } = null;
-    public virtual string? Charisma { get; set; } = null;
-    public virtual string? Stealth { get; set; } = null;
-    public virtual string? Search { get; set; } = null;
-    public virtual string? Infravision { get; set; } = null;
-    public virtual string? Tunnel { get; set; } = null;
-    public virtual string? Attacks { get; set; } = null;
-    public virtual string? Speed { get; set; } = null;
-    public virtual string? BonusArmorClass { get; set; } = null;
-    public virtual string? Hits { get; set; } = null;
-    public virtual string? Damage { get; set; } = null;
-
-    public virtual string? BaseArmorClass { get; set; } = null;
-
     /// <summary>
     /// Returns then name of an <see cref="Activation "/>, if the item can be activated; or null, if the item cannot be activated.  Dragon scale mail, rings of ice, acid and flames, the planar weapon, fixed artifacts and
     /// random artifacts may have an <see cref="Activation"/>.  Returns null, by default.  This property is used to bind the <see cref="Activation"/> property during the bind phase.
@@ -127,16 +103,6 @@ public class ItemEnhancementGameConfiguration
 
     public virtual bool? IsCursed { get; set; } = null;
 
-    /// <summary>
-    /// Returns the number of damage dice to apply to the item.
-    /// </summary>
-    public virtual int? DamageDice { get; set; } = null;
-
-    /// <summary>
-    /// Returns the number of dice sides to apply to the item.
-    /// </summary>
-    public virtual int? DiceSides { get; set; } = null;
-
     public virtual bool? DrainExp { get; set; } = null;
     public virtual bool? DreadCurse { get; set; } = null;
     public virtual bool? EasyKnow { get; set; } = null;
@@ -157,10 +123,6 @@ public class ItemEnhancementGameConfiguration
     public virtual bool? NoMagic { get; set; } = null;
     public virtual bool? NoTele { get; set; } = null;
     public virtual bool? PermaCurse { get; set; } = null;
-    public virtual int? Radius { get; set; } = null;
-    /// <summary>
-    /// Returns true, if the item can reflect bolts and arrows.  Returns false, by default.  Shields, helms, cloaks and hard armor return true.
-    /// </summary>
     public virtual bool? Reflect { get; set; } = null;
     public virtual bool? Regen { get; set; } = null;
     public virtual bool? ResAcid { get; set; } = null;
@@ -185,7 +147,6 @@ public class ItemEnhancementGameConfiguration
     public virtual bool? ShowMods { get; set; } = null;
     public virtual bool? SlayAnimal { get; set; } = null;
     public virtual bool? SlayDemon { get; set; } = null;
-    public virtual int? SlayDragon { get; set; } = null;
     public virtual bool? SlayEvil { get; set; } = null;
     public virtual bool? SlayGiant { get; set; } = null;
     public virtual bool? SlayOrc { get; set; } = null;
@@ -202,24 +163,11 @@ public class ItemEnhancementGameConfiguration
     public virtual bool? Teleport { get; set; } = null;
 
     /// <summary>
-    /// Returns an additional treasure rating to apply to the item.  This treasure rating will be added to the out-of-level delta that is automatically added.
-    /// </summary>
-    public virtual int? TreasureRating { get; set; } = null;
-
-    /// <summary>
-    /// Returns the additional value of the enhancement.  Returns 0, by default.
-    /// </summary>
-    public virtual int? Value { get; set; } = null;
-
-    /// <summary>
     /// Returns true, if the enhancement causes the item to become valueless; false, if the item retains its value.  Returns false, by default.
     /// </summary>
     public virtual bool? Valueless { get; set; } = null;
 
     public virtual bool? Vampiric { get; set; } = null;
-    public virtual int? Vorpal1InChance { get; set; } = null;
-    public virtual int? VorpalExtraAttacks1InChance { get; set; } = null;
-    public virtual int? Weight { get; set; } = null;
     public virtual bool? Wraith { get; set; } = null;   
     public virtual bool? XtraMight { get; set; } = null;
     public virtual bool? XtraShots { get; set; } = null;

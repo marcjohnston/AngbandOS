@@ -2,17 +2,20 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class GolemRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "4";
-    public override string Charisma => "-4";
-    public override string Constitution => "4";
-    public override string Wisdom => "-5";
-    public override string Intelligence => "-5";
-    public override string Dexterity => "0";
-    public override int? Value => -4200;
-    public override string? Infravision => "4";
-    public override string? DisarmTraps => "-5";
-    public override string? UseDevice => "-5";
-    public override string? SavingThrow => "10";
-    public override string? Stealth => "-1";
-    public override string? Search => "-1";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(CharismaAttribute), "-4"),
+        (nameof(ConstitutionAttribute), "4"),
+        (nameof(WisdomAttribute), "-5"),
+        (nameof(IntelligenceAttribute), "-5"),
+        (nameof(DexterityAttribute), "0"),
+        (nameof(ValueAttribute), "-4200"),
+        (nameof(InfravisionAttribute), "4"),
+        (nameof(DisarmTrapsAttribute), "-5"),
+        (nameof(UseDeviceAttribute), "-5"),
+        (nameof(SavingThrowAttribute), "10"),
+        (nameof(StealthAttribute), "-1"),
+        (nameof(SearchAttribute), "-1"),
+        (nameof(StrengthAttribute), "4")
+    };
 }

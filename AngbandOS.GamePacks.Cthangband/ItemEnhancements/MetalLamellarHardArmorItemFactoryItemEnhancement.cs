@@ -4,12 +4,15 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MetalLamellarHardArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Reflect => true;
-    public override int? Weight => 340;
-    public override int? Value => 1250;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 6;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "340"),
+        (nameof(ValueAttribute), "1250"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "6"),
+        (nameof(MeleeToHitAttribute), "-3"),
+        (nameof(BaseArmorClassAttribute), "23"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightWhite;
-    public override string? BaseArmorClass => "23";
     public override string? HatesAcid => "true";
-    public override string? Hits => "-3";
 }

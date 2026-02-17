@@ -4,10 +4,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class GoldenCrownArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? IgnoreAcid => true;
-    public override int? Weight => 30;
-    public override int? Value => 1000;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "30"),
+        (nameof(ValueAttribute), "1000"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1"),
+    };
     public override ColorEnum? Color => ColorEnum.Gold;
     public override string? HatesAcid => "true";
 }

@@ -4,14 +4,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MysticCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "2";
-    public override string Charisma => "0";
-    public override string Constitution => "2";
-    public override string Wisdom => "2";
-    public override string Intelligence => "-1";
-    public override string Dexterity => "2";
-    public override int? Value => 8400;
-    public override string? DisarmTraps => "40";
-    public override string? UseDevice => "30";
-    public override string? SavingThrow => "30";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(StrengthAttribute), "2"),
+        (nameof(CharismaAttribute), "0"),
+        (nameof(ConstitutionAttribute), "2"),
+        (nameof(WisdomAttribute), "2"),
+        (nameof(IntelligenceAttribute), "-1"),
+        (nameof(DexterityAttribute), "2"),
+        (nameof(ValueAttribute), "8400"),
+        (nameof(DisarmTrapsAttribute), "40"),
+        (nameof(UseDeviceAttribute), "30"),
+        (nameof(SavingThrowAttribute), "30"),
+    };
 }

@@ -4,14 +4,23 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MightyHammerOfWorldsFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Aggravate => true;
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "25"),
+        (nameof(MeleeToHitAttribute), "5"),
+        (nameof(AttacksAttribute), "10"),
+        (nameof(DamageDiceAttribute), "6"),
+        (nameof(ValueAttribute), "500000"),
+        (nameof(WeightAttribute), "800"),
+        (nameof(SlayDragonAttribute), "5"),
+    };
     public override string FriendlyName => "of Worlds";
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? Impact => true;
-    public override int? SlayDragon => 5;
     public override bool? NoMagic => true;
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
@@ -26,11 +35,5 @@ public class MightyHammerOfWorldsFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool? SlayTroll => true;
     public override bool? SlayUndead => true;
     public override bool? Telepathy => true;
-    public override int? Weight => 800;
-    public override int? Value => 500000;
-    public override int? DamageDice => 6;
-    public override string Attacks => "10";
-    public override string Hits => "5";
-    public override string Damage => "25";
     public override ColorEnum? Color => ColorEnum.Black;
 }

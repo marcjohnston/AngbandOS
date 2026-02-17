@@ -4,7 +4,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PintOfFineWineFoodItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 10;
-    public override int? Value => 2;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "10"),
+        (nameof(ValueAttribute), "2"),
+    };
     public override ColorEnum? Color => ColorEnum.Red;
 }

@@ -3,8 +3,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
-    // Dragon Helm and Terror Mask cause fear
     public override string? ActivationName => nameof(ActivationsEnum.Terror40xEvery3xp10Activation);
     public override bool? FreeAct => true;
     public override string FriendlyName => "'Terror Mask'";
@@ -15,9 +13,17 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? IgnoreFire => true;
     public override bool? ImCold => true;
     public override bool? NoMagic => true;
-    public override string? Intelligence => "-1";
-    public override string? Search => "-1";
-    public override string? Wisdom => "-1";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(IntelligenceAttribute), "-1"),
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(SearchAttribute), "-1"),
+        (nameof(ToDamageAttribute), "25"),
+        (nameof(MeleeToHitAttribute), "25"),
+        (nameof(AttacksAttribute), "10"),
+        (nameof(ValueAttribute), "40000"),
+        (nameof(WisdomAttribute), "-1"),
+    };
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
     public override bool? ResDisen => true;
@@ -26,9 +32,5 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
     public override bool? Teleport => true;
-    public override int? Value => 40000;
-    public override string Attacks => "10";
-    public override string Hits => "25";
-    public override string Damage => "25";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

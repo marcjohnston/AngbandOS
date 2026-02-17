@@ -4,14 +4,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FanaticCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "2";
-    public override string Charisma => "-2";
-    public override string Constitution => "2";
-    public override string Wisdom => "0";
-    public override string Intelligence => "1";
-    public override string Dexterity => "1";
-    public override int? Value => 6300;
-    public override string? DisarmTraps => "20";
-    public override string? UseDevice => "24";
-    public override string? SavingThrow => "30";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(CharismaAttribute), "-2"),
+        (nameof(ConstitutionAttribute), "2"),
+        (nameof(WisdomAttribute), "0"),
+        (nameof(IntelligenceAttribute), "1"),
+        (nameof(DexterityAttribute), "1"),
+        (nameof(ValueAttribute), "6300"),
+        (nameof(DisarmTrapsAttribute), "20"),
+        (nameof(UseDeviceAttribute), "24"),
+        (nameof(SavingThrowAttribute), "30"),
+        (nameof(StrengthAttribute), "2")
+    };
 }

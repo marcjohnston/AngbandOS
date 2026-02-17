@@ -3,19 +3,22 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LeatherScaleMailWyvernscaleFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(MeleeToHitAttribute), "-1"),
+        (nameof(AttacksAttribute), "25"),
+        (nameof(ValueAttribute), "25000"),
+        (nameof(WeightAttribute), "-80"),
+        (nameof(DexterityAttribute), "3"),
+    };
     public override string FriendlyName => "'Wyvernscale'";
     public override bool? HideType => true;
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? Dexterity => "3";
     public override bool? ResAcid => true;
     public override bool? ResShards => true;
-    public override int? Weight => -80;
-    public override int? Value => 25000;
-    public override string Attacks => "25";
-    public override string Hits => "-1";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

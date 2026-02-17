@@ -6,7 +6,20 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
     public override bool? Aggravate => true;
     public override bool? BrandFire => true;
     public override bool? BrandPois => true;
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "18"),
+        (nameof(MeleeToHitAttribute), "18"),
+        (nameof(DiceSidesAttribute), "4"),
+        (nameof(DamageDiceAttribute), "5"),
+        (nameof(ValueAttribute), "444444"),
+        (nameof(WeightAttribute), "280"),
+        (nameof(SlayDragonAttribute), "3"),
+        (nameof(TunnelAttribute), "6"),
+        (nameof(RadiusAttribute), "3"),
+        (nameof(StrengthAttribute), "6"),
+    };
     public override string FriendlyName => "'Deathwreaker'";
     public override bool? HideType => true;
     public override bool? IgnoreAcid => true;
@@ -14,28 +27,14 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? ImFire => true;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a mace which provides no light.
-    /// </summary>
-    public override int? Radius => 3;
-
     public override bool? NoTele => true;
-    public override string? Tunnel => "6";
-    public override string? Strength => "6";
     public override bool? ResChaos => true;
     public override bool? ResDark => true;
     public override bool? ResDisen => true;
     public override bool? ShowMods => true;
     public override bool? SlayAnimal => true;
-    public override int? SlayDragon => 3;
     public override bool? SlayEvil => true;
     public override bool? SlayUndead => true;
     public override bool? Vampiric => true;
-    public override int? Weight => 280;
-    public override int? Value => 444444;
-    public override int? DamageDice => 5;
-    public override int? DiceSides => 4;
-    public override string Hits => "18";
-    public override string Damage => "18";
     public override ColorEnum? Color => ColorEnum.Purple;
 }

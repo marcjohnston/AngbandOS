@@ -2,17 +2,20 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class ZombieRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "2";
-    public override string Charisma => "-5";
-    public override string Constitution => "4";
-    public override string Wisdom => "-6";
-    public override string Intelligence => "-6";
-    public override string Dexterity => "1";
-    public override int? Value => -8250;
-    public override string? Infravision => "2";
-    public override string? DisarmTraps => "-5";
-    public override string? UseDevice => "-5";
-    public override string? SavingThrow => "8";
-    public override string? Stealth => "-1";
-    public override string? Search => "-1";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(StrengthAttribute), "2"),
+        (nameof(CharismaAttribute), "-5"),
+        (nameof(ConstitutionAttribute), "4"),
+        (nameof(WisdomAttribute), "-6"),
+        (nameof(IntelligenceAttribute), "-6"),
+        (nameof(DexterityAttribute), "1"),
+        (nameof(ValueAttribute), "-8250"),
+        (nameof(InfravisionAttribute), "2"),
+        (nameof(DisarmTrapsAttribute), "-5"),
+        (nameof(UseDeviceAttribute), "-5"),
+        (nameof(SavingThrowAttribute), "8"),
+        (nameof(StealthAttribute), "-1"),
+        (nameof(SearchAttribute), "-1"),
+    };
 }

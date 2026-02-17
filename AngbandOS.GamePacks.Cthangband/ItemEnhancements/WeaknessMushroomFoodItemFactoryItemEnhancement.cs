@@ -4,8 +4,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaknessMushroomFoodItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 1;
-    public override int? DamageDice => 5;
-    public override int? DiceSides => 5;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "1"),
+        (nameof(DamageDiceAttribute), "5"),
+        (nameof(DiceSidesAttribute), "5"),
+    };
     public override bool? Valueless => true;
 }

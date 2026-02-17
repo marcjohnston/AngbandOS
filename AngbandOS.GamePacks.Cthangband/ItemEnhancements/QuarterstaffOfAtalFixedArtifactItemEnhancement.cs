@@ -3,10 +3,20 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    // Atal does full identify
     public override string? ActivationName => nameof(ActivationsEnum.ProbingDetectionAndFullIdEvery1000Activation);
     public override bool? BrandFire => true;
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "13"),
+        (nameof(MeleeToHitAttribute), "10"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(ValueAttribute), "140000"),
+        (nameof(WisdomAttribute), "4"),
+        (nameof(IntelligenceAttribute), "4"),
+        (nameof(CharismaAttribute), "4"),
+        (nameof(RadiusAttribute), "3"),
+    };
     public override string FriendlyName => "of Atal";
     public override bool? HideType => true;
     public override bool? HoldLife => true;
@@ -14,14 +24,6 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a quarterstaff which provides no light.
-    /// </summary>
-    public override int? Radius => 3;
-
-    public override string? Charisma => "4";
-    public override string? Intelligence => "4";
-    public override string? Wisdom => "4";
     public override bool? ResFire => true;
     public override bool? ResNether => true;
     public override bool? SeeInvis => true;
@@ -34,9 +36,5 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? Regen => true;
     public override bool? SlowDigest => true;
     public override bool? Telepathy => true;
-    public override int? Value => 140000;
-    public override int? DamageDice => 1;
-    public override string Hits => "10";
-    public override string Damage => "13";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

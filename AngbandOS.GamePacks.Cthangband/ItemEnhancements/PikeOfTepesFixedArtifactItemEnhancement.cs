@@ -3,7 +3,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(ToDamageAttribute), "12"),
+        (nameof(MeleeToHitAttribute), "10"),
+        (nameof(AttacksAttribute), "10"),
+        (nameof(ValueAttribute), "32000"),
+        (nameof(IntelligenceAttribute), "2"),
+        (nameof(RadiusAttribute), "3"),
+    };
     public override bool? BrandCold => true;
     public override bool? BrandFire => true;
     public override string FriendlyName => "of Tepes";
@@ -12,12 +21,6 @@ public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a pike which provides no light.
-    /// </summary>
-    public override int? Radius => 3;
-
-    public override string? Intelligence => "2";
     public override bool? ResCold => true;
     public override bool? ResFire => true;
     public override bool? ShowMods => true;
@@ -26,9 +29,5 @@ public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     public override bool? SlayTroll => true;
     public override bool? SlowDigest => true;
     public override bool? SustInt => true;
-    public override int? Value => 32000;
-    public override string Attacks => "10";
-    public override string Hits => "10";
-    public override string Damage => "12";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

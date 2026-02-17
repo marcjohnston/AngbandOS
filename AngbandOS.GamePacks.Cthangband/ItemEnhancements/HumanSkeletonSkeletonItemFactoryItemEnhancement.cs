@@ -4,9 +4,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class HumanSkeletonSkeletonItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 60;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 2;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "60"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "2"),
+    };
     public override ColorEnum? Color => ColorEnum.Beige;
     public override string? HatesAcid => "true";
     public override bool? Valueless => true;

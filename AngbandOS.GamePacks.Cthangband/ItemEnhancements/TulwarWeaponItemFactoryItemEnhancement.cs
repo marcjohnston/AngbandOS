@@ -7,10 +7,13 @@ public class TulwarWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override bool? CanApplyBlessedArtifactBias => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 100;
-    public override int? Value => 200;
-    public override int? DamageDice => 2;
-    public override int? DiceSides => 4;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "100"),
+        (nameof(ValueAttribute), "200"),
+        (nameof(DamageDiceAttribute), "2"),
+        (nameof(DiceSidesAttribute), "4"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightWhite;
     public override string? HatesAcid => "true";
 }

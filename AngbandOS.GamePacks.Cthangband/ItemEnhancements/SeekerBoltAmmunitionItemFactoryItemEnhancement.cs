@@ -6,10 +6,13 @@ public class SeekerBoltAmmunitionItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool? ShowMods => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 3;
-    public override int? Value => 25;
-    public override int? DamageDice => 4;
-    public override int? DiceSides => 5;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "25"),
+        (nameof(DamageDiceAttribute), "4"),
+        (nameof(DiceSidesAttribute), "5"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightBlue;
     public override string? HatesAcid => "true";
 }

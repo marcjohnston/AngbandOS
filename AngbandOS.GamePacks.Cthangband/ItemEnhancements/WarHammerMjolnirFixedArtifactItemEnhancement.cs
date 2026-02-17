@@ -4,7 +4,18 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? BrandElec => true;
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "21"),
+        (nameof(MeleeToHitAttribute), "19"),
+        (nameof(AttacksAttribute), "5"),
+        (nameof(DamageDiceAttribute), "6"),
+        (nameof(ValueAttribute), "250000"),
+        (nameof(RadiusAttribute), "3"),
+        (nameof(WisdomAttribute), "4"),
+        (nameof(SlayDragonAttribute), "5"),
+    };
     public override bool? FreeAct => true;
     public override string FriendlyName => "'Mjolnir'";
     public override bool? HideType => true;
@@ -12,8 +23,6 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override int? SlayDragon => 5;
-    public override string? Wisdom => "4";
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
     public override bool? ResElec => true;
@@ -26,14 +35,8 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override bool? SlayUndead => true;
     public override bool? Feather => true;
     public override bool? HoldLife => true;
-    public override int? Radius => 3;
     public override bool? Regen => true;
     public override bool? SlowDigest => true;
     public override bool? Telepathy => true;
-    public override int? Value => 250000;
-    public override int? DamageDice => 6;
-    public override string Attacks => "5";
-    public override string Hits => "19";
-    public override string Damage => "21";
     public override ColorEnum? Color => ColorEnum.Black;
 }

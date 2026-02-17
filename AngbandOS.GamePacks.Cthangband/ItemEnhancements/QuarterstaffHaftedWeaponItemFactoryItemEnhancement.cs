@@ -6,10 +6,13 @@ public class QuarterstaffHaftedWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override bool? ShowMods => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 150;
-    public override int? Value => 200;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 9;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "150"),
+        (nameof(ValueAttribute), "200"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "9"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightBrown;
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";

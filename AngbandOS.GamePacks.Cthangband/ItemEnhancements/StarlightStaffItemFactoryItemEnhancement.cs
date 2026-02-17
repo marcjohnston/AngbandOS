@@ -3,10 +3,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class StarlightStaffItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Weight => 50;
-    public override int? Value => 800;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 2;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "50"),
+        (nameof(ValueAttribute), "800"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "2"),
+    };
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
 }

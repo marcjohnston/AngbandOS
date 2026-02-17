@@ -28,11 +28,6 @@ internal abstract class Race : IGetKey
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
-
-        // Cut and paste
-        //string? prop1 = Game.GetProperty(@"D:\Programming\AngbandOS\AngbandOS.Core\Races\", Key, "public override int BaseSearchBonus => ");
-        //if (prop1 is not null)
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", Enhancement.GetKey, $"    public override string? Search => \"{prop1.Split("=> ")[1].Replace(";", "").Trim()}\";");
     }
     public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
 

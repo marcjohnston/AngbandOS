@@ -4,6 +4,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SearchingAmuletItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? HideType => true;
-    public override int? Weight => 3;
-    public override int? Value => 600;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "600"),
+    };
 }

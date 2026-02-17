@@ -8,5 +8,8 @@ public class IronHelmTerrorMaskNonWarriorFixedArtifactItemEnhancement : ItemEnha
     public override bool? Aggravate => true;
     public override bool? DreadCurse => true;
     public override bool? Valueless => true;
-    public override int? Value => -42500;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(ValueAttribute), "-42500"),
+    };
 }

@@ -4,9 +4,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class HardLeatherCapHelmItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Reflect => true;
-    public override int? Weight => 15;
-    public override int? Value => 12;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "15"),
+        (nameof(ValueAttribute), "12"),
+        (nameof(BaseArmorClassAttribute), "2"),
+    };
     public override ColorEnum? Color => ColorEnum.Brown;
-    public override string? BaseArmorClass => "2";
     public override string? HatesAcid => "true";
 }

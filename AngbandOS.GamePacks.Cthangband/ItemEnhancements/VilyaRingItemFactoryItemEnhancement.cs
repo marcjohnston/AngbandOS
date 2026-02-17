@@ -3,7 +3,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class VilyaRingItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-     public override int? Weight => 2;
-    public override int? Value => 300000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "2"),
+        (nameof(ValueAttribute), "300000"),
+    };
     public override string? HatesElectricity => "true";
 }

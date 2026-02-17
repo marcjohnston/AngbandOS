@@ -4,8 +4,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SlowMonsterRodItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 15;
-    public override int? Value => 1500;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "15"),
+        (nameof(ValueAttribute), "1500"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1"),
+    };
 }

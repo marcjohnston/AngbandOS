@@ -6,10 +6,13 @@ public class RoundedPebbleShotAmmunitionItemFactoryItemEnhancement : ItemEnhance
     public override bool? ShowMods => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 4;
-    public override int? Value => 1;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 2;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "4"),
+        (nameof(ValueAttribute), "1"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "2"),
+    };
     public override ColorEnum? Color => ColorEnum.Grey;
 }
 

@@ -2,16 +2,19 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class TchoTchoRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "3";
-    public override string Charisma => "-2";
-    public override string Constitution => "2";
-    public override string Wisdom => "-1";
-    public override string Intelligence => "-2";
-    public override string Dexterity => "1";
-    public override int? Value => 2700;
-    public override string? DisarmTraps => "-2";
-    public override string? UseDevice => "-10";
-    public override string? SavingThrow => "2";
-    public override string? Stealth => "-1";
-    public override string? Search => "1";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(StrengthAttribute), "3"),
+        (nameof(CharismaAttribute), "-2"),
+        (nameof(ConstitutionAttribute), "2"),
+        (nameof(WisdomAttribute), "-1"),
+        (nameof(IntelligenceAttribute), "-2"),
+        (nameof(DexterityAttribute), "1"),
+        (nameof(ValueAttribute), "2700"),
+        (nameof(DisarmTrapsAttribute), "-2"),
+        (nameof(UseDeviceAttribute), "-10"),
+        (nameof(SavingThrowAttribute), "2"),
+        (nameof(StealthAttribute), "-1"),
+        (nameof(SearchAttribute), "1"),
+    };
 }

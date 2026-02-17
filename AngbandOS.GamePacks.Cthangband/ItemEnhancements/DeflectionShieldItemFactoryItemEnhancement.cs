@@ -5,12 +5,15 @@ public class DeflectionShieldItemFactoryItemEnhancement : ItemEnhancementGameCon
 {
     public override bool? IgnoreAcid => true;
     public override bool? Reflect => true;
-    public override int? Weight => 100;
-    public override int? Value => 10000;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "100"),
+        (nameof(ValueAttribute), "10000"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1"),
+        (nameof(BonusArmorClassAttribute), "10"),
+        (nameof(BaseArmorClassAttribute), "10"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightBlue;
-    public override string? BaseArmorClass => "10";
     public override string? HatesAcid => "true";
-    public override string? BonusArmorClass => "10";
 }

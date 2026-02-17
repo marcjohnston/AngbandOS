@@ -4,12 +4,15 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class AugmentedChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Reflect => true;
-    public override int? Weight => 270;
-    public override int? Value => 900;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 4;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "270"),
+        (nameof(ValueAttribute), "900"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(MeleeToHitAttribute), "-2"),
+        (nameof(DiceSidesAttribute), "4"),
+        (nameof(BaseArmorClassAttribute), "16"),
+    };
     public override ColorEnum? Color => ColorEnum.Grey;
-    public override string? BaseArmorClass => "16";
     public override string? HatesAcid => "true";
-    public override string? Hits => "-2";
 }

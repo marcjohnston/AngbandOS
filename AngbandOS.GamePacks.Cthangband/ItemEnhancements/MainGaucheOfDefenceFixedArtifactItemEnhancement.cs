@@ -3,7 +3,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MainGaucheOfDefenceFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(ToDamageAttribute), "15"),
+        (nameof(MeleeToHitAttribute), "12"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(ValueAttribute), "22500"),
+        (nameof(SpeedAttribute), "3"),
+        (nameof(IntelligenceAttribute), "3"),
+        (nameof(DexterityAttribute), "3"),
+    };
     public override bool? FreeAct => true;
     public override string FriendlyName => "of Defence";
     public override bool? HideType => true;
@@ -11,16 +21,9 @@ public class MainGaucheOfDefenceFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? Dexterity => "3";
-    public override string? Intelligence => "3";
-    public override string? Speed => "3";
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
     public override bool? SlayGiant => true;
     public override bool? SlayTroll => true;
-    public override int? Value => 22500;
-    public override int? DamageDice => 1;
-    public override string Hits => "12";
-    public override string Damage => "15";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

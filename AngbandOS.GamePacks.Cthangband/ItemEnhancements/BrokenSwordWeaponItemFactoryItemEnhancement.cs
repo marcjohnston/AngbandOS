@@ -7,12 +7,15 @@ public class BrokenSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool? CanApplyBlessedArtifactBias => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 30;
-    public override int? Value => 2;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 2;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "30"),
+        (nameof(ValueAttribute), "2"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(MeleeToHitAttribute), "-2"),
+        (nameof(ToDamageAttribute), "-4"),
+        (nameof(DiceSidesAttribute), "2"),
+    };
     public override ColorEnum? Color => ColorEnum.Black;
     public override string? HatesAcid => "true";
-    public override string? Hits => "-2";
-    public override string? Damage => "-4";
 }

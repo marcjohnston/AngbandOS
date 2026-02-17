@@ -3,31 +3,30 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "32"),
+        (nameof(MeleeToHitAttribute), "32"),
+        (nameof(DamageDiceAttribute), "3"),
+        (nameof(ValueAttribute), "250000"),
+        (nameof(WeightAttribute), "20"),
+        (nameof(VorpalExtraAttacks1InChanceAttribute), "2"),
+        (nameof(Vorpal1InChanceAttribute), "3"),
+        (nameof(SpeedAttribute), "2"),
+        (nameof(DexterityAttribute), "2"),
+        (nameof(RadiusAttribute), "3"),
+        (nameof(StrengthAttribute), "2"),
+    };
     public override bool? FreeAct => true;
     public override string FriendlyName => "'Vorpal Blade'";
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a long sword which provides no light.
-    /// </summary>
-    public override int? Radius => 3;
-
-    public override string? Dexterity => "2";
-    public override string? Speed => "2";
-    public override string? Strength => "2";
     public override bool? Regen => true;
     public override bool? SeeInvis => true;
     public override bool? SlayEvil => true;
     public override bool? SlowDigest => true;
-    public override int? Vorpal1InChance => 3;
-    public override int? VorpalExtraAttacks1InChance => 2;
-    public override int? Weight => 20;
-    public override int? Value => 250000;
-    public override int? DamageDice => 3;
-    public override string Hits => "32";
-    public override string Damage => "32";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

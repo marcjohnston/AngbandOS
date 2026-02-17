@@ -2,17 +2,20 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class HobbitRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "-2";
-    public override string Charisma => "1";
-    public override string Constitution => "2";
-    public override string Wisdom => "1";
-    public override string Intelligence => "2";
-    public override string Dexterity => "3";
-    public override int? Value => 7650;
-    public override string? Infravision => "4";
-    public override string? DisarmTraps => "15";
-    public override string? UseDevice => "18";
-    public override string? SavingThrow => "18";
-    public override string? Stealth => "5";
-    public override string? Search => "12";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(CharismaAttribute), "1"),
+        (nameof(ConstitutionAttribute), "2"),
+        (nameof(WisdomAttribute), "1"),
+        (nameof(IntelligenceAttribute), "2"),
+        (nameof(DexterityAttribute), "3"),
+        (nameof(ValueAttribute), "7650"),
+        (nameof(InfravisionAttribute), "4"),
+        (nameof(DisarmTrapsAttribute), "15"),
+        (nameof(UseDeviceAttribute), "18"),
+        (nameof(SavingThrowAttribute), "18"),
+        (nameof(StealthAttribute), "5"),
+        (nameof(SearchAttribute), "12"),
+        (nameof(StrengthAttribute), "-2")
+    };
 }

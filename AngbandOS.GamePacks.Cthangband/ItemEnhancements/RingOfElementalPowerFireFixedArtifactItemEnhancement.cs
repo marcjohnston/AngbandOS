@@ -3,9 +3,23 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class RingOfElementalPowerFireFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    // Ring of Elemental Fire casts a fireball
     public override string? ActivationName => nameof(ActivationsEnum.FireBall120r3Every225p1d225DirectionalActivation);
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(StrengthAttribute), "1"),
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "10"),
+        (nameof(MeleeToHitAttribute), "10"),
+        (nameof(DiceSidesAttribute), "1"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(ValueAttribute), "100000"),
+        (nameof(WisdomAttribute), "1"),
+        (nameof(SpeedAttribute), "1"),
+        (nameof(IntelligenceAttribute), "1"),
+        (nameof(DexterityAttribute), "1"),
+        (nameof(ConstitutionAttribute), "1"),
+        (nameof(CharismaAttribute), "1"),
+    };
     public override bool? FreeAct => true;
     public override string FriendlyName => "of Elemental Power (Fire)";
     public override bool? HideType => true;
@@ -14,21 +28,9 @@ public class RingOfElementalPowerFireFixedArtifactItemEnhancement : ItemEnhancem
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? ImFire => true;
-    public override string? Charisma => "1";
-    public override string? Constitution => "1";
-    public override string? Dexterity => "1";
-    public override string? Intelligence => "1";
-    public override string? Speed => "1";
-    public override string? Strength => "1";
-    public override string? Wisdom => "1";
     public override bool? Regen => true;
     public override bool? SeeInvis => true;
     public override bool? SlowDigest => true;
     public override bool? SustDex => true;
     public override bool? SustStr => true;
-    public override int? Value => 100000;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
-    public override string Hits => "10";
-    public override string Damage => "10";
 }

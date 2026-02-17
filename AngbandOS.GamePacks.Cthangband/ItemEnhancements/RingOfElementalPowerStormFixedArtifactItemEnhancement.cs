@@ -3,9 +3,24 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class RingOfElementalPowerStormFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    // Ring of Elemental Lightning casts a lightning ball
     public override string? ActivationName => nameof(ActivationsEnum.LargeLightningBall250Every425p1d425DirectionalActivation);
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "12"),
+        (nameof(MeleeToHitAttribute), "12"),
+        (nameof(DiceSidesAttribute), "1"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(ValueAttribute), "300000"),
+        (nameof(RadiusAttribute), "3"),
+        (nameof(WisdomAttribute), "3"),
+        (nameof(SpeedAttribute), "3"),
+        (nameof(IntelligenceAttribute), "3"),
+        (nameof(DexterityAttribute), "3"),
+        (nameof(ConstitutionAttribute), "3"),
+        (nameof(CharismaAttribute), "3"),
+        (nameof(StrengthAttribute), "3"),
+    };
     public override bool? Feather => true;
     public override bool? FreeAct => true;
     public override string FriendlyName => "of Elemental Power (Storm)";
@@ -16,13 +31,6 @@ public class RingOfElementalPowerStormFixedArtifactItemEnhancement : ItemEnhance
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? ImElec => true;
-    public override string? Charisma => "3";
-    public override string? Constitution => "3";
-    public override string? Dexterity => "3";
-    public override string? Intelligence => "3";
-    public override string? Speed => "3";
-    public override string? Strength => "3";
-    public override string? Wisdom => "3";
     public override bool? Regen => true;
     public override bool? SeeInvis => true;
     public override bool? SlowDigest => true;
@@ -30,11 +38,5 @@ public class RingOfElementalPowerStormFixedArtifactItemEnhancement : ItemEnhance
     public override bool? SustInt => true;
     public override bool? SustStr => true;
     public override bool? SustWis => true;
-    public override int? Radius => 3;
     public override bool? Telepathy => true;
-    public override int? Value => 300000;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
-    public override string Hits => "12";
-    public override string Damage => "12";
 }

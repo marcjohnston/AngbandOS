@@ -8,6 +8,9 @@ public class AntiTeleportationAmuletItemFactoryItemEnhancement : ItemEnhancement
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? NoTele => true;
-    public override int? Weight => 3;
-    public override int? Value => 15000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "15000"),
+    };
 }

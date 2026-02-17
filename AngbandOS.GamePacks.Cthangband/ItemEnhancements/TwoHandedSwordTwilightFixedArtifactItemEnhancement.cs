@@ -3,7 +3,18 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(ToDamageAttribute), "-60"),
+        (nameof(MeleeToHitAttribute), "-40"),
+        (nameof(AttacksAttribute), "-50"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(ValueAttribute), "40000"),
+        (nameof(WeightAttribute), "50"),
+        (nameof(SpeedAttribute), "10"),
+        (nameof(RadiusAttribute), "3"),
+    };
     public override bool? Aggravate => true;
     public override bool? BrandFire => true;
     public override bool? IsCursed => true;
@@ -15,21 +26,9 @@ public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? ImFire => true;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a two-handed sword which provides no light.
-    /// </summary>
-    public override int? Radius => 3;
-
-    public override string? Speed => "10";
     public override bool? ResDisen => true;
     public override bool? ResFear => true;
     public override bool? ResFire => true;
     public override bool? ShowMods => true;
-    public override int? Weight => 50;
-    public override int? Value => 40000;
-    public override int? DamageDice => 1;
-    public override string Attacks => "-50";
-    public override string Hits => "-40";
-    public override string Damage => "-60";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

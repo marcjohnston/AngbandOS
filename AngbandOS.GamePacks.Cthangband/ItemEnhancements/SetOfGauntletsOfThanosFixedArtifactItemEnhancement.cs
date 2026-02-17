@@ -3,7 +3,15 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(ToDamageAttribute), "-12"),
+        (nameof(MeleeToHitAttribute), "-11"),
+        (nameof(ValueAttribute), "40000"),
+        (nameof(DexterityAttribute), "2"),
+        (nameof(StrengthAttribute), "2"),
+    };
     public override bool? Aggravate => true;
     public override bool? IsCursed => true;
     public override bool? DreadCurse => true;
@@ -17,8 +25,6 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? IgnoreFire => true;
     public override bool? ImCold => true;
     public override bool? ImFire => true;
-    public override string? Dexterity => "2";
-    public override string? Strength => "2";
     public override bool? ResChaos => true;
     public override bool? ResDisen => true;
     public override bool? ResNether => true;
@@ -26,8 +32,5 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? ResPois => true;
     public override bool? ShowMods => true;
     public override bool? Teleport => true;
-    public override int? Value => 40000;
-    public override string Hits => "-11";
-    public override string Damage => "-12";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

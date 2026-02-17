@@ -8,7 +8,10 @@ public class AntiMagicAmuletItemFactoryItemEnhancement : ItemEnhancementGameConf
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? NoMagic => true;
-    public override int? Weight => 3;
-    public override int? Value => 30000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "30000"),
+    };
 }
 

@@ -4,12 +4,15 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class MetalBrigandineHardArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Reflect => true;
-    public override int? Weight => 290;
-    public override int? Value => 1100;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 4;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "290"),
+        (nameof(ValueAttribute), "1100"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "4"),
+        (nameof(MeleeToHitAttribute), "-3"),
+        (nameof(BaseArmorClassAttribute), "19"),
+    };
     public override ColorEnum? Color => ColorEnum.Grey;
-    public override string? BaseArmorClass => "19";
     public override string? HatesAcid => "true";
-    public override string? Hits => "-3";
 }

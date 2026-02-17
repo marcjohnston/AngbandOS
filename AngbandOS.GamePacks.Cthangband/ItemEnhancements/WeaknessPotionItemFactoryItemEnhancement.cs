@@ -4,9 +4,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class WeaknessPotionItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 4;
-    public override int? DamageDice => 3;
-    public override int? DiceSides => 12;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "4"),
+        (nameof(DamageDiceAttribute), "3"),
+        (nameof(DiceSidesAttribute), "12"),
+    };
     public override string? HatesCold => "true";
     public override bool? Valueless => true;
 }

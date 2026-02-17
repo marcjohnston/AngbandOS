@@ -10,14 +10,17 @@ public class PseudoDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGa
     public override bool? IgnoreFire => true;
     public override bool? ResDark => true;
     public override bool? ResLight => true;
-    public override int? TreasureRating => 30;
-    public override int? Weight => 200;
-    public override int? Value => 55000;
-    public override int? DamageDice => 2;
-    public override int? DiceSides => 4;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "30"),
+        (nameof(WeightAttribute), "200"),
+        (nameof(ValueAttribute), "55000"),
+        (nameof(DamageDiceAttribute), "2"),
+        (nameof(DiceSidesAttribute), "4"),
+        (nameof(MeleeToHitAttribute), "-2"),
+        (nameof(BonusArmorClassAttribute), "10"),
+        (nameof(BaseArmorClassAttribute), "30"),
+    };
     public override ColorEnum? Color => ColorEnum.Pink;
-    public override string? BaseArmorClass => "30";
     public override string? HatesAcid => "true";
-    public override string? BonusArmorClass => "10";
-    public override string? Hits => "-2";
 }

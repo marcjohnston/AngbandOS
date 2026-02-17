@@ -3,10 +3,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class RemoveCurseStaffItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Weight => 50;
-    public override int? Value => 500;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 2;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "50"),
+        (nameof(ValueAttribute), "500"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "2"),
+    };
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
 }

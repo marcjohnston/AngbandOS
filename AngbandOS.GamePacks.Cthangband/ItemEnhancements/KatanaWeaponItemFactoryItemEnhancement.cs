@@ -7,10 +7,13 @@ public class KatanaWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     public override bool? CanApplyBlessedArtifactBias => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 120;
-    public override int? Value => 400;
-    public override int? DamageDice => 3;
-    public override int? DiceSides => 4;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "120"),
+        (nameof(ValueAttribute), "400"),
+        (nameof(DamageDiceAttribute), "3"),
+        (nameof(DiceSidesAttribute), "4"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightWhite;
     public override string? HatesAcid => "true";
 }

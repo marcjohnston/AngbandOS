@@ -5,7 +5,21 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
 {
     public override bool? Aggravate => true;
     public override bool? BrandFire => true;
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "21"),
+        (nameof(MeleeToHitAttribute), "19"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(ValueAttribute), "205000"),
+        (nameof(WeightAttribute), "50"),
+        (nameof(VorpalExtraAttacks1InChanceAttribute), "2"),
+        (nameof(Vorpal1InChanceAttribute), "6"),
+        (nameof(CharismaAttribute), "4"),
+        (nameof(RadiusAttribute), "3"),
+        (nameof(SlayDragonAttribute), "5"),
+        (nameof(StrengthAttribute), "4"),
+    };
     public override bool? FreeAct => true;
     public override string FriendlyName => "'Firetongue'";
     public override bool? HideType => true;
@@ -13,14 +27,6 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override int? SlayDragon => 5;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a two-handed sword which provides no light.
-    /// </summary>
-    public override int? Radius => 3;
-
-    public override string? Charisma => "4";
-    public override string? Strength => "4";
     public override bool? ResChaos => true;
     public override bool? ResFire => true;
     public override bool? SeeInvis => true;
@@ -32,12 +38,5 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
     public override bool? SlayOrc => true;
     public override bool? SlayTroll => true;
     public override bool? SlayUndead => true;
-    public override int? Vorpal1InChance => 6;
-    public override int? VorpalExtraAttacks1InChance => 2;
-    public override int? Weight => 50;
-    public override int? Value => 205000;
-    public override int? DamageDice => 1;
-    public override string Hits => "19";
-    public override string Damage => "21";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

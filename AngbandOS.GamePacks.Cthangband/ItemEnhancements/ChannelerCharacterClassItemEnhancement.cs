@@ -4,14 +4,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ChannelerCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "-1";
-    public override string Charisma => "3";
-    public override string Constitution => "-1";
-    public override string Wisdom => "2";
-    public override string Intelligence => "0";
-    public override string Dexterity => "-1";
-    public override int? Value => 150;
-    public override string? DisarmTraps => "40";
-    public override string? UseDevice => "40";
-    public override string? SavingThrow => "30";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(StrengthAttribute), "-1"),
+        (nameof(CharismaAttribute), "3"),
+        (nameof(ConstitutionAttribute), "-1"),
+        (nameof(WisdomAttribute), "2"),
+        (nameof(IntelligenceAttribute), "0"),
+        (nameof(DexterityAttribute), "-1"),
+        (nameof(ValueAttribute), "150"),
+        (nameof(DisarmTrapsAttribute), "40"),
+        (nameof(UseDeviceAttribute), "40"),
+        (nameof(SavingThrowAttribute), "30"),
+    };
 }

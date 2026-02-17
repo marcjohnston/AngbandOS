@@ -4,7 +4,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ExecutionersSwordOfNyarlathotepFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? BrandPois => true;
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "19"),
+        (nameof(MeleeToHitAttribute), "18"),
+        (nameof(ValueAttribute), "111000"),
+        (nameof(VorpalExtraAttacks1InChanceAttribute), "2"),
+        (nameof(Vorpal1InChanceAttribute), "6"),
+        (nameof(SlayDragonAttribute), "3"),
+    };
     public override string FriendlyName => "of Nyarlathotep";
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;
@@ -12,16 +21,10 @@ public class ExecutionersSwordOfNyarlathotepFixedArtifactItemEnhancement : ItemE
     public override bool? IgnoreFire => true;
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
-    public override int? SlayDragon => 3;
     public override bool? SlayEvil => true;
     public override bool? SlayGiant => true;
     public override bool? SlayOrc => true;
     public override bool? SlayTroll => true;
     public override bool? SlayUndead => true;
-    public override int? Vorpal1InChance => 6;
-    public override int? VorpalExtraAttacks1InChance => 2;
-    public override int? Value => 111000;
-    public override string Hits => "18";
-    public override string Damage => "19";
     public override ColorEnum? Color => ColorEnum.Red;
 }

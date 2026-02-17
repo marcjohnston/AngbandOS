@@ -3,11 +3,21 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    // Karakal teleports you randomly
     public override string? ActivationName => nameof(ActivationsEnum.GetawayEvery35Activation);
     public override bool? BrandElec => true;
     public override bool? Chaotic => true;
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "12"),
+        (nameof(MeleeToHitAttribute), "8"),
+        (nameof(ValueAttribute), "150000"),
+        (nameof(SpeedAttribute), "2"),
+        (nameof(ConstitutionAttribute), "2"),
+        (nameof(AttacksAttribute), "2"),
+        (nameof(RadiusAttribute), "3"),
+        (nameof(StrengthAttribute), "2"),
+    };
     public override bool? FreeAct => true;
     public override string FriendlyName => "of Karakal";
     public override bool? HideType => true;
@@ -15,15 +25,6 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a long sword which provides no light.
-    /// </summary>
-    public override int? Radius => 3;
-
-    public override string? Attacks => "2";
-    public override string? Constitution => "2";
-    public override string? Speed => "2";
-    public override string? Strength => "2";
     public override bool? Regen => true;
     public override bool? ResDark => true;
     public override bool? ResDisen => true;
@@ -39,8 +40,5 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? SustInt => true;
     public override bool? SustStr => true;
     public override bool? SustWis => true;
-    public override int? Value => 150000;
-    public override string Hits => "8";
-    public override string Damage => "12";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

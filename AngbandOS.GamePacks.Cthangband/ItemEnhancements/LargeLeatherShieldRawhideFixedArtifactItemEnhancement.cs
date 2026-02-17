@@ -3,7 +3,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LargeLeatherShieldRawhideFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(AttacksAttribute), "20"),
+        (nameof(ValueAttribute), "12000"),
+        (nameof(WeightAttribute), "-40"),
+    };
     public override string FriendlyName => "'Rawhide'";
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;
@@ -15,8 +21,5 @@ public class LargeLeatherShieldRawhideFixedArtifactItemEnhancement : ItemEnhance
     public override bool? ResElec => true;
     public override bool? ResFire => true;
     public override bool? ResLight => true;
-    public override int? Weight => -40;
-    public override int? Value => 12000;
-    public override string Attacks => "20";
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

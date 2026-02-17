@@ -3,7 +3,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "20"),
+        (nameof(MeleeToHitAttribute), "10"),
+        (nameof(AttacksAttribute), "15"),
+        (nameof(ValueAttribute), "150000"),
+        (nameof(ConstitutionAttribute), "3"),
+        (nameof(SlayDragonAttribute), "5"),
+    };
     public override bool? FreeAct => true;
     public override string FriendlyName => "of the Yeeks";
     public override bool? HideType => true;
@@ -11,8 +20,6 @@ public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override int? SlayDragon => 5;
-    public override string? Constitution => "3";
     public override bool? ResAcid => true;
     public override bool? ResChaos => true;
     public override bool? ResDark => true;
@@ -22,9 +29,5 @@ public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGam
     public override bool? SlayDemon => true;
     public override bool? SlayOrc => true;
     public override bool? SlayTroll => true;
-    public override int? Value => 150000;
-    public override string Attacks => "15";
-    public override string Hits => "10";
-    public override string Damage => "20";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

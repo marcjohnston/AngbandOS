@@ -3,10 +3,18 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    // Everflame shoots a fire ball
     public override string? ActivationName => nameof(ActivationsEnum.BallOfFire72r2Every400DirectionalActivation);
     public override bool? BrandFire => true;
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "15"),
+        (nameof(MeleeToHitAttribute), "10"),
+        (nameof(AttacksAttribute), "5"),
+        (nameof(ValueAttribute), "80000"),
+        (nameof(RadiusAttribute), "3"),
+        (nameof(StrengthAttribute), "4"),
+    };
     public override bool? FreeAct => true;
     public override string FriendlyName => "of Everflame";
     public override bool? HideType => true;
@@ -14,12 +22,6 @@ public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a long sword which provides no light.
-    /// </summary>
-    public override int? Radius => 3;
-
-    public override string? Strength => "4";
     public override bool? ResFire => true;
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
@@ -27,9 +29,5 @@ public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementG
     public override bool? SlayOrc => true;
     public override bool? SlayTroll => true;
     public override bool? SustDex => true;
-    public override int? Value => 80000;
-    public override string Attacks => "5";
-    public override string Hits => "10";
-    public override string Damage => "15";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -3,6 +3,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CarlammasAmuletItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Weight => 3;
-    public override int? Value => 60000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "60000"),
+    };
 }

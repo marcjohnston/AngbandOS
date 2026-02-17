@@ -4,10 +4,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class EmptyBottleItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 2;
-    public override int? Value => 1;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "2"),
+        (nameof(ValueAttribute), "1"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1"),
+    };
     public override string? HatesAcid => "true";
     public override string? HatesCold => "true";
 }

@@ -8,10 +8,13 @@ public class PnakoticManuscriptsCorporealBookItemFactoryItemEnhancement : ItemEn
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? EasyKnow => true;
-    public override int? Weight => 30;
-    public override int? Value => 100000;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "30"),
+        (nameof(ValueAttribute), "100000"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightYellow;
     public override string? HatesFire => "true";
 }

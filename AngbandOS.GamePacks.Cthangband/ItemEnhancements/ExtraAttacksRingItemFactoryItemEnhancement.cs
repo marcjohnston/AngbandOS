@@ -3,8 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ExtraAttacksRingItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string? Attacks => "1";
-    public override int? Weight => 2;
-    public override int? Value => 100000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(AttacksAttribute), "1"),
+        (nameof(WeightAttribute), "2"),
+        (nameof(ValueAttribute), "100000"),
+    };
     public override string? HatesElectricity => "true";
 }

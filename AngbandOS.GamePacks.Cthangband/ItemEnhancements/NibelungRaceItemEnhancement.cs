@@ -2,17 +2,20 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class NibelungRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "1";
-    public override string Charisma => "-4";
-    public override string Constitution => "2";
-    public override string Wisdom => "2";
-    public override string Intelligence => "-1";
-    public override string Dexterity => "0";
-    public override int? Value => 3000;
-    public override string? Infravision => "5";
-    public override string? DisarmTraps => "3";
-    public override string? UseDevice => "5";
-    public override string? SavingThrow => "10";
-    public override string? Stealth => "1";
-    public override string? Search => "5";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(StrengthAttribute), "1"),
+        (nameof(CharismaAttribute), "-4"),
+        (nameof(ConstitutionAttribute), "2"),
+        (nameof(WisdomAttribute), "2"),
+        (nameof(IntelligenceAttribute), "-1"),
+        (nameof(DexterityAttribute), "0"),
+        (nameof(ValueAttribute), "3000"),
+        (nameof(InfravisionAttribute), "5"),
+        (nameof(DisarmTrapsAttribute), "3"),
+        (nameof(UseDeviceAttribute), "5"),
+        (nameof(SavingThrowAttribute), "10"),
+        (nameof(StealthAttribute), "1"),
+        (nameof(SearchAttribute), "5"),
+    };
 }

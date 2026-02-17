@@ -11,6 +11,9 @@ public class ResistanceAmuletItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool? ResCold => true;
     public override bool? ResElec => true;
     public override bool? ResFire => true;
-    public override int? Weight => 3;
-    public override int? Value => 25000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "25000"),
+    };
 }

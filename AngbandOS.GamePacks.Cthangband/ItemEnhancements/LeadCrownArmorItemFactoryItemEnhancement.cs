@@ -3,10 +3,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LeadCrownArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Weight => 20;
-    public override int? Value => 1000;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "20"),
+        (nameof(ValueAttribute), "1000"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1"),
+    };
     public override ColorEnum? Color => ColorEnum.Black;
     public override string? HatesAcid => "true";
 }

@@ -7,10 +7,13 @@ public class PikePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool? CanApplyBlessedArtifactBias => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 160;
-    public override int? Value => 358;
-    public override int? DamageDice => 2;
-    public override int? DiceSides => 5;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "160"),
+        (nameof(ValueAttribute), "358"),
+        (nameof(DamageDiceAttribute), "2"),
+        (nameof(DiceSidesAttribute), "5"),
+    };
     public override ColorEnum? Color => ColorEnum.Grey;
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";

@@ -3,7 +3,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ShadowCloakOfTheShoggothFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(AttacksAttribute), "12"),
+        (nameof(ValueAttribute), "35000"),
+        (nameof(StealthAttribute), "4"),
+    };
     public override bool? FreeAct => true;
     public override string FriendlyName => "of the Shoggoth";
     public override bool? IgnoreAcid => true;
@@ -11,9 +17,6 @@ public class ShadowCloakOfTheShoggothFixedArtifactItemEnhancement : ItemEnhancem
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? ImAcid => true;
-    public override string? Stealth => "4";
     public override bool? SeeInvis => true;
-    public override int? Value => 35000;
-    public override string Attacks => "12";
     public override ColorEnum? Color => ColorEnum.Black;
 }

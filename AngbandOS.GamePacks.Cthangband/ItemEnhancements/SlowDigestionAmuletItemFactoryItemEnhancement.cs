@@ -5,6 +5,9 @@ public class SlowDigestionAmuletItemFactoryItemEnhancement : ItemEnhancementGame
 {
     public override bool? EasyKnow => true;
     public override bool? SlowDigest => true;
-    public override int? Weight => 3;
-    public override int? Value => 200;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "200"),
+    };
 }

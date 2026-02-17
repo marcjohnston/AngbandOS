@@ -3,7 +3,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(SlayDragonAttribute), "5"),
+        (nameof(ConstitutionAttribute), "5"),
+        (nameof(ValueAttribute), "100000"),
+        (nameof(DamageDiceAttribute), "2"),
+        (nameof(MeleeToHitAttribute), "-20"),
+        (nameof(ToDamageAttribute), "20"),
+    };
     public override bool? Aggravate => true;
     public override bool? IsCursed => true;
     public override string FriendlyName => "'Selfslayer'";
@@ -13,16 +22,10 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override int? SlayDragon => 5;
-    public override string? Constitution => "5";
     public override bool? ResDisen => true;
     public override bool? ShowMods => true;
     public override bool? SlayDemon => true;
     public override bool? SlayEvil => true;
     public override bool? SlayTroll => true;
-    public override int? Value => 100000;
-    public override int? DamageDice => 2;
-    public override string Hits => "-20";
-    public override string Damage => "20";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

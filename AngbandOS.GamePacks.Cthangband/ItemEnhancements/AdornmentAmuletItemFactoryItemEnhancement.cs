@@ -4,6 +4,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class AdornmentAmuletItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 3;
-    public override int? Value => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "20"),
+    };
 }

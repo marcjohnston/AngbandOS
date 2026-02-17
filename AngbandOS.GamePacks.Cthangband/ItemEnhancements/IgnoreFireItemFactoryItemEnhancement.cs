@@ -5,5 +5,8 @@ public class IgnoreFireItemFactoryItemEnhancement : ItemEnhancementGameConfigura
 {
     public override bool? IgnoreFire => true;
     public override bool? EasyKnow => true;
-    public override int? Value => 100;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(ValueAttribute), "100"),
+    };
 }

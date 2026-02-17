@@ -3,18 +3,21 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class DragonHelmItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 5;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "5"),
+        (nameof(BonusArmorClassAttribute), "10"),
+        (nameof(BaseArmorClassAttribute), "8"),
+        (nameof(DiceSidesAttribute), "3"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(ValueAttribute), "10000"),
+        (nameof(WeightAttribute), "50"),
+    };
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? Reflect => true;
-    public override int? Weight => 50;
-    public override int? Value => 10000;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 3;
     public override ColorEnum? Color => ColorEnum.BrightGreen;
-    public override string? BaseArmorClass => "8";
     public override string? HatesAcid => "true";
-    public override string? BonusArmorClass => "10";
 }

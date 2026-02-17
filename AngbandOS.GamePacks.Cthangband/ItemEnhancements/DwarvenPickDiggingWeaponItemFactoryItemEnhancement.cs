@@ -6,9 +6,12 @@ public class DwarvenPickDiggingWeaponItemFactoryItemEnhancement : ItemEnhancemen
     public override bool? ShowMods => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 200;
-    public override int? Value => 600;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 4;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "200"),
+        (nameof(ValueAttribute), "600"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "4"),
+    };
     public override ColorEnum? Color => ColorEnum.Blue;
 }

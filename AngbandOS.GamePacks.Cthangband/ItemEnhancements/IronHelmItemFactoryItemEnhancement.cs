@@ -4,11 +4,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class IronHelmItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Reflect => true;
-    public override int? Weight => 75;
-    public override int? Value => 75;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 3;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "75"),
+        (nameof(ValueAttribute), "75"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "3"),
+        (nameof(BaseArmorClassAttribute), "5"),
+    };
     public override ColorEnum? Color => ColorEnum.Grey;
-    public override string? BaseArmorClass => "5";
     public override string? HatesAcid => "true";
 }

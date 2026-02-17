@@ -5,8 +5,11 @@ public class StupidityRingItemFactoryItemEnhancement : ItemEnhancementGameConfig
 {
     public override bool? IsCursed => true;
     public override bool? HideType => true;
-    public override int? Weight => 2;
-    public override int? Value => -5000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "2"),
+        (nameof(ValueAttribute), "-5000"),
+    };
     public override string? HatesElectricity => "true";
     public override bool? Valueless => true;
 }

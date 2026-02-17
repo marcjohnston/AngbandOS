@@ -7,7 +7,18 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool? Blessed => true;
     public override bool? BrandElec => true;
     public override bool? BrandFire => true;
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "25"),
+        (nameof(MeleeToHitAttribute), "15"),
+        (nameof(AttacksAttribute), "5"),
+        (nameof(DamageDiceAttribute), "3"),
+        (nameof(ValueAttribute), "180000"),
+        (nameof(WisdomAttribute), "4"),
+        (nameof(IntelligenceAttribute), "4"),
+        (nameof(RadiusAttribute), "3"),
+    };
     public override bool? FreeAct => true;
     public override string FriendlyName => "'Gungnir'";
     public override bool? HideType => true;
@@ -15,13 +26,6 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for a spear which provides no light.
-    /// </summary>
-    public override int? Radius => 3;
-
-    public override string? Intelligence => "4";
-    public override string? Wisdom => "4";
     public override bool? ResElec => true;
     public override bool? ResFire => true;
     public override bool? ResLight => true;
@@ -30,10 +34,5 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override bool? SlayOrc => true;
     public override bool? SlayTroll => true;
     public override bool? SlowDigest => true;
-    public override int? Value => 180000;
-    public override int? DamageDice => 3;
-    public override string Attacks => "5";
-    public override string Hits => "15";
-    public override string Damage => "25";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

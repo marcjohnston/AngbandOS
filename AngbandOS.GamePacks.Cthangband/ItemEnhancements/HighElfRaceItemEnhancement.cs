@@ -1,18 +1,22 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
+    
+[Serializable]
 public class HighElfRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "1";
-    public override string Charisma => "5";
-    public override string Constitution => "1";
-    public override string Wisdom => "2";
-    public override string Intelligence => "3";
-    public override string Dexterity => "3";
-    public override int? Value => 14250;
-    public override string? Infravision => "4";
-    public override string? DisarmTraps => "4";
-    public override string? UseDevice => "20";
-    public override string? SavingThrow => "20";
-    public override string? Stealth => "4";
-    public override string? Search => "3";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(CharismaAttribute), "5"),
+        (nameof(ConstitutionAttribute), "1"),
+        (nameof(WisdomAttribute), "2"),
+        (nameof(IntelligenceAttribute), "3"),
+        (nameof(DexterityAttribute), "3"),
+        (nameof(ValueAttribute), "14250"),
+        (nameof(InfravisionAttribute), "4"),
+        (nameof(DisarmTrapsAttribute), "4"),
+        (nameof(UseDeviceAttribute), "20"),
+        (nameof(SavingThrowAttribute), "20"),
+        (nameof(StealthAttribute), "4"),
+        (nameof(SearchAttribute), "3"),
+        (nameof(StrengthAttribute), "1")
+    };
 }

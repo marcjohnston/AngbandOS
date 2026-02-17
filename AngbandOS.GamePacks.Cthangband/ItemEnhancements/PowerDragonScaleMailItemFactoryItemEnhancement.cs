@@ -22,14 +22,17 @@ public class PowerDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool? ResPois => true;
     public override bool? ResShards => true;
     public override bool? ResSound => true;
-    public override int? TreasureRating => 30;
-    public override int? Weight => 250;
-    public override int? Value => 345000;
-    public override int? DamageDice => 2;
-    public override int? DiceSides => 4;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "30"),
+        (nameof(WeightAttribute), "250"),
+        (nameof(ValueAttribute), "345000"),
+        (nameof(DamageDiceAttribute), "2"),
+        (nameof(DiceSidesAttribute), "4"),
+        (nameof(MeleeToHitAttribute), "-3"),
+        (nameof(BonusArmorClassAttribute), "15"),
+        (nameof(BaseArmorClassAttribute), "40"),
+    };
     public override ColorEnum? Color => ColorEnum.Yellow;
-    public override string? BaseArmorClass => "40";
     public override string? HatesAcid => "true";
-    public override string? BonusArmorClass => "15";
-    public override string? Hits => "-3";
 }

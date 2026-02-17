@@ -2,16 +2,19 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class GreatOneRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "1";
-    public override string Charisma => "2";
-    public override string Constitution => "3";
-    public override string Wisdom => "2";
-    public override string Intelligence => "2";
-    public override string Dexterity => "2";
-    public override int? Value => 12900;
-    public override string? DisarmTraps => "4";
-    public override string? UseDevice => "5";
-    public override string? SavingThrow => "5";
-    public override string? Stealth => "2";
-    public override string? Search => "3";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(CharismaAttribute), "2"),
+        (nameof(ConstitutionAttribute), "3"),
+        (nameof(WisdomAttribute), "2"),
+        (nameof(IntelligenceAttribute), "2"),
+        (nameof(DexterityAttribute), "2"),
+        (nameof(ValueAttribute), "12900"),
+        (nameof(DisarmTrapsAttribute), "4"),
+        (nameof(UseDeviceAttribute), "5"),
+        (nameof(SavingThrowAttribute), "5"),
+        (nameof(StealthAttribute), "2"),
+        (nameof(SearchAttribute), "3"),
+        (nameof(StrengthAttribute), "1")
+    };
 }

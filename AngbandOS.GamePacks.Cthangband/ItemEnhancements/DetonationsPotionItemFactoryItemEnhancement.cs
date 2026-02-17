@@ -4,9 +4,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class DetonationsPotionItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 4;
-    public override int? Value => 10000;
-    public override int? DamageDice => 25;
-    public override int? DiceSides => 25;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "4"),
+        (nameof(ValueAttribute), "10000"),
+        (nameof(DamageDiceAttribute), "25"),
+        (nameof(DiceSidesAttribute), "25"),
+    };
     public override string? HatesCold => "true";
 }

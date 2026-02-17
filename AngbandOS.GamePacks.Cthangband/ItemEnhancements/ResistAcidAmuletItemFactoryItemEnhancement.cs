@@ -6,6 +6,9 @@ public class ResistAcidAmuletItemFactoryItemEnhancement : ItemEnhancementGameCon
     public override bool? EasyKnow => true;
     public override bool? IgnoreAcid => true;
     public override bool? ResAcid => true;
-    public override int? Weight => 3;
-    public override int? Value => 300;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "300"),
+    };
 }

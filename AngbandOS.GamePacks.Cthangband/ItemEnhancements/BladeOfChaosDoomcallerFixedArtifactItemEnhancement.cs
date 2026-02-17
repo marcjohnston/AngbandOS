@@ -8,18 +8,24 @@ public class BladeOfChaosDoomcallerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? BrandFire => true;
     public override bool? BrandPois => true;
     public override bool? Chaotic => true;
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(SlayDragonAttribute), "5"),
+        (nameof(Vorpal1InChanceAttribute), "6"),
+        (nameof(VorpalExtraAttacks1InChanceAttribute), "2"),
+        (nameof(ValueAttribute), "250000"),
+        (nameof(AttacksAttribute), "-50"),
+        (nameof(MeleeToHitAttribute), "18"),
+        (nameof(ToDamageAttribute), "28"),
+        (nameof(RadiusAttribute), "1"),
+    };
     public override bool? FreeAct => true;
     public override string FriendlyName => "'Doomcaller'";
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override int? SlayDragon => 5;
-    /// <summary>
-    /// Returns a value of 3 to add to the radius of light for the Blade of Chaos which provides no light.
-    /// </summary>
-    public override int? Radius => 1;
     public override bool? ResAcid => true;
     public override bool? ResChaos => true;
     public override bool? ResCold => true;
@@ -32,11 +38,5 @@ public class BladeOfChaosDoomcallerFixedArtifactItemEnhancement : ItemEnhancemen
     public override bool? SlayOrc => true;
     public override bool? SlayTroll => true;
     public override bool? Telepathy => true;
-    public override int? Vorpal1InChance => 6;
-    public override int? VorpalExtraAttacks1InChance => 2;
-    public override int? Value => 250000;
-    public override string Attacks => "-50";
-    public override string Hits => "18";
-    public override string Damage => "28";
     public override ColorEnum? Color => ColorEnum.Purple;
 }

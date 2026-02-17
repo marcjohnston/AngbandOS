@@ -4,8 +4,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PhaseDoorScrollItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 5;
-    public override int? Value => 15;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "5"),
+        (nameof(ValueAttribute), "15"),
+    };
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
 }

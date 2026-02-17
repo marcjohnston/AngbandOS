@@ -3,13 +3,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LeatherScaleMailSoftArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Weight => 140;
-    public override int? Value => 450;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "140"),
+        (nameof(ValueAttribute), "450"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1"),
+        (nameof(MeleeToHitAttribute), "-1"),
+        (nameof(BaseArmorClassAttribute), "11"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightBrown;
-    public override string? BaseArmorClass => "11";
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
-    public override string? Hits => "-1";
 }

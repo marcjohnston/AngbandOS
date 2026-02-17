@@ -6,7 +6,10 @@ public class ResistFireRingItemFactoryItemEnhancement : ItemEnhancementGameConfi
     public override bool? EasyKnow => true;
     public override bool? IgnoreFire => true;
     public override bool? ResFire => true;
-    public override int? Weight => 2;
-    public override int? Value => 250;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "2"),
+        (nameof(ValueAttribute), "250"),
+    };
     public override string? HatesElectricity => "true";
 }

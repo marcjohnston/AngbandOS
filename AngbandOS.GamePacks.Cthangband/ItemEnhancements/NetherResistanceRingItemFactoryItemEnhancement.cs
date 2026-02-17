@@ -6,7 +6,10 @@ public class NetherResistanceRingItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool? EasyKnow => true;
     public override bool? HoldLife => true;
     public override bool? ResNether => true;
-    public override int? Weight => 2;
-    public override int? Value => 14500;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "2"),
+        (nameof(ValueAttribute), "14500"),
+    };
     public override string? HatesElectricity => "true";
 }

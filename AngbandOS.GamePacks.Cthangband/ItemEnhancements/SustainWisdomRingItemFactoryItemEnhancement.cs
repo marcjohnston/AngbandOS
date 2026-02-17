@@ -5,7 +5,10 @@ public class SustainWisdomRingItemFactoryItemEnhancement : ItemEnhancementGameCo
 {
     public override bool? EasyKnow => true;
     public override bool? SustWis => true;
-    public override int? Weight => 2;
-    public override int? Value => 600;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "2"),
+        (nameof(ValueAttribute), "600"),
+    };
     public override string? HatesElectricity => "true";
 }

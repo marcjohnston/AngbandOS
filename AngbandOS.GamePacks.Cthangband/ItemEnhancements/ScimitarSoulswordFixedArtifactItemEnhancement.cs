@@ -4,16 +4,23 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Blessed => true;
-    public override string? Attacks => "1";
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(AttacksAttribute), "1"),
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "11"),
+        (nameof(MeleeToHitAttribute), "9"),
+        (nameof(ValueAttribute), "111111"),
+        (nameof(SlayDragonAttribute), "3"),
+        (nameof(WisdomAttribute), "2"),
+        (nameof(IntelligenceAttribute), "2"),
+    };
     public override string FriendlyName => "'Soulsword'";
     public override bool? HoldLife => true;
     public override bool? IgnoreAcid => true;
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? Intelligence => "2";
-    public override string? Wisdom => "2";
     public override bool? ResChaos => true;
     public override bool? ResDisen => true;
     public override bool? ResNether => true;
@@ -22,11 +29,7 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
     public override bool? ShowMods => true;
     public override bool? SlayAnimal => true;
     public override bool? SlayDemon => true;
-    public override int? SlayDragon => 3;
     public override bool? SlayEvil => true;
     public override bool? SlayUndead => true;
-    public override int? Value => 111111;
-    public override string Hits => "9";
-    public override string Damage => "11";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

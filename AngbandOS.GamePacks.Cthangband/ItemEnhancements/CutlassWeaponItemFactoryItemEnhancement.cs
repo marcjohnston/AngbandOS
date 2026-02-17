@@ -7,10 +7,13 @@ public class CutlassWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfig
     public override bool? CanApplyBlessedArtifactBias => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 110;
-    public override int? Value => 85;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 7;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "110"),
+        (nameof(ValueAttribute), "85"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "7"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightWhite;
     public override string? HatesAcid => "true";
 }

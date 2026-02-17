@@ -1,23 +1,20 @@
-// AngbandOS: 2022 Marc Johnston
-//
-// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
-// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
-// and not for profit purposes provided that this copyright and statement are included in all such
-// copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
 public class WeaponOfKadathItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Value => 20000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(ValueAttribute), "20000"),
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(MeleeToHitAttribute), "1d5"),
+        (nameof(ToDamageAttribute), "1d5"),
+        (nameof(DexterityAttribute), "1d2"),
+        (nameof(ConstitutionAttribute), "1d2"),
+        (nameof(StrengthAttribute), "1d2"),
+    };
     public override bool? FreeAct => true;
     public override string? FriendlyName => "of Kadath";
-    public override string? Constitution => "1d2";
-    public override string? Dexterity => "1d2";
-    public override string? Strength => "1d2";
-    public override string? Damage => "1d5";
-    public override string? Hits => "1d5";
-    public override int? TreasureRating => 20;
     public override bool? SeeInvis => true;
     public override bool? SlayGiant => true;
     public override bool? SlayOrc => true;

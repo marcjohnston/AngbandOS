@@ -4,14 +4,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class DruidCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "-1";
-    public override string Charisma => "3";
-    public override string Constitution => "0";
-    public override string Wisdom => "4";
-    public override string Intelligence => "-3";
-    public override string Dexterity => "-2";
-    public override int? Value => -1050;
-    public override string? DisarmTraps => "30";
-    public override string? UseDevice => "30";
-    public override string? SavingThrow => "32";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(CharismaAttribute), "3"),
+        (nameof(ConstitutionAttribute), "0"),
+        (nameof(WisdomAttribute), "4"),
+        (nameof(IntelligenceAttribute), "-3"),
+        (nameof(DexterityAttribute), "-2"),
+        (nameof(ValueAttribute), "-1050"),
+        (nameof(DisarmTrapsAttribute), "30"),
+        (nameof(UseDeviceAttribute), "30"),
+        (nameof(SavingThrowAttribute), "32"),
+        (nameof(StrengthAttribute), "-1")
+    };
 }

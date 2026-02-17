@@ -3,8 +3,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class DaggerCharityFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
-    // Charity shoots a lightning bolt
     public override string? ActivationName => nameof(ActivationsEnum.LightningBolt4d8Every6p1d6DirectionalActivation);
     public override bool? BrandElec => true;
     public override string FriendlyName => "'Charity'";
@@ -14,8 +12,12 @@ public class DaggerCharityFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool? IgnoreFire => true;
     public override bool? ResElec => true;
     public override bool? ShowMods => true;
-    public override int? Value => 13000;
-    public override string Hits => "4";
-    public override string Damage => "6";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(ValueAttribute), "13000"),
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(MeleeToHitAttribute), "4"),
+        (nameof(ToDamageAttribute), "6"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

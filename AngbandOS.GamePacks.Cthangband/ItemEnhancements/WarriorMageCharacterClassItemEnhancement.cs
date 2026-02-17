@@ -4,14 +4,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WarriorMageCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override string Strength => "2";
-    public override string Charisma => "1";
-    public override string Constitution => "0";
-    public override string Wisdom => "0";
-    public override string Intelligence => "2";
-    public override string Dexterity => "1";
-    public override int? Value => 6450;
-    public override string? DisarmTraps => "30";
-    public override string? UseDevice => "30";
-    public override string? SavingThrow => "28";
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(StrengthAttribute), "2"),
+        (nameof(CharismaAttribute), "1"),
+        (nameof(ConstitutionAttribute), "0"),
+        (nameof(WisdomAttribute), "0"),
+        (nameof(IntelligenceAttribute), "2"),
+        (nameof(DexterityAttribute), "1"),
+        (nameof(ValueAttribute), "6450"),
+        (nameof(DisarmTrapsAttribute), "30"),
+        (nameof(UseDeviceAttribute), "30"),
+        (nameof(SavingThrowAttribute), "28"),
+    };
 }

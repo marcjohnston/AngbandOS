@@ -9,6 +9,9 @@ public class AntiTheftAmuletItemFactoryItemEnhancement : ItemEnhancementGameConf
     public override bool? IgnoreFire => true;
     public override bool? NoTele => true;
     public override bool? AntiTheft => true;
-    public override int? Weight => 3;
-    public override int? Value => 1000;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "1000"),
+    };
 }

@@ -7,8 +7,11 @@ public class SlingRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
     public override bool? CanApplyBlowsBonus => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 5;
-    public override int? Value => 5;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "5"),
+        (nameof(ValueAttribute), "5"),
+    };
     public override ColorEnum? Color => ColorEnum.Brown;
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";

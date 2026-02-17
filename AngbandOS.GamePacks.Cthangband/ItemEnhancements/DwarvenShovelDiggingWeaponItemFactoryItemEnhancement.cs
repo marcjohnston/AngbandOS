@@ -6,9 +6,12 @@ public class DwarvenShovelDiggingWeaponItemFactoryItemEnhancement : ItemEnhancem
     public override bool? ShowMods => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 120;
-    public override int? Value => 200;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 3;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "120"),
+        (nameof(ValueAttribute), "200"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "3"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightBlue;
 }

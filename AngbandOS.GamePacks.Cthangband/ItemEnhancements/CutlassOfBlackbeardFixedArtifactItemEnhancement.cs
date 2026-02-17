@@ -3,7 +3,15 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CutlassOfBlackbeardFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(DexterityAttribute), "3"),
+        (nameof(StealthAttribute), "3"),
+        (nameof(ValueAttribute), "28000"),
+        (nameof(MeleeToHitAttribute), "10"),
+        (nameof(ToDamageAttribute), "11"),
+    };
     public override bool? Feather => true;
     public override string FriendlyName => "of Blackbeard";
     public override bool? HideType => true;
@@ -11,8 +19,6 @@ public class CutlassOfBlackbeardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? Dexterity => "3";
-    public override string? Stealth => "3";
     public override bool? Regen => true;
     public override bool? ResAcid => true;
     public override bool? ResCold => true;
@@ -20,8 +26,5 @@ public class CutlassOfBlackbeardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override bool? ResFire => true;
     public override bool? SeeInvis => true;
     public override bool? ShowMods => true;
-    public override int? Value => 28000;
-    public override string Hits => "10";
-    public override string Damage => "11";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -4,9 +4,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class PieceOfDwarfBreadFoodItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? EasyKnow => true;
-    public override int? Weight => 3;
-    public override int? Value => 16;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 6;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "16"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "6"),
+    };
     public override ColorEnum? Color => ColorEnum.Grey;
 }

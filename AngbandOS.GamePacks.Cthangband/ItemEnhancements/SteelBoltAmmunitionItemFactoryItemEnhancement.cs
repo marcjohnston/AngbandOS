@@ -6,10 +6,13 @@ public class SteelBoltAmmunitionItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool? ShowMods => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 3;
-    public override int? Value => 2;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 5;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "3"),
+        (nameof(ValueAttribute), "2"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "5"),
+    };
     public override ColorEnum? Color => ColorEnum.Grey;
     public override string? HatesAcid => "true";
 }

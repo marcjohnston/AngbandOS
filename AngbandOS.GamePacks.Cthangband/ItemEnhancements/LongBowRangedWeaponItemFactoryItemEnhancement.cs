@@ -8,8 +8,11 @@ public class LongBowRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGame
     public override bool? CanApplyBlowsBonus => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 40;
-    public override int? Value => 120;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "40"),
+        (nameof(ValueAttribute), "120"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightBrown;
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";

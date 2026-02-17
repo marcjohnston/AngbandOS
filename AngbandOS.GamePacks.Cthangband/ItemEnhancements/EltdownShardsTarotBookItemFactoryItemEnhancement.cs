@@ -8,10 +8,13 @@ public class EltdownShardsTarotBookItemFactoryItemEnhancement : ItemEnhancementG
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
     public override bool? EasyKnow => true;
-    public override int? Weight => 30;
-    public override int? Value => 25000;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "30"),
+        (nameof(ValueAttribute), "25000"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1"),
+    };
     public override ColorEnum? Color => ColorEnum.Pink;
     public override string? HatesFire => "true";
 }

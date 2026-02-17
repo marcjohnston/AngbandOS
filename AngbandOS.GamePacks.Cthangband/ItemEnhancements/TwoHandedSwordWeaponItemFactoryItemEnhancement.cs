@@ -7,10 +7,13 @@ public class TwoHandedSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGam
     public override bool? CanApplyBlessedArtifactBias => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 200;
-    public override int? Value => 775;
-    public override int? DamageDice => 3;
-    public override int? DiceSides => 6;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "200"),
+        (nameof(ValueAttribute), "775"),
+        (nameof(DamageDiceAttribute), "3"),
+        (nameof(DiceSidesAttribute), "6"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightWhite;
     public override string? HatesAcid => "true";
 }

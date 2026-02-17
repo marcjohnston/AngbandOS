@@ -4,12 +4,15 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class FullPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Reflect => true;
-    public override int? Weight => 380;
-    public override int? Value => 1350;
-    public override int? DamageDice => 2;
-    public override int? DiceSides => 4;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "380"),
+        (nameof(ValueAttribute), "1350"),
+        (nameof(DamageDiceAttribute), "2"),
+        (nameof(DiceSidesAttribute), "4"),
+        (nameof(MeleeToHitAttribute), "-3"),
+        (nameof(BaseArmorClassAttribute), "25"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightWhite;
-    public override string? BaseArmorClass => "25";
     public override string? HatesAcid => "true";
-    public override string? Hits => "-3";
 }

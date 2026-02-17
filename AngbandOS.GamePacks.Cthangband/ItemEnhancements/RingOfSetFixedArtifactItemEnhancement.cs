@@ -5,7 +5,23 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
 {
     public override string? ActivationName => nameof(ActivationsEnum.BizarreThingsEvery1d450p450DirectionalActivation);
     public override bool? Aggravate => true;
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "20"),
+        (nameof(ToDamageAttribute), "15"),
+        (nameof(MeleeToHitAttribute), "15"),
+        (nameof(DiceSidesAttribute), "1"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(ValueAttribute), "5000000"),
+        (nameof(RadiusAttribute), "3"),
+        (nameof(WisdomAttribute), "5"),
+        (nameof(SpeedAttribute), "5"),
+        (nameof(IntelligenceAttribute), "5"),
+        (nameof(DexterityAttribute), "5"),
+        (nameof(ConstitutionAttribute), "5"),
+        (nameof(CharismaAttribute), "5"),
+        (nameof(StrengthAttribute), "5"),
+    };
     public override bool? IsCursed => true;
     public override bool? DrainExp => true;
     public override bool? DreadCurse => true;
@@ -21,13 +37,6 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     public override bool? ImElec => true;
     public override bool? ImFire => true;
     public override bool? PermaCurse => true;
-    public override string? Charisma => "5";
-    public override string? Constitution => "5";
-    public override string? Dexterity => "5";
-    public override string? Intelligence => "5";
-    public override string? Speed => "5";
-    public override string? Strength => "5";
-    public override string? Wisdom => "5";
     public override bool? Regen => true;
     public override bool? SeeInvis => true;
     public override bool? SustCha => true;
@@ -39,13 +48,7 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     public override bool? Feather => true;
     public override bool? FreeAct => true;
     public override bool? HoldLife => true;
-    public override int? Radius => 3;
     public override bool? SlowDigest => true;
     public override bool? Telepathy => true;
-    public override int? Value => 5000000;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
-    public override string Hits => "15";
-    public override string Damage => "15";
     public override ColorEnum? Color => ColorEnum.Yellow;
 }

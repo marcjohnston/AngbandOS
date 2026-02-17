@@ -4,11 +4,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class SmallLeatherShieldItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override bool? Reflect => true;
-    public override int? Weight => 50;
-    public override int? Value => 30;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "50"),
+        (nameof(ValueAttribute), "30"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1"),
+        (nameof(BaseArmorClassAttribute), "2"),
+    };
     public override ColorEnum? Color => ColorEnum.BrightBrown;
-    public override string? BaseArmorClass => "2";
     public override string? HatesAcid => "true";
 }

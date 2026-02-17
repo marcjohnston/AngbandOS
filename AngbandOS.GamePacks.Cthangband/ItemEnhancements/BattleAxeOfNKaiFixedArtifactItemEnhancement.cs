@@ -3,7 +3,18 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 20;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(StrengthAttribute), "3"),
+        (nameof(ConstitutionAttribute), "3"),
+        (nameof(StealthAttribute), "3"),
+        (nameof(ValueAttribute), "90000"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(AttacksAttribute), "5"),
+        (nameof(MeleeToHitAttribute), "8"),
+        (nameof(ToDamageAttribute), "11"),
+        (nameof(TreasureRatingAttribute), "20"),
+    };
     public override bool? Feather => true;
     public override bool? FreeAct => true;
     public override string FriendlyName => "of N'Kai";
@@ -12,9 +23,6 @@ public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override bool? IgnoreCold => true;
     public override bool? IgnoreElec => true;
     public override bool? IgnoreFire => true;
-    public override string? Constitution => "3";
-    public override string? Stealth => "3";
-    public override string? Strength => "3";
     public override bool? Regen => true;
     public override bool? ResAcid => true;
     public override bool? ResBlind => true;
@@ -26,10 +34,5 @@ public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameCo
     public override bool? SlayDemon => true;
     public override bool? SlayOrc => true;
     public override bool? SlayTroll => true;
-    public override int? Value => 90000;
-    public override int? DamageDice => 1;
-    public override string Attacks => "5";
-    public override string Hits => "8";
-    public override string Damage => "11";
     public override ColorEnum? Color => ColorEnum.Grey;
 }

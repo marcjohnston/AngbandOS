@@ -3,10 +3,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class StoneToMudWandItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? Weight => 10;
-    public override int? Value => 300;
-    public override int? DamageDice => 1;
-    public override int? DiceSides => 1;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "10"),
+        (nameof(ValueAttribute), "300"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(DiceSidesAttribute), "1"),
+    };
     public override ColorEnum? Color => ColorEnum.Chartreuse;
     public override string? HatesElectricity => "true";
 }

@@ -3,8 +3,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class DaggerOfThothFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override int? TreasureRating => 10;
-    // Thoth shoots a poison ball
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(TreasureRatingAttribute), "10"),
+        (nameof(ValueAttribute), "35000"),
+        (nameof(DamageDiceAttribute), "1"),
+        (nameof(MeleeToHitAttribute), "4"),
+        (nameof(ToDamageAttribute), "3"),
+    };
     public override string? ActivationName => nameof(ActivationsEnum.StinkingCloud12Every1d4p4DirectionalActivation);
     public override bool? BrandPois => true;
     public override string FriendlyName => "of Thoth";
@@ -16,9 +22,5 @@ public class DaggerOfThothFixedArtifactItemEnhancement : ItemEnhancementGameConf
     public override bool? ResPois => true;
     public override bool? ShowMods => true;
     public override bool? SlayOrc => true;
-    public override int? Value => 35000;
-    public override int? DamageDice => 1;
-    public override string Hits => "4";
-    public override string Damage => "3";
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

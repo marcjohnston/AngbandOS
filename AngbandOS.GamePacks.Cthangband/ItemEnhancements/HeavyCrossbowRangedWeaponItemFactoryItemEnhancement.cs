@@ -7,8 +7,11 @@ public class HeavyCrossbowRangedWeaponItemFactoryItemEnhancement : ItemEnhanceme
     public override bool? CanApplyBlowsBonus => true;
     public override bool? CanApplySlayingBonus => true;
     public override bool? CanApplyBonusArmorClassMiscPower => true;
-    public override int? Weight => 200;
-    public override int? Value => 300;
+    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(WeightAttribute), "200"),
+        (nameof(ValueAttribute), "300"),
+    };
     public override ColorEnum? Color => ColorEnum.Grey;
     public override string? HatesAcid => "true";
     public override string? HatesFire => "true";
