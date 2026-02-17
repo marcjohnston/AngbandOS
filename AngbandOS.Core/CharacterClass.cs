@@ -681,13 +681,4 @@ internal abstract class CharacterClass : IGetKey
     }
 
     public virtual bool WorshipsADeity => false; // TODO: Only priests have a godname ... this seems off.
-
-    /// <summary>
-    /// Allows the character class to perform any additional handling when an item is destroyed.  Warriors and Paladins gain experience when specific spell books are
-    /// destroyed.  Does nothing, by default.
-    /// </summary>
-    /// <param name="item">The item.</param>
-    public virtual void ItemDestroyed(Item item, int amount)
-    {
-    }
 }
