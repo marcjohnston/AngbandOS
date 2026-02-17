@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LargeSteelChestItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(HatesFireAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "1000"),
@@ -11,6 +16,4 @@ public class LargeSteelChestItemFactoryItemEnhancement : ItemEnhancementGameConf
         (nameof(DiceSidesAttribute), "6"),
     };
     public override ColorEnum? Color => ColorEnum.Grey;
-    public override string? HatesAcid => "true";
-    public override string? HatesFire => "true";
 }

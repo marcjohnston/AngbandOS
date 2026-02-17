@@ -3,6 +3,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(SustDexAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
@@ -16,12 +26,5 @@ public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(AttacksAttribute), "3"),
     };
     public override string FriendlyName => "of Groo";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ShowMods => true;
-    public override bool? SustDex => true;
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

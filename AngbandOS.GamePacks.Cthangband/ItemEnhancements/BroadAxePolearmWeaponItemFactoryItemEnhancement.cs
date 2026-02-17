@@ -3,10 +3,15 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BroadAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? ShowMods => true;
-    public override bool? CanApplyBlessedArtifactBias => true;
-    public override bool? CanApplySlayingBonus => true;
-    public override bool? CanApplyBonusArmorClassMiscPower => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(HatesFireAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(CanApplyBlessedArtifactBiasAttribute), "true"),
+        (nameof(CanApplySlayingBonusAttribute), "true"),
+        (nameof(CanApplyBonusArmorClassMiscPowerAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "160"),
@@ -15,6 +20,4 @@ public class BroadAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGa
         (nameof(DiceSidesAttribute), "6"),
     };
     public override ColorEnum? Color => ColorEnum.Grey;
-    public override string? HatesAcid => "true";
-    public override string? HatesFire => "true";
 }

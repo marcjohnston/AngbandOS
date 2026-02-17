@@ -3,9 +3,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FlailHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? ShowMods => true;
-    public override bool? CanApplySlayingBonus => true;
-    public override bool? CanApplyBonusArmorClassMiscPower => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(HatesFireAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(CanApplySlayingBonusAttribute), "true"),
+        (nameof(CanApplyBonusArmorClassMiscPowerAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "150"),
@@ -14,6 +19,4 @@ public class FlailHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
         (nameof(DiceSidesAttribute), "6"),
     };
     public override ColorEnum? Color => ColorEnum.Black;
-    public override string? HatesAcid => "true";
-    public override string? HatesFire => "true";
 }

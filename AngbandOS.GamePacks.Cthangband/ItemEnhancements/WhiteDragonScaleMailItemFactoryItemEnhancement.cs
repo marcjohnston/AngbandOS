@@ -3,12 +3,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WhiteDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResColdAttribute), "true"),
+    };
     public override string? ActivationName => nameof(ActivationsEnum.BreathBallOfFrost110r2Every500DirectionalActivation);
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ResCold => true;
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),
@@ -20,5 +24,4 @@ public class WhiteDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(MeleeToHitAttribute), "-2"),
         (nameof(BonusArmorClassAttribute), "10"),
     };
-    public override string? HatesAcid => "true";
 }

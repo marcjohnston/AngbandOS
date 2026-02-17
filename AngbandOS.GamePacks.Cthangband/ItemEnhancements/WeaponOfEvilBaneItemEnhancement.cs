@@ -3,7 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfEvilBaneItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? Blessed => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(BlessedAttribute), "true"),
+        (nameof(SlayEvilAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "5000"),
@@ -11,5 +15,4 @@ public class WeaponOfEvilBaneItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(WisdomAttribute), "1d2"),
     };
     public override string? FriendlyName => "of Evil Bane";
-    public override bool? SlayEvil => true;
 }

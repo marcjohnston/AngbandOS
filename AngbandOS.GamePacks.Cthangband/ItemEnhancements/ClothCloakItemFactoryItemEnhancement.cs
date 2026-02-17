@@ -3,7 +3,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ClothCloakItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? Reflect => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(HatesFireAttribute), "true"),
+        (nameof(ReflectAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "10"),
@@ -11,6 +16,4 @@ public class ClothCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigura
         (nameof(BaseArmorClassAttribute), "1"),
     };
     public override ColorEnum? Color => ColorEnum.Green;
-    public override string? HatesAcid => "true";
-    public override string? HatesFire => "true";
 }

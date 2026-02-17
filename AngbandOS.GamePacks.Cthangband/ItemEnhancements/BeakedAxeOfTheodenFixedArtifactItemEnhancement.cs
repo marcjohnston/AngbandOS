@@ -3,6 +3,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(SlowDigestAttribute), "true"),
+        (nameof(TelepathyAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(MeleeToHitAttribute), "8"),
@@ -15,13 +26,5 @@ public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGam
     };
     public override string? ActivationName => nameof(ActivationsEnum.DrainLife120Every400DirectionalActivation);
     public override string FriendlyName => "of Theoden";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ShowMods => true;
-    public override bool? SlowDigest => true;
-    public override bool? Telepathy => true;
     public override ColorEnum? Color => ColorEnum.Grey;
 }

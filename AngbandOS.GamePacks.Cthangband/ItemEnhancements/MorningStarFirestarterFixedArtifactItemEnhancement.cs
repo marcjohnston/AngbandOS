@@ -3,6 +3,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MorningStarFirestarterFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(BrandFireAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResFireAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
@@ -13,13 +23,6 @@ public class MorningStarFirestarterFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(ValueAttribute), "35000"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.LargeBallFire72Every100DirectionalActivation);
-    public override bool? BrandFire => true;
     public override string FriendlyName => "'Firestarter'";
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ResFire => true;
-    public override bool? ShowMods => true;
     public override ColorEnum? Color => ColorEnum.Black;
 }

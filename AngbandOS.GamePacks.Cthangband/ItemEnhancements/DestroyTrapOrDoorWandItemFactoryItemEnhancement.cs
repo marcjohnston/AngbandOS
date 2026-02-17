@@ -3,6 +3,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class DestroyTrapOrDoorWandItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesElectricityAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "10"),
@@ -11,5 +15,4 @@ public class DestroyTrapOrDoorWandItemFactoryItemEnhancement : ItemEnhancementGa
         (nameof(DiceSidesAttribute), "1"),
     };
     public override ColorEnum? Color => ColorEnum.Chartreuse;
-    public override string? HatesElectricity => "true";
 }

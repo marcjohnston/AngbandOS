@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfSeeingItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(ResBlindAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "1000"),
@@ -10,6 +15,4 @@ public class HatOfSeeingItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SearchAttribute), "1d5"),
     };
     public override string? FriendlyName => "of Seeing";
-    public override bool? ResBlind => true;
-    public override bool? SeeInvis => true;
 }

@@ -3,6 +3,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CloakOfImmolationItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResFireAttribute), "true"),
+        (nameof(ShFireAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "4000"),
@@ -10,8 +17,4 @@ public class CloakOfImmolationItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(BonusArmorClassAttribute), "1d4"),
     };
     public override string? FriendlyName => "of Immolation";
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ResFire => true;
-    public override bool? ShFire => true;
 }

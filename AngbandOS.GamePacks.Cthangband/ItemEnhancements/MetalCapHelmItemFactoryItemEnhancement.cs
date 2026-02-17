@@ -3,7 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MetalCapHelmItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? Reflect => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(ReflectAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "20"),
@@ -13,5 +17,4 @@ public class MetalCapHelmItemFactoryItemEnhancement : ItemEnhancementGameConfigu
         (nameof(BaseArmorClassAttribute), "3"),
     };
     public override ColorEnum? Color => ColorEnum.Grey;
-    public override string? HatesAcid => "true";
 }

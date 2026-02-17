@@ -3,10 +3,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BrokenSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? ShowMods => true;
-    public override bool? CanApplyBlessedArtifactBias => true;
-    public override bool? CanApplySlayingBonus => true;
-    public override bool? CanApplyBonusArmorClassMiscPower => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(CanApplyBlessedArtifactBiasAttribute), "true"),
+        (nameof(CanApplySlayingBonusAttribute), "true"),
+        (nameof(CanApplyBonusArmorClassMiscPowerAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "30"),
@@ -17,5 +21,4 @@ public class BrokenSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
         (nameof(DiceSidesAttribute), "2"),
     };
     public override ColorEnum? Color => ColorEnum.Black;
-    public override string? HatesAcid => "true";
 }

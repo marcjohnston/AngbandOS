@@ -3,6 +3,22 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class DragonHelmOfPowerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResAcidAttribute), "true"),
+        (nameof(ResBlindAttribute), "true"),
+        (nameof(ResColdAttribute), "true"),
+        (nameof(ResElecAttribute), "true"),
+        (nameof(ResFireAttribute), "true"),
+        (nameof(ResLightAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(TelepathyAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(StrengthAttribute), "4"),
@@ -16,18 +32,5 @@ public class DragonHelmOfPowerFixedArtifactItemEnhancement : ItemEnhancementGame
     };
     public override string? ActivationName => nameof(ActivationsEnum.Terror40xEvery3xp10Activation);
     public override string FriendlyName => "of Power";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ResAcid => true;
-    public override bool? ResBlind => true;
-    public override bool? ResCold => true;
-    public override bool? ResElec => true;
-    public override bool? ResFire => true;
-    public override bool? ResLight => true;
-    public override bool? SeeInvis => true;
-    public override bool? Telepathy => true;
     public override ColorEnum? Color => ColorEnum.BrightGreen;
 }

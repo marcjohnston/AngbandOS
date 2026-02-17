@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MetalShodBootsItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(HatesFireAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "80"),
@@ -12,6 +17,4 @@ public class MetalShodBootsItemFactoryItemEnhancement : ItemEnhancementGameConfi
         (nameof(BaseArmorClassAttribute), "6"),
     };
     public override ColorEnum? Color => ColorEnum.Grey;
-    public override string? HatesAcid => "true";
-    public override string? HatesFire => "true";
 }

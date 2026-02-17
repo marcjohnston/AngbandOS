@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CloneMonsterWandItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesElectricityAttribute), "true"),
+        (nameof(ValuelessAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "10"),
@@ -10,6 +15,4 @@ public class CloneMonsterWandItemFactoryItemEnhancement : ItemEnhancementGameCon
         (nameof(DiceSidesAttribute), "1"),
     };
     public override ColorEnum? Color => ColorEnum.Chartreuse;
-    public override string? HatesElectricity => "true";
-    public override bool? Valueless => true;
 }

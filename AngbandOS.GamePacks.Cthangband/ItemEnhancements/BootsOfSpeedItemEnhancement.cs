@@ -3,6 +3,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BootsOfSpeedItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HideTypeAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "200000"),
@@ -10,5 +14,4 @@ public class BootsOfSpeedItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(TreasureRatingAttribute), "25"),
     };
     public override string? FriendlyName => "of Speed";
-    public override bool? HideType => true;
 }

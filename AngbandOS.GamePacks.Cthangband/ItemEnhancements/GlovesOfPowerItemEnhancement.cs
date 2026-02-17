@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GlovesOfPowerItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "2500"),
@@ -12,6 +17,4 @@ public class GlovesOfPowerItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(StrengthAttribute), "1d5")
     };
     public override string? FriendlyName => "of Power";
-    public override bool? HideType => true;
-    public override bool? ShowMods => true;
 }

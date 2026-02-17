@@ -3,9 +3,27 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? Aggravate => true;
-    public override bool? BrandFire => true;
-    public override bool? BrandPois => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(AggravateAttribute), "true"),
+        (nameof(BrandFireAttribute), "true"),
+        (nameof(BrandPoisAttribute), "true"),
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ImFireAttribute), "true"),
+        (nameof(NoTeleAttribute), "true"),
+        (nameof(ResChaosAttribute), "true"),
+        (nameof(ResDarkAttribute), "true"),
+        (nameof(ResDisenAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(SlayAnimalAttribute), "true"),
+        (nameof(SlayEvilAttribute), "true"),
+        (nameof(SlayUndeadAttribute), "true"),
+        (nameof(VampiricAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
@@ -21,20 +39,5 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
         (nameof(StrengthAttribute), "6"),
     };
     public override string FriendlyName => "'Deathwreaker'";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ImFire => true;
-    public override bool? NoTele => true;
-    public override bool? ResChaos => true;
-    public override bool? ResDark => true;
-    public override bool? ResDisen => true;
-    public override bool? ShowMods => true;
-    public override bool? SlayAnimal => true;
-    public override bool? SlayEvil => true;
-    public override bool? SlayUndead => true;
-    public override bool? Vampiric => true;
     public override ColorEnum? Color => ColorEnum.Purple;
 }

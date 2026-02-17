@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfLordlinessItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(SustChaAttribute), "true"),
+        (nameof(SustWisAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "2000"),
@@ -11,6 +16,4 @@ public class HatOfLordlinessItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(CharismaAttribute), "1d3"),
     };
     public override string? FriendlyName => "of Lordliness";
-    public override bool? SustCha => true;
-    public override bool? SustWis => true;
 }

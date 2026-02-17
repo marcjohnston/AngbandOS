@@ -3,7 +3,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SheathOfElectricityItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? ShElec => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(ShElecAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "5000"),

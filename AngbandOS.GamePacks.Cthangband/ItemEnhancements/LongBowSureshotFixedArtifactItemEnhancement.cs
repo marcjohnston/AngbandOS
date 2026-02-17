@@ -3,6 +3,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LongBowSureshotFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResDisenAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(XtraShotsAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
@@ -13,13 +24,5 @@ public class LongBowSureshotFixedArtifactItemEnhancement : ItemEnhancementGameCo
         (nameof(DexterityAttribute), "3"),
     };
     public override string FriendlyName => "'Sureshot'";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ResDisen => true;
-    public override bool? ShowMods => true;
-    public override bool? XtraShots => true;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

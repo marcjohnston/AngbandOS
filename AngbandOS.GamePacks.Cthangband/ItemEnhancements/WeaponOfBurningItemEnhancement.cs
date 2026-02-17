@@ -3,7 +3,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfBurningItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? BrandFire => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(BrandFireAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResFireAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "3000"),
@@ -11,6 +16,4 @@ public class WeaponOfBurningItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(RadiusAttribute), "3"),
     };
     public override string? FriendlyName => "of Burning";
-    public override bool? IgnoreFire => true;
-    public override bool? ResFire => true;
     }

@@ -3,13 +3,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponOfLengItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(AggravateAttribute), "true"),
+        (nameof(ValuelessAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+    };
     public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HeavyCurseAttribute), "true"),
         (nameof(IsCursedAttribute), "true"),
     };
-    public override bool? Aggravate => true;
-    public override bool? Valueless => true;
     public override string? FriendlyName => "of Leng";
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
@@ -18,5 +22,4 @@ public class WeaponOfLengItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(MeleeToHitAttribute), "1d20"),
         (nameof(ValueAttribute), "-25500"),
     };
-    public override bool? SeeInvis => true;
 }

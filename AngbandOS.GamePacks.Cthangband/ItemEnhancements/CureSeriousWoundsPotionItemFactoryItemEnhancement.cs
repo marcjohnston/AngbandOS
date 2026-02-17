@@ -3,7 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CureSeriousWoundsPotionItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? EasyKnow => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesColdAttribute), "true"),
+        (nameof(EasyKnowAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "4"),
@@ -11,5 +15,4 @@ public class CureSeriousWoundsPotionItemFactoryItemEnhancement : ItemEnhancement
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "1"),
     };
-    public override string? HatesCold => "true";
 }

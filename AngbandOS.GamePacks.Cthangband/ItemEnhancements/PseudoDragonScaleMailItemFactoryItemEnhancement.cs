@@ -3,13 +3,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class PseudoDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResDarkAttribute), "true"),
+        (nameof(ResLightAttribute), "true"),
+    };
     public override string? ActivationName => nameof(ActivationsEnum.BreatheLightOrDarkness200r2Every1d300p300DirectionalActivation);
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ResDark => true;
-    public override bool? ResLight => true;
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "30"),
@@ -22,5 +26,4 @@ public class PseudoDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGa
         (nameof(BaseArmorClassAttribute), "30"),
     };
     public override ColorEnum? Color => ColorEnum.Pink;
-    public override string? HatesAcid => "true";
 }

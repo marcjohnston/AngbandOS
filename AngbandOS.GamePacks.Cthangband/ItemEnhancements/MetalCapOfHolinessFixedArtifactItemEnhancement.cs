@@ -3,6 +3,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MetalCapOfHolinessFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
@@ -12,10 +20,5 @@ public class MetalCapOfHolinessFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(CharismaAttribute), "3"),
     };
     public override string FriendlyName => "of Holiness";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
     public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -3,6 +3,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class RingOfMagicFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResPoisAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+    };
     public override string? ActivationName => nameof(ActivationsEnum.DrainLife100Every100p1d100DirectionalActivation);
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
@@ -18,11 +28,4 @@ public class RingOfMagicFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(StrengthAttribute), "1"),
     };
     public override string FriendlyName => "of Magic";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ResPois => true;
-    public override bool? SeeInvis => true;
 }

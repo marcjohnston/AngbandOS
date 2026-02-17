@@ -3,9 +3,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ShadowCloakItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? ResDark => true;
-    public override bool? ResLight => true;
-    public override bool? Reflect => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(HatesFireAttribute), "true"),
+        (nameof(ResDarkAttribute), "true"),
+        (nameof(ResLightAttribute), "true"),
+        (nameof(ReflectAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "5"),
@@ -14,6 +19,4 @@ public class ShadowCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigur
         (nameof(BaseArmorClassAttribute), "6"),
     };
     public override ColorEnum? Color => ColorEnum.Black;
-    public override string? HatesAcid => "true";
-    public override string? HatesFire => "true";
 }

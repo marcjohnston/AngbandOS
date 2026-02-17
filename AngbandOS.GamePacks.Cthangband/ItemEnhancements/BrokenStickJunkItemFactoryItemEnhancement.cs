@@ -3,7 +3,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BrokenStickJunkItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? EasyKnow => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(EasyKnowAttribute), "true"),
+        (nameof(ValuelessAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "3"),
@@ -11,6 +16,4 @@ public class BrokenStickJunkItemFactoryItemEnhancement : ItemEnhancementGameConf
         (nameof(DiceSidesAttribute), "1"),
     };
     public override ColorEnum? Color => ColorEnum.Red;
-    public override string? HatesAcid => "true";
-    public override bool? Valueless => true;
 }

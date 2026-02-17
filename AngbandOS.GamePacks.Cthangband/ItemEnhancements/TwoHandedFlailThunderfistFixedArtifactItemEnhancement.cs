@@ -3,8 +3,23 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class TwoHandedFlailThunderfistFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? BrandElec => true;
-    public override bool? BrandFire => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(BrandElecAttribute), "true"),
+        (nameof(BrandFireAttribute), "true"),
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResDarkAttribute), "true"),
+        (nameof(ResElecAttribute), "true"),
+        (nameof(ResFireAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(SlayAnimalAttribute), "true"),
+        (nameof(SlayOrcAttribute), "true"),
+        (nameof(SlayTrollAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
@@ -16,17 +31,5 @@ public class TwoHandedFlailThunderfistFixedArtifactItemEnhancement : ItemEnhance
         (nameof(StrengthAttribute), "4"),
     };
     public override string FriendlyName => "'Thunderfist'";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ResDark => true;
-    public override bool? ResElec => true;
-    public override bool? ResFire => true;
-    public override bool? ShowMods => true;
-    public override bool? SlayAnimal => true;
-    public override bool? SlayOrc => true;
-    public override bool? SlayTroll => true;
     public override ColorEnum? Color => ColorEnum.Yellow;
 }

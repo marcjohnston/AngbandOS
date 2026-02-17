@@ -3,9 +3,33 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(BrandElecAttribute), "true"),
+        (nameof(ChaoticAttribute), "true"),
+        (nameof(FreeActAttribute), "true"),
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(RegenAttribute), "true"),
+        (nameof(ResDarkAttribute), "true"),
+        (nameof(ResDisenAttribute), "true"),
+        (nameof(ResElecAttribute), "true"),
+        (nameof(ResFearAttribute), "true"),
+        (nameof(ResLightAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(SlayDemonAttribute), "true"),
+        (nameof(SlayEvilAttribute), "true"),
+        (nameof(SlowDigestAttribute), "true"),
+        (nameof(SustConAttribute), "true"),
+        (nameof(SustIntAttribute), "true"),
+        (nameof(SustStrAttribute), "true"),
+        (nameof(SustWisAttribute), "true"),
+    };
     public override string? ActivationName => nameof(ActivationsEnum.GetawayEvery35Activation);
-    public override bool? BrandElec => true;
-    public override bool? Chaotic => true;
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
@@ -18,27 +42,6 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(RadiusAttribute), "3"),
         (nameof(StrengthAttribute), "2"),
     };
-    public override bool? FreeAct => true;
     public override string FriendlyName => "of Karakal";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? Regen => true;
-    public override bool? ResDark => true;
-    public override bool? ResDisen => true;
-    public override bool? ResElec => true;
-    public override bool? ResFear => true;
-    public override bool? ResLight => true;
-    public override bool? SeeInvis => true;
-    public override bool? ShowMods => true;
-    public override bool? SlayDemon => true;
-    public override bool? SlayEvil => true;
-    public override bool? SlowDigest => true;
-    public override bool? SustCon => true;
-    public override bool? SustInt => true;
-    public override bool? SustStr => true;
-    public override bool? SustWis => true;
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

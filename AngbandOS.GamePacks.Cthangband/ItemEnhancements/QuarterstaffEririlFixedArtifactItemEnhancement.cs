@@ -3,6 +3,18 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResLightAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(SlayEvilAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
@@ -15,14 +27,5 @@ public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGam
     };
     public override string? ActivationName => nameof(ActivationsEnum.IdentifyEvery10Activation);
     public override string FriendlyName => "'Eriril'";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ResLight => true;
-    public override bool? SeeInvis => true;
-    public override bool? ShowMods => true;
-    public override bool? SlayEvil => true;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

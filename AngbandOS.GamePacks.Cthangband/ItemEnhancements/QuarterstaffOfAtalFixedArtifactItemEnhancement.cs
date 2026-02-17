@@ -3,8 +3,29 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(BrandFireAttribute), "true"),
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(HoldLifeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResFireAttribute), "true"),
+        (nameof(ResNetherAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(SlayEvilAttribute), "true"),
+        (nameof(SlayOrcAttribute), "true"),
+        (nameof(SlayTrollAttribute), "true"),
+        (nameof(FeatherAttribute), "true"),
+        (nameof(FreeActAttribute), "true"),
+        (nameof(RegenAttribute), "true"),
+        (nameof(SlowDigestAttribute), "true"),
+        (nameof(TelepathyAttribute), "true"),
+    };
     public override string? ActivationName => nameof(ActivationsEnum.ProbingDetectionAndFullIdEvery1000Activation);
-    public override bool? BrandFire => true;
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
@@ -18,23 +39,5 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Atal";
-    public override bool? HideType => true;
-    public override bool? HoldLife => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ResFire => true;
-    public override bool? ResNether => true;
-    public override bool? SeeInvis => true;
-    public override bool? ShowMods => true;
-    public override bool? SlayEvil => true;
-    public override bool? SlayOrc => true;
-    public override bool? SlayTroll => true;
-    public override bool? Feather => true;
-    public override bool? FreeAct => true;
-    public override bool? Regen => true;
-    public override bool? SlowDigest => true;
-    public override bool? Telepathy => true;
     public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

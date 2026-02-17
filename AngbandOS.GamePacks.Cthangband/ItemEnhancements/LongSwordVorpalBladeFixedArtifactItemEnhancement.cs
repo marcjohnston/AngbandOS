@@ -3,6 +3,18 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(FreeActAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(RegenAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(SlayEvilAttribute), "true"),
+        (nameof(SlowDigestAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
@@ -18,15 +30,6 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(RadiusAttribute), "3"),
         (nameof(StrengthAttribute), "2"),
     };
-    public override bool? FreeAct => true;
     public override string FriendlyName => "'Vorpal Blade'";
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? Regen => true;
-    public override bool? SeeInvis => true;
-    public override bool? SlayEvil => true;
-    public override bool? SlowDigest => true;
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

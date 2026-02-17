@@ -3,7 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MetalBrigandineHardArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? Reflect => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(ReflectAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "290"),
@@ -14,5 +18,4 @@ public class MetalBrigandineHardArmorItemFactoryItemEnhancement : ItemEnhancemen
         (nameof(BaseArmorClassAttribute), "19"),
     };
     public override ColorEnum? Color => ColorEnum.Grey;
-    public override string? HatesAcid => "true";
 }

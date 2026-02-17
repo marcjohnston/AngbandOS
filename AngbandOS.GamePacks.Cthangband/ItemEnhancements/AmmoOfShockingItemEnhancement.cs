@@ -3,12 +3,15 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class AmmoOfShockingItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? BrandElec => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(BrandElecAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "30"),
         (nameof(TreasureRatingAttribute), "10"),
     };
     public override string? FriendlyName => "of Shocking";
-    public override bool? IgnoreElec => true;
 }

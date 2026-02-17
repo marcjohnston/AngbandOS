@@ -3,8 +3,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MithrilPlateMailHardArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? IgnoreAcid => true;
-    public override bool? Reflect => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(ReflectAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "300"),
@@ -15,5 +19,4 @@ public class MithrilPlateMailHardArmorItemFactoryItemEnhancement : ItemEnhanceme
         (nameof(BaseArmorClassAttribute), "35"),
     };
     public override ColorEnum? Color => ColorEnum.BrightBlue;
-    public override string? HatesAcid => "true";
 }

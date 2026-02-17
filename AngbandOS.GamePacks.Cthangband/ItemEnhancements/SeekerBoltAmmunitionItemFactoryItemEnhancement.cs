@@ -3,9 +3,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SeekerBoltAmmunitionItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? ShowMods => true;
-    public override bool? CanApplySlayingBonus => true;
-    public override bool? CanApplyBonusArmorClassMiscPower => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(CanApplySlayingBonusAttribute), "true"),
+        (nameof(CanApplyBonusArmorClassMiscPowerAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "3"),
@@ -14,6 +18,5 @@ public class SeekerBoltAmmunitionItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(DiceSidesAttribute), "5"),
     };
     public override ColorEnum? Color => ColorEnum.BrightBlue;
-    public override string? HatesAcid => "true";
 }
 

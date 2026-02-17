@@ -3,6 +3,25 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class RingOfElementalPowerIceFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(FeatherAttribute), "true"),
+        (nameof(FreeActAttribute), "true"),
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(HoldLifeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ImColdAttribute), "true"),
+        (nameof(RegenAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(SustIntAttribute), "true"),
+        (nameof(SustWisAttribute), "true"),
+        (nameof(SlowDigestAttribute), "true"),
+        (nameof(TelepathyAttribute), "true"),
+    };
     public override string? ActivationName => nameof(ActivationsEnum.LargeFrostBall200Every325p1d325DirectionalActivation);
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
@@ -21,21 +40,5 @@ public class RingOfElementalPowerIceFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(CharismaAttribute), "2"),
         (nameof(StrengthAttribute), "2"),
     };
-    public override bool? Feather => true;
-    public override bool? FreeAct => true;
     public override string FriendlyName => "of Elemental Power (Ice)";
-    public override bool? HideType => true;
-    public override bool? HoldLife => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ImCold => true;
-    public override bool? Regen => true;
-    public override bool? SeeInvis => true;
-    public override bool? ShowMods => true;
-    public override bool? SustInt => true;
-    public override bool? SustWis => true;
-    public override bool? SlowDigest => true;
-    public override bool? Telepathy => true;
 }

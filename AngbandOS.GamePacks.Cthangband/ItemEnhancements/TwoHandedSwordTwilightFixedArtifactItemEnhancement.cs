@@ -3,6 +3,21 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(AggravateAttribute), "true"),
+        (nameof(BrandFireAttribute), "true"),
+        (nameof(DreadCurseAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ImFireAttribute), "true"),
+        (nameof(ResDisenAttribute), "true"),
+        (nameof(ResFearAttribute), "true"),
+        (nameof(ResFireAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+    };
     public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HeavyCurseAttribute), "true"),
@@ -20,18 +35,6 @@ public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(SpeedAttribute), "10"),
         (nameof(RadiusAttribute), "3"),
     };
-    public override bool? Aggravate => true;
-    public override bool? BrandFire => true;
-    public override bool? DreadCurse => true;
     public override string FriendlyName => "'Twilight'";
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ImFire => true;
-    public override bool? ResDisen => true;
-    public override bool? ResFear => true;
-    public override bool? ResFire => true;
-    public override bool? ShowMods => true;
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

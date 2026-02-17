@@ -3,6 +3,15 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MagiAmuletItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(FreeActAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "25"),
@@ -10,10 +19,4 @@ public class MagiAmuletItemFactoryItemEnhancement : ItemEnhancementGameConfigura
         (nameof(ValueAttribute), "30000"),
         (nameof(WeightAttribute), "3"),
     };
-    public override bool? FreeAct => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? SeeInvis => true;
 }

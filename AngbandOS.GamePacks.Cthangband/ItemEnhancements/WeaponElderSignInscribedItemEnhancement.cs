@@ -3,8 +3,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponElderSignInscribedItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(BlessedAttribute), "true"),
+        (nameof(ResFearAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(SlayDemonAttribute), "true"),
+        (nameof(SlayEvilAttribute), "true"),
+        (nameof(SlayUndeadAttribute), "true"),
+    };
     public override string? AdditionalItemEnhancementWeightedRandomBindingKey => nameof(SustainItemEnhancementWeightedRandom);
-    public override bool? Blessed => true;
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "20000"),
@@ -15,9 +23,4 @@ public class WeaponElderSignInscribedItemEnhancement : ItemEnhancementGameConfig
         (nameof(WisdomAttribute), "1d4"),
     };
     public override string? FriendlyName => "(Elder Sign Inscribed)";
-    public override bool? ResFear => true;
-    public override bool? SeeInvis => true;
-    public override bool? SlayDemon => true;
-    public override bool? SlayEvil => true;
-    public override bool? SlayUndead => true;
 }

@@ -3,6 +3,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HatOfMightItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(FreeActAttribute), "true"),
+        (nameof(SustConAttribute), "true"),
+        (nameof(SustDexAttribute), "true"),
+        (nameof(SustStrAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "2000"),
@@ -10,9 +17,5 @@ public class HatOfMightItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(WisdomAttribute), "1d3"),
         (nameof(StrengthAttribute), "1d3")
     };
-    public override bool? FreeAct => true;
     public override string? FriendlyName => "of Might";
-    public override bool? SustCon => true;
-    public override bool? SustDex => true;
-    public override bool? SustStr => true;
 }

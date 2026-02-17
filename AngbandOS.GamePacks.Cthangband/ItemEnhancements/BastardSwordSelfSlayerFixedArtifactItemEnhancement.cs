@@ -3,6 +3,20 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(AggravateAttribute), "true"),
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ResDisenAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(SlayDemonAttribute), "true"),
+        (nameof(SlayEvilAttribute), "true"),
+        (nameof(SlayTrollAttribute), "true"),
+    };
     public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HeavyCurseAttribute), "true"),
@@ -18,17 +32,6 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(MeleeToHitAttribute), "-20"),
         (nameof(ToDamageAttribute), "20"),
     };
-    public override bool? Aggravate => true;
     public override string FriendlyName => "'Selfslayer'";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ResDisen => true;
-    public override bool? ShowMods => true;
-    public override bool? SlayDemon => true;
-    public override bool? SlayEvil => true;
-    public override bool? SlayTroll => true;
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

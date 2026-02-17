@@ -3,6 +3,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GlovesOfSlayingItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(ShowModsAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "1500"),
@@ -11,5 +15,4 @@ public class GlovesOfSlayingItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ToDamageAttribute), "1d6"),
     };
     public override string? FriendlyName => "of Slaying";
-    public override bool? ShowMods => true;
 }

@@ -3,7 +3,10 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ResistElectricityAndElectricityBiasItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? ResElec => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(ResElecAttribute), "true"),
+    };
     public override string? ArtifactBiasWeightedRandomBindingKey => nameof(Electricity1In1ArtifactBiasWeightedRandom);
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

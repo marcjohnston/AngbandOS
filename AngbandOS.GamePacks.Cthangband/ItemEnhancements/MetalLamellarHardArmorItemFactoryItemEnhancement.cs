@@ -3,7 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class MetalLamellarHardArmorItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? Reflect => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(ReflectAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "340"),
@@ -14,5 +18,4 @@ public class MetalLamellarHardArmorItemFactoryItemEnhancement : ItemEnhancementG
         (nameof(BaseArmorClassAttribute), "23"),
     };
     public override ColorEnum? Color => ColorEnum.BrightWhite;
-    public override string? HatesAcid => "true";
 }

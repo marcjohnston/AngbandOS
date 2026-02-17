@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class HardLeatherBootsItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(HatesFireAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "40"),
@@ -12,6 +17,4 @@ public class HardLeatherBootsItemFactoryItemEnhancement : ItemEnhancementGameCon
         (nameof(BaseArmorClassAttribute), "3"),
     };
     public override ColorEnum? Color => ColorEnum.BrightBrown;
-    public override string? HatesAcid => "true";
-    public override string? HatesFire => "true";
 }

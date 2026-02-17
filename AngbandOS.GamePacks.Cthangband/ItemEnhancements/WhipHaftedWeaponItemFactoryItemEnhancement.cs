@@ -3,8 +3,13 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WhipHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? ShowMods => true;
-    public override bool? CanApplyBonusArmorClassMiscPower => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(HatesFireAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(CanApplyBonusArmorClassMiscPowerAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "30"),
@@ -13,6 +18,4 @@ public class WhipHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGameCon
         (nameof(DiceSidesAttribute), "6"),
     };
     public override ColorEnum? Color => ColorEnum.Black;
-    public override string? HatesAcid => "true";
-    public override string? HatesFire => "true";
 }

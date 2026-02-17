@@ -3,6 +3,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GlaiveOfPainFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
@@ -11,10 +19,5 @@ public class GlaiveOfPainFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(ValueAttribute), "50000"),
     };
     public override string FriendlyName => "of Pain";
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ShowMods => true;
     public override ColorEnum? Color => ColorEnum.Grey;
 }

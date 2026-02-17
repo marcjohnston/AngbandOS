@@ -3,16 +3,19 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SlingRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? ShowMods => true;
-    public override bool? CanApplyBlowsBonus => true;
-    public override bool? CanApplySlayingBonus => true;
-    public override bool? CanApplyBonusArmorClassMiscPower => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesAcidAttribute), "true"),
+        (nameof(HatesFireAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(CanApplyBlowsBonusAttribute), "true"),
+        (nameof(CanApplySlayingBonusAttribute), "true"),
+        (nameof(CanApplyBonusArmorClassMiscPowerAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "5"),
         (nameof(ValueAttribute), "5"),
     };
     public override ColorEnum? Color => ColorEnum.Brown;
-    public override string? HatesAcid => "true";
-    public override string? HatesFire => "true";
 }

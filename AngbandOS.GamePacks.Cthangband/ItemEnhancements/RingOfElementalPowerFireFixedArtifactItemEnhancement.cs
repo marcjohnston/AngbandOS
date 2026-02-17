@@ -3,6 +3,21 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class RingOfElementalPowerFireFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(FreeActAttribute), "true"),
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ImFireAttribute), "true"),
+        (nameof(RegenAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(SlowDigestAttribute), "true"),
+        (nameof(SustDexAttribute), "true"),
+        (nameof(SustStrAttribute), "true"),
+    };
     public override string? ActivationName => nameof(ActivationsEnum.FireBall120r3Every225p1d225DirectionalActivation);
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
@@ -20,17 +35,5 @@ public class RingOfElementalPowerFireFixedArtifactItemEnhancement : ItemEnhancem
         (nameof(ConstitutionAttribute), "1"),
         (nameof(CharismaAttribute), "1"),
     };
-    public override bool? FreeAct => true;
     public override string FriendlyName => "of Elemental Power (Fire)";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ImFire => true;
-    public override bool? Regen => true;
-    public override bool? SeeInvis => true;
-    public override bool? SlowDigest => true;
-    public override bool? SustDex => true;
-    public override bool? SustStr => true;
 }

@@ -3,6 +3,27 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(NoTeleAttribute), "true"),
+        (nameof(PermaCurseAttribute), "true"),
+        (nameof(ResAcidAttribute), "true"),
+        (nameof(ResColdAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
+        (nameof(ResDarkAttribute), "true"),
+        (nameof(ResElecAttribute), "true"),
+        (nameof(ResFireAttribute), "true"),
+        (nameof(ResLightAttribute), "true"),
+        (nameof(ResNexusAttribute), "true"),
+        (nameof(ResPoisAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(TelepathyAttribute), "true"),
+    };
     public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HeavyCurseAttribute), "true"),
@@ -22,23 +43,5 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(StrengthAttribute), "125"),
     };
     public override string FriendlyName => "of the Universe";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? NoTele => true;
-    public override bool? PermaCurse => true;
-    public override bool? ResAcid => true;
-    public override bool? ResCold => true;
-    public override bool? ResConf => true;
-    public override bool? ResDark => true;
-    public override bool? ResElec => true;
-    public override bool? ResFire => true;
-    public override bool? ResLight => true;
-    public override bool? ResNexus => true;
-    public override bool? ResPois => true;
-    public override bool? SeeInvis => true;
-    public override bool? Telepathy => true;
     public override ColorEnum? Color => ColorEnum.Black;
 }

@@ -3,8 +3,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BrassLanternLightSourceItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override bool? EasyKnow => true;
-    public override bool? IgnoreFire => true;
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(HatesFireAttribute), "true"),
+        (nameof(EasyKnowAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(RadiusAttribute), "2"),
@@ -15,5 +19,4 @@ public class BrassLanternLightSourceItemFactoryItemEnhancement : ItemEnhancement
         (nameof(BurnRateAttribute), "1"),
     };
     public override ColorEnum? Color => ColorEnum.BrightBrown;
-    public override string? HatesFire => "true";
 }

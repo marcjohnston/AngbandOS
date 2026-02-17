@@ -3,13 +3,41 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(AggravateAttribute), "true"),
+        (nameof(DrainExpAttribute), "true"),
+        (nameof(DreadCurseAttribute), "true"),
+        (nameof(HideTypeAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(ImAcidAttribute), "true"),
+        (nameof(ImColdAttribute), "true"),
+        (nameof(ImElecAttribute), "true"),
+        (nameof(ImFireAttribute), "true"),
+        (nameof(PermaCurseAttribute), "true"),
+        (nameof(RegenAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(SustChaAttribute), "true"),
+        (nameof(SustConAttribute), "true"),
+        (nameof(SustDexAttribute), "true"),
+        (nameof(SustIntAttribute), "true"),
+        (nameof(SustStrAttribute), "true"),
+        (nameof(SustWisAttribute), "true"),
+        (nameof(FeatherAttribute), "true"),
+        (nameof(FreeActAttribute), "true"),
+        (nameof(HoldLifeAttribute), "true"),
+        (nameof(SlowDigestAttribute), "true"),
+        (nameof(TelepathyAttribute), "true"),
+    };
     public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HeavyCurseAttribute), "true"),
         (nameof(IsCursedAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.BizarreThingsEvery1d450p450DirectionalActivation);
-    public override bool? Aggravate => true;
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
@@ -27,31 +55,6 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
         (nameof(CharismaAttribute), "5"),
         (nameof(StrengthAttribute), "5"),
     };
-    public override bool? DrainExp => true;
-    public override bool? DreadCurse => true;
     public override string FriendlyName => "of Set";
-    public override bool? HideType => true;
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? ImAcid => true;
-    public override bool? ImCold => true;
-    public override bool? ImElec => true;
-    public override bool? ImFire => true;
-    public override bool? PermaCurse => true;
-    public override bool? Regen => true;
-    public override bool? SeeInvis => true;
-    public override bool? SustCha => true;
-    public override bool? SustCon => true;
-    public override bool? SustDex => true;
-    public override bool? SustInt => true;
-    public override bool? SustStr => true;
-    public override bool? SustWis => true;
-    public override bool? Feather => true;
-    public override bool? FreeAct => true;
-    public override bool? HoldLife => true;
-    public override bool? SlowDigest => true;
-    public override bool? Telepathy => true;
     public override ColorEnum? Color => ColorEnum.Yellow;
 }

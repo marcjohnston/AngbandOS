@@ -3,8 +3,26 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LongSwordExcaliburFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(BrandColdAttribute), "true"),
+        (nameof(FreeActAttribute), "true"),
+        (nameof(IgnoreAcidAttribute), "true"),
+        (nameof(IgnoreColdAttribute), "true"),
+        (nameof(IgnoreElecAttribute), "true"),
+        (nameof(IgnoreFireAttribute), "true"),
+        (nameof(RegenAttribute), "true"),
+        (nameof(ResColdAttribute), "true"),
+        (nameof(ResLightAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(ShowModsAttribute), "true"),
+        (nameof(SlayDemonAttribute), "true"),
+        (nameof(SlayEvilAttribute), "true"),
+        (nameof(SlayTrollAttribute), "true"),
+        (nameof(SlayUndeadAttribute), "true"),
+        (nameof(SlowDigestAttribute), "true"),
+    };
     public override string? ActivationName => nameof(ActivationsEnum.BallOfCold100r2Every300DirectionalActivation);
-    public override bool? BrandCold => true;
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
@@ -15,21 +33,6 @@ public class LongSwordExcaliburFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(SpeedAttribute), "10"),
         (nameof(RadiusAttribute), "3"),
     };
-    public override bool? FreeAct => true;
     public override string FriendlyName => "'Excalibur'";
-    public override bool? IgnoreAcid => true;
-    public override bool? IgnoreCold => true;
-    public override bool? IgnoreElec => true;
-    public override bool? IgnoreFire => true;
-    public override bool? Regen => true;
-    public override bool? ResCold => true;
-    public override bool? ResLight => true;
-    public override bool? SeeInvis => true;
-    public override bool? ShowMods => true;
-    public override bool? SlayDemon => true;
-    public override bool? SlayEvil => true;
-    public override bool? SlayTroll => true;
-    public override bool? SlayUndead => true;
-    public override bool? SlowDigest => true;
     public override ColorEnum? Color => ColorEnum.BrightWhite;
 }
