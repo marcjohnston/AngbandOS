@@ -347,7 +347,38 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson
 
     #region
     private readonly Game Game;
-    public string[] GetMultilineName => Game.ConvertToMultiline(MultilineName ?? FriendlyName);
+    private string[] ConvertToMultiline(string multiLineName)
+    {
+
+        List<string> names = new();
+        int width = 12;
+        string[] ff = multiLineName.Split('\n');
+        foreach (string fff in ff)
+        {
+            string f = fff;
+            while (f.Length > width)
+            {
+                int pos = width;
+                while (f[pos] != ' ' && pos > 0)
+                {
+                    pos--;
+                }
+                if (pos == 0)
+                {
+                    names.Add(f.Substring(0, width));
+                    f = f.Substring(width);
+                }
+                else
+                {
+                    names.Add(f.Substring(0, pos));
+                    f = f.Substring(pos + 1);
+                }
+            }
+            names.Add(f);
+        }
+        return names.ToArray();
+    }
+    public string[] GetMultilineName => ConvertToMultiline(MultilineName ?? FriendlyName);
 
     public MonsterRace(Game game, MonsterRaceGameConfiguration monsterRaceGameConfiguration)
     {

@@ -9,7 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Game
+internal partial class Game
 {
     public string Find(string folder, string filenameWithoutExtension)
     {
@@ -183,40 +183,11 @@ internal class Game
     public const string RareAttributeKey = "rare";
     public const string FixedAttributeKey = "fixed";
 
-    public Ability StrengthAbility; // TODO: These are still hardcoded into the framework
-    public Ability IntelligenceAbility; // TODO: These are still hardcoded into the framework
-    public Ability WisdomAbility; // TODO: These are still hardcoded into the framework
-    public Ability DexterityAbility; // TODO: These are still hardcoded into the framework
-    public Ability ConstitutionAbility; // TODO: These are still hardcoded into the framework
-    public Ability CharismaAbility; // TODO: These are still hardcoded into the framework
-
     public God? God;
 
     public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
     public int GenomeArmorClassBonus;
     public bool ChaosGift;
-    public int CharismaBonus;
-    public int ConstitutionBonus;
-    public int DexterityBonus;
-    public bool ElecHit;
-    public bool Esp;
-    public bool FeatherFall;
-    public bool MutationFireHit;
-    public bool MutationFreeAction;
-    public int MutationInfravisionBonus;
-    public int IntelligenceBonus;
-    public bool MagicResistance;
-    public bool Regen;
-    public bool ResFear;
-    public bool ResTime;
-    public int SearchBonus;
-    public int SpeedBonus;
-    public int StealthBonus;
-    public int StrengthBonus;
-    public bool SuppressRegen;
-    public bool SustainAll;
-    public bool Vulnerable;
-    public int WisdomBonus;
     public readonly List<Mutation> MutationsNotPossessed = new List<Mutation>();
     public readonly List<Mutation> MutationsPossessed = new List<Mutation>();
 
@@ -278,13 +249,6 @@ internal class Game
 
     public readonly RefreshMapProperty RefreshMap;
     public readonly TrackedMonsterChangedProperty TrackedMonsterChanged;
-    public bool IsBirthday;
-    public bool IsDawn;
-    public bool IsDusk;
-    public bool IsFeelTime;
-    public bool IsHalloween;
-    public bool IsMidnight;
-    public bool IsNewYear;
 
     private const int LevelFeelDelay = 2500;
     private const int MillisecondsPerTurn = 800;
@@ -552,71 +516,6 @@ internal class Game
     public readonly ExperienceLevelIntProperty ExperienceLevel;
 
     public Patron GooPatron;
-    public bool HasAcidImmunity;
-    public bool HasAcidResistance;
-    public bool HasAggravation;
-    public bool HasAntiMagic;
-    public bool HasAntiTeleport;
-    public bool HasAntiTheft;
-    public bool HasBlessedBlade;
-    public bool HasBlindnessResistance;
-    public bool HasChaosResistance;
-    public bool HasColdImmunity;
-    public bool HasColdResistance;
-
-    /// <summary>
-    /// Returns true, if the players automatically instills confusion in monsters when the player touches the monster.
-    /// </summary>
-    public bool HasConfusingTouch;
-
-    public bool HasConfusionResistance;
-    public bool HasDarkResistance;
-    public bool HasDisenchantResistance;
-    public bool HasElementalVulnerability;
-    public bool HasExperienceDrain;
-    public bool HasExtraMight;
-    public bool HasFearResistance;
-    public bool HasFeatherFall;
-    public bool HasFireImmunity;
-    public bool HasFireResistance;
-    public bool HasFireSheath;
-    public bool HasFreeAction;
-
-    /// <summary>
-    /// Returns true, if the players race glows in the dark.  Spectres, sprites and vampires glow.
-    /// </summary>
-    public int GlowInTheDarkRadius;
-
-    public bool HasHoldLife;
-    public bool HasLightningImmunity;
-    public bool HasLightningResistance;
-    public bool HasElectricitySheath;
-    public bool HasLightResistance;
-    public bool HasNetherResistance;
-    public bool HasNexusResistance;
-    public bool HasPoisonResistance;
-    public bool HasQuakeWeapon;
-    public bool HasRandomTeleport;
-    public bool HasReflection;
-    public bool HasRegeneration;
-    public bool HasRestrictingArmor;
-    public bool HasRestrictingGloves;
-    public bool HasSeeInvisibility;
-    public bool HasShardResistance;
-    public bool HasSlowDigestion;
-    public bool HasSoundResistance;
-    public bool HasSustainCharisma;
-    public bool HasSustainConstitution;
-    public bool HasSustainDexterity;
-    public bool HasSustainIntelligence;
-    public bool HasSustainStrength;
-    public bool HasSustainWisdom;
-    public bool HasTelepathy;
-    public bool HasTimeResistance;
-    public int Height;
-    public int HitDie;
-    public int InfravisionRange;
-    public bool IsSearching;
 
     /// <summary>
     /// 
@@ -693,93 +592,6 @@ internal class Game
     /// <returns></returns>
     [Obsolete("Relies on the Realm.Key")]
     public bool Studies(string realmName) => (PrimaryRealm != null && PrimaryRealm.Key == realmName) || (SecondaryRealm != null && SecondaryRealm.Key == realmName); // TODO: This relies on the realm key.
-
-    public int SkillDigging;
-    public int ComputedDisarmTraps;
-    public int SkillMelee;
-    public int SkillRanged;
-    public int SkillSavingThrow;
-    public int SkillSearchFrequency;
-    public int SkillSearching;
-    public int SkillStealth;
-    public int SkillThrowing;
-    public int SkillUseDevice;
-    public int SocialClass;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>borg: player->timed[TMD_OPP_ACID]</remarks>
-    public readonly Timer AcidResistanceTimer;
-    public readonly Timer BleedingTimer;
-    public readonly Timer BlessingTimer;
-    public readonly Timer BlindnessTimer;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>borg: player->timed[TMD_OPP_COLD]</remarks>
-    public readonly Timer ColdResistanceTimer;
-    public readonly Timer ConfusionTimer;
-    public readonly Timer EtherealnessTimer;
-    public readonly Timer FearTimer;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>borg: player->timed[TMD_OPP_FIRE]</remakrs>
-    public readonly Timer FireResistanceTimer;
-    public readonly Timer HallucinationsTimer;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>readonly borg: player->timed[TMD_FAST]</remarks>
-    public readonly Timer HasteTimer;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>borg: player->timed[TMD_HERO]</remarks>
-    public readonly Timer HeroismTimer;
-    public readonly Timer InfravisionTimer;
-    public readonly Timer InvulnerabilityTimer;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>borg: player->timed[TMD_OPP_ELEC]</remarks>
-    public readonly Timer LightningResistanceTimer;
-    public readonly Timer ParalysisTimer;
-    public readonly Timer PoisonTimer;
-
-    /// <summary>
-    /// 
-    /// </summaryreadonly >
-    /// <remarks>readonly borg: player->timed[TMD_OPP_POIS]</remarks>
-    public readonly Timer PoisonResistanceTimer;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>borg:player->timed[TMD_PROTEVIL]</remarks>
-    public readonly Timer ProtectionFromEvilTimer;
-    public readonly Timer SeeInvisibilityTimer;
-    public readonly Timer SlowTimer;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>borg: player->timed[TMD_STONESKIN]</remarks>
-    public readonly Timer StoneskinTimer;
-    public readonly Timer StunTimer;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>borg: player->timed[TMD_SHERO]</remarks>
-    public readonly Timer SuperheroismTimer;
-    public readonly Timer TelepathyTimer;
 
     /// <summary>
     /// Returns the index of the town that the player owns a home; or null, if the player doesn't own a home.
@@ -1259,25 +1071,6 @@ internal class Game
     }
 
 
-    public MonsterRaceFilter GetRandomBizarreMonsterSelector()
-    {
-        switch (DieRoll(6))
-        {
-            case 1:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre1MonsterRaceFilter));
-            case 2:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre2MonsterRaceFilter));
-            case 3:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre3MonsterRaceFilter));
-            case 4:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre4MonsterRaceFilter));
-            case 5:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre5MonsterRaceFilter));
-            default:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre6MonsterRaceFilter));
-        }
-    }
-
     // PROFILE MESSAGING START
     /// <summary>
     /// Returns the queue that stores all of the messages.  An actual Queue isn't being used because the Count property for the last item 
@@ -1467,70 +1260,7 @@ internal class Game
 
     public byte Elevation(int wildY, int wildX, int y, int x)
     {
-        return _elevationMap[((wildY - 1) * (Constants.WildernessHeight - 1)) + y + 1][
-            ((wildX - 1) * (Constants.WildernessWidth - 1)) + x + 1];
-    }
-
-    public void MakeIslandContours()
-    {
-        do
-        {
-            bool reject = false;
-            PerlinNoise perlinNoise = new PerlinNoise(RandomLessThan(int.MaxValue - 1));
-            const int mapWidth = (10 * (Constants.WildernessWidth - 1)) + 3;
-            const int mapHeight = (10 * (Constants.WildernessHeight - 1)) + 3;
-            const double widthDivisor = 1 / (double)mapWidth;
-            const double heightDivisor = 1 / (double)mapHeight;
-            _elevationMap = new byte[mapHeight][];
-            for (int row = 0; row < mapHeight; row++)
-            {
-                _elevationMap[row] = new byte[mapWidth];
-            }
-            for (int row = 0; row < mapHeight; row++)
-            {
-                for (int col = 0; col < mapWidth; col++)
-                {
-                    double v = perlinNoise.Noise(10 * col * widthDivisor, 10 * row * heightDivisor, -0.5);
-                    v = (v + 1) / 2;
-                    double dX = Math.Abs(col - (mapWidth / 2)) * widthDivisor;
-                    double dY = Math.Abs(row - (mapHeight / 2)) * heightDivisor;
-                    double d = Math.Max(dX, dY);
-                    const double elevation = 0.05;
-                    const double steepness = 6.0;
-                    const double dropoff = 50.0;
-                    v += elevation - (dropoff * Math.Pow(d, steepness));
-                    v = Math.Min(1, Math.Max(0, v));
-                    byte rounded = (byte)(v * 10);
-                    _elevationMap[row][col] = rounded;
-                }
-            }
-            for (int row = 0; row < mapHeight; row++)
-            {
-                if (_elevationMap[row][1] != 0)
-                {
-                    reject = true;
-                }
-                if (_elevationMap[row][mapWidth - 2] != 0)
-                {
-                    reject = true;
-                }
-            }
-            for (int col = 0; col < mapWidth; col++)
-            {
-                if (_elevationMap[1][col] != 0)
-                {
-                    reject = true;
-                }
-                if (_elevationMap[mapHeight - 2][col] != 0)
-                {
-                    reject = true;
-                }
-            }
-            if (!reject)
-            {
-                break;
-            }
-        } while (true);
+        return _elevationMap[((wildY - 1) * (Constants.WildernessHeight - 1)) + y + 1][((wildX - 1) * (Constants.WildernessWidth - 1)) + x + 1];
     }
 
     /// <summary>
@@ -2150,6 +1880,234 @@ internal class Game
     /// <exception cref="Exception"></exception>
     private void GenerateNewGame()
     {
+        void AssignItemFlavors()
+        {
+            List<Flavor>? GenerateFlavors(ItemClass itemClass)
+            {
+                if (itemClass.NumberOfFlavorsToGenerate == 0)
+                {
+                    return itemClass.ItemFlavors?.ToList();
+                }
+
+                List<Flavor>? itemFlavors = new List<Flavor>();
+
+                UseFixed = true;
+                FixedSeed = _seedFlavor;
+                WeightedRandom<string> illegibleFlavorSyllablesWeightedRandom = new WeightedRandom<string>(this, IllegibleFlavorSyllables);
+                if (illegibleFlavorSyllablesWeightedRandom.SumCount == 0)
+                {
+                    throw new Exception("No illegible syllables loaded to generate item flavors.");
+                }
+
+                for (int i = 0; i < itemClass.NumberOfFlavorsToGenerate; i++)
+                {
+                    while (true)
+                    {
+                        string buf = "";
+                        while (true)
+                        {
+                            string tmp = "";
+                            int s = RandomLessThan(100) < 30 ? 1 : 2;
+                            for (int q = 0; q < s; q++)
+                            {
+                                tmp += illegibleFlavorSyllablesWeightedRandom.Choose();
+                            }
+                            if (buf.Length + tmp.Length > 14)
+                            {
+                                break;
+                            }
+                            buf += " ";
+                            buf += tmp;
+                        }
+                        bool okay = true;
+                        string name = buf.Substring(1);
+                        foreach (Flavor testFlavor in itemFlavors)
+                        {
+                            if (testFlavor.Name.Substring(0, 4) == name.Substring(0, 4))
+                            {
+                                okay = false;
+                                break;
+                            }
+                        }
+                        if (okay)
+                        {
+                            // Select a random flavor from the repository.
+                            int index = RandomLessThan(itemClass.ItemFlavors.Length);
+                            Flavor baseFlavor = itemClass.ItemFlavors[index];
+
+                            // Generate an item flavor.
+                            Flavor flavor = new IllegibleItemFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
+                            itemFlavors.Add(flavor);
+                            break;
+                        }
+                    }
+                }
+
+                return itemFlavors;
+            }
+
+            // Create a dictionary that tracks all of the flavor repositories as the flavors are being assigned.
+            Dictionary<ItemClass, List<Flavor>> itemClassWorkingRepositoryOfItemFlavors = new Dictionary<ItemClass, List<Flavor>>();
+
+            // Loop through all of the item factories.  Multiple item factories will have common item class flavor repositories.
+            foreach (ItemFactory kPtr in SingletonRepository.Get<ItemFactory>())
+            {
+                // Check to see if the item class has flavor.
+                if (kPtr.ItemClass.HasFlavor)
+                {
+                    // Check to see if the item has a predefined flavor.
+                    if (kPtr.PreassignedItemFlavor != null)
+                    {
+                        // Assign the predefined flavor.
+                        kPtr.Flavor = kPtr.PreassignedItemFlavor;
+                    }
+                    else
+                    {
+                        // No, it doesn't have a preasigned flavor.  Assign one from the item class flavor repository.
+                        if (!itemClassWorkingRepositoryOfItemFlavors.TryGetValue(kPtr.ItemClass, out List<Flavor>? currentFlavorRepository))
+                        {
+                            // Get the flavor repository for the item class.  This generation process may involve generating illegible scroll titles.
+                            List<Flavor>? completeFlavorRepository = GenerateFlavors(kPtr.ItemClass);
+
+                            // The dictionary currently isn't tracking the repository.  Set it up now.
+                            currentFlavorRepository = completeFlavorRepository;
+                            itemClassWorkingRepositoryOfItemFlavors.Add(kPtr.ItemClass, currentFlavorRepository);
+                        }
+
+                        // Ensure there are enough flavors.
+                        if (currentFlavorRepository.Count == 0)
+                        {
+                            throw new Exception($"The ItemClass {kPtr.ItemClass.Name} does not have enough flavors to assign to the associated factories.");
+                        }
+
+                        // Select a random item flavor.
+                        int randomIndex = UseRandom.Next(currentFlavorRepository.Count);
+
+                        // Retrieve the flavor to assign to the factory.
+                        kPtr.Flavor = currentFlavorRepository[randomIndex];
+
+                        // Remove the used flavor from the current item class repository.
+                        currentFlavorRepository.RemoveAt(randomIndex);
+                    }
+
+                    kPtr.FlavorSymbol = kPtr.Flavor.Symbol;
+                    kPtr.EffectiveAttributeSet.Color = kPtr.Flavor.Color;
+                }
+            }
+        }
+        void PlayerOutfit()
+        {
+            if (Race.OutfitsWithScrollsOfLight || CharacterClass.OutfitsWithScrollsOfLight)
+            {
+                ItemFactory scrollLightItemClass = SingletonRepository.Get<ItemFactory>(nameof(LightScrollItemFactory));
+                Item item = new Item(this, scrollLightItemClass);
+                item.StackCount = RandomBetween(3, 7);
+                item.IsFlavorAware = true;
+                item.BecomeKnown();
+                item.IdentityIsStoreBought = true;
+                InventoryCarry(item);
+            }
+            else
+            {
+                ItemFactory woodenTorchItemClass = SingletonRepository.Get<ItemFactory>(nameof(WoodenTorchLightSourceItemFactory));
+                Item item = new Item(this, woodenTorchItemClass);
+                item.StackCount = RandomBetween(3, 7);
+                item.TurnsOfLightRemaining = RandomBetween(3, 7) * 500;
+                item.IsFlavorAware = true;
+                item.BecomeKnown();
+                InventoryCarry(item);
+                Item carried = item.TakeFromStack(1);
+                LightsourceWieldSlot lightsourceInventorySlot = (LightsourceWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(LightsourceWieldSlot));
+                SetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault(), carried);
+                WeightCarried += carried.EffectivePropertySet.Weight;
+            }
+
+            // Retrieve the tables to select from.
+            OutfitManifest[] characterClassAndRaceOutfitItemsTable = SingletonRepository.Get<OutfitManifest>(); // Get the table to select from.
+
+            ///
+            /// (string[] MatchValues, bool IsEqual)?
+            /// A null value is a wildcard, to match any null and non-null value.  OutfitManifests validate against null because character classes, races and realms are not null.
+            /// A non-null value has an IsEqual for an equality test.  True for == (Contains), false for != (Does not contain).
+            /// The MatchValues can be null to detect for null values.  This is generic and not applicable for OutfitManifests.
+            /// Otherwise a non-null and non-empty list of matching values is used for the contains.
+            /// 
+
+            // The match values for the character class, races and realms were validated to ensure null and empty values were not specified.
+            // Generate the character class match function based on the equality operator.
+            Func<OutfitManifest, bool> characterClassMatch = p =>
+                !p.CharacterClassBindingKey.HasValue || // The outfit manifest defined a wildcard
+                p.CharacterClassBindingKey.Value.MatchValues is not null && p.CharacterClassBindingKey.Value.IsEqual && p.CharacterClassBindingKey.Value.MatchValues.Contains(CharacterClass?.GetKey) || // One of the outfit manifest matches the character class
+                p.CharacterClassBindingKey.Value.MatchValues is not null && !p.CharacterClassBindingKey.Value.IsEqual && !p.CharacterClassBindingKey.Value.MatchValues.Contains(CharacterClass?.GetKey); // None of the outfit manifest values match the character class
+
+            // Generate the race match function based on the equality operator.
+            Func<OutfitManifest, bool> raceMatch = p =>
+                !p.RaceBindingKey.HasValue || // The outfit manifest defined a wildcard
+                p.RaceBindingKey.Value.MatchValues is not null && p.RaceBindingKey.Value.IsEqual && p.RaceBindingKey.Value.MatchValues.Contains(Race?.GetKey) || // One of the outfit manifest matches the race
+                p.RaceBindingKey.Value.MatchValues is not null && !p.RaceBindingKey.Value.IsEqual && !p.RaceBindingKey.Value.MatchValues.Contains(Race?.GetKey); // None of the outfit manifest values match the race
+
+            // Generate the realm match function based on the equality operator.  The logic here is that with equality, either the primary or secondary must match, but for inequality, neither the primary nor to secondary can match.
+            Func<OutfitManifest, bool> realmMatch = p =>
+                !p.RealmBindingKey.HasValue || // The outfit manifest defined a wildcard
+                p.RealmBindingKey.Value.MatchValues is not null && p.RealmBindingKey.Value.IsEqual && (p.RealmBindingKey.Value.MatchValues.Contains(PrimaryRealm?.GetKey) || p.RealmBindingKey.Value.MatchValues.Contains(SecondaryRealm?.GetKey)) || // One of the outfit manifest matches the race
+                p.RealmBindingKey.Value.MatchValues is not null && !p.RealmBindingKey.Value.IsEqual && !p.RealmBindingKey.Value.MatchValues.Contains(PrimaryRealm?.GetKey) && !p.RealmBindingKey.Value.MatchValues.Contains(SecondaryRealm?.GetKey); // None of the outfit manifest values match the race
+
+            OutfitManifest[] characterClassAndRaceOutfitItems = characterClassAndRaceOutfitItemsTable.Where(_outfitManifest => characterClassMatch(_outfitManifest) && raceMatch(_outfitManifest) && realmMatch(_outfitManifest)).ToArray();
+
+            // Outfit the player with all of the applicable items.
+            foreach (OutfitManifest characterClassAndRaceOutfitItemsEntry in characterClassAndRaceOutfitItems)
+            {
+                foreach ((ItemFactory itemFactory, ItemEnhancement[]? itemEnhancements, Expression StackCount, bool MakeKnown, bool WieldOne) in characterClassAndRaceOutfitItemsEntry.ItemFactoryAndEnhancements)
+                {
+                    // Create an item from the factory.
+                    Item item = new Item(this, itemFactory);
+                    item.StackCount = ComputeIntegerExpression(StackCount).Value;
+
+                    if (itemFactory.AimingTuple != null)
+                    {
+                        item.WandChargesRemaining = 1;
+                    }
+
+                    if (itemEnhancements is not null)
+                    {
+                        foreach (ItemEnhancement itemEnhancement in itemEnhancements)
+                        {
+                            item.SetRareItem(itemEnhancement);
+                        }
+                    }
+
+                    if (MakeKnown)
+                    {
+                        item.IdentityIsStoreBought = true;
+                        item.IsFlavorAware = true;
+                        item.BecomeKnown();
+                    }
+
+                    if (WieldOne)
+                    {
+                        bool wieldFailed = !item.Wield();
+                        if (wieldFailed)
+                        {
+                            throw new Exception($"The {item.GetDescription(false)} cannot be outfit because the all of the wield slots are currently in use.");
+                        }
+                    }
+                    else
+                    {
+                        InventoryCarry(item);
+                    }
+                }
+            }
+        }
+        void ResetItemFlavors()
+        {
+            // Enumerate all of the item factories and turn on the FlavorAware flag for all item factories that do not have flavors.
+            UseFixed = false;
+            foreach (ItemFactory itemFactory in SingletonRepository.Get<ItemFactory>())
+            {
+                itemFactory.IsFlavorAware = !itemFactory.ItemClass.HasFlavor;
+            }
+        }
+
         SetBackground(BackgroundImageEnum.Paper);
         PlayMusic(MusicTrackEnum.Chargen);
         Inventory = new Item[InventorySlotEnum.Total];
@@ -2307,6 +2265,84 @@ internal class Game
     /// </remarks>
     public void Play(IConsoleViewPort consoleViewPort, ICorePersistentStorage? persistentStorage)
     {
+        void Kingly()
+        {
+            CurrentDepth = 0;
+            DiedFrom = "Ripe Old Age";
+            ExperiencePoints.IntValue = MaxExperienceGained.IntValue;
+            ExperienceLevel.IntValue = MaxLevelGained;
+            Gold.IntValue += 10000000;
+            SetBackground(BackgroundImageEnum.Crown);
+            Screen.Clear();
+            AnyKey(44);
+        }
+
+        void PrintTomb()
+        {
+            {
+                DateTime ct = DateTime.Now;
+                if (IsWinner.BoolValue)
+                {
+                    SetBackground(BackgroundImageEnum.Sunset);
+                    PlayMusic(MusicTrackEnum.Victory);
+                }
+                else
+                {
+                    SetBackground(BackgroundImageEnum.Tomb);
+                    PlayMusic(MusicTrackEnum.Death);
+                }
+                Screen.Clear();
+                string buf = PlayerName.StringValue.Trim() + Generation.ToRoman(true);
+                if (IsWinner.BoolValue || ExperienceLevel.IntValue > Constants.PyMaxLevel)
+                {
+                    buf += " the Magnificent";
+                }
+                Screen.Print(buf, 39, 1);
+                buf = $"Level {ExperienceLevel.IntValue} {CharacterClass.ClassSubName(PrimaryRealm)}";
+                Screen.Print(buf, 40, 1);
+                string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
+                Screen.Print(tmp, 39, 34);
+                tmp = $"by {DiedFrom}".PadLeft(45);
+                Screen.Print(tmp, 40, 34);
+                tmp = $"on {ct:dd MMM yyyy h.mm tt}".PadLeft(45);
+                Screen.Print(tmp, 41, 34);
+                AnyKey(44);
+            }
+        }
+
+        void CloseGame()
+        {
+            HandleStuff();
+            MsgPrint(string.Empty);
+            FullScreenOverlay = true;
+            if (IsDead)
+            {
+                if (IsWinner.BoolValue)
+                {
+                    Kingly();
+                }
+
+                //HighScore score = new HighScore(this);
+                SaveGame();
+                PrintTomb();
+                if (IsWizard.BoolValue)
+                {
+                    return;
+                }
+                //Program.HiScores.InsertNewScore(score);
+                //Program.HiScores.DisplayScores(score.Pts);
+            }
+            else
+            {
+                DoCmdSaveGame(false);
+                //if (!Program.ExitToDesktop)
+                //{
+                //    Terminal.PlayMusic(MusicTrack.Menu);
+                //    Program.HiScores.DisplayScores(new HighScore(this));
+                //}
+            }
+        }
+
         // If this game is to be replayed, we need to initialize the non-fixed random with the same value that was used to construct the game.
         int randomSeed = ReplayQueueIndex == 0 ? MainSequenceRandomSeed : CurrentSequenceRandomSeed;
         _mainSequence = new Random(randomSeed);
@@ -2384,7 +2420,6 @@ internal class Game
         ConsoleViewPort.GameStopped();
         CloseGame();
     }
-
     public Store? FindHomeStore(Town town) => Array.Find(town.Stores, store => store.GetType() == typeof(HomeStoreFactory));
 
     public void MoveHouse(Town oldTown, Town newTown)
@@ -2988,38 +3023,6 @@ internal class Game
         RedrawStuff();
     }
 
-    public string[] ConvertToMultiline(string multiLineName)
-    {
-
-        List<string> names = new();
-        int width = 12;
-        string[] ff = multiLineName.Split('\n');
-        foreach (string fff in ff)
-        {
-            string f = fff;
-            while (f.Length > width)
-            {
-                int pos = width;
-                while (f[pos] != ' ' && pos > 0)
-                {
-                    pos--;
-                }
-                if (pos == 0)
-                {
-                    names.Add(f.Substring(0, width));
-                    f = f.Substring(width);
-                }
-                else
-                {
-                    names.Add(f.Substring(0, pos));
-                    f = f.Substring(pos + 1);
-                }
-            }
-            names.Add(f);
-        }
-        return names.ToArray();
-    }
-
     public void HealthTrack(int? mIdx)
     {
         TrackedMonster.Value = mIdx == null ? null : Monsters[mIdx.Value];
@@ -3175,10 +3178,6 @@ internal class Game
         }
     }
 
-    public void Winner()
-    {
-    }
-
     public void NoticeStuff()
     {
         SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)).Check();
@@ -3238,164 +3237,6 @@ internal class Game
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Check();
     }
 
-    private List<Flavor>? GenerateFlavors(ItemClass itemClass)
-    {
-        if (itemClass.NumberOfFlavorsToGenerate == 0)
-        {
-            return itemClass.ItemFlavors?.ToList();
-        }
-
-        List<Flavor>? itemFlavors = new List<Flavor>();
-
-        UseFixed = true;
-        FixedSeed = _seedFlavor;
-        WeightedRandom<string> illegibleFlavorSyllablesWeightedRandom = new WeightedRandom<string>(this, IllegibleFlavorSyllables);
-        if (illegibleFlavorSyllablesWeightedRandom.SumCount == 0)
-        {
-            throw new Exception("No illegible syllables loaded to generate item flavors.");
-        }
-
-        for (int i = 0; i < itemClass.NumberOfFlavorsToGenerate; i++)
-        {
-            while (true)
-            {
-                string buf = "";
-                while (true)
-                {
-                    string tmp = "";
-                    int s = RandomLessThan(100) < 30 ? 1 : 2;
-                    for (int q = 0; q < s; q++)
-                    {
-                        tmp += illegibleFlavorSyllablesWeightedRandom.Choose();
-                    }
-                    if (buf.Length + tmp.Length > 14)
-                    {
-                        break;
-                    }
-                    buf += " ";
-                    buf += tmp;
-                }
-                bool okay = true;
-                string name = buf.Substring(1);
-                foreach (Flavor testFlavor in itemFlavors)
-                {
-                    if (testFlavor.Name.Substring(0, 4) == name.Substring(0, 4))
-                    {
-                        okay = false;
-                        break;
-                    }
-                }
-                if (okay)
-                {
-                    // Select a random flavor from the repository.
-                    int index = RandomLessThan(itemClass.ItemFlavors.Length);
-                    Flavor baseFlavor = itemClass.ItemFlavors[index];
-
-                    // Generate an item flavor.
-                    Flavor flavor = new IllegibleItemFlavor(this, baseFlavor.Symbol, baseFlavor.Color, name);
-                    itemFlavors.Add(flavor);
-                    break;
-                }
-            }
-        }
-
-        return itemFlavors;
-    }
-
-    private void ResetItemFlavors()
-    {
-        // Enumerate all of the item factories and turn on the FlavorAware flag for all item factories that do not have flavors.
-        UseFixed = false;
-        foreach (ItemFactory itemFactory in SingletonRepository.Get<ItemFactory>())
-        {
-            itemFactory.IsFlavorAware = !itemFactory.ItemClass.HasFlavor;
-        }
-    }
-    private void AssignItemFlavors()
-    {
-        // Create a dictionary that tracks all of the flavor repositories as the flavors are being assigned.
-        Dictionary<ItemClass, List<Flavor>> itemClassWorkingRepositoryOfItemFlavors = new Dictionary<ItemClass, List<Flavor>>();
-
-        // Loop through all of the item factories.  Multiple item factories will have common item class flavor repositories.
-        foreach (ItemFactory kPtr in SingletonRepository.Get<ItemFactory>())
-        {
-            // Check to see if the item class has flavor.
-            if (kPtr.ItemClass.HasFlavor)
-            {
-                // Check to see if the item has a predefined flavor.
-                if (kPtr.PreassignedItemFlavor != null)
-                {
-                    // Assign the predefined flavor.
-                    kPtr.Flavor = kPtr.PreassignedItemFlavor;
-                }
-                else
-                {
-                    // No, it doesn't have a preasigned flavor.  Assign one from the item class flavor repository.
-                    if (!itemClassWorkingRepositoryOfItemFlavors.TryGetValue(kPtr.ItemClass, out List<Flavor>? currentFlavorRepository))
-                    {
-                        // Get the flavor repository for the item class.  This generation process may involve generating illegible scroll titles.
-                        List<Flavor>? completeFlavorRepository = GenerateFlavors(kPtr.ItemClass);
-
-                        // The dictionary currently isn't tracking the repository.  Set it up now.
-                        currentFlavorRepository = completeFlavorRepository;
-                        itemClassWorkingRepositoryOfItemFlavors.Add(kPtr.ItemClass, currentFlavorRepository);
-                    }
-
-                    // Ensure there are enough flavors.
-                    if (currentFlavorRepository.Count == 0)
-                    {
-                        throw new Exception($"The ItemClass {kPtr.ItemClass.Name} does not have enough flavors to assign to the associated factories.");
-                    }
-
-                    // Select a random item flavor.
-                    int randomIndex = UseRandom.Next(currentFlavorRepository.Count);
-
-                    // Retrieve the flavor to assign to the factory.
-                    kPtr.Flavor = currentFlavorRepository[randomIndex];
-
-                    // Remove the used flavor from the current item class repository.
-                    currentFlavorRepository.RemoveAt(randomIndex);
-                }
-
-                kPtr.FlavorSymbol = kPtr.Flavor.Symbol;
-                kPtr.EffectiveAttributeSet.Color = kPtr.Flavor.Color;
-            }
-        }
-    }
-
-    private void CloseGame()
-    {
-        HandleStuff();
-        MsgPrint(string.Empty);
-        FullScreenOverlay = true;
-        if (IsDead)
-        {
-            if (IsWinner.BoolValue)
-            {
-                Kingly();
-            }
-
-            //HighScore score = new HighScore(this);
-            SaveGame();
-            PrintTomb();
-            if (IsWizard.BoolValue)
-            {
-                return;
-            }
-            //Program.HiScores.InsertNewScore(score);
-            //Program.HiScores.DisplayScores(score.Pts);
-        }
-        else
-        {
-            DoCmdSaveGame(false);
-            //if (!Program.ExitToDesktop)
-            //{
-            //    Terminal.PlayMusic(MusicTrack.Menu);
-            //    Program.HiScores.DisplayScores(new HighScore(this));
-            //}
-        }
-    }
-
     /// <summary>
     /// Returns the number of regions of width for the island.  Returns 12, by default.
     /// </summary>
@@ -3408,6 +3249,68 @@ internal class Game
 
     private void CreateWorld() 
     {
+        void MakeIslandContours()
+        {
+            do
+            {
+                bool reject = false;
+                PerlinNoise perlinNoise = new PerlinNoise(RandomLessThan(int.MaxValue - 1));
+                const int mapWidth = (10 * (Constants.WildernessWidth - 1)) + 3;
+                const int mapHeight = (10 * (Constants.WildernessHeight - 1)) + 3;
+                const double widthDivisor = 1 / (double)mapWidth;
+                const double heightDivisor = 1 / (double)mapHeight;
+                _elevationMap = new byte[mapHeight][];
+                for (int row = 0; row < mapHeight; row++)
+                {
+                    _elevationMap[row] = new byte[mapWidth];
+                }
+                for (int row = 0; row < mapHeight; row++)
+                {
+                    for (int col = 0; col < mapWidth; col++)
+                    {
+                        double v = perlinNoise.Noise(10 * col * widthDivisor, 10 * row * heightDivisor, -0.5);
+                        v = (v + 1) / 2;
+                        double dX = Math.Abs(col - (mapWidth / 2)) * widthDivisor;
+                        double dY = Math.Abs(row - (mapHeight / 2)) * heightDivisor;
+                        double d = Math.Max(dX, dY);
+                        const double elevation = 0.05;
+                        const double steepness = 6.0;
+                        const double dropoff = 50.0;
+                        v += elevation - (dropoff * Math.Pow(d, steepness));
+                        v = Math.Min(1, Math.Max(0, v));
+                        byte rounded = (byte)(v * 10);
+                        _elevationMap[row][col] = rounded;
+                    }
+                }
+                for (int row = 0; row < mapHeight; row++)
+                {
+                    if (_elevationMap[row][1] != 0)
+                    {
+                        reject = true;
+                    }
+                    if (_elevationMap[row][mapWidth - 2] != 0)
+                    {
+                        reject = true;
+                    }
+                }
+                for (int col = 0; col < mapWidth; col++)
+                {
+                    if (_elevationMap[1][col] != 0)
+                    {
+                        reject = true;
+                    }
+                    if (_elevationMap[mapHeight - 2][col] != 0)
+                    {
+                        reject = true;
+                    }
+                }
+                if (!reject)
+                {
+                    break;
+                }
+            } while (true);
+        }
+
         // Create and initialize the wilderness regions.
         Wilderness = new WildernessRegion[IslandHeight][];
         for (int i = 0; i < IslandHeight; i++)
@@ -3861,51 +3764,6 @@ internal class Game
                 table[z].FinalProbability = p;
                 aux[x]++;
             }
-        }
-    }
-
-    private void Kingly()
-    {
-        CurrentDepth = 0;
-        DiedFrom = "Ripe Old Age";
-        ExperiencePoints.IntValue = MaxExperienceGained.IntValue;
-        ExperienceLevel.IntValue = MaxLevelGained;
-        Gold.IntValue += 10000000;
-        SetBackground(BackgroundImageEnum.Crown);
-        Screen.Clear();
-        AnyKey(44);
-    }
-
-    private void PrintTomb()
-    {
-        {
-            DateTime ct = DateTime.Now;
-            if (IsWinner.BoolValue)
-            {
-                SetBackground(BackgroundImageEnum.Sunset);
-                PlayMusic(MusicTrackEnum.Victory);
-            }
-            else
-            {
-                SetBackground(BackgroundImageEnum.Tomb);
-                PlayMusic(MusicTrackEnum.Death);
-            }
-            Screen.Clear();
-            string buf = PlayerName.StringValue.Trim() + Generation.ToRoman(true);
-            if (IsWinner.BoolValue || ExperienceLevel.IntValue > Constants.PyMaxLevel)
-            {
-                buf += " the Magnificent";
-            }
-            Screen.Print(buf, 39, 1);
-            buf = $"Level {ExperienceLevel.IntValue} {CharacterClass.ClassSubName(PrimaryRealm)}";
-            Screen.Print(buf, 40, 1);
-            string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
-            Screen.Print(tmp, 39, 34);
-            tmp = $"by {DiedFrom}".PadLeft(45);
-            Screen.Print(tmp, 40, 34);
-            tmp = $"on {ct:dd MMM yyyy h.mm tt}".PadLeft(45);
-            Screen.Print(tmp, 41, 34);
-            AnyKey(44);
         }
     }
 
@@ -6986,6 +6844,75 @@ internal class Game
     /// <param name="x"> The x coordinate of the location being attacked </param>
     public void PlayerAttackMonster(int y, int x)
     {
+        /// <summary>
+        /// Resolve a natural attack the player has from a mutation
+        /// </summary>
+        /// <param name="monsterIndex"> The monster being attacked </param>
+        /// <param name="mutation"> The mutation being used to attack </param>
+        /// <param name="fear"> Whether or not the monster is scared by the attack </param>
+        /// <param name="monsterDies"> Whether or not the monster is killed by the attack </param>
+        void PlayerNaturalAttackOnMonster(int monsterIndex, Mutation mutation, out bool fear, out bool monsterDies)
+        {
+            fear = false;
+            monsterDies = false;
+            Monster monster = Monsters[monsterIndex];
+            MonsterRace race = monster.Race;
+            int damageSides = mutation.DamageDiceSize;
+            int damageDice = mutation.DamageDiceNumber;
+            int effectiveWeight = mutation.EquivalentWeaponWeight;
+            string attackDescription = mutation.AttackDescription;
+            string monsterName = monster.Name;
+            // See if the player hit the monster
+            int bonus = Bonuses.AttackBonus;
+            int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
+            if (PlayerCheckHitOnMonster(chance, race.ArmorClass, monster.IsVisible))
+            {
+                // It was a hit, so let the player know
+                PlaySound(SoundEffectEnum.MeleeHit);
+                MsgPrint($"You hit {monsterName} with your {attackDescription}.");
+                // Roll the damage, with possible critical damage
+                int damage = DiceRoll(damageDice, damageSides);
+                damage = PlayerCriticalMelee(effectiveWeight, Bonuses.AttackBonus, damage);
+                damage += Bonuses.DamageBonus;
+                // Can't have negative damage
+                if (damage < 0)
+                {
+                    damage = 0;
+                }
+                // If it's a friend, it will get angry
+                if (monster.IsPet)
+                {
+                    MsgPrint($"{monsterName} gets angry!");
+                    monster.IsPet = false;
+                }
+                // Apply damage of the correct type to the monster
+                switch (mutation.MutationAttackType)
+                {
+                    case MutationAttackTypeEnum.Physical:
+                        monsterDies = DamageMonster(monsterIndex, damage, out fear, "");
+                        break;
+
+                    case MutationAttackTypeEnum.Poison:
+                        Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
+                        poisonProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
+                        break;
+
+                    case MutationAttackTypeEnum.Hellfire:
+                        Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
+                        hellFireProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
+                        break;
+                }
+                // The monster might hurt when we touch it
+                TouchZapPlayer(monster);
+            }
+            else
+            {
+                // We missed, so just let us know
+                PlaySound(SoundEffectEnum.Miss);
+                MsgPrint($"You miss {monsterName}.");
+            }
+        }
+
         GridTile tile = Map.Grid[y][x];
         Monster monster = Monsters[tile.MonsterIndex];
         MonsterRace race = monster.Race;
@@ -8079,75 +8006,6 @@ internal class Game
     }
 
     /// <summary>
-    /// Resolve a natural attack the player has from a mutation
-    /// </summary>
-    /// <param name="monsterIndex"> The monster being attacked </param>
-    /// <param name="mutation"> The mutation being used to attack </param>
-    /// <param name="fear"> Whether or not the monster is scared by the attack </param>
-    /// <param name="monsterDies"> Whether or not the monster is killed by the attack </param>
-    private void PlayerNaturalAttackOnMonster(int monsterIndex, Mutation mutation, out bool fear, out bool monsterDies)
-    {
-        fear = false;
-        monsterDies = false;
-        Monster monster = Monsters[monsterIndex];
-        MonsterRace race = monster.Race;
-        int damageSides = mutation.DamageDiceSize;
-        int damageDice = mutation.DamageDiceNumber;
-        int effectiveWeight = mutation.EquivalentWeaponWeight;
-        string attackDescription = mutation.AttackDescription;
-        string monsterName = monster.Name;
-        // See if the player hit the monster
-        int bonus = Bonuses.AttackBonus;
-        int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
-        if (PlayerCheckHitOnMonster(chance, race.ArmorClass, monster.IsVisible))
-        {
-            // It was a hit, so let the player know
-            PlaySound(SoundEffectEnum.MeleeHit);
-            MsgPrint($"You hit {monsterName} with your {attackDescription}.");
-            // Roll the damage, with possible critical damage
-            int damage = DiceRoll(damageDice, damageSides);
-            damage = PlayerCriticalMelee(effectiveWeight, Bonuses.AttackBonus, damage);
-            damage += Bonuses.DamageBonus;
-            // Can't have negative damage
-            if (damage < 0)
-            {
-                damage = 0;
-            }
-            // If it's a friend, it will get angry
-            if (monster.IsPet)
-            {
-                MsgPrint($"{monsterName} gets angry!");
-                monster.IsPet = false;
-            }
-            // Apply damage of the correct type to the monster
-            switch (mutation.MutationAttackType)
-            {
-                case MutationAttackTypeEnum.Physical:
-                    monsterDies = DamageMonster(monsterIndex, damage, out fear, "");
-                    break;
-
-                case MutationAttackTypeEnum.Poison:
-                    Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
-                    poisonProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill : true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
-                    break;
-
-                case MutationAttackTypeEnum.Hellfire:
-                    Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
-                    hellFireProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
-                    break;
-            }
-            // The monster might hurt when we touch it
-            TouchZapPlayer(monster);
-        }
-        else
-        {
-            // We missed, so just let us know
-            PlaySound(SoundEffectEnum.Miss);
-            MsgPrint($"You miss {monsterName}.");
-        }
-    }
-
-    /// <summary>
     /// Remove a tile by tunnelling through it
     /// </summary>
     /// <param name="y"> The y coordinate of the tile </param>
@@ -9070,14 +8928,6 @@ internal class Game
         }
     }
 
-    public int Turn
-    {
-        get
-        {
-            return _currentTurn;
-        }
-    }
-
     public void MarkLevelEntry()
     {
         _levelEntryTurn = _currentTurn;
@@ -9313,110 +9163,6 @@ internal class Game
                     a = ColorEnum.Pink;
                 }
                 Screen.Print(a, menuItems[i], row, 2);
-            }
-        }
-    }
-
-    private void PlayerOutfit()
-    {
-        if (Race.OutfitsWithScrollsOfLight || CharacterClass.OutfitsWithScrollsOfLight)
-        {
-            ItemFactory scrollLightItemClass = SingletonRepository.Get<ItemFactory>(nameof(LightScrollItemFactory));
-            Item item = new Item(this, scrollLightItemClass);
-            item.StackCount = RandomBetween(3, 7);
-            item.IsFlavorAware = true;
-            item.BecomeKnown();
-            item.IdentityIsStoreBought = true;
-            InventoryCarry(item);
-        }
-        else
-        {
-            ItemFactory woodenTorchItemClass = SingletonRepository.Get<ItemFactory>(nameof(WoodenTorchLightSourceItemFactory));
-            Item item = new Item(this, woodenTorchItemClass);
-            item.StackCount = RandomBetween(3, 7);
-            item.TurnsOfLightRemaining = RandomBetween(3, 7) * 500;
-            item.IsFlavorAware = true;
-            item.BecomeKnown();
-            InventoryCarry(item);
-            Item carried = item.TakeFromStack(1);
-            LightsourceWieldSlot lightsourceInventorySlot = (LightsourceWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(LightsourceWieldSlot));
-            SetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault(), carried);
-            WeightCarried += carried.EffectivePropertySet.Weight;
-        }
-
-        // Retrieve the tables to select from.
-        OutfitManifest[] characterClassAndRaceOutfitItemsTable = SingletonRepository.Get<OutfitManifest>(); // Get the table to select from.
-
-        ///
-        /// (string[] MatchValues, bool IsEqual)?
-        /// A null value is a wildcard, to match any null and non-null value.  OutfitManifests validate against null because character classes, races and realms are not null.
-        /// A non-null value has an IsEqual for an equality test.  True for == (Contains), false for != (Does not contain).
-        /// The MatchValues can be null to detect for null values.  This is generic and not applicable for OutfitManifests.
-        /// Otherwise a non-null and non-empty list of matching values is used for the contains.
-        /// 
-
-        // The match values for the character class, races and realms were validated to ensure null and empty values were not specified.
-        // Generate the character class match function based on the equality operator.
-        Func<OutfitManifest, bool> characterClassMatch = p =>
-            !p.CharacterClassBindingKey.HasValue || // The outfit manifest defined a wildcard
-            p.CharacterClassBindingKey.Value.MatchValues is not null && p.CharacterClassBindingKey.Value.IsEqual && p.CharacterClassBindingKey.Value.MatchValues.Contains(CharacterClass?.GetKey) || // One of the outfit manifest matches the character class
-            p.CharacterClassBindingKey.Value.MatchValues is not null && !p.CharacterClassBindingKey.Value.IsEqual && !p.CharacterClassBindingKey.Value.MatchValues.Contains(CharacterClass?.GetKey); // None of the outfit manifest values match the character class
-
-        // Generate the race match function based on the equality operator.
-        Func<OutfitManifest, bool> raceMatch = p =>
-            !p.RaceBindingKey.HasValue || // The outfit manifest defined a wildcard
-            p.RaceBindingKey.Value.MatchValues is not null && p.RaceBindingKey.Value.IsEqual && p.RaceBindingKey.Value.MatchValues.Contains(Race?.GetKey) || // One of the outfit manifest matches the race
-            p.RaceBindingKey.Value.MatchValues is not null && !p.RaceBindingKey.Value.IsEqual && !p.RaceBindingKey.Value.MatchValues.Contains(Race?.GetKey); // None of the outfit manifest values match the race
-
-        // Generate the realm match function based on the equality operator.  The logic here is that with equality, either the primary or secondary must match, but for inequality, neither the primary nor to secondary can match.
-        Func<OutfitManifest, bool> realmMatch = p =>
-            !p.RealmBindingKey.HasValue || // The outfit manifest defined a wildcard
-            p.RealmBindingKey.Value.MatchValues is not null && p.RealmBindingKey.Value.IsEqual && (p.RealmBindingKey.Value.MatchValues.Contains(PrimaryRealm?.GetKey) || p.RealmBindingKey.Value.MatchValues.Contains(SecondaryRealm?.GetKey)) || // One of the outfit manifest matches the race
-            p.RealmBindingKey.Value.MatchValues is not null && !p.RealmBindingKey.Value.IsEqual && !p.RealmBindingKey.Value.MatchValues.Contains(PrimaryRealm?.GetKey) && !p.RealmBindingKey.Value.MatchValues.Contains(SecondaryRealm?.GetKey); // None of the outfit manifest values match the race
-
-        OutfitManifest[] characterClassAndRaceOutfitItems = characterClassAndRaceOutfitItemsTable.Where(_outfitManifest => characterClassMatch(_outfitManifest) && raceMatch(_outfitManifest) && realmMatch(_outfitManifest)).ToArray();
-
-        // Outfit the player with all of the applicable items.
-        foreach (OutfitManifest characterClassAndRaceOutfitItemsEntry in characterClassAndRaceOutfitItems)
-        {
-            foreach ((ItemFactory itemFactory, ItemEnhancement[]? itemEnhancements, Expression StackCount, bool MakeKnown, bool WieldOne) in characterClassAndRaceOutfitItemsEntry.ItemFactoryAndEnhancements)
-            {
-                // Create an item from the factory.
-                Item item = new Item(this, itemFactory);
-                item.StackCount = ComputeIntegerExpression(StackCount).Value;
-
-                if (itemFactory.AimingTuple != null)
-                {
-                    item.WandChargesRemaining = 1;
-                }
-
-                if (itemEnhancements is not null)
-                {
-                    foreach (ItemEnhancement itemEnhancement in itemEnhancements)
-                    {
-                        item.SetRareItem(itemEnhancement);
-                    }
-                }
-
-                if (MakeKnown)
-                {
-                    item.IdentityIsStoreBought = true;
-                    item.IsFlavorAware = true;
-                    item.BecomeKnown();
-                }
-
-                if (WieldOne)
-                {
-                    bool wieldFailed = !item.Wield();
-                    if (wieldFailed)
-                    {
-                        throw new Exception($"The {item.GetDescription(false)} cannot be outfit because the all of the wield slots are currently in use.");
-                    }
-                }
-                else
-                {
-                    InventoryCarry(item);
-                }
             }
         }
     }
@@ -17042,17 +16788,6 @@ internal class Game
             var decrement = Math.Max((max / DecayRate), 1);
             AddFavor(isMax, -decrement);
         }
-    }
-
-    /// <summary>
-    /// Parses an expression and returns a <see cref="Expression"/> expression.
-    /// </summary>
-    /// <param name="expressionText"></param>
-    /// <returns></returns>
-    public Expression ParseAnyExpression(string expressionText)
-    {
-        Expression expression = ExpressionParser.ParseExpression(expressionText);
-        return expression;
     }
 
     /// <summary>
