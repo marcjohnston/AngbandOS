@@ -9,6 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FalseResistFearItemFilter : ItemFilterGameConfiguration
 {
-
-    public override bool? ResFear => false;
+    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
+    {
+        (nameof(ResFearAttribute), false),
+    };
 }

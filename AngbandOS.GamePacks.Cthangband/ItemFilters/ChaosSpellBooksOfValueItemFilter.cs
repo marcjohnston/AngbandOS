@@ -13,8 +13,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class ChaosSpellBooksOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]
-        {
-            nameof(ChaosSpellBooksItemClass)
-        };
+    {
+        nameof(ChaosSpellBooksItemClass)
+    };
     public override bool? IsOfValue => true;
 }

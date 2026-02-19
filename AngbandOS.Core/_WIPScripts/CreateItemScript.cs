@@ -54,6 +54,7 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
             return;
         }
 
+        qPtr.CreateRandomArtifact(true);
         qPtr.EnchantItem(Game.Difficulty, allowFixedArtifact, good, great, false);
         Game.DropNear(qPtr, null, Game.MapY.IntValue, Game.MapX.IntValue);
         Game.MsgPrint("Allocated.");

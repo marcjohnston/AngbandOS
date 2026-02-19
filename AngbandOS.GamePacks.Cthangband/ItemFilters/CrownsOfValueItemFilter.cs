@@ -10,8 +10,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CrownsOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]
-        {
-            nameof(CrownsItemClass)
-        };
+    {
+        nameof(CrownsItemClass)
+    };
     public override bool? IsOfValue => true;
 }

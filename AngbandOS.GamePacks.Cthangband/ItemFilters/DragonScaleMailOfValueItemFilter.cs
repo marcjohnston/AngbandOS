@@ -13,8 +13,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class DragonScaleMailOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]
-        {
-            nameof(DragonScaleMailsItemClass)
-        };
+    {
+        nameof(DragonScaleMailsItemClass)
+    };
     public override bool? IsOfValue => true;
 }

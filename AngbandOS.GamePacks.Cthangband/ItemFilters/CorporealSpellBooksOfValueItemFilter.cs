@@ -13,8 +13,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CorporealSpellBooksOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]
-        {
-            nameof(CorporealSpellBooksItemClass)
-        };
+    {
+        nameof(CorporealSpellBooksItemClass)
+    };
     public override bool? IsOfValue => true;
 }

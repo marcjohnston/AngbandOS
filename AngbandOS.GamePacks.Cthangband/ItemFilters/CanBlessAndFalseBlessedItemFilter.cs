@@ -9,6 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CanBlessAndFalseBlessedItemFilter : ItemFilterGameConfiguration
 {
-    public override bool? Blessed => false;
+    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
+    {
+        (nameof(BlessedAttribute), false),
+    };
     public override bool? CanApplyBlessedArtifactBias => true;
 }

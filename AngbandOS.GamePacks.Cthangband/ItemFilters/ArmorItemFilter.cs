@@ -12,5 +12,16 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ArmorItemFilter : ItemFilterGameConfiguration
 {
-    public override bool? IsArmor => true;
+    public override string[]? AnyMatchingItemClassNames => new string[]
+    {
+        nameof(BootsItemClass),
+        nameof(CloaksItemClass),
+        nameof(CrownsItemClass),
+        nameof(DragonScaleMailsItemClass),
+        nameof(GlovesItemClass),
+        nameof(HardArmorsItemClass),
+        nameof(HelmsItemClass),
+        nameof(ShieldsItemClass),
+        nameof(SoftArmorsItemClass),
+    };
 }

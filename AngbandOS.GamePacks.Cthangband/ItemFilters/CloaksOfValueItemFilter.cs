@@ -13,8 +13,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class CloaksOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]
-        {
-            nameof(CloaksItemClass)
-        };
+    {
+        nameof(CloaksItemClass)
+    };
     public override bool? IsOfValue => true;
 }

@@ -9,6 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FalseResistDisenchantItemFilter : ItemFilterGameConfiguration
 {
-
-    public override bool? ResDisen => false;
+    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
+    {
+        (nameof(ResDisenAttribute), false),
+    };
 }

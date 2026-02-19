@@ -13,9 +13,12 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class BlessedPolearmsOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]
-        {
-            nameof(PolearmsItemClass)
-        };
-    public override bool? IsBlessed => true;
+    {
+        nameof(PolearmsItemClass)
+    };
+    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
+    {
+        (nameof(BlessedAttribute), true),
+    };
     public override bool? IsOfValue => true;
 }

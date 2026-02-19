@@ -9,7 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FalseSheathOfElectricityItemFilter : ItemFilterGameConfiguration
 {
-
-    public override bool? ResElec => false;
-    public override bool? FactoryAllowsShElecricity => true;
+    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
+    {
+        (nameof(ResElecAttribute), false),
+        (nameof(CanProvideSheathOfElectricityAttribute), true),
+    };
 }

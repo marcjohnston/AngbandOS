@@ -9,6 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FalseResistDarknessItemFilter : ItemFilterGameConfiguration
 {
-
-    public override bool? ResDark => false;
+    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
+    {
+        (nameof(ResDarkAttribute), false),
+    };
 }

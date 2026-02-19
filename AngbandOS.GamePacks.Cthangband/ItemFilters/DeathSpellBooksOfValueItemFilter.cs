@@ -13,8 +13,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 public class DeathSpellBooksOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]
-        {
-            nameof(DeathSpellBooksItemClass)
-        };
+    {
+        nameof(DeathSpellBooksItemClass)
+    };
     public override bool? IsOfValue => true;
 }

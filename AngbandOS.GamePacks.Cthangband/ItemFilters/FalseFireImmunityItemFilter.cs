@@ -9,6 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FalseFireImmunityItemFilter : ItemFilterGameConfiguration
 {
-
-    public override bool? ImElec => false;
+    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
+    {
+        (nameof(ImFireAttribute), false),
+    };
 }

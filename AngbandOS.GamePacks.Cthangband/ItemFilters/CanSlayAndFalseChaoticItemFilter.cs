@@ -9,7 +9,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CanSlayAndFalseChaoticItemFilter : ItemFilterGameConfiguration
 {
-
-    public override bool? Chaotic => false;
+    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
+    {
+        (nameof(ChaoticAttribute), false),
+    };
     public override bool? ArtifactBiasCanSlay => true;
 }

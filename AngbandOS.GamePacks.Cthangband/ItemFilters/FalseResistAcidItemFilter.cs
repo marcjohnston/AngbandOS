@@ -9,6 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FalseResistAcidItemFilter : ItemFilterGameConfiguration
 {
-
-    public override bool? ResAcid => false;
+    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
+    {
+        (nameof(ResAcidAttribute), false),
+    };
 }
