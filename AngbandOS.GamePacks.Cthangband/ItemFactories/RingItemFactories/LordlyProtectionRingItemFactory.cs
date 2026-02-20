@@ -29,7 +29,6 @@ public class LordlyProtectionRingItemFactory : ItemFactoryGameConfiguration
     {
         (100, 5)
     };
-    public override bool IsWearableOrWieldable => true;
 
     /// <summary>
     /// Returns true, because rings are magical and should be detected with the detect magic scroll.

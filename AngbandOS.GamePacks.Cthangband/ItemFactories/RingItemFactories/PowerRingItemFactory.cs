@@ -23,7 +23,6 @@ public class PowerRingItemFactory : ItemFactoryGameConfiguration
     public override string? PreassignedItemFlavorBindingKey => nameof(PlainGoldRingItemFlavor);
     public override string? ItemEnhancementBindingKey => nameof(PowerRingItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 110;
-    public override bool IsWearableOrWieldable => true;
 
     /// <summary>
     /// Returns true, because rings are magical and should be detected with the detect magic scroll.

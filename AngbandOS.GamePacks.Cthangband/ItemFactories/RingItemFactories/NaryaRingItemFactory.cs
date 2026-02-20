@@ -21,7 +21,6 @@ public class NaryaRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override string? ItemEnhancementBindingKey => nameof(NaryaRingItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 80;
-    public override bool IsWearableOrWieldable => true;
 
     /// <summary>
     /// Returns true, because rings are magical and should be detected with the detect magic scroll.

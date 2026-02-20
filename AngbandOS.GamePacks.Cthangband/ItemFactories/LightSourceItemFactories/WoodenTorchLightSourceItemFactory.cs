@@ -9,11 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WoodenTorchLightSourceItemFactory : ItemFactoryGameConfiguration
 {
-    /// <summary>
-    /// Returns true because a torch can be used as fuel for another torch.
-    /// </summary>
-    public override bool IsFuelForTorch => true;
-
     public override string SymbolBindingKey => nameof(TildeSymbol);
     public override string Name => "Wooden Torch";
 
@@ -55,6 +50,5 @@ public class WoodenTorchLightSourceItemFactory : ItemFactoryGameConfiguration
     /// <summary>
     /// Returns true, because all light sources can be worn/wielded.
     /// </summary>
-    public override bool IsWearableOrWieldable => true;
     public override bool IsGood => true;
 }

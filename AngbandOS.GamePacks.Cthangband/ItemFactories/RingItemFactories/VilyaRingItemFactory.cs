@@ -21,7 +21,6 @@ public class VilyaRingItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorSuppressedDescriptionSyntax => "Ring~ of $Name$";
     public override string? ItemEnhancementBindingKey => nameof(VilyaRingItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 100;
-    public override bool IsWearableOrWieldable => true;
 
     /// <summary>
     /// Returns true, because rings are magical and should be detected with the detect magic scroll.

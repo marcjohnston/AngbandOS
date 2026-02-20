@@ -56,6 +56,5 @@ public class RoundedPebbleShotAmmunitionItemFactory : ItemFactoryGameConfigurati
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override bool IsWearableOrWieldable => true;
     public override bool IsGood => true;
 }

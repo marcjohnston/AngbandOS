@@ -21,7 +21,6 @@ public class IngweAmuletItemFactory : ItemFactoryGameConfiguration
     public override string? FlavorSuppressedDescriptionSyntax => "Amulet~ of $Name$";
     public override string? ItemEnhancementBindingKey => nameof(IngweAmuletItemFactoryItemEnhancement);
     public override int LevelNormallyFound => 60;
-    public override bool IsWearableOrWieldable => true;
 
     /// <summary>
     /// Returns true, because amulets are magical and should be detected with the detect magic scroll.

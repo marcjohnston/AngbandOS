@@ -141,7 +141,6 @@ internal sealed class Item : IComparable<Item>
     public bool CanSpikeDoorClosed => _factory.CanSpikeDoorClosed;
     public bool IsLanternFuel => _factory.IsLanternFuel;
     public ItemFactory[]? AmmunitionItemFactories => _factory.AmmunitionItemFactories;
-    public bool IsWearableOrWieldable => _factory.IsWearableOrWieldable;
     public bool ProvidesSunlight => _factory.ProvidesSunlight;
     public bool CanBeEaten => _factory.CanBeEaten;
     public IScriptItem? EatMagicScript => _factory.EatMagicScript;

@@ -42,7 +42,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         IsOfValue = itemFilterGameConfiguration.IsOfValue;
         IsTooHeavyToWield = itemFilterGameConfiguration.IsTooHeavyToWield;
         IsUsableSpellBook = itemFilterGameConfiguration.IsUsableSpellBook;
-        IsWearableOrWieldable = itemFilterGameConfiguration.IsWearableOrWieldable;
 
         CanApplyBlessedArtifactBias = itemFilterGameConfiguration.CanApplyBlessedArtifactBias;
         ArtifactBiasCanSlay = itemFilterGameConfiguration.ArtifactBiasCanSlay;
@@ -80,7 +79,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
             IsOfValue = IsOfValue,
             IsTooHeavyToWield = IsTooHeavyToWield,
             IsUsableSpellBook = IsUsableSpellBook,
-            IsWearableOrWieldable = IsWearableOrWieldable,
             AnyMatchingItemClassNames = AnyMatchingItemClassNames,
             AllNonMatchingItemClassNames = AllNonMatchingItemClassNames,
             AnyMatchingItemFactoryNames = AnyMatchingItemFactoryNames,
@@ -173,7 +171,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         itemMatchList.AddRange(AddBooleanMatch(IsOfValue, new IsOfValueBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsTooHeavyToWield, new IsTooHeavyToWieldBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsUsableSpellBook, new IsUsableSpellBookBooleanGetItemProperty(Game)));
-        itemMatchList.AddRange(AddBooleanMatch(IsWearableOrWieldable, new IsWearableOrWieldableBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddContainsMatch<ItemClass>(AnyMatchingItemClasses, AllNonMatchingItemClasses, new ItemClassGetItemProperty(Game)));
         itemMatchList.AddRange(AddContainsMatch<ItemFactory>(AnyMatchingItemFactories, AllNonMatchingItemFactories, new ItemFactoryGetItemProperty(Game)));
 
@@ -272,11 +269,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
     /// Returns true, if the item is either the primary or secondary spell book; false, if the item cannot be either the primary or secondary spell book; or null, if indifferent.  Returns null, by default.
     /// </summary>
     public bool? IsUsableSpellBook { get; } = null;
-
-    /// <summary>
-    /// Returns true, if the item is wearable; false, if the item cannot be wearable; or null, if indifferent.  Returns null, by default.
-    /// </summary>
-    public bool? IsWearableOrWieldable { get; } = null;
 
     /// <summary>
     /// Returns the key for the ItemClass that the ItemFactory must belong to; or null, if indifferent.  Returns null, by default.

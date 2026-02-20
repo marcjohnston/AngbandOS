@@ -234,16 +234,6 @@ public class ItemFactoryGameConfiguration
     public virtual bool IdentityCanBeSensed { get; set; } = false;
 
     /// <summary>
-    /// Returns true, if the item can be used as fuel for a torch.
-    /// </summary>
-    public virtual bool IsFuelForTorch { get; set; } = false;
-
-    /// <summary>
-    /// Returns true, if the item can be worn.
-    /// </summary>
-    public virtual bool IsWearableOrWieldable { get; set; } = false;
-
-    /// <summary>
     /// Returns true, if the item can be eaten.
     /// </summary>
     public virtual bool CanBeEaten { get; set; } = false;

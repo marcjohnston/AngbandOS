@@ -58,6 +58,5 @@ public class SteelBoltAmmunitionItemFactory : ItemFactoryGameConfiguration
     public override bool AskDestroyAll => false;
 
     public override bool HasQualityRatings => true;
-    public override bool IsWearableOrWieldable => true;
     public override bool IsGood => true;
 }

@@ -29,7 +29,6 @@ public class WisdomAmuletItemFactory : ItemFactoryGameConfiguration
     {
         (20, 1)
     };
-    public override bool IsWearableOrWieldable => true;
 
     /// <summary>
     /// Returns true, because amulets are magical and should be detected with the detect magic scroll.

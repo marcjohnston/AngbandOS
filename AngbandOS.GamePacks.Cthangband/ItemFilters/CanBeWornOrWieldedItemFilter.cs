@@ -12,5 +12,31 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CanBeWornOrWieldedItemFilter : ItemFilterGameConfiguration
 {
-    public override bool? IsWearableOrWieldable => true;
+    public override string[]? AnyMatchingItemClassNames => new string[]
+    {
+        nameof(BootsItemClass),
+        nameof(CloaksItemClass),
+        nameof(CrownsItemClass),
+        nameof(DragonScaleMailsItemClass),
+        nameof(GlovesItemClass),
+        nameof(HardArmorsItemClass),
+        nameof(HelmsItemClass),
+        nameof(ShieldsItemClass),
+        nameof(SoftArmorsItemClass),
+        nameof(RingsItemClass),
+
+        nameof(AmuletsItemClass),
+        nameof(LightSourcesItemClass),
+
+        nameof(PolearmsItemClass),
+        nameof(HaftedItemClass),
+        nameof(SwordsItemClass),
+        nameof(DiggersItemClass),
+        nameof(CrossbowItemClass),
+        nameof(ShotsItemClass),
+        nameof(ArrowsItemClass),
+        nameof(SlingItemClass),
+        nameof(BoltsItemClass),
+        nameof(BowItemClass),
+    };
 }

@@ -23,7 +23,6 @@ public class ResistFireRingItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override bool IsWearableOrWieldable => true;
 
     /// <summary>
     /// Returns true, because rings are magical and should be detected with the detect magic scroll.

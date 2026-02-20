@@ -51,7 +51,6 @@ public class LeadCrownArmorItemFactory : ItemFactoryGameConfiguration
     public override bool HasQualityRatings => true;
     public override bool IsArmor => true;
     public override bool IdentityCanBeSensed => true;
-    public override bool IsWearableOrWieldable => true;
     public override int RandartActivationChance => base.RandartActivationChance * 2;
 
     public override bool IsGood => true;

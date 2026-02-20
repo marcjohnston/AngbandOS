@@ -29,7 +29,6 @@ public class ProtectionRingItemFactory : ItemFactoryGameConfiguration
     {
         (10, 1)
     };
-    public override bool IsWearableOrWieldable => true;
     public override string? ItemEnhancementBindingKey => nameof(ProtectionRingItemFactoryItemEnhancement);
 
 

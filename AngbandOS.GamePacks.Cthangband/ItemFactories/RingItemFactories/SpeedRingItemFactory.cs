@@ -32,7 +32,6 @@ public class SpeedRingItemFactory : ItemFactoryGameConfiguration
     {
         (80, 1)
     };
-    public override bool IsWearableOrWieldable => true;
 
     /// <summary>
     /// Returns true, because rings are magical and should be detected with the detect magic scroll.

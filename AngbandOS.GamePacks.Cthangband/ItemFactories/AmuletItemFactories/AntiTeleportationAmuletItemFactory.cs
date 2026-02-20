@@ -28,7 +28,6 @@ public class AntiTeleportationAmuletItemFactory : ItemFactoryGameConfiguration
     {
         (30, 4)
     };
-    public override bool IsWearableOrWieldable => true;
 
     /// <summary>
     /// Returns true, because amulets are magical and should be detected with the detect magic scroll.
