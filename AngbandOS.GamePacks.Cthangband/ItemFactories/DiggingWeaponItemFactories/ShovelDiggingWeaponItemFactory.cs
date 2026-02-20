@@ -22,7 +22,6 @@ public class ShovelDiggingWeaponItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(ShovelDiggingWeaponItemFactoryItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(DiggersItemClass);
-    public override bool CanTunnel => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")

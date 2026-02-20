@@ -19,7 +19,6 @@ public class ItemFilterGameConfiguration
     public virtual bool? CanBeRead { get; set; } = null;
     public virtual bool? CanBeRecharged { get; set; } = null;
     public virtual bool? CanBeUsed { get; set; } = null;
-    public virtual bool? CanBeUsedToDig { get; set; } = null;
     public virtual bool? CanBeZapped { get; set; } = null;
     public virtual bool? CanProjectArrows { get; set; } = null;
     public virtual bool? IsFuelForTorch { get; set; } = null;

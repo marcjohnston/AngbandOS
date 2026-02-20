@@ -12,6 +12,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class DiggersOfValueItemFilter : ItemFilterGameConfiguration
 {
-    public override bool? CanBeUsedToDig => true;
+    public override string[]? AnyMatchingItemClassNames => new string[] { nameof(DiggersItemClass) };
     public override bool? IsOfValue => true;
 }

@@ -101,11 +101,6 @@ public class ItemFactoryGameConfiguration
     public virtual bool CanSpikeDoorClosed { get; set; } = false;
 
     /// <summary>
-    /// Returns true, if the item can be used to dig; false, otherwise.  Returns false, by default.
-    /// </summary>
-    public virtual bool CanTunnel { get; set; } = false;
-
-    /// <summary>
     /// Returns true, if the item is a bow and can project arrows; false, otherwise.  Returns false, by default.
     /// </summary>
     public virtual bool CanProjectArrows { get; set; } = false;

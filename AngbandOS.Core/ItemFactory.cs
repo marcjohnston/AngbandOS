@@ -52,7 +52,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         QuaffBindingTuple = itemFactoryGameConfiguration.QuaffBindingTuple;
         AmmunitionItemFactoryBindingKeys = itemFactoryGameConfiguration.AmmunitionItemFactoryBindingKeys;
         CanSpikeDoorClosed = itemFactoryGameConfiguration.CanSpikeDoorClosed;
-        CanTunnel = itemFactoryGameConfiguration.CanTunnel;
         CanProjectArrows = itemFactoryGameConfiguration.CanProjectArrows;
         EnchantmentMaximumCount = itemFactoryGameConfiguration.EnchantmentMaximumCount;
         IsMagical = itemFactoryGameConfiguration.IsMagical;
@@ -226,7 +225,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             QuaffBindingTuple = QuaffBindingTuple,
             AmmunitionItemFactoryBindingKeys = AmmunitionItemFactoryBindingKeys,
             CanSpikeDoorClosed = CanSpikeDoorClosed,
-            CanTunnel = CanTunnel,
             CanProjectArrows = CanProjectArrows,
             EnchantmentMaximumCount = EnchantmentMaximumCount,
             IsMagical = IsMagical,
@@ -1770,11 +1768,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns true, if the item can be used to spike a door closed; false, otherwise.  Returns false, by default.
     /// </summary>
     public bool CanSpikeDoorClosed { get; } = false;
-
-    /// <summary>
-    /// Returns true, if the item can be used to dig; false, otherwise.  Returns false, by default.
-    /// </summary>
-    public bool CanTunnel { get; } = false;
 
     /// <summary>
     /// Returns true, if the item is a bow and can project arrows; false, otherwise.  Returns false, by default.

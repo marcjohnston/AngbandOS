@@ -31,7 +31,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         CanBeRead = itemFilterGameConfiguration.CanBeRead;
         CanBeRecharged = itemFilterGameConfiguration.CanBeRecharged;
         CanBeUsed = itemFilterGameConfiguration.CanBeUsed;
-        CanBeUsedToDig = itemFilterGameConfiguration.CanBeUsedToDig;
         CanBeZapped = itemFilterGameConfiguration.CanBeZapped;
         CanProjectArrows = itemFilterGameConfiguration.CanProjectArrows;
         IsFuelForTorch = itemFilterGameConfiguration.IsFuelForTorch;
@@ -75,7 +74,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
             CanBeRead = CanBeRead,
             CanBeRecharged = CanBeRecharged,
             CanBeUsed = CanBeUsed,
-            CanBeUsedToDig = CanBeUsedToDig,
             CanBeZapped = CanBeZapped,
             CanProjectArrows = CanProjectArrows,
             IsFuelForTorch = IsFuelForTorch,
@@ -170,7 +168,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         itemMatchList.AddRange(AddBooleanMatch(CanBeRead, new CanBeReadBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanBeRecharged, new CanBeReadBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanBeUsed, new CanBeUsedBooleanGetItemProperty(Game)));
-        itemMatchList.AddRange(AddBooleanMatch(CanBeUsedToDig, new CanTunnelBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanBeZapped, new CanBeZappedBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanProjectArrows, new CanProjectArrowsBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsFuelForTorch, new IsFuelForTorchBooleanGetItemProperty(Game)));
@@ -242,12 +239,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
     /// Returns true, if the item can be used; false, if the item cannot be used; or null, if indifferent.  Returns null, by default.
     /// </summary>
     public bool? CanBeUsed { get; } = null;
-
-    /// <summary>
-    /// Returns true, if the item can be used to dig; false, if the item cannot be used to dig; or null, if indifferent.  Returns null, by default.
-    /// </summary>
-    [Obsolete("Use ItemClass")]
-    public bool? CanBeUsedToDig { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be zapped; false, if the item cannot be zapped; or null, if indifferent.  Returns null, by default.

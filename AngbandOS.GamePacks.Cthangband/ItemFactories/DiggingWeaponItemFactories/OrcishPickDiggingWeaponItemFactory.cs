@@ -22,7 +22,6 @@ public class OrcishPickDiggingWeaponItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(OrcishPickDiggingWeaponItemFactoryItemEnhancement);
 
     public override string ItemClassBindingKey => nameof(DiggersItemClass);
-    public override bool CanTunnel => true;
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]
     {
         (100, "3d5-3")
