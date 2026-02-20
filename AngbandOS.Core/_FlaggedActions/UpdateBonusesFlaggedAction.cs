@@ -256,7 +256,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasRegeneration = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Telepathy)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Get())
                     {
                         Game.HasTelepathy = true;
                     }

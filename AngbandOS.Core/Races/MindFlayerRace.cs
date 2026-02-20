@@ -46,7 +46,7 @@ internal class MindFlayerRace : Race
         }
         if (level > 29)
         {
-            itemCharacteristics.Telepathy = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);

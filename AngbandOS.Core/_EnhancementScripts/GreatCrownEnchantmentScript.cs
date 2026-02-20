@@ -52,7 +52,7 @@ internal class GreatCrownEnchantmentScript : Script, IEnhancementScript
                     item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfSeeingItemEnhancement)));
                     if (Game.DieRoll(3) == 1)
                     {
-                        item.EffectiveAttributeSet.Telepathy = true;
+                        item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
                     }
                     break;
             }

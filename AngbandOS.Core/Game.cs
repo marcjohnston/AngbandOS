@@ -13057,7 +13057,7 @@ internal partial class Game
         }
         if (CharacterClass.InstantTelepathyLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantTelepathyLevel)
         {
-            itemCharacteristics.Telepathy = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
         }
         if (CharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSpeedLevel && !MartialArtistHeavyArmor())
         {
@@ -13176,7 +13176,7 @@ internal partial class Game
         }
         if (Esp)
         {
-            itemCharacteristics.Telepathy = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
         }
         if (HasFreeAction)
         {

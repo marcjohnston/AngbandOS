@@ -45,7 +45,7 @@ internal class SpectreRace : Race
         itemCharacteristics.SlowDigest = true;
         if (level > 34)
         {
-            itemCharacteristics.Telepathy = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);

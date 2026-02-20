@@ -308,7 +308,7 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Levitate", 33, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Feather);
         DisplayStat("Light", 34, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Radius > 0);
         DisplayStat("See Invis", 35, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SeeInvis);
-        DisplayStat("Telepathy", 36, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Telepathy);
+        DisplayStat("Telepathy", 36, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Get());
 
         Game.DisplayPlayerEquippy(20, 52 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 52 + 11);

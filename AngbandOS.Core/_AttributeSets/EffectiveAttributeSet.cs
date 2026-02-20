@@ -1473,20 +1473,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             }
         }
     }
-    public bool Telepathy
-    {
-        get
-        {
-            return Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
-            }
-        }
-    }
     public int TreasureRating
     {
         get
