@@ -7096,11 +7096,12 @@ internal partial class Game
                     {
                         int stepK = totalDamage;
                         string message = meleeItem.EffectiveAttributeSet.Vorpal1InChance == 0 ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
+                        int vorpalExtraAttacks1InChance = meleeItem.EffectiveAttributeSet.VorpalExtraAttacks1InChance;
                         MsgPrint(message);
                         do
                         {
                             totalDamage += stepK;
-                        } while (meleeItem.EffectiveAttributeSet.VorpalExtraAttacks1InChance >= 1 && DieRoll(meleeItem.EffectiveAttributeSet.VorpalExtraAttacks1InChance) == 1);
+                        } while (vorpalExtraAttacks1InChance >= 1 && DieRoll(vorpalExtraAttacks1InChance) == 1);
                     }
                     // Add bonus damage for the weapon
                     totalDamage += meleeItem.EffectiveAttributeSet.ToDamage;
