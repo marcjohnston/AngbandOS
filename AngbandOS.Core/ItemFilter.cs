@@ -21,6 +21,10 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         Game = game;
         Key = itemFilterGameConfiguration.Key ?? itemFilterGameConfiguration.GetType().Name;
 
+        AnyMatchingItemClassNames = itemFilterGameConfiguration.AnyMatchingItemClassNames;
+        AllNonMatchingItemClassNames = itemFilterGameConfiguration.AllNonMatchingItemClassNames;
+        AnyMatchingItemFactoryNames = itemFilterGameConfiguration.AnyMatchingItemFactoryNames;
+        AllNonMatchingItemFactoryNames = itemFilterGameConfiguration.AllNonMatchingItemFactoryNames;
         OrAttributeMatchingBindings = itemFilterGameConfiguration.OrAttributeMatchingBindings;
 
         CanBeActivated = itemFilterGameConfiguration.CanBeActivated;
@@ -33,17 +37,12 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         CanBeUsed = itemFilterGameConfiguration.CanBeUsed;
         CanBeZapped = itemFilterGameConfiguration.CanBeZapped;
         CanProjectArrows = itemFilterGameConfiguration.CanProjectArrows;
-        IsFuelForTorch = itemFilterGameConfiguration.IsFuelForTorch;
         IsKnown = itemFilterGameConfiguration.IsKnown;
         IsLanternFuel = itemFilterGameConfiguration.IsLanternFuel;
         IsOfValue = itemFilterGameConfiguration.IsOfValue;
         IsTooHeavyToWield = itemFilterGameConfiguration.IsTooHeavyToWield;
         IsUsableSpellBook = itemFilterGameConfiguration.IsUsableSpellBook;
         IsWearableOrWieldable = itemFilterGameConfiguration.IsWearableOrWieldable;
-        AnyMatchingItemClassNames = itemFilterGameConfiguration.AnyMatchingItemClassNames;
-        AllNonMatchingItemClassNames = itemFilterGameConfiguration.AllNonMatchingItemClassNames;
-        AnyMatchingItemFactoryNames = itemFilterGameConfiguration.AnyMatchingItemFactoryNames;
-        AllNonMatchingItemFactoryNames = itemFilterGameConfiguration.AllNonMatchingItemFactoryNames;
 
         CanApplyBlessedArtifactBias = itemFilterGameConfiguration.CanApplyBlessedArtifactBias;
         ArtifactBiasCanSlay = itemFilterGameConfiguration.ArtifactBiasCanSlay;
@@ -76,7 +75,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
             CanBeUsed = CanBeUsed,
             CanBeZapped = CanBeZapped,
             CanProjectArrows = CanProjectArrows,
-            IsFuelForTorch = IsFuelForTorch,
             IsKnown = IsKnown,
             IsLanternFuel = IsLanternFuel,
             IsOfValue = IsOfValue,
@@ -170,7 +168,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         itemMatchList.AddRange(AddBooleanMatch(CanBeUsed, new CanBeUsedBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanBeZapped, new CanBeZappedBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanProjectArrows, new CanProjectArrowsBooleanGetItemProperty(Game)));
-        itemMatchList.AddRange(AddBooleanMatch(IsFuelForTorch, new IsFuelForTorchBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsKnown, new IsKnownBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsLanternFuel, new IsLanternFuelBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsOfValue, new IsOfValueBooleanGetItemProperty(Game)));
@@ -249,11 +246,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
     /// Returns true, if the item must be able to project arrows; false, if the item cannot project arrows; or null, if indifferent.  Returns null, by default.
     /// </summary>
     public bool? CanProjectArrows { get; } = null;
-
-    /// <summary>
-    /// Returns true, if the item must capable of fueling a torch; false, if the item cannot be fuel for a torch; or null, if indifferent.  Returns null, by default.
-    /// </summary>
-    public bool? IsFuelForTorch { get; } = null;
 
     /// <summary>
     /// Returns true, if the item must be known; false, if the item cannot be known; or null, if indifferent.  Returns null, by default.

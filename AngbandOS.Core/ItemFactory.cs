@@ -80,7 +80,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         MakeObjectCountExpression = itemFactoryGameConfiguration.MakeObjectCountExpression;
         GetsDamageMultiplier = itemFactoryGameConfiguration.GetsDamageMultiplier;
         IdentityCanBeSensed = itemFactoryGameConfiguration.IdentityCanBeSensed;
-        IsFuelForTorch = itemFactoryGameConfiguration.IsFuelForTorch;
         IsWearableOrWieldable = itemFactoryGameConfiguration.IsWearableOrWieldable;
         CanBeEaten = itemFactoryGameConfiguration.CanBeEaten;
         IsArmor = itemFactoryGameConfiguration.IsArmor;
@@ -254,7 +253,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             MakeObjectCountExpression = MakeObjectCountExpression,
             GetsDamageMultiplier = GetsDamageMultiplier,
             IdentityCanBeSensed = IdentityCanBeSensed,
-            IsFuelForTorch = IsFuelForTorch,
             IsWearableOrWieldable = IsWearableOrWieldable,
             CanBeEaten = CanBeEaten,
             IsArmor = IsArmor,
@@ -1896,11 +1894,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns true, if the item can be sensed; false, otherwise.  Returns false, by default.
     /// </summary>
     public bool IdentityCanBeSensed { get; } = false;
-
-    /// <summary>
-    /// Returns true, if the item can be used as fuel for a torch.
-    /// </summary>
-    public bool IsFuelForTorch { get; } = false;
 
     /// <summary>
     /// Returns true, if the item can be worn.

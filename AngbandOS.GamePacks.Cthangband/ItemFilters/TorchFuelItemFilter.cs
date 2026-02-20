@@ -12,5 +12,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class TorchFuelItemFilter : ItemFilterGameConfiguration
 {
-    public override bool? IsFuelForTorch => true;
+    public override string[]? AnyMatchingItemFactoryNames => new string[] { nameof(WoodenTorchLightSourceItemFactory) };
 }
