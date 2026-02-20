@@ -1010,23 +1010,12 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
         {
             return Get<SumEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get();
         }
-        set
-        {
-            Get<SumEffectiveAttributeValue>(nameof(BurnRateAttribute)).Append(value);
-        }
     }
     public bool Reflect
     {
         get
         {
             return Get<OrEffectiveAttributeValue>(nameof(ReflectAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(ReflectAttribute)).Set();
-            }
         }
     }
     public bool Regen
@@ -1267,17 +1256,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             }
         }
     }
-    public int SavingThrow
-    {
-        get
-        {
-            return Get<SumEffectiveAttributeValue>(nameof(SavingThrowAttribute)).Get();
-        }
-        set
-        {
-            Get<SumEffectiveAttributeValue>(nameof(SavingThrowAttribute)).Set(value);
-        }
-    }
     public bool SeeInvis
     {
         get
@@ -1340,13 +1318,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
         {
             return Get<OrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Get();
         }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Set();
-            }
-        }
     }
     public bool SlayDemon
     {
@@ -1368,23 +1339,12 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
         {
             return Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get();
         }
-        set
-        {
-            Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Set(value);
-        }
     }
     public bool SlayEvil
     {
         get
         {
             return Get<OrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Set();
-            }
         }
     }
     public bool SlayGiant
@@ -1393,26 +1353,12 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
         {
             return Get<OrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Get();
         }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Set();
-            }
-        }
     }
     public bool SlayOrc
     {
         get
         {
             return Get<OrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Set();
-            }
         }
     }
     public bool SlayTroll
@@ -1421,26 +1367,12 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
         {
             return Get<OrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Get();
         }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Set();
-            }
-        }
     }
     public bool SlayUndead
     {
         get
         {
             return Get<OrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Set();
-            }
         }
     }
     public bool SlowDigest
@@ -1580,26 +1512,11 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Set(value);
         }
     }
-    public int UseDevice
-    {
-        get
-        {
-            return Get<SumEffectiveAttributeValue>(nameof(UseDeviceAttribute)).Get();
-        }
-        set
-        {
-            Get<SumEffectiveAttributeValue>(nameof(UseDeviceAttribute)).Set(value);
-        }
-    }
     public int Value
     {
         get
         {
             return Get<SumEffectiveAttributeValue>(nameof(ValueAttribute)).Get();
-        }
-        set
-        {
-            Get<SumEffectiveAttributeValue>(nameof(ValueAttribute)).Append(value);
         }
     }
     public bool Valueless
@@ -1622,13 +1539,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
         {
             return Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get();
         }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Set();
-            }
-        }
     }
     public int Vorpal1InChance
     {
@@ -1646,10 +1556,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
         get
         {
             return Get<SumEffectiveAttributeValue>(nameof(VorpalExtraAttacks1InChanceAttribute)).Get();
-        }
-        set
-        {
-            Get<SumEffectiveAttributeValue>(nameof(VorpalExtraAttacks1InChanceAttribute)).Set(value);
         }
     }
     public int Weight
@@ -1669,13 +1575,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
         {
             return Get<OrEffectiveAttributeValue>(nameof(WraithAttribute)).Get();
         }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(WraithAttribute)).Set();
-            }
-        }
     }
     public bool XtraMight
     {
@@ -1683,26 +1582,12 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
         {
             return Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get();
         }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Set();
-            }
-        }
     }
     public bool XtraShots
     {
         get
         {
             return Get<OrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Set();
-            }
         }
     }
     #endregion
