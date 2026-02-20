@@ -22,7 +22,7 @@ internal class RangedWeaponWieldSlot : EquipmentWieldSlot
     public override void AddItem(Item item)
     {
         Game.SetInventoryItem(InventorySlotEnum.RangedWeapon, item);
-        Game.WeightCarried += item.EffectivePropertySet.Weight;
+        Game.WeightCarried += item.EffectiveAttributeSet.Weight;
     }
     public override string MentionUse(int? index)
     {
@@ -30,7 +30,7 @@ internal class RangedWeaponWieldSlot : EquipmentWieldSlot
         if (Count > 0 && index.HasValue)
         {
             Item? oPtr = Game.GetInventoryItem(index.Value);
-            if (oPtr != null && Game.StrengthAbility.StrMaxWeaponWeight < oPtr.EffectivePropertySet.Weight / 10)
+            if (oPtr != null && Game.StrengthAbility.StrMaxWeaponWeight < oPtr.EffectiveAttributeSet.Weight / 10)
             {
                 p = "Just holding";
             }
@@ -41,7 +41,7 @@ internal class RangedWeaponWieldSlot : EquipmentWieldSlot
     public override string DescribeItemLocation(Item oPtr)
     {
         string p = "shooting missiles with";
-        if (oPtr != null && Game.StrengthAbility.StrMaxWeaponWeight < oPtr.EffectivePropertySet.Weight / 10)
+        if (oPtr != null && Game.StrengthAbility.StrMaxWeaponWeight < oPtr.EffectiveAttributeSet.Weight / 10)
         {
             p = "just holding";
         }

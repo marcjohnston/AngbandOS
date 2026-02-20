@@ -22,6 +22,6 @@ internal class TerribleTunnelEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.Tunnel = 0 - item.EffectivePropertySet.Tunnel;
+        item.EffectiveAttributeSet.Tunnel = 0 - item.EffectiveAttributeSet.Tunnel;
     }
 }

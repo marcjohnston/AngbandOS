@@ -51,16 +51,16 @@ internal class GreatAmmoEnchantmentScript : Script, IEnhancementScript
                 break;
             case 12:
                 item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(AmmoOfSlayingItemEnhancement)));
-                item.EffectivePropertySet.DamageDice = item.EffectivePropertySet.DamageDice + 1;
+                item.EffectiveAttributeSet.DamageDice = item.EffectiveAttributeSet.DamageDice + 1;
                 break;
         }
-        while (Game.RandomLessThan(10 * item.EffectivePropertySet.DamageDice * item.EffectivePropertySet.DiceSides) == 0)
+        while (Game.RandomLessThan(10 * item.EffectiveAttributeSet.DamageDice * item.EffectiveAttributeSet.DiceSides) == 0)
         {
-            item.EffectivePropertySet.DamageDice = item.EffectivePropertySet.DamageDice + 1;
+            item.EffectiveAttributeSet.DamageDice = item.EffectiveAttributeSet.DamageDice + 1;
         }
-        if (item.EffectivePropertySet.DamageDice > 9)
+        if (item.EffectiveAttributeSet.DamageDice > 9)
         {
-            item.EffectivePropertySet.DamageDice = 9;
+            item.EffectiveAttributeSet.DamageDice = 9;
         }
     }
 }

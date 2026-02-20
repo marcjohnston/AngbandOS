@@ -49,7 +49,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
                         Item? item = Game.GetInventoryItem(index);
                         if (item != null)
                         {
-                            curWgt += item.EffectivePropertySet.Weight;
+                            curWgt += item.EffectiveAttributeSet.Weight;
                         }
                     }
                 }

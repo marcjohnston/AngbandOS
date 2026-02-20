@@ -62,11 +62,11 @@ internal class FireItemScript : UniversalScript, IGetKey
         Game.PlaySound(SoundEffectEnum.Shoot);
         // Get the details of the shot
         string missileName = individualAmmunition.GetFullDescription(false);
-        ColorEnum missileColor = individualAmmunition.EffectivePropertySet.Color;
+        ColorEnum missileColor = individualAmmunition.EffectiveAttributeSet.Color;
         char missileCharacter = individualAmmunition.FlavorSymbol.Character;
         int shotSpeed = Game.MissileAttacksPerRound;
-        int shotDamage = Game.DiceRoll(individualAmmunition.EffectivePropertySet.DamageDice, individualAmmunition.EffectivePropertySet.DiceSides) + individualAmmunition.EffectivePropertySet.ToDamage + missileWeapon.EffectivePropertySet.ToDamage;
-        int attackBonus = Game.Bonuses.AttackBonus + individualAmmunition.EffectivePropertySet.MeleeToHit + missileWeapon.EffectivePropertySet.MeleeToHit;
+        int shotDamage = Game.DiceRoll(individualAmmunition.EffectiveAttributeSet.DamageDice, individualAmmunition.EffectiveAttributeSet.DiceSides) + individualAmmunition.EffectiveAttributeSet.ToDamage + missileWeapon.EffectiveAttributeSet.ToDamage;
+        int attackBonus = Game.Bonuses.AttackBonus + individualAmmunition.EffectiveAttributeSet.MeleeToHit + missileWeapon.EffectiveAttributeSet.MeleeToHit;
         int chanceToHit = Game.SkillRanged + (attackBonus * Constants.BthPlusAdj);
 
         // Damage multiplier depends on weapon
@@ -170,7 +170,7 @@ internal class FireItemScript : UniversalScript, IGetKey
                     }
                     // Work out the damage done
                     shotDamage = individualAmmunition.AdjustDamageForMonsterType(shotDamage, monster);
-                    shotDamage = Game.PlayerCriticalRanged(individualAmmunition.EffectivePropertySet.Weight, individualAmmunition.EffectivePropertySet.MeleeToHit, shotDamage);
+                    shotDamage = Game.PlayerCriticalRanged(individualAmmunition.EffectiveAttributeSet.Weight, individualAmmunition.EffectiveAttributeSet.MeleeToHit, shotDamage);
                     if (shotDamage < 0)
                     {
                         shotDamage = 0;

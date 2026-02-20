@@ -28,7 +28,7 @@ internal class BrandWeaponAsVampiricScript : Script, IScript, ICastSpellScript
             Item? item = Game.GetInventoryItem(inventorySlot);
 
             // We must have a non-rare, non-artifact weapon that isn't cursed
-            if (item is not null && !item.IsArtifact && !item.IsRare && !item.EffectivePropertySet.IsCursed)
+            if (item is not null && !item.IsArtifact && !item.IsRare && !item.EffectiveAttributeSet.IsCursed)
             {
                 string itemName = item.GetDescription(false);
 

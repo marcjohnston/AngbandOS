@@ -541,7 +541,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         if (IsRangedWeapon)
         {
             int power = MissileDamageMultiplier;
-            if (item.EffectivePropertySet.XtraMight)
+            if (item.EffectiveAttributeSet.XtraMight)
             {
                 power++;
             }
@@ -549,99 +549,99 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
+                s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
 
-                if (item.EffectivePropertySet.BaseArmorClass != 0)
+                if (item.EffectiveAttributeSet.BaseArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.EffectivePropertySet.BaseArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
+                    s += $" [{item.EffectiveAttributeSet.BaseArmorClass},{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
-                else if (item.EffectivePropertySet.BonusArmorClass != 0)
+                else if (item.EffectiveAttributeSet.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
+                    s += $" [{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
             }
-            else if (item.EffectivePropertySet.BaseArmorClass != 0)
+            else if (item.EffectiveAttributeSet.BaseArmorClass != 0)
             {
-                s += $" [{item.EffectivePropertySet.BaseArmorClass}]";
+                s += $" [{item.EffectiveAttributeSet.BaseArmorClass}]";
             }
         }
         else if (IsWeapon)
         {
-            s += $" ({item.EffectivePropertySet.DamageDice}d{item.EffectivePropertySet.DiceSides})";
+            s += $" ({item.EffectiveAttributeSet.DamageDice}d{item.EffectiveAttributeSet.DiceSides})";
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
+                s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
 
-                if (item.EffectivePropertySet.BaseArmorClass != 0)
+                if (item.EffectiveAttributeSet.BaseArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.EffectivePropertySet.BaseArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
+                    s += $" [{item.EffectiveAttributeSet.BaseArmorClass},{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
-                else if (item.EffectivePropertySet.BonusArmorClass != 0)
+                else if (item.EffectiveAttributeSet.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
+                    s += $" [{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
             }
-            else if (item.EffectivePropertySet.BaseArmorClass != 0)
+            else if (item.EffectiveAttributeSet.BaseArmorClass != 0)
             {
-                s += $" [{item.EffectivePropertySet.BaseArmorClass}]";
+                s += $" [{item.EffectiveAttributeSet.BaseArmorClass}]";
             }
         }
         else if (IsArmor)
         {
             if (item.IsKnown())
             {
-                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.MeleeToHit != 0 && item.EffectivePropertySet.ToDamage != 0)
+                if (item.EffectiveAttributeSet.ShowMods || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
+                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
-                else if (item.EffectivePropertySet.MeleeToHit != 0)
+                else if (item.EffectiveAttributeSet.MeleeToHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)})";
+                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)})";
                 }
-                else if (item.EffectivePropertySet.ToDamage != 0)
+                else if (item.EffectiveAttributeSet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToDamage)})";
+                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
 
                 // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                s += $" [{item.EffectivePropertySet.BaseArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
+                s += $" [{item.EffectiveAttributeSet.BaseArmorClass},{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
             }
-            else if (item.EffectivePropertySet.BaseArmorClass != 0)
+            else if (item.EffectiveAttributeSet.BaseArmorClass != 0)
             {
-                s += $" [{item.EffectivePropertySet.BaseArmorClass}]";
+                s += $" [{item.EffectiveAttributeSet.BaseArmorClass}]";
             }
         }
         else
         {
             if (item.IsKnown())
             {
-                if (item.EffectivePropertySet.ShowMods || item.EffectivePropertySet.MeleeToHit != 0 && item.EffectivePropertySet.ToDamage != 0)
+                if (item.EffectiveAttributeSet.ShowMods || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)},{GetSignedValue(item.EffectivePropertySet.ToDamage)})";
+                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
-                else if (item.EffectivePropertySet.MeleeToHit != 0)
+                else if (item.EffectiveAttributeSet.MeleeToHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.MeleeToHit)})";
+                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)})";
                 }
-                else if (item.EffectivePropertySet.ToDamage != 0)
+                else if (item.EffectiveAttributeSet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectivePropertySet.ToDamage)})";
+                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
 
-                if (item.EffectivePropertySet.BaseArmorClass != 0)
+                if (item.EffectiveAttributeSet.BaseArmorClass != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.EffectivePropertySet.BaseArmorClass},{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
+                    s += $" [{item.EffectiveAttributeSet.BaseArmorClass},{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
-                else if (item.EffectivePropertySet.BonusArmorClass != 0)
+                else if (item.EffectiveAttributeSet.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.EffectivePropertySet.BonusArmorClass)}]";
+                    s += $" [{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
             }
         }
@@ -696,7 +696,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             if (commonBonusValue.HasValue && commonBonusValue.Value.bonusValue != 0)
             {
                 s += $" ({GetSignedValue(commonBonusValue.Value.bonusValue)}";
-                if (!item.EffectivePropertySet.HideType && commonBonusValue.Value.priorityBonusName != "")
+                if (!item.EffectiveAttributeSet.HideType && commonBonusValue.Value.priorityBonusName != "")
                 {
                     s += $" {commonBonusValue.Value.priorityBonusName}";
                 }
@@ -723,101 +723,101 @@ internal sealed class ItemFactory : IGetKey, IToJson
     private (int bonusValue, string priorityBonusName)? CommonBonusValue(Item item)
     {
         (int bonusValue, string priorityBonusName)? value = null;
-        if (item.EffectivePropertySet.Speed != 0)
+        if (item.EffectiveAttributeSet.Speed != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Speed != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Speed != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Speed, "speed");
+            value = (item.EffectiveAttributeSet.Speed, "speed");
         }
-        if (item.EffectivePropertySet.Attacks != 0)
+        if (item.EffectiveAttributeSet.Attacks != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Attacks != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Attacks != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Attacks, Game.Pluralize("attack", item.EffectivePropertySet.Attacks));
+            value = (item.EffectiveAttributeSet.Attacks, Game.Pluralize("attack", item.EffectiveAttributeSet.Attacks));
         }
-        if (item.EffectivePropertySet.Stealth != 0)
+        if (item.EffectiveAttributeSet.Stealth != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Stealth != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Stealth != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Stealth, "stealth");
+            value = (item.EffectiveAttributeSet.Stealth, "stealth");
         }
-        if (item.EffectivePropertySet.Search != 0)
+        if (item.EffectiveAttributeSet.Search != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Search != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Search != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Search, "searching");
+            value = (item.EffectiveAttributeSet.Search, "searching");
         }
-        if (item.EffectivePropertySet.Infravision != 0)
+        if (item.EffectiveAttributeSet.Infravision != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Infravision != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Infravision != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Infravision, "infravision");
+            value = (item.EffectiveAttributeSet.Infravision, "infravision");
         }
-        if (item.EffectivePropertySet.Charisma != 0)
+        if (item.EffectiveAttributeSet.Charisma != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Charisma != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Charisma != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Charisma, "");
+            value = (item.EffectiveAttributeSet.Charisma, "");
         }
-        if (item.EffectivePropertySet.Constitution != 0)
+        if (item.EffectiveAttributeSet.Constitution != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Constitution != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Constitution != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Constitution, "");
+            value = (item.EffectiveAttributeSet.Constitution, "");
         }
-        if (item.EffectivePropertySet.Dexterity != 0)
+        if (item.EffectiveAttributeSet.Dexterity != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Dexterity != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Dexterity != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Dexterity, "");
+            value = (item.EffectiveAttributeSet.Dexterity, "");
         }
-        if (item.EffectivePropertySet.Intelligence != 0)
+        if (item.EffectiveAttributeSet.Intelligence != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Intelligence != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Intelligence != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Intelligence, "");
+            value = (item.EffectiveAttributeSet.Intelligence, "");
         }
-        if (item.EffectivePropertySet.Strength != 0)
+        if (item.EffectiveAttributeSet.Strength != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Strength != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Strength != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Strength, "");
+            value = (item.EffectiveAttributeSet.Strength, "");
         }
-        if (item.EffectivePropertySet.Wisdom != 0)
+        if (item.EffectiveAttributeSet.Wisdom != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Wisdom != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Wisdom != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Wisdom, "");
+            value = (item.EffectiveAttributeSet.Wisdom, "");
         }
-        if (item.EffectivePropertySet.Tunnel != 0)
+        if (item.EffectiveAttributeSet.Tunnel != 0)
         {
-            if (value.HasValue && item.EffectivePropertySet.Tunnel != value.Value.bonusValue)
+            if (value.HasValue && item.EffectiveAttributeSet.Tunnel != value.Value.bonusValue)
             {
                 return null;
             }
-            value = (item.EffectivePropertySet.Tunnel, "");
+            value = (item.EffectiveAttributeSet.Tunnel, "");
         }
         if (!value.HasValue)
         {
@@ -863,7 +863,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         {
             return 0;
         }
-        return item.EffectivePropertySet.Radius;
+        return item.EffectiveAttributeSet.Radius;
     }
 
     /// <summary>

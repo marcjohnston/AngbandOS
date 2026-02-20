@@ -108,7 +108,7 @@ internal class AimWandScript : UniversalScript, IGetKey
             {
                 Item splitItem = item.TakeFromStack(1);
                 item.WandChargesRemaining++;
-                Game.WeightCarried -= splitItem.EffectivePropertySet.Weight;
+                Game.WeightCarried -= splitItem.EffectiveAttributeSet.Weight;
                 Game.InventoryCarry(splitItem);
                 Game.MsgPrint("You unstack your wand.");
             }

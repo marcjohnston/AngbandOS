@@ -19,6 +19,6 @@ internal class RightHandWieldSlot : EquipmentWieldSlot
     public override void AddItem(Item item)
     {
         Game.SetInventoryItem(InventorySlotEnum.RightHand, item);
-        Game.WeightCarried += item.EffectivePropertySet.Weight;
+        Game.WeightCarried += item.EffectiveAttributeSet.Weight;
     }
 }

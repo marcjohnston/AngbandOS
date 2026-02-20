@@ -2019,7 +2019,7 @@ internal partial class Game
                 Item carried = item.TakeFromStack(1);
                 LightsourceWieldSlot lightsourceInventorySlot = (LightsourceWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(LightsourceWieldSlot));
                 SetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault(), carried);
-                WeightCarried += carried.EffectivePropertySet.Weight;
+                WeightCarried += carried.EffectiveAttributeSet.Weight;
             }
 
             // Retrieve the tables to select from.
@@ -5153,27 +5153,27 @@ internal partial class Game
             int chance;
             if ((eflag & Constants.EnchTohit) != 0)
             {
-                if (oPtr.EffectivePropertySet.MeleeToHit < 0)
+                if (oPtr.EffectiveAttributeSet.MeleeToHit < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.EffectivePropertySet.MeleeToHit > 15)
+                else if (oPtr.EffectiveAttributeSet.MeleeToHit > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = chanceIn1000[oPtr.EffectivePropertySet.MeleeToHit];
+                    chance = chanceIn1000[oPtr.EffectiveAttributeSet.MeleeToHit];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.EffectivePropertySet.MeleeToHit++;
+                    oPtr.EffectiveAttributeSet.MeleeToHit++;
                     res = true;
-                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.MeleeToHit >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.PermaCurse && oPtr.EffectiveAttributeSet.MeleeToHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
+                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
+                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -5181,27 +5181,27 @@ internal partial class Game
             }
             if ((eflag & Constants.EnchTodam) != 0)
             {
-                if (oPtr.EffectivePropertySet.ToDamage < 0)
+                if (oPtr.EffectiveAttributeSet.ToDamage < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.EffectivePropertySet.ToDamage > 15)
+                else if (oPtr.EffectiveAttributeSet.ToDamage > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = chanceIn1000[oPtr.EffectivePropertySet.ToDamage];
+                    chance = chanceIn1000[oPtr.EffectiveAttributeSet.ToDamage];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.EffectivePropertySet.ToDamage++;
+                    oPtr.EffectiveAttributeSet.ToDamage++;
                     res = true;
-                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.ToDamage >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.PermaCurse && oPtr.EffectiveAttributeSet.ToDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
+                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
+                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -5209,28 +5209,28 @@ internal partial class Game
             }
             if ((eflag & Constants.EnchToac) != 0)
             {
-                if (oPtr.EffectivePropertySet.BonusArmorClass < 0)
+                if (oPtr.EffectiveAttributeSet.BonusArmorClass < 0)
                 {
                     chance = 0;
                 }
-                else if (oPtr.EffectivePropertySet.BonusArmorClass > 15)
+                else if (oPtr.EffectiveAttributeSet.BonusArmorClass > 15)
                 {
                     chance = 1000;
                 }
                 else
                 {
-                    chance = chanceIn1000[oPtr.EffectivePropertySet.BonusArmorClass];
+                    chance = chanceIn1000[oPtr.EffectiveAttributeSet.BonusArmorClass];
                 }
                 if (DieRoll(1000) > chance && (!isArtifact || RandomLessThan(100) < 50))
                 {
-                    oPtr.EffectivePropertySet.BonusArmorClass++;
+                    oPtr.EffectiveAttributeSet.BonusArmorClass++;
                     res = true;
-                    if (oPtr.EffectivePropertySet.IsCursed && !oPtr.EffectivePropertySet.PermaCurse && oPtr.EffectivePropertySet.BonusArmorClass >= 0 &&
+                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.PermaCurse && oPtr.EffectiveAttributeSet.BonusArmorClass >= 0 &&
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-                        oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
+                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
+                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
                         oPtr.IdentSense = true;
                         oPtr.Inscription = "uncursed";
                     }
@@ -5440,11 +5440,11 @@ internal partial class Game
 
     public bool SetAcidDestroy(Item oPtr)
     {
-        if (!oPtr.EffectivePropertySet.HatesAcid)
+        if (!oPtr.EffectiveAttributeSet.HatesAcid)
         {
             return false;
         }
-        if (oPtr.EffectivePropertySet.IgnoreAcid)
+        if (oPtr.EffectiveAttributeSet.IgnoreAcid)
         {
             return false;
         }
@@ -5453,11 +5453,11 @@ internal partial class Game
 
     public bool SetColdDestroy(Item oPtr)
     {
-        if (!oPtr.EffectivePropertySet.HatesCold)
+        if (!oPtr.EffectiveAttributeSet.HatesCold)
         {
             return false;
         }
-        if (oPtr.EffectivePropertySet.IgnoreCold)
+        if (oPtr.EffectiveAttributeSet.IgnoreCold)
         {
             return false;
         }
@@ -5466,11 +5466,11 @@ internal partial class Game
 
     public bool SetElecDestroy(Item oPtr)
     {
-        if (!oPtr.EffectivePropertySet.HatesElectricity)
+        if (!oPtr.EffectiveAttributeSet.HatesElectricity)
         {
             return false;
         }
-        if (oPtr.EffectivePropertySet.IgnoreElec)
+        if (oPtr.EffectiveAttributeSet.IgnoreElec)
         {
             return false;
         }
@@ -5479,11 +5479,11 @@ internal partial class Game
 
     public bool SetFireDestroy(Item oPtr)
     {
-        if (!oPtr.EffectivePropertySet.HatesFire)
+        if (!oPtr.EffectiveAttributeSet.HatesFire)
         {
             return false;
         }
-        if (oPtr.EffectivePropertySet.IgnoreFire)
+        if (oPtr.EffectiveAttributeSet.IgnoreFire)
         {
             return false;
         }
@@ -5815,18 +5815,18 @@ internal partial class Game
         {
             return false;
         }
-        if (oPtr.EffectivePropertySet.BaseArmorClass + oPtr.EffectivePropertySet.BonusArmorClass <= 0)
+        if (oPtr.EffectiveAttributeSet.BaseArmorClass + oPtr.EffectiveAttributeSet.BonusArmorClass <= 0)
         {
             return false;
         }
         string oName = oPtr.GetDescription(false);
-        if (oPtr.EffectivePropertySet.IgnoreAcid)
+        if (oPtr.EffectiveAttributeSet.IgnoreAcid)
         {
             MsgPrint($"Your {oName} is unaffected!");
             return true;
         }
         MsgPrint($"Your {oName} is damaged!");
-        oPtr.EffectivePropertySet.BonusArmorClass--;
+        oPtr.EffectiveAttributeSet.BonusArmorClass--;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         return true;
     }
@@ -5875,24 +5875,24 @@ internal partial class Game
             }
 
             // If it is not cursed, skip it.
-            if (!oPtr.EffectivePropertySet.IsCursed)
+            if (!oPtr.EffectiveAttributeSet.IsCursed)
             {
                 continue;
             }
 
             // If it is heavy cursed, and we did not ask to remove the heavy curse, skip it.
-            if (!alsoRemoveHeavyCurse && oPtr.EffectivePropertySet.HeavyCurse)
+            if (!alsoRemoveHeavyCurse && oPtr.EffectiveAttributeSet.HeavyCurse)
             {
                 continue;
             }
 
             // Permacurse cannot be removed.
-            if (oPtr.EffectivePropertySet.PermaCurse)
+            if (oPtr.EffectiveAttributeSet.PermaCurse)
             {
                 continue;
             }
-            oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-            oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
+            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
+            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
             oPtr.IdentSense = true;
             oPtr.Inscription = "uncursed";
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -6235,16 +6235,16 @@ internal partial class Game
             // Completely remake the armor into a set of blasted armor
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.EffectivePropertySet.RemoveKeyedEnhancements(Game.FixedAttributeKey);
+            item.EffectiveAttributeSet.RemoveKeyedEnhancements(Game.FixedAttributeKey);
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(ArmorBlastedItemEnhancement)));
-            item.EffectivePropertySet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
-            item.EffectivePropertySet.MeleeToHit = 0;
-            item.EffectivePropertySet.ToDamage = 0;
-            item.EffectivePropertySet.BaseArmorClass = 0;
-            item.EffectivePropertySet.DamageDice = 0;
-            item.EffectivePropertySet.DiceSides = 0;
-            item.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
-            item.EffectivePropertySet.Valueless = true;
+            item.EffectiveAttributeSet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
+            item.EffectiveAttributeSet.MeleeToHit = 0;
+            item.EffectiveAttributeSet.ToDamage = 0;
+            item.EffectiveAttributeSet.BaseArmorClass = 0;
+            item.EffectiveAttributeSet.DamageDice = 0;
+            item.EffectiveAttributeSet.DiceSides = 0;
+            item.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            item.EffectiveAttributeSet.Valueless = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
@@ -6274,16 +6274,16 @@ internal partial class Game
             // Completely remake the item into a shattered weapon
             MsgPrint($"A terrible black aura blasts your {itemName}!");
             item.FixedArtifact = null;
-            item.EffectivePropertySet.RemoveKeyedEnhancements(Game.FixedAttributeKey);
+            item.EffectiveAttributeSet.RemoveKeyedEnhancements(Game.FixedAttributeKey);
             item.SetRareItem(SingletonRepository.Get<ItemEnhancement>(nameof(WeaponShatteredItemEnhancement)));
-            item.EffectivePropertySet.MeleeToHit = 0 - DieRoll(5) - DieRoll(5);
-            item.EffectivePropertySet.ToDamage = 0 - DieRoll(5) - DieRoll(5);
-            item.EffectivePropertySet.BonusArmorClass = 0;
-            item.EffectivePropertySet.BaseArmorClass = 0;
-            item.EffectivePropertySet.DamageDice = 0;
-            item.EffectivePropertySet.DiceSides = 0;
-            item.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
-            item.EffectivePropertySet.Valueless = true;
+            item.EffectiveAttributeSet.MeleeToHit = 0 - DieRoll(5) - DieRoll(5);
+            item.EffectiveAttributeSet.ToDamage = 0 - DieRoll(5) - DieRoll(5);
+            item.EffectiveAttributeSet.BonusArmorClass = 0;
+            item.EffectiveAttributeSet.BaseArmorClass = 0;
+            item.EffectiveAttributeSet.DamageDice = 0;
+            item.EffectiveAttributeSet.DiceSides = 0;
+            item.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            item.EffectiveAttributeSet.Valueless = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         }
@@ -6963,7 +6963,7 @@ internal partial class Game
         Item? meleeItem = GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (meleeItem != null)
         {
-            bonus += meleeItem.EffectivePropertySet.MeleeToHit;
+            bonus += meleeItem.EffectiveAttributeSet.MeleeToHit;
         }
         int chance = SkillMelee + (bonus * Constants.BthPlusAdj);
         // Attacking uses a full turn
@@ -7001,8 +7001,8 @@ internal partial class Game
                 if (meleeItem != null)
                 {
                     // Get our weapon's flags to see if we need to do anything special
-                    chaosEffect = meleeItem.EffectivePropertySet.Chaotic && DieRoll(2) == 1;
-                    if (meleeItem.EffectivePropertySet.Vampiric || (chaosEffect && DieRoll(5) < 3))
+                    chaosEffect = meleeItem.EffectiveAttributeSet.Chaotic && DieRoll(2) == 1;
+                    if (meleeItem.EffectiveAttributeSet.Vampiric || (chaosEffect && DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
@@ -7068,7 +7068,7 @@ internal partial class Game
                 else if (meleeItem != null)
                 {
                     // Roll damage for the weapon
-                    totalDamage = DiceRoll(meleeItem.EffectivePropertySet.DamageDice, meleeItem.EffectivePropertySet.DiceSides);
+                    totalDamage = DiceRoll(meleeItem.EffectiveAttributeSet.DamageDice, meleeItem.EffectiveAttributeSet.DiceSides);
                     totalDamage = meleeItem.AdjustDamageForMonsterType(totalDamage, monster);
                     // Extra damage for backstabbing
                     if (backstab)
@@ -7086,24 +7086,24 @@ internal partial class Game
                         chaosEffect = false;
                     }
                     // Check if we did a critical
-                    totalDamage = PlayerCriticalMelee(meleeItem.EffectivePropertySet.Weight, meleeItem.EffectivePropertySet.MeleeToHit, totalDamage);
+                    totalDamage = PlayerCriticalMelee(meleeItem.EffectiveAttributeSet.Weight, meleeItem.EffectiveAttributeSet.MeleeToHit, totalDamage);
 
                     // Vorpal weapons have a chance of a deep cut.
-                    bool vorpalCut = DieRoll(meleeItem.EffectivePropertySet.Vorpal1InChance) == 1;
+                    bool vorpalCut = DieRoll(meleeItem.EffectiveAttributeSet.Vorpal1InChance) == 1;
 
                     // If we did a vorpal cut, do extra damage
                     if (vorpalCut)
                     {
                         int stepK = totalDamage;
-                        string message = meleeItem.EffectivePropertySet.Vorpal1InChance == 0 ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
+                        string message = meleeItem.EffectiveAttributeSet.Vorpal1InChance == 0 ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
                         MsgPrint(message);
                         do
                         {
                             totalDamage += stepK;
-                        } while (meleeItem.EffectivePropertySet.VorpalExtraAttacks1InChance >= 1 && DieRoll(meleeItem.EffectivePropertySet.VorpalExtraAttacks1InChance) == 1);
+                        } while (meleeItem.EffectiveAttributeSet.VorpalExtraAttacks1InChance >= 1 && DieRoll(meleeItem.EffectiveAttributeSet.VorpalExtraAttacks1InChance) == 1);
                     }
                     // Add bonus damage for the weapon
-                    totalDamage += meleeItem.EffectivePropertySet.ToDamage;
+                    totalDamage += meleeItem.EffectiveAttributeSet.ToDamage;
                 }
                 // Add bonus damage for strength etc.
                 totalDamage += Bonuses.DamageBonus;
@@ -7448,18 +7448,18 @@ internal partial class Game
         }
         item.ItemOptimize();
         string missileName = missile.GetFullDescription(false);
-        ColorEnum missileColor = missile.EffectivePropertySet.Color;
+        ColorEnum missileColor = missile.EffectiveAttributeSet.Color;
         char missileCharacter = missile.FlavorSymbol.Character;
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
-        int divider = missile.EffectivePropertySet.Weight > 10 ? missile.EffectivePropertySet.Weight : 10;
+        int divider = missile.EffectiveAttributeSet.Weight > 10 ? missile.EffectiveAttributeSet.Weight : 10;
         int throwDistance = (StrengthAbility.StrAttackSpeedComponent + 20) * multiplier / divider;
         if (throwDistance > 10)
         {
             throwDistance = 10;
         }
         // Work out the damage done
-        int damage = DiceRoll(missile.EffectivePropertySet.DamageDice, missile.EffectivePropertySet.DiceSides) + missile.EffectivePropertySet.ToDamage;
+        int damage = DiceRoll(missile.EffectiveAttributeSet.DamageDice, missile.EffectiveAttributeSet.DiceSides) + missile.EffectiveAttributeSet.ToDamage;
         damage *= damageMultiplier;
         int chance = SkillThrowing + (Bonuses.AttackBonus * Constants.BthPlusAdj);
         // Throwing something always uses a full turn, even if you can make multiple missile attacks
@@ -7551,7 +7551,7 @@ internal partial class Game
                     }
                     // Adjust the damage for the particular monster type
                     damage = missile.AdjustDamageForMonsterType(damage, monster);
-                    damage = PlayerCriticalRanged(missile.EffectivePropertySet.Weight, missile.EffectivePropertySet.MeleeToHit, damage);
+                    damage = PlayerCriticalRanged(missile.EffectiveAttributeSet.Weight, missile.EffectiveAttributeSet.MeleeToHit, damage);
                     if (damage < 0)
                     {
                         damage = 0;
@@ -7703,7 +7703,7 @@ internal partial class Game
         }
         Item item = tile.Items[0]; // TODO: We can only pull the top item?
         // Check the weight of the item
-        if (item != null && item.EffectivePropertySet.Weight > maxWeight) // TODO: We are only measuring the weight of the first item?
+        if (item != null && item.EffectiveAttributeSet.Weight > maxWeight) // TODO: We are only measuring the weight of the first item?
         {
             MsgPrint("The object is too heavy.");
             return;
@@ -9932,15 +9932,15 @@ internal partial class Game
                 GridTile cPtr = Map.Grid[y][x];
                 foreach (Item item in cPtr.Items)
                 {
-                    if (item.EffectivePropertySet.HasKeyedItemEnhancements(Game.FixedAttributeKey))
+                    if (item.EffectiveAttributeSet.HasKeyedItemEnhancements(Game.FixedAttributeKey))
                     {
                         return 1;
                     }
-                    if (!item.EffectivePropertySet.IsCursed && !item.EffectivePropertySet.Valueless && item.LevelNormallyFound > Difficulty)
+                    if (!item.EffectiveAttributeSet.IsCursed && !item.EffectiveAttributeSet.Valueless && item.LevelNormallyFound > Difficulty)
                     {
                         treasureRating += item.LevelNormallyFound - Difficulty;
                     }
-                    treasureRating += item.EffectivePropertySet.TreasureRating;
+                    treasureRating += item.EffectiveAttributeSet.TreasureRating;
                 }
             }
         }
@@ -12422,7 +12422,7 @@ internal partial class Game
                     Item? item = GetInventoryItem(index);
                     if (item != null)
                     {
-                        martialArtistArmWgt += item.EffectivePropertySet.Weight;
+                        martialArtistArmWgt += item.EffectiveAttributeSet.Weight;
                     }
                     //foreach (Item item in inventorySlot)
                     //{
@@ -12739,7 +12739,7 @@ internal partial class Game
                 // Only print items that exist
                 if (item != null)
                 {
-                    color = item.EffectivePropertySet.Color;
+                    color = item.EffectiveAttributeSet.Color;
                     character = item.FlavorSymbol.Character;
                 }
                 Screen.Print(color, character, screenRow, screenCol + column);
@@ -12886,7 +12886,7 @@ internal partial class Game
         {
             return;
         }
-        if (oPtr.EffectivePropertySet.Blessed && DieRoll(888) > chance)
+        if (oPtr.EffectiveAttributeSet.Blessed && DieRoll(888) > chance)
         {
             string oName = oPtr.GetDescription(false);
             string s = oPtr.StackCount > 1 ? "" : "s";
@@ -12895,20 +12895,20 @@ internal partial class Game
         }
         if (DieRoll(100) <= heavyChance && (oPtr.IsArtifact || oPtr.IsRare))
         {
-            if (!oPtr.EffectivePropertySet.HeavyCurse)
+            if (!oPtr.EffectiveAttributeSet.HeavyCurse)
             {
                 changed = true;
             }
-            oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
-            oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Set();
+            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Set();
         }
         else
         {
-            if (!oPtr.EffectivePropertySet.IsCursed)
+            if (!oPtr.EffectiveAttributeSet.IsCursed)
             {
                 changed = true;
             }
-            oPtr.EffectivePropertySet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
         }
         if (changed)
         {
@@ -13750,7 +13750,7 @@ internal partial class Game
             {
                 // Group it together.
                 jPtr.Absorb(oPtr);
-                WeightCarried += oPtr.StackCount * oPtr.EffectivePropertySet.Weight;
+                WeightCarried += oPtr.StackCount * oPtr.EffectiveAttributeSet.Weight;
                 SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
                 return jPtr;
             }
@@ -13798,7 +13798,7 @@ internal partial class Game
         oPtr.Y = 0;
         oPtr.X = 0;
         oPtr.HoldingMonsterIndex = 0;
-        WeightCarried += oPtr.StackCount * oPtr.EffectivePropertySet.Weight;
+        WeightCarried += oPtr.StackCount * oPtr.EffectiveAttributeSet.Weight;
         _invenCnt++;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();
@@ -13998,10 +13998,10 @@ internal partial class Game
                     consoleRow["label"] = new ConsoleString(ColorEnum.White, $"{index.IndexToLabel()})");
 
                     // Apply flavor visuals
-                    consoleRow["flavor"] = new ConsoleChar(oPtr.EffectivePropertySet.Color, oPtr.FlavorSymbol.Character);
+                    consoleRow["flavor"] = new ConsoleChar(oPtr.EffectiveAttributeSet.Color, oPtr.FlavorSymbol.Character);
                     consoleRow["usage"] = new ConsoleString(ColorEnum.White, $"{inventorySlot.MentionUse(index)}:");
 
-                    ColorEnum color = oPtr.EffectivePropertySet.Color;
+                    ColorEnum color = oPtr.EffectiveAttributeSet.Color;
                     string description = oPtr.GetFullDescription(true);
                     if (description.Length > maximumDescriptionWidth)
                     {
@@ -14009,7 +14009,7 @@ internal partial class Game
                     }
                     consoleRow["description"] = new ConsoleString(color, description);
 
-                    int wgt = oPtr.EffectivePropertySet.Weight * oPtr.StackCount;
+                    int wgt = oPtr.EffectiveAttributeSet.Weight * oPtr.StackCount;
                     consoleRow["weight"] = new ConsoleString(ColorEnum.White, $"{wgt / 10}.{wgt % 10} lb");
                     slotIsEmpty = false;
                 }
@@ -15060,7 +15060,7 @@ internal partial class Game
             if (oPtr.WasNoticed)
             {
                 character = oPtr.FlavorSymbol.Character;
-                color = oPtr.EffectivePropertySet.Color;
+                color = oPtr.EffectiveAttributeSet.Color;
                 if (HallucinationsTimer.Value != 0)
                 {
                     ImageObject(out color, out character);

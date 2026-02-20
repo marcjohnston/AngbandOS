@@ -6,6 +6,6 @@ internal class ArtifactBiasBooleanGetItemProperty : GetItemProperty<bool>
 
     public override bool Get(Item item)
     {
-        return item.EffectivePropertySet.ArtifactBias != null;
+        return item.EffectiveAttributeSet.ArtifactBias != null;
     }
 }

@@ -22,6 +22,6 @@ internal class PoorIntelligence5BP1EnchantmentScript : Script, IEnhancementScrip
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.Intelligence = 0 - (1 + item.GetBonusValue(5, level));
+        item.EffectiveAttributeSet.Intelligence = 0 - (1 + item.GetBonusValue(5, level));
     }
 }

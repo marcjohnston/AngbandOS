@@ -17,11 +17,11 @@ internal class TerribleCrownEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.BonusArmorClass -= item.GetBonusValue(10, level);
+        item.EffectiveAttributeSet.BonusArmorClass -= item.GetBonusValue(10, level);
         item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(CrownPoorItemEnhancementWeightedRandom)).ChooseOrDefault());
-        if (item.EffectivePropertySet.BonusArmorClass < 0)
+        if (item.EffectiveAttributeSet.BonusArmorClass < 0)
         {
-            item.EffectivePropertySet.IsCursed = true;
+            item.EffectiveAttributeSet.IsCursed = true;
         }
     }
 }

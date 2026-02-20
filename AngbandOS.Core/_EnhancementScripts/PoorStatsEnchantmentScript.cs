@@ -22,11 +22,11 @@ internal class PoorStatsEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.Charisma = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
-        item.EffectivePropertySet.Constitution = item.EffectivePropertySet.Charisma;
-        item.EffectivePropertySet.Dexterity = item.EffectivePropertySet.Charisma;
-        item.EffectivePropertySet.Strength = item.EffectivePropertySet.Charisma;
-        item.EffectivePropertySet.Intelligence = item.EffectivePropertySet.Charisma;
-        item.EffectivePropertySet.Wisdom = item.EffectivePropertySet.Charisma;
+        item.EffectiveAttributeSet.Charisma = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
+        item.EffectiveAttributeSet.Constitution = item.EffectiveAttributeSet.Charisma;
+        item.EffectiveAttributeSet.Dexterity = item.EffectiveAttributeSet.Charisma;
+        item.EffectiveAttributeSet.Strength = item.EffectiveAttributeSet.Charisma;
+        item.EffectiveAttributeSet.Intelligence = item.EffectiveAttributeSet.Charisma;
+        item.EffectiveAttributeSet.Wisdom = item.EffectiveAttributeSet.Charisma;
     }
 }

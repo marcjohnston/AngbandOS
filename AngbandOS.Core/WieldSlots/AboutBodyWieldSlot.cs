@@ -22,6 +22,6 @@ internal class AboutBodyWieldSlot : EquipmentWieldSlot
     public override void AddItem(Item item)
     {
         Game.SetInventoryItem(InventorySlotEnum.AboutBody, item);
-        Game.WeightCarried += item.EffectivePropertySet.Weight;
+        Game.WeightCarried += item.EffectiveAttributeSet.Weight;
     }
 }

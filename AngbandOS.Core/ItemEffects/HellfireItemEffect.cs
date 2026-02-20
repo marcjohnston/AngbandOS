@@ -22,7 +22,7 @@ internal class HellfireItemEffect : ItemEffect
             plural = true;
         }
 
-        if (oPtr.EffectivePropertySet.IsCursed)
+        if (oPtr.EffectiveAttributeSet.IsCursed)
         {
             doKill = true;
             noteKill = plural ? " are destroyed!" : " is destroyed!";

@@ -18,7 +18,7 @@ internal class OrAttributeItemMatch : ItemMatch
     }
     public override bool Matches(Item item)
     {
-        bool value = item.EffectivePropertySet.Get<OrEffectiveAttributeValue>(Attribute).Get();
+        bool value = item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(Attribute).Get();
         return value == DesiredValue;
     }
 }

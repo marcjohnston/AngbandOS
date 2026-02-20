@@ -56,7 +56,7 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
         oPtr.ModifyStackCount(num);
 
         // Items that are being wielded add or subtract from the players weight being carried.
-        Game.WeightCarried += num * oPtr.EffectivePropertySet.Weight;
+        Game.WeightCarried += num * oPtr.EffectiveAttributeSet.Weight;
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineAndReorderGroupSetFlaggedAction)).Set();

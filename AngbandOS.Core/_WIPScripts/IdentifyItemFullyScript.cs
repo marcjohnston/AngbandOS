@@ -48,7 +48,7 @@ internal class IdentifyItemFullyScript : Script, IScript, ICastSpellScript, IAct
         Game.MsgPrint($"{oPtr.DescribeLocation()}: {oName} ({oPtr.Label}).");
 
         // Check to see if the player is carrying the item and it is stompable.
-        if (oPtr.IsInInventory && oPtr.Stompable && !oPtr.EffectivePropertySet.IsCursed)
+        if (oPtr.IsInInventory && oPtr.Stompable && !oPtr.EffectiveAttributeSet.IsCursed)
         {
             string itemName = oPtr.GetFullDescription(true);
             Game.MsgPrint($"You destroy {oName}.");

@@ -1209,35 +1209,35 @@ internal class Monster : IItemContainer
                         bool willHurt = false;
                         string itemName = item.GetFullDescription(true);
                         string monsterName = IndefiniteWhenHiddenName;
-                        if (item.EffectivePropertySet.SlayDragon > 1 && Race.Dragon)
+                        if (item.EffectiveAttributeSet.SlayDragon > 1 && Race.Dragon)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectivePropertySet.SlayTroll && Race.Troll)
+                        if (item.EffectiveAttributeSet.SlayTroll && Race.Troll)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectivePropertySet.SlayGiant && Race.Giant)
+                        if (item.EffectiveAttributeSet.SlayGiant && Race.Giant)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectivePropertySet.SlayOrc && Race.Orc)
+                        if (item.EffectiveAttributeSet.SlayOrc && Race.Orc)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectivePropertySet.SlayDemon && Race.Demon)
+                        if (item.EffectiveAttributeSet.SlayDemon && Race.Demon)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectivePropertySet.SlayUndead && Race.Undead)
+                        if (item.EffectiveAttributeSet.SlayUndead && Race.Undead)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectivePropertySet.SlayAnimal && Race.Animal)
+                        if (item.EffectiveAttributeSet.SlayAnimal && Race.Animal)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectivePropertySet.SlayEvil && Race.Evil)
+                        if (item.EffectiveAttributeSet.SlayEvil && Race.Evil)
                         {
                             willHurt = true;
                         }

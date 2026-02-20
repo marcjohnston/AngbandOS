@@ -39,7 +39,7 @@ internal class DropScript : UniversalScript, IGetKey
             return;
         }
         // Can't drop a cursed item
-        if (item.IsInEquipment && item.EffectivePropertySet.IsCursed)
+        if (item.IsInEquipment && item.EffectiveAttributeSet.IsCursed)
         {
             Game.MsgPrint("Hmmm, it seems to be cursed.");
             return;

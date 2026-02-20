@@ -22,6 +22,6 @@ internal class BonusAttacks3BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.Attacks = Math.Max(1, item.GetBonusValue(3, level));
+        item.EffectiveAttributeSet.Attacks = Math.Max(1, item.GetBonusValue(3, level));
     }
 }

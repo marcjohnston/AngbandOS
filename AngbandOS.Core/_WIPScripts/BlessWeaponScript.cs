@@ -33,20 +33,20 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
         }
         string your = oPtr.IsInInventory ? "your" : "the"; ;
         string oName = oPtr.GetDescription(false);
-        if (oPtr.EffectivePropertySet.IsCursed)
+        if (oPtr.EffectiveAttributeSet.IsCursed)
         {
-            if ((oPtr.EffectivePropertySet.HeavyCurse && Game.DieRoll(100) < 33) || oPtr.EffectivePropertySet.PermaCurse)
+            if ((oPtr.EffectiveAttributeSet.HeavyCurse && Game.DieRoll(100) < 33) || oPtr.EffectiveAttributeSet.PermaCurse)
             {
                 Game.MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
                 return;
             }
             Game.MsgPrint($"A malignant aura leaves {your} {oName}.");
-            oPtr.EffectivePropertySet.IsCursed = false;
+            oPtr.EffectiveAttributeSet.IsCursed = false;
             oPtr.IdentSense = true;
             oPtr.Inscription = "uncursed";
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         }
-        if (oPtr.EffectivePropertySet.Blessed)
+        if (oPtr.EffectiveAttributeSet.Blessed)
         {
             string s = oPtr.StackCount > 1 ? "were" : "was";
             Game.MsgPrint($"{your} {oName} {s} blessed already.");
@@ -56,38 +56,38 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
         {
             string s = oPtr.StackCount > 1 ? "" : "s";
             Game.MsgPrint($"{your} {oName} shine{s}!");
-            oPtr.EffectivePropertySet.Blessed = true;
+            oPtr.EffectiveAttributeSet.Blessed = true;
         }
         else
         {
             bool disHappened = false;
             Game.MsgPrint("The artifact resists your blessing!");
-            if (oPtr.EffectivePropertySet.MeleeToHit > 0)
+            if (oPtr.EffectiveAttributeSet.MeleeToHit > 0)
             {
-                oPtr.EffectivePropertySet.MeleeToHit--;
+                oPtr.EffectiveAttributeSet.MeleeToHit--;
                 disHappened = true;
             }
-            if (oPtr.EffectivePropertySet.MeleeToHit > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.EffectiveAttributeSet.MeleeToHit > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.EffectivePropertySet.MeleeToHit--;
+                oPtr.EffectiveAttributeSet.MeleeToHit--;
             }
-            if (oPtr.EffectivePropertySet.ToDamage > 0)
+            if (oPtr.EffectiveAttributeSet.ToDamage > 0)
             {
-                oPtr.EffectivePropertySet.ToDamage--;
+                oPtr.EffectiveAttributeSet.ToDamage--;
                 disHappened = true;
             }
-            if (oPtr.EffectivePropertySet.ToDamage > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.EffectiveAttributeSet.ToDamage > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.EffectivePropertySet.ToDamage--;
+                oPtr.EffectiveAttributeSet.ToDamage--;
             }
-            if (oPtr.EffectivePropertySet.BonusArmorClass > 0)
+            if (oPtr.EffectiveAttributeSet.BonusArmorClass > 0)
             {
-                oPtr.EffectivePropertySet.BonusArmorClass--;
+                oPtr.EffectiveAttributeSet.BonusArmorClass--;
                 disHappened = true;
             }
-            if (oPtr.EffectivePropertySet.BonusArmorClass > 5 && Game.RandomLessThan(100) < 33)
+            if (oPtr.EffectiveAttributeSet.BonusArmorClass > 5 && Game.RandomLessThan(100) < 33)
             {
-                oPtr.EffectivePropertySet.BonusArmorClass--;
+                oPtr.EffectiveAttributeSet.BonusArmorClass--;
             }
             if (disHappened)
             {

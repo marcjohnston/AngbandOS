@@ -131,7 +131,7 @@ internal class Store
         Item oPtr = StoreInventoryList[itemIndex];
         string outVal = $"{letter}) ";
         Game.Screen.PrintLine(outVal, row, 0);
-        ColorEnum a = oPtr.EffectivePropertySet.Color;
+        ColorEnum a = oPtr.EffectiveAttributeSet.Color;
         char c = oPtr.FlavorSymbol.Character;
         Game.Screen.Print(a, c.ToString(), row, 3);
         string oName = oPtr.GetFullDescription(true);
@@ -140,8 +140,8 @@ internal class Store
         {
             oName = oName.Substring(0, maxwid);
         }
-        Game.Screen.Print(oPtr.EffectivePropertySet.Color, oName, row, 5);
-        int wgt = oPtr.EffectivePropertySet.Weight;
+        Game.Screen.Print(oPtr.EffectiveAttributeSet.Color, oName, row, 5);
+        int wgt = oPtr.EffectiveAttributeSet.Weight;
         outVal = $"{wgt / 10,3}.{wgt % 10}{(StoreFactory.RenderWeightUnitOfMeasurement ? " lb" : "")}";
 
         if (StoreFactory.ShowItemPricing)

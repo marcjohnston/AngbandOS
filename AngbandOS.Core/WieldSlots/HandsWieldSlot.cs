@@ -24,7 +24,7 @@ internal class HandsWieldSlot : EquipmentWieldSlot
     public override void AddItem(Item item)
     {
         Game.SetInventoryItem(InventorySlotEnum.Hands, item);
-        Game.WeightCarried += item.EffectivePropertySet.Weight;
+        Game.WeightCarried += item.EffectiveAttributeSet.Weight;
     }
     public override int CalcMana(Game game, int msp)
     {
@@ -35,7 +35,7 @@ internal class HandsWieldSlot : EquipmentWieldSlot
             foreach (int index in InventorySlots)
             {
                 Item? oPtr = Game.GetInventoryItem(index);
-                if (oPtr != null && !oPtr.EffectivePropertySet.FreeAct && oPtr.EffectivePropertySet.Dexterity == 0)
+                if (oPtr != null && !oPtr.EffectiveAttributeSet.FreeAct && oPtr.EffectiveAttributeSet.Dexterity == 0)
                 {
                     msp = 3 * msp / 4;
                     RestrictingGloves = true;

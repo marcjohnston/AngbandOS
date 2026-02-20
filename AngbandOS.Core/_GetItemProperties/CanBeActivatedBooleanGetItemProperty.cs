@@ -13,7 +13,7 @@ internal class CanBeActivatedBooleanGetItemProperty : GetItemProperty<bool>
 
     public override bool Get(Item item)
     {
-        return item.EffectivePropertySet.Activation != null;
+        return item.EffectiveAttributeSet.Activation != null;
     }
 }
 

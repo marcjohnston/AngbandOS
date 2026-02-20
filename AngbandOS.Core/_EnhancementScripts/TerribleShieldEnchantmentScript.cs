@@ -17,10 +17,10 @@ internal class TerribleShieldEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.BonusArmorClass -= item.GetBonusValue(10, level);
-        if (item.EffectivePropertySet.BonusArmorClass < 0)
+        item.EffectiveAttributeSet.BonusArmorClass -= item.GetBonusValue(10, level);
+        if (item.EffectiveAttributeSet.BonusArmorClass < 0)
         {
-            item.EffectivePropertySet.IsCursed = true;
+            item.EffectiveAttributeSet.IsCursed = true;
         }
     }
 }

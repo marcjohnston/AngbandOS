@@ -22,21 +22,21 @@ internal class MeteorItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectivePropertySet.HatesFire)
+        if (oPtr.EffectiveAttributeSet.HatesFire)
         {
             doKill = true;
             noteKill = plural ? " burn up!" : " burns up!";
-            if (oPtr.EffectivePropertySet.IgnoreFire)
+            if (oPtr.EffectiveAttributeSet.IgnoreFire)
             {
                 ignore = true;
             }
         }
-        if (oPtr.EffectivePropertySet.HatesCold)
+        if (oPtr.EffectiveAttributeSet.HatesCold)
         {
             ignore = false;
             doKill = true;
             noteKill = plural ? " shatter!" : " shatters!";
-            if (oPtr.EffectivePropertySet.IgnoreCold)
+            if (oPtr.EffectiveAttributeSet.IgnoreCold)
             {
                 ignore = true;
             }

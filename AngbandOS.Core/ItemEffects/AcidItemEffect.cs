@@ -22,11 +22,11 @@ internal class AcidItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectivePropertySet.HatesAcid)
+        if (oPtr.EffectiveAttributeSet.HatesAcid)
         {
             doKill = true;
             noteKill = oPtr.StackCount > 1 ? " melt!" : " melts!";
-            if (oPtr.EffectivePropertySet.IgnoreAcid)
+            if (oPtr.EffectiveAttributeSet.IgnoreAcid)
             {
                 ignore = true;
             }

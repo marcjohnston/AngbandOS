@@ -6,6 +6,6 @@ internal class IsCursedBooleanGetItemProperty : GetItemProperty<bool>
 
     public override bool Get(Item item)
     {
-        return item.EffectivePropertySet.IsCursed;
+        return item.EffectiveAttributeSet.IsCursed;
     }
 }

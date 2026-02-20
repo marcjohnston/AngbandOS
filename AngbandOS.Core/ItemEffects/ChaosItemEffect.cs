@@ -21,7 +21,7 @@ internal class ChaosItemEffect : ItemEffect
             plural = true;
         }
         string noteKill = plural ? " are destroyed!" : " is destroyed!";
-        if (oPtr.EffectivePropertySet.ResChaos)
+        if (oPtr.EffectiveAttributeSet.ResChaos)
         {
             ignore = true;
         }

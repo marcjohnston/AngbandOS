@@ -33,7 +33,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    effectiveAttributeSet.MergeAttributeSet(oPtr.EffectivePropertySet.ToReadOnly());
+                    effectiveAttributeSet.MergeAttributeSet(oPtr.EffectiveAttributeSet.ToReadOnly());
                 }
             }
         }
@@ -203,227 +203,227 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    Game.StrengthAbility.Bonus += oPtr.EffectivePropertySet.Strength;
-                    Game.IntelligenceAbility.Bonus += oPtr.EffectivePropertySet.Intelligence;
-                    Game.WisdomAbility.Bonus += oPtr.EffectivePropertySet.Wisdom;
-                    Game.DexterityAbility.Bonus += oPtr.EffectivePropertySet.Dexterity;
-                    Game.ConstitutionAbility.Bonus += oPtr.EffectivePropertySet.Constitution;
-                    Game.CharismaAbility.Bonus += oPtr.EffectivePropertySet.Charisma;
-                    Game.SkillStealth += oPtr.EffectivePropertySet.Stealth;
-                    Game.SkillSearching += oPtr.EffectivePropertySet.Search * 5;
-                    Game.SkillSearchFrequency += oPtr.EffectivePropertySet.Search * 5;
-                    Game.InfravisionRange += oPtr.EffectivePropertySet.Infravision;
-                    Game.SkillDigging += oPtr.EffectivePropertySet.Tunnel * 20;
-                    Game.Speed.IntValue += oPtr.EffectivePropertySet.Speed;
-                    extraBlows += oPtr.EffectivePropertySet.Attacks;
-                    if (oPtr.EffectivePropertySet.Impact)
+                    Game.StrengthAbility.Bonus += oPtr.EffectiveAttributeSet.Strength;
+                    Game.IntelligenceAbility.Bonus += oPtr.EffectiveAttributeSet.Intelligence;
+                    Game.WisdomAbility.Bonus += oPtr.EffectiveAttributeSet.Wisdom;
+                    Game.DexterityAbility.Bonus += oPtr.EffectiveAttributeSet.Dexterity;
+                    Game.ConstitutionAbility.Bonus += oPtr.EffectiveAttributeSet.Constitution;
+                    Game.CharismaAbility.Bonus += oPtr.EffectiveAttributeSet.Charisma;
+                    Game.SkillStealth += oPtr.EffectiveAttributeSet.Stealth;
+                    Game.SkillSearching += oPtr.EffectiveAttributeSet.Search * 5;
+                    Game.SkillSearchFrequency += oPtr.EffectiveAttributeSet.Search * 5;
+                    Game.InfravisionRange += oPtr.EffectiveAttributeSet.Infravision;
+                    Game.SkillDigging += oPtr.EffectiveAttributeSet.Tunnel * 20;
+                    Game.Speed.IntValue += oPtr.EffectiveAttributeSet.Speed;
+                    extraBlows += oPtr.EffectiveAttributeSet.Attacks;
+                    if (oPtr.EffectiveAttributeSet.Impact)
                     {
                         Game.HasQuakeWeapon = true;
                     }
-                    if (oPtr.EffectivePropertySet.AntiTheft)
+                    if (oPtr.EffectiveAttributeSet.AntiTheft)
                     {
                         Game.HasAntiTheft = true;
                     }
-                    if (oPtr.EffectivePropertySet.XtraShots)
+                    if (oPtr.EffectiveAttributeSet.XtraShots)
                     {
                         extraShots++;
                     }
-                    if (oPtr.EffectivePropertySet.Aggravate)
+                    if (oPtr.EffectiveAttributeSet.Aggravate)
                     {
                         Game.HasAggravation = true;
                     }
-                    if (oPtr.EffectivePropertySet.Teleport)
+                    if (oPtr.EffectiveAttributeSet.Teleport)
                     {
                         Game.HasRandomTeleport = true;
                     }
-                    if (oPtr.EffectivePropertySet.DrainExp)
+                    if (oPtr.EffectiveAttributeSet.DrainExp)
                     {
                         Game.HasExperienceDrain = true;
                     }
-                    if (oPtr.EffectivePropertySet.Blessed)
+                    if (oPtr.EffectiveAttributeSet.Blessed)
                     {
                         Game.HasBlessedBlade = true;
                     }
-                    if (oPtr.EffectivePropertySet.XtraMight)
+                    if (oPtr.EffectiveAttributeSet.XtraMight)
                     {
                         Game.HasExtraMight = true;
                     }
-                    if (oPtr.EffectivePropertySet.SlowDigest)
+                    if (oPtr.EffectiveAttributeSet.SlowDigest)
                     {
                         Game.HasSlowDigestion = true;
                     }
-                    if (oPtr.EffectivePropertySet.Regen)
+                    if (oPtr.EffectiveAttributeSet.Regen)
                     {
                         Game.HasRegeneration = true;
                     }
-                    if (oPtr.EffectivePropertySet.Telepathy)
+                    if (oPtr.EffectiveAttributeSet.Telepathy)
                     {
                         Game.HasTelepathy = true;
                     }
-                    if (oPtr.EffectivePropertySet.SeeInvis)
+                    if (oPtr.EffectiveAttributeSet.SeeInvis)
                     {
                         Game.HasSeeInvisibility = true;
                     }
-                    if (oPtr.EffectivePropertySet.Feather)
+                    if (oPtr.EffectiveAttributeSet.Feather)
                     {
                         Game.HasFeatherFall = true;
                     }
-                    if (oPtr.EffectivePropertySet.FreeAct)
+                    if (oPtr.EffectiveAttributeSet.FreeAct)
                     {
                         Game.HasFreeAction = true;
                     }
-                    if (oPtr.EffectivePropertySet.HoldLife)
+                    if (oPtr.EffectiveAttributeSet.HoldLife)
                     {
                         Game.HasHoldLife = true;
                     }
-                    if (oPtr.EffectivePropertySet.Wraith)
+                    if (oPtr.EffectiveAttributeSet.Wraith)
                     {
                         Game.EtherealnessTimer.SetValue(Math.Max(Game.EtherealnessTimer.Value, 20));
                     }
-                    if (oPtr.EffectivePropertySet.ImFire)
+                    if (oPtr.EffectiveAttributeSet.ImFire)
                     {
                         Game.HasFireImmunity = true;
                     }
-                    if (oPtr.EffectivePropertySet.ImAcid)
+                    if (oPtr.EffectiveAttributeSet.ImAcid)
                     {
                         Game.HasAcidImmunity = true;
                     }
-                    if (oPtr.EffectivePropertySet.ImCold)
+                    if (oPtr.EffectiveAttributeSet.ImCold)
                     {
                         Game.HasColdImmunity = true;
                     }
-                    if (oPtr.EffectivePropertySet.ImElec)
+                    if (oPtr.EffectiveAttributeSet.ImElec)
                     {
                         Game.HasLightningImmunity = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResAcid)
+                    if (oPtr.EffectiveAttributeSet.ResAcid)
                     {
                         Game.HasAcidResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResElec)
+                    if (oPtr.EffectiveAttributeSet.ResElec)
                     {
                         Game.HasLightningResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResFire)
+                    if (oPtr.EffectiveAttributeSet.ResFire)
                     {
                         Game.HasFireResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResCold)
+                    if (oPtr.EffectiveAttributeSet.ResCold)
                     {
                         Game.HasColdResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResPois)
+                    if (oPtr.EffectiveAttributeSet.ResPois)
                     {
                         Game.HasPoisonResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResFear)
+                    if (oPtr.EffectiveAttributeSet.ResFear)
                     {
                         Game.HasFearResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResConf)
+                    if (oPtr.EffectiveAttributeSet.ResConf)
                     {
                         Game.HasConfusionResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResSound)
+                    if (oPtr.EffectiveAttributeSet.ResSound)
                     {
                         Game.HasSoundResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResLight)
+                    if (oPtr.EffectiveAttributeSet.ResLight)
                     {
                         Game.HasLightResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResDark)
+                    if (oPtr.EffectiveAttributeSet.ResDark)
                     {
                         Game.HasDarkResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResChaos)
+                    if (oPtr.EffectiveAttributeSet.ResChaos)
                     {
                         Game.HasChaosResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResDisen)
+                    if (oPtr.EffectiveAttributeSet.ResDisen)
                     {
                         Game.HasDisenchantResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResShards)
+                    if (oPtr.EffectiveAttributeSet.ResShards)
                     {
                         Game.HasShardResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResNexus)
+                    if (oPtr.EffectiveAttributeSet.ResNexus)
                     {
                         Game.HasNexusResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResBlind)
+                    if (oPtr.EffectiveAttributeSet.ResBlind)
                     {
                         Game.HasBlindnessResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.ResNether)
+                    if (oPtr.EffectiveAttributeSet.ResNether)
                     {
                         Game.HasNetherResistance = true;
                     }
-                    if (oPtr.EffectivePropertySet.Reflect)
+                    if (oPtr.EffectiveAttributeSet.Reflect)
                     {
                         Game.HasReflection = true;
                     }
-                    if (oPtr.EffectivePropertySet.ShFire)
+                    if (oPtr.EffectiveAttributeSet.ShFire)
                     {
                         Game.HasFireSheath = true;
                     }
-                    if (oPtr.EffectivePropertySet.ShElec)
+                    if (oPtr.EffectiveAttributeSet.ShElec)
                     {
                         Game.HasElectricitySheath = true;
                     }
-                    if (oPtr.EffectivePropertySet.NoMagic)
+                    if (oPtr.EffectiveAttributeSet.NoMagic)
                     {
                         Game.HasAntiMagic = true;
                     }
-                    if (oPtr.EffectivePropertySet.NoTele)
+                    if (oPtr.EffectiveAttributeSet.NoTele)
                     {
                         Game.HasAntiTeleport = true;
                     }
-                    if (oPtr.EffectivePropertySet.SustStr)
+                    if (oPtr.EffectiveAttributeSet.SustStr)
                     {
                         Game.HasSustainStrength = true;
                     }
-                    if (oPtr.EffectivePropertySet.SustInt)
+                    if (oPtr.EffectiveAttributeSet.SustInt)
                     {
                         Game.HasSustainIntelligence = true;
                     }
-                    if (oPtr.EffectivePropertySet.SustWis)
+                    if (oPtr.EffectiveAttributeSet.SustWis)
                     {
                         Game.HasSustainWisdom = true;
                     }
-                    if (oPtr.EffectivePropertySet.SustDex)
+                    if (oPtr.EffectiveAttributeSet.SustDex)
                     {
                         Game.HasSustainDexterity = true;
                     }
-                    if (oPtr.EffectivePropertySet.SustCon)
+                    if (oPtr.EffectiveAttributeSet.SustCon)
                     {
                         Game.HasSustainConstitution = true;
                     }
-                    if (oPtr.EffectivePropertySet.SustCha)
+                    if (oPtr.EffectiveAttributeSet.SustCha)
                     {
                         Game.HasSustainCharisma = true;
                     }
-                    baseArmorClass += oPtr.EffectivePropertySet.BaseArmorClass;
-                    Game.DisplayedBaseArmorClass += oPtr.EffectivePropertySet.BaseArmorClass;
-                    Game.ArmorClassBonus += oPtr.EffectivePropertySet.BonusArmorClass;
+                    baseArmorClass += oPtr.EffectiveAttributeSet.BaseArmorClass;
+                    Game.DisplayedBaseArmorClass += oPtr.EffectiveAttributeSet.BaseArmorClass;
+                    Game.ArmorClassBonus += oPtr.EffectiveAttributeSet.BonusArmorClass;
                     if (oPtr.IsKnown())
                     {
-                        Game.KnownBonusArmorClass += oPtr.EffectivePropertySet.BonusArmorClass;
+                        Game.KnownBonusArmorClass += oPtr.EffectiveAttributeSet.BonusArmorClass;
                     }
                     if (inventorySlot.IsWeapon)
                     {
                         continue;
                     }
-                    attackBonus += oPtr.EffectivePropertySet.MeleeToHit;
-                    damageBonus += oPtr.EffectivePropertySet.ToDamage;
+                    attackBonus += oPtr.EffectiveAttributeSet.MeleeToHit;
+                    damageBonus += oPtr.EffectiveAttributeSet.ToDamage;
                     if (oPtr.IsKnown())
                     {
-                        displayedAttackBonus += oPtr.EffectivePropertySet.MeleeToHit;
+                        displayedAttackBonus += oPtr.EffectiveAttributeSet.MeleeToHit;
                     }
                     if (oPtr.IsKnown())
                     {
-                        displayedDamageBonus += oPtr.EffectivePropertySet.ToDamage;
+                        displayedDamageBonus += oPtr.EffectiveAttributeSet.ToDamage;
                     }
                 }
             }
@@ -609,10 +609,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 if (oPtr != null)
                 {
                     // Determine if the ranged weapon is too heavy.
-                    if (hold < oPtr.EffectivePropertySet.Weight / 10)
+                    if (hold < oPtr.EffectiveAttributeSet.Weight / 10)
                     {
-                        attackBonus += 2 * (hold - (oPtr.EffectivePropertySet.Weight / 10));
-                        displayedAttackBonus += 2 * (hold - (oPtr.EffectivePropertySet.Weight / 10));
+                        attackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
+                        displayedAttackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
                         hasHeavyBow = true;
                     }
                     else
@@ -645,10 +645,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             foreach (int index in meleeWeaponInventorySlot.InventorySlots)
             {
                 Item? oPtr = Game.GetInventoryItem(index);
-                if (oPtr != null && hold < oPtr.EffectivePropertySet.Weight / 10)
+                if (oPtr != null && hold < oPtr.EffectiveAttributeSet.Weight / 10)
                 {
-                    attackBonus += 2 * (hold - (oPtr.EffectivePropertySet.Weight / 10));
-                    displayedAttackBonus += 2 * (hold - (oPtr.EffectivePropertySet.Weight / 10));
+                    attackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
+                    displayedAttackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
                     hasHeavyWeapon = true;
                 }
                 if (oPtr != null && !hasHeavyWeapon)
@@ -656,7 +656,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     int num = Game.CharacterClass.MaximumMeleeAttacksPerRound(Game.ExperienceLevel.IntValue);
                     int wgt = Game.CharacterClass.MaximumWeight;
                     int mul = Game.CharacterClass.AttackSpeedMultiplier;
-                    int div = oPtr.EffectivePropertySet.Weight < wgt ? wgt : oPtr.EffectivePropertySet.Weight;
+                    int div = oPtr.EffectiveAttributeSet.Weight < wgt ? wgt : oPtr.EffectiveAttributeSet.Weight;
                     int strIndex = Game.StrengthAbility.StrAttackSpeedComponent * mul / div;
                     if (strIndex > 11)
                     {
@@ -682,7 +682,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.MeleeAttacksPerRound = 1;
                     }
-                    Game.SkillDigging += oPtr.EffectivePropertySet.Weight / 10;
+                    Game.SkillDigging += oPtr.EffectiveAttributeSet.Weight / 10;
                 }
                 else if (Game.IsMartialArtistAndNotWieldingAMeleeWeapon())
                 {

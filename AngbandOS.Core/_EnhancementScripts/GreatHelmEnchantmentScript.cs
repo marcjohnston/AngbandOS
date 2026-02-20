@@ -17,7 +17,7 @@ internal class GreatHelmEnchantmentScript : Script, IEnhancementScript
     /// <returns></returns>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.BonusArmorClass += item.GetBonusValue(10, level);
+        item.EffectiveAttributeSet.BonusArmorClass += item.GetBonusValue(10, level);
 
         if (Game.DieRoll(20) == 1)
         {
@@ -44,7 +44,7 @@ internal class GreatHelmEnchantmentScript : Script, IEnhancementScript
                     item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfSeeingItemEnhancement)));
                     if (Game.DieRoll(7) == 1)
                     {
-                        item.EffectivePropertySet.Telepathy = true;
+                        item.EffectiveAttributeSet.Telepathy = true;
                     }
                     break;
                 case 9:

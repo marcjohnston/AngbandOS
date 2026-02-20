@@ -27,7 +27,7 @@ internal class BrandWeaponWithAstraScript : Script, IScript, ICastSpellScript
         // We must have a non-rare, non-artifact weapon that isn't cursed
         if (item != null)
         {
-            if (!item.IsArtifact && !item.IsRare && !item.EffectivePropertySet.IsCursed)
+            if (!item.IsArtifact && !item.IsRare && !item.EffectiveAttributeSet.IsCursed)
             {
                 string act;
                 string itemName = item.GetDescription(false);
@@ -35,7 +35,7 @@ internal class BrandWeaponWithAstraScript : Script, IScript, ICastSpellScript
                 // Make it a planar weapon
                 act = "seems very unstable now.";
                 item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponPlanarWeaponItemEnhancement)));
-                item.EffectivePropertySet.Search = Game.DieRoll(2);
+                item.EffectiveAttributeSet.Search = Game.DieRoll(2);
 
                 // Let the player know what happened
                 Game.MsgPrint($"Your {itemName} {act}");

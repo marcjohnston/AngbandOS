@@ -99,8 +99,8 @@ internal class ChaosWpReward : Reward
                 break;
         }
         Item qPtr = new Item(Game, reward);
-        qPtr.EffectivePropertySet.MeleeToHit = 3 + (Game.DieRoll(Game.Difficulty) % 10);
-        qPtr.EffectivePropertySet.ToDamage = 3 + (Game.DieRoll(Game.Difficulty) % 10);
+        qPtr.EffectiveAttributeSet.MeleeToHit = 3 + (Game.DieRoll(Game.Difficulty) % 10);
+        qPtr.EffectiveAttributeSet.ToDamage = 3 + (Game.DieRoll(Game.Difficulty) % 10);
         qPtr.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceAndBiasItemEnhancementWeightedRandom)));
         qPtr.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponChaoticItemEnhancement)));
         Game.DropNear(qPtr, null, Game.MapY.IntValue, Game.MapX.IntValue);

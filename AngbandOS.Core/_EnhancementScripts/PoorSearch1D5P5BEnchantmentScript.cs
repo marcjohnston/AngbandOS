@@ -22,6 +22,6 @@ internal class PoorSearch1D5P5BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.Search = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
+        item.EffectiveAttributeSet.Search = 0 - (Game.DieRoll(5) + item.GetBonusValue(5, level));
     }
 }

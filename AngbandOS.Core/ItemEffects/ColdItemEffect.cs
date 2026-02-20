@@ -22,11 +22,11 @@ internal class ColdItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectivePropertySet.HatesCold)
+        if (oPtr.EffectiveAttributeSet.HatesCold)
         {
             noteKill = plural ? " shatter!" : " shatters!";
             doKill = true;
-            if (oPtr.EffectivePropertySet.IgnoreCold)
+            if (oPtr.EffectiveAttributeSet.IgnoreCold)
             {
                 ignore = true;
             }

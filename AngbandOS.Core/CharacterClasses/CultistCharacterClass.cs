@@ -86,7 +86,7 @@ internal class CultistCharacterClass : CharacterClass
         // Cultists that are NOT wielding the a blade of chaos lose bonuses for being an unpriestly weapon.
         if (oPtr != null)
         {
-            if (!oPtr.EffectivePropertySet.Chaotic)
+            if (!oPtr.EffectiveAttributeSet.Chaotic)
             {
                 return new Bonuses()
                 {

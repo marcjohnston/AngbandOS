@@ -23,7 +23,7 @@ internal class LightsourceWieldSlot : EquipmentWieldSlot
     public override void AddItem(Item item)
     {
         Game.SetInventoryItem(InventorySlotEnum.Lightsource, item);
-        Game.WeightCarried += item.EffectivePropertySet.Weight;
+        Game.WeightCarried += item.EffectiveAttributeSet.Weight;
     }
     /// <summary>
     /// Consumes a turn of light during the ProcessWorldHook event.  Base inventory slot ProcessWorldHook processing occurs first, allowing light source items to process the event first.
@@ -40,10 +40,10 @@ internal class LightsourceWieldSlot : EquipmentWieldSlot
         foreach (int index in InventorySlots)
         {
             Item? oPtr = Game.GetInventoryItem(index);
-            if (oPtr != null && oPtr.EffectivePropertySet.BurnRate > 0 && oPtr.TurnsOfLightRemaining > 0)
+            if (oPtr != null && oPtr.EffectiveAttributeSet.BurnRate > 0 && oPtr.TurnsOfLightRemaining > 0)
             {
                 hadLight = true;
-                oPtr.TurnsOfLightRemaining -= oPtr.EffectivePropertySet.BurnRate;
+                oPtr.TurnsOfLightRemaining -= oPtr.EffectiveAttributeSet.BurnRate;
 
                 // If the player is blind, do not allow the light to go out completely.
                 if (Game.BlindnessTimer.Value != 0)

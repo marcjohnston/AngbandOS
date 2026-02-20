@@ -604,7 +604,7 @@ internal sealed class Item : IComparable<Item>
         MonsterRace rPtr = mPtr.Race;
         if (GetsDamageMultiplier)
         {
-            if (EffectivePropertySet.SlayAnimal && rPtr.Animal)
+            if (EffectiveAttributeSet.SlayAnimal && rPtr.Animal)
             {
                 if (mPtr.IsVisible)
                 {
@@ -615,7 +615,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 2;
                 }
             }
-            if (EffectivePropertySet.SlayEvil && rPtr.Evil)
+            if (EffectiveAttributeSet.SlayEvil && rPtr.Evil)
             {
                 if (mPtr.IsVisible)
                 {
@@ -626,7 +626,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 2;
                 }
             }
-            if (EffectivePropertySet.SlayUndead && rPtr.Undead)
+            if (EffectiveAttributeSet.SlayUndead && rPtr.Undead)
             {
                 if (mPtr.IsVisible)
                 {
@@ -637,7 +637,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (EffectivePropertySet.SlayDemon && rPtr.Demon)
+            if (EffectiveAttributeSet.SlayDemon && rPtr.Demon)
             {
                 if (mPtr.IsVisible)
                 {
@@ -648,7 +648,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (EffectivePropertySet.SlayOrc && rPtr.Orc)
+            if (EffectiveAttributeSet.SlayOrc && rPtr.Orc)
             {
                 if (mPtr.IsVisible)
                 {
@@ -659,7 +659,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (EffectivePropertySet.SlayTroll && rPtr.Troll)
+            if (EffectiveAttributeSet.SlayTroll && rPtr.Troll)
             {
                 if (mPtr.IsVisible)
                 {
@@ -670,7 +670,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (EffectivePropertySet.SlayGiant && rPtr.Giant)
+            if (EffectiveAttributeSet.SlayGiant && rPtr.Giant)
             {
                 if (mPtr.IsVisible)
                 {
@@ -687,12 +687,12 @@ internal sealed class Item : IComparable<Item>
                 {
                     rPtr.Knowledge.Characteristics.Dragon = true;
                 }
-                if (mult < EffectivePropertySet.SlayDragon)
+                if (mult < EffectiveAttributeSet.SlayDragon)
                 {
-                    mult = EffectivePropertySet.SlayDragon;
+                    mult = EffectiveAttributeSet.SlayDragon;
                 }
             }
-            if (EffectivePropertySet.BrandAcid)
+            if (EffectiveAttributeSet.BrandAcid)
             {
                 if (rPtr.ImmuneAcid)
                 {
@@ -709,7 +709,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (EffectivePropertySet.BrandElec)
+            if (EffectiveAttributeSet.BrandElec)
             {
                 if (rPtr.ImmuneLightning)
                 {
@@ -726,7 +726,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (EffectivePropertySet.BrandFire)
+            if (EffectiveAttributeSet.BrandFire)
             {
                 if (rPtr.ImmuneFire)
                 {
@@ -743,7 +743,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (EffectivePropertySet.BrandCold)
+            if (EffectiveAttributeSet.BrandCold)
             {
                 if (rPtr.ImmuneCold)
                 {
@@ -760,7 +760,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (EffectivePropertySet.BrandPois)
+            if (EffectiveAttributeSet.BrandPois)
             {
                 if (rPtr.ImmunePoison)
                 {
@@ -811,7 +811,7 @@ internal sealed class Item : IComparable<Item>
             return false;
         }
 
-        if (EffectivePropertySet != other.EffectivePropertySet)
+        if (EffectiveAttributeSet != other.EffectiveAttributeSet)
         {
             return false;
         }
@@ -908,9 +908,9 @@ internal sealed class Item : IComparable<Item>
             {
                 basenm = FixedArtifact.Name;
             }
-            else if (EffectivePropertySet.FriendlyName != null)
+            else if (EffectiveAttributeSet.FriendlyName != null)
             {
-                basenm = $"{basenm} {EffectivePropertySet.FriendlyName}";
+                basenm = $"{basenm} {EffectiveAttributeSet.FriendlyName}";
             }
         }
         return basenm;
@@ -933,7 +933,7 @@ internal sealed class Item : IComparable<Item>
         {
             fullDescription = Inscription;
         }
-        else if (EffectivePropertySet.IsCursed && (IsKnown() || IdentSense))
+        else if (EffectiveAttributeSet.IsCursed && (IsKnown() || IdentSense))
         {
             fullDescription = "cursed";
         }
@@ -982,7 +982,7 @@ internal sealed class Item : IComparable<Item>
 
         if (IsArtifact)
         {
-            if (EffectivePropertySet.IsCursed || EffectivePropertySet.Valueless)
+            if (EffectiveAttributeSet.IsCursed || EffectiveAttributeSet.Valueless)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(TerribleItemQualityRating));
             }
@@ -990,36 +990,36 @@ internal sealed class Item : IComparable<Item>
         }
         if (IsRare)
         {
-            if (EffectivePropertySet.IsCursed || EffectivePropertySet.Valueless)
+            if (EffectiveAttributeSet.IsCursed || EffectiveAttributeSet.Valueless)
             {
                 return Game.SingletonRepository.Get<ItemQualityRating>(nameof(WorthlessItemQualityRating));
             }
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(ExcellentItemQualityRating));
         }
 
-        if (EffectivePropertySet.IsCursed)
+        if (EffectiveAttributeSet.IsCursed)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
 
-        if (EffectivePropertySet.Valueless)
+        if (EffectiveAttributeSet.Valueless)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
-        if (NegativeBonusDamageRepresentsBroken && EffectivePropertySet.ToDamage < 0)
+        if (NegativeBonusDamageRepresentsBroken && EffectiveAttributeSet.ToDamage < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
-        if (NegativeBonusArmorClassRepresentsBroken && EffectivePropertySet.BonusArmorClass < 0)
+        if (NegativeBonusArmorClassRepresentsBroken && EffectiveAttributeSet.BonusArmorClass < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
-        if (NegativeBonusHitRepresentsBroken && EffectivePropertySet.MeleeToHit < 0)
+        if (NegativeBonusHitRepresentsBroken && EffectiveAttributeSet.MeleeToHit < 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
 
-        if (EffectivePropertySet.BonusArmorClass > 0 || EffectivePropertySet.MeleeToHit + EffectivePropertySet.ToDamage > 0)
+        if (EffectiveAttributeSet.BonusArmorClass > 0 || EffectiveAttributeSet.MeleeToHit + EffectiveAttributeSet.ToDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1034,11 +1034,11 @@ internal sealed class Item : IComparable<Item>
 
     public ItemQualityRating? GetVagueQualityRating()
     {
-        if (EffectivePropertySet.IsCursed)
+        if (EffectiveAttributeSet.IsCursed)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(CursedItemQualityRating));
         }
-        if (EffectivePropertySet.Valueless)
+        if (EffectiveAttributeSet.Valueless)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(BrokenItemQualityRating));
         }
@@ -1050,11 +1050,11 @@ internal sealed class Item : IComparable<Item>
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
-        if (EffectivePropertySet.BonusArmorClass > 0)
+        if (EffectiveAttributeSet.BonusArmorClass > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
-        if (EffectivePropertySet.MeleeToHit + EffectivePropertySet.ToDamage > 0)
+        if (EffectiveAttributeSet.MeleeToHit + EffectiveAttributeSet.ToDamage > 0)
         {
             return Game.SingletonRepository.Get<ItemQualityRating>(nameof(GoodItemQualityRating));
         }
@@ -1066,9 +1066,9 @@ internal sealed class Item : IComparable<Item>
         List<string> identityDetailList = new List<string>();
         foreach (ItemIdentification itemIdentification in Game.SingletonRepository.Get<ItemIdentification>())
         {
-            if (itemIdentification.Test(EffectivePropertySet))
+            if (itemIdentification.Test(EffectiveAttributeSet))
             {
-                string[] identifications = itemIdentification.GenerateIdentifications(EffectivePropertySet);
+                string[] identifications = itemIdentification.GenerateIdentifications(EffectiveAttributeSet);
                 identityDetailList.AddRange(identifications);
             }
         }
@@ -1110,14 +1110,14 @@ internal sealed class Item : IComparable<Item>
         {
             return true;
         }
-        if (EffectivePropertySet.EasyKnow && IsFlavorAware)
+        if (EffectiveAttributeSet.EasyKnow && IsFlavorAware)
         {
             return true;
         }
         return false;
     }
 
-    public bool IsRare => EffectivePropertySet.HasKeyedItemEnhancements(Game.RareAttributeKey);
+    public bool IsRare => EffectiveAttributeSet.HasKeyedItemEnhancements(Game.RareAttributeKey);
 
     public EffectiveAttributeSet ObjectFlagsKnown()
     {
@@ -1125,7 +1125,7 @@ internal sealed class Item : IComparable<Item>
         {
             return new EffectiveAttributeSet(Game);
         }
-        return EffectivePropertySet;
+        return EffectiveAttributeSet;
     }
 
     /// <summary>
@@ -1144,12 +1144,12 @@ internal sealed class Item : IComparable<Item>
     public int GetUncursedValue()
     {
         // If the factory reports the item as valueless, then the item is valueless.
-        if (EffectivePropertySet.Valueless)
+        if (EffectiveAttributeSet.Valueless)
         {
             return 0;
         }
 
-        int value = EffectivePropertySet.Value;
+        int value = EffectiveAttributeSet.Value;
 
         return value;
     }
@@ -1248,7 +1248,7 @@ internal sealed class Item : IComparable<Item>
         if (IsKnown())
         {
             // We only need to check to see if the item is cursed.  The <see cref="GetRealValue"/> method checks to see if the item is valueless.
-            if (EffectivePropertySet.IsCursed)
+            if (EffectiveAttributeSet.IsCursed)
             {
                 return 0;
             }
@@ -1257,7 +1257,7 @@ internal sealed class Item : IComparable<Item>
         else
         {
             // Check to see if the player has identified the item via a sense ability.  If so, we can sense if the item has no value.
-            if (IdentSense && (EffectivePropertySet.Valueless || EffectivePropertySet.IsCursed))
+            if (IdentSense && (EffectiveAttributeSet.Valueless || EffectiveAttributeSet.IsCursed))
             {
                 return 0;
             }
@@ -1266,7 +1266,7 @@ internal sealed class Item : IComparable<Item>
             if (IsFlavorAware)
             {
                 // Return the value of the item factory.
-                return EffectivePropertySet.Get<SumEffectiveAttributeValue>(nameof(ValueAttribute)).Get(Game.FactoryAttributeKey);
+                return EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(ValueAttribute)).Get(Game.FactoryAttributeKey);
             }
 
             // We do not know what the item is, so return the base value of the factory.
@@ -1349,7 +1349,7 @@ internal sealed class Item : IComparable<Item>
             }
         }
         FixedArtifact = fixedArtifact;
-        EffectivePropertySet.MergeAttributeSet(Game.FixedAttributeKey, fixedArtifactItemPropertySet.ToReadOnly());
+        EffectiveAttributeSet.MergeAttributeSet(Game.FixedAttributeKey, fixedArtifactItemPropertySet.ToReadOnly());
         return true;
     }
 
@@ -1481,7 +1481,7 @@ internal sealed class Item : IComparable<Item>
         ItemEnhancement? itemAdditiveBundle = itemAdditiveBundleWeightedRandom.ChooseOrDefault();
         if (itemAdditiveBundle != null)
         {
-            EffectivePropertySet.MergeAttributeSet(itemAdditiveBundle.GenerateAttributeSet());
+            EffectiveAttributeSet.MergeAttributeSet(itemAdditiveBundle.GenerateAttributeSet());
         }
     }
 
@@ -1494,7 +1494,7 @@ internal sealed class Item : IComparable<Item>
     {
         // Create a set of random artifact characteristics.
         ReadOnlyAttributeSet randomArtifactPropertySet = _factory.CreateRandomArtifact(this, alsoIdentifyItem);
-        EffectivePropertySet.MergeAttributeSet(Game.RandomAttributeKey, randomArtifactPropertySet);
+        EffectiveAttributeSet.MergeAttributeSet(Game.RandomAttributeKey, randomArtifactPropertySet);
 
         ActivationRechargeTimeRemaining = 0; // TODO: If the item already had activation running, the conversion could change it? and restart the recharge?
         string newName;
@@ -1587,13 +1587,13 @@ internal sealed class Item : IComparable<Item>
         _factory = factory;
 
         // Generate the read-only item characteristics from the factory.
-        EffectivePropertySet = new EffectiveAttributeSet(Game);
+        EffectiveAttributeSet = new EffectiveAttributeSet(Game);
 
         // Generate the factory attribute set.
         ReadOnlyAttributeSet factoryPropertySet = factory.EffectiveAttributeSet.ToReadOnly();
 
         // Add it to the item.
-        EffectivePropertySet.MergeAttributeSet(Game.FactoryAttributeKey, factoryPropertySet);
+        EffectiveAttributeSet.MergeAttributeSet(Game.FactoryAttributeKey, factoryPropertySet);
 
         StackCount = 1;
 
@@ -1623,7 +1623,7 @@ internal sealed class Item : IComparable<Item>
     {
         Game = cloneFrom.Game;
         _factory = cloneFrom._factory;
-        EffectivePropertySet = cloneFrom.EffectivePropertySet.Clone();
+        EffectiveAttributeSet = cloneFrom.EffectiveAttributeSet.Clone();
 
         StackCount = newCount.HasValue ? newCount.Value : 1;
         NutritionalValue = cloneFrom.NutritionalValue;
@@ -1661,7 +1661,7 @@ internal sealed class Item : IComparable<Item>
     #region Item Properties Management
     public FixedArtifact? FixedArtifact = null;
 
-    public readonly EffectiveAttributeSet EffectivePropertySet;
+    public readonly EffectiveAttributeSet EffectiveAttributeSet;
 
     /// <summary>
     /// Returns the factory that created this item.  All of the initial state data is retrieved from the <see cref="ItemFactory"/>when the <see cref="Item"/> is created.  We preserve this <see cref="ItemFactory"/>
@@ -1682,13 +1682,13 @@ internal sealed class Item : IComparable<Item>
             // Check to see if we need to remove properties.
             if (IsRare)
             {
-                EffectivePropertySet.RemoveKeyedEnhancements(Game.RareAttributeKey);
+                EffectiveAttributeSet.RemoveKeyedEnhancements(Game.RareAttributeKey);
             }
         }
         else
         {
             // Check to see if we are enchanting a cursed or broken item.
-            int goodBadMultiplier = EffectivePropertySet.IsCursed || EffectivePropertySet.Valueless ? -1 : 1;
+            int goodBadMultiplier = EffectiveAttributeSet.IsCursed || EffectiveAttributeSet.Valueless ? -1 : 1;
 
             EffectiveAttributeSet? rareItemEffectivePropertySet = new EffectiveAttributeSet(Game);
             rareItemEffectivePropertySet.MergeAttributeSet(rareItem.GenerateAttributeSet());
@@ -1707,7 +1707,7 @@ internal sealed class Item : IComparable<Item>
             rareItemEffectivePropertySet.Tunnel *= goodBadMultiplier;
             rareItemEffectivePropertySet.Attacks *= goodBadMultiplier;
             rareItemEffectivePropertySet.Speed *= goodBadMultiplier;
-            EffectivePropertySet.MergeAttributeSet(Game.RareAttributeKey, rareItemEffectivePropertySet.ToReadOnly());
+            EffectiveAttributeSet.MergeAttributeSet(Game.RareAttributeKey, rareItemEffectivePropertySet.ToReadOnly());
         }
     }
     #endregion

@@ -17,7 +17,7 @@ internal class DetCurseMutationScript : UniversalScript, IGetKey
 
                 if (oPtr != null)
                 {
-                    if (oPtr.EffectivePropertySet.IsCursed)
+                    if (oPtr.EffectiveAttributeSet.IsCursed)
                     {
                         oPtr.Inscription = "cursed";
                     }

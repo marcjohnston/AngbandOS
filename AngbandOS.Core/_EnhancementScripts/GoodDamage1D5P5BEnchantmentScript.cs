@@ -22,6 +22,6 @@ internal class GoodDamage1D5P5BEnchantmentScript : Script, IEnhancementScript
     /// </remarks>
     public void ExecuteEnchantmentScript(Item item, int level)
     {
-        item.EffectivePropertySet.ToDamage += Game.DieRoll(5) + item.GetBonusValue(5, level);
+        item.EffectiveAttributeSet.ToDamage += Game.DieRoll(5) + item.GetBonusValue(5, level);
     }
 }

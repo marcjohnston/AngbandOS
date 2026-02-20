@@ -22,11 +22,11 @@ internal class FireItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectivePropertySet.HatesFire)
+        if (oPtr.EffectiveAttributeSet.HatesFire)
         {
             doKill = true;
             noteKill = plural ? " burn up!" : " burns up!";
-            if (oPtr.EffectivePropertySet.IgnoreFire)
+            if (oPtr.EffectiveAttributeSet.IgnoreFire)
             {
                 ignore = true;
             }
