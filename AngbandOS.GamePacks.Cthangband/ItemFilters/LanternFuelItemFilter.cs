@@ -12,5 +12,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LanternFuelItemFilter : ItemFilterGameConfiguration
 {
-    public override bool? IsLanternFuel => true;
+    public override string[]? AnyMatchingItemFactoryNames => new string[] { nameof(BrassLanternLightSourceItemFactory), nameof(FlaskOfOilItemFactory) };
 }

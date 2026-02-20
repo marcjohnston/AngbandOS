@@ -9,10 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FlaskOfOilItemFactory : ItemFactoryGameConfiguration
 {
-    /// <summary>
-    /// Returns true because a flask of oil is valid as fuel for lanterns.
-    /// </summary>
-    public override bool IsLanternFuel => true;
     public override string SymbolBindingKey => nameof(ExclamationPointSymbol);
     public override string Name => "Flask of oil";
 

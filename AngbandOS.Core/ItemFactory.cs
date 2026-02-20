@@ -92,7 +92,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         AlternateFlavorUnknownDescriptionSyntax = itemFactoryGameConfiguration.AlternateFlavorUnknownDescriptionSyntax;
         ZapBindingTuple = itemFactoryGameConfiguration.ZapBindingTuple;
         ItemClassBindingKey = itemFactoryGameConfiguration.ItemClassBindingKey;
-        IsLanternFuel = itemFactoryGameConfiguration.IsLanternFuel;
         PackSort = itemFactoryGameConfiguration.PackSort;
         WieldSlotBindingKeys = itemFactoryGameConfiguration.WieldSlotBindingKeys;
         AskDestroyAll = itemFactoryGameConfiguration.AskDestroyAll;
@@ -263,7 +262,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             AlternateFlavorUnknownDescriptionSyntax = AlternateFlavorUnknownDescriptionSyntax,
             ZapBindingTuple = ZapBindingTuple,
             ItemClassBindingKey = ItemClassBindingKey,
-            IsLanternFuel = IsLanternFuel,
             PackSort = PackSort,
             WieldSlotBindingKeys = WieldSlotBindingKeys,
             AskDestroyAll = AskDestroyAll,
@@ -1941,11 +1939,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     private string ItemClassBindingKey { get; }
 
     public bool DisableStomp { get; }
-
-    /// <summary>
-    /// Returns true, if the item is fuel for a lantern.  Returns false, by default.
-    /// </summary>
-    public bool IsLanternFuel { get; } = false;
 
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.

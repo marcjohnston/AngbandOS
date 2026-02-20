@@ -37,7 +37,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         CanBeZapped = itemFilterGameConfiguration.CanBeZapped;
         CanProjectArrows = itemFilterGameConfiguration.CanProjectArrows;
         IsKnown = itemFilterGameConfiguration.IsKnown;
-        IsLanternFuel = itemFilterGameConfiguration.IsLanternFuel;
         IsOfValue = itemFilterGameConfiguration.IsOfValue;
         IsTooHeavyToWield = itemFilterGameConfiguration.IsTooHeavyToWield;
         IsUsableSpellBook = itemFilterGameConfiguration.IsUsableSpellBook;
@@ -73,7 +72,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
             CanBeZapped = CanBeZapped,
             CanProjectArrows = CanProjectArrows,
             IsKnown = IsKnown,
-            IsLanternFuel = IsLanternFuel,
             IsOfValue = IsOfValue,
             IsTooHeavyToWield = IsTooHeavyToWield,
             IsUsableSpellBook = IsUsableSpellBook,
@@ -164,7 +162,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         itemMatchList.AddRange(AddBooleanMatch(CanBeZapped, new CanBeZappedBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanProjectArrows, new CanProjectArrowsBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsKnown, new IsKnownBooleanGetItemProperty(Game)));
-        itemMatchList.AddRange(AddBooleanMatch(IsLanternFuel, new IsLanternFuelBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsOfValue, new IsOfValueBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsTooHeavyToWield, new IsTooHeavyToWieldBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsUsableSpellBook, new IsUsableSpellBookBooleanGetItemProperty(Game)));

@@ -139,7 +139,6 @@ internal sealed class Item : IComparable<Item>
     public bool AskDestroyAll => _factory.AskDestroyAll;
     public bool VanishesWhenEatenBySkeletons => _factory.VanishesWhenEatenBySkeletons;
     public bool CanSpikeDoorClosed => _factory.CanSpikeDoorClosed;
-    public bool IsLanternFuel => _factory.IsLanternFuel;
     public ItemFactory[]? AmmunitionItemFactories => _factory.AmmunitionItemFactories;
     public bool ProvidesSunlight => _factory.ProvidesSunlight;
     public IScriptItem? EatMagicScript => _factory.EatMagicScript;

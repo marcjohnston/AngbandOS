@@ -14,11 +14,6 @@ public class BrassLanternLightSourceItemFactory : ItemFactoryGameConfiguration
     /// </summary>
     public override int? MaxPhlogiston => 15000;
 
-    /// <summary>
-    /// Returns true because a lantern contains oil which is valid as fuel for other lanterns.
-    /// </summary>
-    public override bool IsLanternFuel => true;
-
     public override string SymbolBindingKey => nameof(TildeSymbol);
     public override string Name => "Brass Lantern";
 

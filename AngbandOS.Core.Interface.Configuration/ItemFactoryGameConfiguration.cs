@@ -283,11 +283,6 @@ public class ItemFactoryGameConfiguration
     public virtual string ItemClassBindingKey { get; set; }
 
     /// <summary>
-    /// Returns true, if the item is fuel for a lantern.  Returns false, by default.
-    /// </summary>
-    public virtual bool IsLanternFuel { get; set; } = false;
-
-    /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
     /// </summary>
     public virtual int PackSort { get; set; }

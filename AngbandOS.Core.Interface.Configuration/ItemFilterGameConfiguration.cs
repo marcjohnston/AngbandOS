@@ -21,11 +21,9 @@ public class ItemFilterGameConfiguration
     public virtual bool? CanBeZapped { get; set; } = null;
     public virtual bool? CanProjectArrows { get; set; } = null;
     public virtual bool? IsKnown { get; set; } = null;
-    public virtual bool? IsLanternFuel { get; set; } = null;
     public virtual bool? IsOfValue { get; set; } = null;
     public virtual bool? IsTooHeavyToWield { get; set; } = null;
     public virtual bool? IsUsableSpellBook { get; set; } = null;
-    public virtual bool? IsWearableOrWieldable { get; set; } = null;
     public virtual bool? CanApplyBlessedArtifactBias { get; set; } = null;
     public virtual bool? ArtifactBiasCanSlay { get; set; } = null;
 
