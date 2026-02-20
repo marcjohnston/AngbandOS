@@ -41,21 +41,35 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
         }
         Item qPtr = new Item(Game, itemFactory);
         qPtr.StackCount = Game.CommandArgument == 0 ? 1 : Game.CommandArgument;
-        if (!Game.GetBool($"Allow Fixed Artifact (0=False, 1=True)? ", out bool allowFixedArtifact))
+        if (!Game.GetBool($"Random Artifact (0=False, 1=True)? ", out bool randomArtifact))
         {
             return;
         }
-        if (!Game.GetBool($"Good Item (0=False, 1=True)? ", out bool good))
+        if (randomArtifact)
         {
-            return;
+            qPtr.CreateRandomArtifact(true);
         }
-        if (!Game.GetBool($"Great Item (0=False, 1=True)? ", out bool great))
+        else
         {
-            return;
-        }
+            if (!Game.GetBool($"Allow Fixed Artifact (0=False, 1=True)? ", out bool allowFixedArtifact))
+            {
+                return;
+            }
+            if (!Game.GetBool($"Good Item (0=False, 1=True)? ", out bool good))
+            {
+                return;
+            }
+            if (!Game.GetBool($"Great Item (0=False, 1=True)? ", out bool great))
+            {
+                return;
+            }
+            if (!Game.GetBool($"Store Stock (0=False, 1=True)? ", out bool storeStock))
+            {
+                return;
+            }
 
-        qPtr.CreateRandomArtifact(true);
-        qPtr.EnchantItem(Game.Difficulty, allowFixedArtifact, good, great, false);
+            qPtr.EnchantItem(Game.Difficulty, allowFixedArtifact, good, great, storeStock);
+        }
         Game.DropNear(qPtr, null, Game.MapY.IntValue, Game.MapX.IntValue);
         Game.MsgPrint("Allocated.");
         return;
