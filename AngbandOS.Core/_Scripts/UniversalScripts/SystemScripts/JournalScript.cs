@@ -322,7 +322,7 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Ign Cold", 29, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.IgnoreCold);
         DisplayStat("Activate", 30, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Activation != null);
         DisplayStat("Drain Exp", 31, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.DrainExp);
-        DisplayStat("Teleport", 32, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Teleport);
+        DisplayStat("Teleport", 32, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get());
         DisplayStat("Aggravate", 33, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Aggravate);
         DisplayStat("Blessed", 34, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Blessed);
         DisplayStat("Cursed", 35, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.IsCursed);

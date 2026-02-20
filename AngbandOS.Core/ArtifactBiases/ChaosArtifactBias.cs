@@ -26,9 +26,9 @@ internal class ChaosArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(EffectiveAttributeSet characteristics)
     {
-        if (!characteristics.Teleport)
+        if (!characteristics.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get())
         {
-            characteristics.Teleport = true;
+            characteristics.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Set();
             if (Game.DieRoll(2) == 1)
             {
                 return true;

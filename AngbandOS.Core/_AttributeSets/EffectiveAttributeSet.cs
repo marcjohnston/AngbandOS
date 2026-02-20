@@ -1487,20 +1487,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             }
         }
     }
-    public bool Teleport
-    {
-        get
-        {
-            return Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Set();
-            }
-        }
-    }
     public int TreasureRating
     {
         get

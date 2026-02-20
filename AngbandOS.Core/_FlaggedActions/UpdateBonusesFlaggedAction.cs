@@ -232,7 +232,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasAggravation = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Teleport)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get())
                     {
                         Game.HasRandomTeleport = true;
                     }

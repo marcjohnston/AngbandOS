@@ -1180,7 +1180,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             }
             if (Game.DieRoll(2) == 1)
             {
-                characteristics.Teleport = true;
+                characteristics.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Set();
             }
             else if (Game.DieRoll(3) == 1)
             {
@@ -1306,7 +1306,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 23:
-                    characteristics.Teleport = true;
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Set();
                     break;
 
                 case 24:
