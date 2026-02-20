@@ -12,6 +12,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CanBeEatenItemFilter : ItemFilterGameConfiguration
 {
-
-    public override bool? CanBeEaten => true;
+    public override string[]? AnyMatchingItemClassNames => new string[]
+    {
+        nameof(FoodItemClass),
+        nameof(MushroomItemClass),
+    };
 }

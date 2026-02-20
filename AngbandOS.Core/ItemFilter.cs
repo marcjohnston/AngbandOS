@@ -29,7 +29,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
 
         CanBeActivated = itemFilterGameConfiguration.CanBeActivated;
         CanBeAimed = itemFilterGameConfiguration.CanBeAimed;
-        CanBeEaten = itemFilterGameConfiguration.CanBeEaten;
         CanBeFired = itemFilterGameConfiguration.CanBeFired;
         CanBeQuaffed = itemFilterGameConfiguration.CanBeQuaffed;
         CanBeRead = itemFilterGameConfiguration.CanBeRead;
@@ -66,7 +65,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
 
             CanBeActivated = CanBeActivated,
             CanBeAimed = CanBeAimed,
-            CanBeEaten = CanBeEaten,
             CanBeFired = CanBeFired,
             CanBeQuaffed = CanBeQuaffed,
             CanBeRead = CanBeRead,
@@ -158,7 +156,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
 
         itemMatchList.AddRange(AddBooleanMatch(CanBeActivated, new CanBeActivatedBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanBeAimed, new CanBeAimedBooleanGetItemProperty(Game)));
-        itemMatchList.AddRange(AddBooleanMatch(CanBeEaten, new CanBeEatenBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanBeFired, new CanBeFiredBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanBeQuaffed, new CanBeQuaffedBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanBeRead, new CanBeReadBooleanGetItemProperty(Game)));
@@ -203,11 +200,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
     /// Returns true, if the item can be aimed; false, if the item cannot be aimed; or null, if indifferent.  Returns null, by default.
     /// </summary>
     public bool? CanBeAimed { get; } = null;
-
-    /// <summary>
-    /// Returns true, if the item can be eaten; false, if the item cannot be eaten; or null, if indifferent.  Returns null, by default.
-    /// </summary>
-    public bool? CanBeEaten { get; } = null;
 
     /// <summary>
     /// Returns true, if the item can be fired; false, if the item cannot be fired; or null, if indifferent.  Returns null, by default.

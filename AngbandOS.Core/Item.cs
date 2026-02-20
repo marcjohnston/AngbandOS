@@ -142,7 +142,6 @@ internal sealed class Item : IComparable<Item>
     public bool IsLanternFuel => _factory.IsLanternFuel;
     public ItemFactory[]? AmmunitionItemFactories => _factory.AmmunitionItemFactories;
     public bool ProvidesSunlight => _factory.ProvidesSunlight;
-    public bool CanBeEaten => _factory.CanBeEaten;
     public IScriptItem? EatMagicScript => _factory.EatMagicScript;
     public (IEatOrQuaffScript QuaffScript, ProjectileScript? SmashScript, int ManaEquivalent)? QuaffTuple => _factory.QuaffTuple;
     public (IZapRodScript Script, Expression TurnsToRecharge, bool RequiresAiming, int ManaEquivalent)? ZapTuple => _factory.ZapTuple;

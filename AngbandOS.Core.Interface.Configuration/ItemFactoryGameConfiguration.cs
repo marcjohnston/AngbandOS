@@ -234,11 +234,6 @@ public class ItemFactoryGameConfiguration
     public virtual bool IdentityCanBeSensed { get; set; } = false;
 
     /// <summary>
-    /// Returns true, if the item can be eaten.
-    /// </summary>
-    public virtual bool CanBeEaten { get; set; } = false;
-
-    /// <summary>
     /// Returns true, if the item is armor.
     /// </summary>
     public virtual bool IsArmor { get; set; } = false;

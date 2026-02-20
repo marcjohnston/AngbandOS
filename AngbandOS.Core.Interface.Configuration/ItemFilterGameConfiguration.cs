@@ -13,7 +13,6 @@ public class ItemFilterGameConfiguration
     public virtual string[]? AllNonMatchingItemFactoryNames { get; set; } = null;
     public virtual bool? CanBeActivated { get; set; } = null;
     public virtual bool? CanBeAimed { get; set; } = null;
-    public virtual bool? CanBeEaten { get; set; } = null;
     public virtual bool? CanBeFired { get; set; } = null;
     public virtual bool? CanBeQuaffed { get; set; } = null;
     public virtual bool? CanBeRead { get; set; } = null;

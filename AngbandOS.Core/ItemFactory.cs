@@ -80,7 +80,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         MakeObjectCountExpression = itemFactoryGameConfiguration.MakeObjectCountExpression;
         GetsDamageMultiplier = itemFactoryGameConfiguration.GetsDamageMultiplier;
         IdentityCanBeSensed = itemFactoryGameConfiguration.IdentityCanBeSensed;
-        CanBeEaten = itemFactoryGameConfiguration.CanBeEaten;
         IsArmor = itemFactoryGameConfiguration.IsArmor;
         IsWeapon = itemFactoryGameConfiguration.IsWeapon;
         NumberOfItemsContained = itemFactoryGameConfiguration.NumberOfItemsContained;
@@ -252,7 +251,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
             MakeObjectCountExpression = MakeObjectCountExpression,
             GetsDamageMultiplier = GetsDamageMultiplier,
             IdentityCanBeSensed = IdentityCanBeSensed,
-            CanBeEaten = CanBeEaten,
             IsArmor = IsArmor,
             IsWeapon = IsWeapon,
             NumberOfItemsContained = NumberOfItemsContained,
@@ -1892,11 +1890,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// Returns true, if the item can be sensed; false, otherwise.  Returns false, by default.
     /// </summary>
     public bool IdentityCanBeSensed { get; } = false;
-
-    /// <summary>
-    /// Returns true, if the item can be eaten.
-    /// </summary>
-    public bool CanBeEaten { get; } = false;
 
     /// <summary>
     /// Returns true, if the item is armor.
