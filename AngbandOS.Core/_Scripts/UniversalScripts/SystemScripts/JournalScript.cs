@@ -234,7 +234,7 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Add Speed", 14, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Speed > 0);
         DisplayStat("Add Blows", 15, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Attacks > 0);
         DisplayStat("Chaotic", 16, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Chaotic);
-        DisplayStat("Vampiric", 17, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Vampiric);
+        DisplayStat("Vampiric", 17, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get());
 
         Game.DisplayPlayerEquippy(0, 26 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 26 + 11);
@@ -300,7 +300,7 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Anti-Theft", 25, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.AntiTheft);
         DisplayStat("Anti-Tele", 26, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.NoTele);
         DisplayStat("Anti-Magic", 27, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.NoMagic);
-        DisplayStat("WraithForm", 28, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Wraith);
+        DisplayStat("WraithForm", 28, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(WraithAttribute)).Get());
         DisplayStat("EvilCurse", 29, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.DreadCurse);
         DisplayStat("Easy Know", 30, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.EasyKnow);
         DisplayStat("Hide Type", 31, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.HideType);
@@ -314,8 +314,8 @@ internal class JournalScript : UniversalScript, IGetKey
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 52 + 11);
         DisplayStat("Digestion", 22, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SlowDigest);
         DisplayStat("Regen", 23, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Regen);
-        DisplayStat("Xtra Might", 24, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.XtraMight);
-        DisplayStat("Xtra Shots", 25, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.XtraShots);
+        DisplayStat("Xtra Might", 24, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get());
+        DisplayStat("Xtra Shots", 25, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get());
         DisplayStat("Ign Acid", 26, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.IgnoreAcid);
         DisplayStat("Ign Elec", 27, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.IgnoreElec);
         DisplayStat("Ign Fire", 28, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.IgnoreFire);

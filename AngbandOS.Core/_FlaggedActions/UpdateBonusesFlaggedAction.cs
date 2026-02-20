@@ -224,7 +224,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasAntiTheft = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.XtraShots)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get())
                     {
                         extraShots++;
                     }
@@ -244,7 +244,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasBlessedBlade = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.XtraMight)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get())
                     {
                         Game.HasExtraMight = true;
                     }
@@ -276,7 +276,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasHoldLife = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Wraith)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(WraithAttribute)).Get())
                     {
                         Game.EtherealnessTimer.SetValue(Math.Max(Game.EtherealnessTimer.Value, 20));
                     }

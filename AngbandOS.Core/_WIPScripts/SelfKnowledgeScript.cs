@@ -376,7 +376,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
             {
                 info[infoCount++] = "Your weapon is very sharp.";
             }
-            if (meleeItem.EffectiveAttributeSet.Vampiric)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon drains life from your foes.";
             }

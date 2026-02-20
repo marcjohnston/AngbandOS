@@ -7002,7 +7002,7 @@ internal partial class Game
                 {
                     // Get our weapon's flags to see if we need to do anything special
                     chaosEffect = meleeItem.EffectiveAttributeSet.Chaotic && DieRoll(2) == 1;
-                    if (meleeItem.EffectiveAttributeSet.Vampiric || (chaosEffect && DieRoll(5) < 3))
+                    if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get() || (chaosEffect && DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
@@ -7096,7 +7096,7 @@ internal partial class Game
                     {
                         int stepK = totalDamage;
                         string message = meleeItem.EffectiveAttributeSet.Vorpal1InChance == 0 ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
-                        int vorpalExtraAttacks1InChance = meleeItem.EffectiveAttributeSet.VorpalExtraAttacks1InChance;
+                        int vorpalExtraAttacks1InChance = meleeItem.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(VorpalExtraAttacks1InChanceAttribute)).Get();
                         MsgPrint(message);
                         do
                         {

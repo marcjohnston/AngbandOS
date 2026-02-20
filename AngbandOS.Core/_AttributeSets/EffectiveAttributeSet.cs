@@ -1512,13 +1512,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Set(value);
         }
     }
-    public int Value
-    {
-        get
-        {
-            return Get<SumEffectiveAttributeValue>(nameof(ValueAttribute)).Get();
-        }
-    }
     public bool Valueless
     {
         get
@@ -1533,13 +1526,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             }
         }
     }
-    public bool Vampiric
-    {
-        get
-        {
-            return Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get();
-        }
-    }
     public int Vorpal1InChance
     {
         get
@@ -1551,13 +1537,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             Get<SumEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Set(value);
         }
     }
-    public int VorpalExtraAttacks1InChance
-    {
-        get
-        {
-            return Get<SumEffectiveAttributeValue>(nameof(VorpalExtraAttacks1InChanceAttribute)).Get();
-        }
-    }
     public int Weight
     {
         get
@@ -1567,27 +1546,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
         set
         {
             Get<SumEffectiveAttributeValue>(nameof(WeightAttribute)).Set(value);
-        }
-    }
-    public bool Wraith
-    {
-        get
-        {
-            return Get<OrEffectiveAttributeValue>(nameof(WraithAttribute)).Get();
-        }
-    }
-    public bool XtraMight
-    {
-        get
-        {
-            return Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get();
-        }
-    }
-    public bool XtraShots
-    {
-        get
-        {
-            return Get<OrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get();
         }
     }
     #endregion

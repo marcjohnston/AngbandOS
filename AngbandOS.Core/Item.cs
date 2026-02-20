@@ -1149,7 +1149,7 @@ internal sealed class Item : IComparable<Item>
             return 0;
         }
 
-        int value = EffectiveAttributeSet.Value;
+        int value = EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(ValueAttribute)).Get();
 
         return value;
     }

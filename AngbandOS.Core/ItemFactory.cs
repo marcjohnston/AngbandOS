@@ -541,7 +541,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         if (IsRangedWeapon)
         {
             int power = MissileDamageMultiplier;
-            if (item.EffectiveAttributeSet.XtraMight)
+            if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get())
             {
                 power++;
             }
