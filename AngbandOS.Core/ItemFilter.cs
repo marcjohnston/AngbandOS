@@ -41,7 +41,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         IsTooHeavyToWield = itemFilterGameConfiguration.IsTooHeavyToWield;
         IsUsableSpellBook = itemFilterGameConfiguration.IsUsableSpellBook;
 
-        CanApplyBlessedArtifactBias = itemFilterGameConfiguration.CanApplyBlessedArtifactBias;
         ArtifactBiasCanSlay = itemFilterGameConfiguration.ArtifactBiasCanSlay;
         ArtifactBias = itemFilterGameConfiguration.ArtifactBias;
         IsCursed = itemFilterGameConfiguration.IsCursed;
@@ -79,7 +78,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
             AllNonMatchingItemClassNames = AllNonMatchingItemClassNames,
             AnyMatchingItemFactoryNames = AnyMatchingItemFactoryNames,
             AllNonMatchingItemFactoryNames = AllNonMatchingItemFactoryNames,
-            CanApplyBlessedArtifactBias = CanApplyBlessedArtifactBias,
             ArtifactBiasCanSlay = ArtifactBiasCanSlay,
             ArtifactBias = ArtifactBias,
             IsCursed = IsCursed,
@@ -168,7 +166,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         itemMatchList.AddRange(AddContainsMatch<ItemClass>(AnyMatchingItemClasses, AllNonMatchingItemClasses, new ItemClassGetItemProperty(Game)));
         itemMatchList.AddRange(AddContainsMatch<ItemFactory>(AnyMatchingItemFactories, AllNonMatchingItemFactories, new ItemFactoryGetItemProperty(Game)));
 
-        itemMatchList.AddRange(AddBooleanMatch(CanApplyBlessedArtifactBias, new CanApplyBlessedArtifactBiasBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(ArtifactBiasCanSlay, new ArtifactBiasCanSlayBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(ArtifactBias, new ArtifactBiasBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsCursed, new IsCursedBooleanGetItemProperty(Game)));
@@ -283,7 +280,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
     private string[]? AllNonMatchingItemFactoryNames { get; } = null;
     public ItemFactory[]? AllNonMatchingItemFactories { get; private set; }
 
-    public bool? CanApplyBlessedArtifactBias { get; } = null;
     public bool? ArtifactBiasCanSlay { get; } = null;
 
     public bool? ArtifactBias { get; } = null;

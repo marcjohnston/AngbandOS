@@ -12,6 +12,6 @@ public class CanBlessAndFalseBlessedItemFilter : ItemFilterGameConfiguration
     public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
     {
         (nameof(BlessedAttribute), false),
+        (nameof(CanApplyBlessedArtifactBiasAttribute), true),
     };
-    public override bool? CanApplyBlessedArtifactBias => true;
 }
