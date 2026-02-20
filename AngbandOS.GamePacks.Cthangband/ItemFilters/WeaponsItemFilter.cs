@@ -12,5 +12,17 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponsItemFilter : ItemFilterGameConfiguration
 {
-    public override bool? IsWeapon => true;
+    public override string[]? AnyMatchingItemClassNames => new string[]
+    {
+        nameof(PolearmsItemClass),
+        nameof(HaftedItemClass),
+        nameof(SwordsItemClass),
+        nameof(DiggersItemClass),
+        nameof(CrossbowItemClass),
+        nameof(ShotsItemClass),
+        nameof(ArrowsItemClass),
+        nameof(SlingItemClass),
+        nameof(BoltsItemClass),
+        nameof(BowItemClass),
+    };
 }

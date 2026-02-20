@@ -25,7 +25,7 @@ public class BallAndChainHaftedWeaponItemFactory : ItemFactoryGameConfiguration
         (100, "3d5-3")
     };
 
-    public override string ItemClassBindingKey => nameof(HaftedWeaponsItemClass);
+    public override string ItemClassBindingKey => nameof(HaftedItemClass);
     public override int PackSort => 30;
 
 

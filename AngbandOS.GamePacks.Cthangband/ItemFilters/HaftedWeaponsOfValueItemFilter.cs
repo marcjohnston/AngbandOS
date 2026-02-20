@@ -14,7 +14,7 @@ public class HaftedWeaponsOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]
         {
-            nameof(HaftedWeaponsItemClass)
+            nameof(HaftedItemClass)
         };
     public override bool? IsOfValue => true;
 }

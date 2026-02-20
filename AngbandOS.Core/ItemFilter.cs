@@ -40,7 +40,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         IsOfValue = itemFilterGameConfiguration.IsOfValue;
         IsTooHeavyToWield = itemFilterGameConfiguration.IsTooHeavyToWield;
         IsUsableSpellBook = itemFilterGameConfiguration.IsUsableSpellBook;
-        IsWeapon = itemFilterGameConfiguration.IsWeapon;
         IsWearableOrWieldable = itemFilterGameConfiguration.IsWearableOrWieldable;
         AnyMatchingItemClassNames = itemFilterGameConfiguration.AnyMatchingItemClassNames;
         AllNonMatchingItemClassNames = itemFilterGameConfiguration.AllNonMatchingItemClassNames;
@@ -85,7 +84,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
             IsOfValue = IsOfValue,
             IsTooHeavyToWield = IsTooHeavyToWield,
             IsUsableSpellBook = IsUsableSpellBook,
-            IsWeapon = IsWeapon,
             IsWearableOrWieldable = IsWearableOrWieldable,
             AnyMatchingItemClassNames = AnyMatchingItemClassNames,
             AllNonMatchingItemClassNames = AllNonMatchingItemClassNames,
@@ -181,7 +179,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         itemMatchList.AddRange(AddBooleanMatch(IsOfValue, new IsOfValueBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsTooHeavyToWield, new IsTooHeavyToWieldBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsUsableSpellBook, new IsUsableSpellBookBooleanGetItemProperty(Game)));
-        itemMatchList.AddRange(AddBooleanMatch(IsWeapon, new IsWeaponBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(IsWearableOrWieldable, new IsWearableOrWieldableBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddContainsMatch<ItemClass>(AnyMatchingItemClasses, AllNonMatchingItemClasses, new ItemClassGetItemProperty(Game)));
         itemMatchList.AddRange(AddContainsMatch<ItemFactory>(AnyMatchingItemFactories, AllNonMatchingItemFactories, new ItemFactoryGetItemProperty(Game)));
@@ -292,11 +289,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
     /// Returns true, if the item is either the primary or secondary spell book; false, if the item cannot be either the primary or secondary spell book; or null, if indifferent.  Returns null, by default.
     /// </summary>
     public bool? IsUsableSpellBook { get; } = null;
-
-    /// <summary>
-    /// Returns true, if the item must a weapon; false, if the item cannot be a weapon; or null, if indifferent.  Returns null, by default.
-    /// </summary>
-    public bool? IsWeapon { get; } = null;
 
     /// <summary>
     /// Returns true, if the item is wearable; false, if the item cannot be wearable; or null, if indifferent.  Returns null, by default.

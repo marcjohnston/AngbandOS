@@ -28,7 +28,6 @@ public class ItemFilterGameConfiguration
     public virtual bool? IsOfValue { get; set; } = null;
     public virtual bool? IsTooHeavyToWield { get; set; } = null;
     public virtual bool? IsUsableSpellBook { get; set; } = null;
-    public virtual bool? IsWeapon { get; set; } = null;
     public virtual bool? IsWearableOrWieldable { get; set; } = null;
     public virtual bool? CanApplyBlessedArtifactBias { get; set; } = null;
     public virtual bool? ArtifactBiasCanSlay { get; set; } = null;

@@ -23,7 +23,7 @@ public class MightyHammerHaftedWeaponItemFactory : ItemFactoryGameConfiguration
         (100, "3d5-3")
     };
 
-    public override string ItemClassBindingKey => nameof(HaftedWeaponsItemClass);
+    public override string ItemClassBindingKey => nameof(HaftedItemClass);
     public override int PackSort => 30;
 
     public override string[] WieldSlotBindingKeys => new string[] { nameof(WieldSlotsEnum.MeleeWeaponWieldSlot) };
