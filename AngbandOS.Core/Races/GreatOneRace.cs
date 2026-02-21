@@ -38,7 +38,7 @@ internal class GreatOneRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SustCon = true;
+        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
         itemCharacteristics.Regen = true;
     }
     protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);

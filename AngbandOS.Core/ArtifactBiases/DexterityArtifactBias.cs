@@ -27,9 +27,9 @@ internal class DexterityArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(EffectiveAttributeSet characteristics)
     {
-        if (!characteristics.SustDex)
+        if (!characteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Get())
         {
-            characteristics.SustDex = true;
+            characteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
             if (Game.DieRoll(2) == 1)
             {
                 return true;

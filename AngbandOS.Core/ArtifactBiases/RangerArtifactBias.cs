@@ -51,9 +51,9 @@ internal class RangerArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(EffectiveAttributeSet characteristics)
     {
-        if (!characteristics.SustCon)
+        if (!characteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Get())
         {
-            characteristics.SustCon = true;
+            characteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
             if (Game.DieRoll(2) == 1)
             {
                 return true;

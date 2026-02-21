@@ -233,12 +233,12 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
                 {
                     // Only extract known bonuses, not full bonuses
                     EffectiveAttributeSet itemCharacteristics = item.ObjectFlagsKnown();
-                    ShowBonus(itemCharacteristics.SustStr, itemCharacteristics.Strength > 0, item.EffectiveAttributeSet.Strength, row + 0, col);
-                    ShowBonus(itemCharacteristics.SustInt, itemCharacteristics.Intelligence > 0, item.EffectiveAttributeSet.Intelligence, row + 1, col);
+                    ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Get(), itemCharacteristics.Strength > 0, item.EffectiveAttributeSet.Strength, row + 0, col);
+                    ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Get(), itemCharacteristics.Intelligence > 0, item.EffectiveAttributeSet.Intelligence, row + 1, col);
                     ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get(), itemCharacteristics.Wisdom > 0, item.EffectiveAttributeSet.Wisdom, row + 2, col);
-                    ShowBonus(itemCharacteristics.SustDex, itemCharacteristics.Dexterity > 0, item.EffectiveAttributeSet.Dexterity, row + 3, col);
-                    ShowBonus(itemCharacteristics.SustCon, itemCharacteristics.Constitution > 0, item.EffectiveAttributeSet.Constitution, row + 4, col);
-                    ShowBonus(itemCharacteristics.SustCha, itemCharacteristics.Charisma > 0, item.EffectiveAttributeSet.Charisma, row + 5, col);
+                    ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Get(), itemCharacteristics.Dexterity > 0, item.EffectiveAttributeSet.Dexterity, row + 3, col);
+                    ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Get(), itemCharacteristics.Constitution > 0, item.EffectiveAttributeSet.Constitution, row + 4, col);
+                    ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Get(), itemCharacteristics.Charisma > 0, item.EffectiveAttributeSet.Charisma, row + 5, col);
                 }
                 col++;
             }

@@ -1206,7 +1206,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             switch (Game.DieRoll(31))
             {
                 case 1:
-                    characteristics.SustStr = true;
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
@@ -1214,7 +1214,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 2:
-                    characteristics.SustInt = true;
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
@@ -1230,7 +1230,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 4:
-                    characteristics.SustDex = true;
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
@@ -1238,7 +1238,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 5:
-                    characteristics.SustCon = true;
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
@@ -1246,7 +1246,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 6:
-                    characteristics.SustCha = true;
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));

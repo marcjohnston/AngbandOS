@@ -256,12 +256,12 @@ internal class JournalScript : UniversalScript, IGetKey
 
         Game.DisplayPlayerEquippy(0, 52 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 52 + 11);
-        DisplayStat("Sust Str", 2, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SustStr);
-        DisplayStat("Sust Int", 3, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SustInt);
+        DisplayStat("Sust Str", 2, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Get());
+        DisplayStat("Sust Int", 3, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Get());
         DisplayStat("Sust Wis", 4, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get());
-        DisplayStat("Sust Dex", 5, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SustDex);
-        DisplayStat("Sust Con", 6, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SustCon);
-        DisplayStat("Sust Cha", 7, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SustCha);
+        DisplayStat("Sust Dex", 5, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Get());
+        DisplayStat("Sust Con", 6, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Get());
+        DisplayStat("Sust Cha", 7, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Get());
 
 
         DisplayStat("Imm Acid", 10, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ImAcid);

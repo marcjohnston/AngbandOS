@@ -44,12 +44,12 @@ internal class GreatOrbOfLightEnchantmentScript : Script, IEnhancementScript
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResDisen = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.FreeAct = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.HoldLife = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SustStr = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SustInt = true);
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set());
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SustDex = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SustCon = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SustCha = true);
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Feather = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SeeInvis = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set());

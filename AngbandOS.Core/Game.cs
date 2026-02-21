@@ -13085,7 +13085,7 @@ internal partial class Game
         }
         if (CharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainConstitutionLevel)
         {
-            itemCharacteristics.SustCon = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
         }
         if (CharacterClass.InstantPoisonResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantPoisonResistanceLevel)
         {
@@ -13093,11 +13093,11 @@ internal partial class Game
         }
         if (CharacterClass.InstantSustainDexterityLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainDexterityLevel)
         {
-            itemCharacteristics.SustDex = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
         }
         if (CharacterClass.InstantSustainStrengthLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainStrengthLevel)
         {
-            itemCharacteristics.SustStr = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
         }
         if (CharacterClass.InstantHoldLifeLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantHoldLifeLevel)
         {
@@ -13113,7 +13113,7 @@ internal partial class Game
         }
         if (CharacterClass.InstantSustainCharismaLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainCharismaLevel)
         {
-            itemCharacteristics.SustCha = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
         }
         if (CharacterClass.InstantSoundResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSoundResistanceLevel)
         {
@@ -13129,7 +13129,7 @@ internal partial class Game
         }
         if (CharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainIntelligenceLevel)
         {
-            itemCharacteristics.SustInt = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
         }
         if (CharacterClass.InstantNexusResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantNexusResistanceLevel)
         {
@@ -13184,14 +13184,14 @@ internal partial class Game
         }
         if (SustainAll)
         {
-            itemCharacteristics.SustCon = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
             if (ExperienceLevel.IntValue > 9)
             {
-                itemCharacteristics.SustStr = true;
+                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
             }
             if (ExperienceLevel.IntValue > 19)
             {
-                itemCharacteristics.SustDex = true;
+                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
             }
             if (ExperienceLevel.IntValue > 29)
             {
@@ -13199,11 +13199,11 @@ internal partial class Game
             }
             if (ExperienceLevel.IntValue > 39)
             {
-                itemCharacteristics.SustInt = true;
+                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
             }
             if (ExperienceLevel.IntValue > 49)
             {
-                itemCharacteristics.SustCha = true;
+                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
             }
         }
         return itemCharacteristics;

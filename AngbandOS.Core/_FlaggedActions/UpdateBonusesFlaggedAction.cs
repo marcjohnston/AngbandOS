@@ -380,11 +380,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasAntiTeleport = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.SustStr)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Get())
                     {
                         Game.HasSustainStrength = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.SustInt)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Get())
                     {
                         Game.HasSustainIntelligence = true;
                     }
@@ -392,15 +392,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasSustainWisdom = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.SustDex)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Get())
                     {
                         Game.HasSustainDexterity = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.SustCon)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Get())
                     {
                         Game.HasSustainConstitution = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.SustCha)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Get())
                     {
                         Game.HasSustainCharisma = true;
                     }
