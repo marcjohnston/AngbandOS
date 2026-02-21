@@ -46,7 +46,7 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
             oPtr.Inscription = "uncursed";
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         }
-        if (oPtr.EffectiveAttributeSet.Blessed)
+        if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get())
         {
             string s = oPtr.StackCount > 1 ? "were" : "was";
             Game.MsgPrint($"{your} {oName} {s} blessed already.");
@@ -56,7 +56,7 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
         {
             string s = oPtr.StackCount > 1 ? "" : "s";
             Game.MsgPrint($"{your} {oName} shine{s}!");
-            oPtr.EffectiveAttributeSet.Blessed = true;
+            oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Set();
         }
         else
         {

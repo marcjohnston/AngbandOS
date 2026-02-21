@@ -360,7 +360,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         Item? meleeItem = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
         if (meleeItem != null)
         {
-            if (meleeItem.EffectiveAttributeSet.Blessed)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon has been blessed by the gods.";
             }
@@ -380,23 +380,23 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
             {
                 info[infoCount++] = "Your weapon drains life from your foes.";
             }
-            if (meleeItem.EffectiveAttributeSet.BrandAcid)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandAcidAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon melts your foes.";
             }
-            if (meleeItem.EffectiveAttributeSet.BrandElec)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandElecAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon shocks your foes.";
             }
-            if (meleeItem.EffectiveAttributeSet.BrandFire)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandFireAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon burns your foes.";
             }
-            if (meleeItem.EffectiveAttributeSet.BrandCold)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandColdAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon freezes your foes.";
             }
-            if (meleeItem.EffectiveAttributeSet.BrandPois)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandPoisAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon poisons your foes.";
             }

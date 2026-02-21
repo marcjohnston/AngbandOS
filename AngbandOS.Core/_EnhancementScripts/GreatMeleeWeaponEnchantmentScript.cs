@@ -85,7 +85,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 if (Game.RandomLessThan(100) < 20)
                 {
                     item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
-                    item.EffectiveAttributeSet.Blessed = true;
+                    item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Set();
                     item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfEvilBaneItemEnhancement)));
                 }
                 break;
@@ -167,7 +167,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 }
                 if (Game.DieRoll(5) == 1)
                 {
-                    item.EffectiveAttributeSet.BrandPois = true;
+                    item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandPoisAttribute)).Set();
                 }
                 if (item.CapableOfVorpalSlaying && Game.DieRoll(3) == 1)
                 {

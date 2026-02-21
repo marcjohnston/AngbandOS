@@ -248,11 +248,11 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Slay Drag.", 9, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get() > 1);
         DisplayStat("Sharpness", 10, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Vorpal1InChance > 0);
         DisplayStat("Impact", 11, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Impact);
-        DisplayStat("Poison Brd", 12, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BrandPois);
-        DisplayStat("Acid Brand", 13, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BrandAcid);
-        DisplayStat("Elec Brand", 14, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BrandElec);
-        DisplayStat("Fire Brand", 15, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BrandFire);
-        DisplayStat("Cold Brand", 16, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BrandCold);
+        DisplayStat("Poison Brd", 12, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(BrandPoisAttribute)).Get());
+        DisplayStat("Acid Brand", 13, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(BrandAcidAttribute)).Get());
+        DisplayStat("Elec Brand", 14, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(BrandElecAttribute)).Get());
+        DisplayStat("Fire Brand", 15, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(BrandFireAttribute)).Get());
+        DisplayStat("Cold Brand", 16, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(BrandColdAttribute)).Get());
 
         Game.DisplayPlayerEquippy(0, 52 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 52 + 11);
@@ -297,7 +297,7 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Aura Fire", 22, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ShFireAttribute)).Get());
         DisplayStat("Aura Elec", 23, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ShElecAttribute)).Get());
 
-        DisplayStat("Anti-Theft", 25, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.AntiTheft);
+        DisplayStat("Anti-Theft", 25, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(AntiTheftAttribute)).Get());
         DisplayStat("Anti-Tele", 26, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.NoTele);
         DisplayStat("Anti-Magic", 27, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.NoMagic);
         DisplayStat("WraithForm", 28, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(WraithAttribute)).Get());
@@ -323,8 +323,8 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Activate", 30, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Activation != null);
         DisplayStat("Drain Exp", 31, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.DrainExp);
         DisplayStat("Teleport", 32, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get());
-        DisplayStat("Aggravate", 33, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Aggravate);
-        DisplayStat("Blessed", 34, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Blessed);
+        DisplayStat("Aggravate", 33, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(AggravateAttribute)).Get());
+        DisplayStat("Blessed", 34, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get());
         DisplayStat("Cursed", 35, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.IsCursed);
         DisplayStat("Hvy Curse", 36, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.HeavyCurse);
         DisplayStat("Prm Curse", 37, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.PermaCurse);

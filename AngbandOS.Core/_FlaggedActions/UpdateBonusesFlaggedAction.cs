@@ -220,7 +220,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasQuakeWeapon = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.AntiTheft)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(AntiTheftAttribute)).Get())
                     {
                         Game.HasAntiTheft = true;
                     }
@@ -228,7 +228,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         extraShots++;
                     }
-                    if (oPtr.EffectiveAttributeSet.Aggravate)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(AggravateAttribute)).Get())
                     {
                         Game.HasAggravation = true;
                     }
@@ -240,7 +240,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasExperienceDrain = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Blessed)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get())
                     {
                         Game.HasBlessedBlade = true;
                     }

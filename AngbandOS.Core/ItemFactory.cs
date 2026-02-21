@@ -1078,7 +1078,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 22:
                 case 23:
-                    if (characteristics.CanApplyBlowsBonus)
+                    if (characteristics.Get<OrEffectiveAttributeValue>(nameof(CanApplyBlowsBonusAttribute)).Get())
                     {
                         ApplyRandomBonuses(characteristics);
                     }
@@ -1172,7 +1172,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             }
             if (Game.DieRoll(2) == 1)
             {
-                characteristics.Aggravate = true;
+                characteristics.Get<OrEffectiveAttributeValue>(nameof(AggravateAttribute)).Set();
             }
             if (Game.DieRoll(3) == 1)
             {
@@ -1312,7 +1312,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 case 24:
                 case 25:
                 case 26:
-                    if (!characteristics.CanApplyBonusArmorClassMiscPower)
+                    if (!characteristics.Get<OrEffectiveAttributeValue>(nameof(CanApplyBonusArmorClassMiscPowerAttribute)).Get())
                     {
                         // This item cannot have misc power, select a different
                         ApplyMiscPowerForRandomArtifactCreation(characteristics);
@@ -1430,7 +1430,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         }
         while (powers-- != 0)
         {
-            int maxType = (characteristics.CanApplySlayingBonus ? 7 : 5);
+            int maxType = (characteristics.Get<OrEffectiveAttributeValue>(nameof(CanApplySlayingBonusAttribute)).Get() ? 7 : 5);
             switch (Game.DieRoll(maxType))
             {
                 case 1:
@@ -1482,12 +1482,12 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                         itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistDisenchantItemEnhancement)));
 
-                        if (characteristics.CanProvideSheathOfElectricity)
+                        if (characteristics.Get<OrEffectiveAttributeValue>(nameof(CanProvideSheathOfElectricityAttribute)).Get())
                         {
                             itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(SheathOfElectricityAndElectricityBiasItemEnhancement)));
                         }
 
-                        if (characteristics.CanProvideSheathOfFire)
+                        if (characteristics.Get<OrEffectiveAttributeValue>(nameof(CanProvideSheathOfFireAttribute)).Get())
                         {
                             itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(SheathOfFireAndFireBiasItemEnhancement)));
                         }

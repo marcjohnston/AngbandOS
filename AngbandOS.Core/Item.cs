@@ -692,7 +692,7 @@ internal sealed class Item : IComparable<Item>
                     mult = EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get();
                 }
             }
-            if (EffectiveAttributeSet.BrandAcid)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandAcidAttribute)).Get())
             {
                 if (rPtr.ImmuneAcid)
                 {
@@ -709,7 +709,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (EffectiveAttributeSet.BrandElec)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandElecAttribute)).Get())
             {
                 if (rPtr.ImmuneLightning)
                 {
@@ -726,7 +726,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (EffectiveAttributeSet.BrandFire)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandFireAttribute)).Get())
             {
                 if (rPtr.ImmuneFire)
                 {
@@ -743,7 +743,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (EffectiveAttributeSet.BrandCold)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandColdAttribute)).Get())
             {
                 if (rPtr.ImmuneCold)
                 {
@@ -760,7 +760,7 @@ internal sealed class Item : IComparable<Item>
                     }
                 }
             }
-            if (EffectiveAttributeSet.BrandPois)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandPoisAttribute)).Get())
             {
                 if (rPtr.ImmunePoison)
                 {

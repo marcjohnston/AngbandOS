@@ -12887,7 +12887,7 @@ internal partial class Game
         {
             return;
         }
-        if (oPtr.EffectiveAttributeSet.Blessed && DieRoll(888) > chance)
+        if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get() && DieRoll(888) > chance)
         {
             string oName = oPtr.GetDescription(false);
             string s = oPtr.StackCount > 1 ? "" : "s";
