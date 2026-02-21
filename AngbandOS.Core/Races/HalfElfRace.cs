@@ -34,8 +34,8 @@ internal class HalfElfRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.ResLight = true;
-        itemCharacteristics.SeeInvis = true;
+        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
+        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
     }
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
     public override void CalcBonuses()

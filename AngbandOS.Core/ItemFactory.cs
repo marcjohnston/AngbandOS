@@ -595,7 +595,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         {
             if (item.IsKnown())
             {
-                if (item.EffectiveAttributeSet.ShowMods || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
+                if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Get() || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
                 {
                     s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
@@ -620,7 +620,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         {
             if (item.IsKnown())
             {
-                if (item.EffectiveAttributeSet.ShowMods || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
+                if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Get() || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
                 {
                     s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
@@ -1284,7 +1284,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 case 15:
                 case 16:
                 case 17:
-                    characteristics.SeeInvis = true;
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
                     break;
 
                 case 18:
@@ -1297,12 +1297,12 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 19:
                 case 20:
-                    characteristics.SlowDigest = true;
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
                     break;
 
                 case 21:
                 case 22:
-                    characteristics.Regen = true;
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
                     break;
 
                 case 23:
@@ -1319,7 +1319,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     }
                     else
                     {
-                        characteristics.ShowMods = true;
+                        characteristics.Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Set();
                         characteristics.BonusArmorClass = 4 + Game.DieRoll(11);
                     }
                     break;
@@ -1327,7 +1327,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                 case 27:
                 case 28:
                 case 29:
-                    characteristics.ShowMods = true;
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Set();
                     characteristics.MeleeToHit += 4 + Game.DieRoll(11);
                     characteristics.ToDamage += 4 + Game.DieRoll(11);
                     break;
@@ -1492,7 +1492,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                             itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(SheathOfFireAndFireBiasItemEnhancement)));
                         }
 
-                        if (characteristics.Reflect)
+                        if (characteristics.Get<OrEffectiveAttributeValue>(nameof(ReflectAttribute)).Get())
                         {
                             itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ReflectBoltsAndArrowsItemEnhancement)));
                         }

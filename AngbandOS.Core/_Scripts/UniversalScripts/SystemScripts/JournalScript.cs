@@ -238,14 +238,14 @@ internal class JournalScript : UniversalScript, IGetKey
 
         Game.DisplayPlayerEquippy(0, 26 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 26 + 11);
-        DisplayStat("Slay Anim.", 2, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SlayAnimal);
-        DisplayStat("Slay Evil", 3, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SlayEvil);
-        DisplayStat("Slay Und.", 4, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SlayUndead);
-        DisplayStat("Slay Demon", 5, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SlayDemon);
-        DisplayStat("Slay Orc", 6, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SlayOrc);
-        DisplayStat("Slay Troll", 7, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SlayTroll);
-        DisplayStat("Slay Giant", 8, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SlayGiant);
-        DisplayStat("Slay Drag.", 9, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SlayDragon > 1);
+        DisplayStat("Slay Anim.", 2, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Get());
+        DisplayStat("Slay Evil", 3, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Get());
+        DisplayStat("Slay Und.", 4, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Get());
+        DisplayStat("Slay Demon", 5, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlayDemonAttribute)).Get());
+        DisplayStat("Slay Orc", 6, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Get());
+        DisplayStat("Slay Troll", 7, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Get());
+        DisplayStat("Slay Giant", 8, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Get());
+        DisplayStat("Slay Drag.", 9, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get() > 1);
         DisplayStat("Sharpness", 10, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Vorpal1InChance > 0);
         DisplayStat("Impact", 11, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Impact);
         DisplayStat("Poison Brd", 12, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.BrandPois);
@@ -269,33 +269,33 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Imm Fire", 12, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ImFire);
         DisplayStat("Imm Cold", 13, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ImCold);
 
-        DisplayStat("Reflect", 15, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Reflect);
+        DisplayStat("Reflect", 15, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ReflectAttribute)).Get());
         DisplayStat("Free Act", 16, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.FreeAct);
         DisplayStat("Hold Life", 17, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.HoldLife);
 
         Game.DisplayPlayerEquippy(20, 0 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 0 + 11);
-        DisplayStat("Res Acid", 22, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResAcid);
-        DisplayStat("Res Elec", 23, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResElec);
-        DisplayStat("Res Fire", 24, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResFire);
-        DisplayStat("Res Cold", 25, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResCold);
-        DisplayStat("Res Pois", 26, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResPois);
-        DisplayStat("Res Fear", 27, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResFear);
-        DisplayStat("Res Light", 28, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResLight);
-        DisplayStat("Res Dark", 29, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResDark);
-        DisplayStat("Res Blind", 30, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResBlind);
-        DisplayStat("Res Conf", 31, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResConf);
-        DisplayStat("Res Sound", 32, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResSound);
-        DisplayStat("Res Shard", 33, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResShards);
-        DisplayStat("Res Neth", 34, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResNether);
-        DisplayStat("Res Nexus", 35, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResNexus);
-        DisplayStat("Res Chaos", 36, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResChaos);
-        DisplayStat("Res Disen", 37, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ResDisen);
+        DisplayStat("Res Acid", 22, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Get());
+        DisplayStat("Res Elec", 23, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResElecAttribute)).Get());
+        DisplayStat("Res Fire", 24, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResFireAttribute)).Get());
+        DisplayStat("Res Cold", 25, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Get());
+        DisplayStat("Res Pois", 26, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Get());
+        DisplayStat("Res Fear", 27, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Get());
+        DisplayStat("Res Light", 28, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Get());
+        DisplayStat("Res Dark", 29, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Get());
+        DisplayStat("Res Blind", 30, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Get());
+        DisplayStat("Res Conf", 31, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Get());
+        DisplayStat("Res Sound", 32, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Get());
+        DisplayStat("Res Shard", 33, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Get());
+        DisplayStat("Res Neth", 34, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Get());
+        DisplayStat("Res Nexus", 35, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Get());
+        DisplayStat("Res Chaos", 36, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Get());
+        DisplayStat("Res Disen", 37, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Get());
 
         Game.DisplayPlayerEquippy(20, 26 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 26 + 11);
-        DisplayStat("Aura Fire", 22, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ShFire);
-        DisplayStat("Aura Elec", 23, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ShElec);
+        DisplayStat("Aura Fire", 22, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ShFireAttribute)).Get());
+        DisplayStat("Aura Elec", 23, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ShElecAttribute)).Get());
 
         DisplayStat("Anti-Theft", 25, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.AntiTheft);
         DisplayStat("Anti-Tele", 26, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.NoTele);
@@ -304,16 +304,16 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("EvilCurse", 29, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.DreadCurse);
         DisplayStat("Easy Know", 30, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.EasyKnow);
         DisplayStat("Hide Type", 31, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.HideType);
-        DisplayStat("Show Mods", 32, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.ShowMods);
+        DisplayStat("Show Mods", 32, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Get());
         DisplayStat("Levitate", 33, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Feather);
         DisplayStat("Light", 34, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Radius > 0);
-        DisplayStat("See Invis", 35, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SeeInvis);
+        DisplayStat("See Invis", 35, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Get());
         DisplayStat("Telepathy", 36, 26, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Get());
 
         Game.DisplayPlayerEquippy(20, 52 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 52 + 11);
-        DisplayStat("Digestion", 22, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SlowDigest);
-        DisplayStat("Regen", 23, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Regen);
+        DisplayStat("Digestion", 22, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Get());
+        DisplayStat("Regen", 23, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Get());
         DisplayStat("Xtra Might", 24, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get());
         DisplayStat("Xtra Shots", 25, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get());
         DisplayStat("Ign Acid", 26, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.IgnoreAcid);

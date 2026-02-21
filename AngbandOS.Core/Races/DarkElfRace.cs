@@ -37,7 +37,7 @@ internal class DarkElfRace : Race
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.ResDark = true;
+        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
     }
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
 

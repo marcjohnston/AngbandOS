@@ -1209,35 +1209,35 @@ internal class Monster : IItemContainer
                         bool willHurt = false;
                         string itemName = item.GetFullDescription(true);
                         string monsterName = IndefiniteWhenHiddenName;
-                        if (item.EffectiveAttributeSet.SlayDragon > 1 && Race.Dragon)
+                        if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get() > 1 && Race.Dragon)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.SlayTroll && Race.Troll)
+                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Get() && Race.Troll)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.SlayGiant && Race.Giant)
+                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Get() && Race.Giant)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.SlayOrc && Race.Orc)
+                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Get() && Race.Orc)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.SlayDemon && Race.Demon)
+                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayDemonAttribute)).Get() && Race.Demon)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.SlayUndead && Race.Undead)
+                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Get() && Race.Undead)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.SlayAnimal && Race.Animal)
+                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Get() && Race.Animal)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.SlayEvil && Race.Evil)
+                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Get() && Race.Evil)
                         {
                             willHurt = true;
                         }

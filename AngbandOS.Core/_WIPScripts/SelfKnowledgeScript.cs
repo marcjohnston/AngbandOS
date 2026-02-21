@@ -400,39 +400,39 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
             {
                 info[infoCount++] = "Your weapon poisons your foes.";
             }
-            if (meleeItem.EffectiveAttributeSet.SlayAnimal)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon strikes at animals with extra force.";
             }
-            if (meleeItem.EffectiveAttributeSet.SlayEvil)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon strikes at evil with extra force.";
             }
-            if (meleeItem.EffectiveAttributeSet.SlayUndead)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon strikes at undead with holy wrath.";
             }
-            if (meleeItem.EffectiveAttributeSet.SlayDemon)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayDemonAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon strikes at demons with holy wrath.";
             }
-            if (meleeItem.EffectiveAttributeSet.SlayOrc)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon is especially deadly against orcs.";
             }
-            if (meleeItem.EffectiveAttributeSet.SlayTroll)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon is especially deadly against trolls.";
             }
-            if (meleeItem.EffectiveAttributeSet.SlayGiant)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon is especially deadly against giants.";
             }
-            if (meleeItem.EffectiveAttributeSet.SlayDragon > 1)
+            if (meleeItem.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get() > 1)
             {
                 info[infoCount++] = "Your weapon is especially deadly against dragons.";
             }
-            if (meleeItem.EffectiveAttributeSet.SlayDragon > 3)
+            if (meleeItem.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get() > 3)
             {
                 info[infoCount++] = "Your weapon is a great bane of dragons.";
             }

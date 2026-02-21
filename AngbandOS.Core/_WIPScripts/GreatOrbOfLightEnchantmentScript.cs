@@ -26,22 +26,22 @@ internal class GreatOrbOfLightEnchantmentScript : Script, IEnhancementScript
         for (int i = 0; i < 3; i++)
         {
             WeightedRandomAction weightedRandomAction = new WeightedRandomAction(Game);
-            weightedRandomAction.Add(2, () => item.EffectiveAttributeSet.ResDark = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResLight = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResBlind = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResFear = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResAcid = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResElec = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResFire = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResCold = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResPois = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResConf = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResSound = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResShards = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResNether = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResNexus = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResChaos = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.ResDisen = true);
+            weightedRandomAction.Add(2, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResElecAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResFireAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.FreeAct = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.HoldLife = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set());
@@ -51,10 +51,10 @@ internal class GreatOrbOfLightEnchantmentScript : Script, IEnhancementScript
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Feather = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SeeInvis = true);
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set());
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SlowDigest = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Regen = true);
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set());
             weightedRandomAction.Choose();
         }
     }

@@ -38,7 +38,7 @@ internal class CyclopsRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.ResSound = true;
+        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Set();
     }
 
     protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);

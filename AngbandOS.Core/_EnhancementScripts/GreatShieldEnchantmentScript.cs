@@ -52,7 +52,7 @@ internal class GreatShieldEnchantmentScript : Script, IEnhancementScript
                 item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(ResistanceAndBiasItemEnhancementWeightedRandom)));
                 if (Game.DieRoll(4) == 1)
                 {
-                    item.EffectiveAttributeSet.ResPois = true;
+                    item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
                 }
                 item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ShieldOfResistanceItemEnhancement)));
                 break;

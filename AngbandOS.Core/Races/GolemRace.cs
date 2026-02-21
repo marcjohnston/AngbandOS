@@ -38,10 +38,10 @@ internal class GolemRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.SeeInvis = true;
+        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
         itemCharacteristics.FreeAct = true;
-        itemCharacteristics.ResPois = true;
-        itemCharacteristics.SlowDigest = true;
+        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
+        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
         if (level > 34)
         {
             itemCharacteristics.HoldLife = true;

@@ -41,8 +41,8 @@ internal class HalfTrollRace : Race
         itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
         if (level > 14)
         {
-            itemCharacteristics.Regen = true;
-            itemCharacteristics.SlowDigest = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);

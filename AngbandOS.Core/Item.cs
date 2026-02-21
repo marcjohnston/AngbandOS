@@ -604,7 +604,7 @@ internal sealed class Item : IComparable<Item>
         MonsterRace rPtr = mPtr.Race;
         if (GetsDamageMultiplier)
         {
-            if (EffectiveAttributeSet.SlayAnimal && rPtr.Animal)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Get() && rPtr.Animal)
             {
                 if (mPtr.IsVisible)
                 {
@@ -615,7 +615,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 2;
                 }
             }
-            if (EffectiveAttributeSet.SlayEvil && rPtr.Evil)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Get() && rPtr.Evil)
             {
                 if (mPtr.IsVisible)
                 {
@@ -626,7 +626,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 2;
                 }
             }
-            if (EffectiveAttributeSet.SlayUndead && rPtr.Undead)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Get() && rPtr.Undead)
             {
                 if (mPtr.IsVisible)
                 {
@@ -637,7 +637,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (EffectiveAttributeSet.SlayDemon && rPtr.Demon)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayDemonAttribute)).Get() && rPtr.Demon)
             {
                 if (mPtr.IsVisible)
                 {
@@ -648,7 +648,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (EffectiveAttributeSet.SlayOrc && rPtr.Orc)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Get() && rPtr.Orc)
             {
                 if (mPtr.IsVisible)
                 {
@@ -659,7 +659,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (EffectiveAttributeSet.SlayTroll && rPtr.Troll)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Get() && rPtr.Troll)
             {
                 if (mPtr.IsVisible)
                 {
@@ -670,7 +670,7 @@ internal sealed class Item : IComparable<Item>
                     mult = 3;
                 }
             }
-            if (EffectiveAttributeSet.SlayGiant && rPtr.Giant)
+            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Get() && rPtr.Giant)
             {
                 if (mPtr.IsVisible)
                 {
@@ -687,9 +687,9 @@ internal sealed class Item : IComparable<Item>
                 {
                     rPtr.Knowledge.Characteristics.Dragon = true;
                 }
-                if (mult < EffectiveAttributeSet.SlayDragon)
+                if (mult < EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get())
                 {
-                    mult = EffectiveAttributeSet.SlayDragon;
+                    mult = EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get();
                 }
             }
             if (EffectiveAttributeSet.BrandAcid)

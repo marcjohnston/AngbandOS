@@ -37,7 +37,7 @@ internal class HalfGiantRace : Race
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.ResShards = true;
+        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Set();
         itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
     }
     protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);

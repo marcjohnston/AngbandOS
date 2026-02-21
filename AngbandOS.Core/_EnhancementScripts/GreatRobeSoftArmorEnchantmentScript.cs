@@ -57,7 +57,7 @@ internal class GreatRobeSoftArmorEnchantmentScript : Script, IEnhancementScript
                     item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(ArmorOfResistanceItemEnhancement)));
                     if (Game.DieRoll(4) == 1)
                     {
-                        item.EffectiveAttributeSet.ResPois = true;
+                        item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
                     }
                     item.ApplyRandomResistance(Game.SingletonRepository.Get<ItemEnhancementWeightedRandom>(nameof(FixedArtifactItemEnhancementWeightedRandom)));
                     break;

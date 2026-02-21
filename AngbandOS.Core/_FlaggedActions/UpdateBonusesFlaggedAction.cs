@@ -248,11 +248,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasExtraMight = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.SlowDigest)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Get())
                     {
                         Game.HasSlowDigestion = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Regen)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Get())
                     {
                         Game.HasRegeneration = true;
                     }
@@ -260,7 +260,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasTelepathy = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.SeeInvis)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Get())
                     {
                         Game.HasSeeInvisibility = true;
                     }
@@ -296,79 +296,79 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasLightningImmunity = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResAcid)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Get())
                     {
                         Game.HasAcidResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResElec)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResElecAttribute)).Get())
                     {
                         Game.HasLightningResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResFire)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResFireAttribute)).Get())
                     {
                         Game.HasFireResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResCold)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Get())
                     {
                         Game.HasColdResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResPois)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Get())
                     {
                         Game.HasPoisonResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResFear)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Get())
                     {
                         Game.HasFearResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResConf)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Get())
                     {
                         Game.HasConfusionResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResSound)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Get())
                     {
                         Game.HasSoundResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResLight)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Get())
                     {
                         Game.HasLightResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResDark)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Get())
                     {
                         Game.HasDarkResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResChaos)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Get())
                     {
                         Game.HasChaosResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResDisen)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Get())
                     {
                         Game.HasDisenchantResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResShards)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Get())
                     {
                         Game.HasShardResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResNexus)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Get())
                     {
                         Game.HasNexusResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResBlind)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Get())
                     {
                         Game.HasBlindnessResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ResNether)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Get())
                     {
                         Game.HasNetherResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Reflect)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ReflectAttribute)).Get())
                     {
                         Game.HasReflection = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ShFire)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ShFireAttribute)).Get())
                     {
                         Game.HasFireSheath = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.ShElec)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ShElecAttribute)).Get())
                     {
                         Game.HasElectricitySheath = true;
                     }

@@ -13041,11 +13041,11 @@ internal partial class Game
         EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet(this);
         if (CharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFearResistanceLevel)
         {
-            itemCharacteristics.ResFear = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
         }
         if (CharacterClass.InstantChaosResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantChaosResistanceLevel)
         {
-            itemCharacteristics.ResChaos = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set();
         }
         if (CharacterClass.InstantSustainWisdomLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainWisdomLevel)
         {
@@ -13053,7 +13053,7 @@ internal partial class Game
         }
         if (CharacterClass.InstantConfusionResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantConfusionResistanceLevel)
         {
-            itemCharacteristics.ResConf = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
         }
         if (CharacterClass.InstantTelepathyLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantTelepathyLevel)
         {
@@ -13069,7 +13069,7 @@ internal partial class Game
         }
         if (CharacterClass.InstantBlindnessResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantBlindnessResistanceLevel)
         {
-            itemCharacteristics.ResBlind = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Set();
         }
         if (CharacterClass.InstantFeatherFallingLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFeatherFallingLevel)
         {
@@ -13077,11 +13077,11 @@ internal partial class Game
         }
         if (CharacterClass.InstantSeeInvisibilityLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSeeInvisibilityLevel)
         {
-            itemCharacteristics.SeeInvis = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
         }
         if (CharacterClass.InstantSlowDigestionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSlowDigestionLevel)
         {
-            itemCharacteristics.SlowDigest = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
         }
         if (CharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainConstitutionLevel)
         {
@@ -13089,7 +13089,7 @@ internal partial class Game
         }
         if (CharacterClass.InstantPoisonResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantPoisonResistanceLevel)
         {
-            itemCharacteristics.ResPois = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
         }
         if (CharacterClass.InstantSustainDexterityLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainDexterityLevel)
         {
@@ -13105,11 +13105,11 @@ internal partial class Game
         }
         if (CharacterClass.InstantDarknessResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantDarknessResistanceLevel)
         {
-            itemCharacteristics.ResDark = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
         }
         if (CharacterClass.InstantLightResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantLightResistanceLevel)
         {
-            itemCharacteristics.ResLight = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
         }
         if (CharacterClass.InstantSustainCharismaLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainCharismaLevel)
         {
@@ -13117,15 +13117,15 @@ internal partial class Game
         }
         if (CharacterClass.InstantSoundResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSoundResistanceLevel)
         {
-            itemCharacteristics.ResSound = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Set();
         }
         if (CharacterClass.InstantDisenchantmentResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantDisenchantmentResistanceLevel)
         {
-            itemCharacteristics.ResDisen = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Set();
         }
         if (CharacterClass.InstantRegenerationLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantRegenerationLevel)
         {
-            itemCharacteristics.Regen = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
         }
         if (CharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainIntelligenceLevel)
         {
@@ -13133,15 +13133,15 @@ internal partial class Game
         }
         if (CharacterClass.InstantNexusResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantNexusResistanceLevel)
         {
-            itemCharacteristics.ResNexus = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Set();
         }
         if (CharacterClass.InstantShardsResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantShardsResistanceLevel)
         {
-            itemCharacteristics.ResShards = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Set();
         }
         if (CharacterClass.InstantNetherResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantNetherResistanceLevel)
         {
-            itemCharacteristics.ResNether = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
         }
         if (CharacterClass.ItemRadiusOverride.HasValue)
         {
@@ -13151,7 +13151,7 @@ internal partial class Game
         Race.UpdateRacialAbilities(ExperienceLevel.IntValue, itemCharacteristics);
         if (Regen && !SuppressRegen)
         {
-            itemCharacteristics.Regen = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
         }
         if (SpeedBonus != 0)
         {
@@ -13159,11 +13159,11 @@ internal partial class Game
         }
         if (ElecHit)
         {
-            itemCharacteristics.ShElec = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ShElecAttribute)).Set();
         }
         if (HasFireSheath)
         {
-            itemCharacteristics.ShFire = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ShFireAttribute)).Set();
             itemCharacteristics.Radius = 2;
         }
         if (FeatherFall)
@@ -13172,7 +13172,7 @@ internal partial class Game
         }
         if (ResFear)
         {
-            itemCharacteristics.ResFear = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
         }
         if (Esp)
         {

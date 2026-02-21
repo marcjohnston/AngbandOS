@@ -42,7 +42,7 @@ internal class MindFlayerRace : Race
         itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
         if (level > 14)
         {
-            itemCharacteristics.SeeInvis = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
         }
         if (level > 29)
         {

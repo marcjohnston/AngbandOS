@@ -38,7 +38,7 @@ internal class HalfOrcRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.ResDark = true;
+        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
     }
     protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);
 
