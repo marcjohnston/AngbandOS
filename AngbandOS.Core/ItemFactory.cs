@@ -1222,7 +1222,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
                     break;
 
                 case 3:
-                    characteristics.SustWis = true;
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));

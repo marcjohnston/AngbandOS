@@ -39,7 +39,7 @@ internal class MindFlayerRace : Race
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
         itemCharacteristics.SustInt = true;
-        itemCharacteristics.SustWis = true;
+        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
         if (level > 14)
         {
             itemCharacteristics.SeeInvis = true;

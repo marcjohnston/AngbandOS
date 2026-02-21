@@ -13049,7 +13049,7 @@ internal partial class Game
         }
         if (CharacterClass.InstantSustainWisdomLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainWisdomLevel)
         {
-            itemCharacteristics.SustWis = true;
+            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
         }
         if (CharacterClass.InstantConfusionResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantConfusionResistanceLevel)
         {
@@ -13195,7 +13195,7 @@ internal partial class Game
             }
             if (ExperienceLevel.IntValue > 29)
             {
-                itemCharacteristics.SustWis = true;
+                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
             }
             if (ExperienceLevel.IntValue > 39)
             {

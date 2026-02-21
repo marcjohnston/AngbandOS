@@ -258,7 +258,7 @@ internal class JournalScript : UniversalScript, IGetKey
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 52 + 11);
         DisplayStat("Sust Str", 2, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SustStr);
         DisplayStat("Sust Int", 3, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SustInt);
-        DisplayStat("Sust Wis", 4, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SustWis);
+        DisplayStat("Sust Wis", 4, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get());
         DisplayStat("Sust Dex", 5, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SustDex);
         DisplayStat("Sust Con", 6, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SustCon);
         DisplayStat("Sust Cha", 7, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.SustCha);

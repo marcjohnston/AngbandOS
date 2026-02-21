@@ -46,13 +46,13 @@ internal class GreatOrbOfLightEnchantmentScript : Script, IEnhancementScript
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.HoldLife = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SustStr = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SustInt = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SustWis = true);
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SustDex = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SustCon = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SustCha = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Feather = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SeeInvis = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Get() = true);
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.SlowDigest = true);
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Regen = true);
             weightedRandomAction.Choose();

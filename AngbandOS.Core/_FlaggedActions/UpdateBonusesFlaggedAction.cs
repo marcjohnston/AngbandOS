@@ -388,7 +388,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasSustainIntelligence = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.SustWis)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get())
                     {
                         Game.HasSustainWisdom = true;
                     }

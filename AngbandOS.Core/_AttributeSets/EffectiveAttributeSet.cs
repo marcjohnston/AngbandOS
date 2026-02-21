@@ -1459,20 +1459,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             }
         }
     }
-    public bool SustWis
-    {
-        get
-        {
-            return Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
-            }
-        }
-    }
     public int TreasureRating
     {
         get

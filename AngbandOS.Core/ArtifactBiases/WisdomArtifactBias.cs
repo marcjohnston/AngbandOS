@@ -27,9 +27,9 @@ internal class WisdomArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(EffectiveAttributeSet characteristics)
     {
-        if (!characteristics.SustWis)
+        if (!characteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get())
         {
-            characteristics.SustWis = true;
+            characteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
             if (Game.DieRoll(2) == 1)
             {
                 return true;
