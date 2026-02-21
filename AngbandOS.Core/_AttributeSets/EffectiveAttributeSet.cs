@@ -1004,13 +1004,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             Get<SumEffectiveAttributeValue>(nameof(RadiusAttribute)).Append(value);
         }
     }
-    public int BurnRate
-    {
-        get
-        {
-            return Get<SumEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get();
-        }
-    }
     public bool Valueless
     {
         get

@@ -685,7 +685,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             s += $" ({item.WandChargesRemaining} {Game.Pluralize("charge", item.WandChargesRemaining)})";
         }
 
-        if (EffectiveAttributeSet.BurnRate > 0)
+        if (EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get() > 0)
         {
             s += $" (with {item.TurnsOfLightRemaining} {Game.Pluralize("turn", item.TurnsOfLightRemaining)} of light)";
         }
@@ -859,7 +859,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// <returns></returns>
     public int CalculateTorch(Item item)
     {
-        if (EffectiveAttributeSet.BurnRate > 0 && item.TurnsOfLightRemaining <= 0)
+        if (EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get() > 0 && item.TurnsOfLightRemaining <= 0)
         {
             return 0;
         }
