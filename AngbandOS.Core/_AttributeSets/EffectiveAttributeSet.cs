@@ -1389,17 +1389,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             }
         }
     }
-    public int TreasureRating
-    {
-        get
-        {
-            return Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Get();
-        }
-        set
-        {
-            Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Set(value);
-        }
-    }
     public bool Valueless
     {
         get

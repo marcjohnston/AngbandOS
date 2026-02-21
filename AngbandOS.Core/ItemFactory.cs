@@ -1536,7 +1536,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         characteristics.IgnoreElec = true;
         characteristics.IgnoreFire = true;
         characteristics.IgnoreCold = true;
-        characteristics.TreasureRating = 40;
+        characteristics.Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Append(40);
 
         if (aCursed)
         {

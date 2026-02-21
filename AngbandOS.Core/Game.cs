@@ -9941,7 +9941,7 @@ internal partial class Game
                     {
                         treasureRating += item.LevelNormallyFound - Difficulty;
                     }
-                    treasureRating += item.EffectiveAttributeSet.TreasureRating;
+                    treasureRating += item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Get();
                 }
             }
         }
