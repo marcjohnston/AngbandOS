@@ -7001,7 +7001,7 @@ internal partial class Game
                 if (meleeItem != null)
                 {
                     // Get our weapon's flags to see if we need to do anything special
-                    chaosEffect = meleeItem.EffectiveAttributeSet.Chaotic && DieRoll(2) == 1;
+                    chaosEffect = meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Get() && DieRoll(2) == 1;
                     if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get() || (chaosEffect && DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic

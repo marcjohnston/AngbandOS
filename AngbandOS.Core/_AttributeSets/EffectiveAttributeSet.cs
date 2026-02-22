@@ -365,20 +365,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             Get<NullableReferenceSetEffectiveAttributeValue<ArtifactBias>>(nameof(ArtifactBiasAttribute)).Set(value);
         }
     }
-    public bool Chaotic
-    {
-        get
-        {
-            return Get<OrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Set();
-            }
-        }
-    }
     public ColorEnum Color
     {
         get

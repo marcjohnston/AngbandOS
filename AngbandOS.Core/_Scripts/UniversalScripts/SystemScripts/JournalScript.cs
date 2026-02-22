@@ -233,7 +233,7 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Add Tun..", 13, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Tunnel > 0);
         DisplayStat("Add Speed", 14, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Speed > 0);
         DisplayStat("Add Blows", 15, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Attacks > 0);
-        DisplayStat("Chaotic", 16, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Chaotic);
+        DisplayStat("Chaotic", 16, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Get());
         DisplayStat("Vampiric", 17, 0, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get());
 
         Game.DisplayPlayerEquippy(0, 26 + 11);

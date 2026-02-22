@@ -364,7 +364,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
             {
                 info[infoCount++] = "Your weapon has been blessed by the gods.";
             }
-            if (meleeItem.EffectiveAttributeSet.Chaotic)
+            if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Get())
             {
                 info[infoCount++] = "Your weapon is branded with the Yellow Sign.";
             }
