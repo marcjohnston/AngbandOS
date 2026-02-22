@@ -236,7 +236,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasRandomTeleport = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.DrainExp)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(DrainExpAttribute)).Get())
                     {
                         Game.HasExperienceDrain = true;
                     }

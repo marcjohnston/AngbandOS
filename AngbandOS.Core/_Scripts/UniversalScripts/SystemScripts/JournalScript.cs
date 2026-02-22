@@ -321,7 +321,7 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Ign Fire", 28, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.IgnoreFire);
         DisplayStat("Ign Cold", 29, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.IgnoreCold);
         DisplayStat("Activate", 30, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Activation != null);
-        DisplayStat("Drain Exp", 31, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.DrainExp);
+        DisplayStat("Drain Exp", 31, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(DrainExpAttribute)).Get());
         DisplayStat("Teleport", 32, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get());
         DisplayStat("Aggravate", 33, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(AggravateAttribute)).Get());
         DisplayStat("Blessed", 34, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get());

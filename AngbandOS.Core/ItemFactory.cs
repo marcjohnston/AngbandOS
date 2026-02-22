@@ -1176,7 +1176,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             }
             if (Game.DieRoll(3) == 1)
             {
-                characteristics.DrainExp = true;
+                characteristics.Get<OrEffectiveAttributeValue>(nameof(DrainExpAttribute)).Set();
             }
             if (Game.DieRoll(2) == 1)
             {

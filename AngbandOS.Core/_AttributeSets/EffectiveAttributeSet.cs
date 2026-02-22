@@ -417,20 +417,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             Get<SumEffectiveAttributeValue>(nameof(DiceSidesAttribute)).Append(value);
         }
     }
-    public bool DrainExp
-    {
-        get
-        {
-            return Get<OrEffectiveAttributeValue>(nameof(DrainExpAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<OrEffectiveAttributeValue>(nameof(DrainExpAttribute)).Set();
-            }
-        }
-    }
     public bool DreadCurse
     {
         get
