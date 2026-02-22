@@ -46,7 +46,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.EffectiveAttributeSet = BuildEffectiveAttributeSetForPlayer().ToReadOnly(); // TODO: This isn't being used yet.
 
         List<Bonuses> bonusesToMerge = new List<Bonuses>();
-        int baseArmorClass = 0;
         int attackBonus = 0;
         int damageBonus = 0;
         int displayedAttackBonus = 0;
@@ -404,7 +403,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasSustainCharisma = true;
                     }
-                    baseArmorClass += oPtr.EffectiveAttributeSet.BaseArmorClass;
                     Game.DisplayedBaseArmorClass += oPtr.EffectiveAttributeSet.BaseArmorClass;
                     Game.ArmorClassBonus += oPtr.EffectiveAttributeSet.BonusArmorClass;
                     if (oPtr.IsKnown())
@@ -796,7 +794,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         // Create a new bonuses that we will use to merge with all of the additionals.
         Bonuses newBonuses = new Bonuses
         {
-            BaseArmorClass = baseArmorClass,
             AttackBonus = attackBonus,
             DamageBonus = damageBonus,
             DisplayedAttackBonus = displayedAttackBonus,

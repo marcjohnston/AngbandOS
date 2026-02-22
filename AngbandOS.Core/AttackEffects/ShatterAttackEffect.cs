@@ -15,7 +15,7 @@ internal class ShatterAttackEffect : AttackEffect
     public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         obvious = true;
-        int armorClass = Game.Bonuses.BaseArmorClass + Game.ArmorClassBonus;
+        int armorClass = Game.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(nameof(BaseArmorClassAttribute)).Value + Game.ArmorClassBonus;
         damage -= damage * (armorClass < 150 ? armorClass : 150) / 250;
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
         // Do an earthquake only if we did enough damage on the hit

@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Bonuses
 {
-    public int BaseArmorClass { get; init; } = 0;
     public int AttackBonus {get; init; } = 0;
     public int DamageBonus { get; init; } = 0;
     public int DisplayedAttackBonus { get; init; } = 0;
@@ -23,7 +22,6 @@ internal class Bonuses
     {
         return new Bonuses()
         {
-            BaseArmorClass = BaseArmorClass + bonuses.BaseArmorClass,
             AttackBonus = AttackBonus + bonuses.AttackBonus,
             DamageBonus = AttackBonus + bonuses.DamageBonus,
             DisplayedAttackBonus = DisplayedAttackBonus + bonuses.DisplayedAttackBonus,
