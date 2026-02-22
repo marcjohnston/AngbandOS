@@ -167,17 +167,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             Get<SumEffectiveAttributeValue>(nameof(MeleeToHitAttribute)).Append(value);
         }
     }
-    public int BaseArmorClass
-    {
-        get
-        {
-            return Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get();
-        }
-        set
-        {
-            Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Append(value);
-        }
-    }
     public int BonusArmorClass
     {
         get

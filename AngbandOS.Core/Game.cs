@@ -486,7 +486,6 @@ internal partial class Game
     public readonly MaxManaIntProperty MaxMana;
     public readonly ExperiencePointsIntProperty ExperiencePoints;
     public int KnownBonusArmorClass;
-    public int DisplayedBaseArmorClass;
     public readonly StringProperty PlayerName;
 
     /// <summary>
@@ -5815,7 +5814,7 @@ internal partial class Game
         {
             return false;
         }
-        if (oPtr.EffectiveAttributeSet.BaseArmorClass + oPtr.EffectiveAttributeSet.BonusArmorClass <= 0)
+        if (oPtr.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() + oPtr.EffectiveAttributeSet.BonusArmorClass <= 0)
         {
             return false;
         }
@@ -6240,7 +6239,7 @@ internal partial class Game
             item.EffectiveAttributeSet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.MeleeToHit = 0;
             item.EffectiveAttributeSet.ToDamage = 0;
-            item.EffectiveAttributeSet.BaseArmorClass = 0;
+            item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
             item.EffectiveAttributeSet.DamageDice = 0;
             item.EffectiveAttributeSet.DiceSides = 0;
             item.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
@@ -6279,7 +6278,7 @@ internal partial class Game
             item.EffectiveAttributeSet.MeleeToHit = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.ToDamage = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.BonusArmorClass = 0;
-            item.EffectiveAttributeSet.BaseArmorClass = 0;
+            item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
             item.EffectiveAttributeSet.DamageDice = 0;
             item.EffectiveAttributeSet.DiceSides = 0;
             item.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();

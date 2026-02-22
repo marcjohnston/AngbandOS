@@ -63,7 +63,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             ability.Bonus = 0;
         }
-        Game.DisplayedBaseArmorClass = 0;
         Game.KnownBonusArmorClass = 0;
         Game.ArmorClassBonus = 0;
         Game.HasAggravation = false;
@@ -403,7 +402,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasSustainCharisma = true;
                     }
-                    Game.DisplayedBaseArmorClass += oPtr.EffectiveAttributeSet.BaseArmorClass;
                     Game.ArmorClassBonus += oPtr.EffectiveAttributeSet.BonusArmorClass;
                     if (oPtr.IsKnown())
                     {
