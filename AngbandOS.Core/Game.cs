@@ -8108,7 +8108,7 @@ internal partial class Game
             return false;
         }
         // Roll for the attack
-        int armorClass = EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(nameof(BaseArmorClassAttribute)).Value + ArmorClassBonus;
+        int armorClass = EffectiveAttributeSet.Get<int>(nameof(BaseArmorClassAttribute)) + ArmorClassBonus;
         return DieRoll(attackStrength) > armorClass * 3 / 4;
     }
 

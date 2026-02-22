@@ -17,10 +17,11 @@ internal sealed class ReadOnlyAttributeSet
         Value = value;
     }
     public AttributeValue this[int index] => Value[(int)index];
-    public T Get<T>(string attributeName) where T : AttributeValue
+    public T Get<T>(string attributeName)
     {
         Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
         int index = attribute.Index;
-        return (T)Value[index];
+        ReadOnlyAttributeValue<T> value = (ReadOnlyAttributeValue<T>)Value[index];
+        return value.Value;
     }
 }

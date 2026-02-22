@@ -15,7 +15,7 @@ internal class HurtAttackEffect : AttackEffect
     public override void ApplyToPlayer(Monster monster, ref bool obvious, ref int damage, ref bool blinked)
     {
         // Normal damage is reduced by armor
-        int armorClass = Game.EffectiveAttributeSet.Get<ReadOnlyAttributeValue<int>>(nameof(BaseArmorClassAttribute)).Value + Game.ArmorClassBonus;
+        int armorClass = Game.EffectiveAttributeSet.Get<int>(nameof(BaseArmorClassAttribute)) + Game.ArmorClassBonus;
         obvious = true;
         damage -= damage * (armorClass < 150 ? armorClass : 150) / 250;
         Game.TakeHit(damage, monster.IndefiniteVisibleName);
