@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(RegenAttribute), "true"),
+    };
+
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BlessedAttribute), "true"),
@@ -14,7 +19,6 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ImAcidAttribute), "true"),
-        (nameof(RegenAttribute), "true"),
         (nameof(ResNetherAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
         (nameof(ShowModsAttribute), "true"),

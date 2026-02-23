@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class RingOfElementalPowerIceFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(RegenAttribute), "true"),
+    };
+
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(FeatherAttribute), "true"),
@@ -14,7 +19,6 @@ public class RingOfElementalPowerIceFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ImColdAttribute), "true"),
-        (nameof(RegenAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
         (nameof(ShowModsAttribute), "true"),
         (nameof(SustIntAttribute), "true"),

@@ -16,11 +16,11 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(TelepathyAttribute), "true"),
         (nameof(FeatherAttribute), "true"),
         (nameof(HoldLifeAttribute), "true"),
-        (nameof(RegenAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
     };
     public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(RegenAttribute), "true"),
         (nameof(IsCursedAttribute), "true"),
     };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]

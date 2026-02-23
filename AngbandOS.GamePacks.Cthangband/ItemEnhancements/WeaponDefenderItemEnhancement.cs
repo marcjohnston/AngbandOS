@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponDefenderItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(RegenAttribute), "true"),
+    };
+
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(FeatherAttribute), "true"),
@@ -11,7 +16,6 @@ public class WeaponDefenderItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IgnoreColdAttribute), "true"),
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
-        (nameof(RegenAttribute), "true"),
         (nameof(ResAcidAttribute), "true"),
         (nameof(ResColdAttribute), "true"),
         (nameof(ResElecAttribute), "true"),

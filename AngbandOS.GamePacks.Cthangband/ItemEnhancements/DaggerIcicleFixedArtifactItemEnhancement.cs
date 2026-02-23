@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(RegenAttribute), "true"),
+    };
+
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BrandColdAttribute), "true"),
@@ -12,7 +17,6 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(IgnoreColdAttribute), "true"),
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
-        (nameof(RegenAttribute), "true"),
         (nameof(ResColdAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
         (nameof(ShowModsAttribute), "true"),

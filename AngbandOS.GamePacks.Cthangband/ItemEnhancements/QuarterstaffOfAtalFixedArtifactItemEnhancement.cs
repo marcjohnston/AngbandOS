@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(RegenAttribute), "true"),
+    };
+
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BrandFireAttribute), "true"),
@@ -21,7 +26,6 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(SlayTrollAttribute), "true"),
         (nameof(FeatherAttribute), "true"),
         (nameof(FreeActAttribute), "true"),
-        (nameof(RegenAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
         (nameof(TelepathyAttribute), "true"),
     };

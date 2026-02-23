@@ -54,7 +54,7 @@ internal class GreatOrbOfLightEnchantmentScript : Script, IEnhancementScript
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set());
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).Set());
             weightedRandomAction.Choose();
         }
     }

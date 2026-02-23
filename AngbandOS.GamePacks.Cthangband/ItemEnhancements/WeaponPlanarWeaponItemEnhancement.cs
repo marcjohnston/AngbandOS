@@ -3,10 +3,14 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WeaponPlanarWeaponItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(RegenAttribute), "true"),
+    };
+
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(FreeActAttribute), "true"),
-        (nameof(RegenAttribute), "true"),
         (nameof(ResNexusAttribute), "true"),
         (nameof(SlayEvilAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),

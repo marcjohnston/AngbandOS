@@ -13124,7 +13124,7 @@ internal partial class Game
         }
         if (CharacterClass.InstantRegenerationLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantRegenerationLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
+            itemCharacteristics.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
         }
         if (CharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainIntelligenceLevel)
         {
@@ -13150,7 +13150,7 @@ internal partial class Game
         Race.UpdateRacialAbilities(ExperienceLevel.IntValue, itemCharacteristics);
         if (Regen && !SuppressRegen)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
+            itemCharacteristics.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
         }
         if (SpeedBonus != 0)
         {

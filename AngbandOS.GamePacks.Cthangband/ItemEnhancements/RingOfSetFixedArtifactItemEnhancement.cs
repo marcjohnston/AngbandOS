@@ -18,7 +18,6 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
         (nameof(ImElecAttribute), "true"),
         (nameof(ImFireAttribute), "true"),
         (nameof(PermaCurseAttribute), "true"),
-        (nameof(RegenAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
         (nameof(SustChaAttribute), "true"),
         (nameof(SustConAttribute), "true"),
@@ -34,6 +33,7 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     };
     public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(RegenAttribute), "true"),
         (nameof(HeavyCurseAttribute), "true"),
         (nameof(IsCursedAttribute), "true"),
     };

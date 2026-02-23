@@ -44,4 +44,12 @@ internal class BoolSetEffectiveAttributeValue : SetEffectiveAttributeValue<bool?
     {
         _attributeModifiers.Add(("", false));
     }
+    public bool IsTrue
+    {
+        get
+        {
+            bool? value = Get();
+            return value.HasValue && value.Value;
+        }
+    }
 }

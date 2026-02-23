@@ -313,7 +313,7 @@ internal class JournalScript : UniversalScript, IGetKey
         Game.DisplayPlayerEquippy(20, 52 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 21, 52 + 11);
         DisplayStat("Digestion", 22, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Get());
-        DisplayStat("Regen", 23, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Get());
+        DisplayStat("Regen", 23, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).IsTrue);
         DisplayStat("Xtra Might", 24, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get());
         DisplayStat("Xtra Shots", 25, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get());
         DisplayStat("Ign Acid", 26, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.IgnoreAcid);

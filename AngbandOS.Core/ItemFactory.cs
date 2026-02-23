@@ -1302,7 +1302,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
                 case 21:
                 case 22:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
+                    characteristics.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
                     break;
 
                 case 23:

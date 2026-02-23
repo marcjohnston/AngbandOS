@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(RegenAttribute), "true"),
+    };
+
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BrandElecAttribute), "true"),
@@ -24,7 +29,6 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
         (nameof(SlayUndeadAttribute), "true"),
         (nameof(FeatherAttribute), "true"),
         (nameof(HoldLifeAttribute), "true"),
-        (nameof(RegenAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
         (nameof(TelepathyAttribute), "true"),
     };

@@ -41,7 +41,7 @@ internal class HalfTrollRace : Race
         itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
         if (level > 14)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
+            itemCharacteristics.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
             itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
         }
     }

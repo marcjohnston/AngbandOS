@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(RegenAttribute), "true"),
+    };
+
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(FreeActAttribute), "true"),
@@ -15,7 +20,6 @@ public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(ShowModsAttribute), "true"),
         (nameof(FeatherAttribute), "true"),
         (nameof(HoldLifeAttribute), "true"),
-        (nameof(RegenAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
         (nameof(TelepathyAttribute), "true"),
