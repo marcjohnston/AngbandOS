@@ -117,6 +117,7 @@ public class GameConfiguration
         gameConfiguration.MappedItemEnhancements = LoadFromAssembly<MappedItemEnhancementGameConfiguration>(assembly);
         gameConfiguration.ChestTraps = LoadFromAssembly<ChestTrapGameConfiguration>(assembly);
         gameConfiguration.OutfitManifests = LoadFromAssembly<OutfitManifestGameConfiguration>(assembly);
+        gameConfiguration.AttributeFilters = LoadFromAssembly<AttributeFilterGameConfiguration>(assembly);
 
         gameConfiguration.OrAttributes = LoadFromAssembly<OrAttributeGameConfiguration>(assembly);
         gameConfiguration.SumAttributes = LoadFromAssembly<SumAttributeGameConfiguration>(assembly);
@@ -217,6 +218,7 @@ public class GameConfiguration
     public virtual PluralGameConfiguration[]? Plurals { get; set; } = null;
 
     public virtual AttackGameConfiguration[]? Attacks { get; set; } = null;
+    public virtual AttributeFilterGameConfiguration[]? AttributeFilters { get; set; } = null;
 
     public virtual OrAttributeGameConfiguration[]? OrAttributes { get; set; } = null;
     public virtual SumAttributeGameConfiguration[]? SumAttributes { get; set; } = null;

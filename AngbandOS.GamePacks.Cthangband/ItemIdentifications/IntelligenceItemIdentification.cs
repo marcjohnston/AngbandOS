@@ -2,8 +2,8 @@ namespace AngbandOS.GamePacks.Cthangband
 {
     [Serializable]
     public class IntelligenceItemIdentification : ItemIdentificationGameConfiguration
-    {
-        public override (string AttributeKey, int? StartingValue, int? EndingValue)[]? SumAttributeFilterBindings => new (string, int?, int?)[] { (nameof(IntelligenceAttribute), 1, null) };
+{
+        public override string AttributesFilterBindingKey => nameof(IntelligenceItemIdentificationAttributeFilter);
         public override string[] EffectDescription => new string[] { "It affects your intelligence." };
     }
 }

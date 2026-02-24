@@ -2,8 +2,8 @@ namespace AngbandOS.GamePacks.Cthangband
 {
     [Serializable]
     public class SustConItemIdentification : ItemIdentificationGameConfiguration
-    {
-        public override (string AttributeKey, bool DesiredValue)[]? OrAttributeFilterBindings => new (string, bool)[] { (nameof(SustConAttribute), true) };
+{
+        public override string AttributesFilterBindingKey => nameof(SustConItemIdentificationAttributeFilter);
         public override string[] EffectDescription => new string[] { "It sustains your constitution." };
     }
 }
