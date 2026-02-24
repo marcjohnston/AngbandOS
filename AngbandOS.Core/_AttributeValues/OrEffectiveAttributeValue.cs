@@ -86,9 +86,13 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
     {
         _attributeModifiers.Add(("", true));
     }
+    /// <summary>
+    /// Sets the OR attribute, if and only if the parameter is true.  Null and false values have no effect and do not set.
+    /// </summary>
+    /// <param name="value"></param>
     public void Set(bool? value)
     {
-        if (value.HasValue)
+        if (value.HasValue && value.Value)
         {
             Set();
         }
