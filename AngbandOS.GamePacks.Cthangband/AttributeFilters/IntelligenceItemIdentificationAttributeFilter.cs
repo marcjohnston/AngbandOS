@@ -1,13 +1,8 @@
-using AngbandOS.Core.Interface.Configuration;
-using AngbandOS.GamePacks.Cthangband;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-[Serializable]
-public class IntelligenceItemIdentificationAttributeFilter : AttributeFilterGameConfiguration
+namespace AngbandOS.GamePacks.Cthangband
 {
-    public override (string AttributeKey, int? StartingValue, int? EndingValue)[]? SumAttributeFilterBindings => new (string, int?, int?)[] { (nameof(IntelligenceAttribute), 1, null) };
+    [Serializable]
+    public class IntelligenceItemIdentificationAttributeFilter : AttributeFilterGameConfiguration
+    {
+        public override (string AttributeKey, int? StartingValue, int? EndingValue)[]? SumAttributeFilterBindings => new (string, int?, int?)[] { (nameof(IntelligenceAttribute), 1, null) };
+    }
 }

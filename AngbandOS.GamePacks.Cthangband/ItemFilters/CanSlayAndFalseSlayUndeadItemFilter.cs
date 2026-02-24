@@ -9,9 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class CanSlayAndFalseSlayUndeadItemFilter : ItemFilterGameConfiguration
 {
-    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
-    {
-        (nameof(SlayUndeadAttribute), false),
-    };
+    public override string? AttributeFilterBindingKey => nameof(CanSlayAndFalseSlayUndeadItemFilterAttributeFilter);
     public override bool? ArtifactBiasCanSlay => true;
 }

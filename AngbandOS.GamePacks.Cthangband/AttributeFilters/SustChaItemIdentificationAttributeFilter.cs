@@ -1,13 +1,8 @@
-using AngbandOS.Core.Interface.Configuration;
-using AngbandOS.GamePacks.Cthangband;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-[Serializable]
-public class SustChaItemIdentificationAttributeFilter : AttributeFilterGameConfiguration
+namespace AngbandOS.GamePacks.Cthangband
 {
-    public override (string AttributeKey, bool DesiredValue)[]? OrAttributeFilterBindings => new (string, bool)[] { (nameof(SustChaAttribute), true) };
+    [Serializable]
+    public class SustChaItemIdentificationAttributeFilter : AttributeFilterGameConfiguration
+    {
+        public override (string AttributeKey, bool DesiredValue)[]? OrAttributeFilterBindings => new (string, bool)[] { (nameof(SustChaAttribute), true) };
+    }
 }

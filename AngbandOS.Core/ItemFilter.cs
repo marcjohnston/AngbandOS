@@ -5,6 +5,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface.Configuration;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -16,38 +18,41 @@ namespace AngbandOS.Core;
 internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
 {
     private readonly Game Game;
-    public ItemFilter(Game game, ItemFilterGameConfiguration itemFilterGameConfiguration)
+    public ItemFilter(Game game, ItemFilterGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = itemFilterGameConfiguration.Key ?? itemFilterGameConfiguration.GetType().Name;
+        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
 
-        AnyMatchingItemClassNames = itemFilterGameConfiguration.AnyMatchingItemClassNames;
-        AllNonMatchingItemClassNames = itemFilterGameConfiguration.AllNonMatchingItemClassNames;
-        AnyMatchingItemFactoryNames = itemFilterGameConfiguration.AnyMatchingItemFactoryNames;
-        AllNonMatchingItemFactoryNames = itemFilterGameConfiguration.AllNonMatchingItemFactoryNames;
-        OrAttributeMatchingBindings = itemFilterGameConfiguration.OrAttributeMatchingBindings;
+        AnyMatchingItemClassNames = gameConfiguration.AnyMatchingItemClassNames;
+        AllNonMatchingItemClassNames = gameConfiguration.AllNonMatchingItemClassNames;
+        AnyMatchingItemFactoryNames = gameConfiguration.AnyMatchingItemFactoryNames;
+        AllNonMatchingItemFactoryNames = gameConfiguration.AllNonMatchingItemFactoryNames;
 
-        CanBeActivated = itemFilterGameConfiguration.CanBeActivated;
-        CanBeAimed = itemFilterGameConfiguration.CanBeAimed;
-        CanBeFired = itemFilterGameConfiguration.CanBeFired;
-        CanBeQuaffed = itemFilterGameConfiguration.CanBeQuaffed;
-        CanBeRead = itemFilterGameConfiguration.CanBeRead;
-        CanBeRecharged = itemFilterGameConfiguration.CanBeRecharged;
-        CanBeUsed = itemFilterGameConfiguration.CanBeUsed;
-        CanBeZapped = itemFilterGameConfiguration.CanBeZapped;
-        CanProjectArrows = itemFilterGameConfiguration.CanProjectArrows;
-        IsKnown = itemFilterGameConfiguration.IsKnown;
-        IsOfValue = itemFilterGameConfiguration.IsOfValue;
-        IsTooHeavyToWield = itemFilterGameConfiguration.IsTooHeavyToWield;
-        IsUsableSpellBook = itemFilterGameConfiguration.IsUsableSpellBook;
+        AttributeFilterBindingKey = gameConfiguration.AttributeFilterBindingKey;
 
-        ArtifactBiasCanSlay = itemFilterGameConfiguration.ArtifactBiasCanSlay;
-        ArtifactBias = itemFilterGameConfiguration.ArtifactBias;
-        IsCursed = itemFilterGameConfiguration.IsCursed;
-        HeavyCurse = itemFilterGameConfiguration.HeavyCurse;
+        CanBeActivated = gameConfiguration.CanBeActivated;
+        CanBeAimed = gameConfiguration.CanBeAimed;
+        CanBeFired = gameConfiguration.CanBeFired;
+        CanBeQuaffed = gameConfiguration.CanBeQuaffed;
+        CanBeRead = gameConfiguration.CanBeRead;
+        CanBeRecharged = gameConfiguration.CanBeRecharged;
+        CanBeUsed = gameConfiguration.CanBeUsed;
+        CanBeZapped = gameConfiguration.CanBeZapped;
+        CanProjectArrows = gameConfiguration.CanProjectArrows;
+        IsKnown = gameConfiguration.IsKnown;
+        IsOfValue = gameConfiguration.IsOfValue;
+        IsTooHeavyToWield = gameConfiguration.IsTooHeavyToWield;
+        IsUsableSpellBook = gameConfiguration.IsUsableSpellBook;
+
+        ArtifactBiasCanSlay = gameConfiguration.ArtifactBiasCanSlay;
+        ArtifactBias = gameConfiguration.ArtifactBias;
+        IsCursed = gameConfiguration.IsCursed;
+        HeavyCurse = gameConfiguration.HeavyCurse;
     }
 
     private ItemMatch[] ItemMatches { get; set; }
+    private string? AttributeFilterBindingKey { get; }
+    public AttributeFilter? AttributeFilter { get; private set; }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -59,7 +64,7 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         {
             Key = Key,
 
-            OrAttributeMatchingBindings = OrAttributeMatchingBindings,
+            AttributeFilterBindingKey = AttributeFilterBindingKey,
 
             CanBeActivated = CanBeActivated,
             CanBeAimed = CanBeAimed,
@@ -129,9 +134,6 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         return new ItemMatch[] { };
     }
 
-    public (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings { get; } = null;
-    public (string AttributeName, bool DesiredValue)[] OrAttributeMatchings { get; private set; }
-
     public void Bind()
     {
         AnyMatchingItemClasses = Game.SingletonRepository.GetNullable<ItemClass>(AnyMatchingItemClassNames);
@@ -139,16 +141,9 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         AnyMatchingItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(AnyMatchingItemFactoryNames);
         AllNonMatchingItemFactories = Game.SingletonRepository.GetNullable<ItemFactory>(AllNonMatchingItemFactoryNames);
 
-        List<ItemMatch> itemMatchList = new List<ItemMatch>();
+        AttributeFilter = Game.SingletonRepository.GetNullable<AttributeFilter>(AttributeFilterBindingKey);
 
-        if (OrAttributeMatchingBindings is not null)
-        {
-            foreach ((string attributeName, bool desiredValue) in OrAttributeMatchingBindings)
-            {
-                Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
-                itemMatchList.Add(new OrAttributeItemMatch(Game, attribute, desiredValue));
-            }
-        }
+        List<ItemMatch> itemMatchList = new List<ItemMatch>();
 
         itemMatchList.AddRange(AddBooleanMatch(CanBeActivated, new CanBeActivatedBooleanGetItemProperty(Game)));
         itemMatchList.AddRange(AddBooleanMatch(CanBeAimed, new CanBeAimedBooleanGetItemProperty(Game)));
@@ -175,6 +170,13 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
 
     public bool Matches(Item item)
     {
+        // Test the attribute filter, if there was one.
+        if (AttributeFilter is not null && !AttributeFilter.Test(item.EffectiveAttributeSet))
+        {
+            return false;
+        }
+
+        // Test each of the item matches.
         foreach (ItemMatch itemMatch in ItemMatches)
         {
             if (!itemMatch.Matches(item))

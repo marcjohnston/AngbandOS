@@ -9,8 +9,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FalseResistChaosItemFilter : ItemFilterGameConfiguration
 {
-    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
-    {
-        (nameof(ResChaosAttribute), false),
-    };
+    public override string? AttributeFilterBindingKey => nameof(FalseResistChaosItemFilterAttributeFilter);
 }

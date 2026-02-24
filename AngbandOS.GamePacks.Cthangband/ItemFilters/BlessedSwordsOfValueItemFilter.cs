@@ -16,9 +16,6 @@ public class BlessedSwordsOfValueItemFilter : ItemFilterGameConfiguration
     {
         nameof(SwordsItemClass)
     };
-    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
-    {
-        (nameof(BlessedAttribute), true),
-    };
+    public override string? AttributeFilterBindingKey => nameof(BlessedSwordsOfValueItemFilterAttributeFilter);
     public override bool? IsOfValue => true;
 }

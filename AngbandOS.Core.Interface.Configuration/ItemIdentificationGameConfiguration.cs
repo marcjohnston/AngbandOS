@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 public class ItemIdentificationGameConfiguration
 {
     public virtual string Key { get; set; }
-    public virtual string AttributesFilterBindingKey { get; set; }
+    public virtual string AttributeFilterBindingKey { get; set; }
     public virtual string[]? InterpolationExpressionAttributeNames { get; set; } = null;
     public virtual string[] EffectDescription { get; set; }
 }

@@ -4,8 +4,8 @@
 public class ItemFilterGameConfiguration
 {
     public virtual string Key { get; set; }
-    
-    public virtual (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings { get; set; } = null;
+
+    public virtual string? AttributeFilterBindingKey { get; set; } = null;
 
     public virtual string[]? AnyMatchingItemClassNames { get; set; } = null;
     public virtual string[]? AllNonMatchingItemClassNames { get; set; } = null;

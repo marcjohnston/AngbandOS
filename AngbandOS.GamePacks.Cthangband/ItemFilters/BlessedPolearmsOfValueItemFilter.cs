@@ -16,9 +16,6 @@ public class BlessedPolearmsOfValueItemFilter : ItemFilterGameConfiguration
     {
         nameof(PolearmsItemClass)
     };
-    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
-    {
-        (nameof(BlessedAttribute), true),
-    };
+    public override string? AttributeFilterBindingKey => nameof(BlessedPolearmsOfValueItemFilterAttributeFilter);
     public override bool? IsOfValue => true;
 }

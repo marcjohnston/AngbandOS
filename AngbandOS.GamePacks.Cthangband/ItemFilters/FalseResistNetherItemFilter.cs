@@ -9,8 +9,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FalseResistNetherItemFilter : ItemFilterGameConfiguration
 {
-    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
-    {
-        (nameof(ResNetherAttribute), false),
-    };
+    public override string? AttributeFilterBindingKey => nameof(FalseResistNetherItemFilterAttributeFilter);
 }

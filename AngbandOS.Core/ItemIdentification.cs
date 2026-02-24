@@ -14,7 +14,7 @@ internal class ItemIdentification : IGetKey, IToJson
     {
         Game = game;
         Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
-        AttributesFilterBindingKey = gameConfiguration.AttributesFilterBindingKey;
+        AttributeFilterBindingKey = gameConfiguration.AttributeFilterBindingKey;
         InterpolationExpressionAttributeNames = gameConfiguration.InterpolationExpressionAttributeNames;
         EffectDescription = gameConfiguration.EffectDescription;
     }
@@ -28,7 +28,7 @@ internal class ItemIdentification : IGetKey, IToJson
         ItemIdentificationGameConfiguration gameConfiguration = new ItemIdentificationGameConfiguration()
         {
             Key = Key,
-            AttributesFilterBindingKey = AttributesFilterBindingKey,
+            AttributeFilterBindingKey = AttributeFilterBindingKey,
             InterpolationExpressionAttributeNames = InterpolationExpressionAttributeNames,
             EffectDescription = EffectDescription,
         };
@@ -38,12 +38,12 @@ internal class ItemIdentification : IGetKey, IToJson
 
     public string GetKey => Key;
 
-    private string AttributesFilterBindingKey { get; }
-    public AttributeFilter AttributesFilter { get; private set; }
+    private string AttributeFilterBindingKey { get; }
+    public AttributeFilter AttributeFilter { get; private set; }
 
     public void Bind()
     {
-        AttributesFilter = Game.SingletonRepository.Get<AttributeFilter>(AttributesFilterBindingKey);
+        AttributeFilter = Game.SingletonRepository.Get<AttributeFilter>(AttributeFilterBindingKey);
         InterpolationExpressionAttributes = Game.SingletonRepository.GetNullable<Attribute>(InterpolationExpressionAttributeNames);
     }
     private string[]? InterpolationExpressionAttributeNames { get; }
@@ -51,7 +51,7 @@ internal class ItemIdentification : IGetKey, IToJson
     public string[] EffectDescription { get; }
     public bool Test(EffectiveAttributeSet effectiveAttributeSet)
     {
-        return AttributesFilter.Test(effectiveAttributeSet);
+        return AttributeFilter.Test(effectiveAttributeSet);
     }
 
     public string[] GenerateIdentifications(EffectiveAttributeSet effectiveAttributeSet)

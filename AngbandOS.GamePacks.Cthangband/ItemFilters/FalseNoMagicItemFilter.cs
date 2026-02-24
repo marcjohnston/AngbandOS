@@ -9,8 +9,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FalseNoMagicItemFilter : ItemFilterGameConfiguration
 {
-    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
-    {
-        (nameof(NoMagicAttribute), false),
-    };
+    public override string? AttributeFilterBindingKey => nameof(FalseNoMagicItemFilterAttributeFilter);
 }

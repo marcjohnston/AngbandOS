@@ -9,8 +9,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FalseAcidImmunityItemFilter : ItemFilterGameConfiguration
 {
-    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
-    {
-        (nameof(ImAcidAttribute), false),
-    };
+    public override string? AttributeFilterBindingKey => nameof(FalseAcidImmunityItemFilterAttributeFilter);
 }

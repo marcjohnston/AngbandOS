@@ -9,8 +9,5 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class FalseElectricityImmunityItemFilter : ItemFilterGameConfiguration
 {
-    public override (string AttributeName, bool DesiredValue)[]? OrAttributeMatchingBindings => new (string, bool)[]
-    {
-        (nameof(ImElecAttribute), false),
-    };
+    public override string? AttributeFilterBindingKey => nameof(FalseElectricityImmunityItemFilterAttributeFilter);
 }
