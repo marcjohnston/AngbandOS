@@ -81,7 +81,7 @@ internal partial class Game
     /// <summary>
     /// Represents the players effective attribute values.
     /// </summary>
-    public readonly EffectiveAttributeSet EffectiveAttributeSet;
+    public ReadOnlyAttributeSet EffectiveAttributeSet;
 
     public void GainMutation(Mutation mutation)
     {
@@ -182,9 +182,6 @@ internal partial class Game
     public const string RandomAttributeKey = "random";
     public const string RareAttributeKey = "rare";
     public const string FixedAttributeKey = "fixed";
-    public const string RaceAttributeKey = "race";
-    public const string CharacterClassAttributeKey = "characterclass";
-    public const string WieldSlotPrefixAttributeKey = "wieldslot";
 
     public God? God;
 
@@ -888,10 +885,6 @@ internal partial class Game
         // Load all of the predefined objects.  The singleton repository must already be created.
         DateTime startTime = DateTime.Now;
         SingletonRepository.LoadAndBind(gameConfiguration);
-
-        // Now that the singleton library has been loaded, we can generate the effective attribute set from the attributes.
-        EffectiveAttributeSet = new EffectiveAttributeSet(this);
-
         TimeSpan elapsedTime = DateTime.Now - startTime;
         if (gameConfiguration.MaxMessageLogLength != null)
         {
@@ -8115,7 +8108,7 @@ internal partial class Game
             return false;
         }
         // Roll for the attack
-        int armorClass = EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() + ArmorClassBonus;
+        int armorClass = EffectiveAttributeSet.Get<int>(nameof(BaseArmorClassAttribute)) + ArmorClassBonus;
         return DieRoll(attackStrength) > armorClass * 3 / 4;
     }
 
