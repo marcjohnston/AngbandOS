@@ -13,15 +13,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private bool MartialArtistNotifyAux;
 
     private UpdateBonusesFlaggedAction(Game game) : base(game) { }
-    private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
+    private void UpdateEffectiveAttributeSetForPlayer()
     {
-        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
-
         // Apply the race enhancements.
-        effectiveAttributeSet.MergeAttributeSet(Game.Race.EffectiveAttributeSet);
+        Game.EffectiveAttributeSet.ReplaceAttributeSet(Game.RaceAttributeKey, Game.Race.EffectiveAttributeSet);
 
         // Apply the character class enhancements.
-        effectiveAttributeSet.MergeAttributeSet(Game.CharacterClass.EffectiveAttributeSet);
+        Game.EffectiveAttributeSet.ReplaceAttributeSet(Game.CharacterClassAttributeKey, Game.CharacterClass.EffectiveAttributeSet);
 
         // Apply all of the mutations that the player has.
 
@@ -33,17 +31,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    effectiveAttributeSet.MergeAttributeSet(oPtr.EffectiveAttributeSet.ToReadOnly());
+                    Game.EffectiveAttributeSet.ReplaceAttributeSet($"{Game.WieldSlotPrefixAttributeKey}-{i}",  oPtr.EffectiveAttributeSet.ToReadOnly());
                 }
             }
         }
-
-        return effectiveAttributeSet;
     }
 
     protected override void Execute()
     {
-        Game.EffectiveAttributeSet = BuildEffectiveAttributeSetForPlayer().ToReadOnly(); // TODO: This isn't being used yet.
+        UpdateEffectiveAttributeSetForPlayer();
 
         List<Bonuses> bonusesToMerge = new List<Bonuses>();
         int attackBonus = 0;

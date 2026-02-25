@@ -41,6 +41,12 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             attributeLedger.RemoveModifiers(key);
     }
 
+    public void ReplaceAttributeSet(string key, ReadOnlyAttributeSet readOnlyPropertySet)
+    {
+        RemoveKeyedEnhancements(key);
+        MergeAttributeSet(readOnlyPropertySet);
+    }
+
     /// <summary>
     /// Merge a set of read-only attribute values with a specific key.
     /// </summary>
