@@ -19,5 +19,4 @@ public class MaceOfDisruptionHaftedWeaponItemFactoryItemEnhancement : ItemEnhanc
         (nameof(DamageDiceAttribute), "5"),
         (nameof(DiceSidesAttribute), "8"),
     };
-    public override ColorEnum? Color => ColorEnum.Purple;
 }

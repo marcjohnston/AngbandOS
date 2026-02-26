@@ -37,5 +37,4 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Gungnir'";
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

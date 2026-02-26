@@ -14,4 +14,5 @@ internal class BroadSwordBlackIceFixedArtifact : FixedArtifact
     public override string Name => "The Broad Sword 'Black Ice'";
     public override int Level => 20;
     public override int Rarity => 20;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

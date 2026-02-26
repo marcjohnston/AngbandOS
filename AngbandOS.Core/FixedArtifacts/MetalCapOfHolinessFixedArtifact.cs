@@ -14,4 +14,5 @@ internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
     public override string Name => "The Metal Cap of Holiness";
     public override int Level => 10;
     public override int Rarity => 2;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

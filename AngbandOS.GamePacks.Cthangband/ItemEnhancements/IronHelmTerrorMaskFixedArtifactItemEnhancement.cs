@@ -35,5 +35,4 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(ValueAttribute), "40000"),
         (nameof(WisdomAttribute), "-1"),
     };
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

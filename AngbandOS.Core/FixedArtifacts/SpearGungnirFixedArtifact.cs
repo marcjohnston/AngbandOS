@@ -14,4 +14,5 @@ internal class SpearGungnirFixedArtifact : FixedArtifact
     public override string Name => "The Spear 'Gungnir'";
     public override int Level => 15;
     public override int Rarity => 45;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

@@ -14,4 +14,5 @@ internal class SoftLeatherArmorOfTheKoboldChiefFixedArtifact : FixedArtifact
     public override string Name => "The Soft Leather Armor of the Kobold Chief";
     public override int Level => 20;
     public override int Rarity => 3;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

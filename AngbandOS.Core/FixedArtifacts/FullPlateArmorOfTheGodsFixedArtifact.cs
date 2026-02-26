@@ -14,4 +14,5 @@ internal class FullPlateArmorOfTheGodsFixedArtifact : FixedArtifact
     public override string Name => "The Full Plate Armor of the Gods";
     public override int Level => 30;
     public override int Rarity => 3;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

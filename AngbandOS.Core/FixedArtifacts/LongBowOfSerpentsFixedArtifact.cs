@@ -14,4 +14,5 @@ internal class LongBowOfSerpentsFixedArtifact : FixedArtifact
     public override string Name => "The Long Bow of Serpents";
     public override int Level => 30;
     public override int Rarity => 20;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

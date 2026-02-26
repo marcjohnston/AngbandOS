@@ -24,5 +24,4 @@ public class MorningStarFirestarterFixedArtifactItemEnhancement : ItemEnhancemen
     };
     public override string? ActivationName => nameof(ActivationsEnum.LargeBallFire72Every100DirectionalActivation);
     public override string FriendlyName => "'Firestarter'";
-    public override ColorEnum? Color => ColorEnum.Black;
 }

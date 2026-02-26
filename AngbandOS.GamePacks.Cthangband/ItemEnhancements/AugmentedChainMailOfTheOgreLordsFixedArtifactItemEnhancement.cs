@@ -26,5 +26,4 @@ public class AugmentedChainMailOfTheOgreLordsFixedArtifactItemEnhancement : Item
     };
     public override string? ActivationName => nameof(ActivationsEnum.DestroyDoorsEvery10Activation);
     public override string FriendlyName => "of the Ogre Lords";
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -14,4 +14,5 @@ internal class SabreOfXuraFixedArtifact : FixedArtifact
     public override string Name => "The Sabre of Xura";
     public override int Level => 20;
     public override int Rarity => 45;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

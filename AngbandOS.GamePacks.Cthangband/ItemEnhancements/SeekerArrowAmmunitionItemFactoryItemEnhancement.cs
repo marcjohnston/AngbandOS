@@ -18,6 +18,5 @@ public class SeekerArrowAmmunitionItemFactoryItemEnhancement : ItemEnhancementGa
         (nameof(DamageDiceAttribute), "4"),
         (nameof(DiceSidesAttribute), "4"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightGreen;
 }
 

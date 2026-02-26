@@ -34,5 +34,4 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(StrengthAttribute), "-25"),
     };
     public override string FriendlyName => "of Misery";
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

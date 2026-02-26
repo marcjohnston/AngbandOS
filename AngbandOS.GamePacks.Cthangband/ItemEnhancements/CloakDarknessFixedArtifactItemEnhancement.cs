@@ -24,5 +24,4 @@ public class CloakDarknessFixedArtifactItemEnhancement : ItemEnhancementGameConf
         (nameof(WisdomAttribute), "2"),
         (nameof(AttacksAttribute), "4"),
     };
-    public override ColorEnum? Color => ColorEnum.Green;
 }

@@ -14,4 +14,5 @@ internal class BastardSwordSelfSlayerFixedArtifact : FixedArtifact
     public override string Name => "The Bastard Sword 'Selfslayer'";
     public override int Level => 30;
     public override int Rarity => 15;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

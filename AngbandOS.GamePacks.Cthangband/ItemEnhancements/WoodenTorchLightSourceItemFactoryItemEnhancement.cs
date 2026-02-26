@@ -17,5 +17,4 @@ public class WoodenTorchLightSourceItemFactoryItemEnhancement : ItemEnhancementG
         (nameof(DiceSidesAttribute), "1"),
         (nameof(BurnRateAttribute), "1"),
     };
-    public override ColorEnum? Color => ColorEnum.Brown;
 }

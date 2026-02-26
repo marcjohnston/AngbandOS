@@ -17,4 +17,5 @@ internal class StarEssenceOfPolarisFixedArtifact : FixedArtifact
     public override bool DisableViaRandom => true;
     public override int Level => 1;
     public override int Rarity => 1;
+    public override ColorEnum Color => ColorEnum.Yellow;
 }

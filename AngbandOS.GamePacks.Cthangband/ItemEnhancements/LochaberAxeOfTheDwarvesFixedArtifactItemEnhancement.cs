@@ -28,5 +28,4 @@ public class LochaberAxeOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(InfravisionAttribute), "10"),
     };
     public override string FriendlyName => "of the Dwarves";
-    public override ColorEnum? Color => ColorEnum.Black;
 }

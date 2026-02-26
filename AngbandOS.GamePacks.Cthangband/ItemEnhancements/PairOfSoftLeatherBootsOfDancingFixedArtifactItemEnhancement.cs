@@ -26,5 +26,4 @@ public class PairOfSoftLeatherBootsOfDancingFixedArtifactItemEnhancement : ItemE
     };
     public override string? ActivationName => nameof(ActivationsEnum.RemoveFearAndPoisonEvery5Activation);
     public override string FriendlyName => "of Dancing";
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

@@ -14,4 +14,5 @@ internal class LongSwordExcaliburFixedArtifact : FixedArtifact
     public override string Name => "The Long Sword 'Excalibur'";
     public override int Level => 20;
     public override int Rarity => 120;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

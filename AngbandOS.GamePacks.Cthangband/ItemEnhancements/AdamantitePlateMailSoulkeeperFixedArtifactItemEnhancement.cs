@@ -27,5 +27,4 @@ public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnh
         (nameof(ConstitutionAttribute), "2"),
     };
     public override string FriendlyName => "'Soulkeeper'";
-    public override ColorEnum? Color => ColorEnum.BrightGreen;
 }

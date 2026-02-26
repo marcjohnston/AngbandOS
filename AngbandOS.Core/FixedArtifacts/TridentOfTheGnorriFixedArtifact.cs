@@ -14,4 +14,5 @@ internal class TridentOfTheGnorriFixedArtifact : FixedArtifact
     public override string Name => "The Trident of the Gnorri";
     public override int Level => 30;
     public override int Rarity => 90;
+    public override ColorEnum Color => ColorEnum.Yellow;
 }

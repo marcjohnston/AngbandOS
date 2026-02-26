@@ -14,4 +14,5 @@ internal class RapierOfMontoyaFixedArtifact : FixedArtifact
     public override string Name => "The Rapier of Montoya";
     public override int Level => 15;
     public override int Rarity => 8;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

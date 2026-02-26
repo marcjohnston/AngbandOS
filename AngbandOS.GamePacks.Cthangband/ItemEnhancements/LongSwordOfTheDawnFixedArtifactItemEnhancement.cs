@@ -42,5 +42,4 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "of the Dawn";
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

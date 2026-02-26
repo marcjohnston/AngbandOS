@@ -14,4 +14,5 @@ internal class SteelHelmOfHammerhandFixedArtifact : FixedArtifact
     public override string Name => "The Steel Helm of Hammerhand";
     public override int Level => 20;
     public override int Rarity => 2;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

@@ -31,5 +31,4 @@ public class TridentOfWrathFixedArtifactItemEnhancement : ItemEnhancementGameCon
         (nameof(StrengthAttribute), "2"),
     };
     public override string FriendlyName => "of Wrath";
-    public override ColorEnum? Color => ColorEnum.Yellow;
 }

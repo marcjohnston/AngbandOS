@@ -23,5 +23,4 @@ public class LongBowOfSerpentsFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(DexterityAttribute), "3"),
     };
     public override string FriendlyName => "of Serpents";
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

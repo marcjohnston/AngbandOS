@@ -29,5 +29,4 @@ public class ExecutionersSwordOfNyarlathotepFixedArtifactItemEnhancement : ItemE
         (nameof(SlayDragonAttribute), "3"),
     };
     public override string FriendlyName => "of Nyarlathotep";
-    public override ColorEnum? Color => ColorEnum.Red;
 }

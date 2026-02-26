@@ -14,4 +14,5 @@ internal class QuarterstaffOfAtalFixedArtifact : FixedArtifact
     public override string Name => "The Quarterstaff of Atal";
     public override int Level => 30;
     public override int Rarity => 105;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

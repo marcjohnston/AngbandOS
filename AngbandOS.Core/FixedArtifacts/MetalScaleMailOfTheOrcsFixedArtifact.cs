@@ -14,4 +14,5 @@ internal class MetalScaleMailOfTheOrcsFixedArtifact : FixedArtifact
     public override string Name => "The Metal Scale Mail of the Orcs";
     public override int Level => 40;
     public override int Rarity => 3;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

@@ -12,5 +12,4 @@ public class SlimeMoldFoodItemFactoryItemEnhancement : ItemEnhancementGameConfig
         (nameof(WeightAttribute), "5"),
         (nameof(ValueAttribute), "2"),
     };
-    public override ColorEnum? Color => ColorEnum.Green;
 }

@@ -14,5 +14,4 @@ public class HardLeatherCapHelmItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(ValueAttribute), "12"),
         (nameof(BaseArmorClassAttribute), "2"),
     };
-    public override ColorEnum? Color => ColorEnum.Brown;
 }

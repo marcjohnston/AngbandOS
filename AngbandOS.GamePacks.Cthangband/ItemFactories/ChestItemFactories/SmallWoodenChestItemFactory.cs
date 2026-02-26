@@ -36,4 +36,5 @@ public class SmallWoodenChestItemFactory : ItemFactoryGameConfiguration
 
     public override int PackSort => 36;
     public override bool IsGood => true;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

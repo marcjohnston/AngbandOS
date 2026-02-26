@@ -56,5 +56,4 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
         (nameof(StrengthAttribute), "5"),
     };
     public override string FriendlyName => "of Set";
-    public override ColorEnum? Color => ColorEnum.Yellow;
 }

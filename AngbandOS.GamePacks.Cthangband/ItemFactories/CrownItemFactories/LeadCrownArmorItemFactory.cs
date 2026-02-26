@@ -54,4 +54,5 @@ public class LeadCrownArmorItemFactory : ItemFactoryGameConfiguration
     public override int RandartActivationChance => base.RandartActivationChance * 2;
 
     public override bool IsGood => true;
+    public override ColorEnum Color => ColorEnum.Black;
 }

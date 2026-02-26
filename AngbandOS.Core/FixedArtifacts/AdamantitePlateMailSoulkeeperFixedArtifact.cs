@@ -14,4 +14,5 @@ internal class AdamantitePlateMailSoulkeeperFixedArtifact : FixedArtifact
     public override string Name => "The Adamantite Plate Mail 'Soulkeeper'";
     public override int Level => 75;
     public override int Rarity => 9;
+    public override ColorEnum Color => ColorEnum.BrightGreen;
 }

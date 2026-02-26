@@ -14,4 +14,5 @@ internal class LongBowSureshotFixedArtifact : FixedArtifact
     public override string Name => "The Long Bow 'Sureshot'";
     public override int Level => 40;
     public override int Rarity => 20;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

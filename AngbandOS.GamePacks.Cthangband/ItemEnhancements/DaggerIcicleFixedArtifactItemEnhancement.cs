@@ -35,5 +35,4 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     };
     public override string? ActivationName => nameof(ActivationsEnum.BallOfCold48r2Every5p1d5DirectionalActivation);
     public override string FriendlyName => "'Icicle'";
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

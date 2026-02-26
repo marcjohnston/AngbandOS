@@ -26,5 +26,4 @@ public class FullPlateArmorOfTheGodsFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(ConstitutionAttribute), "1"),
     };
     public override string FriendlyName => "of the Gods";
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

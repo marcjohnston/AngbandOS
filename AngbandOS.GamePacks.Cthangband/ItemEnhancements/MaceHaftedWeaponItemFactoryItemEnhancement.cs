@@ -18,5 +18,4 @@ public class MaceHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGameCon
         (nameof(DamageDiceAttribute), "2"),
         (nameof(DiceSidesAttribute), "4"),
     };
-    public override ColorEnum? Color => ColorEnum.Black;
 }

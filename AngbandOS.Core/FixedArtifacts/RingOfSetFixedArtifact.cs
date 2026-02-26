@@ -17,4 +17,5 @@ internal class RingOfSetFixedArtifact : FixedArtifact
     public override bool DisableViaRandom => true;
     public override int Level => 100;
     public override int Rarity => 100;
+    public override ColorEnum Color => ColorEnum.Yellow;
 }

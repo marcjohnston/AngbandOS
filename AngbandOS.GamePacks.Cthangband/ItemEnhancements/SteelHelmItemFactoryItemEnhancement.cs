@@ -16,5 +16,4 @@ public class SteelHelmItemFactoryItemEnhancement : ItemEnhancementGameConfigurat
         (nameof(DiceSidesAttribute), "3"),
         (nameof(BaseArmorClassAttribute), "6"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

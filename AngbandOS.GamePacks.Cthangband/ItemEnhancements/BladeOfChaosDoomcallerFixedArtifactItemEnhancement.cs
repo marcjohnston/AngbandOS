@@ -41,5 +41,4 @@ public class BladeOfChaosDoomcallerFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(RadiusAttribute), "1"),
     };
     public override string FriendlyName => "'Doomcaller'";
-    public override ColorEnum? Color => ColorEnum.Purple;
 }

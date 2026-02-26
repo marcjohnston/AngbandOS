@@ -14,5 +14,4 @@ public class RobeSoftArmorItemFactoryItemEnhancement : ItemEnhancementGameConfig
         (nameof(ValueAttribute), "4"),
         (nameof(BaseArmorClassAttribute), "2"),
     };
-    public override ColorEnum? Color => ColorEnum.Blue;
 }

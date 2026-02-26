@@ -18,4 +18,5 @@ public class MithrilGoldItemFactory : ItemFactoryGameConfiguration
     public override int PackSort => 0;
     public override bool IsIgnoredByMonsters => true;
     public override bool IsGood => true;
+    public override ColorEnum Color => ColorEnum.BrightBlue;
 }

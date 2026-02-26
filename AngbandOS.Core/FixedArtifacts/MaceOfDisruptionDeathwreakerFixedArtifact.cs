@@ -14,4 +14,5 @@ internal class MaceOfDisruptionDeathwreakerFixedArtifact : FixedArtifact
     public override string Name => "The Mace of Disruption 'Deathwreaker'";
     public override int Level => 80;
     public override int Rarity => 38;
+    public override ColorEnum Color => ColorEnum.Purple;
 }

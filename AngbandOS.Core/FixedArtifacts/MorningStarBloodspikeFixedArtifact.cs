@@ -14,4 +14,5 @@ internal class MorningStarBloodspikeFixedArtifact : FixedArtifact
     public override string Name => "The Morning Star 'Bloodspike'";
     public override int Level => 20;
     public override int Rarity => 30;
+    public override ColorEnum Color => ColorEnum.Black;
 }

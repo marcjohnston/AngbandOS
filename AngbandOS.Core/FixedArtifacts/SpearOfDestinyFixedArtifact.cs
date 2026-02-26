@@ -14,4 +14,5 @@ internal class SpearOfDestinyFixedArtifact : FixedArtifact
     public override string Name => "The Spear of Destiny";
     public override int Level => 15;
     public override int Rarity => 45;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

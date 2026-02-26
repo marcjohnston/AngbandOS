@@ -15,5 +15,4 @@ public class MinorMagicksFolkBookItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "1"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightPurple;
 }

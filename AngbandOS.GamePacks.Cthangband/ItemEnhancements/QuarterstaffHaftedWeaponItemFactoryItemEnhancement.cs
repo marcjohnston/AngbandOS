@@ -18,5 +18,4 @@ public class QuarterstaffHaftedWeaponItemFactoryItemEnhancement : ItemEnhancemen
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "9"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

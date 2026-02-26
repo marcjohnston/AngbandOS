@@ -29,5 +29,4 @@ public class BroadSwordLightningFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(MeleeToHitAttribute), "12"),
         (nameof(ToDamageAttribute), "16"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

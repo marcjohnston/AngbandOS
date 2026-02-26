@@ -19,5 +19,4 @@ public class ScytheOfSlicingPolearmWeaponItemFactoryItemEnhancement : ItemEnhanc
         (nameof(DamageDiceAttribute), "8"),
         (nameof(DiceSidesAttribute), "4"),
     };
-    public override ColorEnum? Color => ColorEnum.Red;
 }

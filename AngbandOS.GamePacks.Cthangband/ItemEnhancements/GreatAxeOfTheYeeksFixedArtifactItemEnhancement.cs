@@ -32,5 +32,4 @@ public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(SlayDragonAttribute), "5"),
     };
     public override string FriendlyName => "of the Yeeks";
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

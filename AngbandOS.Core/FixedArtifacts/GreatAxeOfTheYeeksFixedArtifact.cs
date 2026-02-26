@@ -14,4 +14,5 @@ internal class GreatAxeOfTheYeeksFixedArtifact : FixedArtifact
     public override string Name => "The Great Axe of the Yeeks";
     public override int Level => 30;
     public override int Rarity => 90;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

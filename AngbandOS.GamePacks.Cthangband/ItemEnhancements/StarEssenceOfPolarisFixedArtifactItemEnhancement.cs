@@ -19,5 +19,4 @@ public class StarEssenceOfPolarisFixedArtifactItemEnhancement : ItemEnhancementG
     };
     public override string? ActivationName => nameof(ActivationsEnum.IlluminationEvery1d10p10DirectionalActivation);
     public override string FriendlyName => "of Polaris";
-    public override ColorEnum? Color => ColorEnum.Yellow;
 }

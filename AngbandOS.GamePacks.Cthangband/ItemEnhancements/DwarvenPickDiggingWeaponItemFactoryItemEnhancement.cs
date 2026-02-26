@@ -16,5 +16,4 @@ public class DwarvenPickDiggingWeaponItemFactoryItemEnhancement : ItemEnhancemen
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "4"),
     };
-    public override ColorEnum? Color => ColorEnum.Blue;
 }

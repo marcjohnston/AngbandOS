@@ -15,4 +15,5 @@ internal class DaggerCharityFixedArtifact : FixedArtifact
     public override string Name => "The Dagger 'Charity'";
     public override int Level => 5;
     public override int Rarity => 10;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

@@ -38,4 +38,5 @@ public class StinkingCloudWandItemFactory : ItemFactoryGameConfiguration
     public override int BaseValue => 50;
 
     public override bool IsGood => true;
+    public override ColorEnum Color => ColorEnum.Chartreuse;
 }

@@ -23,5 +23,4 @@ public class SoftLeatherArmorOfTheKoboldChiefFixedArtifactItemEnhancement : Item
         (nameof(StealthAttribute), "4"),
     };
     public override string FriendlyName => "of the Kobold Chief";
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

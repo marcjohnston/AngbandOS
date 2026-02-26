@@ -24,5 +24,4 @@ public class GreenDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(BonusArmorClassAttribute), "10"),
         (nameof(BaseArmorClassAttribute), "30"),
     };
-    public override ColorEnum? Color => ColorEnum.Green;
 }

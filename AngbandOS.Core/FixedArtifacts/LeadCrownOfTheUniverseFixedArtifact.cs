@@ -15,4 +15,5 @@ internal class LeadCrownOfTheUniverseFixedArtifact : FixedArtifact
     public override string Name => "The Lead Crown of the Universe";
     public override int Level => 100;
     public override int Rarity => 1;
+    public override ColorEnum Color => ColorEnum.Black;
 }

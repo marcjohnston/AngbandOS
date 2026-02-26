@@ -14,4 +14,5 @@ internal class LeatherScaleMailWyvernscaleFixedArtifact : FixedArtifact
     public override string Name => "The Leather Scale Mail 'Wyvernscale'";
     public override int Level => 20;
     public override int Rarity => 3;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

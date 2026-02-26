@@ -14,5 +14,4 @@ public class StoneToMudWandItemFactoryItemEnhancement : ItemEnhancementGameConfi
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "1"),
     };
-    public override ColorEnum? Color => ColorEnum.Chartreuse;
 }

@@ -14,4 +14,5 @@ internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact
     public override string Name => "The Power Dragon Scale Mail 'Bladeturner'";
     public override int Level => 95;
     public override int Rarity => 3;
+    public override ColorEnum Color => ColorEnum.Purple;
 }

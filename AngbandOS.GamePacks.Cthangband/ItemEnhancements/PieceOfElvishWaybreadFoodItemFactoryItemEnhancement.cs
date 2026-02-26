@@ -12,5 +12,4 @@ public class PieceOfElvishWaybreadFoodItemFactoryItemEnhancement : ItemEnhanceme
         (nameof(WeightAttribute), "3"),
         (nameof(ValueAttribute), "10"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightBlue;
 }

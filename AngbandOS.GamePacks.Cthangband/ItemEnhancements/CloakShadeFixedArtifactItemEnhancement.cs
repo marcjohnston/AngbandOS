@@ -20,5 +20,4 @@ public class CloakShadeFixedArtifactItemEnhancement : ItemEnhancementGameConfigu
         (nameof(ValueAttribute), "8000"),
     };
     public override string FriendlyName => "'Shade'";
-    public override ColorEnum? Color => ColorEnum.Green;
 }

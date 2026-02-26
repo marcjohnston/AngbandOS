@@ -18,5 +18,4 @@ public class MightyHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhancemen
         (nameof(DamageDiceAttribute), "3"),
         (nameof(DiceSidesAttribute), "9"),
     };
-    public override ColorEnum? Color => ColorEnum.Black;
 }

@@ -22,5 +22,4 @@ public class DaggerCharityFixedArtifactItemEnhancement : ItemEnhancementGameConf
         (nameof(MeleeToHitAttribute), "4"),
         (nameof(ToDamageAttribute), "6"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

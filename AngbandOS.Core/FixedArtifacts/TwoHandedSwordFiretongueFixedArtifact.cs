@@ -14,4 +14,5 @@ internal class TwoHandedSwordFiretongueFixedArtifact : FixedArtifact
     public override string Name => "The Two-Handed Sword 'Firetongue'";
     public override int Level => 30;
     public override int Rarity => 180;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }
