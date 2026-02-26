@@ -2206,10 +2206,11 @@ internal partial class Game
         RaceAtBirth = Race;
         InitializeQuests();
         IsDead = false;
-        PlayerOutfit();
 
         AssignItemFlavors();
         ResetItemFlavors();
+
+        PlayerOutfit();
 
         _seedFlavor = RandomLessThan(int.MaxValue);
         CreateWorld();

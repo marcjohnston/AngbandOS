@@ -1636,6 +1636,7 @@ internal sealed class Item : IComparable<Item>
         TurnsOfLightRemaining  = cloneFrom.TurnsOfLightRemaining;
         WandChargesRemaining = cloneFrom.WandChargesRemaining;
         StaffChargesRemaining = cloneFrom.StaffChargesRemaining;
+        Color = cloneFrom.Color;
 
         IdentSense = cloneFrom.IdentSense;
         IdentFixed = cloneFrom.IdentFixed;
