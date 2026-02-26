@@ -170,7 +170,6 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public int NutritionalValue { get; private set; }
 
-    private int TurnOfLightValue => _factory.ValuePerTurnOfLight;
     private int BaseValue => _factory.BaseValue;
     public Realm Realm => _factory.Realm;
 
