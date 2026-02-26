@@ -14,5 +14,4 @@ internal class LongSwordVorpalBladeFixedArtifact : FixedArtifact
     public override string Name => "The Long Sword 'Vorpal Blade'";
     public override int Level => 50;
     public override int Rarity => 30;
-    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

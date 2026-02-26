@@ -17,5 +17,4 @@ internal class StarEssenceOfXothFixedArtifact : FixedArtifact
     public override bool DisableViaRandom => true;
     public override int Level => 30;
     public override int Rarity => 25;
-    public override ColorEnum Color => ColorEnum.Yellow;
 }

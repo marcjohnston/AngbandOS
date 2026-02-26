@@ -14,5 +14,4 @@ internal class DaggerFaithFixedArtifact : FixedArtifact
     public override string Name => "The Dagger 'Faith'";
     public override int Level => 4;
     public override int Rarity => 10;
-    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

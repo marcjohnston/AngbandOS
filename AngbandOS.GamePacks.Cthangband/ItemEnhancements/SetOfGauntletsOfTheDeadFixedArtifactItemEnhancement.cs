@@ -19,4 +19,5 @@ public class SetOfGauntletsOfTheDeadFixedArtifactItemEnhancement : ItemEnhanceme
     };
     public override string? ActivationName => nameof(ActivationsEnum.BoltOfAcid5d8Every1d5p5DirectionalActivation);
     public override string FriendlyName => "of the Dead";
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

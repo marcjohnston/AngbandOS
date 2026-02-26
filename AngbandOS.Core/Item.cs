@@ -1349,7 +1349,6 @@ internal sealed class Item : IComparable<Item>
             }
         }
         FixedArtifact = fixedArtifact;
-        Color = fixedArtifact.Color;
         EffectiveAttributeSet.MergeAttributeSet(Game.FixedAttributeKey, fixedArtifactItemPropertySet.ToReadOnly());
         return true;
     }
@@ -1576,8 +1575,6 @@ internal sealed class Item : IComparable<Item>
     }
     #endregion
 
-    public ColorEnum Color { get; set; }
-
     #region Constructors
     /// <summary>
     /// Create a new item with a stackcount of 1.  Items must be associated with a factory.  No enhancements are applied.
@@ -1588,8 +1585,6 @@ internal sealed class Item : IComparable<Item>
     {
         Game = game;
         _factory = factory;
-
-        Color = factory.Color;
 
         // Generate the read-only item characteristics from the factory.
         EffectiveAttributeSet = new EffectiveAttributeSet(Game);

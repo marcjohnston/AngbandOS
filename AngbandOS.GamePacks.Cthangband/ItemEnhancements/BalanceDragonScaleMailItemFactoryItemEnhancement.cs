@@ -27,4 +27,5 @@ public class BalanceDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementG
         (nameof(MeleeToHitAttribute), "-2"),
         (nameof(BaseArmorClassAttribute), "30"),
     };
+    public override ColorEnum? Color => ColorEnum.Silver;
 }

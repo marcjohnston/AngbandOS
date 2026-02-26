@@ -19,4 +19,5 @@ public class LochaberAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancemen
         (nameof(DamageDiceAttribute), "3"),
         (nameof(DiceSidesAttribute), "8"),
     };
+    public override ColorEnum? Color => ColorEnum.Black;
 }

@@ -26,4 +26,5 @@ public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGam
     };
     public override string? ActivationName => nameof(ActivationsEnum.DrainLife120Every400DirectionalActivation);
     public override string FriendlyName => "of Theoden";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

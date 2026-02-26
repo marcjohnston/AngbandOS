@@ -14,5 +14,4 @@ internal class BattleAxeSpleenSlicerFixedArtifact : FixedArtifact
     public override string Name => "The Battle Axe 'Spleen Slicer'";
     public override int Level => 30;
     public override int Rarity => 15;
-    public override ColorEnum Color => ColorEnum.Grey;
 }

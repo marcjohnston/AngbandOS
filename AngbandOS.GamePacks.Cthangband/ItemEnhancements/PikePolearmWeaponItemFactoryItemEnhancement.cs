@@ -19,4 +19,5 @@ public class PikePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
         (nameof(DamageDiceAttribute), "2"),
         (nameof(DiceSidesAttribute), "5"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

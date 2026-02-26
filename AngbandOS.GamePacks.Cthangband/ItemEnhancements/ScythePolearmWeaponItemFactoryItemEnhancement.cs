@@ -19,4 +19,5 @@ public class ScythePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGame
         (nameof(DamageDiceAttribute), "5"),
         (nameof(DiceSidesAttribute), "3"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -16,4 +16,5 @@ public class MetalCapHelmItemFactoryItemEnhancement : ItemEnhancementGameConfigu
         (nameof(DiceSidesAttribute), "1"),
         (nameof(BaseArmorClassAttribute), "3"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

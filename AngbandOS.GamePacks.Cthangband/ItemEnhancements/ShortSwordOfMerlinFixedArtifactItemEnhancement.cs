@@ -29,4 +29,5 @@ public class ShortSwordOfMerlinFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(AttacksAttribute), "2"),
     };
     public override string FriendlyName => "of Merlin";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -14,5 +14,4 @@ internal class MainGaucheOfDefenceFixedArtifact : FixedArtifact
     public override string Name => "The Main Gauche of Defence";
     public override int Level => 15;
     public override int Rarity => 30;
-    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

@@ -15,5 +15,4 @@ internal class LongSwordOfKarakalFixedArtifact : FixedArtifact
     public override string Name => "The Long Sword of Karakal";
     public override int Level => 20;
     public override int Rarity => 30;
-    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

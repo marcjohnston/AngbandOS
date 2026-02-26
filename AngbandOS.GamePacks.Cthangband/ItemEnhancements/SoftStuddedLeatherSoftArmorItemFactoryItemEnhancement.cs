@@ -16,4 +16,5 @@ public class SoftStuddedLeatherSoftArmorItemFactoryItemEnhancement : ItemEnhance
         (nameof(DiceSidesAttribute), "1"),
         (nameof(BaseArmorClassAttribute), "5"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

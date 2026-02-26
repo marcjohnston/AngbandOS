@@ -32,4 +32,5 @@ public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Tepes";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

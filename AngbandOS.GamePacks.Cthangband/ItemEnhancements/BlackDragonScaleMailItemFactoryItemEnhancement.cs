@@ -24,4 +24,5 @@ public class BlackDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(MeleeToHitAttribute), "-2"),
         (nameof(BaseArmorClassAttribute), "30"),
     };
+    public override ColorEnum? Color => ColorEnum.Black;
 }

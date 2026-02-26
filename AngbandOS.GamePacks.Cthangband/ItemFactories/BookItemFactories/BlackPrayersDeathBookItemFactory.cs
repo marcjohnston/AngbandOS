@@ -48,5 +48,4 @@ public class BlackPrayersDeathBookItemFactory : ItemFactoryGameConfiguration
 
     public override int ExperienceGainDivisorForDestroying => 4;
     public override bool IsGood => true;
-    public override ColorEnum Color => ColorEnum.Grey;
 }

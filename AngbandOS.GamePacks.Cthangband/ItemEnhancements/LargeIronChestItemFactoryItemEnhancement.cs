@@ -15,4 +15,5 @@ public class LargeIronChestItemFactoryItemEnhancement : ItemEnhancementGameConfi
         (nameof(DamageDiceAttribute), "2"),
         (nameof(DiceSidesAttribute), "6"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

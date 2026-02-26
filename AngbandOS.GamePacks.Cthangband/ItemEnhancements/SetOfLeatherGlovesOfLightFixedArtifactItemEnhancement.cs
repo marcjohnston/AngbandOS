@@ -22,4 +22,5 @@ public class SetOfLeatherGlovesOfLightFixedArtifactItemEnhancement : ItemEnhance
     };
     public override string? ActivationName => nameof(ActivationsEnum.MagicMissile2d6Every2DirectionalActivation);
     public override string FriendlyName => "of Light";
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

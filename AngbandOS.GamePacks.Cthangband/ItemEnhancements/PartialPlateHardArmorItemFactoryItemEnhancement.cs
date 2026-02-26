@@ -17,4 +17,5 @@ public class PartialPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGa
         (nameof(MeleeToHitAttribute), "-3"),
         (nameof(BaseArmorClassAttribute), "22"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

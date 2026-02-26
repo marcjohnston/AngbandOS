@@ -33,4 +33,5 @@ public class CutlassOfBlackbeardFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(ToDamageAttribute), "11"),
     };
     public override string FriendlyName => "of Blackbeard";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

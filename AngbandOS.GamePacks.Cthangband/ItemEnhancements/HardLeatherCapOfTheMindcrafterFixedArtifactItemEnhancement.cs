@@ -22,4 +22,5 @@ public class HardLeatherCapOfTheMindcrafterFixedArtifactItemEnhancement : ItemEn
         (nameof(IntelligenceAttribute), "2"),
     };
     public override string FriendlyName => "of the Mindcrafter";
+    public override ColorEnum? Color => ColorEnum.Brown;
 }

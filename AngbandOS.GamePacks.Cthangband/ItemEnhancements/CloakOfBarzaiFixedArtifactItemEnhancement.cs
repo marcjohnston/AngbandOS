@@ -23,4 +23,5 @@ public class CloakOfBarzaiFixedArtifactItemEnhancement : ItemEnhancementGameConf
     };
     public override string? ActivationName => nameof(ActivationsEnum.ResistAll20p1d20Activation);
     public override string FriendlyName => "of Barzai";
+    public override ColorEnum? Color => ColorEnum.Green;
 }

@@ -22,4 +22,5 @@ public class PairOfMetalShodBootsOfTheBlackReaverFixedArtifactItemEnhancement : 
         (nameof(StrengthAttribute), "10"),
     };
     public override string FriendlyName => "of the Black Reaver";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

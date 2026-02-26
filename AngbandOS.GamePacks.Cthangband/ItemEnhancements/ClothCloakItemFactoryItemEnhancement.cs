@@ -15,4 +15,5 @@ public class ClothCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigura
         (nameof(ValueAttribute), "3"),
         (nameof(BaseArmorClassAttribute), "1"),
     };
+    public override ColorEnum? Color => ColorEnum.Green;
 }

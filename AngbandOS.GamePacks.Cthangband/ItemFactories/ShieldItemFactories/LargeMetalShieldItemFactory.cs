@@ -53,5 +53,4 @@ public class LargeMetalShieldItemFactory : ItemFactoryGameConfiguration
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatShieldEnchantmentScript) })
     };
     public override bool IsGood => true;
-    public override ColorEnum Color => ColorEnum.Grey;
 }

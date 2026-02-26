@@ -33,4 +33,5 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(ToDamageAttribute), "20"),
     };
     public override string FriendlyName => "'Selfslayer'";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

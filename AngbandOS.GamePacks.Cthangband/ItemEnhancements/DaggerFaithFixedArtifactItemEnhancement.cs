@@ -23,4 +23,5 @@ public class DaggerFaithFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     };
     public override string? ActivationName => nameof(ActivationsEnum.FireBolt9d8Every8p1d8DirectionalActivation);
     public override string FriendlyName => "'Faith'";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -23,4 +23,5 @@ public class DaggerHopeFixedArtifactItemEnhancement : ItemEnhancementGameConfigu
     public override string? ActivationName => nameof(ActivationsEnum.FrostBolt6d8Every7p1d7DirectionalActivation);
 
     public override string FriendlyName => "'Hope'";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

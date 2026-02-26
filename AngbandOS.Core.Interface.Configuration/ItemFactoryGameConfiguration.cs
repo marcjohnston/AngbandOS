@@ -24,12 +24,6 @@ public class ItemFactoryGameConfiguration
     public virtual bool NegativeBonusArmorClassRepresentsBroken { get; set; } = false;
     public virtual bool NegativeBonusHitRepresentsBroken { get; set; } = false;
 
-    /// <summary>
-    /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
-    /// that have flavor may change the FlavorColor based on the flavor.
-    /// </summary>
-    public virtual ColorEnum Color { get; set; }
-
     public virtual string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey { get; set; } = nameof(ItemEnhancementWeightedRandomsEnum.SlayingItemEnhancementWeightedRandom);
 
     /// <summary>

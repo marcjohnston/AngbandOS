@@ -27,4 +27,5 @@ public class FlailTotilaFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Totila'";
+    public override ColorEnum? Color => ColorEnum.Black;
 }

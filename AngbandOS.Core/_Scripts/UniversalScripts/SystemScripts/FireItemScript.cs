@@ -62,7 +62,7 @@ internal class FireItemScript : UniversalScript, IGetKey
         Game.PlaySound(SoundEffectEnum.Shoot);
         // Get the details of the shot
         string missileName = individualAmmunition.GetFullDescription(false);
-        ColorEnum missileColor = individualAmmunition.Color;
+        ColorEnum missileColor = individualAmmunition.EffectiveAttributeSet.Color;
         char missileCharacter = individualAmmunition.FlavorSymbol.Character;
         int shotSpeed = Game.MissileAttacksPerRound;
         int shotDamage = Game.DiceRoll(individualAmmunition.EffectiveAttributeSet.DamageDice, individualAmmunition.EffectiveAttributeSet.DiceSides) + individualAmmunition.EffectiveAttributeSet.ToDamage + missileWeapon.EffectiveAttributeSet.ToDamage;

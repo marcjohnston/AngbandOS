@@ -12,4 +12,5 @@ public class HardBiscuitFoodItemFactoryItemEnhancement : ItemEnhancementGameConf
         (nameof(WeightAttribute), "2"),
         (nameof(ValueAttribute), "1"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

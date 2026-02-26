@@ -16,4 +16,5 @@ public class LargeMetalShieldItemFactoryItemEnhancement : ItemEnhancementGameCon
         (nameof(DiceSidesAttribute), "3"),
         (nameof(BaseArmorClassAttribute), "5"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -19,4 +19,5 @@ public class GlaiveOfPainFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(ValueAttribute), "50000"),
     };
     public override string FriendlyName => "of Pain";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

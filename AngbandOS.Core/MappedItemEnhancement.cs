@@ -1,6 +1,4 @@
-﻿using AngbandOS.GamePacks.Cthangband;
-
-namespace AngbandOS.Core.MappedSpellScripts;
+﻿namespace AngbandOS.Core.MappedSpellScripts;
 
 [Serializable]
 internal sealed class MappedItemEnhancement : IGetKey, IToJson

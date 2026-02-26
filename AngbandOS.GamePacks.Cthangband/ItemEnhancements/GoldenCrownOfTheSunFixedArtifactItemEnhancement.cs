@@ -41,4 +41,5 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "of the Sun";
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

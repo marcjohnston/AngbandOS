@@ -43,4 +43,5 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Atal";
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

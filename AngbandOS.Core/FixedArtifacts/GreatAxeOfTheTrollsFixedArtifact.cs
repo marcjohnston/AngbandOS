@@ -14,5 +14,4 @@ internal class GreatAxeOfTheTrollsFixedArtifact : FixedArtifact
     public override string Name => "The Great Axe of the Trolls";
     public override int Level => 30;
     public override int Rarity => 120;
-    public override ColorEnum Color => ColorEnum.Grey;
 }

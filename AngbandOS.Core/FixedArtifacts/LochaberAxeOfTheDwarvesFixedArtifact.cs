@@ -14,5 +14,4 @@ internal class LochaberAxeOfTheDwarvesFixedArtifact : FixedArtifact
     public override string Name => "The Lochaber Axe of the Dwarves";
     public override int Level => 30;
     public override int Rarity => 8;
-    public override ColorEnum Color => ColorEnum.Black;
 }

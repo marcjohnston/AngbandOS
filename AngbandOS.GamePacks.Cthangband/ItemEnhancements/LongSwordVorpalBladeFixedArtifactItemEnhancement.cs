@@ -35,4 +35,5 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(StrengthAttribute), "2"),
     };
     public override string FriendlyName => "'Vorpal Blade'";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -19,4 +19,5 @@ public class SetOfGauntletsIronfistFixedArtifactItemEnhancement : ItemEnhancemen
     };
     public override string? ActivationName => nameof(ActivationsEnum.BoltOfFire9d8Every1d8p8DirectionalActivation);
     public override string FriendlyName => "'Ironfist'";
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

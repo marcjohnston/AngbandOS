@@ -18,4 +18,5 @@ public class WarHammerHaftedWeaponItemFactoryItemEnhancement : ItemEnhancementGa
         (nameof(DamageDiceAttribute), "3"),
         (nameof(DiceSidesAttribute), "3"),
     };
+    public override ColorEnum? Color => ColorEnum.Black;
 }

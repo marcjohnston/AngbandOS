@@ -27,4 +27,5 @@ public class LanceSkewerFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(DexterityAttribute), "2"),
     };
     public override string FriendlyName => "'Skewer'";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

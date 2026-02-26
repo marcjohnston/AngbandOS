@@ -30,4 +30,5 @@ public class TwoHandedSwordDragonslayerFixedArtifactItemEnhancement : ItemEnhanc
         (nameof(StrengthAttribute), "2"),
     };
     public override string FriendlyName => "'Dragonslayer'";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

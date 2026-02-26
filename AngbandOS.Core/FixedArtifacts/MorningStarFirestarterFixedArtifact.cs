@@ -14,5 +14,4 @@ internal class MorningStarFirestarterFixedArtifact : FixedArtifact
     public override string Name => "The Morning Star 'Firestarter'";
     public override int Level => 20;
     public override int Rarity => 15;
-    public override ColorEnum Color => ColorEnum.Black;
 }

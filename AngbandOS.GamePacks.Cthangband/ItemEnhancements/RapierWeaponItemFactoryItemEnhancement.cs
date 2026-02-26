@@ -18,4 +18,5 @@ public class RapierWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "6"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -18,4 +18,5 @@ public class AdamantitePlateMailHardArmorItemFactoryItemEnhancement : ItemEnhanc
         (nameof(BaseArmorClassAttribute), "40"),
         (nameof(MeleeToHitAttribute), "-4"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightGreen;
 }

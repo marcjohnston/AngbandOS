@@ -15,5 +15,4 @@ internal class MightyHammerOfWorldsFixedArtifact : FixedArtifact
     public override string Name => "The Mighty Hammer of Worlds";
     public override int Level => 100;
     public override int Rarity => 1;
-    public override ColorEnum Color => ColorEnum.Black;
 }

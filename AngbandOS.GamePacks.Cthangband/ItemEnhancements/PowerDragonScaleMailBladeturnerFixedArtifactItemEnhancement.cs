@@ -44,4 +44,5 @@ public class PowerDragonScaleMailBladeturnerFixedArtifactItemEnhancement : ItemE
         (nameof(BonusArmorClassAttribute), "10"),    
     };
     public override string FriendlyName => "'Bladeturner'";
+    public override ColorEnum? Color => ColorEnum.Purple;
 }

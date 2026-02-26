@@ -12,4 +12,5 @@ public class PintOfFineAleFoodItemFactoryItemEnhancement : ItemEnhancementGameCo
         (nameof(WeightAttribute), "5"),
         (nameof(ValueAttribute), "1"),
     };
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

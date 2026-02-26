@@ -14,5 +14,4 @@ internal class CutlassOfBlackbeardFixedArtifact : FixedArtifact
     public override string Name => "The Cutlass of Blackbeard";
     public override int Level => 20;
     public override int Rarity => 8;
-    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

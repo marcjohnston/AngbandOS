@@ -57,5 +57,4 @@ public class HardLeatherSoftArmorItemFactory : ItemFactoryGameConfiguration
         (new int[] { 1, 2 }, null, new string[] { nameof(SystemScriptsEnum.GoodSoftArmorEnchantmentScript) }),
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatSoftArmorEnchantmentScript) })
     };
-    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

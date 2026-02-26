@@ -17,4 +17,5 @@ public class HardStuddedLeatherSoftArmorItemFactoryItemEnhancement : ItemEnhance
         (nameof(MeleeToHitAttribute), "-1"),
         (nameof(BaseArmorClassAttribute), "7"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

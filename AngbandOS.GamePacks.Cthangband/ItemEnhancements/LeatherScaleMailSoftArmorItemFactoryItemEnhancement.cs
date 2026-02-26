@@ -17,4 +17,5 @@ public class LeatherScaleMailSoftArmorItemFactoryItemEnhancement : ItemEnhanceme
         (nameof(MeleeToHitAttribute), "-1"),
         (nameof(BaseArmorClassAttribute), "11"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

@@ -18,4 +18,5 @@ public class TwoHandedFlailHaftedWeaponItemFactoryItemEnhancement : ItemEnhancem
         (nameof(DamageDiceAttribute), "3"),
         (nameof(DiceSidesAttribute), "6"),
     };
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

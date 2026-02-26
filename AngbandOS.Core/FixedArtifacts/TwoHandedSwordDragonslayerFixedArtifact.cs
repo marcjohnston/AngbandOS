@@ -14,5 +14,4 @@ internal class TwoHandedSwordDragonslayerFixedArtifact : FixedArtifact
     public override string Name => "The Two-Handed Sword 'Dragonslayer'";
     public override int Level => 30;
     public override int Rarity => 30;
-    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

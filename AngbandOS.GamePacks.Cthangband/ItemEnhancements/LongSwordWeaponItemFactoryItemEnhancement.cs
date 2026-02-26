@@ -18,4 +18,5 @@ public class LongSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameConf
         (nameof(DamageDiceAttribute), "2"),
         (nameof(DiceSidesAttribute), "5"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

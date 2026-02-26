@@ -54,5 +54,4 @@ public class DragonHelmItemFactory : ItemFactoryGameConfiguration
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatHelmEnchantmentScript) })
     };
     public override bool IsGood => true;
-    public override ColorEnum Color => ColorEnum.BrightGreen;
 }

@@ -17,4 +17,5 @@ public class MetalBrigandineHardArmorItemFactoryItemEnhancement : ItemEnhancemen
         (nameof(MeleeToHitAttribute), "-3"),
         (nameof(BaseArmorClassAttribute), "19"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

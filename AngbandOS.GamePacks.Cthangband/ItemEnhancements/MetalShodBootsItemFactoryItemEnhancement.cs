@@ -16,4 +16,5 @@ public class MetalShodBootsItemFactoryItemEnhancement : ItemEnhancementGameConfi
         (nameof(DiceSidesAttribute), "1"),
         (nameof(BaseArmorClassAttribute), "6"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

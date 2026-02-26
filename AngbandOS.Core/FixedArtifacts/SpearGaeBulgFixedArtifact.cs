@@ -14,5 +14,4 @@ internal class SpearGaeBulgFixedArtifact : FixedArtifact
     public override string Name => "The Spear 'Gae Bulg'";
     public override int Level => 15;
     public override int Rarity => 12;
-    public override ColorEnum Color => ColorEnum.Grey;
 }

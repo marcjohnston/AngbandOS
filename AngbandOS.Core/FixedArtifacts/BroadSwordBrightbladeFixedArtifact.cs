@@ -14,5 +14,4 @@ internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
     public override string Name => "The Broad Sword 'Brightblade'";
     public override int Level => 20;
     public override int Rarity => 20;
-    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

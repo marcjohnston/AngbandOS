@@ -53,5 +53,4 @@ public class MithrilPlateMailHardArmorItemFactory : ItemFactoryGameConfiguration
         (new int[] { 1, 2 }, null, new string[] { nameof(SystemScriptsEnum.GoodHardArmorEnchantmentScript) }),
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatHardArmorEnchantmentScript) })
     };
-    public override ColorEnum Color => ColorEnum.BrightBlue;
 }

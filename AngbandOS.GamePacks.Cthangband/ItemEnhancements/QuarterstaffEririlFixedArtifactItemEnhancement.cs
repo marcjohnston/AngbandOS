@@ -27,4 +27,5 @@ public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGam
     };
     public override string? ActivationName => nameof(ActivationsEnum.IdentifyEvery10Activation);
     public override string FriendlyName => "'Eriril'";
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

@@ -41,4 +41,5 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
         (nameof(StrengthAttribute), "4"),
     };
     public override string FriendlyName => "'Firetongue'";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

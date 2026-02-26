@@ -15,4 +15,5 @@ public class FlaskOfOilItemFactoryItemEnhancement : ItemEnhancementGameConfigura
         (nameof(DamageDiceAttribute), "2"),
         (nameof(DiceSidesAttribute), "6"),
     };
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

@@ -318,6 +318,7 @@ internal class SingletonRepository
         // Preload
         LoadFromConfiguration<OrAttribute, OrAttributeGameConfiguration>(gameConfiguration.OrAttributes);
         LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes);
+        LoadFromConfiguration<ColorEnumAttribute, ColorEnumAttributeGameConfiguration>(gameConfiguration.ColorEnumAttributes);
         LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes);
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
@@ -410,39 +411,6 @@ internal class SingletonRepository
         {
             singleton.Bind();
         }
-
-        //foreach (FixedArtifact fixedArtifact in Get<FixedArtifact>())
-        //{
-        //    MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
-        //    MappedItemEnhancement[]? mappedItemEnhancements = allMappedItemEnhancements.Where(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(fixedArtifact.Key))).ToArray();
-        //    if (mappedItemEnhancements is not null)
-        //    {
-        //        bool done = false;
-        //        foreach (MappedItemEnhancement mappedItemEnhancement in mappedItemEnhancements)
-        //        {
-        //            if (mappedItemEnhancement.ItemEnhancements is not null)
-        //            {
-        //                foreach (IItemEnhancement iitemEnhancement in mappedItemEnhancement.ItemEnhancements)
-        //                {
-        //                    ItemEnhancement itemEnhancement = iitemEnhancement.GetItemEnhancement();
-        //                    if (iitemEnhancement.GetItemEnhancement().Color is not null)
-        //                    {
-        //                        string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements\", itemEnhancement.GetKey, "public override ColorEnum");
-        //                        if (prop1 is null && itemEnhancement.Color is not null)
-        //                            throw new Exception();
-        //                        if (prop1 is not null)
-        //                            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", fixedArtifact.Key, $"    public override ColorEnum Color => ColorEnum.{Enum.GetName<ColorEnum>(itemEnhancement.Color.Value)};");
-        //                        done = true;
-        //                        break;
-        //                    }
-        //                }
-        //            }
-        //            if (done)
-        //                break;
-
-        //        }
-        //    }
-        //}
     }
 
     private void ValidateSystemScriptsEnum()

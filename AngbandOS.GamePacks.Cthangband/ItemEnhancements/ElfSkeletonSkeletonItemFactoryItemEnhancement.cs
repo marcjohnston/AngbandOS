@@ -15,4 +15,5 @@ public class ElfSkeletonSkeletonItemFactoryItemEnhancement : ItemEnhancementGame
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "2"),
     };
+    public override ColorEnum? Color => ColorEnum.Beige;
 }

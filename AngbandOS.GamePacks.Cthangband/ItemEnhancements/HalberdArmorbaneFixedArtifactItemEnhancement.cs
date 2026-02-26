@@ -29,4 +29,5 @@ public class HalberdArmorbaneFixedArtifactItemEnhancement : ItemEnhancementGameC
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Armorbane'";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

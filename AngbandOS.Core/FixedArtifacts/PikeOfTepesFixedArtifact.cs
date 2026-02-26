@@ -14,5 +14,4 @@ internal class PikeOfTepesFixedArtifact : FixedArtifact
     public override string Name => "The Pike of Tepes";
     public override int Level => 20;
     public override int Rarity => 15;
-    public override ColorEnum Color => ColorEnum.Grey;
 }

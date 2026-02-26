@@ -38,4 +38,5 @@ public class LongSwordExcaliburFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Excalibur'";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -27,4 +27,5 @@ public class MetalBrigandineArmorOfSerpentsFixedArtifactItemEnhancement : ItemEn
         (nameof(StrengthAttribute), "2"),
     };
     public override string FriendlyName => "of Serpents";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -24,4 +24,5 @@ public class RapierOfMontoyaFixedArtifactItemEnhancement : ItemEnhancementGameCo
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Montoya";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

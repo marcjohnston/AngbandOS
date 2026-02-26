@@ -18,4 +18,5 @@ public class BrassLanternLightSourceItemFactoryItemEnhancement : ItemEnhancement
         (nameof(DiceSidesAttribute), "1"),
         (nameof(BurnRateAttribute), "1"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

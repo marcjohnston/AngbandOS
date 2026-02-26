@@ -32,4 +32,5 @@ public class MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement : It
         (nameof(IntelligenceAttribute), "4"),
     };
     public override string FriendlyName => "of the Vampire Hunter";
+    public override ColorEnum? Color => ColorEnum.BrightBlue;
 }

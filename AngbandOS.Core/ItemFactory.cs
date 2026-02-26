@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.Interface.Configuration;
-
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -29,8 +27,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
     }
     public string Key { get; }
     public string GetKey => Key;
-    public ColorEnum Color { get; set; }
-
     #region Constructors
     public ItemFactory(Game game, ItemFactoryGameConfiguration itemFactoryGameConfiguration) 
     {
@@ -39,7 +35,6 @@ internal sealed class ItemFactory : IGetKey, IToJson
         Key = itemFactoryGameConfiguration.Key ?? itemFactoryGameConfiguration.GetType().Name;
         ItemEnhancementBindingKey = itemFactoryGameConfiguration.ItemEnhancementBindingKey;
 
-        Color = itemFactoryGameConfiguration.Color;
         PreassignedItemFlavorBindingKey = itemFactoryGameConfiguration.PreassignedItemFlavorBindingKey;
         NegativeBonusDamageRepresentsBroken = itemFactoryGameConfiguration.NegativeBonusDamageRepresentsBroken;
         NegativeBonusArmorClassRepresentsBroken = itemFactoryGameConfiguration.NegativeBonusArmorClassRepresentsBroken;
@@ -207,8 +202,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     {
         ItemFactoryGameConfiguration itemFactoryGameConfiguration = new ItemFactoryGameConfiguration()
         {
-            Key = Key,
-            Color = Color,
+            Key = Key,           
             ItemEnhancementBindingKey = ItemEnhancementBindingKey,
             PreassignedItemFlavorBindingKey = PreassignedItemFlavorBindingKey,
             NegativeBonusDamageRepresentsBroken = NegativeBonusDamageRepresentsBroken,
@@ -371,12 +365,10 @@ internal sealed class ItemFactory : IGetKey, IToJson
         ItemEnhancement itemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
         EffectiveAttributeSet.MergeAttributeSet(itemEnhancement.GenerateAttributeSet());
 
-        // Cut and paste
-        //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements\", itemEnhancement.GetKey, "public override ColorEnum");
-        //if (prop1 is null && itemEnhancement.Color is not null)
-        //    throw new Exception();
+        //// Cut and paste
+        //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, "public override int BonusDamage => ");
         //if (prop1 is not null)
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories", Key, $"    public override ColorEnum Color => ColorEnum.{Enum.GetName<ColorEnum>(itemEnhancement.Color.Value)};");
+        //            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", itemEnhancement.GetKey, $"    public override string? Damage => \"{prop1.Split("=> ")[1].Replace(";","").Trim()}\";");
         //bool isGood = BonusArmorClass >= 0 && BonusHit >= 0 && BonusDamage >= 0;
         //if (isGood)
         //    Game.PasteProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, $"    public override bool IsGood => {isGood.ToString().ToLower()};");

@@ -30,4 +30,5 @@ public class MultiHuedDragonScaleMailRazorbackFixedArtifactItemEnhancement : Ite
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Razorback'";
+    public override ColorEnum? Color => ColorEnum.Purple;
 }

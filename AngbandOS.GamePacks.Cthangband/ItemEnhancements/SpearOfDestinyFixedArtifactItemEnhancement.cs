@@ -38,4 +38,5 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Destiny";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

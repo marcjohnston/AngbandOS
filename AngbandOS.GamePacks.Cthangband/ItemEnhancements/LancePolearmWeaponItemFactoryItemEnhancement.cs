@@ -19,4 +19,5 @@ public class LancePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(DamageDiceAttribute), "2"),
         (nameof(DiceSidesAttribute), "8"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

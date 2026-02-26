@@ -31,4 +31,5 @@ public class TwoHandedFlailThunderfistFixedArtifactItemEnhancement : ItemEnhance
         (nameof(StrengthAttribute), "4"),
     };
     public override string FriendlyName => "'Thunderfist'";
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

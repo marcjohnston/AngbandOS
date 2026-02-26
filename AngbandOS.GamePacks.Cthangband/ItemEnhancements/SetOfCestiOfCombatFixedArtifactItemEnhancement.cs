@@ -36,4 +36,5 @@ public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(DexterityAttribute), "4"),
     };
     public override string FriendlyName => "of Combat";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

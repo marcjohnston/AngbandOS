@@ -14,5 +14,4 @@ internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
     public override string Name => "The Hard Leather Cap of the Mindcrafter";
     public override int Level => 20;
     public override int Rarity => 2;
-    public override ColorEnum Color => ColorEnum.Brown;
 }

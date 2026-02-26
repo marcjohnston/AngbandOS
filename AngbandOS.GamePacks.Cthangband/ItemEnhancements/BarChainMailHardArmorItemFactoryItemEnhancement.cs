@@ -17,4 +17,5 @@ public class BarChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancementGa
         (nameof(MeleeToHitAttribute), "-2"),
         (nameof(BaseArmorClassAttribute), "18"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

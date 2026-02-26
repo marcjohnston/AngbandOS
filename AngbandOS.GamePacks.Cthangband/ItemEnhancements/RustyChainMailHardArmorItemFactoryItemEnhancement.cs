@@ -18,4 +18,5 @@ public class RustyChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancement
         (nameof(BonusArmorClassAttribute), "-8"),
         (nameof(BaseArmorClassAttribute), "14"),
     };
+    public override ColorEnum? Color => ColorEnum.Red;
 }

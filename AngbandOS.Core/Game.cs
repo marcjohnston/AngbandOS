@@ -1990,7 +1990,7 @@ internal partial class Game
                     }
 
                     kPtr.FlavorSymbol = kPtr.Flavor.Symbol;
-                    kPtr.Color = kPtr.Flavor.Color;
+                    kPtr.EffectiveAttributeSet.Color = kPtr.Flavor.Color;
                 }
             }
         }
@@ -7448,7 +7448,7 @@ internal partial class Game
         }
         item.ItemOptimize();
         string missileName = missile.GetFullDescription(false);
-        ColorEnum missileColor = missile.Color;
+        ColorEnum missileColor = missile.EffectiveAttributeSet.Color;
         char missileCharacter = missile.FlavorSymbol.Character;
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
@@ -12739,7 +12739,7 @@ internal partial class Game
                 // Only print items that exist
                 if (item != null)
                 {
-                    color = item.Color;
+                    color = item.EffectiveAttributeSet.Color;
                     character = item.FlavorSymbol.Character;
                 }
                 Screen.Print(color, character, screenRow, screenCol + column);
@@ -13998,10 +13998,10 @@ internal partial class Game
                     consoleRow["label"] = new ConsoleString(ColorEnum.White, $"{index.IndexToLabel()})");
 
                     // Apply flavor visuals
-                    consoleRow["flavor"] = new ConsoleChar(oPtr.Color, oPtr.FlavorSymbol.Character);
+                    consoleRow["flavor"] = new ConsoleChar(oPtr.EffectiveAttributeSet.Color, oPtr.FlavorSymbol.Character);
                     consoleRow["usage"] = new ConsoleString(ColorEnum.White, $"{inventorySlot.MentionUse(index)}:");
 
-                    ColorEnum color = oPtr.Color;
+                    ColorEnum color = oPtr.EffectiveAttributeSet.Color;
                     string description = oPtr.GetFullDescription(true);
                     if (description.Length > maximumDescriptionWidth)
                     {
@@ -15060,7 +15060,7 @@ internal partial class Game
             if (oPtr.WasNoticed)
             {
                 character = oPtr.FlavorSymbol.Character;
-                color = oPtr.Color;
+                color = oPtr.EffectiveAttributeSet.Color;
                 if (HallucinationsTimer.Value != 0)
                 {
                     ImageObject(out color, out character);

@@ -29,5 +29,4 @@ public class FlaskOfOilItemFactory : ItemFactoryGameConfiguration
     public override string BreakageChanceProbabilityExpression => "100/100";
     public override int PackSort => 10;
     public override bool IsGood => true;
-    public override ColorEnum Color => ColorEnum.Yellow;
 }

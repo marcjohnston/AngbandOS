@@ -23,4 +23,5 @@ public class GemstoneShiningTrapezodedronFixedArtifactItemEnhancement : ItemEnha
         (nameof(IntelligenceAttribute), "3"),
     };
     public override string FriendlyName => "'Shining Trapezodedron'";
+    public override ColorEnum? Color => ColorEnum.Red;
 }

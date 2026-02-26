@@ -25,4 +25,5 @@ public class DaggerOfThothFixedArtifactItemEnhancement : ItemEnhancementGameConf
     };
     public override string? ActivationName => nameof(ActivationsEnum.StinkingCloud12Every1d4p4DirectionalActivation);
     public override string FriendlyName => "of Thoth";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

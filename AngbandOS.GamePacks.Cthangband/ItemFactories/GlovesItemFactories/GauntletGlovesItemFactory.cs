@@ -53,5 +53,4 @@ public class GauntletGlovesItemFactory : ItemFactoryGameConfiguration
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatGlovesEnchantmentScript) })
     };
     public override bool IsGood => true;
-    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

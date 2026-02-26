@@ -43,4 +43,5 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(StrengthAttribute), "125"),
     };
     public override string FriendlyName => "of the Universe";
+    public override ColorEnum? Color => ColorEnum.Black;
 }

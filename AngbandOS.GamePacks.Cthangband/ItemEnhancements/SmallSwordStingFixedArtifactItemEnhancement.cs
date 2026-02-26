@@ -31,4 +31,5 @@ public class SmallSwordStingFixedArtifactItemEnhancement : ItemEnhancementGameCo
         (nameof(StrengthAttribute), "2"),
     };
     public override string FriendlyName => "'Sting'";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

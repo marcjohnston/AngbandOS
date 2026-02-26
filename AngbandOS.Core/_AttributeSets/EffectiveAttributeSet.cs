@@ -354,6 +354,17 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             Get<NullableReferenceSetEffectiveAttributeValue<ArtifactBias>>(nameof(ArtifactBiasAttribute)).Set(value);
         }
     }
+    public ColorEnum Color
+    {
+        get
+        {
+            return Get<ColorEnumSetEffectiveAttributeValue>(nameof(ColorAttribute)).Get();
+        }
+        set
+        {
+            Get<ColorEnumSetEffectiveAttributeValue>(nameof(ColorAttribute)).Set(value);
+        }
+    }
     public bool IsCursed
     {
         get

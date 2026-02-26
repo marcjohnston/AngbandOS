@@ -38,4 +38,10 @@ public class ItemEnhancementGameConfiguration
     /// <inheritdoc />
     public virtual string? ActivationName { get; set; }
     public virtual string? ArtifactBiasWeightedRandomBindingKey { get; set; } = null;
+
+    /// <summary>
+    /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
+    /// that have flavor may change the FlavorColor based on the flavor.
+    /// </summary>
+    public virtual ColorEnum? Color { get; set; } = null;
 }

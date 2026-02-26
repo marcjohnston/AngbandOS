@@ -40,4 +40,5 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(DexterityAttribute), "4"),
     };
     public override string FriendlyName => "of the Gnorri";
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

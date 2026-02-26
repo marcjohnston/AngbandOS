@@ -14,5 +14,4 @@ internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
     public override string Name => "The Multi-Hued Dragon Scale Mail 'Razorback'";
     public override int Level => 90;
     public override int Rarity => 9;
-    public override ColorEnum Color => ColorEnum.Purple;
 }

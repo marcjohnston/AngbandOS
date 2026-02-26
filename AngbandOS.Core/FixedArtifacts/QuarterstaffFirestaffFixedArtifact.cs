@@ -14,5 +14,4 @@ internal class QuarterstaffFirestaffFixedArtifact : FixedArtifact
     public override string Name => "The Quarterstaff 'Firestaff'";
     public override int Level => 20;
     public override int Rarity => 18;
-    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

@@ -57,5 +57,4 @@ public class RoundedPebbleShotAmmunitionItemFactory : ItemFactoryGameConfigurati
 
     public override bool HasQualityRatings => true;
     public override bool IsGood => true;
-    public override ColorEnum Color => ColorEnum.Grey;
 }

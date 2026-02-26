@@ -14,5 +14,4 @@ internal class FlailTotilaFixedArtifact : FixedArtifact
     public override string Name => "The Flail 'Totila'";
     public override int Level => 20;
     public override int Rarity => 8;
-    public override ColorEnum Color => ColorEnum.Black;
 }

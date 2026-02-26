@@ -32,4 +32,5 @@ public class DragonHelmOfPowerFixedArtifactItemEnhancement : ItemEnhancementGame
     };
     public override string? ActivationName => nameof(ActivationsEnum.Terror40xEvery3xp10Activation);
     public override string FriendlyName => "of Power";
+    public override ColorEnum? Color => ColorEnum.BrightGreen;
 }

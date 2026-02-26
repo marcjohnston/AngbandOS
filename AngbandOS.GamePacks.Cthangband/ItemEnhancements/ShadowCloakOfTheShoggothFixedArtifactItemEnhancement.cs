@@ -21,4 +21,5 @@ public class ShadowCloakOfTheShoggothFixedArtifactItemEnhancement : ItemEnhancem
         (nameof(StealthAttribute), "4"),
     };
     public override string FriendlyName => "of the Shoggoth";
+    public override ColorEnum? Color => ColorEnum.Black;
 }

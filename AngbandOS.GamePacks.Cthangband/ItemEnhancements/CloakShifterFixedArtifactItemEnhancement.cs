@@ -20,4 +20,5 @@ public class CloakShifterFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     };
     public override string? ActivationName => nameof(ActivationsEnum.Teleport100Every45Activation);
     public override string FriendlyName => "'Shifter'";
+    public override ColorEnum? Color => ColorEnum.Green;
 }

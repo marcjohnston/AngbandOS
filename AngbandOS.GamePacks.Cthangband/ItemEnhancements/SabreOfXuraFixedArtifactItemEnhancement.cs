@@ -45,4 +45,5 @@ public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(StrengthAttribute), "4"),
     };
     public override string FriendlyName => "of Xura";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

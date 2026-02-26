@@ -23,4 +23,5 @@ public class LightCrossbowOfDeathFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(ValueAttribute), "50000"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

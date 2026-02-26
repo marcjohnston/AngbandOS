@@ -14,5 +14,4 @@ internal class LanceSkewerFixedArtifact : FixedArtifact
     public override string Name => "The Lance 'Skewer'";
     public override int Level => 20;
     public override int Rarity => 23;
-    public override ColorEnum Color => ColorEnum.Grey;
 }

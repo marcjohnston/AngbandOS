@@ -17,5 +17,4 @@ internal class GemstoneShiningTrapezodedronFixedArtifact : FixedArtifact
     public override bool DisableViaRandom => true;
     public override int Level => 50;
     public override int Rarity => 50;
-    public override ColorEnum Color => ColorEnum.Red;
 }

@@ -49,5 +49,4 @@ public class AzathothChaosBookItemFactory : ItemFactoryGameConfiguration
         (500, "1d3-1")
     };
     public override bool IsGood => true;
-    public override ColorEnum Color => ColorEnum.Red;
 }

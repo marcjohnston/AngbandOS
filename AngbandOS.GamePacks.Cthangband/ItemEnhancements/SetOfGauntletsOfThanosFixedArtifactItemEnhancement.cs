@@ -38,4 +38,5 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(StrengthAttribute), "2"),
     };
     public override string FriendlyName => "of Thanos";
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

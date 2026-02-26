@@ -18,4 +18,5 @@ public class MainGaucheWeaponItemFactoryItemEnhancement : ItemEnhancementGameCon
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "5"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

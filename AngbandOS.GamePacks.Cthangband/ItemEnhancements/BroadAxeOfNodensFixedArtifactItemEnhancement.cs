@@ -26,4 +26,5 @@ public class BroadAxeOfNodensFixedArtifactItemEnhancement : ItemEnhancementGameC
         (nameof(ToDamageAttribute), "19"),
     };
     public override string FriendlyName => "of Nodens";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

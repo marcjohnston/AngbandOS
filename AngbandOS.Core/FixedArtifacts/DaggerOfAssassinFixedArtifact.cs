@@ -14,5 +14,4 @@ internal class DaggerOfAssassinFixedArtifact : FixedArtifact
     public override string Name => "The Dagger of Assassin";
     public override int Level => 20;
     public override int Rarity => 80;
-    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

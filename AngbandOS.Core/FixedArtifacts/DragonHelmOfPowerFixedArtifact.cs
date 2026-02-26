@@ -14,5 +14,4 @@ internal class DragonHelmOfPowerFixedArtifact : FixedArtifact
     public override string Name => "The Dragon Helm of Power";
     public override int Level => 40;
     public override int Rarity => 12;
-    public override ColorEnum Color => ColorEnum.BrightGreen;
 }

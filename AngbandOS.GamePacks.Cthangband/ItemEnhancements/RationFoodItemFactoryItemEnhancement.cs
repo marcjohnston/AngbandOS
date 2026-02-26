@@ -12,4 +12,5 @@ public class RationFoodItemFactoryItemEnhancement : ItemEnhancementGameConfigura
         (nameof(WeightAttribute), "10"),
         (nameof(ValueAttribute), "3"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

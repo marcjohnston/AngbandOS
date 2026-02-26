@@ -15,4 +15,5 @@ public class SmallSteelChestItemFactoryItemEnhancement : ItemEnhancementGameConf
         (nameof(DamageDiceAttribute), "2"),
         (nameof(DiceSidesAttribute), "4"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -24,4 +24,5 @@ public class RedDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(BonusArmorClassAttribute), "10"),
         (nameof(BaseArmorClassAttribute), "30"),
     };
+    public override ColorEnum? Color => ColorEnum.Red;
 }

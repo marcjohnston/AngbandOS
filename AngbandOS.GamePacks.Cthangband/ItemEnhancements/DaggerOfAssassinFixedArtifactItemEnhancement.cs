@@ -33,4 +33,5 @@ public class DaggerOfAssassinFixedArtifactItemEnhancement : ItemEnhancementGameC
         (nameof(ToDamageAttribute), "15"),
     };
     public override string FriendlyName => "of Assassin";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

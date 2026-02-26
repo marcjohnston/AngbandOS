@@ -14,5 +14,4 @@ internal class IronCrownOfMiseryFixedArtifact : FixedArtifact
     public override string Name => "The Iron Crown of Misery";
     public override int Level => 40;
     public override int Rarity => 12;
-    public override ColorEnum Color => ColorEnum.Grey;
 }

@@ -28,4 +28,5 @@ public class MainGaucheOfDefenceFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(DexterityAttribute), "3"),
     };
     public override string FriendlyName => "of Defence";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

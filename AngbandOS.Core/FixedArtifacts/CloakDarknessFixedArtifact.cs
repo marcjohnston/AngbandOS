@@ -14,5 +14,4 @@ internal class CloakDarknessFixedArtifact : FixedArtifact
     public override string Name => "The Cloak 'Darkness'";
     public override int Level => 5;
     public override int Rarity => 45;
-    public override ColorEnum Color => ColorEnum.Green;
 }

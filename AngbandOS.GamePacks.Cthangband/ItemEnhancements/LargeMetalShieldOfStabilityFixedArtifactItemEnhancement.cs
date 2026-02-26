@@ -27,4 +27,5 @@ public class LargeMetalShieldOfStabilityFixedArtifactItemEnhancement : ItemEnhan
         (nameof(ValueAttribute), "160000"),
     };
     public override string FriendlyName => "of Stability";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

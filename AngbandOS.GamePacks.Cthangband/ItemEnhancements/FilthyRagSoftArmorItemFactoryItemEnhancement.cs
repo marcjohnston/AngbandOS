@@ -15,4 +15,5 @@ public class FilthyRagSoftArmorItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(BonusArmorClassAttribute), "-1"),
         (nameof(BaseArmorClassAttribute), "1"),
     };
+    public override ColorEnum? Color => ColorEnum.Black;
 }

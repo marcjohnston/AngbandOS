@@ -32,4 +32,5 @@ public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(StrengthAttribute), "4"),
     };
     public override string FriendlyName => "of Everflame";
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -18,4 +18,5 @@ public class ExecutionersSwordWeaponItemFactoryItemEnhancement : ItemEnhancement
         (nameof(DamageDiceAttribute), "4"),
         (nameof(DiceSidesAttribute), "5"),
     };
+    public override ColorEnum? Color => ColorEnum.Red;
 }

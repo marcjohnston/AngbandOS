@@ -14,5 +14,4 @@ internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
     public override string Name => "The Battle Axe of N'Kai";
     public override int Level => 30;
     public override int Rarity => 15;
-    public override ColorEnum Color => ColorEnum.Grey;
 }

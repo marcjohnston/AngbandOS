@@ -25,4 +25,5 @@ public class CloakOfTheSwashbucklerFixedArtifactItemEnhancement : ItemEnhancemen
     };
     public override string? ActivationName => nameof(ActivationsEnum.RechargeActivation);
     public override string FriendlyName => "of the Swashbuckler";
+    public override ColorEnum? Color => ColorEnum.Green;
 }

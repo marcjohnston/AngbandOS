@@ -50,5 +50,4 @@ public class BlueDragonScaleMailItemFactory : ItemFactoryGameConfiguration
         (new int[] { 1, 2 }, null, new string[] { nameof(SystemScriptsEnum.GoodDragonScaleMailEnchantmentScript) }),
         (new int[] { 2 }, null, new string[] { nameof(SystemScriptsEnum.GreatDragonScaleMailEnchantmentScript) })
     };
-    public override ColorEnum Color => ColorEnum.Blue;
 }

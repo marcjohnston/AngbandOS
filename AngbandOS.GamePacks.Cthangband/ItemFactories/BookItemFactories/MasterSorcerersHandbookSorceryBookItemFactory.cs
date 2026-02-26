@@ -51,5 +51,4 @@ public class MasterSorcerersHandbookSorceryBookItemFactory : ItemFactoryGameConf
 
     public override int ExperienceGainDivisorForDestroying => 4;
     public override bool IsGood => true;
-    public override ColorEnum Color => ColorEnum.BrightBlue;
 }

@@ -19,4 +19,5 @@ public class TridentPolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "8"),
     };
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

@@ -17,4 +17,5 @@ public class SlingRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGameCo
         (nameof(WeightAttribute), "5"),
         (nameof(ValueAttribute), "5"),
     };
+    public override ColorEnum? Color => ColorEnum.Brown;
 }

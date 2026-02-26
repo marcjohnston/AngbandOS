@@ -4,9 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.Interfaces;
-using AngbandOS.GamePacks.Cthangband;
-
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -26,7 +23,8 @@ internal abstract class FixedArtifact : IGetKey, IToJson
         //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override ColorEnum Color => ");
         ////if (property is null)
         ////    throw new Exception("");
-
+        //MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
+        //MappedItemEnhancement[]? mappedItemEnhancements = allMappedItemEnhancements.Where(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(GetKey))).ToArray(); // Must match the character class
 
         //if (mappedItemEnhancements.Length == 0)
         //    throw new Exception("");
@@ -47,13 +45,6 @@ internal abstract class FixedArtifact : IGetKey, IToJson
     {
         return "";
     }
-
-
-    /// <summary>
-    /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
-    /// that have flavor may change the FlavorColor based on the flavor.
-    /// </summary>
-    public virtual ColorEnum Color { get; set; }
 
     public virtual string Key => GetType().Name;
     public string GetKey => Key;

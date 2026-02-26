@@ -18,4 +18,5 @@ public class DaggerWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "4"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

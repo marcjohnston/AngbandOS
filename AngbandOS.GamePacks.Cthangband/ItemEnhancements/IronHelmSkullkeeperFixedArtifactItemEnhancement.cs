@@ -23,4 +23,5 @@ public class IronHelmSkullkeeperFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(IntelligenceAttribute), "2"),
     };
     public override string FriendlyName => "'Skullkeeper'";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

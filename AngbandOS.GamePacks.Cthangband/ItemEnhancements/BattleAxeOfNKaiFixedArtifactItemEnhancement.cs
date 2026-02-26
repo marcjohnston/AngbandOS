@@ -41,4 +41,5 @@ public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameCo
         (nameof(TreasureRatingAttribute), "20"),
     };
     public override string FriendlyName => "of N'Kai";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

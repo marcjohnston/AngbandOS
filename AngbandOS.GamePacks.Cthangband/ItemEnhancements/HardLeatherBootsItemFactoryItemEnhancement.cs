@@ -16,4 +16,5 @@ public class HardLeatherBootsItemFactoryItemEnhancement : ItemEnhancementGameCon
         (nameof(DiceSidesAttribute), "1"),
         (nameof(BaseArmorClassAttribute), "3"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

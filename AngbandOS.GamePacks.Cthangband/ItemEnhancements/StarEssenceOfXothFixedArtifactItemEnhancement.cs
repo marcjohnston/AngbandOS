@@ -21,4 +21,5 @@ public class StarEssenceOfXothFixedArtifactItemEnhancement : ItemEnhancementGame
     };
     public override string? ActivationName => nameof(ActivationsEnum.MagicMappingAndIlluminationEvery1d50p50DirectionalActivation);
     public override string FriendlyName => "of Xoth";
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

@@ -17,4 +17,5 @@ public class FullPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(MeleeToHitAttribute), "-3"),
         (nameof(BaseArmorClassAttribute), "25"),
     };
+    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

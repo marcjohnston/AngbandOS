@@ -27,6 +27,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         AdditionalItemEnhancementWeightedRandomBindingKey = itemEnhancementGameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
         ApplicableItemFactoryBindingKeys = itemEnhancementGameConfiguration.ApplicableItemFactoryBindingKeys;
         ArtifactBiasWeightedRandomBindingKey = itemEnhancementGameConfiguration.ArtifactBiasWeightedRandomBindingKey;
+        Color = itemEnhancementGameConfiguration.Color;
         FriendlyName = itemEnhancementGameConfiguration.FriendlyName;
     }
     #endregion
@@ -76,6 +77,10 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         if (Activation is not null)
         {
             itemCharacteristics.Activation = Activation;
+        }
+        if (Color.HasValue)
+        {
+            itemCharacteristics.Color = Color.Value;
         }
         itemCharacteristics.FriendlyName = FriendlyName;
         return itemCharacteristics.ToReadOnly();
@@ -152,6 +157,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
             AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,
             ApplicableItemFactoryBindingKeys = ApplicableItemFactoryBindingKeys,
             ArtifactBiasWeightedRandomBindingKey = ArtifactBiasWeightedRandomBindingKey,
+            Color = Color,
             FriendlyName = FriendlyName,
         };
         return JsonSerializer.Serialize(itemEnhancementDefinition, Game.GetJsonSerializerOptions());
@@ -196,6 +202,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     /// <inheritdoc />
     private string? ActivationName { get; }
 
-    private string? ArtifactBiasWeightedRandomBindingKey { get; }       
+    private string? ArtifactBiasWeightedRandomBindingKey { get; }
+    
+    public ColorEnum? Color { get; }
+       
     #endregion
 }

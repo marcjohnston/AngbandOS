@@ -27,4 +27,5 @@ public class SpearGaeBulgFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(InfravisionAttribute), "3"),
     };
     public override string FriendlyName => "'Gae Bulg'";
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

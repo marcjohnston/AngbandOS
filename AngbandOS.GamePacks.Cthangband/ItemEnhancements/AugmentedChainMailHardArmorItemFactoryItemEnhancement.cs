@@ -17,4 +17,5 @@ public class AugmentedChainMailHardArmorItemFactoryItemEnhancement : ItemEnhance
         (nameof(DiceSidesAttribute), "4"),
         (nameof(BaseArmorClassAttribute), "16"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }

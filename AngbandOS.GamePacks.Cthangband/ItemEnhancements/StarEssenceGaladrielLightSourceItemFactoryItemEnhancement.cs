@@ -15,4 +15,5 @@ public class StarEssenceGaladrielLightSourceItemFactoryItemEnhancement : ItemEnh
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "1"),
     };
+    public override ColorEnum? Color => ColorEnum.Yellow;
 }

@@ -16,4 +16,5 @@ public class SmallMetalShieldItemFactoryItemEnhancement : ItemEnhancementGameCon
         (nameof(DiceSidesAttribute), "2"),
         (nameof(BaseArmorClassAttribute), "3"),
     };
+    public override ColorEnum? Color => ColorEnum.Grey;
 }
