@@ -7,21 +7,21 @@
 namespace AngbandOS.Core.WieldSlots;
 
 [Serializable]
-internal class FeetWieldSlot : EquipmentWieldSlot
+internal class OnBodyWieldSlot : EquipmentWieldSlot
 {
-    private FeetWieldSlot(Game game) : base(game) { }
-    public override string Label(int index) => "m";
-    public override string Label(Item oPtr) => "m";
-    public override int[] InventorySlots => new int[] { InventorySlotEnum.Feet };
-    public override string MentionUse(int? index) => "On feet";
-    public override string DescribeItemLocation(Item oPtr) => "wearing on your feet";
-    public override int BareArmorClassBonus => Game.ExperienceLevel.IntValue / 3;
+    private OnBodyWieldSlot(Game game) : base(game) { }
+    public override string Label(Item oPtr) => "h";
+    public override int[] InventorySlots => new int[] { InventorySlotEnum.OnBody };
+    public override string MentionUse(int? index) => "On body";
+    public override string DescribeItemLocation(Item oPtr) => "wearing on your body";
+    public override int BareArmorClassBonus => Game.ExperienceLevel.IntValue * 3 / 2;
     public override bool IsWeightRestricting => true;
     public override bool IsArmor => true;
-    public override int SortOrder => 13;
+    public override bool CanBeCursed => true;
+    public override int SortOrder => 8;
     public override void AddItem(Item item)
     {
-        Game.SetInventoryItem(InventorySlotEnum.Feet, item);
+        Game.SetInventoryItem(InventorySlotEnum.OnBody, item);
         Game.WeightCarried += item.EffectiveAttributeSet.Weight;
     }
 }

@@ -11,7 +11,6 @@ internal class HandsWieldSlot : EquipmentWieldSlot
 {
     private bool RestrictingGloves;
     private HandsWieldSlot(Game game) : base(game) { }
-    public override string Label(int index) => "l";
     public override string Label(Item oPtr) => "l";
     public override int[] InventorySlots => new int[] { InventorySlotEnum.Hands };
     public override string MentionUse(int? index) => "On hands";

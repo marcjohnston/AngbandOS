@@ -10,7 +10,6 @@ namespace AngbandOS.Core.WieldSlots;
 internal class AboutBodyWieldSlot : EquipmentWieldSlot
 {
     private AboutBodyWieldSlot(Game game) : base(game) { }
-    public override string Label(int index) => "i";
     public override string Label(Item optr) => "i";
     public override int[] InventorySlots => new int[] { InventorySlotEnum.AboutBody };
     public override string MentionUse(int? index) => "About body";

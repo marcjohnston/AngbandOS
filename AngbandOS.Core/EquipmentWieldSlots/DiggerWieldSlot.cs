@@ -11,7 +11,6 @@ internal class DiggerWieldSlot : EquipmentWieldSlot
 {
     private DiggerWieldSlot(Game game) : base(game) { }
     public override int[] InventorySlots => new int[] { InventorySlotEnum.Digger };
-    public override string Label(int index) => "c";
     public override string Label(Item oPtr) => "c";
     public override string MentionUse(int? index) => "Digging with";
     public override string DescribeItemLocation(Item oPtr) => "carrying in your pack";

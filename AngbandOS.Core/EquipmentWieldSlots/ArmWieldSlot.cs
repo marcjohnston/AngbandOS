@@ -11,7 +11,6 @@ internal class ArmWieldSlot : EquipmentWieldSlot
 {
     private ArmWieldSlot(Game game) : base(game) { }
     public override int[] InventorySlots => new int[] { InventorySlotEnum.Arm };
-    public override string Label(int index) => "j";
     public override string Label(Item oPtr) => "j";
     public override string MentionUse(int? index) => "On arm";
     public override string DescribeItemLocation(Item oPtr) => "wearing on your arm";

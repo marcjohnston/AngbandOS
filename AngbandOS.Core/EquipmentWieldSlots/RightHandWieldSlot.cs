@@ -10,7 +10,6 @@ namespace AngbandOS.Core.WieldSlots;
 internal class RightHandWieldSlot : EquipmentWieldSlot
 {
     private RightHandWieldSlot(Game game) : base(game) { }
-    public override string Label(int index) => "e";
     public override string Label(Item oPtr) => "e";
     public override int[] InventorySlots => new int[] { InventorySlotEnum.RightHand };
     public override string MentionUse(int? index) => "On right hand";

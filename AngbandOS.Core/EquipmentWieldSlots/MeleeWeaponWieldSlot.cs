@@ -9,30 +9,29 @@ using System;
 namespace AngbandOS.Core.WieldSlots;
 
 [Serializable]
-internal class RangedWeaponWieldSlot : EquipmentWieldSlot
+internal class MeleeWeaponWieldSlot : EquipmentWieldSlot
 {
-    private RangedWeaponWieldSlot(Game game) : base(game) { }
-    public override string Label(int index) => "b";
-    public override string Label(Item oPtr) => "b";
-    public override int[] InventorySlots => new int[] { InventorySlotEnum.RangedWeapon };
-    public override bool IsRangedWeapon => true;
-    public override string WieldPhrase => "You are shooting with";
-    public override int SortOrder => 2;
-    public override string TakeOffMessage(Item oPtr) => "You were holding";
+    private MeleeWeaponWieldSlot(Game game) : base(game) { }
+    public override int[] InventorySlots => new int[] { InventorySlotEnum.MeleeWeapon };
+    public override int SortOrder => 1;
+    public override string Label(Item oPtr) => "a";
+    public override bool IsMeleeWeapon => true;
+    public override string WieldPhrase => "You are wielding";
+    public override string TakeOffMessage(Item oPtr) => "You were wielding";
     public override void AddItem(Item item)
     {
-        Game.SetInventoryItem(InventorySlotEnum.RangedWeapon, item);
+        Game.SetInventoryItem(InventorySlotEnum.MeleeWeapon, item);
         Game.WeightCarried += item.EffectiveAttributeSet.Weight;
     }
     public override string MentionUse(int? index)
     {
-        string p = "Shooting";
+        string p = "Wielding";
         if (Count > 0 && index.HasValue)
         {
             Item? oPtr = Game.GetInventoryItem(index.Value);
             if (oPtr != null && Game.StrengthAbility.StrMaxWeaponWeight < oPtr.EffectiveAttributeSet.Weight / 10)
             {
-                p = "Just holding";
+                p = "Just lifting";
             }
         }
         return p;
@@ -40,10 +39,12 @@ internal class RangedWeaponWieldSlot : EquipmentWieldSlot
 
     public override string DescribeItemLocation(Item oPtr)
     {
-        string p = "shooting missiles with";
+        string p = "attacking monsters with";
+
+        // Check to see if we have a weapon.
         if (oPtr != null && Game.StrengthAbility.StrMaxWeaponWeight < oPtr.EffectiveAttributeSet.Weight / 10)
         {
-            p = "just holding";
+            p = "just lifting";
         }
         return p;
     }

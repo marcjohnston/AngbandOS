@@ -10,7 +10,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
 {
-    protected const string alphabet = "abcdefghijklmnopqrstuvwxyz";
     protected readonly Game Game;
     protected WieldSlot(Game game)
     {
@@ -38,8 +37,11 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     public abstract int[] InventorySlots { get; }
     public virtual string TakeOffMessage(Item oPtr) => "You were wearing";
 
-    [Obsolete("Use Label(Item)")]
-    public abstract string Label(int index);
+    /// <summary>
+    /// Returns the alphabetical label for the position of the item in the container.  The player will use this label to select the item from the container.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    public abstract string Label(Item oPtr); // TODO: This is problematic for inventory slots that have more than one item.
 
     /// <summary>
     /// Returns a description of an item in the container.
@@ -78,12 +80,6 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     //    Game.SetInventoryItem(slot, null);
     //    // TODO: need to drop the weight
     //}
-
-    /// <summary>
-    /// Returns the alphabetical label for the position of the item in the container.  The player will use this label to select the item from the container.
-    /// </summary>
-    /// <param name="oPtr"></param>
-    public abstract string Label(Item oPtr); // TODO: This is problematic for inventory slots that have more than one item.
 
     /// <summary>
     /// Renders a description of the item.  For an inventory slot, the description is rendered as possessive.

@@ -7,18 +7,17 @@
 namespace AngbandOS.Core.WieldSlots;
 
 [Serializable]
-internal class NeckWieldSlot : EquipmentWieldSlot
+internal class LeftHandWieldSlot : EquipmentWieldSlot
 {
-    private NeckWieldSlot(Game game) : base(game) { }
-    public override int[] InventorySlots => new int[] { InventorySlotEnum.Neck };
-    public override string Label(int index) => "f";
-    public override string Label(Item oPtr) => "f";
-    public override string MentionUse(int? index) => "Around neck";
-    public override string DescribeItemLocation(Item oPtr) => "wearing around your neck";
-    public override int SortOrder => 6;
+    private LeftHandWieldSlot(Game game) : base(game) { }
+    public override int[] InventorySlots => new int[] { InventorySlotEnum.LeftHand };
+    public override string Label(Item oPtr) => "d";
+    public override string MentionUse(int? index) => "On left hand";
+    public override string DescribeItemLocation(Item oPtr) => "wearing on your left hand";
+    public override int SortOrder => 4;
     public override void AddItem(Item item)
     {
-        Game.SetInventoryItem(InventorySlotEnum.Neck, item);
+        Game.SetInventoryItem(InventorySlotEnum.LeftHand, item);
         Game.WeightCarried += item.EffectiveAttributeSet.Weight;
     }
 }

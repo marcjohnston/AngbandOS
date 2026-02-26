@@ -4,17 +4,15 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
-using System;
-namespace AngbandOS.Core.WieldSlots;
+namespace AngbandOS.Core;
 
 [Serializable]
 internal class PackWieldSlot : WieldSlot
 {
+    protected const string alphabet = "abcdefghijklmnopqrstuvwxyz";
     private PackWieldSlot(Game game) : base(game) { }
     public override int[] InventorySlots => new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }; // TODO: Is 26 valid?  Game.InvenCarry says otherwise
     public override int MaximumItemSlots => InventorySlots.Length;
-    public override string Label(int index) => alphabet[index].ToString();
     public override string Label(Item oPtr)
     {
         int foundSlot = FindInventorySlot(oPtr);
@@ -31,7 +29,7 @@ internal class PackWieldSlot : WieldSlot
         Game.InventoryCarry(oPtr);
     }
 
-    /// Checks the quantity of an item and removes it, when the quanity is zero.  The pack inventory slot will move subsequent items in the pack to the end of the pack.
+    /// Checks the quantity of an item and removes it, when the quantity is zero.  The pack inventory slot will move subsequent items in the pack to the end of the pack.
     /// </summary>
     /// <param name="oPtr"></param>
     public override void ItemOptimize(Item oPtr)

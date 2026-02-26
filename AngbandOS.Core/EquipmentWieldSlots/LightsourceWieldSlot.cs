@@ -10,7 +10,6 @@ namespace AngbandOS.Core.WieldSlots;
 internal class LightsourceWieldSlot : EquipmentWieldSlot
 {
     private LightsourceWieldSlot(Game game) : base(game) { }
-    public override string Label(int index) => "g";
     public override string Label(Item oPtr) => "g";
     public override int[] InventorySlots => new int[] { InventorySlotEnum.Lightsource };
     public override string MentionUse(int? index) => "Light source";
