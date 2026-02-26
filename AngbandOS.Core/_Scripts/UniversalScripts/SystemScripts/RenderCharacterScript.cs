@@ -215,9 +215,9 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         int col = statCol + 44;
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", row - 1, col);
         Game.Screen.Print(ColorEnum.Blue, "Modifications", row + 6, col);
-        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
+        foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>())
         {
-            foreach (int inventorySlotIndex in inventorySlot.InventorySlots)
+            foreach (int inventorySlotIndex in equipmentWieldSlot.InventorySlots)
             {
                 Item? item = Game.GetInventoryItem(inventorySlotIndex);
                 if (item == null)

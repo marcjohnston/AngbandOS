@@ -14,11 +14,6 @@ internal abstract class EquipmentWieldSlot : WieldSlot
 {
     protected EquipmentWieldSlot(Game game) : base(game) { }
 
-    /// <summary>
-    /// Returns true.
-    /// </summary>
-    public override bool IsEquipment => true;
-
     public override bool IsWieldedAsEquipment => true;
 
     /// Checks the quantity of an item and removes it, when the quanity is zero.

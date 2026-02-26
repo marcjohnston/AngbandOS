@@ -201,11 +201,6 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     public virtual bool IsWeightRestricting => IsArmor;
 
     /// <summary>
-    /// Returns true, if the inventory slot represents equipment; false, if the inventory slot represents a pack.  Defaults to false.
-    /// </summary>
-    public virtual bool IsEquipment => false;
-
-    /// <summary>
     /// Returns true, if an identity sense chance test passes so that the item is identified; false, if the
     /// the item should not identified.  Returns true, by default.  Wielded items always return true.   Items in the
     /// pack return a random positive result so that the item is identitied much less frequently.

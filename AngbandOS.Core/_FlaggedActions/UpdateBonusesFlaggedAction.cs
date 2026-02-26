@@ -26,9 +26,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         // Apply all of the mutations that the player has.
 
         // Apply all of the items that the player is wielding.
-        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
+        foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>())
         {
-            foreach (int i in inventorySlot.InventorySlots)
+            foreach (int i in equipmentWieldSlot.InventorySlots)
             {
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
@@ -194,9 +194,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Game.HasSustainCharisma = true;
             }
         }
-        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
+        foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>())
         {
-            foreach (int i in inventorySlot.InventorySlots)
+            foreach (int i in equipmentWieldSlot.InventorySlots)
             {
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
@@ -407,7 +407,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.KnownBonusArmorClass += oPtr.EffectiveAttributeSet.BonusArmorClass;
                     }
-                    if (inventorySlot.IsWeapon)
+                    if (equipmentWieldSlot.IsWeapon)
                     {
                         continue;
                     }

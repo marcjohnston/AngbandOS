@@ -17,9 +17,9 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
     protected override void Execute()
     {
         Game.LightLevel = 0;
-        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
+        foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>())
         {
-            foreach (int i in inventorySlot.InventorySlots)
+            foreach (int i in equipmentWieldSlot.InventorySlots)
             {
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)

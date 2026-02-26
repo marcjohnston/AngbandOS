@@ -31,7 +31,7 @@ internal class InventoryScript : UniversalScript, IGetKey
         Game.ViewingEquipment = false;
         ScreenBuffer savedScreen = Game.Screen.Clone();
         // We want to see everything
-        bool inventoryShown = Game.ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, null);
+        bool inventoryShown = Game.ShowInven(new WieldSlot[] { Game.PackWieldSlot }, null);
         if (!inventoryShown)
         {
             Game.MsgPrint("You have nothing.");

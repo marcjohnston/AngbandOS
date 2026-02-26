@@ -47,7 +47,7 @@ internal class DrainStaffChargesAttackEffect : AttackEffect
         // We will attempt up to 10 selections on items.
         for (int k = 0; k < 10; k++)
         {
-            WieldSlot packInventorySlot = Game.SingletonRepository.Get<WieldSlot>(nameof(PackWieldSlot));
+            WieldSlot packInventorySlot = Game.PackWieldSlot;
             int i = packInventorySlot.WeightedRandom.Choose();
             Item? item = Game.GetInventoryItem(i);
             if (item != null && DrainChargesMonsterAttack(item, monster, ref obvious))

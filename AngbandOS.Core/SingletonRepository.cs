@@ -307,6 +307,7 @@ internal class SingletonRepository
         RegisterInterface<Talent>();
         RegisterInterface<Timer>();
         RegisterInterface<WieldSlot>();
+        RegisterInterface<EquipmentWieldSlot>();
         RegisterInterface<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
 
         // Load system singletons.

@@ -971,6 +971,7 @@ internal partial class Game
         StunTimer = (StunningTimer)SingletonRepository.Get<Timer>(nameof(Timers.StunningTimer));
         SuperheroismTimer = (SuperheroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.SuperheroismTimer));
         TelepathyTimer = (TelepathyTimer)SingletonRepository.Get<Timer>(nameof(Timers.TelepathyTimer));
+        PackWieldSlot = (PackWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(Core.PackWieldSlot));
 
         if (String.IsNullOrEmpty(gameConfiguration.DungeonViewBindingKey))
         {
@@ -981,7 +982,7 @@ internal partial class Game
 
         InitializeAllocationTables();
     }
-
+    public readonly PackWieldSlot PackWieldSlot;
     public void RenderView(View view)
     {
         ConsoleView = view;
@@ -2016,9 +2017,7 @@ internal partial class Game
                 item.BecomeKnown();
                 InventoryCarry(item);
                 Item carried = item.TakeFromStack(1);
-                LightsourceWieldSlot lightsourceInventorySlot = (LightsourceWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(LightsourceWieldSlot));
-                SetInventoryItem(lightsourceInventorySlot.WeightedRandom.ChooseOrDefault(), carried);
-                WeightCarried += carried.EffectiveAttributeSet.Weight;
+                carried.Wield();
             }
 
             // Retrieve the tables to select from.
@@ -2736,9 +2735,9 @@ internal partial class Game
         }
         if (canChooseFromEquipment)
         {
-            foreach (WieldSlot inventorySlot in SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
+            foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>())
             {
-                foreach (int ii in inventorySlot.InventorySlots)
+                foreach (int ii in equipmentWieldSlot.InventorySlots)
                 {
                     Item? oPtr = GetInventoryItem(ii);
                     if (oPtr != null && (itemFilter == null || itemFilter.Matches(oPtr)))
@@ -2799,7 +2798,7 @@ internal partial class Game
                 }
                 else
                 {
-                    ShowInven(_inventorySlot => !_inventorySlot.IsEquipment, itemFilter);
+                    ShowInven(new WieldSlot[] { PackWieldSlot }, itemFilter);
                 }
             }
             string tmpVal;
@@ -4027,7 +4026,7 @@ internal partial class Game
         bool caveNoRegen = false;
 
         // Allow all wield slots access to the process world.
-        foreach (WieldSlot inventorySlot in SingletonRepository.Get<WieldSlot>())
+        foreach (WieldSlot inventorySlot in SingletonRepository.Get<EquipmentWieldSlot>().Concat(new WieldSlot[] { PackWieldSlot }))
         {
             ProcessWorldEventArgs inventorySlotProcessWorldEventArgs = new ProcessWorldEventArgs();
             inventorySlot.ProcessWorld(inventorySlotProcessWorldEventArgs);
@@ -12414,7 +12413,7 @@ internal partial class Game
         {
             return false;
         }
-        foreach (WieldSlot inventorySlot in SingletonRepository.Get<WieldSlot>())
+        foreach (EquipmentWieldSlot inventorySlot in SingletonRepository.Get<EquipmentWieldSlot>())
         {
             if (inventorySlot.IsArmor)
             {
@@ -12730,9 +12729,9 @@ internal partial class Game
     public void DisplayPlayerEquippy(int screenRow, int screenCol)
     {
         int column = 0;
-        foreach (WieldSlot inventorySlot in SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
+        foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>().OrderBy(_inventorySlot => _inventorySlot.SortOrder))
         {
-            foreach (int index in inventorySlot.InventorySlots)
+            foreach (int index in equipmentWieldSlot.InventorySlots)
             {
                 Item? item = GetInventoryItem(index);
                 ColorEnum color = ColorEnum.Background;
@@ -13960,7 +13959,8 @@ internal partial class Game
 
     public void ShowEquipment(IItemFilter? itemFilter)
     {
-        ShowInven(_inventorySlot => _inventorySlot.IsEquipment, itemFilter, true, true, true);
+        WieldSlot[] wieldSlots = SingletonRepository.Get<EquipmentWieldSlot>().OrderBy(_inventorySlot => _inventorySlot.SortOrder).ToArray();
+        ShowInven(wieldSlots, itemFilter, true, true, true);
     }
 
     /// <summary>
@@ -13970,13 +13970,8 @@ internal partial class Game
     /// <param name="itemFilter"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    public bool ShowInven(Func<WieldSlot, bool> inventorySlotPredicate, IItemFilter? itemFilter, bool ShowEmptySlotsAsNothing = false, bool ShowFlavorColumn = false, bool ShowUsageColumn = false)
+    public bool ShowInven(WieldSlot[] wieldSlots, IItemFilter? itemFilter, bool ShowEmptySlotsAsNothing = false, bool ShowFlavorColumn = false, bool ShowUsageColumn = false)
     {
-        WieldSlot[] inventorySlots = SingletonRepository.Get<WieldSlot>()
-            .Where(_inventorySlot => inventorySlotPredicate(_inventorySlot))
-            .OrderBy(_inventorySlot => _inventorySlot.SortOrder)
-            .ToArray();
-
         const string labels = "abcdefghijklmnopqrstuvwxyz";
         ConsoleTable consoleTable = new ConsoleTable("label", "flavor", "usage", "description", "weight");
         consoleTable.Column("flavor").IsVisible = ShowFlavorColumn;
@@ -13987,7 +13982,7 @@ internal partial class Game
         {
             maximumDescriptionWidth -= 17;
         }
-        foreach (WieldSlot inventorySlot in inventorySlots)
+        foreach (WieldSlot inventorySlot in wieldSlots)
         {
             bool slotIsEmpty = true;
             foreach (int index in inventorySlot.InventorySlots)

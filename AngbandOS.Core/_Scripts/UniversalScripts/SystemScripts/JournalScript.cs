@@ -120,9 +120,9 @@ internal class JournalScript : UniversalScript, IGetKey
     {
         // Determine if the stat is granted via any equipment.  This allows us to choose the color before rendering any of the inventory slots.
         bool anyHasStat = false;
-        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment))
+        foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>())
         {
-            foreach (int i in inventorySlot.InventorySlots)
+            foreach (int i in equipmentWieldSlot.InventorySlots)
             {
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
@@ -142,9 +142,9 @@ internal class JournalScript : UniversalScript, IGetKey
 
         // Now render all of the inventory slots.
         int index = 0;
-        foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsEquipment).OrderBy(_inventorySlot => _inventorySlot.SortOrder))
+        foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>().OrderBy(_inventorySlot => _inventorySlot.SortOrder))
         {
-            foreach (int i in inventorySlot.InventorySlots)
+            foreach (int i in equipmentWieldSlot.InventorySlots)
             {
                 bool thisHasStat = false;
                 Item? oPtr = Game.GetInventoryItem(i);
