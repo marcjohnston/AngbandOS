@@ -51,8 +51,6 @@ internal class PackWieldSlot : WieldSlot
         Game.SetInventoryItem(InventorySlotEnum.PackCount, null);
     }
 
-    public override bool IsEquipment => false;
-
     public override bool IsWieldedAsEquipment => false;
 
     /// <summary>
