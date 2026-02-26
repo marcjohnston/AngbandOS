@@ -34,5 +34,4 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
     };
     public override string? ActivationName => nameof(ActivationsEnum.DrainLife90Every70DirectionalActivation);
     public override string FriendlyName => "'Justice'";
-    public override ColorEnum? Color => ColorEnum.BrightBlue;
 }

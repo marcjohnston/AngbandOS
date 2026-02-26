@@ -20,5 +20,4 @@ public class PairOfHardLeatherBootsOfIthaquaFixedArtifactItemEnhancement : ItemE
         (nameof(SpeedAttribute), "15"),
     };
     public override string FriendlyName => "of Ithaqua";
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

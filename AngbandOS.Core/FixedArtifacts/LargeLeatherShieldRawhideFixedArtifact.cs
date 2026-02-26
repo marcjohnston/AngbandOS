@@ -14,4 +14,5 @@ internal class LargeLeatherShieldRawhideFixedArtifact : FixedArtifact
     public override string Name => "The Large Leather Shield 'Rawhide'";
     public override int Level => 30;
     public override int Rarity => 3;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

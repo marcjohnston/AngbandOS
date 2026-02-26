@@ -12,5 +12,4 @@ public class StripOfVenisonFoodItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(WeightAttribute), "2"),
         (nameof(ValueAttribute), "2"),
     };
-    public override ColorEnum? Color => ColorEnum.Brown;
 }

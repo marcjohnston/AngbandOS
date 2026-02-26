@@ -18,5 +18,4 @@ public class MithrilChainMailHardArmorItemFactoryItemEnhancement : ItemEnhanceme
         (nameof(MeleeToHitAttribute), "-1"),
         (nameof(BaseArmorClassAttribute), "28"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightBlue;
 }

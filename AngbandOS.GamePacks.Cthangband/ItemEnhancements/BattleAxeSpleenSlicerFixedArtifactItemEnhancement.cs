@@ -25,5 +25,4 @@ public class BattleAxeSpleenSlicerFixedArtifactItemEnhancement : ItemEnhancement
     };
     public override string? ActivationName => nameof(ActivationsEnum.Heal4d8AndWoundsEvery3p1d3Activation);
     public override string FriendlyName => "'Spleen Slicer'";
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

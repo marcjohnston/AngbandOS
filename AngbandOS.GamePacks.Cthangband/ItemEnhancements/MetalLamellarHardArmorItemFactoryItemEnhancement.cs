@@ -17,5 +17,4 @@ public class MetalLamellarHardArmorItemFactoryItemEnhancement : ItemEnhancementG
         (nameof(MeleeToHitAttribute), "-3"),
         (nameof(BaseArmorClassAttribute), "23"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

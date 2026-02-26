@@ -16,5 +16,4 @@ public class LargeLeatherShieldItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(DiceSidesAttribute), "2"),
         (nameof(BaseArmorClassAttribute), "4"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

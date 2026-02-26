@@ -47,5 +47,4 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(StrengthAttribute), "2"),
     };
     public override string FriendlyName => "of Karakal";
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -17,5 +17,4 @@ public class HeavyCrossbowRangedWeaponItemFactoryItemEnhancement : ItemEnhanceme
         (nameof(WeightAttribute), "200"),
         (nameof(ValueAttribute), "300"),
     };
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

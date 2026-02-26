@@ -22,5 +22,4 @@ public class DragonShieldItemFactoryItemEnhancement : ItemEnhancementGameConfigu
         (nameof(ValueAttribute), "10000"),
         (nameof(WeightAttribute), "100"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightGreen;
 }

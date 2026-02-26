@@ -14,4 +14,5 @@ internal class DaggerIcicleFixedArtifact : FixedArtifact
     public override string Name => "The Dagger 'Icicle'";
     public override int Level => 10;
     public override int Rarity => 40;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

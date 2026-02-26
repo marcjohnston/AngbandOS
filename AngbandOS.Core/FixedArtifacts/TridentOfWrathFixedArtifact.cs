@@ -14,4 +14,5 @@ internal class TridentOfWrathFixedArtifact : FixedArtifact
     public override string Name => "The Trident of Wrath";
     public override int Level => 15;
     public override int Rarity => 35;
+    public override ColorEnum Color => ColorEnum.Yellow;
 }

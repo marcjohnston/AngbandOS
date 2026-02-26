@@ -18,5 +18,4 @@ public class LongBowRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGame
         (nameof(WeightAttribute), "40"),
         (nameof(ValueAttribute), "120"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

@@ -25,5 +25,4 @@ public class QuarterstaffFirestaffFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Firestaff'";
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

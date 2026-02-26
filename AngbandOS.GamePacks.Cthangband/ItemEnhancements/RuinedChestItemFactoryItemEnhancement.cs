@@ -13,5 +13,4 @@ public class RuinedChestItemFactoryItemEnhancement : ItemEnhancementGameConfigur
     {
         (nameof(WeightAttribute), "250"),
     };
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

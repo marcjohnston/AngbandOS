@@ -38,5 +38,4 @@ public class MightyHammerOfWorldsFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(SlayDragonAttribute), "5"),
     };
     public override string FriendlyName => "of Worlds";
-    public override ColorEnum? Color => ColorEnum.Black;
 }

@@ -45,5 +45,4 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
         (nameof(SlayDragonAttribute), "5"),
     };
     public override string FriendlyName => "'Mjolnir'";
-    public override ColorEnum? Color => ColorEnum.Black;
 }

@@ -16,5 +16,4 @@ public class OrcishPickDiggingWeaponItemFactoryItemEnhancement : ItemEnhancement
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "3"),
     };
-    public override ColorEnum? Color => ColorEnum.Green;
 }

@@ -19,5 +19,4 @@ public class HalberdPolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(DamageDiceAttribute), "3"),
         (nameof(DiceSidesAttribute), "5"),
     };
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

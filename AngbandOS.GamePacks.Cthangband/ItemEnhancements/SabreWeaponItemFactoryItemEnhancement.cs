@@ -18,5 +18,4 @@ public class SabreWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigur
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "7"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

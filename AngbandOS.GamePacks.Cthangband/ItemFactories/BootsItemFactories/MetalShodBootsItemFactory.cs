@@ -55,4 +55,5 @@ public class MetalShodBootsItemFactory : ItemFactoryGameConfiguration
     public override bool IdentityCanBeSensed => true;
     public override int RandartActivationChance => base.RandartActivationChance * 2;
     public override bool IsGood => true;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

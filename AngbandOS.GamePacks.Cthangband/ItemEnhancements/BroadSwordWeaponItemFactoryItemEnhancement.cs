@@ -18,5 +18,4 @@ public class BroadSwordWeaponItemFactoryItemEnhancement : ItemEnhancementGameCon
         (nameof(DamageDiceAttribute), "2"),
         (nameof(DiceSidesAttribute), "5"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

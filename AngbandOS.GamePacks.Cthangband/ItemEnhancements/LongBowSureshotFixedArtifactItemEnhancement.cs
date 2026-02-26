@@ -24,5 +24,4 @@ public class LongBowSureshotFixedArtifactItemEnhancement : ItemEnhancementGameCo
         (nameof(DexterityAttribute), "3"),
     };
     public override string FriendlyName => "'Sureshot'";
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

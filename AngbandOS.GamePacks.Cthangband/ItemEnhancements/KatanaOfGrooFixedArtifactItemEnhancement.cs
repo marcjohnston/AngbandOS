@@ -26,5 +26,4 @@ public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(AttacksAttribute), "3"),
     };
     public override string FriendlyName => "of Groo";
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

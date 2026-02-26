@@ -12,5 +12,4 @@ public class PintOfFineWineFoodItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(WeightAttribute), "10"),
         (nameof(ValueAttribute), "2"),
     };
-    public override ColorEnum? Color => ColorEnum.Red;
 }

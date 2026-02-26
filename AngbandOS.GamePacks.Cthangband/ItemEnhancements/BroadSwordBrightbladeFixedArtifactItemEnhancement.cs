@@ -27,5 +27,4 @@ public class BroadSwordBrightbladeFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(ToDamageAttribute), "15"),
     };
     public override string FriendlyName => "'Brightblade'";
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

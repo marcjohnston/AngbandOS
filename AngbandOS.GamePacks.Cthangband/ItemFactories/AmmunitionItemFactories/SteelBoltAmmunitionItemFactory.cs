@@ -59,4 +59,5 @@ public class SteelBoltAmmunitionItemFactory : ItemFactoryGameConfiguration
 
     public override bool HasQualityRatings => true;
     public override bool IsGood => true;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

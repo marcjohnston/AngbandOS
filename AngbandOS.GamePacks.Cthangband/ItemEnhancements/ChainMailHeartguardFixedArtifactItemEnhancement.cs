@@ -27,5 +27,4 @@ public class ChainMailHeartguardFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(MeleeToHitAttribute), "-2"),
     };
     public override string FriendlyName => "'Heartguard'";
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

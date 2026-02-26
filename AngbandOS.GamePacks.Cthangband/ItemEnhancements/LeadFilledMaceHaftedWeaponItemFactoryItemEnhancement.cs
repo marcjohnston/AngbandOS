@@ -18,5 +18,4 @@ public class LeadFilledMaceHaftedWeaponItemFactoryItemEnhancement : ItemEnhancem
         (nameof(DamageDiceAttribute), "3"),
         (nameof(DiceSidesAttribute), "4"),
     };
-    public override ColorEnum? Color => ColorEnum.Black;
 }

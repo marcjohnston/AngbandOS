@@ -16,5 +16,4 @@ public class GauntletGlovesItemFactoryItemEnhancement : ItemEnhancementGameConfi
         (nameof(DiceSidesAttribute), "1"),
         (nameof(BaseArmorClassAttribute), "2"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

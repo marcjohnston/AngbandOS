@@ -34,5 +34,4 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(IntelligenceAttribute), "2"),
     };
     public override string FriendlyName => "'Soulsword'";
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

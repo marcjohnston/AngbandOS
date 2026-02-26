@@ -18,5 +18,4 @@ public class KatanaWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfigu
         (nameof(DamageDiceAttribute), "3"),
         (nameof(DiceSidesAttribute), "4"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

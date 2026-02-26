@@ -17,5 +17,4 @@ public class RibbedPlateHardArmorItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(MeleeToHitAttribute), "-3"),
         (nameof(BaseArmorClassAttribute), "28"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

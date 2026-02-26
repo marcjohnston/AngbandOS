@@ -26,5 +26,4 @@ public class SetOfGauntletsOfGhoulsFixedArtifactItemEnhancement : ItemEnhancemen
     };
     public override string? ActivationName => nameof(ActivationsEnum.BoltOfFrost6d8Every1d7p7DirectionalActivation);
     public override string FriendlyName => "of Ghouls";
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

@@ -14,4 +14,5 @@ internal class SetOfCestiOfCombatFixedArtifact : FixedArtifact
     public override string Name => "The Set of Cesti of Combat";
     public override int Level => 40;
     public override int Rarity => 15;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

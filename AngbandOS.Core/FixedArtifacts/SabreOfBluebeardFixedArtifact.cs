@@ -14,4 +14,5 @@ internal class SabreOfBluebeardFixedArtifact : FixedArtifact
     public override string Name => "The Sabre of Bluebeard";
     public override int Level => 15;
     public override int Rarity => 8;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

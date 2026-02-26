@@ -19,5 +19,4 @@ public class GlaivePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGame
         (nameof(DamageDiceAttribute), "2"),
         (nameof(DiceSidesAttribute), "6"),
     };
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

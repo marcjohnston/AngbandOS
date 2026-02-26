@@ -24,5 +24,4 @@ public class BlueDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGame
         (nameof(MeleeToHitAttribute), "-2"),
         (nameof(BaseArmorClassAttribute), "30"),
     };
-    public override ColorEnum? Color => ColorEnum.Blue;
 }

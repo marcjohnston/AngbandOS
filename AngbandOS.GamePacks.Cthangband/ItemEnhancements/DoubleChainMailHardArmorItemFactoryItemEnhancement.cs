@@ -17,5 +17,4 @@ public class DoubleChainMailHardArmorItemFactoryItemEnhancement : ItemEnhancemen
         (nameof(MeleeToHitAttribute), "-2"),
         (nameof(BaseArmorClassAttribute), "16"),
     };
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

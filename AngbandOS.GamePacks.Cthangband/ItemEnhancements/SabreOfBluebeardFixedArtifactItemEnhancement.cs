@@ -25,5 +25,4 @@ public class SabreOfBluebeardFixedArtifactItemEnhancement : ItemEnhancementGameC
         (nameof(AttacksAttribute), "1"),
     };
     public override string FriendlyName => "of Bluebeard";
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

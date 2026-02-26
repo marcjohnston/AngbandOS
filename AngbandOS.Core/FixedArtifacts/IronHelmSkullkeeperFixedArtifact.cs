@@ -14,4 +14,5 @@ internal class IronHelmSkullkeeperFixedArtifact : FixedArtifact
     public override string Name => "The Iron Helm 'Skullkeeper'";
     public override int Level => 20;
     public override int Rarity => 5;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

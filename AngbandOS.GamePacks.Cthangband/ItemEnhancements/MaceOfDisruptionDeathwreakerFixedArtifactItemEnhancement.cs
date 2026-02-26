@@ -39,5 +39,4 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
         (nameof(StrengthAttribute), "6"),
     };
     public override string FriendlyName => "'Deathwreaker'";
-    public override ColorEnum? Color => ColorEnum.Purple;
 }

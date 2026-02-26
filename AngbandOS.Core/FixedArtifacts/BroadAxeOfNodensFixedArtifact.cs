@@ -14,4 +14,5 @@ internal class BroadAxeOfNodensFixedArtifact : FixedArtifact
     public override string Name => "The Broad Axe of Nodens";
     public override int Level => 20;
     public override int Rarity => 8;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

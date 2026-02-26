@@ -20,5 +20,4 @@ public class BladeOfChaosWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(DamageDiceAttribute), "6"),
         (nameof(DiceSidesAttribute), "5"),
     };
-    public override ColorEnum? Color => ColorEnum.Purple;
 }

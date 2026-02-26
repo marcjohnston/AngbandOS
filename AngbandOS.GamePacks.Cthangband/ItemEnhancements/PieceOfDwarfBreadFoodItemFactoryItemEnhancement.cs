@@ -14,5 +14,4 @@ public class PieceOfDwarfBreadFoodItemFactoryItemEnhancement : ItemEnhancementGa
         (nameof(DamageDiceAttribute), "1"),
         (nameof(DiceSidesAttribute), "6"),
     };
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

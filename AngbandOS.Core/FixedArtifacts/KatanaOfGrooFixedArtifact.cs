@@ -14,4 +14,5 @@ internal class KatanaOfGrooFixedArtifact : FixedArtifact
     public override string Name => "The Katana of Groo";
     public override int Level => 30;
     public override int Rarity => 25;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

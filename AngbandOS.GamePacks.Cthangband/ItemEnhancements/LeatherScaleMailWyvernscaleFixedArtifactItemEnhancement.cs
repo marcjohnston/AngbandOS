@@ -23,5 +23,4 @@ public class LeatherScaleMailWyvernscaleFixedArtifactItemEnhancement : ItemEnhan
         (nameof(DexterityAttribute), "3"),
     };
     public override string FriendlyName => "'Wyvernscale'";
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

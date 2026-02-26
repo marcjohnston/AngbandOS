@@ -25,5 +25,4 @@ public class MaceThunderFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(ValueAttribute), "50000"),
         (nameof(WeightAttribute), "80"),
     };
-    public override ColorEnum? Color => ColorEnum.Black;
 }

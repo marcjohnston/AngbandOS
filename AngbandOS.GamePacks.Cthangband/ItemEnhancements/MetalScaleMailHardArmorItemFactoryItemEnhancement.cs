@@ -17,5 +17,4 @@ public class MetalScaleMailHardArmorItemFactoryItemEnhancement : ItemEnhancement
         (nameof(MeleeToHitAttribute), "-2"),
         (nameof(BaseArmorClassAttribute), "13"),
     };
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

@@ -18,5 +18,4 @@ public class ShadowCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigur
         (nameof(BonusArmorClassAttribute), "4"),
         (nameof(BaseArmorClassAttribute), "6"),
     };
-    public override ColorEnum? Color => ColorEnum.Black;
 }

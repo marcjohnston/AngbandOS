@@ -18,5 +18,4 @@ public class ShortBowRangedWeaponItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(WeightAttribute), "30"),
         (nameof(ValueAttribute), "50"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

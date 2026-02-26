@@ -36,5 +36,4 @@ public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(RadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Twilight'";
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

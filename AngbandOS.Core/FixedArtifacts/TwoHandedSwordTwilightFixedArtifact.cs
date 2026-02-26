@@ -14,4 +14,5 @@ internal class TwoHandedSwordTwilightFixedArtifact : FixedArtifact
     public override string Name => "The Two-Handed Sword 'Twilight'";
     public override int Level => 30;
     public override int Rarity => 15;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

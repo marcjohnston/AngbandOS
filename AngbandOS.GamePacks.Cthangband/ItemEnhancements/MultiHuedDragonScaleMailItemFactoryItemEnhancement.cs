@@ -28,5 +28,4 @@ public class MultiHuedDragonScaleMailItemFactoryItemEnhancement : ItemEnhancemen
         (nameof(BonusArmorClassAttribute), "10"),
         (nameof(BaseArmorClassAttribute), "30"),
     };
-    public override ColorEnum? Color => ColorEnum.Purple;
 }

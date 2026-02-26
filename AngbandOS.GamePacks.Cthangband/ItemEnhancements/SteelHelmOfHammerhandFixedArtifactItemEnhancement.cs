@@ -21,5 +21,4 @@ public class SteelHelmOfHammerhandFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(DexterityAttribute), "3"),
     };
     public override string FriendlyName => "of Hammerhand";
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

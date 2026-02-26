@@ -20,5 +20,4 @@ public class BrokenDaggerWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(ToDamageAttribute), "-4"),
         (nameof(DiceSidesAttribute), "1"),
     };
-    public override ColorEnum? Color => ColorEnum.Black;
 }

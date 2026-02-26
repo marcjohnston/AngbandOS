@@ -16,4 +16,5 @@ internal class BroadSwordLightningFixedArtifact : FixedArtifact
     public override int Level => 20;
 
     public override int Rarity => 90;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

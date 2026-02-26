@@ -14,4 +14,5 @@ internal class LongSwordOfTheDawnFixedArtifact : FixedArtifact
     public override string Name => "The Long Sword of the Dawn";
     public override int Level => 40;
     public override int Rarity => 120;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

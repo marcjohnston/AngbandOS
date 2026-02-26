@@ -26,5 +26,4 @@ public class MorningStarBloodspikeFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(StrengthAttribute), "4"),
     };
     public override string FriendlyName => "'Bloodspike'";
-    public override ColorEnum? Color => ColorEnum.Black;
 }

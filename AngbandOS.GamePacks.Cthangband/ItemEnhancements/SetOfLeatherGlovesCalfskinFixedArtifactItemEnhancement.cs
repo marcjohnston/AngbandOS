@@ -24,5 +24,4 @@ public class SetOfLeatherGlovesCalfskinFixedArtifactItemEnhancement : ItemEnhanc
         (nameof(ConstitutionAttribute), "2"),
     };
     public override string FriendlyName => "'Calfskin'";
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

@@ -14,4 +14,5 @@ internal class SetOfGauntletsWhiteSparkFixedArtifact : FixedArtifact
     public override string Name => "The Set of Gauntlets 'White Spark'";
     public override int Level => 10;
     public override int Rarity => 20;
+    public override ColorEnum Color => ColorEnum.BrightBrown;
 }

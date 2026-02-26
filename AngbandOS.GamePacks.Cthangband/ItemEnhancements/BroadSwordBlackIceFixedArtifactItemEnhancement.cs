@@ -26,5 +26,4 @@ public class BroadSwordBlackIceFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(ToDamageAttribute), "15"),
     };
     public override string FriendlyName => "'Black Ice'";
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

@@ -14,4 +14,5 @@ internal class WarHammerMjolnirFixedArtifact : FixedArtifact
     public override string Name => "The War Hammer 'Mjolnir'";
     public override int Level => 40;
     public override int Rarity => 75;
+    public override ColorEnum Color => ColorEnum.Black;
 }

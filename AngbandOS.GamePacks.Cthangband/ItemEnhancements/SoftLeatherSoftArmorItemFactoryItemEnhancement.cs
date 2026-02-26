@@ -14,5 +14,4 @@ public class SoftLeatherSoftArmorItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(ValueAttribute), "18"),
         (nameof(BaseArmorClassAttribute), "4"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

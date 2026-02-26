@@ -14,4 +14,5 @@ internal class ShortSwordOfMerlinFixedArtifact : FixedArtifact
     public override string Name => "The Short Sword of Merlin";
     public override int Level => 20;
     public override int Rarity => 8;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

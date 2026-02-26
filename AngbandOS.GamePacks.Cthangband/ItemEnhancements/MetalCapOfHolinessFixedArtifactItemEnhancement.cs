@@ -20,5 +20,4 @@ public class MetalCapOfHolinessFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(CharismaAttribute), "3"),
     };
     public override string FriendlyName => "of Holiness";
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

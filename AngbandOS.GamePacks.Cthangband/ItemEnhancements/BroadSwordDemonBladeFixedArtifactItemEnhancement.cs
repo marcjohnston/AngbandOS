@@ -33,5 +33,4 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(DexterityAttribute), "2"),
         (nameof(CharismaAttribute), "2"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightWhite;
 }

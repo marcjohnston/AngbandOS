@@ -14,4 +14,5 @@ internal class HalberdArmorbaneFixedArtifact : FixedArtifact
     public override string Name => "The Halberd 'Armorbane'";
     public override int Level => 20;
     public override int Rarity => 8;
+    public override ColorEnum Color => ColorEnum.Grey;
 }

@@ -26,4 +26,5 @@ public class ShardOfPotteryJunkItemFactory : ItemFactoryGameConfiguration
     public override string? ItemEnhancementBindingKey => nameof(ShardOfPotteryJunkItemFactoryItemEnhancement);
     public override string BreakageChanceProbabilityExpression => "100/100";
     public override bool IsGood => true;
+    public override ColorEnum Color => ColorEnum.Red;
 }

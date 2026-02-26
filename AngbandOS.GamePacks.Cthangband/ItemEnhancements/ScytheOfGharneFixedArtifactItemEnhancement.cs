@@ -32,5 +32,4 @@ public class ScytheOfGharneFixedArtifactItemEnhancement : ItemEnhancementGameCon
     };
     public override string? ActivationName => nameof(ActivationsEnum.WordOfRecallEvery200DirectionalActivation);
     public override string FriendlyName => "of G'harne";
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

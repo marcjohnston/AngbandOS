@@ -24,5 +24,4 @@ public class SmallMetalShieldVitriolFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(StrengthAttribute), "4"),
     };
     public override string FriendlyName => "'Vitriol'";
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

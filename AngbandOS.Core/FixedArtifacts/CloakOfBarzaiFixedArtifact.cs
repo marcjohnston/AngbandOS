@@ -14,4 +14,5 @@ internal class CloakOfBarzaiFixedArtifact : FixedArtifact
     public override string Name => "The Cloak of Barzai";
     public override int Level => 5;
     public override int Rarity => 45;
+    public override ColorEnum Color => ColorEnum.Green;
 }

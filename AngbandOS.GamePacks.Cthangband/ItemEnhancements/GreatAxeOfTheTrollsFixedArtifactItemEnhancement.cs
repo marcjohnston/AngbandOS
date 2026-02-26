@@ -36,5 +36,4 @@ public class GreatAxeOfTheTrollsFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(StrengthAttribute), "2")
     };
     public override string FriendlyName => "of the Trolls";
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

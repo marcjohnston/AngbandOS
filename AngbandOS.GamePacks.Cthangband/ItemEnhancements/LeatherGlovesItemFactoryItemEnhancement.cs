@@ -14,5 +14,4 @@ public class LeatherGlovesItemFactoryItemEnhancement : ItemEnhancementGameConfig
         (nameof(ValueAttribute), "3"),
         (nameof(BaseArmorClassAttribute), "1"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

@@ -24,5 +24,4 @@ public class LargeLeatherShieldRawhideFixedArtifactItemEnhancement : ItemEnhance
         (nameof(WeightAttribute), "-40"),
     };
     public override string FriendlyName => "'Rawhide'";
-    public override ColorEnum? Color => ColorEnum.BrightBrown;
 }

@@ -14,4 +14,5 @@ internal class DaggerOfThothFixedArtifact : FixedArtifact
     public override string Name => "The Dagger of Thoth";
     public override int Level => 5;
     public override int Rarity => 40;
+    public override ColorEnum Color => ColorEnum.BrightWhite;
 }

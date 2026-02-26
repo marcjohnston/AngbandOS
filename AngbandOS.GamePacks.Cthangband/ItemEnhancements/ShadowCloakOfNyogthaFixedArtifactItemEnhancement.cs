@@ -27,5 +27,4 @@ public class ShadowCloakOfNyogthaFixedArtifactItemEnhancement : ItemEnhancementG
     };
     public override string? ActivationName => nameof(ActivationsEnum.RestoreLifeLevelsEvery450DirectionalActivation);
     public override string FriendlyName => "of Nyogtha";
-    public override ColorEnum? Color => ColorEnum.Black;
 }

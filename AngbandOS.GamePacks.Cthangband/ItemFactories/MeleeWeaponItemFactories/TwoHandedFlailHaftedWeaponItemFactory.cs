@@ -58,4 +58,5 @@ public class TwoHandedFlailHaftedWeaponItemFactory : ItemFactoryGameConfiguratio
     public override bool IdentityCanBeSensed => true;
     public override bool IsWeapon => true;
     public override bool IsGood => true;
+    public override ColorEnum Color => ColorEnum.Yellow;
 }

@@ -20,5 +20,4 @@ public class ElvenCloakItemFactoryItemEnhancement : ItemEnhancementGameConfigura
         (nameof(BonusArmorClassAttribute), "4"),
         (nameof(BaseArmorClassAttribute), "4"),
     };
-    public override ColorEnum? Color => ColorEnum.BrightGreen;
 }

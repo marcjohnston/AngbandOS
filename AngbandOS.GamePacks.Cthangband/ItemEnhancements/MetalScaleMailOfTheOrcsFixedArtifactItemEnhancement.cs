@@ -30,5 +30,4 @@ public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(StrengthAttribute), "4"),
     };
     public override string FriendlyName => "of the Orcs";
-    public override ColorEnum? Color => ColorEnum.Grey;
 }

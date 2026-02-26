@@ -14,4 +14,5 @@ internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
     public override string Name => "The Blade of Chaos 'Doomcaller'";
     public override int Level => 70;
     public override int Rarity => 25;
+    public override ColorEnum Color => ColorEnum.Purple;
 }
