@@ -111,7 +111,7 @@ public class GameConfiguration
         gameConfiguration.CharacterClassAbilities = LoadFromAssembly<CharacterClassAbilityGameConfiguration>(assembly);
         gameConfiguration.Activations = LoadFromAssembly<ActivationGameConfiguration>(assembly);
         gameConfiguration.ItemFilters = LoadFromAssembly<ItemFilterGameConfiguration>(assembly);
-        gameConfiguration.BoolPosFunctions = LoadFromAssembly<BoolPosFunctionGameConfiguration>(assembly);
+        gameConfiguration.BoolPosFunctions = LoadFromAssembly<BoolProductOfSumsFunctionGameConfiguration>(assembly);
         gameConfiguration.RechargeItemScripts = LoadFromAssembly<RechargeItemScriptGameConfiguration>(assembly);
         gameConfiguration.TeleportSelfScripts = LoadFromAssembly<TeleportSelfScriptGameConfiguration>(assembly);
         gameConfiguration.MappedItemEnhancements = LoadFromAssembly<MappedItemEnhancementGameConfiguration>(assembly);
@@ -285,7 +285,7 @@ public class GameConfiguration
     public virtual CharacterClassAbilityGameConfiguration[]? CharacterClassAbilities { get; set; } = null;
     public virtual ActivationGameConfiguration[]? Activations { get; set; } = null;
     public virtual ItemFilterGameConfiguration[]? ItemFilters { get; set; } = null;
-    public virtual BoolPosFunctionGameConfiguration[]? BoolPosFunctions { get; set; } = null;
+    public virtual BoolProductOfSumsFunctionGameConfiguration[]? BoolPosFunctions { get; set; } = null;
     public virtual RechargeItemScriptGameConfiguration[]? RechargeItemScripts { get; set; } = null;
     public virtual TeleportSelfScriptGameConfiguration[]? TeleportSelfScripts { get; set; } = null;
     public virtual MappedItemEnhancementGameConfiguration[]? MappedItemEnhancements { get; set; } = null;

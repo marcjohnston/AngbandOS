@@ -329,7 +329,7 @@ internal class SingletonRepository
         LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks);
         LoadFromConfiguration<AttributeFilter, AttributeFilterGameConfiguration>(gameConfiguration.AttributeFilters);
         LoadFromConfiguration<BoolWidget, BoolWidgetGameConfiguration>(gameConfiguration.BoolWidgets);
-        LoadFromConfiguration<BoolPosFunction, BoolPosFunctionGameConfiguration>(gameConfiguration.BoolPosFunctions);
+        LoadFromConfiguration<BoolProductOfSumsFunction, BoolProductOfSumsFunctionGameConfiguration>(gameConfiguration.BoolPosFunctions);
         LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities);
         LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<ChestTrap, ChestTrapGameConfiguration>(gameConfiguration.ChestTraps);
