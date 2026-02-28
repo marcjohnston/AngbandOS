@@ -12,10 +12,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class TrapDetectionConditionalWidget : ConditionalWidgetGameConfiguration
 {
-    public override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
-    {
-        (nameof(FunctionsEnum.TrapsDetectedBoolFunction), true, 0)
-    };
+    public override string ProductOfSumsBoolFunctionKey => nameof(TrapDetectionProductOfSumsBoolFunction);
 
     public override string[]? TrueWidgetNames => new string[] { nameof(TrapCountRangedWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(NoTrapsDetectedLabelWidget) };

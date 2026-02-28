@@ -3,14 +3,7 @@
 [Serializable]
 public class ConditionalWidgetGameConfiguration
 {
-    /// <summary>
-    /// Returns an array of the names of the conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for 
-    /// the widget to be enabled.  This property is bound used to bind the Enabled property during the binding phase.  The conditions are a boolean expression in the form of a product of sums (POS)
-    /// that determine if the widget is enabled when the result matches the <see cref="valueConditionalMustBe"/> parameter.  The <see cref="term"/> parameter is used to determine
-    /// the conditions that make up a term.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
-    /// boolean expressions into POS format.
-    /// </summary>
-    public virtual (string conditionalName, bool isTrue, int term)[] EnabledNames { get; set; }
+    public virtual string ProductOfSumsBoolFunctionKey { get; set; }
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true; or null, if no widget should be invalidated.  This 

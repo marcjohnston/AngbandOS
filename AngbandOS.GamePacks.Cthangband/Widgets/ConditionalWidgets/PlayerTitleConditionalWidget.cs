@@ -10,10 +10,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class PlayerTitleConditionalWidget : ConditionalWidgetGameConfiguration
 {
-    public override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
-    {
-        (nameof(PropertiesEnum.IsWizardBoolProperty), true, 0),
-    };
+    public override string ProductOfSumsBoolFunctionKey => nameof(PlayerTitleProductOfSumsBoolFunction);
     public override string[]? TrueWidgetNames => new string[] { nameof(WizardTitleLabelWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(WinnerConditionalWidget) };
 }

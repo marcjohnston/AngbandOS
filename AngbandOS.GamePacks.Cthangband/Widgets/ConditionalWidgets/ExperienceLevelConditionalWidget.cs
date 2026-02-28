@@ -13,10 +13,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ExperienceLevelConditionalWidget : ConditionalWidgetGameConfiguration
 {
-    public override (string conditionalName, bool isTrue, int term)[] EnabledNames => new (string, bool, int)[]
-    {
-        (nameof(FunctionsEnum.ExperienceLevelsLostBoolFunction), true, 0)
-    };
+    public override string ProductOfSumsBoolFunctionKey => nameof(ExperienceLevelProductOfSumsBoolFunction);
 
     public override string[]? TrueWidgetNames => new string[] { nameof(ExperienceLevelLostIntWidget), nameof(ExperienceLevelLostLabelWidget) };
 

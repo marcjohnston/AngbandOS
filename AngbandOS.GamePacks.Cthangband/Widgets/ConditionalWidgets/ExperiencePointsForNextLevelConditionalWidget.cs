@@ -14,9 +14,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ExperiencePointsForNextLevelConditionalWidget : ConditionalWidgetGameConfiguration
 {
-    public override (string, bool, int)[] EnabledNames => new (string, bool, int)[] {
-        (nameof(FunctionsEnum.ExperiencePointsLostBoolFunction), true, 0)
-    };
+    public override string ProductOfSumsBoolFunctionKey => nameof(ExperiencePointsForNextLevelProductOfSumsBoolFunction);
     public override string[]? TrueWidgetNames => new string[] { nameof(ExperiencePointsForNextLevelLostIntWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(ExperiencePointsForNextLevelIntWidget) };
 }

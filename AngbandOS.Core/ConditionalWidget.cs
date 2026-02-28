@@ -12,7 +12,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
     public ConditionalWidget(Game game, ConditionalWidgetGameConfiguration conditionalWidgetGameConfiguration) : base(game)
     {
         Key = conditionalWidgetGameConfiguration.Key ?? conditionalWidgetGameConfiguration.GetType().Name;
-        EnabledNames = conditionalWidgetGameConfiguration.EnabledNames;
+        ProductOfSumsBoolFunctionKey = conditionalWidgetGameConfiguration.ProductOfSumsBoolFunctionKey;
         TrueWidgetNames = conditionalWidgetGameConfiguration.TrueWidgetNames;
         FalseWidgetNames = conditionalWidgetGameConfiguration.FalseWidgetNames;
         ChangeTrackerNames = conditionalWidgetGameConfiguration.ChangeTrackerNames;
@@ -30,13 +30,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
     public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
-        List<(IBoolValue, bool, int)> conditionalList = new();
-        foreach ((string enabledName, bool isTrue, int productOfSumsTerm) in EnabledNames)
-        {
-            IBoolValue boolValue = Game.SingletonRepository.Get<IBoolValue>(enabledName);
-            conditionalList.Add((boolValue, isTrue, productOfSumsTerm));
-        }
-        Enabled = conditionalList.ToArray();
+        ProductOfSumsBoolFunction = Game.SingletonRepository.Get<ProductOfSumsBoolFunction>(ProductOfSumsBoolFunctionKey);
         TrueWidgets = Game.SingletonRepository.GetNullable<Widget>(TrueWidgetNames);
         FalseWidgets = Game.SingletonRepository.GetNullable<Widget>(FalseWidgetNames);
     }
@@ -46,7 +40,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
         ConditionalWidgetGameConfiguration conditionalWidgetGameConfiguration = new ConditionalWidgetGameConfiguration()
         {
             Key = Key,
-            EnabledNames = EnabledNames,
+            ProductOfSumsBoolFunctionKey = ProductOfSumsBoolFunctionKey,
             TrueWidgetNames = TrueWidgetNames,
             FalseWidgetNames = FalseWidgetNames,
             ChangeTrackerNames = ChangeTrackerNames,
@@ -54,23 +48,8 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
         return JsonSerializer.Serialize(conditionalWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    /// <summary>
-    /// Returns an array of conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for the widget
-    /// to be enabled.  This property is bound from the EnabledNames property during the binding phase.  The conditions are a boolean expression in the form of a product of sums (POS)
-    /// that determine if the widget is enabled when the result matches the <see cref="valueConditionalMustBe"/> parameter.  The <see cref="productOfSumsTerm"/> parameter is used to determine
-    /// the conditions that make up a term using a Product-Of-Sums formula.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
-    /// boolean expressions into POS format.
-    /// </summary>
-    private (IBoolValue conditional, bool valueConditionalMustBe, int productOfSumsTerm)[] Enabled { get; set; }
-
-    /// <summary>
-    /// Returns an array of the names of the conditionals that need to be met for the widget to rendered; or null, if there are no conditions.  All conditions must return true for 
-    /// the widget to be enabled.  This property is bound used to bind the Enabled property during the binding phase.  The conditions are a boolean expression in the form of a product of sums (POS)
-    /// that determine if the widget is enabled when the result matches the <see cref="valueConditionalMustBe"/> parameter.  The <see cref="term"/> parameter is used to determine
-    /// the conditions that make up a term.  All conditions with the same term value are considered to belong to the same term (sum).  Use Gaussian Elimination to convert existing
-    /// boolean expressions into POS format.
-    /// </summary>
-    private (string conditionalName, bool isTrue, int term)[] EnabledNames { get; }
+    public ProductOfSumsBoolFunction ProductOfSumsBoolFunction { get; private set; }
+    private string ProductOfSumsBoolFunctionKey { get; }
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true; or null, if no widget should be invalidated.  This 
@@ -103,26 +82,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
     {
         get
         {
-            // Check to see if the widget is enabled.  Evaluate the product of sums.
-            Dictionary<int, bool> terms = new Dictionary<int, bool>();
-            foreach ((IBoolValue condition, bool isTrue, int productOfSumsTerm) in Enabled)
-            {
-                if (!terms.ContainsKey(productOfSumsTerm))
-                {
-                    bool conditionIsTrue = condition.BoolValue;
-                    terms.Add(productOfSumsTerm, conditionIsTrue);
-                }
-                else if (terms[productOfSumsTerm] == false) // Short circuit evaluation
-                {
-                    bool conditionIsTrue = condition.BoolValue;
-                    terms[productOfSumsTerm] |= conditionIsTrue;
-                }
-            }
-            if (terms.Any(termAndResult => !termAndResult.Value))
-            {
-                return false;
-            }
-            return true;
+            return ProductOfSumsBoolFunction.BoolValue;
         }
     }
 

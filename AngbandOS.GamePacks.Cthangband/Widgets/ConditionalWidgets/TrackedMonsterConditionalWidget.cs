@@ -12,10 +12,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class TrackedMonsterConditionalWidget : ConditionalWidgetGameConfiguration
 {
-    public override (string conditionalName, bool isTrue, int term)[] EnabledNames => new (string, bool, int)[]
-    {
-        (nameof(FunctionsEnum.PlayerIsTrackingMonsterBoolFunction), true, 0)
-    };
+    public override string ProductOfSumsBoolFunctionKey => nameof(TrackedMonsterProductOfSumsBoolFunction);
+
     public override string[]? TrueWidgetNames => new string[] { nameof(TrackedMonsterRaceNameTextWidget), nameof(TrackedMonsterHealthIsInvisibleConditionalWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(TrackedMonsterRaceNameTextWidget), nameof(NoTrackedMonsterHealthLabelWidget) };
     public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.PlayerIsTrackingMonsterBoolFunction) };
