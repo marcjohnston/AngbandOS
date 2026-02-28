@@ -8,10 +8,10 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal sealed class BoolProductOfSumsFunction : IChangeTracker, IGetKey, IBoolValue, IToJson
+internal sealed class ProductOfSumsBoolFunction : IChangeTracker, IGetKey, IBoolValue, IToJson
 {
     private readonly Game Game;
-    public BoolProductOfSumsFunction(Game game, BoolProductOfSumsFunctionGameConfiguration boolPosFunctionGameConfiguration) 
+    public ProductOfSumsBoolFunction(Game game, ProductOfSumsBoolFunctionGameConfiguration boolPosFunctionGameConfiguration) 
     {
         Game = game;
         Key = boolPosFunctionGameConfiguration.Key ?? boolPosFunctionGameConfiguration.GetType().Name;
@@ -31,7 +31,7 @@ internal sealed class BoolProductOfSumsFunction : IChangeTracker, IGetKey, IBool
     private IChangeTracker[]? Dependencies { get; set; }
     public string ToJson()
     {
-        BoolProductOfSumsFunctionGameConfiguration textWidgetGameConfiguration = new()
+        ProductOfSumsBoolFunctionGameConfiguration textWidgetGameConfiguration = new()
         {
             Key = Key,
             EnabledNames = EnabledNames
