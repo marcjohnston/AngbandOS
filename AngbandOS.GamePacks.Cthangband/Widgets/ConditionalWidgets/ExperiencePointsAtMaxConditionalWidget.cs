@@ -14,7 +14,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ExperiencePointsAtMaxConditionalWidget : ConditionalWidgetGameConfiguration
 {
-    public override string ProductOfSumsBoolFunctionKey => nameof(ExperiencePointsAtMaxProductOfSumsBoolFunction);
+    public override string ProductOfSumsBoolFunctionKey => nameof(ExperiencePointsAtMaxProductOfSumsConditional);
     public override string[]? TrueWidgetNames => new string[] { nameof(ExperiencePointsAtMaxLabelWidget) };
     public override string[]? FalseWidgetNames => new string[] { nameof(ExperiencePointsForNextLevelConditionalWidget) };
     public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.ExperiencePointsForNextLevelIntFunction) };

@@ -30,7 +30,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
     public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
-        ProductOfSumsBoolFunction = Game.SingletonRepository.Get<ProductOfSumsBoolFunction>(ProductOfSumsBoolFunctionKey);
+        ProductOfSumsBoolFunction = Game.SingletonRepository.Get<ProductOfSumsConditional>(ProductOfSumsBoolFunctionKey);
         TrueWidgets = Game.SingletonRepository.GetNullable<Widget>(TrueWidgetNames);
         FalseWidgets = Game.SingletonRepository.GetNullable<Widget>(FalseWidgetNames);
     }
@@ -48,7 +48,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
         return JsonSerializer.Serialize(conditionalWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public ProductOfSumsBoolFunction ProductOfSumsBoolFunction { get; private set; }
+    public ProductOfSumsConditional ProductOfSumsBoolFunction { get; private set; }
     private string ProductOfSumsBoolFunctionKey { get; }
 
     /// <summary>

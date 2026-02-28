@@ -328,7 +328,7 @@ internal class SingletonRepository
         LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration>(gameConfiguration.ArtifactBiasWeightedRandoms);
         LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks);
         LoadFromConfiguration<AttributeFilter, AttributeFilterGameConfiguration>(gameConfiguration.AttributeFilters);
-        LoadFromConfiguration<ProductOfSumsBoolFunction, ProductOfSumsBoolFunctionGameConfiguration>(gameConfiguration.ProductOfSumsBoolFunctions);
+        LoadFromConfiguration<ProductOfSumsConditional, ProductOfSumsConditionalGameConfiguration>(gameConfiguration.ProductOfSumsBoolFunctions);
         LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities);
         LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells);
         LoadFromConfiguration<ChestTrap, ChestTrapGameConfiguration>(gameConfiguration.ChestTraps);

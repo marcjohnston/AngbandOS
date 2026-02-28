@@ -1,9 +1,9 @@
 namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
-public class ManaProductOfSumsBoolFunction : ProductOfSumsBoolFunctionGameConfiguration
+public class StudyProductOfSumsConditional : ProductOfSumsConditionalGameConfiguration
 {
     public override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
     {
-        (nameof(FunctionsEnum.UsesManaBoolFunction), true, 0)
+        (nameof(FunctionsEnum.CanStudyBoolFunction), true, 0)
     };
 }

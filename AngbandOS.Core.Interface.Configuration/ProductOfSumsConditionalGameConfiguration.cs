@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ProductOfSumsBoolFunctionGameConfiguration
+public class ProductOfSumsConditionalGameConfiguration
 {
     public virtual string Key { get; set; }
     public virtual (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames { get; set; }

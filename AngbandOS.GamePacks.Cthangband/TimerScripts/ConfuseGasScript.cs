@@ -11,5 +11,5 @@ public class ConfuseGasTimerScript : TimerScriptGameConfiguration
     public override string? PreMessage => "A gas of scintillating colors surrounds you!";
     public override string TimerBindingKey => nameof(TimersEnum.ConfusingTimer);
     public override string? ValueExpression => "10+1d20";
-    public override string? EnabledBoolPosFunctionBindingKey => nameof(DoesNotHaveConfusionResistanceProductOfSumsBoolFunction);
+    public override string? EnabledBoolPosFunctionBindingKey => nameof(DoesNotHaveConfusionResistanceProductOfSumsConditional);
 }

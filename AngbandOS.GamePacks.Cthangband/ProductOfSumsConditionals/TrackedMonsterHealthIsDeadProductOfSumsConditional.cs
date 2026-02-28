@@ -1,6 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
-public class TrackedMonsterHealthIsDeadProductOfSumsBoolFunction : ProductOfSumsBoolFunctionGameConfiguration
+public class TrackedMonsterHealthIsDeadProductOfSumsConditional : ProductOfSumsConditionalGameConfiguration
 {
     public override (string, bool, int)[] EnabledNames => new (string, bool, int)[]
     {
