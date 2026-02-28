@@ -40,7 +40,7 @@ public class DungeonView : ViewGameConfiguration
         nameof(PlayerTitleConditionalWidget),
         nameof(PoisonedRangedWidget),
         nameof(RaceTitleStringWidget),
-        nameof(StudyBoolWidget),
+        nameof(StudyConditionalWidget),
         nameof(StunnedRangedWidget),
         nameof(TrackedMonsterConditionalWidget),
         nameof(TrapDetectionConditionalWidget),

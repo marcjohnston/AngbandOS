@@ -75,7 +75,6 @@ public class GameConfiguration
         gameConfiguration.ItemFactories = LoadFromAssembly<ItemFactoryGameConfiguration>(assembly);
         gameConfiguration.ItemIdentifications = LoadFromAssembly<ItemIdentificationGameConfiguration>(assembly);
         gameConfiguration.ProjectileWeightedRandomScripts = LoadFromAssembly<ProjectileScriptWeightedRandomGameConfiguration>(assembly);
-        gameConfiguration.BoolWidgets = LoadFromAssembly<BoolWidgetGameConfiguration>(assembly);
         gameConfiguration.ConditionalWidgets = LoadFromAssembly<ConditionalWidgetGameConfiguration>(assembly);
         gameConfiguration.DateWidgets = LoadFromAssembly<DateWidgetGameConfiguration>(assembly);
         gameConfiguration.IntWidgets = LoadFromAssembly<IntWidgetGameConfiguration>(assembly);
@@ -249,7 +248,6 @@ public class GameConfiguration
     public virtual ItemFactoryGameConfiguration[]? ItemFactories { get; set; } = null;
     public virtual ProjectileScriptWeightedRandomGameConfiguration[]? ProjectileWeightedRandomScripts { get; set; } = null;
 
-    public virtual BoolWidgetGameConfiguration[]? BoolWidgets { get; set; } = null;
     public virtual ConditionalWidgetGameConfiguration[]? ConditionalWidgets { get; set; } = null;
     public virtual DateWidgetGameConfiguration[]? DateWidgets { get; set; } = null;
     public virtual IntWidgetGameConfiguration[]? IntWidgets { get; set; } = null;
