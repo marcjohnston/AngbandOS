@@ -3,7 +3,7 @@
 [Serializable]
 public class ConditionalWidgetGameConfiguration
 {
-    public virtual string ProductOfSumsBoolFunctionKey { get; set; }
+    public virtual string ConditionalKey { get; set; }
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true; or null, if no widget should be invalidated.  This 

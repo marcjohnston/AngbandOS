@@ -12,7 +12,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
     public ConditionalWidget(Game game, ConditionalWidgetGameConfiguration conditionalWidgetGameConfiguration) : base(game)
     {
         Key = conditionalWidgetGameConfiguration.Key ?? conditionalWidgetGameConfiguration.GetType().Name;
-        ProductOfSumsBoolFunctionKey = conditionalWidgetGameConfiguration.ProductOfSumsBoolFunctionKey;
+        ConditionalKey = conditionalWidgetGameConfiguration.ConditionalKey;
         TrueWidgetNames = conditionalWidgetGameConfiguration.TrueWidgetNames;
         FalseWidgetNames = conditionalWidgetGameConfiguration.FalseWidgetNames;
         ChangeTrackerNames = conditionalWidgetGameConfiguration.ChangeTrackerNames;
@@ -30,7 +30,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
     public void Bind()
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
-        ProductOfSumsBoolFunction = Game.SingletonRepository.Get<ProductOfSumsConditional>(ProductOfSumsBoolFunctionKey);
+        Conditional = Game.SingletonRepository.Get<Conditional>(ConditionalKey);
         TrueWidgets = Game.SingletonRepository.GetNullable<Widget>(TrueWidgetNames);
         FalseWidgets = Game.SingletonRepository.GetNullable<Widget>(FalseWidgetNames);
     }
@@ -40,7 +40,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
         ConditionalWidgetGameConfiguration conditionalWidgetGameConfiguration = new ConditionalWidgetGameConfiguration()
         {
             Key = Key,
-            ProductOfSumsBoolFunctionKey = ProductOfSumsBoolFunctionKey,
+            ConditionalKey = ConditionalKey,
             TrueWidgetNames = TrueWidgetNames,
             FalseWidgetNames = FalseWidgetNames,
             ChangeTrackerNames = ChangeTrackerNames,
@@ -48,8 +48,8 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
         return JsonSerializer.Serialize(conditionalWidgetGameConfiguration, Game.GetJsonSerializerOptions());
     }
 
-    public ProductOfSumsConditional ProductOfSumsBoolFunction { get; private set; }
-    private string ProductOfSumsBoolFunctionKey { get; }
+    public Conditional Conditional { get; private set; }
+    private string ConditionalKey { get; }
 
     /// <summary>
     /// Returns the name of the widget to invalidate when the <see cref="Enabled"/> property returns true; or null, if no widget should be invalidated.  This 
@@ -82,7 +82,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
     {
         get
         {
-            return ProductOfSumsBoolFunction.BoolValue;
+            return Conditional.BoolValue;
         }
     }
 

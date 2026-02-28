@@ -13,6 +13,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ManaConditionalWidget : ConditionalWidgetGameConfiguration
 {
-    public override string ProductOfSumsBoolFunctionKey => nameof(ManaProductOfSumsConditional);
+    public override string ConditionalKey => nameof(ManaConditional);
     public override string[]? TrueWidgetNames => new string[] { nameof(ManaMaxRangedWidget), nameof(ManaLabelWidget), nameof(MaxManaLabelWidget), nameof(MaxManaIntWidget) };
 }

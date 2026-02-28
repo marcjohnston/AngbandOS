@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 public class ConditionalScriptGameConfiguration
 {
     public virtual string Key { get; set; }
-    public virtual (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames { get; set; }
+    public virtual string ConditionalKey { get; set; }
     public virtual string[]? TrueScriptBindingKeys { get; set; } = null;
     public virtual string[]? FalseScriptBindingKeys { get; set; } = null;
 }

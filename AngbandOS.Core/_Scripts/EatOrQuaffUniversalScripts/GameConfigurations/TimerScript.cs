@@ -33,7 +33,7 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
     {
         Value = Game.ParseNullableNumericExpression(ValueExpression);
         Timer = Game.SingletonRepository.Get<Timer>(TimerBindingKey);
-        EnabledBoolPosFunction = Game.SingletonRepository.GetNullable<ProductOfSumsConditional>(EnabledBoolPosFunctionBindingKey);
+        EnabledBoolPosFunction = Game.SingletonRepository.GetNullable<Conditional>(EnabledBoolPosFunctionBindingKey);
     }
     protected string? ValueExpression { get; }
     protected virtual string TimerBindingKey { get; }
@@ -44,7 +44,7 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
     /// Returns the function to be used to determine if the script is enabled or null, if the script is always enabled.  If the script is not enabled, the
     /// <see cref="IdentifiedResultEnum"/> return value will always be false.
     /// </summary>
-    public ProductOfSumsConditional? EnabledBoolPosFunction { get; private set; }
+    public Conditional? EnabledBoolPosFunction { get; private set; }
     public virtual string? PreMessage { get; } = null;
     protected virtual string? EnabledBoolPosFunctionBindingKey { get; } = null;
     protected Timer Timer { get; private set; }
