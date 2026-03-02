@@ -7,11 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ActivationAttribute : Attribute, IGetKey
+internal class ActivationAttribute : Attribute
 {
     private ActivationAttribute(Game game) : base(game) { }
+    public override string Key => GetType().Name;
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ActivationEffectiveAttributeValue(Game, this);
-
-    public string GetKey => GetType().Name;
-    public void Bind() { }
 }

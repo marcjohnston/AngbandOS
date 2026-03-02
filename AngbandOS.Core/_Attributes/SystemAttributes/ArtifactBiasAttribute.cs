@@ -7,10 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ArtifactBiasAttribute : Attribute, IGetKey
+internal class ArtifactBiasAttribute : Attribute
 {
     private ArtifactBiasAttribute(Game game) : base(game) { }
+    public override string Key => GetType().Name;
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ArtifactBiasEffectiveAttributeValue(Game, this);
-    public string GetKey => GetType().Name;
-    public void Bind() { }
 }

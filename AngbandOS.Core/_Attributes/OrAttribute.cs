@@ -9,17 +9,14 @@ using AngbandOS.Core.Interface.Configuration;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class OrAttribute : Attribute, IGetKey, IToJson
+internal class OrAttribute : Attribute, IToJson
 {
     public OrAttribute(Game game, OrAttributeGameConfiguration gameConfiguration) : base(game)
     {
         Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
     }
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new OrEffectiveAttributeValue(Game, this);
-    public string Key { get; }
-
-    public string GetKey => Key;
-    public void Bind() { }
+    public override string Key { get; }
 
     public string ToJson()
     {

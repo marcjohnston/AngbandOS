@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Attribute
+internal abstract class Attribute : IGetKey
 {
     private static int Count = 0;
 
@@ -16,9 +16,14 @@ internal abstract class Attribute
     /// </summary>
     public int Index { get; private set; }
 
+    public abstract string Key { get; }
+    public string GetKey => Key;
+
     protected readonly Game Game;
 
     public abstract EffectiveAttributeValue CreateEffectiveAttributeValue();
+
+    public void Bind() { }
 
     protected Attribute(Game game)
     {

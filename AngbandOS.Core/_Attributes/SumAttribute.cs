@@ -9,17 +9,15 @@ using System.Xml.Linq;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class SumAttribute : Attribute, IGetKey, IToJson
+internal class SumAttribute : Attribute, IToJson
 {
     public SumAttribute(Game game, SumAttributeGameConfiguration gameConfiguration) : base(game)
     {
         Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
     }
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new SumEffectiveAttributeValue(Game, this);
-    public string Key { get; }
+    public override string Key { get; }
 
-    public string GetKey => Key;
-    public void Bind() { }
     public string ToJson()
     {
         SumAttributeGameConfiguration gameConfiguration = new()

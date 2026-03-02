@@ -7,16 +7,15 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class BoolAttribute : Attribute, IGetKey, IToJson
+internal class BoolAttribute : Attribute, IToJson
 {
     public BoolAttribute(Game game, BoolAttributeGameConfiguration gameConfiguration) : base(game)
     {
         Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
     }
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new BoolSetEffectiveAttributeValue(Game, this, null);
-    public string Key { get; }
-    public string GetKey => Key;
-    public void Bind() { }
+    public override string Key { get; }
+
     public string ToJson()
     {
         BoolAttributeGameConfiguration gameConfiguration = new()

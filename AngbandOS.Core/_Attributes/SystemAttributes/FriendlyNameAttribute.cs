@@ -7,10 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class FriendlyNameAttribute : Attribute, IGetKey
+internal class FriendlyNameAttribute : Attribute
 {
     private FriendlyNameAttribute(Game game) : base(game) { }
+    public override string Key => GetType().Name;
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new FriendlyNameEffectiveAttributeValue(Game, this);
-    public string GetKey => GetType().Name;
-    public void Bind() { }
 }
