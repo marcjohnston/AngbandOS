@@ -11,18 +11,6 @@
     height: 100%;
     padding: 0 25px 25px 25px;
 
-    & #spacer {
-        flex-grow: 1;
-    }
-
-    & #chat {
-        max-width: 25%; // We do not want the width of the chat window to consume more than 25% of the screen width.
-    }
-
-    & #main-component {
-      width: 100%;
-    }
-
     & #vertical-panes {
       display: flex;
       flex-direction: column;
@@ -39,51 +27,42 @@
           line-height: 1rem;
         }
       }
-    }
 
-    & #left-pane {
-      width: 0px;
-    }
-
-    & #right-pane {
-      width: 0px;
-    }
-
-    & #canvas-pane {
-      width: 100%;
-      height: 100%;
-      display: flex;
-
-      & canvas {
-        background-color: black;
+      & #canvas-pane {
         width: 100%;
         height: 100%;
-        object-fit: none;
-        object-position: left top;
-      }
+        display: flex;
 
-      & #in-game-menu {
-        position: absolute;
+        & canvas {
+          background-color: black;
+          width: 100%;
+          height: 100%;
+          object-fit: none;
+          object-position: left top;
+        }
 
-        & #in-game-menu-flex-box {
-          display: flex;
-          flex-direction: column;
+        & #in-game-menu {
+          position: absolute;
 
-          & button {
-            padding: 0;
-            margin: 0;
+          & #in-game-menu-flex-box {
+            display: flex;
+            flex-direction: column;
+
+            & button {
+              padding: 0;
+              margin: 0;
+            }
           }
         }
       }
     }
-  }
 
-  & #footer {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    font-size: 8pt;
-    color: white;
-    border-top: 1px solid darkgray;
+    & #spacer {
+        flex-grow: 1;
+    }
+
+    & #chat {
+        max-width: 25%; // We do not want the width of the chat window to consume more than 25% of the screen width.
+    }
   }
 }
