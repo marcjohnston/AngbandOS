@@ -124,6 +124,12 @@ internal class SingletonRepository
         return singleton;
     }
 
+    public int GetIndex<T>(T singleton) where T : class
+    {
+        string typeName = typeof(T).Name;
+        return _allGenericRepositoriesDictionary[typeName].GetIndex(singleton);
+    }
+
     /// <summary>
     /// Returns an array of singletons from the repository specified by the <typeparamref name="T"/> type that are references by the unique key
     /// identifiers <paramref name="keys"/> or null if <paramref name="keys"/> is null.  If any of the singletons do not exist, an exception is thrown.
@@ -226,12 +232,12 @@ internal class SingletonRepository
         }
         catch (NotImplementedException)
         {
-            Game.MsgPrint("The persistance interface does not support entity persistance.");
+            Game.MsgPrint("The persistence interface does not support entity persistence.");
             return;
         }
         catch (Exception ex)
         {
-            Game.MsgPrint($"The persistance interface failed to save the configuration '{ex.Message}'.");
+            Game.MsgPrint($"The persistence interface failed to save the configuration '{ex.Message}'.");
             return;
         }
     }
@@ -293,6 +299,7 @@ internal class SingletonRepository
         RegisterInterface<MartialArtsEffect>();
         RegisterInterface<MonsterEffect>();
         RegisterInterface<MonsterFilter>();
+        RegisterInterface<MonsterRace>(); 
         RegisterInterface<MonsterRaceFilter>();
         RegisterInterface<MonsterSelector>();
         RegisterInterface<MonsterSpell>();
@@ -489,6 +496,13 @@ internal class SingletonRepository
         RegisterInterface<T>(false);
     }
 
+    private bool IsDirectlyAssignableFrom<TInterface>(Type type)
+    {
+        return type.GetInterfaces()
+            .Except(type.BaseType?.GetInterfaces() ?? Type.EmptyTypes)
+            .Contains(typeof(TInterface));
+    }
+
     /// <summary>
     /// Registers a repository for all singletons that implement the interface specified by <typeparamref name="T"/>.
     /// </summary>
@@ -497,13 +511,20 @@ internal class SingletonRepository
     private void RegisterInterface<T>(bool enablePersistance = true)
     {
         string typeName = typeof(T).Name;
-        if (_allGenericRepositoriesDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+        if (!_allGenericRepositoriesDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
-            throw new Exception($"{typeName} repository already registered.");
+            genericRepository = new GenericRepository(enablePersistance);
+
+            // Check to see if the singletons implements the IIndexedSingletons interface.  If it does, we need to add the repository to the list of indexed repositories so that the singletons can be indexed after they are loaded.
+            if (IsDirectlyAssignableFrom<IIndexedSingletons>(typeof(T)))
+            {
+                _indexedRepositories.Add(genericRepository);
+            }
+            _allGenericRepositoriesDictionary.Add(typeName, genericRepository);
         }
-        genericRepository = new GenericRepository(enablePersistance);
-        _allGenericRepositoriesDictionary.Add(typeName, genericRepository);
     }
+
+    private List<GenericRepository> _indexedRepositories = new List<GenericRepository>();
 
     /// <summary>
     /// Registers a singleton with all of the repositories by determining all of the interfaces and base classes that the singleton supports and registering the singleton
@@ -554,6 +575,17 @@ internal class SingletonRepository
                     throw new Exception($"The singleton key {key} has already been registered in the {typeName} repository and is conflicting with {existing.GetType().Name}.");
                 }
                 genericRepository.Add(key, singleton);
+
+                // Now that the singleton is added, we need to check to see if the singleton needs to be indexed.
+                if (IsDirectlyAssignableFrom<IIndexedSingletons>(interfaceType))
+                {
+                    IIndexedSingletons indexedSingleton = (IIndexedSingletons)singleton;
+                    if (indexedSingleton.Index != -1)
+                    {
+                        throw new Exception($"{nameof(RegisterSingleton)} has detected an index overwrite condition.");
+                    }
+                    indexedSingleton.Index = genericRepository.GetIndex(singleton);
+                }
             }
         }
     }
@@ -590,7 +622,7 @@ internal class SingletonRepository
 
     private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations) where T : IGetKey where TConfiguration : notnull
     {
-        // For persistance validation, we need to ensure the type T implements IToJson.
+        // For persistence validation, we need to ensure the type T implements IToJson.
         if (!typeof(IToJson).IsAssignableFrom(typeof(T)))
         {
             throw new Exception($"The type {typeof(T).Name} does not implement {nameof(IToJson)} to support the persistance for {nameof(GameConfiguration)}.");

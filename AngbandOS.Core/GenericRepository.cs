@@ -35,6 +35,11 @@ internal class GenericRepository // TODO: Rename this as simply Repository
         return resultList.ToArray();
     }
 
+    public int GetIndex(object singleton)
+    {
+        return List.IndexOf(singleton);
+    }
+
     /// <summary>
     /// Returns the number of singletons in the repository without needing to perform any typecasting.
     /// </summary>

@@ -7,11 +7,13 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson
+internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, IIndexedSingletons
 {
     #region 102 Serialized Members
 
     public string Key { get; }
+
+    public int Index { get; set; } = -1; // Preset for overwrite detection.
 
     private string[]? SpellNames { get; } = null;
 
@@ -491,14 +493,6 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson
     public string GetKey => Key;
     public void Bind()
     {
-        // We need to initialize the monster indexes.
-        // TODO: The Index should be removed.
-        for (int i = 0; i < Game.SingletonRepository.Count<MonsterRace>(); i++)
-        {
-            MonsterRace monsterRace = Game.SingletonRepository.Get<MonsterRace>(i);
-            monsterRace.Index = i;
-        }
-
         Knowledge = new MonsterKnowledge(Game, this);
         int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
         int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);
@@ -613,12 +607,6 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson
     /// Returns the level at which the monster will appear.  This is typically same as LevelFound but Player and the NobodyGhost are moved to the town level.
     /// </summary>
     public int Level { get; private set; }
-
-    /// <summary>
-    /// Returns the index into the monster race array where the monster is.  Set just after construction.
-    /// </summary>
-    [Obsolete("Index will be removed.")]
-    public int Index { get; private set; }
 
     public ItemFactory GoldItemFactory { get; private set; }
 

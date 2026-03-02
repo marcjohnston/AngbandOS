@@ -7,14 +7,12 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Attribute : IGetKey
+internal abstract class Attribute : IGetKey, IIndexedSingletons
 {
-    private static int Count = 0;
-
     /// <summary>
-    /// Returns the unique index of the attribute.  
+    /// Returns the unique index of the attribute.  This property implements the IIndexedSingletons.
     /// </summary>
-    public int Index { get; private set; }
+    public int Index { get; set; } = -1; // Preset for overwrite detection.
 
     public abstract string Key { get; }
     public string GetKey => Key;
@@ -28,7 +26,5 @@ internal abstract class Attribute : IGetKey
     protected Attribute(Game game)
     {
         Game = game;
-        Index = Count;
-        Count++;
     }
 }
