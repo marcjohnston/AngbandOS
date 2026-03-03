@@ -10,11 +10,8 @@ import { MatSnackBar as MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../modules/error-messages/error-messages.module';
 import { ActiveGameDetails } from './active-game-details';
 import { DatePipe, NgClass, NgIf } from '@angular/common';
-import { ChatComponent } from '../chat/chat.component';
-import { FooterComponent } from '../footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 import { ChangeDetectorRef } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MasterLayoutComponent } from '../master-layout/master-layout.component';
@@ -28,13 +25,10 @@ const idleTimeIntervalInMilliseconds = 5000;
   standalone: true,
   imports: [
     NgIf,
-    ChatComponent,
-    FooterComponent,
     NgClass,
     MatIconModule,
     DatePipe,
     MatTableModule,
-    NavMenuComponent,
     MatButtonModule,
     MasterLayoutComponent
   ]
@@ -239,10 +233,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     });   
   }
 
-  ngOnDestroy() {
+  async ngOnDestroy() {
     if (this._serviceConnection !== undefined) {
       this._serviceConnection.off("ActiveGamesUpdated");
-      this._serviceConnection.stop();
+      await this._serviceConnection.stop();
     }
   }
 

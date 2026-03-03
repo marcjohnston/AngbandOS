@@ -36,7 +36,7 @@ import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 export class PlayComponent implements OnInit, OnDestroy {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;
   @ViewChild('inGameMenu', { static: true }) private inGameMenuRef: ElementRef | undefined;
-  private connection: HubConnection | undefined;
+  private gameHubConnection: HubConnection | undefined;
   public connectionId: string | null = null;
   public gameGuid: string | null | undefined = undefined; // Represents the unique identifier for the game to play; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
   private _initSubscriptions = new Subscription();
@@ -60,55 +60,55 @@ export class PlayComponent implements OnInit, OnDestroy {
     // Only accept keyboard input for the game, when the active element is the BODY.  Otherwise, input type controls on the screen need to process
     // the input.  We cannot limit the host listener because the other elements still belong to the body.
     if (document.activeElement !== null && document.activeElement.tagName.toUpperCase() === "BODY") {
-      if (this.connection) {
+      if (this.gameHubConnection) {
         const shift: string = (event.shiftKey ? "." : "");
         switch (event.key) {
           case "ArrowLeft":
-            this.connection.send("keypressed", `${shift}4`);
+            this.gameHubConnection.send("keypressed", `${shift}4`);
             event.preventDefault();
             break;
           case "ArrowRight":
-            this.connection.send("keypressed", `${shift}6`);
+            this.gameHubConnection.send("keypressed", `${shift}6`);
             event.preventDefault();
             break;
           case "ArrowUp":
-            this.connection.send("keypressed", `${shift}8`);
+            this.gameHubConnection.send("keypressed", `${shift}8`);
             event.preventDefault();
             break;
           case "ArrowDown":
-            this.connection.send("keypressed", `${shift}2`);
+            this.gameHubConnection.send("keypressed", `${shift}2`);
             event.preventDefault();
             break;
           case "Home":
-            this.connection.send("keypressed", `${shift}7`);
+            this.gameHubConnection.send("keypressed", `${shift}7`);
             event.preventDefault();
             break;
           case "End":
-            this.connection.send("keypressed", `${shift}1`);
+            this.gameHubConnection.send("keypressed", `${shift}1`);
             event.preventDefault();
             break;
           case "PageUp":
-            this.connection.send("keypressed", `${shift}9`);
+            this.gameHubConnection.send("keypressed", `${shift}9`);
             event.preventDefault();
             break;
           case "PageDown":
-            this.connection.send("keypressed", `${shift}3`);
+            this.gameHubConnection.send("keypressed", `${shift}3`);
             event.preventDefault();
             break;
           case "Enter":
-            this.connection.send("keypressed", '\x0D');
+            this.gameHubConnection.send("keypressed", '\x0D');
             event.preventDefault();
             break;
           case "Tab":
-            this.connection.send("keypressed", '\x09');
+            this.gameHubConnection.send("keypressed", '\x09');
             event.preventDefault();
             break;
           case "Escape":
-            this.connection.send("keypressed", '\x1B');
+            this.gameHubConnection.send("keypressed", '\x1B');
             event.preventDefault();
             break;
           case "Backspace":
-            this.connection.send("keypressed", '\x08');
+            this.gameHubConnection.send("keypressed", '\x08');
             event.preventDefault();
             break;
 
@@ -132,7 +132,7 @@ export class PlayComponent implements OnInit, OnDestroy {
           default:
             // Do not send special keystrokes.
             if (event.key.length === 1) {
-              this.connection.send("keypressed", event.key);
+              this.gameHubConnection.send("keypressed", event.key);
             }
             break;
         }
@@ -141,7 +141,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   public macroClicked(key: string) {
-    if (this.connection !== undefined && this.preferences !== undefined) {
+    if (this.gameHubConnection !== undefined && this.preferences !== undefined) {
       let macro: string | null = null; // We use null, if there is no setting.
       switch (key) {
         case "F1":
@@ -199,7 +199,7 @@ export class PlayComponent implements OnInit, OnDestroy {
           macro = `${macro?.substring(0, index)}${charCode}${macro.substring(index + 4)}`;
         } while (true);
       }
-      this.connection.send("keypressed", macro);
+      this.gameHubConnection.send("keypressed", macro);
     }
   }
 
@@ -236,7 +236,7 @@ export class PlayComponent implements OnInit, OnDestroy {
       dialogSubscription.add(matDialogRef.afterClosed().subscribe((preferencesDialogData: PreferencesDialogData) => {
         dialogSubscription.unsubscribe();
 
-        if (this.connection === undefined) {
+        if (this.gameHubConnection === undefined) {
           this.showSnackBar("Connection lost!")
         } else {
           this.updateUserPreferences(preferencesDialogData);
@@ -288,31 +288,31 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   private check() {
-    if (this.connection !== undefined && this.gameGuid !== undefined) {
-      this.connection.start().then(() => {
-        if (this.connection) {
-          this.connectionId = this.connection.connectionId;
+    if (this.gameHubConnection !== undefined && this.gameGuid !== undefined) {
+      this.gameHubConnection.start().then(() => {
+        if (this.gameHubConnection) {
+          this.connectionId = this.gameHubConnection.connectionId;
 
-          this.connection.on("Clear", () => {
+          this.gameHubConnection.on("Clear", () => {
             this._zone.run(() => {
               this._htmlConsole?.clear();
             });
           });
-          this.connection.on("BatchPrint", (printLines: PrintLine[]) => {
+          this.gameHubConnection.on("BatchPrint", (printLines: PrintLine[]) => {
             this._zone.run(() => {
               this._htmlConsole?.batchPrint(printLines);
             });
           });
-          this.connection.on("SetBackground", (backgroundImage: number) => {
+          this.gameHubConnection.on("SetBackground", (backgroundImage: number) => {
             this._zone.run(() => {
             });
           });
-          this.connection.on("SendMessage", (message: string) => {
+          this.gameHubConnection.on("SendMessage", (message: string) => {
             this._zone.run(() => {
               this.showSnackBar(message);
             });
           });
-          this.connection.on("GameIncompatible", () => {
+          this.gameHubConnection.on("GameIncompatible", () => {
             this._zone.run(() => {
               const snackBarRef = this._snackBar.open("Game cannot be played because it is incompatible.", undefined, {
                 duration: 2000,                
@@ -322,22 +322,22 @@ export class PlayComponent implements OnInit, OnDestroy {
               }));
             });
           });
-          this.connection.on("PlaySound", (sound: number) => {
+          this.gameHubConnection.on("PlaySound", (sound: number) => {
             this._zone.run(() => {
               this._htmlConsole?.playSound(sound);
             });
           });
-          this.connection.on("PlayMusic", (music: number) => {
+          this.gameHubConnection.on("PlayMusic", (music: number) => {
             this._zone.run(() => {
             });
           });
-          this.connection.on("GameOver", () => {
+          this.gameHubConnection.on("GameOver", () => {
             this._zone.run(() => {
               this.GameInProgress = false;
               this._router.navigate(['/']);
             });
           });
-          this.connection.on("GameStarted", (gameGuid: string) => {
+          this.gameHubConnection.on("GameStarted", (gameGuid: string) => {
             this._zone.run(() => {
               this.gameGuid = gameGuid;
             });
@@ -392,13 +392,21 @@ export class PlayComponent implements OnInit, OnDestroy {
               singingPlayerAttacks: null,
               worshipPlayerAttacks: null
             }
-            this.connection.send("PlayNewGame", gameConfiguration);
+            this.gameHubConnection.send("PlayNewGame", gameConfiguration).then(() => {
+              this._snackBar.open(`Playing`, undefined, {
+                duration: 2000,
+              });
+            }, (reason: any) => {
+              this._snackBar.open(`PlayNewGame rejected ${reason}.`, undefined, {
+                duration: 2000,
+              });
+            });
           } else {
-            this.connection.send("PlayExistingGame", this.gameGuid);
+            this.gameHubConnection.send("PlayExistingGame", this.gameGuid);
           }
         }
-      }, () => {
-        this.showSnackBar("Connection to game server failed.");
+      }, (reason: any) => {
+        this.showSnackBar(`Connection to game server failed ${reason}.`);
         this._router.navigate(['/']);
       });
     }
@@ -454,20 +462,28 @@ export class PlayComponent implements OnInit, OnDestroy {
           this._accessToken = _currentUser.jwt;
         }
 
-        if (this.connection !== undefined) {
-          this.connection.stop();
+        if (this.gameHubConnection !== undefined) {
+          this.gameHubConnection.stop();
         }
 
         // Ensure there is an access token and that the connection has been established already.
-        if (this._accessToken !== undefined) {
+        if (this._accessToken === undefined) {
+          this._snackBar.open(`Credentials invalid.`, undefined, {
+            duration: 2000,
+          });
+        }
+        else {
           // Create the signal-r connection object.
-          this.connection = new HubConnectionBuilder().withUrl("/apiv1/game-hub", {
+          this.gameHubConnection = new HubConnectionBuilder().withUrl("/apiv1/game-hub", {
             accessTokenFactory: () => this._accessToken as string,
           }).build();
           this.check();
+          this.getUserPreferences();
         }
-
-        this.getUserPreferences();
+      }, (error: any) => {
+        this._snackBar.open(`Error during authentication ${error}.`, undefined, {
+          duration: 2000,
+        });
       }));
 
       // Retrieve the game guid from the query.
@@ -475,6 +491,10 @@ export class PlayComponent implements OnInit, OnDestroy {
         // Retrieve the guid for the game to play.  If this is a new game, gameGuid will be returned as null.
         this.gameGuid = paramMap.get("guid");
         this.check();
+      }, (error: any) => {
+        this._snackBar.open(`Error during guid parameter retrieval ${error}.`, undefined, {
+          duration: 2000,
+        });
       }));
     }
   }
@@ -518,17 +538,17 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.connection) {
-      this.connection.off("Clear");
-      this.connection.off("BatchPrint");
-      this.connection.off("SetBackground");
-      this.connection.off("PlaySound");
-      this.connection.off("PlayMusic");
-      this.connection.off("GameOver");
-      this.connection.off("GameStarted");
-      this.connection.off("SendMessage");
-      this.connection.off("GameIncompatible");
-      this.connection.stop();
+    if (this.gameHubConnection) {
+      this.gameHubConnection.off("Clear");
+      this.gameHubConnection.off("BatchPrint");
+      this.gameHubConnection.off("SetBackground");
+      this.gameHubConnection.off("PlaySound");
+      this.gameHubConnection.off("PlayMusic");
+      this.gameHubConnection.off("GameOver");
+      this.gameHubConnection.off("GameStarted");
+      this.gameHubConnection.off("SendMessage");
+      this.gameHubConnection.off("GameIncompatible");
+      this.gameHubConnection.stop();
       this._initSubscriptions.unsubscribe();
     }
   }

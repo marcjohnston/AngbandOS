@@ -10,9 +10,6 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
-import { NavMenuComponent } from '../../nav-menu/nav-menu.component';
-import { ChatComponent } from '../../chat/chat.component';
-import { FooterComponent } from '../../footer/footer.component';
 import { MasterLayoutComponent } from '../../master-layout/master-layout.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -25,13 +22,10 @@ import { MatInputModule } from '@angular/material/input';
   imports: [
     RouterLink,
     NgIf,
-    ChatComponent,
     MatFormField,
     MatCheckbox,
     MatInputModule,
     ReactiveFormsModule,
-    FooterComponent,
-    NavMenuComponent,
     MasterLayoutComponent,
     MatButtonModule
   ]
