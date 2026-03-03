@@ -2,7 +2,7 @@ import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthenticationService } from '../authentication-service/authentication.service';
+import { AuthenticationService, LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME, LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME, LOCAL_STORAGE_PASSWORD_KEY_NAME } from '../authentication-service/authentication.service';
 import { LoginFormGroup } from './login-form-group';
 import { NgIf } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
@@ -57,9 +57,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       this._return = params['return'];
 
       // Setup the formgroup values.
-      const emailAddress = localStorage.getItem('email-address');
-      const password = localStorage.getItem('password');
-      const keepLoggedIn = localStorage.getItem('keep-logged-in');
+      const emailAddress = localStorage.getItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME) ?? "";
+      const password = localStorage.getItem(LOCAL_STORAGE_PASSWORD_KEY_NAME) ?? "";
+      const keepLoggedIn = localStorage.getItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME);
+
       this.formGroup.emailAddress.setValue(emailAddress);
       this.formGroup.password.setValue(password);
       this.formGroup.keepLoggedIn.setValue(keepLoggedIn);
