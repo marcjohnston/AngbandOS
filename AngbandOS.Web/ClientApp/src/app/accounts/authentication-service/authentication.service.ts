@@ -66,9 +66,9 @@ export class AuthenticationService {
 
   public autoLogin(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      const emailAddress = localStorage.getItem('email-address');
-      const password = localStorage.getItem('password');
-      const keepLoggedIn = localStorage.getItem('keep-logged-in');
+      const emailAddress = localStorage.getItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME);
+      const password = localStorage.getItem(LOCAL_STORAGE_PASSWORD_KEY_NAME);
+      const keepLoggedIn = localStorage.getItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME);
       if (keepLoggedIn && emailAddress && password) {
         this.login(emailAddress, password).then(() => {
           resolve();
@@ -109,11 +109,11 @@ export class AuthenticationService {
         }
       }, (reason: any) => {
         this.currentUser.next(null);
-        localStorage.setItem('keep-logged-in', "");
+        localStorage.setItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME, "");
         reject(reason)
       }).catch(() => {
         this.currentUser.next(null);
-        localStorage.setItem('keep-logged-in', "");
+        localStorage.setItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME, "");
         reject();
       });
     })
