@@ -93,14 +93,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   private updateHistory(history: ChatMessage[]) {
-    console.log("Chat updated.")
+    this.showMessage("Chat updated.")
     this.history = history;
     this.scrollToBottomOfChatAfterViewChecked = true;
     this._changeDetectorRef.detectChanges();
   }
 
   private appendHistory(message: ChatMessage) {
-    console.log("Chat message received.");
+    this.showMessage("Chat message received.");
     this.history?.push(message);
     this.scrollToBottomOfChatAfterViewChecked = true;
     this._changeDetectorRef.detectChanges();
@@ -109,54 +109,54 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   private connectServiceHub() {
     // Since we bounce back and forth between the chat and service hubs depending on the authentication of the user, we will initialize the
     // connection only as needed.
-    console.log("Connecting to service hub.");
+    this.showMessage("Connecting to service hub.");
     this._serviceConnection = new HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
+
+    // Register handlers before start.
+    this._serviceConnection.on("ChatRefreshed", (_history: ChatMessage[]) => {
+      this.updateHistory(_history);
+    });
+    this._serviceConnection.on("ChatUpdated", (_message: ChatMessage) => {
+      this.appendHistory(_message);
+    });
+
     this._serviceConnection.start().then(() => {
       this.connectionId = `Service: ${this._serviceConnection?.connectionId!}`;
       if (this._serviceConnection !== undefined) {
-        this._serviceConnection.on("ChatRefreshed", (_history: ChatMessage[]) => {
-          this.updateHistory(_history);
-        });
-        this._serviceConnection.on("ChatUpdated", (_message: ChatMessage) => {
-          this.appendHistory(_message);
-        });
         this._serviceConnection.send("RefreshChat", null);
       }
     }, (reason: any) => {
-      this._snackBar.open(`Cannot connect to service '${reason}'`, "", {
-        duration: 5000
-      });
+      this.showMessage(`Cannot connect to service '${reason}'`);
     });
   }
 
   private connectChatHub(accessToken: string) {
     // Since we bounce back and forth between the chat and service hubs depending on the authentication of the user, we will initialize the
     // connection only as needed.
-    console.log("Connecting to chat hub.");
+    this.showMessage("Connecting to chat hub.");
     this._chatConnection = new HubConnectionBuilder().withUrl("/apiv1/chat-hub", {
       accessTokenFactory: () => accessToken
     }).build();
+
+    // Register handlers before start.
+    this._chatConnection.on("ChatRefreshed", (_history: ChatMessage[]) => {
+      this.updateHistory(_history);
+    });
+    this._chatConnection.on("ChatUpdated", (_message: ChatMessage) => {
+      this.appendHistory(_message);
+    });
+    this._chatConnection.on("MessageFailed", () => {
+      this.showMessage("Unable to send message.");
+      this._changeDetectorRef.detectChanges();
+    });
+
     this._chatConnection.start().then(() => {
       this.connectionId = `Chat: ${this._chatConnection?.connectionId!}`;
       if (this._chatConnection !== undefined) {
-        this._chatConnection.on("ChatRefreshed", (_history: ChatMessage[]) => {
-          this.updateHistory(_history);
-        });
-        this._chatConnection.on("ChatUpdated", (_message: ChatMessage) => {
-          this.appendHistory(_message);
-        });
-        this._chatConnection.on("MessageFailed", () => {
-          this._snackBar.open("Unable to send message.", "", {
-            duration: 5000
-          });
-          this._changeDetectorRef.detectChanges();
-        });
         this._chatConnection.send("RefreshChat", null);
       }
     }, (reason: any) => {
-      this._snackBar.open(`Cannot connect to chat '${reason}'`, "", {
-        duration: 5000
-      });
+      this.showMessage(`Cannot connect to chat '${reason}'`);
     });
   }
 
@@ -168,21 +168,21 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   private handleAuthenticationChange() {
-    console.log("Reconnecting due to authentication change.");
-    this.disconnectChatHub();
-    this.disconnectServiceHub();
+    this.showMessage("Reconnecting to chat.");
+    this.disconnectHubs().then(() => {
 
-    // Check to see if we are authenticated.
-    if (this._authenticationService.currentUser.value == null || this._authenticationService.currentUser.value?.jwt === undefined) {
-      // Connect to the anonymous service-hub.
-      this.isAuthenticated = false;
-      this.connectServiceHub();
-    } else {
-      this.isAuthenticated = true;
-      this.isAdministrator = this._authenticationService.currentUser.value?.isAdmin!;
-      const accessToken = this._authenticationService.currentUser.value.jwt;
-      this.connectChatHub(accessToken);
-    }
+      // Check to see if we are authenticated.
+      if (this._authenticationService.currentUser.value == null || this._authenticationService.currentUser.value?.jwt === undefined) {
+        // Connect to the anonymous service-hub.
+        this.isAuthenticated = false;
+        this.connectServiceHub();
+      } else {
+        this.isAuthenticated = true;
+        this.isAdministrator = this._authenticationService.currentUser.value?.isAdmin!;
+        const accessToken = this._authenticationService.currentUser.value.jwt;
+        this.connectChatHub(accessToken);
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -190,36 +190,42 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     const currentUserSubscription = this._authenticationService.currentUser.subscribe((_user: UserDetails | null) => {
       this.handleAuthenticationChange();
     }, (error: any) => {
-      console.log("Error subscribing to authentication service.");
+      this.showMessage(`"Error subscribing to authentication service {error}`);
     });
     this._initSubscriptions.add(currentUserSubscription);
   }
 
-  private disconnectServiceHub() {
+  /**
+   * Disconnect from both the chat and service hubs.  Resolves only after all 
+   */
+  private disconnectHubs(): Promise<void> {
+    const chatAndServiceHubs: Promise<void>[] = [];
     if (this._serviceConnection !== undefined) {
-      console.log("Disconnecting from service hub.");
+      this.showMessage(`Disconnecting from service hub.`);
+
       this._serviceConnection.off("ChatUpdated");
       this._serviceConnection.off("ChatRefreshed");
-      this._serviceConnection.stop();
-      this._serviceConnection = undefined;
-    }
-  }
 
-  private disconnectChatHub() {
+      chatAndServiceHubs.push(this._serviceConnection.stop());
+    }
     if (this._chatConnection !== undefined) {
-      console.log("Disconnecting from chat hub.");
+      this.showMessage(`Disconnecting from chat hub.`);
+
       this._chatConnection.off("ChatUpdated");
       this._chatConnection.off("MessageFailed");
       this._chatConnection.off("ChatRefreshed");
-      this._chatConnection.stop();
-      this._chatConnection = undefined;
+
+      chatAndServiceHubs.push(this._chatConnection.stop());
     }
+
+    return Promise.all(chatAndServiceHubs).then(() => {
+      this._serviceConnection = undefined;
+      this._chatConnection = undefined;
+    });
   }
 
   ngOnDestroy() {
-    console.log("Destroying chat.");
     this._initSubscriptions.unsubscribe();
-    this.disconnectServiceHub();
-    this.disconnectChatHub();
+    this.disconnectHubs();
   }
 }
