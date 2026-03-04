@@ -63,7 +63,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       this.formGroup.emailAddress.setValue(emailAddress);
       this.formGroup.password.setValue(password);
-      this.formGroup.keepLoggedIn.setValue(keepLoggedIn);
+
+      const keepLoggedInAsBoolean: boolean = keepLoggedIn === "true";
+      this.formGroup.keepLoggedIn.setValue(keepLoggedInAsBoolean);
 
       // We need subscriptions to erase the message when the username or password form fields are changed.
       this._initSubscriptions.add(this.formGroup.emailAddress.valueChanges.subscribe(() => this.message = ""));
@@ -79,7 +81,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this._authenticationService.login(this.formGroup.emailAddress.value, this.formGroup.password.value).then(() => {
       // Check for the remember me checkbox functionality.  This only works for successful logins.
       if (this.formGroup.rememberMe.value) {
-        this._authenticationService.storeCredentialsLocally(this.formGroup.emailAddress.value, this.formGroup.password.value, this.formGroup.keepLoggedIn.value);
+        const keepLoggedInAsBoolean: boolean = this.formGroup.keepLoggedIn.value === true;
+        this._authenticationService.storeCredentialsLocally(this.formGroup.emailAddress.value, this.formGroup.password.value, keepLoggedInAsBoolean);
       } else {
         this._authenticationService.removeLocallyStoredCredentials();
       }
