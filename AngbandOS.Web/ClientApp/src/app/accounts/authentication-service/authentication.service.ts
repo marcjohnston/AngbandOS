@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JwtClaims } from './jwt-claims';
 import { LoginResponse } from './login-response';
 import { UserDetails } from './user-details';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
-const LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME = "email-address";
-const LOCAL_STORAGE_PASSWORD_KEY_NAME = "password";
-const LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME = "keep-logged-in";
+export const LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME = "email-address";
+export const LOCAL_STORAGE_PASSWORD_KEY_NAME = "password";
+export const LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME = "keep-logged-in";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,19 @@ export class AuthenticationService {
 
   constructor(
     private _httpClient: HttpClient
-  ) { }
+  ) {
+    // Listen for changes to localStorage from other tabs and react.
+    // This lets duplicated tabs see credential changes and either renew or clear authentication.
+    window.addEventListener('storage', (evt: StorageEvent) => {
+      if (!evt.key) {
+        return;
+      }
+      // Only react to our keys.
+      if (evt.key === LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME || evt.key === LOCAL_STORAGE_PASSWORD_KEY_NAME || evt.key === LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME) {
+        this.autoLogin();
+      }
+    });
+  }
 
   public get isAuthenticated(): boolean {
     return this.currentUser.value !== null;
@@ -33,15 +44,6 @@ export class AuthenticationService {
     localStorage.removeItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME);
     localStorage.removeItem(LOCAL_STORAGE_PASSWORD_KEY_NAME);
     localStorage.removeItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME);
-  }
-
-  public renewAuthentication() {
-    const emailAddress = localStorage.getItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME);
-    const password = localStorage.getItem(LOCAL_STORAGE_PASSWORD_KEY_NAME);
-    const keepLoggedIn = localStorage.getItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME);
-    if (keepLoggedIn === "true" && emailAddress !== null && password !== null) {
-      this.login(emailAddress, password).then();
-    }
   }
 
   /**
@@ -69,10 +71,14 @@ export class AuthenticationService {
       const emailAddress = localStorage.getItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME);
       const password = localStorage.getItem(LOCAL_STORAGE_PASSWORD_KEY_NAME);
       const keepLoggedIn = localStorage.getItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME);
-      if (keepLoggedIn && emailAddress && password) {
-        this.login(emailAddress, password).then(() => {
-          resolve();
-        }, () => reject());
+      if (keepLoggedIn === "true" && emailAddress && password) {
+        this.login(emailAddress, password).then(() => resolve(), () => {
+          this.currentUser.next(null);
+          resolve(); // Resolve even if login failed so callers aren't left hanging.
+        });
+      } else {
+        // No auto-login to perform; resolve immediately.
+        resolve();
       }
     });
   }
@@ -80,7 +86,7 @@ export class AuthenticationService {
   public login(emailAddress: string, password: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this._httpClient.post<LoginResponse>(`/apiv1/accounts/${encodeURI(emailAddress)}/authentication`, { password }).toPromise().then((_loginResponse: LoginResponse | undefined) => {
-        if (_loginResponse !== undefined && _loginResponse.jwtToken !== null) {
+        if (_loginResponse !== undefined && _loginResponse.jwtToken !== null && _loginResponse.jwtToken !== undefined) {
           const jwtToken: string = _loginResponse.jwtToken as string;
           // Convert the payload into an object.  The jwt properties are always strings.
           const jwtClaims: any = this.parseJwt(jwtToken);
