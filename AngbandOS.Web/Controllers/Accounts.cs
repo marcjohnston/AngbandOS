@@ -1,5 +1,4 @@
 ﻿using AngbandOS.Web.Interface;
-using AngbandOS.Web.Models;
 using AngbandOS.Web.TemplateProcessing;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

@@ -1,4 +1,4 @@
-﻿namespace AngbandOS.Web.Models
+﻿namespace AngbandOS.Web
 {
     /// <summary>
     /// Represents the preferences to be associated to a user.

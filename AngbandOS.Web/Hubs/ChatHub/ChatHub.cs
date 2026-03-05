@@ -1,15 +1,15 @@
 ﻿using AngbandOS.Web.Interface;
-using AngbandOS.Web.Models;
+using AngbandOS.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using System.Security.Claims;
+
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>
-    /// Represents the signal-r hub to process the following incoming and outgoing signal-r chat messages:
-    /// - Refresh
-    /// - SendMessage
+    /// Represents the signal-r hub to process the ability to receive, send and delete messages, which require authentication.  The reception of messages also retrieves direct messages because the
+    /// user is authenticated (so we know who they are).
     /// </summary>
     [Authorize]
     public class ChatHub : Hub<IChatHub>

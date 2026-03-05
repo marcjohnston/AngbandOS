@@ -1,14 +1,15 @@
 ﻿using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface.Configuration;
 using AngbandOS.PersistentStorage;
+using AngbandOS.Web.Hubs;
 using AngbandOS.Web.Interface;
-using AngbandOS.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using System.Security.Claims;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
-namespace AngbandOS.Web.Hubs
+
+namespace AngbandOS.Web.Services
 {
     /// <summary>
     /// Represents a singleton service that maintains the active state for AngbandOS.  The primary purpose of this game service singleton is that it can forward requests from

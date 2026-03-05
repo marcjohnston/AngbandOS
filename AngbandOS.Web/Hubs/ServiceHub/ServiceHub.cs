@@ -1,7 +1,8 @@
 ﻿using AngbandOS.Web.Interface;
-using AngbandOS.Web.Models;
+using AngbandOS.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+
 namespace AngbandOS.Web.Hubs
 {
     /// <summary>

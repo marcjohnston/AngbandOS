@@ -1,5 +1,4 @@
-﻿using AngbandOS.Web.Models;
-using Duende.IdentityServer.EntityFramework.Options;
+﻿using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
