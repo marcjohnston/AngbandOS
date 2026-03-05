@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs';
 
 export const LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME = "email-address";
 export const LOCAL_STORAGE_PASSWORD_KEY_NAME = "password";
-export const LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME = "keep-logged-in";
 
 @Injectable({
   providedIn: 'root'
@@ -17,33 +16,29 @@ export class AuthenticationService {
   constructor(
     private _httpClient: HttpClient
   ) {
-    // Listen for changes to localStorage from other tabs and react.
-    // This lets duplicated tabs see credential changes and either renew or clear authentication.
-    window.addEventListener('storage', (evt: StorageEvent) => {
-      if (!evt.key) {
-        return;
-      }
-      // Only react to our keys.
-      if (evt.key === LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME || evt.key === LOCAL_STORAGE_PASSWORD_KEY_NAME || evt.key === LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME) {
-        this.autoLogin();
-      }
-    });
   }
 
   public get isAuthenticated(): boolean {
     return this.currentUser.value !== null;
   }
 
-  public storeCredentialsLocally(emailAddress: string, password: string, keepLoggedIn: boolean) {
+  public getLocallyStoredCredentials() {
+    const emailAddress: string | null = localStorage.getItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME) ?? "";
+    const password: string | null = localStorage.getItem(LOCAL_STORAGE_PASSWORD_KEY_NAME) ?? "";
+    return {
+      emailAddress,
+      password
+    }
+  }
+
+  public storeCredentialsLocally(emailAddress: string, password: string) {
     localStorage.setItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME, emailAddress);
     localStorage.setItem(LOCAL_STORAGE_PASSWORD_KEY_NAME, password);
-    localStorage.setItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME, keepLoggedIn ? "true" : "false");
   }
 
   public removeLocallyStoredCredentials() {
     localStorage.removeItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME);
     localStorage.removeItem(LOCAL_STORAGE_PASSWORD_KEY_NAME);
-    localStorage.removeItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME);
   }
 
   /**
@@ -64,23 +59,6 @@ export class AuthenticationService {
     } else {
       return null;
     }
-  }
-
-  public autoLogin(): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      const emailAddress = localStorage.getItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME);
-      const password = localStorage.getItem(LOCAL_STORAGE_PASSWORD_KEY_NAME);
-      const keepLoggedIn = localStorage.getItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME);
-      if (keepLoggedIn === "true" && emailAddress && password) {
-        this.login(emailAddress, password).then(() => resolve(), () => {
-          this.currentUser.next(null);
-          resolve(); // Resolve even if login failed so callers aren't left hanging.
-        });
-      } else {
-        // No auto-login to perform; resolve immediately.
-        resolve();
-      }
-    });
   }
 
   public login(emailAddress: string, password: string): Promise<void> {
@@ -115,11 +93,9 @@ export class AuthenticationService {
         }
       }, (reason: any) => {
         this.currentUser.next(null);
-        localStorage.setItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME, "");
         reject(reason)
       }).catch(() => {
         this.currentUser.next(null);
-        localStorage.setItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME, "");
         reject();
       });
     })

@@ -3,6 +3,9 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 
+/**
+ * Adds the Bearer token to the HTTP request, if the user is authenticated.
+ */
 @Injectable({
   providedIn: 'root'
 })

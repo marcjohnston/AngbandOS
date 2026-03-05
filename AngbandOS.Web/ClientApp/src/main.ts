@@ -27,7 +27,6 @@ import { ResetPasswordComponent } from './app/accounts/reset-password/reset-pass
 import { ChangePasswordComponent } from './app/accounts/change-password/change-password.component';
 
 // Services / interceptors / guards
-import { UnauthorizedInterceptorService } from './app/accounts/unauthorized-interceptor/unauthorized-interceptor.service';
 import { AuthenticationInterceptor } from './app/accounts/authentication-interceptor/authentication-interceptor';
 import { CanDeactivatePlay } from './app/can-deactivate-play/can-deactivate-play';
 
@@ -58,7 +57,6 @@ const providers = [
   ]),
   provideHttpClient(withInterceptorsFromDi()),
   CanDeactivatePlay,
-  { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptorService, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
 ];
 

@@ -22,7 +22,6 @@ export class LogoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    localStorage.removeItem('keep-logged-in');
     this.success = this._authenticationService.logout();
     this._zone.run(() => this._router.navigate(['/']));
   }

@@ -2,7 +2,7 @@ import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthenticationService, LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME, LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME, LOCAL_STORAGE_PASSWORD_KEY_NAME } from '../authentication-service/authentication.service';
+import { AuthenticationService, LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME, LOCAL_STORAGE_PASSWORD_KEY_NAME } from '../authentication-service/authentication.service';
 import { LoginFormGroup } from './login-form-group';
 import { NgIf } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
@@ -57,15 +57,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       this._return = params['return'];
 
       // Setup the formgroup values.
-      const emailAddress = localStorage.getItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME) ?? "";
-      const password = localStorage.getItem(LOCAL_STORAGE_PASSWORD_KEY_NAME) ?? "";
-      const keepLoggedIn = localStorage.getItem(LOCAL_STORAGE_KEEP_LOGGED_IN_KEY_NAME);
+      const { emailAddress, password } = this._authenticationService.getLocallyStoredCredentials();
 
       this.formGroup.emailAddress.setValue(emailAddress);
       this.formGroup.password.setValue(password);
-
-      const keepLoggedInAsBoolean: boolean = keepLoggedIn === "true";
-      this.formGroup.keepLoggedIn.setValue(keepLoggedInAsBoolean);
 
       // We need subscriptions to erase the message when the username or password form fields are changed.
       this._initSubscriptions.add(this.formGroup.emailAddress.valueChanges.subscribe(() => this.message = ""));
@@ -81,8 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this._authenticationService.login(this.formGroup.emailAddress.value, this.formGroup.password.value).then(() => {
       // Check for the remember me checkbox functionality.  This only works for successful logins.
       if (this.formGroup.rememberMe.value) {
-        const keepLoggedInAsBoolean: boolean = this.formGroup.keepLoggedIn.value === true;
-        this._authenticationService.storeCredentialsLocally(this.formGroup.emailAddress.value, this.formGroup.password.value, keepLoggedInAsBoolean);
+        this._authenticationService.storeCredentialsLocally(this.formGroup.emailAddress.value, this.formGroup.password.value);
       } else {
         this._authenticationService.removeLocallyStoredCredentials();
       }

@@ -207,7 +207,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       } else {
         this.isAuthenticated = false;
-        this._authenticationService.autoLogin();
         this._changeDetectorRef.detectChanges();
       }
     });

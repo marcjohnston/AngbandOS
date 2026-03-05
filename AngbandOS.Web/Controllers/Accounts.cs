@@ -136,7 +136,7 @@ namespace AngbandOS.Web.Controllers
             var token = new JwtSecurityToken(Configuration["Jwt:Issuer"],
               Configuration["Jwt:Issuer"],
               claims.ToArray(),
-              expires: DateTime.Now.AddSeconds(86400),
+              expires: DateTime.Now.AddYears(1),
               signingCredentials: credentials);
 
             JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
