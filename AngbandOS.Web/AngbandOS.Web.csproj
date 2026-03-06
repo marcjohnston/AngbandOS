@@ -124,6 +124,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\hub-service\" />
     <Folder Include="ClientApp\src\assets\images\" />
   </ItemGroup>
 
