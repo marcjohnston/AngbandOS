@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { HubConnectionBuilder } from '@microsoft/signalr';
+import { Subscription, timer } from 'rxjs';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
 import { SavedGameDetails } from './saved-game-details';
@@ -14,7 +15,6 @@ import { MatTableModule } from '@angular/material/table';
 import { ChangeDetectorRef } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MasterLayoutComponent } from '../master-layout/master-layout.component';
-import { HubService } from '../hub-service/hub.service';
 
 const idleTimeIntervalInMilliseconds = 5000;
 
@@ -45,14 +45,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   public isAdministrator: boolean = false;
 
   private readonly _initSubscriptions = new Subscription();
+  private readonly _serviceConnection = new HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
 
   constructor(
     private _httpClient: HttpClient,
     private _snackBar: MatSnackBar,
     private _authenticationService: AuthenticationService,
     private _router: Router,
-    private _changeDetectorRef: ChangeDetectorRef,
-    private _hubService: HubService
+    private _changeDetectorRef: ChangeDetectorRef
   ) {
   }
 
@@ -175,21 +175,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Subscribe to active games via HubService
-    const activeGamesSub = this._hubService.onActiveGamesUpdated.subscribe((_activeGames: ActiveGameDetails[]) => {
-      this.activeGames = _activeGames;
-      if (this.activeGames.length > 0) {
-        setTimeout(() => this.updateIdleTimes(), idleTimeIntervalInMilliseconds);
+    // Start a signal-r connection to receive updates to the list.
+    this._serviceConnection.start().then(() => {
+      if (this._serviceConnection !== undefined) {
+        this._serviceConnection.on("ActiveGamesUpdated", (_activeGames: ActiveGameDetails[]) => {
+          this.activeGames = _activeGames;
+          if (this.activeGames.length > 0) {
+            setTimeout(() => this.updateIdleTimes(), idleTimeIntervalInMilliseconds);
+          }
+          this._changeDetectorRef.detectChanges();
+        });
+        this._serviceConnection.send("RefreshActiveGames");
       }
-      this._changeDetectorRef.detectChanges();
     }, (reason: any) => {
-      console.log(`Active games subscription error: ${reason}`);
-    });
-    this._initSubscriptions.add(activeGamesSub);
-
-    // Ensure service hub is started (HubService will guard against duplicate starts).
-    this._hubService.connectServiceHub().catch((reason: any) => {
-      console.log(`Service hub connect rejected: ${reason}`);
+      console.log(`Service hub rejected connection.  ${reason}`);
     });
 
     // Subscribe to the authenticated user.
@@ -199,7 +198,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.isAdministrator = (_userDetails.isAdmin === true);
         this._changeDetectorRef.detectChanges();
         this._httpClient.get<SavedGameDetails[]>(`/apiv1/saved-games`).toPromise().then((_savedGames) => {
-          this.savedGames = _savedGames;
+          this.savedGames = _savedGames; 
           this._changeDetectorRef.detectChanges();
         }, (_errorResponse: HttpErrorResponse) => {
           this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
@@ -230,11 +229,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
         duration: 5000
       });
-    });
+    });   
   }
 
   async ngOnDestroy() {
-    this._initSubscriptions.unsubscribe();
+    if (this._serviceConnection !== undefined) {
+      this._serviceConnection.off("ActiveGamesUpdated");
+      await this._serviceConnection.stop();
+    }
   }
 
   public onSavedGameRowClick(savedGame: SavedGameDetails) {
