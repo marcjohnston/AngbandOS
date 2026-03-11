@@ -27,6 +27,14 @@ html, body {
 }
 
 
+.small-select-panel mat-option { // Material drop down select with smaller font.  This is for the UI Designer.
+  font-size: 13px;
+  min-height: 13px;
+  line-height: 13px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
 .game-designer-undo-icon {
   color: green; // The modified will be a green color.
   font-size: 1.5rem; // The modified icon should only be 1rem.  By default, it is much larger.

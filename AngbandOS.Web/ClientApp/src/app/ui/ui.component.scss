@@ -1,36 +1,63 @@
-#container {
+#horizontal-panes {
+  display: flex;
+  flex-direction: row;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
 
-  & #horizontal-panes {
-    display: flex;
-    flex-direction: row;
-  }
-
-  & #left-pane {
+  & #settings-pane {
     width: 300px;
     min-width: 300px;
     border: 1px solid white;
+    display: flex;
+    flex-direction: column;
 
-    & .color-picker {
-      width: 100px;
-      height: 20px;
-      position: absolute;
-      margin-top: -11px;
+    & table {
+      width: 100%;
+      flex-grow: 1;
+
+      & .checkbox {
+        margin-left: 0; // Remove the default margins.
+        margin-top: 0; // Remove the default margins.
+      }
+
+      & .numeric-input {
+        width: 75px; // The input needs a fixed width for the up/down arrows to show properly.
+      }
+
+      & .color-picker {
+        width: 140px; // The color-picker needs a fixed size.
+        height: 20px; // The color-picker needs a fixed size.
+        position: relative; // The color-picker needs a relative positioning for it to work; otherwise everything seems to shift to the right, when clicked.
+      }
+    }
+
+    & button { // Refresh button
+      width: 100%; // Needs full width.
+      margin-top: 10px;
+      padding-top: 5px; // Give additional sizing.
+      padding-bottom: 5px; // Give additional sizing.
     }
   }
 
   & #canvas-pane {
-    display: flex;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border: 1px solid red;
+    position: relative; // important for percentage sizing inside
 
-    & canvas {
-      background-color: black;
-      object-fit: none;
-      object-position: left top;
-      border: 1px solid white;
+    & #resizable-canvas-container {
+      overflow: scroll; // This is needed to show the resize handle.
+      border: 1px solid green; // Show a green border around the resizable box.
+      resize: both; // Enable resize for this div.  The canvas should update to fit.
+      width: 50%; // starting size
+      height: 50%; // starting size
+
+      & canvas {
+        background-color: black;
+        object-fit: none;
+        object-position: left top;
+        border: 1px solid white;
+      }
     }
   }
 }

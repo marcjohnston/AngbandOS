@@ -1,78 +1,62 @@
-<div id="container">
+<app-master-layout>
   <div id="horizontal-panes">
-    <div id="left-pane">
-      <div>
-        <table>
-          <tr>
-            <td>
-              Character Size
-            </td>
-            <td>
-              <mat-slider [min]="1" [max]="32">
-                <input matSliderThumb [(ngModel)]="charSize"/>
-              </mat-slider>
-              <label>{{charSize}}</label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Horizontal Spacing
-            </td>
-            <td>
-              <mat-slider [min]="1" [max]="32">
-                <input matSliderThumb [(ngModel)]="xSpacing" />
-              </mat-slider>
-              <label>{{xSpacing}}</label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Vertical Spacing
-            </td>
-            <td>
-              <mat-slider [min]="1" [max]="32">
-                <input matSliderThumb [(ngModel)]="ySpacing" />
-              </mat-slider>
-              <label>{{ySpacing}}</label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Window Width
-            </td>
-            <td>
-              <mat-slider [min]="30" [max]="200">
-                <input matSliderThumb [(ngModel)]="windowWidth" />
-              </mat-slider>
-              <label>{{windowWidth}}</label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Window Height
-            </td>
-            <td>
-              <mat-slider [min]="20" [max]="100">
-                <input matSliderThumb [(ngModel)]="windowHeight" />
-              </mat-slider>
-              <label>{{windowHeight}}</label>
-            </td>
-          </tr>
-          <ng-container *ngFor="let color of colors; let i = index">
-            <tr>
-              <td>
-                {{color}}
-              </td>
-              <td>
-                <span class="color-picker" [cpPosition]="'right'" [cpPositionOffset]="'40'" (colorPickerChange)="setColor(i, $event)" [colorPicker]="getColor(i)" [style.background]="getColor(i)"></span>
-              </td>
-            </tr>
-          </ng-container>
-        </table>
+    <div id="settings-pane">
+      <table>
+        <tr>
+          <td>
+            Font Family
+          </td>
+          <td>
+            <mat-select panelClass="small-select-panel" [(ngModel)]="fontName">
+              @for (fontName of availableFontNames; track $index) {
+                <mat-option value="{{fontName}}">{{fontName}}</mat-option>
+              }
+            </mat-select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Bold
+          </td>
+          <td>
+            <input class="checkbox" type="checkbox" [(ngModel)]="bold">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Viewport Width
+          </td>
+          <td>
+            <input class="numeric-input" type="number" [(ngModel)]="viewportWidth">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Viewport Height
+          </td>
+          <td>
+            <input class="numeric-input" type="number" [(ngModel)]="viewportHeight">
+          </td>
+        </tr>
+        <tr><td colspan="2"></td></tr>
+        @for (color of availableColorNames; track $index; let i = $index) {
+        <tr>
+          <td>
+            {{color}}
+          </td>
+          <td>
+            <div class="color-picker" [cpPosition]="'right'" [cpPositionOffset]="'40'" (colorPickerChange)="setColor(i, $event)" [colorPicker]="getColor(i)" [style.background]="getColor(i)"></div>
+          </td>
+        </tr>
+        }
+      </table>
+      <button (click)="refresh()">Refresh</button>
+      <button (click)="reset()">Reset</button>
+    </div>
+    <div id="canvas-pane">
+      <div #canvasContainer id="resizable-canvas-container">
+        <canvas #console></canvas>
       </div>
     </div>
-    <div #canvasContainer id="canvas-pane">
-      <canvas #console></canvas>
-    </div>
   </div>
-</div>
+</app-master-layout>

@@ -1,10 +1,11 @@
-import { Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HtmlConsole } from '../modules/html-console/html-console.module';
 import { PrintLine } from '../modules/html-console/print-line';
+import { ConsoleConfiguration } from '../modules/html-console/console-configuration';
 
 @Component({
   selector: 'app-watch',
@@ -30,7 +31,7 @@ export class WatchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.canvasRef !== undefined) {
-      this._htmlConsole = new HtmlConsole(this.canvasRef);
+      this._htmlConsole = new HtmlConsole(this.canvasRef, new ConsoleConfiguration());
     }
 
     // Create the signal-r connection object.

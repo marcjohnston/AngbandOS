@@ -20,6 +20,7 @@ import { NgIf } from '@angular/common';
 import { FooterComponent } from '../footer/footer.component';
 import { ChatComponent } from '../chat/chat.component';
 import { NavMenuComponent } from '../nav-menu/nav-menu.component';
+import { ConsoleConfiguration } from '../modules/html-console/console-configuration';
 
 @Component({
   selector: 'app-play',
@@ -447,7 +448,7 @@ export class PlayComponent implements OnInit, OnDestroy {
       this._router.navigate(['/']);
     } else {
       // Create an HTML console module to handle all of the interaction.
-      this._htmlConsole = new HtmlConsole(this.canvasRef);
+      this._htmlConsole = new HtmlConsole(this.canvasRef, new ConsoleConfiguration());
 
       // Setup the in-game drop-down menu.
       const inGameMenuElement: HTMLDivElement = this.inGameMenuRef?.nativeElement;
