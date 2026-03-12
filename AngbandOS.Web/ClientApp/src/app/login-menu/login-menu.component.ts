@@ -18,35 +18,32 @@ import { NgIf } from '@angular/common';
   ]
 })
 export class LoginMenuComponent implements OnInit, OnDestroy {
-  public username: string | null = null;
-  private _initSubscriptions = new Subscription();
-  public isAuthenticated: boolean = false;
-  public isAdministrator: boolean = false;
-
   constructor(
     private _authenticationService: AuthenticationService,
-    private _router: Router,
-    private _activatedRoute: ActivatedRoute
   ) { }
 
-  ngOnInit() {
-    this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_userDetails: UserDetails | null) => {
-      if (_userDetails == null || _userDetails.username == null) {
-        // User is not logged in.
-        this.username = null;
-        this.isAuthenticated = false;
-        this.isAdministrator = false;
-      } else {
-        this.username = _userDetails.username;
-        this.isAuthenticated = true;
-        this.isAdministrator = (_userDetails.isAdmin === true);
-      }
-    }));
+  public get isAuthenticated(): boolean {
+    return this._authenticationService.isAuthenticated;
   }
 
-  ngOnDestroy() {
-    this._initSubscriptions.unsubscribe();
+  public get isAdministrator(): boolean {
+    const userDetails: UserDetails | null = this._authenticationService.currentUser?.value;
+    if (userDetails !== null) {
+      return userDetails.isAdmin;
+    }
+    return false;
   }
+
+  public get username(): string | null {
+    const userDetails: UserDetails | null = this._authenticationService.currentUser?.value;
+    if (userDetails !== null) {
+      return userDetails.username;
+    }
+    return null;
+  }
+  ngOnInit() { }
+
+  ngOnDestroy() { }
 
   public onWikiClick() {
     // We need to redirect to the /wiki folder.  This will be a virtual directory that is not under the control of the Angular router.
