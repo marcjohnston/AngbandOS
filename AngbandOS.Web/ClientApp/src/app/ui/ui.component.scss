@@ -6,7 +6,6 @@
 
   & #settings-pane {
     width: 300px;
-    min-width: 300px;
     border: 1px solid white;
     display: flex;
     flex-direction: column;
@@ -15,27 +14,35 @@
       width: 100%;
       flex-grow: 1;
 
+      & mat-select {
+        width: 170px; // The drop down with the current font names needs 170px.
+      }
+
       & .checkbox {
         margin-left: 0; // Remove the default margins.
         margin-top: 0; // Remove the default margins.
       }
 
       & .numeric-input {
-        width: 75px; // The input needs a fixed width for the up/down arrows to show properly.
+        width: 90%; // The input needs a fixed width for the up/down arrows to show properly.
       }
 
       & .color-picker {
-        width: 140px; // The color-picker needs a fixed size.
+        width: 90%; // The color-picker needs a fixed size.
         height: 20px; // The color-picker needs a fixed size.
         position: relative; // The color-picker needs a relative positioning for it to work; otherwise everything seems to shift to the right, when clicked.
       }
     }
 
-    & button { // Refresh button
-      width: 100%; // Needs full width.
-      margin-top: 10px;
-      padding-top: 5px; // Give additional sizing.
-      padding-bottom: 5px; // Give additional sizing.
+    & button {
+      padding: 5px; // All buttons should have same padding.
+      margin-left: 10px; // All buttons have same left margin.
+      margin-right: 10px; // All buttons have same right margin.
+      margin-top: 10px; // All buttons have same top margin.
+    }
+
+    & button:last-of-type {
+      margin-bottom: 10px; // The last button has margin on bottom.
     }
   }
 
@@ -45,12 +52,10 @@
     border: 1px solid red;
     position: relative; // important for percentage sizing inside
 
-    & #resizable-canvas-container {
+    & #resizable-canvas-container { // The size of this div is controlled by the user.  We only set the initial size.  We also dynamically set the max width and height.
       overflow: scroll; // This is needed to show the resize handle.
       border: 1px solid green; // Show a green border around the resizable box.
       resize: both; // Enable resize for this div.  The canvas should update to fit.
-      width: 50%; // starting size
-      height: 50%; // starting size
 
       & canvas {
         background-color: black;

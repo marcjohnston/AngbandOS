@@ -124,6 +124,15 @@ export class UiComponent implements OnInit {
     this.refresh();
   }
 
+  private updateResizingContainerMaximumSize() {
+    const resizingContainerElement = this.canvasRef!.nativeElement.parentElement;
+    const maxContainerElement = resizingContainerElement.parentElement;
+    const maxDivWidth = maxContainerElement.clientWidth;
+    const maxDivHeight = maxContainerElement.clientHeight;
+    resizingContainerElement.style.maxWidth = `${maxDivWidth}px`;
+    resizingContainerElement.style.maxHeight = `${maxDivHeight}px`;
+  }
+
   ngOnInit(): void {
     // When the canvasRef is initialized, we can setup the HtmlConsole.
     if (this.canvasRef !== undefined) {
@@ -132,17 +141,23 @@ export class UiComponent implements OnInit {
 
     // Track sizing on the canvas container.
     this.resizeObserver = new ResizeObserver(entries => {
-      const maxDivWidth = this.canvasRef!.nativeElement.parentElement.parentElement.clientWidth;
-      const maxDivHeight = this.canvasRef!.nativeElement.parentElement.parentElement.clientHeight;
-      this.canvasRef!.nativeElement.parentElement.style.maxWidth = `${maxDivWidth}px`;
-      this.canvasRef!.nativeElement.parentElement.style.maxHeight = `${maxDivHeight}px`;
+      // Update the maximum size of the resizing container and refresh the canvas.
+      this.updateResizingContainerMaximumSize();
 
       // Refresh the canvas.
       this.refresh();
     });
     this.resizeObserver.observe(this.canvasContainerRef?.nativeElement);
 
-    // Draw the initial screen.
+    // Draw the initial screen.  Update the maximum size of the resizing container and refresh the canvas.
+    this.updateResizingContainerMaximumSize();
+
+    // Set the initial size of the resizing container to the maximum size.
+    const resizingContainerElement = this.canvasRef!.nativeElement.parentElement;
+    resizingContainerElement.style.width = resizingContainerElement.style.maxWidth;
+    resizingContainerElement.style.height = resizingContainerElement.style.maxHeight;
+
+    // Refresh the canvas.
     this.refresh();
   }
 }

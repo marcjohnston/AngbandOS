@@ -3,7 +3,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box; // We need to set border-box throughout the entire UI.
+  overflow: hidden; // Do not allow scroll bars to appear.
+  // box-sizing: border-box; // We need to set border-box throughout the entire UI.
 
   @media (min-width: 768px) { // Desktop
     & #component-body {
@@ -12,9 +13,12 @@
       width: 100%;
       height: 100%;
       padding: 0 25px 25px 25px;
+      overflow: hidden; // Do not allow scroll bars to appear.
 
       & #content-component {
         width: 100%;
+        height: 100%;
+        overflow: auto; // Content that spills over should have scroll bars.
       }
     }
   }
@@ -25,10 +29,12 @@
       flex-direction: column;
       width: 100%;
       height: 100%;
+      overflow: hidden; // Do not allow scroll bars to appear.
 
       & #content-component {
         width: 100%;
         margin-bottom: 10px;
+        overflow: auto; // Content that spills over should have scroll bars.
       }
     }
   }
