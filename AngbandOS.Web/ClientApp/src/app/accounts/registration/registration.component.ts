@@ -4,9 +4,12 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../authentication-service/authentication.service';
 import { PostAccount } from './post-account';
 import { RegistrationFormGroup } from './registration-form-group';
-import { NgClass, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatError, MatFormField } from '@angular/material/form-field';
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { MasterLayoutComponent } from '../../master-layout/master-layout.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-registration',
@@ -15,11 +18,14 @@ import { MatError, MatFormField } from '@angular/material/form-field';
   standalone: true,
   imports: [
     NgIf,
+    MatButtonModule,
     ReactiveFormsModule,
     MatFormField,
+    MatLabel,
     MatError,
-    NgClass,
-    RouterLink
+    MatInputModule,
+    RouterLink,
+    MasterLayoutComponent
   ]
 })
 export class RegistrationComponent {
@@ -51,9 +57,6 @@ export class RegistrationComponent {
       this._httpClient.post(`/apiv1/accounts`, postUser).toPromise().then(() => {
         // Log the user in automatically.
         this._authenticationService.login(this.formGroup.emailAddress.value, this.formGroup.password.value).then(() => {
-          // Remove any previously stored credentials.
-          this._authenticationService.removeLocallyStoredCredentials();
-
           // Navigate to the profile page to send the confirmation email.
           this._zone.run(() => { this._router.navigate([`/accounts/profile`], { queryParams: { confirm: "true" } }) });
         }, (_errorResponse: HttpErrorResponse) => {

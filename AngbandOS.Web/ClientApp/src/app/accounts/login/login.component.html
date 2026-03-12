@@ -10,8 +10,6 @@
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password" />
       </mat-form-field>
-      <mat-checkbox formControlName="rememberMe">Remember me!</mat-checkbox>
-      <input type="submit" value="Save" hidden>
       <span>{{message}}</span>
       <button mat-button mat-flat-button>Login</button>
       <a href="#" [routerLink]='["/accounts/forgot-password"]'>Forgot password!</a>

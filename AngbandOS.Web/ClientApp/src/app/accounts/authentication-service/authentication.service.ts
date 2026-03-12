@@ -4,8 +4,7 @@ import { LoginResponse } from './login-response';
 import { UserDetails } from './user-details';
 import { BehaviorSubject } from 'rxjs';
 
-export const LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME = "email-address";
-export const LOCAL_STORAGE_PASSWORD_KEY_NAME = "password";
+export const LOCAL_STORAGE_JWT = "jwt";
 
 @Injectable({
   providedIn: 'root'
@@ -20,25 +19,6 @@ export class AuthenticationService {
 
   public get isAuthenticated(): boolean {
     return this.currentUser.value !== null;
-  }
-
-  public getLocallyStoredCredentials() {
-    const emailAddress: string | null = localStorage.getItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME) ?? "";
-    const password: string | null = localStorage.getItem(LOCAL_STORAGE_PASSWORD_KEY_NAME) ?? "";
-    return {
-      emailAddress,
-      password
-    }
-  }
-
-  public storeCredentialsLocally(emailAddress: string, password: string) {
-    localStorage.setItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME, emailAddress);
-    localStorage.setItem(LOCAL_STORAGE_PASSWORD_KEY_NAME, password);
-  }
-
-  public removeLocallyStoredCredentials() {
-    localStorage.removeItem(LOCAL_STORAGE_EMAIL_ADDRESS_KEY_NAME);
-    localStorage.removeItem(LOCAL_STORAGE_PASSWORD_KEY_NAME);
   }
 
   /**
@@ -70,6 +50,7 @@ export class AuthenticationService {
           const jwtClaims: any = this.parseJwt(jwtToken);
 
           if (jwtClaims !== null) {
+            localStorage.setItem(LOCAL_STORAGE_JWT, jwtClaims);
             const roles: string[] = jwtClaims['https://angbandos.skarstech.com/roles'];
 
             // Now manually convert the claims into a user details with the correct data-types.
@@ -102,6 +83,7 @@ export class AuthenticationService {
   }
 
   public logout(): boolean {
+    localStorage.removeItem(LOCAL_STORAGE_JWT);
     this.currentUser.next(null);
     return true;
   }

@@ -1,4 +1,7 @@
 form {
+  display: flex; // Use flex to render the form-fields.
+  flex-direction: column; // Arrange the form-fields straight down.
+
   & div {
     font-size: 1.5rem;
     height: 2rem;

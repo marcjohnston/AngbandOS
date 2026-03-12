@@ -10,6 +10,9 @@ import { UpdateAccountRequest } from '../change-password/update-account-request'
 import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
+import { MasterLayoutComponent } from '../../master-layout/master-layout.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +23,10 @@ import { MatFormField } from '@angular/material/form-field';
     NgIf,
     RouterLink,
     ReactiveFormsModule,
-    MatFormField
+    MatFormField,
+    MasterLayoutComponent,
+    MatInputModule,
+    MatButtonModule,
   ]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
@@ -84,6 +90,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
         });
       });
     }
+  }
+
+  public get isAuthenticated(): boolean {
+    return this._authenticationService.isAuthenticated;
   }
 
   public onResendConfirmationEmailClick() {

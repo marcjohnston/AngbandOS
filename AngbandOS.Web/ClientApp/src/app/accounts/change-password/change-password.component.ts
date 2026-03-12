@@ -9,6 +9,9 @@ import { NgIf } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
 import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MasterLayoutComponent } from '../../master-layout/master-layout.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-change-password',
@@ -19,7 +22,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgIf,
     MatFormField,
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule,
+    MasterLayoutComponent,
+    MatButtonModule
   ]
 })
 export class ChangePasswordComponent {

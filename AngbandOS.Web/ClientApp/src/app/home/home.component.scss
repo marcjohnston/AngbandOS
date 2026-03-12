@@ -1,6 +1,14 @@
 @use '@angular/material' as mat;
 @use 'src/theme' as theme;
 
+#home-layout-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title {
+    font-size: 28px;
+}
 .my-header-row {
   height: 10px;
 }
@@ -36,4 +44,11 @@ table {
 button {
   margin-top: 25px; // The Play New Game button needs some margin at the top.
   width: 200px; // Make the button fairly wide.
+}
+
+.hover-icon {
+  border-radius: 1px;
+}
+.hover-icon:hover {
+  border-radius: 4px;
 }

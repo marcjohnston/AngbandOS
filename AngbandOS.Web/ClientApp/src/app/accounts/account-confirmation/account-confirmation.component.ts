@@ -11,6 +11,7 @@ import { ErrorMessages } from '../../modules/error-messages/error-messages.modul
 import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
+import { MasterLayoutComponent } from '../../master-layout/master-layout.component';
 
 @Component({
   selector: 'app-account-confirmation',
@@ -20,7 +21,8 @@ import { MatFormField } from '@angular/material/form-field';
   imports: [
     NgIf,
     ReactiveFormsModule,
-    MatFormField
+    MatFormField,
+    MasterLayoutComponent
   ]
 })
 export class AccountConfirmationComponent implements OnInit, OnDestroy {

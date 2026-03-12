@@ -1,43 +1,32 @@
-<ng-container *ngIf="!isAuthenticated">
-  <form [formGroup]="formGroup">
-    <h2>Register</h2>
-    <mat-form-field id="username">
-      <input matInput
-             formControlName="username"
-             autocomplete="username"
-             placeholder="Username" />
-      <mat-error *ngIf="formGroup.username.invalid">{{formGroup.usernameError}}</mat-error>
-    </mat-form-field>
-    <mat-form-field id="email-address">
-      <input matInput
-             formControlName="emailAddress"
-             autocomplete="email"
-             placeholder="Email Address" />
-      <mat-error *ngIf="formGroup.emailAddress.invalid">{{formGroup.emailError}}</mat-error>
-    </mat-form-field>
-    <mat-form-field id="password">
-      <input matInput
-             type="password"
-             formControlName="password"
-             autocomplete="new-password"
-             placeholder="Password" />
-      <mat-error *ngIf="formGroup.password.invalid">{{formGroup.passwordError}}</mat-error>
-    </mat-form-field>
-    <mat-form-field id="confirm-password">
-      <input matInput
-             type="password"
-             formControlName="confirmPassword"
-             autocomplete="new-password"
-             placeholder="Confirm Password" />
-    </mat-form-field>
-    <button mat-flat-button [ngClass]="{'greyed': formGroup.invalid}" (click)="onRegisterClick()">Register</button>
-    <mat-error *ngIf="formGroup.invalid && formGroup.confirmPassword.touched">{{formGroup.confirmError}}</mat-error>
-    <ng-template ngFor [ngForOf]="messages" let-message>
-      <div>{{message}}</div>
-    </ng-template>
-  </form>
-</ng-container>
-<ng-container *ngIf="isAuthenticated">
-  <p>You are registered.</p>
-  <p>Click <a [routerLink]="['/']">here</a> to return to the home screen.</p>
-</ng-container>
+<app-master-layout>
+  <ng-container *ngIf="!isAuthenticated">
+    <form [formGroup]="formGroup" (submit)="onRegisterClick()">
+      <div class="header-title">Create an Account</div>
+      <mat-form-field id="username">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+      </mat-form-field>
+      <mat-form-field id="email-address">
+        <mat-label>Email Address</mat-label>
+        <input matInput formControlName="emailAddress" />
+      </mat-form-field>
+      <mat-form-field id="password">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
+      <mat-form-field id="confirm-password">
+        <mat-label>Confirm</mat-label>
+        <input matInput type="password" formControlName="confirmPassword" />
+      </mat-form-field>
+      <mat-error *ngIf="formGroup.invalid && formGroup.confirmPassword.touched">{{formGroup.confirmError}}</mat-error>
+      <ng-template ngFor [ngForOf]="messages" let-message>
+        <div>{{message}}</div>
+      </ng-template>
+      <button mat-button mat-flat-button>Register</button>
+    </form>
+  </ng-container>
+  <ng-container *ngIf="isAuthenticated">
+    <p>You are registered.</p>
+    <p>Click <a [routerLink]="['/']">here</a> to return to the home screen.</p>
+  </ng-container>
+</app-master-layout>
