@@ -5,6 +5,9 @@ import { ErrorMessages } from '../../modules/error-messages/error-messages.modul
 import { ForgotPasswordDialogFormGroup } from './forgot-password-dialog-form-group';
 import { MatError, MatFormField } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MasterLayoutComponent } from '../../master-layout/master-layout.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-forgot-password',
@@ -14,7 +17,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     ReactiveFormsModule,
     MatFormField,
-    MatError
+    MatError,
+    MasterLayoutComponent,
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class ForgotPasswordComponent {
