@@ -7,20 +7,18 @@
 }
 
 .header-title {
-    font-size: 28px;
-}
-.my-header-row {
-  height: 10px;
+  font-size: 1.25rem;
 }
 
-.mat-mdc-header-cell {
-    height: 10px;
-}
 .mat-column-actions {
   justify-content: right; // The icons should be right aligned.
 }
 
-table {
+mat-row:hover {
+  background-color: mat.m2-get-color-from-palette(theme.$primary, darker); // When a row is hovered, we highlight it.
+}
+
+mat-table {
   width: 100%; // Applies to the active games and saved games
 
   & th {
@@ -36,9 +34,6 @@ table {
     white-space: nowrap; // Do not allow the time to be wrapped.
   }
 
-  & [mat-row]:hover {
-    background-color: mat.m2-get-color-from-palette(theme.$primary, darker); // When a row is hovered, we highlight it.
-  }
 }
 
 button {
@@ -46,9 +41,12 @@ button {
   width: 200px; // Make the button fairly wide.
 }
 
-.hover-icon {
-  border-radius: 1px;
+mat-icon {
+  display: flex; // The icon needs to be centered.  We need flex for this.
+  align-items: center; // Center
+  justify-content: center; // Center
 }
-.hover-icon:hover {
-  border-radius: 4px;
+
+mat-icon:hover {
+  transform: scale(1.15);
 }
