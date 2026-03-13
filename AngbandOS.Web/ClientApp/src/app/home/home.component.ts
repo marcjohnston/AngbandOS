@@ -41,8 +41,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   public activeUsersDisplayedColumns: string[] = ["username", "connectionId", "actions"];
   public selectedActiveUser: UserDetails | null = null;
   public selectedSavedGame: SavedGameDetails | null = null;
-  public isAuthenticated: boolean = false;
-  public isAdministrator: boolean = false;
 
   private readonly _initSubscriptions = new Subscription();
   private readonly _serviceConnection = new HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
@@ -54,6 +52,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _changeDetectorRef: ChangeDetectorRef
   ) {
+  }
+
+  public get isAuthenticated(): boolean {
+    return this._authenticationService.isAuthenticated;
+  }
+
+  public get isAdministrator(): boolean {
+    return this._authenticationService.isAdministrator;
+  }
+
+  public get username(): string | null {
+    return this._authenticationService.username;
   }
 
   private pluralize(value: number, singular: string, plural: string): string {
@@ -194,8 +204,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     // Subscribe to the authenticated user.
     const currentUserSubscription = this._authenticationService.currentUser.subscribe((_userDetails: UserDetails | null) => {
       if (_userDetails !== null && _userDetails.username !== null) {
-        this.isAuthenticated = true;
-        this.isAdministrator = (_userDetails.isAdmin === true);
         this._changeDetectorRef.detectChanges();
         this._httpClient.get<SavedGameDetails[]>(`/apiv1/saved-games`).toPromise().then((_savedGames) => {
           this.savedGames = _savedGames; 
@@ -205,9 +213,6 @@ export class HomeComponent implements OnInit, OnDestroy {
             duration: 5000
           });
         });
-      } else {
-        this.isAuthenticated = false;
-        this._changeDetectorRef.detectChanges();
       }
     });
 

@@ -17,6 +17,9 @@ export class AuthenticationService {
   ) {
   }
 
+  /**
+   * Returns true, if the user is authenticated; false, otherwise.  If the user is not logged in and there is a JWT in the local storage, the user will be logged in automatically.
+   */
   public get isAuthenticated(): boolean {
     // If the user isn't logged in, check the local storage for the jwt.
     if (this.currentUser.value === null) {     
@@ -26,6 +29,22 @@ export class AuthenticationService {
       }
     }
     return this.currentUser.value !== null;
+  }
+
+  public get isAdministrator(): boolean {
+    const userDetails: UserDetails | null = this.currentUser?.value;
+    if (userDetails !== null) {
+      return userDetails.isAdmin;
+    }
+    return false;
+  }
+
+  public get username(): string | null {
+    const userDetails: UserDetails | null = this.currentUser?.value;
+    if (userDetails !== null) {
+      return userDetails.username;
+    }
+    return null;
   }
 
   /**

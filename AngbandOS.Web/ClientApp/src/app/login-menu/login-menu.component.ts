@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
-import { Subscription } from 'rxjs';
-import { UserDetails } from '../accounts/authentication-service/user-details';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
 
@@ -27,20 +25,13 @@ export class LoginMenuComponent implements OnInit, OnDestroy {
   }
 
   public get isAdministrator(): boolean {
-    const userDetails: UserDetails | null = this._authenticationService.currentUser?.value;
-    if (userDetails !== null) {
-      return userDetails.isAdmin;
-    }
-    return false;
+    return this._authenticationService.isAdministrator;
   }
 
   public get username(): string | null {
-    const userDetails: UserDetails | null = this._authenticationService.currentUser?.value;
-    if (userDetails !== null) {
-      return userDetails.username;
-    }
-    return null;
+    return this._authenticationService.username;
   }
+
   ngOnInit() { }
 
   ngOnDestroy() { }
