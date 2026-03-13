@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Subscription } from 'rxjs';
@@ -85,17 +85,9 @@ export class ChatComponent implements OnInit, OnDestroy {
     scrollDiv.scrollTop = scrollDiv.scrollHeight;
   }
 
-  //ngAfterViewChecked() {
-  //  if (this.scrollToBottomOfChatAfterViewChecked) {
-  //    this.scrollToBottomOfChatAfterViewChecked = false;
-  //    this.scrollToBottomOfChat();
-  //  }
-  //}
-
   private updateHistory(history: ChatMessage[]) {
     this.showMessage("Chat updated.")
     this.history = history;
-    //this.scrollToBottomOfChatAfterViewChecked = true;
     this._changeDetectorRef.detectChanges();
     this.scrollToBottomOfChat();
   }
@@ -103,7 +95,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   private appendHistory(message: ChatMessage) {
     this.showMessage("Chat message received.");
     this.history?.push(message);
-    //this.scrollToBottomOfChatAfterViewChecked = true;
     this._changeDetectorRef.detectChanges();
     this.scrollToBottomOfChat();
   }
