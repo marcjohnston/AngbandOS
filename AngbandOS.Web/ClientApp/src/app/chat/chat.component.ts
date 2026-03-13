@@ -22,7 +22,7 @@ import { ChangeDetectorRef } from '@angular/core';
     MatCardModule
   ]
 })
-export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class ChatComponent implements OnInit, OnDestroy {
   public history: ChatMessage[] | undefined;
   public isAuthenticated: boolean = false;
   public isAdministrator = false;
@@ -85,25 +85,27 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     scrollDiv.scrollTop = scrollDiv.scrollHeight;
   }
 
-  ngAfterViewChecked() {
-    if (this.scrollToBottomOfChatAfterViewChecked) {
-      this.scrollToBottomOfChatAfterViewChecked = false;
-      this.scrollToBottomOfChat();
-    }
-  }
+  //ngAfterViewChecked() {
+  //  if (this.scrollToBottomOfChatAfterViewChecked) {
+  //    this.scrollToBottomOfChatAfterViewChecked = false;
+  //    this.scrollToBottomOfChat();
+  //  }
+  //}
 
   private updateHistory(history: ChatMessage[]) {
     this.showMessage("Chat updated.")
     this.history = history;
-    this.scrollToBottomOfChatAfterViewChecked = true;
+    //this.scrollToBottomOfChatAfterViewChecked = true;
     this._changeDetectorRef.detectChanges();
+    this.scrollToBottomOfChat();
   }
 
   private appendHistory(message: ChatMessage) {
     this.showMessage("Chat message received.");
     this.history?.push(message);
-    this.scrollToBottomOfChatAfterViewChecked = true;
+    //this.scrollToBottomOfChatAfterViewChecked = true;
     this._changeDetectorRef.detectChanges();
+    this.scrollToBottomOfChat();
   }
 
   private connectServiceHub() {
