@@ -53,7 +53,7 @@
     position: relative; // important for percentage sizing inside
 
     & #resizable-canvas-container { // The size of this div is controlled by the user.  We only set the initial size.  We also dynamically set the max width and height.
-      overflow: scroll; // This is needed to show the resize handle.
+      overflow: auto; // This is needed to show the resize handle.
       border: 1px solid green; // Show a green border around the resizable box.
       resize: both; // Enable resize for this div.  The canvas should update to fit.
 

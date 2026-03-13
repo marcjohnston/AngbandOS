@@ -127,9 +127,10 @@ export class UiComponent implements OnInit {
   private updateResizingContainerMaximumSize() {
     const resizingContainerElement = this.canvasRef!.nativeElement.parentElement;
     const maxContainerElement = resizingContainerElement.parentElement;
+
     const maxDivWidth = maxContainerElement.clientWidth;
     const maxDivHeight = maxContainerElement.clientHeight;
-    resizingContainerElement.style.maxWidth = `${maxDivWidth}px`;
+    resizingContainerElement.style.maxWidth = `${maxDivWidth-1}px`;
     resizingContainerElement.style.maxHeight = `${maxDivHeight}px`;
   }
 
@@ -154,8 +155,8 @@ export class UiComponent implements OnInit {
 
     // Set the initial size of the resizing container to the maximum size.
     const resizingContainerElement = this.canvasRef!.nativeElement.parentElement;
-    resizingContainerElement.style.width = resizingContainerElement.style.maxWidth;
-    resizingContainerElement.style.height = resizingContainerElement.style.maxHeight;
+    resizingContainerElement.style.width = resizingContainerElement.style.maxWidth; // The px is already in the maxWidth property.
+    resizingContainerElement.style.height = resizingContainerElement.style.maxHeight; // The px is already in the maxHeight property.
 
     // Refresh the canvas.
     this.refresh();
