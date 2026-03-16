@@ -4,13 +4,11 @@
       <ng-container *ngFor="let card of history">
         <mat-card title="{{isAdministrator ? 'ID: ' + card.id : ''}}">
           <mat-card-subtitle>
-            <div class="card-subtitle">
-              <span>{{card.fromUsername}}</span>
-              <span>{{formatDate(card.sentDateTime)}}</span>
-              <span *ngIf="isAdministrator">
-                <mat-icon aria-hidden="false" title="Delete This Message" aria-label="Delete Message" fontIcon="clear" (click)="deleteMessage(card)"></mat-icon>
-              </span>
-            </div>
+            <span class="from-username">{{card.fromUsername}}</span>
+            <span>{{formatDate(card.sentDateTime)}}</span>
+            <ng-container *ngIf="isAdministrator">
+              <mat-icon aria-hidden="false" title="Delete This Message" aria-label="Delete Message" fontIcon="clear" (click)="deleteMessage(card)"></mat-icon>
+            </ng-container>
           </mat-card-subtitle>
           <mat-card-content>
             {{card.message}}

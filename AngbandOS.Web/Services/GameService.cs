@@ -44,7 +44,6 @@ namespace AngbandOS.Web.Services
         private readonly IHubContext<GameHub, IGameHub> GameHub;
         private readonly IHubContext<AdminHub, IAdminHub> AdminHub;
         private readonly IHubContext<ServiceHub, IServiceHub> ServiceHub;
-        private readonly IHubContext<ChatHub, IChatHub> ChatHub;
         private readonly IHubContext<SpectatingHub, ISpectatingHub> SpectatorsHub;
         private readonly IConfiguration Configuration;
         private readonly string ConnectionString;
@@ -55,7 +54,6 @@ namespace AngbandOS.Web.Services
         public GameService(
             IHubContext<GameHub, IGameHub> gameHub,
             IHubContext<ServiceHub, IServiceHub> serviceHub,
-            IHubContext<ChatHub, IChatHub> chatHub,
             IHubContext<AdminHub, IAdminHub> adminHub,
             IHubContext<SpectatingHub, ISpectatingHub> spectatorsHub,
             IConfiguration configuration,
@@ -65,7 +63,6 @@ namespace AngbandOS.Web.Services
             Configuration = configuration;
             GameHub = gameHub;
             ServiceHub = serviceHub;
-            ChatHub = chatHub;
             AdminHub = adminHub;
             SpectatorsHub = spectatorsHub;
             ServiceScopeFactory = serviceScopeFactory;
@@ -310,6 +307,23 @@ namespace AngbandOS.Web.Services
             ServiceHub.Clients.All.ActiveUsersRefreshed(GetChatUsers());
         }
 
+        //public void RefreshAllChatClients()
+        //{
+        //    foreach (KeyValuePair<string, ChatRecipient> connectionIdAndChatRecipient in ChatRecipients)
+        //    {
+        //        ChatRecipient chatRecipient = connectionIdAndChatRecipient.Value;
+        //        chatHubConnections.
+        //        await chatRecipient.SendUpdateAsync(messageWritten.Type, messageWritten.ToId, chatMessage);
+        //    }
+
+
+        //    foreach (ActiveUserDetails activeUserDetails in GetChatUsers())
+        //    {
+        //        ChatHub.cl
+        //        activeUserDetails.Equals
+        //        --ServiceHub.Clients.All.ActiveUsersRefreshed(GetChatUsers());
+        //    }
+        //}
         /// <summary>
         /// Removes a user from the chat system.
         /// </summary>

@@ -9,40 +9,6 @@
     margin-left: 20px; // If the chat is in a row orientation, enforce a margin.
   }
 
-  & mat-card {
-    padding: 5px;
-    margin-bottom: 2px;
-  }
-
-  & .card-subtitle {
-    display: flex;  
-    flex-direction: row;
-
-    & span {
-      white-space: nowrap;
-      font-size: 8pt;
-
-      & .mat-icon {
-        font-size: 15px; // Render the X about the same size as the card-header
-        padding-left: 5px; // The X needs a bit of space to the right of the date/time
-      }
-    }
-
-    & span:first-child {
-      width: 100%;
-    }
-  }
-
-  & mat-card-subtitle {
-    margin-bottom: 5px;
-    height: 15px;
-  }
-
-  & mat-card-content {
-    word-wrap: break-word; // Content in the chat needs to word-wrap and force words to break, if the word itself is too long.
-    height: 15px;
-  }
-
   & #history-area {
     height: 100%;
     min-height: 500px;
@@ -52,10 +18,46 @@
     & #history-scroll-area {
       height: 0;
     }
+
+    & mat-card {
+      padding: 0 5px 0 5px;
+      //    padding-right: 5px;
+      margin-bottom: 2px; // Cards need to have a little space between them or they are merged into one and look weird.
+
+      & mat-card-subtitle {
+        display: flex;
+        flex-direction: row;
+        width: 100%; // Consume the entire width.
+
+        & span {
+          white-space: nowrap; // Do not wrap any content.
+          font-size: 8pt; // Font for all spans is 8pt.
+        }
+
+        & .mat-icon {
+          font-size: 15px; // Render the X about the same size as the card-header
+          padding-left: 5px; // The X needs a bit of space to the right of the date/time
+          height: auto; // Size the icon accordingly to the font-size.  Otherwise there is too much space on bottom.
+          align-content: center; // Center icon vertically.
+        }
+
+        & .from-username {
+          flex-grow: 1; // Make the username as wide as possible.
+        }
+      }
+
+      & mat-card-content {
+        word-wrap: break-word; // Content in the chat needs to word-wrap and force words to break, if the word itself is too long.
+        height: auto; // Make sure the card can contain all of the content.  Otherwise it renders outside.
+        padding-bottom: 5px; // Remove the padding on the bottom.
+      }
+    }
   }
 
   & textarea {
-    width: 100%;
-    height: 2rem;
+    width: 100%; // The text area needs to be full width.
+    min-height: 2rem; // Do not allow the text area to be smaller than 2rem.
+    height: 2rem; // The initial height of the text area needs to be 2rem.
+    resize: vertical; // Allow the text area to resize vertically, but not horizontally.
   }
 }

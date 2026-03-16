@@ -48,6 +48,9 @@ namespace AngbandOS.Web.Hubs
             if (Context.User.HasClaim(customRoleClaimType, "administrator"))
             {
                 await WebPersistentStorage.DeleteMessagesAsync(messageId);
+
+                // We need to force a refresh of all chat clients.
+                //GameService.RefreshAllChatClients();
                 //ChatMessage[] chatMessages = await GameService.GetChatMessagesAsync(Context.ConnectionId, endingId);
                 //IChatHub chatHub = Clients.Client(Context.ConnectionId);
                 //await chatHub.ChatRefreshed(chatMessages.ToArray());
