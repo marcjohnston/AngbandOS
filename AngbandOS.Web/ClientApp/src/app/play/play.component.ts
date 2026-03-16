@@ -21,6 +21,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { ChatComponent } from '../chat/chat.component';
 import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 import { ConsoleConfiguration } from '../modules/html-console/console-configuration';
+import { MasterLayoutComponent } from '../master-layout/master-layout.component';
 
 @Component({
   selector: 'app-play',
@@ -31,11 +32,13 @@ import { ConsoleConfiguration } from '../modules/html-console/console-configurat
     NgIf,
     FooterComponent,
     ChatComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    MasterLayoutComponent
   ]
 })
 export class PlayComponent implements OnInit, OnDestroy {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;
+  @ViewChild('canvasContainer', { static: true }) private canvasContainerRef: ElementRef | undefined;
   @ViewChild('inGameMenu', { static: true }) private inGameMenuRef: ElementRef | undefined;
   private gameHubConnection: HubConnection | undefined;
   public connectionId: string | null = null;
@@ -44,6 +47,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   private _htmlConsole: HtmlConsole | undefined = undefined;
   private _accessToken: string | undefined = undefined;
   public preferences: Preferences | undefined = undefined; // Represents the users preferences.  Will be undefined, until they are retrieved from the back end.
+  private resizeObserver!: ResizeObserver;
 
   constructor(
     private _preferencesDialog: MatDialog,
@@ -497,6 +501,16 @@ export class PlayComponent implements OnInit, OnDestroy {
           duration: 2000,
         });
       }));
+
+      // Track sizing on the canvas container.
+      this.resizeObserver = new ResizeObserver(entries => {
+        // Refresh the canvas.  Set the configuration, to our designer configuration.  The html console module automatically detectes the change and refreshes.  The screen will be blank from the refresh.
+        this._htmlConsole!.consoleConfiguration = new ConsoleConfiguration();
+
+        this.gameHubConnection?.send("Refresh");
+       // _gameServer.RefreshSpectatorConsole(new SpectatingConsole(spectatorHub));
+      });
+      this.resizeObserver.observe(this.canvasContainerRef?.nativeElement);
     }
   }
 

@@ -133,6 +133,16 @@ namespace AngbandOS.Web.Services
             await PlayAsync(context, userId, null, gameConfiguration, username);
         }
 
+        /// <summary>
+        /// Common play method to handle the playing of a new or existing game.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="userId"></param>
+        /// <param name="guid"></param>
+        /// <param name="gameConfiguration"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         private async Task PlayAsync(HubCallerContext context, string userId, string? guid, GameConfiguration? gameConfiguration, string username)
         { 
             if ((guid != null && gameConfiguration != null) || (guid == null && gameConfiguration == null))
@@ -275,7 +285,21 @@ namespace AngbandOS.Web.Services
         public void KeyPressed(string connectionId, string keys)
         {
             if (SignalRConsoles.TryGetValue(connectionId, out SignalRConsole console))
+            {
                 console.KeyPressed(keys);
+            }
+        }
+
+        /// <summary>
+        /// Processes a request from a web client and routes it to the correct signal-r console.
+        /// </summary>
+        /// <param name="connectionId"></param>
+        public void Refresh(string connectionId)
+        {
+            if (SignalRConsoles.TryGetValue(connectionId, out SignalRConsole console))
+            {
+                console.Refresh();
+            }
         }
         #endregion
 
@@ -436,6 +460,7 @@ namespace AngbandOS.Web.Services
                 // Retrieve the spectator hub client for the connection.  This signal-r interface is how the game will communicate to the client.
                 ISpectatingHub spectatorHub = SpectatorsHub.Clients.Client(spectatorConnectionId);
 
+                // Tell the host game that there is a new spectator.
                 signalRConsole.AddSpectator(spectatorHub);
             }
         }

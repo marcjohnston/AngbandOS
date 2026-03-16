@@ -111,7 +111,10 @@ public class GameServer
     /// <param name="spectatorConsole"></param>
     public void RefreshSpectatorConsole(IViewPort spectatorConsole)
     {
-        Game.Screen.RefreshSpectatorConsole(spectatorConsole);
+        if (Game is not null)
+        {
+            Game.Screen.RefreshSpectatorConsole(spectatorConsole);
+        }
     }
 
     /// <summary>

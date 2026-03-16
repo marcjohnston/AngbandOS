@@ -1,71 +1,48 @@
-#container {
-  width: 100%;
-  height: 100%;
+#vertical-panes {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  align-self: flex-start;
 
-  & #component-window {
-    display: flex;
+  & #macros-div {
+    display: none;
     flex-direction: row;
+
+    & button {
+      flex-grow: 1;
+      height: 2.5rem;
+      margin-bottom: 5px;
+      line-height: 1rem;
+    }
+  }
+
+  & #canvas-pane {
     width: 100%;
     height: 100%;
-    padding: 0 25px 25px 25px;
+    display: flex;
 
-    & #vertical-panes {
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
+    & canvas {
+      background-color: black;
       width: 100%;
       height: 100%;
-      align-self: flex-start;
+      object-fit: none;
+      object-position: left top;
+    }
 
-      & #macros-div {
-        display: none;
-        flex-direction: row;
+    & #in-game-menu {
+      position: absolute;
+
+      & #in-game-menu-flex-box {
+        display: flex;
+        flex-direction: column;
 
         & button {
-          flex-grow: 1;
-          height: 2.5rem;
-          margin-bottom: 5px;
-          line-height: 1rem;
+          padding: 0;
+          margin: 0;
         }
       }
-
-      & #canvas-pane {
-        width: 100%;
-        height: 100%;
-        display: flex;
-
-        & canvas {
-          background-color: black;
-          width: 100%;
-          height: 100%;
-          object-fit: none;
-          object-position: left top;
-        }
-
-        & #in-game-menu {
-          position: absolute;
-
-          & #in-game-menu-flex-box {
-            display: flex;
-            flex-direction: column;
-
-            & button {
-              padding: 0;
-              margin: 0;
-            }
-          }
-        }
-      }
-    }
-
-    & #spacer {
-      flex-grow: 1;
-    }
-
-    & #chat {
-      max-width: 25%; // We do not want the width of the chat window to consume more than 25% of the screen width.
     }
   }
 }

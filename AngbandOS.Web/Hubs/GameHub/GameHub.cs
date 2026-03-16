@@ -76,6 +76,14 @@ namespace AngbandOS.Web.Hubs
             GameService.KeyPressed(Context.ConnectionId, keys);
         }
 
+        /// <summary>
+        /// Process a refresh request from the web client.  The client will need this on window resize.
+        /// </summary>
+        public void Refresh()
+        {
+            GameService.Refresh(Context.ConnectionId);
+        }
+
         public async override Task OnConnectedAsync()
         {
             // We are not doing anything at this time with the connections.  We should render a list of who is playing though.

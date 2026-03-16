@@ -116,7 +116,7 @@ namespace AngbandOS.Web.Hubs
         }
         #endregion
 
-        #region IConsole Implementation
+        #region Game Play and IConsole Implementation
         public int Height => 45;
 
         public int Width => 80;
@@ -223,6 +223,22 @@ namespace AngbandOS.Web.Hubs
             return c;
         }
 
+
+        /// <summary>
+        /// Processes an incoming keystroke from the web client and inserts it into the queue for the game to use.
+        /// </summary>
+        /// <param name="c"></param>
+        public void KeyPressed(string keys)
+        {
+            if (keys != null)
+            {
+                foreach (char c in keys)
+                {
+                    KeyQueue.Enqueue(c); // TODO: Use a wait event
+                }
+            }
+        }
+
         public void MessagesUpdated()
         {
             foreach (IGameMessagesHub gameMessageHub in _gameMessagesMonitors)
@@ -282,9 +298,6 @@ namespace AngbandOS.Web.Hubs
         {
             NotificationAction(this, GameUpdateNotificationEnum.InputReceived, "Game input received.");
         }
-        #endregion
-
-        #region Game Play
         public void Shutdown()
         {
             // Set the game flag to shut down.  Do this first, because we need to game to exit quickly when keypresses are bypassed.
@@ -402,18 +415,11 @@ namespace AngbandOS.Web.Hubs
         }
 
         /// <summary>
-        /// Processes an incoming keystroke from the web client and inserts it into the queue for the game to use.
+        /// Send a refresh update of the game to the client.
         /// </summary>
-        /// <param name="c"></param>
-        public void KeyPressed(string keys)
+        public void Refresh()
         {
-            if (keys != null)
-            {
-                foreach (char c in keys)
-                {
-                    KeyQueue.Enqueue(c);
-                }
-            }
+            _gameServer.RefreshSpectatorConsole(this);
         }
         #endregion
 

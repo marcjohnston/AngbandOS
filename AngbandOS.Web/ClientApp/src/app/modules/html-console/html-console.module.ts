@@ -124,7 +124,6 @@ export class HtmlConsole {
    * Force refresh.  The refresh resizes the font and updates the canvas size accordingly.
    */
   public refresh() {
-
     const canvas = this.canvasRef.nativeElement;
 
     // Measure the font size.
