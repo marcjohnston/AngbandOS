@@ -163,7 +163,7 @@ export class HtmlConsole {
     this.context.textBaseline = 'alphabetic';
     this.context.textAlign = 'left';
 
-    canvas.title = `Font: ${this.context.font} Char: ${this.fontMeasurements.characterWidth},${this.fontMeasurements.characterHeight} Canvas: ${canvas.width}x${canvas.height} Container: ${containerWidth}x${containerHeight}`;
+    canvas.title = `Font: ${this.context.font} Cell: ${this.fontMeasurements.characterWidth},${this.fontMeasurements.characterHeight} Canvas: ${canvas.width}x${canvas.height} Container: ${containerWidth}x${containerHeight}`;
 
     canvas.style.minWidth = canvas.width + "px";
     canvas.style.maxWidth = canvas.width + "px";
