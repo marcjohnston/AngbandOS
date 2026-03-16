@@ -4,11 +4,11 @@
       <div class="header-title">Login</div>
       <mat-form-field id="email-address">
         <mat-label>Email Address</mat-label>
-        <input matInput formControlName="emailAddress" />
+        <input matInput formControlName="emailAddress" name="username" autocomplete="username" />
       </mat-form-field>
       <mat-form-field id="password">
         <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" />
+        <input matInput type="password" formControlName="password" name="password" autocomplete="current-password" />
       </mat-form-field>
       <span>{{message}}</span>
       <button mat-button mat-flat-button>Login</button>
