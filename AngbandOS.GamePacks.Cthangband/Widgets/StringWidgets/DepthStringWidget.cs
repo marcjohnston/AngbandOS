@@ -11,7 +11,7 @@ public class DepthStringWidget : StringWidgetGameConfiguration
 {
     public override int X => 69;
     public override int Y => 44;
-    public override int? Width => 9;
+    public override int? Width => 10;
     public override string StringValueName => nameof(FunctionsEnum.DepthStringFunction);
     public override string[]? ChangeTrackerNames => new string[] { nameof(FunctionsEnum.DepthStringFunction) };
 }
