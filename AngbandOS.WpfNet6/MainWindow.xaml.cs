@@ -18,7 +18,7 @@ namespace Cthangband;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window, IConsoleViewPort
+public partial class MainWindow : Window, IConsole
 {
     private const bool Fullscreen = false;
     private const float StartupMusicVolume = 100;

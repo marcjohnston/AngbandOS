@@ -177,7 +177,7 @@ public class GameServer
     /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
     /// <param name="gameConfiguration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public GameResults PlayNewGame(IConsoleViewPort console, ICorePersistentStorage? persistentStorage, GameConfiguration gameConfiguration, string? serializedGameReplay)
+    public GameResults PlayNewGame(IConsole console, ICorePersistentStorage? persistentStorage, GameConfiguration gameConfiguration, string? serializedGameReplay)
     {
         // TODO: Validate the GameConfiguration here.  This is the only entry point for a GameConfiguration into the Core and we cannot expect that it is valid.
         if (console == null)
@@ -209,7 +209,7 @@ public class GameServer
     /// <param name="console"></param>
     /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
     /// <returns></returns>
-    public GameResults PlayExistingGame(IConsoleViewPort console, ICorePersistentStorage persistentStorage)
+    public GameResults PlayExistingGame(IConsole console, ICorePersistentStorage persistentStorage)
     {
         if (console == null)
         {
