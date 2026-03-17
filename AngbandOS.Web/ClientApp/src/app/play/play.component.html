@@ -15,7 +15,7 @@
       <button (click)="macroClicked('F11')">ALT-F11<br />{{preferences.f11Macro}}</button>
       <button (click)="macroClicked('F12')">ALT-F12<br />{{preferences.f12Macro}}</button>
     </div>
-    <div #canvasContainer id="canvas-pane" (keydown)="onKeyDown($event)" title="ConnectionId: {{connectionId}} Game Guid: {{gameGuid}}">
+    <div #canvasContainer id="canvas-pane" (keydown)="onKeyDown($event)">
       <div #inGameMenu id="in-game-menu">
         <div id="in-game-menu-flex-box">
           <button (click)="onEditPreferencesClick()" *ngIf="preferences !== undefined">Preferences</button>

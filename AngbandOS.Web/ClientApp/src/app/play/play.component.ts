@@ -339,6 +339,7 @@ export class PlayComponent implements OnInit, OnDestroy {
           this.gameHubConnection.on("GameStarted", (gameGuid: string) => {
             this._zone.run(() => {
               this.gameGuid = gameGuid;
+              this.canvasContainerRef!.nativeElement.title = `Connection: ${this.connectionId} Game: ${this.gameGuid}`;
             });
           });
 
@@ -501,8 +502,8 @@ export class PlayComponent implements OnInit, OnDestroy {
         // Refresh the canvas.  Set the configuration, to our designer configuration.  The html console module automatically detectes the change and refreshes.  The screen will be blank from the refresh.
         this._htmlConsole!.consoleConfiguration = new ConsoleConfiguration();
 
+        // Send the refresh command so that we can get the initial view.
         this.gameHubConnection?.send("Refresh");
-       // _gameServer.RefreshSpectatorConsole(new SpectatingConsole(spectatorHub));
       });
       this.resizeObserver.observe(this.canvasContainerRef?.nativeElement);
     }
