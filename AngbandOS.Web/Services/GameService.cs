@@ -22,12 +22,12 @@ namespace AngbandOS.Web.Services
         /// <summary>
         /// Returns a dictionary that returns a SignalRConsole when given a Signal-R connection id.
         /// </summary>
-        private readonly ConcurrentDictionary<string, SignalRConsole> SignalRConsoles = new ConcurrentDictionary<string, SignalRConsole>();
+        private readonly ConcurrentDictionary<string, GameConsole> SignalRConsoles = new ConcurrentDictionary<string, GameConsole>();
 
         /// <summary>
         /// Returns a dictionary that returns the Signal-R connection id when given a SignalRConsole.
         /// </summary>
-        private readonly ConcurrentDictionary<SignalRConsole, string> ConnectionIds = new ConcurrentDictionary<SignalRConsole, string>();
+        private readonly ConcurrentDictionary<GameConsole, string> ConnectionIds = new ConcurrentDictionary<GameConsole, string>();
 
         /// <summary>
         /// Returns a dictionary that returns the ChatRecipient when given a Signal-R connection ID.
@@ -41,10 +41,10 @@ namespace AngbandOS.Web.Services
         private readonly HubConnectionsMonitor serviceHubConnections = new HubConnectionsMonitor();
         private readonly HubConnectionsMonitor adminHubConnections = new HubConnectionsMonitor();
 
-        private readonly IHubContext<GameHub, IGameHub> GameHub;
-        private readonly IHubContext<AdminHub, IAdminHub> AdminHub;
-        private readonly IHubContext<ServiceHub, IServiceHub> ServiceHub;
-        private readonly IHubContext<SpectatingHub, ISpectatingHub> SpectatorsHub;
+        private readonly IHubContext<ConsoleHub, IConsoleMessages> GameHub;
+        private readonly IHubContext<AdminHub, IAdminMessages> AdminHub;
+        private readonly IHubContext<ServiceHub, IServiceMessages> ServiceHub;
+        private readonly IHubContext<SpectatingHub, ISpectatingMessages> SpectatorsHub;
         private readonly IConfiguration Configuration;
         private readonly string ConnectionString;
         private readonly IServiceScopeFactory ServiceScopeFactory;
@@ -52,10 +52,10 @@ namespace AngbandOS.Web.Services
 
         #region Constructor
         public GameService(
-            IHubContext<GameHub, IGameHub> gameHub,
-            IHubContext<ServiceHub, IServiceHub> serviceHub,
-            IHubContext<AdminHub, IAdminHub> adminHub,
-            IHubContext<SpectatingHub, ISpectatingHub> spectatorsHub,
+            IHubContext<ConsoleHub, IConsoleMessages> gameHub,
+            IHubContext<ServiceHub, IServiceMessages> serviceHub,
+            IHubContext<AdminHub, IAdminMessages> adminHub,
+            IHubContext<SpectatingHub, ISpectatingMessages> spectatorsHub,
             IConfiguration configuration,
             IServiceScopeFactory serviceScopeFactory
         )
@@ -90,7 +90,7 @@ namespace AngbandOS.Web.Services
             gameHubConnections.Disconnected(connectionId);
 
             // Get the console running the game.  It may still be active.
-            if (SignalRConsoles.TryGetValue(connectionId, out SignalRConsole? console))
+            if (SignalRConsoles.TryGetValue(connectionId, out GameConsole? console))
             {
                 // Remove the connection from the consoles.
                 SignalRConsoles.Remove(connectionId, out _);
@@ -107,7 +107,7 @@ namespace AngbandOS.Web.Services
         public bool KillGame(string connectionId)
         {
             // Retrieve the console for the game to be killed.
-            if (SignalRConsoles.TryGetValue(connectionId, out SignalRConsole? console))
+            if (SignalRConsoles.TryGetValue(connectionId, out GameConsole? console))
             {
                 console.Kill();
                 return true;
@@ -152,10 +152,10 @@ namespace AngbandOS.Web.Services
             string connectionId = context.ConnectionId;
 
             // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
-            IGameHub gameHub = GameHub.Clients.Client(connectionId);
+            IConsoleMessages gameHub = GameHub.Clients.Client(connectionId);
 
             // Construct an update monitor that is used when the game notifies us that interesting events that happen in the game.
-            Action<SignalRConsole, GameUpdateNotificationEnum, string> gameUpdateMonitor = async (SignalRConsole signalRConsole, GameUpdateNotificationEnum gameUpdateNotification, string message) =>
+            Action<GameConsole, GameUpdateNotificationEnum, string> gameUpdateMonitor = async (GameConsole signalRConsole, GameUpdateNotificationEnum gameUpdateNotification, string message) =>
             {
                 // Update all clients that the active games has been updated.  This happens for all notifications.
                 await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
@@ -192,7 +192,7 @@ namespace AngbandOS.Web.Services
             };
 
             // Create a signal-r console object to manage the in-progress game.  Create a background worker object that runs the game and receives messages from the game to send to the client.
-            SignalRConsole console;
+            GameConsole console;
 
             // Check to see if this is a request for a new game.
             if (guid == null && gameConfiguration != null)
@@ -215,7 +215,7 @@ namespace AngbandOS.Web.Services
                 gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
 
                 // Create a background worker object that runs the game and receives messages from the game to send to the client.
-                console = new SignalRConsole(context, gameHub, corePersistentStorage, gameConfiguration, userId, username, gameUpdateMonitor);
+                console = new GameConsole(context, gameHub, corePersistentStorage, gameConfiguration, userId, username, gameUpdateMonitor);
             }
             else
             {
@@ -223,7 +223,7 @@ namespace AngbandOS.Web.Services
                 ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
 
                 // Play an existing game.
-                console = new SignalRConsole(context, gameHub, corePersistentStorage, userId, username, gameUpdateMonitor);
+                console = new GameConsole(context, gameHub, corePersistentStorage, userId, username, gameUpdateMonitor);
             }
 
             // For debugging purposes, we will provide a name for the thread that indicates the ID of the user and the game GUID.
@@ -264,7 +264,7 @@ namespace AngbandOS.Web.Services
         private void Console_RunWorkerCompleted(object? sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             // A game is over.  Remove it from the active games.
-            SignalRConsole console = (SignalRConsole)sender;
+            GameConsole console = (GameConsole)sender;
 
             // Remove the console from the connections.
             ConnectionIds.Remove(console, out _);
@@ -284,7 +284,7 @@ namespace AngbandOS.Web.Services
         /// <param name="keys">The key that was pressed.</param>
         public void KeyPressed(string connectionId, string keys)
         {
-            if (SignalRConsoles.TryGetValue(connectionId, out SignalRConsole console))
+            if (SignalRConsoles.TryGetValue(connectionId, out GameConsole console))
             {
                 console.KeyPressed(keys);
             }
@@ -296,7 +296,7 @@ namespace AngbandOS.Web.Services
         /// <param name="connectionId"></param>
         public void Refresh(string connectionId)
         {
-            if (SignalRConsoles.TryGetValue(connectionId, out SignalRConsole console))
+            if (SignalRConsoles.TryGetValue(connectionId, out GameConsole console))
             {
                 console.Refresh();
             }
@@ -455,10 +455,10 @@ namespace AngbandOS.Web.Services
         public void Spectate(string spectatorConnectionId, string gameToSpectateSignalRConnectionId)
         {
             // Get the signal-r console object that is hosting the game.
-            if (SignalRConsoles.TryGetValue(gameToSpectateSignalRConnectionId, out SignalRConsole? signalRConsole))
+            if (SignalRConsoles.TryGetValue(gameToSpectateSignalRConnectionId, out GameConsole? signalRConsole))
             {
                 // Retrieve the spectator hub client for the connection.  This signal-r interface is how the game will communicate to the client.
-                ISpectatingHub spectatorHub = SpectatorsHub.Clients.Client(spectatorConnectionId);
+                ISpectatingMessages spectatorHub = SpectatorsHub.Clients.Client(spectatorConnectionId);
 
                 // Tell the host game that there is a new spectator.
                 signalRConsole.AddSpectator(spectatorHub);
@@ -498,7 +498,7 @@ namespace AngbandOS.Web.Services
         public PageOfGameMessages? GetGameMessages(string gameSignalRConnectionId, int? firstIndex = null, int lastIndex = 0, int? maximumMessagesToRetrieve = null)
         {
             // Get the signal-r console object that is hosting the game.
-            if (SignalRConsoles.TryGetValue(gameSignalRConnectionId, out SignalRConsole? signalRConsole))
+            if (SignalRConsoles.TryGetValue(gameSignalRConnectionId, out GameConsole? signalRConsole))
             {
                 PageOfGameMessages? gameMessages = signalRConsole.GetGameMessages(firstIndex, lastIndex, maximumMessagesToRetrieve);
                 return gameMessages;
@@ -509,7 +509,7 @@ namespace AngbandOS.Web.Services
         public void MonitorGameMessages(IGameMessagesHub monitorHub, string gameSignalRConnectionId, int? maximumMessagesToRetrieve = null)
         {
             // Get the signal-r console object that is hosting the game that needs to be monitored.
-            if (SignalRConsoles.TryGetValue(gameSignalRConnectionId, out SignalRConsole? signalRConsole))
+            if (SignalRConsoles.TryGetValue(gameSignalRConnectionId, out GameConsole? signalRConsole))
             {
                 // Add the hub for the monitor to the game.
                 signalRConsole.MonitorGameMessages(monitorHub, maximumMessagesToRetrieve);
@@ -584,7 +584,7 @@ namespace AngbandOS.Web.Services
         public ActiveGameDetails[] GetActiveGames()
         {
             List<ActiveGameDetails> activeGames = new List<ActiveGameDetails>();
-            foreach (KeyValuePair<string, SignalRConsole> console in SignalRConsoles)
+            foreach (KeyValuePair<string, GameConsole> console in SignalRConsoles)
             {
                 ActiveGameDetails activeGameDetails = new ActiveGameDetails()
                 {

@@ -8,7 +8,7 @@ namespace AngbandOS.Web.Hubs
     /// <summary>
     /// Represents an anonymous signal-r hub singleton service for the home screen that monitors active games and provides public read-only chats.
     /// </summary>
-    public class ServiceHub : Hub<IServiceHub>
+    public class ServiceHub : Hub<IServiceMessages>
     {
         private readonly GameService GameService;
         private readonly IWebPersistentStorage WebPersistentStorage;
@@ -32,7 +32,7 @@ namespace AngbandOS.Web.Hubs
         {
             // Immediately send a seeding list of active games to the client.
             ActiveGameDetails[] activeGames = GameService.GetActiveGames();
-            IServiceHub serviceHub = Clients.Client(Context.ConnectionId);
+            IServiceMessages serviceHub = Clients.Client(Context.ConnectionId);
             serviceHub.ActiveGamesUpdated(activeGames);
         }
 
@@ -40,14 +40,14 @@ namespace AngbandOS.Web.Hubs
         {
             //// Immediately send a seeding list of active games to the client.
             ActiveUserDetails[] activeUsers = GameService.GetChatUsers();
-            IServiceHub serviceHub = Clients.Client(Context.ConnectionId);
+            IServiceMessages serviceHub = Clients.Client(Context.ConnectionId);
             serviceHub.ActiveUsersRefreshed(activeUsers);
         }
 
         public async Task RefreshChat(int? endingId)
         {
             // Get the hub for the currently connected client.
-            IServiceHub serviceHub = Clients.Client(Context.ConnectionId);
+            IServiceMessages serviceHub = Clients.Client(Context.ConnectionId);
             try
             {
                 ChatMessage[] chatMessages = await GameService.GetChatMessagesAsync(Context.ConnectionId, endingId);
@@ -69,7 +69,7 @@ namespace AngbandOS.Web.Hubs
         public override Task OnConnectedAsync()
         {
             //HttpTransportType? transportType = Context.Features.Get<IHttpTransportFeature>()?.TransportType; // This was to determine what type of transport was being used so that the dashboard can render it.  It isn't ready yet though.
-            IServiceHub serviceHub = Clients.Client(Context.ConnectionId);
+            IServiceMessages serviceHub = Clients.Client(Context.ConnectionId);
 
             // Add this connection to the service hub connections.
             GameService.ServiceHubConnected(Context.ConnectionId);

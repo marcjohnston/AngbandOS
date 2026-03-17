@@ -2,32 +2,11 @@
 namespace AngbandOS.Web.Hubs;
 
 /// <summary>
-/// Represents an interface that defines the outgoing signal-r methods that the game can send.  This interface is
-/// just used for playing games--not spectating games.
+/// Represents an interface that defines the outgoing signal-r methods that the a spectating client can receive.  There is no WaitForKey or inputs from a spectating client.
+/// used for playing games.
 /// </summary>
-public interface IGameHub
+public interface ISpectatingMessages
 {
-    /// <summary>
-    /// Sends a generic message to the client.
-    /// </summary>
-    /// <param name="message"></param>
-    /// <returns></returns>
-    Task SendMessage(string message);
-
-    /// <summary>
-    /// Sends a message to the client that the game cannot be played because it is incompatible.
-    /// </summary>
-    /// <param name="message"></param>
-    /// <returns></returns>
-    Task GameIncompatible();
-
-    /// <summary>
-    /// Outgoing message to the client that the game started.  The primary purpose for this message is for the client
-    /// to be able to receive the guid for a new game that was created.
-    /// </summary>
-    /// <returns></returns>
-    Task GameStarted(string guid);
-
     /// <summary>
     /// Outgoing message to a web client that the game is over.
     /// </summary>

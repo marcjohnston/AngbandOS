@@ -11,7 +11,7 @@ namespace AngbandOS.Web.Hubs
     /// Represents an object that accept messages from an active game (AngbandOS.Core) and send the message to the client browser via a SignalR hub.  This class operates 
     /// as a background worker to process incoming messages and send outgoing messages without blocking the main thread.
     /// </summary>
-    public class SignalRConsole : BackgroundWorker, IConsoleViewPort
+    public class GameConsole : BackgroundWorker, IConsoleViewPort
     {
         #region State Date
         /// <summary>
@@ -22,12 +22,12 @@ namespace AngbandOS.Web.Hubs
         /// <summary>
         /// Returns the signal-r hub that the console is communicating on.        
         /// </summary>
-        private readonly IGameHub _consoleGameHub;
+        private readonly IConsoleMessages _consoleGameHub;
 
         /// <summary>
         /// Returns the list of people watching the game.
         /// </summary>
-        private readonly List<ISpectatingHub> _spectators = new List<ISpectatingHub>();
+        private readonly List<ISpectatingMessages> _spectators = new List<ISpectatingMessages>();
 
         /// <summary>
         /// Returns the list of windows that are monitoring the game messages.
@@ -57,7 +57,7 @@ namespace AngbandOS.Web.Hubs
         /// <summary>
         /// Returns object that handles the notification channel.
         /// </summary>
-        private readonly Action<SignalRConsole, GameUpdateNotificationEnum, string> NotificationAction;
+        private readonly Action<GameConsole, GameUpdateNotificationEnum, string> NotificationAction;
 
         /// <summary>
         /// Returns the context for the GameHub.  This is used to abort the signal-r connection and terminate the game instantly.
@@ -77,7 +77,7 @@ namespace AngbandOS.Web.Hubs
 
         #region Constructor
         /// <summary>
-        /// Constructs a new <see cref="SignalRConsole"/> object to play a new game.
+        /// Constructs a new <see cref="GameConsole"/> object to play a new game.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="gameHub"></param>
@@ -85,7 +85,7 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId">The user ID of the player.  This property is used to GET ActiveGames controller to return the user ID of the player.</param>
         /// <param name="username">The username for the player.  This property is used by the GET ActiveGames controller to return the name of the player./></param>
         /// <param name="notificationAction"></param>
-        public SignalRConsole(HubCallerContext context, IGameHub gameHub, ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration, string userId, string username, Action<SignalRConsole, GameUpdateNotificationEnum, string> notificationAction)
+        public GameConsole(HubCallerContext context, IConsoleMessages gameHub, ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration, string userId, string username, Action<GameConsole, GameUpdateNotificationEnum, string> notificationAction)
         {
             _consoleGameHub = gameHub;
             PersistentStorage = persistentStorage;
@@ -97,7 +97,7 @@ namespace AngbandOS.Web.Hubs
         }
 
         /// <summary>
-        /// Constructs a new <see cref="SignalRConsole"/> object to play an existing game.
+        /// Constructs a new <see cref="GameConsole"/> object to play an existing game.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="gameHub"></param>
@@ -105,7 +105,7 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId"></param>
         /// <param name="username"></param>
         /// <param name="notificationAction"></param>
-        public SignalRConsole(HubCallerContext context, IGameHub gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<SignalRConsole, GameUpdateNotificationEnum, string> notificationAction)
+        public GameConsole(HubCallerContext context, IConsoleMessages gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<GameConsole, GameUpdateNotificationEnum, string> notificationAction)
         {
             _consoleGameHub = gameHub;
             PersistentStorage = persistentStorage;
@@ -131,7 +131,7 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.Clear();
 
             // These messages are relayed to all spectators.
-            foreach (ISpectatingHub gameHub in _spectators)
+            foreach (ISpectatingMessages gameHub in _spectators)
             {
                 gameHub.Clear();
             }
@@ -147,7 +147,7 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.PlayMusic(music);
 
             // These messages are relayed to all spectators.
-            foreach (ISpectatingHub gameHub in _spectators)
+            foreach (ISpectatingMessages gameHub in _spectators)
             {
                 gameHub.PlayMusic(music);
             }
@@ -163,7 +163,7 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.PlaySound(sound);
 
             // These messages are relayed to all spectators.
-            foreach (ISpectatingHub gameHub in _spectators)
+            foreach (ISpectatingMessages gameHub in _spectators)
             {
                 gameHub.PlaySound(sound);
             }
@@ -179,7 +179,7 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.BatchPrint(printLines);
 
             // These messages are relayed to all spectators.
-            foreach (ISpectatingHub spectatorHub in _spectators)
+            foreach (ISpectatingMessages spectatorHub in _spectators)
             {
                 spectatorHub.BatchPrint(printLines);
             }
@@ -195,7 +195,7 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.SetBackground(image);
 
             // These messages are relayed to all spectators.
-            foreach (ISpectatingHub gameHub in _spectators)
+            foreach (ISpectatingMessages gameHub in _spectators)
             {
                 gameHub.SetBackground(image);
             }
@@ -428,7 +428,7 @@ namespace AngbandOS.Web.Hubs
         /// Adds a spectating window to the list of windows spectating the game.
         /// </summary>
         /// <param name="spectatorHub">The watcher hub.</param>
-        public void AddSpectator(ISpectatingHub spectatorHub)
+        public void AddSpectator(ISpectatingMessages spectatorHub)
         {
             _spectators.Add(spectatorHub);
 
@@ -440,7 +440,7 @@ namespace AngbandOS.Web.Hubs
         /// Removes a spectating window from the list of windows spectating the game.
         /// </summary>
         /// <param name="spectatorHub">The watcher hub.</param>
-        public void RemoveSpectator(ISpectatingHub spectatorHub)
+        public void RemoveSpectator(ISpectatingMessages spectatorHub)
         {
             _spectators.Remove(spectatorHub);
         }
@@ -452,7 +452,7 @@ namespace AngbandOS.Web.Hubs
         private void DisconnectSpectators()
         {
             // These messages are relayed to all spectators.
-            foreach (ISpectatingHub spectatorHub in _spectators)
+            foreach (ISpectatingMessages spectatorHub in _spectators)
             {
                 spectatorHub.GameOver();
             }

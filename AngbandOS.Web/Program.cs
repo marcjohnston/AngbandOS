@@ -116,7 +116,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapHub<GameHub>("/apiv1/game-hub"); // Processes actual game play
+app.MapHub<ConsoleHub>("/apiv1/game-hub"); // Processes actual game play
 app.MapHub<ServiceHub>("/apiv1/service-hub"); // Processes active game list
 app.MapHub<SpectatingHub>("/apiv1/spectators-hub"); // Processes spectating games
 app.MapHub<GameMessagesHub>("/apiv1/game-messages-hub"); // Processes game-messages windows
