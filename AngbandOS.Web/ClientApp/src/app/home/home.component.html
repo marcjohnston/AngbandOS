@@ -44,8 +44,8 @@
             Actions
           </mat-header-cell>
           <mat-cell mat-cell *matCellDef="let activeGame" class="right-most-column">
-            <mat-icon *ngIf="isAdministrator" aria-hidden="false" title="Force stop this active game." aria-label="Delete Saved Game" fontIcon="delete" (click)="killActiveGame(activeGame)">delete</mat-icon>
-            <mat-icon aria-hidden="false" title="Watch This Game" aria-label="Watch Saved Game" (click)="onActiveGameRowClick(activeGame)">visibility</mat-icon>
+            <mat-icon *ngIf="isAdministrator" aria-hidden="false" title="Force stop this active game." aria-label="Delete Saved Game" fontIcon="delete" (click)="killActiveGame(activeGame)"></mat-icon>
+            <mat-icon aria-hidden="false" title="Watch This Game" aria-label="Watch Saved Game" fontIcon="visibility" (click)="onActiveGameRowClick(activeGame)"></mat-icon>
           </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="activeGamesDisplayedColumns"></mat-header-row>>
@@ -54,7 +54,10 @@
     </ng-container>
     <ng-container *ngIf="isAuthenticated === true">
       <ng-container *ngIf="savedGames !== undefined">
-        <div class="header-title">Your Saved Games</div>
+        <div id="header">
+          <div class="header-title">Your Saved Games</div>
+          <button mat-button  matButton="outlined" (click)="onNewGame()">Play New Game</button>
+        </div>
         <mat-table mat-table [dataSource]="savedGames">
           <ng-container matColumnDef="guid">
             <mat-header-cell mat-header-cell *matHeaderCellDef>
@@ -111,7 +114,6 @@
           <mat-row *matRowDef="let savedGame; columns: savedGamesDisplayedColumns" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></mat-row>
         </mat-table>
       </ng-container>
-      <button mat-button mat-flat-button (click)="onNewGame()">Play New Game</button>
     </ng-container>
     <ng-container *ngIf="isAuthenticated === false">
       Welcome to AngbandOS.  You must login to play.

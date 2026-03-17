@@ -7,8 +7,22 @@
 }
 
 .header-title {
-  font-size: 1.25rem;
+  font-size: 1.25rem; // All header titles have the same font-size.
+  flex-grow: 1;
 }
+
+#header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: end;
+
+  & button {
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+}
+
 
 .mat-column-actions {
   justify-content: right; // The icons should be right aligned.
@@ -34,11 +48,6 @@ mat-table {
     white-space: nowrap; // Do not allow the time to be wrapped.
   }
 
-}
-
-button {
-  margin-top: 25px; // The Play New Game button needs some margin at the top.
-  width: 200px; // Make the button fairly wide.
 }
 
 mat-icon {
