@@ -419,7 +419,7 @@ namespace AngbandOS.Web.Hubs
         /// </summary>
         public void Refresh()
         {
-            _gameServer.RefreshSpectatorConsole(this);
+            _gameServer.RefreshViewPort(this);
         }
         #endregion
 
@@ -433,7 +433,7 @@ namespace AngbandOS.Web.Hubs
             _spectators.Add(spectatorHub);
 
             // Send a request to the game to refresh the screen.
-            _gameServer.RefreshSpectatorConsole(new SpectatingConsole(spectatorHub));
+            _gameServer.RefreshViewPort(new SpectatingConsole(spectatorHub));
         }
 
         /// <summary>

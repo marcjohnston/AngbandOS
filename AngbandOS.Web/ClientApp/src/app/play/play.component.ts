@@ -17,9 +17,6 @@ import { Preferences } from './preferences';
 import { GameConfiguration } from "./game-configuration";
 import { PutUserPreferences } from './put-user-preferences';
 import { NgIf } from '@angular/common';
-import { FooterComponent } from '../footer/footer.component';
-import { ChatComponent } from '../chat/chat.component';
-import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 import { ConsoleConfiguration } from '../modules/html-console/console-configuration';
 import { MasterLayoutComponent } from '../master-layout/master-layout.component';
 
@@ -30,9 +27,6 @@ import { MasterLayoutComponent } from '../master-layout/master-layout.component'
   standalone: true,
   imports: [
     NgIf,
-    FooterComponent,
-    ChatComponent,
-    NavMenuComponent,
     MasterLayoutComponent
   ]
 })

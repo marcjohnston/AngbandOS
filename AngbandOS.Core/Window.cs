@@ -301,7 +301,7 @@ internal class Window
     /// <summary>
     /// Refresh a spectator window.  The contents of the current screen are batch printed to the spectator console.
     /// </summary>
-    public void RefreshSpectatorConsole(IViewPort spectatorConsole)
+    public void RefreshViewPort(IViewPort spectatorConsole)
     {
         List<PrintLine> batchPrintLines = new List<PrintLine>();
         spectatorConsole.Clear();
