@@ -7,10 +7,10 @@ namespace AngbandOS.Web.Hubs
     public class AdministatorChatRecipient : ChatRecipient
     {
         private readonly string UserId;
-        private readonly IChatMessages ChatHub;
+        private readonly IChatHubMessages ChatHub;
         public bool IncludeDeletedMessages { get; set; } = false;
 
-        public AdministatorChatRecipient(IChatMessages chatHub, string userId, string username) : base(username)
+        public AdministatorChatRecipient(IChatHubMessages chatHub, string userId, string username) : base(username)
         {
             ChatHub = chatHub;
             UserId = userId;

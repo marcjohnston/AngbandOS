@@ -8,7 +8,7 @@ namespace AngbandOS.Web.Hubs
     /// Represents the signal-r hub singleton service to process incoming and outgoing signal-r messages for the messages window.
     /// This hub is identical to the game-hub, except it allows anonymous requests.
     /// </summary>
-    public class GameMessagesHub : Hub<IGameMessagesHub>
+    public class GameMessagesHub : Hub<IGameMessagesHubMessages>
     {
         private readonly GameService GameService;
 
@@ -27,7 +27,7 @@ namespace AngbandOS.Web.Hubs
         {
             // Forward the request to the game service.
             PageOfGameMessages? pageOfGameMessages = GameService.GetGameMessages(gameConnectionId, firstIndex, lastIndex, maximumMessagesToRetrieve);
-            IGameMessagesHub hub = Clients.Client(Context.ConnectionId);
+            IGameMessagesHubMessages hub = Clients.Client(Context.ConnectionId);
             hub.GameMessagesReceived(pageOfGameMessages);
         }
 
@@ -40,7 +40,7 @@ namespace AngbandOS.Web.Hubs
         public void MonitorGameMessages(string gameConnectionId, int? maximumMessagesToRetrieve = null)
         {
             // Forward the request to the game service.
-            IGameMessagesHub monitorHub = Clients.Client(Context.ConnectionId);
+            IGameMessagesHubMessages monitorHub = Clients.Client(Context.ConnectionId);
             GameService.MonitorGameMessages(monitorHub, gameConnectionId, maximumMessagesToRetrieve);
         }
 

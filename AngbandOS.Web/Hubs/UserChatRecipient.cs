@@ -8,9 +8,9 @@ namespace AngbandOS.Web.Hubs
     public class UserChatRecipient : ChatRecipient
     {
         private readonly string UserId;
-        private readonly IChatMessages ChatHub;
+        private readonly IChatHubMessages ChatHub;
 
-        public UserChatRecipient(IChatMessages chatHub, string userId, string username) : base(username)
+        public UserChatRecipient(IChatHubMessages chatHub, string userId, string username) : base(username)
         {
             UserId = userId;
             ChatHub = chatHub;

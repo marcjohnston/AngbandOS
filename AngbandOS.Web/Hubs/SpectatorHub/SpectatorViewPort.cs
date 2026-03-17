@@ -1,15 +1,15 @@
 ﻿using AngbandOS.Core.Interface;
 namespace AngbandOS.Web.Hubs;
 
-public class SpectatingConsole : IViewPort
+public class SpectatorViewPort : IViewPort
 {
-    private readonly ISpectatingMessages _gameHub;
+    private readonly ISpectatorHubMessages _gameHub;
 
     public int Height => 45;
 
     public int Width => 80;
 
-    public SpectatingConsole(ISpectatingMessages gameHub)
+    public SpectatorViewPort(ISpectatorHubMessages gameHub)
     {
         _gameHub = gameHub;
     }

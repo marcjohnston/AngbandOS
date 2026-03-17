@@ -12,18 +12,18 @@ namespace AngbandOS.Web.Hubs
     /// user is authenticated (so we know who they are).
     /// </summary>
     [Authorize]
-    public class ChatHub : Hub<IChatMessages>
+    public class ChatHub : Hub<IChatHubMessages>
     {
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly IWebPersistentStorage WebPersistentStorage;
-        private readonly IHubContext<ServiceHub, IServiceMessages> ServiceHub;
+        private readonly IHubContext<ServiceHub, IServiceHubMessages> ServiceHub;
         private readonly IConfiguration Configuration;
         private readonly GameService GameService;
 
         public ChatHub(
             IConfiguration configuration,
             UserManager<ApplicationUser> userManager,
-            IHubContext<ServiceHub, IServiceMessages> serviceHub,
+            IHubContext<ServiceHub, IServiceHubMessages> serviceHub,
             IWebPersistentStorage webPersistentStorage,
             GameService gameService
         )
@@ -77,7 +77,7 @@ namespace AngbandOS.Web.Hubs
             ChatMessage[] chatMessages = await GameService.GetChatMessagesAsync(Context.ConnectionId, endingId);
 
             // Get the hub for the currently connected client.
-            IChatMessages chatHub = Clients.Client(Context.ConnectionId);
+            IChatHubMessages chatHub = Clients.Client(Context.ConnectionId);
 
             // Send the response.
             await chatHub.ChatRefreshed(chatMessages.ToArray());
@@ -86,7 +86,7 @@ namespace AngbandOS.Web.Hubs
 
         public async override Task OnConnectedAsync()
         {
-            IChatMessages chatHub = Clients.Client(Context.ConnectionId);
+            IChatHubMessages chatHub = Clients.Client(Context.ConnectionId);
             string? emailAddress = Context.User.FindFirst(ClaimTypes.Email)?.Value;
             ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
             string customRoleClaimType = Configuration["CustomRoleClaimType"];

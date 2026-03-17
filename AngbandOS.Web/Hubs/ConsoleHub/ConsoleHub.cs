@@ -13,7 +13,7 @@ namespace AngbandOS.Web.Hubs
     /// <summary>
     /// Represents the signal-r hub to process the in-game messages.  This hub interfaces with the GameService to fulfill requests.
     /// </summary>
-    public class ConsoleHub : Hub<IConsoleMessages>
+    public class ConsoleHub : Hub<IConsoleHubMessages>
     {
         private readonly GameService GameService;
         private readonly UserManager<ApplicationUser> UserManager;

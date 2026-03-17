@@ -41,10 +41,10 @@ namespace AngbandOS.Web.Services
         private readonly HubConnectionsMonitor serviceHubConnections = new HubConnectionsMonitor();
         private readonly HubConnectionsMonitor adminHubConnections = new HubConnectionsMonitor();
 
-        private readonly IHubContext<ConsoleHub, IConsoleMessages> GameHub;
-        private readonly IHubContext<AdminHub, IAdminMessages> AdminHub;
-        private readonly IHubContext<ServiceHub, IServiceMessages> ServiceHub;
-        private readonly IHubContext<SpectatingHub, ISpectatingMessages> SpectatorsHub;
+        private readonly IHubContext<ConsoleHub, IConsoleHubMessages> GameHub;
+        private readonly IHubContext<AdminHub, IAdminHubMessages> AdminHub;
+        private readonly IHubContext<ServiceHub, IServiceHubMessages> ServiceHub;
+        private readonly IHubContext<SpectatorHub, ISpectatorHubMessages> SpectatorsHub;
         private readonly IConfiguration Configuration;
         private readonly string ConnectionString;
         private readonly IServiceScopeFactory ServiceScopeFactory;
@@ -52,10 +52,10 @@ namespace AngbandOS.Web.Services
 
         #region Constructor
         public GameService(
-            IHubContext<ConsoleHub, IConsoleMessages> gameHub,
-            IHubContext<ServiceHub, IServiceMessages> serviceHub,
-            IHubContext<AdminHub, IAdminMessages> adminHub,
-            IHubContext<SpectatingHub, ISpectatingMessages> spectatorsHub,
+            IHubContext<ConsoleHub, IConsoleHubMessages> gameHub,
+            IHubContext<ServiceHub, IServiceHubMessages> serviceHub,
+            IHubContext<AdminHub, IAdminHubMessages> adminHub,
+            IHubContext<SpectatorHub, ISpectatorHubMessages> spectatorsHub,
             IConfiguration configuration,
             IServiceScopeFactory serviceScopeFactory
         )
@@ -152,7 +152,7 @@ namespace AngbandOS.Web.Services
             string connectionId = context.ConnectionId;
 
             // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
-            IConsoleMessages gameHub = GameHub.Clients.Client(connectionId);
+            IConsoleHubMessages gameHub = GameHub.Clients.Client(connectionId);
 
             // Construct an update monitor that is used when the game notifies us that interesting events that happen in the game.
             Action<GameConsole, GameUpdateNotificationEnum, string> gameUpdateMonitor = async (GameConsole signalRConsole, GameUpdateNotificationEnum gameUpdateNotification, string message) =>
@@ -458,7 +458,7 @@ namespace AngbandOS.Web.Services
             if (SignalRConsoles.TryGetValue(gameToSpectateSignalRConnectionId, out GameConsole? signalRConsole))
             {
                 // Retrieve the spectator hub client for the connection.  This signal-r interface is how the game will communicate to the client.
-                ISpectatingMessages spectatorHub = SpectatorsHub.Clients.Client(spectatorConnectionId);
+                ISpectatorHubMessages spectatorHub = SpectatorsHub.Clients.Client(spectatorConnectionId);
 
                 // Tell the host game that there is a new spectator.
                 signalRConsole.AddSpectator(spectatorHub);
@@ -506,7 +506,7 @@ namespace AngbandOS.Web.Services
             return null;
         }
 
-        public void MonitorGameMessages(IGameMessagesHub monitorHub, string gameSignalRConnectionId, int? maximumMessagesToRetrieve = null)
+        public void MonitorGameMessages(IGameMessagesHubMessages monitorHub, string gameSignalRConnectionId, int? maximumMessagesToRetrieve = null)
         {
             // Get the signal-r console object that is hosting the game that needs to be monitored.
             if (SignalRConsoles.TryGetValue(gameSignalRConnectionId, out GameConsole? signalRConsole))

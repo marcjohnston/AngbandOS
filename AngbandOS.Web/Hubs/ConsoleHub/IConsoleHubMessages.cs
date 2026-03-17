@@ -5,7 +5,7 @@ namespace AngbandOS.Web.Hubs;
 /// Represents an interface that defines the outgoing signal-r methods that the game can send.  This interface is
 /// just used for playing games--not spectating games.
 /// </summary>
-public interface IConsoleMessages
+public interface IConsoleHubMessages
 {
     /// <summary>
     /// Sends a generic message to the client.

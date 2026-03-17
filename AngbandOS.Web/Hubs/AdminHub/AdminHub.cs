@@ -15,18 +15,18 @@ namespace AngbandOS.Web.Hubs
     /// - SendMessage
     /// </summary>
     [Authorize]
-    public class AdminHub : Hub<IAdminMessages>
+    public class AdminHub : Hub<IAdminHubMessages>
     {
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly IWebPersistentStorage WebPersistentStorage;
-        private readonly IHubContext<ServiceHub, IServiceMessages> ServiceHub;
+        private readonly IHubContext<ServiceHub, IServiceHubMessages> ServiceHub;
         private readonly IConfiguration Configuration;
         private readonly GameService GameService;
 
         public AdminHub(
             IConfiguration configuration,
             UserManager<ApplicationUser> userManager,
-            IHubContext<ServiceHub, IServiceMessages> serviceHub,
+            IHubContext<ServiceHub, IServiceHubMessages> serviceHub,
             IWebPersistentStorage webPersistentStorage,
             GameService gameService
         )
@@ -40,7 +40,7 @@ namespace AngbandOS.Web.Hubs
 
         public void UpdateHubConnections()
         {
-            IAdminMessages adminHub = Clients.Client(Context.ConnectionId);
+            IAdminHubMessages adminHub = Clients.Client(Context.ConnectionId);
             HubConnections hubConnections = GameService.GetConnections();
             adminHub.HubConnectionsUpdated(hubConnections);
         }
