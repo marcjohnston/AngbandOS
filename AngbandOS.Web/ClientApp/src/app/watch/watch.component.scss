@@ -1,32 +1,18 @@
-#container {
+#canvas-container {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 
-  & #canvas-container {
+  & canvas {
+    background-color: black;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-
-    & canvas {
-      background-color: black;
-      width: 100%;
-      height: 100%;
-      object-fit: none;
-      object-position: left top;
-      max-width: 1440px;
-      min-width: 1440px;
-      max-height: 810px;
-      min-height: 810px;
-    }
-  }
-
-  & #footer {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    font-size: 8pt;
+    object-fit: none;
+    object-position: left top;
+    max-width: 1440px;
+    min-width: 1440px;
+    max-height: 810px;
+    min-height: 810px;
   }
 }
