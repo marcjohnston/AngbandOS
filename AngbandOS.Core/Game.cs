@@ -8617,7 +8617,7 @@ internal partial class Game
     public TimeSpan? MaxKeystrokeReplayElapsedTime = new TimeSpan(0, 0, 0, 0, 0);
 
     /// <summary>
-    /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort" and updates the <see cref="LastInputReceived"/> property./>
+    /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort"/> and updates the <see cref="LastInputReceived"/> property./>
     /// </summary>
     /// <param name="k"> The keypress to add </param>
     private void WaitAndEnqueueKey()
@@ -8630,7 +8630,7 @@ internal partial class Game
             // Retrieve the replay step that needs to be replayed.  This is a non-destructive (non-dequeue) peek.  We only increment the replay index pointer.
             GameReplayStep gameReplayStep = ReplayQueue[ReplayQueueIndex];
 
-            // Compute how much elapsed time occured since the last keystroke.
+            // Compute how much elapsed time occurred since the last keystroke.
             TimeSpan keystrokeElapsedTime = ReplayQueueIndex == 0 ? TimeSpan.Zero : ReplayQueue[ReplayQueueIndex].DateTime - ReplayQueue[ReplayQueueIndex - 1].DateTime;
             ReplayQueueIndex++;
 
