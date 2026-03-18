@@ -31,10 +31,10 @@
           <mat-header-cell mat-header-cell *matHeaderCellDef>
             Idle
           </mat-header-cell>
-          <mat-cell mat-cell class="time-span" *matCellDef="let activeGame">{{activeGame.idleTimeSpan}}</mat-cell>
+          <mat-cell mat-cell class="time-span" *matCellDef="let activeGame" title="{{activeGame.lastInputReceived}}">{{activeGame.idleTimeSpan}}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="game-time">
-          <mat-header-cell mat-header-cell *matHeaderCellDef>
+          <mat-header-cell mat-header-cell *matHeaderCellDef title="The amount of time that has elapsed for the character in game time.  This is not real-world time.">
             Game Time
           </mat-header-cell>
           <mat-cell mat-cell class="time-span" *matCellDef="let activeGame">{{timeSpanAsString(activeGame.elapsedGameTime)}}</mat-cell>

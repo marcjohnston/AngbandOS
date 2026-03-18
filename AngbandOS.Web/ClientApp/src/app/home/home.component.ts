@@ -16,7 +16,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MasterLayoutComponent } from '../master-layout/master-layout.component';
 
-const idleTimeIntervalInMilliseconds = 5000;
+const idleTimeSpanUpdateIntervalInMilliseconds = 5000;
 
 @Component({
   selector: 'app-home',
@@ -167,20 +167,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     return this.join([ yearsTimeSpan, monthsTimeSpan, daysTimeSpan, hoursTimeSpan, minutesTimeSpan, secondsTimeSpan ]);
   }
 
-  private updateIdleTimes() {
+  private updateIdleTimeSpans() {
     if (this.activeGames !== undefined) {
+      const millisecondsPerMinute = 1000 * 60;
+      const millisecondsPerHour = millisecondsPerMinute * 60;
       for (let i = 0; i < this.activeGames.length; i++) {
         const activeGame = this.activeGames[i];
         if (activeGame.lastInputReceived !== undefined && activeGame.lastInputReceived !== null) {
           const lastInputReceived: number = Date.parse(activeGame.lastInputReceived);
           const idleTimeInMilliseconds: number = Date.now() - lastInputReceived;
-          const hoursIdle = Math.trunc(idleTimeInMilliseconds / (1000 * 60 * 60));
-          const minutesIdle = Math.trunc(idleTimeInMilliseconds / (1000 * 60));
-          const secondsIdle = Math.trunc(idleTimeInMilliseconds / 1000);
+          const hoursIdle = Math.floor(idleTimeInMilliseconds / millisecondsPerHour);
+          const minutesAndSecondsOfIdleTimeRemainingInMilliseconds = idleTimeInMilliseconds % millisecondsPerHour;
+          const minutesIdle = Math.floor(minutesAndSecondsOfIdleTimeRemainingInMilliseconds / millisecondsPerMinute);
+          const secondsOfIdleTimeRemainingInMilliseconds = minutesAndSecondsOfIdleTimeRemainingInMilliseconds % millisecondsPerMinute;
+          const secondsIdle = Math.floor(secondsOfIdleTimeRemainingInMilliseconds / 1000);
           activeGame.idleTimeSpan = this.timeSpanAsString(`${hoursIdle}:${minutesIdle}:${secondsIdle}`);
         }
       }
-      setTimeout(() => this.updateIdleTimes(), idleTimeIntervalInMilliseconds);
+      this._changeDetectorRef.detectChanges();
+
+      // Restart another timer for the next update.
+      setTimeout(() => this.updateIdleTimeSpans(), idleTimeSpanUpdateIntervalInMilliseconds);
     }
   }
 
@@ -190,9 +197,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       if (this._serviceConnection !== undefined) {
         this._serviceConnection.on("ActiveGamesUpdated", (_activeGames: ActiveGameDetails[]) => {
           this.activeGames = _activeGames;
-          if (this.activeGames.length > 0) {
-            setTimeout(() => this.updateIdleTimes(), idleTimeIntervalInMilliseconds);
-          }
           this._changeDetectorRef.detectChanges();
         });
         this._serviceConnection.send("RefreshActiveGames");
@@ -200,6 +204,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     }, (reason: any) => {
       console.log(`Service hub rejected connection.  ${reason}`);
     });
+
+    // Start a single timer that updates the idle timeouts.
+    setTimeout(() => this.updateIdleTimeSpans(), idleTimeSpanUpdateIntervalInMilliseconds);
 
     // Subscribe to the authenticated user.
     const currentUserSubscription = this._authenticationService.currentUser.subscribe((_userDetails: UserDetails | null) => {
