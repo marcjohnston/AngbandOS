@@ -76,7 +76,7 @@ public class GameServer
     }
 
     /// <summary>
-    /// 
+    /// Returns the amount of time that has elapsed for the character in game time.  This is not real-world playing time.
     /// </summary>
     public TimeSpan? ElapsedGameTime
     {
