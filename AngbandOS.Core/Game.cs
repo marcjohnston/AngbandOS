@@ -2258,7 +2258,6 @@ internal partial class Game
     /// </summary>
     /// <param name="consoleViewPort"></param>
     /// <param name="persistentStorage"></param>
-    /// <param name="updateMonitor"></param>
     /// <remarks>
     /// For game replay mode and the ability to restore a saved game, we need to reinitialize the random generator because the Random object is not serializable.
     /// </remarks>
@@ -8939,9 +8938,9 @@ internal partial class Game
 
     public void Tick()
     {
-        var oldDay = CurrentGameDateTime.DateAndTimeValue.DayOfYear;
-        _currentTurn++;
         var oldDateTime = CurrentGameDateTime.DateAndTimeValue;
+        var oldDay = oldDateTime.DayOfYear;
+        _currentTurn++;
         CurrentGameDateTime.DateAndTimeValue += _tick;
         var newDay = CurrentGameDateTime.DateAndTimeValue.DayOfYear;
         IsBirthday = false;
@@ -8987,7 +8986,10 @@ internal partial class Game
         }
 
         // Send an update to the calling application, that the game time has changed.
-        ConsoleViewPort.GameTimeElapsed();
+        if (CurrentGameDateTime.DateAndTimeValue > oldDateTime + new TimeSpan(0, 0, 5))
+        {
+            ConsoleViewPort.GameTimeElapsed();
+        }
     }
 
     public void ToNextDawn()

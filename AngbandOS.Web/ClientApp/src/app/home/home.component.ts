@@ -16,7 +16,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MasterLayoutComponent } from '../master-layout/master-layout.component';
 
-const idleTimeSpanUpdateIntervalInMilliseconds = 5000;
+const idleTimeSpanUpdateIntervalInMilliseconds = 1000;
 
 @Component({
   selector: 'app-home',
