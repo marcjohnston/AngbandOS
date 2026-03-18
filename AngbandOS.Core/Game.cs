@@ -8627,7 +8627,7 @@ internal partial class Game
         // Check to see if we are in playback mode.
         if (ReplayQueueIndex < ReplayQueue.Count)
         {
-            // Retrieve the replay step that needs to be replayed.  This is a non-destructive (non-dequeue) peek.  We only increment the replay index pointer.
+            // Yes, we are in replay mode.  Retrieve the replay step that needs to be replayed.  This is a non-destructive (non-dequeue) peek.  We only increment the replay index pointer.
             GameReplayStep gameReplayStep = ReplayQueue[ReplayQueueIndex];
 
             // Compute how much elapsed time occurred since the last keystroke.
@@ -8669,7 +8669,7 @@ internal partial class Game
         }
         else
         {
-            // Detect if we just entered the popup menu.
+            // No we are in interactive mode.  Detect if we just entered the popup menu.
             bool enteredPopupMenu = InPopupMenu && !PreviousInPopupMenu;
             bool exitedPopupMenu = !InPopupMenu && PreviousInPopupMenu;
             bool popupMenuCommand = InPopupMenu && PreviousInPopupMenu;
