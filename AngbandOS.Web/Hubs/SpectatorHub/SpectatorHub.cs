@@ -1,4 +1,5 @@
-﻿using AngbandOS.Web.Services;
+﻿using AngbandOS.Core.Interface;
+using AngbandOS.Web.Services;
 using Microsoft.AspNetCore.SignalR;
 
 namespace AngbandOS.Web.Hubs
@@ -11,6 +12,20 @@ namespace AngbandOS.Web.Hubs
     {
         private readonly GameService GameService;
 
+        /// <summary>
+        /// The associated viewport for the spectator or null, before the watch command is sent or if the game no longer exists.  The <see cref="Watch(string)"/> method sets this value.
+        /// </summary>
+        private IViewPort? ViewPort {
+            get
+            {
+                return Context.Items["ViewPort"] as IViewPort;  
+            }
+            set
+            {
+                Context.Items["ViewPort"] = value;
+            }
+        }
+
         public SpectatorHub(
             GameService gameService
         )
@@ -18,6 +33,7 @@ namespace AngbandOS.Web.Hubs
             GameService = gameService;
         }
 
+        #region Incoming messages from the web client
         /// <summary>
         /// Process the incoming web client request to watch a game.
         /// </summary>
@@ -26,9 +42,24 @@ namespace AngbandOS.Web.Hubs
         public void Watch(string watchingConnectionId)
         {
             // Forward the request to the game service.
-            GameService.Spectate(Context.ConnectionId, watchingConnectionId);
+            ViewPort = GameService.Spectate(Context.ConnectionId, watchingConnectionId);
         }
 
+        /// <summary>
+        /// Process a refresh request from the web client.  The client sends this message when the window resizes.
+        /// </summary>
+        public void Refresh()
+        {
+            // Ensure there is a viewport.
+            if (ViewPort is not null)
+            {
+                // We need to send the command to the game service, because it has the connections to the game core.
+                GameService.RefreshViewPort(Context.ConnectionId, ViewPort);
+            }
+        }
+        #endregion
+
+        #region Connections and disconnections
         /// <summary>
         /// Called when a new spectating window connects to the hub.  This hub doesn't know which game to watch yet, until the spectating window sends the watch message.
         /// </summary>
@@ -54,5 +85,6 @@ namespace AngbandOS.Web.Hubs
             GameService.SpectatingHubDisconnected(Context.ConnectionId);
             return base.OnDisconnectedAsync(exception);
         }
+        #endregion
     }
 }

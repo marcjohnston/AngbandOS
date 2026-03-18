@@ -45,6 +45,7 @@ namespace AngbandOS.Web.Hubs
             adminHub.HubConnectionsUpdated(hubConnections);
         }
 
+        #region Connections and Disconnections
         public async override Task OnConnectedAsync()
         {
             // We are not doing anything at this time with the connections.  We should render a list of who is playing though.
@@ -59,5 +60,6 @@ namespace AngbandOS.Web.Hubs
             GameService.AdminHubDisconnected(Context.ConnectionId);
             await base.OnDisconnectedAsync(exception);
         }
+        #endregion
     }
 }

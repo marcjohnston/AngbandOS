@@ -28,6 +28,7 @@ namespace AngbandOS.Web.Hubs
             Configuration = configuration;
         }
 
+        #region Incoming messages from the web client
         public void RefreshActiveGames()
         {
             // Immediately send a seeding list of active games to the client.
@@ -61,7 +62,9 @@ namespace AngbandOS.Web.Hubs
                 await serviceHub.ChatRefreshed(new ChatMessage[] { new ChatMessage { Id = 0, FromUsername = "Chat System", SentDateTime = DateTime.Now, Message = "Error loading chat." } });
             }
         }
+        #endregion
 
+        #region Connections and Disconnections
         /// <summary>
         /// Triggered by signal-r when a user connects to the service hub on the home screen.  This message is fowarded to the GameService.
         /// </summary>
@@ -91,5 +94,6 @@ namespace AngbandOS.Web.Hubs
             GameService.ChatDisconnected(Context.ConnectionId);
             return base.OnDisconnectedAsync(exception);
         }
+        #endregion
     }
 }

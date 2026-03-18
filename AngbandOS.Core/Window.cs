@@ -56,9 +56,9 @@ internal class Window
     public GridCoordinate CursorPosition => new GridCoordinate(ActiveScreen.Cx, ActiveScreen.Cy);
 
     [NonSerialized]
-    private IConsole _consoleViewPort;
+    private IConsoleAndViewPort _consoleViewPort;
 
-    public Window(IConsole consoleViewPort)
+    public Window(IConsoleAndViewPort consoleViewPort)
     {
         _consoleViewPort = consoleViewPort;    
         Width = _consoleViewPort.Width;

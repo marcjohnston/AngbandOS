@@ -419,7 +419,7 @@ internal partial class Game
     /// Returns the object that the calling application provided to be used to connect the game input and output to the calling application.
     /// </summary>
     [NonSerialized]
-    public IConsole ConsoleViewPort;
+    public IConsoleAndViewPort ConsoleViewPort;
 
     public int CommandArgument;
     public int CommandDirection;
@@ -2262,7 +2262,7 @@ internal partial class Game
     /// <remarks>
     /// For game replay mode and the ability to restore a saved game, we need to reinitialize the random generator because the Random object is not serializable.
     /// </remarks>
-    public void Play(IConsole consoleViewPort, ICorePersistentStorage? persistentStorage)
+    public void Play(IConsoleAndViewPort consoleViewPort, ICorePersistentStorage? persistentStorage)
     {
         void Kingly()
         {

@@ -11,7 +11,7 @@ namespace AngbandOS.Web.Hubs
     /// Represents an object that accept messages from an active game (AngbandOS.Core) and send the message to the client browser via a SignalR hub.  This class operates 
     /// as a background worker to process incoming messages and send outgoing messages without blocking the main thread.
     /// </summary>
-    public class GameConsole : BackgroundWorker, IConsole
+    public class ConsoleAndViewPort : BackgroundWorker, IConsoleAndViewPort
     {
         #region State Date
         /// <summary>
@@ -57,7 +57,7 @@ namespace AngbandOS.Web.Hubs
         /// <summary>
         /// Returns object that handles the notification channel.
         /// </summary>
-        private readonly Action<GameConsole, GameUpdateNotificationEnum, string> NotificationAction;
+        private readonly Action<ConsoleAndViewPort, GameUpdateNotificationEnum, string> NotificationAction;
 
         /// <summary>
         /// Returns the context for the GameHub.  This is used to abort the signal-r connection and terminate the game instantly.
@@ -77,7 +77,7 @@ namespace AngbandOS.Web.Hubs
 
         #region Constructor
         /// <summary>
-        /// Constructs a new <see cref="GameConsole"/> object to play a new game.
+        /// Constructs a new <see cref="ConsoleAndViewPort"/> object to play a new game.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="gameHub"></param>
@@ -85,7 +85,7 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId">The user ID of the player.  This property is used to GET ActiveGames controller to return the user ID of the player.</param>
         /// <param name="username">The username for the player.  This property is used by the GET ActiveGames controller to return the name of the player./></param>
         /// <param name="notificationAction"></param>
-        public GameConsole(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration, string userId, string username, Action<GameConsole, GameUpdateNotificationEnum, string> notificationAction)
+        public ConsoleAndViewPort(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration, string userId, string username, Action<ConsoleAndViewPort, GameUpdateNotificationEnum, string> notificationAction)
         {
             _consoleGameHub = gameHub;
             PersistentStorage = persistentStorage;
@@ -97,7 +97,7 @@ namespace AngbandOS.Web.Hubs
         }
 
         /// <summary>
-        /// Constructs a new <see cref="GameConsole"/> object to play an existing game.
+        /// Constructs a new <see cref="ConsoleAndViewPort"/> object to play an existing game.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="gameHub"></param>
@@ -105,7 +105,7 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId"></param>
         /// <param name="username"></param>
         /// <param name="notificationAction"></param>
-        public GameConsole(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<GameConsole, GameUpdateNotificationEnum, string> notificationAction)
+        public ConsoleAndViewPort(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<ConsoleAndViewPort, GameUpdateNotificationEnum, string> notificationAction)
         {
             _consoleGameHub = gameHub;
             PersistentStorage = persistentStorage;
@@ -369,23 +369,19 @@ namespace AngbandOS.Web.Hubs
 
             // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
             // IConsole to receive and process print and wait for key requests.
+            GameResults results;
             if (GameConfiguration == null)
             {
-                GameResults results = _gameServer.PlayExistingGame(this, PersistentStorage);
-                if (results.GameIsOver)
-                {
-                    // The game is over.  Let the client know.
-                    GameOver();
-                }
+                results = _gameServer.PlayExistingGame(this, PersistentStorage);
             }
             else
             {
-                GameResults results = _gameServer.PlayNewGame(this, PersistentStorage, GameConfiguration, null);
-                if (results.GameIsOver)
-                {
-                    // The game is over.  Let the client know.
-                    GameOver();
-                }
+                results = _gameServer.PlayNewGame(this, PersistentStorage, GameConfiguration, null);
+            }
+            if (results.GameIsOver)
+            {
+                // The game is over.  Let the client know.
+                GameOver();
             }
 
             // We need to send the game-over message to all clients monitoring the game.
@@ -421,19 +417,32 @@ namespace AngbandOS.Web.Hubs
         {
             _gameServer.RefreshViewPort(this);
         }
+
+        /// <summary>
+        /// Sends a refresh update of the game to the specified viewport--which can be the game console or a spectator.
+        /// </summary>
+        /// <param name="viewPort"></param>
+        public void RefreshViewPort(IViewPort viewPort)
+        {
+            _gameServer.RefreshViewPort(viewPort);
+        }
         #endregion
 
         #region Spectating
         /// <summary>
-        /// Adds a spectating window to the list of windows spectating the game.
+        /// Returns a spectator viewport after adding a new spectator to the game.
         /// </summary>
         /// <param name="spectatorHub">The watcher hub.</param>
-        public void AddSpectator(ISpectatorHubMessages spectatorHub)
+        public IViewPort AddSpectator(ISpectatorHubMessages spectatorHub)
         {
             _spectators.Add(spectatorHub);
 
-            // Send a request to the game to refresh the screen.
-            _gameServer.RefreshViewPort(new SpectatorViewPort(spectatorHub));
+            IViewPort viewPort = new SpectatorViewPort(spectatorHub);
+
+            // Send a request to the game to refresh the screen.           
+            _gameServer.RefreshViewPort(viewPort);
+
+            return viewPort;
         }
 
         /// <summary>

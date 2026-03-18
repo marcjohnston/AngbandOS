@@ -1,4 +1,5 @@
-﻿using AngbandOS.Core.Interface.Configuration;
+﻿using AngbandOS.Core.Interface;
+using AngbandOS.Core.Interface.Configuration;
 using AngbandOS.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Connections;
@@ -18,6 +19,21 @@ namespace AngbandOS.Web.Hubs
         private readonly GameService GameService;
         private readonly UserManager<ApplicationUser> UserManager;
 
+        /// <summary>
+        /// The associated viewport for the game or null, before the play command is sent or if the game no longer exists.  The play game methods sets this value.
+        /// </summary>
+        private IViewPort? ViewPort
+        {
+            get
+            {
+                return Context.Items["ViewPort"] as IViewPort;
+            }
+            set
+            {
+                Context.Items["ViewPort"] = value;
+            }
+        }
+
         public ConsoleHub(
             GameService gameService,
             UserManager<ApplicationUser> userManager
@@ -27,6 +43,7 @@ namespace AngbandOS.Web.Hubs
             UserManager = userManager;
         }
 
+        #region Incoming Messages from the Web Client
         /// <summary>
         /// Process the incoming web client request to play an existing game.
         /// </summary>
@@ -40,7 +57,7 @@ namespace AngbandOS.Web.Hubs
 
             if (user.Id != null)
             {
-                await GameService.PlayNewGameAsync(Context, user.Id, new Core.Interface.Configuration.GameConfiguration(), user.UserName);
+                ViewPort = await GameService.PlayNewGameAsync(Context, user.Id, new Core.Interface.Configuration.GameConfiguration(), user.UserName);
             }
         }
 
@@ -62,7 +79,7 @@ namespace AngbandOS.Web.Hubs
 
             if (user.Id != null)
             {
-                await GameService.PlayExistingGameAsync(Context, user.Id, guid, user.UserName);
+                ViewPort = await GameService.PlayExistingGameAsync(Context, user.Id, guid, user.UserName);
             }
         }
 
@@ -77,13 +94,19 @@ namespace AngbandOS.Web.Hubs
         }
 
         /// <summary>
-        /// Process a refresh request from the web client.  The client will need this on window resize.
+        /// Process an income refresh request from the web client.  The client will need this on window resize.
         /// </summary>
         public void Refresh()
         {
-            GameService.Refresh(Context.ConnectionId);
+            // Do not send refresh, if the viewport isn't ready.
+            if (ViewPort is not null)
+            {
+                GameService.RefreshViewPort(Context.ConnectionId, ViewPort);
+            }
         }
+        #endregion
 
+        #region Connection and Disconnection Methods
         public async override Task OnConnectedAsync()
         {
             // We are not doing anything at this time with the connections.  We should render a list of who is playing though.
@@ -97,5 +120,6 @@ namespace AngbandOS.Web.Hubs
         {
             await GameService.GameHubDisconnectedAsync(Context.ConnectionId);
         }
+        #endregion
     }
 }

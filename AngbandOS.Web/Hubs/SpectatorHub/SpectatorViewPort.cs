@@ -1,6 +1,9 @@
 ﻿using AngbandOS.Core.Interface;
 namespace AngbandOS.Web.Hubs;
 
+/// <summary>
+/// Represents a viewport for a spectator.  This viewport uses a spectator hub to send associated messages to the web client.
+/// </summary>
 public class SpectatorViewPort : IViewPort
 {
     private readonly ISpectatorHubMessages _gameHub;

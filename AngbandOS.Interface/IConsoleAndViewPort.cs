@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the interface that needs to be implemented to play a game.  It requires a viewport interface.
 /// </summary>
-public interface IConsole : IViewPort
+public interface IConsoleAndViewPort : IViewPort
 {
     /// <summary>
     /// Returns the maximum length of the queue used to store keystrokes.  The implementing object must return a value >= 1.  256 is recommended.
