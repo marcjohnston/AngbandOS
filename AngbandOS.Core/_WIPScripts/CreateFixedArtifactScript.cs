@@ -28,6 +28,7 @@ internal class CreateFixedArtifactScript : Script, IScript, ICastSpellScript
     public void ExecuteScript()
     {
         int aIdx = Game.CommandArgument;
+        Game.CommandArgument = 0;
         if (aIdx < 0 || aIdx >= Game.SingletonRepository.Count<FixedArtifact>())
         {
             return;

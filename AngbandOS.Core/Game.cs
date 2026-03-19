@@ -1016,6 +1016,25 @@ internal partial class Game
         }
         return false;
     }
+    public bool GetInt(string prompt, int defaultValue, out int? value)
+    {
+        return GetInt(prompt, defaultValue, 9, out value);
+    }
+
+    public bool GetInt(string prompt, int defaultValue, int maxLength, out int? value)
+    {
+        value = null;
+        if (!GetString(prompt, out string tmpVal, $"{defaultValue}", maxLength))
+        {
+            return false;
+        }
+        if (!int.TryParse(tmpVal, out int tmpInt))
+        {
+            return false;
+        }
+        value = tmpInt;
+        return true;
+    }
 
     public void StorePrtGold()
     {
@@ -2847,7 +2866,7 @@ internal partial class Game
             int k;
             switch (which)
             {
-                case '\x1b':
+                case '\x1b': // Escape
                     {
                         done = true;
                         item = true;
@@ -8617,139 +8636,140 @@ internal partial class Game
     public TimeSpan? MaxKeystrokeReplayElapsedTime = new TimeSpan(0, 0, 0, 0, 0);
 
     /// <summary>
-    /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort"/> and updates the <see cref="LastInputReceived"/> property./>
-    /// </summary>
-    /// <param name="k"> The keypress to add </param>
-    private void WaitAndEnqueueKey()
-    {
-        char k;
-
-        // Check to see if we are in playback mode.
-        if (ReplayQueueIndex < ReplayQueue.Count)
-        {
-            // Yes, we are in replay mode.  Retrieve the replay step that needs to be replayed.  This is a non-destructive (non-dequeue) peek.  We only increment the replay index pointer.
-            GameReplayStep gameReplayStep = ReplayQueue[ReplayQueueIndex];
-
-            // Compute how much elapsed time occurred since the last keystroke.
-            TimeSpan keystrokeElapsedTime = ReplayQueueIndex == 0 ? TimeSpan.Zero : ReplayQueue[ReplayQueueIndex].DateTime - ReplayQueue[ReplayQueueIndex - 1].DateTime;
-            ReplayQueueIndex++;
-
-            // Retrieve the current date and time for the computations.
-            DateTime now = DateTime.Now;
-
-            // Check to see if the last keystroke date and time needs to be initialized.
-            if (LastKeystrokeDateTime == null)
-            {
-                LastKeystrokeDateTime = now;
-            }
-
-            // Determine when the next keystroke should be submitted.
-            DateTime nextKeystrokeSubmitTime = LastKeystrokeDateTime.Value + keystrokeElapsedTime;
-
-            // Compute how much time we need to wait and wait that time out.
-            TimeSpan waitTime = nextKeystrokeSubmitTime - now;
-
-            // Enforce a maximum elapsed keystroke wait time.
-            if (MaxKeystrokeReplayElapsedTime.HasValue && waitTime > MaxKeystrokeReplayElapsedTime)
-            {
-                waitTime = MaxKeystrokeReplayElapsedTime.Value;
-            }
-
-            // Force a wait.
-            if (waitTime > TimeSpan.Zero)
-            {
-                Pause(waitTime);
-            }
-
-            // Deliver the keystroke.
-            k = gameReplayStep.Keystroke;
-
-            // Update the running keystroke submit time.  If the wait time was shortened due to exceeding the maximum elapsed time, we set the time to the target time.
-            LastKeystrokeDateTime = nextKeystrokeSubmitTime;
-        }
-        else
-        {
-            // No we are in interactive mode.  Detect if we just entered the popup menu.
-            bool enteredPopupMenu = InPopupMenu && !PreviousInPopupMenu;
-            bool exitedPopupMenu = !InPopupMenu && PreviousInPopupMenu;
-            bool popupMenuCommand = InPopupMenu && PreviousInPopupMenu;
-            if (enteredPopupMenu || exitedPopupMenu || popupMenuCommand)
-            {
-                // Remove the keystroke.
-                ReplayQueue.RemoveAt(ReplayQueue.Count - 1);
-            }
-            PreviousInPopupMenu = InPopupMenu;
-
-            // Wait for a keystroke from the console and record it and the elapsed time in milliseconds for replay.
-            k = ConsoleViewPort.WaitForKey();
-
-            // Append the replay step.
-            ReplayQueue.Add(new GameReplayStep(DateTime.Now, k));
-
-            // We are in recording mode.  Keep the replay queue index up to date.
-            ReplayQueueIndex = ReplayQueue.Count;
-        }
-
-        if (k == 0) // TODO: This should never be
-        {
-            return;
-        }
-        KeyQueue[KeyHead++] = k;
-        if (KeyHead == KeyQueue.Length)
-        {
-            KeyHead = 0;
-        }
-
-        LastInputReceived = DateTime.Now;
-        ConsoleViewPort.InputReceived();
-    }
-
-    /// <summary>
-    /// Attempts to gets a keypress from the <see cref="ConsoleViewport"/> queue.  Returns true, if a keypress was returned.  Returns false, if the <paramref name="wait"/> is true and the <see cref="ConsoleViewPort"/>
-    /// queue is empty.
-    /// </summary>
-    /// <param name="ch"> The next key from the queue </param>
-    /// <param name="wait"> Whether to wait for a key if one isn't already available </param>
-    /// <param name="take"> Whether to take the keypress out of the queue </param>
-    /// <returns> True if a keypress was available, false otherwise </returns>
-    private bool GetKeypress(out char ch, bool wait, bool take)
-    {
-        ch = '\0';
-        if (wait)
-        {
-            UpdateScreen();
-            while (KeyHead == KeyTail && !Shutdown) // TODO: should this yield?
-            {
-                WaitAndEnqueueKey();
-            }
-        }
-        else
-        {
-            if (!ConsoleViewPort.KeyQueueIsEmpty())
-            {
-                WaitAndEnqueueKey();
-            }
-        }
-        if (KeyHead == KeyTail)
-        {
-            return false;
-        }
-        ch = KeyQueue[KeyTail];
-        if (take && ++KeyTail == KeyQueue.Length)
-        {
-            KeyTail = 0;
-        }
-        return true;
-    }
-
-    /// <summary>
-    /// Returns the next keystoke from either the artificial keystroke buffer, or the <see cref="ConsoleViewPort"/>.  The artificial keystroke buffer will always be processed before the <see cref="ConsoleViewPort"/>
+    /// Returns the next keystroke from either the artificial keystroke buffer, or the <see cref="ConsoleViewPort"/>.  The artificial keystroke buffer will always be processed before the <see cref="ConsoleViewPort"/>
     /// keystrokes are retrieved.
     /// </summary>
     /// <returns>The next key pressed.</returns>
     public char Inkey(bool disableArtificialKeybuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
     {
-        char ch = '\0';
+        /// <summary>
+        /// Attempts to gets a keypress from the <see cref="ConsoleViewport"/> queue.  Returns true, if a keypress was returned.  Returns false, if the <paramref name="wait"/> is true and the <see cref="ConsoleViewPort"/>
+        /// queue is empty.
+        /// </summary>
+        /// <param name="ch"> The next key from the queue </param>
+        /// <param name="wait"> Whether to wait for a key if one isn't already available </param>
+        /// <param name="take"> Whether to take the keypress out of the queue </param>
+        /// <returns> True if a keypress was available, false otherwise </returns>
+        bool GetKeypress(out char ch, bool wait, bool take)
+        {
+
+            /// <summary>
+            /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort"/> and updates the <see cref="LastInputReceived"/> property./>
+            /// </summary>
+            /// <param name="k"> The keypress to add </param>
+            void WaitAndEnqueueKey()
+            {
+                char k;
+
+                // Check to see if we are in playback mode.
+                if (ReplayQueueIndex < ReplayQueue.Count)
+                {
+                    // Yes, we are in replay mode.  Retrieve the replay step that needs to be replayed.  This is a non-destructive (non-dequeue) peek.  We only increment the replay index pointer.
+                    GameReplayStep gameReplayStep = ReplayQueue[ReplayQueueIndex];
+
+                    // Compute how much elapsed time occurred since the last keystroke.
+                    TimeSpan keystrokeElapsedTime = ReplayQueueIndex == 0 ? TimeSpan.Zero : ReplayQueue[ReplayQueueIndex].DateTime - ReplayQueue[ReplayQueueIndex - 1].DateTime;
+                    ReplayQueueIndex++;
+
+                    // Retrieve the current date and time for the computations.
+                    DateTime now = DateTime.Now;
+
+                    // Check to see if the last keystroke date and time needs to be initialized.
+                    if (LastKeystrokeDateTime == null)
+                    {
+                        LastKeystrokeDateTime = now;
+                    }
+
+                    // Determine when the next keystroke should be submitted.
+                    DateTime nextKeystrokeSubmitTime = LastKeystrokeDateTime.Value + keystrokeElapsedTime;
+
+                    // Compute how much time we need to wait and wait that time out.
+                    TimeSpan waitTime = nextKeystrokeSubmitTime - now;
+
+                    // Enforce a maximum elapsed keystroke wait time.
+                    if (MaxKeystrokeReplayElapsedTime.HasValue && waitTime > MaxKeystrokeReplayElapsedTime)
+                    {
+                        waitTime = MaxKeystrokeReplayElapsedTime.Value;
+                    }
+
+                    // Force a wait.
+                    if (waitTime > TimeSpan.Zero)
+                    {
+                        Pause(waitTime);
+                    }
+
+                    // Deliver the keystroke.
+                    k = gameReplayStep.Keystroke;
+
+                    // Update the running keystroke submit time.  If the wait time was shortened due to exceeding the maximum elapsed time, we set the time to the target time.
+                    LastKeystrokeDateTime = nextKeystrokeSubmitTime;
+                }
+                else
+                {
+                    // No we are in interactive mode.  Detect if we just entered the popup menu.
+                    bool enteredPopupMenu = InPopupMenu && !PreviousInPopupMenu;
+                    bool exitedPopupMenu = !InPopupMenu && PreviousInPopupMenu;
+                    bool popupMenuCommand = InPopupMenu && PreviousInPopupMenu;
+                    if (enteredPopupMenu || exitedPopupMenu || popupMenuCommand)
+                    {
+                        // Remove the keystroke.
+                        ReplayQueue.RemoveAt(ReplayQueue.Count - 1);
+                    }
+                    PreviousInPopupMenu = InPopupMenu;
+
+                    // Wait for a keystroke from the console and record it and the elapsed time in milliseconds for replay.
+                    k = ConsoleViewPort.WaitForKey();
+
+                    // Append the replay step.
+                    ReplayQueue.Add(new GameReplayStep(DateTime.Now, k));
+
+                    // We are in recording mode.  Keep the replay queue index up to date.
+                    ReplayQueueIndex = ReplayQueue.Count;
+                }
+
+                if (k == 0) // TODO: This should never be
+                {
+                    return;
+                }
+                KeyQueue[KeyHead++] = k;
+                if (KeyHead == KeyQueue.Length)
+                {
+                    KeyHead = 0;
+                }
+
+                LastInputReceived = DateTime.Now;
+                ConsoleViewPort.InputReceived();
+            }
+
+            ch = '\0';
+            if (wait)
+            {
+                UpdateScreen();
+                while (KeyHead == KeyTail && !Shutdown) // TODO: should this yield?
+                {
+                    WaitAndEnqueueKey();
+                }
+            }
+            else
+            {
+                if (!ConsoleViewPort.KeyQueueIsEmpty())
+                {
+                    WaitAndEnqueueKey();
+                }
+            }
+            if (KeyHead == KeyTail)
+            {
+                return false;
+            }
+            ch = KeyQueue[KeyTail];
+            if (take && ++KeyTail == KeyQueue.Length)
+            {
+                KeyTail = 0;
+            }
+            return true;
+        }
+
+    char ch = '\0';
         if (!disableArtificialKeybuffer && _artificialKeyBuffer.Length > 0)
         {
             ch = _artificialKeyBuffer[0];

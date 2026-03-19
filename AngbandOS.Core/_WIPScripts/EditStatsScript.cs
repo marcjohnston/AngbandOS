@@ -31,67 +31,43 @@ internal class EditStatsScript : Script, IScript, ICastSpellScript
         int tmpInt;
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            string ppp = $"{ability.Name} (3-118): ";
-            if (!Game.GetString(ppp, out tmpVal, $"{ability.InnateMax}", 3))
-            {
-                return;
+            if (Game.GetInt($"{ability.Name} (3-118): ", ability.InnateMax, 3, out int? abilityValue)) {
+                if (abilityValue > 18 + 100)
+                {
+                    abilityValue = 18 + 100;
+                }
+                else if (abilityValue < 3)
+                {
+                    abilityValue = 3;
+                }
+                ability.Innate = abilityValue.Value;
+                ability.InnateMax = abilityValue.Value;
             }
-            if (!int.TryParse(tmpVal, out tmpInt))
+        }
+        if (Game.GetInt("Gold: ", Game.Gold.IntValue, out int? goldValue))
+        {
+            if (goldValue < 0)
             {
-                tmpInt = 0;
+                goldValue = 0;
             }
-            if (tmpInt > 18 + 100)
+            Game.Gold.IntValue = goldValue.Value;
+        }
+        if (Game.GetInt("Mana: ", Game.Mana.IntValue, out int? manaValue))
+        {
+            if (manaValue < 0)
             {
-                tmpInt = 18 + 100;
+                manaValue = 0;
             }
-            else if (tmpInt < 3)
+            Game.Mana.IntValue = manaValue.Value;
+        }
+        if (Game.GetInt("Experience: ", Game.MaxExperienceGained.IntValue, out int? experienceValue))
+        {
+            if (experienceValue < 0)
             {
-                tmpInt = 3;
+                experienceValue = 0;
             }
-            ability.Innate = tmpInt;
-            ability.InnateMax = tmpInt;
+            Game.MaxExperienceGained.IntValue = experienceValue.Value;
         }
-        if (!Game.GetString("Gold: ", out tmpVal, $"{Game.Gold.IntValue}", 9))
-        {
-            return;
-        }
-        if (!int.TryParse(tmpVal, out tmpInt))
-        {
-            tmpInt = 0;
-        }
-        if (tmpInt < 0)
-        {
-            tmpInt = 0;
-        }
-        Game.Gold.IntValue = tmpInt;
-
-        if (!Game.GetString("Mana: ", out tmpVal, $"{Game.Mana.IntValue}", 9))
-        {
-            return;
-        }
-        if (!int.TryParse(tmpVal, out tmpInt))
-        {
-            tmpInt = 0;
-        }
-        if (tmpInt < 0)
-        {
-            tmpInt = 0;
-        }
-        Game.Mana.IntValue = tmpInt;
-
-        if (!Game.GetString("Experience: ", out tmpVal, $"{Game.MaxExperienceGained.IntValue}", 9))
-        {
-            return;
-        }
-        if (!int.TryParse(tmpVal, out tmpInt))
-        {
-            tmpInt = 0;
-        }
-        if (tmpInt < 0)
-        {
-            tmpInt = 0;
-        }
-        Game.MaxExperienceGained.IntValue = tmpInt;
 
         Game.CheckExperience();
         Game.RunScript(nameof(RedrawScript));

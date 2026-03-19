@@ -40,7 +40,6 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
             return;
         }
         Item qPtr = new Item(Game, itemFactory);
-        qPtr.StackCount = Game.CommandArgument == 0 ? 1 : Game.CommandArgument;
         if (!Game.GetBool($"Random Artifact (0=False, 1=True)? ", out bool randomArtifact))
         {
             return;
@@ -68,7 +67,15 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
                 return;
             }
 
+            int initialStackCount = Game.CommandArgument == 0 ? 1 : Game.CommandArgument;
+            if (!Game.GetInt($"Stack count? ", initialStackCount, out int? stackCount) || !stackCount.HasValue)
+            {
+                return;
+            }
+
             qPtr.EnchantItem(Game.Difficulty, allowFixedArtifact, good, great, storeStock);
+            qPtr.StackCount = stackCount.Value;
+            Game.CommandArgument = 0;
         }
         Game.DropNear(qPtr, null, Game.MapY.IntValue, Game.MapX.IntValue);
         Game.MsgPrint("Allocated.");
