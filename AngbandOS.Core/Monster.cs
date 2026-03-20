@@ -1025,7 +1025,7 @@ internal class Monster : IItemContainer
                         int k = tile.FeatureType.LockLevel;
                         if (Game.RandomLessThan(Health / 10) > k)
                         {
-                            Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Get<Tile>("LockedDoor0"));
+                            Game.CaveSetFeat(newY, newX, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
                             mayBash = false;
                         }
                     }
