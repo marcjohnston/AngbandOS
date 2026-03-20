@@ -19,6 +19,17 @@ public class GameServer
     private Game Game;
 
     /// <summary>
+    /// Forwards a save game request to the in-progress game. 
+    /// </summary>
+    public void SaveGame()
+    {
+        if (Game != null)
+        {
+            Game.SaveGame();
+        }
+    }
+
+    /// <summary>
     /// Returns the current level of the player.  If the player is dead, null is returned.
     /// </summary>
     /// <returns></returns>

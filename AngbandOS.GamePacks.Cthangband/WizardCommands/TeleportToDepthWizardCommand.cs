@@ -7,13 +7,13 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class JumpLevelsWizardCommand : WizardCommandGameConfiguration
+public class TeleportToDepthWizardCommand : WizardCommandGameConfiguration
 {
     public override char KeyChar => 'j';
 
-    public override string HelpDescription => "Teleport to Target";
+    public override string HelpDescription => "Teleport to Depth";
 
     public override string? HelpGroupName => nameof(WizardMovementHelpGroup);
 
-    public override string? ExecuteScriptName => nameof(SystemScriptsEnum.JumpToLevelScript);
+    public override string? ExecuteScriptName => nameof(SystemScriptsEnum.TeleportToDepthScript);
 }

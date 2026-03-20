@@ -95,6 +95,7 @@ namespace AngbandOS.Web.Services
             // Get the console running the game.  It may still be active.
             if (GameHostConsoleAndViewPortsDictionary.TryGetValue(connectionId, out ConsoleAndViewPort? console))
             {
+                console.SaveGame();
                 // Remove the connection from the consoles.
                 GameHostConsoleAndViewPortsDictionary.Remove(connectionId, out _);
 

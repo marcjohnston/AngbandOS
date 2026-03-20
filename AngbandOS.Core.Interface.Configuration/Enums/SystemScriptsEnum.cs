@@ -279,7 +279,7 @@
         IocaineScript,
         JewelJudgementDrainLifeScript,
         JournalScript,
-        JumpToLevelScript,
+        TeleportToDepthScript,
         KlackonRacialPowerScript,
         LaserEyeMutationScript,
         LauncherMutationScript,

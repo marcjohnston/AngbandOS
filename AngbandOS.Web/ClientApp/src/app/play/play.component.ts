@@ -332,7 +332,7 @@ export class PlayComponent implements OnInit, OnDestroy {
           });
           this.gameHubConnection.on("GameOver", () => {
             this._zone.run(() => {
-              this.GameInProgress = false;
+              this.gameInProgress = false;
               this._router.navigate(['/']);
             });
           });
@@ -343,7 +343,7 @@ export class PlayComponent implements OnInit, OnDestroy {
             });
           });
 
-          this.GameInProgress = true;
+          this.gameInProgress = true;
           if (this.gameGuid === null) {
             const gameConfiguration: GameConfiguration = {
               maxMessageLogLength: 1,
@@ -392,10 +392,16 @@ export class PlayComponent implements OnInit, OnDestroy {
               singingPlayerAttacks: null,
               worshipPlayerAttacks: null
             }
+
+            // Fires when the connection is completely closed (after retries fail or no reconnect configured)
+            this.gameHubConnection.onclose((error) => {
+              this.showSnackBar("Connection lost.  Redirecting back to home.");
+              setTimeout(() => {
+                this._router.navigate(['/']);
+              }, 10);
+            });
+
             this.gameHubConnection.send("PlayNewGame", gameConfiguration).then(() => {
-              this._snackBar.open(`Playing`, undefined, {
-                duration: 2000,
-              });
             }, (reason: any) => {
               this._snackBar.open(`PlayNewGame rejected ${reason}.`, undefined, {
                 duration: 2000,
@@ -407,6 +413,10 @@ export class PlayComponent implements OnInit, OnDestroy {
         }
       }, (reason: any) => {
         this.showSnackBar(`Connection to game server failed ${reason}.`);
+        // Turn off the game in progress so that the CanDeactivate route guard isn't triggered.
+        this.gameInProgress = false;
+
+        // Navigate to the home screen.
         this._router.navigate(['/']);
       });
     }
@@ -427,7 +437,7 @@ export class PlayComponent implements OnInit, OnDestroy {
    * Returns true, if the game is still in progress; false, otherwise.  This is used for the can-deactivate-play component to throw a warning dialog box,
    * if the game is still in-progress. 
    */
-  public GameInProgress: boolean = false;
+  public gameInProgress: boolean = false;
 
   private showSnackBar(message: string) {
     this._snackBar.open(message, undefined, {

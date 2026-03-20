@@ -86,14 +86,12 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   private updateHistory(history: ChatMessage[]) {
-    this.showMessage("Chat updated.")
     this.history = history;
     this._changeDetectorRef.detectChanges();
     this.scrollToBottomOfChat();
   }
 
   private appendHistory(message: ChatMessage) {
-    this.showMessage("Chat message received.");
     this.history?.push(message);
     this._changeDetectorRef.detectChanges();
     this.scrollToBottomOfChat();

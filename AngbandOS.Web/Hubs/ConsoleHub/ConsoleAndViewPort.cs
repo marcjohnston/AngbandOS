@@ -116,9 +116,8 @@ namespace AngbandOS.Web.Hubs
         }
         #endregion
 
-        #region Game Play and IConsole Implementation
+        #region IConsole Implementation for Outgoing Messages from the Game Core to the Web Client
         public int Height => 45;
-
         public int Width => 80;
         public int MaximumKeyQueueLength => 256;
 
@@ -201,11 +200,6 @@ namespace AngbandOS.Web.Hubs
             }
         }
 
-        public bool KeyQueueIsEmpty()
-        {
-            return KeyQueue.IsEmpty;
-        }
-
         /// <summary>
         /// This message is received from the game when a key is needed.
         /// </summary>
@@ -223,20 +217,9 @@ namespace AngbandOS.Web.Hubs
             return c;
         }
 
-
-        /// <summary>
-        /// Processes an incoming keystroke from the web client and inserts it into the queue for the game to use.
-        /// </summary>
-        /// <param name="c"></param>
-        public void KeyPressed(string keys)
+        public bool KeyQueueIsEmpty()
         {
-            if (keys != null)
-            {
-                foreach (char c in keys)
-                {
-                    KeyQueue.Enqueue(c); // TODO: Use a wait event
-                }
-            }
+            return KeyQueue.IsEmpty;
         }
 
         public void MessagesUpdated()
@@ -298,6 +281,38 @@ namespace AngbandOS.Web.Hubs
         {
             NotificationAction(this, GameUpdateNotificationEnum.InputReceived, "Game input received.");
         }
+        #endregion
+
+        #region Incoming Messages from the Web Client and the Game Service
+        /// <summary>
+        /// Processes an incoming keystroke from the web client and inserts it into the queue for the game to use.
+        /// </summary>
+        /// <param name="c"></param>
+        public void KeyPressed(string keys)
+        {
+            if (keys != null)
+            {
+                foreach (char c in keys)
+                {
+                    KeyQueue.Enqueue(c); // TODO: Use a wait event
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sends a message to the console that the game cannot be played because it is incompatible.
+        /// </summary>
+        /// <param name="message"></param>
+        public void GameIncompatible()
+        {
+            _consoleGameHub.GameIncompatible();
+        }
+
+        public void Kill() // TODO: Alias for Shutdown
+        {
+            Shutdown();
+        }
+
         public void Shutdown()
         {
             // Set the game flag to shut down.  Do this first, because we need to game to exit quickly when keypresses are bypassed.
@@ -309,11 +324,6 @@ namespace AngbandOS.Web.Hubs
             // Set the flag to force the input queue to shut down.  This will bypass the keystrokes.
             ShuttingDown = true;
 
-        }
-
-        public void Kill() // TODO: Alias for Shutdown
-        {
-            Shutdown();
         }
 
         /// <summary>
@@ -363,8 +373,33 @@ namespace AngbandOS.Web.Hubs
 
         public string? ThreadName { get; set; } = null;
 
+        /// <summary>
+        /// Sends a refresh update of the game to the specified viewport--which can be the game console or a spectator.
+        /// </summary>
+        /// <param name="viewPort"></param>
+        public void RefreshViewPort(IViewPort viewPort)
+        {
+            _gameServer.RefreshViewPort(viewPort);
+        }
+
+        public void SaveGame()
+        {
+            _gameServer.SaveGame();
+        }
+        #endregion
+
+        #region Game Play Thread Loop
         protected override void OnDoWork(DoWorkEventArgs e)
         {
+            /// <summary>
+            /// Sends a message from the game to the console client and all spectators that the game is over.
+            /// </summary>
+            void GameOver()
+            {
+                _consoleGameHub.GameOver();
+                DisconnectSpectators();
+            }
+
             Thread.CurrentThread.Name = ThreadName;
 
             // Create a game server to play the game.  
@@ -394,44 +429,9 @@ namespace AngbandOS.Web.Hubs
             // Abort the context.  This will throw the signal-r disconnect?
             Context.Abort();
         }
-
-        /// <summary>
-        /// Sends a message from the game to the console client and all spectators that the game is over.
-        /// </summary>
-        private void GameOver()
-        {
-            _consoleGameHub.GameOver();
-            DisconnectSpectators();
-        }
-
-        /// <summary>
-        /// Sends a message to the console that the game cannot be played because it is incompatible.
-        /// </summary>
-        /// <param name="message"></param>
-        public void GameIncompatible()
-        {
-            _consoleGameHub.GameIncompatible();
-        }
-
-        /// <summary>
-        /// Send a refresh update of the game to the client.
-        /// </summary>
-        public void Refresh()
-        {
-            _gameServer.RefreshViewPort(this);
-        }
-
-        /// <summary>
-        /// Sends a refresh update of the game to the specified viewport--which can be the game console or a spectator.
-        /// </summary>
-        /// <param name="viewPort"></param>
-        public void RefreshViewPort(IViewPort viewPort)
-        {
-            _gameServer.RefreshViewPort(viewPort);
-        }
         #endregion
 
-        #region Spectating
+        #region Spectators Management
         /// <summary>
         /// Returns a spectator viewport after adding a new spectator to the game.
         /// </summary>

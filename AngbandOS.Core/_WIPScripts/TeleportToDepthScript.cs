@@ -7,9 +7,9 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class JumpToLevelScript : Script, IScript, ICastSpellScript
+internal class TeleportToDepthScript : Script, IScript, ICastSpellScript
 {
-    private JumpToLevelScript(Game game) : base(game) { }
+    private TeleportToDepthScript(Game game) : base(game) { }
 
     public void ExecuteCastSpellScript(Spell spell)
     {
@@ -29,7 +29,7 @@ internal class JumpToLevelScript : Script, IScript, ICastSpellScript
     {
         if (Game.CommandArgument <= 0)
         {
-            string ppp = $"Jump to level (0-{Game.CurDungeon.MaxLevel}): ";
+            string ppp = $"Teleport to Depth (0-{Game.CurDungeon.MaxLevel}): ";
             string def = $"{Game.CurrentDepth}";
             if (!Game.GetString(ppp, out string tmpVal, def, 10))
             {
