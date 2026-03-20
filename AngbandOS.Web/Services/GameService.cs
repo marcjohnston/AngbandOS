@@ -409,11 +409,12 @@ namespace AngbandOS.Web.Services
         {
             string fromUsername = await GetUsernameAsync(message.FromId);
             string toUsername = await GetUsernameAsync(message.ToId);
+            TimeZoneInfo eastern = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
             return new ChatMessage
             {
                 FromUsername = fromUsername,
                 Message = message.Message,
-                SentDateTime = message.SentDateTime,
+                SentDateTime = TimeZoneInfo.ConvertTime(message.SentDateTime, eastern),
                 Id = message.Id
             };
         }

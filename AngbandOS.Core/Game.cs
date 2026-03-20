@@ -8718,7 +8718,7 @@ internal partial class Game
                     }
                     PreviousInPopupMenu = InPopupMenu;
 
-                    // Wait for a keystroke from the console and record it and the elapsed time in milliseconds for replay.
+                    // Wait for a keystroke from the console and record it and the current date and time for replay.
                     k = ConsoleViewPort.WaitForKey();
 
                     // Append the replay step.

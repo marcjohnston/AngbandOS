@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
 import { ChatMessage } from './chat-message';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ChangeDetectorRef } from '@angular/core';
@@ -16,6 +16,7 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./chat.component.scss'],
   standalone: true,
   imports: [
+    CommonModule,
     NgFor,
     NgIf,
     MatIconModule,
@@ -28,7 +29,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   public isAdministrator = false;
   public connectionId: string | null = null;
   @ViewChild('scrollDiv', { static: true }) private scrollDivRef: ElementRef | undefined;
-  private scrollToBottomOfChatAfterViewChecked = false;
   private _initSubscriptions = new Subscription();
   private _chatConnection: HubConnection | undefined; // Initialized only as needed due to two different authentication channels.
   private _serviceConnection: HubConnection | undefined; // Initialized only as needed due to two different authentication channels.
