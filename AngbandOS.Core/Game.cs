@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.EventsArgs;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
@@ -16895,5 +16896,47 @@ internal partial class Game
     {
         Expression expression = ParseNumericExpression(expressionText);
         return new ProbabilityExpression(this, expression);
+    }
+
+    public Town? GetEscortDestination(Dictionary<char, Town> towns)
+    {
+        ScreenBuffer savedScreen = Screen.Clone();
+        try
+        {
+            var keys = towns.Keys.ToList();
+            keys.Sort();
+            string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
+            for (int i = 0; i < keys.Count; i++)
+            {
+                Screen.Print(ColorEnum.White, $" {keys[i].ToString().ToLower()}) {towns[keys[i]].Name}".PadRight(60), i + 1, 20);
+            }
+            Screen.Print(ColorEnum.White, "".PadRight(60), keys.Count + 1, 20);
+            while (GetCom(outVal, out char choice))
+            {
+                choice = choice.ToString().ToUpper()[0];
+                foreach (var c in keys)
+                {
+                    if (choice == c)
+                    {
+                        return towns[c];
+                    }
+                }
+            }
+        }
+        finally
+        {
+            Screen.Restore(savedScreen);
+        }
+        return null;
+    }
+    public void GoToTown(Town town)
+    {
+        WildernessX = town.X;
+        WildernessY = town.Y;
+        CurTown = town;
+        CurDungeon = CurTown.Dungeon;
+        NewLevelFlag = true;
+        CameFrom = LevelStartEnum.StartRandom;
+        ToNextDusk();
     }
 }

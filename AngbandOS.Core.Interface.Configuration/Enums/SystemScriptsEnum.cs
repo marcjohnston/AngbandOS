@@ -517,6 +517,7 @@
         TeleportLevelScript,
         TeleportRuneScript,
         TeleportToTargetScript,
+        TeleportToAnyTownScript,
         TerribleBootsEnchantmentScript,
         TerribleCloakEnchantmentScript,
         TerribleCrownEnchantmentScript,

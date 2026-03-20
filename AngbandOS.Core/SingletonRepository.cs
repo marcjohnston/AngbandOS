@@ -465,7 +465,7 @@ internal class SingletonRepository
         }
         if (missing.Count > 0)
         {
-            throw new Exception($"There is no cooresponding system script for the {String.Join("\t", missing)} enum.  A system script that implements the {nameof(IGetKey)} is required to be loaded.");
+            throw new Exception($"There is no corresponding system script for the {String.Join("\t", missing)} enum.  A system script that implements the {nameof(IGetKey)} is required to be loaded.");
         }
     }
     private void ValidateJointTable<T, T1, T2>(Func<T1, T2, string> GetCompositeKey) where T : class where T1 : class where T2 : class // TODO: WHY CANT THIS BE where T: IGETKEY

@@ -32,7 +32,7 @@ internal class HireAnEscortScript : Script, IStoreCommandScript
         }
         else
         {
-            var destination = GetEscortDestination(validTowns);
+            var destination = Game.GetEscortDestination(validTowns);
             if (destination != null)
             {
                 if (!Game.ServiceHaggle(200, out int price))
@@ -47,13 +47,8 @@ internal class HireAnEscortScript : Script, IStoreCommandScript
                         Game.SayComment_1();
                         Game.PlaySound(SoundEffectEnum.StoreTransaction);
                         Game.StorePrtGold();
-                        Game.WildernessX = destination.X;
-                        Game.WildernessY = destination.Y;
-                        Game.CurTown = destination;
-                        Game.NewLevelFlag = true;
-                        Game.CameFrom = LevelStartEnum.StartRandom;
                         Game.MsgPrint("The journey takes all day.");
-                        Game.ToNextDusk();
+                        Game.GoToTown(destination);
                         storeCommandEvent.LeaveStore = true;
                     }
                 }
@@ -61,37 +56,5 @@ internal class HireAnEscortScript : Script, IStoreCommandScript
         }
         Game.HandleStuff();
         storeCommandEvent.LeaveStore = false;
-    }
-
-    private Town? GetEscortDestination(Dictionary<char, Town> towns)
-    {
-        ScreenBuffer savedScreen = Game.Screen.Clone();
-        try
-        {
-            var keys = towns.Keys.ToList();
-            keys.Sort();
-            string outVal = $"Destination town ({keys[0].ToString().ToLower()} to {keys[keys.Count - 1].ToString().ToLower()})? ";
-            for (int i = 0; i < keys.Count; i++)
-            {
-                Game.Screen.Print(ColorEnum.White, $" {keys[i].ToString().ToLower()}) {towns[keys[i]].Name}".PadRight(60), i + 1, 20);
-            }
-            Game.Screen.Print(ColorEnum.White, "".PadRight(60), keys.Count + 1, 20);
-            while (Game.GetCom(outVal, out char choice))
-            {
-                choice = choice.ToString().ToUpper()[0];
-                foreach (var c in keys)
-                {
-                    if (choice == c)
-                    {
-                        return towns[c];
-                    }
-                }
-            }
-        }
-        finally
-        {
-            Game.Screen.Restore(savedScreen);
-        }
-        return null;
     }
 }
