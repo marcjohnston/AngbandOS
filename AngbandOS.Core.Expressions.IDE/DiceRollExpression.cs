@@ -29,5 +29,6 @@ public class DiceRollExpression : InfixExpression
     {
         return $"{Dice}d{Sides}";
     }
+    public override string Text => ToString();
 }
 
