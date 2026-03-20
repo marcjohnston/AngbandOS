@@ -216,7 +216,7 @@ namespace AngbandOS.Web.Services
 
                 SqlGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(ConnectionString);
                 //gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(username, ""); // Load the configuration from SQL
-                gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
+                gameConfiguration = new GamePacks.Cthangband.CthangbandGameConfiguration();
 
                 // Create a background worker object that runs the game and receives messages from the game to send to the client.
                 gameConsoleAndViewPort = new ConsoleAndViewPort(context, gameHub, corePersistentStorage, gameConfiguration, userId, username, gameUpdateMonitor);
