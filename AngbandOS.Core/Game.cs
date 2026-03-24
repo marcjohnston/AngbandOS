@@ -297,8 +297,9 @@ internal partial class Game : IGameSerialization
     /// <summary>
     /// Plays the current game.
     /// </summary>
-    /// <param name="consoleViewPort"></param>
-    /// <param name="persistentStorage"></param>
+    /// <param name="consoleViewPort">Supply a reference to the <see cref="nameof(IConsoleAndViewPort)"/> that is required for the game play.</param>
+    /// <param name="persistentStorage">Supply an optional reference to the <see cref="nameof(ICorePersisentStorage)"/> to save the game.</param>
+    /// <param name="replayPersistentStorage">Supply an optional processor to receive player interaction steps for game replay.</param>
     /// <remarks>
     /// For game replay mode and the ability to restore a saved game, we need to reinitialize the random generator because the Random object is not serializable.
     /// </remarks>

@@ -29,7 +29,7 @@ internal class PersistConfigurationScript : Script, IScript, ICastSpellScript
     {
         if (Game.CorePersistentStorage == null)
         {
-            Game.MsgPrint("No persistance interface was provided to save the configuration.");
+            Game.MsgPrint("No persistence interface was provided to save the configuration.");
             return;
         }
 
