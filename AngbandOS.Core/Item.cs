@@ -1090,7 +1090,7 @@ internal sealed class Item : IComparable<Item>
             if (k == 22 && j + 1 < identityDetailList.Count)
             {
                 Game.Screen.PrintLine("-- more --", k, 15);
-                Game.Inkey();
+                Game.GetAndRecordKeystroke();
                 for (; k > 2; k--)
                 {
                     Game.Screen.PrintLine("", k, 15);
@@ -1098,7 +1098,7 @@ internal sealed class Item : IComparable<Item>
             }
         }
         Game.Screen.PrintLine("[Press any key to continue]", k, 15);
-        Game.Inkey();
+        Game.GetAndRecordKeystroke();
         Game.Screen.Restore(savedScreen);
         return true;
     }

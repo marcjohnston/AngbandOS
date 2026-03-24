@@ -42,6 +42,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   private _accessToken: string | undefined = undefined;
   public preferences: Preferences | undefined = undefined; // Represents the users preferences.  Will be undefined, until they are retrieved from the back end.
   private resizeObserver!: ResizeObserver;
+  private replay: boolean | undefined = undefined;
 
   constructor(
     private _preferencesDialog: MatDialog,
@@ -54,6 +55,27 @@ export class PlayComponent implements OnInit, OnDestroy {
   ) {
   }
 
+  /**
+   * Handles all generic message communication to the hub.
+   * @param methodName
+   * @param args
+   */
+  private sendMessage(methodName: string, args: any[]) {
+    if (this.gameHubConnection !== undefined) {
+      this.gameHubConnection.send(methodName, ...args).then(() => { }, (rejectReason: any) => {
+        this.showSnackBar("Error in communication", 500); // Shorten the message time.
+      });
+    }
+  }
+
+  /**
+   * Handles keypressed message communication to the hub.
+   * @param key
+   */
+  private sendKeypressedMessage(key: string) {
+    this.sendMessage("keypressed", [ key ]);
+  }
+
   @HostListener('window:keydown', ['$event'])
   public onKeyDown(event: KeyboardEvent) {
     // Only accept keyboard input for the game, when the active element is the BODY.  Otherwise, input type controls on the screen need to process
@@ -62,52 +84,52 @@ export class PlayComponent implements OnInit, OnDestroy {
       if (this.gameHubConnection) {
         const shift: string = (event.shiftKey ? "." : "");
         switch (event.key) {
-          case "ArrowLeft":
-            this.gameHubConnection.send("keypressed", `${shift}4`);
+          case "ArrowLeft":            
+            this.sendKeypressedMessage(`${shift}4`);
             event.preventDefault();
             break;
           case "ArrowRight":
-            this.gameHubConnection.send("keypressed", `${shift}6`);
+            this.sendKeypressedMessage(`${shift}6`);
             event.preventDefault();
             break;
           case "ArrowUp":
-            this.gameHubConnection.send("keypressed", `${shift}8`);
+            this.sendKeypressedMessage(`${shift}8`);
             event.preventDefault();
             break;
           case "ArrowDown":
-            this.gameHubConnection.send("keypressed", `${shift}2`);
+            this.sendKeypressedMessage(`${shift}2`);
             event.preventDefault();
             break;
           case "Home":
-            this.gameHubConnection.send("keypressed", `${shift}7`);
+            this.sendKeypressedMessage(`${shift}7`);
             event.preventDefault();
             break;
           case "End":
-            this.gameHubConnection.send("keypressed", `${shift}1`);
+            this.sendKeypressedMessage(`${shift}1`);
             event.preventDefault();
             break;
           case "PageUp":
-            this.gameHubConnection.send("keypressed", `${shift}9`);
+            this.sendKeypressedMessage(`${shift}9`);
             event.preventDefault();
             break;
           case "PageDown":
-            this.gameHubConnection.send("keypressed", `${shift}3`);
+            this.sendKeypressedMessage(`${shift}3`);
             event.preventDefault();
             break;
           case "Enter":
-            this.gameHubConnection.send("keypressed", '\x0D');
+            this.sendKeypressedMessage('\x0D');
             event.preventDefault();
             break;
           case "Tab":
-            this.gameHubConnection.send("keypressed", '\x09');
+            this.sendKeypressedMessage('\x09');
             event.preventDefault();
             break;
           case "Escape":
-            this.gameHubConnection.send("keypressed", '\x1B');
+            this.sendKeypressedMessage('\x1B');
             event.preventDefault();
             break;
           case "Backspace":
-            this.gameHubConnection.send("keypressed", '\x08');
+            this.sendKeypressedMessage('\x08');
             event.preventDefault();
             break;
 
@@ -131,7 +153,7 @@ export class PlayComponent implements OnInit, OnDestroy {
           default:
             // Do not send special keystrokes.
             if (event.key.length === 1) {
-              this.gameHubConnection.send("keypressed", event.key);
+              this.sendKeypressedMessage(event.key);
             }
             break;
         }
@@ -283,11 +305,61 @@ export class PlayComponent implements OnInit, OnDestroy {
         f12Macro: getUserPreferences!.f12Macro!
       };
     }
+  }
 
+  private LoadConfiguration(): GameConfiguration {
+    const gameConfiguration: GameConfiguration = {
+      maxMessageLogLength: 1,
+      startupTownName: null,
+      towns: null,
+      shopkeepers: null,
+      gameCommands: null,
+      storeCommands: null,
+      helpGroups: null,
+      monsterRaces: null,
+      symbols: null,
+      vaults: null,
+      dungeonGuardians: null,
+      dungeons: null,
+      storeFactories: null,
+      projectileGraphics: null,
+      amuletReadableFlavor: null,
+      mushroomReadableFlavors: null,
+      potionReadableFlavors: null,
+      ringReadableFlavors: null,
+      rodReadableFlavors: null,
+      scrollReadableFlavors: null,
+      staffReadableFlavors: null,
+      wandReadableFlavors: null,
+      classSpells: null,
+      wizardCommands: null,
+      tiles: null,
+      animations: null,
+      spells: null,
+      plurals: null,
+      attacks: null,
+      gods: null,
+      elvishTexts: null,
+      findQuests: null,
+      funnyComments: null,
+      funnyDescriptions: null,
+      horrificDescriptions: null,
+      insultPlayerAttacks: null,
+      moanPlayerAttacks: null,
+      unreadableFlavorSyllables: null,
+      shopkeeperAcceptedComments: null,
+      shopkeeperBargainComments: null,
+      shopkeeperGoodComments: null,
+      shopkeeperLessThanGuessComments: null,
+      shopkeeperWorthlessComments: null,
+      singingPlayerAttacks: null,
+      worshipPlayerAttacks: null
+    }
+    return gameConfiguration;
   }
 
   private check() {
-    if (this.gameHubConnection !== undefined && this.gameGuid !== undefined) {
+    if (this.gameHubConnection !== undefined && this.gameGuid !== undefined && this.replay !== undefined) {
       this.gameHubConnection.start().then(() => {
         if (this.gameHubConnection) {
           this.connectionId = this.gameHubConnection.connectionId;
@@ -343,63 +415,27 @@ export class PlayComponent implements OnInit, OnDestroy {
             });
           });
 
-          this.gameInProgress = true;
-          if (this.gameGuid === null) {
-            const gameConfiguration: GameConfiguration = {
-              maxMessageLogLength: 1,
-              startupTownName: null,
-              towns: null,
-              shopkeepers: null,
-              gameCommands: null,
-              storeCommands: null,
-              helpGroups: null,
-              monsterRaces: null,
-              symbols: null,
-              vaults: null,
-              dungeonGuardians: null,
-              dungeons: null,
-              storeFactories: null,
-              projectileGraphics: null,
-              amuletReadableFlavor: null,
-              mushroomReadableFlavors: null,
-              potionReadableFlavors: null,
-              ringReadableFlavors: null,
-              rodReadableFlavors: null,
-              scrollReadableFlavors: null,
-              staffReadableFlavors: null,
-              wandReadableFlavors: null,
-              classSpells: null,
-              wizardCommands: null,
-              tiles: null,
-              animations: null,
-              spells: null,
-              plurals: null,
-              attacks: null,
-              gods: null,
-              elvishTexts: null,
-              findQuests: null,
-              funnyComments: null,
-              funnyDescriptions: null,
-              horrificDescriptions: null,
-              insultPlayerAttacks: null,
-              moanPlayerAttacks: null,
-              unreadableFlavorSyllables: null,
-              shopkeeperAcceptedComments: null,
-              shopkeeperBargainComments: null,
-              shopkeeperGoodComments: null,
-              shopkeeperLessThanGuessComments: null,
-              shopkeeperWorthlessComments: null,
-              singingPlayerAttacks: null,
-              worshipPlayerAttacks: null
-            }
+          // Fires when the connection is completely closed (after retries fail or no reconnect configured)
+          this.gameHubConnection.onclose((error) => {
+            this.showSnackBar("Connection lost.  Redirecting back to home.");
+            setTimeout(() => {
+              this._router.navigate(['/']);
+            }, 10);
+          });
 
-            // Fires when the connection is completely closed (after retries fail or no reconnect configured)
-            this.gameHubConnection.onclose((error) => {
-              this.showSnackBar("Connection lost.  Redirecting back to home.");
-              setTimeout(() => {
-                this._router.navigate(['/']);
-              }, 10);
+          this.gameInProgress = true;
+
+          // Check to see if this is a request to replay a game.
+          if (this.replay) {
+            this.gameHubConnection.send("ReplayGame", this.gameGuid).then(() => {
+            }, (reason: any) => {
+              this._snackBar.open(`ReplayGame rejected ${reason}.`, undefined, {
+                duration: 2000,
+              });
             });
+          } else if (this.gameGuid === null) {
+            // This is a new game request.  We must send a game configuration.
+            const gameConfiguration: GameConfiguration = this.LoadConfiguration();
 
             this.gameHubConnection.send("PlayNewGame", gameConfiguration).then(() => {
             }, (reason: any) => {
@@ -408,7 +444,13 @@ export class PlayComponent implements OnInit, OnDestroy {
               });
             });
           } else {
-            this.gameHubConnection.send("PlayExistingGame", this.gameGuid);
+            // This is a request to play an existing game.  Send the game guid.
+            this.gameHubConnection.send("PlayExistingGame", this.gameGuid).then(() => {
+            }, (reason: any) => {
+              this._snackBar.open(`PlayExistingGame rejected ${reason}.`, undefined, {
+                duration: 2000,
+              });
+            });
           }
         }
       }, (reason: any) => {
@@ -439,9 +481,9 @@ export class PlayComponent implements OnInit, OnDestroy {
    */
   public gameInProgress: boolean = false;
 
-  private showSnackBar(message: string) {
+  private showSnackBar(message: string, duration: number = 2000) {
     this._snackBar.open(message, undefined, {
-      duration: 2000,
+      duration: duration,
     });
   }
 
@@ -505,6 +547,11 @@ export class PlayComponent implements OnInit, OnDestroy {
         this._snackBar.open(`Error during guid parameter retrieval ${error}.`, undefined, {
           duration: 2000,
         });
+      }));
+
+      this._initSubscriptions.add(this._activatedRoute.queryParams.subscribe(_parameters => {
+        this.replay = _parameters["replay"] === "1";
+        this.check();
       }));
 
       // Track sizing on the canvas container.

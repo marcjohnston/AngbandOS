@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 namespace AngbandOS.PersistentStorage
 {
+
     /// <summary>
     /// Represents a Sql driver for AngbandOS to read and write saved games to a Sql database.  
     /// Also supports the ability for a front-end to retrieve SavedGameDetails for a user.
@@ -138,7 +139,8 @@ namespace AngbandOS.PersistentStorage
                         Level = _savedGame.Level,
                         Guid = _savedGame.Guid.ToString(),
                         IsAlive = _savedGame.IsAlive,
-                        SavedDateTime = _savedGame.DateTime
+                        SavedDateTime = _savedGame.DateTime,
+                        ReplayIsAvailable = context.GameReplays.Where(_gameReplay => _gameReplay.GameGuid == _savedGame.Guid).Any()
                     })
                     .ToArrayAsync();
                 return savedGames;

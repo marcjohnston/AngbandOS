@@ -144,7 +144,7 @@ internal class ReportMagicsScript : Script, IScript, ICastSpellScript
             if (k == 22 && j + 1 < i)
             {
                 Game.Screen.PrintLine("-- more --", k, 15);
-                Game.Inkey();
+                Game.GetAndRecordKeystroke();
                 for (; k > 2; k--)
                 {
                     Game.Screen.PrintLine("", k, 15);
@@ -152,7 +152,7 @@ internal class ReportMagicsScript : Script, IScript, ICastSpellScript
             }
         }
         Game.Screen.PrintLine("[Press any key to continue]", k, 13);
-        Game.Inkey();
+        Game.GetAndRecordKeystroke();
         Game.Screen.Restore(savedScreen);
     }
 

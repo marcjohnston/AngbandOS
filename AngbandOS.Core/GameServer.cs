@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interface;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -188,7 +189,7 @@ public class GameServer
     /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
     /// <param name="gameConfiguration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public GameResults PlayNewGame(IConsoleAndViewPort console, ICorePersistentStorage? persistentStorage, GameConfiguration gameConfiguration, string? serializedGameReplay)
+    public GameResults PlayNewGame(IConsoleAndViewPort console, ICorePersistentStorage? persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, GameReplayDetails? gameReplayDetails)
     {
         // TODO: Validate the GameConfiguration here.  This is the only entry point for a GameConfiguration into the Core and we cannot expect that it is valid.
         if (console == null)
@@ -199,8 +200,15 @@ public class GameServer
         bool gameIsOver = false;
         try
         {
-            Game = new Game(gameConfiguration, serializedGameReplay);
-            Game.Play(console, persistentStorage);
+            Game = new Game(gameConfiguration, gameReplayDetails);
+
+            // Announce the new game and the seed for the replay.
+            if (replayPersistentStorage is not null && gameReplayDetails is null)
+            {
+                replayPersistentStorage.NewGame(Game.MainSequenceRandomSeed);
+            }
+
+            Game.Play(console, persistentStorage, replayPersistentStorage);
             gameIsOver = true;
         }
         catch (Exception ex)
@@ -208,10 +216,7 @@ public class GameServer
             console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
         }
 
-        // Serialize the GameReplay.
-        GameReplay gameReplay = new GameReplay(Game.MainSequenceRandomSeed, Game.ReplayQueue.ToArray());
-        serializedGameReplay = JsonSerializer.Serialize(gameReplay); // This is replacing the parameter contents.
-        return new GameResults(gameIsOver, serializedGameReplay);
+        return new GameResults(gameIsOver);
     }
 
     /// <summary>
@@ -220,7 +225,7 @@ public class GameServer
     /// <param name="console"></param>
     /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
     /// <returns></returns>
-    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage)
+    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage)
     {
         if (console == null)
         {
@@ -236,7 +241,7 @@ public class GameServer
         {
             // Retrieve the game from persistent storage.
             Game = Game.LoadGame(persistentStorage);
-            Game.Play(console, persistentStorage);
+            Game.Play(console, persistentStorage, replayPersistentStorage);
             gameIsOver = true;
         }
         catch (Exception ex)
@@ -245,8 +250,6 @@ public class GameServer
         }
 
         // Serialize the GameReplay.
-        GameReplay gameReplay = new GameReplay(Game.MainSequenceRandomSeed, Game.ReplayQueue.ToArray());
-        string serializedGameReplay = JsonSerializer.Serialize(gameReplay);
-        return new GameResults(gameIsOver, serializedGameReplay);
+        return new GameResults(gameIsOver);
     }
 }

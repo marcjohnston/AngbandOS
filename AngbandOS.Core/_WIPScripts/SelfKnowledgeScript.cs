@@ -450,7 +450,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
             if (row == 22 && infoIndex + 1 < infoCount)
             {
                 Game.Screen.PrintLine("-- more --", row, 15);
-                Game.Inkey();
+                Game.GetAndRecordKeystroke();
                 for (; row > 2; row--)
                 {
                     Game.Screen.PrintLine("", row, 15);
@@ -458,7 +458,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
             }
         }
         Game.Screen.PrintLine("[Press any key to continue]", row, 13);
-        Game.Inkey();
+        Game.GetAndRecordKeystroke();
         Game.Screen.Restore(savedScreen);
     }
 

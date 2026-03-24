@@ -3,11 +3,9 @@
 public class GameResults
 {
     public bool GameIsOver { get; }
-    public string Replay { get; }
 
-    public GameResults(bool gameIsOver, string replay)
+    public GameResults(bool gameIsOver)
     {
         GameIsOver = gameIsOver;
-        Replay = replay;
     }
 }

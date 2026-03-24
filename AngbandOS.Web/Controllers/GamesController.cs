@@ -2,7 +2,6 @@
 using AngbandOS.Core.Interface.Configuration;
 using AngbandOS.Core.Interface.Metadata;
 using AngbandOS.PersistentStorage;
-using AngbandOS.Web.Hubs;
 using AngbandOS.Web.Interface;
 using AngbandOS.Web.Services;
 using Microsoft.AspNetCore.Authorization;

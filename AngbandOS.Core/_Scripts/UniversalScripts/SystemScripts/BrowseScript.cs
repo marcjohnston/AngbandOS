@@ -57,7 +57,7 @@ internal class BrowseScript : UniversalScript, IGetKey
         Game.MsgPrint(null);
         // Wait for a keypress and re-load the screen
         Game.Screen.Print("[Press any key to continue]", 0, 23);
-        Game.Inkey();
+        Game.GetAndRecordKeystroke();
         Game.Screen.Restore(savedScreen);
     }
 }

@@ -48,7 +48,7 @@ internal class RetireScript : UniversalScript, IGetKey
                 // Require a confirmation to make sure the player doesn't accidentally give up a
                 // long-running character
                 Game.Screen.PrintLine("Type the '@' sign to give up (this character will no longer be playable): ", 0, 0);
-                int i = Game.Inkey();
+                int i = Game.GetAndRecordKeystroke();
                 Game.MsgPrint(null);
                 if (i != '@')
                 {

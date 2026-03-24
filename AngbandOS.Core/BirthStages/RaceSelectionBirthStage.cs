@@ -23,7 +23,7 @@ internal class RaceSelectionBirthStage : BirthStage
         {
             Game.MenuDisplay(currentSelection, menuItems);
             RenderSelection(currentSelection);
-            char c = Game.Inkey();
+            char c = Game.GetAndRecordKeystroke();
             switch (c)
             {
                 case '8':

@@ -61,7 +61,7 @@ internal sealed class GameMessageWidget : Widget, IGetKey, IToJson
             Game.Screen.Print(ColorEnum.BrightBlue, MorePrompt, Y, X + Game.GameMessage.StringValue.Length + 1);
             while (!Game.Shutdown)
             {
-                Game.Inkey(true);
+                Game.GetAndRecordKeystroke(true);
                 break;
             }
         }

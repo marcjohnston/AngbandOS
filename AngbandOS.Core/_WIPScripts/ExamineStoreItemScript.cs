@@ -45,7 +45,7 @@ internal class ExamineStoreItemScript : Script, IStoreCommandScript
                 Game.PrintSpells(oPtr.Spells.ToArray(), 1, 20);
                 Game.MsgPrint(null);
                 Game.Screen.Print("[Press any key to continue]", 0, 23);
-                Game.Inkey();
+                Game.GetAndRecordKeystroke();
                 Game.Screen.Restore(savedScreen);
             }
             else

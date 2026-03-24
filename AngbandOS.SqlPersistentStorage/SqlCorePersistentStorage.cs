@@ -3,6 +3,7 @@ using AngbandOS.PersistentStorage.Sql.Entities;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
+
 namespace AngbandOS.PersistentStorage
 {
     /// <summary>
@@ -17,7 +18,7 @@ namespace AngbandOS.PersistentStorage
         protected string ConnectionString { get; }
 
         /// <summary>
-        /// Returns the username to use when reading and writing a saved game to the database.
+        /// Returns the username to use when reading and writing a saved game to the database.  This is how the game is linked to a user.
         /// </summary>
         protected string Username { get; }
 
@@ -64,9 +65,13 @@ namespace AngbandOS.PersistentStorage
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
+                // Retrieve an existing game from the database.
                 SavedGame? savedGame = context.SavedGames.SingleOrDefault(_savedGame => _savedGame.Username == Username && _savedGame.Guid.ToString() == GameGuid);
-                if (savedGame == null)
+
+                // Check to see if it exists.
+                if (savedGame is null)
                 {
+                    // Create a new one and add it to the table.
                     savedGame = new SavedGame()
                     {
                         Username = Username,

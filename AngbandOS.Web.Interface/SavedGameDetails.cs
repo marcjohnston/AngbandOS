@@ -12,4 +12,5 @@ public class SavedGameDetails
     public string CharacterName { get; set; }
     public string Comments { get; set; }
     public bool IsAlive { get; set; }
+    public bool ReplayIsAvailable { get; set; }
 }

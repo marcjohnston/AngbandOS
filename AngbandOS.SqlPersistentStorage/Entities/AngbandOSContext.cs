@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+
 namespace AngbandOS.PersistentStorage.Sql.Entities
 {
     public partial class AngbandOSContext : DbContext
@@ -23,9 +24,12 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; } = null!;
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<DeviceCode> DeviceCodes { get; set; } = null!;
+        public virtual DbSet<Game> Games { get; set; } = null!;
+        public virtual DbSet<GameReplay> GameReplays { get; set; } = null!;
         public virtual DbSet<Key> Keys { get; set; } = null!;
         public virtual DbSet<Message> Messages { get; set; } = null!;
         public virtual DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
+        public virtual DbSet<ReplayStep> ReplaySteps { get; set; } = null!;
         public virtual DbSet<RepositoryEntity> RepositoryEntities { get; set; } = null!;
         public virtual DbSet<SavedGame> SavedGames { get; set; } = null!;
         public virtual DbSet<SavedGameContent> SavedGameContents { get; set; } = null!;
@@ -37,7 +41,8 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
             modelBuilder.Entity<AspNetRole>(entity =>
             {
                 entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
-                    .IsUnique();
+                    .IsUnique()
+                    .HasFilter("([NormalizedName] IS NOT NULL)");
 
                 entity.Property(e => e.Name).HasMaxLength(256);
 
@@ -58,7 +63,8 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                 entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
 
                 entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
-                    .IsUnique();
+                    .IsUnique()
+                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
 
                 entity.Property(e => e.Id)
                     .HasMaxLength(36)
@@ -165,6 +171,33 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                 entity.Property(e => e.SubjectId).HasMaxLength(200);
             });
 
+            modelBuilder.Entity<Game>(entity =>
+            {
+                entity.Property(e => e.CharacterName)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(1024)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<GameReplay>(entity =>
+            {
+                entity.HasKey(e => e.GameGuid);
+
+                entity.HasIndex(e => e.ReplayId, "UQ_GameReplays")
+                    .IsUnique();
+
+                entity.Property(e => e.GameGuid).ValueGeneratedNever();
+
+                entity.Property(e => e.ReplayId).ValueGeneratedOnAdd();
+            });
+
             modelBuilder.Entity<Key>(entity =>
             {
                 entity.HasIndex(e => e.Use, "IX_Keys_Use");
@@ -229,6 +262,18 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                 entity.Property(e => e.Type).HasMaxLength(50);
             });
 
+            modelBuilder.Entity<ReplayStep>(entity =>
+            {
+                entity.Property(e => e.DateTime).HasPrecision(3);
+
+                entity.HasOne(d => d.GameReplay)
+                    .WithMany(p => p.ReplaySteps)
+                    .HasPrincipalKey(p => p.ReplayId)
+                    .HasForeignKey(d => d.GameReplayId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ReplaySteps_GameReplays");
+            });
+
             modelBuilder.Entity<RepositoryEntity>(entity =>
             {
                 entity.HasKey(e => new { e.RepositoryName, e.Key })
@@ -247,11 +292,10 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
 
             modelBuilder.Entity<SavedGame>(entity =>
             {
-                entity.HasKey(e => new { e.Guid, e.Username });
+                entity.HasKey(e => e.Guid)
+                    .HasName("PK_SavedGames_1");
 
-                entity.Property(e => e.Username)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+                entity.Property(e => e.Guid).ValueGeneratedNever();
 
                 entity.Property(e => e.CharacterName)
                     .HasMaxLength(255)
@@ -263,10 +307,13 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
 
                 entity.Property(e => e.DateTime).HasColumnType("datetime");
 
+                entity.Property(e => e.Username)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
                 entity.HasOne(d => d.SavedGameContent)
                     .WithMany(p => p.SavedGames)
                     .HasForeignKey(d => d.SavedGameContentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SavedGames_SavedGameContents");
             });
 

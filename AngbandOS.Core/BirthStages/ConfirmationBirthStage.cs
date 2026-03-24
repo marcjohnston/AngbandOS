@@ -58,7 +58,7 @@ internal class ConfirmationBirthStage : BirthStage
             Game.Screen.Print(ColorEnum.Orange, "[Use return to confirm, or left to go back.]", 43, 1);
             IScript showCharacterSheet = Game.SingletonRepository.Get<IScript>(nameof(RenderCharacterScript)); // TODO: This framework object uses a gamepack script
             showCharacterSheet.ExecuteScript();
-            char c = Game.Inkey();
+            char c = Game.GetAndRecordKeystroke();
             switch (c)
             {
                 case (char)13:

@@ -127,25 +127,24 @@ internal partial class Game
     }
 
     #region Game Replay
-    /// <summary>
-    /// Returns the date and time of when the last keystroke was presented to the game either by the replay system or via the keyboard/console.
-    /// </summary>
-    private DateTime? LastKeystrokeDateTime = null;
+    [NonSerialized]
+    private IReplayPersistentStorage? ReplayPersistentStorage = null;
 
     /// <summary>
-    /// Tracks the index for the GameReplayStep that will be sent to the game during game replay mode.  In recording mode, it is incremented to ensure the game doesn't attempt to replay the same keystroke.
+    /// Returns the date and time of of the previous keystroke during replay mode.
     /// </summary>
-    private int ReplayQueueIndex = 0;
+    private DateTime? replayPreviousKeystrokeDateTime = null;
 
     /// <summary>
     /// The queue for recording keystrokes or playing back keystrokes.  This structure is used for both recording and playback.
     /// </summary>
-    public readonly List<GameReplayStep> ReplayQueue = new List<GameReplayStep>(); // List.Add has a O(1) time complexity until it needs to be resized.
+    [NonSerialized]
+    public readonly Queue<GameReplayStep> ReplayQueue = new Queue<GameReplayStep>(); // List.Add has a O(1) time complexity until it needs to be resized.
 
     /// <summary>
     /// Returns the random seed to start the game that is applied to the non-fixed random generator.
     /// </summary>
-    public int MainSequenceRandomSeed;
+    public readonly int MainSequenceRandomSeed;
 
     /// <summary>
     /// Returns the value of the non-fixed random seed to use to restore the non-fixed random generator.  This seed is needed because the Random object cannot be serialized and we need to restore
@@ -157,7 +156,7 @@ internal partial class Game
     /// Returns true, when the game is processing the popup menu.  This value is used to determine when the game is entering and existing the popup menu mode.  Keystrokes that are used during, to render or
     /// to exit the popup menu are not recorded--in actuality, those keystrokes are removed from the queue.
     /// </summary>
-    public bool PreviousInPopupMenu = false;
+    //public bool PreviousInPopupMenu = false;
     #endregion
 
     #region Configuration Properties
@@ -437,7 +436,7 @@ internal partial class Game
     /// </summary>
     public bool HideCursorOnFullScreenInkey;
 
-    public bool InPopupMenu;
+    //public bool InPopupMenu;
 
     public char[] KeyQueue;
 
@@ -853,15 +852,18 @@ internal partial class Game
     /// For game replay mode, construction of the game DOES NOT use the random generator.  We only initialize the non-fixed seed.
     /// 
     /// </remarks>
-    public Game(GameConfiguration gameConfiguration, string? serializedGameReplay)
+    public Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay)
     {
         _mainSequence = new Random();
-        // Restore the game replay, if needed.
-        if (!string.IsNullOrEmpty(serializedGameReplay))
+
+        // Check to see if we are replaying a game.
+        if (gameReplay is not null)
         {
-            GameReplay gameReplay = JsonSerializer.Deserialize<GameReplay>(serializedGameReplay);
-            MainSequenceRandomSeed = gameReplay.MainSequenceRandomSeed;
-            ReplayQueue.AddRange(gameReplay.GameReplaySteps);
+            MainSequenceRandomSeed = gameReplay.Seed;
+            foreach (GameReplayStep gameReplayStep in gameReplay.GameReplaySteps)
+            {
+                ReplayQueue.Enqueue(gameReplayStep);
+            }
         }
         else
         {
@@ -2273,6 +2275,8 @@ internal partial class Game
         GenerateNewLevel();
     }
 
+    public bool IsInReplayMode => ReplayQueue.Count > 0;
+
     /// <summary>
     /// Plays the current game.
     /// </summary>
@@ -2281,7 +2285,7 @@ internal partial class Game
     /// <remarks>
     /// For game replay mode and the ability to restore a saved game, we need to reinitialize the random generator because the Random object is not serializable.
     /// </remarks>
-    public void Play(IConsoleAndViewPort consoleViewPort, ICorePersistentStorage? persistentStorage)
+    public void Play(IConsoleAndViewPort consoleViewPort, ICorePersistentStorage? persistentStorage, IReplayPersistentStorage? replayPersistentStorage)
     {
         void Kingly()
         {
@@ -2361,17 +2365,15 @@ internal partial class Game
             }
         }
 
-        // If this game is to be replayed, we need to initialize the non-fixed random with the same value that was used to construct the game.
-        int randomSeed = ReplayQueueIndex == 0 ? MainSequenceRandomSeed : CurrentSequenceRandomSeed;
+        // If this game is a replay, we need to initialize the non-fixed random with the same value that was used to construct the game, otherwise, we need to restore the random to the next seed for deterministic game play.
+        int randomSeed = IsInReplayMode ? MainSequenceRandomSeed : CurrentSequenceRandomSeed;
         _mainSequence = new Random(randomSeed);
-
-        // Reset the last keystroke date and time.  This ensures the time offline isn't recorded as wait time.
-        LastKeystrokeDateTime = DateTime.Now;
 
         ConsoleViewPort = consoleViewPort;
         Shutdown = false;
         LastInputReceived = DateTime.Now;
         CorePersistentStorage = persistentStorage;
+        ReplayPersistentStorage = replayPersistentStorage;
         KeyQueue = new char[ConsoleViewPort.MaximumKeyQueueLength];
         Screen = new Window(consoleViewPort);
         MapMovementKeys();
@@ -2863,7 +2865,7 @@ internal partial class Game
             outVal += " ESC";
             tmpVal = $"({outVal}) {prompt}";
             Screen.PrintLine(tmpVal, 0, 0);
-            char which = Inkey();
+            char which = GetAndRecordKeystroke();
             int k;
             switch (which)
             {
@@ -3821,7 +3823,7 @@ internal partial class Game
         if (Running != 0 || CommandRepeat != 0 || (Resting != 0 && (Resting & 0x0F) == 0))
         {
             // We need a non-blocking inkey.
-            if (Inkey(false, true) != 0)
+            if (GetAndRecordKeystroke(false, true) != 0)
             {
                 Disturb(false);
                 MsgPrint("Cancelled.");
@@ -5917,6 +5919,23 @@ internal partial class Game
             cnt++;
         }
         return cnt > 0;
+    }
+    public void ShowPopupMenu()
+    {
+        List<string> menuItems = new List<string>() { "Resume Game", "Save and Quit" };
+        PopupMenu menu = new PopupMenu(menuItems);
+        int result = menu.Show(this);
+        switch (result)
+        {
+            // Escape or Resume Game
+            case -1:
+            case 0:
+                break;
+            // Save and Quit
+            case 1:
+                Playing = false; // TODO: Need to use event arguments
+                break;
+        }
     }
 
     /// <summary>
@@ -8307,7 +8326,7 @@ internal partial class Game
     {
         Screen.PrintLine("", row, 0);
         Screen.Print(ColorEnum.Orange, "[Press any key to continue]", row, 27);
-        Inkey();
+        GetAndRecordKeystroke();
         Screen.PrintLine("", row, 0);
     }
 
@@ -8336,7 +8355,7 @@ internal partial class Game
         {
             Screen.Goto(cursorPosition.Y, cursorPosition.X + k);
             Screen.UpdateScreen();
-            i = Inkey();
+            i = GetAndRecordKeystroke();
             switch (i)
             {
                 case '\x1b':
@@ -8384,7 +8403,7 @@ internal partial class Game
         Screen.PrintLine(buf, 0, 0);
         while (!Shutdown)
         {
-            i = Inkey();
+            i = GetAndRecordKeystroke();
             switch (i)
             {
                 case 'y':
@@ -8412,7 +8431,7 @@ internal partial class Game
             prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
         }
         Screen.PrintLine(prompt, 0, 0);
-        command = Inkey();
+        command = GetAndRecordKeystroke();
         MsgPrint(null);
         return command != '\x1b';
     }
@@ -8549,62 +8568,73 @@ internal partial class Game
         CommandDirection = 0;
         while (!Shutdown)
         {
-            char cmd;
             HideCursorOnFullScreenInkey = true;
-            cmd = Inkey();
+            (char cmd, bool isArtificial) = GetKeystroke();
             MsgPrint(null);
-            if (cmd == '0')
+            if (cmd == '\x1b')
             {
-                int oldArg = CommandArgument;
-                CommandArgument = 0;
-                Screen.PrintLine("Count: ", 0, 0);
-                while (!Shutdown)
+                // Keystrokes will not be recorded here.
+                ShowPopupMenu();
+            }
+            else
+            {
+                if (!isArtificial)
                 {
-                    cmd = Inkey();
-                    if (cmd == 0x7F || cmd == 0x08)
+                    RecordReplayStep(cmd);
+                }
+                if (cmd == '0')
+                {
+                    int oldArg = CommandArgument;
+                    CommandArgument = 0;
+                    Screen.PrintLine("Count: ", 0, 0);
+                    while (!Shutdown)
                     {
-                        CommandArgument /= 10;
-                        Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
-                    }
-                    else if (cmd >= '0' && cmd <= '9')
-                    {
-                        if (CommandArgument >= 1000)
+                        cmd = GetAndRecordKeystroke();
+                        if (cmd == 0x7F || cmd == 0x08)
                         {
-                            CommandArgument = 9999;
+                            CommandArgument /= 10;
+                            Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
+                        }
+                        else if (cmd >= '0' && cmd <= '9')
+                        {
+                            if (CommandArgument >= 1000)
+                            {
+                                CommandArgument = 9999;
+                            }
+                            else
+                            {
+                                CommandArgument = (CommandArgument * 10) + int.Parse(cmd.ToString());
+                            }
+                            Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
                         }
                         else
                         {
-                            CommandArgument = (CommandArgument * 10) + int.Parse(cmd.ToString());
+                            break;
                         }
+                    }
+                    if (CommandArgument == 0)
+                    {
+                        CommandArgument = 99;
                         Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
                     }
-                    else
+                    if (oldArg != 0)
                     {
-                        break;
+                        CommandArgument = oldArg;
+                        Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
+                    }
+                    if (cmd == ' ' || cmd == '\n' || cmd == '\r')
+                    {
+                        if (!GetCom("Command: ", out cmd))
+                        {
+                            CommandArgument = 0;
+                            continue;
+                        }
                     }
                 }
-                if (CommandArgument == 0)
+                else if (cmd == '\\')
                 {
-                    CommandArgument = 99;
-                    Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
+                    GetCom("Command: ", out cmd);
                 }
-                if (oldArg != 0)
-                {
-                    CommandArgument = oldArg;
-                    Screen.PrintLine($"Count: {CommandArgument}", 0, 0);
-                }
-                if (cmd == ' ' || cmd == '\n' || cmd == '\r')
-                {
-                    if (!GetCom("Command: ", out cmd))
-                    {
-                        CommandArgument = 0;
-                        continue;
-                    }
-                }
-            }
-            if (cmd == '\\')
-            {
-                GetCom("Command: ", out cmd);
             }
             string act = _keymapAct[mode][cmd];
             if (!string.IsNullOrEmpty(act))
@@ -8636,12 +8666,30 @@ internal partial class Game
     /// </summary>
     public TimeSpan? MaxKeystrokeReplayElapsedTime = new TimeSpan(0, 0, 0, 0, 0);
 
+    public void RecordReplayStep(char keystroke)
+    {
+        if (!IsInReplayMode && ReplayPersistentStorage is not null)
+        {
+            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke);
+        }
+    }
+
+    public char GetAndRecordKeystroke(bool disableArtificialKeybuffer = false, bool nonBlocking = false)
+    {
+        (char keystroke, bool isArtificial) = GetKeystroke(disableArtificialKeybuffer, nonBlocking);
+        if (!isArtificial)
+        {
+            RecordReplayStep(keystroke);
+        }
+        return keystroke;
+    }
+
     /// <summary>
     /// Returns the next keystroke from either the artificial keystroke buffer, or the <see cref="ConsoleViewPort"/>.  The artificial keystroke buffer will always be processed before the <see cref="ConsoleViewPort"/>
     /// keystrokes are retrieved.
     /// </summary>
     /// <returns>The next key pressed.</returns>
-    public char Inkey(bool disableArtificialKeybuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
+    public (char keystroke, bool isArtifical) GetKeystroke(bool disableArtificialKeybuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
     {
         /// <summary>
         /// Attempts to gets a keypress from the <see cref="ConsoleViewport"/> queue.  Returns true, if a keypress was returned.  Returns false, if the <paramref name="wait"/> is true and the <see cref="ConsoleViewPort"/>
@@ -8663,26 +8711,20 @@ internal partial class Game
                 char k;
 
                 // Check to see if we are in playback mode.
-                if (ReplayQueueIndex < ReplayQueue.Count)
+                if (IsInReplayMode)
                 {
                     // Yes, we are in replay mode.  Retrieve the replay step that needs to be replayed.  This is a non-destructive (non-dequeue) peek.  We only increment the replay index pointer.
-                    GameReplayStep gameReplayStep = ReplayQueue[ReplayQueueIndex];
+                    GameReplayStep gameReplayStep = ReplayQueue.Dequeue();
 
                     // Compute how much elapsed time occurred since the last keystroke.
-                    TimeSpan keystrokeElapsedTime = ReplayQueueIndex == 0 ? TimeSpan.Zero : ReplayQueue[ReplayQueueIndex].DateTime - ReplayQueue[ReplayQueueIndex - 1].DateTime;
-                    ReplayQueueIndex++;
+                    TimeSpan keystrokeElapsedTime = (replayPreviousKeystrokeDateTime is null) ? TimeSpan.Zero : gameReplayStep.DateTime - replayPreviousKeystrokeDateTime.Value;
+                    replayPreviousKeystrokeDateTime = gameReplayStep.DateTime;
 
                     // Retrieve the current date and time for the computations.
                     DateTime now = DateTime.Now;
 
-                    // Check to see if the last keystroke date and time needs to be initialized.
-                    if (LastKeystrokeDateTime == null)
-                    {
-                        LastKeystrokeDateTime = now;
-                    }
-
                     // Determine when the next keystroke should be submitted.
-                    DateTime nextKeystrokeSubmitTime = LastKeystrokeDateTime.Value + keystrokeElapsedTime;
+                    DateTime nextKeystrokeSubmitTime = replayPreviousKeystrokeDateTime.Value + keystrokeElapsedTime;
 
                     // Compute how much time we need to wait and wait that time out.
                     TimeSpan waitTime = nextKeystrokeSubmitTime - now;
@@ -8703,29 +8745,12 @@ internal partial class Game
                     k = gameReplayStep.Keystroke;
 
                     // Update the running keystroke submit time.  If the wait time was shortened due to exceeding the maximum elapsed time, we set the time to the target time.
-                    LastKeystrokeDateTime = nextKeystrokeSubmitTime;
+                    replayPreviousKeystrokeDateTime = nextKeystrokeSubmitTime;
                 }
                 else
                 {
-                    // No we are in interactive mode.  Detect if we just entered the popup menu.
-                    bool enteredPopupMenu = InPopupMenu && !PreviousInPopupMenu;
-                    bool exitedPopupMenu = !InPopupMenu && PreviousInPopupMenu;
-                    bool popupMenuCommand = InPopupMenu && PreviousInPopupMenu;
-                    if (enteredPopupMenu || exitedPopupMenu || popupMenuCommand)
-                    {
-                        // Remove the keystroke.
-                        ReplayQueue.RemoveAt(ReplayQueue.Count - 1);
-                    }
-                    PreviousInPopupMenu = InPopupMenu;
-
                     // Wait for a keystroke from the console and record it and the current date and time for replay.
                     k = ConsoleViewPort.WaitForKey();
-
-                    // Append the replay step.
-                    ReplayQueue.Add(new GameReplayStep(DateTime.Now, k));
-
-                    // We are in recording mode.  Keep the replay queue index up to date.
-                    ReplayQueueIndex = ReplayQueue.Count;
                 }
 
                 if (k == 0) // TODO: This should never be
@@ -8770,22 +8795,18 @@ internal partial class Game
             return true;
         }
 
-    char ch = '\0';
+        char ch = '\0';
         if (!disableArtificialKeybuffer && _artificialKeyBuffer.Length > 0)
         {
             ch = _artificialKeyBuffer[0];
             _artificialKeyBuffer = _artificialKeyBuffer.Remove(0, 1);
             HideCursorOnFullScreenInkey = false;
-            return ch;
+            return (ch, true);
         }
         bool v = Screen.CursorVisible;
         if (!nonBlocking && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
         {
             Screen.CursorVisible = true;
-        }
-        if (InPopupMenu)
-        {
-            Screen.CursorVisible = false;
         }
         while (ch == 0 && !Shutdown)
         {
@@ -8815,7 +8836,7 @@ internal partial class Game
         }
         Screen.CursorVisible = v;
         HideCursorOnFullScreenInkey = false;
-        return ch;
+        return (ch, false);
     }
 
     private void MapMovementKeys()
@@ -12050,7 +12071,7 @@ internal partial class Game
         while (ch != 27 && ch != ' ' && !Shutdown)
         {
             ConsoleView.MoveCursorTo(y, x);
-            ch = Inkey();
+            ch = GetAndRecordKeystroke();
             switch (ch)
             {
                 case '\x1b':
@@ -12225,7 +12246,7 @@ internal partial class Game
                 outVal = $"{s1}{s2}{s3}{name} [{info}]";
                 Screen.PrintLine(outVal, 0, 0);
                 ConsoleView.MoveCursorTo(y, x);
-                query = Inkey();
+                query = GetAndRecordKeystroke();
                 if (!Shutdown)
                 {
                     break;
@@ -12255,7 +12276,7 @@ internal partial class Game
                             ScreenBuffer savedScreen = Screen.Clone();
                             rPtr.Knowledge.Display();
                             Screen.Print(ColorEnum.White, $"  [r,{info}]");
-                            query = Inkey();
+                            query = GetAndRecordKeystroke();
                             Screen.Restore(savedScreen);
                         }
                         else
@@ -12265,7 +12286,7 @@ internal partial class Game
                             outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
                             Screen.PrintLine(outVal, 0, 0);
                             ConsoleView.MoveCursorTo(y, x);
-                            query = Inkey();
+                            query = GetAndRecordKeystroke();
                         }
                         if (query != 'r')
                         {
@@ -12299,7 +12320,7 @@ internal partial class Game
                         Screen.PrintLine(outVal, 0, 0);
                         Screen.UpdateScreen();
                         ConsoleView.MoveCursorTo(y, x);
-                        query = Inkey();
+                        query = GetAndRecordKeystroke();
                         if (query != '\r' && query != '\n' && query != ' ')
                         {
                             exitWhile = true;
@@ -12329,7 +12350,7 @@ internal partial class Game
                     outVal = $"{s1}{s2}{s3}{oName} [{info}]";
                     Screen.PrintLine(outVal, 0, 0);
                     ConsoleView.MoveCursorTo(y, x);
-                    query = Inkey();
+                    query = GetAndRecordKeystroke();
                     if (query != '\r' && query != '\n' && query != ' ')
                     {
                         exitDo = true;
@@ -12376,7 +12397,7 @@ internal partial class Game
                 outVal = $"{s1}{s2}{s3}{name} [{info}]";
                 Screen.PrintLine(outVal, 0, 0);
                 ConsoleView.MoveCursorTo(y, x);
-                query = Inkey();
+                query = GetAndRecordKeystroke();
                 if (query != '\r' && query != '\n' && query != ' ')
                 {
                     break;

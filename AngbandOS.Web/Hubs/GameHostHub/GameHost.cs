@@ -11,7 +11,7 @@ namespace AngbandOS.Web.Hubs
     /// Represents an object that accept messages from an active game (AngbandOS.Core) and send the message to the client browser via a SignalR hub.  This class operates 
     /// as a background worker to process incoming messages and send outgoing messages without blocking the main thread.
     /// </summary>
-    public class ConsoleAndViewPort : BackgroundWorker, IConsoleAndViewPort
+    public class GameHost : BackgroundWorker, IConsoleAndViewPort
     {
         #region State Date
         /// <summary>
@@ -40,6 +40,11 @@ namespace AngbandOS.Web.Hubs
         private readonly ICorePersistentStorage PersistentStorage;
 
         /// <summary>
+        /// Returns the object responsible for the persistence of the game.
+        /// </summary>
+        private readonly IReplayPersistentStorage ReplayPersistentStorage;
+
+        /// <summary>
         /// Returns the actual game.  The game is null, until the thread is started.
         /// </summary>
         private GameServer? _gameServer = null;
@@ -57,7 +62,7 @@ namespace AngbandOS.Web.Hubs
         /// <summary>
         /// Returns object that handles the notification channel.
         /// </summary>
-        private readonly Action<ConsoleAndViewPort, GameUpdateNotificationEnum, string> NotificationAction;
+        private readonly Action<GameHost, GameUpdateNotificationEnum, string> NotificationAction;
 
         /// <summary>
         /// Returns the context for the GameHub.  This is used to abort the signal-r connection and terminate the game instantly.
@@ -73,11 +78,13 @@ namespace AngbandOS.Web.Hubs
         /// Returns the <see cref="GameConfiguration"/> to use to create a new game; or null, to play an existing game.
         /// </summary>
         private readonly GameConfiguration? GameConfiguration = null;
+
+        private readonly GameReplayDetails? GameReplay;
         #endregion
 
         #region Constructor
         /// <summary>
-        /// Constructs a new <see cref="ConsoleAndViewPort"/> object to play a new game.
+        /// Constructs a new <see cref="GameHost"/> object to play a new game.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="gameHub"></param>
@@ -85,7 +92,7 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId">The user ID of the player.  This property is used to GET ActiveGames controller to return the user ID of the player.</param>
         /// <param name="username">The username for the player.  This property is used by the GET ActiveGames controller to return the name of the player./></param>
         /// <param name="notificationAction"></param>
-        public ConsoleAndViewPort(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration, string userId, string username, Action<ConsoleAndViewPort, GameUpdateNotificationEnum, string> notificationAction)
+        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IReplayPersistentStorage replayPersistentStorage)
         {
             _consoleGameHub = gameHub;
             PersistentStorage = persistentStorage;
@@ -94,10 +101,12 @@ namespace AngbandOS.Web.Hubs
             NotificationAction = notificationAction;
             Context = context;
             GameConfiguration = gameConfiguration;
+            ReplayPersistentStorage = replayPersistentStorage;
+            GameReplay = null;
         }
 
         /// <summary>
-        /// Constructs a new <see cref="ConsoleAndViewPort"/> object to play an existing game.
+        /// Constructs a new <see cref="GameHost"/> object to play an existing game.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="gameHub"></param>
@@ -105,18 +114,43 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId"></param>
         /// <param name="username"></param>
         /// <param name="notificationAction"></param>
-        public ConsoleAndViewPort(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<ConsoleAndViewPort, GameUpdateNotificationEnum, string> notificationAction)
+        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IReplayPersistentStorage replayPersistentStorage)
+        {
+            _consoleGameHub = gameHub;
+            PersistentStorage = persistentStorage;
+            UserId = userId;
+            Username = username;
+            GameConfiguration = null;
+            NotificationAction = notificationAction;
+            Context = context;
+            ReplayPersistentStorage = replayPersistentStorage;
+            GameReplay = null;
+        }
+
+        /// <summary>
+        /// Constructs a new <see cref="GameHost"/> object to replay a game.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="gameHub"></param>
+        /// <param name="persistentStorage"></param>
+        /// <param name="userId"></param>
+        /// <param name="username"></param>
+        /// <param name="notificationAction"></param>
+        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IReplayPersistentStorage replayPersistentStorage, GameReplayDetails? gameReplay)
         {
             _consoleGameHub = gameHub;
             PersistentStorage = persistentStorage;
             UserId = userId;
             Username = username;
             NotificationAction = notificationAction;
+            GameConfiguration = gameConfiguration;
             Context = context;
+            ReplayPersistentStorage = replayPersistentStorage;
+            GameReplay = gameReplay;
         }
         #endregion
 
-        #region IConsole Implementation for Outgoing Messages from the Game Core to the Web Client
+        #region IConsole Implementation for Messages from the Game to the Web Client
         public int Height => 45;
         public int Width => 80;
         public int MaximumKeyQueueLength => 256;
@@ -408,13 +442,15 @@ namespace AngbandOS.Web.Hubs
             // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
             // IConsole to receive and process print and wait for key requests.
             GameResults results;
-            if (GameConfiguration == null)
+
+            // Check to see if this is a request to play an existing game.
+            if (GameConfiguration is null)
             {
-                results = _gameServer.PlayExistingGame(this, PersistentStorage);
+                results = _gameServer.PlayExistingGame(this, PersistentStorage, ReplayPersistentStorage);
             }
             else
-            {
-                results = _gameServer.PlayNewGame(this, PersistentStorage, GameConfiguration, null);
+            {               
+                results = _gameServer.PlayNewGame(this, PersistentStorage, ReplayPersistentStorage, GameConfiguration, GameReplay);
             }
             if (results.GameIsOver)
             {

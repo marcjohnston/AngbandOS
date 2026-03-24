@@ -53,7 +53,7 @@ internal class JournalScript : UniversalScript, IGetKey
             Game.Screen.Print(ColorEnum.Blue, "(u) Uniques", 11, 0);
             Game.Screen.Print(ColorEnum.Blue, "(w) Worthless Items", 12, 0);
             Game.Screen.Print(ColorEnum.Orange, "[Select a journal section, or Escape to finish.]", 43, 1);
-            char k = Game.Inkey();
+            char k = Game.GetAndRecordKeystroke();
             if (k == '\x1b')
             {
                 break;
@@ -330,7 +330,7 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Prm Curse", 37, 52, (EffectiveAttributeSet itemCharacteristics) => itemCharacteristics.PermaCurse);
 
         Game.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
-        Game.Inkey();
+        Game.GetAndRecordKeystroke();
     }
 
     private void JournalDeities()
@@ -428,7 +428,7 @@ internal class JournalScript : UniversalScript, IGetKey
             Game.Screen.Print(ColorEnum.Blue, "Over time, your standing with all deities will revert back to indifference.", 12, 1);
         }
         Game.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
-        Game.Inkey();
+        Game.GetAndRecordKeystroke();
     }
 
     private void JournalKills()
@@ -521,7 +521,7 @@ internal class JournalScript : UniversalScript, IGetKey
             buf = $"Total Kills: {total}";
             Game.Screen.Print(ColorEnum.Blue, buf, 41, 0);
             Game.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-            int c = Game.Inkey();
+            int c = Game.GetAndRecordKeystroke();
             if (c == '\x1b')
             {
                 break;
@@ -593,7 +593,7 @@ internal class JournalScript : UniversalScript, IGetKey
             Game.Screen.Print(ColorEnum.Blue, "=============", 1, 1);
             Game.Screen.Print(ColorEnum.Blue, "You haven't seen any monsters yet!", 3, 0);
             Game.Screen.Print(ColorEnum.Orange, "[Press any key to finish]", 43, 1);
-            Game.Inkey();
+            Game.GetAndRecordKeystroke();
             return;
         }
         int currentFilterIndex = 0;
@@ -623,7 +623,7 @@ internal class JournalScript : UniversalScript, IGetKey
                 Game.Screen.Print(ColorEnum.Blue, "=============", 1, 1);
                 DisplayMonster(filtered[currentIndex], currentIndex, maxFiltered);
                 Game.Screen.Print(ColorEnum.Orange, "[Up and down to change type, left and right to change monster, Esc to finish]", 43, 1);
-                c = Game.Inkey();
+                c = Game.GetAndRecordKeystroke();
                 if (c == '4')
                 {
                     if (currentIndex > 0)
@@ -720,7 +720,7 @@ internal class JournalScript : UniversalScript, IGetKey
                 }
             }
             Game.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-            int c = Game.Inkey();
+            int c = Game.GetAndRecordKeystroke();
             if (c == '\x1b')
             {
                 break;
@@ -783,7 +783,7 @@ internal class JournalScript : UniversalScript, IGetKey
                 }
             }
             Game.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-            int c = Game.Inkey();
+            int c = Game.GetAndRecordKeystroke();
             if (c == '\x1b')
             {
                 break;
@@ -832,7 +832,7 @@ internal class JournalScript : UniversalScript, IGetKey
             Game.Screen.Print(ColorEnum.Blue, "Congratulations! You have completed all the quests.", row, 0);
         }
         Game.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
-        Game.Inkey();
+        Game.GetAndRecordKeystroke();
     }
 
     private void JournalRecall()
@@ -863,7 +863,7 @@ internal class JournalScript : UniversalScript, IGetKey
         Game.Screen.Goto(8, 0);
         Game.Screen.PrintWrap(ColorEnum.Blue, description);
         Game.Screen.Print(ColorEnum.Orange, "[Press any key to finish.]", 43, 1);
-        Game.Inkey();
+        Game.GetAndRecordKeystroke();
     }
 
     private void JournalUniques()
@@ -902,7 +902,7 @@ internal class JournalScript : UniversalScript, IGetKey
                 }
             }
             Game.Screen.Print(ColorEnum.Orange, "[Use up and down to navigate list, and Escape to finish.]", 43, 1);
-            int c = Game.Inkey();
+            int c = Game.GetAndRecordKeystroke();
             if (c == '\x1b')
             {
                 break;
@@ -966,7 +966,7 @@ internal class JournalScript : UniversalScript, IGetKey
             Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
-                char c = Game.Inkey();
+                char c = Game.GetAndRecordKeystroke();
                 if (c == '8' && menu > 0)
                 {
                     menu--;
@@ -1048,7 +1048,7 @@ internal class JournalScript : UniversalScript, IGetKey
             Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
-                char c = Game.Inkey();
+                char c = Game.GetAndRecordKeystroke();
                 if (c == '8' && menu > 0)
                 {
                     menu--;
@@ -1090,7 +1090,7 @@ internal class JournalScript : UniversalScript, IGetKey
             Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
-                char c = Game.Inkey();
+                char c = Game.GetAndRecordKeystroke();
                 if (c == '8' && menu > 0)
                 {
                     menu--;
@@ -1147,7 +1147,7 @@ internal class JournalScript : UniversalScript, IGetKey
             Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
-                char c = Game.Inkey();
+                char c = Game.GetAndRecordKeystroke();
                 if (c == '8' && menu > 0)
                 {
                     menu--;

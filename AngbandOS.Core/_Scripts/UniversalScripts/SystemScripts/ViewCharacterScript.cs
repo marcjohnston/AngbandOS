@@ -39,7 +39,7 @@ internal class ViewCharacterScript : UniversalScript, IGetKey
             RenderCharacterScript showCharacterSheet = (RenderCharacterScript)Game.SingletonRepository.Get<IScript>(nameof(RenderCharacterScript));
             showCharacterSheet.ExecuteScript();
             Game.Screen.Print(ColorEnum.Orange, "[Press 'c' to change name, or ESC]", 43, 23);
-            char keyPress = Game.Inkey();
+            char keyPress = Game.GetAndRecordKeystroke();
             // Escape breaks us out of the loop
             if (keyPress == '\x1b')
             {

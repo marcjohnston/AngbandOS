@@ -64,7 +64,7 @@ internal class PopupMenu
                 }
             }
             game.HideCursorOnFullScreenInkey = true;
-            char k = game.Inkey();
+            (char k, bool _) = game.GetKeystroke();
 
             switch (k)
             {
@@ -97,12 +97,12 @@ internal class PopupMenu
 
     public int Show(Game game)
     {
-        game.InPopupMenu = true;
+        game.Screen.CursorVisible = false;
         game.FullScreenOverlay = true;
         ScreenBuffer savedScreen = game.Screen.Clone();
         var result = DisplayMenu(game);
         game.Screen.Restore(savedScreen);
-        game.InPopupMenu = false;
+        game.Screen.CursorVisible = true;
         game.FullScreenOverlay = false;
         return result;
     }

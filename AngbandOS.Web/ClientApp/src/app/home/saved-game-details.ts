@@ -6,4 +6,5 @@ export class SavedGameDetails {
   public characterName: string | undefined;
   public comments: string | undefined;
   public isAlive: boolean | undefined;
+  public replayIsAvailable: boolean | undefined;
 }

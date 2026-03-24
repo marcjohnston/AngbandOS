@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace AngbandOS.PersistentStorage.Sql.Entities
 {
-    public partial class SavedGame
+    public partial class Game
     {
-        public Guid Guid { get; set; }
+        public int Id { get; set; }
+        public int Seed { get; set; }
         public string Username { get; set; } = null!;
         public int Level { get; set; }
         public int Gold { get; set; }
@@ -13,8 +14,5 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public string Comments { get; set; } = null!;
         public bool IsAlive { get; set; }
         public DateTime DateTime { get; set; }
-        public int SavedGameContentId { get; set; }
-
-        public virtual SavedGameContent SavedGameContent { get; set; } = null!;
     }
 }

@@ -251,7 +251,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onSavedGameRowClick(savedGame: SavedGameDetails) {
+  public playSavedGame(savedGame: SavedGameDetails) {
     this._router.navigate(['/play', savedGame.guid]);
   }
 
@@ -259,6 +259,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._router.navigate(['/watch', activeGame.connectionId]);
   }
 
+  public replaySavedGame(savedGame: SavedGameDetails) {
+    this._router.navigate(['/play', savedGame.guid], { queryParams: { replay: 1}});
+  }
+  
   public onNewGame() {
     this._router.navigate(['/play']);
   }

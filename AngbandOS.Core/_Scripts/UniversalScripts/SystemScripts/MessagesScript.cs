@@ -51,7 +51,7 @@ internal class MessagesScript : UniversalScript, IGetKey
             // Get a command
             Game.Screen.PrintLine($"Message Recall ({index}-{index + row - 1} of {messageNumber}), Offset {horizontalOffset}", 0, 0);
             Game.Screen.PrintLine("[Press 'p' for older, 'n' for newer, <dir> to scroll, or ESCAPE]", 43, 0);
-            int keyCode = Game.Inkey();
+            int keyCode = Game.GetAndRecordKeystroke();
             if (keyCode == '\x1b')
             {
                 // Break out of the infinite loop

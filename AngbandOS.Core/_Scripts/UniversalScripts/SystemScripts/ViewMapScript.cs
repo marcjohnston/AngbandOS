@@ -55,7 +55,7 @@ internal class ViewMapScript : UniversalScript, IGetKey
             Game.Screen.Goto(cy, cx);
         }
         // Wait for a keypress, and restore the screen (looking at the map takes no time)
-        Game.Inkey();
+        Game.GetAndRecordKeystroke();
         Game.Screen.Restore(savedScreen);
         Game.FullScreenOverlay = false;
         Game.SetBackground(BackgroundImageEnum.Overhead);

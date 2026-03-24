@@ -45,7 +45,7 @@ namespace AngbandOS.Web.Hubs
 
         #region Incoming Messages from the Web Client
         /// <summary>
-        /// Process the incoming web client request to play an existing game.
+        /// Process the incoming web client request to play an existing game.  The client supplies the game configuration.
         /// </summary>
         /// <param name="guid">The unique identifier for the game to be played.  Must be owned by the user.  Null, to start a new game.</param>
         /// <returns></returns>
@@ -80,6 +80,28 @@ namespace AngbandOS.Web.Hubs
             if (user.Id != null)
             {
                 ViewPort = await GameService.PlayExistingGameAsync(Context, user.Id, guid, user.UserName);
+            }
+        }
+
+        /// <summary>
+        /// Process the incoming web client request to replay a game.  The appropriate configuration for the existing game will be loaded.
+        /// </summary>
+        /// <param name="guid">The unique identifier for the game to be played.  Must be owned by the user.  Null, to start a new game.</param>
+        /// <returns></returns>
+        public async Task ReplayGame(string guid)
+        {
+            if (guid == null)
+            {
+                throw new ArgumentNullException(nameof(guid));
+            }
+
+            // We need to ensure the user is authenticated.
+            string? emailAddress = Context.User?.FindFirst(ClaimTypes.Email)?.Value;
+            ApplicationUser? user = await UserManager.FindByEmailAsync(emailAddress);
+
+            if (user.Id != null)
+            {
+                ViewPort = await GameService.ReplayGameAsync(Context, user.Id, guid, user.UserName);
             }
         }
 

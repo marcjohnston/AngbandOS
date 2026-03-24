@@ -375,7 +375,6 @@
         PoorStatsEnchantmentScript,
         PoorStrength5BP1EnchantmentScript,
         PoorWisdomEnchantmentScript,
-        PopupMenuScript,
         PowerDragonScript,
         ProbingDetectionAndFullIdScript,
         ProbingScript,

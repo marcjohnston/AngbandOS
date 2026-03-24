@@ -78,7 +78,7 @@ internal class WizardHelpScript : Script, IScript, ICastSpellScript
             }
             consoleGrid.Render(Game, new ConsoleWindow(1, 4, 79, 21), new ConsoleTopLeftAlignment());
             Game.Screen.Print("Hit any key to continue", 43, 23);
-            Game.Inkey();
+            Game.GetAndRecordKeystroke();
         }
         finally
         {

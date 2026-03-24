@@ -40,7 +40,7 @@ internal class InventoryScript : UniversalScript, IGetKey
         // Get a new command
         string outVal = $"Inventory: carrying {Game.WeightCarried / 10}.{Game.WeightCarried % 10} pounds ({Game.WeightCarried * 100 / (Game.StrengthAbility.StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
         Game.Screen.PrintLine(outVal, 0, 0);
-        char c = Game.Inkey();
+        char c = Game.GetAndRecordKeystroke();
         Game.Screen.Restore(savedScreen);
         // Display details if the player wants
         if (c != '\x1b')
