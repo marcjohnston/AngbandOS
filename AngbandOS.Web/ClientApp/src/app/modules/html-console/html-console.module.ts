@@ -137,7 +137,7 @@ export class HtmlConsole {
     this.context.textAlign = 'left';
 
     // Resize the font.
-    this.fontMeasurements = new FontMeasurements(this.canvasRef, this.configuration.fontName);
+    this.fontMeasurements = new FontMeasurements(this.canvasRef, this.generateFontName(this.fontSizeInPixels));
 
     while (true) {
       // Test the next font size.

@@ -1,6 +1,5 @@
 import { ElementRef } from "@angular/core";
 
-
 export class FontMeasurements {
     public offsets: { x: number; y: number; }[] = new Array(255); // Full array so that we do not have to check bounds.
     public readonly characterWidth: number = 0;
@@ -63,14 +62,11 @@ export class FontMeasurements {
             // Compute the top left of the bounding box.
             const left = textMetrics.actualBoundingBoxLeft;
             const right = textMetrics.actualBoundingBoxRight;
-            const ascent = textMetrics.actualBoundingBoxAscent;
-            const descent = textMetrics.actualBoundingBoxDescent;
             const width = left + right;
 
-            // Compute an offset that centers the glyph within the cell.
-            const x = this.characterWidth / 2 - width / 2; // - left + (-(right + left) / 2 + (this.characterWidth / 2));
+            // Compute an offset that centers the glyph horizontally within the cell.  No vertical adjustment are made--this maintains the baseline so that the reading line doesn't look weird.
+            const x = this.characterWidth / 2 - width / 2 + left; // Adding the left, brings the glyph to the center point.
             const y = maxAscent; // We are rendering using the 'alphabetic' textbaseline, so no per character ascent is needed.
-
 
             // Save the offsets for quick use during drawing.
             this.offsets[asciiIndex] = { x, y };
