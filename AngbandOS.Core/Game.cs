@@ -4,14 +4,14 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.EventsArgs;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal partial class Game
+internal partial class Game : IGameSerialization
 {
+    #region Code Altering Property Management for Development Purposes Only
     public string Find(string folder, string filenameWithoutExtension)
     {
         string path = Path.Combine(folder, $"{filenameWithoutExtension}.cs");
@@ -78,7 +78,388 @@ internal partial class Game
         }
         throw new Exception("");
     }
+    #endregion
 
+    #region Game Serialization
+    public void Serialize(GameStateBag bag)
+    {
+        bag.Serialize(this);
+    }
+
+    public void Deserialize(GameStateBag bag)
+    {
+        bag.Deserialize(this);
+    }
+
+    /// <summary>
+    /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
+    /// </summary>
+    /// <param name="player">The player to save.  If the player is dead, then this should be the corpse.</param>
+    public void SaveGame()
+    {
+        //GameStateBag gameStateBag = new GameStateBag();
+        //this.Serialize(gameStateBag);
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        MemoryStream memoryStream = new MemoryStream();
+        formatter.Serialize(memoryStream, this);
+        memoryStream.Position = 0;
+        GameDetails gameDetails = new GameDetails()
+        {
+            CharacterName = PlayerName.StringValue, // The player parameter
+            Level = ExperienceLevel.IntValue, // The player parameter
+            Gold = Gold.IntValue, // The parameter
+            IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
+            Comments = ""
+        };
+        CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
+    }
+    #endregion
+
+    #region Game Replay
+    [NonSerialized]
+    private IReplayPersistentStorage? ReplayPersistentStorage = null;
+
+    /// <summary>
+    /// Returns the date and time of of the previous keystroke during replay mode.
+    /// </summary>
+    private DateTime? replayPreviousKeystrokeDateTime = null;
+
+    /// <summary>
+    /// The queue for recording keystrokes or playing back keystrokes.  This structure is used for both recording and playback.
+    /// </summary>
+    [NonSerialized]
+    public readonly Queue<GameReplayStep> ReplayQueue = new Queue<GameReplayStep>(); // List.Add has a O(1) time complexity until it needs to be resized.
+
+    /// <summary>
+    /// Returns the random seed to start the game that is applied to the non-fixed random generator.
+    /// </summary>
+    public readonly int MainSequenceRandomSeed;
+
+    /// <summary>
+    /// Returns the value of the non-fixed random seed to use to restore the non-fixed random generator.  This seed is needed because the Random object cannot be serialized and we need to restore
+    /// the non-fixed random generator when a saved game is restored.
+    /// </summary>
+    public int CurrentSequenceRandomSeed;
+
+    /// <summary>
+    /// Returns true, when the game is processing the popup menu.  This value is used to determine when the game is entering and existing the popup menu mode.  Keystrokes that are used during, to render or
+    /// to exit the popup menu are not recorded--in actuality, those keystrokes are removed from the queue.
+    /// </summary>
+    //public bool PreviousInPopupMenu = false;
+    #endregion
+
+    #region New Game Construction
+    /// <summary>
+    /// Creates a new game.  
+    /// </summary>
+    /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
+    /// <remarks>
+    /// For game replay mode, construction of the game DOES NOT use the random generator.  We only initialize the non-fixed seed.
+    /// 
+    /// </remarks>
+    public Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay)
+    {
+        _mainSequence = new Random();
+
+        // Check to see if we are replaying a game.
+        if (gameReplay is not null)
+        {
+            MainSequenceRandomSeed = gameReplay.Seed;
+            foreach (GameReplayStep gameReplayStep in gameReplay.GameReplaySteps)
+            {
+                ReplayQueue.Enqueue(gameReplayStep);
+            }
+        }
+        else
+        {
+            // Generate all new random seeds.
+            Random r = new Random();
+            MainSequenceRandomSeed = r.Next(int.MaxValue);
+        }
+
+        ParseLanguage = new AngbandOSExpressionParseLanguage(this);
+        ExpressionParser = new ExpressionParser(ParseLanguage);
+        IntegerToDecimalExpressionTypeConverter = new IntegerToDecimalExpressionTypeConverter();
+        DecimalToIntegerExpressionTypeConverter = new DecimalToIntegerExpressionTypeConverter();
+
+        IsDead = true;
+        Map = new Map(this);
+
+        DungeonGenerator = new StandardDungeonGenerator(this);
+
+        // Create an instance of the SingletonRepository.  This allows repositories that are loading access to the SingletonRepository object. // TODO: This needs to be fixed once the items no longer reference other objects during construction
+        SingletonRepository = new SingletonRepository(this);
+
+        // Load all of the predefined objects.  The singleton repository must already be created.
+        DateTime startTime = DateTime.Now;
+        SingletonRepository.LoadAndBind(gameConfiguration);
+        TimeSpan elapsedTime = DateTime.Now - startTime;
+        if (gameConfiguration.MaxMessageLogLength != null)
+        {
+            MaxMessageLogLength = gameConfiguration.MaxMessageLogLength.Value;
+        }
+        if (gameConfiguration.StartupTownName != null)
+        {
+            StartupTownName = gameConfiguration.StartupTownName;
+        }
+        if (gameConfiguration.GoldFactoriesBindingKeys != null)
+        {
+            List<ItemFactory> goldFactoryList = new List<ItemFactory>();
+            foreach (string goldFactoryBindingKey in gameConfiguration.GoldFactoriesBindingKeys)
+            {
+                goldFactoryList.Add(SingletonRepository.Get<ItemFactory>(goldFactoryBindingKey));
+            }
+            GoldFactories = goldFactoryList.ToArray();
+        }
+        GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression ?? "1/20");
+
+        RequiredExperiencePerLevel = gameConfiguration.RequiredExperiencePerLevel;
+        ExtractEnergy = gameConfiguration.ExtractEnergy;
+        BlowsTable = gameConfiguration.BlowsTable;
+        FollowDistance = gameConfiguration.FollowDistance;
+        DecayRate = gameConfiguration.DecayRate;
+        PatronRestingFavour = gameConfiguration.PatronRestingFavour;
+
+        ElvishTexts = gameConfiguration.ElvishTexts ?? new string[] { };
+        HorrificDescriptions = gameConfiguration.HorrificDescriptions ?? new string[] { };
+        FunnyComments = gameConfiguration.FunnyComments ?? new string[] { };
+        FunnyDescriptions = gameConfiguration.FunnyDescriptions ?? new string[] { };
+        FindQuests = gameConfiguration.FindQuests ?? new string[] { };
+        IllegibleFlavorSyllables = gameConfiguration.IllegibleFlavorSyllables ?? new string[] { };
+        ShopkeeperAcceptedComments = gameConfiguration.ShopkeeperAcceptedComments ?? new string[] { };
+
+        Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
+
+        Quests = new List<Quest>();
+        GameMessage = (GameMessageProperty)SingletonRepository.Get<Property>(nameof(GameMessageProperty));
+        Gold = (GoldIntProperty)SingletonRepository.Get<Property>(nameof(GoldIntProperty));
+        Mana = (ManaIntProperty)SingletonRepository.Get<Property>(nameof(ManaIntProperty));
+        MaxMana = (MaxManaIntProperty)SingletonRepository.Get<Property>(nameof(MaxManaIntProperty));
+        ExperiencePoints = (ExperiencePointsIntProperty)SingletonRepository.Get<Property>(nameof(ExperiencePointsIntProperty));
+        Food = (FoodIntProperty)SingletonRepository.Get<Property>(nameof(FoodIntProperty));
+        Health = (HealthPointsIntProperty)SingletonRepository.Get<Property>(nameof(HealthPointsIntProperty));
+        Speed = (SpeedIntProperty)SingletonRepository.Get<Property>(nameof(SpeedIntProperty));
+        MaxHealth = (MaxHealthPointsIntProperty)SingletonRepository.Get<Property>(nameof(MaxHealthPointsIntProperty));
+        SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Get<Property>(nameof(SpareSpellSlotsIntProperty));
+        ExperienceLevel = (ExperienceLevelIntProperty)SingletonRepository.Get<Property>(nameof(ExperienceLevelIntProperty));
+        ExperienceMultiplier = (ExperienceMultiplierIntProperty)SingletonRepository.Get<Property>(nameof(ExperienceMultiplierIntProperty));
+        IsWinner = (IsWinnerBoolProperty)SingletonRepository.Get<Property>(nameof(IsWinnerBoolProperty));
+        IsWizard = (IsWizardBoolProperty)SingletonRepository.Get<Property>(nameof(IsWizardBoolProperty));
+        PlayerName = (PlayerNameStringProperty)SingletonRepository.Get<Property>(nameof(PlayerNameStringProperty));
+        CurrentGameDateTime = (CurrentGameDateTimeProperty)SingletonRepository.Get<Property>(nameof(CurrentGameDateTimeProperty));
+        RefreshMap = (RefreshMapProperty)SingletonRepository.Get<Property>(nameof(RefreshMapProperty));
+        TrackedMonsterChanged = (TrackedMonsterChangedProperty)SingletonRepository.Get<Property>(nameof(TrackedMonsterChangedProperty));
+        MapX = (MapXIntProperty)SingletonRepository.Get<Property>(nameof(MapXIntProperty));
+        MapY = (MapYIntProperty)SingletonRepository.Get<Property>(nameof(MapYIntProperty));
+        MaxExperienceGained = (HighestExperiencePointsAchievedIntProperty)SingletonRepository.Get<Property>(nameof(HighestExperiencePointsAchievedIntProperty));
+        TrackedMonster = (TrackedMonsterNullableMonsterProperty)SingletonRepository.Get<Property>(nameof(TrackedMonsterNullableMonsterProperty));
+
+        AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.AcidResistanceTimer));
+        BleedingTimer = (BleedingTimer)SingletonRepository.Get<Timer>(nameof(Timers.BleedingTimer));
+        BlessingTimer = (BlessingTimer)SingletonRepository.Get<Timer>(nameof(Timers.BlessingTimer));
+        BlindnessTimer = (BlindnessTimer)SingletonRepository.Get<Timer>(nameof(Timers.BlindnessTimer));
+        ColdResistanceTimer = (ColdResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.ColdResistanceTimer));
+        ConfusionTimer = (ConfusingTimer)SingletonRepository.Get<Timer>(nameof(Timers.ConfusingTimer));
+        EtherealnessTimer = (EtherealnessTimer)SingletonRepository.Get<Timer>(nameof(Timers.EtherealnessTimer));
+        FearTimer = (FearTimer)SingletonRepository.Get<Timer>(nameof(Timers.FearTimer));
+        FireResistanceTimer = (FireResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.FireResistanceTimer));
+        HallucinationsTimer = (HallucinatingTimer)SingletonRepository.Get<Timer>(nameof(Timers.HallucinatingTimer));
+        HasteTimer = (HasteTimer)SingletonRepository.Get<Timer>(nameof(Timers.HasteTimer));
+        HeroismTimer = (HeroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.HeroismTimer));
+        InfravisionTimer = (InfravisionTimer)SingletonRepository.Get<Timer>(nameof(Timers.InfravisionTimer));
+        InvulnerabilityTimer = (InvulnerabilityTimer)SingletonRepository.Get<Timer>(nameof(Timers.InvulnerabilityTimer));
+        LightningResistanceTimer = (LightningResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.LightningResistanceTimer));
+        ParalysisTimer = (ParalysisTimer)SingletonRepository.Get<Timer>(nameof(Timers.ParalysisTimer));
+        PoisonTimer = (PoisoningTimer)SingletonRepository.Get<Timer>(nameof(Timers.PoisoningTimer));
+        PoisonResistanceTimer = (PoisonResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.PoisonResistanceTimer));
+        ProtectionFromEvilTimer = (ProtectionFromEvilTimer)SingletonRepository.Get<Timer>(nameof(Timers.ProtectionFromEvilTimer));
+        SeeInvisibilityTimer = (SeeInvisibilityTimer)SingletonRepository.Get<Timer>(nameof(Timers.SeeInvisibilityTimer));
+        SlowTimer = (SlowTimer)SingletonRepository.Get<Timer>(nameof(Timers.SlowTimer));
+        StoneskinTimer = (StoneskinTimer)SingletonRepository.Get<Timer>(nameof(Timers.StoneskinTimer));
+        StunTimer = (StunningTimer)SingletonRepository.Get<Timer>(nameof(Timers.StunningTimer));
+        SuperheroismTimer = (SuperheroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.SuperheroismTimer));
+        TelepathyTimer = (TelepathyTimer)SingletonRepository.Get<Timer>(nameof(Timers.TelepathyTimer));
+        PackWieldSlot = (PackWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(Core.PackWieldSlot));
+
+        if (String.IsNullOrEmpty(gameConfiguration.DungeonViewBindingKey))
+        {
+            throw new Exception($"No {nameof(gameConfiguration.DungeonViewBindingKey)} provided.");
+        }
+        View consoleView = SingletonRepository.Get<View>(gameConfiguration.DungeonViewBindingKey);
+        RenderView(consoleView);
+
+        InitializeAllocationTables();
+    }
+    #endregion
+
+    #region Play and Game Loop
+    /// <summary>
+    /// Plays the current game.
+    /// </summary>
+    /// <param name="consoleViewPort"></param>
+    /// <param name="persistentStorage"></param>
+    /// <remarks>
+    /// For game replay mode and the ability to restore a saved game, we need to reinitialize the random generator because the Random object is not serializable.
+    /// </remarks>
+    public void Play(IConsoleAndViewPort consoleViewPort, ICorePersistentStorage? persistentStorage, IReplayPersistentStorage? replayPersistentStorage)
+    {
+        void Kingly()
+        {
+            CurrentDepth = 0;
+            DiedFrom = "Ripe Old Age";
+            ExperiencePoints.IntValue = MaxExperienceGained.IntValue;
+            ExperienceLevel.IntValue = MaxLevelGained;
+            Gold.IntValue += 10000000;
+            SetBackground(BackgroundImageEnum.Crown);
+            Screen.Clear();
+            AnyKey(44);
+        }
+
+        void PrintTomb()
+        {
+            {
+                DateTime ct = DateTime.Now;
+                if (IsWinner.BoolValue)
+                {
+                    SetBackground(BackgroundImageEnum.Sunset);
+                    PlayMusic(MusicTrackEnum.Victory);
+                }
+                else
+                {
+                    SetBackground(BackgroundImageEnum.Tomb);
+                    PlayMusic(MusicTrackEnum.Death);
+                }
+                Screen.Clear();
+                string buf = PlayerName.StringValue.Trim() + Generation.ToRoman(true);
+                if (IsWinner.BoolValue || ExperienceLevel.IntValue > Constants.PyMaxLevel)
+                {
+                    buf += " the Magnificent";
+                }
+                Screen.Print(buf, 39, 1);
+                buf = $"Level {ExperienceLevel.IntValue} {CharacterClass.ClassSubName(PrimaryRealm)}";
+                Screen.Print(buf, 40, 1);
+                string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
+                Screen.Print(tmp, 39, 34);
+                tmp = $"by {DiedFrom}".PadLeft(45);
+                Screen.Print(tmp, 40, 34);
+                tmp = $"on {ct:dd MMM yyyy h.mm tt}".PadLeft(45);
+                Screen.Print(tmp, 41, 34);
+                AnyKey(44);
+            }
+        }
+
+        void CloseGame()
+        {
+            HandleStuff();
+            MsgPrint(string.Empty);
+            FullScreenOverlay = true;
+            if (IsDead)
+            {
+                if (IsWinner.BoolValue)
+                {
+                    Kingly();
+                }
+
+                //HighScore score = new HighScore(this);
+                SaveGame();
+                PrintTomb();
+                if (IsWizard.BoolValue)
+                {
+                    return;
+                }
+                //Program.HiScores.InsertNewScore(score);
+                //Program.HiScores.DisplayScores(score.Pts);
+            }
+            else
+            {
+                DoCmdSaveGame(false);
+                //if (!Program.ExitToDesktop)
+                //{
+                //    Terminal.PlayMusic(MusicTrack.Menu);
+                //    Program.HiScores.DisplayScores(new HighScore(this));
+                //}
+            }
+        }
+
+        // If this game is a replay, we need to initialize the non-fixed random with the same value that was used to construct the game, otherwise, we need to restore the random to the next seed for deterministic game play.
+        int randomSeed = IsInReplayMode ? MainSequenceRandomSeed : CurrentSequenceRandomSeed;
+        _mainSequence = new Random(randomSeed);
+
+        ConsoleViewPort = consoleViewPort;
+        Shutdown = false;
+        LastInputReceived = DateTime.Now;
+        CorePersistentStorage = persistentStorage;
+        ReplayPersistentStorage = replayPersistentStorage;
+        KeyQueue = new char[ConsoleViewPort.MaximumKeyQueueLength];
+        Screen = new Window(consoleViewPort);
+        MapMovementKeys();
+
+        FullScreenOverlay = true;
+        SetBackground(BackgroundImageEnum.Normal);
+        Screen.CursorVisible = false;
+        if (UseFixed)
+        {
+            UseFixed = false;
+        }
+        if (IsDead)
+        {
+            GenerateNewGame();
+        }
+        ConsoleViewPort.GameStarted();
+        //MessageAppendNextMessage = false;
+        MsgPrint(string.Empty);
+        UpdateScreen();
+        FullScreenOverlay = false;
+        SetBackground(BackgroundImageEnum.Overhead);
+        Playing = true;
+        if (Health.IntValue < 0)
+        {
+            IsDead = true;
+        }
+
+        // Repeat the dungeon loop until normal game ends or the shutdown flag is raised.
+        while (!Shutdown)
+        {
+            // Play the current dungeon 
+            DungeonLoop();
+
+            // We need to detect if the shutdown has happened, or if we are changing the dungeon 
+            if (!Shutdown)
+            {
+                // The dungeon level is changing.
+                NoticeStuff();
+                UpdateStuff();
+                RedrawStuff();
+                TargetWho = null;
+                HealthTrack(null);
+                SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Check(true);
+                SingletonRepository.Get<FlaggedAction>(nameof(RemoveViewFlaggedAction)).Check(true);
+                if (!Playing && !IsDead)
+                {
+                    break;
+                }
+                _petList = GetPets();
+                WipeMList();
+                MsgPrint(string.Empty);
+                if (IsDead)
+                {
+                    ConsoleViewPort.PlayerDied(PlayerName.StringValue, DiedFrom, ExperienceLevel.IntValue);
+
+                    // Store the player info
+                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, CharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.StringValue, ExperienceLevel.IntValue, Generation);
+                    break;
+                }
+                GenerateNewLevel();
+                ReplacePets(MapY.IntValue, MapX.IntValue, _petList);
+            }
+        }
+        ConsoleViewPort.GameStopped();
+        CloseGame();
+    }
+    #endregion
+
+    #region WIP Methods Not Yet Categorized
     /// <summary>
     /// Represents the players effective attribute values.
     /// </summary>
@@ -126,40 +507,6 @@ internal partial class Game
         return bonus;
     }
 
-    #region Game Replay
-    [NonSerialized]
-    private IReplayPersistentStorage? ReplayPersistentStorage = null;
-
-    /// <summary>
-    /// Returns the date and time of of the previous keystroke during replay mode.
-    /// </summary>
-    private DateTime? replayPreviousKeystrokeDateTime = null;
-
-    /// <summary>
-    /// The queue for recording keystrokes or playing back keystrokes.  This structure is used for both recording and playback.
-    /// </summary>
-    [NonSerialized]
-    public readonly Queue<GameReplayStep> ReplayQueue = new Queue<GameReplayStep>(); // List.Add has a O(1) time complexity until it needs to be resized.
-
-    /// <summary>
-    /// Returns the random seed to start the game that is applied to the non-fixed random generator.
-    /// </summary>
-    public readonly int MainSequenceRandomSeed;
-
-    /// <summary>
-    /// Returns the value of the non-fixed random seed to use to restore the non-fixed random generator.  This seed is needed because the Random object cannot be serialized and we need to restore
-    /// the non-fixed random generator when a saved game is restored.
-    /// </summary>
-    public int CurrentSequenceRandomSeed;
-
-    /// <summary>
-    /// Returns true, when the game is processing the popup menu.  This value is used to determine when the game is entering and existing the popup menu mode.  Keystrokes that are used during, to render or
-    /// to exit the popup menu are not recorded--in actuality, those keystrokes are removed from the queue.
-    /// </summary>
-    //public bool PreviousInPopupMenu = false;
-    #endregion
-
-    #region Configuration Properties
     /// <summary>
     /// Returns the distance at which a pet will move closer to the player.
     /// </summary>
@@ -176,19 +523,31 @@ internal partial class Game
     public readonly int[] RequiredExperiencePerLevel;
     public readonly int[] ExtractEnergy;
     private readonly int PatronRestingFavour;
-    #endregion
 
     public const string FactoryAttributeKey = "factory";
     public const string RandomAttributeKey = "random";
     public const string RareAttributeKey = "rare";
     public const string FixedAttributeKey = "fixed";
 
+    /// <summary>
+    /// Represents the god that the player selected during birth.
+    /// </summary>
+    [GameSerializable]
     public God? God;
 
+    [GameSerializable]
     public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
+
+    [GameSerializable]
     public int GenomeArmorClassBonus;
+
+    [GameSerializable]
     public bool ChaosGift;
+
+    [GameSerializable]
     public readonly List<Mutation> MutationsNotPossessed = new List<Mutation>();
+
+    [GameSerializable]
     public readonly List<Mutation> MutationsPossessed = new List<Mutation>();
 
     [NonSerialized]
@@ -197,6 +556,7 @@ internal partial class Game
     [NonSerialized]
     private Random _fixed;
 
+    [GameSerializable]
     public int TreasureFeeling;
 
     public Random UseRandom => UseFixed ? _fixed : _mainSequence;
@@ -204,6 +564,7 @@ internal partial class Game
     /// <summary>
     /// Set true to use the fixed seed, and false to use the generic randomiser
     /// </summary>
+    [GameSerializable]
     public bool UseFixed = false;
 
     private const int _randnorNum = 256;
@@ -435,8 +796,6 @@ internal partial class Game
     /// full screen overlay
     /// </summary>
     public bool HideCursorOnFullScreenInkey;
-
-    //public bool InPopupMenu;
 
     public char[] KeyQueue;
 
@@ -844,147 +1203,6 @@ internal partial class Game
         return expression.Compute<DecimalExpression>(IntegerToDecimalExpressionTypeConverter);
     }
 
-    /// <summary>
-    /// Creates a new game.  
-    /// </summary>
-    /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
-    /// <remarks>
-    /// For game replay mode, construction of the game DOES NOT use the random generator.  We only initialize the non-fixed seed.
-    /// 
-    /// </remarks>
-    public Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay)
-    {
-        _mainSequence = new Random();
-
-        // Check to see if we are replaying a game.
-        if (gameReplay is not null)
-        {
-            MainSequenceRandomSeed = gameReplay.Seed;
-            foreach (GameReplayStep gameReplayStep in gameReplay.GameReplaySteps)
-            {
-                ReplayQueue.Enqueue(gameReplayStep);
-            }
-        }
-        else
-        {
-            // Generate all new random seeds.
-            Random r = new Random();
-            MainSequenceRandomSeed = r.Next(int.MaxValue);
-        }
-
-        ParseLanguage = new AngbandOSExpressionParseLanguage(this);
-        ExpressionParser = new ExpressionParser(ParseLanguage);
-        IntegerToDecimalExpressionTypeConverter = new IntegerToDecimalExpressionTypeConverter();
-        DecimalToIntegerExpressionTypeConverter = new DecimalToIntegerExpressionTypeConverter();
-
-        IsDead = true;
-        Map = new Map(this);
-
-        DungeonGenerator = new StandardDungeonGenerator(this);
-
-        // Create an instance of the SingletonRepository.  This allows repositories that are loading access to the SingletonRepository object. // TODO: This needs to be fixed once the items no longer reference other objects during construction
-        SingletonRepository = new SingletonRepository(this);
-
-        // Load all of the predefined objects.  The singleton repository must already be created.
-        DateTime startTime = DateTime.Now;
-        SingletonRepository.LoadAndBind(gameConfiguration);
-        TimeSpan elapsedTime = DateTime.Now - startTime;
-        if (gameConfiguration.MaxMessageLogLength != null)
-        {
-            MaxMessageLogLength = gameConfiguration.MaxMessageLogLength.Value;
-        }
-        if (gameConfiguration.StartupTownName != null)
-        {
-            StartupTownName = gameConfiguration.StartupTownName;
-        }
-        if (gameConfiguration.GoldFactoriesBindingKeys != null)
-        {
-            List<ItemFactory> goldFactoryList = new List<ItemFactory>();
-            foreach (string goldFactoryBindingKey in gameConfiguration.GoldFactoriesBindingKeys)
-            {
-                goldFactoryList.Add(SingletonRepository.Get<ItemFactory>(goldFactoryBindingKey));
-            }
-            GoldFactories = goldFactoryList.ToArray();
-        }
-        GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression ?? "1/20");
-
-        RequiredExperiencePerLevel = gameConfiguration.RequiredExperiencePerLevel;
-        ExtractEnergy = gameConfiguration.ExtractEnergy;
-        BlowsTable = gameConfiguration.BlowsTable;
-        FollowDistance = gameConfiguration.FollowDistance;
-        DecayRate = gameConfiguration.DecayRate;
-        PatronRestingFavour = gameConfiguration.PatronRestingFavour;
-
-        ElvishTexts = gameConfiguration.ElvishTexts ?? new string[] { };
-        HorrificDescriptions = gameConfiguration.HorrificDescriptions ?? new string[] { };
-        FunnyComments = gameConfiguration.FunnyComments ?? new string[] { };
-        FunnyDescriptions = gameConfiguration.FunnyDescriptions ?? new string[] { };
-        FindQuests = gameConfiguration.FindQuests ?? new string[] { };
-        IllegibleFlavorSyllables = gameConfiguration.IllegibleFlavorSyllables ?? new string[] { };
-        ShopkeeperAcceptedComments = gameConfiguration.ShopkeeperAcceptedComments ?? new string[] { };
-
-        Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
-
-        Quests = new List<Quest>();
-        GameMessage = (GameMessageProperty)SingletonRepository.Get<Property>(nameof(GameMessageProperty));
-        Gold = (GoldIntProperty)SingletonRepository.Get<Property>(nameof(GoldIntProperty));
-        Mana = (ManaIntProperty)SingletonRepository.Get<Property>(nameof(ManaIntProperty));
-        MaxMana = (MaxManaIntProperty)SingletonRepository.Get<Property>(nameof(MaxManaIntProperty));
-        ExperiencePoints = (ExperiencePointsIntProperty)SingletonRepository.Get<Property>(nameof(ExperiencePointsIntProperty));
-        Food = (FoodIntProperty)SingletonRepository.Get<Property>(nameof(FoodIntProperty));
-        Health = (HealthPointsIntProperty)SingletonRepository.Get<Property>(nameof(HealthPointsIntProperty));
-        Speed = (SpeedIntProperty)SingletonRepository.Get<Property>(nameof(SpeedIntProperty));
-        MaxHealth = (MaxHealthPointsIntProperty)SingletonRepository.Get<Property>(nameof(MaxHealthPointsIntProperty));
-        SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Get<Property>(nameof(SpareSpellSlotsIntProperty));
-        ExperienceLevel = (ExperienceLevelIntProperty)SingletonRepository.Get<Property>(nameof(ExperienceLevelIntProperty));
-        ExperienceMultiplier = (ExperienceMultiplierIntProperty)SingletonRepository.Get<Property>(nameof(ExperienceMultiplierIntProperty));
-        IsWinner = (IsWinnerBoolProperty)SingletonRepository.Get<Property>(nameof(IsWinnerBoolProperty));
-        IsWizard = (IsWizardBoolProperty)SingletonRepository.Get<Property>(nameof(IsWizardBoolProperty));
-        PlayerName = (PlayerNameStringProperty)SingletonRepository.Get<Property>(nameof(PlayerNameStringProperty));
-        CurrentGameDateTime = (CurrentGameDateTimeProperty)SingletonRepository.Get<Property>(nameof(CurrentGameDateTimeProperty));
-        RefreshMap = (RefreshMapProperty)SingletonRepository.Get<Property>(nameof(RefreshMapProperty));
-        TrackedMonsterChanged = (TrackedMonsterChangedProperty)SingletonRepository.Get<Property>(nameof(TrackedMonsterChangedProperty));
-        MapX = (MapXIntProperty)SingletonRepository.Get<Property>(nameof(MapXIntProperty));
-        MapY = (MapYIntProperty)SingletonRepository.Get<Property>(nameof(MapYIntProperty));
-        MaxExperienceGained = (HighestExperiencePointsAchievedIntProperty)SingletonRepository.Get<Property>(nameof(HighestExperiencePointsAchievedIntProperty));
-        TrackedMonster = (TrackedMonsterNullableMonsterProperty)SingletonRepository.Get<Property>(nameof(TrackedMonsterNullableMonsterProperty));
-
-        AcidResistanceTimer = (AcidResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.AcidResistanceTimer));
-        BleedingTimer = (BleedingTimer)SingletonRepository.Get<Timer>(nameof(Timers.BleedingTimer));
-        BlessingTimer = (BlessingTimer)SingletonRepository.Get<Timer>(nameof(Timers.BlessingTimer));
-        BlindnessTimer = (BlindnessTimer)SingletonRepository.Get<Timer>(nameof(Timers.BlindnessTimer));
-        ColdResistanceTimer = (ColdResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.ColdResistanceTimer));
-        ConfusionTimer = (ConfusingTimer)SingletonRepository.Get<Timer>(nameof(Timers.ConfusingTimer));
-        EtherealnessTimer = (EtherealnessTimer)SingletonRepository.Get<Timer>(nameof(Timers.EtherealnessTimer));
-        FearTimer = (FearTimer)SingletonRepository.Get<Timer>(nameof(Timers.FearTimer));
-        FireResistanceTimer = (FireResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.FireResistanceTimer));
-        HallucinationsTimer = (HallucinatingTimer)SingletonRepository.Get<Timer>(nameof(Timers.HallucinatingTimer));
-        HasteTimer = (HasteTimer)SingletonRepository.Get<Timer>(nameof(Timers.HasteTimer));
-        HeroismTimer = (HeroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.HeroismTimer));
-        InfravisionTimer = (InfravisionTimer)SingletonRepository.Get<Timer>(nameof(Timers.InfravisionTimer));
-        InvulnerabilityTimer = (InvulnerabilityTimer)SingletonRepository.Get<Timer>(nameof(Timers.InvulnerabilityTimer));
-        LightningResistanceTimer = (LightningResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.LightningResistanceTimer));
-        ParalysisTimer = (ParalysisTimer)SingletonRepository.Get<Timer>(nameof(Timers.ParalysisTimer));
-        PoisonTimer = (PoisoningTimer)SingletonRepository.Get<Timer>(nameof(Timers.PoisoningTimer));
-        PoisonResistanceTimer = (PoisonResistanceTimer)SingletonRepository.Get<Timer>(nameof(Timers.PoisonResistanceTimer));
-        ProtectionFromEvilTimer = (ProtectionFromEvilTimer)SingletonRepository.Get<Timer>(nameof(Timers.ProtectionFromEvilTimer));
-        SeeInvisibilityTimer = (SeeInvisibilityTimer)SingletonRepository.Get<Timer>(nameof(Timers.SeeInvisibilityTimer));
-        SlowTimer = (SlowTimer)SingletonRepository.Get<Timer>(nameof(Timers.SlowTimer));
-        StoneskinTimer = (StoneskinTimer)SingletonRepository.Get<Timer>(nameof(Timers.StoneskinTimer));
-        StunTimer = (StunningTimer)SingletonRepository.Get<Timer>(nameof(Timers.StunningTimer));
-        SuperheroismTimer = (SuperheroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.SuperheroismTimer));
-        TelepathyTimer = (TelepathyTimer)SingletonRepository.Get<Timer>(nameof(Timers.TelepathyTimer));
-        PackWieldSlot = (PackWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(Core.PackWieldSlot));
-
-        if (String.IsNullOrEmpty(gameConfiguration.DungeonViewBindingKey))
-        {
-            throw new Exception($"No {nameof(gameConfiguration.DungeonViewBindingKey)} provided.");
-        }
-        View consoleView = SingletonRepository.Get<View>(gameConfiguration.DungeonViewBindingKey);
-        RenderView(consoleView);
-
-        InitializeAllocationTables();
-    }
     public readonly PackWieldSlot PackWieldSlot;
     public void RenderView(View view)
     {
@@ -1863,27 +2081,6 @@ internal partial class Game
         return SingletonRepository.Get<ItemFactory>(table[i].Index);
     }
 
-    /// <summary>
-    /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
-    /// </summary>
-    /// <param name="player">The player to save.  If the player is dead, then this should be the corpse.</param>
-    public void SaveGame()
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-        MemoryStream memoryStream = new MemoryStream();
-        formatter.Serialize(memoryStream, this);
-        memoryStream.Position = 0;
-        GameDetails gameDetails = new GameDetails()
-        {
-            CharacterName = PlayerName.StringValue, // The player parameter
-            Level = ExperienceLevel.IntValue, // The player parameter
-            Gold = Gold.IntValue, // The parameter
-            IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
-            Comments = ""
-        };
-        CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
-    }
-
     private void ResetStompability()
     {
         foreach (ItemFactory itemFactory in SingletonRepository.Get<ItemFactory>())
@@ -2276,170 +2473,6 @@ internal partial class Game
     }
 
     public bool IsInReplayMode => ReplayQueue.Count > 0;
-
-    /// <summary>
-    /// Plays the current game.
-    /// </summary>
-    /// <param name="consoleViewPort"></param>
-    /// <param name="persistentStorage"></param>
-    /// <remarks>
-    /// For game replay mode and the ability to restore a saved game, we need to reinitialize the random generator because the Random object is not serializable.
-    /// </remarks>
-    public void Play(IConsoleAndViewPort consoleViewPort, ICorePersistentStorage? persistentStorage, IReplayPersistentStorage? replayPersistentStorage)
-    {
-        void Kingly()
-        {
-            CurrentDepth = 0;
-            DiedFrom = "Ripe Old Age";
-            ExperiencePoints.IntValue = MaxExperienceGained.IntValue;
-            ExperienceLevel.IntValue = MaxLevelGained;
-            Gold.IntValue += 10000000;
-            SetBackground(BackgroundImageEnum.Crown);
-            Screen.Clear();
-            AnyKey(44);
-        }
-
-        void PrintTomb()
-        {
-            {
-                DateTime ct = DateTime.Now;
-                if (IsWinner.BoolValue)
-                {
-                    SetBackground(BackgroundImageEnum.Sunset);
-                    PlayMusic(MusicTrackEnum.Victory);
-                }
-                else
-                {
-                    SetBackground(BackgroundImageEnum.Tomb);
-                    PlayMusic(MusicTrackEnum.Death);
-                }
-                Screen.Clear();
-                string buf = PlayerName.StringValue.Trim() + Generation.ToRoman(true);
-                if (IsWinner.BoolValue || ExperienceLevel.IntValue > Constants.PyMaxLevel)
-                {
-                    buf += " the Magnificent";
-                }
-                Screen.Print(buf, 39, 1);
-                buf = $"Level {ExperienceLevel.IntValue} {CharacterClass.ClassSubName(PrimaryRealm)}";
-                Screen.Print(buf, 40, 1);
-                string tmp = $"Killed on Level {CurrentDepth}".PadLeft(45);
-                Screen.Print(tmp, 39, 34);
-                tmp = $"by {DiedFrom}".PadLeft(45);
-                Screen.Print(tmp, 40, 34);
-                tmp = $"on {ct:dd MMM yyyy h.mm tt}".PadLeft(45);
-                Screen.Print(tmp, 41, 34);
-                AnyKey(44);
-            }
-        }
-
-        void CloseGame()
-        {
-            HandleStuff();
-            MsgPrint(string.Empty);
-            FullScreenOverlay = true;
-            if (IsDead)
-            {
-                if (IsWinner.BoolValue)
-                {
-                    Kingly();
-                }
-
-                //HighScore score = new HighScore(this);
-                SaveGame();
-                PrintTomb();
-                if (IsWizard.BoolValue)
-                {
-                    return;
-                }
-                //Program.HiScores.InsertNewScore(score);
-                //Program.HiScores.DisplayScores(score.Pts);
-            }
-            else
-            {
-                DoCmdSaveGame(false);
-                //if (!Program.ExitToDesktop)
-                //{
-                //    Terminal.PlayMusic(MusicTrack.Menu);
-                //    Program.HiScores.DisplayScores(new HighScore(this));
-                //}
-            }
-        }
-
-        // If this game is a replay, we need to initialize the non-fixed random with the same value that was used to construct the game, otherwise, we need to restore the random to the next seed for deterministic game play.
-        int randomSeed = IsInReplayMode ? MainSequenceRandomSeed : CurrentSequenceRandomSeed;
-        _mainSequence = new Random(randomSeed);
-
-        ConsoleViewPort = consoleViewPort;
-        Shutdown = false;
-        LastInputReceived = DateTime.Now;
-        CorePersistentStorage = persistentStorage;
-        ReplayPersistentStorage = replayPersistentStorage;
-        KeyQueue = new char[ConsoleViewPort.MaximumKeyQueueLength];
-        Screen = new Window(consoleViewPort);
-        MapMovementKeys();
-
-        FullScreenOverlay = true;
-        SetBackground(BackgroundImageEnum.Normal);
-        Screen.CursorVisible = false;
-        if (UseFixed)
-        {
-            UseFixed = false;
-        }
-        if (IsDead)
-        {
-            GenerateNewGame();
-        }
-        ConsoleViewPort.GameStarted();
-        //MessageAppendNextMessage = false;
-        MsgPrint(string.Empty);
-        UpdateScreen();
-        FullScreenOverlay = false;
-        SetBackground(BackgroundImageEnum.Overhead);
-        Playing = true;
-        if (Health.IntValue < 0)
-        {
-            IsDead = true;
-        }
-
-        // Repeat the dungeon loop until normal game ends or the shutdown flag is raised.
-        while (!Shutdown)
-        {
-            // Play the current dungeon 
-            DungeonLoop();
-
-            // We need to detect if the shutdown has happened, or if we are changing the dungeon 
-            if (!Shutdown)
-            {
-                // The dungeon level is changing.
-                NoticeStuff();
-                UpdateStuff();
-                RedrawStuff();
-                TargetWho = null;
-                HealthTrack(null);
-                SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Check(true);
-                SingletonRepository.Get<FlaggedAction>(nameof(RemoveViewFlaggedAction)).Check(true);
-                if (!Playing && !IsDead)
-                {
-                    break;
-                }
-                _petList = GetPets();
-                WipeMList();
-                MsgPrint(string.Empty);
-                if (IsDead)
-                {
-                    ConsoleViewPort.PlayerDied(PlayerName.StringValue, DiedFrom, ExperienceLevel.IntValue);
-
-                    // Store the player info
-                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, CharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.StringValue, ExperienceLevel.IntValue, Generation);
-                    break;
-                }
-                GenerateNewLevel();
-                ReplacePets(MapY.IntValue, MapX.IntValue, _petList);
-            }
-        }
-        ConsoleViewPort.GameStopped();
-        CloseGame();
-    }
     public Store? FindHomeStore(Town town) => Array.Find(town.Stores, store => store.GetType() == typeof(HomeStoreFactory));
 
     public void MoveHouse(Town oldTown, Town newTown)
@@ -16960,4 +16993,5 @@ internal partial class Game
         CameFrom = LevelStartEnum.StartRandom;
         ToNextDusk();
     }
+    #endregion
 }
