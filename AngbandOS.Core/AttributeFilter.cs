@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class AttributeFilter : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public AttributeFilter(Game game, AttributeFilterGameConfiguration gameConfiguration)
     {
         Game = game;

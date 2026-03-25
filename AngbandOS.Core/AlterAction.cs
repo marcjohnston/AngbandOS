@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class AlterAction : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected AlterAction(Game game)
     {
         Game = game;

@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class ItemEffect : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
 
     public virtual string Key => GetType().Name;
 

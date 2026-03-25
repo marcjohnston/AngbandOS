@@ -15,7 +15,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class ItemFactory : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     private string ItemEnhancementBindingKey { get; }
 
     ///// <summary>

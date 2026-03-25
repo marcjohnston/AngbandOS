@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PhysicalAttributeSets;
 [Serializable]
 internal sealed class PhysicalAttributeSet : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public PhysicalAttributeSet(Game game, PhysicalAttributeSetGameConfiguration physicalAttributeSetGameConfiguration)
     {
         Game = game;

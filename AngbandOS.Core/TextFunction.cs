@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Functions;
 [Serializable]
 internal abstract class TextFunction : IChangeTracker, IGetKey, ITextValue
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected TextFunction(Game game)
     {
         Game = game;

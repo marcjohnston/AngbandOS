@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class EatOrQuaffUniversalScript : IActivateItemScript, IAimWandScript, IZapRodScript, IScript, IReadScrollOrUseStaffScript, ICastSpellScript, IEatOrQuaffScript
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected EatOrQuaffUniversalScript(Game game)
     {
         Game = game;

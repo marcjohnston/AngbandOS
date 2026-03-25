@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class EffectiveAttributeValue : AttributeValue
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected readonly Attribute Attribute;
     public EffectiveAttributeValue(Game game, Attribute attribute)
     {

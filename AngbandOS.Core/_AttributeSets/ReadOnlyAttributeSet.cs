@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class ReadOnlyAttributeSet
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public AttributeValue[] Value { get; }
     public ReadOnlyAttributeSet(Game game, AttributeValue[] value)
     {

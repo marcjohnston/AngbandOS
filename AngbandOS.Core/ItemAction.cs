@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class ItemAction : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected ItemAction(Game game)
     {
         Game = game;

@@ -483,7 +483,7 @@ internal class SingletonRepository
     #endregion
 
     #region Privates
-    private readonly Game Game;
+    private Game Game { get; }
     private Dictionary<string, GenericRepository> _allGenericRepositoriesDictionary = new Dictionary<string, GenericRepository>();
 
     /// <summary>

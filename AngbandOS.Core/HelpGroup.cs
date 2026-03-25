@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class HelpGroup : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public HelpGroup(Game game, HelpGroupGameConfiguration helpGroupGameConfiguration)
     {
         Game = game;

@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public SummonScript(Game game, SummonScriptGameConfiguration summonScriptGameConfiguration)
     {
         Game = game;

@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class Map
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public Map(Game game)
     {
         Game = game;

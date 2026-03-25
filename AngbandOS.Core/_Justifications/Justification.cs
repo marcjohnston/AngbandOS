@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Justifications;
 [Serializable]
 internal abstract class Justification : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected Justification(Game game)
     {
         Game = game;

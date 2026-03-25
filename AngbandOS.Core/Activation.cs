@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 /// </summary>
 internal sealed class Activation : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public Activation(Game game, ActivationGameConfiguration activationGameConfiguration)
     {
         Game = game;

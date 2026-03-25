@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Expressions;
 [Serializable]
 internal class ExperienceLevelIdentifierFactorParser : IdentifierFactorParser
 {
-    public readonly Game Game;
+    public Game Game { get; }
     public ExperienceLevelIdentifierFactorParser(Game game)
     {
         Game = game;

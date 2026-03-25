@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class SyllableSet : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public SyllableSet(Game game, SyllableSetGameConfiguration syllableSetGameConfiguration)
     {
         Game = game;

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal abstract class Script : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected Script(Game game)
     {
         Game = game;

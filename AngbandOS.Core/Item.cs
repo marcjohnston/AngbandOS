@@ -89,7 +89,7 @@ internal sealed class Item : IComparable<Item>
 
     public int X;
     public int Y;
-    private readonly Game Game;
+    private Game Game { get; }
 
     // All of these properties are initially set by the Factory.
     public int TurnsOfLightRemaining;

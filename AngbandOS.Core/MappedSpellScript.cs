@@ -3,7 +3,7 @@ namespace AngbandOS.Core.MappedSpellScripts;
 [Serializable]
 internal sealed class MappedSpellScript : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public MappedSpellScript(Game game, MappedSpellScriptGameConfiguration mappedSpellScriptGameConfiguration)
     {
         Game = game;

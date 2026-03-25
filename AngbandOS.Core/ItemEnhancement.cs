@@ -32,7 +32,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
     #endregion
 
     #region API
-    private readonly Game Game;
+    private Game Game { get; }
 
     /// <summary>
     /// Returns this <see cref="ItemEnhancement"/> object itself.  This method allows the <see cref="ItemEnhancement"/> and <see cref="ItemEnhancementWeightedRandom"/> to be specified in the <see cref="MappedItemEnhancement.ItemEnhancements"/>.

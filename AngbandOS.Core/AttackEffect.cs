@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class AttackEffect : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected AttackEffect(Game game)
     {
         Game = game;

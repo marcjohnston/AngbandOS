@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class OutfitManifest : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public OutfitManifest(Game game, OutfitManifestGameConfiguration characterClassAndRaceOutfitGameConfiguration)
     {
         Game = game;

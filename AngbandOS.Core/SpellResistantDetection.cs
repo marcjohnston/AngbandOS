@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class SpellResistantDetection : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected SpellResistantDetection(Game game)
     {
         Game = game;

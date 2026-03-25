@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class MartialArtsEffect : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected MartialArtsEffect(Game game)
     {
         Game = game;

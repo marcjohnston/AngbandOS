@@ -3,7 +3,7 @@
 [Serializable]
 internal class DiceRollInfixOperator : InfixOperator
 {
-    public readonly Game Game;
+    public Game Game { get; }
     public DiceRollInfixOperator(Game game)
     {
         Game = game;    

@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class Alignment : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected Alignment(Game game)
     {
         Game = game;

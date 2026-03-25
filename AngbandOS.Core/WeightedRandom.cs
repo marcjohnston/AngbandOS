@@ -39,7 +39,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class WeightedRandom<T>
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     private readonly List<KeyValuePair<int, T>> _list = new List<KeyValuePair<int, T>>();
     private int _sumCount = 0;
 

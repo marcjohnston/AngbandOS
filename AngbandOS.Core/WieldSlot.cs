@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected WieldSlot(Game game)
     {
         Game = game;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Functions;
 [Serializable]
 internal abstract class BoolFunction : IChangeTracker, IGetKey, IBoolValue
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected BoolFunction(Game game) 
     {
         Game = game;

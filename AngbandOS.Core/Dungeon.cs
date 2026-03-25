@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class Dungeon : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
 
     /// <summary>
     /// Create the dungeon

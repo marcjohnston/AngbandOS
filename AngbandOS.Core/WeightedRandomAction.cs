@@ -8,7 +8,7 @@ namespace AngbandOS.Core;
 
 internal class WeightedRandomAction
 {
-    private readonly Game Game;
+    private Game Game { get; }
     private Dictionary<int, Action> values = new Dictionary<int, Action>();
 
     public WeightedRandomAction(Game game)

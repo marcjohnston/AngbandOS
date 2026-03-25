@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class RoomLayout : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected RoomLayout(Game game)
     {
         Game = game;

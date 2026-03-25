@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class Spell : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
 
     public Spell(Game game, SpellGameConfiguration spellGameConfiguration)
     {

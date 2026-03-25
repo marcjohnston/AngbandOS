@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
 {
-    private readonly Game Game;
+    private Game Game { get; }
     private readonly EffectiveAttributeValue[] _effectiveAttributeValues;
     private static Attribute[]? CachedAttributes = null;
     private Attribute[] LoadCachedAttributes()

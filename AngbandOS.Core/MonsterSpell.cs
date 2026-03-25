@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class MonsterSpell : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected MonsterSpell(Game game) 
     {
         Game = game;

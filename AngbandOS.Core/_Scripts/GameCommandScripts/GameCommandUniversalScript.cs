@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class GameCommandUniversalScript : IGameCommandScript, IScript, ICastSpellScript, IStoreCommandScript
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected GameCommandUniversalScript(Game game)
     {
         Game = game;

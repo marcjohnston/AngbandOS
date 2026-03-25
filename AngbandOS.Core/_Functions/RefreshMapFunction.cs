@@ -13,7 +13,7 @@ namespace AngbandOS.Core.Functions;
 [Serializable]
 internal class RefreshMapFunction : IChangeTracker, IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     private RefreshMapFunction(Game game) 
     {
         Game = game;

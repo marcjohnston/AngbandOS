@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ProbabilityExpression 
 {
-    private readonly Game Game;
+    private Game Game { get; }
     private Expression _expression { get; }
     public ProbabilityExpression(Game game, Expression expression)
     {

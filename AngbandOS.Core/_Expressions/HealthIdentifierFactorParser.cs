@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Expressions;
 [Serializable]
 internal class HealthIdentifierFactorParser : IdentifierFactorParser
 {
-    public readonly Game Game;
+    public Game Game { get; }
     public HealthIdentifierFactorParser(Game game)
     {
         Game = game;

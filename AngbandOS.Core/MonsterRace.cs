@@ -348,7 +348,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     #endregion
 
     #region
-    private readonly Game Game;
+    private Game Game { get; }
     private string[] ConvertToMultiline(string multiLineName)
     {
 

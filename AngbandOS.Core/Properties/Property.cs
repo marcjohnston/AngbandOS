@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal abstract class Property : IGetKey, IChangeTracker
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected Property(Game game)
     {
         Game = game;

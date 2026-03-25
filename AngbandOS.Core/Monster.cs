@@ -221,7 +221,7 @@ internal class Monster : IItemContainer
     public int Speed;
     public int StolenGold;
     public int StunLevel;
-    private readonly Game Game;
+    private Game Game { get; }
 
     public Monster(Game game)
     {

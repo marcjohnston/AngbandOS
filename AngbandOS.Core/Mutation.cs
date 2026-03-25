@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class Mutation : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected Mutation(Game game)
     {
         Game = game;

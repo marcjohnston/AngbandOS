@@ -13,7 +13,7 @@ namespace AngbandOS.Core;
 internal sealed class View : IGetKey, IToJson
 {
     #region State Data
-    private readonly Game Game;
+    private Game Game { get; }
 
     /// <summary>
     /// Returns the widgets that support the ability to "poke" a character directly into a dungeon map; or null, if the pokeable widgets haven't been bound yet.  These types of 

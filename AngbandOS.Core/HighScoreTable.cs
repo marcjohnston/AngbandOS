@@ -13,7 +13,7 @@
 //        public int RaceFilter = -1;
 
 //        private readonly List<HighScore> _scores;
-//        private readonly Game Game;
+//        private Game Game { get; }
 
 //        public HighScoreTable(Game game)
 //        {

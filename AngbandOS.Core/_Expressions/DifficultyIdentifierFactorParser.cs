@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Expressions;
 [Serializable]
 internal class DifficultyIdentifierFactorParser : IdentifierFactorParser
 {
-    public readonly Game Game;
+    public Game Game { get; }
     public DifficultyIdentifierFactorParser(Game game)
     {
         Game = game;

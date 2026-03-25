@@ -17,7 +17,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public ItemFilter(Game game, ItemFilterGameConfiguration gameConfiguration)
     {
         Game = game;

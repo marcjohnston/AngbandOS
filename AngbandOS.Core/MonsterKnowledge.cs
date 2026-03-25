@@ -32,7 +32,7 @@ internal class MonsterKnowledge
     private readonly string[] _wdHeCap = { "It", "He", "She" };
     private readonly string[] _wdHis = { "its", "his", "her" };
     private StringBuilder _description;
-    private readonly Game Game;
+    private Game Game { get; }
 
     public MonsterKnowledge(Game game, MonsterRace monsterType)
     {

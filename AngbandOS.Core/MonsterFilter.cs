@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class MonsterFilter : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     public MonsterFilter(Game game)
     {
         Game = game;

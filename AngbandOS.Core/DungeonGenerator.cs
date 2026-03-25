@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class DungeonGenerator
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
 
     public abstract bool GenerateDungeon(int objectLevel);
 

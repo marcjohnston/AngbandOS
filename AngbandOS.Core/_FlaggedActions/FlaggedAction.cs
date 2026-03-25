@@ -9,7 +9,7 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal abstract class FlaggedAction : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected FlaggedAction(Game game)
     {
         Game = game;

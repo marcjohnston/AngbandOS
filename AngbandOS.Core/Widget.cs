@@ -13,7 +13,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class Widget
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected Widget(Game game)
     {
         Game = game;

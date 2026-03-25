@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class ItemQualityRating : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected ItemQualityRating(Game game)
     {
         Game = game;

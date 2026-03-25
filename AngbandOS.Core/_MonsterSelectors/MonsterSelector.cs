@@ -9,7 +9,7 @@ namespace AngbandOS.Core.MonsterSelectors;
 [Serializable]
 internal abstract class MonsterSelector : IMonsterSelector, IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected MonsterSelector(Game game)
     {
         Game = game;

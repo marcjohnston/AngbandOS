@@ -19,7 +19,7 @@ internal class Quest
     public int Level;
     public int RIdx;
     public int ToKill;
-    protected readonly Game Game;
+    protected Game Game { get; }
 
     public bool IsActive => (Level != 0 && Killed < ToKill);
 

@@ -3,7 +3,7 @@
 [Serializable]
 internal sealed class Symbol : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public Symbol(Game game, SymbolGameConfiguration symbolGameConfiguration) 
     {
         Game = game;

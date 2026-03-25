@@ -23,7 +23,7 @@ internal sealed class Realm : IGetKey, IToJson
     #endregion
 
     #region Api Methods
-    private readonly Game Game;
+    private Game Game { get; }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

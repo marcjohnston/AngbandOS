@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class RacialPowerTest : IGetKey, IBoolValue, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public RacialPowerTest(Game game, RacialPowerTestGameConfiguration racialPowerTestGameConfiguration)
     {
         Game = game;

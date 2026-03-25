@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class ArtifactBias : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     public string GetKey => Key;
 
     protected ArtifactBias(Game game)

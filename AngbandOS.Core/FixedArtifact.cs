@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class FixedArtifact : IGetKey, IToJson
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected FixedArtifact(Game game)
     {
         Game = game;

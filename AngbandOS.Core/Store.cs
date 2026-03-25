@@ -12,7 +12,7 @@ internal class Store
     private int _x;
     private int _y;
 
-    protected readonly Game Game;
+    protected Game Game { get; }
     public readonly StoreFactory StoreFactory;
 
     public Store(Game game, StoreFactory storeFactory)

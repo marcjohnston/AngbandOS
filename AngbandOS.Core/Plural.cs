@@ -3,7 +3,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class Plural : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public Plural(Game game, PluralGameConfiguration pluralGameConfiguration)
     {
         Game = game;

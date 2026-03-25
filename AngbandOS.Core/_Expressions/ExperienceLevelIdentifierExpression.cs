@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Expressions;
 [Serializable]
 internal class ExperienceLevelIdentifierExpression : IdentifierExpression
 {
-    public readonly Game Game;
+    public Game Game { get; }
     public ExperienceLevelIdentifierExpression(Game game, string matchedIdentifier) : base(matchedIdentifier)
     {
         Game = game;

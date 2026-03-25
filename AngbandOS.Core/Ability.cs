@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class Ability : IGetKey
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     public Ability(Game game)
     {
         Game = game;

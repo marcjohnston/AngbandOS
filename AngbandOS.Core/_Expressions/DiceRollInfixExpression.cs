@@ -3,7 +3,7 @@
 [Serializable]
 internal class DiceRollInfixExpression : InfixExpression
 {
-    public readonly Game Game;
+    public Game Game { get; }
     public DiceRollInfixExpression(Game game, Expression dice, Expression sides) : base(dice, sides)
     {
         Game = game;

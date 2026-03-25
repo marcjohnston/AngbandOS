@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ConditionalScript : IGetKey, IScript, IToJson
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     public ConditionalScript(Game game, ConditionalScriptGameConfiguration gameConfiguration)
     {
         Game = game;

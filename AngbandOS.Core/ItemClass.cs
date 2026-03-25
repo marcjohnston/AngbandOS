@@ -6,7 +6,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class ItemClass : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public ItemClass(Game game, ItemClassGameConfiguration itemClassGameConfiguration)
     {
         Game = game;

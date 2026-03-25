@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Expressions;
 [Serializable]
 internal class HealthIdentifierExpression : IdentifierExpression
 {
-    public readonly Game Game;
+    public Game Game { get; }
     public HealthIdentifierExpression(Game game, string matchedIdentifier) : base(matchedIdentifier)
     {
         Game = game;

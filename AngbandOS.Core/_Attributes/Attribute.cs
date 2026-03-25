@@ -17,7 +17,7 @@ internal abstract class Attribute : IGetKey, IIndexedSingletons
     public abstract string Key { get; }
     public string GetKey => Key;
 
-    protected readonly Game Game;
+    protected Game Game { get; }
 
     public abstract EffectiveAttributeValue CreateEffectiveAttributeValue();
 

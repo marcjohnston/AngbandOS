@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class GetItemProperty<T> : IDebugDescription
 {
-    protected readonly Game Game;
+    protected Game Game { get; }
     protected GetItemProperty(Game game)
     {
         Game = game;

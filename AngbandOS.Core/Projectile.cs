@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class Projectile : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
 
     public Projectile(Game game, ProjectileGameConfiguration projectileGameConfiguration)
     {

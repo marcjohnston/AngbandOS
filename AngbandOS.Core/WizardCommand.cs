@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class WizardCommand : IHelpCommand, IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public WizardCommand(Game game, WizardCommandGameConfiguration wizardCommandGameConfiguration)
     {
         Game = game;

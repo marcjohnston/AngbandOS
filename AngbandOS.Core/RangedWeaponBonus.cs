@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class RangedWeaponBonus : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public RangedWeaponBonus(Game game, RangedWeaponBonusGameConfiguration missileAttacksPerRoundGameConfiguration)
     {
         Game = game;

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.RaceGenders;
 [Serializable]
 internal sealed class RaceGender : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public RaceGender(Game game, RaceGenderGameConfiguration raceGenderGameConfiguration)
     {
         Game = game;

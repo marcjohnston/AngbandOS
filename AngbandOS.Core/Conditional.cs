@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Functions;
 [Serializable]
 internal sealed class Conditional : IChangeTracker, IGetKey, IBoolValue, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public Conditional(Game game, ConditionalGameConfiguration boolPosFunctionGameConfiguration) 
     {
         Game = game;

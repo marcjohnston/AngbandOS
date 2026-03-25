@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class StoreFactory : IItemFilter, IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public StoreFactory(Game game, StoreFactoryGameConfiguration storeFactoryGameConfiguration)
     {
         Game = game;

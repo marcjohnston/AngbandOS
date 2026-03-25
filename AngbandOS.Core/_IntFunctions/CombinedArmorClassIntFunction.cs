@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Functions;
 [Serializable]
 internal class CombinedArmorClassIntFunction : IChangeTracker, IGetKey, IIntValue
 {
-    private readonly Game Game;
+    private Game Game { get; }
     private int? OldValue = null;
     private CombinedArmorClassIntFunction(Game game)
     {

@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class MonsterTarget : Target
 {
-    private readonly Game Game;
+    private Game Game { get; }
     private readonly Monster _monster;
     public override GridCoordinate? GetTargetLocation()
     {

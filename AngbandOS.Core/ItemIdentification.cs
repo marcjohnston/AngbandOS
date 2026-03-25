@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ItemIdentification : IGetKey, IToJson
 {
-    private readonly Game Game;
+    private Game Game { get; }
     public ItemIdentification(Game game, ItemIdentificationGameConfiguration gameConfiguration)
     {
         Game = game;
