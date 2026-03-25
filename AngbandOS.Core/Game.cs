@@ -8,8 +8,9 @@ using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
 
+
 [Serializable]
-internal partial class Game : IGameSerialization
+internal partial class Game
 {
     #region Code Altering Property Management for Development Purposes Only
     public string Find(string folder, string filenameWithoutExtension)
@@ -81,16 +82,6 @@ internal partial class Game : IGameSerialization
     #endregion
 
     #region Game Serialization
-    public void Serialize(GameStateBag bag)
-    {
-        bag.Serialize(this);
-    }
-
-    public void Deserialize(GameStateBag bag)
-    {
-        bag.Deserialize(this);
-    }
-
     /// <summary>
     /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
     /// </summary>
@@ -98,7 +89,18 @@ internal partial class Game : IGameSerialization
     public void SaveGame()
     {
         //GameStateBag gameStateBag = new GameStateBag();
-        //this.Serialize(gameStateBag);
+        //object? gameData = gameStateBag.Serialize(this);
+        //string jsonSerializedGameData = JsonSerializer.Serialize(gameData);
+        //byte[] jsonSerializedGameDataAsByteArray = System.Text.ASCIIEncoding.UTF8.GetBytes(jsonSerializedGameData);
+        //GameDetails gameDetails = new GameDetails()
+        //{
+        //    CharacterName = PlayerName.StringValue, // The player parameter
+        //    Level = ExperienceLevel.IntValue, // The player parameter
+        //    Gold = Gold.IntValue, // The parameter
+        //    IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
+        //    Comments = ""
+        //};
+        //CorePersistentStorage?.WriteGame(gameDetails, jsonSerializedGameDataAsByteArray);
 
         BinaryFormatter formatter = new BinaryFormatter();
         MemoryStream memoryStream = new MemoryStream();
@@ -112,8 +114,9 @@ internal partial class Game : IGameSerialization
             IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
             Comments = ""
         };
-        CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
+        //CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
     }
+
     #endregion
 
     #region Game Replay
@@ -149,7 +152,7 @@ internal partial class Game : IGameSerialization
     //public bool PreviousInPopupMenu = false;
     #endregion
 
-    #region New Game Construction
+    #region New and Existing Game Construction
     /// <summary>
     /// Creates a new game.  
     /// </summary>
@@ -290,6 +293,34 @@ internal partial class Game : IGameSerialization
         RenderView(consoleView);
 
         InitializeAllocationTables();
+    }
+
+    /// <summary>
+    /// Retrieves a save game from persistent storage.  If no persistent storage is specified, a new game is created. This static method is used as a factory
+    /// to generate the Game object that can be played using the Play method.  This is the only static method.
+    /// </summary>
+    /// <param name="persistentStorage"></param>
+    /// <returns></returns>
+    public static Game LoadGame(ICorePersistentStorage persistentStorage, string serializedGameData, GameConfiguration gameConfiguration)
+    {
+        if (persistentStorage == null)
+        {
+            throw new ArgumentNullException("persistentStorage", "A persistentStorage object must be provided to load the game and cannot be null.");
+        }
+
+        // Retrieve the saved game from the persistent storage.  If the persistent storage doesn't find it, the return data is expected to be null; which
+        // will indicate that a new game needs to be created.
+        byte[]? data = persistentStorage.ReadGame();
+
+        if (data == null)
+        {
+            throw new Exception("Saved game does not exist.");
+        }
+
+        // Deserialize the game.
+        BinaryFormatter formatter = new BinaryFormatter();
+        MemoryStream memoryStream = new MemoryStream(data);
+        return (Game)formatter.Deserialize(memoryStream);
     }
     #endregion
 
@@ -460,6 +491,10 @@ internal partial class Game : IGameSerialization
     }
     #endregion
 
+    #region Game Configuration and the Singleton Repository
+    public SingletonRepository SingletonRepository { get; }
+    #endregion
+
     #region WIP Methods Not Yet Categorized
     /// <summary>
     /// Represents the players effective attribute values.
@@ -533,22 +568,16 @@ internal partial class Game : IGameSerialization
     /// <summary>
     /// Represents the god that the player selected during birth.
     /// </summary>
-    [GameSerializable]
     public God? God;
 
-    [GameSerializable]
     public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
 
-    [GameSerializable]
     public int GenomeArmorClassBonus;
 
-    [GameSerializable]
     public bool ChaosGift;
 
-    [GameSerializable]
     public readonly List<Mutation> MutationsNotPossessed = new List<Mutation>();
 
-    [GameSerializable]
     public readonly List<Mutation> MutationsPossessed = new List<Mutation>();
 
     [NonSerialized]
@@ -557,7 +586,6 @@ internal partial class Game : IGameSerialization
     [NonSerialized]
     private Random _fixed;
 
-    [GameSerializable]
     public int TreasureFeeling;
 
     public Random UseRandom => UseFixed ? _fixed : _mainSequence;
@@ -565,7 +593,6 @@ internal partial class Game : IGameSerialization
     /// <summary>
     /// Set true to use the fixed seed, and false to use the generic randomiser
     /// </summary>
-    [GameSerializable]
     public bool UseFixed = false;
 
     private const int _randnorNum = 256;
@@ -604,10 +631,39 @@ internal partial class Game : IGameSerialization
         }
     }
 
-    private readonly ExpressionParser ExpressionParser; // This is encapsulated via the Parse* methods.
-    public readonly ParseLanguage ParseLanguage;
-    public readonly IntegerToDecimalExpressionTypeConverter IntegerToDecimalExpressionTypeConverter;
-    public readonly DecimalToIntegerExpressionTypeConverter DecimalToIntegerExpressionTypeConverter;
+    #region Expression Parsing
+    /// <summary>
+    /// Returns the parser used to parse expressions.
+    /// </summary>
+    /// <remarks>
+    /// This property is initialized during construction.
+    /// </remarks>
+    private ExpressionParser ExpressionParser { get; } // This is encapsulated via the Parse* methods.
+
+    /// <summary>
+    /// Returns the language used by the expression parser.
+    /// </summary>
+    /// <remarks>
+    /// This property is initialized during construction.
+    /// </remarks>
+    public ParseLanguage ParseLanguage { get; }
+
+    /// <summary>
+    /// Returns the a type converter from integer to decimal for the expression parser.
+    /// </summary>
+    /// <remarks>
+    /// This property is initialized during construction.
+    /// </remarks>
+    public IntegerToDecimalExpressionTypeConverter IntegerToDecimalExpressionTypeConverter { get; }
+
+    /// <summary>
+    /// Returns the a type converter from decimal to integer for the expression parser.
+    /// </summary>
+    /// <remarks>
+    /// This property is initialized during construction.
+    /// </remarks>
+    public DecimalToIntegerExpressionTypeConverter DecimalToIntegerExpressionTypeConverter { get; }
+    #endregion
 
     public readonly RefreshMapProperty RefreshMap;
     public readonly TrackedMonsterChangedProperty TrackedMonsterChanged;
@@ -646,8 +702,6 @@ internal partial class Game : IGameSerialization
     public bool IsDead = false;
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
-
-    public SingletonRepository SingletonRepository;
 
     private DungeonGenerator DungeonGenerator;
 
@@ -1282,35 +1336,6 @@ internal partial class Game : IGameSerialization
         Screen.Print(outVal, 1, 0);
         return !GetCheck("Accept deal? ");
     }
-
-    /// <summary>
-    /// Retrieves a save game from persistent storage.  If no persistent storage is specified, a new game is created. This static method is used as a factory
-    /// to generate the Game object that can be played using the Play method.  This is the only static method.
-    /// </summary>
-    /// <param name="persistentStorage"></param>
-    /// <returns></returns>
-    public static Game LoadGame(ICorePersistentStorage persistentStorage)
-    {
-        if (persistentStorage == null)
-        {
-            throw new ArgumentNullException("persistentStorage", "A persistentStorage object must be provided to load the game and cannot be null.");
-        }
-
-        // Retrieve the saved game from the persistent storage.  If the persistent storage doesn't find it, the return data is expected to be null; which
-        // will indicate that a new game needs to be created.
-        byte[]? data = persistentStorage.ReadGame();
-
-        if (data == null)
-        {
-            throw new Exception("Saved game does not exist.");
-        }
-
-        // Deserialize the game.
-        BinaryFormatter formatter = new BinaryFormatter();
-        MemoryStream memoryStream = new MemoryStream(data);
-        return (Game)formatter.Deserialize(memoryStream);
-    }
-
 
     // PROFILE MESSAGING START
     /// <summary>

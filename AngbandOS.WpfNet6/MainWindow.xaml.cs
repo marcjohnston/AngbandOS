@@ -216,8 +216,8 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         ICorePersistentStorage persistentStorage = new FileSystemCorePersistentStorage(saveFilename);
         if (persistentStorage.GameExists())
         {
-            GameResults gameResults = gameServer.PlayExistingGame(this, persistentStorage, null);
-            //File.WriteAllText(replayFilename, gameResults.Replay);
+            GameResults gameResults = gameServer.PlayExistingGame(this, persistentStorage, null, null, null);
+            //File.WriteAllText(replayFilename, gameResults.Replay); // TODO: This needs to move to the filepersistence driver
         }
         else
         {
@@ -235,7 +235,7 @@ public partial class MainWindow : Window, IConsoleAndViewPort
             Assembly assembly = typeof(AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration).Assembly;
 
             GameResults gameResults = gameServer.PlayNewGame(this, persistentStorage, null, gameConfiguration, null);
-            //File.WriteAllText(replayFilename, gameResults.Replay);
+            //File.WriteAllText(replayFilename, gameResults.Replay);// TODO: This needs to move to the filepersistence driver
         }
     }
 

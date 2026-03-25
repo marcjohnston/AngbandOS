@@ -201,6 +201,7 @@ public class GameServer
         try
         {
             Game = new Game(gameConfiguration, gameReplayDetails);
+      //      Game.SaveGame();
 
             // Announce the new game and the seed for the replay.
             if (replayPersistentStorage is not null && gameReplayDetails is null)
@@ -225,7 +226,7 @@ public class GameServer
     /// <param name="console"></param>
     /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
     /// <returns></returns>
-    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage)
+    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, string serializedGameData, GameConfiguration gameConfiguration)
     {
         if (console == null)
         {
@@ -240,7 +241,7 @@ public class GameServer
         try
         {
             // Retrieve the game from persistent storage.
-            Game = Game.LoadGame(persistentStorage);
+            Game = Game.LoadGame(persistentStorage, serializedGameData, gameConfiguration);
             Game.Play(console, persistentStorage, replayPersistentStorage);
             gameIsOver = true;
         }
