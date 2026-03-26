@@ -79,7 +79,7 @@ internal class SingletonRepository
     }
 
     /// <summary>
-    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterInterface"/> for more information) of type <typeparamref name="T"/> and returns null, if it isn't found.
+    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterIndex"/> for more information) of type <typeparamref name="T"/> and returns null, if it isn't found.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -106,7 +106,7 @@ internal class SingletonRepository
     }
 
     /// <summary>
-    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterInterface"/> for more information) of type <typeparamref name="T"/> and throws an exception if it isn't found.
+    /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterIndex"/> for more information) of type <typeparamref name="T"/> and throws an exception if it isn't found.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -159,7 +159,7 @@ internal class SingletonRepository
     }
 
     /// <summary>
-    /// Returns the number of API Objects in a registered repository (see <see cref="RegisterInterface"/> for more information).
+    /// Returns the number of API Objects in a registered repository (see <see cref="RegisterIndex"/> for more information).
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
@@ -170,7 +170,7 @@ internal class SingletonRepository
     }
 
     /// <summary>
-    /// Returns an array of API Objects from the registered repository (see <see cref="RegisterInterface"/> for more information) of type <typeparamref name="T"/> by their unique key 
+    /// Returns an array of API Objects from the registered repository (see <see cref="RegisterIndex"/> for more information) of type <typeparamref name="T"/> by their unique key 
     /// identifiers <paramref name="keys"/>.  If any the singletons do not exist, an exception is thrown.  Empty arrays are supported and will return an empty array.
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -250,72 +250,72 @@ internal class SingletonRepository
     public void LoadAndBind(GameConfiguration gameConfiguration)
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
-        RegisterIndex<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
-        RegisterIndex<IActivateItemScript>();
-        RegisterIndex<IAimWandScript>();
-        RegisterIndex<IBoolValue>();
-        RegisterIndex<ICastSpellScript>();
-        RegisterIndex<IChangeTracker>();
-        RegisterIndex<IDateAndTimeValue>();
-        RegisterIndex<IEatOrQuaffScript>();
-        RegisterIndex<IEnhancementScript>();
-        RegisterIndex<IGameCommandScript>();
-        RegisterIndex<IIntValue>();
-        RegisterIndex<IItemEnhancement>();
-        RegisterIndex<IMonsterSelector>();
-        RegisterIndex<ITextValue>();
-        RegisterIndex<IReadScrollOrUseStaffScript>();
-        RegisterIndex<IScript>();
-        RegisterIndex<IScriptBool>();
-        RegisterIndex<IScriptItem>();
-        RegisterIndex<IScriptItemGridTile>();
-        RegisterIndex<IScriptItemInt>();
-        RegisterIndex<IScriptItemMonster>();
-        RegisterIndex<IStoreCommandScript>();
-        RegisterIndex<IStringValue>();
-        RegisterIndex<IUsedScript>();
-        RegisterIndex<IZapRodScript>();
+        RegisterInterface<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
+        RegisterInterface<IActivateItemScript>();
+        RegisterInterface<IAimWandScript>();
+        RegisterInterface<IBoolValue>();
+        RegisterInterface<ICastSpellScript>();
+        RegisterInterface<IChangeTracker>();
+        RegisterInterface<IDateAndTimeValue>();
+        RegisterInterface<IEatOrQuaffScript>();
+        RegisterInterface<IEnhancementScript>();
+        RegisterInterface<IGameCommandScript>();
+        RegisterInterface<IIntValue>();
+        RegisterInterface<IItemEnhancement>();
+        RegisterInterface<IMonsterSelector>();
+        RegisterInterface<ITextValue>();
+        RegisterInterface<IReadScrollOrUseStaffScript>();
+        RegisterInterface<IScript>();
+        RegisterInterface<IScriptBool>();
+        RegisterInterface<IScriptItem>();
+        RegisterInterface<IScriptItemGridTile>();
+        RegisterInterface<IScriptItemInt>();
+        RegisterInterface<IScriptItemMonster>();
+        RegisterInterface<IStoreCommandScript>();
+        RegisterInterface<IStringValue>();
+        RegisterInterface<IUsedScript>();
+        RegisterInterface<IZapRodScript>();
 
         // Base preload
-        RegisterIndex<Attribute>();
+        RegisterInterface<Attribute>();
 
         // Not configurable yet
-        RegisterIndex<Ability>();
-        RegisterIndex<ActivationWeightedRandom>();
-        RegisterIndex<Alignment>();
-        RegisterIndex<AlterAction>();
-        RegisterIndex<ArtifactBias>();
-        RegisterIndex<AttackEffect>();
-        RegisterIndex<CharacterClass>();
-        RegisterIndex<BirthStage>();
-        RegisterIndex<FixedArtifact>();
-        RegisterIndex<FlaggedAction>();
-        RegisterIndex<GridTileScript>();
-        RegisterIndex<ItemAction>();
-        RegisterIndex<ItemEffect>();
-        RegisterIndex<ItemMatch>();
-        RegisterIndex<ItemQualityRating>();
-        RegisterIndex<Justification>();
-        RegisterIndex<MartialArtsEffect>();
-        RegisterIndex<MonsterEffect>();
-        RegisterIndex<MonsterFilter>();
-        RegisterIndex<MonsterRace>(); 
-        RegisterIndex<MonsterRaceFilter>();
-        RegisterIndex<MonsterSelector>();
-        RegisterIndex<MonsterSpell>();
-        RegisterIndex<Mutation>();
-        RegisterIndex<PlayerEffectUniversalScript>();
-        RegisterIndex<ProbabilityExpression>();
-        RegisterIndex<Property>();
-        RegisterIndex<Race>();
-        RegisterIndex<Reward>();
-        RegisterIndex<RoomLayout>();
-        RegisterIndex<SpellResistantDetection>();
-        RegisterIndex<Talent>();
-        RegisterIndex<Timer>();
-        RegisterIndex<WieldSlot>();
-        RegisterIndex<EquipmentWieldSlot>();
-        RegisterIndex<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
+        RegisterInterface<Ability>();
+        RegisterInterface<ActivationWeightedRandom>();
+        RegisterInterface<Alignment>();
+        RegisterInterface<AlterAction>();
+        RegisterInterface<ArtifactBias>();
+        RegisterInterface<AttackEffect>();
+        RegisterInterface<CharacterClass>();
+        RegisterInterface<BirthStage>();
+        RegisterInterface<FixedArtifact>();
+        RegisterInterface<FlaggedAction>();
+        RegisterInterface<GridTileScript>();
+        RegisterInterface<ItemAction>();
+        RegisterInterface<ItemEffect>();
+        RegisterInterface<ItemMatch>();
+        RegisterInterface<ItemQualityRating>();
+        RegisterInterface<Justification>();
+        RegisterInterface<MartialArtsEffect>();
+        RegisterInterface<MonsterEffect>();
+        RegisterInterface<MonsterFilter>();
+        RegisterInterface<MonsterRace>(); 
+        RegisterInterface<MonsterRaceFilter>();
+        RegisterInterface<MonsterSelector>();
+        RegisterInterface<MonsterSpell>();
+        RegisterInterface<Mutation>();
+        RegisterInterface<PlayerEffectUniversalScript>();
+        RegisterInterface<ProbabilityExpression>();
+        RegisterInterface<Property>();
+        RegisterInterface<Race>();
+        RegisterInterface<Reward>();
+        RegisterInterface<RoomLayout>();
+        RegisterInterface<SpellResistantDetection>();
+        RegisterInterface<Talent>();
+        RegisterInterface<Timer>();
+        RegisterInterface<WieldSlot>();
+        RegisterInterface<EquipmentWieldSlot>();
+        RegisterInterface<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
 
         // Load system singletons.
         LoadAllAssemblyTypes<IGetKey>();
@@ -493,9 +493,13 @@ internal class SingletonRepository
     /// </summary>
     private List<IGetKey> _allSingletonsList = new List<IGetKey>();
 
-    private void RegisterIndex<T>()
+    /// <summary>
+    /// Registers an additional index for singleton entities by an interface.  Persistence for the index is not enabled.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    private void RegisterInterface<T>()
     {
-        RegisterInterface<T>(false);
+        RegisterIndex<T>(false);
     }
 
     private bool IsDirectlyAssignableFrom<TInterface>(Type type)
@@ -506,11 +510,11 @@ internal class SingletonRepository
     }
 
     /// <summary>
-    /// Registers a repository for all singletons that implement the interface specified by <typeparamref name="T"/>.
+    /// Registers a repository to build an index for a specific type of singletons specified by the <typeparamref name="T"/> type parameter.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <exception cref="Exception"></exception>
-    private void RegisterInterface<T>(bool enablePersistance = true)
+    private void RegisterIndex<T>(bool enablePersistance = true)
     {
         string typeName = typeof(T).Name;
         if (!_allGenericRepositoriesDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
@@ -629,7 +633,7 @@ internal class SingletonRepository
         }
 
         // Register the repository with persistence.
-        RegisterIndex<T>();
+        RegisterInterface<T>();
 
         string typeName = typeof(T).Name;
         if (entityConfigurations is not null)
