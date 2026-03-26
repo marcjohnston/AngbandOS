@@ -250,72 +250,72 @@ internal class SingletonRepository
     public void LoadAndBind(GameConfiguration gameConfiguration)
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
-        RegisterInterface<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
-        RegisterInterface<IActivateItemScript>();
-        RegisterInterface<IAimWandScript>();
-        RegisterInterface<IBoolValue>();
-        RegisterInterface<ICastSpellScript>();
-        RegisterInterface<IChangeTracker>();
-        RegisterInterface<IDateAndTimeValue>();
-        RegisterInterface<IEatOrQuaffScript>();
-        RegisterInterface<IEnhancementScript>();
-        RegisterInterface<IGameCommandScript>();
-        RegisterInterface<IIntValue>();
-        RegisterInterface<IItemEnhancement>();
-        RegisterInterface<IMonsterSelector>();
-        RegisterInterface<ITextValue>();
-        RegisterInterface<IReadScrollOrUseStaffScript>();
-        RegisterInterface<IScript>();
-        RegisterInterface<IScriptBool>();
-        RegisterInterface<IScriptItem>();
-        RegisterInterface<IScriptItemGridTile>();
-        RegisterInterface<IScriptItemInt>();
-        RegisterInterface<IScriptItemMonster>();
-        RegisterInterface<IStoreCommandScript>();
-        RegisterInterface<IStringValue>();
-        RegisterInterface<IUsedScript>();
-        RegisterInterface<IZapRodScript>();
+        RegisterIndex<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
+        RegisterIndex<IActivateItemScript>();
+        RegisterIndex<IAimWandScript>();
+        RegisterIndex<IBoolValue>();
+        RegisterIndex<ICastSpellScript>();
+        RegisterIndex<IChangeTracker>();
+        RegisterIndex<IDateAndTimeValue>();
+        RegisterIndex<IEatOrQuaffScript>();
+        RegisterIndex<IEnhancementScript>();
+        RegisterIndex<IGameCommandScript>();
+        RegisterIndex<IIntValue>();
+        RegisterIndex<IItemEnhancement>();
+        RegisterIndex<IMonsterSelector>();
+        RegisterIndex<ITextValue>();
+        RegisterIndex<IReadScrollOrUseStaffScript>();
+        RegisterIndex<IScript>();
+        RegisterIndex<IScriptBool>();
+        RegisterIndex<IScriptItem>();
+        RegisterIndex<IScriptItemGridTile>();
+        RegisterIndex<IScriptItemInt>();
+        RegisterIndex<IScriptItemMonster>();
+        RegisterIndex<IStoreCommandScript>();
+        RegisterIndex<IStringValue>();
+        RegisterIndex<IUsedScript>();
+        RegisterIndex<IZapRodScript>();
 
         // Base preload
-        RegisterInterface<Attribute>();
+        RegisterIndex<Attribute>();
 
         // Not configurable yet
-        RegisterInterface<Ability>();
-        RegisterInterface<ActivationWeightedRandom>();
-        RegisterInterface<Alignment>();
-        RegisterInterface<AlterAction>();
-        RegisterInterface<ArtifactBias>();
-        RegisterInterface<AttackEffect>();
-        RegisterInterface<CharacterClass>();
-        RegisterInterface<BirthStage>();
-        RegisterInterface<FixedArtifact>();
-        RegisterInterface<FlaggedAction>();
-        RegisterInterface<GridTileScript>();
-        RegisterInterface<ItemAction>();
-        RegisterInterface<ItemEffect>();
-        RegisterInterface<ItemMatch>();
-        RegisterInterface<ItemQualityRating>();
-        RegisterInterface<Justification>();
-        RegisterInterface<MartialArtsEffect>();
-        RegisterInterface<MonsterEffect>();
-        RegisterInterface<MonsterFilter>();
-        RegisterInterface<MonsterRace>(); 
-        RegisterInterface<MonsterRaceFilter>();
-        RegisterInterface<MonsterSelector>();
-        RegisterInterface<MonsterSpell>();
-        RegisterInterface<Mutation>();
-        RegisterInterface<PlayerEffectUniversalScript>();
-        RegisterInterface<ProbabilityExpression>();
-        RegisterInterface<Property>();
-        RegisterInterface<Race>();
-        RegisterInterface<Reward>();
-        RegisterInterface<RoomLayout>();
-        RegisterInterface<SpellResistantDetection>();
-        RegisterInterface<Talent>();
-        RegisterInterface<Timer>();
-        RegisterInterface<WieldSlot>();
-        RegisterInterface<EquipmentWieldSlot>();
-        RegisterInterface<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
+        RegisterIndex<Ability>();
+        RegisterIndex<ActivationWeightedRandom>();
+        RegisterIndex<Alignment>();
+        RegisterIndex<AlterAction>();
+        RegisterIndex<ArtifactBias>();
+        RegisterIndex<AttackEffect>();
+        RegisterIndex<CharacterClass>();
+        RegisterIndex<BirthStage>();
+        RegisterIndex<FixedArtifact>();
+        RegisterIndex<FlaggedAction>();
+        RegisterIndex<GridTileScript>();
+        RegisterIndex<ItemAction>();
+        RegisterIndex<ItemEffect>();
+        RegisterIndex<ItemMatch>();
+        RegisterIndex<ItemQualityRating>();
+        RegisterIndex<Justification>();
+        RegisterIndex<MartialArtsEffect>();
+        RegisterIndex<MonsterEffect>();
+        RegisterIndex<MonsterFilter>();
+        RegisterIndex<MonsterRace>(); 
+        RegisterIndex<MonsterRaceFilter>();
+        RegisterIndex<MonsterSelector>();
+        RegisterIndex<MonsterSpell>();
+        RegisterIndex<Mutation>();
+        RegisterIndex<PlayerEffectUniversalScript>();
+        RegisterIndex<ProbabilityExpression>();
+        RegisterIndex<Property>();
+        RegisterIndex<Race>();
+        RegisterIndex<Reward>();
+        RegisterIndex<RoomLayout>();
+        RegisterIndex<SpellResistantDetection>();
+        RegisterIndex<Talent>();
+        RegisterIndex<Timer>();
+        RegisterIndex<WieldSlot>();
+        RegisterIndex<EquipmentWieldSlot>();
+        RegisterIndex<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
 
         // Load system singletons.
         LoadAllAssemblyTypes<IGetKey>();
@@ -493,7 +493,7 @@ internal class SingletonRepository
     /// </summary>
     private List<IGetKey> _allSingletonsList = new List<IGetKey>();
 
-    private void RegisterInterface<T>()
+    private void RegisterIndex<T>()
     {
         RegisterInterface<T>(false);
     }
@@ -628,11 +628,11 @@ internal class SingletonRepository
             throw new Exception($"The type {typeof(T).Name} does not implement {nameof(IToJson)} to support the persistance for {nameof(GameConfiguration)}.");
         }
 
-        // Register the repository with persistance.
-        RegisterInterface<T>();
+        // Register the repository with persistence.
+        RegisterIndex<T>();
 
         string typeName = typeof(T).Name;
-        if (entityConfigurations != null)
+        if (entityConfigurations is not null)
         {
             ConstructorInfo? constructor = typeof(T).GetConstructors(BindingFlags.Public | BindingFlags.Instance)
                 .SingleOrDefault(_constructor =>
@@ -650,10 +650,6 @@ internal class SingletonRepository
                 T entity = (T)constructor.Invoke(new object[] { Game, entityConfiguration });
                 RegisterSingleton(entity);
             }
-        }
-        else
-        {
-            LoadAllAssemblyTypes<T>();
         }
     }
     #endregion
