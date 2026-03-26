@@ -484,7 +484,9 @@ internal class SingletonRepository
 
     #region Privates
     private Game Game { get; }
-    private Dictionary<string, GenericRepository> _allGenericRepositoriesDictionary = new Dictionary<string, GenericRepository>();
+    private Dictionary<string, GenericRepository> _allGenericRepositoriesDictionary { get; } = new Dictionary<string, GenericRepository>();
+    private List<GenericRepository> _indexedRepositories { get; } = new List<GenericRepository>();
+
 
     /// <summary>
     /// Returns a list of all singletons.  This is used to track all of the loaded singletons so that they can be bound quickly and only once.
@@ -523,8 +525,6 @@ internal class SingletonRepository
             _allGenericRepositoriesDictionary.Add(typeName, genericRepository);
         }
     }
-
-    private List<GenericRepository> _indexedRepositories = new List<GenericRepository>();
 
     /// <summary>
     /// Registers a singleton with all of the repositories by determining all of the interfaces and base classes that the singleton supports and registering the singleton

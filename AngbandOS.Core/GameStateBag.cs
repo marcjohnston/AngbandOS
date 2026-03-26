@@ -57,6 +57,7 @@ internal class GameStateBag
             {
                 return new Dictionary<string, object?>
                 {
+                    ["$type"] = "ref",
                     ["$ref"] = existingId
                 };
             }
@@ -66,7 +67,7 @@ internal class GameStateBag
             _objectToId[value] = id;
 
             // Retrieve all of the fields to be preserved.  We exclude property backing fields and fields marked as [NonSerialized].
-            IEnumerable<FieldInfo> serializableFields = value.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(p => !p.IsDefined(typeof(CompilerGeneratedAttribute), true) && !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute)));
+            IEnumerable<FieldInfo> serializableFields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(p => !p.IsDefined(typeof(CompilerGeneratedAttribute), true) && !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute)));
             var objectValue = new Dictionary<string, object?>();
 
             foreach (FieldInfo propertyInfo in serializableFields)
@@ -76,10 +77,12 @@ internal class GameStateBag
                 object? fieldValue = propertyInfo.GetValue(value);
                 objectValue[key] = Serialize(fieldValue, DelimitIf(parent, ".", $"{type.Name}.{key}"));
             }
+
             return new Dictionary<string, object?>
             {
+                ["$type"] = "object",
                 ["$id"] = id,
-                ["$type"] = value.GetType().Name,
+                ["$basetype"] = type.Name,
                 ["$value"] = objectValue
             };
         }
@@ -123,8 +126,8 @@ internal class GameStateBag
 
             return new Dictionary<string, object?>
             {
-                ["$tuple"] = true,
-                ["$type"] = type.FullName,
+                ["$type"] = "tuple",
+                ["$basetype"] = type.Name,
                 ["$values"] = values
             };
         }

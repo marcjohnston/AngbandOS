@@ -88,24 +88,10 @@ internal partial class Game
     /// <param name="player">The player to save.  If the player is dead, then this should be the corpse.</param>
     public void SaveGame()
     {
-        //GameStateBag gameStateBag = new GameStateBag();
-        //object? gameData = gameStateBag.Serialize(this);
-        //string jsonSerializedGameData = JsonSerializer.Serialize(gameData);
-        //byte[] jsonSerializedGameDataAsByteArray = System.Text.ASCIIEncoding.UTF8.GetBytes(jsonSerializedGameData);
-        //GameDetails gameDetails = new GameDetails()
-        //{
-        //    CharacterName = PlayerName.StringValue, // The player parameter
-        //    Level = ExperienceLevel.IntValue, // The player parameter
-        //    Gold = Gold.IntValue, // The parameter
-        //    IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
-        //    Comments = ""
-        //};
-        //CorePersistentStorage?.WriteGame(gameDetails, jsonSerializedGameDataAsByteArray);
-
-        BinaryFormatter formatter = new BinaryFormatter();
-        MemoryStream memoryStream = new MemoryStream();
-        formatter.Serialize(memoryStream, this);
-        memoryStream.Position = 0;
+        GameStateBag gameStateBag = new GameStateBag();
+        object? gameData = gameStateBag.Serialize(this);
+        string jsonSerializedGameData = JsonSerializer.Serialize(gameData, new JsonSerializerOptions { IncludeFields = true });
+        byte[] jsonSerializedGameDataAsByteArray = System.Text.ASCIIEncoding.UTF8.GetBytes(jsonSerializedGameData);
         GameDetails gameDetails = new GameDetails()
         {
             CharacterName = PlayerName.StringValue, // The player parameter
@@ -114,6 +100,20 @@ internal partial class Game
             IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
             Comments = ""
         };
+        CorePersistentStorage?.WriteGame(gameDetails, jsonSerializedGameDataAsByteArray);
+
+        //BinaryFormatter formatter = new BinaryFormatter();
+        //MemoryStream memoryStream = new MemoryStream();
+        //formatter.Serialize(memoryStream, this);
+        //memoryStream.Position = 0;
+        //GameDetails gameDetails = new GameDetails()
+        //{
+        //    CharacterName = PlayerName.StringValue, // The player parameter
+        //    Level = ExperienceLevel.IntValue, // The player parameter
+        //    Gold = Gold.IntValue, // The parameter
+        //    IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
+        //    Comments = ""
+        //};
         //CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
     }
 
@@ -222,7 +222,7 @@ internal partial class Game
         BlowsTable = gameConfiguration.BlowsTable;
         FollowDistance = gameConfiguration.FollowDistance;
         DecayRate = gameConfiguration.DecayRate;
-        PatronRestingFavour = gameConfiguration.PatronRestingFavour;
+        PatronRestingFavor = gameConfiguration.PatronRestingFavour;
 
         ElvishTexts = gameConfiguration.ElvishTexts ?? new string[] { };
         HorrificDescriptions = gameConfiguration.HorrificDescriptions ?? new string[] { };
@@ -495,141 +495,23 @@ internal partial class Game
     public SingletonRepository SingletonRepository { get; }
     #endregion
 
-    #region WIP Methods Not Yet Categorized
+    #region Player Effective Attribute Set
     /// <summary>
     /// Represents the players effective attribute values.
     /// </summary>
     public ReadOnlyAttributeSet EffectiveAttributeSet;
-
-    public void GainMutation(Mutation mutation)
-    {
-        MutationsNotPossessed.Remove(mutation);
-        if (MutationsPossessed.Count > 0 && mutation.Group != MutationGroupEnum.None)
-        {
-            int i = 0;
-            do
-            {
-                if (MutationsPossessed[i].Group == mutation.Group)
-                {
-                    Mutation other = MutationsPossessed[i];
-                    MutationsPossessed.RemoveAt(i);
-                    other.OnLose();
-                    MsgPrint(other.LoseMessage);
-                    MutationsNotPossessed.Add(other);
-                }
-                else
-                {
-                    i++;
-                }
-            } while (i < MutationsPossessed.Count);
-        }
-        MutationsPossessed.Add(mutation);
-        mutation.OnGain();
-        MsgPrint(mutation.GainMessage);
-        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-        HandleStuff();
-    }
-
-    public int EnchantBonus(int bonus)
-    {
-        do
-        {
-            bonus++;
-        } while (bonus < DieRoll(5) || DieRoll(bonus) == 1);
-        if (bonus > 4 && DieRoll(Constants.WeirdLuck) != 1)
-        {
-            bonus = 4;
-        }
-        return bonus;
-    }
-
-    /// <summary>
-    /// Returns the distance at which a pet will move closer to the player.
-    /// </summary>
-    public readonly int FollowDistance;
-    private readonly int DecayRate;
-    public readonly string[] ShopkeeperAcceptedComments;
-    public readonly string[] IllegibleFlavorSyllables;
-    public readonly string[] FindQuests;
-    public readonly string[] ElvishTexts;
-    public readonly string[] FunnyDescriptions;
-    public readonly string[] FunnyComments;
-    public readonly string[] HorrificDescriptions;
-    public readonly int[][] BlowsTable;
-    public readonly int[] RequiredExperiencePerLevel;
-    public readonly int[] ExtractEnergy;
-    private readonly int PatronRestingFavour;
-
     public const string FactoryAttributeKey = "factory";
     public const string RandomAttributeKey = "random";
     public const string RareAttributeKey = "rare";
     public const string FixedAttributeKey = "fixed";
+    #endregion
 
-    /// <summary>
-    /// Represents the god that the player selected during birth.
-    /// </summary>
-    public God? God;
-
-    public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
-
-    public int GenomeArmorClassBonus;
-
-    public bool ChaosGift;
-
-    public readonly List<Mutation> MutationsNotPossessed = new List<Mutation>();
-
-    public readonly List<Mutation> MutationsPossessed = new List<Mutation>();
-
-    [NonSerialized]
-    private Random _mainSequence;
-
-    [NonSerialized]
-    private Random _fixed;
-
-    public int TreasureFeeling;
-
-    public Random UseRandom => UseFixed ? _fixed : _mainSequence;
-
-    /// <summary>
-    /// Set true to use the fixed seed, and false to use the generic randomiser
-    /// </summary>
-    public bool UseFixed = false;
-
-    private const int _randnorNum = 256;
-    private const int _randnorStd = 64;
-
-    private readonly int[] _randnorTable =
-    {
-        206, 613, 1022, 1430, 1838, 2245, 2652, 3058, 3463, 3867, 4271, 4673, 5075, 5475, 5874, 6271, 6667, 7061,
-        7454, 7845, 8234, 8621, 9006, 9389, 9770, 10148, 10524, 10898, 11269, 11638, 12004, 12367, 12727, 13085,
-        13440, 13792, 14140, 14486, 14828, 15168, 15504, 15836, 16166, 16492, 16814, 17133, 17449, 17761, 18069,
-        18374, 18675, 18972, 19266, 19556, 19842, 20124, 20403, 20678, 20949, 21216, 21479, 21738, 21994, 22245,
-        22493, 22737, 22977, 23213, 23446, 23674, 23899, 24120, 24336, 24550, 24759, 24965, 25166, 25365, 25559,
-        25750, 25937, 26120, 26300, 26476, 26649, 26818, 26983, 27146, 27304, 27460, 27612, 27760, 27906, 28048,
-        28187, 28323, 28455, 28585, 28711, 28835, 28955, 29073, 29188, 29299, 29409, 29515, 29619, 29720, 29818,
-        29914, 30007, 30098, 30186, 30272, 30356, 30437, 30516, 30593, 30668, 30740, 30810, 30879, 30945, 31010,
-        31072, 31133, 31192, 31249, 31304, 31358, 31410, 31460, 31509, 31556, 31601, 31646, 31688, 31730, 31770,
-        31808, 31846, 31882, 31917, 31950, 31983, 32014, 32044, 32074, 32102, 32129, 32155, 32180, 32205, 32228,
-        32251, 32273, 32294, 32314, 32333, 32352, 32370, 32387, 32404, 32420, 32435, 32450, 32464, 32477, 32490,
-        32503, 32515, 32526, 32537, 32548, 32558, 32568, 32577, 32586, 32595, 32603, 32611, 32618, 32625, 32632,
-        32639, 32645, 32651, 32657, 32662, 32667, 32672, 32677, 32682, 32686, 32690, 32694, 32698, 32702, 32705,
-        32708, 32711, 32714, 32717, 32720, 32722, 32725, 32727, 32729, 32731, 32733, 32735, 32737, 32739, 32740,
-        32742, 32743, 32745, 32746, 32747, 32748, 32749, 32750, 32751, 32752, 32753, 32754, 32755, 32756, 32757,
-        32757, 32758, 32758, 32759, 32760, 32760, 32761, 32761, 32761, 32762, 32762, 32763, 32763, 32763, 32764,
-        32764, 32764, 32764, 32765, 32765, 32765, 32765, 32766, 32766, 32766, 32766, 32767
-    };
-
-    private int _fixedSeed;
-
-    public int FixedSeed // TODO: This is ugly
-    {
-        get => _fixedSeed;
-        set
-        {
-            _fixed = new Random(value);
-            _fixedSeed = value;
-        }
-    }
+    #region Stores & Shopkeepers
+    public string[] ShopkeeperAcceptedComments { get; }
+    public string[] FunnyDescriptions { get; }
+    public string[] FunnyComments { get; }
+    public string[] HorrificDescriptions { get; }
+    #endregion
 
     #region Expression Parsing
     /// <summary>
@@ -664,6 +546,161 @@ internal partial class Game
     /// </remarks>
     public DecimalToIntegerExpressionTypeConverter DecimalToIntegerExpressionTypeConverter { get; }
     #endregion
+
+    #region Random Number Generator
+    [NonSerialized]
+    private Random _mainSequence;
+
+    [NonSerialized]
+    private Random _fixed;
+
+    public Random UseRandom => UseFixed ? _fixed : _mainSequence;
+    /// <summary>
+    /// Set true to use the fixed seed, and false to use the generic randomiser
+    /// </summary>
+    public bool UseFixed = false;
+
+    private const int _randnorNum = 256;
+    private const int _randnorStd = 64;
+
+    private int[] _randnorTable { get; } =
+    {
+        206, 613, 1022, 1430, 1838, 2245, 2652, 3058, 3463, 3867, 4271, 4673, 5075, 5475, 5874, 6271, 6667, 7061,
+        7454, 7845, 8234, 8621, 9006, 9389, 9770, 10148, 10524, 10898, 11269, 11638, 12004, 12367, 12727, 13085,
+        13440, 13792, 14140, 14486, 14828, 15168, 15504, 15836, 16166, 16492, 16814, 17133, 17449, 17761, 18069,
+        18374, 18675, 18972, 19266, 19556, 19842, 20124, 20403, 20678, 20949, 21216, 21479, 21738, 21994, 22245,
+        22493, 22737, 22977, 23213, 23446, 23674, 23899, 24120, 24336, 24550, 24759, 24965, 25166, 25365, 25559,
+        25750, 25937, 26120, 26300, 26476, 26649, 26818, 26983, 27146, 27304, 27460, 27612, 27760, 27906, 28048,
+        28187, 28323, 28455, 28585, 28711, 28835, 28955, 29073, 29188, 29299, 29409, 29515, 29619, 29720, 29818,
+        29914, 30007, 30098, 30186, 30272, 30356, 30437, 30516, 30593, 30668, 30740, 30810, 30879, 30945, 31010,
+        31072, 31133, 31192, 31249, 31304, 31358, 31410, 31460, 31509, 31556, 31601, 31646, 31688, 31730, 31770,
+        31808, 31846, 31882, 31917, 31950, 31983, 32014, 32044, 32074, 32102, 32129, 32155, 32180, 32205, 32228,
+        32251, 32273, 32294, 32314, 32333, 32352, 32370, 32387, 32404, 32420, 32435, 32450, 32464, 32477, 32490,
+        32503, 32515, 32526, 32537, 32548, 32558, 32568, 32577, 32586, 32595, 32603, 32611, 32618, 32625, 32632,
+        32639, 32645, 32651, 32657, 32662, 32667, 32672, 32677, 32682, 32686, 32690, 32694, 32698, 32702, 32705,
+        32708, 32711, 32714, 32717, 32720, 32722, 32725, 32727, 32729, 32731, 32733, 32735, 32737, 32739, 32740,
+        32742, 32743, 32745, 32746, 32747, 32748, 32749, 32750, 32751, 32752, 32753, 32754, 32755, 32756, 32757,
+        32757, 32758, 32758, 32759, 32760, 32760, 32761, 32761, 32761, 32762, 32762, 32763, 32763, 32763, 32764,
+        32764, 32764, 32764, 32765, 32765, 32765, 32765, 32766, 32766, 32766, 32766, 32767
+    };
+
+    private int _fixedSeed;
+
+    public int FixedSeed // TODO: This is ugly
+    {
+        get => _fixedSeed;
+        set
+        {
+            _fixed = new Random(value);
+            _fixedSeed = value;
+        }
+    }
+    #endregion
+
+    #region Movement and Running
+    /// <summary>
+    /// The direction the player is currently running in
+    /// </summary>
+    public int CurrentRunDirection;
+
+    /// <summary>
+    /// A list of entry points into the _directionCycle for each direction (except 0 or 5) that
+    /// take you to a middling entry for that direction from which we can safely rotate to
+    /// either side
+    /// </summary>
+    private int[] _cycleEntryPoint { get; } = { 0, 8, 9, 10, 7, 0, 11, 6, 5, 4 };
+
+    /// <summary>
+    /// A list of keypad directions which rotates left when you increment and right when you decrement
+    /// </summary>
+    private int[] _directionCycle { get; } = { 1, 2, 3, 6, 9, 8, 7, 4, 1, 2, 3, 6, 9, 8, 7, 4, 1 };
+
+    private bool _findBreakleft;
+    private bool _findBreakright;
+    private bool _findOpenarea;
+
+    /// <summary>
+    /// The direction in which we were previously running
+    /// </summary>
+    private int _previousRunDirection;
+    #endregion
+
+    #region Mutations
+    public void GainMutation(Mutation mutation)
+    {
+        MutationsNotPossessed.Remove(mutation);
+        if (MutationsPossessed.Count > 0 && mutation.Group != MutationGroupEnum.None)
+        {
+            int i = 0;
+            do
+            {
+                if (MutationsPossessed[i].Group == mutation.Group)
+                {
+                    Mutation other = MutationsPossessed[i];
+                    MutationsPossessed.RemoveAt(i);
+                    other.OnLose();
+                    MsgPrint(other.LoseMessage);
+                    MutationsNotPossessed.Add(other);
+                }
+                else
+                {
+                    i++;
+                }
+            } while (i < MutationsPossessed.Count);
+        }
+        MutationsPossessed.Add(mutation);
+        mutation.OnGain();
+        MsgPrint(mutation.GainMessage);
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        HandleStuff();
+    }
+    #endregion
+
+    #region WIP Methods Not Yet Categorized
+
+    public int EnchantBonus(int bonus)
+    {
+        do
+        {
+            bonus++;
+        } while (bonus < DieRoll(5) || DieRoll(bonus) == 1);
+        if (bonus > 4 && DieRoll(Constants.WeirdLuck) != 1)
+        {
+            bonus = 4;
+        }
+        return bonus;
+    }
+
+    /// <summary>
+    /// Returns the distance at which a pet will move closer to the player.
+    /// </summary>
+    public readonly int FollowDistance;
+    private readonly int DecayRate;
+    public string[] IllegibleFlavorSyllables { get; }
+    public string[] FindQuests { get; }
+    public string[] ElvishTexts { get; }
+    public int[][] BlowsTable { get; }
+    public int[] RequiredExperiencePerLevel { get; }
+    public int[] ExtractEnergy { get; }
+    private int PatronRestingFavor { get; }
+
+    /// <summary>
+    /// Represents the god that the player selected during birth.
+    /// </summary>
+    public God? God;
+
+    public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
+
+    public int GenomeArmorClassBonus;
+
+    public bool ChaosGift;
+
+    public readonly List<Mutation> MutationsNotPossessed = new List<Mutation>();
+
+    public readonly List<Mutation> MutationsPossessed = new List<Mutation>();
+
+    public int TreasureFeeling;
+
 
     public readonly RefreshMapProperty RefreshMap;
     public readonly TrackedMonsterChangedProperty TrackedMonsterChanged;
@@ -709,32 +746,6 @@ internal partial class Game
     /// Maximum amount of health that can be drained from an opponent in one turn
     /// </summary>
     private const int _maxVampiricDrain = 100;
-
-    /// <summary>
-    /// The direction the player is currently running in
-    /// </summary>
-    public int CurrentRunDirection;
-
-    /// <summary>
-    /// A list of entry points into the _directionCycle for each direction (except 0 or 5) that
-    /// take you to a middling entry for that direction from which we can safely rotate to
-    /// either side
-    /// </summary>
-    private readonly int[] _cycleEntryPoint = { 0, 8, 9, 10, 7, 0, 11, 6, 5, 4 };
-
-    /// <summary>
-    /// A list of keypad directions which rotates left when you increment and right when you decrement
-    /// </summary>
-    private readonly int[] _directionCycle = { 1, 2, 3, 6, 9, 8, 7, 4, 1, 2, 3, 6, 9, 8, 7, 4, 1 };
-
-    private bool _findBreakleft;
-    private bool _findBreakright;
-    private bool _findOpenarea;
-
-    /// <summary>
-    /// The direction in which we were previously running
-    /// </summary>
-    private int _previousRunDirection;
 
     /// <summary>
     /// Returns the date and time when the last player input was received or the game was initially started.  Null, until the game is started.
@@ -16846,14 +16857,14 @@ internal partial class Game
                 if (god == God)
                 {
                     god.IsPatron = true;
-                    god.RestingFavor = PatronRestingFavour * 4;
-                    god.Favor = PatronRestingFavour * 4;
+                    god.RestingFavor = PatronRestingFavor * 4;
+                    god.Favor = PatronRestingFavor * 4;
                 }
                 else
                 {
                     god.IsPatron = false;
-                    god.RestingFavor = -PatronRestingFavour;
-                    god.Favor = -PatronRestingFavour;
+                    god.RestingFavor = -PatronRestingFavor;
+                    god.Favor = -PatronRestingFavor;
                 }
             }
         }

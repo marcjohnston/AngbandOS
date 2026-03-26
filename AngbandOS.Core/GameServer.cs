@@ -201,7 +201,7 @@ public class GameServer
         try
         {
             Game = new Game(gameConfiguration, gameReplayDetails);
-      //      Game.SaveGame();
+            Game.SaveGame();
 
             // Announce the new game and the seed for the replay.
             if (replayPersistentStorage is not null && gameReplayDetails is null)
