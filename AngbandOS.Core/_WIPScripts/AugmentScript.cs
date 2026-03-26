@@ -20,35 +20,13 @@ internal class AugmentScript : Script, IEatOrQuaffScript
         bool isIdentified = false;
 
         // Augmentation increases all ability scores
-        IdentifiedResultEnum identifiedResult = Game.TryIncreasingAbilityScore(Game.StrengthAbility);
-        if (identifiedResult == IdentifiedResultEnum.True)
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            isIdentified = true;
-        }
-        identifiedResult = Game.TryIncreasingAbilityScore(Game.IntelligenceAbility);
-        if (identifiedResult == IdentifiedResultEnum.True)
-        {
-            isIdentified = true;
-        }
-        identifiedResult = Game.TryIncreasingAbilityScore(Game.WisdomAbility);
-        if (identifiedResult == IdentifiedResultEnum.True)
-        {
-            isIdentified = true;
-        }
-        identifiedResult = Game.TryIncreasingAbilityScore(Game.DexterityAbility);
-        if (identifiedResult == IdentifiedResultEnum.True)
-        {
-            isIdentified = true;
-        }
-        identifiedResult = Game.TryIncreasingAbilityScore(Game.ConstitutionAbility);
-        if (identifiedResult == IdentifiedResultEnum.True)
-        {
-            isIdentified = true;
-        }
-        identifiedResult = Game.TryIncreasingAbilityScore(Game.CharismaAbility);
-        if (identifiedResult == IdentifiedResultEnum.True)
-        {
-            isIdentified = true;
+            IdentifiedResultEnum identifiedResult = Game.TryIncreasingAbilityScore(ability);
+            if (identifiedResult == IdentifiedResultEnum.True)
+            {
+                isIdentified = true;
+            }
         }
         return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }

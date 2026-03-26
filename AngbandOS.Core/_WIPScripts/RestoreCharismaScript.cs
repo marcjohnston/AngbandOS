@@ -18,7 +18,7 @@ internal class RestoreCharismaScript : Script, IEatOrQuaffScript
     public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Restore charisma restores your charisma
-        bool isIdentified = Game.TryRestoringAbilityScore(Game.CharismaAbility);
+        bool isIdentified = Game.TryRestoringAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)));
         return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

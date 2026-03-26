@@ -18,7 +18,7 @@ internal class RestoreConstitutionScript : Script, IEatOrQuaffScript
     public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Restore constitution restores your constitution
-        bool isIdentified = Game.TryRestoringAbilityScore(Game.ConstitutionAbility);
+        bool isIdentified = Game.TryRestoringAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)));
         return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

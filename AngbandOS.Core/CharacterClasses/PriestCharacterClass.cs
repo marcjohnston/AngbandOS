@@ -32,7 +32,7 @@ internal class PriestCharacterClass : CharacterClass
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 2;
     public override int ExperienceFactor => 20;
-    public override Ability PrimeStat => Game.WisdomAbility;
+    public override Ability PrimeStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
     public override int? SpellMinFailChance => 5;
     public override string[] Info => new string[] {
         "Devout followers of the Great Ones, Priests use WIS based",
@@ -69,7 +69,7 @@ internal class PriestCharacterClass : CharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override Ability SpellStat => Game.WisdomAbility;
+    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(10000 / ((level * level) + 40)));
     public override Realm[] AvailablePrimaryRealms => new Realm[] {

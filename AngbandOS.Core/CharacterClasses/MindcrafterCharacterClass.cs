@@ -36,7 +36,7 @@ internal class MindcrafterCharacterClass : CharacterClass
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 2;
     public override int ExperienceFactor => 25;
-    public override Ability PrimeStat => Game.WisdomAbility;
+    public override Ability PrimeStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
     public override string[] Info => new string[] {
         "Disciples of the psionic arts, Mindcrafters learn a range",
         "of mental abilities; which they power using WIS. As well",
@@ -49,7 +49,7 @@ internal class MindcrafterCharacterClass : CharacterClass
 
     public override void Cast() => CastMentalism();
 
-    public override Ability SpellStat => Game.WisdomAbility;
+    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
     public override ArtifactBias? ArtifactBias => (Game.DieRoll(5) > 2 ? Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias)) : null);
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(55000 / ((level * level) + 40)));
 

@@ -34,7 +34,7 @@ internal class WarriorCharacterClass : CharacterClass
     public override int RangedAttackBonusPerLevel => 45;
     public override int HitDieBonus => 9;
     public override int ExperienceFactor => 0;
-    public override Ability PrimeStat => Game.StrengthAbility;
+    public override Ability PrimeStat => Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility));
     public override string[] Info => new string[] {
         "Straightforward, no-nonsense fighters. They are the best",
         "characters at melee combat, and require the least amount",

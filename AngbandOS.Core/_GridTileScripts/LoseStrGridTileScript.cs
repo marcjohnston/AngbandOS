@@ -15,7 +15,7 @@ internal class LoseStrGridTileScript : GridTileScript
     {
         Game.RunScript(nameof(ASmallNeedleHasPrickedYouRenderMessageScript));
         Game.TakeHit(Game.DiceRoll(1, 4), "a poison needle");
-        Game.TryDecreasingAbilityScore(Game.StrengthAbility);
+        Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)));
         return (IsNoticedEnum.True, DestroysContentsEnum.False);
     }
 }

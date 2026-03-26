@@ -587,8 +587,8 @@ internal class Monster : IItemContainer
         }
         if (Game.DieRoll(power) < Game.SkillSavingThrow)
         {
-            Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
-            Game.TryDecreasingAbilityScore(Game.WisdomAbility);
+            Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
+            Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
             return;
         }
         if (Game.DieRoll(power) < Game.SkillSavingThrow)
@@ -603,11 +603,11 @@ internal class Monster : IItemContainer
             }
             while (Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
+                Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
             }
             while (Game.RandomLessThan(100) > Game.SkillSavingThrow)
             {
-                Game.TryDecreasingAbilityScore(Game.WisdomAbility);
+                Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
             }
             if (!Game.HasChaosResistance)
             {
@@ -617,11 +617,11 @@ internal class Monster : IItemContainer
         }
         if (Game.DieRoll(power) < Game.SkillSavingThrow)
         {
-            if (Game.DecreaseAbilityScore(Game.IntelligenceAbility, 10, true))
+            if (Game.DecreaseAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)), 10, true))
             {
                 happened = true;
             }
-            if (Game.DecreaseAbilityScore(Game.WisdomAbility, 10, true))
+            if (Game.DecreaseAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)), 10, true))
             {
                 happened = true;
             }

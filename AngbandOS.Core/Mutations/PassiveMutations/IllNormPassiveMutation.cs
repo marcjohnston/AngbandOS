@@ -17,11 +17,11 @@ internal class IllNormPassiveMutation : Mutation
 
     public override void OnGain()
     {
-        Game.CharismaAbility.Override = true;
+        Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Override = true;
     }
 
     public override void OnLose()
     {
-        Game.CharismaAbility.Override = false;
+        Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Override = false;
     }
 }

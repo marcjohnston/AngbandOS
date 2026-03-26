@@ -22,29 +22,12 @@ internal class RestorationIdentifiedAndUsedScriptItemAndDirection : Script, IZap
         {
             isIdentified = true;
         }
-        if (Game.TryRestoringAbilityScore(Game.StrengthAbility))
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            isIdentified = true;
-        }
-        if (Game.TryRestoringAbilityScore(Game.IntelligenceAbility))
-        {
-            isIdentified = true;
-        }
-        if (Game.TryRestoringAbilityScore(Game.WisdomAbility))
-        {
-            isIdentified = true;
-        }
-        if (Game.TryRestoringAbilityScore(Game.DexterityAbility))
-        {
-            isIdentified = true;
-        }
-        if (Game.TryRestoringAbilityScore(Game.ConstitutionAbility))
-        {
-            isIdentified = true;
-        }
-        if (Game.TryRestoringAbilityScore(Game.CharismaAbility))
-        {
-            isIdentified = true;
+            if (Game.TryRestoringAbilityScore(ability))
+            {
+                isIdentified = true;
+            }
         }
         return new IdentifiedAndUsedResult(isIdentified, true);
     }

@@ -34,11 +34,11 @@ internal class AbilityScoreScript : EatOrQuaffUniversalScript, IGetKey, IToJson
     {
         if (TrueToIncreaseFalseToDecrease)
         {
-            return Game.TryIncreasingAbilityScore(Game.IntelligenceAbility);
+            return Game.TryIncreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
         }
         else
         {
-            return Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
+            return Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
         }
     }
 

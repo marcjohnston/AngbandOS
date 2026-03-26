@@ -22,12 +22,10 @@ internal class RestoreBodyScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.TryRestoringAbilityScore(Game.StrengthAbility);
-        Game.TryRestoringAbilityScore(Game.IntelligenceAbility);
-        Game.TryRestoringAbilityScore(Game.WisdomAbility);
-        Game.TryRestoringAbilityScore(Game.DexterityAbility);
-        Game.TryRestoringAbilityScore(Game.ConstitutionAbility);
-        Game.TryRestoringAbilityScore(Game.CharismaAbility);
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
+        {
+            Game.TryRestoringAbilityScore(ability);
+        }
     }
     public string LearnedDetails => "";
 }

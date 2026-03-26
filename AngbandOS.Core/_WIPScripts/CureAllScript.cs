@@ -28,12 +28,10 @@ internal class CureAllScript : Script, IScript, ICastSpellScript
     public void ExecuteScript()
     {
         Game.RunScript(nameof(RemoveAllCurseScript));
-        Game.RestoreAbilityScore(Game.StrengthAbility);
-        Game.RestoreAbilityScore(Game.IntelligenceAbility);
-        Game.RestoreAbilityScore(Game.WisdomAbility);
-        Game.RestoreAbilityScore(Game.ConstitutionAbility);
-        Game.RestoreAbilityScore(Game.DexterityAbility);
-        Game.RestoreAbilityScore(Game.CharismaAbility);
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
+        {
+            Game.RestoreAbilityScore(ability);
+        }
         Game.RunScript(nameof(RestoreLevelScript));
         Game.Health.IntValue = Game.MaxHealth.IntValue;
         Game.FractionalHealth = 0;

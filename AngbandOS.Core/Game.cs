@@ -88,24 +88,10 @@ internal partial class Game
     /// <param name="player">The player to save.  If the player is dead, then this should be the corpse.</param>
     public void SaveGame()
     {
-        GameStateBag gameStateBag = new GameStateBag();
-        object? gameData = gameStateBag.Serialize(this);
-        string jsonSerializedGameData = JsonSerializer.Serialize(gameData, new JsonSerializerOptions { IncludeFields = true });
-        byte[] jsonSerializedGameDataAsByteArray = System.Text.ASCIIEncoding.UTF8.GetBytes(jsonSerializedGameData);
-        GameDetails gameDetails = new GameDetails()
-        {
-            CharacterName = PlayerName.StringValue, // The player parameter
-            Level = ExperienceLevel.IntValue, // The player parameter
-            Gold = Gold.IntValue, // The parameter
-            IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
-            Comments = ""
-        };
-        CorePersistentStorage?.WriteGame(gameDetails, jsonSerializedGameDataAsByteArray);
-
-        //BinaryFormatter formatter = new BinaryFormatter();
-        //MemoryStream memoryStream = new MemoryStream();
-        //formatter.Serialize(memoryStream, this);
-        //memoryStream.Position = 0;
+        //GameStateBag gameStateBag = new GameStateBag();
+        //object? gameData = gameStateBag.Serialize(this);
+        //string jsonSerializedGameData = JsonSerializer.Serialize(gameData, new JsonSerializerOptions { IncludeFields = true });
+        //byte[] jsonSerializedGameDataAsByteArray = System.Text.ASCIIEncoding.UTF8.GetBytes(jsonSerializedGameData);
         //GameDetails gameDetails = new GameDetails()
         //{
         //    CharacterName = PlayerName.StringValue, // The player parameter
@@ -114,7 +100,21 @@ internal partial class Game
         //    IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
         //    Comments = ""
         //};
-        //CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
+        //CorePersistentStorage?.WriteGame(gameDetails, jsonSerializedGameDataAsByteArray);
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        MemoryStream memoryStream = new MemoryStream();
+        formatter.Serialize(memoryStream, this);
+        memoryStream.Position = 0;
+        GameDetails gameDetails = new GameDetails()
+        {
+            CharacterName = PlayerName.StringValue, // The player parameter
+            Level = ExperienceLevel.IntValue, // The player parameter
+            Gold = Gold.IntValue, // The parameter
+            IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
+            Comments = ""
+        };
+        CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
     }
 
     #endregion
@@ -2376,13 +2376,6 @@ internal partial class Game
             History[i] = "";
         }
 
-        StrengthAbility = SingletonRepository.Get<Ability>(nameof(StrengthAbility));
-        IntelligenceAbility = SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
-        WisdomAbility = SingletonRepository.Get<Ability>(nameof(WisdomAbility));
-        DexterityAbility = SingletonRepository.Get<Ability>(nameof(DexterityAbility));
-        ConstitutionAbility = SingletonRepository.Get<Ability>(nameof(ConstitutionAbility));
-        CharismaAbility = SingletonRepository.Get<Ability>(nameof(CharismaAbility)); 
-
         WeightCarried = 0;
 
         foreach (FixedArtifact aPtr in SingletonRepository.Get<FixedArtifact>())
@@ -4455,7 +4448,7 @@ internal partial class Game
         }
         if (AcidResistanceTimer.Value == 0 && !HasAcidResistance && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(CharismaAbility);
+            TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(CharismaAbility)));
         }
         if (MinusAc())
         {
@@ -4666,7 +4659,7 @@ internal partial class Game
         }
         if (!(ColdResistanceTimer.Value != 0 || HasColdResistance) && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(StrengthAbility);
+            TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(StrengthAbility)));
         }
         TakeHit(dam, kbStr);
         if (!(HasColdResistance && ColdResistanceTimer.Value != 0))
@@ -5217,7 +5210,7 @@ internal partial class Game
         }
         if (!(LightningResistanceTimer.Value != 0 || HasLightningResistance) && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(DexterityAbility);
+            TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(DexterityAbility)));
         }
         TakeHit(dam, kbStr);
         if (!(LightningResistanceTimer.Value != 0 && HasLightningResistance))
@@ -5412,7 +5405,7 @@ internal partial class Game
         }
         if (!(FireResistanceTimer.Value != 0 || HasFireResistance) && DieRoll(HurtChance) == 1)
         {
-            TryDecreasingAbilityScore(StrengthAbility);
+            TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(StrengthAbility)));
         }
         TakeHit(dam, killedByIndefiniteVisibleName);
         if (!(HasFireResistance && FireResistanceTimer.Value != 0))
@@ -6067,7 +6060,8 @@ internal partial class Game
         EnergyUse = 100;
         GridTile cPtr = Map.Grid[y][x];
         MsgPrint("You smash into the door!");
-        int bash = StrengthAbility.StrAttackSpeedComponent;
+        Ability strengthAbility = SingletonRepository.Get<Ability>(nameof(StrengthAbility));
+        int bash = strengthAbility.StrAttackSpeedComponent;
         int temp = cPtr.FeatureType.LockLevel;
         temp = bash - (temp * 10);
         if (temp < 1)
@@ -6084,7 +6078,7 @@ internal partial class Game
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateViewFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateDistancesFlaggedAction)).Set();
         }
-        else if (RandomLessThan(100) < DexterityAbility.DexTheftAvoidance + ExperienceLevel.IntValue)
+        else if (RandomLessThan(100) < SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexTheftAvoidance + ExperienceLevel.IntValue)
         {
             MsgPrint("The door holds firm.");
             more = true;
@@ -7561,7 +7555,8 @@ internal partial class Game
         // Thrown distance is based on the weight of the missile
         int multiplier = 10 + (2 * (damageMultiplier - 1));
         int divider = missile.EffectiveAttributeSet.Weight > 10 ? missile.EffectiveAttributeSet.Weight : 10;
-        int throwDistance = (StrengthAbility.StrAttackSpeedComponent + 20) * multiplier / divider;
+        Ability strengthAbility = SingletonRepository.Get<Ability>(nameof(StrengthAbility));
+        int throwDistance = (strengthAbility.StrAttackSpeedComponent + 20) * multiplier / divider;
         if (throwDistance > 10)
         {
             throwDistance = 10;

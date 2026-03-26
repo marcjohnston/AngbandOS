@@ -37,25 +37,25 @@ internal class StunningTimer : Timer
             {
                 if (!Game.HasSustainIntelligence)
                 {
-                    Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
+                    Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
                 }
                 if (!Game.HasSustainWisdom)
                 {
-                    Game.TryDecreasingAbilityScore(Game.WisdomAbility);
+                    Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
                 }
             }
             else if (Game.DieRoll(2) == 1)
             {
                 if (!Game.HasSustainIntelligence)
                 {
-                    Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
+                    Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
                 }
             }
             else
             {
                 if (!Game.HasSustainWisdom)
                 {
-                    Game.TryDecreasingAbilityScore(Game.WisdomAbility);
+                    Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
                 }
             }
         }
@@ -64,7 +64,7 @@ internal class StunningTimer : Timer
     {
         if (Value != 0)
         {
-            int adjust = Game.ConstitutionAbility.ConRecoverySpeed + 1;
+            int adjust = Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).ConRecoverySpeed + 1;
             AddTimer(-adjust);
         }
     }

@@ -54,7 +54,7 @@ internal class BleedingTimer : Timer
             if (!Game.HasSustainCharisma)
             {
                 Game.MsgPrint("You have been horribly scarred.");
-                Game.TryDecreasingAbilityScore(Game.CharismaAbility);
+                Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)));
             }
         }
         switch (newRate)
@@ -112,7 +112,7 @@ internal class BleedingTimer : Timer
     {
         if (Value > 0)
         {
-            int adjust = Game.ConstitutionAbility.ConRecoverySpeed + 1;
+            int adjust = Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).ConRecoverySpeed + 1;
             if (Value > 1000)
             {
                 adjust = 0;

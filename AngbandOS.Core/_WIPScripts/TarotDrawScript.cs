@@ -52,8 +52,8 @@ internal class TarotDrawScript : Script, IScript, ICastSpellScript
         else if (die < 26)
         {
             Game.MsgPrint("It's the Fool.");
-            Game.TryDecreasingAbilityScore(Game.IntelligenceAbility);
-            Game.TryDecreasingAbilityScore(Game.WisdomAbility);
+            Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
+            Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
         }
         else if (die < 30)
         {

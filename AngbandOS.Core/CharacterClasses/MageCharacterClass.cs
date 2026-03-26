@@ -34,7 +34,7 @@ internal class MageCharacterClass : CharacterClass
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 0;
     public override int ExperienceFactor => 30;
-    public override Ability PrimeStat => Game.IntelligenceAbility;
+    public override Ability PrimeStat => Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
     public override string[] Info => new string[] {
         "Flexible INT based spell casters who can cast magic from",
         "any two realms of their choice. However, they can't wear",
@@ -56,7 +56,7 @@ internal class MageCharacterClass : CharacterClass
 
 
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
-    public override Ability SpellStat => Game.IntelligenceAbility;
+    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;

@@ -22,7 +22,7 @@ internal class PoisoningTimer : Timer
     {
         if (Value != 0)
         {
-            int adjust = Game.ConstitutionAbility.ConRecoverySpeed + 1;
+            int adjust = Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).ConRecoverySpeed + 1;
             AddTimer(-adjust);
         }
     }   

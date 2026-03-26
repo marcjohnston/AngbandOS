@@ -119,13 +119,6 @@ internal partial class Game
     public readonly Timer SuperheroismTimer;
     public readonly Timer TelepathyTimer;
 
-    public Ability StrengthAbility; // TODO: These are still hardcoded into the framework
-    public Ability IntelligenceAbility; // TODO: These are still hardcoded into the framework
-    public Ability WisdomAbility; // TODO: These are still hardcoded into the framework
-    public Ability DexterityAbility; // TODO: These are still hardcoded into the framework
-    public Ability ConstitutionAbility; // TODO: These are still hardcoded into the framework
-    public Ability CharismaAbility; // TODO: These are still hardcoded into the framework
-
     public int CharismaBonus;
     public int ConstitutionBonus;
     public int DexterityBonus;

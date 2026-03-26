@@ -12,7 +12,7 @@ internal class UpdateHealthFlaggedAction : FlaggedAction
     private UpdateHealthFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        int bonus = Game.ConstitutionAbility.ConHealthBonus;
+        int bonus = Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).ConHealthBonus;
         int mhp = Game.PlayerHp[Game.ExperienceLevel.IntValue - 1] + (bonus * Game.ExperienceLevel.IntValue / 2);
         if (mhp < Game.ExperienceLevel.IntValue + 1)
         {

@@ -136,12 +136,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
             ability.Bonus += raceAbility.Bonus + characterClassAbility.Bonus;
         }
-        Game.StrengthAbility.Bonus += Game.StrengthBonus;
-        Game.IntelligenceAbility.Bonus += Game.IntelligenceBonus;
-        Game.WisdomAbility.Bonus += Game.WisdomBonus;
-        Game.DexterityAbility.Bonus += Game.DexterityBonus;
-        Game.ConstitutionAbility.Bonus += Game.ConstitutionBonus;
-        Game.CharismaAbility.Bonus += Game.CharismaBonus;
+        Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).Bonus += Game.StrengthBonus;
+        Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).Bonus += Game.IntelligenceBonus;
+        Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)).Bonus += Game.WisdomBonus;
+        Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).Bonus += Game.DexterityBonus;
+        Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).Bonus += Game.ConstitutionBonus;
+        Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Bonus += Game.CharismaBonus;
         Game.Speed.IntValue += Game.SpeedBonus;
         Game.HasRegeneration |= Game.Regen;
         Game.SkillSearchFrequency += Game.SearchBonus;
@@ -201,12 +201,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    Game.StrengthAbility.Bonus += oPtr.EffectiveAttributeSet.Strength;
-                    Game.IntelligenceAbility.Bonus += oPtr.EffectiveAttributeSet.Intelligence;
-                    Game.WisdomAbility.Bonus += oPtr.EffectiveAttributeSet.Wisdom;
-                    Game.DexterityAbility.Bonus += oPtr.EffectiveAttributeSet.Dexterity;
-                    Game.ConstitutionAbility.Bonus += oPtr.EffectiveAttributeSet.Constitution;
-                    Game.CharismaAbility.Bonus += oPtr.EffectiveAttributeSet.Charisma;
+                    Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).Bonus += oPtr.EffectiveAttributeSet.Strength;
+                    Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).Bonus += oPtr.EffectiveAttributeSet.Intelligence;
+                    Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)).Bonus += oPtr.EffectiveAttributeSet.Wisdom;
+                    Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).Bonus += oPtr.EffectiveAttributeSet.Dexterity;
+                    Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).Bonus += oPtr.EffectiveAttributeSet.Constitution;
+                    Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Bonus += oPtr.EffectiveAttributeSet.Charisma;
                     Game.SkillStealth += oPtr.EffectiveAttributeSet.Stealth;
                     Game.SkillSearching += oPtr.EffectiveAttributeSet.Search * 5;
                     Game.SkillSearchFrequency += oPtr.EffectiveAttributeSet.Search * 5;
@@ -566,7 +566,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         int j = Game.WeightCarried;
 
         // Compute the weight limit.
-        int ii = Game.StrengthAbility.StrCarryingCapacity * 100;
+        int ii = Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrCarryingCapacity * 100;
 
         if (j > ii / 2)
         {
@@ -584,15 +584,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();
         }
-        Game.ArmorClassBonus += Game.DexterityAbility.DexArmorClassBonus;
-        damageBonus += Game.StrengthAbility.StrDamageBonus;
-        attackBonus += Game.DexterityAbility.DexAttackBonus;
-        attackBonus += Game.StrengthAbility.StrAttackBonus;
-        Game.KnownBonusArmorClass += Game.DexterityAbility.DexArmorClassBonus;
-        displayedDamageBonus += Game.StrengthAbility.StrDamageBonus;
-        displayedAttackBonus += Game.DexterityAbility.DexAttackBonus;
-        displayedAttackBonus += Game.StrengthAbility.StrAttackBonus;
-        int hold = Game.StrengthAbility.StrMaxWeaponWeight;
+        Game.ArmorClassBonus += Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexArmorClassBonus;
+        damageBonus += Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDamageBonus;
+        attackBonus += Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexAttackBonus;
+        attackBonus += Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrAttackBonus;
+        Game.KnownBonusArmorClass += Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexArmorClassBonus;
+        displayedDamageBonus += Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDamageBonus;
+        displayedAttackBonus += Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexAttackBonus;
+        displayedAttackBonus += Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrAttackBonus;
+        int hold = Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrMaxWeaponWeight;
 
         // Enumerate all of the ranged weapon slots.
         foreach (WieldSlot rangedWeaponInventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
@@ -653,12 +653,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     int wgt = Game.CharacterClass.MaximumWeight;
                     int mul = Game.CharacterClass.AttackSpeedMultiplier;
                     int div = oPtr.EffectiveAttributeSet.Weight < wgt ? wgt : oPtr.EffectiveAttributeSet.Weight;
-                    int strIndex = Game.StrengthAbility.StrAttackSpeedComponent * mul / div;
+                    int strIndex = Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrAttackSpeedComponent * mul / div;
                     if (strIndex > 11)
                     {
                         strIndex = 11;
                     }
-                    int dexIndex = Game.DexterityAbility.DexAttackSpeedComponent;
+                    int dexIndex = Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexAttackSpeedComponent;
                     if (dexIndex > 11)
                     {
                         dexIndex = 11;
@@ -758,11 +758,11 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
 
         Game.SkillStealth++;
-        Game.ComputedDisarmTraps += Game.DexterityAbility.DexDisarmBonus;
-        Game.ComputedDisarmTraps += Game.IntelligenceAbility.IntDisarmBonus;
-        Game.SkillUseDevice += Game.IntelligenceAbility.IntUseDeviceBonus;
-        Game.SkillSavingThrow += Game.WisdomAbility.WisSavingThrowBonus;
-        Game.SkillDigging += Game.StrengthAbility.StrDiggingBonus;
+        Game.ComputedDisarmTraps += Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexDisarmBonus;
+        Game.ComputedDisarmTraps += Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntDisarmBonus;
+        Game.SkillUseDevice += Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntUseDeviceBonus;
+        Game.SkillSavingThrow += Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)).WisSavingThrowBonus;
+        Game.SkillDigging += Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDiggingBonus;
         Game.ComputedDisarmTraps += (Game.CharacterClass.DisarmBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillUseDevice += (Game.CharacterClass.DeviceBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillSavingThrow += (Game.CharacterClass.SaveBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;

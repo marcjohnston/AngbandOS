@@ -38,7 +38,8 @@ internal class InventoryScript : UniversalScript, IGetKey
             return;
         }
         // Get a new command
-        string outVal = $"Inventory: carrying {Game.WeightCarried / 10}.{Game.WeightCarried % 10} pounds ({Game.WeightCarried * 100 / (Game.StrengthAbility.StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
+        Ability strengthAbility = Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility));
+        string outVal = $"Inventory: carrying {Game.WeightCarried / 10}.{Game.WeightCarried % 10} pounds ({Game.WeightCarried * 100 / (strengthAbility.StrCarryingCapacity * 100 / 2)}% of capacity). Command: ";
         Game.Screen.PrintLine(outVal, 0, 0);
         char c = Game.GetAndRecordKeystroke();
         Game.Screen.Restore(savedScreen);

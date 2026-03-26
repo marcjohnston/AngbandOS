@@ -18,7 +18,7 @@ internal class RestoreWisdomScript : Script, IEatOrQuaffScript
     public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         // Restore wisdom restores your wisdom
-        bool isIdentified = Game.TryRestoringAbilityScore(Game.WisdomAbility);
+        bool isIdentified = Game.TryRestoringAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
         return isIdentified ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

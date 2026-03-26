@@ -12,12 +12,10 @@ internal class GreatOneRaceDreamingPowerRacialPowerScript : Script, IScript
         Game.RunScript(nameof(BleedingResetTimerScript));
         Game.BlindnessTimer.ResetTimer();
         Game.FearTimer.ResetTimer();
-        Game.TryRestoringAbilityScore(Game.StrengthAbility);
-        Game.TryRestoringAbilityScore(Game.IntelligenceAbility);
-        Game.TryRestoringAbilityScore(Game.WisdomAbility);
-        Game.TryRestoringAbilityScore(Game.DexterityAbility);
-        Game.TryRestoringAbilityScore(Game.ConstitutionAbility);
-        Game.TryRestoringAbilityScore(Game.CharismaAbility);
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
+        {
+            Game.TryRestoringAbilityScore(ability);
+        }
         Game.RunScript(nameof(RestoreLevelScript));
     }
 }

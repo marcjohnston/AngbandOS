@@ -34,11 +34,11 @@ internal class RedrawStatsFlaggedAction : FlaggedAction
 
     protected override void Execute()
     {
-        PrtStat(Game.StrengthAbility, 0);
-        PrtStat(Game.IntelligenceAbility, 1);
-        PrtStat(Game.WisdomAbility, 2);
-        PrtStat(Game.DexterityAbility, 3);
-        PrtStat(Game.ConstitutionAbility, 4);
-        PrtStat(Game.CharismaAbility, 5);
+        PrtStat(Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)), 0);
+        PrtStat(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)), 1);
+        PrtStat(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)), 2);
+        PrtStat(Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)), 3);
+        PrtStat(Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)), 4);
+        PrtStat(Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)), 5);
     }
 }

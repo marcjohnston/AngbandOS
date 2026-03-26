@@ -32,7 +32,7 @@ internal class ChannelerCharacterClass : CharacterClass
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 1;
     public override int ExperienceFactor => 30;
-    public override Ability PrimeStat => Game.CharismaAbility;
+    public override Ability PrimeStat => Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility));
     public override string[] Info => new string[] {
         "Similar to a spell caster, but rather than casting spells",
         "from a book, they can use their CHA to channel mana into",
@@ -46,7 +46,7 @@ internal class ChannelerCharacterClass : CharacterClass
     /// </summary>
     public override bool CanUseManaInsteadOfConsumingItem => true;
 
-    public override Ability SpellStat => Game.CharismaAbility;
+    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility));
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;

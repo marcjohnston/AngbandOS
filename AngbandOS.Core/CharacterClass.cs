@@ -168,7 +168,7 @@ internal abstract class CharacterClass : IGetKey
             {
                 bool perm = Game.RandomLessThan(100) < 25;
                 Game.MsgPrint("You have damaged your health!");
-                Game.DecreaseAbilityScore(Game.ConstitutionAbility, 15 + Game.DieRoll(10), perm);
+                Game.DecreaseAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)), 15 + Game.DieRoll(10), perm);
             }
         }
     }
@@ -249,7 +249,7 @@ internal abstract class CharacterClass : IGetKey
             {
                 bool perm = Game.RandomLessThan(100) < 25;
                 Game.MsgPrint("You have damaged your mind!");
-                Game.DecreaseAbilityScore(Game.WisdomAbility, 15 + Game.DieRoll(10), perm);
+                Game.DecreaseAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)), 15 + Game.DieRoll(10), perm);
             }
         }
     }
@@ -654,7 +654,7 @@ internal abstract class CharacterClass : IGetKey
     /// <value>The spell weight.</value>
     public virtual int SpellWeight => 0;
 
-    public virtual Ability SpellStat => Game.StrengthAbility;
+    public virtual Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility));
     public virtual int MaximumMeleeAttacksPerRound(int level) => 5;
     public virtual int MaximumWeight => 35;
     public virtual int AttackSpeedMultiplier => 3;

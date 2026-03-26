@@ -22,8 +22,8 @@ internal class SpecialEnlightenmentScript : Script, IEatOrQuaffScript
         Game.MsgPrint("You begin to feel more enlightened...");
         Game.MsgPrint(string.Empty);
         Game.RunScript(nameof(LightScript));
-        Game.TryIncreasingAbilityScore(Game.IntelligenceAbility);
-        Game.TryIncreasingAbilityScore(Game.WisdomAbility);
+        Game.TryIncreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
+        Game.TryIncreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
         Game.DetectTraps();
         Game.DetectDoors();
         Game.DetectStairs();

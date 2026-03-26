@@ -18,7 +18,7 @@ internal class EatRestoreConstitutionScript : Script, IEatOrQuaffScript
     public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         Game.PlaySound(SoundEffectEnum.Eat);
-        if (Game.TryRestoringAbilityScore(Game.ConstitutionAbility))
+        if (Game.TryRestoringAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility))))
         {
             return IdentifiedResultEnum.True;
         }

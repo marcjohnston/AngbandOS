@@ -25,7 +25,7 @@ internal class PoisonGasPlayerEffect : PlayerEffectUniversalScript
         if (!(Game.PoisonResistanceTimer.Value != 0 || Game.HasPoisonResistance) &&
             Game.DieRoll(Game.HurtChance) == 1)
         {
-            Game.TryDecreasingAbilityScore(Game.ConstitutionAbility);
+            Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)));
         }
         Game.TakeHit(dam, killer);
         if (!(Game.HasPoisonResistance || Game.PoisonResistanceTimer.Value != 0))

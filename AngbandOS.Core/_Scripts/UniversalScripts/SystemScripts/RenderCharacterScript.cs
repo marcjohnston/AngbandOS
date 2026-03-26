@@ -48,7 +48,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         (string bonus1, string bonus2, string bonus3, string bonus4, string bonus5) = ability.GetBonuses();
 
         // Add the bonus text for spell casting abilities
-        if (Game.CharacterClass.SpellStat == ability && ability != Game.StrengthAbility)
+        if (Game.CharacterClass.SpellStat == ability && ability != Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)))
         {
             int mana = ability.ManaBonus;
             // Casting abilities only have one or two inherent bonuses, so it's safe to start at three

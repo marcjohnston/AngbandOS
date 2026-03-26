@@ -38,7 +38,7 @@ internal class MonkCharacterClass : CharacterClass
     /// </summary>
     public override bool IsMartialArtist => true;
 
-    public override Ability PrimeStat => Game.DexterityAbility;
+    public override Ability PrimeStat => Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility));
     public override string[] Info => new string[] {
         "Masters of unarmed combat. While wearing only light armor",
         "they can move faster and dodge blows and can learn to",
@@ -75,7 +75,7 @@ internal class MonkCharacterClass : CharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override Ability SpellStat => Game.WisdomAbility;
+    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;

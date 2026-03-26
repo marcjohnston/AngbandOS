@@ -13,12 +13,10 @@ internal class RestAllScript : Script, IActivateItemScript
 
     public UsedResultEnum ExecuteActivateItemScript(Item item) // This is run by an item activation
     {
-        Game.TryRestoringAbilityScore(Game.StrengthAbility);
-        Game.TryRestoringAbilityScore(Game.IntelligenceAbility);
-        Game.TryRestoringAbilityScore(Game.WisdomAbility);
-        Game.TryRestoringAbilityScore(Game.DexterityAbility);
-        Game.TryRestoringAbilityScore(Game.ConstitutionAbility);
-        Game.TryRestoringAbilityScore(Game.CharismaAbility);
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
+        {
+            Game.TryRestoringAbilityScore(ability);
+        }
         Game.RunScript(nameof(RestoreLevelScript));
         return UsedResultEnum.True;
     }

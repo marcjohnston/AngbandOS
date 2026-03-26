@@ -28,12 +28,10 @@ internal class LifeScript : Script, IEatOrQuaffScript
         Game.HallucinationsTimer.ResetTimer();
         Game.StunTimer.ResetTimer();
         Game.PoisonTimer.ResetTimer();
-        Game.TryRestoringAbilityScore(Game.StrengthAbility);
-        Game.TryRestoringAbilityScore(Game.ConstitutionAbility);
-        Game.TryRestoringAbilityScore(Game.DexterityAbility);
-        Game.TryRestoringAbilityScore(Game.WisdomAbility);
-        Game.TryRestoringAbilityScore(Game.IntelligenceAbility);
-        Game.TryRestoringAbilityScore(Game.CharismaAbility);
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
+        {
+            Game.TryRestoringAbilityScore(ability);
+        }
         return true ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

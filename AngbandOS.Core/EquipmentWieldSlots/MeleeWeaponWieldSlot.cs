@@ -29,7 +29,7 @@ internal class MeleeWeaponWieldSlot : EquipmentWieldSlot
         if (Count > 0 && index.HasValue)
         {
             Item? oPtr = Game.GetInventoryItem(index.Value);
-            if (oPtr != null && Game.StrengthAbility.StrMaxWeaponWeight < oPtr.EffectiveAttributeSet.Weight / 10)
+            if (oPtr != null && Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrMaxWeaponWeight < oPtr.EffectiveAttributeSet.Weight / 10)
             {
                 p = "Just lifting";
             }
@@ -42,7 +42,7 @@ internal class MeleeWeaponWieldSlot : EquipmentWieldSlot
         string p = "attacking monsters with";
 
         // Check to see if we have a weapon.
-        if (oPtr != null && Game.StrengthAbility.StrMaxWeaponWeight < oPtr.EffectiveAttributeSet.Weight / 10)
+        if (oPtr != null && Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrMaxWeaponWeight < oPtr.EffectiveAttributeSet.Weight / 10)
         {
             p = "just lifting";
         }

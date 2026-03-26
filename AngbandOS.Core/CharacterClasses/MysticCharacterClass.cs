@@ -36,7 +36,7 @@ internal class MysticCharacterClass : CharacterClass
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 40;
-    public override Ability PrimeStat => Game.WisdomAbility;
+    public override Ability PrimeStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
     public override string[] Info => new string[] {
         "Mystics master both martial and psionic arts, which they",
         "power using WIS. Can resist confusion (at lvl 10), fear",
@@ -47,7 +47,7 @@ internal class MysticCharacterClass : CharacterClass
     public override string MagicType => "psychic talents";
     public override int SpellWeight => 300;
     public override void Cast() => CastMentalism();
-    public override Ability SpellStat => Game.WisdomAbility;
+    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;

@@ -14,7 +14,8 @@ internal class IsTooHeavyToWieldBooleanGetItemProperty : GetItemProperty<bool>
     public override string DebugDescription => "IsTooHeavyToWield";
     public override bool Get(Item item)
     {
-        return Game.StrengthAbility.StrMaxWeaponWeight < item.EffectiveAttributeSet.Weight / 10;
+        Ability strengthAbility = Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility));
+        return strengthAbility.StrMaxWeaponWeight < item.EffectiveAttributeSet.Weight / 10;
     }
 }
 

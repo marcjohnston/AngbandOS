@@ -30,7 +30,7 @@ internal class RangerCharacterClass : CharacterClass
     public override int RangedAttackBonusPerLevel => 45;
     public override int HitDieBonus => 4;
     public override int ExperienceFactor => 30;
-    public override Ability PrimeStat => Game.IntelligenceAbility;
+    public override Ability PrimeStat => Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
     public override string[] Info => new string[] {
         "Masters of ranged combat, especiallly using bows. Rangers",
         "supplement their shooting and stealth with INT based spell",
@@ -66,7 +66,7 @@ internal class RangerCharacterClass : CharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override Ability SpellStat => Game.IntelligenceAbility;
+    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
     public override int AttackSpeedMultiplier => 4;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
     public override int FromScrollWarriorArtifactBiasPercentageChance => 30;
