@@ -7,17 +7,17 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal sealed class RacialPower : IGetKey, IScript, IToJson
+internal sealed class RacePower : IGetKey, IScript, IToJson
 {
     private Game Game { get; }
-    public RacialPower(Game game, RacialPowerGameConfiguration racialPowerGameConfiguration)
+    public RacePower(Game game, RacePowerGameConfiguration racialPowerGameConfiguration)
     {
         Game = game;
         ScriptBindingKey = racialPowerGameConfiguration.ScriptBindingKey;
         RaceBindingKey = racialPowerGameConfiguration.RaceBindingKey;
         CharacterClassBindingKey = racialPowerGameConfiguration.CharacterClassBindingKey;
     }
-    public static string GetCompositeKey(Race race, CharacterClass? characterClass) => Game.GetCompositeKey(race.GetKey, characterClass?.GetKey, nameof(RacialPower));
+    public static string GetCompositeKey(Race race, CharacterClass? characterClass) => Game.GetCompositeKey(race.GetKey, characterClass?.GetKey, nameof(RacePower));
     public IScript Script { get; private set; }
     private string ScriptBindingKey { get; }
     public Race Race { get; private set; }
@@ -25,7 +25,7 @@ internal sealed class RacialPower : IGetKey, IScript, IToJson
     public CharacterClass? CharacterClass { get; private set; }
     private string? CharacterClassBindingKey { get; } = null;
 
-    public string GetKey => Game.GetCompositeKey(RaceBindingKey, CharacterClassBindingKey, nameof(RacialPower));
+    public string GetKey => Game.GetCompositeKey(RaceBindingKey, CharacterClassBindingKey, nameof(RacePower));
 
     public void Bind()
     {
@@ -36,7 +36,7 @@ internal sealed class RacialPower : IGetKey, IScript, IToJson
 
     public string ToJson()
     {
-        RacialPowerGameConfiguration gameConfiguration = new()
+        RacePowerGameConfiguration gameConfiguration = new()
         {
             ScriptBindingKey = ScriptBindingKey,
             RaceBindingKey = RaceBindingKey,

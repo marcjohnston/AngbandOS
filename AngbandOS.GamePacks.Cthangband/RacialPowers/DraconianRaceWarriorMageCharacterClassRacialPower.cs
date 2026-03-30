@@ -1,7 +1,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class DraconianRaceWarriorMageCharacterClassRacialPower : RacialPowerGameConfiguration
+public class DraconianRaceWarriorMageCharacterClassRacialPower : RacePowerGameConfiguration
 {
     public override string ScriptBindingKey => nameof(DraconianRaceManaOrDisenchantmentCharacterClassRacialPowerConditionalScript);
     public override string RaceBindingKey => nameof(RacesEnum.DraconianRace);

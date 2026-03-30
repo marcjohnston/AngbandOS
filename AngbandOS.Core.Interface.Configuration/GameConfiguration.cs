@@ -104,7 +104,7 @@ public class GameConfiguration
         gameConfiguration.Patrons = LoadFromAssembly<PatronGameConfiguration>(assembly);
         gameConfiguration.RacialPowerTests = LoadFromAssembly<RacialPowerTestGameConfiguration>(assembly);
         gameConfiguration.RaceAbilities = LoadFromAssembly<RaceAbilityGameConfiguration>(assembly);
-        gameConfiguration.RacialPowers = LoadFromAssembly<RacialPowerGameConfiguration>(assembly);
+        gameConfiguration.RacialPowers = LoadFromAssembly<RacePowerGameConfiguration>(assembly);
         gameConfiguration.RangedWeaponBonuses = LoadFromAssembly<RangedWeaponBonusGameConfiguration>(assembly);
         gameConfiguration.ConditionalScripts = LoadFromAssembly<ConditionalScriptGameConfiguration>(assembly);
         gameConfiguration.CharacterClassAbilities = LoadFromAssembly<CharacterClassAbilityGameConfiguration>(assembly);
@@ -278,7 +278,7 @@ public class GameConfiguration
     public virtual PatronGameConfiguration[]? Patrons { get; set; } = null;
     public virtual RacialPowerTestGameConfiguration[]? RacialPowerTests { get; set; } = null;
     public virtual RaceAbilityGameConfiguration[]? RaceAbilities { get; set; } = null;
-    public virtual RacialPowerGameConfiguration[]? RacialPowers { get; set; } = null;
+    public virtual RacePowerGameConfiguration[]? RacialPowers { get; set; } = null;
     public virtual ConditionalScriptGameConfiguration[]? ConditionalScripts { get; set; } = null;
     public virtual CharacterClassAbilityGameConfiguration[]? CharacterClassAbilities { get; set; } = null;
     public virtual ActivationGameConfiguration[]? Activations { get; set; } = null;

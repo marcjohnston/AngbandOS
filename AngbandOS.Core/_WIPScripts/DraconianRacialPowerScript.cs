@@ -15,7 +15,7 @@ internal class DraconianRacialPowerScript : Script, IScript
         }
         else
         {
-            Game.RunScript(RacialPower.GetCompositeKey(Game.Race, null));
+            Game.RunScript(RacePower.GetCompositeKey(Game.Race, null));
         }
     }
 }

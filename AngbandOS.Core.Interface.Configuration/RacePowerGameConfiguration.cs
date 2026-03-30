@@ -2,7 +2,7 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class RacialPowerGameConfiguration
+public class RacePowerGameConfiguration
 {
     public virtual string ScriptBindingKey { get; set; }
     public virtual string RaceBindingKey { get; set; }

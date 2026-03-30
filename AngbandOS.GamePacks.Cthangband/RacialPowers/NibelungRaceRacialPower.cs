@@ -1,7 +1,7 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]
-public class NibelungRaceRacialPower : RacialPowerGameConfiguration
+public class NibelungRaceRacialPower : RacePowerGameConfiguration
 {
     public override string ScriptBindingKey => nameof(NibelungRaceRacialPowerConditionalScript);
     public override string RaceBindingKey => nameof(RacesEnum.NibelungRace);
