@@ -363,7 +363,16 @@ internal partial class Game
                     PlayMusic(MusicTrackEnum.Death);
                 }
                 Screen.Clear();
-                string buf = PlayerName.StringValue.Trim() + Generation.ToRoman(true);
+
+                string buf = PlayerName.StringValue.Trim() + Generation.ToRoman();
+
+                // If we're for a generation, we want to skip 'I' (you're simply "John", not "John I")
+                // and prefix with a space if not 'I')
+                if (Generation > 1)
+                {
+                    buf = $" {buf}";
+                }
+
                 if (IsWinner.BoolValue || ExperienceLevel.IntValue > Constants.PyMaxLevel)
                 {
                     buf += " the Magnificent";
@@ -1179,10 +1188,6 @@ internal partial class Game
         return expression.Compute<BooleanExpression>();
     }
 
-    //    private static string SuffixIf(string? value, string suffix) => String.IsNullOrEmpty(value) ? "" : $"{value}{suffix}";
-    public static string DelimitIf(string? prefix, string delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
-    private static string DelimitIf(string? prefix, char delimiter, char? suffix) => String.IsNullOrEmpty(prefix) || suffix is null ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
-    private static string DelimitIf(string? prefix, char delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
 
     /// <summary>
     /// Returns a string representation for composite key.  The returned key is compliant for filenames and ensures keys do not collide in namespace.
@@ -1198,7 +1203,7 @@ internal partial class Game
         {
             if (String.IsNullOrEmpty(key))
             {
-                compositeKey = $"{DelimitIf(compositeKey, keyDelimiter, wildCardCharacter)}";
+                compositeKey = $"{StringLibrary.DelimitIf(compositeKey, keyDelimiter, wildCardCharacter)}";
             }
             else
             {
@@ -1206,12 +1211,19 @@ internal partial class Game
                 {
                     throw new Exception($"The singleton key {key} presented for composite generation cannot contain the reserved character '{keyDelimiter}' or '{wildCardCharacter}'.");
                 }
-                compositeKey = $"{DelimitIf(compositeKey, keyDelimiter, key)}";
+                compositeKey = $"{StringLibrary.DelimitIf(compositeKey, keyDelimiter, key)}";
             }
         }
         return compositeKey;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="keys"></param>
+    /// <returns>
+    /// This version is used by the <see cref="OutfitManifest"/> because the bindings have equalities with them.
+    /// </returns>
     public static string GetCompositeKey(params (string[]? value, bool isEqual)?[] keys)
     {
         const string nullToken = "";

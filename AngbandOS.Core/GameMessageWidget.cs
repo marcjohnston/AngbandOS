@@ -128,7 +128,7 @@ internal sealed class GameMessageWidget : Widget, IGetKey, IToJson
             }
         }
 
-        Game.GameMessage.StringValue = Game.DelimitIf(Game.GameMessage.StringValue, " ", message);
+        Game.GameMessage.StringValue = StringLibrary.DelimitIf(Game.GameMessage.StringValue, " ", message);
         Game.Screen.Print(ColorEnum.White, Game.GameMessage.StringValue, Y, X);
     }
 

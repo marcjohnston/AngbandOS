@@ -557,17 +557,17 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
+                s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
 
                 if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
+                    s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
                 else if (item.EffectiveAttributeSet.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
+                    s += $" [{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
             }
             else if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
@@ -581,17 +581,17 @@ internal sealed class ItemFactory : IGetKey, IToJson
 
             if (item.IsKnown())
             {
-                s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
+                s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
 
                 if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
+                    s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
                 else if (item.EffectiveAttributeSet.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
+                    s += $" [{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
             }
             else if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
@@ -605,19 +605,19 @@ internal sealed class ItemFactory : IGetKey, IToJson
             {
                 if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Get() || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
+                    s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
                 else if (item.EffectiveAttributeSet.MeleeToHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)})";
+                    s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)})";
                 }
                 else if (item.EffectiveAttributeSet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
+                    s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
 
                 // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
+                s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
             }
             else if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
             {
@@ -630,26 +630,26 @@ internal sealed class ItemFactory : IGetKey, IToJson
             {
                 if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Get() || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
+                    s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
                 else if (item.EffectiveAttributeSet.MeleeToHit != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)})";
+                    s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)})";
                 }
                 else if (item.EffectiveAttributeSet.ToDamage != 0)
                 {
-                    s += $" ({GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
+                    s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
 
                 if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
+                    s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
                 else if (item.EffectiveAttributeSet.BonusArmorClass != 0)
                 {
                     // This is not armor, only show bonus armor class, if it is not zero and we know about it.
-                    s += $" [{GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
+                    s += $" [{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
             }
         }
@@ -703,7 +703,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
             (int bonusValue, string priorityBonusName)? commonBonusValue = CommonBonusValue(item);
             if (commonBonusValue.HasValue && commonBonusValue.Value.bonusValue != 0)
             {
-                s += $" ({GetSignedValue(commonBonusValue.Value.bonusValue)}";
+                s += $" ({StringLibrary.GetSignedValue(commonBonusValue.Value.bonusValue)}";
                 if (!item.EffectiveAttributeSet.HideType && commonBonusValue.Value.priorityBonusName != "")
                 {
                     s += $" {commonBonusValue.Value.priorityBonusName}";

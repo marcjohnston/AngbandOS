@@ -28,11 +28,6 @@ internal class GameStateBag
         _objectToId = new Dictionary<object, int>(ReferenceEqualityComparer.Instance);
     }
 
-    private string DelimitIf(string prefix, string delimiter, string suffix)
-    {
-        return !String.IsNullOrEmpty(prefix) && !String.IsNullOrEmpty(suffix) ? $"{prefix}{delimiter}{suffix}" : $"{prefix}{suffix}";
-    }
-
     public object? Serialize(object? value, string parent = "")
     {
         // Handle null values.
@@ -75,7 +70,7 @@ internal class GameStateBag
                 // Get the key and value and type of the field.
                 string key = propertyInfo.Name;
                 object? fieldValue = propertyInfo.GetValue(value);
-                objectValue[key] = Serialize(fieldValue, DelimitIf(parent, ".", $"{type.Name}.{key}"));
+                objectValue[key] = Serialize(fieldValue, StringLibrary.DelimitIf(parent, ".", $"{type.Name}.{key}"));
             }
 
             return new Dictionary<string, object?>
@@ -93,7 +88,7 @@ internal class GameStateBag
         {
             if (!_seenNonGameObjects.Add(value))
             {
-                throw new Exception($"Shared reference detected for non-game type: {DelimitIf(parent, ".", type.Name)} is not supported.");
+                throw new Exception($"Shared reference detected for non-game type: {StringLibrary.DelimitIf(parent, ".", type.Name)} is not supported.");
             }
         }
 #endif
@@ -106,7 +101,7 @@ internal class GameStateBag
             foreach (DictionaryEntry entry in dictionary)
             {
                 string key = entry.Key.ToString()!; // Dictionary keys can never be null.
-                result[key] = Serialize(entry.Value, DelimitIf(parent, ".", key));
+                result[key] = Serialize(entry.Value, StringLibrary.DelimitIf(parent, ".", key));
             }
 
             return result;
@@ -121,7 +116,7 @@ internal class GameStateBag
 
             foreach (var field in fields)
             {
-                values.Add(Serialize(field.GetValue(value), DelimitIf(parent, ".", field.Name)));
+                values.Add(Serialize(field.GetValue(value), StringLibrary.DelimitIf(parent, ".", field.Name)));
             }
 
             return new Dictionary<string, object?>
