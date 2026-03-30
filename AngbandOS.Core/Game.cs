@@ -85,7 +85,7 @@ internal partial class Game
     #endregion
 
     #region Game Serialization
-    public GameStateBag Serialize(object? value, string name = "")
+    public GameStateBag Serialize(object? value, string name = "", bool trim = true)
     {
         /// <summary>
         /// Returns the state of a type.  The return object type is dependent on the type of data being serialized.
@@ -95,7 +95,7 @@ internal partial class Game
         /// <param name="parent"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        GameStateBag Serialize(object? value, Dictionary<object, int> _objectToId, string parent)
+        GameStateBag Serialize(object? value, Dictionary<object, int> _objectToId, string parent, bool trim)
         {
             FieldInfo[] GetAllFields(Type? type)
             {
@@ -188,7 +188,7 @@ internal partial class Game
                     // Get the key and value and type of the field.
                     string key = propertyInfo.Name;
                     object? fieldValue = propertyInfo.GetValue(value);
-                    objectValue[key] = Serialize(fieldValue, _objectToId, StringLibrary.DelimitIf(parent, ".", $"{type.Name}.{key}"));
+                    objectValue[key] = Serialize(fieldValue, _objectToId, StringLibrary.DelimitIf(parent, ".", $"{type.Name}.{key}"), trim);
                 }
 
                 return new ObjectGameStateBag(id, type.Name, new DictionaryGameStateBag(objectValue));
@@ -202,7 +202,7 @@ internal partial class Game
                 foreach (DictionaryEntry entry in dictionary)
                 {
                     string key = entry.Key.ToString()!; // Dictionary keys can never be null.
-                    result[key] = Serialize(entry.Value, _objectToId, StringLibrary.DelimitIf(parent, ".", key));
+                    result[key] = Serialize(entry.Value, _objectToId, StringLibrary.DelimitIf(parent, ".", key), trim);
                 }
 
                 return new DictionaryGameStateBag(result);
@@ -217,10 +217,16 @@ internal partial class Game
 
                 foreach (var field in fields)
                 {
-                    values.Add(Serialize(field.GetValue(value), _objectToId, StringLibrary.DelimitIf(parent, ".", field.Name)));
+                    values.Add(Serialize(field.GetValue(value), _objectToId, StringLibrary.DelimitIf(parent, ".", field.Name), trim));
                 }
 
                 return new TupleGameStateBag(type.Name, values.ToArray());
+            }
+
+            // Byte[][]
+            if (value is byte[][] byteJaggedArray)
+            {
+                return new NullValueGameStateBag();
             }
 
             // Collections
@@ -231,7 +237,7 @@ internal partial class Game
                 int index = 0;
                 foreach (var item in enumerable)
                 {
-                    list.Add(Serialize(item, _objectToId, $"{parent}[{index}]"));
+                    list.Add(Serialize(item, _objectToId, $"{parent}[{index}]", trim));
                     index++;
                 }
 
@@ -241,7 +247,7 @@ internal partial class Game
             throw new Exception($"{type.Name} serialization not supported on field {parent}.");
         }
 
-        return Serialize(value, new Dictionary<object, int>(), name);
+        return Serialize(value, new Dictionary<object, int>(), name, trim);
     }
 
     public GameStateBag Save()

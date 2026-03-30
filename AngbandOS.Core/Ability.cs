@@ -95,7 +95,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Price adjustment for charisma (as a percentage of normal price)
     /// </summary>
-    private readonly int[] _adjChaPriceAdjustment =
+    private int[] _adjChaPriceAdjustment { get; } =
     {
         130, 125, 122, 120, 118, 116, 114, 112, 110, 108,
         106, 104, 103, 102, 101, 100,  99,  98,  97,  96,
@@ -106,7 +106,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Con bonus to health (per hit die), stored as double actual bonus
     /// </summary>
-    private readonly int[] _adjConHealthBonus =
+    private int[] _adjConHealthBonus { get; } =
     {
         -5, -3, -2, -1,  0,  0,  0,  0,  0,  0,
          0,  0,  1,  1,  2,  3,  4,  4,  4,  4,
@@ -117,7 +117,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Con bonus to recovery from wounds and poison
     /// </summary>
-    private readonly int[] _adjConRecoverySpeed =
+    private int[] _adjConRecoverySpeed { get; } =
     {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 1, 1, 1, 1, 2, 2, 2, 2, 2,
@@ -128,7 +128,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Dex bonus to armor class (stored as bonus)
     /// </summary>
-    private readonly int[] _adjDexArmorClassBonus =
+    private int[] _adjDexArmorClassBonus { get; } =
     {
         -4, -3, -2, -1, 0, 0, 0, 0, 0, 0, 0,
         0, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3,
@@ -139,7 +139,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Dex bonus for attacks (stored as bonus)
     /// </summary>
-    private readonly int[] _adjDexAttackBonus =
+    private int[] _adjDexAttackBonus { get; } =
     {
         -3, -2, -2, -1, -1, 0, 0, 0, 0, 0, 0,
         0, 0, 1, 2, 3, 3, 3, 3, 3, 4, 4, 4,
@@ -150,7 +150,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Dex component put towards number of attacks
     /// </summary>
-    private readonly int[] _adjDexAttackSpeedComponent =
+    private int[] _adjDexAttackSpeedComponent { get; } =
     {
         0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16,
         18, 20, 20, 20
@@ -159,7 +159,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Dex bonus for disarming traps
     /// </summary>
-    private readonly int[] _adjDexDisarmBonus =
+    private int[] _adjDexDisarmBonus { get; } =
     {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10,
         10, 10
@@ -168,7 +168,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Dex-based chance to avoid theft
     /// </summary>
-    private readonly int[] _adjDexTheftAvoidance =
+    private int[] _adjDexTheftAvoidance { get; } =
     {
         0, 1, 2, 3, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 15, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90,
         100, 100, 100, 100, 100, 100, 100, 100
@@ -177,8 +177,8 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Number of half-spells per level
     /// </summary>
-    private readonly int[] _adjHalfSpellsPerLevel =
-                            {
+    private int[] _adjHalfSpellsPerLevel { get; } =
+    {
         0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5,
         6, 6
     };
@@ -186,8 +186,8 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Int bonus to disarm traps
     /// </summary>
-    private readonly int[] _adjIntDisarmBonus =
-            {
+    private int[] _adjIntDisarmBonus { get; } =
+    {
         0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10, 10, 11, 12, 13, 14, 15, 16,
         17, 18, 19, 19, 20
     };
@@ -195,7 +195,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Int bonus to using devices
     /// </summary>
-    private readonly int[] _adjIntUseDeviceBonus =
+    private int[] _adjIntUseDeviceBonus { get; } =
     {
         0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
         17, 18, 19, 20
@@ -204,8 +204,8 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Bonus to mana per level, (stored as double actual bonus)
     /// </summary>
-    private readonly int[] _adjManaBonus =
-        {
+    private int[] _adjManaBonus { get; } =
+    {
         0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
         16, 17, 17, 18
     };
@@ -213,8 +213,8 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Spell failure reduction
     /// </summary>
-    private readonly int[] _adjSpellFailureReduction =
-                    {
+    private int[] _adjSpellFailureReduction { get; } =
+    {
         0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
         17, 18, 19, 20
     };
@@ -222,7 +222,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Minimum spell failure chance
     /// </summary>
-    private readonly int[] _adjSpellMinFailChance =
+    private int[] _adjSpellMinFailChance { get; } =
     {
         99, 99, 99, 99, 99, 50, 30, 20, 15, 12, 11, 10, 9, 8, 7, 6, 6, 5, 5, 5, 4, 4, 4, 4, 3, 3, 2, 2, 2, 2, 1, 1,
         1, 1, 1, 0, 0, 0
@@ -231,7 +231,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Str bonus for attacks (stored as bonus)
     /// </summary>
-    private readonly int[] _adjStrAttackBonus =
+    private int[] _adjStrAttackBonus { get; } =
     {
         -3, -2, -1, -1, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2,
@@ -242,7 +242,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Str component put towards number of attacks
     /// </summary>
-    private readonly int[] _adjStrAttackSpeedComponent =
+    private int[] _adjStrAttackSpeedComponent { get; } =
     {
         3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130,
         140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240
@@ -251,7 +251,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Str-based carrying capacity (tenths of lb)
     /// </summary>
-    private readonly int[] _adjStrCarryingCapacity =
+    private int[] _adjStrCarryingCapacity { get; } =
     {
         5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 26, 28, 30, 31, 31, 32, 32, 33, 33, 34,
         34, 35, 35, 36, 36, 37, 37, 38, 38, 39
@@ -260,7 +260,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Str bonus to damage
     /// </summary>
-    private readonly int[] _adjStrDamageBonus =
+    private int[] _adjStrDamageBonus { get; } =
     {
         -2, -2, -1, -1, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4,
@@ -271,7 +271,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Str bonus to digging
     /// </summary>
-    private readonly int[] _adjStrDiggingBonus =
+    private int[] _adjStrDiggingBonus { get; } =
     {
         0, 0, 1, 2, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 10, 12, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75,
         80, 85, 90, 95, 100, 100, 100
@@ -280,7 +280,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Str-based max weapon weight (tenths of lb)
     /// </summary>
-    private readonly int[] _adjStrMaxWeaponWeight =
+    private int[] _adjStrMaxWeaponWeight { get; } =
     {
         4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 30, 35, 40, 45, 50, 55, 60, 65, 70, 80, 80, 80,
         80, 80, 90, 90, 90, 90, 90, 100, 100, 100
@@ -289,7 +289,7 @@ internal abstract class Ability : IGetKey
     /// <summary>
     /// Wis bonus to saving throws
     /// </summary>
-    private readonly int[] _adjWisSavingThrowBonus =
+    private int[] _adjWisSavingThrowBonus { get; } =
     {
         0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
         16, 17, 18, 19

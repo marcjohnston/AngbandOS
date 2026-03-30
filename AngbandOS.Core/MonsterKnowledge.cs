@@ -27,11 +27,10 @@ internal class MonsterKnowledge
     public int RSights;
     public int RTkills;
     public int RWake;
-    private readonly MonsterRace _monsterType;
-    private readonly string[] _wdHe = { "it", "he", "she" };
-    private readonly string[] _wdHeCap = { "It", "He", "She" };
-    private readonly string[] _wdHis = { "its", "his", "her" };
-    private StringBuilder _description;
+    private MonsterRace _monsterType { get; }
+    private string[] _wdHe { get; } = { "it", "he", "she" };
+    private string[] _wdHeCap { get; } = { "It", "He", "She" };
+    private string[] _wdHis { get; } = { "its", "his", "her" };
     private Game Game { get; }
 
     public MonsterKnowledge(Game game, MonsterRace monsterType)
@@ -54,7 +53,7 @@ internal class MonsterKnowledge
         int msex = 0;
         string[] vp = new string[64];
         MonsterKnowledge knowledge = this;
-        _description = new StringBuilder();
+        StringBuilder _description = new StringBuilder();
         if (Game.IsWizard.BoolValue)
         {
             knowledge = new MonsterKnowledge(Game, _monsterType);

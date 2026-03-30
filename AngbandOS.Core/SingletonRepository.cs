@@ -29,7 +29,10 @@ internal class SingletonRepository
         {
             string key = singleton.GetKey;
             GameStateBag singletonGameStateBag = Game.Serialize(singleton);
-            result.Add(key, singletonGameStateBag);
+            if (!singletonGameStateBag.IsEmpty)
+            {
+                result.Add(key, singletonGameStateBag);
+            }
         }
 
         return new DictionaryGameStateBag(result);

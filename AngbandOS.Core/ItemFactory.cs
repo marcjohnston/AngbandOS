@@ -179,16 +179,16 @@ internal sealed class ItemFactory : IGetKey, IToJson
     /// <summary>
     /// Returns the CodedName value to render the item descriptions.  
     /// </summary>
-    private string _descriptionSyntax;
+    private string _descriptionSyntax { get; set; }
 
     /// <summary>
     /// Returns the AlternateCodedName value to render for item descriptions.
     /// </summary>
-    private string _alternateDescriptionSyntax;
-    private string _flavorSuppressedDescriptionSyntax;
-    private string _alternateFlavorSuppressedDescriptionSyntax;
-    private string _flavorUnknownDescriptionSyntax;
-    private string _alternateFlavorUnknownDescriptionSyntax;
+    private string _alternateDescriptionSyntax { get; set; }
+    private string _flavorSuppressedDescriptionSyntax { get; set; }
+    private string _alternateFlavorSuppressedDescriptionSyntax { get; set; }
+    private string _flavorUnknownDescriptionSyntax { get; set; }
+    private string _alternateFlavorUnknownDescriptionSyntax { get; set; }
 
     /// <summary>
     /// Returns the index of the book as it pertains to the realm.
@@ -364,7 +364,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
         EquipmentProcessWorldScript?.ExecuteScriptItem(item);
         ProcessWorld(item);
     }
-    public EffectiveAttributeSet EffectiveAttributeSet;
+    public EffectiveAttributeSet EffectiveAttributeSet { get; }
 
     public void Bind()
     {

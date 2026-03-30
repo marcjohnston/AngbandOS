@@ -4,9 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Collections;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
 namespace AngbandOS.Core;
@@ -36,7 +33,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             nameof(ColorEnumValueGameStateBag) => new ColorEnumValueGameStateBag((ColorEnum)Enum.Parse(typeof(ColorEnum), doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
             nameof(ReferenceGameStateBag) => new ReferenceGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32()),
             nameof(DictionaryGameStateBag) => new DictionaryGameStateBag(JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
-            nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), doc.RootElement.GetProperty("DataType").GetString()!, JsonSerializer.Deserialize<GameStateBag>(doc.RootElement.GetProperty("GameStateBag").GetRawText(), options)!),
+            nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), doc.RootElement.GetProperty("DataType").GetString()!, JsonSerializer.Deserialize<DictionaryGameStateBag>(doc.RootElement.GetProperty("GameStateBag").GetRawText(), options)!),
             nameof(TupleGameStateBag) => new TupleGameStateBag(doc.RootElement.GetProperty("DataType").GetString()!, JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(ListGameStateBag) => new ListGameStateBag(JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             _ => throw new Exception($"Unknown type {type}")
@@ -145,8 +142,9 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
 //[JsonDerivedType(typeof(ObjectGameStateBag), "object")]
 //[JsonDerivedType(typeof(ListGameStateBag), "list")]
 //[JsonDerivedType(typeof(TupleGameStateBag), "tuple")]
-internal class GameStateBag
+internal abstract class GameStateBag
 {
+    public virtual bool IsEmpty => false;
     public void Deserialize(object entity)
     {
         //IEnumerable<FieldInfo> serializableFields = entity.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(p => !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute)));
@@ -295,6 +293,7 @@ internal class ReferenceGameStateBag : GameStateBag
 
 internal class DictionaryGameStateBag : GameStateBag
 {
+    public override bool IsEmpty => Value.Count == 0;
     public Dictionary<string, GameStateBag> Value { get; }
     public DictionaryGameStateBag(Dictionary<string, GameStateBag> value)
     {
@@ -304,10 +303,11 @@ internal class DictionaryGameStateBag : GameStateBag
 
 internal class ObjectGameStateBag : GameStateBag
 {
+    public override bool IsEmpty => GameStateBag.IsEmpty;
     public int ObjectId { get; }
     public string DataType { get; }
-    public GameStateBag GameStateBag { get; }
-    public ObjectGameStateBag(int objectId, string dataTypeName, GameStateBag value)
+    public DictionaryGameStateBag GameStateBag { get; }
+    public ObjectGameStateBag(int objectId, string dataTypeName, DictionaryGameStateBag value)
     {
         ObjectId = objectId;
         DataType = dataTypeName;
