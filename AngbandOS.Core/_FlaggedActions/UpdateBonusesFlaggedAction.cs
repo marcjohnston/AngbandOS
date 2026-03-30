@@ -12,7 +12,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private bool MartialArtistArmorAux;
     private bool MartialArtistNotifyAux;
 
-    private UpdateBonusesFlaggedAction(Game game) : base(game) { }
+    private UpdateBonusesFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
     {
         EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.WieldSlots;
 [Serializable]
 internal class HeadWieldSlot : EquipmentWieldSlot
 {
-    private HeadWieldSlot(Game game) : base(game) { }
+    private HeadWieldSlot(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Label(Item oPtr) => "k";
     public override int[] InventorySlots => new int[] { InventorySlotEnum.Head };
     public override string MentionUse(int? index) => "On head";

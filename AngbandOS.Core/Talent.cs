@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 internal abstract class Talent : IGetKey
 {
     protected Game Game { get; }
-    protected Talent(Game game)
+    protected Talent(Game game, GameStateBag gameStateBag) // This object is a singleton
     {
         Game = game;
     }

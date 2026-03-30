@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Justifications;
 internal abstract class Justification : IGetKey
 {
     protected Game Game { get; }
-    protected Justification(Game game)
+    protected Justification(Game game, GameStateBag gameStateBag) // This object is a singleton
     {
         Game = game;
     }

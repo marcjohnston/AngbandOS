@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class PoisoningTimer : Timer
 {
-    private PoisoningTimer(Game game) : base(game) { } // This object is a singleton.
+    private PoisoningTimer(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override void EffectStopped()
     {
         Game.MsgPrint("You are no longer poisoned.");

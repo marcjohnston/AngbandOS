@@ -9,7 +9,7 @@ namespace AngbandOS.Core.SpellResistantDetections;
 [Serializable]
 internal class NethSpellResistantDetection : SpellResistantDetection
 {
-    private NethSpellResistantDetection(Game game) : base(game) { }
+    private NethSpellResistantDetection(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override void Learn(Monster monster)
     {
         if (Game.HasNetherResistance)

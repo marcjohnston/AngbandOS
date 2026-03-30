@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class LightPlayerEffect : PlayerEffectUniversalScript
 {
-    private LightPlayerEffect(Game game) : base(game) { } // This object is a singleton.
+    private LightPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string? BlindPreMessage => "You are hit by something slow!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {

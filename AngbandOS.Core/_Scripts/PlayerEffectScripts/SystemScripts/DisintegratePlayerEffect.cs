@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class DisintegratePlayerEffect : PlayerEffectUniversalScript
 {
-    private DisintegratePlayerEffect(Game game) : base(game) { } // This object is a singleton.
+    private DisintegratePlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string? BlindPreMessage => "You are hit by pure energy!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {

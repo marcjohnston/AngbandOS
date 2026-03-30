@@ -9,7 +9,7 @@ namespace AngbandOS.Core.SpellResistantDetections;
 [Serializable]
 internal class ManaSpellResistantDetection : SpellResistantDetection
 {
-    private ManaSpellResistantDetection(Game game) : base(game) { }
+    private ManaSpellResistantDetection(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override void Learn(Monster monster)
     {
         if (Game.MaxMana.IntValue == 0)

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class NetherPlayerEffect : PlayerEffectUniversalScript
 {
-    private NetherPlayerEffect(Game game) : base(game) { } // This object is a singleton.
+    private NetherPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string? BlindPreMessage => "You are hit by nether forces!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {

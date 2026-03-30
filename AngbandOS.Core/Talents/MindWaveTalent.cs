@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class MindWaveTalent : Talent
 {
-    private MindWaveTalent(Game game) : base(game) { }
+    private MindWaveTalent(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Name => "Mind Wave";
     public override int Level => 18;
     public override int ManaCost => 10;

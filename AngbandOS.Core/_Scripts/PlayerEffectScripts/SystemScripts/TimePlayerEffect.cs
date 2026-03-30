@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class TimePlayerEffect : PlayerEffectUniversalScript
 {
-    private TimePlayerEffect(Game game) : base(game) { } // This object is a singleton.
+    private TimePlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string? BlindPreMessage => "You are hit by a blast from the past!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {

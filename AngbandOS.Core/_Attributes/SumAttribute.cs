@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class SumAttribute : Attribute, IToJson
 {
-    public SumAttribute(Game game, SumAttributeGameConfiguration gameConfiguration) : base(game)
+    public SumAttribute(Game game, SumAttributeGameConfiguration gameConfiguration, GameStateBag gameStateBag) : base(game, gameStateBag) // This object is a singleton
     {
         Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
     }

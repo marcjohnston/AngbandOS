@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Justifications;
 [Serializable]
 internal class CenterJustification : Justification
 {
-    private CenterJustification(Game game) : base(game) { }
+    private CenterJustification(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     public override string Format(string value, int width) => value.PadCenter(width);
 }

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class OldHealPlayerEffect : PlayerEffectUniversalScript
 {
-    private OldHealPlayerEffect(Game game) : base(game) { } // This object is a singleton.
+    private OldHealPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string? BlindPreMessage => "You are hit by something invigorating!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {

@@ -171,16 +171,52 @@ public class GameServer
         }
     }
 
-    //private string GenerateReplayQueue((char, TimeSpan)[] replayQueue)
-    //{
-    //    List<string> s = new List<string>();
-    //    foreach ((char c, TimeSpan t) in replayQueue)
-    //    {
-    //        byte b = (byte)c;
-    //        s.Add($"replayQueue.Enqueue(((char)0x{b.ToString("X2")}, TimeSpan.FromMilliseconds({(long)t.TotalMilliseconds})));");
-    //    }
-    //    return string.Join("\n", s);
-    //}
+    /// <summary>
+    /// Generates and plays a new game.  If the game cannot be played or throws an exception, false is returned; otherwise, the game is played out and true is returned when the game is over or saved.
+    /// </summary>
+    /// <param name="console"></param>
+    /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
+    /// <param name="gameConfiguration">Represents configuration data to use when generating a new game.</param>
+    /// <returns></returns>
+    public GameResults PlayNewGame(IConsoleAndViewPort console, ICorePersistentStorage? persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration)
+    {
+        // TODO: Validate the GameConfiguration here.  This is the only entry point for a GameConfiguration into the Core and we cannot expect that it is valid.
+        if (console == null)
+        {
+            throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
+        }
+
+        bool gameIsOver = false;
+        string? serializedGameData = null;
+        try
+        {
+            Game = new Game(gameConfiguration);
+
+            // Announce the new game and the seed for the replay.
+            if (replayPersistentStorage is not null)
+            {
+                replayPersistentStorage.NewGame(Game.MainSequenceRandomSeed);
+            }
+
+            Game.Play(console, persistentStorage, replayPersistentStorage);
+
+            GameStateBag saveGameStateBag = Game.Save();
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = false
+            };
+            options.Converters.Add(new GameStateBagConverter());
+            serializedGameData = JsonSerializer.Serialize(saveGameStateBag, options);
+
+            gameIsOver = true;
+        }
+        catch (Exception ex)
+        {
+            console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
+        }
+
+        return new GameResults(gameIsOver, serializedGameData);
+    }
 
     /// <summary>
     /// Generates and plays a new game.  If the game cannot be played or throws an exception, false is returned; otherwise, the game is played out and true is returned when the game is over or saved.
@@ -189,7 +225,7 @@ public class GameServer
     /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
     /// <param name="gameConfiguration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public GameResults PlayNewGame(IConsoleAndViewPort console, ICorePersistentStorage? persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, GameReplayDetails? gameReplayDetails)
+    public GameResults ReplayGame(IConsoleAndViewPort console, ICorePersistentStorage? persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, GameReplayDetails gameReplayDetails)
     {
         // TODO: Validate the GameConfiguration here.  This is the only entry point for a GameConfiguration into the Core and we cannot expect that it is valid.
         if (console == null)
@@ -201,14 +237,6 @@ public class GameServer
         try
         {
             Game = new Game(gameConfiguration, gameReplayDetails);
-            //Game.SaveGame();
-
-            // Announce the new game and the seed for the replay.
-            if (replayPersistentStorage is not null && gameReplayDetails is null)
-            {
-                replayPersistentStorage.NewGame(Game.MainSequenceRandomSeed);
-            }
-
             Game.Play(console, persistentStorage, replayPersistentStorage);
             gameIsOver = true;
         }
@@ -226,7 +254,7 @@ public class GameServer
     /// <param name="console"></param>
     /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
     /// <returns></returns>
-    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, string serializedGameData, GameConfiguration gameConfiguration)
+    public GameResults PlayLegacyExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration)
     {
         if (console == null)
         {
@@ -241,7 +269,47 @@ public class GameServer
         try
         {
             // Retrieve the game from persistent storage.
-            Game = Game.LoadGame(persistentStorage, serializedGameData, gameConfiguration);
+            Game = Game.LoadGame(persistentStorage, gameConfiguration);
+            Game.Play(console, persistentStorage, replayPersistentStorage);
+            gameIsOver = true;
+        }
+        catch (Exception ex)
+        {
+            console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
+        }
+
+        // Serialize the GameReplay.
+        return new GameResults(gameIsOver);
+    }
+
+    /// <summary>
+    /// Plays an existing game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
+    /// </summary>
+    /// <param name="console"></param>
+    /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
+    /// <returns></returns>
+    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, string serializedGameState)
+    {
+        if (console == null)
+        {
+            throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
+        }
+        if (persistentStorage == null)
+        {
+            throw new ArgumentNullException("persistentStorage", "A persistentStorage object must be provided to retrieve the game from persistent storage and cannot be null.");
+        }
+
+        bool gameIsOver = false;
+        try
+        {
+            // Retrieve the game from persistent storage.
+            GameStateBag? gameStateBag = JsonSerializer.Deserialize<GameStateBag>(serializedGameState);
+            if (gameStateBag is null)
+            {
+                throw new Exception("Failed to deserialize game.");
+            }
+
+            Game = new Game(gameConfiguration, gameStateBag);
             Game.Play(console, persistentStorage, replayPersistentStorage);
             gameIsOver = true;
         }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
 {
     private int OldLightLevel;
-    private UpdateTorchRadiusFlaggedAction(Game game) : base(game) { }
+    private UpdateTorchRadiusFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     /// <summary>
     /// Compute the level of light.  The player may be wielding multiple sources of light.
     /// </summary>

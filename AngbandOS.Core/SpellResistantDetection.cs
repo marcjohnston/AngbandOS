@@ -10,15 +10,10 @@ namespace AngbandOS.Core;
 internal abstract class SpellResistantDetection : IGetKey
 {
     protected Game Game { get; }
-    protected SpellResistantDetection(Game game)
+    protected SpellResistantDetection(Game game, GameStateBag gameStateBag) // This object is a singleton
     {
         Game = game;
     }
-
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
 
     public virtual string Key => GetType().Name;
 

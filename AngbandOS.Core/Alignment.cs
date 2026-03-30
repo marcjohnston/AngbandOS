@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 internal abstract class Alignment : IGetKey
 {
     protected Game Game { get; }
-    protected Alignment(Game game)
+    protected Alignment(Game game, GameStateBag gameStateBag) // This object is a singleton
     {
         Game = game;
     }

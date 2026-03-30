@@ -9,7 +9,7 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class UpdateHealthFlaggedAction : FlaggedAction
 {
-    private UpdateHealthFlaggedAction(Game game) : base(game) { }
+    private UpdateHealthFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override void Execute()
     {
         int bonus = Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).ConHealthBonus;

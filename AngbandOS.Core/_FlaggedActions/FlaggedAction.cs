@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FlaggedActions;
 internal abstract class FlaggedAction : IGetKey
 {
     protected Game Game { get; }
-    protected FlaggedAction(Game game)
+    protected FlaggedAction(Game game, GameStateBag gameStateBag) // This object is a singleton
     {
         Game = game;
     }

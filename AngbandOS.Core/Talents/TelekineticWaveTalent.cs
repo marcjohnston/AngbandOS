@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class TelekineticWaveTalent : Talent
 {
-    private TelekineticWaveTalent(Game game) : base(game) { }
+    private TelekineticWaveTalent(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Name => "Telekinetic Wave";
     public override int Level => 28;
     public override int ManaCost => 20;

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class PrecognitionTalent : Talent
 {
-    private PrecognitionTalent(Game game) : base(game) { }
+    private PrecognitionTalent(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Name => "Precognition";
     public override int Level => 1;
     public override int ManaCost => 1;

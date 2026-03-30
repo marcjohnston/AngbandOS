@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class ShardPlayerEffect : PlayerEffectUniversalScript
 {
-    private ShardPlayerEffect(Game game) : base(game) { } // This object is a singleton.
+    private ShardPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string? BlindPreMessage => "You are hit by shards of crystal!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {

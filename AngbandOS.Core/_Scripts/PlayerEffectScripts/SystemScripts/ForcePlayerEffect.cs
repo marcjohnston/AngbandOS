@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class ForcePlayerEffect : PlayerEffectUniversalScript
 {
-    private ForcePlayerEffect(Game game) : base(game) { } // This object is a singleton.
+    private ForcePlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string? BlindPreMessage => "You are hit by kinetic force!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {

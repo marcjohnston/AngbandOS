@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class ParalysisTimer : Timer
 {
-    private ParalysisTimer(Game game) : base(game) { } // This object is a singleton.
+    private ParalysisTimer(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override void EffectStopped()
     {
         Game.MsgPrint("You can move again.");

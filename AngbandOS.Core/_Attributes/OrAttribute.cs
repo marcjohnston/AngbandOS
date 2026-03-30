@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class OrAttribute : Attribute, IToJson
 {
-    public OrAttribute(Game game, OrAttributeGameConfiguration gameConfiguration) : base(game)
+    public OrAttribute(Game game, OrAttributeGameConfiguration gameConfiguration, GameStateBag gameStateBag) : base(game, gameStateBag) // This object is a singleton
     {
         Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
     }

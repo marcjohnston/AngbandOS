@@ -9,6 +9,11 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class Attribute : IGetKey, IIndexedSingletons
 {
+    protected Attribute(Game game, GameStateBag gameStateBag) // This object is a singleton
+    {
+        Game = game;
+    }
+
     /// <summary>
     /// Returns the unique index of the attribute.  This property implements the IIndexedSingletons.
     /// </summary>
@@ -22,9 +27,4 @@ internal abstract class Attribute : IGetKey, IIndexedSingletons
     public abstract EffectiveAttributeValue CreateEffectiveAttributeValue();
 
     public void Bind() { }
-
-    protected Attribute(Game game)
-    {
-        Game = game;
-    }
 }

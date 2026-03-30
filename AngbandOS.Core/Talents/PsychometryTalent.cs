@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class PsychometryTalent : Talent
 {
-    private PsychometryTalent(Game game) : base(game) { }
+    private PsychometryTalent(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Name => "Psychometry";
     public override int Level => 15;
     public override int ManaCost => 12;

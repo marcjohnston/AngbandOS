@@ -11,7 +11,7 @@ internal class RedrawStateFlaggedAction : FlaggedAction
 {
     private const int ColState = 27;
     private const int RowState = 43;
-    private RedrawStateFlaggedAction(Game game) : base(game) { }
+    private RedrawStateFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override void Execute()
     {
         ColorEnum attr = ColorEnum.White;

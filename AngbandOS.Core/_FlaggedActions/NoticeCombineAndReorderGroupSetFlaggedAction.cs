@@ -9,7 +9,7 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class NoticeCombineAndReorderGroupSetFlaggedAction : GroupSetFlaggedAction
 {
-    private NoticeCombineAndReorderGroupSetFlaggedAction(Game game) : base(game) { }
+    private NoticeCombineAndReorderGroupSetFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override void Bind()
     {
         RedrawActions = new FlaggedAction[] {

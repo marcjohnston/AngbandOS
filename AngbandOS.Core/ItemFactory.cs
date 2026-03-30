@@ -32,7 +32,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     public ColorEnum Color { get; set; }
 
     #region Constructors
-    public ItemFactory(Game game, ItemFactoryGameConfiguration gameConfiguration) 
+    public ItemFactory(Game game, ItemFactoryGameConfiguration gameConfiguration, GameStateBag gameStateBag) 
     {
         Game = game;
         EffectiveAttributeSet = new EffectiveAttributeSet(Game);

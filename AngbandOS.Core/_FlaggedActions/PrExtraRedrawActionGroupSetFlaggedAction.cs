@@ -9,7 +9,7 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class PrExtraRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
 {
-    private PrExtraRedrawActionGroupSetFlaggedAction(Game game) : base(game) { }
+    private PrExtraRedrawActionGroupSetFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     public override void Bind()
     {

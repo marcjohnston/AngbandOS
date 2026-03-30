@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class ElectricityPlayerEffect : PlayerEffectUniversalScript
 {
-    private ElectricityPlayerEffect(Game game) : base(game) { } // This object is a singleton.
+    private ElectricityPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string? BlindPreMessage => "You are hit by lightning!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {

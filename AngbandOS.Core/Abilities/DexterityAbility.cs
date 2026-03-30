@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class DexterityAbility : Ability
 {
-    private DexterityAbility(Game game) : base(game) { } // This object is a singleton
+    private DexterityAbility(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     public override bool HasSustain => Game.HasSustainDexterity;
     public override string DescStatNeg => "clumsy";

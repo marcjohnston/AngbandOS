@@ -40,8 +40,19 @@ namespace AngbandOS.Core;
 internal class WeightedRandom<T>
 {
     protected Game Game { get; }
-    private readonly List<KeyValuePair<int, T>> _list = new List<KeyValuePair<int, T>>();
-    private int _sumCount = 0;
+
+    /// <remarks>
+    /// This property is set during the binding phase and is not state data.
+    /// </remarks>
+    private List<KeyValuePair<int, T>> _list { get; } = new List<KeyValuePair<int, T>>();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// This property is managed during the binding phase and is not state data.
+    /// </remarks>
+    private int _sumCount { get; set; } = 0; 
 
     protected T[] Items => _list.Select(_keyValuePair => _keyValuePair.Value).ToArray();
 

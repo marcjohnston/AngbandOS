@@ -212,7 +212,7 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         string savePath = Path.Combine(myDocumentsPath, "My Games");
         string saveFilename = Path.Combine(savePath, "angbandos.savefile");
-        string replayFilename = Path.Combine(savePath, "replay.json");
+        string replayFilename = Path.Combine(savePath, "savegame.json");
         ICorePersistentStorage persistentStorage = new FileSystemCorePersistentStorage(saveFilename);
         if (persistentStorage.GameExists())
         {
@@ -234,8 +234,8 @@ public partial class MainWindow : Window, IConsoleAndViewPort
             GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
             Assembly assembly = typeof(AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration).Assembly;
 
-            GameResults gameResults = gameServer.PlayNewGame(this, persistentStorage, null, gameConfiguration, null);
-            //File.WriteAllText(replayFilename, gameResults.Replay);// TODO: This needs to move to the filepersistence driver
+            GameResults gameResults = gameServer.PlayNewGame(this, persistentStorage, null, gameConfiguration);
+            File.WriteAllText(replayFilename, gameResults.SerializedGameData);// TODO: This needs to move to the filepersistence driver
         }
     }
 

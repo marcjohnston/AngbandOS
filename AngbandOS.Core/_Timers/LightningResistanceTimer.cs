@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class LightningResistanceTimer : Timer
 {
-    private LightningResistanceTimer(Game game) : base(game) { } // This object is a singleton.
+    private LightningResistanceTimer(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override void EffectStopped()
     {
         Game.MsgPrint("You feel less resistant to electricity.");

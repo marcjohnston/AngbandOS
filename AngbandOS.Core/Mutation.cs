@@ -33,7 +33,7 @@ internal abstract class Mutation : IGetKey
             Activation = (activationScript, ActivationBinding.Value.MinLevel, costExpression, ability, ActivationBinding.Value.Difficulty);
         }
     }
-    private (IScript ActivationScript, int MinLevel, Expression Cost, Ability Ability, int Difficulty)? Activation;
+    private (IScript ActivationScript, int MinLevel, Expression Cost, Ability Ability, int Difficulty)? Activation { get; set; }
     protected virtual (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding { get; } = null;
 
     public virtual string AttackDescription => "";

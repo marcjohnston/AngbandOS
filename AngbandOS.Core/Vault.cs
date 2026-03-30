@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class Vault : IGetKey, IToJson
 {
-    private Game Game;
+    private Game Game { get; }
     public Vault(Game game, VaultGameConfiguration gameConfiguration)
     {
         Game = game;

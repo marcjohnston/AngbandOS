@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class IntelligenceAbility : Ability
 {
-    private IntelligenceAbility(Game game) : base(game) { } // This object is a singleton
+    private IntelligenceAbility(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     public override bool HasSustain => Game.HasSustainIntelligence;
     public override string DescStatNeg => "stupid";

@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 internal abstract class MartialArtsEffect : IGetKey
 {
     protected Game Game { get; }
-    protected MartialArtsEffect(Game game)
+    protected MartialArtsEffect(Game game, GameStateBag gameStateBag) // This object is a singleton)
     {
         Game = game;
     }

@@ -17,7 +17,7 @@ internal abstract class GridTileScript : IGetKey
 
     public void Bind() { }
 
-    protected GridTileScript(Game game)
+    protected GridTileScript(Game game, GameStateBag gameStateBag) // This object is a singleton
     {
         Game = game;
     }

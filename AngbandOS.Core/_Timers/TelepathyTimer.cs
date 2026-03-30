@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class TelepathyTimer : Timer
 {
-    private TelepathyTimer(Game game) : base(game) { } // This object is a singleton.
+    private TelepathyTimer(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override void EffectStopped()
     {
         Game.MsgPrint("Your consciousness contracts again.");

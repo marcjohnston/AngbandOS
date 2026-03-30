@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class ProtectionFromEvilTimer : Timer
 {
-    private ProtectionFromEvilTimer(Game game) : base(game) { } // This object is a singleton.
+    private ProtectionFromEvilTimer(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override void EffectStopped()
     {
         Game.MsgPrint("You no longer feel safe from evil.");

@@ -21,6 +21,20 @@ internal class SingletonRepository
     #endregion
 
     #region Publics
+    public GameStateBag Serialize()
+    {
+        var result = new Dictionary<string, GameStateBag>();
+
+        foreach (IGetKey singleton in _allSingletonsList)
+        {
+            string key = singleton.GetKey;
+            GameStateBag singletonGameStateBag = Game.Serialize(singleton);
+            result.Add(key, singletonGameStateBag);
+        }
+
+        return new DictionaryGameStateBag(result);
+    }
+
     /// <summary>
     /// Returns a <see cref="WeightedRandom"/> object with all of the entities in the <typeparamref name="T""Tx"/> repository.
     /// </summary>
@@ -247,7 +261,7 @@ internal class SingletonRepository
     /// collection--if the ExcludeFromRepository property returns false.  If the ExcludeFromRepository is true, the singleton object will be discarded.
     /// </summary>
     /// <param name="game"></param>
-    public void LoadAndBind(GameConfiguration gameConfiguration)
+    public void LoadAndBind(GameConfiguration gameConfiguration, GameStateBag? gameStateBag)
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
         RegisterInterface<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
@@ -318,90 +332,90 @@ internal class SingletonRepository
         RegisterInterface<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
 
         // Load system singletons.
-        LoadAllAssemblyTypes<IGetKey>();
+        LoadAllAssemblyTypes<IGetKey>(gameStateBag);
 
         // Validate the system scripts exist, before we load the user configurable ones.
         ValidateSystemScriptsEnum();
 
         // Preload
-        LoadFromConfiguration<OrAttribute, OrAttributeGameConfiguration>(gameConfiguration.OrAttributes);
-        LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes);
-        LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes);
+        LoadFromConfiguration<OrAttribute, OrAttributeGameConfiguration>(gameConfiguration.OrAttributes, gameStateBag);
+        LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes, gameStateBag);
+        LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes, gameStateBag);
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
-        LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts);
-        LoadFromConfiguration<Activation, ActivationGameConfiguration>(gameConfiguration.Activations);
-        LoadFromConfiguration<Animation, AnimationGameConfiguration>(gameConfiguration.Animations);
-        LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration>(gameConfiguration.ArtifactBiasWeightedRandoms);
-        LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks);
-        LoadFromConfiguration<AttributeFilter, AttributeFilterGameConfiguration>(gameConfiguration.AttributeFilters);
-        LoadFromConfiguration<Conditional, ConditionalGameConfiguration>(gameConfiguration.ProductOfSumsBoolFunctions);
-        LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities); // Composite singleton
-        LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells); // Composite singleton
-        LoadFromConfiguration<ChestTrap, ChestTrapGameConfiguration>(gameConfiguration.ChestTraps);
-        LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations);
-        LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration>(gameConfiguration.ConditionalWidgets);
-        LoadFromConfiguration<ConditionalScript, ConditionalScriptGameConfiguration>(gameConfiguration.ConditionalScripts);
-        LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration>(gameConfiguration.DateWidgets);
-        LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration>(gameConfiguration.DungeonGuardians);
-        LoadFromConfiguration<Dungeon, DungeonGameConfiguration>(gameConfiguration.Dungeons);
-        LoadFromConfiguration<GameCommand, GameCommandGameConfiguration>(gameConfiguration.GameCommands);
-        LoadFromConfiguration<GameMessageWidget, GameMessageWidgetGameConfiguration>(gameConfiguration.GameMessageWidgets);
-        LoadFromConfiguration<Gender, GenderGameConfiguration>(gameConfiguration.Genders);
-        LoadFromConfiguration<God, GodGameConfiguration>(gameConfiguration.Gods);
-        LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration>(gameConfiguration.HelpGroups);
-        LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration>(gameConfiguration.IntWidgets);
-        LoadFromConfiguration<ItemClass, ItemClassGameConfiguration>(gameConfiguration.ItemClasses);
-        LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration>(gameConfiguration.ItemEnhancements);
-        LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration>(gameConfiguration.ItemEnhancementWeightedRandoms);       
-        LoadFromConfiguration<ItemIdentification, ItemIdentificationGameConfiguration>(gameConfiguration.ItemIdentifications);
-        LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration>(gameConfiguration.ItemFactories);
-        LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration>(gameConfiguration.ItemFactoryWeightedRandoms);
-        LoadFromConfiguration<ItemFilter, ItemFilterGameConfiguration>(gameConfiguration.ItemFilters);
-        LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration>(gameConfiguration.ItemFlavors);
-        LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration>(gameConfiguration.MappedSpellScripts);
-        LoadFromConfiguration<MappedItemEnhancement, MappedItemEnhancementGameConfiguration>(gameConfiguration.MappedItemEnhancements);
-        LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration>(gameConfiguration.MapWidgets);
-        LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration>(gameConfiguration.MartialArtsAttacks);
-        LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration>(gameConfiguration.MaxRangedWidgets);
-        LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration>(gameConfiguration.MonsterRaces);
-        LoadFromConfiguration<OutfitManifest, OutfitManifestGameConfiguration>(gameConfiguration.OutfitManifests); // Composite singleton     
-        LoadFromConfiguration<Patron, PatronGameConfiguration>(gameConfiguration.Patrons);
-        LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration>(gameConfiguration.PhysicalAttributeSets);
-        LoadFromConfiguration<Plural, PluralGameConfiguration>(gameConfiguration.Plurals);
-        LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration>(gameConfiguration.ProjectileGraphics);
-        LoadFromConfiguration<Projectile, ProjectileGameConfiguration>(gameConfiguration.Projectiles);
-        LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration>(gameConfiguration.ProjectileScripts);
-        LoadFromConfiguration<ProjectileScriptWeightedRandom, ProjectileScriptWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts);
-        LoadFromConfiguration<RaceAbility, RaceAbilityGameConfiguration>(gameConfiguration.RaceAbilities); // Composite singleton
-        LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration>(gameConfiguration.RaceGenders); // Composite singleton
-        LoadFromConfiguration<RacePower, RacePowerGameConfiguration>(gameConfiguration.RacialPowers); // Composite singleton
-        LoadFromConfiguration<RacialPowerTest, RacialPowerTestGameConfiguration>(gameConfiguration.RacialPowerTests);
-        LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration>(gameConfiguration.RangedWidgets);
-        LoadFromConfiguration<RangedWeaponBonus, RangedWeaponBonusGameConfiguration>(gameConfiguration.RangedWeaponBonuses); // Composite singleton
-        LoadFromConfiguration<Realm, RealmGameConfiguration>(gameConfiguration.Realms);
-        LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration>(gameConfiguration.RealmCharacterClasses); // Composite singleton
-        LoadFromConfiguration<RechargeItemScript, RechargeItemScriptGameConfiguration>(gameConfiguration.RechargeItemScripts);
-        LoadFromConfiguration<RenderMessageScript, RenderMessageScriptGameConfiguration>(gameConfiguration.RenderMessageScripts);
-        LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration>(gameConfiguration.Shopkeepers);
-        LoadFromConfiguration<Spell, SpellGameConfiguration>(gameConfiguration.Spells);
-        LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration>(gameConfiguration.StoreCommands);
-        LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration>(gameConfiguration.StoreFactories);
-        LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration>(gameConfiguration.StringWidgets);
-        LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration>(gameConfiguration.SummonScripts);
-        LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration>(gameConfiguration.SummonWeightedRandoms);
-        LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration>(gameConfiguration.SyllableSets);
-        LoadFromConfiguration<Symbol, SymbolGameConfiguration>(gameConfiguration.Symbols);
-        LoadFromConfiguration<LabelWidget, LabelWidgetGameConfiguration>(gameConfiguration.LabelWidgets);
-        LoadFromConfiguration<TeleportSelfScript, TeleportSelfScriptGameConfiguration>(gameConfiguration.TeleportSelfScripts);        
-        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration>(gameConfiguration.NullableStringsTextAreaWidgets);
-        LoadFromConfiguration<Tile, TileGameConfiguration>(gameConfiguration.Tiles);
-        LoadFromConfiguration<TimerScript, TimerScriptGameConfiguration>(gameConfiguration.TimerScripts);
-        LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration>(gameConfiguration.TimeWidgets);
-        LoadFromConfiguration<Town, TownGameConfiguration>(gameConfiguration.Towns);
-        LoadFromConfiguration<Vault, VaultGameConfiguration>(gameConfiguration.Vaults);
-        LoadFromConfiguration<View, ViewGameConfiguration>(gameConfiguration.Views);
-        LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration>(gameConfiguration.WizardCommands);
+        LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts, gameStateBag);
+        LoadFromConfiguration<Activation, ActivationGameConfiguration>(gameConfiguration.Activations, gameStateBag);
+        LoadFromConfiguration<Animation, AnimationGameConfiguration>(gameConfiguration.Animations, gameStateBag);
+        LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration>(gameConfiguration.ArtifactBiasWeightedRandoms, gameStateBag);
+        LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks, gameStateBag);
+        LoadFromConfiguration<AttributeFilter, AttributeFilterGameConfiguration>(gameConfiguration.AttributeFilters, gameStateBag);
+        LoadFromConfiguration<Conditional, ConditionalGameConfiguration>(gameConfiguration.ProductOfSumsBoolFunctions, gameStateBag);
+        LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities, gameStateBag); // Composite singleton // Composite singleton
+        LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells, gameStateBag);
+        LoadFromConfiguration<ChestTrap, ChestTrapGameConfiguration>(gameConfiguration.ChestTraps, gameStateBag);
+        LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations, gameStateBag);
+        LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration>(gameConfiguration.ConditionalWidgets, gameStateBag);
+        LoadFromConfiguration<ConditionalScript, ConditionalScriptGameConfiguration>(gameConfiguration.ConditionalScripts, gameStateBag);
+        LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration>(gameConfiguration.DateWidgets, gameStateBag);
+        LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration>(gameConfiguration.DungeonGuardians, gameStateBag);
+        LoadFromConfiguration<Dungeon, DungeonGameConfiguration>(gameConfiguration.Dungeons, gameStateBag);
+        LoadFromConfiguration<GameCommand, GameCommandGameConfiguration>(gameConfiguration.GameCommands, gameStateBag);
+        LoadFromConfiguration<GameMessageWidget, GameMessageWidgetGameConfiguration>(gameConfiguration.GameMessageWidgets, gameStateBag);
+        LoadFromConfiguration<Gender, GenderGameConfiguration>(gameConfiguration.Genders, gameStateBag);
+        LoadFromConfiguration<God, GodGameConfiguration>(gameConfiguration.Gods, gameStateBag);
+        LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration>(gameConfiguration.HelpGroups, gameStateBag);
+        LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration>(gameConfiguration.IntWidgets, gameStateBag);
+        LoadFromConfiguration<ItemClass, ItemClassGameConfiguration>(gameConfiguration.ItemClasses, gameStateBag);
+        LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration>(gameConfiguration.ItemEnhancements, gameStateBag);
+        LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration>(gameConfiguration.ItemEnhancementWeightedRandoms, gameStateBag);       
+        LoadFromConfiguration<ItemIdentification, ItemIdentificationGameConfiguration>(gameConfiguration.ItemIdentifications, gameStateBag);
+        LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration>(gameConfiguration.ItemFactories, gameStateBag);
+        LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration>(gameConfiguration.ItemFactoryWeightedRandoms, gameStateBag);
+        LoadFromConfiguration<ItemFilter, ItemFilterGameConfiguration>(gameConfiguration.ItemFilters, gameStateBag);
+        LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration>(gameConfiguration.ItemFlavors, gameStateBag);
+        LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration>(gameConfiguration.MappedSpellScripts, gameStateBag);
+        LoadFromConfiguration<MappedItemEnhancement, MappedItemEnhancementGameConfiguration>(gameConfiguration.MappedItemEnhancements, gameStateBag);
+        LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration>(gameConfiguration.MapWidgets, gameStateBag);
+        LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration>(gameConfiguration.MartialArtsAttacks, gameStateBag);
+        LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration>(gameConfiguration.MaxRangedWidgets, gameStateBag);
+        LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration>(gameConfiguration.MonsterRaces, gameStateBag);
+        LoadFromConfiguration<OutfitManifest, OutfitManifestGameConfiguration>(gameConfiguration.OutfitManifests, gameStateBag); // Composite singleton    
+        LoadFromConfiguration<Patron, PatronGameConfiguration>(gameConfiguration.Patrons, gameStateBag);
+        LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration>(gameConfiguration.PhysicalAttributeSets, gameStateBag);
+        LoadFromConfiguration<Plural, PluralGameConfiguration>(gameConfiguration.Plurals, gameStateBag);
+        LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration>(gameConfiguration.ProjectileGraphics, gameStateBag);
+        LoadFromConfiguration<Projectile, ProjectileGameConfiguration>(gameConfiguration.Projectiles, gameStateBag);
+        LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration>(gameConfiguration.ProjectileScripts, gameStateBag);
+        LoadFromConfiguration<ProjectileScriptWeightedRandom, ProjectileScriptWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts, gameStateBag);
+        LoadFromConfiguration<RaceAbility, RaceAbilityGameConfiguration>(gameConfiguration.RaceAbilities, gameStateBag); // Composite singleton
+        LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration>(gameConfiguration.RaceGenders, gameStateBag); // Composite singleton
+        LoadFromConfiguration<RacePower, RacePowerGameConfiguration>(gameConfiguration.RacialPowers, gameStateBag); // Composite singleton
+        LoadFromConfiguration<RacialPowerTest, RacialPowerTestGameConfiguration>(gameConfiguration.RacialPowerTests, gameStateBag);
+        LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration>(gameConfiguration.RangedWidgets, gameStateBag);
+        LoadFromConfiguration<RangedWeaponBonus, RangedWeaponBonusGameConfiguration>(gameConfiguration.RangedWeaponBonuses, gameStateBag);
+        LoadFromConfiguration<Realm, RealmGameConfiguration>(gameConfiguration.Realms, gameStateBag);
+        LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration>(gameConfiguration.RealmCharacterClasses, gameStateBag); // Composite singleton
+        LoadFromConfiguration<RechargeItemScript, RechargeItemScriptGameConfiguration>(gameConfiguration.RechargeItemScripts, gameStateBag);
+        LoadFromConfiguration<RenderMessageScript, RenderMessageScriptGameConfiguration>(gameConfiguration.RenderMessageScripts, gameStateBag);
+        LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration>(gameConfiguration.Shopkeepers, gameStateBag);
+        LoadFromConfiguration<Spell, SpellGameConfiguration>(gameConfiguration.Spells, gameStateBag);
+        LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration>(gameConfiguration.StoreCommands, gameStateBag);
+        LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration>(gameConfiguration.StoreFactories, gameStateBag);
+        LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration>(gameConfiguration.StringWidgets, gameStateBag);
+        LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration>(gameConfiguration.SummonScripts, gameStateBag);
+        LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration>(gameConfiguration.SummonWeightedRandoms, gameStateBag);
+        LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration>(gameConfiguration.SyllableSets, gameStateBag);
+        LoadFromConfiguration<Symbol, SymbolGameConfiguration>(gameConfiguration.Symbols, gameStateBag);
+        LoadFromConfiguration<LabelWidget, LabelWidgetGameConfiguration>(gameConfiguration.LabelWidgets, gameStateBag);
+        LoadFromConfiguration<TeleportSelfScript, TeleportSelfScriptGameConfiguration>(gameConfiguration.TeleportSelfScripts, gameStateBag);        
+        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration>(gameConfiguration.NullableStringsTextAreaWidgets, gameStateBag);
+        LoadFromConfiguration<Tile, TileGameConfiguration>(gameConfiguration.Tiles, gameStateBag);
+        LoadFromConfiguration<TimerScript, TimerScriptGameConfiguration>(gameConfiguration.TimerScripts, gameStateBag);
+        LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration>(gameConfiguration.TimeWidgets, gameStateBag);
+        LoadFromConfiguration<Town, TownGameConfiguration>(gameConfiguration.Towns, gameStateBag);
+        LoadFromConfiguration<Vault, VaultGameConfiguration>(gameConfiguration.Vaults, gameStateBag);
+        LoadFromConfiguration<View, ViewGameConfiguration>(gameConfiguration.Views, gameStateBag);
+        LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration>(gameConfiguration.WizardCommands, gameStateBag);
 
         //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
         //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
@@ -594,7 +608,7 @@ internal class SingletonRepository
         }
     }
 
-    private void LoadAllAssemblyTypes<T>() // TODO: WHY CANT THIS BE where T: IGETKEY
+    private void LoadAllAssemblyTypes<T>(object? gameStateBag) // TODO: WHY CANT THIS BE where T: IGETKEY
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
         Type[] types = assembly.GetTypes();
@@ -607,52 +621,128 @@ internal class SingletonRepository
                 // Ensure it only has one private constructor.
                 // TODO: The one private constructor needs to be tested properly.
                 ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-                if (constructors.Length == 1)
+                if (constructors.Length != 1)
                 {
-                    // We will only instantiate the singleton, if we are storing it.
-                    try
-                    {
-                        IGetKey singleton = (IGetKey)constructors[0].Invoke(new object[] { Game });
-                        RegisterSingleton(singleton);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception($"An error occurred instantiating the {type.Name} singleton '{ex.Message}'.  Check to ensure the constructor is private(Game game).");
-                    }
+                    continue;
+                    throw new Exception($"Invalid number of constructors for {type.Name}.  Expecting only a single constructor.");
+                }
+
+                ConstructorInfo constructor = constructors[0];
+                ParameterInfo[] parameterInfos = constructor.GetParameters();
+
+                if (parameterInfos.Length < 1)
+                {
+                    throw new Exception($"Constructor for {type.Name} has no parameters.  Expecting {nameof(Game)} and {nameof(GameStateBag)}.");
+                }
+
+                if (parameterInfos[0].ParameterType != typeof(Game))
+                {
+                    throw new Exception($"First parameter for {type.Name} constructor is not of type {nameof(Game)}.");
+                }
+
+                if (parameterInfos.Length > 2)
+                {
+                    throw new Exception($"Constructor for {type.Name} has too many parameters.  Expecting {nameof(Game)} and {nameof(GameStateBag)}.");
+                }
+
+                if (parameterInfos.Length == 2 && parameterInfos[1].ParameterType != typeof(GameStateBag))
+                {
+                    throw new Exception($"Invalid parameter for {type.Name} constructor.  Expecting {nameof(Game)} and {nameof(GameStateBag)}.");
+                }
+
+                object?[] parameters = parameterInfos.Length == 1 ? new object?[] { Game } : new object?[] { Game, gameStateBag };
+
+                try
+                {
+                    IGetKey singleton = (IGetKey)constructor.Invoke(parameters);
+                    RegisterSingleton(singleton);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"An error occurred instantiating the {type.Name} singleton '{ex.Message}'.  Check to ensure the constructor is private(Game game).");
                 }
             }
         }
     }
 
-    private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations) where T : IGetKey where TConfiguration : notnull
+    private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations, object? gameStateBag) where T : IGetKey where TConfiguration : notnull
     {
         // For persistence validation, we need to ensure the type T implements IToJson.
         if (!typeof(IToJson).IsAssignableFrom(typeof(T)))
         {
-            throw new Exception($"The type {typeof(T).Name} does not implement {nameof(IToJson)} to support the persistance for {nameof(GameConfiguration)}.");
+            throw new Exception($"The type {typeof(T).Name} does not implement {nameof(IToJson)} to support the persistence for {nameof(GameConfiguration)}.");
         }
 
         // Register the repository with persistence.
         RegisterInterface<T>();
 
-        string typeName = typeof(T).Name;
         if (entityConfigurations is not null)
         {
-            ConstructorInfo? constructor = typeof(T).GetConstructors(BindingFlags.Public | BindingFlags.Instance)
-                .SingleOrDefault(_constructor =>
-                {
-                    ParameterInfo[] parameters = _constructor.GetParameters();
-                    return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration);
-                });
-            if (constructor is null)
+            // TODO: Why do we need to specify the search criteria.  Are we hosting multiple ctors?
+            //ConstructorInfo? constructor = typeof(T).GetConstructors(BindingFlags.Public | BindingFlags.Instance)
+            //    .SingleOrDefault(_constructor =>
+            //    {
+            //        ParameterInfo[] parameters = _constructor.GetParameters();
+            //        return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration);
+            //    });
+            //if (constructor is null)
+            //{
+            //    throw new Exception($"Cannot find constructor for {typeof(T).Name}.  Expecting ctor(Game, {typeof(TConfiguration).Name})");
+            //}
+            //foreach (TConfiguration entityConfiguration in entityConfigurations)
+            //{
+            //    // We need to convert from the GameConfiguration object to the entity object.  Create the generic object
+            //    T entity = (T)constructor.Invoke(new object?[] { Game, entityConfiguration, gameStateBag });
+            //    RegisterSingleton(entity);
+            //}
+            Type type = typeof(T);
+            string typeName = type.Name;
+            ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+            if (constructors.Length != 1)
             {
-                throw new Exception($"Cannot find constructor for {typeof(T).Name}.  Expecting ctor(Game, {typeof(TConfiguration).Name})");
+                throw new Exception($"Invalid number of constructors for {type.Name}.  Expecting only a single constructor.");
             }
+
+            ConstructorInfo constructor = constructors[0];
+            ParameterInfo[] parameterInfos = constructor.GetParameters();
+
+            if (parameterInfos.Length < 2)
+            {
+                throw new Exception($"Constructor for {type.Name} has too few parameters.  Expecting {nameof(Game)}, {typeof(TConfiguration)} and {nameof(GameStateBag)}.");
+            }
+
+            if (parameterInfos[0].ParameterType != typeof(Game))
+            {
+                throw new Exception($"First parameter for {type.Name} constructor is not of type {nameof(Game)}.");
+            }
+            if (parameterInfos[1].ParameterType != typeof(TConfiguration))
+            {
+                throw new Exception($"Invalid parameter for {type.Name} constructor.  Expecting {nameof(Game)}, {typeof(TConfiguration)} and {nameof(GameStateBag)}.");
+            }
+
+            if (parameterInfos.Length > 3)
+            {
+                throw new Exception($"Constructor for {type.Name} has too many parameters.  Expecting {nameof(Game)}, {typeof(TConfiguration)} and {nameof(GameStateBag)}.");
+            }
+
+            if (parameterInfos.Length == 3 && parameterInfos[2].ParameterType != typeof(GameStateBag))
+            {
+                throw new Exception($"Invalid parameter for {type.Name} constructor.  Expecting {nameof(Game)}, {typeof(TConfiguration)} and {nameof(GameStateBag)}.");
+            }
+
             foreach (TConfiguration entityConfiguration in entityConfigurations)
             {
-                // We need to convert from the GameConfiguration object to the entity object.  Create the generic object
-                T entity = (T)constructor.Invoke(new object[] { Game, entityConfiguration });
-                RegisterSingleton(entity);
+                object?[] parameters = parameterInfos.Length == 2 ? new object?[] { Game, entityConfiguration } : new object?[] { Game, entityConfiguration, gameStateBag };
+
+                try
+                {
+                    IGetKey singleton = (IGetKey)constructor.Invoke(parameters);
+                    RegisterSingleton(singleton);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"An error occurred instantiating the {type.Name} singleton '{ex.Message}'.  Check to ensure the constructor is private(Game game).");
+                }
             }
         }
     }

@@ -11,7 +11,7 @@ internal class RedrawSpeedFlaggedAction : FlaggedAction
 {
     private const int ColSpeed = 43;
     private const int RowSpeed = 44;
-    private RedrawSpeedFlaggedAction(Game game) : base(game) { }
+    private RedrawSpeedFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override void Execute()
     {
         int i = Game.Speed.IntValue;

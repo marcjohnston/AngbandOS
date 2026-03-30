@@ -13,7 +13,7 @@ namespace AngbandOS.Core;
 internal abstract class Ability : IGetKey
 {
     protected Game Game { get; }
-    public Ability(Game game)
+    public Ability(Game game, GameStateBag gameStateBag)
     {
         Game = game;
     }

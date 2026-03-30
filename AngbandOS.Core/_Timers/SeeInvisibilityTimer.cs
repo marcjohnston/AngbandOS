@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class SeeInvisibilityTimer : Timer
 {
-    private SeeInvisibilityTimer(Game game) : base(game) { } // This object is a singleton.
+    private SeeInvisibilityTimer(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override void EffectStopped()
     {
         Game.MsgPrint("Your eyes feel less sensitive.");

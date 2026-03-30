@@ -9,7 +9,7 @@ namespace AngbandOS.Core.GridTileEffects;
 [Serializable]
 internal class LoseConGridTileScript : GridTileScript
 {
-    private LoseConGridTileScript(Game game) : base(game) { } // This object is a singleton.
+    private LoseConGridTileScript(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {

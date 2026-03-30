@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class AdrenalineChannelingTalent : Talent
 {
-    private AdrenalineChannelingTalent(Game game) : base(game) { }
+    private AdrenalineChannelingTalent(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     public override string Name => "Adrenaline Channeling";
     public override int Level => 23;

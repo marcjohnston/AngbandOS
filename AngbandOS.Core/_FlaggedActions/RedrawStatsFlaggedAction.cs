@@ -11,7 +11,7 @@ internal class RedrawStatsFlaggedAction : FlaggedAction
 {
     private const int RowStat = 15;
     private const int ColStat = 6;
-    private RedrawStatsFlaggedAction(Game game) : base(game) { }
+    private RedrawStatsFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     private void PrtStat(Ability stat, int rowOffset)
     {
         if (stat.Innate < stat.InnateMax)

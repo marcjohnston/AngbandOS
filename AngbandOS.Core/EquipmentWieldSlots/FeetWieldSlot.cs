@@ -9,7 +9,7 @@ namespace AngbandOS.Core.WieldSlots;
 [Serializable]
 internal class FeetWieldSlot : EquipmentWieldSlot
 {
-    private FeetWieldSlot(Game game) : base(game) { }
+    private FeetWieldSlot(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Label(Item oPtr) => "m";
     public override int[] InventorySlots => new int[] { InventorySlotEnum.Feet };
     public override string MentionUse(int? index) => "On feet";

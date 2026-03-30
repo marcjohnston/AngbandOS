@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class EquipmentWieldSlot : WieldSlot
 {
-    protected EquipmentWieldSlot(Game game) : base(game) { }
+    protected EquipmentWieldSlot(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     public override bool IsWieldedAsEquipment => true;
 

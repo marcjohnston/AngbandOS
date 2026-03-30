@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class Animation : IGetKey, IToJson
 {
-    private Game Game;
+    private Game Game { get; }
     public Animation(Game game, AnimationGameConfiguration gameConfiguration) 
     {
         Game = game;

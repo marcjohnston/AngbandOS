@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class ChestTrapCombination : IGetKey, IToJson
 {
-    private Game Game;
+    private Game Game { get; }
     public ChestTrapCombination(Game game, ChestTrapCombinationGameConfiguration gameConfiguration)
     {
         Game = game;

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class AcidResistanceTimer : Timer
 {
-    private AcidResistanceTimer(Game game) : base(game) { } // This object is a singleton.
+    private AcidResistanceTimer(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     protected override void OnRateIncreased(int newRate, int currentRate)
     {

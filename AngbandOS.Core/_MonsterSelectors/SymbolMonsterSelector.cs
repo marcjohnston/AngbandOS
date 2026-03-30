@@ -9,7 +9,7 @@ namespace AngbandOS.Core.MonsterSelectors;
 [Serializable]
 internal class SymbolMonsterSelector : MonsterSelector
 {
-    private SymbolMonsterSelector(Game game) : base(game) { }
+    private SymbolMonsterSelector(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {

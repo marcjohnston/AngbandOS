@@ -16,7 +16,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
     /// </summary>
     private bool OldRestrictingArmor;
 
-    private UpdateManaFlaggedAction(Game game) : base(game) { }
+    private UpdateManaFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override void Execute()
     {       
         if (!Game.UsesMana)

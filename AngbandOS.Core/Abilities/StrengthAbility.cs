@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class StrengthAbility : Ability
 {
-    private StrengthAbility(Game game) : base(game) { } // This object is a singleton
+    private StrengthAbility(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     public override bool HasSustain => Game.HasSustainStrength;
 

@@ -13,6 +13,10 @@ namespace AngbandOS.Core;
 internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
 {
     protected Game Game { get; }
+    public Timer(Game game, GameStateBag gameStateBag) // This object is a singleton
+    {
+        Game = game;
+    }
 
     /// <summary>
     /// Resets the <see cref="IsChanged"/> change tracking flag.
@@ -26,11 +30,6 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
     /// Returns true, if the value has changed since the last <see cref="ClearChangedFlag"/>.
     /// </summary>
     public virtual bool IsChanged { get; private set; }
-
-    public Timer(Game game)
-    {
-        Game = game;
-    }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

@@ -4,7 +4,10 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Collections;
 using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
 
@@ -82,26 +85,183 @@ internal partial class Game
     #endregion
 
     #region Game Serialization
+    public GameStateBag Serialize(object? value, string name = "")
+    {
+        /// <summary>
+        /// Returns the state of a type.  The return object type is dependent on the type of data being serialized.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="_objectToId"></param>
+        /// <param name="parent"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        GameStateBag Serialize(object? value, Dictionary<object, int> _objectToId, string parent)
+        {
+            FieldInfo[] GetAllFields(Type? type)
+            {
+                List<FieldInfo> fieldInfoList = new List<FieldInfo>();
+                while (type != null)
+                {
+                    foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                    {
+                        fieldInfoList.Add(field);
+                    }
+
+                    type = type.BaseType;
+                }
+                return fieldInfoList.ToArray();
+            }
+
+            // Handle null values.
+            if (value == null)
+            {
+                return new NullValueGameStateBag();
+            }
+
+            if (value  is DateTime dateTimeValue)
+            {
+                return new DateTimeValueGameStateBag(dateTimeValue);
+            }
+            
+            if (value is TimeSpan timeSpanValue)
+            {
+                return new TimeSpanValueGameStateBag(timeSpanValue);
+            }
+            
+            if (value is string stringValue)
+            {
+                return new StringValueGameStateBag(stringValue);
+            }
+
+            if (value is byte byteValue)
+            {
+                return new ByteValueGameStateBag(byteValue);
+            }
+
+            if (value is char charValue)
+            {
+                return new CharValueGameStateBag(charValue);
+            }
+
+            if (value is decimal decimalValue)
+            {
+                return new DecimalValueGameStateBag(decimalValue);
+            }
+            
+            if (value is int intValue)
+            {
+                return new IntValueGameStateBag(intValue);
+            }
+            
+            if (value is bool boolValue)
+            {
+                return new BoolValueGameStateBag(boolValue);
+            }
+
+            if (value is ColorEnum colorEnumValue)
+            {
+                return new ColorEnumValueGameStateBag(colorEnumValue);
+            }
+
+            Type type = value.GetType();
+
+            // Object identity--game objects only
+            if (type.Assembly == GetType().Assembly)
+            {
+                // already seen?
+                if (_objectToId.TryGetValue(value, out int existingId))
+                {
+                    return new ReferenceGameStateBag(existingId);
+                }
+
+                // first time seeing this object
+                int id = _objectToId.Count + 1;
+                _objectToId[value] = id;
+
+                // Retrieve all of the fields to be preserved.  We exclude property backing fields and fields marked as [NonSerialized].
+                FieldInfo[] allFields = GetAllFields(type);
+                IEnumerable<FieldInfo> serializableFields = allFields.Where(p => !p.IsDefined(typeof(CompilerGeneratedAttribute), true) && !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute)));
+                var objectValue = new Dictionary<string, GameStateBag>();
+
+                foreach (FieldInfo propertyInfo in serializableFields)
+                {
+                    // Get the key and value and type of the field.
+                    string key = propertyInfo.Name;
+                    object? fieldValue = propertyInfo.GetValue(value);
+                    objectValue[key] = Serialize(fieldValue, _objectToId, StringLibrary.DelimitIf(parent, ".", $"{type.Name}.{key}"));
+                }
+
+                return new ObjectGameStateBag(id, type.Name, new DictionaryGameStateBag(objectValue));
+            }
+
+            // Dictionaries
+            if (value is IDictionary dictionary)
+            {
+                var result = new Dictionary<string, GameStateBag>();
+
+                foreach (DictionaryEntry entry in dictionary)
+                {
+                    string key = entry.Key.ToString()!; // Dictionary keys can never be null.
+                    result[key] = Serialize(entry.Value, _objectToId, StringLibrary.DelimitIf(parent, ".", key));
+                }
+
+                return new DictionaryGameStateBag(result);
+            }
+
+            // Tuples
+            if (type.Namespace == "System" && (type.Name.StartsWith("ValueTuple`") || type.Name.StartsWith("Tuple`")))
+            {
+                var values = new List<GameStateBag>();
+
+                var fields = type.GetFields();
+
+                foreach (var field in fields)
+                {
+                    values.Add(Serialize(field.GetValue(value), _objectToId, StringLibrary.DelimitIf(parent, ".", field.Name)));
+                }
+
+                return new TupleGameStateBag(type.Name, values.ToArray());
+            }
+
+            // Collections
+            if (value is IEnumerable enumerable && value is not string)
+            {
+                var list = new List<GameStateBag>();
+
+                int index = 0;
+                foreach (var item in enumerable)
+                {
+                    list.Add(Serialize(item, _objectToId, $"{parent}[{index}]"));
+                    index++;
+                }
+
+                return new ListGameStateBag(list.ToArray());
+            }
+
+            throw new Exception($"{type.Name} serialization not supported on field {parent}.");
+        }
+
+        return Serialize(value, new Dictionary<object, int>(), name);
+    }
+
+    public GameStateBag Save()
+    {
+        GameStateBag singletonRepositoryGameStateBag = SingletonRepository.Serialize();
+        GameStateBag gameGameStateBag = Serialize(this);
+        Dictionary<string, GameStateBag> gameStateBagDictionary = new Dictionary<string, GameStateBag>()
+        {
+            { "SingletonRepository", singletonRepositoryGameStateBag },
+            { "Game", gameGameStateBag }
+        };
+        return new DictionaryGameStateBag(gameStateBagDictionary);
+    }
+
     /// <summary>
     /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
     /// </summary>
     /// <param name="player">The player to save.  If the player is dead, then this should be the corpse.</param>
     public void SaveGame()
     {
-        //GameStateBag gameStateBag = new GameStateBag();
-        //object? gameData = gameStateBag.Serialize(this);
-        //string jsonSerializedGameData = JsonSerializer.Serialize(gameData, new JsonSerializerOptions { IncludeFields = true });
-        //byte[] jsonSerializedGameDataAsByteArray = System.Text.ASCIIEncoding.UTF8.GetBytes(jsonSerializedGameData);
-        //GameDetails gameDetails = new GameDetails()
-        //{
-        //    CharacterName = PlayerName.StringValue, // The player parameter
-        //    Level = ExperienceLevel.IntValue, // The player parameter
-        //    Gold = Gold.IntValue, // The parameter
-        //    IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
-        //    Comments = ""
-        //};
-        //CorePersistentStorage?.WriteGame(gameDetails, jsonSerializedGameDataAsByteArray);
-
         BinaryFormatter formatter = new BinaryFormatter();
         MemoryStream memoryStream = new MemoryStream();
         formatter.Serialize(memoryStream, this);
@@ -152,7 +312,31 @@ internal partial class Game
     //public bool PreviousInPopupMenu = false;
     #endregion
 
-    #region New and Existing Game Construction
+    #region New and Existing Game Construction    
+
+    /// <summary>
+    /// Restore a new game.
+    /// </summary>
+    /// <param name="gameConfiguration"></param>
+    /// <param name="gameStateBag"></param>
+    public Game(GameConfiguration gameConfiguration, GameStateBag gameStateBag) : this(gameConfiguration, null, gameStateBag) { }
+
+    /// <summary>
+    /// Create a new game to play from scratch.
+    /// </summary>
+    /// <param name="gameConfiguration"></param>
+    /// <param name="gameReplay"></param>
+    public Game(GameConfiguration gameConfiguration) : this(gameConfiguration, null, null) { }
+
+    /// <summary>
+    /// Replay a game.
+    /// </summary>
+    /// <param name="gameConfiguration"></param>
+    /// <param name="gameReplay"></param>
+    public Game(GameConfiguration gameConfiguration, GameReplayDetails gameReplay) : this(gameConfiguration, gameReplay, null) 
+    {
+    }
+
     /// <summary>
     /// Creates a new game.  
     /// </summary>
@@ -161,12 +345,15 @@ internal partial class Game
     /// For game replay mode, construction of the game DOES NOT use the random generator.  We only initialize the non-fixed seed.
     /// 
     /// </remarks>
-    public Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay)
+    /// <param name="gameConfiguration"></param>
+    /// <param name="gameReplay">Supply t</param>
+    /// <param name="gameStateBag">Supply the game state bag to restore a game.  The game configuration must match the game being restored.</param>
+    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, GameStateBag? gameStateBag)
     {
         _mainSequence = new Random();
 
         // Check to see if we are replaying a game.
-        if (gameReplay is not null)
+        if (gameReplay is not null) // TODO: This should be moved into the overload that applies
         {
             MainSequenceRandomSeed = gameReplay.Seed;
             foreach (GameReplayStep gameReplayStep in gameReplay.GameReplaySteps)
@@ -196,7 +383,7 @@ internal partial class Game
 
         // Load all of the predefined objects.  The singleton repository must already be created.
         DateTime startTime = DateTime.Now;
-        SingletonRepository.LoadAndBind(gameConfiguration);
+        SingletonRepository.LoadAndBind(gameConfiguration, gameStateBag);
         TimeSpan elapsedTime = DateTime.Now - startTime;
         if (gameConfiguration.MaxMessageLogLength != null)
         {
@@ -301,7 +488,7 @@ internal partial class Game
     /// </summary>
     /// <param name="persistentStorage"></param>
     /// <returns></returns>
-    public static Game LoadGame(ICorePersistentStorage persistentStorage, string serializedGameData, GameConfiguration gameConfiguration)
+    public static Game LoadGame(ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration)
     {
         if (persistentStorage == null)
         {

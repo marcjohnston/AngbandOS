@@ -9,7 +9,7 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class UpdateLightFlaggedAction : FlaggedAction
 {
-    private UpdateLightFlaggedAction(Game game) : base(game) { }
+    private UpdateLightFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     private void CaveLightHack(int y, int x)
     {
         Game.Map.Grid[y][x].PlayerLit = true;

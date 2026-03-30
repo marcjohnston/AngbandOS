@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class FirePlayerEffect : PlayerEffectUniversalScript
 {
-    private FirePlayerEffect(Game game) : base(game) { } // This object is a singleton.
+    private FirePlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string? BlindPreMessage => "You are hit by fire!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {

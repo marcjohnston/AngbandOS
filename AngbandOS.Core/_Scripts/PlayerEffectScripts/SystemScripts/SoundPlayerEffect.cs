@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class SoundPlayerEffect : PlayerEffectUniversalScript
 {
-    private SoundPlayerEffect(Game game) : base(game) { } // This object is a singleton.
+    private SoundPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string? BlindPreMessage => "You are hit by a loud noise!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {

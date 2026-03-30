@@ -9,7 +9,7 @@ namespace AngbandOS.Core.SpellResistantDetections;
 [Serializable]
 internal class FearSpellResistantDetection : SpellResistantDetection
 {
-    private FearSpellResistantDetection(Game game) : base(game) { }
+    private FearSpellResistantDetection(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override void Learn(Monster monster)
     {
         if (Game.HasFearResistance)

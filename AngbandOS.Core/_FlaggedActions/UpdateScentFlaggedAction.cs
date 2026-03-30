@@ -12,7 +12,7 @@ internal class UpdateScentFlaggedAction : FlaggedAction
     private int _flowHead;
     private int _flowN;
     private int _flowTail;
-    private UpdateScentFlaggedAction(Game game) : base(game) { }
+    private UpdateScentFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     private void UpdateFlowAux(int y, int x, int n)
     {
         int oldHead = _flowHead;

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.GridTileEffects;
 [Serializable]
 internal class StoneWallGridTileScript : GridTileScript
 {
-    private StoneWallGridTileScript(Game game) : base(game) { } // This object is a singleton.
+    private StoneWallGridTileScript(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {

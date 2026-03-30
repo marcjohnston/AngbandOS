@@ -9,7 +9,7 @@ namespace AngbandOS.Core.GridTileEffects;
 [Serializable]
 internal class MakeDoorGridTileScript : GridTileScript
 {
-    private MakeDoorGridTileScript(Game game) : base(game) { } // This object is a singleton.
+    private MakeDoorGridTileScript(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {

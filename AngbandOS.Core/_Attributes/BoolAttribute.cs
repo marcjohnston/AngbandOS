@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class BoolAttribute : Attribute, IToJson
 {
-    public BoolAttribute(Game game, BoolAttributeGameConfiguration gameConfiguration) : base(game)
+    public BoolAttribute(Game game, BoolAttributeGameConfiguration gameConfiguration, GameStateBag gameStateBag) : base(game, gameStateBag) // This object is a singleton
     {
         Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
     }

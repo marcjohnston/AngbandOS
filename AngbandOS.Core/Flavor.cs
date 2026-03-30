@@ -12,7 +12,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class Flavor
 {
-    protected Game Game;
+    protected Game Game { get; }
     protected Flavor(Game game)
     {
         Game = game;

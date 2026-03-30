@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class CharacterArmorTalent : Talent
 {
-    private CharacterArmorTalent(Game game) : base(game) { }
+    private CharacterArmorTalent(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Name => "Character Armor";
     public override int Level => 13;
     public override int ManaCost => 12;

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class BleedingTimer : Timer
 {
-    private BleedingTimer(Game game) : base(game) { } // This object is a singleton.
+    private BleedingTimer(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
 
     protected override int GetRate(int value)
     {

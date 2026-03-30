@@ -9,7 +9,7 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class DisenchantPlayerEffect : PlayerEffectUniversalScript
 {
-    private DisenchantPlayerEffect(Game game) : base(game) { } // This object is a singleton.
+    private DisenchantPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string? BlindPreMessage => "You are hit by something!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {

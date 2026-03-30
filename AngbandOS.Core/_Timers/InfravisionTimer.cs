@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class InfravisionTimer : Timer
 {
-    private InfravisionTimer(Game game) : base(game) { } // This object is a singleton.
+    private InfravisionTimer(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override void EffectStopped()
     {
         Game.MsgPrint("Your eyes stop tingling.");

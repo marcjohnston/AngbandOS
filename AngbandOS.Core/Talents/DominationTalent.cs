@@ -11,7 +11,7 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class DominationTalent : Talent
 {
-    private DominationTalent(Game game) : base(game) { }
+    private DominationTalent(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Name => "Domination";
     public override int Level => 9;
     public override int ManaCost => 7;

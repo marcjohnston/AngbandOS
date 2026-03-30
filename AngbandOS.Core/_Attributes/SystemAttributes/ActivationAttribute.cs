@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ActivationAttribute : Attribute
 {
-    private ActivationAttribute(Game game) : base(game) { }
+    private ActivationAttribute(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Key => GetType().Name;
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ActivationEffectiveAttributeValue(Game, this);
 }

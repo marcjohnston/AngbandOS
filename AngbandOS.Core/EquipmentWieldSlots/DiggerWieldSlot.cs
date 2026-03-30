@@ -9,7 +9,7 @@ namespace AngbandOS.Core.WieldSlots;
 [Serializable]
 internal class DiggerWieldSlot : EquipmentWieldSlot
 {
-    private DiggerWieldSlot(Game game) : base(game) { }
+    private DiggerWieldSlot(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override int[] InventorySlots => new int[] { InventorySlotEnum.Digger };
     public override string Label(Item oPtr) => "c";
     public override string MentionUse(int? index) => "Digging with";
