@@ -16,6 +16,87 @@ public class GameConfiguration
         MergeAllSingletonsFromAssembly(this, assembly);
     }
 
+    /// <summary>
+    /// Returns a string representation for composite key.  The returned key is compliant for filenames and ensures keys do not collide in namespace.
+    /// </summary>
+    /// <param name="keys"></param>
+    /// <returns></returns>
+    public static string GetCompositeKey(params string?[] keys)
+    {
+        const char wildCardCharacter = '~';
+        const char keyDelimiter = '-';
+        string compositeKey = "";
+        foreach (string? key in keys)
+        {
+            if (String.IsNullOrEmpty(key))
+            {
+                compositeKey = $"{StringLibrary.DelimitIf(compositeKey, keyDelimiter, wildCardCharacter)}";
+            }
+            else
+            {
+                if (key.Contains("-") || key.Contains(wildCardCharacter))
+                {
+                    throw new Exception($"The singleton key {key} presented for composite generation cannot contain the reserved character '{keyDelimiter}' or '{wildCardCharacter}'.");
+                }
+                compositeKey = $"{StringLibrary.DelimitIf(compositeKey, keyDelimiter, key)}";
+            }
+        }
+        return compositeKey;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="keys"></param>
+    /// <returns>
+    /// This version is used by the <see cref="OutfitManifest"/> because the bindings have equalities with them.
+    /// </returns>
+    public static string GetCompositeKey(params (string[]? value, bool isEqual)?[] keys)
+    {
+        const string nullToken = "";
+        const string wildCardToken = "~";
+        const string keyDelimiter = "_";
+        string compositeKey = "";
+        string currentDelimiter = "";
+        foreach ((string[]? MatchValues, bool IsEqual)? key in keys)
+        {
+            compositeKey = $"{compositeKey}{currentDelimiter}";
+            currentDelimiter = keyDelimiter;
+
+            // Check to see if the key represents a wildcard--match both null and all non-null values.
+            if (key is null)
+            {
+                compositeKey = $"{compositeKey}{wildCardToken}";
+            }
+            else
+            {
+                // Test to ensure compliance for the unique key.
+                //if (key.Value == "")
+                //{
+                //    throw new Exception($"Blank singleton key value are not supported for composite generation.");
+                //}
+                //if (keyDelimiter != "" && value.Contains(keyDelimiter) || wildCardToken != "" && value.Contains(wildCardToken) || nullToken != "" && value.Contains(nullToken))
+                //{
+                //    throw new Exception($"The singleton key value {value} presented for composite generation is invalid.");
+                //}
+                if (key.Value.MatchValues is null)
+                {
+                    compositeKey = $"{compositeKey}{nullToken}";
+                }
+                else
+                {
+                    compositeKey = $"{compositeKey}{(key.Value.IsEqual ? "+" : "-")}";
+                    foreach (string matchValue in key.Value.MatchValues)
+                    {
+                        compositeKey = $"{compositeKey}{matchValue}";
+                    }
+                }
+            }
+
+        }
+        return compositeKey;
+    }
+
     private static T[] LoadFromAssembly<T>(Assembly assembly) where T : class, new()
     {
         List<T> singletonsList = new List<T>();

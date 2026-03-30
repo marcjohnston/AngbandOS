@@ -7,10 +7,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class AttackGameConfiguration
+public class AttackGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.
     /// </summary>

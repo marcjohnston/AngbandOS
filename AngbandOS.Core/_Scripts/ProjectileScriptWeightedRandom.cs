@@ -9,12 +9,12 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>, IGetKey, IUniversalScript, IToJson 
 {
-    public ProjectileScriptWeightedRandom(Game game, ProjectileScriptWeightedRandomGameConfiguration projectileWeightedRandomGameConfiguration) : base(game)
+    public ProjectileScriptWeightedRandom(Game game, ProjectileScriptWeightedRandomGameConfiguration gameConfiguration) : base(game)
     {
-        Key = projectileWeightedRandomGameConfiguration.Key ?? projectileWeightedRandomGameConfiguration.GetType().Name;
-        NameAndWeightBindings = projectileWeightedRandomGameConfiguration.NameAndWeightBindings;
-        LearnedDetails = projectileWeightedRandomGameConfiguration.LearnedDetails;
-        LearnedDetailsMode = projectileWeightedRandomGameConfiguration.LearnedDetailsMode;
+        Key = gameConfiguration.GetKey;
+        NameAndWeightBindings = gameConfiguration.NameAndWeightBindings;
+        LearnedDetails = gameConfiguration.LearnedDetails;
+        LearnedDetailsMode = gameConfiguration.LearnedDetailsMode;
     }
 
     /// <summary>

@@ -7,8 +7,7 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class TeleportSelfScriptGameConfiguration
+public class TeleportSelfScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
     public virtual string DistanceExpression { get; set; } = "10";
 }

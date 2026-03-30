@@ -10,13 +10,13 @@ namespace AngbandOS.Core;
 internal sealed class God : IGetKey, IToJson
 {
     private Game Game { get; }
-    public God(Game game, GodGameConfiguration godGameConfiguration)
+    public God(Game game, GodGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = godGameConfiguration.Key ?? godGameConfiguration.GetType().Name;
-        LongName = godGameConfiguration.LongName;
-        ShortName = godGameConfiguration.ShortName;
-        FavorDescription = godGameConfiguration.FavorDescription;
+        Key = gameConfiguration.GetKey;
+        LongName = gameConfiguration.LongName;
+        ShortName = gameConfiguration.ShortName;
+        FavorDescription = gameConfiguration.FavorDescription;
     }
 
     public string LongName { get; }

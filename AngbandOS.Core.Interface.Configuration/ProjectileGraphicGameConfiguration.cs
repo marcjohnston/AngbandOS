@@ -2,10 +2,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ProjectileGraphicGameConfiguration
+public class ProjectileGraphicGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     /// <summary>
     /// Returns the character to be used for the projectile.
     /// </summary>

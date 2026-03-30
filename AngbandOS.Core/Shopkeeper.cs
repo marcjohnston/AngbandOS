@@ -10,14 +10,14 @@ namespace AngbandOS.Core;
 internal sealed class Shopkeeper : IGetKey, IToJson
 {
     private Game Game { get; }
-    public Shopkeeper(Game game, ShopkeeperGameConfiguration shopkeeperGameConfiguration)
+    public Shopkeeper(Game game, ShopkeeperGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = shopkeeperGameConfiguration.Key ?? shopkeeperGameConfiguration.GetType().Name;
-        MaxCost = shopkeeperGameConfiguration.MaxCost;
-        MinInflate = shopkeeperGameConfiguration.MinInflate;
-        Name = shopkeeperGameConfiguration.Name;
-        RaceName = shopkeeperGameConfiguration.RaceName;
+        Key = gameConfiguration.GetKey;
+        MaxCost = gameConfiguration.MaxCost;
+        MinInflate = gameConfiguration.MinInflate;
+        Name = gameConfiguration.Name;
+        RaceName = gameConfiguration.RaceName;
     }
 
     public int MaxCost { get; }

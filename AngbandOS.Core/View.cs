@@ -24,11 +24,11 @@ internal sealed class View : IGetKey, IToJson
     #endregion
 
     #region Constructors
-    public View(Game game, ViewGameConfiguration viewGameConfiguration)
+    public View(Game game, ViewGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = viewGameConfiguration.Key ?? viewGameConfiguration.GetType().Name;
-        WidgetNames = viewGameConfiguration.WidgetNames;
+        Key = gameConfiguration.GetKey;
+        WidgetNames = gameConfiguration.WidgetNames;
     }
     #endregion
 

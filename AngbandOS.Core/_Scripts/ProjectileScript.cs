@@ -11,27 +11,27 @@ namespace AngbandOS.Core;
 internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson
 {
     private Game Game { get; }
-    public ProjectileScript(Game game, ProjectileScriptGameConfiguration projectileScriptGameConfiguration)
+    public ProjectileScript(Game game, ProjectileScriptGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = projectileScriptGameConfiguration.Key ?? projectileScriptGameConfiguration.GetType().Name;
-        ProjectileBindingKey = projectileScriptGameConfiguration.ProjectileBindingKey;
-        DamageRollExpression = projectileScriptGameConfiguration.DamageRollExpression;
-        RadiusRollExpression = projectileScriptGameConfiguration.RadiusRollExpression;
-        Stop = projectileScriptGameConfiguration.Stop;
-        Kill = projectileScriptGameConfiguration.Kill;
-        Jump = projectileScriptGameConfiguration.Jump;
-        Beam = projectileScriptGameConfiguration.Beam;
-        Grid = projectileScriptGameConfiguration.Grid;
-        Item = projectileScriptGameConfiguration.Item;
-        Thru = projectileScriptGameConfiguration.Thru;
-        Hide = projectileScriptGameConfiguration.Hide;
-        Identified = projectileScriptGameConfiguration.Identified;
-        PreMessage = projectileScriptGameConfiguration.PreMessage;
-        PostMessage = projectileScriptGameConfiguration.PostMessage;
-        SmashingOnPetsTurnsUnfriendly = projectileScriptGameConfiguration.SmashingOnPetsTurnsUnfriendly;
-        NonDirectionalProjectileMode = projectileScriptGameConfiguration.NonDirectionalProjectileMode;
-        CustomLearnedDetails = projectileScriptGameConfiguration.CustomLearnedDetails;
+        Key = gameConfiguration.GetKey;
+        ProjectileBindingKey = gameConfiguration.ProjectileBindingKey;
+        DamageRollExpression = gameConfiguration.DamageRollExpression;
+        RadiusRollExpression = gameConfiguration.RadiusRollExpression;
+        Stop = gameConfiguration.Stop;
+        Kill = gameConfiguration.Kill;
+        Jump = gameConfiguration.Jump;
+        Beam = gameConfiguration.Beam;
+        Grid = gameConfiguration.Grid;
+        Item = gameConfiguration.Item;
+        Thru = gameConfiguration.Thru;
+        Hide = gameConfiguration.Hide;
+        Identified = gameConfiguration.Identified;
+        PreMessage = gameConfiguration.PreMessage;
+        PostMessage = gameConfiguration.PostMessage;
+        SmashingOnPetsTurnsUnfriendly = gameConfiguration.SmashingOnPetsTurnsUnfriendly;
+        NonDirectionalProjectileMode = gameConfiguration.NonDirectionalProjectileMode;
+        CustomLearnedDetails = gameConfiguration.CustomLearnedDetails;
     }
 
     public void Bind()

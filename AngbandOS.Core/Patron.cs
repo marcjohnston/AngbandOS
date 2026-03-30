@@ -10,14 +10,14 @@ namespace AngbandOS.Core;
 internal sealed class Patron : IGetKey, IToJson
 {
     private Game Game { get; }
-    public Patron(Game game, PatronGameConfiguration patronGameConfiguration)
+    public Patron(Game game, PatronGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = patronGameConfiguration.Key ?? patronGameConfiguration.GetType().Name;
-        LongName = patronGameConfiguration.LongName;
-        PreferredAbilityBindingKey = patronGameConfiguration.PreferredAbilityBindingKey;
-        RewardBindingKeys = patronGameConfiguration.RewardBindingKeys;
-        ShortName = patronGameConfiguration.ShortName;
+        Key = gameConfiguration.GetKey;
+        LongName = gameConfiguration.LongName;
+        PreferredAbilityBindingKey = gameConfiguration.PreferredAbilityBindingKey;
+        RewardBindingKeys = gameConfiguration.RewardBindingKeys;
+        ShortName = gameConfiguration.ShortName;
     }
 
     /// <summary>

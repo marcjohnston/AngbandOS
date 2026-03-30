@@ -10,14 +10,15 @@ namespace AngbandOS.Core;
 internal sealed class RacePower : IGetKey, IScript, IToJson
 {
     private Game Game { get; }
-    public RacePower(Game game, RacePowerGameConfiguration racialPowerGameConfiguration)
+    public RacePower(Game game, RacePowerGameConfiguration gameConfiguration)
     {
         Game = game;
-        ScriptBindingKey = racialPowerGameConfiguration.ScriptBindingKey;
-        RaceBindingKey = racialPowerGameConfiguration.RaceBindingKey;
-        CharacterClassBindingKey = racialPowerGameConfiguration.CharacterClassBindingKey;
+        Key = gameConfiguration.GetKey;
+        ScriptBindingKey = gameConfiguration.ScriptBindingKey;
+        RaceBindingKey = gameConfiguration.RaceBindingKey;
+        CharacterClassBindingKey = gameConfiguration.CharacterClassBindingKey;
     }
-    public static string GetCompositeKey(Race race, CharacterClass? characterClass) => Game.GetCompositeKey(race.GetKey, characterClass?.GetKey, nameof(RacePower));
+    public static string GetCompositeKey(Race race, CharacterClass? characterClass) => GameConfiguration.GetCompositeKey(race.GetKey, characterClass?.GetKey, nameof(RacePowerGameConfiguration));
     public IScript Script { get; private set; }
     private string ScriptBindingKey { get; }
     public Race Race { get; private set; }
@@ -25,7 +26,8 @@ internal sealed class RacePower : IGetKey, IScript, IToJson
     public CharacterClass? CharacterClass { get; private set; }
     private string? CharacterClassBindingKey { get; } = null;
 
-    public string GetKey => Game.GetCompositeKey(RaceBindingKey, CharacterClassBindingKey, nameof(RacePower));
+    public string Key { get; }
+    public string GetKey => Key;
 
     public void Bind()
     {

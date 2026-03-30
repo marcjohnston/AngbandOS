@@ -2,9 +2,7 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ViewGameConfiguration
+public class ViewGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string[] WidgetNames { get; set; }
-
-    public virtual string? Key { get; set; } = null;
 }

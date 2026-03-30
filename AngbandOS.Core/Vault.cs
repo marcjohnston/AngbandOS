@@ -10,17 +10,17 @@ namespace AngbandOS.Core;
 internal sealed class Vault : IGetKey, IToJson
 {
     private Game Game;
-    public Vault(Game game, VaultGameConfiguration vaultGameConfiguration)
+    public Vault(Game game, VaultGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = vaultGameConfiguration.Key ?? vaultGameConfiguration.GetType().Name;
-        Color = vaultGameConfiguration.Color;
-        Name = vaultGameConfiguration.Name;
-        Category = vaultGameConfiguration.Category;
-        Height = vaultGameConfiguration.Height;
-        Rating = vaultGameConfiguration.Rating;
-        Text = vaultGameConfiguration.Text;
-        Width = vaultGameConfiguration.Width;
+        Key = gameConfiguration.GetKey;
+        Color = gameConfiguration.Color;
+        Name = gameConfiguration.Name;
+        Category = gameConfiguration.Category;
+        Height = gameConfiguration.Height;
+        Rating = gameConfiguration.Rating;
+        Text = gameConfiguration.Text;
+        Width = gameConfiguration.Width;
     }
 
     public string Key { get; }

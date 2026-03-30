@@ -8,10 +8,10 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUniversalScript, IToJson
 {
-    public SummonWeightedRandom(Game game, SummonWeightedRandomGameConfiguration summonWeightedRandomGameConfiguration) : base(game)
+    public SummonWeightedRandom(Game game, SummonWeightedRandomGameConfiguration gameConfiguration) : base(game)
     {
-        Key = summonWeightedRandomGameConfiguration.Key ?? summonWeightedRandomGameConfiguration.GetType().Name;
-        NameAndWeightBindings = summonWeightedRandomGameConfiguration.NameAndWeightBindings;
+        Key = gameConfiguration.GetKey;
+        NameAndWeightBindings = gameConfiguration.NameAndWeightBindings;
         LearnedDetails = LearnedDetails;
     }
 

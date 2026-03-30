@@ -7,9 +7,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ItemIdentificationGameConfiguration
+public class ItemIdentificationGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string Key { get; set; }
     public virtual string AttributeFilterBindingKey { get; set; }
     public virtual string[]? InterpolationExpressionAttributeNames { get; set; } = null;
     public virtual string[] EffectDescription { get; set; }

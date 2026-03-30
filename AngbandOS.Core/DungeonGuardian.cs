@@ -10,12 +10,12 @@ namespace AngbandOS.Core;
 internal sealed class DungeonGuardian : IGetKey, IToJson
 {
     private Game Game { get; }
-    public DungeonGuardian(Game game, DungeonGuardianGameConfiguration dungeonGuardianGameConfiguration)
+    public DungeonGuardian(Game game, DungeonGuardianGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = dungeonGuardianGameConfiguration.Key ?? dungeonGuardianGameConfiguration.GetType().Name;
-        MonsterRaceName = dungeonGuardianGameConfiguration.MonsterRaceName;
-        LevelFound = dungeonGuardianGameConfiguration.LevelFound;
+        Key = gameConfiguration.GetKey;
+        MonsterRaceName = gameConfiguration.MonsterRaceName;
+        LevelFound = gameConfiguration.LevelFound;
     }
 
     public string Key { get; }

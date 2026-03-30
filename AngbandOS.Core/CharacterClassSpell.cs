@@ -10,15 +10,16 @@ namespace AngbandOS.Core;
 internal sealed class CharacterClassSpell : IGetKey, IToJson
 {
     private Game Game { get; }
-    public CharacterClassSpell(Game game, CharacterClassSpellGameConfiguration classSpellGameConfiguration)
+    public CharacterClassSpell(Game game, CharacterClassSpellGameConfiguration gameConfiguration)
     {
         Game = game;
-        SpellName = classSpellGameConfiguration.SpellName;
-        CharacterClassName = classSpellGameConfiguration.CharacterClassName;
-        Level = classSpellGameConfiguration.Level;
-        ManaCost = classSpellGameConfiguration.ManaCost;
-        BaseFailure = classSpellGameConfiguration.BaseFailure;
-        FirstCastExperience = classSpellGameConfiguration.FirstCastExperience;
+        Key = gameConfiguration.GetKey;
+        SpellName = gameConfiguration.SpellName;
+        CharacterClassName = gameConfiguration.CharacterClassName;
+        Level = gameConfiguration.Level;
+        ManaCost = gameConfiguration.ManaCost;
+        BaseFailure = gameConfiguration.BaseFailure;
+        FirstCastExperience = gameConfiguration.FirstCastExperience;
     }
 
     /// <summary>
@@ -46,11 +47,13 @@ internal sealed class CharacterClassSpell : IGetKey, IToJson
     public int BaseFailure { get; }
     public int FirstCastExperience { get; }
 
-    public static string GetCompositeKey(CharacterClass t1, Spell t2) => Game.GetCompositeKey(t1.GetKey, t2.GetKey);
+    public static string GetCompositeKey(CharacterClass characterClass, Spell spell) => GameConfiguration.GetCompositeKey(characterClass.GetKey, spell.GetKey);
+    public string Key { get; }
+
     /// <summary>
     /// Returns the a composite key created from the character class name and spell name with a period between them.
     /// </summary>
-    public string GetKey => Game.GetCompositeKey(CharacterClassName, SpellName);
+    public string GetKey => Key;
 
     public void Bind() { }
 }

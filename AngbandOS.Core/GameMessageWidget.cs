@@ -9,14 +9,14 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class GameMessageWidget : Widget, IGetKey, IToJson
 {
-    public GameMessageWidget(Game game, GameMessageWidgetGameConfiguration gameMessageWidgetGameConfiguration) : base(game)
+    public GameMessageWidget(Game game, GameMessageWidgetGameConfiguration gameConfiguration) : base(game)
     {
-        Key = gameMessageWidgetGameConfiguration.Key ?? gameMessageWidgetGameConfiguration.GetType().Name;
-        Color = gameMessageWidgetGameConfiguration.Color;
-        X = gameMessageWidgetGameConfiguration.X;
-        Y = gameMessageWidgetGameConfiguration.Y;
-        Width = gameMessageWidgetGameConfiguration.Width;
-        MorePrompt = gameMessageWidgetGameConfiguration.MorePrompt;
+        Key = gameConfiguration.GetKey;
+        Color = gameConfiguration.Color;
+        X = gameConfiguration.X;
+        Y = gameConfiguration.Y;
+        Width = gameConfiguration.Width;
+        MorePrompt = gameConfiguration.MorePrompt;
     }
 
     public string Key { get; }

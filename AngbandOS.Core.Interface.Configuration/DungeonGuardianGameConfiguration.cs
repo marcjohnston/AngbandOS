@@ -7,10 +7,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class DungeonGuardianGameConfiguration
+public class DungeonGuardianGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     /// <summary>
     /// Returns the name of the race for the first quest monster.
     /// </summary>
@@ -21,13 +19,4 @@ public class DungeonGuardianGameConfiguration
     /// The level for the fixed quest.
     /// </summary>
     public virtual int LevelFound { get; set; }
-
-    //public bool IsValid()
-    //{
-    //    if (Key == null || MonsterRaceName == null || LevelFound == null)
-    //    {
-    //        return false;
-    //    }
-    //    return true;
-    //}
 }

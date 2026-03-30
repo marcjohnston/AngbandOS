@@ -7,9 +7,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class SyllableSetGameConfiguration
+public class SyllableSetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
     public virtual string[] BeginningSyllables { get; set; }
     public virtual string[] MiddleSyllables { get; set; }
     public virtual string[] EndingSyllables { get; set; }

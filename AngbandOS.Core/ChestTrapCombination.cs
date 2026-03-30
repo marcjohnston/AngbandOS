@@ -10,11 +10,11 @@ namespace AngbandOS.Core;
 internal sealed class ChestTrapCombination : IGetKey, IToJson
 {
     private Game Game;
-    public ChestTrapCombination(Game game, ChestTrapCombinationGameConfiguration chestTrapGameConfiguration)
+    public ChestTrapCombination(Game game, ChestTrapCombinationGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = chestTrapGameConfiguration.Key ?? chestTrapGameConfiguration.GetType().Name;
-        ChestTrapBindingKeys = chestTrapGameConfiguration.ChestTrapBindingKeys;
+        Key = gameConfiguration.GetKey;
+        ChestTrapBindingKeys = gameConfiguration.ChestTrapBindingKeys;
     }
 
     /// <summary>

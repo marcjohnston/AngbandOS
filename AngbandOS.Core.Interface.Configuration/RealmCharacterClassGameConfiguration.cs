@@ -7,8 +7,10 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class RealmCharacterClassGameConfiguration
+public class RealmCharacterClassGameConfiguration : CompositeSingletonGameConfiguration
 {
+    public sealed override string?[] CompositeKeys => new string?[] { RealmBindingKey, CharacterClassBindingKey }; // CONFIRMED
+
     public virtual string CharacterClassBindingKey { get; set; }
     public virtual string RealmBindingKey { get; set; }
     public virtual string? CharacterClassTitle { get; set; } = null;

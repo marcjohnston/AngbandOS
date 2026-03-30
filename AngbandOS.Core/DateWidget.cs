@@ -9,16 +9,16 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class DateWidget : Widget, IGetKey, IToJson
 {
-    public DateWidget(Game game, DateWidgetGameConfiguration dateWidgetGameConfiguration) : base(game)
+    public DateWidget(Game game, DateWidgetGameConfiguration gameConfiguration) : base(game)
     {
-        Key = dateWidgetGameConfiguration.Key ?? dateWidgetGameConfiguration.GetType().Name;
-        DateValueName = dateWidgetGameConfiguration.DateValueName;
-        Color = dateWidgetGameConfiguration.Color;
-        X = dateWidgetGameConfiguration.X;
-        Y = dateWidgetGameConfiguration.Y;
-        Width = dateWidgetGameConfiguration.Width;
-        JustificationName = dateWidgetGameConfiguration.JustificationName;
-        ChangeTrackerNames = dateWidgetGameConfiguration.ChangeTrackerNames;
+        Key = gameConfiguration.GetKey;
+        DateValueName = gameConfiguration.DateValueName;
+        Color = gameConfiguration.Color;
+        X = gameConfiguration.X;
+        Y = gameConfiguration.Y;
+        Width = gameConfiguration.Width;
+        JustificationName = gameConfiguration.JustificationName;
+        ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
     public string DateValueName { get; }
     public IDateAndTimeValue DateValue { get; private set; }

@@ -11,7 +11,7 @@ internal class AbilityScoreScript : EatOrQuaffUniversalScript, IGetKey, IToJson
 {
     public AbilityScoreScript(Game game, AbilityScoreScriptGameConfiguration gameConfiguration) : base(game)
     {
-        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
+        Key = gameConfiguration.GetKey;
         LearnedDetails = gameConfiguration.LearnedDetails;
         UsesItem = gameConfiguration.UsesItem;
         AbilityBindingKey = gameConfiguration.AbilityBindingKey;

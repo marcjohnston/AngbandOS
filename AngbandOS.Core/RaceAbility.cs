@@ -10,21 +10,23 @@ namespace AngbandOS.Core;
 internal sealed class RaceAbility : IGetKey, IToJson
 {
     private Game Game { get; }
-    public RaceAbility(Game game, RaceAbilityGameConfiguration raceAbilityGameConfiguration)
+    public RaceAbility(Game game, RaceAbilityGameConfiguration gameConfiguration)
     {
         Game = game;
-        Bonus = raceAbilityGameConfiguration.Bonus;
-        RaceBindingKey = raceAbilityGameConfiguration.RaceBindingKey;
-        AbilityBindingKey = raceAbilityGameConfiguration.AbilityBindingKey;
+        Key = gameConfiguration.GetKey;
+        Bonus = gameConfiguration.Bonus;
+        RaceBindingKey = gameConfiguration.RaceBindingKey;
+        AbilityBindingKey = gameConfiguration.AbilityBindingKey;
     }
     public int Bonus { get; } = 0;
     public Race Race { get; private set; }
     public Ability Ability { get; private set; }
     public string RaceBindingKey { get; }
     public string AbilityBindingKey { get; }
-    public string GetKey => Game.GetCompositeKey(RaceBindingKey, AbilityBindingKey);
+    public string Key { get; }
+    public string GetKey => Key;
 
-    public static string GetCompositeKey(Race race, Ability ability) => $"{race.Key}-{ability.Key}";
+    public static string GetCompositeKey(Race race, Ability ability) => GameConfiguration.GetCompositeKey(race.GetKey, ability.GetKey);
     public void Bind()
     {
         Race = Game.SingletonRepository.Get<Race>(RaceBindingKey);

@@ -2,13 +2,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class PluralGameConfiguration
+public class PluralGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    /// <summary>
-    /// Returns the capitalized singular version of the noun.
-    /// </summary>
-    public virtual string? Key { get; set; } = null;
-
     /// <summary>
     /// Returns the pluralized version of the key.
     /// the class.

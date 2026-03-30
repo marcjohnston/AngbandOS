@@ -7,10 +7,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ItemFactoryGameConfiguration
+public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     public virtual string? ItemEnhancementBindingKey { get; set; } = null;
 
     /// <summary>

@@ -12,13 +12,13 @@ namespace AngbandOS.Core;
 internal sealed class SyllableSet : IGetKey, IToJson
 {
     private Game Game { get; }
-    public SyllableSet(Game game, SyllableSetGameConfiguration syllableSetGameConfiguration)
+    public SyllableSet(Game game, SyllableSetGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = syllableSetGameConfiguration.Key ?? syllableSetGameConfiguration.GetType().Name;
-        BeginningSyllables = syllableSetGameConfiguration.BeginningSyllables;
-        MiddleSyllables = syllableSetGameConfiguration.MiddleSyllables;
-        EndingSyllables = syllableSetGameConfiguration.EndingSyllables;
+        Key = gameConfiguration.GetKey;
+        BeginningSyllables = gameConfiguration.BeginningSyllables;
+        MiddleSyllables = gameConfiguration.MiddleSyllables;
+        EndingSyllables = gameConfiguration.EndingSyllables;
     }
 
     public string[] BeginningSyllables { get; }

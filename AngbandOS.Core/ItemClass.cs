@@ -7,14 +7,14 @@ namespace AngbandOS.Core;
 internal sealed class ItemClass : IGetKey, IToJson
 {
     private Game Game { get; }
-    public ItemClass(Game game, ItemClassGameConfiguration itemClassGameConfiguration)
+    public ItemClass(Game game, ItemClassGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = itemClassGameConfiguration.Key ?? itemClassGameConfiguration.GetType().Name;
-        Name = itemClassGameConfiguration.Name;
-        AllowStomp = itemClassGameConfiguration.AllowStomp;
-        NumberOfFlavorsToGenerate = itemClassGameConfiguration.NumberOfFlavorsToGenerate;
-        ItemFlavorBindingKeys = itemClassGameConfiguration.ItemFlavorBindingKeys;
+        Key = gameConfiguration.GetKey;
+        Name = gameConfiguration.Name;
+        AllowStomp = gameConfiguration.AllowStomp;
+        NumberOfFlavorsToGenerate = gameConfiguration.NumberOfFlavorsToGenerate;
+        ItemFlavorBindingKeys = gameConfiguration.ItemFlavorBindingKeys;
     }
 
     /// <summary>

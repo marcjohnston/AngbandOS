@@ -1,7 +1,6 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class BoolAttributeGameConfiguration
+public class BoolAttributeGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
 }

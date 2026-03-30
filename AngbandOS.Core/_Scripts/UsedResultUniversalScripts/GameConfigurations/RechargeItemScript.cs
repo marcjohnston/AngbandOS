@@ -9,13 +9,13 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class RechargeItemScript : UsedResultUniversalScript, IGetKey, IToJson
 {
-    public RechargeItemScript(Game game, RechargeItemScriptGameConfiguration rechargeItemScriptGameConfiguration) : base(game)
+    public RechargeItemScript(Game game, RechargeItemScriptGameConfiguration gameConfiguration) : base(game)
     {
-        Key = rechargeItemScriptGameConfiguration.Key ?? rechargeItemScriptGameConfiguration.GetType().Name;
-        TurnsExpression = rechargeItemScriptGameConfiguration.TurnsExpression;
-        SelectItemMessage = rechargeItemScriptGameConfiguration.SelectItemMessage;
-        NonRechargeableItemMessage = rechargeItemScriptGameConfiguration.NonRechargeableItemMessage;
-        NothingRechargeableMessage = rechargeItemScriptGameConfiguration.NothingRechargeableMessage;
+        Key = gameConfiguration.GetKey;
+        TurnsExpression = gameConfiguration.TurnsExpression;
+        SelectItemMessage = gameConfiguration.SelectItemMessage;
+        NonRechargeableItemMessage = gameConfiguration.NonRechargeableItemMessage;
+        NothingRechargeableMessage = gameConfiguration.NothingRechargeableMessage;
     }
 
     /// <summary>

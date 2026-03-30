@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class GameMessageWidgetGameConfiguration
+public class GameMessageWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     /// <summary>
     /// Returns the color that the widget <see cref="Text"/> will be drawn.  Returns the color white by default.
@@ -23,7 +23,6 @@ public class GameMessageWidgetGameConfiguration
     /// </summary>
     public virtual int? Width { get; set; } = null;
 
-    public virtual string? Key { get; set; } = null;
     public virtual string MorePrompt { get; set; } = "-more-";
 }
 

@@ -7,9 +7,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class AttributeFilterGameConfiguration
+public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string Key { get; set; }
     public virtual (string AttributeKey, bool DesiredValue)[]? OrAttributeFilterBindings { get; set; } = null;
     public virtual (string AttributeKey, bool?[] DesiredValue)[]? BoolAttributeFilterBindings { get; set; } = null;
     public virtual (string AttributeKey, int? StartingValue, int? EndingValue)[]? SumAttributeFilterBindings { get; set; } = null;

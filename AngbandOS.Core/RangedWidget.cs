@@ -12,18 +12,18 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson
     private string _text;
     private ColorEnum _color;
 
-    public RangedWidget(Game game, RangedWidgetGameConfiguration rangedWidgetGameConfiguration) : base(game)
+    public RangedWidget(Game game, RangedWidgetGameConfiguration gameConfiguration) : base(game)
     {
-        Key = rangedWidgetGameConfiguration.Key ?? rangedWidgetGameConfiguration.GetType().Name;
-        Ranges = rangedWidgetGameConfiguration.Ranges;
-        IntValueName = rangedWidgetGameConfiguration.IntValueName;
-        DefaultText = rangedWidgetGameConfiguration.DefaultText;
-        DefaultColor = rangedWidgetGameConfiguration.DefaultColor;
-        X = rangedWidgetGameConfiguration.X;
-        Y = rangedWidgetGameConfiguration.Y;
-        Width = rangedWidgetGameConfiguration.Width;
-        JustificationName = rangedWidgetGameConfiguration.JustificationName;
-        ChangeTrackerNames = rangedWidgetGameConfiguration.ChangeTrackerNames;
+        Key = gameConfiguration.GetKey;
+        Ranges = gameConfiguration.Ranges;
+        IntValueName = gameConfiguration.IntValueName;
+        DefaultText = gameConfiguration.DefaultText;
+        DefaultColor = gameConfiguration.DefaultColor;
+        X = gameConfiguration.X;
+        Y = gameConfiguration.Y;
+        Width = gameConfiguration.Width;
+        JustificationName = gameConfiguration.JustificationName;
+        ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
         _text = DefaultText;
         _color = DefaultColor;
     }

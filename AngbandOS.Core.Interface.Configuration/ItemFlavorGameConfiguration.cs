@@ -8,9 +8,8 @@ namespace AngbandOS.Core.Interface.Configuration;
 
 /// <entity-name-property-name>Name</entity-name-property-name>
 [Serializable]
-public class ItemFlavorGameConfiguration
+public class ItemFlavorGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
     /// <foreign-collection-name>Symbols</foreign-collection-name>
     public virtual string SymbolName { get; set; }
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;

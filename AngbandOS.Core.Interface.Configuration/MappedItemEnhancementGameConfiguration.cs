@@ -2,10 +2,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class MappedItemEnhancementGameConfiguration
+public class MappedItemEnhancementGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     /// <summary>
     /// Returns the fixed artifacts for the map entry; or null, for all fixed artifacts.
     /// </summary>

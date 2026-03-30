@@ -4,16 +4,16 @@ namespace AngbandOS.Core.MappedSpellScripts;
 internal sealed class MappedSpellScript : IGetKey, IToJson
 {
     private Game Game { get; }
-    public MappedSpellScript(Game game, MappedSpellScriptGameConfiguration mappedSpellScriptGameConfiguration)
+    public MappedSpellScript(Game game, MappedSpellScriptGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = mappedSpellScriptGameConfiguration.Key ?? mappedSpellScriptGameConfiguration.GetType().Name;
-        Success = mappedSpellScriptGameConfiguration.Success;
-        RealmBindingKey = mappedSpellScriptGameConfiguration.RealmBindingKey;
-        SpellBindingKey = mappedSpellScriptGameConfiguration.SpellBindingKey;
-        CharacterClassBindingKey = mappedSpellScriptGameConfiguration.CharacterClassBindingKey;
-        CastSpellScriptBindingKeys = mappedSpellScriptGameConfiguration.CastSpellScriptBindingKeys;
-        MinimumExperienceLevel = mappedSpellScriptGameConfiguration.MinimumExperienceLevel;
+        Key = gameConfiguration.GetKey;
+        Success = gameConfiguration.Success;
+        RealmBindingKey = gameConfiguration.RealmBindingKey;
+        SpellBindingKey = gameConfiguration.SpellBindingKey;
+        CharacterClassBindingKey = gameConfiguration.CharacterClassBindingKey;
+        CastSpellScriptBindingKeys = gameConfiguration.CastSpellScriptBindingKeys;
+        MinimumExperienceLevel = gameConfiguration.MinimumExperienceLevel;
     }
 
     public string Key { get; }

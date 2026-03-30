@@ -9,10 +9,10 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey, IToJson
 {
-    public ItemFactoryWeightedRandom(Game game, ItemFactoryWeightedRandomGameConfiguration itemFactoryWeightedRandomGameConfiguration) : base(game)
+    public ItemFactoryWeightedRandom(Game game, ItemFactoryWeightedRandomGameConfiguration gameConfiguration) : base(game)
     {
-        Key = itemFactoryWeightedRandomGameConfiguration.Key ?? itemFactoryWeightedRandomGameConfiguration.GetType().Name;
-        NameAndWeightBindings = itemFactoryWeightedRandomGameConfiguration.NameAndWeightBindings;
+        Key = gameConfiguration.GetKey;
+        NameAndWeightBindings = gameConfiguration.NameAndWeightBindings;
     }
 
     /// <summary>

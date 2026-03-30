@@ -10,19 +10,19 @@ namespace AngbandOS.Core;
 internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson
 {
     private Game Game { get; }
-    public SummonScript(Game game, SummonScriptGameConfiguration summonScriptGameConfiguration)
+    public SummonScript(Game game, SummonScriptGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = summonScriptGameConfiguration.Key ?? summonScriptGameConfiguration.GetType().Name;
-        Pet = summonScriptGameConfiguration.Pet;
-        GroupBooleanExpression = summonScriptGameConfiguration.GroupBooleanExpression;
-        MonsterFilterBindingKey = summonScriptGameConfiguration.MonsterFilterBindingKey;
-        LevelRollExpression = summonScriptGameConfiguration.LevelRollExpression;
-        PreMessages = summonScriptGameConfiguration.PreMessages;
-        SuccessMessages = summonScriptGameConfiguration.SuccessMessages;
-        FailureMessages = summonScriptGameConfiguration.FailureMessages;
-        LearnedDetails = summonScriptGameConfiguration.LearnedDetails;
-        Used = summonScriptGameConfiguration.Used;
+        Key = gameConfiguration.GetKey;
+        Pet = gameConfiguration.Pet;
+        GroupBooleanExpression = gameConfiguration.GroupBooleanExpression;
+        MonsterFilterBindingKey = gameConfiguration.MonsterFilterBindingKey;
+        LevelRollExpression = gameConfiguration.LevelRollExpression;
+        PreMessages = gameConfiguration.PreMessages;
+        SuccessMessages = gameConfiguration.SuccessMessages;
+        FailureMessages = gameConfiguration.FailureMessages;
+        LearnedDetails = gameConfiguration.LearnedDetails;
+        Used = gameConfiguration.Used;
     }
 
     /// <summary>

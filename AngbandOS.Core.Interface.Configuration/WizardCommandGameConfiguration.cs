@@ -7,22 +7,12 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class WizardCommandGameConfiguration
+public class WizardCommandGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
     public virtual char KeyChar { get; set; }
     public virtual bool IsEnabled { get; set; } = true;
     public virtual string? HelpGroupName { get; set; } = null;
     public virtual string HelpDescription { get; set; } = "";
     public virtual string? ExecuteScriptName { get; set; } = null;
-
-    //public bool IsValid()
-    //{
-    //    if (Key == null || KeyChar == null || IsEnabled == null || HelpDescription == null)
-    //    {
-    //        return false;
-    //    }
-    //    return true;
-    //}
 }
 

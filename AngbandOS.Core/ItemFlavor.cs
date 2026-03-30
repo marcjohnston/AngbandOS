@@ -12,13 +12,13 @@ namespace AngbandOS.Core.ItemFlavors;
 [Serializable]
 internal sealed class ItemFlavor : Flavor, IGetKey, IToJson
 {
-    public ItemFlavor(Game game, ItemFlavorGameConfiguration readableFlavorGameConfiguration) : base(game)
+    public ItemFlavor(Game game, ItemFlavorGameConfiguration gameConfiguration) : base(game)
     {
-        Key = readableFlavorGameConfiguration.Key ?? readableFlavorGameConfiguration.GetType().Name;
-        Name = readableFlavorGameConfiguration.Name;
-        SymbolName = readableFlavorGameConfiguration.SymbolName;
-        Color = readableFlavorGameConfiguration.Color;
-        CanBeAssigned = readableFlavorGameConfiguration.CanBeAssigned;
+        Key = gameConfiguration.GetKey;
+        Name = gameConfiguration.Name;
+        SymbolName = gameConfiguration.SymbolName;
+        Color = gameConfiguration.Color;
+        CanBeAssigned = gameConfiguration.CanBeAssigned;
     }
 
     /// <summary>

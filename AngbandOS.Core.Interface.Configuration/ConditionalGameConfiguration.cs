@@ -7,9 +7,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ConditionalGameConfiguration
+public class ConditionalGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string Key { get; set; }
     public virtual (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames { get; set; }
 }
 

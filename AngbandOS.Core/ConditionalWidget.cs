@@ -9,13 +9,13 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
 {
-    public ConditionalWidget(Game game, ConditionalWidgetGameConfiguration conditionalWidgetGameConfiguration) : base(game)
+    public ConditionalWidget(Game game, ConditionalWidgetGameConfiguration gameConfiguration) : base(game)
     {
-        Key = conditionalWidgetGameConfiguration.Key ?? conditionalWidgetGameConfiguration.GetType().Name;
-        ConditionalKey = conditionalWidgetGameConfiguration.ConditionalKey;
-        TrueWidgetNames = conditionalWidgetGameConfiguration.TrueWidgetNames;
-        FalseWidgetNames = conditionalWidgetGameConfiguration.FalseWidgetNames;
-        ChangeTrackerNames = conditionalWidgetGameConfiguration.ChangeTrackerNames;
+        Key = gameConfiguration.GetKey;
+        ConditionalKey = gameConfiguration.ConditionalKey;
+        TrueWidgetNames = gameConfiguration.TrueWidgetNames;
+        FalseWidgetNames = gameConfiguration.FalseWidgetNames;
+        ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
     /// <summary>

@@ -9,16 +9,16 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class TimeWidget : Widget, IGetKey, IToJson
 {
-    public TimeWidget(Game game, TimeWidgetGameConfiguration timeWidgetGameConfiguration) : base(game)
+    public TimeWidget(Game game, TimeWidgetGameConfiguration gameConfiguration) : base(game)
     {
-        Key = timeWidgetGameConfiguration.Key ?? timeWidgetGameConfiguration.GetType().Name;
-        DateAndTimeValueName = timeWidgetGameConfiguration.DateAndTimeValueName;
-        Color = timeWidgetGameConfiguration.Color;
-        X = timeWidgetGameConfiguration.X;
-        Y = timeWidgetGameConfiguration.Y;
-        Width = timeWidgetGameConfiguration.Width;
-        JustificationName = timeWidgetGameConfiguration.JustificationName;
-        ChangeTrackerNames = timeWidgetGameConfiguration.ChangeTrackerNames;
+        Key = gameConfiguration.GetKey;
+        DateAndTimeValueName = gameConfiguration.DateAndTimeValueName;
+        Color = gameConfiguration.Color;
+        X = gameConfiguration.X;
+        Y = gameConfiguration.Y;
+        Width = gameConfiguration.Width;
+        JustificationName = gameConfiguration.JustificationName;
+        ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
     public string DateAndTimeValueName { get; }

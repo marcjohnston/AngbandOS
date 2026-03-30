@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class RangedWidgetGameConfiguration
+public class RangedWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     /// <summary>
     /// Returns an array of tuples that specify the text and color to render for a range of values.  The <paramref name="startValue"/> element specifies the smallest (or start) value of the range.  Ranges must be sorted in
@@ -47,7 +47,6 @@ public class RangedWidgetGameConfiguration
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
     public virtual string[]? ChangeTrackerNames { get; set; }
-    public virtual string? Key { get; set; } = null;
 }
 
 

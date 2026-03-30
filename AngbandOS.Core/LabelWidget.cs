@@ -13,16 +13,16 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class LabelWidget : Widget, IGetKey, IToJson
 {
-    public LabelWidget(Game game, LabelWidgetGameConfiguration textWidgetGameConfiguration) : base(game)
+    public LabelWidget(Game game, LabelWidgetGameConfiguration gameConfiguration) : base(game)
     {
-        Key = textWidgetGameConfiguration.Key ?? textWidgetGameConfiguration.GetType().Name;
-        Text = textWidgetGameConfiguration.Text;
-        Color = textWidgetGameConfiguration.Color;
-        X = textWidgetGameConfiguration.X;
-        Y = textWidgetGameConfiguration.Y;
-        Width = textWidgetGameConfiguration.Width;
-        JustificationName = textWidgetGameConfiguration.JustificationName;
-        ChangeTrackerNames = textWidgetGameConfiguration.ChangeTrackerNames;
+        Key = gameConfiguration.GetKey;
+        Text = gameConfiguration.Text;
+        Color = gameConfiguration.Color;
+        X = gameConfiguration.X;
+        Y = gameConfiguration.Y;
+        Width = gameConfiguration.Width;
+        JustificationName = gameConfiguration.JustificationName;
+        ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
     /// <summary>

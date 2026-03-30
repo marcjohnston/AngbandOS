@@ -1,12 +1,9 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ItemFilterGameConfiguration
+public class ItemFilterGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string Key { get; set; }
-
     public virtual string? AttributeFilterBindingKey { get; set; } = null;
-
     public virtual string[]? AnyMatchingItemClassNames { get; set; } = null;
     public virtual string[]? AllNonMatchingItemClassNames { get; set; } = null;
     public virtual string[]? AnyMatchingItemFactoryNames { get; set; } = null;
@@ -25,9 +22,7 @@ public class ItemFilterGameConfiguration
     public virtual bool? IsTooHeavyToWield { get; set; } = null;
     public virtual bool? IsUsableSpellBook { get; set; } = null;
     public virtual bool? ArtifactBiasCanSlay { get; set; } = null;
-
     public virtual bool? ArtifactBias { get; set; } = null;
-
     public virtual bool? IsCursed { get; set; } = null;
     public virtual bool? HeavyCurse { get; set; } = null;
 }

@@ -13,18 +13,18 @@ internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson
     private string _value;
     private ColorEnum _color;
 
-    public MaxRangedWidget(Game game, MaxRangedWidgetGameConfiguration maxRangedWidgetGameConfiguration) : base(game)
+    public MaxRangedWidget(Game game, MaxRangedWidgetGameConfiguration gameConfiguration) : base(game)
     {
-        Key = maxRangedWidgetGameConfiguration.Key ?? maxRangedWidgetGameConfiguration.GetType().Name;
-        Ranges = maxRangedWidgetGameConfiguration.Ranges;
-        DefaultColor = maxRangedWidgetGameConfiguration.DefaultColor;
-        MaxIntValueName = maxRangedWidgetGameConfiguration.MaxIntValueName;
-        IntValueName = maxRangedWidgetGameConfiguration.IntValueName;
-        X = maxRangedWidgetGameConfiguration.X;
-        Y = maxRangedWidgetGameConfiguration.Y;
-        Width = maxRangedWidgetGameConfiguration.Width;
-        JustificationName = maxRangedWidgetGameConfiguration.JustificationName;
-        ChangeTrackerNames = maxRangedWidgetGameConfiguration.ChangeTrackerNames;
+        Key = gameConfiguration.GetKey;
+        Ranges = gameConfiguration.Ranges;
+        DefaultColor = gameConfiguration.DefaultColor;
+        MaxIntValueName = gameConfiguration.MaxIntValueName;
+        IntValueName = gameConfiguration.IntValueName;
+        X = gameConfiguration.X;
+        Y = gameConfiguration.Y;
+        Width = gameConfiguration.Width;
+        JustificationName = gameConfiguration.JustificationName;
+        ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
         _color = DefaultColor;
     }
 

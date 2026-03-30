@@ -17,19 +17,19 @@ internal sealed class Dungeon : IGetKey, IToJson
     /// <summary>
     /// Create the dungeon
     /// </summary>
-    public Dungeon(Game game, DungeonGameConfiguration dungeonGameConfiguration)
+    public Dungeon(Game game, DungeonGameConfiguration gameConfiguration)
     {
         Game = game;
         Offset = BaseOffset;
-        Key = dungeonGameConfiguration.Key ?? dungeonGameConfiguration.GetType().Name;
-        BaseOffset = dungeonGameConfiguration.BaseOffset;
-        BiasMonsterFilterName = dungeonGameConfiguration.BiasMonsterFilterName;
-        DungeonGuardianNames = dungeonGameConfiguration.DungeonGuardianNames;
-        MapSymbol = dungeonGameConfiguration.MapSymbol;
-        MaxLevel = dungeonGameConfiguration.MaxLevel;
-        Name = dungeonGameConfiguration.Name;
-        Shortname = dungeonGameConfiguration.Shortname;
-        Tower = dungeonGameConfiguration.Tower;
+        Key = gameConfiguration.GetKey;
+        BaseOffset = gameConfiguration.BaseOffset;
+        BiasMonsterFilterName = gameConfiguration.BiasMonsterFilterName;
+        DungeonGuardianNames = gameConfiguration.DungeonGuardianNames;
+        MapSymbol = gameConfiguration.MapSymbol;
+        MaxLevel = gameConfiguration.MaxLevel;
+        Name = gameConfiguration.Name;
+        Shortname = gameConfiguration.Shortname;
+        Tower = gameConfiguration.Tower;
     }
 
     #region Api Methods

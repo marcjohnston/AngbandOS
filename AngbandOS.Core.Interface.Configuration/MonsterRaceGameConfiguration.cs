@@ -13,10 +13,8 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// 102 Properties
 /// </remarks>
 [Serializable]
-public class MonsterRaceGameConfiguration
+public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     /// <foreign-collection-name>MonsterSpells</foreign-collection-name>
     public virtual string[]? SpellNames { get; set; } = null;
 

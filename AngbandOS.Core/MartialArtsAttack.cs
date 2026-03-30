@@ -11,17 +11,17 @@ internal sealed class MartialArtsAttack : IGetKey, IToJson
 {
     private Game Game { get; }
 
-    public MartialArtsAttack(Game game, MartialArtsAttackGameConfiguration martialArtsAttackGameConfiguration)
+    public MartialArtsAttack(Game game, MartialArtsAttackGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = martialArtsAttackGameConfiguration.Key ?? martialArtsAttackGameConfiguration.GetType().Name;
-        Chance = martialArtsAttackGameConfiguration.Chance;
-        Dd = martialArtsAttackGameConfiguration.Dd;
-        Desc = martialArtsAttackGameConfiguration.Desc;
-        Ds = martialArtsAttackGameConfiguration.Ds;
-        MartialArtsEffectBindingKey = martialArtsAttackGameConfiguration.MartialArtsEffectBindingKey;
-        MinLevel = martialArtsAttackGameConfiguration.MinLevel;
-        IsDefault = martialArtsAttackGameConfiguration.IsDefault;
+        Key = gameConfiguration.GetKey;
+        Chance = gameConfiguration.Chance;
+        Dd = gameConfiguration.Dd;
+        Desc = gameConfiguration.Desc;
+        Ds = gameConfiguration.Ds;
+        MartialArtsEffectBindingKey = gameConfiguration.MartialArtsEffectBindingKey;
+        MinLevel = gameConfiguration.MinLevel;
+        IsDefault = gameConfiguration.IsDefault;
     }
 
     /// <summary>

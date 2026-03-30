@@ -7,8 +7,10 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class RangedWeaponBonusGameConfiguration
+public class RangedWeaponBonusGameConfiguration : CompositeSingletonGameConfiguration
 {
+    public sealed override string?[] CompositeKeys => new string?[] { CharacterClassBindingKey, ItemClassBindingKey, ExperienceLevel == null ? null : ExperienceLevel.Value.ToString() }; // CONFIRMED
+
     /// <foreign-collection-name>Spells</foreign-collection-name>
     public virtual string? ItemClassBindingKey { get; set; } = null;
     /// <foreign-collection-name>CharacterClasses</foreign-collection-name>

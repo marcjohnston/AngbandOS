@@ -1,10 +1,8 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ProjectileScriptGameConfiguration
+public class ProjectileScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     /// <summary>
     /// Returns details to reveal to the player when learned; or null to return a default duration "dam {Damage}".
     /// </summary>

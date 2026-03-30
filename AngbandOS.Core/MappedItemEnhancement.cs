@@ -9,7 +9,7 @@ internal sealed class MappedItemEnhancement : IGetKey, IToJson
     public MappedItemEnhancement(Game game, MappedItemEnhancementGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
+        Key = gameConfiguration.GetKey;
         FixedArtifactBindingKeys = gameConfiguration.FixedArtifactBindingKeys;
         CharacterClassBindingKeys = gameConfiguration.CharacterClassBindingKeys;
         ItemEnhancementBindingKeys = gameConfiguration.ItemEnhancementBindingKeys;

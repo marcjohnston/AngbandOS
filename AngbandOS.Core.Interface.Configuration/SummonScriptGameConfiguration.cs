@@ -1,10 +1,8 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class SummonScriptGameConfiguration
+public class SummonScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     /// <summary>
     /// Returns true, to summon a friendly monster (a.k.a pet); false, otherwise.  Returns false, by default.
     /// </summary>

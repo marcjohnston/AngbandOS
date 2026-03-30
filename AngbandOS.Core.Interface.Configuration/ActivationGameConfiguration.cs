@@ -8,9 +8,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ActivationGameConfiguration
+public class ActivationGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string Key { get; set; }
     public virtual string Name { get; set; }
     public virtual string? PreActivationMessage { get; set; } = null;
     public virtual int Value { get; set; }

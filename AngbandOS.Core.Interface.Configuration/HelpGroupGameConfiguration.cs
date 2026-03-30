@@ -7,20 +7,9 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class HelpGroupGameConfiguration
+public class HelpGroupGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     public virtual int SortIndex { get; set; }
 
     public virtual string Title { get; set; }
-
-    //public bool IsValid()
-    //{
-    //    if (Key == null || SortIndex == null || Title == null)
-    //    {
-    //        return false;
-    //    }
-    //    return true;
-    //}
 }

@@ -12,12 +12,12 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class MapWidget : Widget, IGetKey, IToJson
 {
-    public MapWidget(Game game, MapWidgetGameConfiguration mapWidgetGameConfiguration) : base(game)
+    public MapWidget(Game game, MapWidgetGameConfiguration gameConfiguration) : base(game)
     {
-        Key = mapWidgetGameConfiguration.Key ?? mapWidgetGameConfiguration.GetType().Name;
-        X = mapWidgetGameConfiguration.X;
-        Y = mapWidgetGameConfiguration.Y;
-        ChangeTrackerNames = mapWidgetGameConfiguration.ChangeTrackerNames;
+        Key = gameConfiguration.GetKey;
+        X = gameConfiguration.X;
+        Y = gameConfiguration.Y;
+        ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
     /// <summary>

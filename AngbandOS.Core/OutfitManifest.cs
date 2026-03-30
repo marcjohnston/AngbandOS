@@ -10,21 +10,24 @@ namespace AngbandOS.Core;
 internal class OutfitManifest : IGetKey, IToJson
 {
     private Game Game { get; }
-    public OutfitManifest(Game game, OutfitManifestGameConfiguration characterClassAndRaceOutfitGameConfiguration)
+    public OutfitManifest(Game game, OutfitManifestGameConfiguration gameConfiguration)
     {
         Game = game;
-        CharacterClassBindingKey = characterClassAndRaceOutfitGameConfiguration.CharacterClassBindingKey;
-        RaceBindingKey = characterClassAndRaceOutfitGameConfiguration.RaceBindingKey;
-        RealmBindingKey = characterClassAndRaceOutfitGameConfiguration.RealmBindingKey;
-        ItemFactoryAndEnhancementsBindings = characterClassAndRaceOutfitGameConfiguration.ItemFactoryAndEnhancementsBindings;
+        Key = gameConfiguration.GetKey;
+        CharacterClassBindingKey = gameConfiguration.CharacterClassBindingKey;
+        RaceBindingKey = gameConfiguration.RaceBindingKey;
+        RealmBindingKey = gameConfiguration.RealmBindingKey;
+        ItemFactoryAndEnhancementsBindings = gameConfiguration.ItemFactoryAndEnhancementsBindings;
     }
-    
+    public static string GetCompositeKey(CharacterClass characterClass, Race race, Realm realm) => GameConfiguration.GetCompositeKey(characterClass.GetKey, race.GetKey, realm.GetKey);
+
     public (string[] MatchValues, bool IsEqual)? CharacterClassBindingKey { get; private set; }
     public (string[] MatchValues, bool IsEqual)? RaceBindingKey { get; private set; }
     public (string[] MatchValues, bool IsEqual)? RealmBindingKey { get; private set; }
     private (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKeys, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings { get; set; }
     public (ItemFactory, ItemEnhancement[]?, Expression, bool, bool)[] ItemFactoryAndEnhancements { get; private set; }
-    public string GetKey => Game.GetCompositeKey(CharacterClassBindingKey, RaceBindingKey, RealmBindingKey);
+    public string Key { get; }
+    public string GetKey => Key;
 
     public void Bind()
     {

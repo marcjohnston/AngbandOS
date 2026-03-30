@@ -4,13 +4,13 @@
 internal sealed class Symbol : IGetKey, IToJson
 {
     private Game Game { get; }
-    public Symbol(Game game, SymbolGameConfiguration symbolGameConfiguration) 
+    public Symbol(Game game, SymbolGameConfiguration gameConfiguration) 
     {
         Game = game;
-        Character = symbolGameConfiguration.Character;
-        QueryCharacter = symbolGameConfiguration.QueryCharacter;
-        Name = symbolGameConfiguration.Name;
-        Key = symbolGameConfiguration.Key ?? symbolGameConfiguration.GetType().Name;
+        Key = gameConfiguration.GetKey;
+        Character = gameConfiguration.Character;
+        QueryCharacter = gameConfiguration.QueryCharacter;
+        Name = gameConfiguration.Name;
     }
     public char Character { get; }
 

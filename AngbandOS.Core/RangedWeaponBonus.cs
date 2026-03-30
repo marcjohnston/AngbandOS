@@ -10,20 +10,21 @@ namespace AngbandOS.Core;
 internal class RangedWeaponBonus : IGetKey, IToJson
 {
     private Game Game { get; }
-    public RangedWeaponBonus(Game game, RangedWeaponBonusGameConfiguration missileAttacksPerRoundGameConfiguration)
+    public RangedWeaponBonus(Game game, RangedWeaponBonusGameConfiguration gameConfiguration)
     {
         Game = game;
-        CharacterClassBindingKey = missileAttacksPerRoundGameConfiguration.CharacterClassBindingKey;
-        ItemClassBindingKey = missileAttacksPerRoundGameConfiguration.ItemClassBindingKey;
-        ExperienceLevel = missileAttacksPerRoundGameConfiguration.ExperienceLevel;
-        BonusMissileAttacksPerRound = missileAttacksPerRoundGameConfiguration.BonusMissileAttacksPerRound;
+        Key = gameConfiguration.GetKey;
+        CharacterClassBindingKey = gameConfiguration.CharacterClassBindingKey;
+        ItemClassBindingKey = gameConfiguration.ItemClassBindingKey;
+        ExperienceLevel = gameConfiguration.ExperienceLevel;
+        BonusMissileAttacksPerRound = gameConfiguration.BonusMissileAttacksPerRound;
     }
     public string? CharacterClassBindingKey { get; private set; } = null;
     public string? ItemClassBindingKey { get; private set; } = null;
     public int? ExperienceLevel { get; private set; } = null;
     public int BonusMissileAttacksPerRound { get; private set; } = 0;
-
-    public string GetKey => Game.GetCompositeKey(CharacterClassBindingKey, ItemClassBindingKey, ExperienceLevel == null ? null : ExperienceLevel.Value.ToString());
+    public string Key { get; }
+    public string GetKey => Key;
 
     public void Bind() { }
     public string ToJson()

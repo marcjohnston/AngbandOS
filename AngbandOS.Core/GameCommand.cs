@@ -10,14 +10,14 @@ namespace AngbandOS.Core;
 internal sealed class GameCommand : IGetKey, IToJson
 {
     private Game Game { get; }
-    public GameCommand(Game game, GameCommandGameConfiguration gameCommandGameConfiguration)
+    public GameCommand(Game game, GameCommandGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = gameCommandGameConfiguration.Key ?? gameCommandGameConfiguration.GetType().Name;
-        KeyChar = gameCommandGameConfiguration.KeyChar;
-        IsEnabled = gameCommandGameConfiguration.IsEnabled;
-        Repeat = gameCommandGameConfiguration.Repeat;
-        ExecuteScriptName = gameCommandGameConfiguration.ExecuteScriptName;
+        Key = gameConfiguration.GetKey;
+        KeyChar = gameConfiguration.KeyChar;
+        IsEnabled = gameConfiguration.IsEnabled;
+        Repeat = gameConfiguration.Repeat;
+        ExecuteScriptName = gameConfiguration.ExecuteScriptName;
     }
 
     public string Key { get; } 

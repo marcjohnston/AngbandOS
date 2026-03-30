@@ -10,13 +10,14 @@ namespace AngbandOS.Core;
 internal sealed class RealmCharacterClass : IGetKey, IToJson
 {
     private Game Game { get; }
-    public RealmCharacterClass(Game game, RealmCharacterClassGameConfiguration realmCharacterClassGameConfiguration)
+    public RealmCharacterClass(Game game, RealmCharacterClassGameConfiguration gameConfiguration)
     {
         Game = game;
-        CharacterClassBindingKey = realmCharacterClassGameConfiguration.CharacterClassBindingKey;
-        RealmBindingKey = realmCharacterClassGameConfiguration.RealmBindingKey;
-        CharacterClassTitle = realmCharacterClassGameConfiguration.CharacterClassTitle;
-        DeityBindingKey = realmCharacterClassGameConfiguration.DeityBindingKey;
+        Key = gameConfiguration.GetKey;
+        CharacterClassBindingKey = gameConfiguration.CharacterClassBindingKey;
+        RealmBindingKey = gameConfiguration.RealmBindingKey;
+        CharacterClassTitle = gameConfiguration.CharacterClassTitle;
+        DeityBindingKey = gameConfiguration.DeityBindingKey;
     }
 
     /// <summary>
@@ -34,8 +35,8 @@ internal sealed class RealmCharacterClass : IGetKey, IToJson
         };
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
-
-    public string GetKey => $"{RealmBindingKey}-{CharacterClassBindingKey}";
+    public string Key { get; }
+    public string GetKey => Key;
 
     public void Bind()
     {
@@ -44,7 +45,7 @@ internal sealed class RealmCharacterClass : IGetKey, IToJson
         Deity = Game.SingletonRepository.GetNullable<God>(DeityBindingKey);
     }
 
-    public static string GetCompositeKey(Realm t1, CharacterClass t2) => $"{t1.GetKey}-{t2.GetKey}";
+    public static string GetCompositeKey(Realm realm, CharacterClass characterClass) => GameConfiguration.GetCompositeKey(realm.GetKey, characterClass.GetKey);
     public God? Deity { get; private set; }
 
     public CharacterClass CharacterClass { get; private set; }

@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class TileGameConfiguration
+public class TileGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual bool IsEarthquakeResistant { get; set; } = false;
     public virtual bool IsPathBase { get; set; } = false;
@@ -10,8 +10,6 @@ public class TileGameConfiguration
     public virtual string? OnJammedTileName { get; set; } = null;
     public virtual string? VisibleTreasureForTileName { get; set; } = null;
     public virtual bool IsYellowSignSigil { get; set; } = false;
-
-    public virtual string? Key { get; set; } = null;
 
     public virtual string? StepOnScriptName { get; set; }
 

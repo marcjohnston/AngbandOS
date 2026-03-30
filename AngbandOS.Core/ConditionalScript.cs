@@ -16,7 +16,7 @@ internal class ConditionalScript : IGetKey, IScript, IToJson
     public ConditionalScript(Game game, ConditionalScriptGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
+        Key = gameConfiguration.GetKey;
         ConditionalKey = gameConfiguration.ConditionalKey;
         TrueScriptBindingKeys = gameConfiguration.TrueScriptBindingKeys;
         FalseScriptBindingKeys = gameConfiguration.FalseScriptBindingKeys;

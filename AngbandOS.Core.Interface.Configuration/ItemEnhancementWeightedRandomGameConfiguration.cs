@@ -4,9 +4,7 @@
 /// Represents a singleton for a weighted random of <see cref="ItemEnhancement"/> objects.
 /// </summary>
 [Serializable]
-public class ItemEnhancementWeightedRandomGameConfiguration
+public class ItemEnhancementWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     public virtual (string?, int)[] NameAndWeightBindings { get; set; }
 }

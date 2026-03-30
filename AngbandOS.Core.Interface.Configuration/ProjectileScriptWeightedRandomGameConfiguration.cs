@@ -2,9 +2,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ProjectileScriptWeightedRandomGameConfiguration
+public class ProjectileScriptWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
     public virtual (string, int)[] NameAndWeightBindings { get; set; }
     public virtual string LearnedDetails { get; set; } = "";
 

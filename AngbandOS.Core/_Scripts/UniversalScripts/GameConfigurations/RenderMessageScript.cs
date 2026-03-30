@@ -10,12 +10,12 @@ namespace AngbandOS.Core;
 
 internal sealed class RenderMessageScript : UniversalScript, IGetKey, IToJson
 {
-    public RenderMessageScript(Game game, RenderMessageScriptGameConfiguration renderMessageScriptGameConfiguration) : base(game)
+    public RenderMessageScript(Game game, RenderMessageScriptGameConfiguration gameConfiguration) : base(game)
     {
-        Key = renderMessageScriptGameConfiguration.Key ?? renderMessageScriptGameConfiguration.GetType().Name;
-        Message = renderMessageScriptGameConfiguration.Message;
-        UsesItem = renderMessageScriptGameConfiguration.UsesItem;
-        IdentifiesItem = renderMessageScriptGameConfiguration.IdentifiesItem;
+        Key = gameConfiguration.GetKey;
+        Message = gameConfiguration.Message;
+        UsesItem = gameConfiguration.UsesItem;
+        IdentifiesItem = gameConfiguration.IdentifiesItem;
     }
 
     /// <summary>

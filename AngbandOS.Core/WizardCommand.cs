@@ -10,15 +10,15 @@ namespace AngbandOS.Core;
 internal sealed class WizardCommand : IHelpCommand, IGetKey, IToJson
 {
     private Game Game { get; }
-    public WizardCommand(Game game, WizardCommandGameConfiguration wizardCommandGameConfiguration)
+    public WizardCommand(Game game, WizardCommandGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = wizardCommandGameConfiguration.Key ?? wizardCommandGameConfiguration.GetType().Name;
-        KeyChar = wizardCommandGameConfiguration.KeyChar;
-        IsEnabled = wizardCommandGameConfiguration.IsEnabled;
-        ExecuteScriptName = wizardCommandGameConfiguration.ExecuteScriptName;
-        HelpDescription = wizardCommandGameConfiguration.HelpDescription;
-        HelpGroupName = wizardCommandGameConfiguration.HelpGroupName;
+        Key = gameConfiguration.GetKey;
+        KeyChar = gameConfiguration.KeyChar;
+        IsEnabled = gameConfiguration.IsEnabled;
+        ExecuteScriptName = gameConfiguration.ExecuteScriptName;
+        HelpDescription = gameConfiguration.HelpDescription;
+        HelpGroupName = gameConfiguration.HelpGroupName;
     }
 
     /// <summary>

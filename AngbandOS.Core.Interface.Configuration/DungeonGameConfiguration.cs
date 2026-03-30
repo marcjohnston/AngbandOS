@@ -7,10 +7,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class DungeonGameConfiguration
+public class DungeonGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     /// <summary>
     /// Returns base offset (difficulty) for the dungeon.
     /// </summary>

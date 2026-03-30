@@ -10,15 +10,15 @@ namespace AngbandOS.Core;
 internal sealed class Realm : IGetKey, IToJson
 {
     #region Constructor
-    public Realm(Game game, RealmGameConfiguration realmGameConfiguration)
+    public Realm(Game game, RealmGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = realmGameConfiguration.Key ?? realmGameConfiguration.GetType().Name;
-        SpellBookNames = realmGameConfiguration.SpellBookNames;
-        Info = realmGameConfiguration.Info;
-        Name = realmGameConfiguration.Name;
-        ResistantToHolyAndHellProjectiles = realmGameConfiguration.ResistantToHolyAndHellProjectiles;
-        SusceptibleToHolyAndHellProjectiles = realmGameConfiguration.SusceptibleToHolyAndHellProjectiles;
+        Key = gameConfiguration.GetKey;
+        SpellBookNames = gameConfiguration.SpellBookNames;
+        Info = gameConfiguration.Info;
+        Name = gameConfiguration.Name;
+        ResistantToHolyAndHellProjectiles = gameConfiguration.ResistantToHolyAndHellProjectiles;
+        SusceptibleToHolyAndHellProjectiles = gameConfiguration.SusceptibleToHolyAndHellProjectiles;
     }
     #endregion
 

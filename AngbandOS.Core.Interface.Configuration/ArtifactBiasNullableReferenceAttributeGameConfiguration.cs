@@ -2,7 +2,6 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ArtifactBiasNullableReferenceAttributeGameConfiguration
+public class ArtifactBiasNullableReferenceAttributeGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
 }

@@ -11,11 +11,11 @@ namespace AngbandOS.Core.Functions;
 internal sealed class Conditional : IChangeTracker, IGetKey, IBoolValue, IToJson
 {
     private Game Game { get; }
-    public Conditional(Game game, ConditionalGameConfiguration boolPosFunctionGameConfiguration) 
+    public Conditional(Game game, ConditionalGameConfiguration gameConfiguration) 
     {
         Game = game;
-        Key = boolPosFunctionGameConfiguration.Key ?? boolPosFunctionGameConfiguration.GetType().Name;
-        EnabledNames = boolPosFunctionGameConfiguration.EnabledNames;
+        Key = gameConfiguration.GetKey;
+        EnabledNames = gameConfiguration.EnabledNames;
     }
 
     /// <summary>

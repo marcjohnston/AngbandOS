@@ -2,10 +2,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class SpellGameConfiguration
+public class SpellGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     /// <summary>
     /// Returns the name of the spell, as rendered to the SaveGame.
     /// </summary>

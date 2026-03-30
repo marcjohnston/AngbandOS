@@ -4,11 +4,11 @@ namespace AngbandOS.Core;
 internal sealed class Plural : IGetKey, IToJson
 {
     private Game Game { get; }
-    public Plural(Game game, PluralGameConfiguration pluralGameConfiguration)
+    public Plural(Game game, PluralGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = pluralGameConfiguration.Key ?? pluralGameConfiguration.GetType().Name;
-        PluralForm = pluralGameConfiguration.PluralForm;
+        Key = gameConfiguration.GetKey;
+        PluralForm = gameConfiguration.PluralForm;
     }
 
     /// <summary>

@@ -21,7 +21,7 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
     public ItemFilter(Game game, ItemFilterGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
+        Key = gameConfiguration.GetKey;
 
         AnyMatchingItemClassNames = gameConfiguration.AnyMatchingItemClassNames;
         AllNonMatchingItemClassNames = gameConfiguration.AllNonMatchingItemClassNames;

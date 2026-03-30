@@ -10,16 +10,16 @@ namespace AngbandOS.Core;
 internal sealed class Town : IGetKey, IToJson
 {
     private Game Game { get; }
-    public Town(Game game, TownGameConfiguration townGameConfiguration)
+    public Town(Game game, TownGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = townGameConfiguration.Key ?? townGameConfiguration.GetType().Name;
-        DungeonName = townGameConfiguration.DungeonName;
-        HousePrice = townGameConfiguration.HousePrice;
-        Name = townGameConfiguration.Name;
-        Char = townGameConfiguration.Char;
-        StoreFactoryNames = townGameConfiguration.StoreFactoryNames;
-        AllowStartupTown = townGameConfiguration.AllowStartupTown;
+        Key = gameConfiguration.GetKey;
+        DungeonName = gameConfiguration.DungeonName;
+        HousePrice = gameConfiguration.HousePrice;
+        Name = gameConfiguration.Name;
+        Char = gameConfiguration.Char;
+        StoreFactoryNames = gameConfiguration.StoreFactoryNames;
+        AllowStartupTown = gameConfiguration.AllowStartupTown;
     }
 
     /// <summary>

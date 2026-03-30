@@ -13,17 +13,17 @@ namespace AngbandOS.Core;
 internal sealed class RacialPowerTest : IGetKey, IBoolValue, IToJson
 {
     private Game Game { get; }
-    public RacialPowerTest(Game game, RacialPowerTestGameConfiguration racialPowerTestGameConfiguration)
+    public RacialPowerTest(Game game, RacialPowerTestGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = racialPowerTestGameConfiguration.Key ?? racialPowerTestGameConfiguration.GetType().Name;
-        MinLevel = racialPowerTestGameConfiguration.MinLevel;
-        CostExpression = racialPowerTestGameConfiguration.CostExpression;
-        UseAbilityBindingKey = racialPowerTestGameConfiguration.UseAbilityBindingKey;
-        Difficulty = racialPowerTestGameConfiguration.Difficulty;
+        Key = gameConfiguration.GetKey;
+        MinLevel = gameConfiguration.MinLevel;
+        CostExpression = gameConfiguration.CostExpression;
+        UseAbilityBindingKey = gameConfiguration.UseAbilityBindingKey;
+        Difficulty = gameConfiguration.Difficulty;
     }
 
-    public string Key { get; set; }
+    public string Key { get; }
     public string GetKey => Key;
 
     public void Bind()

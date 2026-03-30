@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// 
 /// </summary>
 [Serializable]
-public class StoreFactoryGameConfiguration
+public class StoreFactoryGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     /// <summary>
     /// Returns true, if the store is an empty lot; false, if it is a store.  Empty lots render as either grave yards or fields.
@@ -31,8 +31,6 @@ public class StoreFactoryGameConfiguration
     /// Returns true, if the entrances to the stores are are randomly placed.
     /// </summary>
     public virtual bool StoreEntranceDoorsAreBlownOff { get; set; } = false;
-
-    public virtual string? Key { get; set; } = null;
 
     /// <summary>
     /// Returns the number of items in a page for the store.

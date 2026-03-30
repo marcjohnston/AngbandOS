@@ -11,12 +11,12 @@ internal sealed class Spell : IGetKey, IToJson
 {
     private Game Game { get; }
 
-    public Spell(Game game, SpellGameConfiguration spellGameConfiguration)
+    public Spell(Game game, SpellGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = spellGameConfiguration.Key ?? spellGameConfiguration.GetType().Name;
-        Name = spellGameConfiguration.Name;
-        LearnedDetails = spellGameConfiguration.LearnedDetails;
+        Key = gameConfiguration.GetKey;
+        Name = gameConfiguration.Name;
+        LearnedDetails = gameConfiguration.LearnedDetails;
     }
 
     public ItemFactory SpellBookItemFactory { get; private set; }

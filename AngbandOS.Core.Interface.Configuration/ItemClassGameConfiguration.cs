@@ -1,10 +1,8 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ItemClassGameConfiguration
+public class ItemClassGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     /// <summary>
     /// Returns the capitalized name of a singular item that the class represents.  This name can be used in a format like 'Your {0}'
     /// </summary>

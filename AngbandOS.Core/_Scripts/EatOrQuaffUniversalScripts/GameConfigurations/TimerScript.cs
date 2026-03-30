@@ -11,7 +11,7 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
 {
     public TimerScript(Game game, TimerScriptGameConfiguration gameConfiguration) : base(game)
     {
-        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
+        Key = gameConfiguration.GetKey;
         ValueExpression = gameConfiguration.ValueExpression;
         TimerBindingKey = gameConfiguration.TimerBindingKey;
         Used = gameConfiguration.Used;

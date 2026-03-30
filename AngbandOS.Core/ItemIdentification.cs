@@ -13,7 +13,7 @@ internal class ItemIdentification : IGetKey, IToJson
     public ItemIdentification(Game game, ItemIdentificationGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
+        Key = gameConfiguration.GetKey;
         AttributeFilterBindingKey = gameConfiguration.AttributeFilterBindingKey;
         InterpolationExpressionAttributeNames = gameConfiguration.InterpolationExpressionAttributeNames;
         EffectDescription = gameConfiguration.EffectDescription;

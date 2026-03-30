@@ -10,12 +10,12 @@ namespace AngbandOS.Core;
 internal sealed class ProjectileGraphic : IGetKey, IToJson
 {
     private Game Game;
-    public ProjectileGraphic(Game game, ProjectileGraphicGameConfiguration projectileGraphicGameConfiguration)
+    public ProjectileGraphic(Game game, ProjectileGraphicGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = projectileGraphicGameConfiguration.Key ?? projectileGraphicGameConfiguration.GetType().Name;
-        Character = projectileGraphicGameConfiguration.Character;
-        Color = projectileGraphicGameConfiguration.Color;
+        Key = gameConfiguration.GetKey;
+        Character = gameConfiguration.Character;
+        Color = gameConfiguration.Color;
     }
 
     /// <summary>

@@ -10,14 +10,14 @@ namespace AngbandOS.Core;
 internal sealed class StoreCommand : IGetKey, IToJson
 {
     private Game Game { get; }
-    public StoreCommand(Game game, StoreCommandGameConfiguration storeCommandGameConfiguration)
+    public StoreCommand(Game game, StoreCommandGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = storeCommandGameConfiguration.Key ?? storeCommandGameConfiguration.GetType().Name;
-        KeyChar = storeCommandGameConfiguration.KeyChar;
-        Description = storeCommandGameConfiguration.Description;
-        ValidStoreFactoryNames = storeCommandGameConfiguration.ValidStoreFactoryNames;
-        ExecuteScriptName = storeCommandGameConfiguration.ExecuteScriptName;
+        Key = gameConfiguration.GetKey;
+        KeyChar = gameConfiguration.KeyChar;
+        Description = gameConfiguration.Description;
+        ValidStoreFactoryNames = gameConfiguration.ValidStoreFactoryNames;
+        ExecuteScriptName = gameConfiguration.ExecuteScriptName;
     }
 
     public string Key { get; }

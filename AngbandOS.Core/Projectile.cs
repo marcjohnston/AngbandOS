@@ -11,17 +11,17 @@ internal sealed class Projectile : IGetKey, IToJson
 {
     private Game Game { get; }
 
-    public Projectile(Game game, ProjectileGameConfiguration projectileGameConfiguration)
+    public Projectile(Game game, ProjectileGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = projectileGameConfiguration.Key ?? projectileGameConfiguration.GetType().Name;
-        GridTileScriptBindingKey = projectileGameConfiguration.FloorEffectBindingKey;
-        ItemEffectBindingKey = projectileGameConfiguration.ItemEffectBindingKey;
-        PlayerEffectBindingKey = projectileGameConfiguration.PlayerEffectBindingKey;
-        MonsterEffectBindingKey = projectileGameConfiguration.MonsterEffectBindingKey;
-        BoltProjectileGraphicBindingKey = projectileGameConfiguration.BoltProjectileGraphicBindingKey;
-        EffectAnimationBindingKey = projectileGameConfiguration.EffectAnimationBindingKey;
-        ImpactProjectileGraphicBindingKey = projectileGameConfiguration.ImpactProjectileGraphicBindingKey;
+        Key = gameConfiguration.GetKey;
+        GridTileScriptBindingKey = gameConfiguration.FloorEffectBindingKey;
+        ItemEffectBindingKey = gameConfiguration.ItemEffectBindingKey;
+        PlayerEffectBindingKey = gameConfiguration.PlayerEffectBindingKey;
+        MonsterEffectBindingKey = gameConfiguration.MonsterEffectBindingKey;
+        BoltProjectileGraphicBindingKey = gameConfiguration.BoltProjectileGraphicBindingKey;
+        EffectAnimationBindingKey = gameConfiguration.EffectAnimationBindingKey;
+        ImpactProjectileGraphicBindingKey = gameConfiguration.ImpactProjectileGraphicBindingKey;
     }
 
     /// <summary>

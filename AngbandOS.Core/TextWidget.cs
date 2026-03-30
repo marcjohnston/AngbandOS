@@ -9,18 +9,18 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class TextWidget : Widget, IGetKey, IToJson
 {
-    public TextWidget(Game game, TextWidgetGameConfiguration nullableStringsTextAreaWidgetGameConfiguration) : base(game)
+    public TextWidget(Game game, TextWidgetGameConfiguration gameConfiguration) : base(game)
     {
-        Key = nullableStringsTextAreaWidgetGameConfiguration.Key ?? nullableStringsTextAreaWidgetGameConfiguration.GetType().Name;
-        NullableStringsValueName = nullableStringsTextAreaWidgetGameConfiguration.NullableStringsValueName;
-        Color = nullableStringsTextAreaWidgetGameConfiguration.Color;
-        X = nullableStringsTextAreaWidgetGameConfiguration.X;
-        Y = nullableStringsTextAreaWidgetGameConfiguration.Y;
-        Width = nullableStringsTextAreaWidgetGameConfiguration.Width;
-        Height = nullableStringsTextAreaWidgetGameConfiguration.Height;
-        JustificationName = nullableStringsTextAreaWidgetGameConfiguration.JustificationName;
-        AlignmentName = nullableStringsTextAreaWidgetGameConfiguration.AlignmentName;
-        ChangeTrackerNames = nullableStringsTextAreaWidgetGameConfiguration.ChangeTrackerNames;
+        Key = gameConfiguration.GetKey;
+        NullableStringsValueName = gameConfiguration.NullableStringsValueName;
+        Color = gameConfiguration.Color;
+        X = gameConfiguration.X;
+        Y = gameConfiguration.Y;
+        Width = gameConfiguration.Width;
+        Height = gameConfiguration.Height;
+        JustificationName = gameConfiguration.JustificationName;
+        AlignmentName = gameConfiguration.AlignmentName;
+        ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
     /// <summary>

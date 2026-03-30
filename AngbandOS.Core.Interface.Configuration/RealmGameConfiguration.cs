@@ -7,10 +7,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class RealmGameConfiguration
+public class RealmGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     public virtual string[] SpellBookNames { get; set; }
 
     public virtual string[] Info { get; set; }

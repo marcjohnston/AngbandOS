@@ -11,9 +11,8 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// artifact creation process.
 /// </summary>
 [Serializable]
-public class ItemEnhancementGameConfiguration
+public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
     public virtual (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings { get; set; } = null;
     public virtual (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings { get; set; } = null;
     public virtual (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings { get; set; } = null;

@@ -13,15 +13,15 @@ namespace AngbandOS.Core;
 internal sealed class Animation : IGetKey, IToJson
 {
     private Game Game;
-    public Animation(Game game, AnimationGameConfiguration animationGameConfiguration) 
+    public Animation(Game game, AnimationGameConfiguration gameConfiguration) 
     {
         Game = game;
-        Key = animationGameConfiguration.Key ?? animationGameConfiguration.GetType().Name;
-        AlternateColor = animationGameConfiguration.AlternateColor;
-        Character = animationGameConfiguration.Character;
-        Color = animationGameConfiguration.Color;
-        Name = animationGameConfiguration.Name;
-        Sequence = animationGameConfiguration.Sequence;
+        Key = gameConfiguration.GetKey;
+        AlternateColor = gameConfiguration.AlternateColor;
+        Character = gameConfiguration.Character;
+        Color = gameConfiguration.Color;
+        Name = gameConfiguration.Name;
+        Sequence = gameConfiguration.Sequence;
     }
 
     /// <summary>

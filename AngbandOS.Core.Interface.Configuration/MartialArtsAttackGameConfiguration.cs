@@ -1,9 +1,8 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class MartialArtsAttackGameConfiguration
+public class MartialArtsAttackGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
     public virtual int Chance { get; set; }
     public virtual int Dd { get; set; }
     public virtual string Desc { get; set; }

@@ -12,10 +12,10 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class ArtifactBiasWeightedRandom : WeightedRandom<ArtifactBias?>, IGetKey, IToJson
 {
-    public ArtifactBiasWeightedRandom(Game game, ArtifactBiasWeightedRandomGameConfiguration artifactBiasWeightedRandomGameConfiguration) : base(game)
+    public ArtifactBiasWeightedRandom(Game game, ArtifactBiasWeightedRandomGameConfiguration gameConfiguration) : base(game)
     {
-        Key = artifactBiasWeightedRandomGameConfiguration.Key ?? artifactBiasWeightedRandomGameConfiguration.GetType().Name;
-        ArtifactBiasBindingKeyAndWeightTuples = artifactBiasWeightedRandomGameConfiguration.ArtifactBiasBindingKeyAndWeightTuples;
+        Key = gameConfiguration.GetKey;
+        ArtifactBiasBindingKeyAndWeightTuples = gameConfiguration.ArtifactBiasBindingKeyAndWeightTuples;
     }
 
     public string Key { get; }

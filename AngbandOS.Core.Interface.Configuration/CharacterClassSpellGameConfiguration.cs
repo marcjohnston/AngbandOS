@@ -7,8 +7,10 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class CharacterClassSpellGameConfiguration
+public class CharacterClassSpellGameConfiguration : CompositeSingletonGameConfiguration
 {
+    public sealed override string?[] CompositeKeys => new string?[] { CharacterClassName, SpellName }; // CONFIRMED
+
     /// <foreign-collection-name>Spells</foreign-collection-name>
     public virtual string SpellName { get; set; }
     /// <foreign-collection-name>CharacterClasses</foreign-collection-name>

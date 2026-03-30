@@ -10,18 +10,18 @@ namespace AngbandOS.Core;
 internal sealed class Attack : IGetKey, IToJson
 {
     private Game Game { get; }
-    public Attack(Game game, AttackGameConfiguration attackGameConfiguration)
+    public Attack(Game game, AttackGameConfiguration gameConfiguration)
     {
         Game = game;
-        MonsterAction = attackGameConfiguration.MonsterAction;
-        Key = attackGameConfiguration.Key ?? attackGameConfiguration.GetType().Name;
-        PlayerActionMessages = attackGameConfiguration.PlayerActionMessages;
-        KnowledgeAction = attackGameConfiguration.KnowledgeAction;
-        AttackTouchesTarget = attackGameConfiguration.AttackTouchesTarget;
-        AttackAwakensTarget = attackGameConfiguration.AttackAwakensTarget;
-        AttackStunsTarget = attackGameConfiguration.AttackStunsTarget;
-        AttackCutsTarget = attackGameConfiguration.AttackCutsTarget;
-        RendersMissMessage = attackGameConfiguration.RendersMissMessage;
+        Key = gameConfiguration.GetKey;
+        MonsterAction = gameConfiguration.MonsterAction;
+        PlayerActionMessages = gameConfiguration.PlayerActionMessages;
+        KnowledgeAction = gameConfiguration.KnowledgeAction;
+        AttackTouchesTarget = gameConfiguration.AttackTouchesTarget;
+        AttackAwakensTarget = gameConfiguration.AttackAwakensTarget;
+        AttackStunsTarget = gameConfiguration.AttackStunsTarget;
+        AttackCutsTarget = gameConfiguration.AttackCutsTarget;
+        RendersMissMessage = gameConfiguration.RendersMissMessage;
     }
 
     public string Key { get; }

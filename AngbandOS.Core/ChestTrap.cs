@@ -14,12 +14,12 @@ namespace AngbandOS.Core;
 internal class ChestTrap : IGetKey, IToJson
 {
     protected Game Game { get; }
-    public ChestTrap(Game game, ChestTrapGameConfiguration chestTrapGameConfiguration)
+    public ChestTrap(Game game, ChestTrapGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = chestTrapGameConfiguration.Key ?? chestTrapGameConfiguration.GetType().Name;
-        Description = chestTrapGameConfiguration.Description;
-        ActivationGridTileScriptBindingKey = chestTrapGameConfiguration.ActivationGridTileScriptBindingKey;
+        Key = gameConfiguration.GetKey;
+        Description = gameConfiguration.Description;
+        ActivationGridTileScriptBindingKey = gameConfiguration.ActivationGridTileScriptBindingKey;
     }
 
     /// <summary>

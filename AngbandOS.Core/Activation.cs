@@ -13,15 +13,15 @@ namespace AngbandOS.Core;
 internal sealed class Activation : IGetKey, IToJson
 {
     private Game Game { get; }
-    public Activation(Game game, ActivationGameConfiguration activationGameConfiguration)
+    public Activation(Game game, ActivationGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = activationGameConfiguration.Key ?? activationGameConfiguration.GetType().Name;
-        Name = activationGameConfiguration.Name;
-        PreActivationMessage = activationGameConfiguration.PreActivationMessage;
-        Value = activationGameConfiguration.Value;
-        RechargeTimeRollExpression = activationGameConfiguration.RechargeTimeRollExpression;
-        ActivationCancellableScriptItemBindingKey = activationGameConfiguration.ActivationCancellableScriptItemBindingKey;
+        Key = gameConfiguration.GetKey;
+        Name = gameConfiguration.Name;
+        PreActivationMessage = gameConfiguration.PreActivationMessage;
+        Value = gameConfiguration.Value;
+        RechargeTimeRollExpression = gameConfiguration.RechargeTimeRollExpression;
+        ActivationCancellableScriptItemBindingKey = gameConfiguration.ActivationCancellableScriptItemBindingKey;
     }
 
     /// <summary>

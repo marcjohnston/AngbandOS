@@ -9,10 +9,10 @@ namespace AngbandOS.Core.Scripts;
 [Serializable]
 internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
 {
-    public TeleportSelfScript(Game game, TeleportSelfScriptGameConfiguration teleportSelfScriptGameConfiguration) : base(game)
+    public TeleportSelfScript(Game game, TeleportSelfScriptGameConfiguration gameConfiguration) : base(game)
     {
-        Key = teleportSelfScriptGameConfiguration.Key ?? teleportSelfScriptGameConfiguration.GetType().Name;
-        DistanceExpression = teleportSelfScriptGameConfiguration.DistanceExpression;
+        Key = gameConfiguration.GetKey;
+        DistanceExpression = gameConfiguration.DistanceExpression;
     }
 
     public override string LearnedDetails => $"range {Distance.Minimize().Text}";

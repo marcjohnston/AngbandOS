@@ -10,12 +10,12 @@ namespace AngbandOS.Core;
 internal sealed class HelpGroup : IGetKey, IToJson
 {
     private Game Game { get; }
-    public HelpGroup(Game game, HelpGroupGameConfiguration helpGroupGameConfiguration)
+    public HelpGroup(Game game, HelpGroupGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = helpGroupGameConfiguration.Key ?? helpGroupGameConfiguration.GetType().Name;
-        SortIndex = helpGroupGameConfiguration.SortIndex;
-        Title = helpGroupGameConfiguration.Title;
+        Key = gameConfiguration.GetKey;
+        SortIndex = gameConfiguration.SortIndex;
+        Title = gameConfiguration.Title;
     }
 
     public string Key { get; }

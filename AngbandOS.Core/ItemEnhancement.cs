@@ -14,20 +14,20 @@ namespace AngbandOS.Core;
 internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
 {
     #region Constructors
-    public ItemEnhancement(Game game, ItemEnhancementGameConfiguration itemEnhancementGameConfiguration)
+    public ItemEnhancement(Game game, ItemEnhancementGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = itemEnhancementGameConfiguration.Key ?? itemEnhancementGameConfiguration.GetType().Name;
+        Key = gameConfiguration.GetKey;
 
-        SumAttributeAndExpressionBindings = itemEnhancementGameConfiguration.SumAttributeAndExpressionBindings;
-        BoolAttributeAndExpressionBindings = itemEnhancementGameConfiguration.BoolAttributeAndExpressionBindings;
-        OrAttributeAndExpressionBindings = itemEnhancementGameConfiguration.OrAttributeAndExpressionBindings;
+        SumAttributeAndExpressionBindings = gameConfiguration.SumAttributeAndExpressionBindings;
+        BoolAttributeAndExpressionBindings = gameConfiguration.BoolAttributeAndExpressionBindings;
+        OrAttributeAndExpressionBindings = gameConfiguration.OrAttributeAndExpressionBindings;
 
-        ActivationName = itemEnhancementGameConfiguration.ActivationName;
-        AdditionalItemEnhancementWeightedRandomBindingKey = itemEnhancementGameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
-        ApplicableItemFactoryBindingKeys = itemEnhancementGameConfiguration.ApplicableItemFactoryBindingKeys;
-        ArtifactBiasWeightedRandomBindingKey = itemEnhancementGameConfiguration.ArtifactBiasWeightedRandomBindingKey;
-        FriendlyName = itemEnhancementGameConfiguration.FriendlyName;
+        ActivationName = gameConfiguration.ActivationName;
+        AdditionalItemEnhancementWeightedRandomBindingKey = gameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
+        ApplicableItemFactoryBindingKeys = gameConfiguration.ApplicableItemFactoryBindingKeys;
+        ArtifactBiasWeightedRandomBindingKey = gameConfiguration.ArtifactBiasWeightedRandomBindingKey;
+        FriendlyName = gameConfiguration.FriendlyName;
     }
     #endregion
 

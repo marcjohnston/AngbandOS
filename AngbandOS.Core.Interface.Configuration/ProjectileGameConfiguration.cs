@@ -1,10 +1,8 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ProjectileGameConfiguration
+public class ProjectileGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     public virtual string FloorEffectBindingKey { get; set; } = nameof(GridTileScriptsEnum.UnnoticedGridTileScript);
     public virtual string ItemEffectBindingKey { get; set; } = nameof(ItemEffectScriptsEnum.UnnoticedItemEffect);
     public virtual string PlayerEffectBindingKey { get; set; } = nameof(PlayerEffectScriptsEnum.NoticedPlayerEffect);

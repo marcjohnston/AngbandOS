@@ -7,10 +7,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ShopkeeperGameConfiguration
+public class ShopkeeperGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string? Key { get; set; } = null;
-
     public virtual int MaxCost { get; set; }
 
     public virtual int MinInflate { get; set; }
@@ -18,14 +16,5 @@ public class ShopkeeperGameConfiguration
     public virtual string Name { get; set; }
 
     public virtual string? RaceName { get; set; }
-
-    //public bool IsValid()
-    //{
-    //    if (Key == null || MaxCost == null || MinInflate == null || Name == null)
-    //    {
-    //        return false;
-    //    }
-    //    return true;
-    //}
 }
 

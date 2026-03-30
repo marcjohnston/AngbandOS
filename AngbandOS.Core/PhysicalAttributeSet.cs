@@ -10,14 +10,14 @@ namespace AngbandOS.Core.PhysicalAttributeSets;
 internal sealed class PhysicalAttributeSet : IGetKey, IToJson
 {
     private Game Game { get; }
-    public PhysicalAttributeSet(Game game, PhysicalAttributeSetGameConfiguration physicalAttributeSetGameConfiguration)
+    public PhysicalAttributeSet(Game game, PhysicalAttributeSetGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = Key = physicalAttributeSetGameConfiguration.Key ?? physicalAttributeSetGameConfiguration.GetType().Name;
-        BaseHeight = physicalAttributeSetGameConfiguration.BaseHeight;
-        HeightRange = physicalAttributeSetGameConfiguration.HeightRange;
-        BaseWeight = physicalAttributeSetGameConfiguration.BaseWeight;
-        WeightRange = physicalAttributeSetGameConfiguration.WeightRange;
+        Key = gameConfiguration.GetKey;
+        BaseHeight = gameConfiguration.BaseHeight;
+        HeightRange = gameConfiguration.HeightRange;
+        BaseWeight = gameConfiguration.BaseWeight;
+        WeightRange = gameConfiguration.WeightRange;
     }
 
     /// <summary>

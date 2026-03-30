@@ -7,9 +7,8 @@
 namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ConditionalScriptGameConfiguration
+public class ConditionalScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
-    public virtual string Key { get; set; }
     public virtual string ConditionalKey { get; set; }
     public virtual string[]? TrueScriptBindingKeys { get; set; } = null;
     public virtual string[]? FalseScriptBindingKeys { get; set; } = null;

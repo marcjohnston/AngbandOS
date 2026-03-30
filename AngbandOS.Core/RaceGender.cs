@@ -10,12 +10,13 @@ namespace AngbandOS.Core.RaceGenders;
 internal sealed class RaceGender : IGetKey, IToJson
 {
     private Game Game { get; }
-    public RaceGender(Game game, RaceGenderGameConfiguration raceGenderGameConfiguration)
+    public RaceGender(Game game, RaceGenderGameConfiguration gameConfiguration)
     {
         Game = game;
-        RaceBindingKey = raceGenderGameConfiguration.RaceBindingKey;
-        GenderBindingKey = raceGenderGameConfiguration.GenderBindingKey;
-        PhysicalAttributesWeightedRandomBindings = raceGenderGameConfiguration.PhysicalAttributesWeightedRandomBindings;
+        Key = gameConfiguration.GetKey;
+        RaceBindingKey = gameConfiguration.RaceBindingKey;
+        GenderBindingKey = gameConfiguration.GenderBindingKey;
+        PhysicalAttributesWeightedRandomBindings = gameConfiguration.PhysicalAttributesWeightedRandomBindings;
     }
 
     /// <summary>
@@ -33,8 +34,9 @@ internal sealed class RaceGender : IGetKey, IToJson
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
+    public string Key { get; }
     public string GetKey => $"{RaceBindingKey}-{GenderBindingKey}";
-
+    public static string GetCompositeKey(Race race, Gender gender) => GameConfiguration.GetCompositeKey(race.GetKey, gender.GetKey);
     public void Bind()
     {
         Race = Game.SingletonRepository.Get<Race>(RaceBindingKey);
@@ -42,8 +44,6 @@ internal sealed class RaceGender : IGetKey, IToJson
         (PhysicalAttributeSet PhysicalAttributeSet, int Weight)[] physicalAttributesWeightedRandoms = PhysicalAttributesWeightedRandomBindings.Select(_physicalAttributesWeightedRandomBinding => (Game.SingletonRepository.Get<PhysicalAttributeSet>(_physicalAttributesWeightedRandomBinding.PhysicalAttributesBindingKey), _physicalAttributesWeightedRandomBinding.Weight)).ToArray();
         PhysicalAttributesWeightedRandom = new WeightedRandom<PhysicalAttributeSet>(Game, physicalAttributesWeightedRandoms);
     }
-
-    public static string GetCompositeKey(Race t1, Gender t2) => $"{t1.GetKey}-{t2.GetKey}";
 
     public Race Race { get; private set; }
     public Gender Gender { get; private set; }

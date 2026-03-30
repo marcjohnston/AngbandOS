@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class ConditionalWidgetGameConfiguration
+public class ConditionalWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string ConditionalKey { get; set; }
 
@@ -47,5 +47,4 @@ public class ConditionalWidgetGameConfiguration
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>
     public virtual string[]? ChangeTrackerNames { get; set; } = null;
-    public virtual string? Key { get; set; } = null;
 }

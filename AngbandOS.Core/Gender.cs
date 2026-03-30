@@ -10,13 +10,13 @@ namespace AngbandOS.Core;
 internal sealed class Gender : IGetKey, IToJson
 {
     private Game Game { get; }
-    public Gender(Game game, GenderGameConfiguration genderGameConfiguration)
+    public Gender(Game game, GenderGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = genderGameConfiguration.Key ?? genderGameConfiguration.GetType().Name;
-        Title = genderGameConfiguration.Title;
-        Winner = genderGameConfiguration.Winner;
-        CanBeRandomlySelected = genderGameConfiguration.CanBeRandomlySelected;
+        Key = gameConfiguration.GetKey;
+        Title = gameConfiguration.Title;
+        Winner = gameConfiguration.Winner;
+        CanBeRandomlySelected = gameConfiguration.CanBeRandomlySelected;
     }
 
     /// <summary>

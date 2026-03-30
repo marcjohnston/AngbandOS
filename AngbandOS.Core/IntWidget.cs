@@ -9,16 +9,16 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class IntWidget : Widget, IGetKey, IToJson
 {
-    public IntWidget(Game game, IntWidgetGameConfiguration intWidgetGameConfiguration) : base(game)
+    public IntWidget(Game game, IntWidgetGameConfiguration gameConfiguration) : base(game)
     {
-        Key = intWidgetGameConfiguration.Key ?? intWidgetGameConfiguration.GetType().Name;
-        IntValueName = intWidgetGameConfiguration.IntValueName;
-        Color = intWidgetGameConfiguration.Color;
-        X = intWidgetGameConfiguration.X;
-        Y = intWidgetGameConfiguration.Y;
-        Width = intWidgetGameConfiguration.Width;
-        JustificationName = intWidgetGameConfiguration.JustificationName;
-        ChangeTrackerNames = intWidgetGameConfiguration.ChangeTrackerNames;
+        Key = gameConfiguration.GetKey;
+        IntValueName = gameConfiguration.IntValueName;
+        Color = gameConfiguration.Color;
+        X = gameConfiguration.X;
+        Y = gameConfiguration.Y;
+        Width = gameConfiguration.Width;
+        JustificationName = gameConfiguration.JustificationName;
+        ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
     public string Key { get; }
 

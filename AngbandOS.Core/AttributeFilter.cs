@@ -14,7 +14,7 @@ internal class AttributeFilter : IGetKey, IToJson
     public AttributeFilter(Game game, AttributeFilterGameConfiguration gameConfiguration)
     {
         Game = game;
-        Key = gameConfiguration.Key ?? gameConfiguration.GetType().Name;
+        Key = gameConfiguration.GetKey;
         ActivationAttributeNonNull = gameConfiguration.ActivationAttributeNonNull;
         ArtifactBiasAttributeNonNull = gameConfiguration.ArtifactBiasAttributeNonNull;
         BoolAttributeFiltersBindings = gameConfiguration.BoolAttributeFilterBindings;
