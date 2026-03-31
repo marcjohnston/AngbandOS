@@ -43,7 +43,7 @@ internal class Window
     /// <summary>
     /// Represents fast character index into the color and character array for each row.  0, 80, 160 etc
     /// </summary>
-    private readonly int[] RowStartingIndexArray; 
+    private int[] RowStartingIndexArray { get; }
 
     /// <summary>
     /// True, if a clear command was issued.  This flag forces a screen clear event to be emitted to the client and all screen contents redrawn when the UpdateScreen method runs.

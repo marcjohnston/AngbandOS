@@ -1,14 +1,14 @@
-﻿// AngbandOS: 2022 Marc Johnston
+// AngbandOS: 2022 Marc Johnston
 //
 // This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Text;
 using System.Text.Json.Serialization;
 
 namespace AngbandOS.Core;
-
-internal class GameStateBagConverter : JsonConverter<GameStateBag>
+    internal class GameStateBagConverter : JsonConverter<GameStateBag>
 {
     const string TypePropertyName = "$type";
     const string ValuePropertyName = "Value";
@@ -35,6 +35,8 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             nameof(DictionaryGameStateBag) => new DictionaryGameStateBag(JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
             nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), doc.RootElement.GetProperty("DataType").GetString()!, JsonSerializer.Deserialize<DictionaryGameStateBag>(doc.RootElement.GetProperty("GameStateBag").GetRawText(), options)!),
             nameof(TupleGameStateBag) => new TupleGameStateBag(doc.RootElement.GetProperty("DataType").GetString()!, JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
+            nameof(ByteArrayGameStateBag) => new ByteArrayGameStateBag(Encoding.UTF8.GetBytes(doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
+            nameof(CharArrayGameStateBag) => new CharArrayGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!.ToCharArray()),
             nameof(ListGameStateBag) => new ListGameStateBag(JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             _ => throw new Exception($"Unknown type {type}")
         };
@@ -121,6 +123,16 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
                 JsonSerializer.Serialize(writer, tupleValue.Values, options);
                 break;
 
+            case ByteArrayGameStateBag byteArrayValue:
+                writer.WriteString(TypePropertyName, nameof(ByteArrayGameStateBag));
+                writer.WriteString(ValuePropertyName, byteArrayValue.Value);
+                break;
+
+            case CharArrayGameStateBag charArrayValue:
+                writer.WriteString(TypePropertyName, nameof(CharArrayGameStateBag));
+                writer.WriteString(ValuePropertyName, charArrayValue.Value);
+                break;
+
             case ListGameStateBag listValue:
                 writer.WriteString(TypePropertyName, nameof(ListGameStateBag));
                 writer.WritePropertyName("Values");
@@ -132,209 +144,5 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
         }
 
         writer.WriteEndObject();
-    }
-}
-
-//[JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
-//[JsonDerivedType(typeof(IntValueGameStateBag), "int")]
-//[JsonDerivedType(typeof(StringValueGameStateBag), "string")]
-//[JsonDerivedType(typeof(DictionaryGameStateBag), "dict")]
-//[JsonDerivedType(typeof(ObjectGameStateBag), "object")]
-//[JsonDerivedType(typeof(ListGameStateBag), "list")]
-//[JsonDerivedType(typeof(TupleGameStateBag), "tuple")]
-internal abstract class GameStateBag
-{
-    public virtual bool IsEmpty => false;
-    public void Deserialize(object entity)
-    {
-        //IEnumerable<FieldInfo> serializableFields = entity.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(p => !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute)));
-
-        //foreach (FieldInfo fieldInfo in serializableFields)
-        //{
-        //    if (DataDictionary.TryGetValue(fieldInfo.Name, out object? value))
-        //    {
-        //        fieldInfo.SetValue(entity, value);
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Invalid game state.");
-        //    }
-        //}
-    }
-}
-
-internal class NullValueGameStateBag : GameStateBag
-{
-    public NullValueGameStateBag() { }
-    public override string ToString()
-    {
-        return "null";
-    }
-}
-
-internal class DateTimeValueGameStateBag : GameStateBag
-{
-    public DateTime Value { get; }
-    public DateTimeValueGameStateBag(DateTime value)
-    {
-        Value = value;
-    }
-    public override string ToString()
-    {
-        return $"{Value}";
-    }
-}
-
-internal class TimeSpanValueGameStateBag : GameStateBag
-{
-    public TimeSpan Value { get; }
-    public TimeSpanValueGameStateBag(TimeSpan value)
-    {
-        Value = value;
-    }
-}
-
-internal class StringValueGameStateBag : GameStateBag
-{
-    public string Value { get; }
-    public StringValueGameStateBag(string value)
-    {
-        Value = value;
-    }
-    public override string ToString()
-    {
-        return $"{Value}";
-    }
-}
-
-internal class DecimalValueGameStateBag : GameStateBag
-{
-    public decimal Value { get; }
-    public DecimalValueGameStateBag(decimal value)
-    {
-        Value = value;
-    }
-    public override string ToString()
-    {
-        return $"{Value}";
-    }
-}
-
-internal class IntValueGameStateBag : GameStateBag
-{
-    public int Value { get; }
-    public IntValueGameStateBag(int value)
-    {
-        Value = value;
-    }
-    public override string ToString()
-    {
-        return $"{Value}";
-    }
-}
-
-internal class BoolValueGameStateBag : GameStateBag
-{
-    public bool Value { get; }
-    public BoolValueGameStateBag(bool value)
-    {
-        Value = value;
-    }
-
-    public override string ToString()
-    {
-        return $"{Value}";
-    }
-}
-
-internal class CharValueGameStateBag : GameStateBag
-{
-    public char Value { get; }
-    public CharValueGameStateBag(char value)
-    {
-        Value = value;
-    }
-}
-
-internal class ByteValueGameStateBag : GameStateBag
-{
-    public byte Value { get; }
-    public  ByteValueGameStateBag(byte value)
-    {
-        Value = value;
-    }
-}
-
-internal class ColorEnumValueGameStateBag : GameStateBag
-{
-    public ColorEnum Value { get; }
-    public ColorEnumValueGameStateBag(ColorEnum value)
-    {
-        Value = value;
-    }
-    public override string ToString()
-    {
-        return $"{Value}";
-    }
-}
-
-internal class ReferenceGameStateBag : GameStateBag
-{
-    public int ObjectId { get; }
-    public ReferenceGameStateBag(int objectId)
-    {
-        ObjectId = objectId;
-    }
-    public override string ToString()
-    {
-        return $"=>{ObjectId}";
-    }
-}
-
-internal class DictionaryGameStateBag : GameStateBag
-{
-    public override bool IsEmpty => Value.Count == 0;
-    public Dictionary<string, GameStateBag> Value { get; }
-    public DictionaryGameStateBag(Dictionary<string, GameStateBag> value)
-    {
-        Value = value;
-    }
-}
-
-internal class ObjectGameStateBag : GameStateBag
-{
-    public override bool IsEmpty => GameStateBag.IsEmpty;
-    public int ObjectId { get; }
-    public string DataType { get; }
-    public DictionaryGameStateBag GameStateBag { get; }
-    public ObjectGameStateBag(int objectId, string dataTypeName, DictionaryGameStateBag value)
-    {
-        ObjectId = objectId;
-        DataType = dataTypeName;
-        GameStateBag = value;
-    }
-    public override string ToString()
-    {
-        return $"{DataType} Object#{ObjectId}";
-    }
-}
-
-internal class TupleGameStateBag : GameStateBag
-{
-    public string DataType { get; }
-    public GameStateBag[] Values {get;}
-    public TupleGameStateBag(string dataType, GameStateBag[] values)
-    {
-        DataType = dataType;
-        Values = values;
-    }
-}
-
-internal class ListGameStateBag : GameStateBag
-{
-    public GameStateBag[] Values { get; }
-    public ListGameStateBag(GameStateBag[] values)
-    {
-        Values = values;
     }
 }

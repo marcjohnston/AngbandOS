@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 namespace AngbandOS.Core;
 
 
@@ -85,175 +86,10 @@ internal partial class Game
     #endregion
 
     #region Game Serialization
-    public GameStateBag Serialize(object? value, string name = "", bool trim = true)
-    {
-        /// <summary>
-        /// Returns the state of a type.  The return object type is dependent on the type of data being serialized.
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="_objectToId"></param>
-        /// <param name="parent"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        GameStateBag Serialize(object? value, Dictionary<object, int> _objectToId, string parent, bool trim)
-        {
-            FieldInfo[] GetAllFields(Type? type)
-            {
-                List<FieldInfo> fieldInfoList = new List<FieldInfo>();
-                while (type != null)
-                {
-                    foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
-                    {
-                        fieldInfoList.Add(field);
-                    }
-
-                    type = type.BaseType;
-                }
-                return fieldInfoList.ToArray();
-            }
-
-            // Handle null values.
-            if (value == null)
-            {
-                return new NullValueGameStateBag();
-            }
-
-            if (value  is DateTime dateTimeValue)
-            {
-                return new DateTimeValueGameStateBag(dateTimeValue);
-            }
-            
-            if (value is TimeSpan timeSpanValue)
-            {
-                return new TimeSpanValueGameStateBag(timeSpanValue);
-            }
-            
-            if (value is string stringValue)
-            {
-                return new StringValueGameStateBag(stringValue);
-            }
-
-            if (value is byte byteValue)
-            {
-                return new ByteValueGameStateBag(byteValue);
-            }
-
-            if (value is char charValue)
-            {
-                return new CharValueGameStateBag(charValue);
-            }
-
-            if (value is decimal decimalValue)
-            {
-                return new DecimalValueGameStateBag(decimalValue);
-            }
-            
-            if (value is int intValue)
-            {
-                return new IntValueGameStateBag(intValue);
-            }
-            
-            if (value is bool boolValue)
-            {
-                return new BoolValueGameStateBag(boolValue);
-            }
-
-            if (value is ColorEnum colorEnumValue)
-            {
-                return new ColorEnumValueGameStateBag(colorEnumValue);
-            }
-
-            Type type = value.GetType();
-
-            // Object identity--game objects only
-            if (type.Assembly == GetType().Assembly)
-            {
-                // already seen?
-                if (_objectToId.TryGetValue(value, out int existingId))
-                {
-                    return new ReferenceGameStateBag(existingId);
-                }
-
-                // first time seeing this object
-                int id = _objectToId.Count + 1;
-                _objectToId[value] = id;
-
-                // Retrieve all of the fields to be preserved.  We exclude property backing fields and fields marked as [NonSerialized].
-                FieldInfo[] allFields = GetAllFields(type);
-                IEnumerable<FieldInfo> serializableFields = allFields.Where(p => !p.IsDefined(typeof(CompilerGeneratedAttribute), true) && !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute)));
-                var objectValue = new Dictionary<string, GameStateBag>();
-
-                foreach (FieldInfo propertyInfo in serializableFields)
-                {
-                    // Get the key and value and type of the field.
-                    string key = propertyInfo.Name;
-                    object? fieldValue = propertyInfo.GetValue(value);
-                    objectValue[key] = Serialize(fieldValue, _objectToId, StringLibrary.DelimitIf(parent, ".", $"{type.Name}.{key}"), trim);
-                }
-
-                return new ObjectGameStateBag(id, type.Name, new DictionaryGameStateBag(objectValue));
-            }
-
-            // Dictionaries
-            if (value is IDictionary dictionary)
-            {
-                var result = new Dictionary<string, GameStateBag>();
-
-                foreach (DictionaryEntry entry in dictionary)
-                {
-                    string key = entry.Key.ToString()!; // Dictionary keys can never be null.
-                    result[key] = Serialize(entry.Value, _objectToId, StringLibrary.DelimitIf(parent, ".", key), trim);
-                }
-
-                return new DictionaryGameStateBag(result);
-            }
-
-            // Tuples
-            if (type.Namespace == "System" && (type.Name.StartsWith("ValueTuple`") || type.Name.StartsWith("Tuple`")))
-            {
-                var values = new List<GameStateBag>();
-
-                var fields = type.GetFields();
-
-                foreach (var field in fields)
-                {
-                    values.Add(Serialize(field.GetValue(value), _objectToId, StringLibrary.DelimitIf(parent, ".", field.Name), trim));
-                }
-
-                return new TupleGameStateBag(type.Name, values.ToArray());
-            }
-
-            // Byte[][]
-            if (value is byte[][] byteJaggedArray)
-            {
-                return new NullValueGameStateBag();
-            }
-
-            // Collections
-            if (value is IEnumerable enumerable && value is not string)
-            {
-                var list = new List<GameStateBag>();
-
-                int index = 0;
-                foreach (var item in enumerable)
-                {
-                    list.Add(Serialize(item, _objectToId, $"{parent}[{index}]", trim));
-                    index++;
-                }
-
-                return new ListGameStateBag(list.ToArray());
-            }
-
-            throw new Exception($"{type.Name} serialization not supported on field {parent}.");
-        }
-
-        return Serialize(value, new Dictionary<object, int>(), name, trim);
-    }
-
     public GameStateBag Save()
     {
         GameStateBag singletonRepositoryGameStateBag = SingletonRepository.Serialize();
-        GameStateBag gameGameStateBag = Serialize(this);
+        GameStateBag gameGameStateBag = GameStateBag.Serialize(this);
         Dictionary<string, GameStateBag> gameStateBagDictionary = new Dictionary<string, GameStateBag>()
         {
             { "SingletonRepository", singletonRepositoryGameStateBag },
@@ -1080,7 +916,7 @@ internal partial class Game
     /// </summary>
     public string _artificialKeyBuffer = "";
 
-    private string[][] _keymapAct;
+    private string[][] _keymapAct { get; set; }
 
     /// <summary>
     /// Returns true, if the parent is requesting the game to shut down immediately.  Returns false, by default.
@@ -1252,18 +1088,18 @@ internal partial class Game
     public const int MaxWid = 198;
 
     public readonly Map Map;
-    public readonly int[] KeypadDirectionXOffset = { 0, -1, 0, 1, -1, 0, 1, -1, 0, 1 };
-    public readonly int[] KeypadDirectionYOffset = { 0, 1, 1, 1, 0, 0, 0, -1, -1, -1 };
+    public int[] KeypadDirectionXOffset { get; } = { 0, -1, 0, 1, -1, 0, 1, -1, 0, 1 };
+    public int[] KeypadDirectionYOffset { get; } = { 0, 1, 1, 1, 0, 0, 0, -1, -1, -1 };
 
     /// <summary>
     /// Returns all of the directions in a sequence.  This is used for for the StarBall and StarLight projectiles where the projectiles are launched in every direction in a specific sequence.
     /// </summary>
-    public readonly int[] OrderedDirection = { 2, 8, 6, 4, 3, 1, 9, 7 }; // The final direction [8] and a non-directional value of 5 has been removed because it is not used.
+    public int[] OrderedDirection { get; } = { 2, 8, 6, 4, 3, 1, 9, 7 }; // The final direction [8] and a non-directional value of 5 has been removed because it is not used.
 
     /// <summary>
     /// 0=South, 1=North, 2=East, 3=West, 4=SE, 5=SW, 6=NE, 7=NW, 8=0,0
     /// </summary>
-    public readonly int[] OrderedDirectionXOffset = { 0, 0, 1, -1, 1, -1, 1, -1, 0 };
+    public int[] OrderedDirectionXOffset { get; } = { 0, 0, 1, -1, 1, -1, 1, -1, 0 };
 
     /// <summary>
     /// 0=South, 1=North, 2=East, 3=West, 4=SE, 5=SW, 6=NE, 7=NW, 8=0,0

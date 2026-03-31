@@ -1,0 +1,212 @@
+﻿// AngbandOS: 2022 Marc Johnston
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+using System.Collections;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Text.Json.Serialization;
+
+namespace AngbandOS.Core;
+
+//[JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
+//[JsonDerivedType(typeof(IntValueGameStateBag), "int")]
+//[JsonDerivedType(typeof(StringValueGameStateBag), "string")]
+//[JsonDerivedType(typeof(DictionaryGameStateBag), "dict")]
+//[JsonDerivedType(typeof(ObjectGameStateBag), "object")]
+//[JsonDerivedType(typeof(ListGameStateBag), "list")]
+//[JsonDerivedType(typeof(TupleGameStateBag), "tuple")]
+internal abstract class GameStateBag
+{
+    public virtual bool IsEmpty => false;
+    public static GameStateBag Serialize(object? value, string name = "", bool trim = true)
+    {
+        /// <summary>
+        /// Returns the state of a type.  The return object type is dependent on the type of data being serialized.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="_objectToId"></param>
+        /// <param name="parent"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        GameStateBag Serialize(object? value, Dictionary<object, int> _objectToId, string parent, bool trim)
+        {
+            FieldInfo[] GetAllFields(Type? type)
+            {
+                List<FieldInfo> fieldInfoList = new List<FieldInfo>();
+                while (type != null)
+                {
+                    foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                    {
+                        fieldInfoList.Add(field);
+                    }
+
+                    type = type.BaseType;
+                }
+                return fieldInfoList.ToArray();
+            }
+
+            // Handle null values.
+            if (value == null)
+            {
+                return new NullValueGameStateBag();
+            }
+
+            if (value is DateTime dateTimeValue)
+            {
+                return new DateTimeValueGameStateBag(dateTimeValue);
+            }
+
+            if (value is TimeSpan timeSpanValue)
+            {
+                return new TimeSpanValueGameStateBag(timeSpanValue);
+            }
+
+            if (value is string stringValue)
+            {
+                return new StringValueGameStateBag(stringValue);
+            }
+
+            if (value is byte byteValue)
+            {
+                return new ByteValueGameStateBag(byteValue);
+            }
+
+            if (value is char charValue)
+            {
+                return new CharValueGameStateBag(charValue);
+            }
+
+            if (value is decimal decimalValue)
+            {
+                return new DecimalValueGameStateBag(decimalValue);
+            }
+
+            if (value is int intValue)
+            {
+                return new IntValueGameStateBag(intValue);
+            }
+
+            if (value is bool boolValue)
+            {
+                return new BoolValueGameStateBag(boolValue);
+            }
+
+            if (value is ColorEnum colorEnumValue)
+            {
+                return new ColorEnumValueGameStateBag(colorEnumValue);
+            }
+
+            Type type = value.GetType();
+
+            // Object identity--game objects only
+            if (type.Assembly == typeof(GameStateBag).Assembly)
+            {
+                // already seen?
+                if (_objectToId.TryGetValue(value, out int existingId))
+                {
+                    return new ReferenceGameStateBag(existingId);
+                }
+
+                // first time seeing this object
+                int id = _objectToId.Count + 1;
+                _objectToId[value] = id;
+
+                // Retrieve all of the fields to be preserved.  We exclude property backing fields and fields marked as [NonSerialized].
+                FieldInfo[] allFields = GetAllFields(type);
+                IEnumerable<FieldInfo> serializableFields = allFields.Where(p => !p.IsDefined(typeof(CompilerGeneratedAttribute), true) && !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute)));
+                var objectValue = new Dictionary<string, GameStateBag>();
+
+                foreach (FieldInfo propertyInfo in serializableFields)
+                {
+                    // Get the key and value and type of the field.
+                    string key = propertyInfo.Name;
+                    object? fieldValue = propertyInfo.GetValue(value);
+                    objectValue[key] = Serialize(fieldValue, _objectToId, StringLibrary.DelimitIf(parent, ".", $"{type.Name}.{key}"), trim);
+                }
+
+                return new ObjectGameStateBag(id, type.Name, new DictionaryGameStateBag(objectValue));
+            }
+
+            // Dictionaries
+            if (value is IDictionary dictionary)
+            {
+                var result = new Dictionary<string, GameStateBag>();
+
+                foreach (DictionaryEntry entry in dictionary)
+                {
+                    string key = entry.Key.ToString()!; // Dictionary keys can never be null.
+                    result[key] = Serialize(entry.Value, _objectToId, StringLibrary.DelimitIf(parent, ".", key), trim);
+                }
+
+                return new DictionaryGameStateBag(result);
+            }
+
+            // Tuples
+            if (type.Namespace == "System" && (type.Name.StartsWith("ValueTuple`") || type.Name.StartsWith("Tuple`")))
+            {
+                var values = new List<GameStateBag>();
+
+                var fields = type.GetFields();
+
+                foreach (var field in fields)
+                {
+                    values.Add(Serialize(field.GetValue(value), _objectToId, StringLibrary.DelimitIf(parent, ".", field.Name), trim));
+                }
+
+                return new TupleGameStateBag(type.Name, values.ToArray());
+            }
+
+            // Char[]
+            if (value is char[] charArray)
+            {
+                return new CharArrayGameStateBag(charArray);
+            }
+
+            // Byte[]
+            if (value is byte[] byteArray)
+            {
+                return new ByteArrayGameStateBag(byteArray);
+            }
+
+            // Collections
+            if (value is IEnumerable enumerable && value is not string)
+            {
+                var list = new List<GameStateBag>();
+
+                int index = 0;
+                foreach (var item in enumerable)
+                {
+                    list.Add(Serialize(item, _objectToId, $"{parent}[{index}]", trim));
+                    index++;
+                }
+
+                return new ListGameStateBag(list.ToArray());
+            }
+
+            throw new Exception($"{type.Name} serialization not supported on field {parent}.");
+        }
+
+        return Serialize(value, new Dictionary<object, int>(), name, trim);
+    }
+
+    public void Deserialize(object entity)
+    {
+        //IEnumerable<FieldInfo> serializableFields = entity.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(p => !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute)));
+
+        //foreach (FieldInfo fieldInfo in serializableFields)
+        //{
+        //    if (DataDictionary.TryGetValue(fieldInfo.Name, out object? value))
+        //    {
+        //        fieldInfo.SetValue(entity, value);
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Invalid game state.");
+        //    }
+        //}
+    }
+}

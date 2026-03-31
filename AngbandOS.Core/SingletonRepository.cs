@@ -28,7 +28,7 @@ internal class SingletonRepository
         foreach (IGetKey singleton in _allSingletonsList)
         {
             string key = singleton.GetKey;
-            GameStateBag singletonGameStateBag = Game.Serialize(singleton);
+            GameStateBag singletonGameStateBag = GameStateBag.Serialize(singleton);
             if (!singletonGameStateBag.IsEmpty)
             {
                 result.Add(key, singletonGameStateBag);
