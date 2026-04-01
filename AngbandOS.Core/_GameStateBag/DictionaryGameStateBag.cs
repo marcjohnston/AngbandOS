@@ -8,9 +8,9 @@ namespace AngbandOS.Core;
     
 internal class DictionaryGameStateBag : GameStateBag
 {
-    public Dictionary<string, GameStateBag> Value { get; }
+    public Dictionary<string, GameStateBag> Values { get; }
     public DictionaryGameStateBag(Dictionary<string, GameStateBag> value)
     {
-        Value = value;
+        Values = value;
     }
 }

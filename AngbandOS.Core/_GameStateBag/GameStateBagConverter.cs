@@ -106,14 +106,14 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             case DictionaryGameStateBag dictionaryValue:
                 writer.WriteString(TypePropertyName, nameof(DictionaryGameStateBag));
                 writer.WritePropertyName(ValuePropertyName);
-                JsonSerializer.Serialize(writer, dictionaryValue.Value, options);
+                JsonSerializer.Serialize(writer, dictionaryValue.Values, options);
                 break;
 
             case ObjectGameStateBag objectValue:
                 writer.WriteString(TypePropertyName, nameof(ObjectGameStateBag));
                 writer.WriteNumber("ObjectId", objectValue.ObjectId);
                 writer.WritePropertyName("Values");
-                JsonSerializer.Serialize(writer, objectValue.Value, options);
+                JsonSerializer.Serialize(writer, objectValue.Values, options);
                 break;
 
             case TupleGameStateBag tupleValue:

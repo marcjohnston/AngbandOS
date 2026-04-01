@@ -8,10 +8,10 @@ namespace AngbandOS.Core;
 internal class ObjectGameStateBag : GameStateBag
 {
     public int ObjectId { get; }
-    public Dictionary<string, GameStateBag> Value { get; }
+    public Dictionary<string, GameStateBag> Values { get; }
     private TGameStateBag GetGameStateBag<TGameStateBag>(string key) where TGameStateBag : GameStateBag
     {
-        if (Value.TryGetValue(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
+        if (Values.TryGetValue(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
         {
             return typedGameStateBag;
         }
@@ -25,7 +25,7 @@ internal class ObjectGameStateBag : GameStateBag
     public ObjectGameStateBag(int objectId, Dictionary<string, GameStateBag> value)
     {
         ObjectId = objectId;
-        Value = value;
+        Values = value;
     }
     public override string ToString()
     {

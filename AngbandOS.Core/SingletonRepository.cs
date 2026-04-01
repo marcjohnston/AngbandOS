@@ -21,14 +21,14 @@ internal class SingletonRepository
     #endregion
 
     #region Publics
-    public GameStateBag Serialize()
+    public GameStateBag Serialize(Dictionary<object, int> objectToIdDictionary)
     {
         var result = new Dictionary<string, GameStateBag>();
 
         foreach (IGetKey singleton in _allSingletonsList)
         {
             string key = singleton.GetKey;
-            GameStateBag singletonGameStateBag = GameStateBag.Serialize(singleton);
+            GameStateBag singletonGameStateBag = GameStateBag.Serialize(objectToIdDictionary, singleton, nameof(SingletonRepository));
             result.Add(key, singletonGameStateBag);
         }
 
@@ -640,7 +640,7 @@ internal class SingletonRepository
                 if (dictionaryGameStateBag is not null)
                 {
                     // We are restoring a game.  Game Restore States 3, 4, 5 and 6.  Check to see if there is game state for this singleton
-                    if (dictionaryGameStateBag.Value.TryGetValue(typeName, out GameStateBag? singletonGameStateBag))
+                    if (dictionaryGameStateBag.Values.TryGetValue(typeName, out GameStateBag? singletonGameStateBag))
                     {
                         // There is game state.  Game Restore States 5 and 6.  We need a constructor that takes the game object and the appropriate game state.
                         ConstructorInfo? restoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
@@ -735,7 +735,7 @@ internal class SingletonRepository
             if (dictionaryGameStateBag is not null)
             {
                 // We are restoring a game.  Game Restore States 3, 4, 5 and 6.  Check to see if there is game state for this singleton
-                if (dictionaryGameStateBag.Value.TryGetValue(typeName, out GameStateBag? singletonGameStateBag))
+                if (dictionaryGameStateBag.Values.TryGetValue(typeName, out GameStateBag? singletonGameStateBag))
                 {
                     // There is game state.  Game Restore States 5 and 6.  We need a constructor that takes the game object, the configuration and the appropriate game state.
                     ConstructorInfo? restoreGameConstructor = constructors.SingleOrDefault(_constructor =>
