@@ -16,6 +16,7 @@ internal abstract class FlaggedAction : IGetKey
     }
     protected FlaggedAction(Game game, ObjectGameStateBag gameStateBag) : this(game) // This object is a singleton
     {
+        _flag = gameStateBag.GetBool("_flag");
     }
 
     public virtual string Key => GetType().Name;

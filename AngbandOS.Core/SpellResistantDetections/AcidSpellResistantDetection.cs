@@ -10,7 +10,7 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class AcidSpellResistantDetection : SpellResistantDetection 
 {
     private AcidSpellResistantDetection(Game game) : base(game) { }
-    private AcidSpellResistantDetection(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override void Learn(Monster monster)
+    public override void Learn(Monster monster)
     {
         if (Game.HasAcidResistance)
         {

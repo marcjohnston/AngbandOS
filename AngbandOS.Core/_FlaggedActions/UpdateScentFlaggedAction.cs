@@ -13,7 +13,13 @@ internal class UpdateScentFlaggedAction : FlaggedAction
     private int _flowN;
     private int _flowTail;
     private UpdateScentFlaggedAction(Game game) : base(game) { }
-    private UpdateScentFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    private void UpdateFlowAux(int y, int x, int n)
+    private UpdateScentFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag)
+    {
+        _flowHead = gameStateBag.GetInt("_flowHead");
+        _flowN = gameStateBag.GetInt("_flowN");
+        _flowTail = gameStateBag.GetInt("_flowTail");
+    }
+    private void UpdateFlowAux(int y, int x, int n)
     {
         int oldHead = _flowHead;
         GridTile cPtr = Game.Map.Grid[1][1];

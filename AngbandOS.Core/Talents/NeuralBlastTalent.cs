@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Talents;
 internal class NeuralBlastTalent : Talent
 {
     private NeuralBlastTalent(Game game) : base(game) { }
-    private NeuralBlastTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Neural Blast";
+    public override string Name => "Neural Blast";
     public override int Level => 2;
     public override int ManaCost => 1;
     public override int BaseFailure => 20;

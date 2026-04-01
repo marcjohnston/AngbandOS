@@ -14,12 +14,8 @@ internal abstract class SpellResistantDetection : IGetKey
     {
         Game = game;
     }
-    protected SpellResistantDetection(Game game, GameStateBag gameStateBag) : this(game) // This object is a singleton
-    {
-    }
 
     public virtual string Key => GetType().Name;
-
     public string GetKey => Key;
     public void Bind() { }
 

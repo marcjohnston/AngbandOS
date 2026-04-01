@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 internal class MindWaveTalent : Talent
 {
     private MindWaveTalent(Game game) : base(game) { }
-    private MindWaveTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Mind Wave";
+    public override string Name => "Mind Wave";
     public override int Level => 18;
     public override int ManaCost => 10;
     public override int BaseFailure => 45;

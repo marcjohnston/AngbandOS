@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Talents;
 internal class AdrenalineChannelingTalent : Talent
 {
     private AdrenalineChannelingTalent(Game game) : base(game) { }
-    private AdrenalineChannelingTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override string Name => "Adrenaline Channeling";
     public override int Level => 23;
     public override int ManaCost => 15;

@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Talents;
 internal class PulveriseTalent : Talent
 {
     private PulveriseTalent(Game game) : base(game) { }
-    private PulveriseTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Pulverise";
+    public override string Name => "Pulverise";
     public override int Level => 11;
     public override int ManaCost => 7;
     public override int BaseFailure => 30;

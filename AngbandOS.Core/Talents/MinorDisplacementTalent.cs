@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 internal class MinorDisplacementTalent : Talent
 {
     private MinorDisplacementTalent(Game game) : base(game) { }
-    private MinorDisplacementTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Minor Displacement";
+    public override string Name => "Minor Displacement";
     public override int Level => 3;
     public override int ManaCost => 2;
     public override int BaseFailure => 25;

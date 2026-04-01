@@ -14,14 +14,6 @@ internal abstract class Talent : IGetKey
     {
         Game = game;
     }
-    protected Talent(Game game, GameStateBag gameStateBag) : this(game) // This object is a singleton
-    {
-    }
-
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
 
     public virtual string Key => GetType().Name;
 

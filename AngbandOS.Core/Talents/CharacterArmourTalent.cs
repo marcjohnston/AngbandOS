@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 internal class CharacterArmorTalent : Talent
 {
     private CharacterArmorTalent(Game game) : base(game) { }
-    private CharacterArmorTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Character Armor";
+    public override string Name => "Character Armor";
     public override int Level => 13;
     public override int ManaCost => 12;
     public override int BaseFailure => 50;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class SoundSpellResistantDetection : SpellResistantDetection
 {
     private SoundSpellResistantDetection(Game game) : base(game) { }
-    private SoundSpellResistantDetection(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override void Learn(Monster monster)
+    public override void Learn(Monster monster)
     {
         if (Game.HasSoundResistance)
         {

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class FreeSpellResistantDetection : SpellResistantDetection
 {
     private FreeSpellResistantDetection(Game game) : base(game) { }
-    private FreeSpellResistantDetection(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override void Learn(Monster monster)
+    public override void Learn(Monster monster)
     {
         if (Game.HasFreeAction)
         {

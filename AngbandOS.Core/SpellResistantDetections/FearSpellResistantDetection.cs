@@ -10,7 +10,7 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class FearSpellResistantDetection : SpellResistantDetection
 {
     private FearSpellResistantDetection(Game game) : base(game) { }
-    private FearSpellResistantDetection(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override void Learn(Monster monster)
+    public override void Learn(Monster monster)
     {
         if (Game.HasFearResistance)
         {

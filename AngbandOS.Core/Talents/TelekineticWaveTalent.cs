@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 internal class TelekineticWaveTalent : Talent
 {
     private TelekineticWaveTalent(Game game) : base(game) { }
-    private TelekineticWaveTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Telekinetic Wave";
+    public override string Name => "Telekinetic Wave";
     public override int Level => 28;
     public override int ManaCost => 20;
     public override int BaseFailure => 45;

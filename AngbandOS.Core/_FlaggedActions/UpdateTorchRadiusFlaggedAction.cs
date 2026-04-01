@@ -11,7 +11,12 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
 {
     private int OldLightLevel;
     private UpdateTorchRadiusFlaggedAction(Game game) : base(game) { }
-    private UpdateTorchRadiusFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    /// <summary>
+    private UpdateTorchRadiusFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag)
+    {
+        OldLightLevel = gameStateBag.GetInt("OldLightLevel");
+    }
+    
+    /// <summary>
     /// Compute the level of light.  The player may be wielding multiple sources of light.
     /// </summary>
     protected override void Execute()

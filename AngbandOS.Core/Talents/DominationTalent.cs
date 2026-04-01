@@ -12,7 +12,7 @@ namespace AngbandOS.Core.Talents;
 internal class DominationTalent : Talent
 {
     private DominationTalent(Game game) : base(game) { }
-    private DominationTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Domination";
+    public override string Name => "Domination";
     public override int Level => 9;
     public override int ManaCost => 7;
     public override int BaseFailure => 50;

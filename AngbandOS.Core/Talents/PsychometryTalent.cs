@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Talents;
 internal class PsychometryTalent : Talent
 {
     private PsychometryTalent(Game game) : base(game) { }
-    private PsychometryTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Psychometry";
+    public override string Name => "Psychometry";
     public override int Level => 15;
     public override int ManaCost => 12;
     public override int BaseFailure => 60;

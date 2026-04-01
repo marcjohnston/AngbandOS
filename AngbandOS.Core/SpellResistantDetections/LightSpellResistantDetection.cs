@@ -10,7 +10,7 @@ namespace AngbandOS.Core.SpellResistantDetections;
 internal class LightSpellResistantDetection : SpellResistantDetection
 {
     private LightSpellResistantDetection(Game game) : base(game) { }
-    private LightSpellResistantDetection(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override void Learn(Monster monster)
+    public override void Learn(Monster monster)
     {
         if (Game.HasLightResistance)
         {
