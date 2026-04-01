@@ -173,6 +173,13 @@ internal class GameStateBag
             return new ByteArrayGameStateBag(byteArray);
         }
 
+
+        // Queue<string>
+        if (value is Queue<string> queueOfString)
+        {
+            return new QueueOfStringGameStateBag(queueOfString.ToArray());
+        }
+
         // Collections
         if (value is IEnumerable enumerable && value is not string)
         {

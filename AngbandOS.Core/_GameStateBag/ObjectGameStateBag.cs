@@ -41,6 +41,8 @@ internal class ObjectGameStateBag : GameStateBag
 
     public ColorEnum GetColorEnum(string key) => GetGameStateBag<ColorEnumValueGameStateBag>(key).Value;
 
+    public string[] GetQueueStrings(string key) => GetGameStateBag<QueueOfStringGameStateBag>(key).Values.ToArray();
+
     public ObjectGameStateBag(int objectId, Dictionary<string, GameStateBag> value)
     {
         ObjectId = objectId;

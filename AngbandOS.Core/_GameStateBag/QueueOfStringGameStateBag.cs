@@ -6,10 +6,10 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class ListGameStateBag : GameStateBag
+internal class QueueOfStringGameStateBag : GameStateBag
 {
-    public GameStateBag[] Values { get; }
-    public ListGameStateBag(GameStateBag[] values)
+    public string[] Values { get; }
+    public QueueOfStringGameStateBag(string[] values)
     {
         Values = values;
     }

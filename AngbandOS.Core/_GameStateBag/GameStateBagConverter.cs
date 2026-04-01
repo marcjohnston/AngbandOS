@@ -35,6 +35,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             nameof(ListGameStateBag) => new ListGameStateBag(JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(NullValueGameStateBag) => new NullValueGameStateBag(),
             nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
+            nameof(QueueOfStringGameStateBag) => new QueueOfStringGameStateBag(JsonSerializer.Deserialize<string[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(ReferenceGameStateBag) => new ReferenceGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32()),
             nameof(StringValueGameStateBag) => new StringValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!),
             nameof(TimeSpanValueGameStateBag) => new TimeSpanValueGameStateBag(TimeSpan.Parse(doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
@@ -49,43 +50,14 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
 
         switch (value)
         {
-            case NullValueGameStateBag:
-                writer.WriteString(TypePropertyName, nameof(NullValueGameStateBag));
-                break;
-
-            case DateTimeValueGameStateBag dateTimeValue:
-                writer.WriteString(TypePropertyName, nameof(DateTimeValueGameStateBag));
-                writer.WriteString(ValuePropertyName, dateTimeValue.Value);
-                break;
-
-            case TimeSpanValueGameStateBag timeSpanValue:
-                writer.WriteString(TypePropertyName, nameof(TimeSpanValueGameStateBag));
-                writer.WriteString(ValuePropertyName, timeSpanValue.Value.ToString());
-                break;
-
-            case StringValueGameStateBag stringValue:
-                writer.WriteString(TypePropertyName, nameof(StringValueGameStateBag));
-                writer.WriteString(ValuePropertyName, stringValue.Value);
-                break;
-
-            case DecimalValueGameStateBag decimalValue:
-                writer.WriteString(TypePropertyName, nameof(DecimalValueGameStateBag));
-                writer.WriteNumber(ValuePropertyName, decimalValue.Value);
-                break;
-
-            case IntValueGameStateBag intValue:
-                writer.WriteString(TypePropertyName, nameof(IntValueGameStateBag));
-                writer.WriteNumber(ValuePropertyName, intValue.Value);
-                break;
-
             case BoolValueGameStateBag boolValue:
                 writer.WriteString(TypePropertyName, nameof(BoolValueGameStateBag));
                 writer.WriteBoolean(ValuePropertyName, boolValue.Value);
                 break;
 
-            case CharValueGameStateBag charValue:
-                writer.WriteString(TypePropertyName, nameof(CharValueGameStateBag));
-                writer.WriteString(ValuePropertyName, charValue.Value.ToString());
+            case ByteArrayGameStateBag byteArrayValue:
+                writer.WriteString(TypePropertyName, nameof(ByteArrayGameStateBag));
+                writer.WriteString(ValuePropertyName, byteArrayValue.Value);
                 break;
 
             case ByteValueGameStateBag byteValue:
@@ -93,20 +65,50 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
                 writer.WriteNumber(ValuePropertyName, byteValue.Value);
                 break;
 
+            case CharArrayGameStateBag charArrayValue:
+                writer.WriteString(TypePropertyName, nameof(CharArrayGameStateBag));
+                writer.WriteString(ValuePropertyName, charArrayValue.Value);
+                break;
+
+            case CharValueGameStateBag charValue:
+                writer.WriteString(TypePropertyName, nameof(CharValueGameStateBag));
+                writer.WriteString(ValuePropertyName, charValue.Value.ToString());
+                break;
+
             case ColorEnumValueGameStateBag colorEnumValue:
                 writer.WriteString(TypePropertyName, nameof(ColorEnumValueGameStateBag));
                 writer.WriteString(ValuePropertyName, colorEnumValue.Value.ToString());
                 break;
 
-            case ReferenceGameStateBag referenceValue:
-                writer.WriteString(TypePropertyName, nameof(ReferenceGameStateBag));
-                writer.WriteNumber("ObjectId", referenceValue.ObjectId);
+            case DateTimeValueGameStateBag dateTimeValue:
+                writer.WriteString(TypePropertyName, nameof(DateTimeValueGameStateBag));
+                writer.WriteString(ValuePropertyName, dateTimeValue.Value);
+                break;
+
+            case DecimalValueGameStateBag decimalValue:
+                writer.WriteString(TypePropertyName, nameof(DecimalValueGameStateBag));
+                writer.WriteNumber(ValuePropertyName, decimalValue.Value);
                 break;
 
             case DictionaryGameStateBag dictionaryValue:
                 writer.WriteString(TypePropertyName, nameof(DictionaryGameStateBag));
                 writer.WritePropertyName(ValuePropertyName);
                 JsonSerializer.Serialize(writer, dictionaryValue.Values, options);
+                break;
+
+            case IntValueGameStateBag intValue:
+                writer.WriteString(TypePropertyName, nameof(IntValueGameStateBag));
+                writer.WriteNumber(ValuePropertyName, intValue.Value);
+                break;
+
+            case ListGameStateBag listValue:
+                writer.WriteString(TypePropertyName, nameof(ListGameStateBag));
+                writer.WritePropertyName("Values");
+                JsonSerializer.Serialize(writer, listValue.Values, options);
+                break;
+
+            case NullValueGameStateBag:
+                writer.WriteString(TypePropertyName, nameof(NullValueGameStateBag));
                 break;
 
             case ObjectGameStateBag objectValue:
@@ -116,27 +118,32 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
                 JsonSerializer.Serialize(writer, objectValue.Values, options);
                 break;
 
+            case QueueOfStringGameStateBag queueOfStringValue:
+                writer.WriteString(TypePropertyName, nameof(QueueOfStringGameStateBag));
+                writer.WritePropertyName("Values");
+                JsonSerializer.Serialize(writer, queueOfStringValue.Values, options);
+                break;
+
+            case ReferenceGameStateBag referenceValue:
+                writer.WriteString(TypePropertyName, nameof(ReferenceGameStateBag));
+                writer.WriteNumber("ObjectId", referenceValue.ObjectId);
+                break;
+
+            case StringValueGameStateBag stringValue:
+                writer.WriteString(TypePropertyName, nameof(StringValueGameStateBag));
+                writer.WriteString(ValuePropertyName, stringValue.Value);
+                break;
+
+            case TimeSpanValueGameStateBag timeSpanValue:
+                writer.WriteString(TypePropertyName, nameof(TimeSpanValueGameStateBag));
+                writer.WriteString(ValuePropertyName, timeSpanValue.Value.ToString());
+                break;
+
             case TupleGameStateBag tupleValue:
                 writer.WriteString(TypePropertyName, nameof(TupleGameStateBag));
                 writer.WriteString("DataType", tupleValue.DataType);
                 writer.WritePropertyName("Values");
                 JsonSerializer.Serialize(writer, tupleValue.Values, options);
-                break;
-
-            case ByteArrayGameStateBag byteArrayValue:
-                writer.WriteString(TypePropertyName, nameof(ByteArrayGameStateBag));
-                writer.WriteString(ValuePropertyName, byteArrayValue.Value);
-                break;
-
-            case CharArrayGameStateBag charArrayValue:
-                writer.WriteString(TypePropertyName, nameof(CharArrayGameStateBag));
-                writer.WriteString(ValuePropertyName, charArrayValue.Value);
-                break;
-
-            case ListGameStateBag listValue:
-                writer.WriteString(TypePropertyName, nameof(ListGameStateBag));
-                writer.WritePropertyName("Values");
-                JsonSerializer.Serialize(writer, listValue.Values, options);
                 break;
 
             default:

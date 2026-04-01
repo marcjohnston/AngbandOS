@@ -653,6 +653,28 @@ internal class SingletonRepository
                             throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {boolRestorePropertyValue.Value}.");
                         }
                         break;
+                    case DateTimeValueGameStateBag dateTimeRestorePropertyValue:
+                        if (singletonFieldValue is not DateTime dateTimeSingletonFieldValue)
+                        {
+                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a DateTime value.");
+                        }
+                        if (dateTimeSingletonFieldValue != dateTimeRestorePropertyValue.Value)
+                        {
+                            throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {dateTimeRestorePropertyValue.Value}.");
+                        }
+                        break;
+                    case QueueOfStringGameStateBag queueOfStringRestorePropertyValue:
+                        if (singletonFieldValue is not Queue<string> queueOfStringSingletonFieldValue)
+                        {
+                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a Queue<string> value.");
+                        }
+                        if (!queueOfStringRestorePropertyValue.Values.SequenceEqual(queueOfStringSingletonFieldValue))
+                        {
+                            throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  The messages are different.");
+                        }
+                        break;
+                    default:
+                        throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton has an unsupported GameStateBag type of {RestorePropertyValue.GetType().Name}.");
                 }
             }
         }
