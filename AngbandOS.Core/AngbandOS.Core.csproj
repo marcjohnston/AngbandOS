@@ -9,7 +9,7 @@
     <FileVersion>1.1</FileVersion>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <WarningsAsErrors>CS0114</WarningsAsErrors>
-    <AppDesignerFolder>_Properties</AppDesignerFolder>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
   </PropertyGroup>
 
   <ItemGroup>
