@@ -9,8 +9,8 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class ChaosPlayerEffect : PlayerEffectUniversalScript
 {
-    private ChaosPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string? BlindPreMessage => "You are hit by a wave of anarchy!";
+    private ChaosPlayerEffect(Game game) : base(game) { }
+    private ChaosPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by a wave of anarchy!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

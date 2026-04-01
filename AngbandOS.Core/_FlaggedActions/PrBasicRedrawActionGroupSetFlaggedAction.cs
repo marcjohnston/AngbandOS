@@ -9,8 +9,8 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class PrBasicRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
 {
-    private PrBasicRedrawActionGroupSetFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-
+    private PrBasicRedrawActionGroupSetFlaggedAction(Game game) : base(game) { }
+    private PrBasicRedrawActionGroupSetFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override void Bind()
     {
         RedrawActions = new FlaggedAction[] {

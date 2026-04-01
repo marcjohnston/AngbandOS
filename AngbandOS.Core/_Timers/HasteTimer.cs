@@ -9,8 +9,8 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class HasteTimer : Timer
 {
-    private HasteTimer(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    protected override void EffectStopped()
+    private HasteTimer(Game game) : base(game) { }
+    private HasteTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
     {
         Game.MsgPrint("You feel yourself slow down.");
     }

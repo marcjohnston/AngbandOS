@@ -9,7 +9,8 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ArtifactBiasAttribute : Attribute
 {
-    private ArtifactBiasAttribute(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
+    private ArtifactBiasAttribute(Game game) : base(game) { }
+    private ArtifactBiasAttribute(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override string Key => GetType().Name;
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ArtifactBiasEffectiveAttributeValue(Game, this);
 }

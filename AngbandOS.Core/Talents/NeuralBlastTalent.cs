@@ -11,8 +11,8 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class NeuralBlastTalent : Talent
 {
-    private NeuralBlastTalent(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string Name => "Neural Blast";
+    private NeuralBlastTalent(Game game) : base(game) { }
+    private NeuralBlastTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Neural Blast";
     public override int Level => 2;
     public override int ManaCost => 1;
     public override int BaseFailure => 20;

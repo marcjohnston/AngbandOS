@@ -12,8 +12,8 @@ internal class UpdateScentFlaggedAction : FlaggedAction
     private int _flowHead;
     private int _flowN;
     private int _flowTail;
-    private UpdateScentFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    private void UpdateFlowAux(int y, int x, int n)
+    private UpdateScentFlaggedAction(Game game) : base(game) { }
+    private UpdateScentFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    private void UpdateFlowAux(int y, int x, int n)
     {
         int oldHead = _flowHead;
         GridTile cPtr = Game.Map.Grid[1][1];

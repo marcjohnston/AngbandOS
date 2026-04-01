@@ -9,8 +9,8 @@ namespace AngbandOS.Core.Timers;
 [Serializable]
 internal class EtherealnessTimer : Timer
 {
-    private EtherealnessTimer(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    protected override void EffectStopped()
+    private EtherealnessTimer(Game game) : base(game) { }
+    private EtherealnessTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
     {
         Game.MsgPrint("You feel opaque.");
     }

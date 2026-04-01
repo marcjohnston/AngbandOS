@@ -9,8 +9,8 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class NukePlayerEffect : PlayerEffectUniversalScript
 {
-    private NukePlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string? BlindPreMessage => "You are hit by radiation!";
+    private NukePlayerEffect(Game game) : base(game) { }
+    private NukePlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by radiation!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

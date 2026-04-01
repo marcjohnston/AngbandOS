@@ -9,7 +9,8 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class FriendlyNameAttribute : Attribute
 {
-    private FriendlyNameAttribute(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
+    private FriendlyNameAttribute(Game game) : base(game) { }
+    private FriendlyNameAttribute(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override string Key => GetType().Name;
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new FriendlyNameEffectiveAttributeValue(Game, this);
 }

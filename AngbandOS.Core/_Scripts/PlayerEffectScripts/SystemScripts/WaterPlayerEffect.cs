@@ -9,8 +9,8 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class WaterPlayerEffect : PlayerEffectUniversalScript
 {
-    private WaterPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string? BlindPreMessage => "You are hit by something wet!";
+    private WaterPlayerEffect(Game game) : base(game) { }
+    private WaterPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by something wet!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

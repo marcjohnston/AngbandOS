@@ -10,9 +10,12 @@ namespace AngbandOS.Core.MonsterSelectors;
 internal abstract class MonsterSelector : IMonsterSelector, IGetKey
 {
     protected Game Game { get; }
-    protected MonsterSelector(Game game, GameStateBag gameStateBag) // This object is a singleton
+    protected MonsterSelector(Game game) // This object is a singleton
     {
         Game = game;
+    }
+    protected MonsterSelector(Game game, ObjectGameStateBag gameStateBag) : this(game) // This object is a singleton
+    {
     }
 
     public string GetKey => GetType().Name;

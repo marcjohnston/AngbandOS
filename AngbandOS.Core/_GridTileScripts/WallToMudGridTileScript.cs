@@ -9,8 +9,8 @@ namespace AngbandOS.Core.GridTileEffects;
 [Serializable]
 internal class WallToMudGridTileScript : GridTileScript
 {
-    private WallToMudGridTileScript(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-
+    private WallToMudGridTileScript(Game game) : base(game) { }
+    private WallToMudGridTileScript(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];

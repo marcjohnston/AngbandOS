@@ -9,8 +9,8 @@ namespace AngbandOS.Core.GridTileEffects;
 [Serializable]
 internal class ExplodeGridTileScript : GridTileScript
 {
-    private ExplodeGridTileScript(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-
+    private ExplodeGridTileScript(Game game) : base(game) { }
+    private ExplodeGridTileScript(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         Game.RunScript(nameof(ThereIsASuddenExplosionRenderMessageScript));

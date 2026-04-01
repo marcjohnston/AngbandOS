@@ -9,8 +9,8 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class RemoveViewFlaggedAction : FlaggedAction
 {
-    private RemoveViewFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    protected override void Execute()
+    private RemoveViewFlaggedAction(Game game) : base(game) { }
+    private RemoveViewFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void Execute()
     {
         foreach (GridCoordinate gridCoordinate in Game.View)
         {

@@ -4,23 +4,31 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Text.Json.Serialization;
-
 namespace AngbandOS.Core;
-    internal class ObjectGameStateBag : GameStateBag
+internal class ObjectGameStateBag : GameStateBag
 {
-    public override bool IsEmpty => GameStateBag.IsEmpty;
     public int ObjectId { get; }
-    public string DataType { get; }
-    public DictionaryGameStateBag GameStateBag { get; }
-    public ObjectGameStateBag(int objectId, string dataTypeName, DictionaryGameStateBag value)
+    public Dictionary<string, GameStateBag> Value { get; }
+    private TGameStateBag GetGameStateBag<TGameStateBag>(string key) where TGameStateBag : GameStateBag
+    {
+        if (Value.TryGetValue(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
+        {
+            return typedGameStateBag;
+        }
+        throw new InvalidOperationException($"Key '{key}' is missing or not of type {typeof(TGameStateBag).Name}.");
+    }
+    public bool GetBool(string key) => GetGameStateBag<BoolValueGameStateBag>(key).Value;
+
+    public int GetInt(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
+
+    public string GetString(string key) => GetGameStateBag<StringValueGameStateBag>(key).Value;
+    public ObjectGameStateBag(int objectId, Dictionary<string, GameStateBag> value)
     {
         ObjectId = objectId;
-        DataType = dataTypeName;
-        GameStateBag = value;
+        Value = value;
     }
     public override string ToString()
     {
-        return $"{DataType} Object#{ObjectId}";
+        return $"Object#{ObjectId}";
     }
 }

@@ -9,8 +9,8 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class NoticedPlayerEffect : PlayerEffectUniversalScript
 {
-    private NoticedPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
+    private NoticedPlayerEffect(Game game) : base(game) { }
+    private NoticedPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         return IdentifiedResultEnum.True;
     }

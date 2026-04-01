@@ -11,8 +11,8 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class PsychicDrainTalent : Talent
 {
-    private PsychicDrainTalent(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string Name => "Psychic Drain";
+    private PsychicDrainTalent(Game game) : base(game) { }
+    private PsychicDrainTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Psychic Drain";
     public override int Level => 25;
     public override int ManaCost => 10;
     public override int BaseFailure => 40;

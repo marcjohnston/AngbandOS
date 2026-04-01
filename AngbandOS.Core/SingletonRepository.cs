@@ -29,10 +29,7 @@ internal class SingletonRepository
         {
             string key = singleton.GetKey;
             GameStateBag singletonGameStateBag = GameStateBag.Serialize(singleton);
-            if (!singletonGameStateBag.IsEmpty)
-            {
-                result.Add(key, singletonGameStateBag);
-            }
+            result.Add(key, singletonGameStateBag);
         }
 
         return new DictionaryGameStateBag(result);
@@ -263,8 +260,9 @@ internal class SingletonRepository
     /// Performs the load phase of the singleton repository.  This phase reads all of the types from the assembly and adds it into its respective
     /// collection--if the ExcludeFromRepository property returns false.  If the ExcludeFromRepository is true, the singleton object will be discarded.
     /// </summary>
-    /// <param name="game"></param>
-    public void LoadAndBind(GameConfiguration gameConfiguration, GameStateBag? gameStateBag)
+    /// <param name="gameConfiguration"></param>
+    /// <param name="gameStateBag">Supply the <see cref="GameStateBag"/> that contains the field values for the singletons to rehydrate with.  The <see cref="GameStateBag"/> must be an instance of the <see cref="DictionaryGameStateBag"/>.</param>
+    public void LoadAndBind(GameConfiguration gameConfiguration, DictionaryGameStateBag? gameStateBag)
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
         RegisterInterface<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
@@ -611,50 +609,91 @@ internal class SingletonRepository
         }
     }
 
-    private void LoadAllAssemblyTypes<T>(object? gameStateBag) // TODO: WHY CANT THIS BE where T: IGETKEY
+    private void LoadAllAssemblyTypes<T>(DictionaryGameStateBag? dictionaryGameStateBag) // TODO: WHY CANT THIS BE where T: IGETKEY
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
         Type[] types = assembly.GetTypes();
         foreach (Type type in types)
         {
+            string typeName = type.Name;
+
             // Ensure the type is not abstract and inherits the IGetKey interface.
             // TODO: No test for IGetKey is done
             if (!type.IsAbstract && typeof(IGetKey).IsAssignableFrom(type) && typeof(T).IsAssignableFrom(type))
             {
-                // Ensure it only has one private constructor.
-                // TODO: The one private constructor needs to be tested properly.
-                ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-                if (constructors.Length != 1)
+                ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).Where(_constructor => _constructor.IsPrivate).ToArray();
+
+                // If there are no private constructors, this type does not quality as a system singleton.
+                if (constructors.Length == 0)
                 {
                     continue;
-                    throw new Exception($"Invalid number of constructors for {type.Name}.  Expecting only a single constructor.");
-                }
+                }   
 
-                ConstructorInfo constructor = constructors[0];
-                ParameterInfo[] parameterInfos = constructor.GetParameters();
-
-                if (parameterInfos.Length < 1)
+                // There cannot be more than 2 constructors.
+                if (constructors.Length > 2)
                 {
-                    throw new Exception($"Constructor for {type.Name} has no parameters.  Expecting {nameof(Game)} and {nameof(GameStateBag)}.");
+                    throw new Exception($"Invalid number of constructors for {typeName}.  Expecting ctor({nameof(Game)}) and an optional ctor({nameof(Game)}, {nameof(GameStateBag)}).");
                 }
 
-                if (parameterInfos[0].ParameterType != typeof(Game))
+                (ConstructorInfo Constructor, GameStateBag? GameStateBag)? constructorAndParameters = null;
+                // Check to see if we are restoring a game.  
+                if (dictionaryGameStateBag is not null)
                 {
-                    throw new Exception($"First parameter for {type.Name} constructor is not of type {nameof(Game)}.");
+                    // We are restoring a game.  Game Restore States 3, 4, 5 and 6.  Check to see if there is game state for this singleton
+                    if (dictionaryGameStateBag.Value.TryGetValue(typeName, out GameStateBag? singletonGameStateBag))
+                    {
+                        // There is game state.  Game Restore States 5 and 6.  We need a constructor that takes the game object and the appropriate game state.
+                        ConstructorInfo? restoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
+                        {
+                            ParameterInfo[] parameters = _constructor.GetParameters();
+                            return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == singletonGameStateBag.GetType();
+                        });
+
+                        if (restoreGameStateConstructor is null)
+                        {
+                            // Game Restore State 5.
+                            throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}, {singletonGameStateBag.GetType().Name}).");
+                        }
+
+                        // Game Restore State 6.  Set the parameters for the constructor.
+                        constructorAndParameters = (restoreGameStateConstructor, singletonGameStateBag);
+                    }
+                    else
+                    {
+                        // Game Restore States 3 and 4.  Check to see if the singleton requires game state for restore.
+                        ConstructorInfo? genericRestoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
+                        {
+                            ParameterInfo[] parameters = _constructor.GetParameters();
+                            return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && typeof(GameStateBag).IsAssignableFrom(parameters[1].ParameterType);
+                        });
+
+                        if (genericRestoreGameStateConstructor is not null)
+                        {
+                            // Game Restore State 4.
+                            throw new Exception($"The game state bag does not contain game state for the {typeName} singleton, but the singleton requires game state.");
+                        }
+                    }
                 }
 
-                if (parameterInfos.Length > 2)
+                // This is either a new game from scratch, or the game state doesn't have state for this singleton.
+                if (constructorAndParameters is null)
                 {
-                    throw new Exception($"Constructor for {type.Name} has too many parameters.  Expecting {nameof(Game)} and {nameof(GameStateBag)}.");
+                    // We are constructing a new game from scratch.  Game Restore States 1 and 2.  We need a constructor that only takes the Game object.
+                    ConstructorInfo? newGameFromScratchConstructor = constructors.SingleOrDefault(_constructor => {
+                        ParameterInfo[] parameters = _constructor.GetParameters();
+                        return parameters.Length == 1 && parameters[0].ParameterType == typeof(Game);
+                    });
+
+                    if (newGameFromScratchConstructor is null)
+                    {
+                        throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}).");
+                    }
+
+                    constructorAndParameters = (newGameFromScratchConstructor, null);
                 }
 
-                if (parameterInfos.Length == 2 && parameterInfos[1].ParameterType != typeof(GameStateBag))
-                {
-                    throw new Exception($"Invalid parameter for {type.Name} constructor.  Expecting {nameof(Game)} and {nameof(GameStateBag)}.");
-                }
-
-                object?[] parameters = parameterInfos.Length == 1 ? new object?[] { Game } : new object?[] { Game, gameStateBag };
-
+                ConstructorInfo constructor = constructorAndParameters.Value.Constructor;
+                object?[] parameters = constructorAndParameters.Value.GameStateBag is null ? new object?[] { Game } : new object?[] { Game, constructorAndParameters.Value.GameStateBag };
                 try
                 {
                     IGetKey singleton = (IGetKey)constructor.Invoke(parameters);
@@ -668,7 +707,7 @@ internal class SingletonRepository
         }
     }
 
-    private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations, object? gameStateBag) where T : IGetKey where TConfiguration : notnull
+    private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations, DictionaryGameStateBag? dictionaryGameStateBag) where T : IGetKey where TConfiguration : notnull
     {
         // For persistence validation, we need to ensure the type T implements IToJson.
         if (!typeof(IToJson).IsAssignableFrom(typeof(T)))
@@ -681,61 +720,77 @@ internal class SingletonRepository
 
         if (entityConfigurations is not null)
         {
-            // TODO: Why do we need to specify the search criteria.  Are we hosting multiple ctors?
-            //ConstructorInfo? constructor = typeof(T).GetConstructors(BindingFlags.Public | BindingFlags.Instance)
-            //    .SingleOrDefault(_constructor =>
-            //    {
-            //        ParameterInfo[] parameters = _constructor.GetParameters();
-            //        return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration);
-            //    });
-            //if (constructor is null)
-            //{
-            //    throw new Exception($"Cannot find constructor for {typeof(T).Name}.  Expecting ctor(Game, {typeof(TConfiguration).Name})");
-            //}
-            //foreach (TConfiguration entityConfiguration in entityConfigurations)
-            //{
-            //    // We need to convert from the GameConfiguration object to the entity object.  Create the generic object
-            //    T entity = (T)constructor.Invoke(new object?[] { Game, entityConfiguration, gameStateBag });
-            //    RegisterSingleton(entity);
-            //}
             Type type = typeof(T);
             string typeName = type.Name;
             ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
-            if (constructors.Length != 1)
+
+            // There cannot be more than 2 constructors.
+            if (constructors.Length < 1 || constructors.Length > 2)
             {
-                throw new Exception($"Invalid number of constructors for {type.Name}.  Expecting only a single constructor.");
+                throw new Exception($"Invalid number of constructors for {typeName}.  Expecting ctor({nameof(Game)}, {typeof(TConfiguration).Name}) and an optional ctor({nameof(Game)}, {typeof(TConfiguration).Name}, {nameof(GameStateBag)}).");
             }
 
-            ConstructorInfo constructor = constructors[0];
-            ParameterInfo[] parameterInfos = constructor.GetParameters();
-
-            if (parameterInfos.Length < 2)
+            (ConstructorInfo Constructor, GameStateBag? GameStateBag)? constructorAndParameters = null;
+            // Check to see if we are restoring a game.  
+            if (dictionaryGameStateBag is not null)
             {
-                throw new Exception($"Constructor for {type.Name} has too few parameters.  Expecting {nameof(Game)}, {typeof(TConfiguration)} and {nameof(GameStateBag)}.");
+                // We are restoring a game.  Game Restore States 3, 4, 5 and 6.  Check to see if there is game state for this singleton
+                if (dictionaryGameStateBag.Value.TryGetValue(typeName, out GameStateBag? singletonGameStateBag))
+                {
+                    // There is game state.  Game Restore States 5 and 6.  We need a constructor that takes the game object, the configuration and the appropriate game state.
+                    ConstructorInfo? restoreGameConstructor = constructors.SingleOrDefault(_constructor =>
+                    {
+                        ParameterInfo[] parameters = _constructor.GetParameters();
+                        return parameters.Length == 3 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration) && parameters[2].ParameterType == singletonGameStateBag.GetType();
+                    });
+
+                    if (restoreGameConstructor is null)
+                    {
+                        // Game Restore State 5.
+                        throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}, {typeof(TConfiguration).Name}, {singletonGameStateBag.GetType().Name}).");
+                    }
+
+                    // Game Restore State 6.  Set the parameters for the constructor.
+                    constructorAndParameters = (restoreGameConstructor, singletonGameStateBag);
+                }
+                else
+                {
+                    // Game Restore States 3 and 4.  Check to see if the singleton requires game state for restore.
+                    ConstructorInfo? genericRestoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
+                    {
+                        ParameterInfo[] parameters = _constructor.GetParameters();
+                        return parameters.Length == 3 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration) && typeof(GameStateBag).IsAssignableFrom(parameters[2].ParameterType);
+                    });
+
+                    if (genericRestoreGameStateConstructor is not null)
+                    {
+                        // Game Restore State 4.
+                        throw new Exception($"The game state bag does not contain game state for the {typeName} singleton, but the singleton requires game state.");
+                    }
+                }
             }
 
-            if (parameterInfos[0].ParameterType != typeof(Game))
+            // This is either a new game from scratch, or the game state doesn't have state for this singleton.
+            if (constructorAndParameters is null)
             {
-                throw new Exception($"First parameter for {type.Name} constructor is not of type {nameof(Game)}.");
-            }
-            if (parameterInfos[1].ParameterType != typeof(TConfiguration))
-            {
-                throw new Exception($"Invalid parameter for {type.Name} constructor.  Expecting {nameof(Game)}, {typeof(TConfiguration)} and {nameof(GameStateBag)}.");
+                // We are constructing a new game from scratch.  Game Restore States 1 and 2.  We need a constructor that only takes the Game object.
+                ConstructorInfo? newGameFromScratchConstructor = constructors.SingleOrDefault(_constructor => {
+                    ParameterInfo[] parameters = _constructor.GetParameters();
+                    return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration);
+                });
+
+                if (newGameFromScratchConstructor is null)
+                {
+                    throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}, {typeof(TConfiguration).Name}).");
+                }
+
+                constructorAndParameters = (newGameFromScratchConstructor, null);
             }
 
-            if (parameterInfos.Length > 3)
-            {
-                throw new Exception($"Constructor for {type.Name} has too many parameters.  Expecting {nameof(Game)}, {typeof(TConfiguration)} and {nameof(GameStateBag)}.");
-            }
-
-            if (parameterInfos.Length == 3 && parameterInfos[2].ParameterType != typeof(GameStateBag))
-            {
-                throw new Exception($"Invalid parameter for {type.Name} constructor.  Expecting {nameof(Game)}, {typeof(TConfiguration)} and {nameof(GameStateBag)}.");
-            }
-
+            ConstructorInfo constructor = constructorAndParameters.Value.Constructor;
             foreach (TConfiguration entityConfiguration in entityConfigurations)
             {
-                object?[] parameters = parameterInfos.Length == 2 ? new object?[] { Game, entityConfiguration } : new object?[] { Game, entityConfiguration, gameStateBag };
+                object?[] parameters = constructorAndParameters.Value.GameStateBag is null ? new object?[] { Game, entityConfiguration } : new object?[] { Game, entityConfiguration, constructorAndParameters.Value.GameStateBag };
 
                 try
                 {

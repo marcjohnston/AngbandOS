@@ -9,8 +9,8 @@ namespace AngbandOS.Core.Alignments;
 [Serializable]
 internal class MiddleAlignment : Alignment
 {
-    private MiddleAlignment(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string[] Align(string[] lines, int minimumHeight)
+    private MiddleAlignment(Game game) : base(game) { }
+    private MiddleAlignment(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string[] Align(string[] lines, int minimumHeight)
     {
         List<string> alignedLines = lines.ToList();
         (int halfHeight, int heightRemainder) = Math.DivRem(minimumHeight, 2);

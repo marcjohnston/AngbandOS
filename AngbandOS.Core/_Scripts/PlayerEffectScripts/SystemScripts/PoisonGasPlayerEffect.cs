@@ -9,8 +9,8 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class PoisonGasPlayerEffect : PlayerEffectUniversalScript
 {
-    private PoisonGasPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string? BlindPreMessage => "You are hit by poison!";
+    private PoisonGasPlayerEffect(Game game) : base(game) { }
+    private PoisonGasPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by poison!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

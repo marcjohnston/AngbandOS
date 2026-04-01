@@ -17,9 +17,12 @@ internal abstract class PlayerEffectUniversalScript : IPlayerEffectScript, IGetK
 
     public void Bind() { }
 
-    protected PlayerEffectUniversalScript(Game game, GameStateBag gameStateBag) // This object is a singleton
+    protected PlayerEffectUniversalScript(Game game) // This object is a singleton
     {
         Game = game;
+    }
+    protected PlayerEffectUniversalScript(Game game, ObjectGameStateBag gameStateBag) : this(game) // This object is a singleton
+    {
     }
 
     public virtual int MaximumDamageAllowed => 1600;

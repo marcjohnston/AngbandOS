@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -212,12 +211,25 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         string savePath = Path.Combine(myDocumentsPath, "My Games");
         string saveFilename = Path.Combine(savePath, "angbandos.savefile");
-        string replayFilename = Path.Combine(savePath, "savegame.json");
+        string replayFilename = Path.Combine(savePath, "replay.json");
+        string jsonSaveFilename = Path.Combine(savePath, "savegame.json");
         ICorePersistentStorage persistentStorage = new FileSystemCorePersistentStorage(saveFilename);
         if (persistentStorage.GameExists())
         {
-            GameResults gameResults = gameServer.PlayExistingGame(this, persistentStorage, null, null, null);
+            GameResults gameResults = gameServer.PlayLegacyExistingGame(this, persistentStorage, null);
             //File.WriteAllText(replayFilename, gameResults.Replay); // TODO: This needs to move to the filepersistence driver
+        }
+        else if (File.Exists(jsonSaveFilename))
+        {
+            string serializedSaveGameData = File.ReadAllText(jsonSaveFilename);
+            GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
+            GameResults gameResults = gameServer.PlayExistingGame(this, persistentStorage, null, gameConfiguration, serializedSaveGameData);
+        }
+        else if (File.Exists(replayFilename))
+        {
+            string replayData = File.ReadAllText(replayFilename);
+            GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
+         //   GameResults gameResults = gameServer.ReplayGame(this, persistentStorage, null, gameConfiguration, replayData);
         }
         else
         {
@@ -230,12 +242,15 @@ public partial class MainWindow : Window, IConsoleAndViewPort
                 gameReplay = File.ReadAllText(replayFilename);
             }
 
+
             // Retrieve a reference to the assembly so that we can dynamically load it.
             GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
-            Assembly assembly = typeof(AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration).Assembly;
 
             GameResults gameResults = gameServer.PlayNewGame(this, persistentStorage, null, gameConfiguration);
-            File.WriteAllText(replayFilename, gameResults.SerializedGameData);// TODO: This needs to move to the filepersistence driver
+            if (gameResults.SerializedGameData?.Length > 0)
+            {
+                File.WriteAllText(jsonSaveFilename, gameResults.SerializedGameData);// TODO: This needs to move to the filepersistence driver
+            }
         }
     }
 
@@ -518,5 +533,23 @@ public partial class MainWindow : Window, IConsoleAndViewPort
     public void MessagesReceived(IGameMessage[] gameMessages)
     {
 
+    }
+}
+
+public class Replay : IReplayPersistentStorage
+{
+    public GameReplayDetails GetReplay(string gameGuid)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void NewGame(int seed)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void WriteStep(DateTime dateTime, char keystroke)
+    {
+        throw new NotImplementedException();
     }
 }

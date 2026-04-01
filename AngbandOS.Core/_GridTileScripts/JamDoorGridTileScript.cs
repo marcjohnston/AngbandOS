@@ -9,8 +9,8 @@ namespace AngbandOS.Core.GridTileEffects;
 [Serializable]
 internal class JamDoorGridTileScript : GridTileScript
 {
-    private JamDoorGridTileScript(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-
+    private JamDoorGridTileScript(Game game) : base(game) { }
+    private JamDoorGridTileScript(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];

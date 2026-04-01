@@ -4,18 +4,17 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Collections;
 using System.Diagnostics;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 namespace AngbandOS.Core;
 
 
 [Serializable]
 internal partial class Game
 {
+    private const string SingletonGameStateBagKey = "SingletonRepository";
+    private const string GameGameStateBagKey = "Game";
+
     #region Code Altering Property Management for Development Purposes Only
     public string Find(string folder, string filenameWithoutExtension)
     {
@@ -92,8 +91,8 @@ internal partial class Game
         GameStateBag gameGameStateBag = GameStateBag.Serialize(this);
         Dictionary<string, GameStateBag> gameStateBagDictionary = new Dictionary<string, GameStateBag>()
         {
-            { "SingletonRepository", singletonRepositoryGameStateBag },
-            { "Game", gameGameStateBag }
+            { SingletonGameStateBagKey, singletonRepositoryGameStateBag },
+            { GameGameStateBagKey, gameGameStateBag }
         };
         return new DictionaryGameStateBag(gameStateBagDictionary);
     }
@@ -161,7 +160,7 @@ internal partial class Game
     /// </summary>
     /// <param name="gameConfiguration"></param>
     /// <param name="gameStateBag"></param>
-    public Game(GameConfiguration gameConfiguration, GameStateBag gameStateBag) : this(gameConfiguration, null, gameStateBag) { }
+    public Game(GameConfiguration gameConfiguration, DictionaryGameStateBag gameStateBag) : this(gameConfiguration, null, gameStateBag) { }
 
     /// <summary>
     /// Create a new game to play from scratch.
@@ -190,7 +189,7 @@ internal partial class Game
     /// <param name="gameConfiguration"></param>
     /// <param name="gameReplay">Supply t</param>
     /// <param name="gameStateBag">Supply the game state bag to restore a game.  The game configuration must match the game being restored.</param>
-    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, GameStateBag? gameStateBag)
+    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, DictionaryGameStateBag? dictionaryGameStateBag)
     {
         _mainSequence = new Random();
 
@@ -225,7 +224,20 @@ internal partial class Game
 
         // Load all of the predefined objects.  The singleton repository must already be created.
         DateTime startTime = DateTime.Now;
-        SingletonRepository.LoadAndBind(gameConfiguration, gameStateBag);
+        GameStateBag? singletonRepositoryGameStateBag = dictionaryGameStateBag?.Value[SingletonGameStateBagKey];
+        if (singletonRepositoryGameStateBag is not null)
+        {
+            if (singletonRepositoryGameStateBag is not DictionaryGameStateBag singletonDictionaryRepositoryGameStateBag)
+            {
+                throw new Exception($"Expected a {nameof(DictionaryGameStateBag)} for the singleton repository game state bag.");
+            }
+            SingletonRepository.LoadAndBind(gameConfiguration, singletonDictionaryRepositoryGameStateBag);
+        }
+        else
+        {
+            SingletonRepository.LoadAndBind(gameConfiguration, null);
+        }
+
         TimeSpan elapsedTime = DateTime.Now - startTime;
         if (gameConfiguration.MaxMessageLogLength != null)
         {
@@ -330,7 +342,7 @@ internal partial class Game
     /// </summary>
     /// <param name="persistentStorage"></param>
     /// <returns></returns>
-    public static Game LoadGame(ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration)
+    public static Game LoadLegacyGame(ICorePersistentStorage persistentStorage)
     {
         if (persistentStorage == null)
         {

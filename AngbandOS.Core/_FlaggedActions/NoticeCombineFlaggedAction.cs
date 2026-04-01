@@ -9,8 +9,8 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class NoticeCombineFlaggedAction : FlaggedAction
 {
-    private NoticeCombineFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-
+    private NoticeCombineFlaggedAction(Game game) : base(game) { }
+    private NoticeCombineFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     protected override void Execute()
     {
         bool flag = false;

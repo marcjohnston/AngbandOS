@@ -9,8 +9,8 @@ namespace AngbandOS.Core.Alignments;
 [Serializable]
 internal class BottomAlignment : Alignment
 {
-    private BottomAlignment(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string[] Align(string[] lines, int minimumHeight)
+    private BottomAlignment(Game game) : base(game) { }
+    private BottomAlignment(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string[] Align(string[] lines, int minimumHeight)
     {
         List<string> alignedLines = lines.ToList();
         for (int i = 0; i < minimumHeight - lines.Length; i++)

@@ -9,7 +9,8 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class WisdomAbility : Ability
 {
-    private WisdomAbility(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
+    private WisdomAbility(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
+    private WisdomAbility(Game game) : base(game) { } // This object is a singleton
 
     public override bool HasSustain => Game.HasSustainWisdom;
     public override string DescStatNeg => "naive";

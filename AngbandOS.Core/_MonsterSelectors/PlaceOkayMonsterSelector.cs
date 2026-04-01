@@ -9,8 +9,8 @@ namespace AngbandOS.Core.MonsterSelectors;
 [Serializable]
 internal class PlaceOkayMonsterSelector : MonsterSelector
 {
-    private PlaceOkayMonsterSelector(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-
+    private PlaceOkayMonsterSelector(Game game) : base(game) { }
+    private PlaceOkayMonsterSelector(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
         return new PlaceOkaySystemMonsterRaceFilter(Game, monsterRace.Index);

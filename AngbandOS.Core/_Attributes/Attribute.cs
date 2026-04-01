@@ -9,9 +9,12 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class Attribute : IGetKey, IIndexedSingletons
 {
-    protected Attribute(Game game, GameStateBag gameStateBag) // This object is a singleton
+    protected Attribute(Game game) // This object is a singleton
     {
         Game = game;
+    }
+    protected Attribute(Game game, ObjectGameStateBag gameStateBag) : this(game) // This object is a singleton
+    {
     }
 
     /// <summary>

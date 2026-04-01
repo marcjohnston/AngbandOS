@@ -15,8 +15,8 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class UpdateViewFlaggedAction : FlaggedAction
 {
-    private UpdateViewFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-
+    private UpdateViewFlaggedAction(Game game) : base(game) { }
+    private UpdateViewFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     /// <summary>
     /// Set the c.TileFlags as IsVisible and add the coordinate to the Game.View.
     /// </summary>

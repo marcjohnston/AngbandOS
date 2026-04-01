@@ -9,7 +9,8 @@ namespace AngbandOS.Core.WieldSlots;
 [Serializable]
 internal class ArmWieldSlot : EquipmentWieldSlot
 {
-    private ArmWieldSlot(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
+    private ArmWieldSlot(Game game) : base(game) { } // This object is a singleton
+    private ArmWieldSlot(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override int[] InventorySlots => new int[] { InventorySlotEnum.Arm };
     public override string Label(Item oPtr) => "j";
     public override string MentionUse(int? index) => "On arm";

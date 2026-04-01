@@ -8,7 +8,8 @@ using System.Text;
 using System.Text.Json.Serialization;
 
 namespace AngbandOS.Core;
-    internal class GameStateBagConverter : JsonConverter<GameStateBag>
+    
+internal class GameStateBagConverter : JsonConverter<GameStateBag>
 {
     const string TypePropertyName = "$type";
     const string ValuePropertyName = "Value";
@@ -21,23 +22,23 @@ namespace AngbandOS.Core;
 
         return type switch
         {
-            nameof(NullValueGameStateBag) => new NullValueGameStateBag(),
-            nameof(DateTimeValueGameStateBag) => new DateTimeValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDateTime()),
-            nameof(TimeSpanValueGameStateBag) => new TimeSpanValueGameStateBag(TimeSpan.Parse(doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
-            nameof(StringValueGameStateBag) => new StringValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!),
-            nameof(DecimalValueGameStateBag) => new DecimalValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDecimal()),
-            nameof(IntValueGameStateBag) => new IntValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetInt32()),
             nameof(BoolValueGameStateBag) => new BoolValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetBoolean()),
-            nameof(CharValueGameStateBag) => new CharValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()![0]),
-            nameof(ByteValueGameStateBag) => new ByteValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetByte()),
-            nameof(ColorEnumValueGameStateBag) => new ColorEnumValueGameStateBag((ColorEnum)Enum.Parse(typeof(ColorEnum), doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
-            nameof(ReferenceGameStateBag) => new ReferenceGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32()),
-            nameof(DictionaryGameStateBag) => new DictionaryGameStateBag(JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
-            nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), doc.RootElement.GetProperty("DataType").GetString()!, JsonSerializer.Deserialize<DictionaryGameStateBag>(doc.RootElement.GetProperty("GameStateBag").GetRawText(), options)!),
-            nameof(TupleGameStateBag) => new TupleGameStateBag(doc.RootElement.GetProperty("DataType").GetString()!, JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(ByteArrayGameStateBag) => new ByteArrayGameStateBag(Encoding.UTF8.GetBytes(doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
+            nameof(ByteValueGameStateBag) => new ByteValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetByte()),
             nameof(CharArrayGameStateBag) => new CharArrayGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!.ToCharArray()),
+            nameof(CharValueGameStateBag) => new CharValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()![0]),
+            nameof(ColorEnumValueGameStateBag) => new ColorEnumValueGameStateBag((ColorEnum)Enum.Parse(typeof(ColorEnum), doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
+            nameof(DateTimeValueGameStateBag) => new DateTimeValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDateTime()),
+            nameof(DecimalValueGameStateBag) => new DecimalValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDecimal()),
+            nameof(DictionaryGameStateBag) => new DictionaryGameStateBag(JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
+            nameof(IntValueGameStateBag) => new IntValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetInt32()),
             nameof(ListGameStateBag) => new ListGameStateBag(JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
+            nameof(NullValueGameStateBag) => new NullValueGameStateBag(),
+            nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty("GameStateBag").GetRawText(), options)!),
+            nameof(ReferenceGameStateBag) => new ReferenceGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32()),
+            nameof(StringValueGameStateBag) => new StringValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!),
+            nameof(TimeSpanValueGameStateBag) => new TimeSpanValueGameStateBag(TimeSpan.Parse(doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
+            nameof(TupleGameStateBag) => new TupleGameStateBag(doc.RootElement.GetProperty("DataType").GetString()!, JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             _ => throw new Exception($"Unknown type {type}")
         };
     }
@@ -111,9 +112,8 @@ namespace AngbandOS.Core;
             case ObjectGameStateBag objectValue:
                 writer.WriteString(TypePropertyName, nameof(ObjectGameStateBag));
                 writer.WriteNumber("ObjectId", objectValue.ObjectId);
-                writer.WriteString("DataType", objectValue.DataType);
                 writer.WritePropertyName("GameStateBag");
-                JsonSerializer.Serialize(writer, objectValue.GameStateBag, options);
+                JsonSerializer.Serialize(writer, objectValue.Value, options);
                 break;
 
             case TupleGameStateBag tupleValue:

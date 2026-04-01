@@ -9,8 +9,8 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class OldSleepPlayerEffect : PlayerEffectUniversalScript
 {
-    private OldSleepPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string? BlindPreMessage => "You fall asleep!";
+    private OldSleepPlayerEffect(Game game) : base(game) { }
+    private OldSleepPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You fall asleep!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         if (Game.HasFreeAction)

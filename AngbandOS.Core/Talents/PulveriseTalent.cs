@@ -11,8 +11,8 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class PulveriseTalent : Talent
 {
-    private PulveriseTalent(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string Name => "Pulverise";
+    private PulveriseTalent(Game game) : base(game) { }
+    private PulveriseTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Pulverise";
     public override int Level => 11;
     public override int ManaCost => 7;
     public override int BaseFailure => 30;

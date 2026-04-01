@@ -9,7 +9,8 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class CharismaAbility : Ability
 {
-    private CharismaAbility(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
+    private CharismaAbility(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
+    private CharismaAbility(Game game) : base(game) { } // This object is a singleton
 
     public override bool HasSustain => Game.HasSustainCharisma;
     public override string DescStatNeg => "ugly";

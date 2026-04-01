@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Justifications;
 [Serializable]
 internal class RightJustification : Justification
 {
-    private RightJustification(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-
+    private RightJustification(Game game) : base(game) { }
+    private RightJustification(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override string Format(string value, int width) => value.PadLeft(width);
 }

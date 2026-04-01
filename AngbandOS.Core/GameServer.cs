@@ -201,12 +201,7 @@ public class GameServer
             Game.Play(console, persistentStorage, replayPersistentStorage);
 
             GameStateBag saveGameStateBag = Game.Save();
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = false
-            };
-            options.Converters.Add(new GameStateBagConverter());
-            serializedGameData = JsonSerializer.Serialize(saveGameStateBag, options);
+            serializedGameData = saveGameStateBag.Serialize();
 
             gameIsOver = true;
         }
@@ -254,7 +249,7 @@ public class GameServer
     /// <param name="console"></param>
     /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
     /// <returns></returns>
-    public GameResults PlayLegacyExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration)
+    public GameResults PlayLegacyExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage)
     {
         if (console == null)
         {
@@ -269,7 +264,7 @@ public class GameServer
         try
         {
             // Retrieve the game from persistent storage.
-            Game = Game.LoadGame(persistentStorage, gameConfiguration);
+            Game = Game.LoadLegacyGame(persistentStorage);
             Game.Play(console, persistentStorage, replayPersistentStorage);
             gameIsOver = true;
         }
@@ -285,10 +280,13 @@ public class GameServer
     /// <summary>
     /// Plays an existing game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
     /// </summary>
-    /// <param name="console"></param>
-    /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
+    /// <param name="console">Supple the object to act as the console for the game.</param>
+    /// <param name="persistentStorage">Supply the object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
+    /// <param name="gameConfiguration">Supply the configuration for the game to be played.  It must match the same game that was played in the <paramref name="serializedGameStateBag"/>.</param>
+    /// <param name="replayPersistentStorage"> Supply the object responsible to accepting the replay steps.  If not supplied, the replay steps will not be provided.</param>
+    /// <param name="serializedGameStateBag">Supply the serialized game state to be restored.</param>
     /// <returns></returns>
-    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, string serializedGameState)
+    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, string serializedGameStateBag)
     {
         if (console == null)
         {
@@ -303,13 +301,18 @@ public class GameServer
         try
         {
             // Retrieve the game from persistent storage.
-            GameStateBag? gameStateBag = JsonSerializer.Deserialize<GameStateBag>(serializedGameState);
+            GameStateBag? gameStateBag = GameStateBag.Deserialize(serializedGameStateBag);
             if (gameStateBag is null)
             {
                 throw new Exception("Failed to deserialize game.");
             }
 
-            Game = new Game(gameConfiguration, gameStateBag);
+            if (gameStateBag is not DictionaryGameStateBag dictionaryGameStateBag)
+            {
+                throw new Exception("Unexpected game state bag format.");
+            }
+
+            Game = new Game(gameConfiguration, dictionaryGameStateBag);
             Game.Play(console, persistentStorage, replayPersistentStorage);
             gameIsOver = true;
         }

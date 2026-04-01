@@ -9,8 +9,8 @@ namespace AngbandOS.Core.GridTileEffects;
 [Serializable]
 internal class PoisonGridTileScript : GridTileScript
 {
-    private PoisonGridTileScript(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-
+    private PoisonGridTileScript(Game game) : base(game) { }
+    private PoisonGridTileScript(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         Game.RunScript(nameof(APuffOfGreenGasSurroundsYouRenderMessageScript));

@@ -7,19 +7,10 @@
 using System.Collections;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json.Serialization;
 
 namespace AngbandOS.Core;
 
-//[JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
-//[JsonDerivedType(typeof(IntValueGameStateBag), "int")]
-//[JsonDerivedType(typeof(StringValueGameStateBag), "string")]
-//[JsonDerivedType(typeof(DictionaryGameStateBag), "dict")]
-//[JsonDerivedType(typeof(ObjectGameStateBag), "object")]
-//[JsonDerivedType(typeof(ListGameStateBag), "list")]
-//[JsonDerivedType(typeof(TupleGameStateBag), "tuple")]
-internal abstract class GameStateBag
+internal class GameStateBag
 {
     public virtual bool IsEmpty => false;
     public static GameStateBag Serialize(object? value, string name = "", bool trim = true)
@@ -128,7 +119,7 @@ internal abstract class GameStateBag
                     objectValue[key] = Serialize(fieldValue, _objectToId, StringLibrary.DelimitIf(parent, ".", $"{type.Name}.{key}"), trim);
                 }
 
-                return new ObjectGameStateBag(id, type.Name, new DictionaryGameStateBag(objectValue));
+                return new ObjectGameStateBag(id, objectValue);
             }
 
             // Dictionaries
@@ -193,20 +184,24 @@ internal abstract class GameStateBag
         return Serialize(value, new Dictionary<object, int>(), name, trim);
     }
 
-    public void Deserialize(object entity)
+    public string Serialize()
     {
-        //IEnumerable<FieldInfo> serializableFields = entity.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(p => !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute)));
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = false
+        };
+        options.Converters.Add(new GameStateBagConverter());
+        return JsonSerializer.Serialize(this, options);
+    }
 
-        //foreach (FieldInfo fieldInfo in serializableFields)
-        //{
-        //    if (DataDictionary.TryGetValue(fieldInfo.Name, out object? value))
-        //    {
-        //        fieldInfo.SetValue(entity, value);
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Invalid game state.");
-        //    }
-        //}
+    public static GameStateBag? Deserialize(string serializedGameStateBag)
+    {
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = false
+        };
+        options.Converters.Add(new GameStateBagConverter());
+
+        return JsonSerializer.Deserialize<GameStateBag>(serializedGameStateBag, options);
     }
 }

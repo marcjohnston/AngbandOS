@@ -9,8 +9,8 @@ namespace AngbandOS.Core.GridTileEffects;
 [Serializable]
 internal class UnnoticedGridTileScript : GridTileScript
 {
-    private UnnoticedGridTileScript(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-
+    private UnnoticedGridTileScript(Game game) : base(game) { }
+    private UnnoticedGridTileScript(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         return (IsNoticedEnum.False, DestroysContentsEnum.False);

@@ -9,8 +9,9 @@ namespace AngbandOS.Core.WieldSlots;
 [Serializable]
 internal class HandsWieldSlot : EquipmentWieldSlot
 {
+    private HandsWieldSlot(Game game) : base(game) { } // This object is a singleton
+    private HandsWieldSlot(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     private bool RestrictingGloves;
-    private HandsWieldSlot(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Label(Item oPtr) => "l";
     public override int[] InventorySlots => new int[] { InventorySlotEnum.Hands };
     public override string MentionUse(int? index) => "On hands";

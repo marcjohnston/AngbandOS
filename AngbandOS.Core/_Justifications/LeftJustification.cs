@@ -9,8 +9,8 @@ namespace AngbandOS.Core.Justifications;
 [Serializable]
 internal class LeftJustification : Justification
 {
-    private LeftJustification(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string Format(string value, int width)
+    private LeftJustification(Game game) : base(game) { }
+    private LeftJustification(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Format(string value, int width)
     {
         if (value.Length > width)
         {

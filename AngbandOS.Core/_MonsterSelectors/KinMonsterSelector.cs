@@ -9,8 +9,8 @@ namespace AngbandOS.Core.MonsterSelectors;
 [Serializable]
 internal class KinMonsterSelector : MonsterSelector
 {
-    private KinMonsterSelector(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-
+    private KinMonsterSelector(Game game) : base(game) { }
+    private KinMonsterSelector(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
         return new KinSystemMonsterRaceFilter(Game, monsterRace.Symbol.Character);

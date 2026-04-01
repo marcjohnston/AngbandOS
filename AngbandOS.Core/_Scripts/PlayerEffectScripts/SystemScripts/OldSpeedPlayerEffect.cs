@@ -9,8 +9,8 @@ namespace AngbandOS.Core.PlayerEffects;
 [Serializable]
 internal class OldSpeedPlayerEffect : PlayerEffectUniversalScript
 {
-    private OldSpeedPlayerEffect(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string? BlindPreMessage => "You are hit by something!";
+    private OldSpeedPlayerEffect(Game game) : base(game) { }
+    private OldSpeedPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by something!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         Game.HasteTimer.AddTimer(Game.DieRoll(5));

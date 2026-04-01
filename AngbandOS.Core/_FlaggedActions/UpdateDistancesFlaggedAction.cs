@@ -9,8 +9,8 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class UpdateDistancesFlaggedAction : FlaggedAction
 {
-    private UpdateDistancesFlaggedAction(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    protected override void Execute()
+    private UpdateDistancesFlaggedAction(Game game) : base(game) { }
+    private UpdateDistancesFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void Execute()
     {
         for (int i = 1; i < Game.MonsterMax; i++)
         {

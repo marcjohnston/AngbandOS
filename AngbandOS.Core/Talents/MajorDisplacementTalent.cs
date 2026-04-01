@@ -9,8 +9,8 @@ namespace AngbandOS.Core.Talents;
 [Serializable]
 internal class MajorDisplacementTalent : Talent
 {
-    private MajorDisplacementTalent(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
-    public override string Name => "Major Displacement";
+    private MajorDisplacementTalent(Game game) : base(game) { }
+    private MajorDisplacementTalent(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Name => "Major Displacement";
     public override int Level => 7;
     public override int ManaCost => 6;
     public override int BaseFailure => 35;

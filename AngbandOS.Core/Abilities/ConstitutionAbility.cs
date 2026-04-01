@@ -9,7 +9,8 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ConstitutionAbility : Ability
 {
-    private ConstitutionAbility(Game game, GameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
+    private ConstitutionAbility(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
+    private ConstitutionAbility(Game game) : base(game) { } // This object is a singleton
 
     public override bool HasSustain => Game.HasSustainConstitution;
     public override string DescStatNeg => "sickly";
