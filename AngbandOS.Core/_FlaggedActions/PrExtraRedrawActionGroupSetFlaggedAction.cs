@@ -9,13 +9,12 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class PrExtraRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
 {
+    protected override FlaggedAction[] RedrawActions => new FlaggedAction[]
+    {
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)),
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)),
+    };
     private PrExtraRedrawActionGroupSetFlaggedAction(Game game) : base(game) { }
     private PrExtraRedrawActionGroupSetFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
-    public override void Bind()
-    {
-        RedrawActions = new FlaggedAction[] {
-            Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)),
-            Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)),
-        };
-    }
+    public override void Bind() { }
 }

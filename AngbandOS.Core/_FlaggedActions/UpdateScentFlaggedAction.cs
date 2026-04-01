@@ -15,9 +15,9 @@ internal class UpdateScentFlaggedAction : FlaggedAction
     private UpdateScentFlaggedAction(Game game) : base(game) { }
     private UpdateScentFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag)
     {
-        _flowHead = gameStateBag.GetInt("_flowHead");
-        _flowN = gameStateBag.GetInt("_flowN");
-        _flowTail = gameStateBag.GetInt("_flowTail");
+        _flowHead = gameStateBag.GetInt(nameof(_flowHead));
+        _flowN = gameStateBag.GetInt(nameof(_flowN));
+        _flowTail = gameStateBag.GetInt(nameof(_flowTail));
     }
     private void UpdateFlowAux(int y, int x, int n)
     {

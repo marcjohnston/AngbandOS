@@ -7,9 +7,9 @@
 namespace AngbandOS.Core.FlaggedActions;
 
 [Serializable]
-internal class GroupSetFlaggedAction : FlaggedAction
+internal abstract class GroupSetFlaggedAction : FlaggedAction
 {
-    protected FlaggedAction[] RedrawActions;
+    protected abstract FlaggedAction[] RedrawActions { get; }
     protected GroupSetFlaggedAction(Game game) : base(game) { } // This object is a singleton
     protected GroupSetFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override bool IsSet => RedrawActions.Any(_redrawAction => _redrawAction.IsSet);

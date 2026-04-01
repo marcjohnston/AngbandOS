@@ -10,4 +10,5 @@ namespace AngbandOS.Core.Properties;
 internal class CurrentGameDateTimeProperty : DateTimeProperty
 {
     private CurrentGameDateTimeProperty(Game game) : base(game) { } // This object is a singleton.
+    private CurrentGameDateTimeProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { } // This object is a singleton.
 }

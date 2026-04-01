@@ -9,12 +9,12 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class NoticeCombineAndReorderGroupSetFlaggedAction : GroupSetFlaggedAction
 {
-    private NoticeCombineAndReorderGroupSetFlaggedAction(Game game) : base(game) { }
-    private NoticeCombineAndReorderGroupSetFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override void Bind()
+    protected override FlaggedAction[] RedrawActions => new FlaggedAction[] 
     {
-        RedrawActions = new FlaggedAction[] {
-            Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)),
-            Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeReorderFlaggedAction))
-        };
-    }
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeCombineFlaggedAction)),
+        Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeReorderFlaggedAction))
+    };
+    private NoticeCombineAndReorderGroupSetFlaggedAction(Game game) : base(game) { }
+    private NoticeCombineAndReorderGroupSetFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    
+    public override void Bind() { }
 }

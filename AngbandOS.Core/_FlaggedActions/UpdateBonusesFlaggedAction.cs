@@ -13,7 +13,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private bool MartialArtistNotifyAux;
 
     private UpdateBonusesFlaggedAction(Game game) : base(game) { }
-    private UpdateBonusesFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
+    private UpdateBonusesFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag)
+    {
+        MartialArtistArmorAux = gameStateBag.GetBool(nameof(MartialArtistArmorAux));
+        MartialArtistNotifyAux = gameStateBag.GetBool(nameof(MartialArtistNotifyAux));
+    }
+    private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
     {
         EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
 

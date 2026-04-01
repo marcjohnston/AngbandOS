@@ -14,6 +14,7 @@ internal class ExperienceLevelIntProperty : IntProperty
 {
     private ExperienceLevelIntProperty(Game game) : base(game) { } // This object is a singleton.
 
+    private ExperienceLevelIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { } // This object is a singleton.
     protected override void OnAfterSet()
     {
         base.OnAfterSet();

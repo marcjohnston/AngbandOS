@@ -13,7 +13,7 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
     private UpdateTorchRadiusFlaggedAction(Game game) : base(game) { }
     private UpdateTorchRadiusFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag)
     {
-        OldLightLevel = gameStateBag.GetInt("OldLightLevel");
+        OldLightLevel = gameStateBag.GetInt(nameof(OldLightLevel));
     }
     
     /// <summary>
