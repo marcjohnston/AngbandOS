@@ -20,6 +20,7 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
 
     public Timer(Game game, ObjectGameStateBag gameStateBag) : this(game) // This object is a singleton
     {
+        _value = gameStateBag.GetInt("_value");
     }
 
     /// <summary>

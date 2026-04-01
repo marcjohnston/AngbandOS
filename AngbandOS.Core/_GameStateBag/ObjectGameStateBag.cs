@@ -15,7 +15,7 @@ internal class ObjectGameStateBag : GameStateBag
         {
             return typedGameStateBag;
         }
-        throw new InvalidOperationException($"Key '{key}' is missing or not of type {typeof(TGameStateBag).Name}.");
+        throw new InvalidOperationException($"The key '{key}' does not belong to the type {typeof(TGameStateBag).Name}.");
     }
     public bool GetBool(string key) => GetGameStateBag<BoolValueGameStateBag>(key).Value;
 

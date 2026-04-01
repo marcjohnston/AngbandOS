@@ -706,7 +706,7 @@ internal class SingletonRepository
                         Dictionary<string, GameStateBag> singletonDictionaryGameStateBag = singletonObjectGameStateBag.Values;
                         foreach ((string RestorePropertyName, GameStateBag RestorePropertyValue) in singletonDictionaryGameStateBag)
                         {
-                            FieldInfo? singletonFieldInfo = singleton.GetType().GetField(RestorePropertyName);
+                            FieldInfo? singletonFieldInfo = GameStateBag.GetAllFields(singleton.GetType()).SingleOrDefault(_fieldInfo => _fieldInfo.Name == RestorePropertyName);
                             if (singletonFieldInfo is null)
                             {
                                 throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton could not be found."); 

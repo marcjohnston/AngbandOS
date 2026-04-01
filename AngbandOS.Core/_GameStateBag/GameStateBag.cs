@@ -12,6 +12,21 @@ namespace AngbandOS.Core;
 
 internal class GameStateBag
 {
+    public static FieldInfo[] GetAllFields(Type? type)
+    {
+        List<FieldInfo> fieldInfoList = new List<FieldInfo>();
+        while (type != null)
+        {
+            foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+            {
+                fieldInfoList.Add(field);
+            }
+
+            type = type.BaseType;
+        }
+        return fieldInfoList.ToArray();
+    }
+
     /// <summary>
     /// Returns the state of a type.  The return object type is dependent on the type of data being serialized.
     /// </summary>
@@ -22,21 +37,6 @@ internal class GameStateBag
     /// <exception cref="Exception"></exception>
     public static GameStateBag Serialize(Dictionary<object, int> objectToIdDictionary, object? value, string parent = "")
     {
-        FieldInfo[] GetAllFields(Type? type)
-        {
-            List<FieldInfo> fieldInfoList = new List<FieldInfo>();
-            while (type != null)
-            {
-                foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
-                {
-                    fieldInfoList.Add(field);
-                }
-
-                type = type.BaseType;
-            }
-            return fieldInfoList.ToArray();
-        }
-
         // Handle null values.
         if (value == null)
         {
