@@ -27,6 +27,19 @@ internal class GameStateBag
         return fieldInfoList.ToArray();
     }
 
+    public static bool IsEmpty(GameStateBag gameStateBag)
+    {
+        switch (gameStateBag)
+        {
+            case ObjectGameStateBag objectGameStateBag:
+                return objectGameStateBag.Values.Count == 0;
+            case DictionaryGameStateBag dictionaryGameStateBag:
+                return dictionaryGameStateBag.Values.Count == 0;
+            default:
+                return false; // Primitive types are never empty.
+        }
+    }
+
     /// <summary>
     /// Returns the state of a type.  The return object type is dependent on the type of data being serialized.
     /// </summary>

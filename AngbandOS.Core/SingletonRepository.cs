@@ -609,6 +609,55 @@ internal class SingletonRepository
         }
     }
 
+    private void VerifyRestore(GameStateBag? gameStateBag, object singleton)
+    {
+        // Perform a verification of the restore process.
+        if (gameStateBag is not null)
+        {
+            ObjectGameStateBag singletonObjectGameStateBag = (ObjectGameStateBag)gameStateBag;
+            Dictionary<string, GameStateBag> singletonDictionaryGameStateBag = singletonObjectGameStateBag.Values;
+            foreach ((string RestorePropertyName, GameStateBag RestorePropertyValue) in singletonDictionaryGameStateBag)
+            {
+                FieldInfo? singletonFieldInfo = GameStateBag.GetAllFields(singleton.GetType()).SingleOrDefault(_fieldInfo => _fieldInfo.Name == RestorePropertyName);
+                if (singletonFieldInfo is null)
+                {
+                    throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton could not be found.");
+                }
+
+                object? singletonFieldValue = singletonFieldInfo.GetValue(singleton);
+                switch (RestorePropertyValue)
+                {
+                    case NullValueGameStateBag:
+                        if (singletonFieldValue is not null)
+                        {
+                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as null.");
+                        }
+                        break;
+                    case IntValueGameStateBag intRestorePropertyValue:
+                        if (singletonFieldValue is not int intSingletonFieldValue)
+                        {
+                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as an integer value.");
+                        }
+                        if (intSingletonFieldValue != intRestorePropertyValue.Value)
+                        {
+                            throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {intRestorePropertyValue.Value}.");
+                        }
+                        break;
+                    case BoolValueGameStateBag boolRestorePropertyValue:
+                        if (singletonFieldValue is not bool boolSingletonFieldValue)
+                        {
+                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a bool value.");
+                        }
+                        if (boolSingletonFieldValue != boolRestorePropertyValue.Value)
+                        {
+                            throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {boolRestorePropertyValue.Value}.");
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
     private void LoadAllAssemblyTypes<T>(DictionaryGameStateBag? dictionaryGameStateBag) // TODO: WHY CANT THIS BE where T: IGETKEY
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
@@ -635,28 +684,34 @@ internal class SingletonRepository
                     throw new Exception($"Invalid number of constructors for {typeName}.  Expecting ctor({nameof(Game)}) and an optional ctor({nameof(Game)}, {nameof(GameStateBag)}).");
                 }
 
+                // Declare a tuple for the constructor and game state bag that is needed for the construction of the singleton.
                 (ConstructorInfo Constructor, GameStateBag? GameStateBag)? constructorAndParameters = null;
+
                 // Check to see if we are restoring a game.  
                 if (dictionaryGameStateBag is not null)
                 {
                     // We are restoring a game.  Game Restore States 3, 4, 5 and 6.  Check to see if there is game state for this singleton
                     if (dictionaryGameStateBag.Values.TryGetValue(typeName, out GameStateBag? singletonGameStateBag))
                     {
-                        // There is game state.  Game Restore States 5 and 6.  We need a constructor that takes the game object and the appropriate game state.
-                        ConstructorInfo? restoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
+                        // There is game state.  Game Restore States 5 and 6.  We need to check if there are fields to restore.
+                        if (!GameStateBag.IsEmpty(singletonGameStateBag))
                         {
-                            ParameterInfo[] parameters = _constructor.GetParameters();
-                            return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == singletonGameStateBag.GetType();
-                        });
+                            // The GameStateBag is not empty and requires a restore.  We need a constructor that takes the game object and the appropriate game state.
+                            ConstructorInfo? restoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
+                            {
+                                ParameterInfo[] parameters = _constructor.GetParameters();
+                                return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == singletonGameStateBag.GetType();
+                            });
 
-                        if (restoreGameStateConstructor is null)
-                        {
-                            // Game Restore State 5.
-                            throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}, {singletonGameStateBag.GetType().Name}).");
+                            if (restoreGameStateConstructor is null)
+                            {
+                                // Game Restore State 5.
+                                throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}, {singletonGameStateBag.GetType().Name}).");
+                            }
+
+                            // Game Restore State 6.  Set the parameters for the constructor.
+                            constructorAndParameters = (restoreGameStateConstructor, singletonGameStateBag);
                         }
-
-                        // Game Restore State 6.  Set the parameters for the constructor.
-                        constructorAndParameters = (restoreGameStateConstructor, singletonGameStateBag);
                     }
                     else
                     {
@@ -698,52 +753,7 @@ internal class SingletonRepository
                 {
                     IGetKey singleton = (IGetKey)constructor.Invoke(parameters);
                     RegisterSingleton(singleton);
-
-                    // Perform a verification of the restore process.
-                    if (constructorAndParameters.Value.GameStateBag is not null)
-                    {
-                        ObjectGameStateBag singletonObjectGameStateBag = (ObjectGameStateBag)constructorAndParameters.Value.GameStateBag;
-                        Dictionary<string, GameStateBag> singletonDictionaryGameStateBag = singletonObjectGameStateBag.Values;
-                        foreach ((string RestorePropertyName, GameStateBag RestorePropertyValue) in singletonDictionaryGameStateBag)
-                        {
-                            FieldInfo? singletonFieldInfo = GameStateBag.GetAllFields(singleton.GetType()).SingleOrDefault(_fieldInfo => _fieldInfo.Name == RestorePropertyName);
-                            if (singletonFieldInfo is null)
-                            {
-                                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton could not be found."); 
-                            }
-
-                            object? singletonFieldValue = singletonFieldInfo.GetValue(singleton);
-                            switch (RestorePropertyValue)
-                            {
-                                case NullValueGameStateBag:
-                                    if (singletonFieldValue is not null)
-                                    {
-                                        throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as null.");
-                                    }
-                                    break;
-                                case IntValueGameStateBag intRestorePropertyValue:
-                                    if (singletonFieldValue is not int intSingletonFieldValue)
-                                    {
-                                        throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as an integer value.");
-                                    }
-                                    if (intSingletonFieldValue != intRestorePropertyValue.Value)
-                                    {
-                                        throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {intRestorePropertyValue.Value}.");
-                                    }
-                                    break;
-                                case BoolValueGameStateBag boolRestorePropertyValue:
-                                    if (singletonFieldValue is not bool boolSingletonFieldValue)
-                                    {
-                                        throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a bool value.");
-                                    }
-                                    if (boolSingletonFieldValue != boolRestorePropertyValue.Value)
-                                    {
-                                        throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {boolRestorePropertyValue.Value}.");
-                                    }
-                                    break;
-                            }
-                        }
-                    }
+                    VerifyRestore(constructorAndParameters.Value.GameStateBag, singleton);
                 }
                 catch (Exception ex)
                 {
