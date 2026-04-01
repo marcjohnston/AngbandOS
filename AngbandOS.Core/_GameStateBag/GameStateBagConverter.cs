@@ -34,7 +34,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             nameof(IntValueGameStateBag) => new IntValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetInt32()),
             nameof(ListGameStateBag) => new ListGameStateBag(JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(NullValueGameStateBag) => new NullValueGameStateBag(),
-            nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty("GameStateBag").GetRawText(), options)!),
+            nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(ReferenceGameStateBag) => new ReferenceGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32()),
             nameof(StringValueGameStateBag) => new StringValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!),
             nameof(TimeSpanValueGameStateBag) => new TimeSpanValueGameStateBag(TimeSpan.Parse(doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
@@ -112,7 +112,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             case ObjectGameStateBag objectValue:
                 writer.WriteString(TypePropertyName, nameof(ObjectGameStateBag));
                 writer.WriteNumber("ObjectId", objectValue.ObjectId);
-                writer.WritePropertyName("GameStateBag");
+                writer.WritePropertyName("Values");
                 JsonSerializer.Serialize(writer, objectValue.Value, options);
                 break;
 

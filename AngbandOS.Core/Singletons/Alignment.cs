@@ -14,9 +14,6 @@ internal abstract class Alignment : IGetKey
     {
         Game = game;
     }
-    protected Alignment(Game game, ObjectGameStateBag gameStateBag) : this(game)
-    {
-    }
 
     public string GetKey => GetType().Name;
 
