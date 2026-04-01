@@ -10,6 +10,7 @@ namespace AngbandOS.Core.Properties;
 internal class GoldIntProperty : IntProperty
 {
     private GoldIntProperty(Game game) : base(game) { } // This object is a singleton.
+    private GoldIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
 
     protected override void OnAfterSet()
     {

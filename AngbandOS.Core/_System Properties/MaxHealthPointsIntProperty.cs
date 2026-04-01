@@ -10,4 +10,5 @@ namespace AngbandOS.Core.Properties;
 internal class MaxHealthPointsIntProperty : IntProperty
 {
     private MaxHealthPointsIntProperty(Game game) : base(game) { } // This object is a singleton.
+    private MaxHealthPointsIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
 }

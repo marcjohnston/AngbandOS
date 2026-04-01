@@ -10,4 +10,5 @@ namespace AngbandOS.Core.Properties;
 internal class HealthPointsIntProperty : IntProperty
 {
     private HealthPointsIntProperty(Game game) : base(game) { } // This object is a singleton.
+    private HealthPointsIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
 }

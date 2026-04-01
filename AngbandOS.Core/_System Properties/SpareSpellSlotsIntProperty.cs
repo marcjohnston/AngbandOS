@@ -10,4 +10,5 @@ namespace AngbandOS.Core.Properties;
 internal class SpareSpellSlotsIntProperty : IntProperty
 {
     private SpareSpellSlotsIntProperty(Game game) : base(game) { } // This object is a singleton.
+    private SpareSpellSlotsIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
 }

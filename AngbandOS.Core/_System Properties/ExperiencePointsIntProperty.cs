@@ -13,4 +13,5 @@ namespace AngbandOS.Core.Properties;
 internal class ExperiencePointsIntProperty : IntProperty
 {
     private ExperiencePointsIntProperty(Game game) : base(game) { } // This object is a singleton.
+    private ExperiencePointsIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
 }

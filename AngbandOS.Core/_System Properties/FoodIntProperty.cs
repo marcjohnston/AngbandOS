@@ -10,4 +10,5 @@ namespace AngbandOS.Core.Properties;
 internal class FoodIntProperty : IntProperty
 {
     private FoodIntProperty(Game game) : base(game) { } // This object is a singleton.
+    private FoodIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
 }

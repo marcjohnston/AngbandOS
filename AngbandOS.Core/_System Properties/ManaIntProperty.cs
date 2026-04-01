@@ -10,4 +10,5 @@ namespace AngbandOS.Core.Properties;
 internal class ManaIntProperty : IntProperty
 {
     private ManaIntProperty(Game game) : base(game) { } // This object is a singleton.
+    private ManaIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
 }

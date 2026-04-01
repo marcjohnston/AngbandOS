@@ -13,4 +13,5 @@ namespace AngbandOS.Core.Properties;
 internal class HighestExperiencePointsAchievedIntProperty : IntProperty
 {
     private HighestExperiencePointsAchievedIntProperty(Game game) : base(game) { } // This object is a singleton.
+    private HighestExperiencePointsAchievedIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
 }
