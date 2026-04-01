@@ -12,7 +12,7 @@ internal abstract class IntProperty : Property, IIntValue
     protected IntProperty(Game game) : base(game) { }
     protected IntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game)
     {
-        _value = objectGameStateBag.GetInt("Value");
+        _value = objectGameStateBag.GetInt(nameof(_value));
     }
 
     private int _value;

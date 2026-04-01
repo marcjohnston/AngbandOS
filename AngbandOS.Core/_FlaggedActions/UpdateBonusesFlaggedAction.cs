@@ -9,14 +9,12 @@ namespace AngbandOS.Core.FlaggedActions;
 [Serializable]
 internal class UpdateBonusesFlaggedAction : FlaggedAction
 {
-    private bool MartialArtistArmorAux;
-    private bool MartialArtistNotifyAux;
+    private bool PreviousMartialArtistArmorAux;
 
     private UpdateBonusesFlaggedAction(Game game) : base(game) { }
     private UpdateBonusesFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag)
     {
-        MartialArtistArmorAux = gameStateBag.GetBool(nameof(MartialArtistArmorAux));
-        MartialArtistNotifyAux = gameStateBag.GetBool(nameof(MartialArtistNotifyAux));
+        PreviousMartialArtistArmorAux = gameStateBag.GetBool(nameof(PreviousMartialArtistArmorAux));
     }
     private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
     {
@@ -641,6 +639,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
 
         // TODO: Legacy code only had 1 possibility for the melee weapon.  Now we are scanning multiple wield slots capable of multiple items.
+        bool MartialArtistArmorAux = false;
         foreach (WieldSlot meleeWeaponInventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsMeleeWeapon))
         {
             foreach (int index in meleeWeaponInventorySlot.InventorySlots)
@@ -730,7 +729,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                 }
 
-                MartialArtistArmorAux = false;
                 if (Game.CharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor is not null)
                 {
                     int divisor = Game.CharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor.Value;
@@ -868,10 +866,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Game.MsgPrint(Game.CharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Chaos flows freely through you again." : "You feel more comfortable after removing your weapon.");
             }
         }
-        if (Game.CharacterClass.IsMartialArtist && MartialArtistArmorAux != MartialArtistNotifyAux) // TODO: This should be moved to the wield action
+        if (Game.CharacterClass.IsMartialArtist && MartialArtistArmorAux != PreviousMartialArtistArmorAux) // TODO: This should be moved to the wield action
         {
             Game.MsgPrint(Game.MartialArtistHeavyArmor() ? "The weight of your armor disrupts your balance." : "You regain your balance.");
-            MartialArtistNotifyAux = MartialArtistArmorAux;
+            PreviousMartialArtistArmorAux = MartialArtistArmorAux;
         }
     }
 }
