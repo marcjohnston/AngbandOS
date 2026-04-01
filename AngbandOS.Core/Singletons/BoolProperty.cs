@@ -12,7 +12,11 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class BoolProperty : Property, IBoolValue
 {
-    public BoolProperty(Game game) : base(game) { }
+    protected BoolProperty(Game game) : base(game) { }
+    protected BoolProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game)
+    {
+        _value = objectGameStateBag.GetBool(nameof(_value));
+    }
 
     private bool _value;
 
