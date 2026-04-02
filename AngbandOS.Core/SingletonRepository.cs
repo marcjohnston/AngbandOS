@@ -643,6 +643,16 @@ internal class SingletonRepository
                             throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {intRestorePropertyValue.Value}.");
                         }
                         break;
+                    case StringValueGameStateBag stringRestorePropertyValue:
+                        if (singletonFieldValue is not string stringSingletonFieldValue)
+                        {
+                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as an string value.");
+                        }
+                        if (stringSingletonFieldValue != stringRestorePropertyValue.Value)
+                        {
+                            throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {stringRestorePropertyValue.Value}.");
+                        }
+                        break;
                     case BoolValueGameStateBag boolRestorePropertyValue:
                         if (singletonFieldValue is not bool boolSingletonFieldValue)
                         {
