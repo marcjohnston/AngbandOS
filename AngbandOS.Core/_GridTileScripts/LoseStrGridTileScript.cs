@@ -10,7 +10,6 @@ namespace AngbandOS.Core.GridTileEffects;
 internal class LoseStrGridTileScript : GridTileScript
 {
     private LoseStrGridTileScript(Game game) : base(game) { }
-    private LoseStrGridTileScript(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         Game.RunScript(nameof(ASmallNeedleHasPrickedYouRenderMessageScript));

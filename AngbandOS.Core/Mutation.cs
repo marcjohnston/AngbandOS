@@ -22,7 +22,7 @@ internal abstract class Mutation : IGetKey
     /// <returns></returns>
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         // Check to see if there is an activation that needs binding.
         if (ActivationBinding is not null)

@@ -10,7 +10,6 @@ namespace AngbandOS.Core;
 internal class PackWieldSlot : WieldSlot
 {
     private PackWieldSlot(Game game) : base(game) { } // This object is a singleton
-    private PackWieldSlot(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected const string alphabet = "abcdefghijklmnopqrstuvwxyz";
     public override int[] InventorySlots => new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }; // TODO: Is 26 valid?  Game.InvenCarry says otherwise
     public override int MaximumItemSlots => InventorySlots.Length;

@@ -262,7 +262,7 @@ internal class SingletonRepository
     /// </summary>
     /// <param name="gameConfiguration"></param>
     /// <param name="gameStateBag">Supply the <see cref="GameStateBag"/> that contains the field values for the singletons to rehydrate with.  The <see cref="GameStateBag"/> must be an instance of the <see cref="DictionaryGameStateBag"/>.</param>
-    public void LoadAndBind(GameConfiguration gameConfiguration, DictionaryGameStateBag? gameStateBag)
+    public void LoadAndBind(GameConfiguration gameConfiguration, RestoreGameState? restoreGameState)
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
         RegisterInterface<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
@@ -333,90 +333,90 @@ internal class SingletonRepository
         RegisterInterface<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
 
         // Load system singletons.
-        LoadAllAssemblyTypes<IGetKey>(gameStateBag);
+        LoadAllAssemblyTypes<IGetKey>(restoreGameState);
 
         // Validate the system scripts exist, before we load the user configurable ones.
         ValidateSystemScriptsEnum();
-
+        
         // Preload
-        LoadFromConfiguration<OrAttribute, OrAttributeGameConfiguration>(gameConfiguration.OrAttributes, gameStateBag);
-        LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes, gameStateBag);
-        LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes, gameStateBag);
+        LoadFromConfiguration<OrAttribute, OrAttributeGameConfiguration>(gameConfiguration.OrAttributes, restoreGameState);
+        LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes, restoreGameState);
+        LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes, restoreGameState);
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
-        LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts, gameStateBag);
-        LoadFromConfiguration<Activation, ActivationGameConfiguration>(gameConfiguration.Activations, gameStateBag);
-        LoadFromConfiguration<Animation, AnimationGameConfiguration>(gameConfiguration.Animations, gameStateBag);
-        LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration>(gameConfiguration.ArtifactBiasWeightedRandoms, gameStateBag);
-        LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks, gameStateBag);
-        LoadFromConfiguration<AttributeFilter, AttributeFilterGameConfiguration>(gameConfiguration.AttributeFilters, gameStateBag);
-        LoadFromConfiguration<Conditional, ConditionalGameConfiguration>(gameConfiguration.ProductOfSumsBoolFunctions, gameStateBag);
-        LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities, gameStateBag); // Composite singleton // Composite singleton
-        LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells, gameStateBag);
-        LoadFromConfiguration<ChestTrap, ChestTrapGameConfiguration>(gameConfiguration.ChestTraps, gameStateBag);
-        LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations, gameStateBag);
-        LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration>(gameConfiguration.ConditionalWidgets, gameStateBag);
-        LoadFromConfiguration<ConditionalScript, ConditionalScriptGameConfiguration>(gameConfiguration.ConditionalScripts, gameStateBag);
-        LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration>(gameConfiguration.DateWidgets, gameStateBag);
-        LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration>(gameConfiguration.DungeonGuardians, gameStateBag);
-        LoadFromConfiguration<Dungeon, DungeonGameConfiguration>(gameConfiguration.Dungeons, gameStateBag);
-        LoadFromConfiguration<GameCommand, GameCommandGameConfiguration>(gameConfiguration.GameCommands, gameStateBag);
-        LoadFromConfiguration<GameMessageWidget, GameMessageWidgetGameConfiguration>(gameConfiguration.GameMessageWidgets, gameStateBag);
-        LoadFromConfiguration<Gender, GenderGameConfiguration>(gameConfiguration.Genders, gameStateBag);
-        LoadFromConfiguration<God, GodGameConfiguration>(gameConfiguration.Gods, gameStateBag);
-        LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration>(gameConfiguration.HelpGroups, gameStateBag);
-        LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration>(gameConfiguration.IntWidgets, gameStateBag);
-        LoadFromConfiguration<ItemClass, ItemClassGameConfiguration>(gameConfiguration.ItemClasses, gameStateBag);
-        LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration>(gameConfiguration.ItemEnhancements, gameStateBag);
-        LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration>(gameConfiguration.ItemEnhancementWeightedRandoms, gameStateBag);       
-        LoadFromConfiguration<ItemIdentification, ItemIdentificationGameConfiguration>(gameConfiguration.ItemIdentifications, gameStateBag);
-        LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration>(gameConfiguration.ItemFactories, gameStateBag);
-        LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration>(gameConfiguration.ItemFactoryWeightedRandoms, gameStateBag);
-        LoadFromConfiguration<ItemFilter, ItemFilterGameConfiguration>(gameConfiguration.ItemFilters, gameStateBag);
-        LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration>(gameConfiguration.ItemFlavors, gameStateBag);
-        LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration>(gameConfiguration.MappedSpellScripts, gameStateBag);
-        LoadFromConfiguration<MappedItemEnhancement, MappedItemEnhancementGameConfiguration>(gameConfiguration.MappedItemEnhancements, gameStateBag);
-        LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration>(gameConfiguration.MapWidgets, gameStateBag);
-        LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration>(gameConfiguration.MartialArtsAttacks, gameStateBag);
-        LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration>(gameConfiguration.MaxRangedWidgets, gameStateBag);
-        LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration>(gameConfiguration.MonsterRaces, gameStateBag);
-        LoadFromConfiguration<OutfitManifest, OutfitManifestGameConfiguration>(gameConfiguration.OutfitManifests, gameStateBag); // Composite singleton    
-        LoadFromConfiguration<Patron, PatronGameConfiguration>(gameConfiguration.Patrons, gameStateBag);
-        LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration>(gameConfiguration.PhysicalAttributeSets, gameStateBag);
-        LoadFromConfiguration<Plural, PluralGameConfiguration>(gameConfiguration.Plurals, gameStateBag);
-        LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration>(gameConfiguration.ProjectileGraphics, gameStateBag);
-        LoadFromConfiguration<Projectile, ProjectileGameConfiguration>(gameConfiguration.Projectiles, gameStateBag);
-        LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration>(gameConfiguration.ProjectileScripts, gameStateBag);
-        LoadFromConfiguration<ProjectileScriptWeightedRandom, ProjectileScriptWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts, gameStateBag);
-        LoadFromConfiguration<RaceAbility, RaceAbilityGameConfiguration>(gameConfiguration.RaceAbilities, gameStateBag); // Composite singleton
-        LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration>(gameConfiguration.RaceGenders, gameStateBag); // Composite singleton
-        LoadFromConfiguration<RacePower, RacePowerGameConfiguration>(gameConfiguration.RacialPowers, gameStateBag); // Composite singleton
-        LoadFromConfiguration<RacialPowerTest, RacialPowerTestGameConfiguration>(gameConfiguration.RacialPowerTests, gameStateBag);
-        LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration>(gameConfiguration.RangedWidgets, gameStateBag);
-        LoadFromConfiguration<RangedWeaponBonus, RangedWeaponBonusGameConfiguration>(gameConfiguration.RangedWeaponBonuses, gameStateBag);
-        LoadFromConfiguration<Realm, RealmGameConfiguration>(gameConfiguration.Realms, gameStateBag);
-        LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration>(gameConfiguration.RealmCharacterClasses, gameStateBag); // Composite singleton
-        LoadFromConfiguration<RechargeItemScript, RechargeItemScriptGameConfiguration>(gameConfiguration.RechargeItemScripts, gameStateBag);
-        LoadFromConfiguration<RenderMessageScript, RenderMessageScriptGameConfiguration>(gameConfiguration.RenderMessageScripts, gameStateBag);
-        LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration>(gameConfiguration.Shopkeepers, gameStateBag);
-        LoadFromConfiguration<Spell, SpellGameConfiguration>(gameConfiguration.Spells, gameStateBag);
-        LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration>(gameConfiguration.StoreCommands, gameStateBag);
-        LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration>(gameConfiguration.StoreFactories, gameStateBag);
-        LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration>(gameConfiguration.StringWidgets, gameStateBag);
-        LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration>(gameConfiguration.SummonScripts, gameStateBag);
-        LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration>(gameConfiguration.SummonWeightedRandoms, gameStateBag);
-        LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration>(gameConfiguration.SyllableSets, gameStateBag);
-        LoadFromConfiguration<Symbol, SymbolGameConfiguration>(gameConfiguration.Symbols, gameStateBag);
-        LoadFromConfiguration<LabelWidget, LabelWidgetGameConfiguration>(gameConfiguration.LabelWidgets, gameStateBag);
-        LoadFromConfiguration<TeleportSelfScript, TeleportSelfScriptGameConfiguration>(gameConfiguration.TeleportSelfScripts, gameStateBag);        
-        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration>(gameConfiguration.NullableStringsTextAreaWidgets, gameStateBag);
-        LoadFromConfiguration<Tile, TileGameConfiguration>(gameConfiguration.Tiles, gameStateBag);
-        LoadFromConfiguration<TimerScript, TimerScriptGameConfiguration>(gameConfiguration.TimerScripts, gameStateBag);
-        LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration>(gameConfiguration.TimeWidgets, gameStateBag);
-        LoadFromConfiguration<Town, TownGameConfiguration>(gameConfiguration.Towns, gameStateBag);
-        LoadFromConfiguration<Vault, VaultGameConfiguration>(gameConfiguration.Vaults, gameStateBag);
-        LoadFromConfiguration<View, ViewGameConfiguration>(gameConfiguration.Views, gameStateBag);
-        LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration>(gameConfiguration.WizardCommands, gameStateBag);
+        LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts, restoreGameState);
+        LoadFromConfiguration<Activation, ActivationGameConfiguration>(gameConfiguration.Activations, restoreGameState);
+        LoadFromConfiguration<Animation, AnimationGameConfiguration>(gameConfiguration.Animations, restoreGameState);
+        LoadFromConfiguration<ArtifactBiasWeightedRandom, ArtifactBiasWeightedRandomGameConfiguration>(gameConfiguration.ArtifactBiasWeightedRandoms, restoreGameState);
+        LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks, restoreGameState);
+        LoadFromConfiguration<AttributeFilter, AttributeFilterGameConfiguration>(gameConfiguration.AttributeFilters, restoreGameState);
+        LoadFromConfiguration<Conditional, ConditionalGameConfiguration>(gameConfiguration.ProductOfSumsBoolFunctions, restoreGameState);
+        LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities, restoreGameState); // Composite singleton // Composite singleton
+        LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells, restoreGameState);
+        LoadFromConfiguration<ChestTrap, ChestTrapGameConfiguration>(gameConfiguration.ChestTraps, restoreGameState);
+        LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations, restoreGameState);
+        LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration>(gameConfiguration.ConditionalWidgets, restoreGameState);
+        LoadFromConfiguration<ConditionalScript, ConditionalScriptGameConfiguration>(gameConfiguration.ConditionalScripts, restoreGameState);
+        LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration>(gameConfiguration.DateWidgets, restoreGameState);
+        LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration>(gameConfiguration.DungeonGuardians, restoreGameState);
+        LoadFromConfiguration<Dungeon, DungeonGameConfiguration>(gameConfiguration.Dungeons, restoreGameState);
+        LoadFromConfiguration<GameCommand, GameCommandGameConfiguration>(gameConfiguration.GameCommands, restoreGameState);
+        LoadFromConfiguration<GameMessageWidget, GameMessageWidgetGameConfiguration>(gameConfiguration.GameMessageWidgets, restoreGameState);
+        LoadFromConfiguration<Gender, GenderGameConfiguration>(gameConfiguration.Genders, restoreGameState);
+        LoadFromConfiguration<God, GodGameConfiguration>(gameConfiguration.Gods, restoreGameState);
+        LoadFromConfiguration<HelpGroup, HelpGroupGameConfiguration>(gameConfiguration.HelpGroups, restoreGameState);
+        LoadFromConfiguration<IntWidget, IntWidgetGameConfiguration>(gameConfiguration.IntWidgets, restoreGameState);
+        LoadFromConfiguration<ItemClass, ItemClassGameConfiguration>(gameConfiguration.ItemClasses, restoreGameState);
+        LoadFromConfiguration<ItemEnhancement, ItemEnhancementGameConfiguration>(gameConfiguration.ItemEnhancements, restoreGameState);
+        LoadFromConfiguration<ItemEnhancementWeightedRandom, ItemEnhancementWeightedRandomGameConfiguration>(gameConfiguration.ItemEnhancementWeightedRandoms, restoreGameState);       
+        LoadFromConfiguration<ItemIdentification, ItemIdentificationGameConfiguration>(gameConfiguration.ItemIdentifications, restoreGameState);
+        LoadFromConfiguration<ItemFactory, ItemFactoryGameConfiguration>(gameConfiguration.ItemFactories, restoreGameState);
+        LoadFromConfiguration<ItemFactoryWeightedRandom, ItemFactoryWeightedRandomGameConfiguration>(gameConfiguration.ItemFactoryWeightedRandoms, restoreGameState);
+        LoadFromConfiguration<ItemFilter, ItemFilterGameConfiguration>(gameConfiguration.ItemFilters, restoreGameState);
+        LoadFromConfiguration<ItemFlavor, ItemFlavorGameConfiguration>(gameConfiguration.ItemFlavors, restoreGameState);
+        LoadFromConfiguration<MappedSpellScript, MappedSpellScriptGameConfiguration>(gameConfiguration.MappedSpellScripts, restoreGameState);
+        LoadFromConfiguration<MappedItemEnhancement, MappedItemEnhancementGameConfiguration>(gameConfiguration.MappedItemEnhancements, restoreGameState);
+        LoadFromConfiguration<MapWidget, MapWidgetGameConfiguration>(gameConfiguration.MapWidgets, restoreGameState);
+        LoadFromConfiguration<MartialArtsAttack, MartialArtsAttackGameConfiguration>(gameConfiguration.MartialArtsAttacks, restoreGameState);
+        LoadFromConfiguration<MaxRangedWidget, MaxRangedWidgetGameConfiguration>(gameConfiguration.MaxRangedWidgets, restoreGameState);
+        LoadFromConfiguration<MonsterRace, MonsterRaceGameConfiguration>(gameConfiguration.MonsterRaces, restoreGameState);
+        LoadFromConfiguration<OutfitManifest, OutfitManifestGameConfiguration>(gameConfiguration.OutfitManifests, restoreGameState); // Composite singleton    
+        LoadFromConfiguration<Patron, PatronGameConfiguration>(gameConfiguration.Patrons, restoreGameState);
+        LoadFromConfiguration<PhysicalAttributeSet, PhysicalAttributeSetGameConfiguration>(gameConfiguration.PhysicalAttributeSets, restoreGameState);
+        LoadFromConfiguration<Plural, PluralGameConfiguration>(gameConfiguration.Plurals, restoreGameState);
+        LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration>(gameConfiguration.ProjectileGraphics, restoreGameState);
+        LoadFromConfiguration<Projectile, ProjectileGameConfiguration>(gameConfiguration.Projectiles, restoreGameState);
+        LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration>(gameConfiguration.ProjectileScripts, restoreGameState);
+        LoadFromConfiguration<ProjectileScriptWeightedRandom, ProjectileScriptWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts, restoreGameState);
+        LoadFromConfiguration<RaceAbility, RaceAbilityGameConfiguration>(gameConfiguration.RaceAbilities, restoreGameState); // Composite singleton
+        LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration>(gameConfiguration.RaceGenders, restoreGameState); // Composite singleton
+        LoadFromConfiguration<RacePower, RacePowerGameConfiguration>(gameConfiguration.RacialPowers, restoreGameState); // Composite singleton
+        LoadFromConfiguration<RacialPowerTest, RacialPowerTestGameConfiguration>(gameConfiguration.RacialPowerTests, restoreGameState);
+        LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration>(gameConfiguration.RangedWidgets, restoreGameState);
+        LoadFromConfiguration<RangedWeaponBonus, RangedWeaponBonusGameConfiguration>(gameConfiguration.RangedWeaponBonuses, restoreGameState);
+        LoadFromConfiguration<Realm, RealmGameConfiguration>(gameConfiguration.Realms, restoreGameState);
+        LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration>(gameConfiguration.RealmCharacterClasses, restoreGameState); // Composite singleton
+        LoadFromConfiguration<RechargeItemScript, RechargeItemScriptGameConfiguration>(gameConfiguration.RechargeItemScripts, restoreGameState);
+        LoadFromConfiguration<RenderMessageScript, RenderMessageScriptGameConfiguration>(gameConfiguration.RenderMessageScripts, restoreGameState);
+        LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration>(gameConfiguration.Shopkeepers, restoreGameState);
+        LoadFromConfiguration<Spell, SpellGameConfiguration>(gameConfiguration.Spells, restoreGameState);
+        LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration>(gameConfiguration.StoreCommands, restoreGameState);
+        LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration>(gameConfiguration.StoreFactories, restoreGameState);
+        LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration>(gameConfiguration.StringWidgets, restoreGameState);
+        LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration>(gameConfiguration.SummonScripts, restoreGameState);
+        LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration>(gameConfiguration.SummonWeightedRandoms, restoreGameState);
+        LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration>(gameConfiguration.SyllableSets, restoreGameState);
+        LoadFromConfiguration<Symbol, SymbolGameConfiguration>(gameConfiguration.Symbols, restoreGameState);
+        LoadFromConfiguration<LabelWidget, LabelWidgetGameConfiguration>(gameConfiguration.LabelWidgets, restoreGameState);
+        LoadFromConfiguration<TeleportSelfScript, TeleportSelfScriptGameConfiguration>(gameConfiguration.TeleportSelfScripts, restoreGameState);        
+        LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration>(gameConfiguration.NullableStringsTextAreaWidgets, restoreGameState);
+        LoadFromConfiguration<Tile, TileGameConfiguration>(gameConfiguration.Tiles, restoreGameState);
+        LoadFromConfiguration<TimerScript, TimerScriptGameConfiguration>(gameConfiguration.TimerScripts, restoreGameState);
+        LoadFromConfiguration<TimeWidget, TimeWidgetGameConfiguration>(gameConfiguration.TimeWidgets, restoreGameState);
+        LoadFromConfiguration<Town, TownGameConfiguration>(gameConfiguration.Towns, restoreGameState);
+        LoadFromConfiguration<Vault, VaultGameConfiguration>(gameConfiguration.Vaults, restoreGameState);
+        LoadFromConfiguration<View, ViewGameConfiguration>(gameConfiguration.Views, restoreGameState);
+        LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration>(gameConfiguration.WizardCommands, restoreGameState);
 
         //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
         //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
@@ -430,7 +430,8 @@ internal class SingletonRepository
         // Bind all of the singletons now.
         foreach (IGetKey singleton in _allSingletonsList)
         {
-            singleton.Bind();
+            RestoreGameState? singletonRestoreGameState = restoreGameState?.Get(singleton.GetKey);
+            singleton.Bind(singletonRestoreGameState);
         }
 
         //foreach (FixedArtifact fixedArtifact in Get<FixedArtifact>())
@@ -609,288 +610,371 @@ internal class SingletonRepository
         }
     }
 
-    private void VerifyRestore(GameStateBag? gameStateBag, object singleton)
+    private void RegisterSingletonWithRestoreGameState(IGetKey singleton, RestoreGameState restoreGameState)
     {
-        // Perform a verification of the restore process.
-        if (gameStateBag is not null)
+        // Retrieve the restore state for this singleton.
+        RestoreGameState? singletonRestoreGameState = restoreGameState.Get(singleton.GetKey);
+        if (singletonRestoreGameState is null)
         {
-            ObjectGameStateBag singletonObjectGameStateBag = (ObjectGameStateBag)gameStateBag;
-            Dictionary<string, GameStateBag> singletonDictionaryGameStateBag = singletonObjectGameStateBag.Values;
-            foreach ((string RestorePropertyName, GameStateBag RestorePropertyValue) in singletonDictionaryGameStateBag)
-            {
-                FieldInfo? singletonFieldInfo = GameStateBag.GetAllFields(singleton.GetType()).SingleOrDefault(_fieldInfo => _fieldInfo.Name == RestorePropertyName);
-                if (singletonFieldInfo is null)
-                {
-                    throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton could not be found.");
-                }
-
-                object? singletonFieldValue = singletonFieldInfo.GetValue(singleton);
-                switch (RestorePropertyValue)
-                {
-                    case NullValueGameStateBag:
-                        if (singletonFieldValue is not null)
-                        {
-                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as null.");
-                        }
-                        break;
-                    case IntValueGameStateBag intRestorePropertyValue:
-                        if (singletonFieldValue is not int intSingletonFieldValue)
-                        {
-                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as an integer value.");
-                        }
-                        if (intSingletonFieldValue != intRestorePropertyValue.Value)
-                        {
-                            throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {intRestorePropertyValue.Value}.");
-                        }
-                        break;
-                    case StringValueGameStateBag stringRestorePropertyValue:
-                        if (singletonFieldValue is not string stringSingletonFieldValue)
-                        {
-                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as an string value.");
-                        }
-                        if (stringSingletonFieldValue != stringRestorePropertyValue.Value)
-                        {
-                            throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {stringRestorePropertyValue.Value}.");
-                        }
-                        break;
-                    case BoolValueGameStateBag boolRestorePropertyValue:
-                        if (singletonFieldValue is not bool boolSingletonFieldValue)
-                        {
-                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a bool value.");
-                        }
-                        if (boolSingletonFieldValue != boolRestorePropertyValue.Value)
-                        {
-                            throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {boolRestorePropertyValue.Value}.");
-                        }
-                        break;
-                    case DateTimeValueGameStateBag dateTimeRestorePropertyValue:
-                        if (singletonFieldValue is not DateTime dateTimeSingletonFieldValue)
-                        {
-                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a DateTime value.");
-                        }
-                        if (dateTimeSingletonFieldValue != dateTimeRestorePropertyValue.Value)
-                        {
-                            throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {dateTimeRestorePropertyValue.Value}.");
-                        }
-                        break;
-                    case QueueOfStringGameStateBag queueOfStringRestorePropertyValue:
-                        if (singletonFieldValue is not Queue<string> queueOfStringSingletonFieldValue)
-                        {
-                            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a Queue<string> value.");
-                        }
-                        if (!queueOfStringRestorePropertyValue.Values.SequenceEqual(queueOfStringSingletonFieldValue))
-                        {
-                            throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  The messages are different.");
-                        }
-                        break;
-                    default:
-                        throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton has an unsupported GameStateBag type of {RestorePropertyValue.GetType().Name}.");
-                }
-            }
+            throw new Exception($"There is a mismatch between the save game and the game configuration.  The {singleton.GetType().Name} bag was not found in the save game.");
         }
+        singletonRestoreGameState.RegisterSingleton(singleton);
     }
 
-    private void LoadAllAssemblyTypes<T>(DictionaryGameStateBag? dictionaryGameStateBag) // TODO: WHY CANT THIS BE where T: IGETKEY
+    private void VerifyRestore(RestoreGameState restoreGameState, object singleton)
+    {
+        // Perform a verification of the restore process.
+        //ObjectGameStateBag singletonObjectGameStateBag = (ObjectGameStateBag)restoreGameState.GameStateBag;
+        //Dictionary<string, GameStateBag> singletonDictionaryGameStateBag = singletonObjectGameStateBag.Values;
+        //foreach ((string RestorePropertyName, GameStateBag RestorePropertyValue) in restoreGameState. singletonDictionaryGameStateBag)
+        //{
+        //    FieldInfo? singletonFieldInfo = GameStateBag.GetAllFields(singleton.GetType()).SingleOrDefault(_fieldInfo => _fieldInfo.Name == RestorePropertyName);
+        //    if (singletonFieldInfo is null)
+        //    {
+        //        throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton could not be found.");
+        //    }
+
+        //    object? singletonFieldValue = singletonFieldInfo.GetValue(singleton);
+        //    switch (RestorePropertyValue)
+        //    {
+        //        case NullValueGameStateBag:
+        //            if (singletonFieldValue is not null)
+        //            {
+        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as null.");
+        //            }
+        //            break;
+        //        case IntValueGameStateBag intRestorePropertyValue:
+        //            if (singletonFieldValue is not int intSingletonFieldValue)
+        //            {
+        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as an integer value.");
+        //            }
+        //            if (intSingletonFieldValue != intRestorePropertyValue.Value)
+        //            {
+        //                throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {intRestorePropertyValue.Value}.");
+        //            }
+        //            break;
+        //        case StringValueGameStateBag stringRestorePropertyValue:
+        //            if (singletonFieldValue is not string stringSingletonFieldValue)
+        //            {
+        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as an string value.");
+        //            }
+        //            if (stringSingletonFieldValue != stringRestorePropertyValue.Value)
+        //            {
+        //                throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {stringRestorePropertyValue.Value}.");
+        //            }
+        //            break;
+        //        case BoolValueGameStateBag boolRestorePropertyValue:
+        //            if (singletonFieldValue is not bool boolSingletonFieldValue)
+        //            {
+        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a bool value.");
+        //            }
+        //            if (boolSingletonFieldValue != boolRestorePropertyValue.Value)
+        //            {
+        //                throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {boolRestorePropertyValue.Value}.");
+        //            }
+        //            break;
+        //        case DateTimeValueGameStateBag dateTimeRestorePropertyValue:
+        //            if (singletonFieldValue is not DateTime dateTimeSingletonFieldValue)
+        //            {
+        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a DateTime value.");
+        //            }
+        //            if (dateTimeSingletonFieldValue != dateTimeRestorePropertyValue.Value)
+        //            {
+        //                throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {dateTimeRestorePropertyValue.Value}.");
+        //            }
+        //            break;
+        //        case QueueOfStringGameStateBag queueOfStringRestorePropertyValue:
+        //            if (singletonFieldValue is not Queue<string> queueOfStringSingletonFieldValue)
+        //            {
+        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a Queue<string> value.");
+        //            }
+        //            if (!queueOfStringRestorePropertyValue.Values.SequenceEqual(queueOfStringSingletonFieldValue))
+        //            {
+        //                throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  The messages are different.");
+        //            }
+        //            break;
+        //        default:
+        //            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton has an unsupported GameStateBag type of {RestorePropertyValue.GetType().Name}.");
+        //    }
+        //}
+    }
+
+    private void LoadAllAssemblyTypes<T>(RestoreGameState? restoreGameState) // TODO: WHY CANT THIS BE where T: IGETKEY
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
         Type[] types = assembly.GetTypes();
         foreach (Type type in types)
         {
-            string typeName = type.Name;
-
             // Ensure the type is not abstract and inherits the IGetKey interface.
             // TODO: No test for IGetKey is done
             if (!type.IsAbstract && typeof(IGetKey).IsAssignableFrom(type) && typeof(T).IsAssignableFrom(type))
             {
-                ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).Where(_constructor => _constructor.IsPrivate).ToArray();
-
-                // If there are no private constructors, this type does not quality as a system singleton.
-                if (constructors.Length == 0)
+                // Ensure it only has one private constructor.
+                // TODO: The one private constructor needs to be tested properly.
+                ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+                if (constructors.Length == 1)
                 {
-                    continue;
-                }   
-
-                // There cannot be more than 2 constructors.
-                if (constructors.Length > 2)
-                {
-                    throw new Exception($"Invalid number of constructors for {typeName}.  Expecting ctor({nameof(Game)}) and an optional ctor({nameof(Game)}, {nameof(GameStateBag)}).");
-                }
-
-                // Declare a tuple for the constructor and game state bag that is needed for the construction of the singleton.
-                (ConstructorInfo Constructor, GameStateBag? GameStateBag)? constructorAndParameters = null;
-
-                // Check to see if we are restoring a game.  
-                if (dictionaryGameStateBag is not null)
-                {
-                    // We are restoring a game.  Game Restore States 3, 4, 5 and 6.  Check to see if there is game state for this singleton
-                    if (dictionaryGameStateBag.Values.TryGetValue(typeName, out GameStateBag? singletonGameStateBag))
+                    // We will only instantiate the singleton, if we are storing it.
+                    try
                     {
-                        // There is game state.  Game Restore States 5 and 6.  We need to check if there are fields to restore.
-                        if (!GameStateBag.IsEmpty(singletonGameStateBag))
+                        IGetKey singleton = (IGetKey)constructors[0].Invoke(new object[] { Game });
+                        RegisterSingleton(singleton);
+                        if (restoreGameState is not null)
                         {
-                            // The GameStateBag is not empty and requires a restore.  We need a constructor that takes the game object and the appropriate game state.
-                            ConstructorInfo? restoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
-                            {
-                                ParameterInfo[] parameters = _constructor.GetParameters();
-                                return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == singletonGameStateBag.GetType();
-                            });
-
-                            if (restoreGameStateConstructor is null)
-                            {
-                                // Game Restore State 5.
-                                throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}, {singletonGameStateBag.GetType().Name}).");
-                            }
-
-                            // Game Restore State 6.  Set the parameters for the constructor.
-                            constructorAndParameters = (restoreGameStateConstructor, singletonGameStateBag);
+                            RegisterSingletonWithRestoreGameState(singleton, restoreGameState);
                         }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        // Game Restore States 3 and 4.  Check to see if the singleton requires game state for restore.
-                        ConstructorInfo? genericRestoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
-                        {
-                            ParameterInfo[] parameters = _constructor.GetParameters();
-                            return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && typeof(GameStateBag).IsAssignableFrom(parameters[1].ParameterType);
-                        });
-
-                        if (genericRestoreGameStateConstructor is not null)
-                        {
-                            // Game Restore State 4.
-                            throw new Exception($"The game state bag does not contain game state for the {typeName} singleton, but the singleton requires game state.");
-                        }
+                        throw new Exception($"An error occurred instantiating the {type.Name} singleton '{ex.Message}'.  Check to ensure the constructor is private(Game game).");
                     }
-                }
-
-                // This is either a new game from scratch, or the game state doesn't have state for this singleton.
-                if (constructorAndParameters is null)
-                {
-                    // We are constructing a new game from scratch.  Game Restore States 1 and 2.  We need a constructor that only takes the Game object.
-                    ConstructorInfo? newGameFromScratchConstructor = constructors.SingleOrDefault(_constructor => {
-                        ParameterInfo[] parameters = _constructor.GetParameters();
-                        return parameters.Length == 1 && parameters[0].ParameterType == typeof(Game);
-                    });
-
-                    if (newGameFromScratchConstructor is null)
-                    {
-                        throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}).");
-                    }
-
-                    constructorAndParameters = (newGameFromScratchConstructor, null);
-                }
-
-                ConstructorInfo constructor = constructorAndParameters.Value.Constructor;
-                object?[] parameters = constructorAndParameters.Value.GameStateBag is null ? new object?[] { Game } : new object?[] { Game, constructorAndParameters.Value.GameStateBag };
-                try
-                {
-                    IGetKey singleton = (IGetKey)constructor.Invoke(parameters);
-                    RegisterSingleton(singleton);
-                    VerifyRestore(constructorAndParameters.Value.GameStateBag, singleton);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"An error occurred instantiating the {type.Name} singleton '{ex.Message}'.  Check to ensure the constructor is private(Game game).");
                 }
             }
         }
     }
 
-    private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations, DictionaryGameStateBag? dictionaryGameStateBag) where T : IGetKey where TConfiguration : notnull
+    private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations, RestoreGameState? restoreGameState) where T : IGetKey where TConfiguration : notnull
     {
         // For persistence validation, we need to ensure the type T implements IToJson.
         if (!typeof(IToJson).IsAssignableFrom(typeof(T)))
         {
-            throw new Exception($"The type {typeof(T).Name} does not implement {nameof(IToJson)} to support the persistence for {nameof(GameConfiguration)}.");
+            throw new Exception($"The type {typeof(T).Name} does not implement {nameof(IToJson)} to support the persistance for {nameof(GameConfiguration)}.");
         }
 
         // Register the repository with persistence.
         RegisterInterface<T>();
 
+        string typeName = typeof(T).Name;
         if (entityConfigurations is not null)
         {
-            Type type = typeof(T);
-            string typeName = type.Name;
-            ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
-
-            // There cannot be more than 2 constructors.
-            if (constructors.Length < 1 || constructors.Length > 2)
-            {
-                throw new Exception($"Invalid number of constructors for {typeName}.  Expecting ctor({nameof(Game)}, {typeof(TConfiguration).Name}) and an optional ctor({nameof(Game)}, {typeof(TConfiguration).Name}, {nameof(GameStateBag)}).");
-            }
-
-            (ConstructorInfo Constructor, GameStateBag? GameStateBag)? constructorAndParameters = null;
-            // Check to see if we are restoring a game.  
-            if (dictionaryGameStateBag is not null)
-            {
-                // We are restoring a game.  Game Restore States 3, 4, 5 and 6.  Check to see if there is game state for this singleton
-                if (dictionaryGameStateBag.Values.TryGetValue(typeName, out GameStateBag? singletonGameStateBag))
+            ConstructorInfo? constructor = typeof(T).GetConstructors(BindingFlags.Public | BindingFlags.Instance)
+                .SingleOrDefault(_constructor =>
                 {
-                    // There is game state.  Game Restore States 5 and 6.  We need a constructor that takes the game object, the configuration and the appropriate game state.
-                    ConstructorInfo? restoreGameConstructor = constructors.SingleOrDefault(_constructor =>
-                    {
-                        ParameterInfo[] parameters = _constructor.GetParameters();
-                        return parameters.Length == 3 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration) && parameters[2].ParameterType == singletonGameStateBag.GetType();
-                    });
-
-                    if (restoreGameConstructor is null)
-                    {
-                        // Game Restore State 5.
-                        throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}, {typeof(TConfiguration).Name}, {singletonGameStateBag.GetType().Name}).");
-                    }
-
-                    // Game Restore State 6.  Set the parameters for the constructor.
-                    constructorAndParameters = (restoreGameConstructor, singletonGameStateBag);
-                }
-                else
-                {
-                    // Game Restore States 3 and 4.  Check to see if the singleton requires game state for restore.
-                    ConstructorInfo? genericRestoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
-                    {
-                        ParameterInfo[] parameters = _constructor.GetParameters();
-                        return parameters.Length == 3 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration) && typeof(GameStateBag).IsAssignableFrom(parameters[2].ParameterType);
-                    });
-
-                    if (genericRestoreGameStateConstructor is not null)
-                    {
-                        // Game Restore State 4.
-                        throw new Exception($"The game state bag does not contain game state for the {typeName} singleton, but the singleton requires game state.");
-                    }
-                }
-            }
-
-            // This is either a new game from scratch, or the game state doesn't have state for this singleton.
-            if (constructorAndParameters is null)
-            {
-                // We are constructing a new game from scratch.  Game Restore States 1 and 2.  We need a constructor that only takes the Game object.
-                ConstructorInfo? newGameFromScratchConstructor = constructors.SingleOrDefault(_constructor => {
                     ParameterInfo[] parameters = _constructor.GetParameters();
                     return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration);
                 });
-
-                if (newGameFromScratchConstructor is null)
-                {
-                    throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}, {typeof(TConfiguration).Name}).");
-                }
-
-                constructorAndParameters = (newGameFromScratchConstructor, null);
+            if (constructor is null)
+            {
+                throw new Exception($"Cannot find constructor for {typeof(T).Name}.  Expecting ctor(Game, {typeof(TConfiguration).Name})");
             }
-
-            ConstructorInfo constructor = constructorAndParameters.Value.Constructor;
             foreach (TConfiguration entityConfiguration in entityConfigurations)
             {
-                object?[] parameters = constructorAndParameters.Value.GameStateBag is null ? new object?[] { Game, entityConfiguration } : new object?[] { Game, entityConfiguration, constructorAndParameters.Value.GameStateBag };
+                // We need to convert from the GameConfiguration object to the entity object.  Create the generic object
+                T singleton = (T)constructor.Invoke(new object[] { Game, entityConfiguration });
+                RegisterSingleton(singleton);
 
-                try
+                if (restoreGameState is not null)
                 {
-                    IGetKey singleton = (IGetKey)constructor.Invoke(parameters);
-                    RegisterSingleton(singleton);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"An error occurred instantiating the {type.Name} singleton '{ex.Message}'.  Check to ensure the constructor is private(Game game).");
+                    RegisterSingletonWithRestoreGameState(singleton, restoreGameState);
                 }
             }
         }
     }
+
+    //private void LoadAllAssemblyTypes<T>(RestoreGameState? restoreGameState) // TODO: WHY CANT THIS BE where T: IGETKEY
+    //{
+    //    Assembly assembly = Assembly.GetExecutingAssembly();
+    //    Type[] types = assembly.GetTypes();
+    //    foreach (Type type in types)
+    //    {
+    //        string typeName = type.Name;
+
+    //        // Ensure the type is not abstract and inherits the IGetKey interface.
+    //        // TODO: No test for IGetKey is done
+    //        if (!type.IsAbstract && typeof(IGetKey).IsAssignableFrom(type) && typeof(T).IsAssignableFrom(type))
+    //        {
+    //            ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).Where(_constructor => _constructor.IsPrivate).ToArray();
+
+    //            // If there are no private constructors, this type does not quality as a system singleton.
+    //            if (constructors.Length == 0)
+    //            {
+    //                continue;
+    //            }   
+
+    //            // There cannot be more than 2 constructors.
+    //            if (constructors.Length > 2)
+    //            {
+    //                throw new Exception($"Invalid number of constructors for {typeName}.  Expecting ctor({nameof(Game)}) and an optional ctor({nameof(Game)}, {nameof(GameStateBag)}).");
+    //            }
+
+    //            // Check to see if we are restoring a game.  
+    //            if (restoreGameState is not null)
+    //            {
+    //                // We are restoring a game.  Game Restore States 3, 4, 5 and 6.  Get the game state for this singleton.  It must be present.
+    //                RestoreGameState singletonRestoreGameState = restoreGameState.Get(typeName);
+
+    //                // Game Restore States 5 and 6. Check if there are fields to restore.  This determines if the singleton object needs the RestoreGameState parameter.
+    //                if (!singletonRestoreGameState.IsEmpty())
+    //                {
+    //                    // The GameStateBag is not empty and requires a restore.  We need a constructor that takes the game object and the appropriate game state.
+    //                    ConstructorInfo? restoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
+    //                    {
+    //                        ParameterInfo[] parameters = _constructor.GetParameters();
+    //                        return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(RestoreGameState);
+    //                    });
+
+    //                    if (restoreGameStateConstructor is null)
+    //                    {
+    //                        // Game Restore State 5.
+    //                        throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}, {nameof(RestoreGameState)}).");
+    //                    }
+
+    //                    try
+    //                    {
+    //                        IGetKey singleton = (IGetKey)restoreGameStateConstructor.Invoke(new object?[] { Game, singletonRestoreGameState });
+    //                        RegisterSingleton(singleton);
+    //                        VerifyRestore(singletonRestoreGameState, singleton);
+    //                        singletonRestoreGameState.RegisterSingleton(singleton);
+    //                        continue;
+    //                    }
+    //                    catch (Exception ex)
+    //                    {
+    //                        throw new Exception($"An error occurred instantiating the {type.Name} singleton '{ex.Message}'.  Check to ensure the constructor is private(Game game).");
+    //                    }
+    //                }
+    //                else
+    //                {
+    //                    // Game Restore States 3 and 4.  Check to see if the singleton requires game state for restore.
+    //                    ConstructorInfo? genericRestoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
+    //                    {
+    //                        ParameterInfo[] parameters = _constructor.GetParameters();
+    //                        return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(RestoreGameState);
+    //                    });
+
+    //                    if (genericRestoreGameStateConstructor is not null)
+    //                    {
+    //                        // Game Restore State 4.
+    //                        throw new Exception($"The game state bag does not contain game state for the {typeName} singleton, but the singleton requires game state.");
+    //                    }
+    //                }
+    //            }
+
+    //            // This is either a new game from scratch, or the game state doesn't have state for this singleton.
+    //            // We are constructing a new game from scratch.  Game Restore States 1 and 2.  We need a constructor that only takes the Game object.
+    //            ConstructorInfo? newGameFromScratchConstructor = constructors.SingleOrDefault(_constructor =>
+    //            {
+    //                ParameterInfo[] parameters = _constructor.GetParameters();
+    //                return parameters.Length == 1 && parameters[0].ParameterType == typeof(Game);
+    //            });
+
+    //            if (newGameFromScratchConstructor is null)
+    //            {
+    //                throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}).");
+    //            }
+
+    //            try
+    //            {
+    //                IGetKey singleton = (IGetKey)newGameFromScratchConstructor.Invoke(new object?[] { Game });
+    //                RegisterSingleton(singleton);
+    //            }
+    //            catch (Exception ex)
+    //            {
+    //                throw new Exception($"An error occurred instantiating the {type.Name} singleton '{ex.Message}'.  Check to ensure the constructor is private(Game game).");
+    //            }
+    //        }
+    //    }
+    //}
+
+    //private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations, RestoreGameState? restoreGameState) where T : IGetKey where TConfiguration : notnull
+    //{
+    //    // For persistence validation, we need to ensure the type T implements IToJson.
+    //    if (!typeof(IToJson).IsAssignableFrom(typeof(T)))
+    //    {
+    //        throw new Exception($"The type {typeof(T).Name} does not implement {nameof(IToJson)} to support the persistence for {nameof(GameConfiguration)}.");
+    //    }
+
+    //    // Register the repository with persistence.
+    //    RegisterInterface<T>();
+
+    //    if (entityConfigurations is not null)
+    //    {
+    //        Type type = typeof(T);
+    //        string typeName = type.Name;
+    //        ConstructorInfo[] constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+
+    //        // There cannot be more than 2 constructors.
+    //        if (constructors.Length < 1 || constructors.Length > 2)
+    //        {
+    //            throw new Exception($"Invalid number of constructors for {typeName}.  Expecting ctor({nameof(Game)}, {typeof(TConfiguration).Name}) and an optional ctor({nameof(Game)}, {typeof(TConfiguration).Name}, {nameof(GameStateBag)}).");
+    //        }
+
+    //        (ConstructorInfo Constructor, RestoreGameState? RestoreGameState)? constructorAndParameters = null;
+    //        // Check to see if we are restoring a game.  
+    //        if (restoreGameState is not null)
+    //        {
+    //            // We are restoring a game.  Game Restore States 3, 4, 5 and 6.  Get the game state for this singleton.  It must be present.
+    //            RestoreGameState singletonRestoreGameState = restoreGameState.Get(typeName);
+
+    //            // We are restoring a game.  Game Restore States 3, 4, 5 and 6.  Check to see if there is game state for this singleton
+    //            if (!singletonRestoreGameState.IsEmpty())
+    //            {
+    //                // There is game state.  Game Restore States 5 and 6.  We need a constructor that takes the game object, the configuration and the appropriate game state.
+    //                ConstructorInfo? restoreGameConstructor = constructors.SingleOrDefault(_constructor =>
+    //                {
+    //                    ParameterInfo[] parameters = _constructor.GetParameters();
+    //                    return parameters.Length == 3 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration) && parameters[2].ParameterType == typeof(RestoreGameState);
+    //                });
+
+    //                if (restoreGameConstructor is null)
+    //                {
+    //                    // Game Restore State 5.
+    //                    throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}, {typeof(TConfiguration).Name}, {typeof(RestoreGameState)}).");
+    //                }
+
+    //                // Game Restore State 6.  Set the parameters for the constructor.
+    //                constructorAndParameters = (restoreGameConstructor, singletonRestoreGameState);
+    //            }
+    //            else
+    //            {
+    //                // Game Restore States 3 and 4.  Check to see if the singleton requires game state for restore.
+    //                ConstructorInfo? genericRestoreGameStateConstructor = constructors.SingleOrDefault(_constructor =>
+    //                {
+    //                    ParameterInfo[] parameters = _constructor.GetParameters();
+    //                    return parameters.Length == 3 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration) && parameters[2].ParameterType == typeof(RestoreGameState);
+    //                });
+
+    //                if (genericRestoreGameStateConstructor is not null)
+    //                {
+    //                    // Game Restore State 4.
+    //                    throw new Exception($"The game state bag does not contain game state for the {typeName} singleton, but the singleton requires game state.");
+    //                }
+    //            }
+    //        }
+
+    //        // This is either a new game from scratch, or the game state doesn't have state for this singleton.
+    //        if (constructorAndParameters is null)
+    //        {
+    //            // We are constructing a new game from scratch.  Game Restore States 1 and 2.  We need a constructor that only takes the Game object.
+    //            ConstructorInfo? newGameFromScratchConstructor = constructors.SingleOrDefault(_constructor => {
+    //                ParameterInfo[] parameters = _constructor.GetParameters();
+    //                return parameters.Length == 2 && parameters[0].ParameterType == typeof(Game) && parameters[1].ParameterType == typeof(TConfiguration);
+    //            });
+
+    //            if (newGameFromScratchConstructor is null)
+    //            {
+    //                throw new Exception($"Cannot find constructor for {typeName}.  Expecting ctor({nameof(Game)}, {typeof(TConfiguration).Name}).");
+    //            }
+
+    //            constructorAndParameters = (newGameFromScratchConstructor, null);
+    //        }
+
+    //        ConstructorInfo constructor = constructorAndParameters.Value.Constructor;
+    //        foreach (TConfiguration entityConfiguration in entityConfigurations)
+    //        {
+    //            // Build the parameters to send to the constructor.
+    //            object?[] parameters = constructorAndParameters.Value.RestoreGameState is null ? new object?[] { Game, entityConfiguration } : new object?[] { Game, entityConfiguration, constructorAndParameters.Value.RestoreGameState };
+
+    //            try
+    //            {
+    //                IGetKey singleton = (IGetKey)constructor.Invoke(parameters);
+    //                RegisterSingleton(singleton);
+    //            }
+    //            catch (Exception ex)
+    //            {
+    //                throw new Exception($"An error occurred instantiating the {type.Name} singleton '{ex.Message}'.  Check to ensure the constructor is private(Game game).");
+    //            }
+    //        }
+    //    }
+    //}
     #endregion
 }

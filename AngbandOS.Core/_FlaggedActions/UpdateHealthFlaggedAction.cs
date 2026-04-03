@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class UpdateHealthFlaggedAction : FlaggedAction
 {
     private UpdateHealthFlaggedAction(Game game) : base(game) { }
-    private UpdateHealthFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void Execute()
+    protected override void Execute()
     {
         int bonus = Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).ConHealthBonus;
         int mhp = Game.PlayerHp[Game.ExperienceLevel.IntValue - 1] + (bonus * Game.ExperienceLevel.IntValue / 2);

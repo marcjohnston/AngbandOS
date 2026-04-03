@@ -14,7 +14,7 @@ internal class AlterScript : GameCommandUniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Gets a direction from the player and alters the tile in that direction.  Returns false, if the action fails due to chance.

@@ -10,7 +10,6 @@ namespace AngbandOS.Core.GridTileEffects;
 internal class StoneWallGridTileScript : GridTileScript
 {
     private StoneWallGridTileScript(Game game) : base(game) { }
-    private StoneWallGridTileScript(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         if (!Game.GridOpenNoItemOrCreature(y, x))

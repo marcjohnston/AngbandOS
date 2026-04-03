@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class ForcePlayerEffect : PlayerEffectUniversalScript
 {
     private ForcePlayerEffect(Game game) : base(game) { }
-    private ForcePlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by kinetic force!";
+    public override string? BlindPreMessage => "You are hit by kinetic force!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

@@ -10,11 +10,20 @@ namespace AngbandOS.Core.Properties;
 internal abstract class DateTimeProperty : Property, IDateAndTimeValue
 {
     protected DateTimeProperty(Game game) : base(game) { }
-    protected DateTimeProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game)
+    protected DateTimeProperty(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
-        _value = objectGameStateBag.GetDateTime(nameof(_value));
+        _value = restoreGameState.GetDateTime(nameof(_value));
     }
 
+    public override void Bind(RestoreGameState? restoreGameState)
+    {
+        base.Bind(restoreGameState);
+        if (restoreGameState != null)
+        {
+            _value = restoreGameState.GetDateTime(nameof(_value));
+        }
+    }
+    
     private DateTime _value;
 
     public DateTime DateAndTimeValue

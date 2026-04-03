@@ -23,7 +23,7 @@ internal class JournalScript : UniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public override bool RequiresRerendering => true;
 

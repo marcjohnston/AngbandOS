@@ -43,7 +43,7 @@ internal sealed class Shopkeeper : IGetKey, IToJson
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         OwnerRace = Game.SingletonRepository.GetNullable<Race>(RaceName);
     }

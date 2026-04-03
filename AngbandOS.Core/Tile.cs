@@ -151,7 +151,7 @@ internal sealed class Tile : IGetKey, IToJson
         return JsonSerializer.Serialize(tileDefinition, Game.GetJsonSerializerOptions());
     }
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         AlterAction = AlterActionName == null ? null : Game.SingletonRepository.Get<AlterAction>(AlterActionName);
         HiddenTreasureForTile = HiddenTreasureForTileName == null ? null : Game.SingletonRepository.Get<Tile>(HiddenTreasureForTileName);

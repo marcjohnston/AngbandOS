@@ -34,7 +34,7 @@ internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson
         CustomLearnedDetails = gameConfiguration.CustomLearnedDetails;
     }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileBindingKey);
         DamageRoll = Game.ParseNumericExpression(DamageRollExpression);

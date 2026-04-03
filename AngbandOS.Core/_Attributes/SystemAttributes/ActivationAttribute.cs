@@ -10,7 +10,6 @@ namespace AngbandOS.Core;
 internal class ActivationAttribute : Attribute
 {
     private ActivationAttribute(Game game) : base(game) { }
-    private ActivationAttribute(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override string Key => GetType().Name;
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ActivationEffectiveAttributeValue(Game, this);
 }

@@ -13,11 +13,15 @@ internal class UpdateScentFlaggedAction : FlaggedAction
     private int _flowN;
     private int _flowTail;
     private UpdateScentFlaggedAction(Game game) : base(game) { }
-    private UpdateScentFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag)
+    public override void Bind(RestoreGameState? restoreGameState)
     {
-        _flowHead = gameStateBag.GetInt(nameof(_flowHead));
-        _flowN = gameStateBag.GetInt(nameof(_flowN));
-        _flowTail = gameStateBag.GetInt(nameof(_flowTail));
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
+        {
+            _flowHead = restoreGameState.GetInt(nameof(_flowHead));
+            _flowN = restoreGameState.GetInt(nameof(_flowN));
+            _flowTail = restoreGameState.GetInt(nameof(_flowTail));
+        }
     }
     private void UpdateFlowAux(int y, int x, int n)
     {

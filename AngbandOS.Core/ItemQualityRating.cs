@@ -26,7 +26,7 @@ internal abstract class ItemQualityRating : IGetKey
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
     }
 

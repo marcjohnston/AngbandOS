@@ -38,7 +38,7 @@ internal sealed class Gender : IGetKey, IToJson
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public string Title { get; }
     public string Winner { get; } // TODO ... this winner title to describe the type of winner is not rendered

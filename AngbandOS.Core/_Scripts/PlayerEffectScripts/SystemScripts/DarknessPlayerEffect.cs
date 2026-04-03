@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class DarknessPlayerEffect : PlayerEffectUniversalScript
 {
     private DarknessPlayerEffect(Game game) : base(game) { }
-    private DarknessPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by something!";
+    public override string? BlindPreMessage => "You are hit by something!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         bool blind = Game.BlindnessTimer.Value != 0;

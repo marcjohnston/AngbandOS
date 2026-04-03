@@ -14,11 +14,6 @@ internal abstract class MartialArtsEffect : IGetKey
     {
         Game = game;
     }
-    protected MartialArtsEffect(Game game, ObjectGameStateBag gameStateBag) : this(game) // This object is a singleton)
-    {
-    }
-
-
     public Expression StunLevel { get; private set; }
 
     /// <summary>
@@ -28,7 +23,7 @@ internal abstract class MartialArtsEffect : IGetKey
 
     public string GetKey => GetType().Name;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         StunLevel = Game.ParseNumericExpression(StunLevelExpression);
     }

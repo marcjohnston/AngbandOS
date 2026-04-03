@@ -27,7 +27,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Conditional = Game.SingletonRepository.Get<Conditional>(ConditionalKey);

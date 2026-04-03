@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class HeroismTimer : Timer
 {
     private HeroismTimer(Game game) : base(game) { }
-    private HeroismTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("The heroism wears off.");
     }

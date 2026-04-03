@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class AcidPlayerEffect : PlayerEffectUniversalScript
 {
     private AcidPlayerEffect(Game game) : base(game) { }
-    private AcidPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by acid!";
+    public override string? BlindPreMessage => "You are hit by acid!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

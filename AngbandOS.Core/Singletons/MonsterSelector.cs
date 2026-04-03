@@ -14,13 +14,10 @@ internal abstract class MonsterSelector : IMonsterSelector, IGetKey
     {
         Game = game;
     }
-    protected MonsterSelector(Game game, ObjectGameStateBag gameStateBag) : this(game) // This object is a singleton
-    {
-    }
 
     public string GetKey => GetType().Name;
 
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public abstract MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace);
 

@@ -18,7 +18,7 @@ internal abstract class MonsterFilter : IGetKey
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         FrequencyProbabilityExpression = Game.ParseNullableProbabilityExpression(FrequencyProbabilityExpressionText);
     }

@@ -13,9 +13,6 @@ internal abstract class Attribute : IGetKey, IIndexedSingletons
     {
         Game = game;
     }
-    protected Attribute(Game game, ObjectGameStateBag gameStateBag) : this(game) // This object is a singleton
-    {
-    }
 
     /// <summary>
     /// Returns the unique index of the attribute.  This property implements the IIndexedSingletons.
@@ -29,5 +26,5 @@ internal abstract class Attribute : IGetKey, IIndexedSingletons
 
     public abstract EffectiveAttributeValue CreateEffectiveAttributeValue();
 
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 }

@@ -48,7 +48,7 @@ internal class AttributeFilter : IGetKey, IToJson
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         List<(BoolAttribute, bool?[])> boolAttributeList = new List<(BoolAttribute, bool?[])>();
         if (BoolAttributeFiltersBindings is not null)

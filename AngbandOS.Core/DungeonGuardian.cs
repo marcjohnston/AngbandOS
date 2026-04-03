@@ -34,7 +34,7 @@ internal sealed class DungeonGuardian : IGetKey, IToJson
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         MonsterRace = Game.SingletonRepository.Get<MonsterRace>(MonsterRaceName);
     }

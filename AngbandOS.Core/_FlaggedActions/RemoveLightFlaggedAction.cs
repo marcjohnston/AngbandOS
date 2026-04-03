@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class RemoveLightFlaggedAction : FlaggedAction
 {
     private RemoveLightFlaggedAction(Game game) : base(game) { }
-    private RemoveLightFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void Execute()
+    protected override void Execute()
     {
         foreach (GridCoordinate gridCoordinate in Game.Light)
         {

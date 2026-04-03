@@ -10,7 +10,6 @@ namespace AngbandOS.Core.GridTileEffects;
 internal class DestroyTrapGridTileScript : GridTileScript
 {
     private DestroyTrapGridTileScript(Game game) : base(game) { }
-    private DestroyTrapGridTileScript(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];

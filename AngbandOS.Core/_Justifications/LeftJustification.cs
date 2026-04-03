@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Justifications;
 internal class LeftJustification : Justification
 {
     private LeftJustification(Game game) : base(game) { }
-    private LeftJustification(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string Format(string value, int width)
+    public override string Format(string value, int width)
     {
         if (value.Length > width)
         {

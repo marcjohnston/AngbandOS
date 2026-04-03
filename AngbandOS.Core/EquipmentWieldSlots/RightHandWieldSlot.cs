@@ -10,7 +10,6 @@ namespace AngbandOS.Core.WieldSlots;
 internal class RightHandWieldSlot : EquipmentWieldSlot
 {
     private RightHandWieldSlot(Game game) : base(game) { } // This object is a singleton
-    private RightHandWieldSlot(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Label(Item oPtr) => "e";
     public override int[] InventorySlots => new int[] { InventorySlotEnum.RightHand };
     public override string MentionUse(int? index) => "On right hand";

@@ -36,7 +36,7 @@ internal abstract class BoolFunction : IChangeTracker, IGetKey, IBoolValue
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Dependencies = Game.SingletonRepository.GetNullable<IChangeTracker>(DependencyNames);
     }

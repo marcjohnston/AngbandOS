@@ -12,7 +12,7 @@ internal class RedrawSpeedFlaggedAction : FlaggedAction
     private const int ColSpeed = 43;
     private const int RowSpeed = 44;
     private RedrawSpeedFlaggedAction(Game game) : base(game) { }
-    private RedrawSpeedFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void Execute()
+    protected override void Execute()
     {
         int i = Game.Speed.IntValue;
         ColorEnum attr = ColorEnum.White;

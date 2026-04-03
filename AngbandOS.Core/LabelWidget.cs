@@ -34,7 +34,7 @@ internal sealed class LabelWidget : Widget, IGetKey, IToJson
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);

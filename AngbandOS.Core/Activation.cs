@@ -94,7 +94,7 @@ internal sealed class Activation : IGetKey, IToJson
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         RechargeTimeRoll = Game.ParseNumericExpression(RechargeTimeRollExpression);
         ActivationCancellableScript = Game.SingletonRepository.Get<IActivateItemScript>(ActivationCancellableScriptItemBindingKey);

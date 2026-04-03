@@ -15,6 +15,4 @@ internal class NoticeCombineAndReorderGroupSetFlaggedAction : GroupSetFlaggedAct
         Game.SingletonRepository.Get<FlaggedAction>(nameof(NoticeReorderFlaggedAction))
     };
     private NoticeCombineAndReorderGroupSetFlaggedAction(Game game) : base(game) { }
-    private NoticeCombineAndReorderGroupSetFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    
-    public override void Bind() { }
 }

@@ -134,7 +134,7 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson
         return new ItemMatch[] { };
     }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         AnyMatchingItemClasses = Game.SingletonRepository.GetNullable<ItemClass>(AnyMatchingItemClassNames);
         AllNonMatchingItemClasses = Game.SingletonRepository.GetNullable<ItemClass>(AllNonMatchingItemClassNames);

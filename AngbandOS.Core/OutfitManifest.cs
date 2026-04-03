@@ -29,7 +29,7 @@ internal class OutfitManifest : IGetKey, IToJson
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         // Validate.
         if (CharacterClassBindingKey.HasValue && CharacterClassBindingKey.Value.MatchValues.Contains(""))

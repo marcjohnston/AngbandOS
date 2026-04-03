@@ -10,7 +10,6 @@ namespace AngbandOS.Core.MonsterSelectors;
 internal class SymbolMonsterSelector : MonsterSelector
 {
     private SymbolMonsterSelector(Game game) : base(game) { }
-    private SymbolMonsterSelector(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
         return new SymbolSystemMonsterRaceFilter(Game, monsterRace.Symbol.Character);

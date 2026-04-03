@@ -48,7 +48,7 @@ internal class ConditionalScript : IGetKey, IScript, IToJson
     /// </summary>
     protected IScript[]? FalseScripts { get; private set; }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Conditional = Game.SingletonRepository.Get<Conditional>(ConditionalKey);
         TrueScripts = Game.SingletonRepository.GetNullable<IScript>(TrueScriptBindingKeys);

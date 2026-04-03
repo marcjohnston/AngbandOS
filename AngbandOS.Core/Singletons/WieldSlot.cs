@@ -16,10 +16,6 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
         Game = game;
     }
 
-    protected WieldSlot(Game game, ObjectGameStateBag gameState) : this(game)
-    {
-    }
-
     /// <summary>
     /// Returns the maximum number of items that the inventory slot can hold.  Returns 1, by default.  All inventory slots return 1, except for the pack that returns 26 (a-z).
     /// </summary>
@@ -264,5 +260,5 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey //
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public virtual void Bind(RestoreGameState? restoreGameState) { }
 }

@@ -48,7 +48,7 @@ internal sealed class Attack : IGetKey, IToJson
     }
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Returns the action message to be displayed, when the attack targets another monster.

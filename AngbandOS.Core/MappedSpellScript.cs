@@ -19,7 +19,7 @@ internal sealed class MappedSpellScript : IGetKey, IToJson
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Spell = Game.SingletonRepository.GetNullable<Spell>(SpellBindingKey);
         Realm = Game.SingletonRepository.GetNullable<Realm>(RealmBindingKey);

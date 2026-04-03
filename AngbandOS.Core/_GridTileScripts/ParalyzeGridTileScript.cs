@@ -10,7 +10,6 @@ namespace AngbandOS.Core.GridTileEffects;
 internal class ParalyzeGridTileScript : GridTileScript
 {
     private ParalyzeGridTileScript(Game game) : base(game) { }
-    private ParalyzeGridTileScript(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         Game.RunScript(nameof(APuffOfYellowGasSurroundsYouRenderMessageScript));

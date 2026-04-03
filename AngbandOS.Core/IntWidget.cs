@@ -64,7 +64,7 @@ internal sealed class IntWidget : Widget, IGetKey, IToJson
     /// </summary>
     public string[]? ChangeTrackerNames { get; } = null;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);

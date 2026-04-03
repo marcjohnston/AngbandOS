@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class ColdPlayerEffect : PlayerEffectUniversalScript
 {
     private ColdPlayerEffect(Game game) : base(game) { }
-    private ColdPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by cold!";
+    public override string? BlindPreMessage => "You are hit by cold!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

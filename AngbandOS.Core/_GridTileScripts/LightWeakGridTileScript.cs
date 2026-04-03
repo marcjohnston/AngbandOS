@@ -10,7 +10,6 @@ namespace AngbandOS.Core.GridTileEffects;
 internal class LightWeakGridTileScript : GridTileScript
 {
     private LightWeakGridTileScript(Game game) : base(game) { }
-    private LightWeakGridTileScript(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         GridTile cPtr = Game.Map.Grid[y][x];

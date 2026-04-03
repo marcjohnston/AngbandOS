@@ -18,7 +18,7 @@ internal abstract class FixedArtifact : IGetKey, IToJson
         Game = game;
     }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
 

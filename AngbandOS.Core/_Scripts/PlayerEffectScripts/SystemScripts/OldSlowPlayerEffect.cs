@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class OldSlowPlayerEffect : PlayerEffectUniversalScript
 {
     private OldSlowPlayerEffect(Game game) : base(game) { }
-    private OldSlowPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by something slow!";
+    public override string? BlindPreMessage => "You are hit by something slow!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         Game.SlowTimer.AddTimer(Game.RandomLessThan(4) + 4);

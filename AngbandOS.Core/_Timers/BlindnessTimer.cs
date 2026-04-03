@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class BlindnessTimer : Timer
 {
     private BlindnessTimer(Game game) : base(game) { }
-    private BlindnessTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You can see again.");
     }

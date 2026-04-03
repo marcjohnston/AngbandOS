@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class PoisoningTimer : Timer
 {
     private PoisoningTimer(Game game) : base(game) { }
-    private PoisoningTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You are no longer poisoned.");
     }

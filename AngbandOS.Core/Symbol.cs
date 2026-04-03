@@ -25,7 +25,7 @@ internal sealed class Symbol : IGetKey, IToJson
     public string Name { get; }
 
     public string Key { get; }
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public string GetKey => Key;
 

@@ -41,7 +41,7 @@ internal sealed class PhysicalAttributeSet : IGetKey, IToJson
 
     public string GetKey => Key;
 
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public int BaseHeight { get; }
     public int HeightRange { get; }

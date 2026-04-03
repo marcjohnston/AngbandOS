@@ -29,7 +29,7 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
     public virtual string Key { get; }
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Value = Game.ParseNullableNumericExpression(ValueExpression);
         Timer = Game.SingletonRepository.Get<Timer>(TimerBindingKey);

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class LightPlayerEffect : PlayerEffectUniversalScript
 {
     private LightPlayerEffect(Game game) : base(game) { }
-    private LightPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by something slow!";
+    public override string? BlindPreMessage => "You are hit by something slow!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         bool blind = Game.BlindnessTimer.Value != 0;

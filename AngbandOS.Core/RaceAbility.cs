@@ -27,7 +27,7 @@ internal sealed class RaceAbility : IGetKey, IToJson
     public string GetKey => Key;
 
     public static string GetCompositeKey(Race race, Ability ability) => GameConfiguration.GetCompositeKey(race.GetKey, ability.GetKey);
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Race = Game.SingletonRepository.Get<Race>(RaceBindingKey);
         Ability = Game.SingletonRepository.Get<Ability>(AbilityBindingKey);

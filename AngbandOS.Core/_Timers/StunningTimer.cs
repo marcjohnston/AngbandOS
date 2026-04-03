@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class StunningTimer : Timer
 {
     private StunningTimer(Game game) : base(game) { }
-    private StunningTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You are no longer stunned.");
     }

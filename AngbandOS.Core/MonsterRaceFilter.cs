@@ -23,7 +23,7 @@ internal abstract class MonsterRaceFilter : IMonsterSelector, IGetKey
     /// </summary>
     /// <returns></returns>
 
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace) => this;
 

@@ -36,7 +36,7 @@ internal sealed class StoreCommand : IGetKey, IToJson
     public string Description { get; }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         // Get the script from the singleton repository.
         ExecuteScript = ExecuteScriptName == null ? null : Game.SingletonRepository.Get<IStoreCommandScript>(ExecuteScriptName);

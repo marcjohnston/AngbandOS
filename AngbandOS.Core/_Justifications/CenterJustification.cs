@@ -10,6 +10,5 @@ namespace AngbandOS.Core.Justifications;
 internal class CenterJustification : Justification
 {
     private CenterJustification(Game game) : base(game) { }
-    private CenterJustification(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override string Format(string value, int width) => value.PadCenter(width);
 }

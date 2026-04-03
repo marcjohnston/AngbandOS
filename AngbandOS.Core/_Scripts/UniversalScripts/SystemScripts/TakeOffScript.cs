@@ -19,7 +19,7 @@ internal class TakeOffScript : UniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Allows an item to be taken-off from active equipment.

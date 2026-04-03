@@ -46,7 +46,7 @@ internal sealed class God : IGetKey, IToJson
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
     }
 

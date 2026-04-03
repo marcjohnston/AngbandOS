@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class HellfirePlayerEffect : PlayerEffectUniversalScript
 {
     private HellfirePlayerEffect(Game game) : base(game) { }
-    private HellfirePlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by something!";
+    public override string? BlindPreMessage => "You are hit by something!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

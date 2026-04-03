@@ -18,7 +18,7 @@ internal sealed class MappedItemEnhancement : IGetKey, IToJson
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ItemEnhancements = Game.SingletonRepository.GetNullable<IItemEnhancement>(ItemEnhancementBindingKeys);
     }

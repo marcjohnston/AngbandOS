@@ -12,7 +12,6 @@ internal class RedrawEquippyFlaggedAction : FlaggedAction
     private const int ColEquippy = 0;
     private const int RowEquippy = 13;
     private RedrawEquippyFlaggedAction(Game game) : base(game) { }
-    private RedrawEquippyFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     /// <summary>
     /// Display the 'Equippy' characters (the visual representation of a character's equipment)
     /// in the default location on the main game screen

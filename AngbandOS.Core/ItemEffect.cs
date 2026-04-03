@@ -15,7 +15,7 @@ internal abstract class ItemEffect : IGetKey
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
     }
     protected ItemEffect(Game game)

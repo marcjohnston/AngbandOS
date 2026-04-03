@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class DisintegratePlayerEffect : PlayerEffectUniversalScript
 {
     private DisintegratePlayerEffect(Game game) : base(game) { }
-    private DisintegratePlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by pure energy!";
+    public override string? BlindPreMessage => "You are hit by pure energy!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

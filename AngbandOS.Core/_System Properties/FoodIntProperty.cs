@@ -9,6 +9,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class FoodIntProperty : IntProperty
 {
-    private FoodIntProperty(Game game) : base(game) { } // This object is a singleton.
-    private FoodIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
+    private FoodIntProperty(Game game) : base(game) { }
 }

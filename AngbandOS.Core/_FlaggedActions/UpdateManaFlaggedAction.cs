@@ -17,9 +17,13 @@ internal class UpdateManaFlaggedAction : FlaggedAction
     private bool OldRestrictingArmor;
 
     private UpdateManaFlaggedAction(Game game) : base(game) { }
-    private UpdateManaFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) 
+    public override void Bind(RestoreGameState? restoreGameState)
     {
-        OldRestrictingArmor = gameStateBag.GetBool(nameof(OldRestrictingArmor));
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
+        {
+            OldRestrictingArmor = restoreGameState.GetBool(nameof(OldRestrictingArmor));
+        }
     }
     protected override void Execute()
     {       

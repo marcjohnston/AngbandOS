@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Timers;
 internal class AcidResistanceTimer : Timer
 {
     private AcidResistanceTimer(Game game) : base(game) { }
-    private AcidResistanceTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     protected override void OnRateIncreased(int newRate, int currentRate)
     {
         Game.MsgPrint("You feel resistant to acid!");

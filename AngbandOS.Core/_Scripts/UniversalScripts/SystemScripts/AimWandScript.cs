@@ -19,7 +19,7 @@ internal class AimWandScript : UniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
     /// <summary>
     /// Executes the aim wand script and disposes of the successful result.
     /// </summary>

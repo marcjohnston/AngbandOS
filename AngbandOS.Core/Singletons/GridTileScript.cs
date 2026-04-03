@@ -15,14 +15,11 @@ internal abstract class GridTileScript : IGetKey
 
     public string GetKey => Key;
 
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     protected GridTileScript(Game game) // This object is a singleton
     {
         Game = game;
-    }
-    protected GridTileScript(Game game, GameStateBag gameStateBag) : this(game) // This object is a singleton
-    {
     }
 
     public abstract (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y);

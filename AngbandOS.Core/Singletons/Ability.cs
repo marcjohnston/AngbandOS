@@ -18,15 +18,18 @@ internal abstract class Ability : IGetKey
         Game = game;
     }
 
-    protected Ability(Game game, ObjectGameStateBag gameStateBag) : this(game)
+    public void Bind(RestoreGameState? restoreGameState)
     {
-        Adjusted = gameStateBag.GetInt(nameof(Adjusted));
-        AdjustedMax = gameStateBag.GetInt(nameof(AdjustedMax));
-        Bonus = gameStateBag.GetInt(nameof(Bonus));
-        Innate = gameStateBag.GetInt(nameof(Innate));
-        InnateMax = gameStateBag.GetInt(nameof(InnateMax));
-        Override = gameStateBag.GetBool(nameof(Override));
-        TableIndex = gameStateBag.GetInt(nameof(TableIndex));
+        if (restoreGameState is not null)
+        {
+            Adjusted = restoreGameState.GetInt(nameof(Adjusted));
+            AdjustedMax = restoreGameState.GetInt(nameof(AdjustedMax));
+            Bonus = restoreGameState.GetInt(nameof(Bonus));
+            Innate = restoreGameState.GetInt(nameof(Innate));
+            InnateMax = restoreGameState.GetInt(nameof(InnateMax));
+            Override = restoreGameState.GetBool(nameof(Override));
+            TableIndex = restoreGameState.GetInt(nameof(TableIndex));
+        }
     }
 
     #region Game State
@@ -91,10 +94,6 @@ internal abstract class Ability : IGetKey
         {
             Bonus = 0;
         }
-    }
-
-    public void Bind()
-    {
     }
 
     public abstract bool HasSustain { get; }

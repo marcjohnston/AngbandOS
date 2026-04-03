@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class OldHealPlayerEffect : PlayerEffectUniversalScript
 {
     private OldHealPlayerEffect(Game game) : base(game) { }
-    private OldHealPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by something invigorating!";
+    public override string? BlindPreMessage => "You are hit by something invigorating!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         Game.RestoreHealth(dam);

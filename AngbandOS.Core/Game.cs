@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
@@ -193,6 +194,7 @@ internal partial class Game
     /// <param name="gameStateBag">Supply the game state bag to restore a game.  The game configuration must match the game being restored.</param>
     private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, DictionaryGameStateBag? dictionaryGameStateBag)
     {
+        #region Non-Serialized Initialization - The initialization in this region is only for non-serialized fields and properties.
         _mainSequence = new Random();
 
         // Check to see if we are replaying a game.
@@ -211,15 +213,15 @@ internal partial class Game
             MainSequenceRandomSeed = r.Next(int.MaxValue);
         }
 
+        // Instantiate the parser that is needed for the singleton repository.
         ParseLanguage = new AngbandOSExpressionParseLanguage(this);
         ExpressionParser = new ExpressionParser(ParseLanguage);
         IntegerToDecimalExpressionTypeConverter = new IntegerToDecimalExpressionTypeConverter();
         DecimalToIntegerExpressionTypeConverter = new DecimalToIntegerExpressionTypeConverter();
+        #endregion
 
-        IsDead = true;
-        Map = new Map(this);
-
-        DungeonGenerator = new StandardDungeonGenerator(this);
+        // We need to generate a common dictionary for the object id to reference dictionary that is used to restore a game.
+        Dictionary<int, IGetKey> objectIdToReferenceDictionary = new Dictionary<int, IGetKey>();
 
         // Create an instance of the SingletonRepository.  This allows repositories that are loading access to the SingletonRepository object. // TODO: This needs to be fixed once the items no longer reference other objects during construction
         SingletonRepository = new SingletonRepository(this);
@@ -233,12 +235,40 @@ internal partial class Game
             {
                 throw new Exception($"Expected a {nameof(DictionaryGameStateBag)} for the singleton repository game state bag.");
             }
-            SingletonRepository.LoadAndBind(gameConfiguration, singletonDictionaryRepositoryGameStateBag);
+            SingletonRepository.LoadAndBind(gameConfiguration, new RestoreGameState(objectIdToReferenceDictionary, singletonDictionaryRepositoryGameStateBag));
+
+            // Check to see if there are any bags unfulfilled in the restore state.            
+            foreach (KeyValuePair<string, GameStateBag> singletonKeyAndGameStateBag in singletonDictionaryRepositoryGameStateBag.Values)
+            {
+                if (singletonKeyAndGameStateBag.Value is ObjectGameStateBag objectGameStateBag)
+                {
+                    if (!objectIdToReferenceDictionary.ContainsKey(objectGameStateBag.ObjectId))
+                    {
+                        throw new Exception($"The singleton repository game state bag did not create an object for {singletonKeyAndGameStateBag.Key}.");
+                    }
+                }
+                else if (singletonKeyAndGameStateBag.Value is ReferenceGameStateBag referenceGameStateBag)
+                {
+                    if (!objectIdToReferenceDictionary.ContainsKey(referenceGameStateBag.ObjectId))
+                    {
+                        throw new Exception($"The singleton repository game state bag did not create an object for {singletonKeyAndGameStateBag.Key}.");
+                    }
+                }
+                else
+                {
+                    throw new Exception($"Cannot verify singleton objects were created because {singletonKeyAndGameStateBag.Key} is not an {nameof(ObjectGameStateBag)} or {nameof(ReferenceGameStateBag)}.");
+                }
+            }
         }
         else
         {
             SingletonRepository.LoadAndBind(gameConfiguration, null);
         }
+
+        IsDead = true;
+        Map = new Map(this);
+
+        DungeonGenerator = new StandardDungeonGenerator(this);
 
         TimeSpan elapsedTime = DateTime.Now - startTime;
         if (gameConfiguration.MaxMessageLogLength != null)

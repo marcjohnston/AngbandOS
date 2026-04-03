@@ -19,7 +19,7 @@ internal class SpikeClosedDoorScript : UniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Executes the spike closed door script.

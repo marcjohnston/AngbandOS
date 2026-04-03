@@ -15,6 +15,4 @@ internal class PrExtraRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
         Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)),
     };
     private PrExtraRedrawActionGroupSetFlaggedAction(Game game) : base(game) { }
-    private PrExtraRedrawActionGroupSetFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
-    public override void Bind() { }
 }

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class ProtectionFromEvilTimer : Timer
 {
     private ProtectionFromEvilTimer(Game game) : base(game) { }
-    private ProtectionFromEvilTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You no longer feel safe from evil.");
     }

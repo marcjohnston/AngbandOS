@@ -21,7 +21,7 @@ internal sealed class CharacterClassAbility : IGetKey, IToJson
     public string AbilityBindingKey { get; }
 
     public static string GetCompositeKey(CharacterClass characterClass, Ability ability) => $"{characterClass.Key}-{ability.Key}";
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         CharacterClass = Game.SingletonRepository.Get<CharacterClass>(CharacterClassBindingKey);
         Ability = Game.SingletonRepository.Get<Ability>(AbilityBindingKey);

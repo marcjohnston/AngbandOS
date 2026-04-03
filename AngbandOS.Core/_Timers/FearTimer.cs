@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class FearTimer : Timer
 {
     private FearTimer(Game game) : base(game) { }
-    private FearTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You feel bolder now.");
     }

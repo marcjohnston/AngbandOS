@@ -9,8 +9,7 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class PlayerNameStringProperty : StringProperty
 {
-    private PlayerNameStringProperty(Game game) : base(game) { } // This object is a singleton.
-    private PlayerNameStringProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { } // This object is a singleton.
+    private PlayerNameStringProperty(Game game) : base(game) { }
 
     protected override void OnAfterSet()
     {

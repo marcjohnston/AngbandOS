@@ -12,9 +12,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     private bool PreviousMartialArtistArmorAux;
 
     private UpdateBonusesFlaggedAction(Game game) : base(game) { }
-    private UpdateBonusesFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag)
+    public override void Bind(RestoreGameState? restoreGameState)
     {
-        PreviousMartialArtistArmorAux = gameStateBag.GetBool(nameof(PreviousMartialArtistArmorAux));
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
+        {
+            PreviousMartialArtistArmorAux = restoreGameState.GetBool(nameof(PreviousMartialArtistArmorAux));
+        }
     }
     private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
     {

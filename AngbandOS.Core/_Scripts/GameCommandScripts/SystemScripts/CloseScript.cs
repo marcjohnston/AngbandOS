@@ -14,7 +14,7 @@ internal class CloseScript : GameCommandUniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Count the number of open doors around the players location, puting the location of the

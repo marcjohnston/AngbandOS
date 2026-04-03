@@ -50,7 +50,7 @@ internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson
     public string GetKey => Key;
     public MonsterRaceFilter MonsterFilter { get; private set; }
     public Expression LevelRoll { get; private set; }
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         MonsterFilter = Game.SingletonRepository.Get<MonsterRaceFilter>(MonsterFilterBindingKey);
         LevelRoll = Game.ParseNumericExpression(LevelRollExpression);

@@ -17,7 +17,7 @@ internal abstract class SpellResistantDetection : IGetKey
 
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public abstract void Learn(Monster monster);
 }

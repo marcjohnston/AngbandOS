@@ -24,7 +24,7 @@ internal sealed class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, I
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         foreach ((string name, int weight) in NameAndWeightBindings)
         {

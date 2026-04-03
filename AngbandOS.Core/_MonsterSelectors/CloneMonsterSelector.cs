@@ -10,7 +10,6 @@ namespace AngbandOS.Core.MonsterSelectors;
 internal class CloneMonsterSelector : MonsterSelector
 {
     private CloneMonsterSelector(Game game) : base(game) { }
-    private CloneMonsterSelector(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
         return new CloneSystemMonsterRaceFilter(Game, monsterRace);

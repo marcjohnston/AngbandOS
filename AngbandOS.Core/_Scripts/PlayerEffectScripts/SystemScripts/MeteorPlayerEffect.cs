@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class MeteorPlayerEffect : PlayerEffectUniversalScript
 {
     private MeteorPlayerEffect(Game game) : base(game) { }
-    private MeteorPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "Something falls from the sky on you!";
+    public override string? BlindPreMessage => "Something falls from the sky on you!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

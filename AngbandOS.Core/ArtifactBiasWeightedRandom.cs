@@ -23,7 +23,7 @@ internal sealed class ArtifactBiasWeightedRandom : WeightedRandom<ArtifactBias?>
 
     private (string?, int)[] ArtifactBiasBindingKeyAndWeightTuples { get; }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         foreach ((string? artifactBiasBindingKey, int weight) in ArtifactBiasBindingKeyAndWeightTuples)
         {

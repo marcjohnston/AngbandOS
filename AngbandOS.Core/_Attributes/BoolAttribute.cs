@@ -13,10 +13,6 @@ internal class BoolAttribute : Attribute, IToJson
     {
         Key = gameConfiguration.GetKey;
     }
-    public BoolAttribute(Game game, BoolAttributeGameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) // This object is a singleton
-    {
-        Key = gameConfiguration.GetKey;
-    }
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new BoolSetEffectiveAttributeValue(Game, this, null);
     public override string Key { get; }
 

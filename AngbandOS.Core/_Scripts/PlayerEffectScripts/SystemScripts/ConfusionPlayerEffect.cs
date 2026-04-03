@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class ConfusionPlayerEffect : PlayerEffectUniversalScript
 {
     private ConfusionPlayerEffect(Game game) : base(game) { }
-    private ConfusionPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by something puzzling!";
+    public override string? BlindPreMessage => "You are hit by something puzzling!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

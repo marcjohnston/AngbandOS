@@ -10,13 +10,6 @@ namespace AngbandOS.Core.Properties;
 internal class GameMessageProperty : Property
 {
     private GameMessageProperty(Game game) : base(game) { }
-    private GameMessageProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game)
-    {
-        foreach (string message in objectGameStateBag.GetQueueStrings(nameof(MessageQueue)))
-        {
-            MessageQueue.Enqueue(message);
-        }
-    }
     public Queue<string?> MessageQueue = new Queue<string?>();
     public string StringValue { get; set; } = "";
 
@@ -32,6 +25,14 @@ internal class GameMessageProperty : Property
         {
             MessageQueue.Enqueue(message);
             SetChangedFlag();
+        }
+    }
+    public override void Bind(RestoreGameState? restoreGameState)
+    {
+        base.Bind(restoreGameState);
+        foreach (string message in restoreGameState.GetQueueStrings(nameof(MessageQueue)))
+        {
+            MessageQueue.Enqueue(message);
         }
     }
 }

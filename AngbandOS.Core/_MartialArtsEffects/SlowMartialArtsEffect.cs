@@ -11,7 +11,6 @@ namespace AngbandOS.Core;
 internal class SlowMartialArtsEffect : MartialArtsEffect
 {
     private SlowMartialArtsEffect(Game game) : base(game) { } // This object is a singleton
-    private SlowMartialArtsEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override int Execute(Monster monster, MartialArtsAttack martialArtsAttack, int resistanceToStun)
     {
         // Check to ensure the monster is not stationary and has legs.

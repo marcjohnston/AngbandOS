@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class NoticeReorderFlaggedAction : FlaggedAction
 {
     private NoticeReorderFlaggedAction(Game game) : base(game) { }
-    private NoticeReorderFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void Execute()
+    protected override void Execute()
     {
         bool itemsWereReordered = SortPack();
         if (itemsWereReordered)

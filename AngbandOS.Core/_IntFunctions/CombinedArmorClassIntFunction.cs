@@ -23,7 +23,7 @@ internal class CombinedArmorClassIntFunction : IChangeTracker, IGetKey, IIntValu
 
     public int IntValue => Game.EffectiveAttributeSet.Get<int>(nameof(BaseArmorClassAttribute)) + Game.KnownBonusArmorClass;
 
-    public void Bind() {  }
+    public void Bind(RestoreGameState? restoreGameState) {  }
 
     public void ClearChangedFlag()
     {

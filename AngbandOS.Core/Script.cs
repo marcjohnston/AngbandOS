@@ -23,5 +23,5 @@ internal abstract class Script : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 }

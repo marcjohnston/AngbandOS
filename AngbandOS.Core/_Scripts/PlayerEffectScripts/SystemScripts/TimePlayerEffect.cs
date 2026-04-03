@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class TimePlayerEffect : PlayerEffectUniversalScript
 {
     private TimePlayerEffect(Game game) : base(game) { }
-    private TimePlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by a blast from the past!";
+    public override string? BlindPreMessage => "You are hit by a blast from the past!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string act = null;

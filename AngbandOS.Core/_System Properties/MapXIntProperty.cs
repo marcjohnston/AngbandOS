@@ -9,6 +9,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class MapXIntProperty : IntProperty
 {
-    private MapXIntProperty(Game game) : base(game) { } // This object is a singleton.
-    private MapXIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
+    private MapXIntProperty(Game game) : base(game) { }
 }

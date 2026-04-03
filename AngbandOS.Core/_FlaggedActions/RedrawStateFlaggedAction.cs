@@ -12,7 +12,7 @@ internal class RedrawStateFlaggedAction : FlaggedAction
     private const int ColState = 27;
     private const int RowState = 43;
     private RedrawStateFlaggedAction(Game game) : base(game) { }
-    private RedrawStateFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void Execute()
+    protected override void Execute()
     {
         ColorEnum attr = ColorEnum.White;
         string text;

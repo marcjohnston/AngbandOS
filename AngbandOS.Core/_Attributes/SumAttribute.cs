@@ -13,10 +13,6 @@ internal class SumAttribute : Attribute, IToJson
     {
         Key = gameConfiguration.GetKey;
     }
-    public SumAttribute(Game game, SumAttributeGameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) // This object is a singleton
-    {
-        Key = gameConfiguration.GetKey;
-    }
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new SumEffectiveAttributeValue(Game, this);
     public override string Key { get; }
 

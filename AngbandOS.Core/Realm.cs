@@ -44,7 +44,7 @@ internal sealed class Realm : IGetKey, IToJson
     }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         SpellBooks = Game.SingletonRepository.Get<ItemFactory>(SpellBookNames);
     }

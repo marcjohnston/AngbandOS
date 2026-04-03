@@ -19,7 +19,7 @@ internal class AnnihilationScript : UniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Destroys every monster, taking a hit for each one but adding mana for each too.

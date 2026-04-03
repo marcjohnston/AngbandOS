@@ -11,7 +11,6 @@ namespace AngbandOS.Core;
 internal class Stun3p1d3MartialArtsEffect : MartialArtsEffect
 {
     private Stun3p1d3MartialArtsEffect(Game game) : base(game) { } // This object is a singleton
-    private Stun3p1d3MartialArtsEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     protected override string StunLevelExpression => "3+1d3";
     public override int Execute(Monster monster, MartialArtsAttack martialArtsAttack, int resistanceToStun)
     {

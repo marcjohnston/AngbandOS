@@ -10,9 +10,11 @@ namespace AngbandOS.Core.Properties;
 internal abstract class IntProperty : Property, IIntValue
 {
     protected IntProperty(Game game) : base(game) { }
-    protected IntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game)
+
+    public override void Bind(RestoreGameState restoreGameState)
     {
-        _value = objectGameStateBag.GetInt(nameof(_value));
+        base.Bind(restoreGameState);
+        _value = restoreGameState.GetInt(nameof(_value));
     }
 
     private int _value;

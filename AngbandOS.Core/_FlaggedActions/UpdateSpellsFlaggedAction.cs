@@ -18,7 +18,7 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class UpdateSpellsFlaggedAction : FlaggedAction
 {
     private UpdateSpellsFlaggedAction(Game game) : base(game) { }
-    private UpdateSpellsFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void Execute()
+    protected override void Execute()
     {
         if (Game.IsDead)
         {

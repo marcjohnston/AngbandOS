@@ -12,9 +12,8 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class ExperienceLevelIntProperty : IntProperty
 {
-    private ExperienceLevelIntProperty(Game game) : base(game) { } // This object is a singleton.
+    private ExperienceLevelIntProperty(Game game) : base(game) { }
 
-    private ExperienceLevelIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
     protected override void OnAfterSet()
     {
         base.OnAfterSet();

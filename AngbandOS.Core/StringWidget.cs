@@ -33,7 +33,7 @@ internal sealed class StringWidget : Widget, IGetKey, IToJson
     public string StringValueName { get; }
     public IStringValue StringValue { get; private set; }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);

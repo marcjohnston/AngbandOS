@@ -40,7 +40,7 @@ internal sealed class Patron : IGetKey, IToJson
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         PreferredAbility = Game.SingletonRepository.GetNullable<Ability>(PreferredAbilityBindingKey);
         Rewards = Game.SingletonRepository.Get<Reward>(RewardBindingKeys);

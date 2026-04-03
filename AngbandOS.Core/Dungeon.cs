@@ -34,7 +34,7 @@ internal sealed class Dungeon : IGetKey, IToJson
 
     #region Api Methods
     public string GetKey => Key;
-    public void Bind() 
+    public void Bind(RestoreGameState? restoreGameState) 
     {
         if (BiasMonsterFilterName != null)
         {

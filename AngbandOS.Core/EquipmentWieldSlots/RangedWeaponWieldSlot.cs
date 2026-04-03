@@ -12,7 +12,6 @@ namespace AngbandOS.Core.WieldSlots;
 internal class RangedWeaponWieldSlot : EquipmentWieldSlot
 {
     private RangedWeaponWieldSlot(Game game) : base(game) { } // This object is a singleton
-    private RangedWeaponWieldSlot(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { } // This object is a singleton
     public override string Label(Item oPtr) => "b";
     public override int[] InventorySlots => new int[] { InventorySlotEnum.RangedWeapon };
     public override bool IsRangedWeapon => true;

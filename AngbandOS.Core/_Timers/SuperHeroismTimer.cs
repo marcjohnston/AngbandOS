@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class SuperheroismTimer : Timer
 {
     private SuperheroismTimer(Game game) : base(game) { }
-    private SuperheroismTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You feel less Berserk.");
     }

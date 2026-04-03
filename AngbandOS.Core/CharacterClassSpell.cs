@@ -55,5 +55,5 @@ internal sealed class CharacterClassSpell : IGetKey, IToJson
     /// </summary>
     public string GetKey => Key;
 
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 }

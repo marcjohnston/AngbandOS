@@ -13,10 +13,6 @@ internal class OrAttribute : Attribute, IToJson
     {
         Key = gameConfiguration.GetKey;
     }
-    public OrAttribute(Game game, OrAttributeGameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) // This object is a singleton
-    {
-        Key = gameConfiguration.GetKey;
-    }
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new OrEffectiveAttributeValue(Game, this);
     public override string Key { get; }
 

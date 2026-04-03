@@ -29,7 +29,7 @@ internal sealed class RacePower : IGetKey, IScript, IToJson
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Script = Game.SingletonRepository.Get<IScript>(ScriptBindingKey);
         Race = Game.SingletonRepository.Get<Race>(RaceBindingKey);

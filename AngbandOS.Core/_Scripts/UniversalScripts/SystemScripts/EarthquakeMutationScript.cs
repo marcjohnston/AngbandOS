@@ -6,7 +6,7 @@ internal class EarthquakeMutationScript : UniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
     public override void ExecuteScript()
     {
         if (!Game.IsQuest(Game.CurrentDepth) && Game.CurrentDepth != 0)

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class IcePlayerEffect : PlayerEffectUniversalScript
 {
     private IcePlayerEffect(Game game) : base(game) { }
-    private IcePlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by something sharp and cold!";
+    public override string? BlindPreMessage => "You are hit by something sharp and cold!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class BlessingTimer : Timer
 {
     private BlessingTimer(Game game) : base(game) { }
-    private BlessingTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("The prayer has expired.");
     }

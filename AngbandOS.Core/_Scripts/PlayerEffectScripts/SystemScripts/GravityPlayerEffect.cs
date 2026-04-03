@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class GravityPlayerEffect : PlayerEffectUniversalScript
 {
     private GravityPlayerEffect(Game game) : base(game) { }
-    private GravityPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by something heavy!";
+    public override string? BlindPreMessage => "You are hit by something heavy!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

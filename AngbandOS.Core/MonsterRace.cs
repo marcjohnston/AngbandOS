@@ -491,7 +491,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Knowledge = new MonsterKnowledge(Game, this);
         int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);

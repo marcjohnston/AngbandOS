@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Timers;
 internal class HallucinatingTimer : Timer
 {
     private HallucinatingTimer(Game game) : base(game) { }
-    private HallucinatingTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     protected override void EffectStopped()
     {
         Game.MsgPrint("You can see clearly again.");

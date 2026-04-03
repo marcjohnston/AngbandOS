@@ -14,9 +14,9 @@ internal abstract class ProjectileMonsterSpell : MonsterSpell
 {
     protected ProjectileMonsterSpell(Game game) : base(game) { }
 
-    public override void Bind()
+    public override void Bind(RestoreGameState? restoreGameState)
     {
-        base.Bind();
+        base.Bind(restoreGameState);
         Projectile = Game.SingletonRepository.Get<Projectile>(ProjectileKey);
     }
 

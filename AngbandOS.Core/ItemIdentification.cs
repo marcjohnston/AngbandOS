@@ -41,7 +41,7 @@ internal class ItemIdentification : IGetKey, IToJson
     private string AttributeFilterBindingKey { get; }
     public AttributeFilter AttributeFilter { get; private set; }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         AttributeFilter = Game.SingletonRepository.Get<AttributeFilter>(AttributeFilterBindingKey);
         InterpolationExpressionAttributes = Game.SingletonRepository.GetNullable<Attribute>(InterpolationExpressionAttributeNames);

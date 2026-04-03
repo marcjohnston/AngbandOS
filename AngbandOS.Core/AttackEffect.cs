@@ -23,7 +23,7 @@ internal abstract class AttackEffect : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public abstract string Description { get; }
     public abstract int Power { get; }

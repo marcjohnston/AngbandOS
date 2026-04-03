@@ -23,7 +23,7 @@ internal abstract class MonsterSpell : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public virtual void Bind()
+    public virtual void Bind(RestoreGameState? restoreGameState)
     {
         SmartLearn = Game.SingletonRepository.Get<SpellResistantDetection>(SmartLearnSpellResistantDetectionKeys);
     }

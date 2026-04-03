@@ -23,7 +23,7 @@ internal abstract class Race : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);

@@ -18,7 +18,7 @@ internal abstract class Talent : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public abstract string Name { get; }
 

@@ -39,7 +39,7 @@ internal class ChestTrap : IGetKey, IToJson
     public virtual string Key { get; set; }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ActivationGridTileScript = Game.SingletonRepository.Get<GridTileScript>(ActivationGridTileScriptBindingKey);
     }

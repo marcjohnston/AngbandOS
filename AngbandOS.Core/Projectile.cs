@@ -47,7 +47,7 @@ internal sealed class Projectile : IGetKey, IToJson
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         MonsterEffect = Game.SingletonRepository.Get<MonsterEffect>(MonsterEffectBindingKey);
         ItemEffect = Game.SingletonRepository.Get<ItemEffect>(ItemEffectBindingKey);

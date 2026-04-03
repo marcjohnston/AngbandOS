@@ -10,7 +10,6 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class NoticeCombineFlaggedAction : FlaggedAction
 {
     private NoticeCombineFlaggedAction(Game game) : base(game) { }
-    private NoticeCombineFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     protected override void Execute()
     {
         bool flag = false;

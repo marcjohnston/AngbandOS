@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class ConfusingTimer : Timer
 {
     private ConfusingTimer(Game game) : base(game) { }
-    private ConfusingTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You feel less confused now.");
     }

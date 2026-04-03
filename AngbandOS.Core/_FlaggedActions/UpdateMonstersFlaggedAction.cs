@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class UpdateMonstersFlaggedAction : FlaggedAction
 {
     private UpdateMonstersFlaggedAction(Game game) : base(game) { }
-    private UpdateMonstersFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void Execute()
+    protected override void Execute()
     {
         for (int i = 1; i < Game.MonsterMax; i++)
         {

@@ -6,7 +6,7 @@ internal class GrowMoldMutationScript : UniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
     public override void ExecuteScript()
     {
         for (int i = 0; i < 8; i++)

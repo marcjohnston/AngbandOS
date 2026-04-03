@@ -6,7 +6,7 @@ internal class BerserkMutationScript : UniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
     public override void ExecuteScript()
     {
         Game.SuperheroismTimer.AddTimer(base.Game.DieRoll(25) + 25);

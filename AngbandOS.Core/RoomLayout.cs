@@ -23,7 +23,7 @@ internal abstract class RoomLayout : IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Returns the number of grid blocks to the left of the zero-dimension center that the room occupies.

@@ -32,7 +32,7 @@ internal abstract class StringFunction : IChangeTracker, IGetKey, IStringValue
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Dependencies = Game.SingletonRepository.GetNullable<IChangeTracker>(DependencyNames);
     }

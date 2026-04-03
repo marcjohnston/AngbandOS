@@ -26,7 +26,7 @@ internal sealed class RacialPowerTest : IGetKey, IBoolValue, IToJson
     public string Key { get; }
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         UseAbility = Game.SingletonRepository.Get<Ability>(UseAbilityBindingKey);
         Cost = Game.ParseNumericExpression(CostExpression);

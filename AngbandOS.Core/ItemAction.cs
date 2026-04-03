@@ -19,7 +19,7 @@ internal abstract class ItemAction : IGetKey
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ItemFilters = Game.SingletonRepository.Get<ItemFilter>(ItemFilterNames);
     }

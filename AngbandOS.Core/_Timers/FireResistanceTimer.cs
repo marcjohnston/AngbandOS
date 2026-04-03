@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class FireResistanceTimer : Timer
 {
     private FireResistanceTimer(Game game) : base(game) { }
-    private FireResistanceTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You feel less resistant to fire.");
     }

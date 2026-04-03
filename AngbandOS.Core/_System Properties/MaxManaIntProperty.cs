@@ -9,6 +9,5 @@ namespace AngbandOS.Core.Properties;
 [Serializable]
 internal class MaxManaIntProperty : IntProperty
 {
-    private MaxManaIntProperty(Game game) : base(game) { } // This object is a singleton.
-    private MaxManaIntProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game, objectGameStateBag) { }
+    private MaxManaIntProperty(Game game) : base(game) { }
 }

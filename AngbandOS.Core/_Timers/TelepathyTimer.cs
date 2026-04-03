@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class TelepathyTimer : Timer
 {
     private TelepathyTimer(Game game) : base(game) { }
-    private TelepathyTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("Your consciousness contracts again.");
     }

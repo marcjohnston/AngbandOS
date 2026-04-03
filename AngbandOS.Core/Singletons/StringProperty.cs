@@ -10,11 +10,15 @@ namespace AngbandOS.Core.Properties;
 internal abstract class StringProperty : Property, IStringValue
 {
     protected StringProperty(Game game) : base(game) { }
-    protected StringProperty(Game game, ObjectGameStateBag objectGameStateBag) : base(game)
-    {
-        _value = objectGameStateBag.GetString(nameof(_value));
-    }
 
+    public override void Bind(RestoreGameState? restoreGameState)
+    {
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
+        {
+            _value = restoreGameState.GetString(nameof(_value));
+        }
+    }
     private string _value;
     public string StringValue
     {

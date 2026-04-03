@@ -11,9 +11,9 @@ internal abstract class SummonMonsterSpell : MonsterSpell
 {
     protected SummonMonsterSpell(Game game) : base(game) { }
 
-    public override void Bind()
+    public override void Bind(RestoreGameState? restoreGameState)
     {
-        base.Bind();
+        base.Bind(restoreGameState);
         MonsterSelector = Game.SingletonRepository.GetNullable<IMonsterSelector>(MonsterSelectorBindingKey);
         FriendlyMonsterSelector = Game.SingletonRepository.GetNullable<IMonsterSelector>(FriendlyMonsterSelectorBindingKey);
     }

@@ -370,7 +370,7 @@ internal sealed class ItemFactory : IGetKey, IToJson
     }
     public EffectiveAttributeSet EffectiveAttributeSet { get; }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ItemEnhancement itemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
         EffectiveAttributeSet.MergeAttributeSet(itemEnhancement.GenerateAttributeSet());

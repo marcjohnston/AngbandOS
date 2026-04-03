@@ -15,7 +15,7 @@ internal abstract class MonsterEffect : IGetKey
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         UnfriendPetMonsterFilter = Game.SingletonRepository.GetNullable<MonsterFilter>(UnfriendPetMonsterFilterBindingKey);
     }

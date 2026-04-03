@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class EtherealnessTimer : Timer
 {
     private EtherealnessTimer(Game game) : base(game) { }
-    private EtherealnessTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You feel opaque.");
     }

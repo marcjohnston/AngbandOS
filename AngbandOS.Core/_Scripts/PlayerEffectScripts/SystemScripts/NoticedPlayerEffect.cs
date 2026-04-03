@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class NoticedPlayerEffect : PlayerEffectUniversalScript
 {
     private NoticedPlayerEffect(Game game) : base(game) { }
-    private NoticedPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
+    public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         return IdentifiedResultEnum.True;
     }

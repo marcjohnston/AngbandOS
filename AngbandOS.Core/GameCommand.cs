@@ -23,7 +23,7 @@ internal sealed class GameCommand : IGetKey, IToJson
     public string Key { get; } 
 
     public string GetKey => Key;
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ExecuteScript = ExecuteScriptName == null ? null : Game.SingletonRepository.Get<IGameCommandScript>(ExecuteScriptName);
     }

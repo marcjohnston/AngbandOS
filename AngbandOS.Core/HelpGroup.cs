@@ -21,7 +21,7 @@ internal sealed class HelpGroup : IGetKey, IToJson
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public string ToJson()
     {

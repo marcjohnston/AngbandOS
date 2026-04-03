@@ -10,7 +10,6 @@ namespace AngbandOS.Core.MonsterSelectors;
 internal class PlaceOkayMonsterSelector : MonsterSelector
 {
     private PlaceOkayMonsterSelector(Game game) : base(game) { }
-    private PlaceOkayMonsterSelector(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace)
     {
         return new PlaceOkaySystemMonsterRaceFilter(Game, monsterRace.Index);

@@ -46,7 +46,7 @@ internal sealed class Spell : IGetKey, IToJson
     public string GetKey => Key;
 
 
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Returns true, if the spell has been forgotten because the players level dropped to low.  When true, Learned is set to false.

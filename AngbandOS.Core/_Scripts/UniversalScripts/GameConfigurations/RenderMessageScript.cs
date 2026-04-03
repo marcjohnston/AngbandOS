@@ -37,7 +37,7 @@ internal sealed class RenderMessageScript : UniversalScript, IGetKey, IToJson
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 
     public override bool UsesItem { get; } = false;
     public override bool IdentifiesItem { get; } = false;

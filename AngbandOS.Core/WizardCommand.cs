@@ -42,7 +42,7 @@ internal sealed class WizardCommand : IHelpCommand, IGetKey, IToJson
     public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind() 
+    public void Bind(RestoreGameState? restoreGameState) 
     {
         ExecuteScript = ExecuteScriptName == null ? null : Game.SingletonRepository.Get<IScript>(ExecuteScriptName);
         HelpGroup = HelpGroupName == null ? null : Game.SingletonRepository.Get<HelpGroup>(HelpGroupName);

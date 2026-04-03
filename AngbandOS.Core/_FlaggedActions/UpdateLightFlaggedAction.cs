@@ -10,7 +10,7 @@ namespace AngbandOS.Core.FlaggedActions;
 internal class UpdateLightFlaggedAction : FlaggedAction
 {
     private UpdateLightFlaggedAction(Game game) : base(game) { }
-    private UpdateLightFlaggedAction(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    private void CaveLightHack(int y, int x)
+    private void CaveLightHack(int y, int x)
     {
         Game.Map.Grid[y][x].PlayerLit = true;
         Game.Light.Add(new GridCoordinate(x, y));

@@ -10,6 +10,5 @@ namespace AngbandOS.Core.Justifications;
 internal class RightJustification : Justification
 {
     private RightJustification(Game game) : base(game) { }
-    private RightJustification(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override string Format(string value, int width) => value.PadLeft(width);
 }

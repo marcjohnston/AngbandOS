@@ -393,7 +393,7 @@ internal abstract class CharacterClass : IGetKey
     {
         EffectiveAttributeSet = Enhancement.GenerateAttributeSet();
     }
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ItemActions = Game.SingletonRepository.GetNullable<ItemAction>(ItemActionNames);
         MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);

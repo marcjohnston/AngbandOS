@@ -14,13 +14,10 @@ internal abstract class Justification : IGetKey
     {
         Game = game;
     }
-    protected Justification(Game game, GameStateBag gameStateBag) : this(game) // This object is a singleton
-    {
-    }
 
     public abstract string Format(string value, int width);
 
     public string GetKey => GetType().Name;
 
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
 }

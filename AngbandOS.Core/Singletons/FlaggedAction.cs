@@ -14,16 +14,16 @@ internal abstract class FlaggedAction : IGetKey
     {
         Game = game;
     }
-    protected FlaggedAction(Game game, ObjectGameStateBag gameStateBag) : this(game) // This object is a singleton
+    protected FlaggedAction(Game game, RestoreGameState restoreGameState) : this(game) // This object is a singleton
     {
-        _flag = gameStateBag.GetBool(nameof(_flag));
+        _flag = restoreGameState.GetBool(nameof(_flag));
     }
 
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
 
-    public virtual void Bind() { } // TODO: This is a special case virtual for bind because group flagged actions bind.  A flagged action doesn't support grouping.  Flagged actions will never be configurable either.  Not sure if they should be a repository.
+    public virtual void Bind(RestoreGameState? restoreGameState) { } // TODO: This is a special case virtual for bind because group flagged actions bind.  A flagged action doesn't support grouping.  Flagged actions will never be configurable either.  Not sure if they should be a repository.
 
     private bool _flag;
 

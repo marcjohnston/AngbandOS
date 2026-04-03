@@ -79,7 +79,7 @@ internal sealed class Town : IGetKey, IToJson
     /// </summary>
     public bool CanBeEscortedHere => true;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         List<StoreFactory> storeFactoryList = new List<StoreFactory>();
         foreach (string storeName in StoreFactoryNames)

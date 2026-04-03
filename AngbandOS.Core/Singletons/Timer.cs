@@ -13,14 +13,9 @@ namespace AngbandOS.Core;
 internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
 {
     protected Game Game { get; }
-    public Timer(Game game) // This object is a singleton
+    public Timer(Game game)
     {
         Game = game;
-    }
-
-    public Timer(Game game, ObjectGameStateBag gameStateBag) : this(game) // This object is a singleton
-    {
-        _value = gameStateBag.GetInt(nameof(_value));
     }
 
     /// <summary>
@@ -44,7 +39,13 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState)
+    {
+        if (restoreGameState is not null)
+        {
+            _value = restoreGameState.GetInt(nameof(_value));
+        }
+    }
 
     private int _value;
 

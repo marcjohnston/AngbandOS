@@ -48,7 +48,7 @@ internal sealed class View : IGetKey, IToJson
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Widgets = Game.SingletonRepository.Get<Widget>(WidgetNames);
     }

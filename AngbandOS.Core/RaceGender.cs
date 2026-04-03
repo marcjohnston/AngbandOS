@@ -37,7 +37,7 @@ internal sealed class RaceGender : IGetKey, IToJson
     public string Key { get; }
     public string GetKey => $"{RaceBindingKey}-{GenderBindingKey}";
     public static string GetCompositeKey(Race race, Gender gender) => GameConfiguration.GetCompositeKey(race.GetKey, gender.GetKey);
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Race = Game.SingletonRepository.Get<Race>(RaceBindingKey);
         Gender = Game.SingletonRepository.Get<Gender>(GenderBindingKey);

@@ -57,7 +57,7 @@ internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson
     public string IntValueName { get; }
     public IIntValue IntValue { get; private set; }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);

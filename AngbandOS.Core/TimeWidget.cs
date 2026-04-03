@@ -70,7 +70,7 @@ internal sealed class TimeWidget : Widget, IGetKey, IToJson
     /// </summary>
     public string JustificationName { get; } = nameof(LeftJustification);
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         ChangeTrackers = Game.SingletonRepository.GetNullable<IChangeTracker>(ChangeTrackerNames);
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);

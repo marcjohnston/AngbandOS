@@ -10,7 +10,6 @@ namespace AngbandOS.Core.GridTileEffects;
 internal class SummonGridTileScript : GridTileScript
 {
     private SummonGridTileScript(Game game) : base(game) { }
-    private SummonGridTileScript(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
         Game.RunScript(nameof(YouAreEnvelopedInACloudOfSmokeRenderMessageScript));

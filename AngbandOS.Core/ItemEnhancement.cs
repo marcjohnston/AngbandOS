@@ -90,7 +90,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement
         }
         return ApplicableItemFactories.Contains(itemFactory);
     }
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         // We are using a dictionary because we do not want to support duplicate attributes.
         Dictionary<Attribute, Expression> sumAttributeAndExpressionList = new Dictionary<Attribute, Expression>();

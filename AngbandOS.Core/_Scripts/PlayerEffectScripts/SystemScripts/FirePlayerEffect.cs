@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class FirePlayerEffect : PlayerEffectUniversalScript
 {
     private FirePlayerEffect(Game game) : base(game) { }
-    private FirePlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by fire!";
+    public override string? BlindPreMessage => "You are hit by fire!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

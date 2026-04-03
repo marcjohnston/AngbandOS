@@ -42,7 +42,7 @@ internal sealed class Conditional : IChangeTracker, IGetKey, IBoolValue, IToJson
 
     public string GetKey => Key;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         Dependencies = Game.SingletonRepository.GetNullable<IChangeTracker>(DependencyNames);
         List<(IBoolValue, bool, int)> conditionalList = new();

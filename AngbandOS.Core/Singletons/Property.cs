@@ -17,6 +17,9 @@ internal abstract class Property : IGetKey, IChangeTracker
     {
         Game = game;
     }
+    protected Property(Game game, RestoreGameState restoreGameState) : this(game)
+    {
+    }
 
     /// <summary>
     /// Sets the change flag to true to indicate that the value has changed.  This should only be performed by derived classes when the internal value changes.
@@ -48,6 +51,5 @@ internal abstract class Property : IGetKey, IChangeTracker
         throw new Exception($"ToString override missing for {GetType().Name}.");
     }
 
-    public void Bind() { }
-
+    public virtual void Bind(RestoreGameState? restoreGameState) { }
 }

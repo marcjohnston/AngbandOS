@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class ParalysisTimer : Timer
 {
     private ParalysisTimer(Game game) : base(game) { }
-    private ParalysisTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You can move again.");
     }

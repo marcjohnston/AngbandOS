@@ -10,7 +10,7 @@ namespace AngbandOS.Core.PlayerEffects;
 internal class InertiaPlayerEffect : PlayerEffectUniversalScript
 {
     private InertiaPlayerEffect(Game game) : base(game) { }
-    private InertiaPlayerEffect(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    public override string? BlindPreMessage => "You are hit by something slow!";
+    public override string? BlindPreMessage => "You are hit by something slow!";
     public override IdentifiedResultEnum Apply(Monster mPtr, int dam)
     {
         string killer = mPtr.IndefiniteVisibleName;

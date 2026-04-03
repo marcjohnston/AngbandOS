@@ -117,7 +117,7 @@ internal sealed class StoreFactory : IItemFilter, IGetKey, IToJson
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         // Bind the advertised commands.
         AdvertisedStoreCommand1 = AdvertisedStoreCommand1Name == null ? null : Game.SingletonRepository.Get<StoreCommand>(AdvertisedStoreCommand1Name);

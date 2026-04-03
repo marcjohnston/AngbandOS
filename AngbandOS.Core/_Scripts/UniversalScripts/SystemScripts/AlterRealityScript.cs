@@ -19,7 +19,7 @@ internal class AlterRealityScript : UniversalScript, IGetKey
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;
-    public void Bind() { }
+    public void Bind(RestoreGameState? restoreGameState) { }
     /// <summary>
     /// Takes the player to a new level with a random starting location.
     /// </summary>

@@ -28,7 +28,7 @@ internal abstract class ArtifactBias : IGetKey
 
     public virtual string Key => GetType().Name;
 
-    public void Bind()
+    public void Bind(RestoreGameState? restoreGameState)
     {
         (ItemFilter, ProbabilityExpression, ItemEnhancement, ProbabilityExpression)[]? BindTestsAndItemEnhancements((string ItemCharacteristicTestName, string ItemAdditiveBundleProbabilityExpression, string ItemAdditiveBundleName, string MoreProbabilityExpression)[]? tuples)
         {

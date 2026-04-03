@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class HasteTimer : Timer
 {
     private HasteTimer(Game game) : base(game) { }
-    private HasteTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You feel yourself slow down.");
     }

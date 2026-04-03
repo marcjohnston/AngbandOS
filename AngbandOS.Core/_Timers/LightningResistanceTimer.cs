@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Timers;
 internal class LightningResistanceTimer : Timer
 {
     private LightningResistanceTimer(Game game) : base(game) { }
-    private LightningResistanceTimer(Game game, ObjectGameStateBag gameStateBag) : base(game, gameStateBag) { }    protected override void EffectStopped()
+    protected override void EffectStopped()
     {
         Game.MsgPrint("You feel less resistant to electricity.");
     }
