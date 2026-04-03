@@ -432,6 +432,10 @@ internal class SingletonRepository
         {
             RestoreGameState? singletonRestoreGameState = restoreGameState?.Get(singleton.GetKey);
             singleton.Bind(singletonRestoreGameState);
+            if (singletonRestoreGameState is not null)
+            {
+                VerifyRestore(singletonRestoreGameState, singleton);
+            }
         }
 
         //foreach (FixedArtifact fixedArtifact in Get<FixedArtifact>())
@@ -466,6 +470,96 @@ internal class SingletonRepository
         //        }
         //    }
         //}
+    }
+
+    private void VerifyRestore(RestoreGameState restoreGameState, object singleton)
+    {
+        //Perform a verification of the restore process.
+        switch (restoreGameState.GameStateBag)
+        {
+            case ObjectGameStateBag objectGameStateBag:
+                foreach ((string PropertyName, GameStateBag ExpectedValue) in objectGameStateBag.Values)
+                {
+
+                    // Retrieve the field info from the singleton.
+                    FieldInfo? singletonFieldInfo = GameStateBag.GetAllFields(singleton.GetType()).SingleOrDefault(_fieldInfo => _fieldInfo.Name == PropertyName);
+                    if (singletonFieldInfo is null)
+                    {
+                        throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton could not be found.");
+                    }
+
+                    // Retrieve the actual value from the singleton.
+                    object? singletonFieldValue = singletonFieldInfo.GetValue(singleton);
+
+                    // Compare the expected value to the actual value based on the type of the expected value.
+                    switch (ExpectedValue)
+                    {
+                        case NullValueGameStateBag:
+                            if (singletonFieldValue is not null)
+                            {
+                                throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton did not verify as null.");
+                            }
+                            break;
+                        case IntValueGameStateBag intRestorePropertyValue:
+                            if (singletonFieldValue is not int intSingletonFieldValue)
+                            {
+                                throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton did not verify as an integer value.");
+                            }
+                            if (intSingletonFieldValue != intRestorePropertyValue.Value)
+                            {
+                                throw new Exception($"During restore verification, the {PropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {intRestorePropertyValue.Value}.");
+                            }
+                            break;
+                        case StringValueGameStateBag stringRestorePropertyValue:
+                            if (singletonFieldValue is not string stringSingletonFieldValue)
+                            {
+                                throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton did not verify as an string value.");
+                            }
+                            if (stringSingletonFieldValue != stringRestorePropertyValue.Value)
+                            {
+                                throw new Exception($"During restore verification, the {PropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {stringRestorePropertyValue.Value}.");
+                            }
+                            break;
+                        case BoolValueGameStateBag boolRestorePropertyValue:
+                            if (singletonFieldValue is not bool boolSingletonFieldValue)
+                            {
+                                throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton did not verify as a bool value.");
+                            }
+                            if (boolSingletonFieldValue != boolRestorePropertyValue.Value)
+                            {
+                                throw new Exception($"During restore verification, the {PropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {boolRestorePropertyValue.Value}.");
+                            }
+                            break;
+                        case DateTimeValueGameStateBag dateTimeRestorePropertyValue:
+                            if (singletonFieldValue is not DateTime dateTimeSingletonFieldValue)
+                            {
+                                throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton did not verify as a DateTime value.");
+                            }
+                            if (dateTimeSingletonFieldValue != dateTimeRestorePropertyValue.Value)
+                            {
+                                throw new Exception($"During restore verification, the {PropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {dateTimeRestorePropertyValue.Value}.");
+                            }
+                            break;
+                        case QueueOfStringGameStateBag queueOfStringRestorePropertyValue:
+                            if (singletonFieldValue is not Queue<string> queueOfStringSingletonFieldValue)
+                            {
+                                throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton did not verify as a Queue<string> value.");
+                            }
+                            if (!queueOfStringRestorePropertyValue.Values.SequenceEqual(queueOfStringSingletonFieldValue))
+                            {
+                                throw new Exception($"During restore verification, the {PropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  The messages are different.");
+                            }
+                            break;
+                        default:
+                            throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton has an unsupported GameStateBag type of {PropertyName}.");
+                    }
+                }
+                break;
+        }
+
+          //ObjectGameStateBag singletonObjectGameStateBag = (ObjectGameStateBag);
+//        Dictionary<string, GameStateBag> singletonDictionaryGameStateBag = singletonObjectGameStateBag.Values;
+        
     }
 
     private void ValidateSystemScriptsEnum()
@@ -619,84 +713,6 @@ internal class SingletonRepository
             throw new Exception($"There is a mismatch between the save game and the game configuration.  The {singleton.GetType().Name} bag was not found in the save game.");
         }
         singletonRestoreGameState.RegisterSingleton(singleton);
-    }
-
-    private void VerifyRestore(RestoreGameState restoreGameState, object singleton)
-    {
-        // Perform a verification of the restore process.
-        //ObjectGameStateBag singletonObjectGameStateBag = (ObjectGameStateBag)restoreGameState.GameStateBag;
-        //Dictionary<string, GameStateBag> singletonDictionaryGameStateBag = singletonObjectGameStateBag.Values;
-        //foreach ((string RestorePropertyName, GameStateBag RestorePropertyValue) in restoreGameState. singletonDictionaryGameStateBag)
-        //{
-        //    FieldInfo? singletonFieldInfo = GameStateBag.GetAllFields(singleton.GetType()).SingleOrDefault(_fieldInfo => _fieldInfo.Name == RestorePropertyName);
-        //    if (singletonFieldInfo is null)
-        //    {
-        //        throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton could not be found.");
-        //    }
-
-        //    object? singletonFieldValue = singletonFieldInfo.GetValue(singleton);
-        //    switch (RestorePropertyValue)
-        //    {
-        //        case NullValueGameStateBag:
-        //            if (singletonFieldValue is not null)
-        //            {
-        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as null.");
-        //            }
-        //            break;
-        //        case IntValueGameStateBag intRestorePropertyValue:
-        //            if (singletonFieldValue is not int intSingletonFieldValue)
-        //            {
-        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as an integer value.");
-        //            }
-        //            if (intSingletonFieldValue != intRestorePropertyValue.Value)
-        //            {
-        //                throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {intRestorePropertyValue.Value}.");
-        //            }
-        //            break;
-        //        case StringValueGameStateBag stringRestorePropertyValue:
-        //            if (singletonFieldValue is not string stringSingletonFieldValue)
-        //            {
-        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as an string value.");
-        //            }
-        //            if (stringSingletonFieldValue != stringRestorePropertyValue.Value)
-        //            {
-        //                throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {stringRestorePropertyValue.Value}.");
-        //            }
-        //            break;
-        //        case BoolValueGameStateBag boolRestorePropertyValue:
-        //            if (singletonFieldValue is not bool boolSingletonFieldValue)
-        //            {
-        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a bool value.");
-        //            }
-        //            if (boolSingletonFieldValue != boolRestorePropertyValue.Value)
-        //            {
-        //                throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {boolRestorePropertyValue.Value}.");
-        //            }
-        //            break;
-        //        case DateTimeValueGameStateBag dateTimeRestorePropertyValue:
-        //            if (singletonFieldValue is not DateTime dateTimeSingletonFieldValue)
-        //            {
-        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a DateTime value.");
-        //            }
-        //            if (dateTimeSingletonFieldValue != dateTimeRestorePropertyValue.Value)
-        //            {
-        //                throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  Expected {dateTimeRestorePropertyValue.Value}.");
-        //            }
-        //            break;
-        //        case QueueOfStringGameStateBag queueOfStringRestorePropertyValue:
-        //            if (singletonFieldValue is not Queue<string> queueOfStringSingletonFieldValue)
-        //            {
-        //                throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton did not verify as a Queue<string> value.");
-        //            }
-        //            if (!queueOfStringRestorePropertyValue.Values.SequenceEqual(queueOfStringSingletonFieldValue))
-        //            {
-        //                throw new Exception($"During restore verification, the {RestorePropertyName} property value for the {singleton.GetType().Name} singleton did not verify.  The messages are different.");
-        //            }
-        //            break;
-        //        default:
-        //            throw new Exception($"During restore verification, the {RestorePropertyName} property for the {singleton.GetType().Name} singleton has an unsupported GameStateBag type of {RestorePropertyValue.GetType().Name}.");
-        //    }
-        //}
     }
 
     private void LoadAllAssemblyTypes<T>(RestoreGameState? restoreGameState) // TODO: WHY CANT THIS BE where T: IGETKEY

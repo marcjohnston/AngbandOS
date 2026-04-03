@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 internal class RestoreGameState
 {
     private Dictionary<int, IGetKey> ObjectIdToReferenceDictionary { get; }
-    private GameStateBag GameStateBag { get; }
+    public GameStateBag GameStateBag { get; }
     public RestoreGameState(Dictionary<int, IGetKey> objectIdToReferenceDictionary, GameStateBag gameStateBag)
     {
         ObjectIdToReferenceDictionary = objectIdToReferenceDictionary;
@@ -67,6 +67,15 @@ internal class RestoreGameState
         }
         throw new KeyNotFoundException($"The key '{key}' was not found in the GameStateBag or is not of type {typeof(TGameStateBag).Name}.");
     }
+    public RestoreGameState[] GetAll()
+    {
+        if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
+        {
+            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
+        }
+        return objectGameStateBag.Values.Select(kvp => new RestoreGameState(ObjectIdToReferenceDictionary, kvp.Value)).ToArray();
+    }
+
     public bool GetBool(string key) => GetGameStateBag<BoolValueGameStateBag>(key).Value;
 
     public int GetInt(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
