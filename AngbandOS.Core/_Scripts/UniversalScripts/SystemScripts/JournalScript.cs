@@ -10,15 +10,6 @@ namespace AngbandOS.Core.Scripts;
 internal class JournalScript : UniversalScript, IGetKey
 {
     private JournalScript(Game game) : base(game) { }
-    private readonly ColorEnum[] _menuColors = new ColorEnum[128]; // TODO: This is state that we might not need
-    private readonly int[] _menuIndices = new int[128]; // TODO: This is state that we might not need
-    private readonly string[] _menuItem = new string[128]; // TODO: This is state that we might not need
-    private int _menuLength; // TODO: This is state that we might not need
-
-    /// <summary>
-    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
-    /// </summary>
-    /// <returns></returns>
 
     public virtual string Key => GetType().Name;
 
@@ -930,19 +921,18 @@ internal class JournalScript : UniversalScript, IGetKey
         }
     }
 
-    private void BuildMenuForForWorthlessItems()
+    private List<JournalMenuItem> BuildMenuForForWorthlessItems()
     {
-        _menuLength = 0;
+        List<JournalMenuItem> _menuItem = new List<JournalMenuItem>();
         for (int i = 0; i < Game.SingletonRepository.Count<ItemClass>() - 1; i++)
         {
             ItemClass itemClass = Game.SingletonRepository.Get<ItemClass>(i);
             if (itemClass.AllowStomp)
             {
-                _menuItem[_menuLength] = Game.Pluralize(Game.SingletonRepository.Get<ItemClass>(i).Name);
-                _menuColors[_menuLength] = ColorEnum.Blue;
-                _menuLength++;
+                _menuItem.Add(new JournalMenuItem(Game.Pluralize(Game.SingletonRepository.Get<ItemClass>(i).Name), ColorEnum.Blue, null));
             }
         }
+        return _menuItem;
     }
 
     private void JournalWorthlessItems()
@@ -958,11 +948,11 @@ internal class JournalScript : UniversalScript, IGetKey
         text += "inventory. Items you are wielding will never be destroyed (giving you chance to improve their ";
         text += "quality to a non-worthless level).";
         Game.Screen.PrintWrap(ColorEnum.Blue, text);
-        BuildMenuForForWorthlessItems();
-        int menu = _menuLength / 2;
+        List<JournalMenuItem> _menuItem = BuildMenuForForWorthlessItems();
+        int menu = _menuItem.Count / 2;
         while (!Game.Shutdown)
         {
-            MenuDisplay(menu);
+            MenuDisplay(_menuItem, menu);
             Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
@@ -972,14 +962,14 @@ internal class JournalScript : UniversalScript, IGetKey
                     menu--;
                     break;
                 }
-                if (c == '2' && menu < _menuLength - 1)
+                if (c == '2' && menu < _menuItem.Count - 1)
                 {
                     menu++;
                     break;
                 }
                 if (c == '6')
                 {
-                    WorthlessItemTypeSelection(Game.SingletonRepository.Get<ItemClass>().First(_itemClass => Game.Pluralize(_itemClass.Name) == _menuItem[menu]));
+                    WorthlessItemTypeSelection(Game.SingletonRepository.Get<ItemClass>().First(_itemClass => Game.Pluralize(_itemClass.Name) == _menuItem[menu].Text));
                     BuildMenuForForWorthlessItems();
                     break;
                 }
@@ -991,20 +981,20 @@ internal class JournalScript : UniversalScript, IGetKey
         }
     }
 
-    private void MenuDisplay(int current)
+    private void MenuDisplay(List<JournalMenuItem> _menuItem, int current)
     {
         Game.Screen.Clear(9);
         Game.Screen.Print(ColorEnum.Orange, "=>", 25, 0);
         string desc = string.Empty;
         ColorEnum descColor = ColorEnum.Brown;
-        for (int i = 0; i < _menuLength; i++)
+        for (int i = 0; i < _menuItem.Count; i++)
         {
             int row = 25 + i - current;
             if (row < 10 || row > 40)
             {
                 continue;
             }
-            ColorEnum a = _menuColors[i];
+            ColorEnum a = _menuItem[i].Color;
             if (i == current)
             {
                 switch (a)
@@ -1026,7 +1016,7 @@ internal class JournalScript : UniversalScript, IGetKey
                 }
                 descColor = a;
             }
-            Game.Screen.Print(a, _menuItem[i], row, 2);
+            Game.Screen.Print(a, _menuItem[i].Text, row, 2);
         }
         Game.Screen.Print(descColor, desc, 25, 33);
     }
@@ -1034,17 +1024,15 @@ internal class JournalScript : UniversalScript, IGetKey
     private void WorthlessItemChestSelection(ItemFactory kPtr)
     {
         string[] qualityText = new[] { "Empty", "Unlocked", "Locked", "Trapped" };
-        _menuLength = 0;
+        List<JournalMenuItem> _menuItem = new List<JournalMenuItem>();
         for (int i = 0; i < 4; i++)
         {
-            _menuItem[i] = qualityText[i];
-            _menuColors[i] = kPtr.Stompable[i] ? ColorEnum.Red : ColorEnum.Green;
+            _menuItem.Add(new JournalMenuItem(qualityText[i], kPtr.Stompable[i] ? ColorEnum.Red : ColorEnum.Green, null));
         }
-        _menuLength = 4;
         int menu = 1;
         while (!Game.Shutdown)
         {
-            MenuDisplay(menu);
+            MenuDisplay(_menuItem, menu);
             Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
@@ -1054,7 +1042,7 @@ internal class JournalScript : UniversalScript, IGetKey
                     menu--;
                     break;
                 }
-                if (c == '2' && menu < _menuLength - 1)
+                if (c == '2' && menu < _menuItem.Count - 1)
                 {
                     menu++;
                     break;
@@ -1062,7 +1050,7 @@ internal class JournalScript : UniversalScript, IGetKey
                 if (c == '6')
                 {
                     kPtr.Stompable[menu] = !kPtr.Stompable[menu];
-                    _menuColors[menu] = kPtr.Stompable[menu] ? ColorEnum.Red : ColorEnum.Green;
+                    _menuItem[menu].Color = kPtr.Stompable[menu] ? ColorEnum.Red : ColorEnum.Green;
                     break;
                 }
                 if (c == '4')
@@ -1076,17 +1064,15 @@ internal class JournalScript : UniversalScript, IGetKey
     private void WorthlessItemQualitySelection(ItemFactory kPtr)
     {
         string[] qualityText = new[] { "Bad", "Average", "Good", "Excellent" };
-        _menuLength = 0;
+        List<JournalMenuItem> _menuItem = new List<JournalMenuItem>();
         for (int i = 0; i < 4; i++)
         {
-            _menuItem[i] = qualityText[i];
-            _menuColors[i] = kPtr.Stompable[i] ? ColorEnum.Red : ColorEnum.Green;
+            _menuItem.Add(new JournalMenuItem(qualityText[i], kPtr.Stompable[i] ? ColorEnum.Red : ColorEnum.Green, null));
         }
-        _menuLength = 4;
         int menu = 1;
         while (!Game.Shutdown)
         {
-            MenuDisplay(menu);
+            MenuDisplay(_menuItem, menu);
             Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
@@ -1096,7 +1082,7 @@ internal class JournalScript : UniversalScript, IGetKey
                     menu--;
                     break;
                 }
-                if (c == '2' && menu < _menuLength - 1)
+                if (c == '2' && menu < _menuItem.Count - 1)
                 {
                     menu++;
                     break;
@@ -1104,7 +1090,7 @@ internal class JournalScript : UniversalScript, IGetKey
                 if (c == '6')
                 {
                     kPtr.Stompable[menu] = !kPtr.Stompable[menu];
-                    _menuColors[menu] = kPtr.Stompable[menu] ? ColorEnum.Red : ColorEnum.Green;
+                    _menuItem[menu].Color = kPtr.Stompable[menu] ? ColorEnum.Red : ColorEnum.Green;
                     break;
                 }
                 if (c == '4')
@@ -1117,7 +1103,7 @@ internal class JournalScript : UniversalScript, IGetKey
 
     private void WorthlessItemTypeSelection(ItemClass tval)
     {
-        _menuLength = 0;
+        List<JournalMenuItem> _menuItem = new List<JournalMenuItem>();
         for (int i = 0; i < Game.SingletonRepository.Count<ItemFactory>(); i++)
         {
             ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(i);
@@ -1127,23 +1113,22 @@ internal class JournalScript : UniversalScript, IGetKey
                 {
                     continue;
                 }
-                _menuItem[_menuLength] = itemFactory.Name;
+                ColorEnum color;
                 if (!itemFactory.AskDestroyAll)
                 {
-                    _menuColors[_menuLength] = ColorEnum.Blue;
+                    color = ColorEnum.Blue;
                 }
                 else
                 {
-                    _menuColors[_menuLength] = itemFactory.Stompable[0] ? ColorEnum.Red : ColorEnum.Green;
+                    color = itemFactory.Stompable[0] ? ColorEnum.Red : ColorEnum.Green;
                 }
-                _menuIndices[_menuLength] = i;
-                _menuLength++;
+                _menuItem.Add(new JournalMenuItem(itemFactory.Name, color, i));
             }
         }
-        int menu = _menuLength / 2;
+        int menu = _menuItem.Count / 2;
         while (!Game.Shutdown)
         {
-            MenuDisplay(menu);
+            MenuDisplay(_menuItem, menu);
             Game.Screen.Print(ColorEnum.Orange, "[Up/Down = select item type, Left/Right = forward/back.]", 43, 1);
             while (true)
             {
@@ -1153,38 +1138,35 @@ internal class JournalScript : UniversalScript, IGetKey
                     menu--;
                     break;
                 }
-                if (c == '2' && menu < _menuLength - 1)
+                if (c == '2' && menu < _menuItem.Count - 1)
                 {
                     menu++;
                     break;
                 }
                 if (c == '6')
                 {
-                    ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(_menuIndices[menu]);
+                    ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(_menuItem[menu].Key.Value);
                     if (!itemFactory.AskDestroyAll)
                     {
                         WorthlessItemQualitySelection(itemFactory);
-                        _menuLength = 0;
+                        _menuItem.Clear();
                         for (int i = 0; i < Game.SingletonRepository.Count<ItemFactory>(); i++)
                         {
                             itemFactory = Game.SingletonRepository.Get<ItemFactory>(i);
                             if (itemFactory.ItemClass == tval)
                             {
-                                if (itemFactory.DisableStomp) // TODO: This only pulls from the ItemFactory and not generated characteristcs
+                                if (itemFactory.DisableStomp) // TODO: This only pulls from the ItemFactory and not generated characteristics
                                 {
                                     continue;
                                 }
-                                _menuItem[_menuLength] = itemFactory.Name;
-                                _menuColors[_menuLength] = ColorEnum.Blue;
-                                _menuIndices[_menuLength] = i;
-                                _menuLength++;
+                                _menuItem.Add(new JournalMenuItem(itemFactory.Name, ColorEnum.Blue, i));
                             }
                         }
                     }
                     else
                     {
                         itemFactory.Stompable[0] = !itemFactory.Stompable[0];
-                        _menuColors[menu] = itemFactory.Stompable[0] ? ColorEnum.Red : ColorEnum.Green;
+                        _menuItem[menu].Color = itemFactory.Stompable[0] ? ColorEnum.Red : ColorEnum.Green;
                     }
                     break;
                 }

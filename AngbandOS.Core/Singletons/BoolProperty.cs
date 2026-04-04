@@ -16,7 +16,10 @@ internal abstract class BoolProperty : Property, IBoolValue
     public override void Bind(RestoreGameState restoreGameState)
     {
         base.Bind(restoreGameState);
-        _value = restoreGameState.GetBool(nameof(_value));
+        if (restoreGameState is not null)
+        {
+            _value = restoreGameState.GetBool(nameof(_value));
+        }
     }
 
     private bool _value;

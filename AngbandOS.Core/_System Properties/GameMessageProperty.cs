@@ -30,9 +30,12 @@ internal class GameMessageProperty : Property
     public override void Bind(RestoreGameState? restoreGameState)
     {
         base.Bind(restoreGameState);
-        foreach (string message in restoreGameState.GetQueueStrings(nameof(MessageQueue)))
+        if (restoreGameState is not null)
         {
-            MessageQueue.Enqueue(message);
+            foreach (string message in restoreGameState.GetQueueStrings(nameof(MessageQueue)))
+            {
+                MessageQueue.Enqueue(message);
+            }
         }
     }
 }

@@ -14,7 +14,10 @@ internal abstract class IntProperty : Property, IIntValue
     public override void Bind(RestoreGameState restoreGameState)
     {
         base.Bind(restoreGameState);
-        _value = restoreGameState.GetInt(nameof(_value));
+        if (restoreGameState is not null)
+        {
+            _value = restoreGameState.GetInt(nameof(_value));
+        }
     }
 
     private int _value;
