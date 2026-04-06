@@ -6,9 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interfaces;
 
-internal interface IGameSerialization
+internal interface IGameSerialize
 {
-    void Serialize(GameStateBag bag);
-    void Deserialize(GameStateBag bag);
+    GameStateBag Serialize(SaveGameState saveGameState);
+ //   void Deserialize(GameStateBag bag);
 }
 

@@ -6,26 +6,26 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class DateTimeValueGameStateBag : GameStateBag
+internal class NullableIntValueGameStateBag : GameStateBag
 {
-    public DateTime Value { get; }
-    public DateTimeValueGameStateBag(DateTime value)
+    public int? Value { get; }
+    public NullableIntValueGameStateBag(int? value)
     {
         Value = value;
+    }
+    public override void Verify(RestoreGameState restoreGameState, object? singleton)
+    {
+        if (singleton is not int intSingletonFieldValue)
+        {
+            throw new Exception($"During restore verification, the {singleton?.GetType().Name ?? "null"} singleton did not verify as a nullable integer value.");
+        }
+        if (intSingletonFieldValue != Value.Value)
+        {
+            throw new Exception($"During restore verification, the {singleton.GetType().Name} singleton did not verify.  Expected {Value}.");
+        }
     }
     public override string ToString()
     {
         return $"{Value}";
-    }
-    public override void Verify(RestoreGameState restoreGameState, object? singleton)
-    {
-        if (singleton is not DateTime dateTimeSingletonFieldValue)
-        {
-            throw new Exception($"During restore verification, the {singleton?.GetType().Name ?? "null"} singleton did not verify as a DateTime value.");
-        }
-        if (dateTimeSingletonFieldValue != Value)
-        {
-            throw new Exception($"During restore verification, the {singleton.GetType().Name} singleton did not verify.  Expected {Value}.");
-        }
     }
 }

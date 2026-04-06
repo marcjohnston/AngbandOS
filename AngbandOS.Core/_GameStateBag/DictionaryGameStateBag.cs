@@ -13,4 +13,8 @@ internal class DictionaryGameStateBag : GameStateBag
     {
         Values = value;
     }
+    public override void Verify(RestoreGameState restoreGameState, object? singleton)
+    {
+        throw new NotImplementedException();
+    }
 }

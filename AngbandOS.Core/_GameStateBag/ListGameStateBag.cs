@@ -13,4 +13,8 @@ internal class ListGameStateBag : GameStateBag
     {
         Values = values;
     }
+    public override void Verify(RestoreGameState restoreGameState, object? singleton)
+    {
+        throw new NotImplementedException();
+    }
 }

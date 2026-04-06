@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
+
 internal class StringValueGameStateBag : GameStateBag
 {
     public string Value { get; }
@@ -15,5 +16,16 @@ internal class StringValueGameStateBag : GameStateBag
     public override string ToString()
     {
         return $"{Value}";
+    }
+    public override void Verify(RestoreGameState restoreGameState, object? singleton)
+    {
+        if (singleton is not string stringSingletonFieldValue)
+        {
+            throw new Exception($"During restore verification, the {singleton?.GetType().Name ?? "null"} singleton did not verify as an string value.");
+        }
+        if (stringSingletonFieldValue != Value)
+        {
+            throw new Exception($"During restore verification, the {singleton.GetType().Name} singleton did not verify.  Expected {Value}.");
+        }
     }
 }

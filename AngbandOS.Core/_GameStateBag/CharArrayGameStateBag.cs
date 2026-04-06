@@ -17,4 +17,15 @@ internal class CharArrayGameStateBag : GameStateBag
     {
         return $"{Value}";
     }
+    public override void Verify(RestoreGameState restoreGameState, object? singleton)
+    {
+        if (singleton is not char[] charArraySingletonFieldValue)
+        {
+            throw new Exception($"During restore verification, the {singleton?.GetType().Name ?? "null"} singleton did not verify as a char[] value.");
+        }
+        if (charArraySingletonFieldValue.ToString() != Value)
+        {
+            throw new Exception($"During restore verification, the {singleton.GetType().Name} singleton did not verify.  Expected {Value}.");
+        }
+    }
 }

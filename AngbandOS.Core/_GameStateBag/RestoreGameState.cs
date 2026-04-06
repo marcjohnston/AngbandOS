@@ -8,6 +8,9 @@ using System.Text;
 
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents the object for restoring game state values.  It keeps a reference to the dictionary used to track object creation. 
+/// </summary>
 internal class RestoreGameState
 {
     private Dictionary<int, IGetKey> ObjectIdToReferenceDictionary { get; }
@@ -41,6 +44,16 @@ internal class RestoreGameState
             throw new InvalidOperationException($"GameStateBag is not a {typeof(ObjectGameStateBag)}.");
         }
     }
+    public RestoreGameState New(GameStateBag gameStateBag)
+    {
+        return new RestoreGameState(ObjectIdToReferenceDictionary, gameStateBag);
+    }
+
+    public void Verify(object? singleton)
+    {
+        GameStateBag.Verify(this, singleton);
+    }
+
     public RestoreGameState? Get(string key)
     {
         if (GameStateBag is not DictionaryGameStateBag dictionaryGameStateBag)
@@ -67,18 +80,11 @@ internal class RestoreGameState
         }
         throw new KeyNotFoundException($"The key '{key}' was not found in the GameStateBag or is not of type {typeof(TGameStateBag).Name}.");
     }
-    public RestoreGameState[] GetAll()
-    {
-        if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
-        {
-            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
-        }
-        return objectGameStateBag.Values.Select(kvp => new RestoreGameState(ObjectIdToReferenceDictionary, kvp.Value)).ToArray();
-    }
 
     public bool GetBool(string key) => GetGameStateBag<BoolValueGameStateBag>(key).Value;
 
     public int GetInt(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
+    public int? GetNullableInt(string key) => GetGameStateBag<NullableIntValueGameStateBag>(key).Value;
 
     public string GetString(string key) => GetGameStateBag<StringValueGameStateBag>(key).Value;
 

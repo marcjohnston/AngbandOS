@@ -88,16 +88,10 @@ internal partial class Game
     #region Game Serialization
     public GameStateBag Save()
     {
-        // Use a common object lookup dictionary across both the singleton repository and the game to ensure that objects that are referenced by both the singleton repository and the game are only serialized once and that references to those objects are properly maintained.
-        Dictionary<object, int> objectToIdDictionary = new Dictionary<object, int>();
-        GameStateBag singletonRepositoryGameStateBag = SingletonRepository.Serialize(objectToIdDictionary);
-        GameStateBag gameGameStateBag = GameStateBag.Serialize(objectToIdDictionary, this, nameof(Game));
-        Dictionary<string, GameStateBag> gameStateBagDictionary = new Dictionary<string, GameStateBag>()
-        {
-            { SingletonGameStateBagKey, singletonRepositoryGameStateBag },
-            { GameGameStateBagKey, gameGameStateBag }
-        };
-        return new DictionaryGameStateBag(gameStateBagDictionary);
+        SaveGameState saveGameState = new SaveGameState();
+        GameStateBag singletonRepositoryGameStateBag = SingletonRepository.Serialize(saveGameState);
+        GameStateBag gameGameStateBag = saveGameState.SerializeViaReflection(this, nameof(Game));
+        return saveGameState.AddDictionary((nameof(SingletonRepository), singletonRepositoryGameStateBag), (nameof(Game), gameGameStateBag));
     }
 
     /// <summary>

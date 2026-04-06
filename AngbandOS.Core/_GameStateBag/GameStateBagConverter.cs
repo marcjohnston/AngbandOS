@@ -34,6 +34,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             nameof(IntValueGameStateBag) => new IntValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetInt32()),
             nameof(ListGameStateBag) => new ListGameStateBag(JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(NullValueGameStateBag) => new NullValueGameStateBag(),
+            nameof(NullableIntValueGameStateBag) => new NullableIntValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetInt32()),
             nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(QueueOfStringGameStateBag) => new QueueOfStringGameStateBag(JsonSerializer.Deserialize<string[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(ReferenceGameStateBag) => new ReferenceGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32()),
@@ -109,6 +110,18 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
 
             case NullValueGameStateBag:
                 writer.WriteString(TypePropertyName, nameof(NullValueGameStateBag));
+                break;
+
+            case NullableIntValueGameStateBag nullableIntValue:
+                writer.WriteString(TypePropertyName, nameof(NullableIntValueGameStateBag));
+                if (nullableIntValue.Value.HasValue)
+                {
+                    writer.WriteNumber(ValuePropertyName, nullableIntValue.Value.Value);
+                }
+                else
+                {
+                    writer.WriteString(ValuePropertyName, "null");
+                }
                 break;
 
             case ObjectGameStateBag objectValue:
