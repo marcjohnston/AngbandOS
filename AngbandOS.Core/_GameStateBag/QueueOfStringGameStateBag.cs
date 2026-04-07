@@ -8,8 +8,8 @@ namespace AngbandOS.Core;
 
 internal class QueueOfStringGameStateBag : GameStateBag
 {
-    public string[] Values { get; }
-    public QueueOfStringGameStateBag(string[] values)
+    public string?[] Values { get; }
+    public QueueOfStringGameStateBag(string?[] values)
     {
         Values = values;
     }

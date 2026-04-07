@@ -35,6 +35,16 @@ internal sealed class SingletonRepository : IGameSerialize
             if (singleton is IGameSerialize gameSerializableSingleton)
             {
                 singletonGameStateBag = saveGameState.CreateObjectGameStateBag(singleton, gameSerializableSingleton.Serialize(saveGameState));
+
+#if DEBUG
+                // Verify the reflection doesn't have more fields than the IGameSerialize return.
+                SaveGameState tempSaveGameState = new SaveGameState();
+                GameStateBag singletonGameStateBagViaReflection = tempSaveGameState.SerializeViaReflection(singleton, nameof(SingletonRepository));
+                if (((ObjectGameStateBag)singletonGameStateBagViaReflection).Values.Count > ((ObjectGameStateBag)singletonGameStateBag).Values.Count)
+                {
+                    throw new Exception($"The number of fields serialized via reflection for {singleton.GetType().Name} does not match the number of fields serialized via the IGameSerialize interface.  This indicates that the IGameSerialize implementation is not serializing all of the fields in the singleton.  This will cause issues with game state restoration.  Ensure that all fields are being serialized in the IGameSerialize implementation.");
+                }
+#endif
             }
             else
             {

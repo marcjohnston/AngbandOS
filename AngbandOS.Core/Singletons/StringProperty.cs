@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal abstract class StringProperty : Property, IStringValue
+internal abstract class StringProperty : Property, IStringValue, IGameSerialize
 {
     protected StringProperty(Game game) : base(game) { }
 
@@ -20,6 +20,12 @@ internal abstract class StringProperty : Property, IStringValue
         }
     }
     private string _value;
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(_value), new StringValueGameStateBag(_value))
+        );
+    }
     public string StringValue
     {
         get

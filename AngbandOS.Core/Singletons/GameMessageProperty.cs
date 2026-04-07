@@ -7,10 +7,14 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal class GameMessageProperty : Property
+internal class GameMessageProperty : Property, IGameSerialize
 {
     private GameMessageProperty(Game game) : base(game) { }
     public Queue<string?> MessageQueue = new Queue<string?>();
+
+    /// <summary>
+    /// Returns the current message.
+    /// </summary>
     public string StringValue { get; set; } = "";
 
     public override string ToString()
@@ -37,5 +41,12 @@ internal class GameMessageProperty : Property
                 MessageQueue.Enqueue(message);
             }
         }
+    }
+
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(MessageQueue), new QueueOfStringGameStateBag(MessageQueue.ToArray()))
+        );
     }
 }

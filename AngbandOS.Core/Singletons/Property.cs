@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Properties;
 /// Represents a base class for any value that participates in change tracking.  Various types of value data types are built using derived classes; <see cref="IntProperty"/>.
 /// </summary>
 [Serializable]
-internal abstract class Property : IGetKey, IChangeTracker
+internal abstract class Property : IGetKey, IChangeTracker, IGameSerialize
 {
     protected Game Game { get; }
     protected Property(Game game)
@@ -20,6 +20,8 @@ internal abstract class Property : IGetKey, IChangeTracker
     protected Property(Game game, RestoreGameState restoreGameState) : this(game)
     {
     }
+
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Sets the change flag to true to indicate that the value has changed.  This should only be performed by derived classes when the internal value changes.

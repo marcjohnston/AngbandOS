@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal abstract class Script : IGetKey
+internal abstract class Script : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected Script(Game game)
@@ -15,10 +15,7 @@ internal abstract class Script : IGetKey
         Game = game;
     }
 
-    /// <summary>
-    /// Returns the entity serialized into a Json string.  Returns an empty string by default.
-    /// </summary>
-    /// <returns></returns>
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public virtual string Key => GetType().Name;
 

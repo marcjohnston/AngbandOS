@@ -21,9 +21,9 @@ internal abstract class IntProperty : Property, IIntValue, IGameSerialize
     }
 
     private int _value;
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
             (nameof(_value), new IntValueGameStateBag(_value))
         );
     }

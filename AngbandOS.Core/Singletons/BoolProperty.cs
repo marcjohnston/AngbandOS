@@ -10,7 +10,7 @@ namespace AngbandOS.Core.Properties;
 /// Represents a boolean game property.  These properties can be referenced by widgets and conditionals.
 /// </summary>
 [Serializable]
-internal abstract class BoolProperty : Property, IBoolValue
+internal abstract class BoolProperty : Property, IBoolValue, IGameSerialize
 {
     protected BoolProperty(Game game) : base(game) { }
     public override void Bind(RestoreGameState restoreGameState)
@@ -56,5 +56,12 @@ internal abstract class BoolProperty : Property, IBoolValue
     public override string ToString()
     {
         return _value.ToString();
+    }
+
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(_value), new BoolValueGameStateBag(_value))
+        );
     }
 }

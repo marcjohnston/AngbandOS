@@ -25,9 +25,9 @@ internal abstract class DateTimeProperty : Property, IDateAndTimeValue, IGameSer
     }
     
     private DateTime _value;
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
             (nameof(_value), new DateTimeValueGameStateBag(_value))
         );
     }
