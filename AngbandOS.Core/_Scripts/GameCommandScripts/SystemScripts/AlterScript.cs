@@ -7,11 +7,13 @@
 namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class AlterScript : GameCommandUniversalScript, IGetKey
+internal class AlterScript : GameCommandUniversalScript, IGetKey, IGameSerialize
 {
     private AlterScript(Game game) : base(game) { }
 
     public virtual string Key => GetType().Name;
+
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState) { }

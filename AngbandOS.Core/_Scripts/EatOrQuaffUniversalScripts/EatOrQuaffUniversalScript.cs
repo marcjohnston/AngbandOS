@@ -10,13 +10,15 @@ namespace AngbandOS.Core;
 /// Represents an eat or quaff script (a call with no parameters that returns an IdentifiedResult) with adapters for the other calling mechanisms.
 /// </summary>
 [Serializable]
-internal abstract class EatOrQuaffUniversalScript : IActivateItemScript, IAimWandScript, IZapRodScript, IScript, IReadScrollOrUseStaffScript, ICastSpellScript, IEatOrQuaffScript
+internal abstract class EatOrQuaffUniversalScript : IActivateItemScript, IAimWandScript, IZapRodScript, IScript, IReadScrollOrUseStaffScript, ICastSpellScript, IEatOrQuaffScript, IGameSerialize
 {
     protected Game Game { get; }
     protected EatOrQuaffUniversalScript(Game game)
     {
         Game = game;
     }
+
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the details to reveal to the player when learned.  Returns blank, by default.
