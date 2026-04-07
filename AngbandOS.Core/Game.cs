@@ -91,7 +91,7 @@ internal partial class Game
         SaveGameState saveGameState = new SaveGameState();
         DictionaryGameStateBag singletonRepositoryGameStateBag = SingletonRepository.Serialize(saveGameState);
         GameStateBag gameGameStateBag = saveGameState.SerializeViaReflection(this, nameof(Game));
-        return saveGameState.CreateDictionaryGameStateBag((nameof(SingletonRepository), singletonRepositoryGameStateBag), (nameof(Game), gameGameStateBag));
+        return new DictionaryGameStateBag((nameof(SingletonRepository), singletonRepositoryGameStateBag), (nameof(Game), gameGameStateBag));
     }
 
     /// <summary>

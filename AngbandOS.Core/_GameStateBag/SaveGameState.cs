@@ -18,16 +18,49 @@ internal class SaveGameState
     {
     }
 
+    public GameStateBag CreateObjectGameStateBag(object obj)
+    {
+        if (obj is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        if (ObjectToIdDictionary.TryGetValue(obj, out int existingId))
+        {
+            return new ReferenceGameStateBag(existingId);
+        }
+
+        GameStateBag gameStateBag;
+        if (obj is IGameSerialize gameSerializable)
+        {
+            gameStateBag = gameSerializable.Serialize(this);
+
+#if DEBUG
+            int serializedCount = ((DictionaryGameStateBag?)gameStateBag)?.Values.Count ?? 0;
+            // Verify the reflection doesn't have more fields than the IGameSerialize return.
+            SaveGameState tempSaveGameState = new SaveGameState();
+            GameStateBag singletonGameStateBagViaReflection = tempSaveGameState.SerializeViaReflection(obj, nameof(SingletonRepository));
+            if (((DictionaryGameStateBag)singletonGameStateBagViaReflection).Values.Count > serializedCount)
+            {
+                throw new Exception($"The number of fields serialized via reflection for {obj.GetType().Name} does not match the number of fields serialized via the IGameSerialize interface.  This indicates that the IGameSerialize implementation is not serializing all of the fields in the singleton.  This will cause issues with game state restoration.  Ensure that all fields are being serialized in the IGameSerialize implementation.");
+            }
+#endif
+        }
+        else
+        {
+            gameStateBag = SerializeViaReflection(obj, "");
+        }
+
+        int objectId = ObjectToIdDictionary.Count + 1;
+        ObjectToIdDictionary.Add(obj, objectId);
+        return new ObjectGameStateBag(objectId, ((DictionaryGameStateBag?)gameStateBag)?.Values);
+    }
+
     public ObjectGameStateBag CreateObjectGameStateBag(object obj, DictionaryGameStateBag? dictionaryGameStateBag)
     {
         int objectId = ObjectToIdDictionary.Count + 1;
         ObjectToIdDictionary.Add(obj, objectId);
         return new ObjectGameStateBag(objectId, dictionaryGameStateBag?.Values);
-    }
-    public GameStateBag CreateDictionaryGameStateBag(params (string, GameStateBag)[] fieldNamesAndGameStateBags)
-    {
-        Dictionary<string, GameStateBag> fieldNameAndGameStateBagDictionary = fieldNamesAndGameStateBags.ToDictionary(_fieldNameAndGameStateBag => _fieldNameAndGameStateBag.Item1, _fieldNameAndGameStateBag => _fieldNameAndGameStateBag.Item2);
-        return new DictionaryGameStateBag(fieldNameAndGameStateBagDictionary);
     }
 
     public static FieldInfo[] GetAllFields(Type? type)
@@ -111,16 +144,6 @@ internal class SaveGameState
         // Object identity--game objects only
         if (type.Assembly == typeof(GameStateBag).Assembly)
         {
-            // already seen?
-            if (ObjectToIdDictionary.TryGetValue(value, out int existingId))
-            {
-                return new ReferenceGameStateBag(existingId);
-            }
-
-            // This is the first time seeing this object, register it.
-            int id = ObjectToIdDictionary.Count + 1;
-            ObjectToIdDictionary.Add(value, id);
-
             // Retrieve all of the fields to be preserved.  We exclude property backing fields and fields marked as [NonSerialized].
             FieldInfo[] allFields = GetAllFields(type);
             IEnumerable<FieldInfo> serializableFields = allFields.Where(p => !p.IsDefined(typeof(CompilerGeneratedAttribute), true) && !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute)));
@@ -134,7 +157,7 @@ internal class SaveGameState
                 objectValue[key] = SerializeViaReflection(fieldValue, StringLibrary.DelimitIf(parent, ".", $"{type.Name}.{key}"));
             }
 
-            return new ObjectGameStateBag(id, objectValue);
+            return new DictionaryGameStateBag(objectValue);
         }
 
         // Dictionaries

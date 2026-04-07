@@ -40,6 +40,12 @@ internal abstract class NullableMonsterProperty : Property, INullMonsterValue
 
     public Monster? NullMonsterValue => Value;
 
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(_value), saveGameState.CreateObjectGameStateBag(_value))
+        );
+    }
     protected virtual void OnBeforeSet() { }
     protected virtual void OnAfterSet() { }
 

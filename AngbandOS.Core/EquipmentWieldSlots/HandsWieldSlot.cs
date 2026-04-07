@@ -20,6 +20,13 @@ internal class HandsWieldSlot : EquipmentWieldSlot
     public override bool IsArmor => true;
     public override int SortOrder => 12;
 
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(RestrictingGloves), new BoolValueGameStateBag(RestrictingGloves))
+        );
+    }
+
     public override void AddItem(Item item)
     {
         Game.SetInventoryItem(InventorySlotEnum.Hands, item);
