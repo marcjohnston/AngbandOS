@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class GridTileScript : IGetKey
+internal abstract class GridTileScript : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
 
@@ -23,4 +23,5 @@ internal abstract class GridTileScript : IGetKey
     }
 
     public abstract (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y);
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

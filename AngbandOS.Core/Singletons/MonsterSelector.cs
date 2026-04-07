@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.MonsterSelectors;
 
 [Serializable]
-internal abstract class MonsterSelector : IMonsterSelector, IGetKey
+internal abstract class MonsterSelector : IMonsterSelector, IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected MonsterSelector(Game game) // This object is a singleton
@@ -20,5 +20,6 @@ internal abstract class MonsterSelector : IMonsterSelector, IGetKey
     public void Bind(RestoreGameState? restoreGameState) { }
 
     public abstract MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace);
-
+
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

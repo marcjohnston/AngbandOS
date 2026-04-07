@@ -9,6 +9,29 @@ namespace AngbandOS.Core;
 internal class DictionaryGameStateBag : GameStateBag
 {
     public Dictionary<string, GameStateBag> Values { get; }
+    public DictionaryGameStateBag(GameStateBag? gameStateBag, params (string Key, GameStateBag GameState)[] values)
+    {
+        Values = new Dictionary<string, GameStateBag>();
+        if (gameStateBag is DictionaryGameStateBag dictionaryGameStateBag)
+        {
+            foreach ((string Key, GameStateBag GameState) in dictionaryGameStateBag.Values)
+            {
+                Values.Add(Key, GameState);
+            }
+        }
+        else if (gameStateBag is not null)
+        {
+            throw new Exception("Invalid game state bag provided to the constructor of a DictionaryGameStateBag.  The game state bag must be null or a DictionaryGameStateBag.");
+        }
+        foreach ((string Key, GameStateBag GameState) value in values)
+        {
+            Values.Add(value.Key, value.GameState);
+        }
+    }
+    public DictionaryGameStateBag(params (string Key, GameStateBag GameState)[] values)
+    {
+        Values = values.ToDictionary(_value => _value.Key, _value => _value.GameState);
+    }
     public DictionaryGameStateBag(Dictionary<string, GameStateBag> value)
     {
         Values = value;

@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal abstract class DateTimeProperty : Property, IDateAndTimeValue
+internal abstract class DateTimeProperty : Property, IDateAndTimeValue, IGameSerialize
 {
     protected DateTimeProperty(Game game) : base(game) { }
     protected DateTimeProperty(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
@@ -25,6 +25,12 @@ internal abstract class DateTimeProperty : Property, IDateAndTimeValue
     }
     
     private DateTime _value;
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(_value), new DateTimeValueGameStateBag(_value))
+        );
+    }
 
     public DateTime DateAndTimeValue
     {

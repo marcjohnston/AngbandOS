@@ -10,12 +10,19 @@ namespace AngbandOS.Core;
 /// Represents an action that occurs over a period of time.
 /// </summary>
 [Serializable]
-internal abstract class Timer : IGetKey, IIntValue, IChangeTracker
+internal abstract class Timer : IGetKey, IIntValue, IChangeTracker, IGameSerialize
 {
     protected Game Game { get; }
     public Timer(Game game)
     {
         Game = game;
+    }
+
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(_value), new IntValueGameStateBag(_value))
+        );
     }
 
     /// <summary>

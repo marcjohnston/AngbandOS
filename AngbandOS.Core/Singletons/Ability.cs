@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// An ability score
 /// </summary>
 [Serializable]
-internal abstract class Ability : IGetKey
+internal abstract class Ability : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected Ability(Game game)
@@ -30,6 +30,19 @@ internal abstract class Ability : IGetKey
             Override = restoreGameState.GetBool(nameof(Override));
             TableIndex = restoreGameState.GetInt(nameof(TableIndex));
         }
+    }
+
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Adjusted), new IntValueGameStateBag(Adjusted)),
+            (nameof(AdjustedMax), new IntValueGameStateBag(AdjustedMax)),
+            (nameof(Bonus), new IntValueGameStateBag(Bonus)),
+            (nameof(Innate), new IntValueGameStateBag(Innate)),
+            (nameof(InnateMax), new IntValueGameStateBag(InnateMax)),
+            (nameof(Override), new BoolValueGameStateBag(Override)),
+            (nameof(TableIndex), new IntValueGameStateBag(TableIndex))
+        );
     }
 
     #region Game State

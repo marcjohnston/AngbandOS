@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Attribute : IGetKey, IIndexedSingletons
+internal abstract class Attribute : IGetKey, IIndexedSingletons, IGameSerialize
 {
     protected Attribute(Game game) // This object is a singleton
     {
@@ -27,4 +27,11 @@ internal abstract class Attribute : IGetKey, IIndexedSingletons
     public abstract EffectiveAttributeValue CreateEffectiveAttributeValue();
 
     public void Bind(RestoreGameState? restoreGameState) { }
+
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Index), new IntValueGameStateBag(Index))
+        );
+    }
 }

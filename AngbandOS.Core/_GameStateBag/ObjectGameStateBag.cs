@@ -13,10 +13,10 @@ internal class ObjectGameStateBag : GameStateBag
     public int ObjectId { get; }
     public Dictionary<string, GameStateBag> Values { get; }
 
-    public ObjectGameStateBag(int objectId, Dictionary<string, GameStateBag> value)
+    public ObjectGameStateBag(int objectId, Dictionary<string, GameStateBag>? value)
     {
         ObjectId = objectId;
-        Values = value;
+        Values = value ?? new Dictionary<string, GameStateBag>();
     }
     public override string ToString()
     {

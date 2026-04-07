@@ -48,6 +48,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         return effectiveAttributeSet;
     }
 
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState), 
+            (nameof(PreviousMartialArtistArmorAux), new BoolValueGameStateBag(PreviousMartialArtistArmorAux))
+        );
+    }
     protected override void Execute()
     {
         Game.EffectiveAttributeSet = BuildEffectiveAttributeSetForPlayer().ToReadOnly(); // TODO: This isn't being used yet.

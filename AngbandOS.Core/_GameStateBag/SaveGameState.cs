@@ -17,14 +17,14 @@ internal class SaveGameState
     public SaveGameState()
     {
     }
-    public ObjectGameStateBag CreateObjectGameStateBag(object obj, params (string, GameStateBag)[] fieldNamesAndGameStateBags)
+
+    public ObjectGameStateBag CreateObjectGameStateBag(object obj, DictionaryGameStateBag? dictionaryGameStateBag)
     {
         int objectId = ObjectToIdDictionary.Count + 1;
-        ObjectToIdDictionary.Add(this, objectId);
-        Dictionary<string, GameStateBag> fieldNameAndGameStateBagDictionary = fieldNamesAndGameStateBags.ToDictionary(_fieldNameAndGameStateBag => _fieldNameAndGameStateBag.Item1, _fieldNameAndGameStateBag => _fieldNameAndGameStateBag.Item2);
-        return new ObjectGameStateBag(objectId, fieldNameAndGameStateBagDictionary);
+        ObjectToIdDictionary.Add(obj, objectId);
+        return new ObjectGameStateBag(objectId, dictionaryGameStateBag?.Values);
     }
-    public GameStateBag AddDictionary(params (string, GameStateBag)[] fieldNamesAndGameStateBags)
+    public GameStateBag CreateDictionaryGameStateBag(params (string, GameStateBag)[] fieldNamesAndGameStateBags)
     {
         Dictionary<string, GameStateBag> fieldNameAndGameStateBagDictionary = fieldNamesAndGameStateBags.ToDictionary(_fieldNameAndGameStateBag => _fieldNameAndGameStateBag.Item1, _fieldNameAndGameStateBag => _fieldNameAndGameStateBag.Item2);
         return new DictionaryGameStateBag(fieldNameAndGameStateBagDictionary);

@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Talent : IGetKey
+internal abstract class Talent : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected Talent(Game game) // This object is a singleton
@@ -20,6 +20,7 @@ internal abstract class Talent : IGetKey
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState) { }
 
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
     public abstract string Name { get; }
 
     public abstract int Level { get; }

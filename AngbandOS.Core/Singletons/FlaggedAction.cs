@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.FlaggedActions;
 
 [Serializable]
-internal abstract class FlaggedAction : IGetKey
+internal abstract class FlaggedAction : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected FlaggedAction(Game game) // This object is a singleton
@@ -19,6 +19,7 @@ internal abstract class FlaggedAction : IGetKey
         _flag = restoreGameState.GetBool(nameof(_flag));
     }
 
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
     public virtual string Key => GetType().Name;
 
     public string GetKey => Key;

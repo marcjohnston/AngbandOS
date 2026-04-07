@@ -23,6 +23,16 @@ internal class UpdateScentFlaggedAction : FlaggedAction
             _flowTail = restoreGameState.GetInt(nameof(_flowTail));
         }
     }
+
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState), 
+            (nameof(_flowHead), new IntValueGameStateBag(_flowHead)), 
+            (nameof(_flowN), new IntValueGameStateBag(_flowN)), 
+            (nameof(_flowTail), new IntValueGameStateBag(_flowTail))
+        );
+    }
+
     private void UpdateFlowAux(int y, int x, int n)
     {
         int oldHead = _flowHead;

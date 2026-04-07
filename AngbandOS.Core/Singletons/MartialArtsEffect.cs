@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class MartialArtsEffect : IGetKey
+internal abstract class MartialArtsEffect : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected MartialArtsEffect(Game game) // This object is a singleton)
@@ -15,6 +15,8 @@ internal abstract class MartialArtsEffect : IGetKey
         Game = game;
     }
     public Expression StunLevel { get; private set; }
+
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns an expression for the amount of stun to deliver to the monster with a successful martial arts attack.  Returns 0, by default.

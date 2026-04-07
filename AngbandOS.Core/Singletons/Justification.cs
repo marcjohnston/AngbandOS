@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Justifications;
 
 [Serializable]
-internal abstract class Justification : IGetKey
+internal abstract class Justification : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected Justification(Game game) // This object is a singleton
@@ -20,4 +20,5 @@ internal abstract class Justification : IGetKey
     public string GetKey => GetType().Name;
 
     public void Bind(RestoreGameState? restoreGameState) { }
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

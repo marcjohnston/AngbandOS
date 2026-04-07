@@ -20,6 +20,14 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
             OldLightLevel = restoreGameState.GetInt(nameof(OldLightLevel));
         }
     }
+
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState), 
+            (nameof(OldLightLevel), new IntValueGameStateBag(OldLightLevel))
+        );
+    }
+
     /// <summary>
     /// Compute the level of light.  The player may be wielding multiple sources of light.
     /// </summary>

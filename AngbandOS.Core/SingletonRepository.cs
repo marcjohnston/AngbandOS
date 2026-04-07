@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a repository for all game singletons.
 /// </summary>
-internal class SingletonRepository
+internal sealed class SingletonRepository : IGameSerialize
 {
     #region Constructors
     public SingletonRepository(Game game)
@@ -21,7 +21,7 @@ internal class SingletonRepository
     #endregion
 
     #region Publics
-    public GameStateBag Serialize(SaveGameState saveGameState)
+    public DictionaryGameStateBag Serialize(SaveGameState saveGameState)
     {
         // The singleton repository is going to use a dictionary for all of the singletons.  The IGetKey will provide the unique key.
         var result = new Dictionary<string, GameStateBag>();
@@ -34,7 +34,7 @@ internal class SingletonRepository
 
             if (singleton is IGameSerialize gameSerializableSingleton)
             {
-                singletonGameStateBag = gameSerializableSingleton.Serialize(saveGameState);
+                singletonGameStateBag = saveGameState.CreateObjectGameStateBag(singleton, gameSerializableSingleton.Serialize(saveGameState));
             }
             else
             {

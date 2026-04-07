@@ -25,6 +25,13 @@ internal class UpdateManaFlaggedAction : FlaggedAction
             OldRestrictingArmor = restoreGameState.GetBool(nameof(OldRestrictingArmor));
         }
     }
+
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState), 
+            (nameof(OldRestrictingArmor), new BoolValueGameStateBag(OldRestrictingArmor))
+        );
+    }
     protected override void Execute()
     {       
         if (!Game.UsesMana)

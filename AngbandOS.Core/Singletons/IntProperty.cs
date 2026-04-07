@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal abstract class IntProperty : Property, IIntValue
+internal abstract class IntProperty : Property, IIntValue, IGameSerialize
 {
     protected IntProperty(Game game) : base(game) { }
 
@@ -21,6 +21,12 @@ internal abstract class IntProperty : Property, IIntValue
     }
 
     private int _value;
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(_value), new IntValueGameStateBag(_value))
+        );
+    }
 
     public int IntValue
     {

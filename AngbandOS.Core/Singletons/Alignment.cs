@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Alignment : IGetKey
+internal abstract class Alignment : IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     protected Alignment(Game game)
@@ -20,4 +20,5 @@ internal abstract class Alignment : IGetKey
     public abstract string[] Align(string[] lines, int mininumHeight);
 
     public void Bind(RestoreGameState? restoreGameState) { }
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 }
