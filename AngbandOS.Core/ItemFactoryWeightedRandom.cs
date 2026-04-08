@@ -7,13 +7,15 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal sealed class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey, IToJson
+internal sealed class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey, IToJson, IGameSerialize
 {
     public ItemFactoryWeightedRandom(Game game, ItemFactoryWeightedRandomGameConfiguration gameConfiguration) : base(game)
     {
         Key = gameConfiguration.GetKey;
         NameAndWeightBindings = gameConfiguration.NameAndWeightBindings;
     }
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the nullable names and weights.  Names can be null to support non-action weights.

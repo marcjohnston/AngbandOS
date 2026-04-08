@@ -10,6 +10,12 @@ namespace AngbandOS.Core.BirthStages;
 internal class IntroductionBirthStage : BirthStage
 {
     private int currentSelection = 0;
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(currentSelection), new IntValueGameStateBag(currentSelection))
+        );
+    }
     private IntroductionBirthStage(Game game) : base(game) { }
 
     public override BirthStage? Render()

@@ -9,9 +9,11 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
+    #region State Data
     private bool _sortValidated = false;
     private string _value;
     private ColorEnum _color;
+    #endregion
 
     public MaxRangedWidget(Game game, MaxRangedWidgetGameConfiguration gameConfiguration) : base(game)
     {
@@ -28,7 +30,14 @@ internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, IGameSerialize
         _color = DefaultColor;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(_sortValidated), new BoolValueGameStateBag(_sortValidated)),
+            (nameof(_value), new StringValueGameStateBag(_value)),
+            (nameof(_color), new ColorEnumValueGameStateBag(_color))
+        );
+    }
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.
     /// </summary>

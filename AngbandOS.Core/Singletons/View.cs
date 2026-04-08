@@ -12,7 +12,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class View : IGetKey, IToJson, IGameSerialize
 {
-    #region State Data
     private Game Game { get; }
 
     /// <summary>
@@ -20,8 +19,7 @@ internal sealed class View : IGetKey, IToJson, IGameSerialize
     /// widgets are the only widgets that "Update" inbetween the widget update phases.  Binding of pokeable widgets cannot be performed during the binding phase because the
     /// widgets themselves may not have been bound when the form binds; in that case, null is used.
     /// </summary>
-    private Widget[]? PokeWidgets = null;
-    #endregion
+    private Widget[]? PokeWidgets { get; set; } = null;
 
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
     #region Constructors
@@ -52,19 +50,7 @@ internal sealed class View : IGetKey, IToJson, IGameSerialize
     public void Bind(RestoreGameState? restoreGameState)
     {
         Widgets = Game.SingletonRepository.Get<Widget>(WidgetNames);
-    }
-
-    private Widget[] GetPokeWidgets()
-    {
-        List<Widget> iPutWidgetList = new List<Widget>();
-        foreach (Widget widget in Widgets)
-        {
-            if (widget.CanPoke)
-            {
-                iPutWidgetList.Add(widget);
-            }
-        }
-        return iPutWidgetList.ToArray();
+        PokeWidgets = Widgets.Where(widget => widget.CanPoke).ToArray();
     }
 
     public string ToJson()
@@ -119,14 +105,12 @@ internal sealed class View : IGetKey, IToJson, IGameSerialize
             a = ColorEnum.Black;
         }
 
-        if (PokeWidgets == null)
+        if (PokeWidgets is not null)
         {
-            PokeWidgets = GetPokeWidgets();
-        }
-
-        foreach (Widget widget in PokeWidgets)
-        {
-            widget.Poke(a, c, y, x);
+            foreach (Widget widget in PokeWidgets)
+            {
+                widget.Poke(a, c, y, x);
+            }
         }
     }
 
@@ -151,14 +135,12 @@ internal sealed class View : IGetKey, IToJson, IGameSerialize
     /// <param name="col"></param>
     public void MoveCursorTo(int row, int col)
     {
-        if (PokeWidgets == null)
+        if (PokeWidgets is not null)
         {
-            PokeWidgets = GetPokeWidgets();
-        }
-
-        foreach (Widget widget in PokeWidgets) 
-        {
-            widget.MoveCursorTo(row, col);
+            foreach (Widget widget in PokeWidgets)
+            {
+                widget.MoveCursorTo(row, col);
+            }
         }
     }
     #endregion

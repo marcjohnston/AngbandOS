@@ -8,19 +8,18 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal abstract class StringFunction : IChangeTracker, IGetKey, IStringValue
+internal abstract class IntFunction : IChangeTracker, IGetKey, IIntValue, IGameSerialize
 {
     protected Game Game { get; }
-    protected StringFunction(Game game)
+    protected IntFunction(Game game)
     {
         Game = game;
     }
-
-    public abstract string StringValue { get; }
     /// <summary>
     /// Returns true, if there are no dependencies or if any the change tracking on any dependency is flagged as changed.
     /// </summary>
     public bool IsChanged => Dependencies == null ? true : Dependencies.Any(_dependency => _dependency.IsChanged);
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Does nothing, because functions are not sinks for tracking.
@@ -38,4 +37,8 @@ internal abstract class StringFunction : IChangeTracker, IGetKey, IStringValue
     }
 
     public virtual string[]? DependencyNames => null;
+
+    public abstract int Value { get; }
+
+    public int IntValue => Value;
 }

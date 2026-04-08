@@ -24,7 +24,7 @@ internal class ProbingDetectionAndFullIdScript : UsedResultUniversalScript, IGet
         RechargeItemScript = Game.SingletonRepository.Get<RechargeItemScript>(nameof(RechargeItem2xRechargeItemScript));
     }
 
-    private RechargeItemScript RechargeItemScript;
+    private RechargeItemScript RechargeItemScript { get; set; }
     public override UsedResultEnum ExecuteUsedScript()
     {
         UsedResultEnum rechargeItemUsedResult = RechargeItemScript.ExecuteUsedScript();

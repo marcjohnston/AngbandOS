@@ -8,14 +8,15 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal abstract class TextFunction : IChangeTracker, IGetKey, ITextValue
+internal abstract class TextFunction : IChangeTracker, IGetKey, ITextValue, IGameSerialize
 {
     protected Game Game { get; }
     protected TextFunction(Game game)
     {
         Game = game;
-    } 
+    }
 
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
     public abstract string[]? NullableStringsValue { get; }
     /// <summary>
     /// Returns true, if there are no dependencies or if any the change tracking on any dependency is flagged as changed.

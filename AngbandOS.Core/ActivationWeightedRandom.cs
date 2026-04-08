@@ -10,12 +10,13 @@ namespace AngbandOS.Core;
 /// Represents a singleton for a weighted random of <see cref="Activation"/> objects.
 /// </summary>
 [Serializable]
-internal abstract class ActivationWeightedRandom : WeightedRandom<Activation>, IGetKey
+internal abstract class ActivationWeightedRandom : WeightedRandom<Activation>, IGetKey, IGameSerialize
 {
     public ActivationWeightedRandom(Game game) : base(game) { }
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
     protected abstract (string, int)[] ActivationNamesAndWeights { get; }
 
     public void Bind(RestoreGameState? restoreGameState)

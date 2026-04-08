@@ -8,13 +8,15 @@
 namespace AngbandOS.Core.Functions;
 
 [Serializable]
-internal abstract class IntFunction : IChangeTracker, IGetKey, IIntValue
+internal abstract class StringFunction : IChangeTracker, IGetKey, IStringValue, IGameSerialize
 {
     protected Game Game { get; }
-    protected IntFunction(Game game)
+    protected StringFunction(Game game)
     {
         Game = game;
     }
+
+    public abstract string StringValue { get; }
     /// <summary>
     /// Returns true, if there are no dependencies or if any the change tracking on any dependency is flagged as changed.
     /// </summary>
@@ -36,8 +38,5 @@ internal abstract class IntFunction : IChangeTracker, IGetKey, IIntValue
     }
 
     public virtual string[]? DependencyNames => null;
-
-    public abstract int Value { get; }
-
-    public int IntValue => Value;
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

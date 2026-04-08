@@ -1,7 +1,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal sealed class Plural : IGetKey, IToJson
+internal sealed class Plural : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     public Plural(Game game, PluralGameConfiguration gameConfiguration)
@@ -10,6 +10,7 @@ internal sealed class Plural : IGetKey, IToJson
         Key = gameConfiguration.GetKey;
         PluralForm = gameConfiguration.PluralForm;
     }
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

@@ -11,13 +11,14 @@ namespace AngbandOS.Core.Functions;
 /// to repaint the map as needed.
 /// </summary>
 [Serializable]
-internal class RefreshMapFunction : IChangeTracker, IGetKey
+internal class RefreshMapFunction : IChangeTracker, IGetKey, IGameSerialize
 {
     protected Game Game { get; }
     private RefreshMapFunction(Game game) 
     {
         Game = game;
     }
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
     public virtual string[]? DependencyNames => new string[]
     {
         nameof(RefreshMapProperty), // Manual map refresh
