@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 internal class ListGameStateBag : GameStateBag
 {
     public GameStateBag[] Values { get; }
-    public ListGameStateBag(GameStateBag[] values)
+    public ListGameStateBag(params GameStateBag[] values)
     {
         Values = values;
     }

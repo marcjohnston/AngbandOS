@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal abstract class IntProperty : Property, IIntValue, IGameSerialize
+internal abstract class IntProperty : Property, IIntValue
 {
     protected IntProperty(Game game) : base(game) { }
 

@@ -1,0 +1,88 @@
+﻿// AngbandOS: 2022 Marc Johnston
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interfaces;
+using AngbandOS.GamePacks.Cthangband;
+
+namespace AngbandOS.Core;
+
+[Serializable]
+internal abstract class FixedArtifact : IGetKey, IToJson, IGameSerialize
+{
+    protected Game Game { get; }
+    protected FixedArtifact(Game game)
+    {
+        Game = game;
+    }
+
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(CurNum), new IntValueGameStateBag(CurNum))
+        );
+    }
+    public void Bind(RestoreGameState? restoreGameState)
+    {
+        BaseItemFactory = Game.SingletonRepository.Get<ItemFactory>(BaseItemFactoryName);
+
+        //// Cut and paste
+        //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override ColorEnum Color => ");
+        ////if (property is null)
+        ////    throw new Exception("");
+
+
+        //if (mappedItemEnhancements.Length == 0)
+        //    throw new Exception("");
+        //foreach (MappedItemEnhancement mappedItemEnhancement in mappedItemEnhancements)
+        //{
+        //    mappedItemEnhancement.Bind();
+        //    BaseItemFactory.Bind();
+        //    ItemEnhancement itemEnhancement = mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement();
+        //    //if ((BaseItemFactory.ItemEnhancement?.BonusDamageRollExpression == null ? 0 : Int32.Parse(BaseItemFactory.ItemEnhancement.BonusDamageRollExpression)) != ToD)
+        //    //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, $"    public override string BonusDamageRollExpression => \"{ToD - (BaseItemFactory.ItemEnhancement?.BonusDamageRollExpression is null ? 0 : Int32.Parse(BaseItemFactory.ItemEnhancement.BonusDamageRollExpression))}\";");
+        //    //Debug.Print($"{itemEnhancement.GetKey} public override int DamageSides => {itemEnhancement.DiceSides - BaseItemFactory.ItemEnhancement.DiceSides};");
+        //    if (property is not null)
+        //        Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, property);
+        //}
+    }
+
+    public string ToJson()
+    {
+        return "";
+    }
+
+
+    /// <summary>
+    /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
+    /// that have flavor may change the FlavorColor based on the flavor.
+    /// </summary>
+    public virtual ColorEnum Color { get; set; }
+
+    public virtual string Key => GetType().Name;
+    public string GetKey => Key;
+
+    /// <summary>
+    /// Represents the quantity of this artifact currently in existence.  
+    /// </summary>
+    public int CurNum = 0; // TODO: This property should graduate into an ItemFactory as the Count property.
+
+    protected abstract string BaseItemFactoryName { get; }
+
+    /// <summary>
+    /// Returns the item factory that acts as the base item for fixed artifacts of this type.
+    /// </summary>
+    public ItemFactory BaseItemFactory { get; private set; }
+
+    public virtual bool DisableStomp => false;
+    public abstract string Name { get; } // TODO: This must be used outside of the ItemEnhancement
+
+    public virtual bool DisableViaEnchantment => false;
+    public virtual bool DisableViaRandom => false;
+
+    public abstract int Level { get; } // TODO: Need to convert this to an enhancement.  This must be used outside of the ItemEnhancement
+
+    public abstract int Rarity { get; } // TODO: Need to convert this to an enhancement.  This must be used outside of the ItemEnhancement
+}

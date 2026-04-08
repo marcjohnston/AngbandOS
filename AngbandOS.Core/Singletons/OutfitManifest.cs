@@ -1,0 +1,73 @@
+﻿// AngbandOS: 2022 Marc Johnston
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+namespace AngbandOS.Core;
+
+[Serializable]
+internal class OutfitManifest : IGetKey, IToJson, IGameSerialize
+{
+    private Game Game { get; }
+    public OutfitManifest(Game game, OutfitManifestGameConfiguration gameConfiguration)
+    {
+        Game = game;
+        Key = gameConfiguration.GetKey;
+        CharacterClassBindingKey = gameConfiguration.CharacterClassBindingKey;
+        RaceBindingKey = gameConfiguration.RaceBindingKey;
+        RealmBindingKey = gameConfiguration.RealmBindingKey;
+        ItemFactoryAndEnhancementsBindings = gameConfiguration.ItemFactoryAndEnhancementsBindings;
+    }
+    public static string GetCompositeKey(CharacterClass characterClass, Race race, Realm realm) => GameConfiguration.GetCompositeKey(characterClass.GetKey, race.GetKey, realm.GetKey);
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+
+    public (string[] MatchValues, bool IsEqual)? CharacterClassBindingKey { get; private set; }
+    public (string[] MatchValues, bool IsEqual)? RaceBindingKey { get; private set; }
+    public (string[] MatchValues, bool IsEqual)? RealmBindingKey { get; private set; }
+    private (string ItemFactoryBindingKey, string[]? ItemEnhancementBindingKeys, string StackCountExpression, bool MakeKnown, bool WieldOne)[] ItemFactoryAndEnhancementsBindings { get; set; }
+    public (ItemFactory, ItemEnhancement[]?, Expression, bool, bool)[] ItemFactoryAndEnhancements { get; private set; }
+    public string Key { get; }
+    public string GetKey => Key;
+
+    public void Bind(RestoreGameState? restoreGameState)
+    {
+        // Validate.
+        if (CharacterClassBindingKey.HasValue && CharacterClassBindingKey.Value.MatchValues.Contains(""))
+        {
+            throw new Exception($"The {nameof(CharacterClassBindingKey)} {nameof(OutfitManifest)} with key {GetKey} cannot match empty character class values with or without equality.");
+        }
+
+        if (RaceBindingKey.HasValue && RaceBindingKey.Value.MatchValues.Contains(""))
+        {
+            throw new Exception($"The {nameof(RaceBindingKey)} {nameof(OutfitManifest)} with key {GetKey} cannot match empty race values with or without equality.");
+        }
+
+        if (RealmBindingKey.HasValue && RealmBindingKey.Value.MatchValues.Contains(""))
+        {
+            throw new Exception($"The {nameof(RealmBindingKey)} {nameof(OutfitManifest)} with key {GetKey} cannot match empty realm values with or without equality.");
+        }
+
+        List<(ItemFactory, ItemEnhancement[]?, Expression, bool, bool)> itemFactoriesAndEnhancementsList = new();
+        foreach ((string itemFactoryBindingKey, string[]? itemEnhancementBindingKeys, string stackCountExpression, bool makeKnown, bool wieldOne) in ItemFactoryAndEnhancementsBindings)
+        {
+            ItemFactory itemFactory = Game.SingletonRepository.Get<ItemFactory>(itemFactoryBindingKey);
+            ItemEnhancement[]? itemEnhancements = Game.SingletonRepository.GetNullable<ItemEnhancement>(itemEnhancementBindingKeys);
+            Expression stackCount = Game.ParseNumericExpression(stackCountExpression);
+            itemFactoriesAndEnhancementsList.Add((itemFactory, itemEnhancements, stackCount, makeKnown, wieldOne));
+        }
+        ItemFactoryAndEnhancements = itemFactoriesAndEnhancementsList.ToArray();
+    }
+
+    public string ToJson()
+    {
+        OutfitManifestGameConfiguration gameConfiguration = new()
+        {
+            CharacterClassBindingKey = CharacterClassBindingKey,
+            RaceBindingKey = RaceBindingKey,
+            RealmBindingKey = RealmBindingKey,
+            ItemFactoryAndEnhancementsBindings = ItemFactoryAndEnhancementsBindings,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
+    }
+}

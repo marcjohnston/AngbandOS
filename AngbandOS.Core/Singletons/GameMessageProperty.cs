@@ -7,7 +7,7 @@
 namespace AngbandOS.Core.Properties;
 
 [Serializable]
-internal class GameMessageProperty : Property, IGameSerialize
+internal class GameMessageProperty : Property
 {
     private GameMessageProperty(Game game) : base(game) { }
     public Queue<string?> MessageQueue = new Queue<string?>();

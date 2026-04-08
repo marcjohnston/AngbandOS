@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.Interface.Configuration;
-
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -13,15 +11,21 @@ namespace AngbandOS.Core;
 /// properties are modifiable.
 /// </summary>
 [Serializable]
-internal sealed class ItemFactory : IGetKey, IToJson
+internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
     private string ItemEnhancementBindingKey { get; }
 
-    ///// <summary>
-    ///// Represents the enhancements to apply to items created by this factory.
-    ///// </summary>
-    //private ItemEnhancement ItemEnhancement { get; set; }
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(IsFlavorAware), new BoolValueGameStateBag(IsFlavorAware)),
+            (nameof(FlavorSymbol), saveGameState.CreateObjectGameStateBag(FlavorSymbol)),
+            (nameof(FlavorColor), new ColorEnumValueGameStateBag(FlavorColor)),
+            (nameof(Tried), new BoolValueGameStateBag(Tried)),
+            (nameof(Stompable), new ListGameStateBag(new BoolValueGameStateBag(Stompable[0]), new BoolValueGameStateBag(Stompable[1]), new BoolValueGameStateBag(Stompable[2]), new BoolValueGameStateBag(Stompable[3])))
+        );
+    }
 
     public override string ToString()
     {
