@@ -21,7 +21,14 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
 
     public ItemFactory SpellBookItemFactory { get; private set; }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Forgotten), new BoolValueGameStateBag(Forgotten)),
+            (nameof(Learned), new BoolValueGameStateBag(Learned)),
+            (nameof(Tried), new BoolValueGameStateBag(Tried))
+        );
+    }
 
     /// <summary>
     /// Returns the index of the spell in the realm.  This index starts at 0 and increments by one for each spell.
@@ -50,6 +57,7 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
 
     public void Bind(RestoreGameState? restoreGameState) { }
 
+    #region State Data
     /// <summary>
     /// Returns true, if the spell has been forgotten because the players level dropped to low.  When true, Learned is set to false.
     /// </summary>
@@ -62,15 +70,16 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     public bool Learned;
 
     /// <summary>
-    /// Returns the name of the spell, as rendered to the Game.
-    /// </summary>
-    public string Name { get; }
-
-    /// <summary>
     /// Returns true, if the spell has been attempted to be cast; false, otherwise.  Set to false, by default.  Set to true, the first time the player attempts to cast the
     /// spell; regardless of success or failure.
     /// </summary>
     public bool Tried = false;
+    #endregion
+
+    /// <summary>
+    /// Returns the name of the spell, as rendered to the Game.
+    /// </summary>
+    public string Name { get; }
 
     /// <remarks>
     /// This is initialized after the player selects a character class.

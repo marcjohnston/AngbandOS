@@ -4271,9 +4271,9 @@ internal partial class Game
         {
             RegenerateHealth(regenAmount);
         }
-        if (GooPatron.MultiRew)
+        if (GooPatron.RewardReceived)
         {
-            GooPatron.MultiRew = false;
+            GooPatron.RewardReceived = false;
         }
 
         // Every timer gets to process the world event.

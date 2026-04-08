@@ -4,10 +4,12 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.ComponentModel;
+
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class MonsterCharacteristics : IMonsterCharacteristics
+internal class MonsterCharacteristics : IMonsterCharacteristics, IGameSerialize
 {
     public MonsterCharacteristics()
     {
@@ -178,6 +180,8 @@ internal class MonsterCharacteristics : IMonsterCharacteristics
         Troll = copyFrom.Troll;
         Undead = copyFrom.Undead;
     }
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public MonsterCharacteristics(IMonsterCharacteristics copyFrom, IMonsterCharacteristics unionWith)
     {

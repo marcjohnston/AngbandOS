@@ -9,7 +9,17 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, IIndexedSingletons, IGameSerialize
 {
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(CurNum), new IntValueGameStateBag(CurNum)),
+            (nameof(Guardian), new BoolValueGameStateBag(Guardian)),
+            (nameof(OnlyGuardian), new BoolValueGameStateBag(OnlyGuardian)),
+            (nameof(MaxNum), new IntValueGameStateBag(MaxNum)),
+            (nameof(Knowledge), saveGameState.CreateObjectGameStateBag(Knowledge))
+        );
+    }
+
     #region 102 Serialized Members
 
     public string Key { get; }
@@ -348,6 +358,14 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     public bool HasLegs { get; } = false;
     #endregion
 
+    #region State Data
+    public int CurNum;
+    public bool Guardian;
+    public bool OnlyGuardian;
+    public int MaxNum;
+    public MonsterKnowledge Knowledge;
+    #endregion
+
     #region
     private Game Game { get; }
     private string[] ConvertToMultiline(string multiLineName)
@@ -532,7 +550,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
         GoldItemFactory = Game.SingletonRepository.Get<ItemFactory>(GoldItemFactoryBindingKey);
     }
 
-    public MonsterSpellList Spells = new MonsterSpellList();
+    public MonsterSpellList Spells { get; } = new MonsterSpellList();
     public bool BreatheAcid => Spells.Contains(typeof(AcidBreatheBallMonsterSpell));
     public bool BreatheCold => Spells.Contains(typeof(ColdBreatheBallMonsterSpell));
     public bool BreatheFire => Spells.Contains(typeof(FireBreatheBallMonsterSpell));
@@ -548,12 +566,6 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     public bool BreatheInertia => Spells.Contains(typeof(InertiaBreatheBallMonsterSpell));
     public bool BreatheTime => Spells.Contains(typeof(TimeBreatheBallMonsterSpell));
     public bool TeleportSelf => Spells.Contains(typeof(TeleportSelfMonsterSpell));
-
-    public int CurNum;
-    public bool Guardian;
-    public bool OnlyGuardian;
-    public int MaxNum;
-    public MonsterKnowledge Knowledge;
 
     /// <summary>
     /// Returns a standard message note for a monster of either it 'dies' or is 'destroyed' based on whether

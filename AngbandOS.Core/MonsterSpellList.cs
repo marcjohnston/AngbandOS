@@ -10,12 +10,21 @@ namespace AngbandOS.Core.MonsterSpells;
 /// Represents an immutable set of spells.
 /// </summary>
 [Serializable]
-internal class MonsterSpellList
+internal class MonsterSpellList : IGameSerialize
 {
     /// <summary>
     /// Represents all of the spells available to the monster.  This list is immutable and set only in the constructor.
     /// </summary>
     private readonly MonsterSpell[] _spells;
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        List<GameStateBag> spellBags = new List<GameStateBag>();
+        spellBags.AddRange(_spells.Select(_spell => saveGameState.CreateObjectGameStateBag(_spell)));
+        return new DictionaryGameStateBag(
+            (nameof(_spells), new ListGameStateBag(spellBags.ToArray()))
+        );
+    }
 
     public MonsterSpell[] Spells => _spells;
 

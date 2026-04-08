@@ -20,7 +20,13 @@ internal sealed class Patron : IGetKey, IToJson, IGameSerialize
         ShortName = gameConfiguration.ShortName;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(RewardReceived), new BoolValueGameStateBag(RewardReceived))
+        );
+    }
+
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
@@ -48,7 +54,7 @@ internal sealed class Patron : IGetKey, IToJson, IGameSerialize
     }
 
     public string LongName { get; }
-    public bool MultiRew;
+    public bool RewardReceived;
 
     public Ability? PreferredAbility { get; private set; }
     private string? PreferredAbilityBindingKey { get; } = null;
@@ -60,11 +66,11 @@ internal sealed class Patron : IGetKey, IToJson, IGameSerialize
     {
         int type;
         int nastyChance = 6;
-        if (MultiRew)
+        if (RewardReceived)
         {
             return;
         }
-        MultiRew = true;
+        RewardReceived = true;
         if (Game.ExperienceLevel.IntValue == 13)
         {
             nastyChance = 2;

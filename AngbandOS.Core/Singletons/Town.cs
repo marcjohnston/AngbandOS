@@ -22,7 +22,17 @@ internal sealed class Town : IGetKey, IToJson, IGameSerialize
         AllowStartupTown = gameConfiguration.AllowStartupTown;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Seed), new IntValueGameStateBag(Seed)),
+            (nameof(Visited), new BoolValueGameStateBag(Visited)),
+            (nameof(X), new IntValueGameStateBag(X)),
+            (nameof(Y), new IntValueGameStateBag(Y))
+        );
+    }
+
+    #region State Data
     /// <summary>
     /// Represents the RND seed that is used to generate the town.  This ensures the town is regenerated the same when the player returns.
     /// </summary>
@@ -38,6 +48,7 @@ internal sealed class Town : IGetKey, IToJson, IGameSerialize
     /// Returns the wilderness Y coordinate of the town.
     /// </summary>
     public int Y = 0;
+    #endregion
 
     /// <summary>
     /// Returns the dungeon that is under the city.  This property is bound from the DungeonName property during the bind phase.

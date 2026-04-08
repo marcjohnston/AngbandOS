@@ -4,13 +4,14 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
 using System.Text;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class MonsterKnowledge
+internal class MonsterKnowledge : IGameSerialize
 {
+
+    #region State Data
     public readonly int[] RBlows = new int[4];
     public int RCastInate;
     public int RCastSpell;
@@ -27,6 +28,29 @@ internal class MonsterKnowledge
     public int RSights;
     public int RTkills;
     public int RWake;
+    #endregion
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(RBlows), new ListGameStateBag(new IntValueGameStateBag(RBlows[0]), new IntValueGameStateBag(RBlows[1]), new IntValueGameStateBag(RBlows[2]), new IntValueGameStateBag(RBlows[3]))),
+            (nameof(RCastInate), new IntValueGameStateBag(RCastInate)),
+            (nameof(RCastSpell), new IntValueGameStateBag(RCastSpell)),
+            (nameof(RDeaths), new IntValueGameStateBag(RDeaths)),
+            (nameof(RDropGold), new IntValueGameStateBag(RDropGold)),
+            (nameof(RDropItem), new IntValueGameStateBag(RDropItem)),
+            (nameof(Guardian), new BoolValueGameStateBag(Guardian)),
+            (nameof(OnlyGuardian), new BoolValueGameStateBag(OnlyGuardian)),
+            (nameof(Characteristics), saveGameState.CreateObjectGameStateBag(Characteristics)),
+            (nameof(RSpells), saveGameState.CreateObjectGameStateBag(RSpells)),
+            (nameof(RIgnore), new IntValueGameStateBag(RIgnore)),
+            (nameof(RPkills), new IntValueGameStateBag(RPkills)),
+            (nameof(RProbed), new BoolValueGameStateBag(RProbed)),
+            (nameof(RSights), new IntValueGameStateBag(RSights)),
+            (nameof(RTkills), new IntValueGameStateBag(RTkills)),
+            (nameof(RWake), new IntValueGameStateBag(RWake))
+        );
+    }
+
     private MonsterRace _monsterType { get; }
     private string[] _wdHe { get; } = { "it", "he", "she" };
     private string[] _wdHeCap { get; } = { "It", "He", "She" };

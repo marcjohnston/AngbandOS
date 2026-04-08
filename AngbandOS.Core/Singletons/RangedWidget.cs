@@ -9,8 +9,10 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class RangedWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
+    #region State Data
     private string _text;
     private ColorEnum _color;
+    #endregion
 
     public RangedWidget(Game game, RangedWidgetGameConfiguration gameConfiguration) : base(game)
     {
@@ -28,7 +30,13 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, IGameSerialize
         _color = DefaultColor;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(_text), new StringValueGameStateBag(_text)),
+            (nameof(_color), new ColorEnumValueGameStateBag(_color))
+        );
+    }
 
     public string Key { get; }
 
