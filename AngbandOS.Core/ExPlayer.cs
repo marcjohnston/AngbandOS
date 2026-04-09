@@ -11,8 +11,9 @@ namespace AngbandOS.Core;
 /// game preview, or to create a new character based on the previous one.
 /// </summary>
 [Serializable]
-internal class ExPlayer
+internal class ExPlayer : IGameSerialize
 {
+    #region State Data
     /// <summary>
     /// The index of the character's gender
     /// </summary>
@@ -57,6 +58,22 @@ internal class ExPlayer
     /// The character's second realm of magic (if any)
     /// </summary>
     public readonly Realm? SecondaryRealm;
+    #endregion
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Gender), saveGameState.CreateGameStateBag(Gender)),
+            (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
+            (nameof(Level), saveGameState.CreateGameStateBag(Level)),
+            (nameof(Name), saveGameState.CreateGameStateBag(Name)),
+            (nameof(CharacterClassName), saveGameState.CreateGameStateBag(CharacterClassName)),
+            (nameof(Race), saveGameState.CreateGameStateBag(Race)),
+            (nameof(RaceAtBirth), saveGameState.CreateGameStateBag(RaceAtBirth)),
+            (nameof(PrimaryRealm), saveGameState.CreateGameStateBag(PrimaryRealm)),
+            (nameof(SecondaryRealm), saveGameState.CreateGameStateBag(SecondaryRealm))
+        );
+    }
 
     /// <summary>
     /// Make an ex-player from a player, remembering the essential information about the character

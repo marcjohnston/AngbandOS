@@ -29,6 +29,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             nameof(CharValueGameStateBag) => new CharValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()![0]),
             nameof(ColorEnumValueGameStateBag) => new ColorEnumValueGameStateBag((ColorEnum)Enum.Parse(typeof(ColorEnum), doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
             nameof(DateTimeValueGameStateBag) => new DateTimeValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDateTime()),
+            nameof(NullableDateTimeValueGameStateBag) => new NullableDateTimeValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDateTime()),
             nameof(DecimalValueGameStateBag) => new DecimalValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDecimal()),
             nameof(DictionaryGameStateBag) => new DictionaryGameStateBag(JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
             nameof(IntValueGameStateBag) => new IntValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetInt32()),
@@ -117,6 +118,18 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
                 if (nullableIntValue.Value.HasValue)
                 {
                     writer.WriteNumber(ValuePropertyName, nullableIntValue.Value.Value);
+                }
+                else
+                {
+                    writer.WriteString(ValuePropertyName, "null");
+                }
+                break;
+
+            case NullableDateTimeValueGameStateBag nullableDateTimeValue:
+                writer.WriteString(TypePropertyName, nameof(NullableDateTimeValueGameStateBag));
+                if (nullableDateTimeValue.Value.HasValue)
+                {
+                    writer.WriteString(ValuePropertyName, nullableDateTimeValue.Value.Value);
                 }
                 else
                 {

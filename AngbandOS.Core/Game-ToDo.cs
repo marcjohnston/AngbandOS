@@ -8,6 +8,7 @@ namespace AngbandOS.Core;
 
 internal partial class Game
 {
+    #region State Data
     public bool IsBirthday;
     public bool IsDawn;
     public bool IsDusk;
@@ -93,32 +94,6 @@ internal partial class Game
     public int SkillUseDevice;
     public int SocialClass;
 
-    public readonly Timer AcidResistanceTimer;
-    public readonly Timer BleedingTimer;
-    public readonly Timer BlessingTimer;
-    public readonly Timer BlindnessTimer;
-    public readonly Timer ColdResistanceTimer;
-    public readonly Timer ConfusionTimer;
-    public readonly Timer EtherealnessTimer;
-    public readonly Timer FearTimer;
-    public readonly Timer FireResistanceTimer;
-    public readonly Timer HallucinationsTimer;
-    public readonly Timer HasteTimer;
-    public readonly Timer HeroismTimer;
-    public readonly Timer InfravisionTimer;
-    public readonly Timer InvulnerabilityTimer;
-    public readonly Timer LightningResistanceTimer;
-    public readonly Timer ParalysisTimer;
-    public readonly Timer PoisonTimer;
-    public readonly Timer PoisonResistanceTimer;
-    public readonly Timer ProtectionFromEvilTimer;
-    public readonly Timer SeeInvisibilityTimer;
-    public readonly Timer SlowTimer;
-    public readonly Timer StoneskinTimer;
-    public readonly Timer StunTimer;
-    public readonly Timer SuperheroismTimer;
-    public readonly Timer TelepathyTimer;
-
     public int CharismaBonus;
     public int ConstitutionBonus;
     public int DexterityBonus;
@@ -141,6 +116,33 @@ internal partial class Game
     public bool SustainAll;
     public bool Vulnerable;
     public int WisdomBonus;
+    #endregion
+
+    public Timer AcidResistanceTimer { get; }
+    public Timer BleedingTimer { get; }
+    public Timer BlessingTimer { get; }
+    public Timer BlindnessTimer { get; }
+    public Timer ColdResistanceTimer { get; }
+    public Timer ConfusionTimer { get; }
+    public Timer EtherealnessTimer { get; }
+    public Timer FearTimer { get; }
+    public Timer FireResistanceTimer { get; }
+    public Timer HallucinationsTimer { get; }
+    public Timer HasteTimer { get; }
+    public Timer HeroismTimer { get; }
+    public Timer InfravisionTimer { get; }
+    public Timer InvulnerabilityTimer { get; }
+    public Timer LightningResistanceTimer { get; }
+    public Timer ParalysisTimer { get; }
+    public Timer PoisonTimer { get; }
+    public Timer PoisonResistanceTimer { get; }
+    public Timer ProtectionFromEvilTimer { get; }
+    public Timer SeeInvisibilityTimer { get; }
+    public Timer SlowTimer { get; }
+    public Timer StoneskinTimer { get; }
+    public Timer StunTimer { get; }
+    public Timer SuperheroismTimer { get; }
+    public Timer TelepathyTimer { get; }
 
 
     public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable

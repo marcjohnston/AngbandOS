@@ -6,10 +6,10 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class DateTimeValueGameStateBag : GameStateBag
+internal class NullableDateTimeValueGameStateBag : GameStateBag
 {
-    public DateTime Value { get; }
-    public DateTimeValueGameStateBag(DateTime value)
+    public DateTime? Value { get; }
+    public NullableDateTimeValueGameStateBag(DateTime? value)
     {
         Value = value;
     }

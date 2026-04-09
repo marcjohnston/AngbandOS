@@ -10,8 +10,9 @@ namespace AngbandOS.Core;
 /// Represents a buffer of screen data.  This buffer is used for the screen contents and the double buffer to emit to the console.
 /// </summary>
 [Serializable]
-internal class ScreenBuffer
+internal class ScreenBuffer : IGameSerialize
 {
+    #region State Data
     /// <summary>
     /// Array of color data for the entire screen.
     /// </summary>
@@ -36,6 +37,18 @@ internal class ScreenBuffer
     /// Whether or nt the cursor is visible.  Encapsulated using the CursorVisible property.
     /// </summary>
     public bool CursorVisible = false;
+    #endregion
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Va), saveGameState.CreateGameStateBag(Va)),
+            (nameof(Vc), saveGameState.CreateGameStateBag(Vc)),
+            (nameof(Cx), saveGameState.CreateGameStateBag(Cx)),
+            (nameof(Cy), saveGameState.CreateGameStateBag(Cy)),
+            (nameof(CursorVisible), saveGameState.CreateGameStateBag(CursorVisible))
+        );
+    }
 
     public ScreenBuffer(int width, int height)
     {

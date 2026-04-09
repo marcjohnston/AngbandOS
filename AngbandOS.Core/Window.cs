@@ -4,14 +4,17 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Reflection.Emit;
+
 namespace AngbandOS.Core;
 
 /// <summary>
 /// Represents a window (or screen) that is rendered to the UI.  This window will consist of the width and height.  A layout needs to conform to the window.
 /// </summary>
 [Serializable]
-internal class Window
+internal class Window : IGameSerialize
 {
+    #region State Data
     /// <summary>
     /// Represents the active screen display.
     /// </summary>
@@ -49,6 +52,22 @@ internal class Window
     /// True, if a clear command was issued.  This flag forces a screen clear event to be emitted to the client and all screen contents redrawn when the UpdateScreen method runs.
     /// </summary>
     private bool TotalErase;
+    #endregion
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(ActiveScreen), saveGameState.CreateGameStateBag(ActiveScreen)),
+            (nameof(OldScreen), saveGameState.CreateGameStateBag(OldScreen)),
+            (nameof(UpdateWindow), saveGameState.CreateGameStateBag(UpdateWindow)),
+            (nameof(AttrBlank), saveGameState.CreateGameStateBag(AttrBlank)),
+            (nameof(CharBlank), saveGameState.CreateGameStateBag(CharBlank)),
+            (nameof(Height), saveGameState.CreateGameStateBag(Height)),
+            (nameof(Width), saveGameState.CreateGameStateBag(Width)),
+            (nameof(RowStartingIndexArray), saveGameState.CreateGameStateBag(RowStartingIndexArray)),
+            (nameof(TotalErase), saveGameState.CreateGameStateBag(TotalErase))
+        );
+    }
 
     /// <summary>
     /// Returns the current cursor position.

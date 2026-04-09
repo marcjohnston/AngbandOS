@@ -43,7 +43,7 @@ internal abstract class NullableMonsterProperty : Property, INullMonsterValue
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(_value), saveGameState.CreateObjectGameStateBag(_value))
+            (nameof(_value), saveGameState.CreateGameStateBag(_value))
         );
     }
     protected virtual void OnBeforeSet() { }

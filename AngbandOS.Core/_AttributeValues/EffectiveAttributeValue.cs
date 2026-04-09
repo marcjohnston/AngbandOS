@@ -14,6 +14,12 @@ internal abstract class EffectiveAttributeValue : AttributeValue
 {
     protected Game Game { get; }
     protected readonly Attribute Attribute;
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(Attribute), saveGameState.CreateGameStateBag(Attribute))
+        );
+    }
     public EffectiveAttributeValue(Game game, Attribute attribute)
     {
         Game = game;

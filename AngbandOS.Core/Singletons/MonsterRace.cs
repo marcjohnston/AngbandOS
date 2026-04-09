@@ -16,7 +16,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
             (nameof(Guardian), new BoolValueGameStateBag(Guardian)),
             (nameof(OnlyGuardian), new BoolValueGameStateBag(OnlyGuardian)),
             (nameof(MaxNum), new IntValueGameStateBag(MaxNum)),
-            (nameof(Knowledge), saveGameState.CreateObjectGameStateBag(Knowledge))
+            (nameof(Knowledge), saveGameState.CreateGameStateBag(Knowledge))
         );
     }
 

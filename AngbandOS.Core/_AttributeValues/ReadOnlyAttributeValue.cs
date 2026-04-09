@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents an immutuable attribute value.
+/// Represents an immutable attribute value.
 /// </summary>
 /// <typeparam name="T"></typeparam>
 [Serializable]
@@ -17,5 +17,11 @@ internal class ReadOnlyAttributeValue<T> : AttributeValue
     public ReadOnlyAttributeValue(T value)
     {
         Value = value;
+    }
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Value), saveGameState.CreateGameStateBag(Value))
+        );
     }
 }

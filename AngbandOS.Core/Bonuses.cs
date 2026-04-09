@@ -7,16 +7,30 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Bonuses
+internal class Bonuses : IGameSerialize
 {
-    public int AttackBonus {get; init; } = 0;
+    #region State Data
+    public int AttackBonus { get; init; } = 0;
     public int DamageBonus { get; init; } = 0;
     public int DisplayedAttackBonus { get; init; } = 0;
     public int DisplayedDamageBonus { get; init; } = 0;
-    public bool HasUnpriestlyWeapon {get; init; } = false;
+    public bool HasUnpriestlyWeapon { get; init; } = false;
     public bool HasHeavyBow { get; init; } = false;
     public bool HasHeavyWeapon { get; init; } = false;
+    #endregion
 
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(AttackBonus), saveGameState.CreateGameStateBag(AttackBonus)),
+            (nameof(DamageBonus), saveGameState.CreateGameStateBag(DamageBonus)),
+            (nameof(DisplayedAttackBonus), saveGameState.CreateGameStateBag(DisplayedAttackBonus)),
+            (nameof(DisplayedDamageBonus), saveGameState.CreateGameStateBag(DisplayedDamageBonus)),
+            (nameof(HasUnpriestlyWeapon), saveGameState.CreateGameStateBag(HasUnpriestlyWeapon)),
+            (nameof(HasHeavyBow), saveGameState.CreateGameStateBag(HasHeavyBow)),
+            (nameof(HasHeavyWeapon), saveGameState.CreateGameStateBag(HasHeavyWeapon))
+        );
+    }
 
     public Bonuses Merge(Bonuses bonuses)
     {

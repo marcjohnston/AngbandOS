@@ -11,6 +11,12 @@ internal class MonsterTarget : Target
 {
     private Game Game { get; }
     private readonly Monster _monster;
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(_monster), saveGameState.CreateGameStateBag(_monster))
+        );
+    }
     public override GridCoordinate? GetTargetLocation()
     {
         // Ensure we can still target the monster.

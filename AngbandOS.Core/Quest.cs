@@ -7,8 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Quest
+internal class Quest : IGameSerialize
 {
+    #region State Data
     public bool Discovered;
     public Dungeon Dungeon;
     public int Killed;
@@ -19,6 +20,20 @@ internal class Quest
     public int Level;
     public int RIdx;
     public int ToKill;
+    #endregion
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Discovered), saveGameState.CreateGameStateBag(Discovered)),
+            (nameof(Dungeon), saveGameState.CreateGameStateBag(Dungeon)),
+            (nameof(Killed), saveGameState.CreateGameStateBag(Killed)),
+            (nameof(Level), saveGameState.CreateGameStateBag(Level)),
+            (nameof(RIdx), saveGameState.CreateGameStateBag(RIdx)),
+            (nameof(ToKill), saveGameState.CreateGameStateBag(ToKill))
+        );
+    }
+
     protected Game Game { get; }
 
     public bool IsActive => (Level != 0 && Killed < ToKill);

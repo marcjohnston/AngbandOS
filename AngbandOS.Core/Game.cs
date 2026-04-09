@@ -86,11 +86,203 @@ internal partial class Game
     #endregion
 
     #region Game Serialization
+    public DictionaryGameStateBag Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(IsBirthday), new BoolValueGameStateBag(IsBirthday)),
+            (nameof(IsDawn), new BoolValueGameStateBag(IsDawn)),
+            (nameof(IsDusk), new BoolValueGameStateBag(IsDusk)),
+            (nameof(IsFeelTime), new BoolValueGameStateBag(IsFeelTime)),
+            (nameof(IsHalloween), new BoolValueGameStateBag(IsHalloween)),
+            (nameof(IsMidnight), new BoolValueGameStateBag(IsMidnight)),
+            (nameof(IsNewYear), new BoolValueGameStateBag(IsNewYear)),
+            (nameof(HasAcidImmunity), new BoolValueGameStateBag(HasAcidImmunity)),
+            (nameof(HasAcidResistance), new BoolValueGameStateBag(HasAcidResistance)),
+            (nameof(HasAggravation), new BoolValueGameStateBag(HasAggravation)),
+            (nameof(HasAntiMagic), new BoolValueGameStateBag(HasAntiMagic)),
+            (nameof(HasAntiTeleport), new BoolValueGameStateBag(HasAntiTeleport)),
+            (nameof(HasAntiTheft), new BoolValueGameStateBag(HasAntiTheft)),
+            (nameof(HasBlessedBlade), new BoolValueGameStateBag(HasBlessedBlade)),
+            (nameof(HasBlindnessResistance), new BoolValueGameStateBag(HasBlindnessResistance)),
+            (nameof(HasChaosResistance), new BoolValueGameStateBag(HasChaosResistance)),
+            (nameof(HasColdImmunity), new BoolValueGameStateBag(HasColdImmunity)),
+            (nameof(HasColdResistance), new BoolValueGameStateBag(HasColdResistance)),
+            (nameof(HasConfusingTouch), new BoolValueGameStateBag(HasConfusingTouch)),
+            (nameof(HasConfusionResistance), new BoolValueGameStateBag(HasConfusionResistance)),
+            (nameof(HasDarkResistance), new BoolValueGameStateBag(HasDarkResistance)),
+            (nameof(HasDisenchantResistance), new BoolValueGameStateBag(HasDisenchantResistance)),
+            (nameof(HasElementalVulnerability), new BoolValueGameStateBag(HasElementalVulnerability)),
+            (nameof(HasExperienceDrain), new BoolValueGameStateBag(HasExperienceDrain)),
+            (nameof(HasExtraMight), new BoolValueGameStateBag(HasExtraMight)),
+            (nameof(HasFearResistance), new BoolValueGameStateBag(HasFearResistance)),
+            (nameof(HasFeatherFall), new BoolValueGameStateBag(HasFeatherFall)),
+            (nameof(HasFireImmunity), new BoolValueGameStateBag(HasFireImmunity)),
+            (nameof(HasFireResistance), new BoolValueGameStateBag(HasFireResistance)),
+            (nameof(HasFireSheath), new BoolValueGameStateBag(HasFireSheath)),
+            (nameof(HasFreeAction), new BoolValueGameStateBag(HasFreeAction)),
+            (nameof(GlowInTheDarkRadius), new IntValueGameStateBag(GlowInTheDarkRadius)),
+            (nameof(HasHoldLife), new BoolValueGameStateBag(HasHoldLife)),
+            (nameof(HasLightningImmunity), new BoolValueGameStateBag(HasLightningImmunity)),
+            (nameof(HasLightningResistance), new BoolValueGameStateBag(HasLightningResistance)),
+            (nameof(HasElectricitySheath), new BoolValueGameStateBag(HasElectricitySheath)),
+            (nameof(HasLightResistance), new BoolValueGameStateBag(HasLightResistance)),
+            (nameof(HasNetherResistance), new BoolValueGameStateBag(HasNetherResistance)),
+            (nameof(HasNexusResistance), new BoolValueGameStateBag(HasNexusResistance)),
+            (nameof(HasPoisonResistance), new BoolValueGameStateBag(HasPoisonResistance)),
+            (nameof(HasQuakeWeapon), new BoolValueGameStateBag(HasQuakeWeapon)),
+            (nameof(HasRandomTeleport), new BoolValueGameStateBag(HasRandomTeleport)),
+            (nameof(HasReflection), new BoolValueGameStateBag(HasReflection)),
+            (nameof(HasRegeneration), new BoolValueGameStateBag(HasRegeneration)),
+            (nameof(HasRestrictingArmor), new BoolValueGameStateBag(HasRestrictingArmor)),
+            (nameof(HasRestrictingGloves), new BoolValueGameStateBag(HasRestrictingGloves)),
+            (nameof(HasSeeInvisibility), new BoolValueGameStateBag(HasSeeInvisibility)),
+            (nameof(HasShardResistance), new BoolValueGameStateBag(HasShardResistance)),
+            (nameof(HasSlowDigestion), new BoolValueGameStateBag(HasSlowDigestion)),
+            (nameof(HasSoundResistance), new BoolValueGameStateBag(HasSoundResistance)),
+            (nameof(HasSustainCharisma), new BoolValueGameStateBag(HasSustainCharisma)),
+            (nameof(HasSustainConstitution), new BoolValueGameStateBag(HasSustainConstitution)),
+            (nameof(HasSustainDexterity), new BoolValueGameStateBag(HasSustainDexterity)),
+            (nameof(HasSustainIntelligence), new BoolValueGameStateBag(HasSustainIntelligence)),
+            (nameof(HasSustainStrength), new BoolValueGameStateBag(HasSustainStrength)),
+            (nameof(HasSustainWisdom), new BoolValueGameStateBag(HasSustainWisdom)),
+            (nameof(HasTelepathy), new BoolValueGameStateBag(HasTelepathy)),
+            (nameof(HasTimeResistance), new BoolValueGameStateBag(HasTimeResistance)),
+            (nameof(Height), new IntValueGameStateBag(Height)),
+            (nameof(HitDie), new IntValueGameStateBag(HitDie)),
+            (nameof(InfravisionRange), new IntValueGameStateBag(InfravisionRange)),
+            (nameof(IsSearching), new BoolValueGameStateBag(IsSearching)),
+            (nameof(SkillDigging), new IntValueGameStateBag(SkillDigging)),
+            (nameof(ComputedDisarmTraps), new IntValueGameStateBag(ComputedDisarmTraps)),
+            (nameof(SkillMelee), new IntValueGameStateBag(SkillMelee)),
+            (nameof(SkillRanged), new IntValueGameStateBag(SkillRanged)),
+            (nameof(SkillSavingThrow), new IntValueGameStateBag(SkillSavingThrow)),
+            (nameof(SkillSearchFrequency), new IntValueGameStateBag(SkillSearchFrequency)),
+            (nameof(SkillSearching), new IntValueGameStateBag(SkillSearching)),
+            (nameof(SkillStealth), new IntValueGameStateBag(SkillStealth)),
+            (nameof(SkillThrowing), new IntValueGameStateBag(SkillThrowing)),
+            (nameof(SkillUseDevice), new IntValueGameStateBag(SkillUseDevice)),
+            (nameof(SocialClass), new IntValueGameStateBag(SocialClass)),
+
+            (nameof(CharismaBonus), new IntValueGameStateBag(CharismaBonus)),
+            (nameof(ConstitutionBonus), new IntValueGameStateBag(ConstitutionBonus)),
+            (nameof(DexterityBonus), new IntValueGameStateBag(DexterityBonus)),
+            (nameof(ElecHit), new BoolValueGameStateBag(ElecHit)),
+            (nameof(Esp), new BoolValueGameStateBag(Esp)),
+            (nameof(FeatherFall), new BoolValueGameStateBag(FeatherFall)),
+            (nameof(MutationFireHit), new BoolValueGameStateBag(MutationFireHit)),
+            (nameof(MutationFreeAction), new BoolValueGameStateBag(MutationFreeAction)),
+            (nameof(MutationInfravisionBonus), new IntValueGameStateBag(MutationInfravisionBonus)),
+            (nameof(IntelligenceBonus), new IntValueGameStateBag(IntelligenceBonus)),
+            (nameof(MagicResistance), new BoolValueGameStateBag(MagicResistance)),
+            (nameof(Regen), new BoolValueGameStateBag(Regen)),
+            (nameof(ResFear), new BoolValueGameStateBag(ResFear)),
+            (nameof(ResTime), new BoolValueGameStateBag(ResTime)),
+            (nameof(SearchBonus), new IntValueGameStateBag(SearchBonus)),
+            (nameof(SpeedBonus), new IntValueGameStateBag(SpeedBonus)),
+            (nameof(StealthBonus), new IntValueGameStateBag(StealthBonus)),
+            (nameof(StrengthBonus), new IntValueGameStateBag(StrengthBonus)),
+            (nameof(SuppressRegen), new BoolValueGameStateBag(SuppressRegen)),
+            (nameof(SustainAll), new BoolValueGameStateBag(SustainAll)),
+            (nameof(Vulnerable), new BoolValueGameStateBag(Vulnerable)),
+            (nameof(WisdomBonus), new IntValueGameStateBag(WisdomBonus)),
+            (nameof(replayPreviousKeystrokeDateTime), new NullableDateTimeValueGameStateBag(replayPreviousKeystrokeDateTime)),
+            (nameof(MainSequenceRandomSeed), new IntValueGameStateBag(MainSequenceRandomSeed)),
+            (nameof(CurrentSequenceRandomSeed), new IntValueGameStateBag(CurrentSequenceRandomSeed)),
+            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet)),
+
+            (nameof(UseFixed), new BoolValueGameStateBag(UseFixed)),
+            (nameof(FixedSeed), new IntValueGameStateBag(FixedSeed)),
+            (nameof(CurrentRunDirection), new IntValueGameStateBag(CurrentRunDirection)),
+            (nameof(_findBreakleft), new BoolValueGameStateBag(_findBreakleft)),
+            (nameof(_findBreakright), new BoolValueGameStateBag(_findBreakright)),
+            (nameof(_findOpenarea), new BoolValueGameStateBag(_findOpenarea)),
+            (nameof(_previousRunDirection), new IntValueGameStateBag(_previousRunDirection)),
+            (nameof(FollowDistance), new IntValueGameStateBag(FollowDistance)),
+            (nameof(DecayRate), new IntValueGameStateBag(DecayRate)),
+            (nameof(God), saveGameState.CreateGameStateBag(God)),
+            (nameof(NaturalAttacks), saveGameState.CreateGameStateBag(NaturalAttacks)),
+            (nameof(GenomeArmorClassBonus), new IntValueGameStateBag(GenomeArmorClassBonus)),
+            (nameof(ChaosGift), new BoolValueGameStateBag(ChaosGift)),
+            (nameof(MutationsNotPossessed), saveGameState.CreateGameStateBag(MutationsNotPossessed)),
+            (nameof(MutationsPossessed), saveGameState.CreateGameStateBag(MutationsPossessed)),
+            (nameof(TreasureFeeling), new IntValueGameStateBag(TreasureFeeling)),
+            (nameof(_birthday), new IntValueGameStateBag(_birthday)),
+            (nameof(_currentTurn), new IntValueGameStateBag(_currentTurn)),
+            (nameof(_dawn), new DateTimeValueGameStateBag(_dawn)),
+            (nameof(_dusk), new DateTimeValueGameStateBag(_dusk)),
+            (nameof(_gameStartDateTime), new DateTimeValueGameStateBag(_gameStartDateTime)),
+            (nameof(_levelEntryTurn), new IntValueGameStateBag(_levelEntryTurn)),
+            (nameof(IsDead), new BoolValueGameStateBag(IsDead)),
+            (nameof(LastInputReceived), saveGameState.CreateGameStateBag(LastInputReceived)),
+            (nameof(CommandRepeat), saveGameState.CreateGameStateBag(CommandRepeat)),
+            (nameof(Quests), saveGameState.CreateGameStateBag(Quests)),
+            (nameof(_elevationMap), saveGameState.CreateGameStateBag(_elevationMap)),
+            (nameof(AllocKindSize), saveGameState.CreateGameStateBag(AllocKindSize)),
+            (nameof(AllocKindTable), saveGameState.CreateGameStateBag(AllocKindTable)),
+            (nameof(AllocRaceSize), saveGameState.CreateGameStateBag(AllocRaceSize)),
+            (nameof(AllocRaceTable), saveGameState.CreateGameStateBag(AllocRaceTable)),
+            (nameof(CameFrom), saveGameState.CreateGameStateBag(CameFrom)),
+            (nameof(CharacterXtra), saveGameState.CreateGameStateBag(CharacterXtra)),
+            (nameof(CreateDownStair), saveGameState.CreateGameStateBag(CreateDownStair)),
+            (nameof(CreateUpStair), saveGameState.CreateGameStateBag(CreateUpStair)),
+            (nameof(CurDungeon), saveGameState.CreateGameStateBag(CurDungeon)),
+            (nameof(CurrentDepth), saveGameState.CreateGameStateBag(CurrentDepth)),
+            (nameof(CurTown), saveGameState.CreateGameStateBag(CurTown)),
+            (nameof(DiedFrom), saveGameState.CreateGameStateBag(DiedFrom)),
+            (nameof(DungeonDifficulty), saveGameState.CreateGameStateBag(DungeonDifficulty)),
+            (nameof(EnergyUse), saveGameState.CreateGameStateBag(EnergyUse)),
+            (nameof(HackMind), saveGameState.CreateGameStateBag(HackMind)),
+            (nameof(NewLevelFlag), saveGameState.CreateGameStateBag(NewLevelFlag)),
+            (nameof(Playing), saveGameState.CreateGameStateBag(Playing)),
+            (nameof(RecallDungeon), saveGameState.CreateGameStateBag(RecallDungeon)),
+            (nameof(Resting), saveGameState.CreateGameStateBag(Resting)),
+            (nameof(Running), saveGameState.CreateGameStateBag(Running)),
+            (nameof(TargetWho), saveGameState.CreateGameStateBag(TargetWho)),
+            (nameof(TotalFriendLevels), saveGameState.CreateGameStateBag(TotalFriendLevels)),
+            (nameof(TotalFriends), saveGameState.CreateGameStateBag(TotalFriends)),
+            (nameof(TrackedMonster), saveGameState.CreateGameStateBag(TrackedMonster)),
+            (nameof(ViewingEquipment), saveGameState.CreateGameStateBag(ViewingEquipment)),
+            (nameof(ViewingItemList), saveGameState.CreateGameStateBag(ViewingItemList)),
+            (nameof(_petList ), saveGameState.CreateGameStateBag(_petList )),
+            (nameof(_seedFlavor), saveGameState.CreateGameStateBag(_seedFlavor)),
+            (nameof(HurtChance ), saveGameState.CreateGameStateBag(HurtChance )),
+            (nameof(ExPlayer), saveGameState.CreateGameStateBag(ExPlayer)),
+            (nameof(LevelOfFirstSpell), saveGameState.CreateGameStateBag(LevelOfFirstSpell)),
+            (nameof(SpellOrder), saveGameState.CreateGameStateBag(SpellOrder)),
+            (nameof(Talents), saveGameState.CreateGameStateBag(Talents)),
+            (nameof(CommandArgument), saveGameState.CreateGameStateBag(CommandArgument)),
+            (nameof(CommandDirection), saveGameState.CreateGameStateBag(CommandDirection)),
+            (nameof(CurrentCommand), saveGameState.CreateGameStateBag(CurrentCommand)),
+            (nameof(FullScreenOverlay), saveGameState.CreateGameStateBag(FullScreenOverlay)),
+            (nameof(HideCursorOnFullScreenInkey), saveGameState.CreateGameStateBag(HideCursorOnFullScreenInkey)),
+            (nameof(KeyQueue), saveGameState.CreateGameStateBag(KeyQueue)),
+            (nameof(Screen), saveGameState.CreateGameStateBag(Screen)),
+            (nameof(KeyHead), saveGameState.CreateGameStateBag(KeyHead)),
+            (nameof(KeyTail), saveGameState.CreateGameStateBag(KeyTail)),
+            (nameof(_artificialKeyBuffer), saveGameState.CreateGameStateBag(_artificialKeyBuffer)),
+            (nameof(_keymapAct), saveGameState.CreateGameStateBag(_keymapAct)),
+            (nameof(History), saveGameState.CreateGameStateBag(History)),
+            (nameof(PlayerHp), saveGameState.CreateGameStateBag(PlayerHp)),
+            (nameof(Age), saveGameState.CreateGameStateBag(Age)),
+            (nameof(ArmorClassBonus), saveGameState.CreateGameStateBag(ArmorClassBonus)),
+
+            (nameof(Energy), saveGameState.CreateGameStateBag(Energy)),
+            (nameof(Bonuses), saveGameState.CreateGameStateBag(Bonuses)),
+            (nameof(FractionalExperiencePoints), saveGameState.CreateGameStateBag(FractionalExperiencePoints)),
+            (nameof(FractionalHealth), saveGameState.CreateGameStateBag(FractionalHealth)),
+            (nameof(FractionalMana), saveGameState.CreateGameStateBag(FractionalMana)),
+            (nameof(Gender), saveGameState.CreateGameStateBag(Gender)),
+            (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
+            (nameof(GetFirstLevelMutation), saveGameState.CreateGameStateBag(GetFirstLevelMutation)),
+            (nameof(KnownBonusArmorClass), saveGameState.CreateGameStateBag(KnownBonusArmorClass))
+       );
+    }
+
     public GameStateBag Save()
     {
         SaveGameState saveGameState = new SaveGameState();
         DictionaryGameStateBag singletonRepositoryGameStateBag = SingletonRepository.Serialize(saveGameState);
-        GameStateBag gameGameStateBag = saveGameState.SerializeViaReflection(this, nameof(Game));
+        DictionaryGameStateBag gameGameStateBag = Serialize(saveGameState);
         return new DictionaryGameStateBag((nameof(SingletonRepository), singletonRepositoryGameStateBag), (nameof(Game), gameGameStateBag));
     }
 
@@ -100,19 +292,19 @@ internal partial class Game
     /// <param name="player">The player to save.  If the player is dead, then this should be the corpse.</param>
     public void SaveGame()
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        MemoryStream memoryStream = new MemoryStream();
-        formatter.Serialize(memoryStream, this);
-        memoryStream.Position = 0;
-        GameDetails gameDetails = new GameDetails()
-        {
-            CharacterName = PlayerName.StringValue, // The player parameter
-            Level = ExperienceLevel.IntValue, // The player parameter
-            Gold = Gold.IntValue, // The parameter
-            IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
-            Comments = ""
-        };
-        CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
+        //BinaryFormatter formatter = new BinaryFormatter();
+        //MemoryStream memoryStream = new MemoryStream();
+        //formatter.Serialize(memoryStream, this);
+        //memoryStream.Position = 0;
+        //GameDetails gameDetails = new GameDetails()
+        //{
+        //    CharacterName = PlayerName.StringValue, // The player parameter
+        //    Level = ExperienceLevel.IntValue, // The player parameter
+        //    Gold = Gold.IntValue, // The parameter
+        //    IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
+        //    Comments = ""
+        //};
+        //CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
     }
 
     #endregion
@@ -777,9 +969,8 @@ internal partial class Game
 
     public int TreasureFeeling;
 
-
-    public readonly RefreshMapProperty RefreshMap;
-    public readonly TrackedMonsterChangedProperty TrackedMonsterChanged;
+    public RefreshMapProperty RefreshMap { get; }
+    public TrackedMonsterChangedProperty TrackedMonsterChanged { get; }
 
     private const int LevelFeelDelay = 2500;
     private const int MillisecondsPerTurn = 800;
@@ -799,7 +990,7 @@ internal partial class Game
 
     private DateTime _gameStartDateTime;
     private int _levelEntryTurn;
-    private TimeSpan _tick = new TimeSpan(0, 0, 0, 0, MillisecondsPerTurn);
+    private TimeSpan _tick { get; } = new TimeSpan(0, 0, 0, 0, MillisecondsPerTurn);
 
     public const int DungeonCount = 20; // TODO: Use the Singleton.Dungeons.Count property
 
@@ -807,7 +998,7 @@ internal partial class Game
     /// Returns the maximum level of light that the player is allowed to have.  Returns 5, by default.  The <see cref="UpdateLightFlaggedAction"/> uses a precomputed algorithm for processing the
     /// light-of-sight and which grid locations can get the light.  This algorithm would need to be updated to support further distances.
     /// </summary>
-    public int? MaximumLightLevel { get; set; } = 5;
+    public int? MaximumLightLevel { get; } = 5;
 
     /// <summary>
     /// Returns true, if the player is dead; false, otherwise.
@@ -816,7 +1007,7 @@ internal partial class Game
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
 
-    private DungeonGenerator DungeonGenerator;
+    private DungeonGenerator DungeonGenerator { get; }
 
     /// <summary>
     /// Maximum amount of health that can be drained from an opponent in one turn
@@ -966,12 +1157,11 @@ internal partial class Game
     public const int SafeMaxAttempts = 5000;
 
     public readonly string[] History = new string[4];
-    public readonly int[] MaxDlv = new int[DungeonCount];
     public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
     public int Age;
     public int ArmorClassBonus;
     public int Energy;
-    public readonly ExperienceMultiplierIntProperty ExperienceMultiplier;
+    public ExperienceMultiplierIntProperty ExperienceMultiplier { get; }
 
     public Bonuses Bonuses = new Bonuses(); // Create a new bonuses with default values until the UpdateBonusesFlaggedAction updates it.
 
@@ -982,10 +1172,10 @@ internal partial class Game
     public int Generation; // This is how many times the character name has changed.
     public bool GetFirstLevelMutation;
     
-    public readonly GoldIntProperty Gold;
-    public readonly ManaIntProperty Mana;
-    public readonly MaxManaIntProperty MaxMana;
-    public readonly ExperiencePointsIntProperty ExperiencePoints;
+    public GoldIntProperty Gold { get; }
+    public ManaIntProperty Mana { get; }
+    public MaxManaIntProperty MaxMana { get; }
+    public ExperiencePointsIntProperty ExperiencePoints { get; }
     public int KnownBonusArmorClass;
     public readonly StringProperty PlayerName;
 
@@ -3794,7 +3984,7 @@ internal partial class Game
                     table[z].Index = i;
                     table[z].Level = depth;
                     table[z].BaseProbability = p;
-                    table[z].FilteredProbabiity = p;
+                    table[z].FilteredProbability = p;
                     table[z].FinalProbability = p;
                     aux[depth]++;
                 }
@@ -3840,7 +4030,7 @@ internal partial class Game
                 table[z].Index = i;
                 table[z].Level = x;
                 table[z].BaseProbability = p;
-                table[z].FilteredProbabiity = p;
+                table[z].FilteredProbability = p;
                 table[z].FinalProbability = p;
                 aux[x]++;
             }
@@ -12328,7 +12518,7 @@ internal partial class Game
                 {
                     bool recall = false;
                     boring = false;
-                    string mName = mPtr.IndefinitionWhenVisibleName;
+                    string mName = mPtr.IndefiniteNameWhenVisible;
                     HealthTrack(cPtr.MonsterIndex);
                     HandleStuff();
                     while (!Shutdown)

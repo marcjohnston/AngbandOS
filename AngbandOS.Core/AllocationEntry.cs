@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// An allocation entry for selecting monsters and items
 /// </summary>
 [Serializable]
-internal class AllocationEntry
+internal class AllocationEntry : IGameSerialize
 {
     /// <summary>
     /// The base probability of the entry being chosen
@@ -20,7 +20,7 @@ internal class AllocationEntry
     /// <summary>
     /// The probability of the entry being chosen, after first pass filtering
     /// </summary>
-    public int FilteredProbabiity;
+    public int FilteredProbability;
 
     /// <summary>
     /// The probability of the entry being chosen, after second pass filtering
@@ -36,4 +36,15 @@ internal class AllocationEntry
     /// The level of the monster or item that this entry is for
     /// </summary>
     public int Level;
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(BaseProbability), saveGameState.CreateGameStateBag(BaseProbability)),
+            (nameof(FilteredProbability), saveGameState.CreateGameStateBag(FilteredProbability)),
+            (nameof(FinalProbability), saveGameState.CreateGameStateBag(FinalProbability)),
+            (nameof(Index), saveGameState.CreateGameStateBag(Index)),
+            (nameof(Level), saveGameState.CreateGameStateBag(Level))
+        );
+    }
 }

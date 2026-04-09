@@ -7,10 +7,10 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal sealed class ReadOnlyAttributeSet
+internal sealed class ReadOnlyAttributeSet : IGameSerialize
 {
     private Game Game { get; }
-    public AttributeValue[] Value { get; }
+    public readonly AttributeValue[] Value;
     public ReadOnlyAttributeSet(Game game, AttributeValue[] value)
     {
         Game = game;
@@ -23,5 +23,12 @@ internal sealed class ReadOnlyAttributeSet
         int index = attribute.Index;
         ReadOnlyAttributeValue<T> value = (ReadOnlyAttributeValue<T>)Value[index];
         return value.Value;
+    }
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Value), saveGameState.CreateGameStateBag(Value))
+        );
     }
 }

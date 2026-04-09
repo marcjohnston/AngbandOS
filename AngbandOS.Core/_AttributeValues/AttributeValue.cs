@@ -10,6 +10,7 @@ namespace AngbandOS.Core;
 /// Represents the base class for an attribute value.  There are two flavors: readonly; which maintains a single immutable value and effective; which maintains an algorithmic non-immutable value.
 /// </summary>
 [Serializable]
-internal abstract class AttributeValue
+internal abstract class AttributeValue : IGameSerialize
 {
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

@@ -10,14 +10,28 @@ namespace AngbandOS.Core;
 /// Represents a window into the screen that has been modified.  This window limits how much of the double buffer screen needs to be checked.
 /// </summary>
 [Serializable]
-internal class UpdateWindow
+internal class UpdateWindow : IGameSerialize
 {
+    #region State Data
     public int Y1;
     public int Y2;
     public int[] X1;
     public int[] X2;
     private int Width { get; }
     private int Height { get; }
+    #endregion
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Y1), saveGameState.CreateGameStateBag(Y1)),
+            (nameof(Y2), saveGameState.CreateGameStateBag(Y2)),
+            (nameof(X1), saveGameState.CreateGameStateBag(X1)),
+            (nameof(X2), saveGameState.CreateGameStateBag(X2)),
+            (nameof(Width), saveGameState.CreateGameStateBag(Width)),
+            (nameof(Height), saveGameState.CreateGameStateBag(Height))
+        );
+    }
 
     public UpdateWindow(int width, int height)
     {

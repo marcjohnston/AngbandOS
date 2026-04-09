@@ -7,8 +7,9 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Monster : IItemContainer
+internal class Monster : IItemContainer, IGameSerialize
 {
+    #region State Data
     public int ConfusionLevel;
 
     /// <summary>
@@ -23,26 +24,6 @@ internal class Monster : IItemContainer
     /// </summary>
     private int _fearLevel;
 
-    /// <summary>
-    /// Returns the remaining health points for the monster.  A negative (<0) value means the monster is dead.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
-    /// property, when the tracked monster health changes.
-    /// </summary>
-    public int FearLevel
-    {
-        get
-        {
-            return _fearLevel;
-        }
-        set
-        {
-            _fearLevel = value;
-            if (Game.TrackedMonster.NullMonsterValue == this)
-            {
-                Game.TrackedMonsterChanged.SetChangedFlag();
-            }
-        }
-    }
-
     public List<Item> Items = new List<Item>();
 
     /// <summary>
@@ -56,51 +37,9 @@ internal class Monster : IItemContainer
     private int _health;
 
     /// <summary>
-    /// Returns the remaining health points for the monster.  A negative (<0) value means the monster is dead.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
-    /// property, when the tracked monster health changes.
-    /// </summary>
-    public int Health
-    {
-        get
-        {
-            return _health;
-        }
-        set
-        {
-            _health = value;
-            if (Game.TrackedMonster.NullMonsterValue == this)
-            {
-                Game.TrackedMonsterChanged.SetChangedFlag();
-            }
-        }
-    }
-
-    public int IndividualMonsterFlags;
-
-    /// <summary>
     /// Returns true, if the monster is visible; false, otherwise.
     /// </summary>
     private bool _isVisible;
-
-    /// <summary>
-    /// Returns true, if the monster is visible; false, otherwise.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
-    /// property, when the tracked monster visibility changes.
-    /// </summary>
-    public bool IsVisible
-    {
-        get
-        {
-            return _isVisible;
-        }
-        set
-        {
-            _isVisible = value;
-            if (Game.TrackedMonster.NullMonsterValue == this)
-            {
-                Game.TrackedMonsterChanged.SetChangedFlag();
-            }
-        }
-    }
 
     public int MapX;
     public int MapY;
@@ -111,26 +50,6 @@ internal class Monster : IItemContainer
     private int _maxHealth;
 
     /// <summary>
-    /// Returns the maximum health points for the monster.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
-    /// property, when the tracked monster health changes.
-    /// </summary>
-    public int MaxHealth
-    {
-        get
-        {
-            return _maxHealth;
-        }
-        set
-        {
-            _maxHealth = value;
-            if (Game.TrackedMonster.NullMonsterValue == this)
-            {
-                Game.TrackedMonsterChanged.SetChangedFlag();
-            }
-        }
-    }
-
-    /// <summary>
     /// Returns true, if the monster is a clone via the MultiplyMonster.
     /// </summary>
     public bool SmCloned = false;
@@ -139,26 +58,6 @@ internal class Monster : IItemContainer
     /// Returns the true, if the monster is friendly; false, otherwise.
     /// </summary>
     private bool _isPet;
-
-    /// <summary>
-    /// Returns the true, if the monster is friendly; false, otherwise.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
-    /// property, when the tracked monster health changes.
-    /// </summary>
-    public bool IsPet
-    {
-        get
-        {
-            return _isPet;
-        }
-        set
-        {
-            _isPet = value;
-            if (Game.TrackedMonster.NullMonsterValue == this)
-            {
-                Game.TrackedMonsterChanged.SetChangedFlag();
-            }
-        }
-    }
 
     public bool SmImmAcid = false;
     public bool SmImmCold = false;
@@ -198,6 +97,162 @@ internal class Monster : IItemContainer
     /// </summary>
     private int _sleepLevel;
 
+    public int Speed;
+    public int StolenGold;
+    public int StunLevel;
+    #endregion
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(ConfusionLevel), saveGameState.CreateGameStateBag(ConfusionLevel)),
+            (nameof(DistanceFromPlayer), saveGameState.CreateGameStateBag(DistanceFromPlayer)),
+            (nameof(Energy), saveGameState.CreateGameStateBag(Energy)),
+            (nameof(_fearLevel), saveGameState.CreateGameStateBag(_fearLevel)),
+            (nameof(Items), saveGameState.CreateGameStateBag(Items)),
+            (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
+            (nameof(_health), saveGameState.CreateGameStateBag(_health)),
+            (nameof(_isVisible), saveGameState.CreateGameStateBag(_isVisible)),
+            (nameof(MapX), saveGameState.CreateGameStateBag(MapX)),
+            (nameof(MapY), saveGameState.CreateGameStateBag(MapY)),
+            (nameof(_maxHealth), saveGameState.CreateGameStateBag(_maxHealth)),
+            (nameof(_isPet), saveGameState.CreateGameStateBag(_isPet)),
+            (nameof(SmCloned), saveGameState.CreateGameStateBag(SmCloned)),
+            (nameof(SmImmAcid), saveGameState.CreateGameStateBag(SmImmAcid)),
+            (nameof(SmImmCold), saveGameState.CreateGameStateBag(SmImmCold)),
+            (nameof(SmImmElec), saveGameState.CreateGameStateBag(SmImmElec)),
+            (nameof(SmImmFire), saveGameState.CreateGameStateBag(SmImmFire)),
+            (nameof(SmImmFree), saveGameState.CreateGameStateBag(SmImmFree)),
+            (nameof(SmImmMana), saveGameState.CreateGameStateBag(SmImmMana)),
+            (nameof(SmImmReflect), saveGameState.CreateGameStateBag(SmImmReflect)),
+            (nameof(SmImmXxx5), saveGameState.CreateGameStateBag(SmImmXxx5)),
+            (nameof(SmOppAcid), saveGameState.CreateGameStateBag(SmOppAcid)),
+            (nameof(SmOppCold), saveGameState.CreateGameStateBag(SmOppCold)),
+            (nameof(SmOppElec), saveGameState.CreateGameStateBag(SmOppElec)),
+            (nameof(SmOppFire), saveGameState.CreateGameStateBag(SmOppFire)),
+            (nameof(SmOppPois), saveGameState.CreateGameStateBag(SmOppPois)),
+            (nameof(SmOppXXx1), saveGameState.CreateGameStateBag(SmOppXXx1)),
+            (nameof(SmResAcid), saveGameState.CreateGameStateBag(SmResAcid)),
+            (nameof(SmResBlind), saveGameState.CreateGameStateBag(SmResBlind)),
+            (nameof(SmResChaos), saveGameState.CreateGameStateBag(SmResChaos)),
+            (nameof(SmResCold), saveGameState.CreateGameStateBag(SmResCold)),
+            (nameof(SmResConf), saveGameState.CreateGameStateBag(SmResConf)),
+            (nameof(SmResDark), saveGameState.CreateGameStateBag(SmResDark)),
+            (nameof(SmResDisen), saveGameState.CreateGameStateBag(SmResDisen)),
+            (nameof(SmResElec), saveGameState.CreateGameStateBag(SmResElec)),
+            (nameof(SmResFear), saveGameState.CreateGameStateBag(SmResFear)),
+            (nameof(SmResFire), saveGameState.CreateGameStateBag(SmResFire)),
+            (nameof(SmResLight), saveGameState.CreateGameStateBag(SmResLight)),
+            (nameof(SmResNeth), saveGameState.CreateGameStateBag(SmResNeth)),
+            (nameof(SmResNexus), saveGameState.CreateGameStateBag(SmResNexus)),
+            (nameof(SmResPois), saveGameState.CreateGameStateBag(SmResPois)),
+            (nameof(SmResShard), saveGameState.CreateGameStateBag(SmResShard)),
+            (nameof(SmResSound), saveGameState.CreateGameStateBag(SmResSound))
+        );
+    }
+
+    /// <summary>
+    /// Returns the remaining health points for the monster.  A negative (<0) value means the monster is dead.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
+    /// property, when the tracked monster health changes.
+    /// </summary>
+    public int FearLevel
+    {
+        get
+        {
+            return _fearLevel;
+        }
+        set
+        {
+            _fearLevel = value;
+            if (Game.TrackedMonster.NullMonsterValue == this)
+            {
+                Game.TrackedMonsterChanged.SetChangedFlag();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Returns the remaining health points for the monster.  A negative (<0) value means the monster is dead.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
+    /// property, when the tracked monster health changes.
+    /// </summary>
+    public int Health
+    {
+        get
+        {
+            return _health;
+        }
+        set
+        {
+            _health = value;
+            if (Game.TrackedMonster.NullMonsterValue == this)
+            {
+                Game.TrackedMonsterChanged.SetChangedFlag();
+            }
+        }
+    }
+
+    public int IndividualMonsterFlags;
+
+    /// <summary>
+    /// Returns true, if the monster is visible; false, otherwise.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
+    /// property, when the tracked monster visibility changes.
+    /// </summary>
+    public bool IsVisible
+    {
+        get
+        {
+            return _isVisible;
+        }
+        set
+        {
+            _isVisible = value;
+            if (Game.TrackedMonster.NullMonsterValue == this)
+            {
+                Game.TrackedMonsterChanged.SetChangedFlag();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Returns the maximum health points for the monster.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
+    /// property, when the tracked monster health changes.
+    /// </summary>
+    public int MaxHealth
+    {
+        get
+        {
+            return _maxHealth;
+        }
+        set
+        {
+            _maxHealth = value;
+            if (Game.TrackedMonster.NullMonsterValue == this)
+            {
+                Game.TrackedMonsterChanged.SetChangedFlag();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Returns the true, if the monster is friendly; false, otherwise.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
+    /// property, when the tracked monster health changes.
+    /// </summary>
+    public bool IsPet
+    {
+        get
+        {
+            return _isPet;
+        }
+        set
+        {
+            _isPet = value;
+            if (Game.TrackedMonster.NullMonsterValue == this)
+            {
+                Game.TrackedMonsterChanged.SetChangedFlag();
+            }
+        }
+    }
+
     /// <summary>
     /// Returns the how deep a monster is sleeping.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking
     /// property, when the tracked monster health changes.
@@ -217,10 +272,6 @@ internal class Monster : IItemContainer
             }
         }
     }
-
-    public int Speed;
-    public int StolenGold;
-    public int StunLevel;
     private Game Game { get; }
 
     public Monster(Game game)
@@ -312,9 +363,9 @@ internal class Monster : IItemContainer
     public string VisibleName => MonsterDescription(0x80);
 
     /// <summary>
-    /// Returns the indefinite name fo the monster, when the monster is visible.
+    /// Returns the indefinite name for the monster, when the monster is visible.
     /// </summary>
-    public string IndefinitionWhenVisibleName => MonsterDescription(0x08);
+    public string IndefiniteNameWhenVisible => MonsterDescription(0x08);
 
     /// <summary>
     /// </summary>

@@ -7,12 +7,14 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Target
+internal abstract class Target : IGameSerialize
 {
     /// <summary>
     /// Returns the location of the target; or null, if the target is not valid.
     /// </summary>
     public abstract GridCoordinate? GetTargetLocation();
+
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the monster that is being targeted; or null, if there is no monster being targeted.  Used to detect when the targeted monster is killed so that the target
