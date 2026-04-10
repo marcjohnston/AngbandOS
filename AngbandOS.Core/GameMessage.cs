@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class GameMessage : IGameMessage
+internal class GameMessage : IGameMessage, IGameSerialize
 {
     public int Count { get; set; }
     public string Text { get; }
@@ -15,5 +15,13 @@ internal class GameMessage : IGameMessage
     {
         Text = text;
         Count = 1;
+    }
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Text), saveGameState.CreateGameStateBag(Text)),
+            (nameof(Count), saveGameState.CreateGameStateBag(Count))
+        );
     }
 }

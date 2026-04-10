@@ -10,14 +10,24 @@ namespace AngbandOS.Core;
 /// A simple immutable coordinate, stored in a reference type so it can be passed from function to function.
 /// </summary>
 [Serializable]
-internal class GridCoordinate
+internal class GridCoordinate : IGameSerialize
 {
-    public int X { get; }
-    public int Y { get; }
+    #region State Data
+    public readonly int X;
+    public readonly int Y;
+    #endregion
 
     public GridCoordinate Clone()
     {
         return new GridCoordinate(X, Y);
+    }
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(X), saveGameState.CreateGameStateBag(X)),
+            (nameof(Y), saveGameState.CreateGameStateBag(Y))
+        );
     }
 
     public GridCoordinate(int x, int y)

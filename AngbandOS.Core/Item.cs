@@ -11,9 +11,60 @@ namespace AngbandOS.Core;
 /// single parent (or factory) that controls what type of object the item is.
 /// </summary>
 [Serializable]
-internal sealed class Item : IComparable<Item>
+internal sealed class Item : IComparable<Item>, IGameSerialize
 {
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(FixedArtifact), saveGameState.CreateGameStateBag(FixedArtifact)),
+            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet)),
+            (nameof(_factory), saveGameState.CreateGameStateBag(_factory)),
+            (nameof(NutritionalValue), saveGameState.CreateGameStateBag(NutritionalValue)),
+            (nameof(Color), saveGameState.CreateGameStateBag(Color)),
+            (nameof(IdentSense), saveGameState.CreateGameStateBag(IdentSense)),
+            (nameof(IdentFixed), saveGameState.CreateGameStateBag(IdentFixed)),
+            (nameof(IdentEmpty), saveGameState.CreateGameStateBag(IdentEmpty)),
+            (nameof(IdentityIsKnown), saveGameState.CreateGameStateBag(IdentityIsKnown)),
+            (nameof(IdentityIsStoreBought), saveGameState.CreateGameStateBag(IdentityIsStoreBought)),
+            (nameof(IdentMental), saveGameState.CreateGameStateBag(IdentMental)),
+            (nameof(StackCount), saveGameState.CreateGameStateBag(StackCount)),
+            (nameof(Discount), saveGameState.CreateGameStateBag(Discount)),
+            (nameof(HoldingMonsterIndex), saveGameState.CreateGameStateBag(HoldingMonsterIndex)),
+            (nameof(Inscription), saveGameState.CreateGameStateBag(Inscription)),
+            (nameof(WasNoticed), saveGameState.CreateGameStateBag(WasNoticed)),
+            (nameof(ActivationRechargeTimeRemaining), saveGameState.CreateGameStateBag(ActivationRechargeTimeRemaining)),
+            (nameof(ContainerTraps), saveGameState.CreateGameStateBag(ContainerTraps)),
+            (nameof(LevelOfObjectsInContainer), saveGameState.CreateGameStateBag(LevelOfObjectsInContainer)),
+            (nameof(ContainerIsOpen), saveGameState.CreateGameStateBag(ContainerIsOpen)),
+            (nameof(StaffChargesRemaining), saveGameState.CreateGameStateBag(StaffChargesRemaining)),
+            (nameof(WandChargesRemaining), saveGameState.CreateGameStateBag(WandChargesRemaining)),
+            (nameof(RodRechargeTimeRemaining), saveGameState.CreateGameStateBag(RodRechargeTimeRemaining)),
+            (nameof(X), saveGameState.CreateGameStateBag(X)),
+            (nameof(Y), saveGameState.CreateGameStateBag(Y)),
+            (nameof(TurnsOfLightRemaining), saveGameState.CreateGameStateBag(TurnsOfLightRemaining)),
+            (nameof(GoldPieces), saveGameState.CreateGameStateBag(GoldPieces)),
+            (nameof(RandomArtifactName), saveGameState.CreateGameStateBag(X))
+        );
+    }
+
     #region State Data - Fields that are maintained
+    public FixedArtifact? FixedArtifact = null;
+
+    public readonly EffectiveAttributeSet EffectiveAttributeSet;
+
+    /// <summary>
+    /// Returns the factory that created this item.  All of the initial state data is retrieved from the <see cref="ItemFactory"/>when the <see cref="Item"/> is created.  We preserve this <see cref="ItemFactory"/>
+    /// because the factory provides some methods but eventually, these methods will become customizable scripts that the <see cref="Item"/> will take copies of when the <see cref="Item"/> is constructed.  At 
+    /// that point, the <see cref="ItemFactory"/> will no longer be needed after construction.
+    /// </summary>
+    private ItemFactory _factory;
+
+    /// <summary>
+    /// Returns the nutritional value in turns provided to the player, when eaten.
+    /// </summary>
+    public readonly int NutritionalValue;
+    public ColorEnum Color { get; set; }
+
     /// <summary>
     /// Returns true, if the player has sensed the item.  Item characteristics that can be sensed are <see cref="IsCursed"/> and <see cref="Valueless"/> (maybe <see cref="IsArtifact"/> too?)
     /// </summary>
@@ -89,7 +140,6 @@ internal sealed class Item : IComparable<Item>
 
     public int X;
     public int Y;
-    private Game Game { get; }
 
     // All of these properties are initially set by the Factory.
     public int TurnsOfLightRemaining;
@@ -104,6 +154,8 @@ internal sealed class Item : IComparable<Item>
     /// </summary>
     public string? RandomArtifactName = null;
     #endregion
+
+    private Game Game { get; }
 
     #region API Methods
     public Item TakeFromStack(int count)
@@ -164,11 +216,6 @@ internal sealed class Item : IComparable<Item>
     public bool NegativeBonusDamageRepresentsBroken => _factory.NegativeBonusDamageRepresentsBroken;
     public bool NegativeBonusArmorClassRepresentsBroken => _factory.NegativeBonusArmorClassRepresentsBroken;
     public bool NegativeBonusHitRepresentsBroken => _factory.NegativeBonusHitRepresentsBroken;
-
-    /// <summary>
-    /// Returns the nutritional value in turns provided to the player, when eaten.
-    /// </summary>
-    public int NutritionalValue { get; private set; }
 
     private int BaseValue => _factory.BaseValue;
     public Realm Realm => _factory.Realm;
@@ -1575,7 +1622,6 @@ internal sealed class Item : IComparable<Item>
     }
     #endregion
 
-    public ColorEnum Color { get; set; }
 
     #region Constructors
     /// <summary>
@@ -1664,17 +1710,6 @@ internal sealed class Item : IComparable<Item>
     #endregion
 
     #region Item Properties Management
-    public FixedArtifact? FixedArtifact = null;
-
-    public readonly EffectiveAttributeSet EffectiveAttributeSet;
-
-    /// <summary>
-    /// Returns the factory that created this item.  All of the initial state data is retrieved from the <see cref="ItemFactory"/>when the <see cref="Item"/> is created.  We preserve this <see cref="ItemFactory"/>
-    /// because the factory provides some methods but eventually, these methods will become customizable scripts that the <see cref="Item"/> will take copies of when the <see cref="Item"/> is constructed.  At 
-    /// that point, the <see cref="ItemFactory"/> will no longer be needed after construction.
-    /// </summary>
-    private ItemFactory _factory;
-
     /// <summary>
     /// Returns the factory for this item.  This method is being used for <see cref="ItemFilter"/> classes and should not be used directly.
     /// </summary>

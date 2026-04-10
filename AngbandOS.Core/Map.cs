@@ -10,7 +10,7 @@ namespace AngbandOS.Core;
 /// Represents the map of a single level.  Encapsulates all interactions so that changes to the map can be tracked.
 /// </summary>
 [Serializable]
-internal class Map
+internal class Map : IGameSerialize
 {
     private Game Game { get; }
     public Map(Game game)
@@ -23,7 +23,7 @@ internal class Map
     public void Initialize()
     {
         TrapsDetectedProperty trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty));
-        Tile grassTile = Game.GetGrassTile;
+        Tile grassTile = Game.GrassTile;
         Tile dungeonFloorTile = Game.SingletonRepository.Get<Tile>(nameof(DungeonFloorTile));
         Tile towerFloorTile = Game.SingletonRepository.Get<Tile>(nameof(TowerFloorTile));
         Tile nothingTile = Game.SingletonRepository.Get<Tile>(nameof(NothingTile));
@@ -45,5 +45,12 @@ internal class Map
                 }
             }
         }
+    }
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Grid), saveGameState.CreateGameStateBag(Grid))
+        );
     }
 }

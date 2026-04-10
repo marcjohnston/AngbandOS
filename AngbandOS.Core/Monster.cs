@@ -100,6 +100,8 @@ internal class Monster : IItemContainer, IGameSerialize
     public int Speed;
     public int StolenGold;
     public int StunLevel;
+    public int IndividualMonsterFlags;
+
     #endregion
 
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
@@ -147,7 +149,14 @@ internal class Monster : IItemContainer, IGameSerialize
             (nameof(SmResNexus), saveGameState.CreateGameStateBag(SmResNexus)),
             (nameof(SmResPois), saveGameState.CreateGameStateBag(SmResPois)),
             (nameof(SmResShard), saveGameState.CreateGameStateBag(SmResShard)),
-            (nameof(SmResSound), saveGameState.CreateGameStateBag(SmResSound))
+            (nameof(SmResSound), saveGameState.CreateGameStateBag(SmResSound)),
+            (nameof(Race), saveGameState.CreateGameStateBag(Race)),
+            (nameof(_sleepLevel), saveGameState.CreateGameStateBag(_sleepLevel)),
+            (nameof(Speed), saveGameState.CreateGameStateBag(Speed)),
+            (nameof(StolenGold), saveGameState.CreateGameStateBag(StolenGold)),
+            (nameof(StunLevel), saveGameState.CreateGameStateBag(StunLevel)),
+            (nameof(IndividualMonsterFlags), saveGameState.CreateGameStateBag(IndividualMonsterFlags))
+
         );
     }
 
@@ -190,8 +199,6 @@ internal class Monster : IItemContainer, IGameSerialize
             }
         }
     }
-
-    public int IndividualMonsterFlags;
 
     /// <summary>
     /// Returns true, if the monster is visible; false, otherwise.  This property add change tracking when set to update the <see cref="Game.TrackedMonsterChanged"/> change tracking

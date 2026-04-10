@@ -30,19 +30,19 @@ internal class CreateStairsScript : Script, IScript, ICastSpellScript
         Game.DeleteObject(Game.MapY.IntValue, Game.MapX.IntValue);
         if (Game.CurrentDepth <= 0)
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.GetDownStaircaseTile);
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.DownStaircaseTile);
         }
         else if (Game.IsQuest(Game.CurrentDepth) || Game.CurrentDepth >= Game.CurDungeon.MaxLevel)
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.CurDungeon.Tower ? Game.GetDownStaircaseTile : Game.GetUpStaircaseTile);
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.CurDungeon.Tower ? Game.DownStaircaseTile : Game.UpStaircaseTile);
         }
         else if (Game.RandomLessThan(100) < 50)
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.GetDownStaircaseTile);
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.DownStaircaseTile);
         }
         else
         {
-            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.GetUpStaircaseTile);
+            Game.CaveSetFeat(Game.MapY.IntValue, Game.MapX.IntValue, Game.UpStaircaseTile);
         }
     }
     public string LearnedDetails => "";

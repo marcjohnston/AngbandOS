@@ -15,8 +15,18 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
     protected readonly List<(string Key, int Modifier)> _attributeModifiers = new List<(string, int)>();
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
+        // Serialize the tuples.
+        GameStateBag[] tupleGameStateBags = _attributeModifiers.Select(_attributeModifier => new DictionaryGameStateBag(
+                (nameof(_attributeModifier.Key), saveGameState.CreateGameStateBag(_attributeModifier.Key)),
+                (nameof(_attributeModifier.Modifier), saveGameState.CreateGameStateBag(_attributeModifier.Modifier))
+        )).ToArray();
+
+        // Put the tuples into a list.
+        GameStateBag listOfTuplesGameStateBag = new ListGameStateBag(tupleGameStateBags);
+
+        // Return the dictionary of the values.
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(_attributeModifiers), saveGameState.CreateGameStateBag(_attributeModifiers))
+            (nameof(_attributeModifiers), listOfTuplesGameStateBag)
         );
     }
     public SumEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }

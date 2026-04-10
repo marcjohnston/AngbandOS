@@ -13,9 +13,6 @@ namespace AngbandOS.Core;
 [Serializable]
 internal partial class Game
 {
-    private const string SingletonGameStateBagKey = "SingletonRepository";
-    private const string GameGameStateBagKey = "Game";
-
     #region Code Altering Property Management for Development Purposes Only
     public string Find(string folder, string filenameWithoutExtension)
     {
@@ -89,6 +86,7 @@ internal partial class Game
     public DictionaryGameStateBag Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
+            (nameof(SingletonRepository), SingletonRepository.Serialize(saveGameState)),
             (nameof(IsBirthday), new BoolValueGameStateBag(IsBirthday)),
             (nameof(IsDawn), new BoolValueGameStateBag(IsDawn)),
             (nameof(IsDusk), new BoolValueGameStateBag(IsDusk)),
@@ -207,6 +205,7 @@ internal partial class Game
             (nameof(MutationsPossessed), saveGameState.CreateGameStateBag(MutationsPossessed)),
             (nameof(TreasureFeeling), new IntValueGameStateBag(TreasureFeeling)),
             (nameof(_birthday), new IntValueGameStateBag(_birthday)),
+            (nameof(CurrentGameDateTime), saveGameState.CreateGameStateBag(CurrentGameDateTime)),
             (nameof(_currentTurn), new IntValueGameStateBag(_currentTurn)),
             (nameof(_dawn), new DateTimeValueGameStateBag(_dawn)),
             (nameof(_dusk), new DateTimeValueGameStateBag(_dusk)),
@@ -265,8 +264,8 @@ internal partial class Game
             (nameof(PlayerHp), saveGameState.CreateGameStateBag(PlayerHp)),
             (nameof(Age), saveGameState.CreateGameStateBag(Age)),
             (nameof(ArmorClassBonus), saveGameState.CreateGameStateBag(ArmorClassBonus)),
-
             (nameof(Energy), saveGameState.CreateGameStateBag(Energy)),
+            (nameof(ExperienceMultiplier), saveGameState.CreateGameStateBag(ExperienceMultiplier)),
             (nameof(Bonuses), saveGameState.CreateGameStateBag(Bonuses)),
             (nameof(FractionalExperiencePoints), saveGameState.CreateGameStateBag(FractionalExperiencePoints)),
             (nameof(FractionalHealth), saveGameState.CreateGameStateBag(FractionalHealth)),
@@ -274,16 +273,88 @@ internal partial class Game
             (nameof(Gender), saveGameState.CreateGameStateBag(Gender)),
             (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
             (nameof(GetFirstLevelMutation), saveGameState.CreateGameStateBag(GetFirstLevelMutation)),
-            (nameof(KnownBonusArmorClass), saveGameState.CreateGameStateBag(KnownBonusArmorClass))
-       );
-    }
+            (nameof(Gold), saveGameState.CreateGameStateBag(Gold)),
+            (nameof(Mana), saveGameState.CreateGameStateBag(Mana)),
+            (nameof(MaxMana), saveGameState.CreateGameStateBag(MaxMana)),
+            (nameof(ExperiencePoints), saveGameState.CreateGameStateBag(ExperiencePoints)),
+            (nameof(KnownBonusArmorClass), saveGameState.CreateGameStateBag(KnownBonusArmorClass)),
+            (nameof(PlayerName), saveGameState.CreateGameStateBag(PlayerName)),
+            (nameof(Speed), saveGameState.CreateGameStateBag(Speed)),
+            (nameof(SpareSpellSlots), saveGameState.CreateGameStateBag(SpareSpellSlots)),
+            (nameof(ConsoleView), saveGameState.CreateGameStateBag(ConsoleView)),
+            (nameof(Health), saveGameState.CreateGameStateBag(Health)),
+            (nameof(MaxHealth), saveGameState.CreateGameStateBag(MaxHealth)),
+            (nameof(Food), saveGameState.CreateGameStateBag(Food)),
+            (nameof(ExperienceLevel), saveGameState.CreateGameStateBag(ExperienceLevel)),
+            (nameof(GooPatron), saveGameState.CreateGameStateBag(GooPatron)),
+            (nameof(IsWinner), saveGameState.CreateGameStateBag(IsWinner)),
+            (nameof(IsWizard), saveGameState.CreateGameStateBag(IsWizard)),
+            (nameof(LightLevel), saveGameState.CreateGameStateBag(LightLevel)),
+            (nameof(MapX), saveGameState.CreateGameStateBag(MapX)),
+            (nameof(MapY), saveGameState.CreateGameStateBag(MapY)),
+            (nameof(MaxExperienceGained), saveGameState.CreateGameStateBag(MaxExperienceGained)),
+            (nameof(MaxLevelGained), saveGameState.CreateGameStateBag(MaxLevelGained)),
+            (nameof(MeleeAttacksPerRound), saveGameState.CreateGameStateBag(MeleeAttacksPerRound)),
+            (nameof(MissileAttacksPerRound), saveGameState.CreateGameStateBag(MissileAttacksPerRound)),
+            (nameof(OldSpareSpellSlots), saveGameState.CreateGameStateBag(OldSpareSpellSlots)),
+            (nameof(CharacterClass), saveGameState.CreateGameStateBag(CharacterClass)),
+            (nameof(Race), saveGameState.CreateGameStateBag(Race)),
+            (nameof(RaceAtBirth), saveGameState.CreateGameStateBag(RaceAtBirth)),
+            (nameof(PrimaryRealm), saveGameState.CreateGameStateBag(PrimaryRealm)),
+            (nameof(SecondaryRealm), saveGameState.CreateGameStateBag(SecondaryRealm)),
+            (nameof(TownWithHouse), saveGameState.CreateGameStateBag(TownWithHouse)),
+            (nameof(Weight), saveGameState.CreateGameStateBag(Weight)),
+            (nameof(WeightCarried), saveGameState.CreateGameStateBag(WeightCarried)),
+            (nameof(WildernessX), saveGameState.CreateGameStateBag(WildernessX)),
+            (nameof(WildernessY), saveGameState.CreateGameStateBag(WildernessY)),
+            (nameof(WordOfRecallDelay), saveGameState.CreateGameStateBag(WordOfRecallDelay)),
+            (nameof(Map), saveGameState.CreateGameStateBag(Map)),
+            (nameof(TempX), saveGameState.CreateGameStateBag(TempX)),
+            (nameof(TempY), saveGameState.CreateGameStateBag(TempY)),
+            (nameof(CurHgt), saveGameState.CreateGameStateBag(CurHgt)),
+            (nameof(CurWid), saveGameState.CreateGameStateBag(CurWid)),
+            (nameof(DangerFeeling), saveGameState.CreateGameStateBag(DangerFeeling)),
+            (nameof(DangerRating), saveGameState.CreateGameStateBag(DangerRating)),
+            (nameof(MaxPanelCols), saveGameState.CreateGameStateBag(MaxPanelCols)),
+            (nameof(MaxPanelRows), saveGameState.CreateGameStateBag(MaxPanelRows)),
+            (nameof(MCnt), saveGameState.CreateGameStateBag(MCnt)),
+            (nameof(MonsterMax), saveGameState.CreateGameStateBag(MonsterMax)),
+            (nameof(MonsterLevel), saveGameState.CreateGameStateBag(MonsterLevel)),
+            (nameof(PanelCol), saveGameState.CreateGameStateBag(PanelCol)),
+            (nameof(PanelRow), saveGameState.CreateGameStateBag(PanelRow)),
+            (nameof(PanelColMax), saveGameState.CreateGameStateBag(PanelColMax)),
+            (nameof(PanelColMin), saveGameState.CreateGameStateBag(PanelColMin)),
+            (nameof(PanelRowMax), saveGameState.CreateGameStateBag(PanelRowMax)),
+            (nameof(PanelRowMin), saveGameState.CreateGameStateBag(PanelRowMin)),
+            (nameof(SpecialDanger), saveGameState.CreateGameStateBag(SpecialDanger)),
+            (nameof(TempN), saveGameState.CreateGameStateBag(TempN)),
+            (nameof(Light), saveGameState.CreateGameStateBag(Light)),
+            (nameof(View), saveGameState.CreateGameStateBag(View)),
+            (nameof(CurrentlyActingMonster), saveGameState.CreateGameStateBag(CurrentlyActingMonster)),
+            (nameof(DunBias), saveGameState.CreateGameStateBag(DunBias)),
+            (nameof(NumRepro), saveGameState.CreateGameStateBag(NumRepro)),
+            (nameof(RepairMonsters), saveGameState.CreateGameStateBag(RepairMonsters)),
+            (nameof(ShimmerMonsters), saveGameState.CreateGameStateBag(ShimmerMonsters)),
+            (nameof(Monsters), saveGameState.CreateGameStateBag(Monsters)),
+            (nameof(_hackMIdxIi), saveGameState.CreateGameStateBag(_hackMIdxIi)),
+            (nameof(StartupTownName), saveGameState.CreateGameStateBag(StartupTownName)),
+            (nameof(GoldFactories), saveGameState.CreateGameStateBag(GoldFactories)),
+            (nameof(MessageLog), saveGameState.CreateGameStateBag(MessageLog)),
+            (nameof(RecentMessages), saveGameState.CreateGameStateBag(RecentMessages)),
+            (nameof(PreviousMessages), saveGameState.CreateGameStateBag(PreviousMessages)),
+            (nameof(GameMessage), saveGameState.CreateGameStateBag(GameMessage)),
+            (nameof(MessageFirstQueueIndex), saveGameState.CreateGameStateBag(MessageFirstQueueIndex)),
+            (nameof(_prevCharacterClass), saveGameState.CreateGameStateBag(_prevCharacterClass)),
+            (nameof(_prevGeneration), saveGameState.CreateGameStateBag(_prevGeneration)),
+            (nameof(_prevName), saveGameState.CreateGameStateBag(_prevName)),
+            (nameof(_prevRace), saveGameState.CreateGameStateBag(_prevRace)),
 
-    public GameStateBag Save()
-    {
-        SaveGameState saveGameState = new SaveGameState();
-        DictionaryGameStateBag singletonRepositoryGameStateBag = SingletonRepository.Serialize(saveGameState);
-        DictionaryGameStateBag gameGameStateBag = Serialize(saveGameState);
-        return new DictionaryGameStateBag((nameof(SingletonRepository), singletonRepositoryGameStateBag), (nameof(Game), gameGameStateBag));
+            (nameof(_prevPrimaryRealm), saveGameState.CreateGameStateBag(_prevPrimaryRealm)),
+            (nameof(_prevSecondaryRealm), saveGameState.CreateGameStateBag(_prevSecondaryRealm)),
+            (nameof(_prevSex), saveGameState.CreateGameStateBag(_prevSex)),
+            (nameof(Inventory), saveGameState.CreateGameStateBag(Inventory)),
+            (nameof(_invenCnt), saveGameState.CreateGameStateBag(_invenCnt))
+       );
     }
 
     /// <summary>
@@ -414,7 +485,7 @@ internal partial class Game
 
         // Load all of the predefined objects.  The singleton repository must already be created.
         DateTime startTime = DateTime.Now;
-        GameStateBag? singletonRepositoryGameStateBag = dictionaryGameStateBag?.Values[SingletonGameStateBagKey];
+        GameStateBag? singletonRepositoryGameStateBag = dictionaryGameStateBag?.Values[nameof(SingletonRepository)];
         if (singletonRepositoryGameStateBag is not null)
         {
             if (singletonRepositoryGameStateBag is not DictionaryGameStateBag singletonDictionaryRepositoryGameStateBag)
@@ -450,6 +521,12 @@ internal partial class Game
         {
             SingletonRepository.LoadAndBind(gameConfiguration, null);
         }
+
+        DownStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsDownStaircase);
+        UpStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsUpStaircase);
+        GrassTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsGrass);
+        RockTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsRock);
+        WaterTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsWater);
 
         IsDead = true;
         Map = new Map(this);
@@ -1161,7 +1238,7 @@ internal partial class Game
     public int Age;
     public int ArmorClassBonus;
     public int Energy;
-    public ExperienceMultiplierIntProperty ExperienceMultiplier { get; }
+    public readonly ExperienceMultiplierIntProperty ExperienceMultiplier;
 
     public Bonuses Bonuses = new Bonuses(); // Create a new bonuses with default values until the UpdateBonusesFlaggedAction updates it.
 
@@ -1171,11 +1248,11 @@ internal partial class Game
     public Gender? Gender = null; // The gender will be null until the player has selected the gender.
     public int Generation; // This is how many times the character name has changed.
     public bool GetFirstLevelMutation;
-    
-    public GoldIntProperty Gold { get; }
-    public ManaIntProperty Mana { get; }
-    public MaxManaIntProperty MaxMana { get; }
-    public ExperiencePointsIntProperty ExperiencePoints { get; }
+
+    public readonly GoldIntProperty Gold;
+    public readonly ManaIntProperty Mana;
+    public readonly MaxManaIntProperty MaxMana;
+    public readonly ExperiencePointsIntProperty ExperiencePoints;
     public int KnownBonusArmorClass;
     public readonly StringProperty PlayerName;
 
@@ -1332,7 +1409,7 @@ internal partial class Game
     /// <summary>
     /// 0=South, 1=North, 2=East, 3=West, 4=SE, 5=SW, 6=NE, 7=NW, 8=0,0
     /// </summary>
-    public readonly int[] OrderedDirectionYOffset = { 1, -1, 0, 0, 1, 1, -1, -1, 0 };
+    public int[] OrderedDirectionYOffset { get; } = { 1, -1, 0, 0, 1, 1, -1, -1, 0 };
 
     public readonly int[] TempX = new int[Constants.TempMax]; // TODO: Use CursorPositon and combine TempX and TempY into a list to absolve TempN
     public readonly int[] TempY = new int[Constants.TempMax]; // TODO: These are shared privates??? what a hack
@@ -1413,7 +1490,7 @@ internal partial class Game
     /// <summary>
     /// Returns the maximum number of messages that can be stored in the message log.  Once this log size has been filled, the oldest messages will be deleted.
     /// </summary>
-    public readonly int? MaxMessageLogLength = 2048;
+    public int? MaxMessageLogLength { get; } = 2048;
 
     /// <summary>
     /// Returns the name of the town that the player will start in; or null, for a random eligible town to be selected.  Returns null, by default.
@@ -1428,7 +1505,7 @@ internal partial class Game
     /// <summary>
     /// Returns the one-in-probability that found gold is great.
     /// </summary>
-    public readonly ProbabilityExpression GoldItemIsGreatProbability;
+    public ProbabilityExpression GoldItemIsGreatProbability { get; }
 
     /// <summary>
     /// Returns an <see cref="IntegerExpression"/> from an expression computation.  A type-conversion from a decimal result to an integer result is performed as needed.  If the result is not
@@ -1456,7 +1533,7 @@ internal partial class Game
         return expression.Compute<DecimalExpression>(IntegerToDecimalExpressionTypeConverter);
     }
 
-    public readonly PackWieldSlot PackWieldSlot;
+    public PackWieldSlot PackWieldSlot { get; }
     public void RenderView(View view)
     {
         ConsoleView = view;
@@ -3439,7 +3516,7 @@ internal partial class Game
                 }
                 DeleteObject(y, x);
                 MsgPrint("A magical stairway appears...");
-                CaveSetFeat(y, x, CurDungeon.Tower ? GetUpStaircaseTile : GetDownStaircaseTile);
+                CaveSetFeat(y, x, CurDungeon.Tower ? UpStaircaseTile : DownStaircaseTile);
                 SingletonRepository.Get<FlaggedAction>(nameof(UpdateScentFlaggedAction)).Set();
                 SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
                 SingletonRepository.Get<FlaggedAction>(nameof(UpdateLightFlaggedAction)).Set();
@@ -3804,7 +3881,7 @@ internal partial class Game
             if (CaveValidBold(MapY.IntValue, MapX.IntValue))
             {
                 DeleteObject(MapY.IntValue, MapX.IntValue);
-                CaveSetFeat(MapY.IntValue, MapX.IntValue, CreateDownStair ? GetDownStaircaseTile : GetUpStaircaseTile);
+                CaveSetFeat(MapY.IntValue, MapX.IntValue, CreateDownStair ? DownStaircaseTile : UpStaircaseTile);
             }
             CreateDownStair = false;
             CreateUpStair = false;
@@ -8916,7 +8993,7 @@ internal partial class Game
     /// <summary>
     /// Returns the maximum elapsed time to submit a replay keystroke or null, to impose no limit.
     /// </summary>
-    public TimeSpan? MaxKeystrokeReplayElapsedTime = new TimeSpan(0, 0, 0, 0, 0);
+    public TimeSpan? MaxKeystrokeReplayElapsedTime { get; } = new TimeSpan(0, 0, 0, 0, 0);
 
     public void RecordReplayStep(char keystroke)
     {
@@ -10541,70 +10618,15 @@ internal partial class Game
         }
     }
 
-    private Tile? _downStaircaseTile = null;
-    public Tile GetDownStaircaseTile
-    {
-        get
-        {
-            if (_downStaircaseTile == null)
-            {
-                _downStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsDownStaircase);
-            }
-            return _downStaircaseTile;
-        }
-    }
+    public Tile DownStaircaseTile { get; }
 
-    private Tile? _upStaircaseTile = null;
-    public Tile GetUpStaircaseTile
-    {
-        get
-        {
-            if (_upStaircaseTile == null)
-            {
-                _upStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsUpStaircase);
-            }
-            return _upStaircaseTile;
-        }
-    }
+    public Tile UpStaircaseTile { get; }
 
-    private Tile? _grassTile = null;
-    public Tile GetGrassTile
-    {
-        get
-        {
-            if (_grassTile == null)
-            {
-                _grassTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsGrass);
-            }
-            return _grassTile;
-        }
-    }
+    public Tile GrassTile { get; }
 
-    private Tile? _rockTile = null;
-    public Tile GetRockTile
-    {
-        get
-        {
-            if (_rockTile == null)
-            {
-                _rockTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsRock);
-            }
-            return _rockTile;
-        }
-    }
+    public Tile RockTile { get; }
 
-    private Tile? _waterTile = null;
-    public Tile GetWaterTile
-    {
-        get
-        {
-            if (_waterTile == null)
-            {
-                _waterTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsWater);
-            }
-            return _waterTile;
-        }
-    }
+    public Tile WaterTile { get; }
 
     private void MakeDungeonEntrance(int left, int top, int width, int height, out int stairX, out int stairY)
     {
@@ -10627,7 +10649,7 @@ internal partial class Game
         Map.Grid[y - 1][x + 1].RevertToBackground();
         Map.Grid[y][x - 2].RevertToBackground();
         Map.Grid[y][x - 1].RevertToBackground();
-        Map.Grid[y][x].SetFeature(GetDownStaircaseTile);
+        Map.Grid[y][x].SetFeature(DownStaircaseTile);
         stairX = x;
         stairY = y;
         Map.Grid[y][x + 1].RevertToBackground();
@@ -10644,90 +10666,90 @@ internal partial class Game
         int midY = top + (height / 2);
         for (int y = midY - 3; y < midY + 3; y++)
         {
-            Map.Grid[y][midX - 7].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX - 7].SetFeature(GetGrassTile);
+            Map.Grid[y][midX - 7].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX - 7].SetFeature(GrassTile);
         }
         for (int y = midY - 5; y < midY + 5; y++)
         {
-            Map.Grid[y][midX - 6].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX - 6].SetFeature(GetGrassTile);
+            Map.Grid[y][midX - 6].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX - 6].SetFeature(GrassTile);
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Map.Grid[y][midX - 5].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX - 5].SetFeature(GetGrassTile);
+            Map.Grid[y][midX - 5].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX - 5].SetFeature(GrassTile);
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Map.Grid[y][midX - 4].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX - 4].SetFeature(GetGrassTile);
+            Map.Grid[y][midX - 4].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX - 4].SetFeature(GrassTile);
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Map.Grid[y][midX - 3].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX - 3].SetFeature(GetGrassTile);
+            Map.Grid[y][midX - 3].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX - 3].SetFeature(GrassTile);
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Map.Grid[y][midX - 2].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX - 2].SetFeature(GetGrassTile);
+            Map.Grid[y][midX - 2].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX - 2].SetFeature(GrassTile);
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Map.Grid[y][midX - 1].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX - 1].SetFeature(GetGrassTile);
+            Map.Grid[y][midX - 1].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX - 1].SetFeature(GrassTile);
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Map.Grid[y][midX].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX].SetFeature(GetGrassTile);
+            Map.Grid[y][midX].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX].SetFeature(GrassTile);
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Map.Grid[y][midX + 1].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX + 1].SetFeature(GetGrassTile);
+            Map.Grid[y][midX + 1].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX + 1].SetFeature(GrassTile);
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Map.Grid[y][midX + 2].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX + 2].SetFeature(GetGrassTile);
+            Map.Grid[y][midX + 2].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX + 2].SetFeature(GrassTile);
         }
         for (int y = midY - 7; y < midY + 6; y++)
         {
-            Map.Grid[y][midX + 3].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX + 3].SetFeature(GetGrassTile);
+            Map.Grid[y][midX + 3].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX + 3].SetFeature(GrassTile);
         }
         for (int y = midY - 6; y < midY + 6; y++)
         {
-            Map.Grid[y][midX + 4].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX + 4].SetFeature(GetGrassTile);
+            Map.Grid[y][midX + 4].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX + 4].SetFeature(GrassTile);
         }
         for (int y = midY - 5; y < midY + 5; y++)
         {
-            Map.Grid[y][midX + 5].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX + 5].SetFeature(GetGrassTile);
+            Map.Grid[y][midX + 5].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX + 5].SetFeature(GrassTile);
         }
         for (int y = midY - 3; y < midY + 3; y++)
         {
-            Map.Grid[y][midX + 6].SetBackgroundFeature(GetGrassTile);
-            Map.Grid[y][midX + 6].SetFeature(GetGrassTile);
+            Map.Grid[y][midX + 6].SetBackgroundFeature(GrassTile);
+            Map.Grid[y][midX + 6].SetFeature(GrassTile);
         }
-        Map.Grid[midY - 6][midX].SetFeature(GetRockTile);
-        Map.Grid[midY - 6][midX - 1].SetFeature(GetRockTile);
-        Map.Grid[midY - 5][midX - 4].SetFeature(GetRockTile);
-        Map.Grid[midY - 4][midX - 5].SetFeature(GetRockTile);
-        Map.Grid[midY - 1][midX - 6].SetFeature(GetRockTile);
-        Map.Grid[midY][midX - 6].SetFeature(GetRockTile);
-        Map.Grid[midY + 3][midX - 5].SetFeature(GetRockTile);
-        Map.Grid[midY + 4][midX - 4].SetFeature(GetRockTile);
-        Map.Grid[midY + 5][midX - 1].SetFeature(GetRockTile);
-        Map.Grid[midY + 5][midX].SetFeature(GetRockTile);
-        Map.Grid[midY + 4][midX + 3].SetFeature(GetRockTile);
-        Map.Grid[midY + 3][midX + 4].SetFeature(GetRockTile);
-        Map.Grid[midY][midX + 5].SetFeature(GetRockTile);
-        Map.Grid[midY - 1][midX + 5].SetFeature(GetRockTile);
-        Map.Grid[midY - 4][midX + 4].SetFeature(GetRockTile);
-        Map.Grid[midY - 5][midX + 3].SetFeature(GetRockTile);
+        Map.Grid[midY - 6][midX].SetFeature(RockTile);
+        Map.Grid[midY - 6][midX - 1].SetFeature(RockTile);
+        Map.Grid[midY - 5][midX - 4].SetFeature(RockTile);
+        Map.Grid[midY - 4][midX - 5].SetFeature(RockTile);
+        Map.Grid[midY - 1][midX - 6].SetFeature(RockTile);
+        Map.Grid[midY][midX - 6].SetFeature(RockTile);
+        Map.Grid[midY + 3][midX - 5].SetFeature(RockTile);
+        Map.Grid[midY + 4][midX - 4].SetFeature(RockTile);
+        Map.Grid[midY + 5][midX - 1].SetFeature(RockTile);
+        Map.Grid[midY + 5][midX].SetFeature(RockTile);
+        Map.Grid[midY + 4][midX + 3].SetFeature(RockTile);
+        Map.Grid[midY + 3][midX + 4].SetFeature(RockTile);
+        Map.Grid[midY][midX + 5].SetFeature(RockTile);
+        Map.Grid[midY - 1][midX + 5].SetFeature(RockTile);
+        Map.Grid[midY - 4][midX + 4].SetFeature(RockTile);
+        Map.Grid[midY - 5][midX + 3].SetFeature(RockTile);
     }
 
     private void MakeLake(int minX, int minY, int width, int height)
@@ -10753,13 +10775,13 @@ internal partial class Game
                 int rounded = (int)(v * 10);
                 if (rounded > 3)
                 {
-                    cPtr.SetBackgroundFeature(GetWaterTile);
-                    cPtr.SetFeature(GetWaterTile);
+                    cPtr.SetBackgroundFeature(WaterTile);
+                    cPtr.SetFeature(WaterTile);
                 }
                 else if (rounded == 3)
                 {
-                    cPtr.SetBackgroundFeature(GetGrassTile);
-                    cPtr.SetFeature(GetGrassTile);
+                    cPtr.SetBackgroundFeature(GrassTile);
+                    cPtr.SetFeature(GrassTile);
                 }
             }
         }
@@ -10862,7 +10884,7 @@ internal partial class Game
             Map.Grid[y - 14][x + i].PlayerMemorized = true;
             Map.Grid[y - 14][x + i].SelfLit = true;
         }
-        Map.Grid[y][x].SetFeature(GetUpStaircaseTile);
+        Map.Grid[y][x].SetFeature(UpStaircaseTile);
         Map.Grid[y][x].PlayerMemorized = true;
         Map.Grid[y][x].SelfLit = true;
         for (i = -3; i < 4; i++)
@@ -11017,7 +11039,7 @@ internal partial class Game
             cPtr = Map.Grid[y][x];
             if (cPtr.FeatureType == cPtr.BackgroundFeature)
             {
-                cPtr.SetFeature(GetRockTile);
+                cPtr.SetFeature(RockTile);
                 cPtr.PlayerMemorized = true;
             }
         }
@@ -11096,7 +11118,7 @@ internal partial class Game
             }
         } while (true);
         cPtr = Map.Grid[y][x];
-        cPtr.SetFeature(GetDownStaircaseTile);
+        cPtr.SetFeature(DownStaircaseTile);
         cPtr.PlayerMemorized = true;
         return new GridCoordinate(x, y);
     }
@@ -11479,15 +11501,15 @@ internal partial class Game
         {
             return;
         }
-        Map.Grid[midY - 1][midX - 1].SetFeature(GetGrassTile);
-        Map.Grid[midY - 1][midX].SetFeature(GetGrassTile);
-        Map.Grid[midY - 1][midX + 1].SetFeature(GetGrassTile);
-        Map.Grid[midY][midX - 1].SetFeature(GetGrassTile);
+        Map.Grid[midY - 1][midX - 1].SetFeature(GrassTile);
+        Map.Grid[midY - 1][midX].SetFeature(GrassTile);
+        Map.Grid[midY - 1][midX + 1].SetFeature(GrassTile);
+        Map.Grid[midY][midX - 1].SetFeature(GrassTile);
         Map.Grid[midY][midX].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-        Map.Grid[midY][midX + 1].SetFeature(GetGrassTile);
-        Map.Grid[midY + 1][midX - 1].SetFeature(GetGrassTile);
-        Map.Grid[midY + 1][midX].SetFeature(GetGrassTile);
-        Map.Grid[midY + 1][midX + 1].SetFeature(GetGrassTile);
+        Map.Grid[midY][midX + 1].SetFeature(GrassTile);
+        Map.Grid[midY + 1][midX - 1].SetFeature(GrassTile);
+        Map.Grid[midY + 1][midX].SetFeature(GrassTile);
+        Map.Grid[midY + 1][midX + 1].SetFeature(GrassTile);
         if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadUp) != 0)
         {
             x = 0;
@@ -11507,12 +11529,12 @@ internal partial class Game
                 }
                 if (!Map.Grid[y][midX - 1 + x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[y][midX - 1 + x].SetFeature(GetGrassTile);
+                    Map.Grid[y][midX - 1 + x].SetFeature(GrassTile);
                 }
                 Map.Grid[y][midX + x].SetFeature(SingletonRepository.Get<Tile>(nameof(WildPathNSTile)));
                 if (!Map.Grid[y][midX + 1 + x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[y][midX + 1 + x].SetFeature(GetGrassTile);
+                    Map.Grid[y][midX + 1 + x].SetFeature(GrassTile);
                 }
             }
         }
@@ -11535,12 +11557,12 @@ internal partial class Game
                 }
                 if (!Map.Grid[y][midX - 1 + x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[y][midX - 1 + x].SetFeature(GetGrassTile);
+                    Map.Grid[y][midX - 1 + x].SetFeature(GrassTile);
                 }
                 Map.Grid[y][midX + x].SetFeature(SingletonRepository.Get<Tile>(nameof(WildPathNSTile)));
                 if (!Map.Grid[y][midX + 1 + x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[y][midX + 1 + x].SetFeature(GetGrassTile);
+                    Map.Grid[y][midX + 1 + x].SetFeature(GrassTile);
                 }
             }
         }
@@ -11563,12 +11585,12 @@ internal partial class Game
                 }
                 if (!Map.Grid[midY - 1 + y][x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[midY - 1 + y][x].SetFeature(GetGrassTile);
+                    Map.Grid[midY - 1 + y][x].SetFeature(GrassTile);
                 }
                 Map.Grid[midY + y][x].SetFeature(SingletonRepository.Get<Tile>(nameof(WildPathEWTile)));
                 if (!Map.Grid[midY + 1 + y][x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[midY + 1 + y][x].SetFeature(GetGrassTile);
+                    Map.Grid[midY + 1 + y][x].SetFeature(GrassTile);
                 }
             }
         }
@@ -11591,12 +11613,12 @@ internal partial class Game
                 }
                 if (!Map.Grid[midY - 1 + y][x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[midY - 1 + y][x].SetFeature(GetGrassTile);
+                    Map.Grid[midY - 1 + y][x].SetFeature(GrassTile);
                 }
                 Map.Grid[midY + y][x].SetFeature(SingletonRepository.Get<Tile>(nameof(WildPathEWTile)));
                 if (!Map.Grid[midY + 1 + y][x].FeatureType.IsWildPath)
                 {
-                    Map.Grid[midY + 1 + y][x].SetFeature(GetGrassTile);
+                    Map.Grid[midY + 1 + y][x].SetFeature(GrassTile);
                 }
             }
         }
@@ -12014,11 +12036,11 @@ internal partial class Game
             for (x = 0; x < CurWid; x++)
             {
                 byte elevation = Elevation(WildernessY, WildernessX, y, x);
-                Tile floorTile = GetWaterTile;
-                Tile featureTile = GetWaterTile;
+                Tile floorTile = WaterTile;
+                Tile featureTile = WaterTile;
                 if (elevation > 0)
                 {
-                    floorTile = GetGrassTile;
+                    floorTile = GrassTile;
                     if (DieRoll(10) < elevation)
                     {
                         if (DieRoll(10) < elevation)
@@ -12032,7 +12054,7 @@ internal partial class Game
                     }
                     else
                     {
-                        featureTile = GetGrassTile;
+                        featureTile = GrassTile;
                     }
                 }
                 Map.Grid[y][x].SetFeature(featureTile);
@@ -12066,7 +12088,7 @@ internal partial class Game
             {
                 continue;
             }
-            Map.Grid[y][x].SetFeature(GetRockTile);
+            Map.Grid[y][x].SetFeature(RockTile);
         }
         UseFixed = false;
         if (CameFrom == LevelStartEnum.StartRandom)

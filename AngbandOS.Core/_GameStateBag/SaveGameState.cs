@@ -90,6 +90,16 @@ internal class SaveGameState
             return new ObjectGameStateBag(objectId, ((DictionaryGameStateBag?)gameStateBag)?.Values);
         }
 
+        if (value is IGameSerialize[][] arrayOfArrayOfIGameSerialize)
+        {
+            var gameStateBags = new List<GameStateBag>();
+            foreach (IGameSerialize[] item in arrayOfArrayOfIGameSerialize)
+            {
+                gameStateBags.Add(CreateGameStateBag(item));
+            }
+            return new ListGameStateBag(gameStateBags.ToArray());
+        }
+
         if (value is IEnumerable<IGameSerialize> enumerableOfIGameSerialize)
         {
             var gameStateBags = new List<GameStateBag>();
@@ -199,6 +209,7 @@ internal class SaveGameState
             return new ListGameStateBag(gameStateBags.ToArray());
         }
 
+        Type type = value.GetType();
         throw new Exception($"{value.GetType().Name} serialization not supported.");
     }
 
@@ -374,4 +385,117 @@ internal class SaveGameState
 
         throw new Exception($"{type.Name} serialization not supported on field {parent}.");
     }
+    public static class DeepComparer
+    {
+        public static bool DeepEquals(object? a, object? b)
+        {
+            var visited = new HashSet<(object, object)>(new ReferenceTupleComparer());
+            return DeepEqualsInternal(a, b, visited);
+        }
+
+        private static bool DeepEqualsInternal(object? a, object? b, HashSet<(object, object)> visited)
+        {
+            if (ReferenceEquals(a, b))
+                return true;
+
+            if (a == null || b == null)
+                return false;
+
+            var typeA = a.GetType();
+            var typeB = b.GetType();
+
+            if (typeA != typeB)
+                return false;
+
+            if (IsSimple(typeA))
+                return a.Equals(b);
+
+            if (visited.Contains((a, b)))
+                return true;
+
+            visited.Add((a, b));
+
+            // Handle IEnumerable (but skip string)
+            if (typeof(IEnumerable).IsAssignableFrom(typeA) && typeA != typeof(string))
+            {
+                var enumA = ((IEnumerable)a).GetEnumerator();
+                var enumB = ((IEnumerable)b).GetEnumerator();
+
+                while (true)
+                {
+                    var hasA = enumA.MoveNext();
+                    var hasB = enumB.MoveNext();
+
+                    if (hasA != hasB)
+                        return false;
+
+                    if (!hasA)
+                        break;
+
+                    if (!DeepEqualsInternal(enumA.Current, enumB.Current, visited))
+                        return false;
+                }
+
+                return true;
+            }
+
+            const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+
+            // Compare fields
+            foreach (var field in typeA.GetFields(flags))
+            {
+                var valA = field.GetValue(a);
+                var valB = field.GetValue(b);
+
+                if (!DeepEqualsInternal(valA, valB, visited))
+                    return false;
+            }
+
+            // Compare properties
+            foreach (var prop in typeA.GetProperties(flags))
+            {
+                if (prop.GetIndexParameters().Length > 0)
+                    continue; // skip indexers
+
+                if (!prop.CanRead)
+                    continue;
+
+                var valA = prop.GetValue(a);
+                var valB = prop.GetValue(b);
+
+                if (!DeepEqualsInternal(valA, valB, visited))
+                    return false;
+            }
+
+            return true;
+        }
+
+        private static bool IsSimple(Type type)
+        {
+            return type.IsPrimitive
+                   || type.IsEnum
+                   || type == typeof(string)
+                   || type == typeof(decimal)
+                   || type == typeof(DateTime)
+                   || type == typeof(Guid)
+                   || type == typeof(TimeSpan);
+        }
+
+        private class ReferenceTupleComparer : IEqualityComparer<(object, object)>
+        {
+            public bool Equals((object, object) x, (object, object) y)
+            {
+                return ReferenceEquals(x.Item1, y.Item1) && ReferenceEquals(x.Item2, y.Item2);
+            }
+
+            public int GetHashCode((object, object) obj)
+            {
+                unchecked
+                {
+                    return (RuntimeHelpers.GetHashCode(obj.Item1) * 397) ^ RuntimeHelpers.GetHashCode(obj.Item2);
+                }
+            }
+        }
+    }
 }
+

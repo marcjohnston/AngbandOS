@@ -26,6 +26,22 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        // Serialize the tuples.
+        GameStateBag[] tupleGameStateBags = _attributeModifiers.Select(_attributeModifier => new DictionaryGameStateBag(
+                (nameof(_attributeModifier.Key), saveGameState.CreateGameStateBag(_attributeModifier.Key)),
+                (nameof(_attributeModifier.Modifier), saveGameState.CreateGameStateBag(_attributeModifier.Modifier))
+        )).ToArray();
+
+        // Put the tuples into a list.
+        GameStateBag listOfTuplesGameStateBag = new ListGameStateBag(tupleGameStateBags);
+
+        // Return the dictionary of the values.
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(_attributeModifiers), listOfTuplesGameStateBag)
+        );
+    }
 
     public override bool HasKeyedItemEnhancements(string key)
     {

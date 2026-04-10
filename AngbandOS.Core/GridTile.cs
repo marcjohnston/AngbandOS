@@ -10,15 +10,38 @@ namespace AngbandOS.Core;
 /// A single grid tile in either the dungeon, town, or wilderness.  Grid tiles are also containers for items; as they can have one or more items on the tile.
 /// </summary>
 [Serializable]
-internal class GridTile : IItemContainer
+internal class GridTile : IItemContainer, IGameSerialize
 {
-    private readonly TrapsDetectedProperty TrapsDetectedProperty;
     public GridTile(TrapsDetectedProperty trapsDetectedProperty, Tile backgroundFeature, Tile featureType)
     {
         TrapsDetectedProperty = trapsDetectedProperty;
         BackgroundFeature = backgroundFeature;
         FeatureType = featureType;
     }
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(TrapsDetectedProperty), saveGameState.CreateGameStateBag(TrapsDetectedProperty)),
+            (nameof(EasyVisibility), saveGameState.CreateGameStateBag(EasyVisibility)),
+            (nameof(InRoom), saveGameState.CreateGameStateBag(InRoom)),
+            (nameof(InVault), saveGameState.CreateGameStateBag(InVault)),
+            (nameof(IsVisible), saveGameState.CreateGameStateBag(IsVisible)),
+            (nameof(PlayerLit), saveGameState.CreateGameStateBag(PlayerLit)),
+            (nameof(PlayerMemorized), saveGameState.CreateGameStateBag(PlayerMemorized)),
+            (nameof(SelfLit), saveGameState.CreateGameStateBag(SelfLit)),
+            (nameof(TempFlag), saveGameState.CreateGameStateBag(TempFlag)),
+            (nameof(_trapsDetected), saveGameState.CreateGameStateBag(_trapsDetected)),
+            (nameof(BackgroundFeature), saveGameState.CreateGameStateBag(BackgroundFeature)),
+            (nameof(FeatureType), saveGameState.CreateGameStateBag(FeatureType)),
+            (nameof(Items), saveGameState.CreateGameStateBag(Items)),
+            (nameof(MonsterIndex), saveGameState.CreateGameStateBag(MonsterIndex)),
+            (nameof(ScentAge), saveGameState.CreateGameStateBag(ScentAge)),
+            (nameof(ScentStrength), saveGameState.CreateGameStateBag(ScentStrength))
+        );
+    }
+
+    #region State Data
+    private readonly TrapsDetectedProperty TrapsDetectedProperty;
 
     /// <summary>
     /// Used within the view code to mark tiles that are "easily" visible
@@ -61,21 +84,6 @@ internal class GridTile : IItemContainer
     public bool TempFlag;
 
     private bool _trapsDetected;
-    /// <summary>
-    /// Set if the grid tile has had a Detect Traps used on it
-    /// </summary>
-    public bool TrapsDetected
-    {
-        get
-        {
-            return _trapsDetected;
-        }
-        set
-        {
-            _trapsDetected = value;
-            TrapsDetectedProperty.SetChangedFlag();
-        }
-    }
 
     /// <summary>
     /// The type of feature in this grid tile
@@ -107,6 +115,23 @@ internal class GridTile : IItemContainer
     /// </summary>
     public int ScentStrength;
 
+    #endregion
+
+    /// <summary>
+    /// Set if the grid tile has had a Detect Traps used on it
+    /// </summary>
+    public bool TrapsDetected
+    {
+        get
+        {
+            return _trapsDetected;
+        }
+        set
+        {
+            _trapsDetected = value;
+            TrapsDetectedProperty.SetChangedFlag();
+        }
+    }
     public string DescribeItemLocation(Item oPtr) => $"On the ground:";
 
     public string Label(Item oPtr) => ""; // TODO: Items on the floor cannot be selected yet.

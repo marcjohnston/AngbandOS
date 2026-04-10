@@ -200,7 +200,8 @@ public class GameServer
 
             Game.Play(console, persistentStorage, replayPersistentStorage);
 
-            GameStateBag saveGameStateBag = Game.Save();
+            SaveGameState saveGameState = new SaveGameState();
+            GameStateBag saveGameStateBag = Game.Serialize(saveGameState);
             serializedGameData = saveGameStateBag.Serialize();
 
             gameIsOver = true;
