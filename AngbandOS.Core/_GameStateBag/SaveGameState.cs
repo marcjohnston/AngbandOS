@@ -48,7 +48,7 @@ internal class SaveGameState
 
             int objectId = ObjectToIdDictionary.Count + 1;
             ObjectToIdDictionary.Add(value, objectId);
-            return new ObjectGameStateBag(objectId, ((DictionaryGameStateBag?)gameStateBag)?.Values);
+            return new ObjectGameStateBag(objectId, value.GetType().Name, ((DictionaryGameStateBag?)gameStateBag)?.Values);
         }
 
         if (value is IGameSerialize[][] arrayOfArrayOfIGameSerialize)
@@ -111,6 +111,11 @@ internal class SaveGameState
             return new BoolValueGameStateBag(boolValue);
         }
 
+        if (value is Enum)
+        {
+            return new IntValueGameStateBag((int)value);    
+        }
+
         // char[]
         if (value is char[] charArray)
         {
@@ -143,11 +148,6 @@ internal class SaveGameState
         if (value is byte[] byteArray)
         {
             return new ByteArrayGameStateBag(byteArray);
-        }
-
-        if (value is Enum)
-        {
-            return new IntValueGameStateBag((int)value);    
         }
 
         if (value is string[] arrayOfString)
@@ -277,9 +277,9 @@ internal class SaveGameState
             return new BoolValueGameStateBag(boolValue);
         }
 
-        if (value is ColorEnum colorEnumValue)
+        if (value is Enum)
         {
-            return new ColorEnumValueGameStateBag(colorEnumValue);
+            return new IntValueGameStateBag((int)value);
         }
 
         Type type = value.GetType();

@@ -15,11 +15,15 @@ internal class IntValueGameStateBag : GameStateBag
     }
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
-        if (singleton is not int intSingletonFieldValue)
+        if (singleton is Enum)
         {
-            throw new Exception($"During restore verification, the {singleton?.GetType().Name ?? "null"} singleton did not verify as an integer value.");
+            return (int)singleton == Value;
         }
-        return intSingletonFieldValue == Value;
+        if (singleton is int intSingletonFieldValue)
+        {
+            return intSingletonFieldValue == Value;
+        }
+        throw new Exception($"During restore verification, the {singleton?.GetType().Name ?? "null"} singleton did not verify as an integer value.");
     }
     public override string ToString()
     {

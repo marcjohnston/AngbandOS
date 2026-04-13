@@ -13,10 +13,12 @@ namespace AngbandOS.Core;
 /// </summary>
 internal class RestoreGameState
 {
+    private Game Game { get; }
     private Dictionary<int, IGetKey> ObjectIdToReferenceDictionary { get; }
     public GameStateBag GameStateBag { get; }
-    public RestoreGameState(Dictionary<int, IGetKey> objectIdToReferenceDictionary, GameStateBag gameStateBag)
+    public RestoreGameState(Game game, Dictionary<int, IGetKey> objectIdToReferenceDictionary, GameStateBag gameStateBag)
     {
+        Game = game;
         ObjectIdToReferenceDictionary = objectIdToReferenceDictionary;
         GameStateBag = gameStateBag;
     }
@@ -44,9 +46,14 @@ internal class RestoreGameState
             throw new InvalidOperationException($"GameStateBag is not a {typeof(ObjectGameStateBag)}.");
         }
     }
+    public IGetKey GetObjectById(int objectId)
+    {
+        return ObjectIdToReferenceDictionary[objectId];
+    }
+
     public RestoreGameState New(GameStateBag gameStateBag)
     {
-        return new RestoreGameState(ObjectIdToReferenceDictionary, gameStateBag);
+        return new RestoreGameState(Game, ObjectIdToReferenceDictionary, gameStateBag);
     }
 
     public bool Verify(object? singleton)
@@ -63,7 +70,7 @@ internal class RestoreGameState
 
         if (dictionaryGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
         {
-            return new RestoreGameState(ObjectIdToReferenceDictionary, gameStateBag);
+            return new RestoreGameState(Game, ObjectIdToReferenceDictionary, gameStateBag);
         }
         return null;
     }
@@ -82,6 +89,104 @@ internal class RestoreGameState
     }
 
     public bool GetBool(string key) => GetGameStateBag<BoolValueGameStateBag>(key).Value;
+
+    public T GetEnum<T>(string key) where T : Enum
+    {
+        int value = GetInt(key);
+        if (Enum.IsDefined(typeof(T), value))
+        {
+            return (T)(object)value;
+        }
+        throw new ArgumentOutOfRangeException(nameof(value), $"Invalid value for enum {typeof(T).Name}: {value}");
+    }
+
+    public bool[] GetArrayOfBool(string key)
+    {
+        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
+        List<bool> boolList = new List<bool>();
+        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        {
+            if (gameStateBag is not BoolValueGameStateBag boolValueGameStateBag)
+            {
+                throw new Exception($"Expected bool value game state bag");
+            }
+            boolList.Add(boolValueGameStateBag.Value);
+        }
+        return boolList.ToArray();
+    }
+
+    public T GetReference<T>(GameStateBag gameStateBag)
+    {
+        if (gameStateBag is ReferenceGameStateBag referenceGameStateBag)
+        {
+            if (ObjectIdToReferenceDictionary.TryGetValue(referenceGameStateBag.ObjectId, out var reference))
+            {
+                if (reference is not T typedReference)
+                {
+                    throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
+                }
+                return typedReference;
+            }
+            throw new Exception("Reference ID not found in ObjectIdToReferenceDictionary.");
+        }
+        else if (gameStateBag is ObjectGameStateBag objectGameStateBag)
+        {
+            if (ObjectIdToReferenceDictionary.TryGetValue(objectGameStateBag.ObjectId, out var reference))
+            {
+                if (reference is not T typedReference)
+                {
+                    throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
+                }
+                return typedReference;
+            }
+            // The object doesn't exist yet.  We need to create it.
+            var fullyQualifiedName = $"{typeof(Game).Assembly.GetName().Name}.Core.{objectGameStateBag.TypeName}";
+            Type? type = Type.GetType(fullyQualifiedName);
+            if (type is null)
+            {
+                throw new Exception($"{fullyQualifiedName} type not found.  Ensure it is in the Core namespace.");
+            }
+            object?[] parameters = new object?[] { Game, New(objectGameStateBag) };
+            T? t = (T?)Activator.CreateInstance(type, parameters);
+            if (t is null)
+            {
+                throw new Exception($"Unable to instantiate a new {objectGameStateBag.TypeName}.");
+            }
+            return t;
+        }
+        throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
+    }
+
+    public T GetReference<T>(string key)
+    {
+        if (GameStateBag is not ObjectGameStateBag thisObjectGameStateBag)
+        {
+            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
+        }
+        if (thisObjectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        {
+            return GetReference<T>(gameStateBag);
+        }
+        throw new KeyNotFoundException($"The key '{key}' was not found in the GameStateBag.");
+    }
+
+
+    public T? GetNullableReference<T>(string key)
+    {
+        if (GameStateBag is not ObjectGameStateBag thisObjectGameStateBag)
+        {
+            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
+        }
+        if (thisObjectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        {
+            if (gameStateBag is NullValueGameStateBag)
+            {
+                return default;
+            }
+            return GetReference<T>(gameStateBag);
+        }
+        throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
+    }
 
     public int GetInt(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
     public int? GetNullableInt(string key)
@@ -109,7 +214,7 @@ internal class RestoreGameState
 
     public TimeSpan GetTimeSpan(string key) => GetGameStateBag<TimeSpanValueGameStateBag>(key).Value;
 
-    public ColorEnum GetColorEnum(string key) => GetGameStateBag<ColorEnumValueGameStateBag>(key).Value;
+    //public ColorEnum GetColorEnum(string key) => GetGameStateBag<ColorEnumValueGameStateBag>(key).Value;
 
     public string[] GetQueueStrings(string key) => GetGameStateBag<QueueOfStringGameStateBag>(key).Values.ToArray();
     public bool IsEmpty()

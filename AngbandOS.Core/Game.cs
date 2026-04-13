@@ -492,7 +492,7 @@ internal partial class Game
             {
                 throw new Exception($"Expected a {nameof(DictionaryGameStateBag)} for the singleton repository game state bag.");
             }
-            SingletonRepository.LoadAndBind(gameConfiguration, new RestoreGameState(objectIdToReferenceDictionary, singletonDictionaryRepositoryGameStateBag));
+            SingletonRepository.LoadAndBind(gameConfiguration, new RestoreGameState(this, objectIdToReferenceDictionary, singletonDictionaryRepositoryGameStateBag));
 
             // Check to see if there are any bags unfulfilled in the restore state.            
             foreach (KeyValuePair<string, GameStateBag> singletonKeyAndGameStateBag in singletonDictionaryRepositoryGameStateBag.Values)

@@ -22,6 +22,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             (nameof(IsFlavorAware), saveGameState.CreateGameStateBag(IsFlavorAware)),
             (nameof(FlavorSymbol), saveGameState.CreateGameStateBag(FlavorSymbol)),
             (nameof(FlavorColor), saveGameState.CreateGameStateBag(FlavorColor)),
+            (nameof(Flavor), saveGameState.CreateGameStateBag(Flavor)),
             (nameof(Tried), saveGameState.CreateGameStateBag(Tried)),
             (nameof(Stompable), saveGameState.CreateGameStateBag(Stompable))
         );
@@ -160,16 +161,9 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     public ColorEnum FlavorColor;
 
     /// <summary>
-    /// Returns the the <see cref="ItemFlavor"/> that this item should be assigned.  This assignment overrides the random flavor assignment, when the <see cref="ItemClass"/>
-    /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
-    /// This property is bound using the <see cref="PreassignedItemFlavorBindingKey"/> property during the binding phase.
-    /// </summary>
-    public Flavor? PreassignedItemFlavor { get; private set; }
-
-    /// <summary>
     /// Returns the flavor that was issued to the item factory.
     /// </summary>
-    public Flavor? Flavor { get; set; }
+    public Flavor? Flavor;
 
     /// <summary>
     /// Returns true, if the player has attempted/tried the item.
@@ -180,8 +174,15 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     /// Returns true, if items of this type are stompable (based on the known "feeling" of (Broken, Average, Good & Excellent)).
     /// Use StompableType enum to address each index.
     /// </summary>
-    public readonly bool[] Stompable = new bool[4];
+    public bool[] Stompable { get; private set; } = new bool[4];
     #endregion
+
+    /// <summary>
+    /// Returns the the <see cref="ItemFlavor"/> that this item should be assigned.  This assignment overrides the random flavor assignment, when the <see cref="ItemClass"/>
+    /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
+    /// This property is bound using the <see cref="PreassignedItemFlavorBindingKey"/> property during the binding phase.
+    /// </summary>
+    public Flavor? PreassignedItemFlavor { get; private set; }
 
     #region Cached Data - Non-binding properties that are set once, considered read-only and used for performance.
     /// <summary>
@@ -509,6 +510,16 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         SlayingRandomArtifactItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey);
         PreassignedItemFlavor = Game.SingletonRepository.GetNullable<ItemFlavor>(PreassignedItemFlavorBindingKey);
         EnhancementFixedArtifactFactories = Game.SingletonRepository.GetNullable<FixedArtifact>(EnhancementFixedArtifactFactoriesBindingKeys);
+
+        if (restoreGameState is not null)
+        {
+            IsFlavorAware = restoreGameState.GetBool(nameof(IsFlavorAware));
+            FlavorSymbol = restoreGameState.GetReference<Symbol>(nameof(FlavorSymbol));
+            FlavorColor = restoreGameState.GetEnum<ColorEnum>(nameof(FlavorColor));
+            Flavor = restoreGameState.GetNullableReference<Flavor>(nameof(Flavor));
+            Tried = restoreGameState.GetBool(nameof(Tried));
+            Stompable = restoreGameState.GetArrayOfBool(nameof(Stompable));
+        }
     }
 
     /// <summary>

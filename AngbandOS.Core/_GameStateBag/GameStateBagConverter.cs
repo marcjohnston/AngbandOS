@@ -27,14 +27,14 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             nameof(ByteValueGameStateBag) => new ByteValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetByte()),
             nameof(CharArrayGameStateBag) => new CharArrayGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!.ToCharArray()),
             nameof(CharValueGameStateBag) => new CharValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()![0]),
-            nameof(ColorEnumValueGameStateBag) => new ColorEnumValueGameStateBag((ColorEnum)Enum.Parse(typeof(ColorEnum), doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
+            //nameof(EnumValueGameStateBag) => new EnumValueGameStateBag((ColorEnum)Enum.Parse(typeof(ColorEnum), doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
             nameof(DateTimeValueGameStateBag) => new DateTimeValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDateTime()),
             nameof(DecimalValueGameStateBag) => new DecimalValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDecimal()),
             nameof(DictionaryGameStateBag) => new DictionaryGameStateBag(JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
             nameof(IntValueGameStateBag) => new IntValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetInt32()),
             nameof(ListGameStateBag) => new ListGameStateBag(JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(NullValueGameStateBag) => new NullValueGameStateBag(),
-            nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
+            nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), doc.RootElement.GetProperty("TypeName").GetString()!, JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(QueueOfStringGameStateBag) => new QueueOfStringGameStateBag(JsonSerializer.Deserialize<string[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(ReferenceGameStateBag) => new ReferenceGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32()),
             nameof(StringValueGameStateBag) => new StringValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!),
@@ -75,10 +75,10 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
                 writer.WriteString(ValuePropertyName, charValue.Value.ToString());
                 break;
 
-            case ColorEnumValueGameStateBag colorEnumValue:
-                writer.WriteString(TypePropertyName, nameof(ColorEnumValueGameStateBag));
-                writer.WriteString(ValuePropertyName, colorEnumValue.Value.ToString());
-                break;
+            //case EnumValueGameStateBag enumValue:
+            //    writer.WriteString(TypePropertyName, nameof(EnumValueGameStateBag));
+            //    writer.WriteString(ValuePropertyName, enumValue.Value.ToString());
+            //    break;
 
             case DateTimeValueGameStateBag dateTimeValue:
                 writer.WriteString(TypePropertyName, nameof(DateTimeValueGameStateBag));
@@ -114,6 +114,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             case ObjectGameStateBag objectValue:
                 writer.WriteString(TypePropertyName, nameof(ObjectGameStateBag));
                 writer.WriteNumber("ObjectId", objectValue.ObjectId);
+                writer.WriteString("TypeName", objectValue.TypeName);
                 writer.WritePropertyName("Values");
                 JsonSerializer.Serialize(writer, objectValue.Values, options);
                 break;

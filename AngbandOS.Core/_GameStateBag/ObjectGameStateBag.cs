@@ -11,11 +11,13 @@ namespace AngbandOS.Core;
 internal class ObjectGameStateBag : GameStateBag
 {
     public int ObjectId { get; }
+    public string TypeName { get; }
     public Dictionary<string, GameStateBag> Values { get; }
 
-    public ObjectGameStateBag(int objectId, Dictionary<string, GameStateBag>? value)
+    public ObjectGameStateBag(int objectId, string typeName, Dictionary<string, GameStateBag>? value)
     {
         ObjectId = objectId;
+        TypeName = typeName;
         Values = value ?? new Dictionary<string, GameStateBag>();
     }
     public override string ToString()

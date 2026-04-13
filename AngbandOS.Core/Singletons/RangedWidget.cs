@@ -33,8 +33,8 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, IGameSerialize
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(_text), new StringValueGameStateBag(_text)),
-            (nameof(_color), new ColorEnumValueGameStateBag(_color))
+            (nameof(_text), saveGameState.CreateGameStateBag(_text)),
+            (nameof(_color), saveGameState.CreateGameStateBag(_color))
         );
     }
 

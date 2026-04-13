@@ -9,3 +9,4 @@ Json
 ﻿Deserialize
 ﻿boolean
 ﻿deserialize
+﻿Stompable

@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Text.Json.Serialization;
-
 namespace AngbandOS.Core;
     internal class ReferenceGameStateBag : GameStateBag
 {
@@ -20,6 +18,10 @@ namespace AngbandOS.Core;
     }
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
-        throw new NotImplementedException();
+        if (singleton is null || restoreGameState.GetObjectById(ObjectId) != singleton)
+        {
+            throw new Exception("Reference fails to verify.");
+        }
+        return true;
     }
 }
