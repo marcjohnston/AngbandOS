@@ -29,13 +29,11 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             nameof(CharValueGameStateBag) => new CharValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()![0]),
             nameof(ColorEnumValueGameStateBag) => new ColorEnumValueGameStateBag((ColorEnum)Enum.Parse(typeof(ColorEnum), doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
             nameof(DateTimeValueGameStateBag) => new DateTimeValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDateTime()),
-            nameof(NullableDateTimeValueGameStateBag) => new NullableDateTimeValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDateTime()),
             nameof(DecimalValueGameStateBag) => new DecimalValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDecimal()),
             nameof(DictionaryGameStateBag) => new DictionaryGameStateBag(JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
             nameof(IntValueGameStateBag) => new IntValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetInt32()),
             nameof(ListGameStateBag) => new ListGameStateBag(JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(NullValueGameStateBag) => new NullValueGameStateBag(),
-            nameof(NullableIntValueGameStateBag) => new NullableIntValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetInt32()),
             nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(QueueOfStringGameStateBag) => new QueueOfStringGameStateBag(JsonSerializer.Deserialize<string[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
             nameof(ReferenceGameStateBag) => new ReferenceGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32()),
@@ -111,30 +109,6 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
 
             case NullValueGameStateBag:
                 writer.WriteString(TypePropertyName, nameof(NullValueGameStateBag));
-                break;
-
-            case NullableIntValueGameStateBag nullableIntValue:
-                writer.WriteString(TypePropertyName, nameof(NullableIntValueGameStateBag));
-                if (nullableIntValue.Value.HasValue)
-                {
-                    writer.WriteNumber(ValuePropertyName, nullableIntValue.Value.Value);
-                }
-                else
-                {
-                    writer.WriteString(ValuePropertyName, "null");
-                }
-                break;
-
-            case NullableDateTimeValueGameStateBag nullableDateTimeValue:
-                writer.WriteString(TypePropertyName, nameof(NullableDateTimeValueGameStateBag));
-                if (nullableDateTimeValue.Value.HasValue)
-                {
-                    writer.WriteString(ValuePropertyName, nullableDateTimeValue.Value.Value);
-                }
-                else
-                {
-                    writer.WriteString(ValuePropertyName, "null");
-                }
                 break;
 
             case ObjectGameStateBag objectValue:

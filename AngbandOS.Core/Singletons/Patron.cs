@@ -23,7 +23,7 @@ internal sealed class Patron : IGetKey, IToJson, IGameSerialize
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(RewardReceived), new BoolValueGameStateBag(RewardReceived))
+            (nameof(RewardReceived), saveGameState.CreateGameStateBag(RewardReceived))
         );
     }
 

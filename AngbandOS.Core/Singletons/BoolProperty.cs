@@ -61,7 +61,7 @@ internal abstract class BoolProperty : Property, IBoolValue
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(_value), new BoolValueGameStateBag(_value))
+            (nameof(_value), saveGameState.CreateGameStateBag(_value))
         );
     }
 }

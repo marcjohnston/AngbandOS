@@ -12,10 +12,10 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(CurNum), new IntValueGameStateBag(CurNum)),
-            (nameof(Guardian), new BoolValueGameStateBag(Guardian)),
-            (nameof(OnlyGuardian), new BoolValueGameStateBag(OnlyGuardian)),
-            (nameof(MaxNum), new IntValueGameStateBag(MaxNum)),
+            (nameof(CurNum), saveGameState.CreateGameStateBag(CurNum)),
+            (nameof(Guardian), saveGameState.CreateGameStateBag(Guardian)),
+            (nameof(OnlyGuardian), saveGameState.CreateGameStateBag(OnlyGuardian)),
+            (nameof(MaxNum), saveGameState.CreateGameStateBag(MaxNum)),
             (nameof(Knowledge), saveGameState.CreateGameStateBag(Knowledge))
         );
     }

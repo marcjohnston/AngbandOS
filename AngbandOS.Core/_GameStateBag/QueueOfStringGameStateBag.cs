@@ -13,15 +13,12 @@ internal class QueueOfStringGameStateBag : GameStateBag
     {
         Values = values;
     }
-    public override void Verify(RestoreGameState restoreGameState, object? singleton)
+    public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
         if (singleton is not Queue<string> queueOfStringSingletonFieldValue)
         {
             throw new Exception($"During restore verification, the {singleton?.GetType().Name ?? "null"} singleton did not verify as a Queue<string> value.");
         }
-        if (!Values.SequenceEqual(queueOfStringSingletonFieldValue))
-        {
-            throw new Exception($"During restore verification, the {singleton.GetType().Name} singleton did not verify.  The messages are different.");
-        }
+        return Values.SequenceEqual(queueOfStringSingletonFieldValue);
     }
 }

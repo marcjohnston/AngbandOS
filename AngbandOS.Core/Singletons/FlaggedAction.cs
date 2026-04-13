@@ -22,7 +22,7 @@ internal abstract class FlaggedAction : IGetKey, IGameSerialize
     public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(_flag), new BoolValueGameStateBag(_flag))
+            (nameof(_flag), saveGameState.CreateGameStateBag(_flag))
         );
     }
 

@@ -22,25 +22,65 @@ internal class ObjectGameStateBag : GameStateBag
     {
         return $"Object#{ObjectId}";
     }
-    public override void Verify(RestoreGameState restoreGameState, object? singleton)
+    private static MemberInfo? GetMemberInfo(Type type, string name)
+    {
+        const BindingFlags flags =
+            BindingFlags.Instance |
+            BindingFlags.Static |
+            BindingFlags.Public |
+            BindingFlags.NonPublic;
+
+        while (type != null)
+        {
+            // Check property
+            var prop = type.GetProperty(name, flags);
+            if (prop != null)
+                return prop;
+
+            // Check field
+            var field = type.GetField(name, flags);
+            if (field != null)
+                return field;
+
+            type = type.BaseType!;
+        }
+
+        return null;
+    }
+
+    private static object? GetMemberValue(MemberInfo member, object obj)
+    {
+        return member switch
+        {
+            PropertyInfo p => p.GetValue(obj),
+            FieldInfo f => f.GetValue(obj),
+            _ => throw new NotSupportedException($"Unsupported member type: {member.GetType().Name}")
+        };
+    }
+
+    public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
         if (singleton is null)
         {
-            throw new Exception($"During restore verification, the null singleton did not verify as an object.");
+            throw new Exception($"During restore verification, a null singleton cannot verify as an object.");
         }
 
         foreach ((string PropertyName, GameStateBag ExpectedValue) in Values)
         {
             // Retrieve the field info from the singleton.
-            FieldInfo? singletonFieldInfo = SaveGameState.GetAllFields(singleton.GetType()).SingleOrDefault(_fieldInfo => _fieldInfo.Name == PropertyName);
-            if (singletonFieldInfo is null)
+            MemberInfo? singletonMemberInfo = GetMemberInfo(singleton.GetType(), PropertyName);
+            if (singletonMemberInfo is null)
             {
                 throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton could not be found.");
             }
 
             // Retrieve the actual value from the singleton.
-            object? singletonFieldValue = singletonFieldInfo.GetValue(singleton);
-            restoreGameState.New(ExpectedValue).Verify(singletonFieldValue);
+            object? singletonFieldValue = GetMemberValue(singletonMemberInfo, singleton);
+            if (!restoreGameState.New(ExpectedValue).Verify(singletonFieldValue))
+            {
+                throw new Exception($"During restore verification, the {PropertyName} property of the {singleton.GetType().Name} singleton did not verify.  Expected {ExpectedValue}.");
+            }
         }
+        return true;
     }
 }

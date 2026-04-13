@@ -25,10 +25,10 @@ internal sealed class Town : IGetKey, IToJson, IGameSerialize
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Seed), new IntValueGameStateBag(Seed)),
-            (nameof(Visited), new BoolValueGameStateBag(Visited)),
-            (nameof(X), new IntValueGameStateBag(X)),
-            (nameof(Y), new IntValueGameStateBag(Y))
+            (nameof(Seed), saveGameState.CreateGameStateBag(Seed)),
+            (nameof(Visited), saveGameState.CreateGameStateBag(Visited)),
+            (nameof(X), saveGameState.CreateGameStateBag(X)),
+            (nameof(Y), saveGameState.CreateGameStateBag(Y))
         );
     }
 

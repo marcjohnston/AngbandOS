@@ -32,22 +32,22 @@ internal class MonsterKnowledge : IGameSerialize
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(RBlows), new ListGameStateBag(new IntValueGameStateBag(RBlows[0]), new IntValueGameStateBag(RBlows[1]), new IntValueGameStateBag(RBlows[2]), new IntValueGameStateBag(RBlows[3]))),
-            (nameof(RCastInate), new IntValueGameStateBag(RCastInate)),
-            (nameof(RCastSpell), new IntValueGameStateBag(RCastSpell)),
-            (nameof(RDeaths), new IntValueGameStateBag(RDeaths)),
-            (nameof(RDropGold), new IntValueGameStateBag(RDropGold)),
-            (nameof(RDropItem), new IntValueGameStateBag(RDropItem)),
-            (nameof(Guardian), new BoolValueGameStateBag(Guardian)),
-            (nameof(OnlyGuardian), new BoolValueGameStateBag(OnlyGuardian)),
+            (nameof(RBlows), saveGameState.CreateGameStateBag(RBlows[0])),
+            (nameof(RCastInate), saveGameState.CreateGameStateBag(RCastInate)),
+            (nameof(RCastSpell), saveGameState.CreateGameStateBag(RCastSpell)),
+            (nameof(RDeaths), saveGameState.CreateGameStateBag(RDeaths)),
+            (nameof(RDropGold), saveGameState.CreateGameStateBag(RDropGold)),
+            (nameof(RDropItem), saveGameState.CreateGameStateBag(RDropItem)),
+            (nameof(Guardian), saveGameState.CreateGameStateBag(Guardian)),
+            (nameof(OnlyGuardian), saveGameState.CreateGameStateBag(OnlyGuardian)),
             (nameof(Characteristics), saveGameState.CreateGameStateBag(Characteristics)),
             (nameof(RSpells), saveGameState.CreateGameStateBag(RSpells)),
-            (nameof(RIgnore), new IntValueGameStateBag(RIgnore)),
-            (nameof(RPkills), new IntValueGameStateBag(RPkills)),
-            (nameof(RProbed), new BoolValueGameStateBag(RProbed)),
-            (nameof(RSights), new IntValueGameStateBag(RSights)),
-            (nameof(RTkills), new IntValueGameStateBag(RTkills)),
-            (nameof(RWake), new IntValueGameStateBag(RWake))
+            (nameof(RIgnore), saveGameState.CreateGameStateBag(RIgnore)),
+            (nameof(RPkills), saveGameState.CreateGameStateBag(RPkills)),
+            (nameof(RProbed), saveGameState.CreateGameStateBag(RProbed)),
+            (nameof(RSights), saveGameState.CreateGameStateBag(RSights)),
+            (nameof(RTkills), saveGameState.CreateGameStateBag(RTkills)),
+            (nameof(RWake), saveGameState.CreateGameStateBag(RWake))
         );
     }
 

@@ -24,9 +24,9 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Forgotten), new BoolValueGameStateBag(Forgotten)),
-            (nameof(Learned), new BoolValueGameStateBag(Learned)),
-            (nameof(Tried), new BoolValueGameStateBag(Tried))
+            (nameof(Forgotten), saveGameState.CreateGameStateBag(Forgotten)),
+            (nameof(Learned), saveGameState.CreateGameStateBag(Learned)),
+            (nameof(Tried), saveGameState.CreateGameStateBag(Tried))
         );
     }
 

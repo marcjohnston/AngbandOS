@@ -43,7 +43,7 @@ internal abstract class NullableIntProperty : Property, INullIntValue
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(_value), new NullableIntValueGameStateBag(_value))
+            (nameof(_value), saveGameState.CreateGameStateBag(_value))
         );
     }
 

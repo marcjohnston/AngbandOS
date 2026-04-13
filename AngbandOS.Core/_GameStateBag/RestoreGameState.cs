@@ -49,9 +49,9 @@ internal class RestoreGameState
         return new RestoreGameState(ObjectIdToReferenceDictionary, gameStateBag);
     }
 
-    public void Verify(object? singleton)
+    public bool Verify(object? singleton)
     {
-        GameStateBag.Verify(this, singleton);
+        return GameStateBag.Verify(this, singleton);
     }
 
     public RestoreGameState? Get(string key)
@@ -84,7 +84,14 @@ internal class RestoreGameState
     public bool GetBool(string key) => GetGameStateBag<BoolValueGameStateBag>(key).Value;
 
     public int GetInt(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
-    public int? GetNullableInt(string key) => GetGameStateBag<NullableIntValueGameStateBag>(key).Value;
+    public int? GetNullableInt(string key)
+    {
+        if (GameStateBag is NullValueGameStateBag)
+        {
+            return null;
+        }
+        return GetInt(key);
+    }
 
     public string GetString(string key) => GetGameStateBag<StringValueGameStateBag>(key).Value;
 

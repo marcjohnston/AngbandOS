@@ -18,7 +18,7 @@ namespace AngbandOS.Core;
     {
         return $"=>{ObjectId}";
     }
-    public override void Verify(RestoreGameState restoreGameState, object? singleton)
+    public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
         throw new NotImplementedException();
     }

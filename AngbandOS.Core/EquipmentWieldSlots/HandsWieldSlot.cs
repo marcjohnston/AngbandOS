@@ -23,7 +23,7 @@ internal class HandsWieldSlot : EquipmentWieldSlot
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(RestrictingGloves), new BoolValueGameStateBag(RestrictingGloves))
+            (nameof(RestrictingGloves), saveGameState.CreateGameStateBag(RestrictingGloves))
         );
     }
 

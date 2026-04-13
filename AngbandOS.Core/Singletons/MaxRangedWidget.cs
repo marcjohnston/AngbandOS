@@ -33,9 +33,9 @@ internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, IGameSerialize
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(_sortValidated), new BoolValueGameStateBag(_sortValidated)),
-            (nameof(_value), new StringValueGameStateBag(_value)),
-            (nameof(_color), new ColorEnumValueGameStateBag(_color))
+            (nameof(_sortValidated), saveGameState.CreateGameStateBag(_sortValidated)),
+            (nameof(_value), saveGameState.CreateGameStateBag(_value)),
+            (nameof(_color), saveGameState.CreateGameStateBag(_color))
         );
     }
     /// <summary>

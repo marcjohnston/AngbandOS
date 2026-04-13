@@ -19,15 +19,12 @@ internal class ByteArrayGameStateBag : GameStateBag
     {
         return $"{Value}";
     }
-    public override void Verify(RestoreGameState restoreGameState, object? singleton)
+    public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
         if (singleton is not byte[] byteArraySingletonFieldValue)
         {
             throw new Exception($"During restore verification, the {singleton?.GetType().Name ?? "null"} singleton did not verify as a byte[] value.");
         }
-        if (byteArraySingletonFieldValue.ToString() != Value)
-        {
-            throw new Exception($"During restore verification, the {singleton.GetType().Name} singleton did not verify.  Expected {Value}.");
-        }
+        return byteArraySingletonFieldValue.ToString() == Value;
     }
 }

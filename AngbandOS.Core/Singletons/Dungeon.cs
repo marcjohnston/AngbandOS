@@ -34,13 +34,13 @@ internal sealed class Dungeon : IGetKey, IToJson, IGameSerialize
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(RecallLevel), new IntValueGameStateBag(RecallLevel)),
-            (nameof(KnownDepth), new BoolValueGameStateBag(KnownDepth)),
-            (nameof(KnownOffset), new BoolValueGameStateBag(KnownOffset)),
-            (nameof(Offset), new IntValueGameStateBag(Offset)),
-            (nameof(Visited), new BoolValueGameStateBag(Visited)),
-            (nameof(X), new IntValueGameStateBag(X)),
-            (nameof(Y), new IntValueGameStateBag(Y))
+            (nameof(RecallLevel), saveGameState.CreateGameStateBag(RecallLevel)),
+            (nameof(KnownDepth), saveGameState.CreateGameStateBag(KnownDepth)),
+            (nameof(KnownOffset), saveGameState.CreateGameStateBag(KnownOffset)),
+            (nameof(Offset), saveGameState.CreateGameStateBag(Offset)),
+            (nameof(Visited), saveGameState.CreateGameStateBag(Visited)),
+            (nameof(X), saveGameState.CreateGameStateBag(X)),
+            (nameof(Y), saveGameState.CreateGameStateBag(Y))
         );
     }
 

@@ -17,15 +17,12 @@ internal class DateTimeValueGameStateBag : GameStateBag
     {
         return $"{Value}";
     }
-    public override void Verify(RestoreGameState restoreGameState, object? singleton)
+    public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
         if (singleton is not DateTime dateTimeSingletonFieldValue)
         {
             throw new Exception($"During restore verification, the {singleton?.GetType().Name ?? "null"} singleton did not verify as a DateTime value.");
         }
-        if (dateTimeSingletonFieldValue != Value)
-        {
-            throw new Exception($"During restore verification, the {singleton.GetType().Name} singleton did not verify.  Expected {Value}.");
-        }
+        return dateTimeSingletonFieldValue == Value;
     }
 }

@@ -51,7 +51,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(base.Serialize(saveGameState), 
-            (nameof(PreviousMartialArtistArmorAux), new BoolValueGameStateBag(PreviousMartialArtistArmorAux))
+            (nameof(PreviousMartialArtistArmorAux), saveGameState.CreateGameStateBag(PreviousMartialArtistArmorAux))
         );
     }
     protected override void Execute()

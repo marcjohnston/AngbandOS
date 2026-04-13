@@ -432,6 +432,7 @@ internal sealed class SingletonRepository : IGameSerialize
         // Bind all of the singletons now.
         foreach (IGetKey singleton in _allSingletonsList)
         {
+            // Retrieve the restore game state, if we are restoring; otherwise, we will have null as the restore game state--which is still passed to the singleton Bind method.
             RestoreGameState? singletonRestoreGameState = restoreGameState?.Get(singleton.GetKey);
 
             // Allow the singleton to bind now.  Provide the restore game state, if we are restoring.
@@ -483,7 +484,10 @@ internal sealed class SingletonRepository : IGameSerialize
         string singletonTypeName = singleton?.GetType().Name ?? "null";
 
         // Perform a verification of the restore process.
-        restoreGameState.Verify(singleton);
+        if (!restoreGameState.Verify(singleton))
+        {
+            throw new Exception($"During restore verification, the {singletonTypeName} singleton did not verify.");
+        }
     }
 
     private void ValidateSystemScriptsEnum()
@@ -678,7 +682,7 @@ internal sealed class SingletonRepository : IGameSerialize
         // For persistence validation, we need to ensure the type T implements IToJson.
         if (!typeof(IToJson).IsAssignableFrom(typeof(T)))
         {
-            throw new Exception($"The type {typeof(T).Name} does not implement {nameof(IToJson)} to support the persistance for {nameof(GameConfiguration)}.");
+            throw new Exception($"The type {typeof(T).Name} does not implement {nameof(IToJson)} to support the persistence for {nameof(GameConfiguration)}.");
         }
 
         // Register the repository with persistence.

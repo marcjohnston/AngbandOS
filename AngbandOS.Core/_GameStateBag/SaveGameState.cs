@@ -19,45 +19,6 @@ internal class SaveGameState
     {
     }
 
-//    public GameStateBag CreateObjectGameStateBag(object? obj)
-//    {
-//        if (obj is null)
-//        {
-//            return new NullValueGameStateBag();
-//        }
-
-//        if (ObjectToIdDictionary.TryGetValue(obj, out int existingId))
-//        {
-//            return new ReferenceGameStateBag(existingId);
-//        }
-
-//        GameStateBag gameStateBag;
-//        if (obj is IGameSerialize gameSerializable)
-//        {
-//            gameStateBag = gameSerializable.Serialize(this);
-
-//#if DEBUG
-//            int serializedCount = ((DictionaryGameStateBag?)gameStateBag)?.Values.Count ?? 0;
-//            // Verify the reflection doesn't have more fields than the IGameSerialize return.
-//            SaveGameState tempSaveGameState = new SaveGameState();
-//            GameStateBag singletonGameStateBagViaReflection = tempSaveGameState.SerializeViaReflection(obj, nameof(SingletonRepository));
-//            if (((DictionaryGameStateBag)singletonGameStateBagViaReflection).Values.Count > serializedCount)
-//            {
-//                Debug.WriteLine($"The number of fields serialized via reflection for {obj.GetType().Name} does not match the number of fields serialized via the IGameSerialize interface.  This indicates that the IGameSerialize implementation is not serializing all of the fields in the singleton.  This will cause issues with game state restoration.  Ensure that all fields are being serialized in the IGameSerialize implementation.");
-//            }
-//#endif
-//        }
-//        else
-//        {
-//            Debug.WriteLine($"Warning: {obj.GetType().Name} does not implement IGameSerialize.  Using reflection-based serialization, which is slower and more error-prone.  Consider implementing IGameSerialize on {obj.GetType().Name} to improve performance and reliability.");
-//            gameStateBag = SerializeViaReflection(obj, "");
-//        }
-
-//        int objectId = ObjectToIdDictionary.Count + 1;
-//        ObjectToIdDictionary.Add(obj, objectId);
-//        return new ObjectGameStateBag(objectId, ((DictionaryGameStateBag?)gameStateBag)?.Values);
-//    }
-
     public GameStateBag CreateGameStateBag(object? value)
     {
         if (value is null)
@@ -154,6 +115,28 @@ internal class SaveGameState
         if (value is char[] charArray)
         {
             return new CharArrayGameStateBag(charArray);
+        }
+
+        // int[]
+        if (value is int[] intArray)
+        {
+            var gameStateBags = new List<GameStateBag>();
+            foreach (int item in intArray)
+            {
+                gameStateBags.Add(CreateGameStateBag(item));
+            }
+            return new ListGameStateBag(gameStateBags.ToArray());
+        }
+
+        // bool[]
+        if (value is bool[] boolArray)
+        {
+            var gameStateBags = new List<GameStateBag>();
+            foreach (bool item in boolArray)
+            {
+                gameStateBags.Add(CreateGameStateBag(item));
+            }
+            return new ListGameStateBag(gameStateBags.ToArray());
         }
 
         // byte[]

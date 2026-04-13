@@ -35,13 +35,13 @@ internal abstract class Ability : IGetKey, IGameSerialize
     public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Adjusted), new IntValueGameStateBag(Adjusted)),
-            (nameof(AdjustedMax), new IntValueGameStateBag(AdjustedMax)),
-            (nameof(Bonus), new IntValueGameStateBag(Bonus)),
-            (nameof(Innate), new IntValueGameStateBag(Innate)),
-            (nameof(InnateMax), new IntValueGameStateBag(InnateMax)),
-            (nameof(Override), new BoolValueGameStateBag(Override)),
-            (nameof(TableIndex), new IntValueGameStateBag(TableIndex))
+            (nameof(Adjusted), saveGameState.CreateGameStateBag(Adjusted)),
+            (nameof(AdjustedMax), saveGameState.CreateGameStateBag(AdjustedMax)),
+            (nameof(Bonus), saveGameState.CreateGameStateBag(Bonus)),
+            (nameof(Innate), saveGameState.CreateGameStateBag(Innate)),
+            (nameof(InnateMax), saveGameState.CreateGameStateBag(InnateMax)),
+            (nameof(Override), saveGameState.CreateGameStateBag(Override)),
+            (nameof(TableIndex), saveGameState.CreateGameStateBag(TableIndex))
         );
     }
 

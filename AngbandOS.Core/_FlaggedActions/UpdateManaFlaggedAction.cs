@@ -29,7 +29,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(base.Serialize(saveGameState), 
-            (nameof(OldRestrictingArmor), new BoolValueGameStateBag(OldRestrictingArmor))
+            (nameof(OldRestrictingArmor), saveGameState.CreateGameStateBag(OldRestrictingArmor))
         );
     }
     protected override void Execute()
