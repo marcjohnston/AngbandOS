@@ -62,6 +62,17 @@ internal sealed class Dungeon : IGetKey, IToJson, IGameSerialize
             }
         }
         DungeonGuardians = dungeonGuardianList.ToArray();
+
+        if (restoreGameState is not null)
+        {
+            RecallLevel = restoreGameState.GetInt(nameof(RecallLevel));
+            KnownDepth = restoreGameState.GetBool(nameof(KnownDepth));
+            KnownOffset = restoreGameState.GetBool(nameof(KnownOffset));
+            Offset = restoreGameState.GetInt(nameof(Offset));
+            Visited = restoreGameState.GetBool(nameof(Visited));
+            X = restoreGameState.GetInt(nameof(X));
+            Y = restoreGameState.GetInt(nameof(Y));
+        }
     }
 
     public int ActiveQuestCount()
@@ -99,7 +110,7 @@ internal sealed class Dungeon : IGetKey, IToJson, IGameSerialize
     /// <summary>
     /// Randomize the actual offset (difficulty) of each dungeon around its base offset for some variability
     /// </summary>
-    public void RandomiseOffset()
+    public void RandomizeOffset()
     {
         // Maximum offset is the dungeon's base offset or 10, whichever is less (but since we're
         // using 'less than', we add one to both values here)

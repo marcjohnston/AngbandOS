@@ -2728,7 +2728,7 @@ internal partial class Game
         CreateWorld();
         foreach (var dungeon in SingletonRepository.Get<Dungeon>())
         {
-            dungeon.RandomiseOffset();
+            dungeon.RandomizeOffset();
         }
         ResetStompability();
         CurrentDepth = 0;
