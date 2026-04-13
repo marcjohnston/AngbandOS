@@ -6,12 +6,15 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
+/// <summary>
+/// Represents a widget that renders a specific text value and color based on an integer value.
+/// </summary>
 [Serializable]
 internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
     #region State Data
     private bool _sortValidated = false;
-    private string _value;
+    private string _value = ""; // The default value to render is blank.
     private ColorEnum _color;
     #endregion
 
@@ -73,6 +76,16 @@ internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, IGameSerialize
         Justification = Game.SingletonRepository.Get<Justification>(JustificationName);
         IntValue = Game.SingletonRepository.Get<IIntValue>(IntValueName);
         MaxIntValue = Game.SingletonRepository.Get<IIntValue>(MaxIntValueName);
+
+        // Now that we need to check the ranges, validate that the ranges are properly sorted in descending order.  We only do this once.
+        ValidateRangeSorting();
+
+        if (restoreGameState is not null)
+        {
+            _sortValidated = restoreGameState.GetBool(nameof(_sortValidated));
+            _value = restoreGameState.GetString(nameof(_value));
+            _color = restoreGameState.GetEnum<ColorEnum>(nameof(_color));
+        }
     }
 
     private void ValidateRangeSorting()
@@ -116,9 +129,6 @@ internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, IGameSerialize
 
     public override void Update()
     {
-        // Now that we need to check the ranges, validate that the ranges are properly sorted in descending order.  We only do this once.
-        ValidateRangeSorting();
-
         // Grab a copy of the value and max value so that we do not retrieve it for every range.
         int intValue = IntValue.IntValue;
         string intTextValue = intValue.ToString();
