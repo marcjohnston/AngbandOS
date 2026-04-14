@@ -27,7 +27,6 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             nameof(ByteValueGameStateBag) => new ByteValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetByte()),
             nameof(CharArrayGameStateBag) => new CharArrayGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!.ToCharArray()),
             nameof(CharValueGameStateBag) => new CharValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()![0]),
-            //nameof(EnumValueGameStateBag) => new EnumValueGameStateBag((ColorEnum)Enum.Parse(typeof(ColorEnum), doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
             nameof(DateTimeValueGameStateBag) => new DateTimeValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDateTime()),
             nameof(DecimalValueGameStateBag) => new DecimalValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDecimal()),
             nameof(DictionaryGameStateBag) => new DictionaryGameStateBag(JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
@@ -74,11 +73,6 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
                 writer.WriteString(TypePropertyName, nameof(CharValueGameStateBag));
                 writer.WriteString(ValuePropertyName, charValue.Value.ToString());
                 break;
-
-            //case EnumValueGameStateBag enumValue:
-            //    writer.WriteString(TypePropertyName, nameof(EnumValueGameStateBag));
-            //    writer.WriteString(ValuePropertyName, enumValue.Value.ToString());
-            //    break;
 
             case DateTimeValueGameStateBag dateTimeValue:
                 writer.WriteString(TypePropertyName, nameof(DateTimeValueGameStateBag));

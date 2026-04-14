@@ -20,6 +20,15 @@ internal class ObjectGameStateBag : GameStateBag
         TypeName = typeName;
         Values = value ?? new Dictionary<string, GameStateBag>();
     }
+    public GameStateBag Find(string key)
+    {
+        if (Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        {
+            return gameStateBag;
+        }
+        throw new Exception($"Unable to find {key} in the {nameof(ObjectGameStateBag)}.");
+    }
+
     public override string ToString()
     {
         return $"Object#{ObjectId}";

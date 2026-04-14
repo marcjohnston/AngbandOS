@@ -23,29 +23,11 @@ internal class RestoreGameState
         GameStateBag = gameStateBag;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="singleton"></param>
-    /// <exception cref="InvalidOperationException"></exception>
-    /// <remarks>
-    /// Objects registration can occur via objects or references.  The order depends on how the serialization unfolded.
-    /// </remarks>
-    public void RegisterSingleton(IGetKey singleton)
+    public void TrackObject(int objectId, IGetKey singleton)
     {
-        if (GameStateBag is ObjectGameStateBag objectGameStateBag)
-        {
-            ObjectIdToReferenceDictionary[objectGameStateBag.ObjectId] = singleton;
-        }
-        else if (GameStateBag is ReferenceGameStateBag referenceGameStateBag)
-        {
-            ObjectIdToReferenceDictionary[referenceGameStateBag.ObjectId] = singleton;
-        }
-        else
-        {
-            throw new InvalidOperationException($"GameStateBag is not a {typeof(ObjectGameStateBag)}.");
-        }
+        ObjectIdToReferenceDictionary.Add(objectId, singleton);
     }
+
     public IGetKey GetObjectById(int objectId)
     {
         return ObjectIdToReferenceDictionary[objectId];
@@ -63,12 +45,12 @@ internal class RestoreGameState
 
     public RestoreGameState? Get(string key)
     {
-        if (GameStateBag is not DictionaryGameStateBag dictionaryGameStateBag)
+        if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
         {
-            throw new InvalidOperationException("GameStateBag is not a DictionaryGameStateBag.");
+            throw new InvalidOperationException($"GameStateBag is not an {nameof(ObjectGameStateBag)}.");
         }
 
-        if (dictionaryGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        if (objectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
         {
             return new RestoreGameState(Game, ObjectIdToReferenceDictionary, gameStateBag);
         }
@@ -115,7 +97,7 @@ internal class RestoreGameState
         return boolList.ToArray();
     }
 
-    public T GetReference<T>(GameStateBag gameStateBag)
+    private T GetReference<T>(GameStateBag gameStateBag)
     {
         if (gameStateBag is ReferenceGameStateBag referenceGameStateBag)
         {
@@ -159,11 +141,11 @@ internal class RestoreGameState
 
     public T GetReference<T>(string key)
     {
-        if (GameStateBag is not ObjectGameStateBag thisObjectGameStateBag)
+        if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
         {
             throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
         }
-        if (thisObjectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        if (objectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
         {
             return GetReference<T>(gameStateBag);
         }
@@ -173,11 +155,11 @@ internal class RestoreGameState
 
     public T? GetNullableReference<T>(string key)
     {
-        if (GameStateBag is not ObjectGameStateBag thisObjectGameStateBag)
+        if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
         {
             throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
         }
-        if (thisObjectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        if (objectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
         {
             if (gameStateBag is NullValueGameStateBag)
             {
@@ -186,6 +168,39 @@ internal class RestoreGameState
             return GetReference<T>(gameStateBag);
         }
         throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
+    }
+
+    public T[] GetReferences<T>(string key)
+    {
+        if (GameStateBag is not ListGameStateBag listGameStateBag)
+        {
+            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
+        }
+        List<T> list = new List<T>();
+        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        {
+            T t = GetReference<T>(gameStateBag);
+            list.Add(t);
+        }
+        return list.ToArray();
+    }
+
+    public int[] GetIntegers(string key)
+    {
+        if (GameStateBag is not ListGameStateBag listGameStateBag)
+        {
+            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
+        }
+        List<int> list = new List<int>();
+        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        {
+            if (gameStateBag is not IntValueGameStateBag intValueGameStateBag)
+            {
+                throw new Exception("Expected list of integers.");
+            }
+            list.Add(intValueGameStateBag.Value);
+        }
+        return list.ToArray();
     }
 
     public int GetInt(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
@@ -214,19 +229,5 @@ internal class RestoreGameState
 
     public TimeSpan GetTimeSpan(string key) => GetGameStateBag<TimeSpanValueGameStateBag>(key).Value;
 
-    //public ColorEnum GetColorEnum(string key) => GetGameStateBag<ColorEnumValueGameStateBag>(key).Value;
-
     public string[] GetQueueStrings(string key) => GetGameStateBag<QueueOfStringGameStateBag>(key).Values.ToArray();
-    public bool IsEmpty()
-    {
-        switch (GameStateBag)
-        {
-            case ObjectGameStateBag objectGameStateBag:
-                return objectGameStateBag.Values.Count == 0;
-            case DictionaryGameStateBag dictionaryGameStateBag:
-                return dictionaryGameStateBag.Values.Count == 0;
-            default:
-                return false; // Primitive types are never empty.
-        }
-    }
 }

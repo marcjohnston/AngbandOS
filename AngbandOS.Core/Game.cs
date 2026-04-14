@@ -4,7 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
@@ -86,7 +85,8 @@ internal partial class Game
     public DictionaryGameStateBag Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(SingletonRepository), SingletonRepository.Serialize(saveGameState)),
+            (nameof(SingletonRepository), saveGameState.CreateGameStateBag(SingletonRepository)),
+
             (nameof(IsBirthday), saveGameState.CreateGameStateBag(IsBirthday)),
             (nameof(IsDawn), saveGameState.CreateGameStateBag(IsDawn)),
             (nameof(IsDusk), saveGameState.CreateGameStateBag(IsDusk)),
@@ -160,7 +160,6 @@ internal partial class Game
             (nameof(SkillThrowing), saveGameState.CreateGameStateBag(SkillThrowing)),
             (nameof(SkillUseDevice), saveGameState.CreateGameStateBag(SkillUseDevice)),
             (nameof(SocialClass), saveGameState.CreateGameStateBag(SocialClass)),
-
             (nameof(CharismaBonus), saveGameState.CreateGameStateBag(CharismaBonus)),
             (nameof(ConstitutionBonus), saveGameState.CreateGameStateBag(ConstitutionBonus)),
             (nameof(DexterityBonus), saveGameState.CreateGameStateBag(DexterityBonus)),
@@ -187,7 +186,6 @@ internal partial class Game
             (nameof(MainSequenceRandomSeed), saveGameState.CreateGameStateBag(MainSequenceRandomSeed)),
             (nameof(CurrentSequenceRandomSeed), saveGameState.CreateGameStateBag(CurrentSequenceRandomSeed)),
             (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet)),
-
             (nameof(UseFixed), saveGameState.CreateGameStateBag(UseFixed)),
             (nameof(FixedSeed), saveGameState.CreateGameStateBag(FixedSeed)),
             (nameof(CurrentRunDirection), saveGameState.CreateGameStateBag(CurrentRunDirection)),
@@ -348,7 +346,6 @@ internal partial class Game
             (nameof(_prevGeneration), saveGameState.CreateGameStateBag(_prevGeneration)),
             (nameof(_prevName), saveGameState.CreateGameStateBag(_prevName)),
             (nameof(_prevRace), saveGameState.CreateGameStateBag(_prevRace)),
-
             (nameof(_prevPrimaryRealm), saveGameState.CreateGameStateBag(_prevPrimaryRealm)),
             (nameof(_prevSecondaryRealm), saveGameState.CreateGameStateBag(_prevSecondaryRealm)),
             (nameof(_prevSex), saveGameState.CreateGameStateBag(_prevSex)),
@@ -488,14 +485,15 @@ internal partial class Game
         GameStateBag? singletonRepositoryGameStateBag = dictionaryGameStateBag?.Values[nameof(SingletonRepository)];
         if (singletonRepositoryGameStateBag is not null)
         {
-            if (singletonRepositoryGameStateBag is not DictionaryGameStateBag singletonDictionaryRepositoryGameStateBag)
+            if (singletonRepositoryGameStateBag is not ObjectGameStateBag objectRepositoryGameStateBag)
             {
                 throw new Exception($"Expected a {nameof(DictionaryGameStateBag)} for the singleton repository game state bag.");
             }
-            SingletonRepository.LoadAndBind(gameConfiguration, new RestoreGameState(this, objectIdToReferenceDictionary, singletonDictionaryRepositoryGameStateBag));
+            SingletonRepository.LoadAndBind(gameConfiguration, new RestoreGameState(this, objectIdToReferenceDictionary, objectRepositoryGameStateBag));
 
+            #if DEBUG
             // Check to see if there are any bags unfulfilled in the restore state.            
-            foreach (KeyValuePair<string, GameStateBag> singletonKeyAndGameStateBag in singletonDictionaryRepositoryGameStateBag.Values)
+            foreach (KeyValuePair<string, GameStateBag> singletonKeyAndGameStateBag in objectRepositoryGameStateBag.Values)
             {
                 if (singletonKeyAndGameStateBag.Value is ObjectGameStateBag objectGameStateBag)
                 {
@@ -516,6 +514,7 @@ internal partial class Game
                     throw new Exception($"Cannot verify singleton objects were created because {singletonKeyAndGameStateBag.Key} is not an {nameof(ObjectGameStateBag)} or {nameof(ReferenceGameStateBag)}.");
                 }
             }
+            #endif
         }
         else
         {

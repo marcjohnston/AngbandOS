@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Diagnostics;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -29,11 +30,10 @@ internal sealed class SingletonRepository : IGameSerialize
         foreach (IGetKey singleton in _allSingletonsList)
         {
             string key = singleton.GetKey;
-
+            Debug.Print($"Singleton => {singleton.GetKey}");
             GameStateBag singletonGameStateBag = saveGameState.CreateGameStateBag(singleton);
             result.Add(key, singletonGameStateBag);
         }
-
         return new DictionaryGameStateBag(result);
     }
 
@@ -267,72 +267,72 @@ internal sealed class SingletonRepository : IGameSerialize
     public void LoadAndBind(GameConfiguration gameConfiguration, RestoreGameState? restoreGameState)
     {
         // These are the types to load from the assembly.  The interfaces that are not registered here will be registered just before the configuration is loaded.
-        RegisterInterface<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
-        RegisterInterface<IActivateItemScript>();
-        RegisterInterface<IAimWandScript>();
-        RegisterInterface<IBoolValue>();
-        RegisterInterface<ICastSpellScript>();
-        RegisterInterface<IChangeTracker>();
-        RegisterInterface<IDateAndTimeValue>();
-        RegisterInterface<IEatOrQuaffScript>();
-        RegisterInterface<IEnhancementScript>();
-        RegisterInterface<IGameCommandScript>();
-        RegisterInterface<IIntValue>();
-        RegisterInterface<IItemEnhancement>();
-        RegisterInterface<IMonsterSelector>();
-        RegisterInterface<ITextValue>();
-        RegisterInterface<IReadScrollOrUseStaffScript>();
-        RegisterInterface<IScript>();
-        RegisterInterface<IScriptBool>();
-        RegisterInterface<IScriptItem>();
-        RegisterInterface<IScriptItemGridTile>();
-        RegisterInterface<IScriptItemInt>();
-        RegisterInterface<IScriptItemMonster>();
-        RegisterInterface<IStoreCommandScript>();
-        RegisterInterface<IStringValue>();
-        RegisterInterface<IUsedScript>();
-        RegisterInterface<IZapRodScript>();
+        RegisterIndex<IGetKey>(); // This repository should be needed, it is capable of retrieving all singletons.
+        RegisterIndex<IActivateItemScript>();
+        RegisterIndex<IAimWandScript>();
+        RegisterIndex<IBoolValue>();
+        RegisterIndex<ICastSpellScript>();
+        RegisterIndex<IChangeTracker>();
+        RegisterIndex<IDateAndTimeValue>();
+        RegisterIndex<IEatOrQuaffScript>();
+        RegisterIndex<IEnhancementScript>();
+        RegisterIndex<IGameCommandScript>();
+        RegisterIndex<IIntValue>();
+        RegisterIndex<IItemEnhancement>();
+        RegisterIndex<IMonsterSelector>();
+        RegisterIndex<ITextValue>();
+        RegisterIndex<IReadScrollOrUseStaffScript>();
+        RegisterIndex<IScript>();
+        RegisterIndex<IScriptBool>();
+        RegisterIndex<IScriptItem>();
+        RegisterIndex<IScriptItemGridTile>();
+        RegisterIndex<IScriptItemInt>();
+        RegisterIndex<IScriptItemMonster>();
+        RegisterIndex<IStoreCommandScript>();
+        RegisterIndex<IStringValue>();
+        RegisterIndex<IUsedScript>();
+        RegisterIndex<IZapRodScript>();
 
         // Base preload
-        RegisterInterface<Attribute>();
+        RegisterIndex<Attribute>();
 
         // Not configurable yet
-        RegisterInterface<Ability>();
-        RegisterInterface<ActivationWeightedRandom>();
-        RegisterInterface<Alignment>();
-        RegisterInterface<AlterAction>();
-        RegisterInterface<ArtifactBias>();
-        RegisterInterface<AttackEffect>();
-        RegisterInterface<CharacterClass>();
-        RegisterInterface<BirthStage>();
-        RegisterInterface<FixedArtifact>();
-        RegisterInterface<FlaggedAction>();
-        RegisterInterface<GridTileScript>();
-        RegisterInterface<ItemAction>();
-        RegisterInterface<ItemEffect>();
-        RegisterInterface<ItemMatch>();
-        RegisterInterface<ItemQualityRating>();
-        RegisterInterface<Justification>();
-        RegisterInterface<MartialArtsEffect>();
-        RegisterInterface<MonsterEffect>();
-        RegisterInterface<MonsterFilter>();
-        RegisterInterface<MonsterRace>(); 
-        RegisterInterface<MonsterRaceFilter>();
-        RegisterInterface<MonsterSelector>();
-        RegisterInterface<MonsterSpell>();
-        RegisterInterface<Mutation>();
-        RegisterInterface<PlayerEffectUniversalScript>();
-        RegisterInterface<ProbabilityExpression>();
-        RegisterInterface<Property>();
-        RegisterInterface<Race>();
-        RegisterInterface<Reward>();
-        RegisterInterface<RoomLayout>();
-        RegisterInterface<SpellResistantDetection>();
-        RegisterInterface<Talent>();
-        RegisterInterface<Timer>();
-        RegisterInterface<WieldSlot>();
-        RegisterInterface<EquipmentWieldSlot>();
-        RegisterInterface<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
+        RegisterIndex<Ability>();
+        RegisterIndex<ActivationWeightedRandom>();
+        RegisterIndex<Alignment>();
+        RegisterIndex<AlterAction>();
+        RegisterIndex<ArtifactBias>();
+        RegisterIndex<AttackEffect>();
+        RegisterIndex<CharacterClass>();
+        RegisterIndex<BirthStage>();
+        RegisterIndex<FixedArtifact>();
+        RegisterIndex<FlaggedAction>();
+        RegisterIndex<GridTileScript>();
+        RegisterIndex<ItemAction>();
+        RegisterIndex<ItemEffect>();
+        RegisterIndex<ItemMatch>();
+        RegisterIndex<ItemQualityRating>();
+        RegisterIndex<Justification>();
+        RegisterIndex<MartialArtsEffect>();
+        RegisterIndex<MonsterEffect>();
+        RegisterIndex<MonsterFilter>();
+        RegisterIndex<MonsterRace>(); 
+        RegisterIndex<MonsterRaceFilter>();
+        RegisterIndex<MonsterSelector>();
+        RegisterIndex<MonsterSpell>();
+        RegisterIndex<Mutation>();
+        RegisterIndex<PlayerEffectUniversalScript>();
+        RegisterIndex<ProbabilityExpression>();
+        RegisterIndex<Property>();
+        RegisterIndex<Race>();
+        RegisterIndex<Reward>();
+        RegisterIndex<RoomLayout>();
+        RegisterIndex<SpellResistantDetection>();
+        RegisterIndex<Talent>();
+        RegisterIndex<Timer>();
+        RegisterIndex<WieldSlot>();
+        RegisterIndex<EquipmentWieldSlot>();
+        RegisterIndex<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
 
         // Load system singletons.
         LoadAllAssemblyTypes<IGetKey>(restoreGameState);
@@ -535,7 +535,7 @@ internal sealed class SingletonRepository : IGameSerialize
     /// Registers an additional index for singleton entities by an interface.  Persistence for the index is not enabled.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    private void RegisterInterface<T>()
+    private void RegisterIndex<T>()
     {
         RegisterIndex<T>(false);
     }
@@ -574,7 +574,7 @@ internal sealed class SingletonRepository : IGameSerialize
     /// </summary>
     /// <param name="singleton"></param>
     /// <exception cref="Exception"></exception>
-    private void RegisterSingleton(IGetKey singleton)
+    private void IndexSingleton(IGetKey singleton)
     {
         // Add the singleton to the list of singletons so that they can be bound.  Only add the singleton once.
         if (!_allSingletonsList.Contains(singleton))
@@ -624,7 +624,7 @@ internal sealed class SingletonRepository : IGameSerialize
                     IIndexedSingletons indexedSingleton = (IIndexedSingletons)singleton;
                     if (indexedSingleton.Index != -1)
                     {
-                        throw new Exception($"{nameof(RegisterSingleton)} has detected an index overwrite condition.");
+                        throw new Exception($"{nameof(IndexSingleton)} has detected an index overwrite condition.");
                     }
                     indexedSingleton.Index = genericRepository.GetIndex(singleton);
                 }
@@ -632,19 +632,28 @@ internal sealed class SingletonRepository : IGameSerialize
         }
     }
 
-    private void RegisterSingletonWithRestoreGameState(IGetKey singleton, RestoreGameState restoreGameState)
+    private int FindObjectId(ObjectGameStateBag singletonRepositoryGameStateBag, IGetKey singleton)
     {
-        // Retrieve the restore state for this singleton.
-        RestoreGameState? singletonRestoreGameState = restoreGameState.Get(singleton.GetKey);
-        if (singletonRestoreGameState is null)
+        // Find the matching singleton in the restore game state and ensure it is an object game state bag so that we have an object ID that we can track.
+        GameStateBag singletonGameStateBag = singletonRepositoryGameStateBag.Find(singleton.GetKey);
+        if (singletonGameStateBag is ObjectGameStateBag singletonObjectGameStateBag)
         {
-            throw new Exception($"There is a mismatch between the save game and the game configuration.  The {singleton.GetType().Name} bag was not found in the save game.");
+            return singletonObjectGameStateBag.ObjectId;
         }
-        singletonRestoreGameState.RegisterSingleton(singleton);
+        if (singletonGameStateBag is ReferenceGameStateBag singletonReferenceGameStateBag)
+        {
+            return singletonReferenceGameStateBag.ObjectId;
+        }
+        throw new Exception($"The singleton {singleton.GetKey} in the restore game state is not an {nameof(ObjectGameStateBag)} or a {nameof(ReferenceGameStateBag)}.");
     }
 
     private void LoadAllAssemblyTypes<T>(RestoreGameState? restoreGameState) // TODO: WHY CANT THIS BE where T: IGETKEY
     {
+        if (restoreGameState.GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
+        {
+            throw new Exception($"The {nameof(restoreGameState)} parameter for the {nameof(LoadAllAssemblyTypes)} must be an {nameof(ObjectGameStateBag)}.");
+        }
+
         Assembly assembly = Assembly.GetExecutingAssembly();
         Type[] types = assembly.GetTypes();
         foreach (Type type in types)
@@ -662,10 +671,13 @@ internal sealed class SingletonRepository : IGameSerialize
                     try
                     {
                         IGetKey singleton = (IGetKey)constructors[0].Invoke(new object[] { Game });
-                        RegisterSingleton(singleton);
+                        IndexSingleton(singleton);
+
+                        // If we are restoring a game, we need to track the singleton we created here is phase 1 of the load with the object id.
                         if (restoreGameState is not null)
                         {
-                            RegisterSingletonWithRestoreGameState(singleton, restoreGameState);
+                            // Track the object as created.
+                            restoreGameState.TrackObject(FindObjectId(singletonRepositoryGameStateBag, singleton), singleton);
                         }
                     }
                     catch (Exception ex)
@@ -686,7 +698,7 @@ internal sealed class SingletonRepository : IGameSerialize
         }
 
         // Register the repository with persistence.
-        RegisterInterface<T>();
+        RegisterIndex<T>();
 
         string typeName = typeof(T).Name;
         if (entityConfigurations is not null)
@@ -701,15 +713,23 @@ internal sealed class SingletonRepository : IGameSerialize
             {
                 throw new Exception($"Cannot find constructor for {typeof(T).Name}.  Expecting ctor(Game, {typeof(TConfiguration).Name})");
             }
+
+            if (restoreGameState.GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
+            {
+                throw new Exception($"The {nameof(restoreGameState)} parameter for the {nameof(LoadAllAssemblyTypes)} must be an {nameof(ObjectGameStateBag)}.");
+            }
+
             foreach (TConfiguration entityConfiguration in entityConfigurations)
             {
                 // We need to convert from the GameConfiguration object to the entity object.  Create the generic object
                 T singleton = (T)constructor.Invoke(new object[] { Game, entityConfiguration });
-                RegisterSingleton(singleton);
+                IndexSingleton(singleton);
 
+                // If we are restoring a game, we need to track the singleton we created here is phase 1 of the load with the object id.
                 if (restoreGameState is not null)
                 {
-                    RegisterSingletonWithRestoreGameState(singleton, restoreGameState);
+                    // Track the object as created.
+                    restoreGameState.TrackObject(FindObjectId(singletonRepositoryGameStateBag, singleton), singleton);
                 }
             }
         }

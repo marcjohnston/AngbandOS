@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Drawing;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -156,7 +158,6 @@ internal class Monster : IItemContainer, IGameSerialize
             (nameof(StolenGold), saveGameState.CreateGameStateBag(StolenGold)),
             (nameof(StunLevel), saveGameState.CreateGameStateBag(StunLevel)),
             (nameof(IndividualMonsterFlags), saveGameState.CreateGameStateBag(IndividualMonsterFlags))
-
         );
     }
 
@@ -281,6 +282,58 @@ internal class Monster : IItemContainer, IGameSerialize
     }
     private Game Game { get; }
 
+    public Monster(Game game, RestoreGameState restoreGameState) : this(game)
+    {
+        ConfusionLevel = restoreGameState.GetInt(nameof(ConfusionLevel));
+        DistanceFromPlayer = restoreGameState.GetInt(nameof(DistanceFromPlayer));
+        Energy = restoreGameState.GetInt(nameof(Energy));
+        _fearLevel = restoreGameState.GetInt(nameof(_fearLevel));
+        Items.AddRange(restoreGameState.GetReferences<Item>(nameof(Items)));
+        Generation = restoreGameState.GetInt(nameof(Generation));
+        _health = restoreGameState.GetInt(nameof(_health));
+        _isVisible = restoreGameState.GetBool(nameof(_isVisible));
+        MapX = restoreGameState.GetInt(nameof(MapX));
+        MapY = restoreGameState.GetInt(nameof(MapY));
+        _maxHealth = restoreGameState.GetInt(nameof(_maxHealth));
+        _isPet = restoreGameState.GetBool(nameof(_isPet));
+        SmCloned = restoreGameState.GetBool(nameof(SmCloned));
+        SmImmAcid = restoreGameState.GetBool(nameof(SmImmAcid));
+        SmImmCold = restoreGameState.GetBool(nameof(SmImmCold));
+        SmImmElec = restoreGameState.GetBool(nameof(SmImmElec));
+        SmImmFire = restoreGameState.GetBool(nameof(SmImmFire));
+        SmImmFree = restoreGameState.GetBool(nameof(SmImmFree));
+        SmImmMana = restoreGameState.GetBool(nameof(SmImmMana));
+        SmImmReflect = restoreGameState.GetBool(nameof(SmImmReflect));
+        SmImmXxx5 = restoreGameState.GetBool(nameof(SmImmXxx5));
+        SmOppAcid = restoreGameState.GetBool(nameof(SmOppAcid));
+        SmOppCold = restoreGameState.GetBool(nameof(SmOppCold));
+        SmOppElec = restoreGameState.GetBool(nameof(SmOppElec));
+        SmOppFire = restoreGameState.GetBool(nameof(SmOppFire));
+        SmOppPois = restoreGameState.GetBool(nameof(SmOppPois));
+        SmOppXXx1 = restoreGameState.GetBool(nameof(SmOppXXx1));
+        SmResAcid = restoreGameState.GetBool(nameof(SmResAcid));
+        SmResBlind = restoreGameState.GetBool(nameof(SmResBlind));
+        SmResChaos = restoreGameState.GetBool(nameof(SmResChaos));
+        SmResCold = restoreGameState.GetBool(nameof(SmResCold));
+        SmResConf = restoreGameState.GetBool(nameof(SmResConf));
+        SmResDark = restoreGameState.GetBool(nameof(SmResDark));
+        SmResDisen = restoreGameState.GetBool(nameof(SmResDisen));
+        SmResElec = restoreGameState.GetBool(nameof(SmResElec));
+        SmResFear = restoreGameState.GetBool(nameof(SmResFear));
+        SmResFire = restoreGameState.GetBool(nameof(SmResFire));
+        SmResLight = restoreGameState.GetBool(nameof(SmResLight));
+        SmResNeth = restoreGameState.GetBool(nameof(SmResNeth));
+        SmResNexus = restoreGameState.GetBool(nameof(SmResNexus));
+        SmResPois = restoreGameState.GetBool(nameof(SmResPois));
+        SmResShard = restoreGameState.GetBool(nameof(SmResShard));
+        SmResSound = restoreGameState.GetBool(nameof(SmResSound));
+        Race = restoreGameState.GetReference<MonsterRace>(nameof(Race));
+        _sleepLevel = restoreGameState.GetInt(nameof(_sleepLevel));
+        Speed = restoreGameState.GetInt(nameof(Speed));
+        StolenGold = restoreGameState.GetInt(nameof(StolenGold));
+        StunLevel = restoreGameState.GetInt(nameof(StunLevel));
+        IndividualMonsterFlags = restoreGameState.GetInt(nameof(IndividualMonsterFlags));
+    }
     public Monster(Game game)
     {
         Game = game;

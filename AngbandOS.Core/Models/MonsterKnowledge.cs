@@ -28,11 +28,13 @@ internal class MonsterKnowledge : IGameSerialize
     public int RSights;
     public int RTkills;
     public int RWake;
+    private readonly MonsterRace _monsterType;
     #endregion
+
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(RBlows), saveGameState.CreateGameStateBag(RBlows[0])),
+            (nameof(RBlows), saveGameState.CreateGameStateBag(RBlows)),
             (nameof(RCastInate), saveGameState.CreateGameStateBag(RCastInate)),
             (nameof(RCastSpell), saveGameState.CreateGameStateBag(RCastSpell)),
             (nameof(RDeaths), saveGameState.CreateGameStateBag(RDeaths)),
@@ -47,20 +49,40 @@ internal class MonsterKnowledge : IGameSerialize
             (nameof(RProbed), saveGameState.CreateGameStateBag(RProbed)),
             (nameof(RSights), saveGameState.CreateGameStateBag(RSights)),
             (nameof(RTkills), saveGameState.CreateGameStateBag(RTkills)),
-            (nameof(RWake), saveGameState.CreateGameStateBag(RWake))
+            (nameof(RWake), saveGameState.CreateGameStateBag(RWake)),
+            (nameof(_monsterType), saveGameState.CreateGameStateBag(_monsterType))
         );
     }
 
-    private MonsterRace _monsterType { get; }
     private string[] _wdHe { get; } = { "it", "he", "she" };
     private string[] _wdHeCap { get; } = { "It", "He", "She" };
     private string[] _wdHis { get; } = { "its", "his", "her" };
     private Game Game { get; }
 
-    public MonsterKnowledge(Game game, MonsterRace monsterType)
+    public MonsterKnowledge(Game game, MonsterRace monsterRace)
     {
         Game = game;
-        _monsterType = monsterType;
+        _monsterType = monsterRace;
+    }
+
+    public MonsterKnowledge(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<MonsterRace>(nameof(MonsterRace)))
+    {
+        RBlows = restoreGameState.GetIntegers(nameof(RBlows));
+        RCastInate = restoreGameState.GetInt(nameof(RCastInate));
+        RCastSpell = restoreGameState.GetInt(nameof(RCastSpell));
+        RDeaths = restoreGameState.GetInt(nameof(RDeaths));
+        RDropGold = restoreGameState.GetInt(nameof(RDropGold));
+        RDropItem = restoreGameState.GetInt(nameof(RDropItem));
+        Guardian = restoreGameState.GetBool(nameof(Guardian));
+        OnlyGuardian = restoreGameState.GetBool(nameof(OnlyGuardian));
+        Characteristics = restoreGameState.GetReference<MonsterCharacteristics>(nameof(Characteristics));
+        RSpells.Add(restoreGameState.GetReferences<MonsterSpell>(nameof(RSpells)));
+        RIgnore = restoreGameState.GetInt(nameof(RIgnore));
+        RPkills = restoreGameState.GetInt(nameof(RPkills));
+        RProbed = restoreGameState.GetBool(nameof(RProbed));
+        RSights = restoreGameState.GetInt(nameof(RSights));
+        RTkills = restoreGameState.GetInt(nameof(RTkills));
+        RWake = restoreGameState.GetInt(nameof(RWake));
     }
 
     public void Display()

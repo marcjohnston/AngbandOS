@@ -548,6 +548,15 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
         Attacks = attackList.ToArray();
 
         GoldItemFactory = Game.SingletonRepository.Get<ItemFactory>(GoldItemFactoryBindingKey);
+
+        if (restoreGameState is not null)
+        {
+            CurNum = restoreGameState.GetInt(nameof(CurNum));
+            Guardian = restoreGameState.GetBool(nameof(Guardian));
+            OnlyGuardian = restoreGameState.GetBool(nameof(OnlyGuardian));
+            MaxNum = restoreGameState.GetInt(nameof(MaxNum));
+            Knowledge = restoreGameState.GetReference<MonsterKnowledge>(nameof(Knowledge));
+        }
     }
 
     public MonsterSpellList Spells { get; } = new MonsterSpellList();

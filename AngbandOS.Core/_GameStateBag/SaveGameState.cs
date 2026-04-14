@@ -15,12 +15,9 @@ internal class SaveGameState
 {
     private Dictionary<object, int> ObjectToIdDictionary = new Dictionary<object, int>();
 
-    public SaveGameState()
-    {
-    }
-
     public GameStateBag CreateGameStateBag(object? value)
     {
+        //Debug.Print($"CreateGameStateBag => {value?.GetType().Name}");
         if (value is null)
         {
             return new NullValueGameStateBag();
@@ -33,21 +30,23 @@ internal class SaveGameState
                 return new ReferenceGameStateBag(existingId);
             }
 
+            // We need to register this object to the dictionary before we serialize the object to prevent recursion.
+            int objectId = ObjectToIdDictionary.Count + 1;
+            ObjectToIdDictionary.Add(value, objectId);
+
             DictionaryGameStateBag? gameStateBag = gameSerializable.Serialize(this);
 
             #if DEBUG
-            int serializedCount = ((DictionaryGameStateBag?)gameStateBag)?.Values.Count ?? 0;
-            // Verify the reflection doesn't have more fields than the IGameSerialize return.
-            SaveGameState tempSaveGameState = new SaveGameState();
-            GameStateBag singletonGameStateBagViaReflection = tempSaveGameState.SerializeViaReflection(value, "");
-            if (((DictionaryGameStateBag)singletonGameStateBagViaReflection).Values.Count > serializedCount)
+            FieldInfo[] allFields = GetAllFields(value.GetType());
+            FieldInfo[] expectedSerializableFields = allFields.Where(p => !p.IsDefined(typeof(CompilerGeneratedAttribute), true) && !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute))).ToArray();
+
+            int actualSerializedFieldCount = gameStateBag?.Values.Count ?? 0;
+            if (actualSerializedFieldCount < expectedSerializableFields.Length)
             {
                 Debug.WriteLine($"The number of fields serialized via reflection for {value.GetType().Name} does not match the number of fields serialized via the IGameSerialize interface.  This indicates that the IGameSerialize implementation is not serializing all of the fields in the singleton.  This will cause issues with game state restoration.  Ensure that all fields are being serialized in the IGameSerialize implementation.");
             }
             #endif
 
-            int objectId = ObjectToIdDictionary.Count + 1;
-            ObjectToIdDictionary.Add(value, objectId);
             return new ObjectGameStateBag(objectId, value.GetType().Name, ((DictionaryGameStateBag?)gameStateBag)?.Values);
         }
 
@@ -193,20 +192,10 @@ internal class SaveGameState
         }
 
         Type type = value.GetType();
-        throw new Exception($"{value.GetType().Name} serialization not supported.");
+        throw new Exception($"{type.Name} serialization not supported.");
     }
 
-    //public GameStateBag CreateListGameStateBag<T>(IEnumerable<T> list)
-    //{
-    //    var gameStateBags = new List<GameStateBag>();
-    //    foreach (var item in list)
-    //    {
-    //        gameStateBags.Add(CreateGameStateBag(item));
-    //    }
-    //    return new ListGameStateBag(gameStateBags.ToArray());
-    //}
-
-    public static FieldInfo[] GetAllFields(Type? type)
+    private static FieldInfo[] GetAllFields(Type? type)
     {
         List<FieldInfo> fieldInfoList = new List<FieldInfo>();
         while (type != null)
@@ -221,153 +210,6 @@ internal class SaveGameState
         return fieldInfoList.ToArray();
     }
 
-    /// <summary>
-    /// Returns the state of a type.  The return object type is dependent on the type of data being serialized.
-    /// </summary>
-    /// <param name="value"></param>
-    /// <param name="_objectToId"></param>
-    /// <param name="parent"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public GameStateBag SerializeViaReflection(object? value, string parent = "")
-    {
-        // Handle null values.
-        if (value is null)
-        {
-            return new NullValueGameStateBag();
-        }
-
-        if (value is DateTime dateTimeValue)
-        {
-            return new DateTimeValueGameStateBag(dateTimeValue);
-        }
-
-        if (value is TimeSpan timeSpanValue)
-        {
-            return new TimeSpanValueGameStateBag(timeSpanValue);
-        }
-
-        if (value is string stringValue)
-        {
-            return new StringValueGameStateBag(stringValue);
-        }
-
-        if (value is byte byteValue)
-        {
-            return new ByteValueGameStateBag(byteValue);
-        }
-
-        if (value is char charValue)
-        {
-            return new CharValueGameStateBag(charValue);
-        }
-
-        if (value is decimal decimalValue)
-        {
-            return new DecimalValueGameStateBag(decimalValue);
-        }
-
-        if (value is int intValue)
-        {
-            return new IntValueGameStateBag(intValue);
-        }
-
-        if (value is bool boolValue)
-        {
-            return new BoolValueGameStateBag(boolValue);
-        }
-
-        if (value is Enum)
-        {
-            return new IntValueGameStateBag((int)value);
-        }
-
-        Type type = value.GetType();
-
-        // Object identity--game objects only
-        if (type.Assembly == typeof(GameStateBag).Assembly)
-        {
-            // Retrieve all of the fields to be preserved.  We exclude property backing fields and fields marked as [NonSerialized].
-            FieldInfo[] allFields = GetAllFields(type);
-            IEnumerable<FieldInfo> serializableFields = allFields.Where(p => !p.IsDefined(typeof(CompilerGeneratedAttribute), true) && !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute)));
-            var objectValue = new Dictionary<string, GameStateBag>();
-
-            foreach (FieldInfo childFieldInfo in serializableFields)
-            {
-                // Get the key and value and type of the field.
-                string key = childFieldInfo.Name;
-                object? fieldValue = childFieldInfo.GetValue(value);
-                objectValue[key] = SerializeViaReflection(fieldValue, StringLibrary.DelimitIf(parent, ".", $"{type.Name}.{key}"));
-            }
-
-            return new DictionaryGameStateBag(objectValue);
-        }
-
-        // Dictionaries
-        if (value is IDictionary dictionary)
-        {
-            var result = new Dictionary<string, GameStateBag>();
-
-            foreach (DictionaryEntry entry in dictionary)
-            {
-                string key = entry.Key.ToString()!; // Dictionary keys can never be null.
-                result[key] = SerializeViaReflection(entry.Value, StringLibrary.DelimitIf(parent, ".", key));
-            }
-
-            return new DictionaryGameStateBag(result);
-        }
-
-        // Tuples
-        if (type.Namespace == "System" && (type.Name.StartsWith("ValueTuple`") || type.Name.StartsWith("Tuple`")))
-        {
-            var values = new List<GameStateBag>();
-
-            var fields = type.GetFields();
-
-            foreach (var field in fields)
-            {
-                values.Add(SerializeViaReflection(field.GetValue(value), StringLibrary.DelimitIf(parent, ".", field.Name)));
-            }
-
-            return new TupleGameStateBag(type.Name, values.ToArray());
-        }
-
-        // Char[]
-        if (value is char[] charArray)
-        {
-            return new CharArrayGameStateBag(charArray);
-        }
-
-        // Byte[]
-        if (value is byte[] byteArray)
-        {
-            return new ByteArrayGameStateBag(byteArray);
-        }
-
-
-        // Queue<string>
-        if (value is Queue<string> queueOfString)
-        {
-            return new QueueOfStringGameStateBag(queueOfString.ToArray());
-        }
-
-        // Collections
-        if (value is IEnumerable enumerable && value is not string)
-        {
-            var list = new List<GameStateBag>();
-
-            int index = 0;
-            foreach (var item in enumerable)
-            {
-                list.Add(SerializeViaReflection(item, $"{parent}[{index}]"));
-                index++;
-            }
-
-            return new ListGameStateBag(list.ToArray());
-        }
-
-        throw new Exception($"{type.Name} serialization not supported on field {parent}.");
-    }
     public static class DeepComparer
     {
         public static bool DeepEquals(object? a, object? b)

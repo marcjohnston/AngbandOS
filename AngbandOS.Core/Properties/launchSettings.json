@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "AngbandOS.Core": {
+      "commandName": "Project",
+      "nativeDebugging": false,
+      "hotReloadEnabled": true
+    }
+  }
+}
