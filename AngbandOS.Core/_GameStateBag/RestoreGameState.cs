@@ -14,9 +14,9 @@ namespace AngbandOS.Core;
 internal class RestoreGameState
 {
     private Game Game { get; }
-    private Dictionary<int, IGetKey> ObjectIdToReferenceDictionary { get; }
+    private Dictionary<int, object> ObjectIdToReferenceDictionary { get; }
     public GameStateBag GameStateBag { get; }
-    public RestoreGameState(Game game, Dictionary<int, IGetKey> objectIdToReferenceDictionary, GameStateBag gameStateBag)
+    public RestoreGameState(Game game, Dictionary<int, object> objectIdToReferenceDictionary, GameStateBag gameStateBag)
     {
         Game = game;
         ObjectIdToReferenceDictionary = objectIdToReferenceDictionary;
@@ -28,7 +28,7 @@ internal class RestoreGameState
         ObjectIdToReferenceDictionary.Add(objectId, singleton);
     }
 
-    public IGetKey GetObjectById(int objectId)
+    public object GetObjectById(int objectId)
     {
         return ObjectIdToReferenceDictionary[objectId];
     }
@@ -113,14 +113,16 @@ internal class RestoreGameState
         }
         else if (gameStateBag is ObjectGameStateBag objectGameStateBag)
         {
-            if (ObjectIdToReferenceDictionary.TryGetValue(objectGameStateBag.ObjectId, out var reference))
+            int objectId = objectGameStateBag.ObjectId;
+            if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
             {
-                if (reference is not T typedReference)
+                if (singleton is not T typedReference)
                 {
                     throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
                 }
                 return typedReference;
             }
+
             // The object doesn't exist yet.  We need to create it.
             var fullyQualifiedName = $"{typeof(Game).Assembly.GetName().Name}.Core.{objectGameStateBag.TypeName}";
             Type? type = Type.GetType(fullyQualifiedName);
@@ -128,7 +130,8 @@ internal class RestoreGameState
             {
                 throw new Exception($"{fullyQualifiedName} type not found.  Ensure it is in the Core namespace.");
             }
-            object?[] parameters = new object?[] { Game, New(objectGameStateBag) };
+            RestoreGameState restoreGameState = New(objectGameStateBag);
+            object?[] parameters = new object?[] { Game,  restoreGameState };
             T? t = (T?)Activator.CreateInstance(type, parameters);
             if (t is null)
             {

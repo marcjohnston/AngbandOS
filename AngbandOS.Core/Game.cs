@@ -475,7 +475,7 @@ internal partial class Game
         #endregion
 
         // We need to generate a common dictionary for the object id to reference dictionary that is used to restore a game.
-        Dictionary<int, IGetKey> objectIdToReferenceDictionary = new Dictionary<int, IGetKey>();
+        Dictionary<int, object> objectIdToReferenceDictionary = new Dictionary<int, object>();
 
         // Create an instance of the SingletonRepository.  This allows repositories that are loading access to the SingletonRepository object. // TODO: This needs to be fixed once the items no longer reference other objects during construction
         SingletonRepository = new SingletonRepository(this);
