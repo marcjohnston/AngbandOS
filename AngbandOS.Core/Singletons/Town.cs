@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Drawing;
+
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -101,6 +103,14 @@ internal sealed class Town : IGetKey, IToJson, IGameSerialize
         StoreFactories = storeFactoryList.ToArray();
 
         Dungeon = Game.SingletonRepository.Get<Dungeon>(DungeonName);
+
+        if (restoreGameState is not null)
+        {
+            Seed = restoreGameState.GetInt(nameof(Seed));
+            Visited = restoreGameState.GetBool(nameof(Visited));
+            X = restoreGameState.GetInt(nameof(X));
+            Y = restoreGameState.GetInt(nameof(Y));
+        }
     }
 
     public void Initialize()

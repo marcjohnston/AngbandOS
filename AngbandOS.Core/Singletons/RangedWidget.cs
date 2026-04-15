@@ -53,6 +53,12 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, IGameSerialize
         {
             throw new Exception($"The ranges specified for the {GetType().Name} are not sorted in descending order by startValue.");
         }
+
+        if (restoreGameState is not null)
+        {
+            _text = restoreGameState.GetString(nameof(_text));
+            _color = restoreGameState.GetEnum<ColorEnum>(nameof(_color));
+        }
     }
 
     /// <summary>
