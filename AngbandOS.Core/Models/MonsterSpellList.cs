@@ -4,7 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.MonsterSpells;
+namespace AngbandOS.Core;
 
 /// <summary>
 /// Represents an immutable set of spells.
@@ -22,8 +22,13 @@ internal class MonsterSpellList : IGameSerialize
         List<GameStateBag> spellBags = new List<GameStateBag>();
         spellBags.AddRange(_spells.Select(_spell => saveGameState.CreateGameStateBag(_spell)));
         return new DictionaryGameStateBag(
-            (nameof(_spells), new ListGameStateBag(spellBags.ToArray()))
+            (nameof(_spells), saveGameState.CreateGameStateBag(_spells))
         );
+    }
+
+    public MonsterSpellList(Game game, RestoreGameState restoreGameState)
+    {
+        _spells = restoreGameState.GetReferences<MonsterSpell>(nameof(_spells));
     }
 
     public MonsterSpell[] Spells => _spells;
