@@ -649,11 +649,6 @@ internal sealed class SingletonRepository : IGameSerialize
 
     private void LoadAllAssemblyTypes<T>(RestoreGameState? restoreGameState) // TODO: WHY CANT THIS BE where T: IGETKEY
     {
-        if (restoreGameState.GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
-        {
-            throw new Exception($"The {nameof(restoreGameState)} parameter for the {nameof(LoadAllAssemblyTypes)} must be an {nameof(ObjectGameStateBag)}.");
-        }
-
         Assembly assembly = Assembly.GetExecutingAssembly();
         Type[] types = assembly.GetTypes();
         foreach (Type type in types)
@@ -676,6 +671,11 @@ internal sealed class SingletonRepository : IGameSerialize
                         // If we are restoring a game, we need to track the singleton we created here is phase 1 of the load with the object id.
                         if (restoreGameState is not null)
                         {
+                            if (restoreGameState.GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
+                            {
+                                throw new Exception($"The {nameof(restoreGameState)} parameter for the {nameof(LoadAllAssemblyTypes)} must be an {nameof(ObjectGameStateBag)}.");
+                            }
+
                             // Track the object as created.
                             restoreGameState.TrackObject(FindObjectId(singletonRepositoryGameStateBag, singleton), singleton);
                         }
@@ -714,10 +714,6 @@ internal sealed class SingletonRepository : IGameSerialize
                 throw new Exception($"Cannot find constructor for {typeof(T).Name}.  Expecting ctor(Game, {typeof(TConfiguration).Name})");
             }
 
-            if (restoreGameState.GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
-            {
-                throw new Exception($"The {nameof(restoreGameState)} parameter for the {nameof(LoadAllAssemblyTypes)} must be an {nameof(ObjectGameStateBag)}.");
-            }
 
             foreach (TConfiguration entityConfiguration in entityConfigurations)
             {
@@ -728,6 +724,11 @@ internal sealed class SingletonRepository : IGameSerialize
                 // If we are restoring a game, we need to track the singleton we created here is phase 1 of the load with the object id.
                 if (restoreGameState is not null)
                 {
+                    if (restoreGameState.GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
+                    {
+                        throw new Exception($"The {nameof(restoreGameState)} parameter for the {nameof(LoadAllAssemblyTypes)} must be an {nameof(ObjectGameStateBag)}.");
+                    }
+
                     // Track the object as created.
                     restoreGameState.TrackObject(FindObjectId(singletonRepositoryGameStateBag, singleton), singleton);
                 }

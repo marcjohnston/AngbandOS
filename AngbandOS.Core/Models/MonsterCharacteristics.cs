@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.ComponentModel;
-
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -96,6 +94,89 @@ internal class MonsterCharacteristics : IMonsterCharacteristics, IGameSerialize
         Troll = false;
         Undead = false;
     }
+    public MonsterCharacteristics(Game game, RestoreGameState restoreGameState)
+    {
+        AttrClear = restoreGameState.GetBool(nameof(AttrClear));
+        AttrMulti = restoreGameState.GetBool(nameof(AttrMulti));
+        CharClear = restoreGameState.GetBool(nameof(CharClear));
+        CharMulti = restoreGameState.GetBool(nameof(CharMulti));
+        Drop_1D2 = restoreGameState.GetBool(nameof(Drop_1D2));
+        Drop_2D2 = restoreGameState.GetBool(nameof(Drop_2D2));
+        Drop_3D2 = restoreGameState.GetBool(nameof(Drop_3D2));
+        Drop_4D2 = restoreGameState.GetBool(nameof(Drop_4D2));
+        Drop60 = restoreGameState.GetBool(nameof(Drop60));
+        Drop90 = restoreGameState.GetBool(nameof(Drop90));
+        DropGood = restoreGameState.GetBool(nameof(DropGood));
+        DropGreat = restoreGameState.GetBool(nameof(DropGreat));
+        Escorted = restoreGameState.GetBool(nameof(Escorted));
+        EscortsGroup = restoreGameState.GetBool(nameof(EscortsGroup));
+        Female = restoreGameState.GetBool(nameof(Female));
+        ForceMaxHp = restoreGameState.GetBool(nameof(ForceMaxHp));
+        ForceSleep = restoreGameState.GetBool(nameof(ForceSleep));
+        Friends = restoreGameState.GetBool(nameof(Friends));
+        Male = restoreGameState.GetBool(nameof(Male));
+        NeverAttack = restoreGameState.GetBool(nameof(NeverAttack));
+        NeverMove = restoreGameState.GetBool(nameof(NeverMove));
+        OnlyDropGold = restoreGameState.GetBool(nameof(OnlyDropGold));
+        OnlyDropItem = restoreGameState.GetBool(nameof(OnlyDropItem));
+        RandomMove25 = restoreGameState.GetBool(nameof(RandomMove25));
+        RandomMove50 = restoreGameState.GetBool(nameof(RandomMove50));
+        Unique = restoreGameState.GetBool(nameof(Unique));
+        AttrAny = restoreGameState.GetBool(nameof(AttrAny));
+        BashDoor = restoreGameState.GetBool(nameof(BashDoor));
+        ColdBlood = restoreGameState.GetBool(nameof(ColdBlood));
+        EldritchHorror = restoreGameState.GetBool(nameof(EldritchHorror));
+        EmptyMind = restoreGameState.GetBool(nameof(EmptyMind));
+        FireAura = restoreGameState.GetBool(nameof(FireAura));
+        Invisible = restoreGameState.GetBool(nameof(Invisible));
+        KillBody = restoreGameState.GetBool(nameof(KillBody));
+        KillItem = restoreGameState.GetBool(nameof(KillItem));
+        KillWall = restoreGameState.GetBool(nameof(KillWall));
+        LightningAura = restoreGameState.GetBool(nameof(LightningAura));
+        MoveBody = restoreGameState.GetBool(nameof(MoveBody));
+        Multiply = restoreGameState.GetBool(nameof(Multiply));
+        OpenDoor = restoreGameState.GetBool(nameof(OpenDoor));
+        PassWall = restoreGameState.GetBool(nameof(PassWall));
+        Powerful = restoreGameState.GetBool(nameof(Powerful));
+        Reflecting = restoreGameState.GetBool(nameof(Reflecting));
+        Regenerate = restoreGameState.GetBool(nameof(Regenerate));
+        Shapechanger = restoreGameState.GetBool(nameof(Shapechanger));
+        Smart = restoreGameState.GetBool(nameof(Smart));
+        Stupid = restoreGameState.GetBool(nameof(Stupid));
+        TakeItem = restoreGameState.GetBool(nameof(TakeItem));
+        WeirdMind = restoreGameState.GetBool(nameof(WeirdMind));
+        Animal = restoreGameState.GetBool(nameof(Animal));
+        Cthuloid = restoreGameState.GetBool(nameof(Cthuloid));
+        Demon = restoreGameState.GetBool(nameof(Demon));
+        Dragon = restoreGameState.GetBool(nameof(Dragon));
+        Evil = restoreGameState.GetBool(nameof(Evil));
+        Giant = restoreGameState.GetBool(nameof(Giant));
+        Good = restoreGameState.GetBool(nameof(Good));
+        GreatOldOne = restoreGameState.GetBool(nameof(GreatOldOne));
+        HurtByCold = restoreGameState.GetBool(nameof(HurtByCold));
+        HurtByFire = restoreGameState.GetBool(nameof(HurtByFire));
+        HurtByLight = restoreGameState.GetBool(nameof(HurtByLight));
+        HurtByRock = restoreGameState.GetBool(nameof(HurtByRock));
+        ImmuneAcid = restoreGameState.GetBool(nameof(ImmuneAcid));
+        ImmuneCold = restoreGameState.GetBool(nameof(ImmuneCold));
+        ImmuneConfusion = restoreGameState.GetBool(nameof(ImmuneConfusion));
+        ImmuneFear = restoreGameState.GetBool(nameof(ImmuneFear));
+        ImmuneFire = restoreGameState.GetBool(nameof(ImmuneFire));
+        ImmuneLightning = restoreGameState.GetBool(nameof(ImmuneLightning));
+        ImmunePoison = restoreGameState.GetBool(nameof(ImmunePoison));
+        ImmuneSleep = restoreGameState.GetBool(nameof(ImmuneSleep));
+        ImmuneStun = restoreGameState.GetBool(nameof(ImmuneStun));
+        Nonliving = restoreGameState.GetBool(nameof(Nonliving));
+        Orc = restoreGameState.GetBool(nameof(Orc));
+        ResistDisenchant = restoreGameState.GetBool(nameof(ResistDisenchant));
+        ResistNether = restoreGameState.GetBool(nameof(ResistNether));
+        ResistNexus = restoreGameState.GetBool(nameof(ResistNexus));
+        ResistPlasma = restoreGameState.GetBool(nameof(ResistPlasma));
+        ResistTeleport = restoreGameState.GetBool(nameof(ResistTeleport));
+        ResistWater = restoreGameState.GetBool(nameof(ResistWater));
+        Troll = restoreGameState.GetBool(nameof(Troll));
+        Undead = restoreGameState.GetBool(nameof(Undead));
+    }
 
     public MonsterCharacteristics(IMonsterCharacteristics copyFrom)
     {
@@ -181,7 +262,91 @@ internal class MonsterCharacteristics : IMonsterCharacteristics, IGameSerialize
         Undead = copyFrom.Undead;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(AttrClear), saveGameState.CreateGameStateBag(AttrClear)),
+            (nameof(AttrMulti), saveGameState.CreateGameStateBag(AttrMulti)),
+            (nameof(CharClear), saveGameState.CreateGameStateBag(CharClear)),
+            (nameof(CharMulti), saveGameState.CreateGameStateBag(CharMulti)),
+            (nameof(Drop_1D2), saveGameState.CreateGameStateBag(Drop_1D2)),
+            (nameof(Drop_2D2), saveGameState.CreateGameStateBag(Drop_2D2)),
+            (nameof(Drop_3D2), saveGameState.CreateGameStateBag(Drop_3D2)),
+            (nameof(Drop_4D2), saveGameState.CreateGameStateBag(Drop_4D2)),
+            (nameof(Drop60), saveGameState.CreateGameStateBag(Drop60)),
+            (nameof(Drop90), saveGameState.CreateGameStateBag(Drop90)),
+            (nameof(DropGood), saveGameState.CreateGameStateBag(DropGood)),
+            (nameof(DropGreat), saveGameState.CreateGameStateBag(DropGreat)),
+            (nameof(Escorted), saveGameState.CreateGameStateBag(Escorted)),
+            (nameof(EscortsGroup), saveGameState.CreateGameStateBag(EscortsGroup)),
+            (nameof(Female), saveGameState.CreateGameStateBag(Female)),
+            (nameof(ForceMaxHp), saveGameState.CreateGameStateBag(ForceMaxHp)),
+            (nameof(ForceSleep), saveGameState.CreateGameStateBag(ForceSleep)),
+            (nameof(Friends), saveGameState.CreateGameStateBag(Friends)),
+            (nameof(Male), saveGameState.CreateGameStateBag(Male)),
+            (nameof(NeverAttack), saveGameState.CreateGameStateBag(NeverAttack)),
+            (nameof(NeverMove), saveGameState.CreateGameStateBag(NeverMove)),
+            (nameof(OnlyDropGold), saveGameState.CreateGameStateBag(OnlyDropGold)),
+            (nameof(OnlyDropItem), saveGameState.CreateGameStateBag(OnlyDropItem)),
+            (nameof(RandomMove25), saveGameState.CreateGameStateBag(RandomMove25)),
+            (nameof(RandomMove50), saveGameState.CreateGameStateBag(RandomMove50)),
+            (nameof(Unique), saveGameState.CreateGameStateBag(Unique)),
+            (nameof(AttrAny), saveGameState.CreateGameStateBag(AttrAny)),
+            (nameof(BashDoor), saveGameState.CreateGameStateBag(BashDoor)),
+            (nameof(ColdBlood), saveGameState.CreateGameStateBag(ColdBlood)),
+            (nameof(EldritchHorror), saveGameState.CreateGameStateBag(EldritchHorror)),
+            (nameof(EmptyMind), saveGameState.CreateGameStateBag(EmptyMind)),
+            (nameof(FireAura), saveGameState.CreateGameStateBag(FireAura)),
+            (nameof(Invisible), saveGameState.CreateGameStateBag(Invisible)),
+            (nameof(KillBody), saveGameState.CreateGameStateBag(KillBody)),
+            (nameof(KillItem), saveGameState.CreateGameStateBag(KillItem)),
+            (nameof(KillWall), saveGameState.CreateGameStateBag(KillWall)),
+            (nameof(LightningAura), saveGameState.CreateGameStateBag(LightningAura)),
+            (nameof(MoveBody), saveGameState.CreateGameStateBag(MoveBody)),
+            (nameof(Multiply), saveGameState.CreateGameStateBag(Multiply)),
+            (nameof(OpenDoor), saveGameState.CreateGameStateBag(OpenDoor)),
+            (nameof(PassWall), saveGameState.CreateGameStateBag(PassWall)),
+            (nameof(Powerful), saveGameState.CreateGameStateBag(Powerful)),
+            (nameof(Reflecting), saveGameState.CreateGameStateBag(Reflecting)),
+            (nameof(Regenerate), saveGameState.CreateGameStateBag(Regenerate)),
+            (nameof(Shapechanger), saveGameState.CreateGameStateBag(Shapechanger)),
+            (nameof(Smart), saveGameState.CreateGameStateBag(Smart)),
+            (nameof(Stupid), saveGameState.CreateGameStateBag(Stupid)),
+            (nameof(TakeItem), saveGameState.CreateGameStateBag(TakeItem)),
+            (nameof(WeirdMind), saveGameState.CreateGameStateBag(WeirdMind)),
+            (nameof(Animal), saveGameState.CreateGameStateBag(Animal)),
+            (nameof(Cthuloid), saveGameState.CreateGameStateBag(Cthuloid)),
+            (nameof(Demon), saveGameState.CreateGameStateBag(Demon)),
+            (nameof(Dragon), saveGameState.CreateGameStateBag(Dragon)),
+            (nameof(Evil), saveGameState.CreateGameStateBag(Evil)),
+            (nameof(Giant), saveGameState.CreateGameStateBag(Giant)),
+            (nameof(Good), saveGameState.CreateGameStateBag(Good)),
+            (nameof(GreatOldOne), saveGameState.CreateGameStateBag(GreatOldOne)),
+            (nameof(HurtByCold), saveGameState.CreateGameStateBag(HurtByCold)),
+            (nameof(HurtByFire), saveGameState.CreateGameStateBag(HurtByFire)),
+            (nameof(HurtByLight), saveGameState.CreateGameStateBag(HurtByLight)),
+            (nameof(HurtByRock), saveGameState.CreateGameStateBag(HurtByRock)),
+            (nameof(ImmuneAcid), saveGameState.CreateGameStateBag(ImmuneAcid)),
+            (nameof(ImmuneCold), saveGameState.CreateGameStateBag(ImmuneCold)),
+            (nameof(ImmuneConfusion), saveGameState.CreateGameStateBag(ImmuneConfusion)),
+            (nameof(ImmuneFear), saveGameState.CreateGameStateBag(ImmuneFear)),
+            (nameof(ImmuneFire), saveGameState.CreateGameStateBag(ImmuneFire)),
+            (nameof(ImmuneLightning), saveGameState.CreateGameStateBag(ImmuneLightning)),
+            (nameof(ImmunePoison), saveGameState.CreateGameStateBag(ImmunePoison)),
+            (nameof(ImmuneSleep), saveGameState.CreateGameStateBag(ImmuneSleep)),
+            (nameof(ImmuneStun), saveGameState.CreateGameStateBag(ImmuneStun)),
+            (nameof(Nonliving), saveGameState.CreateGameStateBag(Nonliving)),
+            (nameof(Orc), saveGameState.CreateGameStateBag(Orc)),
+            (nameof(ResistDisenchant), saveGameState.CreateGameStateBag(ResistDisenchant)),
+            (nameof(ResistNether), saveGameState.CreateGameStateBag(ResistNether)),
+            (nameof(ResistNexus), saveGameState.CreateGameStateBag(ResistNexus)),
+            (nameof(ResistPlasma), saveGameState.CreateGameStateBag(ResistPlasma)),
+            (nameof(ResistTeleport), saveGameState.CreateGameStateBag(ResistTeleport)),
+            (nameof(ResistWater), saveGameState.CreateGameStateBag(ResistWater)),
+            (nameof(Troll), saveGameState.CreateGameStateBag(Troll)),
+            (nameof(Undead), saveGameState.CreateGameStateBag(Undead))
+        );
+    }
 
     public MonsterCharacteristics(IMonsterCharacteristics copyFrom, IMonsterCharacteristics unionWith)
     {

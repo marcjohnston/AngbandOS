@@ -131,13 +131,19 @@ internal class RestoreGameState
                 throw new Exception($"{fullyQualifiedName} type not found.  Ensure it is in the Core namespace.");
             }
             RestoreGameState restoreGameState = New(objectGameStateBag);
-            object?[] parameters = new object?[] { Game,  restoreGameState };
-            T? t = (T?)Activator.CreateInstance(type, parameters);
-            if (t is null)
+            try
             {
-                throw new Exception($"Unable to instantiate a new {objectGameStateBag.TypeName}.");
+                T? t = (T?)Activator.CreateInstance(type, Game, restoreGameState);
+                if (t is null)
+                {
+                    throw new Exception($"Unable to instantiate a new {objectGameStateBag.TypeName}.");
+                }
+                return t;
             }
-            return t;
+            catch (Exception ex)
+            {
+                throw new Exception($"Error during construction of a {type.Name}({nameof(Game)}, {nameof(RestoreGameState)}.  {ex.Message}");
+            }
         }
         throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
     }
@@ -175,12 +181,8 @@ internal class RestoreGameState
 
     public T[] GetReferences<T>(string key)
     {
-        if (GameStateBag is not ListGameStateBag listGameStateBag)
-        {
-            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
-        }
         List<T> list = new List<T>();
-        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        foreach (GameStateBag gameStateBag in GetGameStateBag<ListGameStateBag>(key).Values)
         {
             T t = GetReference<T>(gameStateBag);
             list.Add(t);
@@ -189,13 +191,9 @@ internal class RestoreGameState
     }
 
     public int[] GetIntegers(string key)
-    {
-        if (GameStateBag is not ListGameStateBag listGameStateBag)
-        {
-            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
-        }
+    {        
         List<int> list = new List<int>();
-        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        foreach (GameStateBag gameStateBag in GetGameStateBag<ListGameStateBag>(key).Values)
         {
             if (gameStateBag is not IntValueGameStateBag intValueGameStateBag)
             {
