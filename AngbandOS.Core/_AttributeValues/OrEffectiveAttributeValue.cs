@@ -71,11 +71,11 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
         return false;
     }
 
-    public override AttributeValue ToReadOnly() => new ReadOnlyAttributeValue<bool>(Get());
+    public override AttributeValue ToReadOnly() => new BoolReadOnlyAttributeValue(Get());
 
     public override void Merge(AttributeValue value)
     {
-        ReadOnlyAttributeValue<bool> orEffectiveAttributeValue = (ReadOnlyAttributeValue<bool>)value;
+        BoolReadOnlyAttributeValue orEffectiveAttributeValue = (BoolReadOnlyAttributeValue)value;
         _attributeModifiers.Add(("", orEffectiveAttributeValue.Value));
     }
 
@@ -85,7 +85,7 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
         {
             throw new ArgumentException("Invalid key specified for enhancements.");
         }
-        ReadOnlyAttributeValue<bool> orEffectiveAttributeValue = (ReadOnlyAttributeValue<bool>)value;
+        BoolReadOnlyAttributeValue orEffectiveAttributeValue = (BoolReadOnlyAttributeValue)value;
         _attributeModifiers.Add((key, orEffectiveAttributeValue.Value));
     }
 

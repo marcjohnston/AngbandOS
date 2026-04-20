@@ -23,6 +23,18 @@ internal class RestoreGameState
         GameStateBag = gameStateBag;
     }
 
+    public bool ContainsKey(int key)
+    {
+        return ObjectIdToReferenceDictionary.ContainsKey(key);
+    }
+
+    public RestoreGameState(Game game, GameStateBag gameStateBag)
+    {
+        Game = game;
+        ObjectIdToReferenceDictionary = new Dictionary<int, object>();
+        GameStateBag = gameStateBag;
+    }
+
     public void TrackObject(int objectId, IGetKey singleton)
     {
         ObjectIdToReferenceDictionary.Add(objectId, singleton);
@@ -57,17 +69,25 @@ internal class RestoreGameState
         return null;
     }
 
-    private TGameStateBag GetGameStateBag<TGameStateBag>(string key) where TGameStateBag : GameStateBag
+    public TGameStateBag GetGameStateBag<TGameStateBag>(string key) where TGameStateBag : GameStateBag
     {
-        if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
+        if (GameStateBag is ObjectGameStateBag objectGameStateBag)
         {
-            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
+            if (objectGameStateBag.Values.TryGetValue(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
+            {
+                return typedGameStateBag;
+            }
+            throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(ObjectGameStateBag)}.");
         }
-        if (objectGameStateBag.Values.TryGetValue(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
-        {
-            return typedGameStateBag;
-        }
-        throw new KeyNotFoundException($"The key '{key}' was not found in the GameStateBag or is not of type {typeof(TGameStateBag).Name}.");
+        //if (GameStateBag is DictionaryGameStateBag dictionaryGameStateBag)
+        //{
+        //    if (dictionaryGameStateBag.Values.TryGetValue(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
+        //    {
+        //        return typedGameStateBag;
+        //    }
+        //    throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(DictionaryGameStateBag)}.");
+        //}
+        throw new InvalidOperationException($"GameStateBag is not of type {nameof(ObjectGameStateBag)} or {nameof(DictionaryGameStateBag)}.");
     }
 
     public bool GetBool(string key) => GetGameStateBag<BoolValueGameStateBag>(key).Value;
@@ -82,7 +102,7 @@ internal class RestoreGameState
         throw new ArgumentOutOfRangeException(nameof(value), $"Invalid value for enum {typeof(T).Name}: {value}");
     }
 
-    public bool[] GetArrayOfBool(string key)
+    public bool[] GetBools(string key)
     {
         ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
         List<bool> boolList = new List<bool>();
@@ -191,9 +211,10 @@ internal class RestoreGameState
     }
 
     public int[] GetIntegers(string key)
-    {        
+    {
+        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
         List<int> list = new List<int>();
-        foreach (GameStateBag gameStateBag in GetGameStateBag<ListGameStateBag>(key).Values)
+        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
         {
             if (gameStateBag is not IntValueGameStateBag intValueGameStateBag)
             {
@@ -204,14 +225,98 @@ internal class RestoreGameState
         return list.ToArray();
     }
 
+    public string[] GetStrings(string key)
+    {
+        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
+        List<string> list = new List<string>();
+        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        {
+            if (gameStateBag is not StringValueGameStateBag stringValueGameStateBag)
+            {
+                throw new Exception("Expected list of strings.");
+            }
+            list.Add(stringValueGameStateBag.Value);
+        }
+        return list.ToArray();
+    }
+    public string[][] GetArrayOfStrings(string key)
+    {
+        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
+        List<string[]> listOfStrings = new List<string[]>();
+        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        {
+            if (gameStateBag is not ListGameStateBag listOfStringsBag)
+            {
+                throw new Exception("Jagged array of string not a list.");
+            }
+            List<string> list = new List<string>();
+            foreach (GameStateBag innerGameStateBag in listOfStringsBag.Values)
+            {
+                if (innerGameStateBag is not StringValueGameStateBag stringValueGameStateBag)
+                {
+                    throw new Exception("Expected inner list of strings.");
+                }
+                list.Add(stringValueGameStateBag.Value);
+            }
+            list.AddRange(list);
+        }
+        return listOfStrings.ToArray();
+    }
+
+    public byte[][] GetArrayOfBytes(string key)
+    {
+        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
+        List<byte[]> listOfStrings = new List<byte[]>();
+        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        {
+            if (gameStateBag is not ListGameStateBag listOfStringsBag)
+            {
+                throw new Exception("Jagged array of string not a list.");
+            }
+            List<byte> list = new List<byte>();
+            foreach (GameStateBag innerGameStateBag in listOfStringsBag.Values)
+            {
+                if (innerGameStateBag is not ByteValueGameStateBag byteValueGameStateBag)
+                {
+                    throw new Exception("Expected inner list of strings.");
+                }
+                list.Add(byteValueGameStateBag.Value);
+            }
+            list.AddRange(list);
+        }
+        return listOfStrings.ToArray();
+    }
+
+    public char[] GetChars(string key) => GetString(key).ToArray();
     public int GetInt(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
     public int? GetNullableInt(string key)
     {
-        if (GameStateBag is NullValueGameStateBag)
+        GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);
+        if (gameStateBag is NullValueGameStateBag)
         {
-            return null;
+            return default;
         }
         return GetInt(key);
+    }
+
+    public bool? GetNullableBool(string key)
+    {
+        GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);
+        if (gameStateBag is NullValueGameStateBag)
+        {
+            return default;
+        }
+        return GetBool(key);
+    }
+
+    public DateTime? GetNullableDateTime(string key)
+    {
+        GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);
+        if (gameStateBag is NullValueGameStateBag)
+        {
+            return default;
+        }
+        return GetDateTime(key);
     }
 
     public string GetString(string key) => GetGameStateBag<StringValueGameStateBag>(key).Value;

@@ -16,11 +16,10 @@ internal class CombinedArmorClassIntFunction : IChangeTracker, IGetKey, IIntValu
         Game = game;
     }
 
-    public bool IsChanged => !OldValue.HasValue || OldValue.Value != Game.EffectiveAttributeSet.Get<int>(nameof(BaseArmorClassAttribute)) + Game.KnownBonusArmorClass;
-
+    public bool IsChanged => !OldValue.HasValue || OldValue.Value != Game.EffectiveAttributeSet.GetInt(nameof(BaseArmorClassAttribute)) + Game.KnownBonusArmorClass;
     public string GetKey => GetType().Name;
 
-    public int IntValue => Game.EffectiveAttributeSet.Get<int>(nameof(BaseArmorClassAttribute)) + Game.KnownBonusArmorClass;
+    public int IntValue => Game.EffectiveAttributeSet.GetInt(nameof(BaseArmorClassAttribute)) + Game.KnownBonusArmorClass;
 
     public void Bind(RestoreGameState? restoreGameState)
     {

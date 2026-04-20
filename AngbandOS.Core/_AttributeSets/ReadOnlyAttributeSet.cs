@@ -16,12 +16,16 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
         Game = game;
         Value = value;
     }
+    public ReadOnlyAttributeSet(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReferences<AttributeValue>(nameof(Value)))
+    {
+    }
+
     public AttributeValue this[int index] => Value[(int)index];
-    public T Get<T>(string attributeName)
+    public int GetInt(string attributeName)
     {
         Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
         int index = attribute.Index;
-        ReadOnlyAttributeValue<T> value = (ReadOnlyAttributeValue<T>)Value[index];
+        IntReadOnlyAttributeValue value = (IntReadOnlyAttributeValue)Value[index];
         return value.Value;
     }
 

@@ -18,6 +18,23 @@ internal class BoolSetEffectiveAttributeValue : SetEffectiveAttributeValue<bool?
         return (EffectiveAttributeValue)clone;
     }
     public override string RenderForItemIdentification => Get().ToString();
+    public override AttributeValue ToReadOnly() => new NullableBoolReadOnlyAttributeValue(Get());
+
+    public override void Merge(AttributeValue value)
+    {
+        NullableBoolReadOnlyAttributeValue setEffectiveAttributeValue = (NullableBoolReadOnlyAttributeValue)value;
+        _attributeModifiers.Add(("", setEffectiveAttributeValue.Value));
+    }
+
+    public override void Merge(string key, AttributeValue value)
+    {
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new ArgumentException("Invalid key specified for enhancements.");
+        }
+        NullableBoolReadOnlyAttributeValue setEffectiveAttributeValue = (NullableBoolReadOnlyAttributeValue)value;
+        _attributeModifiers.Add((key, setEffectiveAttributeValue.Value));
+    }
 
     /// <summary>
     /// Computes a value to append to the modifiers so that the effective value equals the specified value.

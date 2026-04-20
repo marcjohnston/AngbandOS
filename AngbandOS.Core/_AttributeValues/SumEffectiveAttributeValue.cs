@@ -37,7 +37,7 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
         return (EffectiveAttributeValue)clone;
     }
     public override string RenderForItemIdentification => Get().ToString();
-    public override AttributeValue ToReadOnly() => new ReadOnlyAttributeValue<int>(Get());
+    public override AttributeValue ToReadOnly() => new IntReadOnlyAttributeValue(Get());
 
     public override bool HasKeyedItemEnhancements(string key)
     {
@@ -76,7 +76,7 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
 
     public override void Merge(AttributeValue value)
     {
-        ReadOnlyAttributeValue<int> additionEffectiveAttributeValue = (ReadOnlyAttributeValue<int>)value;
+        IntReadOnlyAttributeValue additionEffectiveAttributeValue = (IntReadOnlyAttributeValue)value;
         _attributeModifiers.Add(("", additionEffectiveAttributeValue.Value));
     }
 
@@ -86,7 +86,7 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
         {
             throw new ArgumentException("Invalid key specified for enhancements.");
         }
-        ReadOnlyAttributeValue<int> additionEffectiveAttributeValue = (ReadOnlyAttributeValue<int>)value;
+        IntReadOnlyAttributeValue additionEffectiveAttributeValue = (IntReadOnlyAttributeValue)value;
         _attributeModifiers.Add((key, additionEffectiveAttributeValue.Value));
     }
 

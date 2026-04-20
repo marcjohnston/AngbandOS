@@ -201,7 +201,7 @@ public class GameServer
             Game.Play(console, persistentStorage, replayPersistentStorage);
 
             SaveGameState saveGameState = new SaveGameState();
-            GameStateBag saveGameStateBag = Game.Serialize(saveGameState);
+            GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
             serializedGameData = saveGameStateBag.Serialize();
 
             gameIsOver = true;
@@ -308,12 +308,12 @@ public class GameServer
                 throw new Exception("Failed to deserialize game.");
             }
 
-            if (gameStateBag is not DictionaryGameStateBag dictionaryGameStateBag)
+            if (gameStateBag is not ObjectGameStateBag objectGameStateBag)
             {
                 throw new Exception("Unexpected game state bag format.");
             }
 
-            Game = new Game(gameConfiguration, dictionaryGameStateBag);
+            Game = new Game(gameConfiguration, objectGameStateBag);
             Game.Play(console, persistentStorage, replayPersistentStorage);
             gameIsOver = true;
         }

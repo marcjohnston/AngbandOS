@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class FriendlyNameEffectiveAttributeValue : NullableReferenceSetEffectiveAttributeValue<String>
+internal class FriendlyNameEffectiveAttributeValue : NullableReferenceSetEffectiveAttributeValue<string> 
 {
     public FriendlyNameEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute, null) { }
     public override EffectiveAttributeValue Clone()
@@ -17,4 +17,20 @@ internal class FriendlyNameEffectiveAttributeValue : NullableReferenceSetEffecti
         return (EffectiveAttributeValue)clone;
     }
     public override string RenderForItemIdentification => "";
+    public override AttributeValue ToReadOnly() => new NullableStringReadOnlyAttributeValue(Get());
+    public override void Merge(AttributeValue value)
+    {
+        NullableStringReadOnlyAttributeValue setEffectiveAttributeValue = (NullableStringReadOnlyAttributeValue)value;
+        _attributeModifiers.Add(("", setEffectiveAttributeValue.Value));
+    }
+
+    public override void Merge(string key, AttributeValue value)
+    {
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new ArgumentException("Invalid key specified for enhancements.");
+        }
+        NullableStringReadOnlyAttributeValue setEffectiveAttributeValue = (NullableStringReadOnlyAttributeValue)value;
+        _attributeModifiers.Add((key, setEffectiveAttributeValue.Value));
+    }
 }

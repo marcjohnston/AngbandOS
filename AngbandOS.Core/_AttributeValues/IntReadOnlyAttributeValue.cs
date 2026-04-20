@@ -6,18 +6,18 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-/// <summary>
-/// Represents an immutable attribute value.
-/// </summary>
-/// <typeparam name="T"></typeparam>
 [Serializable]
-internal class ReadOnlyAttributeValue<T> : AttributeValue
+internal class IntReadOnlyAttributeValue : AttributeValue
 {
-    public readonly T Value;
-    public ReadOnlyAttributeValue(T value)
+    public readonly int Value;
+    public IntReadOnlyAttributeValue(int value)
     {
         Value = value;
     }
+    public IntReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetInt(nameof(Value)))
+    {
+    }
+
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(

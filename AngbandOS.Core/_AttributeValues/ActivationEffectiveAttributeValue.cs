@@ -11,10 +11,26 @@ internal class ActivationEffectiveAttributeValue : NullableReferenceSetEffective
 {
     public ActivationEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute, null) { }
     public override string RenderForItemIdentification => Get()?.Description ?? "nothing";
+    public override AttributeValue ToReadOnly() => new ActivationReadOnlyAttributeValue(Get());
     public override EffectiveAttributeValue Clone()
     {
         ActivationEffectiveAttributeValue clone = new ActivationEffectiveAttributeValue(Game, Attribute);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
+    }
+    public override void Merge(AttributeValue value)
+    {
+        ActivationReadOnlyAttributeValue setEffectiveAttributeValue = (ActivationReadOnlyAttributeValue)value;
+        _attributeModifiers.Add(("", setEffectiveAttributeValue.Value));
+    }
+
+    public override void Merge(string key, AttributeValue value)
+    {
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new ArgumentException("Invalid key specified for enhancements.");
+        }
+        ActivationReadOnlyAttributeValue setEffectiveAttributeValue = (ActivationReadOnlyAttributeValue)value;
+        _attributeModifiers.Add((key, setEffectiveAttributeValue.Value));
     }
 }

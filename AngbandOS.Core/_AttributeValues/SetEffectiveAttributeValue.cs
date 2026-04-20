@@ -55,23 +55,6 @@ internal abstract class SetEffectiveAttributeValue<T> : EffectiveAttributeValue
         return _attributeModifiers[_attributeModifiers.Count - 1].Modifier;
     }
 
-    public override AttributeValue ToReadOnly() => new ReadOnlyAttributeValue<T>(Get());
-    public override void Merge(AttributeValue value)
-    {
-        ReadOnlyAttributeValue<T> setEffectiveAttributeValue = (ReadOnlyAttributeValue<T>)value;
-        _attributeModifiers.Add(("", setEffectiveAttributeValue.Value));
-    }
-
-    public override void Merge(string key, AttributeValue value)
-    {
-        if (String.IsNullOrEmpty(key))
-        {
-            throw new ArgumentException("Invalid key specified for enhancements.");
-        }
-        ReadOnlyAttributeValue<T> setEffectiveAttributeValue = (ReadOnlyAttributeValue<T>)value;
-        _attributeModifiers.Add((key, setEffectiveAttributeValue.Value));
-    }
-
     public override void RemoveModifiers(string key)
     {
         if (String.IsNullOrEmpty(key))

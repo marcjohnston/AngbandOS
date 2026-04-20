@@ -518,7 +518,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             FlavorColor = restoreGameState.GetEnum<ColorEnum>(nameof(FlavorColor));
             Flavor = restoreGameState.GetNullableReference<Flavor>(nameof(Flavor));
             Tried = restoreGameState.GetBool(nameof(Tried));
-            Stompable = restoreGameState.GetArrayOfBool(nameof(Stompable));
+            Stompable = restoreGameState.GetBools(nameof(Stompable));
         }
     }
 

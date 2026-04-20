@@ -10,6 +10,7 @@ namespace AngbandOS.Core;
 internal class ArtifactBiasEffectiveAttributeValue : NullableReferenceSetEffectiveAttributeValue<ArtifactBias>
 {
     public ArtifactBiasEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute, null) { }
+    public override AttributeValue ToReadOnly() => new ArtifactBiasReadOnlyAttributeValue(Get());
     public override EffectiveAttributeValue Clone()
     {
         ArtifactBiasEffectiveAttributeValue clone = new ArtifactBiasEffectiveAttributeValue(Game, Attribute);
@@ -17,4 +18,19 @@ internal class ArtifactBiasEffectiveAttributeValue : NullableReferenceSetEffecti
         return (EffectiveAttributeValue)clone;
     }
     public override string RenderForItemIdentification => Get()?.AffinityName.ToLower() ?? "nothing";
+    public override void Merge(AttributeValue value)
+    {
+        ArtifactBiasReadOnlyAttributeValue setEffectiveAttributeValue = (ArtifactBiasReadOnlyAttributeValue)value;
+        _attributeModifiers.Add(("", setEffectiveAttributeValue.Value));
+    }
+
+    public override void Merge(string key, AttributeValue value)
+    {
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new ArgumentException("Invalid key specified for enhancements.");
+        }
+        ArtifactBiasReadOnlyAttributeValue setEffectiveAttributeValue = (ArtifactBiasReadOnlyAttributeValue)value;
+        _attributeModifiers.Add((key, setEffectiveAttributeValue.Value));
+    }
 }
