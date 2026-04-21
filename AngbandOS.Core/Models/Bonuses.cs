@@ -32,6 +32,19 @@ internal class Bonuses : IGameSerialize
         );
     }
 
+    public Bonuses() { }
+    public Bonuses(Game game, RestoreGameState restoreGameState)
+    {
+        AttackBonus = restoreGameState.GetInt(nameof(AttackBonus));
+        DamageBonus = restoreGameState.GetInt(nameof(DamageBonus));
+        DisplayedAttackBonus = restoreGameState.GetInt(nameof(DisplayedAttackBonus));
+        DisplayedDamageBonus = restoreGameState.GetInt(nameof(DisplayedDamageBonus));
+        HasUnpriestlyWeapon = restoreGameState.GetBool(nameof(HasUnpriestlyWeapon));
+        HasHeavyBow = restoreGameState.GetBool(nameof(HasHeavyBow));
+        HasHeavyWeapon = restoreGameState.GetBool(nameof(HasHeavyWeapon));
+    }
+
+
     public Bonuses Merge(Bonuses bonuses)
     {
         return new Bonuses()
