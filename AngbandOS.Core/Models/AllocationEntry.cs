@@ -47,4 +47,13 @@ internal class AllocationEntry : IGameSerialize
             (nameof(Level), saveGameState.CreateGameStateBag(Level))
         );
     }
+    public AllocationEntry() { }
+    public AllocationEntry(Game game, RestoreGameState restoreGameState)
+    {
+        BaseProbability = restoreGameState.GetInt(nameof(BaseProbability));
+        FilteredProbability = restoreGameState.GetInt(nameof(FilteredProbability));
+        FinalProbability = restoreGameState.GetInt(nameof(FinalProbability));
+        Index = restoreGameState.GetInt(nameof(Index));
+        Level = restoreGameState.GetInt(nameof(Level));
+    }
 }

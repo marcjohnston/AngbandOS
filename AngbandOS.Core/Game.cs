@@ -672,8 +672,8 @@ internal partial class Game : IGameSerialize
             ViewingItemList = restoreGameState.GetBool(nameof(ViewingItemList));
             _petList = restoreGameState.GetReferences<Monster>(nameof(_petList)).ToList();
             _seedFlavor = restoreGameState.GetInt(nameof(_seedFlavor));
-            ExPlayer = restoreGameState.GetReference<ExPlayer>(nameof(ExPlayer));
-            LevelOfFirstSpell = restoreGameState.GetInt(nameof(LevelOfFirstSpell));
+            ExPlayer = restoreGameState.GetNullableReference<ExPlayer>(nameof(ExPlayer));
+            LevelOfFirstSpell = restoreGameState.GetNullableInt(nameof(LevelOfFirstSpell));
             SpellOrder = restoreGameState.GetReferences<Spell>(nameof(SpellOrder)).ToList();
             Talents = restoreGameState.GetReferences<Talent>(nameof(Talents)).ToList();
             CommandArgument = restoreGameState.GetInt(nameof(CommandArgument));
@@ -1409,7 +1409,7 @@ internal partial class Game : IGameSerialize
     private int _seedFlavor;
     public const int HurtChance = 16;
 
-    public ExPlayer ExPlayer;
+    public ExPlayer? ExPlayer = null;
 
     /// <summary>
     /// Returns the level of the first spell that the player can cast or null, if there are no books or spells in either realm.

@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Reflection;
 using System.Text;
 
 namespace AngbandOS.Core;
@@ -119,6 +120,17 @@ internal class RestoreGameState
 
     private T GetReference<T>(GameStateBag gameStateBag)
     {
+        #if DEBUG
+        if (!typeof(IGetKey).IsAssignableFrom(typeof(T)))
+        {
+            ConstructorInfo? gameAndRestoreGameStateConstructor = typeof(T).GetConstructor(BindingFlags.Public | BindingFlags.Instance, null, new[] { typeof(Game), typeof(RestoreGameState) }, null);
+            if (gameAndRestoreGameStateConstructor is null)
+            {
+                throw new Exception($"Model for {typeof(T).Name} does not have public constructor for (Game, RestoreGameState).");
+            }
+        }
+        #endif
+
         if (gameStateBag is ReferenceGameStateBag referenceGameStateBag)
         {
             if (ObjectIdToReferenceDictionary.TryGetValue(referenceGameStateBag.ObjectId, out var reference))
