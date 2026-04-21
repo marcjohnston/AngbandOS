@@ -92,7 +92,7 @@ internal class Monster : IItemContainer, IGameSerialize
     public bool SmResShard = false;
     public bool SmResSound = false;
 
-    public MonsterRace Race;
+    public MonsterRace? Race = null;
 
     /// <summary>
     /// Returns the how deep a monster is sleeping.
@@ -327,7 +327,7 @@ internal class Monster : IItemContainer, IGameSerialize
         SmResPois = restoreGameState.GetBool(nameof(SmResPois));
         SmResShard = restoreGameState.GetBool(nameof(SmResShard));
         SmResSound = restoreGameState.GetBool(nameof(SmResSound));
-        Race = restoreGameState.GetReference<MonsterRace>(nameof(Race));
+        Race = restoreGameState.GetNullableReference<MonsterRace>(nameof(Race));
         _sleepLevel = restoreGameState.GetInt(nameof(_sleepLevel));
         Speed = restoreGameState.GetInt(nameof(Speed));
         StolenGold = restoreGameState.GetInt(nameof(StolenGold));

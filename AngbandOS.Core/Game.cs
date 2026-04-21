@@ -480,6 +480,11 @@ internal partial class Game : IGameSerialize
         {
             // This is a new game.
             SingletonRepository.LoadAndBind(gameConfiguration, null);
+
+            // There are a few properties we need to set.
+            IsDead = true;
+            Map = new Map(this);
+            Quests = new List<Quest>();
         }
         else
         {
@@ -786,9 +791,6 @@ internal partial class Game : IGameSerialize
         RockTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsRock);
         WaterTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsWater);
 
-        IsDead = true;
-        Map = new Map(this);
-
         DungeonGenerator = new StandardDungeonGenerator(this);
 
         TimeSpan elapsedTime = DateTime.Now - startTime;
@@ -830,7 +832,6 @@ internal partial class Game : IGameSerialize
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
         #endif
 
-        Quests = new List<Quest>();
         GameMessage = (GameMessageProperty)SingletonRepository.Get<Property>(nameof(GameMessageProperty));
         Gold = (GoldIntProperty)SingletonRepository.Get<Property>(nameof(GoldIntProperty));
         Mana = (ManaIntProperty)SingletonRepository.Get<Property>(nameof(ManaIntProperty));
