@@ -103,6 +103,27 @@ internal class RestoreGameState
         throw new ArgumentOutOfRangeException(nameof(value), $"Invalid value for enum {typeof(T).Name}: {value}");
     }
 
+    public T[] GetEnums<T>(string key) where T : Enum
+    {
+        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
+        List<T> boolList = new List<T>();
+        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        {
+            if (gameStateBag is not IntValueGameStateBag intValueGameStateBag)
+            {
+                throw new Exception($"Expected int value game state bag for enum.");
+            }
+            int value = intValueGameStateBag.Value;
+            if (!Enum.IsDefined(typeof(T), value))
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), $"Invalid value for enum {typeof(T).Name}: {value}");
+            }
+            T enumValue = (T)(object)value;
+            boolList.Add(enumValue);
+        }
+        return boolList.ToArray();
+    }
+
     public bool[] GetBools(string key)
     {
         ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
@@ -121,7 +142,8 @@ internal class RestoreGameState
     private T GetReference<T>(GameStateBag gameStateBag)
     {
         #if DEBUG
-        if (!typeof(IGetKey).IsAssignableFrom(typeof(T)))
+        // We will only check game serializable models and not IGetKey.
+        if (!typeof(IGetKey).IsAssignableFrom(typeof(T)) && !typeof(T).IsAbstract)
         {
             ConstructorInfo? gameAndRestoreGameStateConstructor = typeof(T).GetConstructor(BindingFlags.Public | BindingFlags.Instance, null, new[] { typeof(Game), typeof(RestoreGameState) }, null);
             if (gameAndRestoreGameStateConstructor is null)
@@ -222,7 +244,7 @@ internal class RestoreGameState
         return list.ToArray();
     }
 
-    public int[] GetIntegers(string key)
+    public int[] GetInts(string key)
     {
         ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
         List<int> list = new List<int>();
@@ -291,7 +313,7 @@ internal class RestoreGameState
         return listOfBytes.ToArray();
     }
 
-    public char[] GetChars(string key) => GetString(key).ToArray();
+    public char[] GetChars(string key) => GetGameStateBag<CharArrayGameStateBag>(key).Value.ToCharArray();
     public int GetInt(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
     public int? GetNullableInt(string key)
     {

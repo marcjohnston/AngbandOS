@@ -30,8 +30,8 @@ internal class Window : IGameSerialize
     /// </summary>
     private UpdateWindow UpdateWindow;
 
-    private ColorEnum AttrBlank;
-    private char CharBlank;
+    private const ColorEnum AttrBlank = ColorEnum.Background;
+    private const char CharBlank = ' ';
 
     /// <summary>
     /// Returns the height of the screen.
@@ -60,13 +60,22 @@ internal class Window : IGameSerialize
             (nameof(ActiveScreen), saveGameState.CreateGameStateBag(ActiveScreen)),
             (nameof(OldScreen), saveGameState.CreateGameStateBag(OldScreen)),
             (nameof(UpdateWindow), saveGameState.CreateGameStateBag(UpdateWindow)),
-            (nameof(AttrBlank), saveGameState.CreateGameStateBag(AttrBlank)),
-            (nameof(CharBlank), saveGameState.CreateGameStateBag(CharBlank)),
             (nameof(Height), saveGameState.CreateGameStateBag(Height)),
             (nameof(Width), saveGameState.CreateGameStateBag(Width)),
             (nameof(RowStartingIndexArray), saveGameState.CreateGameStateBag(RowStartingIndexArray)),
             (nameof(TotalErase), saveGameState.CreateGameStateBag(TotalErase))
         );
+    }
+
+    public Window(Game game, RestoreGameState restoreGameState)
+    {
+        ActiveScreen = restoreGameState.GetReference<ScreenBuffer>(nameof(ActiveScreen));
+        OldScreen = restoreGameState.GetReference<ScreenBuffer>(nameof(OldScreen));
+        UpdateWindow = restoreGameState.GetReference<UpdateWindow>(nameof(UpdateWindow));
+        Height = restoreGameState.GetInt(nameof(Height));
+        Width = restoreGameState.GetInt(nameof(Width));
+        RowStartingIndexArray = restoreGameState.GetInts(nameof(RowStartingIndexArray));
+        TotalErase = restoreGameState.GetBool(nameof(TotalErase));
     }
 
     /// <summary>
@@ -75,11 +84,28 @@ internal class Window : IGameSerialize
     public GridCoordinate CursorPosition => new GridCoordinate(ActiveScreen.Cx, ActiveScreen.Cy);
 
     [NonSerialized]
-    private IConsoleAndViewPort _consoleViewPort;
+    private IConsoleAndViewPort? _consoleViewPort = null;
 
+    /// <summary>
+    /// Sets the console and viewport when a game is being restored.
+    /// </summary>
+    /// <param name="consoleViewPort"></param>
+    public void SetConsoleAndViewPort(IConsoleAndViewPort consoleViewPort)
+    {
+        _consoleViewPort = consoleViewPort;
+        if (Width != consoleViewPort.Width || Height != consoleViewPort.Height)
+        {
+            throw new Exception("Incompatible console and viewport.");
+        }
+    }
+
+    /// <summary>
+    /// Creates a new window and sets the console and viewport for a new game.
+    /// </summary>
+    /// <param name="consoleViewPort"></param>
     public Window(IConsoleAndViewPort consoleViewPort)
     {
-        _consoleViewPort = consoleViewPort;    
+        _consoleViewPort = consoleViewPort;
         Width = _consoleViewPort.Width;
         Height = _consoleViewPort.Height;
 
@@ -87,9 +113,6 @@ internal class Window : IGameSerialize
         OldScreen = new ScreenBuffer(Width, Height);
 
         UpdateWindow = new UpdateWindow(Width, Height);
-
-        AttrBlank = 0;
-        CharBlank = ' ';
 
         TotalErase = true;
 

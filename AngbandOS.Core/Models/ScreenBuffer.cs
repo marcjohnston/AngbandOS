@@ -50,6 +50,15 @@ internal class ScreenBuffer : IGameSerialize
         );
     }
 
+    public ScreenBuffer(Game game, RestoreGameState restoreGameState)
+    {
+        Va = restoreGameState.GetEnums<ColorEnum>(nameof(Va));
+        Vc = restoreGameState.GetChars(nameof(Vc));
+        Cx = restoreGameState.GetInt(nameof(Cx));
+        Cy = restoreGameState.GetInt(nameof(Cy));
+        CursorVisible = restoreGameState.GetBool(nameof(CursorVisible));
+    }
+
     public ScreenBuffer(int width, int height)
     {
         Va = new ColorEnum[width * height];

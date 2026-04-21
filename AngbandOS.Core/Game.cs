@@ -688,7 +688,7 @@ internal partial class Game : IGameSerialize
             _artificialKeyBuffer = restoreGameState.GetString(nameof(_artificialKeyBuffer));
             _keymapAct = restoreGameState.GetArrayOfStrings(nameof(_keymapAct));
             History = restoreGameState.GetStrings(nameof(History));
-            PlayerHp = restoreGameState.GetIntegers(nameof(PlayerHp));
+            PlayerHp = restoreGameState.GetInts(nameof(PlayerHp));
             Age = restoreGameState.GetInt(nameof(Age));
             ArmorClassBonus = restoreGameState.GetInt(nameof(ArmorClassBonus));
             Energy = restoreGameState.GetInt(nameof(Energy));
@@ -736,8 +736,8 @@ internal partial class Game : IGameSerialize
             WildernessY = restoreGameState.GetInt(nameof(WildernessY));
             WordOfRecallDelay = restoreGameState.GetInt(nameof(WordOfRecallDelay));
             Map = restoreGameState.GetReference<Map>(nameof(Map));
-            TempX = restoreGameState.GetIntegers(nameof(TempX));
-            TempY = restoreGameState.GetIntegers(nameof(TempY));
+            TempX = restoreGameState.GetInts(nameof(TempX));
+            TempY = restoreGameState.GetInts(nameof(TempY));
             CurHgt = restoreGameState.GetInt(nameof(CurHgt));
             CurWid = restoreGameState.GetInt(nameof(CurWid));
             DangerFeeling = restoreGameState.GetInt(nameof(DangerFeeling));
@@ -826,7 +826,9 @@ internal partial class Game : IGameSerialize
         IllegibleFlavorSyllables = gameConfiguration.IllegibleFlavorSyllables ?? new string[] { };
         ShopkeeperAcceptedComments = gameConfiguration.ShopkeeperAcceptedComments ?? new string[] { };
 
+        #if DEBUG
         Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
+        #endif
 
         Quests = new List<Quest>();
         GameMessage = (GameMessageProperty)SingletonRepository.Get<Property>(nameof(GameMessageProperty));
@@ -1027,7 +1029,18 @@ internal partial class Game : IGameSerialize
         CorePersistentStorage = persistentStorage;
         ReplayPersistentStorage = replayPersistentStorage;
         KeyQueue = new char[ConsoleViewPort.MaximumKeyQueueLength];
-        Screen = new Window(consoleViewPort);
+
+        if (Screen is null)
+        {
+            // This is a new game.  Initialize the screen.
+            Screen = new Window(consoleViewPort);
+        }
+        else
+        {
+            // The game was restored.  We only need to set the console and viewport.
+            Screen.SetConsoleAndViewPort(consoleViewPort);
+        }
+
         MapMovementKeys();
 
         FullScreenOverlay = true;
@@ -1470,7 +1483,11 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// The current contents of the game screen.
     /// </summary>
-    public Window Screen;
+    /// <remarks>
+    /// This field starts out as null.  If the game is restored, the restoration instantiates this Window object with the applicable restoration data, but without the console view object.  The console view object
+    /// is supplied at the play game stage.
+    /// </remarks>
+    public Window? Screen = null;
 
     public int KeyHead = 0;
     public int KeyTail = 0;
