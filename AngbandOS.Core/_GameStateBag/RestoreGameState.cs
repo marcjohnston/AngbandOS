@@ -345,6 +345,27 @@ internal class RestoreGameState
         return GetDateTime(key);
     }
 
+    public T[][] GetJaggedArrayOfReferences<T>(string key)
+    {
+        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
+        List<T[]> listOfStrings = new List<T[]>();
+        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        {
+            if (gameStateBag is not ListGameStateBag listOfStringsBag)
+            {
+                throw new Exception($"Jagged array of {typeof(T).Name} not a list.");
+            }
+
+            List<T> list = new List<T>();
+            foreach (GameStateBag innerGameStateBag in listOfStringsBag.Values)
+            {
+                list.Add(GetReference<T>(innerGameStateBag));
+            }
+            list.AddRange(list);
+        }
+        return listOfStrings.ToArray();
+    }
+
     public string GetString(string key) => GetGameStateBag<StringValueGameStateBag>(key).Value;
 
     public DateTime GetDateTime(string key) => GetGameStateBag<DateTimeValueGameStateBag>(key).Value;

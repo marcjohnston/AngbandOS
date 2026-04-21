@@ -14,7 +14,7 @@ internal class GridTile : IItemContainer, IGameSerialize
 {
     public GridTile(TrapsDetectedProperty trapsDetectedProperty, Tile backgroundFeature, Tile featureType)
     {
-        TrapsDetectedProperty = trapsDetectedProperty;
+        TrapsDetectedProperty = trapsDetectedProperty; // TODO: These should be retrieved.  We need to store the Game reference though.
         BackgroundFeature = backgroundFeature;
         FeatureType = featureType;
     }
@@ -40,6 +40,25 @@ internal class GridTile : IItemContainer, IGameSerialize
         );
     }
 
+    public GridTile(Game game, RestoreGameState restoreGameState)
+    {
+        TrapsDetectedProperty = restoreGameState.GetReference<TrapsDetectedProperty>(nameof(TrapsDetectedProperty));
+        EasyVisibility = restoreGameState.GetBool(nameof(EasyVisibility));
+        InRoom = restoreGameState.GetBool(nameof(InRoom));
+        InVault = restoreGameState.GetBool(nameof(InVault));
+        IsVisible = restoreGameState.GetBool(nameof(IsVisible));
+        PlayerLit = restoreGameState.GetBool(nameof(PlayerLit));
+        PlayerMemorized = restoreGameState.GetBool(nameof(PlayerMemorized));
+        SelfLit = restoreGameState.GetBool(nameof(SelfLit));
+        TempFlag = restoreGameState.GetBool(nameof(TempFlag));
+        _trapsDetected = restoreGameState.GetBool(nameof(_trapsDetected));
+        BackgroundFeature = restoreGameState.GetReference<Tile>(nameof(BackgroundFeature));
+        FeatureType = restoreGameState.GetReference<Tile>(nameof(FeatureType));
+        Items = restoreGameState.GetReferences<Item>(nameof(Items)).ToList();
+        MonsterIndex = restoreGameState.GetInt(nameof(MonsterIndex));
+        ScentAge = restoreGameState.GetInt(nameof(ScentAge));
+        ScentStrength = restoreGameState.GetInt(nameof(ScentStrength));
+    }
     #region State Data
     private readonly TrapsDetectedProperty TrapsDetectedProperty;
 

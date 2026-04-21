@@ -9,6 +9,9 @@ namespace AngbandOS.Core.Properties;
 /// <summary>
 /// Represents a base class for any value that participates in change tracking.  Various types of value data types are built using derived classes; <see cref="IntProperty"/>.
 /// </summary>
+/// <remarks>
+/// This object has dual restore options.
+/// </remarks>
 [Serializable]
 internal abstract class Property : IGetKey, IChangeTracker, IGameSerialize
 {
@@ -19,9 +22,15 @@ internal abstract class Property : IGetKey, IChangeTracker, IGameSerialize
     }
     protected Property(Game game, RestoreGameState restoreGameState) : this(game)
     {
+        IsChanged = restoreGameState.GetBool(nameof(IsChanged));
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(IsChanged), saveGameState.CreateGameStateBag(IsChanged))
+        );
+    }
 
     /// <summary>
     /// Sets the change flag to true to indicate that the value has changed.  This should only be performed by derived classes when the internal value changes.
@@ -53,5 +62,11 @@ internal abstract class Property : IGetKey, IChangeTracker, IGameSerialize
         throw new Exception($"ToString override missing for {GetType().Name}.");
     }
 
-    public virtual void Bind(RestoreGameState? restoreGameState) { }
+    public virtual void Bind(RestoreGameState? restoreGameState)
+    {
+        if (restoreGameState is not null)
+        {
+            IsChanged = restoreGameState.GetBool(nameof(IsChanged));
+        }
+    }
 }
