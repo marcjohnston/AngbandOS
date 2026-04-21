@@ -143,32 +143,6 @@ internal class SaveGameState
             return new ListGameStateBag(gameStateBags.ToArray());
         }
 
-        // byte[]
-        if (value is byte[] byteArray)
-        {
-            return new ByteArrayGameStateBag(byteArray);
-        }
-
-        if (value is string[] arrayOfString)
-        {
-            var gameStateBags = new List<GameStateBag>();
-            foreach (string item in arrayOfString)
-            {
-                gameStateBags.Add(CreateGameStateBag(item));
-            }
-            return new ListGameStateBag(gameStateBags.ToArray());
-        }
-
-        if (value is ColorEnum[] arrayOfColorEnum)
-        {
-            var gameStateBags = new List<GameStateBag>();
-            foreach (ColorEnum item in arrayOfColorEnum)
-            {
-                gameStateBags.Add(CreateGameStateBag(item));
-            }
-            return new ListGameStateBag(gameStateBags.ToArray());
-        }
-
         // byte[][]
         if (value is byte[][] arrayOfByteArray)
         {
@@ -180,11 +154,39 @@ internal class SaveGameState
             return new ListGameStateBag(gameStateBags.ToArray());
         }
 
+        // byte[]
+        if (value is byte[] byteArray)
+        {
+            return new ByteArrayGameStateBag(byteArray);
+        }
+
         // string[][]
         if (value is string[][] arrayOfStringArray)
         {
             var gameStateBags = new List<GameStateBag>();
             foreach (string[] item in arrayOfStringArray)
+            {
+                gameStateBags.Add(CreateGameStateBag(item));
+            }
+            return new ListGameStateBag(gameStateBags.ToArray());
+        }
+
+        // string[]
+        if (value is string[] arrayOfString)
+        {
+            var gameStateBags = new List<GameStateBag>();
+            foreach (string item in arrayOfString)
+            {
+                gameStateBags.Add(CreateGameStateBag(item));
+            }
+            return new ListGameStateBag(gameStateBags.ToArray());
+        }
+
+        // enum[]
+        if (value is ColorEnum[] arrayOfColorEnum)
+        {
+            var gameStateBags = new List<GameStateBag>();
+            foreach (ColorEnum item in arrayOfColorEnum)
             {
                 gameStateBags.Add(CreateGameStateBag(item));
             }

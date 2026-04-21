@@ -11,7 +11,7 @@ internal class Quest : IGameSerialize
 {
     #region State Data
     public bool Discovered;
-    public Dungeon Dungeon;
+    public Dungeon? Dungeon = null;
     public int Killed;
 
     /// <summary>
@@ -94,5 +94,14 @@ internal class Quest : IGameSerialize
     public Quest(Game game)
     {
         Game = game;
+    }
+    public Quest(Game game, RestoreGameState restoreGameState) : this(game)
+    {
+        Discovered = restoreGameState.GetBool(nameof(Discovered));
+        Dungeon = restoreGameState.GetNullableReference<Dungeon>(nameof(Dungeon));
+        Killed = restoreGameState.GetInt(nameof(Killed));
+        Level = restoreGameState.GetInt(nameof(Level));
+        RIdx = restoreGameState.GetInt(nameof(RIdx));
+        ToKill = restoreGameState.GetInt(nameof(ToKill));
     }
 }

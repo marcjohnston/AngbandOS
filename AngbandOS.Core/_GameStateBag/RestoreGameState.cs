@@ -266,25 +266,17 @@ internal class RestoreGameState
     public byte[][] GetArrayOfBytes(string key)
     {
         ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
-        List<byte[]> listOfStrings = new List<byte[]>();
+        List<byte[]> listOfBytes = new List<byte[]>();
         foreach (GameStateBag gameStateBag in listGameStateBag.Values)
         {
-            if (gameStateBag is not ListGameStateBag listOfStringsBag)
+            if (gameStateBag is not ByteArrayGameStateBag byteArrayGameStateBag)
             {
-                throw new Exception("Jagged array of string not a list.");
+                throw new KeyNotFoundException($"List was not of {nameof(ByteArrayGameStateBag)}.");
             }
-            List<byte> list = new List<byte>();
-            foreach (GameStateBag innerGameStateBag in listOfStringsBag.Values)
-            {
-                if (innerGameStateBag is not ByteValueGameStateBag byteValueGameStateBag)
-                {
-                    throw new Exception("Expected inner list of strings.");
-                }
-                list.Add(byteValueGameStateBag.Value);
-            }
-            list.AddRange(list);
+            byte[] bytes = Encoding.UTF8.GetBytes(byteArrayGameStateBag.Value);
+            listOfBytes.Add(bytes);
         }
-        return listOfStrings.ToArray();
+        return listOfBytes.ToArray();
     }
 
     public char[] GetChars(string key) => GetString(key).ToArray();
