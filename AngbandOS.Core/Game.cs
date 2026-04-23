@@ -203,7 +203,6 @@ internal partial class Game : IGameSerialize
             (nameof(MutationsPossessed), saveGameState.CreateGameStateBag(MutationsPossessed)),
             (nameof(TreasureFeeling), saveGameState.CreateGameStateBag(TreasureFeeling)),
             (nameof(_birthday), saveGameState.CreateGameStateBag(_birthday)),
-            (nameof(CurrentGameDateTime), saveGameState.CreateGameStateBag(CurrentGameDateTime)),
             (nameof(_currentTurn), saveGameState.CreateGameStateBag(_currentTurn)),
             (nameof(_dawn), saveGameState.CreateGameStateBag(_dawn)),
             (nameof(_dusk), saveGameState.CreateGameStateBag(_dusk)),
@@ -237,7 +236,6 @@ internal partial class Game : IGameSerialize
             (nameof(TargetWho), saveGameState.CreateGameStateBag(TargetWho)),
             (nameof(TotalFriendLevels), saveGameState.CreateGameStateBag(TotalFriendLevels)),
             (nameof(TotalFriends), saveGameState.CreateGameStateBag(TotalFriends)),
-            (nameof(TrackedMonster), saveGameState.CreateGameStateBag(TrackedMonster)),
             (nameof(ViewingEquipment), saveGameState.CreateGameStateBag(ViewingEquipment)),
             (nameof(ViewingItemList), saveGameState.CreateGameStateBag(ViewingItemList)),
             (nameof(_petList ), saveGameState.CreateGameStateBag(_petList )),
@@ -262,7 +260,6 @@ internal partial class Game : IGameSerialize
             (nameof(Age), saveGameState.CreateGameStateBag(Age)),
             (nameof(ArmorClassBonus), saveGameState.CreateGameStateBag(ArmorClassBonus)),
             (nameof(Energy), saveGameState.CreateGameStateBag(Energy)),
-            (nameof(ExperienceMultiplier), saveGameState.CreateGameStateBag(ExperienceMultiplier)),
             (nameof(Bonuses), saveGameState.CreateGameStateBag(Bonuses)),
             (nameof(FractionalExperiencePoints), saveGameState.CreateGameStateBag(FractionalExperiencePoints)),
             (nameof(FractionalHealth), saveGameState.CreateGameStateBag(FractionalHealth)),
@@ -270,26 +267,9 @@ internal partial class Game : IGameSerialize
             (nameof(Gender), saveGameState.CreateGameStateBag(Gender)),
             (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
             (nameof(GetFirstLevelMutation), saveGameState.CreateGameStateBag(GetFirstLevelMutation)),
-            (nameof(Gold), saveGameState.CreateGameStateBag(Gold)),
-            (nameof(Mana), saveGameState.CreateGameStateBag(Mana)),
-            (nameof(MaxMana), saveGameState.CreateGameStateBag(MaxMana)),
-            (nameof(ExperiencePoints), saveGameState.CreateGameStateBag(ExperiencePoints)),
             (nameof(KnownBonusArmorClass), saveGameState.CreateGameStateBag(KnownBonusArmorClass)),
-            (nameof(PlayerName), saveGameState.CreateGameStateBag(PlayerName)),
-            (nameof(Speed), saveGameState.CreateGameStateBag(Speed)),
-            (nameof(SpareSpellSlots), saveGameState.CreateGameStateBag(SpareSpellSlots)),
-            (nameof(ConsoleView), saveGameState.CreateGameStateBag(ConsoleView)),
-            (nameof(Health), saveGameState.CreateGameStateBag(Health)),
-            (nameof(MaxHealth), saveGameState.CreateGameStateBag(MaxHealth)),
-            (nameof(Food), saveGameState.CreateGameStateBag(Food)),
-            (nameof(ExperienceLevel), saveGameState.CreateGameStateBag(ExperienceLevel)),
             (nameof(GooPatron), saveGameState.CreateGameStateBag(GooPatron)),
-            (nameof(IsWinner), saveGameState.CreateGameStateBag(IsWinner)),
-            (nameof(IsWizard), saveGameState.CreateGameStateBag(IsWizard)),
             (nameof(LightLevel), saveGameState.CreateGameStateBag(LightLevel)),
-            (nameof(MapX), saveGameState.CreateGameStateBag(MapX)),
-            (nameof(MapY), saveGameState.CreateGameStateBag(MapY)),
-            (nameof(MaxExperienceGained), saveGameState.CreateGameStateBag(MaxExperienceGained)),
             (nameof(MaxLevelGained), saveGameState.CreateGameStateBag(MaxLevelGained)),
             (nameof(MeleeAttacksPerRound), saveGameState.CreateGameStateBag(MeleeAttacksPerRound)),
             (nameof(MissileAttacksPerRound), saveGameState.CreateGameStateBag(MissileAttacksPerRound)),
@@ -334,10 +314,10 @@ internal partial class Game : IGameSerialize
             (nameof(ShimmerMonsters), saveGameState.CreateGameStateBag(ShimmerMonsters)),
             (nameof(Monsters), saveGameState.CreateGameStateBag(Monsters)),
             (nameof(_hackMIdxIi), saveGameState.CreateGameStateBag(_hackMIdxIi)),
+            (nameof(StartupTownName), saveGameState.CreateGameStateBag(StartupTownName)),
             (nameof(MessageLog), saveGameState.CreateGameStateBag(MessageLog)),
             (nameof(RecentMessages), saveGameState.CreateGameStateBag(RecentMessages)),
             (nameof(PreviousMessages), saveGameState.CreateGameStateBag(PreviousMessages)),
-            (nameof(GameMessage), saveGameState.CreateGameStateBag(GameMessage)),
             (nameof(MessageFirstQueueIndex), saveGameState.CreateGameStateBag(MessageFirstQueueIndex)),
             (nameof(_prevCharacterClass), saveGameState.CreateGameStateBag(_prevCharacterClass)),
             (nameof(_prevGeneration), saveGameState.CreateGameStateBag(_prevGeneration)),
@@ -630,7 +610,7 @@ internal partial class Game : IGameSerialize
             _previousRunDirection = restoreGameState.GetInt(nameof(_previousRunDirection));
             FollowDistance = restoreGameState.GetInt(nameof(FollowDistance));
             DecayRate = restoreGameState.GetInt(nameof(DecayRate));
-            God = restoreGameState.GetNullableReference<God>(nameof(God));
+            God = restoreGameState.GetReferenceOrDefault<God>(nameof(God));
             NaturalAttacks = restoreGameState.GetReferences<Mutation>(nameof(NaturalAttacks)).ToList();
             GenomeArmorClassBonus = restoreGameState.GetInt(nameof(GenomeArmorClassBonus));
             ChaosGift = restoreGameState.GetBool(nameof(ChaosGift));
@@ -638,7 +618,6 @@ internal partial class Game : IGameSerialize
             MutationsPossessed = restoreGameState.GetReferences<Mutation>(nameof(MutationsPossessed)).ToList();
             TreasureFeeling = restoreGameState.GetInt(nameof(TreasureFeeling));
             _birthday = restoreGameState.GetInt(nameof(_birthday));
-            //CurrentGameDateTime = restoreGameState.GetInt(nameof(CurrentGameDateTime));
             _currentTurn = restoreGameState.GetInt(nameof(_currentTurn));
             _dawn = restoreGameState.GetDateTime(nameof(_dawn));
             _dusk = restoreGameState.GetDateTime(nameof(_dusk));
@@ -669,15 +648,14 @@ internal partial class Game : IGameSerialize
             RecallDungeon = restoreGameState.GetReference<Dungeon>(nameof(RecallDungeon));
             Resting = restoreGameState.GetInt(nameof(Resting));
             Running = restoreGameState.GetInt(nameof(Running));
-            TargetWho = restoreGameState.GetNullableReference<Target>(nameof(TargetWho));
+            TargetWho = restoreGameState.GetReferenceOrDefault<Target>(nameof(TargetWho));
             TotalFriendLevels = restoreGameState.GetInt(nameof(TotalFriendLevels));
             TotalFriends = restoreGameState.GetInt(nameof(TotalFriends));
-      //      TrackedMonster = restoreGameState.GetInt(nameof(TrackedMonster));
             ViewingEquipment = restoreGameState.GetBool(nameof(ViewingEquipment));
             ViewingItemList = restoreGameState.GetBool(nameof(ViewingItemList));
             _petList = restoreGameState.GetReferences<Monster>(nameof(_petList)).ToList();
             _seedFlavor = restoreGameState.GetInt(nameof(_seedFlavor));
-            ExPlayer = restoreGameState.GetNullableReference<ExPlayer>(nameof(ExPlayer));
+            ExPlayer = restoreGameState.GetReferenceOrDefault<ExPlayer>(nameof(ExPlayer));
             LevelOfFirstSpell = restoreGameState.GetNullableInt(nameof(LevelOfFirstSpell));
             SpellOrder = restoreGameState.GetReferences<Spell>(nameof(SpellOrder)).ToList();
             Talents = restoreGameState.GetReferences<Talent>(nameof(Talents)).ToList();
@@ -697,44 +675,26 @@ internal partial class Game : IGameSerialize
             Age = restoreGameState.GetInt(nameof(Age));
             ArmorClassBonus = restoreGameState.GetInt(nameof(ArmorClassBonus));
             Energy = restoreGameState.GetInt(nameof(Energy));
-      //      ExperienceMultiplier = restoreGameState.GetInt(nameof(ExperienceMultiplier));
             Bonuses = restoreGameState.GetReference<Bonuses>(nameof(Bonuses));
             FractionalExperiencePoints = restoreGameState.GetInt(nameof(FractionalExperiencePoints));
             FractionalHealth = restoreGameState.GetInt(nameof(FractionalHealth));
             FractionalMana = restoreGameState.GetInt(nameof(FractionalMana));
-            Gender = restoreGameState.GetNullableReference<Gender>(nameof(Gender));
+            Gender = restoreGameState.GetReferenceOrDefault<Gender>(nameof(Gender));
             Generation = restoreGameState.GetInt(nameof(Generation));
             GetFirstLevelMutation = restoreGameState.GetBool(nameof(GetFirstLevelMutation));
-            //Gold = restoreGameState.GetInt(nameof(Gold));
-            //Mana = restoreGameState.GetInt(nameof(Mana));
-            //MaxMana = restoreGameState.GetInt(nameof(MaxMana));
-            //ExperiencePoints = restoreGameState.GetInt(nameof(ExperiencePoints));
             KnownBonusArmorClass = restoreGameState.GetInt(nameof(KnownBonusArmorClass));
-            //PlayerName = restoreGameState.GetInt(nameof(PlayerName));
-            //Speed = restoreGameState.GetInt(nameof(Speed));
-            //SpareSpellSlots = restoreGameState.GetInt(nameof(SpareSpellSlots));
-            //ConsoleView = restoreGameState.GetInt(nameof(ConsoleView)); checked this one
-         //   Health = restoreGameState.GetInt(nameof(Health));
-            //MaxHealth = restoreGameState.GetInt(nameof(MaxHealth));
-            //Food = restoreGameState.GetInt(nameof(Food));
-            //ExperienceLevel = restoreGameState.GetInt(nameof(ExperienceLevel));
             GooPatron = restoreGameState.GetReference<Patron>(nameof(GooPatron));
-            //IsWinner = restoreGameState.GetBool(nameof(IsWinner));
-            //IsWizard = restoreGameState.GetBool(nameof(IsWizard));
             LightLevel = restoreGameState.GetInt(nameof(LightLevel));
-            //MapX = restoreGameState.GetInt(nameof(MapX));
-            //MapY = restoreGameState.GetInt(nameof(MapY));
-            //MaxExperienceGained = restoreGameState.GetInt(nameof(MaxExperienceGained));
             MaxLevelGained = restoreGameState.GetInt(nameof(MaxLevelGained));
             MeleeAttacksPerRound = restoreGameState.GetInt(nameof(MeleeAttacksPerRound));
             MissileAttacksPerRound = restoreGameState.GetInt(nameof(MissileAttacksPerRound));
             OldSpareSpellSlots = restoreGameState.GetInt(nameof(OldSpareSpellSlots));
             CharacterClass = restoreGameState.GetReference<CharacterClass>(nameof(CharacterClass));
-            Race = restoreGameState.GetNullableReference<Race>(nameof(Race));
+            Race = restoreGameState.GetReferenceOrDefault<Race>(nameof(Race));
             RaceAtBirth = restoreGameState.GetReference<Race>(nameof(RaceAtBirth));
-            PrimaryRealm = restoreGameState.GetNullableReference<Realm>(nameof(PrimaryRealm));
-            SecondaryRealm = restoreGameState.GetNullableReference<Realm>(nameof(SecondaryRealm));
-            TownWithHouse = restoreGameState.GetNullableReference<Town>(nameof(TownWithHouse));
+            PrimaryRealm = restoreGameState.GetReferenceOrDefault<Realm>(nameof(PrimaryRealm));
+            SecondaryRealm = restoreGameState.GetReferenceOrDefault<Realm>(nameof(SecondaryRealm));
+            TownWithHouse = restoreGameState.GetReferenceOrDefault<Town>(nameof(TownWithHouse));
             Weight = restoreGameState.GetInt(nameof(Weight));
             WeightCarried = restoreGameState.GetInt(nameof(WeightCarried));
             WildernessX = restoreGameState.GetInt(nameof(WildernessX));
@@ -763,25 +723,25 @@ internal partial class Game : IGameSerialize
             Light = restoreGameState.GetReferences<GridCoordinate>(nameof(Light)).ToList();
             View = restoreGameState.GetReferences<GridCoordinate>(nameof(View)).ToList();
             CurrentlyActingMonster = restoreGameState.GetInt(nameof(CurrentlyActingMonster));
-            DunBias = restoreGameState.GetNullableReference<MonsterRaceFilter>(nameof(DunBias));
+            DunBias = restoreGameState.GetReferenceOrDefault<MonsterRaceFilter>(nameof(DunBias));
             NumRepro = restoreGameState.GetInt(nameof(NumRepro));
             RepairMonsters = restoreGameState.GetBool(nameof(RepairMonsters));
             ShimmerMonsters = restoreGameState.GetBool(nameof(ShimmerMonsters));
             Monsters = restoreGameState.GetReferences<Monster>(nameof(Monsters)).ToArray();
             _hackMIdxIi = restoreGameState.GetInt(nameof(_hackMIdxIi));
+            StartupTownName = restoreGameState.GetStringOrDefault(nameof(StartupTownName));
             MessageLog = restoreGameState.GetReferences<GameMessage>(nameof(MessageLog)).ToList();
             RecentMessages = restoreGameState.GetReferences<GameMessage>(nameof(RecentMessages)).ToList();
             PreviousMessages = restoreGameState.GetReferences<GameMessage>(nameof(PreviousMessages)).ToArray();
-            //GameMessage = restoreGameState.GetInt(nameof(GameMessage));
             MessageFirstQueueIndex = restoreGameState.GetInt(nameof(MessageFirstQueueIndex));
             _prevCharacterClass = restoreGameState.GetReference<CharacterClass>(nameof(_prevCharacterClass));
             _prevGeneration = restoreGameState.GetInt(nameof(_prevGeneration));
             _prevName = restoreGameState.GetString(nameof(_prevName));
-            _prevRace = restoreGameState.GetNullableReference<Race>(nameof(_prevRace));
-            _prevPrimaryRealm = restoreGameState.GetNullableReference<Realm>(nameof(_prevPrimaryRealm));
-            _prevSecondaryRealm = restoreGameState.GetNullableReference<Realm>(nameof(_prevSecondaryRealm));
+            _prevRace = restoreGameState.GetReferenceOrDefault<Race>(nameof(_prevRace));
+            _prevPrimaryRealm = restoreGameState.GetReferenceOrDefault<Realm>(nameof(_prevPrimaryRealm));
+            _prevSecondaryRealm = restoreGameState.GetReferenceOrDefault<Realm>(nameof(_prevSecondaryRealm));
             _prevSex = restoreGameState.GetReference<Gender>(nameof(_prevSex));
-            //Inventory = restoreGameState.GetInt(nameof(Inventory));
+            Inventory = restoreGameState.GetNullableReferences<Item>(nameof(Inventory));
             _invenCnt = restoreGameState.GetInt(nameof(_invenCnt));
         }
 
@@ -1324,7 +1284,7 @@ internal partial class Game : IGameSerialize
     private const int LevelFeelDelay = 2500;
     private const int MillisecondsPerTurn = 800;
     private int _birthday;
-    private readonly CurrentGameDateTimeProperty CurrentGameDateTime;
+    private CurrentGameDateTimeProperty CurrentGameDateTime { get; }
     private int _currentTurn;
 
     /// <summary>
@@ -1407,7 +1367,7 @@ internal partial class Game : IGameSerialize
 
     public int TotalFriendLevels;
     public int TotalFriends;
-    public NullableMonsterProperty TrackedMonster;
+    public NullableMonsterProperty TrackedMonster { get; }
 
     /// <summary>
     /// Returns true, when the GetItem/SelectItem is rendering the equipment list, instead of the inventory list (when the ViewingItemList is true).
@@ -1514,7 +1474,7 @@ internal partial class Game : IGameSerialize
     public int Age;
     public int ArmorClassBonus;
     public int Energy;
-    public readonly ExperienceMultiplierIntProperty ExperienceMultiplier;
+    public ExperienceMultiplierIntProperty ExperienceMultiplier { get; }
 
     public Bonuses Bonuses = new Bonuses(); // Create a new bonuses with default values until the UpdateBonusesFlaggedAction updates it.
 
@@ -1525,38 +1485,38 @@ internal partial class Game : IGameSerialize
     public int Generation; // This is how many times the character name has changed.
     public bool GetFirstLevelMutation;
 
-    public readonly GoldIntProperty Gold;
-    public readonly ManaIntProperty Mana;
-    public readonly MaxManaIntProperty MaxMana;
-    public readonly ExperiencePointsIntProperty ExperiencePoints;
+    public GoldIntProperty Gold { get; }
+    public ManaIntProperty Mana { get; }
+    public MaxManaIntProperty MaxMana { get; }
+    public ExperiencePointsIntProperty ExperiencePoints { get; }
     public int KnownBonusArmorClass;
-    public readonly StringProperty PlayerName;
+    public StringProperty PlayerName { get; }
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>state->speed</remarks>
-    public readonly SpeedIntProperty Speed;
+    public SpeedIntProperty Speed { get; }
 
-    public readonly SpareSpellSlotsIntProperty SpareSpellSlots;
+    public SpareSpellSlotsIntProperty SpareSpellSlots { get; }
 
     public View ConsoleView { get; private set; }
 
-    public readonly HealthPointsIntProperty Health;
+    public HealthPointsIntProperty Health { get; }
 
-    public readonly MaxHealthPointsIntProperty MaxHealth;
+    public MaxHealthPointsIntProperty MaxHealth { get; }
 
     /// <summary>
     ///
     /// </summary>
     /// <remarks>borg: This was player->exp</remarks>
-    public readonly FoodIntProperty Food; // TODO: How is this different from a timer
+    public FoodIntProperty Food { get; } // TODO: How is this different from a timer
 
     /// <summary>
     /// 
     /// </summary>
     /// <remarks>borg: player->lev</remarks>
-    public readonly ExperienceLevelIntProperty ExperienceLevel;
+    public ExperienceLevelIntProperty ExperienceLevel { get; }
 
     public Patron GooPatron;
 
@@ -1564,27 +1524,27 @@ internal partial class Game : IGameSerialize
     /// 
     /// </summary>
     /// <remarks>borg: player->total_winner</remarks>
-    public readonly IsWinnerBoolProperty IsWinner;
-    public readonly IsWizardBoolProperty IsWizard;
+    public IsWinnerBoolProperty IsWinner { get; }
+    public IsWizardBoolProperty IsWizard { get; }
 
     public int LightLevel;
 
     /// <summary>
     /// The current player X position.
     /// </summary>
-    public readonly MapXIntProperty MapX;
+    public MapXIntProperty MapX { get; }
 
     /// <summary>
     /// The current player Y position.
     /// </summary>
-    public readonly MapYIntProperty MapY;
+    public MapYIntProperty MapY { get; }
 
     /// <summary>
     /// Returns the highest experience points that the player has achieved.  This value may be different from the current experience points due to the player losing experience.  This
     /// property maintains this highest value so that the player can restore those lost experience.
     /// </summary>
     /// <remarks>borg: player->max_exp</remarks>
-    public readonly HighestExperiencePointsAchievedIntProperty MaxExperienceGained;
+    public HighestExperiencePointsAchievedIntProperty MaxExperienceGained { get; }
 
     /// <summary>
     ///
@@ -1776,7 +1736,7 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the item factories to be used to generate gold.  If there are no item factories defined, gold will not be generated.
     /// </summary>
-    public readonly ItemFactory[]? GoldFactories = null;
+    public ItemFactory[]? GoldFactories { get; }
 
     /// <summary>
     /// Returns the one-in-probability that found gold is great.
@@ -1900,7 +1860,7 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the property that maintains the game message.
     /// </summary>
-    public GameMessageProperty GameMessage;
+    public GameMessageProperty GameMessage { get; }
 
     /// <summary>
     /// Returns the unique index of the first message in the MessageLog.  When messages drop out of the list due to the size of the MessageLog, this index is incremented
@@ -9823,7 +9783,7 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// List of backstory fragments joined together on character generation
     /// </summary>
-    private readonly PlayerHistory[] _backgroundTable =
+    private PlayerHistory[] _backgroundTable { get; } =
     {
         // Group 1: Human start /Half-Elf legitimacy 1->2->3->50->51->52->53->End
         new PlayerHistory("You are the illegitimate and unacknowledged child ", 10, 1, 2, 25),

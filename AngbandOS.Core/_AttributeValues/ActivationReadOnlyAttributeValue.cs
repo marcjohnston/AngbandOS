@@ -7,14 +7,14 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class ActivationReadOnlyAttributeValue : AttributeValue
+internal class ActivationReadOnlyAttributeValue : AttributeValue, IGameSerialize
 {
     public readonly Activation? Value;
     public ActivationReadOnlyAttributeValue(Activation? value)
     {
         Value = value;
     }
-    public ActivationReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetNullableReference<Activation>(nameof(Value)))
+    public ActivationReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetReferenceOrDefault<Activation>(nameof(Value)))
     {
     }
 

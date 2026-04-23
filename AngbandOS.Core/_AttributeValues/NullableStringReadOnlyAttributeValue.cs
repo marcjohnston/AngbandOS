@@ -19,7 +19,7 @@ internal class NullableStringReadOnlyAttributeValue : AttributeValue
     {
         Value = value;
     }
-    public NullableStringReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetNullableReference<string>(nameof(Value)))
+    public NullableStringReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetReferenceOrDefault<string>(nameof(Value)))
     {
     }
 

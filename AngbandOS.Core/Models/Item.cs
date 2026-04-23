@@ -43,8 +43,40 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
             (nameof(Y), saveGameState.CreateGameStateBag(Y)),
             (nameof(TurnsOfLightRemaining), saveGameState.CreateGameStateBag(TurnsOfLightRemaining)),
             (nameof(GoldPieces), saveGameState.CreateGameStateBag(GoldPieces)),
-            (nameof(RandomArtifactName), saveGameState.CreateGameStateBag(X))
+            (nameof(RandomArtifactName), saveGameState.CreateGameStateBag(RandomArtifactName))
         );
+    }
+
+    public Item(Game game, RestoreGameState restoreGameState)
+    {
+        FixedArtifact = restoreGameState.GetReferenceOrDefault<FixedArtifact>(nameof(FixedArtifact));
+        EffectiveAttributeSet = restoreGameState.GetReference<EffectiveAttributeSet>(nameof(EffectiveAttributeSet));
+        _factory = restoreGameState.GetReference<ItemFactory>(nameof(_factory));
+        NutritionalValue = restoreGameState.GetInt(nameof(NutritionalValue));
+        Color = restoreGameState.GetEnum<ColorEnum>(nameof(Color));
+        IdentSense = restoreGameState.GetBool(nameof(IdentSense));
+        IdentFixed = restoreGameState.GetBool(nameof(IdentFixed));
+        IdentEmpty = restoreGameState.GetBool(nameof(IdentEmpty));
+        IdentityIsKnown = restoreGameState.GetBool(nameof(IdentityIsKnown));
+        IdentityIsStoreBought = restoreGameState.GetBool(nameof(IdentityIsStoreBought));
+        IdentMental = restoreGameState.GetBool(nameof(IdentMental));
+        StackCount = restoreGameState.GetInt(nameof(StackCount));
+        Discount = restoreGameState.GetInt(nameof(Discount));
+        HoldingMonsterIndex = restoreGameState.GetInt(nameof(HoldingMonsterIndex));
+        Inscription = restoreGameState.GetString(nameof(Inscription));
+        WasNoticed = restoreGameState.GetBool(nameof(WasNoticed));
+        ActivationRechargeTimeRemaining = restoreGameState.GetInt(nameof(ActivationRechargeTimeRemaining));
+        ContainerTraps = restoreGameState.GetReferencesOrNull<ChestTrap>(nameof(ContainerTraps));
+        LevelOfObjectsInContainer = restoreGameState.GetInt(nameof(LevelOfObjectsInContainer));
+        ContainerIsOpen = restoreGameState.GetBool(nameof(ContainerIsOpen));
+        StaffChargesRemaining = restoreGameState.GetInt(nameof(StaffChargesRemaining));
+        WandChargesRemaining = restoreGameState.GetInt(nameof(WandChargesRemaining));
+        RodRechargeTimeRemaining = restoreGameState.GetInt(nameof(RodRechargeTimeRemaining));
+        X = restoreGameState.GetInt(nameof(X));
+        Y = restoreGameState.GetInt(nameof(Y));
+        TurnsOfLightRemaining = restoreGameState.GetInt(nameof(TurnsOfLightRemaining));
+        GoldPieces = restoreGameState.GetInt(nameof(GoldPieces));
+        RandomArtifactName = restoreGameState.GetStringOrDefault(nameof(RandomArtifactName));
     }
 
     #region State Data - Fields that are maintained

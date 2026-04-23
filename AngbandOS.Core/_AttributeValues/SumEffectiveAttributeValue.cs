@@ -13,6 +13,7 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
     /// Represents the modifiers that are combined to create the effective value.
     /// </summary>
     protected readonly List<(string Key, int Modifier)> _attributeModifiers = new List<(string, int)>();
+    public SumEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<Attribute>(nameof(Attribute))) { }
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         // Serialize the tuples.

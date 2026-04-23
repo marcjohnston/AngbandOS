@@ -9,8 +9,15 @@ using System.Collections;
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
+internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGameSerialize
 {
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(_effectiveAttributeValues), saveGameState.CreateGameStateBag(_effectiveAttributeValues))
+        );
+    }
+
     private Game Game { get; }
     private readonly EffectiveAttributeValue[] _effectiveAttributeValues;
     private static Attribute[]? CachedAttributes = null;
@@ -33,6 +40,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>
             EffectiveAttributeValue effectiveAttributeValue = attribute.CreateEffectiveAttributeValue();
             _effectiveAttributeValues[attribute.Index] = effectiveAttributeValue;
         }
+    }
+
+    public EffectiveAttributeSet(Game game, RestoreGameState restoreGameState)
+    {
+        Game = game;
+        Attribute[] cachedAttributes = LoadCachedAttributes();
+        _effectiveAttributeValues = restoreGameState.GetReferences<EffectiveAttributeValue>(nameof(_effectiveAttributeValues));
     }
 
     public void RemoveKeyedEnhancements(string key)

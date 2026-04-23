@@ -327,7 +327,7 @@ internal class Monster : IItemContainer, IGameSerialize
         SmResPois = restoreGameState.GetBool(nameof(SmResPois));
         SmResShard = restoreGameState.GetBool(nameof(SmResShard));
         SmResSound = restoreGameState.GetBool(nameof(SmResSound));
-        Race = restoreGameState.GetNullableReference<MonsterRace>(nameof(Race));
+        Race = restoreGameState.GetReferenceOrDefault<MonsterRace>(nameof(Race));
         _sleepLevel = restoreGameState.GetInt(nameof(_sleepLevel));
         Speed = restoreGameState.GetInt(nameof(Speed));
         StolenGold = restoreGameState.GetInt(nameof(StolenGold));

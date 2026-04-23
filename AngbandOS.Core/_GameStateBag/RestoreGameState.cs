@@ -216,7 +216,7 @@ internal class RestoreGameState
     }
 
 
-    public T? GetNullableReference<T>(string key)
+    public T? GetReferenceOrDefault<T>(string key)
     {
         if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
         {
@@ -230,7 +230,24 @@ internal class RestoreGameState
             }
             return GetReference<T>(gameStateBag);
         }
-        throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
+        throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
+    }
+
+    public T[]? GetReferencesOrNull<T>(string key)
+    {
+        if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
+        {
+            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
+        }
+        if (objectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        {
+            if (gameStateBag is NullValueGameStateBag)
+            {
+                return default;
+            }
+            return GetReferences<T>(key); // TODO: This smells
+        }
+        throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
     }
 
     public T[] GetReferences<T>(string key)
@@ -240,6 +257,23 @@ internal class RestoreGameState
         {
             T t = GetReference<T>(gameStateBag);
             list.Add(t);
+        }
+        return list.ToArray();
+    }
+
+    public T?[] GetNullableReferences<T>(string key)
+    {
+        List<T?> list = new List<T?>();
+        foreach (GameStateBag gameStateBag in GetGameStateBag<ListGameStateBag>(key).Values)
+        {
+            if (gameStateBag is NullValueGameStateBag)
+            {
+                list.Add(default);
+            }
+            else
+            {
+                list.Add(GetReference<T>(gameStateBag));
+            }
         }
         return list.ToArray();
     }
@@ -364,6 +398,16 @@ internal class RestoreGameState
             list.AddRange(list);
         }
         return listOfStrings.ToArray();
+    }
+
+    public string? GetStringOrDefault(string key)
+    {
+        GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);
+        if (gameStateBag is NullValueGameStateBag)
+        {
+            return default;
+        }
+        return GetString(key); // TODO: This smells
     }
 
     public string GetString(string key) => GetGameStateBag<StringValueGameStateBag>(key).Value;

@@ -18,6 +18,7 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
     private readonly List<(string Key, bool Modifier)> _attributeModifiers = new List<(string, bool)>();
 
     public OrEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
+    public OrEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<Attribute>(nameof(Attribute))) { }
     public override string RenderForItemIdentification => Get().ToString();
 
     public override EffectiveAttributeValue Clone()

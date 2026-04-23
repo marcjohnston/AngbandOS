@@ -10,6 +10,25 @@ namespace AngbandOS.Core;
 internal class FriendlyNameEffectiveAttributeValue : NullableReferenceSetEffectiveAttributeValue<string> 
 {
     public FriendlyNameEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute, null) { }
+    public FriendlyNameEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<Attribute>(nameof(Attribute))) { }
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        // Serialize the tuples.
+        GameStateBag[] tupleGameStateBags = _attributeModifiers.Select(_attributeModifier => new DictionaryGameStateBag(
+                (nameof(_attributeModifier.Key), saveGameState.CreateGameStateBag(_attributeModifier.Key)),
+                (nameof(_attributeModifier.Modifier), saveGameState.CreateGameStateBag(_attributeModifier.Modifier)),
+                (nameof(InitialValue), saveGameState.CreateGameStateBag(InitialValue))
+        )).ToArray();
+
+        // Put the tuples into a list.
+        GameStateBag listOfTuplesGameStateBag = new ListGameStateBag(tupleGameStateBags);
+
+        // Return the dictionary of the values.
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(InitialValue), saveGameState.CreateGameStateBag(InitialValue)),
+            (nameof(_attributeModifiers), listOfTuplesGameStateBag)
+        );
+    }
     public override EffectiveAttributeValue Clone()
     {
         FriendlyNameEffectiveAttributeValue clone = new FriendlyNameEffectiveAttributeValue(Game, Attribute);

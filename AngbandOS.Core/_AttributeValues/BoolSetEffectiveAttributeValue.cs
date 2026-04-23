@@ -10,12 +10,31 @@ namespace AngbandOS.Core;
 internal class BoolSetEffectiveAttributeValue : SetEffectiveAttributeValue<bool?>
 {
     public BoolSetEffectiveAttributeValue(Game game, Attribute attribute, bool? defaultValue) : base(game, attribute, defaultValue) { }
+    public BoolSetEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<Attribute>(nameof(Attribute)), restoreGameState.GetNullableBool(nameof(InitialValue))) { }
 
     public override EffectiveAttributeValue Clone()
     {
         BoolSetEffectiveAttributeValue clone = new BoolSetEffectiveAttributeValue(Game, Attribute, InitialValue);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
+    }
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        // Serialize the tuples.
+        GameStateBag[] attributeModifiersGameStateBags = _attributeModifiers.Select(_attributeModifier => new DictionaryGameStateBag(
+                (nameof(_attributeModifier.Key), saveGameState.CreateGameStateBag(_attributeModifier.Key)),
+                (nameof(_attributeModifier.Modifier), saveGameState.CreateGameStateBag(_attributeModifier.Modifier)),
+                (nameof(InitialValue), saveGameState.CreateGameStateBag(InitialValue))
+        )).ToArray();
+
+        // Put the dictionary of tuples into a list.
+        GameStateBag attributeModifiersListGameStateBag = new ListGameStateBag(attributeModifiersGameStateBags);
+
+        // Return the dictionary of the values.
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(InitialValue), saveGameState.CreateGameStateBag(InitialValue)),
+            (nameof(_attributeModifiers), attributeModifiersListGameStateBag)
+        );
     }
     public override string RenderForItemIdentification => Get().ToString();
     public override AttributeValue ToReadOnly() => new NullableBoolReadOnlyAttributeValue(Get());
