@@ -49,6 +49,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
 
     public Item(Game game, RestoreGameState restoreGameState)
     {
+        Game = game;
         FixedArtifact = restoreGameState.GetReferenceOrDefault<FixedArtifact>(nameof(FixedArtifact));
         EffectiveAttributeSet = restoreGameState.GetReference<EffectiveAttributeSet>(nameof(EffectiveAttributeSet));
         _factory = restoreGameState.GetReference<ItemFactory>(nameof(_factory));
