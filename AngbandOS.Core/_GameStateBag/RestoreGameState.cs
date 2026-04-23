@@ -395,7 +395,7 @@ internal class RestoreGameState
             {
                 list.Add(GetReference<T>(innerGameStateBag));
             }
-            list.AddRange(list);
+            listOfStrings.Add(list.ToArray());
         }
         return listOfStrings.ToArray();
     }

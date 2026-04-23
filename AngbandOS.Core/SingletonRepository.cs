@@ -30,7 +30,6 @@ internal sealed class SingletonRepository : IGameSerialize
         foreach (IGetKey singleton in _allSingletonsList)
         {
             string key = singleton.GetKey;
-            Debug.Print($"Singleton => {singleton.GetKey}");
             GameStateBag singletonGameStateBag = saveGameState.CreateGameStateBag(singleton);
             result.Add(key, singletonGameStateBag);
         }

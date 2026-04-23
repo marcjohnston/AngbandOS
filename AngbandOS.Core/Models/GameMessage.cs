@@ -17,6 +17,11 @@ internal class GameMessage : IGameMessage, IGameSerialize
         Count = 1;
     }
 
+    public GameMessage(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetString(nameof(Text)))
+    {
+        Count = restoreGameState.GetInt(nameof(Count));
+    }
+
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(

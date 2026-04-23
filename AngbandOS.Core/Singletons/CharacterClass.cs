@@ -16,7 +16,12 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     }
     protected abstract string EnhancementBindingKey { get; }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet))
+        );
+    }
     public virtual Bonuses? GetBonusesForMeleeWeapon(Item? oPtr) => null;
 
     protected virtual string? MeleeAttacksPerRoundBonusExpression => null;
@@ -402,7 +407,13 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         TarotDrawRoll = Game.ParseNumericExpression(TarotDrawRollExpression);
         SpellOfWonderBeamProbabilityRoll = Game.ParseNumericExpression(SpellOfWonderBeamProbabilityRollExpression);
         InvokeSpiritsBeamProbabilityRoll = Game.ParseNumericExpression(InvokeSpiritsBeamProbabilityRollExpression);
+
+        if (restoreGameState is not null)
+        {
+            EffectiveAttributeSet = restoreGameState.GetReference<ReadOnlyAttributeSet>(nameof(EffectiveAttributeSet));
+        }
     }
+
     public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
 
     /// <summary>

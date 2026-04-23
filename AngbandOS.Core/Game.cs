@@ -284,6 +284,7 @@ internal partial class Game : IGameSerialize
             (nameof(WeightCarried), saveGameState.CreateGameStateBag(WeightCarried)),
             (nameof(WildernessX), saveGameState.CreateGameStateBag(WildernessX)),
             (nameof(WildernessY), saveGameState.CreateGameStateBag(WildernessY)),
+            (nameof(Wilderness), saveGameState.CreateGameStateBag(Wilderness)),
             (nameof(WordOfRecallDelay), saveGameState.CreateGameStateBag(WordOfRecallDelay)),
             (nameof(Map), saveGameState.CreateGameStateBag(Map)),
             (nameof(TempX), saveGameState.CreateGameStateBag(TempX)),
@@ -699,6 +700,7 @@ internal partial class Game : IGameSerialize
             WeightCarried = restoreGameState.GetInt(nameof(WeightCarried));
             WildernessX = restoreGameState.GetInt(nameof(WildernessX));
             WildernessY = restoreGameState.GetInt(nameof(WildernessY));
+            Wilderness = restoreGameState.GetJaggedArrayOfReferences<WildernessRegion>(nameof(Wilderness));
             WordOfRecallDelay = restoreGameState.GetInt(nameof(WordOfRecallDelay));
             Map = restoreGameState.GetReference<Map>(nameof(Map));
             TempX = restoreGameState.GetInts(nameof(TempX));

@@ -19,7 +19,12 @@ internal abstract class Race : IGetKey, IGameSerialize
     {
         EffectiveAttributeSet = Enhancement.GenerateAttributeSet();
     }
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet))
+        );
+    }
 
     public virtual string Key => GetType().Name;
 
@@ -29,7 +34,16 @@ internal abstract class Race : IGetKey, IGameSerialize
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
+
+        if (restoreGameState is not null)
+        {
+            EffectiveAttributeSet = restoreGameState.GetReference<ReadOnlyAttributeSet>(nameof(EffectiveAttributeSet));
+        }
     }
+
+    /// <summary>
+    /// Represents a set of generated attributes.
+    /// </summary>
     public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
 
     protected abstract string EnhancementBindingKey { get; }
