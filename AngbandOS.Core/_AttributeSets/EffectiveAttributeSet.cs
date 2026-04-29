@@ -350,22 +350,22 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<NullableReferenceSetEffectiveAttributeValue<Activation>>(nameof(ActivationAttribute)).Get();
+            return Get<ActivationEffectiveAttributeValue>(nameof(ActivationAttribute)).Get();
         }
         set
         {
-            Get<NullableReferenceSetEffectiveAttributeValue<Activation>>(nameof(ActivationAttribute)).Set(value);
+            Get<ActivationEffectiveAttributeValue>(nameof(ActivationAttribute)).Set(value);
         }
     }
     public ArtifactBias? ArtifactBias
     {
         get
         {
-            return Get<NullableReferenceSetEffectiveAttributeValue<ArtifactBias>>(nameof(ArtifactBiasAttribute)).Get();
+            return Get<ArtifactBiasEffectiveAttributeValue>(nameof(ArtifactBiasAttribute)).Get();
         }
         set
         {
-            Get<NullableReferenceSetEffectiveAttributeValue<ArtifactBias>>(nameof(ArtifactBiasAttribute)).Set(value);
+            Get<ArtifactBiasEffectiveAttributeValue>(nameof(ArtifactBiasAttribute)).Set(value);
         }
     }
     public bool IsCursed
@@ -469,11 +469,11 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<NullableReferenceSetEffectiveAttributeValue<string>>(nameof(FriendlyNameAttribute)).Get();
+            return Get<FriendlyNameEffectiveAttributeValue>(nameof(FriendlyNameAttribute)).Get();
         }
         set
         {
-            Get<NullableReferenceSetEffectiveAttributeValue<string>>(nameof(FriendlyNameAttribute)).Set(value);
+            Get<FriendlyNameEffectiveAttributeValue>(nameof(FriendlyNameAttribute)).Set(value);
         }
     }
     public bool HatesElectricity

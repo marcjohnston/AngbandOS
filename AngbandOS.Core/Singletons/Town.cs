@@ -30,7 +30,8 @@ internal sealed class Town : IGetKey, IToJson, IGameSerialize
             (nameof(Seed), saveGameState.CreateGameStateBag(Seed)),
             (nameof(Visited), saveGameState.CreateGameStateBag(Visited)),
             (nameof(X), saveGameState.CreateGameStateBag(X)),
-            (nameof(Y), saveGameState.CreateGameStateBag(Y))
+            (nameof(Y), saveGameState.CreateGameStateBag(Y)),
+            (nameof(Stores), saveGameState.CreateGameStateBag(Stores))
         );
     }
 
@@ -110,6 +111,7 @@ internal sealed class Town : IGetKey, IToJson, IGameSerialize
             Visited = restoreGameState.GetBool(nameof(Visited));
             X = restoreGameState.GetInt(nameof(X));
             Y = restoreGameState.GetInt(nameof(Y));
+            Stores = restoreGameState.GetReferences<Store>(nameof(Stores));
         }
     }
 

@@ -214,16 +214,16 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         string replayFilename = Path.Combine(savePath, "replay.json");
         string jsonSaveFilename = Path.Combine(savePath, "savegame.json");
         ICorePersistentStorage persistentStorage = new FileSystemCorePersistentStorage(saveFilename);
-        if (persistentStorage.GameExists())
-        {
-            GameResults gameResults = gameServer.PlayLegacyExistingGame(this, persistentStorage, null);
-            //File.WriteAllText(replayFilename, gameResults.Replay); // TODO: This needs to move to the filepersistence driver
-        }
-        else if (File.Exists(jsonSaveFilename))
+        if (File.Exists(jsonSaveFilename))
         {
             string serializedSaveGameData = File.ReadAllText(jsonSaveFilename);
             GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
             GameResults gameResults = gameServer.PlayExistingGame(this, persistentStorage, null, gameConfiguration, serializedSaveGameData);
+        }
+        else if (persistentStorage.GameExists())
+        {
+            GameResults gameResults = gameServer.PlayLegacyExistingGame(this, persistentStorage, null);
+            //File.WriteAllText(replayFilename, gameResults.Replay); // TODO: This needs to move to the filepersistence driver
         }
         else if (File.Exists(replayFilename))
         {

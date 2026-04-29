@@ -4,8 +4,10 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System;
 using System.Collections;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -214,31 +216,40 @@ internal class SaveGameState
 
     public static class DeepComparer
     {
-        public static bool DeepEquals(object? a, object? b)
+        public static void DeepEquals(object? a, object? b)
         {
             var visited = new HashSet<(object, object)>(new ReferenceTupleComparer());
-            return DeepEqualsInternal(a, b, visited);
+            DeepEqualsInternal(a, b, visited, "$");
         }
 
-        private static bool DeepEqualsInternal(object? a, object? b, HashSet<(object, object)> visited)
+        private static void DeepEqualsInternal(object? a, object? b, HashSet<(object, object)> visited, string path)
         {
             if (ReferenceEquals(a, b))
-                return true;
+                return;
 
-            if (a == null || b == null)
-                return false;
+            if (a is null || b is null)
+                throw new Exception($"Null mismatch at {path}");
 
             var typeA = a.GetType();
             var typeB = b.GetType();
 
             if (typeA != typeB)
-                return false;
+            {
+                throw new Exception($"Type mismatch at {path}: {typeA.Name} vs {typeB.Name}");
+            }
 
             if (IsSimple(typeA))
-                return a.Equals(b);
+            {
+                if (!a.Equals(b))
+                {
+                    throw new Exception($"Value mismatch at {path}: {a} vs {b}");
+                }
+
+                return;
+            }
 
             if (visited.Contains((a, b)))
-                return true;
+                return;
 
             visited.Add((a, b));
 
@@ -248,22 +259,28 @@ internal class SaveGameState
                 var enumA = ((IEnumerable)a).GetEnumerator();
                 var enumB = ((IEnumerable)b).GetEnumerator();
 
+                int index = 0;
                 while (true)
                 {
                     var hasA = enumA.MoveNext();
                     var hasB = enumB.MoveNext();
 
                     if (hasA != hasB)
-                        return false;
+                    {
+                        throw new Exception($"Collection length mismatch at {path}");
+
+                    }
 
                     if (!hasA)
+                    {
                         break;
+                    }
 
-                    if (!DeepEqualsInternal(enumA.Current, enumB.Current, visited))
-                        return false;
+                    DeepEqualsInternal(enumA.Current, enumB.Current, visited, $"{path}.{typeA.Name}[{index}]");
+                    index++;
                 }
 
-                return true;
+                return;
             }
 
             const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
@@ -271,30 +288,15 @@ internal class SaveGameState
             // Compare fields
             foreach (var field in typeA.GetFields(flags))
             {
-                var valA = field.GetValue(a);
-                var valB = field.GetValue(b);
+                if (!field.IsNotSerialized)
+                {
+                    var valA = field.GetValue(a);
+                    var valB = field.GetValue(b);
 
-                if (!DeepEqualsInternal(valA, valB, visited))
-                    return false;
+                    DeepEqualsInternal(valA, valB, visited, $"{path}.{typeA.Name}");
+                }
             }
-
-            // Compare properties
-            foreach (var prop in typeA.GetProperties(flags))
-            {
-                if (prop.GetIndexParameters().Length > 0)
-                    continue; // skip indexers
-
-                if (!prop.CanRead)
-                    continue;
-
-                var valA = prop.GetValue(a);
-                var valB = prop.GetValue(b);
-
-                if (!DeepEqualsInternal(valA, valB, visited))
-                    return false;
-            }
-
-            return true;
+            return;
         }
 
         private static bool IsSimple(Type type)
@@ -307,7 +309,6 @@ internal class SaveGameState
                    || type == typeof(Guid)
                    || type == typeof(TimeSpan);
         }
-
         private class ReferenceTupleComparer : IEqualityComparer<(object, object)>
         {
             public bool Equals((object, object) x, (object, object) y)

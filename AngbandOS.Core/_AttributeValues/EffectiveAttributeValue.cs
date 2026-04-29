@@ -25,6 +25,12 @@ internal abstract class EffectiveAttributeValue : AttributeValue
         Game = game;
         Attribute = attribute;
     }
+    public EffectiveAttributeValue(Game game, RestoreGameState restoreGameState)
+    {
+        Game = game;
+        Attribute = restoreGameState.GetReference<Attribute>(nameof(Attribute));
+    }
+
     public abstract string RenderForItemIdentification { get; }
     public abstract EffectiveAttributeValue Clone();
 

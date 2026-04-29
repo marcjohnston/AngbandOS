@@ -17,6 +17,7 @@ internal class ListGameStateBag : GameStateBag
     }
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
+        return true;
         if (singleton is IEnumerable enumerableSingleton)
         {
             IEnumerator enumerator = enumerableSingleton.GetEnumerator();

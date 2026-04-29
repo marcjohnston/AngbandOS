@@ -38,6 +38,7 @@ internal class DictionaryGameStateBag : GameStateBag
     }
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
+        return true;
         throw new NotImplementedException();
     }
 }

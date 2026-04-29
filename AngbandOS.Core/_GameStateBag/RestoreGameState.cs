@@ -80,14 +80,14 @@ internal class RestoreGameState
             }
             throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(ObjectGameStateBag)}.");
         }
-        //if (GameStateBag is DictionaryGameStateBag dictionaryGameStateBag)
-        //{
-        //    if (dictionaryGameStateBag.Values.TryGetValue(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
-        //    {
-        //        return typedGameStateBag;
-        //    }
-        //    throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(DictionaryGameStateBag)}.");
-        //}
+        if (GameStateBag is DictionaryGameStateBag dictionaryGameStateBag)
+        {
+            if (dictionaryGameStateBag.Values.TryGetValue(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
+            {
+                return typedGameStateBag;
+            }
+            throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(DictionaryGameStateBag)}.");
+        }
         throw new InvalidOperationException($"GameStateBag is not of type {nameof(ObjectGameStateBag)} or {nameof(DictionaryGameStateBag)}.");
     }
 
@@ -218,19 +218,29 @@ internal class RestoreGameState
 
     public T? GetReferenceOrDefault<T>(string key)
     {
-        if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
+        if (GameStateBag is ObjectGameStateBag objectGameStateBag)
         {
-            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
-        }
-        if (objectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
-        {
-            if (gameStateBag is NullValueGameStateBag)
+            if (objectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
             {
-                return default;
+                if (gameStateBag is NullValueGameStateBag)
+                {
+                    return default;
+                }
+                return GetReference<T>(gameStateBag);
             }
-            return GetReference<T>(gameStateBag);
         }
-        throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
+        if (GameStateBag is DictionaryGameStateBag dictionaryGameStateBag)
+        {
+            if (dictionaryGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+            {
+                if (gameStateBag is NullValueGameStateBag)
+                {
+                    return default;
+                }
+                return GetReference<T>(gameStateBag);
+            }
+        }
+        throw new InvalidOperationException($"GameStateBag is not of type {nameof(ObjectGameStateBag)} or {nameof(DictionaryGameStateBag)}.");
     }
 
     public T[]? GetReferencesOrNull<T>(string key)
@@ -408,6 +418,16 @@ internal class RestoreGameState
             return default;
         }
         return GetString(key); // TODO: This smells
+    }
+
+    public bool? GetBoolOrDefault(string key)
+    {
+        GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);
+        if (gameStateBag is NullValueGameStateBag)
+        {
+            return default;
+        }
+        return GetBool(key); // TODO: This smells
     }
 
     public string GetString(string key) => GetGameStateBag<StringValueGameStateBag>(key).Value;

@@ -7,13 +7,26 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class Store
+internal class Store : IGameSerialize
 {
     private int _x;
     private int _y;
 
     protected Game Game { get; }
     public readonly StoreFactory StoreFactory;
+
+    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(_x), saveGameState.CreateGameStateBag(_x)),
+            (nameof(_y), saveGameState.CreateGameStateBag(_y)),
+            (nameof(_leaveStore), saveGameState.CreateGameStateBag(_leaveStore)),
+            (nameof(StoreInventoryList), saveGameState.CreateGameStateBag(StoreInventoryList)),
+            (nameof(StoreTop), saveGameState.CreateGameStateBag(StoreTop)),
+            (nameof(Owner), saveGameState.CreateGameStateBag(Owner)),
+            (nameof(StoreFactory), saveGameState.CreateGameStateBag(StoreFactory))
+       );
+    }
 
     public Store(Game game, StoreFactory storeFactory)
     {
@@ -35,6 +48,15 @@ internal class Store
         InventoryFactories = table.ToArray();
     }
 
+    public Store(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<StoreFactory>(nameof(StoreFactory)))
+    {
+        _x = restoreGameState.GetInt(nameof(_x));
+        _y = restoreGameState.GetInt(nameof(_y));
+        _leaveStore = restoreGameState.GetBool(nameof(_leaveStore));
+        StoreInventoryList = restoreGameState.GetReferences<Item>(nameof(StoreInventoryList)).ToList();
+        StoreTop = restoreGameState.GetInt(nameof(StoreTop));
+        Owner = restoreGameState.GetReference<Shopkeeper>(nameof(Owner));
+    }
     /// <summary>
     /// The grid x coordinate of the store on the town level.
     /// </summary>

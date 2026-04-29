@@ -24,6 +24,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             (nameof(FlavorColor), saveGameState.CreateGameStateBag(FlavorColor)),
             (nameof(Flavor), saveGameState.CreateGameStateBag(Flavor)),
             (nameof(Tried), saveGameState.CreateGameStateBag(Tried)),
+            (nameof(Color), saveGameState.CreateGameStateBag(Color)),
             (nameof(Stompable), saveGameState.CreateGameStateBag(Stompable))
         );
     }
@@ -34,7 +35,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     }
     public string Key { get; }
     public string GetKey => Key;
-    public ColorEnum Color { get; set; }
+    public ColorEnum Color;
 
     #region Constructors
     public ItemFactory(Game game, ItemFactoryGameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag) : this(game, gameConfiguration)
@@ -518,6 +519,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             FlavorColor = restoreGameState.GetEnum<ColorEnum>(nameof(FlavorColor));
             Flavor = restoreGameState.GetReferenceOrDefault<Flavor>(nameof(Flavor));
             Tried = restoreGameState.GetBool(nameof(Tried));
+            Color = restoreGameState.GetEnum<ColorEnum>(nameof(Color));
             Stompable = restoreGameState.GetBools(nameof(Stompable));
         }
     }

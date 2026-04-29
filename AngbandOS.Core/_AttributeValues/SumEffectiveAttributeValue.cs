@@ -13,7 +13,20 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
     /// Represents the modifiers that are combined to create the effective value.
     /// </summary>
     protected readonly List<(string Key, int Modifier)> _attributeModifiers = new List<(string, int)>();
-    public SumEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<Attribute>(nameof(Attribute))) { }
+    public SumEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<Attribute>(nameof(Attribute)))
+    {
+        ListGameStateBag tuplesListGameStateBag = restoreGameState.GetGameStateBag<ListGameStateBag>(nameof(_attributeModifiers));
+
+        // We need to skip the first modifier.  It is preassigned.  TODO: This shouldn't be like this.
+        foreach (GameStateBag tupleGameStateBag in tuplesListGameStateBag.Values)
+        {
+            RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
+            string key = tupleRestoreGameState.GetString("Key");
+            int modifier = tupleRestoreGameState.GetInt("Modifier");
+
+            _attributeModifiers.Add((key, modifier));
+        }
+    }
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         // Serialize the tuples.

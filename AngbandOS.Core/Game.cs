@@ -419,7 +419,6 @@ internal partial class Game : IGameSerialize
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     /// <remarks>
     /// For game replay mode, construction of the game DOES NOT use the random generator.  We only initialize the non-fixed seed.
-    /// 
     /// </remarks>
     /// <param name="gameConfiguration"></param>
     /// <param name="gameReplay">Supply t</param>

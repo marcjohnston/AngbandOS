@@ -314,6 +314,8 @@ public class GameServer
             }
 
             Game = new Game(gameConfiguration, objectGameStateBag);
+            Game legacyGame = Game.LoadLegacyGame(persistentStorage);
+            SaveGameState.DeepComparer.DeepEquals(Game, legacyGame);
             Game.Play(console, persistentStorage, replayPersistentStorage);
             gameIsOver = true;
         }
