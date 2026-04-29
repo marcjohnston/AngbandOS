@@ -3230,10 +3230,10 @@ internal partial class Game : IGameSerialize
         MsgPrint(string.Empty);
         HandleStuff();
         UpdateScreen();
-        DiedFrom = "(saved)";
+      //  DiedFrom = "(saved)";
         SaveGame();
         UpdateScreen();
-        DiedFrom = "(alive and well)";
+      //  DiedFrom = "(alive and well)";
     }
 
     /// <summary>

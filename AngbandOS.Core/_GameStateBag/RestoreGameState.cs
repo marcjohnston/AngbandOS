@@ -336,7 +336,7 @@ internal class RestoreGameState
                 }
                 list.Add(stringValueGameStateBag.Value);
             }
-            list.AddRange(list);
+            listOfStrings.Add(list.ToArray());
         }
         return listOfStrings.ToArray();
     }
