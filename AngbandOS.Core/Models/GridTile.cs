@@ -12,16 +12,32 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class GridTile : IItemContainer, IGameSerialize
 {
-    public GridTile(TrapsDetectedProperty trapsDetectedProperty, Tile backgroundFeature, Tile featureType)
+    private Game Game { get; }
+    private TrapsDetectedProperty _trapsDetectedProperty { get; }
+
+    /// <summary>
+    /// The type of feature in this grid tile
+    /// </summary>
+    private Tile _backgroundFeature { get; set; }
+
+    /// <summary>
+    /// The type of feature in this grid tile
+    /// </summary>
+    private Tile _featureType { get; set; }
+
+    public Tile FeatureType => _featureType;
+    public Tile BackgroundFeature => _backgroundFeature;
+
+    public GridTile(Game game)
     {
-        TrapsDetectedProperty = trapsDetectedProperty; // TODO: These should be retrieved.  We need to store the Game reference though.
-        BackgroundFeature = backgroundFeature;
-        FeatureType = featureType;
+        Game = game;
+        _trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty));
+        _backgroundFeature = Game.SingletonRepository.Get<Tile>(nameof(NothingTile));
+        _featureType = Game.SingletonRepository.Get<Tile>(nameof(NothingTile));
     }
     public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(TrapsDetectedProperty), saveGameState.CreateGameStateBag(TrapsDetectedProperty)),
             (nameof(EasyVisibility), saveGameState.CreateGameStateBag(EasyVisibility)),
             (nameof(InRoom), saveGameState.CreateGameStateBag(InRoom)),
             (nameof(InVault), saveGameState.CreateGameStateBag(InVault)),
@@ -31,8 +47,6 @@ internal class GridTile : IItemContainer, IGameSerialize
             (nameof(SelfLit), saveGameState.CreateGameStateBag(SelfLit)),
             (nameof(TempFlag), saveGameState.CreateGameStateBag(TempFlag)),
             (nameof(_trapsDetected), saveGameState.CreateGameStateBag(_trapsDetected)),
-            (nameof(BackgroundFeature), saveGameState.CreateGameStateBag(BackgroundFeature)),
-            (nameof(FeatureType), saveGameState.CreateGameStateBag(FeatureType)),
             (nameof(Items), saveGameState.CreateGameStateBag(Items)),
             (nameof(MonsterIndex), saveGameState.CreateGameStateBag(MonsterIndex)),
             (nameof(ScentAge), saveGameState.CreateGameStateBag(ScentAge)),
@@ -40,9 +54,8 @@ internal class GridTile : IItemContainer, IGameSerialize
         );
     }
 
-    public GridTile(Game game, RestoreGameState restoreGameState)
+    public GridTile(Game game, RestoreGameState restoreGameState) : this(game)
     {
-        TrapsDetectedProperty = restoreGameState.GetReference<TrapsDetectedProperty>(nameof(TrapsDetectedProperty));
         EasyVisibility = restoreGameState.GetBool(nameof(EasyVisibility));
         InRoom = restoreGameState.GetBool(nameof(InRoom));
         InVault = restoreGameState.GetBool(nameof(InVault));
@@ -52,16 +65,13 @@ internal class GridTile : IItemContainer, IGameSerialize
         SelfLit = restoreGameState.GetBool(nameof(SelfLit));
         TempFlag = restoreGameState.GetBool(nameof(TempFlag));
         _trapsDetected = restoreGameState.GetBool(nameof(_trapsDetected));
-        BackgroundFeature = restoreGameState.GetReference<Tile>(nameof(BackgroundFeature));
-        FeatureType = restoreGameState.GetReference<Tile>(nameof(FeatureType));
         Items = restoreGameState.GetReferences<Item>(nameof(Items)).ToList();
         MonsterIndex = restoreGameState.GetInt(nameof(MonsterIndex));
         ScentAge = restoreGameState.GetInt(nameof(ScentAge));
         ScentStrength = restoreGameState.GetInt(nameof(ScentStrength));
     }
-    #region State Data
-    private readonly TrapsDetectedProperty TrapsDetectedProperty;
 
+    #region State Data
     /// <summary>
     /// Used within the view code to mark tiles that are "easily" visible
     /// </summary>
@@ -105,16 +115,6 @@ internal class GridTile : IItemContainer, IGameSerialize
     private bool _trapsDetected;
 
     /// <summary>
-    /// The type of feature in this grid tile
-    /// </summary>
-    public Tile BackgroundFeature;
-
-    /// <summary>
-    /// The type of feature in this grid tile
-    /// </summary>
-    public Tile FeatureType;
-
-    /// <summary>
     /// The index of the first item that is in this grid tile
     /// </summary>
     public List<Item> Items = new List<Item>(); // TODO: Publically, this needs to be an array
@@ -122,7 +122,7 @@ internal class GridTile : IItemContainer, IGameSerialize
     /// <summary>
     /// The index of the monster that is in this grid tile
     /// </summary>
-    public int MonsterIndex;
+    public int MonsterIndex; // TODO: This should be a nullable reference to a monster.
 
     /// <summary>
     /// The time since the player's scent in the tile was calculated
@@ -136,6 +136,8 @@ internal class GridTile : IItemContainer, IGameSerialize
 
     #endregion
 
+    private TrapsDetectedProperty TrapsDetectedProperty { get; }
+
     /// <summary>
     /// Set if the grid tile has had a Detect Traps used on it
     /// </summary>
@@ -148,7 +150,7 @@ internal class GridTile : IItemContainer, IGameSerialize
         set
         {
             _trapsDetected = value;
-            TrapsDetectedProperty.SetChangedFlag();
+            _trapsDetectedProperty.SetChangedFlag();
         }
     }
     public string DescribeItemLocation(Item oPtr) => $"On the ground:";
@@ -216,28 +218,28 @@ internal class GridTile : IItemContainer, IGameSerialize
 
     public void RevertToBackground()
     {
-        FeatureType = BackgroundFeature;
+        _featureType = _backgroundFeature;
     }
 
     public void SetBackgroundFeature(Tile tile)
     {
-        BackgroundFeature = tile;
+        _backgroundFeature = tile;
     }
 
     public void SetFeature(Tile tile)
     {
-        FeatureType = tile;
+        _featureType = tile;
     }
 
     public override string ToString()
     {
-        if (FeatureType == null)
+        if (_featureType == null)
         {
             return "Null Feature";
         }
         else
         {
-            return FeatureType.Description;
+            return _featureType.Description;
         }
     }
 }

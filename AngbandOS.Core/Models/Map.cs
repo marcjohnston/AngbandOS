@@ -27,14 +27,13 @@ internal class Map : IGameSerialize
         Tile grassTile = Game.GrassTile;
         Tile dungeonFloorTile = Game.SingletonRepository.Get<Tile>(nameof(DungeonFloorTile));
         Tile towerFloorTile = Game.SingletonRepository.Get<Tile>(nameof(TowerFloorTile));
-        Tile nothingTile = Game.SingletonRepository.Get<Tile>(nameof(NothingTile));
 
         for (int y = 0; y < Game.MaxHgt; y++)
         {
             Grid[y] = new GridTile[Game.MaxWid];
             for (int x = 0; x < Game.MaxWid; x++)
             {
-                GridTile newTile = new GridTile(trapsDetectedProperty, nothingTile, nothingTile);
+                GridTile newTile = new GridTile(Game);
                 Grid[y][x] = newTile;
                 if (Game.CurrentDepth == 0)
                 {

@@ -14620,7 +14620,7 @@ internal partial class Game : IGameSerialize
     public void CaveSetFeat(int y, int x, Tile tile)
     {
         GridTile cPtr = Map.Grid[y][x];
-        cPtr.FeatureType = tile;
+        cPtr.SetFeature(tile);
         NoteSpot(y, x);
         ConsoleView.RefreshMapLocation(y, x);
     }
