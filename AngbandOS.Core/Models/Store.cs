@@ -15,7 +15,7 @@ internal class Store : IGameSerialize
     protected Game Game { get; }
     public readonly StoreFactory StoreFactory;
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_x), saveGameState.CreateGameStateBag(_x)),

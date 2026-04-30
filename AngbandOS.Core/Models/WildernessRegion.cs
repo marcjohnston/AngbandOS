@@ -30,7 +30,7 @@ internal class WildernessRegion : IGameSerialize
         Seed = restoreGameState.GetInt(nameof(Seed));
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Dungeon), saveGameState.CreateGameStateBag(Dungeon)),

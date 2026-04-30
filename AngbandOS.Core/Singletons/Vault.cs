@@ -23,7 +23,7 @@ internal sealed class Vault : IGetKey, IToJson, IGameSerialize
         Width = gameConfiguration.Width;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string Key { get; }
 
     public string GetKey => Key;

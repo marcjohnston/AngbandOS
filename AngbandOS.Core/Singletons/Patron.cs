@@ -20,7 +20,7 @@ internal sealed class Patron : IGetKey, IToJson, IGameSerialize
         ShortName = gameConfiguration.ShortName;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(RewardReceived), saveGameState.CreateGameStateBag(RewardReceived))

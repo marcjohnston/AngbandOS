@@ -82,7 +82,7 @@ internal partial class Game : IGameSerialize
     #endregion
 
     #region Game Serialization
-    public DictionaryGameStateBag Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(SingletonRepository), saveGameState.CreateGameStateBag(SingletonRepository)),

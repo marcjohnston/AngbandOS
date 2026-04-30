@@ -22,7 +22,7 @@ internal sealed class Realm : IGetKey, IToJson, IGameSerialize
     }
     #endregion
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     #region Api Methods
     private Game Game { get; }

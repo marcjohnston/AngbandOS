@@ -37,7 +37,7 @@ internal class AllocationEntry : IGameSerialize
     /// </summary>
     public int Level;
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(BaseProbability), saveGameState.CreateGameStateBag(BaseProbability)),

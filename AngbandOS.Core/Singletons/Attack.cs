@@ -24,7 +24,7 @@ internal sealed class Attack : IGetKey, IToJson, IGameSerialize
         RendersMissMessage = gameConfiguration.RendersMissMessage;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string Key { get; }
 

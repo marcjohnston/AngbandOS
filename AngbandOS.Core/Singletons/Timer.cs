@@ -18,7 +18,7 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker, IGameSeriali
         Game = game;
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_value), new IntValueGameStateBag(_value))

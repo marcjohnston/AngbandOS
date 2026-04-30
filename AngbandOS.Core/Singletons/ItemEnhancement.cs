@@ -30,7 +30,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         FriendlyName = gameConfiguration.FriendlyName;
     }
     #endregion
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     #region API
     private Game Game { get; }

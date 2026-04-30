@@ -24,7 +24,7 @@ internal abstract class ItemAction : IGetKey, IGameSerialize
         ItemFilters = Game.SingletonRepository.Get<ItemFilter>(ItemFilterNames);
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     protected abstract string[] ItemFilterNames { get; }
 

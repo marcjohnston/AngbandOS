@@ -15,7 +15,7 @@ internal abstract class UsedResultUniversalScript : IScript, ICastSpellScript, I
     {
         Game = game;
     }
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string LearnedDetails => throw new NotImplementedException();
 

@@ -20,6 +20,6 @@ internal abstract class SpellResistantDetection : IGetKey, IGameSerialize
     public void Bind(RestoreGameState? restoreGameState) { }
 
     public abstract void Learn(Monster monster);
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }
 

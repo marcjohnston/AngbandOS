@@ -16,7 +16,7 @@ internal abstract class MartialArtsEffect : IGetKey, IGameSerialize
     }
     public Expression StunLevel { get; private set; }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns an expression for the amount of stun to deliver to the monster with a successful martial arts attack.  Returns 0, by default.

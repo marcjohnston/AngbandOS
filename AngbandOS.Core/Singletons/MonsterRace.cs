@@ -9,7 +9,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, IIndexedSingletons, IGameSerialize
 {
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(CurNum), saveGameState.CreateGameStateBag(CurNum)),

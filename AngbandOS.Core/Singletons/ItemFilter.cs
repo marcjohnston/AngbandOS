@@ -47,7 +47,7 @@ internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson, IGameSerialize
         IsCursed = gameConfiguration.IsCursed;
         HeavyCurse = gameConfiguration.HeavyCurse;
     }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     private ItemMatch[] ItemMatches { get; set; }
     private string? AttributeFilterBindingKey { get; }

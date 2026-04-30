@@ -24,7 +24,7 @@ internal sealed class Town : IGetKey, IToJson, IGameSerialize
         AllowStartupTown = gameConfiguration.AllowStartupTown;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Seed), saveGameState.CreateGameStateBag(Seed)),

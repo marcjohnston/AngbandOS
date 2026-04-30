@@ -21,7 +21,7 @@ internal sealed class View : IGetKey, IToJson, IGameSerialize
     /// </summary>
     private Widget[]? PokeWidgets { get; set; } = null;
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     #region Constructors
     public View(Game game, ViewGameConfiguration gameConfiguration)
     {

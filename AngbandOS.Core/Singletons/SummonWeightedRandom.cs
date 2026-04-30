@@ -15,7 +15,7 @@ internal sealed class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetK
         LearnedDetails = LearnedDetails;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
  
     /// <summary>
     /// Returns the nullable names and weights.  Names can be null to support non-action weights.

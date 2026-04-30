@@ -19,7 +19,7 @@ internal sealed class Gender : IGetKey, IToJson, IGameSerialize
         CanBeRandomlySelected = gameConfiguration.CanBeRandomlySelected;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>

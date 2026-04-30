@@ -59,7 +59,7 @@ internal sealed class StoreFactory : IItemFilter, IGetKey, IToJson, IGameSeriali
         StoreAnalyzesPurchases = gameConfiguration.StoreAnalyzesPurchases;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string GetKey => Key;
 

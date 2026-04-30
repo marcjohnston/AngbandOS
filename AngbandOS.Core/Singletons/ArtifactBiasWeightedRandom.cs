@@ -18,7 +18,7 @@ internal sealed class ArtifactBiasWeightedRandom : WeightedRandom<ArtifactBias?>
         ArtifactBiasBindingKeyAndWeightTuples = gameConfiguration.ArtifactBiasBindingKeyAndWeightTuples;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string Key { get; }
     public string GetKey => Key;

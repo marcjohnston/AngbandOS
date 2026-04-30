@@ -12,7 +12,7 @@ internal sealed class Symbol : IGetKey, IToJson, IGameSerialize
         QueryCharacter = gameConfiguration.QueryCharacter;
         Name = gameConfiguration.Name;
     }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public char Character { get; }
 

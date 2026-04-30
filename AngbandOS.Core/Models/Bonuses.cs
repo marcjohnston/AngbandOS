@@ -19,7 +19,7 @@ internal class Bonuses : IGameSerialize
     public bool HasHeavyWeapon { get; init; } = false;
     #endregion
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(AttackBonus), saveGameState.CreateGameStateBag(AttackBonus)),

@@ -10,7 +10,7 @@ internal sealed class Plural : IGetKey, IToJson, IGameSerialize
         Key = gameConfiguration.GetKey;
         PluralForm = gameConfiguration.PluralForm;
     }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

@@ -60,7 +60,7 @@ internal class ExPlayer : IGameSerialize
     public readonly Realm? SecondaryRealm;
     #endregion
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Gender), saveGameState.CreateGameStateBag(Gender)),

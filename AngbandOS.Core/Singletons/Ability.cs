@@ -32,7 +32,7 @@ internal abstract class Ability : IGetKey, IGameSerialize
         }
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Adjusted), saveGameState.CreateGameStateBag(Adjusted)),

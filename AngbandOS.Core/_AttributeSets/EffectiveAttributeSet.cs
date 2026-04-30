@@ -11,7 +11,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGameSerialize
 {
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_effectiveAttributeValues), saveGameState.CreateGameStateBag(_effectiveAttributeValues))

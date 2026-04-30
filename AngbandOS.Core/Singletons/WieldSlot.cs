@@ -16,7 +16,7 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey, I
     {
         Game = game;
     }
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the maximum number of items that the inventory slot can hold.  Returns 1, by default.  All inventory slots return 1, except for the pack that returns 26 (a-z).

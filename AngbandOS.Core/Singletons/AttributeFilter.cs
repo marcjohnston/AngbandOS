@@ -22,7 +22,7 @@ internal class AttributeFilter : IGetKey, IToJson, IGameSerialize
         SumAttributeFilterBindings = gameConfiguration.SumAttributeFilterBindings;
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public bool? ActivationAttributeNonNull { get; }
     public bool? ArtifactBiasAttributeNonNull { get; }
     private (string AttributeKey, bool?[] Value)[]? BoolAttributeFiltersBindings { get; }

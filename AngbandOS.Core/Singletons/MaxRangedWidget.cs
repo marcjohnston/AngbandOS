@@ -33,7 +33,7 @@ internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, IGameSerialize
         _color = DefaultColor;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_sortValidated), saveGameState.CreateGameStateBag(_sortValidated)),

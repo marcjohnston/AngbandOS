@@ -106,7 +106,7 @@ internal class Monster : IItemContainer, IGameSerialize
 
     #endregion
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(ConfusionLevel), saveGameState.CreateGameStateBag(ConfusionLevel)),

@@ -21,7 +21,7 @@ internal abstract class ArtifactBias : IGetKey, IGameSerialize
     }
 
     public abstract string AffinityName { get; }
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public virtual string Key => GetType().Name;
 

@@ -20,7 +20,7 @@ internal sealed class RealmCharacterClass : IGetKey, IToJson, IGameSerialize
         DeityBindingKey = gameConfiguration.DeityBindingKey;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

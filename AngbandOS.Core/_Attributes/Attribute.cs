@@ -28,7 +28,7 @@ internal abstract class Attribute : IGetKey, IIndexedSingletons, IGameSerialize
 
     public void Bind(RestoreGameState? restoreGameState) { }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Index), new IntValueGameStateBag(Index))

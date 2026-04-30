@@ -21,7 +21,7 @@ internal sealed class TimeWidget : Widget, IGetKey, IToJson, IGameSerialize
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string DateAndTimeValueName { get; }
 
     public string Key { get; }

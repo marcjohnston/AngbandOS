@@ -21,7 +21,7 @@ internal sealed class GameMessageWidget : Widget, IGetKey, IToJson, IGameSeriali
 
     public string Key { get; }
     public string GetKey => Key;
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public void Bind(RestoreGameState? restoreGameState)
     {

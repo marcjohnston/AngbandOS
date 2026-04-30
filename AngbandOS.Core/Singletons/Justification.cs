@@ -20,5 +20,5 @@ internal abstract class Justification : IGetKey, IGameSerialize
     public string GetKey => GetType().Name;
 
     public void Bind(RestoreGameState? restoreGameState) { }
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

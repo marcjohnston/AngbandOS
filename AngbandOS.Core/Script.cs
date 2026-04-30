@@ -15,7 +15,7 @@ internal abstract class Script : IGetKey, IGameSerialize
         Game = game;
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public virtual string Key => GetType().Name;
 

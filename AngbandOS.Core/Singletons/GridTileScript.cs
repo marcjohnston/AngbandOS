@@ -23,5 +23,5 @@ internal abstract class GridTileScript : IGetKey, IGameSerialize
     }
 
     public abstract (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y);
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

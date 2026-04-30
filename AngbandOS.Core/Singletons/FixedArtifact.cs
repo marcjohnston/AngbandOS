@@ -18,7 +18,7 @@ internal abstract class FixedArtifact : IGetKey, IToJson, IGameSerialize
         Game = game;
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(CurNum), new IntValueGameStateBag(CurNum))

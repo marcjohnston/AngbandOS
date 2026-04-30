@@ -20,7 +20,7 @@ internal abstract class AlterAction : IGetKey, IGameSerialize
         Game = game;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public abstract bool Execute(int x, int y);
 

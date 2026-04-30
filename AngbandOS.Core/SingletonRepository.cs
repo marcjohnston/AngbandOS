@@ -22,7 +22,7 @@ internal sealed class SingletonRepository : IGameSerialize
     #endregion
 
     #region Publics
-    public DictionaryGameStateBag Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         // The singleton repository is going to use a dictionary for all of the singletons.  The IGetKey will provide the unique key.
         var result = new Dictionary<string, GameStateBag>();

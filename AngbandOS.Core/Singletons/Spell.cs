@@ -21,7 +21,7 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
 
     public ItemFactory SpellBookItemFactory { get; private set; }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Forgotten), saveGameState.CreateGameStateBag(Forgotten)),

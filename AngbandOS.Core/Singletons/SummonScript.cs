@@ -25,7 +25,7 @@ internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson, IGameSe
         Used = gameConfiguration.Used;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.  Returns an empty string by default.

@@ -12,5 +12,5 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class AttributeValue : IGameSerialize
 {
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

@@ -22,7 +22,7 @@ internal sealed class CharacterClassSpell : IGetKey, IToJson, IGameSerialize
         FirstCastExperience = gameConfiguration.FirstCastExperience;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

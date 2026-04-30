@@ -20,7 +20,7 @@ internal sealed class StoreCommand : IGetKey, IToJson, IGameSerialize
         ExecuteScriptName = gameConfiguration.ExecuteScriptName;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string Key { get; }
 

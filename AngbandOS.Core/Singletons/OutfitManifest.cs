@@ -20,7 +20,7 @@ internal class OutfitManifest : IGetKey, IToJson, IGameSerialize
         ItemFactoryAndEnhancementsBindings = gameConfiguration.ItemFactoryAndEnhancementsBindings;
     }
     public static string GetCompositeKey(CharacterClass characterClass, Race race, Realm realm) => GameConfiguration.GetCompositeKey(characterClass.GetKey, race.GetKey, realm.GetKey);
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public (string[] MatchValues, bool IsEqual)? CharacterClassBindingKey { get; private set; }
     public (string[] MatchValues, bool IsEqual)? RaceBindingKey { get; private set; }

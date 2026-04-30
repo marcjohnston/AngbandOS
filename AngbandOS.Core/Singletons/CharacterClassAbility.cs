@@ -12,7 +12,7 @@ internal sealed class CharacterClassAbility : IGetKey, IToJson, IGameSerialize
         CharacterClassBindingKey = gameConfiguration.CharacterClassBindingKey;
         AbilityBindingKey = gameConfiguration.AbilityBindingKey;
    }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string Key { get; }
     public string GetKey => Key;
     public int Bonus { get; } = 0;

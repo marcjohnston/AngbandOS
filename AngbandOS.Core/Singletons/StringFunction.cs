@@ -38,5 +38,5 @@ internal abstract class StringFunction : IChangeTracker, IGetKey, IStringValue, 
     }
 
     public virtual string[]? DependencyNames => null;
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

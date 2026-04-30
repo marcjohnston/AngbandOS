@@ -16,7 +16,7 @@ internal abstract class BoolFunction : IChangeTracker, IGetKey, IBoolValue, IGam
         Game = game;
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the boolean result of the function.  This method provides the implementation for the IConditional interface.

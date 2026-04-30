@@ -16,7 +16,7 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     }
     public virtual string Key => GetType().Name;
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState)

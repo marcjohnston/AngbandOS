@@ -15,7 +15,7 @@ internal sealed class MappedItemEnhancement : IGetKey, IToJson, IGameSerialize
         ItemEnhancementBindingKeys = gameConfiguration.ItemEnhancementBindingKeys;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string Key { get; }
     public string GetKey => Key;
 

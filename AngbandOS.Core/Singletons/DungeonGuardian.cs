@@ -18,7 +18,7 @@ internal sealed class DungeonGuardian : IGetKey, IToJson, IGameSerialize
         LevelFound = gameConfiguration.LevelFound;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string Key { get; }
 

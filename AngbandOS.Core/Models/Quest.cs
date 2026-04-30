@@ -22,7 +22,7 @@ internal class Quest : IGameSerialize
     public int ToKill;
     #endregion
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Discovered), saveGameState.CreateGameStateBag(Discovered)),

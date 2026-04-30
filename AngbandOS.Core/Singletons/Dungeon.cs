@@ -31,7 +31,7 @@ internal sealed class Dungeon : IGetKey, IToJson, IGameSerialize
         Shortname = gameConfiguration.Shortname;
         Tower = gameConfiguration.Tower;
     }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(RecallLevel), saveGameState.CreateGameStateBag(RecallLevel)),

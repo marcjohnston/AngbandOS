@@ -20,7 +20,7 @@ internal sealed class Shopkeeper : IGetKey, IToJson, IGameSerialize
         RaceName = gameConfiguration.RaceName;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public int MaxCost { get; }
 

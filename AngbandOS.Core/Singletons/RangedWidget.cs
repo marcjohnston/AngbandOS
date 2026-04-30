@@ -30,7 +30,7 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, IGameSerialize
         _color = DefaultColor;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_text), saveGameState.CreateGameStateBag(_text)),

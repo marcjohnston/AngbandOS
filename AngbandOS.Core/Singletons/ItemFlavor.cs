@@ -21,7 +21,7 @@ internal sealed class ItemFlavor : Flavor, IGetKey, IToJson, IGameSerialize
         CanBeAssigned = gameConfiguration.CanBeAssigned;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

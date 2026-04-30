@@ -24,7 +24,7 @@ internal sealed class Animation : IGetKey, IToJson, IGameSerialize
         Sequence = gameConfiguration.Sequence;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

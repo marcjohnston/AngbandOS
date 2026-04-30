@@ -21,7 +21,7 @@ internal sealed class IntWidget : Widget, IGetKey, IToJson, IGameSerialize
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
     public string Key { get; }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string GetKey => Key;
 

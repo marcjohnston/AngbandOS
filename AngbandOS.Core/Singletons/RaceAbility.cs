@@ -18,7 +18,7 @@ internal sealed class RaceAbility : IGetKey, IToJson, IGameSerialize
         RaceBindingKey = gameConfiguration.RaceBindingKey;
         AbilityBindingKey = gameConfiguration.AbilityBindingKey;
     }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public int Bonus { get; } = 0;
     public Race Race { get; private set; }
     public Ability Ability { get; private set; }

@@ -19,7 +19,7 @@ internal class RangedWeaponBonus : IGetKey, IToJson, IGameSerialize
         ExperienceLevel = gameConfiguration.ExperienceLevel;
         BonusMissileAttacksPerRound = gameConfiguration.BonusMissileAttacksPerRound;
     }
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string? CharacterClassBindingKey { get; private set; } = null;
     public string? ItemClassBindingKey { get; private set; } = null;
     public int? ExperienceLevel { get; private set; } = null;

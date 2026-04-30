@@ -15,7 +15,7 @@ internal abstract class GameCommandUniversalScript : IGameCommandScript, IScript
         Game = game;
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns information about the script, or blank if there is no detailed information.  Returns blank, by default.

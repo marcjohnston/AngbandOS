@@ -23,7 +23,7 @@ internal sealed class RacialPowerTest : IGetKey, IBoolValue, IToJson, IGameSeria
         Difficulty = gameConfiguration.Difficulty;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string Key { get; }
     public string GetKey => Key;

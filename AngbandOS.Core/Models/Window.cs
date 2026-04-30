@@ -54,7 +54,7 @@ internal class Window : IGameSerialize
     private bool TotalErase;
     #endregion
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(ActiveScreen), saveGameState.CreateGameStateBag(ActiveScreen)),

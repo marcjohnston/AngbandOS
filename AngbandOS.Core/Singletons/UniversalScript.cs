@@ -15,7 +15,7 @@ internal abstract class UniversalScript : IActivateItemScript, IAimWandScript, I
         Game = game;
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public virtual bool RequiresRerendering { get; } = false;
 

@@ -18,7 +18,7 @@ internal abstract class EatOrQuaffUniversalScript : IActivateItemScript, IAimWan
         Game = game;
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the details to reveal to the player when learned.  Returns blank, by default.

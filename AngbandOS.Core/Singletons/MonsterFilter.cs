@@ -15,7 +15,7 @@ internal abstract class MonsterFilter : IGetKey, IGameSerialize
         Game = game;
     }
     public virtual string Key => GetType().Name;
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string GetKey => Key;
 

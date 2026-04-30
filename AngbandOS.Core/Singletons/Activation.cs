@@ -24,7 +24,7 @@ internal sealed class Activation : IGetKey, IToJson, IGameSerialize
         ActivationCancellableScriptItemBindingKey = gameConfiguration.ActivationCancellableScriptItemBindingKey;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the unique name for this activation.  This name should be capitalized appropriately.

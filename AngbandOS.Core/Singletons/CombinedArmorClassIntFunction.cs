@@ -34,7 +34,7 @@ internal class CombinedArmorClassIntFunction : IChangeTracker, IGetKey, IIntValu
         OldValue = IntValue;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(OldValue), saveGameState.CreateGameStateBag(OldValue))

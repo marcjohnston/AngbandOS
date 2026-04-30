@@ -4,10 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System;
 using System.Collections;
 using System.Diagnostics;
-using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -36,7 +34,7 @@ internal class SaveGameState
             int objectId = ObjectToIdDictionary.Count + 1;
             ObjectToIdDictionary.Add(value, objectId);
 
-            DictionaryGameStateBag? gameStateBag = gameSerializable.Serialize(this);
+            DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag)gameSerializable.Serialize(this);
 
             #if DEBUG
             FieldInfo[] allFields = GetAllFields(value.GetType());

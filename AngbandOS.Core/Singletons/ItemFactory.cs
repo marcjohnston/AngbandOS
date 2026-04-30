@@ -16,7 +16,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     private Game Game { get; }
     private string ItemEnhancementBindingKey { get; }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(IsFlavorAware), saveGameState.CreateGameStateBag(IsFlavorAware)),

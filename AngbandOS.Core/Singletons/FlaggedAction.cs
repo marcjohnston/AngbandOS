@@ -19,7 +19,7 @@ internal abstract class FlaggedAction : IGetKey, IGameSerialize
         _flag = restoreGameState.GetBool(nameof(_flag));
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(_flag), saveGameState.CreateGameStateBag(_flag))

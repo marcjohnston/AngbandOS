@@ -13,7 +13,6 @@ internal interface IGameSerialize
     /// </summary>
     /// <param name="saveGameState"></param>
     /// <returns></returns>
-    DictionaryGameStateBag? Serialize(SaveGameState saveGameState);
- //   void Deserialize(GameStateBag bag);
+    GameStateBag? Serialize(SaveGameState saveGameState);
 }
 

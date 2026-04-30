@@ -21,7 +21,7 @@ internal sealed class SyllableSet : IGetKey, IToJson, IGameSerialize
         EndingSyllables = gameConfiguration.EndingSyllables;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string[] BeginningSyllables { get; }
     public string[] MiddleSyllables { get; }
     public string[] EndingSyllables { get; }

@@ -22,7 +22,7 @@ internal class GridCoordinate : IGameSerialize
         return new GridCoordinate(X, Y);
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(X), saveGameState.CreateGameStateBag(X)),

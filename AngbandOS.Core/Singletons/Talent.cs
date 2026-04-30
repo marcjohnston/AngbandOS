@@ -20,7 +20,7 @@ internal abstract class Talent : IGetKey, IGameSerialize
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState) { }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public abstract string Name { get; }
 
     public abstract int Level { get; }

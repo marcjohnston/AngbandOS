@@ -17,7 +17,7 @@ internal class MonsterSpellList : IGameSerialize
     /// </summary>
     private readonly MonsterSpell[] _spells;
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         List<GameStateBag> spellBags = new List<GameStateBag>();
         spellBags.AddRange(_spells.Select(_spell => saveGameState.CreateGameStateBag(_spell)));

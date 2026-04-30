@@ -23,7 +23,7 @@ internal sealed class MartialArtsAttack : IGetKey, IToJson, IGameSerialize
         MinLevel = gameConfiguration.MinLevel;
         IsDefault = gameConfiguration.IsDefault;
     }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

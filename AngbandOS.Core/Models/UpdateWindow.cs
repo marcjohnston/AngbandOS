@@ -21,7 +21,7 @@ internal class UpdateWindow : IGameSerialize
     private int Height { get; }
     #endregion
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Y1), saveGameState.CreateGameStateBag(Y1)),

@@ -16,7 +16,7 @@ internal abstract class TextFunction : IChangeTracker, IGetKey, ITextValue, IGam
         Game = game;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public abstract string[]? NullableStringsValue { get; }
     /// <summary>
     /// Returns true, if there are no dependencies or if any the change tracking on any dependency is flagged as changed.

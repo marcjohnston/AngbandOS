@@ -21,7 +21,7 @@ internal class ConditionalScript : IGetKey, IScript, IToJson, IGameSerialize
         TrueScriptBindingKeys = gameConfiguration.TrueScriptBindingKeys;
         FalseScriptBindingKeys = gameConfiguration.FalseScriptBindingKeys;
     }
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public Conditional Conditional { get; private set; }
     private string ConditionalKey { get; }
 

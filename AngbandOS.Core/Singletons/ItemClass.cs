@@ -17,7 +17,7 @@ internal sealed class ItemClass : IGetKey, IToJson, IGameSerialize
         ItemFlavorBindingKeys = gameConfiguration.ItemFlavorBindingKeys;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the capitalized name of a singular item that the class represents.  This name can be used in a format like 'Your {0}'

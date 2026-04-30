@@ -18,7 +18,7 @@ internal sealed class RacePower : IGetKey, IScript, IToJson, IGameSerialize
         RaceBindingKey = gameConfiguration.RaceBindingKey;
         CharacterClassBindingKey = gameConfiguration.CharacterClassBindingKey;
     }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public static string GetCompositeKey(Race race, CharacterClass? characterClass) => GameConfiguration.GetCompositeKey(race.GetKey, characterClass?.GetKey, nameof(RacePowerGameConfiguration));
     public IScript Script { get; private set; }
     private string ScriptBindingKey { get; }

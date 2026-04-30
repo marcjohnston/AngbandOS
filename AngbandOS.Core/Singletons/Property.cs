@@ -25,7 +25,7 @@ internal abstract class Property : IGetKey, IChangeTracker, IGameSerialize
         IsChanged = restoreGameState.GetBool(nameof(IsChanged));
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(IsChanged), saveGameState.CreateGameStateBag(IsChanged))

@@ -31,7 +31,7 @@ internal class MonsterKnowledge : IGameSerialize
     private readonly MonsterRace _monsterType;
     #endregion
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(RBlows), saveGameState.CreateGameStateBag(RBlows)),

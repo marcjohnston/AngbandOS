@@ -21,7 +21,7 @@ internal sealed class GameCommand : IGetKey, IToJson, IGameSerialize
     }
 
     public string Key { get; }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState)

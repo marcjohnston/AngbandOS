@@ -39,7 +39,7 @@ internal class ScreenBuffer : IGameSerialize
     public bool CursorVisible = false;
     #endregion
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Va), saveGameState.CreateGameStateBag(Va)),

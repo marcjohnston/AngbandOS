@@ -16,7 +16,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     }
     protected abstract string EnhancementBindingKey { get; }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet))

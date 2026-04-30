@@ -19,7 +19,7 @@ internal sealed class RaceGender : IGetKey, IToJson, IGameSerialize
         PhysicalAttributesWeightedRandomBindings = gameConfiguration.PhysicalAttributesWeightedRandomBindings;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

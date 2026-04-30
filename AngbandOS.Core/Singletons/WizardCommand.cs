@@ -21,7 +21,7 @@ internal sealed class WizardCommand : IHelpCommand, IGetKey, IToJson, IGameSeria
         HelpGroupName = gameConfiguration.HelpGroupName;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>

@@ -77,7 +77,7 @@ internal sealed class Tile : IGetKey, IToJson, IGameSerialize
         YellowInTorchlight = gameConfiguration.YellowInTorchlight;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

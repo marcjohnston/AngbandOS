@@ -18,7 +18,7 @@ internal sealed class HelpGroup : IGetKey, IToJson, IGameSerialize
         Title = gameConfiguration.Title;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string Key { get; }
 
     public string GetKey => Key;

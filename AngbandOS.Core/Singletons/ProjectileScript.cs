@@ -34,7 +34,7 @@ internal sealed class ProjectileScript : IGetKey, IUniversalScript, IToJson, IGa
         CustomLearnedDetails = gameConfiguration.CustomLearnedDetails;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public void Bind(RestoreGameState? restoreGameState)
     {

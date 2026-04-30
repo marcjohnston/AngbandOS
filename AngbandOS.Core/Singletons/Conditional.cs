@@ -18,7 +18,7 @@ internal sealed class Conditional : IChangeTracker, IGetKey, IBoolValue, IToJson
         EnabledNames = gameConfiguration.EnabledNames;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns true, if there are no dependencies or if any the change tracking on any dependency is flagged as changed.

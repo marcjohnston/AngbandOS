@@ -17,7 +17,7 @@ internal sealed class ConditionalWidget : Widget, IGetKey, IToJson, IGameSeriali
         FalseWidgetNames = gameConfiguration.FalseWidgetNames;
         ChangeTrackerNames = gameConfiguration.ChangeTrackerNames;
     }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the name of the property that participates in change tracking.  This property is used to bind the <see cref="ChangeTrackers"/> property during the bind phase.

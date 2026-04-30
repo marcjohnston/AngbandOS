@@ -16,7 +16,7 @@ internal sealed class MappedSpellScript : IGetKey, IToJson, IGameSerialize
         MinimumExperienceLevel = gameConfiguration.MinimumExperienceLevel;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public string Key { get; }
     public string GetKey => Key;

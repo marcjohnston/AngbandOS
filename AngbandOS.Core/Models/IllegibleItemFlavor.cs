@@ -12,7 +12,7 @@ internal class IllegibleItemFlavor : Flavor, IGameSerialize
     public override Symbol Symbol { get; protected set; }
     public override ColorEnum Color { get; }
     public override string Name { get; }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Name), saveGameState.CreateGameStateBag(Name)),

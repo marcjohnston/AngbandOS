@@ -18,7 +18,7 @@ internal class ItemIdentification : IGetKey, IToJson, IGameSerialize
         InterpolationExpressionAttributeNames = gameConfiguration.InterpolationExpressionAttributeNames;
         EffectDescription = gameConfiguration.EffectDescription;
     }
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

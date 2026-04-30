@@ -18,7 +18,7 @@ internal abstract class MonsterRaceFilter : IMonsterSelector, IGetKey, IGameSeri
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

@@ -29,7 +29,7 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
         return value.Value;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Value), saveGameState.CreateGameStateBag(Value))

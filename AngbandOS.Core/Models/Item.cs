@@ -13,7 +13,7 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class Item : IComparable<Item>, IGameSerialize
 {
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(FixedArtifact), saveGameState.CreateGameStateBag(FixedArtifact)),

@@ -35,7 +35,7 @@ internal class GridTile : IItemContainer, IGameSerialize
         _backgroundFeature = Game.SingletonRepository.Get<Tile>(nameof(NothingTile));
         _featureType = Game.SingletonRepository.Get<Tile>(nameof(NothingTile));
     }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(EasyVisibility), saveGameState.CreateGameStateBag(EasyVisibility)),

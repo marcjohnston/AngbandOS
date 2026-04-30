@@ -16,7 +16,7 @@ internal abstract class ActivationWeightedRandom : WeightedRandom<Activation>, I
     public virtual string Key => GetType().Name;
     public string GetKey => Key;
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     protected abstract (string, int)[] ActivationNamesAndWeights { get; }
 
     public void Bind(RestoreGameState? restoreGameState)

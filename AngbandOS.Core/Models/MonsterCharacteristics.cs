@@ -262,7 +262,7 @@ internal class MonsterCharacteristics : IMonsterCharacteristics, IGameSerialize
         Undead = copyFrom.Undead;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(AttrClear), saveGameState.CreateGameStateBag(AttrClear)),

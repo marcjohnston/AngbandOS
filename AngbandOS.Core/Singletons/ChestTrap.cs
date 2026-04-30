@@ -22,7 +22,7 @@ internal class ChestTrap : IGetKey, IToJson, IGameSerialize
         ActivationGridTileScriptBindingKey = gameConfiguration.ActivationGridTileScriptBindingKey;
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

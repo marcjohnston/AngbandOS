@@ -22,7 +22,7 @@ internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>
     /// </summary>
     protected (string name, int weight)[] NameAndWeightBindings { get; }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     public virtual string Key { get; }
 

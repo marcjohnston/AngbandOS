@@ -21,7 +21,7 @@ internal abstract class PlayerEffectUniversalScript : IPlayerEffectScript, IGetK
     {
         Game = game;
     }
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public virtual int MaximumDamageAllowed => 1600;
     public virtual string? BlindPreMessage => null;
 

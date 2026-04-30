@@ -20,7 +20,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
         UnfriendPetMonsterFilter = Game.SingletonRepository.GetNullable<MonsterFilter>(UnfriendPetMonsterFilterBindingKey);
     }
 
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     protected MonsterEffect(Game game)
     {
         Game = game;

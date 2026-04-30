@@ -18,7 +18,7 @@ internal class RefreshMapFunction : IChangeTracker, IGetKey, IGameSerialize
     {
         Game = game;
     }
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public virtual string[]? DependencyNames => new string[]
     {
         nameof(RefreshMapProperty), // Manual map refresh

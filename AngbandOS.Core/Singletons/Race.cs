@@ -19,7 +19,7 @@ internal abstract class Race : IGetKey, IGameSerialize
     {
         EffectiveAttributeSet = Enhancement.GenerateAttributeSet();
     }
-    public virtual DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet))

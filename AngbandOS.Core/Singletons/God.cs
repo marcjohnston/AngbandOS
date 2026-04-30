@@ -19,7 +19,7 @@ internal sealed class God : IGetKey, IToJson, IGameSerialize
         FavorDescription = gameConfiguration.FavorDescription;
     }
 
-    public DictionaryGameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public string LongName { get; }
     public string ShortName { get; }
     private const int PatronMultiplier = 2;
