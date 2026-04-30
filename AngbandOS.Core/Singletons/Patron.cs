@@ -51,6 +51,11 @@ internal sealed class Patron : IGetKey, IToJson, IGameSerialize
     {
         PreferredAbility = Game.SingletonRepository.GetNullable<Ability>(PreferredAbilityBindingKey);
         Rewards = Game.SingletonRepository.Get<Reward>(RewardBindingKeys);
+
+        if (restoreGameState is not null)
+        {
+            RewardReceived = restoreGameState.GetBool(nameof(RewardReceived));
+        }
     }
 
     public string LongName { get; }
