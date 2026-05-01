@@ -60,4 +60,8 @@
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="_DungeonGenerators\" />
+  </ItemGroup>
+
 </Project>

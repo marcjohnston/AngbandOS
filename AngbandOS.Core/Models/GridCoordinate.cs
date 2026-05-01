@@ -17,6 +17,17 @@ internal class GridCoordinate : IGameSerialize
     public readonly int Y;
     #endregion
 
+    public GridCoordinate(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    public GridCoordinate(Game game, RestoreGameState restoreGameState) : this(
+        restoreGameState.GetInt(nameof(X)),
+        restoreGameState.GetInt(nameof(Y))
+    ) { }
+
     public GridCoordinate Clone()
     {
         return new GridCoordinate(X, Y);
@@ -28,11 +39,5 @@ internal class GridCoordinate : IGameSerialize
             (nameof(X), saveGameState.CreateGameStateBag(X)),
             (nameof(Y), saveGameState.CreateGameStateBag(Y))
         );
-    }
-
-    public GridCoordinate(int x, int y)
-    {
-        X = x;
-        Y = y;
     }
 }

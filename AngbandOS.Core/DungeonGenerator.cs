@@ -7,12 +7,13 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class DungeonGenerator
+internal abstract class DungeonGenerator : IGameSerialize
 {
     protected Game Game { get; }
 
     public abstract bool GenerateDungeon(int objectLevel);
 
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public DungeonGenerator(Game game)
     {
         Game = game;

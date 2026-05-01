@@ -87,6 +87,7 @@ internal partial class Game : IGameSerialize
         return new DictionaryGameStateBag(
             (nameof(SingletonRepository), saveGameState.CreateGameStateBag(SingletonRepository)),
 
+            (nameof(DungeonGenerator), saveGameState.CreateGameStateBag(DungeonGenerator)),
             (nameof(IsBirthday), saveGameState.CreateGameStateBag(IsBirthday)),
             (nameof(IsDawn), saveGameState.CreateGameStateBag(IsDawn)),
             (nameof(IsDusk), saveGameState.CreateGameStateBag(IsDusk)),
@@ -465,6 +466,7 @@ internal partial class Game : IGameSerialize
             IsDead = true;
             Map = new Map(this);
             Quests = new List<Quest>();
+            InitializeAllocationTables(); // This is not performed on a restore.
         }
         else
         {
@@ -502,6 +504,7 @@ internal partial class Game : IGameSerialize
             #endif
 
             // Now restore this game object itself.
+            DungeonGenerator = restoreGameState.GetReference<DungeonGenerator>(nameof(DungeonGenerator));
             IsBirthday = restoreGameState.GetBool(nameof(IsBirthday));
             IsDawn = restoreGameState.GetBool(nameof(IsDawn));
             IsDusk = restoreGameState.GetBool(nameof(IsDusk));
@@ -639,7 +642,7 @@ internal partial class Game : IGameSerialize
             CurDungeon = restoreGameState.GetReference<Dungeon>(nameof(CurDungeon));
             CurrentDepth = restoreGameState.GetInt(nameof(CurrentDepth));
             CurTown = restoreGameState.GetReference<Town>(nameof(CurTown));
-            DiedFrom = restoreGameState.GetString(nameof(DiedFrom));
+            DiedFrom = restoreGameState.GetStringOrDefault(nameof(DiedFrom));
             DungeonDifficulty = restoreGameState.GetInt(nameof(DungeonDifficulty));
             EnergyUse = restoreGameState.GetInt(nameof(EnergyUse));
             HackMind = restoreGameState.GetBool(nameof(HackMind));
@@ -849,8 +852,6 @@ internal partial class Game : IGameSerialize
         }
         View consoleView = SingletonRepository.Get<View>(gameConfiguration.DungeonViewBindingKey);
         RenderView(consoleView);
-
-        InitializeAllocationTables();
     }
 
     /// <summary>
@@ -1317,7 +1318,7 @@ internal partial class Game : IGameSerialize
 
     public const int OneInChanceUpStairsReturnsToTownLevel = 5;
 
-    private DungeonGenerator DungeonGenerator { get; }
+    private readonly DungeonGenerator DungeonGenerator;
 
     /// <summary>
     /// Maximum amount of health that can be drained from an opponent in one turn
@@ -1351,7 +1352,7 @@ internal partial class Game : IGameSerialize
     public Dungeon CurDungeon; // TODO: This may be CurTown.Dungeon?
     public int CurrentDepth;
     public Town CurTown;
-    public string DiedFrom;
+    public string? DiedFrom = null;
     public int DungeonDifficulty;
     public int EnergyUse;
     public bool HackMind;

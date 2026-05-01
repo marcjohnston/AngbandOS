@@ -192,6 +192,7 @@ internal class RestoreGameState
                 {
                     throw new Exception($"Unable to instantiate a new {objectGameStateBag.TypeName}.");
                 }
+                ObjectIdToReferenceDictionary.Add(objectId, t);
                 return t;
             }
             catch (Exception ex)
@@ -355,6 +356,30 @@ internal class RestoreGameState
             listOfBytes.Add(bytes);
         }
         return listOfBytes.ToArray();
+    }
+
+    public bool[][] GetArrayOfBools(string key)
+    {
+        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
+        List<bool[]> listOfBools = new List<bool[]>();
+        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        {
+            if (gameStateBag is not ListGameStateBag listOfStringsBag)
+            {
+                throw new Exception("Jagged array of string not a list.");
+            }
+            List<bool> list = new List<bool>();
+            foreach (GameStateBag innerGameStateBag in listOfStringsBag.Values)
+            {
+                if (innerGameStateBag is not BoolValueGameStateBag boolValueGameStateBag)
+                {
+                    throw new Exception("Expected inner list of strings.");
+                }
+                list.Add(boolValueGameStateBag.Value);
+            }
+            listOfBools.Add(list.ToArray());
+        }
+        return listOfBools.ToArray();
     }
 
     public char[] GetChars(string key) => GetGameStateBag<CharArrayGameStateBag>(key).Value.ToCharArray();

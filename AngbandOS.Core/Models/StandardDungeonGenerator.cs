@@ -4,21 +4,16 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.DungeonGenerators;
+namespace AngbandOS.Core;
 
 [Serializable]
 internal class StandardDungeonGenerator : DungeonGenerator
 {
     private const int MaximumNumberOfRooms = 100; // This is the maximum number of rooms that can be tracked when a dungeon is generated.  Any rooms generated beyond this count are not tracked as a room.
     private const int MinimumNumberOfRooms = 50; // The minimum number of rooms to attempt to create.
-    private List<GridCoordinate> Rooms; // This is the center of each room that was generated.
 
     private const int _smallLevel = 3;
-    private GridCoordinate[] Door;
-    private bool[][] RoomMap; // This is a quadrant of _blockWid wide blocks by _blockHgt blocks high map tracking if a room has been built in that quadrant.
-    private GridCoordinate[] Tunn;
-    private GridCoordinate[] Wall;
-    private const int DoorMax = 200;
+    private const int DoorMax = 200; // TODO: This needs to be a List<Door> not a fixed size array.
     private const int _blockHgt = 21; // This is the vertical height of a block that is used to divide the dungeon into grid blocks for room placement.
     private const int _blockWid = 11; // This is the horizontal width of a block that is used to divide the dungeon into grid blocks for room placement.
     private const int MaxRoomsCol = Game.MaxWid / _blockWid; // This is the number of horizontal grid blocks for the current dungeon.
@@ -48,18 +43,13 @@ internal class StandardDungeonGenerator : DungeonGenerator
     private const int _dunTunRnd = 10;
     private const int _dunUnusual = 194;
     private const int _emptyLevel = 15;
-    private const int TunnMax = 900;
-    private const int WallMax = 500;
-
-    private int ColRooms;
-    private bool Crowded;
-    private int DoorN;
-    private int RowRooms;
-    private int TunnN;
-    private int WallN;
+    private const int TunnMax = 900; // TODO: This needs to be a List<Tunnel> not a fixed size array.
+    private const int WallMax = 500; // TODO: This needs to be a List<Wall> not a fixed size array.
 
     public StandardDungeonGenerator(Game game) : base(game) { }
+    public StandardDungeonGenerator(Game game, RestoreGameState restoreGameState) : this(game) { }
 
+    public override GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Generates an underground level.
@@ -172,13 +162,13 @@ internal class StandardDungeonGenerator : DungeonGenerator
         return true;
     }
 
-    private bool RoomBuild(int objectLevel, int y0, int x0, RoomLayout roomType, int difficulty) // TODO: This belongs to each room type
+    private bool RoomBuild(int objectLevel, int y0, int x0, RoomLayout roomType, int difficulty, bool crowded, int rowRooms, int colRooms, bool[][] roomMap, List<GridCoordinate> rooms) // TODO: This belongs to each room type
     {
         if (difficulty < roomType.Level)
         {
             return false;
         }
-        if (Crowded && (roomType.Type == 5 || roomType.Type == 6))
+        if (crowded && (roomType.Type == 5 || roomType.Type == 6))
         {
             return false;
         }
@@ -186,11 +176,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
         int y2 = y0 + roomType.Dy2;
         int x1 = x0 + roomType.Dx1;
         int x2 = x0 + roomType.Dx2;
-        if (y1 < 0 || y2 >= RowRooms)
+        if (y1 < 0 || y2 >= rowRooms)
         {
             return false;
         }
-        if (x1 < 0 || x2 >= ColRooms)
+        if (x1 < 0 || x2 >= colRooms)
         {
             return false;
         }
@@ -200,7 +190,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             for (x = x1; x <= x2; x++)
             {
-                if (RoomMap[y][x])
+                if (roomMap[y][x])
                 {
                     return false;
                 }
@@ -209,20 +199,20 @@ internal class StandardDungeonGenerator : DungeonGenerator
         y = (y1 + y2 + 1) * _blockHgt / 2;
         x = (x1 + x2 + 1) * _blockWid / 2;
         roomType.Build(objectLevel, y, x);
-        if (Rooms.Count < MaximumNumberOfRooms)
+        if (rooms.Count < MaximumNumberOfRooms)
         {
-            Rooms.Add(new GridCoordinate(x, y));
+            rooms.Add(new GridCoordinate(x, y));
         }
         for (y = y1; y <= y2; y++)
         {
             for (x = x1; x <= x2; x++)
             {
-                RoomMap[y][x] = true;
+                roomMap[y][x] = true;
             }
         }
         if (roomType.Type == 5 || roomType.Type == 6)
         {
-            Crowded = true;
+            crowded = true;
         }
         return true;
     }
@@ -664,14 +654,14 @@ internal class StandardDungeonGenerator : DungeonGenerator
         cdir = Game.OrderedDirectionXOffset[i];
     }
 
-    private void BuildTunnel(int row1, int col1, int row2, int col2)
+    private void BuildTunnel(int row1, int col1, int row2, int col2, GridCoordinate?[] wall, GridCoordinate?[] tunn, int doorN, GridCoordinate?[] door)
     {
         int i, y, x;
         int mainLoopCount = 0;
         bool doorFlag = false;
         GridTile cPtr;
-        TunnN = 0;
-        WallN = 0;
+        int TunnN = 0;
+        int WallN = 0;
         int startRow = row1;
         int startCol = col1;
         CorrectDir(out int rowDir, out int colDir, row1, col1, row2, col2);
@@ -738,7 +728,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 col1 = tmpCol;
                 if (WallN < WallMax)
                 {
-                    Wall[WallN] = new GridCoordinate(col1, row1);
+                    wall[WallN] = new GridCoordinate(col1, row1);
                     WallN++;
                 }
                 for (y = row1 - 1; y <= row1 + 1; y++)
@@ -763,7 +753,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 col1 = tmpCol;
                 if (TunnN < TunnMax)
                 {
-                    Tunn[TunnN] = new GridCoordinate(col1, row1);
+                    tunn[TunnN] = new GridCoordinate(col1, row1);
                     TunnN++;
                 }
                 doorFlag = false;
@@ -774,10 +764,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 col1 = tmpCol;
                 if (!doorFlag)
                 {
-                    if (DoorN < DoorMax)
+                    if (doorN < DoorMax)
                     {
-                        Door[DoorN] = new GridCoordinate(col1, row1);
-                        DoorN++;
+                        door[doorN] = new GridCoordinate(col1, row1);
+                        doorN++;
                     }
                     doorFlag = true;
                 }
@@ -802,15 +792,15 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         for (i = 0; i < TunnN; i++)
         {
-            y = Tunn[i].Y;
-            x = Tunn[i].X;
+            y = tunn[i].Y;
+            x = tunn[i].X;
             cPtr = Game.Map.Grid[y][x];
             cPtr.RevertToBackground();
         }
         for (i = 0; i < WallN; i++)
         {
-            y = Wall[i].Y;
-            x = Wall[i].X;
+            y = wall[i].Y;
+            x = wall[i].X;
             cPtr = Game.Map.Grid[y][x];
             cPtr.RevertToBackground();
             if (Game.RandomLessThan(100) < _dunTunPen)
@@ -827,6 +817,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void MakeDungeonLevel(int objectLevel)
     {
+        //int DoorN;
+        //int TunnN;
+        //int WallN;
         int k;
         int y;
         int x;
@@ -834,33 +827,33 @@ internal class StandardDungeonGenerator : DungeonGenerator
         bool destroyed = false;
         bool emptyLevel = false;
 
-        Door = new GridCoordinate[DoorMax];
-        Wall = new GridCoordinate[WallMax];
-        Tunn = new GridCoordinate[TunnMax];
+        GridCoordinate?[] door = new GridCoordinate[DoorMax];
+        GridCoordinate?[] tunn = new GridCoordinate[TunnMax];
+        GridCoordinate?[] wall = new GridCoordinate[WallMax];
 
         // Compute the number of grid blocks for this size of dungeon.
-        Rooms = new List<GridCoordinate>();
-        RowRooms = Game.CurHgt / _blockHgt;
-        ColRooms = Game.CurWid / _blockWid;
+        List<GridCoordinate> rooms = new List<GridCoordinate>(); // This is the center of each room that was generated.
+        int rowRooms = Game.CurHgt / _blockHgt;
+        int colRooms = Game.CurWid / _blockWid;
 
         // The dungeon must be large enough to support at least one type-1 room.
         Type1RoomLayout type1RoomLayout = (Type1RoomLayout)Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout));
-        if (RowRooms < type1RoomLayout.Height)
+        if (rowRooms < type1RoomLayout.Height)
         {
             Game.CurHgt = type1RoomLayout.Height * _blockHgt;
-            RowRooms = Game.CurHgt / _blockHgt;
+            rowRooms = Game.CurHgt / _blockHgt;
         }
-        if (ColRooms < type1RoomLayout.Width)
+        if (colRooms < type1RoomLayout.Width)
         {
             Game.CurWid = type1RoomLayout.Width * _blockWid;
-            ColRooms = Game.CurWid / _blockWid;
+            colRooms = Game.CurWid / _blockWid;
         }
 
         // Initialize the grid of rooms to prevent overlapping.
-        RoomMap = new bool[MaxRoomsRow][];
+        bool[][] roomMap = new bool[MaxRoomsRow][]; // This is a quadrant of _blockWid wide blocks by _blockHgt blocks high map tracking if a room has been built in that quadrant.
         for (int i = 0; i < MaxRoomsRow; i++)
         {
-            RoomMap[i] = new bool[MaxRoomsCol];
+            roomMap[i] = new bool[MaxRoomsCol];
         }
 
         if (Game.MaxPanelRows == 0)
@@ -898,23 +891,23 @@ internal class StandardDungeonGenerator : DungeonGenerator
         {
             destroyed = false;
         }
-        for (y = 0; y < RowRooms; y++)
+        for (y = 0; y < rowRooms; y++)
         {
-            for (x = 0; x < ColRooms; x++)
+            for (x = 0; x < colRooms; x++)
             {
-                RoomMap[y][x] = false;
+                roomMap[y][x] = false;
             }
         }
-        Crowded = false;
+        bool crowded = false;
         int roomAttemptCount = 0;
 
         // Attempt to generate rooms until we have attempted a minimum number of generations and we have reached a minimum number of rooms generated.
-        while (roomAttemptCount < MinimumNumberOfRooms || Rooms.Count < MinimumRoomCount)
+        while (roomAttemptCount < MinimumNumberOfRooms || rooms.Count < MinimumRoomCount)
         {
             roomAttemptCount++;
 
-            y = Game.RandomLessThan(RowRooms);
-            x = Game.RandomLessThan(ColRooms);
+            y = Game.RandomLessThan(rowRooms);
+            x = Game.RandomLessThan(colRooms);
             if (x % 3 == 0)
             {
                 x++;
@@ -925,7 +918,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
             }
             if (destroyed)
             {
-                if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout)), Game.Difficulty))
+                if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout)), Game.Difficulty, crowded, rowRooms, colRooms, roomMap, rooms))
                 {
                 }
                 continue;
@@ -939,7 +932,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         if (maxVaultOk > 1)
                         {
-                            if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type8RoomLayout)), Game.Difficulty))
+                            if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type8RoomLayout)), Game.Difficulty, crowded, rowRooms, colRooms, roomMap, rooms))
                             {
                                 continue;
                             }
@@ -949,35 +942,35 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     {
                         if (maxVaultOk > 0)
                         {
-                            if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type7RoomLayout)), Game.Difficulty))
+                            if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type7RoomLayout)), Game.Difficulty, crowded, rowRooms, colRooms, roomMap, rooms))
                             {
                                 continue;
                             }
                         }
                     }
-                    if (k < 40 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type5RoomLayout)), Game.Difficulty))
+                    if (k < 40 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type5RoomLayout)), Game.Difficulty, crowded, rowRooms, colRooms, roomMap, rooms))
                     {
                         continue;
                     }
-                    if (k < 55 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type6RoomLayout)), Game.Difficulty))
+                    if (k < 55 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type6RoomLayout)), Game.Difficulty, crowded, rowRooms, colRooms, roomMap, rooms))
                     {
                         continue;
                     }
                 }
-                if (k < 25 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type4RoomLayout)), Game.Difficulty))
+                if (k < 25 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type4RoomLayout)), Game.Difficulty, crowded, rowRooms, colRooms, roomMap, rooms))
                 {
                     continue;
                 }
-                if (k < 50 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type3RoomLayout)), Game.Difficulty))
+                if (k < 50 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type3RoomLayout)), Game.Difficulty, crowded, rowRooms, colRooms, roomMap, rooms))
                 {
                     continue;
                 }
-                if (k < 100 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type2RoomLayout)), Game.Difficulty))
+                if (k < 100 && RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type2RoomLayout)), Game.Difficulty, crowded, rowRooms, colRooms, roomMap, rooms))
                 {
                     continue;
                 }
             }
-            if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout)), Game.Difficulty))
+            if (RoomBuild(objectLevel, y, x, Game.SingletonRepository.Get<RoomLayout>(nameof(Type1RoomLayout)), Game.Difficulty, crowded, rowRooms, colRooms, roomMap, rooms))
             {
             }
         }
@@ -1001,28 +994,28 @@ internal class StandardDungeonGenerator : DungeonGenerator
             GridTile cPtr = Game.Map.Grid[y][Game.CurWid - 1];
             cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallPermentSolidTile)));
         }
-        for (int i = 0; i < Rooms.Count; i++)
+        for (int i = 0; i < rooms.Count; i++)
         {
-            int pick1 = Game.RandomLessThan(Rooms.Count);
-            int pick2 = Game.RandomLessThan(Rooms.Count);
-            int y1 = Rooms[pick1].Y;
-            int x1 = Rooms[pick1].X;
-            Rooms[pick1] = Rooms[pick2].Clone();
-            Rooms[pick2] = new GridCoordinate(x1, y1);
+            int pick1 = Game.RandomLessThan(rooms.Count);
+            int pick2 = Game.RandomLessThan(rooms.Count);
+            int y1 = rooms[pick1].Y;
+            int x1 = rooms[pick1].X;
+            rooms[pick1] = rooms[pick2].Clone();
+            rooms[pick2] = new GridCoordinate(x1, y1);
         }
-        DoorN = 0;
-        y = Rooms[Rooms.Count - 1].Y;
-        x = Rooms[Rooms.Count - 1].X;
-        for (int i = 0; i < Rooms.Count; i++)
+        int doorN = 0;
+        y = rooms[rooms.Count - 1].Y;
+        x = rooms[rooms.Count - 1].X;
+        for (int i = 0; i < rooms.Count; i++)
         {
-            BuildTunnel(Rooms[i].Y, Rooms[i].X, y, x);
-            y = Rooms[i].Y;
-            x = Rooms[i].X;
+            BuildTunnel(rooms[i].Y, rooms[i].X, y, x, wall, tunn, doorN, door);
+            y = rooms[i].Y;
+            x = rooms[i].X;
         }
-        for (int i = 0; i < DoorN; i++)
+        for (int i = 0; i < doorN; i++)
         {
-            y = Door[i].Y;
-            x = Door[i].X;
+            y = door[i].Y;
+            x = door[i].X;
             TryDoor(y, x - 1);
             TryDoor(y, x + 1);
             TryDoor(y - 1, x);

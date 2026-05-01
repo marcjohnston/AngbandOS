@@ -3,10 +3,10 @@
 [Serializable]
 internal sealed class Symbol : IGetKey, IToJson, IGameSerialize
 {
-    private Game Game { get; }
+    //private Game Game { get; }
     public Symbol(Game game, SymbolGameConfiguration gameConfiguration) 
     {
-        Game = game;
+        //Game = game;
         Key = gameConfiguration.GetKey;
         Character = gameConfiguration.Character;
         QueryCharacter = gameConfiguration.QueryCharacter;

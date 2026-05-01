@@ -220,11 +220,11 @@ public partial class MainWindow : Window, IConsoleAndViewPort
             GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
             GameResults gameResults = gameServer.PlayExistingGame(this, persistentStorage, null, gameConfiguration, serializedSaveGameData);
         }
-        else if (persistentStorage.GameExists())
-        {
-            GameResults gameResults = gameServer.PlayLegacyExistingGame(this, persistentStorage, null);
-            //File.WriteAllText(replayFilename, gameResults.Replay); // TODO: This needs to move to the filepersistence driver
-        }
+        //else if (persistentStorage.GameExists())
+        //{
+        //    GameResults gameResults = gameServer.PlayLegacyExistingGame(this, persistentStorage, null);
+        //    //File.WriteAllText(replayFilename, gameResults.Replay); // TODO: This needs to move to the filepersistence driver
+        //}
         else if (File.Exists(replayFilename))
         {
             string replayData = File.ReadAllText(replayFilename);

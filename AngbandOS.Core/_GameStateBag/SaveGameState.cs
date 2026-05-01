@@ -132,11 +132,22 @@ internal class SaveGameState
             return new ListGameStateBag(gameStateBags.ToArray());
         }
 
-        // bool[]
-        if (value is bool[] boolArray)
+        // bool[][]
+        if (value is bool[][] arrayOfBools)
         {
             var gameStateBags = new List<GameStateBag>();
-            foreach (bool item in boolArray)
+            foreach (bool[] item in arrayOfBools)
+            {
+                gameStateBags.Add(CreateGameStateBag(item));
+            }
+            return new ListGameStateBag(gameStateBags.ToArray());
+        }
+
+        // bool[]
+        if (value is bool[] bools)
+        {
+            var gameStateBags = new List<GameStateBag>();
+            foreach (bool item in bools)
             {
                 gameStateBags.Add(CreateGameStateBag(item));
             }
@@ -144,10 +155,10 @@ internal class SaveGameState
         }
 
         // byte[][]
-        if (value is byte[][] arrayOfByteArray)
+        if (value is byte[][] arrayOfBytes)
         {
             var gameStateBags = new List<GameStateBag>();
-            foreach (byte[] item in arrayOfByteArray)
+            foreach (byte[] item in arrayOfBytes)
             {
                 gameStateBags.Add(CreateGameStateBag(item));
             }
@@ -155,16 +166,16 @@ internal class SaveGameState
         }
 
         // byte[]
-        if (value is byte[] byteArray)
+        if (value is byte[] bytes)
         {
-            return new ByteArrayGameStateBag(byteArray);
+            return new ByteArrayGameStateBag(bytes);
         }
 
         // string[][]
-        if (value is string[][] arrayOfStringArray)
+        if (value is string[][] arrayOfStrings)
         {
             var gameStateBags = new List<GameStateBag>();
-            foreach (string[] item in arrayOfStringArray)
+            foreach (string[] item in arrayOfStrings)
             {
                 gameStateBags.Add(CreateGameStateBag(item));
             }
@@ -172,10 +183,10 @@ internal class SaveGameState
         }
 
         // string[]
-        if (value is string[] arrayOfString)
+        if (value is string[] strings)
         {
             var gameStateBags = new List<GameStateBag>();
-            foreach (string item in arrayOfString)
+            foreach (string item in strings)
             {
                 gameStateBags.Add(CreateGameStateBag(item));
             }
@@ -183,10 +194,10 @@ internal class SaveGameState
         }
 
         // enum[]
-        if (value is ColorEnum[] arrayOfColorEnum)
+        if (value is ColorEnum[] colorEnums)
         {
             var gameStateBags = new List<GameStateBag>();
-            foreach (ColorEnum item in arrayOfColorEnum)
+            foreach (ColorEnum item in colorEnums)
             {
                 gameStateBags.Add(CreateGameStateBag(item));
             }

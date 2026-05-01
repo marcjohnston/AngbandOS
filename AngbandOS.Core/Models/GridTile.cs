@@ -33,7 +33,7 @@ internal class GridTile : IItemContainer, IGameSerialize
         Game = game;
         _trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty));
         _backgroundFeature = Game.SingletonRepository.Get<Tile>(nameof(NothingTile));
-        _featureType = Game.SingletonRepository.Get<Tile>(nameof(NothingTile));
+        _featureType = _backgroundFeature;
     }
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
@@ -50,12 +50,16 @@ internal class GridTile : IItemContainer, IGameSerialize
             (nameof(Items), saveGameState.CreateGameStateBag(Items)),
             (nameof(MonsterIndex), saveGameState.CreateGameStateBag(MonsterIndex)),
             (nameof(ScentAge), saveGameState.CreateGameStateBag(ScentAge)),
-            (nameof(ScentStrength), saveGameState.CreateGameStateBag(ScentStrength))
+            (nameof(ScentStrength), saveGameState.CreateGameStateBag(ScentStrength)),
+            (nameof(_backgroundFeature), saveGameState.CreateGameStateBag(_backgroundFeature)),
+            (nameof(_featureType), saveGameState.CreateGameStateBag(_featureType))
         );
     }
 
-    public GridTile(Game game, RestoreGameState restoreGameState) : this(game)
+    public GridTile(Game game, RestoreGameState restoreGameState)
     {
+        Game = game;
+        _trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty));
         EasyVisibility = restoreGameState.GetBool(nameof(EasyVisibility));
         InRoom = restoreGameState.GetBool(nameof(InRoom));
         InVault = restoreGameState.GetBool(nameof(InVault));
@@ -69,6 +73,8 @@ internal class GridTile : IItemContainer, IGameSerialize
         MonsterIndex = restoreGameState.GetInt(nameof(MonsterIndex));
         ScentAge = restoreGameState.GetInt(nameof(ScentAge));
         ScentStrength = restoreGameState.GetInt(nameof(ScentStrength));
+        _backgroundFeature = restoreGameState.GetReference<Tile>(nameof(_backgroundFeature));
+        _featureType = restoreGameState.GetReference<Tile>(nameof(_featureType));
     }
 
     #region State Data
