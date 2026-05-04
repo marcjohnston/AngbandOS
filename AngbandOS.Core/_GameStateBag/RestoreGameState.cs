@@ -15,9 +15,9 @@ namespace AngbandOS.Core;
 internal class RestoreGameState
 {
     private Game Game { get; }
-    private Dictionary<int, object> ObjectIdToReferenceDictionary { get; }
+    private Dictionary<int, (object Singleton, ObjectGameStateBag? ObjectGameStateBag)> ObjectIdToReferenceDictionary { get; }
     public GameStateBag GameStateBag { get; }
-    public RestoreGameState(Game game, Dictionary<int, object> objectIdToReferenceDictionary, GameStateBag gameStateBag)
+    public RestoreGameState(Game game, Dictionary<int, (object, ObjectGameStateBag?)> objectIdToReferenceDictionary, GameStateBag gameStateBag)
     {
         Game = game;
         ObjectIdToReferenceDictionary = objectIdToReferenceDictionary;
@@ -32,13 +32,43 @@ internal class RestoreGameState
     public RestoreGameState(Game game, GameStateBag gameStateBag)
     {
         Game = game;
-        ObjectIdToReferenceDictionary = new Dictionary<int, object>();
+        ObjectIdToReferenceDictionary = new Dictionary<int, (object, ObjectGameStateBag?)>();
         GameStateBag = gameStateBag;
     }
 
-    public void TrackObject(int objectId, IGetKey singleton)
+    public void TrackObject(int objectId, object singleton, ObjectGameStateBag? objectGameStateBag)
     {
-        ObjectIdToReferenceDictionary.Add(objectId, singleton);
+        // Check to see if we are updating the object game state bag.
+        if (ObjectIdToReferenceDictionary.ContainsKey(objectId))
+        {
+            (object ExistingSingleton, ObjectGameStateBag? ExistingObjectGameStateBag) = ObjectIdToReferenceDictionary[objectId];
+
+            #if DEBUG
+            // Check to ensure the singleton is the same.  If not, something is wrong.
+            if (ExistingSingleton != singleton)
+            {
+                throw new Exception($"Object ID already tracked with a different singleton.  Object ID: {objectId}");
+            }
+            #endif
+
+            // The singleton already exists.  We are only going to update the reference, if we have the object game state bag.  Otherwise, this will be the second or later reference for an object that was serialized early.
+            if (objectGameStateBag is not null)
+            {
+                #if DEBUG
+                // Check to make sure we are not overwriting an existing object state bag.  If so, something is wrong.
+                if (ObjectIdToReferenceDictionary[objectId].ObjectGameStateBag is not null)
+                {
+                    throw new Exception($"Object ID already tracked with an object game state bag.  Object ID: {objectId}");
+                }
+                #endif
+                // Update the reference with the object game state bag.
+                ObjectIdToReferenceDictionary[objectId] = (singleton, objectGameStateBag);
+            }
+            return;
+        }
+
+        // We are tracking the object for the first time.  We will add it to the dictionary.  It is possible that we are tracking a reference before we have the object game state bag, so we will allow the object game state bag to be null for now and update it later when we have it.
+        ObjectIdToReferenceDictionary.Add(objectId, (singleton, null));
     }
 
     public object GetObjectById(int objectId)
@@ -56,18 +86,51 @@ internal class RestoreGameState
         return GameStateBag.Verify(this, singleton);
     }
 
-    public RestoreGameState? Get(string key)
+    /// <summary>
+    /// Retrieve the game state bag for a given singleton. 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
+    /// <exception cref="Exception"></exception>
+    /// <remarks>
+    /// The singletons will have already been created and tracked during the load phase.  So no additional tracking will be needed.
+    /// </remarks>
+    public RestoreGameState Get(string key)
     {
-        if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
+        if (GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
         {
             throw new InvalidOperationException($"GameStateBag is not an {nameof(ObjectGameStateBag)}.");
         }
 
-        if (objectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        // Retrieve the game state bag for the singleton by key.  We are not tracking the object id's with the singleton, so we need to repeat the lookup again.
+        if (singletonRepositoryGameStateBag.Values.TryGetValue(key, out GameStateBag? singletonGameStateBag))
         {
-            return new RestoreGameState(Game, ObjectIdToReferenceDictionary, gameStateBag);
+            // Check to see if it is an object game state bag.  If so, it means the singleton was not serialized by a previous singleton, which should be most of the cases.
+            if (singletonGameStateBag is ObjectGameStateBag objectGameStateBag)
+            {
+                // The value is null.  We can return early with the null game state bag.  The object game state bag should also be in the dictionary, but we will not be using it.
+                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, objectGameStateBag);
+            }
+
+            // Check to see if it is a reference game state bag.  If so, then it was serialized by a previous singleton.
+            if (singletonGameStateBag is ReferenceGameStateBag referenceGameStateBag)
+            {
+                // We will need to retrieve the game state bag from the earlier dictionary.  The game state bag should have been tracked during the load phase, so it should be in the dictionary.
+                ObjectGameStateBag? originalObjectGameStateBag = ObjectIdToReferenceDictionary[referenceGameStateBag.ObjectId].ObjectGameStateBag;
+
+                // Ensure the object game state bag is there, otherwise something is wrong.
+                if (originalObjectGameStateBag is null)
+                {
+                    throw new Exception($"Original object game state bag not found for reference with object ID {referenceGameStateBag.ObjectId}.");
+                }
+                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, originalObjectGameStateBag);
+            }
+            throw new Exception("Expected an ObjectGameStateBag or ReferenceGameStateBag.");
         }
-        return null;
+
+        // The object doesn't exist.
+        throw new Exception("Key not found in GameStateBag.");
     }
 
     public TGameStateBag GetGameStateBag<TGameStateBag>(string key) where TGameStateBag : GameStateBag
@@ -153,27 +216,36 @@ internal class RestoreGameState
         }
         #endif
 
+        // Check to see if the singleton game state bag is a reference.  This will occur when the singleton was already serialized from a previous singleton.
         if (gameStateBag is ReferenceGameStateBag referenceGameStateBag)
         {
-            if (ObjectIdToReferenceDictionary.TryGetValue(referenceGameStateBag.ObjectId, out var reference))
+            int objectId = referenceGameStateBag.ObjectId;
+            if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out (object Singleton, ObjectGameStateBag? ObjectGameStateBag) reference))
             {
-                if (reference is not T typedReference)
+                if (!typeof(T).IsAssignableFrom(reference.Singleton.GetType()))
                 {
                     throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
                 }
+
+                // We need to track the object.  Since this is a reference game state bag, we do not have the object game state bag yet and will pass null.
+                T typedReference = (T)reference.Singleton;
+                TrackObject(objectId, typedReference, null);
                 return typedReference;
             }
             throw new Exception("Reference ID not found in ObjectIdToReferenceDictionary.");
         }
         else if (gameStateBag is ObjectGameStateBag objectGameStateBag)
         {
+            // This is an object game state bag.  The object might already exist.  If it does, we can return it but we might need to add the object game state bag to the reference tracking for the bind phase.
             int objectId = objectGameStateBag.ObjectId;
-            if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
+            if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out (object Singleton, ObjectGameStateBag? GameStateBag) reference))
             {
-                if (singleton is not T typedReference)
+                if (!typeof(T).IsAssignableFrom(reference.Singleton.GetType()))
                 {
                     throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
                 }
+                T typedReference = (T)reference.Singleton;
+                TrackObject(objectId, typedReference, objectGameStateBag);
                 return typedReference;
             }
 
@@ -192,7 +264,7 @@ internal class RestoreGameState
                 {
                     throw new Exception($"Unable to instantiate a new {objectGameStateBag.TypeName}.");
                 }
-                ObjectIdToReferenceDictionary.Add(objectId, t);
+                TrackObject(objectId, t, objectGameStateBag);
                 return t;
             }
             catch (Exception ex)

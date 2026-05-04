@@ -14,10 +14,11 @@ internal class ClassSelectionBirthStage : BirthStage
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(currentSelection), new IntValueGameStateBag(currentSelection))
+            (nameof(currentSelection), saveGameState.CreateGameStateBag(currentSelection))
         );
     }
     private ClassSelectionBirthStage(Game game) : base(game) { }
+
     public override BirthStage? Render()
     {
         DisplayPartialCharacter();
@@ -57,6 +58,14 @@ internal class ClassSelectionBirthStage : BirthStage
         return null;
     }
 
+    public override void Bind(RestoreGameState? restoreGameState)
+    {
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
+        {
+            currentSelection = restoreGameState.GetInt(nameof(currentSelection));
+        }
+    }
     /// <summary>
     /// Renders the details of a Character Class during the Birth selection process.
     /// </summary>

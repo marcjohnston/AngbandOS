@@ -13,10 +13,18 @@ internal class Realm2SelectionBirthStage : BirthStage
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(currentSelection), new IntValueGameStateBag(currentSelection))
+            (nameof(currentSelection), saveGameState.CreateGameStateBag(currentSelection))
         );
     }
     private Realm2SelectionBirthStage(Game game) : base(game) { }
+    public override void Bind(RestoreGameState? restoreGameState)
+    {
+        base.Bind(restoreGameState);
+        if (restoreGameState is not null)
+        {
+            currentSelection = restoreGameState.GetInt(nameof(currentSelection));
+        }
+    }
     public override BirthStage? Render()
     {
         DisplayPartialCharacter();

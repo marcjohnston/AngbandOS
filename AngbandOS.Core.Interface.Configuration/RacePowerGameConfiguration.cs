@@ -1,7 +1,4 @@
-﻿
-using System.Diagnostics;
-
-namespace AngbandOS.Core.Interface.Configuration;
+﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
 public class RacePowerGameConfiguration : CompositeSingletonGameConfiguration

@@ -25,7 +25,9 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             (nameof(Flavor), saveGameState.CreateGameStateBag(Flavor)),
             (nameof(Tried), saveGameState.CreateGameStateBag(Tried)),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
-            (nameof(Stompable), saveGameState.CreateGameStateBag(Stompable))
+            (nameof(Stompable), saveGameState.CreateGameStateBag(Stompable)),
+            (nameof(_bookIndex), saveGameState.CreateGameStateBag(_bookIndex)),
+            (nameof(_realm), saveGameState.CreateGameStateBag(_realm))
         );
     }
 
@@ -200,16 +202,20 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     private string _flavorUnknownDescriptionSyntax { get; set; }
     private string _alternateFlavorUnknownDescriptionSyntax { get; set; }
 
+    private int _bookIndex;
+
     /// <summary>
     /// Returns the index of the book as it pertains to the realm.
     /// </summary>
-    public int BookIndex { get; private set; } // TODO: Can this be done during binding?
+    public int BookIndex => _bookIndex; // TODO: Can this be done during binding?
+
+    private Realm? _realm = null;
 
     /// <summary>
     /// Returns the singleton realm that this book factory belongs to.  This is needed because realms define books--books do not define what realm they belong to.
     /// For this reason, the Realm the book belongs to is set at run-time.
     /// </summary>
-    public Realm Realm { get; private set; } // TODO: Can this be done during binding?
+    public Realm? Realm => _realm; // TODO: Can this be done during binding?
     #endregion
 
     #region Concrete Methods and Properties (Non-abstract and non-virtual) - API Object Functionality
@@ -340,8 +346,8 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     /// <param name="bookIndex"></param>
     public void SetBookIndex(Realm realm, int bookIndex) // TODO: Can this be done during binding?
     {
-        BookIndex = bookIndex;
-        Realm = realm;
+        _bookIndex = bookIndex;
+        _realm = realm;
     }
 
     /// <summary>
@@ -521,6 +527,8 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             Tried = restoreGameState.GetBool(nameof(Tried));
             Color = restoreGameState.GetEnum<ColorEnum>(nameof(Color));
             Stompable = restoreGameState.GetBools(nameof(Stompable));
+            _bookIndex = restoreGameState.GetInt(nameof(_bookIndex));
+            _realm = restoreGameState.GetReferenceOrDefault<Realm>(nameof(_realm));
         }
     }
 

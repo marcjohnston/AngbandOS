@@ -237,7 +237,7 @@ internal class SaveGameState
                 return;
 
             if (a is null || b is null)
-                throw new Exception($"Null mismatch at {path}");
+               throw new Exception($"Null mismatch at {path}");
 
             var typeA = a.GetType();
             var typeB = b.GetType();

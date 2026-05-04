@@ -11,7 +11,7 @@ internal class UseRacialPowerScript : Script, IScript
     {
         // Check for an overriding race/character class racial power first.
         string raceAndCharacterClassCompositeKey = RacePower.GetCompositeKey(Game.Race, Game.CharacterClass);
-        RacePower? raceAndCharacterClassRacialPower = Game.SingletonRepository.GetNullable<RacePower>(raceAndCharacterClassCompositeKey);
+        RacePower? raceAndCharacterClassRacialPower = Game.SingletonRepository.TryGetNullable<RacePower>(raceAndCharacterClassCompositeKey);
         if (raceAndCharacterClassRacialPower is not null)
         {
             raceAndCharacterClassRacialPower.Script.ExecuteScript();
@@ -20,7 +20,7 @@ internal class UseRacialPowerScript : Script, IScript
         {
             // Check for a race.
             string raceOnlyCompositeKey = RacePower.GetCompositeKey(Game.Race, null);
-            RacePower? raceOnlyRacialPower = Game.SingletonRepository.GetNullable<RacePower>(raceOnlyCompositeKey);
+            RacePower? raceOnlyRacialPower = Game.SingletonRepository.TryGetNullable<RacePower>(raceOnlyCompositeKey);
             if (raceOnlyRacialPower is not null)
             {
                 raceOnlyRacialPower.Script.ExecuteScript();

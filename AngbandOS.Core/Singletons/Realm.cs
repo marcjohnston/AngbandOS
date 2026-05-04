@@ -22,7 +22,12 @@ internal sealed class Realm : IGetKey, IToJson, IGameSerialize
     }
     #endregion
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(_firstSpellLevel), saveGameState.CreateGameStateBag(_firstSpellLevel))
+        );
+    }
 
     #region Api Methods
     private Game Game { get; }
@@ -49,6 +54,11 @@ internal sealed class Realm : IGetKey, IToJson, IGameSerialize
     public void Bind(RestoreGameState? restoreGameState)
     {
         SpellBooks = Game.SingletonRepository.Get<ItemFactory>(SpellBookNames);
+
+        if (restoreGameState is not null)
+        {
+            _firstSpellLevel = restoreGameState.GetNullableInt(nameof(_firstSpellLevel));
+        }
     }
 
     /// <summary>
@@ -77,7 +87,7 @@ internal sealed class Realm : IGetKey, IToJson, IGameSerialize
                 }
             }
         }
-        FirstSpellLevel = spellFirst;
+        _firstSpellLevel = spellFirst;
     }
     #endregion
 
@@ -89,10 +99,12 @@ internal sealed class Realm : IGetKey, IToJson, IGameSerialize
     #endregion
 
     #region State Data
+    private int? _firstSpellLevel = null;
+
     /// <summary>
     /// Returns the level of the first spell for this realm.  If there are no books or spells, null is returned.
     /// </summary>
-    public int? FirstSpellLevel { get; private set; }
+    public int? FirstSpellLevel => _firstSpellLevel;
     #endregion
 
     #region Light-weight Virtuals and Abstracts

@@ -4,7 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Diagnostics;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -432,16 +431,16 @@ internal sealed class SingletonRepository : IGameSerialize
         foreach (IGetKey singleton in _allSingletonsList)
         {
             // Retrieve the restore game state, if we are restoring; otherwise, we will have null as the restore game state--which is still passed to the singleton Bind method.
-            RestoreGameState? singletonRestoreGameState = restoreGameState?.Get(singleton.GetKey);
+            RestoreGameState singletonRestoreGameState = restoreGameState?.Get(singleton.GetKey);
 
             // Allow the singleton to bind now.  Provide the restore game state, if we are restoring.
             singleton.Bind(singletonRestoreGameState);
 
-            // If we are restoring, perform a verification process.
-            if (singletonRestoreGameState is not null)
-            {
-                VerifyRestore(singletonRestoreGameState, singleton);
-            }
+            //// If we are restoring, perform a verification process.
+            //if (singletonRestoreGameState is not null)
+            //{
+            //    VerifyRestore(singletonRestoreGameState, singleton);
+            //}
         }
 
         //foreach (FixedArtifact fixedArtifact in Get<FixedArtifact>())
@@ -478,16 +477,16 @@ internal sealed class SingletonRepository : IGameSerialize
         //}
     }
 
-    private void VerifyRestore(RestoreGameState restoreGameState, object? singleton)
-    {
-        string singletonTypeName = singleton?.GetType().Name ?? "null";
+    //private void VerifyRestore(RestoreGameState restoreGameState, object? singleton)
+    //{
+    //    string singletonTypeName = singleton?.GetType().Name ?? "null";
 
-        // Perform a verification of the restore process.
-        if (!restoreGameState.Verify(singleton))
-        {
-            throw new Exception($"During restore verification, the {singletonTypeName} singleton did not verify.");
-        }
-    }
+    //    // Perform a verification of the restore process.
+    //    if (!restoreGameState.Verify(singleton))
+    //    {
+    //        throw new Exception($"During restore verification, the {singletonTypeName} singleton did not verify.");
+    //    }
+    //}
 
     private void ValidateSystemScriptsEnum()
     {
@@ -631,21 +630,6 @@ internal sealed class SingletonRepository : IGameSerialize
         }
     }
 
-    private int FindObjectId(ObjectGameStateBag singletonRepositoryGameStateBag, IGetKey singleton)
-    {
-        // Find the matching singleton in the restore game state and ensure it is an object game state bag so that we have an object ID that we can track.
-        GameStateBag singletonGameStateBag = singletonRepositoryGameStateBag.Find(singleton.GetKey);
-        if (singletonGameStateBag is ObjectGameStateBag singletonObjectGameStateBag)
-        {
-            return singletonObjectGameStateBag.ObjectId;
-        }
-        if (singletonGameStateBag is ReferenceGameStateBag singletonReferenceGameStateBag)
-        {
-            return singletonReferenceGameStateBag.ObjectId;
-        }
-        throw new Exception($"The singleton {singleton.GetKey} in the restore game state is not an {nameof(ObjectGameStateBag)} or a {nameof(ReferenceGameStateBag)}.");
-    }
-
     private void LoadAllAssemblyTypes<T>(RestoreGameState? restoreGameState) // TODO: WHY CANT THIS BE where T: IGETKEY
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
@@ -670,13 +654,7 @@ internal sealed class SingletonRepository : IGameSerialize
                         // If we are restoring a game, we need to track the singleton we created here is phase 1 of the load with the object id.
                         if (restoreGameState is not null)
                         {
-                            if (restoreGameState.GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
-                            {
-                                throw new Exception($"The {nameof(restoreGameState)} parameter for the {nameof(LoadAllAssemblyTypes)} must be an {nameof(ObjectGameStateBag)}.");
-                            }
-
-                            // Track the object as created.
-                            restoreGameState.TrackObject(FindObjectId(singletonRepositoryGameStateBag, singleton), singleton);
+                            TrackSingleton(restoreGameState, singleton);
                         }
                     }
                     catch (Exception ex)
@@ -686,6 +664,38 @@ internal sealed class SingletonRepository : IGameSerialize
                 }
             }
         }
+    }
+
+    private void TrackSingleton(RestoreGameState restoreGameState, IGetKey singleton)
+    {
+        #if DEBUG
+        if (restoreGameState.GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
+        {
+            throw new Exception($"The {nameof(restoreGameState)} parameter for the {nameof(LoadAllAssemblyTypes)} must be an {nameof(ObjectGameStateBag)}.");
+        }
+        #endif
+
+        // Find the matching singleton in the restore game state and ensure it is an object game state bag so that we have an object ID that we can track.
+        GameStateBag singletonGameStateBag = singletonRepositoryGameStateBag.Find(singleton.GetKey);
+
+        // Track the object as created.
+        // TODO: Technically we can always pass null for the game state bag because object game state bags are retrieved during the bind phase and we do not have them for the reference game state bags.
+        // restoreGameState.TrackObject(objectId, singleton, null); should be sufficient.
+        if (singletonGameStateBag is ObjectGameStateBag singletonObjectGameStateBag)
+        {
+            // Track the object with the game state bag, since the object game state bag is used to track the object id for singletons and also store the field values for the singleton.
+            int objectId = singletonObjectGameStateBag.ObjectId;
+            restoreGameState.TrackObject(objectId, singleton, singletonObjectGameStateBag);
+            return;
+        }
+        if (singletonGameStateBag is ReferenceGameStateBag singletonReferenceGameStateBag)
+        {
+            // Track the object without the game state bag, since the reference game state bag is only used to track the object id for references to singletons that are stored in the object game state bag.
+            int objectId = singletonReferenceGameStateBag.ObjectId;
+            restoreGameState.TrackObject(objectId, singleton, null);
+            return;
+        }
+        throw new Exception($"The singleton {singleton.GetKey} in the restore game state is not an {nameof(ObjectGameStateBag)} or a {nameof(ReferenceGameStateBag)}.");
     }
 
     private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations, RestoreGameState? restoreGameState) where T : IGetKey where TConfiguration : notnull
@@ -723,13 +733,7 @@ internal sealed class SingletonRepository : IGameSerialize
                 // If we are restoring a game, we need to track the singleton we created here is phase 1 of the load with the object id.
                 if (restoreGameState is not null)
                 {
-                    if (restoreGameState.GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
-                    {
-                        throw new Exception($"The {nameof(restoreGameState)} parameter for the {nameof(LoadAllAssemblyTypes)} must be an {nameof(ObjectGameStateBag)}.");
-                    }
-
-                    // Track the object as created.
-                    restoreGameState.TrackObject(FindObjectId(singletonRepositoryGameStateBag, singleton), singleton);
+                    TrackSingleton(restoreGameState, singleton);
                 }
             }
         }

@@ -21,7 +21,7 @@ internal abstract class BirthStage : IGetKey, IGameSerialize
 
     public virtual string Key => GetType().Name;
 
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public virtual void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
     /// Renders the birth stage and returns the next birth stage to render or null when either the birth stage is complete or the Game.Shutdown is true.

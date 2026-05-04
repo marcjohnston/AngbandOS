@@ -19,21 +19,27 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
         LearnedDetails = gameConfiguration.LearnedDetails;
     }
 
-    public ItemFactory SpellBookItemFactory { get; private set; }
+    private ItemFactory? _spellBookItemFactory = null;
+    public ItemFactory? SpellBookItemFactory => _spellBookItemFactory;
 
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(Forgotten), saveGameState.CreateGameStateBag(Forgotten)),
+            (nameof(_spellIndex), saveGameState.CreateGameStateBag(_spellIndex)),
             (nameof(Learned), saveGameState.CreateGameStateBag(Learned)),
+            (nameof(_spellBookItemFactory), saveGameState.CreateGameStateBag(_spellBookItemFactory)),
+            (nameof(_characterClassSpell), saveGameState.CreateGameStateBag(_characterClassSpell)),
             (nameof(Tried), saveGameState.CreateGameStateBag(Tried))
         );
     }
 
+    private int _spellIndex = 0;
+
     /// <summary>
     /// Returns the index of the spell in the realm.  This index starts at 0 and increments by one for each spell.
     /// </summary>
-    public int SpellIndex { get; private set; }
+    public int SpellIndex => _spellIndex;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.
@@ -55,7 +61,18 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     public string GetKey => Key;
 
 
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind(RestoreGameState? restoreGameState)
+    {
+        if (restoreGameState is not null)
+        {
+            Forgotten = restoreGameState.GetBool(nameof(Forgotten));
+            _spellIndex = restoreGameState.GetInt(nameof(_spellIndex));
+            Learned = restoreGameState.GetBool(nameof(Learned));
+            _spellBookItemFactory = restoreGameState.GetReferenceOrDefault<ItemFactory>(nameof(_spellBookItemFactory));
+            _characterClassSpell = restoreGameState.GetReferenceOrDefault<CharacterClassSpell>(nameof(_characterClassSpell));
+            Tried = restoreGameState.GetBool(nameof(Tried));
+        }
+    }
 
     #region State Data
     /// <summary>
@@ -81,10 +98,11 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     /// </summary>
     public string Name { get; }
 
+    private CharacterClassSpell? _characterClassSpell = null;
     /// <remarks>
     /// This is initialized after the player selects a character class.
     /// </remarks>
-    public CharacterClassSpell CharacterClassSpell { get; private set; }
+    public CharacterClassSpell? CharacterClassSpell => _characterClassSpell;
   
     /// <summary>
     /// Returns the spell scripts that are associated with either the success or failure of casting a spell.  This is done by performing a lookup through the spell script
@@ -281,9 +299,9 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
 
     public void Initialize(ItemFactory itemFactory, int spellIndex) // TODO: This can be a game event for "CharacterClass_Changed"
     {
-        CharacterClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(Game.CharacterClass, this));
-        SpellIndex = spellIndex;
-        SpellBookItemFactory = itemFactory;
+        _characterClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(Game.CharacterClass, this));
+        _spellIndex = spellIndex;
+        _spellBookItemFactory = itemFactory;
         //CastSpellScripts = GetMappedSpellScripts(true);
         //FailedCastSpellScripts = GetMappedSpellScripts(false);
     }

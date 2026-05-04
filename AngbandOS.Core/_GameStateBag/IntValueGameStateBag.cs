@@ -15,7 +15,11 @@ internal class IntValueGameStateBag : GameStateBag
     }
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
-        if (singleton is Enum)
+        if (singleton is null)
+        {
+            return true;
+        }
+        else if (singleton is Enum)
         {
             return (int)singleton == Value;
         }

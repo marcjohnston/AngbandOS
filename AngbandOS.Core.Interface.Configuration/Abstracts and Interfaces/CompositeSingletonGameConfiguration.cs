@@ -1,5 +1,4 @@
-﻿
-namespace AngbandOS.Core.Interface.Configuration;
+﻿namespace AngbandOS.Core.Interface.Configuration;
 
 public abstract class CompositeSingletonGameConfiguration : IGetKeyGameConfiguration
 {
