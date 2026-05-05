@@ -9,42 +9,6 @@ using System.Text;
 
 namespace AngbandOS.Core;
 
-internal class RestorePack
-{
-    private int CurrentBitIndex = 0;
-    private int CurrentIndex = 0;
-    private byte[] Data;
-    public RestorePack(byte[] data)
-    {
-        Data = data;
-    }
-    public bool UnpackBoolFromBit()
-    {
-        bool value = ((Data[CurrentIndex] >> CurrentBitIndex) & 1) == 1;
-        CurrentBitIndex++;
-        if (CurrentBitIndex > 7)
-        {
-            CurrentIndex++;
-            CurrentBitIndex = 0;
-        }
-        return value;
-    }
-
-    public bool UnpackBool()
-    {
-        bool value = Data[CurrentIndex] == 1;
-        CurrentIndex += 1;
-        return value;
-        
-    }
-    public int UnpackInt()
-    {
-        int value = BitConverter.ToInt32(Data, CurrentIndex);
-        CurrentIndex += 4;
-        return value;
-    }
-}
-
 /// <summary>
 /// Represents the object for restoring game state values.  It keeps a reference to the dictionary used to track object creation. 
 /// </summary>
