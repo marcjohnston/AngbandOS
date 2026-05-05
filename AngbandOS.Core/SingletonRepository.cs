@@ -679,20 +679,18 @@ internal sealed class SingletonRepository : IGameSerialize
         GameStateBag singletonGameStateBag = singletonRepositoryGameStateBag.Find(singleton.GetKey);
 
         // Track the object as created.
-        // TODO: Technically we can always pass null for the game state bag because object game state bags are retrieved during the bind phase and we do not have them for the reference game state bags.
-        // restoreGameState.TrackObject(objectId, singleton, null); should be sufficient.
         if (singletonGameStateBag is ObjectGameStateBag singletonObjectGameStateBag)
         {
             // Track the object with the game state bag, since the object game state bag is used to track the object id for singletons and also store the field values for the singleton.
             int objectId = singletonObjectGameStateBag.ObjectId;
-            restoreGameState.TrackObject(objectId, singleton, singletonObjectGameStateBag);
+            restoreGameState.TrackObject(objectId, singleton);
             return;
         }
         if (singletonGameStateBag is ReferenceGameStateBag singletonReferenceGameStateBag)
         {
             // Track the object without the game state bag, since the reference game state bag is only used to track the object id for references to singletons that are stored in the object game state bag.
             int objectId = singletonReferenceGameStateBag.ObjectId;
-            restoreGameState.TrackObject(objectId, singleton, null);
+            restoreGameState.TrackObject(objectId, singleton);
             return;
         }
         throw new Exception($"The singleton {singleton.GetKey} in the restore game state is not an {nameof(ObjectGameStateBag)} or a {nameof(ReferenceGameStateBag)}.");
