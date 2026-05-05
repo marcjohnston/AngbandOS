@@ -37,6 +37,40 @@ internal class GridTile : IItemContainer, IGameSerialize
     }
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
+        if (saveGameState.PackAsBytes)
+        {
+            byte[] packedBools;
+            if (saveGameState.PackBoolsAsBits)
+            {
+                packedBools = saveGameState.Pack(EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag);
+            }
+            else
+            {
+                packedBools = saveGameState.Pack(
+                    saveGameState.Pack(EasyVisibility),
+                    saveGameState.Pack(InRoom),
+                    saveGameState.Pack(InVault),
+                    saveGameState.Pack(IsVisible),
+                    saveGameState.Pack(PlayerLit),
+                    saveGameState.Pack(PlayerMemorized),
+                    saveGameState.Pack(SelfLit),
+                    saveGameState.Pack(TempFlag)
+                );
+            }
+            byte[] packed = saveGameState.Pack(
+                packedBools,
+                saveGameState.Pack(_trapsDetected),
+                saveGameState.Pack(MonsterIndex),
+                saveGameState.Pack(ScentAge),
+                saveGameState.Pack(ScentStrength)
+            );
+            return new DictionaryGameStateBag(
+                (nameof(saveGameState.PackAsBytes), saveGameState.CreateGameStateBag(packed)),
+                (nameof(Items), saveGameState.CreateGameStateBag(Items)),
+                (nameof(_backgroundFeature), saveGameState.CreateGameStateBag(_backgroundFeature)),
+                (nameof(_featureType), saveGameState.CreateGameStateBag(_featureType))
+            );
+        }
         return new DictionaryGameStateBag(
             (nameof(EasyVisibility), saveGameState.CreateGameStateBag(EasyVisibility)),
             (nameof(InRoom), saveGameState.CreateGameStateBag(InRoom)),
@@ -60,19 +94,52 @@ internal class GridTile : IItemContainer, IGameSerialize
     {
         Game = game;
         _trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty));
-        EasyVisibility = restoreGameState.GetBool(nameof(EasyVisibility));
-        InRoom = restoreGameState.GetBool(nameof(InRoom));
-        InVault = restoreGameState.GetBool(nameof(InVault));
-        IsVisible = restoreGameState.GetBool(nameof(IsVisible));
-        PlayerLit = restoreGameState.GetBool(nameof(PlayerLit));
-        PlayerMemorized = restoreGameState.GetBool(nameof(PlayerMemorized));
-        SelfLit = restoreGameState.GetBool(nameof(SelfLit));
-        TempFlag = restoreGameState.GetBool(nameof(TempFlag));
-        _trapsDetected = restoreGameState.GetBool(nameof(_trapsDetected));
+        if (restoreGameState.PackAsBytes)
+        {
+            RestorePack restorePack = restoreGameState.Unpack(nameof(restoreGameState.PackAsBytes));
+            if (restoreGameState.PackBoolsAsBits)
+            {
+                EasyVisibility = restorePack.UnpackBoolFromBit();
+                InRoom = restorePack.UnpackBoolFromBit();
+                InVault = restorePack.UnpackBoolFromBit();
+                IsVisible = restorePack.UnpackBoolFromBit();
+                PlayerLit = restorePack.UnpackBoolFromBit();
+                PlayerMemorized = restorePack.UnpackBoolFromBit();
+                SelfLit = restorePack.UnpackBoolFromBit();
+                TempFlag = restorePack.UnpackBoolFromBit();
+            }
+            else
+            {
+                EasyVisibility = restorePack.UnpackBool();
+                InRoom = restorePack.UnpackBool();
+                InVault = restorePack.UnpackBool();
+                IsVisible = restorePack.UnpackBool();
+                PlayerLit = restorePack.UnpackBool();
+                PlayerMemorized = restorePack.UnpackBool();
+                SelfLit = restorePack.UnpackBool();
+                TempFlag = restorePack.UnpackBool();
+            }
+            _trapsDetected = restorePack.UnpackBool();
+            MonsterIndex = restorePack.UnpackInt();
+            ScentAge = restorePack.UnpackInt();
+            ScentStrength = restorePack.UnpackInt();
+        }
+        else
+        {
+            EasyVisibility = restoreGameState.GetBool(nameof(EasyVisibility));
+            InRoom = restoreGameState.GetBool(nameof(InRoom));
+            InVault = restoreGameState.GetBool(nameof(InVault));
+            IsVisible = restoreGameState.GetBool(nameof(IsVisible));
+            PlayerLit = restoreGameState.GetBool(nameof(PlayerLit));
+            PlayerMemorized = restoreGameState.GetBool(nameof(PlayerMemorized));
+            SelfLit = restoreGameState.GetBool(nameof(SelfLit));
+            TempFlag = restoreGameState.GetBool(nameof(TempFlag));
+            _trapsDetected = restoreGameState.GetBool(nameof(_trapsDetected));
+            MonsterIndex = restoreGameState.GetInt(nameof(MonsterIndex));
+            ScentAge = restoreGameState.GetInt(nameof(ScentAge));
+            ScentStrength = restoreGameState.GetInt(nameof(ScentStrength));
+        }
         Items = restoreGameState.GetReferences<Item>(nameof(Items)).ToList();
-        MonsterIndex = restoreGameState.GetInt(nameof(MonsterIndex));
-        ScentAge = restoreGameState.GetInt(nameof(ScentAge));
-        ScentStrength = restoreGameState.GetInt(nameof(ScentStrength));
         _backgroundFeature = restoreGameState.GetReference<Tile>(nameof(_backgroundFeature));
         _featureType = restoreGameState.GetReference<Tile>(nameof(_featureType));
     }

@@ -15,6 +15,83 @@ internal class SaveGameState
 {
     private Dictionary<object, int> ObjectToIdDictionary = new Dictionary<object, int>();
 
+    #region Packing Methods
+    public bool PackAsBytes => true;
+    public bool PackBoolsAsBits => true;
+    public byte[] Pack(bool a, params bool[] b)
+    {
+        int totalBits = 1 + b.Length;
+        byte[] result = new byte[(totalBits + 7) / 8];
+
+        if (a)
+        {
+            result[0] |= 1;
+        }
+
+        for (int i = 0; i < b.Length; i++)
+        {
+            if (b[i])
+            {
+                int bitIndex = i + 1; // because 'a' is bit 0
+                result[bitIndex / 8] |= (byte)(1 << (bitIndex % 8));
+            }
+        }
+
+        return result;
+    }
+
+    public byte[] Pack(byte a, params byte[][] bytes)
+    {
+        List<byte> result = new List<byte>();
+        result.Add(a);
+        foreach (var byteArray in bytes)
+        {
+            result.AddRange(byteArray);
+        }
+        return result.ToArray();
+    }
+
+    public byte[] Pack(params byte[][] bytes)
+    {
+        List<byte> result = new List<byte>();
+        foreach (var byteArray in bytes)
+        {
+            result.AddRange(byteArray);
+        }
+        return result.ToArray();
+    }
+    public byte[] Pack(bool value)
+    {
+        return new byte[] { value ? (byte)1 : (byte)0 };
+    }
+    public byte[] Pack(byte value)
+    {
+        return new byte[] { value };
+    }
+    public byte[] Pack(char value)
+    {
+        return BitConverter.GetBytes(value);
+    }
+    public byte[] Pack(decimal value)
+    {
+        int[] bits = decimal.GetBits(value);
+        List<byte> bytes = new List<byte>();
+        foreach (int bit in bits)
+        {
+            bytes.AddRange(BitConverter.GetBytes(bit));
+        }
+        return bytes.ToArray();
+    }
+    public byte[] Pack(int value)
+    {
+        return BitConverter.GetBytes(value);
+    }
+    public byte[] Pack(string value)
+    {
+        return Pack(Pack(value.Length), System.Text.Encoding.UTF8.GetBytes(value));
+    }
+    #endregion
+
     public GameStateBag CreateGameStateBag(object? value)
     {
         //Debug.Print($"CreateGameStateBag => {value?.GetType().Name}");
