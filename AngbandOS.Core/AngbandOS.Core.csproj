@@ -20,6 +20,7 @@
     <Compile Remove="Widgets\TextAreaWidgets\**" />
     <Compile Remove="_AimWandScripts\**" />
     <Compile Remove="_BoolPosFunctions\**" />
+    <Compile Remove="_DungeonGenerators\**" />
     <Compile Remove="_ReadScrollOrUseStaffScripts\**" />
     <Compile Remove="_RenderMessageScripts\**" />
     <Compile Remove="_TimerScripts\**" />
@@ -31,6 +32,7 @@
     <EmbeddedResource Remove="Widgets\TextAreaWidgets\**" />
     <EmbeddedResource Remove="_AimWandScripts\**" />
     <EmbeddedResource Remove="_BoolPosFunctions\**" />
+    <EmbeddedResource Remove="_DungeonGenerators\**" />
     <EmbeddedResource Remove="_ReadScrollOrUseStaffScripts\**" />
     <EmbeddedResource Remove="_RenderMessageScripts\**" />
     <EmbeddedResource Remove="_TimerScripts\**" />
@@ -42,6 +44,7 @@
     <None Remove="Widgets\TextAreaWidgets\**" />
     <None Remove="_AimWandScripts\**" />
     <None Remove="_BoolPosFunctions\**" />
+    <None Remove="_DungeonGenerators\**" />
     <None Remove="_ReadScrollOrUseStaffScripts\**" />
     <None Remove="_RenderMessageScripts\**" />
     <None Remove="_TimerScripts\**" />
@@ -58,10 +61,6 @@
     <ProjectReference Include="..\AngbandOS.Core.StringLibrary\AngbandOS.Core.StringLibrary.csproj" />
     <ProjectReference Include="..\AngbandOS.GamePacks.Cthangband\AngbandOS.GamePacks.Cthangband.csproj" />
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="_DungeonGenerators\" />
   </ItemGroup>
 
 </Project>
