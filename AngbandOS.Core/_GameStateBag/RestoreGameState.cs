@@ -210,10 +210,12 @@ internal class RestoreGameState
             int objectId = referenceGameStateBag.ObjectId;
             if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
             {
+                #if DEBUG
                 if (!typeof(T).IsAssignableFrom(singleton.GetType()))
                 {
                     throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
                 }
+                #endif
 
                 // We need to track the object.  Since this is a reference game state bag, we do not have the object game state bag yet and will pass null.
                 T typedReference = (T)singleton;
@@ -227,11 +229,14 @@ internal class RestoreGameState
             int objectId = objectGameStateBag.ObjectId;
             if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
             {
+                #if DEBUG
                 // The object already exists, even though we now have the object game state bag.  We will need to track this object game state bag for the bind phase.
                 if (!typeof(T).IsAssignableFrom(singleton.GetType()))
                 {
                     throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
                 }
+                #endif
+
                 T typedReference = (T)singleton;
                 TrackGameStateBag(objectId, objectGameStateBag);
                 return typedReference;
@@ -265,10 +270,13 @@ internal class RestoreGameState
 
     public T GetReference<T>(string key)
     {
+        #if DEBUG
         if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
         {
             throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
         }
+        #endif
+
         if (objectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
         {
             return GetReference<T>(gameStateBag);
