@@ -17,23 +17,35 @@ internal class RestoreGameState
     private Game Game { get; }
     private Dictionary<int, (object Singleton, ObjectGameStateBag? ObjectGameStateBag)> ObjectIdToReferenceDictionary { get; }
     public GameStateBag GameStateBag { get; }
-    public RestoreGameState(Game game, Dictionary<int, (object, ObjectGameStateBag?)> objectIdToReferenceDictionary, GameStateBag gameStateBag)
+
+    /// <summary>
+    /// Creates a clone of the RestoreGameState with a new game state bag.
+    /// </summary>
+    /// <param name="game"></param>
+    /// <param name="objectIdToReferenceDictionary"></param>
+    /// <param name="gameStateBag"></param>
+    private RestoreGameState(Game game, Dictionary<int, (object, ObjectGameStateBag?)> objectIdToReferenceDictionary, GameStateBag gameStateBag)
     {
         Game = game;
         ObjectIdToReferenceDictionary = objectIdToReferenceDictionary;
         GameStateBag = gameStateBag;
     }
 
-    public bool ContainsKey(int key)
-    {
-        return ObjectIdToReferenceDictionary.ContainsKey(key);
-    }
-
+    /// <summary>
+    /// Creates a new instance of the RestoreGameState class.
+    /// </summary>
+    /// <param name="game"></param>
+    /// <param name="gameStateBag"></param>
     public RestoreGameState(Game game, GameStateBag gameStateBag)
     {
         Game = game;
         ObjectIdToReferenceDictionary = new Dictionary<int, (object, ObjectGameStateBag?)>();
         GameStateBag = gameStateBag;
+    }
+
+    public bool ContainsKey(int key)
+    {
+        return ObjectIdToReferenceDictionary.ContainsKey(key);
     }
 
     public void TrackObject(int objectId, object singleton, ObjectGameStateBag? objectGameStateBag)
