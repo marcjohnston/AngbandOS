@@ -83,7 +83,11 @@ internal class RestoreGameState
 
     public bool Verify(object? singleton)
     {
+#if DEBUG
         return GameStateBag.Verify(this, singleton);
+#else
+        return true;
+#endif
     }
 
     /// <summary>

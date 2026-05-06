@@ -219,6 +219,10 @@ public partial class MainWindow : Window, IConsoleAndViewPort
             string serializedSaveGameData = File.ReadAllText(jsonSaveFilename);
             GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
             GameResults gameResults = gameServer.PlayExistingGame(this, persistentStorage, null, gameConfiguration, serializedSaveGameData);
+            if (gameResults.SerializedGameData?.Length > 0)
+            {
+                File.WriteAllText(jsonSaveFilename, gameResults.SerializedGameData);// TODO: This needs to move to the filepersistence driver
+            }
         }
         //else if (persistentStorage.GameExists())
         //{

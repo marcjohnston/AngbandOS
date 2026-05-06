@@ -94,7 +94,6 @@ internal class SaveGameState
 
     public GameStateBag CreateGameStateBag(object? value)
     {
-        //Debug.Print($"CreateGameStateBag => {value?.GetType().Name}");
         if (value is null)
         {
             return new NullValueGameStateBag();
