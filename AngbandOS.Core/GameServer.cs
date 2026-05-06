@@ -297,6 +297,7 @@ public class GameServer
         }
 
         bool gameIsOver = false;
+        string? serializedGameData = null;
         try
         {
             // Retrieve the game from persistent storage.
@@ -315,6 +316,11 @@ public class GameServer
             Game legacyGame = Game.LoadLegacyGame(persistentStorage);
             SaveGameState.DeepComparer.DeepEquals(Game, legacyGame);
             Game.Play(console, persistentStorage, replayPersistentStorage);
+
+            SaveGameState saveGameState = new SaveGameState();
+            GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
+            serializedGameData = saveGameStateBag.Serialize();
+
             gameIsOver = true;
         }
         catch (Exception ex)
@@ -323,6 +329,6 @@ public class GameServer
         }
 
         // Serialize the GameReplay.
-        return new GameResults(gameIsOver);
+        return new GameResults(gameIsOver, serializedGameData);
     }
 }
