@@ -8,37 +8,54 @@ namespace AngbandOS.Core;
     
 internal class DictionaryGameStateBag : GameStateBag
 {
-    public Dictionary<string, GameStateBag> Values { get; }
+    public Dictionary<string, GameStateBag> Values { get; } = new Dictionary<string, GameStateBag>();
+
+    /// <summary>
+    /// Creates a new dictionary game state bag with itemized properties to be serialized and additional base properties.  This constructor is typically used for derived models.
+    /// </summary>
+    /// <param name="gameStateBag"></param>
+    /// <param name="values"></param>
+    /// <exception cref="Exception"></exception>
     public DictionaryGameStateBag(GameStateBag? gameStateBag, params (string Key, GameStateBag GameState)[] values)
     {
-        Values = new Dictionary<string, GameStateBag>();
         if (gameStateBag is DictionaryGameStateBag dictionaryGameStateBag)
         {
-            foreach ((string Key, GameStateBag GameState) in dictionaryGameStateBag.Values)
-            {
-                Values.Add(Key, GameState);
-            }
+            LoadValues(dictionaryGameStateBag.Values.Select(_keyValuePair => (_keyValuePair.Key, _keyValuePair.Value)).ToArray());
         }
         else if (gameStateBag is not null)
         {
             throw new Exception("Invalid game state bag provided to the constructor of a DictionaryGameStateBag.  The game state bag must be null or a DictionaryGameStateBag.");
         }
-        foreach ((string Key, GameStateBag GameState) value in values)
+        LoadValues(values);
+    }
+
+    private void LoadValues((string Key, GameStateBag GameState)[] values)
+    {
+        foreach ((string Key, GameStateBag GameState) in values)
         {
-            Values.Add(value.Key, value.GameState);
+            Values.Add(Key, GameState);
         }
     }
+
+    /// <summary>
+    /// Creates a new dictionary game state bag with itemized properties to be serialized with no base properties.  This constructor is typically used for non-derived models and the singletons.
+    /// </summary>
+    /// <param name="values"></param>
     public DictionaryGameStateBag(params (string Key, GameStateBag GameState)[] values)
     {
-        Values = values.ToDictionary(_value => _value.Key, _value => _value.GameState);
+        LoadValues(values);
     }
+
+    /// <summary>
+    /// Creates a new dictionary game state bag with enumerated properties.  This constructor is typically used for the singleton repository object.
+    /// </summary>
+    /// <param name="value"></param>
     public DictionaryGameStateBag(Dictionary<string, GameStateBag> value)
     {
-        Values = value;
+        LoadValues(value.Select(_keyValuePair => (_keyValuePair.Key, _keyValuePair.Value)).ToArray());
     }
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
         return true;
-        throw new NotImplementedException();
     }
 }
