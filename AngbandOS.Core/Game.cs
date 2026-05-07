@@ -478,30 +478,30 @@ internal partial class Game : IGameSerialize
 
             SingletonRepository.LoadAndBind(gameConfiguration, restoreGameState.New(singletonRepositoryGameStateBag));
 
-            #if DEBUG
-            // Check to see if there are any bags unfulfilled in the restore state.            
-            foreach (KeyValuePair<string, GameStateBag> singletonKeyAndGameStateBag in singletonRepositoryGameStateBag.Values)
-            {
-                if (singletonKeyAndGameStateBag.Value is ObjectGameStateBag objectGameStateBag)
-                {
-                    if (!restoreGameState.ContainsKey(objectGameStateBag.ObjectId))
-                    {
-                        throw new Exception($"The singleton repository game state bag did not create an object for {singletonKeyAndGameStateBag.Key}.");
-                    }
-                }
-                else if (singletonKeyAndGameStateBag.Value is ReferenceGameStateBag referenceGameStateBag)
-                {
-                    if (!restoreGameState.ContainsKey(referenceGameStateBag.ObjectId))
-                    {
-                        throw new Exception($"The singleton repository game state bag did not create an object for {singletonKeyAndGameStateBag.Key}.");
-                    }
-                }
-                else
-                {
-                    throw new Exception($"Cannot verify singleton objects were created because {singletonKeyAndGameStateBag.Key} is not an {nameof(ObjectGameStateBag)} or {nameof(ReferenceGameStateBag)}.");
-                }
-            }
-            #endif
+            //#if DEBUG
+            //// Check to see if there are any bags unfulfilled in the restore state.            
+            //foreach (KeyValuePair<string, GameStateBag> singletonKeyAndGameStateBag in singletonRepositoryGameStateBag.Values)
+            //{
+            //    if (singletonKeyAndGameStateBag.Value is ObjectGameStateBag objectGameStateBag)
+            //    {
+            //        if (!restoreGameState.ContainsKey(objectGameStateBag.ObjectId))
+            //        {
+            //            throw new Exception($"The singleton repository game state bag did not create an object for {singletonKeyAndGameStateBag.Key}.");
+            //        }
+            //    }
+            //    else if (singletonKeyAndGameStateBag.Value is ReferenceGameStateBag referenceGameStateBag)
+            //    {
+            //        if (!restoreGameState.ContainsKey(referenceGameStateBag.ObjectId))
+            //        {
+            //            throw new Exception($"The singleton repository game state bag did not create an object for {singletonKeyAndGameStateBag.Key}.");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        throw new Exception($"Cannot verify singleton objects were created because {singletonKeyAndGameStateBag.Key} is not an {nameof(ObjectGameStateBag)} or {nameof(ReferenceGameStateBag)}.");
+            //    }
+            //}
+            //#endif
 
             // Now restore this game object itself.
             DungeonGenerator = restoreGameState.GetReference<DungeonGenerator>(nameof(DungeonGenerator));

@@ -12,17 +12,17 @@ internal class ObjectGameStateBag : GameStateBag
 {
     public int ObjectId { get; }
     public string TypeName { get; }
-    public Dictionary<string, GameStateBag> Values { get; }
+    private Dictionary<string, GameStateBag>? propertyNameAndGameStateBagDictionary { get; }
 
     public ObjectGameStateBag(int objectId, string typeName, Dictionary<string, GameStateBag>? value)
     {
         ObjectId = objectId;
         TypeName = typeName;
-        Values = value ?? new Dictionary<string, GameStateBag>();
+        propertyNameAndGameStateBagDictionary = value;
     }
     public GameStateBag Find(string key)
     {
-        if (Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        if (propertyNameAndGameStateBagDictionary is not null && propertyNameAndGameStateBagDictionary.TryGetValue(key, out GameStateBag? gameStateBag))
         {
             return gameStateBag;
         }
@@ -69,6 +69,18 @@ internal class ObjectGameStateBag : GameStateBag
         };
     }
 
+    public IReadOnlyDictionary<string, GameStateBag>? Values => propertyNameAndGameStateBagDictionary;
+
+    public bool TryGetGameStateBag(string key, out GameStateBag? gameStateBag)
+    {
+        if (propertyNameAndGameStateBagDictionary is null)
+        {
+            gameStateBag = null;
+            return false;
+        }
+        return propertyNameAndGameStateBagDictionary.TryGetValue(key, out gameStateBag);
+    }
+
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
         if (singleton is null)
@@ -76,20 +88,23 @@ internal class ObjectGameStateBag : GameStateBag
             throw new Exception($"During restore verification, a null singleton cannot verify as an object.");
         }
 
-        foreach ((string PropertyName, GameStateBag ExpectedValue) in Values)
+        if (propertyNameAndGameStateBagDictionary is not null)
         {
-            // Retrieve the field info from the singleton.
-            MemberInfo? singletonMemberInfo = GetMemberInfo(singleton.GetType(), PropertyName);
-            if (singletonMemberInfo is null)
+            foreach ((string PropertyName, GameStateBag ExpectedValue) in propertyNameAndGameStateBagDictionary)
             {
-                throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton could not be found.");
-            }
+                // Retrieve the field info from the singleton.
+                MemberInfo? singletonMemberInfo = GetMemberInfo(singleton.GetType(), PropertyName);
+                if (singletonMemberInfo is null)
+                {
+                    throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton could not be found.");
+                }
 
-            // Retrieve the actual value from the singleton.
-            object? singletonFieldValue = GetMemberValue(singletonMemberInfo, singleton);
-            if (!restoreGameState.New(ExpectedValue).Verify(singletonFieldValue))
-            {
-                throw new Exception($"During restore verification, the {PropertyName} property of the {singleton.GetType().Name} singleton did not verify.  Expected {ExpectedValue}.");
+                // Retrieve the actual value from the singleton.
+                object? singletonFieldValue = GetMemberValue(singletonMemberInfo, singleton);
+                if (!restoreGameState.New(ExpectedValue).Verify(singletonFieldValue))
+                {
+                    throw new Exception($"During restore verification, the {PropertyName} property of the {singleton.GetType().Name} singleton did not verify.  Expected {ExpectedValue}.");
+                }
             }
         }
         return true;

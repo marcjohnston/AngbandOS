@@ -126,7 +126,7 @@ internal class RestoreGameState
         #endif
 
         // Retrieve the game state bag for the singleton by key.  We are not tracking the object id's with the singleton, so we need to repeat the lookup again.
-        if (singletonRepositoryGameStateBag.Values.TryGetValue(key, out GameStateBag? singletonGameStateBag))
+        if (singletonRepositoryGameStateBag.TryGetGameStateBag(key, out GameStateBag? singletonGameStateBag))
         {
             // Check to see if it is an object game state bag.  If so, it means the singleton was not serialized by a previous singleton, which should be most of the cases.
             if (singletonGameStateBag is ObjectGameStateBag objectGameStateBag)
@@ -153,7 +153,7 @@ internal class RestoreGameState
     {
         if (GameStateBag is ObjectGameStateBag objectGameStateBag)
         {
-            if (objectGameStateBag.Values.TryGetValue(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
+            if (objectGameStateBag.TryGetGameStateBag(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
             {
                 return typedGameStateBag;
             }
@@ -332,7 +332,7 @@ internal class RestoreGameState
         }
         #endif
 
-        if (objectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
         {
             return GetReference<T>(gameStateBag);
         }
@@ -344,7 +344,7 @@ internal class RestoreGameState
     {
         if (GameStateBag is ObjectGameStateBag objectGameStateBag)
         {
-            if (objectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+            if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
             {
                 if (gameStateBag is NullValueGameStateBag)
                 {
@@ -373,7 +373,7 @@ internal class RestoreGameState
         {
             throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
         }
-        if (objectGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
         {
             if (gameStateBag is NullValueGameStateBag)
             {
