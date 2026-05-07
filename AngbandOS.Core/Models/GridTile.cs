@@ -42,11 +42,11 @@ internal class GridTile : IItemContainer, IGameSerialize
             byte[] packedBools;
             if (saveGameState.PackBoolsAsBits)
             {
-                packedBools = saveGameState.Pack(EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag);
+                packedBools = saveGameState.PackBits(EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag);
             }
             else
             {
-                packedBools = saveGameState.Pack(
+                packedBools = saveGameState.Concatenate(
                     saveGameState.Pack(EasyVisibility),
                     saveGameState.Pack(InRoom),
                     saveGameState.Pack(InVault),
@@ -57,18 +57,18 @@ internal class GridTile : IItemContainer, IGameSerialize
                     saveGameState.Pack(TempFlag)
                 );
             }
-            byte[] packed = saveGameState.Pack(
+            byte[] packed = saveGameState.Concatenate(
                 packedBools,
                 saveGameState.Pack(_trapsDetected),
                 saveGameState.Pack(MonsterIndex),
                 saveGameState.Pack(ScentAge),
-                saveGameState.Pack(ScentStrength)
+                saveGameState.Pack(ScentStrength),
+                saveGameState.Pack(_backgroundFeature),
+                saveGameState.Pack(_featureType)
             );
             return new DictionaryGameStateBag(
                 (nameof(saveGameState.PackAsBytes), saveGameState.CreateGameStateBag(packed)),
-                (nameof(Items), saveGameState.CreateGameStateBag(Items)),
-                (nameof(_backgroundFeature), saveGameState.CreateGameStateBag(_backgroundFeature)),
-                (nameof(_featureType), saveGameState.CreateGameStateBag(_featureType))
+                (nameof(Items), saveGameState.CreateGameStateBag(Items))
             );
         }
         return new DictionaryGameStateBag(
@@ -123,6 +123,8 @@ internal class GridTile : IItemContainer, IGameSerialize
             MonsterIndex = restorePack.UnpackInt();
             ScentAge = restorePack.UnpackInt();
             ScentStrength = restorePack.UnpackInt();
+            _backgroundFeature = restorePack.Unpack<Tile>();
+            _featureType = restorePack.Unpack<Tile>();
         }
         else
         {
@@ -138,10 +140,10 @@ internal class GridTile : IItemContainer, IGameSerialize
             MonsterIndex = restoreGameState.GetInt(nameof(MonsterIndex));
             ScentAge = restoreGameState.GetInt(nameof(ScentAge));
             ScentStrength = restoreGameState.GetInt(nameof(ScentStrength));
+            _backgroundFeature = restoreGameState.GetReference<Tile>(nameof(_backgroundFeature));
+            _featureType = restoreGameState.GetReference<Tile>(nameof(_featureType));
         }
         Items = restoreGameState.GetReferences<Item>(nameof(Items)).ToList();
-        _backgroundFeature = restoreGameState.GetReference<Tile>(nameof(_backgroundFeature));
-        _featureType = restoreGameState.GetReference<Tile>(nameof(_featureType));
     }
 
     #region State Data

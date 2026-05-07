@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System;
 using System.Reflection;
 using System.Text;
 
@@ -51,8 +52,8 @@ internal class RestoreGameState
     public bool PackBoolsAsBits => true;
     public RestorePack Unpack(string key)
     {
-        byte[] data = Encoding.UTF8.GetBytes(GetGameStateBag<ByteArrayGameStateBag>(key).Value);
-        return new RestorePack(data);
+        byte[] data = Convert.FromBase64String(GetGameStateBag<ByteArrayGameStateBag>(key).Value);
+        return new RestorePack(this, data);
     }
     #endregion
     public bool ContainsKey(int key)
@@ -66,9 +67,24 @@ internal class RestoreGameState
         ObjectIdToReferenceDictionary.Add(objectId, singleton);
     }
 
-    private void TrackGameStateBag(int objectId, ObjectGameStateBag objectGameStateBag)
+    public void TrackGameStateBag(int objectId, ObjectGameStateBag objectGameStateBag)
     {
         ObjectIdToObjectGameStateBagDictionary.Add(objectId, objectGameStateBag);
+    }
+
+    public object? TryGetObjectById(int objectId)
+    {
+        if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? value))
+        {
+#if DEBUG
+            if (value is null)
+            {
+                throw new Exception("Cannot be null.");
+            }
+#endif
+            return value;
+        }
+        return null;
     }
 
     public object GetObjectById(int objectId)
@@ -238,7 +254,7 @@ internal class RestoreGameState
         }
         else if (gameStateBag is ObjectGameStateBag objectGameStateBag)
         {
-            // This is an object game state bag.  The object might already exist.  If it does, we can return it but we might need to add the object game state bag to the reference tracking for the bind phase.
+            // This is an object game state bag.  The object might already exist because the object was serialized early.
             int objectId = objectGameStateBag.ObjectId;
             if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
             {
@@ -255,30 +271,56 @@ internal class RestoreGameState
                 return typedReference;
             }
 
-            // The object doesn't exist yet.  We need to create it and track it.
-            var fullyQualifiedName = $"{typeof(Game).Assembly.GetName().Name}.Core.{objectGameStateBag.TypeName}";
-            Type? type = Type.GetType(fullyQualifiedName);
-            if (type is null)
-            {
-                throw new Exception($"{fullyQualifiedName} type not found.  Ensure it is in the Core namespace.");
-            }
-            RestoreGameState restoreGameState = New(objectGameStateBag);
-            try
-            {
-                T? t = (T?)Activator.CreateInstance(type, Game, restoreGameState);
-                if (t is null)
-                {
-                    throw new Exception($"Unable to instantiate a new {objectGameStateBag.TypeName}.");
-                }
-                TrackObject(objectId, t);
-                return t;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error during construction of a {type.Name}({nameof(Game)}, {nameof(RestoreGameState)}.  {ex.Message}");
-            }
+            return CreateObject<T>(objectId, objectGameStateBag);
+            //// The object doesn't exist yet.  We need to create it and track it.
+            //var fullyQualifiedName = $"{typeof(Game).Assembly.GetName().Name}.Core.{objectGameStateBag.TypeName}";
+            //Type? type = Type.GetType(fullyQualifiedName);
+            //if (type is null)
+            //{
+            //    throw new Exception($"{fullyQualifiedName} type not found.  Ensure it is in the Core namespace.");
+            //}
+            //RestoreGameState restoreGameState = New(objectGameStateBag);
+            //try
+            //{
+            //    T? t = (T?)Activator.CreateInstance(type, Game, restoreGameState);
+            //    if (t is null)
+            //    {
+            //        throw new Exception($"Unable to instantiate a new {objectGameStateBag.TypeName}.");
+            //    }
+            //    TrackObject(objectId, t);
+            //    return t;
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception($"Error during construction of a {type.Name}({nameof(Game)}, {nameof(RestoreGameState)}.  {ex.Message}");
+            //}
         }
         throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
+    }
+
+    public T CreateObject<T>(int objectId, ObjectGameStateBag objectGameStateBag)
+    {
+        var fullyQualifiedName = $"{typeof(Game).Assembly.GetName().Name}.Core.{objectGameStateBag.TypeName}";
+        Type? type = Type.GetType(fullyQualifiedName);
+        if (type is null)
+        {
+            throw new Exception($"{fullyQualifiedName} type not found.  Ensure it is in the Core namespace.");
+        }
+        RestoreGameState restoreGameState = New(objectGameStateBag);
+        try
+        {
+            T? t = (T?)Activator.CreateInstance(type, Game, restoreGameState);
+            if (t is null)
+            {
+                throw new Exception($"Unable to instantiate a new {objectGameStateBag.TypeName}.");
+            }
+            TrackObject(objectId, t);
+            return t;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error during construction of a {type.Name}({nameof(Game)}, {nameof(RestoreGameState)}.  {ex.Message}");
+        }
     }
 
     public T GetReference<T>(string key)
@@ -433,7 +475,7 @@ internal class RestoreGameState
             {
                 throw new KeyNotFoundException($"List was not of {nameof(ByteArrayGameStateBag)}.");
             }
-            byte[] bytes = Encoding.UTF8.GetBytes(byteArrayGameStateBag.Value);
+            byte[] bytes = Convert.FromBase64String(byteArrayGameStateBag.Value);
             listOfBytes.Add(bytes);
         }
         return listOfBytes.ToArray();
@@ -548,7 +590,7 @@ internal class RestoreGameState
 
     public char[] GetCharArray(string key) => GetGameStateBag<CharArrayGameStateBag>(key).Value.ToCharArray();
 
-    public byte[] GetByteArray(string key) => Encoding.UTF8.GetBytes(GetGameStateBag<ByteArrayGameStateBag>(key).Value);
+    public byte[] GetByteArray(string key) => Convert.FromBase64String(GetGameStateBag<ByteArrayGameStateBag>(key).Value);
 
     public TimeSpan GetTimeSpan(string key) => GetGameStateBag<TimeSpanValueGameStateBag>(key).Value;
 

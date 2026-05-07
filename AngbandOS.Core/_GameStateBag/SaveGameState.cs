@@ -18,7 +18,14 @@ internal class SaveGameState
     #region Packing Methods
     public bool PackAsBytes => true;
     public bool PackBoolsAsBits => true;
-    public byte[] Pack(bool a, params bool[] b)
+
+    /// <summary>
+    /// Packs a one or more boolean values into bytes in a bit-wise manner.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    public byte[] PackBits(bool a, params bool[] b)
     {
         int totalBits = 1 + b.Length;
         byte[] result = new byte[(totalBits + 7) / 8];
@@ -40,7 +47,13 @@ internal class SaveGameState
         return result;
     }
 
-    public byte[] Pack(byte a, params byte[][] bytes)
+    /// <summary>
+    /// Concatenates a byte and one or more byte arrays into a single byte array.  This is often used for serializations that need to inject a byte discriminator.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="bytes"></param>
+    /// <returns></returns>
+    public byte[] Concatenate(byte a, params byte[][] bytes)
     {
         List<byte> result = new List<byte>();
         result.Add(a);
@@ -51,7 +64,12 @@ internal class SaveGameState
         return result.ToArray();
     }
 
-    public byte[] Pack(params byte[][] bytes)
+    /// <summary>
+    /// Concatenates one or more byte arrays into a single byte array.
+    /// </summary>
+    /// <param name="bytes"></param>
+    /// <returns></returns>
+    public byte[] Concatenate(params byte[][] bytes)
     {
         List<byte> result = new List<byte>();
         foreach (var byteArray in bytes)
@@ -60,6 +78,17 @@ internal class SaveGameState
         }
         return result.ToArray();
     }
+    public byte[] Concatenate(byte[] a, params byte[][] bytes)
+    {
+        List<byte> result = new List<byte>();
+        result.AddRange(a);
+        foreach (var byteArray in bytes)
+        {
+            result.AddRange(byteArray);
+        }
+        return result.ToArray();
+    }
+
     public byte[] Pack(bool value)
     {
         return new byte[] { value ? (byte)1 : (byte)0 };
@@ -72,6 +101,59 @@ internal class SaveGameState
     {
         return BitConverter.GetBytes(value);
     }
+
+    /// <summary>
+    /// Pack an object game state bag which are either references or complete objects.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public byte[] Pack(IGameSerialize value)
+    {
+        if (ObjectToIdDictionary.TryGetValue(value, out int existingId))
+        {
+            // This is a reference.
+            return Concatenate((byte)11, Pack(existingId));
+        }
+
+        // We need to register this object to the dictionary before we serialize the object to prevent recursion.
+        int objectId = RegisterObject(value);
+
+        DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)value.Serialize(this);
+
+        return Concatenate(
+            (byte)1,
+            Pack(objectId),
+            Pack(value.GetType().Name),
+            Pack(gameStateBag?.Values)
+        );
+    }
+
+    //public byte[] Pack(GameStateBag gameStateBag)
+    //{
+    //    string serializedGameStateBag = gameStateBag.Serialize();
+    //    return Pack(serializedGameStateBag);
+    //}
+
+    ///// <summary>
+    ///// Packs an unknown number of byte arrays by packing the length of the array first.
+    ///// </summary>
+    ///// <param name="data"></param>
+    ///// <returns></returns>
+    //public byte[] PackList(byte[][] data)
+    //{
+    //    return Concatenate(Pack(data.Length), data.Select(_bytes => Concatenate(Pack(_bytes.Length), _bytes)).ToArray());
+    //}
+
+    public byte[] Pack(Dictionary<string, GameStateBag>? gameStateBag)
+    {
+        if (gameStateBag is null)
+        {
+            return Pack((byte)0);
+        }
+
+        return Concatenate(Pack((byte)1), Pack(gameStateBag.Count), gameStateBag.SelectMany(_keyValuePair => Concatenate(Pack(_keyValuePair.Key), Pack(_keyValuePair.Value.Serialize()))).ToArray());
+    }
+
     public byte[] Pack(decimal value)
     {
         int[] bits = decimal.GetBits(value);
@@ -88,9 +170,24 @@ internal class SaveGameState
     }
     public byte[] Pack(string value)
     {
-        return Pack(Pack(value.Length), System.Text.Encoding.UTF8.GetBytes(value));
+        return Concatenate(Pack(value.Length), Convert.FromBase64String(value));
     }
     #endregion
+
+    /// <summary>
+    /// Registers an object with the dictionary and returns the ID for the object.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    /// <remarks>
+    /// The object id algorithm (to keep the ID unique, using the next available ID for every subsequent call) is embedded in this method.
+    /// </remarks>
+    private int RegisterObject(object value)
+    {
+        int objectId = ObjectToIdDictionary.Count + 1;
+        ObjectToIdDictionary.Add(value, objectId);
+        return objectId;
+    }
 
     public GameStateBag CreateGameStateBag(object? value)
     {
@@ -107,23 +204,21 @@ internal class SaveGameState
             }
 
             // We need to register this object to the dictionary before we serialize the object to prevent recursion.
-            int objectId = ObjectToIdDictionary.Count + 1;
-            ObjectToIdDictionary.Add(value, objectId);
+            int objectId = RegisterObject(value);
+            DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)gameSerializable.Serialize(this);
 
-            DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag)gameSerializable.Serialize(this);
+            //#if DEBUG
+            //FieldInfo[] allFields = GetAllFields(value.GetType());
+            //FieldInfo[] expectedSerializableFields = allFields.Where(p => !p.IsDefined(typeof(CompilerGeneratedAttribute), true) && !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute))).ToArray();
 
-            #if DEBUG
-            FieldInfo[] allFields = GetAllFields(value.GetType());
-            FieldInfo[] expectedSerializableFields = allFields.Where(p => !p.IsDefined(typeof(CompilerGeneratedAttribute), true) && !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute))).ToArray();
+            //int actualSerializedFieldCount = gameStateBag?.Values.Count ?? 0;
+            //if (actualSerializedFieldCount < expectedSerializableFields.Length)
+            //{
+            //    Debug.WriteLine($"The number of fields serialized via reflection for {value.GetType().Name} does not match the number of fields serialized via the IGameSerialize interface.  This indicates that the IGameSerialize implementation is not serializing all of the fields in the singleton.  This will cause issues with game state restoration.  Ensure that all fields are being serialized in the IGameSerialize implementation.");
+            //}
+            //#endif
 
-            int actualSerializedFieldCount = gameStateBag?.Values.Count ?? 0;
-            if (actualSerializedFieldCount < expectedSerializableFields.Length)
-            {
-                Debug.WriteLine($"The number of fields serialized via reflection for {value.GetType().Name} does not match the number of fields serialized via the IGameSerialize interface.  This indicates that the IGameSerialize implementation is not serializing all of the fields in the singleton.  This will cause issues with game state restoration.  Ensure that all fields are being serialized in the IGameSerialize implementation.");
-            }
-            #endif
-
-            return new ObjectGameStateBag(objectId, value.GetType().Name, ((DictionaryGameStateBag?)gameStateBag)?.Values);
+            return new ObjectGameStateBag(objectId, value.GetType().Name, gameStateBag?.Values);
         }
 
         if (value is IGameSerialize[][] arrayOfArrayOfIGameSerialize)

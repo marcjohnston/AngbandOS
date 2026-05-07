@@ -10,3 +10,4 @@ Json
 ﻿boolean
 ﻿deserialize
 ﻿Stompable
+﻿boolean

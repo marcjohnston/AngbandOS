@@ -23,7 +23,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
         return type switch
         {
             nameof(BoolValueGameStateBag) => new BoolValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetBoolean()),
-            nameof(ByteArrayGameStateBag) => new ByteArrayGameStateBag(Encoding.UTF8.GetBytes(doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
+            nameof(ByteArrayGameStateBag) => new ByteArrayGameStateBag(Convert.FromBase64String(doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
             nameof(ByteValueGameStateBag) => new ByteValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetByte()),
             nameof(CharArrayGameStateBag) => new CharArrayGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!.ToCharArray()),
             nameof(CharValueGameStateBag) => new CharValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()![0]),
