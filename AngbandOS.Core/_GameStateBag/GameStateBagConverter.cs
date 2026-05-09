@@ -110,7 +110,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
                 writer.WriteNumber("ObjectId", objectValue.ObjectId);
                 writer.WriteString("TypeName", objectValue.TypeName);
                 writer.WritePropertyName("Values");
-                JsonSerializer.Serialize(writer, objectValue.Values, options);
+                JsonSerializer.Serialize(writer, objectValue.SerializeItems, options);
                 break;
 
             case QueueOfStringGameStateBag queueOfStringValue:

@@ -22,12 +22,8 @@ internal abstract class GameStateBag
 
     public static GameStateBag? Deserialize(string serializedGameStateBag)
     {
-        var options = new JsonSerializerOptions
-        {
-            WriteIndented = false
-        };
+        var options = new JsonSerializerOptions();
         options.Converters.Add(new GameStateBagConverter());
-
         return JsonSerializer.Deserialize<GameStateBag>(serializedGameStateBag, options);
     }
 }

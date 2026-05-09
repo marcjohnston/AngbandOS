@@ -666,6 +666,13 @@ internal sealed class SingletonRepository : IGameSerialize
         }
     }
 
+    /// <summary>
+    /// Track a singleton during the load phase of the restore process.  If a game is being restored, singletons undergo the load phase and need to be tracked so that other objects can reference them and they can 
+    /// undergo the bind phase afterwards.
+    /// </summary>
+    /// <param name="restoreGameState"></param>
+    /// <param name="singleton"></param>
+    /// <exception cref="Exception"></exception>
     private void TrackSingleton(RestoreGameState restoreGameState, IGetKey singleton)
     {
         #if DEBUG
@@ -676,7 +683,17 @@ internal sealed class SingletonRepository : IGameSerialize
         #endif
 
         // Find the matching singleton in the restore game state and ensure it is an object game state bag so that we have an object ID that we can track.
-        GameStateBag singletonGameStateBag = singletonRepositoryGameStateBag.Find(singleton.GetKey);
+        GameStateBag? singletonGameStateBag = singletonRepositoryGameStateBag.Find(singleton.GetKey);
+        if (singletonGameStateBag is null)
+        {
+            if (!restoreGameState.UnusedAndEmptyObjectsPruned)
+            {
+                throw new Exception($"The singleton game state bag for the singleton {singleton.GetKey} is missing from the restore game state.");
+            }
+
+            // This object was pruned, no tracking needed.
+            return;
+        }
 
         // Track the object as created.
         if (singletonGameStateBag is ObjectGameStateBag singletonObjectGameStateBag)

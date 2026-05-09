@@ -4,9 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System;
 using System.Reflection;
-using System.Text;
 
 namespace AngbandOS.Core;
 
@@ -19,19 +17,20 @@ internal class RestoreGameState
     private Dictionary<int, object> ObjectIdToReferenceDictionary { get; }
     private Dictionary<int, ObjectGameStateBag> ObjectIdToObjectGameStateBagDictionary { get; }
     public GameStateBag GameStateBag { get; }
-
+    public bool UnusedAndEmptyObjectsPruned { get; }
     /// <summary>
     /// Creates a clone of the RestoreGameState with a new game state bag.
     /// </summary>
     /// <param name="game"></param>
     /// <param name="objectIdToReferenceDictionary"></param>
     /// <param name="gameStateBag"></param>
-    private RestoreGameState(Game game, Dictionary<int, object> objectIdToReferenceDictionary, Dictionary<int, ObjectGameStateBag> objectIdToObjectGameStateBagDictionary, GameStateBag gameStateBag)
+    private RestoreGameState(Game game, Dictionary<int, object> objectIdToReferenceDictionary, Dictionary<int, ObjectGameStateBag> objectIdToObjectGameStateBagDictionary, GameStateBag gameStateBag, bool unusedAndEmptyObjectsArePruned)
     {
         Game = game;
         ObjectIdToReferenceDictionary = objectIdToReferenceDictionary;
         ObjectIdToObjectGameStateBagDictionary = objectIdToObjectGameStateBagDictionary;
         GameStateBag = gameStateBag;
+        UnusedAndEmptyObjectsPruned = unusedAndEmptyObjectsArePruned;
     }
 
     /// <summary>
@@ -39,12 +38,15 @@ internal class RestoreGameState
     /// </summary>
     /// <param name="game"></param>
     /// <param name="gameStateBag"></param>
-    public RestoreGameState(Game game, GameStateBag gameStateBag)
+    public RestoreGameState(Game game, GameStateBag gameStateBag, bool unusedAndEmptyObjectsArePruned)
     {
         Game = game;
         ObjectIdToReferenceDictionary = new Dictionary<int, object>();
         ObjectIdToObjectGameStateBagDictionary = new Dictionary<int, ObjectGameStateBag>();
         GameStateBag = gameStateBag;
+
+        // Retrieve the pruned objects value from the saved game state.
+        UnusedAndEmptyObjectsPruned = unusedAndEmptyObjectsArePruned;
     }
 
     #region Packing Methods
@@ -94,7 +96,7 @@ internal class RestoreGameState
 
     public RestoreGameState New(GameStateBag gameStateBag)
     {
-        return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, gameStateBag);
+        return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, gameStateBag, UnusedAndEmptyObjectsPruned);
     }
 
     public bool Verify(object? singleton)
@@ -132,7 +134,7 @@ internal class RestoreGameState
             if (singletonGameStateBag is ObjectGameStateBag objectGameStateBag)
             {
                 // The value is null.  We can return early with the null game state bag.  The object game state bag should also be in the dictionary, but we will not be using it.
-                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, objectGameStateBag);
+                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, objectGameStateBag, UnusedAndEmptyObjectsPruned);
             }
 
             // Check to see if it is a reference game state bag.  If so, then it was serialized by a previous singleton.
@@ -140,12 +142,16 @@ internal class RestoreGameState
             {
                 // We will need to retrieve the game state bag from the earlier dictionary.  The game state bag should have been tracked during the load phase, so it should be in the dictionary.
                 ObjectGameStateBag originalObjectGameStateBag = ObjectIdToObjectGameStateBagDictionary[referenceGameStateBag.ObjectId];
-                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, originalObjectGameStateBag);
+                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, originalObjectGameStateBag, UnusedAndEmptyObjectsPruned);
             }
             throw new Exception("Expected an ObjectGameStateBag or ReferenceGameStateBag.");
         }
 
         // The object doesn't exist.
+        if (UnusedAndEmptyObjectsPruned)
+        {
+            return new RestoreGameState(Game, new NullValueGameStateBag(), UnusedAndEmptyObjectsPruned);
+        }
         throw new Exception("Key not found in GameStateBag.");
     }
 

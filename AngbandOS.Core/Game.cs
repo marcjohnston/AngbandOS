@@ -87,7 +87,6 @@ internal partial class Game : IGameSerialize
         return new DictionaryGameStateBag(
             (nameof(SingletonRepository), saveGameState.CreateGameStateBag(SingletonRepository)),
 
-            (nameof(DungeonGenerator), saveGameState.CreateGameStateBag(DungeonGenerator)),
             (nameof(IsBirthday), saveGameState.CreateGameStateBag(IsBirthday)),
             (nameof(IsDawn), saveGameState.CreateGameStateBag(IsDawn)),
             (nameof(IsDusk), saveGameState.CreateGameStateBag(IsDusk)),
@@ -390,13 +389,12 @@ internal partial class Game : IGameSerialize
     #endregion
 
     #region New and Existing Game Construction    
-
     /// <summary>
-    /// Restore a new game.
+    /// Restore an existing game.
     /// </summary>
     /// <param name="gameConfiguration"></param>
     /// <param name="gameStateBag"></param>
-    public Game(GameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag) : this(gameConfiguration, null, gameStateBag) { }
+    public Game(GameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag, bool unusedAndEmptyObjectsArePruned) : this(gameConfiguration, null, (gameStateBag, unusedAndEmptyObjectsArePruned)) { }
 
     /// <summary>
     /// Create a new game to play from scratch.
@@ -424,7 +422,7 @@ internal partial class Game : IGameSerialize
     /// <param name="gameConfiguration"></param>
     /// <param name="gameReplay">Supply t</param>
     /// <param name="gameStateBag">Supply the game state bag to restore a game.  The game configuration must match the game being restored.</param>
-    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, ObjectGameStateBag? gameStateBag)
+    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, (ObjectGameStateBag GameStateBag, bool UnusedAndEmptyObjectsArePruned)? restoreGameStateBagAndOptions)
     {
         #region Non-Serialized Initialization - The initialization in this region is only for non-serialized fields and properties.
         _mainSequence = new Random();
@@ -457,7 +455,7 @@ internal partial class Game : IGameSerialize
 
         // Load all of the predefined objects.  The singleton repository must already be created.
         DateTime startTime = DateTime.Now;
-        if (gameStateBag is null)
+        if (restoreGameStateBagAndOptions is null)
         {
             // This is a new game.
             SingletonRepository.LoadAndBind(gameConfiguration, null);
@@ -472,8 +470,7 @@ internal partial class Game : IGameSerialize
         {
             // Restore the game.
             // We need to generate a common dictionary for the object id to reference dictionary that is used to restore a game.
-            RestoreGameState restoreGameState = new RestoreGameState(this, gameStateBag);
-
+            RestoreGameState restoreGameState = new RestoreGameState(this, restoreGameStateBagAndOptions.Value.GameStateBag, restoreGameStateBagAndOptions.Value.UnusedAndEmptyObjectsArePruned);
             ObjectGameStateBag singletonRepositoryGameStateBag = restoreGameState.GetGameStateBag<ObjectGameStateBag>(nameof(SingletonRepository));
 
             SingletonRepository.LoadAndBind(gameConfiguration, restoreGameState.New(singletonRepositoryGameStateBag));
@@ -504,7 +501,6 @@ internal partial class Game : IGameSerialize
             //#endif
 
             // Now restore this game object itself.
-            DungeonGenerator = restoreGameState.GetReference<DungeonGenerator>(nameof(DungeonGenerator));
             IsBirthday = restoreGameState.GetBool(nameof(IsBirthday));
             IsDawn = restoreGameState.GetBool(nameof(IsDawn));
             IsDusk = restoreGameState.GetBool(nameof(IsDusk));

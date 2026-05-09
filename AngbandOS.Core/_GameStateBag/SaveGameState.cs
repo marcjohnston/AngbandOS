@@ -5,7 +5,6 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using System.Collections;
-using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -14,6 +13,7 @@ namespace AngbandOS.Core;
 internal class SaveGameState
 {
     private Dictionary<object, int> ObjectToIdDictionary = new Dictionary<object, int>();
+    private Dictionary<int, bool> ObjectReferenceCountDictionary = new Dictionary<int, bool>();
 
     #region Packing Methods
     public bool PackAsBytes => true;
@@ -102,6 +102,27 @@ internal class SaveGameState
         return BitConverter.GetBytes(value);
     }
 
+    public bool ObjectIsReferenced(int objectId)
+    {
+        return ObjectReferenceCountDictionary.ContainsKey(objectId);
+    }
+
+    /// <summary>
+    /// Returns the object ID for a reference to an existing object, if the object already exists.  If a reference is issued, the reference count for the object is also incremented. 
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    private bool TryGetReferenceId(object value, out int id)
+    {
+        if (ObjectToIdDictionary.TryGetValue(value, out id))
+        {
+            ObjectReferenceCountDictionary[id] = true;
+            return true;    
+        }
+        return false;
+    }
+
     /// <summary>
     /// Pack an object game state bag which are either references or complete objects.
     /// </summary>
@@ -109,7 +130,7 @@ internal class SaveGameState
     /// <returns></returns>
     public byte[] Pack(IGameSerialize value)
     {
-        if (ObjectToIdDictionary.TryGetValue(value, out int existingId))
+        if (TryGetReferenceId(value, out int existingId))
         {
             // This is a reference.
             return Concatenate((byte)11, Pack(existingId));
@@ -198,7 +219,7 @@ internal class SaveGameState
 
         if (value is IGameSerialize gameSerializable)
         {
-            if (ObjectToIdDictionary.TryGetValue(value, out int existingId))
+            if (TryGetReferenceId(value, out int existingId))
             {
                 return new ReferenceGameStateBag(existingId);
             }

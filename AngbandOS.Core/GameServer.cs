@@ -200,7 +200,11 @@ public class GameServer
 
             SaveGameState saveGameState = new SaveGameState();
             GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
-            serializedGameData = saveGameStateBag.Serialize();
+            if (PruneUnusedAndEmptyObjects)
+            {
+                ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
+            }
+            serializedGameData = Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
 
             gameIsOver = true;
         }
@@ -210,6 +214,18 @@ public class GameServer
         }
 
         return new GameResults(gameIsOver, serializedGameData);
+    }
+    private bool PruneUnusedAndEmptyObjects => true;
+
+    private string Serialize(SaveGameData saveGameData)
+    {
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = false
+        };
+
+        options.Converters.Add(new GameStateBagConverter());
+        return JsonSerializer.Serialize(saveGameData, options);
     }
 
     /// <summary>
@@ -281,11 +297,11 @@ public class GameServer
     /// </summary>
     /// <param name="console">Supple the object to act as the console for the game.</param>
     /// <param name="persistentStorage">Supply the object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
-    /// <param name="gameConfiguration">Supply the configuration for the game to be played.  It must match the same game that was played in the <paramref name="serializedGameStateBag"/>.</param>
+    /// <param name="gameConfiguration">Supply the configuration for the game to be played.  It must match the same game that was played in the <paramref name="serializedSaveGameData"/>.</param>
     /// <param name="replayPersistentStorage"> Supply the object responsible to accepting the replay steps.  If not supplied, the replay steps will not be provided.</param>
-    /// <param name="serializedGameStateBag">Supply the serialized game state to be restored.</param>
+    /// <param name="serializedSaveGameData">Supply the serialized game state to be restored.</param>
     /// <returns></returns>
-    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, string serializedGameStateBag)
+    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, string serializedSaveGameData)
     {
         if (console == null)
         {
@@ -301,25 +317,32 @@ public class GameServer
         try
         {
             // Retrieve the game from persistent storage.
-            GameStateBag? gameStateBag = GameStateBag.Deserialize(serializedGameStateBag);
-            if (gameStateBag is null)
+            var options = new JsonSerializerOptions();
+            options.Converters.Add(new GameStateBagConverter());
+
+            SaveGameData? saveGameData = JsonSerializer.Deserialize<SaveGameData>(serializedSaveGameData, options);
+            if (saveGameData is null)
             {
-                throw new Exception("Failed to deserialize game.");
+                throw new Exception("Failed to deserialize game data.");
             }
 
-            if (gameStateBag is not ObjectGameStateBag objectGameStateBag)
+            if (saveGameData.Game is not ObjectGameStateBag objectGameStateBag)
             {
                 throw new Exception("Unexpected game state bag format.");
             }
 
-            Game = new Game(gameConfiguration, objectGameStateBag);
+            Game = new Game(gameConfiguration, objectGameStateBag, saveGameData.UnusedAndEmptyObjectsPruned);
             Game legacyGame = Game.LoadLegacyGame(persistentStorage);
             SaveGameState.DeepComparer.DeepEquals(Game, legacyGame);
             Game.Play(console, persistentStorage, replayPersistentStorage);
 
             SaveGameState saveGameState = new SaveGameState();
             GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
-            serializedGameData = saveGameStateBag.Serialize();
+            if (PruneUnusedAndEmptyObjects)
+            {
+                ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
+            }
+            serializedGameData = Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
 
             gameIsOver = true;
         }

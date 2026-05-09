@@ -12,7 +12,7 @@ internal class ObjectGameStateBag : GameStateBag
 {
     public int ObjectId { get; }
     public string TypeName { get; }
-    private Dictionary<string, GameStateBag>? propertyNameAndGameStateBagDictionary { get; }
+    private Dictionary<string, GameStateBag>? propertyNameAndGameStateBagDictionary;
 
     public ObjectGameStateBag(int objectId, string typeName, Dictionary<string, GameStateBag>? value)
     {
@@ -20,15 +20,24 @@ internal class ObjectGameStateBag : GameStateBag
         TypeName = typeName;
         propertyNameAndGameStateBagDictionary = value;
     }
-    public GameStateBag Find(string key)
+    public GameStateBag? Find(string key)
     {
         if (propertyNameAndGameStateBagDictionary is not null && propertyNameAndGameStateBagDictionary.TryGetValue(key, out GameStateBag? gameStateBag))
         {
             return gameStateBag;
         }
-        throw new Exception($"Unable to find {key} in the {nameof(ObjectGameStateBag)}.");
+        return null;
     }
 
+    public void Add(string key, GameStateBag gameStateBag)
+    {
+        if (propertyNameAndGameStateBagDictionary is null)
+        {
+            propertyNameAndGameStateBagDictionary = new Dictionary<string, GameStateBag>();
+        }
+
+        propertyNameAndGameStateBagDictionary.Add(key, gameStateBag);
+    }
     public override string ToString()
     {
         return $"Object#{ObjectId}";
@@ -69,7 +78,7 @@ internal class ObjectGameStateBag : GameStateBag
         };
     }
 
-    public IReadOnlyDictionary<string, GameStateBag>? Values => propertyNameAndGameStateBagDictionary;
+    public IReadOnlyDictionary<string, GameStateBag>? SerializeItems => propertyNameAndGameStateBagDictionary;
 
     public bool TryGetGameStateBag(string key, out GameStateBag? gameStateBag)
     {
@@ -79,6 +88,32 @@ internal class ObjectGameStateBag : GameStateBag
             return false;
         }
         return propertyNameAndGameStateBagDictionary.TryGetValue(key, out gameStateBag);
+    }
+
+    public bool IsEmpty => propertyNameAndGameStateBagDictionary is null || propertyNameAndGameStateBagDictionary.Count == 0;
+
+    public void PruneItems(SaveGameState saveGameState)
+    {
+        // Are there items to enumerate.
+        if (propertyNameAndGameStateBagDictionary is not null)
+        {
+            // Enumerate all of the items.
+            foreach ((string key, GameStateBag itemGameStateBag) in propertyNameAndGameStateBagDictionary)
+            {
+                // Ensure the game state bag is an object game state bag, and if so, prune the items of the item game state bag.
+                if (itemGameStateBag is ObjectGameStateBag itemObjectGameStateBag)
+                {
+                    // Prune the items of the item game state bag.
+                    itemObjectGameStateBag.PruneItems(saveGameState);
+
+                    if (itemObjectGameStateBag.IsEmpty && !saveGameState.ObjectIsReferenced(itemObjectGameStateBag.ObjectId))
+                    {
+                        // The item is an empty object, we can remove it.
+                        propertyNameAndGameStateBagDictionary.Remove(key);
+                    }
+                }
+            }
+        }
     }
 
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)
