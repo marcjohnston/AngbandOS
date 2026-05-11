@@ -29,15 +29,6 @@ internal class ObjectGameStateBag : GameStateBag
         return null;
     }
 
-    public void Add(string key, GameStateBag gameStateBag)
-    {
-        if (propertyNameAndGameStateBagDictionary is null)
-        {
-            propertyNameAndGameStateBagDictionary = new Dictionary<string, GameStateBag>();
-        }
-
-        propertyNameAndGameStateBagDictionary.Add(key, gameStateBag);
-    }
     public override string ToString()
     {
         return $"Object#{ObjectId}";
