@@ -128,7 +128,7 @@ internal class RestoreGameState
             if (singletonGameStateBag is ObjectGameStateBag objectGameStateBag)
             {
                 // The value is null.  We can return early with the null game state bag.  The object game state bag should also be in the dictionary, but we will not be using it.
-                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, objectGameStateBag, UnusedAndEmptyObjectsPruned);
+                return New(objectGameStateBag);
             }
 
             // Check to see if it is a reference game state bag.  If so, then it was serialized by a previous singleton.
@@ -136,7 +136,7 @@ internal class RestoreGameState
             {
                 // We will need to retrieve the game state bag from the earlier dictionary.  The game state bag should have been tracked during the load phase, so it should be in the dictionary.
                 ObjectGameStateBag originalObjectGameStateBag = ObjectIdToObjectGameStateBagDictionary[referenceGameStateBag.ObjectId];
-                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, originalObjectGameStateBag, UnusedAndEmptyObjectsPruned);
+                return New(originalObjectGameStateBag);
             }
             throw new Exception("Expected an ObjectGameStateBag or ReferenceGameStateBag.");
         }
@@ -155,7 +155,7 @@ internal class RestoreGameState
         {
             if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
             {
-                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, gameStateBag, UnusedAndEmptyObjectsPruned);
+                return New(gameStateBag);
             }
             throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(ObjectGameStateBag)}.");
         }
@@ -163,7 +163,7 @@ internal class RestoreGameState
         {
             if (dictionaryGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
             {
-                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, gameStateBag, UnusedAndEmptyObjectsPruned);
+                return New(gameStateBag);
             }
             throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(DictionaryGameStateBag)}.");
         }
@@ -349,6 +349,7 @@ internal class RestoreGameState
         List<T> list = new List<T>();
         foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
         {
+            RestoreGameState restoreGameState = New(gameStateBag);
             T t = GetReference<T>(gameStateBag);
             list.Add(t);
         }
@@ -497,7 +498,7 @@ internal class RestoreGameState
             {
                 throw new Exception($"Jagged array of {typeof(T).Name} not a list.");
             }
-            RestoreGameState referencesRestoreGameState = new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, gameStateBag, UnusedAndEmptyObjectsPruned);
+            RestoreGameState referencesRestoreGameState = New(gameStateBag);
             T[] references = referencesRestoreGameState.GetReferences<T>();
             listOfReferences.Add(references);
         }
