@@ -120,12 +120,10 @@ internal class RestoreGameState
     /// </remarks>
     public RestoreGameState Get(string key)
     {
-        #if DEBUG
         if (GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
         {
             throw new InvalidOperationException($"GameStateBag is not an {nameof(ObjectGameStateBag)}.");
         }
-        #endif
 
         // Retrieve the game state bag for the singleton by key.  We are not tracking the object id's with the singleton, so we need to repeat the lookup again.
         if (singletonRepositoryGameStateBag.TryGetGameStateBag(key, out GameStateBag? singletonGameStateBag))

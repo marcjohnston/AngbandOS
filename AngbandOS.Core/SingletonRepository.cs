@@ -675,12 +675,10 @@ internal sealed class SingletonRepository : IGameSerialize
     /// <exception cref="Exception"></exception>
     private void TrackSingleton(RestoreGameState restoreGameState, IGetKey singleton)
     {
-        #if DEBUG
         if (restoreGameState.GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
         {
             throw new Exception($"The {nameof(restoreGameState)} parameter for the {nameof(LoadAllAssemblyTypes)} must be an {nameof(ObjectGameStateBag)}.");
         }
-        #endif
 
         // Find the matching singleton in the restore game state and ensure it is an object game state bag so that we have an object ID that we can track.
         GameStateBag? singletonGameStateBag = singletonRepositoryGameStateBag.Find(singleton.GetKey);
