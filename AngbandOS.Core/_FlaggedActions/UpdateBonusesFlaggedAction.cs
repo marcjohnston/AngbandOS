@@ -17,7 +17,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         base.Bind(restoreGameState);
         if (restoreGameState is not null)
         {
-            PreviousMartialArtistArmorAux = restoreGameState.GetBool(nameof(PreviousMartialArtistArmorAux));
+            PreviousMartialArtistArmorAux = restoreGameState.GetByKey(nameof(PreviousMartialArtistArmorAux)).GetBool();
         }
     }
     private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()

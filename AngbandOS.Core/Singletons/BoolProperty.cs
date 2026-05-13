@@ -18,7 +18,7 @@ internal abstract class BoolProperty : Property, IBoolValue
         base.Bind(restoreGameState);
         if (restoreGameState is not null)
         {
-            _value = restoreGameState.GetBool(nameof(_value));
+            _value = restoreGameState.GetByKey(nameof(_value)).GetBool();
         }
     }
 

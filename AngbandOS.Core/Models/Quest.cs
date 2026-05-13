@@ -97,7 +97,7 @@ internal class Quest : IGameSerialize
     }
     public Quest(Game game, RestoreGameState restoreGameState) : this(game)
     {
-        Discovered = restoreGameState.GetBool(nameof(Discovered));
+        Discovered = restoreGameState.GetByKey(nameof(Discovered)).GetBool();
         Dungeon = restoreGameState.GetReferenceOrDefault<Dungeon>(nameof(Dungeon));
         Killed = restoreGameState.GetInt(nameof(Killed));
         Level = restoreGameState.GetInt(nameof(Level));

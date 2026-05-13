@@ -22,7 +22,7 @@ internal abstract class Property : IGetKey, IChangeTracker, IGameSerialize
     }
     protected Property(Game game, RestoreGameState restoreGameState) : this(game)
     {
-        IsChanged = restoreGameState.GetBool(nameof(IsChanged));
+        IsChanged = restoreGameState.GetByKey(nameof(IsChanged)).GetBool();
     }
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
@@ -66,7 +66,7 @@ internal abstract class Property : IGetKey, IChangeTracker, IGameSerialize
     {
         if (restoreGameState is not null)
         {
-            IsChanged = restoreGameState.GetBool(nameof(IsChanged));
+            IsChanged = restoreGameState.GetByKey(nameof(IsChanged)).GetBool();
         }
     }
 }

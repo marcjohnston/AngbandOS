@@ -520,11 +520,11 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            IsFlavorAware = restoreGameState.GetBool(nameof(IsFlavorAware));
+            IsFlavorAware = restoreGameState.GetByKey(nameof(IsFlavorAware)).GetBool();
             FlavorSymbol = restoreGameState.GetReference<Symbol>(nameof(FlavorSymbol));
             FlavorColor = restoreGameState.GetByKey(nameof(FlavorColor)).GetEnum<ColorEnum>();
             Flavor = restoreGameState.GetReferenceOrDefault<Flavor>(nameof(Flavor));
-            Tried = restoreGameState.GetBool(nameof(Tried));
+            Tried = restoreGameState.GetByKey(nameof(Tried)).GetBool();
             Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
             Stompable = restoreGameState.GetByKey(nameof(Stompable)).GetBools();
             _bookIndex = restoreGameState.GetInt(nameof(_bookIndex));

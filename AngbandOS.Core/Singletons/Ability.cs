@@ -27,7 +27,7 @@ internal abstract class Ability : IGetKey, IGameSerialize
             Bonus = restoreGameState.GetInt(nameof(Bonus));
             Innate = restoreGameState.GetInt(nameof(Innate));
             InnateMax = restoreGameState.GetInt(nameof(InnateMax));
-            Override = restoreGameState.GetBool(nameof(Override));
+            Override = restoreGameState.GetByKey(nameof(Override)).GetBool();
             TableIndex = restoreGameState.GetInt(nameof(TableIndex));
         }
     }

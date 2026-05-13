@@ -39,9 +39,9 @@ internal class Bonuses : IGameSerialize
         DamageBonus = restoreGameState.GetInt(nameof(DamageBonus));
         DisplayedAttackBonus = restoreGameState.GetInt(nameof(DisplayedAttackBonus));
         DisplayedDamageBonus = restoreGameState.GetInt(nameof(DisplayedDamageBonus));
-        HasUnpriestlyWeapon = restoreGameState.GetBool(nameof(HasUnpriestlyWeapon));
-        HasHeavyBow = restoreGameState.GetBool(nameof(HasHeavyBow));
-        HasHeavyWeapon = restoreGameState.GetBool(nameof(HasHeavyWeapon));
+        HasUnpriestlyWeapon = restoreGameState.GetByKey(nameof(HasUnpriestlyWeapon)).GetBool();
+        HasHeavyBow = restoreGameState.GetByKey(nameof(HasHeavyBow)).GetBool();
+        HasHeavyWeapon = restoreGameState.GetByKey(nameof(HasHeavyWeapon)).GetBool();
     }
 
 

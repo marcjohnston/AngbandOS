@@ -552,8 +552,8 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
         if (restoreGameState is not null)
         {
             CurNum = restoreGameState.GetInt(nameof(CurNum));
-            Guardian = restoreGameState.GetBool(nameof(Guardian));
-            OnlyGuardian = restoreGameState.GetBool(nameof(OnlyGuardian));
+            Guardian = restoreGameState.GetByKey(nameof(Guardian)).GetBool();
+            OnlyGuardian = restoreGameState.GetByKey(nameof(OnlyGuardian)).GetBool();
             MaxNum = restoreGameState.GetInt(nameof(MaxNum));
             Knowledge = restoreGameState.GetReference<MonsterKnowledge>(nameof(Knowledge));
         }

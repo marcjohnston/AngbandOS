@@ -56,7 +56,7 @@ internal class ScreenBuffer : IGameSerialize
         Vc = restoreGameState.GetChars(nameof(Vc));
         Cx = restoreGameState.GetInt(nameof(Cx));
         Cy = restoreGameState.GetInt(nameof(Cy));
-        CursorVisible = restoreGameState.GetBool(nameof(CursorVisible));
+        CursorVisible = restoreGameState.GetByKey(nameof(CursorVisible)).GetBool();
     }
 
     public ScreenBuffer(int width, int height)

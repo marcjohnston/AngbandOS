@@ -22,7 +22,7 @@ internal class BoolSetEffectiveAttributeValue : EffectiveAttributeValue
     }
     public BoolSetEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState.GetReference<Attribute>(nameof(Attribute)))
     {
-        _initialValue = restoreGameState.GetBoolOrDefault(nameof(_initialValue));
+        _initialValue = restoreGameState.GetByKey(nameof(_initialValue)).GetBoolOrDefault();
         ListGameStateBag tuplesListGameStateBag = restoreGameState.GetGameStateBag<ListGameStateBag>(nameof(_attributeModifiers));
 
         // We need to skip the first modifier.  It is preassigned.  TODO: This shouldn't be like this.
@@ -30,7 +30,7 @@ internal class BoolSetEffectiveAttributeValue : EffectiveAttributeValue
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
             string key = tupleRestoreGameState.GetString("Key");
-            bool? modifier = tupleRestoreGameState.GetBoolOrDefault("Modifier");
+            bool? modifier = tupleRestoreGameState.GetByKey("Modifier").GetBoolOrDefault();
 
             _attributeModifiers.Add((key, modifier));
         }

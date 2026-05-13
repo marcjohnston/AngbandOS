@@ -128,15 +128,15 @@ internal class GridTile : IItemContainer, IGameSerialize
         }
         else
         {
-            EasyVisibility = restoreGameState.GetBool(nameof(EasyVisibility));
-            InRoom = restoreGameState.GetBool(nameof(InRoom));
-            InVault = restoreGameState.GetBool(nameof(InVault));
-            IsVisible = restoreGameState.GetBool(nameof(IsVisible));
-            PlayerLit = restoreGameState.GetBool(nameof(PlayerLit));
-            PlayerMemorized = restoreGameState.GetBool(nameof(PlayerMemorized));
-            SelfLit = restoreGameState.GetBool(nameof(SelfLit));
-            TempFlag = restoreGameState.GetBool(nameof(TempFlag));
-            _trapsDetected = restoreGameState.GetBool(nameof(_trapsDetected));
+            EasyVisibility = restoreGameState.GetByKey(nameof(EasyVisibility)).GetBool();
+            InRoom = restoreGameState.GetByKey(nameof(InRoom)).GetBool();
+            InVault = restoreGameState.GetByKey(nameof(InVault)).GetBool();
+            IsVisible = restoreGameState.GetByKey(nameof(IsVisible)).GetBool();
+            PlayerLit = restoreGameState.GetByKey(nameof(PlayerLit)).GetBool();
+            PlayerMemorized = restoreGameState.GetByKey(nameof(PlayerMemorized)).GetBool();
+            SelfLit = restoreGameState.GetByKey(nameof(SelfLit)).GetBool();
+            TempFlag = restoreGameState.GetByKey(nameof(TempFlag)).GetBool();
+            _trapsDetected = restoreGameState.GetByKey(nameof(_trapsDetected)).GetBool();
             MonsterIndex = restoreGameState.GetInt(nameof(MonsterIndex));
             ScentAge = restoreGameState.GetInt(nameof(ScentAge));
             ScentStrength = restoreGameState.GetInt(nameof(ScentStrength));

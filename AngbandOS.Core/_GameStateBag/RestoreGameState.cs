@@ -196,7 +196,7 @@ internal class RestoreGameState
         throw new InvalidOperationException($"GameStateBag is not of type {nameof(ObjectGameStateBag)} or {nameof(DictionaryGameStateBag)}.");
     }
 
-    public bool GetBool(string key) => GetGameStateBag<BoolValueGameStateBag>(key).Value;
+    public bool GetBool() => ((BoolValueGameStateBag)GameStateBag).Value;
 
     public T GetEnum<T>() where T : Enum
     {
@@ -544,16 +544,6 @@ internal class RestoreGameState
         return GetInt(key);
     }
 
-    public bool? GetNullableBool(string key)
-    {
-        GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);
-        if (gameStateBag is NullValueGameStateBag)
-        {
-            return default;
-        }
-        return GetBool(key);
-    }
-
     public DateTime? GetNullableDateTime(string key)
     {
         GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);
@@ -595,14 +585,13 @@ internal class RestoreGameState
         return GetString(key); // TODO: This smells
     }
 
-    public bool? GetBoolOrDefault(string key)
+    public bool? GetBoolOrDefault()
     {
-        GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);
-        if (gameStateBag is NullValueGameStateBag)
+        if (GameStateBag is NullValueGameStateBag)
         {
             return default;
         }
-        return GetBool(key); // TODO: This smells
+        return GetBool(); // TODO: This smells
     }
 
     public string GetString(string key) => GetGameStateBag<StringValueGameStateBag>(key).Value;

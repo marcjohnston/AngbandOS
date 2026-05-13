@@ -14,7 +14,7 @@ internal class NullableBoolReadOnlyAttributeValue : AttributeValue
     {
         Value = value;
     }
-    public NullableBoolReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetNullableBool(nameof(Value)))
+    public NullableBoolReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetByKey(nameof(Value)).GetBoolOrDefault())
     {
     }
 

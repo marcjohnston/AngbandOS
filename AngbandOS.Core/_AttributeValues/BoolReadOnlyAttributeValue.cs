@@ -14,7 +14,7 @@ internal class BoolReadOnlyAttributeValue : AttributeValue
     {
         Value = value;
     }
-    public BoolReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetBool(nameof(Value)))
+    public BoolReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetByKey(nameof(Value)).GetBool())
     {
     }
 

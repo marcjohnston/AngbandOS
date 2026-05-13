@@ -22,7 +22,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
         base.Bind(restoreGameState);
         if (restoreGameState is not null)
         {
-            OldRestrictingArmor = restoreGameState.GetBool(nameof(OldRestrictingArmor));
+            OldRestrictingArmor = restoreGameState.GetByKey(nameof(OldRestrictingArmor)).GetBool();
         }
     }
 

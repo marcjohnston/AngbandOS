@@ -52,7 +52,7 @@ internal class Store : IGameSerialize
     {
         _x = restoreGameState.GetInt(nameof(_x));
         _y = restoreGameState.GetInt(nameof(_y));
-        _leaveStore = restoreGameState.GetBool(nameof(_leaveStore));
+        _leaveStore = restoreGameState.GetByKey(nameof(_leaveStore)).GetBool();
         StoreInventoryList = restoreGameState.GetReferences<Item>(nameof(StoreInventoryList)).ToList();
         StoreTop = restoreGameState.GetInt(nameof(StoreTop));
         Owner = restoreGameState.GetReference<Shopkeeper>(nameof(Owner));

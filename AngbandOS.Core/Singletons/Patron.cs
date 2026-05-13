@@ -54,7 +54,7 @@ internal sealed class Patron : IGetKey, IToJson, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            RewardReceived = restoreGameState.GetBool(nameof(RewardReceived));
+            RewardReceived = restoreGameState.GetByKey(nameof(RewardReceived)).GetBool();
         }
     }
 

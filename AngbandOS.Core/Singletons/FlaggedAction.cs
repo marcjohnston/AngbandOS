@@ -16,7 +16,7 @@ internal abstract class FlaggedAction : IGetKey, IGameSerialize
     }
     protected FlaggedAction(Game game, RestoreGameState restoreGameState) : this(game) // This object is a singleton
     {
-        _flag = restoreGameState.GetBool(nameof(_flag));
+        _flag = restoreGameState.GetByKey(nameof(_flag)).GetBool();
     }
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
