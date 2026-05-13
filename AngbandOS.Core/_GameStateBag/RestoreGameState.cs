@@ -239,7 +239,7 @@ internal class RestoreGameState
         return boolList.ToArray();
     }
 
-    private T GetReference<T>(GameStateBag gameStateBag)
+    public T GetReference<T>()
     {
         #if DEBUG
         // We will only check game serializable models and not IGetKey.
@@ -254,7 +254,7 @@ internal class RestoreGameState
         #endif
 
         // Check to see if the singleton game state bag is a reference.  This will occur when the singleton was already serialized from a previous singleton.
-        if (gameStateBag is ReferenceGameStateBag referenceGameStateBag)
+        if (GameStateBag is ReferenceGameStateBag referenceGameStateBag)
         {
             // This is a reference game state bag.  Retrieve the object id and check to see if the object is already being tracked.
             int objectId = referenceGameStateBag.ObjectId;
@@ -273,7 +273,7 @@ internal class RestoreGameState
             }
             throw new Exception("Reference ID not found in ObjectIdToReferenceDictionary.");
         }
-        else if (gameStateBag is ObjectGameStateBag objectGameStateBag)
+        else if (GameStateBag is ObjectGameStateBag objectGameStateBag)
         {
             // This is an object game state bag.  The object might already exist because the object was serialized early.
             int objectId = objectGameStateBag.ObjectId;
@@ -320,11 +320,6 @@ internal class RestoreGameState
         {
             throw new Exception($"Error during construction of a {type.Name}({nameof(Game)}, {nameof(RestoreGameState)}.  {ex.Message}");
         }
-    }
-
-    public T GetReference<T>()
-    {
-        return GetReference<T>(GameStateBag);
     }
 
     public T? GetReferenceOrDefault<T>()
