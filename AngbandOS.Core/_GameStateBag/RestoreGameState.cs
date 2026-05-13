@@ -159,7 +159,7 @@ internal class RestoreGameState
         {
             if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
             {
-                return new RestoreGameState(Game, gameStateBag, UnusedAndEmptyObjectsPruned);
+                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, gameStateBag, UnusedAndEmptyObjectsPruned);
             }
             throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(ObjectGameStateBag)}.");
         }
@@ -167,7 +167,7 @@ internal class RestoreGameState
         {
             if (dictionaryGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
             {
-                return new RestoreGameState(Game, gameStateBag, UnusedAndEmptyObjectsPruned);
+                return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, gameStateBag, UnusedAndEmptyObjectsPruned);
             }
             throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(DictionaryGameStateBag)}.");
         }
