@@ -4,11 +4,16 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Reflection;
+using System.Text.Json.Serialization;
+
 namespace AngbandOS.Core;
     
 internal class DictionaryGameStateBag : GameStateBag
 {
     public Dictionary<string, GameStateBag> Values { get; } = new Dictionary<string, GameStateBag>();
+
+    public GameStateBag? Find(string key) => Values.TryGetValue(key, out GameStateBag? gameStateBag) ? gameStateBag : null;
 
     /// <summary>
     /// Creates a new dictionary game state bag with itemized properties to be serialized and additional base properties.  This constructor is typically used for derived models.
@@ -49,13 +54,100 @@ internal class DictionaryGameStateBag : GameStateBag
     /// <summary>
     /// Creates a new dictionary game state bag with enumerated properties.  This constructor is typically used for the singleton repository object.
     /// </summary>
-    /// <param name="value"></param>
-    public DictionaryGameStateBag(Dictionary<string, GameStateBag> value)
+    /// <param name="values"></param>
+    [JsonConstructor]
+    public DictionaryGameStateBag(Dictionary<string, GameStateBag> values)
     {
-        LoadValues(value.Select(_keyValuePair => (_keyValuePair.Key, _keyValuePair.Value)).ToArray());
+        LoadValues(values.Select(_keyValuePair => (_keyValuePair.Key, _keyValuePair.Value)).ToArray());
     }
+
+    public bool TryGetGameStateBag(string key, out GameStateBag? gameStateBag) => Values.TryGetValue(key, out gameStateBag);
+
+    public void PruneItems(SaveGameState saveGameState)
+    {
+        // Are there items to enumerate.
+        //if (Values is not null)
+        //{
+        //    // Enumerate all of the items.
+        //    foreach ((string key, GameStateBag itemGameStateBag) in Values)
+        //    {
+        //        // Ensure the game state bag is an object game state bag, and if so, prune the items of the item game state bag.
+        //        if (itemGameStateBag is ObjectGameStateBag itemObjectGameStateBag)
+        //        {
+        //            // Prune the items of the item game state bag.
+        //            itemObjectGameStateBag.PruneItems(saveGameState);
+
+        //            if (itemObjectGameStateBag.IsEmpty && !saveGameState.ObjectIsReferenced(itemObjectGameStateBag.ObjectId))
+        //            {
+        //                // The item is an empty object, we can remove it.
+        //                Values.Remove(key);
+        //            }
+        //        }
+        //    }
+        //}
+    }
+    private static MemberInfo? GetMemberInfo(Type type, string name)
+    {
+        const BindingFlags flags =
+            BindingFlags.Instance |
+            BindingFlags.Static |
+            BindingFlags.Public |
+            BindingFlags.NonPublic;
+
+        while (type != null)
+        {
+            // Check property
+            var prop = type.GetProperty(name, flags);
+            if (prop != null)
+                return prop;
+
+            // Check field
+            var field = type.GetField(name, flags);
+            if (field != null)
+                return field;
+
+            type = type.BaseType!;
+        }
+
+        return null;
+    }
+
+    private static object? GetMemberValue(MemberInfo member, object obj)
+    {
+        return member switch
+        {
+            PropertyInfo p => p.GetValue(obj),
+            FieldInfo f => f.GetValue(obj),
+            _ => throw new NotSupportedException($"Unsupported member type: {member.GetType().Name}")
+        };
+    }
+
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
+        if (singleton is null)
+        {
+            throw new Exception($"During restore verification, a null singleton cannot verify as an object.");
+        }
+
+        if (Values is not null)
+        {
+            foreach ((string PropertyName, GameStateBag ExpectedValue) in Values)
+            {
+                // Retrieve the field info from the singleton.
+                MemberInfo? singletonMemberInfo = GetMemberInfo(singleton.GetType(), PropertyName);
+                if (singletonMemberInfo is null)
+                {
+                    throw new Exception($"During restore verification, the {PropertyName} property for the {singleton.GetType().Name} singleton could not be found.");
+                }
+
+                // Retrieve the actual value from the singleton.
+                object? singletonFieldValue = GetMemberValue(singletonMemberInfo, singleton);
+                if (!restoreGameState.New(ExpectedValue).Verify(singletonFieldValue))
+                {
+                    throw new Exception($"During restore verification, the {PropertyName} property of the {singleton.GetType().Name} singleton did not verify.  Expected {ExpectedValue}.");
+                }
+            }
+        }
         return true;
     }
 }

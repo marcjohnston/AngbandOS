@@ -4,7 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace AngbandOS.Core;
@@ -31,14 +30,14 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             nameof(DecimalValueGameStateBag) => new DecimalValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetDecimal()),
             nameof(DictionaryGameStateBag) => new DictionaryGameStateBag(JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
             nameof(IntValueGameStateBag) => new IntValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetInt32()),
-            nameof(ListGameStateBag) => new ListGameStateBag(JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
+            nameof(ListGameStateBag) => new ListGameStateBag(JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
             nameof(NullValueGameStateBag) => new NullValueGameStateBag(),
-            nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), doc.RootElement.GetProperty("TypeName").GetString()!, JsonSerializer.Deserialize<Dictionary<string, GameStateBag>>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
-            nameof(QueueOfStringGameStateBag) => new QueueOfStringGameStateBag(JsonSerializer.Deserialize<string[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
+            nameof(ObjectGameStateBag) => new ObjectGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32(), doc.RootElement.GetProperty("TypeName").GetString()!, JsonSerializer.Deserialize<DictionaryGameStateBag>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
+            nameof(QueueOfStringGameStateBag) => new QueueOfStringGameStateBag(JsonSerializer.Deserialize<string[]>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
             nameof(ReferenceGameStateBag) => new ReferenceGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32()),
             nameof(StringValueGameStateBag) => new StringValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!),
             nameof(TimeSpanValueGameStateBag) => new TimeSpanValueGameStateBag(TimeSpan.Parse(doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
-            nameof(TupleGameStateBag) => new TupleGameStateBag(doc.RootElement.GetProperty("DataType").GetString()!, JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty("Values").GetRawText(), options)!),
+            nameof(TupleGameStateBag) => new TupleGameStateBag(doc.RootElement.GetProperty("DataType").GetString()!, JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
             _ => throw new Exception($"Unknown type {type}")
         };
     }
@@ -97,7 +96,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
 
             case ListGameStateBag listValue:
                 writer.WriteString(TypePropertyName, nameof(ListGameStateBag));
-                writer.WritePropertyName("Values");
+                writer.WritePropertyName(ValuePropertyName);
                 JsonSerializer.Serialize(writer, listValue.Values, options);
                 break;
 
@@ -109,13 +108,13 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
                 writer.WriteString(TypePropertyName, nameof(ObjectGameStateBag));
                 writer.WriteNumber("ObjectId", objectValue.ObjectId);
                 writer.WriteString("TypeName", objectValue.TypeName);
-                writer.WritePropertyName("Values");
-                JsonSerializer.Serialize(writer, objectValue.SerializeItems, options);
+                writer.WritePropertyName(ValuePropertyName);
+                JsonSerializer.Serialize(writer, objectValue.Values, options);
                 break;
 
             case QueueOfStringGameStateBag queueOfStringValue:
                 writer.WriteString(TypePropertyName, nameof(QueueOfStringGameStateBag));
-                writer.WritePropertyName("Values");
+                writer.WritePropertyName(ValuePropertyName);
                 JsonSerializer.Serialize(writer, queueOfStringValue.Values, options);
                 break;
 
@@ -137,7 +136,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             case TupleGameStateBag tupleValue:
                 writer.WriteString(TypePropertyName, nameof(TupleGameStateBag));
                 writer.WriteString("DataType", tupleValue.DataType);
-                writer.WritePropertyName("Values");
+                writer.WritePropertyName(ValuePropertyName);
                 JsonSerializer.Serialize(writer, tupleValue.Values, options);
                 break;
 

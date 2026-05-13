@@ -108,21 +108,34 @@ internal class RestorePack
         // Check to see if this is a reference.
         if (UnpackByte() == 11)
         {
-            // It is.
+            // It is.  Retrieve a packed int for the reference.
             int existingObjectId = UnpackInt();
+
+            // Lookup the reference in the restore game state.
             object reference = RestoreGameState.GetObjectById(existingObjectId);
+
+            // Convert the reference accordingly and return it.
             if (reference is T typedReference)
             {
                 return typedReference;
             }
+
+            // The reference was not the correct type, throw an exception.
             throw new Exception("Cannot convert pack.");
         }
+
+        // This is an object definition.  We need to unpack the ID for the object and the type name.
         int newObjectId = UnpackInt();
         string typeName = UnpackString();
-        Dictionary<string, GameStateBag>? dictionary = null;
+
+        // Now we need to generate the dictionary game state bag.
+        DictionaryGameStateBag? dictionaryGameStateBag = null;
+
+        // Check to see if it is null.
         if (UnpackByte() != 0)
         {
-            dictionary = new Dictionary<string, GameStateBag>();
+            // It is not.  Lets unpack the dictionary game state bag.
+            Dictionary<string, GameStateBag> dictionary = new Dictionary<string, GameStateBag>();
             int dictionaryLength = UnpackInt();
             for (int i = 0; i < dictionaryLength; i++)
             {
@@ -136,8 +149,9 @@ internal class RestorePack
 
                 dictionary.Add(key, gameStateBag);
             }
+            dictionaryGameStateBag = new DictionaryGameStateBag(dictionary);
         }
-        ObjectGameStateBag objectGameStateBag = new ObjectGameStateBag(newObjectId, typeName, dictionary);
+        ObjectGameStateBag objectGameStateBag = new ObjectGameStateBag(newObjectId, typeName, dictionaryGameStateBag);
 
         object? existingObject = RestoreGameState.TryGetObjectById(newObjectId);
         if (existingObject is not null)

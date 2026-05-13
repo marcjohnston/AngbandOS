@@ -239,7 +239,7 @@ internal class SaveGameState
             //}
             //#endif
 
-            return new ObjectGameStateBag(objectId, value.GetType().Name, gameStateBag?.Values);
+            return new ObjectGameStateBag(objectId, value.GetType().Name, gameStateBag);
         }
 
         if (value is IGameSerialize[][] arrayOfArrayOfIGameSerialize)
