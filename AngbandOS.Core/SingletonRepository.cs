@@ -431,7 +431,7 @@ internal sealed class SingletonRepository : IGameSerialize
         foreach (IGetKey singleton in _allSingletonsList)
         {
             // Retrieve the restore game state, if we are restoring; otherwise, we will have null as the restore game state--which is still passed to the singleton Bind method.
-            RestoreGameState singletonRestoreGameState = restoreGameState?.Get(singleton.GetKey);
+            RestoreGameState? singletonRestoreGameState = restoreGameState?.Get(singleton.GetKey);
 
             // Allow the singleton to bind now.  Provide the restore game state, if we are restoring.
             singleton.Bind(singletonRestoreGameState);
