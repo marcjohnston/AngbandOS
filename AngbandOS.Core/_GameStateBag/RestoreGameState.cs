@@ -18,8 +18,9 @@ internal class RestoreGameState
     private Dictionary<int, ObjectGameStateBag> ObjectIdToObjectGameStateBagDictionary { get; }
     public GameStateBag GameStateBag { get; }
     public bool UnusedAndEmptyObjectsPruned { get; }
+
     /// <summary>
-    /// Creates a clone of the RestoreGameState with a new game state bag.
+    /// Creates a clone of the RestoreGameState with a new game state bag.  Only the New method should utilize this constructor.
     /// </summary>
     /// <param name="game"></param>
     /// <param name="objectIdToReferenceDictionary"></param>
@@ -350,7 +351,7 @@ internal class RestoreGameState
         foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
         {
             RestoreGameState restoreGameState = New(gameStateBag);
-            T t = GetReference<T>(gameStateBag);
+            T t = restoreGameState.GetReference<T>();
             list.Add(t);
         }
         return list.ToArray();
@@ -367,7 +368,9 @@ internal class RestoreGameState
             }
             else
             {
-                list.Add(GetReference<T>(gameStateBag));
+                RestoreGameState restoreGameState = New(gameStateBag);
+                T t = restoreGameState.GetReference<T>();
+                list.Add(t);
             }
         }
         return list.ToArray();
