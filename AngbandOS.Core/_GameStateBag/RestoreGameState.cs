@@ -351,12 +351,10 @@ internal class RestoreGameState
 
     public T GetReference<T>(string key)
     {
-        #if DEBUG
         if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
         {
             throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
         }
-        #endif
 
         if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
         {
