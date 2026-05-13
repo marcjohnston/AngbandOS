@@ -111,7 +111,7 @@ internal sealed class Town : IGetKey, IToJson, IGameSerialize
             Visited = restoreGameState.GetByKey(nameof(Visited)).GetBool();
             X = restoreGameState.GetInt(nameof(X));
             Y = restoreGameState.GetInt(nameof(Y));
-            Stores = restoreGameState.GetReferences<Store>(nameof(Stores));
+            Stores = restoreGameState.GetByKey(nameof(Stores)).GetReferences<Store>();
         }
     }
 

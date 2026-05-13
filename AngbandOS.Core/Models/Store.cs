@@ -48,14 +48,14 @@ internal class Store : IGameSerialize
         InventoryFactories = table.ToArray();
     }
 
-    public Store(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<StoreFactory>(nameof(StoreFactory)))
+    public Store(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(StoreFactory)).GetReference<StoreFactory>())
     {
         _x = restoreGameState.GetInt(nameof(_x));
         _y = restoreGameState.GetInt(nameof(_y));
         _leaveStore = restoreGameState.GetByKey(nameof(_leaveStore)).GetBool();
-        StoreInventoryList = restoreGameState.GetReferences<Item>(nameof(StoreInventoryList)).ToList();
+        StoreInventoryList = restoreGameState.GetByKey(nameof(StoreInventoryList)).GetReferences<Item>().ToList();
         StoreTop = restoreGameState.GetInt(nameof(StoreTop));
-        Owner = restoreGameState.GetReference<Shopkeeper>(nameof(Owner));
+        Owner = restoreGameState.GetByKey(nameof(Owner)).GetReference<Shopkeeper>();
     }
     /// <summary>
     /// The grid x coordinate of the store on the town level.

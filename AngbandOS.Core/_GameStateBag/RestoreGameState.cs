@@ -58,10 +58,6 @@ internal class RestoreGameState
         return new RestorePack(this, data);
     }
     #endregion
-    public bool ContainsKey(int key)
-    {
-        return ObjectIdToReferenceDictionary.ContainsKey(key);
-    }
 
     public void TrackObject(int objectId, object singleton)
     {
@@ -296,28 +292,6 @@ internal class RestoreGameState
             }
 
             return CreateObject<T>(objectId, objectGameStateBag);
-            //// The object doesn't exist yet.  We need to create it and track it.
-            //var fullyQualifiedName = $"{typeof(Game).Assembly.GetName().Name}.Core.{objectGameStateBag.TypeName}";
-            //Type? type = Type.GetType(fullyQualifiedName);
-            //if (type is null)
-            //{
-            //    throw new Exception($"{fullyQualifiedName} type not found.  Ensure it is in the Core namespace.");
-            //}
-            //RestoreGameState restoreGameState = New(objectGameStateBag);
-            //try
-            //{
-            //    T? t = (T?)Activator.CreateInstance(type, Game, restoreGameState);
-            //    if (t is null)
-            //    {
-            //        throw new Exception($"Unable to instantiate a new {objectGameStateBag.TypeName}.");
-            //    }
-            //    TrackObject(objectId, t);
-            //    return t;
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception($"Error during construction of a {type.Name}({nameof(Game)}, {nameof(RestoreGameState)}.  {ex.Message}");
-            //}
         }
         throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
     }
@@ -347,69 +321,33 @@ internal class RestoreGameState
         }
     }
 
-    public T GetReference<T>(string key)
+    public T GetReference<T>()
     {
-        if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
-        {
-            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
-        }
-
-        if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
-        {
-            return GetReference<T>(gameStateBag);
-        }
-        throw new KeyNotFoundException($"The key '{key}' was not found in the GameStateBag.");
+        return GetReference<T>(GameStateBag);
     }
 
-
-    public T? GetReferenceOrDefault<T>(string key)
+    public T? GetReferenceOrDefault<T>()
     {
-        if (GameStateBag is ObjectGameStateBag objectGameStateBag)
+        if (GameStateBag is NullValueGameStateBag)
         {
-            if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
-            {
-                if (gameStateBag is NullValueGameStateBag)
-                {
-                    return default;
-                }
-                return GetReference<T>(gameStateBag);
-            }
+            return default;
         }
-        if (GameStateBag is DictionaryGameStateBag dictionaryGameStateBag)
-        {
-            if (dictionaryGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
-            {
-                if (gameStateBag is NullValueGameStateBag)
-                {
-                    return default;
-                }
-                return GetReference<T>(gameStateBag);
-            }
-        }
-        throw new InvalidOperationException($"GameStateBag is not of type {nameof(ObjectGameStateBag)} or {nameof(DictionaryGameStateBag)}.");
+        return GetReference<T>();
     }
 
-    public T[]? GetReferencesOrNull<T>(string key)
+    public T[]? GetReferencesOrNull<T>()
     {
-        if (GameStateBag is not ObjectGameStateBag objectGameStateBag)
+        if (GameStateBag is NullValueGameStateBag)
         {
-            throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
+            return default;
         }
-        if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
-        {
-            if (gameStateBag is NullValueGameStateBag)
-            {
-                return default;
-            }
-            return GetReferences<T>(key); // TODO: This smells
-        }
-        throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name}.");
+        return GetReferences<T>(); // TODO: This smells
     }
 
-    public T[] GetReferences<T>(string key)
+    public T[] GetReferences<T>()
     {
         List<T> list = new List<T>();
-        foreach (GameStateBag gameStateBag in GetGameStateBag<ListGameStateBag>(key).Values)
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
         {
             T t = GetReference<T>(gameStateBag);
             list.Add(t);
@@ -417,10 +355,10 @@ internal class RestoreGameState
         return list.ToArray();
     }
 
-    public T?[] GetNullableReferences<T>(string key)
+    public T?[] GetNullableReferences<T>()
     {
         List<T?> list = new List<T?>();
-        foreach (GameStateBag gameStateBag in GetGameStateBag<ListGameStateBag>(key).Values)
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
         {
             if (gameStateBag is NullValueGameStateBag)
             {

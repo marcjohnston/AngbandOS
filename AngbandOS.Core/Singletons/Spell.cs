@@ -68,8 +68,8 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
             Forgotten = restoreGameState.GetByKey(nameof(Forgotten)).GetBool();
             _spellIndex = restoreGameState.GetInt(nameof(_spellIndex));
             Learned = restoreGameState.GetByKey(nameof(Learned)).GetBool();
-            _spellBookItemFactory = restoreGameState.GetReferenceOrDefault<ItemFactory>(nameof(_spellBookItemFactory));
-            _characterClassSpell = restoreGameState.GetReferenceOrDefault<CharacterClassSpell>(nameof(_characterClassSpell));
+            _spellBookItemFactory = restoreGameState.GetByKey(nameof(_spellBookItemFactory)).GetReferenceOrDefault<ItemFactory>();
+            _characterClassSpell = restoreGameState.GetByKey(nameof(_characterClassSpell)).GetReferenceOrDefault<CharacterClassSpell>();
             Tried = restoreGameState.GetByKey(nameof(Tried)).GetBool();
         }
     }

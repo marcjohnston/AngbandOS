@@ -288,7 +288,7 @@ internal class Monster : IItemContainer, IGameSerialize
         DistanceFromPlayer = restoreGameState.GetInt(nameof(DistanceFromPlayer));
         Energy = restoreGameState.GetInt(nameof(Energy));
         _fearLevel = restoreGameState.GetInt(nameof(_fearLevel));
-        Items.AddRange(restoreGameState.GetReferences<Item>(nameof(Items)));
+        Items.AddRange(restoreGameState.GetByKey(nameof(Items)).GetReferences<Item>());
         Generation = restoreGameState.GetInt(nameof(Generation));
         _health = restoreGameState.GetInt(nameof(_health));
         _isVisible = restoreGameState.GetByKey(nameof(_isVisible)).GetBool();
@@ -327,7 +327,7 @@ internal class Monster : IItemContainer, IGameSerialize
         SmResPois = restoreGameState.GetByKey(nameof(SmResPois)).GetBool();
         SmResShard = restoreGameState.GetByKey(nameof(SmResShard)).GetBool();
         SmResSound = restoreGameState.GetByKey(nameof(SmResSound)).GetBool();
-        Race = restoreGameState.GetReferenceOrDefault<MonsterRace>(nameof(Race));
+        Race = restoreGameState.GetByKey(nameof(Race)).GetReferenceOrDefault<MonsterRace>();
         _sleepLevel = restoreGameState.GetInt(nameof(_sleepLevel));
         Speed = restoreGameState.GetInt(nameof(Speed));
         StolenGold = restoreGameState.GetInt(nameof(StolenGold));

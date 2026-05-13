@@ -69,9 +69,9 @@ internal class Window : IGameSerialize
 
     public Window(Game game, RestoreGameState restoreGameState)
     {
-        ActiveScreen = restoreGameState.GetReference<ScreenBuffer>(nameof(ActiveScreen));
-        OldScreen = restoreGameState.GetReference<ScreenBuffer>(nameof(OldScreen));
-        UpdateWindow = restoreGameState.GetReference<UpdateWindow>(nameof(UpdateWindow));
+        ActiveScreen = restoreGameState.GetByKey(nameof(ActiveScreen)).GetReference<ScreenBuffer>();
+        OldScreen = restoreGameState.GetByKey(nameof(OldScreen)).GetReference<ScreenBuffer>();
+        UpdateWindow = restoreGameState.GetByKey(nameof(UpdateWindow)).GetReference<UpdateWindow>();
         Height = restoreGameState.GetInt(nameof(Height));
         Width = restoreGameState.GetInt(nameof(Width));
         RowStartingIndexArray = restoreGameState.GetInts(nameof(RowStartingIndexArray));

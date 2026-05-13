@@ -40,9 +40,9 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     public ColorEnum Color;
 
     #region Constructors
-    public ItemFactory(Game game, ItemFactoryGameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag) : this(game, gameConfiguration)
-    {
-    }
+    //public ItemFactory(Game game, ItemFactoryGameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag) : this(game, gameConfiguration)
+    //{
+    //}
 
     public ItemFactory(Game game, ItemFactoryGameConfiguration gameConfiguration) 
     {
@@ -521,14 +521,14 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         if (restoreGameState is not null)
         {
             IsFlavorAware = restoreGameState.GetByKey(nameof(IsFlavorAware)).GetBool();
-            FlavorSymbol = restoreGameState.GetReference<Symbol>(nameof(FlavorSymbol));
+            FlavorSymbol = restoreGameState.GetByKey(nameof(FlavorSymbol)).GetReference<Symbol>();
             FlavorColor = restoreGameState.GetByKey(nameof(FlavorColor)).GetEnum<ColorEnum>();
-            Flavor = restoreGameState.GetReferenceOrDefault<Flavor>(nameof(Flavor));
+            Flavor = restoreGameState.GetByKey(nameof(Flavor)).GetReferenceOrDefault<Flavor>();
             Tried = restoreGameState.GetByKey(nameof(Tried)).GetBool();
             Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
             Stompable = restoreGameState.GetByKey(nameof(Stompable)).GetBools();
             _bookIndex = restoreGameState.GetInt(nameof(_bookIndex));
-            _realm = restoreGameState.GetReferenceOrDefault<Realm>(nameof(_realm));
+            _realm = restoreGameState.GetByKey(nameof(_realm)).GetReferenceOrDefault<Realm>();
         }
     }
 

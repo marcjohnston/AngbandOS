@@ -16,7 +16,7 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
         Game = game;
         Value = value;
     }
-    public ReadOnlyAttributeSet(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReferences<AttributeValue>(nameof(Value)))
+    public ReadOnlyAttributeSet(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Value)).GetReferences<AttributeValue>())
     {
     }
 

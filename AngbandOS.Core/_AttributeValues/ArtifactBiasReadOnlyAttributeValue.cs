@@ -14,7 +14,7 @@ internal class ArtifactBiasReadOnlyAttributeValue : AttributeValue
     {
         Value = value;
     }
-    public ArtifactBiasReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetReferenceOrDefault<ArtifactBias>(nameof(Value)))
+    public ArtifactBiasReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetByKey(nameof(Value)).GetReferenceOrDefault<ArtifactBias>())
     {
     }
 

@@ -48,7 +48,7 @@ internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
         _attributeModifiers.RemoveAll((item) => item.Key == key);
     }
     public FriendlyNameEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
-    public FriendlyNameEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<Attribute>(nameof(Attribute)))
+    public FriendlyNameEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
     {
         ListGameStateBag tuplesListGameStateBag = restoreGameState.GetGameStateBag<ListGameStateBag>(nameof(_attributeModifiers));
 

@@ -14,7 +14,7 @@ internal class ActivationReadOnlyAttributeValue : AttributeValue, IGameSerialize
     {
         Value = value;
     }
-    public ActivationReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetReferenceOrDefault<Activation>(nameof(Value)))
+    public ActivationReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetByKey(nameof(Value)).GetReferenceOrDefault<Activation>())
     {
     }
 

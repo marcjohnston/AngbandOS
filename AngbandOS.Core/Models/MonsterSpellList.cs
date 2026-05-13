@@ -28,7 +28,7 @@ internal class MonsterSpellList : IGameSerialize
 
     public MonsterSpellList(Game game, RestoreGameState restoreGameState)
     {
-        _spells = restoreGameState.GetReferences<MonsterSpell>(nameof(_spells));
+        _spells = restoreGameState.GetByKey(nameof(_spells)).GetReferences<MonsterSpell>();
     }
 
     public MonsterSpell[] Spells => _spells;

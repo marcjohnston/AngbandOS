@@ -37,7 +37,7 @@ internal abstract class Race : IGetKey, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            EffectiveAttributeSet = restoreGameState.GetReference<ReadOnlyAttributeSet>(nameof(EffectiveAttributeSet));
+            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetReference<ReadOnlyAttributeSet>();
         }
     }
 

@@ -50,9 +50,9 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     public Item(Game game, RestoreGameState restoreGameState)
     {
         Game = game;
-        FixedArtifact = restoreGameState.GetReferenceOrDefault<FixedArtifact>(nameof(FixedArtifact));
-        EffectiveAttributeSet = restoreGameState.GetReference<EffectiveAttributeSet>(nameof(EffectiveAttributeSet));
-        _factory = restoreGameState.GetReference<ItemFactory>(nameof(_factory));
+        FixedArtifact = restoreGameState.GetByKey(nameof(FixedArtifact)).GetReferenceOrDefault<FixedArtifact>();
+        EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetReference<EffectiveAttributeSet>();
+        _factory = restoreGameState.GetByKey(nameof(_factory)).GetReference<ItemFactory>();
         NutritionalValue = restoreGameState.GetInt(nameof(NutritionalValue));
         Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
         IdentSense = restoreGameState.GetByKey(nameof(IdentSense)).GetBool();
@@ -67,7 +67,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         Inscription = restoreGameState.GetByKey(nameof(Inscription)).GetString();
         WasNoticed = restoreGameState.GetByKey(nameof(WasNoticed)).GetBool();
         ActivationRechargeTimeRemaining = restoreGameState.GetInt(nameof(ActivationRechargeTimeRemaining));
-        ContainerTraps = restoreGameState.GetReferencesOrNull<ChestTrap>(nameof(ContainerTraps));
+        ContainerTraps = restoreGameState.GetByKey(nameof(ContainerTraps)).GetReferencesOrNull<ChestTrap>();
         LevelOfObjectsInContainer = restoreGameState.GetInt(nameof(LevelOfObjectsInContainer));
         ContainerIsOpen = restoreGameState.GetByKey(nameof(ContainerIsOpen)).GetBool();
         StaffChargesRemaining = restoreGameState.GetInt(nameof(StaffChargesRemaining));

@@ -46,7 +46,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         Game = game;
         Attribute[] cachedAttributes = LoadCachedAttributes();
-        _effectiveAttributeValues = restoreGameState.GetReferences<EffectiveAttributeValue>(nameof(_effectiveAttributeValues));
+        _effectiveAttributeValues = restoreGameState.GetByKey(nameof(_effectiveAttributeValues)).GetReferences<EffectiveAttributeValue>();
     }
 
     public void RemoveKeyedEnhancements(string key)
