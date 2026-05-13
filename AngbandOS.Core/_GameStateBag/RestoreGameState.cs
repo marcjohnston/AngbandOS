@@ -488,25 +488,20 @@ internal class RestoreGameState
         return GetDateTime(key);
     }
 
-    public T[][] GetJaggedArrayOfReferences<T>(string key)
+    public T[][] GetJaggedArrayOfReferences<T>()
     {
-        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
-        List<T[]> listOfStrings = new List<T[]>();
-        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        List<T[]> listOfReferences = new List<T[]>();
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
         {
             if (gameStateBag is not ListGameStateBag listOfStringsBag)
             {
                 throw new Exception($"Jagged array of {typeof(T).Name} not a list.");
             }
-
-            List<T> list = new List<T>();
-            foreach (GameStateBag innerGameStateBag in listOfStringsBag.Values)
-            {
-                list.Add(GetReference<T>(innerGameStateBag));
-            }
-            listOfStrings.Add(list.ToArray());
+            RestoreGameState referencesRestoreGameState = new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, gameStateBag, UnusedAndEmptyObjectsPruned);
+            T[] references = referencesRestoreGameState.GetReferences<T>();
+            listOfReferences.Add(references);
         }
-        return listOfStrings.ToArray();
+        return listOfReferences.ToArray();
     }
 
     public string? GetStringOrDefault()
