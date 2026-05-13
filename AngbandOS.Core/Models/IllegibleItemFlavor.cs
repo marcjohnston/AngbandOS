@@ -21,7 +21,7 @@ internal class IllegibleItemFlavor : Flavor, IGameSerialize
         );
     }
 
-    public IllegibleItemFlavor(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<Symbol>(nameof(Symbol)), restoreGameState.GetEnum<ColorEnum>(nameof(Color)), restoreGameState.GetString(nameof(Name)))
+    public IllegibleItemFlavor(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetReference<Symbol>(nameof(Symbol)), restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>(), restoreGameState.GetString(nameof(Name)))
     {
     }
 

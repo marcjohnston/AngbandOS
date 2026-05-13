@@ -631,7 +631,7 @@ internal partial class Game : IGameSerialize
             AllocKindTable = restoreGameState.GetReferences<AllocationEntry>(nameof(AllocKindTable)).ToArray();
             AllocRaceSize = restoreGameState.GetInt(nameof(AllocRaceSize));
             AllocRaceTable = restoreGameState.GetReferences<AllocationEntry>(nameof(AllocRaceTable)).ToArray();
-            CameFrom = restoreGameState.GetEnum<LevelStartEnum>(nameof(CameFrom));
+            CameFrom = restoreGameState.GetByKey(nameof(CameFrom)).GetEnum<LevelStartEnum>();
             CharacterXtra = restoreGameState.GetBool(nameof(CharacterXtra));
             CreateDownStair = restoreGameState.GetBool(nameof(CreateDownStair));
             CreateUpStair = restoreGameState.GetBool(nameof(CreateUpStair));

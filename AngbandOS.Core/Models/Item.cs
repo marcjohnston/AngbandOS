@@ -54,7 +54,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         EffectiveAttributeSet = restoreGameState.GetReference<EffectiveAttributeSet>(nameof(EffectiveAttributeSet));
         _factory = restoreGameState.GetReference<ItemFactory>(nameof(_factory));
         NutritionalValue = restoreGameState.GetInt(nameof(NutritionalValue));
-        Color = restoreGameState.GetEnum<ColorEnum>(nameof(Color));
+        Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
         IdentSense = restoreGameState.GetBool(nameof(IdentSense));
         IdentFixed = restoreGameState.GetBool(nameof(IdentFixed));
         IdentEmpty = restoreGameState.GetBool(nameof(IdentEmpty));

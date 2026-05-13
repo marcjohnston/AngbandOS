@@ -52,7 +52,7 @@ internal class ScreenBuffer : IGameSerialize
 
     public ScreenBuffer(Game game, RestoreGameState restoreGameState)
     {
-        Va = restoreGameState.GetEnums<ColorEnum>(nameof(Va));
+        Va = restoreGameState.GetByKey(nameof(Va)).GetEnums<ColorEnum>();
         Vc = restoreGameState.GetChars(nameof(Vc));
         Cx = restoreGameState.GetInt(nameof(Cx));
         Cy = restoreGameState.GetInt(nameof(Cy));

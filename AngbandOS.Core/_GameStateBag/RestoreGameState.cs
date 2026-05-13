@@ -155,6 +155,26 @@ internal class RestoreGameState
         throw new Exception("Key not found in GameStateBag.");
     }
 
+    public RestoreGameState GetByKey(string key)
+    {
+        if (GameStateBag is ObjectGameStateBag objectGameStateBag)
+        {
+            if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
+            {
+                return new RestoreGameState(Game, gameStateBag, UnusedAndEmptyObjectsPruned);
+            }
+            throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(ObjectGameStateBag)}.");
+        }
+        if (GameStateBag is DictionaryGameStateBag dictionaryGameStateBag)
+        {
+            if (dictionaryGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+            {
+                return new RestoreGameState(Game, gameStateBag, UnusedAndEmptyObjectsPruned);
+            }
+            throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(DictionaryGameStateBag)}.");
+        }
+        throw new InvalidOperationException($"GameStateBag is not of type {nameof(ObjectGameStateBag)} or {nameof(DictionaryGameStateBag)}.");
+    }
     public TGameStateBag GetGameStateBag<TGameStateBag>(string key) where TGameStateBag : GameStateBag
     {
         if (GameStateBag is ObjectGameStateBag objectGameStateBag)
@@ -178,19 +198,19 @@ internal class RestoreGameState
 
     public bool GetBool(string key) => GetGameStateBag<BoolValueGameStateBag>(key).Value;
 
-    public T GetEnum<T>(string key) where T : Enum
+    public T GetEnum<T>() where T : Enum
     {
-        int value = GetInt(key);
+        int value = GetInt();
         if (Enum.IsDefined(typeof(T), value))
         {
             return (T)(object)value;
         }
-        throw new ArgumentOutOfRangeException(nameof(value), $"Invalid value for enum {typeof(T).Name}: {value}");
+        throw new ArgumentOutOfRangeException(nameof(value), $"Invalid value for {typeof(T).Name}: {value}");
     }
 
-    public T[] GetEnums<T>(string key) where T : Enum
+    public T[] GetEnums<T>() where T : Enum
     {
-        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
+        ListGameStateBag listGameStateBag = (ListGameStateBag)GameStateBag;
         List<T> boolList = new List<T>();
         foreach (GameStateBag gameStateBag in listGameStateBag.Values)
         {
@@ -209,9 +229,9 @@ internal class RestoreGameState
         return boolList.ToArray();
     }
 
-    public bool[] GetBools(string key)
+    public bool[] GetBools()
     {
-        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
+        ListGameStateBag listGameStateBag = (ListGameStateBag)GameStateBag;
         List<bool> boolList = new List<bool>();
         foreach (GameStateBag gameStateBag in listGameStateBag.Values)
         {
@@ -513,6 +533,7 @@ internal class RestoreGameState
 
     public char[] GetChars(string key) => GetGameStateBag<CharArrayGameStateBag>(key).Value.ToCharArray();
     public int GetInt(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
+    public int GetInt() => ((IntValueGameStateBag)GameStateBag).Value;
     public int? GetNullableInt(string key)
     {
         GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);

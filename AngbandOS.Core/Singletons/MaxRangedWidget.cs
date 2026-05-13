@@ -84,7 +84,7 @@ internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, IGameSerialize
         {
             _sortValidated = restoreGameState.GetBool(nameof(_sortValidated));
             _value = restoreGameState.GetString(nameof(_value));
-            _color = restoreGameState.GetEnum<ColorEnum>(nameof(_color));
+            _color = restoreGameState.GetByKey(nameof(_color)).GetEnum<ColorEnum>();
         }
     }
 
