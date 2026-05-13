@@ -22,7 +22,7 @@ internal class ArtifactBiasEffectiveAttributeValue : EffectiveAttributeValue
         foreach (GameStateBag tupleGameStateBag in tuplesListGameStateBag.Values)
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetString("Key");
+            string key = tupleRestoreGameState.GetByKey("Key").GetString();
             ArtifactBias? modifier = tupleRestoreGameState.GetReferenceOrDefault<ArtifactBias>("Modifier");
             _attributeModifiers.Add((key, modifier));
         }

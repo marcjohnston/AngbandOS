@@ -29,7 +29,7 @@ internal class BoolSetEffectiveAttributeValue : EffectiveAttributeValue
         foreach (GameStateBag tupleGameStateBag in tuplesListGameStateBag.Values)
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetString("Key");
+            string key = tupleRestoreGameState.GetByKey("Key").GetString();
             bool? modifier = tupleRestoreGameState.GetByKey("Modifier").GetBoolOrDefault();
 
             _attributeModifiers.Add((key, modifier));

@@ -638,7 +638,7 @@ internal partial class Game : IGameSerialize
             CurDungeon = restoreGameState.GetReference<Dungeon>(nameof(CurDungeon));
             CurrentDepth = restoreGameState.GetInt(nameof(CurrentDepth));
             CurTown = restoreGameState.GetReference<Town>(nameof(CurTown));
-            DiedFrom = restoreGameState.GetStringOrDefault(nameof(DiedFrom));
+            DiedFrom = restoreGameState.GetByKey(nameof(DiedFrom)).GetStringOrDefault();
             DungeonDifficulty = restoreGameState.GetInt(nameof(DungeonDifficulty));
             EnergyUse = restoreGameState.GetInt(nameof(EnergyUse));
             HackMind = restoreGameState.GetByKey(nameof(HackMind)).GetBool();
@@ -667,7 +667,7 @@ internal partial class Game : IGameSerialize
             Screen = restoreGameState.GetReference<Window>(nameof(Screen));
             KeyHead = restoreGameState.GetInt(nameof(KeyHead));
             KeyTail = restoreGameState.GetInt(nameof(KeyTail));
-            _artificialKeyBuffer = restoreGameState.GetString(nameof(_artificialKeyBuffer));
+            _artificialKeyBuffer = restoreGameState.GetByKey(nameof(_artificialKeyBuffer)).GetString();
             _keymapAct = restoreGameState.GetArrayOfStrings(nameof(_keymapAct));
             History = restoreGameState.GetStrings(nameof(History));
             PlayerHp = restoreGameState.GetInts(nameof(PlayerHp));
@@ -729,14 +729,14 @@ internal partial class Game : IGameSerialize
             ShimmerMonsters = restoreGameState.GetByKey(nameof(ShimmerMonsters)).GetBool();
             Monsters = restoreGameState.GetReferences<Monster>(nameof(Monsters)).ToArray();
             _hackMIdxIi = restoreGameState.GetInt(nameof(_hackMIdxIi));
-            StartupTownName = restoreGameState.GetStringOrDefault(nameof(StartupTownName));
+            StartupTownName = restoreGameState.GetByKey(nameof(StartupTownName)).GetStringOrDefault();
             MessageLog = restoreGameState.GetReferences<GameMessage>(nameof(MessageLog)).ToList();
             RecentMessages = restoreGameState.GetReferences<GameMessage>(nameof(RecentMessages)).ToList();
             PreviousMessages = restoreGameState.GetReferences<GameMessage>(nameof(PreviousMessages)).ToArray();
             MessageFirstQueueIndex = restoreGameState.GetInt(nameof(MessageFirstQueueIndex));
             _prevCharacterClass = restoreGameState.GetReference<CharacterClass>(nameof(_prevCharacterClass));
             _prevGeneration = restoreGameState.GetInt(nameof(_prevGeneration));
-            _prevName = restoreGameState.GetString(nameof(_prevName));
+            _prevName = restoreGameState.GetByKey(nameof(_prevName)).GetString();
             _prevRace = restoreGameState.GetReferenceOrDefault<Race>(nameof(_prevRace));
             _prevPrimaryRealm = restoreGameState.GetReferenceOrDefault<Realm>(nameof(_prevPrimaryRealm));
             _prevSecondaryRealm = restoreGameState.GetReferenceOrDefault<Realm>(nameof(_prevSecondaryRealm));

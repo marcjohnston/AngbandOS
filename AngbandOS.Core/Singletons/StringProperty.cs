@@ -16,7 +16,7 @@ internal abstract class StringProperty : Property, IStringValue
         base.Bind(restoreGameState);
         if (restoreGameState is not null)
         {
-            _value = restoreGameState.GetString(nameof(_value));
+            _value = restoreGameState.GetByKey(nameof(_value)).GetString();
         }
     }
     private string _value;

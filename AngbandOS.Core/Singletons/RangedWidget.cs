@@ -56,7 +56,7 @@ internal sealed class RangedWidget : Widget, IGetKey, IToJson, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            _text = restoreGameState.GetString(nameof(_text));
+            _text = restoreGameState.GetByKey(nameof(_text)).GetString();
             _color = restoreGameState.GetByKey(nameof(_color)).GetEnum<ColorEnum>();
         }
     }

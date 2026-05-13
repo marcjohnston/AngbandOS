@@ -17,7 +17,7 @@ internal class GameMessage : IGameMessage, IGameSerialize
         Count = 1;
     }
 
-    public GameMessage(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetString(nameof(Text)))
+    public GameMessage(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetByKey(nameof(Text)).GetString())
     {
         Count = restoreGameState.GetInt(nameof(Count));
     }

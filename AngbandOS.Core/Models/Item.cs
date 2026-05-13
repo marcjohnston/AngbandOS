@@ -64,7 +64,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         StackCount = restoreGameState.GetInt(nameof(StackCount));
         Discount = restoreGameState.GetInt(nameof(Discount));
         HoldingMonsterIndex = restoreGameState.GetInt(nameof(HoldingMonsterIndex));
-        Inscription = restoreGameState.GetString(nameof(Inscription));
+        Inscription = restoreGameState.GetByKey(nameof(Inscription)).GetString();
         WasNoticed = restoreGameState.GetByKey(nameof(WasNoticed)).GetBool();
         ActivationRechargeTimeRemaining = restoreGameState.GetInt(nameof(ActivationRechargeTimeRemaining));
         ContainerTraps = restoreGameState.GetReferencesOrNull<ChestTrap>(nameof(ContainerTraps));
@@ -77,7 +77,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         Y = restoreGameState.GetInt(nameof(Y));
         TurnsOfLightRemaining = restoreGameState.GetInt(nameof(TurnsOfLightRemaining));
         GoldPieces = restoreGameState.GetInt(nameof(GoldPieces));
-        RandomArtifactName = restoreGameState.GetStringOrDefault(nameof(RandomArtifactName));
+        RandomArtifactName = restoreGameState.GetByKey(nameof(RandomArtifactName)).GetStringOrDefault();
     }
 
     #region State Data - Fields that are maintained

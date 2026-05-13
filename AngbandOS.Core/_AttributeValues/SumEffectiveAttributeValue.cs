@@ -21,7 +21,7 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
         foreach (GameStateBag tupleGameStateBag in tuplesListGameStateBag.Values)
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetString("Key");
+            string key = tupleRestoreGameState.GetByKey("Key").GetString();
             int modifier = tupleRestoreGameState.GetInt("Modifier");
 
             _attributeModifiers.Add((key, modifier));

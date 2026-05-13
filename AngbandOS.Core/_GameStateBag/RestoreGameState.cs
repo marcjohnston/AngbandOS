@@ -575,14 +575,13 @@ internal class RestoreGameState
         return listOfStrings.ToArray();
     }
 
-    public string? GetStringOrDefault(string key)
+    public string? GetStringOrDefault()
     {
-        GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);
-        if (gameStateBag is NullValueGameStateBag)
+        if (GameStateBag is NullValueGameStateBag)
         {
             return default;
         }
-        return GetString(key); // TODO: This smells
+        return GetString(); // TODO: This smells
     }
 
     public bool? GetBoolOrDefault()
@@ -594,7 +593,7 @@ internal class RestoreGameState
         return GetBool(); // TODO: This smells
     }
 
-    public string GetString(string key) => GetGameStateBag<StringValueGameStateBag>(key).Value;
+    public string GetString() => ((StringValueGameStateBag)GameStateBag).Value;
 
     public DateTime GetDateTime(string key) => GetGameStateBag<DateTimeValueGameStateBag>(key).Value;
 

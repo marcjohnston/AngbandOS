@@ -26,7 +26,7 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
         foreach (GameStateBag tupleGameStateBag in tuplesListGameStateBag.Values)
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetString("Key");
+            string key = tupleRestoreGameState.GetByKey("Key").GetString();
             bool modifier = tupleRestoreGameState.GetByKey("Modifier").GetBool();
 
             _attributeModifiers.Add((key, modifier));

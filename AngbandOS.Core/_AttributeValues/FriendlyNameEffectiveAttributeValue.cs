@@ -55,8 +55,8 @@ internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
         foreach (GameStateBag tupleGameStateBag in tuplesListGameStateBag.Values)
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetString("Key");
-            string? modifier = tupleRestoreGameState.GetStringOrDefault("Modifier");
+            string key = tupleRestoreGameState.GetByKey("Key").GetString();
+            string? modifier = tupleRestoreGameState.GetByKey("Modifier").GetStringOrDefault();
             _attributeModifiers.Add((key, modifier));
         }
     }
