@@ -626,7 +626,7 @@ internal partial class Game : IGameSerialize
             LastInputReceived = restoreGameState.GetNullableDateTime(nameof(LastInputReceived));
             CommandRepeat = restoreGameState.GetInt(nameof(CommandRepeat));
             Quests = restoreGameState.GetByKey(nameof(Quests)).GetReferences<Quest>().ToList();
-            _elevationMap = restoreGameState.GetArrayOfBytes(nameof(_elevationMap));
+            _elevationMap = restoreGameState.GetByKey(nameof(_elevationMap)).GetArrayOfBytes();
             AllocKindSize = restoreGameState.GetInt(nameof(AllocKindSize));
             AllocKindTable = restoreGameState.GetByKey(nameof(AllocKindTable)).GetReferences<AllocationEntry>().ToArray();
             AllocRaceSize = restoreGameState.GetInt(nameof(AllocRaceSize));

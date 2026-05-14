@@ -414,11 +414,10 @@ internal class RestoreGameState
         return listOfStrings.ToArray();
     }
 
-    public byte[][] GetArrayOfBytes(string key)
+    public byte[][] GetArrayOfBytes()
     {
-        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
         List<byte[]> listOfBytes = new List<byte[]>();
-        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
         {
             if (gameStateBag is not ByteArrayGameStateBag byteArrayGameStateBag)
             {
@@ -430,26 +429,18 @@ internal class RestoreGameState
         return listOfBytes.ToArray();
     }
 
-    public bool[][] GetArrayOfBools(string key)
+    public bool[][] GetArrayOfBools()
     {
-        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
         List<bool[]> listOfBools = new List<bool[]>();
-        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
         {
             if (gameStateBag is not ListGameStateBag listOfStringsBag)
             {
                 throw new Exception("Jagged array of string not a list.");
             }
-            List<bool> list = new List<bool>();
-            foreach (GameStateBag innerGameStateBag in listOfStringsBag.Values)
-            {
-                if (innerGameStateBag is not BoolValueGameStateBag boolValueGameStateBag)
-                {
-                    throw new Exception("Expected inner list of strings.");
-                }
-                list.Add(boolValueGameStateBag.Value);
-            }
-            listOfBools.Add(list.ToArray());
+            RestoreGameState restoreGameState = New(gameStateBag);
+            bool[] bools = restoreGameState.GetBools();
+            listOfBools.Add(bools);
         }
         return listOfBools.ToArray();
     }
