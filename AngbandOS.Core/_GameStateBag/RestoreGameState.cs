@@ -371,11 +371,10 @@ internal class RestoreGameState
         return list.ToArray();
     }
 
-    public int[] GetInts(string key)
+    public int[] GetInts()
     {
-        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
         List<int> list = new List<int>();
-        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
         {
             if (gameStateBag is not IntValueGameStateBag intValueGameStateBag)
             {
@@ -399,26 +398,18 @@ internal class RestoreGameState
         }
         return list.ToArray();
     }
-    public string[][] GetArrayOfStrings(string key)
+    public string[][] GetArrayOfStrings()
     {
-        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
         List<string[]> listOfStrings = new List<string[]>();
-        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
         {
             if (gameStateBag is not ListGameStateBag listOfStringsBag)
             {
                 throw new Exception("Jagged array of string not a list.");
             }
-            List<string> list = new List<string>();
-            foreach (GameStateBag innerGameStateBag in listOfStringsBag.Values)
-            {
-                if (innerGameStateBag is not StringValueGameStateBag stringValueGameStateBag)
-                {
-                    throw new Exception("Expected inner list of strings.");
-                }
-                list.Add(stringValueGameStateBag.Value);
-            }
-            listOfStrings.Add(list.ToArray());
+            RestoreGameState restoreGameState = New(gameStateBag);
+            string[] strings = restoreGameState.GetStrings();
+            listOfStrings.Add(strings);
         }
         return listOfStrings.ToArray();
     }
@@ -486,7 +477,7 @@ internal class RestoreGameState
         return GetDateTime(key);
     }
 
-    public T[][] GetJaggedArrayOfReferences<T>()
+    public T[][] GetArrayOfReferences<T>()
     {
         List<T[]> listOfReferences = new List<T[]>();
         foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)

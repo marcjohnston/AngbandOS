@@ -67,7 +67,7 @@ internal class MonsterKnowledge : IGameSerialize
 
     public MonsterKnowledge(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(_monsterType)).GetReference<MonsterRace>())
     {
-        RBlows = restoreGameState.GetInts(nameof(RBlows));
+        RBlows = restoreGameState.GetByKey(nameof(RBlows)).GetInts();
         RCastInate = restoreGameState.GetInt(nameof(RCastInate));
         RCastSpell = restoreGameState.GetInt(nameof(RCastSpell));
         RDeaths = restoreGameState.GetInt(nameof(RDeaths));

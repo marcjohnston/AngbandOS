@@ -37,8 +37,8 @@ internal class UpdateWindow : IGameSerialize
     {
         Y1 = restoreGameState.GetInt(nameof(Y1));
         Y2 = restoreGameState.GetInt(nameof(Y2));
-        X1 = restoreGameState.GetInts(nameof(X1));
-        X2 = restoreGameState.GetInts(nameof(X2));
+        X1 = restoreGameState.GetByKey(nameof(X1)).GetInts();
+        X2 = restoreGameState.GetByKey(nameof(X2)).GetInts();
         Width = restoreGameState.GetInt(nameof(Width));
         Height = restoreGameState.GetInt(nameof(Height));
     }

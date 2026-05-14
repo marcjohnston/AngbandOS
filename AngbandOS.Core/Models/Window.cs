@@ -74,7 +74,7 @@ internal class Window : IGameSerialize
         UpdateWindow = restoreGameState.GetByKey(nameof(UpdateWindow)).GetReference<UpdateWindow>();
         Height = restoreGameState.GetInt(nameof(Height));
         Width = restoreGameState.GetInt(nameof(Width));
-        RowStartingIndexArray = restoreGameState.GetInts(nameof(RowStartingIndexArray));
+        RowStartingIndexArray = restoreGameState.GetByKey(nameof(RowStartingIndexArray)).GetInts();
         TotalErase = restoreGameState.GetByKey(nameof(TotalErase)).GetBool();
     }
 

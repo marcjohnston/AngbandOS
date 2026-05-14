@@ -55,6 +55,6 @@ internal class Map : IGameSerialize
     }
     public Map(Game game, RestoreGameState restoreGameState) : this(game)
     {
-        Grid = restoreGameState.GetByKey(nameof(Grid)).GetJaggedArrayOfReferences<GridTile>();
+        Grid = restoreGameState.GetByKey(nameof(Grid)).GetArrayOfReferences<GridTile>();
     }
 }

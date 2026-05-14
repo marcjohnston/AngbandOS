@@ -668,9 +668,9 @@ internal partial class Game : IGameSerialize
             KeyHead = restoreGameState.GetInt(nameof(KeyHead));
             KeyTail = restoreGameState.GetInt(nameof(KeyTail));
             _artificialKeyBuffer = restoreGameState.GetByKey(nameof(_artificialKeyBuffer)).GetString();
-            _keymapAct = restoreGameState.GetArrayOfStrings(nameof(_keymapAct));
+            _keymapAct = restoreGameState.GetByKey(nameof(_keymapAct)).GetArrayOfStrings();
             History = restoreGameState.GetByKey(nameof(History)).GetStrings();
-            PlayerHp = restoreGameState.GetInts(nameof(PlayerHp));
+            PlayerHp = restoreGameState.GetByKey(nameof(PlayerHp)).GetInts();
             Age = restoreGameState.GetInt(nameof(Age));
             ArmorClassBonus = restoreGameState.GetInt(nameof(ArmorClassBonus));
             Energy = restoreGameState.GetInt(nameof(Energy));
@@ -698,11 +698,11 @@ internal partial class Game : IGameSerialize
             WeightCarried = restoreGameState.GetInt(nameof(WeightCarried));
             WildernessX = restoreGameState.GetInt(nameof(WildernessX));
             WildernessY = restoreGameState.GetInt(nameof(WildernessY));
-            Wilderness = restoreGameState.GetByKey(nameof(Wilderness)).GetJaggedArrayOfReferences<WildernessRegion>();
+            Wilderness = restoreGameState.GetByKey(nameof(Wilderness)).GetArrayOfReferences<WildernessRegion>();
             WordOfRecallDelay = restoreGameState.GetInt(nameof(WordOfRecallDelay));
             Map = restoreGameState.GetByKey(nameof(Map)).GetReference<Map>();
-            TempX = restoreGameState.GetInts(nameof(TempX));
-            TempY = restoreGameState.GetInts(nameof(TempY));
+            TempX = restoreGameState.GetByKey(nameof(TempX)).GetInts();
+            TempY = restoreGameState.GetByKey(nameof(TempY)).GetInts();
             CurHgt = restoreGameState.GetInt(nameof(CurHgt));
             CurWid = restoreGameState.GetInt(nameof(CurWid));
             DangerFeeling = restoreGameState.GetInt(nameof(DangerFeeling));
