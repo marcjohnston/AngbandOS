@@ -36,7 +36,6 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             nameof(ReferenceGameStateBag) => new ReferenceGameStateBag(doc.RootElement.GetProperty("ObjectId").GetInt32()),
             nameof(StringValueGameStateBag) => new StringValueGameStateBag(doc.RootElement.GetProperty(ValuePropertyName).GetString()!),
             nameof(TimeSpanValueGameStateBag) => new TimeSpanValueGameStateBag(TimeSpan.Parse(doc.RootElement.GetProperty(ValuePropertyName).GetString()!)),
-            nameof(TupleGameStateBag) => new TupleGameStateBag(doc.RootElement.GetProperty("DataType").GetString()!, JsonSerializer.Deserialize<GameStateBag[]>(doc.RootElement.GetProperty(ValuePropertyName).GetRawText(), options)!),
             _ => throw new Exception($"Unknown type {type}")
         };
     }
@@ -124,13 +123,6 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
             case TimeSpanValueGameStateBag timeSpanValue:
                 writer.WriteString(TypePropertyName, nameof(TimeSpanValueGameStateBag));
                 writer.WriteString(ValuePropertyName, timeSpanValue.Value.ToString());
-                break;
-
-            case TupleGameStateBag tupleValue:
-                writer.WriteString(TypePropertyName, nameof(TupleGameStateBag));
-                writer.WriteString("DataType", tupleValue.DataType);
-                writer.WritePropertyName(ValuePropertyName);
-                JsonSerializer.Serialize(writer, tupleValue.Values, options);
                 break;
 
             default:
