@@ -24,8 +24,11 @@ internal class ObjectGameStateBag : GameStateBag
         TypeName = typeName;
         Values = value;
     }
-    public GameStateBag? Find(string key) => Values?.Find(key);
 
+    /// <summary>
+    /// Returns a string for debugging purposes that represents the object ID.
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
         return $"Object#{ObjectId}";

@@ -149,6 +149,19 @@ internal class RestoreGameState
         throw new Exception("Key not found in GameStateBag.");
     }
 
+    public int GetObjectId()
+    {
+        if (GameStateBag is ObjectGameStateBag singletonObjectGameStateBag)
+        {
+            return singletonObjectGameStateBag.ObjectId;
+        }
+        if (GameStateBag is ReferenceGameStateBag singletonReferenceGameStateBag)
+        {
+            return singletonReferenceGameStateBag.ObjectId;
+        }
+        throw new Exception($"The restore game state is not an {nameof(ObjectGameStateBag)} or a {nameof(ReferenceGameStateBag)}.");
+    }
+
     public RestoreGameState GetByKey(string key)
     {
         if (GameStateBag is ObjectGameStateBag objectGameStateBag)

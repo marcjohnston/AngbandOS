@@ -675,40 +675,12 @@ internal sealed class SingletonRepository : IGameSerialize
     /// <exception cref="Exception"></exception>
     private void TrackSingleton(RestoreGameState restoreGameState, IGetKey singleton)
     {
-        if (restoreGameState.GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
-        {
-            throw new Exception($"The {nameof(restoreGameState)} parameter for the {nameof(LoadAllAssemblyTypes)} must be an {nameof(ObjectGameStateBag)}.");
-        }
-
         // Find the matching singleton in the restore game state and ensure it is an object game state bag so that we have an object ID that we can track.
-        GameStateBag? singletonGameStateBag = singletonRepositoryGameStateBag.Find(singleton.GetKey);
-        if (singletonGameStateBag is null)
-        {
-            if (!restoreGameState.UnusedAndEmptyObjectsPruned)
-            {
-                throw new Exception($"The singleton game state bag for the singleton {singleton.GetKey} is missing from the restore game state.");
-            }
-
-            // This object was pruned, no tracking needed.
-            return;
-        }
-
-        // Track the object as created.
-        if (singletonGameStateBag is ObjectGameStateBag singletonObjectGameStateBag)
-        {
-            // Track the object with the game state bag, since the object game state bag is used to track the object id for singletons and also store the field values for the singleton.
-            int objectId = singletonObjectGameStateBag.ObjectId;
-            restoreGameState.TrackObject(objectId, singleton);
-            return;
-        }
-        if (singletonGameStateBag is ReferenceGameStateBag singletonReferenceGameStateBag)
-        {
-            // Track the object without the game state bag, since the reference game state bag is only used to track the object id for references to singletons that are stored in the object game state bag.
-            int objectId = singletonReferenceGameStateBag.ObjectId;
-            restoreGameState.TrackObject(objectId, singleton);
-            return;
-        }
-        throw new Exception($"The singleton {singleton.GetKey} in the restore game state is not an {nameof(ObjectGameStateBag)} or a {nameof(ReferenceGameStateBag)}.");
+        RestoreGameState singletonRestoreGameState = restoreGameState.GetByKey(singleton.GetKey);
+        
+        // Track the object without the game state bag, since the reference game state bag is only used to track the object id for references to singletons that are stored in the object game state bag.
+        int objectId = singletonRestoreGameState.GetObjectId();
+        restoreGameState.TrackObject(objectId, singleton);
     }
 
     private void LoadFromConfiguration<T, TConfiguration>(TConfiguration[]? entityConfigurations, RestoreGameState? restoreGameState) where T : IGetKey where TConfiguration : notnull
