@@ -445,7 +445,7 @@ internal class RestoreGameState
         return listOfBools.ToArray();
     }
 
-    public char[] GetChars(string key) => GetGameStateBag<CharArrayGameStateBag>(key).Value.ToCharArray();
+    public char[] GetChars() => ((CharArrayGameStateBag)GameStateBag).Value.ToCharArray();
     public int GetInt(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
     public int GetInt() => ((IntValueGameStateBag)GameStateBag).Value;
     public int? GetNullableInt(string key)

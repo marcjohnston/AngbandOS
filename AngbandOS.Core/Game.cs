@@ -663,7 +663,7 @@ internal partial class Game : IGameSerialize
             CurrentCommand = restoreGameState.GetChar(nameof(CurrentCommand));
             FullScreenOverlay = restoreGameState.GetByKey(nameof(FullScreenOverlay)).GetBool();
             HideCursorOnFullScreenInkey = restoreGameState.GetByKey(nameof(HideCursorOnFullScreenInkey)).GetBool();
-            KeyQueue = restoreGameState.GetChars(nameof(KeyQueue));
+            KeyQueue = restoreGameState.GetByKey(nameof(KeyQueue)).GetChars();
             Screen = restoreGameState.GetByKey(nameof(Screen)).GetReference<Window>();
             KeyHead = restoreGameState.GetInt(nameof(KeyHead));
             KeyTail = restoreGameState.GetInt(nameof(KeyTail));
