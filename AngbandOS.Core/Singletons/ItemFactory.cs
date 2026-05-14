@@ -527,7 +527,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             Tried = restoreGameState.GetByKey(nameof(Tried)).GetBool();
             Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
             Stompable = restoreGameState.GetByKey(nameof(Stompable)).GetBools();
-            _bookIndex = restoreGameState.GetInt(nameof(_bookIndex));
+            _bookIndex = restoreGameState.GetByKey(nameof(_bookIndex)).GetInt();
             _realm = restoreGameState.GetByKey(nameof(_realm)).GetReferenceOrDefault<Realm>();
         }
     }

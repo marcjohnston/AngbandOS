@@ -284,17 +284,17 @@ internal class Monster : IItemContainer, IGameSerialize
 
     public Monster(Game game, RestoreGameState restoreGameState) : this(game)
     {
-        ConfusionLevel = restoreGameState.GetInt(nameof(ConfusionLevel));
-        DistanceFromPlayer = restoreGameState.GetInt(nameof(DistanceFromPlayer));
-        Energy = restoreGameState.GetInt(nameof(Energy));
-        _fearLevel = restoreGameState.GetInt(nameof(_fearLevel));
+        ConfusionLevel = restoreGameState.GetByKey(nameof(ConfusionLevel)).GetInt();
+        DistanceFromPlayer = restoreGameState.GetByKey(nameof(DistanceFromPlayer)).GetInt();
+        Energy = restoreGameState.GetByKey(nameof(Energy)).GetInt();
+        _fearLevel = restoreGameState.GetByKey(nameof(_fearLevel)).GetInt();
         Items.AddRange(restoreGameState.GetByKey(nameof(Items)).GetReferences<Item>());
-        Generation = restoreGameState.GetInt(nameof(Generation));
-        _health = restoreGameState.GetInt(nameof(_health));
+        Generation = restoreGameState.GetByKey(nameof(Generation)).GetInt();
+        _health = restoreGameState.GetByKey(nameof(_health)).GetInt();
         _isVisible = restoreGameState.GetByKey(nameof(_isVisible)).GetBool();
-        MapX = restoreGameState.GetInt(nameof(MapX));
-        MapY = restoreGameState.GetInt(nameof(MapY));
-        _maxHealth = restoreGameState.GetInt(nameof(_maxHealth));
+        MapX = restoreGameState.GetByKey(nameof(MapX)).GetInt();
+        MapY = restoreGameState.GetByKey(nameof(MapY)).GetInt();
+        _maxHealth = restoreGameState.GetByKey(nameof(_maxHealth)).GetInt();
         _isPet = restoreGameState.GetByKey(nameof(_isPet)).GetBool();
         SmCloned = restoreGameState.GetByKey(nameof(SmCloned)).GetBool();
         SmImmAcid = restoreGameState.GetByKey(nameof(SmImmAcid)).GetBool();
@@ -328,11 +328,11 @@ internal class Monster : IItemContainer, IGameSerialize
         SmResShard = restoreGameState.GetByKey(nameof(SmResShard)).GetBool();
         SmResSound = restoreGameState.GetByKey(nameof(SmResSound)).GetBool();
         Race = restoreGameState.GetByKey(nameof(Race)).GetReferenceOrDefault<MonsterRace>();
-        _sleepLevel = restoreGameState.GetInt(nameof(_sleepLevel));
-        Speed = restoreGameState.GetInt(nameof(Speed));
-        StolenGold = restoreGameState.GetInt(nameof(StolenGold));
-        StunLevel = restoreGameState.GetInt(nameof(StunLevel));
-        IndividualMonsterFlags = restoreGameState.GetInt(nameof(IndividualMonsterFlags));
+        _sleepLevel = restoreGameState.GetByKey(nameof(_sleepLevel)).GetInt();
+        Speed = restoreGameState.GetByKey(nameof(Speed)).GetInt();
+        StolenGold = restoreGameState.GetByKey(nameof(StolenGold)).GetInt();
+        StunLevel = restoreGameState.GetByKey(nameof(StunLevel)).GetInt();
+        IndividualMonsterFlags = restoreGameState.GetByKey(nameof(IndividualMonsterFlags)).GetInt();
     }
     public Monster(Game game)
     {

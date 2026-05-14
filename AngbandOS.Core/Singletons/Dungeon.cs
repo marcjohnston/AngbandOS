@@ -65,13 +65,13 @@ internal sealed class Dungeon : IGetKey, IToJson, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            RecallLevel = restoreGameState.GetInt(nameof(RecallLevel));
+            RecallLevel = restoreGameState.GetByKey(nameof(RecallLevel)).GetInt();
             KnownDepth = restoreGameState.GetByKey(nameof(KnownDepth)).GetBool();
             KnownOffset = restoreGameState.GetByKey(nameof(KnownOffset)).GetBool();
-            Offset = restoreGameState.GetInt(nameof(Offset));
+            Offset = restoreGameState.GetByKey(nameof(Offset)).GetInt();
             Visited = restoreGameState.GetByKey(nameof(Visited)).GetBool();
-            X = restoreGameState.GetInt(nameof(X));
-            Y = restoreGameState.GetInt(nameof(Y));
+            X = restoreGameState.GetByKey(nameof(X)).GetInt();
+            Y = restoreGameState.GetByKey(nameof(Y)).GetInt();
         }
     }
 

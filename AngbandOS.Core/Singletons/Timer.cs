@@ -50,7 +50,7 @@ internal abstract class Timer : IGetKey, IIntValue, IChangeTracker, IGameSeriali
     {
         if (restoreGameState is not null)
         {
-            _value = restoreGameState.GetInt(nameof(_value));
+            _value = restoreGameState.GetByKey(nameof(_value)).GetInt();
         }
     }
 

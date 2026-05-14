@@ -30,7 +30,7 @@ internal abstract class FixedArtifact : IGetKey, IToJson, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            CurNum = restoreGameState.GetInt(nameof(CurNum));
+            CurNum = restoreGameState.GetByKey(nameof(CurNum)).GetInt();
         }
         //// Cut and paste
         //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override ColorEnum Color => ");

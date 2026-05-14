@@ -24,7 +24,7 @@ internal class Realm1SelectionBirthStage : BirthStage
         base.Bind(restoreGameState);
         if (restoreGameState is not null)
         {
-            currentSelection = restoreGameState.GetInt(nameof(currentSelection));
+            currentSelection = restoreGameState.GetByKey(nameof(currentSelection)).GetInt();
         }
     }
     public override BirthStage? Render()

@@ -22,7 +22,7 @@ internal class IntroductionBirthStage : BirthStage
         base.Bind(restoreGameState);
         if (restoreGameState is not null)
         {
-            currentSelection = restoreGameState.GetInt(nameof(currentSelection));
+            currentSelection = restoreGameState.GetByKey(nameof(currentSelection)).GetInt();
         }
     }
 

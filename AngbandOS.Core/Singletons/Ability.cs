@@ -22,13 +22,13 @@ internal abstract class Ability : IGetKey, IGameSerialize
     {
         if (restoreGameState is not null)
         {
-            Adjusted = restoreGameState.GetInt(nameof(Adjusted));
-            AdjustedMax = restoreGameState.GetInt(nameof(AdjustedMax));
-            Bonus = restoreGameState.GetInt(nameof(Bonus));
-            Innate = restoreGameState.GetInt(nameof(Innate));
-            InnateMax = restoreGameState.GetInt(nameof(InnateMax));
+            Adjusted = restoreGameState.GetByKey(nameof(Adjusted)).GetInt();
+            AdjustedMax = restoreGameState.GetByKey(nameof(AdjustedMax)).GetInt();
+            Bonus = restoreGameState.GetByKey(nameof(Bonus)).GetInt();
+            Innate = restoreGameState.GetByKey(nameof(Innate)).GetInt();
+            InnateMax = restoreGameState.GetByKey(nameof(InnateMax)).GetInt();
             Override = restoreGameState.GetByKey(nameof(Override)).GetBool();
-            TableIndex = restoreGameState.GetInt(nameof(TableIndex));
+            TableIndex = restoreGameState.GetByKey(nameof(TableIndex)).GetInt();
         }
     }
 

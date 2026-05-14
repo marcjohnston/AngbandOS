@@ -57,7 +57,7 @@ internal sealed class Realm : IGetKey, IToJson, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            _firstSpellLevel = restoreGameState.GetNullableInt(nameof(_firstSpellLevel));
+            _firstSpellLevel = restoreGameState.GetByKey(nameof(_firstSpellLevel)).GetNullableInt();
         }
     }
 

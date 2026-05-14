@@ -18,9 +18,9 @@ internal class UpdateScentFlaggedAction : FlaggedAction
         base.Bind(restoreGameState);
         if (restoreGameState is not null)
         {
-            _flowHead = restoreGameState.GetInt(nameof(_flowHead));
-            _flowN = restoreGameState.GetInt(nameof(_flowN));
-            _flowTail = restoreGameState.GetInt(nameof(_flowTail));
+            _flowHead = restoreGameState.GetByKey(nameof(_flowHead)).GetInt();
+            _flowN = restoreGameState.GetByKey(nameof(_flowN)).GetInt();
+            _flowTail = restoreGameState.GetByKey(nameof(_flowTail)).GetInt();
         }
     }
 

@@ -14,7 +14,7 @@ internal class IntReadOnlyAttributeValue : AttributeValue
     {
         Value = value;
     }
-    public IntReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetInt(nameof(Value)))
+    public IntReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetByKey(nameof(Value)).GetInt())
     {
     }
 

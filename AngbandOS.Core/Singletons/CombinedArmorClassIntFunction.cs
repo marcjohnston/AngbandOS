@@ -25,7 +25,7 @@ internal class CombinedArmorClassIntFunction : IChangeTracker, IGetKey, IIntValu
     {
         if (restoreGameState is not null)
         {
-            OldValue = restoreGameState.GetNullableInt(nameof(OldValue));
+            OldValue = restoreGameState.GetByKey(nameof(OldValue)).GetNullableInt();
         }
     }
 

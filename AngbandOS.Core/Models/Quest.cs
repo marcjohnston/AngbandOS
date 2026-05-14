@@ -99,9 +99,9 @@ internal class Quest : IGameSerialize
     {
         Discovered = restoreGameState.GetByKey(nameof(Discovered)).GetBool();
         Dungeon = restoreGameState.GetByKey(nameof(Dungeon)).GetReferenceOrDefault<Dungeon>();
-        Killed = restoreGameState.GetInt(nameof(Killed));
-        Level = restoreGameState.GetInt(nameof(Level));
-        RIdx = restoreGameState.GetInt(nameof(RIdx));
-        ToKill = restoreGameState.GetInt(nameof(ToKill));
+        Killed = restoreGameState.GetByKey(nameof(Killed)).GetInt();
+        Level = restoreGameState.GetByKey(nameof(Level)).GetInt();
+        RIdx = restoreGameState.GetByKey(nameof(RIdx)).GetInt();
+        ToKill = restoreGameState.GetByKey(nameof(ToKill)).GetInt();
     }
 }

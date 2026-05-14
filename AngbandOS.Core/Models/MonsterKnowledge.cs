@@ -68,21 +68,21 @@ internal class MonsterKnowledge : IGameSerialize
     public MonsterKnowledge(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(_monsterType)).GetReference<MonsterRace>())
     {
         RBlows = restoreGameState.GetByKey(nameof(RBlows)).GetInts();
-        RCastInate = restoreGameState.GetInt(nameof(RCastInate));
-        RCastSpell = restoreGameState.GetInt(nameof(RCastSpell));
-        RDeaths = restoreGameState.GetInt(nameof(RDeaths));
-        RDropGold = restoreGameState.GetInt(nameof(RDropGold));
-        RDropItem = restoreGameState.GetInt(nameof(RDropItem));
+        RCastInate = restoreGameState.GetByKey(nameof(RCastInate)).GetInt();
+        RCastSpell = restoreGameState.GetByKey(nameof(RCastSpell)).GetInt();
+        RDeaths = restoreGameState.GetByKey(nameof(RDeaths)).GetInt();
+        RDropGold = restoreGameState.GetByKey(nameof(RDropGold)).GetInt();
+        RDropItem = restoreGameState.GetByKey(nameof(RDropItem)).GetInt();
         Guardian = restoreGameState.GetByKey(nameof(Guardian)).GetBool();
         OnlyGuardian = restoreGameState.GetByKey(nameof(OnlyGuardian)).GetBool();
         Characteristics = restoreGameState.GetByKey(nameof(Characteristics)).GetReference<MonsterCharacteristics>();
         RSpells = restoreGameState.GetByKey(nameof(RSpells)).GetReference<MonsterSpellList>();
-        RIgnore = restoreGameState.GetInt(nameof(RIgnore));
-        RPkills = restoreGameState.GetInt(nameof(RPkills));
+        RIgnore = restoreGameState.GetByKey(nameof(RIgnore)).GetInt();
+        RPkills = restoreGameState.GetByKey(nameof(RPkills)).GetInt();
         RProbed = restoreGameState.GetByKey(nameof(RProbed)).GetBool();
-        RSights = restoreGameState.GetInt(nameof(RSights));
-        RTkills = restoreGameState.GetInt(nameof(RTkills));
-        RWake = restoreGameState.GetInt(nameof(RWake));
+        RSights = restoreGameState.GetByKey(nameof(RSights)).GetInt();
+        RTkills = restoreGameState.GetByKey(nameof(RTkills)).GetInt();
+        RWake = restoreGameState.GetByKey(nameof(RWake)).GetInt();
     }
 
     public void Display()

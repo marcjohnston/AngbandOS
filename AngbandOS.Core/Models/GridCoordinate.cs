@@ -24,8 +24,8 @@ internal class GridCoordinate : IGameSerialize
     }
 
     public GridCoordinate(Game game, RestoreGameState restoreGameState) : this(
-        restoreGameState.GetInt(nameof(X)),
-        restoreGameState.GetInt(nameof(Y))
+        restoreGameState.GetByKey(nameof(X)).GetInt(),
+        restoreGameState.GetByKey(nameof(Y)).GetInt()
     ) { }
 
     public GridCoordinate Clone()

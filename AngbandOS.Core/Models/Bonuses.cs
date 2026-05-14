@@ -35,10 +35,10 @@ internal class Bonuses : IGameSerialize
     public Bonuses() { }
     public Bonuses(Game game, RestoreGameState restoreGameState)
     {
-        AttackBonus = restoreGameState.GetInt(nameof(AttackBonus));
-        DamageBonus = restoreGameState.GetInt(nameof(DamageBonus));
-        DisplayedAttackBonus = restoreGameState.GetInt(nameof(DisplayedAttackBonus));
-        DisplayedDamageBonus = restoreGameState.GetInt(nameof(DisplayedDamageBonus));
+        AttackBonus = restoreGameState.GetByKey(nameof(AttackBonus)).GetInt();
+        DamageBonus = restoreGameState.GetByKey(nameof(DamageBonus)).GetInt();
+        DisplayedAttackBonus = restoreGameState.GetByKey(nameof(DisplayedAttackBonus)).GetInt();
+        DisplayedDamageBonus = restoreGameState.GetByKey(nameof(DisplayedDamageBonus)).GetInt();
         HasUnpriestlyWeapon = restoreGameState.GetByKey(nameof(HasUnpriestlyWeapon)).GetBool();
         HasHeavyBow = restoreGameState.GetByKey(nameof(HasHeavyBow)).GetBool();
         HasHeavyWeapon = restoreGameState.GetByKey(nameof(HasHeavyWeapon)).GetBool();

@@ -53,7 +53,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         FixedArtifact = restoreGameState.GetByKey(nameof(FixedArtifact)).GetReferenceOrDefault<FixedArtifact>();
         EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetReference<EffectiveAttributeSet>();
         _factory = restoreGameState.GetByKey(nameof(_factory)).GetReference<ItemFactory>();
-        NutritionalValue = restoreGameState.GetInt(nameof(NutritionalValue));
+        NutritionalValue = restoreGameState.GetByKey(nameof(NutritionalValue)).GetInt();
         Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
         IdentSense = restoreGameState.GetByKey(nameof(IdentSense)).GetBool();
         IdentFixed = restoreGameState.GetByKey(nameof(IdentFixed)).GetBool();
@@ -61,22 +61,22 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         IdentityIsKnown = restoreGameState.GetByKey(nameof(IdentityIsKnown)).GetBool();
         IdentityIsStoreBought = restoreGameState.GetByKey(nameof(IdentityIsStoreBought)).GetBool();
         IdentMental = restoreGameState.GetByKey(nameof(IdentMental)).GetBool();
-        StackCount = restoreGameState.GetInt(nameof(StackCount));
-        Discount = restoreGameState.GetInt(nameof(Discount));
-        HoldingMonsterIndex = restoreGameState.GetInt(nameof(HoldingMonsterIndex));
+        StackCount = restoreGameState.GetByKey(nameof(StackCount)).GetInt();
+        Discount = restoreGameState.GetByKey(nameof(Discount)).GetInt();
+        HoldingMonsterIndex = restoreGameState.GetByKey(nameof(HoldingMonsterIndex)).GetInt();
         Inscription = restoreGameState.GetByKey(nameof(Inscription)).GetString();
         WasNoticed = restoreGameState.GetByKey(nameof(WasNoticed)).GetBool();
-        ActivationRechargeTimeRemaining = restoreGameState.GetInt(nameof(ActivationRechargeTimeRemaining));
+        ActivationRechargeTimeRemaining = restoreGameState.GetByKey(nameof(ActivationRechargeTimeRemaining)).GetInt();
         ContainerTraps = restoreGameState.GetByKey(nameof(ContainerTraps)).GetReferencesOrNull<ChestTrap>();
-        LevelOfObjectsInContainer = restoreGameState.GetInt(nameof(LevelOfObjectsInContainer));
+        LevelOfObjectsInContainer = restoreGameState.GetByKey(nameof(LevelOfObjectsInContainer)).GetInt();
         ContainerIsOpen = restoreGameState.GetByKey(nameof(ContainerIsOpen)).GetBool();
-        StaffChargesRemaining = restoreGameState.GetInt(nameof(StaffChargesRemaining));
-        WandChargesRemaining = restoreGameState.GetInt(nameof(WandChargesRemaining));
-        RodRechargeTimeRemaining = restoreGameState.GetInt(nameof(RodRechargeTimeRemaining));
-        X = restoreGameState.GetInt(nameof(X));
-        Y = restoreGameState.GetInt(nameof(Y));
-        TurnsOfLightRemaining = restoreGameState.GetInt(nameof(TurnsOfLightRemaining));
-        GoldPieces = restoreGameState.GetInt(nameof(GoldPieces));
+        StaffChargesRemaining = restoreGameState.GetByKey(nameof(StaffChargesRemaining)).GetInt();
+        WandChargesRemaining = restoreGameState.GetByKey(nameof(WandChargesRemaining)).GetInt();
+        RodRechargeTimeRemaining = restoreGameState.GetByKey(nameof(RodRechargeTimeRemaining)).GetInt();
+        X = restoreGameState.GetByKey(nameof(X)).GetInt();
+        Y = restoreGameState.GetByKey(nameof(Y)).GetInt();
+        TurnsOfLightRemaining = restoreGameState.GetByKey(nameof(TurnsOfLightRemaining)).GetInt();
+        GoldPieces = restoreGameState.GetByKey(nameof(GoldPieces)).GetInt();
         RandomArtifactName = restoreGameState.GetByKey(nameof(RandomArtifactName)).GetStringOrDefault();
     }
 

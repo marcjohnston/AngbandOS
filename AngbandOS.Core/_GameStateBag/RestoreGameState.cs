@@ -446,16 +446,15 @@ internal class RestoreGameState
     }
 
     public char[] GetChars() => ((CharArrayGameStateBag)GameStateBag).Value.ToCharArray();
-    public int GetInt(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
+    public int GetIntByKey(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
     public int GetInt() => ((IntValueGameStateBag)GameStateBag).Value;
-    public int? GetNullableInt(string key)
+    public int? GetNullableInt()
     {
-        GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);
-        if (gameStateBag is NullValueGameStateBag)
+        if (GameStateBag is NullValueGameStateBag)
         {
             return default;
         }
-        return GetInt(key);
+        return GetInt();
     }
 
     public DateTime? GetNullableDateTime(string key)

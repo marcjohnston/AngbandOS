@@ -26,8 +26,8 @@ internal class WildernessRegion : IGameSerialize
     {
         Dungeon = restoreGameState.GetByKey(nameof(Dungeon)).GetReferenceOrDefault<Dungeon>();
         Town = restoreGameState.GetByKey(nameof(Town)).GetReferenceOrDefault<Town>();
-        RoadMap = restoreGameState.GetInt(nameof(RoadMap));
-        Seed = restoreGameState.GetInt(nameof(Seed));
+        RoadMap = restoreGameState.GetByKey(nameof(RoadMap)).GetInt();
+        Seed = restoreGameState.GetByKey(nameof(Seed)).GetInt();
     }
 
     public GameStateBag? Serialize(SaveGameState saveGameState)

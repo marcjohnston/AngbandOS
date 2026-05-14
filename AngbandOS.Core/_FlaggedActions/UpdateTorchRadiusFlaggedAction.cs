@@ -17,7 +17,7 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
         base.Bind(restoreGameState);
         if (restoreGameState is not null)
         {
-            OldLightLevel = restoreGameState.GetInt(nameof(OldLightLevel));
+            OldLightLevel = restoreGameState.GetByKey(nameof(OldLightLevel)).GetInt();
         }
     }
 

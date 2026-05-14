@@ -50,11 +50,11 @@ internal class Store : IGameSerialize
 
     public Store(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(StoreFactory)).GetReference<StoreFactory>())
     {
-        _x = restoreGameState.GetInt(nameof(_x));
-        _y = restoreGameState.GetInt(nameof(_y));
+        _x = restoreGameState.GetByKey(nameof(_x)).GetInt();
+        _y = restoreGameState.GetByKey(nameof(_y)).GetInt();
         _leaveStore = restoreGameState.GetByKey(nameof(_leaveStore)).GetBool();
         StoreInventoryList = restoreGameState.GetByKey(nameof(StoreInventoryList)).GetReferences<Item>().ToList();
-        StoreTop = restoreGameState.GetInt(nameof(StoreTop));
+        StoreTop = restoreGameState.GetByKey(nameof(StoreTop)).GetInt();
         Owner = restoreGameState.GetByKey(nameof(Owner)).GetReference<Shopkeeper>();
     }
     /// <summary>

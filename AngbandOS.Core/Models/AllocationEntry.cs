@@ -50,10 +50,10 @@ internal class AllocationEntry : IGameSerialize
     public AllocationEntry() { }
     public AllocationEntry(Game game, RestoreGameState restoreGameState)
     {
-        BaseProbability = restoreGameState.GetInt(nameof(BaseProbability));
-        FilteredProbability = restoreGameState.GetInt(nameof(FilteredProbability));
-        FinalProbability = restoreGameState.GetInt(nameof(FinalProbability));
-        Index = restoreGameState.GetInt(nameof(Index));
-        Level = restoreGameState.GetInt(nameof(Level));
+        BaseProbability = restoreGameState.GetByKey(nameof(BaseProbability)).GetInt();
+        FilteredProbability = restoreGameState.GetByKey(nameof(FilteredProbability)).GetInt();
+        FinalProbability = restoreGameState.GetByKey(nameof(FinalProbability)).GetInt();
+        Index = restoreGameState.GetByKey(nameof(Index)).GetInt();
+        Level = restoreGameState.GetByKey(nameof(Level)).GetInt();
     }
 }

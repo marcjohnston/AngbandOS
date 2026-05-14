@@ -137,9 +137,9 @@ internal class GridTile : IItemContainer, IGameSerialize
             SelfLit = restoreGameState.GetByKey(nameof(SelfLit)).GetBool();
             TempFlag = restoreGameState.GetByKey(nameof(TempFlag)).GetBool();
             _trapsDetected = restoreGameState.GetByKey(nameof(_trapsDetected)).GetBool();
-            MonsterIndex = restoreGameState.GetInt(nameof(MonsterIndex));
-            ScentAge = restoreGameState.GetInt(nameof(ScentAge));
-            ScentStrength = restoreGameState.GetInt(nameof(ScentStrength));
+            MonsterIndex = restoreGameState.GetByKey(nameof(MonsterIndex)).GetInt();
+            ScentAge = restoreGameState.GetByKey(nameof(ScentAge)).GetInt();
+            ScentStrength = restoreGameState.GetByKey(nameof(ScentStrength)).GetInt();
             _backgroundFeature = restoreGameState.GetByKey(nameof(_backgroundFeature)).GetReference<Tile>();
             _featureType = restoreGameState.GetByKey(nameof(_featureType)).GetReference<Tile>();
         }
