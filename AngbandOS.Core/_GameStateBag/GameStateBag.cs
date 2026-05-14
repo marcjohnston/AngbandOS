@@ -8,7 +8,7 @@ namespace AngbandOS.Core;
 
 internal abstract class GameStateBag
 {
-    public abstract bool Verify(RestoreGameState restoreGameState, object? singleton);
+    public virtual bool Verify(RestoreGameState restoreGameState, object? singleton) => true;
 
     public string Serialize()
     {
