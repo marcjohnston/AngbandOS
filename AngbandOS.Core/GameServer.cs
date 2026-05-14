@@ -186,10 +186,9 @@ public class GameServer
             throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
         }
 
-        bool gameIsOver = false;
-        string? serializedGameData = null;
         try
         {
+            bool gameIsOver = false;
             Game = new Game(gameConfiguration);
 
             // Announce the new game and the seed for the replay.
@@ -206,16 +205,16 @@ public class GameServer
             {
                 ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
             }
-            serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
+            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
 
             gameIsOver = true;
+            return new GameResults(gameIsOver, serializedGameData);
         }
         catch (Exception ex)
         {
-            console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
+            console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}"); // TODO: this should be caught externally
+            throw new Exception("An error occurred while attempting to play a new game.  See inner exception for details.", ex);
         }
-
-        return new GameResults(gameIsOver, serializedGameData);
     }
     private bool PruneUnusedAndEmptyObjects => true;
 
@@ -234,19 +233,27 @@ public class GameServer
             throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
         }
 
-        bool gameIsOver = false;
         try
         {
+            bool gameIsOver = false;
             Game = new Game(gameConfiguration, gameReplayDetails);
             Game.Play(console, persistentStorage, replayPersistentStorage);
+
+            SaveGameState saveGameState = new SaveGameState();
+            GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
+            if (PruneUnusedAndEmptyObjects)
+            {
+                ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
+            }
+            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
             gameIsOver = true;
+            return new GameResults(gameIsOver, serializedGameData);
         }
         catch (Exception ex)
         {
-            console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
+            console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}"); // TODO: this should be caught externally
+            throw new Exception("An error occurred while attempting to play a new game.  See inner exception for details.", ex);
         }
-
-        return new GameResults(gameIsOver);
     }
 
     /// <summary>
@@ -266,21 +273,28 @@ public class GameServer
             throw new ArgumentNullException("persistentStorage", "A persistentStorage object must be provided to retrieve the game from persistent storage and cannot be null.");
         }
 
-        bool gameIsOver = false;
         try
         {
+            bool gameIsOver = false;
             // Retrieve the game from persistent storage.
             Game = Game.LoadLegacyGame(persistentStorage);
             Game.Play(console, persistentStorage, replayPersistentStorage);
+
+            SaveGameState saveGameState = new SaveGameState();
+            GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
+            if (PruneUnusedAndEmptyObjects)
+            {
+                ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
+            }
+            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
             gameIsOver = true;
+            return new GameResults(gameIsOver, serializedGameData);
         }
         catch (Exception ex)
         {
             console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
+            throw new Exception("An error occurred while attempting to play an existing game.  See inner exception for details.", ex);
         }
-
-        // Serialize the GameReplay.
-        return new GameResults(gameIsOver);
     }
 
     /// <summary>
@@ -292,7 +306,7 @@ public class GameServer
     /// <param name="replayPersistentStorage"> Supply the object responsible to accepting the replay steps.  If not supplied, the replay steps will not be provided.</param>
     /// <param name="serializedSaveGameData">Supply the serialized game state to be restored.</param>
     /// <returns></returns>
-    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, string serializedSaveGameData)
+    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, byte[] serializedSaveGameData)
     {
         if (console == null)
         {
@@ -303,10 +317,9 @@ public class GameServer
             throw new ArgumentNullException("persistentStorage", "A persistentStorage object must be provided to retrieve the game from persistent storage and cannot be null.");
         }
 
-        bool gameIsOver = false;
-        string? serializedGameData = null;
         try
         {
+            bool gameIsOver = false;
             // Retrieve the game from persistent storage.
             SaveGameData saveGameData = GameSerializer.Deserialize(serializedSaveGameData);
             if (saveGameData.Game is not ObjectGameStateBag objectGameStateBag)
@@ -315,8 +328,12 @@ public class GameServer
             }
 
             Game = new Game(gameConfiguration, objectGameStateBag, saveGameData.UnusedAndEmptyObjectsPruned);
+
+#if DEBUG
             Game legacyGame = Game.LoadLegacyGame(persistentStorage);
             SaveGameState.DeepComparer.DeepEquals(Game, legacyGame);
+#endif
+
             Game.Play(console, persistentStorage, replayPersistentStorage);
 
             SaveGameState saveGameState = new SaveGameState();
@@ -325,16 +342,15 @@ public class GameServer
             {
                 ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
             }
-            serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
+            byte[] newSerializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
 
             gameIsOver = true;
+            return new GameResults(gameIsOver, newSerializedGameData);
         }
         catch (Exception ex)
         {
             console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
+            throw new Exception("An error occurred while attempting to play an existing game.  See inner exception for details.", ex);
         }
-
-        // Serialize the GameReplay.
-        return new GameResults(gameIsOver, serializedGameData);
     }
 }

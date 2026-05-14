@@ -3,9 +3,9 @@
 public class GameResults
 {
     public bool GameIsOver { get; }
-    public string? SerializedGameData { get; }
+    public byte[] SerializedGameData { get; }
 
-    public GameResults(bool gameIsOver, string? serializedGameData = null)
+    public GameResults(bool gameIsOver, byte[] serializedGameData)
     {
         GameIsOver = gameIsOver;
         SerializedGameData = serializedGameData;

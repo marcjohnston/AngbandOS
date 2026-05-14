@@ -13,6 +13,6 @@ internal interface IGameSerializer
     /// </summary>
     /// <param name="saveGameState">The current save game state, which can be used to create game state bags for properties of the entity.</param>
     /// <returns>A GameStateBag representing the serialized state of the entity.</returns>
-    string Serialize(SaveGameData saveGameData);
-    SaveGameData Deserialize(string serializedSaveGameData);
+    byte[] Serialize(SaveGameData saveGameData);
+    SaveGameData Deserialize(byte[] serializedSaveGameData);
 }

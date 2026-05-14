@@ -216,12 +216,12 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         ICorePersistentStorage persistentStorage = new FileSystemCorePersistentStorage(saveFilename);
         if (File.Exists(jsonSaveFilename))
         {
-            string serializedSaveGameData = File.ReadAllText(jsonSaveFilename);
+            byte[] serializedSaveGameData = File.ReadAllBytes(jsonSaveFilename);
             GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
             GameResults gameResults = gameServer.PlayExistingGame(this, persistentStorage, null, gameConfiguration, serializedSaveGameData);
             if (gameResults.SerializedGameData?.Length > 0)
             {
-                File.WriteAllText(jsonSaveFilename, gameResults.SerializedGameData);// TODO: This needs to move to the filepersistence driver
+                File.WriteAllBytes(jsonSaveFilename, gameResults.SerializedGameData);// TODO: This needs to move to the filepersistence driver
             }
         }
         //else if (persistentStorage.GameExists())
@@ -246,14 +246,13 @@ public partial class MainWindow : Window, IConsoleAndViewPort
                 gameReplay = File.ReadAllText(replayFilename);
             }
 
-
             // Retrieve a reference to the assembly so that we can dynamically load it.
             GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
 
             GameResults gameResults = gameServer.PlayNewGame(this, persistentStorage, null, gameConfiguration);
             if (gameResults.SerializedGameData?.Length > 0)
             {
-                File.WriteAllText(jsonSaveFilename, gameResults.SerializedGameData);// TODO: This needs to move to the filepersistence driver
+                File.WriteAllBytes(jsonSaveFilename, gameResults.SerializedGameData);// TODO: This needs to move to the filepersistence driver
             }
         }
     }

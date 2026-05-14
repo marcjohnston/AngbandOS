@@ -8,7 +8,7 @@ namespace AngbandOS.Core;
 
 internal class JsonGameSerializer : IGameSerializer
 {
-    public string Serialize(SaveGameData saveGameData)
+    public byte[] Serialize(SaveGameData saveGameData)
     {
         var options = new JsonSerializerOptions
         {
@@ -16,9 +16,9 @@ internal class JsonGameSerializer : IGameSerializer
         };
 
         options.Converters.Add(new GameStateBagConverter());
-        return JsonSerializer.Serialize(saveGameData, options);
+        return JsonSerializer.SerializeToUtf8Bytes(saveGameData, options);
     }
-    public SaveGameData Deserialize(string serializedSaveGameData)
+    public SaveGameData Deserialize(byte[] serializedSaveGameData)
     {
         var options = new JsonSerializerOptions();
         options.Converters.Add(new GameStateBagConverter());
