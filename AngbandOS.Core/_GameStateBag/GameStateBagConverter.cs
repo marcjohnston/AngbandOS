@@ -54,7 +54,7 @@ internal class GameStateBagConverter : JsonConverter<GameStateBag>
 
             case ByteArrayGameStateBag byteArrayValue:
                 writer.WriteString(TypePropertyName, nameof(ByteArrayGameStateBag));
-                writer.WriteString(ValuePropertyName, byteArrayValue.Value);
+                writer.WriteString(ValuePropertyName, Convert.ToBase64String(byteArrayValue.Value));
                 break;
 
             case ByteValueGameStateBag byteValue:

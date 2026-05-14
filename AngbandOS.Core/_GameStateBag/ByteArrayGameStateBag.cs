@@ -8,10 +8,10 @@ namespace AngbandOS.Core;
 
 internal class ByteArrayGameStateBag : GameStateBag
 {
-    public string Value { get; }
+    public byte[] Value { get; }
     public ByteArrayGameStateBag(byte[] value)
     {
-        Value = Convert.ToBase64String(value);
+        Value = value;
     }
     public override string ToString()
     {
@@ -23,6 +23,6 @@ internal class ByteArrayGameStateBag : GameStateBag
         {
             throw new Exception($"During restore verification, the {singleton?.GetType().Name ?? "null"} singleton did not verify as a byte[] value.");
         }
-        return byteArraySingletonFieldValue.ToString() == Value;
+        return byteArraySingletonFieldValue.SequenceEqual(Value);
     }
 }

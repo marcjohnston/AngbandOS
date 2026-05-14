@@ -96,7 +96,7 @@ internal class GridTile : IItemContainer, IGameSerialize
         _trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty));
         if (restoreGameState.PackAsBytes)
         {
-            RestorePack restorePack = restoreGameState.Unpack(nameof(restoreGameState.PackAsBytes));
+            RestorePack restorePack = restoreGameState.GetByKey(nameof(restoreGameState.PackAsBytes)).Unpack();
             if (restoreGameState.PackBoolsAsBits)
             {
                 EasyVisibility = restorePack.UnpackBoolFromBit();

@@ -53,10 +53,9 @@ internal class RestoreGameState
     #region Packing Methods
     public bool PackAsBytes => true;
     public bool PackBoolsAsBits => true;
-    public RestorePack Unpack(string key)
+    public RestorePack Unpack()
     {
-        byte[] data = Convert.FromBase64String(GetGameStateBag<ByteArrayGameStateBag>(key).Value);
-        return new RestorePack(this, data);
+        return new RestorePack(this, GetBytes());
     }
     #endregion
 
@@ -444,8 +443,8 @@ internal class RestoreGameState
             {
                 throw new KeyNotFoundException($"List was not of {nameof(ByteArrayGameStateBag)}.");
             }
-            byte[] bytes = Convert.FromBase64String(byteArrayGameStateBag.Value);
-            listOfBytes.Add(bytes);
+            RestoreGameState restoreGameState = New(gameStateBag);
+            listOfBytes.Add(restoreGameState.GetBytes());
         }
         return listOfBytes.ToArray();
     }
@@ -530,7 +529,7 @@ internal class RestoreGameState
 
     public decimal GetDecimal() => ((DecimalValueGameStateBag)GameStateBag).Value;
 
-    public byte[] GetBytes() => Convert.FromBase64String(((ByteArrayGameStateBag)GameStateBag).Value);
+    public byte[] GetBytes() => ((ByteArrayGameStateBag)GameStateBag).Value;
 
     public TimeSpan GetTimeSpan() => ((TimeSpanValueGameStateBag)GameStateBag).Value;
 }
