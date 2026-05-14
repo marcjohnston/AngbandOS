@@ -386,11 +386,10 @@ internal class RestoreGameState
         return list.ToArray();
     }
 
-    public string[] GetStrings(string key)
+    public string[] GetStrings()
     {
-        ListGameStateBag listGameStateBag = GetGameStateBag<ListGameStateBag>(key);
         List<string> list = new List<string>();
-        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
         {
             if (gameStateBag is not StringValueGameStateBag stringValueGameStateBag)
             {

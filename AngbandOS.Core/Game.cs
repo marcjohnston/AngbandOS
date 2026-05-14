@@ -669,7 +669,7 @@ internal partial class Game : IGameSerialize
             KeyTail = restoreGameState.GetInt(nameof(KeyTail));
             _artificialKeyBuffer = restoreGameState.GetByKey(nameof(_artificialKeyBuffer)).GetString();
             _keymapAct = restoreGameState.GetArrayOfStrings(nameof(_keymapAct));
-            History = restoreGameState.GetStrings(nameof(History));
+            History = restoreGameState.GetByKey(nameof(History)).GetStrings();
             PlayerHp = restoreGameState.GetInts(nameof(PlayerHp));
             Age = restoreGameState.GetInt(nameof(Age));
             ArmorClassBonus = restoreGameState.GetInt(nameof(ArmorClassBonus));
