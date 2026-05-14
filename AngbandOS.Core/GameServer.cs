@@ -17,6 +17,8 @@ public class GameServer
     /// </summary>
     private Game Game;
 
+    private IGameSerializer GameSerializer { get; } = new BinaryGameSerializer();
+
     /// <summary>
     /// Forwards a save game request to the in-progress game. 
     /// </summary>
@@ -204,7 +206,7 @@ public class GameServer
             {
                 ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
             }
-            serializedGameData = Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
+            serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
 
             gameIsOver = true;
         }
@@ -216,17 +218,6 @@ public class GameServer
         return new GameResults(gameIsOver, serializedGameData);
     }
     private bool PruneUnusedAndEmptyObjects => true;
-
-    private string Serialize(SaveGameData saveGameData)
-    {
-        var options = new JsonSerializerOptions
-        {
-            WriteIndented = false
-        };
-
-        options.Converters.Add(new GameStateBagConverter());
-        return JsonSerializer.Serialize(saveGameData, options);
-    }
 
     /// <summary>
     /// Generates and plays a new game.  If the game cannot be played or throws an exception, false is returned; otherwise, the game is played out and true is returned when the game is over or saved.
@@ -317,15 +308,7 @@ public class GameServer
         try
         {
             // Retrieve the game from persistent storage.
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new GameStateBagConverter());
-
-            SaveGameData? saveGameData = JsonSerializer.Deserialize<SaveGameData>(serializedSaveGameData, options);
-            if (saveGameData is null)
-            {
-                throw new Exception("Failed to deserialize game data.");
-            }
-
+            SaveGameData saveGameData = GameSerializer.Deserialize(serializedSaveGameData);
             if (saveGameData.Game is not ObjectGameStateBag objectGameStateBag)
             {
                 throw new Exception("Unexpected game state bag format.");
@@ -342,7 +325,7 @@ public class GameServer
             {
                 ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
             }
-            serializedGameData = Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
+            serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
 
             gameIsOver = true;
         }

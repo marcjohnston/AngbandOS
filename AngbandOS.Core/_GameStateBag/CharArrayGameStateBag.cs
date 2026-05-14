@@ -8,10 +8,10 @@ namespace AngbandOS.Core;
 
 internal class CharArrayGameStateBag : GameStateBag
 {
-    public string Value { get; }
+    public char[] Value { get; }
     public CharArrayGameStateBag(char[] value)
     {
-        Value = new string(value);
+        Value = value;
     }
     public override string ToString()
     {
@@ -23,6 +23,6 @@ internal class CharArrayGameStateBag : GameStateBag
         {
             throw new Exception($"During restore verification, the {singleton?.GetType().Name ?? "null"} singleton did not verify as a char[] value.");
         }
-        return charArraySingletonFieldValue.ToString() == Value;
+        return charArraySingletonFieldValue.SequenceEqual(Value);
     }
 }

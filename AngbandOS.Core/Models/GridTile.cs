@@ -37,40 +37,6 @@ internal class GridTile : IItemContainer, IGameSerialize
     }
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
-        if (saveGameState.PackAsBytes)
-        {
-            byte[] packedBools;
-            if (saveGameState.PackBoolsAsBits)
-            {
-                packedBools = saveGameState.PackBits(EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag);
-            }
-            else
-            {
-                packedBools = saveGameState.Concatenate(
-                    saveGameState.Pack(EasyVisibility),
-                    saveGameState.Pack(InRoom),
-                    saveGameState.Pack(InVault),
-                    saveGameState.Pack(IsVisible),
-                    saveGameState.Pack(PlayerLit),
-                    saveGameState.Pack(PlayerMemorized),
-                    saveGameState.Pack(SelfLit),
-                    saveGameState.Pack(TempFlag)
-                );
-            }
-            byte[] packed = saveGameState.Concatenate(
-                packedBools,
-                saveGameState.Pack(_trapsDetected),
-                saveGameState.Pack(MonsterIndex),
-                saveGameState.Pack(ScentAge),
-                saveGameState.Pack(ScentStrength),
-                saveGameState.Pack(_backgroundFeature),
-                saveGameState.Pack(_featureType)
-            );
-            return new DictionaryGameStateBag(
-                (nameof(saveGameState.PackAsBytes), saveGameState.CreateGameStateBag(packed)),
-                (nameof(Items), saveGameState.CreateGameStateBag(Items))
-            );
-        }
         return new DictionaryGameStateBag(
             (nameof(EasyVisibility), saveGameState.CreateGameStateBag(EasyVisibility)),
             (nameof(InRoom), saveGameState.CreateGameStateBag(InRoom)),
@@ -94,55 +60,21 @@ internal class GridTile : IItemContainer, IGameSerialize
     {
         Game = game;
         _trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty));
-        if (restoreGameState.PackAsBytes)
-        {
-            RestorePack restorePack = restoreGameState.GetByKey(nameof(restoreGameState.PackAsBytes)).Unpack();
-            if (restoreGameState.PackBoolsAsBits)
-            {
-                EasyVisibility = restorePack.UnpackBoolFromBit();
-                InRoom = restorePack.UnpackBoolFromBit();
-                InVault = restorePack.UnpackBoolFromBit();
-                IsVisible = restorePack.UnpackBoolFromBit();
-                PlayerLit = restorePack.UnpackBoolFromBit();
-                PlayerMemorized = restorePack.UnpackBoolFromBit();
-                SelfLit = restorePack.UnpackBoolFromBit();
-                TempFlag = restorePack.UnpackBoolFromBit();
-            }
-            else
-            {
-                EasyVisibility = restorePack.UnpackBool();
-                InRoom = restorePack.UnpackBool();
-                InVault = restorePack.UnpackBool();
-                IsVisible = restorePack.UnpackBool();
-                PlayerLit = restorePack.UnpackBool();
-                PlayerMemorized = restorePack.UnpackBool();
-                SelfLit = restorePack.UnpackBool();
-                TempFlag = restorePack.UnpackBool();
-            }
-            _trapsDetected = restorePack.UnpackBool();
-            MonsterIndex = restorePack.UnpackInt();
-            ScentAge = restorePack.UnpackInt();
-            ScentStrength = restorePack.UnpackInt();
-            _backgroundFeature = restorePack.Unpack<Tile>();
-            _featureType = restorePack.Unpack<Tile>();
-        }
-        else
-        {
-            EasyVisibility = restoreGameState.GetByKey(nameof(EasyVisibility)).GetBool();
-            InRoom = restoreGameState.GetByKey(nameof(InRoom)).GetBool();
-            InVault = restoreGameState.GetByKey(nameof(InVault)).GetBool();
-            IsVisible = restoreGameState.GetByKey(nameof(IsVisible)).GetBool();
-            PlayerLit = restoreGameState.GetByKey(nameof(PlayerLit)).GetBool();
-            PlayerMemorized = restoreGameState.GetByKey(nameof(PlayerMemorized)).GetBool();
-            SelfLit = restoreGameState.GetByKey(nameof(SelfLit)).GetBool();
-            TempFlag = restoreGameState.GetByKey(nameof(TempFlag)).GetBool();
-            _trapsDetected = restoreGameState.GetByKey(nameof(_trapsDetected)).GetBool();
-            MonsterIndex = restoreGameState.GetByKey(nameof(MonsterIndex)).GetInt();
-            ScentAge = restoreGameState.GetByKey(nameof(ScentAge)).GetInt();
-            ScentStrength = restoreGameState.GetByKey(nameof(ScentStrength)).GetInt();
-            _backgroundFeature = restoreGameState.GetByKey(nameof(_backgroundFeature)).GetReference<Tile>();
-            _featureType = restoreGameState.GetByKey(nameof(_featureType)).GetReference<Tile>();
-        }
+        EasyVisibility = restoreGameState.GetByKey(nameof(EasyVisibility)).GetBool();
+        InRoom = restoreGameState.GetByKey(nameof(InRoom)).GetBool();
+        InVault = restoreGameState.GetByKey(nameof(InVault)).GetBool();
+        IsVisible = restoreGameState.GetByKey(nameof(IsVisible)).GetBool();
+        PlayerLit = restoreGameState.GetByKey(nameof(PlayerLit)).GetBool();
+        PlayerMemorized = restoreGameState.GetByKey(nameof(PlayerMemorized)).GetBool();
+        SelfLit = restoreGameState.GetByKey(nameof(SelfLit)).GetBool();
+        TempFlag = restoreGameState.GetByKey(nameof(TempFlag)).GetBool();
+        _trapsDetected = restoreGameState.GetByKey(nameof(_trapsDetected)).GetBool();
+        MonsterIndex = restoreGameState.GetByKey(nameof(MonsterIndex)).GetInt();
+        ScentAge = restoreGameState.GetByKey(nameof(ScentAge)).GetInt();
+        ScentStrength = restoreGameState.GetByKey(nameof(ScentStrength)).GetInt();
+        _backgroundFeature = restoreGameState.GetByKey(nameof(_backgroundFeature)).GetReference<Tile>();
+        _featureType = restoreGameState.GetByKey(nameof(_featureType)).GetReference<Tile>();
+
         Items = restoreGameState.GetByKey(nameof(Items)).GetReferences<Item>().ToList();
     }
 

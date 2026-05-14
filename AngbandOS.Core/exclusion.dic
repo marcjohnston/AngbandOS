@@ -12,3 +12,4 @@ Json
 ﻿Stompable
 ﻿boolean
 ﻿deserialize
+﻿Serializer

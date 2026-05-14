@@ -9,21 +9,4 @@ namespace AngbandOS.Core;
 internal abstract class GameStateBag
 {
     public virtual bool Verify(RestoreGameState restoreGameState, object? singleton) => true;
-
-    public string Serialize()
-    {
-        var options = new JsonSerializerOptions
-        {
-            WriteIndented = false
-        };
-        options.Converters.Add(new GameStateBagConverter());
-        return JsonSerializer.Serialize(this, options);
-    }
-
-    public static GameStateBag? Deserialize(string serializedGameStateBag)
-    {
-        var options = new JsonSerializerOptions();
-        options.Converters.Add(new GameStateBagConverter());
-        return JsonSerializer.Deserialize<GameStateBag>(serializedGameStateBag, options);
-    }
 }

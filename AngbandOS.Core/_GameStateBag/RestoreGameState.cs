@@ -50,15 +50,6 @@ internal class RestoreGameState
         UnusedAndEmptyObjectsPruned = unusedAndEmptyObjectsArePruned;
     }
 
-    #region Packing Methods
-    public bool PackAsBytes => true;
-    public bool PackBoolsAsBits => true;
-    public RestorePack Unpack()
-    {
-        return new RestorePack(this, GetBytes());
-    }
-    #endregion
-
     public void TrackObject(int objectId, object singleton)
     {
         // We are tracking the object for the first time.  We will add it to the dictionary.  It is possible that we are tracking a reference before we have the object game state bag, so we will allow the object game state bag to be null for now and update it later when we have it.
@@ -478,7 +469,7 @@ internal class RestoreGameState
         return listOfBools.ToArray();
     }
 
-    public char[] GetChars() => ((CharArrayGameStateBag)GameStateBag).Value.ToCharArray();
+    public char[] GetChars() => ((CharArrayGameStateBag)GameStateBag).Value;
     public int GetInt() => ((IntValueGameStateBag)GameStateBag).Value;
     public int? GetNullableInt()
     {
