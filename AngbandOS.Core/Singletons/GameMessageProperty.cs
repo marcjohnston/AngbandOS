@@ -36,7 +36,7 @@ internal class GameMessageProperty : Property
         base.Bind(restoreGameState);
         if (restoreGameState is not null)
         {
-            foreach (string message in restoreGameState.GetQueueStrings(nameof(MessageQueue)))
+            foreach (string? message in restoreGameState.GetByKey(nameof(MessageQueue)).GetNullableStrings())
             {
                 MessageQueue.Enqueue(message);
             }
@@ -46,7 +46,7 @@ internal class GameMessageProperty : Property
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(MessageQueue), new QueueOfStringGameStateBag(MessageQueue.ToArray()))
+            (nameof(MessageQueue), saveGameState.CreateGameStateBag(MessageQueue.ToArray()))
         );
     }
 }

@@ -398,6 +398,27 @@ internal class RestoreGameState
         }
         return list.ToArray();
     }
+    public string?[] GetNullableStrings()
+    {
+        List<string?> list = new List<string?>();
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
+        {
+            if (gameStateBag is NullValueGameStateBag)
+            {
+                list.Add(null);
+            }
+            else
+            {
+                if (gameStateBag is not StringValueGameStateBag stringValueGameStateBag)
+                {
+                    throw new Exception("Expected list of strings.");
+                }
+                list.Add(stringValueGameStateBag.Value);
+            }
+        }
+        return list.ToArray();
+    }
+
     public string[][] GetArrayOfStrings()
     {
         List<string[]> listOfStrings = new List<string[]>();
@@ -446,7 +467,6 @@ internal class RestoreGameState
     }
 
     public char[] GetChars() => ((CharArrayGameStateBag)GameStateBag).Value.ToCharArray();
-    public int GetIntByKey(string key) => GetGameStateBag<IntValueGameStateBag>(key).Value;
     public int GetInt() => ((IntValueGameStateBag)GameStateBag).Value;
     public int? GetNullableInt()
     {
@@ -504,17 +524,13 @@ internal class RestoreGameState
 
     public DateTime GetDateTime() => ((DateTimeValueGameStateBag)GameStateBag).Value;
 
-    public byte GetByte(string key) => GetGameStateBag<ByteValueGameStateBag>(key).Value;
+    public byte GetByte() => ((ByteValueGameStateBag)GameStateBag).Value;
 
-    public char GetChar(string key) => GetGameStateBag<CharValueGameStateBag>(key).Value;
+    public char GetChar() => ((CharValueGameStateBag)GameStateBag).Value;
 
-    public decimal GetDecimal(string key) => GetGameStateBag<DecimalValueGameStateBag>(key).Value;
+    public decimal GetDecimal() => ((DecimalValueGameStateBag)GameStateBag).Value;
 
-    public char[] GetCharArray(string key) => GetGameStateBag<CharArrayGameStateBag>(key).Value.ToCharArray();
+    public byte[] GetBytes() => Convert.FromBase64String(((ByteArrayGameStateBag)GameStateBag).Value);
 
-    public byte[] GetByteArray(string key) => Convert.FromBase64String(GetGameStateBag<ByteArrayGameStateBag>(key).Value);
-
-    public TimeSpan GetTimeSpan(string key) => GetGameStateBag<TimeSpanValueGameStateBag>(key).Value;
-
-    public string[] GetQueueStrings(string key) => GetGameStateBag<QueueOfStringGameStateBag>(key).Values.ToArray();
+    public TimeSpan GetTimeSpan() => ((TimeSpanValueGameStateBag)GameStateBag).Value;
 }

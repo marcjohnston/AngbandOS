@@ -660,7 +660,7 @@ internal partial class Game : IGameSerialize
             Talents = restoreGameState.GetByKey(nameof(Talents)).GetReferences<Talent>().ToList();
             CommandArgument = restoreGameState.GetByKey(nameof(CommandArgument)).GetInt();
             CommandDirection = restoreGameState.GetByKey(nameof(CommandDirection)).GetInt();
-            CurrentCommand = restoreGameState.GetChar(nameof(CurrentCommand));
+            CurrentCommand = restoreGameState.GetByKey(nameof(CurrentCommand)).GetChar();
             FullScreenOverlay = restoreGameState.GetByKey(nameof(FullScreenOverlay)).GetBool();
             HideCursorOnFullScreenInkey = restoreGameState.GetByKey(nameof(HideCursorOnFullScreenInkey)).GetBool();
             KeyQueue = restoreGameState.GetByKey(nameof(KeyQueue)).GetChars();
