@@ -457,14 +457,13 @@ internal class RestoreGameState
         return GetInt();
     }
 
-    public DateTime? GetNullableDateTime(string key)
+    public DateTime? GetNullableDateTime()
     {
-        GameStateBag gameStateBag = GetGameStateBag<GameStateBag>(key);
-        if (gameStateBag is NullValueGameStateBag)
+        if (GameStateBag is NullValueGameStateBag)
         {
             return default;
         }
-        return GetDateTime(key);
+        return GetDateTime();
     }
 
     public T[][] GetArrayOfReferences<T>()
@@ -503,7 +502,7 @@ internal class RestoreGameState
 
     public string GetString() => ((StringValueGameStateBag)GameStateBag).Value;
 
-    public DateTime GetDateTime(string key) => GetGameStateBag<DateTimeValueGameStateBag>(key).Value;
+    public DateTime GetDateTime() => ((DateTimeValueGameStateBag)GameStateBag).Value;
 
     public byte GetByte(string key) => GetGameStateBag<ByteValueGameStateBag>(key).Value;
 

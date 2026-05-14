@@ -12,7 +12,7 @@ internal abstract class DateTimeProperty : Property, IDateAndTimeValue
     protected DateTimeProperty(Game game) : base(game) { }
     protected DateTimeProperty(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
-        _value = restoreGameState.GetDateTime(nameof(_value));
+        _value = restoreGameState.GetByKey(nameof(_value)).GetDateTime();
     }
 
     public override void Bind(RestoreGameState? restoreGameState)
@@ -20,7 +20,7 @@ internal abstract class DateTimeProperty : Property, IDateAndTimeValue
         base.Bind(restoreGameState);
         if (restoreGameState != null)
         {
-            _value = restoreGameState.GetDateTime(nameof(_value));
+            _value = restoreGameState.GetByKey(nameof(_value)).GetDateTime();
         }
     }
     

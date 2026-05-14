@@ -596,7 +596,7 @@ internal partial class Game : IGameSerialize
             SustainAll = restoreGameState.GetByKey(nameof(SustainAll)).GetBool();
             Vulnerable = restoreGameState.GetByKey(nameof(Vulnerable)).GetBool();
             WisdomBonus = restoreGameState.GetByKey(nameof(WisdomBonus)).GetInt();
-            replayPreviousKeystrokeDateTime = restoreGameState.GetNullableDateTime(nameof(replayPreviousKeystrokeDateTime));
+            replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTime();
             MainSequenceRandomSeed = restoreGameState.GetByKey(nameof(MainSequenceRandomSeed)).GetInt();
             CurrentSequenceRandomSeed = restoreGameState.GetByKey(nameof(CurrentSequenceRandomSeed)).GetInt();
             EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetReference<ReadOnlyAttributeSet>();
@@ -618,12 +618,12 @@ internal partial class Game : IGameSerialize
             TreasureFeeling = restoreGameState.GetByKey(nameof(TreasureFeeling)).GetInt();
             _birthday = restoreGameState.GetByKey(nameof(_birthday)).GetInt();
             _currentTurn = restoreGameState.GetByKey(nameof(_currentTurn)).GetInt();
-            _dawn = restoreGameState.GetDateTime(nameof(_dawn));
-            _dusk = restoreGameState.GetDateTime(nameof(_dusk));
-            _gameStartDateTime = restoreGameState.GetDateTime(nameof(_gameStartDateTime));
+            _dawn = restoreGameState.GetByKey(nameof(_dawn)).GetDateTime();
+            _dusk = restoreGameState.GetByKey(nameof(_dusk)).GetDateTime();
+            _gameStartDateTime = restoreGameState.GetByKey(nameof(_gameStartDateTime)).GetDateTime();
             _levelEntryTurn = restoreGameState.GetByKey(nameof(_levelEntryTurn)).GetInt();
             IsDead = restoreGameState.GetByKey(nameof(IsDead)).GetBool();
-            LastInputReceived = restoreGameState.GetNullableDateTime(nameof(LastInputReceived));
+            LastInputReceived = restoreGameState.GetByKey(nameof(LastInputReceived)).GetNullableDateTime();
             CommandRepeat = restoreGameState.GetByKey(nameof(CommandRepeat)).GetInt();
             Quests = restoreGameState.GetByKey(nameof(Quests)).GetReferences<Quest>().ToList();
             _elevationMap = restoreGameState.GetByKey(nameof(_elevationMap)).GetArrayOfBytes();
