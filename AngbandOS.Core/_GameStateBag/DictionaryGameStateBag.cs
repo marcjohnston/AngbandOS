@@ -61,6 +61,7 @@ internal class DictionaryGameStateBag : GameStateBag
         LoadValues(values.Select(_keyValuePair => (_keyValuePair.Key, _keyValuePair.Value)).ToArray());
     }
 
+    public int GetIndex(string key) => Values.Keys.ToList().IndexOf(key);
     public bool TryGetGameStateBag(string key, out GameStateBag? gameStateBag) => Values.TryGetValue(key, out gameStateBag);
 
     public void PruneItems(SaveGameState saveGameState)

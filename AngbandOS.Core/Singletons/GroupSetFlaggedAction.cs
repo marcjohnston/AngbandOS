@@ -11,7 +11,6 @@ internal abstract class GroupSetFlaggedAction : FlaggedAction
 {
     protected abstract FlaggedAction[] RedrawActions { get; }
     protected GroupSetFlaggedAction(Game game) : base(game) { }
-    protected GroupSetFlaggedAction(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState) { }
     public override bool IsSet => RedrawActions.Any(_redrawAction => _redrawAction.IsSet);
     public override void Set() => Array.ForEach<FlaggedAction>(RedrawActions, _redrawAction => _redrawAction.Set());
     public override void Clear() => Array.ForEach<FlaggedAction>(RedrawActions, _redrawAction => _redrawAction.Clear());

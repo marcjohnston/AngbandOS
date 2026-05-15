@@ -43,7 +43,7 @@ internal class ObjectGameStateBag : GameStateBag
         }
         return Values.TryGetGameStateBag(key, out gameStateBag);
     }
-
+    public int? GetIndex(string key) => Values?.GetIndex(key);
     public void PruneItems(SaveGameState saveGameState)
     {
         if (Values is not null)

@@ -14,10 +14,6 @@ internal abstract class FlaggedAction : IGetKey, IGameSerialize
     {
         Game = game;
     }
-    protected FlaggedAction(Game game, RestoreGameState restoreGameState) : this(game) // This object is a singleton
-    {
-        _flag = restoreGameState.GetByKey(nameof(_flag)).GetBool();
-    }
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
@@ -30,7 +26,13 @@ internal abstract class FlaggedAction : IGetKey, IGameSerialize
 
     public string GetKey => Key;
 
-    public virtual void Bind(RestoreGameState? restoreGameState) { } // TODO: This is a special case virtual for bind because group flagged actions bind.  A flagged action doesn't support grouping.  Flagged actions will never be configurable either.  Not sure if they should be a repository.
+    public virtual void Bind(RestoreGameState? restoreGameState)
+    {
+        if (restoreGameState is not null)
+        {
+            _flag = restoreGameState.GetByKey(nameof(_flag)).GetBool();
+        }
+    } 
 
     private bool _flag;
 

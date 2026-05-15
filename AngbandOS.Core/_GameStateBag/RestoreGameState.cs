@@ -19,6 +19,10 @@ internal class RestoreGameState
     public GameStateBag GameStateBag { get; }
     public bool UnusedAndEmptyObjectsPruned { get; }
 
+#if DEBUG
+    private int CurrentSequentialIndex = 0;
+#endif
+
     /// <summary>
     /// Creates a clone of the RestoreGameState with a new game state bag.  Only the New method should utilize this constructor.
     /// </summary>
@@ -73,11 +77,11 @@ internal class RestoreGameState
 
     public bool Verify(object? singleton)
     {
-        #if DEBUG
+#if DEBUG
         return GameStateBag.Verify(this, singleton);
-        #else
+#else
         return true;
-        #endif
+#endif
     }
 
     public GameStateBag GetObjectGameStateBag(int objectId)
@@ -85,12 +89,27 @@ internal class RestoreGameState
         return ObjectIdToObjectGameStateBagDictionary[objectId];
     }
 
-    public RestoreGameState GetByKey(string key)
+    public RestoreGameState GetByKey(string key, bool verifySequentialRetrieval = true)
     {
+        void VerifySequenctialRetrieval(int? ordinalIndex)
+        {
+            if (!ordinalIndex.HasValue || ordinalIndex.Value != CurrentSequentialIndex)
+            {
+                throw new Exception($"Sequential index retrieval for the {key} property failed verification.");
+            }
+            CurrentSequentialIndex++;
+        }
+
         if (GameStateBag is ObjectGameStateBag objectGameStateBag)
         {
             if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
             {
+#if DEBUG
+                if (verifySequentialRetrieval)
+                {
+                    VerifySequenctialRetrieval(objectGameStateBag.GetIndex(key));
+                }
+#endif
                 return New(gameStateBag);
             }
             throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(ObjectGameStateBag)}.");
@@ -99,6 +118,12 @@ internal class RestoreGameState
         {
             if (dictionaryGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
             {
+#if DEBUG
+                if (verifySequentialRetrieval)
+                {
+                    VerifySequenctialRetrieval(dictionaryGameStateBag.GetIndex(key));
+                }
+#endif
                 return New(gameStateBag);
             }
             throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(DictionaryGameStateBag)}.");
@@ -169,7 +194,7 @@ internal class RestoreGameState
 
     public T GetReference<T>()
     {
-        #if DEBUG
+#if DEBUG
         // We will only check game serializable models and not IGetKey.
         if (!typeof(IGetKey).IsAssignableFrom(typeof(T)) && !typeof(T).IsAbstract)
         {
@@ -179,7 +204,7 @@ internal class RestoreGameState
                 throw new Exception($"Model for {typeof(T).Name} does not have public constructor for (Game, RestoreGameState).");
             }
         }
-        #endif
+#endif
 
         // Check to see if the singleton game state bag is a reference.  This will occur when the singleton was already serialized from a previous singleton.
         if (GameStateBag is ReferenceGameStateBag referenceGameStateBag)
@@ -188,12 +213,12 @@ internal class RestoreGameState
             int objectId = referenceGameStateBag.ObjectId;
             if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
             {
-                #if DEBUG
+#if DEBUG
                 if (!typeof(T).IsAssignableFrom(singleton.GetType()))
                 {
                     throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
                 }
-                #endif
+#endif
 
                 // We need to track the object.  Since this is a reference game state bag, we do not have the object game state bag yet and will pass null.
                 T typedReference = (T)singleton;
@@ -207,13 +232,13 @@ internal class RestoreGameState
             int objectId = objectGameStateBag.ObjectId;
             if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
             {
-                #if DEBUG
+#if DEBUG
                 // The object already exists, even though we now have the object game state bag.  We will need to track this object game state bag for the bind phase.
                 if (!typeof(T).IsAssignableFrom(singleton.GetType()))
                 {
                     throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
                 }
-                #endif
+#endif
 
                 T typedReference = (T)singleton;
                 TrackGameStateBag(objectId, objectGameStateBag);

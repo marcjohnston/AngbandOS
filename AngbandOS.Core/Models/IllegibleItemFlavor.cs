@@ -15,9 +15,9 @@ internal class IllegibleItemFlavor : Flavor, IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Name), saveGameState.CreateGameStateBag(Name)),
             (nameof(Symbol), saveGameState.CreateGameStateBag(Symbol)),
-            (nameof(Color), saveGameState.CreateGameStateBag(Color))
+            (nameof(Color), saveGameState.CreateGameStateBag(Color)),
+            (nameof(Name), saveGameState.CreateGameStateBag(Name))
         );
     }
 
