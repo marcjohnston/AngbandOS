@@ -8,7 +8,7 @@ namespace AngbandOS.Core;
 
 internal class BinaryGameSerializer : IGameSerializer
 {
-    public byte[] Serialize(GameStateBag gameStateData)
+    private byte[] Serialize(GameStateBag gameStateData)
     {
         List<byte> result = new List<byte>();
         switch (gameStateData)
