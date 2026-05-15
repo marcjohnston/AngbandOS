@@ -56,10 +56,8 @@ internal class GridTile : IItemContainer, IGameSerialize
         );
     }
 
-    public GridTile(Game game, RestoreGameState restoreGameState)
+    public GridTile(Game game, RestoreGameState restoreGameState) : this(game)
     {
-        Game = game;
-        _trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty));
         EasyVisibility = restoreGameState.GetByKey(nameof(EasyVisibility)).GetBool();
         InRoom = restoreGameState.GetByKey(nameof(InRoom)).GetBool();
         InVault = restoreGameState.GetByKey(nameof(InVault)).GetBool();
@@ -69,13 +67,12 @@ internal class GridTile : IItemContainer, IGameSerialize
         SelfLit = restoreGameState.GetByKey(nameof(SelfLit)).GetBool();
         TempFlag = restoreGameState.GetByKey(nameof(TempFlag)).GetBool();
         _trapsDetected = restoreGameState.GetByKey(nameof(_trapsDetected)).GetBool();
+        Items = restoreGameState.GetByKey(nameof(Items)).GetReferences<Item>().ToList();
         MonsterIndex = restoreGameState.GetByKey(nameof(MonsterIndex)).GetInt();
         ScentAge = restoreGameState.GetByKey(nameof(ScentAge)).GetInt();
         ScentStrength = restoreGameState.GetByKey(nameof(ScentStrength)).GetInt();
         _backgroundFeature = restoreGameState.GetByKey(nameof(_backgroundFeature)).GetReference<Tile>();
         _featureType = restoreGameState.GetByKey(nameof(_featureType)).GetReference<Tile>();
-
-        Items = restoreGameState.GetByKey(nameof(Items)).GetReferences<Item>().ToList();
     }
 
     #region State Data
