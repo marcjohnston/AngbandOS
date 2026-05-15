@@ -74,8 +74,7 @@ internal class SaveGameState
             //    Debug.WriteLine($"The number of fields serialized via reflection for {value.GetType().Name} does not match the number of fields serialized via the IGameSerialize interface.  This indicates that the IGameSerialize implementation is not serializing all of the fields in the singleton.  This will cause issues with game state restoration.  Ensure that all fields are being serialized in the IGameSerialize implementation.");
             //}
             //#endif
-
-            return new ObjectGameStateBag(objectId, value.GetType().Name, gameStateBag);
+            return new ObjectGameStateBag(objectId, gameSerializable.GetType().Name, gameStateBag);
         }
 
         if (value is IGameSerialize[][] arrayOfArrayOfIGameSerialize)
