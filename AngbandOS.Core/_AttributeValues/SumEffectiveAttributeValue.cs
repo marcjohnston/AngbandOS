@@ -15,10 +15,8 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
     protected readonly List<(string Key, int Modifier)> _attributeModifiers = new List<(string, int)>();
     public SumEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
     {
-        ListGameStateBag tuplesListGameStateBag = restoreGameState.GetGameStateBag<ListGameStateBag>(nameof(_attributeModifiers));
-
-        // We need to skip the first modifier.  It is preassigned.  TODO: This shouldn't be like this.
-        foreach (GameStateBag tupleGameStateBag in tuplesListGameStateBag.Values)
+        RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
+        foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
             string key = tupleRestoreGameState.GetByKey("Key").GetString();

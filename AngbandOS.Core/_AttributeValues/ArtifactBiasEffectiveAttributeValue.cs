@@ -17,9 +17,8 @@ internal class ArtifactBiasEffectiveAttributeValue : EffectiveAttributeValue
     public ArtifactBiasEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
     public ArtifactBiasEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
     {
-        ListGameStateBag tuplesListGameStateBag = restoreGameState.GetGameStateBag<ListGameStateBag>(nameof(_attributeModifiers));
-
-        foreach (GameStateBag tupleGameStateBag in tuplesListGameStateBag.Values)
+        RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
+        foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
             string key = tupleRestoreGameState.GetByKey("Key").GetString();

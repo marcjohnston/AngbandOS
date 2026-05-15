@@ -471,9 +471,7 @@ internal partial class Game : IGameSerialize
             // Restore the game.
             // We need to generate a common dictionary for the object id to reference dictionary that is used to restore a game.
             RestoreGameState restoreGameState = new RestoreGameState(this, restoreGameStateBagAndOptions.Value.GameStateBag, restoreGameStateBagAndOptions.Value.UnusedAndEmptyObjectsArePruned);
-            ObjectGameStateBag singletonRepositoryGameStateBag = restoreGameState.GetGameStateBag<ObjectGameStateBag>(nameof(SingletonRepository));
-
-            SingletonRepository.LoadAndBind(gameConfiguration, restoreGameState.New(singletonRepositoryGameStateBag));
+            SingletonRepository.LoadAndBind(gameConfiguration, restoreGameState.GetByKey(nameof(SingletonRepository)));
 
             //#if DEBUG
             //// Check to see if there are any bags unfulfilled in the restore state.            

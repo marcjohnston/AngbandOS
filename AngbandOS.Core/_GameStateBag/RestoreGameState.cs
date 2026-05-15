@@ -61,21 +61,6 @@ internal class RestoreGameState
         ObjectIdToObjectGameStateBagDictionary.Add(objectId, objectGameStateBag);
     }
 
-    public object? TryGetObjectById(int objectId)
-    {
-        if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? value))
-        {
-#if DEBUG
-            if (value is null)
-            {
-                throw new Exception("Cannot be null.");
-            }
-#endif
-            return value;
-        }
-        return null;
-    }
-
     public object GetObjectById(int objectId)
     {
         return ObjectIdToReferenceDictionary[objectId];
@@ -88,69 +73,16 @@ internal class RestoreGameState
 
     public bool Verify(object? singleton)
     {
-#if DEBUG
+        #if DEBUG
         return GameStateBag.Verify(this, singleton);
-#else
+        #else
         return true;
-#endif
+        #endif
     }
 
-    /// <summary>
-    /// Retrieve the game state bag for a given singleton for the Bind phase.
-    /// </summary>
-    /// <param name="key"></param>
-    /// <returns></returns>
-    /// <exception cref="InvalidOperationException"></exception>
-    /// <exception cref="Exception"></exception>
-    /// <remarks>
-    /// The singletons will have already been created and tracked during the load phase.  So no additional tracking will be needed.
-    /// </remarks>
-    public RestoreGameState Get(string key)
+    public GameStateBag GetObjectGameStateBag(int objectId)
     {
-        if (GameStateBag is not ObjectGameStateBag singletonRepositoryGameStateBag)
-        {
-            throw new InvalidOperationException($"GameStateBag is not an {nameof(ObjectGameStateBag)}.");
-        }
-
-        // Retrieve the game state bag for the singleton by key.  We are not tracking the object id's with the singleton, so we need to repeat the lookup again.
-        if (singletonRepositoryGameStateBag.TryGetGameStateBag(key, out GameStateBag? singletonGameStateBag))
-        {
-            // Check to see if it is an object game state bag.  If so, it means the singleton was not serialized by a previous singleton, which should be most of the cases.
-            if (singletonGameStateBag is ObjectGameStateBag objectGameStateBag)
-            {
-                // The value is null.  We can return early with the null game state bag.  The object game state bag should also be in the dictionary, but we will not be using it.
-                return New(objectGameStateBag);
-            }
-
-            // Check to see if it is a reference game state bag.  If so, then it was serialized by a previous singleton.
-            if (singletonGameStateBag is ReferenceGameStateBag referenceGameStateBag)
-            {
-                // We will need to retrieve the game state bag from the earlier dictionary.  The game state bag should have been tracked during the load phase, so it should be in the dictionary.
-                ObjectGameStateBag originalObjectGameStateBag = ObjectIdToObjectGameStateBagDictionary[referenceGameStateBag.ObjectId];
-                return New(originalObjectGameStateBag);
-            }
-            throw new Exception("Expected an ObjectGameStateBag or ReferenceGameStateBag.");
-        }
-
-        // The object doesn't exist.
-        if (UnusedAndEmptyObjectsPruned)
-        {
-            return new RestoreGameState(Game, new NullValueGameStateBag(), UnusedAndEmptyObjectsPruned);
-        }
-        throw new Exception("Key not found in GameStateBag.");
-    }
-
-    public int GetObjectId()
-    {
-        if (GameStateBag is ObjectGameStateBag singletonObjectGameStateBag)
-        {
-            return singletonObjectGameStateBag.ObjectId;
-        }
-        if (GameStateBag is ReferenceGameStateBag singletonReferenceGameStateBag)
-        {
-            return singletonReferenceGameStateBag.ObjectId;
-        }
-        throw new Exception($"The restore game state is not an {nameof(ObjectGameStateBag)} or a {nameof(ReferenceGameStateBag)}.");
+        return ObjectIdToObjectGameStateBagDictionary[objectId];
     }
 
     public RestoreGameState GetByKey(string key)
@@ -173,25 +105,18 @@ internal class RestoreGameState
         }
         throw new InvalidOperationException($"GameStateBag is not of type {nameof(ObjectGameStateBag)} or {nameof(DictionaryGameStateBag)}.");
     }
-    public TGameStateBag GetGameStateBag<TGameStateBag>(string key) where TGameStateBag : GameStateBag
+
+    public int GetObjectId()
     {
-        if (GameStateBag is ObjectGameStateBag objectGameStateBag)
+        if (GameStateBag is ObjectGameStateBag singletonObjectGameStateBag)
         {
-            if (objectGameStateBag.TryGetGameStateBag(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
-            {
-                return typedGameStateBag;
-            }
-            throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(ObjectGameStateBag)}.");
+            return singletonObjectGameStateBag.ObjectId;
         }
-        if (GameStateBag is DictionaryGameStateBag dictionaryGameStateBag)
+        if (GameStateBag is ReferenceGameStateBag singletonReferenceGameStateBag)
         {
-            if (dictionaryGameStateBag.Values.TryGetValue(key, out var gameStateBag) && gameStateBag is TGameStateBag typedGameStateBag)
-            {
-                return typedGameStateBag;
-            }
-            throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(DictionaryGameStateBag)}.");
+            return singletonReferenceGameStateBag.ObjectId;
         }
-        throw new InvalidOperationException($"GameStateBag is not of type {nameof(ObjectGameStateBag)} or {nameof(DictionaryGameStateBag)}.");
+        throw new Exception($"The restore game state is not an {nameof(ObjectGameStateBag)} or a {nameof(ReferenceGameStateBag)}.");
     }
 
     public bool GetBool() => ((BoolValueGameStateBag)GameStateBag).Value;
