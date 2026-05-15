@@ -91,7 +91,7 @@ internal class RestoreGameState
 
     public RestoreGameState GetByKey(string key, bool verifySequentialRetrieval = true)
     {
-        void VerifySequenctialRetrieval(int? ordinalIndex)
+        void VerifySequentialRetrieval(int? ordinalIndex)
         {
             if (!ordinalIndex.HasValue || ordinalIndex.Value != CurrentSequentialIndex)
             {
@@ -107,7 +107,7 @@ internal class RestoreGameState
 #if DEBUG
                 if (verifySequentialRetrieval)
                 {
-                    VerifySequenctialRetrieval(objectGameStateBag.GetIndex(key));
+                    VerifySequentialRetrieval(objectGameStateBag.GetIndex(key));
                 }
 #endif
                 return New(gameStateBag);
@@ -121,7 +121,7 @@ internal class RestoreGameState
 #if DEBUG
                 if (verifySequentialRetrieval)
                 {
-                    VerifySequenctialRetrieval(dictionaryGameStateBag.GetIndex(key));
+                    VerifySequentialRetrieval(dictionaryGameStateBag.GetIndex(key));
                 }
 #endif
                 return New(gameStateBag);
