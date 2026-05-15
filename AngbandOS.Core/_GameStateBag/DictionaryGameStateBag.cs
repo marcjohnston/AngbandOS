@@ -11,9 +11,33 @@ namespace AngbandOS.Core;
     
 internal class DictionaryGameStateBag : GameStateBag
 {
+    public readonly bool SequentialRetrieval = true;
     public Dictionary<string, GameStateBag> Values { get; } = new Dictionary<string, GameStateBag>();
 
-    public GameStateBag? Find(string key) => Values.TryGetValue(key, out GameStateBag? gameStateBag) ? gameStateBag : null;
+    /// <summary>
+    /// Creates a new dictionary game state bag with enumerated properties.  This constructor is typically used for the singleton repository object.
+    /// </summary>
+    /// <param name="values"></param>
+    [JsonConstructor]
+    public DictionaryGameStateBag(Dictionary<string, GameStateBag> values)
+    {
+        LoadValues(values.Select(_keyValuePair => (_keyValuePair.Key, _keyValuePair.Value)).ToArray());
+    }
+
+    public DictionaryGameStateBag(Dictionary<string, GameStateBag> values, bool sequentialRetrieval)
+    {
+        SequentialRetrieval = sequentialRetrieval;
+        LoadValues(values.Select(_keyValuePair => (_keyValuePair.Key, _keyValuePair.Value)).ToArray());
+    }
+
+    /// <summary>
+    /// Creates a new dictionary game state bag with itemized properties to be serialized with no base properties.  This constructor is typically used for non-derived models and the singletons.
+    /// </summary>
+    /// <param name="values"></param>
+    public DictionaryGameStateBag(params (string Key, GameStateBag GameState)[] values)
+    {
+        LoadValues(values);
+    }
 
     /// <summary>
     /// Creates a new dictionary game state bag with itemized properties to be serialized and additional base properties.  This constructor is typically used for derived models.
@@ -42,27 +66,31 @@ internal class DictionaryGameStateBag : GameStateBag
         }
     }
 
-    /// <summary>
-    /// Creates a new dictionary game state bag with itemized properties to be serialized with no base properties.  This constructor is typically used for non-derived models and the singletons.
-    /// </summary>
-    /// <param name="values"></param>
-    public DictionaryGameStateBag(params (string Key, GameStateBag GameState)[] values)
-    {
-        LoadValues(values);
-    }
-
-    /// <summary>
-    /// Creates a new dictionary game state bag with enumerated properties.  This constructor is typically used for the singleton repository object.
-    /// </summary>
-    /// <param name="values"></param>
-    [JsonConstructor]
-    public DictionaryGameStateBag(Dictionary<string, GameStateBag> values)
-    {
-        LoadValues(values.Select(_keyValuePair => (_keyValuePair.Key, _keyValuePair.Value)).ToArray());
-    }
-
-    public int GetIndex(string key) => Values.Keys.ToList().IndexOf(key);
     public bool TryGetGameStateBag(string key, out GameStateBag? gameStateBag) => Values.TryGetValue(key, out gameStateBag);
+
+    public GameStateBag? GetByKey(string key, int currentSequentialIndex, bool verifySequentialRetrieval)
+    {
+        if (SequentialRetrieval)
+        {
+            key = currentSequentialIndex.ToString();
+        }
+
+        if (Values.TryGetValue(key, out GameStateBag? gameStateBag))
+        {
+#if DEBUG
+            if (verifySequentialRetrieval)
+            {
+                int ordinalIndex = Values.Keys.ToList().IndexOf(key);
+                if (ordinalIndex != currentSequentialIndex)
+                {
+                    throw new Exception($"Sequential index retrieval for the {key} property failed verification.");
+                }
+            }
+#endif
+            return gameStateBag;
+        }
+        throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(DictionaryGameStateBag)}.");
+    }
 
     public void PruneItems(SaveGameState saveGameState)
     {

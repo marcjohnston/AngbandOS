@@ -91,42 +91,27 @@ internal class RestoreGameState
 
     public RestoreGameState GetByKey(string key, bool verifySequentialRetrieval = true)
     {
-        void VerifySequentialRetrieval(int? ordinalIndex)
-        {
-            if (!ordinalIndex.HasValue || ordinalIndex.Value != CurrentSequentialIndex)
-            {
-                throw new Exception($"Sequential index retrieval for the {key} property failed verification.");
-            }
-            CurrentSequentialIndex++;
-        }
-
         if (GameStateBag is ObjectGameStateBag objectGameStateBag)
         {
-            if (objectGameStateBag.TryGetGameStateBag(key, out GameStateBag? gameStateBag))
+            GameStateBag? gameStateBag = objectGameStateBag.GetByKey(key, CurrentSequentialIndex, verifySequentialRetrieval);
+            if (gameStateBag is null)
             {
-#if DEBUG
-                if (verifySequentialRetrieval)
-                {
-                    VerifySequentialRetrieval(objectGameStateBag.GetIndex(key));
-                }
-#endif
-                return New(gameStateBag);
+                throw new KeyNotFoundException($"Key {key} not found in object game state bag with object id {objectGameStateBag.ObjectId}.");
             }
-            throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(ObjectGameStateBag)}.");
+
+            CurrentSequentialIndex++;
+            return New(gameStateBag);
         }
         if (GameStateBag is DictionaryGameStateBag dictionaryGameStateBag)
         {
-            if (dictionaryGameStateBag.Values.TryGetValue(key, out GameStateBag? gameStateBag))
+            GameStateBag? gameStateBag = dictionaryGameStateBag.GetByKey(key, CurrentSequentialIndex, verifySequentialRetrieval);
+            if (gameStateBag is null)
             {
-#if DEBUG
-                if (verifySequentialRetrieval)
-                {
-                    VerifySequentialRetrieval(dictionaryGameStateBag.GetIndex(key));
-                }
-#endif
-                return New(gameStateBag);
+                throw new KeyNotFoundException($"Key {key} not found in dictionary game state bag.");
             }
-            throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(DictionaryGameStateBag)}.");
+
+            CurrentSequentialIndex++;
+            return New(gameStateBag);
         }
         throw new InvalidOperationException($"GameStateBag is not of type {nameof(ObjectGameStateBag)} or {nameof(DictionaryGameStateBag)}.");
     }

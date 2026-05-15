@@ -34,16 +34,15 @@ internal class ObjectGameStateBag : GameStateBag
         return $"Object#{ObjectId}";
     }
 
-    public bool TryGetGameStateBag(string key, out GameStateBag? gameStateBag)
+    public GameStateBag? GetByKey(string key, int currentSequentialIndex, bool verifySequentialRetrieval)
     {
         if (Values is null)
         {
-            gameStateBag = null;
-            return false;
+            return null;
         }
-        return Values.TryGetGameStateBag(key, out gameStateBag);
+        return Values.GetByKey(key, currentSequentialIndex, verifySequentialRetrieval);
     }
-    public int? GetIndex(string key) => Values?.GetIndex(key);
+
     public void PruneItems(SaveGameState saveGameState)
     {
         if (Values is not null)

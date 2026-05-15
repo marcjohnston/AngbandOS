@@ -51,22 +51,25 @@ internal class BinaryGameSerializer : IGameSerializer
                 }
                 break;
             case DictionaryGameStateBag dictionaryGameStateBag:
-                result.Add(7);
+                result.Add(dictionaryGameStateBag.SequentialRetrieval ? (byte)8 : (byte)7);
                 result.AddRange(BitConverter.GetBytes(dictionaryGameStateBag.Values.Count));
                 foreach (var keyValuePair in dictionaryGameStateBag.Values)
                 {
-                    byte[] keyBytes = System.Text.Encoding.UTF8.GetBytes(keyValuePair.Key);
-                    result.AddRange(BitConverter.GetBytes(keyBytes.Length));
-                    result.AddRange(keyBytes);
+                    if (!dictionaryGameStateBag.SequentialRetrieval)
+                    {
+                        byte[] keyBytes = System.Text.Encoding.UTF8.GetBytes(keyValuePair.Key);
+                        result.AddRange(BitConverter.GetBytes(keyBytes.Length));
+                        result.AddRange(keyBytes);
+                    }
                     result.AddRange(Serialize(keyValuePair.Value));
                 }
                 break;
             case IntValueGameStateBag intValueGameStateBag:
-                result.Add(8);
+                result.Add(9);
                 result.AddRange(BitConverter.GetBytes(intValueGameStateBag.Value));
                 break;
             case ListGameStateBag listGameStateBag:
-                result.Add(9);
+                result.Add(10);
                 result.AddRange(BitConverter.GetBytes(listGameStateBag.Values.Length));
                 foreach (var item in listGameStateBag.Values)
                 {
@@ -74,10 +77,10 @@ internal class BinaryGameSerializer : IGameSerializer
                 }
                 break;
             case NullValueGameStateBag:
-                result.Add(10);
+                result.Add(11);
                 break;
             case ObjectGameStateBag objectGameStateBag:
-                result.Add(11);
+                result.Add(12);
                 result.AddRange(BitConverter.GetBytes(objectGameStateBag.ObjectId));
                 byte[] typeNameBytes = System.Text.Encoding.UTF8.GetBytes(objectGameStateBag.TypeName);
                 result.AddRange(BitConverter.GetBytes(typeNameBytes.Length));
@@ -93,17 +96,17 @@ internal class BinaryGameSerializer : IGameSerializer
                 }
                 break;
             case ReferenceGameStateBag referenceGameStateBag:
-                result.Add(12);
+                result.Add(13);
                 result.AddRange(BitConverter.GetBytes(referenceGameStateBag.ObjectId));
                 break;
             case StringValueGameStateBag stringValueGameStateBag:
-                result.Add(13);
+                result.Add(14);
                 byte[] stringBytes = System.Text.Encoding.UTF8.GetBytes(stringValueGameStateBag.Value);
                 result.AddRange(BitConverter.GetBytes(stringBytes.Length));
                 result.AddRange(stringBytes);
                 break;
             case TimeSpanValueGameStateBag timeSpanValueGameStateBag:
-                result.Add(14);
+                result.Add(15);
                 result.AddRange(BitConverter.GetBytes(timeSpanValueGameStateBag.Value.Ticks));
                 break;
             default:
@@ -173,12 +176,22 @@ internal class BinaryGameSerializer : IGameSerializer
                     GameStateBag value = Deserialize(ref index, data);
                     dictionaryValue[key] = value;
                 }
-                return new DictionaryGameStateBag(dictionaryValue);
+                return new DictionaryGameStateBag(dictionaryValue, false);
             case 8:
+                int sequentialDictionaryCount = BitConverter.ToInt32(data, index);
+                index += 4;
+                Dictionary<string, GameStateBag> sequentialDictionaryValue = new Dictionary<string, GameStateBag>();
+                for (int i = 0; i < sequentialDictionaryCount; i++)
+                {                    
+                    GameStateBag value = Deserialize(ref index, data);
+                    sequentialDictionaryValue[i.ToString()] = value;
+                }
+                return new DictionaryGameStateBag(sequentialDictionaryValue);
+            case 9:
                 int intValue = BitConverter.ToInt32(data, index);
                 index += 4;
                 return new IntValueGameStateBag(intValue);
-            case 9:
+            case 10:
                 int listCount = BitConverter.ToInt32(data, index);
                 index += 4;
                 GameStateBag[] listValue = new GameStateBag[listCount];
@@ -187,9 +200,9 @@ internal class BinaryGameSerializer : IGameSerializer
                     listValue[i] = Deserialize(ref index, data);
                 }
                 return new ListGameStateBag(listValue);
-            case 10:
-                return new NullValueGameStateBag();
             case 11:
+                return new NullValueGameStateBag();
+            case 12:
                 int objectId = BitConverter.ToInt32(data, index);
                 index += 4;
                 int typeNameLength = BitConverter.ToInt32(data, index);
@@ -205,17 +218,17 @@ internal class BinaryGameSerializer : IGameSerializer
                     GameStateBag values = Deserialize(ref index, data);
                     return new ObjectGameStateBag(objectId, typeName, (DictionaryGameStateBag)values);
                 }
-            case 12:
+            case 13:
                 int referenceObjectId = BitConverter.ToInt32(data, index);
                 index += 4;
                 return new ReferenceGameStateBag(referenceObjectId);
-            case 13:
+            case 14:
                 int stringLength = BitConverter.ToInt32(data, index);
                 index += 4;
                 string stringValue = System.Text.Encoding.UTF8.GetString(data, index, stringLength);
                 index += stringLength;
                 return new StringValueGameStateBag(stringValue);
-            case 14:
+            case 15:
                 long timeSpanTicks = BitConverter.ToInt64(data, index);
                 index += 8;
                 return new TimeSpanValueGameStateBag(new TimeSpan(timeSpanTicks));
