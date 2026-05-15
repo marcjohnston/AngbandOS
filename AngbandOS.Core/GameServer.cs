@@ -17,7 +17,8 @@ public class GameServer
     /// </summary>
     private Game Game;
 
-    private IGameSerializer GameSerializer { get; } = new JsonGameSerializer();
+    private IGameSerializer GameSerializer { get; } = new BinaryGameSerializer();
+//    private IGameSerializer GameSerializer { get; } = new JsonGameSerializer();
 
     /// <summary>
     /// Forwards a save game request to the in-progress game. 

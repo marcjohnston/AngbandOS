@@ -9,6 +9,12 @@ namespace AngbandOS.Core;
 [Serializable]
 internal sealed class God : IGetKey, IToJson, IGameSerialize
 {
+    #region State Data
+    public int Favor;
+    public bool IsPatron;
+    public int RestingFavor;
+    #endregion
+
     private Game Game { get; }
     public God(Game game, GodGameConfiguration gameConfiguration)
     {
@@ -19,7 +25,14 @@ internal sealed class God : IGetKey, IToJson, IGameSerialize
         FavorDescription = gameConfiguration.FavorDescription;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Favor), saveGameState.CreateGameStateBag(Favor)),
+            (nameof(IsPatron), saveGameState.CreateGameStateBag(IsPatron)),
+            (nameof(RestingFavor), saveGameState.CreateGameStateBag(RestingFavor))
+        );
+    }
     public string LongName { get; }
     public string ShortName { get; }
     private const int PatronMultiplier = 2;
@@ -37,9 +50,6 @@ internal sealed class God : IGetKey, IToJson, IGameSerialize
         }
     }
 
-    public int Favor { get; set; }
-    public bool IsPatron { get; set; }
-    public int RestingFavor { get; set; }
 
     public string FavorDescription { get; }
 
@@ -49,6 +59,12 @@ internal sealed class God : IGetKey, IToJson, IGameSerialize
 
     public void Bind(RestoreGameState? restoreGameState)
     {
+        if (restoreGameState is not null)
+        {
+            Favor = restoreGameState.GetByKey(nameof(Favor)).GetInt();
+            IsPatron = restoreGameState.GetByKey(nameof(IsPatron)).GetBool();
+            RestingFavor = restoreGameState.GetByKey(nameof(RestingFavor)).GetInt();   
+        }
     }
 
     public string ToJson()
