@@ -4,7 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Diagnostics;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -31,7 +30,6 @@ internal sealed class SingletonRepository : IGameSerialize
         {
             string key = singleton.GetKey;
             GameStateBag singletonGameStateBag = saveGameState.CreateGameStateBag(singleton);
-            Debug.Print(key);
             result.Add(key, singletonGameStateBag);
         }
         return new DictionaryGameStateBag(result, false);
