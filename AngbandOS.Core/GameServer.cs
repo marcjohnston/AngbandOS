@@ -202,11 +202,7 @@ public class GameServer
 
             SaveGameState saveGameState = new SaveGameState();
             GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
-            if (PruneUnusedAndEmptyObjects)
-            {
-                ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
-            }
-            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
+            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
 
             gameIsOver = true;
             return new GameResults(gameIsOver, serializedGameData);
@@ -217,7 +213,6 @@ public class GameServer
             throw new Exception("An error occurred while attempting to play a new game.  See inner exception for details.", ex);
         }
     }
-    private bool PruneUnusedAndEmptyObjects => true;
 
     /// <summary>
     /// Generates and plays a new game.  If the game cannot be played or throws an exception, false is returned; otherwise, the game is played out and true is returned when the game is over or saved.
@@ -242,11 +237,7 @@ public class GameServer
 
             SaveGameState saveGameState = new SaveGameState();
             GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
-            if (PruneUnusedAndEmptyObjects)
-            {
-                ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
-            }
-            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
+            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
             gameIsOver = true;
             return new GameResults(gameIsOver, serializedGameData);
         }
@@ -283,11 +274,7 @@ public class GameServer
 
             SaveGameState saveGameState = new SaveGameState();
             GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
-            if (PruneUnusedAndEmptyObjects)
-            {
-                ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
-            }
-            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
+            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
             gameIsOver = true;
             return new GameResults(gameIsOver, serializedGameData);
         }
@@ -328,7 +315,7 @@ public class GameServer
                 throw new Exception("Unexpected game state bag format.");
             }
 
-            Game = new Game(gameConfiguration, objectGameStateBag, saveGameData.UnusedAndEmptyObjectsPruned);
+            Game = new Game(gameConfiguration, objectGameStateBag);
 
 #if DEBUG
             Game legacyGame = Game.LoadLegacyGame(persistentStorage);
@@ -339,11 +326,7 @@ public class GameServer
 
             SaveGameState saveGameState = new SaveGameState();
             GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
-            if (PruneUnusedAndEmptyObjects)
-            {
-                ((ObjectGameStateBag)saveGameStateBag).PruneItems(saveGameState);
-            }
-            byte[] newSerializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag, PruneUnusedAndEmptyObjects));
+            byte[] newSerializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
 
             gameIsOver = true;
             return new GameResults(gameIsOver, newSerializedGameData);

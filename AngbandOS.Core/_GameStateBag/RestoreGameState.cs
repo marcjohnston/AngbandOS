@@ -17,7 +17,6 @@ internal class RestoreGameState
     private Dictionary<int, object> ObjectIdToReferenceDictionary { get; }
     private Dictionary<int, ObjectGameStateBag> ObjectIdToObjectGameStateBagDictionary { get; }
     public GameStateBag GameStateBag { get; }
-    public bool UnusedAndEmptyObjectsPruned { get; }
 
 #if DEBUG
     private int CurrentSequentialIndex = 0;
@@ -29,13 +28,12 @@ internal class RestoreGameState
     /// <param name="game"></param>
     /// <param name="objectIdToReferenceDictionary"></param>
     /// <param name="gameStateBag"></param>
-    private RestoreGameState(Game game, Dictionary<int, object> objectIdToReferenceDictionary, Dictionary<int, ObjectGameStateBag> objectIdToObjectGameStateBagDictionary, GameStateBag gameStateBag, bool unusedAndEmptyObjectsArePruned)
+    private RestoreGameState(Game game, Dictionary<int, object> objectIdToReferenceDictionary, Dictionary<int, ObjectGameStateBag> objectIdToObjectGameStateBagDictionary, GameStateBag gameStateBag)
     {
         Game = game;
         ObjectIdToReferenceDictionary = objectIdToReferenceDictionary;
         ObjectIdToObjectGameStateBagDictionary = objectIdToObjectGameStateBagDictionary;
         GameStateBag = gameStateBag;
-        UnusedAndEmptyObjectsPruned = unusedAndEmptyObjectsArePruned;
     }
 
     /// <summary>
@@ -43,15 +41,12 @@ internal class RestoreGameState
     /// </summary>
     /// <param name="game"></param>
     /// <param name="gameStateBag"></param>
-    public RestoreGameState(Game game, GameStateBag gameStateBag, bool unusedAndEmptyObjectsArePruned)
+    public RestoreGameState(Game game, GameStateBag gameStateBag)
     {
         Game = game;
         ObjectIdToReferenceDictionary = new Dictionary<int, object>();
         ObjectIdToObjectGameStateBagDictionary = new Dictionary<int, ObjectGameStateBag>();
         GameStateBag = gameStateBag;
-
-        // Retrieve the pruned objects value from the saved game state.
-        UnusedAndEmptyObjectsPruned = unusedAndEmptyObjectsArePruned;
     }
 
     public void TrackObject(int objectId, object singleton)
@@ -72,7 +67,7 @@ internal class RestoreGameState
 
     public RestoreGameState New(GameStateBag gameStateBag)
     {
-        return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, gameStateBag, UnusedAndEmptyObjectsPruned);
+        return new RestoreGameState(Game, ObjectIdToReferenceDictionary, ObjectIdToObjectGameStateBagDictionary, gameStateBag);
     }
 
     public bool Verify(object? singleton)

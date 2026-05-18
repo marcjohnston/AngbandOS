@@ -240,6 +240,6 @@ internal class BinaryGameSerializer : IGameSerializer
     {
         int index = 0;
         GameStateBag gameStateBag = Deserialize(ref index, serializedSaveGameData);
-        return new SaveGameData(gameStateBag, false);
+        return new SaveGameData(gameStateBag);
     }
 }

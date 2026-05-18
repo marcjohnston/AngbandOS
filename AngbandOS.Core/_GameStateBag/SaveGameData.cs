@@ -9,10 +9,8 @@ namespace AngbandOS.Core;
 internal class SaveGameData
 {
     public GameStateBag Game { get; set; }
-    public bool UnusedAndEmptyObjectsPruned { get; set; }
-    public SaveGameData(GameStateBag game, bool unusedAndEmptyObjectsPruned)
+    public SaveGameData(GameStateBag game)
     {
         Game = game;
-        UnusedAndEmptyObjectsPruned = unusedAndEmptyObjectsPruned;
     }
 }

@@ -394,7 +394,7 @@ internal partial class Game : IGameSerialize
     /// </summary>
     /// <param name="gameConfiguration"></param>
     /// <param name="gameStateBag"></param>
-    public Game(GameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag, bool unusedAndEmptyObjectsArePruned) : this(gameConfiguration, null, (gameStateBag, unusedAndEmptyObjectsArePruned)) { }
+    public Game(GameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag) : this(gameConfiguration, null, gameStateBag) { }
 
     /// <summary>
     /// Create a new game to play from scratch.
@@ -422,7 +422,7 @@ internal partial class Game : IGameSerialize
     /// <param name="gameConfiguration"></param>
     /// <param name="gameReplay">Supply t</param>
     /// <param name="gameStateBag">Supply the game state bag to restore a game.  The game configuration must match the game being restored.</param>
-    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, (ObjectGameStateBag GameStateBag, bool UnusedAndEmptyObjectsArePruned)? restoreGameStateBagAndOptions)
+    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, ObjectGameStateBag gameStateBag)
     {
         #region Non-Serialized Initialization - The initialization in this region is only for non-serialized fields and properties.
         _mainSequence = new Random();
@@ -455,7 +455,7 @@ internal partial class Game : IGameSerialize
 
         // Load all of the predefined objects.  The singleton repository must already be created.
         DateTime startTime = DateTime.Now;
-        if (restoreGameStateBagAndOptions is null)
+        if (gameStateBag is null)
         {
             // This is a new game.
             SingletonRepository.LoadAndBind(gameConfiguration, null);
@@ -470,7 +470,7 @@ internal partial class Game : IGameSerialize
         {
             // Restore the game.
             // We need to generate a common dictionary for the object id to reference dictionary that is used to restore a game.
-            RestoreGameState restoreGameState = new RestoreGameState(this, restoreGameStateBagAndOptions.Value.GameStateBag, restoreGameStateBagAndOptions.Value.UnusedAndEmptyObjectsArePruned);
+            RestoreGameState restoreGameState = new RestoreGameState(this, gameStateBag);
             SingletonRepository.LoadAndBind(gameConfiguration, restoreGameState.GetByKey(nameof(SingletonRepository)));
 
             //#if DEBUG
