@@ -92,29 +92,6 @@ internal class DictionaryGameStateBag : GameStateBag
         throw new KeyNotFoundException($"The key '{key}' was not found in the {nameof(DictionaryGameStateBag)}.");
     }
 
-    public void PruneItems(SaveGameState saveGameState)
-    {
-        // Are there items to enumerate.
-        //if (Values is not null)
-        //{
-        //    // Enumerate all of the items.
-        //    foreach ((string key, GameStateBag itemGameStateBag) in Values)
-        //    {
-        //        // Ensure the game state bag is an object game state bag, and if so, prune the items of the item game state bag.
-        //        if (itemGameStateBag is ObjectGameStateBag itemObjectGameStateBag)
-        //        {
-        //            // Prune the items of the item game state bag.
-        //            itemObjectGameStateBag.PruneItems(saveGameState);
-
-        //            if (itemObjectGameStateBag.IsEmpty && !saveGameState.ObjectIsReferenced(itemObjectGameStateBag.ObjectId))
-        //            {
-        //                // The item is an empty object, we can remove it.
-        //                Values.Remove(key);
-        //            }
-        //        }
-        //    }
-        //}
-    }
     private static MemberInfo? GetMemberInfo(Type type, string name)
     {
         const BindingFlags flags =

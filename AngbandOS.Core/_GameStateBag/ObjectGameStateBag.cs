@@ -43,14 +43,6 @@ internal class ObjectGameStateBag : GameStateBag
         return Values.GetByKey(key, currentSequentialIndex, verifySequentialRetrieval);
     }
 
-    public void PruneItems(SaveGameState saveGameState)
-    {
-        if (Values is not null)
-        {
-            Values.PruneItems(saveGameState);
-        }
-    }
-
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {
         if (Values is not null)
