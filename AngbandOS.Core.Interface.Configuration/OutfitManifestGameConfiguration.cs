@@ -1,7 +1,7 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
 [Serializable]
-public class OutfitManifestGameConfiguration : IGetKeyGameConfiguration
+public class OutfitManifestGameConfiguration : IGetKeyGameConfiguration // We cannot use the CompositeSingletonGameConfiguration, because the composite keys in the definition only support strings and we have tuples
 {
     public string GetKey => GameConfiguration.GetCompositeKey(CharacterClassBindingKey, RaceBindingKey, RealmBindingKey); // CONFIRMED
 

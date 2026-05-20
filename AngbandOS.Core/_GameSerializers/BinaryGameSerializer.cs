@@ -4,13 +4,34 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.IO.Compression;
+
 namespace AngbandOS.Core;
 
 internal class BinaryGameSerializer : IGameSerializer
 {
-    private byte[] Serialize(GameStateBag gameStateData)
+    //List<string> u = new List<string>();
+    private static byte[] Serialize(GameStateBag gameStateData)
     {
         List<byte> result = new List<byte>();
+
+        void AddString(string value)
+        {
+            byte[] keyBytes = System.Text.Encoding.UTF8.GetBytes(value);
+            result.AddRange(BitConverter.GetBytes(keyBytes.Length));
+            result.AddRange(keyBytes);
+        }
+
+        void AddTypeName(string value)
+        {
+            AddString(value);
+            //if (!u.Contains(value))
+            //{
+            //    u.Add(value);
+            //    Debug.Print(value);
+            //}
+        }
+
         switch (gameStateData)
         {
             case BoolValueGameStateBag boolValueGameStateBag:
@@ -57,9 +78,7 @@ internal class BinaryGameSerializer : IGameSerializer
                 {
                     if (!dictionaryGameStateBag.SequentialRetrieval)
                     {
-                        byte[] keyBytes = System.Text.Encoding.UTF8.GetBytes(keyValuePair.Key);
-                        result.AddRange(BitConverter.GetBytes(keyBytes.Length));
-                        result.AddRange(keyBytes);
+                        AddTypeName(keyValuePair.Key);
                     }
                     result.AddRange(Serialize(keyValuePair.Value));
                 }
@@ -82,9 +101,7 @@ internal class BinaryGameSerializer : IGameSerializer
             case ObjectGameStateBag objectGameStateBag:
                 result.Add(12);
                 result.AddRange(BitConverter.GetBytes(objectGameStateBag.ObjectId));
-                byte[] typeNameBytes = System.Text.Encoding.UTF8.GetBytes(objectGameStateBag.TypeName);
-                result.AddRange(BitConverter.GetBytes(typeNameBytes.Length));
-                result.AddRange(typeNameBytes);
+                AddTypeName(objectGameStateBag.TypeName);
                 if (objectGameStateBag.Values is null)
                 {
                     result.Add(0);
@@ -101,9 +118,7 @@ internal class BinaryGameSerializer : IGameSerializer
                 break;
             case StringValueGameStateBag stringValueGameStateBag:
                 result.Add(14);
-                byte[] stringBytes = System.Text.Encoding.UTF8.GetBytes(stringValueGameStateBag.Value);
-                result.AddRange(BitConverter.GetBytes(stringBytes.Length));
-                result.AddRange(stringBytes);
+                AddString(stringValueGameStateBag.Value);
                 break;
             case TimeSpanValueGameStateBag timeSpanValueGameStateBag:
                 result.Add(15);
@@ -116,10 +131,33 @@ internal class BinaryGameSerializer : IGameSerializer
     }
     public byte[] Serialize(SaveGameData saveGameData)
     {
-        return Serialize(saveGameData.Game);
+        byte[] unzippedSerializedData = Serialize(saveGameData.Game);
+        byte[] zippedSerializedData = Zip(unzippedSerializedData);
+        return zippedSerializedData;
+    }
+    private static byte[] Zip(byte[] data)
+    {
+        using MemoryStream output = new MemoryStream();
+
+        using (GZipStream gzip = new GZipStream(output, CompressionLevel.Optimal))
+        {
+            gzip.Write(data, 0, data.Length);
+        }
+
+        return output.ToArray();
+    }
+    private static byte[] Unzip(byte[] compressedData)
+    {
+        using MemoryStream input = new MemoryStream(compressedData);
+        using GZipStream gzip = new GZipStream(input, CompressionMode.Decompress);
+        using MemoryStream output = new MemoryStream();
+
+        gzip.CopyTo(output);
+
+        return output.ToArray();
     }
 
-    private GameStateBag Deserialize(ref int index, byte[] data)
+    private static GameStateBag Deserialize(ref int index, byte[] data)
     {
         byte type = data[index++];
         switch (type)
@@ -238,8 +276,10 @@ internal class BinaryGameSerializer : IGameSerializer
     }
     public SaveGameData Deserialize(byte[] serializedSaveGameData)
     {
+        byte[] unzippedSerializedData = Unzip(serializedSaveGameData);
+
         int index = 0;
-        GameStateBag gameStateBag = Deserialize(ref index, serializedSaveGameData);
+        GameStateBag gameStateBag = Deserialize(ref index, unzippedSerializedData);
         return new SaveGameData(gameStateBag);
     }
 }
