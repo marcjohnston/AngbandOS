@@ -10,10 +10,36 @@ namespace AngbandOS.Core;
 
 internal class BinaryGameSerializer : IGameSerializer
 {
+    private enum TypeEnum
+    {
+        BooleanFalseValue = 0,
+        BooleanTrueValue = 1,
+        ByteArray = 2,
+        ByteValue = 3,
+        CharArray = 4,
+        CharValue = 5,
+        DateTimeValue = 6,
+        DecimalValue = 7,
+        DictionaryWithSequentialRetrieval = 8,
+        DictionaryWithNonSequentialRetrieval = 9,
+        IntegerValue = 10,
+        List = 11,
+        NullValue = 12,
+        ObjectWithState = 13,
+        ObjectWithoutState = 14,
+        ReferenceToObject = 15,
+        StringValue = 16,
+        TimeSpanValue = 17
+    }
     //List<string> u = new List<string>();
     private static byte[] Serialize(GameStateBag gameStateData)
     {
         List<byte> result = new List<byte>();
+
+        void Add(TypeEnum typeEnum)
+        {
+            result.Add((byte)typeEnum);
+        }
 
         void AddString(string value)
         {
@@ -35,20 +61,26 @@ internal class BinaryGameSerializer : IGameSerializer
         switch (gameStateData)
         {
             case BoolValueGameStateBag boolValueGameStateBag:
-                result.Add(0);
-                result.Add(boolValueGameStateBag.Value ? (byte)1 : (byte)0);
+                if (boolValueGameStateBag.Value)
+                {
+                    Add(TypeEnum.BooleanTrueValue);
+                }
+                else
+                {
+                    Add(TypeEnum.BooleanFalseValue);
+                }
                 break;
             case ByteArrayGameStateBag byteArrayGameStateBag:
-                result.Add(1);
+                Add(TypeEnum.ByteArray);
                 result.AddRange(BitConverter.GetBytes(byteArrayGameStateBag.Value.Length));
                 result.AddRange(byteArrayGameStateBag.Value);
                 break;
             case ByteValueGameStateBag byteValueGameStateBag:
-                result.Add(2);
+                Add(TypeEnum.ByteValue);
                 result.Add(byteValueGameStateBag.Value);
                 break;
             case CharArrayGameStateBag charArrayGameStateBag:
-                result.Add(3);
+                Add(TypeEnum.CharArray);
                 result.AddRange(BitConverter.GetBytes(charArrayGameStateBag.Value.Length));
                 foreach (char c in charArrayGameStateBag.Value)
                 {
@@ -56,15 +88,15 @@ internal class BinaryGameSerializer : IGameSerializer
                 }
                 break;
             case CharValueGameStateBag charValueGameStateBag:
-                result.Add(4);
+                Add(TypeEnum.CharValue);
                 result.AddRange(BitConverter.GetBytes(charValueGameStateBag.Value));
                 break;
             case DateTimeValueGameStateBag dateTimeValueGameStateBag:
-                result.Add(5);
+                Add(TypeEnum.DateTimeValue);
                 result.AddRange(BitConverter.GetBytes(dateTimeValueGameStateBag.Value.Ticks));
                 break;
             case DecimalValueGameStateBag decimalValueGameStateBag:
-                result.Add(6);
+                Add(TypeEnum.DecimalValue);
                 int[] bits = decimal.GetBits(decimalValueGameStateBag.Value);
                 foreach (int bit in bits)
                 {
@@ -72,7 +104,7 @@ internal class BinaryGameSerializer : IGameSerializer
                 }
                 break;
             case DictionaryGameStateBag dictionaryGameStateBag:
-                result.Add(dictionaryGameStateBag.SequentialRetrieval ? (byte)8 : (byte)7);
+                Add(dictionaryGameStateBag.SequentialRetrieval ? TypeEnum.DictionaryWithSequentialRetrieval : TypeEnum.DictionaryWithNonSequentialRetrieval);
                 result.AddRange(BitConverter.GetBytes(dictionaryGameStateBag.Values.Count));
                 foreach (var keyValuePair in dictionaryGameStateBag.Values)
                 {
@@ -84,11 +116,11 @@ internal class BinaryGameSerializer : IGameSerializer
                 }
                 break;
             case IntValueGameStateBag intValueGameStateBag:
-                result.Add(9);
+                Add(TypeEnum.IntegerValue);
                 result.AddRange(BitConverter.GetBytes(intValueGameStateBag.Value));
                 break;
             case ListGameStateBag listGameStateBag:
-                result.Add(10);
+                Add(TypeEnum.List);
                 result.AddRange(BitConverter.GetBytes(listGameStateBag.Values.Length));
                 foreach (var item in listGameStateBag.Values)
                 {
@@ -96,32 +128,31 @@ internal class BinaryGameSerializer : IGameSerializer
                 }
                 break;
             case NullValueGameStateBag:
-                result.Add(11);
+                Add(TypeEnum.NullValue);
                 break;
             case ObjectGameStateBag objectGameStateBag:
-                result.Add(12);
-                result.AddRange(BitConverter.GetBytes(objectGameStateBag.ObjectId));
-                AddTypeName(objectGameStateBag.TypeName);
                 if (objectGameStateBag.Values is null)
                 {
-                    result.Add(0);
+                    Add(TypeEnum.ObjectWithoutState);
                 }
                 else
                 {
-                    result.Add(1);
+                    Add(TypeEnum.ObjectWithState);
                     result.AddRange(Serialize(objectGameStateBag.Values));
                 }
+                result.AddRange(BitConverter.GetBytes(objectGameStateBag.ObjectId));
+                AddTypeName(objectGameStateBag.TypeName);
                 break;
             case ReferenceGameStateBag referenceGameStateBag:
-                result.Add(13);
+                Add(TypeEnum.ReferenceToObject);
                 result.AddRange(BitConverter.GetBytes(referenceGameStateBag.ObjectId));
                 break;
             case StringValueGameStateBag stringValueGameStateBag:
-                result.Add(14);
+                Add(TypeEnum.StringValue);
                 AddString(stringValueGameStateBag.Value);
                 break;
             case TimeSpanValueGameStateBag timeSpanValueGameStateBag:
-                result.Add(15);
+                Add(TypeEnum.TimeSpanValue);
                 result.AddRange(BitConverter.GetBytes(timeSpanValueGameStateBag.Value.Ticks));
                 break;
             default:
@@ -159,23 +190,33 @@ internal class BinaryGameSerializer : IGameSerializer
 
     private static GameStateBag Deserialize(ref int index, byte[] data)
     {
+        string GetString(ref int index)
+        {
+            int stringLength = BitConverter.ToInt32(data, index);
+            index += 4;
+            string value = System.Text.Encoding.UTF8.GetString(data, index, stringLength);
+            index += stringLength;
+            return value;
+        }
+
         byte type = data[index++];
         switch (type)
         {
-            case 0:
-                bool boolValue = data[index++] == 1;
-                return new BoolValueGameStateBag(boolValue);
-            case 1:
+            case (byte)TypeEnum.BooleanFalseValue:
+                return new BoolValueGameStateBag(false);
+            case (byte)TypeEnum.BooleanTrueValue:
+                return new BoolValueGameStateBag(true);
+            case (byte)TypeEnum.ByteArray:
                 int byteArrayLength = BitConverter.ToInt32(data, index);
                 index += 4;
                 byte[] byteArrayValue = new byte[byteArrayLength];
                 Array.Copy(data, index, byteArrayValue, 0, byteArrayLength);
                 index += byteArrayLength;
                 return new ByteArrayGameStateBag(byteArrayValue);
-            case 2:
+            case (byte)TypeEnum.ByteValue:
                 byte byteValue = data[index++];
                 return new ByteValueGameStateBag(byteValue);
-            case 3:
+            case (byte)TypeEnum.CharArray:
                 int charArrayLength = BitConverter.ToInt32(data, index);
                 index += 4;
                 char[] charArrayValue = new char[charArrayLength];
@@ -185,15 +226,15 @@ internal class BinaryGameSerializer : IGameSerializer
                     index += 2;
                 }
                 return new CharArrayGameStateBag(charArrayValue);
-            case 4:
+            case (byte)TypeEnum.CharValue:
                 char charValue = BitConverter.ToChar(data, index);
                 index += 2;
                 return new CharValueGameStateBag(charValue);
-            case 5:
+            case (byte)TypeEnum.DateTimeValue:
                 long dateTimeTicks = BitConverter.ToInt64(data, index);
                 index += 8;
                 return new DateTimeValueGameStateBag(new DateTime(dateTimeTicks));
-            case 6:
+            case (byte)TypeEnum.DecimalValue:
                 int[] decimalBits = new int[4];
                 for (int i = 0; i < 4; i++)
                 {
@@ -201,21 +242,18 @@ internal class BinaryGameSerializer : IGameSerializer
                     index += 4;
                 }
                 return new DecimalValueGameStateBag(new decimal(decimalBits));
-            case 7:
+            case (byte)TypeEnum.DictionaryWithNonSequentialRetrieval:
                 int dictionaryCount = BitConverter.ToInt32(data, index);
                 index += 4;
                 Dictionary<string, GameStateBag> dictionaryValue = new Dictionary<string, GameStateBag>();
                 for (int i = 0; i < dictionaryCount; i++)
                 {
-                    int keyLength = BitConverter.ToInt32(data, index);
-                    index += 4;
-                    string key = System.Text.Encoding.UTF8.GetString(data, index, keyLength);
-                    index += keyLength;
+                    string key = GetString(ref index);
                     GameStateBag value = Deserialize(ref index, data);
                     dictionaryValue[key] = value;
                 }
                 return new DictionaryGameStateBag(dictionaryValue, false);
-            case 8:
+            case (byte)TypeEnum.DictionaryWithSequentialRetrieval:
                 int sequentialDictionaryCount = BitConverter.ToInt32(data, index);
                 index += 4;
                 Dictionary<string, GameStateBag> sequentialDictionaryValue = new Dictionary<string, GameStateBag>();
@@ -225,11 +263,11 @@ internal class BinaryGameSerializer : IGameSerializer
                     sequentialDictionaryValue[i.ToString()] = value;
                 }
                 return new DictionaryGameStateBag(sequentialDictionaryValue);
-            case 9:
+            case (byte)TypeEnum.IntegerValue:
                 int intValue = BitConverter.ToInt32(data, index);
                 index += 4;
                 return new IntValueGameStateBag(intValue);
-            case 10:
+            case (byte)TypeEnum.List:
                 int listCount = BitConverter.ToInt32(data, index);
                 index += 4;
                 GameStateBag[] listValue = new GameStateBag[listCount];
@@ -238,35 +276,30 @@ internal class BinaryGameSerializer : IGameSerializer
                     listValue[i] = Deserialize(ref index, data);
                 }
                 return new ListGameStateBag(listValue);
-            case 11:
+            case (byte)TypeEnum.NullValue:
                 return new NullValueGameStateBag();
-            case 12:
-                int objectId = BitConverter.ToInt32(data, index);
+            case (byte)TypeEnum.ObjectWithoutState:
+                int objectWithoutStateId = BitConverter.ToInt32(data, index);
                 index += 4;
-                int typeNameLength = BitConverter.ToInt32(data, index);
+                string objectWithoutStateTypeName = GetString(ref index);
+                return new ObjectGameStateBag(objectWithoutStateId, objectWithoutStateTypeName, null);
+            case (byte)TypeEnum.ObjectWithState:
+                GameStateBag objectState = Deserialize(ref index, data);
+                int objectWithStateId = BitConverter.ToInt32(data, index);
                 index += 4;
-                string typeName = System.Text.Encoding.UTF8.GetString(data, index, typeNameLength);
-                index += typeNameLength;
-                if (data[index++] == 0)
-                {
-                    return new ObjectGameStateBag(objectId, typeName, null);
-                }
-                else
-                {
-                    GameStateBag values = Deserialize(ref index, data);
-                    return new ObjectGameStateBag(objectId, typeName, (DictionaryGameStateBag)values);
-                }
-            case 13:
+                string objectWithStateTypeName = GetString(ref index);
+                return new ObjectGameStateBag(objectWithStateId, objectWithStateTypeName, (DictionaryGameStateBag)objectState);
+            case (byte)TypeEnum.ReferenceToObject:
                 int referenceObjectId = BitConverter.ToInt32(data, index);
                 index += 4;
                 return new ReferenceGameStateBag(referenceObjectId);
-            case 14:
+            case (byte)TypeEnum.StringValue:
                 int stringLength = BitConverter.ToInt32(data, index);
                 index += 4;
                 string stringValue = System.Text.Encoding.UTF8.GetString(data, index, stringLength);
                 index += stringLength;
                 return new StringValueGameStateBag(stringValue);
-            case 15:
+            case (byte)TypeEnum.TimeSpanValue:
                 long timeSpanTicks = BitConverter.ToInt64(data, index);
                 index += 8;
                 return new TimeSpanValueGameStateBag(new TimeSpan(timeSpanTicks));
