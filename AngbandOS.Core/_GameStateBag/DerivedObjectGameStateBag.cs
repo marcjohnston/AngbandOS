@@ -36,7 +36,7 @@ internal class DerivedObjectGameStateBag : GameStateBag
     /// <returns></returns>
     public override string ToString()
     {
-        return $"Object#{ObjectId}";
+        return $"{(DerivedId.HasValue ? "Polymorph " : "")}Object#{ObjectId} {(Values is null ? "without" : "with")} state";
     }
 
     public GameStateBag? GetByKey(string key, int currentSequentialIndex, bool verifySequentialRetrieval)

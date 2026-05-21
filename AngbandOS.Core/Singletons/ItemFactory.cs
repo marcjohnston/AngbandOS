@@ -521,7 +521,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             (Stompable[0], Stompable[1], Stompable[2], Stompable[3], IsFlavorAware, Tried) = restoreGameState.GetByKey("bools").Get6Bools();
             FlavorSymbol = restoreGameState.GetByKey(nameof(FlavorSymbol)).GetReference<Symbol>();
             FlavorColor = restoreGameState.GetByKey(nameof(FlavorColor)).GetEnum<ColorEnum>();
-            Flavor = restoreGameState.GetByKey(nameof(Flavor)).GetDerivedReferenceOrDefault<Flavor>((Game game, RestoreGameState restoreGameState) => new IllegibleItemFlavor(Game, restoreGameState));
+            Flavor = restoreGameState.GetByKey(nameof(Flavor)).GetDerivedReferenceOrDefault<Flavor>((RestoreGameState restoreGameState) => new IllegibleItemFlavor(Game, restoreGameState));
             Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
             _bookIndex = restoreGameState.GetByKey(nameof(_bookIndex)).GetInt();
             _realm = restoreGameState.GetByKey(nameof(_realm)).GetReferenceOrDefault<Realm>();

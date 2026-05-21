@@ -279,7 +279,7 @@ internal class RestoreGameState
     }
 
     #region Derived New Object Serialization
-    public T? GetDerivedReferenceOrDefault<T>(params Func<Game, RestoreGameState, T>[] constructors)
+    public T? GetDerivedReferenceOrDefault<T>(params Func<RestoreGameState, T>[] constructors)
     {
         if (GameStateBag is NullValueGameStateBag)
         {
@@ -289,7 +289,7 @@ internal class RestoreGameState
         return GetDerivedReference(constructors);
     }
 
-    private T GetDerivedReference<T>(params Func<Game, RestoreGameState, T>[] constructors)
+    private T GetDerivedReference<T>(params Func<RestoreGameState, T>[] constructors)
     {
         // Check to see if the singleton game state bag is a reference.  This will occur when the singleton was already serialized from a previous singleton.
         if (GameStateBag is ReferenceGameStateBag referenceGameStateBag)
@@ -323,7 +323,7 @@ internal class RestoreGameState
                 throw new Exception($"Derived ID#{derivedObjectGameStateBag.DerivedId} does not have a constructor.");
             }
 
-            Func<Game, RestoreGameState, T> constructor;
+            Func<RestoreGameState, T> constructor;
             if (derivedObjectGameStateBag.DerivedId is null)
             {
 #if DEBUG
@@ -338,14 +338,14 @@ internal class RestoreGameState
             {
                 constructor = constructors[derivedObjectGameStateBag.DerivedId.Value];
             }
-            T t = constructor(Game, restoreGameState);
+            T t = constructor(restoreGameState);
             TrackObject(objectId, t);
             return t;
         }
         throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
     }
 
-    public T[] GetDerivedReferences<T>(Func<Game, RestoreGameState, T> constructor)
+    public T[] GetDerivedReferences<T>(Func<RestoreGameState, T> constructor)
     {
         List<T> list = new List<T>();
         foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)

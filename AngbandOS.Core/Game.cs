@@ -214,9 +214,9 @@ internal partial class Game : IGameSerialize
             (nameof(Quests), saveGameState.CreateGameStateBag(Quests)),
             (nameof(_elevationMap), saveGameState.CreateGameStateBag(_elevationMap)),
             (nameof(AllocKindSize), saveGameState.CreateGameStateBag(AllocKindSize)),
-            (nameof(AllocKindTable), saveGameState.CreateGameStateBag(AllocKindTable)),//, typeof(AllocationEntry))),
+            (nameof(AllocKindTable), saveGameState.CreateGameStateBag(AllocKindTable, typeof(AllocationEntry))),
             (nameof(AllocRaceSize), saveGameState.CreateGameStateBag(AllocRaceSize)),
-            (nameof(AllocRaceTable), saveGameState.CreateGameStateBag(AllocRaceTable)),//, typeof(AllocationEntry))),
+            (nameof(AllocRaceTable), saveGameState.CreateGameStateBag(AllocRaceTable, typeof(AllocationEntry))),
             (nameof(CameFrom), saveGameState.CreateGameStateBag(CameFrom)),
             (nameof(CharacterXtra), saveGameState.CreateGameStateBag(CharacterXtra)),
             (nameof(CreateDownStair), saveGameState.CreateGameStateBag(CreateDownStair)),
@@ -626,11 +626,9 @@ internal partial class Game : IGameSerialize
             Quests = restoreGameState.GetByKey(nameof(Quests)).GetReferences<Quest>().ToList();
             _elevationMap = restoreGameState.GetByKey(nameof(_elevationMap)).GetArrayOfBytes();
             AllocKindSize = restoreGameState.GetByKey(nameof(AllocKindSize)).GetInt();
-            AllocKindTable = restoreGameState.GetByKey(nameof(AllocKindTable)).GetReferences<AllocationEntry>();
-//            AllocKindTable = restoreGameState.GetByKey(nameof(AllocKindTable)).GetDerivedReferences<AllocationEntry>((Game, RestoreGameState) => new AllocationEntry(Game, restoreGameState)).ToArray();
+            AllocKindTable = restoreGameState.GetByKey(nameof(AllocKindTable)).GetDerivedReferences<AllocationEntry>((RestoreGameState restoreGameState) => new AllocationEntry(this, restoreGameState)).ToArray();
             AllocRaceSize = restoreGameState.GetByKey(nameof(AllocRaceSize)).GetInt();
-            AllocRaceTable = restoreGameState.GetByKey(nameof(AllocRaceTable)).GetReferences<AllocationEntry>();
-//            AllocRaceTable = restoreGameState.GetByKey(nameof(AllocRaceTable)).GetDerivedReferences<AllocationEntry>((Game, RestoreGameState) => new AllocationEntry(Game, restoreGameState)).ToArray();
+            AllocRaceTable = restoreGameState.GetByKey(nameof(AllocRaceTable)).GetDerivedReferences<AllocationEntry>((RestoreGameState restoreGameState) => new AllocationEntry(this, restoreGameState)).ToArray();
             CameFrom = restoreGameState.GetByKey(nameof(CameFrom)).GetEnum<LevelStartEnum>();
             CharacterXtra = restoreGameState.GetByKey(nameof(CharacterXtra)).GetBool();
             CreateDownStair = restoreGameState.GetByKey(nameof(CreateDownStair)).GetBool();
