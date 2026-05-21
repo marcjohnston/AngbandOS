@@ -40,12 +40,12 @@ internal class GridTile : IItemContainer, IGameSerialize
         return new DictionaryGameStateBag(
             ("bools", saveGameState.CreateGameStateBag(EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag)),
             (nameof(_trapsDetected), saveGameState.CreateGameStateBag(_trapsDetected)),
-            (nameof(Items), saveGameState.CreateGameStateBag(Items)),
+            (nameof(Items), saveGameState.CreateGameStateBag(Items.ToArray(), typeof(Item))),
             (nameof(MonsterIndex), saveGameState.CreateGameStateBag(MonsterIndex)),
             (nameof(ScentAge), saveGameState.CreateGameStateBag(ScentAge)),
             (nameof(ScentStrength), saveGameState.CreateGameStateBag(ScentStrength)),
-            (nameof(_backgroundFeature), saveGameState.CreateGameStateBag(_backgroundFeature)),
-            (nameof(_featureType), saveGameState.CreateGameStateBag(_featureType))
+            (nameof(_backgroundFeature), saveGameState.CreateGameStateBag(_backgroundFeature, typeof(Tile))),
+            (nameof(_featureType), saveGameState.CreateGameStateBag(_featureType, typeof(Tile)))
         );
     }
 
@@ -53,12 +53,12 @@ internal class GridTile : IItemContainer, IGameSerialize
     {
         (EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag) = restoreGameState.GetByKey(nameof(TempFlag)).Get8Bools();
         _trapsDetected = restoreGameState.GetByKey(nameof(_trapsDetected)).GetBool();
-        Items = restoreGameState.GetByKey(nameof(Items)).GetReferences<Item>().ToList();
+        Items = restoreGameState.GetByKey(nameof(Items)).GetDerivedReferences<Item>((RestoreGameState restoreGameState) => new Item(game, restoreGameState)).ToList();
         MonsterIndex = restoreGameState.GetByKey(nameof(MonsterIndex)).GetInt();
         ScentAge = restoreGameState.GetByKey(nameof(ScentAge)).GetInt();
         ScentStrength = restoreGameState.GetByKey(nameof(ScentStrength)).GetInt();
-        _backgroundFeature = restoreGameState.GetByKey(nameof(_backgroundFeature)).GetReference<Tile>();
-        _featureType = restoreGameState.GetByKey(nameof(_featureType)).GetReference<Tile>();
+        _backgroundFeature = restoreGameState.GetByKey(nameof(_backgroundFeature)).GetDerivedReference<Tile>();
+        _featureType = restoreGameState.GetByKey(nameof(_featureType)).GetDerivedReference<Tile>();
     }
 
     #region State Data

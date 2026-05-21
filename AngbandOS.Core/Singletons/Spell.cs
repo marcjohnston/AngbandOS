@@ -25,12 +25,10 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Forgotten), saveGameState.CreateGameStateBag(Forgotten)),
+            (nameof(Forgotten), saveGameState.CreateGameStateBag(Forgotten, Learned, Tried)),
             (nameof(_spellIndex), saveGameState.CreateGameStateBag(_spellIndex)),
-            (nameof(Learned), saveGameState.CreateGameStateBag(Learned)),
-            (nameof(_spellBookItemFactory), saveGameState.CreateGameStateBag(_spellBookItemFactory)),
-            (nameof(_characterClassSpell), saveGameState.CreateGameStateBag(_characterClassSpell)),
-            (nameof(Tried), saveGameState.CreateGameStateBag(Tried))
+            (nameof(_spellBookItemFactory), saveGameState.CreateGameStateBag(_spellBookItemFactory, typeof(ItemFactory))),
+            (nameof(_characterClassSpell), saveGameState.CreateGameStateBag(_characterClassSpell, typeof(CharacterClassSpell)))
         );
     }
 
@@ -65,12 +63,10 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     {
         if (restoreGameState is not null)
         {
-            Forgotten = restoreGameState.GetByKey(nameof(Forgotten)).GetBool();
+            (Forgotten, Learned, Tried) = restoreGameState.GetByKey(nameof(Forgotten)).Get3Bools();
             _spellIndex = restoreGameState.GetByKey(nameof(_spellIndex)).GetInt();
-            Learned = restoreGameState.GetByKey(nameof(Learned)).GetBool();
-            _spellBookItemFactory = restoreGameState.GetByKey(nameof(_spellBookItemFactory)).GetReferenceOrDefault<ItemFactory>();
-            _characterClassSpell = restoreGameState.GetByKey(nameof(_characterClassSpell)).GetReferenceOrDefault<CharacterClassSpell>();
-            Tried = restoreGameState.GetByKey(nameof(Tried)).GetBool();
+            _spellBookItemFactory = restoreGameState.GetByKey(nameof(_spellBookItemFactory)).GetDerivedReferenceOrDefault<ItemFactory>();
+            _characterClassSpell = restoreGameState.GetByKey(nameof(_characterClassSpell)).GetDerivedReferenceOrDefault<CharacterClassSpell>();
         }
     }
 

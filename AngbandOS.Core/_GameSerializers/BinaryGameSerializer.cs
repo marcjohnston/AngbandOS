@@ -36,8 +36,8 @@ internal class BinaryGameSerializer : IGameSerializer
         StringValue = 16,
         TimeSpanValue = 17
     }
-    
-    //private static Dictionary<string, int> u = new Dictionary<string, int>();
+
+    private static Dictionary<string, int> u = new Dictionary<string, int>();
     private static byte[] Serialize(GameStateBag gameStateData)
     {
         List<byte> result = new List<byte>();
@@ -52,14 +52,14 @@ internal class BinaryGameSerializer : IGameSerializer
         void AddTypeName(string value)
         {
             AddString(value);
-            //if (u.ContainsKey(value))
-            //{
-            //    u[value]++;
-            //}
-            //else
-            //{
-            //    u.Add(value, 1);
-            //}
+            if (u.ContainsKey(value))
+            {
+                u[value]++;
+            }
+            else
+            {
+                u.Add(value, 1);
+            }
         }
 
         switch (gameStateData)
@@ -196,10 +196,10 @@ internal class BinaryGameSerializer : IGameSerializer
     {
         byte[] unzippedSerializedData = Serialize(saveGameData.Game);
         byte[] zippedSerializedData = Zip(unzippedSerializedData);
-        //foreach ((string key, int value) in u.OrderByDescending(kvp => kvp.Value).Where(kvp => kvp.Value > 1).ToDictionary(kvp => kvp.Key, kvp => kvp.Value))
-        //{
-        //    Debug.WriteLine($"Type name {key} used {value} times");
-        //}
+        foreach ((string key, int value) in u.OrderByDescending(kvp => kvp.Value).Where(kvp => kvp.Value > 1).ToDictionary(kvp => kvp.Key, kvp => kvp.Value))
+        {
+            Debug.WriteLine($"Type name {key} used {value} times");
+        }
         return zippedSerializedData;
     }
     private static byte[] Zip(byte[] data)

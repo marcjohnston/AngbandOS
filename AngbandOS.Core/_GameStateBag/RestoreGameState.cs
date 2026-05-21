@@ -169,10 +169,35 @@ internal class RestoreGameState
         return boolList.ToArray();
     }
 
+    public (bool a, bool b) Get2Bools()
+    {
+        byte value = ((ByteValueGameStateBag)GameStateBag).Value;
+        return ((value & (1 << 0)) != 0, (value & (1 << 1)) != 0);
+    }
+    public (bool a, bool b, bool c) Get3Bools()
+    {
+        byte value = ((ByteValueGameStateBag)GameStateBag).Value;
+        return ((value & (1 << 0)) != 0, (value & (1 << 1)) != 0, (value & (1 << 2)) != 0);
+    }
+    public (bool a, bool b, bool c, bool d) Get4Bools()
+    {
+        byte value = ((ByteValueGameStateBag)GameStateBag).Value;
+        return ((value & (1 << 0)) != 0, (value & (1 << 1)) != 0, (value & (1 << 2)) != 0, (value & (1 << 3)) != 0);
+    }
+    public (bool a, bool b, bool c, bool d, bool e) Get5Bools()
+    {
+        byte value = ((ByteValueGameStateBag)GameStateBag).Value;
+        return ((value & (1 << 0)) != 0, (value & (1 << 1)) != 0, (value & (1 << 2)) != 0, (value & (1 << 3)) != 0, (value & (1 << 4)) != 0);
+    }
     public (bool a, bool b, bool c, bool d, bool e, bool f) Get6Bools()
     {
         byte value = ((ByteValueGameStateBag)GameStateBag).Value;
         return ((value & (1 << 0)) != 0, (value & (1 << 1)) != 0, (value & (1 << 2)) != 0, (value & (1 << 3)) != 0, (value & (1 << 4)) != 0, (value & (1 << 5)) != 0);
+    }
+    public (bool a, bool b, bool c, bool d, bool e, bool f, bool g) Get7Bools()
+    {
+        byte value = ((ByteValueGameStateBag)GameStateBag).Value;
+        return ((value & (1 << 0)) != 0, (value & (1 << 1)) != 0, (value & (1 << 2)) != 0, (value & (1 << 3)) != 0, (value & (1 << 4)) != 0, (value & (1 << 5)) != 0, (value & (1 << 6)) != 0);
     }
     public (bool a, bool b, bool c, bool d, bool e, bool f, bool g, bool h) Get8Bools()
     {
@@ -289,7 +314,15 @@ internal class RestoreGameState
         return GetDerivedReference(constructors);
     }
 
-    private T GetDerivedReference<T>(params Func<RestoreGameState, T>[] constructors)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T">Provide the type to convert the return object to.</typeparam>
+    /// <param name="constructors">Provide the functionality to construct any applicable objects.  The constructors must be provided in the same order as the types that were provided during serialization.  If only references are expected, no constructors need to be supplied.</param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="InvalidOperationException"></exception>
+    public T GetDerivedReference<T>(params Func<RestoreGameState, T>[] constructors)
     {
         // Check to see if the singleton game state bag is a reference.  This will occur when the singleton was already serialized from a previous singleton.
         if (GameStateBag is ReferenceGameStateBag referenceGameStateBag)
