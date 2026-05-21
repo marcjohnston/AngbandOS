@@ -415,40 +415,8 @@ internal class RestoreGameState
         }
         return listOfReferences.ToArray();
     }
-    #endregion
 
-    public T? GetReferenceOrDefault<T>()
-    {
-        if (GameStateBag is NullValueGameStateBag)
-        {
-            return default;
-        }
-        return GetReference<T>();
-    }
-
-    public T[]? GetReferencesOrDefault<T>()
-    {
-        if (GameStateBag is NullValueGameStateBag)
-        {
-            return default;
-        }
-        return GetReferences<T>(); // TODO: This smells
-    }
-
-
-    public T[] GetReferences<T>()
-    {
-        List<T> list = new List<T>();
-        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
-        {
-            RestoreGameState restoreGameState = New(gameStateBag);
-            T t = restoreGameState.GetReference<T>();
-            list.Add(t);
-        }
-        return list.ToArray();
-    }
-
-    public T?[] GetNullableReferences<T>()
+    public T?[] GetNullableDerivedReferences<T>(params Func<RestoreGameState, T>[] constructors)
     {
         List<T?> list = new List<T?>();
         foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
@@ -460,9 +428,31 @@ internal class RestoreGameState
             else
             {
                 RestoreGameState restoreGameState = New(gameStateBag);
-                T t = restoreGameState.GetReference<T>();
+                T t = restoreGameState.GetDerivedReference<T>(constructors);
                 list.Add(t);
             }
+        }
+        return list.ToArray();
+    }
+    #endregion
+
+    public T? GetReferenceOrDefault<T>()
+    {
+        if (GameStateBag is NullValueGameStateBag)
+        {
+            return default;
+        }
+        return GetReference<T>();
+    }
+
+    public T[] GetReferences<T>()
+    {
+        List<T> list = new List<T>();
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
+        {
+            RestoreGameState restoreGameState = New(gameStateBag);
+            T t = restoreGameState.GetReference<T>();
+            list.Add(t);
         }
         return list.ToArray();
     }
@@ -546,22 +536,6 @@ internal class RestoreGameState
         return listOfBytes.ToArray();
     }
 
-    public bool[][] GetArrayOfBools()
-    {
-        List<bool[]> listOfBools = new List<bool[]>();
-        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
-        {
-            if (gameStateBag is not ListGameStateBag listOfStringsBag)
-            {
-                throw new Exception("Jagged array of string not a list.");
-            }
-            RestoreGameState restoreGameState = New(gameStateBag);
-            bool[] bools = restoreGameState.GetBools();
-            listOfBools.Add(bools);
-        }
-        return listOfBools.ToArray();
-    }
-
     public char[] GetChars() => ((CharArrayGameStateBag)GameStateBag).Value;
     public int GetInt() => ((IntValueGameStateBag)GameStateBag).Value;
     public int? GetNullableInt()
@@ -580,22 +554,6 @@ internal class RestoreGameState
             return default;
         }
         return GetDateTime();
-    }
-
-    public T[][] GetArrayOfReferences<T>()
-    {
-        List<T[]> listOfReferences = new List<T[]>();
-        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
-        {
-            if (gameStateBag is not ListGameStateBag listOfStringsBag)
-            {
-                throw new Exception($"Jagged array of {typeof(T).Name} not a list.");
-            }
-            RestoreGameState referencesRestoreGameState = New(gameStateBag);
-            T[] references = referencesRestoreGameState.GetReferences<T>();
-            listOfReferences.Add(references);
-        }
-        return listOfReferences.ToArray();
     }
 
     public string? GetStringOrDefault()

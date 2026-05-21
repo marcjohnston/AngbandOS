@@ -142,7 +142,7 @@ internal class SaveGameState
         return new DerivedObjectGameStateBag(objectId, derivedId, gameStateBag);
     }
 
-    public GameStateBag CreateGameStateBag(IGameSerialize[]? gameSerializable, Type derivedType, params Type[] derivedTypes)
+    public GameStateBag CreateGameStateBag(IGameSerialize?[]? gameSerializable, Type derivedType, params Type[] derivedTypes)
     {
         if (gameSerializable is null)
         {
@@ -150,7 +150,7 @@ internal class SaveGameState
         }
 
         var gameStateBags = new List<GameStateBag>();
-        foreach (IGameSerialize item in gameSerializable)
+        foreach (IGameSerialize? item in gameSerializable)
         {
             gameStateBags.Add(CreateGameStateBag(item, derivedType, derivedTypes));
         }

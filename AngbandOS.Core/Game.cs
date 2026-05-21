@@ -327,7 +327,7 @@ internal partial class Game : IGameSerialize
             (nameof(_prevPrimaryRealm), saveGameState.CreateGameStateBag(_prevPrimaryRealm)),
             (nameof(_prevSecondaryRealm), saveGameState.CreateGameStateBag(_prevSecondaryRealm)),
             (nameof(_prevSex), saveGameState.CreateGameStateBag(_prevSex)),
-            (nameof(Inventory), saveGameState.CreateGameStateBag(Inventory)),
+            (nameof(Inventory), saveGameState.CreateGameStateBag(Inventory, typeof(Item))),
             (nameof(_invenCnt), saveGameState.CreateGameStateBag(_invenCnt))
        );
     }
@@ -738,7 +738,7 @@ internal partial class Game : IGameSerialize
             _prevPrimaryRealm = restoreGameState.GetByKey(nameof(_prevPrimaryRealm)).GetReferenceOrDefault<Realm>();
             _prevSecondaryRealm = restoreGameState.GetByKey(nameof(_prevSecondaryRealm)).GetReferenceOrDefault<Realm>();
             _prevSex = restoreGameState.GetByKey(nameof(_prevSex)).GetReference<Gender>();
-            Inventory = restoreGameState.GetByKey(nameof(Inventory)).GetNullableReferences<Item>();
+            Inventory = restoreGameState.GetByKey(nameof(Inventory)).GetNullableDerivedReferences<Item>((RestoreGameState restoreGameState) => new Item(this, restoreGameState));
             _invenCnt = restoreGameState.GetByKey(nameof(_invenCnt)).GetInt();
         }
 
