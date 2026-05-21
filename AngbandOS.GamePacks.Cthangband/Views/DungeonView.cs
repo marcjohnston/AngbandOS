@@ -19,7 +19,6 @@ public class DungeonView : ViewGameConfiguration
         nameof(ConfusedRangedWidget),
         nameof(CutRangedWidget),
         nameof(DepthStringWidget),
-        nameof(DungeonGameMessageWidget),
         nameof(DungeonMapWidget),
         nameof(ExperienceLevelConditionalWidget),
         nameof(ExperiencePointsAtMaxConditionalWidget),
@@ -44,5 +43,6 @@ public class DungeonView : ViewGameConfiguration
         nameof(StunnedRangedWidget),
         nameof(TrackedMonsterConditionalWidget),
         nameof(TrapDetectionConditionalWidget),
+        nameof(DungeonGameMessageWidget),
     };
 }
