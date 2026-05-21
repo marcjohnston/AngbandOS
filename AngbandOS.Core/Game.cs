@@ -284,7 +284,7 @@ internal partial class Game : IGameSerialize
             (nameof(WeightCarried), saveGameState.CreateGameStateBag(WeightCarried)),
             (nameof(WildernessX), saveGameState.CreateGameStateBag(WildernessX)),
             (nameof(WildernessY), saveGameState.CreateGameStateBag(WildernessY)),
-            (nameof(Wilderness), saveGameState.CreateGameStateBag(Wilderness)),
+            (nameof(Wilderness), saveGameState.CreateGameStateBag(Wilderness, typeof(WildernessRegion))),
             (nameof(WordOfRecallDelay), saveGameState.CreateGameStateBag(WordOfRecallDelay)),
             (nameof(Grid), saveGameState.CreateGameStateBag(Grid, typeof(GridTile))),
             (nameof(TempX), saveGameState.CreateGameStateBag(TempX)),
@@ -695,7 +695,7 @@ internal partial class Game : IGameSerialize
             WeightCarried = restoreGameState.GetByKey(nameof(WeightCarried)).GetInt();
             WildernessX = restoreGameState.GetByKey(nameof(WildernessX)).GetInt();
             WildernessY = restoreGameState.GetByKey(nameof(WildernessY)).GetInt();
-            Wilderness = restoreGameState.GetByKey(nameof(Wilderness)).GetArrayOfReferences<WildernessRegion>();
+            Wilderness = restoreGameState.GetByKey(nameof(Wilderness)).GetArrayOfDerivedReferences<WildernessRegion>((RestoreGameState restoreGameState) => new WildernessRegion(this, restoreGameState));
             WordOfRecallDelay = restoreGameState.GetByKey(nameof(WordOfRecallDelay)).GetInt();
             Grid = restoreGameState.GetByKey(nameof(Grid)).GetArrayOfDerivedReferences<GridTile>((RestoreGameState restoreGameState) => new GridTile(this, restoreGameState));
             TempX = restoreGameState.GetByKey(nameof(TempX)).GetInts();

@@ -24,8 +24,8 @@ internal class WildernessRegion : IGameSerialize
     public WildernessRegion() { }
     public WildernessRegion(Game game, RestoreGameState restoreGameState)
     {
-        Dungeon = restoreGameState.GetByKey(nameof(Dungeon)).GetReferenceOrDefault<Dungeon>();
-        Town = restoreGameState.GetByKey(nameof(Town)).GetReferenceOrDefault<Town>();
+        Dungeon = restoreGameState.GetByKey(nameof(Dungeon)).GetDerivedReferenceOrDefault<Dungeon>();
+        Town = restoreGameState.GetByKey(nameof(Town)).GetDerivedReferenceOrDefault<Town>();
         RoadMap = restoreGameState.GetByKey(nameof(RoadMap)).GetInt();
         Seed = restoreGameState.GetByKey(nameof(Seed)).GetInt();
     }
@@ -33,8 +33,8 @@ internal class WildernessRegion : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Dungeon), saveGameState.CreateGameStateBag(Dungeon)),
-            (nameof(Town), saveGameState.CreateGameStateBag(Town)),
+            (nameof(Dungeon), saveGameState.CreateGameStateBag(Dungeon, typeof(Dungeon))),
+            (nameof(Town), saveGameState.CreateGameStateBag(Town, typeof(Town))),
             (nameof(RoadMap), saveGameState.CreateGameStateBag(RoadMap)),
             (nameof(Seed), saveGameState.CreateGameStateBag(Seed))
         );
