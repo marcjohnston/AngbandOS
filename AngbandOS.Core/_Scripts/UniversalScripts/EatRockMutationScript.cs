@@ -15,7 +15,7 @@ internal class EatRockMutationScript : UniversalScript, IGetKey
         }
         int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
         int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-        GridTile cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         if (Game.GridPassable(y, x))
         {
             Game.MsgPrint("You bite into thin air!");

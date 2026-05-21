@@ -29,7 +29,7 @@ internal class TunnelScript : GameCommandUniversalScript, IGetKey
             // Pick up the tile that the player wishes to tunnel through
             int tileY = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
             int tileX = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-            GridTile tile = Game.Map.Grid[tileY][tileX];
+            GridTile tile = Game.Grid[tileY][tileX];
             // Check if it can be tunneled through
             if (tile.FeatureType.IsPassable || tile.FeatureType.IsYellowSignSigil)
             {

@@ -12,7 +12,7 @@ internal class MakeDoorGridTileScript : GridTileScript
     private MakeDoorGridTileScript(Game game) : base(game) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         IsNoticedEnum isNoticed = IsNoticedEnum.False;
         if (Game.GridOpenNoItemOrCreature(y, x))
         {

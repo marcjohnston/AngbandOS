@@ -41,7 +41,7 @@ internal class DisarmScript : GameCommandUniversalScript, IGetKey
         {
             int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
             int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-            GridTile tile = Game.Map.Grid[y][x];
+            GridTile tile = Game.Grid[y][x];
             // Check for a chest
             Item? chestItem = Game.ChestCheck(y, x);
             if (!tile.FeatureType.IsTrap && chestItem == null)

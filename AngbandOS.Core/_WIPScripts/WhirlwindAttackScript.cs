@@ -26,7 +26,7 @@ internal class WhirlwindAttackScript : Script, IScript, ICastSpellScript
         {
             int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
             int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-            GridTile cPtr = Game.Map.Grid[y][x];
+            GridTile cPtr = Game.Grid[y][x];
             Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
             if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || Game.GridPassable(y, x)))
             {

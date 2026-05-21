@@ -133,9 +133,9 @@ internal class FireItemScript : UniversalScript, IGetKey
                 Game.Pause(msec);
             }
             // Check if we might hit a monster (not necessarily the one we were aiming at)
-            if (Game.Map.Grid[y][x].MonsterIndex != 0)
+            if (Game.Grid[y][x].MonsterIndex != 0)
             {
-                GridTile tile = Game.Map.Grid[y][x];
+                GridTile tile = Game.Grid[y][x];
                 Monster monster = Game.Monsters[tile.MonsterIndex];
                 MonsterRace race = monster.Race;
                 bool visible = monster.IsVisible;

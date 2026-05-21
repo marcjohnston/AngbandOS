@@ -14,7 +14,7 @@ namespace AngbandOS.Core.Functions;
 internal class TrapsDetectedBoolFunction : BoolFunction
 {
     private TrapsDetectedBoolFunction(Game game) : base(game) { } // This object is a singleton.
-    public override bool BoolValue => Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue].TrapsDetected;
+    public override bool BoolValue => Game.Grid[Game.MapY.IntValue][Game.MapX.IntValue].TrapsDetected;
 
     public override string[]? DependencyNames => new string[]
     {

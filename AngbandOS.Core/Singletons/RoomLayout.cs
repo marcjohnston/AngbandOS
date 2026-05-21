@@ -77,7 +77,7 @@ internal abstract class RoomLayout : IGetKey, IGameSerialize
                 {
                     continue;
                 }
-                GridTile cPtr = Game.Map.Grid[y][x];
+                GridTile cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.InVault = true;
                 cPtr.InRoom = true;
@@ -240,7 +240,7 @@ internal abstract class RoomLayout : IGetKey, IGameSerialize
 
     protected void PlaceSecretDoor(int y, int x)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(SecretDoorTile)));
     }
 }

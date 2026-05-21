@@ -33,12 +33,12 @@ internal class CloseScript : GameCommandUniversalScript, IGetKey
             int yy = Game.MapY.IntValue + Game.OrderedDirectionYOffset[orderedDirection];
             int xx = Game.MapX.IntValue + Game.OrderedDirectionXOffset[orderedDirection];
             // We must be aware of the door
-            if (!Game.Map.Grid[yy][xx].PlayerMemorized)
+            if (!Game.Grid[yy][xx].PlayerMemorized)
             {
                 continue;
             }
             // It must actually be an open door
-            if (!Game.Map.Grid[yy][xx].FeatureType.CanBeClosed)
+            if (!Game.Grid[yy][xx].FeatureType.CanBeClosed)
             {
                 continue;
             }
@@ -66,7 +66,7 @@ internal class CloseScript : GameCommandUniversalScript, IGetKey
         {
             int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
             int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-            GridTile tile = Game.Map.Grid[y][x];
+            GridTile tile = Game.Grid[y][x];
             // Can only close actual open doors
             if (!tile.FeatureType.IsOpenDoor)
             {

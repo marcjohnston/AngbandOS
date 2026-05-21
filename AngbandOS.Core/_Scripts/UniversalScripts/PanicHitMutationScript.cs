@@ -15,7 +15,7 @@ internal class PanicHitMutationScript : UniversalScript, IGetKey
         }
         int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
         int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-        if (Game.Map.Grid[y][x].MonsterIndex != 0)
+        if (Game.Grid[y][x].MonsterIndex != 0)
         {
             Game.PlayerAttackMonster(y, x);
             Game.RunScript(nameof(TeleportSelf30TeleportSelfScript));

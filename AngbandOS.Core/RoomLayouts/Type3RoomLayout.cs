@@ -36,7 +36,7 @@ internal class Type3RoomLayout : RoomLayout
         {
             for (x = x1A - 1; x <= x2A + 1; x++)
             {
-                cPtr = Game.Map.Grid[y][x];
+                cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.InRoom = true;
                 if (light)
@@ -49,7 +49,7 @@ internal class Type3RoomLayout : RoomLayout
         {
             for (x = x1B - 1; x <= x2B + 1; x++)
             {
-                cPtr = Game.Map.Grid[y][x];
+                cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.InRoom = true;
                 if (light)
@@ -63,37 +63,37 @@ internal class Type3RoomLayout : RoomLayout
         Tile pillar = Game.SingletonRepository.Get<Tile>(nameof(PillarTile));
         for (y = y1A - 1; y <= y2A + 1; y++)
         {
-            cPtr = Game.Map.Grid[y][x1A - 1];
+            cPtr = Game.Grid[y][x1A - 1];
             cPtr.SetFeature(wallOuter);
-            cPtr = Game.Map.Grid[y][x2A + 1];
+            cPtr = Game.Grid[y][x2A + 1];
             cPtr.SetFeature(wallOuter);
         }
         for (x = x1A - 1; x <= x2A + 1; x++)
         {
-            cPtr = Game.Map.Grid[y1A - 1][x];
+            cPtr = Game.Grid[y1A - 1][x];
             cPtr.SetFeature(wallOuter);
-            cPtr = Game.Map.Grid[y2A + 1][x];
+            cPtr = Game.Grid[y2A + 1][x];
             cPtr.SetFeature(wallOuter);
         }
         for (y = y1B - 1; y <= y2B + 1; y++)
         {
-            cPtr = Game.Map.Grid[y][x1B - 1];
+            cPtr = Game.Grid[y][x1B - 1];
             cPtr.SetFeature(wallOuter);
-            cPtr = Game.Map.Grid[y][x2B + 1];
+            cPtr = Game.Grid[y][x2B + 1];
             cPtr.SetFeature(wallOuter);
         }
         for (x = x1B - 1; x <= x2B + 1; x++)
         {
-            cPtr = Game.Map.Grid[y1B - 1][x];
+            cPtr = Game.Grid[y1B - 1][x];
             cPtr.SetFeature(wallOuter);
-            cPtr = Game.Map.Grid[y2B + 1][x];
+            cPtr = Game.Grid[y2B + 1][x];
             cPtr.SetFeature(wallOuter);
         }
         for (y = y1A; y <= y2A; y++)
         {
             for (x = x1A; x <= x2A; x++)
             {
-                cPtr = Game.Map.Grid[y][x];
+                cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
             }
         }
@@ -101,7 +101,7 @@ internal class Type3RoomLayout : RoomLayout
         {
             for (x = x1B; x <= x2B; x++)
             {
-                cPtr = Game.Map.Grid[y][x];
+                cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
             }
         }
@@ -113,7 +113,7 @@ internal class Type3RoomLayout : RoomLayout
                     {
                         for (x = x1A; x <= x2A; x++)
                         {
-                            cPtr = Game.Map.Grid[y][x];
+                            cPtr = Game.Grid[y][x];
                             cPtr.SetFeature(wallInner);
                         }
                     }
@@ -123,16 +123,16 @@ internal class Type3RoomLayout : RoomLayout
                 {
                     for (y = y1B; y <= y2B; y++)
                     {
-                        cPtr = Game.Map.Grid[y][x1A];
+                        cPtr = Game.Grid[y][x1A];
                         cPtr.SetFeature(wallInner);
-                        cPtr = Game.Map.Grid[y][x2A];
+                        cPtr = Game.Grid[y][x2A];
                         cPtr.SetFeature(wallInner);
                     }
                     for (x = x1A; x <= x2A; x++)
                     {
-                        cPtr = Game.Map.Grid[y1B][x];
+                        cPtr = Game.Grid[y1B][x];
                         cPtr.SetFeature(wallInner);
-                        cPtr = Game.Map.Grid[y2B][x];
+                        cPtr = Game.Grid[y2B][x];
                         cPtr.SetFeature(wallInner);
                     }
                     switch (Game.RandomLessThan(4))
@@ -168,9 +168,9 @@ internal class Type3RoomLayout : RoomLayout
                             {
                                 continue;
                             }
-                            cPtr = Game.Map.Grid[y][x1A - 1];
+                            cPtr = Game.Grid[y][x1A - 1];
                             cPtr.SetFeature(wallInner);
-                            cPtr = Game.Map.Grid[y][x2A + 1];
+                            cPtr = Game.Grid[y][x2A + 1];
                             cPtr.SetFeature(wallInner);
                         }
                         for (x = x1A; x <= x2A; x++)
@@ -179,9 +179,9 @@ internal class Type3RoomLayout : RoomLayout
                             {
                                 continue;
                             }
-                            cPtr = Game.Map.Grid[y1B - 1][x];
+                            cPtr = Game.Grid[y1B - 1][x];
                             cPtr.SetFeature(wallInner);
-                            cPtr = Game.Map.Grid[y2B + 1][x];
+                            cPtr = Game.Grid[y2B + 1][x];
                             cPtr.SetFeature(wallInner);
                         }
                         if (Game.RandomLessThan(3) == 0)
@@ -194,20 +194,20 @@ internal class Type3RoomLayout : RoomLayout
                     }
                     else if (Game.RandomLessThan(3) == 0)
                     {
-                        cPtr = Game.Map.Grid[yval][xval];
+                        cPtr = Game.Grid[yval][xval];
                         cPtr.SetFeature(wallInner);
-                        cPtr = Game.Map.Grid[y1B][xval];
+                        cPtr = Game.Grid[y1B][xval];
                         cPtr.SetFeature(wallInner);
-                        cPtr = Game.Map.Grid[y2B][xval];
+                        cPtr = Game.Grid[y2B][xval];
                         cPtr.SetFeature(wallInner);
-                        cPtr = Game.Map.Grid[yval][x1A];
+                        cPtr = Game.Grid[yval][x1A];
                         cPtr.SetFeature(wallInner);
-                        cPtr = Game.Map.Grid[yval][x2A];
+                        cPtr = Game.Grid[yval][x2A];
                         cPtr.SetFeature(wallInner);
                     }
                     else if (Game.RandomLessThan(3) == 0)
                     {
-                        cPtr = Game.Map.Grid[yval][xval];
+                        cPtr = Game.Grid[yval][xval];
                         cPtr.SetFeature(pillar);
                     }
                     break;

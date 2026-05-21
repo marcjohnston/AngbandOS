@@ -54,7 +54,7 @@ internal class SearchScript : UniversalScript, IGetKey
                 if (Game.RandomLessThan(100) < chance)
                 {
                     // If there's a trap, then find it
-                    GridTile tile = Game.Map.Grid[y][x];
+                    GridTile tile = Game.Grid[y][x];
                     if (tile.FeatureType.IsInvisibleTrap)
                     {
                         // Pick a random trap to replace the undetected one with

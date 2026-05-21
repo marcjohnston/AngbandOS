@@ -36,8 +36,8 @@ internal class UpdateScentFlaggedAction : FlaggedAction
     private void UpdateFlowAux(int y, int x, int n)
     {
         int oldHead = _flowHead;
-        GridTile cPtr = Game.Map.Grid[1][1];
-        cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Grid[1][1];
+        cPtr = Game.Grid[y][x];
         if (cPtr.ScentAge == _flowN)
         {
             return;
@@ -77,8 +77,8 @@ internal class UpdateScentFlaggedAction : FlaggedAction
             {
                 for (x = 0; x < Game.CurWid; x++)
                 {
-                    int w = Game.Map.Grid[y][x].ScentAge;
-                    Game.Map.Grid[y][x].ScentAge = w > 128 ? w - 128 : 0;
+                    int w = Game.Grid[y][x].ScentAge;
+                    Game.Grid[y][x].ScentAge = w > 128 ? w - 128 : 0;
                 }
             }
             _flowN = 127;
@@ -97,7 +97,7 @@ internal class UpdateScentFlaggedAction : FlaggedAction
             }
             for (int d = 0; d < 8; d++)
             {
-                UpdateFlowAux(y + Game.OrderedDirectionYOffset[d], x + Game.OrderedDirectionXOffset[d], Game.Map.Grid[y][x].ScentStrength + 1);
+                UpdateFlowAux(y + Game.OrderedDirectionYOffset[d], x + Game.OrderedDirectionXOffset[d], Game.Grid[y][x].ScentStrength + 1);
             }
         }
         _flowHead = 0;

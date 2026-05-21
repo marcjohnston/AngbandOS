@@ -18,43 +18,18 @@ internal class Map : IGameSerialize
         Game = game;
     }
 
-    public readonly GridTile[][] Grid = new GridTile[Game.MaxHgt][];
 
     public void Initialize()
     {
-        // Create a single traps detected property that can trigger any associated widgets.  This one property will be sent to all GridTile objects.
-        TrapsDetectedProperty trapsDetectedProperty = (TrapsDetectedProperty)Game.SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty)); // TODO: GridTileObjects can retrieve the object themselves upon initialization or at runtime.  No need to store as state data.
-        Tile grassTile = Game.GrassTile;
-        Tile dungeonFloorTile = Game.SingletonRepository.Get<Tile>(nameof(DungeonFloorTile));
-        Tile towerFloorTile = Game.SingletonRepository.Get<Tile>(nameof(TowerFloorTile));
-
-        for (int y = 0; y < Game.MaxHgt; y++)
-        {
-            Grid[y] = new GridTile[Game.MaxWid];
-            for (int x = 0; x < Game.MaxWid; x++)
-            {
-                GridTile newTile = new GridTile(Game);
-                Grid[y][x] = newTile;
-                if (Game.CurrentDepth == 0)
-                {
-                    newTile.SetBackgroundFeature(grassTile);
-                }
-                else
-                {
-                    newTile.SetBackgroundFeature(dungeonFloorTile);
-                }
-            }
-        }
     }
 
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Grid), saveGameState.CreateGameStateBag(Grid))
+            
         );
     }
     public Map(Game game, RestoreGameState restoreGameState) : this(game)
     {
-        Grid = restoreGameState.GetByKey(nameof(Grid)).GetArrayOfReferences<GridTile>();
     }
 }

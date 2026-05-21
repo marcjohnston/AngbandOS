@@ -31,7 +31,7 @@ internal abstract class ItemEffect : IGetKey, IGameSerialize
 
     public virtual bool Apply(int who, int y, int x)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         foreach (Item oPtr in cPtr.Items.ToArray()) // Prevent collection modified error
         {

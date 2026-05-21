@@ -52,7 +52,7 @@ internal class MapAreaScript : Script, IScript, ICastSpellScript, IReadScrollOrU
         {
             for (int x = x1; x <= x2; x++)
             {
-                GridTile cPtr = Game.Map.Grid[y][x];
+                GridTile cPtr = Game.Grid[y][x];
                 if (!cPtr.FeatureType.IsWall)
                 {
                     if (!cPtr.FeatureType.IsOpenFloor)
@@ -61,7 +61,7 @@ internal class MapAreaScript : Script, IScript, ICastSpellScript, IReadScrollOrU
                     }
                     for (int i = 0; i < 8; i++)
                     {
-                        cPtr = Game.Map.Grid[y + Game.OrderedDirectionYOffset[i]][x + Game.OrderedDirectionXOffset[i]];
+                        cPtr = Game.Grid[y + Game.OrderedDirectionYOffset[i]][x + Game.OrderedDirectionXOffset[i]];
                         if (cPtr.FeatureType.IsWall)
                         {
                             cPtr.PlayerMemorized = true;

@@ -56,7 +56,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
         }
 
         string mName = mPtr.Name;
-        GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
 
         // Apply the default death note, if needed.
@@ -129,7 +129,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
     public IdentifiedResultEnum Apply(int who, int r, int y, int x, int dam, ref int projectMn, ref int projectMx, ref int projectMy)
     {
         // Get the grid tile for the location in question.
-        GridTile cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
 
         // Check to see if there is a monster at this location.
         if (cPtr.MonsterIndex == 0)
@@ -160,7 +160,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
 
         IdentifiedResultEnum notice = Apply(who, mPtr, dam, r);
 
-        GridTile newGridTile = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile newGridTile = Game.Grid[mPtr.MapY][mPtr.MapX];
         Game.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
         Game.ConsoleView.RefreshMapLocation(y, x);
         projectMn++;

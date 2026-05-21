@@ -92,7 +92,7 @@ internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
                 {
                     continue;
                 }
-                if (Game.Map.Grid[y][x].InVault)
+                if (Game.Grid[y][x].InVault)
                 {
                     continue;
                 }
@@ -121,15 +121,15 @@ internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
                 else
                 {
                     // Check to see if there is a monster here.
-                    if (Game.Map.Grid[oy + yy][ox + xx].MonsterIndex != 0)
+                    if (Game.Grid[oy + yy][ox + xx].MonsterIndex != 0)
                     {
                         // There is.  Check to see if the monster is capable of self teleportation, is not resistant to teleportation and is not sleeping.
-                        if (Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf && !Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
+                        if (Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf && !Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
                         {
-                            if (Game.Monsters[Game.Map.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
+                            if (Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
                             {
                                 // Teleport the monster to the player (which doesn't make sense yet).
-                                TeleportToPlayer(Game.Map.Grid[oy + yy][ox + xx].MonsterIndex);
+                                TeleportToPlayer(Game.Grid[oy + yy][ox + xx].MonsterIndex);
                             }
                         }
                     }
@@ -192,11 +192,11 @@ internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
                 {
                     continue;
                 }
-                if (Game.Map.Grid[ny][nx].FeatureType.IsElderSignSigil)
+                if (Game.Grid[ny][nx].FeatureType.IsElderSignSigil)
                 {
                     continue;
                 }
-                if (Game.Map.Grid[ny][nx].FeatureType.IsYellowSignSigil)
+                if (Game.Grid[ny][nx].FeatureType.IsYellowSignSigil)
                 {
                     continue;
                 }
@@ -211,8 +211,8 @@ internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
             return;
         }
         Game.PlaySound(SoundEffectEnum.Teleport);
-        Game.Map.Grid[ny][nx].MonsterIndex = mIdx;
-        Game.Map.Grid[oy][ox].MonsterIndex = 0;
+        Game.Grid[ny][nx].MonsterIndex = mIdx;
+        Game.Grid[oy][ox].MonsterIndex = 0;
         mPtr.MapY = ny;
         mPtr.MapX = nx;
         Game.UpdateMonsterVisibility(mIdx, true);

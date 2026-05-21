@@ -12,7 +12,7 @@ internal class LightGridTileScript : GridTileScript
     private LightGridTileScript(Game game) : base(game) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         IsNoticedEnum isNoticed = IsNoticedEnum.False;
         cPtr.SelfLit = true;
         Game.NoteSpot(y, x);

@@ -30,7 +30,7 @@ internal class AlterScript : GameCommandUniversalScript, IGetKey, IGameSerialize
         {
             int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
             int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-            GridTile tile = Game.Map.Grid[y][x];
+            GridTile tile = Game.Grid[y][x];
             // Altering a tile will take a turn
             Game.EnergyUse = 100;
             // We 'alter' a tile by attacking it

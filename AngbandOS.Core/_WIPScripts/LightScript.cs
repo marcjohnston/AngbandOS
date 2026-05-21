@@ -31,14 +31,14 @@ internal class LightScript : Script, IScript, ICastSpellScript
         {
             for (int x = 1; x < Game.CurWid - 1; x++)
             {
-                GridTile cPtr = Game.Map.Grid[y][x];
+                GridTile cPtr = Game.Grid[y][x];
                 if (!cPtr.FeatureType.IsWall)
                 {
                     for (int i = 0; i < 9; i++)
                     {
                         int yy = y + Game.OrderedDirectionYOffset[i];
                         int xx = x + Game.OrderedDirectionXOffset[i];
-                        cPtr = Game.Map.Grid[yy][xx];
+                        cPtr = Game.Grid[yy][xx];
                         cPtr.SelfLit = true;
                         if (!cPtr.FeatureType.IsOpenFloor)
                         {

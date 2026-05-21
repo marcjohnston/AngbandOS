@@ -193,7 +193,7 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                     Game.ConsoleView.PutCharAtMapLocation(ImpactProjectileGraphic.Character, ImpactProjectileGraphic.Color, y, x);
                 }
             }
-            cPtr = Game.Map.Grid[y][x];
+            cPtr = Game.Grid[y][x];
             if (dist != 0 && !Game.GridPassable(y, x))
             {
                 break;
@@ -505,7 +505,7 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
             {
                 x = projectMx;
                 y = projectMy;
-                cPtr = Game.Map.Grid[y][x];
+                cPtr = Game.Grid[y][x];
                 if (cPtr.MonsterIndex != 0)
                 {
                     Monster mPtr = Game.Monsters[cPtr.MonsterIndex];

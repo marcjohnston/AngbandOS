@@ -27,7 +27,7 @@ internal class EnterStoreScript : UniversalScript, IGetKey
     /// <returns></returns>
     public override void ExecuteScript()
     {
-        GridTile tile = Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
+        GridTile tile = Game.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
         // Make sure we're actually on a shop tile
         if (!tile.FeatureType.IsShop)
         {

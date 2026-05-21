@@ -40,7 +40,7 @@ internal class StayScript : UniversalScript, IGetKey
         Game.StepOnGrid(false);
 
         // If we're in a shop doorway, enter the shop
-        GridTile tile = Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
+        GridTile tile = Game.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
         if (tile.FeatureType.IsShop)
         {
             Game.Disturb(false);

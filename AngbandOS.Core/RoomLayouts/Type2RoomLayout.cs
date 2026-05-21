@@ -33,7 +33,7 @@ internal class Type2RoomLayout : RoomLayout
         {
             for (x = x1A - 1; x <= x2A + 1; x++)
             {
-                cPtr = Game.Map.Grid[y][x];
+                cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.InRoom = true;
                 if (light)
@@ -46,7 +46,7 @@ internal class Type2RoomLayout : RoomLayout
         {
             for (x = x1B - 1; x <= x2B + 1; x++)
             {
-                cPtr = Game.Map.Grid[y][x];
+                cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.InRoom = true;
                 if (light)
@@ -58,37 +58,37 @@ internal class Type2RoomLayout : RoomLayout
         Tile wallOuter = Game.SingletonRepository.Get<Tile>(nameof(WallOuterTile));
         for (y = y1A - 1; y <= y2A + 1; y++)
         {
-            cPtr = Game.Map.Grid[y][x1A - 1];
+            cPtr = Game.Grid[y][x1A - 1];
             cPtr.SetFeature(wallOuter);
-            cPtr = Game.Map.Grid[y][x2A + 1];
+            cPtr = Game.Grid[y][x2A + 1];
             cPtr.SetFeature(wallOuter);
         }
         for (x = x1A - 1; x <= x2A + 1; x++)
         {
-            cPtr = Game.Map.Grid[y1A - 1][x];
+            cPtr = Game.Grid[y1A - 1][x];
             cPtr.SetFeature(wallOuter);
-            cPtr = Game.Map.Grid[y2A + 1][x];
+            cPtr = Game.Grid[y2A + 1][x];
             cPtr.SetFeature(wallOuter);
         }
         for (y = y1B - 1; y <= y2B + 1; y++)
         {
-            cPtr = Game.Map.Grid[y][x1B - 1];
+            cPtr = Game.Grid[y][x1B - 1];
             cPtr.SetFeature(wallOuter);
-            cPtr = Game.Map.Grid[y][x2B + 1];
+            cPtr = Game.Grid[y][x2B + 1];
             cPtr.SetFeature(wallOuter);
         }
         for (x = x1B - 1; x <= x2B + 1; x++)
         {
-            cPtr = Game.Map.Grid[y1B - 1][x];
+            cPtr = Game.Grid[y1B - 1][x];
             cPtr.SetFeature(wallOuter);
-            cPtr = Game.Map.Grid[y2B + 1][x];
+            cPtr = Game.Grid[y2B + 1][x];
             cPtr.SetFeature(wallOuter);
         }
         for (y = y1A; y <= y2A; y++)
         {
             for (x = x1A; x <= x2A; x++)
             {
-                cPtr = Game.Map.Grid[y][x];
+                cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
             }
         }
@@ -96,7 +96,7 @@ internal class Type2RoomLayout : RoomLayout
         {
             for (x = x1B; x <= x2B; x++)
             {
-                cPtr = Game.Map.Grid[y][x];
+                cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
             }
         }

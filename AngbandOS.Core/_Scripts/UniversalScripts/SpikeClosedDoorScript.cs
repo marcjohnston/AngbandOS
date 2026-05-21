@@ -32,7 +32,7 @@ internal class SpikeClosedDoorScript : UniversalScript, IGetKey
         {
             int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
             int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-            GridTile tile = Game.Map.Grid[y][x];
+            GridTile tile = Game.Grid[y][x];
             // Make sure it can be spiked and we have spikes to do it with
             if (!tile.FeatureType.IsVisibleDoor)
             {

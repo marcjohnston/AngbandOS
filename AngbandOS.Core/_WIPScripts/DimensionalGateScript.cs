@@ -19,7 +19,7 @@ internal class DimensionalGateScript : Script, IActivateItemScript
         }
         Game.Energy -= 60 - Game.ExperienceLevel.IntValue;
         if (!Game.GridPassableNoCreature(ij, ii) ||
-            Game.Map.Grid[ij][ii].InVault ||
+            Game.Grid[ij][ii].InVault ||
             Game.Distance(ij, ii, Game.MapY.IntValue, Game.MapX.IntValue) > Game.ExperienceLevel.IntValue + 2 ||
             Game.RandomLessThan(Game.ExperienceLevel.IntValue * Game.ExperienceLevel.IntValue / 2) == 0)
         {

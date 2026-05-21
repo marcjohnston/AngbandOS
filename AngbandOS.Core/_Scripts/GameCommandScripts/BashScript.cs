@@ -33,7 +33,7 @@ internal class BashScript : GameCommandUniversalScript, IGetKey
         {
             int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
             int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-            GridTile tile = Game.Map.Grid[y][x];
+            GridTile tile = Game.Grid[y][x];
             // Can only bash closed doors
             if (!tile.FeatureType.IsVisibleDoor)
             {

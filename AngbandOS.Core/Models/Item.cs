@@ -348,7 +348,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         // Check to see if the item in on the floor.
         if (X != 0 && Y != 0)
         {
-            return Game.Map.Grid[Y][X];
+            return Game.Grid[Y][X];
         }
 
         // Something is wrong.

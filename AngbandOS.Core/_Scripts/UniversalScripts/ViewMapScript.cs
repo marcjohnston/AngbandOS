@@ -115,7 +115,7 @@ internal class ViewMapScript : UniversalScript, IGetKey
                 Game.MapInfo(j, i, out tempColor, out tempCharacter);
 
                 // Get the priority of the specific map location.
-                int tempPriority = Game.Map.Grid[j][i].FeatureType.MapPriority;
+                int tempPriority = Game.Grid[j][i].FeatureType.MapPriority;
                 if (tempColor == ColorEnum.Background)
                 {
                     tempPriority = 0;

@@ -18,7 +18,7 @@ internal class TeleportAwayEvilMonsterEffect : MonsterEffect
 
     protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
     {
-        GridTile cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
+        GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -79,7 +79,7 @@ internal class TeleportAwayEvilMonsterEffect : MonsterEffect
             }
             note = " disappears!";
             mPtr.TeleportAway(doDist);
-            cPtr = Game.Map.Grid[mPtr.MapY][mPtr.MapX];
+            cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         }
         ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
         return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;

@@ -41,7 +41,7 @@ internal class OpenScript : GameCommandUniversalScript, IGetKey
         {
             int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
             int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-            GridTile tile = Game.Map.Grid[y][x];
+            GridTile tile = Game.Grid[y][x];
             Item? chestItem = Game.ChestCheck(y, x);
             // Make sure there is something to open in the direction we chose
             if (!tile.FeatureType.IsVisibleDoor && chestItem == null)

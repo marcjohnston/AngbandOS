@@ -29,7 +29,7 @@ internal class Type4RoomLayout : RoomLayout
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
             {
-                cPtr = Game.Map.Grid[y][x];
+                cPtr = Game.Grid[y][x];
                 cPtr.RevertToBackground();
                 cPtr.InRoom = true;
                 if (light)
@@ -41,16 +41,16 @@ internal class Type4RoomLayout : RoomLayout
         Tile wallOuterTile = Game.SingletonRepository.Get<Tile>(nameof(WallOuterTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = Game.Map.Grid[y][x1 - 1];
+            cPtr = Game.Grid[y][x1 - 1];
             cPtr.SetFeature(wallOuterTile);
-            cPtr = Game.Map.Grid[y][x2 + 1];
+            cPtr = Game.Grid[y][x2 + 1];
             cPtr.SetFeature(wallOuterTile);
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = Game.Map.Grid[y1 - 1][x];
+            cPtr = Game.Grid[y1 - 1][x];
             cPtr.SetFeature(wallOuterTile);
-            cPtr = Game.Map.Grid[y2 + 1][x];
+            cPtr = Game.Grid[y2 + 1][x];
             cPtr.SetFeature(wallOuterTile);
         }
         y1 += 2;
@@ -60,16 +60,16 @@ internal class Type4RoomLayout : RoomLayout
         Tile wallInnerTile = Game.SingletonRepository.Get<Tile>(nameof(WallInnerTile));
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
-            cPtr = Game.Map.Grid[y][x1 - 1];
+            cPtr = Game.Grid[y][x1 - 1];
             cPtr.SetFeature(wallInnerTile);
-            cPtr = Game.Map.Grid[y][x2 + 1];
+            cPtr = Game.Grid[y][x2 + 1];
             cPtr.SetFeature(wallInnerTile);
         }
         for (x = x1 - 1; x <= x2 + 1; x++)
         {
-            cPtr = Game.Map.Grid[y1 - 1][x];
+            cPtr = Game.Grid[y1 - 1][x];
             cPtr.SetFeature(wallInnerTile);
-            cPtr = Game.Map.Grid[y2 + 1][x];
+            cPtr = Game.Grid[y2 + 1][x];
             cPtr.SetFeature(wallInnerTile);
         }
         switch (Game.DieRoll(5))
@@ -123,7 +123,7 @@ internal class Type4RoomLayout : RoomLayout
                         {
                             continue;
                         }
-                        cPtr = Game.Map.Grid[y][x];
+                        cPtr = Game.Grid[y][x];
                         cPtr.SetFeature(wallInnerTile);
                     }
                 }
@@ -180,7 +180,7 @@ internal class Type4RoomLayout : RoomLayout
                 {
                     for (x = xval - 1; x <= xval + 1; x++)
                     {
-                        cPtr = Game.Map.Grid[y][x];
+                        cPtr = Game.Grid[y][x];
                         cPtr.SetFeature(wallInnerTile);
                     }
                 }
@@ -191,12 +191,12 @@ internal class Type4RoomLayout : RoomLayout
                     {
                         for (x = xval - 5 - tmp; x <= xval - 3 - tmp; x++)
                         {
-                            cPtr = Game.Map.Grid[y][x];
+                            cPtr = Game.Grid[y][x];
                             cPtr.SetFeature(wallInnerTile);
                         }
                         for (x = xval + 3 + tmp; x <= xval + 5 + tmp; x++)
                         {
-                            cPtr = Game.Map.Grid[y][x];
+                            cPtr = Game.Grid[y][x];
                             cPtr.SetFeature(wallInnerTile);
                         }
                     }
@@ -205,14 +205,14 @@ internal class Type4RoomLayout : RoomLayout
                 {
                     for (x = xval - 5; x <= xval + 5; x++)
                     {
-                        cPtr = Game.Map.Grid[yval - 1][x];
+                        cPtr = Game.Grid[yval - 1][x];
                         cPtr.SetFeature(wallInnerTile);
-                        cPtr = Game.Map.Grid[yval + 1][x];
+                        cPtr = Game.Grid[yval + 1][x];
                         cPtr.SetFeature(wallInnerTile);
                     }
-                    cPtr = Game.Map.Grid[yval][xval - 5];
+                    cPtr = Game.Grid[yval][xval - 5];
                     cPtr.SetFeature(wallInnerTile);
-                    cPtr = Game.Map.Grid[yval][xval + 5];
+                    cPtr = Game.Grid[yval][xval + 5];
                     cPtr.SetFeature(wallInnerTile);
                     PlaceSecretDoor(yval - 3 + (Game.DieRoll(2) * 2), xval - 3);
                     PlaceSecretDoor(yval - 3 + (Game.DieRoll(2) * 2), xval + 3);
@@ -254,7 +254,7 @@ internal class Type4RoomLayout : RoomLayout
                     {
                         if ((1 & (x + y)) != 0)
                         {
-                            cPtr = Game.Map.Grid[y][x];
+                            cPtr = Game.Grid[y][x];
                             cPtr.SetFeature(wallInnerTile);
                         }
                     }
@@ -269,12 +269,12 @@ internal class Type4RoomLayout : RoomLayout
             case 5:
                 for (y = y1; y <= y2; y++)
                 {
-                    cPtr = Game.Map.Grid[y][xval];
+                    cPtr = Game.Grid[y][xval];
                     cPtr.SetFeature(wallInnerTile);
                 }
                 for (x = x1; x <= x2; x++)
                 {
-                    cPtr = Game.Map.Grid[yval][x];
+                    cPtr = Game.Grid[yval][x];
                     cPtr.SetFeature(wallInnerTile);
                 }
                 if (Game.RandomLessThan(100) < 50)
@@ -334,13 +334,13 @@ internal class Type4RoomLayout : RoomLayout
 
     private void PlaceDownStairs(int y, int x)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         cPtr.SetFeature(Game.DownStaircaseTile);
     }
 
     private void PlaceUpStairs(int y, int x)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         cPtr.SetFeature(Game.UpStaircaseTile);
     }
 
@@ -382,7 +382,7 @@ internal class Type4RoomLayout : RoomLayout
     }
     private void PlaceLockedDoor(int y, int x)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         WeightedRandom<Tile> tiles = new WeightedRandom<Tile>(Game);
         tiles.Add(1, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor0Tile)));
         tiles.Add(1, Game.SingletonRepository.Get<Tile>(nameof(LockedDoor1Tile)));

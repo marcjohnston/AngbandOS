@@ -31,7 +31,7 @@ internal class DarkScript : Script, IScript, ICastSpellScript
         {
             for (int x = 0; x < Game.CurWid; x++)
             {
-                GridTile cPtr = Game.Map.Grid[y][x];
+                GridTile cPtr = Game.Grid[y][x];
                 cPtr.PlayerMemorized = false;
                 foreach (Item oPtr in cPtr.Items)
                 {

@@ -12,7 +12,7 @@ internal class DarknessWeakGridTileScript : GridTileScript
     private DarknessWeakGridTileScript(Game game) : base(game) { }
     public override (IsNoticedEnum, DestroysContentsEnum) Apply(int x, int y)
     {
-        GridTile cPtr = Game.Map.Grid[y][x];
+        GridTile cPtr = Game.Grid[y][x];
         IsNoticedEnum isNoticed = Game.PlayerCanSeeBold(y, x) ? IsNoticedEnum.True : IsNoticedEnum.False;
         cPtr.SelfLit = false;
         if (cPtr.FeatureType.IsOpenFloor)

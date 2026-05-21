@@ -28,7 +28,7 @@ internal class CreateDimensionDoorScript : Script, IScript, ICastSpellScript
             return;
         }
         Game.Energy -= 60 - Game.ExperienceLevel.IntValue;
-        if (!Game.GridPassableNoCreature(ij, ii) || Game.Map.Grid[ij][ii].InVault || Game.Distance(ij, ii, Game.MapY.IntValue, Game.MapX.IntValue) > Game.ExperienceLevel.IntValue + 2 || Game.RandomLessThan(Game.ExperienceLevel.IntValue * Game.ExperienceLevel.IntValue / 2) == 0)
+        if (!Game.GridPassableNoCreature(ij, ii) || Game.Grid[ij][ii].InVault || Game.Distance(ij, ii, Game.MapY.IntValue, Game.MapX.IntValue) > Game.ExperienceLevel.IntValue + 2 || Game.RandomLessThan(Game.ExperienceLevel.IntValue * Game.ExperienceLevel.IntValue / 2) == 0)
         {
             Game.MsgPrint("You fail to exit the astral plane correctly!");
             Game.Energy -= 100;

@@ -28,7 +28,7 @@ internal class GoDownStairsScript : UniversalScript, IGetKey
     public override void ExecuteScript()
     {
         bool isTrapDoor = false;
-        GridTile tile = Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
+        GridTile tile = Game.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
         if (tile.FeatureType.IsTrapDoor)
         {
             isTrapDoor = true;

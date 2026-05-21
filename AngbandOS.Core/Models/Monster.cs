@@ -922,7 +922,7 @@ internal class Monster : IItemContainer, IGameSerialize
             {
                 for (int x = oldX - 1; x <= oldX + 1; x++)
                 {
-                    if (Game.Map.Grid[y][x].MonsterIndex != 0)
+                    if (Game.Grid[y][x].MonsterIndex != 0)
                     {
                         k++;
                     }
@@ -1064,7 +1064,7 @@ internal class Monster : IItemContainer, IGameSerialize
             // Work out where the move will take us
             int newY = oldY + Game.KeypadDirectionYOffset[d];
             int newX = oldX + Game.KeypadDirectionXOffset[d];
-            GridTile tile = Game.Map.Grid[newY][newX];
+            GridTile tile = Game.Grid[newY][newX];
             Monster monsterInTargetTile = Game.Monsters[tile.MonsterIndex];
             // If we can simply move there, then we will do so
             if (Game.GridPassable(newY, newX))
@@ -1072,7 +1072,7 @@ internal class Monster : IItemContainer, IGameSerialize
                 doMove = true;
             }
             // Bushes don't actually block us, so we can move there too
-            else if (Game.Map.Grid[newY][newX].FeatureType.IsBush)
+            else if (Game.Grid[newY][newX].FeatureType.IsBush)
             {
                 doMove = true;
             }
@@ -1279,7 +1279,7 @@ internal class Monster : IItemContainer, IGameSerialize
             {
                 doTurn = true;
                 // Swap positions with the monster that is in the tile we're aiming for
-                Game.Map.Grid[oldY][oldX].MonsterIndex = tile.MonsterIndex;
+                Game.Grid[oldY][oldX].MonsterIndex = tile.MonsterIndex;
                 // If it was actually a monster then update it accordingly
                 if (tile.MonsterIndex != 0)
                 {
@@ -2411,7 +2411,7 @@ internal class Monster : IItemContainer, IGameSerialize
                 // Check if the player is in a room by counting the room tiles around them
                 for (int i = 0; i < 8; i++)
                 {
-                    if (Game.Map.Grid[Game.MapY.IntValue + Game.OrderedDirectionYOffset[i]][Game.MapX.IntValue + Game.OrderedDirectionXOffset[i]].InRoom)
+                    if (Game.Grid[Game.MapY.IntValue + Game.OrderedDirectionYOffset[i]][Game.MapX.IntValue + Game.OrderedDirectionXOffset[i]].InRoom)
                     {
                         room++;
                     }
@@ -2671,15 +2671,15 @@ internal class Monster : IItemContainer, IGameSerialize
         int dY = monsterY - coord.Y;
         int dX = monsterX - coord.X;
         // If the scent too strong, keep going where we were going
-        if (Game.Map.Grid[monsterY][monsterX].ScentAge < Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue].ScentAge)
+        if (Game.Grid[monsterY][monsterX].ScentAge < Game.Grid[Game.MapY.IntValue][Game.MapX.IntValue].ScentAge)
         {
             return;
         }
-        if (Game.Map.Grid[monsterY][monsterX].ScentStrength > Constants.MonsterFlowDepth)
+        if (Game.Grid[monsterY][monsterX].ScentStrength > Constants.MonsterFlowDepth)
         {
             return;
         }
-        if (Game.Map.Grid[monsterY][monsterX].ScentStrength > Race.NoticeRange)
+        if (Game.Grid[monsterY][monsterX].ScentStrength > Race.NoticeRange)
         {
             return;
         }
@@ -2693,17 +2693,17 @@ internal class Monster : IItemContainer, IGameSerialize
             int y = monsterY + Game.OrderedDirectionYOffset[i];
             int x = monsterX + Game.OrderedDirectionXOffset[i];
             // If we have no scent there, or the scent is too recent, ignore it
-            if (Game.Map.Grid[y][x].ScentAge == 0)
+            if (Game.Grid[y][x].ScentAge == 0)
             {
                 continue;
             }
-            if (Game.Map.Grid[y][x].ScentAge < when)
+            if (Game.Grid[y][x].ScentAge < when)
             {
                 continue;
             }
             // If the scent is weaker than in the other directions, go that way
             int dis = Game.Distance(y, x, dY, dX);
-            int s = (5000 / (dis + 3)) - (500 / (Game.Map.Grid[y][x].ScentStrength + 1));
+            int s = (5000 / (dis + 3)) - (500 / (Game.Grid[y][x].ScentStrength + 1));
             if (s < 0)
             {
                 s = 0;
@@ -2712,7 +2712,7 @@ internal class Monster : IItemContainer, IGameSerialize
             {
                 continue;
             }
-            when = Game.Map.Grid[y][x].ScentAge;
+            when = Game.Grid[y][x].ScentAge;
             score = s;
             gy = y;
             gx = x;
@@ -2744,9 +2744,9 @@ internal class Monster : IItemContainer, IGameSerialize
         }
         int y1 = MapY;
         int x1 = MapX;
-        GridTile cPtr = Game.Map.Grid[y1][x1];
+        GridTile cPtr = Game.Grid[y1][x1];
         // If we have no scent of the player then don't change where we were going
-        if (cPtr.ScentAge < Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue].ScentAge)
+        if (cPtr.ScentAge < Game.Grid[Game.MapY.IntValue][Game.MapX.IntValue].ScentAge)
         {
             if (cPtr.ScentAge == 0)
             {
@@ -2773,20 +2773,20 @@ internal class Monster : IItemContainer, IGameSerialize
         {
             int y = y1 + Game.OrderedDirectionYOffset[i];
             int x = x1 + Game.OrderedDirectionXOffset[i];
-            if (Game.Map.Grid[y][x].ScentAge == 0)
+            if (Game.Grid[y][x].ScentAge == 0)
             {
                 continue;
             }
-            if (Game.Map.Grid[y][x].ScentAge < when)
+            if (Game.Grid[y][x].ScentAge < when)
             {
                 continue;
             }
-            if (Game.Map.Grid[y][x].ScentStrength > cost)
+            if (Game.Grid[y][x].ScentStrength > cost)
             {
                 continue;
             }
-            when = Game.Map.Grid[y][x].ScentAge;
-            cost = Game.Map.Grid[y][x].ScentStrength;
+            when = Game.Grid[y][x].ScentAge;
+            cost = Game.Grid[y][x].ScentStrength;
             // Give us a target in the general direction of the strongest scent
             target = new GridCoordinate(Game.MapX.IntValue + (16 * Game.OrderedDirectionXOffset[i]), Game.MapY.IntValue + (16 * Game.OrderedDirectionYOffset[i]));
         }
@@ -3242,11 +3242,11 @@ internal class Monster : IItemContainer, IGameSerialize
                 {
                     continue;
                 }
-                if (Game.Map.Grid[ny][nx].FeatureType.IsElderSignSigil)
+                if (Game.Grid[ny][nx].FeatureType.IsElderSignSigil)
                 {
                     continue;
                 }
-                if (Game.Map.Grid[ny][nx].FeatureType.IsYellowSignSigil)
+                if (Game.Grid[ny][nx].FeatureType.IsYellowSignSigil)
                 {
                     continue;
                 }
@@ -3257,8 +3257,8 @@ internal class Monster : IItemContainer, IGameSerialize
             min /= 2;
         }
         Game.PlaySound(SoundEffectEnum.Teleport);
-        Game.Map.Grid[ny][nx].MonsterIndex = GetMonsterIndex();
-        Game.Map.Grid[oy][ox].MonsterIndex = 0;
+        Game.Grid[ny][nx].MonsterIndex = GetMonsterIndex();
+        Game.Grid[oy][ox].MonsterIndex = 0;
         MapY = ny;
         MapX = nx;
         Game.UpdateMonsterVisibility(GetMonsterIndex(), true);
@@ -3297,9 +3297,9 @@ internal class Monster : IItemContainer, IGameSerialize
             // Check if we're in bounds and have a monster
             if (Game.InBounds(y, x))
             {
-                if (Game.Map.Grid[y][x].MonsterIndex != 0)
+                if (Game.Grid[y][x].MonsterIndex != 0)
                 {
-                    Monster enemy = Game.Monsters[Game.Map.Grid[y][x].MonsterIndex];
+                    Monster enemy = Game.Monsters[Game.Grid[y][x].MonsterIndex];
                     // Only go for monsters who are awake and on the opposing side
                     if (enemy.IsPet != IsPet && enemy.SleepLevel == 0)
                     {
@@ -3510,11 +3510,11 @@ internal class Monster : IItemContainer, IGameSerialize
                         continue;
                     }
                     // Reject spots that smell too strongly of the player
-                    if (Game.Map.Grid[y][x].ScentAge < Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue].ScentAge)
+                    if (Game.Grid[y][x].ScentAge < Game.Grid[Game.MapY.IntValue][Game.MapX.IntValue].ScentAge)
                     {
                         continue;
                     }
-                    if (Game.Map.Grid[y][x].ScentStrength > Game.Map.Grid[MapY][MapY].ScentStrength + (2 * d))
+                    if (Game.Grid[y][x].ScentStrength > Game.Grid[MapY][MapY].ScentStrength + (2 * d))
                     {
                         continue;
                     }

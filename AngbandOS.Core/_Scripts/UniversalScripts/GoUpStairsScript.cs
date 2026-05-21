@@ -28,7 +28,7 @@ internal class GoUpStairsScript : UniversalScript, IGetKey
     public override void ExecuteScript()
     {
         // We need to actually be on an up staircase
-        GridTile tile = Game.Map.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
+        GridTile tile = Game.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
         if (!tile.FeatureType.IsUpStaircase)
         {
             Game.MsgPrint("I see no up staircase here.");
