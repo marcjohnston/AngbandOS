@@ -6,10 +6,15 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class ObjectGameStateBag : GameStateBag
+internal class DerivedObjectGameStateBag : GameStateBag
 {
     public int ObjectId { get; }
-    public string TypeName { get; }
+
+    /// <summary>
+    /// Represents a unique id for polymorphed types or null, if the type is not polymorphed.
+    /// </summary>
+    public byte? DerivedId { get; }
+
     public readonly DictionaryGameStateBag? Values;
 
     /// <summary>
@@ -18,10 +23,10 @@ internal class ObjectGameStateBag : GameStateBag
     /// <param name="objectId">The unique ID of this object.  During restore operations, this value will come from the serialized data.  During save operations, this value will be provided by the object registration dictionary.</param>
     /// <param name="typeName">The type name to construct, when the object needs to be constructed during the restore operation.  During save operations, this should be the object.GetType().Name value.</param>
     /// <param name="value">Additional data provided by the object to be serialized for the save operations.  Null, if the object has no additional data/state.</param>
-    public ObjectGameStateBag(int objectId, string typeName, DictionaryGameStateBag? value)
+    public DerivedObjectGameStateBag(int objectId, byte? derivedId, DictionaryGameStateBag? value)
     {
         ObjectId = objectId;
-        TypeName = typeName;
+        DerivedId = derivedId;
         Values = value;
     }
 

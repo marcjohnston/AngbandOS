@@ -45,6 +45,103 @@ internal class SaveGameState
         ObjectToIdDictionary.Add(value, objectId);
         return objectId;
     }
+    public GameStateBag CreateGameStateBag(bool a, bool b)
+    {
+        byte value = (byte)((a ? 1 << 0 : 0) | (b ? 1 << 1 : 0));
+        return new ByteValueGameStateBag(value);
+    }
+    public GameStateBag CreateGameStateBag(bool a, bool b, bool c)
+    {
+        byte value = (byte)((a ? 1 << 0 : 0) | (b ? 1 << 1 : 0) | (c ? 1 << 2 : 0));
+        return new ByteValueGameStateBag(value);
+    }
+
+    public GameStateBag CreateGameStateBag(bool a, bool b, bool c, bool d)
+    {
+        byte value = (byte)((a ? 1 << 0 : 0) | (b ? 1 << 1 : 0) | (c ? 1 << 2 : 0) | (d ? 1 << 3 : 0));
+        return new ByteValueGameStateBag(value);
+    }
+    public GameStateBag CreateGameStateBag(bool a, bool b, bool c, bool d, bool e)
+    {
+        byte value = (byte)((a ? 1 << 0 : 0) | (b ? 1 << 1 : 0) | (c ? 1 << 2 : 0) | (d ? 1 << 3 : 0) | (e ? 1 << 4 : 0));
+        return new ByteValueGameStateBag(value);
+    }
+    public GameStateBag CreateGameStateBag(bool a, bool b, bool c, bool d, bool e, bool f)
+    {
+        byte value = (byte)((a ? 1 << 0 : 0) | (b ? 1 << 1 : 0) | (c ? 1 << 2 : 0) | (d ? 1 << 3 : 0) | (e ? 1 << 4 : 0) | (f ? 1 << 5 : 0));
+        return new ByteValueGameStateBag(value);
+    }
+    public GameStateBag CreateGameStateBag(bool a, bool b, bool c, bool d, bool e, bool f, bool g)
+    {
+        byte value = (byte)((a ? 1 << 0 : 0) | (b ? 1 << 1 : 0) | (c ? 1 << 2 : 0) | (d ? 1 << 3 : 0) | (e ? 1 << 4 : 0) | (f ? 1 << 5 : 0) | (g ? 1 << 6 : 0));
+        return new ByteValueGameStateBag(value);
+    }
+    public GameStateBag CreateGameStateBag(bool a, bool b, bool c, bool d, bool e, bool f, bool g, bool h)
+    {
+        byte value = (byte)((a ? 1 << 0 : 0) | (b ? 1 << 1 : 0) | (c ? 1 << 2 : 0) | (d ? 1 << 3 : 0) | (e ? 1 << 4 : 0) | (f ? 1 << 5 : 0) | (g ? 1 << 6 : 0) | (h ? 1 << 7 : 0));
+        return new ByteValueGameStateBag(value);
+    }
+
+    #region Derived Object Creation
+    private byte? DetermineDerivedId(Type actualType, params Type[] derivedTypes)
+    {
+#if DEBUG
+        if (derivedTypes.Length == 0)
+        {
+            throw new Exception("Too few derivedTypes");
+        }
+        else if (derivedTypes.Length > 255)
+        {
+            throw new Exception("Too many derivedTypes");
+        }
+#endif
+        if (derivedTypes.Length == 1)
+        {
+            return null;
+        }
+
+        byte id = 0;
+        foreach (Type derivedType in derivedTypes)
+        {
+            if (actualType == derivedType)
+            {
+                return id;
+            }
+            id++;
+        }
+        throw new Exception($"{actualType.Name} does not match any derived type");
+    }
+
+    public GameStateBag CreateGameStateBag(IGameSerialize? gameSerializable, Type derivedType, params Type[] derivedTypes)
+    {
+        if (gameSerializable is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        if (TryGetReferenceId(gameSerializable, out int existingId))
+        {
+            return new ReferenceGameStateBag(existingId);
+        }
+
+        // We need to register this object to the dictionary before we serialize the object to prevent recursion.
+        int objectId = RegisterObject(gameSerializable);
+        DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)gameSerializable.Serialize(this);
+
+        byte? derivedId = DetermineDerivedId(gameSerializable.GetType(), new Type[] { derivedType }.Concat(derivedTypes).ToArray());
+        return new DerivedObjectGameStateBag(objectId, derivedId, gameStateBag);
+    }
+
+    public GameStateBag CreateGameStateBag(IGameSerialize[] gameSerializable, Type derivedType, params Type[] derivedTypes)
+    {
+        var gameStateBags = new List<GameStateBag>();
+        foreach (IGameSerialize item in gameSerializable)
+        {
+            gameStateBags.Add(CreateGameStateBag(item, derivedType, derivedTypes));
+        }
+        return new ListGameStateBag(gameStateBags.ToArray());
+    }
+    #endregion
 
     public GameStateBag CreateGameStateBag(object? value)
     {
@@ -55,7 +152,7 @@ internal class SaveGameState
 
         if (value is IGameSerialize gameSerializable)
         {
-            if (TryGetReferenceId(value, out int existingId))
+            if (TryGetReferenceId(gameSerializable, out int existingId))
             {
                 return new ReferenceGameStateBag(existingId);
             }
@@ -63,17 +160,6 @@ internal class SaveGameState
             // We need to register this object to the dictionary before we serialize the object to prevent recursion.
             int objectId = RegisterObject(value);
             DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)gameSerializable.Serialize(this);
-
-            //#if DEBUG
-            //FieldInfo[] allFields = GetAllFields(value.GetType());
-            //FieldInfo[] expectedSerializableFields = allFields.Where(p => !p.IsDefined(typeof(CompilerGeneratedAttribute), true) && !System.Attribute.IsDefined(p, typeof(NonSerializedAttribute))).ToArray();
-
-            //int actualSerializedFieldCount = gameStateBag?.Values.Count ?? 0;
-            //if (actualSerializedFieldCount < expectedSerializableFields.Length)
-            //{
-            //    Debug.WriteLine($"The number of fields serialized via reflection for {value.GetType().Name} does not match the number of fields serialized via the IGameSerialize interface.  This indicates that the IGameSerialize implementation is not serializing all of the fields in the singleton.  This will cause issues with game state restoration.  Ensure that all fields are being serialized in the IGameSerialize implementation.");
-            //}
-            //#endif
             return new ObjectGameStateBag(objectId, gameSerializable.GetType().Name, gameStateBag);
         }
 
@@ -233,21 +319,6 @@ internal class SaveGameState
 
         Type type = value.GetType();
         throw new Exception($"{type.Name} serialization not supported.");
-    }
-
-    private static FieldInfo[] GetAllFields(Type? type)
-    {
-        List<FieldInfo> fieldInfoList = new List<FieldInfo>();
-        while (type != null)
-        {
-            foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
-            {
-                fieldInfoList.Add(field);
-            }
-
-            type = type.BaseType;
-        }
-        return fieldInfoList.ToArray();
     }
 
     public static class DeepComparer

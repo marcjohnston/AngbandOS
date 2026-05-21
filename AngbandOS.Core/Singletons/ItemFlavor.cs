@@ -10,7 +10,7 @@ namespace AngbandOS.Core.ItemFlavors;
 /// Represents a single flavor for a group of items that participate in the IFlavor interface.
 /// </summary>
 [Serializable]
-internal sealed class ItemFlavor : Flavor, IGetKey, IToJson, IGameSerialize
+internal sealed class ItemFlavor : Flavor, IGetKey, IToJson
 {
     public ItemFlavor(Game game, ItemFlavorGameConfiguration gameConfiguration) : base(game)
     {
@@ -20,8 +20,6 @@ internal sealed class ItemFlavor : Flavor, IGetKey, IToJson, IGameSerialize
         Color = gameConfiguration.Color;
         CanBeAssigned = gameConfiguration.CanBeAssigned;
     }
-
-    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the entity serialized into a Json string.

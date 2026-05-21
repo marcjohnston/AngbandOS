@@ -38,14 +38,7 @@ internal class GridTile : IItemContainer, IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(EasyVisibility), saveGameState.CreateGameStateBag(EasyVisibility)),
-            (nameof(InRoom), saveGameState.CreateGameStateBag(InRoom)),
-            (nameof(InVault), saveGameState.CreateGameStateBag(InVault)),
-            (nameof(IsVisible), saveGameState.CreateGameStateBag(IsVisible)),
-            (nameof(PlayerLit), saveGameState.CreateGameStateBag(PlayerLit)),
-            (nameof(PlayerMemorized), saveGameState.CreateGameStateBag(PlayerMemorized)),
-            (nameof(SelfLit), saveGameState.CreateGameStateBag(SelfLit)),
-            (nameof(TempFlag), saveGameState.CreateGameStateBag(TempFlag)),
+            ("bools", saveGameState.CreateGameStateBag(EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag)),
             (nameof(_trapsDetected), saveGameState.CreateGameStateBag(_trapsDetected)),
             (nameof(Items), saveGameState.CreateGameStateBag(Items)),
             (nameof(MonsterIndex), saveGameState.CreateGameStateBag(MonsterIndex)),
@@ -58,14 +51,7 @@ internal class GridTile : IItemContainer, IGameSerialize
 
     public GridTile(Game game, RestoreGameState restoreGameState) : this(game)
     {
-        EasyVisibility = restoreGameState.GetByKey(nameof(EasyVisibility)).GetBool();
-        InRoom = restoreGameState.GetByKey(nameof(InRoom)).GetBool();
-        InVault = restoreGameState.GetByKey(nameof(InVault)).GetBool();
-        IsVisible = restoreGameState.GetByKey(nameof(IsVisible)).GetBool();
-        PlayerLit = restoreGameState.GetByKey(nameof(PlayerLit)).GetBool();
-        PlayerMemorized = restoreGameState.GetByKey(nameof(PlayerMemorized)).GetBool();
-        SelfLit = restoreGameState.GetByKey(nameof(SelfLit)).GetBool();
-        TempFlag = restoreGameState.GetByKey(nameof(TempFlag)).GetBool();
+        (EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag) = restoreGameState.GetByKey(nameof(TempFlag)).Get8Bools();
         _trapsDetected = restoreGameState.GetByKey(nameof(_trapsDetected)).GetBool();
         Items = restoreGameState.GetByKey(nameof(Items)).GetReferences<Item>().ToList();
         MonsterIndex = restoreGameState.GetByKey(nameof(MonsterIndex)).GetInt();

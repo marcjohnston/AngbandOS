@@ -19,13 +19,11 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(IsFlavorAware), saveGameState.CreateGameStateBag(IsFlavorAware)),
+            ("bools", saveGameState.CreateGameStateBag(Stompable[0], Stompable[1], Stompable[2], Stompable[3], IsFlavorAware, Tried)),
             (nameof(FlavorSymbol), saveGameState.CreateGameStateBag(FlavorSymbol)),
             (nameof(FlavorColor), saveGameState.CreateGameStateBag(FlavorColor)),
-            (nameof(Flavor), saveGameState.CreateGameStateBag(Flavor)),
-            (nameof(Tried), saveGameState.CreateGameStateBag(Tried)),
+            (nameof(Flavor), saveGameState.CreateGameStateBag(Flavor, typeof(IllegibleItemFlavor), typeof(ItemFlavor))),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
-            (nameof(Stompable), saveGameState.CreateGameStateBag(Stompable)),
             (nameof(_bookIndex), saveGameState.CreateGameStateBag(_bookIndex)),
             (nameof(_realm), saveGameState.CreateGameStateBag(_realm))
         );
@@ -520,13 +518,11 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            IsFlavorAware = restoreGameState.GetByKey(nameof(IsFlavorAware)).GetBool();
+            (Stompable[0], Stompable[1], Stompable[2], Stompable[3], IsFlavorAware, Tried) = restoreGameState.GetByKey("bools").Get6Bools();
             FlavorSymbol = restoreGameState.GetByKey(nameof(FlavorSymbol)).GetReference<Symbol>();
             FlavorColor = restoreGameState.GetByKey(nameof(FlavorColor)).GetEnum<ColorEnum>();
-            Flavor = restoreGameState.GetByKey(nameof(Flavor)).GetReferenceOrDefault<Flavor>();
-            Tried = restoreGameState.GetByKey(nameof(Tried)).GetBool();
+            Flavor = restoreGameState.GetByKey(nameof(Flavor)).GetDerivedReferenceOrDefault<Flavor>((Game game, RestoreGameState restoreGameState) => new IllegibleItemFlavor(Game, restoreGameState));
             Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
-            Stompable = restoreGameState.GetByKey(nameof(Stompable)).GetBools();
             _bookIndex = restoreGameState.GetByKey(nameof(_bookIndex)).GetInt();
             _realm = restoreGameState.GetByKey(nameof(_realm)).GetReferenceOrDefault<Realm>();
         }

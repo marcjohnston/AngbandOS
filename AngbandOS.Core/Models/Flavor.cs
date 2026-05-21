@@ -10,13 +10,15 @@ namespace AngbandOS.Core;
 /// Represents a generic flavor for items.  Flavors can be generated as illegible or provided from the configuration.
 /// </summary>
 [Serializable]
-internal abstract class Flavor
+internal abstract class Flavor : IGameSerialize
 {
     protected Game Game { get; }
     protected Flavor(Game game)
     {
         Game = game;
     }
+
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
     /// <summary>
     /// Returns the symbol to use for rendering.

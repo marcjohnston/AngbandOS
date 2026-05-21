@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Diagnostics;
 using System.IO.Compression;
 
 namespace AngbandOS.Core;
@@ -27,12 +28,16 @@ internal class BinaryGameSerializer : IGameSerializer
         NullValue = 12,
         ObjectWithState = 13,
         ObjectWithoutState = 14,
+        DerivedObjectWithState = 18,
+        DerivedObjectWithoutState = 19,
+        NonDerivedObjectWithState = 20,
+        NonDerivedObjectWithoutState = 21,
         ReferenceToObject = 15,
         StringValue = 16,
         TimeSpanValue = 17
     }
     
-    //List<string> u = new List<string>();
+    //private static List<string> u = new List<string>();
     private static byte[] Serialize(GameStateBag gameStateData)
     {
         List<byte> result = new List<byte>();
@@ -138,6 +143,34 @@ internal class BinaryGameSerializer : IGameSerializer
                 }
                 result.AddRange(BitConverter.GetBytes(objectGameStateBag.ObjectId));
                 AddTypeName(objectGameStateBag.TypeName);
+                break;
+            case DerivedObjectGameStateBag derivedObjectGameStateBag:
+                if (derivedObjectGameStateBag.Values is null)
+                {
+                    if (derivedObjectGameStateBag.DerivedId is null)
+                    {
+                        result.Add((byte)TypeEnum.NonDerivedObjectWithoutState);
+                    }
+                    else
+                    {
+                        result.Add((byte)TypeEnum.DerivedObjectWithoutState);
+                        result.Add(derivedObjectGameStateBag.DerivedId.Value);
+                    }
+                }
+                else
+                {
+                    if (derivedObjectGameStateBag.DerivedId is null)
+                    {
+                        result.Add((byte)TypeEnum.NonDerivedObjectWithState);
+                    }
+                    else
+                    {
+                        result.Add((byte)TypeEnum.DerivedObjectWithState);
+                        result.Add(derivedObjectGameStateBag.DerivedId.Value);
+                    }
+                    result.AddRange(Serialize(derivedObjectGameStateBag.Values));
+                }
+                result.AddRange(BitConverter.GetBytes(derivedObjectGameStateBag.ObjectId));
                 break;
             case ReferenceGameStateBag referenceGameStateBag:
                 result.Add((byte)TypeEnum.ReferenceToObject);
@@ -285,6 +318,26 @@ internal class BinaryGameSerializer : IGameSerializer
                 string typeName2 = System.Text.Encoding.UTF8.GetString(data, index, typeNameLength2);
                 index += typeNameLength2;
                 return new ObjectGameStateBag(objectId2, typeName2, (DictionaryGameStateBag)values);
+            case (byte)TypeEnum.DerivedObjectWithoutState:
+                byte derivedId = data[index++];
+                int derivedObjectId = BitConverter.ToInt32(data, index);
+                index += 4;
+                return new DerivedObjectGameStateBag(derivedObjectId, derivedId, null);
+            case (byte)TypeEnum.DerivedObjectWithState:
+                byte derivedWithStateId = data[index++];
+                GameStateBag derivedState = Deserialize(ref index, data);
+                int derivedObjectId2 = BitConverter.ToInt32(data, index);
+                index += 4;
+                return new DerivedObjectGameStateBag(derivedObjectId2, derivedWithStateId, (DictionaryGameStateBag)derivedState);
+            case (byte)TypeEnum.NonDerivedObjectWithoutState:
+                int nonDerivedObjectId = BitConverter.ToInt32(data, index);
+                index += 4;
+                return new DerivedObjectGameStateBag(nonDerivedObjectId, null, null);
+            case (byte)TypeEnum.NonDerivedObjectWithState:
+                GameStateBag nonDerivedState = Deserialize(ref index, data);
+                int nonDerivedObjectId2 = BitConverter.ToInt32(data, index);
+                index += 4;
+                return new DerivedObjectGameStateBag(nonDerivedObjectId2, null, (DictionaryGameStateBag)nonDerivedState);
             case (byte)TypeEnum.ReferenceToObject:
                 int referenceObjectId = BitConverter.ToInt32(data, index);
                 index += 4;

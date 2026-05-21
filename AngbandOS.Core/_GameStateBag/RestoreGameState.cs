@@ -15,7 +15,8 @@ internal class RestoreGameState
 {
     private Game Game { get; }
     private Dictionary<int, object> ObjectIdToReferenceDictionary { get; }
-    private Dictionary<int, ObjectGameStateBag> ObjectIdToObjectGameStateBagDictionary { get; }
+    private Dictionary<int, GameStateBag> ObjectIdToObjectGameStateBagDictionary { get; }
+
     public GameStateBag GameStateBag { get; }
 
 #if DEBUG
@@ -28,7 +29,7 @@ internal class RestoreGameState
     /// <param name="game"></param>
     /// <param name="objectIdToReferenceDictionary"></param>
     /// <param name="gameStateBag"></param>
-    private RestoreGameState(Game game, Dictionary<int, object> objectIdToReferenceDictionary, Dictionary<int, ObjectGameStateBag> objectIdToObjectGameStateBagDictionary, GameStateBag gameStateBag)
+    private RestoreGameState(Game game, Dictionary<int, object> objectIdToReferenceDictionary, Dictionary<int, GameStateBag> objectIdToObjectGameStateBagDictionary, GameStateBag gameStateBag)
     {
         Game = game;
         ObjectIdToReferenceDictionary = objectIdToReferenceDictionary;
@@ -45,7 +46,7 @@ internal class RestoreGameState
     {
         Game = game;
         ObjectIdToReferenceDictionary = new Dictionary<int, object>();
-        ObjectIdToObjectGameStateBagDictionary = new Dictionary<int, ObjectGameStateBag>();
+        ObjectIdToObjectGameStateBagDictionary = new Dictionary<int, GameStateBag>();
         GameStateBag = gameStateBag;
     }
 
@@ -55,7 +56,7 @@ internal class RestoreGameState
         ObjectIdToReferenceDictionary.Add(objectId, singleton);
     }
 
-    public void TrackGameStateBag(int objectId, ObjectGameStateBag objectGameStateBag)
+    public void TrackGameStateBag(int objectId, GameStateBag objectGameStateBag)
     {
         ObjectIdToObjectGameStateBagDictionary.Add(objectId, objectGameStateBag);
     }
@@ -92,6 +93,17 @@ internal class RestoreGameState
             if (gameStateBag is null)
             {
                 throw new KeyNotFoundException($"Key {key} not found in object game state bag with object id {objectGameStateBag.ObjectId}.");
+            }
+
+            CurrentSequentialIndex++;
+            return New(gameStateBag);
+        }
+        if (GameStateBag is DerivedObjectGameStateBag derivedObjectGameStateBag)
+        {
+            GameStateBag? gameStateBag = derivedObjectGameStateBag.GetByKey(key, CurrentSequentialIndex, verifySequentialRetrieval);
+            if (gameStateBag is null)
+            {
+                throw new KeyNotFoundException($"Key {key} not found in object game state bag with object id {derivedObjectGameStateBag.ObjectId}.");
             }
 
             CurrentSequentialIndex++;
@@ -155,6 +167,17 @@ internal class RestoreGameState
             boolList.Add(enumValue);
         }
         return boolList.ToArray();
+    }
+
+    public (bool a, bool b, bool c, bool d, bool e, bool f) Get6Bools()
+    {
+        byte value = ((ByteValueGameStateBag)GameStateBag).Value;
+        return ((value & (1 << 0)) != 0, (value & (1 << 1)) != 0, (value & (1 << 2)) != 0, (value & (1 << 3)) != 0, (value & (1 << 4)) != 0, (value & (1 << 5)) != 0);
+    }
+    public (bool a, bool b, bool c, bool d, bool e, bool f, bool g, bool h) Get8Bools()
+    {
+        byte value = ((ByteValueGameStateBag)GameStateBag).Value;
+        return ((value & (1 << 0)) != 0, (value & (1 << 1)) != 0, (value & (1 << 2)) != 0, (value & (1 << 3)) != 0, (value & (1 << 4)) != 0, (value & (1 << 5)) != 0, (value & (1 << 6)) != 0, (value & (1 << 7)) != 0);
     }
 
     public bool[] GetBools()
@@ -255,6 +278,86 @@ internal class RestoreGameState
         }
     }
 
+    #region Derived New Object Serialization
+    public T? GetDerivedReferenceOrDefault<T>(params Func<Game, RestoreGameState, T>[] constructors)
+    {
+        if (GameStateBag is NullValueGameStateBag)
+        {
+            return default;
+        }
+
+        return GetDerivedReference(constructors);
+    }
+
+    private T GetDerivedReference<T>(params Func<Game, RestoreGameState, T>[] constructors)
+    {
+        // Check to see if the singleton game state bag is a reference.  This will occur when the singleton was already serialized from a previous singleton.
+        if (GameStateBag is ReferenceGameStateBag referenceGameStateBag)
+        {
+            // This is a reference game state bag.  Retrieve the object id and check to see if the object is already being tracked.
+            int objectId = referenceGameStateBag.ObjectId;
+            if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
+            {
+                // We need to track the object.  Since this is a reference game state bag, we do not have the object game state bag yet and will pass null.
+                T typedReference = (T)singleton;
+                return typedReference;
+            }
+            throw new Exception("Reference ID not found in ObjectIdToReferenceDictionary.");
+        }
+        else if (GameStateBag is DerivedObjectGameStateBag derivedObjectGameStateBag)
+        {
+            // This is a derived object game state bag.  The derived object might already exist because the object was serialized early.
+            int objectId = derivedObjectGameStateBag.ObjectId;
+            if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
+            {
+                T typedReference = (T)singleton;
+                TrackGameStateBag(objectId, derivedObjectGameStateBag);
+                return typedReference;
+            }
+
+            RestoreGameState restoreGameState = New(derivedObjectGameStateBag);
+
+            // We use the derived id to select the appropriate constructor.
+            if (derivedObjectGameStateBag.DerivedId < 0 || derivedObjectGameStateBag.DerivedId >= constructors.Length)
+            {
+                throw new Exception($"Derived ID#{derivedObjectGameStateBag.DerivedId} does not have a constructor.");
+            }
+
+            Func<Game, RestoreGameState, T> constructor;
+            if (derivedObjectGameStateBag.DerivedId is null)
+            {
+#if DEBUG
+                if (constructors.Length != 1)
+                {
+                    throw new Exception("Invalid number of constructors for null derived id received.");
+                }
+#endif
+                constructor = constructors[0];
+            }
+            else
+            {
+                constructor = constructors[derivedObjectGameStateBag.DerivedId.Value];
+            }
+            T t = constructor(Game, restoreGameState);
+            TrackObject(objectId, t);
+            return t;
+        }
+        throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
+    }
+
+    public T[] GetDerivedReferences<T>(Func<Game, RestoreGameState, T> constructor)
+    {
+        List<T> list = new List<T>();
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
+        {
+            RestoreGameState restoreGameState = New(gameStateBag);
+            T t = restoreGameState.GetDerivedReference<T>(constructor);
+            list.Add(t);
+        }
+        return list.ToArray();
+    }
+    #endregion
+
     public T? GetReferenceOrDefault<T>()
     {
         if (GameStateBag is NullValueGameStateBag)
@@ -272,6 +375,7 @@ internal class RestoreGameState
         }
         return GetReferences<T>(); // TODO: This smells
     }
+
 
     public T[] GetReferences<T>()
     {
