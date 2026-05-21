@@ -16,26 +16,20 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(FixedArtifact), saveGameState.CreateGameStateBag(FixedArtifact)),
-            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet)),
-            (nameof(_factory), saveGameState.CreateGameStateBag(_factory)),
+            (nameof(IdentSense), saveGameState.CreateGameStateBag(IdentSense, IdentFixed, IdentEmpty, IdentityIsKnown, IdentityIsStoreBought, IdentMental, WasNoticed, ContainerIsOpen)),
+
+            (nameof(FixedArtifact), saveGameState.CreateGameStateBag(FixedArtifact, typeof(FixedArtifact))),
+            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet, typeof(EffectiveAttributeSet))),
+            (nameof(_factory), saveGameState.CreateGameStateBag(_factory, typeof(ItemFactory))),
             (nameof(NutritionalValue), saveGameState.CreateGameStateBag(NutritionalValue)),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
-            (nameof(IdentSense), saveGameState.CreateGameStateBag(IdentSense)),
-            (nameof(IdentFixed), saveGameState.CreateGameStateBag(IdentFixed)),
-            (nameof(IdentEmpty), saveGameState.CreateGameStateBag(IdentEmpty)),
-            (nameof(IdentityIsKnown), saveGameState.CreateGameStateBag(IdentityIsKnown)),
-            (nameof(IdentityIsStoreBought), saveGameState.CreateGameStateBag(IdentityIsStoreBought)),
-            (nameof(IdentMental), saveGameState.CreateGameStateBag(IdentMental)),
             (nameof(StackCount), saveGameState.CreateGameStateBag(StackCount)),
             (nameof(Discount), saveGameState.CreateGameStateBag(Discount)),
             (nameof(HoldingMonsterIndex), saveGameState.CreateGameStateBag(HoldingMonsterIndex)),
             (nameof(Inscription), saveGameState.CreateGameStateBag(Inscription)),
-            (nameof(WasNoticed), saveGameState.CreateGameStateBag(WasNoticed)),
             (nameof(ActivationRechargeTimeRemaining), saveGameState.CreateGameStateBag(ActivationRechargeTimeRemaining)),
-            (nameof(ContainerTraps), saveGameState.CreateGameStateBag(ContainerTraps)),
+            (nameof(ContainerTraps), saveGameState.CreateGameStateBag(ContainerTraps, typeof(ChestTrap))),
             (nameof(LevelOfObjectsInContainer), saveGameState.CreateGameStateBag(LevelOfObjectsInContainer)),
-            (nameof(ContainerIsOpen), saveGameState.CreateGameStateBag(ContainerIsOpen)),
             (nameof(StaffChargesRemaining), saveGameState.CreateGameStateBag(StaffChargesRemaining)),
             (nameof(WandChargesRemaining), saveGameState.CreateGameStateBag(WandChargesRemaining)),
             (nameof(RodRechargeTimeRemaining), saveGameState.CreateGameStateBag(RodRechargeTimeRemaining)),
@@ -50,26 +44,20 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     public Item(Game game, RestoreGameState restoreGameState)
     {
         Game = game;
-        FixedArtifact = restoreGameState.GetByKey(nameof(FixedArtifact)).GetReferenceOrDefault<FixedArtifact>();
-        EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetReference<EffectiveAttributeSet>();
-        _factory = restoreGameState.GetByKey(nameof(_factory)).GetReference<ItemFactory>();
+        (IdentSense, IdentFixed, IdentEmpty, IdentityIsKnown, IdentityIsStoreBought, IdentMental, WasNoticed, ContainerIsOpen) = restoreGameState.GetByKey(nameof(IdentSense)).Get8Bools();
+
+        FixedArtifact = restoreGameState.GetByKey(nameof(FixedArtifact)).GetDerivedReferenceOrDefault<FixedArtifact>();
+        EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<EffectiveAttributeSet>((RestoreGameState restoreGameState) => new EffectiveAttributeSet(game, restoreGameState));
+        _factory = restoreGameState.GetByKey(nameof(_factory)).GetDerivedReference<ItemFactory>();
         NutritionalValue = restoreGameState.GetByKey(nameof(NutritionalValue)).GetInt();
         Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
-        IdentSense = restoreGameState.GetByKey(nameof(IdentSense)).GetBool();
-        IdentFixed = restoreGameState.GetByKey(nameof(IdentFixed)).GetBool();
-        IdentEmpty = restoreGameState.GetByKey(nameof(IdentEmpty)).GetBool();
-        IdentityIsKnown = restoreGameState.GetByKey(nameof(IdentityIsKnown)).GetBool();
-        IdentityIsStoreBought = restoreGameState.GetByKey(nameof(IdentityIsStoreBought)).GetBool();
-        IdentMental = restoreGameState.GetByKey(nameof(IdentMental)).GetBool();
         StackCount = restoreGameState.GetByKey(nameof(StackCount)).GetInt();
         Discount = restoreGameState.GetByKey(nameof(Discount)).GetInt();
         HoldingMonsterIndex = restoreGameState.GetByKey(nameof(HoldingMonsterIndex)).GetInt();
         Inscription = restoreGameState.GetByKey(nameof(Inscription)).GetString();
-        WasNoticed = restoreGameState.GetByKey(nameof(WasNoticed)).GetBool();
         ActivationRechargeTimeRemaining = restoreGameState.GetByKey(nameof(ActivationRechargeTimeRemaining)).GetInt();
-        ContainerTraps = restoreGameState.GetByKey(nameof(ContainerTraps)).GetReferencesOrNull<ChestTrap>();
+        ContainerTraps = restoreGameState.GetByKey(nameof(ContainerTraps)).GetDerivedReferencesOrDefault<ChestTrap>();
         LevelOfObjectsInContainer = restoreGameState.GetByKey(nameof(LevelOfObjectsInContainer)).GetInt();
-        ContainerIsOpen = restoreGameState.GetByKey(nameof(ContainerIsOpen)).GetBool();
         StaffChargesRemaining = restoreGameState.GetByKey(nameof(StaffChargesRemaining)).GetInt();
         WandChargesRemaining = restoreGameState.GetByKey(nameof(WandChargesRemaining)).GetInt();
         RodRechargeTimeRemaining = restoreGameState.GetByKey(nameof(RodRechargeTimeRemaining)).GetInt();

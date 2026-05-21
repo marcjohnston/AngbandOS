@@ -390,6 +390,16 @@ internal class RestoreGameState
         return list.ToArray();
     }
 
+    public T[]? GetDerivedReferencesOrDefault<T>(params Func<RestoreGameState, T>[] constructors)
+    {
+        if (GameStateBag is NullValueGameStateBag)
+        {
+            return default;
+        }
+
+        return GetDerivedReferences(constructors);
+    }
+
     public T[][] GetArrayOfDerivedReferences<T>(params Func<RestoreGameState, T>[] constructors)
     {
         List<T[]> listOfReferences = new List<T[]>();
@@ -416,7 +426,7 @@ internal class RestoreGameState
         return GetReference<T>();
     }
 
-    public T[]? GetReferencesOrNull<T>()
+    public T[]? GetReferencesOrDefault<T>()
     {
         if (GameStateBag is NullValueGameStateBag)
         {
