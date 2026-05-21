@@ -98,7 +98,7 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "Infravision :", 38, 31);
         Game.Screen.Print(ColorEnum.Purple, "Searching   :", 39, 31);
         Game.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
-        Game.DisplayAPlusB(67, 36, Game.CharacterClass.EffectiveAttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + race.EffectiveAttributeSet.GetInt(nameof(DisarmTrapsAttribute)), Game.CharacterClass.DisarmBonusPerLevel);
+        Game.DisplayAPlusB(67, 36, Game.CharacterClass.ReadOnlyAttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + race.EffectiveAttributeSet.GetInt(nameof(DisarmTrapsAttribute)), Game.CharacterClass.DisarmBonusPerLevel);
         Game.DisplayAPlusB(67, 37, Game.CharacterClass.UseDevice + race.UseDevice, Game.CharacterClass.DeviceBonusPerLevel);
         Game.DisplayAPlusB(67, 38, Game.CharacterClass.SavingThrow + race.SavingThrow, Game.CharacterClass.SaveBonusPerLevel);
         Game.DisplayAPlusB(67, 39, (Game.CharacterClass.Stealth * 4) + (race.Stealth * 4), Game.CharacterClass.StealthBonusPerLevel * 4);

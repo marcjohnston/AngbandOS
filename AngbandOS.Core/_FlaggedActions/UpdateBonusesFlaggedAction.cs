@@ -28,7 +28,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         effectiveAttributeSet.MergeAttributeSet(Game.Race.EffectiveAttributeSet);
 
         // Apply the character class enhancements.
-        effectiveAttributeSet.MergeAttributeSet(Game.CharacterClass.EffectiveAttributeSet);
+        effectiveAttributeSet.MergeAttributeSet(Game.CharacterClass.ReadOnlyAttributeSet);
 
         // Apply all of the mutations that the player has.
 
@@ -127,7 +127,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasFireImmunity = false;
         Game.HasColdImmunity = false;
         Game.InfravisionRange = Game.Race.Infravision; // done
-        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + Game.CharacterClass.EffectiveAttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
+        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + Game.CharacterClass.ReadOnlyAttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
         Game.SkillUseDevice = Game.Race.UseDevice + Game.CharacterClass.UseDevice; // done
         Game.SkillSavingThrow = Game.Race.SavingThrow + Game.CharacterClass.SavingThrow; // done
         Game.SkillStealth = Game.Race.Stealth + Game.CharacterClass.Stealth; // done .. need to copy

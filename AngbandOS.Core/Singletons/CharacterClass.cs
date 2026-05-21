@@ -19,7 +19,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet))
+            (nameof(ReadOnlyAttributeSet), saveGameState.CreateGameStateBag(ReadOnlyAttributeSet))
         );
     }
     public virtual Bonuses? GetBonusesForMeleeWeapon(Item? oPtr) => null;
@@ -397,7 +397,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public ItemEnhancement Enhancement { get; private set; }
     public void Refresh()
     {
-        EffectiveAttributeSet = Enhancement.GenerateAttributeSet();
+        ReadOnlyAttributeSet = Enhancement.GenerateAttributeSet();
     }
     public void Bind(RestoreGameState? restoreGameState)
     {
@@ -410,11 +410,11 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetReference<ReadOnlyAttributeSet>();
+            ReadOnlyAttributeSet = restoreGameState.GetByKey(nameof(ReadOnlyAttributeSet)).GetReference<ReadOnlyAttributeSet>();
         }
     }
 
-    public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
+    public ReadOnlyAttributeSet ReadOnlyAttributeSet { get; private set; }
 
     /// <summary>
     /// Returns true, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.
