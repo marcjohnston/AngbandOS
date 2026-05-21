@@ -82,7 +82,7 @@ internal class SaveGameState
         return new ByteValueGameStateBag(value);
     }
 
-    #region Derived Object Creation
+    #region Object Creation with Polymorphic Type Support
     private byte? DetermineDerivedId(Type actualType, params Type[] derivedTypes)
     {
 #if DEBUG
