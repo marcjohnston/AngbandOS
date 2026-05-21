@@ -113,7 +113,7 @@ internal class Monster : IItemContainer, IGameSerialize
             (nameof(DistanceFromPlayer), saveGameState.CreateGameStateBag(DistanceFromPlayer)),
             (nameof(Energy), saveGameState.CreateGameStateBag(Energy)),
             (nameof(_fearLevel), saveGameState.CreateGameStateBag(_fearLevel)),
-            (nameof(Items), saveGameState.CreateGameStateBag(Items)),
+            (nameof(Items), saveGameState.CreateGameStateBag(Items, typeof(Item))),
             (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
             (nameof(_health), saveGameState.CreateGameStateBag(_health)),
             (nameof(_isVisible), saveGameState.CreateGameStateBag(_isVisible)),
@@ -288,7 +288,7 @@ internal class Monster : IItemContainer, IGameSerialize
         DistanceFromPlayer = restoreGameState.GetByKey(nameof(DistanceFromPlayer)).GetInt();
         Energy = restoreGameState.GetByKey(nameof(Energy)).GetInt();
         _fearLevel = restoreGameState.GetByKey(nameof(_fearLevel)).GetInt();
-        Items.AddRange(restoreGameState.GetByKey(nameof(Items)).GetReferences<Item>());
+        Items.AddRange(restoreGameState.GetByKey(nameof(Items)).GetDerivedReferences<Item>((RestoreGameState restoreGameState) => new Item(game, restoreGameState)));
         Generation = restoreGameState.GetByKey(nameof(Generation)).GetInt();
         _health = restoreGameState.GetByKey(nameof(_health)).GetInt();
         _isVisible = restoreGameState.GetByKey(nameof(_isVisible)).GetBool();

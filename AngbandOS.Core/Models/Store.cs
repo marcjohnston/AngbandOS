@@ -22,9 +22,9 @@ internal class Store : IGameSerialize
             (nameof(_x), saveGameState.CreateGameStateBag(_x)),
             (nameof(_y), saveGameState.CreateGameStateBag(_y)),
             (nameof(_leaveStore), saveGameState.CreateGameStateBag(_leaveStore)),
-            (nameof(StoreInventoryList), saveGameState.CreateGameStateBag(StoreInventoryList)),
+            (nameof(StoreInventoryList), saveGameState.CreateGameStateBag(StoreInventoryList, typeof(Item))),
             (nameof(StoreTop), saveGameState.CreateGameStateBag(StoreTop)),
-            (nameof(Owner), saveGameState.CreateGameStateBag(Owner))
+            (nameof(Owner), saveGameState.CreateGameStateBag(Owner, typeof(Shopkeeper)))
        );
     }
 
@@ -53,9 +53,9 @@ internal class Store : IGameSerialize
         _x = restoreGameState.GetByKey(nameof(_x)).GetInt();
         _y = restoreGameState.GetByKey(nameof(_y)).GetInt();
         _leaveStore = restoreGameState.GetByKey(nameof(_leaveStore)).GetBool();
-        StoreInventoryList = restoreGameState.GetByKey(nameof(StoreInventoryList)).GetReferences<Item>().ToList();
+        StoreInventoryList = restoreGameState.GetByKey(nameof(StoreInventoryList)).GetDerivedReferences<Item>((RestoreGameState restoreGameState) => new Item(game, restoreGameState)).ToList();
         StoreTop = restoreGameState.GetByKey(nameof(StoreTop)).GetInt();
-        Owner = restoreGameState.GetByKey(nameof(Owner)).GetReference<Shopkeeper>();
+        Owner = restoreGameState.GetByKey(nameof(Owner)).GetDerivedReference<Shopkeeper>();
     }
     /// <summary>
     /// The grid x coordinate of the store on the town level.

@@ -19,7 +19,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
             (nameof(IdentSense), saveGameState.CreateGameStateBag(IdentSense, IdentFixed, IdentEmpty, IdentityIsKnown, IdentityIsStoreBought, IdentMental, WasNoticed, ContainerIsOpen)),
 
             (nameof(FixedArtifact), saveGameState.CreateGameStateBag(FixedArtifact, typeof(FixedArtifact))),
-            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet, typeof(EffectiveAttributeSet))),
+            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag((IGameSerialize)EffectiveAttributeSet, typeof(EffectiveAttributeSet))), // We have to apply the cast for ambiguity. 
             (nameof(_factory), saveGameState.CreateGameStateBag(_factory, typeof(ItemFactory))),
             (nameof(NutritionalValue), saveGameState.CreateGameStateBag(NutritionalValue)),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),

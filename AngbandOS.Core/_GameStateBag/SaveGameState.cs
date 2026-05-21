@@ -142,7 +142,7 @@ internal class SaveGameState
         return new DerivedObjectGameStateBag(objectId, derivedId, gameStateBag);
     }
 
-    public GameStateBag CreateGameStateBag(IGameSerialize?[]? gameSerializable, Type derivedType, params Type[] derivedTypes)
+    public GameStateBag CreateGameStateBag(IEnumerable<IGameSerialize?>? gameSerializable, Type derivedType, params Type[] derivedTypes)
     {
         if (gameSerializable is null)
         {
