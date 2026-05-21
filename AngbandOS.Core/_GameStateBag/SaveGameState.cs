@@ -103,6 +103,14 @@ internal class SaveGameState
         byte id = 0;
         foreach (Type derivedType in derivedTypes)
         {
+#if DEBUG
+            // Ensure the type sent on the parameter list is valid.
+            if (!IsCompatible(actualType, derivedType))
+            {
+                throw new InvalidOperationException($"{actualType.FullName} is not assignable to {derivedType.FullName}");
+            }
+#endif
+
             if (actualType == derivedType)
             {
                 return id;
@@ -111,6 +119,8 @@ internal class SaveGameState
         }
         throw new Exception($"{actualType.Name} does not match any derived type");
     }
+
+    private static bool IsCompatible(Type actualType, Type derivedType) => actualType.IsAssignableFrom(derivedType) || (actualType.BaseType != null && IsCompatible(actualType.BaseType, derivedType));
 
     public GameStateBag CreateGameStateBag(IGameSerialize? gameSerializable, Type derivedType, params Type[] derivedTypes)
     {

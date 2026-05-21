@@ -14,7 +14,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(_effectiveAttributeValues), saveGameState.CreateGameStateBag(_effectiveAttributeValues))
+            (nameof(_effectiveAttributeValues), saveGameState.CreateGameStateBag(_effectiveAttributeValues, typeof(ActivationEffectiveAttributeValue), typeof(ArtifactBiasEffectiveAttributeValue), typeof(BoolSetEffectiveAttributeValue), typeof(FriendlyNameEffectiveAttributeValue), typeof(OrEffectiveAttributeValue), typeof(SumEffectiveAttributeValue)))
         );
     }
 
@@ -46,7 +46,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         Game = game;
         Attribute[] cachedAttributes = LoadCachedAttributes();
-        _effectiveAttributeValues = restoreGameState.GetByKey(nameof(_effectiveAttributeValues)).GetReferences<EffectiveAttributeValue>();
+        _effectiveAttributeValues = restoreGameState.GetByKey(nameof(_effectiveAttributeValues)).GetDerivedReferences<EffectiveAttributeValue>(
+            (RestoreGameState restoreGameState) => new ActivationEffectiveAttributeValue(Game, restoreGameState),
+            (RestoreGameState restoreGameState) => new ArtifactBiasEffectiveAttributeValue(Game, restoreGameState),
+            (RestoreGameState restoreGameState) => new BoolSetEffectiveAttributeValue(Game, restoreGameState),
+            (RestoreGameState restoreGameState) => new FriendlyNameEffectiveAttributeValue(Game, restoreGameState),
+            (RestoreGameState restoreGameState) => new OrEffectiveAttributeValue(Game, restoreGameState),
+            (RestoreGameState restoreGameState) => new SumEffectiveAttributeValue(Game, restoreGameState));
     }
 
     public void RemoveKeyedEnhancements(string key)

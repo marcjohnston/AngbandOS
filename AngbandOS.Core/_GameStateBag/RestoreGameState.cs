@@ -345,19 +345,19 @@ internal class RestoreGameState
         throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
     }
 
-    public T[] GetDerivedReferences<T>(Func<RestoreGameState, T> constructor)
+    public T[] GetDerivedReferences<T>(params Func<RestoreGameState, T>[] constructors)
     {
         List<T> list = new List<T>();
         foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
         {
             RestoreGameState restoreGameState = New(gameStateBag);
-            T t = restoreGameState.GetDerivedReference<T>(constructor);
+            T t = restoreGameState.GetDerivedReference<T>(constructors);
             list.Add(t);
         }
         return list.ToArray();
     }
 
-    public T[][] GetArrayOfDerivedReferences<T>(Func<RestoreGameState, T> constructor)
+    public T[][] GetArrayOfDerivedReferences<T>(params Func<RestoreGameState, T>[] constructors)
     {
         List<T[]> listOfReferences = new List<T[]>();
         foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
@@ -367,7 +367,7 @@ internal class RestoreGameState
                 throw new Exception($"Jagged array of {typeof(T).Name} not a list.");
             }
             RestoreGameState referencesRestoreGameState = New(gameStateBag);
-            T[] references = referencesRestoreGameState.GetDerivedReferences<T>(constructor);
+            T[] references = referencesRestoreGameState.GetDerivedReferences<T>(constructors);
             listOfReferences.Add(references);
         }
         return listOfReferences.ToArray();
