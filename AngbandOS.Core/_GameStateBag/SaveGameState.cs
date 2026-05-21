@@ -141,6 +141,16 @@ internal class SaveGameState
         }
         return new ListGameStateBag(gameStateBags.ToArray());
     }
+
+    public GameStateBag CreateGameStateBag(IGameSerialize[][] gameSerializable, Type derivedType, params Type[] derivedTypes)
+    {
+        var gameStateBags = new List<GameStateBag>();
+        foreach (IGameSerialize[] item in gameSerializable)
+        {
+            gameStateBags.Add(CreateGameStateBag(item, derivedType, derivedTypes));
+        }
+        return new ListGameStateBag(gameStateBags.ToArray());
+    }
     #endregion
 
     public GameStateBag CreateGameStateBag(object? value)

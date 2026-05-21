@@ -356,6 +356,22 @@ internal class RestoreGameState
         }
         return list.ToArray();
     }
+
+    public T[][] GetArrayOfDerivedReferences<T>(Func<RestoreGameState, T> constructor)
+    {
+        List<T[]> listOfReferences = new List<T[]>();
+        foreach (GameStateBag gameStateBag in ((ListGameStateBag)GameStateBag).Values)
+        {
+            if (gameStateBag is not ListGameStateBag listOfStringsBag)
+            {
+                throw new Exception($"Jagged array of {typeof(T).Name} not a list.");
+            }
+            RestoreGameState referencesRestoreGameState = New(gameStateBag);
+            T[] references = referencesRestoreGameState.GetDerivedReferences<T>(constructor);
+            listOfReferences.Add(references);
+        }
+        return listOfReferences.ToArray();
+    }
     #endregion
 
     public T? GetReferenceOrDefault<T>()
