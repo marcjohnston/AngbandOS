@@ -87,68 +87,23 @@ internal partial class Game : IGameSerialize
         return new DictionaryGameStateBag(
             (nameof(SingletonRepository), saveGameState.CreateGameStateBag(SingletonRepository)),
 
-            (nameof(IsBirthday), saveGameState.CreateGameStateBag(IsBirthday)),
-            (nameof(IsDawn), saveGameState.CreateGameStateBag(IsDawn)),
-            (nameof(IsDusk), saveGameState.CreateGameStateBag(IsDusk)),
-            (nameof(IsFeelTime), saveGameState.CreateGameStateBag(IsFeelTime)),
-            (nameof(IsHalloween), saveGameState.CreateGameStateBag(IsHalloween)),
-            (nameof(IsMidnight), saveGameState.CreateGameStateBag(IsMidnight)),
-            (nameof(IsNewYear), saveGameState.CreateGameStateBag(IsNewYear)),
-            (nameof(HasAcidImmunity), saveGameState.CreateGameStateBag(HasAcidImmunity)),
-            (nameof(HasAcidResistance), saveGameState.CreateGameStateBag(HasAcidResistance)),
-            (nameof(HasAggravation), saveGameState.CreateGameStateBag(HasAggravation)),
-            (nameof(HasAntiMagic), saveGameState.CreateGameStateBag(HasAntiMagic)),
-            (nameof(HasAntiTeleport), saveGameState.CreateGameStateBag(HasAntiTeleport)),
-            (nameof(HasAntiTheft), saveGameState.CreateGameStateBag(HasAntiTheft)),
-            (nameof(HasBlessedBlade), saveGameState.CreateGameStateBag(HasBlessedBlade)),
-            (nameof(HasBlindnessResistance), saveGameState.CreateGameStateBag(HasBlindnessResistance)),
-            (nameof(HasChaosResistance), saveGameState.CreateGameStateBag(HasChaosResistance)),
-            (nameof(HasColdImmunity), saveGameState.CreateGameStateBag(HasColdImmunity)),
-            (nameof(HasColdResistance), saveGameState.CreateGameStateBag(HasColdResistance)),
-            (nameof(HasConfusingTouch), saveGameState.CreateGameStateBag(HasConfusingTouch)),
-            (nameof(HasConfusionResistance), saveGameState.CreateGameStateBag(HasConfusionResistance)),
-            (nameof(HasDarkResistance), saveGameState.CreateGameStateBag(HasDarkResistance)),
-            (nameof(HasDisenchantResistance), saveGameState.CreateGameStateBag(HasDisenchantResistance)),
-            (nameof(HasElementalVulnerability), saveGameState.CreateGameStateBag(HasElementalVulnerability)),
-            (nameof(HasExperienceDrain), saveGameState.CreateGameStateBag(HasExperienceDrain)),
-            (nameof(HasExtraMight), saveGameState.CreateGameStateBag(HasExtraMight)),
-            (nameof(HasFearResistance), saveGameState.CreateGameStateBag(HasFearResistance)),
-            (nameof(HasFeatherFall), saveGameState.CreateGameStateBag(HasFeatherFall)),
-            (nameof(HasFireImmunity), saveGameState.CreateGameStateBag(HasFireImmunity)),
-            (nameof(HasFireResistance), saveGameState.CreateGameStateBag(HasFireResistance)),
-            (nameof(HasFireSheath), saveGameState.CreateGameStateBag(HasFireSheath)),
-            (nameof(HasFreeAction), saveGameState.CreateGameStateBag(HasFreeAction)),
+            ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasAcidImmunity)),
+            ("bools2", saveGameState.CreateGameStateBag(HasAcidResistance, HasAggravation, HasAntiMagic, HasAntiTeleport, HasAntiTheft, HasBlessedBlade, HasBlindnessResistance, HasChaosResistance)),
+            ("bools3", saveGameState.CreateGameStateBag(HasColdImmunity, HasColdResistance, HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain)),
+            ("bools4", saveGameState.CreateGameStateBag(HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife)),
+            ("bools5", saveGameState.CreateGameStateBag(HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon)),
+            ("bools6", saveGameState.CreateGameStateBag(HasRandomTeleport, HasReflection, HasRegeneration, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion)),
+            ("bools7", saveGameState.CreateGameStateBag(HasSoundResistance, HasSustainCharisma, HasSustainConstitution, HasSustainDexterity, HasSustainIntelligence, HasSustainStrength, HasSustainWisdom, HasTelepathy)),
+            ("bools8", saveGameState.CreateGameStateBag(HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance)),
+            ("bools9", saveGameState.CreateGameStateBag(Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, UseFixed, _findBreakLeft)),
+            ("bools10", saveGameState.CreateGameStateBag(_findBreakRight, _findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag)),
+            ("bools11", saveGameState.CreateGameStateBag(Playing, ViewingEquipment, ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger)),
+            ("bools12", saveGameState.CreateGameStateBag(RepairMonsters, ShimmerMonsters)),
+
             (nameof(GlowInTheDarkRadius), saveGameState.CreateGameStateBag(GlowInTheDarkRadius)),
-            (nameof(HasHoldLife), saveGameState.CreateGameStateBag(HasHoldLife)),
-            (nameof(HasLightningImmunity), saveGameState.CreateGameStateBag(HasLightningImmunity)),
-            (nameof(HasLightningResistance), saveGameState.CreateGameStateBag(HasLightningResistance)),
-            (nameof(HasElectricitySheath), saveGameState.CreateGameStateBag(HasElectricitySheath)),
-            (nameof(HasLightResistance), saveGameState.CreateGameStateBag(HasLightResistance)),
-            (nameof(HasNetherResistance), saveGameState.CreateGameStateBag(HasNetherResistance)),
-            (nameof(HasNexusResistance), saveGameState.CreateGameStateBag(HasNexusResistance)),
-            (nameof(HasPoisonResistance), saveGameState.CreateGameStateBag(HasPoisonResistance)),
-            (nameof(HasQuakeWeapon), saveGameState.CreateGameStateBag(HasQuakeWeapon)),
-            (nameof(HasRandomTeleport), saveGameState.CreateGameStateBag(HasRandomTeleport)),
-            (nameof(HasReflection), saveGameState.CreateGameStateBag(HasReflection)),
-            (nameof(HasRegeneration), saveGameState.CreateGameStateBag(HasRegeneration)),
-            (nameof(HasRestrictingArmor), saveGameState.CreateGameStateBag(HasRestrictingArmor)),
-            (nameof(HasRestrictingGloves), saveGameState.CreateGameStateBag(HasRestrictingGloves)),
-            (nameof(HasSeeInvisibility), saveGameState.CreateGameStateBag(HasSeeInvisibility)),
-            (nameof(HasShardResistance), saveGameState.CreateGameStateBag(HasShardResistance)),
-            (nameof(HasSlowDigestion), saveGameState.CreateGameStateBag(HasSlowDigestion)),
-            (nameof(HasSoundResistance), saveGameState.CreateGameStateBag(HasSoundResistance)),
-            (nameof(HasSustainCharisma), saveGameState.CreateGameStateBag(HasSustainCharisma)),
-            (nameof(HasSustainConstitution), saveGameState.CreateGameStateBag(HasSustainConstitution)),
-            (nameof(HasSustainDexterity), saveGameState.CreateGameStateBag(HasSustainDexterity)),
-            (nameof(HasSustainIntelligence), saveGameState.CreateGameStateBag(HasSustainIntelligence)),
-            (nameof(HasSustainStrength), saveGameState.CreateGameStateBag(HasSustainStrength)),
-            (nameof(HasSustainWisdom), saveGameState.CreateGameStateBag(HasSustainWisdom)),
-            (nameof(HasTelepathy), saveGameState.CreateGameStateBag(HasTelepathy)),
-            (nameof(HasTimeResistance), saveGameState.CreateGameStateBag(HasTimeResistance)),
             (nameof(Height), saveGameState.CreateGameStateBag(Height)),
             (nameof(HitDie), saveGameState.CreateGameStateBag(HitDie)),
             (nameof(InfravisionRange), saveGameState.CreateGameStateBag(InfravisionRange)),
-            (nameof(IsSearching), saveGameState.CreateGameStateBag(IsSearching)),
             (nameof(SkillDigging), saveGameState.CreateGameStateBag(SkillDigging)),
             (nameof(ComputedDisarmTraps), saveGameState.CreateGameStateBag(ComputedDisarmTraps)),
             (nameof(SkillMelee), saveGameState.CreateGameStateBag(SkillMelee)),
@@ -163,42 +118,25 @@ internal partial class Game : IGameSerialize
             (nameof(CharismaBonus), saveGameState.CreateGameStateBag(CharismaBonus)),
             (nameof(ConstitutionBonus), saveGameState.CreateGameStateBag(ConstitutionBonus)),
             (nameof(DexterityBonus), saveGameState.CreateGameStateBag(DexterityBonus)),
-            (nameof(ElecHit), saveGameState.CreateGameStateBag(ElecHit)),
-            (nameof(Esp), saveGameState.CreateGameStateBag(Esp)),
-            (nameof(FeatherFall), saveGameState.CreateGameStateBag(FeatherFall)),
-            (nameof(MutationFireHit), saveGameState.CreateGameStateBag(MutationFireHit)),
-            (nameof(MutationFreeAction), saveGameState.CreateGameStateBag(MutationFreeAction)),
             (nameof(MutationInfravisionBonus), saveGameState.CreateGameStateBag(MutationInfravisionBonus)),
             (nameof(IntelligenceBonus), saveGameState.CreateGameStateBag(IntelligenceBonus)),
-            (nameof(MagicResistance), saveGameState.CreateGameStateBag(MagicResistance)),
-            (nameof(Regen), saveGameState.CreateGameStateBag(Regen)),
-            (nameof(ResFear), saveGameState.CreateGameStateBag(ResFear)),
-            (nameof(ResTime), saveGameState.CreateGameStateBag(ResTime)),
             (nameof(SearchBonus), saveGameState.CreateGameStateBag(SearchBonus)),
             (nameof(SpeedBonus), saveGameState.CreateGameStateBag(SpeedBonus)),
             (nameof(StealthBonus), saveGameState.CreateGameStateBag(StealthBonus)),
             (nameof(StrengthBonus), saveGameState.CreateGameStateBag(StrengthBonus)),
-            (nameof(SuppressRegen), saveGameState.CreateGameStateBag(SuppressRegen)),
-            (nameof(SustainAll), saveGameState.CreateGameStateBag(SustainAll)),
-            (nameof(Vulnerable), saveGameState.CreateGameStateBag(Vulnerable)),
             (nameof(WisdomBonus), saveGameState.CreateGameStateBag(WisdomBonus)),
             (nameof(replayPreviousKeystrokeDateTime), saveGameState.CreateGameStateBag(replayPreviousKeystrokeDateTime)),
             (nameof(MainSequenceRandomSeed), saveGameState.CreateGameStateBag(MainSequenceRandomSeed)),
             (nameof(CurrentSequenceRandomSeed), saveGameState.CreateGameStateBag(CurrentSequenceRandomSeed)),
             (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet, typeof(ReadOnlyAttributeSet))),
-            (nameof(UseFixed), saveGameState.CreateGameStateBag(UseFixed)),
             (nameof(FixedSeed), saveGameState.CreateGameStateBag(FixedSeed)),
             (nameof(CurrentRunDirection), saveGameState.CreateGameStateBag(CurrentRunDirection)),
-            (nameof(_findBreakleft), saveGameState.CreateGameStateBag(_findBreakleft)),
-            (nameof(_findBreakright), saveGameState.CreateGameStateBag(_findBreakright)),
-            (nameof(_findOpenarea), saveGameState.CreateGameStateBag(_findOpenarea)),
             (nameof(_previousRunDirection), saveGameState.CreateGameStateBag(_previousRunDirection)),
             (nameof(FollowDistance), saveGameState.CreateGameStateBag(FollowDistance)),
             (nameof(DecayRate), saveGameState.CreateGameStateBag(DecayRate)),
             (nameof(God), saveGameState.CreateGameStateBag(God)),
             (nameof(NaturalAttacks), saveGameState.CreateGameStateBag(NaturalAttacks)),
             (nameof(GenomeArmorClassBonus), saveGameState.CreateGameStateBag(GenomeArmorClassBonus)),
-            (nameof(ChaosGift), saveGameState.CreateGameStateBag(ChaosGift)),
             (nameof(MutationsNotPossessed), saveGameState.CreateGameStateBag(MutationsNotPossessed)),
             (nameof(MutationsPossessed), saveGameState.CreateGameStateBag(MutationsPossessed)),
             (nameof(TreasureFeeling), saveGameState.CreateGameStateBag(TreasureFeeling)),
@@ -208,7 +146,6 @@ internal partial class Game : IGameSerialize
             (nameof(_dusk), saveGameState.CreateGameStateBag(_dusk)),
             (nameof(_gameStartDateTime), saveGameState.CreateGameStateBag(_gameStartDateTime)),
             (nameof(_levelEntryTurn), saveGameState.CreateGameStateBag(_levelEntryTurn)),
-            (nameof(IsDead), saveGameState.CreateGameStateBag(IsDead)),
             (nameof(LastInputReceived), saveGameState.CreateGameStateBag(LastInputReceived)),
             (nameof(CommandRepeat), saveGameState.CreateGameStateBag(CommandRepeat)),
             (nameof(Quests), saveGameState.CreateGameStateBag(Quests)),
@@ -218,26 +155,18 @@ internal partial class Game : IGameSerialize
             (nameof(AllocRaceSize), saveGameState.CreateGameStateBag(AllocRaceSize)),
             (nameof(AllocRaceTable), saveGameState.CreateGameStateBag(AllocRaceTable, typeof(AllocationEntry))),
             (nameof(CameFrom), saveGameState.CreateGameStateBag(CameFrom)),
-            (nameof(CharacterXtra), saveGameState.CreateGameStateBag(CharacterXtra)),
-            (nameof(CreateDownStair), saveGameState.CreateGameStateBag(CreateDownStair)),
-            (nameof(CreateUpStair), saveGameState.CreateGameStateBag(CreateUpStair)),
             (nameof(CurDungeon), saveGameState.CreateGameStateBag(CurDungeon)),
             (nameof(CurrentDepth), saveGameState.CreateGameStateBag(CurrentDepth)),
             (nameof(CurTown), saveGameState.CreateGameStateBag(CurTown)),
             (nameof(DiedFrom), saveGameState.CreateGameStateBag(DiedFrom)),
             (nameof(DungeonDifficulty), saveGameState.CreateGameStateBag(DungeonDifficulty)),
             (nameof(EnergyUse), saveGameState.CreateGameStateBag(EnergyUse)),
-            (nameof(HackMind), saveGameState.CreateGameStateBag(HackMind)),
-            (nameof(NewLevelFlag), saveGameState.CreateGameStateBag(NewLevelFlag)),
-            (nameof(Playing), saveGameState.CreateGameStateBag(Playing)),
             (nameof(RecallDungeon), saveGameState.CreateGameStateBag(RecallDungeon)),
             (nameof(Resting), saveGameState.CreateGameStateBag(Resting)),
             (nameof(Running), saveGameState.CreateGameStateBag(Running)),
             (nameof(TargetWho), saveGameState.CreateGameStateBag(TargetWho)),
             (nameof(TotalFriendLevels), saveGameState.CreateGameStateBag(TotalFriendLevels)),
             (nameof(TotalFriends), saveGameState.CreateGameStateBag(TotalFriends)),
-            (nameof(ViewingEquipment), saveGameState.CreateGameStateBag(ViewingEquipment)),
-            (nameof(ViewingItemList), saveGameState.CreateGameStateBag(ViewingItemList)),
             (nameof(_petList ), saveGameState.CreateGameStateBag(_petList )),
             (nameof(_seedFlavor), saveGameState.CreateGameStateBag(_seedFlavor)),
             (nameof(ExPlayer), saveGameState.CreateGameStateBag(ExPlayer)),
@@ -247,8 +176,6 @@ internal partial class Game : IGameSerialize
             (nameof(CommandArgument), saveGameState.CreateGameStateBag(CommandArgument)),
             (nameof(CommandDirection), saveGameState.CreateGameStateBag(CommandDirection)),
             (nameof(CurrentCommand), saveGameState.CreateGameStateBag(CurrentCommand)),
-            (nameof(FullScreenOverlay), saveGameState.CreateGameStateBag(FullScreenOverlay)),
-            (nameof(HideCursorOnFullScreenInkey), saveGameState.CreateGameStateBag(HideCursorOnFullScreenInkey)),
             (nameof(KeyQueue), saveGameState.CreateGameStateBag(KeyQueue)),
             (nameof(Screen), saveGameState.CreateGameStateBag(Screen)),
             (nameof(KeyHead), saveGameState.CreateGameStateBag(KeyHead)),
@@ -266,7 +193,6 @@ internal partial class Game : IGameSerialize
             (nameof(FractionalMana), saveGameState.CreateGameStateBag(FractionalMana)),
             (nameof(Gender), saveGameState.CreateGameStateBag(Gender, typeof(Gender))),
             (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
-            (nameof(GetFirstLevelMutation), saveGameState.CreateGameStateBag(GetFirstLevelMutation)),
             (nameof(KnownBonusArmorClass), saveGameState.CreateGameStateBag(KnownBonusArmorClass)),
             (nameof(GooPatron), saveGameState.CreateGameStateBag(GooPatron, typeof(Patron))),
             (nameof(LightLevel), saveGameState.CreateGameStateBag(LightLevel)),
@@ -304,15 +230,12 @@ internal partial class Game : IGameSerialize
             (nameof(PanelColMin), saveGameState.CreateGameStateBag(PanelColMin)),
             (nameof(PanelRowMax), saveGameState.CreateGameStateBag(PanelRowMax)),
             (nameof(PanelRowMin), saveGameState.CreateGameStateBag(PanelRowMin)),
-            (nameof(SpecialDanger), saveGameState.CreateGameStateBag(SpecialDanger)),
             (nameof(TempN), saveGameState.CreateGameStateBag(TempN)),
             (nameof(Light), saveGameState.CreateGameStateBag(Light)),
             (nameof(View), saveGameState.CreateGameStateBag(View)),
             (nameof(CurrentlyActingMonster), saveGameState.CreateGameStateBag(CurrentlyActingMonster)),
             (nameof(DunBias), saveGameState.CreateGameStateBag(DunBias)),
             (nameof(NumRepro), saveGameState.CreateGameStateBag(NumRepro)),
-            (nameof(RepairMonsters), saveGameState.CreateGameStateBag(RepairMonsters)),
-            (nameof(ShimmerMonsters), saveGameState.CreateGameStateBag(ShimmerMonsters)),
             (nameof(Monsters), saveGameState.CreateGameStateBag(Monsters)),
             (nameof(_hackMIdxIi), saveGameState.CreateGameStateBag(_hackMIdxIi)),
             (nameof(StartupTownName), saveGameState.CreateGameStateBag(StartupTownName)),
@@ -498,68 +421,23 @@ internal partial class Game : IGameSerialize
             //#endif
 
             // Now restore this game object itself.
-            IsBirthday = restoreGameState.GetByKey(nameof(IsBirthday)).GetBool();
-            IsDawn = restoreGameState.GetByKey(nameof(IsDawn)).GetBool();
-            IsDusk = restoreGameState.GetByKey(nameof(IsDusk)).GetBool();
-            IsFeelTime = restoreGameState.GetByKey(nameof(IsFeelTime)).GetBool();
-            IsHalloween = restoreGameState.GetByKey(nameof(IsHalloween)).GetBool();
-            IsMidnight = restoreGameState.GetByKey(nameof(IsMidnight)).GetBool();
-            IsNewYear = restoreGameState.GetByKey(nameof(IsNewYear)).GetBool();
-            HasAcidImmunity = restoreGameState.GetByKey(nameof(HasAcidImmunity)).GetBool();
-            HasAcidResistance = restoreGameState.GetByKey(nameof(HasAcidResistance)).GetBool();
-            HasAggravation = restoreGameState.GetByKey(nameof(HasAggravation)).GetBool();
-            HasAntiMagic = restoreGameState.GetByKey(nameof(HasAntiMagic)).GetBool();
-            HasAntiTeleport = restoreGameState.GetByKey(nameof(HasAntiTeleport)).GetBool();
-            HasAntiTheft = restoreGameState.GetByKey(nameof(HasAntiTheft)).GetBool();
-            HasBlessedBlade = restoreGameState.GetByKey(nameof(HasBlessedBlade)).GetBool();
-            HasBlindnessResistance = restoreGameState.GetByKey(nameof(HasBlindnessResistance)).GetBool();
-            HasChaosResistance = restoreGameState.GetByKey(nameof(HasChaosResistance)).GetBool();
-            HasColdImmunity = restoreGameState.GetByKey(nameof(HasColdImmunity)).GetBool();
-            HasColdResistance = restoreGameState.GetByKey(nameof(HasColdResistance)).GetBool();
-            HasConfusingTouch = restoreGameState.GetByKey(nameof(HasConfusingTouch)).GetBool();
-            HasConfusionResistance = restoreGameState.GetByKey(nameof(HasConfusionResistance)).GetBool();
-            HasDarkResistance = restoreGameState.GetByKey(nameof(HasDarkResistance)).GetBool();
-            HasDisenchantResistance = restoreGameState.GetByKey(nameof(HasDisenchantResistance)).GetBool();
-            HasElementalVulnerability = restoreGameState.GetByKey(nameof(HasElementalVulnerability)).GetBool();
-            HasExperienceDrain = restoreGameState.GetByKey(nameof(HasExperienceDrain)).GetBool();
-            HasExtraMight = restoreGameState.GetByKey(nameof(HasExtraMight)).GetBool();
-            HasFearResistance = restoreGameState.GetByKey(nameof(HasFearResistance)).GetBool();
-            HasFeatherFall = restoreGameState.GetByKey(nameof(HasFeatherFall)).GetBool();
-            HasFireImmunity = restoreGameState.GetByKey(nameof(HasFireImmunity)).GetBool();
-            HasFireResistance = restoreGameState.GetByKey(nameof(HasFireResistance)).GetBool();
-            HasFireSheath = restoreGameState.GetByKey(nameof(HasFireSheath)).GetBool();
-            HasFreeAction = restoreGameState.GetByKey(nameof(HasFreeAction)).GetBool();
+            (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasAcidImmunity) = restoreGameState.GetByKey("bools1").Get8Bools();
+            (HasAcidResistance, HasAggravation, HasAntiMagic, HasAntiTeleport, HasAntiTheft, HasBlessedBlade, HasBlindnessResistance, HasChaosResistance) = restoreGameState.GetByKey("bools2").Get8Bools();
+            (HasColdImmunity, HasColdResistance, HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain) = restoreGameState.GetByKey("bools3").Get8Bools();
+            (HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife) = restoreGameState.GetByKey("bools4").Get8Bools();
+            (HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon) = restoreGameState.GetByKey("bools5").Get8Bools();
+            (HasRandomTeleport, HasReflection, HasRegeneration, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion) = restoreGameState.GetByKey("bools6").Get8Bools();
+            (HasSoundResistance, HasSustainCharisma, HasSustainConstitution, HasSustainDexterity, HasSustainIntelligence, HasSustainStrength, HasSustainWisdom, HasTelepathy) = restoreGameState.GetByKey("bools7").Get8Bools();
+            (HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance) = restoreGameState.GetByKey("bools8").Get8Bools();
+            (Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, UseFixed, _findBreakLeft) = restoreGameState.GetByKey("bools9").Get8Bools();
+            (_findBreakRight, _findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag) = restoreGameState.GetByKey("bools10").Get8Bools();
+            (Playing, ViewingEquipment, ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger) = restoreGameState.GetByKey("bools11").Get8Bools();
+            (RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools12").Get2Bools();
+
             GlowInTheDarkRadius = restoreGameState.GetByKey(nameof(GlowInTheDarkRadius)).GetInt();
-            HasHoldLife = restoreGameState.GetByKey(nameof(HasHoldLife)).GetBool();
-            HasLightningImmunity = restoreGameState.GetByKey(nameof(HasLightningImmunity)).GetBool();
-            HasLightningResistance = restoreGameState.GetByKey(nameof(HasLightningResistance)).GetBool();
-            HasElectricitySheath = restoreGameState.GetByKey(nameof(HasElectricitySheath)).GetBool();
-            HasLightResistance = restoreGameState.GetByKey(nameof(HasLightResistance)).GetBool();
-            HasNetherResistance = restoreGameState.GetByKey(nameof(HasNetherResistance)).GetBool();
-            HasNexusResistance = restoreGameState.GetByKey(nameof(HasNexusResistance)).GetBool();
-            HasPoisonResistance = restoreGameState.GetByKey(nameof(HasPoisonResistance)).GetBool();
-            HasQuakeWeapon = restoreGameState.GetByKey(nameof(HasQuakeWeapon)).GetBool();
-            HasRandomTeleport = restoreGameState.GetByKey(nameof(HasRandomTeleport)).GetBool();
-            HasReflection = restoreGameState.GetByKey(nameof(HasReflection)).GetBool();
-            HasRegeneration = restoreGameState.GetByKey(nameof(HasRegeneration)).GetBool();
-            HasRestrictingArmor = restoreGameState.GetByKey(nameof(HasRestrictingArmor)).GetBool();
-            HasRestrictingGloves = restoreGameState.GetByKey(nameof(HasRestrictingGloves)).GetBool();
-            HasSeeInvisibility = restoreGameState.GetByKey(nameof(HasSeeInvisibility)).GetBool();
-            HasShardResistance = restoreGameState.GetByKey(nameof(HasShardResistance)).GetBool();
-            HasSlowDigestion = restoreGameState.GetByKey(nameof(HasSlowDigestion)).GetBool();
-            HasSoundResistance = restoreGameState.GetByKey(nameof(HasSoundResistance)).GetBool();
-            HasSustainCharisma = restoreGameState.GetByKey(nameof(HasSustainCharisma)).GetBool();
-            HasSustainConstitution = restoreGameState.GetByKey(nameof(HasSustainConstitution)).GetBool();
-            HasSustainDexterity = restoreGameState.GetByKey(nameof(HasSustainDexterity)).GetBool();
-            HasSustainIntelligence = restoreGameState.GetByKey(nameof(HasSustainIntelligence)).GetBool();
-            HasSustainStrength = restoreGameState.GetByKey(nameof(HasSustainStrength)).GetBool();
-            HasSustainWisdom = restoreGameState.GetByKey(nameof(HasSustainWisdom)).GetBool();
-            HasTelepathy = restoreGameState.GetByKey(nameof(HasTelepathy)).GetBool();
-            HasTimeResistance = restoreGameState.GetByKey(nameof(HasTimeResistance)).GetBool();
             Height = restoreGameState.GetByKey(nameof(Height)).GetInt();
             HitDie = restoreGameState.GetByKey(nameof(HitDie)).GetInt();
             InfravisionRange = restoreGameState.GetByKey(nameof(InfravisionRange)).GetInt();
-            IsSearching = restoreGameState.GetByKey(nameof(IsSearching)).GetBool();
             SkillDigging = restoreGameState.GetByKey(nameof(SkillDigging)).GetInt();
             ComputedDisarmTraps = restoreGameState.GetByKey(nameof(ComputedDisarmTraps)).GetInt();
             SkillMelee = restoreGameState.GetByKey(nameof(SkillMelee)).GetInt();
@@ -574,42 +452,25 @@ internal partial class Game : IGameSerialize
             CharismaBonus = restoreGameState.GetByKey(nameof(CharismaBonus)).GetInt();
             ConstitutionBonus = restoreGameState.GetByKey(nameof(ConstitutionBonus)).GetInt();
             DexterityBonus = restoreGameState.GetByKey(nameof(DexterityBonus)).GetInt();
-            ElecHit = restoreGameState.GetByKey(nameof(ElecHit)).GetBool();
-            Esp = restoreGameState.GetByKey(nameof(Esp)).GetBool();
-            FeatherFall = restoreGameState.GetByKey(nameof(FeatherFall)).GetBool();
-            MutationFireHit = restoreGameState.GetByKey(nameof(MutationFireHit)).GetBool();
-            MutationFreeAction = restoreGameState.GetByKey(nameof(MutationFreeAction)).GetBool();
             MutationInfravisionBonus = restoreGameState.GetByKey(nameof(MutationInfravisionBonus)).GetInt();
             IntelligenceBonus = restoreGameState.GetByKey(nameof(IntelligenceBonus)).GetInt();
-            MagicResistance = restoreGameState.GetByKey(nameof(MagicResistance)).GetBool();
-            Regen = restoreGameState.GetByKey(nameof(Regen)).GetBool();
-            ResFear = restoreGameState.GetByKey(nameof(ResFear)).GetBool();
-            ResTime = restoreGameState.GetByKey(nameof(ResTime)).GetBool();
             SearchBonus = restoreGameState.GetByKey(nameof(SearchBonus)).GetInt();
             SpeedBonus = restoreGameState.GetByKey(nameof(SpeedBonus)).GetInt();
             StealthBonus = restoreGameState.GetByKey(nameof(StealthBonus)).GetInt();
             StrengthBonus = restoreGameState.GetByKey(nameof(StrengthBonus)).GetInt();
-            SuppressRegen = restoreGameState.GetByKey(nameof(SuppressRegen)).GetBool();
-            SustainAll = restoreGameState.GetByKey(nameof(SustainAll)).GetBool();
-            Vulnerable = restoreGameState.GetByKey(nameof(Vulnerable)).GetBool();
             WisdomBonus = restoreGameState.GetByKey(nameof(WisdomBonus)).GetInt();
             replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTime();
             MainSequenceRandomSeed = restoreGameState.GetByKey(nameof(MainSequenceRandomSeed)).GetInt();
             CurrentSequenceRandomSeed = restoreGameState.GetByKey(nameof(CurrentSequenceRandomSeed)).GetInt();
             EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(this, restoreGameState));
-            UseFixed = restoreGameState.GetByKey(nameof(UseFixed)).GetBool();
             FixedSeed = restoreGameState.GetByKey(nameof(FixedSeed)).GetInt();
             CurrentRunDirection = restoreGameState.GetByKey(nameof(CurrentRunDirection)).GetInt();
-            _findBreakleft = restoreGameState.GetByKey(nameof(_findBreakleft)).GetBool();
-            _findBreakright = restoreGameState.GetByKey(nameof(_findBreakright)).GetBool();
-            _findOpenarea = restoreGameState.GetByKey(nameof(_findOpenarea)).GetBool();
             _previousRunDirection = restoreGameState.GetByKey(nameof(_previousRunDirection)).GetInt();
             FollowDistance = restoreGameState.GetByKey(nameof(FollowDistance)).GetInt();
             DecayRate = restoreGameState.GetByKey(nameof(DecayRate)).GetInt();
             God = restoreGameState.GetByKey(nameof(God)).GetReferenceOrDefault<God>();
             NaturalAttacks = restoreGameState.GetByKey(nameof(NaturalAttacks)).GetReferences<Mutation>().ToList();
             GenomeArmorClassBonus = restoreGameState.GetByKey(nameof(GenomeArmorClassBonus)).GetInt();
-            ChaosGift = restoreGameState.GetByKey(nameof(ChaosGift)).GetBool();
             MutationsNotPossessed = restoreGameState.GetByKey(nameof(MutationsNotPossessed)).GetReferences<Mutation>().ToList();
             MutationsPossessed = restoreGameState.GetByKey(nameof(MutationsPossessed)).GetReferences<Mutation>().ToList();
             TreasureFeeling = restoreGameState.GetByKey(nameof(TreasureFeeling)).GetInt();
@@ -619,7 +480,6 @@ internal partial class Game : IGameSerialize
             _dusk = restoreGameState.GetByKey(nameof(_dusk)).GetDateTime();
             _gameStartDateTime = restoreGameState.GetByKey(nameof(_gameStartDateTime)).GetDateTime();
             _levelEntryTurn = restoreGameState.GetByKey(nameof(_levelEntryTurn)).GetInt();
-            IsDead = restoreGameState.GetByKey(nameof(IsDead)).GetBool();
             LastInputReceived = restoreGameState.GetByKey(nameof(LastInputReceived)).GetNullableDateTime();
             CommandRepeat = restoreGameState.GetByKey(nameof(CommandRepeat)).GetInt();
             Quests = restoreGameState.GetByKey(nameof(Quests)).GetReferences<Quest>().ToList();
@@ -629,26 +489,18 @@ internal partial class Game : IGameSerialize
             AllocRaceSize = restoreGameState.GetByKey(nameof(AllocRaceSize)).GetInt();
             AllocRaceTable = restoreGameState.GetByKey(nameof(AllocRaceTable)).GetDerivedReferences<AllocationEntry>((RestoreGameState restoreGameState) => new AllocationEntry(this, restoreGameState)).ToArray();
             CameFrom = restoreGameState.GetByKey(nameof(CameFrom)).GetEnum<LevelStartEnum>();
-            CharacterXtra = restoreGameState.GetByKey(nameof(CharacterXtra)).GetBool();
-            CreateDownStair = restoreGameState.GetByKey(nameof(CreateDownStair)).GetBool();
-            CreateUpStair = restoreGameState.GetByKey(nameof(CreateUpStair)).GetBool();
             CurDungeon = restoreGameState.GetByKey(nameof(CurDungeon)).GetReference<Dungeon>();
             CurrentDepth = restoreGameState.GetByKey(nameof(CurrentDepth)).GetInt();
             CurTown = restoreGameState.GetByKey(nameof(CurTown)).GetReference<Town>();
             DiedFrom = restoreGameState.GetByKey(nameof(DiedFrom)).GetStringOrDefault();
             DungeonDifficulty = restoreGameState.GetByKey(nameof(DungeonDifficulty)).GetInt();
             EnergyUse = restoreGameState.GetByKey(nameof(EnergyUse)).GetInt();
-            HackMind = restoreGameState.GetByKey(nameof(HackMind)).GetBool();
-            NewLevelFlag = restoreGameState.GetByKey(nameof(NewLevelFlag)).GetBool();
-            Playing = restoreGameState.GetByKey(nameof(Playing)).GetBool();
             RecallDungeon = restoreGameState.GetByKey(nameof(RecallDungeon)).GetReference<Dungeon>();
             Resting = restoreGameState.GetByKey(nameof(Resting)).GetInt();
             Running = restoreGameState.GetByKey(nameof(Running)).GetInt();
             TargetWho = restoreGameState.GetByKey(nameof(TargetWho)).GetReferenceOrDefault<Target>();
             TotalFriendLevels = restoreGameState.GetByKey(nameof(TotalFriendLevels)).GetInt();
             TotalFriends = restoreGameState.GetByKey(nameof(TotalFriends)).GetInt();
-            ViewingEquipment = restoreGameState.GetByKey(nameof(ViewingEquipment)).GetBool();
-            ViewingItemList = restoreGameState.GetByKey(nameof(ViewingItemList)).GetBool();
             _petList = restoreGameState.GetByKey(nameof(_petList)).GetReferences<Monster>().ToList();
             _seedFlavor = restoreGameState.GetByKey(nameof(_seedFlavor)).GetInt();
             ExPlayer = restoreGameState.GetByKey(nameof(ExPlayer)).GetReferenceOrDefault<ExPlayer>();
@@ -658,8 +510,6 @@ internal partial class Game : IGameSerialize
             CommandArgument = restoreGameState.GetByKey(nameof(CommandArgument)).GetInt();
             CommandDirection = restoreGameState.GetByKey(nameof(CommandDirection)).GetInt();
             CurrentCommand = restoreGameState.GetByKey(nameof(CurrentCommand)).GetChar();
-            FullScreenOverlay = restoreGameState.GetByKey(nameof(FullScreenOverlay)).GetBool();
-            HideCursorOnFullScreenInkey = restoreGameState.GetByKey(nameof(HideCursorOnFullScreenInkey)).GetBool();
             KeyQueue = restoreGameState.GetByKey(nameof(KeyQueue)).GetChars();
             Screen = restoreGameState.GetByKey(nameof(Screen)).GetReference<Window>();
             KeyHead = restoreGameState.GetByKey(nameof(KeyHead)).GetInt();
@@ -677,7 +527,6 @@ internal partial class Game : IGameSerialize
             FractionalMana = restoreGameState.GetByKey(nameof(FractionalMana)).GetInt();
             Gender = restoreGameState.GetByKey(nameof(Gender)).GetDerivedReferenceOrDefault<Gender>();
             Generation = restoreGameState.GetByKey(nameof(Generation)).GetInt();
-            GetFirstLevelMutation = restoreGameState.GetByKey(nameof(GetFirstLevelMutation)).GetBool();
             KnownBonusArmorClass = restoreGameState.GetByKey(nameof(KnownBonusArmorClass)).GetInt();
             GooPatron = restoreGameState.GetByKey(nameof(GooPatron)).GetDerivedReference<Patron>();
             LightLevel = restoreGameState.GetByKey(nameof(LightLevel)).GetInt();
@@ -715,15 +564,12 @@ internal partial class Game : IGameSerialize
             PanelColMin = restoreGameState.GetByKey(nameof(PanelColMin)).GetInt();
             PanelRowMax = restoreGameState.GetByKey(nameof(PanelRowMax)).GetInt();
             PanelRowMin = restoreGameState.GetByKey(nameof(PanelRowMin)).GetInt();
-            SpecialDanger = restoreGameState.GetByKey(nameof(SpecialDanger)).GetBool();
             TempN = restoreGameState.GetByKey(nameof(TempN)).GetInt();
             Light = restoreGameState.GetByKey(nameof(Light)).GetReferences<GridCoordinate>().ToList();
             View = restoreGameState.GetByKey(nameof(View)).GetReferences<GridCoordinate>().ToList();
             CurrentlyActingMonster = restoreGameState.GetByKey(nameof(CurrentlyActingMonster)).GetInt();
             DunBias = restoreGameState.GetByKey(nameof(DunBias)).GetReferenceOrDefault<MonsterRaceFilter>();
             NumRepro = restoreGameState.GetByKey(nameof(NumRepro)).GetInt();
-            RepairMonsters = restoreGameState.GetByKey(nameof(RepairMonsters)).GetBool();
-            ShimmerMonsters = restoreGameState.GetByKey(nameof(ShimmerMonsters)).GetBool();
             Monsters = restoreGameState.GetByKey(nameof(Monsters)).GetReferences<Monster>().ToArray();
             _hackMIdxIi = restoreGameState.GetByKey(nameof(_hackMIdxIi)).GetInt();
             StartupTownName = restoreGameState.GetByKey(nameof(StartupTownName)).GetStringOrDefault();
@@ -1187,9 +1033,9 @@ internal partial class Game : IGameSerialize
     /// </summary>
     private int[] _directionCycle { get; } = { 1, 2, 3, 6, 9, 8, 7, 4, 1, 2, 3, 6, 9, 8, 7, 4, 1 };
 
-    private bool _findBreakleft;
-    private bool _findBreakright;
-    private bool _findOpenarea;
+    private bool _findBreakLeft;
+    private bool _findBreakRight;
+    private bool _findOpenArea;
 
     /// <summary>
     /// The direction in which we were previously running
@@ -2090,9 +1936,9 @@ internal partial class Game : IGameSerialize
     {
         CurrentRunDirection = direction;
         _previousRunDirection = direction;
-        _findOpenarea = true;
-        _findBreakright = false;
-        _findBreakleft = false;
+        _findOpenArea = true;
+        _findBreakRight = false;
+        _findBreakLeft = false;
         bool wallDoubleAheadLeft = false;
         bool wallDoubleAheadRight = false;
         bool wallAheadRight = false;
@@ -2105,31 +1951,31 @@ internal partial class Game : IGameSerialize
         // If there's a wall ahead-left of us, remember that
         if (SeeWall(_directionCycle[cycleIndex + 1], MapY.IntValue, MapX.IntValue))
         {
-            _findBreakleft = true;
+            _findBreakLeft = true;
             wallAheadLeft = true;
         }
         // Else check if there's a wall ahead-left of our first step, and remember that
         else if (SeeWall(_directionCycle[cycleIndex + 1], row, col))
         {
-            _findBreakleft = true;
+            _findBreakLeft = true;
             wallDoubleAheadLeft = true;
         }
         // If there's a wall ahead-right of us, remember that
         if (SeeWall(_directionCycle[cycleIndex - 1], MapY.IntValue, MapX.IntValue))
         {
-            _findBreakright = true;
+            _findBreakRight = true;
             wallAheadRight = true;
         }
         // Else check if there's a wall ahead-right of our first step, and remember that
         else if (SeeWall(_directionCycle[cycleIndex - 1], row, col))
         {
-            _findBreakright = true;
+            _findBreakRight = true;
             wallDoubleAheadRight = true;
         }
         // If we're looking for breaks on either side, we're not looking for an open area
-        if (_findBreakleft && _findBreakright)
+        if (_findBreakLeft && _findBreakRight)
         {
-            _findOpenarea = false;
+            _findOpenArea = false;
             // If we're moving orthogonally and we have a wall double-ahead on either side,
             // nudge our assumed previous direction away from it
             if ((direction & 0x01) != 0)
@@ -2217,7 +2063,7 @@ internal partial class Game : IGameSerialize
             // We can enter the tile or it's unseen
             if (tileUnseen || GridPassable(row, col))
             {
-                if (_findOpenarea)
+                if (_findOpenArea)
                 {
                     // Ignore the open area
                 }
@@ -2254,21 +2100,21 @@ internal partial class Game : IGameSerialize
             else
             // If we were looking for an open area we're now just looking for a left or right
             {
-                if (_findOpenarea)
+                if (_findOpenArea)
                 {
                     if (i < 0)
                     {
-                        _findBreakright = true;
+                        _findBreakRight = true;
                     }
                     else if (i > 0)
                     {
-                        _findBreakleft = true;
+                        _findBreakLeft = true;
                     }
                 }
             }
         }
         // If we're looking for an open area, search both directions
-        if (_findOpenarea)
+        if (_findOpenArea)
         {
             // Look left first
             for (i = -searchWidth; i < 0; i++)
@@ -2279,14 +2125,14 @@ internal partial class Game : IGameSerialize
                 tile = Grid[row][col];
                 if (!tile.PlayerMemorized || !tile.FeatureType.IsWall)
                 {
-                    if (_findBreakright)
+                    if (_findBreakRight)
                     {
                         return true;
                     }
                 }
                 else
                 {
-                    if (_findBreakleft)
+                    if (_findBreakLeft)
                     {
                         return true;
                     }
@@ -2301,14 +2147,14 @@ internal partial class Game : IGameSerialize
                 tile = Grid[row][col];
                 if (!tile.PlayerMemorized || !tile.FeatureType.IsWall)
                 {
-                    if (_findBreakleft)
+                    if (_findBreakLeft)
                     {
                         return true;
                     }
                 }
                 else
                 {
-                    if (_findBreakright)
+                    if (_findBreakRight)
                     {
                         return true;
                     }

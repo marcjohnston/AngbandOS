@@ -109,10 +109,10 @@ internal class Monster : IItemContainer, IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(_isVisible), saveGameState.CreateGameStateBag(_isVisible, _isPet, SmCloned, SmImmAcid, SmImmCold, SmImmElec, SmImmFire, SmImmFree)),
-            (nameof(SmImmMana), saveGameState.CreateGameStateBag(SmImmMana, SmImmReflect, SmImmXxx5, SmOppAcid, SmOppCold, SmOppElec, SmOppFire, SmOppPois)),
-            (nameof(SmOppXXx1), saveGameState.CreateGameStateBag(SmOppXXx1, SmResAcid, SmResBlind, SmResChaos, SmResCold, SmResConf, SmResDark, SmResDisen)),
-            (nameof(SmResElec), saveGameState.CreateGameStateBag(SmResElec, SmResFear, SmResFire, SmResLight, SmResNeth, SmResNexus, SmResPois, SmResShard)),
+            ("bools1", saveGameState.CreateGameStateBag(_isVisible, _isPet, SmCloned, SmImmAcid, SmImmCold, SmImmElec, SmImmFire, SmImmFree)),
+            ("bools2", saveGameState.CreateGameStateBag(SmImmMana, SmImmReflect, SmImmXxx5, SmOppAcid, SmOppCold, SmOppElec, SmOppFire, SmOppPois)),
+            ("bools3", saveGameState.CreateGameStateBag(SmOppXXx1, SmResAcid, SmResBlind, SmResChaos, SmResCold, SmResConf, SmResDark, SmResDisen)),
+            ("bools4", saveGameState.CreateGameStateBag(SmResElec, SmResFear, SmResFire, SmResLight, SmResNeth, SmResNexus, SmResPois, SmResShard)),
             (nameof(SmResSound), saveGameState.CreateGameStateBag(SmResSound)),
 
             (nameof(ConfusionLevel), saveGameState.CreateGameStateBag(ConfusionLevel)),
@@ -257,10 +257,10 @@ internal class Monster : IItemContainer, IGameSerialize
 
     public Monster(Game game, RestoreGameState restoreGameState) : this(game)
     {
-        (_isVisible, _isPet, SmCloned, SmImmAcid, SmImmCold, SmImmElec, SmImmFire, SmImmFree) = restoreGameState.GetByKey(nameof(_isVisible)).Get8Bools();
-        (SmImmMana, SmImmReflect, SmImmXxx5, SmOppAcid, SmOppCold, SmOppElec, SmOppFire, SmOppPois) = restoreGameState.GetByKey(nameof(SmImmMana)).Get8Bools();
-        (SmOppXXx1, SmResAcid, SmResBlind, SmResChaos, SmResCold, SmResConf, SmResDark, SmResDisen) = restoreGameState.GetByKey(nameof(SmOppXXx1)).Get8Bools();
-        (SmResElec, SmResFear, SmResFire, SmResLight, SmResNeth, SmResNexus, SmResPois, SmResShard) = restoreGameState.GetByKey(nameof(SmResElec)).Get8Bools();
+        (_isVisible, _isPet, SmCloned, SmImmAcid, SmImmCold, SmImmElec, SmImmFire, SmImmFree) = restoreGameState.GetByKey("bools1").Get8Bools();
+        (SmImmMana, SmImmReflect, SmImmXxx5, SmOppAcid, SmOppCold, SmOppElec, SmOppFire, SmOppPois) = restoreGameState.GetByKey("bools2").Get8Bools();
+        (SmOppXXx1, SmResAcid, SmResBlind, SmResChaos, SmResCold, SmResConf, SmResDark, SmResDisen) = restoreGameState.GetByKey("bools3").Get8Bools();
+        (SmResElec, SmResFear, SmResFire, SmResLight, SmResNeth, SmResNexus, SmResPois, SmResShard) = restoreGameState.GetByKey("bools4").Get8Bools();
         SmResSound = restoreGameState.GetByKey(nameof(SmResSound)).GetBool();
 
         ConfusionLevel = restoreGameState.GetByKey(nameof(ConfusionLevel)).GetInt();
