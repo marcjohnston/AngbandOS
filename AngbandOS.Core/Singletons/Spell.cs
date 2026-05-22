@@ -94,7 +94,14 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     /// </summary>
     public string Name { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// This is a field because it is state data.
+    /// </remarks>
     private CharacterClassSpell? _characterClassSpell = null;
+
     /// <remarks>
     /// This is initialized after the player selects a character class.
     /// </remarks>
