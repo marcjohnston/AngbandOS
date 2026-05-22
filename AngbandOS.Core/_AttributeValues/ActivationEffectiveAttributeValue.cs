@@ -9,10 +9,28 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
 {
+    #region State Data
     /// <summary>
     /// Represents the modifiers that are combined to create the effective value.
     /// </summary>
     protected readonly List<(string Key, Activation? Modifier)> _attributeModifiers = new List<(string, Activation?)>();
+    #endregion
+
+    #region Constructors
+    public ActivationEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
+    public ActivationEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
+    {
+        RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
+        foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
+        {
+            RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
+            string key = tupleRestoreGameState.GetByKey("Key").GetString();
+            Activation? modifier = tupleRestoreGameState.GetByKey("Modifier").GetReferenceOrDefault<Activation>();
+
+            _attributeModifiers.Add((key, modifier));
+        }
+    }
+    #endregion
 
     public override bool HasKeyedItemEnhancements(string key)
     {
@@ -28,6 +46,10 @@ internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
 
     public Activation? Get()
     {
+        if (_attributeModifiers.Count == 0)
+        {
+            return null;
+        }
         return _attributeModifiers[_attributeModifiers.Count - 1].Modifier;
     }
 
@@ -47,23 +69,6 @@ internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
     public void Set(Activation? value)
     {
         _attributeModifiers.Add(("", value));
-    }
-
-    public ActivationEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute)
-    {
-        _attributeModifiers.Add(("", null));
-    }
-    public ActivationEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
-    {
-        RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
-        foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
-        {
-            RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetByKey("Key").GetString();
-            Activation? modifier = tupleRestoreGameState.GetByKey("Modifier").GetReferenceOrDefault<Activation>();
-
-            _attributeModifiers.Add((key, modifier));
-        }
     }
 
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)

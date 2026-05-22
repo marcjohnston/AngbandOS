@@ -9,13 +9,16 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class ArtifactBiasEffectiveAttributeValue : EffectiveAttributeValue
 {
+    #region State Data
     /// <summary>
     /// Represents the modifiers that are combined to create the effective value.
     /// </summary>
     protected readonly List<(string Key, ArtifactBias? Modifier)> _attributeModifiers = new List<(string, ArtifactBias?)>();
+    #endregion
 
+    #region Constructors
     public ArtifactBiasEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
-    public ArtifactBiasEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
+    public ArtifactBiasEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
     {
         RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
         foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
@@ -26,6 +29,8 @@ internal class ArtifactBiasEffectiveAttributeValue : EffectiveAttributeValue
             _attributeModifiers.Add((key, modifier));
         }
     }
+    #endregion
+
     public override AttributeValue ToReadOnly() => new ArtifactBiasReadOnlyAttributeValue(Get());
     public override bool HasKeyedItemEnhancements(string key)
     {
@@ -49,6 +54,10 @@ internal class ArtifactBiasEffectiveAttributeValue : EffectiveAttributeValue
     }
     public ArtifactBias? Get()
     {
+        if (_attributeModifiers.Count == 0)
+        {
+            return null;
+        }
         return _attributeModifiers[_attributeModifiers.Count - 1].Modifier;
     }
 

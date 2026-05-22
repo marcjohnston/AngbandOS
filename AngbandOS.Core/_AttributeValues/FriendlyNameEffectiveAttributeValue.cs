@@ -9,10 +9,27 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
 {
+    #region State Data
     /// <summary>
     /// Represents the modifiers that are combined to create the effective value.
     /// </summary>
     protected readonly List<(string Key, string? Modifier)> _attributeModifiers = new List<(string, string?)>();
+    #endregion
+
+    #region Constructors
+    public FriendlyNameEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
+    public FriendlyNameEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
+    {
+        RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
+        foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
+        {
+            RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
+            string key = tupleRestoreGameState.GetByKey("Key").GetString();
+            string? modifier = tupleRestoreGameState.GetByKey("Modifier").GetStringOrDefault();
+            _attributeModifiers.Add((key, modifier));
+        }
+    }
+    #endregion
 
     public override bool HasKeyedItemEnhancements(string key)
     {
@@ -36,6 +53,10 @@ internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
     }
     public string? Get()
     {
+        if (_attributeModifiers.Count == 0)
+        {
+            return null;
+        }
         return _attributeModifiers[_attributeModifiers.Count - 1].Modifier;
     }
 
@@ -46,18 +67,6 @@ internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
             throw new Exception($"Cannot specify a blank or null key for {nameof(RemoveModifiers)}");
         }
         _attributeModifiers.RemoveAll((item) => item.Key == key);
-    }
-    public FriendlyNameEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
-    public FriendlyNameEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
-    {
-        RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
-        foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
-        {
-            RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetByKey("Key").GetString();
-            string? modifier = tupleRestoreGameState.GetByKey("Modifier").GetStringOrDefault();
-            _attributeModifiers.Add((key, modifier));
-        }
     }
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {

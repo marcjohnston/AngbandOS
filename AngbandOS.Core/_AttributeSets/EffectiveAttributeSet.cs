@@ -11,33 +11,30 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGameSerialize
 {
-    public GameStateBag? Serialize(SaveGameState saveGameState)
-    {
-        return new DictionaryGameStateBag(
-            (nameof(_effectiveAttributeValues), saveGameState.CreateGameStateBag(_effectiveAttributeValues, typeof(ActivationEffectiveAttributeValue), typeof(ArtifactBiasEffectiveAttributeValue), typeof(BoolSetEffectiveAttributeValue), typeof(FriendlyNameEffectiveAttributeValue), typeof(OrEffectiveAttributeValue), typeof(SumEffectiveAttributeValue)))
-        );
-    }
-
-    private Game Game { get; }
+    #region State Data
     private readonly EffectiveAttributeValue[] _effectiveAttributeValues;
-    private static Attribute[]? CachedAttributes = null;
-    private Attribute[] LoadCachedAttributes()
-    {
-        if (CachedAttributes == null)
-        {
-            CachedAttributes = Game.SingletonRepository.Get<Attribute>();
-        }
-        return CachedAttributes;
-    }
+    #endregion
 
+    #region Constructors
+    /// <summary>
+    /// Instantiates all of the effective attribute values.
+    /// </summary>
+    /// <param name="game"></param>
     public EffectiveAttributeSet(Game game)
     {
         Game = game;
         Attribute[] cachedAttributes = LoadCachedAttributes();
+
+        // Allocate the array.
         _effectiveAttributeValues = new EffectiveAttributeValue[cachedAttributes.Length];
+
+        // Loop through all of the configured attributes.
         foreach (Attribute attribute in cachedAttributes)
         {
+            // Generate the attribute value.
             EffectiveAttributeValue effectiveAttributeValue = attribute.CreateEffectiveAttributeValue();
+
+            // Assign it to the array index.
             _effectiveAttributeValues[attribute.Index] = effectiveAttributeValue;
         }
     }
@@ -53,6 +50,25 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
             (RestoreGameState restoreGameState) => new FriendlyNameEffectiveAttributeValue(Game, restoreGameState),
             (RestoreGameState restoreGameState) => new OrEffectiveAttributeValue(Game, restoreGameState),
             (RestoreGameState restoreGameState) => new SumEffectiveAttributeValue(Game, restoreGameState));
+    }
+    #endregion
+
+    public GameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(_effectiveAttributeValues), saveGameState.CreateGameStateBag(_effectiveAttributeValues, typeof(ActivationEffectiveAttributeValue), typeof(ArtifactBiasEffectiveAttributeValue), typeof(BoolSetEffectiveAttributeValue), typeof(FriendlyNameEffectiveAttributeValue), typeof(OrEffectiveAttributeValue), typeof(SumEffectiveAttributeValue)))
+        );
+    }
+
+    private Game Game { get; }
+    private static Attribute[]? CachedAttributes = null;
+    private Attribute[] LoadCachedAttributes()
+    {
+        if (CachedAttributes == null)
+        {
+            CachedAttributes = Game.SingletonRepository.Get<Attribute>();
+        }
+        return CachedAttributes;
     }
 
     public void RemoveKeyedEnhancements(string key)
