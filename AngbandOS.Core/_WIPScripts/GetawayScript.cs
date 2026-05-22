@@ -39,9 +39,9 @@ internal class GetawayScript : Script, IActivateItemScript
             default:
                 if (Game.GetCheck("Leave this level? "))
                 {
-                    {
-                        Game.DoCmdSaveGame(true);
-                    }
+                    Game.MsgPrint(string.Empty);
+                    Game.HandleStuff();
+                    Game.UpdateScreen();
                     Game.NewLevelFlag = true;
                     Game.CameFrom = LevelStartEnum.StartRandom;
                 }

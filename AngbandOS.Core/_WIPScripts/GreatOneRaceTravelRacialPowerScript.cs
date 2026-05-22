@@ -6,7 +6,9 @@ internal class GreatOneRaceTravelRacialPowerScript : Script, IScript
     public void ExecuteScript()
     {
         Game.MsgPrint("You start walking around. Your surroundings change.");
-        Game.DoCmdSaveGame(true);
+        Game.MsgPrint(string.Empty);
+        Game.HandleStuff();
+        Game.UpdateScreen();
         Game.NewLevelFlag = true;
         Game.CameFrom = LevelStartEnum.StartRandom;
     }

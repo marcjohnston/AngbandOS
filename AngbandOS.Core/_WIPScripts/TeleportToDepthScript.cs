@@ -46,7 +46,9 @@ internal class TeleportToDepthScript : Script, IScript, ICastSpellScript
             Game.CommandArgument = Game.CurDungeon.MaxLevel;
         }
         Game.MsgPrint($"You jump to dungeon level {Game.CommandArgument}.");
-        Game.DoCmdSaveGame(true);
+        Game.MsgPrint(string.Empty);
+        Game.HandleStuff();
+        Game.UpdateScreen();
         Game.CurrentDepth = Game.CommandArgument;
         Game.NewLevelFlag = true;
     }

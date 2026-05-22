@@ -42,7 +42,9 @@ internal class TrapDoorScript : Script, IScript, ICastSpellScript
             // Even if we survived, we need a new level
             if (Game.Health.IntValue >= 0)
             {
-                Game.DoCmdSaveGame(true);
+                Game.MsgPrint(string.Empty);
+                Game.HandleStuff();
+                Game.UpdateScreen();
             }
             Game.NewLevelFlag = true;
             // In dungeons we fall to a deeper level, but in towers we fall to a

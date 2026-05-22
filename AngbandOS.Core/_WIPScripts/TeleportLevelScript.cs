@@ -42,21 +42,27 @@ internal class TeleportLevelScript : Script, IScript, ICastSpellScript, IReadScr
         if (Game.CurrentDepth <= 0)
         {
             Game.MsgPrint(downDesc);
-            Game.DoCmdSaveGame(true);
+            Game.MsgPrint(string.Empty);
+            Game.HandleStuff();
+            Game.UpdateScreen();
             Game.CurrentDepth++;
             Game.NewLevelFlag = true;
         }
         else if (Game.IsQuest(Game.CurrentDepth) || Game.CurrentDepth >= Game.CurDungeon.MaxLevel)
         {
             Game.MsgPrint(upDesc);
-            Game.DoCmdSaveGame(true);
+            Game.MsgPrint(string.Empty);
+            Game.HandleStuff();
+            Game.UpdateScreen();
             Game.CurrentDepth--;
             Game.NewLevelFlag = true;
         }
         else if (Game.RandomLessThan(100) < 50)
         {
             Game.MsgPrint(upDesc);
-            Game.DoCmdSaveGame(true);
+            Game.MsgPrint(string.Empty);
+            Game.HandleStuff();
+            Game.UpdateScreen();
             Game.CurrentDepth--;
             Game.NewLevelFlag = true;
             Game.CameFrom = LevelStartEnum.StartRandom;
@@ -64,11 +70,15 @@ internal class TeleportLevelScript : Script, IScript, ICastSpellScript, IReadScr
         else
         {
             Game.MsgPrint(downDesc);
-            Game.DoCmdSaveGame(true);
+            Game.MsgPrint(string.Empty);
+            Game.HandleStuff();
+            Game.UpdateScreen();
             Game.CurrentDepth++;
             Game.NewLevelFlag = true;
         }
-        Game.DoCmdSaveGame(true);
+        Game.MsgPrint(string.Empty);
+        Game.HandleStuff();
+        Game.UpdateScreen();
         Game.CurrentDepth++;
         Game.NewLevelFlag = true;
         Game.PlaySound(SoundEffectEnum.TeleportLevel);

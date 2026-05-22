@@ -59,8 +59,9 @@ internal class GoDownStairsScript : UniversalScript, IGetKey
             {
                 Game.MsgPrint("You enter a maze of down staircases.");
             }
-            // Save the game, just in case
-            Game.DoCmdSaveGame(true);
+            Game.MsgPrint(string.Empty);
+            Game.HandleStuff();
+            Game.UpdateScreen();
         }
         // If we're in a tower, a down staircase reduces our level number
         if (Game.CurDungeon.Tower)

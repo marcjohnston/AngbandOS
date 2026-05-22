@@ -4,6 +4,9 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Diagnostics;
+using System.Reflection;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -15,7 +18,7 @@ internal class ExPlayer : IGameSerialize
 {
     #region State Data
     /// <summary>
-    /// The index of the character's gender
+    /// The character's gender
     /// </summary>
     public readonly Gender Gender;
 
@@ -63,15 +66,15 @@ internal class ExPlayer : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Gender), saveGameState.CreateGameStateBag(Gender)),
+            (nameof(Gender), saveGameState.CreateGameStateBag(Gender, typeof(Gender))),
             (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
             (nameof(Level), saveGameState.CreateGameStateBag(Level)),
             (nameof(Name), saveGameState.CreateGameStateBag(Name)),
             (nameof(CharacterClassName), saveGameState.CreateGameStateBag(CharacterClassName)),
             (nameof(Race), saveGameState.CreateGameStateBag(Race)),
             (nameof(RaceAtBirth), saveGameState.CreateGameStateBag(RaceAtBirth)),
-            (nameof(PrimaryRealm), saveGameState.CreateGameStateBag(PrimaryRealm)),
-            (nameof(SecondaryRealm), saveGameState.CreateGameStateBag(SecondaryRealm))
+            (nameof(PrimaryRealm), saveGameState.CreateGameStateBag(PrimaryRealm, typeof(Realm))),
+            (nameof(SecondaryRealm), saveGameState.CreateGameStateBag(SecondaryRealm, typeof(Realm)))
         );
     }
 
@@ -90,5 +93,18 @@ internal class ExPlayer : IGameSerialize
         Name = name;
         Level = experienceLevel;
         Generation = generation;
+    }
+
+    public ExPlayer(Game game, RestoreGameState restoreGameState)
+    {
+        Gender = restoreGameState.GetByKey(nameof(Gender)).GetDerivedReference<Gender>();
+        Generation = restoreGameState.GetByKey(nameof(Race)).GetInt();
+        Level = restoreGameState.GetByKey(nameof(RaceAtBirth)).GetInt();
+        Name = restoreGameState.GetByKey(nameof(CharacterClassName)).GetString();
+        CharacterClassName = restoreGameState.GetByKey(nameof(PrimaryRealm)).GetString();
+        Race = restoreGameState.GetByKey(nameof(SecondaryRealm)).GetReference<Race>();
+        RaceAtBirth = restoreGameState.GetByKey(nameof(Name)).GetReference<Race>();
+        PrimaryRealm = restoreGameState.GetByKey(nameof(Level)).GetDerivedReferenceOrDefault<Realm>();
+        SecondaryRealm = restoreGameState.GetByKey(nameof(Generation)).GetDerivedReferenceOrDefault<Realm>();
     }
 }

@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Runtime.Serialization.Formatters.Binary;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -18,17 +20,32 @@ public class GameServer
     private Game Game;
 
     private IGameSerializer GameSerializer { get; } = new BinaryGameSerializer();
-//    private IGameSerializer GameSerializer { get; } = new JsonGameSerializer();
+    //    private IGameSerializer GameSerializer { get; } = new JsonGameSerializer();
 
     /// <summary>
     /// Forwards a save game request to the in-progress game. 
     /// </summary>
-    public void SaveGame()
+    public byte[] SaveGame()
     {
-        if (Game != null)
+#if DEBUG
+        BinaryFormatter formatter = new BinaryFormatter();
+        MemoryStream memoryStream = new MemoryStream();
+        formatter.Serialize(memoryStream, Game);
+        memoryStream.Position = 0;
+        GameDetails gameDetails = new GameDetails()
         {
-            Game.SaveGame();
-        }
+            CharacterName = Game.PlayerName.StringValue, // The player parameter
+            Level = Game.ExperienceLevel.IntValue, // The player parameter
+            Gold = Game.Gold.IntValue, // The parameter
+            IsAlive = !Game.IsDead, // If the player is dead, then the game Player will be null.
+            Comments = ""
+        };
+        Game.CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
+#endif
+
+        SaveGameState saveGameState = new SaveGameState();
+        GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
+        return GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
     }
 
     /// <summary>
@@ -200,10 +217,7 @@ public class GameServer
 
             Game.Play(console, persistentStorage, replayPersistentStorage);
 
-            SaveGameState saveGameState = new SaveGameState();
-            GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
-            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
-
+            byte[] serializedGameData = SaveGame();
             gameIsOver = true;
             return new GameResults(gameIsOver, serializedGameData);
         }
@@ -233,11 +247,10 @@ public class GameServer
         {
             bool gameIsOver = false;
             Game = new Game(gameConfiguration, gameReplayDetails);
+
             Game.Play(console, persistentStorage, replayPersistentStorage);
 
-            SaveGameState saveGameState = new SaveGameState();
-            GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
-            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
+            byte[] serializedGameData = SaveGame();
             gameIsOver = true;
             return new GameResults(gameIsOver, serializedGameData);
         }
@@ -272,9 +285,7 @@ public class GameServer
             Game = Game.LoadLegacyGame(persistentStorage);
             Game.Play(console, persistentStorage, replayPersistentStorage);
 
-            SaveGameState saveGameState = new SaveGameState();
-            GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
-            byte[] serializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
+            byte[] serializedGameData = SaveGame();
             gameIsOver = true;
             return new GameResults(gameIsOver, serializedGameData);
         }
@@ -324,9 +335,7 @@ public class GameServer
 
             Game.Play(console, persistentStorage, replayPersistentStorage);
 
-            SaveGameState saveGameState = new SaveGameState();
-            GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
-            byte[] newSerializedGameData = GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
+            byte[] newSerializedGameData = SaveGame();
 
             gameIsOver = true;
             return new GameResults(gameIsOver, newSerializedGameData);

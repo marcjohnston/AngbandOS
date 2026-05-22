@@ -134,7 +134,7 @@ internal partial class Game : IGameSerialize
             (nameof(_previousRunDirection), saveGameState.CreateGameStateBag(_previousRunDirection)),
             (nameof(FollowDistance), saveGameState.CreateGameStateBag(FollowDistance)),
             (nameof(DecayRate), saveGameState.CreateGameStateBag(DecayRate)),
-            (nameof(God), saveGameState.CreateGameStateBag(God)),
+            (nameof(God), saveGameState.CreateGameStateBag(God, typeof(God))),
             (nameof(NaturalAttacks), saveGameState.CreateGameStateBag(NaturalAttacks)),
             (nameof(GenomeArmorClassBonus), saveGameState.CreateGameStateBag(GenomeArmorClassBonus)),
             (nameof(MutationsNotPossessed), saveGameState.CreateGameStateBag(MutationsNotPossessed)),
@@ -164,12 +164,12 @@ internal partial class Game : IGameSerialize
             (nameof(RecallDungeon), saveGameState.CreateGameStateBag(RecallDungeon)),
             (nameof(Resting), saveGameState.CreateGameStateBag(Resting)),
             (nameof(Running), saveGameState.CreateGameStateBag(Running)),
-            (nameof(TargetWho), saveGameState.CreateGameStateBag(TargetWho)),
+            (nameof(TargetWho), saveGameState.CreateGameStateBag(TargetWho, typeof(Target))),
             (nameof(TotalFriendLevels), saveGameState.CreateGameStateBag(TotalFriendLevels)),
             (nameof(TotalFriends), saveGameState.CreateGameStateBag(TotalFriends)),
             (nameof(_petList ), saveGameState.CreateGameStateBag(_petList, typeof(Monster))),
             (nameof(_seedFlavor), saveGameState.CreateGameStateBag(_seedFlavor)),
-            (nameof(ExPlayer), saveGameState.CreateGameStateBag(ExPlayer)),
+            (nameof(ExPlayer), saveGameState.CreateGameStateBag(ExPlayer, typeof(ExPlayer))),
             (nameof(LevelOfFirstSpell), saveGameState.CreateGameStateBag(LevelOfFirstSpell)),
             (nameof(SpellOrder), saveGameState.CreateGameStateBag(SpellOrder, typeof(Spell))),
             (nameof(Talents), saveGameState.CreateGameStateBag(Talents)),
@@ -203,8 +203,8 @@ internal partial class Game : IGameSerialize
             (nameof(CharacterClass), saveGameState.CreateGameStateBag(CharacterClass)),
             (nameof(Race), saveGameState.CreateGameStateBag(Race)),
             (nameof(RaceAtBirth), saveGameState.CreateGameStateBag(RaceAtBirth)),
-            (nameof(PrimaryRealm), saveGameState.CreateGameStateBag(PrimaryRealm)),
-            (nameof(SecondaryRealm), saveGameState.CreateGameStateBag(SecondaryRealm)),
+            (nameof(PrimaryRealm), saveGameState.CreateGameStateBag(PrimaryRealm, typeof(Realm))),
+            (nameof(SecondaryRealm), saveGameState.CreateGameStateBag(SecondaryRealm, typeof(Realm))),
             (nameof(TownWithHouse), saveGameState.CreateGameStateBag(TownWithHouse, typeof(Town))),
             (nameof(Weight), saveGameState.CreateGameStateBag(Weight)),
             (nameof(WeightCarried), saveGameState.CreateGameStateBag(WeightCarried)),
@@ -254,28 +254,6 @@ internal partial class Game : IGameSerialize
             (nameof(_invenCnt), saveGameState.CreateGameStateBag(_invenCnt))
        );
     }
-
-    /// <summary>
-    /// Serializes an object and uses the persistent storage services to write the object to the desired facilities.
-    /// </summary>
-    /// <param name="player">The player to save.  If the player is dead, then this should be the corpse.</param>
-    public void SaveGame()
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-        MemoryStream memoryStream = new MemoryStream();
-        formatter.Serialize(memoryStream, this);
-        memoryStream.Position = 0;
-        GameDetails gameDetails = new GameDetails()
-        {
-            CharacterName = PlayerName.StringValue, // The player parameter
-            Level = ExperienceLevel.IntValue, // The player parameter
-            Gold = Gold.IntValue, // The parameter
-            IsAlive = !IsDead, // If the player is dead, then the game Player will be null.
-            Comments = ""
-        };
-        CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
-    }
-
     #endregion
 
     #region Game Replay
@@ -468,7 +446,7 @@ internal partial class Game : IGameSerialize
             _previousRunDirection = restoreGameState.GetByKey(nameof(_previousRunDirection)).GetInt();
             FollowDistance = restoreGameState.GetByKey(nameof(FollowDistance)).GetInt();
             DecayRate = restoreGameState.GetByKey(nameof(DecayRate)).GetInt();
-            God = restoreGameState.GetByKey(nameof(God)).GetReferenceOrDefault<God>();
+            God = restoreGameState.GetByKey(nameof(God)).GetDerivedReferenceOrDefault<God>();
             NaturalAttacks = restoreGameState.GetByKey(nameof(NaturalAttacks)).GetReferences<Mutation>().ToList();
             GenomeArmorClassBonus = restoreGameState.GetByKey(nameof(GenomeArmorClassBonus)).GetInt();
             MutationsNotPossessed = restoreGameState.GetByKey(nameof(MutationsNotPossessed)).GetReferences<Mutation>().ToList();
@@ -498,12 +476,12 @@ internal partial class Game : IGameSerialize
             RecallDungeon = restoreGameState.GetByKey(nameof(RecallDungeon)).GetReference<Dungeon>();
             Resting = restoreGameState.GetByKey(nameof(Resting)).GetInt();
             Running = restoreGameState.GetByKey(nameof(Running)).GetInt();
-            TargetWho = restoreGameState.GetByKey(nameof(TargetWho)).GetReferenceOrDefault<Target>();
+            TargetWho = restoreGameState.GetByKey(nameof(TargetWho)).GetDerivedReferenceOrDefault<Target>();
             TotalFriendLevels = restoreGameState.GetByKey(nameof(TotalFriendLevels)).GetInt();
             TotalFriends = restoreGameState.GetByKey(nameof(TotalFriends)).GetInt();
             _petList = restoreGameState.GetByKey(nameof(_petList)).GetDerivedReferences<Monster>((RestoreGameState restoreGameState) => new Monster(this, restoreGameState)).ToList();
             _seedFlavor = restoreGameState.GetByKey(nameof(_seedFlavor)).GetInt();
-            ExPlayer = restoreGameState.GetByKey(nameof(ExPlayer)).GetReferenceOrDefault<ExPlayer>();
+            ExPlayer = restoreGameState.GetByKey(nameof(ExPlayer)).GetDerivedReferenceOrDefault<ExPlayer>((RestoreGameState restoreGameState) => new ExPlayer(this, restoreGameState));
             LevelOfFirstSpell = restoreGameState.GetByKey(nameof(LevelOfFirstSpell)).GetNullableInt();
             SpellOrder = restoreGameState.GetByKey(nameof(SpellOrder)).GetDerivedReferences<Spell>().ToList();
             Talents = restoreGameState.GetByKey(nameof(Talents)).GetReferences<Talent>().ToList();
@@ -537,8 +515,8 @@ internal partial class Game : IGameSerialize
             CharacterClass = restoreGameState.GetByKey(nameof(CharacterClass)).GetReference<CharacterClass>();
             Race = restoreGameState.GetByKey(nameof(Race)).GetReferenceOrDefault<Race>();
             RaceAtBirth = restoreGameState.GetByKey(nameof(RaceAtBirth)).GetReference<Race>();
-            PrimaryRealm = restoreGameState.GetByKey(nameof(PrimaryRealm)).GetReferenceOrDefault<Realm>();
-            SecondaryRealm = restoreGameState.GetByKey(nameof(SecondaryRealm)).GetReferenceOrDefault<Realm>();
+            PrimaryRealm = restoreGameState.GetByKey(nameof(PrimaryRealm)).GetDerivedReferenceOrDefault<Realm>();
+            SecondaryRealm = restoreGameState.GetByKey(nameof(SecondaryRealm)).GetDerivedReferenceOrDefault<Realm>();
             TownWithHouse = restoreGameState.GetByKey(nameof(TownWithHouse)).GetDerivedReferenceOrDefault<Town>();
             Weight = restoreGameState.GetByKey(nameof(Weight)).GetInt();
             WeightCarried = restoreGameState.GetByKey(nameof(WeightCarried)).GetInt();
@@ -801,7 +779,6 @@ internal partial class Game : IGameSerialize
                 }
 
                 //HighScore score = new HighScore(this);
-                SaveGame();
                 PrintTomb();
                 if (IsWizard.BoolValue)
                 {
@@ -812,12 +789,10 @@ internal partial class Game : IGameSerialize
             }
             else
             {
-                DoCmdSaveGame(false);
-                //if (!Program.ExitToDesktop)
-                //{
-                //    Terminal.PlayMusic(MusicTrack.Menu);
-                //    Program.HiScores.DisplayScores(new HighScore(this));
-                //}
+                Disturb(true);
+                MsgPrint(string.Empty);
+                HandleStuff();
+                UpdateScreen();
             }
         }
 
@@ -3061,21 +3036,6 @@ internal partial class Game : IGameSerialize
         }
     }
 
-    public void DoCmdSaveGame(bool isAutosave)
-    {
-        if (!isAutosave)
-        {
-            Disturb(true);
-        }
-        MsgPrint(string.Empty);
-        HandleStuff();
-        UpdateScreen();
-      //  DiedFrom = "(saved)";
-        SaveGame();
-        UpdateScreen();
-      //  DiedFrom = "(alive and well)";
-    }
-
     /// <summary>
     /// Returns a list of labels and label ranges to represent inventory slot selections.  Example: a,c-g
     /// </summary>
@@ -4670,7 +4630,9 @@ internal partial class Game : IGameSerialize
                 if (CurrentDepth != 0)
                 {
                     MsgPrint(CurDungeon.Tower ? "You feel yourself yanked downwards!" : "You feel yourself yanked upwards!");
-                    DoCmdSaveGame(true);
+                    MsgPrint(string.Empty);
+                    HandleStuff();
+                    UpdateScreen();
                     RecallDungeon = CurDungeon;
                     CurrentDepth = 0;
                     if (TownWithHouse != null)
@@ -4692,7 +4654,9 @@ internal partial class Game : IGameSerialize
                 else
                 {
                     MsgPrint(RecallDungeon.Tower ? "You feel yourself yanked upwards!" : "You feel yourself yanked downwards!");
-                    DoCmdSaveGame(true);
+                    MsgPrint(string.Empty);
+                    HandleStuff();
+                    UpdateScreen();
                     CurDungeon = RecallDungeon;
                     WildernessX = CurDungeon.X;
                     WildernessY = CurDungeon.Y;
@@ -4933,7 +4897,9 @@ internal partial class Game : IGameSerialize
     public void AlterReality()
     {
         MsgPrint("The world changes!");
-        DoCmdSaveGame(true);
+        MsgPrint(string.Empty);
+        HandleStuff();
+        UpdateScreen();
         NewLevelFlag = true;
         CameFrom = LevelStartEnum.StartRandom;
     }
@@ -7053,7 +7019,9 @@ internal partial class Game : IGameSerialize
                     // We'll need a new level
                     NewLevelFlag = true;
                     CameFrom = LevelStartEnum.StartWalk;
-                    DoCmdSaveGame(true);
+                    MsgPrint(string.Empty);
+                    HandleStuff();
+                    UpdateScreen();
                 }
                 else if (tile.FeatureType.IsVisibleDoor)
                 {
@@ -7135,7 +7103,9 @@ internal partial class Game : IGameSerialize
                     // We need a new map
                     NewLevelFlag = true;
                     CameFrom = LevelStartEnum.StartWalk;
-                    DoCmdSaveGame(true);
+                    MsgPrint(string.Empty);
+                    HandleStuff();
+                    UpdateScreen();
                 }
                 // If we can see that we're walking into a closed door, try to open it
                 else if (tile.FeatureType.IsVisibleDoor)

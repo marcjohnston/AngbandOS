@@ -47,8 +47,9 @@ internal class GoUpStairsScript : UniversalScript, IGetKey
         {
             Game.MsgPrint("You enter a maze of up staircases.");
         }
-        // Autosave, just in case
-        Game.DoCmdSaveGame(true);
+        Game.MsgPrint(string.Empty);
+        Game.HandleStuff();
+        Game.UpdateScreen();
         // In a tower, going up increases our level number
         if (Game.CurDungeon.Tower)
         {

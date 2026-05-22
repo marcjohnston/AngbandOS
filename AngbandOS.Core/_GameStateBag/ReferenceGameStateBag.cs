@@ -14,7 +14,7 @@ namespace AngbandOS.Core;
     }
     public override string ToString()
     {
-        return $"=>{ObjectId}";
+        return $"Reference to Object#{ObjectId}";
     }
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)
     {

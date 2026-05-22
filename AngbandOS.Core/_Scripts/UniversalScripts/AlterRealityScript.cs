@@ -27,7 +27,9 @@ internal class AlterRealityScript : UniversalScript, IGetKey
     public override void ExecuteScript()
     {
         Game.MsgPrint("The world changes!");
-        Game.DoCmdSaveGame(true);
+        Game.MsgPrint(string.Empty);
+        Game.HandleStuff();
+        Game.UpdateScreen();
         Game.NewLevelFlag = true;
         Game.CameFrom = LevelStartEnum.StartRandom;
     }
