@@ -185,7 +185,7 @@ internal partial class Game : IGameSerialize
             (nameof(replayPreviousKeystrokeDateTime), saveGameState.CreateGameStateBag(replayPreviousKeystrokeDateTime)),
             (nameof(MainSequenceRandomSeed), saveGameState.CreateGameStateBag(MainSequenceRandomSeed)),
             (nameof(CurrentSequenceRandomSeed), saveGameState.CreateGameStateBag(CurrentSequenceRandomSeed)),
-            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet)),
+            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet, typeof(ReadOnlyAttributeSet))),
             (nameof(UseFixed), saveGameState.CreateGameStateBag(UseFixed)),
             (nameof(FixedSeed), saveGameState.CreateGameStateBag(FixedSeed)),
             (nameof(CurrentRunDirection), saveGameState.CreateGameStateBag(CurrentRunDirection)),
@@ -264,11 +264,11 @@ internal partial class Game : IGameSerialize
             (nameof(FractionalExperiencePoints), saveGameState.CreateGameStateBag(FractionalExperiencePoints)),
             (nameof(FractionalHealth), saveGameState.CreateGameStateBag(FractionalHealth)),
             (nameof(FractionalMana), saveGameState.CreateGameStateBag(FractionalMana)),
-            (nameof(Gender), saveGameState.CreateGameStateBag(Gender)),
+            (nameof(Gender), saveGameState.CreateGameStateBag(Gender, typeof(Gender))),
             (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
             (nameof(GetFirstLevelMutation), saveGameState.CreateGameStateBag(GetFirstLevelMutation)),
             (nameof(KnownBonusArmorClass), saveGameState.CreateGameStateBag(KnownBonusArmorClass)),
-            (nameof(GooPatron), saveGameState.CreateGameStateBag(GooPatron)),
+            (nameof(GooPatron), saveGameState.CreateGameStateBag(GooPatron, typeof(Patron))),
             (nameof(LightLevel), saveGameState.CreateGameStateBag(LightLevel)),
             (nameof(MaxLevelGained), saveGameState.CreateGameStateBag(MaxLevelGained)),
             (nameof(MeleeAttacksPerRound), saveGameState.CreateGameStateBag(MeleeAttacksPerRound)),
@@ -279,7 +279,7 @@ internal partial class Game : IGameSerialize
             (nameof(RaceAtBirth), saveGameState.CreateGameStateBag(RaceAtBirth)),
             (nameof(PrimaryRealm), saveGameState.CreateGameStateBag(PrimaryRealm)),
             (nameof(SecondaryRealm), saveGameState.CreateGameStateBag(SecondaryRealm)),
-            (nameof(TownWithHouse), saveGameState.CreateGameStateBag(TownWithHouse)),
+            (nameof(TownWithHouse), saveGameState.CreateGameStateBag(TownWithHouse, typeof(Town))),
             (nameof(Weight), saveGameState.CreateGameStateBag(Weight)),
             (nameof(WeightCarried), saveGameState.CreateGameStateBag(WeightCarried)),
             (nameof(WildernessX), saveGameState.CreateGameStateBag(WildernessX)),
@@ -324,8 +324,8 @@ internal partial class Game : IGameSerialize
             (nameof(_prevGeneration), saveGameState.CreateGameStateBag(_prevGeneration)),
             (nameof(_prevName), saveGameState.CreateGameStateBag(_prevName)),
             (nameof(_prevRace), saveGameState.CreateGameStateBag(_prevRace)),
-            (nameof(_prevPrimaryRealm), saveGameState.CreateGameStateBag(_prevPrimaryRealm)),
-            (nameof(_prevSecondaryRealm), saveGameState.CreateGameStateBag(_prevSecondaryRealm)),
+            (nameof(_prevPrimaryRealm), saveGameState.CreateGameStateBag(_prevPrimaryRealm, typeof(Realm))),
+            (nameof(_prevSecondaryRealm), saveGameState.CreateGameStateBag(_prevSecondaryRealm, typeof(Realm))),
             (nameof(_prevSex), saveGameState.CreateGameStateBag(_prevSex)),
             (nameof(Inventory), saveGameState.CreateGameStateBag(Inventory, typeof(Item))),
             (nameof(_invenCnt), saveGameState.CreateGameStateBag(_invenCnt))
@@ -596,7 +596,7 @@ internal partial class Game : IGameSerialize
             replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTime();
             MainSequenceRandomSeed = restoreGameState.GetByKey(nameof(MainSequenceRandomSeed)).GetInt();
             CurrentSequenceRandomSeed = restoreGameState.GetByKey(nameof(CurrentSequenceRandomSeed)).GetInt();
-            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetReference<ReadOnlyAttributeSet>();
+            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(this, restoreGameState));
             UseFixed = restoreGameState.GetByKey(nameof(UseFixed)).GetBool();
             FixedSeed = restoreGameState.GetByKey(nameof(FixedSeed)).GetInt();
             CurrentRunDirection = restoreGameState.GetByKey(nameof(CurrentRunDirection)).GetInt();
@@ -675,11 +675,11 @@ internal partial class Game : IGameSerialize
             FractionalExperiencePoints = restoreGameState.GetByKey(nameof(FractionalExperiencePoints)).GetInt();
             FractionalHealth = restoreGameState.GetByKey(nameof(FractionalHealth)).GetInt();
             FractionalMana = restoreGameState.GetByKey(nameof(FractionalMana)).GetInt();
-            Gender = restoreGameState.GetByKey(nameof(Gender)).GetReferenceOrDefault<Gender>();
+            Gender = restoreGameState.GetByKey(nameof(Gender)).GetDerivedReferenceOrDefault<Gender>();
             Generation = restoreGameState.GetByKey(nameof(Generation)).GetInt();
             GetFirstLevelMutation = restoreGameState.GetByKey(nameof(GetFirstLevelMutation)).GetBool();
             KnownBonusArmorClass = restoreGameState.GetByKey(nameof(KnownBonusArmorClass)).GetInt();
-            GooPatron = restoreGameState.GetByKey(nameof(GooPatron)).GetReference<Patron>();
+            GooPatron = restoreGameState.GetByKey(nameof(GooPatron)).GetDerivedReference<Patron>();
             LightLevel = restoreGameState.GetByKey(nameof(LightLevel)).GetInt();
             MaxLevelGained = restoreGameState.GetByKey(nameof(MaxLevelGained)).GetInt();
             MeleeAttacksPerRound = restoreGameState.GetByKey(nameof(MeleeAttacksPerRound)).GetInt();
@@ -690,7 +690,7 @@ internal partial class Game : IGameSerialize
             RaceAtBirth = restoreGameState.GetByKey(nameof(RaceAtBirth)).GetReference<Race>();
             PrimaryRealm = restoreGameState.GetByKey(nameof(PrimaryRealm)).GetReferenceOrDefault<Realm>();
             SecondaryRealm = restoreGameState.GetByKey(nameof(SecondaryRealm)).GetReferenceOrDefault<Realm>();
-            TownWithHouse = restoreGameState.GetByKey(nameof(TownWithHouse)).GetReferenceOrDefault<Town>();
+            TownWithHouse = restoreGameState.GetByKey(nameof(TownWithHouse)).GetDerivedReferenceOrDefault<Town>();
             Weight = restoreGameState.GetByKey(nameof(Weight)).GetInt();
             WeightCarried = restoreGameState.GetByKey(nameof(WeightCarried)).GetInt();
             WildernessX = restoreGameState.GetByKey(nameof(WildernessX)).GetInt();
@@ -735,8 +735,8 @@ internal partial class Game : IGameSerialize
             _prevGeneration = restoreGameState.GetByKey(nameof(_prevGeneration)).GetInt();
             _prevName = restoreGameState.GetByKey(nameof(_prevName)).GetString();
             _prevRace = restoreGameState.GetByKey(nameof(_prevRace)).GetReferenceOrDefault<Race>();
-            _prevPrimaryRealm = restoreGameState.GetByKey(nameof(_prevPrimaryRealm)).GetReferenceOrDefault<Realm>();
-            _prevSecondaryRealm = restoreGameState.GetByKey(nameof(_prevSecondaryRealm)).GetReferenceOrDefault<Realm>();
+            _prevPrimaryRealm = restoreGameState.GetByKey(nameof(_prevPrimaryRealm)).GetDerivedReferenceOrDefault<Realm>();
+            _prevSecondaryRealm = restoreGameState.GetByKey(nameof(_prevSecondaryRealm)).GetDerivedReferenceOrDefault<Realm>();
             _prevSex = restoreGameState.GetByKey(nameof(_prevSex)).GetReference<Gender>();
             Inventory = restoreGameState.GetByKey(nameof(Inventory)).GetNullableDerivedReferences<Item>((RestoreGameState restoreGameState) => new Item(this, restoreGameState));
             _invenCnt = restoreGameState.GetByKey(nameof(_invenCnt)).GetInt();

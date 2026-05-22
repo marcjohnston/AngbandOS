@@ -26,7 +26,7 @@ internal class Quest : IGameSerialize
     {
         return new DictionaryGameStateBag(
             (nameof(Discovered), saveGameState.CreateGameStateBag(Discovered)),
-            (nameof(Dungeon), saveGameState.CreateGameStateBag(Dungeon)),
+            (nameof(Dungeon), saveGameState.CreateGameStateBag(Dungeon, typeof(Dungeon))),
             (nameof(Killed), saveGameState.CreateGameStateBag(Killed)),
             (nameof(Level), saveGameState.CreateGameStateBag(Level)),
             (nameof(RIdx), saveGameState.CreateGameStateBag(RIdx)),
@@ -98,7 +98,7 @@ internal class Quest : IGameSerialize
     public Quest(Game game, RestoreGameState restoreGameState) : this(game)
     {
         Discovered = restoreGameState.GetByKey(nameof(Discovered)).GetBool();
-        Dungeon = restoreGameState.GetByKey(nameof(Dungeon)).GetReferenceOrDefault<Dungeon>();
+        Dungeon = restoreGameState.GetByKey(nameof(Dungeon)).GetDerivedReferenceOrDefault<Dungeon>();
         Killed = restoreGameState.GetByKey(nameof(Killed)).GetInt();
         Level = restoreGameState.GetByKey(nameof(Level)).GetInt();
         RIdx = restoreGameState.GetByKey(nameof(RIdx)).GetInt();

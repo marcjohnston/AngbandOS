@@ -122,7 +122,15 @@ internal class SaveGameState
 
     private static bool IsCompatible(Type actualType, Type derivedType) => actualType.IsAssignableFrom(derivedType) || (actualType.BaseType != null && IsCompatible(actualType.BaseType, derivedType));
 
-    public GameStateBag CreateGameStateBag(IGameSerialize? gameSerializable, Type derivedType, params Type[] derivedTypes)
+    /// <summary>
+    /// Creates a reference to an object game state bag with support for polymorphism and derived objects by generating a code that tracks which derived object was serialized.  The order of the supplied types is used to generated the derived code.
+    /// At least one type must be supplied.  If only one type is supplied, a default null derived code is generated and not written to the output file.
+    /// </summary>
+    /// <param name="gameSerializable"></param>
+    /// <param name="type">Provide the type for the object to be serialized.</param>
+    /// <param name="derivedTypes">Provide all of the additional derived types.  If none are provided, a null derived code will be generated; otherwise, the derived code will be equal to the position of the type specified.</param>
+    /// <returns></returns>
+    public GameStateBag CreateGameStateBag(IGameSerialize? gameSerializable, Type type, params Type[] derivedTypes)
     {
         if (gameSerializable is null)
         {
@@ -138,11 +146,11 @@ internal class SaveGameState
         int objectId = RegisterObject(gameSerializable);
         DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)gameSerializable.Serialize(this);
 
-        byte? derivedId = DetermineDerivedId(gameSerializable.GetType(), new Type[] { derivedType }.Concat(derivedTypes).ToArray());
+        byte? derivedId = DetermineDerivedId(gameSerializable.GetType(), new Type[] { type }.Concat(derivedTypes).ToArray());
         return new DerivedObjectGameStateBag(objectId, derivedId, gameStateBag);
     }
 
-    public GameStateBag CreateGameStateBag(IEnumerable<IGameSerialize?>? gameSerializable, Type derivedType, params Type[] derivedTypes)
+    public GameStateBag CreateGameStateBag(IEnumerable<IGameSerialize?>? gameSerializable, Type type, params Type[] derivedTypes)
     {
         if (gameSerializable is null)
         {
@@ -152,12 +160,12 @@ internal class SaveGameState
         var gameStateBags = new List<GameStateBag>();
         foreach (IGameSerialize? item in gameSerializable)
         {
-            gameStateBags.Add(CreateGameStateBag(item, derivedType, derivedTypes));
+            gameStateBags.Add(CreateGameStateBag(item, type, derivedTypes));
         }
         return new ListGameStateBag(gameStateBags.ToArray());
     }
 
-    public GameStateBag CreateGameStateBag(IGameSerialize[][]? gameSerializable, Type derivedType, params Type[] derivedTypes)
+    public GameStateBag CreateGameStateBag(IGameSerialize[][]? gameSerializable, Type type, params Type[] derivedTypes)
     {
         if (gameSerializable is null)
         {
@@ -167,7 +175,7 @@ internal class SaveGameState
         var gameStateBags = new List<GameStateBag>();
         foreach (IGameSerialize[] item in gameSerializable)
         {
-            gameStateBags.Add(CreateGameStateBag(item, derivedType, derivedTypes));
+            gameStateBags.Add(CreateGameStateBag(item, type, derivedTypes));
         }
         return new ListGameStateBag(gameStateBags.ToArray());
     }

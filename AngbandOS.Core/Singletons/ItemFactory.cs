@@ -20,12 +20,12 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     {
         return new DictionaryGameStateBag(
             ("bools", saveGameState.CreateGameStateBag(Stompable[0], Stompable[1], Stompable[2], Stompable[3], IsFlavorAware, Tried)),
-            (nameof(FlavorSymbol), saveGameState.CreateGameStateBag(FlavorSymbol)),
+            (nameof(FlavorSymbol), saveGameState.CreateGameStateBag(FlavorSymbol, typeof(Symbol))),
             (nameof(FlavorColor), saveGameState.CreateGameStateBag(FlavorColor)),
             (nameof(Flavor), saveGameState.CreateGameStateBag(Flavor, typeof(IllegibleItemFlavor), typeof(ItemFlavor))),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
             (nameof(_bookIndex), saveGameState.CreateGameStateBag(_bookIndex)),
-            (nameof(_realm), saveGameState.CreateGameStateBag(_realm))
+            (nameof(_realm), saveGameState.CreateGameStateBag(_realm, typeof(Realm)))
         );
     }
 
@@ -519,12 +519,12 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         if (restoreGameState is not null)
         {
             (Stompable[0], Stompable[1], Stompable[2], Stompable[3], IsFlavorAware, Tried) = restoreGameState.GetByKey("bools").Get6Bools();
-            FlavorSymbol = restoreGameState.GetByKey(nameof(FlavorSymbol)).GetReference<Symbol>();
+            FlavorSymbol = restoreGameState.GetByKey(nameof(FlavorSymbol)).GetDerivedReference<Symbol>();
             FlavorColor = restoreGameState.GetByKey(nameof(FlavorColor)).GetEnum<ColorEnum>();
             Flavor = restoreGameState.GetByKey(nameof(Flavor)).GetDerivedReferenceOrDefault<Flavor>((RestoreGameState restoreGameState) => new IllegibleItemFlavor(Game, restoreGameState));
             Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
             _bookIndex = restoreGameState.GetByKey(nameof(_bookIndex)).GetInt();
-            _realm = restoreGameState.GetByKey(nameof(_realm)).GetReferenceOrDefault<Realm>();
+            _realm = restoreGameState.GetByKey(nameof(_realm)).GetDerivedReferenceOrDefault<Realm>();
         }
     }
 
