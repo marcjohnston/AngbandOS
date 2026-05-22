@@ -15,13 +15,13 @@ internal class IllegibleItemFlavor : Flavor
     public override GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Symbol), saveGameState.CreateGameStateBag(Symbol)),
+            (nameof(Symbol), saveGameState.CreateGameStateBag(Symbol, typeof(Symbol))),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
             (nameof(Name), saveGameState.CreateGameStateBag(Name))
         );
     }
 
-    public IllegibleItemFlavor(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Symbol)).GetReference<Symbol>(), restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>(), restoreGameState.GetByKey(nameof(Name)).GetString())
+    public IllegibleItemFlavor(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Symbol)).GetDerivedReference<Symbol>(), restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>(), restoreGameState.GetByKey(nameof(Name)).GetString())
     {
     }
 

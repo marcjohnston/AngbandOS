@@ -19,7 +19,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(ReadOnlyAttributeSet), saveGameState.CreateGameStateBag(ReadOnlyAttributeSet))
+            (nameof(ReadOnlyAttributeSet), saveGameState.CreateGameStateBag(ReadOnlyAttributeSet, typeof(ReadOnlyAttributeSet)))
         );
     }
     public virtual Bonuses? GetBonusesForMeleeWeapon(Item? oPtr) => null;
@@ -410,7 +410,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            ReadOnlyAttributeSet = restoreGameState.GetByKey(nameof(ReadOnlyAttributeSet)).GetReference<ReadOnlyAttributeSet>();
+            ReadOnlyAttributeSet = restoreGameState.GetByKey(nameof(ReadOnlyAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
         }
     }
 

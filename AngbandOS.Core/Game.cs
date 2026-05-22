@@ -155,13 +155,13 @@ internal partial class Game : IGameSerialize
             (nameof(AllocRaceSize), saveGameState.CreateGameStateBag(AllocRaceSize)),
             (nameof(AllocRaceTable), saveGameState.CreateGameStateBag(AllocRaceTable, typeof(AllocationEntry))),
             (nameof(CameFrom), saveGameState.CreateGameStateBag(CameFrom)),
-            (nameof(CurDungeon), saveGameState.CreateGameStateBag(CurDungeon)),
+            (nameof(CurDungeon), saveGameState.CreateGameStateBag(CurDungeon, typeof(Dungeon))),
             (nameof(CurrentDepth), saveGameState.CreateGameStateBag(CurrentDepth)),
-            (nameof(CurTown), saveGameState.CreateGameStateBag(CurTown)),
+            (nameof(CurTown), saveGameState.CreateGameStateBag(CurTown, typeof(Town))),
             (nameof(DiedFrom), saveGameState.CreateGameStateBag(DiedFrom)),
             (nameof(DungeonDifficulty), saveGameState.CreateGameStateBag(DungeonDifficulty)),
             (nameof(EnergyUse), saveGameState.CreateGameStateBag(EnergyUse)),
-            (nameof(RecallDungeon), saveGameState.CreateGameStateBag(RecallDungeon)),
+            (nameof(RecallDungeon), saveGameState.CreateGameStateBag(RecallDungeon, typeof(Dungeon))),
             (nameof(Resting), saveGameState.CreateGameStateBag(Resting)),
             (nameof(Running), saveGameState.CreateGameStateBag(Running)),
             (nameof(TargetWho), saveGameState.CreateGameStateBag(TargetWho, typeof(Target))),
@@ -177,7 +177,7 @@ internal partial class Game : IGameSerialize
             (nameof(CommandDirection), saveGameState.CreateGameStateBag(CommandDirection)),
             (nameof(CurrentCommand), saveGameState.CreateGameStateBag(CurrentCommand)),
             (nameof(KeyQueue), saveGameState.CreateGameStateBag(KeyQueue)),
-            (nameof(Screen), saveGameState.CreateGameStateBag(Screen)),
+            (nameof(Screen), saveGameState.CreateGameStateBag(Screen, typeof(Window))),
             (nameof(KeyHead), saveGameState.CreateGameStateBag(KeyHead)),
             (nameof(KeyTail), saveGameState.CreateGameStateBag(KeyTail)),
             (nameof(_artificialKeyBuffer), saveGameState.CreateGameStateBag(_artificialKeyBuffer)),
@@ -187,7 +187,7 @@ internal partial class Game : IGameSerialize
             (nameof(Age), saveGameState.CreateGameStateBag(Age)),
             (nameof(ArmorClassBonus), saveGameState.CreateGameStateBag(ArmorClassBonus)),
             (nameof(Energy), saveGameState.CreateGameStateBag(Energy)),
-            (nameof(Bonuses), saveGameState.CreateGameStateBag(Bonuses)),
+            (nameof(Bonuses), saveGameState.CreateGameStateBag(Bonuses, typeof(Bonuses))),
             (nameof(FractionalExperiencePoints), saveGameState.CreateGameStateBag(FractionalExperiencePoints)),
             (nameof(FractionalHealth), saveGameState.CreateGameStateBag(FractionalHealth)),
             (nameof(FractionalMana), saveGameState.CreateGameStateBag(FractionalMana)),
@@ -467,13 +467,13 @@ internal partial class Game : IGameSerialize
             AllocRaceSize = restoreGameState.GetByKey(nameof(AllocRaceSize)).GetInt();
             AllocRaceTable = restoreGameState.GetByKey(nameof(AllocRaceTable)).GetDerivedReferences<AllocationEntry>((RestoreGameState restoreGameState) => new AllocationEntry(this, restoreGameState)).ToArray();
             CameFrom = restoreGameState.GetByKey(nameof(CameFrom)).GetEnum<LevelStartEnum>();
-            CurDungeon = restoreGameState.GetByKey(nameof(CurDungeon)).GetReference<Dungeon>();
+            CurDungeon = restoreGameState.GetByKey(nameof(CurDungeon)).GetDerivedReference<Dungeon>();
             CurrentDepth = restoreGameState.GetByKey(nameof(CurrentDepth)).GetInt();
-            CurTown = restoreGameState.GetByKey(nameof(CurTown)).GetReference<Town>();
+            CurTown = restoreGameState.GetByKey(nameof(CurTown)).GetDerivedReference<Town>();
             DiedFrom = restoreGameState.GetByKey(nameof(DiedFrom)).GetStringOrDefault();
             DungeonDifficulty = restoreGameState.GetByKey(nameof(DungeonDifficulty)).GetInt();
             EnergyUse = restoreGameState.GetByKey(nameof(EnergyUse)).GetInt();
-            RecallDungeon = restoreGameState.GetByKey(nameof(RecallDungeon)).GetReference<Dungeon>();
+            RecallDungeon = restoreGameState.GetByKey(nameof(RecallDungeon)).GetDerivedReference<Dungeon>();
             Resting = restoreGameState.GetByKey(nameof(Resting)).GetInt();
             Running = restoreGameState.GetByKey(nameof(Running)).GetInt();
             TargetWho = restoreGameState.GetByKey(nameof(TargetWho)).GetDerivedReferenceOrDefault<Target>();
@@ -489,7 +489,7 @@ internal partial class Game : IGameSerialize
             CommandDirection = restoreGameState.GetByKey(nameof(CommandDirection)).GetInt();
             CurrentCommand = restoreGameState.GetByKey(nameof(CurrentCommand)).GetChar();
             KeyQueue = restoreGameState.GetByKey(nameof(KeyQueue)).GetChars();
-            Screen = restoreGameState.GetByKey(nameof(Screen)).GetReference<Window>();
+            Screen = restoreGameState.GetByKey(nameof(Screen)).GetDerivedReference<Window>((RestoreGameState restoreGameState) => new Window(this, restoreGameState));
             KeyHead = restoreGameState.GetByKey(nameof(KeyHead)).GetInt();
             KeyTail = restoreGameState.GetByKey(nameof(KeyTail)).GetInt();
             _artificialKeyBuffer = restoreGameState.GetByKey(nameof(_artificialKeyBuffer)).GetString();
@@ -499,7 +499,7 @@ internal partial class Game : IGameSerialize
             Age = restoreGameState.GetByKey(nameof(Age)).GetInt();
             ArmorClassBonus = restoreGameState.GetByKey(nameof(ArmorClassBonus)).GetInt();
             Energy = restoreGameState.GetByKey(nameof(Energy)).GetInt();
-            Bonuses = restoreGameState.GetByKey(nameof(Bonuses)).GetReference<Bonuses>();
+            Bonuses = restoreGameState.GetByKey(nameof(Bonuses)).GetDerivedReference<Bonuses>((RestoreGameState restoreGameState) => new Bonuses(this, restoreGameState));
             FractionalExperiencePoints = restoreGameState.GetByKey(nameof(FractionalExperiencePoints)).GetInt();
             FractionalHealth = restoreGameState.GetByKey(nameof(FractionalHealth)).GetInt();
             FractionalMana = restoreGameState.GetByKey(nameof(FractionalMana)).GetInt();

@@ -18,7 +18,7 @@ internal class Store : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(StoreFactory), saveGameState.CreateGameStateBag(StoreFactory)),
+            (nameof(StoreFactory), saveGameState.CreateGameStateBag(StoreFactory, typeof(StoreFactory))),
             (nameof(_x), saveGameState.CreateGameStateBag(_x)),
             (nameof(_y), saveGameState.CreateGameStateBag(_y)),
             (nameof(_leaveStore), saveGameState.CreateGameStateBag(_leaveStore)),
@@ -48,7 +48,7 @@ internal class Store : IGameSerialize
         InventoryFactories = table.ToArray();
     }
 
-    public Store(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(StoreFactory)).GetReference<StoreFactory>())
+    public Store(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(StoreFactory)).GetDerivedReference<StoreFactory>())
     {
         _x = restoreGameState.GetByKey(nameof(_x)).GetInt();
         _y = restoreGameState.GetByKey(nameof(_y)).GetInt();

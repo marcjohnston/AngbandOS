@@ -22,7 +22,7 @@ internal abstract class Race : IGetKey, IGameSerialize
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet))
+            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet, typeof(ReadOnlyAttributeSet)))
         );
     }
 
@@ -37,7 +37,7 @@ internal abstract class Race : IGetKey, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetReference<ReadOnlyAttributeSet>();
+            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
         }
     }
 

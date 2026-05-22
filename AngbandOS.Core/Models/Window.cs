@@ -57,9 +57,9 @@ internal class Window : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(ActiveScreen), saveGameState.CreateGameStateBag(ActiveScreen)),
-            (nameof(OldScreen), saveGameState.CreateGameStateBag(OldScreen)),
-            (nameof(UpdateWindow), saveGameState.CreateGameStateBag(UpdateWindow)),
+            (nameof(ActiveScreen), saveGameState.CreateGameStateBag(ActiveScreen, typeof(ScreenBuffer))),
+            (nameof(OldScreen), saveGameState.CreateGameStateBag(OldScreen, typeof(ScreenBuffer))),
+            (nameof(UpdateWindow), saveGameState.CreateGameStateBag(UpdateWindow, typeof(UpdateWindow))),
             (nameof(Height), saveGameState.CreateGameStateBag(Height)),
             (nameof(Width), saveGameState.CreateGameStateBag(Width)),
             (nameof(RowStartingIndexArray), saveGameState.CreateGameStateBag(RowStartingIndexArray)),
@@ -69,9 +69,9 @@ internal class Window : IGameSerialize
 
     public Window(Game game, RestoreGameState restoreGameState)
     {
-        ActiveScreen = restoreGameState.GetByKey(nameof(ActiveScreen)).GetReference<ScreenBuffer>();
-        OldScreen = restoreGameState.GetByKey(nameof(OldScreen)).GetReference<ScreenBuffer>();
-        UpdateWindow = restoreGameState.GetByKey(nameof(UpdateWindow)).GetReference<UpdateWindow>();
+        ActiveScreen = restoreGameState.GetByKey(nameof(ActiveScreen)).GetDerivedReference<ScreenBuffer>((RestoreGameState restoreGameState) => new ScreenBuffer(game, restoreGameState));
+        OldScreen = restoreGameState.GetByKey(nameof(OldScreen)).GetDerivedReference<ScreenBuffer>((RestoreGameState restoreGameState) => new ScreenBuffer(game, restoreGameState));
+        UpdateWindow = restoreGameState.GetByKey(nameof(UpdateWindow)).GetDerivedReference<UpdateWindow>((RestoreGameState restoreGameState) => new UpdateWindow(game, restoreGameState));
         Height = restoreGameState.GetByKey(nameof(Height)).GetInt();
         Width = restoreGameState.GetByKey(nameof(Width)).GetInt();
         RowStartingIndexArray = restoreGameState.GetByKey(nameof(RowStartingIndexArray)).GetInts();
