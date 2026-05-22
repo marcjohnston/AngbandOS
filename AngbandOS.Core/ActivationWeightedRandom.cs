@@ -26,5 +26,4 @@ internal abstract class ActivationWeightedRandom : WeightedRandom<Activation>, I
             Add(weight, Game.SingletonRepository.Get<Activation>(activationName));
         }
     }
-
 }
