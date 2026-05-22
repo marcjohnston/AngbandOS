@@ -148,7 +148,7 @@ internal partial class Game : IGameSerialize
             (nameof(_levelEntryTurn), saveGameState.CreateGameStateBag(_levelEntryTurn)),
             (nameof(LastInputReceived), saveGameState.CreateGameStateBag(LastInputReceived)),
             (nameof(CommandRepeat), saveGameState.CreateGameStateBag(CommandRepeat)),
-            (nameof(Quests), saveGameState.CreateGameStateBag(Quests)),
+            (nameof(Quests), saveGameState.CreateGameStateBag(Quests, typeof(Quest))),
             (nameof(_elevationMap), saveGameState.CreateGameStateBag(_elevationMap)),
             (nameof(AllocKindSize), saveGameState.CreateGameStateBag(AllocKindSize)),
             (nameof(AllocKindTable), saveGameState.CreateGameStateBag(AllocKindTable, typeof(AllocationEntry))),
@@ -167,11 +167,11 @@ internal partial class Game : IGameSerialize
             (nameof(TargetWho), saveGameState.CreateGameStateBag(TargetWho)),
             (nameof(TotalFriendLevels), saveGameState.CreateGameStateBag(TotalFriendLevels)),
             (nameof(TotalFriends), saveGameState.CreateGameStateBag(TotalFriends)),
-            (nameof(_petList ), saveGameState.CreateGameStateBag(_petList )),
+            (nameof(_petList ), saveGameState.CreateGameStateBag(_petList, typeof(Monster))),
             (nameof(_seedFlavor), saveGameState.CreateGameStateBag(_seedFlavor)),
             (nameof(ExPlayer), saveGameState.CreateGameStateBag(ExPlayer)),
             (nameof(LevelOfFirstSpell), saveGameState.CreateGameStateBag(LevelOfFirstSpell)),
-            (nameof(SpellOrder), saveGameState.CreateGameStateBag(SpellOrder)),
+            (nameof(SpellOrder), saveGameState.CreateGameStateBag(SpellOrder, typeof(Spell))),
             (nameof(Talents), saveGameState.CreateGameStateBag(Talents)),
             (nameof(CommandArgument), saveGameState.CreateGameStateBag(CommandArgument)),
             (nameof(CommandDirection), saveGameState.CreateGameStateBag(CommandDirection)),
@@ -231,17 +231,17 @@ internal partial class Game : IGameSerialize
             (nameof(PanelRowMax), saveGameState.CreateGameStateBag(PanelRowMax)),
             (nameof(PanelRowMin), saveGameState.CreateGameStateBag(PanelRowMin)),
             (nameof(TempN), saveGameState.CreateGameStateBag(TempN)),
-            (nameof(Light), saveGameState.CreateGameStateBag(Light)),
-            (nameof(View), saveGameState.CreateGameStateBag(View)),
+            (nameof(Light), saveGameState.CreateGameStateBag(Light, typeof(GridCoordinate))),
+            (nameof(View), saveGameState.CreateGameStateBag(View, typeof(GridCoordinate))),
             (nameof(CurrentlyActingMonster), saveGameState.CreateGameStateBag(CurrentlyActingMonster)),
             (nameof(DunBias), saveGameState.CreateGameStateBag(DunBias)),
             (nameof(NumRepro), saveGameState.CreateGameStateBag(NumRepro)),
-            (nameof(Monsters), saveGameState.CreateGameStateBag(Monsters)),
+            (nameof(Monsters), saveGameState.CreateGameStateBag(Monsters, typeof(Monster))),
             (nameof(_hackMIdxIi), saveGameState.CreateGameStateBag(_hackMIdxIi)),
             (nameof(StartupTownName), saveGameState.CreateGameStateBag(StartupTownName)),
-            (nameof(MessageLog), saveGameState.CreateGameStateBag(MessageLog)),
-            (nameof(RecentMessages), saveGameState.CreateGameStateBag(RecentMessages)),
-            (nameof(PreviousMessages), saveGameState.CreateGameStateBag(PreviousMessages)),
+            (nameof(MessageLog), saveGameState.CreateGameStateBag(MessageLog, typeof(GameMessage))),
+            (nameof(RecentMessages), saveGameState.CreateGameStateBag(RecentMessages, typeof(GameMessage))),
+            (nameof(PreviousMessages), saveGameState.CreateGameStateBag(PreviousMessages, typeof(GameMessage))),
             (nameof(MessageFirstQueueIndex), saveGameState.CreateGameStateBag(MessageFirstQueueIndex)),
             (nameof(_prevCharacterClass), saveGameState.CreateGameStateBag(_prevCharacterClass)),
             (nameof(_prevGeneration), saveGameState.CreateGameStateBag(_prevGeneration)),
@@ -482,7 +482,7 @@ internal partial class Game : IGameSerialize
             _levelEntryTurn = restoreGameState.GetByKey(nameof(_levelEntryTurn)).GetInt();
             LastInputReceived = restoreGameState.GetByKey(nameof(LastInputReceived)).GetNullableDateTime();
             CommandRepeat = restoreGameState.GetByKey(nameof(CommandRepeat)).GetInt();
-            Quests = restoreGameState.GetByKey(nameof(Quests)).GetReferences<Quest>().ToList();
+            Quests = restoreGameState.GetByKey(nameof(Quests)).GetDerivedReferences<Quest>((RestoreGameState restoreGameState) => new Quest(this, restoreGameState)).ToList();
             _elevationMap = restoreGameState.GetByKey(nameof(_elevationMap)).GetArrayOfBytes();
             AllocKindSize = restoreGameState.GetByKey(nameof(AllocKindSize)).GetInt();
             AllocKindTable = restoreGameState.GetByKey(nameof(AllocKindTable)).GetDerivedReferences<AllocationEntry>((RestoreGameState restoreGameState) => new AllocationEntry(this, restoreGameState)).ToArray();
@@ -501,11 +501,11 @@ internal partial class Game : IGameSerialize
             TargetWho = restoreGameState.GetByKey(nameof(TargetWho)).GetReferenceOrDefault<Target>();
             TotalFriendLevels = restoreGameState.GetByKey(nameof(TotalFriendLevels)).GetInt();
             TotalFriends = restoreGameState.GetByKey(nameof(TotalFriends)).GetInt();
-            _petList = restoreGameState.GetByKey(nameof(_petList)).GetReferences<Monster>().ToList();
+            _petList = restoreGameState.GetByKey(nameof(_petList)).GetDerivedReferences<Monster>((RestoreGameState restoreGameState) => new Monster(this, restoreGameState)).ToList();
             _seedFlavor = restoreGameState.GetByKey(nameof(_seedFlavor)).GetInt();
             ExPlayer = restoreGameState.GetByKey(nameof(ExPlayer)).GetReferenceOrDefault<ExPlayer>();
             LevelOfFirstSpell = restoreGameState.GetByKey(nameof(LevelOfFirstSpell)).GetNullableInt();
-            SpellOrder = restoreGameState.GetByKey(nameof(SpellOrder)).GetReferences<Spell>().ToList();
+            SpellOrder = restoreGameState.GetByKey(nameof(SpellOrder)).GetDerivedReferences<Spell>().ToList();
             Talents = restoreGameState.GetByKey(nameof(Talents)).GetReferences<Talent>().ToList();
             CommandArgument = restoreGameState.GetByKey(nameof(CommandArgument)).GetInt();
             CommandDirection = restoreGameState.GetByKey(nameof(CommandDirection)).GetInt();
@@ -565,17 +565,17 @@ internal partial class Game : IGameSerialize
             PanelRowMax = restoreGameState.GetByKey(nameof(PanelRowMax)).GetInt();
             PanelRowMin = restoreGameState.GetByKey(nameof(PanelRowMin)).GetInt();
             TempN = restoreGameState.GetByKey(nameof(TempN)).GetInt();
-            Light = restoreGameState.GetByKey(nameof(Light)).GetReferences<GridCoordinate>().ToList();
-            View = restoreGameState.GetByKey(nameof(View)).GetReferences<GridCoordinate>().ToList();
+            Light = restoreGameState.GetByKey(nameof(Light)).GetDerivedReferences<GridCoordinate>((RestoreGameState restoreGameState) => new GridCoordinate(this, restoreGameState)).ToList();
+            View = restoreGameState.GetByKey(nameof(View)).GetDerivedReferences<GridCoordinate>((RestoreGameState restoreGameState) => new GridCoordinate(this, restoreGameState)).ToList();
             CurrentlyActingMonster = restoreGameState.GetByKey(nameof(CurrentlyActingMonster)).GetInt();
             DunBias = restoreGameState.GetByKey(nameof(DunBias)).GetReferenceOrDefault<MonsterRaceFilter>();
             NumRepro = restoreGameState.GetByKey(nameof(NumRepro)).GetInt();
-            Monsters = restoreGameState.GetByKey(nameof(Monsters)).GetReferences<Monster>().ToArray();
+            Monsters = restoreGameState.GetByKey(nameof(Monsters)).GetDerivedReferences<Monster>((RestoreGameState restoreGameState) => new Monster(this, restoreGameState)).ToArray();
             _hackMIdxIi = restoreGameState.GetByKey(nameof(_hackMIdxIi)).GetInt();
             StartupTownName = restoreGameState.GetByKey(nameof(StartupTownName)).GetStringOrDefault();
-            MessageLog = restoreGameState.GetByKey(nameof(MessageLog)).GetReferences<GameMessage>().ToList();
-            RecentMessages = restoreGameState.GetByKey(nameof(RecentMessages)).GetReferences<GameMessage>().ToList();
-            PreviousMessages = restoreGameState.GetByKey(nameof(PreviousMessages)).GetReferences<GameMessage>().ToArray();
+            MessageLog = restoreGameState.GetByKey(nameof(MessageLog)).GetDerivedReferences<GameMessage>((RestoreGameState restoreGameState) => new GameMessage(this, restoreGameState)).ToList();
+            RecentMessages = restoreGameState.GetByKey(nameof(RecentMessages)).GetDerivedReferences<GameMessage>((RestoreGameState restoreGameState) => new GameMessage(this, restoreGameState)).ToList();
+            PreviousMessages = restoreGameState.GetByKey(nameof(PreviousMessages)).GetDerivedReferences<GameMessage>((RestoreGameState restoreGameState) => new GameMessage(this, restoreGameState)).ToArray();
             MessageFirstQueueIndex = restoreGameState.GetByKey(nameof(MessageFirstQueueIndex)).GetInt();
             _prevCharacterClass = restoreGameState.GetByKey(nameof(_prevCharacterClass)).GetReference<CharacterClass>();
             _prevGeneration = restoreGameState.GetByKey(nameof(_prevGeneration)).GetInt();

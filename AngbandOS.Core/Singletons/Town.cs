@@ -31,7 +31,7 @@ internal sealed class Town : IGetKey, IToJson, IGameSerialize
             (nameof(Visited), saveGameState.CreateGameStateBag(Visited)),
             (nameof(X), saveGameState.CreateGameStateBag(X)),
             (nameof(Y), saveGameState.CreateGameStateBag(Y)),
-            (nameof(Stores), saveGameState.CreateGameStateBag(Stores))
+            (nameof(Stores), saveGameState.CreateGameStateBag(Stores, typeof(Store)))
         );
     }
 
@@ -111,7 +111,7 @@ internal sealed class Town : IGetKey, IToJson, IGameSerialize
             Visited = restoreGameState.GetByKey(nameof(Visited)).GetBool();
             X = restoreGameState.GetByKey(nameof(X)).GetInt();
             Y = restoreGameState.GetByKey(nameof(Y)).GetInt();
-            Stores = restoreGameState.GetByKey(nameof(Stores)).GetReferences<Store>();
+            Stores = restoreGameState.GetByKey(nameof(Stores)).GetDerivedReferences<Store>((RestoreGameState restoreGameState) => new Store(Game, restoreGameState));
         }
     }
 

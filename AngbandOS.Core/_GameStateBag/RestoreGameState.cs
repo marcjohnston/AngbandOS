@@ -360,9 +360,13 @@ internal class RestoreGameState
             if (derivedObjectGameStateBag.DerivedId is null)
             {
 #if DEBUG
+                if (constructors.Length == 0)
+                {
+                    throw new Exception($"No constructor was supplied to generate a {typeof(T).Name}.");
+                }
                 if (constructors.Length != 1)
                 {
-                    throw new Exception("Invalid number of constructors for null derived id received.");
+                    throw new Exception($"Too many constructors were supplied to generate a {typeof(T).Name}.  {typeof(T).Name} was serialized without polymorphism support.");
                 }
 #endif
                 constructor = constructors[0];
