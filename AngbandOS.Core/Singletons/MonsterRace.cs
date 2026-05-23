@@ -16,7 +16,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
             (nameof(Guardian), saveGameState.CreateGameStateBag(Guardian)),
             (nameof(OnlyGuardian), saveGameState.CreateGameStateBag(OnlyGuardian)),
             (nameof(MaxNum), saveGameState.CreateGameStateBag(MaxNum)),
-            (nameof(Knowledge), saveGameState.CreateGameStateBag(Knowledge))
+            (nameof(Knowledge), saveGameState.CreateGameStateBag(Knowledge, typeof(MonsterKnowledge)))
         );
     }
 
@@ -555,7 +555,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
             Guardian = restoreGameState.GetByKey(nameof(Guardian)).GetBool();
             OnlyGuardian = restoreGameState.GetByKey(nameof(OnlyGuardian)).GetBool();
             MaxNum = restoreGameState.GetByKey(nameof(MaxNum)).GetInt();
-            Knowledge = restoreGameState.GetByKey(nameof(Knowledge)).GetReference<MonsterKnowledge>();
+            Knowledge = restoreGameState.GetByKey(nameof(Knowledge)).GetDerivedReference<MonsterKnowledge>((RestoreGameState restoreGameState) => new MonsterKnowledge(Game, restoreGameState));
         }
     }
 
