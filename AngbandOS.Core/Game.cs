@@ -16664,6 +16664,15 @@ internal partial class Game : IGameSerialize
         DangerRating = old;
     }
 
+    /// <summary>
+    /// Places a monster and all kinds of validation and checks are done.
+    /// </summary>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    /// <param name="rPtr"></param>
+    /// <param name="slp"></param>
+    /// <param name="pet"></param>
+    /// <returns></returns>
     private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool pet)
     {
         // Monster must be provided.

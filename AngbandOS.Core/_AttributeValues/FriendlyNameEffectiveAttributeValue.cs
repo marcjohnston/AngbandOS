@@ -18,7 +18,7 @@ internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
 
     #region Constructors
     public FriendlyNameEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
-    public FriendlyNameEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
+    public FriendlyNameEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
         RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
         foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)

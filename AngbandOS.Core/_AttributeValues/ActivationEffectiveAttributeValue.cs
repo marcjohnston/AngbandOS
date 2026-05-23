@@ -18,14 +18,14 @@ internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
 
     #region Constructors
     public ActivationEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
-    public ActivationEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
+    public ActivationEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
         RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
         foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
             string key = tupleRestoreGameState.GetByKey("Key").GetString();
-            Activation? modifier = tupleRestoreGameState.GetByKey("Modifier").GetReferenceOrDefault<Activation>();
+            Activation? modifier = tupleRestoreGameState.GetByKey("Modifier").GetDerivedReferenceOrDefault<Activation>();
 
             _attributeModifiers.Add((key, modifier));
         }
@@ -76,7 +76,7 @@ internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
         // Serialize the tuples.
         GameStateBag[] tupleGameStateBags = _attributeModifiers.Select(_attributeModifier => new DictionaryGameStateBag(
                 ("Key", saveGameState.CreateGameStateBag(_attributeModifier.Key)),
-                ("Modifier", saveGameState.CreateGameStateBag(_attributeModifier.Modifier))
+                ("Modifier", saveGameState.CreateGameStateBag(_attributeModifier.Modifier, typeof(Activation)))
         )).ToArray();
 
         // Put the tuples into a list.

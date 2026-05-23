@@ -14,7 +14,7 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
     /// </summary>
     protected readonly List<(string Key, int Modifier)> _attributeModifiers = new List<(string, int)>();
     public SumEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
-    public SumEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
+    public SumEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
         RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
         foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)

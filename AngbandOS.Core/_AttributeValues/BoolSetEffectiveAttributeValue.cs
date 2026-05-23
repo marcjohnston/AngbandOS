@@ -20,7 +20,7 @@ internal class BoolSetEffectiveAttributeValue : EffectiveAttributeValue
         _initialValue = initialValue;
         _attributeModifiers.Add(("", initialValue));
     }
-    public BoolSetEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>())
+    public BoolSetEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
         _initialValue = restoreGameState.GetByKey(nameof(_initialValue)).GetBoolOrDefault();
         RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));

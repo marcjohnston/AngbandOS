@@ -220,64 +220,6 @@ internal class RestoreGameState
         return boolList.ToArray();
     }
 
-    public T GetReference<T>()
-    {
-#if DEBUG
-        // We will only check game serializable models and not IGetKey.
-        if (!typeof(IGetKey).IsAssignableFrom(typeof(T)) && !typeof(T).IsAbstract)
-        {
-            ConstructorInfo? gameAndRestoreGameStateConstructor = typeof(T).GetConstructor(BindingFlags.Public | BindingFlags.Instance, null, new[] { typeof(Game), typeof(RestoreGameState) }, null);
-            if (gameAndRestoreGameStateConstructor is null)
-            {
-                throw new Exception($"Model for {typeof(T).Name} does not have public constructor for (Game, RestoreGameState).");
-            }
-        }
-#endif
-
-        // Check to see if the singleton game state bag is a reference.  This will occur when the singleton was already serialized from a previous singleton.
-        if (GameStateBag is ReferenceGameStateBag referenceGameStateBag)
-        {
-            // This is a reference game state bag.  Retrieve the object id and check to see if the object is already being tracked.
-            int objectId = referenceGameStateBag.ObjectId;
-            if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
-            {
-#if DEBUG
-                if (!typeof(T).IsAssignableFrom(singleton.GetType()))
-                {
-                    throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
-                }
-#endif
-
-                // We need to track the object.  Since this is a reference game state bag, we do not have the object game state bag yet and will pass null.
-                T typedReference = (T)singleton;
-                return typedReference;
-            }
-            throw new Exception("Reference ID not found in ObjectIdToReferenceDictionary.");
-        }
-        else if (GameStateBag is ObjectGameStateBag objectGameStateBag)
-        {
-            // This is an object game state bag.  The object might already exist because the object was serialized early.
-            int objectId = objectGameStateBag.ObjectId;
-            if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
-            {
-#if DEBUG
-                // The object already exists, even though we now have the object game state bag.  We will need to track this object game state bag for the bind phase.
-                if (!typeof(T).IsAssignableFrom(singleton.GetType()))
-                {
-                    throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
-                }
-#endif
-
-                T typedReference = (T)singleton;
-                TrackGameStateBag(objectId, objectGameStateBag);
-                return typedReference;
-            }
-
-            return CreateObject<T>(objectId, objectGameStateBag);
-        }
-        throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
-    }
-
     public T CreateObject<T>(int objectId, ObjectGameStateBag objectGameStateBag)
     {
         var fullyQualifiedName = $"{typeof(Game).Assembly.GetName().Name}.Core.{objectGameStateBag.TypeName}";
@@ -439,6 +381,64 @@ internal class RestoreGameState
         return list.ToArray();
     }
     #endregion
+
+    public T GetReference<T>()
+    {
+#if DEBUG
+        // We will only check game serializable models and not IGetKey.
+        if (!typeof(IGetKey).IsAssignableFrom(typeof(T)) && !typeof(T).IsAbstract)
+        {
+            ConstructorInfo? gameAndRestoreGameStateConstructor = typeof(T).GetConstructor(BindingFlags.Public | BindingFlags.Instance, null, new[] { typeof(Game), typeof(RestoreGameState) }, null);
+            if (gameAndRestoreGameStateConstructor is null)
+            {
+                throw new Exception($"Model for {typeof(T).Name} does not have public constructor for (Game, RestoreGameState).");
+            }
+        }
+#endif
+
+        // Check to see if the singleton game state bag is a reference.  This will occur when the singleton was already serialized from a previous singleton.
+        if (GameStateBag is ReferenceGameStateBag referenceGameStateBag)
+        {
+            // This is a reference game state bag.  Retrieve the object id and check to see if the object is already being tracked.
+            int objectId = referenceGameStateBag.ObjectId;
+            if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
+            {
+#if DEBUG
+                if (!typeof(T).IsAssignableFrom(singleton.GetType()))
+                {
+                    throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
+                }
+#endif
+
+                // We need to track the object.  Since this is a reference game state bag, we do not have the object game state bag yet and will pass null.
+                T typedReference = (T)singleton;
+                return typedReference;
+            }
+            throw new Exception("Reference ID not found in ObjectIdToReferenceDictionary.");
+        }
+        else if (GameStateBag is ObjectGameStateBag objectGameStateBag)
+        {
+            // This is an object game state bag.  The object might already exist because the object was serialized early.
+            int objectId = objectGameStateBag.ObjectId;
+            if (ObjectIdToReferenceDictionary.TryGetValue(objectId, out object? singleton))
+            {
+#if DEBUG
+                // The object already exists, even though we now have the object game state bag.  We will need to track this object game state bag for the bind phase.
+                if (!typeof(T).IsAssignableFrom(singleton.GetType()))
+                {
+                    throw new InvalidOperationException($"Reference is not of type {typeof(T).Name}.");
+                }
+#endif
+
+                T typedReference = (T)singleton;
+                TrackGameStateBag(objectId, objectGameStateBag);
+                return typedReference;
+            }
+
+            return CreateObject<T>(objectId, objectGameStateBag);
+        }
+        throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
+    }
 
     public T? GetReferenceOrDefault<T>()
     {

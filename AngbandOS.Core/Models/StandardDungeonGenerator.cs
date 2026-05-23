@@ -480,27 +480,34 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void PutQuestMonster(int rIdx)
     {
-        int y, x;
         if (Game.SingletonRepository.Get<MonsterRace>(rIdx).MaxNum == 0)
         {
             Game.SingletonRepository.Get<MonsterRace>(rIdx).MaxNum++;
-            Game.MsgPrint("Resurrecting guardian to fix corrupted savefile...");
+            Game.MsgPrint("Resurrecting guardian.");
         }
+
+        int y = Game.RandomLessThan(Game.MaxHgt);
+        int x = Game.RandomLessThan(Game.MaxWid);
+        int count = 0; // Prevent infinite loops.
         do
         {
             while (true)
             {
+                count++;
+                if (count > 100) // Prevent infinite loops.
+                {
+                    return;
+                }
+
                 y = Game.RandomLessThan(Game.MaxHgt);
                 x = Game.RandomLessThan(Game.MaxWid);
                 if (!Game.GridOpenNoItemOrCreature(y, x))
                 {
                     continue;
                 }
+                if (Game.Distance(y, x, Game.MapY.IntValue, Game.MapX.IntValue) > 15)
                 {
-                    if (Game.Distance(y, x, Game.MapY.IntValue, Game.MapX.IntValue) > 15)
-                    {
-                        break;
-                    }
+                    break;
                 }
             }
         } while (!Game.PlaceMonsterByIndex(y, x, rIdx, false, false, false));

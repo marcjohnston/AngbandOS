@@ -18,7 +18,7 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
     private readonly List<(string Key, bool Modifier)> _attributeModifiers = new List<(string, bool)>();
 
     public OrEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
-    public OrEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Attribute)).GetReference<Attribute>()) 
+    public OrEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState) 
     {
         RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
         foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)

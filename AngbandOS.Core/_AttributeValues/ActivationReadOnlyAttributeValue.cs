@@ -14,14 +14,14 @@ internal class ActivationReadOnlyAttributeValue : AttributeValue, IGameSerialize
     {
         Value = value;
     }
-    public ActivationReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetByKey(nameof(Value)).GetReferenceOrDefault<Activation>())
+    public ActivationReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : this(restoreGameState.GetByKey(nameof(Value)).GetDerivedReferenceOrDefault<Activation>())
     {
     }
 
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Value), saveGameState.CreateGameStateBag(Value))
+            (nameof(Value), saveGameState.CreateGameStateBag(Value, typeof(Activation)))
         );
     }
 }
