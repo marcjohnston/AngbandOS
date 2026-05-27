@@ -311,6 +311,7 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<ItemMatch>();
         RegisterIndex<ItemQualityRating>();
         RegisterIndex<Justification>();
+        RegisterIndex<LearnedKnowledge>();
         RegisterIndex<MartialArtsEffect>();
         RegisterIndex<MonsterEffect>();
         RegisterIndex<MonsterFilter>();
@@ -358,8 +359,11 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration>(gameConfiguration.ConditionalWidgets, restoreGameState);
         LoadFromConfiguration<ConditionalScript, ConditionalScriptGameConfiguration>(gameConfiguration.ConditionalScripts, restoreGameState);
         LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration>(gameConfiguration.DateWidgets, restoreGameState);
+        LoadFromConfiguration<DamageLearnedKnowledge, DamageLearnedKnowledgeGameConfiguration>(gameConfiguration.DamageLearnedKnowledges, restoreGameState);
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration>(gameConfiguration.DungeonGuardians, restoreGameState);
         LoadFromConfiguration<Dungeon, DungeonGameConfiguration>(gameConfiguration.Dungeons, restoreGameState);
+        LoadFromConfiguration<DurationLearnedKnowledge, DurationLearnedKnowledgeGameConfiguration>(gameConfiguration.DurationLearnedKnowledges, restoreGameState);
+        LoadFromConfiguration<ExperienceLearnedKnowledge, ExperienceLearnedKnowledgeGameConfiguration>(gameConfiguration.ExperienceLearnedKnowledges, restoreGameState);
         LoadFromConfiguration<GameCommand, GameCommandGameConfiguration>(gameConfiguration.GameCommands, restoreGameState);
         LoadFromConfiguration<GameMessageWidget, GameMessageWidgetGameConfiguration>(gameConfiguration.GameMessageWidgets, restoreGameState);
         LoadFromConfiguration<Gender, GenderGameConfiguration>(gameConfiguration.Genders, restoreGameState);
@@ -394,6 +398,7 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<RacialPowerTest, RacialPowerTestGameConfiguration>(gameConfiguration.RacialPowerTests, restoreGameState);
         LoadFromConfiguration<RangedWidget, RangedWidgetGameConfiguration>(gameConfiguration.RangedWidgets, restoreGameState);
         LoadFromConfiguration<RangedWeaponBonus, RangedWeaponBonusGameConfiguration>(gameConfiguration.RangedWeaponBonuses, restoreGameState);
+        LoadFromConfiguration<RangeLearnedKnowledge, RangeLearnedKnowledgeGameConfiguration>(gameConfiguration.RangeLearnedKnowledges, restoreGameState);
         LoadFromConfiguration<Realm, RealmGameConfiguration>(gameConfiguration.Realms, restoreGameState);
         LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration>(gameConfiguration.RealmCharacterClasses, restoreGameState); // Composite singleton
         LoadFromConfiguration<RechargeItemScript, RechargeItemScriptGameConfiguration>(gameConfiguration.RechargeItemScripts, restoreGameState);
@@ -408,6 +413,7 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration>(gameConfiguration.SyllableSets, restoreGameState);
         LoadFromConfiguration<Symbol, SymbolGameConfiguration>(gameConfiguration.Symbols, restoreGameState);
         LoadFromConfiguration<LabelWidget, LabelWidgetGameConfiguration>(gameConfiguration.LabelWidgets, restoreGameState);
+        LoadFromConfiguration<Talent, TalentGameConfiguration>(gameConfiguration.Talents, restoreGameState);
         LoadFromConfiguration<TeleportSelfScript, TeleportSelfScriptGameConfiguration>(gameConfiguration.TeleportSelfScripts, restoreGameState);        
         LoadFromConfiguration<TextWidget, TextWidgetGameConfiguration>(gameConfiguration.NullableStringsTextAreaWidgets, restoreGameState);
         LoadFromConfiguration<Tile, TileGameConfiguration>(gameConfiguration.Tiles, restoreGameState);

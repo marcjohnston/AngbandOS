@@ -4,20 +4,17 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-
-namespace AngbandOS.Core.Talents;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class NeuralBlastTalent : Talent
+internal class NeuralBlastTalentScript : UniversalScript, IGetKey
 {
-    private NeuralBlastTalent(Game game) : base(game) { }
-    public override string Name => "Neural Blast";
-    public override int Level => 2;
-    public override int ManaCost => 1;
-    public override int BaseFailure => 20;
+    private NeuralBlastTalentScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
 
-    public override void Use()
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
+    public override void ExecuteScript()
     {
         if (!Game.GetDirectionWithAim(out int dir))
         {
@@ -33,10 +30,5 @@ internal class NeuralBlastTalent : Talent
             Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(PsiProjectile));
             projectile.TargetedFire(dir, Game.DiceRoll(3 + ((Game.ExperienceLevel.IntValue - 1) / 4), 3 + (Game.ExperienceLevel.IntValue / 15)), 0, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
         }
-    }
-
-    protected override string LearnedDetails()
-    {
-        return $"dam {3 + ((Game.ExperienceLevel.IntValue - 1) / 4)}d{3 + (Game.ExperienceLevel.IntValue / 15)}";
     }
 }

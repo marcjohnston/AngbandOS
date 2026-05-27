@@ -4,26 +4,21 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.Talents;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class TelekineticWaveTalent : Talent
+internal class TelekineticWaveTalentScript : UniversalScript, IGetKey
 {
-    private TelekineticWaveTalent(Game game) : base(game) { }
-    public override string Name => "Telekinetic Wave";
-    public override int Level => 28;
-    public override int ManaCost => 20;
-    public override int BaseFailure => 45;
+    private TelekineticWaveTalentScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
 
-    public override void Use()
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
+
+    public override void ExecuteScript()
     {
         Game.MsgPrint("A wave of pure physical force radiates out from your body!");
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(TelekinesisProjectile));
         projectile.Fire(0, 3 + (Game.ExperienceLevel.IntValue / 10), Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * (Game.ExperienceLevel.IntValue > 39 ? 4 : 3), item: true, kill: true, grid: true, jump: false, beam: false, thru: false, hide: false, stop: false);
-    }
-
-    protected override string LearnedDetails()
-    {
-        return $"dam {Game.ExperienceLevel.IntValue * (Game.ExperienceLevel.IntValue > 39 ? 4 : 3)}";
     }
 }

@@ -7,25 +7,51 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class Talent : IGetKey, IGameSerialize
+internal sealed class Talent : IGetKey, IGameSerialize, IToJson
 {
     protected Game Game { get; }
-    protected Talent(Game game) // This object is a singleton
+    private IScript UseScript { get; set; }
+    public Talent(Game game, TalentGameConfiguration gameConfiguration) // This object is a singleton
     {
         Game = game;
+        Key = gameConfiguration.GetKey;
+        Name = gameConfiguration.Name;
+        Level = gameConfiguration.Level;
+        ManaCost = gameConfiguration.ManaCost;
+        BaseFailure = gameConfiguration.BaseFailure;
+        UseScriptBindingKey = gameConfiguration.UseScriptBindingKey;
+        LearnedKnowledgeBindingKey = gameConfiguration.LearnedKnowledgeBindingKey;
     }
-
-    public virtual string Key => GetType().Name;
+    public string Key { get; }
 
     public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind(RestoreGameState? restoreGameState)
+    {
+        UseScript = Game.SingletonRepository.Get<IScript>(UseScriptBindingKey);
+        LearnedKnowledge = Game.SingletonRepository.GetNullable<LearnedKnowledge>(LearnedKnowledgeBindingKey);
+    }
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
-    public abstract string Name { get; }
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public string Name { get; }
 
-    public abstract int Level { get; }
-    public abstract int ManaCost { get; }
-    public abstract int BaseFailure { get; }
+    public int Level { get; }
+    public int ManaCost { get; }
+    public int BaseFailure { get; }
+    public string UseScriptBindingKey { get; }
+    public string ToJson()
+    {
+        TalentGameConfiguration gameConfiguration = new()
+        {
+            Key = Key,
+            Name = Name,
+            Level = Level,
+            ManaCost = ManaCost,
+            BaseFailure = BaseFailure,
+            UseScriptBindingKey = UseScriptBindingKey,
+            LearnedKnowledgeBindingKey = LearnedKnowledgeBindingKey,
+        };
+        return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
+    }
 
     public int FailureChance()
     {
@@ -58,7 +84,7 @@ internal abstract class Talent : IGetKey, IGameSerialize
 
     public string SummaryLine()
     {
-        return $"{Name,-30}{Level,2} {ManaCost,4} {FailureChance(),3}% {LearnedDetails()}";
+        return $"{Name,-30}{Level,2} {ManaCost,4} {FailureChance(),3}% {LearnedDetails}";
     }
 
     public override string ToString()
@@ -66,7 +92,12 @@ internal abstract class Talent : IGetKey, IGameSerialize
         return $"{Name} ({Level}, {ManaCost}, {BaseFailure})";
     }
 
-    public abstract void Use();
+    public void Use()
+    {
+        UseScript.ExecuteScript();
+    }
 
-    protected abstract string LearnedDetails();
+    protected string? LearnedKnowledgeBindingKey { get; }
+    public LearnedKnowledge? LearnedKnowledge { get; private set; }
+    public string LearnedDetails => LearnedKnowledge is null ? string.Empty : LearnedKnowledge.LearnedDetails;
 }

@@ -187,11 +187,10 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
             Game.MsgPrint("You are too confused!");
             return;
         }
-        if (!GetMentalismTalent(out int n))
+        if (!GetMentalismTalent(out Talent? talent))
         {
             return;
         }
-        Talent talent = Game.Talents[n];
         if (talent.ManaCost > Game.Mana.IntValue)
         {
             Game.MsgPrint("You do not have enough mana to use this talent.");
@@ -260,26 +259,25 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         }
     }
 
-    private bool GetMentalismTalent(out int sn)
+    private bool GetMentalismTalent(out Talent? sn)
     {
-        int i;
-        int num = 0;
+        int i = 0;
         int y = 1;
         int x = 20;
+        sn = null;
         int plev = Game.ExperienceLevel.IntValue;
         string p = "talent";
-        sn = -1;
         bool flag = false;
         ScreenBuffer? savedScreen = null;
-        List<Talent> talents = Game.Talents;
-        for (i = 0; i < talents.Count; i++)
+        List<Talent> talentList = new List<Talent>();
+        foreach (Talent talent in Game.SingletonRepository.Get<Talent>().OrderBy(_talent => _talent.Level))
         {
-            if (talents[i].Level <= plev)
+            if (talent.Level <= plev)
             {
-                num++;
+                talentList.Add(talent);
             }
         }
-        string outVal = $"({p}s {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) Use which {p}? ";
+        string outVal = $"({p}s {0.IndexToLetter()}-{(talentList.Count - 1).IndexToLetter()}, *=List, ESC=exit) Use which {p}? ";
         while (!flag && Game.GetCom(outVal, out char choice))
         {
             if (choice == ' ' || choice == '*' || choice == '?')
@@ -290,13 +288,9 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
                     Game.Screen.PrintLine("", y, x);
                     Game.Screen.Print("Name", y, x + 5);
                     Game.Screen.Print("Lv Mana Fail Info", y, x + 35);
-                    for (i = 0; i < talents.Count; i++)
+                    for (i = 0; i < talentList.Count; i++)
                     {
-                        Talent talent = talents[i];
-                        if (talent.Level > plev)
-                        {
-                            break;
-                        }
+                        Talent talent = talentList[i];
                         string psiDesc = $"  {i.IndexToLetter()}) {talent.SummaryLine()}";
                         Game.Screen.PrintLine(psiDesc, y + i + 1, x);
                     }
@@ -315,13 +309,13 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
                 choice = char.ToLower(choice);
             }
             i = char.IsLower(choice) ? choice.LetterToNumber() : -1;
-            if (i < 0 || i >= num)
+            if (i < 0 || i >= talentList.Count)
             {
                 continue;
             }
             if (ask)
             {
-                string tmpVal = $"Use {talents[i].Name}? ";
+                string tmpVal = $"Use {talentList[i].Name}? ";
                 if (!Game.GetCheck(tmpVal))
                 {
                     continue;
@@ -337,7 +331,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         {
             return false;
         }
-        sn = i;
+        sn = talentList[i];
         return true;
     }
 

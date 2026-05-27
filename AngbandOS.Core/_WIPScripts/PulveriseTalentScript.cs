@@ -4,20 +4,17 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-
-namespace AngbandOS.Core.Talents;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PulveriseTalent : Talent
+internal class PulveriseTalentScript : UniversalScript, IGetKey
 {
-    private PulveriseTalent(Game game) : base(game) { }
-    public override string Name => "Pulverise";
-    public override int Level => 11;
-    public override int ManaCost => 7;
-    public override int BaseFailure => 30;
+    private PulveriseTalentScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
 
-    public override void Use()
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
+    public override void ExecuteScript()
     {
         if (!Game.GetDirectionWithAim(out int dir))
         {
@@ -25,11 +22,5 @@ internal class PulveriseTalent : Talent
         }
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile));
         projectile.TargetedFire(dir, Game.DiceRoll(8 + ((Game.ExperienceLevel.IntValue - 5) / 4), 8), Game.ExperienceLevel.IntValue > 20 ? ((Game.ExperienceLevel.IntValue - 20) / 8) + 1 : 0, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
-    }
-
-    protected override string LearnedDetails()
-    {
-        return $"dam {8 + ((Game.ExperienceLevel.IntValue - 5) / 4)}d8";
-        ;
     }
 }

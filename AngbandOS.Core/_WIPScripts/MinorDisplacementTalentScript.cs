@@ -4,18 +4,17 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.Talents;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class MinorDisplacementTalent : Talent
+internal class MinorDisplacementTalentScript : UniversalScript, IGetKey
 {
-    private MinorDisplacementTalent(Game game) : base(game) { }
-    public override string Name => "Minor Displacement";
-    public override int Level => 3;
-    public override int ManaCost => 2;
-    public override int BaseFailure => 25;
+    private MinorDisplacementTalentScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
 
-    public override void Use()
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
+    public override void ExecuteScript()
     {
         if (Game.ExperienceLevel.IntValue < 25)
         {
@@ -40,10 +39,5 @@ internal class MinorDisplacementTalent : Talent
                 Game.TeleportPlayerTo(j, i);
             }
         }
-    }
-
-    protected override string LearnedDetails()
-    {
-        return $"range {(Game.ExperienceLevel.IntValue < 25 ? 10 : Game.ExperienceLevel.IntValue + 2)}";
     }
 }

@@ -4,18 +4,17 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.Talents;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class CharacterArmorTalent : Talent
+internal class CharacterArmorTalentScript : UniversalScript, IGetKey
 {
-    private CharacterArmorTalent(Game game) : base(game) { }
-    public override string Name => "Character Armor";
-    public override int Level => 13;
-    public override int ManaCost => 12;
-    public override int BaseFailure => 50;
+    private CharacterArmorTalentScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
 
-    public override void Use()
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
+    public override void ExecuteScript()
     {
         Game.StoneskinTimer.AddTimer(Game.ExperienceLevel.IntValue);
         if (Game.ExperienceLevel.IntValue > 14)
@@ -38,10 +37,5 @@ internal class CharacterArmorTalent : Talent
         {
             Game.PoisonResistanceTimer.AddTimer(Game.ExperienceLevel.IntValue);
         }
-    }
-
-    protected override string LearnedDetails()
-    {
-        return $"dur {Game.ExperienceLevel.IntValue}";
     }
 }

@@ -172,7 +172,6 @@ internal partial class Game : IGameSerialize
             (nameof(ExPlayer), saveGameState.CreateGameStateBag(ExPlayer, typeof(ExPlayer))),
             (nameof(LevelOfFirstSpell), saveGameState.CreateGameStateBag(LevelOfFirstSpell)),
             (nameof(SpellOrder), saveGameState.CreateGameStateBag(SpellOrder, typeof(Spell))),
-            (nameof(Talents), saveGameState.CreateGameStateBag(Talents)),
             (nameof(CommandArgument), saveGameState.CreateGameStateBag(CommandArgument)),
             (nameof(CommandDirection), saveGameState.CreateGameStateBag(CommandDirection)),
             (nameof(CurrentCommand), saveGameState.CreateGameStateBag(CurrentCommand)),
@@ -484,7 +483,6 @@ internal partial class Game : IGameSerialize
             ExPlayer = restoreGameState.GetByKey(nameof(ExPlayer)).GetDerivedReferenceOrDefault<ExPlayer>((RestoreGameState restoreGameState) => new ExPlayer(this, restoreGameState));
             LevelOfFirstSpell = restoreGameState.GetByKey(nameof(LevelOfFirstSpell)).GetNullableInt();
             SpellOrder = restoreGameState.GetByKey(nameof(SpellOrder)).GetDerivedReferences<Spell>().ToList();
-            Talents = restoreGameState.GetByKey(nameof(Talents)).GetReferences<Talent>().ToList();
             CommandArgument = restoreGameState.GetByKey(nameof(CommandArgument)).GetInt();
             CommandDirection = restoreGameState.GetByKey(nameof(CommandDirection)).GetInt();
             CurrentCommand = restoreGameState.GetByKey(nameof(CurrentCommand)).GetChar();
@@ -1226,8 +1224,6 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public readonly List<Spell> SpellOrder = new List<Spell>();
                                                          
-    public List<Talent> Talents;
-
     /// <summary>
     /// Represents the object responsible for saving the game, when needed.  If null, the game cannot be saved.
     /// </summary>
@@ -8945,7 +8941,7 @@ internal partial class Game : IGameSerialize
         while (!Shutdown)
         {
             HideCursorOnFullScreenInkey = true;
-            (char cmd, bool isArtificial) = GetKeystroke();
+            (char cmd, bool isArtificial, bool fromReplay) = GetKeystroke();
             MsgPrint(null);
             if (cmd == '\x1b')
             {
@@ -8954,7 +8950,7 @@ internal partial class Game : IGameSerialize
             }
             else
             {
-                if (!isArtificial)
+                if (!isArtificial && !fromReplay)
                 {
                     RecordReplayStep(cmd);
                 }
@@ -9042,9 +9038,9 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public TimeSpan? MaxKeystrokeReplayElapsedTime { get; } = new TimeSpan(0, 0, 0, 0, 0);
 
-    public void RecordReplayStep(char keystroke)
+    private void RecordReplayStep(char keystroke)
     {
-        if (!IsInReplayMode && ReplayPersistentStorage is not null)
+        if (ReplayPersistentStorage is not null)
         {
             ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke);
         }
@@ -9052,8 +9048,8 @@ internal partial class Game : IGameSerialize
 
     public char GetAndRecordKeystroke(bool disableArtificialKeybuffer = false, bool nonBlocking = false)
     {
-        (char keystroke, bool isArtificial) = GetKeystroke(disableArtificialKeybuffer, nonBlocking);
-        if (!isArtificial)
+        (char keystroke, bool isArtificial, bool fromReplay) = GetKeystroke(disableArtificialKeybuffer, nonBlocking);
+        if (!isArtificial && !fromReplay)
         {
             RecordReplayStep(keystroke);
         }
@@ -9065,7 +9061,7 @@ internal partial class Game : IGameSerialize
     /// keystrokes are retrieved.
     /// </summary>
     /// <returns>The next key pressed.</returns>
-    public (char keystroke, bool isArtifical) GetKeystroke(bool disableArtificialKeybuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
+    public (char keystroke, bool isArtificial, bool fromReplay) GetKeystroke(bool disableArtificialKeybuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
     {
         /// <summary>
         /// Attempts to gets a keypress from the <see cref="ConsoleViewport"/> queue.  Returns true, if a keypress was returned.  Returns false, if the <paramref name="wait"/> is true and the <see cref="ConsoleViewPort"/>
@@ -9171,13 +9167,16 @@ internal partial class Game : IGameSerialize
             return true;
         }
 
+        // Retrieve the IsInReplayMode value at the beginning.  The retrieval process will turn off the replay mode for the last keystroke.
+        bool fromReplay = IsInReplayMode;
+
         char ch = '\0';
         if (!disableArtificialKeybuffer && _artificialKeyBuffer.Length > 0)
         {
             ch = _artificialKeyBuffer[0];
             _artificialKeyBuffer = _artificialKeyBuffer.Remove(0, 1);
             HideCursorOnFullScreenInkey = false;
-            return (ch, true);
+            return (ch, true, fromReplay);
         }
         bool v = Screen.CursorVisible;
         if (!nonBlocking && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
@@ -9212,7 +9211,7 @@ internal partial class Game : IGameSerialize
         }
         Screen.CursorVisible = v;
         HideCursorOnFullScreenInkey = false;
-        return (ch, false);
+        return (ch, false, fromReplay);
     }
 
     private void MapMovementKeys()

@@ -64,14 +64,14 @@ public class DivisionInfixExpression : InfixExpression
         return null;
     }
 
-    public override Expression Minimize(MinimizeOptions? options = null)
+    public override Expression Minimize(MinimizeOptions? minimizeOptions = null)
     {
-        if (options is null)
+        if (minimizeOptions is null)
         {
-            options = new MinimizeOptions();
+            minimizeOptions = new MinimizeOptions();
         }
-        Expression minimizedDividend = Dividend.Minimize(options);
-        Expression minimizedDivisor = Divisor.Minimize(options);
+        Expression minimizedDividend = Dividend.Minimize(minimizeOptions);
+        Expression minimizedDivisor = Divisor.Minimize(minimizeOptions);
 
         // Check for identities. x/1=x
         if (minimizedDivisor is IntegerExpression minimizedIntegerDivisorExpression && minimizedIntegerDivisorExpression.Value == 1)
@@ -83,7 +83,11 @@ public class DivisionInfixExpression : InfixExpression
             return minimizedDividend;
         }
         Expression? minimizedExpression = TryDivide(minimizedDividend, minimizedDivisor);
-        if (options.DivideOnlyOnfIntegerResult && minimizedExpression is DecimalExpression && minimizedDividend is IntegerExpression && minimizedDivisor is IntegerExpression)
+        if (minimizeOptions.FloorDecimalDivisionResults && minimizedExpression is DecimalExpression decimalExpression)
+        {
+            minimizedExpression = new IntegerExpression((int)Math.Floor(decimalExpression.Value));
+        }
+        if (minimizeOptions.DivideOnlyIfIntegerResult && minimizedExpression is DecimalExpression && minimizedDividend is IntegerExpression && minimizedDivisor is IntegerExpression)
         {
             return new DivisionInfixExpression(minimizedDividend, minimizedDivisor);
         }

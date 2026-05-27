@@ -4,20 +4,17 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-
-namespace AngbandOS.Core.Talents;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class DominationTalent : Talent
+internal class DominationTalentScript : UniversalScript, IGetKey
 {
-    private DominationTalent(Game game) : base(game) { }
-    public override string Name => "Domination";
-    public override int Level => 9;
-    public override int ManaCost => 7;
-    public override int BaseFailure => 50;
+    private DominationTalentScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
 
-    public override void Use()
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
+    public override void ExecuteScript()
     {
         if (Game.ExperienceLevel.IntValue < 30)
         {
@@ -32,10 +29,5 @@ internal class DominationTalent : Talent
         {
             Game.RunScript(nameof(ControlAnimalAtLos2xProjectileScript));
         }
-    }
-
-    protected override string LearnedDetails()
-    {
-        return string.Empty;
     }
 }

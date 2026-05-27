@@ -71,7 +71,7 @@ public class SubtractionInfixExpression : InfixExpression
             Expression parenthesisExpression = new ParenthesisExpression(minimizedSubtrahend, false);
             return parenthesisExpression.Minimize(options);
         }
-        Expression? minimizedExpression = minimizedExpression = TrySubtract(minimizedSubtrahend, minimizedSubtrahend);
+        Expression? minimizedExpression = minimizedExpression = TrySubtract(minimizedMinuend, minimizedSubtrahend);
         return minimizedExpression ?? new SubtractionInfixExpression(minimizedMinuend, minimizedSubtrahend);
     }
 }

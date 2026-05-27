@@ -20,11 +20,6 @@ internal class ConfirmationBirthStage : BirthStage
         Game.GetStartingGold();
         Game.RefreshGods();
 
-        Game.Talents = new List<Talent>();
-        foreach (Talent talent in Game.SingletonRepository.Get<Talent>())
-        {
-            Game.Talents.Add(talent);
-        }
         if (Game.PrimaryRealm != null)
         {
             Game.PrimaryRealm.InitializeSpells();

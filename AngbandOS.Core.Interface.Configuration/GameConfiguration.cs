@@ -118,6 +118,11 @@ public class GameConfiguration
 
     public static void MergeAllSingletonsFromAssembly(GameConfiguration gameConfiguration, Assembly assembly)
     {
+        gameConfiguration.DurationLearnedKnowledges = LoadFromAssembly<DurationLearnedKnowledgeGameConfiguration>(assembly);
+        gameConfiguration.DamageLearnedKnowledges = LoadFromAssembly<DamageLearnedKnowledgeGameConfiguration>(assembly);
+        gameConfiguration.RangeLearnedKnowledges = LoadFromAssembly<RangeLearnedKnowledgeGameConfiguration>(assembly);
+        gameConfiguration.ExperienceLearnedKnowledges = LoadFromAssembly<ExperienceLearnedKnowledgeGameConfiguration>(assembly);
+
         gameConfiguration.Towns = LoadFromAssembly<TownGameConfiguration>(assembly);
         gameConfiguration.Shopkeepers = LoadFromAssembly<ShopkeeperGameConfiguration>(assembly);
         gameConfiguration.GameCommands = LoadFromAssembly<GameCommandGameConfiguration>(assembly);
@@ -193,6 +198,7 @@ public class GameConfiguration
         gameConfiguration.ItemFilters = LoadFromAssembly<ItemFilterGameConfiguration>(assembly);
         gameConfiguration.ProductOfSumsBoolFunctions = LoadFromAssembly<ConditionalGameConfiguration>(assembly);
         gameConfiguration.RechargeItemScripts = LoadFromAssembly<RechargeItemScriptGameConfiguration>(assembly);
+        gameConfiguration.Talents = LoadFromAssembly<TalentGameConfiguration>(assembly);
         gameConfiguration.TeleportSelfScripts = LoadFromAssembly<TeleportSelfScriptGameConfiguration>(assembly);
         gameConfiguration.MappedItemEnhancements = LoadFromAssembly<MappedItemEnhancementGameConfiguration>(assembly);
         gameConfiguration.ChestTraps = LoadFromAssembly<ChestTrapGameConfiguration>(assembly);
@@ -251,7 +257,11 @@ public class GameConfiguration
     public virtual VaultGameConfiguration[]? Vaults { get; set; } = null;
 
     public virtual DungeonGuardianGameConfiguration[]? DungeonGuardians { get; set; } = null;
+    public virtual DamageLearnedKnowledgeGameConfiguration[]? DamageLearnedKnowledges { get; set; } = null;
+    public virtual DurationLearnedKnowledgeGameConfiguration[]? DurationLearnedKnowledges { get; set; } = null;
 
+    public virtual RangeLearnedKnowledgeGameConfiguration[]? RangeLearnedKnowledges { get; set; } = null;
+    public virtual ExperienceLearnedKnowledgeGameConfiguration[]? ExperienceLearnedKnowledges { get; set; } = null;
     public virtual DungeonGameConfiguration[]? Dungeons { get; set; } = null;
 
     /// <summary>
@@ -366,6 +376,7 @@ public class GameConfiguration
     public virtual ItemFilterGameConfiguration[]? ItemFilters { get; set; } = null;
     public virtual ConditionalGameConfiguration[]? ProductOfSumsBoolFunctions { get; set; } = null;
     public virtual RechargeItemScriptGameConfiguration[]? RechargeItemScripts { get; set; } = null;
+    public virtual TalentGameConfiguration[]? Talents { get; set; } = null;
     public virtual TeleportSelfScriptGameConfiguration[]? TeleportSelfScripts { get; set; } = null;
     public virtual MappedItemEnhancementGameConfiguration[]? MappedItemEnhancements { get; set; } = null;
     public virtual ChestTrapGameConfiguration[]? ChestTraps { get; set; } = null;

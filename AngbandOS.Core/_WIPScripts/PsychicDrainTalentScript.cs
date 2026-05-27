@@ -4,20 +4,17 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-
-namespace AngbandOS.Core.Talents;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PsychicDrainTalent : Talent
+internal class PsychicDrainTalentScript : UniversalScript, IGetKey
 {
-    private PsychicDrainTalent(Game game) : base(game) { }
-    public override string Name => "Psychic Drain";
-    public override int Level => 25;
-    public override int ManaCost => 10;
-    public override int BaseFailure => 40;
+    private PsychicDrainTalentScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
 
-    public override void Use()
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
+    public override void ExecuteScript()
     {
         if (!Game.GetDirectionWithAim(out int dir))
         {
@@ -30,10 +27,5 @@ internal class PsychicDrainTalent : Talent
         {
             Game.Energy -= Game.DieRoll(150);
         }
-    }
-
-    protected override string LearnedDetails()
-    {
-        return $"dam {Game.ExperienceLevel.IntValue / 2}d6";
     }
 }

@@ -2,6 +2,7 @@
 
 public class MinimizeOptions
 {
-    public bool DivideOnlyOnfIntegerResult = true;
+    public bool FloorDecimalDivisionResults = false;
+    public bool DivideOnlyIfIntegerResult = true;
     public bool ExcludeSingleDie = true;
 }

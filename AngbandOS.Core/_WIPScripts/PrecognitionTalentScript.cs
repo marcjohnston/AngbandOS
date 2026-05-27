@@ -4,18 +4,17 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-namespace AngbandOS.Core.Talents;
+namespace AngbandOS.Core.Scripts;
 
 [Serializable]
-internal class PrecognitionTalent : Talent
+internal class PrecognitionTalentScript : UniversalScript, IGetKey
 {
-    private PrecognitionTalent(Game game) : base(game) { }
-    public override string Name => "Precognition";
-    public override int Level => 1;
-    public override int ManaCost => 1;
-    public override int BaseFailure => 15;
+    private PrecognitionTalentScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
 
-    public override void Use()
+    public string GetKey => Key;
+    public void Bind(RestoreGameState? restoreGameState) { }
+    public override void ExecuteScript()
     {
         if (Game.ExperienceLevel.IntValue > 44)
         {
@@ -50,10 +49,5 @@ internal class PrecognitionTalent : Talent
         {
             Game.MsgPrint("You feel safe.");
         }
-    }
-
-    protected override string LearnedDetails()
-    {
-        return string.Empty;
     }
 }
