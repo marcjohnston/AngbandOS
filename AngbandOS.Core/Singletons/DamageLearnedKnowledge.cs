@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal sealed class DamageLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson
+internal sealed class DamageLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, IGameSerialize
 {
     public string DamageExpressionText { get; }
     public Expression DamageExpression { get; private set; }
@@ -34,4 +34,6 @@ internal sealed class DamageLearnedKnowledge : LearnedKnowledge, IGetKey, IToJso
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
+
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

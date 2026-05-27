@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal sealed class DurationLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson
+internal sealed class DurationLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, IGameSerialize
 {
     public string DurationExpressionText { get; }
     public Expression DurationExpression { get; private set; }
@@ -34,4 +34,5 @@ internal sealed class DurationLearnedKnowledge : LearnedKnowledge, IGetKey, IToJ
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

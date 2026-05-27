@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,12 +42,6 @@ internal class ReplayPersistentStorage : IReplayPersistentStorage, IDisposable
             steps.Add(gameReplayStep);
         }
 
-        reader.Close();
-        stream.Close();
-
-        // Now that we have read the replay, prepare the file for appending.
-        _stream = new FileStream(ReplayFilename, FileMode.Append, FileAccess.Write, FileShare.Read);
-
         return new GameReplayDetails(seed, steps.ToArray());
     }
     public GameReplayDetails GetReplay(string gameGuid)
@@ -77,6 +72,11 @@ internal class ReplayPersistentStorage : IReplayPersistentStorage, IDisposable
 
     public async void WriteStep(DateTime dateTime, char keystroke)
     {
+        // If we are appending data to an existing replay, we need to open it now.
+        if (_stream is null)
+        {
+            _stream = new FileStream(ReplayFilename, FileMode.Append, FileAccess.Write, FileShare.Read);
+        }
 
         await WriteDateTimeAsync(dateTime);
         await WriteCharAsync(keystroke);
@@ -297,27 +297,26 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         PlayModeEnum playMode = File.Exists(jsonSaveFilename) ? PlayModeEnum.ExistingGame : File.Exists(replayFilename) ? PlayModeEnum.ReplayGame : PlayModeEnum.NewGame;
         ReplayPersistentStorage replayPersistentStorage = new ReplayPersistentStorage(replayFilename);
         GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
+        GameResults gameResults;
         if (playMode == PlayModeEnum.ExistingGame)
         {
             byte[] serializedSaveGameData = File.ReadAllBytes(jsonSaveFilename);
-            GameResults gameResults = gameServer.PlayExistingGame(this, persistentStorage, replayPersistentStorage, gameConfiguration, serializedSaveGameData);
-            if (gameResults.SerializedGameData?.Length > 0)
-            {
-                File.WriteAllBytes(jsonSaveFilename, gameResults.SerializedGameData);// TODO: This needs to move to the file persistence driver
-            }
+            gameResults = gameServer.PlayExistingGame(this, persistentStorage, replayPersistentStorage, gameConfiguration, serializedSaveGameData);
         }
         else if (playMode == PlayModeEnum.ReplayGame)
         {
             GameReplayDetails gameReplayDetails = replayPersistentStorage.GetReplay();
-            GameResults gameResults = gameServer.ReplayGame(this, persistentStorage, replayPersistentStorage, gameConfiguration, gameReplayDetails);
+            gameResults = gameServer.ReplayGame(this, persistentStorage, replayPersistentStorage, gameConfiguration, gameReplayDetails);
         }
         else
         {
-            GameResults gameResults = gameServer.PlayNewGame(this, persistentStorage, replayPersistentStorage, gameConfiguration);
-            if (gameResults.SerializedGameData?.Length > 0)
-            {
-                File.WriteAllBytes(jsonSaveFilename, gameResults.SerializedGameData);// TODO: This needs to move to the file persistence driver
-            }
+            gameResults = gameServer.PlayNewGame(this, persistentStorage, replayPersistentStorage, gameConfiguration);
+        }
+
+        // Save the game to disk.
+        if (gameResults.SerializedGameData?.Length > 0)
+        {
+            File.WriteAllBytes(jsonSaveFilename, gameResults.SerializedGameData);
         }
     }
 

@@ -10,7 +10,9 @@ namespace AngbandOS.Core;
 internal class LearnedKnowledge
 {
     protected Game Game { get; }
+
     protected MinimizeOptions MinimizeOptions { get; }
+
     public LearnedKnowledge(Game game)
     {
         Game = game;

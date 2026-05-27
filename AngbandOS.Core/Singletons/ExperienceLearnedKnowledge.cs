@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal sealed class ExperienceLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson
+internal sealed class ExperienceLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, IGameSerialize
 {
     public ExperienceLearnedKnowledge(Game game, ExperienceLearnedKnowledgeGameConfiguration gameConfiguration) : base(game)
     {
@@ -59,4 +59,5 @@ internal sealed class ExperienceLearnedKnowledge : LearnedKnowledge, IGetKey, IT
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

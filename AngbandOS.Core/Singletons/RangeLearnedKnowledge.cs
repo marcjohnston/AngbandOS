@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal class RangeLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson
+internal class RangeLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, IGameSerialize
 {
     public string RangeExpressionText { get; }
     public Expression RangeExpression { get; private set; }
@@ -34,4 +34,5 @@ internal class RangeLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
+    public GameStateBag? Serialize(SaveGameState saveGameState) => null;
 }

@@ -1,5 +1,6 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
+[Serializable]
 public class MinimizeOptions
 {
     public bool FloorDecimalDivisionResults = false;
