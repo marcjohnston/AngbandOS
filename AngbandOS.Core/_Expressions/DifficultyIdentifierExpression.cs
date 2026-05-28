@@ -9,15 +9,16 @@ namespace AngbandOS.Core.Expressions;
 [Serializable]
 internal class DifficultyIdentifierExpression : IdentifierExpression
 {
-    public Game Game { get; }
-    public DifficultyIdentifierExpression(Game game, string matchedIdentifier) : base(matchedIdentifier)
-    {
-        Game = game;
-    }
+    public DifficultyIdentifierExpression(string matchedIdentifier) : base(matchedIdentifier) { }
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> providers)
     {
-        return new IntegerExpression(Game.Difficulty);
+        Func<int> GetDifficulty = (Func<int>)providers["Difficulty"];
+        return new IntegerExpression(GetDifficulty());
     }
-    public override Expression Minimize(MinimizeOptions? options = null) => new IntegerExpression(Game.Difficulty);
+    public override Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null)
+    {
+        Func<int> GetDifficulty = (Func<int>)providers["Difficulty"];
+        return new IntegerExpression(GetDifficulty());
+    }
 }

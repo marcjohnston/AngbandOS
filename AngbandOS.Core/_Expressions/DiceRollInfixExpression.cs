@@ -6,11 +6,7 @@ internal class DiceRollInfixExpression : InfixExpression
     /// <summary>
     /// Returns the game object.  This is needed for access to the Random to compute the dice roll.
     /// </summary>
-    public Game Game { get; }
-    public DiceRollInfixExpression(Game game, Expression dice, Expression sides) : base(dice, sides)
-    {
-        Game = game;
-    }
+    public DiceRollInfixExpression(Expression dice, Expression sides) : base(dice, sides) { }
 
     /// <summary>
     /// The number of dice to roll.  This is the left operand of the infix operator.  For example, in "3d6", the dice is 3.  In "d6", the dice is 1.
@@ -31,11 +27,26 @@ internal class DiceRollInfixExpression : InfixExpression
     /// Compute the result of the dice roll.  This will compute the number of dice to roll and the number of sides on each die, then use the game's random number generator to simulate rolling the dice and summing the results.  The final result is returned as an IntegerExpression.
     /// </summary>
     /// <returns></returns>
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> providers)
     {
-        IntegerExpression diceIntegerExpression = Game.ComputeIntegerExpression(Dice);
-        IntegerExpression sidesIntegerExpression = Game.ComputeIntegerExpression(Sides);
-        Random random = Game.UseRandom;
+        // Compute the dice and sides expressions to get the number of dice and the number of sides on each die.
+        Expression diceExpression = Dice.Compute(providers);
+        Expression sidesExpression = Sides.Compute(providers);
+
+        // Validate that both expressions compute to IntegerExpressions, since the number of dice and the number of sides must be integers.  If either expression does not compute to an IntegerExpression, throw an exception with a descriptive error message indicating which expression is invalid and what type it computed to.
+        if (diceExpression is not IntegerExpression diceIntegerExpression)
+        {
+            throw new ArgumentException($"The dice expression must compute to an IntegerExpression.  The current type is {diceExpression.GetType().Name}.");
+        }
+        if (sidesExpression is not IntegerExpression sidesIntegerExpression)
+        {
+            throw new ArgumentException($"The sides expression must compute to an IntegerExpression.  The current type is {sidesExpression.GetType().Name}.");
+        }
+
+        // Retrieve the Random from the dependencies dictionary.  If the Random is not present in the dependencies, throw an exception with a descriptive error message indicating that the Random is required to compute the dice roll.
+        Random random = (Random)providers["Random"];
+
+        // Compute the roll.  This is done by rolling the specified number of dice, where each die has the specified number of sides.  The result of each die roll is a random integer between 1 and the number of sides (inclusive).  The total result is the sum of all the individual die rolls.  For example, if the expression is "3d6", then we would roll three six-sided dice, and the result would be the sum of those three rolls, which could be anywhere from 3 to 18.
         int sum = 0;
         for (int rollIndex = 0; rollIndex < diceIntegerExpression.Value; rollIndex++)
         {
@@ -69,10 +80,10 @@ internal class DiceRollInfixExpression : InfixExpression
     /// </summary>
     /// <param name="options"></param>
     /// <returns></returns>
-    public override Expression Minimize(MinimizeOptions? options = null)
+    public override Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null)
     {
-        Expression minimizedDice = Dice.Minimize(options);
-        Expression minimizedSides = Sides.Minimize(options);
-        return new DiceRollInfixExpression(Game, minimizedDice, minimizedSides);
+        Expression minimizedDice = Dice.Minimize(providers, options);
+        Expression minimizedSides = Sides.Minimize(providers, options);
+        return new DiceRollInfixExpression(minimizedDice, minimizedSides);
     }
 }

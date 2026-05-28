@@ -12,9 +12,9 @@ public class ParenthesisExpression : Expression
     }
 
     public override Type[] ResultTypes => Expression.ResultTypes;
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> providers)
     {
-        Expression computedExpression = Expression.Compute();
+        Expression computedExpression = Expression.Compute(providers);
         Expression? resultExpression = TryCompute(Sign, computedExpression);
 
         if (resultExpression is null)
@@ -52,9 +52,9 @@ public class ParenthesisExpression : Expression
             return $"{signSymbol}({Expression})";
         }
     }
-    public override Expression Minimize(MinimizeOptions? options = null)
+    public override Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null)
     {
-        Expression minimizedExpression = Expression.Minimize(options);
+        Expression minimizedExpression = Expression.Minimize(providers, options);
         Expression? computedExpression = TryCompute(Sign, minimizedExpression);
         return computedExpression ?? new ParenthesisExpression(minimizedExpression, Sign);
     }

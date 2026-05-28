@@ -10,7 +10,7 @@ public class BooleanExpression : Expression
     }
 
     public override Type[] ResultTypes => new Type[] { typeof(BooleanExpression) };
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> providers)
     {
         return this;
     }

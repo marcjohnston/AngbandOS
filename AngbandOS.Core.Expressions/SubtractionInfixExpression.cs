@@ -8,10 +8,10 @@ public class SubtractionInfixExpression : InfixExpression
     public Expression Minuend => Operand1;
     public Expression Subtrahend => Operand2;
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> providers)
     {
-        Expression computedMinuend = Minuend.Compute();
-        Expression computedSubtrahend = Subtrahend.Compute();
+        Expression computedMinuend = Minuend.Compute(providers);
+        Expression computedSubtrahend = Subtrahend.Compute(providers);
         Expression? computedExpression = TrySubtract(computedMinuend, computedSubtrahend);
 
         if (computedExpression is null)
@@ -47,10 +47,10 @@ public class SubtractionInfixExpression : InfixExpression
         return null;
     }
     public override string Text => $"{Minuend}-{Subtrahend}";
-    public override Expression Minimize(MinimizeOptions? options = null)
+    public override Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null)
     {
-        Expression minimizedMinuend = Minuend.Minimize(options);
-        Expression minimizedSubtrahend = Subtrahend.Minimize(options);
+        Expression minimizedMinuend = Minuend.Minimize(providers, options);
+        Expression minimizedSubtrahend = Subtrahend.Minimize(providers, options);
 
         // Check for identities. x-0=x, 0-x=-x
         if (minimizedSubtrahend is IntegerExpression minimizedIntegerSubtrahendExpression && minimizedIntegerSubtrahendExpression.Value == 0)
@@ -64,12 +64,12 @@ public class SubtractionInfixExpression : InfixExpression
         else if (minimizedMinuend is IntegerExpression minimizedIntegerMinuendExpression && minimizedIntegerMinuendExpression.Value == 0)
         {
             Expression parenthesisExpression = new ParenthesisExpression(minimizedSubtrahend, false);
-            return parenthesisExpression.Minimize(options);
+            return parenthesisExpression.Minimize(providers, options);
         }
         else if (minimizedMinuend is DecimalExpression minimizedDecimalMinuendExpression && minimizedDecimalMinuendExpression.Value == 0)
         {
             Expression parenthesisExpression = new ParenthesisExpression(minimizedSubtrahend, false);
-            return parenthesisExpression.Minimize(options);
+            return parenthesisExpression.Minimize(providers, options);
         }
         Expression? minimizedExpression = minimizedExpression = TrySubtract(minimizedMinuend, minimizedSubtrahend);
         return minimizedExpression ?? new SubtractionInfixExpression(minimizedMinuend, minimizedSubtrahend);

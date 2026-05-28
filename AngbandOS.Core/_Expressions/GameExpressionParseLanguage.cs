@@ -22,9 +22,9 @@ internal class GameExpressionParseLanguage : ParseLanguage
         new BooleanFactorParser(),
         new DecimalFactorParser(), // A decimal value needs to be parsed before an integer attempt is made.
         new IntegerFactorParser(),
-        new ExperienceLevelIdentifierFactorParser(Game),
-        new DifficultyIdentifierFactorParser(Game),
-        new HealthIdentifierFactorParser(Game)
+        new ExperienceLevelIdentifierFactorParser(),
+        new DifficultyIdentifierFactorParser(),
+        new HealthIdentifierFactorParser()
     };
 
     public override (int, InfixOperator)[]? InfixOperators => new (int, InfixOperator)[]
@@ -34,6 +34,6 @@ internal class GameExpressionParseLanguage : ParseLanguage
         (1, new SubtractionInfixOperator()),
         (2, new MultiplicationInfixOperator()),
         (2, new DivisionInfixOperator()),
-        (3, new DiceRollInfixOperator(Game)) // This is the most significant operation
+        (3, new DiceRollInfixOperator()) // This is the most significant operation
     };
 }

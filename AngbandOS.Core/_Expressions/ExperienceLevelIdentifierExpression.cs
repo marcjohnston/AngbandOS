@@ -9,15 +9,16 @@ namespace AngbandOS.Core.Expressions;
 [Serializable]
 internal class ExperienceLevelIdentifierExpression : IdentifierExpression
 {
-    public Game Game { get; }
-    public ExperienceLevelIdentifierExpression(Game game, string matchedIdentifier) : base(matchedIdentifier)
-    {
-        Game = game;
-    }
+    public ExperienceLevelIdentifierExpression(string matchedIdentifier) : base(matchedIdentifier) { }
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> providers)
     {
-        return new IntegerExpression(Game.ExperienceLevel.IntValue);
+        Func<int> GetExperienceLevel = (Func<int>)providers["ExperienceLevel"];
+        return new IntegerExpression(GetExperienceLevel());
     }
-    public override Expression Minimize(MinimizeOptions? options = null) => new IntegerExpression(Game.ExperienceLevel.IntValue);
+    public override Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null)
+    {
+        Func<int> GetExperienceLevel = (Func<int>)providers["ExperienceLevel"];
+        return new IntegerExpression(GetExperienceLevel());
+    }
 }

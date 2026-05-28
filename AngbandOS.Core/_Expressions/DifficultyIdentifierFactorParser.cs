@@ -9,14 +9,9 @@ namespace AngbandOS.Core.Expressions;
 [Serializable]
 internal class DifficultyIdentifierFactorParser : IdentifierFactorParser
 {
-    public Game Game { get; }
-    public DifficultyIdentifierFactorParser(Game game)
-    {
-        Game = game;
-    }
     public override string Identifier => "f";
     protected override Expression GenerateExpression(string matchedIdentifier)
     {
-        return new DifficultyIdentifierExpression(Game, Identifier);
+        return new DifficultyIdentifierExpression(Identifier);
     }
 }

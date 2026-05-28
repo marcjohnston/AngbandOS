@@ -364,6 +364,11 @@ internal partial class Game : IGameSerialize
             IsDead = true;
             Quests = new List<Quest>();
             InitializeAllocationTables(); // This is not performed on a restore.
+
+            ExpressionProviders.Add("Random", UseRandom);
+            ExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+            ExpressionProviders.Add("Health", () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+            ExpressionProviders.Add("ExperienceLevel", () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
         }
         else
         {
@@ -1555,6 +1560,8 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public ProbabilityExpression GoldItemIsGreatProbability { get; }
 
+    public readonly Dictionary<string, object> ExpressionProviders = new Dictionary<string, object>();
+
     /// <summary>
     /// Returns an <see cref="IntegerExpression"/> from an expression computation.  A type-conversion from a decimal result to an integer result is performed as needed.  If the result is not
     /// a valid <see cref="IntegerExpression"/> an exception is thrown.
@@ -1563,11 +1570,11 @@ internal partial class Game : IGameSerialize
     /// <returns></returns>
     public IntegerExpression ComputeIntegerExpression(Expression expression)
     {
-        return expression.Compute<IntegerExpression>(DecimalToIntegerExpressionTypeConverter);
+        return expression.Compute<IntegerExpression>(new ExpressionTypeConverter[] { DecimalToIntegerExpressionTypeConverter }, ExpressionProviders);
     }
     public BooleanExpression ComputeBooleanExpression(Expression expression)
     {
-        return expression.Compute<BooleanExpression>();
+        return expression.Compute<BooleanExpression>(null, ExpressionProviders);
     }
 
     /// <summary>
@@ -1578,7 +1585,7 @@ internal partial class Game : IGameSerialize
     /// <returns></returns>
     public DecimalExpression ComputeDecimalExpression(Expression expression)
     {
-        return expression.Compute<DecimalExpression>(IntegerToDecimalExpressionTypeConverter);
+        return expression.Compute<DecimalExpression>(new ExpressionTypeConverter[] { IntegerToDecimalExpressionTypeConverter }, ExpressionProviders);
     }
 
     public PackWieldSlot PackWieldSlot { get; }

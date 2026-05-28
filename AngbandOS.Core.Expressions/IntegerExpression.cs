@@ -10,7 +10,7 @@ public class IntegerExpression : Expression
     }
 
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> providers)
     {
         return this;
     }

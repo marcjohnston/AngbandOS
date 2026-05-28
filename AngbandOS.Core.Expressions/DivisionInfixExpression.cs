@@ -7,10 +7,10 @@ public class DivisionInfixExpression : InfixExpression
     public Expression Dividend => Operand1;
     public Expression Divisor => Operand2;
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> providers)
     {
-        Expression computedDividend = Dividend.Compute();
-        Expression computedDivisor = Divisor.Compute();
+        Expression computedDividend = Dividend.Compute(providers);
+        Expression computedDivisor = Divisor.Compute(providers);
         Expression? computedExpression = TryDivide(computedDividend, computedDivisor);
 
         if (computedExpression is null)
@@ -64,14 +64,14 @@ public class DivisionInfixExpression : InfixExpression
         return null;
     }
 
-    public override Expression Minimize(MinimizeOptions? minimizeOptions = null)
+    public override Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? minimizeOptions = null)
     {
         if (minimizeOptions is null)
         {
             minimizeOptions = new MinimizeOptions();
         }
-        Expression minimizedDividend = Dividend.Minimize(minimizeOptions);
-        Expression minimizedDivisor = Divisor.Minimize(minimizeOptions);
+        Expression minimizedDividend = Dividend.Minimize(providers, minimizeOptions);
+        Expression minimizedDivisor = Divisor.Minimize(providers, minimizeOptions);
 
         // Check for identities. x/1=x
         if (minimizedDivisor is IntegerExpression minimizedIntegerDivisorExpression && minimizedIntegerDivisorExpression.Value == 1)

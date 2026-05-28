@@ -9,14 +9,9 @@ namespace AngbandOS.Core.Expressions;
 [Serializable]
 internal class ExperienceLevelIdentifierFactorParser : IdentifierFactorParser
 {
-    public Game Game { get; }
-    public ExperienceLevelIdentifierFactorParser(Game game)
-    {
-        Game = game;
-    }
     public override string Identifier => "x";
     protected override Expression GenerateExpression(string matchedIdentifier)
     {
-        return new ExperienceLevelIdentifierExpression(Game, Identifier);
+        return new ExperienceLevelIdentifierExpression(Identifier);
     }
 }

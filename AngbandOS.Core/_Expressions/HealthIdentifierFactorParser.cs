@@ -9,14 +9,9 @@ namespace AngbandOS.Core.Expressions;
 [Serializable]
 internal class HealthIdentifierFactorParser : IdentifierFactorParser
 {
-    public Game Game { get; }
-    public HealthIdentifierFactorParser(Game game)
-    {
-        Game = game;
-    }
     public override string Identifier => "h";
     protected override Expression GenerateExpression(string matchedIdentifier)
     {
-        return new HealthIdentifierExpression(Game, Identifier);
+        return new HealthIdentifierExpression(Identifier);
     }
 }

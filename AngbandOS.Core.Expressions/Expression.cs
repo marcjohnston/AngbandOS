@@ -7,7 +7,7 @@ public abstract class Expression
     /// Represents the method that all derived expression need to implement to compute the result of the expression.
     /// </summary>
     /// <returns></returns>
-    public abstract Expression Compute();
+    public abstract Expression Compute(Dictionary<string, object> dependencies);
 
     /// <summary>
     /// Represents the types of results that the expression can produce that must be implemented by all derived expressions.
@@ -20,9 +20,9 @@ public abstract class Expression
     /// <typeparam name="TExpression"></typeparam>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public TExpression Compute<TExpression>(params ExpressionTypeConverter[] typeConverters) where TExpression : Expression
+    public TExpression Compute<TExpression>(ExpressionTypeConverter[]? typeConverters, Dictionary<string, object> providers) where TExpression : Expression
     {
-        Expression expression = Compute();
+        Expression expression = Compute(providers);
         if (expression is TExpression castResult)
         {
             return castResult;
@@ -56,5 +56,5 @@ public abstract class Expression
     /// </summary>
     /// <param name="options"></param>
     /// <returns></returns>
-    public virtual Expression Minimize(MinimizeOptions? options = null) => this; // TODO: Would like the options to not be required to be sent.
+    public virtual Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null) => this; // TODO: Would like the options to not be required to be sent.
 }

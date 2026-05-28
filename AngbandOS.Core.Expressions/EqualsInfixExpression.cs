@@ -7,10 +7,10 @@ public class EqualsInfixExpression : InfixExpression
     public Expression LeftExpression => Operand1;
     public Expression RightExpression => Operand2;
     public override Type[] ResultTypes => new Type[] { typeof(BooleanExpression) };
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> providers)
     {
-        Expression leftExpression = LeftExpression.Compute();
-        Expression rightExpression = RightExpression.Compute();
+        Expression leftExpression = LeftExpression.Compute(providers);
+        Expression rightExpression = RightExpression.Compute(providers);
         if (leftExpression.GetType() != rightExpression.GetType())
         {
             throw new Exception("Boolean expression operands are not the same type.");

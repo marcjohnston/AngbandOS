@@ -8,10 +8,10 @@ public class AdditionInfixExpression : InfixExpression
     public Expression Addend1 => Operand1;
     public Expression Addend2 => Operand2;
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> providers)
     {
-        Expression computedAddend1 = Addend1.Compute();
-        Expression computedAddend2 = Addend2.Compute();
+        Expression computedAddend1 = Addend1.Compute(providers);
+        Expression computedAddend2 = Addend2.Compute(providers);
         Expression? computedExpression = TryAdd(computedAddend1, computedAddend2);
 
         if (computedExpression is null)
@@ -47,10 +47,10 @@ public class AdditionInfixExpression : InfixExpression
         }
         return null;
     }
-    public override Expression Minimize(MinimizeOptions? options = null)
+    public override Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null)
     {
-        Expression minimizedAddend1 = Addend1.Minimize(options);
-        Expression minimizedAddend2 = Addend2.Minimize(options);
+        Expression minimizedAddend1 = Addend1.Minimize(providers, options);
+        Expression minimizedAddend2 = Addend2.Minimize(providers, options);
 
         // Check for identities. x+0=x, 0+x=x
         if (minimizedAddend1 is IntegerExpression minimizedIntegerAddend1Expression && minimizedIntegerAddend1Expression.Value == 0)

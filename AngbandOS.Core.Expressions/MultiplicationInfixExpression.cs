@@ -9,10 +9,10 @@ public class MultiplicationInfixExpression : InfixExpression
     public Expression Factor2 => Operand2;
 
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression), typeof(DecimalExpression) };
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> providers)
     {
-        Expression computedFactor1 = Factor1.Compute();
-        Expression computedFactor2 = Factor2.Compute();
+        Expression computedFactor1 = Factor1.Compute(providers);
+        Expression computedFactor2 = Factor2.Compute(providers);
         Expression? computedExpression = TryMultiply(computedFactor1, computedFactor2);
 
         if (computedExpression is null)
@@ -49,10 +49,10 @@ public class MultiplicationInfixExpression : InfixExpression
     }
 
     public override string Text => $"{Factor1}*{Factor2}";
-    public override Expression Minimize(MinimizeOptions? options = null)
+    public override Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null)
     {
-        Expression minimizedFactor1 = Factor1.Minimize(options);
-        Expression minimizedFactor2 = Factor2.Minimize(options);
+        Expression minimizedFactor1 = Factor1.Minimize(providers, options);
+        Expression minimizedFactor2 = Factor2.Minimize(providers, options);
 
         // Check for identities. x*1=x, 1*x=x, x*0=0, 0*x=x
         if (minimizedFactor1 is IntegerExpression minimizedIntegerFactor1Expression)
