@@ -23,10 +23,10 @@ public class ExpressionParser
             {
                 if (OperatorsDictionary.TryGetValue(precedence, out InfixOperator[]? infixOperators))
                 {
-                    // Ensure there is no ambigious operators (duplicates).
+                    // Ensure there is no ambiguous operators (duplicates).
                     if (infixOperators.Any(_infixOperator => _infixOperator.OperatorSymbol == infixOperator.OperatorSymbol))
                     {
-                        throw new Exception($"Cannot register ambigious infix operator {infixOperator.OperatorSymbol}");
+                        throw new Exception($"Cannot register ambiguous infix operator {infixOperator.OperatorSymbol}");
                     }
 
                     // Add an additional operator to the precedence list and sort by length descending.
