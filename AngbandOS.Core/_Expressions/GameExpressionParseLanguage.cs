@@ -7,11 +7,11 @@
 namespace AngbandOS.Core.Expressions;
 
 [Serializable]
-internal class AngbandOSExpressionParseLanguage : ParseLanguage
+internal class GameExpressionParseLanguage : ParseLanguage
 {
     public Game Game { get; }
     
-    public AngbandOSExpressionParseLanguage(Game game)
+    public GameExpressionParseLanguage(Game game)
     {
         Game = game;
     }

@@ -344,7 +344,7 @@ internal partial class Game : IGameSerialize
         }
 
         // Instantiate the parser that is needed for the singleton repository.
-        ParseLanguage = new AngbandOSExpressionParseLanguage(this);
+        ParseLanguage = new GameExpressionParseLanguage(this);
         ExpressionParser = new ExpressionParser(ParseLanguage);
         IntegerToDecimalExpressionTypeConverter = new IntegerToDecimalExpressionTypeConverter();
         DecimalToIntegerExpressionTypeConverter = new DecimalToIntegerExpressionTypeConverter();
