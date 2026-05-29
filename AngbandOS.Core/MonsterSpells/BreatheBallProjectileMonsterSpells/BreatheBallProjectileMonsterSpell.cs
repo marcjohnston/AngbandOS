@@ -40,11 +40,5 @@ internal abstract class BreatheBallProjectileMonsterSpell : BallProjectileMonste
     /// <summary>
     /// Returns a default radius of damage of 0.
     /// </summary>
-    protected override int Radius => 0;
-
-    protected override IsNoticedEnum Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, bool grid, bool stop, bool item, bool kill)
-    {
-        // Make the radius negative to indicate we need a cone instead of a ball.
-        return base.Project(monster, -rad, y, x, dam, projectile, grid: grid, stop: stop, item: item, kill: kill);
-    }
+    protected override int Radius(Monster monster) => -base.Radius(monster);
 }

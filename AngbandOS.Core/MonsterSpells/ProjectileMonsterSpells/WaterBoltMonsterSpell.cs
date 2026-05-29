@@ -14,11 +14,7 @@ internal class WaterBoltMonsterSpell : ProjectileMonsterSpell
     public override bool IsAttack => true;
     public override string? VsMonsterSeenMessage => "{0} casts a water bolt at {3}";
     public override string? VsPlayerActionMessage => "{0} casts a water bolt.";
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return Game.DiceRoll(10, 10) + monsterLevel;
-    }
+    protected override string DamageRollExpression => "10d10+ML";
     protected override string ProjectileKey => nameof(WaterProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ReflectSpellResistantDetection) };
 }

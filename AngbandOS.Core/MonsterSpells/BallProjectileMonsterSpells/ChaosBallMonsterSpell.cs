@@ -23,6 +23,6 @@ internal class ChaosBallMonsterSpell : BallProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} invokes raw chaos at {3}";
     protected override string ProjectileKey => nameof(ChaosProjectile);
     protected override string DamageRollExpression => "ML*2+10d10";
-    protected override int Radius => 4;
+    protected override int Radius(Monster monster) => 4;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ChaosSpellResistantDetection) };
 }

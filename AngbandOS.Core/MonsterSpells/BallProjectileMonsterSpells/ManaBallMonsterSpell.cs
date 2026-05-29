@@ -26,5 +26,5 @@ internal class ManaBallMonsterSpell : BallProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} invokes a mana storm at {3}";
     protected override string ProjectileKey => nameof(ManaProjectile);
     protected override string DamageRollExpression => "ML*5+10d10";
-    protected override int Radius => 4;
+    protected override int Radius(Monster monster) => 4;
 }

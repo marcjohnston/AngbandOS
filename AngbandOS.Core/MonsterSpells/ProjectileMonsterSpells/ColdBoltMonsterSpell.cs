@@ -17,11 +17,7 @@ internal class ColdBoltMonsterSpell : ProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} casts a frost bolt at {3}";
 
     public override string? VsPlayerActionMessage => "{0} casts a frost bolt.";
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return Game.DiceRoll(6, 8) + (monsterLevel / 3);
-    }
+    protected override string DamageRollExpression => "6d8+(ML/3)";
     protected override string ProjectileKey => nameof(ColdProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ColdSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

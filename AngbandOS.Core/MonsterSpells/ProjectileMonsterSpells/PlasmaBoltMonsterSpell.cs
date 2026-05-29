@@ -14,11 +14,7 @@ internal class PlasmaBoltMonsterSpell : ProjectileMonsterSpell
     public override bool IsAttack => true;
     public override string? VsMonsterSeenMessage => "{0} casts a plasma bolt at {3}";
     public override string? VsPlayerActionMessage => "{0} casts a plasma bolt.";
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return 10 + Game.DiceRoll(8, 7) + monsterLevel;
-    }
+    protected override string DamageRollExpression => "10+8d7+ML";
     protected override string ProjectileKey => nameof(PlasmaProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ReflectSpellResistantDetection) };
 }

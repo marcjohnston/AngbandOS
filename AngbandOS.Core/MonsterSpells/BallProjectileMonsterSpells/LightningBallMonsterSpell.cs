@@ -16,10 +16,5 @@ internal class LightningBallMonsterSpell : BallProjectileMonsterSpell
     public override string? VsPlayerActionMessage => "{0} casts a lightning ball.";
     protected override string ProjectileKey => nameof(ElectricityProjectile);
     protected override string DamageRollExpression => "1d(ML*3/2)+8";
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return Game.DieRoll(monsterLevel * 3 / 2) + 8;
-    }
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ElecSpellResistantDetection) };
 }

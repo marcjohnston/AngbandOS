@@ -15,11 +15,7 @@ internal class PoisonBoltMonsterSpell : ProjectileMonsterSpell
     public override bool IsAttack => true;
     public override string? VsMonsterSeenMessage => "{0} casts a poison bolt at {3}";
     public override string? VsPlayerActionMessage => "{0} casts a poison bolt.";
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return Game.DiceRoll(12, 2) + (monsterLevel / 3);
-    }
+    protected override string DamageRollExpression => "12d2+(ML/3)";
     protected override string ProjectileKey => nameof(PoisonGasProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(PoisSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

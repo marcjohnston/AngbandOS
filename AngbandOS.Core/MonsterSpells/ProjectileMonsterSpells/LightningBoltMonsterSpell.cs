@@ -15,11 +15,7 @@ internal class LightningBoltMonsterSpell : ProjectileMonsterSpell
     public override bool IsAttack => true;
     public override string? VsMonsterSeenMessage => "{0} casts a lightning bolt at {3}";
     public override string? VsPlayerActionMessage => "{0} casts a lightning bolt.";
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return Game.DiceRoll(4, 8) + (monsterLevel / 3);
-    }
+    protected override string DamageRollExpression => "4d8+(ML/3)";
     protected override string ProjectileKey => nameof(ElectricityProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ElecSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

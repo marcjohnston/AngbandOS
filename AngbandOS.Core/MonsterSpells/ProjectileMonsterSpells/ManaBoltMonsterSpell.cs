@@ -14,11 +14,7 @@ internal class ManaBoltMonsterSpell : ProjectileMonsterSpell
     public override bool IsAttack => true;
     public override string? VsMonsterSeenMessage => "{0} casts a mana bolt at {3}";
     public override string? VsPlayerActionMessage => "{0} casts a mana bolt.";
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return Game.DieRoll(monsterLevel * 7 / 2) + 50;
-    }
+    protected override string DamageRollExpression => "1d(ML*7/2)+50";
     protected override string ProjectileKey => nameof(ManaProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ReflectSpellResistantDetection) };
 }

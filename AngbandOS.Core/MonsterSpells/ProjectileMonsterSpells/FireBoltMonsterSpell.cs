@@ -15,11 +15,7 @@ internal class FireBoltMonsterSpell : ProjectileMonsterSpell
     public override bool IsAttack => true;
     public override string? VsMonsterSeenMessage => "{0} casts a fire bolt at {3}";
     public override string? VsPlayerActionMessage => "{0} casts a fire bolt.";
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return Game.DiceRoll(9, 8) + (monsterLevel / 3);
-    }
+    protected override string DamageRollExpression => "9d8+(ML/3)";
     protected override string ProjectileKey => nameof(FireProjectile);
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(FireSpellResistantDetection), nameof(ReflectSpellResistantDetection) };
 }

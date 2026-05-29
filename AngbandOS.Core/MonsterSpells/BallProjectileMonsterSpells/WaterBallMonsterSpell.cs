@@ -15,7 +15,7 @@ internal class WaterBallMonsterSpell : BallProjectileMonsterSpell
     public override string? VsPlayerActionMessage => "{0} gestures fluidly.";
     protected override string ProjectileKey => nameof(WaterProjectile);
     protected override string DamageRollExpression => "1d(ML*5/2)+50";
-    protected override int Radius => 4;
+    protected override int Radius(Monster monster) => 4;
 
     public override void ExecuteOnPlayer(Monster monster)
     {
