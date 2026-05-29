@@ -42,14 +42,6 @@ internal abstract class BreatheBallProjectileMonsterSpell : BallProjectileMonste
     /// </summary>
     protected override int Radius => 0;
 
-    protected abstract int MonsterHealthDamageDivisor { get; }
-    protected abstract int MaxDamage { get; }
-    protected sealed override int Damage(Monster monster)
-    {
-        int damage = monster.Health / MonsterHealthDamageDivisor;
-        return damage > MaxDamage ? MaxDamage : damage;
-    }
-
     protected override IsNoticedEnum Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, bool grid, bool stop, bool item, bool kill)
     {
         // Make the radius negative to indicate we need a cone instead of a ball.

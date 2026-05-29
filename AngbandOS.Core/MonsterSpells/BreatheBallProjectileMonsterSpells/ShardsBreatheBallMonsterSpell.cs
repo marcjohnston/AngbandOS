@@ -14,7 +14,7 @@ internal class ShardsBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} breathes shards at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes shards.";
     protected override string ProjectileKey => nameof(ExplodeProjectile);
-    protected override int MonsterHealthDamageDivisor => 6;
-    protected override int MaxDamage => 400;
+    protected override string DamageRollExpression => "MH/6";
+    protected override int? MaxDamage => 400;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(ShardSpellResistantDetection) };
 }

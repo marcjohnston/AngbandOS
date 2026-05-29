@@ -16,9 +16,4 @@ internal class ExperienceLevelIdentifierExpression : IdentifierExpression
         Func<int> GetExperienceLevel = (Func<int>)providers["ExperienceLevel"];
         return new IntegerExpression(GetExperienceLevel());
     }
-    public override Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null)
-    {
-        Func<int> GetExperienceLevel = (Func<int>)providers["ExperienceLevel"];
-        return new IntegerExpression(GetExperienceLevel());
-    }
 }

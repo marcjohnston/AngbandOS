@@ -16,10 +16,6 @@ internal class RadiationBallMonsterSpell : BallProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} casts a ball of radiation at {3}";
     public override string? VsPlayerActionMessage => "{0} casts a ball of radiation.";
     protected override string ProjectileKey => nameof(NukeProjectile);
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return monsterLevel + Game.DiceRoll(10, 6);
-    }
+    protected override string DamageRollExpression => "ML+10d6";
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(PoisSpellResistantDetection) };
 }

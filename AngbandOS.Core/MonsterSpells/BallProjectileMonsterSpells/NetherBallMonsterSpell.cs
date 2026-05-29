@@ -15,10 +15,6 @@ internal class NetherBallMonsterSpell : BallProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} casts an nether ball at {3}";
     public override string? VsPlayerActionMessage => "{0} casts an nether ball.";
     protected override string ProjectileKey => nameof(NetherProjectile);
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return 50 + Game.DiceRoll(10, 10) + monsterLevel;
-    }
+    protected override string DamageRollExpression => "50+10d10+ML";
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(NethSpellResistantDetection) };
 }

@@ -1562,19 +1562,41 @@ internal partial class Game : IGameSerialize
 
     public readonly Dictionary<string, object> ExpressionProviders = new Dictionary<string, object>();
 
+    private Dictionary<string, object> MergeExpressionProviders(params (string, object)[]? additionalProviders)
+    {
+        Dictionary<string, object> expressionProviders;
+        if (additionalProviders is null)
+        {
+            expressionProviders = ExpressionProviders;
+        }
+        else
+        {
+            // Clone the providers.
+            expressionProviders = new Dictionary<string, object>(ExpressionProviders);
+            // Add the specific providers.
+            foreach ((string key, object provider) in additionalProviders)
+            {
+                expressionProviders.Add(key, provider);
+            }
+        }
+        return expressionProviders;
+    }
+
     /// <summary>
     /// Returns an <see cref="IntegerExpression"/> from an expression computation.  A type-conversion from a decimal result to an integer result is performed as needed.  If the result is not
     /// a valid <see cref="IntegerExpression"/> an exception is thrown.
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
-    public IntegerExpression ComputeIntegerExpression(Expression expression)
+    public IntegerExpression ComputeIntegerExpression(Expression expression, params (string, object)[]? additionalProviders)
     {
-        return expression.Compute<IntegerExpression>(new ExpressionTypeConverter[] { DecimalToIntegerExpressionTypeConverter }, ExpressionProviders);
+        Dictionary<string, object> expressionProviders = MergeExpressionProviders(additionalProviders);
+        return expression.Compute<IntegerExpression>(new ExpressionTypeConverter[] { DecimalToIntegerExpressionTypeConverter }, expressionProviders);
     }
-    public BooleanExpression ComputeBooleanExpression(Expression expression)
+    public BooleanExpression ComputeBooleanExpression(Expression expression, params (string, object)[]? additionalProviders)
     {
-        return expression.Compute<BooleanExpression>(null, ExpressionProviders);
+        Dictionary<string, object> expressionProviders = MergeExpressionProviders(additionalProviders);
+        return expression.Compute<BooleanExpression>(null, expressionProviders);
     }
 
     /// <summary>
@@ -1583,9 +1605,10 @@ internal partial class Game : IGameSerialize
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
-    public DecimalExpression ComputeDecimalExpression(Expression expression)
+    public DecimalExpression ComputeDecimalExpression(Expression expression, params (string, object)[]? additionalProviders)
     {
-        return expression.Compute<DecimalExpression>(new ExpressionTypeConverter[] { IntegerToDecimalExpressionTypeConverter }, ExpressionProviders);
+        Dictionary<string, object> expressionProviders = MergeExpressionProviders(additionalProviders);
+        return expression.Compute<DecimalExpression>(new ExpressionTypeConverter[] { IntegerToDecimalExpressionTypeConverter }, expressionProviders);
     }
 
     public PackWieldSlot PackWieldSlot { get; }

@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Threading;
+
 namespace AngbandOS.Core.MonsterSpells;
 
 [Serializable]
@@ -15,10 +17,6 @@ internal class AcidBallMonsterSpell : BallProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} casts an acid ball at {3}";
     public override string? VsPlayerActionMessage => "{0} casts an acid ball.";
     protected override string ProjectileKey => nameof(AcidProjectile);
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return Game.DieRoll(monsterLevel * 3) + 15;
-    }
+    protected override string DamageRollExpression => "1d(ML*3)+15";
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(AcidSpellResistantDetection) };
 }

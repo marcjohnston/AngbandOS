@@ -22,11 +22,7 @@ internal class DarkBallMonsterSpell : BallProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} invokes a darkness storm at {3}";
     public override string? VsPlayerActionMessage => "{0} invokes a darkness storm.";
     protected override string ProjectileKey => nameof(DarknessProjectile);
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return (monsterLevel * 5) + Game.DiceRoll(10, 10);
-    }
+    protected override string DamageRollExpression => "ML*5+10d10";
     protected override int Radius => 4;
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(DarkSpellResistantDetection) };
 }

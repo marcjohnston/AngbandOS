@@ -24,7 +24,9 @@ internal class GameExpressionParseLanguage : ParseLanguage
         new IntegerFactorParser(),
         new ExperienceLevelIdentifierFactorParser(),
         new DifficultyIdentifierFactorParser(),
-        new HealthIdentifierFactorParser()
+        new HealthIdentifierFactorParser(),
+        new MonsterLevelFactorParser(),
+        new MonsterHealthFactorParser()
     };
 
     public override (int, InfixOperator)[]? InfixOperators => new (int, InfixOperator)[]

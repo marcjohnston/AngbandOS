@@ -13,6 +13,6 @@ internal class TimeBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} breathes time at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes time.";
     protected override string ProjectileKey => nameof(TimeProjectile);
-    protected override int MonsterHealthDamageDivisor => 3;
-    protected override int MaxDamage => 150;
+    protected override string DamageRollExpression => "MH/3";
+    protected override int? MaxDamage => 150;
 }

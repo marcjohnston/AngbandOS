@@ -52,9 +52,9 @@ public abstract class Expression
     public override string ToString() => Text;
 
     /// <summary>
-    /// Represents the method that all derived expression can override to minimize the expression.  The default implementation is to return the expression itself without any changes.
+    /// Represents the method that all derived expression can override to minimize the expression.  The default implementation is to return the Compute(providers).
     /// </summary>
     /// <param name="options"></param>
     /// <returns></returns>
-    public virtual Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null) => this; // TODO: Would like the options to not be required to be sent.
+    public virtual Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null) => Compute(providers); // TODO: Would like the options to not be required to be sent.
 }

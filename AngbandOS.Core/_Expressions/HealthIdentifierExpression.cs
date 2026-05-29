@@ -16,9 +16,4 @@ internal class HealthIdentifierExpression : IdentifierExpression
         Func<int> GetHealth = (Func<int>)providers["Health"];
         return new IntegerExpression(GetHealth());
     }
-    public override Expression Minimize(Dictionary<string, object> providers, MinimizeOptions? options = null)
-    {
-        Func<int> GetHealth = (Func<int>)providers["Health"];
-        return new IntegerExpression(GetHealth());
-    }
 }

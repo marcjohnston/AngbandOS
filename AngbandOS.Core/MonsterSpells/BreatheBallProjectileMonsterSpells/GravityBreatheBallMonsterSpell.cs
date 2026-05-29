@@ -13,6 +13,6 @@ internal class GravityBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpel
     public override string? VsMonsterSeenMessage => "{0} breathes gravity at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes gravity.";
     protected override string ProjectileKey => nameof(GravityProjectile);
-    protected override int MonsterHealthDamageDivisor => 3;
-    protected override int MaxDamage => 200;
+    protected override string DamageRollExpression => "MH/3";
+    protected override int? MaxDamage => 200;
 }

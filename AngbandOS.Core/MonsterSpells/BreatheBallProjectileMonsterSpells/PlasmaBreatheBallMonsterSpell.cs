@@ -13,6 +13,6 @@ internal class PlasmaBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} breathes plasma at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes plasma.";
     protected override string ProjectileKey => nameof(PlasmaProjectile);
-    protected override int MonsterHealthDamageDivisor => 6;
-    protected override int MaxDamage => 150;
+    protected override string DamageRollExpression => "MH/6";
+    protected override int? MaxDamage => 150;
 }

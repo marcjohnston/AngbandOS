@@ -13,6 +13,6 @@ internal class ManaBreatheBallMonsterSpell : BreatheBallProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} breathes magical energy at {3}";
     public override string? VsPlayerActionMessage => "{0} breathes magical energy.";
     protected override string ProjectileKey => nameof(ManaProjectile);
-    protected override int MonsterHealthDamageDivisor => 3;
-    protected override int MaxDamage => 250;
+    protected override string DamageRollExpression => "MH/3";
+    protected override int? MaxDamage => 250;
 }

@@ -84,6 +84,8 @@ internal class DiceRollInfixExpression : InfixExpression
     {
         Expression minimizedDice = Dice.Minimize(providers, options);
         Expression minimizedSides = Sides.Minimize(providers, options);
+
+        // There is no minimized form of a dice roll.
         return new DiceRollInfixExpression(minimizedDice, minimizedSides);
     }
 }

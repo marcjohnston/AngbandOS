@@ -90,7 +90,7 @@ public class ExpressionParser
                     return factorExpression;
                 }
             }
-            throw new Exception($"Unrecognized expression at position {characterIndex} in {text}.");
+            throw new Exception($"Unrecognized expression at position {characterIndex} (base 0) in {text}.");
         }
         else
         {

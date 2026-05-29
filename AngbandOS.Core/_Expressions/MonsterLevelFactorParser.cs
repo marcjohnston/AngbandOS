@@ -7,13 +7,11 @@
 namespace AngbandOS.Core.Expressions;
 
 [Serializable]
-internal class DifficultyIdentifierExpression : IdentifierExpression
+internal class MonsterLevelFactorParser : IdentifierFactorParser
 {
-    public DifficultyIdentifierExpression(string matchedIdentifier) : base(matchedIdentifier) { }
-    public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute(Dictionary<string, object> providers)
+    public override string Identifier => "ml";
+    protected override Expression GenerateExpression(string matchedIdentifier)
     {
-        Func<int> GetDifficulty = (Func<int>)providers["Difficulty"];
-        return new IntegerExpression(GetDifficulty());
+        return new MonsterLevelExpression(Identifier);
     }
 }

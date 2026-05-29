@@ -21,11 +21,7 @@ internal class DarknessMonsterSpell : BallProjectileMonsterSpell
     public override string? VsMonsterSeenMessage => "{0} gestures in shadow at {3}";
     public override string? VsPlayerActionMessage => "{0} gestures in shadow.";
     protected override string ProjectileKey => nameof(AcidProjectile);
-    protected override int Damage(Monster monster)
-    {
-        int monsterLevel = monster.Race.Level >= 1 ? monster.Race.Level : 1;
-        return Game.DieRoll(monsterLevel * 3) + 15;
-    }
+    protected override string DamageRollExpression => "1d(ML*3)+15";
     protected override string[] SmartLearnSpellResistantDetectionKeys => new string[] { nameof(AcidSpellResistantDetection) };
 
     public override void ExecuteOnPlayer(Monster monster)
