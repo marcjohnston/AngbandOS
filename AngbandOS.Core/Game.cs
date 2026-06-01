@@ -324,7 +324,7 @@ internal partial class Game : IGameSerialize
     /// <param name="gameStateBag">Supply the game state bag to restore a game.  The game configuration must match the game being restored.</param>
     private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, ObjectGameStateBag gameStateBag)
     {
-        #region Non-Serialized Initialization - The initialization in this region is only for non-serialized fields and properties.
+        #region Pre-Game Load Non-Serialized Initialization (Random Number Generation and Expression Parsing)
         _mainSequence = new Random();
 
         // Check to see if we are replaying a game.
@@ -350,6 +350,7 @@ internal partial class Game : IGameSerialize
         DecimalToIntegerExpressionTypeConverter = new DecimalToIntegerExpressionTypeConverter();
         #endregion
 
+        #region Game Initialization or Restoration
         // Create an instance of the SingletonRepository.  This allows repositories that are loading access to the SingletonRepository object. // TODO: This needs to be fixed once the items no longer reference other objects during construction
         SingletonRepository = new SingletonRepository(this);
 
@@ -563,8 +564,9 @@ internal partial class Game : IGameSerialize
             Inventory = restoreGameState.GetByKey(nameof(Inventory)).GetNullableDerivedReferences<Item>((RestoreGameState restoreGameState) => new Item(this, restoreGameState));
             _invenCnt = restoreGameState.GetByKey(nameof(_invenCnt)).GetInt();
         }
+        #endregion
 
-        // Set non-serialized properties.
+        #region Post-game load non-serialized initialization - Initialization that depends on the loaded data
         ExpressionProviders.Add("Random", UseRandom);
         ExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
         ExpressionProviders.Add("Health", () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
@@ -666,6 +668,7 @@ internal partial class Game : IGameSerialize
         SuperheroismTimer = (SuperheroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.SuperheroismTimer));
         TelepathyTimer = (TelepathyTimer)SingletonRepository.Get<Timer>(nameof(Timers.TelepathyTimer));
         PackWieldSlot = (PackWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(Core.PackWieldSlot));
+        #endregion
 
         if (String.IsNullOrEmpty(gameConfiguration.DungeonViewBindingKey))
         {
