@@ -566,7 +566,7 @@ internal partial class Game : IGameSerialize
         }
         #endregion
 
-        #region Post-game load non-serialized initialization - Initialization that depends on the loaded data
+        #region Post-game load non-serialized initialization - Initialization that depends on the loaded data.  All non-serialized fields are initialized here.
         ExpressionProviders.Add("Random", UseRandom);
         ExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
         ExpressionProviders.Add("Health", () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
