@@ -57,7 +57,7 @@ public class GreatHellWyrmMonsterRace : MonsterRaceGameConfiguration
     public override bool MoveBody => true;
     public override int NoticeRange => 40;
     public override bool OnlyDropItem => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 2;
     public override int Sleep => 40;
     public override int Speed => 120;

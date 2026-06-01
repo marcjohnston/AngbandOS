@@ -364,11 +364,6 @@ internal partial class Game : IGameSerialize
             IsDead = true;
             Quests = new List<Quest>();
             InitializeAllocationTables(); // This is not performed on a restore.
-
-            ExpressionProviders.Add("Random", UseRandom);
-            ExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
-            ExpressionProviders.Add("Health", () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
-            ExpressionProviders.Add("ExperienceLevel", () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
         }
         else
         {
@@ -569,6 +564,12 @@ internal partial class Game : IGameSerialize
             _invenCnt = restoreGameState.GetByKey(nameof(_invenCnt)).GetInt();
         }
 
+        // Set non-serialized properties.
+        ExpressionProviders.Add("Random", UseRandom);
+        ExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+        ExpressionProviders.Add("Health", () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+        ExpressionProviders.Add("ExperienceLevel", () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+
         DownStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsDownStaircase);
         UpStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsUpStaircase);
         GrassTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsGrass);
@@ -577,7 +578,11 @@ internal partial class Game : IGameSerialize
 
         DungeonGenerator = new StandardDungeonGenerator(this);
 
+        #if DEBUG
         TimeSpan elapsedTime = DateTime.Now - startTime;
+        Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
+        #endif
+
         if (gameConfiguration.MaxMessageLogLength != null)
         {
             MaxMessageLogLength = gameConfiguration.MaxMessageLogLength.Value;
@@ -611,10 +616,6 @@ internal partial class Game : IGameSerialize
         FindQuests = gameConfiguration.FindQuests ?? new string[] { };
         IllegibleFlavorSyllables = gameConfiguration.IllegibleFlavorSyllables ?? new string[] { };
         ShopkeeperAcceptedComments = gameConfiguration.ShopkeeperAcceptedComments ?? new string[] { };
-
-        #if DEBUG
-        Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
-        #endif
 
         GameMessage = (GameMessageProperty)SingletonRepository.Get<Property>(nameof(GameMessageProperty));
         Gold = (GoldIntProperty)SingletonRepository.Get<Property>(nameof(GoldIntProperty));
@@ -1560,7 +1561,10 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public ProbabilityExpression GoldItemIsGreatProbability { get; }
 
-    public readonly Dictionary<string, object> ExpressionProviders = new Dictionary<string, object>();
+    /// <summary>
+    /// Returns the expression providers that are used for game and player expression computations.
+    /// </summary>
+    public Dictionary<string, object> ExpressionProviders { get; } = new Dictionary<string, object>();
 
     private Dictionary<string, object> MergeExpressionProviders(params (string, object)[]? additionalProviders)
     {
@@ -16948,7 +16952,7 @@ internal partial class Game : IGameSerialize
     }
 
     /// <summary>
-    /// Returns a random number with a flat distrubution around centre and within width of it
+    /// Returns a random number with a flat distribution around center and within width of it
     /// </summary>
     /// <param name="centre"> The central value </param>
     /// <param name="width"> The maximum distance (inclusive) from the centre </param>
@@ -16965,9 +16969,9 @@ internal partial class Game : IGameSerialize
     /// <returns> </returns>
     private int Next(int max)
     {
-        if (max <= 0)
+        if (max < 0)
         {
-            return 0; // TODO: This defys the stated purpose
+            return 0; // TODO: This defies the stated purpose
         }
         Random use = UseFixed ? _fixed : _mainSequence;
         return use.Next(max);

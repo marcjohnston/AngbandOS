@@ -48,7 +48,7 @@ public class ShadowDemonMonsterRace : MonsterRaceGameConfiguration
     public override int NoticeRange => 30;
     public override bool OnlyDropItem => true;
     public override bool PassWall => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 3;
     public override bool Regenerate => true;
     public override bool ResistNether => true;

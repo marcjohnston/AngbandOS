@@ -40,7 +40,7 @@ public class EnergyVortexMonsterRace : MonsterRaceGameConfiguration
     public override int Mexp => 130;
     public override bool Nonliving => true;
     public override int NoticeRange => 100;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override bool RandomMove50 => true;
     public override int Rarity => 1;
     public override int Sleep => 0;

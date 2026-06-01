@@ -55,7 +55,7 @@ public class DeathDrakeMonsterRace : MonsterRaceGameConfiguration
     public override int NoticeRange => 25;
     public override bool OnlyDropItem => true;
     public override bool PassWall => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 2;
     public override bool ResistNether => true;
     public override bool ResistTeleport => true;

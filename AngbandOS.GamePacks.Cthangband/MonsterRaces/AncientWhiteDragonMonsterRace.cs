@@ -51,7 +51,7 @@ public class AncientWhiteDragonMonsterRace : MonsterRaceGameConfiguration
     public override int Mexp => 2500;
     public override bool MoveBody => true;
     public override int NoticeRange => 20;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 1;
     public override int Sleep => 80;
     public override bool Smart => true;

@@ -48,7 +48,7 @@ public class AirElementalMonsterRace : MonsterRaceGameConfiguration
     public override int LevelFound => 34;
     public override int Mexp => 390;
     public override int NoticeRange => 12;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override bool RandomMove25 => true;
     public override int Rarity => 2;
     public override int Sleep => 50;

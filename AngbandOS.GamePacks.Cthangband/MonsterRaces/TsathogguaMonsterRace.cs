@@ -71,7 +71,7 @@ public class TsathogguaMonsterRace : MonsterRaceGameConfiguration
     public override int NoticeRange => 100;
     public override bool OnlyDropItem => true;
     public override bool OpenDoor => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 3;
     public override bool Regenerate => true;
     public override bool ResistDisenchant => true;

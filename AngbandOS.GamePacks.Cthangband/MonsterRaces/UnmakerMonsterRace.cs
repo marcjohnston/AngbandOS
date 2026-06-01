@@ -55,7 +55,7 @@ public class UnmakerMonsterRace : MonsterRaceGameConfiguration
     public override bool Multiply => true;
     public override bool Nonliving => true;
     public override int NoticeRange => 60;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override bool RandomMove50 => true;
     public override int Rarity => 4;
     public override bool ResistDisenchant => true;

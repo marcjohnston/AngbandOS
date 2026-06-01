@@ -19,9 +19,5 @@ internal abstract class BallProjectileMonsterSpell : ProjectileMonsterSpell
     protected override bool GridProjectionFlag => true; // Ball projectiles affect the grid.
     protected override bool ItemProjectionFlag => true; // Ball projectiles affect items.
     protected override bool StopProjectionFlag => false; // Ball projectiles do not stop.
-
-    /// <summary>
-    /// Returns the radius for the ball projectile.  Ball projectiles return 2, by default.
-    /// </summary>
-    protected override int Radius(Monster monster) => monster.Race.Powerful ? 3 : 2;
+    protected override int Radius(Monster monster) => base.Radius(monster) + monster.Race.BallAndBreatheProjectileBonusRadius; // Ball projectiles have a radius that is increased by the monster race.
 }

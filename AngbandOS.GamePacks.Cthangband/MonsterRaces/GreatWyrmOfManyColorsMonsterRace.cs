@@ -66,7 +66,7 @@ public class GreatWyrmOfManyColorsMonsterRace : MonsterRaceGameConfiguration
     public override bool MoveBody => true;
     public override int NoticeRange => 40;
     public override bool OnlyDropItem => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 4;
     public override bool ResistTeleport => true;
     public override int Sleep => 255;

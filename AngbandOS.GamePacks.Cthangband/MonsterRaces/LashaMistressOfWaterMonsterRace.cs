@@ -48,7 +48,7 @@ public class LashaMistressOfWaterMonsterRace : MonsterRaceGameConfiguration
     public override int LevelFound => 39;
     public override int Mexp => 3250;
     public override int NoticeRange => 12;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override bool RandomMove25 => true;
     public override int Rarity => 3;
     public override int Sleep => 50;

@@ -54,7 +54,7 @@ public class YigFatherOfSerpentsMonsterRace : MonsterRaceGameConfiguration
     public override int NoticeRange => 50;
     public override bool OnlyDropItem => true;
     public override bool OpenDoor => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 2;
     public override bool ResistDisenchant => true;
     public override bool ResistPlasma => true;

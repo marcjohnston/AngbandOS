@@ -47,7 +47,7 @@ public class MagmaElementalMonsterRace : MonsterRaceGameConfiguration
     public override int Mexp => 950;
     public override int NoticeRange => 10;
     public override bool PassWall => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 2;
     public override int Sleep => 90;
     public override int Speed => 110;

@@ -54,7 +54,7 @@ public class TheLerneanHydraMonsterRace : MonsterRaceGameConfiguration
     public override int NoticeRange => 20;
     public override bool OnlyDropGold => true;
     public override bool OpenDoor => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 2;
     public override int Sleep => 20;
     public override bool Smart => true;

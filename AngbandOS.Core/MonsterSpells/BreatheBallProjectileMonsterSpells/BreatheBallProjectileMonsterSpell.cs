@@ -36,9 +36,5 @@ internal abstract class BreatheBallProjectileMonsterSpell : BallProjectileMonste
     /// <param name="monsterName"></param>
     /// <returns></returns>
     public override string? VsPlayerBlindMessage => "You hear breathing.";
-
-    /// <summary>
-    /// Returns a default radius of damage of 0.
-    /// </summary>
-    protected override int Radius(Monster monster) => -base.Radius(monster);
+    protected override int Radius(Monster monster) => -base.Radius(monster); // Return a negative radius to indicate a cone instead of a ball.
 }

@@ -67,7 +67,7 @@ public class AetherVortexMonsterRace : MonsterRaceGameConfiguration
     public override int Mexp => 4500;
     public override bool Nonliving => true;
     public override int NoticeRange => 100;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override bool RandomMove25 => true;
     public override bool RandomMove50 => true;
     public override int Rarity => 2;

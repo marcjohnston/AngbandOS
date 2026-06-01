@@ -1921,77 +1921,6 @@ internal class Monster : IItemContainer, IGameSerialize
     }
 
     /// <summary>
-    /// Use a breath weapon on another monster
-    /// </summary>
-    /// <param name="monsterIndex"> The monster doing the breathing </param>
-    /// <param name="targetY"> The y coordinate of the target </param>
-    /// <param name="targetX"> The x coordinate of the target </param>
-    /// <param name="projectile"> The type of breath being used </param>
-    /// <param name="damage"> The damage the breath will do </param>
-    /// <param name="radius"> The radius of the attack, or zero for the default radius </param>
-    public void BreatheAtMonster(int targetY, int targetX, Projectile projectile, int damage, int radius) // TODO: Why is this not used
-    {
-        // Radius 0 means use the default radius
-        if (radius < 1)
-        {
-            radius = Race.Powerful ? 3 : 2;
-        }
-        // Make the radius negative to indicate we need a cone instead of a ball
-        radius = 0 - radius;
-        projectile.Fire(GetMonsterIndex(), radius, targetY, targetX, damage, grid: true, item: true, kill: true, jump: false, beam: false, thru: false, hide: false, stop: false);
-    }
-
-    /// <summary>
-    /// Fire some kind of ball attack at the player
-    /// </summary>
-    /// <param name="monsterIndex"> The index of the monster firing the attack </param>
-    /// <param name="projectile"> The type of effect the ball has </param>
-    /// <param name="damage"> The damage done by the ball </param>
-    /// <param name="radius"> The radius of the ball, or zero to use the default radius </param>
-    public void FireBallAtPlayer(Projectile projectile, int damage, int radius) // TODO: Why is this not used
-    {
-        if (radius < 1)
-        {
-            radius = Race.Powerful ? 3 : 2;
-        }
-        projectile.Fire(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, grid: true, item: true, kill: true, jump: false, beam: false, thru: false, hide: false, stop: false);
-    }
-
-    /// <summary>
-    /// Breathe on the player
-    /// </summary>
-    /// <param name="monsterIndex"> The index of the monster doing the breathing </param>
-    /// <param name="projectile"> The projectile that is being breathed </param>
-    /// <param name="damage"> The damage done by the breath </param>
-    /// <param name="radius">
-    /// The (positive) radius of the breath weapon, or zero for the default radius
-    /// </param>
-    public void BreatheAtPlayer(Projectile projectile, int damage, int radius) // TODO: Why is this not used
-    {
-        // Radius 0 means use the default radius
-        if (radius < 1)
-        {
-            radius = Race.Powerful ? 3 : 2;
-        }
-        // Make the radius negative to indicate we need a cone instead of a ball
-        radius = 0 - radius;
-        projectile.Fire(GetMonsterIndex(), radius, Game.MapY.IntValue, Game.MapX.IntValue, damage, grid: true, item: true, kill: true, jump: false, beam: false, thru: false, hide: false, stop: false);
-    }
-
-    /// <summary>
-    /// Fire a bolt of some kind at another monster
-    /// </summary>
-    /// <param name="monsterIndex"> The index of the monster doing the firing </param>
-    /// <param name="targetY"> The y coordinate of the target </param>
-    /// <param name="targetX"> The x coordinate of the target </param>
-    /// <param name="projectile"> The projectile to be fired </param>
-    /// <param name="damage"> The damage the projectile should do </param>
-    public void FireBoltAtMonster(int targetY, int targetX, Projectile projectile, int damage) // TODO: Why is this not used
-    {
-        projectile.Fire(GetMonsterIndex(), 0, targetY, targetX, damage, kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
-    }
-
-    /// <summary>
     /// Take damage after being hit by another monster
     /// </summary>
     /// <param name="monsterIndex"> The index of the monster taking the damage </param>
@@ -2073,17 +2002,6 @@ internal class Monster : IItemContainer, IGameSerialize
     }
 
     /// <summary>
-    /// Cast a bolt spell at the player
-    /// </summary>
-    /// <param name="monsterIndex"> The index of the monster casting the bolt </param>
-    /// <param name="projectile"> The projectile being used for the bolt </param>
-    /// <param name="damage"> The damage that the bolt will do </param>
-    public void FireBoltAtPlayer(Projectile projectile, int damage)
-    {
-        projectile.Fire(GetMonsterIndex(), 0, Game.MapY.IntValue, Game.MapX.IntValue, damage, kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
-    }
-
-    /// <summary>
     /// Forget what the monster has seen, clearing all smart flags except for ally and clone
     /// </summary>
     public void ForgetSmartness()
@@ -2140,175 +2058,175 @@ internal class Monster : IItemContainer, IGameSerialize
         // If we know the player is immune to acid, don't do acid spells
         if (SmImmAcid)
         {
-            spells = spells.Remove((_spell) => _spell.UsesAcid && RealiseSpellIsUseless(100));
+            spells = spells.Remove((_spell) => _spell.UsesAcid && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists acid both temporarily and permanently, probably don't
         // do acid spells
         else if (SmOppAcid && SmResAcid)
         {
-            spells = spells.Remove((_spell) => _spell.UsesAcid && RealiseSpellIsUseless(80));
+            spells = spells.Remove((_spell) => _spell.UsesAcid && RealizeSpellIsUseless(80));
         }
 
         // If we know the player resists acid at all, maybe don't do acid spells
         else if (SmOppAcid || SmResAcid)
         {
-            spells = spells.Remove((_spell) => _spell.UsesAcid && RealiseSpellIsUseless(30));
+            spells = spells.Remove((_spell) => _spell.UsesAcid && RealizeSpellIsUseless(30));
         }
 
         // If we know the player is immune to lightning, don't do lightning spells
         if (SmImmElec)
         {
-            spells = spells.Remove((_spell) => _spell.UsesLightning && RealiseSpellIsUseless(100));
+            spells = spells.Remove((_spell) => _spell.UsesLightning && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists lightning both temporarily and permanently, probably
         // don't do lightning spells
         else if (SmOppElec && SmResElec)
         {
-            spells = spells.Remove((_spell) => _spell.UsesLightning && RealiseSpellIsUseless(80));
+            spells = spells.Remove((_spell) => _spell.UsesLightning && RealizeSpellIsUseless(80));
         }
 
         // If we know the player resists lightning at all, maybe don't do lightning spells
         else if (SmOppElec || SmResElec)
         {
-            spells = spells.Remove((_spell) => _spell.UsesLightning && RealiseSpellIsUseless(30));
+            spells = spells.Remove((_spell) => _spell.UsesLightning && RealizeSpellIsUseless(30));
         }
 
         // If we know the player is immune to fire, don't do fire spells
         if (SmImmFire)
         {
-            spells = spells.Remove((_spell) => _spell.UsesFire && RealiseSpellIsUseless(100));
+            spells = spells.Remove((_spell) => _spell.UsesFire && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists fire both temporarily and permanently, probably don't
         // do fire spells
         else if (SmOppFire && SmResFire)
         {
-            spells = spells.Remove((_spell) => _spell.UsesFire && RealiseSpellIsUseless(80));
+            spells = spells.Remove((_spell) => _spell.UsesFire && RealizeSpellIsUseless(80));
         }
 
         // If we know the player resists fire at all, maybe don't do fire spells
         else if (SmOppFire || SmResFire)
         {
-            spells = spells.Remove((_spell) => _spell.UsesFire && RealiseSpellIsUseless(30));
+            spells = spells.Remove((_spell) => _spell.UsesFire && RealizeSpellIsUseless(30));
         }
 
         // If we know the player is immune to cold, don't do fire spells
         if (SmImmCold)
         {
-            spells = spells.Remove((_spell) => _spell.UsesCold && RealiseSpellIsUseless(100));
+            spells = spells.Remove((_spell) => _spell.UsesCold && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists cold both temporarily and permanently, probably don't do cold spells
         else if (SmOppCold && SmResCold)
         {
-            spells = spells.Remove((_spell) => _spell.UsesCold && RealiseSpellIsUseless(80));
+            spells = spells.Remove((_spell) => _spell.UsesCold && RealizeSpellIsUseless(80));
         }
 
         // If we know the player resists cold at all, maybe don't do cold spells
         else if (SmOppCold || SmResCold)
         {
-            spells = spells.Remove((_spell) => _spell.UsesCold && RealiseSpellIsUseless(30));
+            spells = spells.Remove((_spell) => _spell.UsesCold && RealizeSpellIsUseless(30));
         }
 
         // If we know the player resists poison both temporarily and permanently, probably don't
         // do poison spells
         if (SmOppPois && SmResPois)
         {
-            spells = spells.Remove((_spell) => _spell.UsesPoison && RealiseSpellIsUseless(80));
-            spells = spells.Remove((_spell) => _spell.UsesRadiation && RealiseSpellIsUseless(40));
+            spells = spells.Remove((_spell) => _spell.UsesPoison && RealizeSpellIsUseless(80));
+            spells = spells.Remove((_spell) => _spell.UsesRadiation && RealizeSpellIsUseless(40));
         }
 
         // If we know the player resists poison at all, maybe don't do cold spells
         else if (SmOppPois || SmResPois)
         {
-            spells = spells.Remove((_spell) => _spell.UsesPoison && RealiseSpellIsUseless(30));
+            spells = spells.Remove((_spell) => _spell.UsesPoison && RealizeSpellIsUseless(30));
         }
 
         // If we know the player resists nether, maybe don't do nether spells
         if (SmResNeth)
         {
-            spells = spells.Remove((_spell) => _spell.UsesPoison && RealiseSpellIsUseless(50));
+            spells = spells.Remove((_spell) => _spell.UsesPoison && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists light, maybe don't do light spells
         if (SmResLight)
         {
-            spells = spells.Remove((_spell) => _spell.UsesLight && RealiseSpellIsUseless(50));
+            spells = spells.Remove((_spell) => _spell.UsesLight && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists darkness, maybe don't do darkness spells
         if (SmResDark)
         {
-            spells = spells.Remove((_spell) => _spell.UsesDarkness && RealiseSpellIsUseless(50));
+            spells = spells.Remove((_spell) => _spell.UsesDarkness && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists fear, don't do fear spells
         if (SmResFear)
         {
-            spells = spells.Remove((_spell) => _spell.UsesFear && RealiseSpellIsUseless(100));
+            spells = spells.Remove((_spell) => _spell.UsesFear && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists confiusion, maybe don't do confusion spells
         if (SmResConf)
         {
-            spells = spells.Remove((_spell) => _spell.UsesConfusion && RealiseSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
+            spells = spells.Remove((_spell) => _spell.UsesConfusion && RealizeSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
         }
 
         // If we know the player resists chaos, maybe don't do chaos or confusion spells
         if (SmResChaos)
         {
-            spells = spells.Remove((_spell) => _spell.UsesConfusion && RealiseSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
-            spells = spells.Remove((_spell) => _spell.UsesChaos && RealiseSpellIsUseless(50));
+            spells = spells.Remove((_spell) => _spell.UsesConfusion && RealizeSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
+            spells = spells.Remove((_spell) => _spell.UsesChaos && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists disenchantment, don't do disenchantment spells
         if (SmResDisen)
         {
-            spells = spells.Remove((_spell) => _spell.UsesDisenchantment && RealiseSpellIsUseless(100));
+            spells = spells.Remove((_spell) => _spell.UsesDisenchantment && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists blindness, don't do blindness spells
         if (SmResBlind)
         {
-            spells = spells.Remove((_spell) => _spell.UsesBlindness && RealiseSpellIsUseless(100));
+            spells = spells.Remove((_spell) => _spell.UsesBlindness && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists nexus, maybe don't do nexus or teleport spells
         if (SmResNexus)
         {
-            spells = spells.Remove((_spell) => _spell.UsesNexus && RealiseSpellIsUseless(50));
+            spells = spells.Remove((_spell) => _spell.UsesNexus && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists sound, maybe don't do sound spells
         if (SmResSound)
         {
-            spells = spells.Remove((_spell) => _spell.UsesSound && RealiseSpellIsUseless(50));
+            spells = spells.Remove((_spell) => _spell.UsesSound && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists shards, maybe don't do shard spells
         if (SmResShard)
         {
-            spells = spells.Remove((_spell) => _spell.UsesShards && RealiseSpellIsUseless(_spell.UsesBreathe ? 50 : 20));
+            spells = spells.Remove((_spell) => _spell.UsesShards && RealizeSpellIsUseless(_spell.UsesBreathe ? 50 : 20));
         }
 
         // If we know the player reflects bolts, don't do bolt spells
         if (SmImmReflect)
         {
-            spells = spells.Remove((_spell) => _spell.CanBeReflected && RealiseSpellIsUseless(100));
+            spells = spells.Remove((_spell) => _spell.CanBeReflected && RealizeSpellIsUseless(100));
         }
 
         // If we know the player has free action, don't do slow or hold spells
         if (SmImmFree)
         {
-            spells = spells.Remove((_spell) => _spell.RestrictsFreeAction && RealiseSpellIsUseless(100));
+            spells = spells.Remove((_spell) => _spell.RestrictsFreeAction && RealizeSpellIsUseless(100));
         }
 
         // If we know the player has no mana, don't do mana drain
         if (SmImmMana)
         {
-            spells = spells.Remove((_spell) => _spell.DrainsMana && RealiseSpellIsUseless(100));
+            spells = spells.Remove((_spell) => _spell.DrainsMana && RealizeSpellIsUseless(100));
         }
         return spells;
     }
@@ -2320,7 +2238,7 @@ internal class Monster : IItemContainer, IGameSerialize
     /// <param name="race"> The monster's race </param>
     /// <param name="percentage"> The chance of it happening </param>
     /// <returns> True if it should happen, or false if it should not </returns>
-    private bool RealiseSpellIsUseless(int percentage)
+    private bool RealizeSpellIsUseless(int percentage)
     {
         if (!Race.Smart)
         {

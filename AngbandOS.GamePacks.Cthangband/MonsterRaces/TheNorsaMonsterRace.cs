@@ -66,7 +66,7 @@ public class TheNorsaMonsterRace : MonsterRaceGameConfiguration
     public override int NoticeRange => 20;
     public override bool OnlyDropItem => true;
     public override bool OpenDoor => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 4;
     public override int Sleep => 70;
     public override int Speed => 130;

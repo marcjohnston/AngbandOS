@@ -54,7 +54,7 @@ public class StraashaQueenOfAirMonsterRace : MonsterRaceGameConfiguration
     public override bool LightningAura => true;
     public override int Mexp => 8000;
     public override int NoticeRange => 12;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override bool RandomMove25 => true;
     public override int Rarity => 4;
     public override int Sleep => 50;

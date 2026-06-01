@@ -51,7 +51,7 @@ public class WillOTheWispMonsterRace : MonsterRaceGameConfiguration
     public override bool Nonliving => true;
     public override int NoticeRange => 30;
     public override bool PassWall => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override bool RandomMove50 => true;
     public override int Rarity => 4;
     public override int Sleep => 0;

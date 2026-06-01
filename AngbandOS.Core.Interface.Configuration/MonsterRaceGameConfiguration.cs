@@ -291,7 +291,7 @@ public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfigurati
 
     public virtual bool PassWall { get; set; } = false;
 
-    public virtual bool Powerful { get; set; } = false;
+    public virtual int BallAndBreatheProjectileBonusRadius { get; set; } = 0;
 
     public virtual bool RandomMove25 { get; set; } = false;
 

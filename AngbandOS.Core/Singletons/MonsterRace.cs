@@ -292,7 +292,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
 
     public bool PassWall { get; } = false;
 
-    public bool Powerful { get; } = false;
+    public int BallAndBreatheProjectileBonusRadius { get; } = 0;
 
     public bool RandomMove25 { get; } = false;
 
@@ -484,7 +484,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
         OpenDoor = gameConfiguration.OpenDoor;
         Orc = gameConfiguration.Orc;
         PassWall = gameConfiguration.PassWall;
-        Powerful = gameConfiguration.Powerful;
+        BallAndBreatheProjectileBonusRadius = gameConfiguration.BallAndBreatheProjectileBonusRadius;
         RandomMove25 = gameConfiguration.RandomMove25;
         RandomMove50 = gameConfiguration.RandomMove50;
         Rarity = gameConfiguration.Rarity;
@@ -720,7 +720,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
             OpenDoor = OpenDoor,
             Orc = Orc,
             PassWall = PassWall,
-            Powerful = Powerful,
+            BallAndBreatheProjectileBonusRadius = BallAndBreatheProjectileBonusRadius,
             RandomMove25 = RandomMove25,
             RandomMove50 = RandomMove50,
             Rarity = Rarity,

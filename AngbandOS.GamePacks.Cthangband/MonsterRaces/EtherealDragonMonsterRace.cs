@@ -54,7 +54,7 @@ public class EtherealDragonMonsterRace : MonsterRaceGameConfiguration
     public override int NoticeRange => 25;
     public override bool OnlyDropItem => true;
     public override bool PassWall => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 2;
     public override int Sleep => 15;
     public override int Speed => 120;

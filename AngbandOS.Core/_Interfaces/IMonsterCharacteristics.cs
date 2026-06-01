@@ -50,7 +50,7 @@ internal interface IMonsterCharacteristics
     bool Multiply { get; }
     bool OpenDoor { get; }
     bool PassWall { get; }
-    bool Powerful { get; }
+    int BallAndBreatheProjectileBonusRadius { get; }
     bool Reflecting { get; }
     bool Regenerate { get; }
     bool Shapechanger { get; }

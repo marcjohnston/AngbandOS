@@ -53,7 +53,7 @@ internal class MonsterCharacteristics : IMonsterCharacteristics, IGameSerialize
         Multiply = false;
         OpenDoor = false;
         PassWall = false;
-        Powerful = false;
+        BallAndBreatheProjectileBonusRadius = 0;
         Reflecting = false;
         Regenerate = false;
         Shapechanger = false;
@@ -137,7 +137,7 @@ internal class MonsterCharacteristics : IMonsterCharacteristics, IGameSerialize
         Multiply = restoreGameState.GetByKey(nameof(Multiply)).GetBool();
         OpenDoor = restoreGameState.GetByKey(nameof(OpenDoor)).GetBool();
         PassWall = restoreGameState.GetByKey(nameof(PassWall)).GetBool();
-        Powerful = restoreGameState.GetByKey(nameof(Powerful)).GetBool();
+        BallAndBreatheProjectileBonusRadius = restoreGameState.GetByKey(nameof(BallAndBreatheProjectileBonusRadius)).GetInt();
         Reflecting = restoreGameState.GetByKey(nameof(Reflecting)).GetBool();
         Regenerate = restoreGameState.GetByKey(nameof(Regenerate)).GetBool();
         Shapechanger = restoreGameState.GetByKey(nameof(Shapechanger)).GetBool();
@@ -221,7 +221,7 @@ internal class MonsterCharacteristics : IMonsterCharacteristics, IGameSerialize
         Multiply = copyFrom.Multiply;
         OpenDoor = copyFrom.OpenDoor;
         PassWall = copyFrom.PassWall;
-        Powerful = copyFrom.Powerful;
+        BallAndBreatheProjectileBonusRadius = copyFrom.BallAndBreatheProjectileBonusRadius;
         Reflecting = copyFrom.Reflecting;
         Regenerate = copyFrom.Regenerate;
         Shapechanger = copyFrom.Shapechanger;
@@ -306,7 +306,7 @@ internal class MonsterCharacteristics : IMonsterCharacteristics, IGameSerialize
             (nameof(Multiply), saveGameState.CreateGameStateBag(Multiply)),
             (nameof(OpenDoor), saveGameState.CreateGameStateBag(OpenDoor)),
             (nameof(PassWall), saveGameState.CreateGameStateBag(PassWall)),
-            (nameof(Powerful), saveGameState.CreateGameStateBag(Powerful)),
+            (nameof(BallAndBreatheProjectileBonusRadius), saveGameState.CreateGameStateBag(BallAndBreatheProjectileBonusRadius)),
             (nameof(Reflecting), saveGameState.CreateGameStateBag(Reflecting)),
             (nameof(Regenerate), saveGameState.CreateGameStateBag(Regenerate)),
             (nameof(Shapechanger), saveGameState.CreateGameStateBag(Shapechanger)),
@@ -391,7 +391,7 @@ internal class MonsterCharacteristics : IMonsterCharacteristics, IGameSerialize
         Multiply = copyFrom.Multiply & unionWith.Multiply;
         OpenDoor = copyFrom.OpenDoor & unionWith.OpenDoor;
         PassWall = copyFrom.PassWall & unionWith.PassWall;
-        Powerful = copyFrom.Powerful & unionWith.Powerful;
+        BallAndBreatheProjectileBonusRadius = copyFrom.BallAndBreatheProjectileBonusRadius & unionWith.BallAndBreatheProjectileBonusRadius;
         Reflecting = copyFrom.Reflecting & unionWith.Reflecting;
         Regenerate = copyFrom.Regenerate & unionWith.Regenerate;
         Shapechanger = copyFrom.Shapechanger & unionWith.Shapechanger;
@@ -474,7 +474,7 @@ internal class MonsterCharacteristics : IMonsterCharacteristics, IGameSerialize
     public bool Multiply { get; set; }
     public bool OpenDoor { get; set; }
     public bool PassWall { get; set; }
-    public bool Powerful { get; set; }
+    public int BallAndBreatheProjectileBonusRadius { get; set; }
     public bool Reflecting { get; set; }
     public bool Regenerate { get; set; }
     public bool Shapechanger { get; set; }

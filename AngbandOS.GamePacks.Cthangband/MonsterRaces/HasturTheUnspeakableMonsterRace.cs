@@ -73,7 +73,7 @@ public class HasturTheUnspeakableMonsterRace : MonsterRaceGameConfiguration
     public override int NoticeRange => 20;
     public override bool OnlyDropItem => true;
     public override bool OpenDoor => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 4;
     public override bool ResistTeleport => true;
     public override int Sleep => 10;

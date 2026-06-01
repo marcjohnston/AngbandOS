@@ -53,7 +53,7 @@ public class GromMasterOfEarthMonsterRace : MonsterRaceGameConfiguration
     public override int Mexp => 6000;
     public override int NoticeRange => 10;
     public override bool PassWall => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 4;
     public override int Sleep => 90;
     public override int Speed => 110;

@@ -55,7 +55,7 @@ public class IronLichMonsterRace : MonsterRaceGameConfiguration
     public override int Mexp => 4000;
     public override int NoticeRange => 30;
     public override bool OnlyDropItem => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 4;
     public override bool Reflecting => true;
     public override bool ResistTeleport => true;

@@ -57,7 +57,7 @@ public class FlyingPolypMonsterRace : MonsterRaceGameConfiguration
     public override int NoticeRange => 30;
     public override bool OnlyDropItem => true;
     public override bool OpenDoor => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 6;
     public override bool Reflecting => true;
     public override bool ResistTeleport => true;

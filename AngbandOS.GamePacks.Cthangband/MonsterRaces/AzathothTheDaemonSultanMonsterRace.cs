@@ -82,7 +82,7 @@ public class AzathothTheDaemonSultanMonsterRace : MonsterRaceGameConfiguration
     public override bool Nonliving => true;
     public override int NoticeRange => 111;
     public override bool OnlyDropItem => true;
-    public override bool Powerful => true;
+    public override int BallAndBreatheProjectileBonusRadius => 1;
     public override int Rarity => 1;
     public override bool Reflecting => true;
     public override bool Regenerate => true;
