@@ -247,6 +247,11 @@ internal partial class SaveGameState
             return new DecimalValueGameStateBag(decimalValue);
         }
 
+        if (value is ulong ulongValue)
+        {
+            return new UlongValueGameStateBag(ulongValue);
+        }
+
         if (value is int intValue)
         {
             return new IntValueGameStateBag(intValue);

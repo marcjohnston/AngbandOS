@@ -542,6 +542,7 @@ internal class RestoreGameState
 
     public char[] GetChars() => ((CharArrayGameStateBag)GameStateBag).Value;
     public int GetInt() => ((IntValueGameStateBag)GameStateBag).Value;
+    public ulong GetUlong() => ((UlongValueGameStateBag)GameStateBag).Value;
     public int? GetNullableInt()
     {
         if (GameStateBag is NullValueGameStateBag)
