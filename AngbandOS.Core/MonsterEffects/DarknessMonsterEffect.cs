@@ -27,7 +27,7 @@ internal class DarknessMonsterEffect : MonsterEffect
         {
             obvious = true;
         }
-        if (rPtr.BreatheDark || rPtr.Orc || rPtr.HurtByLight)
+        if (rPtr.CanBreatheDark || rPtr.Orc || rPtr.HurtByLight)
         {
             note = " resists.";
             dam *= 2;

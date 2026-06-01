@@ -21,7 +21,7 @@ internal class InertiaMonsterEffect : MonsterEffect
         {
             obvious = true;
         }
-        if (rPtr.BreatheInertia)
+        if (rPtr.CanBreatheInertia)
         {
             note = " resists.";
             dam *= 3;

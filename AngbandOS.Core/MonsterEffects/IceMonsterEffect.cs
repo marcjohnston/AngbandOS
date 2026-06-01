@@ -31,7 +31,7 @@ internal class IceMonsterEffect : MonsterEffect
                 rPtr.Knowledge.Characteristics.ImmuneCold = true;
             }
         }
-        if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
+        if (doStun != 0 && !rPtr.CanBreatheSound && !rPtr.CanBreatheForce)
         {
             int tmp;
             if (mPtr.StunLevel != 0)

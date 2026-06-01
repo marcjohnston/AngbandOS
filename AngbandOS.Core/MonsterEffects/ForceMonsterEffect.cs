@@ -22,13 +22,13 @@ internal class ForceMonsterEffect : MonsterEffect
             obvious = true;
         }
         int doStun = (Game.DieRoll(15) + r) / (r + 1);
-        if (rPtr.BreatheForce)
+        if (rPtr.CanBreatheForce)
         {
             note = " resists.";
             dam *= 3;
             dam /= Game.DieRoll(6) + 6;
         }
-        if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
+        if (doStun != 0 && !rPtr.CanBreatheSound && !rPtr.CanBreatheForce)
         {
             int tmp;
             if (mPtr.StunLevel != 0)

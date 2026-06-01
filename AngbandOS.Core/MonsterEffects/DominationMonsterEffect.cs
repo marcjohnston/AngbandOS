@@ -114,7 +114,7 @@ internal class DominationMonsterEffect : MonsterEffect
             }
         }
         dam = 0;
-        if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
+        if (doStun != 0 && !rPtr.CanBreatheSound && !rPtr.CanBreatheForce)
         {
             if (seen)
             {
@@ -133,7 +133,7 @@ internal class DominationMonsterEffect : MonsterEffect
             }
             mPtr.StunLevel = tmp < 200 ? tmp : 200;
         }
-        else if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
+        else if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.CanBreatheConfusion && !rPtr.CanBreatheChaos)
         {
             if (seen)
             {

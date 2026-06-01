@@ -13,6 +13,6 @@ internal class AcidBreathingDragonMonsterRaceFilter : MonsterRaceFilter
 
     public override bool Matches(MonsterRace rPtr)
     {
-        return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && rPtr.BreatheAcid;
+        return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && rPtr.CanBreatheAcid;
     }
 }

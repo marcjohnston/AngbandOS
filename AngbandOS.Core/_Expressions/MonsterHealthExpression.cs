@@ -13,7 +13,7 @@ internal class MonsterHealthExpression : IdentifierExpression
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
     public override Expression Compute(Dictionary<string, object> providers)
     {
-        Func<int> GetHealth = (Func<int>)providers["MonsterHealth"];
-        return new IntegerExpression(GetHealth());
+        int health = (int)providers["MonsterHealth"];
+        return new IntegerExpression(health);
     }
 }

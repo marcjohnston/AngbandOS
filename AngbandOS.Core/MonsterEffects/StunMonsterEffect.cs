@@ -30,7 +30,7 @@ internal class StunMonsterEffect : MonsterEffect
             obvious = false;
         }
         dam = 0;
-        if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
+        if (doStun != 0 && !rPtr.CanBreatheSound && !rPtr.CanBreatheForce)
         {
             if (seen)
             {

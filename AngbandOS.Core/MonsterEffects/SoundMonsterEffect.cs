@@ -22,13 +22,13 @@ internal class SoundMonsterEffect : MonsterEffect
             obvious = true;
         }
         int doStun = (10 + Game.DieRoll(15) + r) / (r + 1);
-        if (rPtr.BreatheSound)
+        if (rPtr.CanBreatheSound)
         {
             note = " resists.";
             dam *= 2;
             dam /= Game.DieRoll(6) + 6;
         }
-        if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
+        if (doStun != 0 && !rPtr.CanBreatheSound && !rPtr.CanBreatheForce)
         {
             int tmp;
             if (mPtr.StunLevel != 0)

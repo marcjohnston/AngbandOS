@@ -13,6 +13,6 @@ internal class LightningBreathingDragonMonsterRaceFilter : MonsterRaceFilter
 
     public override bool Matches(MonsterRace rPtr)
     {
-        return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && rPtr.BreatheLightning;
+        return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && rPtr.CanBreatheLightning;
     }
 }

@@ -7643,7 +7643,7 @@ internal partial class Game : IGameSerialize
                 else if (chaosEffect && GridPassable(y, x) && DieRoll(90) > race.Level)
                 {
                     // Can't polymorph a unique or a guardian
-                    if (!(race.Unique || race.BreatheChaos ||
+                    if (!(race.Unique || race.CanBreatheChaos ||
                           race.Guardian))
                     {
                         int newRaceIndex = PolymorphMonsterRace(monster.Race);

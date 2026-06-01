@@ -13,6 +13,6 @@ internal class FireBreathingDragonMonsterRaceFilter : MonsterRaceFilter
 
     public override bool Matches(MonsterRace rPtr)
     {
-        return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && rPtr.BreatheFire;
+        return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && rPtr.CanBreatheFire;
     }
 }

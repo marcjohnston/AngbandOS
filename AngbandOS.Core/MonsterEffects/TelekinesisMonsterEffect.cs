@@ -37,7 +37,7 @@ internal class TelekinesisMonsterEffect : MonsterEffect
             note = " disappears!";
             mPtr.TeleportAway(doDist);
         }
-        else if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
+        else if (doStun != 0 && !rPtr.CanBreatheSound && !rPtr.CanBreatheForce)
         {
             if (seen)
             {

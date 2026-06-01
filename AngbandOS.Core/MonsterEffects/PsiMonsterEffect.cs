@@ -113,7 +113,7 @@ internal class PsiMonsterEffect : MonsterEffect
             }
         }
         string noteDies = " collapses, a mindless husk.";
-        if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
+        if (doStun != 0 && !rPtr.CanBreatheSound && !rPtr.CanBreatheForce)
         {
             if (mPtr.StunLevel != 0)
             {
@@ -127,7 +127,7 @@ internal class PsiMonsterEffect : MonsterEffect
             }
             mPtr.StunLevel = tmp < 200 ? tmp : 200;
         }
-        else if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
+        else if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.CanBreatheConfusion && !rPtr.CanBreatheChaos)
         {
             if (mPtr.ConfusionLevel != 0)
             {

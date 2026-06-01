@@ -21,7 +21,7 @@ internal class ShardMonsterEffect : MonsterEffect
         {
             obvious = true;
         }
-        if (rPtr.BreatheShards)
+        if (rPtr.CanBreatheShards)
         {
             note = " resists.";
             dam *= 3;

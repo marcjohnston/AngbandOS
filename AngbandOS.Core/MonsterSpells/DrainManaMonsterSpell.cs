@@ -76,7 +76,7 @@ internal class DrainManaMonsterSpell : MonsterSpell
         int r1 = (base.Game.DieRoll(rlev) / 2) + 1;
         if (monster.Health < monster.MaxHealth)
         {
-            if (targetRace.Spells.Count == 0)
+            if (targetRace.Spells.Length == 0)
             {
                 if (seeBoth)
                 {

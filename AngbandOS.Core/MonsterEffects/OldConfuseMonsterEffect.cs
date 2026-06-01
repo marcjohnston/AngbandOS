@@ -36,7 +36,7 @@ internal class OldConfuseMonsterEffect : MonsterEffect
             obvious = false;
         }
         dam = 0;
-        if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
+        if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.CanBreatheConfusion && !rPtr.CanBreatheChaos)
         {
             if (seen)
             {

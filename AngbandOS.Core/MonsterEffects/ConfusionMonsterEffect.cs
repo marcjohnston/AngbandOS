@@ -22,7 +22,7 @@ internal class ConfusionMonsterEffect : MonsterEffect
             obvious = true;
         }
         int doConf = (10 + Game.DieRoll(15) + r) / (r + 1);
-        if (rPtr.BreatheConfusion)
+        if (rPtr.CanBreatheConfusion)
         {
             note = " resists.";
             dam *= 2;
@@ -33,7 +33,7 @@ internal class ConfusionMonsterEffect : MonsterEffect
             note = " resists somewhat.";
             dam /= 2;
         }
-        if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
+        if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.CanBreatheConfusion && !rPtr.CanBreatheChaos)
         {
             int tmp;
             if (mPtr.ConfusionLevel != 0)

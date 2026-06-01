@@ -519,13 +519,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
         Level = (LevelFound < 0 || LevelFound > 100) ? 0 : LevelFound; // TODO: Something isn't right here.  
 
         // Bind the monster spell names.
-        if (SpellNames != null)
-        {
-            foreach (string spellName in SpellNames)
-            {
-                Spells.Add(Game.SingletonRepository.Get<MonsterSpell>(spellName));
-            }
-        }
+        Spells = Game.SingletonRepository.GetNullable<MonsterSpell>(SpellNames);
 
         // Bind the symbol.
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolName);
@@ -559,22 +553,22 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
         }
     }
 
-    public MonsterSpellList Spells { get; } = new MonsterSpellList();
-    public bool BreatheAcid => Spells.Contains(typeof(AcidBreatheBallMonsterSpell));
-    public bool BreatheCold => Spells.Contains(typeof(ColdBreatheBallMonsterSpell));
-    public bool BreatheFire => Spells.Contains(typeof(FireBreatheBallMonsterSpell));
-    public bool BreatheLightning => Spells.Contains(typeof(LightningBreatheBallMonsterSpell));
-    public bool BreathePoison => Spells.Contains(typeof(PoisonBreatheBallMonsterSpell));
-    public bool BreatheChaos => Spells.Contains(typeof(ChaosBreatheBallMonsterSpell));
-    public bool BreatheConfusion => Spells.Contains(typeof(ConfusionBreatheBallMonsterSpell));
-    public bool BreatheDark => Spells.Contains(typeof(DarkBreatheBallMonsterSpell));
-    public bool BreatheSound => Spells.Contains(typeof(SoundBreatheBallMonsterSpell));
-    public bool BreatheForce => Spells.Contains(typeof(ForceBreatheBallMonsterSpell));
-    public bool BreatheShards => Spells.Contains(typeof(ShardsBreatheBallMonsterSpell));
-    public bool BreatheGravity => Spells.Contains(typeof(GravityBreatheBallMonsterSpell));
-    public bool BreatheInertia => Spells.Contains(typeof(InertiaBreatheBallMonsterSpell));
-    public bool BreatheTime => Spells.Contains(typeof(TimeBreatheBallMonsterSpell));
-    public bool TeleportSelf => Spells.Contains(typeof(TeleportSelfMonsterSpell));
+    public MonsterSpell[] Spells { get; private set; }
+    public bool CanBreatheAcid => Spells.Any(_spell => typeof(AcidBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheCold => Spells.Any(_spell => typeof(ColdBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheFire => Spells.Any(_spell => typeof(FireBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheLightning => Spells.Any(_spell => typeof(LightningBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreathePoison => Spells.Any(_spell => typeof(PoisonBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheChaos => Spells.Any(_spell => typeof(ChaosBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheConfusion => Spells.Any(_spell => typeof(ConfusionBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheDark => Spells.Any(_spell => typeof(DarkBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheSound => Spells.Any(_spell => typeof(SoundBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheForce => Spells.Any(_spell => typeof(ForceBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheShards => Spells.Any(_spell => typeof(ShardsBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheGravity => Spells.Any(_spell => typeof(GravityBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheInertia => Spells.Any(_spell => typeof(InertiaBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheTime => Spells.Any(_spell => typeof(TimeBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool TeleportSelf => Spells.Any(_spell => typeof(TeleportSelfMonsterSpell).IsAssignableFrom(_spell.GetType()));
 
     /// <summary>
     /// Returns a standard message note for a monster of either it 'dies' or is 'destroyed' based on whether

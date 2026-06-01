@@ -45,7 +45,7 @@ internal class GravityMonsterEffect : MonsterEffect
             }
         }
         int doDist = resistTele ? 0 : 10;
-        if (rPtr.BreatheGravity)
+        if (rPtr.CanBreatheGravity)
         {
             note = " resists.";
             dam *= 3;
@@ -83,7 +83,7 @@ internal class GravityMonsterEffect : MonsterEffect
             note = " disappears!";
             mPtr.TeleportAway(doDist);
         }
-        else if (doStun != 0 && !rPtr.BreatheSound && !rPtr.BreatheForce)
+        else if (doStun != 0 && !rPtr.CanBreatheSound && !rPtr.CanBreatheForce)
         {
             if (seen)
             {

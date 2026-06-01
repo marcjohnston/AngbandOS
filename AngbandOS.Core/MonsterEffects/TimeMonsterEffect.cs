@@ -21,7 +21,7 @@ internal class TimeMonsterEffect : MonsterEffect
         {
             obvious = true;
         }
-        if (rPtr.BreatheTime)
+        if (rPtr.CanBreatheTime)
         {
             note = " resists.";
             dam *= 3;

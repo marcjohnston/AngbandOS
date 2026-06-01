@@ -1621,30 +1621,29 @@ internal class Monster : IItemContainer, IGameSerialize
 
         // Gather together the abilities we have
         int monsterLevel = Race.Level >= 1 ? Race.Level : 1;
-        MonsterSpellList spells = Race.Spells;
+        List<MonsterSpell> spells = Race.Spells.ToList();
 
         // If we're not allowed innate abilities, then things on Flags4 can't be used
         if (noInnate)
         {
-            spells = spells.Remove((_spell) => _spell.IsInnate);
+            spells.RemoveAll(_spell => _spell.IsInnate);
         }
 
-        // If we're smart and badly injured, we may want to prioritise spells that disable the
+        // If we're smart and badly injured, we may want to prioritize spells that disable the
         // player, summon help, or let us escape over spells that do direct damage
         if (Race.Smart && Health < MaxHealth / 10 && Game.RandomLessThan(100) < 50)
         {
-
-            spells = spells.Where((_spell) => _spell.IsIntelligent);
+            spells.RemoveAll(_spell => !_spell.IsIntelligent);
 
             // If we just got rid of all our spells then don't cast
-            if (spells.Count == 0)
+            if (spells.Count() == 0)
             {
                 return false;
             }
         }
 
         // Ditch any spells that we've seen the player resist before so we know they'll be ineffective
-        spells = RemoveIneffectiveSpells(spells);
+        RemoveIneffectiveSpells(spells);
 
         // If we just got rid of all our spells then don't cast
         if (spells.Count == 0)
@@ -1653,16 +1652,16 @@ internal class Monster : IItemContainer, IGameSerialize
         }
 
         // If we don't have a clean shot, and we're stupid, remove bolt spells
-        if (spells.Contains((_spell) => _spell.CanBeReflected) && !Race.Stupid && !Game.CleanShot(MapY, MapX, Game.MapY.IntValue, Game.MapX.IntValue))
+        if (spells.Any(_spell => _spell.CanBeReflected) && !Race.Stupid && !Game.CleanShot(MapY, MapX, Game.MapY.IntValue, Game.MapX.IntValue))
         {
-            spells = spells.Remove((_spell) => _spell.CanBeReflected);
+            spells.RemoveAll(_spell => _spell.CanBeReflected);
         }
 
         // If there's nowhere around the player to put a summoned creature, then remove
         // summoning spells
-        if (spells.Contains((_spell) => _spell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(Game.MapY.IntValue, Game.MapX.IntValue))
+        if (spells.Any(_spell => _spell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(Game.MapY.IntValue, Game.MapX.IntValue))
         {
-            spells = spells.Remove((_spell) => _spell.SummonsHelp);
+            spells.RemoveAll(_spell => _spell.SummonsHelp);
         }
 
         // If we've removed all our spells, don't cast anything
@@ -1734,7 +1733,7 @@ internal class Monster : IItemContainer, IGameSerialize
         bool seenByPlayer = !playerIsBlind && IsVisible;
         if (seenByPlayer)
         {
-            Race.Knowledge.RSpells.Add(thrownSpell);
+            Race.Knowledge.RSpells = Race.Knowledge.RSpells.Concat(new MonsterSpell[] { thrownSpell }).ToArray();
             if (thrownSpell.IsInnate)
             {
                 Race.Knowledge.RCastInate++;
@@ -1779,7 +1778,7 @@ internal class Monster : IItemContainer, IGameSerialize
             return false;
         }
 
-        MonsterSpellList monsterSpells = Race.Spells;
+        List<MonsterSpell> monsterSpells = Race.Spells.ToList();
 
         // Look through the monster list to find a potential target
         for (int i = 1; i < Game.MonsterMax; i++)
@@ -1818,11 +1817,11 @@ internal class Monster : IItemContainer, IGameSerialize
                 continue;
             }
 
-            // If we're smart and badly injured, we may want to prioritise spells that disable
+            // If we're smart and badly injured, we may want to prioritize spells that disable
             // the target, summon help, or let us escape over spells that do direct damage
             if (Race.Smart && Health < MaxHealth / 10 && this.Game.RandomLessThan(100) < 50)
             {
-                monsterSpells = monsterSpells.Where((MonsterSpell _monsterSpell) => _monsterSpell.IsIntelligent);
+                monsterSpells.RemoveAll(_monsterSpell => !_monsterSpell.IsIntelligent);
 
                 // If we just got rid of all our spells then abort
                 if (monsterSpells.Count == 0)
@@ -1830,11 +1829,12 @@ internal class Monster : IItemContainer, IGameSerialize
                     return false;
                 }
             }
+
             // If there's nowhere around the target to put a summoned creature, then remove
             // summoning spells
-            if (monsterSpells.Contains((MonsterSpell _monsterSpell) => _monsterSpell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(target.MapY, target.MapX))
+            if (monsterSpells.Any(_monsterSpell => _monsterSpell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(target.MapY, target.MapX))
             {
-                monsterSpells = monsterSpells.Remove((MonsterSpell _monsterSpell) => _monsterSpell.SummonsHelp);
+                monsterSpells.RemoveAll(_monsterSpell => _monsterSpell.SummonsHelp);
             }
 
             // If we've removed all our spells, don't cast anything
@@ -1850,7 +1850,7 @@ internal class Monster : IItemContainer, IGameSerialize
             }
 
             // Against other monsters we pick spells randomly
-            MonsterSpell? thrownSpell = Race.Spells.ToWeightedRandom(Game).ChooseOrDefault();
+            MonsterSpell? thrownSpell = new WeightedRandom<MonsterSpell>(Game, Race.Spells).ChooseOrDefault();
             if (thrownSpell == null)
             {
                 return false; // We were unable to cast a spell.
@@ -1890,7 +1890,7 @@ internal class Monster : IItemContainer, IGameSerialize
             // If the player saw us cast the spell, let them learn we can do that
             if (seen)
             {
-                Race.Knowledge.RSpells = Race.Knowledge.RSpells.Add(thrownSpell);
+                Race.Knowledge.RSpells = Race.Knowledge.RSpells.Concat(new MonsterSpell[] { thrownSpell }).ToArray();
 
                 // Check to see if the spell was an innate ability.
                 if (thrownSpell.IsInnate)
@@ -2041,12 +2041,12 @@ internal class Monster : IItemContainer, IGameSerialize
     /// <summary>
     /// Remove flags for ineffective spells from the monster's flags and return them.
     /// </summary>
-    private MonsterSpellList RemoveIneffectiveSpells(MonsterSpellList spells)
+    private void RemoveIneffectiveSpells(List<MonsterSpell> spells)
     {
-        // If we're stupid, we won't realise how ineffective things are
+        // If we're stupid, we won't realize how ineffective things are
         if (Race.Stupid)
         {
-            return spells;
+            return;
         }
 
         // Tiny chance of forgetting what we've seen, clearing all smart flags except for ally and clone
@@ -2058,177 +2058,177 @@ internal class Monster : IItemContainer, IGameSerialize
         // If we know the player is immune to acid, don't do acid spells
         if (SmImmAcid)
         {
-            spells = spells.Remove((_spell) => _spell.UsesAcid && RealizeSpellIsUseless(100));
+            spells.RemoveAll(_spell => _spell.UsesAcid && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists acid both temporarily and permanently, probably don't
         // do acid spells
         else if (SmOppAcid && SmResAcid)
         {
-            spells = spells.Remove((_spell) => _spell.UsesAcid && RealizeSpellIsUseless(80));
+            spells.RemoveAll(_spell => _spell.UsesAcid && RealizeSpellIsUseless(80));
         }
 
         // If we know the player resists acid at all, maybe don't do acid spells
         else if (SmOppAcid || SmResAcid)
         {
-            spells = spells.Remove((_spell) => _spell.UsesAcid && RealizeSpellIsUseless(30));
+            spells.RemoveAll(_spell => _spell.UsesAcid && RealizeSpellIsUseless(30));
         }
 
         // If we know the player is immune to lightning, don't do lightning spells
         if (SmImmElec)
         {
-            spells = spells.Remove((_spell) => _spell.UsesLightning && RealizeSpellIsUseless(100));
+            spells.RemoveAll(_spell => _spell.UsesLightning && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists lightning both temporarily and permanently, probably
         // don't do lightning spells
         else if (SmOppElec && SmResElec)
         {
-            spells = spells.Remove((_spell) => _spell.UsesLightning && RealizeSpellIsUseless(80));
+            spells.RemoveAll(_spell => _spell.UsesLightning && RealizeSpellIsUseless(80));
         }
 
         // If we know the player resists lightning at all, maybe don't do lightning spells
         else if (SmOppElec || SmResElec)
         {
-            spells = spells.Remove((_spell) => _spell.UsesLightning && RealizeSpellIsUseless(30));
+            spells.RemoveAll(_spell => _spell.UsesLightning && RealizeSpellIsUseless(30));
         }
 
         // If we know the player is immune to fire, don't do fire spells
         if (SmImmFire)
         {
-            spells = spells.Remove((_spell) => _spell.UsesFire && RealizeSpellIsUseless(100));
+            spells.RemoveAll(_spell => _spell.UsesFire && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists fire both temporarily and permanently, probably don't
         // do fire spells
         else if (SmOppFire && SmResFire)
         {
-            spells = spells.Remove((_spell) => _spell.UsesFire && RealizeSpellIsUseless(80));
+            spells.RemoveAll(_spell => _spell.UsesFire && RealizeSpellIsUseless(80));
         }
 
         // If we know the player resists fire at all, maybe don't do fire spells
         else if (SmOppFire || SmResFire)
         {
-            spells = spells.Remove((_spell) => _spell.UsesFire && RealizeSpellIsUseless(30));
+            spells.RemoveAll(_spell => _spell.UsesFire && RealizeSpellIsUseless(30));
         }
 
         // If we know the player is immune to cold, don't do fire spells
         if (SmImmCold)
         {
-            spells = spells.Remove((_spell) => _spell.UsesCold && RealizeSpellIsUseless(100));
+            spells.RemoveAll(_spell => _spell.UsesCold && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists cold both temporarily and permanently, probably don't do cold spells
         else if (SmOppCold && SmResCold)
         {
-            spells = spells.Remove((_spell) => _spell.UsesCold && RealizeSpellIsUseless(80));
+            spells.RemoveAll(_spell => _spell.UsesCold && RealizeSpellIsUseless(80));
         }
 
         // If we know the player resists cold at all, maybe don't do cold spells
         else if (SmOppCold || SmResCold)
         {
-            spells = spells.Remove((_spell) => _spell.UsesCold && RealizeSpellIsUseless(30));
+            spells.RemoveAll(_spell => _spell.UsesCold && RealizeSpellIsUseless(30));
         }
 
         // If we know the player resists poison both temporarily and permanently, probably don't
         // do poison spells
         if (SmOppPois && SmResPois)
         {
-            spells = spells.Remove((_spell) => _spell.UsesPoison && RealizeSpellIsUseless(80));
-            spells = spells.Remove((_spell) => _spell.UsesRadiation && RealizeSpellIsUseless(40));
+            spells.RemoveAll(_spell => _spell.UsesPoison && RealizeSpellIsUseless(80));
+            spells.RemoveAll(_spell => _spell.UsesRadiation && RealizeSpellIsUseless(40));
         }
 
         // If we know the player resists poison at all, maybe don't do cold spells
         else if (SmOppPois || SmResPois)
         {
-            spells = spells.Remove((_spell) => _spell.UsesPoison && RealizeSpellIsUseless(30));
+            spells.RemoveAll(_spell => _spell.UsesPoison && RealizeSpellIsUseless(30));
         }
 
         // If we know the player resists nether, maybe don't do nether spells
         if (SmResNeth)
         {
-            spells = spells.Remove((_spell) => _spell.UsesPoison && RealizeSpellIsUseless(50));
+            spells.RemoveAll(_spell => _spell.UsesPoison && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists light, maybe don't do light spells
         if (SmResLight)
         {
-            spells = spells.Remove((_spell) => _spell.UsesLight && RealizeSpellIsUseless(50));
+            spells.RemoveAll(_spell => _spell.UsesLight && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists darkness, maybe don't do darkness spells
         if (SmResDark)
         {
-            spells = spells.Remove((_spell) => _spell.UsesDarkness && RealizeSpellIsUseless(50));
+            spells.RemoveAll(_spell => _spell.UsesDarkness && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists fear, don't do fear spells
         if (SmResFear)
         {
-            spells = spells.Remove((_spell) => _spell.UsesFear && RealizeSpellIsUseless(100));
+            spells.RemoveAll(_spell => _spell.UsesFear && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists confiusion, maybe don't do confusion spells
         if (SmResConf)
         {
-            spells = spells.Remove((_spell) => _spell.UsesConfusion && RealizeSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
+            spells.RemoveAll(_spell => _spell.UsesConfusion && RealizeSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
         }
 
         // If we know the player resists chaos, maybe don't do chaos or confusion spells
         if (SmResChaos)
         {
-            spells = spells.Remove((_spell) => _spell.UsesConfusion && RealizeSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
-            spells = spells.Remove((_spell) => _spell.UsesChaos && RealizeSpellIsUseless(50));
+            spells.RemoveAll(_spell => _spell.UsesConfusion && RealizeSpellIsUseless(_spell.UsesBreathe ? 50 : 100));
+            spells.RemoveAll(_spell => _spell.UsesChaos && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists disenchantment, don't do disenchantment spells
         if (SmResDisen)
         {
-            spells = spells.Remove((_spell) => _spell.UsesDisenchantment && RealizeSpellIsUseless(100));
+            spells.RemoveAll(_spell => _spell.UsesDisenchantment && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists blindness, don't do blindness spells
         if (SmResBlind)
         {
-            spells = spells.Remove((_spell) => _spell.UsesBlindness && RealizeSpellIsUseless(100));
+            spells.RemoveAll(_spell => _spell.UsesBlindness && RealizeSpellIsUseless(100));
         }
 
         // If we know the player resists nexus, maybe don't do nexus or teleport spells
         if (SmResNexus)
         {
-            spells = spells.Remove((_spell) => _spell.UsesNexus && RealizeSpellIsUseless(50));
+            spells.RemoveAll(_spell => _spell.UsesNexus && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists sound, maybe don't do sound spells
         if (SmResSound)
         {
-            spells = spells.Remove((_spell) => _spell.UsesSound && RealizeSpellIsUseless(50));
+            spells.RemoveAll(_spell => _spell.UsesSound && RealizeSpellIsUseless(50));
         }
 
         // If we know the player resists shards, maybe don't do shard spells
         if (SmResShard)
         {
-            spells = spells.Remove((_spell) => _spell.UsesShards && RealizeSpellIsUseless(_spell.UsesBreathe ? 50 : 20));
+            spells.RemoveAll(_spell => _spell.UsesShards && RealizeSpellIsUseless(_spell.UsesBreathe ? 50 : 20));
         }
 
         // If we know the player reflects bolts, don't do bolt spells
         if (SmImmReflect)
         {
-            spells = spells.Remove((_spell) => _spell.CanBeReflected && RealizeSpellIsUseless(100));
+            spells.RemoveAll(_spell => _spell.CanBeReflected && RealizeSpellIsUseless(100));
         }
 
         // If we know the player has free action, don't do slow or hold spells
         if (SmImmFree)
         {
-            spells = spells.Remove((_spell) => _spell.RestrictsFreeAction && RealizeSpellIsUseless(100));
+            spells.RemoveAll(_spell => _spell.RestrictsFreeAction && RealizeSpellIsUseless(100));
         }
 
         // If we know the player has no mana, don't do mana drain
         if (SmImmMana)
         {
-            spells = spells.Remove((_spell) => _spell.DrainsMana && RealizeSpellIsUseless(100));
+            spells.RemoveAll(_spell => _spell.DrainsMana && RealizeSpellIsUseless(100));
         }
-        return spells;
+        return;
     }
 
     /// <summary>
@@ -3253,87 +3253,101 @@ internal class Monster : IItemContainer, IGameSerialize
     /// <param name="spells">A list of the 'magic numbers' of the spells the monster can cast</param>
     /// <param name="listSize"> The number of spells in the spell list </param>
     /// <returns> The 'magic number' of the spell the monster will cast </returns>
-    private MonsterSpell ChooseSpellAgainstPlayer(MonsterSpellList spells)
+    private MonsterSpell? ChooseSpellAgainstPlayer(List<MonsterSpell> spells)
     {
+        bool ChooseConditionalRandom(IEnumerable<MonsterSpell> spellList, bool conditional, out MonsterSpell? choice)
+        {
+            if (spellList.Any() && conditional)
+            {
+                return ChooseRandom(spellList, out choice);
+            }
+            choice = null;
+            return false;
+        }
+
+        bool ChooseRandom(IEnumerable<MonsterSpell> spellList, out MonsterSpell? choice)
+        {
+            if (!spellList.Any())
+            {
+                choice = null;
+                return false;
+            }
+
+            WeightedRandom<MonsterSpell> random = new WeightedRandom<MonsterSpell>(Game, spellList);
+            choice = random.ChooseOrDefault();
+            return true;
+        }
         // If the monster is stupid, cast a random spell
         if (Race.Stupid)
         {
-            return spells.ToWeightedRandom(Game).ChooseOrDefault();
+            _ = ChooseRandom(spells, out MonsterSpell? randomChoice);
+            return randomChoice;
         }
 
         // Priority One: If we're afraid or hurt, always use a random escape spell if we have one
-        if (Health < MaxHealth / 3 || FearLevel != 0)
+        if (ChooseConditionalRandom(spells.Where(_spell => _spell.ProvidesEscape), Health < MaxHealth / 3 || FearLevel != 0, out MonsterSpell? escapeChoice))
         {
-            MonsterSpellList escapeSpells = spells.Where((_spell) => _spell.ProvidesEscape);
-            if (escapeSpells.Count > 0)
-            {
-                return escapeSpells.ToWeightedRandom(Game).ChooseOrDefault();
-            }
+            return escapeChoice;
         }
+
         // Priority Two: If we're hurt, always use a random healing spell if we have one
-        if (Health < MaxHealth / 3)
+        if (ChooseConditionalRandom(spells.Where(_spell => _spell.Heals), Health < MaxHealth / 3, out MonsterSpell? healChoice))
         {
-            MonsterSpellList healingSpells = spells.Where((_spell) => _spell.Heals);
-            if (healingSpells.Count > 0)
-            {
-                return healingSpells.ToWeightedRandom(Game).ChooseOrDefault();
-            }
+            return healChoice;
         }
+
         // Priority Three: If we're near the player and have no attack spells, probably use a
-        // tactical spell
-        MonsterSpellList attackSpells = spells.Where((_spell) => _spell.IsAttack);
-        MonsterSpellList tacticalSpells = spells.Where((_spell) => _spell.IsTactical);
-        if (Game.Distance(Game.MapY.IntValue, Game.MapX.IntValue, MapY, MapX) < 4 && attackSpells.Count > 0 && this.Game.RandomLessThan(100) < 75)
+        // tactical spell.
+        IEnumerable<MonsterSpell> attackSpells = spells.Where((_spell) => _spell.IsAttack);
+        IEnumerable<MonsterSpell> tacticalSpells = spells.Where((_spell) => _spell.IsTactical);
+        if (ChooseConditionalRandom(tacticalSpells, Game.Distance(Game.MapY.IntValue, Game.MapX.IntValue, MapY, MapX) < 4 && !attackSpells.Any() && this.Game.RandomLessThan(100) < 75, out MonsterSpell? attacklessTacticleChoice))
         {
-            if (tacticalSpells.Count > 0)
-            {
-                return tacticalSpells.ToWeightedRandom(Game).ChooseOrDefault();
-            }
+            return attacklessTacticleChoice;
         }
 
         // Priority Four: If we're at less than full health, probably use a healing spell
-        if (Health < MaxHealth * 3 / 4 && this.Game.RandomLessThan(100) < 75)
+        if (ChooseConditionalRandom(spells.Where(_spell => _spell.Heals), Health < MaxHealth * 3 / 4 && this.Game.RandomLessThan(100) < 75, out MonsterSpell? fullHealthChoice))
         {
-            MonsterSpellList healingSpells = spells.Where((_spell) => _spell.Heals);
-            if (healingSpells.Count > 0)
-            {
-                return healingSpells.ToWeightedRandom(Game).ChooseOrDefault();
-            }
+            return fullHealthChoice;
         }
+
         // Priority Five: If we have a summoning spell, maybe use it
-        MonsterSpellList summonSpells = spells.Where((_spell) => _spell.SummonsHelp);
-        if (summonSpells.Count > 0 && this.Game.RandomLessThan(100) < 50)
+        if (ChooseConditionalRandom(spells.Where(_spell => _spell.SummonsHelp), this.Game.RandomLessThan(100) < 50, out MonsterSpell? summonChoice))
         {
-            return summonSpells.ToWeightedRandom(Game).ChooseOrDefault();
+            return summonChoice;
         }
 
         // Priority Six: If we have a direct attack spell, probably use it
-        if (attackSpells.Count > 0 && this.Game.RandomLessThan(100) < 85)
+        if (ChooseConditionalRandom(attackSpells, this.Game.RandomLessThan(100) < 85, out MonsterSpell? attackChoice))
         {
-            return attackSpells.ToWeightedRandom(Game).ChooseOrDefault();
+            return attackChoice;
         }
 
         // Priority Seven: If we have a tactical spell, maybe use it
-        if (tacticalSpells.Count > 0 && this.Game.RandomLessThan(100) < 50)
+        if (ChooseConditionalRandom(tacticalSpells, this.Game.RandomLessThan(100) < 50, out MonsterSpell? tacticalChoice))
         {
-            return tacticalSpells.ToWeightedRandom(Game).ChooseOrDefault();
+            return tacticalChoice;
         }
 
         // Priority Eight: If we have a haste spell, maybe use it
-        MonsterSpellList hasteSpells = spells.Where((_spell) => _spell.Hastens);
-        if (hasteSpells.Count > 0 && this.Game.RandomLessThan(100) < 20 + Race.Speed - Speed)
+        if (ChooseConditionalRandom(spells.Where(_spell => _spell.Hastens), this.Game.RandomLessThan(100) < 20 + Race.Speed - Speed, out MonsterSpell? hastenChoice))
         {
-            return hasteSpells.ToWeightedRandom(Game).ChooseOrDefault();
+            return hastenChoice;
         }
 
         // Priority Nine: If we have an annoying spell, probably use it
-        MonsterSpellList annoyanceSpells = spells.Where((_spell) => _spell.Annoys);
-        if (annoyanceSpells.Count > 0 && this.Game.RandomLessThan(100) < 85)
+        if (ChooseConditionalRandom(spells.Where(_spell => _spell.Annoys), this.Game.RandomLessThan(100) < 85, out MonsterSpell? annoyChoice))
         {
-            return annoyanceSpells.ToWeightedRandom(Game).ChooseOrDefault();
+            return annoyChoice;
         }
 
-        // Priority Ten: Give up on using a spell
+        // Priority Ten: If we have any spell, maybe use it
+        if (ChooseRandom(spells, out MonsterSpell? anyChoice))
+        {
+            return anyChoice;
+        }
+
+        // Priority Eleven: Give up on using a spell
         return null;
     }
 

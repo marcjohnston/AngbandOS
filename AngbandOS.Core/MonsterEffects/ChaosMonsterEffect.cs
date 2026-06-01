@@ -24,7 +24,7 @@ internal class ChaosMonsterEffect : MonsterEffect
         }
         bool doPoly = true;
         int doConf = (5 + Game.DieRoll(11) + r) / (r + 1);
-        if (rPtr.BreatheChaos ||
+        if (rPtr.CanBreatheChaos ||
             (rPtr.Demon && Game.DieRoll(3) == 1))
         {
             note = " resists.";
@@ -55,7 +55,7 @@ internal class ChaosMonsterEffect : MonsterEffect
                 mPtr = Game.Monsters[cPtr.MonsterIndex];
             }
         }
-        else if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.BreatheConfusion && !rPtr.BreatheChaos)
+        else if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.CanBreatheConfusion && !rPtr.CanBreatheChaos)
         {
             int tmp;
             if (mPtr.ConfusionLevel != 0)
