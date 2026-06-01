@@ -1567,7 +1567,8 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the expression providers that are used for game and player expression computations.
     /// </summary>
-    public Dictionary<string, object> ExpressionProviders { get; } = new Dictionary<string, object>();
+    [NonSerialized]
+    public readonly Dictionary<string, object> ExpressionProviders = new Dictionary<string, object>();
 
     private Dictionary<string, object> MergeExpressionProviders(params (string, object)[]? additionalProviders)
     {
