@@ -11,8 +11,8 @@ public class GromMasterOfEarthMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBallMonsterSpell),
-        nameof(MonsterSpellsEnum.AcidBoltMonsterSpell)
+        nameof(MonsterSpellsEnum.AcidBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.AcidBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperESymbol);

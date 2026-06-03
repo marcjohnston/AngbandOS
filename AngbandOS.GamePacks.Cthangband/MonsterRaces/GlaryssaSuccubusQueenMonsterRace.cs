@@ -11,14 +11,14 @@ public class GlaryssaSuccubusQueenMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
+        nameof(MonsterSpellsEnum.AcidBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetMonsterSpell),
+        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.NetherBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell),
         nameof(MonsterSpellsEnum.DemonSummonMonsterSpell)
     };
 

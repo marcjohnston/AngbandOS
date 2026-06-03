@@ -11,10 +11,10 @@ public class DracoliskMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell)
+        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.NetherBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell)
     };
 
 

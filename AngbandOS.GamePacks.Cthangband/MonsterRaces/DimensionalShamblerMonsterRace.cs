@@ -11,13 +11,13 @@ public class DimensionalShamblerMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfMonsterSpell)
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperASymbol);

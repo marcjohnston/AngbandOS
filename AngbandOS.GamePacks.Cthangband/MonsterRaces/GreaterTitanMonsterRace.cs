@@ -11,9 +11,9 @@ public class GreaterTitanMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToMonsterSpell)
+        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperPSymbol);

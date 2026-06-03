@@ -11,14 +11,14 @@ public class ShuddeMellMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BrainSmashMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
+        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell)
     };
 

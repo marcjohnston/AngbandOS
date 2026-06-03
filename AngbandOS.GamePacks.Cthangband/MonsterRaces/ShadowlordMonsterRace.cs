@@ -11,18 +11,18 @@ public class ShadowlordMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ShriekMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.DrainManaMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessMonsterSpell),
+        nameof(MonsterSpellsEnum.ShriekScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.NetherBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
         nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfMonsterSpell)
+        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperGSymbol);

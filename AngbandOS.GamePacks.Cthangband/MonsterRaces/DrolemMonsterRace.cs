@@ -11,11 +11,11 @@ public class DrolemMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.Arrow5D6MonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowMonsterSpell)
+        nameof(MonsterSpellsEnum.Arrow5D6ProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PoisonBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerGSymbol);

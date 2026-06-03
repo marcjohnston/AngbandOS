@@ -11,9 +11,9 @@ public class RobinHoodTheOutlawMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.Arrow3D6MonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell)
+        nameof(MonsterSpellsEnum.Arrow3D6ProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

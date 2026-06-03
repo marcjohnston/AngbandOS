@@ -11,18 +11,18 @@ public class OmaraxTheEyeTyrantMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.DarkBallMonsterSpell),
-        nameof(MonsterSpellsEnum.DrainManaMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetMonsterSpell),
+        nameof(MonsterSpellsEnum.AcidBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.DarkBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell),
         nameof(MonsterSpellsEnum.KinSummonMonsterSpell)
     };
 

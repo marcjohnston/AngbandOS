@@ -11,8 +11,8 @@ public class MoaningSpiritMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ScareMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfMonsterSpell)
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperGSymbol);

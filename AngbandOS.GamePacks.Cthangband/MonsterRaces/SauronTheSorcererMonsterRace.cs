@@ -11,27 +11,27 @@ public class SauronTheSorcererMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashMonsterSpell),
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.DarkBallMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBallMonsterSpell),
-        nameof(MonsterSpellsEnum.IceBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBallMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBallMonsterSpell),
-        nameof(MonsterSpellsEnum.DreadCurseMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.DarkBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.IceBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.NetherBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.WaterBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.DreadCurseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell),
         nameof(MonsterSpellsEnum.DemonSummonMonsterSpell),
         nameof(MonsterSpellsEnum.HiDragonSummonMonsterSpell),
         nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
         nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportLevelMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfMonsterSpell)
+        nameof(MonsterSpellsEnum.TeleportLevelScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

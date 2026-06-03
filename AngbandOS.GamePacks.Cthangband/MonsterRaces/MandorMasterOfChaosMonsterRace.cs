@@ -11,15 +11,15 @@ public class MandorMasterOfChaosMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ChaosBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldMonsterSpell),
-        nameof(MonsterSpellsEnum.IceBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
+        nameof(MonsterSpellsEnum.ChaosBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.IceBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell)
     };
 

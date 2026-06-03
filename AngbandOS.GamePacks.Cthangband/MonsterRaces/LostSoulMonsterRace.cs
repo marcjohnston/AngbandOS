@@ -11,8 +11,8 @@ public class LostSoulMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.DrainManaMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfMonsterSpell)
+        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperGSymbol);

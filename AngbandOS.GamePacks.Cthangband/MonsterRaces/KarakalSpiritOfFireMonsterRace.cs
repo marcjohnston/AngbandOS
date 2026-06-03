@@ -11,8 +11,8 @@ public class KarakalSpiritOfFireMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBallMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltMonsterSpell)
+        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperESymbol);

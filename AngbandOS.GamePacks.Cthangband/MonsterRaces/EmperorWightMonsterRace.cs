@@ -12,9 +12,9 @@ public class EmperorWightMonsterRace : MonsterRaceGameConfiguration
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
         nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell)
+        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.NetherBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperWSymbol);

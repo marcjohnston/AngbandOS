@@ -11,12 +11,12 @@ public class YogSothothTheAllInOneMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.DisintegrationBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ChaosBallMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltMonsterSpell),
+        nameof(MonsterSpellsEnum.DisintegrationBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ChaosBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
         nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
         nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
         nameof(MonsterSpellsEnum.HoundSummonMonsterSpell),

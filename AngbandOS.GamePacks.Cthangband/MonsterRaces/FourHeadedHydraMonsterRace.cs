@@ -11,7 +11,7 @@ public class FourHeadedHydraMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ScareMonsterSpell)
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperMSymbol);

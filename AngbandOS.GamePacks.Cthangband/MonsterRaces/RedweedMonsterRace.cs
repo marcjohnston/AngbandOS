@@ -11,7 +11,7 @@ public class RedweedMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlinkMonsterSpell)
+        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerMSymbol);

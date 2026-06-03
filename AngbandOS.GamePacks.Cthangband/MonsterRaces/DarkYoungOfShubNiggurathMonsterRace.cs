@@ -11,9 +11,9 @@ public class DarkYoungOfShubNiggurathMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CauseSeriousWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell)
     };
 

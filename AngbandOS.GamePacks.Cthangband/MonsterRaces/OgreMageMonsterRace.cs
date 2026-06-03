@@ -11,10 +11,10 @@ public class OgreMageMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBallMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell)
     };
 

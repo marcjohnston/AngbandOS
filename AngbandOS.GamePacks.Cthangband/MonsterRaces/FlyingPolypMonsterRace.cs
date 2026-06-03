@@ -11,13 +11,13 @@ public class FlyingPolypMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportAwayMonsterSpell)
+        nameof(MonsterSpellsEnum.TeleportAwayScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperASymbol);

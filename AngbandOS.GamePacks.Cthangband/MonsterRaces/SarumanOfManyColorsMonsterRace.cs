@@ -11,25 +11,25 @@ public class SarumanOfManyColorsMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBallMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
+        nameof(MonsterSpellsEnum.AcidBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBallMonsterSpell),
-        nameof(MonsterSpellsEnum.IceBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBallMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.IceBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.WaterBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.DemonSummonMonsterSpell),
         nameof(MonsterSpellsEnum.DragonSummonMonsterSpell),
         nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportAwayMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfMonsterSpell)
+        nameof(MonsterSpellsEnum.TeleportAwayScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

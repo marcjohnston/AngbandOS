@@ -11,9 +11,9 @@ public class TheInsaneCrusaderMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ShriekMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToMonsterSpell)
+        nameof(MonsterSpellsEnum.ShriekScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

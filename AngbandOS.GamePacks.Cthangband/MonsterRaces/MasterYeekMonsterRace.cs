@@ -11,12 +11,12 @@ public class MasterYeekMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBallMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkMonsterSpell),
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.PoisonBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
         nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfMonsterSpell)
+        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerYSymbol);

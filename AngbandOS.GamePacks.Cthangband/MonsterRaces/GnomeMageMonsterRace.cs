@@ -11,9 +11,9 @@ public class GnomeMageMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
         nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell)
     };
 

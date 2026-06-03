@@ -11,7 +11,7 @@ public class EarthHoundMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ShardsBreatheBallMonsterSpell)
+        nameof(MonsterSpellsEnum.ShardsBreathProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperZSymbol);

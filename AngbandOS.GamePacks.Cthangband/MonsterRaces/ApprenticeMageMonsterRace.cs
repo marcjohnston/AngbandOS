@@ -11,10 +11,10 @@ public class ApprenticeMageMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.MagicMissileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkMonsterSpell)
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.MagicMissileProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

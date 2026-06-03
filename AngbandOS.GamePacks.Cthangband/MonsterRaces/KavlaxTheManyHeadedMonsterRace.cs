@@ -11,15 +11,15 @@ public class KavlaxTheManyHeadedMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfusionBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.GravityBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.NexusBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ShardsBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.SoundBreatheBallMonsterSpell)
+        nameof(MonsterSpellsEnum.AcidBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfusionBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.LightningBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.GravityBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.NexusBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ShardsBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.SoundBreathProjectileMonsterSpell)
     };
 
 

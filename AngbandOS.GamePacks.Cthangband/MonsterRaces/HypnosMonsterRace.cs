@@ -12,21 +12,21 @@ public class HypnosMonsterRace : MonsterRaceGameConfiguration
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
         nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.DrainManaMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
         nameof(MonsterSpellsEnum.DemonSummonMonsterSpell),
         nameof(MonsterSpellsEnum.HiDragonSummonMonsterSpell),
         nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportAwayMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportLevelMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfMonsterSpell)
+        nameof(MonsterSpellsEnum.TeleportAwayScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportLevelScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

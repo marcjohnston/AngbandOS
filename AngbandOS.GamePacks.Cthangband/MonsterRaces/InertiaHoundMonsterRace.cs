@@ -11,7 +11,7 @@ public class InertiaHoundMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.InertiaBreatheBallMonsterSpell)
+        nameof(MonsterSpellsEnum.InertiaBreathProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperZSymbol);

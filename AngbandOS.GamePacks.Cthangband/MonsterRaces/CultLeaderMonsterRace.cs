@@ -11,11 +11,11 @@ public class CultLeaderMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
         nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell),
         nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell)

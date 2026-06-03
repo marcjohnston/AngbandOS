@@ -11,7 +11,7 @@ public class BaronOfHellMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.PlasmaBoltMonsterSpell)
+        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperUSymbol);

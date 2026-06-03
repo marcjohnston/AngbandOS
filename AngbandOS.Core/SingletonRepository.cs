@@ -286,6 +286,8 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<IScriptItemGridTile>();
         RegisterIndex<IScriptItemInt>();
         RegisterIndex<IScriptItemMonster>();
+        RegisterIndex<IScriptMonster>();
+        RegisterIndex<IScriptMonsterMonster>();
         RegisterIndex<IStoreCommandScript>();
         RegisterIndex<IStringValue>();
         RegisterIndex<IUsedScript>();

@@ -11,20 +11,20 @@ public class DarkElvenThaumaturgeMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
+        nameof(MonsterSpellsEnum.AcidBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBallMonsterSpell),
-        nameof(MonsterSpellsEnum.MagicMissileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.MagicMissileProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.DemonSummonMonsterSpell),
         nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell),
         nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToMonsterSpell)
+        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerHSymbol);

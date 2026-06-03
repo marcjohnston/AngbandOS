@@ -11,18 +11,18 @@ public class SorcererMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
+        nameof(MonsterSpellsEnum.AcidBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBallMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
         nameof(MonsterSpellsEnum.DragonSummonMonsterSpell),
         nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell),
         nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToMonsterSpell)
+        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

@@ -11,24 +11,24 @@ public class AetherVortexMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ChaosBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfusionBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.DarkBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ForceBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.GravityBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.InertiaBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.LightBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.NexusBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ShardsBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.SoundBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.TimeBreatheBallMonsterSpell)
+        nameof(MonsterSpellsEnum.AcidBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ChaosBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ConfusionBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.DarkBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.LightningBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ForceBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.GravityBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.InertiaBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.LightBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.NetherBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.NexusBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PlasmaBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PoisonBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ShardsBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.SoundBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.TimeBreathProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerVSymbol);

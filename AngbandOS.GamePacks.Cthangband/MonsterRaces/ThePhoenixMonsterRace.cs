@@ -11,12 +11,12 @@ public class ThePhoenixMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.LightBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBallMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltMonsterSpell)
+        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.LightBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PlasmaBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell)
     };
 
 

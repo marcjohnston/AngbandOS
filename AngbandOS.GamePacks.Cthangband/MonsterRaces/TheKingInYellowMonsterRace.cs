@@ -11,14 +11,14 @@ public class TheKingInYellowMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.AcidBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBallMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBoltMonsterSpell)
+        nameof(MonsterSpellsEnum.ColdBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.NetherBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PoisonBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.AcidBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PoisonBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.WaterBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(QuestionMarkSymbol);

@@ -12,7 +12,7 @@ public class NoviceFanaticMonsterRace : MonsterRaceGameConfiguration
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
         nameof(MonsterSpellsEnum.CauseLightWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell)
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

@@ -11,15 +11,15 @@ public class IthaquaTheWindwalkerMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ChaosBallMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ChaosBallProjectileMonsterSpell),
         nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBallMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBallMonsterSpell),
+        nameof(MonsterSpellsEnum.LightningBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.LightningBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.WaterBallProjectileMonsterSpell),
         nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
         nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
         nameof(MonsterSpellsEnum.KinSummonMonsterSpell)

@@ -12,11 +12,11 @@ public class MedusaTheGorgonMonsterRace : MonsterRaceGameConfiguration
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
         nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PoisonBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
         nameof(MonsterSpellsEnum.HydraSummonMonsterSpell)
     };
 

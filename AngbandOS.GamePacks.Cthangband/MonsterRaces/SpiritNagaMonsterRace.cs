@@ -11,10 +11,10 @@ public class SpiritNagaMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell)
+        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerNSymbol);

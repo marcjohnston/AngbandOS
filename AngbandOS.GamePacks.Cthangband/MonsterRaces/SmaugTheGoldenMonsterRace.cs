@@ -11,9 +11,9 @@ public class SmaugTheGoldenMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBreatheBallMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
         nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell)
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell)
     };
 
 

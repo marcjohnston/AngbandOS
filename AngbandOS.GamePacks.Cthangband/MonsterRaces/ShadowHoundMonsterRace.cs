@@ -11,7 +11,7 @@ public class ShadowHoundMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.DarkBreatheBallMonsterSpell)
+        nameof(MonsterSpellsEnum.DarkBreathProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperZSymbol);

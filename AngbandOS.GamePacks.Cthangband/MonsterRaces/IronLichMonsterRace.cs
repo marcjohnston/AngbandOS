@@ -11,14 +11,14 @@ public class IronLichMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBallMonsterSpell),
-        nameof(MonsterSpellsEnum.DrainManaMonsterSpell),
-        nameof(MonsterSpellsEnum.IceBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBallMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBallMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.IceBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.LightningBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.WaterBallProjectileMonsterSpell),
         nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell)
     };
 

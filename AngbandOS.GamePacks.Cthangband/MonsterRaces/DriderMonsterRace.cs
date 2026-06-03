@@ -11,11 +11,11 @@ public class DriderMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.Arrow3D6MonsterSpell),
+        nameof(MonsterSpellsEnum.Arrow3D6ProjectileMonsterSpell),
         nameof(MonsterSpellsEnum.CauseLightWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell),
-        nameof(MonsterSpellsEnum.MagicMissileMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessMonsterSpell)
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.MagicMissileProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell)
     };
 
 

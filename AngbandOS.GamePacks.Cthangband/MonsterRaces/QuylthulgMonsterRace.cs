@@ -11,7 +11,7 @@ public class QuylthulgMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlinkMonsterSpell),
+        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
         nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell)
     };
 

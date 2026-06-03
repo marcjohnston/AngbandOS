@@ -11,16 +11,16 @@ public class AbhothSourceOfUncleannessMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.NexusBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ChaosBallMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashMonsterSpell),
+        nameof(MonsterSpellsEnum.NexusBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ChaosBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBallMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastMonsterSpell),
-        nameof(MonsterSpellsEnum.DreadCurseMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteMonsterSpell),
-        nameof(MonsterSpellsEnum.HealMonsterSpell),
+        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.DreadCurseScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
         nameof(MonsterSpellsEnum.DemonSummonMonsterSpell),
         nameof(MonsterSpellsEnum.HiDragonSummonMonsterSpell),
@@ -29,10 +29,10 @@ public class AbhothSourceOfUncleannessMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
         nameof(MonsterSpellsEnum.ReaverSummonMonsterSpell),
         nameof(MonsterSpellsEnum.SpiderSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportAwayMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportLevelMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfMonsterSpell)
+        nameof(MonsterSpellsEnum.TeleportAwayScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportLevelScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell),
+        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
 
 

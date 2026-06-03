@@ -11,7 +11,7 @@ public class DholeMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBreatheBallMonsterSpell)
+        nameof(MonsterSpellsEnum.AcidBreathProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperASymbol);

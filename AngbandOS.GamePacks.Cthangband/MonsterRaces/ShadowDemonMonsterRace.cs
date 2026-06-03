@@ -11,7 +11,7 @@ public class ShadowDemonMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.NetherBoltMonsterSpell)
+        nameof(MonsterSpellsEnum.NetherBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperGSymbol);

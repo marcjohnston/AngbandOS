@@ -11,9 +11,9 @@ public class StraashaQueenOfAirMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBallMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBallMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBoltMonsterSpell)
+        nameof(MonsterSpellsEnum.ColdBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.LightningBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.LightningBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperESymbol);

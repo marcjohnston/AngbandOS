@@ -11,9 +11,9 @@ public class ScathaTheWormMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBreatheBallMonsterSpell),
+        nameof(MonsterSpellsEnum.ColdBreathProjectileMonsterSpell),
         nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseMonsterSpell)
+        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell)
     };
 
 

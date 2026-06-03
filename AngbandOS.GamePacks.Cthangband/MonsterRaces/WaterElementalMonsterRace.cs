@@ -11,7 +11,7 @@ public class WaterElementalMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBoltMonsterSpell)
+        nameof(MonsterSpellsEnum.ColdBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperESymbol);

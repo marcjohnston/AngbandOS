@@ -11,7 +11,7 @@ public class IronGolemMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.SlowMonsterSpell)
+        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerGSymbol);

@@ -11,7 +11,7 @@ public class StairwayToHellMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ShriekMonsterSpell),
+        nameof(MonsterSpellsEnum.ShriekScriptMonsterSpell),
         nameof(MonsterSpellsEnum.DemonSummonMonsterSpell)
     };
 

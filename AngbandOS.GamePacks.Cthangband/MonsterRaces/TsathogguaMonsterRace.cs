@@ -11,11 +11,11 @@ public class TsathogguaMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ChaosBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.DisenchantBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.DisintegrationBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBallMonsterSpell),
+        nameof(MonsterSpellsEnum.ChaosBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.DisenchantBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.DisintegrationBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.WaterBallProjectileMonsterSpell),
         nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell)
     };
 

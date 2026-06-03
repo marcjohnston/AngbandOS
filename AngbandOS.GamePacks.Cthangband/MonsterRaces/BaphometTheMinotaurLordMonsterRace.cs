@@ -11,12 +11,12 @@ public class BaphometTheMinotaurLordMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.Arrow7D6MonsterSpell),
-        nameof(MonsterSpellsEnum.ForceBreatheBallMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBallMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowMonsterSpell)
+        nameof(MonsterSpellsEnum.Arrow7D6ProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ForceBreathProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.LightningBallProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell),
+        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperHSymbol);

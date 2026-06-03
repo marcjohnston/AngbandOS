@@ -11,7 +11,7 @@ public class DisenchanterEyeMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.DrainManaMonsterSpell)
+        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerESymbol);

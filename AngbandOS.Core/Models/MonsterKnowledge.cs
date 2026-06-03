@@ -431,27 +431,27 @@ internal class MonsterKnowledge : IGameSerialize
             _description.Append(_wdHeCap[msex]).Append(" usually appears in groups. ");
         }
         int vn = 0;
-        if (combinedSpells.Any(spell => typeof(ShriekMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ShriekScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "shriek for help";
         }
-        if (combinedSpells.Any(spell => typeof(ShardBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ShardBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce shard balls";
         }
-        if (combinedSpells.Any(spell => typeof(Arrow1D6MonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(Arrow1D6ProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "fire an arrow";
         }
-        if (combinedSpells.Any(spell => typeof(Arrow3D6MonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(Arrow3D6ProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "fire arrows";
         }
-        if (combinedSpells.Any(spell => typeof(Arrow5D6MonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(Arrow5D6ProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "fire a missile";
         }
-        if (combinedSpells.Any(spell => typeof(Arrow7D6MonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(Arrow7D6ProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "fire missiles";
         }
@@ -478,91 +478,91 @@ internal class MonsterKnowledge : IGameSerialize
             _description.Append(". ");
         }
         vn = 0;
-        if (combinedSpells.Any(spell => typeof(AcidBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(AcidBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "acid";
         }
-        if (combinedSpells.Any(spell => typeof(LightningBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(LightningBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "lightning";
         }
-        if (combinedSpells.Any(spell => typeof(FireBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(FireBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "fire";
         }
-        if (combinedSpells.Any(spell => typeof(ColdBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ColdBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "frost";
         }
-        if (combinedSpells.Any(spell => typeof(PoisonBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(PoisonBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "poison";
         }
-        if (combinedSpells.Any(spell => typeof(NetherBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(NetherBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "nether";
         }
-        if (combinedSpells.Any(spell => typeof(LightBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(LightBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "light";
         }
-        if (combinedSpells.Any(spell => typeof(DarkBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(DarkBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "darkness";
         }
-        if (combinedSpells.Any(spell => typeof(ConfusionBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ConfusionBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "confusion";
         }
-        if (combinedSpells.Any(spell => typeof(SoundBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(SoundBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "sound";
         }
-        if (combinedSpells.Any(spell => typeof(ChaosBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ChaosBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "chaos";
         }
-        if (combinedSpells.Any(spell => typeof(DisenchantBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(DisenchantBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "disenchantment";
         }
-        if (combinedSpells.Any(spell => typeof(NexusBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(NexusBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "nexus";
         }
-        if (combinedSpells.Any(spell => typeof(TimeBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(TimeBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "time";
         }
-        if (combinedSpells.Any(spell => typeof(InertiaBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(InertiaBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "inertia";
         }
-        if (combinedSpells.Any(spell => typeof(GravityBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(GravityBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "gravity";
         }
-        if (combinedSpells.Any(spell => typeof(ShardsBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ShardsBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "shards";
         }
-        if (combinedSpells.Any(spell => typeof(PlasmaBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(PlasmaBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "plasma";
         }
-        if (combinedSpells.Any(spell => typeof(ForceBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ForceBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "force";
         }
-        if (combinedSpells.Any(spell => typeof(ManaBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ManaBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "mana";
         }
-        if (combinedSpells.Any(spell => typeof(RadiationBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(RadiationBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "toxic waste";
         }
-        if (combinedSpells.Any(spell => typeof(DisintegrationBreatheBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(DisintegrationBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "disintegration";
         }
@@ -589,63 +589,63 @@ internal class MonsterKnowledge : IGameSerialize
             }
         }
         vn = 0;
-        if (combinedSpells.Any(spell => typeof(AcidBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(AcidBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce acid balls";
         }
-        if (combinedSpells.Any(spell => typeof(LightningBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(LightningBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce lightning balls";
         }
-        if (combinedSpells.Any(spell => typeof(FireBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(FireBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce fire balls";
         }
-        if (combinedSpells.Any(spell => typeof(ColdBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ColdBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce frost balls";
         }
-        if (combinedSpells.Any(spell => typeof(PoisonBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(PoisonBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce poison balls";
         }
-        if (combinedSpells.Any(spell => typeof(NetherBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(NetherBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce nether balls";
         }
-        if (combinedSpells.Any(spell => typeof(WaterBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(WaterBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce water balls";
         }
-        if (combinedSpells.Any(spell => typeof(RadiationBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(RadiationBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce balls of radiation";
         }
-        if (combinedSpells.Any(spell => typeof(ManaBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ManaBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "invoke mana storms";
         }
-        if (combinedSpells.Any(spell => typeof(DarkBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(DarkBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "invoke darkness storms";
         }
-        if (combinedSpells.Any(spell => typeof(ChaosBallMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ChaosBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "invoke raw chaos";
         }
-        if (combinedSpells.Any(spell => typeof(DreadCurseMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(DreadCurseScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "invoke the Dread Curse of Azathoth";
         }
-        if (combinedSpells.Any(spell => typeof(DrainManaMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(DrainManaScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "drain mana";
         }
-        if (combinedSpells.Any(spell => typeof(MindBlastMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(MindBlastScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "cause mind blasting";
         }
-        if (combinedSpells.Any(spell => typeof(BrainSmashMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(BrainSmashScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "cause brain smashing";
         }
@@ -665,107 +665,107 @@ internal class MonsterKnowledge : IGameSerialize
         {
             vp[vn++] = "cause mortal wounds";
         }
-        if (combinedSpells.Any(spell => typeof(AcidBoltMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(AcidBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce acid bolts";
         }
-        if (combinedSpells.Any(spell => typeof(LightningBoltMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(LightningBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce lightning bolts";
         }
-        if (combinedSpells.Any(spell => typeof(FireBoltMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(FireBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce fire bolts";
         }
-        if (combinedSpells.Any(spell => typeof(ColdBoltMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ColdBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce frost bolts";
         }
-        if (combinedSpells.Any(spell => typeof(PoisonBoltMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(PoisonBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce poison bolts";
         }
-        if (combinedSpells.Any(spell => typeof(NetherBoltMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(NetherBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce nether bolts";
         }
-        if (combinedSpells.Any(spell => typeof(WaterBoltMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(WaterBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce water bolts";
         }
-        if (combinedSpells.Any(spell => typeof(ManaBoltMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ManaBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce mana bolts";
         }
-        if (combinedSpells.Any(spell => typeof(PlasmaBoltMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(PlasmaBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce plasma bolts";
         }
-        if (combinedSpells.Any(spell => typeof(IceBoltMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(IceBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce ice bolts";
         }
-        if (combinedSpells.Any(spell => typeof(MagicMissileMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(MagicMissileProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "produce magic missiles";
         }
-        if (combinedSpells.Any(spell => typeof(ScareMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ScareScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "terrify";
         }
-        if (combinedSpells.Any(spell => typeof(BlindnessMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(BlindnessScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "blind";
         }
-        if (combinedSpells.Any(spell => typeof(ConfuseMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ConfuseScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "confuse";
         }
-        if (combinedSpells.Any(spell => typeof(SlowMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(SlowScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "slow";
         }
-        if (combinedSpells.Any(spell => typeof(HoldMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(HoldScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "paralyze";
         }
-        if (combinedSpells.Any(spell => typeof(HasteMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(HasteScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "haste-self";
         }
-        if (combinedSpells.Any(spell => typeof(HealMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(HealScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "heal-self";
         }
-        if (combinedSpells.Any(spell => typeof(BlinkMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(BlinkScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "blink-self";
         }
-        if (combinedSpells.Any(spell => typeof(TeleportSelfMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(TeleportSelfScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "teleport-self";
         }
-        if (combinedSpells.Any(spell => typeof(TeleportToMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(TeleportToScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "teleport to";
         }
-        if (combinedSpells.Any(spell => typeof(TeleportAwayMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(TeleportAwayScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "teleport away";
         }
-        if (combinedSpells.Any(spell => typeof(TeleportLevelMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(TeleportLevelScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "teleport level";
         }
-        if (combinedSpells.Any(spell => typeof(DarknessMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(DarknessProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "create darkness";
         }
-        if (combinedSpells.Any(spell => typeof(CreateTrapsMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(CreateTrapsScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "create traps";
         }
-        if (combinedSpells.Any(spell => typeof(ForgetMonsterSpell).IsAssignableFrom(spell.GetType())))
+        if (combinedSpells.Any(spell => typeof(ForgetScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
         {
             vp[vn++] = "cause amnesia";
         }

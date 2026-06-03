@@ -292,7 +292,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
 
     public bool PassWall { get; } = false;
 
-    public int BallAndBreatheProjectileBonusRadius { get; } = 0;
+    public int ProjectileBonusRadius { get; } = 0;
 
     public bool RandomMove25 { get; } = false;
 
@@ -484,7 +484,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
         OpenDoor = gameConfiguration.OpenDoor;
         Orc = gameConfiguration.Orc;
         PassWall = gameConfiguration.PassWall;
-        BallAndBreatheProjectileBonusRadius = gameConfiguration.BallAndBreatheProjectileBonusRadius;
+        ProjectileBonusRadius = gameConfiguration.BallAndBreatheProjectileBonusRadius;
         RandomMove25 = gameConfiguration.RandomMove25;
         RandomMove50 = gameConfiguration.RandomMove50;
         Rarity = gameConfiguration.Rarity;
@@ -554,21 +554,21 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     }
 
     public MonsterSpell[] Spells { get; private set; }
-    public bool CanBreatheAcid => Spells.Any(_spell => typeof(AcidBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheCold => Spells.Any(_spell => typeof(ColdBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheFire => Spells.Any(_spell => typeof(FireBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheLightning => Spells.Any(_spell => typeof(LightningBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreathePoison => Spells.Any(_spell => typeof(PoisonBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheChaos => Spells.Any(_spell => typeof(ChaosBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheConfusion => Spells.Any(_spell => typeof(ConfusionBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheDark => Spells.Any(_spell => typeof(DarkBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheSound => Spells.Any(_spell => typeof(SoundBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheForce => Spells.Any(_spell => typeof(ForceBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheShards => Spells.Any(_spell => typeof(ShardsBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheGravity => Spells.Any(_spell => typeof(GravityBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheInertia => Spells.Any(_spell => typeof(InertiaBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheTime => Spells.Any(_spell => typeof(TimeBreatheBallMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool TeleportSelf => Spells.Any(_spell => typeof(TeleportSelfMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheAcid => Spells.Any(_spell => typeof(AcidBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheCold => Spells.Any(_spell => typeof(ColdBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheFire => Spells.Any(_spell => typeof(FireBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheLightning => Spells.Any(_spell => typeof(LightningBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreathePoison => Spells.Any(_spell => typeof(PoisonBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheChaos => Spells.Any(_spell => typeof(ChaosBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheConfusion => Spells.Any(_spell => typeof(ConfusionBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheDark => Spells.Any(_spell => typeof(DarkBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheSound => Spells.Any(_spell => typeof(SoundBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheForce => Spells.Any(_spell => typeof(ForceBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheShards => Spells.Any(_spell => typeof(ShardsBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheGravity => Spells.Any(_spell => typeof(GravityBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheInertia => Spells.Any(_spell => typeof(InertiaBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanBreatheTime => Spells.Any(_spell => typeof(TimeBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool TeleportSelf => Spells.Any(_spell => typeof(TeleportSelfScriptMonsterSpell).IsAssignableFrom(_spell.GetType()));
 
     /// <summary>
     /// Returns a standard message note for a monster of either it 'dies' or is 'destroyed' based on whether
@@ -714,7 +714,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
             OpenDoor = OpenDoor,
             Orc = Orc,
             PassWall = PassWall,
-            BallAndBreatheProjectileBonusRadius = BallAndBreatheProjectileBonusRadius,
+            BallAndBreatheProjectileBonusRadius = ProjectileBonusRadius,
             RandomMove25 = RandomMove25,
             RandomMove50 = RandomMove50,
             Rarity = Rarity,

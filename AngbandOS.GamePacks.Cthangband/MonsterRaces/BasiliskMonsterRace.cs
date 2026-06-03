@@ -11,7 +11,7 @@ public class BasiliskMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.PoisonBreatheBallMonsterSpell)
+        nameof(MonsterSpellsEnum.PoisonBreathProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperRSymbol);
