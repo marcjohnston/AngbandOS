@@ -47,7 +47,7 @@ internal abstract class SummonMonsterSpell : MonsterSpell
     /// Returns a monster selector key that is used to specify which type of monster to be summoned when a friendly monster is attacking
     /// another monster, or null for any monster.  Returns the monster selector key, by default.
     /// </summary>
-    protected virtual string? FriendlyMonsterSelectorBindingKey => MonsterSelectorBindingKey;
+    protected virtual string? FriendlyMonsterSelectorBindingKey => null;
 
     /// <summary>
     /// Returns a monster selector that is used to specify which type of monster to be summoned when a friendly monster is attacking
@@ -101,7 +101,12 @@ internal abstract class SummonMonsterSpell : MonsterSpell
             int summonLevel = SummonLevel.HasValue ? SummonLevel.Value : monster.Race.Level >= 1 ? monster.Race.Level : 1;
             if (friendly)
             {
-                MonsterRaceFilter? friendlyMonsterFilter = FriendlyMonsterSelector?.GetMonsterFilter(monster.Race);
+                IMonsterSelector? friendlyMonsterSelector = FriendlyMonsterSelector;
+                if (friendlyMonsterSelector is null)
+                {
+                    friendlyMonsterSelector = MonsterSelector;
+                }
+                MonsterRaceFilter? friendlyMonsterFilter = friendlyMonsterSelector?.GetMonsterFilter(monster.Race);
                 if (Game.SummonSpecific(target.MapY, target.MapX, summonLevel, friendlyMonsterFilter, true, true))
                 {
                     count++;
