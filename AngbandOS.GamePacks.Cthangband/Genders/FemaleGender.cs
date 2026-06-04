@@ -11,4 +11,6 @@ public class FemaleGender : GenderGameConfiguration
 {
     public override string Title => "Female";
     public override string Winner => "Queen";
+    public override string Pronoun => "she";
+    public override string PossessiveAdjective => "her";
 }

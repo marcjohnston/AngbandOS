@@ -11,4 +11,6 @@ public class MaleGender : GenderGameConfiguration
 {
     public override string Title => "Male";
     public override string Winner => "King";
+    public override string Pronoun => "he";
+    public override string PossessiveAdjective => "his";
 }

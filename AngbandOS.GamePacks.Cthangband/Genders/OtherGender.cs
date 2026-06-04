@@ -16,4 +16,5 @@ public class OtherGender : GenderGameConfiguration
     /// Returns false, because the Other gender shouldn't be selected when a random character is chosen.
     /// </summary>
     public override bool CanBeRandomlySelected => false;
+
 }

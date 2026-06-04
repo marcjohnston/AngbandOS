@@ -17,6 +17,9 @@ internal sealed class Gender : IGetKey, IToJson, IGameSerialize
         Title = gameConfiguration.Title;
         Winner = gameConfiguration.Winner;
         CanBeRandomlySelected = gameConfiguration.CanBeRandomlySelected;
+        Pronoun = gameConfiguration.Pronoun;
+        PossessiveAdjective = gameConfiguration.PossessiveAdjective;
+
     }
 
     public GameStateBag? Serialize(SaveGameState saveGameState) => null;
@@ -31,10 +34,16 @@ internal sealed class Gender : IGetKey, IToJson, IGameSerialize
             Key = Key,
             Title = Title,
             Winner = Winner,
-            CanBeRandomlySelected = CanBeRandomlySelected
+            CanBeRandomlySelected = CanBeRandomlySelected,
+            Pronoun = Pronoun,
+            PossessiveAdjective = PossessiveAdjective
+
         };
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
+
+    public string Pronoun { get; }
+    public string PossessiveAdjective { get; }
 
     public string Key { get; }
 
