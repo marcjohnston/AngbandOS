@@ -6,10 +6,55 @@ namespace AngbandOS.Core
 {
     public static class StringLibrary
     {
-        public static string SuffixIf(string? value, string suffix) => String.IsNullOrEmpty(value) ? "" : $"{value}{suffix}";
+        /// <summary>
+        /// Inserts a delimiter between a prefix and suffix, if both the prefix and suffix exist.
+        /// </summary>
+        /// <param name="prefix"></param>
+        /// <param name="delimiter"></param>
+        /// <param name="suffix"></param>
+        /// <returns></returns>
         public static string DelimitIf(string? prefix, string delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
+
+        /// <summary>
+        /// Inserts a delimiter between a prefix and suffix, if both the prefix and suffix exist.
+        /// </summary>
+        /// <param name="prefix"></param>
+        /// <param name="delimiter"></param>
+        /// <param name="suffix"></param>
+        /// <returns></returns>
         public static string DelimitIf(string? prefix, char delimiter, char? suffix) => String.IsNullOrEmpty(prefix) || suffix is null ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
+
+        /// <summary>
+        /// Inserts a delimiter between a prefix and suffix, if both the prefix and suffix exist.
+        /// </summary>
+        /// <param name="prefix"></param>
+        /// <param name="delimiter"></param>
+        /// <param name="suffix"></param>
+        /// <returns></returns>
         public static string DelimitIf(string? prefix, char delimiter, string? suffix) => String.IsNullOrEmpty(prefix) || String.IsNullOrEmpty(suffix) ? $"{prefix}{suffix}" : $"{prefix}{delimiter}{suffix}";
+
+        public static string SurroundIf(string? prefix, string? content, string? suffix) => String.IsNullOrEmpty(content) ? $"{prefix}{suffix}" : $"{prefix}{content}{suffix}";
+        public static string PrefixIf(string? prefix, string? content) => String.IsNullOrEmpty(content) ? $"" : $"{prefix}{content}";
+        public static string SuffixIf(string? content, string? suffix) => String.IsNullOrEmpty(content) ? $"" : $"{content}{suffix}";
+
+
+        public static string BuildList(string[] items, string continuingDelimiter = ", ", string finalDelimiter = " or ")
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            string delimiter = "";
+            for (int n = 0; n < items.Length - 1; n++)
+            {
+                stringBuilder.Append(delimiter);
+                stringBuilder.Append(items[n]);
+                delimiter = continuingDelimiter;
+            }
+            if (items.Length > 1)
+            {
+                stringBuilder.Append(finalDelimiter);
+                stringBuilder.Append(items[items.Length]);
+            }
+            return stringBuilder.ToString();
+        }
 
         /// <summary>
         /// Returns whether or not a character is a vowel.
