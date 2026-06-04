@@ -19,6 +19,7 @@ public class DimensionalShamblerMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(UpperASymbol);
     public override ColorEnum Color => ColorEnum.BrightBlue;

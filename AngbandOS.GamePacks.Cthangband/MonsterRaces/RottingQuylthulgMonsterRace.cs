@@ -15,6 +15,7 @@ public class RottingQuylthulgMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;

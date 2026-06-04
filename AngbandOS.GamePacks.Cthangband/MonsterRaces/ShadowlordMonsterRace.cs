@@ -24,6 +24,7 @@ public class ShadowlordMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.Blue;

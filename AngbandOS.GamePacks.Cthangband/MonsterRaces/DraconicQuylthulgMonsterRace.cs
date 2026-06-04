@@ -15,6 +15,7 @@ public class DraconicQuylthulgMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.DragonSummonMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(UpperQSymbol);
     public override ColorEnum Color => ColorEnum.BrightGreen;

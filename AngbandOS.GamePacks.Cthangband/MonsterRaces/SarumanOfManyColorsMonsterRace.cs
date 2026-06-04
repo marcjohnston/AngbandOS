@@ -31,6 +31,7 @@ public class SarumanOfManyColorsMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.TeleportAwayScriptMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.Purple;

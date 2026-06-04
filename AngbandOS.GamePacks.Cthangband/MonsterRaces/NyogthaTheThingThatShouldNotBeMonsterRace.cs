@@ -25,6 +25,7 @@ public class NyogthaTheThingThatShouldNotBeMonsterRace : MonsterRaceGameConfigur
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
 
+    public override bool CanTeleportSelf => true;
 
     /// <summary>
     /// Returns true, because this monster has legs and is susceptible to martial arts ankle kicks.

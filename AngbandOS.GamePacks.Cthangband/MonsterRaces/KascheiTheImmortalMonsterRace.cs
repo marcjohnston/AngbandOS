@@ -24,6 +24,7 @@ public class KascheiTheImmortalMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(UpperLSymbol);
     public override ColorEnum Color => ColorEnum.Purple;

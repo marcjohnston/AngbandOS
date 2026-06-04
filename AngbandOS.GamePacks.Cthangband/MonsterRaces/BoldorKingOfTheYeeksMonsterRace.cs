@@ -18,6 +18,7 @@ public class BoldorKingOfTheYeeksMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.KinSummonMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(LowerYSymbol);
     public override ColorEnum Color => ColorEnum.Purple;

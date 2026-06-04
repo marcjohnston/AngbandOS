@@ -28,6 +28,7 @@ public class HypnosMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(LowerPSymbol);
     public override ColorEnum Color => ColorEnum.BrightWhite;

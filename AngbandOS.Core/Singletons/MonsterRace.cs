@@ -405,6 +405,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     {
         Game = game;
         // 102 Properties
+        CanTeleportSelf = gameConfiguration.CanTeleportSelf;
         Key = gameConfiguration.GetKey;
         SpellNames = gameConfiguration.SpellNames;
         SymbolName = gameConfiguration.SymbolName;
@@ -568,7 +569,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     public bool CanBreatheGravity => Spells.Any(_spell => typeof(GravityBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
     public bool CanBreatheInertia => Spells.Any(_spell => typeof(InertiaBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
     public bool CanBreatheTime => Spells.Any(_spell => typeof(TimeBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool TeleportSelf => Spells.Any(_spell => typeof(TeleportSelfScriptMonsterSpell).IsAssignableFrom(_spell.GetType()));
+    public bool CanTeleportSelf { get; }
 
     /// <summary>
     /// Returns a standard message note for a monster of either it 'dies' or is 'destroyed' based on whether
@@ -637,6 +638,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
         {
             // 102 Properties
             Key = Key,
+            CanTeleportSelf = CanTeleportSelf,
             SpellNames = SpellNames,
             SymbolName = SymbolName,
             Color = Color,

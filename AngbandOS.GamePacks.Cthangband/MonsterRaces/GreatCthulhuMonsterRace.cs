@@ -38,6 +38,7 @@ public class GreatCthulhuMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.ReaverSummonMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
 
     /// <summary>

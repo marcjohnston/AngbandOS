@@ -14,6 +14,7 @@ public class MoaningSpiritMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(UpperGSymbol);
     public override ColorEnum Color => ColorEnum.BrightBrown;

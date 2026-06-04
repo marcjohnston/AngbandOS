@@ -27,6 +27,7 @@ public class HasturTheUnspeakableMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
 
     /// <summary>

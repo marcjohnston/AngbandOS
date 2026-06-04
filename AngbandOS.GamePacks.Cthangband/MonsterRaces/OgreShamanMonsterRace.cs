@@ -19,6 +19,7 @@ public class OgreShamanMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(UpperOSymbol);
     public override ColorEnum Color => ColorEnum.Blue;

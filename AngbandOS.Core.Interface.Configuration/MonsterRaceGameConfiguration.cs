@@ -15,6 +15,8 @@ namespace AngbandOS.Core.Interface.Configuration;
 [Serializable]
 public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfiguration
 {
+    public virtual bool CanTeleportSelf { get; set; } = false;
+
     /// <foreign-collection-name>MonsterSpells</foreign-collection-name>
     public virtual string[]? SpellNames { get; set; } = null;
 

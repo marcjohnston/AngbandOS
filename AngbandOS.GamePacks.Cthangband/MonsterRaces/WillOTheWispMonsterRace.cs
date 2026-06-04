@@ -16,6 +16,7 @@ public class WillOTheWispMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(UpperESymbol);
     public override ColorEnum Color => ColorEnum.BrightTurquoise;

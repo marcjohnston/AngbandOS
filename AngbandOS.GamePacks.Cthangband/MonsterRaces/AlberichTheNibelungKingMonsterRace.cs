@@ -18,6 +18,7 @@ public class AlberichTheNibelungKingMonsterRace : MonsterRaceGameConfiguration
         nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell),
         nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
     };
+    public override bool CanTeleportSelf => true;
 
     public override string SymbolName => nameof(LowerHSymbol);
     public override ColorEnum Color => ColorEnum.Gold;
