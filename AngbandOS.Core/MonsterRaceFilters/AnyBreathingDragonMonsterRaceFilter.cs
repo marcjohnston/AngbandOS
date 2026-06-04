@@ -11,8 +11,13 @@ internal class AnyBreathingDragonMonsterRaceFilter : MonsterRaceFilter
 {
     private AnyBreathingDragonMonsterRaceFilter(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Matches(MonsterRace rPtr)
-    {
-        return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && (rPtr.CanBreatheAcid || rPtr.CanBreatheLightning || rPtr.CanBreatheFire || rPtr.CanBreatheCold || rPtr.CanBreathePoison);
-    }
+    public override string[]? AnyMonsterSpellBindingKeys => new string[] 
+    { 
+        nameof(AcidBreathProjectileMonsterSpell), 
+        nameof(LightningBreathProjectileMonsterSpell), 
+        nameof(FireBreathProjectileMonsterSpell), 
+        nameof(ColdBreathProjectileMonsterSpell), 
+        nameof(PoisonBreathProjectileMonsterSpell)
+    };
+    public override string[]? AnySymbolBindingKeys => new string[] { nameof(UpperDSymbol), nameof(LowerDSymbol) };
 }

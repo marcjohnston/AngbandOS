@@ -20,15 +20,44 @@ internal abstract class MonsterRaceFilter : IMonsterSelector, IGetKey, IGameSeri
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public void Bind(RestoreGameState? restoreGameState)
+    {
+        AnySymbol = Game.SingletonRepository.GetNullable<Symbol>(AnySymbolBindingKeys);
+        AnyMonsterRace = Game.SingletonRepository.GetNullable<MonsterRace>(AnyMonsterRaceBindingKeys);
+        AnyMonsterSpell = Game.SingletonRepository.GetNullable<MonsterSpell>(AnyMonsterSpellBindingKeys);
+    }
 
     public MonsterRaceFilter GetMonsterFilter(MonsterRace monsterRace) => this;
 
+    public virtual string[]? AnySymbolBindingKeys => null;
+    public virtual string[]? AnyMonsterRaceBindingKeys => null;
+    public virtual string[]? AnyMonsterSpellBindingKeys => null;
+
+    protected Symbol[]? AnySymbol { get; private set; } = null;
+    protected MonsterSpell[]? AnyMonsterSpell { get; private set; } = null;
+
+    protected MonsterRace[]? AnyMonsterRace { get; private set; } = null;
     /// <summary>
-    /// Returns true, if a monster matches the selector.
+    /// Returns true, if a monster matches the selector.  Returns true, by default, matching all monster races.
     /// </summary>
     /// <param name="game"></param>
     /// <param name="rPtr">The monster race to check.</param>
     /// <returns></returns>
-    public abstract bool Matches(MonsterRace rPtr);
+    public virtual bool Matches(MonsterRace rPtr)
+    {
+        if (AnySymbol is not null && !AnySymbol.Contains(rPtr.Symbol))
+        {
+            return false;
+        }
+        if (AnyMonsterRace is not null && !AnyMonsterRace.Contains(rPtr))
+        {
+            return false;
+        }
+        if (AnyMonsterSpell is not null && !rPtr.Spells.Any(_monsterSpell => AnyMonsterSpell.Contains(_monsterSpell)))
+        {
+            return false;
+        }
+        return true;
+    }
 }
+

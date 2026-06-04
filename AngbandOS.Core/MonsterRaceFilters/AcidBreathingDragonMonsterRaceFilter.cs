@@ -11,8 +11,6 @@ internal class AcidBreathingDragonMonsterRaceFilter : MonsterRaceFilter
 {
     private AcidBreathingDragonMonsterRaceFilter(Game game) : base(game) { } // This object is a singleton.
 
-    public override bool Matches(MonsterRace rPtr)
-    {
-        return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && rPtr.CanBreatheAcid;
-    }
+    public override string[]? AnyMonsterSpellBindingKeys => new string[] { nameof(AcidBreathProjectileMonsterSpell) };
+    public override string[]? AnySymbolBindingKeys => new string[] { nameof(UpperDSymbol), nameof(LowerDSymbol) };
 }

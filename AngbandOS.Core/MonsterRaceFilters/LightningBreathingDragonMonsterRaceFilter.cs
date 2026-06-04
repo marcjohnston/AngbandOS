@@ -10,9 +10,9 @@ namespace AngbandOS.Core.MonsterRaceFilters;
 internal class LightningBreathingDragonMonsterRaceFilter : MonsterRaceFilter
 {
     private LightningBreathingDragonMonsterRaceFilter(Game game) : base(game) { } // This object is a singleton.
-
-    public override bool Matches(MonsterRace rPtr)
-    {
-        return !rPtr.Unique && "Dd".Contains(rPtr.Symbol.Character.ToString()) && rPtr.CanBreatheLightning;
-    }
+    public override string[]? AnyMonsterSpellBindingKeys => new string[]
+{
+        nameof(LightningBreathProjectileMonsterSpell)
+};
+    public override string[]? AnySymbolBindingKeys => new string[] { nameof(UpperDSymbol), nameof(LowerDSymbol) };
 }
