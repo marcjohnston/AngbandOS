@@ -37,7 +37,6 @@ internal sealed class Gender : IGetKey, IToJson, IGameSerialize
             CanBeRandomlySelected = CanBeRandomlySelected,
             Pronoun = Pronoun,
             PossessiveAdjective = PossessiveAdjective
-
         };
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
