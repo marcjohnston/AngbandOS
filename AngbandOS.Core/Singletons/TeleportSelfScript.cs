@@ -124,7 +124,7 @@ internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
                     if (Game.Grid[oy + yy][ox + xx].MonsterIndex != 0)
                     {
                         // There is.  Check to see if the monster is capable of self teleportation, is not resistant to teleportation and is not sleeping.
-                        if (Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.TeleportSelf && !Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
+                        if (Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.CanTeleportSelf && !Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
                         {
                             if (Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
                             {
