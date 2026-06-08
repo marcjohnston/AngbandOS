@@ -1544,7 +1544,7 @@ internal class Monster : IItemContainer, IGameSerialize
                     Game.MsgPrint($"{monsterName} misses {target.Name}.");
                 }
             }
-            // If the player saw what happened, they know more abouyt what attacks we have
+            // If the player saw what happened, they know more about what attacks we have
             if (visible)
             {
                 if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10)
