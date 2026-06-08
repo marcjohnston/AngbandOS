@@ -555,11 +555,6 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     }
 
     public MonsterSpell[] Spells { get; private set; }
-    public bool CanBreatheAcid => Spells.Any(_spell => typeof(AcidBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheCold => Spells.Any(_spell => typeof(ColdBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheFire => Spells.Any(_spell => typeof(FireBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreatheLightning => Spells.Any(_spell => typeof(LightningBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
-    public bool CanBreathePoison => Spells.Any(_spell => typeof(PoisonBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
     public bool CanBreatheChaos => Spells.Any(_spell => typeof(ChaosBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
     public bool CanBreatheConfusion => Spells.Any(_spell => typeof(ConfusionBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));
     public bool CanBreatheDark => Spells.Any(_spell => typeof(DarkBreathProjectileMonsterSpell).IsAssignableFrom(_spell.GetType()));

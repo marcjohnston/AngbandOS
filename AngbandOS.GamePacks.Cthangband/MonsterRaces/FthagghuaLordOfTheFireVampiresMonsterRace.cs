@@ -11,12 +11,12 @@ public class FthagghuaLordOfTheFireVampiresMonsterRace : MonsterRaceGameConfigur
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
+        nameof(FireBreathProjectileMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(FireBallProjectileMonsterSpell),
+        nameof(FireBoltProjectileMonsterSpell),
+        nameof(ManaBoltProjectileMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell)
     };
 
 

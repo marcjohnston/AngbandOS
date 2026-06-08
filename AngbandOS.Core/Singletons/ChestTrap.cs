@@ -27,7 +27,7 @@ internal class ChestTrap : IGetKey, IToJson, IGameSerialize
     /// <summary>
     /// Returns the entity serialized into a Json string.
     /// </summary>
-    /// <returns></returns>                                public string ToJson()
+    /// <returns></returns>    public string ToJson()
     {
         ChestTrapGameConfiguration definition = new()
         {

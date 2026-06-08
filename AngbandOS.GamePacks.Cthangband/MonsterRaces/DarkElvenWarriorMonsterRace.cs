@@ -11,7 +11,7 @@ public class DarkElvenWarriorMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.MagicMissileProjectileMonsterSpell)
+        nameof(MagicMissileProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerHSymbol);

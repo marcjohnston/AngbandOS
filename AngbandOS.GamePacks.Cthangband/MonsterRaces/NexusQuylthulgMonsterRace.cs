@@ -11,8 +11,8 @@ public class NexusQuylthulgMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportAwayScriptMonsterSpell)
+        nameof(BlinkScriptMonsterSpell),
+        nameof(TeleportAwayScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperQSymbol);

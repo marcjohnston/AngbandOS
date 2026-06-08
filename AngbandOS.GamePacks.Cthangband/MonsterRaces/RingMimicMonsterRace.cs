@@ -11,16 +11,16 @@ public class RingMimicMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseSeriousWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell)
+        nameof(AcidBoltProjectileMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(CauseSeriousWoundsMonsterSpell),
+        nameof(ColdBoltProjectileMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(FireBoltProjectileMonsterSpell),
+        nameof(LightningBoltProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(ForgetScriptMonsterSpell),
+        nameof(MonsterSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(EqualSignSymbol);

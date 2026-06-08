@@ -11,10 +11,10 @@ public class BlackKnightMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(DarknessProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

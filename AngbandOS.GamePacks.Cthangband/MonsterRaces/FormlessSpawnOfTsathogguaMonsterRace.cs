@@ -11,11 +11,11 @@ public class FormlessSpawnOfTsathogguaMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell)
+        nameof(AcidBoltProjectileMonsterSpell),
+        nameof(FireBoltProjectileMonsterSpell),
+        nameof(MindBlastScriptMonsterSpell),
+        nameof(DarknessProjectileMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperASymbol);

@@ -11,9 +11,9 @@ public class RottingQuylthulgMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
+        nameof(BlinkScriptMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
+        nameof(TeleportSelfScriptMonsterSpell)
     };
     public override bool CanTeleportSelf => true;
 

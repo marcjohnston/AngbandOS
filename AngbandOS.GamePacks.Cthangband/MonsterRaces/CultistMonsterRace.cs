@@ -11,10 +11,10 @@ public class CultistMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.CauseSeriousWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell)
+        nameof(CauseSeriousWoundsMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(HealScriptMonsterSpell),
+        nameof(MonsterSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

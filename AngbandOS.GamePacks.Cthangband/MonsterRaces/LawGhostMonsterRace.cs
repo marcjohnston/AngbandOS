@@ -11,8 +11,8 @@ public class LawGhostMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell)
+        nameof(MindBlastScriptMonsterSpell),
+        nameof(ForgetScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperGSymbol);

@@ -11,12 +11,12 @@ public class MasterQuylthulgMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.DragonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiDragonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell)
+        nameof(DragonSummonMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperQSymbol);

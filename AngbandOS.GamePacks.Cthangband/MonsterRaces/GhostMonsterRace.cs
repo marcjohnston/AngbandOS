@@ -11,9 +11,9 @@ public class GhostMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(DrainManaScriptMonsterSpell),
+        nameof(HoldScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperGSymbol);

@@ -11,9 +11,9 @@ public class TheEmperorQuylthulgMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HiDragonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell)
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperQSymbol);

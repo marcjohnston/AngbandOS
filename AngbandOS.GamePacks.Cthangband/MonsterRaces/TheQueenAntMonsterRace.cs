@@ -11,7 +11,7 @@ public class TheQueenAntMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AntSummonMonsterSpell)
+        nameof(AntSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerASymbol);

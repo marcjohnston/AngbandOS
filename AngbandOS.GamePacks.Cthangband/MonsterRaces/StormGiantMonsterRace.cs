@@ -11,12 +11,12 @@ public class StormGiantMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(LightningBallProjectileMonsterSpell),
+        nameof(LightningBoltProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(BlinkScriptMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperPSymbol);

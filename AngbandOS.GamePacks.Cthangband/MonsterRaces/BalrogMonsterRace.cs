@@ -11,15 +11,15 @@ public class BalrogMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.DemonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell)
+        nameof(FireBreathProjectileMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(NetherBallProjectileMonsterSpell),
+        nameof(PlasmaBoltProjectileMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperUSymbol);

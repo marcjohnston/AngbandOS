@@ -11,10 +11,10 @@ public class LesserTitanMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
+        nameof(ScareScriptMonsterSpell),
+        nameof(HealScriptMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperPSymbol);

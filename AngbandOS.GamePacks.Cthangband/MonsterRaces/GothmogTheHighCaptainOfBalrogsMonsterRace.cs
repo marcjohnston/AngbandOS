@@ -11,15 +11,15 @@ public class GothmogTheHighCaptainOfBalrogsMonsterRace : MonsterRaceGameConfigur
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.DisintegrationBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DemonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.KinSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.ReaverSummonMonsterSpell)
+        nameof(DisintegrationBreathProjectileMonsterSpell),
+        nameof(FireBreathProjectileMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(ReaverSummonMonsterSpell)
     };
 
 

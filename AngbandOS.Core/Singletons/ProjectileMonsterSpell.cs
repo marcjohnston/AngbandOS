@@ -10,9 +10,161 @@ namespace AngbandOS.Core;
 /// Represents a monster spell that fires a projectile without any radius.  Default messages are provided.
 /// </summary>
 [Serializable]
-internal abstract class ProjectileMonsterSpell : MonsterSpell
+internal sealed class ProjectileMonsterSpell : MonsterSpell
 {
-    protected ProjectileMonsterSpell(Game game) : base(game) { }
+    public ProjectileMonsterSpell(Game game, ProjectileMonsterSpellGameConfiguration gameConfiguration) : base(game)
+    {
+        Key = gameConfiguration.GetKey;
+        IsInnate = gameConfiguration.IsInnate;
+        IsIntelligent = gameConfiguration.IsIntelligent;
+        UsesAcid = gameConfiguration.UsesAcid;
+        UsesLightning = gameConfiguration.UsesLightning;
+        UsesFire = gameConfiguration.UsesFire;
+        UsesCold = gameConfiguration.UsesCold;
+        UsesPoison = gameConfiguration.UsesPoison;
+        UsesRadiation = gameConfiguration.UsesRadiation;
+        UsesNether = gameConfiguration.UsesNether;
+        UsesLight = gameConfiguration.UsesLight;
+        UsesDarkness = gameConfiguration.UsesDarkness;
+        UsesFear = gameConfiguration.UsesFear;
+        UsesConfusion = gameConfiguration.UsesConfusion;
+        UsesBreathe = gameConfiguration.UsesBreathe;
+        UsesChaos = gameConfiguration.UsesChaos;
+        UsesDisenchantment = gameConfiguration.UsesDisenchantment;
+        UsesBlindness = gameConfiguration.UsesBlindness;
+        UsesNexus = gameConfiguration.UsesNexus;
+        UsesSound = gameConfiguration.UsesSound;
+        UsesShards = gameConfiguration.UsesShards;
+        CanBeReflected = gameConfiguration.CanBeReflected;
+        RestrictsFreeAction = gameConfiguration.RestrictsFreeAction;
+        DrainsMana = gameConfiguration.DrainsMana;
+        SummonsHelp = gameConfiguration.SummonsHelp;
+        ProvidesEscape = gameConfiguration.ProvidesEscape;
+        Heals = gameConfiguration.Heals;
+        IsAttack = gameConfiguration.IsAttack;
+        IsTactical = gameConfiguration.IsTactical;
+        Hastens = gameConfiguration.Hastens;
+        Annoys = gameConfiguration.Annoys;
+        VsPlayerBlindMessage = gameConfiguration.VsPlayerBlindMessage;
+        VsPlayerActionMessage = gameConfiguration.VsPlayerActionMessage;
+        VsPlayerActionMessageOnInvisibleMonster = gameConfiguration.VsPlayerActionMessageOnInvisibleMonster;
+        VsMonsterUnseenMessage = gameConfiguration.VsMonsterUnseenMessage;
+        VsMonsterSeenMessage = gameConfiguration.VsMonsterSeenMessage;
+        SmartLearnSpellResistantDetectionKeys = gameConfiguration.SmartLearnSpellResistantDetectionKeys;
+        WakesSleepingMonsters = gameConfiguration.WakesSleepingMonsters;
+        ItemProjectionFlag = gameConfiguration.ItemProjectionFlag;
+        GridProjectionFlag = gameConfiguration.GridProjectionFlag;
+        KillProjectionFlag = gameConfiguration.KillProjectionFlag;
+        StopProjectionFlag = gameConfiguration.StopProjectionFlag;
+        ProjectileKey = gameConfiguration.ProjectileKey;
+        MaxDamage = gameConfiguration.MaxDamage;
+        DamageRollExpression = gameConfiguration.DamageRollExpression;
+        InverseRadius = gameConfiguration.InverseRadius;
+        RadiusExpressionText = gameConfiguration.RadiusExpressionText;
+        PreExecuteOnPlayerScriptBindingKey = gameConfiguration.PreExecuteOnPlayerScriptBindingKey;
+        PostExecuteOnPlayerScriptBindingKey = gameConfiguration.PostExecuteOnPlayerScriptBindingKey;
+        PreExecuteOnMonsterScriptBindingKey = gameConfiguration.PreExecuteOnMonsterScriptBindingKey;
+        PostExecuteOnMonsterScriptBindingKey = gameConfiguration.PostExecuteOnMonsterScriptBindingKey;
+        KnowledgeAction = gameConfiguration.KnowledgeAction;
+   }
+    public override string ToJson()
+    {
+        ProjectileMonsterSpellGameConfiguration definition = new()
+        {
+            Key = Key,
+            IsInnate = IsInnate,
+            IsIntelligent = IsIntelligent,
+            UsesAcid = UsesAcid,
+            UsesLightning = UsesLightning,
+            UsesFire = UsesFire,
+            UsesCold = UsesCold,
+            UsesPoison = UsesPoison,
+            UsesRadiation = UsesRadiation,
+            UsesNether = UsesNether,
+            UsesLight = UsesLight,
+            UsesDarkness = UsesDarkness,
+            UsesFear = UsesFear,
+            UsesConfusion = UsesConfusion,
+            UsesBreathe = UsesBreathe,
+            UsesChaos = UsesChaos,
+            UsesDisenchantment = UsesDisenchantment,
+            UsesBlindness = UsesBlindness,
+            UsesNexus = UsesNexus,
+            UsesSound = UsesSound,
+            UsesShards = UsesShards,
+            CanBeReflected = CanBeReflected,
+            RestrictsFreeAction = RestrictsFreeAction,
+            DrainsMana = DrainsMana,
+            SummonsHelp = SummonsHelp,
+            ProvidesEscape = ProvidesEscape,
+            Heals = Heals,
+            IsAttack = IsAttack,
+            IsTactical = IsTactical,
+            Hastens = Hastens,
+            Annoys = Annoys,
+            VsPlayerBlindMessage = VsPlayerBlindMessage,
+            VsPlayerActionMessage = VsPlayerActionMessage,
+            VsPlayerActionMessageOnInvisibleMonster = VsPlayerActionMessageOnInvisibleMonster,
+            VsMonsterUnseenMessage = VsMonsterUnseenMessage,
+            VsMonsterSeenMessage = VsMonsterSeenMessage,
+            SmartLearnSpellResistantDetectionKeys = SmartLearnSpellResistantDetectionKeys,
+            WakesSleepingMonsters = WakesSleepingMonsters,
+            ItemProjectionFlag = ItemProjectionFlag,
+            GridProjectionFlag = GridProjectionFlag,
+            KillProjectionFlag = KillProjectionFlag,
+            StopProjectionFlag = StopProjectionFlag,
+            ProjectileKey = ProjectileKey,
+            MaxDamage = MaxDamage,
+            DamageRollExpression = DamageRollExpression,
+            InverseRadius = InverseRadius,
+            RadiusExpressionText = RadiusExpressionText,
+            PreExecuteOnPlayerScriptBindingKey = PreExecuteOnPlayerScriptBindingKey,
+            PostExecuteOnPlayerScriptBindingKey = PostExecuteOnPlayerScriptBindingKey,
+            PreExecuteOnMonsterScriptBindingKey = PreExecuteOnMonsterScriptBindingKey,
+            PostExecuteOnMonsterScriptBindingKey = PostExecuteOnMonsterScriptBindingKey,
+            KnowledgeAction = KnowledgeAction,
+        };
+        return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
+    }
+    public override string Key { get; }
+    public override (string, string) KnowledgeAction { get; }
+    public override bool IsInnate { get; } 
+    public override bool IsIntelligent { get; }
+    public override bool UsesAcid { get; }
+    public override bool UsesLightning { get; }
+    public override bool UsesFire { get; }
+    public override bool UsesCold { get; }
+    public override bool UsesPoison { get; }
+    public override bool UsesRadiation { get; }
+    public override bool UsesNether { get; }
+    public override bool UsesLight { get; }
+    public override bool UsesDarkness { get; }
+    public override bool UsesFear { get; }
+    public override bool UsesConfusion { get; }
+    public override bool UsesBreathe { get; }
+    public override bool UsesChaos { get; }
+    public override bool UsesDisenchantment { get; }
+    public override bool UsesBlindness { get; }
+    public override bool UsesNexus { get; }
+    public override bool UsesSound { get; }
+    public override bool UsesShards { get; }
+    public override bool CanBeReflected { get; }
+    public override bool RestrictsFreeAction { get; }
+    public override bool DrainsMana { get; }
+    public override bool SummonsHelp { get; }
+    public override bool ProvidesEscape { get; }
+    public override bool Heals { get; }
+    public override bool IsAttack { get; }
+    public override bool IsTactical { get; }
+    public override bool Hastens { get; }
+    public override bool Annoys { get; }
+    public override string? VsPlayerBlindMessage { get; }
+    public override string? VsPlayerActionMessage { get; }
+    public override string? VsPlayerActionMessageOnInvisibleMonster { get; }
+    public override string? VsMonsterUnseenMessage { get; }
+    public override string? VsMonsterSeenMessage { get; }
+    protected override string[]? SmartLearnSpellResistantDetectionKeys { get; }
+    public override bool WakesSleepingMonsters { get; }
 
     public override void Bind(RestoreGameState? restoreGameState)
     {
@@ -26,15 +178,15 @@ internal abstract class ProjectileMonsterSpell : MonsterSpell
         PreExecuteOnMonsterScript = Game.SingletonRepository.GetNullable<IScriptMonsterMonster>(PostExecuteOnMonsterScriptBindingKey);
     }
 
-    protected virtual bool ItemProjectionFlag => false;
-    protected virtual bool GridProjectionFlag => false;
-    protected virtual bool KillProjectionFlag => true;
-    protected virtual bool StopProjectionFlag => true;
+    protected bool ItemProjectionFlag { get; }
+    protected bool GridProjectionFlag { get; }
+    protected bool KillProjectionFlag { get; }
+    protected bool StopProjectionFlag { get; }
 
     /// <summary>
     /// Returns the key for the projectile to use.  This property is used to bind the ProjectileProperty during the binding phase.
     /// </summary>
-    protected abstract string ProjectileKey { get; }
+    protected string ProjectileKey { get; }
 
     /// <summary>
     /// Returns the projectile that the monster will use when attacking with the spell.  This property is bound using the ProjectileKey property during the bind phase.
@@ -59,15 +211,15 @@ internal abstract class ProjectileMonsterSpell : MonsterSpell
         return damage;
     }
 
-    protected virtual int? MaxDamage { get; } = null;
+    protected int? MaxDamage { get; } = null;
 
     /// <summary>
     /// Returns the roll expression that determines the amount of damage the arrow projectile inflicts.  This expression is parse
     /// to generate the DamageDiceRoll.
     /// </summary>
-    protected abstract string DamageRollExpression { get; }
-    public virtual bool InverseRadius => false;
-    protected virtual string RadiusExpressionText => "0";
+    protected string DamageRollExpression { get; }
+    public bool InverseRadius { get; }
+    protected string RadiusExpressionText { get; }
     protected Expression RadiusExpression { get; private set; }
 
     /// <summary>
@@ -111,13 +263,13 @@ internal abstract class ProjectileMonsterSpell : MonsterSpell
         return projectile.Fire(monster.GetMonsterIndex(), rad, Game.MapY.IntValue, Game.MapX.IntValue, dam, grid: grid, stop: stop, item: item, kill: kill, jump: false, beam: false, thru: false, hide: false);
     }
 
-    public virtual string? PreExecuteOnPlayerScriptBindingKey => null;
-    public virtual string? PostExecuteOnPlayerScriptBindingKey => null;
+    public string? PreExecuteOnPlayerScriptBindingKey { get; }
+    public string? PostExecuteOnPlayerScriptBindingKey { get; }
     public IScriptMonster? PreExecuteOnPlayerScript { get; private set; }
     public IScriptMonster? PostExecuteOnPlayerScript { get; private set; }
 
-    public virtual string? PreExecuteOnMonsterScriptBindingKey => null;
-    public virtual string? PostExecuteOnMonsterScriptBindingKey => null;
+    public string? PreExecuteOnMonsterScriptBindingKey { get; }
+    public string? PostExecuteOnMonsterScriptBindingKey { get; }
     public IScriptMonsterMonster? PreExecuteOnMonsterScript { get; private set; }
     public IScriptMonsterMonster? PostExecuteOnMonsterScript { get; private set; }
     public sealed override void ExecuteOnPlayer(Monster monster)
@@ -150,3 +302,5 @@ internal abstract class ProjectileMonsterSpell : MonsterSpell
         }
     }
 }
+
+

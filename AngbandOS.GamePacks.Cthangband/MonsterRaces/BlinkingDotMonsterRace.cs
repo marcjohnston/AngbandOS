@@ -11,7 +11,7 @@ public class BlinkingDotMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell)
+        nameof(BlinkScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(CommaSymbol);

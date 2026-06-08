@@ -11,7 +11,7 @@ public class ColbranMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.LightningBoltProjectileMonsterSpell)
+        nameof(LightningBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerGSymbol);

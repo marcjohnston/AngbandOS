@@ -11,23 +11,23 @@ public class AzathothTheDaemonSultanMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ChaosBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.DisintegrationBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.RadiationBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ChaosBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DreadCurseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.GreatOldOneSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiDragonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.ReaverSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.UniqueSummonMonsterSpell)
+        nameof(ChaosBreathProjectileMonsterSpell),
+        nameof(DisintegrationBreathProjectileMonsterSpell),
+        nameof(ManaBreathProjectileMonsterSpell),
+        nameof(NetherBreathProjectileMonsterSpell),
+        nameof(PoisonBreathProjectileMonsterSpell),
+        nameof(RadiationBreathProjectileMonsterSpell),
+        nameof(ChaosBallProjectileMonsterSpell),
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(DreadCurseScriptMonsterSpell),
+        nameof(HasteScriptMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(GreatOldOneSummonMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(ReaverSummonMonsterSpell),
+        nameof(UniqueSummonMonsterSpell)
     };
 
 

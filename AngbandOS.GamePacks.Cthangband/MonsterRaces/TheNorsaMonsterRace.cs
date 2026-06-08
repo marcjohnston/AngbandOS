@@ -11,16 +11,16 @@ public class TheNorsaMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HiDragonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell)
+        nameof(AcidBreathProjectileMonsterSpell),
+        nameof(ColdBreathProjectileMonsterSpell),
+        nameof(LightningBreathProjectileMonsterSpell),
+        nameof(FireBreathProjectileMonsterSpell),
+        nameof(PoisonBreathProjectileMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperHSymbol);

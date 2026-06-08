@@ -11,21 +11,21 @@ public class HasturTheUnspeakableMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.DarkBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportAwayScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
+        nameof(DarkBreathProjectileMonsterSpell),
+        nameof(NetherBreathProjectileMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(DrainManaScriptMonsterSpell),
+        nameof(HoldScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(WaterBallProjectileMonsterSpell),
+        nameof(HasteScriptMonsterSpell),
+        nameof(HealScriptMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(TeleportAwayScriptMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell),
+        nameof(TeleportSelfScriptMonsterSpell)
     };
     public override bool CanTeleportSelf => true;
 

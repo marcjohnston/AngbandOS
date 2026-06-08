@@ -11,15 +11,15 @@ public class SkullDrujMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell)
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(MindBlastScriptMonsterSpell),
+        nameof(NetherBoltProjectileMonsterSpell),
+        nameof(PlasmaBoltProjectileMonsterSpell),
+        nameof(SlowScriptMonsterSpell),
+        nameof(WaterBallProjectileMonsterSpell),
+        nameof(CreateTrapsScriptMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
 

@@ -11,9 +11,9 @@ public class BodakMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.DemonSummonMonsterSpell)
+        nameof(FireBallProjectileMonsterSpell),
+        nameof(FireBoltProjectileMonsterSpell),
+        nameof(DemonSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerUSymbol);

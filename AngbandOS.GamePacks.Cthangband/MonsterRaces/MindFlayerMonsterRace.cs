@@ -11,12 +11,12 @@ public class MindFlayerMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(HoldScriptMonsterSpell),
+        nameof(MindBlastScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(ForgetScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerHSymbol);

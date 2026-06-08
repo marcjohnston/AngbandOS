@@ -11,13 +11,13 @@ public class SkyDrakeMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.LightningBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.GravityBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.LightBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DragonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiDragonSummonMonsterSpell)
+        nameof(LightningBreathProjectileMonsterSpell),
+        nameof(GravityBreathProjectileMonsterSpell),
+        nameof(LightBreathProjectileMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(DragonSummonMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell)
     };
 
 

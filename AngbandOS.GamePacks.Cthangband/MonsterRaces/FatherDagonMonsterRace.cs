@@ -11,15 +11,15 @@ public class FatherDagonMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportAwayScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportLevelScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(BlinkScriptMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(TeleportAwayScriptMonsterSpell),
+        nameof(TeleportLevelScriptMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell),
+        nameof(TeleportSelfScriptMonsterSpell)
     };
 
     public override bool CanTeleportSelf => true;

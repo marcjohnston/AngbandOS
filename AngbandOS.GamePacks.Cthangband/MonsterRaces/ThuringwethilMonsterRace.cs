@@ -11,15 +11,15 @@ public class ThuringwethilMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.KinSummonMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(DrainManaScriptMonsterSpell),
+        nameof(HoldScriptMonsterSpell),
+        nameof(NetherBallProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(KinSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperVSymbol);

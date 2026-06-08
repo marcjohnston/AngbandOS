@@ -11,9 +11,9 @@ public class ChaosShapechangerMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell)
+        nameof(ColdBoltProjectileMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(FireBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperHSymbol);

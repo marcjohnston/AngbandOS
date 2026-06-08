@@ -11,18 +11,18 @@ public class ShadowlordMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ShriekScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
+        nameof(ShriekScriptMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(DrainManaScriptMonsterSpell),
+        nameof(HoldScriptMonsterSpell),
+        nameof(NetherBallProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(DarknessProjectileMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell),
+        nameof(TeleportSelfScriptMonsterSpell)
     };
     public override bool CanTeleportSelf => true;
 

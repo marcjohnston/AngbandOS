@@ -11,17 +11,17 @@ public class BeholderMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell)
+        nameof(AcidBoltProjectileMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(ColdBoltProjectileMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(DrainManaScriptMonsterSpell),
+        nameof(FireBoltProjectileMonsterSpell),
+        nameof(MindBlastScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(SlowScriptMonsterSpell),
+        nameof(DarknessProjectileMonsterSpell),
+        nameof(ForgetScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerESymbol);

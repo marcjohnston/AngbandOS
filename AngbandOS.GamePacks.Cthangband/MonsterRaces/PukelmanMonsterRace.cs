@@ -11,9 +11,9 @@ public class PukelmanMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell)
+        nameof(AcidBoltProjectileMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(SlowScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerGSymbol);

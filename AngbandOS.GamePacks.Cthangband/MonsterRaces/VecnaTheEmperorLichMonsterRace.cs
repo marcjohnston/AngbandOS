@@ -11,22 +11,22 @@ public class VecnaTheEmperorLichMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.KinSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(HoldScriptMonsterSpell),
+        nameof(ManaBallProjectileMonsterSpell),
+        nameof(ManaBoltProjectileMonsterSpell),
+        nameof(NetherBallProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(BlinkScriptMonsterSpell),
+        nameof(CreateTrapsScriptMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperLSymbol);

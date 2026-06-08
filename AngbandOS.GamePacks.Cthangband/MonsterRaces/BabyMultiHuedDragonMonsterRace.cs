@@ -11,11 +11,11 @@ public class BabyMultiHuedDragonMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ColdBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBreathProjectileMonsterSpell)
+        nameof(AcidBreathProjectileMonsterSpell),
+        nameof(ColdBreathProjectileMonsterSpell),
+        nameof(LightningBreathProjectileMonsterSpell),
+        nameof(FireBreathProjectileMonsterSpell),
+        nameof(PoisonBreathProjectileMonsterSpell)
     };
 
 

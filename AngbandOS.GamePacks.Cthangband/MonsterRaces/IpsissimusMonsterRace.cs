@@ -11,18 +11,18 @@ public class IpsissimusMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.MindBlastScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DemonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(HoldScriptMonsterSpell),
+        nameof(MindBlastScriptMonsterSpell),
+        nameof(NetherBoltProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(ForgetScriptMonsterSpell),
+        nameof(HasteScriptMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell),
+        nameof(TeleportSelfScriptMonsterSpell)
     };
     public override bool CanTeleportSelf => true;
 

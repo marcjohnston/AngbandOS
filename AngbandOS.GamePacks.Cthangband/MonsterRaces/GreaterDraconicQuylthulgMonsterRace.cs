@@ -11,9 +11,9 @@ public class GreaterDraconicQuylthulgMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HiDragonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
+        nameof(BlinkScriptMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperQSymbol);

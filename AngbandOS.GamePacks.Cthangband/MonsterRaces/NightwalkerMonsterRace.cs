@@ -11,13 +11,13 @@ public class NightwalkerMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(ManaBoltProjectileMonsterSpell),
+        nameof(NetherBallProjectileMonsterSpell),
+        nameof(NetherBoltProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerZSymbol);

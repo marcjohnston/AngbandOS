@@ -11,9 +11,9 @@ public class MaulotaurMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell)
+        nameof(FireBallProjectileMonsterSpell),
+        nameof(FireBoltProjectileMonsterSpell),
+        nameof(PlasmaBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperHSymbol);

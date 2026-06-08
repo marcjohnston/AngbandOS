@@ -11,16 +11,16 @@ public class AtlachNachaTheSpiderGodMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.DarkBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DarkBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.SpiderSummonMonsterSpell)
+        nameof(DarkBreathProjectileMonsterSpell),
+        nameof(PoisonBreathProjectileMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(DarkBallProjectileMonsterSpell),
+        nameof(HoldScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(DarknessProjectileMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(SpiderSummonMonsterSpell)
     };
 
 

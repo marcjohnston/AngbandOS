@@ -11,12 +11,12 @@ public class ChaosTileMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseSeriousWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(CauseSeriousWoundsMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(BlinkScriptMonsterSpell),
+        nameof(MonsterSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(PeriodSymbol);

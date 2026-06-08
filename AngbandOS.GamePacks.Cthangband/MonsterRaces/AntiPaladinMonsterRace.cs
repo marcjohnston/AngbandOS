@@ -11,14 +11,14 @@ public class AntiPaladinMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(HoldScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(CreateTrapsScriptMonsterSpell),
+        nameof(DarknessProjectileMonsterSpell),
+        nameof(ForgetScriptMonsterSpell),
+        nameof(HasteScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

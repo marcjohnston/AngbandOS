@@ -11,21 +11,21 @@ public class ItMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ShriekScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HydraSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportAwayScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
+        nameof(ShriekScriptMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(DrainManaScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(BlinkScriptMonsterSpell),
+        nameof(CreateTrapsScriptMonsterSpell),
+        nameof(DarknessProjectileMonsterSpell),
+        nameof(ForgetScriptMonsterSpell),
+        nameof(HealScriptMonsterSpell),
+        nameof(HydraSummonMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
+        nameof(TeleportAwayScriptMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(PeriodSymbol);

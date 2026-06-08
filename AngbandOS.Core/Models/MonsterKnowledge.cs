@@ -12,7 +12,7 @@ internal class MonsterKnowledge : IGameSerialize
 {
 
     #region State Data
-    public readonly int[] RBlows = new int[4];
+    public readonly int[] RBlows = new int[4]; // TODO: This needs to be made into a list, not fixed.
     public int RCastInate;
     public int RCastSpell;
     public int RDeaths;
@@ -54,9 +54,6 @@ internal class MonsterKnowledge : IGameSerialize
         );
     }
 
-    private string[] _wdHe { get; } = { "it", "he", "she" };
-    private string[] _wdHeCap { get; } = { "It", "He", "She" };
-    private string[] _wdHis { get; } = { "its", "his", "her" };
     private Game Game { get; }
 
     public MonsterKnowledge(Game game, MonsterRace monsterRace)
@@ -96,8 +93,6 @@ internal class MonsterKnowledge : IGameSerialize
     public void DisplayBody(ColorEnum bodyColor)
     {
         int m;
-        int msex = 0;
-        string[] vp = new string[64];
         MonsterKnowledge knowledge = this;
         StringBuilder _description = new StringBuilder();
         if (Game.IsWizard.BoolValue)
@@ -133,14 +128,9 @@ internal class MonsterKnowledge : IGameSerialize
             knowledge.Characteristics = new MonsterCharacteristics(_monsterType);
             knowledge.RSpells = _monsterType.Spells;
         }
-        if (_monsterType.Female)
-        {
-            msex = 2;
-        }
-        else if (_monsterType.Male)
-        {
-            msex = 1;
-        }
+        string pronoun = Game.Gender.Pronoun.Trim();
+        string capitalizedPronoun = $"{pronoun[0].ToString().ToUpper()}{pronoun[1..]}";
+        string possessiveAdjective = Game.Gender.PossessiveAdjective;
         MonsterCharacteristics characteristics = new MonsterCharacteristics(_monsterType, knowledge.Characteristics);
         MonsterSpell[] combinedSpells = _monsterType.Spells.Concat(knowledge.RSpells).ToArray();
         if (_monsterType.Unique)
@@ -228,12 +218,12 @@ internal class MonsterKnowledge : IGameSerialize
         bool old = false;
         if (_monsterType.Level == 0)
         {
-            _description.Append(_wdHeCap[msex]).Append(" lives in the town");
+            _description.Append(pronoun).Append(" lives in the town");
             old = true;
         }
         else if (knowledge.RTkills != 0 || knowledge.RProbed)
         {
-            _description.Append(_wdHeCap[msex]).Append(" is normally found at level ").Append(_monsterType.Level);
+            _description.Append(capitalizedPronoun).Append(" is normally found at level ").Append(_monsterType.Level);
             old = true;
         }
         if (old)
@@ -242,7 +232,7 @@ internal class MonsterKnowledge : IGameSerialize
         }
         else
         {
-            _description.Append(_wdHeCap[msex]).Append(' ');
+            _description.Append(capitalizedPronoun).Append(' ');
             old = true;
         }
         _description.Append("moves");
@@ -304,7 +294,7 @@ internal class MonsterKnowledge : IGameSerialize
             }
             else
             {
-                _description.Append(_wdHe[msex]).Append(' ');
+                _description.Append(pronoun).Append(' ');
                 old = true;
             }
             _description.Append("does not deign to chase intruders");
@@ -408,459 +398,94 @@ internal class MonsterKnowledge : IGameSerialize
         }
         if (characteristics.FireAura && characteristics.LightningAura)
         {
-            _description.Append(_wdHeCap[msex]).Append(" is surrounded by flames and electricity. ");
+            _description.Append(capitalizedPronoun).Append(" is surrounded by flames and electricity. ");
         }
         else if (characteristics.FireAura)
         {
-            _description.Append(_wdHeCap[msex]).Append(" is surrounded by flames. ");
+            _description.Append(capitalizedPronoun).Append(" is surrounded by flames. ");
         }
         else if (characteristics.LightningAura)
         {
-            _description.Append(_wdHeCap[msex]).Append(" is surrounded by electricity. ");
+            _description.Append(capitalizedPronoun).Append(" is surrounded by electricity. ");
         }
         if (characteristics.Reflecting)
         {
-            _description.Append(_wdHeCap[msex]).Append(" reflects bolt spells. ");
+            _description.Append(capitalizedPronoun).Append(" reflects bolt spells. ");
         }
         if (characteristics.Escorted || characteristics.EscortsGroup)
         {
-            _description.Append(_wdHeCap[msex]).Append(" usually appears with escorts. ");
+            _description.Append(capitalizedPronoun).Append(" usually appears with escorts. ");
         }
         else if (characteristics.Friends)
         {
-            _description.Append(_wdHeCap[msex]).Append(" usually appears in groups. ");
+            _description.Append(capitalizedPronoun).Append(" usually appears in groups. ");
         }
-        int vn = 0;
-        if (combinedSpells.Any(spell => typeof(ShriekScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
+
+        // %CGP - Capitalized gender pronoun
+        // %GP - gender pronoun
+        // %GA - gender possessive adjective
+        // %
+        // %CGP %may. %CGP $maybreathe, and is also magical, casting spells %intelligently %which
+        // %CGP %may. $CGP is magical, casting spells %intelligently %which
+
+        Dictionary<string, List<string>> monsterSpellKnowledgeDictionary = new Dictionary<string, List<string>>();
+        foreach (MonsterSpell monsterSpell in combinedSpells)
         {
-            vp[vn++] = "shriek for help";
+            string actionVerb = monsterSpell.KnowledgeAction.CollapsableActionVerb.Trim();
+            if (!monsterSpellKnowledgeDictionary.TryGetValue(actionVerb, out List<string>? nouns))
+            {
+                nouns = new List<string>();
+                monsterSpellKnowledgeDictionary.Add(actionVerb, nouns);
+            }
+            nouns.Add(monsterSpell.KnowledgeAction.UniqueDescription);
         }
-        if (combinedSpells.Any(spell => typeof(ShardBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce shard balls";
-        }
-        if (combinedSpells.Any(spell => typeof(Arrow1D6ProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "fire an arrow";
-        }
-        if (combinedSpells.Any(spell => typeof(Arrow3D6ProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "fire arrows";
-        }
-        if (combinedSpells.Any(spell => typeof(Arrow5D6ProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "fire a missile";
-        }
-        if (combinedSpells.Any(spell => typeof(Arrow7D6ProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "fire missiles";
-        }
+
         int n;
-        if (vn != 0)
+        string maySentence = "";
+        if (monsterSpellKnowledgeDictionary.TryGetValue("may", out List<string>? mayItemList))
         {
-            _description.Append(_wdHeCap[msex]);
-            for (n = 0; n < vn; n++)
-            {
-                if (n == 0)
-                {
-                    _description.Append(" may ");
-                }
-                else if (n < vn - 1)
-                {
-                    _description.Append(", ");
-                }
-                else
-                {
-                    _description.Append(" or ");
-                }
-                _description.Append(vp[n]);
-            }
-            _description.Append(". ");
+            string mayItemListText = StringLibrary.BuildList(mayItemList.ToArray());
+            maySentence = StringLibrary.SurroundIf($"{capitalizedPronoun} may ", mayItemListText, ".");
         }
-        vn = 0;
-        if (combinedSpells.Any(spell => typeof(AcidBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
+
+        string mayBreatheLeftDisjunct = "";
+        if (monsterSpellKnowledgeDictionary.TryGetValue("may breathe", out List<string>? mayBreatheItemList))
         {
-            vp[vn++] = "acid";
+            string mayBreatheItemListText = StringLibrary.BuildList(mayBreatheItemList.ToArray());
+            mayBreatheLeftDisjunct = StringLibrary.PrefixIf($"{capitalizedPronoun} may breathe ", mayBreatheItemListText);
         }
-        if (combinedSpells.Any(spell => typeof(LightningBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
+
+        string magicalRightDisjunct = "";
+        if (monsterSpellKnowledgeDictionary.TryGetValue("which", out List<string>? magicalItemList))
         {
-            vp[vn++] = "lightning";
-        }
-        if (combinedSpells.Any(spell => typeof(FireBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "fire";
-        }
-        if (combinedSpells.Any(spell => typeof(ColdBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "frost";
-        }
-        if (combinedSpells.Any(spell => typeof(PoisonBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "poison";
-        }
-        if (combinedSpells.Any(spell => typeof(NetherBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "nether";
-        }
-        if (combinedSpells.Any(spell => typeof(LightBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "light";
-        }
-        if (combinedSpells.Any(spell => typeof(DarkBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "darkness";
-        }
-        if (combinedSpells.Any(spell => typeof(ConfusionBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "confusion";
-        }
-        if (combinedSpells.Any(spell => typeof(SoundBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "sound";
-        }
-        if (combinedSpells.Any(spell => typeof(ChaosBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "chaos";
-        }
-        if (combinedSpells.Any(spell => typeof(DisenchantBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "disenchantment";
-        }
-        if (combinedSpells.Any(spell => typeof(NexusBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "nexus";
-        }
-        if (combinedSpells.Any(spell => typeof(TimeBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "time";
-        }
-        if (combinedSpells.Any(spell => typeof(InertiaBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "inertia";
-        }
-        if (combinedSpells.Any(spell => typeof(GravityBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "gravity";
-        }
-        if (combinedSpells.Any(spell => typeof(ShardsBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "shards";
-        }
-        if (combinedSpells.Any(spell => typeof(PlasmaBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "plasma";
-        }
-        if (combinedSpells.Any(spell => typeof(ForceBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "force";
-        }
-        if (combinedSpells.Any(spell => typeof(ManaBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "mana";
-        }
-        if (combinedSpells.Any(spell => typeof(RadiationBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "toxic waste";
-        }
-        if (combinedSpells.Any(spell => typeof(DisintegrationBreathProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "disintegration";
-        }
-        bool breath = false;
-        if (vn != 0)
-        {
-            breath = true;
-            _description.Append(_wdHeCap[msex]);
-            for (n = 0; n < vn; n++)
-            {
-                if (n == 0)
-                {
-                    _description.Append(" may breathe ");
-                }
-                else if (n < vn - 1)
-                {
-                    _description.Append(", ");
-                }
-                else
-                {
-                    _description.Append(" or ");
-                }
-                _description.Append(vp[n]);
-            }
-        }
-        vn = 0;
-        if (combinedSpells.Any(spell => typeof(AcidBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce acid balls";
-        }
-        if (combinedSpells.Any(spell => typeof(LightningBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce lightning balls";
-        }
-        if (combinedSpells.Any(spell => typeof(FireBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce fire balls";
-        }
-        if (combinedSpells.Any(spell => typeof(ColdBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce frost balls";
-        }
-        if (combinedSpells.Any(spell => typeof(PoisonBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce poison balls";
-        }
-        if (combinedSpells.Any(spell => typeof(NetherBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce nether balls";
-        }
-        if (combinedSpells.Any(spell => typeof(WaterBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce water balls";
-        }
-        if (combinedSpells.Any(spell => typeof(RadiationBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce balls of radiation";
-        }
-        if (combinedSpells.Any(spell => typeof(ManaBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "invoke mana storms";
-        }
-        if (combinedSpells.Any(spell => typeof(DarkBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "invoke darkness storms";
-        }
-        if (combinedSpells.Any(spell => typeof(ChaosBallProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "invoke raw chaos";
-        }
-        if (combinedSpells.Any(spell => typeof(DreadCurseScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "invoke the Dread Curse of Azathoth";
-        }
-        if (combinedSpells.Any(spell => typeof(DrainManaScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "drain mana";
-        }
-        if (combinedSpells.Any(spell => typeof(MindBlastScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "cause mind blasting";
-        }
-        if (combinedSpells.Any(spell => typeof(BrainSmashScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "cause brain smashing";
-        }
-        if (combinedSpells.Any(spell => typeof(CauseLightWoundsMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "cause light wounds and cursing";
-        }
-        if (combinedSpells.Any(spell => typeof(CauseSeriousWoundsMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "cause serious wounds and cursing";
-        }
-        if (combinedSpells.Any(spell => typeof(CauseCriticalWoundsMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "cause critical wounds and cursing";
-        }
-        if (combinedSpells.Any(spell => typeof(CauseMortalWoundsMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "cause mortal wounds";
-        }
-        if (combinedSpells.Any(spell => typeof(AcidBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce acid bolts";
-        }
-        if (combinedSpells.Any(spell => typeof(LightningBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce lightning bolts";
-        }
-        if (combinedSpells.Any(spell => typeof(FireBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce fire bolts";
-        }
-        if (combinedSpells.Any(spell => typeof(ColdBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce frost bolts";
-        }
-        if (combinedSpells.Any(spell => typeof(PoisonBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce poison bolts";
-        }
-        if (combinedSpells.Any(spell => typeof(NetherBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce nether bolts";
-        }
-        if (combinedSpells.Any(spell => typeof(WaterBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce water bolts";
-        }
-        if (combinedSpells.Any(spell => typeof(ManaBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce mana bolts";
-        }
-        if (combinedSpells.Any(spell => typeof(PlasmaBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce plasma bolts";
-        }
-        if (combinedSpells.Any(spell => typeof(IceBoltProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce ice bolts";
-        }
-        if (combinedSpells.Any(spell => typeof(MagicMissileProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "produce magic missiles";
-        }
-        if (combinedSpells.Any(spell => typeof(ScareScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "terrify";
-        }
-        if (combinedSpells.Any(spell => typeof(BlindnessScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "blind";
-        }
-        if (combinedSpells.Any(spell => typeof(ConfuseScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "confuse";
-        }
-        if (combinedSpells.Any(spell => typeof(SlowScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "slow";
-        }
-        if (combinedSpells.Any(spell => typeof(HoldScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "paralyze";
-        }
-        if (combinedSpells.Any(spell => typeof(HasteScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "haste-self";
-        }
-        if (combinedSpells.Any(spell => typeof(HealScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "heal-self";
-        }
-        if (combinedSpells.Any(spell => typeof(BlinkScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "blink-self";
-        }
-        if (combinedSpells.Any(spell => typeof(TeleportSelfScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "teleport-self";
-        }
-        if (combinedSpells.Any(spell => typeof(TeleportToScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "teleport to";
-        }
-        if (combinedSpells.Any(spell => typeof(TeleportAwayScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "teleport away";
-        }
-        if (combinedSpells.Any(spell => typeof(TeleportLevelScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "teleport level";
-        }
-        if (combinedSpells.Any(spell => typeof(DarknessProjectileMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "create darkness";
-        }
-        if (combinedSpells.Any(spell => typeof(CreateTrapsScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "create traps";
-        }
-        if (combinedSpells.Any(spell => typeof(ForgetScriptMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "cause amnesia";
-        }
-        if (combinedSpells.Any(spell => typeof(MonsterSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon a monster";
-        }
-        if (combinedSpells.Any(spell => typeof(MonstersSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon monsters";
-        }
-        if (combinedSpells.Any(spell => typeof(KinSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon aid";
-        }
-        if (combinedSpells.Any(spell => typeof(AntSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon ants";
-        }
-        if (combinedSpells.Any(spell => typeof(SpiderSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon spiders";
-        }
-        if (combinedSpells.Any(spell => typeof(HoundSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon hounds";
-        }
-        if (combinedSpells.Any(spell => typeof(HydraSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon hydras";
-        }
-        if (combinedSpells.Any(spell => typeof(CthuloidSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon a Cthuloid entity";
-        }
-        if (combinedSpells.Any(spell => typeof(DemonSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon a demon";
-        }
-        if (combinedSpells.Any(spell => typeof(UndeadSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon an undead";
-        }
-        if (combinedSpells.Any(spell => typeof(DragonSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon a dragon";
-        }
-        if (combinedSpells.Any(spell => typeof(HiUndeadSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon Greater Undead";
-        }
-        if (combinedSpells.Any(spell => typeof(HiDragonSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon Ancient Dragons";
-        }
-        if (combinedSpells.Any(spell => typeof(ReaverSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon Black Reavers";
-        }
-        if (combinedSpells.Any(spell => typeof(GreatOldOneSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon Great Old Ones";
-        }
-        if (combinedSpells.Any(spell => typeof(UniqueSummonMonsterSpell).IsAssignableFrom(spell.GetType())))
-        {
-            vp[vn++] = "summon Unique Monsters";
-        }
-        bool magic = false;
-        if (vn != 0)
-        {
-            magic = true;
-            _description.Append(breath ? ", and is also" : $"{_wdHeCap[msex]} is");
-            _description.Append(" magical, casting spells");
+            string magicalItemListText = StringLibrary.BuildList(magicalItemList.ToArray());
+            string prefix = $"magical, casting spells";
             if (characteristics.Smart)
             {
-                _description.Append(" intelligently");
+                prefix = $"{prefix} intelligently";
             }
-            for (n = 0; n < vn; n++)
-            {
-                if (n == 0)
-                {
-                    _description.Append(" which ");
-                }
-                else if (n < vn - 1)
-                {
-                    _description.Append(", ");
-                }
-                else
-                {
-                    _description.Append(" or ");
-                }
-                _description.Append(vp[n]);
-            }
+            prefix = $"{prefix} which ";
+            magicalRightDisjunct = StringLibrary.PrefixIf(prefix, magicalItemListText);
         }
-        if (breath || magic)
+
+        string mayBreatheAndMagicalSentence = "";
+        if (!String.IsNullOrEmpty(mayBreatheLeftDisjunct) && !String.IsNullOrEmpty(magicalRightDisjunct))
+        {
+            mayBreatheAndMagicalSentence = $"{mayBreatheLeftDisjunct}, and is also {magicalRightDisjunct}";
+        }
+        else if (!String.IsNullOrEmpty(mayBreatheLeftDisjunct))
+        {
+            mayBreatheAndMagicalSentence = mayBreatheLeftDisjunct;
+        }
+        else if (!String.IsNullOrEmpty(magicalRightDisjunct))
+        {
+            mayBreatheAndMagicalSentence = $"{capitalizedPronoun} is {magicalRightDisjunct}";
+        }
+
+        string monsterSpellsKnowledge = StringLibrary.DelimitIf(maySentence, " ", mayBreatheAndMagicalSentence);
+        _description.Append(monsterSpellsKnowledge);
+
+        if (!String.IsNullOrEmpty(mayBreatheAndMagicalSentence))
         {
             m = knowledge.RCastInate + knowledge.RCastSpell;
             n = _monsterType.FrequencyChance;
@@ -877,7 +502,7 @@ internal class MonsterKnowledge : IGameSerialize
         }
         if (KnowArmor(_monsterType, knowledge))
         {
-            _description.Append(_wdHeCap[msex]).Append(" is AC ").Append(_monsterType.ArmorClass);
+            _description.Append(capitalizedPronoun).Append(" is AC ").Append(_monsterType.ArmorClass);
             if (_monsterType.Hdice == 1 && _monsterType.Hside == 1)
             {
                 _description.Append(" and has 1hp. ");
@@ -889,7 +514,8 @@ internal class MonsterKnowledge : IGameSerialize
                     : $" and has {_monsterType.Hdice}d{_monsterType.Hside}hp. ");
             }
         }
-        vn = 0;
+        int vn = 0;
+        string[] vp = new string[64];
         if (characteristics.OpenDoor)
         {
             vp[vn++] = "open doors";
@@ -924,7 +550,7 @@ internal class MonsterKnowledge : IGameSerialize
         }
         if (vn != 0)
         {
-            _description.Append(_wdHeCap[msex]);
+            _description.Append(capitalizedPronoun);
             for (n = 0; n < vn; n++)
             {
                 if (n == 0)
@@ -945,27 +571,27 @@ internal class MonsterKnowledge : IGameSerialize
         }
         if (characteristics.Invisible)
         {
-            _description.Append(_wdHeCap[msex]).Append(" is invisible. ");
+            _description.Append(capitalizedPronoun).Append(" is invisible. ");
         }
         if (characteristics.ColdBlood)
         {
-            _description.Append(_wdHeCap[msex]).Append(" is cold blooded. ");
+            _description.Append(capitalizedPronoun).Append(" is cold blooded. ");
         }
         if (characteristics.EmptyMind)
         {
-            _description.Append(_wdHeCap[msex]).Append(" is not detected by telepathy. ");
+            _description.Append(capitalizedPronoun).Append(" is not detected by telepathy. ");
         }
         if (characteristics.WeirdMind)
         {
-            _description.Append(_wdHeCap[msex]).Append(" is rarely detected by telepathy. ");
+            _description.Append(capitalizedPronoun).Append(" is rarely detected by telepathy. ");
         }
         if (characteristics.Multiply)
         {
-            _description.Append(_wdHeCap[msex]).Append(" breeds explosively. ");
+            _description.Append(capitalizedPronoun).Append(" breeds explosively. ");
         }
         if (characteristics.Regenerate)
         {
-            _description.Append(_wdHeCap[msex]).Append(" regenerates quickly. ");
+            _description.Append(capitalizedPronoun).Append(" regenerates quickly. ");
         }
         vn = 0;
         if (characteristics.HurtByRock)
@@ -986,7 +612,7 @@ internal class MonsterKnowledge : IGameSerialize
         }
         if (vn != 0)
         {
-            _description.Append(_wdHeCap[msex]);
+            _description.Append(capitalizedPronoun);
             for (n = 0; n < vn; n++)
             {
                 if (n == 0)
@@ -1028,7 +654,7 @@ internal class MonsterKnowledge : IGameSerialize
         }
         if (vn != 0)
         {
-            _description.Append(_wdHeCap[msex]);
+            _description.Append(capitalizedPronoun);
             for (n = 0; n < vn; n++)
             {
                 if (n == 0)
@@ -1074,7 +700,7 @@ internal class MonsterKnowledge : IGameSerialize
         }
         if (vn != 0)
         {
-            _description.Append(_wdHeCap[msex]);
+            _description.Append(capitalizedPronoun);
             for (n = 0; n < vn; n++)
             {
                 if (n == 0)
@@ -1112,7 +738,7 @@ internal class MonsterKnowledge : IGameSerialize
         }
         if (vn != 0)
         {
-            _description.Append(_wdHeCap[msex]);
+            _description.Append(capitalizedPronoun);
             for (n = 0; n < vn; n++)
             {
                 if (n == 0)
@@ -1179,13 +805,12 @@ internal class MonsterKnowledge : IGameSerialize
             {
                 act = "is ever vigilant for";
             }
-            _description.Append(
-                _wdHeCap[msex]).Append(' ').Append(act).Append(" intruders, which ").Append(_wdHe[msex]).Append(" may notice from ").AppendFormat("{0:n0}", 10 * _monsterType.NoticeRange).Append(" feet. ");
+            _description.Append(capitalizedPronoun).Append(' ').Append(act).Append(" intruders, which ").Append(pronoun).Append(" may notice from ").AppendFormat("{0:n0}", 10 * _monsterType.NoticeRange).Append(" feet. ");
         }
         if (knowledge.RDropGold != 0 || knowledge.RDropItem != 0)
         {
             bool sin = false;
-            _description.Append(_wdHeCap[msex]).Append(" may carry");
+            _description.Append(capitalizedPronoun).Append(" may carry");
             n = Math.Max(knowledge.RDropGold, knowledge.RDropItem);
             if (n == 1)
             {
@@ -1288,7 +913,7 @@ internal class MonsterKnowledge : IGameSerialize
 
             if (r == 0)
             {
-                _description.Append(_wdHeCap[msex]).Append(" can ");
+                _description.Append(capitalizedPronoun).Append(" can ");
             }
             else if (r < n - 1)
             {
@@ -1320,18 +945,18 @@ internal class MonsterKnowledge : IGameSerialize
         }
         else if (characteristics.NeverAttack)
         {
-            _description.Append(_wdHeCap[msex]).Append(" has no physical attacks. ");
+            _description.Append(capitalizedPronoun).Append(" has no physical attacks. ");
         }
         else
         {
-            _description.Append("Nothing is known about ").Append(_wdHis[msex]).Append(" attack. ");
+            _description.Append("Nothing is known about ").Append(possessiveAdjective).Append(" attack. ");
         }
         if (characteristics.Unique)
         {
             bool dead = _monsterType.MaxNum == 0;
             if (knowledge.RDeaths != 0)
             {
-                _description.Append(_wdHe[msex]).Append(" has slain ").AppendFormat("{0:n0}", knowledge.RDeaths).Append(" of your ancestors");
+                _description.Append(pronoun).Append(" has slain ").AppendFormat("{0:n0}", knowledge.RDeaths).Append(" of your ancestors");
                 if (dead)
                 {
                     _description.Append(", but you have avenged them! ");
@@ -1363,7 +988,7 @@ internal class MonsterKnowledge : IGameSerialize
             }
             else
             {
-                _description.Append("and ").Append(_wdHe[msex]).Append(" is not ever known to have been defeated. ");
+                _description.Append("and ").Append(pronoun).Append(" is not ever known to have been defeated. ");
             }
         }
         else

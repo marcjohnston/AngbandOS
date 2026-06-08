@@ -11,7 +11,7 @@ public class GrandMasterThiefMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell)
+        nameof(CreateTrapsScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

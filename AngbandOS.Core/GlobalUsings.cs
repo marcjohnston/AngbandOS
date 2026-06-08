@@ -29,7 +29,6 @@ global using AngbandOS.Core.ItemQualityRatings;
 global using AngbandOS.Core.MappedSpellScripts;
 global using AngbandOS.Core.MonsterFilters;
 global using AngbandOS.Core.MonsterRaceFilters;
-global using AngbandOS.Core.MonsterSpells;
 global using AngbandOS.Core.Mutations.ActiveMutations;
 global using AngbandOS.Core.Mutations.PassiveMutations;
 global using AngbandOS.Core.Mutations.RandomMutations;

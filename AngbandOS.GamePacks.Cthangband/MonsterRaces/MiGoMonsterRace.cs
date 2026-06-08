@@ -11,9 +11,9 @@ public class MiGoMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell)
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(MonsterSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperASymbol);

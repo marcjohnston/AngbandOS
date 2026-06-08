@@ -11,8 +11,8 @@ public class CryptCreepMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.CauseLightWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell)
+        nameof(CauseLightWoundsMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
 

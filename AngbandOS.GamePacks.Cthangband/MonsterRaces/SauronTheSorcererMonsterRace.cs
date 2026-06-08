@@ -11,27 +11,27 @@ public class SauronTheSorcererMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DarkBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.IceBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.DreadCurseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DemonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiDragonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportLevelScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportSelfScriptMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(DarkBallProjectileMonsterSpell),
+        nameof(FireBallProjectileMonsterSpell),
+        nameof(IceBoltProjectileMonsterSpell),
+        nameof(ManaBallProjectileMonsterSpell),
+        nameof(ManaBoltProjectileMonsterSpell),
+        nameof(NetherBallProjectileMonsterSpell),
+        nameof(PlasmaBoltProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(WaterBallProjectileMonsterSpell),
+        nameof(DreadCurseScriptMonsterSpell),
+        nameof(ForgetScriptMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(TeleportLevelScriptMonsterSpell),
+        nameof(TeleportSelfScriptMonsterSpell)
     };
     public override bool CanTeleportSelf => true;
 

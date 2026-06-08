@@ -11,11 +11,11 @@ public class EtherealDragonMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ConfusionBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.DarkBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.LightBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell)
+        nameof(ConfusionBreathProjectileMonsterSpell),
+        nameof(DarkBreathProjectileMonsterSpell),
+        nameof(LightBreathProjectileMonsterSpell),
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell)
     };
 
 

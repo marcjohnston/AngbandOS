@@ -11,20 +11,20 @@ public class KlingsorEvilMasterOfMagicMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ChaosBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.DarkBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.DrainManaScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DreadCurseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
+        nameof(ChaosBallProjectileMonsterSpell),
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(DarkBallProjectileMonsterSpell),
+        nameof(DrainManaScriptMonsterSpell),
+        nameof(FireBallProjectileMonsterSpell),
+        nameof(HoldScriptMonsterSpell),
+        nameof(ManaBallProjectileMonsterSpell),
+        nameof(NetherBallProjectileMonsterSpell),
+        nameof(PlasmaBoltProjectileMonsterSpell),
+        nameof(WaterBallProjectileMonsterSpell),
+        nameof(CreateTrapsScriptMonsterSpell),
+        nameof(DreadCurseScriptMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

@@ -11,10 +11,10 @@ public class MagicMushroomPatchMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell)
+        nameof(ScareScriptMonsterSpell),
+        nameof(SlowScriptMonsterSpell),
+        nameof(BlinkScriptMonsterSpell),
+        nameof(DarknessProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(CommaSymbol);

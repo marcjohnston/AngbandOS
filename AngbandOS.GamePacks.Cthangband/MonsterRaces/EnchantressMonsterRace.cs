@@ -11,8 +11,8 @@ public class EnchantressMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DragonSummonMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(DragonSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

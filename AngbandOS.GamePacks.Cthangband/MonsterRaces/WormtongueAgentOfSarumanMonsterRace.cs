@@ -11,11 +11,11 @@ public class WormtongueAgentOfSarumanMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HealScriptMonsterSpell)
+        nameof(ColdBoltProjectileMonsterSpell),
+        nameof(PoisonBallProjectileMonsterSpell),
+        nameof(SlowScriptMonsterSpell),
+        nameof(CreateTrapsScriptMonsterSpell),
+        nameof(HealScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

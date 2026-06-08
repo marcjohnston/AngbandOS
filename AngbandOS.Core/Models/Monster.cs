@@ -1709,7 +1709,22 @@ internal class Monster : IItemContainer, IGameSerialize
         bool playerIsBlind = Game.BlindnessTimer.Value != 0;
 
         // Choose which message to render.
-        string? message = playerIsBlind ? thrownSpell.VsPlayerBlindMessage : IsVisible ? thrownSpell.VsPlayerActionMessage : thrownSpell.VsPlayerActionMessageOnInvisibleMonster;
+        string? message = null;
+        if (playerIsBlind)
+        {
+            message = thrownSpell.VsPlayerBlindMessage;
+        }
+        else
+        {
+            if (IsVisible)
+            {
+                message = thrownSpell.VsPlayerActionMessage;
+            }
+            else
+            {
+                message = thrownSpell.VsPlayerActionMessageOnInvisibleMonster ?? thrownSpell.VsPlayerActionMessage;
+            }
+        }
 
         // Check to see if there is a message to be rendered.
         if (message != null)
@@ -1724,9 +1739,12 @@ internal class Monster : IItemContainer, IGameSerialize
         thrownSpell.ExecuteOnPlayer(this);
 
         // Learn from the spell.
-        foreach (SpellResistantDetection smartLearn in thrownSpell.SmartLearn)
+        if (thrownSpell.SmartLearn is not null)
         {
-            Game.UpdateSmartLearn(this, smartLearn);
+            foreach (SpellResistantDetection smartLearn in thrownSpell.SmartLearn)
+            {
+                Game.UpdateSmartLearn(this, smartLearn);
+            }
         }
 
         // If the player saw us cast the spell, let them learn we can do that
@@ -1868,7 +1886,15 @@ internal class Monster : IItemContainer, IGameSerialize
             }
 
             // Render a message to the player.
-            string? message = !seeEither ? thrownSpell.VsMonsterUnseenMessage : thrownSpell.VsMonsterSeenMessage;
+            string? message = null;
+            if (!seeEither)
+            {
+                message = thrownSpell.VsMonsterUnseenMessage ?? thrownSpell.VsPlayerBlindMessage;
+            }
+            else
+            {
+                message = thrownSpell.VsMonsterSeenMessage ?? thrownSpell.VsPlayerActionMessage;
+            }
             if (message != null)
             {
                 string kinName = Race.Unique ? "minions" : "kin";
@@ -3041,6 +3067,10 @@ internal class Monster : IItemContainer, IGameSerialize
             {
                 if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10)
                 {
+                    if ((attackNumber < 0) || (attackNumber > 3))
+                    {
+                        throw new Exception($"Invalid attack number {attackNumber} in MonsterAttackPlayer");
+                    }
                     if (Race.Knowledge.RBlows[attackNumber] < Constants.MaxUchar)
                     {
                         Race.Knowledge.RBlows[attackNumber]++;

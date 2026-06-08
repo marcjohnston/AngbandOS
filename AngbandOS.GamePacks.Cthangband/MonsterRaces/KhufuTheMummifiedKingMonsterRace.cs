@@ -11,13 +11,13 @@ public class KhufuTheMummifiedKingMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.CauseCriticalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CreateTrapsScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.KinSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell)
+        nameof(CauseCriticalWoundsMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(SlowScriptMonsterSpell),
+        nameof(CreateTrapsScriptMonsterSpell),
+        nameof(DarknessProjectileMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerZSymbol);

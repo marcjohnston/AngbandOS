@@ -11,10 +11,10 @@ public class LashaMistressOfWaterMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.IceBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBoltProjectileMonsterSpell)
+        nameof(ColdBallProjectileMonsterSpell),
+        nameof(IceBoltProjectileMonsterSpell),
+        nameof(WaterBallProjectileMonsterSpell),
+        nameof(WaterBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperESymbol);

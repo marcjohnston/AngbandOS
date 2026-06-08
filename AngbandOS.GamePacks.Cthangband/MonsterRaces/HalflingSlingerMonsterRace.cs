@@ -11,7 +11,7 @@ public class HalflingSlingerMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.Arrow7D6ProjectileMonsterSpell)
+        nameof(Arrow7D6ProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerHSymbol);

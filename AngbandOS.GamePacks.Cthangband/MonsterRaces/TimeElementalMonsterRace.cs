@@ -11,8 +11,8 @@ public class TimeElementalMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.TimeBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell)
+        nameof(TimeBreathProjectileMonsterSpell),
+        nameof(SlowScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperESymbol);

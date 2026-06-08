@@ -11,7 +11,7 @@ public class ShamblerMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.LightningBreathProjectileMonsterSpell)
+        nameof(LightningBreathProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperESymbol);

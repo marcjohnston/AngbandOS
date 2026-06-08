@@ -11,9 +11,9 @@ public class MimeTheNibelungMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HealScriptMonsterSpell)
+        nameof(FireBoltProjectileMonsterSpell),
+        nameof(HasteScriptMonsterSpell),
+        nameof(HealScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerHSymbol);

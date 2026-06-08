@@ -11,8 +11,8 @@ public class MatureWhiteDragonMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell)
+        nameof(ColdBreathProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell)
     };
 
 

@@ -11,10 +11,10 @@ public class EyeDrujMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell)
+        nameof(ManaBoltProjectileMonsterSpell),
+        nameof(NetherBallProjectileMonsterSpell),
+        nameof(NetherBoltProjectileMonsterSpell),
+        nameof(UndeadSummonMonsterSpell)
     };
 
 

@@ -11,9 +11,9 @@ public class NineHeadedHydraMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell)
+        nameof(FireBreathProjectileMonsterSpell),
+        nameof(FireBoltProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperMSymbol);

@@ -11,16 +11,16 @@ public class CantorasTheSkeletalLordMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.IceBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.NetherBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.WaterBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(IceBoltProjectileMonsterSpell),
+        nameof(ManaBoltProjectileMonsterSpell),
+        nameof(NetherBallProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(SlowScriptMonsterSpell),
+        nameof(WaterBallProjectileMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell)
     };
 
 

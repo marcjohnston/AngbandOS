@@ -11,14 +11,14 @@ public class ElderThingMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.RadiationBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportAwayScriptMonsterSpell)
+        nameof(RadiationBallProjectileMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(PoisonBallProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
+        nameof(TeleportAwayScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperASymbol);

@@ -11,10 +11,10 @@ public class HoundOfTindalosMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.NetherBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.TimeBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
+        nameof(NetherBreathProjectileMonsterSpell),
+        nameof(TimeBreathProjectileMonsterSpell),
+        nameof(BlinkScriptMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperCSymbol);

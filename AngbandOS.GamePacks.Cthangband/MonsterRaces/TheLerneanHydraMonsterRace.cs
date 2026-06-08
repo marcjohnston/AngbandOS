@@ -11,14 +11,14 @@ public class TheLerneanHydraMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PlasmaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HydraSummonMonsterSpell)
+        nameof(FireBreathProjectileMonsterSpell),
+        nameof(PoisonBreathProjectileMonsterSpell),
+        nameof(FireBallProjectileMonsterSpell),
+        nameof(FireBoltProjectileMonsterSpell),
+        nameof(PlasmaBoltProjectileMonsterSpell),
+        nameof(PoisonBallProjectileMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(HydraSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperMSymbol);

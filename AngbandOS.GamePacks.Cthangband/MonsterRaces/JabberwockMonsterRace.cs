@@ -11,8 +11,8 @@ public class JabberwockMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ChaosBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell)
+        nameof(ChaosBreathProjectileMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperHSymbol);

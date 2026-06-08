@@ -11,10 +11,10 @@ public class DarkElvenWarlockMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.MagicMissileProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell)
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(MagicMissileProjectileMonsterSpell),
+        nameof(ManaBoltProjectileMonsterSpell),
+        nameof(DarknessProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerHSymbol);

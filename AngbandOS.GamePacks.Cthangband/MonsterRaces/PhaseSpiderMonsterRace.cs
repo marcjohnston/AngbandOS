@@ -11,8 +11,8 @@ public class PhaseSpiderMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
+        nameof(BlinkScriptMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell)
     };
 
 

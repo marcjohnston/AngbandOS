@@ -11,9 +11,9 @@ public class YigFatherOfSerpentsMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AcidBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.DisenchantBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBreathProjectileMonsterSpell)
+        nameof(AcidBreathProjectileMonsterSpell),
+        nameof(DisenchantBreathProjectileMonsterSpell),
+        nameof(PoisonBreathProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperJSymbol);

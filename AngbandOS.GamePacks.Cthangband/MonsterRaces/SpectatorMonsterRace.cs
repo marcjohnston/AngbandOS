@@ -11,10 +11,10 @@ public class SpectatorMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.CauseSeriousWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell)
+        nameof(CauseSeriousWoundsMonsterSpell),
+        nameof(HoldScriptMonsterSpell),
+        nameof(SlowScriptMonsterSpell),
+        nameof(ForgetScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerESymbol);

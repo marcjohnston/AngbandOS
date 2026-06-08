@@ -11,10 +11,10 @@ public class DaolothMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.KinSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.TeleportToScriptMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(ManaBoltProjectileMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(TeleportToScriptMonsterSpell)
     };
 
 

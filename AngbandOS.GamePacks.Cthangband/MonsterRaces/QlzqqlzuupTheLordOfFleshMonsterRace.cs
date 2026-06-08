@@ -11,21 +11,21 @@ public class QlzqqlzuupTheLordOfFleshMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.AntSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.DemonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.DragonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.GreatOldOneSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiDragonSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HoundSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HydraSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.KinSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.MonsterSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.SpiderSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.UndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.UniqueSummonMonsterSpell)
+        nameof(AntSummonMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(DemonSummonMonsterSpell),
+        nameof(DragonSummonMonsterSpell),
+        nameof(GreatOldOneSummonMonsterSpell),
+        nameof(HiDragonSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(HoundSummonMonsterSpell),
+        nameof(HydraSummonMonsterSpell),
+        nameof(KinSummonMonsterSpell),
+        nameof(MonsterSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(SpiderSummonMonsterSpell),
+        nameof(UndeadSummonMonsterSpell),
+        nameof(UniqueSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperQSymbol);

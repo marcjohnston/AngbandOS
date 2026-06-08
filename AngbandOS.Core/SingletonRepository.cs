@@ -78,7 +78,7 @@ internal sealed class SingletonRepository : IGameSerialize
         T? value = TryGet<T>(key);
         if (value == null)
         {
-            throw new Exception($"The {typeof(T).Name} repository was registered but the singleton {key} does not exist.\n\n1. Ensure the {nameof(IGetKey)} interface was implemented on the {typeof(T).Name} class.\n\n2. There is only one private constructor and that it only accepts the Game parameter.\n\n3. The singletons are either loaded from the Assembly or the configuration.\n\n");
+            throw new Exception($"The {typeof(T).Name} repository was registered but the singleton {key} does not exist.\n\n1. Ensure the {nameof(IGetKey)} interface was implemented on the {typeof(T).Name} class.\n\n2. There is only one private constructor for system singletons and that it only accepts the Game parameter or a public constructor for configuration loaded singletons that takes the Game and GameConfiguration parameters.\n\n3. The singletons are either loaded from the Assembly or the configuration and 4. The configuration collection is loaded using the LoadFromConfiguration for configured singletons.\n\n");
         }
         return value;
     }
@@ -360,6 +360,7 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations, restoreGameState);
         LoadFromConfiguration<ConditionalWidget, ConditionalWidgetGameConfiguration>(gameConfiguration.ConditionalWidgets, restoreGameState);
         LoadFromConfiguration<ConditionalScript, ConditionalScriptGameConfiguration>(gameConfiguration.ConditionalScripts, restoreGameState);
+        LoadFromConfiguration<CauseWoundsMonsterSpell, CauseWoundsMonsterSpellGameConfiguration>(gameConfiguration.CauseWoundsMonsterSpells, restoreGameState);
         LoadFromConfiguration<DateWidget, DateWidgetGameConfiguration>(gameConfiguration.DateWidgets, restoreGameState);
         LoadFromConfiguration<DamageLearnedKnowledge, DamageLearnedKnowledgeGameConfiguration>(gameConfiguration.DamageLearnedKnowledges, restoreGameState);
         LoadFromConfiguration<DungeonGuardian, DungeonGuardianGameConfiguration>(gameConfiguration.DungeonGuardians, restoreGameState);
@@ -392,6 +393,7 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<Plural, PluralGameConfiguration>(gameConfiguration.Plurals, restoreGameState);
         LoadFromConfiguration<ProjectileGraphic, ProjectileGraphicGameConfiguration>(gameConfiguration.ProjectileGraphics, restoreGameState);
         LoadFromConfiguration<Projectile, ProjectileGameConfiguration>(gameConfiguration.Projectiles, restoreGameState);
+        LoadFromConfiguration<ProjectileMonsterSpell, ProjectileMonsterSpellGameConfiguration>(gameConfiguration.ProjectileMonsterSpells, restoreGameState);
         LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration>(gameConfiguration.ProjectileScripts, restoreGameState);
         LoadFromConfiguration<ProjectileScriptWeightedRandom, ProjectileScriptWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts, restoreGameState);
         LoadFromConfiguration<RaceAbility, RaceAbilityGameConfiguration>(gameConfiguration.RaceAbilities, restoreGameState); // Composite singleton
@@ -405,11 +407,13 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<RealmCharacterClass, RealmCharacterClassGameConfiguration>(gameConfiguration.RealmCharacterClasses, restoreGameState); // Composite singleton
         LoadFromConfiguration<RechargeItemScript, RechargeItemScriptGameConfiguration>(gameConfiguration.RechargeItemScripts, restoreGameState);
         LoadFromConfiguration<RenderMessageScript, RenderMessageScriptGameConfiguration>(gameConfiguration.RenderMessageScripts, restoreGameState);
+        LoadFromConfiguration<ScriptMonsterSpell, ScriptMonsterSpellGameConfiguration>(gameConfiguration.ScriptMonsterSpells, restoreGameState);
         LoadFromConfiguration<Shopkeeper, ShopkeeperGameConfiguration>(gameConfiguration.Shopkeepers, restoreGameState);
         LoadFromConfiguration<Spell, SpellGameConfiguration>(gameConfiguration.Spells, restoreGameState);
         LoadFromConfiguration<StoreCommand, StoreCommandGameConfiguration>(gameConfiguration.StoreCommands, restoreGameState);
         LoadFromConfiguration<StoreFactory, StoreFactoryGameConfiguration>(gameConfiguration.StoreFactories, restoreGameState);
         LoadFromConfiguration<StringWidget, StringWidgetGameConfiguration>(gameConfiguration.StringWidgets, restoreGameState);
+        LoadFromConfiguration<SummonMonsterSpell, SummonMonsterSpellGameConfiguration>(gameConfiguration.SummonMonsterSpells, restoreGameState);
         LoadFromConfiguration<SummonScript, SummonScriptGameConfiguration>(gameConfiguration.SummonScripts, restoreGameState);
         LoadFromConfiguration<SummonWeightedRandom, SummonWeightedRandomGameConfiguration>(gameConfiguration.SummonWeightedRandoms, restoreGameState);
         LoadFromConfiguration<SyllableSet, SyllableSetGameConfiguration>(gameConfiguration.SyllableSets, restoreGameState);

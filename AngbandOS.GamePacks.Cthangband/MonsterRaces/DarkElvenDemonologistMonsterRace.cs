@@ -11,12 +11,12 @@ public class DarkElvenDemonologistMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseSeriousWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.MagicMissileProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.DarknessProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.HealScriptMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(CauseSeriousWoundsMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(MagicMissileProjectileMonsterSpell),
+        nameof(DarknessProjectileMonsterSpell),
+        nameof(HealScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerHSymbol);

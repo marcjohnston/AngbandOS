@@ -11,20 +11,20 @@ public class ShubNiggurathBlackGoatOfTheWoodsMonsterRace : MonsterRaceGameConfig
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ChaosBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfusionBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.PoisonBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.RadiationBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ChaosBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CauseMortalWoundsMonsterSpell),
-        nameof(MonsterSpellsEnum.DarkBallProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ManaBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.CthuloidSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.HiUndeadSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.MonstersSummonMonsterSpell),
-        nameof(MonsterSpellsEnum.UniqueSummonMonsterSpell)
+        nameof(ChaosBreathProjectileMonsterSpell),
+        nameof(ConfusionBreathProjectileMonsterSpell),
+        nameof(PoisonBreathProjectileMonsterSpell),
+        nameof(RadiationBreathProjectileMonsterSpell),
+        nameof(ChaosBallProjectileMonsterSpell),
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(CauseMortalWoundsMonsterSpell),
+        nameof(DarkBallProjectileMonsterSpell),
+        nameof(ManaBoltProjectileMonsterSpell),
+        nameof(HealScriptMonsterSpell),
+        nameof(CthuloidSummonMonsterSpell),
+        nameof(HiUndeadSummonMonsterSpell),
+        nameof(MonstersSummonMonsterSpell),
+        nameof(UniqueSummonMonsterSpell)
     };
 
 

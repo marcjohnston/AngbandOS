@@ -11,13 +11,13 @@ public class BalanceDrakeMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ChaosBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.DisenchantBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ShardsBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.SoundBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.ConfuseScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell)
+        nameof(ChaosBreathProjectileMonsterSpell),
+        nameof(DisenchantBreathProjectileMonsterSpell),
+        nameof(ShardsBreathProjectileMonsterSpell),
+        nameof(SoundBreathProjectileMonsterSpell),
+        nameof(ConfuseScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(SlowScriptMonsterSpell)
     };
 
 

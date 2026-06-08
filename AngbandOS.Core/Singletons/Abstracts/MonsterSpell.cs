@@ -7,7 +7,7 @@
 namespace AngbandOS.Core;
 
 [Serializable]
-internal abstract class MonsterSpell : IGetKey, IGameSerialize
+internal abstract class MonsterSpell : IGetKey, IToJson, IGameSerialize
 {
     protected Game Game { get; }
     protected MonsterSpell(Game game) 
@@ -15,14 +15,18 @@ internal abstract class MonsterSpell : IGetKey, IGameSerialize
         Game = game;
     }
 
+    public abstract string ToJson();
+
+    public abstract (string CollapsableActionVerb, string UniqueDescription) KnowledgeAction { get; }
+
     public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
-    public virtual string Key => GetType().Name;
+    public virtual string Key { get; }
 
     public string GetKey => Key;
     public virtual void Bind(RestoreGameState? restoreGameState)
     {
-        SmartLearn = Game.SingletonRepository.Get<SpellResistantDetection>(SmartLearnSpellResistantDetectionKeys);
+        SmartLearn = Game.SingletonRepository.GetNullable<SpellResistantDetection>(SmartLearnSpellResistantDetectionKeys);
     }
 
     /// <summary>
@@ -206,7 +210,7 @@ internal abstract class MonsterSpell : IGetKey, IGameSerialize
     /// {1} - The genderized possessive name of the monster ... (e.g. "his", if visible) or (e.g. "its", if invisible) 
     /// {2} - The name of the monsters kin.  (e.g. uniques will use "minions" and non-uniques will use "kin" because uniques have no kin)
     /// </summary>
-    public virtual string? VsPlayerActionMessageOnInvisibleMonster => VsPlayerActionMessage;
+    public virtual string? VsPlayerActionMessageOnInvisibleMonster => null;
 
     /// <summary>
     /// Returns the message that is rendered to the player, when the spell is being used against another monster and the player is blind.
@@ -219,7 +223,7 @@ internal abstract class MonsterSpell : IGetKey, IGameSerialize
     /// </summary>
     /// <param name="monsterName"></param>
     /// <returns></returns>
-    public virtual string? VsMonsterUnseenMessage => VsPlayerBlindMessage;
+    public virtual string? VsMonsterUnseenMessage => null;
 
     /// <summary>
     /// Returns the message to be rendered to the player when a monster attacks another monster and the player sees either monster, or null if there
@@ -233,19 +237,19 @@ internal abstract class MonsterSpell : IGetKey, IGameSerialize
     /// <param name="monsterName"></param>
     /// <param name="targetName"></param>
     /// <returns></returns>
-    public virtual string? VsMonsterSeenMessage => VsPlayerActionMessage;
+    public virtual string? VsMonsterSeenMessage => null;
 
     /// <summary>
     /// Returns the keys for the <see cref="SpellResistantDetection"/> characteristics that are learned, when the player experiences or sees the spell.  Returns an empty set, by defaut.  This
     /// property is used to bind the <see cref="SmartLearn"/> property during the binding phase.
     /// </summary>
-    protected virtual string[] SmartLearnSpellResistantDetectionKeys => new string[] { };
+    protected virtual string[]? SmartLearnSpellResistantDetectionKeys => null;
 
     /// <summary>
     /// Returns the characteristics that are learned, when the player experiences or sees the spell.  Returns an empty set, by defaut.  This property is bound using the <see cref="SmartLearnSpellResistantDetectionKeys"/>
     /// property during the bind phase.
     /// </summary>
-    public SpellResistantDetection[] SmartLearn { get; private set; }
+    public SpellResistantDetection[]? SmartLearn { get; private set; }
 
     /// <summary>
     /// Returns true, if the attack on a sleeping monster, wakes the monster.  Returns true, by default.

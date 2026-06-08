@@ -11,7 +11,7 @@ public class ApprenticeRangerMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.Arrow3D6ProjectileMonsterSpell)
+        nameof(Arrow3D6ProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

@@ -11,13 +11,13 @@ public class ShamanMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.BlindnessScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.HoldScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.LightningBoltProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.BlinkScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell)
+        nameof(BlindnessScriptMonsterSpell),
+        nameof(FireBoltProjectileMonsterSpell),
+        nameof(HoldScriptMonsterSpell),
+        nameof(LightningBoltProjectileMonsterSpell),
+        nameof(SlowScriptMonsterSpell),
+        nameof(BlinkScriptMonsterSpell),
+        nameof(HasteScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

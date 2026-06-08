@@ -205,6 +205,11 @@ public class GameConfiguration
         gameConfiguration.OutfitManifests = LoadFromAssembly<OutfitManifestGameConfiguration>(assembly);
         gameConfiguration.AttributeFilters = LoadFromAssembly<AttributeFilterGameConfiguration>(assembly);
 
+        gameConfiguration.ProjectileMonsterSpells = LoadFromAssembly<ProjectileMonsterSpellGameConfiguration>(assembly);
+        gameConfiguration.CauseWoundsMonsterSpells = LoadFromAssembly<CauseWoundsMonsterSpellGameConfiguration>(assembly);
+        gameConfiguration.ScriptMonsterSpells = LoadFromAssembly<ScriptMonsterSpellGameConfiguration>(assembly);
+        gameConfiguration.SummonMonsterSpells = LoadFromAssembly<SummonMonsterSpellGameConfiguration>(assembly);
+
         gameConfiguration.OrAttributes = LoadFromAssembly<OrAttributeGameConfiguration>(assembly);
         gameConfiguration.SumAttributes = LoadFromAssembly<SumAttributeGameConfiguration>(assembly);
         gameConfiguration.ColorEnumAttributes = LoadFromAssembly<ColorEnumAttributeGameConfiguration>(assembly);
@@ -322,6 +327,11 @@ public class GameConfiguration
     public virtual SyllableSetGameConfiguration[]? SyllableSets { get; set; } = null;
     public virtual ProjectileGameConfiguration[]? Projectiles { get; set; } = null;
     public virtual ProjectileScriptGameConfiguration[]? ProjectileScripts { get; set; } = null;
+
+    public virtual ProjectileMonsterSpellGameConfiguration[]? ProjectileMonsterSpells { get; set; } = null;
+    public virtual CauseWoundsMonsterSpellGameConfiguration[]? CauseWoundsMonsterSpells { get; set; } = null;
+    public virtual ScriptMonsterSpellGameConfiguration[]? ScriptMonsterSpells { get; set; } = null;
+    public virtual SummonMonsterSpellGameConfiguration[]? SummonMonsterSpells { get; set; } = null;
 
     public virtual string[]? ShopkeeperAcceptedComments { get; set; } = null;
     public virtual string[]? IllegibleFlavorSyllables { get; set; } = null;

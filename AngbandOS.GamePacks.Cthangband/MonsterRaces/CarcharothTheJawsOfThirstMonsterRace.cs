@@ -11,11 +11,11 @@ public class CarcharothTheJawsOfThirstMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBreathProjectileMonsterSpell),
-        nameof(MonsterSpellsEnum.BrainSmashScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HealScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HoundSummonMonsterSpell)
+        nameof(FireBreathProjectileMonsterSpell),
+        nameof(BrainSmashScriptMonsterSpell),
+        nameof(ScareScriptMonsterSpell),
+        nameof(HealScriptMonsterSpell),
+        nameof(HoundSummonMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperCSymbol);

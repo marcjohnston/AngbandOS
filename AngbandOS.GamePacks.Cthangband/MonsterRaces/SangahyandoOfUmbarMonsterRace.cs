@@ -11,8 +11,8 @@ public class SangahyandoOfUmbarMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.SlowScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.ForgetScriptMonsterSpell)
+        nameof(SlowScriptMonsterSpell),
+        nameof(ForgetScriptMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerPSymbol);

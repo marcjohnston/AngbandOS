@@ -11,7 +11,7 @@ public class ColdVortexMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ColdBreathProjectileMonsterSpell)
+        nameof(ColdBreathProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(LowerVSymbol);

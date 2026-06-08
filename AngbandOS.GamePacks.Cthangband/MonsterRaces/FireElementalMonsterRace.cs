@@ -11,7 +11,7 @@ public class FireElementalMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.FireBoltProjectileMonsterSpell)
+        nameof(FireBoltProjectileMonsterSpell)
     };
 
     public override string SymbolName => nameof(UpperESymbol);

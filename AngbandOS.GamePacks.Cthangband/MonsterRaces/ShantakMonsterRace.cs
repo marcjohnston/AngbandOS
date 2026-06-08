@@ -11,8 +11,8 @@ public class ShantakMonsterRace : MonsterRaceGameConfiguration
 {
     public override string GoldItemFactoryBindingKey => nameof(LotOfGoldGoldItemFactory);
     public override string[]? SpellNames => new string[] {
-        nameof(MonsterSpellsEnum.ScareScriptMonsterSpell),
-        nameof(MonsterSpellsEnum.HasteScriptMonsterSpell)
+        nameof(ScareScriptMonsterSpell),
+        nameof(HasteScriptMonsterSpell)
     };
 
 
