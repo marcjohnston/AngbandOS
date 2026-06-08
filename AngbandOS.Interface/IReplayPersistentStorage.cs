@@ -7,7 +7,7 @@ public interface IReplayPersistentStorage
     /// </summary>
     /// <param name="dateTime"></param>
     /// <param name="keystroke"></param>
-    void WriteStep(DateTime dateTime, char keystroke);
+    void WriteStep(DateTime dateTime, char keystroke, int? seed);
 
     /// <summary>
     /// Called when a new game is started, to allow the persistent storage to clear any existing data and prepare for a new game with the given seed.

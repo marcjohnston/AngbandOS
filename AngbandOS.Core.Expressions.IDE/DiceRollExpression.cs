@@ -8,10 +8,10 @@ public class DiceRollExpression : InfixExpression
 
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
 
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> variables)
     {
-        Expression dice = Dice.Compute();
-        Expression sides = Sides.Compute();
+        Expression dice = Dice.Compute(variables);
+        Expression sides = Sides.Compute(variables);
         if (Dice is IntegerExpression diceIntegerExpression && Sides is IntegerExpression sidesIntegerExpression)
         {
             Random random = new Random();

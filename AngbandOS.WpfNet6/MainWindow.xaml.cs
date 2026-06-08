@@ -539,7 +539,7 @@ public class Replay : IReplayPersistentStorage
         throw new NotImplementedException();
     }
 
-    public void WriteStep(DateTime dateTime, char keystroke)
+    public void WriteStep(DateTime dateTime, char keystroke, int? seed)
     {
         throw new NotImplementedException();
     }

@@ -24,7 +24,7 @@ namespace AngbandOS.PersistentStorage
         }
 
 
-        public void WriteStep(DateTime dateTime, char keystroke)
+        public void WriteStep(DateTime dateTime, char keystroke, int? seed)
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
@@ -32,7 +32,8 @@ namespace AngbandOS.PersistentStorage
                 {
                     GameReplayId = GameReplayId,
                     DateTime = dateTime,
-                    Keystroke = (byte)keystroke
+                    Keystroke = (byte)keystroke,
+                    Seed = seed
                 });
                 context.SaveChanges();
             }

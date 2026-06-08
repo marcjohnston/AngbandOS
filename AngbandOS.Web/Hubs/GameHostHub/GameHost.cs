@@ -446,13 +446,13 @@ namespace AngbandOS.Web.Hubs
             // Check to see if this is a request to play an existing game.
             if (GameConfiguration is null)
             {
-                results = _gameServer.PlayExistingGame(this, PersistentStorage, ReplayPersistentStorage);
+              //  results = _gameServer.PlayExistingGame(this, PersistentStorage, ReplayPersistentStorage, GameConfiguration);
             }
             else
             {               
-                results = _gameServer.PlayNewGame(this, PersistentStorage, ReplayPersistentStorage, GameConfiguration, GameReplay);
+              //  results = _gameServer.PlayNewGame(this, PersistentStorage, ReplayPersistentStorage, GameConfiguration, GameReplay);
             }
-            if (results.GameIsOver)
+          //  if (results.GameIsOver)
             {
                 // The game is over.  Let the client know.
                 GameOver();

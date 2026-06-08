@@ -82,7 +82,7 @@ public partial class MainForm : Form
             node = treeView1.Nodes[0];
         }
         Expression expression = (Expression)node.Tag;
-        Expression result = expression.Compute();
+        Expression result = expression.Compute(new Dictionary<string, object>());
         switch (result)
         {
             case IntegerExpression integerExpression:

@@ -17,7 +17,7 @@ internal class ExperienceLevelIdentifierExpression : IdentifierExpression
         Value = value;
     }
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute()
+    public override Expression Compute(Dictionary<string, object> variables)
     {
         return new IntegerExpression(Value);
     }

@@ -18,7 +18,7 @@ internal class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDispos
         using var stream = new FileStream(ReplayFilename, FileMode.Open, FileAccess.Read);
         using var reader = new BinaryReader(stream);
 
-        int seed = reader.ReadInt32();
+        int gameSeed = reader.ReadInt32();
 
         var steps = new List<GameReplayStep>();
 
@@ -27,11 +27,12 @@ internal class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDispos
             long ticks = reader.ReadInt64();
             char c = reader.ReadChar();
             char c2 = reader.ReadChar();
-            GameReplayStep gameReplayStep = new GameReplayStep(new DateTime(ticks), c);
+            int stepSeed = reader.ReadInt32();
+            GameReplayStep gameReplayStep = new GameReplayStep(new DateTime(ticks), c, stepSeed);
             steps.Add(gameReplayStep);
         }
 
-        return new GameReplayDetails(seed, steps.ToArray());
+        return new GameReplayDetails(gameSeed, steps.ToArray());
     }
     public GameReplayDetails GetReplay(string gameGuid)
     {
@@ -59,7 +60,7 @@ internal class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDispos
         await _stream.WriteAsync(bytes);
     }
 
-    public async void WriteStep(DateTime dateTime, char keystroke)
+    public async void WriteStep(DateTime dateTime, char keystroke, int? seed)
     {
         // If we are appending data to an existing replay, we need to open it now.
         if (_stream is null)
@@ -69,7 +70,10 @@ internal class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDispos
 
         await WriteDateTimeAsync(dateTime);
         await WriteCharAsync(keystroke);
+        await WriteIntAsync(seed ?? -1);
+#if DEBUG
         await _stream.FlushAsync();
+#endif
     }
 
     public void Dispose()

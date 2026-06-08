@@ -325,7 +325,6 @@ internal partial class Game : IGameSerialize
     private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, ObjectGameStateBag gameStateBag)
     {
         #region Pre-Game Load Non-Serialized Initialization (Random Number Generation and Expression Parsing)
-        _mainSequence = new Random();
 
         // Check to see if we are replaying a game.
         if (gameReplay is not null) // TODO: This should be moved into the overload that applies
@@ -350,7 +349,7 @@ internal partial class Game : IGameSerialize
         DecimalToIntegerExpressionTypeConverter = new DecimalToIntegerExpressionTypeConverter();
         #endregion
 
-        #region Game Initialization or Restoration
+        #region Game Initialization or Restoration (random values not supported)
         // Create an instance of the SingletonRepository.  This allows repositories that are loading access to the SingletonRepository object. // TODO: This needs to be fixed once the items no longer reference other objects during construction
         SingletonRepository = new SingletonRepository(this);
 
@@ -363,6 +362,8 @@ internal partial class Game : IGameSerialize
 
             // There are a few properties we need to set.
             IsDead = true;
+            UseFixed = false;
+            CurrentSequenceRandomSeed = MainSequenceRandomSeed;
             Quests = new List<Quest>();
             InitializeAllocationTables(); // This is not performed on a restore.
         }
@@ -567,6 +568,7 @@ internal partial class Game : IGameSerialize
         #endregion
 
         #region Post-game load non-serialized initialization - Initialization that depends on the loaded data.  All non-serialized fields are initialized here.
+        _mainSequence = new Random(MainSequenceRandomSeed);
         ExpressionProviders.Add("Random", UseRandom);
         ExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
         ExpressionProviders.Add("Health", () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
@@ -9076,11 +9078,19 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public TimeSpan? MaxKeystrokeReplayElapsedTime { get; } = new TimeSpan(0, 0, 0, 0, 0);
 
+    /// <summary>
+    /// Records a keystroke to the replay log, along with the current date and time and, in debug builds, the current random seed for the sequence for replay verification.  This information is used to replay the keystrokes with the same timing and random seed in order to reproduce a play session for debugging purposes.
+    /// </summary>
+    /// <param name="keystroke"></param>
     private void RecordReplayStep(char keystroke)
     {
         if (ReplayPersistentStorage is not null)
         {
-            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke);
+#if DEBUG
+            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, CurrentSequenceRandomSeed);
+#else
+            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, null);
+#endif
         }
     }
 
@@ -9153,6 +9163,14 @@ internal partial class Game : IGameSerialize
 
                     // Deliver the keystroke.
                     k = gameReplayStep.Keystroke;
+
+#if DEBUG
+                    // Perform replay verification.
+                    if (CurrentSequenceRandomSeed != gameReplayStep.Seed)
+                    {
+                        throw new Exception($"Replay verification failure: Current random seed {CurrentSequenceRandomSeed} does not match expected random seed {gameReplayStep.Seed} for replay step with keystroke {gameReplayStep.Keystroke} at {gameReplayStep.DateTime}.");
+                    }
+#endif
 
                     // Update the running keystroke submit time.  If the wait time was shortened due to exceeding the maximum elapsed time, we set the time to the target time.
                     replayPreviousKeystrokeDateTime = nextKeystrokeSubmitTime;

@@ -9,6 +9,7 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public int GameReplayId { get; set; }
         public DateTime DateTime { get; set; }
         public byte Keystroke { get; set; }
+        public int? Seed { get; set; }
 
         public virtual GameReplay GameReplay { get; set; } = null!;
     }
