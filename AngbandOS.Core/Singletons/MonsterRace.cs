@@ -513,7 +513,6 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState)
     {
-        Knowledge = new MonsterKnowledge(Game, this);
         int freqInate = (FreqInate == 0 ? 0 : 100 / FreqInate);
         int freqSpell = (FreqSpell == 0 ? 0 : 100 / FreqSpell);
         FrequencyChance = (freqInate + freqSpell) / 2;
@@ -552,6 +551,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
             MaxNum = restoreGameState.GetByKey(nameof(MaxNum)).GetInt();
             Knowledge = restoreGameState.GetByKey(nameof(Knowledge)).GetDerivedReference<MonsterKnowledge>((RestoreGameState restoreGameState) => new MonsterKnowledge(Game, restoreGameState));
         }
+        Knowledge = new MonsterKnowledge(Game, this);
     }
 
     public MonsterSpell[] Spells { get; private set; }

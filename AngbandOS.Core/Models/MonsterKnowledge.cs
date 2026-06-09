@@ -10,9 +10,8 @@ namespace AngbandOS.Core;
 [Serializable]
 internal class MonsterKnowledge : IGameSerialize
 {
-
     #region State Data
-    public readonly int[] RBlows = new int[4]; // TODO: This needs to be made into a list, not fixed.
+    public readonly byte[] RBlows;
     public int RCastInate;
     public int RCastSpell;
     public int RDeaths;
@@ -28,13 +27,13 @@ internal class MonsterKnowledge : IGameSerialize
     public int RSights;
     public int RTkills;
     public int RWake;
-    private readonly MonsterRace _monsterType;
+    private readonly MonsterRace _monsterRace;
     #endregion
 
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(_monsterType), saveGameState.CreateGameStateBag(_monsterType, typeof(MonsterRace))),
+            (nameof(_monsterRace), saveGameState.CreateGameStateBag(_monsterRace, typeof(MonsterRace))),
             (nameof(RBlows), saveGameState.CreateGameStateBag(RBlows)),
             (nameof(RCastInate), saveGameState.CreateGameStateBag(RCastInate)),
             (nameof(RCastSpell), saveGameState.CreateGameStateBag(RCastSpell)),
@@ -59,12 +58,13 @@ internal class MonsterKnowledge : IGameSerialize
     public MonsterKnowledge(Game game, MonsterRace monsterRace)
     {
         Game = game;
-        _monsterType = monsterRace;
+        _monsterRace = monsterRace;
+        RBlows = new byte[monsterRace.Attacks.Length];
     }
 
-    public MonsterKnowledge(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(_monsterType)).GetDerivedReference<MonsterRace>())
+    public MonsterKnowledge(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(_monsterRace)).GetDerivedReference<MonsterRace>())
     {
-        RBlows = restoreGameState.GetByKey(nameof(RBlows)).GetInts();
+        RBlows = restoreGameState.GetByKey(nameof(RBlows)).GetBytes();
         RCastInate = restoreGameState.GetByKey(nameof(RCastInate)).GetInt();
         RCastSpell = restoreGameState.GetByKey(nameof(RCastSpell)).GetInt();
         RDeaths = restoreGameState.GetByKey(nameof(RDeaths)).GetInt();
@@ -92,138 +92,137 @@ internal class MonsterKnowledge : IGameSerialize
 
     public void DisplayBody(ColorEnum bodyColor)
     {
-        int m;
         MonsterKnowledge knowledge = this;
         StringBuilder _description = new StringBuilder();
         if (Game.IsWizard.BoolValue)
         {
-            knowledge = new MonsterKnowledge(Game, _monsterType);
-            for (m = 0; m < _monsterType.Attacks.Length; m++)
+            knowledge = new MonsterKnowledge(Game, _monsterRace);
+            for (int m = 0; m < _monsterRace.Attacks.Length; m++)
             {
-                if (_monsterType.Attacks[m].Effect != null || _monsterType.Attacks[m].Method != null)
+                if (_monsterRace.Attacks[m].Effect != null || _monsterRace.Attacks[m].Method != null)
                 {
-                    knowledge.RBlows[m] = Constants.MaxUchar;
+                    knowledge.RBlows[m] = byte.MaxValue;
                 }
             }
             knowledge.RProbed = true;
             knowledge.RWake = Constants.MaxUchar;
             knowledge.RIgnore = Constants.MaxUchar;
-            knowledge.RDropItem = (_monsterType.Drop_4D2 ? 8 : 0) +
-                                  (_monsterType.Drop_3D2 ? 6 : 0) +
-                                  (_monsterType.Drop_2D2 ? 4 : 0) +
-                                  (_monsterType.Drop_1D2 ? 2 : 0) +
-                                  (_monsterType.Drop90 ? 1 : 0) +
-                                  (_monsterType.Drop60 ? 1 : 0);
+            knowledge.RDropItem = (_monsterRace.Drop_4D2 ? 8 : 0) +
+                                  (_monsterRace.Drop_3D2 ? 6 : 0) +
+                                  (_monsterRace.Drop_2D2 ? 4 : 0) +
+                                  (_monsterRace.Drop_1D2 ? 2 : 0) +
+                                  (_monsterRace.Drop90 ? 1 : 0) +
+                                  (_monsterRace.Drop60 ? 1 : 0);
             knowledge.RDropGold = knowledge.RDropItem;
-            if (_monsterType.OnlyDropGold)
+            if (_monsterRace.OnlyDropGold)
             {
                 knowledge.RDropItem = 0;
             }
-            if (_monsterType.OnlyDropItem)
+            if (_monsterRace.OnlyDropItem)
             {
                 knowledge.RDropGold = 0;
             }
             knowledge.RCastInate = Constants.MaxUchar;
             knowledge.RCastSpell = Constants.MaxUchar;
-            knowledge.Characteristics = new MonsterCharacteristics(_monsterType);
-            knowledge.RSpells = _monsterType.Spells;
+            knowledge.Characteristics = new MonsterCharacteristics(_monsterRace);
+            knowledge.RSpells = _monsterRace.Spells;
         }
         string pronoun = Game.Gender.Pronoun.Trim();
         string capitalizedPronoun = $"{pronoun[0].ToString().ToUpper()}{pronoun[1..]}";
         string possessiveAdjective = Game.Gender.PossessiveAdjective;
-        MonsterCharacteristics characteristics = new MonsterCharacteristics(_monsterType, knowledge.Characteristics);
-        MonsterSpell[] combinedSpells = _monsterType.Spells.Concat(knowledge.RSpells).ToArray();
-        if (_monsterType.Unique)
+        MonsterCharacteristics characteristics = new MonsterCharacteristics(_monsterRace, knowledge.Characteristics);
+        MonsterSpell[] combinedSpells = _monsterRace.Spells.Concat(knowledge.RSpells).ToArray();
+        if (_monsterRace.Unique)
         {
             characteristics.Unique = true;
         }
-        if (_monsterType.Guardian)
+        if (_monsterRace.Guardian)
         {
             Guardian = true;
         }
-        if (_monsterType.Male)
+        if (_monsterRace.Male)
         {
             characteristics.Male = true;
         }
-        if (_monsterType.Female)
+        if (_monsterRace.Female)
         {
             characteristics.Female = true;
         }
-        if (_monsterType.Friends)
+        if (_monsterRace.Friends)
         {
             characteristics.Friends = true;
         }
-        if (_monsterType.Escorted)
+        if (_monsterRace.Escorted)
         {
             characteristics.Escorted = true;
         }
-        if (_monsterType.EscortsGroup)
+        if (_monsterRace.EscortsGroup)
         {
             characteristics.EscortsGroup = true;
         }
         if (knowledge.RTkills != 0 || knowledge.RProbed)
         {
-            if (_monsterType.Orc)
+            if (_monsterRace.Orc)
             {
                 characteristics.Orc = true;
             }
-            if (_monsterType.Troll)
+            if (_monsterRace.Troll)
             {
                 characteristics.Troll = true;
             }
-            if (_monsterType.Giant)
+            if (_monsterRace.Giant)
             {
                 characteristics.Giant = true;
             }
-            if (_monsterType.Dragon)
+            if (_monsterRace.Dragon)
             {
                 characteristics.Dragon = true;
             }
-            if (_monsterType.Demon)
+            if (_monsterRace.Demon)
             {
                 characteristics.Demon = true;
             }
-            if (_monsterType.Cthuloid)
+            if (_monsterRace.Cthuloid)
             {
                 characteristics.Cthuloid = true;
             }
-            if (_monsterType.Undead)
+            if (_monsterRace.Undead)
             {
                 characteristics.Undead = true;
             }
-            if (_monsterType.Evil)
+            if (_monsterRace.Evil)
             {
                 characteristics.Evil = true;
             }
-            if (_monsterType.Good)
+            if (_monsterRace.Good)
             {
                 characteristics.Good = true;
             }
-            if (_monsterType.Animal)
+            if (_monsterRace.Animal)
             {
                 characteristics.Animal = true;
             }
-            if (_monsterType.GreatOldOne)
+            if (_monsterRace.GreatOldOne)
             {
                 characteristics.GreatOldOne = true;
             }
-            if (_monsterType.ForceMaxHp)
+            if (_monsterRace.ForceMaxHp)
             {
                 characteristics.ForceMaxHp = true;
             }
         }
-        string buf = _monsterType.Description;
+        string buf = _monsterRace.Description;
         _description.Append(buf);
         _description.Append(" ");
         bool old = false;
-        if (_monsterType.Level == 0)
+        if (_monsterRace.Level == 0)
         {
             _description.Append(pronoun).Append(" lives in the town");
             old = true;
         }
         else if (knowledge.RTkills != 0 || knowledge.RProbed)
         {
-            _description.Append(capitalizedPronoun).Append(" is normally found at level ").Append(_monsterType.Level);
+            _description.Append(capitalizedPronoun).Append(" is normally found at level ").Append(_monsterRace.Level);
             old = true;
         }
         if (old)
@@ -251,36 +250,36 @@ internal class MonsterKnowledge : IGameSerialize
                 _description.Append(" a bit");
             }
             _description.Append(" erratically");
-            if (_monsterType.Speed != 110)
+            if (_monsterRace.Speed != 110)
             {
                 _description.Append(", and");
             }
         }
-        if (_monsterType.Speed > 110)
+        if (_monsterRace.Speed > 110)
         {
-            if (_monsterType.Speed > 130)
+            if (_monsterRace.Speed > 130)
             {
                 _description.Append(" incredibly");
             }
-            else if (_monsterType.Speed > 120)
+            else if (_monsterRace.Speed > 120)
             {
                 _description.Append(" very");
             }
             _description.Append(" quickly");
-            _description.Append(" (").Append(Game.ExtractEnergy[_monsterType.Speed] / 10.0).Append(" actions per turn)");
+            _description.Append(" (").Append(Game.ExtractEnergy[_monsterRace.Speed] / 10.0).Append(" actions per turn)");
         }
-        else if (_monsterType.Speed < 110)
+        else if (_monsterRace.Speed < 110)
         {
-            if (_monsterType.Speed < 90)
+            if (_monsterRace.Speed < 90)
             {
                 _description.Append(" incredibly");
             }
-            else if (_monsterType.Speed < 100)
+            else if (_monsterRace.Speed < 100)
             {
                 _description.Append(" very");
             }
             _description.Append(" slowly");
-            _description.Append(" (").Append(Game.ExtractEnergy[_monsterType.Speed] / 10.0).Append(" actions per turn)");
+            _description.Append(" (").Append(Game.ExtractEnergy[_monsterRace.Speed] / 10.0).Append(" actions per turn)");
         }
         else
         {
@@ -356,8 +355,8 @@ internal class MonsterKnowledge : IGameSerialize
             {
                 _description.Append(" creature");
             }
-            int i = _monsterType.Mexp * _monsterType.Level / Game.ExperienceLevel.IntValue;
-            int j = ((_monsterType.Mexp * _monsterType.Level % Game.ExperienceLevel.IntValue * 1000 /
+            int i = _monsterRace.Mexp * _monsterRace.Level / Game.ExperienceLevel.IntValue;
+            int j = ((_monsterRace.Mexp * _monsterRace.Level % Game.ExperienceLevel.IntValue * 1000 /
                      Game.ExperienceLevel.IntValue) + 5) / 10;
             if (i > 0)
             {
@@ -487,8 +486,8 @@ internal class MonsterKnowledge : IGameSerialize
 
         if (!String.IsNullOrEmpty(mayBreatheAndMagicalSentence))
         {
-            m = knowledge.RCastInate + knowledge.RCastSpell;
-            n = _monsterType.FrequencyChance;
+            int m = knowledge.RCastInate + knowledge.RCastSpell;
+            n = _monsterRace.FrequencyChance;
             if (m > 100)
             {
                 _description.Append("; 1 time in ").Append(100 / n);
@@ -500,18 +499,18 @@ internal class MonsterKnowledge : IGameSerialize
             }
             _description.Append(". ");
         }
-        if (KnowArmor(_monsterType, knowledge))
+        if (KnowArmor(_monsterRace, knowledge))
         {
-            _description.Append(capitalizedPronoun).Append(" is AC ").Append(_monsterType.ArmorClass);
-            if (_monsterType.Hdice == 1 && _monsterType.Hside == 1)
+            _description.Append(capitalizedPronoun).Append(" is AC ").Append(_monsterRace.ArmorClass);
+            if (_monsterRace.Hdice == 1 && _monsterRace.Hside == 1)
             {
                 _description.Append(" and has 1hp. ");
             }
             else
             {
                 _description.Append(characteristics.ForceMaxHp
-                    ? $" and has {_monsterType.Hdice * _monsterType.Hside:n0}hp. "
-                    : $" and has {_monsterType.Hdice}d{_monsterType.Hside}hp. ");
+                    ? $" and has {_monsterRace.Hdice * _monsterRace.Hside:n0}hp. "
+                    : $" and has {_monsterRace.Hdice}d{_monsterRace.Hside}hp. ");
             }
         }
         int vn = 0;
@@ -757,47 +756,47 @@ internal class MonsterKnowledge : IGameSerialize
             }
             _description.Append(". ");
         }
-        if (knowledge.RWake * knowledge.RWake > _monsterType.Sleep || knowledge.RIgnore == Constants.MaxUchar ||
-            (_monsterType.Sleep == 0 && (knowledge.RTkills >= 10 || knowledge.RProbed)))
+        if (knowledge.RWake * knowledge.RWake > _monsterRace.Sleep || knowledge.RIgnore == Constants.MaxUchar ||
+            (_monsterRace.Sleep == 0 && (knowledge.RTkills >= 10 || knowledge.RProbed)))
         {
             string act;
-            if (_monsterType.Sleep > 200)
+            if (_monsterRace.Sleep > 200)
             {
                 act = "prefers to ignore";
             }
-            else if (_monsterType.Sleep > 95)
+            else if (_monsterRace.Sleep > 95)
             {
                 act = "pays very little attention to";
             }
-            else if (_monsterType.Sleep > 75)
+            else if (_monsterRace.Sleep > 75)
             {
                 act = "pays little attention to";
             }
-            else if (_monsterType.Sleep > 45)
+            else if (_monsterRace.Sleep > 45)
             {
                 act = "tends to overlook";
             }
-            else if (_monsterType.Sleep > 25)
+            else if (_monsterRace.Sleep > 25)
             {
                 act = "takes quite a while to see";
             }
-            else if (_monsterType.Sleep > 10)
+            else if (_monsterRace.Sleep > 10)
             {
                 act = "takes a while to see";
             }
-            else if (_monsterType.Sleep > 5)
+            else if (_monsterRace.Sleep > 5)
             {
                 act = "is fairly observant of";
             }
-            else if (_monsterType.Sleep > 3)
+            else if (_monsterRace.Sleep > 3)
             {
                 act = "is observant of";
             }
-            else if (_monsterType.Sleep > 1)
+            else if (_monsterRace.Sleep > 1)
             {
                 act = "is very observant of";
             }
-            else if (_monsterType.Sleep > 0)
+            else if (_monsterRace.Sleep > 0)
             {
                 act = "is vigilant for";
             }
@@ -805,7 +804,7 @@ internal class MonsterKnowledge : IGameSerialize
             {
                 act = "is ever vigilant for";
             }
-            _description.Append(capitalizedPronoun).Append(' ').Append(act).Append(" intruders, which ").Append(pronoun).Append(" may notice from ").AppendFormat("{0:n0}", 10 * _monsterType.NoticeRange).Append(" feet. ");
+            _description.Append(capitalizedPronoun).Append(' ').Append(act).Append(" intruders, which ").Append(pronoun).Append(" may notice from ").AppendFormat("{0:n0}", 10 * _monsterRace.NoticeRange).Append(" feet. ");
         }
         if (knowledge.RDropGold != 0 || knowledge.RDropItem != 0)
         {
@@ -879,9 +878,9 @@ internal class MonsterKnowledge : IGameSerialize
             _description.Append(". ");
         }
         n = 0;
-        for (m = 0; m < _monsterType.Attacks.Length; m++)
+        for (int m = 0; m < _monsterRace.Attacks.Length; m++)
         {
-            if (_monsterType.Attacks[m].Method == null)
+            if (_monsterRace.Attacks[m].Method == null)
             {
                 continue;
             }
@@ -891,9 +890,9 @@ internal class MonsterKnowledge : IGameSerialize
             }
         }
         int r = 0;
-        for (m = 0; m < _monsterType.Attacks.Length; m++)
+        for (int m = 0; m < _monsterRace.Attacks.Length; m++)
         {
-            if (_monsterType.Attacks[m].Method == null)
+            if (_monsterRace.Attacks[m].Method == null)
             {
                 continue;
             }
@@ -901,10 +900,10 @@ internal class MonsterKnowledge : IGameSerialize
             {
                 continue;
             }
-            Attack method = _monsterType.Attacks[m].Method;
-            AttackEffect? effect = _monsterType.Attacks[m].Effect;
-            int d1 = _monsterType.Attacks[m].Dice;
-            int d2 = _monsterType.Attacks[m].Sides;
+            Attack method = _monsterRace.Attacks[m].Method;
+            AttackEffect? effect = _monsterRace.Attacks[m].Effect;
+            int d1 = _monsterRace.Attacks[m].Dice;
+            int d2 = _monsterRace.Attacks[m].Sides;
             p = method.KnowledgeAction;
             if (effect == null)
                 q = null;
@@ -932,7 +931,7 @@ internal class MonsterKnowledge : IGameSerialize
             {
                 _description.Append(" to ");
                 _description.Append(q);
-                if (d1 != 0 && d2 != 0 && KnowDamage(_monsterType, knowledge, m))
+                if (d1 != 0 && d2 != 0 && KnowDamage(_monsterRace, knowledge, m))
                 {
                     _description.Append(" for ").Append(d1).Append('d').Append(d2).Append(" damage");
                 }
@@ -953,7 +952,7 @@ internal class MonsterKnowledge : IGameSerialize
         }
         if (characteristics.Unique)
         {
-            bool dead = _monsterType.MaxNum == 0;
+            bool dead = _monsterRace.MaxNum == 0;
             if (knowledge.RDeaths != 0)
             {
                 _description.Append(pronoun).Append(" has slain ").AppendFormat("{0:n0}", knowledge.RDeaths).Append(" of your ancestors");
@@ -1016,15 +1015,15 @@ internal class MonsterKnowledge : IGameSerialize
 
     private void DisplayHeader()
     {
-        char c1 = _monsterType.Symbol.Character;
-        ColorEnum a1 = _monsterType.Color;
+        char c1 = _monsterRace.Symbol.Character;
+        ColorEnum a1 = _monsterRace.Color;
         Game.Screen.Erase(0, 0);
         Game.Screen.Goto(0, 0);
-        if (!_monsterType.Unique)
+        if (!_monsterRace.Unique)
         {
             Game.Screen.Print(ColorEnum.White, "The ");
         }
-        Game.Screen.Print(ColorEnum.White, _monsterType.FriendlyName);
+        Game.Screen.Print(ColorEnum.White, _monsterRace.FriendlyName);
         Game.Screen.Print(ColorEnum.White, " ('");
         Game.Screen.Print(a1, c1.ToString());
         Game.Screen.Print(ColorEnum.White, "')");

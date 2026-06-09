@@ -540,6 +540,32 @@ internal class RestoreGameState
         return listOfBytes.ToArray();
     }
 
+    public Dictionary<T1, T2> GetDictionary<T1, T2>(Func<RestoreGameState, T1> keySelector, Func<RestoreGameState, T2> valueSelector) where T1 : notnull
+    {
+        Dictionary<T1, T2> dictionary = new Dictionary<T1, T2>();
+        ListGameStateBag listGameStateBag = (ListGameStateBag)GameStateBag;
+        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
+        {
+            DictionaryGameStateBag dictionaryGameStateBag = (DictionaryGameStateBag)gameStateBag;
+            GameStateBag? keyGameStateBag = dictionaryGameStateBag.GetByKey("Key", 0, false);
+            if (keyGameStateBag is null)
+            {
+                throw new KeyNotFoundException($"Key GameStateBag not found for dictionary entry.");
+            }
+            RestoreGameState restoreGameState = New(keyGameStateBag);
+            T1 key = keySelector(restoreGameState);
+
+            GameStateBag? valueGameStateBag = dictionaryGameStateBag.GetByKey("Value", 1, false);
+            if (valueSelector is null)
+            {
+                throw new KeyNotFoundException($"Value GameStateBag not found for dictionary entry.");
+            }
+            restoreGameState = New(valueGameStateBag);
+            T2 value = valueSelector(restoreGameState);
+            dictionary.Add(key, value);
+        }
+        return dictionary;
+    }
     public char[] GetChars() => ((CharArrayGameStateBag)GameStateBag).Value;
     public int GetInt() => ((IntValueGameStateBag)GameStateBag).Value;
     public ulong GetUlong() => ((UlongValueGameStateBag)GameStateBag).Value;

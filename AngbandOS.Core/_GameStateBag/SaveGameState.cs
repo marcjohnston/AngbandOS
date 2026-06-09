@@ -41,6 +41,8 @@ internal partial class SaveGameState
         ObjectToIdDictionary.Add(value, objectId);
         return objectId;
     }
+
+    #region Bit-wise Boolean Packing
     public GameStateBag CreateGameStateBag(bool a, bool b)
     {
         byte value = (byte)((a ? 1 << 0 : 0) | (b ? 1 << 1 : 0));
@@ -77,6 +79,7 @@ internal partial class SaveGameState
         byte value = (byte)((a ? 1 << 0 : 0) | (b ? 1 << 1 : 0) | (c ? 1 << 2 : 0) | (d ? 1 << 3 : 0) | (e ? 1 << 4 : 0) | (f ? 1 << 5 : 0) | (g ? 1 << 6 : 0) | (h ? 1 << 7 : 0));
         return new ByteValueGameStateBag(value);
     }
+    #endregion
 
     #region Object Creation with Polymorphic Type Support
     private byte? DetermineDerivedId(Type actualType, params Type[] derivedTypes)
@@ -172,6 +175,19 @@ internal partial class SaveGameState
         foreach (IGameSerialize[] item in gameSerializable)
         {
             gameStateBags.Add(CreateGameStateBag(item, type, derivedTypes));
+        }
+        return new ListGameStateBag(gameStateBags.ToArray());
+    }
+
+    public GameStateBag CreateGameStateBag<T1, T2>(Dictionary<T1, T2> dictionary) where T1 : notnull
+    {
+        var gameStateBags = new List<GameStateBag>();
+        foreach ((T1 key, T2 value) in dictionary)
+        {
+            GameStateBag keyGameStateBag = CreateGameStateBag(key);
+            GameStateBag valueGameStateBag = CreateGameStateBag(value);
+            DictionaryGameStateBag dictionaryGameStateBag = new DictionaryGameStateBag(new Dictionary<string, GameStateBag> { { "key", keyGameStateBag }, { "value", valueGameStateBag } });
+            gameStateBags.Add(dictionaryGameStateBag);
         }
         return new ListGameStateBag(gameStateBags.ToArray());
     }

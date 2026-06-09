@@ -3065,12 +3065,8 @@ internal class Monster : IItemContainer, IGameSerialize
             // If the player saw the monster, they now know more about what attacks it can do
             if (visible)
             {
-                if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10)
+                if (obvious || damage != 0 || Race.Knowledge.RBlows[attackNumber] > 10) // TODO: This is a hardcoded value
                 {
-                    if ((attackNumber < 0) || (attackNumber > 3))
-                    {
-                        throw new Exception($"Invalid attack number {attackNumber} in MonsterAttackPlayer");
-                    }
                     if (Race.Knowledge.RBlows[attackNumber] < Constants.MaxUchar)
                     {
                         Race.Knowledge.RBlows[attackNumber]++;
