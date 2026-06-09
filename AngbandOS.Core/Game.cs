@@ -127,7 +127,7 @@ internal partial class Game : IGameSerialize
             (nameof(WisdomBonus), saveGameState.CreateGameStateBag(WisdomBonus)),
             (nameof(replayPreviousKeystrokeDateTime), saveGameState.CreateGameStateBag(replayPreviousKeystrokeDateTime)),
             (nameof(MainSequenceRandomSeed), saveGameState.CreateGameStateBag(MainSequenceRandomSeed)),
-            (nameof(CurrentSequenceRandomSeed), saveGameState.CreateGameStateBag(CurrentSequenceRandomSeed)),
+            (nameof(MainSequenceCurrentSeed), saveGameState.CreateGameStateBag(MainSequenceCurrentSeed)),
             (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet, typeof(ReadOnlyAttributeSet))),
             (nameof(FixedSeed), saveGameState.CreateGameStateBag(FixedSeed)),
             (nameof(CurrentRunDirection), saveGameState.CreateGameStateBag(CurrentRunDirection)),
@@ -279,7 +279,7 @@ internal partial class Game : IGameSerialize
     /// Returns the value of the non-fixed random seed to use to restore the non-fixed random generator.  This seed is needed because the Random object cannot be serialized and we need to restore
     /// the non-fixed random generator when a saved game is restored.
     /// </summary>
-    public int CurrentSequenceRandomSeed;
+    public int MainSequenceCurrentSeed;
 
     /// <summary>
     /// Returns true, when the game is processing the popup menu.  This value is used to determine when the game is entering and existing the popup menu mode.  Keystrokes that are used during, to render or
@@ -338,7 +338,7 @@ internal partial class Game : IGameSerialize
         else
         {
             // Generate all new random seeds.
-            Random r = new Random();
+            IRng r = new SystemRng();
             MainSequenceRandomSeed = r.Next(int.MaxValue);
         }
 
@@ -363,7 +363,7 @@ internal partial class Game : IGameSerialize
             // There are a few properties we need to set.
             IsDead = true;
             UseFixed = false;
-            CurrentSequenceRandomSeed = MainSequenceRandomSeed;
+            MainSequenceCurrentSeed = MainSequenceRandomSeed;
             Quests = new List<Quest>();
             InitializeAllocationTables(); // This is not performed on a restore.
         }
@@ -440,7 +440,7 @@ internal partial class Game : IGameSerialize
             WisdomBonus = restoreGameState.GetByKey(nameof(WisdomBonus)).GetInt();
             replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTime();
             MainSequenceRandomSeed = restoreGameState.GetByKey(nameof(MainSequenceRandomSeed)).GetInt();
-            CurrentSequenceRandomSeed = restoreGameState.GetByKey(nameof(CurrentSequenceRandomSeed)).GetInt();
+            MainSequenceCurrentSeed = restoreGameState.GetByKey(nameof(MainSequenceCurrentSeed)).GetInt();
             EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(this, restoreGameState));
             FixedSeed = restoreGameState.GetByKey(nameof(FixedSeed)).GetInt();
             CurrentRunDirection = restoreGameState.GetByKey(nameof(CurrentRunDirection)).GetInt();
@@ -568,7 +568,10 @@ internal partial class Game : IGameSerialize
         #endregion
 
         #region Post-game load non-serialized initialization - Initialization that depends on the loaded data.  All non-serialized fields are initialized here.
-        _mainSequence = new Random(MainSequenceRandomSeed);
+        // If this game is a replay, we need to initialize the non-fixed random with the same value that was used to construct the game, otherwise, we need to restore the random to the next seed for deterministic game play.
+        int randomSeed = IsInReplayMode ? MainSequenceRandomSeed : MainSequenceCurrentSeed;
+        _mainSequence = new SystemRng(randomSeed);
+
         ExpressionProviders.Add("Random", UseRandom);
         ExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
         ExpressionProviders.Add("Health", () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
@@ -805,10 +808,6 @@ internal partial class Game : IGameSerialize
             }
         }
 
-        // If this game is a replay, we need to initialize the non-fixed random with the same value that was used to construct the game, otherwise, we need to restore the random to the next seed for deterministic game play.
-        int randomSeed = IsInReplayMode ? MainSequenceRandomSeed : CurrentSequenceRandomSeed;
-        _mainSequence = new Random(randomSeed);
-
         ConsoleViewPort = consoleViewPort;
         Shutdown = false;
         LastInputReceived = DateTime.Now;
@@ -950,13 +949,10 @@ internal partial class Game : IGameSerialize
     #endregion
 
     #region Random Number Generator
-    [NonSerialized]
-    private Random _mainSequence;
+    private IRng _mainSequence;
+    private IRng _fixed;
+    public IRng UseRandom => UseFixed ? _fixed : _mainSequence;
 
-    [NonSerialized]
-    private Random _fixed;
-
-    public Random UseRandom => UseFixed ? _fixed : _mainSequence;
     /// <summary>
     /// Set true to use the fixed seed, and false to use the generic randomiser
     /// </summary>
@@ -993,7 +989,7 @@ internal partial class Game : IGameSerialize
         get => _fixedSeed;
         set
         {
-            _fixed = new Random(value);
+            _fixed = new SystemRng(value);
             _fixedSeed = value;
         }
     }
@@ -4280,13 +4276,12 @@ internal partial class Game : IGameSerialize
             }
             else
             {
-                ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
-
                 // We need to track the current seed so that we can restore it if the game is saved and played later.  Also, we use this to enable the game replay.  The position of this process
                 // has been placed strategically to record the seed before the player gets a chance to save and close the game but not before any and every keystroke.
-                CurrentSequenceRandomSeed = Next(int.MaxValue - 1);
-                _mainSequence = new Random(CurrentSequenceRandomSeed);
+                MainSequenceCurrentSeed = Next(int.MaxValue - 1);
+                _mainSequence = new SystemRng(MainSequenceCurrentSeed);
 
+                ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
                 RequestCommand(false);
                 ProcessCommand(false);
                 CloseBatchOfMessages();
@@ -9087,7 +9082,7 @@ internal partial class Game : IGameSerialize
         if (ReplayPersistentStorage is not null)
         {
 #if DEBUG
-            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, CurrentSequenceRandomSeed);
+            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, MainSequenceCurrentSeed);
 #else
             ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, null);
 #endif
@@ -9121,7 +9116,6 @@ internal partial class Game : IGameSerialize
         /// <returns> True if a keypress was available, false otherwise </returns>
         bool GetKeypress(out char ch, bool wait, bool take)
         {
-
             /// <summary>
             /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort"/> and updates the <see cref="LastInputReceived"/> property./>
             /// </summary>
@@ -9166,9 +9160,9 @@ internal partial class Game : IGameSerialize
 
 #if DEBUG
                     // Perform replay verification.
-                    if (CurrentSequenceRandomSeed != gameReplayStep.Seed)
+                    if (MainSequenceCurrentSeed != gameReplayStep.Seed)
                     {
-                        throw new Exception($"Replay verification failure: Current random seed {CurrentSequenceRandomSeed} does not match expected random seed {gameReplayStep.Seed} for replay step with keystroke {gameReplayStep.Keystroke} at {gameReplayStep.DateTime}.");
+                        throw new Exception($"Replay verification failure: Current random seed {MainSequenceCurrentSeed} does not match expected random seed {gameReplayStep.Seed} for replay step with keystroke {gameReplayStep.Keystroke} at {gameReplayStep.DateTime}.");
                     }
 #endif
 
@@ -16995,7 +16989,7 @@ internal partial class Game : IGameSerialize
         {
             return 0; // TODO: This defies the stated purpose
         }
-        Random use = UseFixed ? _fixed : _mainSequence;
+        IRng use = UseFixed ? _fixed : _mainSequence;
         return use.Next(max);
     }
 

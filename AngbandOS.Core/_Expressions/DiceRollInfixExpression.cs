@@ -44,7 +44,7 @@ internal class DiceRollInfixExpression : InfixExpression
         }
 
         // Retrieve the Random from the dependencies dictionary.  If the Random is not present in the dependencies, throw an exception with a descriptive error message indicating that the Random is required to compute the dice roll.
-        Random random = (Random)providers["Random"];
+        IRng random = (IRng)providers["Random"];
 
         // Compute the roll.  This is done by rolling the specified number of dice, where each die has the specified number of sides.  The result of each die roll is a random integer between 1 and the number of sides (inclusive).  The total result is the sum of all the individual die rolls.  For example, if the expression is "3d6", then we would roll three six-sided dice, and the result would be the sum of those three rolls, which could be anywhere from 3 to 18.
         int sum = 0;

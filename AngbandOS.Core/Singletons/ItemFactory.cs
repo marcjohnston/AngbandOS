@@ -547,9 +547,6 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         // Determine the cost of the item.
         int itemCost = item.Value();
 
-        // Get the Random to be used.
-        Random random = Game.UseRandom;
-
         if (MassProduceTuples != null)
         {
             foreach ((int cost, Expression expression) in MassProduceTuples)
