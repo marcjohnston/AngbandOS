@@ -883,7 +883,7 @@ internal partial class Game : IGameSerialize
                     ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, CharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.StringValue, ExperienceLevel.IntValue, Generation);
                     break;
                 }
-                GenerateNewLevel();
+                DungeonGenerator.GenerateNewLevel();
                 ReplacePets(MapY.IntValue, MapX.IntValue, _petList);
             }
         }
@@ -2847,7 +2847,7 @@ internal partial class Game : IGameSerialize
         WildernessX = CurTown.X;
         WildernessY = CurTown.Y;
         CameFrom = LevelStartEnum.StartRandom;
-        GenerateNewLevel();
+        DungeonGenerator.GenerateNewLevel();
     }
 
     public bool IsInReplayMode => ReplayQueue.Count > 0;
@@ -3446,6 +3446,26 @@ internal partial class Game : IGameSerialize
 
     public void MonsterDeath(Monster mPtr)
     {
+        void LoreTreasure(Monster mPtr, int numItem, int numGold)
+        {
+            MonsterRace rPtr = mPtr.Race;
+            if (numItem > rPtr.Knowledge.RDropItem)
+            {
+                rPtr.Knowledge.RDropItem = numItem;
+            }
+            if (numGold > rPtr.Knowledge.RDropGold)
+            {
+                rPtr.Knowledge.RDropGold = numGold;
+            }
+            if (rPtr.DropGood)
+            {
+                rPtr.Knowledge.Characteristics.DropGood = true;
+            }
+            if (rPtr.DropGreat)
+            {
+                rPtr.Knowledge.Characteristics.DropGreat = true;
+            }
+        }
         int dumpItem = 0;
         int dumpGold = 0;
         int number = 0;
@@ -5829,6 +5849,42 @@ internal partial class Game : IGameSerialize
 
     public void Probing()
     {
+        void LoreDoProbe(int mIdx)
+        {
+            Monster mPtr = Monsters[mIdx];
+            MonsterRace rPtr = mPtr.Race;
+            var knowledge = rPtr.Knowledge;
+            for (var m = 0; m < rPtr.Attacks.Length; m++)
+            {
+                if (rPtr.Attacks[m].Effect != null || rPtr.Attacks[m].Method != null)
+                {
+                    knowledge.RBlows[m] = Constants.MaxUchar;
+                }
+            }
+            knowledge.RProbed = true;
+            knowledge.RWake = Constants.MaxUchar;
+            knowledge.RIgnore = Constants.MaxUchar;
+            knowledge.RDropItem = (rPtr.Drop_4D2 ? 8 : 0) +
+                                  (rPtr.Drop_3D2 ? 6 : 0) +
+                                  (rPtr.Drop_2D2 ? 4 : 0) +
+                                  (rPtr.Drop_1D2 ? 2 : 0) +
+                                  (rPtr.Drop90 ? 1 : 0) +
+                                  (rPtr.Drop60 ? 1 : 0);
+            knowledge.RDropGold = knowledge.RDropItem;
+            if (rPtr.OnlyDropGold)
+            {
+                knowledge.RDropItem = 0;
+            }
+            if (rPtr.OnlyDropItem)
+            {
+                knowledge.RDropGold = 0;
+            }
+            knowledge.RCastInate = Constants.MaxUchar;
+            knowledge.RCastSpell = Constants.MaxUchar;
+            knowledge.Characteristics = new MonsterCharacteristics(rPtr);
+            knowledge.RSpells = rPtr.Spells;
+        }
+
         bool probe = false;
         for (int i = 1; i < MonsterMax; i++)
         {
@@ -10235,6 +10291,7 @@ internal partial class Game : IGameSerialize
             socialClass = 1;
         }
         SocialClass = socialClass;
+
         // Split the buffer into four strings to fit on four lines of the screen
         string s = fullHistory.Trim();
         i = 0;
@@ -10254,488 +10311,6 @@ internal partial class Game : IGameSerialize
         }
     }
 
-    public void GenerateNewLevel()
-    {
-        // Reset all of the monsters.
-        Monsters = new Monster[Constants.MaxMIdx];
-        for (int j = 0; j < Constants.MaxMIdx; j++)
-        {
-            Monsters[j] = new Monster(this);
-        }
-
-        // Loop until we are able to build the level and keep track of the number of attempts.
-        for (int generateAttemptNumber = 0; ; generateAttemptNumber++)
-        {
-            bool okay = true;
-
-            // Allocate and reset the grid tiles.
-            // Create a single traps detected property that can trigger any associated widgets.  This one property will be sent to all GridTile objects.
-            TrapsDetectedProperty trapsDetectedProperty = (TrapsDetectedProperty)SingletonRepository.Get<Property>(nameof(TrapsDetectedProperty)); // TODO: GridTileObjects can retrieve the object themselves upon initialization or at runtime.  No need to store as state data.
-            Tile grassTile = GrassTile;
-            Tile dungeonFloorTile = SingletonRepository.Get<Tile>(nameof(DungeonFloorTile));
-            Tile towerFloorTile = SingletonRepository.Get<Tile>(nameof(TowerFloorTile));
-
-            for (int y = 0; y < MaxHgt; y++)
-            {
-                Grid[y] = new GridTile[MaxWid];
-                for (int x = 0; x < MaxWid; x++)
-                {
-                    GridTile newTile = new GridTile(this);
-                    Grid[y][x] = newTile;
-                    if (CurrentDepth == 0)
-                    {
-                        newTile.SetBackgroundFeature(grassTile);
-                    }
-                    else
-                    {
-                        newTile.SetBackgroundFeature(dungeonFloorTile);
-                    }
-                }
-            }
-
-            PanelRowMin = 0;
-            PanelRowMax = 0;
-            PanelColMin = 0;
-            PanelColMax = 0;
-            MonsterLevel = Difficulty;
-            SpecialDanger = false;
-            DangerRating = 0;
-            if (CurrentDepth == 0)
-            {
-                if (Wilderness[WildernessY][WildernessX].Town != null)
-                {
-                    CurTown = Wilderness[WildernessY][WildernessX].Town;
-                    DungeonDifficulty = 0;
-                    DunBias = null;
-                    if (Wilderness[WildernessY][WildernessX].Town.Char == 'K')
-                    {
-                        DungeonDifficulty = 35;
-                        DunBias = SingletonRepository.Get<MonsterRaceFilter>(nameof(CthuloidMonsterRaceFilter));
-                    }
-                }
-                else if (Wilderness[WildernessY][WildernessX].Dungeon != null)
-                {
-                    DungeonDifficulty = Wilderness[WildernessY][WildernessX].Dungeon.Offset / 2;
-                    if (DungeonDifficulty < 4)
-                    {
-                        DungeonDifficulty = 4;
-                    }
-                    DunBias = Wilderness[WildernessY][WildernessX].Dungeon.BiasMonsterFilter;
-                }
-                else
-                {
-                    DungeonDifficulty = 2;
-                    DunBias = SingletonRepository.Get<MonsterRaceFilter>(nameof(AnimalMonsterRaceFilter));
-                }
-                CurHgt = Constants.PlayableScreenHeight;
-                CurWid = Constants.PlayableScreenWidth;
-                MaxPanelRows = (CurHgt / Constants.PlayableScreenHeight * 2) - 2;
-                MaxPanelCols = (CurWid / Constants.PlayableScreenWidth * 2) - 2;
-                PanelRow = MaxPanelRows;
-                PanelCol = MaxPanelCols;
-                if (Wilderness[WildernessY][WildernessX].Town != null)
-                {
-                    TownGen();
-                }
-                else
-                {
-                    WildernessGen();
-                }
-            }
-            else
-            {
-                if (!DungeonGenerator.GenerateDungeon(Difficulty))
-                {
-                    okay = false;
-                }
-            }
-            if (DangerRating > 100)
-            {
-                DangerFeeling = 2;
-            }
-            else if (DangerRating > 80)
-            {
-                DangerFeeling = 3;
-            }
-            else if (DangerRating > 60)
-            {
-                DangerFeeling = 4;
-            }
-            else if (DangerRating > 40)
-            {
-                DangerFeeling = 5;
-            }
-            else if (DangerRating > 30)
-            {
-                DangerFeeling = 6;
-            }
-            else if (DangerRating > 20)
-            {
-                DangerFeeling = 7;
-            }
-            else if (DangerRating > 10)
-            {
-                DangerFeeling = 8;
-            }
-            else if (DangerRating > 0)
-            {
-                DangerFeeling = 9;
-            }
-            else
-            {
-                DangerFeeling = 10;
-            }
-            if (SpecialDanger)
-            {
-                DangerFeeling = 1;
-            }
-            if (CurrentDepth <= 0)
-            {
-                DangerFeeling = 0;
-            }
-            TreasureFeeling = ComputeTreasureFeelingIndex();
-            if (MonsterMax >= Constants.MaxMIdx)
-            {
-                okay = false;
-            }
-            if (generateAttemptNumber < 100)
-            {
-                int totalFeeling = TreasureFeeling + DangerFeeling;
-                if (totalFeeling > 18 || (Difficulty >= 5 && totalFeeling > 16) || (Difficulty >= 10 && totalFeeling > 14) || (Difficulty >= 20 && totalFeeling > 12) || (Difficulty >= 40 && totalFeeling > 10))
-                {
-                    okay = false;
-                }
-            }
-            if (okay)
-            {
-                break;
-            }
-
-            // Reset the level so that we can attempt again.
-            WipeMList();
-        }
-        MarkLevelEntry();
-    }
-
-    public int ComputeTreasureFeelingIndex()
-    {
-        int treasureRating = 0;
-        for (int y = 0; y < CurHgt; y++)
-        {
-            for (int x = 0; x < CurWid; x++)
-            {
-                GridTile cPtr = Grid[y][x];
-                foreach (Item item in cPtr.Items)
-                {
-                    if (item.EffectiveAttributeSet.HasKeyedItemEnhancements(Game.FixedAttributeKey))
-                    {
-                        return 1;
-                    }
-                    if (!item.EffectiveAttributeSet.IsCursed && !item.EffectiveAttributeSet.Valueless && item.LevelNormallyFound > Difficulty)
-                    {
-                        treasureRating += item.LevelNormallyFound - Difficulty;
-                    }
-                    treasureRating += item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Get();
-                }
-            }
-        }
-
-        if (treasureRating > 100)
-        {
-            return 2;
-        }
-        else if (treasureRating > 80)
-        {
-            return 3;
-        }
-        else if (treasureRating > 60)
-        {
-            return 4;
-        }
-        else if (treasureRating > 40)
-        {
-            return 5;
-        }
-        else if (treasureRating > 30)
-        {
-            return 6;
-        }
-        else if (treasureRating > 20)
-        {
-            return 7;
-        }
-        else if (treasureRating > 10)
-        {
-            return 8;
-        }
-        else if (treasureRating > 0)
-        {
-            return 9;
-        }
-        else
-        {
-            return 10;
-        }
-    }
-
-    private void BuildField(int yy, int xx)
-    {
-        int y0 = (yy * 9) + 8;
-        int x0 = (xx * 15) + 10;
-        int y1 = y0 - DieRoll(2) - 1;
-        int y2 = y0 + DieRoll(2) + 1;
-        int x1 = x0 - DieRoll(3) - 2;
-        int x2 = x0 + DieRoll(3) + 2;
-        Tile fieldTile = SingletonRepository.Get<Tile>(nameof(FieldTile));
-        for (int x = x1; x < x2; x++)
-        {
-            for (int y = y1; y < y2; y++)
-            {
-                Grid[y][x].SetFeature(fieldTile);
-                Grid[y][x].SetBackgroundFeature(fieldTile);
-            }
-        }
-        if (DieRoll(5) == 4)
-        {
-            int x = RandomBetween(x1, x2);
-            int y = RandomBetween(y1, y2);
-            Grid[y][x].SetFeature(SingletonRepository.Get<Tile>(nameof(ScarecrowTile)));
-        }
-    }
-
-    private void BuildGraveyard(int yy, int xx)
-    {
-        int y0 = (yy * 9) + 8;
-        int x0 = (xx * 15) + 10;
-        int y1 = y0 - DieRoll(2) - 1;
-        int y2 = y0 + DieRoll(2) + 1;
-        int x1 = x0 - DieRoll(3) - 2;
-        int x2 = x0 + DieRoll(3) + 2;
-        for (int i = 0; i < RandomBetween(10, 20); i++)
-        {
-            int x = (RandomBetween(x1, x2) / 2 * 2) + 1;
-            int y = (RandomBetween(y1, y2) / 2 * 2) + 1;
-            Grid[y][x].SetFeature(SingletonRepository.Get<Tile>(nameof(GraveTile)));
-        }
-    }
-
-    private void BuildStore(Store store, int yy, int xx)
-    {
-        int y, x;
-        GridTile cPtr;
-
-        if (store.StoreFactory.IsEmptyLot)
-        {
-            switch (DieRoll(10))
-            {
-                case 3:
-                case 7:
-                case 9:
-                    break;
-
-                case 6:
-                    BuildGraveyard(yy, xx);
-                    break;
-
-                default:
-                    BuildField(yy, xx);
-                    break;
-            }
-            return;
-        }
-
-        int y0 = (yy * 9) + 6;
-        int x0 = (xx * 15) + 10;
-        int y1 = y0 - DieRoll(2);
-        int y2 = y0 + DieRoll(2) + 1;
-        int x1 = x0 - DieRoll(3) - 2;
-        int x2 = x0 + DieRoll(3) + 2;
-        if ((y2 - y1) % 2 == 0)
-        {
-            y2++;
-        }
-        for (y = y1; y <= y2; y++)
-        {
-            for (x = x1; x <= x2; x++)
-            {
-                cPtr = Grid[y][x];
-                if (!store.StoreFactory.BuildingsMadeFromPermanentRock)
-                {
-                    switch (DieRoll(6))
-                    {
-                        case 1:
-                            cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(WallInnerTile)));
-                            break;
-
-                        case 2:
-                        case 3:
-                        case 4:
-                            cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(RubbleTile)));
-                            break;
-                    }
-                }
-                else
-                {
-                    if (y == y2)
-                    {
-                        cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-                    }
-                    else
-                    {
-                        cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(RoofTile)));
-                    }
-                }
-                cPtr.PlayerMemorized = true;
-                cPtr.SelfLit = true;
-            }
-        }
-        y = y2;
-        x = RandomBetween(x1 + 1, x2 - 2);
-        cPtr = Grid[y][x];
-        if (store.StoreFactory.StoreEntranceDoorsAreBlownOff)
-        {
-            if (DieRoll(8) == 6)
-            {
-                PlaceRandomDoor(y, x);
-            }
-        }
-        else
-        {
-            cPtr.SetFeature(store.StoreFactory.Tile);
-        }
-        store.SetLocation(x, y);
-        for (++y; y < y0 + 7; y++)
-        {
-            cPtr = Grid[y][x];
-            cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-        }
-        y--;
-        int dX = Math.Sign((CurWid / 2) - x);
-        for (x += dX; x != CurWid / 2; x += dX)
-        {
-            cPtr = Grid[y][x];
-            cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-        }
-    }
-
-    private void MakeCornerTowers(int wildX, int wildY)
-    {
-        int height = CurHgt;
-        int width = CurWid;
-        if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY - 1][wildX].Town != null) ||
-            (Wilderness[wildY][wildX - 1].Town != null) || (Wilderness[wildY - 1][wildX - 1].Town != null))
-        {
-            Grid[0][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[0][0].PlayerMemorized = true;
-            Grid[0][0].SelfLit = true;
-            Grid[1][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[1][0].PlayerMemorized = true;
-            Grid[1][0].SelfLit = true;
-            Grid[1][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[1][1].PlayerMemorized = true;
-            Grid[1][1].SelfLit = true;
-            Grid[0][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[0][1].PlayerMemorized = true;
-            Grid[0][1].SelfLit = true;
-            Grid[0][0].RevertToBackground();
-            Grid[0][0].PlayerMemorized = true;
-            Grid[0][0].SelfLit = true;
-            Grid[1][0].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[1][0].PlayerMemorized = true;
-            Grid[1][0].SelfLit = true;
-            Grid[1][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[1][1].PlayerMemorized = true;
-            Grid[1][1].SelfLit = true;
-            Grid[0][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[0][1].PlayerMemorized = true;
-            Grid[0][1].SelfLit = true;
-        }
-        if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY - 1][wildX].Town != null) ||
-            (Wilderness[wildY][wildX + 1].Town != null) || (Wilderness[wildY - 1][wildX + 1].Town != null))
-        {
-            Grid[0][width - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[0][width - 1].PlayerMemorized = true;
-            Grid[0][width - 1].SelfLit = true;
-            Grid[1][width - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[1][width - 1].PlayerMemorized = true;
-            Grid[1][width - 1].SelfLit = true;
-            Grid[1][width - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[1][width - 2].PlayerMemorized = true;
-            Grid[1][width - 2].SelfLit = true;
-            Grid[0][width - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[0][width - 2].PlayerMemorized = true;
-            Grid[0][width - 2].SelfLit = true;
-            Grid[0][width - 1].RevertToBackground();
-            Grid[0][width - 1].PlayerMemorized = true;
-            Grid[0][width - 1].SelfLit = true;
-            Grid[1][width - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[1][width - 1].PlayerMemorized = true;
-            Grid[1][width - 1].SelfLit = true;
-            Grid[1][width - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[1][width - 2].PlayerMemorized = true;
-            Grid[1][width - 2].SelfLit = true;
-            Grid[0][width - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[0][width - 2].PlayerMemorized = true;
-            Grid[0][width - 2].SelfLit = true;
-        }
-        if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY + 1][wildX].Town != null) ||
-            (Wilderness[wildY][wildX + 1].Town != null) || (Wilderness[wildY + 1][wildX + 1].Town != null))
-        {
-            Grid[height - 1][width - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 1][width - 1].PlayerMemorized = true;
-            Grid[height - 1][width - 1].SelfLit = true;
-            Grid[height - 2][width - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 2][width - 1].PlayerMemorized = true;
-            Grid[height - 2][width - 1].SelfLit = true;
-            Grid[height - 2][width - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 2][width - 2].PlayerMemorized = true;
-            Grid[height - 2][width - 2].SelfLit = true;
-            Grid[height - 1][width - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 1][width - 2].PlayerMemorized = true;
-            Grid[height - 1][width - 2].SelfLit = true;
-            Grid[height - 1][width - 1].RevertToBackground();
-            Grid[height - 1][width - 1].PlayerMemorized = true;
-            Grid[height - 1][width - 1].SelfLit = true;
-            Grid[height - 2][width - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 2][width - 1].PlayerMemorized = true;
-            Grid[height - 2][width - 1].SelfLit = true;
-            Grid[height - 2][width - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 2][width - 2].PlayerMemorized = true;
-            Grid[height - 2][width - 2].SelfLit = true;
-            Grid[height - 1][width - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 1][width - 2].PlayerMemorized = true;
-            Grid[height - 1][width - 2].SelfLit = true;
-        }
-        if ((Wilderness[wildY][wildX].Town != null) || (Wilderness[wildY + 1][wildX].Town != null) ||
-            (Wilderness[wildY][wildX - 1].Town != null) || (Wilderness[wildY + 1][wildX - 1].Town != null))
-        {
-            Grid[height - 1][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 1][0].PlayerMemorized = true;
-            Grid[height - 1][0].SelfLit = true;
-            Grid[height - 2][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 2][0].PlayerMemorized = true;
-            Grid[height - 2][0].SelfLit = true;
-            Grid[height - 2][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 2][1].PlayerMemorized = true;
-            Grid[height - 2][1].SelfLit = true;
-            Grid[height - 1][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 1][1].PlayerMemorized = true;
-            Grid[height - 1][1].SelfLit = true;
-            Grid[height - 1][0].RevertToBackground();
-            Grid[height - 1][0].PlayerMemorized = true;
-            Grid[height - 1][0].SelfLit = true;
-            Grid[height - 2][0].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 2][0].PlayerMemorized = true;
-            Grid[height - 2][0].SelfLit = true;
-            Grid[height - 2][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 2][1].PlayerMemorized = true;
-            Grid[height - 2][1].SelfLit = true;
-            Grid[height - 1][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 1][1].PlayerMemorized = true;
-            Grid[height - 1][1].SelfLit = true;
-        }
-    }
-
     public Tile DownStaircaseTile { get; }
 
     public Tile UpStaircaseTile { get; }
@@ -10745,1288 +10320,6 @@ internal partial class Game : IGameSerialize
     public Tile RockTile { get; }
 
     public Tile WaterTile { get; }
-
-    private void MakeDungeonEntrance(int left, int top, int width, int height, out int stairX, out int stairY)
-    {
-        int dummy = 0;
-        int x = 1;
-        int y = 1;
-        while (dummy < SafeMaxAttempts)
-        {
-            dummy++;
-            y = RandomBetween(top, top + height);
-            x = RandomBetween(left, left + width);
-            if (GridOpenNoItemOrCreature(y, x))
-            {
-                break;
-            }
-        }
-        Grid[y - 2][x].RevertToBackground();
-        Grid[y - 1][x - 1].RevertToBackground();
-        Grid[y - 1][x].RevertToBackground();
-        Grid[y - 1][x + 1].RevertToBackground();
-        Grid[y][x - 2].RevertToBackground();
-        Grid[y][x - 1].RevertToBackground();
-        Grid[y][x].SetFeature(DownStaircaseTile);
-        stairX = x;
-        stairY = y;
-        Grid[y][x + 1].RevertToBackground();
-        Grid[y][x + 2].RevertToBackground();
-        Grid[y + 1][x - 1].RevertToBackground();
-        Grid[y + 1][x].RevertToBackground();
-        Grid[y + 1][x + 1].RevertToBackground();
-        Grid[y + 2][x].RevertToBackground();
-    }
-
-    private void MakeHenge(int left, int top, int width, int height)
-    {
-        int midX = left + (width / 2);
-        int midY = top + (height / 2);
-        for (int y = midY - 3; y < midY + 3; y++)
-        {
-            Grid[y][midX - 7].SetBackgroundFeature(GrassTile);
-            Grid[y][midX - 7].SetFeature(GrassTile);
-        }
-        for (int y = midY - 5; y < midY + 5; y++)
-        {
-            Grid[y][midX - 6].SetBackgroundFeature(GrassTile);
-            Grid[y][midX - 6].SetFeature(GrassTile);
-        }
-        for (int y = midY - 6; y < midY + 6; y++)
-        {
-            Grid[y][midX - 5].SetBackgroundFeature(GrassTile);
-            Grid[y][midX - 5].SetFeature(GrassTile);
-        }
-        for (int y = midY - 6; y < midY + 6; y++)
-        {
-            Grid[y][midX - 4].SetBackgroundFeature(GrassTile);
-            Grid[y][midX - 4].SetFeature(GrassTile);
-        }
-        for (int y = midY - 7; y < midY + 6; y++)
-        {
-            Grid[y][midX - 3].SetBackgroundFeature(GrassTile);
-            Grid[y][midX - 3].SetFeature(GrassTile);
-        }
-        for (int y = midY - 7; y < midY + 6; y++)
-        {
-            Grid[y][midX - 2].SetBackgroundFeature(GrassTile);
-            Grid[y][midX - 2].SetFeature(GrassTile);
-        }
-        for (int y = midY - 6; y < midY + 6; y++)
-        {
-            Grid[y][midX - 1].SetBackgroundFeature(GrassTile);
-            Grid[y][midX - 1].SetFeature(GrassTile);
-        }
-        for (int y = midY - 7; y < midY + 6; y++)
-        {
-            Grid[y][midX].SetBackgroundFeature(GrassTile);
-            Grid[y][midX].SetFeature(GrassTile);
-        }
-        for (int y = midY - 7; y < midY + 6; y++)
-        {
-            Grid[y][midX + 1].SetBackgroundFeature(GrassTile);
-            Grid[y][midX + 1].SetFeature(GrassTile);
-        }
-        for (int y = midY - 6; y < midY + 6; y++)
-        {
-            Grid[y][midX + 2].SetBackgroundFeature(GrassTile);
-            Grid[y][midX + 2].SetFeature(GrassTile);
-        }
-        for (int y = midY - 7; y < midY + 6; y++)
-        {
-            Grid[y][midX + 3].SetBackgroundFeature(GrassTile);
-            Grid[y][midX + 3].SetFeature(GrassTile);
-        }
-        for (int y = midY - 6; y < midY + 6; y++)
-        {
-            Grid[y][midX + 4].SetBackgroundFeature(GrassTile);
-            Grid[y][midX + 4].SetFeature(GrassTile);
-        }
-        for (int y = midY - 5; y < midY + 5; y++)
-        {
-            Grid[y][midX + 5].SetBackgroundFeature(GrassTile);
-            Grid[y][midX + 5].SetFeature(GrassTile);
-        }
-        for (int y = midY - 3; y < midY + 3; y++)
-        {
-            Grid[y][midX + 6].SetBackgroundFeature(GrassTile);
-            Grid[y][midX + 6].SetFeature(GrassTile);
-        }
-        Grid[midY - 6][midX].SetFeature(RockTile);
-        Grid[midY - 6][midX - 1].SetFeature(RockTile);
-        Grid[midY - 5][midX - 4].SetFeature(RockTile);
-        Grid[midY - 4][midX - 5].SetFeature(RockTile);
-        Grid[midY - 1][midX - 6].SetFeature(RockTile);
-        Grid[midY][midX - 6].SetFeature(RockTile);
-        Grid[midY + 3][midX - 5].SetFeature(RockTile);
-        Grid[midY + 4][midX - 4].SetFeature(RockTile);
-        Grid[midY + 5][midX - 1].SetFeature(RockTile);
-        Grid[midY + 5][midX].SetFeature(RockTile);
-        Grid[midY + 4][midX + 3].SetFeature(RockTile);
-        Grid[midY + 3][midX + 4].SetFeature(RockTile);
-        Grid[midY][midX + 5].SetFeature(RockTile);
-        Grid[midY - 1][midX + 5].SetFeature(RockTile);
-        Grid[midY - 4][midX + 4].SetFeature(RockTile);
-        Grid[midY - 5][midX + 3].SetFeature(RockTile);
-    }
-
-    private void MakeLake(int minX, int minY, int width, int height)
-    {
-        PerlinNoise perlinNoise = new PerlinNoise(RandomBetween(0, int.MaxValue - 1));
-        double widthDivisor = 1 / (double)width;
-        double heightDivisor = 1 / (double)height;
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                GridTile cPtr = Grid[minY + y][minX + x];
-                double v = perlinNoise.Noise(10 * x * widthDivisor, 10 * y * heightDivisor, -0.5);
-                v = (v + 1) / 2;
-                double dX = Math.Abs(x - (width / 2)) * widthDivisor;
-                double dY = Math.Abs(y - (height / 2)) * heightDivisor;
-                double d = Math.Max(dX, dY);
-                const double elevation = 0.05;
-                const double steepness = 6.0;
-                const double dropoff = 50.0;
-                v += elevation - (dropoff * Math.Pow(d, steepness));
-                v = Math.Min(1, Math.Max(0, v));
-                int rounded = (int)(v * 10);
-                if (rounded > 3)
-                {
-                    cPtr.SetBackgroundFeature(WaterTile);
-                    cPtr.SetFeature(WaterTile);
-                }
-                else if (rounded == 3)
-                {
-                    cPtr.SetBackgroundFeature(GrassTile);
-                    cPtr.SetFeature(GrassTile);
-                }
-            }
-        }
-    }
-
-    private void MakeTower(int left, int top, int width, int height, out int stairX, out int stairY)
-    {
-        int i;
-        int y = top + height;
-        int x = left + (width / 2);
-        stairX = x;
-        stairY = y;
-        for (i = -2; i < 3; i++)
-        {
-            Grid[y][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y][x + i].PlayerMemorized = true;
-            Grid[y][x + i].SelfLit = true;
-        }
-        for (i = -4; i < 5; i++)
-        {
-            Grid[y - 1][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 1][x + i].PlayerMemorized = true;
-            Grid[y - 1][x + i].SelfLit = true;
-        }
-        for (i = -5; i < 6; i++)
-        {
-            Grid[y - 2][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 2][x + i].PlayerMemorized = true;
-            Grid[y - 2][x + i].SelfLit = true;
-        }
-        for (i = -6; i < 7; i++)
-        {
-            Grid[y - 3][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 3][x + i].PlayerMemorized = true;
-            Grid[y - 3][x + i].SelfLit = true;
-        }
-        for (i = -6; i < 7; i++)
-        {
-            Grid[y - 4][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 4][x + i].PlayerMemorized = true;
-            Grid[y - 4][x + i].SelfLit = true;
-        }
-        for (i = -7; i < 8; i++)
-        {
-            Grid[y - 5][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 5][x + i].PlayerMemorized = true;
-            Grid[y - 5][x + i].SelfLit = true;
-        }
-        for (i = -7; i < 8; i++)
-        {
-            Grid[y - 6][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 6][x + i].PlayerMemorized = true;
-            Grid[y - 6][x + i].SelfLit = true;
-        }
-        for (i = -7; i < 8; i++)
-        {
-            Grid[y - 7][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 7][x + i].PlayerMemorized = true;
-            Grid[y - 7][x + i].SelfLit = true;
-        }
-        for (i = -7; i < 8; i++)
-        {
-            Grid[y - 8][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 8][x + i].PlayerMemorized = true;
-            Grid[y - 8][x + i].SelfLit = true;
-        }
-        for (i = -7; i < 8; i++)
-        {
-            Grid[y - 9][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 9][x + i].PlayerMemorized = true;
-            Grid[y - 9][x + i].SelfLit = true;
-        }
-        for (i = -6; i < 7; i++)
-        {
-            Grid[y - 10][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 10][x + i].PlayerMemorized = true;
-            Grid[y - 10][x + i].SelfLit = true;
-        }
-        for (i = -6; i < 7; i++)
-        {
-            Grid[y - 11][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 11][x + i].PlayerMemorized = true;
-            Grid[y - 11][x + i].SelfLit = true;
-        }
-        for (i = -5; i < 6; i++)
-        {
-            Grid[y - 12][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 12][x + i].PlayerMemorized = true;
-            Grid[y - 12][x + i].SelfLit = true;
-        }
-        for (i = -4; i < 5; i++)
-        {
-            Grid[y - 13][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 13][x + i].PlayerMemorized = true;
-            Grid[y - 13][x + i].SelfLit = true;
-        }
-        for (i = -2; i < 4; i++)
-        {
-            Grid[y - 14][x + i].SetFeature(SingletonRepository.Get<Tile>(nameof(WallPermanentBuildingTile)));
-            Grid[y - 14][x + i].PlayerMemorized = true;
-            Grid[y - 14][x + i].SelfLit = true;
-        }
-        Grid[y][x].SetFeature(UpStaircaseTile);
-        Grid[y][x].PlayerMemorized = true;
-        Grid[y][x].SelfLit = true;
-        for (i = -3; i < 4; i++)
-        {
-            if (Grid[y + 1][x + i].FeatureType.IsTree)
-            {
-                Grid[y + 1][x + i].RevertToBackground();
-            }
-        }
-        for (i = -2; i < 3; i++)
-        {
-            if (Grid[y + 2][x + i].FeatureType.IsTree)
-            {
-                Grid[y + 2][x + i].RevertToBackground();
-            }
-        }
-    }
-
-    private void MakeTownCentre()
-    {
-        int xx = CurWid / 2;
-        int yy = CurHgt / 2;
-        switch (DieRoll(12))
-        {
-            case 1:
-            case 3:
-                Grid[yy - 1][xx - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-                Grid[yy][xx - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-                Grid[yy + 1][xx - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-                Grid[yy - 1][xx].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-                Grid[yy + 1][xx].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-                Grid[yy - 1][xx + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-                Grid[yy][xx + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-                Grid[yy + 1][xx + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-                switch (DieRoll(6))
-                {
-                    case 4:
-                    case 1:
-                        Grid[yy][xx].RevertToBackground();
-                        break;
-
-                    case 2:
-                        Grid[yy][xx].SetFeature(SingletonRepository.Get<Tile>(nameof(StatueTile)));
-                        break;
-
-                    default:
-                        Grid[yy][xx].SetFeature(SingletonRepository.Get<Tile>(nameof(FountainTile)));
-                        break;
-                }
-                return;
-
-            case 2:
-            case 8:
-            case 9:
-            case 12:
-                int x = xx - 1;
-                if (DieRoll(2) == 1)
-                {
-                    x = xx + 1;
-                }
-                int y = yy - 1;
-                if (DieRoll(2) == 1)
-                {
-                    y = yy + 1;
-                }
-                Grid[y][x].SetFeature(SingletonRepository.Get<Tile>(nameof(SignpostTile)));
-                break;
-
-            default:
-                return;
-        }
-    }
-
-    private void BuildStores()
-    {
-        List<string> occupied = new List<string>();
-        for (int i = 0; i < CurTown.Stores.Length; i++)
-        {
-            int x;
-            int y;
-            do
-            {
-                x = RandomBetween(0, 3);
-                y = RandomBetween(0, 3);
-                if ((x == 1 || x == 2 || y == 1 || y == 2) && !occupied.Contains($"{x},{y}"))
-                {
-                    break;
-                }
-            } while (true);
-            occupied.Add($"{x},{y}");
-            BuildStore(CurTown.Stores[i], y, x);
-        }
-
-        int maxSpacesRemaining = 4 * 4 - CurTown.Stores.Length;
-        for (int i = 0; i < maxSpacesRemaining; i++)
-        {
-            switch (DieRoll(10))
-            {
-                case 3:
-                case 7:
-                case 9:
-                    break;
-
-                default:
-                    int x;
-                    int y;
-                    do
-                    {
-                        x = RandomBetween(0, 3);
-                        y = RandomBetween(0, 3);
-                        if (!occupied.Contains($"{x},{y}"))
-                        {
-                            break;
-                        }
-                    } while (true);
-                    occupied.Add($"{x},{y}");
-
-                    if (CurTown.UnusedStoreLotsAreGraveyards)
-                    {
-                        BuildGraveyard(y, x);
-                    }
-                    else
-                    {
-                        BuildField(y, x);
-                    }
-                    break;
-            }
-        }
-    }
-
-    private void BuildPath()
-    {
-        int yy = CurHgt / 2;
-        for (int x = 1; x < CurWid - 1; x++)
-        {
-            Grid[yy][x].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-        }
-        int xx = CurWid / 2;
-        for (int y = 1; y < CurHgt - 1; y++)
-        {
-            Grid[y][xx].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-        }
-    }
-
-    private void BuildRocks()
-    {
-        GridTile cPtr;
-        for (int n = 0; n < RandomBetween(1, 10) - 6; n++)
-        {
-            int x = RandomBetween(1, CurWid - 2);
-            int y = RandomBetween(1, CurHgt - 2);
-            cPtr = Grid[y][x];
-            if (cPtr.FeatureType == cPtr.BackgroundFeature)
-            {
-                cPtr.SetFeature(RockTile);
-                cPtr.PlayerMemorized = true;
-            }
-        }
-    }
-
-    private void BuildTrees()
-    {
-        GridTile cPtr;
-        for (int n = 0; n < RandomBetween(5, 10); n++)
-        {
-            int x = RandomBetween(1, CurWid - 2);
-            int y = RandomBetween(1, CurHgt - 2);
-            cPtr = Grid[y][x];
-            if (cPtr.FeatureType == cPtr.BackgroundFeature)
-            {
-                cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(TreeTile)));
-                cPtr.PlayerMemorized = true;
-            }
-        }
-    }
-
-    private void BuildBushes()
-    {
-        GridTile cPtr;
-        for (int n = 0; n < RandomBetween(5, 10); n++)
-        {
-            int x = RandomBetween(1, CurWid - 2);
-            int y = RandomBetween(1, CurHgt - 2);
-            cPtr = Grid[y][x];
-            if (cPtr.FeatureType == cPtr.BackgroundFeature)
-            {
-                cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(BushTile)));
-                cPtr.PlayerMemorized = true;
-            }
-        }
-    }
-
-    private void AddPaths()
-    {
-        GridTile cPtr;
-        int x = CurWid / 2;
-        cPtr = Grid[0][x];
-        cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderNSTile)));
-        cPtr.PlayerMemorized = true;
-        x = CurWid - 2;
-        int y = CurHgt / 2;
-        cPtr = Grid[y][x + 1];
-        cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderEWTile)));
-        cPtr.PlayerMemorized = true;
-        x = CurWid / 2;
-        y = CurHgt - 2;
-        cPtr = Grid[y + 1][x];
-        cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderNSTile)));
-        cPtr.PlayerMemorized = true;
-        x = 1;
-        y = CurHgt / 2;
-        cPtr = Grid[y][0];
-        cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderEWTile)));
-        cPtr.PlayerMemorized = true;
-    }
-
-    private GridCoordinate AddStairsDown()
-    {
-        GridTile cPtr;
-        int dummy = 0;
-        int x;
-        int y;
-        do
-        {
-            dummy++;
-            y = RandomBetween(12, 29);
-            x = RandomBetween(17, 46);
-            if (GridOpenNoItemOrCreature(y, x))
-            {
-                break;
-            }
-        } while (true);
-        cPtr = Grid[y][x];
-        cPtr.SetFeature(DownStaircaseTile);
-        cPtr.PlayerMemorized = true;
-        return new GridCoordinate(x, y);
-    }
-
-    private void SetStartingLocation(GridCoordinate downStairsLocation)
-    {
-        UseFixed = false;
-        switch (CameFrom)
-        {
-            case LevelStartEnum.StartRandom:
-                NewPlayerSpot();
-                break;
-
-            case LevelStartEnum.StartStairs:
-                MapY.IntValue = downStairsLocation.Y;
-                MapX.IntValue = downStairsLocation.X;
-                break;
-
-            case LevelStartEnum.StartWalk:
-                break;
-
-            case LevelStartEnum.StartHouse:
-                foreach (Store store in CurTown.Stores)
-                {
-                    if (store.GetType() != typeof(HomeStoreFactory))
-                    {
-                        continue;
-                    }
-                    MapY.IntValue = store.Y;
-                    MapX.IntValue = store.X;
-                }
-                break;
-
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
-
-    private void MakeTownContents()
-    {
-        UseFixed = true;
-        FixedSeed = CurTown.Seed;
-
-        BuildPath();
-        BuildStores();
-        BuildRocks();
-        BuildTrees();
-        BuildBushes();
-        MakeTownCentre();
-        AddPaths();
-        GridCoordinate downStairsLocation = AddStairsDown();
-        SetStartingLocation(downStairsLocation);
-    }
-
-    private void MakeTownWalls()
-    {
-        int x;
-        int y;
-        GridTile cPtr;
-        for (x = 0; x < CurWid; x++)
-        {
-            cPtr = Grid[0][x];
-            cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            cPtr.PlayerMemorized = true;
-            cPtr.SelfLit = true;
-            cPtr = Grid[CurHgt - 1][x];
-            cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            cPtr.PlayerMemorized = true;
-            cPtr.SelfLit = true;
-        }
-        for (y = 0; y < CurHgt; y++)
-        {
-            cPtr = Grid[y][0];
-            cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            cPtr.PlayerMemorized = true;
-            cPtr.SelfLit = true;
-            cPtr = Grid[y][CurWid - 1];
-            cPtr.SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            cPtr.PlayerMemorized = true;
-            cPtr.SelfLit = true;
-        }
-        Grid[0][(CurWid / 2) - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[0][(CurWid / 2) - 2].PlayerMemorized = true;
-        Grid[0][(CurWid / 2) - 2].SelfLit = true;
-        Grid[0][(CurWid / 2) - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[0][(CurWid / 2) - 1].PlayerMemorized = true;
-        Grid[0][(CurWid / 2) - 1].SelfLit = true;
-        Grid[0][(CurWid / 2) + 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[0][(CurWid / 2) + 1].PlayerMemorized = true;
-        Grid[0][(CurWid / 2) + 1].SelfLit = true;
-        Grid[0][(CurWid / 2) + 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[0][(CurWid / 2) + 2].PlayerMemorized = true;
-        Grid[0][(CurWid / 2) + 2].SelfLit = true;
-        Grid[1][(CurWid / 2) - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[1][(CurWid / 2) - 2].PlayerMemorized = true;
-        Grid[1][(CurWid / 2) - 2].SelfLit = true;
-        Grid[1][(CurWid / 2) - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[1][(CurWid / 2) - 1].PlayerMemorized = true;
-        Grid[1][(CurWid / 2) - 1].SelfLit = true;
-        Grid[1][(CurWid / 2) + 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[1][(CurWid / 2) + 1].PlayerMemorized = true;
-        Grid[1][(CurWid / 2) + 1].SelfLit = true;
-        Grid[1][(CurWid / 2) + 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[1][(CurWid / 2) + 2].PlayerMemorized = true;
-        Grid[1][(CurWid / 2) + 2].SelfLit = true;
-        Grid[0][(CurWid / 2) - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[0][(CurWid / 2) - 2].PlayerMemorized = true;
-        Grid[0][(CurWid / 2) - 2].SelfLit = true;
-        Grid[0][(CurWid / 2) - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[0][(CurWid / 2) - 1].PlayerMemorized = true;
-        Grid[0][(CurWid / 2) - 1].SelfLit = true;
-        Grid[0][CurWid / 2].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderNSTile)));
-        Grid[0][CurWid / 2].PlayerMemorized = true;
-        Grid[0][CurWid / 2].SelfLit = true;
-        Grid[0][(CurWid / 2) + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[0][(CurWid / 2) + 1].PlayerMemorized = true;
-        Grid[0][(CurWid / 2) + 1].SelfLit = true;
-        Grid[0][(CurWid / 2) + 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[0][(CurWid / 2) + 2].PlayerMemorized = true;
-        Grid[0][(CurWid / 2) + 2].SelfLit = true;
-        Grid[1][(CurWid / 2) - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[1][(CurWid / 2) - 2].PlayerMemorized = true;
-        Grid[1][(CurWid / 2) - 2].SelfLit = true;
-        Grid[1][(CurWid / 2) - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[1][(CurWid / 2) - 1].PlayerMemorized = true;
-        Grid[1][(CurWid / 2) - 1].SelfLit = true;
-        Grid[1][CurWid / 2].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-        Grid[1][CurWid / 2].PlayerMemorized = true;
-        Grid[1][CurWid / 2].SelfLit = true;
-        Grid[1][(CurWid / 2) + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[1][(CurWid / 2) + 1].PlayerMemorized = true;
-        Grid[1][(CurWid / 2) + 1].SelfLit = true;
-        Grid[1][(CurWid / 2) + 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[1][(CurWid / 2) + 2].PlayerMemorized = true;
-        Grid[1][(CurWid / 2) + 2].SelfLit = true;
-        Grid[CurHgt - 1][(CurWid / 2) - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[CurHgt - 1][(CurWid / 2) - 2].PlayerMemorized = true;
-        Grid[CurHgt - 1][(CurWid / 2) - 2].SelfLit = true;
-        Grid[CurHgt - 1][(CurWid / 2) - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[CurHgt - 1][(CurWid / 2) - 1].PlayerMemorized = true;
-        Grid[CurHgt - 1][(CurWid / 2) - 1].SelfLit = true;
-        Grid[CurHgt - 1][(CurWid / 2) + 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[CurHgt - 1][(CurWid / 2) + 1].PlayerMemorized = true;
-        Grid[CurHgt - 1][(CurWid / 2) + 1].SelfLit = true;
-        Grid[CurHgt - 1][(CurWid / 2) + 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[CurHgt - 1][(CurWid / 2) + 2].PlayerMemorized = true;
-        Grid[CurHgt - 1][(CurWid / 2) + 2].SelfLit = true;
-        Grid[CurHgt - 2][(CurWid / 2) - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[CurHgt - 2][(CurWid / 2) - 2].PlayerMemorized = true;
-        Grid[CurHgt - 2][(CurWid / 2) - 2].SelfLit = true;
-        Grid[CurHgt - 2][(CurWid / 2) - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[CurHgt - 2][(CurWid / 2) - 1].PlayerMemorized = true;
-        Grid[CurHgt - 2][(CurWid / 2) - 1].SelfLit = true;
-        Grid[CurHgt - 2][(CurWid / 2) + 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[CurHgt - 2][(CurWid / 2) + 1].PlayerMemorized = true;
-        Grid[CurHgt - 2][(CurWid / 2) + 1].SelfLit = true;
-        Grid[CurHgt - 2][(CurWid / 2) + 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[CurHgt - 2][(CurWid / 2) + 2].PlayerMemorized = true;
-        Grid[CurHgt - 2][(CurWid / 2) + 2].SelfLit = true;
-        Grid[CurHgt - 1][(CurWid / 2) - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[CurHgt - 1][(CurWid / 2) - 2].PlayerMemorized = true;
-        Grid[CurHgt - 1][(CurWid / 2) - 2].SelfLit = true;
-        Grid[CurHgt - 1][(CurWid / 2) - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[CurHgt - 1][(CurWid / 2) - 1].PlayerMemorized = true;
-        Grid[CurHgt - 1][(CurWid / 2) - 1].SelfLit = true;
-        Grid[CurHgt - 1][CurWid / 2].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderNSTile)));
-        Grid[CurHgt - 1][CurWid / 2].PlayerMemorized = true;
-        Grid[CurHgt - 1][CurWid / 2].SelfLit = true;
-        Grid[CurHgt - 1][(CurWid / 2) + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[CurHgt - 1][(CurWid / 2) + 1].PlayerMemorized = true;
-        Grid[CurHgt - 1][(CurWid / 2) + 1].SelfLit = true;
-        Grid[CurHgt - 1][(CurWid / 2) + 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[CurHgt - 1][(CurWid / 2) + 2].PlayerMemorized = true;
-        Grid[CurHgt - 1][(CurWid / 2) + 2].SelfLit = true;
-        Grid[CurHgt - 2][(CurWid / 2) - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[CurHgt - 2][(CurWid / 2) - 2].PlayerMemorized = true;
-        Grid[CurHgt - 2][(CurWid / 2) - 2].SelfLit = true;
-        Grid[CurHgt - 2][(CurWid / 2) - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[CurHgt - 2][(CurWid / 2) - 1].PlayerMemorized = true;
-        Grid[CurHgt - 2][(CurWid / 2) - 1].SelfLit = true;
-        Grid[CurHgt - 2][CurWid / 2].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-        Grid[CurHgt - 2][CurWid / 2].PlayerMemorized = true;
-        Grid[CurHgt - 2][CurWid / 2].SelfLit = true;
-        Grid[CurHgt - 2][(CurWid / 2) + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[CurHgt - 2][(CurWid / 2) + 1].PlayerMemorized = true;
-        Grid[CurHgt - 2][(CurWid / 2) + 1].SelfLit = true;
-        Grid[CurHgt - 2][(CurWid / 2) + 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[CurHgt - 2][(CurWid / 2) + 2].PlayerMemorized = true;
-        Grid[CurHgt - 2][(CurWid / 2) + 2].SelfLit = true;
-        Grid[(CurHgt / 2) - 2][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) - 2][0].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 2][0].SelfLit = true;
-        Grid[(CurHgt / 2) - 1][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) - 1][0].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 1][0].SelfLit = true;
-        Grid[(CurHgt / 2) + 1][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) + 1][0].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 1][0].SelfLit = true;
-        Grid[(CurHgt / 2) + 2][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) + 2][0].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 2][0].SelfLit = true;
-        Grid[(CurHgt / 2) - 2][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) - 2][1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 2][1].SelfLit = true;
-        Grid[(CurHgt / 2) - 1][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) - 1][1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 1][1].SelfLit = true;
-        Grid[(CurHgt / 2) + 1][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) + 1][1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 1][1].SelfLit = true;
-        Grid[(CurHgt / 2) + 2][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) + 2][1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 2][1].SelfLit = true;
-        Grid[(CurHgt / 2) - 2][0].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) - 2][0].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 2][0].SelfLit = true;
-        Grid[(CurHgt / 2) - 1][0].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) - 1][0].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 1][0].SelfLit = true;
-        Grid[CurHgt / 2][0].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderEWTile)));
-        Grid[CurHgt / 2][0].PlayerMemorized = true;
-        Grid[CurHgt / 2][0].SelfLit = true;
-        Grid[(CurHgt / 2) + 1][0].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) + 1][0].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 1][0].SelfLit = true;
-        Grid[(CurHgt / 2) + 2][0].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) + 2][0].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 2][0].SelfLit = true;
-        Grid[(CurHgt / 2) - 2][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) - 2][1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 2][1].SelfLit = true;
-        Grid[(CurHgt / 2) - 1][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) - 1][1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 1][1].SelfLit = true;
-        Grid[CurHgt / 2][1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-        Grid[CurHgt / 2][1].PlayerMemorized = true;
-        Grid[CurHgt / 2][1].SelfLit = true;
-        Grid[(CurHgt / 2) + 1][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) + 1][1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 1][1].SelfLit = true;
-        Grid[(CurHgt / 2) + 2][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) + 2][1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 2][1].SelfLit = true;
-        Grid[(CurHgt / 2) - 2][CurWid - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) - 2][CurWid - 1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 2][CurWid - 1].SelfLit = true;
-        Grid[(CurHgt / 2) - 1][CurWid - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) - 1][CurWid - 1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 1][CurWid - 1].SelfLit = true;
-        Grid[(CurHgt / 2) + 1][CurWid - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) + 1][CurWid - 1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 1][CurWid - 1].SelfLit = true;
-        Grid[(CurHgt / 2) + 2][CurWid - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) + 2][CurWid - 1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 2][CurWid - 1].SelfLit = true;
-        Grid[(CurHgt / 2) - 2][CurWid - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) - 2][CurWid - 2].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 2][CurWid - 2].SelfLit = true;
-        Grid[(CurHgt / 2) - 1][CurWid - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) - 1][CurWid - 2].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 1][CurWid - 2].SelfLit = true;
-        Grid[(CurHgt / 2) + 1][CurWid - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) + 1][CurWid - 2].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 1][CurWid - 2].SelfLit = true;
-        Grid[(CurHgt / 2) + 2][CurWid - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-        Grid[(CurHgt / 2) + 2][CurWid - 2].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 2][CurWid - 2].SelfLit = true;
-        Grid[(CurHgt / 2) - 2][CurWid - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) - 2][CurWid - 1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 2][CurWid - 1].SelfLit = true;
-        Grid[(CurHgt / 2) - 1][CurWid - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) - 1][CurWid - 1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 1][CurWid - 1].SelfLit = true;
-        Grid[CurHgt / 2][CurWid - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderEWTile)));
-        Grid[CurHgt / 2][CurWid - 1].PlayerMemorized = true;
-        Grid[CurHgt / 2][CurWid - 1].SelfLit = true;
-        Grid[(CurHgt / 2) + 1][CurWid - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) + 1][CurWid - 1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 1][CurWid - 1].SelfLit = true;
-        Grid[(CurHgt / 2) + 2][CurWid - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) + 2][CurWid - 1].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 2][CurWid - 1].SelfLit = true;
-        Grid[(CurHgt / 2) - 2][CurWid - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) - 2][CurWid - 2].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 2][CurWid - 2].SelfLit = true;
-        Grid[(CurHgt / 2) - 1][CurWid - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) - 1][CurWid - 2].PlayerMemorized = true;
-        Grid[(CurHgt / 2) - 1][CurWid - 2].SelfLit = true;
-        Grid[CurHgt / 2][CurWid - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-        Grid[CurHgt / 2][CurWid - 2].PlayerMemorized = true;
-        Grid[CurHgt / 2][CurWid - 2].SelfLit = true;
-        Grid[(CurHgt / 2) + 1][CurWid - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) + 1][CurWid - 2].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 1][CurWid - 2].SelfLit = true;
-        Grid[(CurHgt / 2) + 2][CurWid - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-        Grid[(CurHgt / 2) + 2][CurWid - 2].PlayerMemorized = true;
-        Grid[(CurHgt / 2) + 2][CurWid - 2].SelfLit = true;
-    }
-
-    private void MakeWildernessFeatures(int wildx, int wildy, out int stairX, out int stairY)
-    {
-        stairX = CurWid / 2;
-        stairY = CurHgt / 2;
-        if (wildx == 1 || wildx == 10 || wildy == 1 || wildy == 10)
-        {
-            return;
-        }
-        int dungeonX = 0;
-        int dungeonY = 0;
-        switch (DieRoll(4))
-        {
-            case 1:
-                dungeonX = 0;
-                dungeonY = 0;
-                break;
-
-            case 2:
-                dungeonX = CurWid / 2;
-                dungeonY = 0;
-                break;
-
-            case 3:
-                dungeonX = 0;
-                dungeonY = CurHgt / 2;
-                break;
-
-            case 4:
-                dungeonX = CurWid / 2;
-                dungeonY = CurHgt / 2;
-                break;
-        }
-        for (int offsetX = 0; offsetX < CurWid - 1; offsetX += CurWid / 2)
-        {
-            for (int offsetY = 0; offsetY < CurHgt - 1; offsetY += CurHgt / 2)
-            {
-                if (offsetX == dungeonX && offsetY == dungeonY)
-                {
-                    if (Wilderness[wildy][wildx].Dungeon != null)
-                    {
-                        if (Wilderness[wildy][wildx].Dungeon.Tower)
-                        {
-                            MakeTower(offsetX + 4, offsetY + 4, (CurWid / 2) - 8, (CurHgt / 2) - 8, out int x, out int y);
-                            stairX = x;
-                            stairY = y;
-                        }
-                        else
-                        {
-                            MakeDungeonEntrance(offsetX + 4, offsetY + 4, (CurWid / 2) - 8, (CurHgt / 2) - 8, out int x, out int y);
-                            stairX = x;
-                            stairY = y;
-                        }
-                    }
-                }
-                else
-                {
-                    switch (DieRoll(30))
-                    {
-                        case 7:
-                        case 22:
-                            MakeLake(offsetX + 4, offsetY + 4, (CurWid / 2) - 8, (CurHgt / 2) - 8);
-                            break;
-
-                        case 15:
-                            MakeHenge(offsetX + 4, offsetY + 4, (CurWid / 2) - 8, (CurHgt / 2) - 8);
-                            break;
-                    }
-                }
-            }
-        }
-    }
-
-    private void MakeWildernessPaths(int wildx, int wildy)
-    {
-        int x;
-        int y;
-
-        int midX = CurWid / 2;
-        int midY = CurHgt / 2;
-        if (Wilderness[wildy][wildx].RoadMap == 0)
-        {
-            return;
-        }
-        Grid[midY - 1][midX - 1].SetFeature(GrassTile);
-        Grid[midY - 1][midX].SetFeature(GrassTile);
-        Grid[midY - 1][midX + 1].SetFeature(GrassTile);
-        Grid[midY][midX - 1].SetFeature(GrassTile);
-        Grid[midY][midX].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-        Grid[midY][midX + 1].SetFeature(GrassTile);
-        Grid[midY + 1][midX - 1].SetFeature(GrassTile);
-        Grid[midY + 1][midX].SetFeature(GrassTile);
-        Grid[midY + 1][midX + 1].SetFeature(GrassTile);
-        if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadUp) != 0)
-        {
-            x = 0;
-            Grid[0][midX].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderNSTile)));
-            Grid[1][midX].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            Grid[midY - 1][midX].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            for (y = 2; y < midY - 1; y++)
-            {
-                x += RandomBetween(-2, 2) / 2;
-                if (x > midY - 1 - y)
-                {
-                    x = midY - 1 - y;
-                }
-                if (x < -(midY - 1 - y))
-                {
-                    x = -(midY - 1 - y);
-                }
-                if (!Grid[y][midX - 1 + x].FeatureType.IsWildPath)
-                {
-                    Grid[y][midX - 1 + x].SetFeature(GrassTile);
-                }
-                Grid[y][midX + x].SetFeature(SingletonRepository.Get<Tile>(nameof(WildPathNSTile)));
-                if (!Grid[y][midX + 1 + x].FeatureType.IsWildPath)
-                {
-                    Grid[y][midX + 1 + x].SetFeature(GrassTile);
-                }
-            }
-        }
-        if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadDown) != 0)
-        {
-            x = 0;
-            Grid[CurHgt - 1][midX].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderNSTile)));
-            Grid[CurHgt - 2][midX].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            Grid[midY + 1][midX].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            for (y = CurHgt - 3; y > midY + 1; y--)
-            {
-                x += RandomBetween(-2, 2) / 2;
-                if (x > y - (midY + 1))
-                {
-                    x = y - (midY + 1);
-                }
-                if (x < -(y - (midY + 1)))
-                {
-                    x = -(y - (midY + 1));
-                }
-                if (!Grid[y][midX - 1 + x].FeatureType.IsWildPath)
-                {
-                    Grid[y][midX - 1 + x].SetFeature(GrassTile);
-                }
-                Grid[y][midX + x].SetFeature(SingletonRepository.Get<Tile>(nameof(WildPathNSTile)));
-                if (!Grid[y][midX + 1 + x].FeatureType.IsWildPath)
-                {
-                    Grid[y][midX + 1 + x].SetFeature(GrassTile);
-                }
-            }
-        }
-        if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadLeft) != 0)
-        {
-            y = 0;
-            Grid[midY][0].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderEWTile)));
-            Grid[midY][1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            Grid[midY][midX - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            for (x = 2; x < midX - 1; x++)
-            {
-                y += RandomBetween(-2, 2) / 2;
-                if (y > midX - 1 - x)
-                {
-                    y = midX - 1 - x;
-                }
-                if (y < -(midX - 1 - x))
-                {
-                    y = -(midX - 1 - x);
-                }
-                if (!Grid[midY - 1 + y][x].FeatureType.IsWildPath)
-                {
-                    Grid[midY - 1 + y][x].SetFeature(GrassTile);
-                }
-                Grid[midY + y][x].SetFeature(SingletonRepository.Get<Tile>(nameof(WildPathEWTile)));
-                if (!Grid[midY + 1 + y][x].FeatureType.IsWildPath)
-                {
-                    Grid[midY + 1 + y][x].SetFeature(GrassTile);
-                }
-            }
-        }
-        if ((Wilderness[wildy][wildx].RoadMap & Constants.RoadRight) != 0)
-        {
-            y = 0;
-            Grid[midY][CurWid - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderEWTile)));
-            Grid[midY][CurWid - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            Grid[midY][midX + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            for (x = CurWid - 3; x > midX + 1; x--)
-            {
-                y += RandomBetween(-2, 2) / 2;
-                if (y > x - (midX + 1))
-                {
-                    y = x - (midX + 1);
-                }
-                if (y < -(x - (midX + 1)))
-                {
-                    y = -(x - (midX + 1));
-                }
-                if (!Grid[midY - 1 + y][x].FeatureType.IsWildPath)
-                {
-                    Grid[midY - 1 + y][x].SetFeature(GrassTile);
-                }
-                Grid[midY + y][x].SetFeature(SingletonRepository.Get<Tile>(nameof(WildPathEWTile)));
-                if (!Grid[midY + 1 + y][x].FeatureType.IsWildPath)
-                {
-                    Grid[midY + 1 + y][x].SetFeature(GrassTile);
-                }
-            }
-        }
-    }
-
-    private void MakeWildernessWalls(int wildX, int wildY)
-    {
-        int height = CurHgt;
-        int width = CurWid;
-        if (Wilderness[wildY - 1][wildX].Town != null)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                Grid[0][x].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-                Grid[0][x].PlayerMemorized = true;
-                Grid[0][x].SelfLit = true;
-            }
-            Grid[0][(width / 2) - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[0][(width / 2) - 2].PlayerMemorized = true;
-            Grid[0][(width / 2) - 2].SelfLit = true;
-            Grid[0][(width / 2) - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[0][(width / 2) - 1].PlayerMemorized = true;
-            Grid[0][(width / 2) - 1].SelfLit = true;
-            Grid[0][(width / 2) + 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[0][(width / 2) + 1].PlayerMemorized = true;
-            Grid[0][(width / 2) + 1].SelfLit = true;
-            Grid[0][(width / 2) + 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[0][(width / 2) + 2].PlayerMemorized = true;
-            Grid[0][(width / 2) + 2].SelfLit = true;
-            Grid[1][(width / 2) - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[1][(width / 2) - 2].PlayerMemorized = true;
-            Grid[1][(width / 2) - 2].SelfLit = true;
-            Grid[1][(width / 2) - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[1][(width / 2) - 1].PlayerMemorized = true;
-            Grid[1][(width / 2) - 1].SelfLit = true;
-            Grid[1][(width / 2) + 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[1][(width / 2) + 1].PlayerMemorized = true;
-            Grid[1][(width / 2) + 1].SelfLit = true;
-            Grid[1][(width / 2) + 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[1][(width / 2) + 2].PlayerMemorized = true;
-            Grid[1][(width / 2) + 2].SelfLit = true;
-            Grid[0][(width / 2) - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[0][(width / 2) - 2].PlayerMemorized = true;
-            Grid[0][(width / 2) - 2].SelfLit = true;
-            Grid[0][(width / 2) - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[0][(width / 2) - 1].PlayerMemorized = true;
-            Grid[0][(width / 2) - 1].SelfLit = true;
-            Grid[0][width / 2].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderNSTile)));
-            Grid[0][width / 2].PlayerMemorized = true;
-            Grid[0][width / 2].SelfLit = true;
-            Grid[0][(width / 2) + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[0][(width / 2) + 1].PlayerMemorized = true;
-            Grid[0][(width / 2) + 1].SelfLit = true;
-            Grid[0][(width / 2) + 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[0][(width / 2) + 2].PlayerMemorized = true;
-            Grid[0][(width / 2) + 2].SelfLit = true;
-            Grid[1][(width / 2) - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[1][(width / 2) - 2].PlayerMemorized = true;
-            Grid[1][(width / 2) - 2].SelfLit = true;
-            Grid[1][(width / 2) - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[1][(width / 2) - 1].PlayerMemorized = true;
-            Grid[1][(width / 2) - 1].SelfLit = true;
-            Grid[1][width / 2].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            Grid[1][width / 2].PlayerMemorized = true;
-            Grid[1][width / 2].SelfLit = true;
-            Grid[1][(width / 2) + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[1][(width / 2) + 1].PlayerMemorized = true;
-            Grid[1][(width / 2) + 1].SelfLit = true;
-            Grid[1][(width / 2) + 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[1][(width / 2) + 2].PlayerMemorized = true;
-            Grid[1][(width / 2) + 2].SelfLit = true;
-        }
-        if (Wilderness[wildY + 1][wildX].Town != null)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                Grid[height - 1][x].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-                Grid[height - 1][x].PlayerMemorized = true;
-                Grid[height - 1][x].SelfLit = true;
-            }
-            Grid[height - 1][(width / 2) - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 1][(width / 2) - 2].PlayerMemorized = true;
-            Grid[height - 1][(width / 2) - 2].SelfLit = true;
-            Grid[height - 1][(width / 2) - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 1][(width / 2) - 1].PlayerMemorized = true;
-            Grid[height - 1][(width / 2) - 1].SelfLit = true;
-            Grid[height - 1][(width / 2) + 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 1][(width / 2) + 1].PlayerMemorized = true;
-            Grid[height - 1][(width / 2) + 1].SelfLit = true;
-            Grid[height - 1][(width / 2) + 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 1][(width / 2) + 2].PlayerMemorized = true;
-            Grid[height - 1][(width / 2) + 2].SelfLit = true;
-            Grid[height - 2][(width / 2) - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 2][(width / 2) - 2].PlayerMemorized = true;
-            Grid[height - 2][(width / 2) - 2].SelfLit = true;
-            Grid[height - 2][(width / 2) - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 2][(width / 2) - 1].PlayerMemorized = true;
-            Grid[height - 2][(width / 2) - 1].SelfLit = true;
-            Grid[height - 2][(width / 2) + 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 2][(width / 2) + 1].PlayerMemorized = true;
-            Grid[height - 2][(width / 2) + 1].SelfLit = true;
-            Grid[height - 2][(width / 2) + 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[height - 2][(width / 2) + 2].PlayerMemorized = true;
-            Grid[height - 2][(width / 2) + 2].SelfLit = true;
-            Grid[height - 1][(width / 2) - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 1][(width / 2) - 2].PlayerMemorized = true;
-            Grid[height - 1][(width / 2) - 2].SelfLit = true;
-            Grid[height - 1][(width / 2) - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 1][(width / 2) - 1].PlayerMemorized = true;
-            Grid[height - 1][(width / 2) - 1].SelfLit = true;
-            Grid[height - 1][width / 2].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderNSTile)));
-            Grid[height - 1][width / 2].PlayerMemorized = true;
-            Grid[height - 1][width / 2].SelfLit = true;
-            Grid[height - 1][(width / 2) + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 1][(width / 2) + 1].PlayerMemorized = true;
-            Grid[height - 1][(width / 2) + 1].SelfLit = true;
-            Grid[height - 1][(width / 2) + 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 1][(width / 2) + 2].PlayerMemorized = true;
-            Grid[height - 1][(width / 2) + 2].SelfLit = true;
-            Grid[height - 2][(width / 2) - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 2][(width / 2) - 2].PlayerMemorized = true;
-            Grid[height - 2][(width / 2) - 2].SelfLit = true;
-            Grid[height - 2][(width / 2) - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 2][(width / 2) - 1].PlayerMemorized = true;
-            Grid[height - 2][(width / 2) - 1].SelfLit = true;
-            Grid[height - 2][width / 2].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            Grid[height - 2][width / 2].PlayerMemorized = true;
-            Grid[height - 2][width / 2].SelfLit = true;
-            Grid[height - 2][(width / 2) + 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 2][(width / 2) + 1].PlayerMemorized = true;
-            Grid[height - 2][(width / 2) + 1].SelfLit = true;
-            Grid[height - 2][(width / 2) + 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[height - 2][(width / 2) + 2].PlayerMemorized = true;
-            Grid[height - 2][(width / 2) + 2].SelfLit = true;
-        }
-        if (Wilderness[wildY][wildX - 1].Town != null)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                Grid[y][0].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-                Grid[y][0].PlayerMemorized = true;
-                Grid[y][0].SelfLit = true;
-            }
-            Grid[(height / 2) - 2][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) - 2][0].PlayerMemorized = true;
-            Grid[(height / 2) - 2][0].SelfLit = true;
-            Grid[(height / 2) - 1][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) - 1][0].PlayerMemorized = true;
-            Grid[(height / 2) - 1][0].SelfLit = true;
-            Grid[(height / 2) + 1][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) + 1][0].PlayerMemorized = true;
-            Grid[(height / 2) + 1][0].SelfLit = true;
-            Grid[(height / 2) + 2][0].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) + 2][0].PlayerMemorized = true;
-            Grid[(height / 2) + 2][0].SelfLit = true;
-            Grid[(height / 2) - 2][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) - 2][1].PlayerMemorized = true;
-            Grid[(height / 2) - 2][1].SelfLit = true;
-            Grid[(height / 2) - 1][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) - 1][1].PlayerMemorized = true;
-            Grid[(height / 2) - 1][1].SelfLit = true;
-            Grid[(height / 2) + 1][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) + 1][1].PlayerMemorized = true;
-            Grid[(height / 2) + 1][1].SelfLit = true;
-            Grid[(height / 2) + 2][1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) + 2][1].PlayerMemorized = true;
-            Grid[(height / 2) + 2][1].SelfLit = true;
-            Grid[(height / 2) - 2][0].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) - 2][0].PlayerMemorized = true;
-            Grid[(height / 2) - 2][0].SelfLit = true;
-            Grid[(height / 2) - 1][0].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) - 1][0].PlayerMemorized = true;
-            Grid[(height / 2) - 1][0].SelfLit = true;
-            Grid[height / 2][0].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderEWTile)));
-            Grid[height / 2][0].PlayerMemorized = true;
-            Grid[height / 2][0].SelfLit = true;
-            Grid[(height / 2) + 1][0].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) + 1][0].PlayerMemorized = true;
-            Grid[(height / 2) + 1][0].SelfLit = true;
-            Grid[(height / 2) + 2][0].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) + 2][0].PlayerMemorized = true;
-            Grid[(height / 2) + 2][0].SelfLit = true;
-            Grid[(height / 2) - 2][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) - 2][1].PlayerMemorized = true;
-            Grid[(height / 2) - 2][1].SelfLit = true;
-            Grid[(height / 2) - 1][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) - 1][1].PlayerMemorized = true;
-            Grid[(height / 2) - 1][1].SelfLit = true;
-            Grid[height / 2][1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            Grid[height / 2][1].PlayerMemorized = true;
-            Grid[height / 2][1].SelfLit = true;
-            Grid[(height / 2) + 1][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) + 1][1].PlayerMemorized = true;
-            Grid[(height / 2) + 1][1].SelfLit = true;
-            Grid[(height / 2) + 2][1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) + 2][1].PlayerMemorized = true;
-            Grid[(height / 2) + 2][1].SelfLit = true;
-        }
-        if (Wilderness[wildY][wildX + 1].Town != null)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                Grid[y][width - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-                Grid[y][width - 1].PlayerMemorized = true;
-                Grid[y][width - 1].SelfLit = true;
-            }
-            Grid[(height / 2) - 2][width - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) - 2][width - 1].PlayerMemorized = true;
-            Grid[(height / 2) - 2][width - 1].SelfLit = true;
-            Grid[(height / 2) - 1][width - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) - 1][width - 1].PlayerMemorized = true;
-            Grid[(height / 2) - 1][width - 1].SelfLit = true;
-            Grid[(height / 2) + 1][width - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) + 1][width - 1].PlayerMemorized = true;
-            Grid[(height / 2) + 1][width - 1].SelfLit = true;
-            Grid[(height / 2) + 2][width - 1].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) + 2][width - 1].PlayerMemorized = true;
-            Grid[(height / 2) + 2][width - 1].SelfLit = true;
-            Grid[(height / 2) - 2][width - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) - 2][width - 2].PlayerMemorized = true;
-            Grid[(height / 2) - 2][width - 2].SelfLit = true;
-            Grid[(height / 2) - 1][width - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) - 1][width - 2].PlayerMemorized = true;
-            Grid[(height / 2) - 1][width - 2].SelfLit = true;
-            Grid[(height / 2) + 1][width - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) + 1][width - 2].PlayerMemorized = true;
-            Grid[(height / 2) + 1][width - 2].SelfLit = true;
-            Grid[(height / 2) + 2][width - 2].SetBackgroundFeature(SingletonRepository.Get<Tile>(nameof(InsideGatehouseTile)));
-            Grid[(height / 2) + 2][width - 2].PlayerMemorized = true;
-            Grid[(height / 2) + 2][width - 2].SelfLit = true;
-            Grid[(height / 2) - 2][width - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) - 2][width - 1].PlayerMemorized = true;
-            Grid[(height / 2) - 2][width - 1].SelfLit = true;
-            Grid[(height / 2) - 1][width - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) - 1][width - 1].PlayerMemorized = true;
-            Grid[(height / 2) - 1][width - 1].SelfLit = true;
-            Grid[height / 2][width - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBorderEWTile)));
-            Grid[height / 2][width - 1].PlayerMemorized = true;
-            Grid[height / 2][width - 1].SelfLit = true;
-            Grid[(height / 2) + 1][width - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) + 1][width - 1].PlayerMemorized = true;
-            Grid[(height / 2) + 1][width - 1].SelfLit = true;
-            Grid[(height / 2) + 2][width - 1].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) + 2][width - 1].PlayerMemorized = true;
-            Grid[(height / 2) + 2][width - 1].SelfLit = true;
-            Grid[(height / 2) - 2][width - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) - 2][width - 2].PlayerMemorized = true;
-            Grid[(height / 2) - 2][width - 2].SelfLit = true;
-            Grid[(height / 2) - 1][width - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) - 1][width - 2].PlayerMemorized = true;
-            Grid[(height / 2) - 1][width - 2].SelfLit = true;
-            Grid[height / 2][width - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-            Grid[height / 2][width - 2].PlayerMemorized = true;
-            Grid[height / 2][width - 2].SelfLit = true;
-            Grid[(height / 2) + 1][width - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) + 1][width - 2].PlayerMemorized = true;
-            Grid[(height / 2) + 1][width - 2].SelfLit = true;
-            Grid[(height / 2) + 2][width - 2].SetFeature(SingletonRepository.Get<Tile>(nameof(TownWallTile)));
-            Grid[(height / 2) + 2][width - 2].PlayerMemorized = true;
-            Grid[(height / 2) + 2][width - 2].SelfLit = true;
-        }
-    }
-
-    public bool NewPlayerSpot()
-    {
-        int y = 0;
-        int x = 0;
-        int maxAttempts = 5000;
-        while (maxAttempts-- != 0)
-        {
-            y = RandomBetween(1, CurHgt - 2);
-            x = RandomBetween(1, CurWid - 2);
-            if (!GridOpenNoItemOrCreature(y, x))
-            {
-                continue;
-            }
-            if (Grid[y][x].InVault)
-            {
-                continue;
-            }
-            break;
-        }
-        if (maxAttempts < 1)
-        {
-            return false;
-        }
-        MapY.IntValue = y;
-        MapX.IntValue = x;
-        return true;
-    }
 
     public void PlaceRandomDoor(int y, int x)
     {
@@ -12055,7 +10348,7 @@ internal partial class Game : IGameSerialize
         cPtr.SetFeature(door);
     }
 
-    private void ResolvePaths()
+    public void ResolvePaths()
     {
         for (int x = 1; x < CurWid - 1; x++)
         {
@@ -12102,156 +10395,6 @@ internal partial class Game : IGameSerialize
                 }
             }
         }
-    }
-
-    private void TownGen()
-    {
-        for (int y = 0; y < CurHgt; y++)
-        {
-            for (int x = 0; x < CurWid; x++)
-            {
-                GridTile cPtr = Grid[y][x];
-                cPtr.RevertToBackground();
-            }
-        }
-        MakeTownWalls();
-        MakeCornerTowers(WildernessX, WildernessY);
-        MakeTownContents();
-        ResolvePaths();
-        if (IsLight)
-        {
-            for (int y = 0; y < CurHgt; y++)
-            {
-                for (int x = 0; x < CurWid; x++)
-                {
-                    GridTile cPtr = Grid[y][x];
-                    cPtr.SelfLit = true;
-                    cPtr.PlayerMemorized = true;
-                }
-            }
-            for (int i = 0; i < Constants.MinMAllocTd; i++)
-            {
-                AllocMonster(3, true);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < Constants.MinMAllocTn; i++)
-            {
-                AllocMonster(3, true);
-            }
-        }
-    }
-
-    private void WildernessGen()
-    {
-        UseFixed = true;
-        FixedSeed = this.Wilderness[this.WildernessY][this.WildernessX].Seed;
-        int x;
-        int y;
-        for (y = 0; y < CurHgt; y++)
-        {
-            for (x = 0; x < CurWid; x++)
-            {
-                byte elevation = Elevation(WildernessY, WildernessX, y, x);
-                Tile floorTile = WaterTile;
-                Tile featureTile = WaterTile;
-                if (elevation > 0)
-                {
-                    floorTile = GrassTile;
-                    if (DieRoll(10) < elevation)
-                    {
-                        if (DieRoll(10) < elevation)
-                        {
-                            featureTile = SingletonRepository.Get<Tile>(nameof(TreeTile));
-                        }
-                        else
-                        {
-                            featureTile = SingletonRepository.Get<Tile>(nameof(BushTile));
-                        }
-                    }
-                    else
-                    {
-                        featureTile = GrassTile;
-                    }
-                }
-                Grid[y][x].SetFeature(featureTile);
-                Grid[y][x].SetBackgroundFeature(floorTile);
-            }
-        }
-        for (x = 0; x < CurWid; x++)
-        {
-            GridTile cPtr = Grid[0][x];
-            cPtr.SetFeature(cPtr.BackgroundFeature.HasWater ? SingletonRepository.Get<Tile>(nameof(WaterBorderTile)) : SingletonRepository.Get<Tile>(nameof(WildBorderTile)));
-            cPtr = Grid[CurHgt - 1][x];
-            cPtr.SetFeature(cPtr.BackgroundFeature.HasWater ? SingletonRepository.Get<Tile>(nameof(WaterBorderTile)) : SingletonRepository.Get<Tile>(nameof(WildBorderTile)));
-        }
-        for (y = 0; y < CurHgt; y++)
-        {
-            GridTile cPtr = Grid[y][0];
-            cPtr.SetFeature(cPtr.BackgroundFeature.HasWater ? SingletonRepository.Get<Tile>(nameof(WaterBorderTile)) : SingletonRepository.Get<Tile>(nameof(WildBorderTile)));
-            cPtr = Grid[y][CurWid - 1];
-            cPtr.SetFeature(cPtr.BackgroundFeature.HasWater ? SingletonRepository.Get<Tile>(nameof(WaterBorderTile)) : SingletonRepository.Get<Tile>(nameof(WildBorderTile)));
-        }
-        MakeWildernessWalls(this.WildernessX, this.WildernessY);
-        MakeCornerTowers(this.WildernessX, this.WildernessY);
-        MakeWildernessPaths(this.WildernessX, this.WildernessY);
-        MakeWildernessFeatures(this.WildernessX, this.WildernessY, out int stairX, out int stairY);
-        int rocks = RandomBetween(1, 10);
-        for (int i = 0; i < rocks; i++)
-        {
-            x = DieRoll(CurWid - 2);
-            y = DieRoll(CurHgt - 2);
-            if (!Grid[y][x].FeatureType.IsGrass)
-            {
-                continue;
-            }
-            Grid[y][x].SetFeature(RockTile);
-        }
-        UseFixed = false;
-        if (CameFrom == LevelStartEnum.StartRandom)
-        {
-            NewPlayerSpot();
-        }
-        else if (CameFrom == LevelStartEnum.StartStairs)
-        {
-            this.MapY.IntValue = stairY;
-            this.MapX.IntValue = stairX;
-        }
-        else if (CameFrom == LevelStartEnum.StartWalk)
-        {
-            if (Grid[this.MapY.IntValue][this.MapX.IntValue].FeatureType.IsTree || Grid[this.MapY.IntValue][this.MapX.IntValue].FeatureType.IsWater)
-            {
-                Grid[this.MapY.IntValue][this.MapX.IntValue].RevertToBackground();
-            }
-        }
-        ResolvePaths();
-        for (y = 1; y < CurHgt - 1; y++)
-        {
-            for (x = 1; x < CurWid - 1; x++)
-            {
-                if (Grid[y][x].FeatureType.IsOpenFloor)
-                {
-                    Grid[y][x].InRoom = true;
-                }
-            }
-        }
-        if (IsLight)
-        {
-            for (y = 0; y < CurHgt; y++)
-            {
-                for (x = 0; x < CurWid; x++)
-                {
-                    Grid[y][x].SelfLit = true;
-                    Grid[y][x].PlayerMemorized = true;
-                }
-            }
-        }
-        for (x = 0; x < Constants.MinMAllocLevel; x++)
-        {
-            AllocMonster(3, true);
-        }
-        ///LEVEL FACTORY
     }
 
     public bool GetDirectionNoAim(out int dp)
@@ -16020,63 +14163,6 @@ internal partial class Game : IGameSerialize
         return list;
     }
 
-    public void LoreDoProbe(int mIdx)
-    {
-        Monster mPtr = Monsters[mIdx];
-        MonsterRace rPtr = mPtr.Race;
-        var knowledge = rPtr.Knowledge;
-        for (var m = 0; m < rPtr.Attacks.Length; m++)
-        {
-            if (rPtr.Attacks[m].Effect != null || rPtr.Attacks[m].Method != null)
-            {
-                knowledge.RBlows[m] = Constants.MaxUchar;
-            }
-        }
-        knowledge.RProbed = true;
-        knowledge.RWake = Constants.MaxUchar;
-        knowledge.RIgnore = Constants.MaxUchar;
-        knowledge.RDropItem = (rPtr.Drop_4D2 ? 8 : 0) +
-                              (rPtr.Drop_3D2 ? 6 : 0) +
-                              (rPtr.Drop_2D2 ? 4 : 0) +
-                              (rPtr.Drop_1D2 ? 2 : 0) +
-                              (rPtr.Drop90 ? 1 : 0) +
-                              (rPtr.Drop60 ? 1 : 0);
-        knowledge.RDropGold = knowledge.RDropItem;
-        if (rPtr.OnlyDropGold)
-        {
-            knowledge.RDropItem = 0;
-        }
-        if (rPtr.OnlyDropItem)
-        {
-            knowledge.RDropGold = 0;
-        }
-        knowledge.RCastInate = Constants.MaxUchar;
-        knowledge.RCastSpell = Constants.MaxUchar;
-        knowledge.Characteristics = new MonsterCharacteristics(rPtr);
-        knowledge.RSpells = rPtr.Spells;
-    }
-
-    public void LoreTreasure(Monster mPtr, int numItem, int numGold)
-    {
-        MonsterRace rPtr = mPtr.Race;
-        if (numItem > rPtr.Knowledge.RDropItem)
-        {
-            rPtr.Knowledge.RDropItem = numItem;
-        }
-        if (numGold > rPtr.Knowledge.RDropGold)
-        {
-            rPtr.Knowledge.RDropGold = numGold;
-        }
-        if (rPtr.DropGood)
-        {
-            rPtr.Knowledge.Characteristics.DropGood = true;
-        }
-        if (rPtr.DropGreat)
-        {
-            rPtr.Knowledge.Characteristics.DropGreat = true;
-        }
-    }
-
     public void MessagePain(Monster mPtr, int dam)
     {
         MonsterRace rPtr = mPtr.Race;
@@ -16253,8 +14339,210 @@ internal partial class Game : IGameSerialize
         return false;
     }
 
+
     public bool PlaceMonsterAux(int y, int x, MonsterRace rPtr, bool slp, bool grp, bool pet)
     {
+        void PlaceMonsterGroup(int y, int x, int rIdx, bool slp, bool charm)
+        {
+            MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
+            int extra = 0;
+            int[] hackY = new int[Constants.GroupMax];
+            int[] hackX = new int[Constants.GroupMax];
+            int total = DieRoll(13);
+            if (rPtr.Level > Difficulty)
+            {
+                extra = rPtr.Level - Difficulty;
+                extra = 0 - DieRoll(extra);
+            }
+            else if (rPtr.Level < Difficulty)
+            {
+                extra = Difficulty - rPtr.Level;
+                extra = DieRoll(extra);
+            }
+            if (extra > 12)
+            {
+                extra = 12;
+            }
+            total += extra;
+            if (total < 1)
+            {
+                total = 1;
+            }
+            if (total > Constants.GroupMax)
+            {
+                total = Constants.GroupMax;
+            }
+            int old = DangerRating;
+            int hackN = 1;
+            hackX[0] = x;
+            hackY[0] = y;
+            for (int n = 0; n < hackN && hackN < total; n++)
+            {
+                int hx = hackX[n];
+                int hy = hackY[n];
+                for (int i = 0; i < 8 && hackN < total; i++)
+                {
+                    int mx = hx + OrderedDirectionXOffset[i];
+                    int my = hy + OrderedDirectionYOffset[i];
+                    if (!GridPassableNoCreature(my, mx))
+                    {
+                        continue;
+                    }
+                    if (PlaceMonsterOne(my, mx, rPtr, slp, charm))
+                    {
+                        hackY[hackN] = my;
+                        hackX[hackN] = mx;
+                        hackN++;
+                    }
+                }
+            }
+            DangerRating = old;
+        }
+
+        /// <summary>
+        /// Places a monster and all kinds of validation and checks are done.
+        /// </summary>
+        /// <param name="y"></param>
+        /// <param name="x"></param>
+        /// <param name="rPtr"></param>
+        /// <param name="slp"></param>
+        /// <param name="pet"></param>
+        /// <returns></returns>
+        bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool pet)
+        {
+            // Monster must be provided.
+            if (rPtr == null)
+            {
+                return false;
+            }
+
+            // Monster cannot be the player.
+            if (rPtr.FriendlyName.StartsWith("Player"))
+            {
+                return false;
+            }
+
+            // Ensure the placement is within the bounds of the level.
+            if (!InBounds(y, x))
+            {
+                return false;
+            }
+
+            // Ensure the grid level is open.
+            if (!GridPassableNoCreature(y, x))
+            {
+                return false;
+            }
+
+            // Do not place monster on a sigil.
+            if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
+            {
+                return false;
+            }
+
+            // Ensure the monster name is not empty or null.
+            string name = rPtr.FriendlyName;
+            if (string.IsNullOrEmpty(rPtr.FriendlyName))
+            {
+                return false;
+            }
+
+            // Do not place more than one if the monster is unique and already allocated.
+            if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
+            {
+                return false;
+            }
+
+            // Check to see if this is a quest guardian.
+            if (rPtr.OnlyGuardian || rPtr.Guardian)
+            {
+                int qIdx = GetQuestNumber();
+                if (qIdx < 0)
+                {
+                    return false;
+                }
+                if (rPtr.Index != Quests[qIdx].RIdx)
+                {
+                    return false;
+                }
+                if (rPtr.CurNum >= Quests[qIdx].ToKill - Quests[qIdx].Killed)
+                {
+                    return false;
+                }
+            }
+            if (rPtr.Level > Difficulty)
+            {
+                if (rPtr.Unique)
+                {
+                    DangerRating += (rPtr.Level - Difficulty) * 2;
+                }
+                else
+                {
+                    DangerRating += rPtr.Level - Difficulty;
+                }
+            }
+            GridTile cPtr = Grid[y][x];
+            cPtr.MonsterIndex = MPop();
+            _hackMIdxIi = cPtr.MonsterIndex;
+            if (cPtr.MonsterIndex == 0)
+            {
+                return false;
+            }
+            Monster mPtr = Monsters[cPtr.MonsterIndex];
+            mPtr.Race = rPtr;
+            mPtr.MapY = y;
+            mPtr.MapX = x;
+            mPtr.Generation = 1;
+            mPtr.StunLevel = 0;
+            mPtr.ConfusionLevel = 0;
+            mPtr.FearLevel = 0;
+            if (pet)
+            {
+                mPtr.IsPet = true;
+            }
+            mPtr.SleepLevel = 0;
+            if (slp && rPtr.Sleep != 0)
+            {
+                int val = rPtr.Sleep;
+                mPtr.SleepLevel = (val * 2) + DieRoll(val * 10);
+            }
+            mPtr.DistanceFromPlayer = 0;
+            mPtr.IndividualMonsterFlags = 0;
+            mPtr.IsVisible = false;
+            mPtr.MaxHealth = rPtr.ForceMaxHp ? rPtr.Hdice * rPtr.Hside : DiceRoll(rPtr.Hdice, rPtr.Hside);
+            mPtr.Health = mPtr.MaxHealth;
+            mPtr.Speed = rPtr.Speed;
+            if (!rPtr.Unique)
+            {
+                int i = ExtractEnergy[rPtr.Speed] / 10;
+                if (i != 0)
+                {
+                    mPtr.Speed += RandomSpread(0, i);
+                }
+            }
+            mPtr.Energy = RandomLessThan(100);
+            if (rPtr.ForceSleep)
+            {
+                mPtr.IndividualMonsterFlags |= Constants.MflagNice;
+                RepairMonsters = true;
+            }
+            if (cPtr.MonsterIndex < CurrentlyActingMonster)
+            {
+                mPtr.IndividualMonsterFlags |= Constants.MflagBorn;
+            }
+            UpdateMonsterVisibility(cPtr.MonsterIndex, true);
+            rPtr.CurNum++;
+            if (rPtr.Multiply)
+            {
+                NumRepro++;
+            }
+            if (rPtr.AttrMulti)
+            {
+                ShimmerMonsters = true;
+            }
+            return true;
+        }
+
         if (!PlaceMonsterOne(y, x, rPtr, slp, pet))
         {
             return false;
@@ -16654,207 +14942,6 @@ internal partial class Game : IGameSerialize
         }
         MsgPrint("Too many monsters!");
         return 0;
-    }
-
-    private void PlaceMonsterGroup(int y, int x, int rIdx, bool slp, bool charm)
-    {
-        MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
-        int extra = 0;
-        int[] hackY = new int[Constants.GroupMax];
-        int[] hackX = new int[Constants.GroupMax];
-        int total = DieRoll(13);
-        if (rPtr.Level > Difficulty)
-        {
-            extra = rPtr.Level - Difficulty;
-            extra = 0 - DieRoll(extra);
-        }
-        else if (rPtr.Level < Difficulty)
-        {
-            extra = Difficulty - rPtr.Level;
-            extra = DieRoll(extra);
-        }
-        if (extra > 12)
-        {
-            extra = 12;
-        }
-        total += extra;
-        if (total < 1)
-        {
-            total = 1;
-        }
-        if (total > Constants.GroupMax)
-        {
-            total = Constants.GroupMax;
-        }
-        int old = DangerRating;
-        int hackN = 1;
-        hackX[0] = x;
-        hackY[0] = y;
-        for (int n = 0; n < hackN && hackN < total; n++)
-        {
-            int hx = hackX[n];
-            int hy = hackY[n];
-            for (int i = 0; i < 8 && hackN < total; i++)
-            {
-                int mx = hx + OrderedDirectionXOffset[i];
-                int my = hy + OrderedDirectionYOffset[i];
-                if (!GridPassableNoCreature(my, mx))
-                {
-                    continue;
-                }
-                if (PlaceMonsterOne(my, mx, rPtr, slp, charm))
-                {
-                    hackY[hackN] = my;
-                    hackX[hackN] = mx;
-                    hackN++;
-                }
-            }
-        }
-        DangerRating = old;
-    }
-
-    /// <summary>
-    /// Places a monster and all kinds of validation and checks are done.
-    /// </summary>
-    /// <param name="y"></param>
-    /// <param name="x"></param>
-    /// <param name="rPtr"></param>
-    /// <param name="slp"></param>
-    /// <param name="pet"></param>
-    /// <returns></returns>
-    private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool pet)
-    {
-        // Monster must be provided.
-        if (rPtr == null)
-        {
-            return false;
-        }
-
-        // Monster cannot be the player.
-        if (rPtr.FriendlyName.StartsWith("Player"))
-        {
-            return false;
-        }
-
-        // Ensure the placement is within the bounds of the level.
-        if (!InBounds(y, x))
-        {
-            return false;
-        }
-
-        // Ensure the grid level is open.
-        if (!GridPassableNoCreature(y, x))
-        {
-            return false;
-        }
-
-        // Do not place monster on a sigil.
-        if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
-        {
-            return false;
-        }
-
-        // Ensure the monster name is not empty or null.
-        string name = rPtr.FriendlyName;
-        if (string.IsNullOrEmpty(rPtr.FriendlyName))
-        {
-            return false;
-        }
-
-        // Do not place more than one if the monster is unique and already allocated.
-        if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
-        {
-            return false;
-        }
-
-        // Check to see if this is a quest guardian.
-        if (rPtr.OnlyGuardian || rPtr.Guardian)
-        {
-            int qIdx = GetQuestNumber();
-            if (qIdx < 0)
-            {
-                return false;
-            }
-            if (rPtr.Index != Quests[qIdx].RIdx)
-            {
-                return false;
-            }
-            if (rPtr.CurNum >= Quests[qIdx].ToKill - Quests[qIdx].Killed)
-            {
-                return false;
-            }
-        }
-        if (rPtr.Level > Difficulty)
-        {
-            if (rPtr.Unique)
-            {
-                DangerRating += (rPtr.Level - Difficulty) * 2;
-            }
-            else
-            {
-                DangerRating += rPtr.Level - Difficulty;
-            }
-        }
-        GridTile cPtr = Grid[y][x];
-        cPtr.MonsterIndex = MPop();
-        _hackMIdxIi = cPtr.MonsterIndex;
-        if (cPtr.MonsterIndex == 0)
-        {
-            return false;
-        }
-        Monster mPtr = Monsters[cPtr.MonsterIndex];
-        mPtr.Race = rPtr;
-        mPtr.MapY = y;
-        mPtr.MapX = x;
-        mPtr.Generation = 1;
-        mPtr.StunLevel = 0;
-        mPtr.ConfusionLevel = 0;
-        mPtr.FearLevel = 0;
-        if (pet)
-        {
-            mPtr.IsPet = true;
-        }
-        mPtr.SleepLevel = 0;
-        if (slp && rPtr.Sleep != 0)
-        {
-            int val = rPtr.Sleep;
-            mPtr.SleepLevel = (val * 2) + DieRoll(val * 10);
-        }
-        mPtr.DistanceFromPlayer = 0;
-        mPtr.IndividualMonsterFlags = 0;
-        mPtr.IsVisible = false;
-        mPtr.MaxHealth = rPtr.ForceMaxHp ? rPtr.Hdice * rPtr.Hside : DiceRoll(rPtr.Hdice, rPtr.Hside);
-        mPtr.Health = mPtr.MaxHealth;
-        mPtr.Speed = rPtr.Speed;
-        if (!rPtr.Unique)
-        {
-            int i = ExtractEnergy[rPtr.Speed] / 10;
-            if (i != 0)
-            {
-                mPtr.Speed += RandomSpread(0, i);
-            }
-        }
-        mPtr.Energy = RandomLessThan(100);
-        if (rPtr.ForceSleep)
-        {
-            mPtr.IndividualMonsterFlags |= Constants.MflagNice;
-            RepairMonsters = true;
-        }
-        if (cPtr.MonsterIndex < CurrentlyActingMonster)
-        {
-            mPtr.IndividualMonsterFlags |= Constants.MflagBorn;
-        }
-        UpdateMonsterVisibility(cPtr.MonsterIndex, true);
-        rPtr.CurNum++;
-        if (rPtr.Multiply)
-        {
-            NumRepro++;
-        }
-        if (rPtr.AttrMulti)
-        {
-            ShimmerMonsters = true;
-        }
-        return true;
     }
 
     public static bool ValidateTupleSorting<T>(T[] items, Func<T, T, bool> testPredicate)
