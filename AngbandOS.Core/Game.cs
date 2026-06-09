@@ -570,7 +570,7 @@ internal partial class Game : IGameSerialize
         #region Post-game load non-serialized initialization - Initialization that depends on the loaded data.  All non-serialized fields are initialized here.
         // If this game is a replay, we need to initialize the non-fixed random with the same value that was used to construct the game, otherwise, we need to restore the random to the next seed for deterministic game play.
         int randomSeed = IsInReplayMode ? MainSequenceRandomSeed : MainSequenceCurrentSeed;
-        _mainSequence = new SystemRng(randomSeed);
+        _mainSequence = new GameRandom(randomSeed);
 
         ExpressionProviders.Add("Random", UseRandom);
         ExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
@@ -949,9 +949,9 @@ internal partial class Game : IGameSerialize
     #endregion
 
     #region Random Number Generator
-    private IRandomGenerator _mainSequence;
-    private IRandomGenerator _fixed;
-    public IRandomGenerator UseRandom => UseFixed ? _fixed : _mainSequence;
+    private GameRandom _mainSequence;
+    private GameRandom _fixed;
+    public GameRandom UseRandom => UseFixed ? _fixed : _mainSequence;
 
     /// <summary>
     /// Set true to use the fixed seed, and false to use the generic randomiser
@@ -989,7 +989,7 @@ internal partial class Game : IGameSerialize
         get => _fixedSeed;
         set
         {
-            _fixed = new SystemRng(value);
+            _fixed = new GameRandom(value);
             _fixedSeed = value;
         }
     }
@@ -4299,7 +4299,7 @@ internal partial class Game : IGameSerialize
                 // We need to track the current seed so that we can restore it if the game is saved and played later.  Also, we use this to enable the game replay.  The position of this process
                 // has been placed strategically to record the seed before the player gets a chance to save and close the game but not before any and every keystroke.
                 MainSequenceCurrentSeed = Next(int.MaxValue - 1);
-                _mainSequence = new SystemRng(MainSequenceCurrentSeed);
+                _mainSequence = new GameRandom(MainSequenceCurrentSeed);
 
                 ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
                 RequestCommand(false);
@@ -15076,7 +15076,7 @@ internal partial class Game : IGameSerialize
         {
             return 0; // TODO: This defies the stated purpose
         }
-        IRandomGenerator use = UseFixed ? _fixed : _mainSequence;
+        GameRandom use = UseFixed ? _fixed : _mainSequence;
         return use.Next(max);
     }
 
