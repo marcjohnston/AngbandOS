@@ -41,7 +41,7 @@ internal class PerlinNoise
          60,  83, 105,  97, 204,  52
     };
 
-    private readonly IRng _random;
+    private readonly IRandomGenerator _random;
 
     public PerlinNoise(int seed)
     {

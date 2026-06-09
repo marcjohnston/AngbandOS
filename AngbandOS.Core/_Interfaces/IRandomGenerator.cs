@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interfaces;
 
-internal interface IRng
+internal interface IRandomGenerator
 {
     int Next(int maxValue);
     double NextDouble();

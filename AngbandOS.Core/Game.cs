@@ -338,7 +338,7 @@ internal partial class Game : IGameSerialize
         else
         {
             // Generate all new random seeds.
-            IRng r = new SystemRng();
+            IRandomGenerator r = new SystemRng();
             MainSequenceRandomSeed = r.Next(int.MaxValue);
         }
 
@@ -949,9 +949,9 @@ internal partial class Game : IGameSerialize
     #endregion
 
     #region Random Number Generator
-    private IRng _mainSequence;
-    private IRng _fixed;
-    public IRng UseRandom => UseFixed ? _fixed : _mainSequence;
+    private IRandomGenerator _mainSequence;
+    private IRandomGenerator _fixed;
+    public IRandomGenerator UseRandom => UseFixed ? _fixed : _mainSequence;
 
     /// <summary>
     /// Set true to use the fixed seed, and false to use the generic randomiser
@@ -15076,7 +15076,7 @@ internal partial class Game : IGameSerialize
         {
             return 0; // TODO: This defies the stated purpose
         }
-        IRng use = UseFixed ? _fixed : _mainSequence;
+        IRandomGenerator use = UseFixed ? _fixed : _mainSequence;
         return use.Next(max);
     }
 
