@@ -65,6 +65,7 @@ internal class GameRandom : IGameSerialize
     }
     public GameRandom()
     {
+        // We need a random generator ready for the reseed.
         randomGenerator = new SystemRandomGenerator();
         Reseed();
     }
