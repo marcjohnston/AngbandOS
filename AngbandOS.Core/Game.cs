@@ -4276,7 +4276,7 @@ internal partial class Game : IGameSerialize
             else
             {
                 ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
-                RequestCommand(false);
+                RequestCommand();
                 ProcessCommand(false);
                 CloseBatchOfMessages();
             }
@@ -8997,7 +8997,7 @@ internal partial class Game : IGameSerialize
         ConsoleViewPort.PlayMusic(musicTrack);
     }
 
-    public void RequestCommand(bool shopping)
+    public void RequestCommand()
     {
         const int mode = Constants.KeymapModeOrig;
         CurrentCommand = (char)0;
@@ -9144,7 +9144,7 @@ internal partial class Game : IGameSerialize
         /// <param name="wait"> Whether to wait for a key if one isn't already available </param>
         /// <param name="take"> Whether to take the keypress out of the queue </param>
         /// <returns> True if a keypress was available, false otherwise </returns>
-        bool GetKeypress(out char ch, bool wait, bool take)
+        bool GetKeypress(out char ch, bool waitAndTake)
         {
             /// <summary>
             /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort"/> and updates the <see cref="LastInputReceived"/> property./>
@@ -9225,7 +9225,7 @@ internal partial class Game : IGameSerialize
             }
 
             ch = '\0';
-            if (wait)
+            if (waitAndTake)
             {
                 UpdateScreen();
                 while (KeyHead == KeyTail && !Shutdown) // TODO: should this yield?
@@ -9245,7 +9245,7 @@ internal partial class Game : IGameSerialize
                 return false;
             }
             ch = KeyQueue[KeyTail];
-            if (take && ++KeyTail == KeyQueue.Length)
+            if (waitAndTake && ++KeyTail == KeyQueue.Length)
             {
                 KeyTail = 0;
             }
@@ -9270,7 +9270,7 @@ internal partial class Game : IGameSerialize
         }
         while (ch == 0 && !Shutdown)
         {
-            if (nonBlocking && GetKeypress(out char kk, false, false))
+            if (nonBlocking && GetKeypress(out char kk, false))
             {
                 ch = kk;
                 break;
@@ -9279,7 +9279,7 @@ internal partial class Game : IGameSerialize
             {
                 break;
             }
-            GetKeypress(out ch, true, true);
+            GetKeypress(out ch, true);
             if (ch == 29)
             {
                 ch = '\0';
