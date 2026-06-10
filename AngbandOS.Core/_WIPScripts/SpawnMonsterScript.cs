@@ -99,8 +99,13 @@ internal class SpawnMonsterScript : Script, IScript, ICastSpellScript
                     case '\r':
                         MonsterRace monsterRace = monsterRaces[selectedIndex];
                         (int y, int x) = Game.Scatter(Game.MapY.IntValue, Game.MapX.IntValue, 1);
-                        Game.PlaceMonsterAux(y, x, monsterRace, false, false, false);
-                        return;
+                        bool placed = Game.PlaceMonsterAux(y, x, monsterRace, false, false, false);
+                        if (!placed)
+                        {
+                            Game.MsgPrint("Failed to place monster.");
+                            return;
+                        }
+                        break;
                 }
             }
         }
