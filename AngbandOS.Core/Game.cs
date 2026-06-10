@@ -6351,23 +6351,6 @@ internal partial class Game : IGameSerialize
         }
         return cnt > 0;
     }
-    public void ShowPopupMenu()
-    {
-        List<string> menuItems = new List<string>() { "Resume Game", "Save and Quit" };
-        PopupMenu menu = new PopupMenu(menuItems);
-        int result = menu.Show(this);
-        switch (result)
-        {
-            // Escape or Resume Game
-            case -1:
-            case 0:
-                break;
-            // Save and Quit
-            case 1:
-                Playing = false; // TODO: Need to use event arguments
-                break;
-        }
-    }
 
     /// <summary>
     /// Process the player's latest command
@@ -8999,6 +8982,24 @@ internal partial class Game : IGameSerialize
 
     public void RequestCommand()
     {
+        void ShowPopupMenu()
+        {
+            List<string> menuItems = new List<string>() { "Resume Game", "Save and Quit" };
+            PopupMenu menu = new PopupMenu(menuItems);
+            int result = menu.Show(this);
+            switch (result)
+            {
+                // Escape or Resume Game
+                case -1:
+                case 0:
+                    break;
+                // Save and Quit
+                case 1:
+                    Playing = false; // TODO: Need to use event arguments
+                    break;
+            }
+        }
+
         const int mode = Constants.KeymapModeOrig;
         CurrentCommand = (char)0;
         CommandArgument = 0;

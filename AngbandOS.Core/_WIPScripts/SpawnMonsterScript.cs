@@ -103,7 +103,6 @@ internal class SpawnMonsterScript : Script, IScript, ICastSpellScript
                         if (!placed)
                         {
                             Game.MsgPrint("Failed to place monster.");
-                            return;
                         }
                         break;
                 }

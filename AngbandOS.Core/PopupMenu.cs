@@ -33,7 +33,7 @@ internal class PopupMenu
         }
     }
 
-    public int DisplayMenu(Game game)
+    private int DisplayMenu(Game game)
     {
         var top = game.Screen.Height / 2 - (_items.Count + _text.Count) / 2;
         var left = game.Screen.Width / 2 - _menuWidth / 2;
@@ -64,7 +64,7 @@ internal class PopupMenu
                 }
             }
             game.HideCursorOnFullScreenInkey = true;
-            (char k, bool _, bool _) = game.GetKeystroke();
+            (char k, bool _, bool _) = game.GetKeystroke(true);
 
             switch (k)
             {
