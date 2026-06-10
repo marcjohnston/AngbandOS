@@ -638,7 +638,7 @@ internal class Store : IGameSerialize
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand5, 43, 0); // This needs to be before #4 to not erase it.
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand4, 43, 56);
             Game.Screen.Print("You may: ", 41, 0);
-            Game.RequestCommand(true);
+            Game.RequestCommand();
             ProcessCommand();
             Game.FullScreenOverlay = true;
             Game.NoticeStuff();
