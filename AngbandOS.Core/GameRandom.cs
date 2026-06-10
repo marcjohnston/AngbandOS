@@ -41,21 +41,18 @@ internal class GameRandom : IGameSerialize
         );
     }
 
-    private int? _currentSeed = null;
-    public int CurrentSeed
+    /// <summary>
+    /// Returns the seed that the random generator is going to use for the next random number to be issued.
+    /// </summary>
+    /// <remarks>
+    /// We need to track the current seed so that we can restore it if the game is saved and played later.  Also, we use this to enable the game replay.  The position of this process
+    /// has been placed strategically to record the seed before the player gets a chance to save and close the game but not before any and every keystroke.
+    /// </remarks>
+    public int CurrentSeed { get; private set; }
+    private void Reseed()
     {
-        get
-        {
-            if (_currentSeed.HasValue)
-            {
-                return _currentSeed.Value;
-            }
-            // We need to track the current seed so that we can restore it if the game is saved and played later.  Also, we use this to enable the game replay.  The position of this process
-            // has been placed strategically to record the seed before the player gets a chance to save and close the game but not before any and every keystroke.
-            _currentSeed = randomGenerator.Next(int.MaxValue - 1);
-            randomGenerator = new SystemRandomGenerator(_currentSeed.Value);
-            return _currentSeed.Value;
-        }
+        CurrentSeed = randomGenerator.Next(int.MaxValue - 1);
+        randomGenerator = new SystemRandomGenerator(CurrentSeed);
     }
 
     [NonSerialized]
@@ -63,17 +60,19 @@ internal class GameRandom : IGameSerialize
 
     public GameRandom(RestoreGameState restoreGameState)
     {
-        int seed = restoreGameState.GetByKey(nameof(CurrentSeed)).GetInt();
-        randomGenerator = new SystemRandomGenerator(seed);
+        CurrentSeed = restoreGameState.GetByKey(nameof(CurrentSeed)).GetInt();
+        randomGenerator = new SystemRandomGenerator(CurrentSeed);
     }
     public GameRandom()
     {
         randomGenerator = new SystemRandomGenerator();
+        Reseed();
     }
 
     public GameRandom(int seed)
     {
-        randomGenerator = new SystemRandomGenerator(seed);
+        CurrentSeed = seed;
+        randomGenerator = new SystemRandomGenerator(CurrentSeed);
     }
 
     /// <summary>
@@ -85,16 +84,17 @@ internal class GameRandom : IGameSerialize
     {
         if (max < 0)
         {
-            throw new Exception("DEBUG ... this shouldn't happen");
-           //return 0; // TODO: This defies the stated purpose
+            throw new Exception("Next(max < 0) ... this shouldn't happen");
         }
-        _currentSeed = null;
-        return randomGenerator.Next(max);
+        int value = randomGenerator.Next(max);
+        Reseed();
+        return value;
     }
     public double NextDouble()
     {
-        _currentSeed = null;
-        return randomGenerator.NextDouble();
+        double value = randomGenerator.NextDouble();
+        Reseed();
+        return value;
     }
 
     /// <summary>
