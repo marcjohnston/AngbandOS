@@ -42,6 +42,9 @@ internal class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDispos
     {
         _stream = new FileStream(ReplayFilename, FileMode.Create, FileAccess.Write, FileShare.Read);
         await WriteIntAsync(seed);
+#if DEBUG
+        await _stream.FlushAsync();
+#endif
     }
     public async Task WriteIntAsync(int value)
     {

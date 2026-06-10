@@ -66,7 +66,7 @@ internal class PolymorphSelfScript : UniversalScript, IGetKey
                     Game.MsgPrint("You polymorph into an abomination!");
                     foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
                     {
-                        Game.DecreaseAbilityScore(ability, Game.FixedSeed + 6, Game.DieRoll(3) == 1);
+                        Game.DecreaseAbilityScore(ability, Game.DieRoll(15) + 6, Game.DieRoll(3) == 1);
                     }
                     if (Game.DieRoll(6) == 1)
                     {

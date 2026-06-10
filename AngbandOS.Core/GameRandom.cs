@@ -6,7 +6,8 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class GameRandom
+[Serializable]
+internal class GameRandom : IGameSerialize
 {
     private const int _randnorNum = 256;
     private const int _randnorStd = 64;
@@ -32,16 +33,47 @@ internal class GameRandom
         32764, 32764, 32764, 32765, 32765, 32765, 32765, 32766, 32766, 32766, 32766, 32767
     };
 
+
+    public GameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(CurrentSeed), saveGameState.CreateGameStateBag(CurrentSeed))
+        );
+    }
+
+    private int? _currentSeed = null;
+    public int CurrentSeed
+    {
+        get
+        {
+            if (_currentSeed.HasValue)
+            {
+                return _currentSeed.Value;
+            }
+            // We need to track the current seed so that we can restore it if the game is saved and played later.  Also, we use this to enable the game replay.  The position of this process
+            // has been placed strategically to record the seed before the player gets a chance to save and close the game but not before any and every keystroke.
+            _currentSeed = randomGenerator.Next(int.MaxValue - 1);
+            randomGenerator = new SystemRandomGenerator(_currentSeed.Value);
+            return _currentSeed.Value;
+        }
+    }
+
+    [NonSerialized]
     private IRandomGenerator randomGenerator;
 
+    public GameRandom(RestoreGameState restoreGameState)
+    {
+        int seed = restoreGameState.GetByKey(nameof(CurrentSeed)).GetInt();
+        randomGenerator = new SystemRandomGenerator(seed);
+    }
     public GameRandom()
     {
-        randomGenerator = new SystemRng();
+        randomGenerator = new SystemRandomGenerator();
     }
 
     public GameRandom(int seed)
     {
-        randomGenerator = new SystemRng(seed);
+        randomGenerator = new SystemRandomGenerator(seed);
     }
 
     /// <summary>
@@ -56,10 +88,12 @@ internal class GameRandom
             throw new Exception("DEBUG ... this shouldn't happen");
            //return 0; // TODO: This defies the stated purpose
         }
+        _currentSeed = null;
         return randomGenerator.Next(max);
     }
     public double NextDouble()
     {
+        _currentSeed = null;
         return randomGenerator.NextDouble();
     }
 

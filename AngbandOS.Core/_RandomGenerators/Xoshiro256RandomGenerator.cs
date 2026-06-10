@@ -1,13 +1,13 @@
 ﻿namespace AngbandOS.Core;
 
-public sealed class Rng
+public sealed class Xoshiro256RandomGenerator
 {
     private ulong _s0;
     private ulong _s1;
     private ulong _s2;
     private ulong _s3;
 
-    public Rng(ulong seed)
+    public Xoshiro256RandomGenerator(ulong seed)
     {
         // Use SplitMix64 to expand a single seed into 256 bits of state.
         ulong state = seed;
@@ -18,7 +18,7 @@ public sealed class Rng
         _s3 = SplitMix64(ref state);
     }
 
-    public Rng(
+    public Xoshiro256RandomGenerator(
         ulong s0,
         ulong s1,
         ulong s2,

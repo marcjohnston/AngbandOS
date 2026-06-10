@@ -45,7 +45,7 @@ internal class PerlinNoise
 
     public PerlinNoise(int seed)
     {
-        _random = new SystemRng(seed);
+        _random = new SystemRandomGenerator(seed);
         InitGradients();
     }
 

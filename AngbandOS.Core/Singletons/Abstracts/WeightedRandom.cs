@@ -136,9 +136,9 @@ internal class WeightedRandom<T>
     /// </summary>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public T Choose()
+    public T Choose(GameRandom? random = null)
     {
-        T? t = ChooseOrDefault();
+        T? t = ChooseOrDefault(random);
         if (t == null)
         {
             throw new Exception("No options exist for choice.");
@@ -150,13 +150,13 @@ internal class WeightedRandom<T>
     /// Chooses and returned a random item from the weighted list; or null, if the list is empty.
     /// </summary>
     /// <returns></returns>
-    public T? ChooseOrDefault()
+    public T? ChooseOrDefault(GameRandom? random = null)
     {
         if (_list.Count == 0)
         {
             return default;
         }
-        int choice = Game.RandomLessThan(_sumCount);
+        int choice = random is not null ? random.RandomLessThan(_sumCount) : Game.RandomLessThan(_sumCount);
         int index = 0;
         while (choice >= _list[index].Key) // This is because there are weights.  The keys are used to track weights.
         {

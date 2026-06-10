@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
 
-
 [Serializable]
 internal partial class Game : IGameSerialize
 {
@@ -95,11 +94,12 @@ internal partial class Game : IGameSerialize
             ("bools6", saveGameState.CreateGameStateBag(HasRandomTeleport, HasReflection, HasRegeneration, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion)),
             ("bools7", saveGameState.CreateGameStateBag(HasSoundResistance, HasSustainCharisma, HasSustainConstitution, HasSustainDexterity, HasSustainIntelligence, HasSustainStrength, HasSustainWisdom, HasTelepathy)),
             ("bools8", saveGameState.CreateGameStateBag(HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance)),
-            ("bools9", saveGameState.CreateGameStateBag(Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, UseFixed, _findBreakLeft)),
-            ("bools10", saveGameState.CreateGameStateBag(_findBreakRight, _findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag)),
-            ("bools11", saveGameState.CreateGameStateBag(Playing, ViewingEquipment, ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger)),
-            ("bools12", saveGameState.CreateGameStateBag(RepairMonsters, ShimmerMonsters)),
+            ("bools9", saveGameState.CreateGameStateBag(Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, _findBreakLeft, _findBreakRight)),
+            ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, Playing)),
+            ("bools11", saveGameState.CreateGameStateBag(ViewingEquipment, ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters)),
 
+            (nameof(_mainSequence), saveGameState.CreateGameStateBag(_mainSequence, typeof(GameRandom))),
+            (nameof(ShimmerMonsters), saveGameState.CreateGameStateBag(ShimmerMonsters)),
             (nameof(GlowInTheDarkRadius), saveGameState.CreateGameStateBag(GlowInTheDarkRadius)),
             (nameof(Height), saveGameState.CreateGameStateBag(Height)),
             (nameof(HitDie), saveGameState.CreateGameStateBag(HitDie)),
@@ -126,10 +126,8 @@ internal partial class Game : IGameSerialize
             (nameof(StrengthBonus), saveGameState.CreateGameStateBag(StrengthBonus)),
             (nameof(WisdomBonus), saveGameState.CreateGameStateBag(WisdomBonus)),
             (nameof(replayPreviousKeystrokeDateTime), saveGameState.CreateGameStateBag(replayPreviousKeystrokeDateTime)),
-            (nameof(MainSequenceRandomSeed), saveGameState.CreateGameStateBag(MainSequenceRandomSeed)),
-            (nameof(MainSequenceCurrentSeed), saveGameState.CreateGameStateBag(MainSequenceCurrentSeed)),
+            (nameof(MainSequenceGameStartSeed), saveGameState.CreateGameStateBag(MainSequenceGameStartSeed)),
             (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag(EffectiveAttributeSet, typeof(ReadOnlyAttributeSet))),
-            (nameof(FixedSeed), saveGameState.CreateGameStateBag(FixedSeed)),
             (nameof(CurrentRunDirection), saveGameState.CreateGameStateBag(CurrentRunDirection)),
             (nameof(_previousRunDirection), saveGameState.CreateGameStateBag(_previousRunDirection)),
             (nameof(FollowDistance), saveGameState.CreateGameStateBag(FollowDistance)),
@@ -273,13 +271,13 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the random seed to start the game that is applied to the non-fixed random generator.
     /// </summary>
-    public readonly int MainSequenceRandomSeed;
+    public readonly int MainSequenceGameStartSeed;
 
-    /// <summary>
-    /// Returns the value of the non-fixed random seed to use to restore the non-fixed random generator.  This seed is needed because the Random object cannot be serialized and we need to restore
-    /// the non-fixed random generator when a saved game is restored.
-    /// </summary>
-    public int MainSequenceCurrentSeed;
+    ///// <summary>
+    ///// Returns the value of the non-fixed random seed to use to restore the non-fixed random generator.  This seed is needed because the Random object cannot be serialized and we need to restore
+    ///// the non-fixed random generator when a saved game is restored.
+    ///// </summary>
+    //public int MainSequenceCurrentSeed;
 
     /// <summary>
     /// Returns true, when the game is processing the popup menu.  This value is used to determine when the game is entering and existing the popup menu mode.  Keystrokes that are used during, to render or
@@ -322,27 +320,33 @@ internal partial class Game : IGameSerialize
     /// <param name="gameConfiguration"></param>
     /// <param name="gameReplay">Supply t</param>
     /// <param name="gameStateBag">Supply the game state bag to restore a game.  The game configuration must match the game being restored.</param>
-    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, ObjectGameStateBag gameStateBag)
+    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, ObjectGameStateBag? gameStateBag)
     {
-        #region Pre-Game Load Non-Serialized Initialization (Random Number Generation and Expression Parsing)
+        // Validate the parameters.
+        if (gameReplay is not null && gameStateBag is not null)
+        {
+            throw new ArgumentException("Cannot construct a game with both a game replay and a game state bag.");
+        }
 
+        #region Pre-Game Load Non-Serialized Initialization (Game Random Generation Seed and Expression Parsing)
         // Check to see if we are replaying a game.
         if (gameReplay is not null) // TODO: This should be moved into the overload that applies
         {
-            MainSequenceRandomSeed = gameReplay.Seed;
+            // This is a game replay.  The main game sequence random number seed needs to be initialized here.
+            MainSequenceGameStartSeed = gameReplay.Seed;
             foreach (GameReplayStep gameReplayStep in gameReplay.GameReplaySteps)
             {
                 ReplayQueue.Enqueue(gameReplayStep);
             }
         }
-        else
+        else if (gameStateBag is null)
         {
-            // Generate all new random seeds.
-            IRandomGenerator r = new SystemRng();
-            MainSequenceRandomSeed = r.Next(int.MaxValue);
+            // This is a new game.  Generate all new random seeds.
+            IRandomGenerator r = new SystemRandomGenerator();
+            MainSequenceGameStartSeed = r.Next(int.MaxValue);
         }
 
-        // Instantiate the parser that is needed for the singleton repository.
+        // Instantiate the parser that is needed for the singleton repository.  Random number generation is still not supported here.
         ParseLanguage = new GameExpressionParseLanguage(this);
         ExpressionParser = new ExpressionParser(ParseLanguage);
         IntegerToDecimalExpressionTypeConverter = new IntegerToDecimalExpressionTypeConverter();
@@ -355,17 +359,19 @@ internal partial class Game : IGameSerialize
 
         // Load all of the predefined objects.  The singleton repository must already be created.
         DateTime startTime = DateTime.Now;
+
+        // Check to see if this is a new game or a game replay.
         if (gameStateBag is null)
         {
-            // This is a new game.
+            // This is a new game or this is a game replay.
             SingletonRepository.LoadAndBind(gameConfiguration, null);
 
-            // There are a few properties we need to set.
+            // TODO: Why do we need to initialize more properties.  Something smells.
+            // There are a few properties we need to set. 
             IsDead = true;
-            UseFixed = false;
-            MainSequenceCurrentSeed = MainSequenceRandomSeed;
             Quests = new List<Quest>();
             InitializeAllocationTables(); // This is not performed on a restore.
+            _mainSequence = new GameRandom(MainSequenceGameStartSeed);
         }
         else
         {
@@ -375,7 +381,7 @@ internal partial class Game : IGameSerialize
             SingletonRepository.LoadAndBind(gameConfiguration, restoreGameState.GetByKey(nameof(SingletonRepository)));
 
             //#if DEBUG
-            //// Check to see if there are any bags unfulfilled in the restore state.            
+            //// Check to see if there are any bags unfulfilled in the restore state.  This might occur, if the restore is from a previous version and the object is no longer available.           
             //foreach (KeyValuePair<string, GameStateBag> singletonKeyAndGameStateBag in singletonRepositoryGameStateBag.Values)
             //{
             //    if (singletonKeyAndGameStateBag.Value is ObjectGameStateBag objectGameStateBag)
@@ -408,11 +414,12 @@ internal partial class Game : IGameSerialize
             (HasRandomTeleport, HasReflection, HasRegeneration, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion) = restoreGameState.GetByKey("bools6").Get8Bools();
             (HasSoundResistance, HasSustainCharisma, HasSustainConstitution, HasSustainDexterity, HasSustainIntelligence, HasSustainStrength, HasSustainWisdom, HasTelepathy) = restoreGameState.GetByKey("bools7").Get8Bools();
             (HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance) = restoreGameState.GetByKey("bools8").Get8Bools();
-            (Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, UseFixed, _findBreakLeft) = restoreGameState.GetByKey("bools9").Get8Bools();
-            (_findBreakRight, _findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag) = restoreGameState.GetByKey("bools10").Get8Bools();
-            (Playing, ViewingEquipment, ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger) = restoreGameState.GetByKey("bools11").Get8Bools();
-            (RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools12").Get2Bools();
+            (Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, _findBreakLeft, _findBreakRight) = restoreGameState.GetByKey("bools9").Get8Bools();
+            (_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, Playing) = restoreGameState.GetByKey("bools10").Get8Bools();
+            (ViewingEquipment, ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
 
+            _mainSequence = restoreGameState.GetByKey(nameof(_mainSequence)).GetDerivedReference<GameRandom>(_restoreGameState => new GameRandom(_restoreGameState));
+            ShimmerMonsters = restoreGameState.GetByKey(nameof(ShimmerMonsters)).GetBool();
             GlowInTheDarkRadius = restoreGameState.GetByKey(nameof(GlowInTheDarkRadius)).GetInt();
             Height = restoreGameState.GetByKey(nameof(Height)).GetInt();
             HitDie = restoreGameState.GetByKey(nameof(HitDie)).GetInt();
@@ -439,10 +446,8 @@ internal partial class Game : IGameSerialize
             StrengthBonus = restoreGameState.GetByKey(nameof(StrengthBonus)).GetInt();
             WisdomBonus = restoreGameState.GetByKey(nameof(WisdomBonus)).GetInt();
             replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTime();
-            MainSequenceRandomSeed = restoreGameState.GetByKey(nameof(MainSequenceRandomSeed)).GetInt();
-            MainSequenceCurrentSeed = restoreGameState.GetByKey(nameof(MainSequenceCurrentSeed)).GetInt();
-            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(this, restoreGameState));
-            FixedSeed = restoreGameState.GetByKey(nameof(FixedSeed)).GetInt();
+            MainSequenceGameStartSeed = restoreGameState.GetByKey(nameof(MainSequenceGameStartSeed)).GetInt();
+            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(this, _restoreGameState));
             CurrentRunDirection = restoreGameState.GetByKey(nameof(CurrentRunDirection)).GetInt();
             _previousRunDirection = restoreGameState.GetByKey(nameof(_previousRunDirection)).GetInt();
             FollowDistance = restoreGameState.GetByKey(nameof(FollowDistance)).GetInt();
@@ -464,9 +469,9 @@ internal partial class Game : IGameSerialize
             Quests = restoreGameState.GetByKey(nameof(Quests)).GetDerivedReferences<Quest>((RestoreGameState restoreGameState) => new Quest(this, restoreGameState)).ToList();
             _elevationMap = restoreGameState.GetByKey(nameof(_elevationMap)).GetArrayOfBytes();
             AllocKindSize = restoreGameState.GetByKey(nameof(AllocKindSize)).GetInt();
-            AllocKindTable = restoreGameState.GetByKey(nameof(AllocKindTable)).GetDerivedReferences<AllocationEntry>((RestoreGameState restoreGameState) => new AllocationEntry(this, restoreGameState)).ToArray();
+            AllocKindTable = restoreGameState.GetByKey(nameof(AllocKindTable)).GetDerivedReferences<AllocationEntry>(_restoreGameState => new AllocationEntry(this, _restoreGameState)).ToArray();
             AllocRaceSize = restoreGameState.GetByKey(nameof(AllocRaceSize)).GetInt();
-            AllocRaceTable = restoreGameState.GetByKey(nameof(AllocRaceTable)).GetDerivedReferences<AllocationEntry>((RestoreGameState restoreGameState) => new AllocationEntry(this, restoreGameState)).ToArray();
+            AllocRaceTable = restoreGameState.GetByKey(nameof(AllocRaceTable)).GetDerivedReferences<AllocationEntry>(_restoreGameState => new AllocationEntry(this, _restoreGameState)).ToArray();
             CameFrom = restoreGameState.GetByKey(nameof(CameFrom)).GetEnum<LevelStartEnum>();
             CurDungeon = restoreGameState.GetByKey(nameof(CurDungeon)).GetDerivedReference<Dungeon>();
             CurrentDepth = restoreGameState.GetByKey(nameof(CurrentDepth)).GetInt();
@@ -480,16 +485,16 @@ internal partial class Game : IGameSerialize
             TargetWho = restoreGameState.GetByKey(nameof(TargetWho)).GetDerivedReferenceOrDefault<Target>();
             TotalFriendLevels = restoreGameState.GetByKey(nameof(TotalFriendLevels)).GetInt();
             TotalFriends = restoreGameState.GetByKey(nameof(TotalFriends)).GetInt();
-            _petList = restoreGameState.GetByKey(nameof(_petList)).GetDerivedReferences<Monster>((RestoreGameState restoreGameState) => new Monster(this, restoreGameState)).ToList();
+            _petList = restoreGameState.GetByKey(nameof(_petList)).GetDerivedReferences<Monster>(_restoreGameState => new Monster(this, _restoreGameState)).ToList();
             _seedFlavor = restoreGameState.GetByKey(nameof(_seedFlavor)).GetInt();
-            ExPlayer = restoreGameState.GetByKey(nameof(ExPlayer)).GetDerivedReferenceOrDefault<ExPlayer>((RestoreGameState restoreGameState) => new ExPlayer(this, restoreGameState));
+            ExPlayer = restoreGameState.GetByKey(nameof(ExPlayer)).GetDerivedReferenceOrDefault<ExPlayer>(_restoreGameState => new ExPlayer(this, _restoreGameState));
             LevelOfFirstSpell = restoreGameState.GetByKey(nameof(LevelOfFirstSpell)).GetNullableInt();
             SpellOrder = restoreGameState.GetByKey(nameof(SpellOrder)).GetDerivedReferences<Spell>().ToList();
             CommandArgument = restoreGameState.GetByKey(nameof(CommandArgument)).GetInt();
             CommandDirection = restoreGameState.GetByKey(nameof(CommandDirection)).GetInt();
             CurrentCommand = restoreGameState.GetByKey(nameof(CurrentCommand)).GetChar();
             KeyQueue = restoreGameState.GetByKey(nameof(KeyQueue)).GetChars();
-            Screen = restoreGameState.GetByKey(nameof(Screen)).GetDerivedReference<Window>((RestoreGameState restoreGameState) => new Window(this, restoreGameState));
+            Screen = restoreGameState.GetByKey(nameof(Screen)).GetDerivedReference<Window>(_restoreGameState => new Window(this, _restoreGameState));
             KeyHead = restoreGameState.GetByKey(nameof(KeyHead)).GetInt();
             KeyTail = restoreGameState.GetByKey(nameof(KeyTail)).GetInt();
             _artificialKeyBuffer = restoreGameState.GetByKey(nameof(_artificialKeyBuffer)).GetString();
@@ -499,7 +504,7 @@ internal partial class Game : IGameSerialize
             Age = restoreGameState.GetByKey(nameof(Age)).GetInt();
             ArmorClassBonus = restoreGameState.GetByKey(nameof(ArmorClassBonus)).GetInt();
             Energy = restoreGameState.GetByKey(nameof(Energy)).GetInt();
-            Bonuses = restoreGameState.GetByKey(nameof(Bonuses)).GetDerivedReference<Bonuses>((RestoreGameState restoreGameState) => new Bonuses(this, restoreGameState));
+            Bonuses = restoreGameState.GetByKey(nameof(Bonuses)).GetDerivedReference<Bonuses>(_restoreGameState => new Bonuses(this, _restoreGameState));
             FractionalExperiencePoints = restoreGameState.GetByKey(nameof(FractionalExperiencePoints)).GetInt();
             FractionalHealth = restoreGameState.GetByKey(nameof(FractionalHealth)).GetInt();
             FractionalMana = restoreGameState.GetByKey(nameof(FractionalMana)).GetInt();
@@ -522,9 +527,9 @@ internal partial class Game : IGameSerialize
             WeightCarried = restoreGameState.GetByKey(nameof(WeightCarried)).GetInt();
             WildernessX = restoreGameState.GetByKey(nameof(WildernessX)).GetInt();
             WildernessY = restoreGameState.GetByKey(nameof(WildernessY)).GetInt();
-            Wilderness = restoreGameState.GetByKey(nameof(Wilderness)).GetArrayOfDerivedReferences<WildernessRegion>((RestoreGameState restoreGameState) => new WildernessRegion(this, restoreGameState));
+            Wilderness = restoreGameState.GetByKey(nameof(Wilderness)).GetArrayOfDerivedReferences<WildernessRegion>(_restoreGameState => new WildernessRegion(this, _restoreGameState));
             WordOfRecallDelay = restoreGameState.GetByKey(nameof(WordOfRecallDelay)).GetInt();
-            Grid = restoreGameState.GetByKey(nameof(Grid)).GetArrayOfDerivedReferences<GridTile>((RestoreGameState restoreGameState) => new GridTile(this, restoreGameState));
+            Grid = restoreGameState.GetByKey(nameof(Grid)).GetArrayOfDerivedReferences<GridTile>(_restoreGameState => new GridTile(this, _restoreGameState));
             TempX = restoreGameState.GetByKey(nameof(TempX)).GetInts();
             TempY = restoreGameState.GetByKey(nameof(TempY)).GetInts();
             CurHgt = restoreGameState.GetByKey(nameof(CurHgt)).GetInt();
@@ -543,17 +548,17 @@ internal partial class Game : IGameSerialize
             PanelRowMax = restoreGameState.GetByKey(nameof(PanelRowMax)).GetInt();
             PanelRowMin = restoreGameState.GetByKey(nameof(PanelRowMin)).GetInt();
             TempN = restoreGameState.GetByKey(nameof(TempN)).GetInt();
-            Light = restoreGameState.GetByKey(nameof(Light)).GetDerivedReferences<GridCoordinate>((RestoreGameState restoreGameState) => new GridCoordinate(this, restoreGameState)).ToList();
-            View = restoreGameState.GetByKey(nameof(View)).GetDerivedReferences<GridCoordinate>((RestoreGameState restoreGameState) => new GridCoordinate(this, restoreGameState)).ToList();
+            Light = restoreGameState.GetByKey(nameof(Light)).GetDerivedReferences<GridCoordinate>(_restoreGameState => new GridCoordinate(this, _restoreGameState)).ToList();
+            View = restoreGameState.GetByKey(nameof(View)).GetDerivedReferences<GridCoordinate>(_restoreGameState => new GridCoordinate(this, _restoreGameState)).ToList();
             CurrentlyActingMonster = restoreGameState.GetByKey(nameof(CurrentlyActingMonster)).GetInt();
             DunBias = restoreGameState.GetByKey(nameof(DunBias)).GetReferenceOrDefault<MonsterRaceFilter>();
             NumRepro = restoreGameState.GetByKey(nameof(NumRepro)).GetInt();
-            Monsters = restoreGameState.GetByKey(nameof(Monsters)).GetDerivedReferences<Monster>((RestoreGameState restoreGameState) => new Monster(this, restoreGameState)).ToArray();
+            Monsters = restoreGameState.GetByKey(nameof(Monsters)).GetDerivedReferences<Monster>(_restoreGameState => new Monster(this, _restoreGameState)).ToArray();
             _hackMIdxIi = restoreGameState.GetByKey(nameof(_hackMIdxIi)).GetInt();
             StartupTownName = restoreGameState.GetByKey(nameof(StartupTownName)).GetStringOrDefault();
-            MessageLog = restoreGameState.GetByKey(nameof(MessageLog)).GetDerivedReferences<GameMessage>((RestoreGameState restoreGameState) => new GameMessage(this, restoreGameState)).ToList();
-            RecentMessages = restoreGameState.GetByKey(nameof(RecentMessages)).GetDerivedReferences<GameMessage>((RestoreGameState restoreGameState) => new GameMessage(this, restoreGameState)).ToList();
-            PreviousMessages = restoreGameState.GetByKey(nameof(PreviousMessages)).GetDerivedReferences<GameMessage>((RestoreGameState restoreGameState) => new GameMessage(this, restoreGameState)).ToArray();
+            MessageLog = restoreGameState.GetByKey(nameof(MessageLog)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToList();
+            RecentMessages = restoreGameState.GetByKey(nameof(RecentMessages)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToList();
+            PreviousMessages = restoreGameState.GetByKey(nameof(PreviousMessages)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToArray();
             MessageFirstQueueIndex = restoreGameState.GetByKey(nameof(MessageFirstQueueIndex)).GetInt();
             _prevCharacterClass = restoreGameState.GetByKey(nameof(_prevCharacterClass)).GetReference<CharacterClass>();
             _prevGeneration = restoreGameState.GetByKey(nameof(_prevGeneration)).GetInt();
@@ -562,17 +567,17 @@ internal partial class Game : IGameSerialize
             _prevPrimaryRealm = restoreGameState.GetByKey(nameof(_prevPrimaryRealm)).GetDerivedReferenceOrDefault<Realm>();
             _prevSecondaryRealm = restoreGameState.GetByKey(nameof(_prevSecondaryRealm)).GetDerivedReferenceOrDefault<Realm>();
             _prevSex = restoreGameState.GetByKey(nameof(_prevSex)).GetDerivedReference<Gender>();
-            Inventory = restoreGameState.GetByKey(nameof(Inventory)).GetNullableDerivedReferences<Item>((RestoreGameState restoreGameState) => new Item(this, restoreGameState));
+            Inventory = restoreGameState.GetByKey(nameof(Inventory)).GetNullableDerivedReferences<Item>(_restoreGameState => new Item(this, _restoreGameState));
             _invenCnt = restoreGameState.GetByKey(nameof(_invenCnt)).GetInt();
         }
         #endregion
 
         #region Post-game load non-serialized initialization - Initialization that depends on the loaded data.  All non-serialized fields are initialized here.
-        // If this game is a replay, we need to initialize the non-fixed random with the same value that was used to construct the game, otherwise, we need to restore the random to the next seed for deterministic game play.
-        int randomSeed = IsInReplayMode ? MainSequenceRandomSeed : MainSequenceCurrentSeed;
-        _mainSequence = new GameRandom(randomSeed);
+        //// If this game is a replay, we need to initialize the non-fixed random with the same value that was used to construct the game, otherwise, we need to restore the random to the next seed for deterministic game play.
+        //int randomSeed = IsInReplayMode ? MainSequenceGameStartSeed : MainSequenceCurrentSeed;
+        //_mainSequence = new GameRandom(randomSeed);
 
-        ExpressionProviders.Add("Random", UseRandom);
+        ExpressionProviders.Add("Random", _mainSequence);
         ExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
         ExpressionProviders.Add("Health", () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
         ExpressionProviders.Add("ExperienceLevel", () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
@@ -831,10 +836,6 @@ internal partial class Game : IGameSerialize
         FullScreenOverlay = true;
         SetBackground(BackgroundImageEnum.Normal);
         Screen.CursorVisible = false;
-        if (UseFixed)
-        {
-            UseFixed = false;
-        }
         if (IsDead)
         {
             GenerateNewGame();
@@ -949,14 +950,7 @@ internal partial class Game : IGameSerialize
     #endregion
 
     #region Random Number Generator
-    private GameRandom _mainSequence;
-    private GameRandom _fixed;
-    public GameRandom UseRandom => UseFixed ? _fixed : _mainSequence;
-
-    /// <summary>
-    /// Set true to use the fixed seed, and false to use the generic randomiser
-    /// </summary>
-    public bool UseFixed = false;
+    public GameRandom _mainSequence;
 
     private const int _randnorNum = 256;
     private const int _randnorStd = 64;
@@ -981,18 +975,6 @@ internal partial class Game : IGameSerialize
         32757, 32758, 32758, 32759, 32760, 32760, 32761, 32761, 32761, 32762, 32762, 32763, 32763, 32763, 32764,
         32764, 32764, 32764, 32765, 32765, 32765, 32765, 32766, 32766, 32766, 32766, 32767
     };
-
-    private int _fixedSeed;
-
-    public int FixedSeed // TODO: This is ugly
-    {
-        get => _fixedSeed;
-        set
-        {
-            _fixed = new GameRandom(value);
-            _fixedSeed = value;
-        }
-    }
     #endregion
 
     #region Movement and Running
@@ -2495,8 +2477,7 @@ internal partial class Game : IGameSerialize
 
                 List<Flavor>? itemFlavors = new List<Flavor>();
 
-                UseFixed = true;
-                FixedSeed = _seedFlavor;
+                GameRandom random = new GameRandom(_seedFlavor);
                 WeightedRandom<string> illegibleFlavorSyllablesWeightedRandom = new WeightedRandom<string>(this, IllegibleFlavorSyllables);
                 if (illegibleFlavorSyllablesWeightedRandom.SumCount == 0)
                 {
@@ -2511,10 +2492,10 @@ internal partial class Game : IGameSerialize
                         while (true)
                         {
                             string tmp = "";
-                            int s = RandomLessThan(100) < 30 ? 1 : 2;
+                            int s = random.RandomLessThan(100) < 30 ? 1 : 2;
                             for (int q = 0; q < s; q++)
                             {
-                                tmp += illegibleFlavorSyllablesWeightedRandom.Choose();
+                                tmp += illegibleFlavorSyllablesWeightedRandom.Choose(random);
                             }
                             if (buf.Length + tmp.Length > 14)
                             {
@@ -2536,7 +2517,7 @@ internal partial class Game : IGameSerialize
                         if (okay)
                         {
                             // Select a random flavor from the repository.
-                            int index = RandomLessThan(itemClass.ItemFlavors.Length);
+                            int index = random.RandomLessThan(itemClass.ItemFlavors.Length);
                             Flavor baseFlavor = itemClass.ItemFlavors[index];
 
                             // Generate an item flavor.
@@ -2546,7 +2527,6 @@ internal partial class Game : IGameSerialize
                         }
                     }
                 }
-
                 return itemFlavors;
             }
 
@@ -2585,7 +2565,7 @@ internal partial class Game : IGameSerialize
                         }
 
                         // Select a random item flavor.
-                        int randomIndex = UseRandom.Next(currentFlavorRepository.Count);
+                        int randomIndex = _mainSequence.Next(currentFlavorRepository.Count);
 
                         // Retrieve the flavor to assign to the factory.
                         kPtr.Flavor = currentFlavorRepository[randomIndex];
@@ -2703,7 +2683,6 @@ internal partial class Game : IGameSerialize
         void ResetItemFlavors()
         {
             // Enumerate all of the item factories and turn on the FlavorAware flag for all item factories that do not have flavors.
-            UseFixed = false;
             foreach (ItemFactory itemFactory in SingletonRepository.Get<ItemFactory>())
             {
                 itemFactory.IsFlavorAware = !itemFactory.ItemClass.HasFlavor;
@@ -4296,11 +4275,6 @@ internal partial class Game : IGameSerialize
             }
             else
             {
-                // We need to track the current seed so that we can restore it if the game is saved and played later.  Also, we use this to enable the game replay.  The position of this process
-                // has been placed strategically to record the seed before the player gets a chance to save and close the game but not before any and every keystroke.
-                MainSequenceCurrentSeed = Next(int.MaxValue - 1);
-                _mainSequence = new GameRandom(MainSequenceCurrentSeed);
-
                 ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
                 RequestCommand(false);
                 ProcessCommand(false);
@@ -9138,7 +9112,7 @@ internal partial class Game : IGameSerialize
         if (ReplayPersistentStorage is not null)
         {
 #if DEBUG
-            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, MainSequenceCurrentSeed);
+            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, _mainSequence.CurrentSeed);
 #else
             ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, null);
 #endif
@@ -9216,9 +9190,14 @@ internal partial class Game : IGameSerialize
 
 #if DEBUG
                     // Perform replay verification.
-                    if (MainSequenceCurrentSeed != gameReplayStep.Seed)
+                    if (gameReplayStep.Seed == 0)
                     {
-                        throw new Exception($"Replay verification failure: Current random seed {MainSequenceCurrentSeed} does not match expected random seed {gameReplayStep.Seed} for replay step with keystroke {gameReplayStep.Keystroke} at {gameReplayStep.DateTime}.");
+                        throw new Exception("Replay verification failure: Replay seed is zero.");
+                    }
+
+                    if (_mainSequence.CurrentSeed != gameReplayStep.Seed)
+                    {
+                        throw new Exception($"Replay verification failure: Current random seed {_mainSequence.CurrentSeed} does not match expected random seed {gameReplayStep.Seed} for replay step with keystroke {gameReplayStep.Keystroke} at {gameReplayStep.DateTime} with {ReplayQueue.Count} steps remaining in the queue.");
                     }
 #endif
 
@@ -15076,8 +15055,7 @@ internal partial class Game : IGameSerialize
         {
             return 0; // TODO: This defies the stated purpose
         }
-        GameRandom use = UseFixed ? _fixed : _mainSequence;
-        return use.Next(max);
+        return _mainSequence.Next(max);
     }
 
     public void InitializeMutations()

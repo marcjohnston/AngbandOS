@@ -542,6 +542,7 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
         Attacks = attackList.ToArray();
 
         GoldItemFactory = Game.SingletonRepository.Get<ItemFactory>(GoldItemFactoryBindingKey);
+        Knowledge = new MonsterKnowledge(Game, this);
 
         if (restoreGameState is not null)
         {
@@ -551,7 +552,6 @@ internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, I
             MaxNum = restoreGameState.GetByKey(nameof(MaxNum)).GetInt();
             Knowledge = restoreGameState.GetByKey(nameof(Knowledge)).GetDerivedReference<MonsterKnowledge>((RestoreGameState restoreGameState) => new MonsterKnowledge(Game, restoreGameState));
         }
-        Knowledge = new MonsterKnowledge(Game, this);
     }
 
     public MonsterSpell[] Spells { get; private set; }

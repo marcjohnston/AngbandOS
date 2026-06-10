@@ -14,22 +14,22 @@ internal partial class SaveGameState
 {
     public static class DeepComparer
     {
-        public static void DeepEquals(object? a, object? b)
+        public static void DeepEquals(object? actualValue, object? expectedValue)
         {
             var visited = new HashSet<(object, object)>(new ReferenceTupleComparer());
-            DeepEqualsInternal(a, b, visited, "$");
+            DeepEqualsInternal(actualValue, expectedValue, visited, "$");
         }
 
-        private static void DeepEqualsInternal(object? a, object? b, HashSet<(object, object)> visited, string path)
+        private static void DeepEqualsInternal(object? actualValue, object? expectedValue, HashSet<(object, object)> visited, string path)
         {
-            if (ReferenceEquals(a, b))
+            if (ReferenceEquals(actualValue, expectedValue))
                 return;
 
-            if (a is null || b is null)
+            if (actualValue is null || expectedValue is null)
                throw new Exception($"Null mismatch at {path}");
 
-            var typeA = a.GetType();
-            var typeB = b.GetType();
+            var typeA = actualValue.GetType();
+            var typeB = expectedValue.GetType();
 
             if (typeA != typeB)
             {
@@ -38,24 +38,24 @@ internal partial class SaveGameState
 
             if (IsSimple(typeA))
             {
-                if (!a.Equals(b))
+                if (!actualValue.Equals(expectedValue))
                 {
-                    throw new Exception($"Value mismatch at {path}: {a} vs {b}");
+                    throw new Exception($"Value mismatch at {path}: actual value of {actualValue} vs expected value of {expectedValue}");
                 }
 
                 return;
             }
 
-            if (visited.Contains((a, b)))
+            if (visited.Contains((actualValue, expectedValue)))
                 return;
 
-            visited.Add((a, b));
+            visited.Add((actualValue, expectedValue));
 
             // Handle IEnumerable (but skip string)
             if (typeof(IEnumerable).IsAssignableFrom(typeA) && typeA != typeof(string))
             {
-                var enumA = ((IEnumerable)a).GetEnumerator();
-                var enumB = ((IEnumerable)b).GetEnumerator();
+                var enumA = ((IEnumerable)actualValue).GetEnumerator();
+                var enumB = ((IEnumerable)expectedValue).GetEnumerator();
 
                 int index = 0;
                 while (true)
@@ -88,8 +88,8 @@ internal partial class SaveGameState
             {
                 if (!field.IsNotSerialized)
                 {
-                    var valA = field.GetValue(a);
-                    var valB = field.GetValue(b);
+                    var valA = field.GetValue(actualValue);
+                    var valB = field.GetValue(expectedValue);
 
                     DeepEqualsInternal(valA, valB, visited, $"{path}.{typeA.Name}");
                 }

@@ -51,15 +51,15 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     public override GameStateBag? Serialize(SaveGameState saveGameState) => null;
 
-    private bool NewPlayerSpot()
+    private bool NewPlayerSpot(GameRandom random)
     {
         int y = 0;
         int x = 0;
         int maxAttempts = 5000;
         while (maxAttempts-- != 0)
         {
-            y = Game.RandomBetween(1, Game.CurHgt - 2);
-            x = Game.RandomBetween(1, Game.CurWid - 2);
+            y = random.RandomBetween(1, Game.CurHgt - 2);
+            x = random.RandomBetween(1, Game.CurWid - 2);
             if (!Game.GridOpenNoItemOrCreature(y, x))
             {
                 continue;
@@ -142,7 +142,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         AllocStairs(Game.UpStaircaseTile, Game.RandomBetween(1, 2), 3);
 
         // Choose a spot for the player.
-        if (!NewPlayerSpot())
+        if (!NewPlayerSpot(Game._mainSequence))
         {
             return false;
         }
@@ -1384,11 +1384,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
             }
             void MakeTownContents()
             {
-                void MakeTownCentre()
+                void MakeTownCentre(GameRandom random)
                 {
                     int xx = Game.CurWid / 2;
                     int yy = Game.CurHgt / 2;
-                    switch (Game.DieRoll(12))
+                    switch (random.DieRoll(12))
                     {
                         case 1:
                         case 3:
@@ -1400,7 +1400,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                             Game.Grid[yy - 1][xx + 1].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
                             Game.Grid[yy][xx + 1].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
                             Game.Grid[yy + 1][xx + 1].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
-                            switch (Game.DieRoll(6))
+                            switch (random.DieRoll(6))
                             {
                                 case 4:
                                 case 1:
@@ -1422,12 +1422,12 @@ internal class StandardDungeonGenerator : DungeonGenerator
                         case 9:
                         case 12:
                             int x = xx - 1;
-                            if (Game.DieRoll(2) == 1)
+                            if (random.DieRoll(2) == 1)
                             {
                                 x = xx + 1;
                             }
                             int y = yy - 1;
-                            if (Game.DieRoll(2) == 1)
+                            if (random.DieRoll(2) == 1)
                             {
                                 y = yy + 1;
                             }
@@ -1438,16 +1438,16 @@ internal class StandardDungeonGenerator : DungeonGenerator
                             return;
                     }
                 }
-                void BuildStores()
+                void BuildStores(GameRandom random)
                 {
-                    void BuildStore(Store store, int yy, int xx)
+                    void BuildStore(GameRandom random, Store store, int yy, int xx)
                     {
                         int y, x;
                         GridTile cPtr;
 
                         if (store.StoreFactory.IsEmptyLot)
                         {
-                            switch (Game.DieRoll(10))
+                            switch (random.DieRoll(10))
                             {
                                 case 3:
                                 case 7:
@@ -1455,11 +1455,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
                                     break;
 
                                 case 6:
-                                    BuildGraveyard(yy, xx);
+                                    BuildGraveyard(random, yy, xx);
                                     break;
 
                                 default:
-                                    BuildField(yy, xx);
+                                    BuildField(random, yy, xx);
                                     break;
                             }
                             return;
@@ -1467,10 +1467,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
                         int y0 = (yy * 9) + 6;
                         int x0 = (xx * 15) + 10;
-                        int y1 = y0 - Game.DieRoll(2);
-                        int y2 = y0 + Game.DieRoll(2) + 1;
-                        int x1 = x0 - Game.DieRoll(3) - 2;
-                        int x2 = x0 + Game.DieRoll(3) + 2;
+                        int y1 = y0 - random.DieRoll(2);
+                        int y2 = y0 + random.DieRoll(2) + 1;
+                        int x1 = x0 - random.DieRoll(3) - 2;
+                        int x2 = x0 + random.DieRoll(3) + 2;
                         if ((y2 - y1) % 2 == 0)
                         {
                             y2++;
@@ -1482,7 +1482,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                                 cPtr = Game.Grid[y][x];
                                 if (!store.StoreFactory.BuildingsMadeFromPermanentRock)
                                 {
-                                    switch (Game.DieRoll(6))
+                                    switch (random.DieRoll(6))
                                     {
                                         case 1:
                                             cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(WallInnerTile)));
@@ -1511,11 +1511,11 @@ internal class StandardDungeonGenerator : DungeonGenerator
                             }
                         }
                         y = y2;
-                        x = Game.RandomBetween(x1 + 1, x2 - 2);
+                        x = random.RandomBetween(x1 + 1, x2 - 2);
                         cPtr = Game.Grid[y][x];
                         if (store.StoreFactory.StoreEntranceDoorsAreBlownOff)
                         {
-                            if (Game.DieRoll(8) == 6)
+                            if (random.DieRoll(8) == 6)
                             {
                                 Game.PlaceRandomDoor(y, x);
                             }
@@ -1546,21 +1546,21 @@ internal class StandardDungeonGenerator : DungeonGenerator
                         int y;
                         do
                         {
-                            x = Game.RandomBetween(0, 3);
-                            y = Game.RandomBetween(0, 3);
+                            x = random.RandomBetween(0, 3);
+                            y = random.RandomBetween(0, 3);
                             if ((x == 1 || x == 2 || y == 1 || y == 2) && !occupied.Contains($"{x},{y}"))
                             {
                                 break;
                             }
                         } while (true);
                         occupied.Add($"{x},{y}");
-                        BuildStore(Game.CurTown.Stores[i], y, x);
+                        BuildStore(random, Game.CurTown.Stores[i], y, x);
                     }
 
                     int maxSpacesRemaining = 4 * 4 - Game.CurTown.Stores.Length;
                     for (int i = 0; i < maxSpacesRemaining; i++)
                     {
-                        switch (Game.DieRoll(10))
+                        switch (random.DieRoll(10))
                         {
                             case 3:
                             case 7:
@@ -1572,8 +1572,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
                                 int y;
                                 do
                                 {
-                                    x = Game.RandomBetween(0, 3);
-                                    y = Game.RandomBetween(0, 3);
+                                    x = random.RandomBetween(0, 3);
+                                    y = random.RandomBetween(0, 3);
                                     if (!occupied.Contains($"{x},{y}"))
                                     {
                                         break;
@@ -1583,24 +1583,24 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
                                 if (Game.CurTown.UnusedStoreLotsAreGraveyards)
                                 {
-                                    BuildGraveyard(y, x);
+                                    BuildGraveyard(random, y, x);
                                 }
                                 else
                                 {
-                                    BuildField(y, x);
+                                    BuildField(random, y, x);
                                 }
                                 break;
                         }
                     }
                 }
-                void BuildField(int yy, int xx)
+                void BuildField(GameRandom random, int yy, int xx)
                 {
                     int y0 = (yy * 9) + 8;
                     int x0 = (xx * 15) + 10;
-                    int y1 = y0 - Game.DieRoll(2) - 1;
-                    int y2 = y0 + Game.DieRoll(2) + 1;
-                    int x1 = x0 - Game.DieRoll(3) - 2;
-                    int x2 = x0 + Game.DieRoll(3) + 2;
+                    int y1 = y0 - random.DieRoll(2) - 1;
+                    int y2 = y0 + random.DieRoll(2) + 1;
+                    int x1 = x0 - random.DieRoll(3) - 2;
+                    int x2 = x0 + random.DieRoll(3) + 2;
                     Tile fieldTile = Game.SingletonRepository.Get<Tile>(nameof(FieldTile));
                     for (int x = x1; x < x2; x++)
                     {
@@ -1610,25 +1610,25 @@ internal class StandardDungeonGenerator : DungeonGenerator
                             Game.Grid[y][x].SetBackgroundFeature(fieldTile);
                         }
                     }
-                    if (Game.DieRoll(5) == 4)
+                    if (random.DieRoll(5) == 4)
                     {
-                        int x = Game.RandomBetween(x1, x2);
-                        int y = Game.RandomBetween(y1, y2);
+                        int x = random.RandomBetween(x1, x2);
+                        int y = random.RandomBetween(y1, y2);
                         Game.Grid[y][x].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(ScarecrowTile)));
                     }
                 }
-                void BuildGraveyard(int yy, int xx)
+                void BuildGraveyard(GameRandom random, int yy, int xx)
                 {
                     int y0 = (yy * 9) + 8;
                     int x0 = (xx * 15) + 10;
-                    int y1 = y0 - Game.DieRoll(2) - 1;
-                    int y2 = y0 + Game.DieRoll(2) + 1;
-                    int x1 = x0 - Game.DieRoll(3) - 2;
-                    int x2 = x0 + Game.DieRoll(3) + 2;
-                    for (int i = 0; i < Game.RandomBetween(10, 20); i++)
+                    int y1 = y0 - random.DieRoll(2) - 1;
+                    int y2 = y0 + random.DieRoll(2) + 1;
+                    int x1 = x0 - random.DieRoll(3) - 2;
+                    int x2 = x0 + random.DieRoll(3) + 2;
+                    for (int i = 0; i < random.RandomBetween(10, 20); i++)
                     {
-                        int x = (Game.RandomBetween(x1, x2) / 2 * 2) + 1;
-                        int y = (Game.RandomBetween(y1, y2) / 2 * 2) + 1;
+                        int x = (random.RandomBetween(x1, x2) / 2 * 2) + 1;
+                        int y = (random.RandomBetween(y1, y2) / 2 * 2) + 1;
                         Game.Grid[y][x].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(GraveTile)));
                     }
                 }
@@ -1645,13 +1645,13 @@ internal class StandardDungeonGenerator : DungeonGenerator
                         Game.Grid[y][xx].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
                     }
                 }
-                void BuildRocks()
+                void BuildRocks(GameRandom random)
                 {
                     GridTile cPtr;
-                    for (int n = 0; n < Game.RandomBetween(1, 10) - 6; n++)
+                    for (int n = 0; n < random.RandomBetween(1, 10) - 6; n++)
                     {
-                        int x = Game.RandomBetween(1, Game.CurWid - 2);
-                        int y = Game.RandomBetween(1, Game.CurHgt - 2);
+                        int x = random.RandomBetween(1, Game.CurWid - 2);
+                        int y = random.RandomBetween(1, Game.CurHgt - 2);
                         cPtr = Game.Grid[y][x];
                         if (cPtr.FeatureType == cPtr.BackgroundFeature)
                         {
@@ -1660,13 +1660,13 @@ internal class StandardDungeonGenerator : DungeonGenerator
                         }
                     }
                 }
-                void BuildTrees()
+                void BuildTrees(GameRandom random)
                 {
                     GridTile cPtr;
-                    for (int n = 0; n < Game.RandomBetween(5, 10); n++)
+                    for (int n = 0; n < random.RandomBetween(5, 10); n++)
                     {
-                        int x = Game.RandomBetween(1, Game.CurWid - 2);
-                        int y = Game.RandomBetween(1, Game.CurHgt - 2);
+                        int x = random.RandomBetween(1, Game.CurWid - 2);
+                        int y = random.RandomBetween(1, Game.CurHgt - 2);
                         cPtr = Game.Grid[y][x];
                         if (cPtr.FeatureType == cPtr.BackgroundFeature)
                         {
@@ -1675,13 +1675,13 @@ internal class StandardDungeonGenerator : DungeonGenerator
                         }
                     }
                 }
-                void BuildBushes()
+                void BuildBushes(GameRandom random)
                 {
                     GridTile cPtr;
-                    for (int n = 0; n < Game.RandomBetween(5, 10); n++)
+                    for (int n = 0; n < random.RandomBetween(5, 10); n++)
                     {
-                        int x = Game.RandomBetween(1, Game.CurWid - 2);
-                        int y = Game.RandomBetween(1, Game.CurHgt - 2);
+                        int x = random.RandomBetween(1, Game.CurWid - 2);
+                        int y = random.RandomBetween(1, Game.CurHgt - 2);
                         cPtr = Game.Grid[y][x];
                         if (cPtr.FeatureType == cPtr.BackgroundFeature)
                         {
@@ -1713,7 +1713,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     cPtr.SetFeature(Game.SingletonRepository.Get<Tile>(nameof(PathBorderEWTile)));
                     cPtr.PlayerMemorized = true;
                 }
-                GridCoordinate AddStairsDown()
+                GridCoordinate AddStairsDown(GameRandom random)
                 {
                     GridTile cPtr;
                     int dummy = 0;
@@ -1722,8 +1722,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     do
                     {
                         dummy++;
-                        y = Game.RandomBetween(12, 29);
-                        x = Game.RandomBetween(17, 46);
+                        y = random.RandomBetween(12, 29);
+                        x = random.RandomBetween(17, 46);
                         if (Game.GridOpenNoItemOrCreature(y, x))
                         {
                             break;
@@ -1734,13 +1734,12 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     cPtr.PlayerMemorized = true;
                     return new GridCoordinate(x, y);
                 }
-                void SetStartingLocation(GridCoordinate downStairsLocation)
+                void SetStartingLocation(GameRandom random, GridCoordinate downStairsLocation)
                 {
-                    Game.UseFixed = false;
                     switch (Game.CameFrom)
                     {
                         case LevelStartEnum.StartRandom:
-                            NewPlayerSpot();
+                            NewPlayerSpot(random);
                             break;
 
                         case LevelStartEnum.StartStairs:
@@ -1768,18 +1767,17 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     }
                 }
 
-                Game.UseFixed = true;
-                Game.FixedSeed = Game.CurTown.Seed;
+                GameRandom random = new GameRandom(Game.CurTown.Seed);
 
                 BuildPath();
-                BuildStores();
-                BuildRocks();
-                BuildTrees();
-                BuildBushes();
-                MakeTownCentre();
+                BuildStores(random);
+                BuildRocks(random);
+                BuildTrees(random);
+                BuildBushes(random);
+                MakeTownCentre(random);
                 AddPaths();
-                GridCoordinate downStairsLocation = AddStairsDown();
-                SetStartingLocation(downStairsLocation);
+                GridCoordinate downStairsLocation = AddStairsDown(random);
+                SetStartingLocation(random, downStairsLocation);
             }
 
             for (int y = 0; y < Game.CurHgt; y++)
@@ -1820,9 +1818,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
         void WildernessGen()
         {
-            void MakeWildernessFeatures(int wildx, int wildy, out int stairX, out int stairY)
+            void MakeWildernessFeatures(GameRandom random, int wildx, int wildy, out int stairX, out int stairY)
             {
-                void MakeDungeonEntrance(int left, int top, int width, int height, out int stairX, out int stairY)
+                void MakeDungeonEntrance(GameRandom random, int left, int top, int width, int height, out int stairX, out int stairY)
                 {
                     int dummy = 0;
                     int x = 1;
@@ -1830,8 +1828,8 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     while (dummy < Game.SafeMaxAttempts)
                     {
                         dummy++;
-                        y = Game.RandomBetween(top, top + height);
-                        x = Game.RandomBetween(left, left + width);
+                        y = random.RandomBetween(top, top + height);
+                        x = random.RandomBetween(left, left + width);
                         if (Game.GridOpenNoItemOrCreature(y, x))
                         {
                             break;
@@ -1946,7 +1944,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 }
                 void MakeLake(int minX, int minY, int width, int height)
                 {
-                    PerlinNoise perlinNoise = new PerlinNoise(Game.RandomBetween(0, int.MaxValue - 1));
+                    PerlinNoise perlinNoise = new PerlinNoise(random.RandomBetween(0, int.MaxValue - 1));
                     double widthDivisor = 1 / (double)width;
                     double heightDivisor = 1 / (double)height;
                     for (int y = 0; y < height; y++)
@@ -2102,7 +2100,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 }
                 int dungeonX = 0;
                 int dungeonY = 0;
-                switch (Game.DieRoll(4))
+                switch (random.DieRoll(4))
                 {
                     case 1:
                         dungeonX = 0;
@@ -2140,7 +2138,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                                 }
                                 else
                                 {
-                                    MakeDungeonEntrance(offsetX + 4, offsetY + 4, (Game.CurWid / 2) - 8, (Game.CurHgt / 2) - 8, out int x, out int y);
+                                    MakeDungeonEntrance(random, offsetX + 4, offsetY + 4, (Game.CurWid / 2) - 8, (Game.CurHgt / 2) - 8, out int x, out int y);
                                     stairX = x;
                                     stairY = y;
                                 }
@@ -2148,7 +2146,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                         }
                         else
                         {
-                            switch (Game.DieRoll(30))
+                            switch (random.DieRoll(30))
                             {
                                 case 7:
                                 case 22:
@@ -2163,7 +2161,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     }
                 }
             }
-            void MakeWildernessPaths(int wildx, int wildy)
+            void MakeWildernessPaths(GameRandom random, int wildx, int wildy)
             {
                 int x;
                 int y;
@@ -2191,7 +2189,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     Game.Grid[midY - 1][midX].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
                     for (y = 2; y < midY - 1; y++)
                     {
-                        x += Game.RandomBetween(-2, 2) / 2;
+                        x += random.RandomBetween(-2, 2) / 2;
                         if (x > midY - 1 - y)
                         {
                             x = midY - 1 - y;
@@ -2219,7 +2217,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     Game.Grid[midY + 1][midX].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
                     for (y = Game.CurHgt - 3; y > midY + 1; y--)
                     {
-                        x += Game.RandomBetween(-2, 2) / 2;
+                        x += random.RandomBetween(-2, 2) / 2;
                         if (x > y - (midY + 1))
                         {
                             x = y - (midY + 1);
@@ -2247,7 +2245,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     Game.Grid[midY][midX - 1].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
                     for (x = 2; x < midX - 1; x++)
                     {
-                        y += Game.RandomBetween(-2, 2) / 2;
+                        y += random.RandomBetween(-2, 2) / 2;
                         if (y > midX - 1 - x)
                         {
                             y = midX - 1 - x;
@@ -2275,7 +2273,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     Game.Grid[midY][midX + 1].SetFeature(Game.SingletonRepository.Get<Tile>(nameof(PathBaseTile)));
                     for (x = Game.CurWid - 3; x > midX + 1; x--)
                     {
-                        y += Game.RandomBetween(-2, 2) / 2;
+                        y += random.RandomBetween(-2, 2) / 2;
                         if (y > x - (midX + 1))
                         {
                             y = x - (midX + 1);
@@ -2554,8 +2552,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 }
             }
 
-            Game.UseFixed = true;
-            Game.FixedSeed = Game.Wilderness[Game.WildernessY][Game.WildernessX].Seed;
+            GameRandom random = new GameRandom(Game.Wilderness[Game.WildernessY][Game.WildernessX].Seed);
             int x;
             int y;
             for (y = 0; y < Game.CurHgt; y++)
@@ -2568,9 +2565,9 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     if (elevation > 0)
                     {
                         floorTile = Game.GrassTile;
-                        if (Game.DieRoll(10) < elevation)
+                        if (random.DieRoll(10) < elevation)
                         {
-                            if (Game.DieRoll(10) < elevation)
+                            if (random.DieRoll(10) < elevation)
                             {
                                 featureTile = Game.SingletonRepository.Get<Tile>(nameof(TreeTile));
                             }
@@ -2604,23 +2601,22 @@ internal class StandardDungeonGenerator : DungeonGenerator
             }
             MakeWildernessWalls(Game.WildernessX, Game.WildernessY);
             MakeCornerTowers(Game.WildernessX, Game.WildernessY);
-            MakeWildernessPaths(Game.WildernessX, Game.WildernessY);
-            MakeWildernessFeatures(Game.WildernessX, Game.WildernessY, out int stairX, out int stairY);
-            int rocks = Game.RandomBetween(1, 10);
+            MakeWildernessPaths(random, Game.WildernessX, Game.WildernessY);
+            MakeWildernessFeatures(random, Game.WildernessX, Game.WildernessY, out int stairX, out int stairY);
+            int rocks = random.RandomBetween(1, 10);
             for (int i = 0; i < rocks; i++)
             {
-                x = Game.DieRoll(Game.CurWid - 2);
-                y = Game.DieRoll(Game.CurHgt - 2);
+                x = random.DieRoll(Game.CurWid - 2);
+                y = random.DieRoll(Game.CurHgt - 2);
                 if (!Game.Grid[y][x].FeatureType.IsGrass)
                 {
                     continue;
                 }
                 Game.Grid[y][x].SetFeature(Game.RockTile);
             }
-            Game.UseFixed = false;
             if (Game.CameFrom == LevelStartEnum.StartRandom)
             {
-                NewPlayerSpot();
+                NewPlayerSpot(Game._mainSequence);
             }
             else if (Game.CameFrom == LevelStartEnum.StartStairs)
             {

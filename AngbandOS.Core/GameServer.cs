@@ -27,7 +27,7 @@ public class GameServer
     /// </summary>
     public byte[] SaveGame()
     {
-#if DEBUG
+#if DEBUG        
         BinaryFormatter formatter = new BinaryFormatter();
         MemoryStream memoryStream = new MemoryStream();
         formatter.Serialize(memoryStream, Game);
@@ -213,7 +213,7 @@ public class GameServer
             // Announce the new game and the seed for the replay.
             if (replayPersistentStorage is not null)
             {
-                replayPersistentStorage.NewGame(Game.MainSequenceRandomSeed);
+                replayPersistentStorage.NewGame(Game.MainSequenceGameStartSeed);
             }
 
             Game.Play(console, persistentStorage, replayPersistentStorage);

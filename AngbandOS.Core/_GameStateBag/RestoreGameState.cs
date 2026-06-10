@@ -304,11 +304,11 @@ internal class RestoreGameState
 #if DEBUG
                 if (constructors.Length == 0)
                 {
-                    throw new Exception($"No constructor was supplied to generate a {typeof(T).Name}.");
+                    throw new Exception($"No constructor was supplied to generate a {typeof(T).Name}.  The passing of no constructors in the arguments is only valid when the game object already exists at this restore step.  In that case this restore can return an existing reference without need for construction but no reference was found for this object.  This object was serialized as non-polymorphic, so exactly one constructor must be supplied.");
                 }
                 if (constructors.Length != 1)
                 {
-                    throw new Exception($"Too many constructors were supplied to generate a {typeof(T).Name}.  {typeof(T).Name} was serialized without polymorphism support.");
+                    throw new Exception($"Too many constructors were supplied to generate a {typeof(T).Name}.  {typeof(T).Name} was serialized without polymorphic support.");
                 }
 #endif
                 constructor = constructors[0];

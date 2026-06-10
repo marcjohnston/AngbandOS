@@ -1,13 +1,13 @@
 ﻿namespace AngbandOS.Core;
 
-public sealed class SystemRng : IRandomGenerator
+public sealed class SystemRandomGenerator : IRandomGenerator
 {
     private Random random;
-    public SystemRng()
+    public SystemRandomGenerator()
     {
         random = new Random();
     }
-    public SystemRng(int seed)
+    public SystemRandomGenerator(int seed)
     {
         random = new Random(seed);
     }
