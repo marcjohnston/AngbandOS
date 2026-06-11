@@ -43,7 +43,7 @@ internal class MonsterKnowledge : IGameSerialize
             (nameof(Guardian), saveGameState.CreateGameStateBag(Guardian)),
             (nameof(OnlyGuardian), saveGameState.CreateGameStateBag(OnlyGuardian)),
             (nameof(Characteristics), saveGameState.CreateGameStateBag(Characteristics, typeof(MonsterCharacteristics))),
-            (nameof(RSpells), saveGameState.CreateGameStateBag(RSpells)),
+            (nameof(RSpells), saveGameState.CreateGameStateBag(RSpells, typeof(MonsterSpell))),
             (nameof(RIgnore), saveGameState.CreateGameStateBag(RIgnore)),
             (nameof(RPkills), saveGameState.CreateGameStateBag(RPkills)),
             (nameof(RProbed), saveGameState.CreateGameStateBag(RProbed)),
