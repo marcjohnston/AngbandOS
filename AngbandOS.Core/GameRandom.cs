@@ -12,6 +12,7 @@ internal class GameRandom : IGameSerialize
     private const int _randnorNum = 256;
     private const int _randnorStd = 64;
 
+
     private int[] _randnorTable { get; } =
     {
         206, 613, 1022, 1430, 1838, 2245, 2652, 3058, 3463, 3867, 4271, 4673, 5075, 5475, 5874, 6271, 6667, 7061,
