@@ -180,6 +180,7 @@
         EvocationScript,
         ExamineScript,
         ExamineStoreItemScript,
+        ExitStoreScript,
         ExorcismScript,
         ExtraDimensionalBeingScript,
         FillLanternEnchantmentScript,

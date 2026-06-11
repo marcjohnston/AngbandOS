@@ -327,6 +327,8 @@ internal class Store : IGameSerialize
         char c = Game.CurrentCommand;
         bool matchingCommandFound = false;
 
+        Game.Screen.PrintLine("", 0, 0);
+
         // Process commands
         foreach (StoreCommand command in Game.SingletonRepository.Get<StoreCommand>())
         {
@@ -353,14 +355,16 @@ internal class Store : IGameSerialize
             }
         }
 
+        string message = "";
         if (matchingCommandFound)
         {
-            Game.MsgPrint("That command does not work in this Store.");
+            message = "That command does not work in this Store.";
         }
         else
         {
-            Game.MsgPrint("That command does not work in stores.");
+            message = "That command does not work in stores.";
         }
+        Game.Screen.PrintLine(message, 0, 0);
     }
 
     private void DisplayStore()
@@ -638,7 +642,7 @@ internal class Store : IGameSerialize
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand5, 43, 0); // This needs to be before #4 to not erase it.
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand4, 43, 56);
             Game.Screen.Print("You may: ", 41, 0);
-            Game.RequestCommand();
+            Game.RequestCommand(false);
             ProcessCommand();
             Game.FullScreenOverlay = true;
             Game.NoticeStuff();

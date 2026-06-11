@@ -542,8 +542,8 @@ internal class Window : IGameSerialize
     /// Print a string in white color, erasing the rest of the line to the width of the screen.
     /// </summary>
     /// <param name="str"> The string to print </param>
-    /// <param name="row"> The row at which to print </param>
-    /// <param name="col"> The column at which to print </param>
+    /// <param name="row"> The row at which to print (base-0).</param>
+    /// <param name="col"> The column at which to print (base-0).</param>
     public void PrintLine(string str, int row, int col)
     {
         PrintLine(ColorEnum.White, str, row, col);

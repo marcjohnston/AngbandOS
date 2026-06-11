@@ -4269,7 +4269,7 @@ internal partial class Game : IGameSerialize
             else
             {
                 ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
-                RequestCommand();
+                RequestCommand(true);
                 ProcessCommand(false);
                 CloseBatchOfMessages();
             }
@@ -8973,7 +8973,7 @@ internal partial class Game : IGameSerialize
         ConsoleViewPort.PlayMusic(musicTrack);
     }
 
-    public void RequestCommand()
+    public void RequestCommand(bool enablePopup)
     {
         void ShowPopupMenu()
         {
@@ -9002,7 +9002,7 @@ internal partial class Game : IGameSerialize
             HideCursorOnFullScreenInkey = true;
             (char cmd, bool isArtificial, bool fromReplay) = GetKeystroke();
             MsgPrint(null);
-            if (cmd == '\x1b')
+            if (enablePopup && cmd == '\x1b')
             {
                 // Keystrokes will not be recorded here.
                 ShowPopupMenu();
@@ -9183,6 +9183,10 @@ internal partial class Game : IGameSerialize
                     k = gameReplayStep.Keystroke;
 
 #if DEBUG
+                    if (ReplayQueue.Count <= 3)
+                    {
+                        int _ = 0;
+                    }
                     // Perform replay verification.
                     if (gameReplayStep.Seed == 0)
                     {
@@ -9214,6 +9218,11 @@ internal partial class Game : IGameSerialize
 
             ch = '\0';
 
+            if (!nonBlocking)
+            {
+                UpdateScreen();
+            }
+
             // If this key queue is empty, attempt to fill it at least once.
             if (KeyQueue.Count == 0)
             {
@@ -9221,15 +9230,8 @@ internal partial class Game : IGameSerialize
             }
 
             // Check for blocking mode.
-            bool screenUpdated = false;
             while (KeyQueue.Count == 0 && !nonBlocking && !Shutdown)
             {
-                if (!screenUpdated)
-                {
-                    UpdateScreen();
-                    screenUpdated = true;
-                }
-
                 Thread.Sleep(5);
                 TryEnqueueKey();
             }
