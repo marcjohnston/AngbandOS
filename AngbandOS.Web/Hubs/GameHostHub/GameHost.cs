@@ -246,11 +246,6 @@ namespace AngbandOS.Web.Hubs
             return c;
         }
 
-        public bool KeyQueueIsEmpty()
-        {
-            return KeyQueue.IsEmpty;
-        }
-
         public void MessagesUpdated()
         {
             foreach (IGameMessagesHubMessages gameMessageHub in _gameMessagesMonitors)

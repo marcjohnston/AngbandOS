@@ -116,11 +116,6 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         }));
     }
 
-    public bool KeyQueueIsEmpty()
-    {
-        return KeyQueue.Count == 0;
-    }
-
     public char? GetKey()
     {
         if (!KeyQueue.TryDequeue(out char key))
