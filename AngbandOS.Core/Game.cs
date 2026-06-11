@@ -4217,9 +4217,10 @@ internal partial class Game : IGameSerialize
         }
         if (Running != 0 || CommandRepeat != 0 || (Resting != 0 && (Resting & 0x0F) == 0))
         {
-            // We need a non-blocking inkey.
+            // We need a non-blocking inkey to detect if we need to cancel running.
             if (GetAndRecordKeystroke(false, true) != 0)
             {
+            //    RecordReplayStep(ReplayStepType.CancelRun);
                 Disturb(false);
                 MsgPrint("Cancelled.");
             }
@@ -7782,7 +7783,7 @@ internal partial class Game : IGameSerialize
                 return;
             }
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateTorchRadiusFlaggedAction)).Set();
-            // Initialise our navigation state
+            // Initialize our navigation state
             StartRun(direction);
         }
         else
@@ -9195,7 +9196,10 @@ internal partial class Game : IGameSerialize
                     {
                         throw new Exception("Replay verification failure: Replay seed is zero.");
                     }
-
+                    if (ReplayQueue.Count == 80)
+                    {
+                        int _ = 0;
+                    }
                     if (_mainSequence.CurrentSeed != gameReplayStep.Seed)
                     {
                         throw new Exception($"Replay verification failure: Current random seed {_mainSequence.CurrentSeed} does not match expected random seed {gameReplayStep.Seed} for replay step with keystroke {gameReplayStep.Keystroke} at {gameReplayStep.DateTime} with {ReplayQueue.Count} steps remaining in the queue.");
@@ -9253,7 +9257,8 @@ internal partial class Game : IGameSerialize
             return true;
         }
 
-        // Retrieve the IsInReplayMode value at the beginning.  The retrieval process will turn off the replay mode for the last keystroke.
+        // Retrieve the IsInReplayMode value at the beginning.  The retrieval process will turn off the replay mode for the last keystroke.  This prevents the last keystroke
+        // from being recorded.
         bool fromReplay = IsInReplayMode;
 
         char ch = '\0';

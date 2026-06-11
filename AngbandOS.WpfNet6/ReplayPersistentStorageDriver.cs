@@ -51,12 +51,25 @@ internal class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDispos
         byte[] bytes = BitConverter.GetBytes(value);
         await _stream.WriteAsync(bytes);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    /// <remarks>This char consumes 2 bytes.</remarks>
     public async Task WriteCharAsync(char value)
     {
         byte[] bytes = BitConverter.GetBytes(value);
         await _stream.WriteAsync(bytes);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    /// <remarks>This date time consumes 8 bytes.</remarks>
     public async Task WriteDateTimeAsync(DateTime value)
     {
         byte[] bytes = BitConverter.GetBytes(value.Ticks);

@@ -17,7 +17,7 @@ internal class ScrollStoreInventoryScript : Script, IStoreCommandScript
     /// <returns></returns>
     public void ExecuteStoreCommandScript(StoreCommandEvent storeCommandEvent)
     {
-        char ch = Game.GetAndRecordKeystroke(false, true); // TODO: Why is this non-blocking?
+        char ch = Game.GetAndRecordKeystroke(); // TODO: This used to be false, true for non-blocking.  Removed for replay functionality.
         switch (ch)
         {
             case '9':
