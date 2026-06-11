@@ -173,10 +173,8 @@ internal partial class Game : IGameSerialize
             (nameof(CommandArgument), saveGameState.CreateGameStateBag(CommandArgument)),
             (nameof(CommandDirection), saveGameState.CreateGameStateBag(CommandDirection)),
             (nameof(CurrentCommand), saveGameState.CreateGameStateBag(CurrentCommand)),
-            (nameof(KeyQueue), saveGameState.CreateGameStateBag(KeyQueue)),
+            (nameof(KeyQueue), saveGameState.CreateGameStateBag(KeyQueue.ToArray())),
             (nameof(Screen), saveGameState.CreateGameStateBag(Screen, typeof(Window))),
-            (nameof(KeyHead), saveGameState.CreateGameStateBag(KeyHead)),
-            (nameof(KeyTail), saveGameState.CreateGameStateBag(KeyTail)),
             (nameof(_artificialKeyBuffer), saveGameState.CreateGameStateBag(_artificialKeyBuffer)),
             (nameof(_keymapAct), saveGameState.CreateGameStateBag(_keymapAct)),
             (nameof(History), saveGameState.CreateGameStateBag(History)),
@@ -370,6 +368,7 @@ internal partial class Game : IGameSerialize
             // There are a few properties we need to set. 
             IsDead = true;
             Quests = new List<Quest>();
+            KeyQueue = new Queue<char>();
             InitializeAllocationTables(); // This is not performed on a restore.
             _mainSequence = new GameRandom(MainSequenceGameStartSeed);
         }
@@ -493,10 +492,8 @@ internal partial class Game : IGameSerialize
             CommandArgument = restoreGameState.GetByKey(nameof(CommandArgument)).GetInt();
             CommandDirection = restoreGameState.GetByKey(nameof(CommandDirection)).GetInt();
             CurrentCommand = restoreGameState.GetByKey(nameof(CurrentCommand)).GetChar();
-            KeyQueue = restoreGameState.GetByKey(nameof(KeyQueue)).GetChars();
+            KeyQueue = new Queue<char>(restoreGameState.GetByKey(nameof(KeyQueue)).GetChars());
             Screen = restoreGameState.GetByKey(nameof(Screen)).GetDerivedReference<Window>(_restoreGameState => new Window(this, _restoreGameState));
-            KeyHead = restoreGameState.GetByKey(nameof(KeyHead)).GetInt();
-            KeyTail = restoreGameState.GetByKey(nameof(KeyTail)).GetInt();
             _artificialKeyBuffer = restoreGameState.GetByKey(nameof(_artificialKeyBuffer)).GetString();
             _keymapAct = restoreGameState.GetByKey(nameof(_keymapAct)).GetArrayOfStrings();
             History = restoreGameState.GetByKey(nameof(History)).GetStrings();
@@ -818,7 +815,6 @@ internal partial class Game : IGameSerialize
         LastInputReceived = DateTime.Now;
         CorePersistentStorage = persistentStorage;
         ReplayPersistentStorage = replayPersistentStorage;
-        KeyQueue = new char[ConsoleViewPort.MaximumKeyQueueLength];
 
         if (Screen is null)
         {
@@ -1240,7 +1236,7 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public bool HideCursorOnFullScreenInkey;
 
-    public char[] KeyQueue;
+    public Queue<char> KeyQueue;
 
     /// <summary>
     /// The current contents of the game screen.
@@ -1250,9 +1246,6 @@ internal partial class Game : IGameSerialize
     /// is supplied at the play game stage.
     /// </remarks>
     public Window? Screen = null;
-
-    public int KeyHead = 0;
-    public int KeyTail = 0;
 
     /// <summary>
     /// A buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.  These artifical keypresses are used only for conversion of 
@@ -9151,9 +9144,9 @@ internal partial class Game : IGameSerialize
             /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort"/> and updates the <see cref="LastInputReceived"/> property./>
             /// </summary>
             /// <param name="k"> The keypress to add </param>
-            void WaitAndEnqueueKey()
+            void TryEnqueueKey()
             {
-                char k;
+                char? k = null;
 
                 // Check to see if we are in playback mode.
                 if (IsInReplayMode)
@@ -9180,7 +9173,7 @@ internal partial class Game : IGameSerialize
                         waitTime = MaxKeystrokeReplayElapsedTime.Value;
                     }
 
-                    // Force a wait.
+                    // Force a thread sleep.
                     if (waitTime > TimeSpan.Zero)
                     {
                         Pause(waitTime);
@@ -9195,10 +9188,6 @@ internal partial class Game : IGameSerialize
                     {
                         throw new Exception("Replay verification failure: Replay seed is zero.");
                     }
-                    if (ReplayQueue.Count == 80)
-                    {
-                        int _ = 0;
-                    }
                     if (_mainSequence.CurrentSeed != gameReplayStep.Seed)
                     {
                         throw new Exception($"Replay verification failure: Current random seed {_mainSequence.CurrentSeed} does not match expected random seed {gameReplayStep.Seed} for replay step with keystroke {gameReplayStep.Keystroke} at {gameReplayStep.DateTime} with {ReplayQueue.Count} steps remaining in the queue.");
@@ -9211,49 +9200,42 @@ internal partial class Game : IGameSerialize
                 else
                 {
                     // Wait for a keystroke from the console and record it and the current date and time for replay.
-                    k = ConsoleViewPort.WaitForKey();
+                    k = ConsoleViewPort.GetKey();
                 }
 
-                if (k == 0) // TODO: This should never be
+                // Do we have anything to enqueue?
+                if (k.HasValue) 
                 {
-                    return;
+                    KeyQueue.Enqueue(k.Value);
+                    LastInputReceived = DateTime.Now;
+                    ConsoleViewPort.InputReceived();
                 }
-                KeyQueue[KeyHead++] = k;
-                if (KeyHead == KeyQueue.Length)
-                {
-                    KeyHead = 0;
-                }
-
-                LastInputReceived = DateTime.Now;
-                ConsoleViewPort.InputReceived();
             }
 
             ch = '\0';
-            if (nonBlocking)
+
+            // If this key queue is empty, attempt to fill it at least once.
+            if (KeyQueue.Count == 0)
             {
-                if (!ConsoleViewPort.KeyQueueIsEmpty())
+                TryEnqueueKey();
+            }
+
+            // Check for blocking mode.
+            bool screenUpdated = false;
+            while (KeyQueue.Count == 0 && !nonBlocking && !Shutdown)
+            {
+                if (!screenUpdated)
                 {
-                    WaitAndEnqueueKey();
+                    UpdateScreen();
+                    screenUpdated = true;
                 }
+
+                Thread.Sleep(5);
+                TryEnqueueKey();
             }
-            else
-            {
-                UpdateScreen();
-                while (KeyHead == KeyTail && !Shutdown) // TODO: should this yield?
-                {
-                    WaitAndEnqueueKey();
-                }
-            }
-            if (KeyHead == KeyTail)
-            {
-                return false;
-            }
-            ch = KeyQueue[KeyTail];
-            if (!nonBlocking && ++KeyTail == KeyQueue.Length) // TODO: I do not understand this
-            {
-                KeyTail = 0;
-            }
-            return true;
+
+            // Take the next keystroke out of the queue and return it.
+            return KeyQueue.TryDequeue(out ch);
         }
 
         // Retrieve the IsInReplayMode value at the beginning.  The retrieval process will turn off the replay mode for the last keystroke.  This prevents the last keystroke
@@ -9268,17 +9250,18 @@ internal partial class Game : IGameSerialize
             HideCursorOnFullScreenInkey = false;
             return (ch, true, fromReplay);
         }
-        bool v = Screen.CursorVisible;
+        bool previousCursorVisible = Screen.CursorVisible;
         if (!nonBlocking && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
         {
             Screen.CursorVisible = true;
         }
-        while (ch == 0 && !Shutdown)
+        while (ch == '\0' && !Shutdown)
         {
             if (nonBlocking)
             {
                 if (GetKeypress(out char kk, true))
                 {
+                    // If a key was retrieved, use it.
                     ch = kk;
                 }
                 break;
@@ -9298,7 +9281,10 @@ internal partial class Game : IGameSerialize
                 ch = '\0';
             }
         }
-        Screen.CursorVisible = v;
+
+        // Restore the cursor visibility.
+        Screen.CursorVisible = previousCursorVisible;
+
         HideCursorOnFullScreenInkey = false;
         return (ch, false, fromReplay);
     }

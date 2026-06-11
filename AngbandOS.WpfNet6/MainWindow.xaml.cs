@@ -35,8 +35,6 @@ public partial class MainWindow : Window, IConsoleAndViewPort
 
     int IViewPort.Width => ViewPortWidth;
 
-    public int MaximumKeyQueueLength => 256;
-
     /// <summary>
     /// Plays a sound
     /// </summary>
@@ -123,13 +121,12 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         return KeyQueue.Count == 0;
     }
 
-    public char WaitForKey()
+    public char? GetKey()
     {
-        while (KeyQueue.Count == 0)
+        if (!KeyQueue.TryDequeue(out char key))
         {
-            System.Threading.Thread.Sleep(5);
+            return null;
         }
-        char key = KeyQueue.Dequeue();
         return key;
     }
 
@@ -524,23 +521,5 @@ public partial class MainWindow : Window, IConsoleAndViewPort
     public void MessagesReceived(IGameMessage[] gameMessages)
     {
 
-    }
-}
-
-public class Replay : IReplayPersistentStorage
-{
-    public GameReplayDetails GetReplay(string gameGuid)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void NewGame(int seed)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void WriteStep(DateTime dateTime, char keystroke, int? seed)
-    {
-        throw new NotImplementedException();
     }
 }

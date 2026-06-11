@@ -6,17 +6,10 @@
 public interface IConsoleAndViewPort : IViewPort
 {
     /// <summary>
-    /// Returns the maximum length of the queue used to store keystrokes.  The implementing object must return a value >= 1.  256 is recommended.
-    /// </summary>
-    int MaximumKeyQueueLength { get; }
-
-    /// <summary>
     /// Retrieve a keypress from the user.
     /// </summary>
     /// <returns></returns>
-    char WaitForKey();
-
-    bool KeyQueueIsEmpty();
+    char? GetKey();
 
     /// <summary>
     /// Messages from the previous command have been received.

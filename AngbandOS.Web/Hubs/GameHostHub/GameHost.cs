@@ -153,7 +153,6 @@ namespace AngbandOS.Web.Hubs
         #region IConsole Implementation for Messages from the Game to the Web Client
         public int Height => 45;
         public int Width => 80;
-        public int MaximumKeyQueueLength => 256;
 
         /// <summary>
         /// Accepts a Clear command sent by the AngbandOS core game and forwards the event to the console and all spectators.
@@ -238,16 +237,12 @@ namespace AngbandOS.Web.Hubs
         /// This message is received from the game when a key is needed.
         /// </summary>
         /// <returns></returns>
-        public char WaitForKey()
+        public char? GetKey()
         {
-            char c;
-
-            // Wait until there is a key from the client.
-            while (!KeyQueue.TryDequeue(out c) && !ShuttingDown)
+            if (!KeyQueue.TryDequeue(out char c))
             {
-                Thread.Sleep(5); // TODO: Use a wait event
+                return null;
             }
-            // Return the key.
             return c;
         }
 
