@@ -4220,7 +4220,6 @@ internal partial class Game : IGameSerialize
             // We need a non-blocking inkey to detect if we need to cancel running.
             if (GetAndRecordKeystroke(false, true) != 0)
             {
-            //    RecordReplayStep(ReplayStepType.CancelRun);
                 Disturb(false);
                 MsgPrint("Cancelled.");
             }
@@ -9276,13 +9275,12 @@ internal partial class Game : IGameSerialize
         }
         while (ch == 0 && !Shutdown)
         {
-            if (nonBlocking && GetKeypress(out char kk, false))
-            {
-                ch = kk;
-                break;
-            }
             if (nonBlocking)
             {
+                if (GetKeypress(out char kk, false))
+                {
+                    ch = kk;
+                }
                 break;
             }
             GetKeypress(out ch, true);
