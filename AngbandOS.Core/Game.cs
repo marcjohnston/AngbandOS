@@ -9120,9 +9120,9 @@ internal partial class Game : IGameSerialize
         }
     }
 
-    public char GetAndRecordKeystroke(bool disableArtificialKeybuffer = false, bool nonBlocking = false)
+    public char GetAndRecordKeystroke(bool disableArtificialKeyBuffer = false, bool nonBlocking = false)
     {
-        (char keystroke, bool isArtificial, bool fromReplay) = GetKeystroke(disableArtificialKeybuffer, nonBlocking);
+        (char keystroke, bool isArtificial, bool fromReplay) = GetKeystroke(disableArtificialKeyBuffer, nonBlocking);
         if (!isArtificial && !fromReplay)
         {
             RecordReplayStep(keystroke);
@@ -9135,7 +9135,7 @@ internal partial class Game : IGameSerialize
     /// keystrokes are retrieved.
     /// </summary>
     /// <returns>The next key pressed.</returns>
-    public (char keystroke, bool isArtificial, bool fromReplay) GetKeystroke(bool disableArtificialKeybuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
+    public (char keystroke, bool isArtificial, bool fromReplay) GetKeystroke(bool disableArtificialKeyBuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
     {
         /// <summary>
         /// Attempts to gets a keypress from the <see cref="ConsoleViewport"/> queue.  Returns true, if a keypress was returned.  Returns false, if the <paramref name="wait"/> is true and the <see cref="ConsoleViewPort"/>
@@ -9145,7 +9145,7 @@ internal partial class Game : IGameSerialize
         /// <param name="wait"> Whether to wait for a key if one isn't already available </param>
         /// <param name="take"> Whether to take the keypress out of the queue </param>
         /// <returns> True if a keypress was available, false otherwise </returns>
-        bool GetKeypress(out char ch, bool waitAndTake)
+        bool GetKeypress(out char ch, bool nonBlocking)
         {
             /// <summary>
             /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort"/> and updates the <see cref="LastInputReceived"/> property./>
@@ -9229,17 +9229,17 @@ internal partial class Game : IGameSerialize
             }
 
             ch = '\0';
-            if (waitAndTake)
+            if (nonBlocking)
             {
-                UpdateScreen();
-                while (KeyHead == KeyTail && !Shutdown) // TODO: should this yield?
+                if (!ConsoleViewPort.KeyQueueIsEmpty())
                 {
                     WaitAndEnqueueKey();
                 }
             }
             else
             {
-                if (!ConsoleViewPort.KeyQueueIsEmpty())
+                UpdateScreen();
+                while (KeyHead == KeyTail && !Shutdown) // TODO: should this yield?
                 {
                     WaitAndEnqueueKey();
                 }
@@ -9249,7 +9249,7 @@ internal partial class Game : IGameSerialize
                 return false;
             }
             ch = KeyQueue[KeyTail];
-            if (waitAndTake && ++KeyTail == KeyQueue.Length)
+            if (!nonBlocking && ++KeyTail == KeyQueue.Length) // TODO: I do not understand this
             {
                 KeyTail = 0;
             }
@@ -9261,7 +9261,7 @@ internal partial class Game : IGameSerialize
         bool fromReplay = IsInReplayMode;
 
         char ch = '\0';
-        if (!disableArtificialKeybuffer && _artificialKeyBuffer.Length > 0)
+        if (!disableArtificialKeyBuffer && _artificialKeyBuffer.Length > 0)
         {
             ch = _artificialKeyBuffer[0];
             _artificialKeyBuffer = _artificialKeyBuffer.Remove(0, 1);
@@ -9277,13 +9277,13 @@ internal partial class Game : IGameSerialize
         {
             if (nonBlocking)
             {
-                if (GetKeypress(out char kk, false))
+                if (GetKeypress(out char kk, true))
                 {
                     ch = kk;
                 }
                 break;
             }
-            GetKeypress(out ch, true);
+            GetKeypress(out ch, false);
             if (ch == 29)
             {
                 ch = '\0';
