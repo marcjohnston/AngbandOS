@@ -7,7 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AngbandOS.Core\AngbandOS.Core.Interface\AngbandOS.Core.Interface.csproj" />
+    <ProjectReference Include="..\AngbandOS.Core\AngbandOS.Core.csproj" />
+    <ProjectReference Include="..\AngbandOS.GamePacks.Cthangband\AngbandOS.GamePacks.Cthangband.csproj" />
+    <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
   </ItemGroup>
 
 </Project>
