@@ -44,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngbandOS.Core.ExpiringDict
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngbandOS.Core.StringLibrary", "AngbandOS.Core.StringLibrary\AngbandOS.Core.StringLibrary.csproj", "{F53E0244-206C-4BFB-8DE5-ECCC37051C68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngbandOS.Console.Linux", "AngbandOS.Console.Linux\AngbandOS.Console.Linux.csproj", "{5687726A-37ED-49F7-9973-BC87EB9AC53D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (Separate Folders)|Any CPU = Debug (Separate Folders)|Any CPU
@@ -468,6 +470,30 @@ Global
 		{F53E0244-206C-4BFB-8DE5-ECCC37051C68}.Release|arm64.Build.0 = Release|Any CPU
 		{F53E0244-206C-4BFB-8DE5-ECCC37051C68}.Release|x86.ActiveCfg = Release|Any CPU
 		{F53E0244-206C-4BFB-8DE5-ECCC37051C68}.Release|x86.Build.0 = Release|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug (Separate Folders)|Any CPU.ActiveCfg = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug (Separate Folders)|Any CPU.Build.0 = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug (Separate Folders)|arm64.ActiveCfg = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug (Separate Folders)|arm64.Build.0 = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug (Separate Folders)|x86.ActiveCfg = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug (Separate Folders)|x86.Build.0 = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug|arm64.Build.0 = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug|x86.Build.0 = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug1|Any CPU.ActiveCfg = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug1|Any CPU.Build.0 = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug1|arm64.ActiveCfg = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug1|arm64.Build.0 = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug1|x86.ActiveCfg = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Debug1|x86.Build.0 = Debug|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Release|arm64.ActiveCfg = Release|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Release|arm64.Build.0 = Release|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Release|x86.ActiveCfg = Release|Any CPU
+		{5687726A-37ED-49F7-9973-BC87EB9AC53D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
