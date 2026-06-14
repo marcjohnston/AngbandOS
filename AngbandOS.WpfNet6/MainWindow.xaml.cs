@@ -1,7 +1,7 @@
 ﻿using AngbandOS.Core;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface.Configuration;
-using AngbandOS.PersistentStorage;
+using AngbandOS.PersistentStorage.FileSystem;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +12,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+
 namespace Cthangband;
 /// <summary>
 /// Interaction logic for MainWindow.xaml

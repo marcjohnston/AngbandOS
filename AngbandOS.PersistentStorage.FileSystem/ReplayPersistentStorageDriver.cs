@@ -1,11 +1,8 @@
 ﻿using AngbandOS.Core.Interface;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-namespace Cthangband;
 
-internal class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDisposable
+namespace AngbandOS.PersistentStorage.FileSystem;
+
+public class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDisposable
 {
     private string ReplayFilename { get; }
     private FileStream _stream;
