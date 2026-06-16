@@ -5,8 +5,5 @@
         Background="Black"
         Width="1600" Height="900"
         KeyDown="OnKeyDown"
-        TextInput="OnTextInput"
-        >
-  <!-- Host panel. The UniformGrid is created in code-behind to avoid XAML UniformGrid xmlns issues. -->
-  <Border Name="Root" Background="Black" />
+        TextInput="OnTextInput">
 </Window>
