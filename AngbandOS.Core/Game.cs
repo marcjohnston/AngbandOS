@@ -85,7 +85,7 @@ internal partial class Game : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(SingletonRepository), saveGameState.CreateGameStateBag(SingletonRepository)),
+            (nameof(SingletonRepository), saveGameState.CreateGameStateBag(SingletonRepository, typeof(SingletonRepository))),
 
             ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasAcidImmunity)),
             ("bools2", saveGameState.CreateGameStateBag(HasAcidResistance, HasAggravation, HasAntiMagic, HasAntiTeleport, HasAntiTheft, HasBlessedBlade, HasBlindnessResistance, HasChaosResistance)),

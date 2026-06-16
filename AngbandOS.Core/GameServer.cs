@@ -44,7 +44,7 @@ public class GameServer
 #endif
 
         SaveGameState saveGameState = new SaveGameState();
-        GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game);
+        GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game, typeof(Game));
         return GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
     }
 
