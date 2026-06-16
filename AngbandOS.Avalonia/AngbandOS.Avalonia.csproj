@@ -5,6 +5,15 @@
     <Nullable>enable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <AssemblyName>AngbandOS</AssemblyName>
+	<VersionPrefix>1.0.0</VersionPrefix>
+	<VersionSuffix>beta</VersionSuffix>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,5 +31,10 @@
     <ProjectReference Include="..\AngbandOS.Core\AngbandOS.Core.csproj" />
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
     <ProjectReference Include="..\AngbandOS.PersistentStorage.FileSystem\AngbandOS.PersistentStorage.FileSystem.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Releases\linux-x64\1.0.0\" />
+    <Folder Include="Releases\win-x64\" />
   </ItemGroup>
 </Project>

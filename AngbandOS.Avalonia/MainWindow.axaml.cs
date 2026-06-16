@@ -55,20 +55,20 @@ namespace AngbandOS.Avalonia
         private void RunGame()
         {
             GameServer gameServer = new GameServer();
-            string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string savePath = Path.Combine(myDocumentsPath, "My Games");
+            string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string savePath = Path.Combine(myDocumentsPath, "AngbandOS");
             Directory.CreateDirectory(savePath);
-            string saveFilename = Path.Combine(savePath, "angbandos.savefile");
-            string replayFilename = Path.Combine(savePath, "replay.json");
-            string jsonSaveFilename = Path.Combine(savePath, "savegame.json");
-            ICorePersistentStorage persistentStorage = new FileSystemCorePersistentStorage(saveFilename);
-            PlayModeEnum playMode = File.Exists(jsonSaveFilename) ? PlayModeEnum.ExistingGame : File.Exists(replayFilename) ? PlayModeEnum.ReplayGame : PlayModeEnum.NewGame;
+            string legacySaveFilename = Path.Combine(savePath, "angbandos.savefile");
+            string replayFilename = Path.Combine(savePath, "AngbandOS.replay");
+            string saveFilename = Path.Combine(savePath, "AngbandOS.save");
+            ICorePersistentStorage persistentStorage = new FileSystemCorePersistentStorage(legacySaveFilename);
+            PlayModeEnum playMode = File.Exists(saveFilename) ? PlayModeEnum.ExistingGame : File.Exists(replayFilename) ? PlayModeEnum.ReplayGame : PlayModeEnum.NewGame;
             ReplayPersistentStorageDriver replayPersistentStorage = new ReplayPersistentStorageDriver(replayFilename);
             GameConfiguration gameConfiguration = new CthangbandGameConfiguration();
             GameResults gameResults;
             if (playMode == PlayModeEnum.ExistingGame)
             {
-                byte[] serializedSaveGameData = File.ReadAllBytes(jsonSaveFilename);
+                byte[] serializedSaveGameData = File.ReadAllBytes(saveFilename);
                 gameResults = gameServer.PlayExistingGame(this, persistentStorage, replayPersistentStorage, gameConfiguration, serializedSaveGameData);
             }
             else if (playMode == PlayModeEnum.ReplayGame)
@@ -83,7 +83,7 @@ namespace AngbandOS.Avalonia
 
             if (gameResults.SerializedGameData?.Length > 0)
             {
-                File.WriteAllBytes(jsonSaveFilename, gameResults.SerializedGameData);
+                File.WriteAllBytes(saveFilename, gameResults.SerializedGameData);
             }
         }
 

@@ -81,12 +81,11 @@ public class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDisposab
             _stream = new FileStream(ReplayFilename, FileMode.Append, FileAccess.Write, FileShare.Read);
         }
 
+        //TODO: This needs to be converted into a concurrent queue and a separate thread to write the queue records.
         await WriteDateTimeAsync(dateTime);
         await WriteCharAsync(keystroke);
         await WriteIntAsync(seed ?? -1);
-#if DEBUG
         await _stream.FlushAsync();
-#endif
     }
 
     public void Dispose()
