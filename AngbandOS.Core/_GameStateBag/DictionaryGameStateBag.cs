@@ -11,16 +11,11 @@ namespace AngbandOS.Core;
     
 internal class DictionaryGameStateBag : GameStateBag
 {
-    /// <summary>
-    /// Returns true, if the values from this dictionary game state bag are retrieved in sequential order during the restore.  When enabled (set to true), the key is not encoded
-    /// during serialization, saving a significant amount of disk space.
-    /// </summary>
     public readonly bool SequentialRetrieval = true;
-
     public Dictionary<string, GameStateBag> Values { get; } = new Dictionary<string, GameStateBag>();
 
     /// <summary>
-    /// Creates a new dictionary game state bag with enumerated properties.  This constructor is used by all of the singleton objects.
+    /// Creates a new dictionary game state bag with enumerated properties.  This constructor is typically used for the singleton repository object.
     /// </summary>
     /// <param name="values"></param>
     [JsonConstructor]
@@ -29,11 +24,6 @@ internal class DictionaryGameStateBag : GameStateBag
         LoadValues(values.Select(_keyValuePair => (_keyValuePair.Key, _keyValuePair.Value)).ToArray());
     }
 
-    /// <summary>
-    /// Creates a new dictionary game state bag with enumerated properties.  This constructor is used by the main singleton repository object where the name/unique id is needed.
-    /// </summary>
-    /// <param name="values"></param>
-    /// <param name="sequentialRetrieval"></param>
     public DictionaryGameStateBag(Dictionary<string, GameStateBag> values, bool sequentialRetrieval)
     {
         SequentialRetrieval = sequentialRetrieval;
@@ -76,7 +66,9 @@ internal class DictionaryGameStateBag : GameStateBag
         }
     }
 
-    public GameStateBag? GetByKey(string key, int currentSequentialIndex)
+    public bool TryGetGameStateBag(string key, out GameStateBag? gameStateBag) => Values.TryGetValue(key, out gameStateBag);
+
+    public GameStateBag? GetByKey(string key, int currentSequentialIndex, bool verifySequentialRetrieval)
     {
         if (SequentialRetrieval)
         {
@@ -86,8 +78,7 @@ internal class DictionaryGameStateBag : GameStateBag
         if (Values.TryGetValue(key, out GameStateBag? gameStateBag))
         {
 #if DEBUG
-            // During DEBUG, perform a verification process that the properties are retrieved in order.
-            if (SequentialRetrieval)
+            if (verifySequentialRetrieval)
             {
                 int ordinalIndex = Values.Keys.ToList().IndexOf(key);
                 if (ordinalIndex != currentSequentialIndex)

@@ -5,6 +5,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
+using SkiaSharp;
 using System;
 using System.Runtime.InteropServices;
 
@@ -180,13 +181,16 @@ namespace AngbandOS.Avalonia
 
                     // fill background rectangle for the whole text span
                     Color backColor = FromColorEnum(pl.backColor);
-                    FillRect(baseAddr, rowBytes, fbWidth, fbHeight, destX, destY, drawW, drawH, backColor);
+                    FillRectPremultiplied(baseAddr, rowBytes, fbWidth, fbHeight, destX, destY, drawW, drawH, backColor);
 
                     // For each char, blit glyph pixels with foreColor directly from cached glyph bitmap
                     for (int i = 0; i < pl.text.Length; i++)
                     {
                         int ch = (byte)pl.text[i];
-                        byte[] mask = _glyphMasks[ch][(int)pl.foreColor];
+                        byte[] mask = _glyphMasks[ch]?[(int)pl.foreColor];
+
+                        if (mask == null)
+                            continue;
 
                         int glyphDestX = destX + i * cellWidth;
                         int glyphDestY = destY;
@@ -252,7 +256,7 @@ namespace AngbandOS.Avalonia
         }
 
         // Helper: fill an axis-aligned rectangle in premultiplied BGRA
-        private static void FillRect(IntPtr baseAddr, int rowBytes, int fbWidth, int fbHeight, int x, int y, int w, int h, Color color)
+        private static void FillRectPremultiplied(IntPtr baseAddr, int rowBytes, int fbWidth, int fbHeight, int x, int y, int w, int h, Color color)
         {
             if (w <= 0 || h <= 0) return;
 

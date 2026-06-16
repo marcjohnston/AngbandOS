@@ -32,9 +32,4 @@
     <ProjectReference Include="..\AngbandOS.Interface\AngbandOS.Core.Interface.csproj" />
     <ProjectReference Include="..\AngbandOS.PersistentStorage.FileSystem\AngbandOS.PersistentStorage.FileSystem.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Releases\linux-x64\1.0.0\" />
-    <Folder Include="Releases\win-x64\" />
-  </ItemGroup>
 </Project>

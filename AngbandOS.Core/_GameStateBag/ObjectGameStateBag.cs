@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Obsolete("Use DerivedObjectGameStateBag")]
 internal class ObjectGameStateBag : GameStateBag
 {
     public int ObjectId { get; }
@@ -35,13 +34,13 @@ internal class ObjectGameStateBag : GameStateBag
         return $"Object#{ObjectId}";
     }
 
-    public GameStateBag? GetByKey(string key, int currentSequentialIndex)
+    public GameStateBag? GetByKey(string key, int currentSequentialIndex, bool verifySequentialRetrieval)
     {
         if (Values is null)
         {
             return null;
         }
-        return Values.GetByKey(key, currentSequentialIndex);
+        return Values.GetByKey(key, currentSequentialIndex, verifySequentialRetrieval);
     }
 
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)

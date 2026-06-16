@@ -39,13 +39,13 @@ internal class DerivedObjectGameStateBag : GameStateBag
         return $"{(DerivedId.HasValue ? "Polymorph " : "")}Object#{ObjectId} {(Values is null ? "without" : "with")} state";
     }
 
-    public GameStateBag? GetByKey(string key, int currentSequentialIndex)
+    public GameStateBag? GetByKey(string key, int currentSequentialIndex, bool verifySequentialRetrieval)
     {
         if (Values is null)
         {
             return null;
         }
-        return Values.GetByKey(key, currentSequentialIndex);
+        return Values.GetByKey(key, currentSequentialIndex, verifySequentialRetrieval);
     }
 
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)

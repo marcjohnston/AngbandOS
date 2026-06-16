@@ -446,7 +446,7 @@ internal sealed class SingletonRepository : IGameSerialize
             RestoreGameState? singletonRestoreGameState = null;
             if (restoreGameState is not null)
             {
-                singletonRestoreGameState = restoreGameState.GetByKey(singleton.GetKey);
+                singletonRestoreGameState = restoreGameState.GetByKey(singleton.GetKey, false);
                 if (singletonRestoreGameState.GameStateBag is ReferenceGameStateBag referenceGameStateBag)
                 {
                     singletonRestoreGameState = restoreGameState.New(restoreGameState.GetObjectGameStateBag(referenceGameStateBag.ObjectId));
