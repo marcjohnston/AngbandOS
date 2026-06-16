@@ -1,6 +1,7 @@
 using AngbandOS.Core;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface.Configuration;
+using AngbandOS.GamePacks.Cthangband;
 using AngbandOS.PersistentStorage.FileSystem;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -51,43 +52,48 @@ namespace AngbandOS.Avalonia
 
         // Start game when opened (same logic as before)
         enum PlayModeEnum { NewGame, ExistingGame, ReplayGame }
+        private void RunGame()
+        {
+            GameServer gameServer = new GameServer();
+            string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string savePath = Path.Combine(myDocumentsPath, "My Games");
+            Directory.CreateDirectory(savePath);
+            string saveFilename = Path.Combine(savePath, "angbandos.savefile");
+            string replayFilename = Path.Combine(savePath, "replay.json");
+            string jsonSaveFilename = Path.Combine(savePath, "savegame.json");
+            ICorePersistentStorage persistentStorage = new FileSystemCorePersistentStorage(saveFilename);
+            PlayModeEnum playMode = File.Exists(jsonSaveFilename) ? PlayModeEnum.ExistingGame : File.Exists(replayFilename) ? PlayModeEnum.ReplayGame : PlayModeEnum.NewGame;
+            ReplayPersistentStorageDriver replayPersistentStorage = new ReplayPersistentStorageDriver(replayFilename);
+            GameConfiguration gameConfiguration = new CthangbandGameConfiguration();
+            GameResults gameResults;
+            if (playMode == PlayModeEnum.ExistingGame)
+            {
+                byte[] serializedSaveGameData = File.ReadAllBytes(jsonSaveFilename);
+                gameResults = gameServer.PlayExistingGame(this, persistentStorage, replayPersistentStorage, gameConfiguration, serializedSaveGameData);
+            }
+            else if (playMode == PlayModeEnum.ReplayGame)
+            {
+                GameReplayDetails gameReplayDetails = replayPersistentStorage.GetReplay();
+                gameResults = gameServer.ReplayGame(this, persistentStorage, replayPersistentStorage, gameConfiguration, gameReplayDetails);
+            }
+            else
+            {
+                gameResults = gameServer.PlayNewGame(this, persistentStorage, replayPersistentStorage, gameConfiguration);
+            }
+
+            if (gameResults.SerializedGameData?.Length > 0)
+            {
+                File.WriteAllBytes(jsonSaveFilename, gameResults.SerializedGameData);
+            }
+        }
+
         private async void MainWindow_Opened(object? sender, EventArgs e)
         {
             await Task.Run(() =>
             {
                 try
                 {
-                    GameServer gameServer = new GameServer();
-                    string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    string savePath = Path.Combine(myDocumentsPath, "My Games");
-                    Directory.CreateDirectory(savePath);
-                    string saveFilename = Path.Combine(savePath, "angbandos.savefile");
-                    string replayFilename = Path.Combine(savePath, "replay.json");
-                    string jsonSaveFilename = Path.Combine(savePath, "savegame.json");
-                    ICorePersistentStorage persistentStorage = new FileSystemCorePersistentStorage(saveFilename);
-                    PlayModeEnum playMode = File.Exists(jsonSaveFilename) ? PlayModeEnum.ExistingGame : File.Exists(replayFilename) ? PlayModeEnum.ReplayGame : PlayModeEnum.NewGame;
-                    ReplayPersistentStorageDriver replayPersistentStorage = new ReplayPersistentStorageDriver(replayFilename);
-                    GameConfiguration gameConfiguration = new AngbandOS.GamePacks.Cthangband.CthangbandGameConfiguration();
-                    GameResults gameResults;
-                    if (playMode == PlayModeEnum.ExistingGame)
-                    {
-                        byte[] serializedSaveGameData = File.ReadAllBytes(jsonSaveFilename);
-                        gameResults = gameServer.PlayExistingGame(this, persistentStorage, replayPersistentStorage, gameConfiguration, serializedSaveGameData);
-                    }
-                    else if (playMode == PlayModeEnum.ReplayGame)
-                    {
-                        GameReplayDetails gameReplayDetails = replayPersistentStorage.GetReplay();
-                        gameResults = gameServer.ReplayGame(this, persistentStorage, replayPersistentStorage, gameConfiguration, gameReplayDetails);
-                    }
-                    else
-                    {
-                        gameResults = gameServer.PlayNewGame(this, persistentStorage, replayPersistentStorage, gameConfiguration);
-                    }
-
-                    if (gameResults.SerializedGameData?.Length > 0)
-                    {
-                        File.WriteAllBytes(jsonSaveFilename, gameResults.SerializedGameData);
-                    }
+                    RunGame();
                 }
                 catch (Exception ex)
                 {

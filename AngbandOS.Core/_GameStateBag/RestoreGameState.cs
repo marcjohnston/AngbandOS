@@ -16,12 +16,8 @@ internal class RestoreGameState
     private Game Game { get; }
     private Dictionary<int, object> ObjectIdToReferenceDictionary { get; }
     private Dictionary<int, GameStateBag> ObjectIdToObjectGameStateBagDictionary { get; }
-
     public GameStateBag GameStateBag { get; }
-
-#if DEBUG
     private int CurrentSequentialIndex = 0;
-#endif
 
     /// <summary>
     /// Creates a clone of the RestoreGameState with a new game state bag.  Only the New method should utilize this constructor.
@@ -85,11 +81,11 @@ internal class RestoreGameState
         return ObjectIdToObjectGameStateBagDictionary[objectId];
     }
 
-    public RestoreGameState GetByKey(string key, bool verifySequentialRetrieval = true)
+    public RestoreGameState GetByKey(string key)
     {
         if (GameStateBag is ObjectGameStateBag objectGameStateBag)
         {
-            GameStateBag? gameStateBag = objectGameStateBag.GetByKey(key, CurrentSequentialIndex, verifySequentialRetrieval);
+            GameStateBag? gameStateBag = objectGameStateBag.GetByKey(key, CurrentSequentialIndex);
             if (gameStateBag is null)
             {
                 throw new KeyNotFoundException($"Key {key} not found in object game state bag with object id {objectGameStateBag.ObjectId}.");
@@ -100,7 +96,7 @@ internal class RestoreGameState
         }
         if (GameStateBag is DerivedObjectGameStateBag derivedObjectGameStateBag)
         {
-            GameStateBag? gameStateBag = derivedObjectGameStateBag.GetByKey(key, CurrentSequentialIndex, verifySequentialRetrieval);
+            GameStateBag? gameStateBag = derivedObjectGameStateBag.GetByKey(key, CurrentSequentialIndex);
             if (gameStateBag is null)
             {
                 throw new KeyNotFoundException($"Key {key} not found in object game state bag with object id {derivedObjectGameStateBag.ObjectId}.");
@@ -111,7 +107,7 @@ internal class RestoreGameState
         }
         if (GameStateBag is DictionaryGameStateBag dictionaryGameStateBag)
         {
-            GameStateBag? gameStateBag = dictionaryGameStateBag.GetByKey(key, CurrentSequentialIndex, verifySequentialRetrieval);
+            GameStateBag? gameStateBag = dictionaryGameStateBag.GetByKey(key, CurrentSequentialIndex);
             if (gameStateBag is null)
             {
                 throw new KeyNotFoundException($"Key {key} not found in dictionary game state bag.");
@@ -120,7 +116,7 @@ internal class RestoreGameState
             CurrentSequentialIndex++;
             return New(gameStateBag);
         }
-        throw new InvalidOperationException($"GameStateBag is not of type {nameof(ObjectGameStateBag)} or {nameof(DictionaryGameStateBag)}.");
+        throw new InvalidOperationException($"GameStateBag is not of type {nameof(DerivedObjectGameStateBag)} or {nameof(DictionaryGameStateBag)}.");
     }
 
     public int GetObjectId()
@@ -540,32 +536,6 @@ internal class RestoreGameState
         return listOfBytes.ToArray();
     }
 
-    public Dictionary<T1, T2> GetDictionary<T1, T2>(Func<RestoreGameState, T1> keySelector, Func<RestoreGameState, T2> valueSelector) where T1 : notnull
-    {
-        Dictionary<T1, T2> dictionary = new Dictionary<T1, T2>();
-        ListGameStateBag listGameStateBag = (ListGameStateBag)GameStateBag;
-        foreach (GameStateBag gameStateBag in listGameStateBag.Values)
-        {
-            DictionaryGameStateBag dictionaryGameStateBag = (DictionaryGameStateBag)gameStateBag;
-            GameStateBag? keyGameStateBag = dictionaryGameStateBag.GetByKey("Key", 0, false);
-            if (keyGameStateBag is null)
-            {
-                throw new KeyNotFoundException($"Key GameStateBag not found for dictionary entry.");
-            }
-            RestoreGameState restoreGameState = New(keyGameStateBag);
-            T1 key = keySelector(restoreGameState);
-
-            GameStateBag? valueGameStateBag = dictionaryGameStateBag.GetByKey("Value", 1, false);
-            if (valueSelector is null)
-            {
-                throw new KeyNotFoundException($"Value GameStateBag not found for dictionary entry.");
-            }
-            restoreGameState = New(valueGameStateBag);
-            T2 value = valueSelector(restoreGameState);
-            dictionary.Add(key, value);
-        }
-        return dictionary;
-    }
     public char[] GetChars() => ((CharArrayGameStateBag)GameStateBag).Value;
     public int GetInt() => ((IntValueGameStateBag)GameStateBag).Value;
     public ulong GetUlong() => ((UlongValueGameStateBag)GameStateBag).Value;
