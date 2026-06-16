@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
+using System.Text;
 
 namespace AngbandOS.PersistentStorage.FileSystem;
 
@@ -15,17 +16,34 @@ public class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDisposab
         using var stream = new FileStream(ReplayFilename, FileMode.Open, FileAccess.Read);
         using var reader = new BinaryReader(stream);
 
+        // Read the game seed.
         int gameSeed = reader.ReadInt32();
 
+        // Read the steps.
         var steps = new List<GameReplayStep>();
-
         while (stream.Position < stream.Length)
         {
+            // Read the date time in clock ticks.
             long ticks = reader.ReadInt64();
+
+            // Read the keystroke.  
             char c = reader.ReadChar();
-            char c2 = reader.ReadChar();
+            char c2 = reader.ReadChar(); // TODO: This will be zero ... but Char is 2 bytes and ReadChar isn't reading it.
+
+            // Read the seed.
             int stepSeed = reader.ReadInt32();
-            GameReplayStep gameReplayStep = new GameReplayStep(new DateTime(ticks), c, stepSeed);
+
+            // Read the stack trace.
+            string? stackTrace = null;
+            byte nullStackTrace = reader.ReadByte();
+            if (nullStackTrace == 1)
+            {
+                int length = reader.ReadInt32();
+                byte[] text = reader.ReadBytes(length);
+                stackTrace = Encoding.UTF8.GetString(text);
+            }
+
+            GameReplayStep gameReplayStep = new GameReplayStep(new DateTime(ticks), c, stepSeed, stackTrace);
             steps.Add(gameReplayStep);
         }
 
@@ -61,6 +79,18 @@ public class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDisposab
         await _stream.WriteAsync(bytes);
     }
 
+    public async Task WriteByteAsync(byte value)
+    {
+        await _stream.WriteAsync(new byte[] { value });
+    }
+
+    public async Task WriteStringAsync(string value)
+    {
+        byte[] bytes = Encoding.UTF8.GetBytes(value);
+        await WriteIntAsync(value.Length);
+        await _stream.WriteAsync(bytes);
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -73,7 +103,7 @@ public class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDisposab
         await _stream.WriteAsync(bytes);
     }
 
-    public async void WriteStep(DateTime dateTime, char keystroke, int? seed)
+    public async void WriteStep(DateTime dateTime, char keystroke, int seed, string? stackTrace = null)
     {
         // If we are appending data to an existing replay, we need to open it now.
         if (_stream is null)
@@ -84,7 +114,16 @@ public class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDisposab
         //TODO: This needs to be converted into a concurrent queue and a separate thread to write the queue records.
         await WriteDateTimeAsync(dateTime);
         await WriteCharAsync(keystroke);
-        await WriteIntAsync(seed ?? -1);
+        await WriteIntAsync(seed);
+        if (stackTrace is null)
+        {
+            await WriteByteAsync(0);
+        }
+        else
+        {
+            await WriteByteAsync(1);
+            await WriteStringAsync(stackTrace);
+        }
         await _stream.FlushAsync();
     }
 

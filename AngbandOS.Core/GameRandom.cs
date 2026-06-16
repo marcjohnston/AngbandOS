@@ -45,42 +45,6 @@ internal class GameRandom : IGameSerialize
         );
     }
 
-    public static string[] GetStackTokens(bool onlyMyCode = true)
-    {
-        var trace = new StackTrace(true);
-        var frames = trace.GetFrames();
-
-        if (frames == null)
-        {
-            return Array.Empty<string>();
-        }
-
-        var tokens = new List<string>();
-        var myAsm = Assembly.GetExecutingAssembly();
-
-        foreach (var frame in frames)
-        {
-            var method = frame.GetMethod();
-            var type = method?.DeclaringType;
-
-            if (method == null || type == null)
-            {
-                continue;
-            }
-
-            if (onlyMyCode && type.Assembly != myAsm)
-            {
-                continue;
-            }
-
-            var line = frame.GetFileLineNumber(); // <-- key part
-
-            tokens.Add($"{type.FullName}.{method.Name}:{line}");
-        }
-
-        return tokens.ToArray();
-    }
-
     /// <summary>
     /// Returns the seed that the random generator is going to use for the next random number to be issued.
     /// </summary>
@@ -91,16 +55,7 @@ internal class GameRandom : IGameSerialize
     public int CurrentSeed { get; private set; }
     private void Reseed()
     {
-        //if (_stream is null)
-        //{
-        //    _stream = new StreamWriter(@"C:\Users\Marc\OneDrive\Documents\My Games\debug.log", append: true);
-        //}
-
-        //int oldSeed = CurrentSeed;
         CurrentSeed = randomGenerator.Next(int.MaxValue - 1);
-        //string stackTrace = String.Join("\t", GetStackTokens());
-        //_stream.WriteLine($"{oldSeed}\t{CurrentSeed}\t{stackTrace}");
-        //_stream.Flush();
         randomGenerator = new SystemRandomGenerator(CurrentSeed);
     }
 

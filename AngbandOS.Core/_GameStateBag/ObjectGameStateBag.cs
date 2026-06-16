@@ -34,13 +34,13 @@ internal class ObjectGameStateBag : GameStateBag
         return $"Object#{ObjectId}";
     }
 
-    public GameStateBag? GetByKey(string key, int currentSequentialIndex, bool verifySequentialRetrieval)
+    public GameStateBag? GetByKey(string key, int currentSequentialIndex)
     {
         if (Values is null)
         {
             return null;
         }
-        return Values.GetByKey(key, currentSequentialIndex, verifySequentialRetrieval);
+        return Values.GetByKey(key, currentSequentialIndex);
     }
 
     public override bool Verify(RestoreGameState restoreGameState, object? singleton)

@@ -68,7 +68,7 @@ internal class DictionaryGameStateBag : GameStateBag
 
     public bool TryGetGameStateBag(string key, out GameStateBag? gameStateBag) => Values.TryGetValue(key, out gameStateBag);
 
-    public GameStateBag? GetByKey(string key, int currentSequentialIndex, bool verifySequentialRetrieval)
+    public GameStateBag? GetByKey(string key, int currentSequentialIndex)
     {
         if (SequentialRetrieval)
         {
@@ -78,7 +78,7 @@ internal class DictionaryGameStateBag : GameStateBag
         if (Values.TryGetValue(key, out GameStateBag? gameStateBag))
         {
 #if DEBUG
-            if (verifySequentialRetrieval)
+            if (SequentialRetrieval)
             {
                 int ordinalIndex = Values.Keys.ToList().IndexOf(key);
                 if (ordinalIndex != currentSequentialIndex)

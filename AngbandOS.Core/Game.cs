@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
 
@@ -9106,11 +9107,48 @@ internal partial class Game : IGameSerialize
         if (ReplayPersistentStorage is not null)
         {
 #if DEBUG
-            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, _mainSequence.CurrentSeed);
+            string[] stackTraceTokens = GetStackTokens();
+            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, _mainSequence.CurrentSeed, String.Join(Environment.NewLine, stackTraceTokens));
 #else
-            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, null);
+            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, _mainSequence.CurrentSeed);
 #endif
         }
+    }
+
+    public static string[] GetStackTokens(bool onlyMyCode = true)
+    {
+        var trace = new StackTrace(true);
+        var frames = trace.GetFrames();
+
+        if (frames == null)
+        {
+            return Array.Empty<string>();
+        }
+
+        var tokens = new List<string>();
+        var myAsm = Assembly.GetExecutingAssembly();
+
+        foreach (var frame in frames)
+        {
+            var method = frame.GetMethod();
+            var type = method?.DeclaringType;
+
+            if (method == null || type == null)
+            {
+                continue;
+            }
+
+            if (onlyMyCode && type.Assembly != myAsm)
+            {
+                continue;
+            }
+
+            var line = frame.GetFileLineNumber(); // <-- key part
+
+            tokens.Add($"{type.FullName}.{method.Name}:{line}");
+        }
+
+        return tokens.ToArray();
     }
 
     public char GetAndRecordKeystroke(bool disableArtificialKeyBuffer = false, bool nonBlocking = false)
