@@ -147,6 +147,7 @@ namespace AngbandOS.Avalonia
                 case Key.Down: e.Handled = true; if ((e.KeyModifiers & KeyModifiers.Shift) != 0) EnqueueChar('.'); EnqueueChar('2'); break;
                 case Key.Clear: e.Handled = true; EnqueueChar('5'); break;
                 case Key.Escape: e.Handled = true; EnqueueChar('\x1b'); break;
+                case Key.Back: e.Handled = true; EnqueueChar('\x08'); break;
             }
         }
 
