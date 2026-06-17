@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using System.Collections;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace AngbandOS.Core;
 
@@ -310,7 +311,22 @@ internal partial class SaveGameState
         return new ListGameStateBag(gameStateBags.ToArray());
     }
 
-    public GameStateBag CreateGameStateBag(char[] value)
+    public GameStateBag CreateGameStateBag(Enum[]? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        var gameStateBags = new List<GameStateBag>();
+        foreach (Enum item in value)
+        {
+            gameStateBags.Add(CreateGameStateBag(item));
+        }
+        return new ListGameStateBag(gameStateBags.ToArray());
+    }
+
+    public GameStateBag CreateGameStateBag(char[]? value)
     {
         if (value is null)
         {
@@ -318,6 +334,92 @@ internal partial class SaveGameState
         }
 
         return new CharArrayGameStateBag(value);
+    }
+
+    public GameStateBag CreateGameStateBag(byte[]? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new ByteArrayGameStateBag(value);
+    }
+
+    public GameStateBag CreateGameStateBag(bool[]? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        var gameStateBags = new List<GameStateBag>();
+        foreach (bool item in value)
+        {
+            gameStateBags.Add(CreateGameStateBag(item));
+        }
+        return new ListGameStateBag(gameStateBags.ToArray());
+    }
+
+    public GameStateBag CreateGameStateBag(byte[][]? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        var gameStateBags = new List<GameStateBag>();
+        foreach (byte[] item in value)
+        {
+            gameStateBags.Add(CreateGameStateBag(item));
+        }
+        return new ListGameStateBag(gameStateBags.ToArray());
+    }
+
+    public GameStateBag CreateGameStateBag(string[]? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        var gameStateBags = new List<GameStateBag>();
+        foreach (string item in value)
+        {
+            gameStateBags.Add(CreateGameStateBag(item));
+        }
+        return new ListGameStateBag(gameStateBags.ToArray());
+    }
+
+    public GameStateBag CreateGameStateBag(string[][]? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        var gameStateBags = new List<GameStateBag>();
+        foreach (string[] item in value)
+        {
+            gameStateBags.Add(CreateGameStateBag(item));
+        }
+        return new ListGameStateBag(gameStateBags.ToArray());
+    }
+
+
+    public GameStateBag CreateGameStateBag(bool[][]? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        var gameStateBags = new List<GameStateBag>();
+        foreach (bool[] item in value)
+        {
+            gameStateBags.Add(CreateGameStateBag(item));
+        }
+        return new ListGameStateBag(gameStateBags.ToArray());
     }
 
     public GameStateBag CreateGameStateBag<T1, T2>(Dictionary<T1, T2> dictionary) where T1 : notnull
