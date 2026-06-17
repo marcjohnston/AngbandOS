@@ -121,6 +121,10 @@ internal class RestoreGameState
 
     public int GetObjectId()
     {
+        if (GameStateBag is DerivedObjectGameStateBag singletonDerivedObjectGameStateBag)
+        {
+            return singletonDerivedObjectGameStateBag.ObjectId;
+        }
         if (GameStateBag is ObjectGameStateBag singletonObjectGameStateBag)
         {
             return singletonObjectGameStateBag.ObjectId;
@@ -129,7 +133,7 @@ internal class RestoreGameState
         {
             return singletonReferenceGameStateBag.ObjectId;
         }
-        throw new Exception($"The restore game state is not an {nameof(ObjectGameStateBag)} or a {nameof(ReferenceGameStateBag)}.");
+        throw new Exception($"The restore game state is not an {nameof(ObjectGameStateBag)}, a {nameof(DerivedObjectGameStateBag)} or a {nameof(ReferenceGameStateBag)}.");
     }
 
     public bool GetBool() => ((BoolValueGameStateBag)GameStateBag).Value;
