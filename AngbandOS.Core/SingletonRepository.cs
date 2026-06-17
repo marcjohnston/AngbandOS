@@ -29,7 +29,7 @@ internal sealed class SingletonRepository : IGameSerialize
         foreach (IGetKey singleton in _allSingletonsList)
         {
             string key = singleton.GetKey;
-            GameStateBag singletonGameStateBag = saveGameState.CreateGameStateBag(singleton);
+            GameStateBag singletonGameStateBag = saveGameState.CreateDerivedGameStateBag(singleton);
             result.Add(key, singletonGameStateBag);
         }
         return new DictionaryGameStateBag(result, false);
