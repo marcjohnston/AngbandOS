@@ -317,7 +317,7 @@ internal class RestoreGameState
             TrackObject(objectId, t);
             return t;
         }
-        throw new InvalidOperationException($"GameStateBag is not of type {typeof(ObjectGameStateBag).Name} or {typeof(ReferenceGameStateBag).Name}.");
+        throw new InvalidOperationException($"{typeof(GameStateBag).Name} is not of type {nameof(DerivedObjectGameStateBag)} or {nameof(ReferenceGameStateBag)}.");
     }
 
     public T[] GetDerivedReferences<T>(params Func<RestoreGameState, T>[] constructors)
