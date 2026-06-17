@@ -324,7 +324,7 @@ public class GameServer
             bool gameIsOver = false;
             // Retrieve the game from persistent storage.
             SaveGameData saveGameData = GameSerializer.Deserialize(serializedSaveGameData);
-            if (saveGameData.Game is not ObjectGameStateBag objectGameStateBag)
+            if (saveGameData.Game is not DerivedObjectGameStateBag objectGameStateBag)
             {
                 throw new Exception("Unexpected game state bag format.");
             }
@@ -332,8 +332,11 @@ public class GameServer
             Game = new Game(gameConfiguration, objectGameStateBag);
 
 #if DEBUG
-            Game legacyGame = Game.LoadLegacyGame(persistentStorage);
-            SaveGameState.DeepComparer.DeepEquals(Game, legacyGame);
+            if (persistentStorage.GameExists())
+            {
+                Game legacyGame = Game.LoadLegacyGame(persistentStorage);
+                SaveGameState.DeepComparer.DeepEquals(Game, legacyGame);
+            }
 #endif
 
             Game.Play(console, persistentStorage, replayPersistentStorage);

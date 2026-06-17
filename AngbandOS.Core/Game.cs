@@ -291,7 +291,7 @@ internal partial class Game : IGameSerialize
     /// </summary>
     /// <param name="gameConfiguration"></param>
     /// <param name="gameStateBag"></param>
-    public Game(GameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag) : this(gameConfiguration, null, gameStateBag) { }
+    public Game(GameConfiguration gameConfiguration, DerivedObjectGameStateBag gameStateBag) : this(gameConfiguration, null, gameStateBag) { }
 
     /// <summary>
     /// Create a new game to play from scratch.
@@ -319,7 +319,7 @@ internal partial class Game : IGameSerialize
     /// <param name="gameConfiguration"></param>
     /// <param name="gameReplay">Supply t</param>
     /// <param name="gameStateBag">Supply the game state bag to restore a game.  The game configuration must match the game being restored.</param>
-    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, ObjectGameStateBag? gameStateBag)
+    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, DerivedObjectGameStateBag? gameStateBag)
     {
         // Validate the parameters.
         if (gameReplay is not null && gameStateBag is not null)
