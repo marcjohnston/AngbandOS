@@ -148,20 +148,25 @@ internal class BinaryGameSerializer : IGameSerializer
                 AddTypeName(objectGameStateBag.TypeName);
                 break;
             case DerivedObjectGameStateBag derivedObjectGameStateBag:
+                // Check to see if there is no state.
                 if (derivedObjectGameStateBag.Values is null)
                 {
+                    // Check to see if it is not polymorphed.
                     if (derivedObjectGameStateBag.DerivedId is null)
                     {
+                        // Not derived.
                         result.Add((byte)TypeEnum.NonDerivedObjectWithoutState);
                     }
                     else
                     {
+                        // Derived polymorphism.
                         result.Add((byte)TypeEnum.DerivedObjectWithoutState);
                         result.Add(derivedObjectGameStateBag.DerivedId.Value);
                     }
                 }
                 else
                 {
+                    // This object also has state.
                     if (derivedObjectGameStateBag.DerivedId is null)
                     {
                         result.Add((byte)TypeEnum.NonDerivedObjectWithState);

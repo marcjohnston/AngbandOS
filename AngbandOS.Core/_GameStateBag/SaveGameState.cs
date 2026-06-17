@@ -131,11 +131,13 @@ internal partial class SaveGameState
     /// <returns></returns>
     public GameStateBag CreateGameStateBag(IGameSerialize? gameSerializable, Type type, params Type[] derivedTypes)
     {
+        // Check if the object is null, we return a null object.
         if (gameSerializable is null)
         {
             return new NullValueGameStateBag();
         }
 
+        // If the object exists, we only return a reference pointer object.
         if (TryGetReferenceId(gameSerializable, out int existingId))
         {
             return new ReferenceGameStateBag(existingId);
@@ -143,9 +145,15 @@ internal partial class SaveGameState
 
         // We need to register this object to the dictionary before we serialize the object to prevent recursion.
         int objectId = RegisterObject(gameSerializable);
+
+        // We need to make the call to the object to perform serialization because this object explicitly has serialization implemented.
         DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)gameSerializable.Serialize(this);
 
+        // Now we need to support polymorphism.  We need to determine which type of object based on the types provided in the parameter list.  We only store the index of the 
+        // conforming type as it is present on the parameter list.
         byte? derivedId = DetermineDerivedId(gameSerializable.GetType(), new Type[] { type }.Concat(derivedTypes).ToArray());
+
+        // Now we return the derived object.
         return new DerivedObjectGameStateBag(objectId, derivedId, gameStateBag);
     }
 
