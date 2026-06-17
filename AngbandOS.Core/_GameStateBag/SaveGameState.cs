@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Collections;
+
 namespace AngbandOS.Core;
 
 internal partial class SaveGameState
@@ -291,6 +293,31 @@ internal partial class SaveGameState
         }
 
         return new IntValueGameStateBag((int)(object)value);
+    }
+
+    public GameStateBag CreateGameStateBag(int[]? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        var gameStateBags = new List<GameStateBag>();
+        foreach (int item in value)
+        {
+            gameStateBags.Add(CreateGameStateBag(item));
+        }
+        return new ListGameStateBag(gameStateBags.ToArray());
+    }
+
+    public GameStateBag CreateGameStateBag(char[] value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new CharArrayGameStateBag(value);
     }
 
     public GameStateBag CreateGameStateBag<T1, T2>(Dictionary<T1, T2> dictionary) where T1 : notnull
