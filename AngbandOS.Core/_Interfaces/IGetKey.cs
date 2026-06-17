@@ -7,7 +7,7 @@
 
 using AngbandOS.Core;
 
-internal interface IGetKey 
+internal interface IGetKey : IGameSerialize
 {
     /// <summary>
     /// Returns the key to be used for other items to link to this repository item.
