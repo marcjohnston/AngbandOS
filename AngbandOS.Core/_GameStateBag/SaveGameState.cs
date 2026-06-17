@@ -129,7 +129,7 @@ internal partial class SaveGameState
     /// <param name="type">Provide the type for the object to be serialized.</param>
     /// <param name="derivedTypes">Provide all of the additional derived types.  If none are provided, a null derived code will be generated; otherwise, the derived code will be equal to the position of the type specified.</param>
     /// <returns></returns>
-    public GameStateBag CreateGameStateBag(IGameSerialize? gameSerializable, Type type, params Type[] derivedTypes)
+    public GameStateBag CreateDerivedGameStateBag(IGameSerialize? gameSerializable, params Type[] derivedTypes)
     {
         // Check if the object is null, we return a null object.
         if (gameSerializable is null)
@@ -151,10 +151,19 @@ internal partial class SaveGameState
 
         // Now we need to support polymorphism.  We need to determine which type of object based on the types provided in the parameter list.  We only store the index of the 
         // conforming type as it is present on the parameter list.
-        byte? derivedId = DetermineDerivedId(gameSerializable.GetType(), new Type[] { type }.Concat(derivedTypes).ToArray());
+        byte? derivedId = null;
+        if (derivedTypes.Length > 0)
+        {
+            derivedId = DetermineDerivedId(gameSerializable.GetType(), derivedTypes);
+        }
 
         // Now we return the derived object.
         return new DerivedObjectGameStateBag(objectId, derivedId, gameStateBag);
+    }
+
+    public GameStateBag CreateGameStateBag(IGameSerialize? gameSerializable, Type type, params Type[] derivedTypes)
+    {
+        return CreateDerivedGameStateBag(gameSerializable, new Type[] { type }.Concat(derivedTypes).ToArray());
     }
 
     public GameStateBag CreateGameStateBag(IEnumerable<IGameSerialize?>? gameSerializable, Type type, params Type[] derivedTypes)
