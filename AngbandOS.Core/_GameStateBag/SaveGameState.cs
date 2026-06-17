@@ -125,75 +125,172 @@ internal partial class SaveGameState
     /// Creates a reference to an object game state bag with support for polymorphism and derived objects by generating a code that tracks which derived object was serialized.  The order of the supplied types is used to generated the derived code.
     /// At least one type must be supplied.  If only one type is supplied, a default null derived code is generated and not written to the output file.
     /// </summary>
-    /// <param name="gameSerializable"></param>
+    /// <param name="value"></param>
     /// <param name="type">Provide the type for the object to be serialized.</param>
     /// <param name="derivedTypes">Provide all of the additional derived types.  If none are provided, a null derived code will be generated; otherwise, the derived code will be equal to the position of the type specified.</param>
     /// <returns></returns>
-    public GameStateBag CreateDerivedGameStateBag(IGameSerialize? gameSerializable, params Type[] derivedTypes)
+    public GameStateBag CreateDerivedGameStateBag(IGameSerialize? value, params Type[] derivedTypes)
     {
         // Check if the object is null, we return a null object.
-        if (gameSerializable is null)
+        if (value is null)
         {
             return new NullValueGameStateBag();
         }
 
         // If the object exists, we only return a reference pointer object.
-        if (TryGetReferenceId(gameSerializable, out int existingId))
+        if (TryGetReferenceId(value, out int existingId))
         {
             return new ReferenceGameStateBag(existingId);
         }
 
         // We need to register this object to the dictionary before we serialize the object to prevent recursion.
-        int objectId = RegisterObject(gameSerializable);
+        int objectId = RegisterObject(value);
 
         // We need to make the call to the object to perform serialization because this object explicitly has serialization implemented.
-        DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)gameSerializable.Serialize(this);
+        DictionaryGameStateBag? gameStateBag = (DictionaryGameStateBag?)value.Serialize(this);
 
         // Now we need to support polymorphism.  We need to determine which type of object based on the types provided in the parameter list.  We only store the index of the 
         // conforming type as it is present on the parameter list.
         byte? derivedId = null;
         if (derivedTypes.Length > 0)
         {
-            derivedId = DetermineDerivedId(gameSerializable.GetType(), derivedTypes);
+            derivedId = DetermineDerivedId(value.GetType(), derivedTypes);
         }
 
         // Now we return the derived object.
         return new DerivedObjectGameStateBag(objectId, derivedId, gameStateBag);
     }
 
-    public GameStateBag CreateGameStateBag(IGameSerialize? gameSerializable, Type type, params Type[] derivedTypes)
+    public GameStateBag CreateGameStateBag(IGameSerialize? value, Type type, params Type[] derivedTypes)
     {
-        return CreateDerivedGameStateBag(gameSerializable, new Type[] { type }.Concat(derivedTypes).ToArray());
+        return CreateDerivedGameStateBag(value, new Type[] { type }.Concat(derivedTypes).ToArray());
     }
 
-    public GameStateBag CreateGameStateBag(IEnumerable<IGameSerialize?>? gameSerializable, Type type, params Type[] derivedTypes)
+    public GameStateBag CreateGameStateBag(IEnumerable<IGameSerialize?>? value, Type type, params Type[] derivedTypes)
     {
-        if (gameSerializable is null)
+        if (value is null)
         {
             return new NullValueGameStateBag();
         }
 
         var gameStateBags = new List<GameStateBag>();
-        foreach (IGameSerialize? item in gameSerializable)
+        foreach (IGameSerialize? item in value)
         {
             gameStateBags.Add(CreateGameStateBag(item, type, derivedTypes));
         }
         return new ListGameStateBag(gameStateBags.ToArray());
     }
 
-    public GameStateBag CreateGameStateBag(IGameSerialize[][]? gameSerializable, Type type, params Type[] derivedTypes)
+    public GameStateBag CreateGameStateBag(IGameSerialize[][]? value, Type type, params Type[] derivedTypes)
     {
-        if (gameSerializable is null)
+        if (value is null)
         {
             return new NullValueGameStateBag();
         }
 
         var gameStateBags = new List<GameStateBag>();
-        foreach (IGameSerialize[] item in gameSerializable)
+        foreach (IGameSerialize[] item in value)
         {
             gameStateBags.Add(CreateGameStateBag(item, type, derivedTypes));
         }
         return new ListGameStateBag(gameStateBags.ToArray());
+    }
+
+    public GameStateBag CreateGameStateBag(DateTime? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new DateTimeValueGameStateBag(value.Value);
+    }
+
+    public GameStateBag CreateGameStateBag(TimeSpan? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new TimeSpanValueGameStateBag(value.Value);
+    }
+
+    public GameStateBag CreateGameStateBag(string? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new StringValueGameStateBag(value);
+    }
+
+    public GameStateBag CreateGameStateBag(byte? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new ByteValueGameStateBag(value.Value);
+    }
+    public GameStateBag CreateGameStateBag(char? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new CharValueGameStateBag(value.Value);
+    }
+    public GameStateBag CreateGameStateBag(decimal? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new DecimalValueGameStateBag(value.Value);
+    }
+    public GameStateBag CreateGameStateBag(ulong? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new UlongValueGameStateBag(value.Value);
+    }
+
+    public GameStateBag CreateGameStateBag(int? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new IntValueGameStateBag(value.Value);
+    }
+
+    public GameStateBag CreateGameStateBag(bool? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new BoolValueGameStateBag(value.Value);
+    }
+
+    public GameStateBag CreateGameStateBag(Enum? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new IntValueGameStateBag((int)(object)value);
     }
 
     public GameStateBag CreateGameStateBag<T1, T2>(Dictionary<T1, T2> dictionary) where T1 : notnull
