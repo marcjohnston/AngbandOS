@@ -48,5 +48,13 @@
     "karma-jasmine": "~5.0.0",
     "karma-jasmine-html-reporter": "^1.7.0",
     "typescript": "~5.9"
+  },
+  "overrides": {
+    "shell-quote": ">=1.8.4",
+    "tar": ">=7.5.16",
+    "vite": ">=7.3.5",
+    "rollup": ">=4.59.0",
+    "flatted": ">=3.4.2",
+    "@angular/platform-server": ">=21.2.16"
   }
 }

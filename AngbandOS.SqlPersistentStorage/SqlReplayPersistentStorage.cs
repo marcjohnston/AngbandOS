@@ -24,7 +24,7 @@ namespace AngbandOS.PersistentStorage
         }
 
 
-        public void WriteStep(DateTime dateTime, char keystroke, int? seed)
+        public void WriteStep(DateTime dateTime, char keystroke, int seed, string? stackTrace)
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
@@ -32,7 +32,7 @@ namespace AngbandOS.PersistentStorage
                 {
                     GameReplayId = GameReplayId,
                     DateTime = dateTime,
-                    Keystroke = (byte)keystroke,
+                    Keystroke = keystroke.ToString(),
                     Seed = seed
                 });
                 context.SaveChanges();
@@ -58,6 +58,7 @@ namespace AngbandOS.PersistentStorage
         {
             using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
             {
+                // Retrieve the game replay step from the database.
                 GameReplay? gameReplay = context.GameReplays
                     .Include(_gameReplay => _gameReplay.ReplaySteps)
                     .SingleOrDefault(_gameReplay => _gameReplay.GameGuid == new Guid(gameGuid));
@@ -66,7 +67,13 @@ namespace AngbandOS.PersistentStorage
                     throw new InvalidOperationException($"No replay found for game guid {GameGuid}");
                 }
                 GameReplayId = gameReplay.ReplayId;
-                return new GameReplayDetails(gameReplay.Seed, gameReplay.ReplaySteps.OrderBy(_replayStep => _replayStep.Id).Select(_replayStep => new GameReplayStep(_replayStep.DateTime, (char)_replayStep.Keystroke)).ToArray());
+
+                // Retrieve all of the game replay steps, in order and convert them into the interface GameReplayStep objects
+                GameReplayStep[] replaySteps = gameReplay.ReplaySteps
+                    .OrderBy(_replayStep => _replayStep.Id)
+                    .Select(_replayStep => new GameReplayStep(_replayStep.DateTime, _replayStep.Keystroke[0], _replayStep.Seed, _replayStep.StackTrace))
+                    .ToArray();
+                return new GameReplayDetails(gameReplay.Seed, replaySteps);
             }
         }
     }

@@ -57,7 +57,7 @@ namespace AngbandOS.Web.Hubs
 
             if (user.Id != null)
             {
-                ViewPort = await GameService.PlayNewGameAsync(Context, user.Id, new Core.Interface.Configuration.GameConfiguration(), user.UserName);
+                ViewPort = await GameService.PlayNewGameAsync(Context, user.Id, new GameConfiguration(), user.UserName);
             }
         }
 

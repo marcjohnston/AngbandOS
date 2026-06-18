@@ -266,6 +266,12 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
             {
                 entity.Property(e => e.DateTime).HasPrecision(3);
 
+                entity.Property(e => e.Keystroke)
+                    .HasMaxLength(1)
+                    .IsFixedLength();
+
+                entity.Property(e => e.StackTrace).IsUnicode(false);
+
                 entity.HasOne(d => d.GameReplay)
                     .WithMany(p => p.ReplaySteps)
                     .HasPrincipalKey(p => p.ReplayId)

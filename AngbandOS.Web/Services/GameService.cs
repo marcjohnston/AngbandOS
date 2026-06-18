@@ -121,6 +121,14 @@ namespace AngbandOS.Web.Services
                 return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context">Provide the signal-r hub context for the request/.</param>
+        /// <param name="userId">Provide the user ID for the logged in user.</param>
+        /// <param name="guid">Provide the game-GUID for the game to be played.</param>
+        /// <param name="username">Provide username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
+        /// <returns></returns>
         public async Task<GameHost?> PlayExistingGameAsync(HubCallerContext context, string userId, string guid, string username)
         {
             string connectionId = context.ConnectionId;
@@ -179,10 +187,10 @@ namespace AngbandOS.Web.Services
         /// <summary>
         /// Initiate game replay from the connection for a specific game guid.
         /// </summary>
-        /// <param name="context">The context of the signal-r GameHub that the request came in from.</param>
-        /// <param name="userId">The user id of the connected user.</param>
-        /// <param name="guid">The guid for the game for which to replay.</param>
-        /// <param name="username">The username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
+        /// <param name="context">Provide context of the signal-r GameHub that the request came in from.</param>
+        /// <param name="userId">Provide user id of the connected user.</param>
+        /// <param name="guid">Provide guid for the game for which to replay.</param>
+        /// <param name="username">Provide username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
         /// <returns></returns>
         public async Task<GameHost?> ReplayGameAsync(HubCallerContext context, string userId, string guid, string username)
         {
@@ -247,10 +255,10 @@ namespace AngbandOS.Web.Services
         /// <summary>
         /// Initiate game play from the connection for a specific game guid.
         /// </summary>
-        /// <param name="context">The context of the signal-r GameHub that the request came in from.</param>
-        /// <param name="userId">The user id of the connected user.</param>
-        /// <param name="gameConfiguration">The game configuration to play.</param>
-        /// <param name="username">The username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
+        /// <param name="context">Provide context of the signal-r GameHub that the request came in from.</param>
+        /// <param name="userId">Provide user id of the connected user.</param>
+        /// <param name="gameConfiguration">Provide game configuration to play.</param>
+        /// <param name="username">Provide username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
         public async Task<GameHost?> PlayNewGameAsync(HubCallerContext context, string userId, GameConfiguration gameConfiguration, string username)
         {
             string connectionId = context.ConnectionId;
