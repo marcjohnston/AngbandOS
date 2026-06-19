@@ -1,12 +1,14 @@
 ﻿using AngbandOS.Core;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface.Configuration;
+using AngbandOS.Web.Interface;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using System.ComponentModel;
 
 namespace AngbandOS.Web.Hubs
 {
+
     /// <summary>
     /// Represents an object that accept messages from an active game (AngbandOS.Core) and send the message to the client browser via a SignalR hub.  This class operates 
     /// as a background worker to process incoming messages and send outgoing messages without blocking the main thread.
@@ -33,16 +35,6 @@ namespace AngbandOS.Web.Hubs
         /// Returns the list of windows that are monitoring the game messages.
         /// </summary>
         private readonly List<IGameMessagesHubMessages> _gameMessagesMonitors = new List<IGameMessagesHubMessages>();
-
-        /// <summary>
-        /// Returns the object responsible for the persistence of the game.
-        /// </summary>
-        private readonly ICorePersistentStorage PersistentStorage;
-
-        /// <summary>
-        /// Returns the object responsible for the persistence of the game.
-        /// </summary>
-        private readonly IReplayPersistentStorage ReplayPersistentStorage;
 
         /// <summary>
         /// Returns the actual game.  The game is null, until the thread is started.
@@ -74,17 +66,13 @@ namespace AngbandOS.Web.Hubs
         /// </summary>
         private bool ShuttingDown = false;
 
-        /// <summary>
-        /// Returns the <see cref="GameConfiguration"/> to use to create a new game; or null, to play an existing game.
-        /// </summary>
-        private readonly GameConfiguration? GameConfiguration = null;
-
-        private readonly GameReplayDetails? GameReplay;
+        private readonly RunContext RunContext;
+        private readonly IWebPersistentStorage WebPersistentStorage;
         #endregion
 
         #region Constructor
         /// <summary>
-        /// Constructs a new <see cref="GameHost"/> object to play a new game.
+        /// Constructs a <see cref="GameHost"/> object to play a new game.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="gameHub"></param>
@@ -92,21 +80,19 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId">The user ID of the player.  This property is used to GET ActiveGames controller to return the user ID of the player.</param>
         /// <param name="username">The username for the player.  This property is used by the GET ActiveGames controller to return the name of the player./></param>
         /// <param name="notificationAction"></param>
-        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IReplayPersistentStorage replayPersistentStorage)
+        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, GameConfiguration gameConfiguration, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IWebPersistentStorage webPersistentStorage)
         {
             _consoleGameHub = gameHub;
-            PersistentStorage = persistentStorage;
             UserId = userId;
             Username = username;
             NotificationAction = notificationAction;
             Context = context;
-            GameConfiguration = gameConfiguration;
-            ReplayPersistentStorage = replayPersistentStorage;
-            GameReplay = null;
+            WebPersistentStorage = webPersistentStorage;
+            RunContext = new PlayNewGameRunContext(userId, gameConfiguration, webPersistentStorage);
         }
 
         /// <summary>
-        /// Constructs a new <see cref="GameHost"/> object to play an existing game.
+        /// Constructs a <see cref="GameHost"/> object to play an existing game.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="gameHub"></param>
@@ -114,21 +100,19 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId"></param>
         /// <param name="username"></param>
         /// <param name="notificationAction"></param>
-        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IReplayPersistentStorage replayPersistentStorage)
+        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, GameConfiguration gameConfiguration, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IWebPersistentStorage webPersistentStorage, string gameGuid)
         {
             _consoleGameHub = gameHub;
-            PersistentStorage = persistentStorage;
             UserId = userId;
             Username = username;
-            GameConfiguration = null;
             NotificationAction = notificationAction;
             Context = context;
-            ReplayPersistentStorage = replayPersistentStorage;
-            GameReplay = null;
+            WebPersistentStorage = webPersistentStorage;
+            RunContext = new PlayExistingGameRunContext(userId, gameConfiguration, webPersistentStorage, gameGuid);
         }
 
         /// <summary>
-        /// Constructs a new <see cref="GameHost"/> object to replay a game.
+        /// Constructs a <see cref="GameHost"/> object to replay a game.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="gameHub"></param>
@@ -136,17 +120,15 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId"></param>
         /// <param name="username"></param>
         /// <param name="notificationAction"></param>
-        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, ICorePersistentStorage persistentStorage, GameConfiguration gameConfiguration, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IReplayPersistentStorage replayPersistentStorage, GameReplayDetails? gameReplay)
+        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, GameConfiguration gameConfiguration, string gameGuid, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IWebPersistentStorage webPersistentStorage)
         {
             _consoleGameHub = gameHub;
-            PersistentStorage = persistentStorage;
             UserId = userId;
             Username = username;
             NotificationAction = notificationAction;
-            GameConfiguration = gameConfiguration;
             Context = context;
-            ReplayPersistentStorage = replayPersistentStorage;
-            GameReplay = gameReplay;
+            WebPersistentStorage = webPersistentStorage;
+            RunContext = new ReplayGameRunContext(userId, gameConfiguration, webPersistentStorage, gameGuid);
         }
         #endregion
 
@@ -332,16 +314,15 @@ namespace AngbandOS.Web.Hubs
             _consoleGameHub.GameIncompatible();
         }
 
+        /// <summary>
+        /// Kill the game whether it is in-progress or not.
+        /// </summary>
         public void Kill() // TODO: Alias for Shutdown
         {
-            Shutdown();
-        }
-
-        public void Shutdown()
-        {
-            // Set the game flag to shut down.  Do this first, because we need to game to exit quickly when keypresses are bypassed.
-            if (_gameServer != null)
+            // Check to see if the game is in progress.
+            if (_gameServer is not null)
             {
+                // Set the game flag to shut down.Do this first, because we need to game to exit quickly when keypresses are bypassed.
                 _gameServer.InitiateShutDown();
             }
 
@@ -403,53 +384,39 @@ namespace AngbandOS.Web.Hubs
         /// <param name="viewPort"></param>
         public void RefreshViewPort(IViewPort viewPort)
         {
-            _gameServer.RefreshViewPort(viewPort);
-        }
-
-        public void SaveGame()
-        {
-            _gameServer.SaveGame();
+            // Check to see if the game is in-progress.
+            if (_gameServer is not null)
+            {
+                _gameServer.RefreshViewPort(viewPort);
+            }
         }
         #endregion
 
         #region Game Play Thread Loop
         protected override void OnDoWork(DoWorkEventArgs e)
         {
-            /// <summary>
-            /// Sends a message from the game to the console client and all spectators that the game is over.
-            /// </summary>
-            void GameOver()
-            {
-                _consoleGameHub.GameOver();
-                DisconnectSpectators();
-            }
-
             Thread.CurrentThread.Name = ThreadName;
 
-            // Create a game server to play the game.  
+            // Create the game server object.
             _gameServer = new GameServer();
 
-            // This thread will initiate the play command on the game with this SignalRConsole object also acting as the injected
-            // IConsole to receive and process print and wait for key requests.
-            GameResults results;
+            // Play the game.
+            GameResults results = RunContext.Play(this, _gameServer);
 
-            // Check to see if this is a request to play an existing game.
-            if (GameConfiguration is null)
+            // Null the game server quickly so that the disconnect from the hub doesn't trigger a kill on the game.
+            _gameServer = null;
+
+            // Render game over message.
+            if (results.GameIsOver)
             {
-              //  results = _gameServer.PlayExistingGame(this, PersistentStorage, ReplayPersistentStorage, GameConfiguration);
-            }
-            else
-            {               
-              //  results = _gameServer.PlayNewGame(this, PersistentStorage, ReplayPersistentStorage, GameConfiguration, GameReplay);
-            }
-          //  if (results.GameIsOver)
-            {
-                // The game is over.  Let the client know.
-                GameOver();
+                // The game is over.  Let the client know.  Also, sends a message from the game to the console client and all spectators that the game is over.
+                _consoleGameHub.GameOver();
             }
 
             // We need to send the game-over message to all clients monitoring the game.
             DisconnectSpectators();
+
+            // Update the monitoring too.
             DisconnectGameMessagesMonitors();
 
             // Abort the context.  This will throw the signal-r disconnect?

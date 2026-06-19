@@ -201,10 +201,6 @@ internal class BinaryGameSerializer : IGameSerializer
     {
         byte[] unzippedSerializedData = Serialize(saveGameData.Game);
         byte[] zippedSerializedData = Zip(unzippedSerializedData);
-        foreach ((string key, int value) in u.OrderByDescending(kvp => kvp.Value).Where(kvp => kvp.Value > 1).ToDictionary(kvp => kvp.Key, kvp => kvp.Value))
-        {
-            Debug.WriteLine($"Type name {key} used {value} times");
-        }
         return zippedSerializedData;
     }
     private static byte[] Zip(byte[] data)

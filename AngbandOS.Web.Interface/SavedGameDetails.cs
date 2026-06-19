@@ -14,3 +14,14 @@ public class SavedGameDetails
     public bool IsAlive { get; set; }
     public bool ReplayIsAvailable { get; set; }
 }
+
+public class ReplayableGame
+{
+
+}
+
+public class AvailableGame
+{
+    public SavedGameDetails[] SavedGames { get; set; }
+    public 
+}

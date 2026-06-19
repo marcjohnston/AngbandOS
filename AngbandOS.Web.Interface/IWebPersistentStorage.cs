@@ -1,14 +1,24 @@
-﻿namespace AngbandOS.Web.Interface
+﻿using AngbandOS.Core.Interface;
+
+namespace AngbandOS.Web.Interface
 {
     /// <summary>
-    /// Represents an interface that a persistent storage driver needs to implement for the web interface.
+    /// Represents an interface that persistent storage drivers need to implement for the web interface.
     /// </summary>
     public interface IWebPersistentStorage
     {
+        #region Preferences Functionality
         Task<UserSettingsDetails?> GetPreferences(string userId);
 
         Task<UserSettingsDetails> WritePreferencesAsync(string userId, UserSettingsDetails userSettingsDetails);
+        #endregion
 
+        #region Save and Load Game Functionality
+        byte[]? ReadGame(string username, string gameGuid);
+        bool WriteGame(string username, string gameGuid, GameDetails gameDetails, byte[] value);
+        #endregion
+
+        #region Messaging and Chat Functionality
         /// <summary>
         /// Deletes a game from the database.
         /// </summary>
@@ -51,5 +61,40 @@
         /// <param name="messageId">The id of the message.</param>
         /// <returns></returns>
         Task<bool> DeleteMessagesAsync(int messageId);
+        #endregion
+
+        #region Game Replay Functionality
+        /// <summary>
+        /// Read game replay details from the database.
+        /// </summary>
+        /// <param name="gameGuid"></param>
+        /// <returns></returns>
+        (GameReplayDetails, int) GetReplay(string gameGuid);
+
+        /// <summary>
+        /// Save the game seed and return a unique identifier for game replay steps.
+        /// </summary>
+        /// <param name="gameGuid"></param>
+        /// <param name="seed"></param>
+        /// <returns></returns>
+        int GenerateGameReplayGameId(string gameGuid, int seed);
+
+        /// <summary>
+        /// Save a replay step in the database.
+        /// </summary>
+        /// <param name="gameReplayId">Provide the unique game replay identifier that was returned from the <see cref="GenerateGameReplayGameId(string, int)"/> method.</param>
+        /// <param name="dateTime"></param>
+        /// <param name="keystroke"></param>
+        /// <param name="seed"></param>
+        /// <param name="stackTrace"></param>
+        void WriteStep(int gameReplayId, DateTime dateTime, char keystroke, int seed, string? stackTrace);
+
+        /// <summary>
+        /// Retrieve the game replay unique identifier for an existing game.
+        /// </summary>
+        /// <param name="gameGuid"></param>
+        /// <returns></returns>
+        int GetGameReplayId(string gameGuid);
+        #endregion
     }
 }

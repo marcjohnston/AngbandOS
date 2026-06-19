@@ -12,7 +12,7 @@ public class Program
 
         Thread gameThread = new Thread(() =>
         {
-            gameServer.PlayNewGame(consoleAndViewPort, null, null, gameConfiguration);
+            gameServer.PlayNewGame(consoleAndViewPort, null, gameConfiguration);
         });
 
         gameThread.IsBackground = true;

@@ -4,7 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Runtime.Serialization.Formatters.Binary;
+using AngbandOS.Core.Interface;
+using System;
 
 namespace AngbandOS.Core;
 
@@ -25,24 +26,8 @@ public class GameServer
     /// <summary>
     /// Forwards a save game request to the in-progress game. 
     /// </summary>
-    public byte[] SaveGame()
+    private byte[] SaveGame()
     {
-#if DEBUG        
-        BinaryFormatter formatter = new BinaryFormatter();
-        MemoryStream memoryStream = new MemoryStream();
-        formatter.Serialize(memoryStream, Game);
-        memoryStream.Position = 0;
-        GameDetails gameDetails = new GameDetails()
-        {
-            CharacterName = Game.PlayerName.StringValue, // The player parameter
-            Level = Game.ExperienceLevel.IntValue, // The player parameter
-            Gold = Game.Gold.IntValue, // The parameter
-            IsAlive = !Game.IsDead, // If the player is dead, then the game Player will be null.
-            Comments = ""
-        };
-        Game.CorePersistentStorage?.WriteGame(gameDetails, memoryStream.ToArray());
-#endif
-
         SaveGameState saveGameState = new SaveGameState();
         GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game, typeof(Game));
         return GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
@@ -192,54 +177,70 @@ public class GameServer
     /// <summary>
     /// Generates and plays a new game.  If the game cannot be played or throws an exception, false is returned; otherwise, the game is played out and true is returned when the game is over or saved.
     /// </summary>
-    /// <param name="console"></param>
-    /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
-    /// <param name="replayPersistentStorage">The object responsible for recording the game's replay.  If this object is not provided, the game's replay will not be recorded.</param>
     /// <param name="gameConfiguration">Represents configuration data to use when generating a new game.</param>
     /// <returns></returns>
-    public GameResults PlayNewGame(IConsoleAndViewPort console, ICorePersistentStorage? persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration)
+    public int GenerateNewGame(GameConfiguration gameConfiguration)
     {
-        // TODO: Validate the GameConfiguration here.  This is the only entry point for a GameConfiguration into the Core and we cannot expect that it is valid.
-        if (console == null)
+        if (Game is not null)
         {
-            throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
+            throw new Exception("Game already loaded.");
         }
 
-        try
-        {
-            bool gameIsOver = false;
-            Game = new Game(gameConfiguration);
-
-            // Announce the new game and the seed for the replay.
-            if (replayPersistentStorage is not null)
-            {
-                replayPersistentStorage.NewGame(Game.MainSequenceGameStartSeed);
-            }
-
-            Game.Play(console, persistentStorage, replayPersistentStorage);
-
-            byte[] serializedGameData = SaveGame();
-            gameIsOver = true;
-            return new GameResults(gameIsOver, serializedGameData);
-        }
-        catch (Exception ex)
-        {
-            console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}"); // TODO: this should be caught externally
-            throw new Exception("An error occurred while attempting to play a new game.  See inner exception for details.", ex);
-        }
+        Game = new Game(gameConfiguration);
+        return Game.MainSequenceGameStartSeed;
     }
 
     /// <summary>
-    /// Generates and plays a new game.  If the game cannot be played or throws an exception, false is returned; otherwise, the game is played out and true is returned when the game is over or saved.
+    /// Plays an existing game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
     /// </summary>
-    /// <param name="console"></param>
-    /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
-    /// <param name="replayPersistentStorage">The object responsible for recording the game's replay.  If this object is not provided, the game's replay will not be recorded.</param>
+    /// <param name="gameConfiguration">Supply the configuration for the game to be played.  It must match the same game that was played in the <paramref name="serializedSaveGameData"/>.</param>
+    /// <param name="serializedSaveGameData">Supply the serialized game state to be restored.</param>
+    /// <returns></returns>
+    public void LoadExistingGame(GameConfiguration gameConfiguration, byte[] serializedSaveGameData)
+    {
+        if (Game is not null)
+        {
+            throw new Exception("Game already loaded.");
+        }
+
+        SaveGameData saveGameData = GameSerializer.Deserialize(serializedSaveGameData);
+        if (saveGameData.Game is not DerivedObjectGameStateBag objectGameStateBag)
+        {
+            throw new Exception("Unexpected game state bag format.");
+        }
+        Game = new Game(gameConfiguration, objectGameStateBag);
+    }
+
+    /// <summary>
+    /// Generates a new game from a replay sequence.
+    /// </summary>
     /// <param name="gameConfiguration">Represents configuration data to use when generating a new game.</param>
     /// <param name="gameReplayDetails">The details of the game replay to be used for replaying the game.</param>
     /// <returns></returns>
-    public GameResults ReplayGame(IConsoleAndViewPort console, ICorePersistentStorage? persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, GameReplayDetails gameReplayDetails)
+    public void LoadGameReplay(GameConfiguration gameConfiguration, GameReplayDetails gameReplayDetails)
     {
+        if (Game is not null)
+        {
+            throw new Exception("Game already loaded.");
+        }
+        Game = new Game(gameConfiguration, gameReplayDetails);
+    }
+
+    /// <summary>
+    /// Plays the current game.
+    /// </summary>
+    /// <param name="console"></param>
+    /// <param name="replayPersistentStorage"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    public GameResults PlayGame(IConsoleAndViewPort console, IReplayPersistentStorage? replayPersistentStorage)
+    {
+        if (Game is null)
+        {
+            throw new Exception($"No game to play.  Must call {nameof(GenerateNewGame)}, {nameof(LoadExistingGame)} or {nameof(LoadGameReplay)} first to setup game to be played.");
+        }
+
         // TODO: Validate the GameConfiguration here.  This is the only entry point for a GameConfiguration into the Core and we cannot expect that it is valid.
         if (console == null)
         {
@@ -249,9 +250,7 @@ public class GameServer
         try
         {
             bool gameIsOver = false;
-            Game = new Game(gameConfiguration, gameReplayDetails);
-
-            Game.Play(console, persistentStorage, replayPersistentStorage);
+            Game.Play(console, replayPersistentStorage);
 
             byte[] serializedGameData = SaveGame();
             gameIsOver = true;
@@ -261,95 +260,6 @@ public class GameServer
         {
             console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}"); // TODO: this should be caught externally
             throw new Exception("An error occurred while attempting to play a new game.  See inner exception for details.", ex);
-        }
-    }
-
-    /// <summary>
-    /// Plays an existing game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
-    /// </summary>
-    /// <param name="console"></param>
-    /// <param name="persistentStorage">The object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
-    /// <returns></returns>
-    //public GameResults PlayLegacyExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage)
-    //{
-    //    if (console == null)
-    //    {
-    //        throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
-    //    }
-    //    if (persistentStorage == null)
-    //    {
-    //        throw new ArgumentNullException("persistentStorage", "A persistentStorage object must be provided to retrieve the game from persistent storage and cannot be null.");
-    //    }
-
-    //    try
-    //    {
-    //        bool gameIsOver = false;
-    //        // Retrieve the game from persistent storage.
-    //        Game = Game.LoadLegacyGame(persistentStorage);
-    //        Game.Play(console, persistentStorage, replayPersistentStorage);
-
-    //        byte[] serializedGameData = SaveGame();
-    //        gameIsOver = true;
-    //        return new GameResults(gameIsOver, serializedGameData);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
-    //        throw new Exception("An error occurred while attempting to play an existing game.  See inner exception for details.", ex);
-    //    }
-    //}
-
-    /// <summary>
-    /// Plays an existing game.  If the game cannot be played false is immediately returned; otherwise, the game is played out and true is returned when the game is over.
-    /// </summary>
-    /// <param name="console">Supple the object to act as the console for the game.</param>
-    /// <param name="persistentStorage">Supply the object responsible for saving the game.  If this object is not provided, the game will not be saved.</param>
-    /// <param name="gameConfiguration">Supply the configuration for the game to be played.  It must match the same game that was played in the <paramref name="serializedSaveGameData"/>.</param>
-    /// <param name="replayPersistentStorage"> Supply the object responsible to accepting the replay steps.  If not supplied, the replay steps will not be provided.</param>
-    /// <param name="serializedSaveGameData">Supply the serialized game state to be restored.</param>
-    /// <returns></returns>
-    public GameResults PlayExistingGame(IConsoleAndViewPort console, ICorePersistentStorage persistentStorage, IReplayPersistentStorage? replayPersistentStorage, GameConfiguration gameConfiguration, byte[] serializedSaveGameData)
-    {
-        if (console == null)
-        {
-            throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
-        }
-        if (persistentStorage == null)
-        {
-            throw new ArgumentNullException("persistentStorage", "A persistentStorage object must be provided to retrieve the game from persistent storage and cannot be null.");
-        }
-
-        try
-        {
-            bool gameIsOver = false;
-            // Retrieve the game from persistent storage.
-            SaveGameData saveGameData = GameSerializer.Deserialize(serializedSaveGameData);
-            if (saveGameData.Game is not DerivedObjectGameStateBag objectGameStateBag)
-            {
-                throw new Exception("Unexpected game state bag format.");
-            }
-
-            Game = new Game(gameConfiguration, objectGameStateBag);
-
-#if DEBUG
-            if (persistentStorage.GameExists())
-            {
-                Game legacyGame = Game.LoadLegacyGame(persistentStorage);
-                SaveGameState.DeepComparer.DeepEquals(Game, legacyGame);
-            }
-#endif
-
-            Game.Play(console, persistentStorage, replayPersistentStorage);
-
-            byte[] newSerializedGameData = SaveGame();
-
-            gameIsOver = true;
-            return new GameResults(gameIsOver, newSerializedGameData);
-        }
-        catch (Exception ex)
-        {
-            console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}");
-            throw new Exception("An error occurred while attempting to play an existing game.  See inner exception for details.", ex);
         }
     }
 }

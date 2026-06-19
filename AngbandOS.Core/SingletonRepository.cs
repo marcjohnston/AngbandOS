@@ -216,47 +216,6 @@ internal sealed class SingletonRepository : IGameSerialize
     }
 
     /// <summary>
-    /// Persists the entire configuration using the CorePersistentStorage driver.
-    /// </summary>
-    /// <param name="name"></param>
-    public void PersistConfiguration(string configurationName)
-    {
-        try
-        {
-            // Enumerate all of the repositories.
-            KeyValuePair<string, GenericRepository>[] persistedRepositories = _allGenericRepositoriesDictionary.Where(_repository => _repository.Value.EnablePersistance).ToArray();
-            foreach (KeyValuePair<string, GenericRepository> typeNameAndRepository in persistedRepositories)
-            {
-                // We need to serialize all of the entities.
-                List<KeyValuePair<string, string>> jsonEntityList = new List<KeyValuePair<string, string>>();
-                foreach (KeyValuePair<string, object> keyAndEntity in typeNameAndRepository.Value.Dictionary)
-                {
-                    object entityAsObject = keyAndEntity.Value;
-                    Type entityType = entityAsObject.GetType();
-
-                    IGetKey entityAsIGetKey = (IGetKey)keyAndEntity.Value;
-                    string key = entityAsIGetKey.GetKey;
-                    IToJson entityAsIToJson = (IToJson)entityAsObject;
-                    string serializedEntity = entityAsIToJson.ToJson();
-                    jsonEntityList.Add(new KeyValuePair<string, string>(key, serializedEntity));
-                }
-                string pluralName = Game.Pluralize(typeNameAndRepository.Key);
-                Game.CorePersistentStorage.PersistEntities(configurationName, pluralName, jsonEntityList.ToArray());
-            }
-        }
-        catch (NotImplementedException)
-        {
-            Game.MsgPrint("The persistence interface does not support entity persistence.");
-            return;
-        }
-        catch (Exception ex)
-        {
-            Game.MsgPrint($"The persistence interface failed to save the configuration '{ex.Message}'.");
-            return;
-        }
-    }
-
-    /// <summary>
     /// Performs the load phase of the singleton repository.  This phase reads all of the types from the assembly and adds it into its respective
     /// collection--if the ExcludeFromRepository property returns false.  If the ExcludeFromRepository is true, the singleton object will be discarded.
     /// </summary>

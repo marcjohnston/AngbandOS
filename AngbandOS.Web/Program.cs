@@ -18,8 +18,8 @@ var connectionString = builder.Configuration["ConnectionString"]; // Connection 
 builder.Services.AddSignalR();
 
 builder.Services.AddSingleton(typeof(GameService), typeof(GameService)); // Maintains active games.  Interface excluded.
+builder.Services.AddSingleton(typeof(IWebPersistentStorage), typeof(SqlWebPersistentStorage)); // Persistent storage driver
 builder.Services.AddScoped(typeof(TemplateProcessor), typeof(TemplateProcessor)); // Template macro processor
-builder.Services.AddScoped(typeof(IWebPersistentStorage), typeof(SqlWebPersistentStorage)); // Persistent storage driver
 builder.Services.AddTransient<IEmailSender, EmailSender>(); // Email sender
 
 // Add services to the container.

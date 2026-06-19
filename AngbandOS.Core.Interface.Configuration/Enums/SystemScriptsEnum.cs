@@ -341,7 +341,6 @@
         OfTheMagiScript,
         OpenScript,
         PanicHitMutationScript,
-        PersistConfigurationScript,
         PhantasmalServantScript,
         PhaseDoorIdentifableAndUsedScript,
         PhaseDoorScript,

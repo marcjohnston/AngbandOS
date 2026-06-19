@@ -8,17 +8,4 @@ public interface IReplayPersistentStorage
     /// <param name="dateTime"></param>
     /// <param name="keystroke"></param>
     void WriteStep(DateTime dateTime, char keystroke, int seed, string? stackTrace = null);
-
-    /// <summary>
-    /// Called when a new game is started, to allow the persistent storage to clear any existing data and prepare for a new game with the given seed.
-    /// </summary>
-    /// <param name="seed"></param>
-    void NewGame(int seed);
-
-    /// <summary>
-    /// Returns the replay details for the game with the given guid.
-    /// </summary>
-    /// <param name="gameGuid"></param>
-    /// <returns></returns>
-    GameReplayDetails GetReplay(string gameGuid);
 }

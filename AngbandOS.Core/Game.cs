@@ -685,34 +685,6 @@ internal partial class Game : IGameSerialize
         View consoleView = SingletonRepository.Get<View>(gameConfiguration.DungeonViewBindingKey);
         RenderView(consoleView);
     }
-
-    /// <summary>
-    /// Retrieves a save game from persistent storage.  If no persistent storage is specified, a new game is created. This static method is used as a factory
-    /// to generate the Game object that can be played using the Play method.  This is the only static method.
-    /// </summary>
-    /// <param name="persistentStorage"></param>
-    /// <returns></returns>
-    public static Game LoadLegacyGame(ICorePersistentStorage persistentStorage)
-    {
-        if (persistentStorage == null)
-        {
-            throw new ArgumentNullException("persistentStorage", "A persistentStorage object must be provided to load the game and cannot be null.");
-        }
-
-        // Retrieve the saved game from the persistent storage.  If the persistent storage doesn't find it, the return data is expected to be null; which
-        // will indicate that a new game needs to be created.
-        byte[]? data = persistentStorage.ReadGame();
-
-        if (data == null)
-        {
-            throw new Exception("Saved game does not exist.");
-        }
-
-        // Deserialize the game.
-        BinaryFormatter formatter = new BinaryFormatter();
-        MemoryStream memoryStream = new MemoryStream(data);
-        return (Game)formatter.Deserialize(memoryStream);
-    }
     #endregion
 
     #region Play and Game Loop
@@ -725,7 +697,7 @@ internal partial class Game : IGameSerialize
     /// <remarks>
     /// For game replay mode and the ability to restore a saved game, we need to reinitialize the random generator because the Random object is not serializable.
     /// </remarks>
-    public void Play(IConsoleAndViewPort consoleViewPort, ICorePersistentStorage? persistentStorage, IReplayPersistentStorage? replayPersistentStorage)
+    public void Play(IConsoleAndViewPort consoleViewPort, IReplayPersistentStorage? replayPersistentStorage)
     {
         void Kingly()
         {
@@ -814,7 +786,6 @@ internal partial class Game : IGameSerialize
         ConsoleViewPort = consoleViewPort;
         Shutdown = false;
         LastInputReceived = DateTime.Now;
-        CorePersistentStorage = persistentStorage;
         ReplayPersistentStorage = replayPersistentStorage;
 
         if (Screen is null)
@@ -1210,12 +1181,6 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public readonly List<Spell> SpellOrder = new List<Spell>();
                                                          
-    /// <summary>
-    /// Represents the object responsible for saving the game, when needed.  If null, the game cannot be saved.
-    /// </summary>
-    [NonSerialized]
-    public ICorePersistentStorage? CorePersistentStorage;
-
     /// <summary>
     /// Returns the object that the calling application provided to be used to connect the game input and output to the calling application.
     /// </summary>

@@ -43,6 +43,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         Game = game;
         Attribute[] cachedAttributes = LoadCachedAttributes();
+
         _effectiveAttributeValues = restoreGameState.GetByKey(nameof(_effectiveAttributeValues)).GetDerivedReferences<EffectiveAttributeValue>(
             (RestoreGameState restoreGameState) => new ActivationEffectiveAttributeValue(Game, restoreGameState),
             (RestoreGameState restoreGameState) => new ArtifactBiasEffectiveAttributeValue(Game, restoreGameState),

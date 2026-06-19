@@ -1,4 +1,5 @@
-﻿using AngbandOS.PersistentStorage.MySql.Entities;
+﻿using AngbandOS.Core.Interface;
+using AngbandOS.PersistentStorage.MySql.Entities;
 using AngbandOS.Web.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -221,6 +222,36 @@ namespace AngbandOS.PersistentStorage
                 await context.SaveChangesAsync();
                 return true;
             }
+        }
+
+        public byte[]? ReadGame(string username, string gameGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool WriteGame(string username, string gameGuid, GameDetails gameDetails, byte[] value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public (GameReplayDetails, int) GetReplay(string gameGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GenerateGameReplayGameId(string gameGuid, int seed)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteStep(int gameReplayId, DateTime dateTime, char keystroke, int seed, string? stackTrace)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetGameReplayId(string gameGuid)
+        {
+            throw new NotImplementedException();
         }
     }
 }

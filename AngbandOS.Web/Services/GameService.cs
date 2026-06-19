@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Concurrent;
 using System.Security.Claims;
-using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace AngbandOS.Web.Services
 {
@@ -52,6 +51,7 @@ namespace AngbandOS.Web.Services
         private readonly IConfiguration Configuration;
         private readonly string ConnectionString;
         private readonly IServiceScopeFactory ServiceScopeFactory;
+        private readonly IWebPersistentStorage WebPersistentStorage;
         #endregion
 
         #region Constructor
@@ -61,7 +61,8 @@ namespace AngbandOS.Web.Services
             IHubContext<AdminHub, IAdminHubMessages> adminHub,
             IHubContext<SpectatorHub, ISpectatorHubMessages> spectatorsHub,
             IConfiguration configuration,
-            IServiceScopeFactory serviceScopeFactory
+            IServiceScopeFactory serviceScopeFactory,
+            IWebPersistentStorage webPersistentStorage
         )
         {
             Configuration = configuration;
@@ -71,6 +72,7 @@ namespace AngbandOS.Web.Services
             SpectatorsHub = spectatorsHub;
             ServiceScopeFactory = serviceScopeFactory;
             ConnectionString = Configuration["ConnectionString"];
+            WebPersistentStorage = webPersistentStorage;
         }
         #endregion
 
@@ -94,14 +96,13 @@ namespace AngbandOS.Web.Services
             gameHubConnections.Disconnected(connectionId);
 
             // Get the console running the game.  It may still be active.
-            if (GameHostConsoleAndViewPortsDictionary.TryGetValue(connectionId, out GameHost? console))
+            if (GameHostConsoleAndViewPortsDictionary.TryGetValue(connectionId, out GameHost? gameHost))
             {
-                console.SaveGame();
+                // Force a shutdown of the console thread.
+                gameHost.Kill();
+
                 // Remove the connection from the consoles.
                 GameHostConsoleAndViewPortsDictionary.Remove(connectionId, out _);
-
-                // Force a shutdown of the console thread.
-                console.Shutdown();
             }
 
             // Run the update notifications.
@@ -119,137 +120,6 @@ namespace AngbandOS.Web.Services
             }
             else
                 return false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="context">Provide the signal-r hub context for the request/.</param>
-        /// <param name="userId">Provide the user ID for the logged in user.</param>
-        /// <param name="guid">Provide the game-GUID for the game to be played.</param>
-        /// <param name="username">Provide username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
-        /// <returns></returns>
-        public async Task<GameHost?> PlayExistingGameAsync(HubCallerContext context, string userId, string guid, string username)
-        {
-            string connectionId = context.ConnectionId;
-
-            // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
-            IConsoleHubMessages gameHub = GameHub.Clients.Client(connectionId);
-
-            // Construct an update monitor that is used when the game notifies us that interesting events that happen in the game.
-            Action<GameHost, GameUpdateNotificationEnum, string> gameUpdateMonitor = ConstructUpdateMonitor(context.User, guid);
-
-            // Create a signal-r console object to manage the in-progress game.  Create a background worker object that runs the game and receives messages from the game to send to the client.
-            GameHost gameConsoleAndViewPort;
-
-            // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-            ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
-
-            // Create an instance of the ReplayPersistentStorage to track the game for replay.
-            IReplayPersistentStorage replayPersistentStorage = new SqlReplayPersistentStorage(ConnectionString, guid);
-
-            // Play an existing game.
-            gameConsoleAndViewPort = new GameHost(context, gameHub, corePersistentStorage, userId, username, gameUpdateMonitor, replayPersistentStorage);
-
-            // For debugging purposes, we will provide a name for the thread that indicates the ID of the user and the game GUID.
-            gameConsoleAndViewPort.ThreadName = $"Game: {userId}/{guid}";
-
-            // We need to track this game by the connection ID so that messages on the signal-r connection can be quickly correlated to the associated game.
-            if (!GameHostConsoleAndViewPortsDictionary.TryAdd(connectionId, gameConsoleAndViewPort))
-            {
-                // We were unable to track this game.  Kill it and abort the play request.
-                gameConsoleAndViewPort.Kill();
-                return null;
-            }
-
-            // We also need to track the connection associated to the game so that game messages can be quickly associated to the signal-r connection.
-            if (!ConnectionIdByGameHostDictionary.TryAdd(gameConsoleAndViewPort, connectionId))
-            {
-                // We were unable to track this game.  Remove the entry we added for the console, kill the game and abort the play request.
-                GameHostConsoleAndViewPortsDictionary.Remove(connectionId, out _);
-                gameConsoleAndViewPort.Kill();
-                return null;
-            }
-
-            // Add an event for when the game is over, that we can disconnect the client.
-            gameConsoleAndViewPort.RunWorkerCompleted += Console_RunWorkerCompleted;
-
-            // Run the background thread and the game.
-            gameConsoleAndViewPort.RunWorkerAsync();
-
-            // Run the update notifications.
-            await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
-
-            return gameConsoleAndViewPort;
-
-        }
-
-        /// <summary>
-        /// Initiate game replay from the connection for a specific game guid.
-        /// </summary>
-        /// <param name="context">Provide context of the signal-r GameHub that the request came in from.</param>
-        /// <param name="userId">Provide user id of the connected user.</param>
-        /// <param name="guid">Provide guid for the game for which to replay.</param>
-        /// <param name="username">Provide username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
-        /// <returns></returns>
-        public async Task<GameHost?> ReplayGameAsync(HubCallerContext context, string userId, string guid, string username)
-        {
-            string connectionId = context.ConnectionId;
-
-            // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
-            IConsoleHubMessages gameHub = GameHub.Clients.Client(connectionId);
-
-            // Construct an update monitor that is used when the game notifies us that interesting events that happen in the game.
-            Action<GameHost, GameUpdateNotificationEnum, string> gameUpdateMonitor = ConstructUpdateMonitor(context.User, guid);
-
-            // Create a signal-r console object to manage the in-progress game.  Create a background worker object that runs the game and receives messages from the game to send to the client.
-            GameHost gameConsoleAndViewPort;
-
-            // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-            ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
-
-            // Create an instance of the ReplayPersistentStorage to track the game for replay.
-            IReplayPersistentStorage replayPersistentStorage = new SqlReplayPersistentStorage(ConnectionString, guid);
-            GameReplayDetails gameReplay = replayPersistentStorage.GetReplay(guid);
-
-            // TODO: We need to load the correct configuration for the replay.  We are not doing this yet.  Load the defualt.
-            SqlGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(ConnectionString);
-            //gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(username, ""); // Load the configuration from SQL
-            GameConfiguration gameConfiguration = new GamePacks.Cthangband.CthangbandGameConfiguration();
-
-            // Play an existing game.
-            gameConsoleAndViewPort = new GameHost(context, gameHub, corePersistentStorage, gameConfiguration, userId, username, gameUpdateMonitor, replayPersistentStorage, gameReplay);
-
-            // For debugging purposes, we will provide a name for the thread that indicates the ID of the user and the game GUID.
-            gameConsoleAndViewPort.ThreadName = $"Game: {userId}/{guid}";
-
-            // We need to track this game by the connection ID so that messages on the signal-r connection can be quickly correlated to the associated game.
-            if (!GameHostConsoleAndViewPortsDictionary.TryAdd(connectionId, gameConsoleAndViewPort))
-            {
-                // We were unable to track this game.  Kill it and abort the play request.
-                gameConsoleAndViewPort.Kill();
-                return null;
-            }
-
-            // We also need to track the connection associated to the game so that game messages can be quickly associated to the signal-r connection.
-            if (!ConnectionIdByGameHostDictionary.TryAdd(gameConsoleAndViewPort, connectionId))
-            {
-                // We were unable to track this game.  Remove the entry we added for the console, kill the game and abort the play request.
-                GameHostConsoleAndViewPortsDictionary.Remove(connectionId, out _);
-                gameConsoleAndViewPort.Kill();
-                return null;
-            }
-
-            // Add an event for when the game is over, that we can disconnect the client.
-            gameConsoleAndViewPort.RunWorkerCompleted += Console_RunWorkerCompleted;
-
-            // Run the background thread and the game.
-            gameConsoleAndViewPort.RunWorkerAsync();
-
-            // Run the update notifications.
-            await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
-
-            return gameConsoleAndViewPort;
         }
 
         /// <summary>
@@ -272,15 +142,6 @@ namespace AngbandOS.Web.Services
             // Construct an update monitor that is used when the game notifies us that interesting events that happen in the game.
             Action<GameHost, GameUpdateNotificationEnum, string> gameUpdateMonitor = ConstructUpdateMonitor(context.User, guid);
 
-            // Create a signal-r console object to manage the in-progress game.  Create a background worker object that runs the game and receives messages from the game to send to the client.
-            GameHost gameConsoleAndViewPort;
-
-            // Create a new instance of the Sql persistent storage so that concurrent games do not interfere with each other.
-            ICorePersistentStorage corePersistentStorage = new SqlCorePersistentStorage(ConnectionString, userId, guid);
-
-            // Create an instance of the ReplayPersistentStorage to track the game for replay.
-            IReplayPersistentStorage replayPersistentStorage = new SqlReplayPersistentStorage(ConnectionString, guid);
-
             // Write a message in the log that a new game was created.
             await WriteMessageAsync(context.User, null, "Game created.", MessageTypeEnum.GameCreated, guid);
 
@@ -293,11 +154,126 @@ namespace AngbandOS.Web.Services
             //gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(username, ""); // Load the configuration from SQL
             gameConfiguration = new GamePacks.Cthangband.CthangbandGameConfiguration();
 
-            // Create a background worker object that runs the game and receives messages from the game to send to the client.
-            gameConsoleAndViewPort = new GameHost(context, gameHub, corePersistentStorage, gameConfiguration, userId, username, gameUpdateMonitor, replayPersistentStorage);
+            // Create a signal-r console object to manage the in-progress game.  This is a background worker object that runs the game and receives messages from the game to send to the client.
+            GameHost gameHost = new GameHost(context, gameHub, gameConfiguration, userId, username, gameUpdateMonitor, WebPersistentStorage);
 
             // For debugging purposes, we will provide a name for the thread that indicates the ID of the user and the game GUID.
-            gameConsoleAndViewPort.ThreadName = $"Game: {userId}/{guid}";
+            gameHost.ThreadName = $"Game: {userId}/{guid}";
+
+            // We need to track this game by the connection ID so that messages on the signal-r connection can be quickly correlated to the associated game.
+            if (!GameHostConsoleAndViewPortsDictionary.TryAdd(connectionId, gameHost))
+            {
+                // We were unable to track this game.  Kill it and abort the play request.
+                gameHost.Kill();
+                return null;
+            }
+
+            // We also need to track the connection associated to the game so that game messages can be quickly associated to the signal-r connection.
+            if (!ConnectionIdByGameHostDictionary.TryAdd(gameHost, connectionId))
+            {
+                // We were unable to track this game.  Remove the entry we added for the console, kill the game and abort the play request.
+                GameHostConsoleAndViewPortsDictionary.Remove(connectionId, out _);
+                gameHost.Kill();
+                return null;
+            }
+
+            // Add an event for when the game is over, that we can disconnect the client.
+            gameHost.RunWorkerCompleted += Console_RunWorkerCompleted;
+
+            // Run the background thread and the game.
+            gameHost.RunWorkerAsync();
+
+            // Run the update notifications.
+            await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
+
+            return gameHost;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context">Provide the signal-r hub context for the request/.</param>
+        /// <param name="userId">Provide the user ID for the logged in user.</param>
+        /// <param name="gameGuid">Provide the game-GUID for the game to be played.</param>
+        /// <param name="username">Provide username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
+        /// <returns></returns>
+        public async Task<GameHost?> PlayExistingGameAsync(HubCallerContext context, string userId, string gameGuid, string username)
+        {
+            string connectionId = context.ConnectionId;
+
+            // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
+            IConsoleHubMessages gameHub = GameHub.Clients.Client(connectionId);
+
+            // Construct an update monitor that is used when the game notifies us that interesting events that happen in the game.
+            Action<GameHost, GameUpdateNotificationEnum, string> gameUpdateMonitor = ConstructUpdateMonitor(context.User, gameGuid);
+
+            // Retrieve the game configuration (for now).
+            GameConfiguration gameConfiguration = new GamePacks.Cthangband.CthangbandGameConfiguration();
+
+            // Create a signal-r console object and background thread processor to manage the in-progress game.  This is a background worker object that runs the game and receives messages from the game to send to the client.
+            GameHost gameConsoleAndViewPort = new GameHost(context, gameHub, gameConfiguration, userId, username, gameUpdateMonitor, WebPersistentStorage, gameGuid);
+
+            // For debugging purposes, we will provide a name for the thread that indicates the ID of the user and the game GUID.
+            gameConsoleAndViewPort.ThreadName = $"Game: {userId}/{gameGuid}";
+
+            // We need to track this game by the connection ID so that messages on the signal-r connection can be quickly correlated to the associated game.
+            if (!GameHostConsoleAndViewPortsDictionary.TryAdd(connectionId, gameConsoleAndViewPort))
+            {
+                // We were unable to track this game.  Kill it and abort the play request.
+                gameConsoleAndViewPort.Kill();
+                return null;
+            }
+
+            // We also need to track the connection associated to the game so that game messages can be quickly associated to the signal-r connection.
+            if (!ConnectionIdByGameHostDictionary.TryAdd(gameConsoleAndViewPort, connectionId))
+            {
+                // We were unable to track this game.  Remove the entry we added for the console, kill the game and abort the play request.
+                GameHostConsoleAndViewPortsDictionary.Remove(connectionId, out _);
+                gameConsoleAndViewPort.Kill();
+                return null;
+            }
+
+            // Add an event for when the game is over, that we can disconnect the client.
+            gameConsoleAndViewPort.RunWorkerCompleted += Console_RunWorkerCompleted;
+
+            // Run the background thread and the game.
+            gameConsoleAndViewPort.RunWorkerAsync();
+
+            // Run the update notifications.
+            await ServiceHub.Clients.All.ActiveGamesUpdated(GetActiveGames());
+
+            return gameConsoleAndViewPort;
+        }
+
+        /// <summary>
+        /// Initiate game replay from the connection for a specific game guid.
+        /// </summary>
+        /// <param name="context">Provide context of the signal-r GameHub that the request came in from.</param>
+        /// <param name="userId">Provide user id of the connected user.</param>
+        /// <param name="gameGuid">Provide guid for the game for which to replay.</param>
+        /// <param name="username">Provide username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
+        /// <returns></returns>
+        public async Task<GameHost?> ReplayGameAsync(HubCallerContext context, string userId, string gameGuid, string username)
+        {
+            string connectionId = context.ConnectionId;
+
+            // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
+            IConsoleHubMessages gameHub = GameHub.Clients.Client(connectionId);
+
+            // Construct an update monitor that is used when the game notifies us that interesting events that happen in the game.
+            Action<GameHost, GameUpdateNotificationEnum, string> gameUpdateMonitor = ConstructUpdateMonitor(context.User, gameGuid);
+
+            // TODO: We need to load the correct configuration for the replay.  We are not doing this yet.  Load the defualt.
+            SqlGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(ConnectionString);
+            //gameConfiguration = gameConfigurationPersistentStorage.LoadConfiguration(username, ""); // Load the configuration from SQL
+            GameConfiguration gameConfiguration = new GamePacks.Cthangband.CthangbandGameConfiguration();
+
+            // Create a signal-r console object to manage the in-progress game.  This is a background worker object that runs the game and receives messages from the game to send to the client.
+            GameHost gameConsoleAndViewPort = new GameHost(context, gameHub, gameConfiguration, gameGuid, userId, username, gameUpdateMonitor, WebPersistentStorage);
+
+            // For debugging purposes, we will provide a name for the thread that indicates the ID of the user and the game GUID.
+            gameConsoleAndViewPort.ThreadName = $"Game: {userId}/{gameGuid}";
 
             // We need to track this game by the connection ID so that messages on the signal-r connection can be quickly correlated to the associated game.
             if (!GameHostConsoleAndViewPortsDictionary.TryAdd(connectionId, gameConsoleAndViewPort))
@@ -497,19 +473,15 @@ namespace AngbandOS.Web.Services
             ChatRecipients.TryGetValue(connectionId, out ChatRecipient? chatRecipient);
 
             // Retrieve the messages from the database.
-            using (IServiceScope scope = ServiceScopeFactory.CreateScope())
-            {
-                IWebPersistentStorage webPersistentStorage = scope.ServiceProvider.GetRequiredService<IWebPersistentStorage>();
-                MessageDetails[] messages = await chatRecipient.GetMessagesAsync(webPersistentStorage, endingId);
+            MessageDetails[] messages = await chatRecipient.GetMessagesAsync(WebPersistentStorage, endingId);
 
-                // Convert the messages into chat format that they can be sent to the client.
-                List<ChatMessage> chatMessages = new List<ChatMessage>();
-                foreach (MessageDetails message in messages)
-                {
-                    chatMessages.Add(await GetChatMessageAsync(message));
-                }
-                return chatMessages.ToArray();
+            // Convert the messages into chat format that they can be sent to the client.
+            List<ChatMessage> chatMessages = new List<ChatMessage>();
+            foreach (MessageDetails message in messages)
+            {
+                chatMessages.Add(await GetChatMessageAsync(message));
             }
+            return chatMessages.ToArray();
         }
 
         private async Task<ChatMessage> GetChatMessageAsync(MessageDetails message)
@@ -772,22 +744,18 @@ namespace AngbandOS.Web.Services
             // Write the message to the database.
             try
             {
-                using (IServiceScope scope = ServiceScopeFactory.CreateScope())
-                {
-                    IWebPersistentStorage webPersistentStorage = scope.ServiceProvider.GetRequiredService<IWebPersistentStorage>();
-                    MessageDetails? messageWritten = await webPersistentStorage.WriteMessageAsync(fromAppUser.Id, toAppUser?.Id, message, type, gameId);
-                    if (messageWritten == null)
-                        return false;
+                MessageDetails? messageWritten = await WebPersistentStorage.WriteMessageAsync(fromAppUser.Id, toAppUser?.Id, message, type, gameId);
+                if (messageWritten == null)
+                    return false;
 
-                    // Relay the message to all clients.
-                    foreach (KeyValuePair<string, ChatRecipient> connectionIdAndChatRecipient in ChatRecipients)
-                    {
-                        ChatRecipient chatRecipient = connectionIdAndChatRecipient.Value;
-                        ChatMessage chatMessage = await GetChatMessageAsync(messageWritten);
-                        await chatRecipient.SendUpdateAsync(messageWritten.Type, messageWritten.ToId, chatMessage);
-                    }
-                    return true;
+                // Relay the message to all clients.
+                foreach (KeyValuePair<string, ChatRecipient> connectionIdAndChatRecipient in ChatRecipients)
+                {
+                    ChatRecipient chatRecipient = connectionIdAndChatRecipient.Value;
+                    ChatMessage chatMessage = await GetChatMessageAsync(messageWritten);
+                    await chatRecipient.SendUpdateAsync(messageWritten.Type, messageWritten.ToId, chatMessage);
                 }
+                return true;
             }
             catch (Exception)
             {
