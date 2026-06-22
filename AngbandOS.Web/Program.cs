@@ -60,7 +60,7 @@ builder.Services.AddAuthentication(x =>
             var path = context.HttpContext.Request.Path;
 
             // If the request is for our hub...
-            if (!string.IsNullOrEmpty(token) && (path.StartsWithSegments("/apiv1/chat-hub") || path.StartsWithSegments("/apiv1/service-hub") || path.StartsWithSegments("/apiv1/game-hub") || path.StartsWithSegments("/apiv1/spectators-hub") || path.StartsWithSegments("/apiv1/admin-hub")))
+            if (!string.IsNullOrEmpty(token) && (path.StartsWithSegments("/apiv1/chat-hub") || path.StartsWithSegments("/apiv1/service-hub") || path.StartsWithSegments("/apiv1/console-hub") || path.StartsWithSegments("/apiv1/spectators-hub") || path.StartsWithSegments("/apiv1/admin-hub")))
             {
                 // Read the token out of the query string
                 context.Token = token;
@@ -116,7 +116,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapHub<ConsoleHub>("/apiv1/game-hub"); // Processes actual game play
+app.MapHub<ConsoleHub>("/apiv1/console-hub"); // Processes actual game play
 app.MapHub<ServiceHub>("/apiv1/service-hub"); // Processes active game list
 app.MapHub<SpectatorHub>("/apiv1/spectators-hub"); // Processes spectating games
 app.MapHub<GameMessagesHub>("/apiv1/game-messages-hub"); // Processes game-messages windows

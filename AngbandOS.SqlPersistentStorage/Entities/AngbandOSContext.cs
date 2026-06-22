@@ -25,7 +25,7 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<DeviceCode> DeviceCodes { get; set; } = null!;
         public virtual DbSet<Game> Games { get; set; } = null!;
-        public virtual DbSet<GameReplay> GameReplays { get; set; } = null!;
+        public virtual DbSet<GameRecovery> GameRecoveries { get; set; } = null!;
         public virtual DbSet<Key> Keys { get; set; } = null!;
         public virtual DbSet<Message> Messages { get; set; } = null!;
         public virtual DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
@@ -186,16 +186,10 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<GameReplay>(entity =>
+            modelBuilder.Entity<GameRecovery>(entity =>
             {
-                entity.HasKey(e => e.GameGuid);
-
-                entity.HasIndex(e => e.ReplayId, "UQ_GameReplays")
+                entity.HasIndex(e => e.Id, "UQ_GameReplays")
                     .IsUnique();
-
-                entity.Property(e => e.GameGuid).ValueGeneratedNever();
-
-                entity.Property(e => e.ReplayId).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<Key>(entity =>
@@ -274,7 +268,6 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
 
                 entity.HasOne(d => d.GameReplay)
                     .WithMany(p => p.ReplaySteps)
-                    .HasPrincipalKey(p => p.ReplayId)
                     .HasForeignKey(d => d.GameReplayId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ReplaySteps_GameReplays");

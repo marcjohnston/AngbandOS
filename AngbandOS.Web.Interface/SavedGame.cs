@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the save game details model for a persistent storage driver.
 /// </summary>
-public class SavedGameDetails
+public class SavedGame
 {
     public string Guid { get; set; }
     public DateTimeOffset SavedDateTime { get; set; }
@@ -12,16 +12,5 @@ public class SavedGameDetails
     public string CharacterName { get; set; }
     public string Comments { get; set; }
     public bool IsAlive { get; set; }
-    public bool ReplayIsAvailable { get; set; }
-}
-
-public class ReplayableGame
-{
-
-}
-
-public class AvailableGame
-{
-    public SavedGameDetails[] SavedGames { get; set; }
-    public 
+    public int? GameRecoveryId { get; set; }
 }

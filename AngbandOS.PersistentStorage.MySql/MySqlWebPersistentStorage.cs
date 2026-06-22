@@ -98,7 +98,7 @@ namespace AngbandOS.PersistentStorage
         }
 
         /// <inheritdoc/>
-        public async Task<bool> DeleteAsync(string id, string username)
+        public async Task<bool> DeleteGameAsync(string id, string username)
         {
             Guid guid = Guid.Parse(id);
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
@@ -117,13 +117,13 @@ namespace AngbandOS.PersistentStorage
         }
 
         /// <inheritdoc/>
-        public async Task<SavedGameDetails[]> ListAsync(string username)
+        public async Task<AvailableGames> ListGamesAsync(string username)
         {
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
-                SavedGameDetails[] savedGames = await context.Savedgames
+                SavedGame[] savedGames = await context.Savedgames
                     .Where(_savedGame => _savedGame.Username == username)
-                    .Select(_savedGame => new SavedGameDetails()
+                    .Select(_savedGame => new SavedGame()
                     {
                         CharacterName = _savedGame.CharacterName,
                         Comments = _savedGame.Comments,
@@ -134,7 +134,11 @@ namespace AngbandOS.PersistentStorage
                         SavedDateTime = _savedGame.DateTime
                     })
                     .ToArrayAsync();
-                return savedGames;
+                return new AvailableGames()
+                {
+                    SavedGames = savedGames,
+                    GamesRecoveries = new GameRecovery[] { }
+                };
             }
         }
 
@@ -234,7 +238,7 @@ namespace AngbandOS.PersistentStorage
             throw new NotImplementedException();
         }
 
-        public (GameReplayDetails, int) GetReplay(string gameGuid)
+        public (GameReplayDetails, int) GetReplay(int gameReplayId)
         {
             throw new NotImplementedException();
         }

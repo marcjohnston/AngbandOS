@@ -12,6 +12,6 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public int Seed { get; set; }
         public string? StackTrace { get; set; }
 
-        public virtual GameReplay GameReplay { get; set; } = null!;
+        public virtual GameRecovery GameReplay { get; set; } = null!;
     }
 }

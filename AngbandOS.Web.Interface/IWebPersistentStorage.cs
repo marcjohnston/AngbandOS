@@ -13,27 +13,27 @@ namespace AngbandOS.Web.Interface
         Task<UserSettingsDetails> WritePreferencesAsync(string userId, UserSettingsDetails userSettingsDetails);
         #endregion
 
-        #region Save and Load Game Functionality
-        byte[]? ReadGame(string username, string gameGuid);
-        bool WriteGame(string username, string gameGuid, GameDetails gameDetails, byte[] value);
-        #endregion
-
-        #region Messaging and Chat Functionality
+        #region Game Functionality
         /// <summary>
         /// Deletes a game from the database.
         /// </summary>
         /// <param name="id">The ID (guid) of the game to be deleted.</param>
         /// <param name="username"></param>
         /// <returns></returns>
-        Task<bool> DeleteAsync(string id, string username);
+        Task<bool> DeleteGameAsync(string id, string username);
 
         /// <summary>
         /// Returns details about the saved games associated to a user.
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        Task<SavedGameDetails[]> ListAsync(string username);
+        Task<AvailableGames> ListGamesAsync(string username);
 
+        byte[]? ReadGame(string username, string gameGuid);
+        bool WriteGame(string username, string gameGuid, GameDetails gameDetails, byte[] value);
+        #endregion
+
+        #region Messaging and Chat Functionality
         /// <summary>
         /// Writes a message record to the database.
         /// </summary>
@@ -69,7 +69,7 @@ namespace AngbandOS.Web.Interface
         /// </summary>
         /// <param name="gameGuid"></param>
         /// <returns></returns>
-        (GameReplayDetails, int) GetReplay(string gameGuid);
+        (GameReplayDetails, int) GetReplay(int gameReplayId);
 
         /// <summary>
         /// Save the game seed and return a unique identifier for game replay steps.

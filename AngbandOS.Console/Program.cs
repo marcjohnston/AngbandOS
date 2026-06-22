@@ -12,7 +12,8 @@ public class Program
 
         Thread gameThread = new Thread(() =>
         {
-            gameServer.PlayNewGame(consoleAndViewPort, null, gameConfiguration);
+            int seed = gameServer.GenerateNewGame(gameConfiguration);
+            gameServer.PlayGame(consoleAndViewPort, null);
         });
 
         gameThread.IsBackground = true;

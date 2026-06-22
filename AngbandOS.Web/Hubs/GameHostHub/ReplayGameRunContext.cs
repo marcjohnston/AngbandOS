@@ -10,14 +10,14 @@ namespace AngbandOS.Web.Hubs
         private readonly string Username;
         private readonly GameConfiguration GameConfiguration;
         private readonly IWebPersistentStorage WebPersistentStorage;
-        private readonly string GameGuid;
+        private readonly int ReplayId;
 
-        public ReplayGameRunContext(string username, GameConfiguration gameConfiguration, IWebPersistentStorage webPersistentStorage, string gameGuid)
+        public ReplayGameRunContext(string username, GameConfiguration gameConfiguration, IWebPersistentStorage webPersistentStorage, int replayId)
         {
             Username = username;
             GameConfiguration = gameConfiguration;
             WebPersistentStorage = webPersistentStorage;
-            GameGuid = gameGuid;
+            ReplayId = replayId;
         }
 
         public override GameResults Play(IConsoleAndViewPort consoleAndViewPort, GameServer gameServer)
@@ -26,7 +26,7 @@ namespace AngbandOS.Web.Hubs
             //WebPersistentStorage.DeleteGame(GameGuid);
 
             // Retrieve the game replay details from the database.
-            (GameReplayDetails gameReplayDetails, int gameReplayId) = WebPersistentStorage.GetReplay(GameGuid);
+            (GameReplayDetails gameReplayDetails, int gameReplayId) = WebPersistentStorage.GetReplay(ReplayId);
 
             // Create an instance of the ReplayPersistentStorage to track the game for replay.
             IReplayPersistentStorage replayPersistentStorage = new SqlReplayAdapter(gameReplayId, WebPersistentStorage);
@@ -47,7 +47,7 @@ namespace AngbandOS.Web.Hubs
                 IsAlive = !gameResults.GameIsOver
             };
 
-            WebPersistentStorage.WriteGame(Username, GameGuid, gameDetails, gameResults.SerializedGameData);
+            //WebPersistentStorage.WriteGame(Username, GameGuid, gameDetails, gameResults.SerializedGameData);
             return gameResults;
         }
     }

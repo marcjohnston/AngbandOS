@@ -25,7 +25,7 @@ const PROXY_CONFIG = [
       "/apiv1/configurations",
       "/apiv1/accounts",
       "/apiv1/admin-hub",
-      "/apiv1/game-hub",
+      "/apiv1/console-hub",
       "/apiv1/spectators-hub",
       "/apiv1/game-messages-hub",
       "/apiv1/service-hub",

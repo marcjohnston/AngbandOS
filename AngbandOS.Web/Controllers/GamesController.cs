@@ -49,7 +49,7 @@ namespace AngbandOS.Web.Controllers
         [Route("saved-games")]
         [Produces("application/json")]
         [Authorize]
-        public async Task<ActionResult<SavedGameDetails[]>> GetSavedGames()
+        public async Task<ActionResult<AvailableGames>> GetSavedGames()
         {
             string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
             if (emailAddress == null)
@@ -58,15 +58,15 @@ namespace AngbandOS.Web.Controllers
             ApplicationUser? user = await UserManager.FindByEmailAsync(emailAddress);
             if (user == null)
                 return Unauthorized();
-            SavedGameDetails[] updatedSavedGameList = await PersistentStorage.ListAsync(user.Id);
-            return Ok(updatedSavedGameList);
+            AvailableGames availableGames = await PersistentStorage.ListGamesAsync(user.Id);
+            return Ok(availableGames);
         }
 
         [HttpDelete]
         [Route("saved-games/{id}")]
         [Produces("application/json")]
         [Authorize]
-        public async Task<ActionResult<SavedGameDetails[]>> DeleteSavedGame([FromRoute] string id)
+        public async Task<ActionResult<AvailableGames>> DeleteSavedGame([FromRoute] string id)
         {
             string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
             if (emailAddress == null)
@@ -76,10 +76,10 @@ namespace AngbandOS.Web.Controllers
             if (user == null)
                 return Unauthorized();
 
-            if (await PersistentStorage.DeleteAsync(id, user.Id))
+            if (await PersistentStorage.DeleteGameAsync(id, user.Id))
             {
-                SavedGameDetails[] savedGames = await PersistentStorage.ListAsync(user.Id);
-                return Ok(savedGames);
+                AvailableGames availableGames = await PersistentStorage.ListGamesAsync(user.Id);
+                return Ok(availableGames);
             }
             else
                 return NotFound();

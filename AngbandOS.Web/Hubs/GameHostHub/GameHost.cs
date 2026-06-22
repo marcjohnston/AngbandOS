@@ -52,9 +52,9 @@ namespace AngbandOS.Web.Hubs
         public readonly string Username;
 
         /// <summary>
-        /// Returns object that handles the notification channel.
+        /// Returns object that handles the notification channel.  Will be null for replay mode.
         /// </summary>
-        private readonly Action<GameHost, GameUpdateNotificationEnum, string> NotificationAction;
+        private readonly Action<GameHost, GameUpdateNotificationEnum, string>? NotificationAction = null;
 
         /// <summary>
         /// Returns the context for the GameHub.  This is used to abort the signal-r connection and terminate the game instantly.
@@ -80,7 +80,7 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId">The user ID of the player.  This property is used to GET ActiveGames controller to return the user ID of the player.</param>
         /// <param name="username">The username for the player.  This property is used by the GET ActiveGames controller to return the name of the player./></param>
         /// <param name="notificationAction"></param>
-        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, GameConfiguration gameConfiguration, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IWebPersistentStorage webPersistentStorage)
+        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, GameConfiguration gameConfiguration, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string>? notificationAction, IWebPersistentStorage webPersistentStorage)
         {
             _consoleGameHub = gameHub;
             UserId = userId;
@@ -100,7 +100,7 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId"></param>
         /// <param name="username"></param>
         /// <param name="notificationAction"></param>
-        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, GameConfiguration gameConfiguration, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IWebPersistentStorage webPersistentStorage, string gameGuid)
+        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, GameConfiguration gameConfiguration, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string>? notificationAction, IWebPersistentStorage webPersistentStorage, string gameGuid)
         {
             _consoleGameHub = gameHub;
             UserId = userId;
@@ -120,15 +120,14 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId"></param>
         /// <param name="username"></param>
         /// <param name="notificationAction"></param>
-        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, GameConfiguration gameConfiguration, string gameGuid, string userId, string username, Action<GameHost, GameUpdateNotificationEnum, string> notificationAction, IWebPersistentStorage webPersistentStorage)
+        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, GameConfiguration gameConfiguration, string userId, string username, IWebPersistentStorage webPersistentStorage, int replayId)
         {
             _consoleGameHub = gameHub;
             UserId = userId;
             Username = username;
-            NotificationAction = notificationAction;
             Context = context;
             WebPersistentStorage = webPersistentStorage;
-            RunContext = new ReplayGameRunContext(userId, gameConfiguration, webPersistentStorage, gameGuid);
+            RunContext = new ReplayGameRunContext(userId, gameConfiguration, webPersistentStorage, replayId);
         }
         #endregion
 
@@ -244,48 +243,75 @@ namespace AngbandOS.Web.Hubs
         /// <param name="level"></param>
         public void PlayerDied(string name, string diedFrom, int level)
         {
-            string message = $"{name.Trim()} was just killed by {diedFrom} on level {level}.";
-            NotificationAction(this, GameUpdateNotificationEnum.PlayerDied, message);
+            if (NotificationAction is not null)
+            {
+                string message = $"{name.Trim()} was just killed by {diedFrom} on level {level}.";
+                NotificationAction(this, GameUpdateNotificationEnum.PlayerDied, message);
+            }
         }
 
         public void CharacterRenamed(string name)
         {
-            string message = $"{name} was just birthed.";
-            NotificationAction(this, GameUpdateNotificationEnum.CharacterRenamed, message);
+            if (NotificationAction is not null)
+            {
+                string message = $"{name} was just birthed.";
+                NotificationAction(this, GameUpdateNotificationEnum.CharacterRenamed, message);
+            }
         }
 
         public void GameStarted()
         {
-            NotificationAction(this, GameUpdateNotificationEnum.GameStarted, "Game started.");
+            if (NotificationAction is not null)
+            {
+                NotificationAction(this, GameUpdateNotificationEnum.GameStarted, "Game started.");
+            }
         }
 
         public void GoldUpdated(int gold)
         {
-            NotificationAction(this, GameUpdateNotificationEnum.GoldUpdated, "Gold updated.");
+            if (NotificationAction is not null)
+            {
+                NotificationAction(this, GameUpdateNotificationEnum.GoldUpdated, "Gold updated.");
+            }
         }
 
         public void ExperienceLevelChanged(int level)
         {
-            NotificationAction(this, GameUpdateNotificationEnum.ExperienceLevelChanged, "Experience level changed.");
+            if (NotificationAction is not null)
+            {
+                NotificationAction(this, GameUpdateNotificationEnum.ExperienceLevelChanged, "Experience level changed.");
+            }
         }
         public void GameStopped()
         {
-            NotificationAction(this, GameUpdateNotificationEnum.GameStopped, "Game stopped.");
+            if (NotificationAction is not null)
+            {
+                NotificationAction(this, GameUpdateNotificationEnum.GameStopped, "Game stopped.");
+            }
         }
 
         public void GameExceptionThrown(string message)
         {
-            NotificationAction(this, GameUpdateNotificationEnum.GameExceptionThrown, message);
+            if (NotificationAction is not null)
+            {
+                NotificationAction(this, GameUpdateNotificationEnum.GameExceptionThrown, message);
+            }
         }
 
         public void GameTimeElapsed()
         {
-            NotificationAction(this, GameUpdateNotificationEnum.GameTimeElapsed, "Game time elapsed.");
+            if (NotificationAction is not null)
+            {
+                NotificationAction(this, GameUpdateNotificationEnum.GameTimeElapsed, "Game time elapsed.");
+            }
         }
 
         public void InputReceived()
         {
-            NotificationAction(this, GameUpdateNotificationEnum.InputReceived, "Game input received.");
+            if (NotificationAction is not null)
+            {
+                NotificationAction(this, GameUpdateNotificationEnum.InputReceived, "Game input received.");
+            }
         }
         #endregion
 

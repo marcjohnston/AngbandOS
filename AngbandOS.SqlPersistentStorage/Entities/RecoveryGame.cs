@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace AngbandOS.PersistentStorage.Sql.Entities
 {
-    public partial class GameReplay
+    public partial class RecoveryGame
     {
-        public GameReplay()
+        public RecoveryGame()
         {
             ReplaySteps = new HashSet<ReplayStep>();
         }

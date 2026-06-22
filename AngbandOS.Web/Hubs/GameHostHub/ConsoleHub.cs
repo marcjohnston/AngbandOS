@@ -88,20 +88,15 @@ namespace AngbandOS.Web.Hubs
         /// </summary>
         /// <param name="guid">The unique identifier for the game to be played.  Must be owned by the user.  Null, to start a new game.</param>
         /// <returns></returns>
-        public async Task ReplayGame(string guid)
+        public async Task ReplayGame(int replayId)
         {
-            if (guid == null)
-            {
-                throw new ArgumentNullException(nameof(guid));
-            }
-
             // We need to ensure the user is authenticated.
             string? emailAddress = Context.User?.FindFirst(ClaimTypes.Email)?.Value;
             ApplicationUser? user = await UserManager.FindByEmailAsync(emailAddress);
 
             if (user.Id != null)
             {
-                ViewPort = await GameService.ReplayGameAsync(Context, user.Id, guid, user.UserName);
+                ViewPort = await GameService.ReplayGameAsync(Context, user.Id, replayId, user.UserName);
             }
         }
 

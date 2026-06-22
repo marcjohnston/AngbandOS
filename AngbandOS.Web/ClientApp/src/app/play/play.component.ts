@@ -36,13 +36,12 @@ export class PlayComponent implements OnInit, OnDestroy {
   @ViewChild('inGameMenu', { static: true }) private inGameMenuRef: ElementRef | undefined;
   private gameHubConnection: HubConnection | undefined;
   public connectionId: string | null = null;
-  public gameGuid: string | null | undefined = undefined; // Represents the unique identifier for the game to play; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
+  public gameGuid: string | number | null | undefined = undefined; // Represents the string unique identifier for the game to play; numeric replay id to replay a game; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
   private _initSubscriptions = new Subscription();
   private _htmlConsole: HtmlConsole | undefined = undefined;
   private _accessToken: string | undefined = undefined;
   public preferences: Preferences | undefined = undefined; // Represents the users preferences.  Will be undefined, until they are retrieved from the back end.
   private resizeObserver!: ResizeObserver;
-  private replay: boolean | undefined = undefined;
 
   constructor(
     private _preferencesDialog: MatDialog,
@@ -359,7 +358,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   private check() {
-    if (this.gameHubConnection !== undefined && this.gameGuid !== undefined && this.replay !== undefined) {
+    if (this.gameHubConnection !== undefined && this.gameGuid !== undefined) {
       this.gameHubConnection.start().then(() => {
         if (this.gameHubConnection) {
           this.connectionId = this.gameHubConnection.connectionId;
@@ -426,7 +425,7 @@ export class PlayComponent implements OnInit, OnDestroy {
           this.gameInProgress = true;
 
           // Check to see if this is a request to replay a game.
-          if (this.replay) {
+          if (typeof this.gameGuid === "number") {
             this.gameHubConnection.send("ReplayGame", this.gameGuid).then(() => {
             }, (reason: any) => {
               this._snackBar.open(`ReplayGame rejected ${reason}.`, undefined, {
@@ -505,7 +504,7 @@ export class PlayComponent implements OnInit, OnDestroy {
       const inGameMenuElement: HTMLDivElement = this.inGameMenuRef?.nativeElement;
       inGameMenuElement.style.display = "none";
       
-      // Wait for the authentication.  Games can only be played with authenticated.
+      // Wait for the authentication.  Games can only be played when authenticated.
       this._initSubscriptions.add(this._authenticationService.currentUser.subscribe((_currentUser: UserDetails | null) => {
         if (_currentUser === null) {
           this._accessToken = undefined;
@@ -526,7 +525,7 @@ export class PlayComponent implements OnInit, OnDestroy {
         }
         else {
           // Create the signal-r connection object.
-          this.gameHubConnection = new HubConnectionBuilder().withUrl("/apiv1/game-hub", {
+          this.gameHubConnection = new HubConnectionBuilder().withUrl("/apiv1/console-hub", {
             accessTokenFactory: () => this._accessToken as string,
           }).build();
           this.check();
@@ -547,11 +546,6 @@ export class PlayComponent implements OnInit, OnDestroy {
         this._snackBar.open(`Error during guid parameter retrieval ${error}.`, undefined, {
           duration: 2000,
         });
-      }));
-
-      this._initSubscriptions.add(this._activatedRoute.queryParams.subscribe(_parameters => {
-        this.replay = _parameters["replay"] === "1";
-        this.check();
       }));
 
       // Track sizing on the canvas container.

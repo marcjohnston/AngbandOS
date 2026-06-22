@@ -254,15 +254,12 @@ namespace AngbandOS.Web.Services
         /// <param name="gameGuid">Provide guid for the game for which to replay.</param>
         /// <param name="username">Provide username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
         /// <returns></returns>
-        public async Task<GameHost?> ReplayGameAsync(HubCallerContext context, string userId, string gameGuid, string username)
+        public async Task<GameHost?> ReplayGameAsync(HubCallerContext context, string userId, int replayId, string username)
         {
             string connectionId = context.ConnectionId;
 
             // Retrieve a game hub client for the connection.  This signal-r interface is how the game will communicate to the client.
             IConsoleHubMessages gameHub = GameHub.Clients.Client(connectionId);
-
-            // Construct an update monitor that is used when the game notifies us that interesting events that happen in the game.
-            Action<GameHost, GameUpdateNotificationEnum, string> gameUpdateMonitor = ConstructUpdateMonitor(context.User, gameGuid);
 
             // TODO: We need to load the correct configuration for the replay.  We are not doing this yet.  Load the defualt.
             SqlGameConfigurationPersistentStorage gameConfigurationPersistentStorage = new SqlGameConfigurationPersistentStorage(ConnectionString);
@@ -270,10 +267,10 @@ namespace AngbandOS.Web.Services
             GameConfiguration gameConfiguration = new GamePacks.Cthangband.CthangbandGameConfiguration();
 
             // Create a signal-r console object to manage the in-progress game.  This is a background worker object that runs the game and receives messages from the game to send to the client.
-            GameHost gameConsoleAndViewPort = new GameHost(context, gameHub, gameConfiguration, gameGuid, userId, username, gameUpdateMonitor, WebPersistentStorage);
+            GameHost gameConsoleAndViewPort = new GameHost(context, gameHub, gameConfiguration, userId, username, WebPersistentStorage, replayId);
 
             // For debugging purposes, we will provide a name for the thread that indicates the ID of the user and the game GUID.
-            gameConsoleAndViewPort.ThreadName = $"Game: {userId}/{gameGuid}";
+            gameConsoleAndViewPort.ThreadName = $"Game Replay ID: {userId}/{replayId}";
 
             // We need to track this game by the connection ID so that messages on the signal-r connection can be quickly correlated to the associated game.
             if (!GameHostConsoleAndViewPortsDictionary.TryAdd(connectionId, gameConsoleAndViewPort))

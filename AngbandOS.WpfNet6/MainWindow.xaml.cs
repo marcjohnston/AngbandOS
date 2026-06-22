@@ -218,16 +218,19 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         if (playMode == PlayModeEnum.ExistingGame)
         {
             byte[] serializedSaveGameData = File.ReadAllBytes(jsonSaveFilename);
-            gameResults = gameServer.PlayExistingGame(this, replayPersistentStorage, gameConfiguration, serializedSaveGameData);
+            gameServer.LoadExistingGame(gameConfiguration, serializedSaveGameData);
+            gameResults = gameServer.PlayGame(this, replayPersistentStorage);
         }
         else if (playMode == PlayModeEnum.ReplayGame)
         {
             GameReplayDetails gameReplayDetails = replayPersistentStorage.GetReplay();
-            gameResults = gameServer.ReplayGame(this, replayPersistentStorage, gameConfiguration, gameReplayDetails);
+            gameServer.LoadGameReplay(gameConfiguration, gameReplayDetails);
+            gameResults = gameServer.PlayGame(this, replayPersistentStorage);
         }
         else
         {
-            gameResults = gameServer.PlayNewGame(this, replayPersistentStorage, gameConfiguration);
+            int seed = gameServer.GenerateNewGame(gameConfiguration);
+            gameResults = gameServer.PlayGame(this, replayPersistentStorage);
         }
 
         // Save the game to disk.

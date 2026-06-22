@@ -5,7 +5,8 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 import { Subscription, timer } from 'rxjs';
 import { AuthenticationService } from '../accounts/authentication-service/authentication.service';
 import { UserDetails } from '../accounts/authentication-service/user-details';
-import { SavedGameDetails } from './saved-game-details';
+import { SavedGame } from './saved-game';
+import { AvailableGames } from './available-games';
 import { MatSnackBar as MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessages } from '../modules/error-messages/error-messages.module';
 import { ActiveGameDetails } from './active-game-details';
@@ -15,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ChangeDetectorRef } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MasterLayoutComponent } from '../master-layout/master-layout.component';
+import { GameRecovery } from './game-recovery';
 
 const idleTimeSpanUpdateIntervalInMilliseconds = 1000;
 
@@ -34,13 +36,14 @@ const idleTimeSpanUpdateIntervalInMilliseconds = 1000;
   ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  public savedGames: SavedGameDetails[] | undefined = undefined;
+  public availableGames: AvailableGames | undefined = undefined;
   public activeGames: ActiveGameDetails[] | undefined = undefined;
   public savedGamesDisplayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved", "actions"];
+  public gameRecoveriesDisplayedColumns: string[] = ["guid", "last-played", "actions"];
   public activeGamesDisplayedColumns: string[] = ["username", "character-name", "gold", "level", "last-input-received", "game-time", "actions"];
   public activeUsersDisplayedColumns: string[] = ["username", "connectionId", "actions"];
   public selectedActiveUser: UserDetails | null = null;
-  public selectedSavedGame: SavedGameDetails | null = null;
+  public selectedSavedGame: SavedGame | null = null;
 
   private readonly _initSubscriptions = new Subscription();
   private readonly _serviceConnection = new HubConnectionBuilder().withUrl("/apiv1/service-hub").build();
@@ -212,8 +215,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     const currentUserSubscription = this._authenticationService.currentUser.subscribe((_userDetails: UserDetails | null) => {
       if (_userDetails !== null && _userDetails.username !== null) {
         this._changeDetectorRef.detectChanges();
-        this._httpClient.get<SavedGameDetails[]>(`/apiv1/saved-games`).toPromise().then((_savedGames) => {
-          this.savedGames = _savedGames; 
+        this._httpClient.get<AvailableGames>(`/apiv1/saved-games`).toPromise().then((_availableGames) => {
+          this.availableGames = _availableGames; 
           this._changeDetectorRef.detectChanges();
         }, (_errorResponse: HttpErrorResponse) => {
           this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
@@ -251,7 +254,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  public playSavedGame(savedGame: SavedGameDetails) {
+  public playSavedGame(savedGame: SavedGame) {
     this._router.navigate(['/play', savedGame.guid]);
   }
 
@@ -259,7 +262,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._router.navigate(['/watch', activeGame.connectionId]);
   }
 
-  public replaySavedGame(savedGame: SavedGameDetails) {
+  public replaySavedGame(savedGame: SavedGame) {
     this._router.navigate(['/play', savedGame.guid], { queryParams: { replay: 1}});
   }
   
@@ -267,10 +270,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._router.navigate(['/play']);
   }
 
-  public deleteSavedGame(savedGame: SavedGameDetails) {
+  public deleteSavedGame(savedGame: SavedGame) {
     if (window.confirm('Are you sure you want to delete this game?')) {
-      this._httpClient.delete<SavedGameDetails[]>(`/apiv1/saved-games/${savedGame.guid}`).toPromise().then((_savedGames) => {
-        this.savedGames = _savedGames;
+      this._httpClient.delete<AvailableGames>(`/apiv1/saved-games/${savedGame.guid}`).toPromise().then((_availableGames) => {
+        this.availableGames = _availableGames;
         this._changeDetectorRef.detectChanges();
       }, (_errorResponse: HttpErrorResponse) => {
         this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
@@ -278,5 +281,21 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       });
     }
+  }
+
+  public deleteRecovery(gameRecovery: GameRecovery) {
+    if (window.confirm('Are you sure you want to delete this recovery?')) {
+      this._httpClient.delete<AvailableGames>(`/apiv1/saved-games/${gameRecovery.id}`).toPromise().then((_availableGames) => {
+        this.availableGames = _availableGames;
+        this._changeDetectorRef.detectChanges();
+      }, (_errorResponse: HttpErrorResponse) => {
+        this._snackBar.open(ErrorMessages.getMessage(_errorResponse).join('\n'), "", {
+          duration: 5000
+        });
+      });
+    }
+  }
+
+  public recoverGame(gameRecovery: GameRecovery) {
   }
 }

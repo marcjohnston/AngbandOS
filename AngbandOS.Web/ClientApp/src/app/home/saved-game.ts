@@ -1,4 +1,4 @@
-export class SavedGameDetails {
+export class SavedGame {
   public guid: string | undefined;
   public savedDateTime: string | undefined;
   public level: number | undefined;
@@ -6,5 +6,5 @@ export class SavedGameDetails {
   public characterName: string | undefined;
   public comments: string | undefined;
   public isAlive: boolean | undefined;
-  public replayIsAvailable: boolean | undefined;
+  public gameRecoveryId: number | null | undefined;
 }
