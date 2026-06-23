@@ -29,7 +29,7 @@ public class GameServer
     private byte[] SaveGame()
     {
         SaveGameState saveGameState = new SaveGameState();
-        GameStateBag saveGameStateBag = saveGameState.CreateGameStateBag(Game, typeof(Game));
+        GameStateBag saveGameStateBag = saveGameState.CreateDerivedGameStateBag(Game, typeof(Game));
         return GameSerializer.Serialize(new SaveGameData(saveGameStateBag));
     }
 

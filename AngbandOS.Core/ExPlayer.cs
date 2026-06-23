@@ -66,15 +66,15 @@ internal class ExPlayer : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Gender), saveGameState.CreateGameStateBag(Gender, typeof(Gender))),
+            (nameof(Gender), saveGameState.CreateDerivedGameStateBag(Gender, typeof(Gender))),
             (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
             (nameof(Level), saveGameState.CreateGameStateBag(Level)),
             (nameof(Name), saveGameState.CreateGameStateBag(Name)),
             (nameof(CharacterClassName), saveGameState.CreateGameStateBag(CharacterClassName)),
             (nameof(Race), saveGameState.CreateGameStateBag(Race)),
             (nameof(RaceAtBirth), saveGameState.CreateGameStateBag(RaceAtBirth)),
-            (nameof(PrimaryRealm), saveGameState.CreateGameStateBag(PrimaryRealm, typeof(Realm))),
-            (nameof(SecondaryRealm), saveGameState.CreateGameStateBag(SecondaryRealm, typeof(Realm)))
+            (nameof(PrimaryRealm), saveGameState.CreateDerivedGameStateBag(PrimaryRealm, typeof(Realm))),
+            (nameof(SecondaryRealm), saveGameState.CreateDerivedGameStateBag(SecondaryRealm, typeof(Realm)))
         );
     }
 

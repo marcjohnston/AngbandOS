@@ -21,7 +21,7 @@ internal class ActivationReadOnlyAttributeValue : AttributeValue, IGameSerialize
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Value), saveGameState.CreateGameStateBag(Value, typeof(Activation)))
+            (nameof(Value), saveGameState.CreateDerivedGameStateBag(Value, typeof(Activation)))
         );
     }
 }

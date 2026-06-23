@@ -40,12 +40,12 @@ internal class GridTile : IItemContainer, IGameSerialize
         return new DictionaryGameStateBag(
             ("bools", saveGameState.CreateGameStateBag(EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag)),
             (nameof(_trapsDetected), saveGameState.CreateGameStateBag(_trapsDetected)),
-            (nameof(Items), saveGameState.CreateGameStateBag(Items, typeof(Item))),
+            (nameof(Items), saveGameState.CreateDerivedGameStateBag(Items, typeof(Item))),
             (nameof(MonsterIndex), saveGameState.CreateGameStateBag(MonsterIndex)),
             (nameof(ScentAge), saveGameState.CreateGameStateBag(ScentAge)),
             (nameof(ScentStrength), saveGameState.CreateGameStateBag(ScentStrength)),
-            (nameof(_backgroundFeature), saveGameState.CreateGameStateBag(_backgroundFeature, typeof(Tile))),
-            (nameof(_featureType), saveGameState.CreateGameStateBag(_featureType, typeof(Tile)))
+            (nameof(_backgroundFeature), saveGameState.CreateDerivedGameStateBag(_backgroundFeature, typeof(Tile))),
+            (nameof(_featureType), saveGameState.CreateDerivedGameStateBag(_featureType, typeof(Tile)))
         );
     }
 

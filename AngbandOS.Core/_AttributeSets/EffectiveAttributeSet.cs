@@ -57,7 +57,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(_effectiveAttributeValues), saveGameState.CreateGameStateBag(_effectiveAttributeValues, typeof(ActivationEffectiveAttributeValue), typeof(ArtifactBiasEffectiveAttributeValue), typeof(BoolSetEffectiveAttributeValue), typeof(FriendlyNameEffectiveAttributeValue), typeof(OrEffectiveAttributeValue), typeof(SumEffectiveAttributeValue)))
+            (nameof(_effectiveAttributeValues), saveGameState.CreateDerivedGameStateBag(_effectiveAttributeValues, typeof(ActivationEffectiveAttributeValue), typeof(ArtifactBiasEffectiveAttributeValue), typeof(BoolSetEffectiveAttributeValue), typeof(FriendlyNameEffectiveAttributeValue), typeof(OrEffectiveAttributeValue), typeof(SumEffectiveAttributeValue)))
         );
     }
 

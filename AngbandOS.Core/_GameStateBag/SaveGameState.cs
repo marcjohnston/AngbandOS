@@ -164,13 +164,7 @@ internal partial class SaveGameState
         return new DerivedObjectGameStateBag(objectId, derivedId, gameStateBag);
     }
 
-    [Obsolete("This overload can be deleted when the non-derived versions are removed.")]
-    public GameStateBag CreateGameStateBag(IGameSerialize? value, Type type, params Type[] derivedTypes)
-    {
-        return CreateDerivedGameStateBag(value, new Type[] { type }.Concat(derivedTypes).ToArray());
-    }
-
-    public GameStateBag CreateGameStateBag(IEnumerable<IGameSerialize?>? value, Type type, params Type[] derivedTypes)
+    public GameStateBag CreateDerivedGameStateBag(IEnumerable<IGameSerialize?>? value, params Type[] derivedTypes)
     {
         if (value is null)
         {
@@ -180,12 +174,12 @@ internal partial class SaveGameState
         var gameStateBags = new List<GameStateBag>();
         foreach (IGameSerialize? item in value)
         {
-            gameStateBags.Add(CreateGameStateBag(item, type, derivedTypes));
+            gameStateBags.Add(CreateDerivedGameStateBag(item, derivedTypes));
         }
         return new ListGameStateBag(gameStateBags.ToArray());
     }
 
-    public GameStateBag CreateGameStateBag(IGameSerialize[][]? value, Type type, params Type[] derivedTypes)
+    public GameStateBag CreateDerivedGameStateBag(IGameSerialize[][]? value, params Type[] derivedTypes)
     {
         if (value is null)
         {
@@ -195,7 +189,7 @@ internal partial class SaveGameState
         var gameStateBags = new List<GameStateBag>();
         foreach (IGameSerialize[] item in value)
         {
-            gameStateBags.Add(CreateGameStateBag(item, type, derivedTypes));
+            gameStateBags.Add(CreateDerivedGameStateBag(item, derivedTypes));
         }
         return new ListGameStateBag(gameStateBags.ToArray());
     }

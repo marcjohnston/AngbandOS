@@ -31,7 +31,7 @@ internal sealed class Town : IGetKey, IToJson, IGameSerialize
             (nameof(Visited), saveGameState.CreateGameStateBag(Visited)),
             (nameof(X), saveGameState.CreateGameStateBag(X)),
             (nameof(Y), saveGameState.CreateGameStateBag(Y)),
-            (nameof(Stores), saveGameState.CreateGameStateBag(Stores, typeof(Store)))
+            (nameof(Stores), saveGameState.CreateDerivedGameStateBag(Stores, typeof(Store)))
         );
     }
 

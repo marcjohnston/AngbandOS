@@ -39,7 +39,7 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Value), saveGameState.CreateGameStateBag(Value, typeof(ActivationReadOnlyAttributeValue), typeof(ArtifactBiasReadOnlyAttributeValue), typeof(BoolReadOnlyAttributeValue), typeof(IntReadOnlyAttributeValue), typeof(NullableBoolReadOnlyAttributeValue), typeof(NullableStringReadOnlyAttributeValue)))
+            (nameof(Value), saveGameState.CreateDerivedGameStateBag(Value, typeof(ActivationReadOnlyAttributeValue), typeof(ArtifactBiasReadOnlyAttributeValue), typeof(BoolReadOnlyAttributeValue), typeof(IntReadOnlyAttributeValue), typeof(NullableBoolReadOnlyAttributeValue), typeof(NullableStringReadOnlyAttributeValue)))
         );
     }
 }

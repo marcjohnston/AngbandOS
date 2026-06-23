@@ -15,7 +15,7 @@ internal class IllegibleItemFlavor : Flavor
     public override GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Symbol), saveGameState.CreateGameStateBag(Symbol, typeof(Symbol))),
+            (nameof(Symbol), saveGameState.CreateDerivedGameStateBag(Symbol, typeof(Symbol))),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
             (nameof(Name), saveGameState.CreateGameStateBag(Name))
         );

@@ -27,8 +27,8 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
         return new DictionaryGameStateBag(
             (nameof(Forgotten), saveGameState.CreateGameStateBag(Forgotten, Learned, Tried)),
             (nameof(_spellIndex), saveGameState.CreateGameStateBag(_spellIndex)),
-            (nameof(_spellBookItemFactory), saveGameState.CreateGameStateBag(_spellBookItemFactory, typeof(ItemFactory))),
-            (nameof(_characterClassSpell), saveGameState.CreateGameStateBag(_characterClassSpell, typeof(CharacterClassSpell)))
+            (nameof(_spellBookItemFactory), saveGameState.CreateDerivedGameStateBag(_spellBookItemFactory, typeof(ItemFactory))),
+            (nameof(_characterClassSpell), saveGameState.CreateDerivedGameStateBag(_characterClassSpell, typeof(CharacterClassSpell)))
         );
     }
 

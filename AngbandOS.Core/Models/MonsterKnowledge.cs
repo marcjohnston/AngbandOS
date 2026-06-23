@@ -33,7 +33,7 @@ internal class MonsterKnowledge : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(_monsterRace), saveGameState.CreateGameStateBag(_monsterRace, typeof(MonsterRace))),
+            (nameof(_monsterRace), saveGameState.CreateDerivedGameStateBag(_monsterRace, typeof(MonsterRace))),
             (nameof(RBlows), saveGameState.CreateGameStateBag(RBlows)),
             (nameof(RCastInate), saveGameState.CreateGameStateBag(RCastInate)),
             (nameof(RCastSpell), saveGameState.CreateGameStateBag(RCastSpell)),
@@ -42,8 +42,8 @@ internal class MonsterKnowledge : IGameSerialize
             (nameof(RDropItem), saveGameState.CreateGameStateBag(RDropItem)),
             (nameof(Guardian), saveGameState.CreateGameStateBag(Guardian)),
             (nameof(OnlyGuardian), saveGameState.CreateGameStateBag(OnlyGuardian)),
-            (nameof(Characteristics), saveGameState.CreateGameStateBag(Characteristics, typeof(MonsterCharacteristics))),
-            (nameof(RSpells), saveGameState.CreateGameStateBag(RSpells, typeof(MonsterSpell))),
+            (nameof(Characteristics), saveGameState.CreateDerivedGameStateBag(Characteristics, typeof(MonsterCharacteristics))),
+            (nameof(RSpells), saveGameState.CreateDerivedGameStateBag(RSpells, typeof(MonsterSpell))),
             (nameof(RIgnore), saveGameState.CreateGameStateBag(RIgnore)),
             (nameof(RPkills), saveGameState.CreateGameStateBag(RPkills)),
             (nameof(RProbed), saveGameState.CreateGameStateBag(RProbed)),

@@ -20,12 +20,12 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     {
         return new DictionaryGameStateBag(
             ("bools", saveGameState.CreateGameStateBag(Stompable[0], Stompable[1], Stompable[2], Stompable[3], IsFlavorAware, Tried)),
-            (nameof(FlavorSymbol), saveGameState.CreateGameStateBag(FlavorSymbol, typeof(Symbol))),
+            (nameof(FlavorSymbol), saveGameState.CreateDerivedGameStateBag(FlavorSymbol, typeof(Symbol))),
             (nameof(FlavorColor), saveGameState.CreateGameStateBag(FlavorColor)),
-            (nameof(Flavor), saveGameState.CreateGameStateBag(Flavor, typeof(IllegibleItemFlavor), typeof(ItemFlavor))),
+            (nameof(Flavor), saveGameState.CreateDerivedGameStateBag(Flavor, typeof(IllegibleItemFlavor), typeof(ItemFlavor))),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
             (nameof(_bookIndex), saveGameState.CreateGameStateBag(_bookIndex)),
-            (nameof(_realm), saveGameState.CreateGameStateBag(_realm, typeof(Realm)))
+            (nameof(_realm), saveGameState.CreateDerivedGameStateBag(_realm, typeof(Realm)))
         );
     }
 

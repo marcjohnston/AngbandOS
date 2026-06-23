@@ -18,13 +18,13 @@ internal class Store : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(StoreFactory), saveGameState.CreateGameStateBag(StoreFactory, typeof(StoreFactory))),
+            (nameof(StoreFactory), saveGameState.CreateDerivedGameStateBag(StoreFactory, typeof(StoreFactory))),
             (nameof(_x), saveGameState.CreateGameStateBag(_x)),
             (nameof(_y), saveGameState.CreateGameStateBag(_y)),
             (nameof(_leaveStore), saveGameState.CreateGameStateBag(_leaveStore)),
-            (nameof(StoreInventoryList), saveGameState.CreateGameStateBag(StoreInventoryList, typeof(Item))),
+            (nameof(StoreInventoryList), saveGameState.CreateDerivedGameStateBag(StoreInventoryList, typeof(Item))),
             (nameof(StoreTop), saveGameState.CreateGameStateBag(StoreTop)),
-            (nameof(Owner), saveGameState.CreateGameStateBag(Owner, typeof(Shopkeeper)))
+            (nameof(Owner), saveGameState.CreateDerivedGameStateBag(Owner, typeof(Shopkeeper)))
        );
     }
 

@@ -33,8 +33,8 @@ internal class WildernessRegion : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Dungeon), saveGameState.CreateGameStateBag(Dungeon, typeof(Dungeon))),
-            (nameof(Town), saveGameState.CreateGameStateBag(Town, typeof(Town))),
+            (nameof(Dungeon), saveGameState.CreateDerivedGameStateBag(Dungeon, typeof(Dungeon))),
+            (nameof(Town), saveGameState.CreateDerivedGameStateBag(Town, typeof(Town))),
             (nameof(RoadMap), saveGameState.CreateGameStateBag(RoadMap)),
             (nameof(Seed), saveGameState.CreateGameStateBag(Seed))
         );

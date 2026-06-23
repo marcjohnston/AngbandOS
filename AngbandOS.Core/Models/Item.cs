@@ -18,9 +18,9 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         return new DictionaryGameStateBag(
             (nameof(IdentSense), saveGameState.CreateGameStateBag(IdentSense, IdentFixed, IdentEmpty, IdentityIsKnown, IdentityIsStoreBought, IdentMental, WasNoticed, ContainerIsOpen)),
 
-            (nameof(FixedArtifact), saveGameState.CreateGameStateBag(FixedArtifact, typeof(FixedArtifact))),
-            (nameof(EffectiveAttributeSet), saveGameState.CreateGameStateBag((IGameSerialize)EffectiveAttributeSet, typeof(EffectiveAttributeSet))), // We have to apply the cast for ambiguity. 
-            (nameof(_factory), saveGameState.CreateGameStateBag(_factory, typeof(ItemFactory))),
+            (nameof(FixedArtifact), saveGameState.CreateDerivedGameStateBag(FixedArtifact, typeof(FixedArtifact))),
+            (nameof(EffectiveAttributeSet), saveGameState.CreateDerivedGameStateBag((IGameSerialize)EffectiveAttributeSet, typeof(EffectiveAttributeSet))), // We have to apply the cast for ambiguity. 
+            (nameof(_factory), saveGameState.CreateDerivedGameStateBag(_factory, typeof(ItemFactory))),
             (nameof(NutritionalValue), saveGameState.CreateGameStateBag(NutritionalValue)),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
             (nameof(StackCount), saveGameState.CreateGameStateBag(StackCount)),
@@ -28,7 +28,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
             (nameof(HoldingMonsterIndex), saveGameState.CreateGameStateBag(HoldingMonsterIndex)),
             (nameof(Inscription), saveGameState.CreateGameStateBag(Inscription)),
             (nameof(ActivationRechargeTimeRemaining), saveGameState.CreateGameStateBag(ActivationRechargeTimeRemaining)),
-            (nameof(ContainerTraps), saveGameState.CreateGameStateBag(ContainerTraps, typeof(ChestTrap))),
+            (nameof(ContainerTraps), saveGameState.CreateDerivedGameStateBag(ContainerTraps, typeof(ChestTrap))),
             (nameof(LevelOfObjectsInContainer), saveGameState.CreateGameStateBag(LevelOfObjectsInContainer)),
             (nameof(StaffChargesRemaining), saveGameState.CreateGameStateBag(StaffChargesRemaining)),
             (nameof(WandChargesRemaining), saveGameState.CreateGameStateBag(WandChargesRemaining)),

@@ -57,9 +57,9 @@ internal class Window : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(ActiveScreen), saveGameState.CreateGameStateBag(ActiveScreen, typeof(ScreenBuffer))),
-            (nameof(OldScreen), saveGameState.CreateGameStateBag(OldScreen, typeof(ScreenBuffer))),
-            (nameof(UpdateWindow), saveGameState.CreateGameStateBag(UpdateWindow, typeof(UpdateWindow))),
+            (nameof(ActiveScreen), saveGameState.CreateDerivedGameStateBag(ActiveScreen, typeof(ScreenBuffer))),
+            (nameof(OldScreen), saveGameState.CreateDerivedGameStateBag(OldScreen, typeof(ScreenBuffer))),
+            (nameof(UpdateWindow), saveGameState.CreateDerivedGameStateBag(UpdateWindow, typeof(UpdateWindow))),
             (nameof(Height), saveGameState.CreateGameStateBag(Height)),
             (nameof(Width), saveGameState.CreateGameStateBag(Width)),
             (nameof(RowStartingIndexArray), saveGameState.CreateGameStateBag(RowStartingIndexArray)),

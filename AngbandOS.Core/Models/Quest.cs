@@ -26,7 +26,7 @@ internal class Quest : IGameSerialize
     {
         return new DictionaryGameStateBag(
             (nameof(Discovered), saveGameState.CreateGameStateBag(Discovered)),
-            (nameof(Dungeon), saveGameState.CreateGameStateBag(Dungeon, typeof(Dungeon))),
+            (nameof(Dungeon), saveGameState.CreateDerivedGameStateBag(Dungeon, typeof(Dungeon))),
             (nameof(Killed), saveGameState.CreateGameStateBag(Killed)),
             (nameof(Level), saveGameState.CreateGameStateBag(Level)),
             (nameof(RIdx), saveGameState.CreateGameStateBag(RIdx)),
