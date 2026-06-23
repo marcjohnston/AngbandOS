@@ -106,11 +106,11 @@
               Actions
             </mat-header-cell>
             <mat-cell mat-cell *matCellDef="let savedGame" class="right-most-column">
-              <mat-icon class="hover-icon" aria-hidden="false" title="Delete This Saved Game" aria-label="Delete Saved Game" fontIcon="delete" (click)="deleteSavedGame(savedGame)"></mat-icon>
               <mat-icon class="hover-icon" aria-hidden="false" title="Play This Game" aria-label="Play Saved Game" fontIcon="slideshow" (click)="playSavedGame(savedGame)"></mat-icon>
               <ng-container *ngIf="savedGame.gameRecoveryId !== null && savedGame.gameRecoveryId !== undefined">
                 <mat-icon class="hover-icon" aria-hidden="false" title="Watch This Game" aria-label="Replay/Watch" fontIcon="replay" (click)="replaySavedGame(savedGame.gameRecoveryId)"></mat-icon>
               </ng-container>
+              <mat-icon class="hover-icon" aria-hidden="false" title="Delete This Saved Game" aria-label="Delete Saved Game" fontIcon="delete" (click)="deleteSavedGame(savedGame)"></mat-icon>
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="savedGamesDisplayedColumns" class="my-header-row"></mat-header-row>

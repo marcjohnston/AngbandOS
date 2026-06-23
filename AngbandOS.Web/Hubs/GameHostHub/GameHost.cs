@@ -421,32 +421,39 @@ namespace AngbandOS.Web.Hubs
         #region Game Play Thread Loop
         protected override void OnDoWork(DoWorkEventArgs e)
         {
-            Thread.CurrentThread.Name = ThreadName;
-
-            // Create the game server object.
-            _gameServer = new GameServer();
-
-            // Play the game.
-            GameResults results = RunContext.Play(this, _gameServer);
-
-            // Null the game server quickly so that the disconnect from the hub doesn't trigger a kill on the game.
-            _gameServer = null;
-
-            // Render game over message.
-            if (results.GameIsOver)
+            try
             {
-                // The game is over.  Let the client know.  Also, sends a message from the game to the console client and all spectators that the game is over.
-                _consoleGameHub.GameOver();
+                Thread.CurrentThread.Name = ThreadName;
+
+                // Create the game server object.
+                _gameServer = new GameServer();
+
+                // Play the game.
+                GameResults results = RunContext.Play(this, _gameServer);
+
+                // Null the game server quickly so that the disconnect from the hub doesn't trigger a kill on the game.
+                _gameServer = null;
+
+                // Render game over message.
+                if (results.GameIsOver)
+                {
+                    // The game is over.  Let the client know.  Also, sends a message from the game to the console client and all spectators that the game is over.
+                    _consoleGameHub.GameOver();
+                }
+
+                // We need to send the game-over message to all clients monitoring the game.
+                DisconnectSpectators();
+
+                // Update the monitoring too.
+                DisconnectGameMessagesMonitors();
+
+                // Abort the context.  This will throw the signal-r disconnect?
+                Context.Abort();
             }
-
-            // We need to send the game-over message to all clients monitoring the game.
-            DisconnectSpectators();
-
-            // Update the monitoring too.
-            DisconnectGameMessagesMonitors();
-
-            // Abort the context.  This will throw the signal-r disconnect?
-            Context.Abort();
+            catch (Exception ex)
+            {
+                _consoleGameHub.SendMessage("Game error!");
+            }
         }
         #endregion
 

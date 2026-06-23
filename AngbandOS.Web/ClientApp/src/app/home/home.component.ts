@@ -262,8 +262,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._router.navigate(['/watch', activeGame.connectionId]);
   }
 
-  public replaySavedGame(savedGame: SavedGame) {
-    this._router.navigate(['/play', savedGame.guid], { queryParams: { replay: 1}});
+  public replaySavedGame(gameRecoveryId: number) {
+    this._router.navigate(['/play', gameRecoveryId]);
   }
   
   public onNewGame() {

@@ -36,7 +36,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   @ViewChild('inGameMenu', { static: true }) private inGameMenuRef: ElementRef | undefined;
   private gameHubConnection: HubConnection | undefined;
   public connectionId: string | null = null;
-  public gameGuid: string | number | null | undefined = undefined; // Represents the string unique identifier for the game to play; numeric replay id to replay a game; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
+  public gameGuidStringOrRecoveryIdNumber: string | number | null | undefined = undefined; // Represents the string unique identifier for the game to play; numeric replay id to replay a game; null, to start a new game; otherwise, undefined when the guid hasn't been retrieved yet.
   private _initSubscriptions = new Subscription();
   private _htmlConsole: HtmlConsole | undefined = undefined;
   private _accessToken: string | undefined = undefined;
@@ -358,7 +358,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   private check() {
-    if (this.gameHubConnection !== undefined && this.gameGuid !== undefined) {
+    if (this.gameHubConnection !== undefined && this.gameGuidStringOrRecoveryIdNumber !== undefined) {
       this.gameHubConnection.start().then(() => {
         if (this.gameHubConnection) {
           this.connectionId = this.gameHubConnection.connectionId;
@@ -409,8 +409,8 @@ export class PlayComponent implements OnInit, OnDestroy {
           });
           this.gameHubConnection.on("GameStarted", (gameGuid: string) => {
             this._zone.run(() => {
-              this.gameGuid = gameGuid;
-              this.canvasContainerRef!.nativeElement.title = `Connection: ${this.connectionId} Game: ${this.gameGuid}`;
+              this.gameGuidStringOrRecoveryIdNumber = gameGuid;
+              this.canvasContainerRef!.nativeElement.title = `Connection: ${this.connectionId} Game: ${this.gameGuidStringOrRecoveryIdNumber}`;
             });
           });
 
@@ -425,14 +425,14 @@ export class PlayComponent implements OnInit, OnDestroy {
           this.gameInProgress = true;
 
           // Check to see if this is a request to replay a game.
-          if (typeof this.gameGuid === "number") {
-            this.gameHubConnection.send("ReplayGame", this.gameGuid).then(() => {
+          if (typeof this.gameGuidStringOrRecoveryIdNumber === "number") {
+            this.gameHubConnection.send("ReplayGame", this.gameGuidStringOrRecoveryIdNumber).then(() => {
             }, (reason: any) => {
               this._snackBar.open(`ReplayGame rejected ${reason}.`, undefined, {
                 duration: 2000,
               });
             });
-          } else if (this.gameGuid === null) {
+          } else if (this.gameGuidStringOrRecoveryIdNumber === null) {
             // This is a new game request.  We must send a game configuration.
             const gameConfiguration: GameConfiguration = this.LoadConfiguration();
 
@@ -444,7 +444,7 @@ export class PlayComponent implements OnInit, OnDestroy {
             });
           } else {
             // This is a request to play an existing game.  Send the game guid.
-            this.gameHubConnection.send("PlayExistingGame", this.gameGuid).then(() => {
+            this.gameHubConnection.send("PlayExistingGame", this.gameGuidStringOrRecoveryIdNumber).then(() => {
             }, (reason: any) => {
               this._snackBar.open(`PlayExistingGame rejected ${reason}.`, undefined, {
                 duration: 2000,
@@ -540,7 +540,21 @@ export class PlayComponent implements OnInit, OnDestroy {
       // Retrieve the game guid from the query.
       this._initSubscriptions.add(this._activatedRoute.paramMap.subscribe((paramMap) => {
         // Retrieve the guid for the game to play.  If this is a new game, gameGuid will be returned as null.
-        this.gameGuid = paramMap.get("guid");
+        const guidRouteValue: string | null = paramMap.get("guid");
+
+        if (guidRouteValue === null) {
+          this.gameGuidStringOrRecoveryIdNumber = null;
+        } else {
+          // Check to see if this is a recovery id.
+          const guidAsNumber: number = Number(guidRouteValue);
+          if (Number.isInteger(guidAsNumber)) {
+            // It is, set the global game guid to the recovery id.
+            this.gameGuidStringOrRecoveryIdNumber = guidAsNumber;
+          }
+          else {
+            this.gameGuidStringOrRecoveryIdNumber = guidRouteValue;
+          }
+        }
         this.check();
       }, (error: any) => {
         this._snackBar.open(`Error during guid parameter retrieval ${error}.`, undefined, {

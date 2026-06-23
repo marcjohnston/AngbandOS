@@ -130,7 +130,7 @@ internal partial class SaveGameState
     /// </summary>
     /// <param name="value"></param>
     /// <param name="type">Provide the type for the object to be serialized.</param>
-    /// <param name="derivedTypes">Provide all of the additional derived types.  If none are provided, a null derived code will be generated; otherwise, the derived code will be equal to the position of the type specified.</param>
+    /// <param name="derivedTypes">Provide all of the compatible (derived types).  If none or only one is provided, a null derived code will be generated; otherwise, the derived code will be equal to the position (base-0) of the type specified.</param>
     /// <returns></returns>
     public GameStateBag CreateDerivedGameStateBag(IGameSerialize? value, params Type[] derivedTypes)
     {
@@ -164,6 +164,7 @@ internal partial class SaveGameState
         return new DerivedObjectGameStateBag(objectId, derivedId, gameStateBag);
     }
 
+    [Obsolete("This overload can be deleted when the non-derived versions are removed.")]
     public GameStateBag CreateGameStateBag(IGameSerialize? value, Type type, params Type[] derivedTypes)
     {
         return CreateDerivedGameStateBag(value, new Type[] { type }.Concat(derivedTypes).ToArray());

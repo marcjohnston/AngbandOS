@@ -63,15 +63,25 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
                 };
                 context.SavedGames.Add(savedGame);
             }
+            else
+            {
+                // Remove the old saved game content record.
+                SavedGameContent savedGameContentPrimaryKey = new SavedGameContent()
+                {
+                    Id = savedGame.SavedGameContentId
+                };
+                context.SavedGameContents.Remove(savedGameContentPrimaryKey);
+            }
             savedGame.CharacterName = gameDetails.CharacterName;
             savedGame.Comments = gameDetails.Comments;
             savedGame.Level = gameDetails.Level;
             savedGame.DateTime = DateTime.Now;
             savedGame.Gold = gameDetails.Gold;
             savedGame.IsAlive = gameDetails.IsAlive;
-            if (savedGame.SavedGameContent == null)
-                savedGame.SavedGameContent = new SavedGameContent();
-            savedGame.SavedGameContent.Data = value;
+            savedGame.SavedGameContent = new SavedGameContent()
+            {
+                Data = value
+            };
 
             context.SaveChanges();
         }
