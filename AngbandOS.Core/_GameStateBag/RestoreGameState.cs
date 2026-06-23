@@ -257,7 +257,8 @@ internal class RestoreGameState
     }
 
     /// <summary>
-    /// 
+    /// Returns a reference to a deserialized object.  If the object does not exist and it will be constructed based on the derived type code that was generated during the serialization process using the
+    /// constructor at the same index (base-0) position specified in the <paramref name="constructors"/> parameter.  If no constructors are provided, the object must already exist and cannot be constructed.
     /// </summary>
     /// <typeparam name="T">Provide the type to convert the return object to.</typeparam>
     /// <param name="constructors">Provide the functionality to construct any applicable objects.  The constructors must be provided in the same order as the types that were provided during serialization.  If only references are expected, no constructors need to be supplied.</param>
@@ -279,7 +280,8 @@ internal class RestoreGameState
             }
             throw new Exception("Reference ID not found in ObjectIdToReferenceDictionary.");
         }
-        else if (GameStateBag is DerivedObjectGameStateBag derivedObjectGameStateBag)
+
+        if (GameStateBag is DerivedObjectGameStateBag derivedObjectGameStateBag)
         {
             // This is a derived object game state bag.  The derived object might already exist because the object was serialized early.
             int objectId = derivedObjectGameStateBag.ObjectId;

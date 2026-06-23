@@ -26,6 +26,7 @@ internal sealed class SingletonRepository : IGameSerialize
         // The singleton repository is going to use a dictionary for all of the singletons.  The IGetKey will provide the unique key.
         var result = new Dictionary<string, GameStateBag>();
 
+        // Attributes must be serialized first as some of the singletons will require them.
         foreach (IGetKey singleton in _allSingletonsList)
         {
             string key = singleton.GetKey;
@@ -297,8 +298,10 @@ internal sealed class SingletonRepository : IGameSerialize
         // Load system singletons.
         LoadAllAssemblyTypes<IGetKey>(restoreGameState);
 
+#if DEBUG
         // Validate the system scripts exist, before we load the user configurable ones.
         ValidateSystemScriptsEnum();
+#endif
         
         // Preload
         LoadFromConfiguration<OrAttribute, OrAttributeGameConfiguration>(gameConfiguration.OrAttributes, restoreGameState);

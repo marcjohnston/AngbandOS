@@ -4,9 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Collections;
-using static System.Reflection.Metadata.BlobBuilder;
-
 namespace AngbandOS.Core;
 
 internal partial class SaveGameState
@@ -125,8 +122,9 @@ internal partial class SaveGameState
     private static bool IsCompatible(Type actualType, Type derivedType) => actualType.IsAssignableFrom(derivedType) || (actualType.BaseType != null && IsCompatible(actualType.BaseType, derivedType));
 
     /// <summary>
-    /// Creates a reference to an object game state bag with support for polymorphism and derived objects by generating a code that tracks which derived object was serialized.  The order of the supplied types is used to generated the derived code.
-    /// At least one type must be supplied.  If only one type is supplied, a default null derived code is generated and not written to the output file.
+    /// Creates a reference to an object game state bag with support for polymorphism.  This is accomplished by generating a code that tracks which derived object was serialized.  The order of the supplied types on the <paramref name="derivedTypes"/> (base-0) 
+    /// is used to generated the derived code.  If no derived types are specified, a null derived code is generated, no debug mode type checking is performed and the object cannot be constructed.  If one type is supplied, a default null derived code is generated and debug mode type checking is
+    /// performed.  In debug mode, a validation step is performed to ensure every derived type specified in the <paramref name="derivedTypes"/> has a common super-type of the value.  This help prevent coding errors.
     /// </summary>
     /// <param name="value"></param>
     /// <param name="type">Provide the type for the object to be serialized.</param>
@@ -140,7 +138,7 @@ internal partial class SaveGameState
             return new NullValueGameStateBag();
         }
 
-        // If the object exists, we only return a reference pointer object.
+        // If the object exists, we return a reference pointer object.
         if (TryGetReferenceId(value, out int existingId))
         {
             return new ReferenceGameStateBag(existingId);
