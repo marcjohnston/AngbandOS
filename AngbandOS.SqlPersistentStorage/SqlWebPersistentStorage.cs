@@ -30,13 +30,13 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
         }
     }
 
-    public byte[]? ReadGame(string username, string gameGuid)
+    public byte[]? ReadGame(string userId, string gameGuid)
     {
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {
             Sql.Entities.SavedGame? savedGame = context.SavedGames
                 .Include(_savedGame => _savedGame.SavedGameContent)
-                .SingleOrDefault(_savedGame => _savedGame.Username == username && _savedGame.Guid.ToString() == gameGuid);
+                .SingleOrDefault(_savedGame => _savedGame.UserId == userId && _savedGame.Guid.ToString() == gameGuid);
             if (savedGame == null)
             {
                 return null;
@@ -45,12 +45,12 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
         }
     }
 
-    public bool WriteGame(string username, string gameGuid, GameDetails gameDetails, byte[] value)
+    public bool WriteGame(string userId, string gameGuid, GameDetails gameDetails, byte[] value)
     {
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {
             // Retrieve an existing game from the database.
-            Sql.Entities.SavedGame? savedGame = context.SavedGames.SingleOrDefault(_savedGame => _savedGame.Username == username && _savedGame.Guid.ToString() == gameGuid);
+            Sql.Entities.SavedGame? savedGame = context.SavedGames.SingleOrDefault(_savedGame => _savedGame.UserId == userId && _savedGame.Guid.ToString() == gameGuid);
 
             // Check to see if it exists.
             if (savedGame is null)
@@ -58,7 +58,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
                 // Create a new one and add it to the table.
                 savedGame = new Sql.Entities.SavedGame()
                 {
-                    Username = username,
+                    UserId = userId,
                     Guid = Guid.Parse(gameGuid),
                     SavedGameContent = new SavedGameContent()
                     {
@@ -169,13 +169,13 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
     }
 
     /// <inheritdoc/>
-    public async Task<bool> DeleteGameAsync(string id, string username)
+    public async Task<bool> DeleteGameAsync(string gameGuid)
     {
-        Guid guid = Guid.Parse(id);
+        Guid guid = Guid.Parse(gameGuid);
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {
             // The delete needs to happen as a transaction.
-            Sql.Entities.SavedGame? savedGame = await context.SavedGames.SingleOrDefaultAsync(_savedGame => _savedGame.Username == username && _savedGame.Guid == guid);
+            Sql.Entities.SavedGame? savedGame = await context.SavedGames.SingleOrDefaultAsync(_savedGame => _savedGame.Guid == guid);
             if (savedGame == null)
             {
                 return false;
@@ -191,13 +191,13 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
     }
 
     /// <inheritdoc/>
-    public async Task<AvailableGames> ListGamesAsync(string username)
+    public async Task<AvailableGames> ListGamesAsync(string userId)
     {
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {
             // Load all of the saved games, but default the replay id to null because it isn't foreign keyed, by design, so we can't reference it easily.
             Web.Interface.SavedGame[] savedGames = await context.SavedGames
-                .Where(_savedGame => _savedGame.Username == username)
+                .Where(_savedGame => _savedGame.UserId == userId)
                 .Select(_savedGame => new Web.Interface.SavedGame()
                 {
                     CharacterName = _savedGame.CharacterName,
@@ -207,38 +207,38 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
                     Guid = _savedGame.Guid.ToString(),
                     IsAlive = _savedGame.IsAlive,
                     SavedDateTime = _savedGame.DateTime,
-                    GameRecoveryId = null
+                    GameRecoveryId = null // We set this in the next step.  This isn't foreign keyed for us to retrieve this right now.
                 })
                 .ToArrayAsync();
 
             // Now load the replay id's for existing games.  Start by gathering the game guid's for a batch lookup.
-            string[] guids = savedGames.Select(_savedGame => _savedGame.Guid).ToArray();
+            string[] savedGameGuids = savedGames.Select(_savedGame => _savedGame.Guid).ToArray();
 
             // Batch lookup against the database.  Return a dictionary for fast lookup.
             Dictionary<string, int> replayLookup = context.GameRecoveries
-                .Where(_gameReplay => guids.Contains(_gameReplay.GameGuid.ToString()))
-                .Select(_gameReplay => new { _gameReplay.GameGuid, _gameReplay.Id })
+                .Where(_gameRecovery => savedGameGuids.Contains(_gameRecovery.GameGuid.ToString()))
+                .Select(_gameRecovery => new { _gameRecovery.GameGuid, _gameRecovery.Id })
                 .ToDictionary(_dictionary => _dictionary.GameGuid.ToString().ToUpper(), _dictionary => _dictionary.Id);
 
-            // Update the saved games return.
+            // Update the saved games with the associated game recovery ID.
             foreach (var savedGame in savedGames)
             {
                 savedGame.GameRecoveryId = replayLookup.TryGetValue(savedGame.Guid, out var id) ? id : null;
             }
             
-            // Retrieve orphaned game replays.  We need a list of the games we did have, so that we can exclude them.
-            string[] saveGameGuids = savedGames.Select(_savedGame => _savedGame.Guid).ToArray();
-
-            // Now get the orphaned replay games.
-            Web.Interface.GameRecovery[] recoverableGames = await context.GameRecoveries.Where(_gameReplay => !saveGameGuids.Contains(_gameReplay.GameGuid.ToString())).Select(_gameReplay => new Web.Interface.GameRecovery()
-            {
-                ReplayId = _gameReplay.Id,
-                LastPlayed = _gameReplay.LastPlayed
-            }).ToArrayAsync();
+            // Retrieve orphaned game recoveries.
+            Web.Interface.GameRecovery[] recoveryGames = await context.GameRecoveries
+                .Where(_gameRecovery => !savedGameGuids.Contains(_gameRecovery.GameGuid.ToString()) && _gameRecovery.UserId == userId)
+                .Select(_gameReplay => new Web.Interface.GameRecovery()
+                    {
+                        Id = _gameReplay.Id,
+                        LastPlayedDateTime = _gameReplay.LastPlayed
+                    })
+                .ToArrayAsync();
             return new AvailableGames()
             {
                 SavedGames = savedGames,
-                GamesRecoveries = recoverableGames
+                GameRecoveries = recoveryGames
             };
         }
     }

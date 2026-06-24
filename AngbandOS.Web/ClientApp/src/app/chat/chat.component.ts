@@ -124,7 +124,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   private connectChatHub(accessToken: string) {
     // Since we bounce back and forth between the chat and service hubs depending on the authentication of the user, we will initialize the
     // connection only as needed.
-    this.showMessage("Connecting to chat hub.");
     this._chatConnection = new HubConnectionBuilder().withUrl("/apiv1/chat-hub", {
       accessTokenFactory: () => accessToken
     }).build();
@@ -159,7 +158,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   private handleAuthenticationChange() {
-    this.showMessage("Reconnecting to chat.");
     this.disconnectHubs().then(() => {
 
       // Check to see if we are authenticated.
@@ -200,8 +198,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       chatAndServiceHubs.push(this._serviceConnection.stop());
     }
     if (this._chatConnection !== undefined) {
-      this.showMessage(`Disconnecting from chat hub.`);
-
       this._chatConnection.off("ChatUpdated");
       this._chatConnection.off("MessageFailed");
       this._chatConnection.off("ChatRefreshed");

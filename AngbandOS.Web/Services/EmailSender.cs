@@ -12,7 +12,6 @@ namespace AngbandOS.Web
         private int SmtpPort;
         private bool SmtpEnableSsl;
 
-
         public EmailSender(IConfiguration configuration)
         {
             SmtpAccount = configuration["Smtp:Account"];

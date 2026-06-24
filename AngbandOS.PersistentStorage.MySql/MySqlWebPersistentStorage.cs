@@ -98,12 +98,12 @@ namespace AngbandOS.PersistentStorage
         }
 
         /// <inheritdoc/>
-        public async Task<bool> DeleteGameAsync(string id, string username)
+        public async Task<bool> DeleteGameAsync(string gameGuid)
         {
-            Guid guid = Guid.Parse(id);
+            Guid guid = Guid.Parse(gameGuid);
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
-                Savedgame? savedGame = await context.Savedgames.SingleOrDefaultAsync(_savedGame => _savedGame.Username == username && _savedGame.Guid == guid);
+                Savedgame? savedGame = await context.Savedgames.SingleOrDefaultAsync(_savedGame => _savedGame.Guid == guid);
                 if (savedGame == null)
                     return false;
                 context.Savedgames.Remove(savedGame);
@@ -137,7 +137,7 @@ namespace AngbandOS.PersistentStorage
                 return new AvailableGames()
                 {
                     SavedGames = savedGames,
-                    GamesRecoveries = new GameRecovery[] { }
+                    GameRecoveries = new GameRecovery[] { }
                 };
             }
         }

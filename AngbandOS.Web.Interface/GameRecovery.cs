@@ -2,6 +2,6 @@
 
 public class GameRecovery
 {
-    public DateTime LastPlayed { get; set; }
-    public int ReplayId { get; set; }
+    public DateTime LastPlayedDateTime { get; set; }
+    public int Id { get; set; }
 }

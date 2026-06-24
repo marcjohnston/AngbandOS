@@ -254,15 +254,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  public playSavedGame(savedGame: SavedGame) {
-    this._router.navigate(['/play', savedGame.guid]);
+  public playSavedGame(gameGuid: string) {
+    this._router.navigate(['/play', gameGuid]);
   }
 
   public onActiveGameRowClick(activeGame: ActiveGameDetails) {
     this._router.navigate(['/watch', activeGame.connectionId]);
   }
 
-  public replaySavedGame(gameRecoveryId: number) {
+  public watchGame(gameRecoveryId: number) {
+    this._router.navigate(['/play', gameRecoveryId]);
+  }
+
+  public recoverGame(gameRecoveryId: number) {
     this._router.navigate(['/play', gameRecoveryId]);
   }
   
@@ -283,9 +287,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  public deleteRecovery(gameRecovery: GameRecovery) {
+  public deleteRecovery(gameRecoveryId: number) {
     if (window.confirm('Are you sure you want to delete this recovery?')) {
-      this._httpClient.delete<AvailableGames>(`/apiv1/saved-games/${gameRecovery.id}`).toPromise().then((_availableGames) => {
+      this._httpClient.delete<AvailableGames>(`/apiv1/game-recoveries/${gameRecoveryId}`).toPromise().then((_availableGames) => {
         this.availableGames = _availableGames;
         this._changeDetectorRef.detectChanges();
       }, (_errorResponse: HttpErrorResponse) => {
@@ -294,8 +298,5 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       });
     }
-  }
-
-  public recoverGame(gameRecovery: GameRecovery) {
   }
 }

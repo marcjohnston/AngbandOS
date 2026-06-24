@@ -190,6 +190,16 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
             {
                 entity.HasIndex(e => e.Id, "UQ_GameReplays")
                     .IsUnique();
+
+                entity.Property(e => e.UserId)
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.GameRecoveries)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GameRecoveries_AspNetUsers");
             });
 
             modelBuilder.Entity<Key>(entity =>
@@ -306,14 +316,20 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
 
                 entity.Property(e => e.DateTime).HasColumnType("datetime");
 
-                entity.Property(e => e.Username)
-                    .HasMaxLength(255)
+                entity.Property(e => e.UserId)
+                    .HasMaxLength(36)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.SavedGameContent)
                     .WithMany(p => p.SavedGames)
                     .HasForeignKey(d => d.SavedGameContentId)
                     .HasConstraintName("FK_SavedGames_SavedGameContents");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.SavedGames)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SavedGames_AspNetUsers");
             });
 
             modelBuilder.Entity<UserGameConfiguration>(entity =>

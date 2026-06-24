@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 using System.Diagnostics;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
 namespace AngbandOS.Core;
 
 [Serializable]
@@ -1002,6 +1001,10 @@ internal partial class Game : IGameSerialize
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         HandleStuff();
     }
+    #endregion
+
+    #region Cached Data
+    public Attribute[]? CachedAttributes = null;
     #endregion
 
     #region WIP Methods Not Yet Categorized
@@ -9193,11 +9196,11 @@ internal partial class Game : IGameSerialize
                     // Perform replay verification.
                     if (gameReplayStep.Seed == 0)
                     {
-                        throw new Exception("Replay verification failure: Replay seed is zero.");
+                        throw new ZeroSeedReplayVerificationFailureException();
                     }
                     if (_mainSequence.CurrentSeed != gameReplayStep.Seed)
                     {
-                        throw new Exception($"Replay verification failure: Current random seed {_mainSequence.CurrentSeed} does not match expected random seed {gameReplayStep.Seed} for replay step with keystroke {gameReplayStep.Keystroke} at {gameReplayStep.DateTime} with {ReplayQueue.Count} steps remaining in the queue.");
+                        throw new InvalidStepSeedReplayVerificationFailureException(_mainSequence.CurrentSeed, gameReplayStep.Seed, gameReplayStep.Keystroke, gameReplayStep.DateTime, ReplayQueue.Count);
                     }
 #endif
 

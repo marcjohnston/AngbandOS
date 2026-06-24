@@ -62,14 +62,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     }
 
     private Game Game { get; }
-    private Attribute[]? CachedAttributes = null;
     private Attribute[] LoadCachedAttributes()
     {
-        if (CachedAttributes == null)
+        if (Game.CachedAttributes == null)
         {
-            CachedAttributes = Game.SingletonRepository.Get<Attribute>();
+            Game.CachedAttributes = Game.SingletonRepository.Get<Attribute>();
         }
-        return CachedAttributes;
+        return Game.CachedAttributes;
     }
 
     public void RemoveKeyedEnhancements(string key)

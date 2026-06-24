@@ -450,9 +450,14 @@ namespace AngbandOS.Web.Hubs
                 // Abort the context.  This will throw the signal-r disconnect?
                 Context.Abort();
             }
+            catch (ReplayVerificationFailureException replayVerificationException)
+            {
+                _consoleGameHub.GameOver($"Replay verification failed!");
+            }
             catch (Exception ex)
             {
-                _consoleGameHub.SendMessage("Game error!");
+                _consoleGameHub.SendMessage($"Game error!  {ex.Message}");
+                _consoleGameHub.GameOver();
             }
         }
         #endregion

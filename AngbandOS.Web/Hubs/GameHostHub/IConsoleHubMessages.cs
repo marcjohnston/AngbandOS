@@ -31,7 +31,7 @@ public interface IConsoleHubMessages
     /// Outgoing message to a web client that the game is over.
     /// </summary>
     /// <returns></returns>
-    Task GameOver();
+    Task GameOver(string? message = null);
 
     /// <summary>
     /// Outgoing message to a web client to clear the screen.

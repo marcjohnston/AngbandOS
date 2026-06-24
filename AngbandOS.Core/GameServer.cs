@@ -247,19 +247,11 @@ public class GameServer
             throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
         }
 
-        try
-        {
-            bool gameIsOver = false;
-            Game.Play(console, replayPersistentStorage);
+        bool gameIsOver = false;
+        Game.Play(console, replayPersistentStorage);
 
-            byte[] serializedGameData = SaveGame();
-            gameIsOver = true;
-            return new GameResults(gameIsOver, serializedGameData);
-        }
-        catch (Exception ex)
-        {
-            console.GameExceptionThrown($"{ex.Message}\n{ex.StackTrace}"); // TODO: this should be caught externally
-            throw new Exception("An error occurred while attempting to play a new game.  See inner exception for details.", ex);
-        }
+        byte[] serializedGameData = SaveGame();
+        gameIsOver = true;
+        return new GameResults(gameIsOver, serializedGameData);
     }
 }

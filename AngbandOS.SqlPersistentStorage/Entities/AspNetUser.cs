@@ -10,8 +10,10 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
             AspNetUserClaims = new HashSet<AspNetUserClaim>();
             AspNetUserLogins = new HashSet<AspNetUserLogin>();
             AspNetUserTokens = new HashSet<AspNetUserToken>();
+            GameRecoveries = new HashSet<GameRecovery>();
             MessageFromUsers = new HashSet<Message>();
             MessageToUsers = new HashSet<Message>();
+            SavedGames = new HashSet<SavedGame>();
         }
 
         public string Id { get; set; } = null!;
@@ -33,7 +35,9 @@ namespace AngbandOS.PersistentStorage.Sql.Entities
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; set; }
+        public virtual ICollection<GameRecovery> GameRecoveries { get; set; }
         public virtual ICollection<Message> MessageFromUsers { get; set; }
         public virtual ICollection<Message> MessageToUsers { get; set; }
+        public virtual ICollection<SavedGame> SavedGames { get; set; }
     }
 }

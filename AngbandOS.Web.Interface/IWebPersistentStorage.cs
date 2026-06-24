@@ -5,6 +5,10 @@ namespace AngbandOS.Web.Interface
     /// <summary>
     /// Represents an interface that persistent storage drivers need to implement for the web interface.
     /// </summary>
+    /// <remarks>
+    /// Drivers are responsible for authorization verification.  For this reason, methods like the <see cref="DeleteGameAsync(string)"/> method require the user ID.  This allows the controller to not have
+    /// to load a resource to determine authorization before operating on that resource. 
+    /// </remarks>
     public interface IWebPersistentStorage
     {
         #region Preferences Functionality
@@ -17,20 +21,20 @@ namespace AngbandOS.Web.Interface
         /// <summary>
         /// Deletes a game from the database.
         /// </summary>
-        /// <param name="id">The ID (guid) of the game to be deleted.</param>
-        /// <param name="username"></param>
+        /// <param name="gameGuid">The ID (guid) of the game to be deleted.</param>
+        /// <param name="userId">The ID for the user who owns the game.</param>
         /// <returns></returns>
-        Task<bool> DeleteGameAsync(string id, string username);
+        Task<bool> DeleteGameAsync(string gameGuid, string userId);
 
         /// <summary>
         /// Returns details about the saved games associated to a user.
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        Task<AvailableGames> ListGamesAsync(string username);
+        Task<AvailableGames> ListGamesAsync(string userId);
 
-        byte[]? ReadGame(string username, string gameGuid);
-        bool WriteGame(string username, string gameGuid, GameDetails gameDetails, byte[] value);
+        byte[]? ReadGame(string userId, string gameGuid);
+        bool WriteGame(string userId, string gameGuid, GameDetails gameDetails, byte[] value);
         #endregion
 
         #region Messaging and Chat Functionality
@@ -63,13 +67,15 @@ namespace AngbandOS.Web.Interface
         Task<bool> DeleteMessagesAsync(int messageId);
         #endregion
 
-        #region Game Replay Functionality
+        #region Game Recovery Functionality
+        Task<bool> DeleteGameRecoveryAsync(int gameRecoveryId, string userId);
+
         /// <summary>
         /// Read game replay details from the database.
         /// </summary>
         /// <param name="gameGuid"></param>
         /// <returns></returns>
-        (GameReplayDetails, int) GetReplay(int gameReplayId);
+        (GameReplayDetails, int) GetReplay(int gameRecoveryId);
 
         /// <summary>
         /// Save the game seed and return a unique identifier for game replay steps.

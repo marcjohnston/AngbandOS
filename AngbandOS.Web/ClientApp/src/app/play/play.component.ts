@@ -30,6 +30,9 @@ import { MasterLayoutComponent } from '../master-layout/master-layout.component'
     MasterLayoutComponent
   ]
 })
+
+const snackBarDefaultDelayTime = 3000;
+
 export class PlayComponent implements OnInit, OnDestroy {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;
   @ViewChild('canvasContainer', { static: true }) private canvasContainerRef: ElementRef | undefined;
@@ -42,6 +45,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   private _accessToken: string | undefined = undefined;
   public preferences: Preferences | undefined = undefined; // Represents the users preferences.  Will be undefined, until they are retrieved from the back end.
   private resizeObserver!: ResizeObserver;
+  
 
   constructor(
     private _preferencesDialog: MatDialog,
@@ -401,10 +405,14 @@ export class PlayComponent implements OnInit, OnDestroy {
             this._zone.run(() => {
             });
           });
-          this.gameHubConnection.on("GameOver", () => {
+          this.gameHubConnection.on("GameOver", (message: string) => {
             this._zone.run(() => {
               this.gameInProgress = false;
-              this._router.navigate(['/']);
+
+              this.showSnackBar(message);
+              setTimeout(() => {
+                this._router.navigate(['/']);
+              }, snackBarDefaultDelayTime);
             });
           });
           this.gameHubConnection.on("GameStarted", (gameGuid: string) => {
@@ -480,7 +488,7 @@ export class PlayComponent implements OnInit, OnDestroy {
    */
   public gameInProgress: boolean = false;
 
-  private showSnackBar(message: string, duration: number = 2000) {
+  private showSnackBar(message: string, duration: number = snackBarDefaultDelayTime) {
     this._snackBar.open(message, undefined, {
       duration: duration,
     });

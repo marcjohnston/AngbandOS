@@ -52,8 +52,8 @@
         <mat-row *matRowDef="let activeGame; columns: activeGamesDisplayedColumns"></mat-row>>
       </mat-table>
     </ng-container>
-    <ng-container *ngIf="isAuthenticated === true">
-      <ng-container *ngIf="availableGames !== undefined && availableGames.savedGames !== undefined">
+    <ng-container *ngIf="isAuthenticated === true && availableGames !== undefined">
+      <ng-container *ngIf="availableGames.savedGames !== undefined">
         <div id="header">
           <div class="header-title">Your Saved Games</div>
           <button mat-button matButton="outlined" (click)="onNewGame()">Play New Game</button>
@@ -106,18 +106,18 @@
               Actions
             </mat-header-cell>
             <mat-cell mat-cell *matCellDef="let savedGame" class="right-most-column">
-              <mat-icon class="hover-icon" aria-hidden="false" title="Play This Game" aria-label="Play Saved Game" fontIcon="slideshow" (click)="playSavedGame(savedGame)"></mat-icon>
+              <mat-icon class="hover-icon" aria-hidden="false" title="Play This Game" aria-label="Play Saved Game" fontIcon="slideshow" (click)="playSavedGame(savedGame.guid)"></mat-icon>
               <ng-container *ngIf="savedGame.gameRecoveryId !== null && savedGame.gameRecoveryId !== undefined">
-                <mat-icon class="hover-icon" aria-hidden="false" title="Watch This Game" aria-label="Replay/Watch" fontIcon="replay" (click)="replaySavedGame(savedGame.gameRecoveryId)"></mat-icon>
+                <mat-icon class="hover-icon" aria-hidden="false" title="Watch This Game" aria-label="Replay/Watch" fontIcon="visibility" (click)="watchGame(savedGame.gameRecoveryId)"></mat-icon>
               </ng-container>
-              <mat-icon class="hover-icon" aria-hidden="false" title="Delete This Saved Game" aria-label="Delete Saved Game" fontIcon="delete" (click)="deleteSavedGame(savedGame)"></mat-icon>
+              <mat-icon class="hover-icon" aria-hidden="false" title="Delete This Saved Game" aria-label="Delete Saved Game" fontIcon="delete" (click)="deleteSavedGame(savedGame.guid)"></mat-icon>
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="savedGamesDisplayedColumns" class="my-header-row"></mat-header-row>
           <mat-row *matRowDef="let savedGame; columns: savedGamesDisplayedColumns" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></mat-row>
         </mat-table>
       </ng-container>
-      <ng-container *ngIf="availableGames !== undefined && availableGames.gameRecoveries !== undefined && availableGames.gameRecoveries.length > 0">
+      <ng-container *ngIf="availableGames.gameRecoveries !== undefined">
         <div id="header">
           <div class="header-title">Recoverable Games</div>
         </div>
@@ -126,21 +126,22 @@
             <mat-header-cell mat-header-cell *matHeaderCellDef>
               Id
             </mat-header-cell>
-            <mat-cell mat-cell *matCellDef="let gameRecovery">1{{gameRecovery.replayId}}</mat-cell>
+            <mat-cell mat-cell *matCellDef="let gameRecovery">1{{gameRecovery.id}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="last-played">
             <mat-header-cell mat-header-cell *matHeaderCellDef>
               Last Played
             </mat-header-cell>
-            <mat-cell mat-cell *matCellDef="let gameRecovery">{{gameRecovery.lastPlayed | date:'medium'}}</mat-cell>
+            <mat-cell mat-cell *matCellDef="let gameRecovery">{{gameRecovery.lastPlayedDateTime | date:'medium'}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="actions">
             <mat-header-cell mat-header-cell *matHeaderCellDef class="right-most-column">
               Actions
             </mat-header-cell>
             <mat-cell mat-cell *matCellDef="let gameRecovery" class="right-most-column">
-              <mat-icon class="hover-icon" aria-hidden="false" title="Delete This Recovery" aria-label="Delete Recovery" fontIcon="delete" (click)="deleteRecovery(gameRecovery)"></mat-icon>
-              <mat-icon class="hover-icon" aria-hidden="false" title="Recover This Game" aria-label="Recover Game" fontIcon="slideshow" (click)="recoverGame(gameRecovery)"></mat-icon>
+              <mat-icon class="hover-icon" aria-hidden="false" title="Watch This Game" aria-label="Replay/Watch" fontIcon="visibility" (click)="watchGame(gameRecovery.id)"></mat-icon>
+              <mat-icon class="hover-icon" aria-hidden="false" title="Recover This Game" aria-label="Recover Game" fontIcon="replay" (click)="recoverGame(gameRecovery.id)"></mat-icon>
+              <mat-icon class="hover-icon" aria-hidden="false" title="Delete This Recovery" aria-label="Delete Recovery" fontIcon="delete" (click)="deleteRecovery(gameRecovery.id)"></mat-icon>
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="gameRecoveriesDisplayedColumns" class="my-header-row"></mat-header-row>

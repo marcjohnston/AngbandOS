@@ -3,5 +3,5 @@
 public class AvailableGames
 {
     public SavedGame[] SavedGames { get; set; }
-    public GameRecovery[] GamesRecoveries { get; set; }
+    public GameRecovery[] GameRecoveries { get; set; }
 }
