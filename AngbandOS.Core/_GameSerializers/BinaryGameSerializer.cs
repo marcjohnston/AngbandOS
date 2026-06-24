@@ -37,7 +37,6 @@ internal class BinaryGameSerializer : IGameSerializer
         TimeSpanValue = 17
     }
 
-    private static Dictionary<string, int> u = new Dictionary<string, int>();
     private static byte[] Serialize(GameStateBag gameStateData)
     {
         List<byte> result = new List<byte>();
@@ -52,14 +51,6 @@ internal class BinaryGameSerializer : IGameSerializer
         void AddTypeName(string value)
         {
             AddString(value);
-            if (u.ContainsKey(value))
-            {
-                u[value]++;
-            }
-            else
-            {
-                u.Add(value, 1);
-            }
         }
 
         switch (gameStateData)

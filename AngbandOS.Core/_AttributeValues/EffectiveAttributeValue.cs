@@ -12,12 +12,15 @@ namespace AngbandOS.Core;
 [Serializable]
 internal abstract class EffectiveAttributeValue : AttributeValue
 {
-    protected Game Game { get; }
+    #region State Date
     protected readonly Attribute Attribute;
+    #endregion
+
+    protected Game Game { get; }
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(Attribute), saveGameState.CreateDerivedGameStateBag(Attribute, typeof(BoolAttribute), typeof(OrAttribute), typeof(SumAttribute), typeof(ActivationAttribute), typeof(ArtifactBiasAttribute), typeof(FriendlyNameAttribute)))
+        return new DictionaryGameStateBag(
+            (nameof(Attribute), saveGameState.CreateDerivedGameStateBag(Attribute, false)) //, typeof(ActivationAttribute), typeof(ArtifactBiasAttribute), typeof(FriendlyNameAttribute), typeof(BoolAttribute), typeof(OrAttribute), typeof(SumAttribute)))
         );
     }
     public EffectiveAttributeValue(Game game, Attribute attribute)

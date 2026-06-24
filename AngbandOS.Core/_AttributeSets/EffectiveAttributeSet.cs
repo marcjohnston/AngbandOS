@@ -62,7 +62,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     }
 
     private Game Game { get; }
-    private static Attribute[]? CachedAttributes = null;
+    private Attribute[]? CachedAttributes = null;
     private Attribute[] LoadCachedAttributes()
     {
         if (CachedAttributes == null)

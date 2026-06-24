@@ -85,16 +85,12 @@ internal partial class SaveGameState
     private byte? DetermineDerivedId(Type actualType, params Type[] derivedTypes)
     {
 #if DEBUG
-        if (derivedTypes.Length == 0)
-        {
-            throw new Exception("Too few derivedTypes");
-        }
-        else if (derivedTypes.Length > 255)
+        if (derivedTypes.Length > 255)
         {
             throw new Exception("Too many derivedTypes");
         }
 #endif
-        if (derivedTypes.Length == 1)
+        if (derivedTypes.Length == 0)
         {
             return null;
         }
@@ -120,6 +116,14 @@ internal partial class SaveGameState
     }
 
     private static bool IsCompatible(Type actualType, Type derivedType) => actualType.IsAssignableFrom(derivedType) || (actualType.BaseType != null && IsCompatible(actualType.BaseType, derivedType));
+    public GameStateBag CreateDerivedGameStateBag(IGameSerialize? value, bool allowConstruction)
+    {
+        return CreateDerivedGameStateBag2(value, allowConstruction);
+    }
+    public GameStateBag CreateDerivedGameStateBag(IGameSerialize? value, params Type[] derivedTypes)
+    {
+        return CreateDerivedGameStateBag2(value, true, derivedTypes);
+    }
 
     /// <summary>
     /// Creates a reference to an object game state bag with support for polymorphism.  This is accomplished by generating a code that tracks which derived object was serialized.  The order of the supplied types on the <paramref name="derivedTypes"/> (base-0) 
@@ -130,7 +134,7 @@ internal partial class SaveGameState
     /// <param name="type">Provide the type for the object to be serialized.</param>
     /// <param name="derivedTypes">Provide all of the compatible (derived types).  If none or only one is provided, a null derived code will be generated; otherwise, the derived code will be equal to the position (base-0) of the type specified.</param>
     /// <returns></returns>
-    public GameStateBag CreateDerivedGameStateBag(IGameSerialize? value, params Type[] derivedTypes)
+    private GameStateBag CreateDerivedGameStateBag2(IGameSerialize? value, bool allowConstruction, params Type[] derivedTypes)
     {
         // Check if the object is null, we return a null object.
         if (value is null)
@@ -144,6 +148,11 @@ internal partial class SaveGameState
             return new ReferenceGameStateBag(existingId);
         }
 
+        if (!allowConstruction)
+        {
+            throw new Exception("Derived type expected.");
+        }
+
         // We need to register this object to the dictionary before we serialize the object to prevent recursion.
         int objectId = RegisterObject(value);
 
@@ -152,11 +161,7 @@ internal partial class SaveGameState
 
         // Now we need to support polymorphism.  We need to determine which type of object based on the types provided in the parameter list.  We only store the index of the 
         // conforming type as it is present on the parameter list.
-        byte? derivedId = null;
-        if (derivedTypes.Length > 0)
-        {
-            derivedId = DetermineDerivedId(value.GetType(), derivedTypes);
-        }
+        byte? derivedId = DetermineDerivedId(value.GetType(), derivedTypes);
 
         // Now we return the derived object.
         return new DerivedObjectGameStateBag(objectId, derivedId, gameStateBag);
@@ -206,6 +211,7 @@ internal partial class SaveGameState
     {
         if (value is null)
         {
+
             return new NullValueGameStateBag();
         }
 

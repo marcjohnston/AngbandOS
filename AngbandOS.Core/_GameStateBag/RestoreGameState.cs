@@ -292,33 +292,32 @@ internal class RestoreGameState
                 return typedReference;
             }
 
-            RestoreGameState restoreGameState = New(derivedObjectGameStateBag);
-
-            // We use the derived id to select the appropriate constructor.
-            if (derivedObjectGameStateBag.DerivedId < 0 || derivedObjectGameStateBag.DerivedId >= constructors.Length)
-            {
-                throw new Exception($"Derived ID#{derivedObjectGameStateBag.DerivedId} does not have a constructor.");
-            }
-
+            // Now we need to choose which constructor to use.
             Func<RestoreGameState, T> constructor;
+
+            // Check to see if the object was serialized without any derived types defined.
             if (derivedObjectGameStateBag.DerivedId is null)
+            {
+                // No derived types were defined.  Construction is not allowed.
+                throw new Exception($"{typeof(T).Name} serialization was performed with no derived types specified.  Construction is not allowed.");
+            }
+            else
             {
 #if DEBUG
                 if (constructors.Length == 0)
                 {
-                    throw new Exception($"No constructor was supplied to generate a {typeof(T).Name}.  The passing of no constructors in the arguments is only valid when the game object already exists at this restore step.  In that case this restore can return an existing reference without need for construction but no reference was found for this object.  This object was serialized as non-polymorphic, so exactly one constructor must be supplied.");
+                    throw new Exception($"No constructor were supplied to construct a {typeof(T).Name}.  This is only valid when the object is required to have been already constructed.");
                 }
-                if (constructors.Length != 1)
+                if (constructors.Length <= derivedObjectGameStateBag.DerivedId.Value)
                 {
-                    throw new Exception($"Too many constructors were supplied to generate a {typeof(T).Name}.  {typeof(T).Name} was serialized without polymorphic support.");
+                    throw new Exception($"Insufficient number of constructors were supplied to generate a {typeof(T).Name}.  At least {derivedObjectGameStateBag.DerivedId.Value} constructors are required.");
                 }
 #endif
-                constructor = constructors[0];
-            }
-            else
-            {
                 constructor = constructors[derivedObjectGameStateBag.DerivedId.Value];
             }
+
+            // Now construct the object.
+            RestoreGameState restoreGameState = New(derivedObjectGameStateBag);
             T t = constructor(restoreGameState);
             TrackObject(objectId, t);
             return t;

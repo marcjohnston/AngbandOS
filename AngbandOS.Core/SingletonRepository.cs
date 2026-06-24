@@ -302,7 +302,7 @@ internal sealed class SingletonRepository : IGameSerialize
         // Validate the system scripts exist, before we load the user configurable ones.
         ValidateSystemScriptsEnum();
 #endif
-        
+
         // Preload
         LoadFromConfiguration<OrAttribute, OrAttributeGameConfiguration>(gameConfiguration.OrAttributes, restoreGameState);
         LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes, restoreGameState);

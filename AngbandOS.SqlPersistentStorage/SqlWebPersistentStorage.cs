@@ -59,18 +59,26 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
                 savedGame = new Sql.Entities.SavedGame()
                 {
                     Username = username,
-                    Guid = Guid.Parse(gameGuid)
+                    Guid = Guid.Parse(gameGuid),
+                    SavedGameContent = new SavedGameContent()
+                    {
+                        Data = value
+                    }
                 };
                 context.SavedGames.Add(savedGame);
             }
             else
             {
-                // Remove the old saved game content record.
-                SavedGameContent savedGameContentPrimaryKey = new SavedGameContent()
+                // We do not want to read the saved game contents but we need an update.  Build a new record, set the serialized data and mark the record as modified.
+                SavedGameContent modifiedSaveGameContent = new SavedGameContent
                 {
-                    Id = savedGame.SavedGameContentId
+                    Id = savedGame.SavedGameContentId,
+                    Data = value
                 };
-                context.SavedGameContents.Remove(savedGameContentPrimaryKey);
+
+                context.SavedGameContents.Attach(modifiedSaveGameContent);
+                context.Entry(modifiedSaveGameContent).Property(x => x.Data).IsModified = true;
+               
             }
             savedGame.CharacterName = gameDetails.CharacterName;
             savedGame.Comments = gameDetails.Comments;
@@ -78,10 +86,6 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
             savedGame.DateTime = DateTime.Now;
             savedGame.Gold = gameDetails.Gold;
             savedGame.IsAlive = gameDetails.IsAlive;
-            savedGame.SavedGameContent = new SavedGameContent()
-            {
-                Data = value
-            };
 
             context.SaveChanges();
         }
