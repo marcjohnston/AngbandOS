@@ -9193,7 +9193,6 @@ internal partial class Game : IGameSerialize
                     // Deliver the keystroke.
                     k = gameReplayStep.Keystroke;
 
-#if DEBUG
                     // Perform replay verification.
                     if (gameReplayStep.Seed == 0)
                     {
@@ -9203,7 +9202,6 @@ internal partial class Game : IGameSerialize
                     {
                         throw new InvalidStepSeedReplayVerificationFailureException(_mainSequence.CurrentSeed, gameReplayStep.Seed, gameReplayStep.Keystroke, gameReplayStep.DateTime, ReplayQueue.Count);
                     }
-#endif
 
                     // Update the running keystroke submit time.  If the wait time was shortened due to exceeding the maximum elapsed time, we set the time to the target time.
                     replayPreviousKeystrokeDateTime = nextKeystrokeSubmitTime;
