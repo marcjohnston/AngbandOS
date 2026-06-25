@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public availableGames: AvailableGames | undefined = undefined;
   public activeGames: ActiveGameDetails[] | undefined = undefined;
   public savedGamesDisplayedColumns: string[] = ["character-name", "gold", "level", "is-alive", "last-saved", "actions"];
-  public gameRecoveriesDisplayedColumns: string[] = ["guid", "last-played", "actions"];
+  public gameRecoveriesDisplayedColumns: string[] = ["last-played", "actions"];
   public activeGamesDisplayedColumns: string[] = ["username", "character-name", "gold", "level", "last-input-received", "game-time", "actions"];
   public activeUsersDisplayedColumns: string[] = ["username", "connectionId", "actions"];
   public selectedActiveUser: UserDetails | null = null;

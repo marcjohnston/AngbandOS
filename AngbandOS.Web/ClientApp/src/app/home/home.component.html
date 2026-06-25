@@ -122,11 +122,11 @@
           <div class="header-title">Recoverable Games</div>
         </div>
         <mat-table mat-table [dataSource]="availableGames.gameRecoveries">
-          <ng-container matColumnDef="guid">
+          <ng-container matColumnDef="id">
             <mat-header-cell mat-header-cell *matHeaderCellDef>
               Id
             </mat-header-cell>
-            <mat-cell mat-cell *matCellDef="let gameRecovery">1{{gameRecovery.id}}</mat-cell>
+            <mat-cell mat-cell *matCellDef="let gameRecovery">{{gameRecovery.id}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="last-played">
             <mat-header-cell mat-header-cell *matHeaderCellDef>

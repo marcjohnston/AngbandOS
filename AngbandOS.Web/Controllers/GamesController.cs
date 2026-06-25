@@ -86,7 +86,7 @@ namespace AngbandOS.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("game-recoveries/{id}")]
+        [Route("game-recoveries/{gameReplayId}")]
         [Produces("application/json")]
         [Authorize]
         public async Task<ActionResult<AvailableGames>> DeleteGameRecovery([FromRoute] int gameReplayId)
