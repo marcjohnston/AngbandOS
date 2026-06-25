@@ -8957,7 +8957,9 @@ internal partial class Game : IGameSerialize
                 // Escape or Resume Game
                 case -1:
                 case 0:
+                    // Cancel, resume game, escape
                     break;
+                case 1:
                 // Save and Quit
                 case 1:
                     Playing = false; // TODO: Need to use event arguments
