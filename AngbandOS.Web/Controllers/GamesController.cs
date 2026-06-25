@@ -76,7 +76,7 @@ namespace AngbandOS.Web.Controllers
             if (user == null)
                 return Unauthorized();
 
-            if (await PersistentStorage.DeleteGameAsync(id))
+            if (await PersistentStorage.DeleteGameAsync(id, user.Id))
             {
                 AvailableGames availableGames = await PersistentStorage.ListGamesAsync(user.Id);
                 return Ok(availableGames);
@@ -89,7 +89,7 @@ namespace AngbandOS.Web.Controllers
         [Route("game-recoveries/{id}")]
         [Produces("application/json")]
         [Authorize]
-        public async Task<ActionResult<AvailableGames>> DeleteGameRecovery([FromRoute] string id)
+        public async Task<ActionResult<AvailableGames>> DeleteGameRecovery([FromRoute] int gameReplayId)
         {
             string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
             if (emailAddress == null)
@@ -99,7 +99,7 @@ namespace AngbandOS.Web.Controllers
             if (user == null)
                 return Unauthorized();
 
-            if (await PersistentStorage.DeleteGameRecoveryAsync(id))
+            if (await PersistentStorage.DeleteGameRecoveryAsync(gameReplayId, user.Id))
             {
                 AvailableGames availableGames = await PersistentStorage.ListGamesAsync(user.Id);
                 return Ok(availableGames);

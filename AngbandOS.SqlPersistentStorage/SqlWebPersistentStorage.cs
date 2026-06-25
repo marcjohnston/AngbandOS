@@ -169,13 +169,13 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
     }
 
     /// <inheritdoc/>
-    public async Task<bool> DeleteGameAsync(string gameGuid)
+    public async Task<bool> DeleteGameAsync(string gameGuid, string userId)
     {
         Guid guid = Guid.Parse(gameGuid);
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {
             // The delete needs to happen as a transaction.
-            Sql.Entities.SavedGame? savedGame = await context.SavedGames.SingleOrDefaultAsync(_savedGame => _savedGame.Guid == guid);
+            Sql.Entities.SavedGame? savedGame = await context.SavedGames.SingleOrDefaultAsync(_savedGame => _savedGame.Guid == guid && _savedGame.UserId == userId);
             if (savedGame == null)
             {
                 return false;
@@ -325,6 +325,26 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
             }
             message.IsDeleted = true;
             await context.SaveChangesAsync();
+            return true;
+        }
+    }
+
+    public async Task<bool> DeleteGameRecoveryAsync(int gameRecoveryId, string userId)
+    {
+        using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+        {
+            // We need an explicit transaction for the ExecuteDeleteAsync
+            await using var transaction = await context.Database.BeginTransactionAsync();
+
+            Sql.Entities.GameRecovery? gameRecovery = await context.GameRecoveries.SingleOrDefaultAsync(_gameRecovery => _gameRecovery.Id == gameRecoveryId && _gameRecovery.UserId == userId);
+            if (gameRecovery == null)
+            {
+                return false;
+            }
+            context.GameRecoveries.Remove(gameRecovery);
+            await context.ReplaySteps.Where(_replayStep => _replayStep.GameReplayId == gameRecoveryId).ExecuteDeleteAsync();
+            await context.SaveChangesAsync();
+            await transaction.CommitAsync();
             return true;
         }
     }

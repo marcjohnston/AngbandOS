@@ -21,6 +21,7 @@ const PROXY_CONFIG = [
 
       // Proxy API endpoints used by the game.
       "/apiv1/saved-games",
+      "/apiv1/game-recoveries",
       "/apiv1/games",
       "/apiv1/configurations",
       "/apiv1/accounts",

@@ -98,7 +98,7 @@ namespace AngbandOS.PersistentStorage
         }
 
         /// <inheritdoc/>
-        public async Task<bool> DeleteGameAsync(string gameGuid)
+        public async Task<bool> DeleteGameAsync(string gameGuid, string userId)
         {
             Guid guid = Guid.Parse(gameGuid);
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
@@ -254,6 +254,11 @@ namespace AngbandOS.PersistentStorage
         }
 
         public int GetGameReplayId(string gameGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteGameRecoveryAsync(int gameRecoveryId, string userId)
         {
             throw new NotImplementedException();
         }

@@ -20,6 +20,8 @@ import { NgIf } from '@angular/common';
 import { ConsoleConfiguration } from '../modules/html-console/console-configuration';
 import { MasterLayoutComponent } from '../master-layout/master-layout.component';
 
+const snackBarDefaultDelayTime = 3000;
+
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
@@ -30,9 +32,6 @@ import { MasterLayoutComponent } from '../master-layout/master-layout.component'
     MasterLayoutComponent
   ]
 })
-
-const snackBarDefaultDelayTime = 3000;
-
 export class PlayComponent implements OnInit, OnDestroy {
   @ViewChild('console', { static: true }) private canvasRef: ElementRef | undefined;
   @ViewChild('canvasContainer', { static: true }) private canvasContainerRef: ElementRef | undefined;
