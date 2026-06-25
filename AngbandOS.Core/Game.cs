@@ -9192,10 +9192,6 @@ internal partial class Game : IGameSerialize
                     k = gameReplayStep.Keystroke;
 
 #if DEBUG
-                    if (ReplayQueue.Count <= 3)
-                    {
-                        int _ = 0;
-                    }
                     // Perform replay verification.
                     if (gameReplayStep.Seed == 0)
                     {
