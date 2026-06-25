@@ -120,14 +120,14 @@ namespace AngbandOS.Web.Hubs
         /// <param name="userId"></param>
         /// <param name="username"></param>
         /// <param name="notificationAction"></param>
-        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, GameConfiguration gameConfiguration, string userId, string username, IWebPersistentStorage webPersistentStorage, int replayId)
+        public GameHost(HubCallerContext context, IConsoleHubMessages gameHub, GameConfiguration gameConfiguration, string userId, string username, IWebPersistentStorage webPersistentStorage, int replayId, bool saveAfterReplay)
         {
             _consoleGameHub = gameHub;
             UserId = userId;
             Username = username;
             Context = context;
             WebPersistentStorage = webPersistentStorage;
-            RunContext = new ReplayGameRunContext(userId, gameConfiguration, webPersistentStorage, replayId);
+            RunContext = new ReplayGameRunContext(userId, gameConfiguration, webPersistentStorage, replayId, saveAfterReplay);
         }
         #endregion
 

@@ -44,8 +44,8 @@ export class PlayComponent implements OnInit, OnDestroy {
   private _accessToken: string | undefined = undefined;
   public preferences: Preferences | undefined = undefined; // Represents the users preferences.  Will be undefined, until they are retrieved from the back end.
   private resizeObserver!: ResizeObserver;
+  private recover: boolean | null = null;
   
-
   constructor(
     private _preferencesDialog: MatDialog,
     private _httpClient: HttpClient,
@@ -360,105 +360,112 @@ export class PlayComponent implements OnInit, OnDestroy {
     return gameConfiguration;
   }
 
+  private play() {
+    if (this.gameHubConnection) {
+      this.connectionId = this.gameHubConnection.connectionId;
+
+      this.gameHubConnection.on("Clear", () => {
+        this._zone.run(() => {
+          this._htmlConsole?.clear();
+        });
+      });
+      this.gameHubConnection.on("BatchPrint", (printLines: PrintLine[]) => {
+        this._zone.run(() => {
+          this._htmlConsole?.batchPrint(printLines);
+        });
+      });
+      this.gameHubConnection.on("SetBackground", (backgroundImage: number) => {
+        this._zone.run(() => {
+        });
+      });
+      this.gameHubConnection.on("SendMessage", (message: string) => {
+        this._zone.run(() => {
+          this.showSnackBar(message);
+        });
+      });
+      this.gameHubConnection.on("GameIncompatible", () => {
+        this._zone.run(() => {
+          const snackBarRef = this._snackBar.open("Game cannot be played because it is incompatible.", undefined, {
+            duration: 2000,                
+          });
+          this._initSubscriptions.add(snackBarRef.afterDismissed().subscribe(() => {
+            this._router.navigate(['/']);
+          }));
+        });
+      });
+      this.gameHubConnection.on("PlaySound", (sound: number) => {
+        this._zone.run(() => {
+          this._htmlConsole?.playSound(sound);
+        });
+      });
+      this.gameHubConnection.on("PlayMusic", (music: number) => {
+        this._zone.run(() => {
+        });
+      });
+      this.gameHubConnection.on("GameOver", (message: string) => {
+        this._zone.run(() => {
+          this.gameInProgress = false;
+
+          this.showSnackBar(message);
+          setTimeout(() => {
+            this._router.navigate(['/']);
+          }, snackBarDefaultDelayTime);
+        });
+      });
+      this.gameHubConnection.on("GameStarted", (gameGuid: string) => {
+        this._zone.run(() => {
+          this.gameGuidStringOrRecoveryIdNumber = gameGuid;
+          this.canvasContainerRef!.nativeElement.title = `Connection: ${this.connectionId} Game: ${this.gameGuidStringOrRecoveryIdNumber}`;
+        });
+      });
+
+      // Fires when the connection is completely closed (after retries fail or no reconnect configured)
+      this.gameHubConnection.onclose((error) => {
+        this.showSnackBar("Connection lost.  Redirecting back to home.");
+        setTimeout(() => {
+          this._router.navigate(['/']);
+        }, 10);
+      });
+
+      this.gameInProgress = true;
+
+      // Check to see if this is a request to replay a game.
+      if (typeof this.gameGuidStringOrRecoveryIdNumber === "number") {
+        const saveAfterReplay = this.recover;
+        this.gameHubConnection.send("ReplayGame", this.gameGuidStringOrRecoveryIdNumber, saveAfterReplay).then(() => {
+        }, (reason: any) => {
+          this._snackBar.open(`ReplayGame rejected ${reason}.`, undefined, {
+            duration: 2000,
+          });
+        });
+      } else if (this.gameGuidStringOrRecoveryIdNumber === null) {
+        // This is a new game request.  We must send a game configuration.
+        const gameConfiguration: GameConfiguration = this.LoadConfiguration();
+
+        this.gameHubConnection.send("PlayNewGame", gameConfiguration).then(() => {
+        }, (reason: any) => {
+          this._snackBar.open(`PlayNewGame rejected ${reason}.`, undefined, {
+            duration: 2000,
+          });
+        });
+      } else {
+        // This is a request to play an existing game.  Send the game guid.
+        this.gameHubConnection.send("PlayExistingGame", this.gameGuidStringOrRecoveryIdNumber).then(() => {
+        }, (reason: any) => {
+          this._snackBar.open(`PlayExistingGame rejected ${reason}.`, undefined, {
+            duration: 2000,
+          });
+        });
+      }
+      }
+  }
+
+  // Check if the asynchronous requirements have been met to play.
   private check() {
     if (this.gameHubConnection !== undefined && this.gameGuidStringOrRecoveryIdNumber !== undefined) {
       this.gameHubConnection.start().then(() => {
-        if (this.gameHubConnection) {
-          this.connectionId = this.gameHubConnection.connectionId;
-
-          this.gameHubConnection.on("Clear", () => {
-            this._zone.run(() => {
-              this._htmlConsole?.clear();
-            });
-          });
-          this.gameHubConnection.on("BatchPrint", (printLines: PrintLine[]) => {
-            this._zone.run(() => {
-              this._htmlConsole?.batchPrint(printLines);
-            });
-          });
-          this.gameHubConnection.on("SetBackground", (backgroundImage: number) => {
-            this._zone.run(() => {
-            });
-          });
-          this.gameHubConnection.on("SendMessage", (message: string) => {
-            this._zone.run(() => {
-              this.showSnackBar(message);
-            });
-          });
-          this.gameHubConnection.on("GameIncompatible", () => {
-            this._zone.run(() => {
-              const snackBarRef = this._snackBar.open("Game cannot be played because it is incompatible.", undefined, {
-                duration: 2000,                
-              });
-              this._initSubscriptions.add(snackBarRef.afterDismissed().subscribe(() => {
-                this._router.navigate(['/']);
-              }));
-            });
-          });
-          this.gameHubConnection.on("PlaySound", (sound: number) => {
-            this._zone.run(() => {
-              this._htmlConsole?.playSound(sound);
-            });
-          });
-          this.gameHubConnection.on("PlayMusic", (music: number) => {
-            this._zone.run(() => {
-            });
-          });
-          this.gameHubConnection.on("GameOver", (message: string) => {
-            this._zone.run(() => {
-              this.gameInProgress = false;
-
-              this.showSnackBar(message);
-              setTimeout(() => {
-                this._router.navigate(['/']);
-              }, snackBarDefaultDelayTime);
-            });
-          });
-          this.gameHubConnection.on("GameStarted", (gameGuid: string) => {
-            this._zone.run(() => {
-              this.gameGuidStringOrRecoveryIdNumber = gameGuid;
-              this.canvasContainerRef!.nativeElement.title = `Connection: ${this.connectionId} Game: ${this.gameGuidStringOrRecoveryIdNumber}`;
-            });
-          });
-
-          // Fires when the connection is completely closed (after retries fail or no reconnect configured)
-          this.gameHubConnection.onclose((error) => {
-            this.showSnackBar("Connection lost.  Redirecting back to home.");
-            setTimeout(() => {
-              this._router.navigate(['/']);
-            }, 10);
-          });
-
-          this.gameInProgress = true;
-
-          // Check to see if this is a request to replay a game.
-          if (typeof this.gameGuidStringOrRecoveryIdNumber === "number") {
-            this.gameHubConnection.send("ReplayGame", this.gameGuidStringOrRecoveryIdNumber).then(() => {
-            }, (reason: any) => {
-              this._snackBar.open(`ReplayGame rejected ${reason}.`, undefined, {
-                duration: 2000,
-              });
-            });
-          } else if (this.gameGuidStringOrRecoveryIdNumber === null) {
-            // This is a new game request.  We must send a game configuration.
-            const gameConfiguration: GameConfiguration = this.LoadConfiguration();
-
-            this.gameHubConnection.send("PlayNewGame", gameConfiguration).then(() => {
-            }, (reason: any) => {
-              this._snackBar.open(`PlayNewGame rejected ${reason}.`, undefined, {
-                duration: 2000,
-              });
-            });
-          } else {
-            // This is a request to play an existing game.  Send the game guid.
-            this.gameHubConnection.send("PlayExistingGame", this.gameGuidStringOrRecoveryIdNumber).then(() => {
-            }, (reason: any) => {
-              this._snackBar.open(`PlayExistingGame rejected ${reason}.`, undefined, {
-                duration: 2000,
-              });
-            });
-          }
-        }
+        // Play the game.
+        this.play();
       }, (reason: any) => {
         this.showSnackBar(`Connection to game server failed ${reason}.`);
         // Turn off the game in progress so that the CanDeactivate route guard isn't triggered.
@@ -557,6 +564,10 @@ export class PlayComponent implements OnInit, OnDestroy {
           if (Number.isInteger(guidAsNumber)) {
             // It is, set the global game guid to the recovery id.
             this.gameGuidStringOrRecoveryIdNumber = guidAsNumber;
+
+            // Retrieve the recover status
+            const recoverStringValue: string | null = paramMap.get("recover");
+            this.recover = recoverStringValue === "1";
           }
           else {
             this.gameGuidStringOrRecoveryIdNumber = guidRouteValue;

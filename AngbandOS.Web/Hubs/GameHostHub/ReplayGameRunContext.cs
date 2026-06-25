@@ -11,13 +11,15 @@ namespace AngbandOS.Web.Hubs
         private readonly GameConfiguration GameConfiguration;
         private readonly IWebPersistentStorage WebPersistentStorage;
         private readonly int ReplayId;
+        private readonly bool SaveAfterReplay;
 
-        public ReplayGameRunContext(string username, GameConfiguration gameConfiguration, IWebPersistentStorage webPersistentStorage, int replayId)
+        public ReplayGameRunContext(string username, GameConfiguration gameConfiguration, IWebPersistentStorage webPersistentStorage, int replayId, bool saveAfterReplay)
         {
             Username = username;
             GameConfiguration = gameConfiguration;
             WebPersistentStorage = webPersistentStorage;
             ReplayId = replayId;
+            SaveAfterReplay = saveAfterReplay;
         }
 
         public override GameResults Play(IConsoleAndViewPort consoleAndViewPort, GameServer gameServer)
@@ -31,21 +33,24 @@ namespace AngbandOS.Web.Hubs
             // Create an instance of the ReplayPersistentStorage to track the game for replay.
             IReplayPersistentStorage replayPersistentStorage = new SqlReplayAdapter(gameReplayId, WebPersistentStorage);
 
-            // Tell the game server to generate the new game with the game replay details.
-            gameServer.LoadGameReplay(GameConfiguration, gameReplayDetails);
+            // Tell the game server to generate the new game with the game replay details.  This web product always closes the game after the replay.  The web product can only view or recover a replay.
+            gameServer.LoadGameReplay(GameConfiguration, gameReplayDetails, true);
 
             // Now play the game.
             GameResults gameResults = gameServer.PlayGame(consoleAndViewPort, replayPersistentStorage);
 
-            // Save the game.
-            GameDetails gameDetails = new GameDetails()
+            if (SaveAfterReplay)
             {
-                CharacterName = gameServer.CharacterName,
-                Comments = "",
-                Level = gameServer.Level.Value,
-                Gold = gameServer.Gold.Value,
-                IsAlive = !gameResults.GameIsOver
-            };
+                // Save the game.
+                GameDetails gameDetails = new GameDetails()
+                {
+                    CharacterName = gameServer.CharacterName,
+                    Comments = "",
+                    Level = gameServer.Level.Value,
+                    Gold = gameServer.Gold.Value,
+                    IsAlive = !gameResults.GameIsOver
+                };
+            }
 
             //WebPersistentStorage.WriteGame(Username, GameGuid, gameDetails, gameResults.SerializedGameData);
             return gameResults;

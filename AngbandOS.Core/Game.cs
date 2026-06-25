@@ -256,6 +256,14 @@ internal partial class Game : IGameSerialize
     private IReplayPersistentStorage? ReplayPersistentStorage = null;
 
     /// <summary>
+    /// Returns whether the game should close after replay is complete; false, for all non-replay operating modes.
+    /// </summary>
+    /// <remarks>
+    /// Serialization is not required.
+    /// </remarks>
+    public bool CloseAfterReplay { get; } = false;
+
+    /// <summary>
     /// Returns the date and time of of the previous keystroke during replay mode.
     /// </summary>
     private DateTime? replayPreviousKeystrokeDateTime = null;
@@ -304,7 +312,7 @@ internal partial class Game : IGameSerialize
     /// </summary>
     /// <param name="gameConfiguration"></param>
     /// <param name="gameReplay"></param>
-    public Game(GameConfiguration gameConfiguration, GameReplayDetails gameReplay) : this(gameConfiguration, gameReplay, null) 
+    public Game(GameConfiguration gameConfiguration, GameReplayDetails gameReplay, bool closeAfterReplay) : this(gameConfiguration, (gameReplay, closeAfterReplay), null) 
     {
     }
 
@@ -318,7 +326,7 @@ internal partial class Game : IGameSerialize
     /// <param name="gameConfiguration"></param>
     /// <param name="gameReplay">Supply t</param>
     /// <param name="gameStateBag">Supply the game state bag to restore a game.  The game configuration must match the game being restored.</param>
-    private Game(GameConfiguration gameConfiguration, GameReplayDetails? gameReplay, DerivedObjectGameStateBag? gameStateBag)
+    private Game(GameConfiguration gameConfiguration, (GameReplayDetails Details, bool CloseAfterReplay)? gameReplay, DerivedObjectGameStateBag? gameStateBag)
     {
         // Validate the parameters.
         if (gameReplay is not null && gameStateBag is not null)
@@ -331,11 +339,12 @@ internal partial class Game : IGameSerialize
         if (gameReplay is not null) // TODO: This should be moved into the overload that applies
         {
             // This is a game replay.  The main game sequence random number seed needs to be initialized here.
-            MainSequenceGameStartSeed = gameReplay.Seed;
-            foreach (GameReplayStep gameReplayStep in gameReplay.GameReplaySteps)
+            MainSequenceGameStartSeed = gameReplay.Value.Details.Seed;
+            foreach (GameReplayStep gameReplayStep in gameReplay.Value.Details.GameReplaySteps)
             {
                 ReplayQueue.Enqueue(gameReplayStep);
             }
+            CloseAfterReplay = gameReplay.Value.CloseAfterReplay;
         }
         else if (gameStateBag is null)
         {
@@ -8954,14 +8963,12 @@ internal partial class Game : IGameSerialize
             int result = menu.Show(this);
             switch (result)
             {
-                // Escape or Resume Game
                 case -1:
                 case 0:
                     // Cancel, resume game, escape
                     break;
                 case 1:
                 // Save and Quit
-                case 1:
                     Playing = false; // TODO: Need to use event arguments
                     break;
             }

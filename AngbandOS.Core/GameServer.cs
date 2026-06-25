@@ -217,13 +217,13 @@ public class GameServer
     /// <param name="gameConfiguration">Represents configuration data to use when generating a new game.</param>
     /// <param name="gameReplayDetails">The details of the game replay to be used for replaying the game.</param>
     /// <returns></returns>
-    public void LoadGameReplay(GameConfiguration gameConfiguration, GameReplayDetails gameReplayDetails)
+    public void LoadGameReplay(GameConfiguration gameConfiguration, GameReplayDetails gameReplayDetails, bool closeAfterReplay)
     {
         if (Game is not null)
         {
             throw new Exception("Game already loaded.");
         }
-        Game = new Game(gameConfiguration, gameReplayDetails);
+        Game = new Game(gameConfiguration, gameReplayDetails, closeAfterReplay);
     }
 
     /// <summary>

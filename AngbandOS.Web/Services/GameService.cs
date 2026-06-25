@@ -5,7 +5,6 @@ using AngbandOS.Web.Hubs;
 using AngbandOS.Web.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
-using System;
 using System.Collections.Concurrent;
 using System.Security.Claims;
 
@@ -254,7 +253,7 @@ namespace AngbandOS.Web.Services
         /// <param name="gameGuid">Provide guid for the game for which to replay.</param>
         /// <param name="username">Provide username for the user.  This needs to be passed from the GameHub because this <see cref="GameService"/> is a singleton and cannot retrieve the username from the UserManager.  The <see cref="GameHub"/> must perform this lookup.</param>
         /// <returns></returns>
-        public async Task<GameHost?> ReplayGameAsync(HubCallerContext context, string userId, int replayId, string username)
+        public async Task<GameHost?> ReplayGameAsync(HubCallerContext context, string userId, int replayId, string username, bool saveAfterReplay)
         {
             string connectionId = context.ConnectionId;
 
@@ -267,7 +266,7 @@ namespace AngbandOS.Web.Services
             GameConfiguration gameConfiguration = new GamePacks.Cthangband.CthangbandGameConfiguration();
 
             // Create a signal-r console object to manage the in-progress game.  This is a background worker object that runs the game and receives messages from the game to send to the client.
-            GameHost gameConsoleAndViewPort = new GameHost(context, gameHub, gameConfiguration, userId, username, WebPersistentStorage, replayId);
+            GameHost gameConsoleAndViewPort = new GameHost(context, gameHub, gameConfiguration, userId, username, WebPersistentStorage, replayId, saveAfterReplay);
 
             // For debugging purposes, we will provide a name for the thread that indicates the ID of the user and the game GUID.
             gameConsoleAndViewPort.ThreadName = $"Game Replay ID: {userId}/{replayId}";
