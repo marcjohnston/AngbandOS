@@ -309,7 +309,7 @@ internal partial class Game : IGameSerialize
     }
 
     /// <summary>
-    /// Creates a new game.  
+    /// Creates a new game for all scenarios and play modes.  
     /// </summary>
     /// <param name="configuration">Represents configuration data to use when generating a new game.</param>
     /// <remarks>
