@@ -34,7 +34,17 @@ namespace AngbandOS.Web.Interface
         Task<AvailableGames> ListGamesAsync(string userId);
 
         byte[]? ReadGame(string userId, string gameGuid);
-        bool WriteGame(string userId, string gameGuid, GameDetails gameDetails, byte[] value);
+
+        /// <summary>
+        /// Writes a game to the persistence storage.
+        /// </summary>
+        /// <param name="userId">The unique identifier for the user.</param>
+        /// <param name="gameGuid">The unique identifier for the game.</param>
+        /// <param name="gameDetails">Game details returned by the game server.</param>
+        /// <param name="gameReplayId">The unique ID for the replay.  This ensures the game recovery references the saved game and is needed during game recovery.</param>
+        /// <param name="serializedGameData">The serialized game data.</param>
+        /// <returns></returns>
+        bool WriteGame(string userId, string gameGuid, GameDetails gameDetails, int gameReplayId, byte[] serializedGameData);
         #endregion
 
         #region Messaging and Chat Functionality

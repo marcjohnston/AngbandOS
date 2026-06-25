@@ -45,7 +45,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
         }
     }
 
-    public bool WriteGame(string userId, string gameGuid, GameDetails gameDetails, byte[] value)
+    public bool WriteGame(string userId, string gameGuid, GameDetails gameDetails, int gameReplayId, byte[] value)
     {
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {
@@ -86,6 +86,9 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
             savedGame.DateTime = DateTime.Now;
             savedGame.Gold = gameDetails.Gold;
             savedGame.IsAlive = gameDetails.IsAlive;
+
+            Sql.Entities.GameRecovery gameRecovery = context.GameRecoveries.Single(_gameRecovery => _gameRecovery.Id == gameReplayId);
+            gameRecovery.GameGuid = new Guid(gameGuid);
 
             context.SaveChanges();
         }

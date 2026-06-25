@@ -233,7 +233,7 @@ namespace AngbandOS.PersistentStorage
             throw new NotImplementedException();
         }
 
-        public bool WriteGame(string username, string gameGuid, GameDetails gameDetails, byte[] value)
+        public bool WriteGame(string username, string gameGuid, GameDetails gameDetails, int gameReplayId, byte[] value)
         {
             throw new NotImplementedException();
         }

@@ -50,9 +50,12 @@ namespace AngbandOS.Web.Hubs
                     Gold = gameServer.Gold.Value,
                     IsAlive = !gameResults.GameIsOver
                 };
+
+                // We have to issue a new guid for this game.  This is essentially a recovery.
+                string gameGuid = Guid.NewGuid().ToString();
+                WebPersistentStorage.WriteGame(Username, gameGuid, gameDetails, gameReplayId, gameResults.SerializedGameData);
             }
 
-            //WebPersistentStorage.WriteGame(Username, GameGuid, gameDetails, gameResults.SerializedGameData);
             return gameResults;
         }
     }

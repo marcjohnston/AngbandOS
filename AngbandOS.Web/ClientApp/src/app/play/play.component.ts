@@ -562,12 +562,14 @@ export class PlayComponent implements OnInit, OnDestroy {
           // Check to see if this is a recovery id.
           const guidAsNumber: number = Number(guidRouteValue);
           if (Number.isInteger(guidAsNumber)) {
-            // It is, set the global game guid to the recovery id.
-            this.gameGuidStringOrRecoveryIdNumber = guidAsNumber;
+            // It is, set the global game guid to the recovery id.  Retrieve the recover status
+            this._activatedRoute.queryParamMap.subscribe(paramMap => {
+              const recoverStringValue: string | null = paramMap.get("recover");
+              this.recover = recoverStringValue === "1";
 
-            // Retrieve the recover status
-            const recoverStringValue: string | null = paramMap.get("recover");
-            this.recover = recoverStringValue === "1";
+              // Now set the recovery ID now that we have the recovery query param.
+              this.gameGuidStringOrRecoveryIdNumber = guidAsNumber;
+            });
           }
           else {
             this.gameGuidStringOrRecoveryIdNumber = guidRouteValue;

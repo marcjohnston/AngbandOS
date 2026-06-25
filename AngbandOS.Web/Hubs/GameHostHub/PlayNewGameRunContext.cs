@@ -45,7 +45,7 @@ namespace AngbandOS.Web.Hubs
                 IsAlive = !results.GameIsOver
             };
 
-            WebPersistentStorage.WriteGame(Username, gameGuid, gameDetails, results.SerializedGameData);
+            WebPersistentStorage.WriteGame(Username, gameGuid, gameDetails, gameReplayId, results.SerializedGameData);
             return results;
         }
     }

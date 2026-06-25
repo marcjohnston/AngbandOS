@@ -1671,7 +1671,7 @@ internal class Monster : IItemContainer, IGameSerialize
         }
 
         // If the player's already dead or off the game.Level, don't cast
-        if (!Game.Playing || Game.IsDead || Game.NewLevelFlag)
+        if (Game.Shutdown || Game.IsDead || Game.NewLevelFlag)
         {
             return false;
         }
@@ -1862,7 +1862,7 @@ internal class Monster : IItemContainer, IGameSerialize
             }
 
             // If the player's already dead or off the level, don't cast
-            if (!Game.Playing || Game.IsDead || Game.NewLevelFlag)
+            if (Game.Shutdown || Game.IsDead || Game.NewLevelFlag)
             {
                 return false;
             }

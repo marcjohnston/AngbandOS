@@ -267,16 +267,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public recoverGame(gameRecoveryId: number) {
-    this._router.navigate(['/play', gameRecoveryId]);
+    this._router.navigate(['/play', gameRecoveryId], { queryParams: { recover: 1 } });
   }
   
   public onNewGame() {
     this._router.navigate(['/play']);
   }
 
-  public deleteSavedGame(savedGame: SavedGame) {
+  public deleteSavedGame(gameGuid: string) {
     if (window.confirm('Are you sure you want to delete this game?')) {
-      this._httpClient.delete<AvailableGames>(`/apiv1/saved-games/${savedGame.guid}`).toPromise().then((_availableGames) => {
+      this._httpClient.delete<AvailableGames>(`/apiv1/saved-games/${gameGuid}`).toPromise().then((_availableGames) => {
         this.availableGames = _availableGames;
         this._changeDetectorRef.detectChanges();
       }, (_errorResponse: HttpErrorResponse) => {
