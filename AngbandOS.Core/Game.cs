@@ -1004,7 +1004,10 @@ internal partial class Game : IGameSerialize
     #endregion
 
     #region Cached Data
-    public Attribute[]? CachedAttributes = null;
+    /// <summary>
+    /// Once all of the Attributes are preloaded during the singleton load phase, we cache them.  This is a time saving cache because the <see cref="EffectiveAttributeSet"/> pulls them a lot.
+    /// </summary>
+    public Attribute[] CachedAttributes;
     #endregion
 
     #region WIP Methods Not Yet Categorized

@@ -253,7 +253,7 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<IUsedScript>();
         RegisterIndex<IZapRodScript>();
 
-        // Base preload
+        // Base preload the Attributes and then cache them.
         RegisterIndex<Attribute>();
 
         // Not configurable yet
@@ -307,6 +307,9 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<OrAttribute, OrAttributeGameConfiguration>(gameConfiguration.OrAttributes, restoreGameState);
         LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes, restoreGameState);
         LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes, restoreGameState);
+
+        // Now we need to cache the attributes, now that they are all loaded.
+        Game.CachedAttributes = Game.SingletonRepository.Get<Attribute>();
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
         LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts, restoreGameState);

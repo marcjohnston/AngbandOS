@@ -23,7 +23,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     public EffectiveAttributeSet(Game game)
     {
         Game = game;
-        Attribute[] cachedAttributes = LoadCachedAttributes();
+        Attribute[] cachedAttributes = Game.CachedAttributes;
 
         // Allocate the array.
         _effectiveAttributeValues = new EffectiveAttributeValue[cachedAttributes.Length];
@@ -42,7 +42,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     public EffectiveAttributeSet(Game game, RestoreGameState restoreGameState)
     {
         Game = game;
-        Attribute[] cachedAttributes = LoadCachedAttributes();
+        Attribute[] cachedAttributes = Game.CachedAttributes;
 
         _effectiveAttributeValues = restoreGameState.GetByKey(nameof(_effectiveAttributeValues)).GetDerivedReferences<EffectiveAttributeValue>(
             (RestoreGameState restoreGameState) => new ActivationEffectiveAttributeValue(Game, restoreGameState),
@@ -62,14 +62,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     }
 
     private Game Game { get; }
-    private Attribute[] LoadCachedAttributes()
-    {
-        if (Game.CachedAttributes == null)
-        {
-            Game.CachedAttributes = Game.SingletonRepository.Get<Attribute>();
-        }
-        return Game.CachedAttributes;
-    }
 
     public void RemoveKeyedEnhancements(string key)
     {
@@ -84,7 +76,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     /// <param name="value"></param>
     public void MergeAttributeSet(ReadOnlyAttributeSet readOnlyPropertySet)
     {
-        foreach (Attribute attribute in Game.SingletonRepository.Get<Attribute>())
+        foreach (Attribute attribute in Game.CachedAttributes)
         {
             _effectiveAttributeValues[attribute.Index].Merge(readOnlyPropertySet[attribute.Index]);
         }
@@ -101,7 +93,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
         {
             throw new ArgumentException("Invalid key specified for enhancements.");
         }
-        foreach (Attribute attribute in Game.SingletonRepository.Get<Attribute>())
+        foreach (Attribute attribute in Game.CachedAttributes)
         {
             _effectiveAttributeValues[attribute.Index].Merge(key, readOnlyPropertySet[attribute.Index]);
         }
@@ -109,7 +101,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
 
     public ReadOnlyAttributeSet ToReadOnly()
     {
-        Attribute[] cachedAttributes = LoadCachedAttributes();
+        Attribute[] cachedAttributes = Game.CachedAttributes;
         AttributeValue[] attributeModifiers = new AttributeValue[cachedAttributes.Length];
         foreach (Attribute attribute in cachedAttributes)
         {
@@ -173,8 +165,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     public EffectiveAttributeSet Clone()
     {
         EffectiveAttributeSet clone = new EffectiveAttributeSet(Game);
-        Attribute[] cachedAttributes = LoadCachedAttributes();
-        foreach (Attribute attribute in cachedAttributes)
+        foreach (Attribute attribute in Game.CachedAttributes)
         {
             clone._effectiveAttributeValues[attribute.Index] = _effectiveAttributeValues[attribute.Index].Clone();
         }
