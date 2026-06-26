@@ -51,7 +51,7 @@ namespace AngbandOS.Core
             if (items.Length > 1)
             {
                 stringBuilder.Append(finalDelimiter);
-                stringBuilder.Append(items[items.Length]);
+                stringBuilder.Append(items[items.Length - 1]);
             }
             return stringBuilder.ToString();
         }
