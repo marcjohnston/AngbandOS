@@ -73,6 +73,7 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         else
         {
             int seed = gameServer.GenerateNewGame(gameConfiguration);
+            replayPersistentStorage.NewGame(seed);
             gameResults = gameServer.PlayGame(this, replayPersistentStorage);
         }
 
