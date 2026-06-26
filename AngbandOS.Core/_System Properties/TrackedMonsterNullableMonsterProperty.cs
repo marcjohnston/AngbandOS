@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Properties;
 
-[Serializable]
 internal class TrackedMonsterNullableMonsterProperty : NullableMonsterProperty
 {
     private TrackedMonsterNullableMonsterProperty(Game game) : base(game) { } // This object is a singleton.

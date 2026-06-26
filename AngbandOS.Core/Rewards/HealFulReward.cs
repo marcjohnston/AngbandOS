@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Rewards;
 
-[Serializable]
 internal class HealFulReward : Reward
 {
     private HealFulReward(Game game) : base(game) { }

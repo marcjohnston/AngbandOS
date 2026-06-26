@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DetectNormalMonstersScript : Script, IScript, ICastSpellScript, IEatOrQuaffScript
 {
     private DetectNormalMonstersScript(Game game) : base(game) { }

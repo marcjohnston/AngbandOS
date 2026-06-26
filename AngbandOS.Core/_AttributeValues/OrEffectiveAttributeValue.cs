@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents an effective attribute value that combines multiple boolean modifiers using a logical OR operation. The effective value is true if any of the modifiers are true, and false if all modifiers are false.
 /// </summary>
-[Serializable]
 internal class OrEffectiveAttributeValue : EffectiveAttributeValue
 {
     /// <summary>

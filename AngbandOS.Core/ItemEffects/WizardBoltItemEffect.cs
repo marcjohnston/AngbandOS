@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.ItemEffects;
 
-[Serializable]
 internal class WizardBoltItemEffect : ItemEffect
 {
     private WizardBoltItemEffect(Game game) : base(game) { } // This object is a singleton.
@@ -52,7 +51,6 @@ internal class WizardBoltItemEffect : ItemEffect
     }
 }
 
-//[Serializable]
 //internal class ItemEffect : ItemEffect
 //{
 //    private ItemEffect(Game game) : base(game) { } // This object is a singleton.

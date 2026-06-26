@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ToggleSearchScript : UniversalScript, IGetKey
 {
     private ToggleSearchScript(Game game) : base(game) { }

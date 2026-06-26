@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.Core.FixedArtifacts;
 
-[Serializable]
 internal class IronHelmTerrorMaskFixedArtifact : FixedArtifact
 {
     private IronHelmTerrorMaskFixedArtifact(Game game) : base(game) { }

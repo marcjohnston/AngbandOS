@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 public class IdentifiedAndUsedResult
 {
     public bool IsIdentified => IdentifiedResult == IdentifiedResultEnum.True;

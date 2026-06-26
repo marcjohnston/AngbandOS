@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a base class for inventory slots that represent equipment inventory slots.
 /// </summary>
-[Serializable]
 internal abstract class EquipmentWieldSlot : WieldSlot
 {
     protected EquipmentWieldSlot(Game game) : base(game) { }

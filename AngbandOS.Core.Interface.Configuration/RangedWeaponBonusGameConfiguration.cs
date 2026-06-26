@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class RangedWeaponBonusGameConfiguration : CompositeSingletonGameConfiguration
 {
     public sealed override string?[] CompositeKeys => new string?[] { CharacterClassBindingKey, ItemClassBindingKey, ExperienceLevel == null ? null : ExperienceLevel.Value.ToString() }; // CONFIRMED

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.Core.FixedArtifacts;
 
-[Serializable]
 internal class BroadSwordBrightbladeFixedArtifact : FixedArtifact
 {
     private BroadSwordBrightbladeFixedArtifact(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DominationTalentScript : UniversalScript, IGetKey
 {
     private DominationTalentScript(Game game) : base(game) { }

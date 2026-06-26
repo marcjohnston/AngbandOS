@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.AttackEffects;
 
-[Serializable]
 internal class PoisonAttackEffect : AttackEffect
 {
     private PoisonAttackEffect(Game game) : base(game) { }

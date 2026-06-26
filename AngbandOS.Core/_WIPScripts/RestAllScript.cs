@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RestAllScript : Script, IActivateItemScript
 {
     private RestAllScript(Game game) : base(game) { }

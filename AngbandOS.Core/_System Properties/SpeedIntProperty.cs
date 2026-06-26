@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Properties;
 
-[Serializable]
 internal class SpeedIntProperty : IntProperty
 {
     private SpeedIntProperty(Game game) : base(game) { }

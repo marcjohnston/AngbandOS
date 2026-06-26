@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class RechargeItemScript : UsedResultUniversalScript, IGetKey, IToJson
 {
     public RechargeItemScript(Game game, RechargeItemScriptGameConfiguration gameConfiguration) : base(game)

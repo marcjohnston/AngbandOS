@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MageZapScript : Script, IScript, ICastSpellScript
 {
     private MageZapScript(Game game) : base(game) { }

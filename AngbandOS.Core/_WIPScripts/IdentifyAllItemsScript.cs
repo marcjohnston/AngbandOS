@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class IdentifyAllItemsScript : Script, IScript, ICastSpellScript, IStoreCommandScript
 {
     private IdentifyAllItemsScript(Game game) : base(game) { }

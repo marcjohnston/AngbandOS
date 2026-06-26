@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RerollHitPointsScript : Script, IScript, ICastSpellScript
 {
     private RerollHitPointsScript(Game game) : base(game) { }

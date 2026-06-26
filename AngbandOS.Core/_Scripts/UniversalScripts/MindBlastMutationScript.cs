@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class MindBlastMutationScript : UniversalScript, IGetKey
 {
     private MindBlastMutationScript(Game game) : base(game) { }

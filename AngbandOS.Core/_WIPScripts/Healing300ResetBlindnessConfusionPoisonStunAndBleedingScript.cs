@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript : Script, IEatOrQuaffScript
 {
     private Healing300ResetBlindnessConfusionPoisonStunAndBleedingScript(Game game) : base(game) { }

@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Check if racial power works based on the minimum level, cost, ability and difficulty.  If the racial power works, it runs an associated script.
 /// </summary>
-[Serializable]
 internal sealed class RacialPowerTest : IGetKey, IBoolValue, IToJson, IGameSerialize
 {
     private Game Game { get; }

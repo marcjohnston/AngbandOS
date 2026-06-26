@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MutateBodyScript : Script, IScript, ICastSpellScript
 {
     private MutateBodyScript(Game game) : base(game) { }

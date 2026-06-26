@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.ArtifactBiases;
 
-[Serializable]
 internal class NecromanticArtifactBias : ArtifactBias
 {
     private NecromanticArtifactBias(Game game) : base(game) { }

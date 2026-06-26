@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RestoreManaScript : Script, IEatOrQuaffScript
 {
     private RestoreManaScript(Game game) : base(game) { }

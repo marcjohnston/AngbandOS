@@ -10,7 +10,6 @@ namespace AngbandOS.Core;
 /// Represents a repository that is both a dictionary and a list.  Singletons are stored in both a dictionary with a string key and a list.  The key is typically the type name.  The singleton
 /// objects are being stored generically as an object.
 /// </summary>
-[Serializable]
 internal class GenericRepository // TODO: Rename this as simply Repository
 {
     public GenericRepository(bool enablePersistance)

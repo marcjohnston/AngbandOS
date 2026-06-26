@@ -1,7 +1,6 @@
 ﻿
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class SummonWeightedRandomGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual (string, int)[] NameAndWeightBindings { get; set; }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class FireTrapScript : Script, IScript, ICastSpellScript
 {
     private FireTrapScript(Game game) : base(game) { }

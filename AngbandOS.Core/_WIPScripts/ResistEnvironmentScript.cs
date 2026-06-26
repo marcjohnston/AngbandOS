@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ResistEnvironmentScript : Script, IScript, ICastSpellScript
 {
     private ResistEnvironmentScript(Game game) : base(game) { }

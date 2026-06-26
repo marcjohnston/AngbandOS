@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class WizardGainMutationScript : Script, IScript
 {
     private WizardGainMutationScript(Game game) : base(game) { }

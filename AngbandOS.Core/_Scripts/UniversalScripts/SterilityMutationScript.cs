@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class SterilityMutationScript : UniversalScript, IGetKey
 {
     private SterilityMutationScript(Game game) : base(game) { }

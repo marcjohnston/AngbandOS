@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class Heal700Script : Script, IActivateItemScript
 {
     private Heal700Script(Game game) : base(game) { }

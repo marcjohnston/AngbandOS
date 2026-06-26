@@ -1,7 +1,6 @@
 namespace AngbandOS.Core.Scripts;
 
 // Vampires can drain health
-[Serializable]
 internal class VampireRacialPowerScript : Script, IScript
 {
     private VampireRacialPowerScript(Game game) : base(game) { }

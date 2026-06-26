@@ -3,7 +3,6 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Allows the player to select and run a dream or travel racial power.
 /// </summary>
-[Serializable]
 internal class GreatOneRacialPowerScript : Script, IScript
 {
     private GreatOneRacialPowerScript(Game game) : base(game) { }

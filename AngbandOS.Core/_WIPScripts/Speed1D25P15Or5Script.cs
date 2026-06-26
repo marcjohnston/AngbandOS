@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class Speed1D25P15Or5Script : Script, IEatOrQuaffScript
 {
     private Speed1D25P15Or5Script(Game game) : base(game) { }

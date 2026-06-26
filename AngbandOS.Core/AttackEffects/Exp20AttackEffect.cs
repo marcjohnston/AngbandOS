@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.AttackEffects;
 
-[Serializable]
 internal class Exp20AttackEffect : ExpAttackEffect
 {
     private Exp20AttackEffect(Game game) : base(game) { }

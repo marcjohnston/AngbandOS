@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Justifications;
 
-[Serializable]
 internal class RightJustification : Justification
 {
     private RightJustification(Game game) : base(game) { }

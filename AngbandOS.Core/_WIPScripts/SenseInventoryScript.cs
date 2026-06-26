@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SenseInventoryScript : Script, IScript, ICastSpellScript
 {
     private SenseInventoryScript(Game game) : base(game) { }

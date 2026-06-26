@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class AugmentScript : Script, IEatOrQuaffScript
 {
     private AugmentScript(Game game) : base(game) { }

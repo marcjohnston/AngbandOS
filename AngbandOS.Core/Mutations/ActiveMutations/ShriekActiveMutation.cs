@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-[Serializable]
 internal class ShriekActiveMutation : Mutation
 {
     private ShriekActiveMutation(Game game) : base(game) { }

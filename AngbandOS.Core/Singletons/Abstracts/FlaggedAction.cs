@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.FlaggedActions;
 
-[Serializable]
 internal abstract class FlaggedAction : IGetKey, IGameSerialize
 {
     protected Game Game { get; }

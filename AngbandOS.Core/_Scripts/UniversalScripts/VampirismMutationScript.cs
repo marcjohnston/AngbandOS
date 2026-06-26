@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class VampirismMutationScript : UniversalScript, IGetKey
 {
     private VampirismMutationScript(Game game) : base(game) { }

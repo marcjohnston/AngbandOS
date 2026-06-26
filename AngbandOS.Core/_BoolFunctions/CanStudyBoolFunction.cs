@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-[Serializable]
 internal class CanStudyBoolFunction : BoolFunction
 {
     private CanStudyBoolFunction(Game game) : base(game) { } // This object is a singleton.

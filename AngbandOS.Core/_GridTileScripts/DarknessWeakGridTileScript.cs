@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GridTileEffects;
 
-[Serializable]
 internal class DarknessWeakGridTileScript : GridTileScript
 {
     private DarknessWeakGridTileScript(Game game) : base(game) { }

@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class AttributeFilter : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class LightArea2D8R2Script : Script, IReadScrollOrUseStaffScript
 {
     private LightArea2D8R2Script(Game game) : base(game) { }

@@ -1,7 +1,6 @@
 namespace AngbandOS.Core.Scripts;
 
 // Yeeks can scream
-[Serializable]
 internal class YeekRacialPowerScript : Script, IScript
 {
     private YeekRacialPowerScript(Game game) : base(game) { }

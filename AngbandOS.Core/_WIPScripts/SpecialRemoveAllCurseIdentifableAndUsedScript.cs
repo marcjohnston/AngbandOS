@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SpecialRemoveAllCurseIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private SpecialRemoveAllCurseIdentifableAndUsedScript(Game game) : base(game) { }

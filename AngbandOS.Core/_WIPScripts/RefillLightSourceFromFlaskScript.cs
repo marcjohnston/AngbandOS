@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Refill a light-source using a flask of oil.
 /// </summary>
-[Serializable]
 internal class RefillLightSourceFromFlaskScript : Script, IScriptItem
 {
     private RefillLightSourceFromFlaskScript(Game game) : base(game) { }

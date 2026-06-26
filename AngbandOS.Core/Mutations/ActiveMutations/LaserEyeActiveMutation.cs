@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-[Serializable]
 internal class LaserEyeActiveMutation : Mutation
 {
     private LaserEyeActiveMutation(Game game) : base(game) { }

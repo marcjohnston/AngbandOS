@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Functions;
 /// Represents a function that determines when the map needs to be updated.  Widgets that reference the map will use this function and the <see cref="IMapChangeTracking"/> interface
 /// to repaint the map as needed.
 /// </summary>
-[Serializable]
 internal class RefreshMapFunction : IChangeTracker, IGetKey, IGameSerialize
 {
     protected Game Game { get; }

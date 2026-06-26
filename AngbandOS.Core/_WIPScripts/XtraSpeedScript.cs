@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class XtraSpeedScript : Script, IActivateItemScript
 {
     private XtraSpeedScript(Game game) : base(game) { }

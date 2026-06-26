@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class WandEatMagicScript : Script, IScriptItem
 {
     private WandEatMagicScript(Game game) : base(game) { }

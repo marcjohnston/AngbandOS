@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DarknessIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private DarknessIdentifableAndUsedScript(Game game) : base(game) { }

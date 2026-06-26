@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class IntWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string IntValueName { get; set; }

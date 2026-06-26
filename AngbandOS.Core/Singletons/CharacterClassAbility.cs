@@ -1,6 +1,5 @@
 namespace AngbandOS.Core.CharacterClassAbilities;
 
-[Serializable]
 internal sealed class CharacterClassAbility : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

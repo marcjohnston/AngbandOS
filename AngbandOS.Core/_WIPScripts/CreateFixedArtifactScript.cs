@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class CreateFixedArtifactScript : Script, IScript, ICastSpellScript
 {
     private CreateFixedArtifactScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Timers;
 
-[Serializable]
 internal class ConfusingTimer : Timer
 {
     private ConfusingTimer(Game game) : base(game) { }

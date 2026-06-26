@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class BonusSearch1D5P5BEnchantmentScript : Script, IEnhancementScript
 {
     private BonusSearch1D5P5BEnchantmentScript(Game game) : base(game) { }

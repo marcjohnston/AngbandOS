@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SacrificeItemScript : Script, IStoreCommandScript
 {
     private SacrificeItemScript(Game game) : base(game) { }

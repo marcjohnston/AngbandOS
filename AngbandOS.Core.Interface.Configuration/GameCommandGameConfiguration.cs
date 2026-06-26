@@ -1,7 +1,6 @@
 ﻿
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class GameCommandGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual char KeyChar { get; set; }

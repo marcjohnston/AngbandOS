@@ -5,7 +5,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class SummonWeightedRandom : WeightedRandom<SummonScript>, IGetKey, IUniversalScript, IToJson, IGameSerialize
 {
     public SummonWeightedRandom(Game game, SummonWeightedRandomGameConfiguration gameConfiguration) : base(game)

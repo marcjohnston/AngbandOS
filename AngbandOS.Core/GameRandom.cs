@@ -4,12 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Diagnostics;
-using System.Reflection;
-
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class GameRandom : IGameSerialize
 {
     private const int _randnorNum = 256;
@@ -59,9 +55,6 @@ internal class GameRandom : IGameSerialize
         randomGenerator = new SystemRandomGenerator(CurrentSeed);
     }
 
-    //private static StreamWriter? _stream = null;
-
-    [NonSerialized]
     private IRandomGenerator randomGenerator;
 
     public GameRandom(RestoreGameState restoreGameState)

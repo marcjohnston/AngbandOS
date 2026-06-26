@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class RechargeItemScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string TurnsExpression { get; set; } = "60";

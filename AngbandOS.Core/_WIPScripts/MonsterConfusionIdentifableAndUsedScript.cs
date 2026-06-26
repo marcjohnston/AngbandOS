@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MonsterConfusionIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private MonsterConfusionIdentifableAndUsedScript(Game game) : base(game) { }

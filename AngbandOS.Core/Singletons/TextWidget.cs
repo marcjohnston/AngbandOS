@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class TextWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
     public TextWidget(Game game, TextWidgetGameConfiguration gameConfiguration) : base(game)

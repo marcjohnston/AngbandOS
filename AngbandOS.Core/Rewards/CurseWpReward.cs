@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Rewards;
 
-[Serializable]
 internal class CurseWpReward : Reward
 {
     private CurseWpReward(Game game) : base(game) { }

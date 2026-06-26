@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 internal class DiceRollInfixOperator : InfixOperator
 {
     public override string OperatorSymbol => "d";

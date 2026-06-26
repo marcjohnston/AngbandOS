@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal abstract class CharacterClass : IGetKey, IGameSerialize
 {
     protected Game Game { get; }

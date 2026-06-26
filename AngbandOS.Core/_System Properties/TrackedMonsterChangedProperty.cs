@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Properties;
 /// <summary>
 /// Represents a property that is used to manually track when the tracked monster is updated.  This property is only used to flag a manual refresh for the tracked monster.
 /// </summary>
-[Serializable]
 internal class TrackedMonsterChangedProperty : Property
 {
     private TrackedMonsterChangedProperty(Game game) : base(game) { } // This object is a singleton.

@@ -3,7 +3,6 @@ using AngbandOS.GamePacks.Cthangband;
 namespace AngbandOS.Core.Scripts;
 
 // Mind Flayers can shoot psychic bolts
-[Serializable]
 internal class MindFlayerRacialPowerScript : Script, IScript
 {
     private MindFlayerRacialPowerScript(Game game) : base(game) { }

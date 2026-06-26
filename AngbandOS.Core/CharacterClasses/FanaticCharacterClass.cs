@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.CharacterClasses;
 
-[Serializable]
 internal class FanaticCharacterClass : CharacterClass
 {
     private FanaticCharacterClass(Game savedGame) : base(savedGame) { }

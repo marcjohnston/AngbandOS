@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class WallOfStoneScript : Script, IScript, ICastSpellScript
 {
     private WallOfStoneScript(Game game) : base(game) { }

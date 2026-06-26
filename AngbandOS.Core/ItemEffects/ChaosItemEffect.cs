@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.ItemEffects;
 
-[Serializable]
 internal class ChaosItemEffect : ItemEffect
 {
     private ChaosItemEffect(Game game) : base(game) { } // This object is a singleton.

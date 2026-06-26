@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.BirthStages;
 
-[Serializable]
 internal class RaceSelectionBirthStage : BirthStage
 {
     private int currentSelection = 16;

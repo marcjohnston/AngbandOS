@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class AttributeFilterGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual (string AttributeKey, bool DesiredValue)[]? OrAttributeFilterBindings { get; set; } = null;

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.CharacterClasses;
 
-[Serializable]
 internal class MageCharacterClass : CharacterClass
 {
     private MageCharacterClass(Game savedGame) : base(savedGame) { }

@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class SpitAcidMutationScript : UniversalScript, IGetKey
 {
     private SpitAcidMutationScript(Game game) : base(game) { }

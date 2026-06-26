@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SpawnMonsterScript : Script, IScript, ICastSpellScript
 {
     private SpawnMonsterScript(Game game) : base(game) { }

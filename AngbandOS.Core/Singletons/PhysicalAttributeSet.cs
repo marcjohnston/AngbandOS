@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.PhysicalAttributeSets;
 
-[Serializable]
 internal sealed class PhysicalAttributeSet : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

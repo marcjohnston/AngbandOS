@@ -8,7 +8,6 @@
 using System.Security.Cryptography.X509Certificates;
 namespace AngbandOS.Core.Mutations.RandomMutations;
 
-[Serializable]
 internal class HornsRandomMutation : Mutation
 {
     private HornsRandomMutation(Game game) : base(game) { }

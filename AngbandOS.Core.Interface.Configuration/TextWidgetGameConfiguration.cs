@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class TextWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string NullableStringsValueName { get; set; }

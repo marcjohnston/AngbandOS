@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class CreateDimensionDoorScript : Script, IScript, ICastSpellScript
 {
     private CreateDimensionDoorScript(Game game) : base(game) { }

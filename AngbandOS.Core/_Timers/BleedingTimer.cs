@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Timers;
 
-[Serializable]
 internal class BleedingTimer : Timer
 {
     private BleedingTimer(Game game) : base(game) { }

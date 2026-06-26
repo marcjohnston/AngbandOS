@@ -8,7 +8,6 @@ using System.Collections;
 
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGameSerialize
 {
     #region State Data

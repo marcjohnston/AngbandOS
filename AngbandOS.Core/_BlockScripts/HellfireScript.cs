@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class HellfireScript : Script, IScript, ICastSpellScript
 {
     private HellfireScript(Game game) : base(game) { }

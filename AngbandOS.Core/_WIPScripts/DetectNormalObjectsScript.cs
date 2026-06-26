@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Reveals normal objects that are within the viewport.
 /// </summary>
-[Serializable]
 internal class DetectNormalObjectsScript : Script, IScript, ICastSpellScript, IEatOrQuaffScript, IReadScrollOrUseStaffScript
 {
     private DetectNormalObjectsScript(Game game) : base(game) { }

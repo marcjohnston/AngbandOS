@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Properties;
 
-[Serializable]
 internal class PlayerNameStringProperty : StringProperty
 {
     private PlayerNameStringProperty(Game game) : base(game) { }

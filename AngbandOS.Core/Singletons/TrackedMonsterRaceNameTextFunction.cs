@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Functions;
 /// <summary>
 /// Represents a function that returns the race name for the monster that the player is tracking; or null, if the player is not tracking a monster.
 /// </summary>
-[Serializable]
 internal class TrackedMonsterRaceNameTextFunction : TextFunction
 {
     private TrackedMonsterRaceNameTextFunction(Game game) : base(game) { } // This object is a singleton.

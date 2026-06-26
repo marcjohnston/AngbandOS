@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class CharacterArmorTalentScript : UniversalScript, IGetKey
 {
     private CharacterArmorTalentScript(Game game) : base(game) { }

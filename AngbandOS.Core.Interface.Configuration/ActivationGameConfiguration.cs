@@ -7,7 +7,6 @@
 
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class ActivationGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string Name { get; set; }

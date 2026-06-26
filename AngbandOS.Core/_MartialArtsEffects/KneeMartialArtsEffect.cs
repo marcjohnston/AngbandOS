@@ -7,7 +7,6 @@
 namespace AngbandOS.Core;
 
 // If it was a knee attack and the monster is male, hit it in the groin
-[Serializable]
 internal class KneeMartialArtsEffect : MartialArtsEffect
 {
     private KneeMartialArtsEffect(Game game) : base(game) { } // This object is a singleton

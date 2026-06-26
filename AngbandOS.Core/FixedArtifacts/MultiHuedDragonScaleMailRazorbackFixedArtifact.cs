@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.Core.FixedArtifacts;
 
-[Serializable]
 internal class MultiHuedDragonScaleMailRazorbackFixedArtifact : FixedArtifact
 {
     private MultiHuedDragonScaleMailRazorbackFixedArtifact(Game game) : base(game) { }

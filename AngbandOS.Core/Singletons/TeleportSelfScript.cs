@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
 {
     public TeleportSelfScript(Game game, TeleportSelfScriptGameConfiguration gameConfiguration) : base(game)

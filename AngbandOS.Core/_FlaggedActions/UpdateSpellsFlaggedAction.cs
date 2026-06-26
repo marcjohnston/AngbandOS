@@ -14,7 +14,6 @@ namespace AngbandOS.Core.FlaggedActions;
 /// Implements the <see cref="AngbandOS.Core.FlaggedActions.FlaggedAction" />
 /// </summary>
 /// <seealso cref="AngbandOS.Core.FlaggedActions.FlaggedAction" />
-[Serializable]
 internal class UpdateSpellsFlaggedAction : FlaggedAction
 {
     private UpdateSpellsFlaggedAction(Game game) : base(game) { }

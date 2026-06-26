@@ -8,7 +8,6 @@ using System.Collections;
 
 namespace AngbandOS.Core;
 
-[Serializable]
 internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey, IGameSerialize // TODO: Rename to InventorySlot when the enumeration is refactored out of existence
 {
     protected Game Game { get; }

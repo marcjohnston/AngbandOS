@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DestroyTrapsAndDoorsScript : Script, IReadScrollOrUseStaffScript
 {
     private DestroyTrapsAndDoorsScript(Game game) : base(game) { }

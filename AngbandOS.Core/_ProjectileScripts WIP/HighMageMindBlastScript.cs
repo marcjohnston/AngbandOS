@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class HighMageMindBlastScript : Script, IScript, ICastSpellScript
 {
     private HighMageMindBlastScript(Game game) : base(game) { }

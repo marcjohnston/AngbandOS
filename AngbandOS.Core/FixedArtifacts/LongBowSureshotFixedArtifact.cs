@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.Core.FixedArtifacts;
 
-[Serializable]
 internal class LongBowSureshotFixedArtifact : FixedArtifact
 {
     private LongBowSureshotFixedArtifact(Game game) : base(game) { }

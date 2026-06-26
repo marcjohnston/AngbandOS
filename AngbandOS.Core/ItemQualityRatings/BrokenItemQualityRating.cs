@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.ItemQualityRatings;
 
-[Serializable]
 internal class BrokenItemQualityRating : ItemQualityRating
 {
     private BrokenItemQualityRating(Game game) : base(game) { } // This object is a singleton

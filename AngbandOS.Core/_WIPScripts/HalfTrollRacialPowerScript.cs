@@ -1,7 +1,6 @@
 namespace AngbandOS.Core.Scripts;
 
 // Half-trolls can go berserk, which also heals them
-[Serializable]
 internal class HalfTrollRacialPowerScript : Script, IScript
 {
     private HalfTrollRacialPowerScript(Game game) : base(game) { }

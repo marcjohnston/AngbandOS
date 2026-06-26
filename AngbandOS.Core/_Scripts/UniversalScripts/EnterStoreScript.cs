@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class EnterStoreScript : UniversalScript, IGetKey
 {
     private EnterStoreScript(Game game) : base(game) { }

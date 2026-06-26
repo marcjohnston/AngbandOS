@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class TelekinesMutationScript : UniversalScript, IGetKey
 {
     private TelekinesMutationScript(Game game) : base(game) { }

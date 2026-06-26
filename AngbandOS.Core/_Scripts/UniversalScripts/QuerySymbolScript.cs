@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class QuerySymbolScript : UniversalScript, IGetKey
 {
     private QuerySymbolScript(Game game) : base(game) { }

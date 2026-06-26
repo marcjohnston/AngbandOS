@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Mutations.RandomMutations;
 
-[Serializable]
 internal class ProdManaRandomMutation : Mutation
 {
     private ProdManaRandomMutation(Game game) : base(game) { }

@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class BrFireMutationScript : UniversalScript, IGetKey
 {
     private BrFireMutationScript(Game game) : base(game) { }

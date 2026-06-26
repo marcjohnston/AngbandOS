@@ -1,7 +1,6 @@
 namespace AngbandOS.Core.Scripts;
 
 // Draconians can breathe an element based on their class and level
-[Serializable]
 internal class DraconianRacialPowerScript : Script, IScript
 {
     private DraconianRacialPowerScript(Game game) : base(game) { }

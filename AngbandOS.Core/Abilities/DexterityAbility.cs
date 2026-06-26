@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class DexterityAbility : Ability
 {
     private DexterityAbility(Game game) : base(game) { } // This object is a singleton

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ReadScrollScript : UniversalScript, IGetKey
 {
     private ReadScrollScript(Game game) : base(game) { }

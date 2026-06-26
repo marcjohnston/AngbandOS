@@ -7,7 +7,6 @@
 using System.Reflection;
 namespace AngbandOS.Core;
 
-[Serializable]
 /// <summary>
 /// Represents a repository for all game singletons.
 /// </summary>

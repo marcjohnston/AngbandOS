@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Rewards;
 
-[Serializable]
 internal class GainAblReward : Reward
 {
     private GainAblReward(Game game) : base(game) { }

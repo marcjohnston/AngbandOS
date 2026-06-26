@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class LifeScript : Script, IEatOrQuaffScript
 {
     private LifeScript(Game game) : base(game) { }

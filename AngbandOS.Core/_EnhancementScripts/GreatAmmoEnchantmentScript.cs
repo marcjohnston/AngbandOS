@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class GreatAmmoEnchantmentScript : Script, IEnhancementScript
 {
     private GreatAmmoEnchantmentScript(Game game) : base(game) { }

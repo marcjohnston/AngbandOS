@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ChaosBall222R4IdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private ChaosBall222R4IdentifableAndUsedScript(Game game) : base(game) { }

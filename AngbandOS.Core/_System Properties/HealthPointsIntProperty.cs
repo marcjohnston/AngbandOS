@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Properties;
 
-[Serializable]
 internal class HealthPointsIntProperty : IntProperty
 {
     private HealthPointsIntProperty(Game game) : base(game) { }

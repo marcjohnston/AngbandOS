@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// <summary>
 /// 
 /// </summary>
-[Serializable]
 public class StoreFactoryGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     /// <summary>

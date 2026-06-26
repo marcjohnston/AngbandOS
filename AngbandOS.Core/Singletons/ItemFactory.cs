@@ -10,7 +10,6 @@ namespace AngbandOS.Core;
 /// Represents different variations (ItemType) of item categories (ItemCategory).  E.g. different types of food that belong to the food category.  Several of the
 /// properties are modifiable.
 /// </summary>
-[Serializable]
 internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

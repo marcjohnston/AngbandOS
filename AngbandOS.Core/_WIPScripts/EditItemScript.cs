@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class EditItemScript : Script, IScript, ICastSpellScript
 {
     private EditItemScript(Game game) : base(game) { }

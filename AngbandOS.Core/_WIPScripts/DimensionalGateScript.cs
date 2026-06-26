@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DimensionalGateScript : Script, IActivateItemScript
 {
     private DimensionalGateScript(Game game) : base(game) { }

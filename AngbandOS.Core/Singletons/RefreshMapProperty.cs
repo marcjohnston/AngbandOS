@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Properties;
 /// Represents a property that is used to manually track when the map needs to be refreshed.  This property is only used to flag a manual refreshing until the <see cref="RefreshMapFunction"/>
 /// function has all dependencies setup properly.  The <see cref="RefreshMapFunction"/> function should be used for both this manual tracking and other timers and such detection.
 /// </summary>
-[Serializable]
 internal class RefreshMapProperty : Property
 {
     private RefreshMapProperty(Game game) : base(game) { } // This object is a singleton.

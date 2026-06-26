@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Alignments;
 
-[Serializable]
 internal class TopAlignment : Alignment
 {
     private TopAlignment(Game game) : base(game) { }

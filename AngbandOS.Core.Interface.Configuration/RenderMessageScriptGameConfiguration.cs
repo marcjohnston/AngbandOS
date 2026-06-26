@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class RenderMessageScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string Message { get; set; }

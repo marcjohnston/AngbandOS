@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RechargeStaffScript : Script, IScriptItemInt
 {
     private RechargeStaffScript(Game game) : base(game) { }

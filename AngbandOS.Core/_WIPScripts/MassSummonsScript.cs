@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MassSummonsScript : Script, IScript, ICastSpellScript
 {
     private MassSummonsScript(Game game) : base(game) { }

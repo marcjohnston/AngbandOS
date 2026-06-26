@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-[Serializable]
 internal class HasConfusionResistanceBoolFunction : BoolFunction
 {
     private HasConfusionResistanceBoolFunction(Game game) : base(game) { } // This object is a singleton.

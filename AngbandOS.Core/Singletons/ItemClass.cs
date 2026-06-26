@@ -3,7 +3,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a class of items factories that are similar.  These classes define a distinct class name and stomp setting.
 /// </summary>
-[Serializable]
 internal sealed class ItemClass : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

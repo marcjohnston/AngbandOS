@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DestroyAreaR15Script : Script, IReadScrollOrUseStaffScript
 {
     private DestroyAreaR15Script(Game game) : base(game) { }

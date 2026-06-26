@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class BanishMutationScript : UniversalScript, IGetKey
 {
     private BanishMutationScript(Game game) : base(game) { }

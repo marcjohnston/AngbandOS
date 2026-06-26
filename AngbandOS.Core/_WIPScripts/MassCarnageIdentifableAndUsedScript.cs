@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MassCarnageIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private MassCarnageIdentifableAndUsedScript(Game game) : base(game) { }

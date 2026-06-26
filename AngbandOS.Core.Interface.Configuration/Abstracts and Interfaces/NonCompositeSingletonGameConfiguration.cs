@@ -1,7 +1,6 @@
 ﻿
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public abstract class NonCompositeSingletonGameConfiguration : IGetKeyGameConfiguration
 {
     /// <summary>

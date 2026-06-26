@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GridTileEffects;
 
-[Serializable]
 internal class LoseConGridTileScript : GridTileScript
 {
     private LoseConGridTileScript(Game game) : base(game) { }

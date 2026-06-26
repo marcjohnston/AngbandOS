@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SlimeMoldScript : Script, IEatOrQuaffScript
 {
     private SlimeMoldScript(Game game) : base(game) { }

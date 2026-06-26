@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class HoldMonsterSpellOnPlayerScript : Script, IScriptMonster
 {
     private HoldMonsterSpellOnPlayerScript(Game game) : base(game) { }

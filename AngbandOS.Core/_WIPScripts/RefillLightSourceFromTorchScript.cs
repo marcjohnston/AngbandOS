@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Refill a torch from another torch.
 /// </summary>
-[Serializable]
 internal class RefillLightSourceFromTorchScript : Script, IScriptItem
 {
     private RefillLightSourceFromTorchScript(Game game) : base(game) { }

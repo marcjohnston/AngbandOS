@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Functions;
 /// <summary>
 /// Represents a boolean value function that returns true, when the experience level of the player has reached the maximum attainable level for the game; false, otherwise.
 /// </summary>
-[Serializable]
 internal class ExperienceLevelAtMaxBoolFunction : BoolFunction
 {
     private ExperienceLevelAtMaxBoolFunction(Game game) : base(game) { }

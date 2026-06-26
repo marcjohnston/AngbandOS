@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.PlayerEffects;
 
-[Serializable]
 internal class NetherPlayerEffect : PlayerEffectUniversalScript
 {
     private NetherPlayerEffect(Game game) : base(game) { }

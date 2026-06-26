@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SayFeelingScript : UniversalScript, IGetKey
 {
     private SayFeelingScript(Game game) : base(game) { }

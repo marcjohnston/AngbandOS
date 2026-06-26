@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class SmellMetMutationScript : UniversalScript, IGetKey
 {
     private SmellMetMutationScript(Game game) : base(game) { }

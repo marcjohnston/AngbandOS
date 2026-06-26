@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SlowDartScript : Script, IScript, ICastSpellScript
 {
     private SlowDartScript(Game game) : base(game) { }

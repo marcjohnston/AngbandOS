@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.AttackEffects;
 
-[Serializable]
 internal class DrainWandChargesAttackEffect : AttackEffect
 {
     private DrainWandChargesAttackEffect(Game game) : base(game) { }

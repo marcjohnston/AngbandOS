@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SummonFriendlyUndead2In3Script : Script, IActivateItemScript
 {
     private SummonFriendlyUndead2In3Script(Game game) : base(game) { }

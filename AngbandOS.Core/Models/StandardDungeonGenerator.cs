@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class StandardDungeonGenerator : DungeonGenerator
 {
     private const int MaximumNumberOfRooms = 100; // This is the maximum number of rooms that can be tracked when a dungeon is generated.  Any rooms generated beyond this count are not tracked as a room.

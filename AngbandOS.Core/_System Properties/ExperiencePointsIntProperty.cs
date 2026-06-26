@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Properties;
 /// <summary>
 /// Represents an integer property of the players experience points.
 /// </summary>
-[Serializable]
 internal class ExperiencePointsIntProperty : IntProperty
 {
     private ExperiencePointsIntProperty(Game game) : base(game) { }

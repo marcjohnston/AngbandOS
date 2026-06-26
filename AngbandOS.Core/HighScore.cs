@@ -7,7 +7,6 @@
 
 //namespace AngbandOS
 //{
-//    [Serializable]
 //    internal class HighScore
 //    {
 //        public readonly string How;

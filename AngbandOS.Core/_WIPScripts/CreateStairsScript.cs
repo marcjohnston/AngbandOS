@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class CreateStairsScript : Script, IScript, ICastSpellScript
 {
     private CreateStairsScript(Game game) : base(game) { }

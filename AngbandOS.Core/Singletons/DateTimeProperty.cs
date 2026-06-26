@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Properties;
 
-[Serializable]
 internal abstract class DateTimeProperty : Property, IDateAndTimeValue
 {
     protected DateTimeProperty(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class BrowseScript : UniversalScript, IGetKey
 {
     private BrowseScript(Game game) : base(game) { }

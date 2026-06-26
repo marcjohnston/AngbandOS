@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SuperheroismAndBlessing50p1d50Script : Script, IActivateItemScript
 {
     private SuperheroismAndBlessing50p1d50Script(Game game) : base(game) { }

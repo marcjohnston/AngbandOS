@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class InvokeChaosScript : Script, IScript, ICastSpellScript
 {
     private InvokeChaosScript(Game game) : base(game) { }

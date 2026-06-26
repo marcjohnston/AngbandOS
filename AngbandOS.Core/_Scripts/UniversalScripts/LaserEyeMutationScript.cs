@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class LaserEyeMutationScript : UniversalScript, IGetKey
 {
     private LaserEyeMutationScript(Game game) : base(game) { }

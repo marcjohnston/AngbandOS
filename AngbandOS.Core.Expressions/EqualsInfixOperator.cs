@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class EqualsInfixOperator : InfixOperator
 {
     public override string OperatorSymbol => "==";

@@ -8,7 +8,6 @@ using System.Drawing;
 
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class Town : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

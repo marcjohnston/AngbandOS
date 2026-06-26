@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// A dungeon that the player can explore
 /// </summary>
-[Serializable]
 internal sealed class Dungeon : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

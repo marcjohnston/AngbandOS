@@ -117,7 +117,7 @@
           <mat-row *matRowDef="let savedGame; columns: savedGamesDisplayedColumns" [ngClass]="{'highlight': savedGame === selectedSavedGame}"></mat-row>
         </mat-table>
       </ng-container>
-      <ng-container *ngIf="availableGames.gameRecoveries !== undefined">
+      <ng-container *ngIf="availableGames.gameRecoveries !== undefined && availableGames.gameRecoveries.length > 0">
         <div id="header">
           <div class="header-title">Recoverable Games</div>
         </div>

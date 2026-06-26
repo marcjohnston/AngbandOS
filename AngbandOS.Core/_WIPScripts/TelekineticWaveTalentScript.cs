@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class TelekineticWaveTalentScript : UniversalScript, IGetKey
 {
     private TelekineticWaveTalentScript(Game game) : base(game) { }

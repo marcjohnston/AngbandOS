@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ToggleRecallScript : Script, IScript, ICastSpellScript, IActivateItemScript
 {
     private ToggleRecallScript(Game game) : base(game) { }

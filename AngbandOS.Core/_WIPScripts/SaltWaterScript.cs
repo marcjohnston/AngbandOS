@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SaltWaterScript : Script, IEatOrQuaffScript
 {
     private SaltWaterScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.BirthStages;
 
-[Serializable]
 internal class ConfirmationBirthStage : BirthStage
 {
     private ConfirmationBirthStage(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class EatHallucinationsScript : Script, IEatOrQuaffScript
 {
     private EatHallucinationsScript(Game game) : base(game) { }

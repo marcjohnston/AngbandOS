@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class ScriptMonsterSpellGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual (string, string) KnowledgeAction { get; set; }

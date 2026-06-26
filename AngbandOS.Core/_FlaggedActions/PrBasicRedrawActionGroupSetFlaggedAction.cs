@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.FlaggedActions;
 
-[Serializable]
 internal class PrBasicRedrawActionGroupSetFlaggedAction : GroupSetFlaggedAction
 {
     protected override FlaggedAction[] RedrawActions => new FlaggedAction[]

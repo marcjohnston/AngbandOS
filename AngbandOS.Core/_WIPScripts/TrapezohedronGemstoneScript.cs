@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class TrapezohedronGemstoneScript : Script, IActivateItemScript
 {
     private TrapezohedronGemstoneScript(Game game) : base(game) { }

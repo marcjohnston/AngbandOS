@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class IllegibleItemFlavor : Flavor
 {
     public override Symbol Symbol { get; protected set; }

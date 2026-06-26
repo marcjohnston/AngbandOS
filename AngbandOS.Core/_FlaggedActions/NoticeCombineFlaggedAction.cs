@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.FlaggedActions;
 
-[Serializable]
 internal class NoticeCombineFlaggedAction : FlaggedAction
 {
     private NoticeCombineFlaggedAction(Game game) : base(game) { }

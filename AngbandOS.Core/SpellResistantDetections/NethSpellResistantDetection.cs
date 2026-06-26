@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.SpellResistantDetections;
 
-[Serializable]
 internal class NethSpellResistantDetection : SpellResistantDetection
 {
     private NethSpellResistantDetection(Game game) : base(game) { }

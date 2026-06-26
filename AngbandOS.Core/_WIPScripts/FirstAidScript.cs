@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class FirstAidScript : Script, IScript, ICastSpellScript
 {
     private FirstAidScript(Game game) : base(game) { }

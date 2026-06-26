@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RestInRoomScript : Script, IScript, ICastSpellScript
 {
     private RestInRoomScript(Game game) : base(game) { }

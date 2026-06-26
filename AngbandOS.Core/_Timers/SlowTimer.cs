@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Timers;
 
-[Serializable]
 internal class SlowTimer : Timer
 {
     private SlowTimer(Game game) : base(game) { }

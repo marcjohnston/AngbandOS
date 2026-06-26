@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 internal class MonsterHealthExpression : IdentifierExpression
 {
     public MonsterHealthExpression(string matchedIdentifier) : base(matchedIdentifier) { }

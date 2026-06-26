@@ -1,7 +1,6 @@
 namespace AngbandOS.Core.Scripts;
 
 // Tcho-Tcho can create The Yellow Sign
-[Serializable]
 internal class TchoTchoRacialPowerScript : Script, IScript
 {
     private TchoTchoRacialPowerScript(Game game) : base(game) { }

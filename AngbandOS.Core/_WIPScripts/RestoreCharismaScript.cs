@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RestoreCharismaScript : Script, IEatOrQuaffScript
 {
     private RestoreCharismaScript(Game game) : base(game) { }

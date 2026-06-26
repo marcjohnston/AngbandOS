@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.MonsterFilters;
 
-[Serializable]
 internal class DemonMonsterFilter : MonsterFilter
 {
     private DemonMonsterFilter(Game game) : base(game) { } // This object is a singleton.

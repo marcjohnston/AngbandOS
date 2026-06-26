@@ -8,7 +8,6 @@
 using System;
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class StarlightScript : Script, IReadScrollOrUseStaffScript
 {
     private StarlightScript(Game game) : base(game) { }

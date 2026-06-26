@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RemoveFearAndPoisonScript : Script, IActivateItemScript
 {
     private RemoveFearAndPoisonScript(Game game) : base(game) { }

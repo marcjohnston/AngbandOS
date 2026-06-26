@@ -11,7 +11,6 @@ namespace AngbandOS.Core.Functions;
 /// Represents a boolean function that returns true, when the player is tracking a monster and that monster is not visible; false, otherwise.  This function has no dependencies
 /// and will evaluate everytime it is referenced.
 /// </summary>
-[Serializable]
 internal class PlayerIsHallucinatingBoolFunction : BoolFunction
 {
     private PlayerIsHallucinatingBoolFunction(Game game) : base(game) { } // This object is a singleton.

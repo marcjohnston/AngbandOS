@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GridTileEffects;
 
-[Serializable]
 internal class PoisonGridTileScript : GridTileScript
 {
     private PoisonGridTileScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class GoodSoftArmorEnchantmentScript : Script, IEnhancementScript
 {
     private GoodSoftArmorEnchantmentScript(Game game) : base(game) { }

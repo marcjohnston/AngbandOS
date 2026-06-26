@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MageChaosBoltScript : Script, IScript, ICastSpellScript
 {
     private MageChaosBoltScript(Game game) : base(game) { }

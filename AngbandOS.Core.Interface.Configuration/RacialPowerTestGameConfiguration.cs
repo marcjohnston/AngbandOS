@@ -1,7 +1,6 @@
 ﻿
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class RacialPowerTestGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual int MinLevel { get; set; }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.Core.FixedArtifacts;
 
-[Serializable]
 internal class SetOfGauntletsOfGhoulsFixedArtifact : FixedArtifact
 {
     private SetOfGauntletsOfGhoulsFixedArtifact(Game game) : base(game) { }

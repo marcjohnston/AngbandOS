@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SpikedPitScript : Script, IScript, ICastSpellScript
 {
     private SpikedPitScript(Game game) : base(game) { }

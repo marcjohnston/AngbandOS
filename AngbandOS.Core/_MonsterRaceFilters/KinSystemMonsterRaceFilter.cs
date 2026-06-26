@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.MonsterRaceFilters;
 
-[Serializable]
 internal class KinSystemMonsterRaceFilter : MonsterRaceFilter
 {
     private char _summonKinType;

@@ -1,7 +1,6 @@
 namespace AngbandOS.Core.Scripts;
 
 // Skeletons and zombies can restore their life energy
-[Serializable]
 internal class ZombieRacialPowerScript : Script, IScript
 {
     private ZombieRacialPowerScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class HorrificVisageScript : Script, IScript, ICastSpellScript
 {
     private HorrificVisageScript(Game game) : base(game) { }

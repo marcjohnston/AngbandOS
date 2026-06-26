@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ExitStoreScript : Script, IStoreCommandScript
 {
     private ExitStoreScript(Game game) : base(game) { }

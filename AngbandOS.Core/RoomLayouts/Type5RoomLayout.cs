@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.RoomLayouts;
 
-[Serializable]
 internal class Type5RoomLayout : RoomLayout
 {
     private Type5RoomLayout(Game game) : base(game) { }

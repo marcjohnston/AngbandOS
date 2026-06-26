@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class PanicHitMutationScript : UniversalScript, IGetKey
 {
     private PanicHitMutationScript(Game game) : base(game) { }

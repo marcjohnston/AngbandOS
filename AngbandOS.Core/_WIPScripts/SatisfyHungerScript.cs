@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SatisfyHungerScript : Script, IScript, ICastSpellScript
 {
     private SatisfyHungerScript(Game game) : base(game) { }

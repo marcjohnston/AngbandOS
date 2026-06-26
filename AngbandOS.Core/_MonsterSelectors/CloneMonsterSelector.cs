@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.MonsterSelectors;
 
-[Serializable]
 internal class CloneMonsterSelector : MonsterSelector
 {
     private CloneMonsterSelector(Game game) : base(game) { }

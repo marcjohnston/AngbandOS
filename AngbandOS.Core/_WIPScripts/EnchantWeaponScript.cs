@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class EnchantWeaponScript : Script, IScript, ICastSpellScript
 {
     private EnchantWeaponScript(Game game) : base(game) { }

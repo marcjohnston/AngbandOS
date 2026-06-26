@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class IllumineMutationScript : UniversalScript, IGetKey
 {
     private IllumineMutationScript(Game game) : base(game) { }

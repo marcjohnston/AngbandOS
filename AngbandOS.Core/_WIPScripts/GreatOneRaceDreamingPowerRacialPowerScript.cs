@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class GreatOneRaceDreamingPowerRacialPowerScript : Script, IScript
 {
     private GreatOneRaceDreamingPowerRacialPowerScript(Game game) : base(game) { }

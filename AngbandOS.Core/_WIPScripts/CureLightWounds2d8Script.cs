@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class CureLightWounds2d8Script : Script, IScript, ICastSpellScript, IEatOrQuaffScript
 {
     private CureLightWounds2d8Script(Game game) : base(game) { }

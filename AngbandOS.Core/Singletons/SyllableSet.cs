@@ -8,7 +8,6 @@ using System.Xml.Linq;
 
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class SyllableSet : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

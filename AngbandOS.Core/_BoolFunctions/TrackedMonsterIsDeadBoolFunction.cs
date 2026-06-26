@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Functions;
 /// <summary>
 /// Represents a boolean function that returns true, when the player is tracking a monster and the monster is dead; false, otherwise.
 /// </summary>
-[Serializable]
 internal class TrackedMonsterIsDeadBoolFunction : BoolFunction
 {
     private TrackedMonsterIsDeadBoolFunction(Game game) : base(game) { } // This object is a singleton.

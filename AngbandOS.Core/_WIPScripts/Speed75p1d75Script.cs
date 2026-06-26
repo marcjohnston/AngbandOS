@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class Speed75p1d75Script : Script, IActivateItemScript
 {
     private Speed75p1d75Script(Game game) : base(game) { }

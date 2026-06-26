@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class BrandWeaponWithAstraScript : Script, IScript, ICastSpellScript
 {
     private BrandWeaponWithAstraScript(Game game) : base(game) { }

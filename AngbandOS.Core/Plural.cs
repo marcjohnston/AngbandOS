@@ -1,6 +1,5 @@
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class Plural : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

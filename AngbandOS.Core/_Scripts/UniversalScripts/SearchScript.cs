@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Search around the player for secret doors and traps
 /// </summary>
-[Serializable]
 internal class SearchScript : UniversalScript, IGetKey
 {
     private SearchScript(Game game) : base(game) { }

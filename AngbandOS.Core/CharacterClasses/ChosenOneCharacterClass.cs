@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.CharacterClasses;
 
-[Serializable]
 internal class ChosenOneCharacterClass : CharacterClass
 {
     private ChosenOneCharacterClass(Game savedGame) : base(savedGame) { }

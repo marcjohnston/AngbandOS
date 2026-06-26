@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class ProjectileScriptWeightedRandom : WeightedRandom<ProjectileScript>, IGetKey, IUniversalScript, IToJson, IGameSerialize
 {
     public ProjectileScriptWeightedRandom(Game game, ProjectileScriptWeightedRandomGameConfiguration gameConfiguration) : base(game)

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.AttackEffects;
 
-[Serializable]
 internal class DisenchantAttackEffect : AttackEffect
 {
     private DisenchantAttackEffect(Game game) : base(game) { }

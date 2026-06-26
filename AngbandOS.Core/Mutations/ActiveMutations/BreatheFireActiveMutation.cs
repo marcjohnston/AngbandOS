@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-[Serializable]
 internal class BreatheFireActiveMutation : Mutation
 {
     private BreatheFireActiveMutation(Game game) : base(game) { }

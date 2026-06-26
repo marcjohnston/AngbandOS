@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ManaStormScript : Script, IScript, ICastSpellScript
 {
     private ManaStormScript(Game game) : base(game) { }

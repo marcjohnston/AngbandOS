@@ -1,7 +1,6 @@
 ﻿using System.Windows.Markup;
 namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class ParenthesisFactorParser : FactorParser
 {
 

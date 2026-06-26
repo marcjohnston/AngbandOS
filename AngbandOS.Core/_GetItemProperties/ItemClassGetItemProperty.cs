@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GetItemProperties;
 
-[Serializable]
 internal class ItemClassGetItemProperty : GetItemProperty<ItemClass>
 {
     public ItemClassGetItemProperty(Game game) : base(game) { }

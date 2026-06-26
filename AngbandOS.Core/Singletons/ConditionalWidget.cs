@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class ConditionalWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
     public ConditionalWidget(Game game, ConditionalWidgetGameConfiguration gameConfiguration) : base(game)

@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class Symbol : IGetKey, IToJson, IGameSerialize
 {
     //private Game Game { get; }

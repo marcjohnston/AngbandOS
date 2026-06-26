@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class CallTheVoidScript : Script, IScript, ICastSpellScript
 {
     private CallTheVoidScript(Game game) : base(game) { }

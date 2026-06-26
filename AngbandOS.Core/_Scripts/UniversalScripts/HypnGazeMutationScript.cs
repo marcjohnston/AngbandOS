@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class HypnGazeMutationScript : UniversalScript, IGetKey
 {
     private HypnGazeMutationScript(Game game) : base(game) { }

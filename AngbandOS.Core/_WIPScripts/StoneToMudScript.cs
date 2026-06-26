@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class StoneToMudScript : Script, IScript, ICastSpellScript
 {
     private StoneToMudScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class PsychicDrainTalentScript : UniversalScript, IGetKey
 {
     private PsychicDrainTalentScript(Game game) : base(game) { }

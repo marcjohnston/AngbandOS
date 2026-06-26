@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class WildChaoticMagicScript : Script, ICastSpellScript
 {
     private WildChaoticMagicScript(Game game) : base(game) { }

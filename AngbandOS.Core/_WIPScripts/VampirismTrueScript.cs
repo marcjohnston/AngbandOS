@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class VampirismTrueScript : Script, IScript, ICastSpellScript
 {
     private VampirismTrueScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class PoisonGasScript : Script, IScript, ICastSpellScript
 {
     private PoisonGasScript(Game game) : base(game) { }

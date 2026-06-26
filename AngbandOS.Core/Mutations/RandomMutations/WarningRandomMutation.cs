@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.RandomMutations;
 
-[Serializable]
 internal class WarningRandomMutation : Mutation
 {
     private WarningRandomMutation(Game game) : base(game) { }

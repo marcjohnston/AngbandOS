@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RestInPlaceScript : GameCommandUniversalScript, IGetKey
 {
     private RestInPlaceScript(Game game) : base(game) { }

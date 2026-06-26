@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ClairvoyanceScript : Script, IScript, ICastSpellScript
 {
     private ClairvoyanceScript(Game game) : base(game) { }

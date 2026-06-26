@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// Represents a set of item characteristics that can be merged with another other IItemCharacterstics.  These objects are used by <see cref="RareItem"/> objects and the random 
 /// artifact creation process.
 /// </summary>
-[Serializable]
 public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings { get; set; } = null;

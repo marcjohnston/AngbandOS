@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DarkScript : Script, IScript, ICastSpellScript
 {
     private DarkScript(Game game) : base(game) { }

@@ -1,7 +1,6 @@
 ﻿
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class RaceAbilityGameConfiguration : CompositeSingletonGameConfiguration
 {
     public sealed override string?[] CompositeKeys => new string?[] { RaceBindingKey, AbilityBindingKey }; // CONFIRMED

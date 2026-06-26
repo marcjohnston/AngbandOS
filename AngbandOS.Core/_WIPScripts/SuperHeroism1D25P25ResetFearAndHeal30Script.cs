@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SuperHeroism1D25P25ResetFearAndHeal30Script : Script, IEatOrQuaffScript, IScript, ICastSpellScript
 {
     private SuperHeroism1D25P25ResetFearAndHeal30Script(Game game) : base(game) { }

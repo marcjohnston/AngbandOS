@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class TeleportAwayMonsterSpellOnMonsterScript : Script, IScriptMonsterMonster
 {
     private TeleportAwayMonsterSpellOnMonsterScript(Game game) : base(game) { }

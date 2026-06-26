@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 internal class DifficultyIdentifierExpression : IdentifierExpression
 {
     public DifficultyIdentifierExpression(string matchedIdentifier) : base(matchedIdentifier) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Properties;
 
-[Serializable]
 internal abstract class NullableIntProperty : Property, INullIntValue
 {
     private NullableIntProperty(Game game) : base(game) { }

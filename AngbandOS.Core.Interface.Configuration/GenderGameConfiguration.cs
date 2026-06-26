@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class GenderGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string Title { get; set; }

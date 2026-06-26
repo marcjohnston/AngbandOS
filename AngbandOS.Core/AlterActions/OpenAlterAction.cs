@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.AlterActions;
 
-[Serializable]
 internal class OpenAlterAction : AlterAction
 {
     private OpenAlterAction(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.ItemActions;
 
-[Serializable]
 internal class GainExperienceForHighLevelSpellBookDestroyedItemAction : ItemAction
 {
     private GainExperienceForHighLevelSpellBookDestroyedItemAction(Game game) : base(game) { } // This object is a singleton.

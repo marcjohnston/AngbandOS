@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GetItemProperties;
 
-[Serializable]
 internal class CanBeQuaffedBooleanGetItemProperty : GetItemProperty<bool>
 {
     public CanBeQuaffedBooleanGetItemProperty(Game game) : base(game) { }

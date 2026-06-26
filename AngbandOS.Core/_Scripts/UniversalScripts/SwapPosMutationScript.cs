@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class SwapPosMutationScript : UniversalScript, IGetKey
 {
     private SwapPosMutationScript(Game game) : base(game) { }

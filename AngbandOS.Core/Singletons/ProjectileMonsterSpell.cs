@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a monster spell that fires a projectile without any radius.  Default messages are provided.
 /// </summary>
-[Serializable]
 internal sealed class ProjectileMonsterSpell : MonsterSpell
 {
     public ProjectileMonsterSpell(Game game, ProjectileMonsterSpellGameConfiguration gameConfiguration) : base(game)

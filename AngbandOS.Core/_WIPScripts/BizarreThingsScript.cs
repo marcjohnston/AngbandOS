@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class BizarreThingsScript : Script, IActivateItemScript
 {
     private BizarreThingsScript(Game game) : base(game) { }

@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class MonsterRaceFilterGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string[]? AnySymbolBindingKeys => null;

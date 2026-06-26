@@ -10,7 +10,6 @@ namespace AngbandOS.Core;
 /// Represents an instance of an item.  This item object is universally capable of being any type of object in the game but it also has a
 /// single parent (or factory) that controls what type of object the item is.
 /// </summary>
-[Serializable]
 internal sealed class Item : IComparable<Item>, IGameSerialize
 {
     public GameStateBag? Serialize(SaveGameState saveGameState)

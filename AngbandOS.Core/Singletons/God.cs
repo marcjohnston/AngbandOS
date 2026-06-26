@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class God : IGetKey, IToJson, IGameSerialize
 {
     #region State Data

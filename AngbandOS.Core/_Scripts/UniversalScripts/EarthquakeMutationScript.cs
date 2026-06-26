@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class EarthquakeMutationScript : UniversalScript, IGetKey
 {
     private EarthquakeMutationScript(Game game) : base(game) { }

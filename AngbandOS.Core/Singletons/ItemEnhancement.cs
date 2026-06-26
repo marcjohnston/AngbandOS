@@ -10,7 +10,6 @@ namespace AngbandOS.Core;
 /// Represents a set of non-deterministic item characteristics that can be merged with another other IItemCharacterstics.  These objects are used by <see cref="RareItem"/> objects and the random 
 /// artifact creation process.
 /// </summary>
-[Serializable]
 internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGameSerialize
 {
     #region Constructors

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.PassiveMutations;
 
-[Serializable]
 internal class XtraEyesPassiveMutation : Mutation
 {
     private XtraEyesPassiveMutation(Game game) : base(game) { }

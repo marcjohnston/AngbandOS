@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class CurseWeaponIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private CurseWeaponIdentifableAndUsedScript(Game game) : base(game) { }

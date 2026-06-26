@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.PlayerEffects;
 
-[Serializable]
 internal class OldHealPlayerEffect : PlayerEffectUniversalScript
 {
     private OldHealPlayerEffect(Game game) : base(game) { }

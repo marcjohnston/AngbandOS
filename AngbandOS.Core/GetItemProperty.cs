@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal abstract class GetItemProperty<T> : IDebugDescription
 {
     protected Game Game { get; }

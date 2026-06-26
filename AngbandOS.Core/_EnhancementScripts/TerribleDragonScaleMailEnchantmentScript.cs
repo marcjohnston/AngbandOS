@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class TerribleDragonScaleMailEnchantmentScript : Script, IEnhancementScript
 {
     private TerribleDragonScaleMailEnchantmentScript(Game game) : base(game) { }

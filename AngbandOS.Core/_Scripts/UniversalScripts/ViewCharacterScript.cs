@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ViewCharacterScript : UniversalScript, IGetKey
 {
     private ViewCharacterScript(Game game) : base(game) { }

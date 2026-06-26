@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class LightScript : Script, IScript, ICastSpellScript
 {
     private LightScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class NeuralBlastTalentScript : UniversalScript, IGetKey
 {
     private NeuralBlastTalentScript(Game game) : base(game) { }

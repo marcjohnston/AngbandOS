@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Rewards;
 
-[Serializable]
 internal class HurtLotReward : Reward
 {
     private HurtLotReward(Game game) : base(game) { }

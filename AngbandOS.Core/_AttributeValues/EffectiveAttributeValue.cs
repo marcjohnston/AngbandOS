@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents an effective attribute value with derived classes that implement various algorithms for combining multiple modifiers into a single effective value.
 /// </summary>
-[Serializable]
 internal abstract class EffectiveAttributeValue : AttributeValue
 {
     #region State Date

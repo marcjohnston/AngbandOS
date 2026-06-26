@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class EsoteriaScript : Script, IScript, ICastSpellScript
 {
     private EsoteriaScript(Game game) : base(game) { }

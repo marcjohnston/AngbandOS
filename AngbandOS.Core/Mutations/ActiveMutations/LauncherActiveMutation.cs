@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-[Serializable]
 internal class LauncherActiveMutation : Mutation
 {
     private LauncherActiveMutation(Game game) : base(game) { }

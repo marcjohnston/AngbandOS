@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Activate the special feature of an item.
 /// </summary>
-[Serializable]
 internal class ActivateScript : UniversalScript, IGetKey
 {
     private ActivateScript(Game game) : base(game) { }

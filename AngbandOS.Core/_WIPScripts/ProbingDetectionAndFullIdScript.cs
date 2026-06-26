@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ProbingDetectionAndFullIdScript : UsedResultUniversalScript, IGetKey
 {
     private ProbingDetectionAndFullIdScript(Game game) : base(game) { }

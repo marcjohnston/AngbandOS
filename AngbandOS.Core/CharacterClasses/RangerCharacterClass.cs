@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.CharacterClasses;
 
-[Serializable]
 internal class RangerCharacterClass : CharacterClass
 {
     private RangerCharacterClass(Game savedGame) : base(savedGame) { }

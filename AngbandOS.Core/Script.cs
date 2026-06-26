@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal abstract class Script : IGetKey, IGameSerialize
 {
     protected Game Game { get; }

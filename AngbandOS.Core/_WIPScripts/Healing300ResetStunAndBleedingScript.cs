@@ -8,7 +8,6 @@
 using System;
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class Healing300ResetStunAndBleedingScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
 {
     private Healing300ResetStunAndBleedingScript(Game game) : base(game) { }

@@ -11,7 +11,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a window (or screen) that is rendered to the UI.  This window will consist of the width and height.  A layout needs to conform to the window.
 /// </summary>
-[Serializable]
 internal class Window : IGameSerialize
 {
     #region State Data
@@ -83,7 +82,6 @@ internal class Window : IGameSerialize
     /// </summary>
     public GridCoordinate CursorPosition => new GridCoordinate(ActiveScreen.Cx, ActiveScreen.Cy);
 
-    [NonSerialized]
     private IConsoleAndViewPort? _consoleViewPort = null;
 
     /// <summary>

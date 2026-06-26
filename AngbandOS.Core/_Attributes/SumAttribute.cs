@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class SumAttribute : Attribute, IToJson
 {
     public SumAttribute(Game game, SumAttributeGameConfiguration gameConfiguration) : base(game) // This object is a singleton

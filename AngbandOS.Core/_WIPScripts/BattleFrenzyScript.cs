@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class BattleFrenzyScript : Script, IScript, ICastSpellScript
 {
     private BattleFrenzyScript(Game game) : base(game) { }

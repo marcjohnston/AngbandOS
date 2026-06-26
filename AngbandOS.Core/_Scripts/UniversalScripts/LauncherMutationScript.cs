@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class LauncherMutationScript : UniversalScript, IGetKey
 {
     private LauncherMutationScript(Game game) : base(game) { }

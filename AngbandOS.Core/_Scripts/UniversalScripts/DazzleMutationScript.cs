@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class DazzleMutationScript : UniversalScript, IGetKey
 {
     private DazzleMutationScript(Game game) : base(game) { }

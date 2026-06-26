@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a buffer of screen data.  This buffer is used for the screen contents and the double buffer to emit to the console.
 /// </summary>
-[Serializable]
 internal class ScreenBuffer : IGameSerialize
 {
     #region State Data

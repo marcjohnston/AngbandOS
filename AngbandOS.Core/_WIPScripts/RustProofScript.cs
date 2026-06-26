@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RustProofScript : Script, IScript, ICastSpellScript
 {
     private RustProofScript(Game game) : base(game) { }

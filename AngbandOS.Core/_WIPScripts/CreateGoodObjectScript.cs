@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class CreateGoodObjectScript : Script, IScript, ICastSpellScript
 {
     private CreateGoodObjectScript(Game game) : base(game) { }

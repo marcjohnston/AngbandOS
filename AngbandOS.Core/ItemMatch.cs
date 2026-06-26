@@ -10,7 +10,6 @@ namespace AngbandOS.Core;
 /// Represents an object that compares an item with some matching criteria.  The <see cref="ItemFilter"/> objects bind using these <see cref="ItemMatch"/> objects to perform run-time item
 /// matching without needing to compare all of the properties of a complete <see cref="ItemFilter"/> object.
 /// </summary>
-[Serializable]
 internal abstract class ItemMatch : IDebugDescription
 {
     protected Game Game { get; }

@@ -12,7 +12,6 @@ namespace AngbandOS.Core.Properties;
 /// <remarks>
 /// This object has dual restore options.
 /// </remarks>
-[Serializable]
 internal abstract class Property : IGetKey, IChangeTracker, IGameSerialize
 {
     protected Game Game { get; }

@@ -3,7 +3,6 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Retrieves a <see cref="RacePower"/> associated to the current race and character class of the player, performs a racial power test and 
 /// </summary>
-[Serializable]
 internal class UseRacialPowerScript : Script, IScript
 {
     private UseRacialPowerScript(Game game) : base(game) { }

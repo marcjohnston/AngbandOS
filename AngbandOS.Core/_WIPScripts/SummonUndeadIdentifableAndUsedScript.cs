@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SummonUndeadIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private SummonUndeadIdentifableAndUsedScript(Game game) : base(game) { }

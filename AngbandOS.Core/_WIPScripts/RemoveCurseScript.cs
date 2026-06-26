@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RemoveCurseScript : Script, IScript, ICastSpellScript, IStoreCommandScript, IEatOrQuaffScript, IReadScrollOrUseStaffScript
 {
     private RemoveCurseScript(Game game) : base(game) { }

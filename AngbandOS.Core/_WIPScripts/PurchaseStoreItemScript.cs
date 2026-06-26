@@ -8,7 +8,6 @@
 using static System.Formats.Asn1.AsnWriter;
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class PurchaseStoreItemScript : Script, IStoreCommandScript
 {
     private PurchaseStoreItemScript(Game game) : base(game) { }

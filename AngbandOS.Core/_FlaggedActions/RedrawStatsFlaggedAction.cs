@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.FlaggedActions;
 
-[Serializable]
 internal class RedrawStatsFlaggedAction : FlaggedAction
 {
     private const int RowStat = 15;

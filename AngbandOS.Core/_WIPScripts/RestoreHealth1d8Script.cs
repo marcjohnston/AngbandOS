@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RestoreHealth1d8Script : Script, IReadScrollOrUseStaffScript
 {
     private RestoreHealth1d8Script(Game game) : base(game) { }

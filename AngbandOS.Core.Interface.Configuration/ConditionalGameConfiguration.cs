@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class ConditionalGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual (string conditionalName, bool valueConditionalMustBe, int productOfSumsTerm)[] EnabledNames { get; set; }

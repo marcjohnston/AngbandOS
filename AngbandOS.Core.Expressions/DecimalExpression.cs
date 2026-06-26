@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class DecimalExpression : Expression
 {
     public readonly double Value;

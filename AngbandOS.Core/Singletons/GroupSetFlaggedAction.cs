@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.FlaggedActions;
 
-[Serializable]
 internal abstract class GroupSetFlaggedAction : FlaggedAction
 {
     protected abstract FlaggedAction[] RedrawActions { get; }

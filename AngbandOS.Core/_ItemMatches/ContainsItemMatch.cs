@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.ItemMatches;
 
-[Serializable]
 internal class ContainsItemMatch<T> : ItemMatch
 {
     public T[] Strings { get; }

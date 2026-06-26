@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ConstitutionDartScript : Script, IScript, ICastSpellScript
 {
     private ConstitutionDartScript(Game game) : base(game) { }

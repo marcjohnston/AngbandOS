@@ -10,7 +10,6 @@ namespace AngbandOS.Core;
 /// Represents an on-screen widget that renders game data.  Widgets are invalidated when they need to be updated.  The Update method determines whether or not the widget
 /// needs to be updated and the Paint method is used to actually draw the widget.  
 /// </summary>
-[Serializable]
 internal abstract class Widget
 {
     protected Game Game { get; }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class CharismaAbility : Ability
 {
     private CharismaAbility(Game game) : base(game) { } // This object is a singleton

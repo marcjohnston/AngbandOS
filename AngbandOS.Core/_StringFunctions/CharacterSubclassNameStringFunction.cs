@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-[Serializable]
 internal class CharacterSubclassNameStringFunction : StringFunction
 {
     private CharacterSubclassNameStringFunction(Game game) : base(game) { } // This object is a singleton.

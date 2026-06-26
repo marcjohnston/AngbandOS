@@ -8,7 +8,6 @@
 using System.Reflection.PortableExecutable;
 namespace AngbandOS.Core.ArtifactBiases;
 
-[Serializable]
 internal class RangerArtifactBias : ArtifactBias
 {
     private RangerArtifactBias(Game game) : base(game) { }

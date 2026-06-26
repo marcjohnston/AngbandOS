@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.RaceGenders;
 
-[Serializable]
 internal sealed class RaceGender : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

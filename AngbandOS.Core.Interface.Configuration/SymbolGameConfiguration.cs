@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class SymbolGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual char Character { get; set; }

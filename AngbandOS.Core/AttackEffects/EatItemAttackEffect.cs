@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.AttackEffects;
 
-[Serializable]
 internal class EatItemAttackEffect : AttackEffect
 {
     private EatItemAttackEffect(Game game) : base(game) { }

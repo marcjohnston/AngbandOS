@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a singleton for a weighted random of <see cref="Activation"/> objects.
 /// </summary>
-[Serializable]
 internal abstract class ActivationWeightedRandom : WeightedRandom<Activation>, IGetKey, IGameSerialize
 {
     public ActivationWeightedRandom(Game game) : base(game) { }

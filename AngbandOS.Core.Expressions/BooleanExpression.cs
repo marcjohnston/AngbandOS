@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class BooleanExpression : Expression
 {
     public readonly bool Value;

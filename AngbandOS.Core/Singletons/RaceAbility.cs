@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class RaceAbility : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

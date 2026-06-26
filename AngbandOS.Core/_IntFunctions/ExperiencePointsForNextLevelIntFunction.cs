@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Functions;
 /// <summary>
 /// Represents an integer function that returns the amount of experience points that the player needs to gain to advance to the next experience level.
 /// </summary>
-[Serializable]
 internal class ExperiencePointsForNextLevelIntFunction : IntFunction
 {
     private ExperiencePointsForNextLevelIntFunction(Game game) : base(game) { } // This object is a singleton.

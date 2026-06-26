@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class BrandBoltsScript : Script, IScript, ICastSpellScript, IActivateItemScript
 {
     private BrandBoltsScript(Game game) : base(game) { }

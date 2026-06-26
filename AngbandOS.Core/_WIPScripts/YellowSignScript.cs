@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class YellowSignScript : Script, IScript, ICastSpellScript, IActivateItemScript
 {
     private YellowSignScript(Game game) : base(game) { }

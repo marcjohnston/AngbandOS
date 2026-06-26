@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GetItemProperties;
 
-[Serializable]
 internal class IsUsableSpellBookBooleanGetItemProperty : GetItemProperty<bool>
 {
     public IsUsableSpellBookBooleanGetItemProperty(Game game) : base(game) { }

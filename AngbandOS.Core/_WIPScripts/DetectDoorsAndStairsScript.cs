@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DetectDoorsAndStairsScript : Script, IZapRodScript, IReadScrollOrUseStaffScript
 {
     private DetectDoorsAndStairsScript(Game game) : base(game) { }

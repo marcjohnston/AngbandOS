@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
 {
     public TimerScript(Game game, TimerScriptGameConfiguration gameConfiguration) : base(game)

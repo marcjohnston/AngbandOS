@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class TileGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual bool IsEarthquakeResistant { get; set; } = false;

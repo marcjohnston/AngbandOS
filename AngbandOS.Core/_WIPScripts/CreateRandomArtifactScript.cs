@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class CreateRandomArtifactScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
 {
     private CreateRandomArtifactScript(Game game) : base(game) { }

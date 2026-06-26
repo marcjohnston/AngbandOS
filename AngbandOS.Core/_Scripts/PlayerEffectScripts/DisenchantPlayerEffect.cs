@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.PlayerEffects;
 
-[Serializable]
 internal class DisenchantPlayerEffect : PlayerEffectUniversalScript
 {
     private DisenchantPlayerEffect(Game game) : base(game) { }

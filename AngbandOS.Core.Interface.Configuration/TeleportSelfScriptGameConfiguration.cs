@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class TeleportSelfScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string DistanceExpression { get; set; } = "10";

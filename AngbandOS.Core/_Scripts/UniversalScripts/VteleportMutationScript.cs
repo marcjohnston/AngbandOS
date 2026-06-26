@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class VteleportMutationScript : UniversalScript, IGetKey
 {
     private VteleportMutationScript(Game game) : base(game) { }

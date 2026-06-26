@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.CharacterClasses;
 
-[Serializable]
 internal class CultistCharacterClass : CharacterClass
 {
     private CultistCharacterClass(Game savedGame) : base(savedGame) { }

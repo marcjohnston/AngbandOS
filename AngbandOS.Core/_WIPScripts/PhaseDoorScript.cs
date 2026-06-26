@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class PhaseDoorScript : Script, IScript, ICastSpellScript
 {
     private PhaseDoorScript(Game game) : base(game) { }

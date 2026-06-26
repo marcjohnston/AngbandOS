@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class StaffEatMagicScript : Script, IScriptItem
 {
     private StaffEatMagicScript(Game game) : base(game) { }

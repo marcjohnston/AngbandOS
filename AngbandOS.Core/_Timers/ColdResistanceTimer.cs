@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Timers;
 
-[Serializable]
 internal class ColdResistanceTimer : Timer
 {
     private ColdResistanceTimer(Game game) : base(game) { }

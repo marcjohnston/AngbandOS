@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class RealmCharacterClassGameConfiguration : CompositeSingletonGameConfiguration
 {
     public sealed override string?[] CompositeKeys => new string?[] { RealmBindingKey, CharacterClassBindingKey }; // CONFIRMED

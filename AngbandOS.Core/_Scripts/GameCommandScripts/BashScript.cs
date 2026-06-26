@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Get a direction and bash a door, returning true, if the command can be repeated; false, if the command succeeds or is futile.</returns>
 /// </summary>
-[Serializable]
 internal class BashScript : GameCommandUniversalScript, IGetKey
 {
     private BashScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson, IGameSerialize
 {
     private Game Game { get; }

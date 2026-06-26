@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Functions;
 /// <summary>
 /// Represents a boolean value function that returns true when the experience level for the player has dropped below the maximum level the player has attained; false, otherwise.
 /// </summary>
-[Serializable]
 internal class ExperienceLevelsLostBoolFunction : BoolFunction
 {
     private ExperienceLevelsLostBoolFunction(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class PhantasmalServantScript : Script, IScript, ICastSpellScript
 {
     private PhantasmalServantScript(Game game) : base(game) { }

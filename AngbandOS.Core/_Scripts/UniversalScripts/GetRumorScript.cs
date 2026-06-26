@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class GetRumorScript : UniversalScript, IGetKey
 {
     private GetRumorScript(Game game) : base(game) { }

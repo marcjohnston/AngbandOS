@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.Core.FixedArtifacts;
 
-[Serializable]
 internal class MetalCapOfHolinessFixedArtifact : FixedArtifact
 {
     private MetalCapOfHolinessFixedArtifact(Game game) : base(game) { }

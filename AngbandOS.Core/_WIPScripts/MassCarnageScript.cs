@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MassCarnageScript : Script, IScriptBool, IScript, ICastSpellScript, IActivateItemScript
 {
     private MassCarnageScript(Game game) : base(game) { }

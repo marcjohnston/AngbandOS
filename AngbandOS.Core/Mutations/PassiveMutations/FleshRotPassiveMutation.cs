@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.PassiveMutations;
 
-[Serializable]
 internal class FleshRotPassiveMutation : Mutation
 {
     private FleshRotPassiveMutation(Game game) : base(game) { }

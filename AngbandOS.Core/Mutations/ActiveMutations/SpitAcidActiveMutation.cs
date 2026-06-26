@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-[Serializable]
 internal class SpitAcidActiveMutation : Mutation
 {
     private SpitAcidActiveMutation(Game game) : base(game) { }

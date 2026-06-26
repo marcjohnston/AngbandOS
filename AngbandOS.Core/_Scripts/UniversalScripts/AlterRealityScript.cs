@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class AlterRealityScript : UniversalScript, IGetKey
 {
     private AlterRealityScript(Game game) : base(game) { }

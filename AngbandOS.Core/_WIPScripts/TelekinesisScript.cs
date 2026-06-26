@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class TelekinesisScript : Script, IScript, ICastSpellScript
 {
     private TelekinesisScript(Game game) : base(game) { }

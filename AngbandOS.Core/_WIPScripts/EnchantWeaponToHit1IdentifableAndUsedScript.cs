@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class EnchantWeaponToHit1IdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private EnchantWeaponToHit1IdentifableAndUsedScript(Game game) : base(game) { }

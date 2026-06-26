@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class VaultGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual ColorEnum Color { get; set; } = ColorEnum.White;

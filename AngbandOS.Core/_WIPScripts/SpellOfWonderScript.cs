@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SpellOfWonderScript : Script, IScript, ICastSpellScript
 {
     private SpellOfWonderScript(Game game) : base(game) { }

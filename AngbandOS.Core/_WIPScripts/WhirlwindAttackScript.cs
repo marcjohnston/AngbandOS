@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class WhirlwindAttackScript : Script, IScript, ICastSpellScript
 {
     private WhirlwindAttackScript(Game game) : base(game) { }

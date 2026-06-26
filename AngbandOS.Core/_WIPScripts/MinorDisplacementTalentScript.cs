@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MinorDisplacementTalentScript : UniversalScript, IGetKey
 {
     private MinorDisplacementTalentScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Properties;
 
-[Serializable]
 internal class SpareSpellSlotsIntProperty : IntProperty
 {
     private SpareSpellSlotsIntProperty(Game game) : base(game) { }

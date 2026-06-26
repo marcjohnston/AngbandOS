@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a view (or layout) of widgets used to render the UI.  Views consist of widgets and must conform to the window.
 /// </summary>
-[Serializable]
 internal sealed class View : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

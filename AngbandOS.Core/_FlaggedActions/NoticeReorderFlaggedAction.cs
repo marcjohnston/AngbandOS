@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.FlaggedActions;
 
-[Serializable]
 internal class NoticeReorderFlaggedAction : FlaggedAction
 {
     private NoticeReorderFlaggedAction(Game game) : base(game) { }

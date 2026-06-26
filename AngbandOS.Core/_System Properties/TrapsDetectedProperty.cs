@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Properties;
 /// Represents a change tracking property that is set to true, when a GridTile.TrapsDetected property is set either true or false.  Widgets will use
 /// this property.
 /// </summary>
-[Serializable]
 internal class TrapsDetectedProperty : Property
 {
     private TrapsDetectedProperty(Game game) : base(game) { } // This object is a singleton.

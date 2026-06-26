@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SummonHordeScript : Script, IScript, ICastSpellScript
 {
     private SummonHordeScript(Game game) : base(game) { }

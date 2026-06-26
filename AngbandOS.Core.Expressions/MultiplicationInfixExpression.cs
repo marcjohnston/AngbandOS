@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class MultiplicationInfixExpression : InfixExpression
 {
     public MultiplicationInfixExpression(Expression factor1, Expression factor2) : base(factor1, factor2) { }

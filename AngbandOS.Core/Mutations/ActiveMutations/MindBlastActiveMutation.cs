@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-[Serializable]
 internal class MindBlastActiveMutation : Mutation
 {
     private MindBlastActiveMutation(Game game) : base(game) { }

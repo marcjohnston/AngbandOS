@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a singleton for a weighted random of nullable <see cref="ItemEnhancement"/> objects.  This weighted random supports null to allow a non-selection.
 /// </summary>
-[Serializable]
 internal sealed class ItemEnhancementWeightedRandom : WeightedRandom<ItemEnhancement?>, IGetKey, IToJson, IItemEnhancement, IGameSerialize
 {
     public ItemEnhancementWeightedRandom(Game game, ItemEnhancementWeightedRandomGameConfiguration gameConfiguration) : base(game)

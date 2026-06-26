@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ResetRecallScript : Script, IScript, ICastSpellScript
 {
     private ResetRecallScript(Game game) : base(game) { }

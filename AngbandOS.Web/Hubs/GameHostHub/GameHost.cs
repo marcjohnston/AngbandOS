@@ -456,8 +456,7 @@ namespace AngbandOS.Web.Hubs
             }
             catch (Exception ex)
             {
-                _consoleGameHub.SendMessage($"Game error!  {ex.Message}");
-                _consoleGameHub.GameOver();
+                _consoleGameHub.GameOver($"Game error!  {ex.Message}");
             }
         }
         #endregion

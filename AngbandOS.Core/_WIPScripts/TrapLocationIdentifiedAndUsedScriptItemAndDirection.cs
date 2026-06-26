@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class TrapLocationIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodScript
 {
     private TrapLocationIdentifiedAndUsedScriptItemAndDirection(Game game) : base(game) { }

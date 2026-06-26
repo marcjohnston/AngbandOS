@@ -7,7 +7,6 @@
 namespace AngbandOS.Core;
 
 // If it was an ankle kick and the monster has legs, slow it
-[Serializable]
 internal class SlowMartialArtsEffect : MartialArtsEffect
 {
     private SlowMartialArtsEffect(Game game) : base(game) { } // This object is a singleton

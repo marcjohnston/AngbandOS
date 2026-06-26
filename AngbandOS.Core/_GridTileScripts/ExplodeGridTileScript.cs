@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GridTileEffects;
 
-[Serializable]
 internal class ExplodeGridTileScript : GridTileScript
 {
     private ExplodeGridTileScript(Game game) : base(game) { }

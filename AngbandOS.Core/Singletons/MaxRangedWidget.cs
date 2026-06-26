@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a widget that renders a specific text value and color based on an integer value.
 /// </summary>
-[Serializable]
 internal sealed class MaxRangedWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
     #region State Data

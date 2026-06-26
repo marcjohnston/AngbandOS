@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class WordOfRecallScript : Script, IActivateItemScript
 {
     private WordOfRecallScript(Game game) : base(game) { }

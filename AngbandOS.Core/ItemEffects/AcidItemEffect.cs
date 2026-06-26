@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.ItemEffects;
 
-[Serializable]
 internal class AcidItemEffect : ItemEffect
 {
     private AcidItemEffect(Game game) : base(game) { } // This object is a singleton.

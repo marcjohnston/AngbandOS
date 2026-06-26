@@ -8,7 +8,6 @@ using System.Drawing;
 
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class Monster : IItemContainer, IGameSerialize
 {
     #region State Data

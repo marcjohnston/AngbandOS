@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.PassiveMutations;
 
-[Serializable]
 internal class ResilientPassiveMutation : Mutation
 {
     private ResilientPassiveMutation(Game game) : base(game) { }

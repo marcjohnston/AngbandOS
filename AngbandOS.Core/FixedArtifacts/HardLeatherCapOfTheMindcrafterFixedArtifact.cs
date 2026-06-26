@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.Core.FixedArtifacts;
 
-[Serializable]
 internal class HardLeatherCapOfTheMindcrafterFixedArtifact : FixedArtifact
 {
     private HardLeatherCapOfTheMindcrafterFixedArtifact(Game game) : base(game) { }

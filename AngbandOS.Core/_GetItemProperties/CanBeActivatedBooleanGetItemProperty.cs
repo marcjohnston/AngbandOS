@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GetItemProperties;
 
-[Serializable]
 internal class CanBeActivatedBooleanGetItemProperty : GetItemProperty<bool>
 {
     public CanBeActivatedBooleanGetItemProperty(Game game) : base(game) { }

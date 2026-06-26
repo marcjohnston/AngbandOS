@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-[Serializable]
 internal abstract class TextFunction : IChangeTracker, IGetKey, ITextValue, IGameSerialize
 {
     protected Game Game { get; }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class CharacterClassSpellGameConfiguration : CompositeSingletonGameConfiguration
 {
     public sealed override string?[] CompositeKeys => new string?[] { CharacterClassName, SpellName }; // CONFIRMED

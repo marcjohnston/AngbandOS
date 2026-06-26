@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DetectionIdentifiedAndUsedScriptItemAndDirection : Script, IZapRodScript
 {
     private DetectionIdentifiedAndUsedScriptItemAndDirection(Game game) : base(game) { }

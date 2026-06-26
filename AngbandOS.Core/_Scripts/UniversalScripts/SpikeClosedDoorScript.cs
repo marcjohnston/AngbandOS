@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SpikeClosedDoorScript : UniversalScript, IGetKey
 {
     private SpikeClosedDoorScript(Game game) : base(game) { }

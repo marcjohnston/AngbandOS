@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-[Serializable]
 internal sealed class Conditional : IChangeTracker, IGetKey, IBoolValue, IToJson, IGameSerialize
 {
     private Game Game { get; }

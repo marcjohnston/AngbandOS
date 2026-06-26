@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 /// <summary>
 /// Represents a power that can be assigned to a random artifact that can be activated.  Fixed artifacts are now using this Activation.
 /// </summary>

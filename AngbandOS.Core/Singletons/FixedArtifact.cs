@@ -9,7 +9,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core;
 
-[Serializable]
 internal abstract class FixedArtifact : IGetKey, IToJson, IGameSerialize
 {
     protected Game Game { get; }

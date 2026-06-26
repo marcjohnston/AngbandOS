@@ -1,7 +1,5 @@
-﻿using System.Linq.Expressions;
-namespace AngbandOS.Core.Expressions;
+﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class AdditionInfixExpression : InfixExpression
 {
     public AdditionInfixExpression(Expression addend1, Expression addend2) : base(addend1, addend2) { }

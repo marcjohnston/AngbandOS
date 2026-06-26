@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.PassiveMutations;
 
-[Serializable]
 internal class InfravisPassiveMutation : Mutation
 {
     private InfravisPassiveMutation(Game game) : base(game) { }

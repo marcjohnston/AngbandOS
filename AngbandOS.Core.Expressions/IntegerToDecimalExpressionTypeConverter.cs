@@ -1,7 +1,6 @@
 ﻿
 namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class IntegerToDecimalExpressionTypeConverter : ExpressionTypeConverter
 {
     public override Type FromExpressionType => typeof(IntegerExpression);

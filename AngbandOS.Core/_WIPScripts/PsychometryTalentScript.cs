@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class PsychometryTalentScript : UniversalScript, IGetKey
 {
     private PsychometryTalentScript(Game game) : base(game) { }

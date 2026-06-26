@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class StayAndPickupScript : UniversalScript, IGetKey
 {
     private StayAndPickupScript(Game game) : base(game) { }

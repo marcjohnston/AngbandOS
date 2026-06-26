@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class ItemFilterGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string? AttributeFilterBindingKey { get; set; } = null;

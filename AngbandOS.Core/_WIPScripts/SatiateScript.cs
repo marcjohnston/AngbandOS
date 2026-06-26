@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SatiateScript : Script, IActivateItemScript
 {
     private SatiateScript(Game game) : base(game) { }

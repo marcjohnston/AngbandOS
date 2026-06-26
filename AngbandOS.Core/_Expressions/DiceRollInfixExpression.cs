@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 internal class DiceRollInfixExpression : InfixExpression
 {
     /// <summary>

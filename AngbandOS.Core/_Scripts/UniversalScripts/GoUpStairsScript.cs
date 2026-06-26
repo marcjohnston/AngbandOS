@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class GoUpStairsScript : UniversalScript, IGetKey
 {
     private GoUpStairsScript(Game game) : base(game) { }

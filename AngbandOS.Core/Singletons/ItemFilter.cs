@@ -12,7 +12,6 @@ namespace AngbandOS.Core;
 /// to the <see cref="ItemMatches"/> list.  This binding of predefined <see cref="ItemMatch"/> objects allows the matching of items at run-time to be as fast as possible; no unnecessary comparisions
 /// are performed.  These <see cref="ItemFilter"/> objects are designed to support configurability.
 /// </summary>
-[Serializable]
 internal sealed class ItemFilter : IGetKey, IItemFilter, IToJson, IGameSerialize
 {
     private Game Game { get; }

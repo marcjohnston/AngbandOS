@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.WieldSlots;
 
-[Serializable]
 internal class LeftHandWieldSlot : EquipmentWieldSlot
 {
     private LeftHandWieldSlot(Game game) : base(game) { } // This object is a singleton

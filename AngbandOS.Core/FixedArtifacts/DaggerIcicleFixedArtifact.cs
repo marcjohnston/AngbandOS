@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.Core.FixedArtifacts;
 
-[Serializable]
 internal class DaggerIcicleFixedArtifact : FixedArtifact
 {
     private DaggerIcicleFixedArtifact(Game game) : base(game) { }

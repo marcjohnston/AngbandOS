@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MapLightScript : Script, IActivateItemScript
 {
     private MapLightScript(Game game) : base(game) { }

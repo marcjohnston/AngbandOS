@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DetectInvisibilityScript : Script, IScript, ICastSpellScript
 {
     private DetectInvisibilityScript(Game game) : base(game) { }

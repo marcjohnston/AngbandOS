@@ -7,7 +7,6 @@
 namespace AngbandOS.Core.CharacterClasses;
 
 
-[Serializable]
 internal class MindcrafterCharacterClass : CharacterClass
 {
     private MindcrafterCharacterClass(Game savedGame) : base(savedGame) { }

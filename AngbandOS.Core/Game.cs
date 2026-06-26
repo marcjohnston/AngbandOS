@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Reflection;
 namespace AngbandOS.Core;
 
-[Serializable]
 internal partial class Game : IGameSerialize
 {
     #region Code Altering Property Management for Development Purposes Only
@@ -252,7 +251,6 @@ internal partial class Game : IGameSerialize
     #endregion
 
     #region Game Replay
-    [NonSerialized]
     private IReplayPersistentStorage? ReplayPersistentStorage = null;
 
     /// <summary>
@@ -271,7 +269,6 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// The queue for recording keystrokes or playing back keystrokes.  This structure is used for both recording and playback.
     /// </summary>
-    [NonSerialized]
     public readonly Queue<GameReplayStep> ReplayQueue = new Queue<GameReplayStep>(); // List.Add has a O(1) time complexity until it needs to be resized.
 
     /// <summary>
@@ -1198,7 +1195,6 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the object that the calling application provided to be used to connect the game input and output to the calling application.
     /// </summary>
-    [NonSerialized]
     public IConsoleAndViewPort ConsoleViewPort;
 
     public int CommandArgument;
@@ -1237,7 +1233,6 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns true, if the parent is requesting the game to shut down immediately.  Returns false, by default.
     /// </summary>
-    [NonSerialized]
     public bool Shutdown = false;
 
     /// GUI
@@ -1520,7 +1515,6 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the expression providers that are used for game and player expression computations.
     /// </summary>
-    [NonSerialized]
     public readonly Dictionary<string, object> ExpressionProviders = new Dictionary<string, object>();
 
     private Dictionary<string, object> MergeExpressionProviders(params (string, object)[]? additionalProviders)

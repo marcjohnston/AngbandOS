@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class EatRockMutationScript : UniversalScript, IGetKey
 {
     private EatRockMutationScript(Game game) : base(game) { }

@@ -8,7 +8,6 @@
 using System.Reflection;
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class VersionScript : UniversalScript, IGetKey
 {
     private VersionScript(Game game) : base(game) { }

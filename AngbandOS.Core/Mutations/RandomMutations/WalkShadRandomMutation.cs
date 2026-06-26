@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.RandomMutations;
 
-[Serializable]
 internal class WalkShadRandomMutation : Mutation
 {
     private WalkShadRandomMutation(Game game) : base(game) { }

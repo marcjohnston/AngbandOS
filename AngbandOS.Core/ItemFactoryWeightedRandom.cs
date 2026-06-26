@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class ItemFactoryWeightedRandom : WeightedRandom<ItemFactory>, IGetKey, IToJson, IGameSerialize
 {
     public ItemFactoryWeightedRandom(Game game, ItemFactoryWeightedRandomGameConfiguration gameConfiguration) : base(game)

@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class TalentGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string Name { get; set; }

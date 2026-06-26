@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.GetItemProperties;
-    [Serializable]
 internal class ArtifactBiasBooleanGetItemProperty : GetItemProperty<bool>
 {
     public ArtifactBiasBooleanGetItemProperty(Game game) : base(game) { }

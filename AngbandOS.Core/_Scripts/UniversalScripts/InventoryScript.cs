@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class InventoryScript : UniversalScript, IGetKey
 {
     private InventoryScript(Game game) : base(game) { }

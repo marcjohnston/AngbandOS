@@ -12,7 +12,6 @@ namespace AngbandOS.Core.FlaggedActions;
 /// Updates the view.  The view of the player extends to a distance as Constants.MaxVision.  Tiles that block line-of-sight are required to ensure
 /// the grid coordinates are not invalid.
 /// </summary>
-[Serializable]
 internal class UpdateViewFlaggedAction : FlaggedAction
 {
     private UpdateViewFlaggedAction(Game game) : base(game) { }

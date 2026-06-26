@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public abstract class ExpressionTypeConverter 
 {
     public abstract Type FromExpressionType { get; }

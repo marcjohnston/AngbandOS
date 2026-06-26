@@ -8,7 +8,6 @@
 using System;
 namespace AngbandOS.Core.WieldSlots;
 
-[Serializable]
 internal class RangedWeaponWieldSlot : EquipmentWieldSlot
 {
     private RangedWeaponWieldSlot(Game game) : base(game) { } // This object is a singleton

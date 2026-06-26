@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class SubtractionInfixExpression : InfixExpression
 {
     public SubtractionInfixExpression(Expression minuend, Expression subtrahend) : base(minuend, subtrahend) { }

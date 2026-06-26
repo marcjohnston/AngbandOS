@@ -1,7 +1,6 @@
 namespace AngbandOS.Core.Scripts;
 
 // Sprites can sleep monsters
-[Serializable]
 internal class SpriteRacialPowerScript : Script, IScript
 {
     private SpriteRacialPowerScript(Game game) : base(game) { }

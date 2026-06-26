@@ -3,7 +3,6 @@ using AngbandOS.GamePacks.Cthangband;
 namespace AngbandOS.Core.Scripts;
 
 // Klackons can spit acid
-[Serializable]
 internal class KlackonRacialPowerScript : Script, IScript
 {
     private KlackonRacialPowerScript(Game game) : base(game) { }

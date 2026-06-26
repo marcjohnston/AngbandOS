@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class StinkingCloudScript : Script, IScript, ICastSpellScript
 {
     private StinkingCloudScript(Game game) : base(game) { }

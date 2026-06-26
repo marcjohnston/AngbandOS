@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Races;
 
-[Serializable]
 internal class KoboldRace : Race
 {
     private KoboldRace(Game game) : base(game) { }

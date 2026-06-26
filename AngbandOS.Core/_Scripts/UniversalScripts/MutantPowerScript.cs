@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MutantPowerScript : UniversalScript, IGetKey
 {
     private MutantPowerScript(Game game) : base(game) { }

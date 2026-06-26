@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class TakeOffScript : UniversalScript, IGetKey
 {
     private TakeOffScript(Game game) : base(game) { }

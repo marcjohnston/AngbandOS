@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class QuaffScript : UniversalScript, IGetKey
 {
     private QuaffScript(Game game) : base(game) { }

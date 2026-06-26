@@ -1,7 +1,6 @@
 namespace AngbandOS.Core.Scripts;
 
 // Dwarves can detect traps, doors, and stairs
-[Serializable]
 internal class DwarfRacialPowerScript : Script, IScript
 {
     private DwarfRacialPowerScript(Game game) : base(game) { }

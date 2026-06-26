@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class EarthquakeR10Script : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
 {
     private EarthquakeR10Script(Game game) : base(game) { }

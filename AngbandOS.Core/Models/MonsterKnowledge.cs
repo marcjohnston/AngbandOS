@@ -7,7 +7,6 @@
 using System.Text;
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class MonsterKnowledge : IGameSerialize
 {
     #region State Data

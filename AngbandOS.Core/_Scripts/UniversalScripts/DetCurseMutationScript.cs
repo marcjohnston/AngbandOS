@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class DetCurseMutationScript : UniversalScript, IGetKey
 {
     private DetCurseMutationScript(Game game) : base(game) { }

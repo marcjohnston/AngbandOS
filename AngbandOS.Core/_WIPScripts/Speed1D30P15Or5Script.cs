@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class Speed1D30P15Or5Script : Script, IReadScrollOrUseStaffScript
 {
     private Speed1D30P15Or5Script(Game game) : base(game) { }

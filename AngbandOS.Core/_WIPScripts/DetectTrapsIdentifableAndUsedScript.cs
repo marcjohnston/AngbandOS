@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DetectTrapsIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private DetectTrapsIdentifableAndUsedScript(Game game) : base(game) { }

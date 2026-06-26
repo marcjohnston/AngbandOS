@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RuneOfProtectionIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private RuneOfProtectionIdentifableAndUsedScript(Game game) : base(game) { }

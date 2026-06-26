@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MapAreaScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
 {
     private MapAreaScript(Game game) : base(game) { }

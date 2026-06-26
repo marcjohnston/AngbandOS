@@ -13,7 +13,6 @@ namespace AngbandOS.Core;
 /// A dead player character, holding just the bare bones needed for the high score table and
 /// game preview, or to create a new character based on the previous one.
 /// </summary>
-[Serializable]
 internal class ExPlayer : IGameSerialize
 {
     #region State Data

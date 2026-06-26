@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class DateWidget : Widget, IGetKey, IToJson, IGameSerialize
 {
     public DateWidget(Game game, DateWidgetGameConfiguration gameConfiguration) : base(game)

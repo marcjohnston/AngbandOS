@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.Core.FixedArtifacts;
 
-[Serializable]
 internal class BladeOfChaosDoomcallerFixedArtifact : FixedArtifact
 {
     private BladeOfChaosDoomcallerFixedArtifact(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.PlayerEffects;
 
-[Serializable]
 internal class AcidPlayerEffect : PlayerEffectUniversalScript
 {
     private AcidPlayerEffect(Game game) : base(game) { }

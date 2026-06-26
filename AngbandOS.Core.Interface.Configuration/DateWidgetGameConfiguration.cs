@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class DateWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string DateValueName { get; set; }

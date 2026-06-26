@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class LookScript : UniversalScript, IGetKey
 {
     private LookScript(Game game) : base(game) { }

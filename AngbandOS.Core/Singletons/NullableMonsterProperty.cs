@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Properties;
 /// <summary>
 /// Represents a property that includes change tracking for a nullable monster.
 /// </summary>
-[Serializable]
 internal abstract class NullableMonsterProperty : Property, INullMonsterValue
 {
     protected NullableMonsterProperty(Game game) : base(game) { }

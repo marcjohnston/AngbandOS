@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class WordOfRecallIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private WordOfRecallIdentifableAndUsedScript(Game game) : base(game) { }

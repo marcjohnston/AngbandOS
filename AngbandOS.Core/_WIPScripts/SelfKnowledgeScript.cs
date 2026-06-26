@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQuaffScript
 {
     private SelfKnowledgeScript(Game game) : base(game) { }

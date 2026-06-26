@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ShowManualScript : UniversalScript, IGetKey
 {
     private ShowManualScript(Game game) : base(game) { }

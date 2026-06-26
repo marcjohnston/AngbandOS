@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class IlluminationEvery1d10p10Script : Script, IActivateItemScript
 {
     private IlluminationEvery1d10p10Script(Game game) : base(game) { }

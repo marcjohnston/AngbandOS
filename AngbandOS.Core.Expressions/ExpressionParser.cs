@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class ExpressionParser
 {
     public readonly ParseLanguage ParseLanguage;

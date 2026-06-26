@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.MonsterSelectors;
 
-[Serializable]
 internal abstract class MonsterSelector : IMonsterSelector, IGetKey, IGameSerialize
 {
     protected Game Game { get; }

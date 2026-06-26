@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ExtraDimensionalBeingScript : Script, IScript, ICastSpellScript
 {
     private ExtraDimensionalBeingScript(Game game) : base(game) { }

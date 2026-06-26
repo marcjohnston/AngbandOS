@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class ExperienceLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, IGameSerialize
 {
     public ExperienceLearnedKnowledge(Game game, ExperienceLearnedKnowledgeGameConfiguration gameConfiguration) : base(game)

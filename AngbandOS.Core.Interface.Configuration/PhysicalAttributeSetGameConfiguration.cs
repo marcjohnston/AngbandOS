@@ -1,7 +1,6 @@
 ﻿
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class PhysicalAttributeSetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual int BaseHeight { get; set; }

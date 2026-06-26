@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// An allocation entry for selecting monsters and items
 /// </summary>
-[Serializable]
 internal class AllocationEntry : IGameSerialize
 {
     /// <summary>

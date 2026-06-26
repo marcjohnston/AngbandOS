@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class DurationLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, IGameSerialize
 {
     public string DurationExpressionText { get; }

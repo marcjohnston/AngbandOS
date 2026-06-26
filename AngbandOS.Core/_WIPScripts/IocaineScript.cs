@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class IocaineScript : Script, IEatOrQuaffScript
 {
     private IocaineScript(Game game) : base(game) { }

@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class RadiationMutationScript : UniversalScript, IGetKey
 {
     private RadiationMutationScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ResistAll40p1d40Script : Script, IActivateItemScript
 {
     private ResistAll40p1d40Script(Game game) : base(game) { }

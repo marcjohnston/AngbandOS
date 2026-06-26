@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class EqualsInfixExpression : InfixExpression
 {
     public EqualsInfixExpression(Expression leftExpression, Expression rightExpression) : base(leftExpression, rightExpression) { }

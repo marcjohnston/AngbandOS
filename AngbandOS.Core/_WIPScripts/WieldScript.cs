@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class WieldScript : Script, IScript, ICastSpellScript, IGameCommandScript, IStoreCommandScript
 {
     private WieldScript(Game game) : base(game) { }

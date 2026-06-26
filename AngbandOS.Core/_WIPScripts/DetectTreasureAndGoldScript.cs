@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DetectTreasureAndGoldScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
 {
     private DetectTreasureAndGoldScript(Game game) : base(game) { }

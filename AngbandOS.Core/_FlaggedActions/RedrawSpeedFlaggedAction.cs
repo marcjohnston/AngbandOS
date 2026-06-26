@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.FlaggedActions;
 
-[Serializable]
 internal class RedrawSpeedFlaggedAction : FlaggedAction
 {
     private const int ColSpeed = 43;

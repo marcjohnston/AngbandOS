@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class CallSunlightScript : Script, IScript, ICastSpellScript
 {
     private CallSunlightScript(Game game) : base(game) { }

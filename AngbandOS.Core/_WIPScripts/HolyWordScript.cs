@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class HolyWordScript : Script, IScript, ICastSpellScript
 {
     private HolyWordScript(Game game) : base(game) { }

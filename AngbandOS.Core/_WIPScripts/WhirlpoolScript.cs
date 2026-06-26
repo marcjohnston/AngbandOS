@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class WhirlpoolScript : Script, IScript, ICastSpellScript
 {
     private WhirlpoolScript(Game game) : base(game) { }

@@ -8,7 +8,6 @@
 using System;
 namespace AngbandOS.Core.BirthStages;
 
-[Serializable]
 internal class Realm1SelectionBirthStage : BirthStage
 {
     private int currentSelection = 0;

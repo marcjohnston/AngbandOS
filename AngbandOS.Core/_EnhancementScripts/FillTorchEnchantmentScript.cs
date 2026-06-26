@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class FillTorchEnchantmentScript : Script, IEnhancementScript
 {
     private FillTorchEnchantmentScript(Game game) : base(game) { }

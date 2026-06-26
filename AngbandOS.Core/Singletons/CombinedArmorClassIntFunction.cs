@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-[Serializable]
 internal class CombinedArmorClassIntFunction : IChangeTracker, IGetKey, IIntValue, IGameSerialize
 {
     private Game Game { get; }

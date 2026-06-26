@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Timers;
 
-[Serializable]
 internal class StunningTimer : Timer
 {
     private StunningTimer(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.AttackEffects;
 
-[Serializable]
 internal class LoseChaAttackEffect : AttackEffect
 {
     private LoseChaAttackEffect(Game game) : base(game) { }

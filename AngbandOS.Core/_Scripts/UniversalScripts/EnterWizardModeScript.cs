@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class EnterWizardModeScript : UniversalScript, IGetKey
 {
     private EnterWizardModeScript(Game game) : base(game) { }

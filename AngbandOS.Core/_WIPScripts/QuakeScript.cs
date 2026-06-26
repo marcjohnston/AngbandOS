@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class QuakeScript : Script, IActivateItemScript
 {
     private QuakeScript(Game game) : base(game) { }

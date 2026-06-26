@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.PlayerEffects;
 
-[Serializable]
 internal class OldSlowPlayerEffect : PlayerEffectUniversalScript
 {
     private OldSlowPlayerEffect(Game game) : base(game) { }

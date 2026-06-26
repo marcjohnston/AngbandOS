@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Functions;
 /// <summary>
 /// Represents an integer function that returns -1, when the player is not tracking a monster or the health of the monster.
 /// </summary>
-[Serializable]
 internal class TrackedMonsterMaxHealthIntFunction : IntFunction
 {
     private TrackedMonsterMaxHealthIntFunction(Game game) : base(game) { } // This object is a singleton.

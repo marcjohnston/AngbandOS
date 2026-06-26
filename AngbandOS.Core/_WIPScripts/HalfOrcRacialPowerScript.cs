@@ -1,7 +1,6 @@
 namespace AngbandOS.Core.Scripts;
 
 // Half-orcs can remove fear
-[Serializable]
 internal class HalfOrcRacialPowerScript : Script, IScript
 {
     private HalfOrcRacialPowerScript(Game game) : base(game) { }

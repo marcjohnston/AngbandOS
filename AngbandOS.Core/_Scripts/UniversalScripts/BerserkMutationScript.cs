@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class BerserkMutationScript : UniversalScript, IGetKey
 {
     private BerserkMutationScript(Game game) : base(game) { }

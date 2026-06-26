@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class GenocideScript : Script, IScript, ICastSpellScript, IScriptBool, IReadScrollOrUseStaffScript, IActivateItemScript
 {
     private GenocideScript(Game game) : base(game) { }

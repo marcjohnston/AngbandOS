@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DisarmScript : GameCommandUniversalScript, IGetKey
 {
     private DisarmScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class ArtifactBiasReadOnlyAttributeValue : AttributeValue
 {
     public readonly ArtifactBias? Value;

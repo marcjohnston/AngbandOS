@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class CallDaylightScript : Script, IScript, ICastSpellScript
 {
     private CallDaylightScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class Curing50Script : Script, IEatOrQuaffScript
 {
     private Curing50Script(Game game) : base(game) { }

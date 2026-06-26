@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.CharacterClasses;
 
-[Serializable]
 internal class PriestCharacterClass : CharacterClass
 {
     private PriestCharacterClass(Game savedGame) : base(savedGame) { }

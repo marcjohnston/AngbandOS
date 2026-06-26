@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class OpenScript : GameCommandUniversalScript, IGetKey
 {
     private OpenScript(Game game) : base(game) { }

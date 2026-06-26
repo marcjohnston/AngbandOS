@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DoorStairLocationIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private DoorStairLocationIdentifableAndUsedScript(Game game) : base(game) { }

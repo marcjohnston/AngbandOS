@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class PowerDragonScript : Script, IActivateItemScript
 {
     private PowerDragonScript(Game game) : base(game) { }

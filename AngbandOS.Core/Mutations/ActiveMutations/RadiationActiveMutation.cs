@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-[Serializable]
 internal class RadiationActiveMutation : Mutation
 {
     private RadiationActiveMutation(Game game) : base(game) { }

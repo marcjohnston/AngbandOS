@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class OfTheMagiScript : Script, IReadScrollOrUseStaffScript
 {
     private OfTheMagiScript(Game game) : base(game) { }

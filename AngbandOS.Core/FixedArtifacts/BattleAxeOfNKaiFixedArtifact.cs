@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.Core.FixedArtifacts;
 
-[Serializable]
 internal class BattleAxeOfNKaiFixedArtifact : FixedArtifact
 {
     private BattleAxeOfNKaiFixedArtifact(Game game) : base(game) { }

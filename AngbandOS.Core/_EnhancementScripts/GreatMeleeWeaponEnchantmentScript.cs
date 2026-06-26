@@ -8,7 +8,6 @@ using System.Reflection.PortableExecutable;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
 {
     private GreatMeleeWeaponEnchantmentScript(Game game) : base(game) { }

@@ -10,7 +10,6 @@ namespace AngbandOS.Core;
 /// Represents a trap on a chest.  Can be layered with multiple traps.  The base class implements the layering.  Derived classes only
 /// need concern themselves with their own implementation and not sub-traps.
 /// </summary>
-[Serializable]
 internal class ChestTrap : IGetKey, IToJson, IGameSerialize
 {
     protected Game Game { get; }

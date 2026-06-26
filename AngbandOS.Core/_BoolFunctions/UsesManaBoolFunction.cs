@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Functions;
 
-[Serializable]
 internal class UsesManaBoolFunction : BoolFunction
 {
     private UsesManaBoolFunction(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class UsedTorchEnchantmentScript : Script, IEnhancementScript
 {
     private UsedTorchEnchantmentScript(Game game) : base(game) { }

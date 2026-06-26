@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RestoreLifeLevelsScript : Script, IActivateItemScript
 {
     private RestoreLifeLevelsScript(Game game) : base(game) { }

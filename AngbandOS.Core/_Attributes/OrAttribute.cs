@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class OrAttribute : Attribute, IToJson
 {
     public OrAttribute(Game game, OrAttributeGameConfiguration gameConfiguration) : base(game) // This object is a singleton

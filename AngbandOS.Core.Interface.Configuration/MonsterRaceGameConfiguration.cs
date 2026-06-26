@@ -12,7 +12,6 @@ namespace AngbandOS.Core.Interface.Configuration;
 /// <remarks>
 /// 102 Properties
 /// </remarks>
-[Serializable]
 public class MonsterRaceGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual bool CanTeleportSelf { get; set; } = false;

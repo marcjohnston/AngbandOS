@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Functions;
 /// <summary>
 /// Represents a boolean value function with change tracking that returns true, when trap detection has been performed on the map grid coordinates of the player.
 /// </summary>
-[Serializable]
 internal class TrapsDetectedBoolFunction : BoolFunction
 {
     private TrapsDetectedBoolFunction(Game game) : base(game) { } // This object is a singleton.

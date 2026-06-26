@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class UseStaffScript : UniversalScript, IGetKey
 {
     private UseStaffScript(Game game) : base(game) { }

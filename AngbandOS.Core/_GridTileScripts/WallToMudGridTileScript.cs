@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GridTileEffects;
 
-[Serializable]
 internal class WallToMudGridTileScript : GridTileScript
 {
     private WallToMudGridTileScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RedrawScript : Script, IScript, ICastSpellScript
 {
     private RedrawScript(Game game) : base(game) { }

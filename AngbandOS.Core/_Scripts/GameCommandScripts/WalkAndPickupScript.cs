@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class WalkAndPickupScript : GameCommandUniversalScript, IGetKey
 {
     private WalkAndPickupScript(Game game) : base(game) { }

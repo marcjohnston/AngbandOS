@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SummonReptileScript : Script, IScript, ICastSpellScript
 {
     private SummonReptileScript(Game game) : base(game) { }

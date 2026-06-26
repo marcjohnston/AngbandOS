@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RestorationScript : Script, IScript, ICastSpellScript, IStoreCommandScript
 {
     private RestorationScript(Game game) : base(game) { }

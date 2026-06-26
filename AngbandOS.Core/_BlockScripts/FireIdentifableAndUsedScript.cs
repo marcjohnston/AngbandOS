@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class FireIdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private FireIdentifableAndUsedScript(Game game) : base(game) { }

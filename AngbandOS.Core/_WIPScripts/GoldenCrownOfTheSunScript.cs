@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class GoldenCrownOfTheSunScript : Script, IActivateItemScript
 {
     private GoldenCrownOfTheSunScript(Game game) : base(game) { }

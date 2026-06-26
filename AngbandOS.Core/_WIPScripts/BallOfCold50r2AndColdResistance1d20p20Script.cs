@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class BallOfCold50r2AndColdResistance1d20p20Script : Script, IActivateItemScript
 {
     private BallOfCold50r2AndColdResistance1d20p20Script(Game game) : base(game) { }

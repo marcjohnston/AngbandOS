@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// An ability score
 /// </summary>
-[Serializable]
 internal abstract class Ability : IGetKey, IGameSerialize
 {
     protected Game Game { get; }

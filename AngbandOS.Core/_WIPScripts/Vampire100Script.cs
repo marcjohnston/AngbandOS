@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class Vampire100Script : Script, IActivateItemScript
 {
     private Vampire100Script(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GetItemProperties;
 
-[Serializable]
 internal class IsTooHeavyToWieldBooleanGetItemProperty : GetItemProperty<bool>
 {
     public IsTooHeavyToWieldBooleanGetItemProperty(Game game) : base(game) { }

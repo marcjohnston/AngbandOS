@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DexterityDartScript : Script, IScript, ICastSpellScript
 {
     private DexterityDartScript(Game game) : base(game) { }

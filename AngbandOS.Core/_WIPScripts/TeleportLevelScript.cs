@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class TeleportLevelScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript
 {
     private TeleportLevelScript(Game game) : base(game) { }

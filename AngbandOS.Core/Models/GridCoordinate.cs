@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// A simple immutable coordinate, stored in a reference type so it can be passed from function to function.
 /// </summary>
-[Serializable]
 internal class GridCoordinate : IGameSerialize
 {
     #region State Data

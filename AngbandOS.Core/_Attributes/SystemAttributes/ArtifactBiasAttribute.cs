@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class ArtifactBiasAttribute : Attribute
 {
     private ArtifactBiasAttribute(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class TunnelScript : GameCommandUniversalScript, IGetKey
 {
     private TunnelScript(Game game) : base(game) { }

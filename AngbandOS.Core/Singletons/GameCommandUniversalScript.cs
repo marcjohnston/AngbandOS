@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal abstract class GameCommandUniversalScript : IGameCommandScript, IScript, ICastSpellScript, IStoreCommandScript, IGameSerialize
 {
     protected Game Game { get; }

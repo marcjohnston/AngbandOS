@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class JournalScript : UniversalScript, IGetKey
 {
     private JournalScript(Game game) : base(game) { }

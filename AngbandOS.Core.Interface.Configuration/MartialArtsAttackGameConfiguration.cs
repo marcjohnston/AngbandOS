@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class MartialArtsAttackGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual int Chance { get; set; }

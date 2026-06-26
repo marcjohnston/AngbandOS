@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class EatScript : UniversalScript, IGetKey
 {
     private EatScript(Game game) : base(game) { }

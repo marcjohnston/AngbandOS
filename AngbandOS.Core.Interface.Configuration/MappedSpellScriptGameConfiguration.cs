@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class MappedSpellScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string? RealmBindingKey { get; set; }

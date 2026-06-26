@@ -9,7 +9,6 @@ namespace AngbandOS.Core.ActivationWeightRandoms;
 /// <summary>
 /// Represents the <see cref="WeightedRandom"/> of <see cref="Activation"/> objects that is used when a random artifact is created.
 /// </summary>
-[Serializable]
 internal class RandomArtifactActivationWeightedRandom : ActivationWeightedRandom
 {
     private RandomArtifactActivationWeightedRandom(Game game) : base(game) { } // This object is a singleton

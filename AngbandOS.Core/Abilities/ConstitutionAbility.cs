@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class ConstitutionAbility : Ability
 {
     private ConstitutionAbility(Game game) : base(game) { } // This object is a singleton

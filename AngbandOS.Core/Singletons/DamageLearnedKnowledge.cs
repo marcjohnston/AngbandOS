@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class DamageLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, IGameSerialize
 {
     public string DamageExpressionText { get; }

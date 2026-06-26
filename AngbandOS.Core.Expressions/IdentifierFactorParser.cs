@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public abstract class IdentifierFactorParser : FactorParser
 {
     public virtual bool CaseSensitive => false;

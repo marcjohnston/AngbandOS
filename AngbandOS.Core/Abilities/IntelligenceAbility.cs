@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class IntelligenceAbility : Ability
 {
     private IntelligenceAbility(Game game) : base(game) { } // This object is a singleton

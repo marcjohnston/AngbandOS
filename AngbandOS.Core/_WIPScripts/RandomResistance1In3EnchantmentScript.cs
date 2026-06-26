@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RandomResistance1In3EnchantmentScript : Script, IEnhancementScript
 {
     private RandomResistance1In3EnchantmentScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GridTileEffects;
 
-[Serializable]
 internal class MakeDoorGridTileScript : GridTileScript
 {
     private MakeDoorGridTileScript(Game game) : base(game) { }

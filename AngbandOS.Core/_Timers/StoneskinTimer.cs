@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Timers;
 
-[Serializable]
 internal class StoneskinTimer : Timer
 {
     private StoneskinTimer(Game game) : base(game) { }

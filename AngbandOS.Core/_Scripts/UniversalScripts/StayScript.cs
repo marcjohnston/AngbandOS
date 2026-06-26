@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class StayScript : UniversalScript, IGetKey
 {
     private StayScript(Game game) : base(game) { }

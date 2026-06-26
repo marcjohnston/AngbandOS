@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SummonGreaterUndeadScript : Script, IScript, ICastSpellScript
 {
     private SummonGreaterUndeadScript(Game game) : base(game) { }

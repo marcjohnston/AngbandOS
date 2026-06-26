@@ -8,7 +8,6 @@
 using System.Security.Cryptography.X509Certificates;
 namespace AngbandOS.Core.Rewards;
 
-[Serializable]
 internal class WrathReward : Reward
 {
     private WrathReward(Game game) : base(game) { }

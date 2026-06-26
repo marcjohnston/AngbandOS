@@ -9,7 +9,6 @@ namespace AngbandOS.Core.ItemFlavors;
 /// <summary>
 /// Represents a single flavor for a group of items that participate in the IFlavor interface.
 /// </summary>
-[Serializable]
 internal sealed class ItemFlavor : Flavor, IGetKey, IToJson
 {
     public ItemFlavor(Game game, ItemFlavorGameConfiguration gameConfiguration) : base(game)

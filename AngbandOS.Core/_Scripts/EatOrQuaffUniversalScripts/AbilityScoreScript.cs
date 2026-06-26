@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class AbilityScoreScript : EatOrQuaffUniversalScript, IGetKey, IToJson
 {
     public AbilityScoreScript(Game game, AbilityScoreScriptGameConfiguration gameConfiguration) : base(game)

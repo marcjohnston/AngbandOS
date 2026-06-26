@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ElderSignScript : Script, IScript, ICastSpellScript, IActivateItemScript
 {
     private ElderSignScript(Game game) : base(game) { }

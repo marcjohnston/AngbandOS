@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Properties;
 
-[Serializable]
 internal class IsWinnerBoolProperty : BoolProperty
 {
     private IsWinnerBoolProperty(Game game) : base(game) { }

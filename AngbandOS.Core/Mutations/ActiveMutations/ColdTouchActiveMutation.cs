@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-[Serializable]
 internal class ColdTouchActiveMutation : Mutation
 {
     private ColdTouchActiveMutation(Game game) : base(game) { }

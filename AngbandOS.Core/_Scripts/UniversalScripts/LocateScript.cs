@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class LocateScript : UniversalScript, IGetKey
 {
     private LocateScript(Game game) : base(game) { }

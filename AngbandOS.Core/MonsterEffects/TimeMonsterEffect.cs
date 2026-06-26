@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.MonsterEffects;
 
-[Serializable]
 internal class TimeMonsterEffect : MonsterEffect
 {
     private TimeMonsterEffect(Game game) : base(game) { } // This object is a singleton.

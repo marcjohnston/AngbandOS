@@ -3,7 +3,6 @@ using AngbandOS.GamePacks.Cthangband;
 namespace AngbandOS.Core.Scripts;
 
 // Imps can cast fire bolt/ball
-[Serializable]
 internal class ImpRacialPowerScript : Script, IScript
 {
     private ImpRacialPowerScript(Game game) : base(game) { }

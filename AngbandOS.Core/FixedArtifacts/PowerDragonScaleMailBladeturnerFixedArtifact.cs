@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.Core.FixedArtifacts;
 
-[Serializable]
 internal class PowerDragonScaleMailBladeturnerFixedArtifact : FixedArtifact
 {
     private PowerDragonScaleMailBladeturnerFixedArtifact(Game game) : base(game) { }

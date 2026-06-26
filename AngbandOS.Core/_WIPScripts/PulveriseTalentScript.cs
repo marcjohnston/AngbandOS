@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class PulveriseTalentScript : UniversalScript, IGetKey
 {
     private PulveriseTalentScript(Game game) : base(game) { }

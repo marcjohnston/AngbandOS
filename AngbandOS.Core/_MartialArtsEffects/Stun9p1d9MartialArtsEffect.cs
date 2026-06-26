@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class Stun9p1d9MartialArtsEffect : MartialArtsEffect
 {
     private Stun9p1d9MartialArtsEffect(Game game) : base(game) { } // This object is a singleton

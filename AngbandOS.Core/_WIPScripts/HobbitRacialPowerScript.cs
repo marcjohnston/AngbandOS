@@ -1,7 +1,6 @@
 namespace AngbandOS.Core.Scripts;
 
 // Hobbits can cook food
-[Serializable]
 internal class HobbitRacialPowerScript : Script, IScript
 {
     private HobbitRacialPowerScript(Game game) : base(game) { }

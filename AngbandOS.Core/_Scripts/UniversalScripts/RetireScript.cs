@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RetireScript : UniversalScript, IGetKey
 {
     private RetireScript(Game game) : base(game) { }

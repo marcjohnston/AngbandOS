@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Properties;
 
-[Serializable]
 internal class IsWizardBoolProperty : BoolProperty
 {
     private IsWizardBoolProperty(Game game) : base(game) { }

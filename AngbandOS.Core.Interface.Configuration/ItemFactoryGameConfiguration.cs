@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class ItemFactoryGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string? ItemEnhancementBindingKey { get; set; } = null;

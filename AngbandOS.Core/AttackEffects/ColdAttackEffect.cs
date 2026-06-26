@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.AttackEffects;
 
-[Serializable]
 internal class ColdAttackEffect : AttackEffect
 {
     private ColdAttackEffect(Game game) : base(game) { }

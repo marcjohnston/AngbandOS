@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class BooleanFactorParser : FactorParser
 {
     public override Expression? TryParse(ExpressionParser parser, string text, ref int characterIndex)

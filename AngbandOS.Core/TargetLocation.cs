@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents a delta location from the player which can be sorted by distance.
 /// </summary>
-[Serializable]
 internal class TargetLocation : IComparable<TargetLocation>
 {
     public readonly int X;

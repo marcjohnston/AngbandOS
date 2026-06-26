@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.PlayerEffects;
 
-[Serializable]
 internal class ColdPlayerEffect : PlayerEffectUniversalScript
 {
     private ColdPlayerEffect(Game game) : base(game) { }

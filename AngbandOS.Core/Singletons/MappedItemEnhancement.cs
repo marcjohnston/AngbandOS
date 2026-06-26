@@ -2,7 +2,6 @@
 
 namespace AngbandOS.Core.MappedSpellScripts;
 
-[Serializable]
 internal sealed class MappedItemEnhancement : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }

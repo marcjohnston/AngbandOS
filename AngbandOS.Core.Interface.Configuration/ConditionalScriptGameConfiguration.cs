@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class ConditionalScriptGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string ConditionalKey { get; set; }

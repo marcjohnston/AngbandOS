@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.AttackEffects;
 
-[Serializable]
 internal class ParalyzeAttackEffect : AttackEffect
 {
     private ParalyzeAttackEffect(Game game) : base(game) { }

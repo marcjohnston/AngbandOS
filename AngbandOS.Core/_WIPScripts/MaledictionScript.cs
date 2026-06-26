@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class MaledictionScript : Script, IScript, ICastSpellScript
 {
     private MaledictionScript(Game game) : base(game) { }

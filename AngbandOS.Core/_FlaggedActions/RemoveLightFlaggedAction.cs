@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.FlaggedActions;
 
-[Serializable]
 internal class RemoveLightFlaggedAction : FlaggedAction
 {
     private RemoveLightFlaggedAction(Game game) : base(game) { }

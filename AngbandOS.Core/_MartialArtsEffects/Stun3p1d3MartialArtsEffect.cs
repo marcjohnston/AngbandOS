@@ -7,7 +7,6 @@
 namespace AngbandOS.Core;
 
 // Have a chance of stunning based on the martial arts attack type chosen
-[Serializable]
 internal class Stun3p1d3MartialArtsEffect : MartialArtsEffect
 {
     private Stun3p1d3MartialArtsEffect(Game game) : base(game) { } // This object is a singleton

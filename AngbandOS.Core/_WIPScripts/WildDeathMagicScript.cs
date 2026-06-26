@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class WildDeathMagicScript : Script, ICastSpellScript
 {
     private WildDeathMagicScript(Game game) : base(game) { }

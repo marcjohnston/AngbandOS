@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ResistFire1d10p10Script : Script, IEatOrQuaffScript
 {
     private ResistFire1d10p10Script(Game game) : base(game) { }

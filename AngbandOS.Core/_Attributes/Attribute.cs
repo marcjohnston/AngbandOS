@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal abstract class Attribute : IGetKey, IIndexedSingletons, IGameSerialize
 {
     protected Attribute(Game game) // This object is a singleton

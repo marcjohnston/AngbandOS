@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class LightAreaRadius3Damage2d15Script : Script, IActivateItemScript
 {
     private LightAreaRadius3Damage2d15Script(Game game) : base(game) { }

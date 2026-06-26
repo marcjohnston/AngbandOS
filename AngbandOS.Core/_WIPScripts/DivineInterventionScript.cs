@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DivineInterventionScript : Script, IScript, ICastSpellScript
 {
     private DivineInterventionScript(Game game) : base(game) { }

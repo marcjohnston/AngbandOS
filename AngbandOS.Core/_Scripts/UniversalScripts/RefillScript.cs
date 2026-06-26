@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class RefillScript : UniversalScript, IGetKey
 {
     private RefillScript(Game game) : base(game) { }

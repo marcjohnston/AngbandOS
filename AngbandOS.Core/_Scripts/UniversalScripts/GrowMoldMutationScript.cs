@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class GrowMoldMutationScript : UniversalScript, IGetKey
 {
     private GrowMoldMutationScript(Game game) : base(game) { }

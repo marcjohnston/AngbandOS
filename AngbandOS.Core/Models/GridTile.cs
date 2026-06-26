@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// A single grid tile in either the dungeon, town, or wilderness.  Grid tiles are also containers for items; as they can have one or more items on the tile.
 /// </summary>
-[Serializable]
 internal class GridTile : IItemContainer, IGameSerialize
 {
     private Game Game { get; }

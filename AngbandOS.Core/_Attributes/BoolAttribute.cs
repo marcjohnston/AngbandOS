@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal class BoolAttribute : Attribute, IToJson
 {
     public BoolAttribute(Game game, BoolAttributeGameConfiguration gameConfiguration) : base(game) // This object is a singleton

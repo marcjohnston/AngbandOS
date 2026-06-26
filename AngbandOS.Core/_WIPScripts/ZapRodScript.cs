@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ZapRodScript : Script, IScript, ICastSpellScript, IGameCommandScript
 {
     private ZapRodScript(Game game) : base(game) { }

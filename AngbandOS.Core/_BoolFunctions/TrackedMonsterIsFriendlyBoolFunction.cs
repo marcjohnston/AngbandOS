@@ -10,7 +10,6 @@ namespace AngbandOS.Core.Functions;
 /// <summary>
 /// Represents a boolean function that returns true, when the player is tracking a monster and that monster is friendly; false, otherwise.
 /// </summary>
-[Serializable]
 internal class TrackedMonsterIsFriendlyBoolFunction : BoolFunction
 {
     private TrackedMonsterIsFriendlyBoolFunction(Game game) : base(game) { } // This object is a singleton.

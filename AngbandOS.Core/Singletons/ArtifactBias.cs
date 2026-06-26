@@ -9,7 +9,6 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents the bias used when applying special abilities to an artifact.
 /// </summary>
-[Serializable]
 internal abstract class ArtifactBias : IGetKey, IGameSerialize
 {
     protected Game Game { get; }

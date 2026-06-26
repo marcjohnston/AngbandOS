@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class ColdTouchMutationScript : UniversalScript, IGetKey
 {
     private ColdTouchMutationScript(Game game) : base(game) { }

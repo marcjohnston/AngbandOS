@@ -9,7 +9,6 @@ namespace AngbandOS.Core.Scripts;
 /// <summary>
 /// Processes the world turn by draining life from the player, when the player does not have anti-magic, 1 time in 1000.
 /// </summary>
-[Serializable]
 internal class JewelJudgementDrainLifeScript : Script, IScriptItem
 {
     private JewelJudgementDrainLifeScript(Game game) : base(game) { }

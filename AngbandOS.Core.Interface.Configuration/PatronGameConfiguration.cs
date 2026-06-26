@@ -1,7 +1,6 @@
 ﻿
 namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class PatronGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string LongName { get; set; }

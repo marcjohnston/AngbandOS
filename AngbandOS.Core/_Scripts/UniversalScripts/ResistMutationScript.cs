@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class ResistMutationScript : UniversalScript, IGetKey
 {
     private ResistMutationScript(Game game) : base(game) { }

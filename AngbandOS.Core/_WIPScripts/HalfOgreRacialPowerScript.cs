@@ -1,7 +1,6 @@
 namespace AngbandOS.Core.Scripts;
 
 // Half-Ogres can go berserk
-[Serializable]
 internal class HalfOgreRacialPowerScript : Script, IScript
 {
     private HalfOgreRacialPowerScript(Game game) : base(game) { }

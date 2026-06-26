@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class EvocationScript : Script, IScript, ICastSpellScript
 {
     private EvocationScript(Game game) : base(game) { }

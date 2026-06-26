@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class SpecialHealingScript : Script, IEatOrQuaffScript
 {
     private SpecialHealingScript(Game game) : base(game) { }

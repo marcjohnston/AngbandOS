@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-[Serializable]
 public class TimeWidgetGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual string DateAndTimeValueName { get; set; }

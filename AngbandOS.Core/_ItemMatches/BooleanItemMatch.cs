@@ -9,7 +9,6 @@ namespace AngbandOS.Core.ItemMatches;
 /// <summary>
 /// Represents an object that performs a boolean match on an item property.
 /// </summary>
-[Serializable]
 internal class BooleanItemMatch : ItemMatch
 {
     public bool TrueToMatchFalseToNotMatch { get; }

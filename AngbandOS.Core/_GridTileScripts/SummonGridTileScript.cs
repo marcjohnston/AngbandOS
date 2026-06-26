@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.GridTileEffects;
 
-[Serializable]
 internal class SummonGridTileScript : GridTileScript
 {
     private SummonGridTileScript(Game game) : base(game) { }

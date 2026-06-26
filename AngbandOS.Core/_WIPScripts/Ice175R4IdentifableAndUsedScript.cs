@@ -8,7 +8,6 @@ using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class Ice175R4IdentifableAndUsedScript : Script, IReadScrollOrUseStaffScript
 {
     private Ice175R4IdentifableAndUsedScript(Game game) : base(game) { }

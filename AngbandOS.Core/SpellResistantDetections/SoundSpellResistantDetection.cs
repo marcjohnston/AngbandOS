@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.SpellResistantDetections;
 
-[Serializable]
 internal class SoundSpellResistantDetection : SpellResistantDetection
 {
     private SoundSpellResistantDetection(Game game) : base(game) { }

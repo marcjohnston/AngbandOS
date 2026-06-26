@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-[Serializable]
 internal sealed class CauseWoundsMonsterSpell : MonsterSpell
 {
     public CauseWoundsMonsterSpell(Game game, CauseWoundsMonsterSpellGameConfiguration gameConfiguration) : base(game)

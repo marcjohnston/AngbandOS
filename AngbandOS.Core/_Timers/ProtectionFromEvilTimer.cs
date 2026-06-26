@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Timers;
 
-[Serializable]
 internal class ProtectionFromEvilTimer : Timer
 {
     private ProtectionFromEvilTimer(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Properties;
 
-[Serializable]
 internal abstract class IntProperty : Property, IIntValue
 {
     protected IntProperty(Game game) : base(game) { }

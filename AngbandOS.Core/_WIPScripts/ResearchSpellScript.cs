@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class ResearchSpellScript : Script, IScript, ICastSpellScript, IStoreCommandScript
 {
     private ResearchSpellScript(Game game) : base(game) { }

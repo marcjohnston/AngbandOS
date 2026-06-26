@@ -8,7 +8,6 @@
 using System;
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class DetectEvilMonstersScript : Script, IScript, ICastSpellScript, IReadScrollOrUseStaffScript, IEatOrQuaffScript
 {
     private DetectEvilMonstersScript(Game game) : base(game) { }

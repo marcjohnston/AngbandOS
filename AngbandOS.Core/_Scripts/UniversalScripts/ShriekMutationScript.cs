@@ -1,5 +1,4 @@
 namespace AngbandOS.Core.Scripts;
-    [Serializable]
 internal class ShriekMutationScript : UniversalScript, IGetKey
 {
     private ShriekMutationScript(Game game) : base(game) { }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-[Serializable]
 internal class Heal4d8AndWoundsScript : Script, IActivateItemScript
 {
     private Heal4d8AndWoundsScript(Game game) : base(game) { }

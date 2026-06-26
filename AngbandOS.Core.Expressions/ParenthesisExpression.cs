@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 public class ParenthesisExpression : Expression
 {
     public readonly Expression Expression;
