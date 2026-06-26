@@ -361,9 +361,6 @@ internal partial class Game : IGameSerialize
         // Create an instance of the SingletonRepository.  This allows repositories that are loading access to the SingletonRepository object. // TODO: This needs to be fixed once the items no longer reference other objects during construction
         SingletonRepository = new SingletonRepository(this);
 
-        // Load all of the predefined objects.  The singleton repository must already be created.
-        DateTime startTime = DateTime.Now;
-
         // Check to see if this is a new game or a game replay.
         if (gameStateBag is null)
         {
@@ -592,11 +589,6 @@ internal partial class Game : IGameSerialize
         WaterTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsWater);
 
         DungeonGenerator = new StandardDungeonGenerator(this);
-
-        #if DEBUG
-        TimeSpan elapsedTime = DateTime.Now - startTime;
-        Debug.Print($"Singleton repository load took {elapsedTime.TotalSeconds.ToString()} seconds.");
-        #endif
 
         if (gameConfiguration.MaxMessageLogLength != null)
         {
