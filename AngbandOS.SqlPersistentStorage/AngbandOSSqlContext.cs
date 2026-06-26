@@ -9,17 +9,16 @@ namespace AngbandOS.PersistentStorage
     {
         protected string ConnectionString { get; }
 
-        public AngbandOSSqlContext(string connectionString)
+        public AngbandOSSqlContext(string connectionString) : base(CreateOptions(connectionString))
         {
             ConnectionString = connectionString;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        private static DbContextOptions<AngbandOSContext> CreateOptions(string connectionString)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(ConnectionString);
-            }
+            return new DbContextOptionsBuilder<AngbandOSContext>()
+                .UseSqlServer(connectionString)
+                .Options;
         }
     }
 }

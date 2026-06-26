@@ -207,6 +207,17 @@ internal partial class SaveGameState
         return new DateTimeValueGameStateBag(value.Value);
     }
 
+    public GameStateBag CreateGameStateBag(DateTimeOffset? value)
+    {
+        if (value is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        return new DateTimeOffsetValueGameStateBag(value.Value);
+    }
+
+
     public GameStateBag CreateGameStateBag(TimeSpan? value)
     {
         if (value is null)

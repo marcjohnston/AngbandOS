@@ -7,5 +7,5 @@ public interface IReplayPersistentStorage
     /// </summary>
     /// <param name="dateTime"></param>
     /// <param name="keystroke"></param>
-    void WriteStep(DateTime dateTime, char keystroke, int seed, string? stackTrace = null);
+    void WriteStep(DateTimeOffset dateTime, char keystroke, int seed, string? stackTrace = null);
 }

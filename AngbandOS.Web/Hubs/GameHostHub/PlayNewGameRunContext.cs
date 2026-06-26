@@ -7,13 +7,13 @@ namespace AngbandOS.Web.Hubs
 {
     internal class PlayNewGameRunContext : RunContext
     {
-        private readonly string Username;
+        private readonly string UserId;
         private readonly GameConfiguration GameConfiguration;
         private readonly IWebPersistentStorage WebPersistentStorage;
 
-        public PlayNewGameRunContext(string username, GameConfiguration gameConfiguration, IWebPersistentStorage webPersistentStorage)
+        public PlayNewGameRunContext(string userId, GameConfiguration gameConfiguration, IWebPersistentStorage webPersistentStorage)
         {
-            Username = username;
+            UserId = userId;
             GameConfiguration = gameConfiguration;
             WebPersistentStorage = webPersistentStorage;
         }
@@ -27,7 +27,7 @@ namespace AngbandOS.Web.Hubs
             int seed = gameServer.GenerateNewGame(GameConfiguration);
 
             // Now we need to setup the replay and get the game replay identifier back.
-            int gameReplayId = WebPersistentStorage.GenerateGameReplayGameId(gameGuid, seed);
+            int gameReplayId = WebPersistentStorage.GenerateGameReplayGameId(UserId, gameGuid, seed);
 
             // Create an instance of the ReplayPersistentStorage to track the game for replay.
             IReplayPersistentStorage replayPersistentStorage = new SqlReplayAdapter(gameReplayId, WebPersistentStorage);
@@ -45,7 +45,7 @@ namespace AngbandOS.Web.Hubs
                 IsAlive = !results.GameIsOver
             };
 
-            WebPersistentStorage.WriteGame(Username, gameGuid, gameDetails, gameReplayId, results.SerializedGameData);
+            WebPersistentStorage.WriteGame(UserId, gameGuid, gameDetails, gameReplayId, results.SerializedGameData);
             return results;
         }
     }

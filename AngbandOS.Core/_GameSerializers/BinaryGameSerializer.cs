@@ -20,21 +20,22 @@ internal class BinaryGameSerializer : IGameSerializer
         CharArray = 4,
         CharValue = 5,
         DateTimeValue = 6,
-        DecimalValue = 7,
-        DictionaryWithSequentialRetrieval = 8,
-        DictionaryWithNonSequentialRetrieval = 9,
-        IntegerValue = 10,
-        List = 11,
-        NullValue = 12,
-        ObjectWithState = 13,
-        ObjectWithoutState = 14,
-        DerivedObjectWithState = 18,
-        DerivedObjectWithoutState = 19,
-        NonDerivedObjectWithState = 20,
-        NonDerivedObjectWithoutState = 21,
-        ReferenceToObject = 15,
-        StringValue = 16,
-        TimeSpanValue = 17
+        DateTimeOffsetValue = 7,
+        DecimalValue = 8,
+        DictionaryWithSequentialRetrieval = 9,
+        DictionaryWithNonSequentialRetrieval = 10,
+        IntegerValue = 11,
+        List = 12,
+        NullValue = 13,
+        ObjectWithState = 14,
+        ObjectWithoutState = 15,
+        DerivedObjectWithState = 16,
+        DerivedObjectWithoutState = 17,
+        NonDerivedObjectWithState = 18,
+        NonDerivedObjectWithoutState = 19,
+        ReferenceToObject = 20,
+        StringValue = 21,
+        TimeSpanValue = 22
     }
 
     private static byte[] Serialize(GameStateBag gameStateData)
@@ -89,6 +90,10 @@ internal class BinaryGameSerializer : IGameSerializer
             case DateTimeValueGameStateBag dateTimeValueGameStateBag:
                 result.Add((byte)TypeEnum.DateTimeValue);
                 result.AddRange(BitConverter.GetBytes(dateTimeValueGameStateBag.Value.Ticks));
+                break;
+            case DateTimeOffsetValueGameStateBag dateTimeOffsetValueGameStateBag:
+                result.Add((byte)TypeEnum.DateTimeOffsetValue);
+                result.AddRange(BitConverter.GetBytes(dateTimeOffsetValueGameStateBag.Value.Ticks));
                 break;
             case DecimalValueGameStateBag decimalValueGameStateBag:
                 result.Add((byte)TypeEnum.DecimalValue);
@@ -251,8 +256,12 @@ internal class BinaryGameSerializer : IGameSerializer
                 return new CharValueGameStateBag(charValue);
             case (byte)TypeEnum.DateTimeValue:
                 long dateTimeTicks = BitConverter.ToInt64(data, index);
-                index += 8;
+                index += 8; 
                 return new DateTimeValueGameStateBag(new DateTime(dateTimeTicks));
+            case (byte)TypeEnum.DateTimeOffsetValue:
+                long dateTimeOffsetTicks = BitConverter.ToInt64(data, index);
+                index += 8; // The data type is still a long.
+                return new DateTimeValueGameStateBag(new DateTime(dateTimeOffsetTicks));
             case (byte)TypeEnum.DecimalValue:
                 int[] decimalBits = new int[4];
                 for (int i = 0; i < 4; i++)

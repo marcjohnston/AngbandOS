@@ -262,9 +262,9 @@ internal partial class Game : IGameSerialize
     public bool CloseAfterReplay { get; } = false;
 
     /// <summary>
-    /// Returns the date and time of of the previous keystroke during replay mode.
+    /// Returns the date and time of the previous keystroke during replay mode.
     /// </summary>
-    private DateTime? replayPreviousKeystrokeDateTime = null;
+    private DateTimeOffset? replayPreviousKeystrokeDateTime = null;
 
     /// <summary>
     /// The queue for recording keystrokes or playing back keystrokes.  This structure is used for both recording and playback.
@@ -450,7 +450,7 @@ internal partial class Game : IGameSerialize
             StealthBonus = restoreGameState.GetByKey(nameof(StealthBonus)).GetInt();
             StrengthBonus = restoreGameState.GetByKey(nameof(StrengthBonus)).GetInt();
             WisdomBonus = restoreGameState.GetByKey(nameof(WisdomBonus)).GetInt();
-            replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTime();
+            replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTimeOffset();
             MainSequenceGameStartSeed = restoreGameState.GetByKey(nameof(MainSequenceGameStartSeed)).GetInt();
             EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(this, _restoreGameState));
             CurrentRunDirection = restoreGameState.GetByKey(nameof(CurrentRunDirection)).GetInt();
@@ -9080,12 +9080,11 @@ internal partial class Game : IGameSerialize
     {
         if (ReplayPersistentStorage is not null)
         {
+            string? stackTrace = null;
 #if DEBUG
-            string[] stackTraceTokens = GetStackTokens();
-            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, _mainSequence.CurrentSeed, String.Join(Environment.NewLine, stackTraceTokens));
-#else
-            ReplayPersistentStorage.WriteStep(DateTime.Now, keystroke, _mainSequence.CurrentSeed);
+            stackTrace = String.Join(Environment.NewLine, GetStackTokens());
 #endif
+            ReplayPersistentStorage.WriteStep(DateTimeOffset.Now, keystroke, _mainSequence.CurrentSeed, stackTrace);
         }
     }
 
@@ -9174,7 +9173,7 @@ internal partial class Game : IGameSerialize
                     DateTime now = DateTime.Now;
 
                     // Determine when the next keystroke should be submitted.
-                    DateTime nextKeystrokeSubmitTime = replayPreviousKeystrokeDateTime.Value + keystrokeElapsedTime;
+                    DateTimeOffset nextKeystrokeSubmitTime = replayPreviousKeystrokeDateTime.Value + keystrokeElapsedTime;
 
                     // Compute how much time we need to wait and wait that time out.
                     TimeSpan waitTime = nextKeystrokeSubmitTime - now;

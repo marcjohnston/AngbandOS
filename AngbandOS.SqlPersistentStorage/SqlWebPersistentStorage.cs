@@ -3,6 +3,7 @@ using AngbandOS.PersistentStorage.Sql.Entities;
 using AngbandOS.Web.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Transactions;
 
 namespace AngbandOS.PersistentStorage;
 
@@ -178,17 +179,33 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {
             // The delete needs to happen as a transaction.
+            await using var transaction = await context.Database.BeginTransactionAsync();
+
+            // Delete the saved game.
             Sql.Entities.SavedGame? savedGame = await context.SavedGames.SingleOrDefaultAsync(_savedGame => _savedGame.Guid == guid && _savedGame.UserId == userId);
             if (savedGame == null)
             {
                 return false;
             }
             context.SavedGames.Remove(savedGame);
+
+            // Delete the contents.
             context.SavedGameContents.Remove(new SavedGameContent
             {
                 Id = savedGame.SavedGameContentId
             });
+
+            // Delete the associated replay/recovery.
+            Sql.Entities.GameRecovery gameRecovery = context.GameRecoveries.Single(_gameRecovery => _gameRecovery.GameGuid.ToString() == gameGuid);
+            context.GameRecoveries.Remove(gameRecovery);
+
+            // Delete all of the replay steps.
+            await context.ReplaySteps.Where(_replayStep => _replayStep.GameReplayId == gameRecovery.Id).ExecuteDeleteAsync();
+
+            // Save and commit.
             await context.SaveChangesAsync();
+            transaction.Commit();
+
             return true;
         }
     }
@@ -374,13 +391,14 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
         }
     }
 
-    public int GenerateGameReplayGameId(string gameGuid, int seed)
+    public int GenerateGameReplayGameId(string userId, string gameGuid, int seed)
     {
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {
             Sql.Entities.GameRecovery newGameReplay = new Sql.Entities.GameRecovery
             {
                 GameGuid = Guid.Parse(gameGuid),
+                UserId = userId,
                 Seed = seed,
                 LastPlayed = DateTime.Now
             };
@@ -391,7 +409,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
         }
     }
 
-    public void WriteStep(int gameReplayId, DateTime dateTime, char keystroke, int seed, string? stackTrace)
+    public void WriteStep(int gameReplayId, DateTimeOffset dateTime, char keystroke, int seed, string? stackTrace)
     {
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {

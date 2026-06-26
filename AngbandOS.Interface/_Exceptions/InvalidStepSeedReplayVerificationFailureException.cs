@@ -11,10 +11,10 @@ public class InvalidStepSeedReplayVerificationFailureException : ReplayVerificat
     public readonly int ActualStepSeed;
     public readonly int ExpectedStepSeed;
     public readonly char Keystroke;
-    public readonly DateTime ReplayDateTime;
+    public readonly DateTimeOffset ReplayDateTime;
     public readonly int RemainingQueueCount;
 
-    public InvalidStepSeedReplayVerificationFailureException(int actualStepSeed, int expectedStepSeed, char keystroke, DateTime replayDateTime, int remainingQueueCount)
+    public InvalidStepSeedReplayVerificationFailureException(int actualStepSeed, int expectedStepSeed, char keystroke, DateTimeOffset replayDateTime, int remainingQueueCount)
     {
         ActualStepSeed = actualStepSeed;
         ExpectedStepSeed = expectedStepSeed;

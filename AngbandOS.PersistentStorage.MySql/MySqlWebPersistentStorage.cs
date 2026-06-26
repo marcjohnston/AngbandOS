@@ -243,12 +243,12 @@ namespace AngbandOS.PersistentStorage
             throw new NotImplementedException();
         }
 
-        public int GenerateGameReplayGameId(string gameGuid, int seed)
+        public int GenerateGameReplayGameId(string userId, string gameGuid, int seed)
         {
             throw new NotImplementedException();
         }
 
-        public void WriteStep(int gameReplayId, DateTime dateTime, char keystroke, int seed, string? stackTrace)
+        public void WriteStep(int gameReplayId, DateTimeOffset dateTime, char keystroke, int seed, string? stackTrace)
         {
             throw new NotImplementedException();
         }

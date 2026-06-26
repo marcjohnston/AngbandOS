@@ -91,9 +91,9 @@
           </ng-container>
           <ng-container matColumnDef="last-saved">
             <mat-header-cell mat-header-cell *matHeaderCellDef>
-              Last Saved
+              Last Played
             </mat-header-cell>
-            <mat-cell mat-cell *matCellDef="let savedGame">{{savedGame.savedDateTime | date: 'M/d/yy, h:mm a z'}}</mat-cell>
+            <mat-cell mat-cell *matCellDef="let savedGame">{{savedGame.savedDateTime | date: 'short'}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="notes">
             <mat-header-cell mat-header-cell *matHeaderCellDef>

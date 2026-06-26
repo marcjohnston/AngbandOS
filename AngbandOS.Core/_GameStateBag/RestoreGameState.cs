@@ -588,6 +588,15 @@ internal class RestoreGameState
         return GetDateTime();
     }
 
+    public DateTimeOffset? GetNullableDateTimeOffset()
+    {
+        if (GameStateBag is NullValueGameStateBag)
+        {
+            return default;
+        }
+        return GetDateTimeOffset();
+    }
+
     public string? GetStringOrDefault()
     {
         if (GameStateBag is NullValueGameStateBag)
@@ -609,6 +618,8 @@ internal class RestoreGameState
     public string GetString() => ((StringValueGameStateBag)GameStateBag).Value;
 
     public DateTime GetDateTime() => ((DateTimeValueGameStateBag)GameStateBag).Value;
+
+    public DateTimeOffset GetDateTimeOffset() => ((DateTimeOffsetValueGameStateBag)GameStateBag).Value;
 
     public byte GetByte() => ((ByteValueGameStateBag)GameStateBag).Value;
 

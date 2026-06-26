@@ -224,7 +224,7 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         else if (playMode == PlayModeEnum.ReplayGame)
         {
             GameReplayDetails gameReplayDetails = replayPersistentStorage.GetReplay();
-            gameServer.LoadGameReplay(gameConfiguration, gameReplayDetails);
+            gameServer.LoadGameReplay(gameConfiguration, gameReplayDetails, false);
             gameResults = gameServer.PlayGame(this, replayPersistentStorage);
         }
         else
