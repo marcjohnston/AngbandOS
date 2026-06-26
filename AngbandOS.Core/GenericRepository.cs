@@ -7,8 +7,8 @@
 namespace AngbandOS.Core;
 
 /// <summary>
-/// Represents a repository that is both a dictionary and a list.  Singletons are stored in both a dictionary with a string key and a list.  The key is typically the type name.  The singleton
-/// objects are being stored generically as an object.
+/// Represents a repository that is both a dictionary (with a key that is typically the type name) for fast O(1) lookup by key value (which is typically class name) and a list for lookups by index.
+/// Singletons are being stored as an object.
 /// </summary>
 internal class GenericRepository // TODO: Rename this as simply Repository
 {
