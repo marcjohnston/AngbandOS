@@ -19,7 +19,7 @@ public partial class SavedGame
 
     public bool IsAlive { get; set; }
 
-    public DateTimeOffset DateTime { get; set; }
+    public DateTime DateTime { get; set; }
 
     public int SavedGameContentId { get; set; }
 

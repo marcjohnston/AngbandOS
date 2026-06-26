@@ -9,7 +9,7 @@ public partial class ReplayStep
 
     public int GameReplayId { get; set; }
 
-    public DateTimeOffset DateTime { get; set; }
+    public DateTime DateTime { get; set; }
 
     public string Keystroke { get; set; } = null!;
 
