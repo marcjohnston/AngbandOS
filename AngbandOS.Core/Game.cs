@@ -264,7 +264,7 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the date and time of the previous keystroke during replay mode.
     /// </summary>
-    private DateTimeOffset? replayPreviousKeystrokeDateTime = null;
+    private DateTime? replayPreviousKeystrokeDateTime = null;
 
     /// <summary>
     /// The queue for recording keystrokes or playing back keystrokes.  This structure is used for both recording and playback.
@@ -447,7 +447,7 @@ internal partial class Game : IGameSerialize
             StealthBonus = restoreGameState.GetByKey(nameof(StealthBonus)).GetInt();
             StrengthBonus = restoreGameState.GetByKey(nameof(StrengthBonus)).GetInt();
             WisdomBonus = restoreGameState.GetByKey(nameof(WisdomBonus)).GetInt();
-            replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTimeOffset();
+            replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTime();
             MainSequenceGameStartSeed = restoreGameState.GetByKey(nameof(MainSequenceGameStartSeed)).GetInt();
             EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(this, _restoreGameState));
             CurrentRunDirection = restoreGameState.GetByKey(nameof(CurrentRunDirection)).GetInt();
@@ -711,7 +711,7 @@ internal partial class Game : IGameSerialize
         void PrintTomb()
         {
             {
-                DateTime ct = DateTime.Now;
+                DateTime ct = DateTime.Now; // This needs to be local time.
                 if (IsWinner.BoolValue)
                 {
                     SetBackground(BackgroundImageEnum.Sunset);
@@ -782,7 +782,7 @@ internal partial class Game : IGameSerialize
 
         ConsoleViewPort = consoleViewPort;
         Shutdown = false;
-        LastInputReceived = DateTime.Now;
+        LastInputReceived = DateTime.Now.ToUniversalTime();
         ReplayPersistentStorage = replayPersistentStorage;
 
         if (Screen is null)
@@ -1099,7 +1099,7 @@ internal partial class Game : IGameSerialize
     private const int _maxVampiricDrain = 100;
 
     /// <summary>
-    /// Returns the date and time when the last player input was received or the game was initially started.  Null, until the game is started.
+    /// Returns the date and time, in UTC, when the last player input was received or the game was initially started.  Null, until the game is started.
     /// </summary>
     public DateTime? LastInputReceived = null;
 
@@ -9076,7 +9076,7 @@ internal partial class Game : IGameSerialize
 #if DEBUG
             stackTrace = String.Join(Environment.NewLine, GetStackTokens());
 #endif
-            ReplayPersistentStorage.WriteStep(DateTimeOffset.Now, keystroke, _mainSequence.CurrentSeed, stackTrace);
+            ReplayPersistentStorage.WriteStep(DateTime.Now.ToUniversalTime(), keystroke, _mainSequence.CurrentSeed, stackTrace);
         }
     }
 
@@ -9162,10 +9162,10 @@ internal partial class Game : IGameSerialize
                     replayPreviousKeystrokeDateTime = gameReplayStep.DateTime;
 
                     // Retrieve the current date and time for the computations.
-                    DateTime now = DateTime.Now;
+                    DateTime now = DateTime.Now.ToUniversalTime();
 
                     // Determine when the next keystroke should be submitted.
-                    DateTimeOffset nextKeystrokeSubmitTime = replayPreviousKeystrokeDateTime.Value + keystrokeElapsedTime;
+                    DateTime nextKeystrokeSubmitTime = replayPreviousKeystrokeDateTime.Value + keystrokeElapsedTime;
 
                     // Compute how much time we need to wait and wait that time out.
                     TimeSpan waitTime = nextKeystrokeSubmitTime - now;
@@ -9214,7 +9214,7 @@ internal partial class Game : IGameSerialize
                 if (k.HasValue) 
                 {
                     KeyQueue.Enqueue(k.Value);
-                    LastInputReceived = DateTime.Now;
+                    LastInputReceived = DateTime.Now.ToUniversalTime();
                     ConsoleViewPort.InputReceived();
                 }
             }

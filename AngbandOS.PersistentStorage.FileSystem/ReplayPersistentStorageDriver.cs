@@ -101,7 +101,7 @@ public class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDisposab
         await _stream.WriteAsync(bytes);
     }
 
-    public async void WriteStep(DateTimeOffset dateTime, char keystroke, int seed, string? stackTrace = null)
+    public async void WriteStep(DateTime dateTime, char keystroke, int seed, string? stackTrace = null)
     {
         // If we are appending data to an existing replay, we need to open it now.
         if (_stream is null)

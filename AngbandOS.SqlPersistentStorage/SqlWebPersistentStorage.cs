@@ -84,7 +84,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
             savedGame.CharacterName = gameDetails.CharacterName;
             savedGame.Comments = gameDetails.Comments;
             savedGame.Level = gameDetails.Level;
-            savedGame.DateTime = DateTime.Now;
+            savedGame.DateTime = DateTime.Now.ToUniversalTime();
             savedGame.Gold = gameDetails.Gold;
             savedGame.IsAlive = gameDetails.IsAlive;
 
@@ -272,7 +272,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
             {
                 FromUserId = fromId,
                 Content = content,
-                SentDateTime = DateTime.Now,
+                SentDateTime = DateTime.Now.ToUniversalTime(),
                 ToUserId = toId,
                 GameId = gameId,
                 Type = (int)type
@@ -400,7 +400,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
                 GameGuid = Guid.Parse(gameGuid),
                 UserId = userId,
                 Seed = seed,
-                LastPlayed = DateTime.Now
+                LastPlayed = DateTime.Now.ToUniversalTime()
             };
             context.GameRecoveries.Add(newGameReplay);
             context.SaveChanges();
@@ -409,7 +409,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
         }
     }
 
-    public void WriteStep(int gameReplayId, DateTimeOffset dateTime, char keystroke, int seed, string? stackTrace)
+    public void WriteStep(int gameReplayId, DateTime dateTime, char keystroke, int seed, string? stackTrace)
     {
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {
