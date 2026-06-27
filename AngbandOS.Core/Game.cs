@@ -94,11 +94,10 @@ internal partial class Game : IGameSerialize
             ("bools7", saveGameState.CreateGameStateBag(HasSoundResistance, HasSustainCharisma, HasSustainConstitution, HasSustainDexterity, HasSustainIntelligence, HasSustainStrength, HasSustainWisdom, HasTelepathy)),
             ("bools8", saveGameState.CreateGameStateBag(HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance)),
             ("bools9", saveGameState.CreateGameStateBag(Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, _findBreakLeft, _findBreakRight)),
-            ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, Playing)),
-            ("bools11", saveGameState.CreateGameStateBag(ViewingEquipment, ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters)),
+            ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment)),
+            ("bools11", saveGameState.CreateGameStateBag(ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters)),
 
             (nameof(_mainSequence), saveGameState.CreateDerivedGameStateBag(_mainSequence, typeof(GameRandom))),
-            (nameof(ShimmerMonsters), saveGameState.CreateGameStateBag(ShimmerMonsters)),
             (nameof(GlowInTheDarkRadius), saveGameState.CreateGameStateBag(GlowInTheDarkRadius)),
             (nameof(Height), saveGameState.CreateGameStateBag(Height)),
             (nameof(HitDie), saveGameState.CreateGameStateBag(HitDie)),
@@ -417,11 +416,10 @@ internal partial class Game : IGameSerialize
             (HasSoundResistance, HasSustainCharisma, HasSustainConstitution, HasSustainDexterity, HasSustainIntelligence, HasSustainStrength, HasSustainWisdom, HasTelepathy) = restoreGameState.GetByKey("bools7").Get8Bools();
             (HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance) = restoreGameState.GetByKey("bools8").Get8Bools();
             (Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, _findBreakLeft, _findBreakRight) = restoreGameState.GetByKey("bools9").Get8Bools();
-            (_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, Playing) = restoreGameState.GetByKey("bools10").Get8Bools();
-            (ViewingEquipment, ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
+            (_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment) = restoreGameState.GetByKey("bools10").Get8Bools();
+            (ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
 
             _mainSequence = restoreGameState.GetByKey(nameof(_mainSequence)).GetDerivedReference<GameRandom>(_restoreGameState => new GameRandom(_restoreGameState));
-            ShimmerMonsters = restoreGameState.GetByKey(nameof(ShimmerMonsters)).GetBool();
             GlowInTheDarkRadius = restoreGameState.GetByKey(nameof(GlowInTheDarkRadius)).GetInt();
             Height = restoreGameState.GetByKey(nameof(Height)).GetInt();
             HitDie = restoreGameState.GetByKey(nameof(HitDie)).GetInt();
@@ -811,7 +809,7 @@ internal partial class Game : IGameSerialize
         UpdateScreen();
         FullScreenOverlay = false;
         SetBackground(BackgroundImageEnum.Overhead);
-        Playing = true;
+        Shutdown = false;
         if (Health.IntValue < 0)
         {
             IsDead = true;
@@ -824,35 +822,48 @@ internal partial class Game : IGameSerialize
             DungeonLoop();
 
             // We need to detect if the shutdown has happened, or if we are changing the dungeon 
-            if (!Shutdown)
+            if (Shutdown)
             {
-                // The dungeon level is changing.
-                NoticeStuff();
-                UpdateStuff();
-                RedrawStuff();
-                TargetWho = null;
-                HealthTrack(null);
-                SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Check(true);
-                SingletonRepository.Get<FlaggedAction>(nameof(RemoveViewFlaggedAction)).Check(true);
-                if (!Playing && !IsDead)
-                {
-                    break;
-                }
-                _petList = GetPets();
-                WipeMList();
-                MsgPrint(string.Empty);
-                if (IsDead)
-                {
-                    ConsoleViewPort.PlayerDied(PlayerName.StringValue, DiedFrom, ExperienceLevel.IntValue);
-
-                    // Store the player info
-                    ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, CharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.StringValue, ExperienceLevel.IntValue, Generation);
-                    break;
-                }
-                DungeonGenerator.GenerateNewLevel();
-                ReplacePets(MapY.IntValue, MapX.IntValue, _petList);
+                break;
             }
+             
+            // The dungeon level is changing.
+            NoticeStuff();
+            UpdateStuff();
+            RedrawStuff();
+            TargetWho = null;
+            HealthTrack(null);
+            SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Check(true);
+            SingletonRepository.Get<FlaggedAction>(nameof(RemoveViewFlaggedAction)).Check(true);
+            if (Shutdown && !IsDead)
+            {
+                break;
+            }
+            _petList = GetPets();
+            WipeMList();
+            MsgPrint(string.Empty);
+            if (IsDead)
+            {
+                ConsoleViewPort.PlayerDied(PlayerName.StringValue, DiedFrom, ExperienceLevel.IntValue);
+
+                // Store the player info
+                ExPlayer = new ExPlayer(Gender, Race, RaceAtBirth, CharacterClass?.GetType().Name, PrimaryRealm, SecondaryRealm, PlayerName.StringValue, ExperienceLevel.IntValue, Generation);
+                break;
+            }
+            DungeonGenerator.GenerateNewLevel();
+            ReplacePets(MapY.IntValue, MapX.IntValue, _petList);
         }
+
+        // Final seed verification.
+        if (!FinalSeed.HasValue)
+        {
+            throw new Exception("Final seed not set.");
+        }
+        else if (FinalSeed.Value != _mainSequence.CurrentSeed)
+        {
+            throw new Exception("Final seed verification failed.");
+        }
+
         ConsoleViewPort.GameStopped();
         CloseGame();
     }
@@ -1130,7 +1141,7 @@ internal partial class Game : IGameSerialize
     public int EnergyUse;
     public bool HackMind;
     public bool NewLevelFlag;
-    public bool Playing;
+    private int? FinalSeed = null;
     public Dungeon RecallDungeon;
     public int Resting;
     public int Running;
@@ -3945,7 +3956,7 @@ internal partial class Game : IGameSerialize
         UpdateStuff();
         RedrawStuff();
         UpdateScreen();
-        if (!Playing || IsDead || NewLevelFlag)
+        if (IsDead || NewLevelFlag)
         {
             return;
         }
@@ -3993,12 +4004,15 @@ internal partial class Game : IGameSerialize
                 CompactMonsters(0);
             }
             ProcessPlayer();
-
+            if (Shutdown)
+            {
+                break;
+            }
             NoticeStuff();
             UpdateStuff();
             RedrawStuff();
             ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
-            if (!Playing || IsDead || NewLevelFlag)
+            if (IsDead || NewLevelFlag)
             {
                 break;
             }
@@ -4009,7 +4023,7 @@ internal partial class Game : IGameSerialize
             UpdateStuff();
             RedrawStuff();
             ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
-            if (!Playing || IsDead || NewLevelFlag)
+            if (IsDead || NewLevelFlag)
             {
                 break;
             }
@@ -4018,7 +4032,7 @@ internal partial class Game : IGameSerialize
             UpdateStuff();
             RedrawStuff();
             ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
-            if (!Playing || IsDead || NewLevelFlag)
+            if (IsDead || NewLevelFlag)
             {
                 break;
             }
@@ -4237,6 +4251,10 @@ internal partial class Game : IGameSerialize
             {
                 ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
                 RequestCommand(true);
+                if (Shutdown)
+                {
+                    break;
+                }
                 ProcessCommand(false);
                 CloseBatchOfMessages();
             }
@@ -4295,7 +4313,7 @@ internal partial class Game : IGameSerialize
                     }
                 }
             }
-            if (!Playing || IsDead || NewLevelFlag)
+            if (IsDead || NewLevelFlag)
             {
                 break;
             }
@@ -8603,7 +8621,7 @@ internal partial class Game : IGameSerialize
             // Process the individual monster
             monster.ProcessMonster(noise);
             // If the monster killed the player or sent us to a new level, then stop processing
-            if (!Playing || IsDead || NewLevelFlag)
+            if (IsDead || NewLevelFlag)
             {
                 break;
             }
@@ -8954,8 +8972,9 @@ internal partial class Game : IGameSerialize
                     // Cancel, resume game, escape
                     break;
                 case 1:
-                // Save and Quit
-                    Playing = false; // TODO: Need to use event arguments
+                    // Save and Quit
+                    Shutdown = true; // TODO: Need to use event arguments
+                    FinalSeed = _mainSequence.CurrentSeed;
                     break;
             }
         }
@@ -9201,7 +9220,8 @@ internal partial class Game : IGameSerialize
                     // Check the replay mode, if replay is over.
                     if (ReplayQueue.Count == 0 && CloseAfterReplay)
                     {
-                        Playing = false;
+                        Shutdown = true;
+                        FinalSeed = _mainSequence.CurrentSeed;
                     }
                 }
                 else

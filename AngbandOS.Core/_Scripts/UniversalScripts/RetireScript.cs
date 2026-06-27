@@ -63,7 +63,7 @@ internal class RetireScript : UniversalScript, IGetKey
             }
         }
         // Assuming whe player didn't give up, "kill" the character by quitting
-        Game.Playing = false;
+        Game.Shutdown = true;
         Game.IsDead = true;
         Game.DiedFrom = "quitting";
     }
