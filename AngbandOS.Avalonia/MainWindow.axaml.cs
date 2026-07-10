@@ -54,7 +54,9 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         Directory.CreateDirectory(savePath);
         string replayFilename = Path.Combine(savePath, "AngbandOS.replay");
         string saveFilename = Path.Combine(savePath, "AngbandOS.save");
-        PlayModeEnum playMode = File.Exists(saveFilename) ? PlayModeEnum.ExistingGame : File.Exists(replayFilename) ? PlayModeEnum.ReplayGame : PlayModeEnum.NewGame;
+        bool saveFileExists = File.Exists(saveFilename);
+        bool replayFileExists = File.Exists(replayFilename);
+        PlayModeEnum playMode = saveFileExists ? PlayModeEnum.ExistingGame : replayFileExists ? PlayModeEnum.ReplayGame : PlayModeEnum.NewGame;
         ReplayPersistentStorageDriver replayPersistentStorage = new ReplayPersistentStorageDriver(replayFilename);
         GameConfiguration gameConfiguration = new CthangbandGameConfiguration();
         GameResults gameResults;
@@ -62,7 +64,15 @@ public partial class MainWindow : Window, IConsoleAndViewPort
         {
             byte[] serializedSaveGameData = File.ReadAllBytes(saveFilename);
             gameServer.LoadExistingGame(gameConfiguration, serializedSaveGameData);
-            gameResults = gameServer.PlayGame(this, replayPersistentStorage);
+            if (replayFileExists)
+            {
+                gameResults = gameServer.PlayGame(this, replayPersistentStorage);
+            }
+            else
+            {
+                // We cannot append to a non-existant replay file.
+                gameResults = gameServer.PlayGame(this, null);
+            }
         }
         else if (playMode == PlayModeEnum.ReplayGame)
         {

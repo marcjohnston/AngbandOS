@@ -54,6 +54,7 @@ internal sealed class CauseWoundsMonsterSpell : MonsterSpell
         HeavyCurseEquipmentChance = gameConfiguration.HeavyCurseEquipmentChance;
         TimedBleedingExpressionText = gameConfiguration.TimedBleedingExpressionText;
     }
+
     public override string Key { get; }
 
     public override string ToJson()
