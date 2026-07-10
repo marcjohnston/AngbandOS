@@ -71,7 +71,7 @@ internal class MonsterKnowledge : IGameSerialize
         RDropItem = restoreGameState.GetByKey(nameof(RDropItem)).GetInt();
         Guardian = restoreGameState.GetByKey(nameof(Guardian)).GetBool();
         OnlyGuardian = restoreGameState.GetByKey(nameof(OnlyGuardian)).GetBool();
-        Characteristics = restoreGameState.GetByKey(nameof(Characteristics)).GetDerivedReference<MonsterCharacteristics>((_restoreGameState => new MonsterCharacteristics(Game, _restoreGameState));
+        Characteristics = restoreGameState.GetByKey(nameof(Characteristics)).GetDerivedReference<MonsterCharacteristics>((_restoreGameState => new MonsterCharacteristics(Game, _restoreGameState)));
         RSpells = restoreGameState.GetByKey(nameof(RSpells)).GetDerivedReferences<MonsterSpell>();
         RIgnore = restoreGameState.GetByKey(nameof(RIgnore)).GetInt();
         RPkills = restoreGameState.GetByKey(nameof(RPkills)).GetInt();
