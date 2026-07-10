@@ -1656,7 +1656,11 @@ internal partial class Game : IGameSerialize
     /// </summary>
     private readonly List<GameMessage> MessageLog = new List<GameMessage>();
     private readonly List<GameMessage> RecentMessages = new List<GameMessage>();
-    private GameMessage[] PreviousMessages;
+
+    /// <summary>
+    /// Returns all of the messages from the previous command.  If there are no messages, the array will be empty.  Null, is not supported.
+    /// </summary>
+    private GameMessage[] PreviousMessages = new GameMessage[0];
 
     /// <summary>
     /// Returns the property that maintains the game message.

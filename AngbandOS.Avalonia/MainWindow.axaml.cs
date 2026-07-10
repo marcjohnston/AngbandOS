@@ -48,48 +48,55 @@ public partial class MainWindow : Window, IConsoleAndViewPort
     enum PlayModeEnum { NewGame, ExistingGame, ReplayGame }
     private void RunGame()
     {
-        GameServer gameServer = new GameServer();
-        string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        string savePath = Path.Combine(myDocumentsPath, "AngbandOS");
-        Directory.CreateDirectory(savePath);
-        string replayFilename = Path.Combine(savePath, "AngbandOS.replay");
-        string saveFilename = Path.Combine(savePath, "AngbandOS.save");
-        bool saveFileExists = File.Exists(saveFilename);
-        bool replayFileExists = File.Exists(replayFilename);
-        PlayModeEnum playMode = saveFileExists ? PlayModeEnum.ExistingGame : replayFileExists ? PlayModeEnum.ReplayGame : PlayModeEnum.NewGame;
-        ReplayPersistentStorageDriver replayPersistentStorage = new ReplayPersistentStorageDriver(replayFilename);
-        GameConfiguration gameConfiguration = new CthangbandGameConfiguration();
-        GameResults gameResults;
-        if (playMode == PlayModeEnum.ExistingGame)
+        try
         {
-            byte[] serializedSaveGameData = File.ReadAllBytes(saveFilename);
-            gameServer.LoadExistingGame(gameConfiguration, serializedSaveGameData);
-            if (replayFileExists)
+            GameServer gameServer = new GameServer();
+            string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string savePath = Path.Combine(myDocumentsPath, "AngbandOS");
+            Directory.CreateDirectory(savePath);
+            string replayFilename = Path.Combine(savePath, "AngbandOS.replay");
+            string saveFilename = Path.Combine(savePath, "AngbandOS.save");
+            bool saveFileExists = File.Exists(saveFilename);
+            bool replayFileExists = File.Exists(replayFilename);
+            PlayModeEnum playMode = saveFileExists ? PlayModeEnum.ExistingGame : replayFileExists ? PlayModeEnum.ReplayGame : PlayModeEnum.NewGame;
+            ReplayPersistentStorageDriver replayPersistentStorage = new ReplayPersistentStorageDriver(replayFilename);
+            GameConfiguration gameConfiguration = new CthangbandGameConfiguration();
+            GameResults gameResults;
+            if (playMode == PlayModeEnum.ExistingGame)
             {
+                byte[] serializedSaveGameData = File.ReadAllBytes(saveFilename);
+                gameServer.LoadExistingGame(gameConfiguration, serializedSaveGameData);
+                if (replayFileExists)
+                {
+                    gameResults = gameServer.PlayGame(this, replayPersistentStorage);
+                }
+                else
+                {
+                    // We cannot append to a non-existant replay file.
+                    gameResults = gameServer.PlayGame(this, null);
+                }
+            }
+            else if (playMode == PlayModeEnum.ReplayGame)
+            {
+                GameReplayDetails gameReplayDetails = replayPersistentStorage.GetReplay();
+                gameServer.LoadGameReplay(gameConfiguration, gameReplayDetails, false);
                 gameResults = gameServer.PlayGame(this, replayPersistentStorage);
             }
             else
             {
-                // We cannot append to a non-existant replay file.
-                gameResults = gameServer.PlayGame(this, null);
+                int seed = gameServer.GenerateNewGame(gameConfiguration);
+                replayPersistentStorage.NewGame(seed);
+                gameResults = gameServer.PlayGame(this, replayPersistentStorage);
+            }
+
+            if (gameResults.SerializedGameData?.Length > 0)
+            {
+                File.WriteAllBytes(saveFilename, gameResults.SerializedGameData);
             }
         }
-        else if (playMode == PlayModeEnum.ReplayGame)
+        catch (Exception ex)
         {
-            GameReplayDetails gameReplayDetails = replayPersistentStorage.GetReplay();
-            gameServer.LoadGameReplay(gameConfiguration, gameReplayDetails, false);
-            gameResults = gameServer.PlayGame(this, replayPersistentStorage);
-        }
-        else
-        {
-            int seed = gameServer.GenerateNewGame(gameConfiguration);
-            replayPersistentStorage.NewGame(seed);
-            gameResults = gameServer.PlayGame(this, replayPersistentStorage);
-        }
-
-        if (gameResults.SerializedGameData?.Length > 0)
-        {
-            File.WriteAllBytes(saveFilename, gameResults.SerializedGameData);
+            Dispatcher.UIThread.Post(() => GameExceptionThrown(ex.Message));
         }
     }
 
