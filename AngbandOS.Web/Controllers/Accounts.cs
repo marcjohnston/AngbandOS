@@ -78,13 +78,19 @@ namespace AngbandOS.Web.Controllers
             try
             {
                 if (postUser == null)
+                {
                     return BadRequest("The user to post was not supplied or did not parse correctly.");
+                }
 
                 if (postUser.Username.Length < 5 || postUser.Username.Length > 15 || !char.IsLetter(postUser.Username[0]) || !postUser.Username.Substring(1).All(char.IsLetterOrDigit))
+                {
                     return BadRequest("Invalid username.");
+                }
 
                 if (!IsValidEmailAddress(postUser.EmailAddress))
+                {
                     return BadRequest("Invalid email address.");
+                }
 
                 // Create a user to add to the ASP.NET Core Identity.
                 ApplicationUser newUser = new ApplicationUser()
@@ -158,7 +164,9 @@ namespace AngbandOS.Web.Controllers
             try
             {
                 if (postAuthentication == null)
+                {
                     return BadRequest("The authentication request to post was not supplied or did not parse correctly.");
+                }
 
                 if (postAuthentication.Password != null)
                 {
@@ -196,7 +204,9 @@ namespace AngbandOS.Web.Controllers
             {
                 string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
                 if (emailAddress == null)
+                {
                     return Unauthorized();
+                }
 
                 ApplicationUser currentUser = await UserManager.FindByEmailAsync(emailAddress);
 
@@ -229,20 +239,28 @@ namespace AngbandOS.Web.Controllers
             try
             {
                 if (verifyAccount == null)
+                {
                     return BadRequest("The user verification to put was not supplied or did not parse correctly.");
+                }
 
                 // Ensure the user performing the confirmation is the currently logged on user.
                 if (User == null)
+                {
                     return base.StatusCode((int)HttpStatusCode.Forbidden);
+                }
 
                 string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
                 if (emailAddress == null)
+                {
                     return Unauthorized();
+                }
                 ApplicationUser user = await UserManager.FindByEmailAsync(emailAddress);
 
                 IdentityResult result = await UserManager.ConfirmEmailAsync(user, verifyAccount.Token);
                 if (!result.Succeeded)
+                {
                     return BadRequest(new string?[] { result.Errors.FirstOrDefault()?.Description });
+                }
 
                 return Ok();
             }
@@ -264,7 +282,9 @@ namespace AngbandOS.Web.Controllers
 
                 // If the user does not exist, do not inform the client.  This is an anonymous call.
                 if (appUser == null)
+                {
                     return Ok();
+                }
 
                 string token = await UserManager.GeneratePasswordResetTokenAsync(appUser);
 
@@ -299,7 +319,9 @@ namespace AngbandOS.Web.Controllers
             try
             {
                 if (resetPasswordRequest == null)
+                {
                     return BadRequest("The password reset request to post was not supplied or did not parsed correctly.");
+                }
                 else
                 {
                     ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
@@ -307,7 +329,9 @@ namespace AngbandOS.Web.Controllers
                     {
                         IdentityResult result = await UserManager.ResetPasswordAsync(appUser, resetPasswordRequest.ResetPasswordToken, resetPasswordRequest.NewPassword);
                         if (result.Succeeded)
+                        {
                             return Ok();
+                        }
                     }
                     return base.StatusCode((int)HttpStatusCode.Forbidden);
                 }
@@ -327,19 +351,27 @@ namespace AngbandOS.Web.Controllers
             try
             {
                 if (changePasswordRequest == null)
+                {
                     return BadRequest("The change password request to put was not supplied or did not parse correctly.");
+                }
                 else
                 {
                     string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
                     if (emailAddress == null)
+                    {
                         return Unauthorized();
+                    }
 
                     ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
                     IdentityResult result = await UserManager.ChangePasswordAsync(appUser, changePasswordRequest.CurrentPassword, changePasswordRequest.NewPassword);
                     if (result.Succeeded)
+                    {
                         return Ok();
+                    }
                     else
+                    {
                         return base.StatusCode((int)HttpStatusCode.Forbidden);
+                    }
                 }
             }
             catch
@@ -357,12 +389,16 @@ namespace AngbandOS.Web.Controllers
             try
             {
                 if (updateAccountRequest == null)
+                {
                     return BadRequest("The update account request to put was not supplied or did not parse correctly.");
+                }
                 else
                 {
                     string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
                     if (emailAddress == null)
+                    {
                         return Unauthorized();
+                    }
 
                     ApplicationUser? currentUser = await UserManager.FindByEmailAsync(emailAddress);
                     IdentityResult result = await UserManager.SetUserNameAsync(currentUser, updateAccountRequest.Username);
@@ -380,9 +416,13 @@ namespace AngbandOS.Web.Controllers
                         await EmailSender.SendEmailAsync(currentUser.Email, "AngbandOS Confirm Email", htmlDocument);
                     }
                     if (result.Succeeded)
+                    {
                         return Ok();
+                    }
                     else
+                    {
                         return base.StatusCode((int)HttpStatusCode.Forbidden);
+                    }
                 }
             }
             catch
@@ -401,11 +441,15 @@ namespace AngbandOS.Web.Controllers
             {
                 string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
                 if (emailAddress == null)
+                {
                     return Unauthorized();
+                }
 
                 ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
                 if (appUser == null)
+                {
                     return base.StatusCode((int)HttpStatusCode.Forbidden);
+                }
 
                 UserSettingsDetails? userSettings = await WebPersistentStorage.GetPreferences(appUser.Id);
                 return new GetUserPreferences()
@@ -442,11 +486,15 @@ namespace AngbandOS.Web.Controllers
             {
                 string? emailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
                 if (emailAddress == null)
+                {
                     return Unauthorized();
+                }
 
                 ApplicationUser? appUser = await UserManager.FindByEmailAsync(emailAddress);
                 if (appUser == null)
+                {
                     return base.StatusCode((int)HttpStatusCode.Forbidden);
+                }
 
                 UserSettingsDetails userSettingsDetails = new UserSettingsDetails()
                 {
