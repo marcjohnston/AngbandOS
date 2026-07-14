@@ -334,7 +334,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
         }
     }
 
-    public async Task<bool> DeleteMessagesAsync(int messageId)
+    public async Task<bool> DeleteMessageAsync(int messageId)
     {
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {
@@ -346,6 +346,16 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
             message.IsDeleted = true;
             await context.SaveChangesAsync();
             return true;
+        }
+    }
+
+    public async Task DeleteAllUserMessagesAsync(string userId)
+    {
+        using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
+        {
+            Message[] messages = context.Messages.Where(_message => _message.FromUserId == userId || (_message.ToUserId != null && _message.ToUserId == userId)).ToArray();
+            context.Messages.RemoveRange(messages);
+            await context.SaveChangesAsync();
         }
     }
 

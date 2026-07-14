@@ -1,10 +1,14 @@
-﻿using AngbandOS.Web.Interface;
+﻿using AngbandOS.Web.Data;
+using AngbandOS.Web.Interface;
 using AngbandOS.Web.TemplateProcessing;
+using Duende.IdentityServer.Events;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Net.Mail;
@@ -123,6 +127,8 @@ namespace AngbandOS.Web.Controllers
             }
         }
 
+        private bool IsAdministrator(string email) => Configuration != null && email.ToLower() == Configuration["administrator"]?.ToLower();
+
         private string GenerateJSONWebToken(ApplicationUser userInfo)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Secret"]));
@@ -133,7 +139,7 @@ namespace AngbandOS.Web.Controllers
             claims.Add(new Claim("email", userInfo.Email));
             claims.Add(new Claim("email_verified", userInfo.EmailConfirmed ? "true" : "false"));
             claims.Add(new Claim("username", userInfo.UserName));
-            if (userInfo.Email == Configuration["administrator"])
+            if (IsAdministrator(userInfo.Email))
             {
                 string customRoleClaimType = Configuration["CustomRoleClaimType"];
                 claims.Add(new Claim(customRoleClaimType, "administrator"));
@@ -342,6 +348,71 @@ namespace AngbandOS.Web.Controllers
             }
         }
 
+        [HttpDelete]
+        [Authorize]
+        [Route("{emailAddress}")]
+        [Produces("application/json")]
+        public async Task<ActionResult> DeleteAccount([FromRoute] string emailAddress)
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(emailAddress))
+                {
+                    return BadRequest();
+                }
+
+                // Get the email address for the current user.  User must be logged in.
+                string? currentUserEmailAddress = User?.FindFirst(ClaimTypes.Email)?.Value;
+                if (currentUserEmailAddress == null || !IsAdministrator(currentUserEmailAddress))
+                {
+                    return Unauthorized();
+                }
+
+                // The delete process requires the entire ApplicationUser object.
+                ApplicationUser? deleteApplicationUser = await UserManager.FindByEmailAsync(emailAddress);
+                if (deleteApplicationUser == null)
+                {
+                    return NotFound();
+                }
+
+                // Do not allow the administrator to change their email address or anyone to change into the administrator email address.
+                if (IsAdministrator(emailAddress))
+                {
+                    return UnprocessableEntity();
+                }
+
+                // Delete saved games.
+                AvailableGames availableGames = await WebPersistentStorage.ListGamesAsync(deleteApplicationUser.Id);
+                foreach (SavedGame savedGame in availableGames.SavedGames)
+                {
+                    await WebPersistentStorage.DeleteGameAsync(savedGame.Guid, deleteApplicationUser.Id);
+                }
+
+                // Delete game recoveries.
+                foreach (GameRecovery gameRecovery in availableGames.GameRecoveries)
+                {
+                    await WebPersistentStorage.DeleteGameRecoveryAsync(gameRecovery.Id, deleteApplicationUser.Id);
+                }
+
+                await WebPersistentStorage.DeleteAllUserMessagesAsync(deleteApplicationUser.Id);
+
+                IdentityResult result = await UserManager.DeleteAsync(deleteApplicationUser);
+
+                if (result.Succeeded)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return base.StatusCode((int)HttpStatusCode.Forbidden);
+                }
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            }
+        }
+
         [HttpPut]
         [Authorize]
         [Route("password")]
@@ -402,8 +473,16 @@ namespace AngbandOS.Web.Controllers
 
                     ApplicationUser? currentUser = await UserManager.FindByEmailAsync(emailAddress);
                     IdentityResult result = await UserManager.SetUserNameAsync(currentUser, updateAccountRequest.Username);
+
+                    // Check to see if we are trying to update the email address.
                     if (updateAccountRequest.EmailAddress != currentUser.Email)
                     {
+                        // Do not allow the administrator to change their email address or anyone to change into the administrator email address.
+                        if (IsAdministrator(currentUser.Email) || IsAdministrator(updateAccountRequest.EmailAddress))
+                        {
+                            return UnprocessableEntity();
+                        }
+
                         // Create an email confirmation token and send it to the user.
                         string token = await UserManager.GenerateChangeEmailTokenAsync(currentUser, updateAccountRequest.EmailAddress);
 

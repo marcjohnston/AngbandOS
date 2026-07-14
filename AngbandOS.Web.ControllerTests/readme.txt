@@ -1,0 +1,1 @@
+These controller tests utilize the REST Client extension by Huachao Mao for Visual Studio Code.

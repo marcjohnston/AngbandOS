@@ -1,0 +1,16 @@
+### Login
+
+# @name login
+POST {{host}}/accounts/{{emailAddress}}/authentication
+Content-Type: application/json
+
+{
+    "password":"{{password}}"
+}
+
+### Delete account
+
+@jwt = {{login.response.body.$.jwtToken}}
+# @prompt deleteEmailAddress Email address for account to delete
+DELETE {{host}}/accounts/{{deleteEmailAddress}}
+Authorization: Bearer {{jwt}}

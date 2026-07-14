@@ -54,7 +54,6 @@
     "tar": ">=7.5.16",
     "vite": ">=7.3.5",
     "rollup": ">=4.59.0",
-    "flatted": ">=3.4.2",
-    "@angular/platform-server": ">=21.2.16"
+    "flatted": ">=3.4.2"
   }
 }

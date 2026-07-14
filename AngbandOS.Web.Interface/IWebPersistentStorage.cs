@@ -1,4 +1,5 @@
 ﻿using AngbandOS.Core.Interface;
+using System.Net;
 
 namespace AngbandOS.Web.Interface
 {
@@ -64,17 +65,24 @@ namespace AngbandOS.Web.Interface
         /// will get to also read all messages but they will also get messages sent directly to them.
         /// </summary>
         /// <param name="userId">The id of the user requesting the messages or null for an anonymous user.</param>
-        /// <param name="mostRecentMessageId">The most recent ID of the message to return.  Only messages prior to this ID will be returned.  Used for scrolling.</param>
+        /// <param name="mostRecentMessageId">The most recent ID of the message to return.  Only messages prior to this ID will be returned; or null for most recent.  Used for scrolling.</param>
         /// <param name="types">List of message types that the user should receive or null for ALL.</param>
         /// <returns></returns>
         Task<MessageDetails[]> GetMessagesAsync(string? userId, int? mostRecentMessageId, MessageTypeEnum[]? types, bool includeDeleted);
 
         /// <summary>
-        /// Deletes a message from the database.
+        /// Flags a single message as deleted by the unique message id from the database and returns true, if the message was found and delete; false, otherwise.
         /// </summary>
         /// <param name="messageId">The id of the message.</param>
         /// <returns></returns>
-        Task<bool> DeleteMessagesAsync(int messageId);
+        Task<bool> DeleteMessageAsync(int messageId);
+
+        /// <summary>
+        /// Deletes all messages associated to a user by the email address.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task DeleteAllUserMessagesAsync(string userId);
         #endregion
 
         #region Game Recovery Functionality

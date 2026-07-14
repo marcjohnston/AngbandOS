@@ -47,7 +47,7 @@ namespace AngbandOS.Web.Hubs
             string customRoleClaimType = Configuration["CustomRoleClaimType"];
             if (Context.User.HasClaim(customRoleClaimType, "administrator"))
             {
-                await WebPersistentStorage.DeleteMessagesAsync(messageId);
+                await WebPersistentStorage.DeleteMessageAsync(messageId);
 
                 // We need to force a refresh of all chat clients.
                 //GameService.RefreshAllChatClients();

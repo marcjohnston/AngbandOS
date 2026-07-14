@@ -63,7 +63,28 @@ export class RegistrationComponent {
           this.messages = [..._errorResponse.error];
         });
       }, (_errorResponse: HttpErrorResponse) => {
-        this.messages = [..._errorResponse.error];
+        if (_errorResponse.status === 409) { // Conflict
+          const errors: string[] = _errorResponse.error;
+
+          if (errors.some(_x => _x.startsWith('Email'))) {
+            this.formGroup.emailAddress.setErrors({
+              ...this.formGroup.emailAddress.errors,
+              duplicate: true
+            });
+            this.formGroup.emailAddress.markAsTouched();
+          }
+
+          if (errors.some(_x => _x.startsWith('Username'))) {
+            this.formGroup.username.setErrors({
+              ...this.formGroup.username.errors,
+              duplicate: true
+            });
+            this.formGroup.username.markAsTouched();
+          }
+        }
+        else {
+          this.messages = [..._errorResponse.error];
+        }
       });
     }
   }

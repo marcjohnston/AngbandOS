@@ -5,20 +5,55 @@
       <mat-form-field id="username">
         <mat-label>Username</mat-label>
         <input matInput formControlName="username" />
+        <mat-error *ngIf="formGroup.username.hasError('duplicate')">
+          This username is already taken.
+        </mat-error>
+        <mat-error *ngIf="formGroup.username.hasError('required')">
+          Username is required.
+        </mat-error>
+        <mat-error *ngIf="formGroup.username.hasError('minlength')">
+          Username must be at least 5 characters.
+        </mat-error>
+        <mat-error *ngIf="formGroup.username.hasError('maxlength')">
+          Username must be no more than 15 characters.
+        </mat-error>
+        <mat-error *ngIf="formGroup.username.hasError('pattern')">
+          Username must start with a letter and contain only letters and numbers.
+        </mat-error>
       </mat-form-field>
       <mat-form-field id="email-address">
         <mat-label>Email Address</mat-label>
         <input matInput formControlName="emailAddress" />
+        <mat-error *ngIf="formGroup.emailAddress.hasError('required')">
+          Email address is required.
+        </mat-error>
+        <mat-error *ngIf="formGroup.emailAddress.hasError('email')">
+          Please enter a valid email address.
+        </mat-error>
+        <mat-error *ngIf="formGroup.username.hasError('duplicate')">
+          This email address is already registered.  Please login.
+        </mat-error>
       </mat-form-field>
       <mat-form-field id="password">
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password" />
+        <mat-error *ngIf="formGroup.password.hasError('minlength')">
+          Password must be at least 8 characters.
+        </mat-error>
+        <mat-error *ngIf="formGroup.password.hasError('required')">
+          Password is required.
+        </mat-error>
       </mat-form-field>
       <mat-form-field id="confirm-password">
         <mat-label>Confirm</mat-label>
         <input matInput type="password" formControlName="confirmPassword" />
+        <mat-error *ngIf="formGroup.confirmPassword.hasError('required')">
+          Password confirmartion is required.
+        </mat-error>
       </mat-form-field>
-      <mat-error *ngIf="formGroup.invalid && formGroup.confirmPassword.touched">{{formGroup.confirmError}}</mat-error>
+      <mat-error *ngIf="formGroup.hasError('passwordMismatch') && formGroup.confirmPassword.touched">
+        Passwords do not match.
+      </mat-error>
       <ng-template ngFor [ngForOf]="messages" let-message>
         <div>{{message}}</div>
       </ng-template>

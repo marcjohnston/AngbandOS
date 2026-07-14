@@ -25,8 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		Documents\Cthangband.xlsx = Documents\Cthangband.xlsx
 		Documents\Game State Bag.pptx = Documents\Game State Bag.pptx
 		Documents\Object Property Design and Binding.pptx = Documents\Object Property Design and Binding.pptx
-		Documents\Web Front-End Test Cases.pptx = Documents\Web Front-End Test Cases.pptx
 		Documents\Persistence Provider Setup.pptx = Documents\Persistence Provider Setup.pptx
+		Documents\Web Front-End Test Cases.pptx = Documents\Web Front-End Test Cases.pptx
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngbandOS.GamePacks.Cthangband", "AngbandOS.GamePacks.Cthangband\AngbandOS.GamePacks.Cthangband.csproj", "{DBE26605-7C51-45F7-BEDD-3113A4208AAF}"
@@ -50,6 +50,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngbandOS.Console", "AngbandOS.Console\AngbandOS.Console.csproj", "{565F60A5-9745-369B-86E1-B4DBF2CE9CBD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngbandOS.Avalonia", "AngbandOS.Avalonia\AngbandOS.Avalonia.csproj", "{A69A3697-69BB-4FCC-AF13-353FE49E31D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AngbandOS.Web.ControllerTests", "AngbandOS.Web.ControllerTests", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		AngbandOS.Web.ControllerTests\Accounts.http = AngbandOS.Web.ControllerTests\Accounts.http
+		AngbandOS.Web.ControllerTests\readme.txt = AngbandOS.Web.ControllerTests\readme.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

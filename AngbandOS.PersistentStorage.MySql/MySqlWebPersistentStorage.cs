@@ -213,7 +213,7 @@ namespace AngbandOS.PersistentStorage
             }
         }
 
-        public async Task<bool> DeleteMessagesAsync(int messageId)
+        public async Task<bool> DeleteMessageAsync(int messageId)
         {
             using (AngbandOSMySqlContext context = new AngbandOSMySqlContext(ConnectionString))
             {
@@ -259,6 +259,11 @@ namespace AngbandOS.PersistentStorage
         }
 
         public Task<bool> DeleteGameRecoveryAsync(int gameRecoveryId, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAllUserMessagesAsync(string userId)
         {
             throw new NotImplementedException();
         }
