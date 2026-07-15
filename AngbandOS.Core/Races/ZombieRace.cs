@@ -75,7 +75,7 @@ internal class ZombieRace : Race
         Game.MsgPrint("The food of mortals is poor sustenance for you.");
         Game.SetFood(Game.Food.IntValue + (item.NutritionalValue / 20));
     }
-    public override bool CanBleed(int level) => (level > 11);
+    public override int? ImmuneToBleedingAtLevel => 12;
 
     public override string ChanceOfSanityBlastImmunityExpressionText => "X+25";
 }

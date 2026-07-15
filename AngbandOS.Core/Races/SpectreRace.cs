@@ -79,7 +79,7 @@ internal class SpectreRace : Race
         Game.MsgPrint("The food of mortals is poor sustenance for you.");
         Game.SetFood(Game.Food.IntValue + (item.NutritionalValue / 20));
     }
-    public override bool CanBleed(int level) => false;
+    public override int? ImmuneToBleedingAtLevel => 0;
 
     public override bool NegatesNetherResistance => true;
 

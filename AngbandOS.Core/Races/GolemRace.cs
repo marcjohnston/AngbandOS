@@ -77,7 +77,7 @@ internal class GolemRace : Race
         Game.SetFood(Game.Food.IntValue + (item.NutritionalValue / 20));
     }
 
-    public override bool CanBleed(int level) => false;
+    public override int? ImmuneToBleedingAtLevel => 0;
 
     public override bool CanBeStunned => false;
 }

@@ -151,11 +151,9 @@ internal abstract class Race : IGetKey, IGameSerialize
     public virtual void Quaff(Item item) { }
 
     /// <summary>
-    /// Returns true, if the race can bleed.  Golems, skeletons and spectres cannot bleed.  Level 12 or greater zombies also do not bleed.  Returns true, by default.
+    /// Returns null, if the race is not immune to bleeding at any level; otherwise, returns the level at which the race becomes immune to bleeding.  A level of 0, means the race is always immune to bleeding.
     /// </summary>
-    /// <param name="level"></param>
-    /// <returns></returns>
-    public virtual bool CanBleed(int level) => true;
+    public virtual int? ImmuneToBleedingAtLevel => null;
 
     /// <summary>
     /// Returns true, if the race is susceptible to nether where resistance to nether is mostly negated.  Returns false, by default.  Only spectres return true.

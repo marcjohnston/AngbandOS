@@ -96,7 +96,8 @@ internal class BleedingTimer : Timer
 
     public override bool SetTimer(int value)
     {
-        if (!Game.Race.CanBleed(Game.ExperienceLevel.IntValue))
+        int? immuneToBleedingAtLevel = Game.Race.ImmuneToBleedingAtLevel;
+        if (immuneToBleedingAtLevel is not null && Game.ExperienceLevel.IntValue >= immuneToBleedingAtLevel)
         {
             value = 0;
         }
