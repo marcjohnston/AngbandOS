@@ -153,5 +153,7 @@ namespace AngbandOS.Core
                 return $"{value}";
             }
         }
+
+        public static string IndefiniteArticle(string title) => "aeiouAEIOU".Contains(title[0]) ? "an" : "a";
     }
 }

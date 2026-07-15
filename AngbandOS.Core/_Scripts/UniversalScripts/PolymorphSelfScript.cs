@@ -54,7 +54,7 @@ internal class PolymorphSelfScript : UniversalScript, IGetKey
                             newRaceIndex = Game.RandomLessThan(Game.SingletonRepository.Count<Race>());
                             newRace = Game.SingletonRepository.Get<Race>(newRaceIndex);
                         } while (newRace is Race);
-                        Game.MsgPrint($"You turn into {newRace.IndefiniteArticleForTitle} {newRace.Title}!");
+                        Game.MsgPrint($"You turn into {StringLibrary.IndefiniteArticle(newRace.Title)} {newRace.Title}!");
                         Game.ChangeRace(newRace);
                     }
                     Game.ConsoleView.RefreshMapLocation(Game.MapY.IntValue, Game.MapX.IntValue);

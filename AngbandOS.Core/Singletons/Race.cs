@@ -18,14 +18,14 @@ internal abstract class Race : IGetKey, IGameSerialize
     {
         EffectiveAttributeSet = Enhancement.GenerateAttributeSet();
     }
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(EffectiveAttributeSet), saveGameState.CreateDerivedGameStateBag(EffectiveAttributeSet, typeof(ReadOnlyAttributeSet)))
         );
     }
 
-    public virtual string Key => GetType().Name;
+    public string Key => GetType().Name;
 
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState)
@@ -62,13 +62,6 @@ internal abstract class Race : IGetKey, IGameSerialize
     public abstract int HitDieBonus { get; }
     public abstract int Infravision { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
     public abstract string Title { get; }
-    public string IndefiniteArticleForTitle
-    {
-        get
-        {
-            return "aeiouAEIOU".Contains(Title[0]) ? "an" : "a";
-        }
-    }
 
     /// <summary>
     /// Returns the description for the race.  The description is multi-line and has word-breaking macros \n built-in.  The description supports up to 6 lines.
@@ -202,7 +195,6 @@ internal abstract class Race : IGetKey, IGameSerialize
             Game.EnergyUse = 0;
         }
     }
-
 
     /// <summary>
     /// Returns true, if characters are automatically outfitted with scrolls of light.  Vampires and spectres return 
