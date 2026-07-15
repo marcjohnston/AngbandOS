@@ -624,7 +624,8 @@ internal class Monster : IItemContainer, IGameSerialize
             Race.Knowledge.Characteristics.EldritchHorror = true;
 
             // Allow the race to resist.
-            if (Game.DieRoll(100) < Game.Race.ChanceOfSanityBlastImmunity(Game.ExperienceLevel.IntValue))
+            int chanceOfSanityBlastImmunity = Game.ComputeIntegerExpression(Game.Race.ChanceOfSanityBlastImmunityExpression).Value;
+            if (Game.DieRoll(100) < chanceOfSanityBlastImmunity)
             {
                 return;
             }

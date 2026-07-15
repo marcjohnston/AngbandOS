@@ -77,5 +77,5 @@ internal class ZombieRace : Race
     }
     public override bool CanBleed(int level) => (level > 11);
 
-    public override int ChanceOfSanityBlastImmunity(int level) => level + 25;
+    public override string ChanceOfSanityBlastImmunityExpressionText => "X+25";
 }

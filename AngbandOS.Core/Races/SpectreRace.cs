@@ -86,5 +86,5 @@ internal class SpectreRace : Race
     public override bool ProjectingNetherRestoresHealth => true;
 
     public override bool OutfitsWithScrollsOfLight => true;
-    public override int ChanceOfSanityBlastImmunity(int level) => level + 25;
+    public override string ChanceOfSanityBlastImmunityExpressionText => "X+25";
 }

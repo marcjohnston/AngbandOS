@@ -70,5 +70,5 @@ internal class MindFlayerRace : Race
             Game.HasTelepathy = true;
         }
     }
-    public override int ChanceOfSanityBlastImmunity(int level) => 100;
+    public override string ChanceOfSanityBlastImmunityExpressionText => "100";
 }

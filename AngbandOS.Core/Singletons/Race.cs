@@ -33,6 +33,7 @@ internal abstract class Race : IGetKey, IGameSerialize
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
         Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
+        ChanceOfSanityBlastImmunityExpression = Game.ParseNumericExpression(ChanceOfSanityBlastImmunityExpressionText);
 
         if (restoreGameState is not null)
         {
@@ -211,7 +212,8 @@ internal abstract class Race : IGetKey, IGameSerialize
     /// Returns a chance (0-100) of the race being immune to a sanity blast.  A chance of 100, means the race is not affected by the sanity blast.  Imps
     /// and mind flayers return 100. Skeletons, zombies, vampires and spectres all return a chance of the players' level + 25.  Returns 0, by default.
     /// </summary>
-    public virtual int ChanceOfSanityBlastImmunity(int level) => 0;
+    public virtual string ChanceOfSanityBlastImmunityExpressionText => "0";
+    public Expression ChanceOfSanityBlastImmunityExpression { get; private set; }
 
     /// <summary>
     /// Returns true, if the race can be stunned.  Returns false, by default.  Only golems return false.

@@ -74,5 +74,5 @@ internal class ImpRace : Race
             Game.HasFireImmunity = true;
         }
     }
-    public override int ChanceOfSanityBlastImmunity(int level) => 100;
+    public override string ChanceOfSanityBlastImmunityExpressionText => "100";
 }
