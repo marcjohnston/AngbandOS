@@ -151,7 +151,7 @@ internal abstract class Race : IGetKey, IGameSerialize
     public virtual void Quaff(Item item) { }
 
     /// <summary>
-    /// Returns null, if the race is not immune to bleeding at any level; otherwise, returns the level at which the race becomes immune to bleeding.  A level of 0, means the race is always immune to bleeding.
+    /// Returns null, if the race is not immune to bleeding at any level; otherwise, returns the level at which the race becomes immune to bleeding.  A level of 1, means the race is always immune to bleeding.
     /// </summary>
     public virtual int? ImmuneToBleedingAtLevel => null;
 

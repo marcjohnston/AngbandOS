@@ -92,7 +92,7 @@ internal class SkeletonRace : Race
             item.Smash(0, Game.MapY.IntValue, Game.MapX.IntValue);
         }
     }
-    public override int? ImmuneToBleedingAtLevel => 0;
+    public override int? ImmuneToBleedingAtLevel => 1;
     public override string ChanceOfSanityBlastImmunityExpressionText => "X+25";
 
 }
