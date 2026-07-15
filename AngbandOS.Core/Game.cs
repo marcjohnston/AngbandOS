@@ -250,6 +250,7 @@ internal partial class Game : IGameSerialize
     #endregion
 
     #region Game Replay
+    private bool GameRestored = false;
     private IReplayPersistentStorage? ReplayPersistentStorage = null;
 
     /// <summary>
@@ -567,6 +568,9 @@ internal partial class Game : IGameSerialize
             _prevSex = restoreGameState.GetByKey(nameof(_prevSex)).GetDerivedReference<Gender>();
             Inventory = restoreGameState.GetByKey(nameof(Inventory)).GetNullableDerivedReferences<Item>(_restoreGameState => new Item(this, _restoreGameState));
             _invenCnt = restoreGameState.GetByKey(nameof(_invenCnt)).GetInt();
+
+            // A restored game needs to return to the request command position, without altering the energy.  The sequence to get to the request command contains an
+            GameRestored = true;
         }
         #endregion
 
@@ -854,16 +858,6 @@ internal partial class Game : IGameSerialize
             ReplacePets(MapY.IntValue, MapX.IntValue, _petList);
         }
 
-        // Final seed verification.
-        if (!FinalSeed.HasValue)
-        {
-            throw new Exception("Final seed not set.");
-        }
-        else if (FinalSeed.Value != _mainSequence.CurrentSeed)
-        {
-            throw new Exception("Final seed verification failed.");
-        }
-
         ConsoleViewPort.GameStopped();
         CloseGame();
     }
@@ -1141,7 +1135,6 @@ internal partial class Game : IGameSerialize
     public int EnergyUse;
     public bool HackMind;
     public bool NewLevelFlag;
-    private int? FinalSeed = null;
     public Dungeon RecallDungeon;
     public int Resting;
     public int Running;
@@ -4168,7 +4161,12 @@ internal partial class Game : IGameSerialize
             RunScript(nameof(GainMutationScript));
             GetFirstLevelMutation = false;
         }
-        Energy += ExtractEnergy[Speed.IntValue]; // TODO: This causes a runtime error for out of bounds
+
+        // We cannot give the player energy for restoring the game.
+        if (!GameRestored)
+        {
+            Energy += ExtractEnergy[Speed.IntValue]; // TODO: This causes a runtime error for out of bounds
+        }
         if (Energy < 100)
         {
             return;
@@ -4254,6 +4252,7 @@ internal partial class Game : IGameSerialize
             else
             {
                 ConsoleView.MoveCursorTo(MapY.IntValue, MapX.IntValue);
+                GameRestored = false;
                 RequestCommand(true);
                 if (Shutdown)
                 {
@@ -8978,7 +8977,6 @@ internal partial class Game : IGameSerialize
                 case 1:
                     // Save and Quit
                     Shutdown = true; // TODO: Need to use event arguments
-                    FinalSeed = _mainSequence.CurrentSeed;
                     break;
             }
         }
@@ -9095,11 +9093,7 @@ internal partial class Game : IGameSerialize
     {
         if (ReplayPersistentStorage is not null)
         {
-            string? stackTrace = null;
-#if DEBUG
-            stackTrace = String.Join(Environment.NewLine, GetStackTokens());
-#endif
-            ReplayPersistentStorage.WriteStep(DateTime.Now.ToUniversalTime(), keystroke, _mainSequence.CurrentSeed, stackTrace);
+            ReplayPersistentStorage.WriteStep(DateTime.Now.ToUniversalTime(), keystroke, _mainSequence.CurrentSeed, null);
         }
     }
 
@@ -9225,7 +9219,6 @@ internal partial class Game : IGameSerialize
                     if (ReplayQueue.Count == 0 && CloseAfterReplay)
                     {
                         Shutdown = true;
-                        FinalSeed = _mainSequence.CurrentSeed;
                     }
                 }
                 else
