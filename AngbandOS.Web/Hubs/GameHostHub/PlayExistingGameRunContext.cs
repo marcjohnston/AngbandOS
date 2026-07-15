@@ -39,20 +39,20 @@ namespace AngbandOS.Web.Hubs
             IReplayPersistentStorage replayPersistentStorage = new SqlReplayAdapter(gameReplayId, WebPersistentStorage);
 
             // Play the game.
-            GameResults results = gameServer.PlayGame(consoleAndViewPort, replayPersistentStorage);
+            GameResults gameResults = gameServer.PlayGame(consoleAndViewPort, replayPersistentStorage);
 
             // Save the game.
             GameDetails gameDetails = new GameDetails()
             {
-                CharacterName = gameServer.CharacterName,
+                CharacterName = gameResults.CharacterName,
                 Comments = "",
-                Level = gameServer.Level.Value,
-                Gold = gameServer.Gold.Value,
-                IsAlive = !results.GameIsOver
+                Level = gameResults.Level,
+                Gold = gameResults.Gold,
+                IsDead = gameResults.IsDead
             };
 
-            WebPersistentStorage.WriteGame(Username, GameGuid, gameDetails, gameReplayId, results.SerializedGameData);
-            return results;
+            WebPersistentStorage.WriteGame(Username, GameGuid, gameDetails, gameReplayId, gameResults.SerializedGameData);
+            return gameResults;
         }
     }
 }

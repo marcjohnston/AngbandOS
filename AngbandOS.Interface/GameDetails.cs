@@ -9,5 +9,5 @@ public class GameDetails
     public int Gold { get; set; }
     public string CharacterName { get; set; }
     public string Comments { get; set; }
-    public bool IsAlive { get; set; }
+    public bool IsDead { get; set; }
 }

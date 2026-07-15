@@ -406,10 +406,17 @@ export class PlayComponent implements OnInit, OnDestroy {
         this._zone.run(() => {
           this.gameInProgress = false;
 
-          this.showSnackBar(message);
-          setTimeout(() => {
+          // If there is a message, then render it.
+          if (message !== null && message.length > 0) {
+            this.showSnackBar(message);
+
+            setTimeout(() => {
+              this._router.navigate(['/']);
+            }, snackBarDefaultDelayTime);
+          } else {
             this._router.navigate(['/']);
-          }, snackBarDefaultDelayTime);
+          }
+
         });
       });
       this.gameHubConnection.on("GameStarted", (gameGuid: string) => {
@@ -421,10 +428,13 @@ export class PlayComponent implements OnInit, OnDestroy {
 
       // Fires when the connection is completely closed (after retries fail or no reconnect configured)
       this.gameHubConnection.onclose((error) => {
-        this.showSnackBar("Connection lost.  Redirecting back to home.");
-        setTimeout(() => {
-          this._router.navigate(['/']);
-        }, 10);
+        // If the game is still in-progress, then there is an issue.  Otherwise, we will allow the game over message to perform the close.
+        if (this.gameInProgress) {
+          this.showSnackBar("Connection lost.  Redirecting back to home.");
+          setTimeout(() => {
+            this._router.navigate(['/']);
+          }, 10);
+        }
       });
 
       this.gameInProgress = true;

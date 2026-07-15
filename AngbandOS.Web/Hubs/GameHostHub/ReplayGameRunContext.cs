@@ -44,14 +44,14 @@ namespace AngbandOS.Web.Hubs
                 // Save the game.
                 GameDetails gameDetails = new GameDetails()
                 {
-                    CharacterName = gameServer.CharacterName,
+                    CharacterName = gameResults.CharacterName,
                     Comments = "",
-                    Level = gameServer.Level.Value,
-                    Gold = gameServer.Gold.Value,
-                    IsAlive = !gameResults.GameIsOver
+                    Level = gameResults.Level,
+                    Gold = gameResults.Gold,
+                    IsDead = gameResults.IsDead
                 };
 
-                // We have to issue a new guid for this game.  This is essentially a recovery.
+                // We have to issue a new guid for this game as this is considered a recovery.
                 string gameGuid = Guid.NewGuid().ToString();
                 WebPersistentStorage.WriteGame(Username, gameGuid, gameDetails, gameReplayId, gameResults.SerializedGameData);
             }

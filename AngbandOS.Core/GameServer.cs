@@ -247,11 +247,9 @@ public class GameServer
             throw new ArgumentNullException("console", "A console object must be provided and cannot be null.");
         }
 
-        bool gameIsOver = false;
         Game.Play(console, replayPersistentStorage);
-
         byte[] serializedGameData = SaveGame();
-        gameIsOver = true;
-        return new GameResults(gameIsOver, serializedGameData);
+
+        return new GameResults(Game.IsDead, Game.PlayerName.StringValue, Game.ExperienceLevel.IntValue, Game.Gold.IntValue, serializedGameData);
     }
 }

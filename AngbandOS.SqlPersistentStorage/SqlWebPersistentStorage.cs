@@ -86,7 +86,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
             savedGame.Level = gameDetails.Level;
             savedGame.DateTime = DateTime.Now.ToUniversalTime();
             savedGame.Gold = gameDetails.Gold;
-            savedGame.IsAlive = gameDetails.IsAlive;
+            savedGame.IsAlive = !gameDetails.IsDead;
 
             Sql.Entities.GameRecovery gameRecovery = context.GameRecoveries.Single(_gameRecovery => _gameRecovery.Id == gameReplayId);
             gameRecovery.GameGuid = new Guid(gameGuid);
