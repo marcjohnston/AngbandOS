@@ -184,7 +184,7 @@ internal partial class Game : IGameSerialize
             (nameof(FractionalMana), saveGameState.CreateGameStateBag(FractionalMana)),
             (nameof(Gender), saveGameState.CreateDerivedGameStateBag(Gender, typeof(Gender))),
             (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
-            (nameof(KnownBonusArmorClass), saveGameState.CreateGameStateBag(KnownBonusArmorClass)),
+            (nameof(BonusArmorClass), saveGameState.CreateGameStateBag(BonusArmorClass)),
             (nameof(UnknownBonusArmorClass), saveGameState.CreateGameStateBag(UnknownBonusArmorClass)),
             (nameof(GooPatron), saveGameState.CreateDerivedGameStateBag(GooPatron, typeof(Patron))),
             (nameof(LightLevel), saveGameState.CreateGameStateBag(LightLevel)),
@@ -507,7 +507,7 @@ internal partial class Game : IGameSerialize
             FractionalMana = restoreGameState.GetByKey(nameof(FractionalMana)).GetInt();
             Gender = restoreGameState.GetByKey(nameof(Gender)).GetDerivedReferenceOrDefault<Gender>();
             Generation = restoreGameState.GetByKey(nameof(Generation)).GetInt();
-            KnownBonusArmorClass = restoreGameState.GetByKey(nameof(KnownBonusArmorClass)).GetInt();
+            BonusArmorClass = restoreGameState.GetByKey(nameof(BonusArmorClass)).GetInt();
             UnknownBonusArmorClass = restoreGameState.GetByKey(nameof(UnknownBonusArmorClass)).GetInt();
             GooPatron = restoreGameState.GetByKey(nameof(GooPatron)).GetDerivedReference<Patron>();
             LightLevel = restoreGameState.GetByKey(nameof(LightLevel)).GetInt();
@@ -1257,14 +1257,15 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Represents the players known bonus armor class.  This is the bonus armor class that the player knows about.  The player may have other bonuses that are unknown to the player.
     /// </summary>
-    public int KnownBonusArmorClass;
+    public int BonusArmorClass;
 
     /// <summary>
-    /// Represents the player unknown bonus armor class.  This is the bonus armor class that the player does not know about.  Items that are unknown will increment this value.
+    /// Represents the player unknown bonus armor class.  This is the bonus armor class that the player does not know about.  Items that are unknown will increment this value.  This is a 
+    /// computed field that is updated by the UpdateBonusesFlaggedAction.
     /// </summary>
     public int UnknownBonusArmorClass;
 
-    public int TotalBonusArmorClass => KnownBonusArmorClass + UnknownBonusArmorClass;
+    public int TotalBonusArmorClass => BonusArmorClass + UnknownBonusArmorClass;
 
     public StringProperty PlayerName { get; }
 
