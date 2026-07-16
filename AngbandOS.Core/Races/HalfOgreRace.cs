@@ -46,7 +46,7 @@ internal class HalfOgreRace : Race
     {
         if (level > 24)
         {
-            return new string[] { "You can set an Yellow Sign (cost 35)." };
+            return new string[] { "You can set a Yellow Sign (cost 35)." };
         }
         return null;
     }
