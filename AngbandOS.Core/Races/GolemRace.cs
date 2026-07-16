@@ -66,7 +66,6 @@ internal class GolemRace : Race
         Game.HasFreeAction = true;
         Game.HasSeeInvisibility = true;
         Game.HasPoisonResistance = true;
-        Game.ArmorClassBonus += 20 + (Game.ExperienceLevel.IntValue / 5);
         Game.KnownBonusArmorClass += 20 + (Game.ExperienceLevel.IntValue / 5);
     }
 

@@ -177,7 +177,6 @@ internal partial class Game : IGameSerialize
             (nameof(History), saveGameState.CreateGameStateBag(History)),
             (nameof(PlayerHp), saveGameState.CreateGameStateBag(PlayerHp)),
             (nameof(Age), saveGameState.CreateGameStateBag(Age)),
-            (nameof(ArmorClassBonus), saveGameState.CreateGameStateBag(ArmorClassBonus)),
             (nameof(Energy), saveGameState.CreateGameStateBag(Energy)),
             (nameof(Bonuses), saveGameState.CreateDerivedGameStateBag(Bonuses, typeof(Bonuses))),
             (nameof(FractionalExperiencePoints), saveGameState.CreateGameStateBag(FractionalExperiencePoints)),
@@ -186,6 +185,7 @@ internal partial class Game : IGameSerialize
             (nameof(Gender), saveGameState.CreateDerivedGameStateBag(Gender, typeof(Gender))),
             (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
             (nameof(KnownBonusArmorClass), saveGameState.CreateGameStateBag(KnownBonusArmorClass)),
+            (nameof(UnknownBonusArmorClass), saveGameState.CreateGameStateBag(UnknownBonusArmorClass)),
             (nameof(GooPatron), saveGameState.CreateDerivedGameStateBag(GooPatron, typeof(Patron))),
             (nameof(LightLevel), saveGameState.CreateGameStateBag(LightLevel)),
             (nameof(MaxLevelGained), saveGameState.CreateGameStateBag(MaxLevelGained)),
@@ -500,7 +500,6 @@ internal partial class Game : IGameSerialize
             History = restoreGameState.GetByKey(nameof(History)).GetStrings();
             PlayerHp = restoreGameState.GetByKey(nameof(PlayerHp)).GetInts();
             Age = restoreGameState.GetByKey(nameof(Age)).GetInt();
-            ArmorClassBonus = restoreGameState.GetByKey(nameof(ArmorClassBonus)).GetInt();
             Energy = restoreGameState.GetByKey(nameof(Energy)).GetInt();
             Bonuses = restoreGameState.GetByKey(nameof(Bonuses)).GetDerivedReference<Bonuses>(_restoreGameState => new Bonuses(this, _restoreGameState));
             FractionalExperiencePoints = restoreGameState.GetByKey(nameof(FractionalExperiencePoints)).GetInt();
@@ -509,6 +508,7 @@ internal partial class Game : IGameSerialize
             Gender = restoreGameState.GetByKey(nameof(Gender)).GetDerivedReferenceOrDefault<Gender>();
             Generation = restoreGameState.GetByKey(nameof(Generation)).GetInt();
             KnownBonusArmorClass = restoreGameState.GetByKey(nameof(KnownBonusArmorClass)).GetInt();
+            UnknownBonusArmorClass = restoreGameState.GetByKey(nameof(UnknownBonusArmorClass)).GetInt();
             GooPatron = restoreGameState.GetByKey(nameof(GooPatron)).GetDerivedReference<Patron>();
             LightLevel = restoreGameState.GetByKey(nameof(LightLevel)).GetInt();
             MaxLevelGained = restoreGameState.GetByKey(nameof(MaxLevelGained)).GetInt();
@@ -1237,7 +1237,6 @@ internal partial class Game : IGameSerialize
     public readonly string[] History = new string[4];
     public readonly int[] PlayerHp = new int[Constants.PyMaxLevel];
     public int Age;
-    public int ArmorClassBonus;
     public int Energy;
     public ExperienceMultiplierIntProperty ExperienceMultiplier { get; }
 
@@ -1254,7 +1253,19 @@ internal partial class Game : IGameSerialize
     public ManaIntProperty Mana { get; }
     public MaxManaIntProperty MaxMana { get; }
     public ExperiencePointsIntProperty ExperiencePoints { get; }
+
+    /// <summary>
+    /// Represents the players known bonus armor class.  This is the bonus armor class that the player knows about.  The player may have other bonuses that are unknown to the player.
+    /// </summary>
     public int KnownBonusArmorClass;
+
+    /// <summary>
+    /// Represents the player unknown bonus armor class.  This is the bonus armor class that the player does not know about.  Items that are unknown will increment this value.
+    /// </summary>
+    public int UnknownBonusArmorClass;
+
+    public int TotalBonusArmorClass => KnownBonusArmorClass + UnknownBonusArmorClass;
+
     public StringProperty PlayerName { get; }
 
     /// <summary>
@@ -8546,7 +8557,7 @@ internal partial class Game : IGameSerialize
             return false;
         }
         // Roll for the attack
-        int armorClass = EffectiveAttributeSet.GetInt(nameof(BaseArmorClassAttribute)) + ArmorClassBonus;
+        int armorClass = EffectiveAttributeSet.GetInt(nameof(BaseArmorClassAttribute)) + TotalBonusArmorClass;
         return DieRoll(attackStrength) > armorClass * 3 / 4;
     }
 

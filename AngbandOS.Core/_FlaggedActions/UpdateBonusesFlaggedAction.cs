@@ -76,7 +76,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             ability.Bonus = 0;
         }
         Game.KnownBonusArmorClass = 0;
-        Game.ArmorClassBonus = 0;
+        Game.UnknownBonusArmorClass = 0;
         Game.HasAggravation = false;
         Game.HasRandomTeleport = false;
         Game.HasExperienceDrain = false;
@@ -165,7 +165,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.GlowInTheDarkRadius = 1;
         }
-        Game.ArmorClassBonus += Game.GenomeArmorClassBonus;
         Game.KnownBonusArmorClass += Game.GenomeArmorClassBonus;
         Game.HasFeatherFall |= Game.FeatherFall;
         Game.HasFearResistance |= Game.ResFear;
@@ -414,10 +413,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasSustainCharisma = true;
                     }
-                    Game.ArmorClassBonus += oPtr.EffectiveAttributeSet.BonusArmorClass;
                     if (oPtr.IsKnown())
                     {
                         Game.KnownBonusArmorClass += oPtr.EffectiveAttributeSet.BonusArmorClass;
+                    }
+                    else
+                    {
+                        Game.UnknownBonusArmorClass += oPtr.EffectiveAttributeSet.BonusArmorClass;
                     }
                     if (equipmentWieldSlot.IsWeapon)
                     {
@@ -443,7 +445,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 if (inventorySlot.Count == 0)
                 {
                     int bareArmorBonus = inventorySlot.BareArmorClassBonus;
-                    Game.ArmorClassBonus += bareArmorBonus;
                     Game.KnownBonusArmorClass += bareArmorBonus;
                 }
             }
@@ -502,25 +503,21 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         if (Game.InvulnerabilityTimer.Value != 0)
         {
-            Game.ArmorClassBonus += 100;
             Game.KnownBonusArmorClass += 100;
         }
         if (Game.EtherealnessTimer.Value != 0)
         {
-            Game.ArmorClassBonus += 100;
             Game.KnownBonusArmorClass += 100;
             Game.HasReflection = true;
         }
         if (Game.BlessingTimer.Value != 0)
         {
-            Game.ArmorClassBonus += 5;
             Game.KnownBonusArmorClass += 5;
             attackBonus += 10;
             displayedAttackBonus += 10;
         }
         if (Game.StoneskinTimer.Value != 0)
         {
-            Game.ArmorClassBonus += 50;
             Game.KnownBonusArmorClass += 50;
         }
         if (Game.HeroismTimer.Value != 0)
@@ -532,7 +529,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             attackBonus += 24;
             displayedAttackBonus += 24;
-            Game.ArmorClassBonus -= 10;
             Game.KnownBonusArmorClass -= 10;
         }
         if (Game.HasteTimer.Value != 0)
@@ -596,10 +592,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();
         }
-        Game.ArmorClassBonus += Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexArmorClassBonus;
-        damageBonus += Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDamageBonus;
-        attackBonus += Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexAttackBonus;
-        attackBonus += Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrAttackBonus;
         Game.KnownBonusArmorClass += Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexArmorClassBonus;
         displayedDamageBonus += Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDamageBonus;
         displayedAttackBonus += Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexAttackBonus;
