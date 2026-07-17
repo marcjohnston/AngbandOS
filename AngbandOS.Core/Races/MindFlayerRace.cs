@@ -15,7 +15,7 @@ internal class MindFlayerRace : Race
     public override int SavingThrow => 15;
     public override int Stealth => 2;
     public override int Search => 5;
-    public override int BaseSearchFrequency => 12;
+    public override int BasePerception => 12;
     public override int MeleeToHit => -10;
     public override int RangedToHit => -5;
     public override int HitDieBonus => 9;

@@ -15,7 +15,7 @@ internal class TchoTchoRace : Race
     public override int SavingThrow => 2;
     public override int Stealth => -1;
     public override int Search => 1;
-    public override int BaseSearchFrequency => 7;
+    public override int BasePerception => 7;
     public override int MeleeToHit => 12;
     public override int RangedToHit => 10;
     public override int HitDieBonus => 11;

@@ -15,7 +15,7 @@ internal class SkeletonRace : Race
     public override int SavingThrow => 5;
     public override int Stealth => -1;
     public override int Search => -1;
-    public override int BaseSearchFrequency => 8;
+    public override int BasePerception => 8;
     public override int MeleeToHit => 10;
     public override int RangedToHit => 0;
     public override int HitDieBonus => 10;

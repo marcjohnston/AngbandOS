@@ -22,15 +22,13 @@ internal class MindcrafterCharacterClass : CharacterClass
     public override int SavingThrow => 30;
     public override int Stealth => 3;
     public override int Search => 22;
-    public override int BaseSearchFrequency => 16;
+    public override int BasePerception => 16;
     public override int MeleeToHit => 50;
     public override int RangedToHit => 40;
     public override int DisarmBonusPerLevel => 10;
     public override int DeviceBonusPerLevel => 10;
     public override int SaveBonusPerLevel => 10;
     public override int StealthBonusPerLevel => 0;
-    public override int SearchBonusPerLevel => 0;
-    public override int SearchFrequencyPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 20;
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 2;

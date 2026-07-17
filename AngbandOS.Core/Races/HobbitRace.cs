@@ -15,7 +15,7 @@ internal class HobbitRace : Race
     public override int SavingThrow => 18;
     public override int Stealth => 5;
     public override int Search => 12;
-    public override int BaseSearchFrequency => 15;
+    public override int BasePerception => 15;
     public override int MeleeToHit => -10;
     public override int RangedToHit => 20;
     public override int HitDieBonus => 7;

@@ -15,7 +15,7 @@ internal class SpectreRace : Race
     public override int SavingThrow => 20;
     public override int Stealth => 5;
     public override int Search => 5;
-    public override int BaseSearchFrequency => 14;
+    public override int BasePerception => 14;
     public override int MeleeToHit => -15;
     public override int RangedToHit => -5;
     public override int HitDieBonus => 7;

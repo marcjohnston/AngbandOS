@@ -401,7 +401,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         int savingThrow = Game.SkillSavingThrow;
         int stealth = Game.SkillStealth;
         int searching = Game.SkillSearching;
-        int searchFrequency = Game.SkillSearchFrequency;
+        int perception = Game.SkillPerception;
         Game.Screen.Print(ColorEnum.Blue, "Fighting    :", 36, 1);
         PrintCategorisedNumber(fighting, 12, 36, 15);
         Game.Screen.Print(ColorEnum.Blue, "Shooting    :", 37, 1);
@@ -411,7 +411,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         Game.Screen.Print(ColorEnum.Blue, "Stealth     :", 39, 1);
         PrintCategorisedNumber(stealth, 1, 39, 15);
         Game.Screen.Print(ColorEnum.Blue, "Perception  :", 36, 28);
-        PrintCategorisedNumber(searchFrequency, 6, 36, 42);
+        PrintCategorisedNumber(perception, 6, 36, 42);
         Game.Screen.Print(ColorEnum.Blue, "Searching   :", 37, 28);
         PrintCategorisedNumber(searching, 6, 37, 42);
         Game.Screen.Print(ColorEnum.Blue, "Disarming   :", 38, 28);

@@ -15,7 +15,7 @@ internal class MiriNigriRace : Race
     public override int SavingThrow => -1;
     public override int Stealth => -1;
     public override int Search => -1;
-    public override int BaseSearchFrequency => 5;
+    public override int BasePerception => 5;
     public override int MeleeToHit => 12;
     public override int RangedToHit => 5;
     public override int HitDieBonus => 11;

@@ -16,7 +16,7 @@ internal class ChannelerCharacterClass : CharacterClass
     public override int SavingThrow => 30;
     public override int Stealth => 2;
     public override int Search => 16;
-    public override int BaseSearchFrequency => 20;
+    public override int BasePerception => 20;
     public override bool RenderMinFail => false;
     public override bool RenderSpellsPerLevel => false;
     public override int MeleeToHit => 40;
@@ -25,8 +25,6 @@ internal class ChannelerCharacterClass : CharacterClass
     public override int DeviceBonusPerLevel => 13;
     public override int SaveBonusPerLevel => 9;
     public override int StealthBonusPerLevel => 0;
-    public override int SearchBonusPerLevel => 0;
-    public override int SearchFrequencyPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 15;
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 1;

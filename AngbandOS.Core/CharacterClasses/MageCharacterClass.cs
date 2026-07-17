@@ -18,7 +18,7 @@ internal class MageCharacterClass : CharacterClass
     public override int Stealth => 2;
     public override int Search => 16;
     public override int? SpellMinFailChance => 5;
-    public override int BaseSearchFrequency => 20;
+    public override int BasePerception => 20;
     public override string InvokeSpiritsBeamProbabilityRollExpression => "X";
     public override string SpellOfWonderBeamProbabilityRollExpression => "X";
     public override int MeleeToHit => 34;
@@ -27,8 +27,6 @@ internal class MageCharacterClass : CharacterClass
     public override int DeviceBonusPerLevel => 13;
     public override int SaveBonusPerLevel => 9;
     public override int StealthBonusPerLevel => 0;
-    public override int SearchBonusPerLevel => 0;
-    public override int SearchFrequencyPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 15;
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 0;

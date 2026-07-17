@@ -87,7 +87,7 @@ internal partial class Game
     public int SkillMelee;
     public int SkillRanged;
     public int SkillSavingThrow;
-    public int SkillSearchFrequency;
+    public int SkillPerception;
     public int SkillSearching;
     public int SkillStealth;
     public int SkillThrowing;

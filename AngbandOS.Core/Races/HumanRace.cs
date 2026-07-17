@@ -15,7 +15,7 @@ internal class HumanRace : Race
     public override int SavingThrow => 0;
     public override int Stealth => 0;
     public override int Search => 0;
-    public override int BaseSearchFrequency => 10;
+    public override int BasePerception => 10;
     public override int MeleeToHit => 0;
     public override int RangedToHit => 0;
     public override int HitDieBonus => 10;

@@ -15,7 +15,7 @@ internal class DarkElfRace : Race
     public override int SavingThrow => 20;
     public override int Stealth => 3;
     public override int Search => 8;
-    public override int BaseSearchFrequency => 12;
+    public override int BasePerception => 12;
     public override int MeleeToHit => -5;
     public override int RangedToHit => 10;
     public override int HitDieBonus => 9;

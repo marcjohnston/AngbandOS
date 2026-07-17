@@ -15,7 +15,7 @@ internal class NibelungRace : Race
     public override int SavingThrow => 10;
     public override int Stealth => 1;
     public override int Search => 5;
-    public override int BaseSearchFrequency => 10;
+    public override int BasePerception => 10;
     public override int MeleeToHit => 9;
     public override int RangedToHit => 0;
     public override int HitDieBonus => 11;

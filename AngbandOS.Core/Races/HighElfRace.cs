@@ -15,7 +15,7 @@ internal class HighElfRace : Race
     public override int SavingThrow => 20;
     public override int Stealth => 4;
     public override int Search => 3;
-    public override int BaseSearchFrequency => 14;
+    public override int BasePerception => 14;
     public override int MeleeToHit => 10;
     public override int RangedToHit => 25;
     public override int HitDieBonus => 10;

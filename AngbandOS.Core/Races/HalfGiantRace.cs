@@ -15,7 +15,7 @@ internal class HalfGiantRace : Race
     public override int SavingThrow => -6;
     public override int Stealth => -2;
     public override int Search => -1;
-    public override int BaseSearchFrequency => 5;
+    public override int BasePerception => 5;
     public override int MeleeToHit => 25;
     public override int RangedToHit => 5;
     public override int HitDieBonus => 13;

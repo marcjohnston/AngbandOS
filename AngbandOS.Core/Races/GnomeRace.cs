@@ -15,7 +15,7 @@ internal class GnomeRace : Race
     public override int SavingThrow => 12;
     public override int Stealth => 3;
     public override int Search => 6;
-    public override int BaseSearchFrequency => 13;
+    public override int BasePerception => 13;
     public override int MeleeToHit => -8;
     public override int RangedToHit => 12;
     public override int HitDieBonus => 8;

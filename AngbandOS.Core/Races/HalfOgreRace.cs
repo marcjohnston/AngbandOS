@@ -15,7 +15,7 @@ internal class HalfOgreRace : Race
     public override int SavingThrow => -5;
     public override int Stealth => -2;
     public override int Search => -1;
-    public override int BaseSearchFrequency => 5;
+    public override int BasePerception => 5;
     public override int MeleeToHit => 20;
     public override int RangedToHit => 0;
     public override int HitDieBonus => 12;

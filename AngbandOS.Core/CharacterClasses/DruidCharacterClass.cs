@@ -20,15 +20,13 @@ internal class DruidCharacterClass : CharacterClass
 
     public override int Search => 20;
     public override int? SpellMinFailChance => 5;
-    public override int BaseSearchFrequency => 8;
+    public override int BasePerception => 8;
     public override int MeleeToHit => 48;
     public override int RangedToHit => 36;
     public override int DisarmBonusPerLevel => 8;
     public override int DeviceBonusPerLevel => 10;
     public override int SaveBonusPerLevel => 12;
     public override int StealthBonusPerLevel => 0;
-    public override int SearchBonusPerLevel => 0;
-    public override int SearchFrequencyPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 20;
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 3;

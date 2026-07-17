@@ -15,7 +15,7 @@ internal class CyclopsRace : Race
     public override int SavingThrow => -5;
     public override int Stealth => -2;
     public override int Search => -2;
-    public override int BaseSearchFrequency => 5;
+    public override int BasePerception => 5;
     public override int MeleeToHit => 20;
     public override int RangedToHit => 12;
     public override int HitDieBonus => 13;

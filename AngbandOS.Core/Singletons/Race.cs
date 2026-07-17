@@ -56,7 +56,7 @@ internal abstract class Race : IGetKey, IGameSerialize
     public abstract int RangedToHit { get; }
     public abstract int SavingThrow { get; }
     public abstract int Search { get; }
-    public abstract int BaseSearchFrequency { get; }
+    public abstract int BasePerception { get; }
     public abstract int Stealth { get; }
     public abstract uint Choice { get; }
     public abstract int ExperienceFactor { get; }

@@ -15,7 +15,7 @@ internal class ImpRace : Race
     public override int SavingThrow => -1;
     public override int Stealth => 1;
     public override int Search => -1;
-    public override int BaseSearchFrequency => 10;
+    public override int BasePerception => 10;
     public override int MeleeToHit => 5;
     public override int RangedToHit => -5;
     public override int HitDieBonus => 10;

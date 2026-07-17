@@ -17,15 +17,13 @@ internal class PaladinCharacterClass : CharacterClass
     public override int SavingThrow => 26;
     public override int Stealth => 1;
     public override int Search => 12;
-    public override int BaseSearchFrequency => 2;
+    public override int BasePerception => 2;
     public override int MeleeToHit => 68;
     public override int RangedToHit => 40;
     public override int DisarmBonusPerLevel => 7;
     public override int DeviceBonusPerLevel => 10;
     public override int SaveBonusPerLevel => 11;
     public override int StealthBonusPerLevel => 0;
-    public override int SearchBonusPerLevel => 0;
-    public override int SearchFrequencyPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 35;
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 6;

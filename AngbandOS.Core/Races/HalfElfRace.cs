@@ -15,7 +15,7 @@ internal class HalfElfRace : Race
     public override int SavingThrow => 3;
     public override int Stealth => 1;
     public override int Search => 6;
-    public override int BaseSearchFrequency => 11;
+    public override int BasePerception => 11;
     public override int MeleeToHit => -1;
     public override int RangedToHit => 5;
     public override int HitDieBonus => 9;

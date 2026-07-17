@@ -131,7 +131,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillSavingThrow = Game.Race.SavingThrow + Game.CharacterClass.SavingThrow; // done
         Game.SkillStealth = Game.Race.Stealth + Game.CharacterClass.Stealth; // done .. need to copy
         Game.SkillSearching = Game.Race.Search + Game.CharacterClass.Search; // done .. need to copy
-        Game.SkillSearchFrequency = Game.Race.BaseSearchFrequency + Game.CharacterClass.BaseSearchFrequency; // added to attributes
+        Game.SkillPerception = Game.Race.BasePerception + Game.CharacterClass.BasePerception; // added to attributes
         Game.SkillMelee = Game.Race.MeleeToHit + Game.CharacterClass.MeleeToHit; // this appears to be tohit
         Game.SkillRanged = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added rangedtohit
         Game.SkillThrowing = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added throwingtohit
@@ -156,7 +156,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Bonus += Game.CharismaBonus;
         Game.Speed.IntValue += Game.SpeedBonus;
         Game.HasRegeneration |= Game.Regen;
-        Game.SkillSearchFrequency += Game.SearchBonus;
+        Game.SkillPerception += Game.SearchBonus;
         Game.SkillSearching += Game.SearchBonus;
         Game.InfravisionRange += Game.MutationInfravisionBonus;
         Game.HasElectricitySheath |= Game.ElecHit;
@@ -220,7 +220,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Bonus += oPtr.EffectiveAttributeSet.Charisma;
                     Game.SkillStealth += oPtr.EffectiveAttributeSet.Stealth;
                     Game.SkillSearching += oPtr.EffectiveAttributeSet.Search * 5;
-                    Game.SkillSearchFrequency += oPtr.EffectiveAttributeSet.Search * 5;
+                    Game.SkillPerception += oPtr.EffectiveAttributeSet.Search * 5;
                     Game.InfravisionRange += oPtr.EffectiveAttributeSet.Infravision;
                     Game.SkillDigging += oPtr.EffectiveAttributeSet.Tunnel * 20;
                     Game.Speed.IntValue += oPtr.EffectiveAttributeSet.Speed;
@@ -771,8 +771,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillUseDevice += (Game.CharacterClass.DeviceBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillSavingThrow += (Game.CharacterClass.SaveBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillStealth += (Game.CharacterClass.StealthBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
-        Game.SkillSearching += (Game.CharacterClass.SearchBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
-        Game.SkillSearchFrequency += (Game.CharacterClass.SearchFrequencyPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillMelee += (Game.CharacterClass.MeleeAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillRanged += (Game.CharacterClass.RangedAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillThrowing += (Game.CharacterClass.RangedAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;

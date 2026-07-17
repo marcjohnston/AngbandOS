@@ -16,7 +16,7 @@ internal class PriestCharacterClass : CharacterClass
     public override int SavingThrow => 32;
     public override int Stealth => 2;
     public override int Search => 16;
-    public override int BaseSearchFrequency => 8;
+    public override int BasePerception => 8;
     public override int UnpriestlyWeaponAdditionalFailureChance => 25;
     public override int? AttackAndDamageBonusForUnpriestlyWeapon => -2;
     public override int MeleeToHit => 48;
@@ -25,8 +25,6 @@ internal class PriestCharacterClass : CharacterClass
     public override int DeviceBonusPerLevel => 10;
     public override int SaveBonusPerLevel => 12;
     public override int StealthBonusPerLevel => 0;
-    public override int SearchBonusPerLevel => 0;
-    public override int SearchFrequencyPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 20;
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 2;

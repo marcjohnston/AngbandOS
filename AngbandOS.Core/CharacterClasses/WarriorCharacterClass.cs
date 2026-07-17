@@ -19,7 +19,7 @@ internal class WarriorCharacterClass : CharacterClass
     public override int? AttackAndDamageBonusPerExperienceLevelDivisor => 5;
     public override int Stealth => 1;
     public override int Search => 14;
-    public override int BaseSearchFrequency => 2;
+    public override int BasePerception => 2;
     public override int MeleeToHit => 70;
     public override int RangedToHit => 60;
     public override int DisarmBonusPerLevel => 12;
@@ -27,8 +27,6 @@ internal class WarriorCharacterClass : CharacterClass
     public override int DeviceBonusPerLevel => 7;
     public override int SaveBonusPerLevel => 10;
     public override int StealthBonusPerLevel => 0;
-    public override int SearchBonusPerLevel => 0;
-    public override int SearchFrequencyPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 45;
     public override int RangedAttackBonusPerLevel => 45;
     public override int HitDieBonus => 9;

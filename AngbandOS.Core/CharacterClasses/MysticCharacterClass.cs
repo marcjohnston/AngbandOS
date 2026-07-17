@@ -22,15 +22,13 @@ internal class MysticCharacterClass : CharacterClass
     public override int SavingThrow => 30;
     public override int Stealth => 5;
     public override int Search => 32;
-    public override int BaseSearchFrequency => 24;
+    public override int BasePerception => 24;
     public override int MeleeToHit => 64;
     public override int RangedToHit => 50;
     public override int DisarmBonusPerLevel => 14;
     public override int DeviceBonusPerLevel => 11;
     public override int SaveBonusPerLevel => 11;
     public override int StealthBonusPerLevel => 0;
-    public override int SearchBonusPerLevel => 0;
-    public override int SearchFrequencyPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 40;
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 6;

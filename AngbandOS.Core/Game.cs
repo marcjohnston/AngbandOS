@@ -106,7 +106,7 @@ internal partial class Game : IGameSerialize
             (nameof(SkillMelee), saveGameState.CreateGameStateBag(SkillMelee)),
             (nameof(SkillRanged), saveGameState.CreateGameStateBag(SkillRanged)),
             (nameof(SkillSavingThrow), saveGameState.CreateGameStateBag(SkillSavingThrow)),
-            (nameof(SkillSearchFrequency), saveGameState.CreateGameStateBag(SkillSearchFrequency)),
+            (nameof(SkillPerception), saveGameState.CreateGameStateBag(SkillPerception)),
             (nameof(SkillSearching), saveGameState.CreateGameStateBag(SkillSearching)),
             (nameof(SkillStealth), saveGameState.CreateGameStateBag(SkillStealth)),
             (nameof(SkillThrowing), saveGameState.CreateGameStateBag(SkillThrowing)),
@@ -429,7 +429,7 @@ internal partial class Game : IGameSerialize
             SkillMelee = restoreGameState.GetByKey(nameof(SkillMelee)).GetInt();
             SkillRanged = restoreGameState.GetByKey(nameof(SkillRanged)).GetInt();
             SkillSavingThrow = restoreGameState.GetByKey(nameof(SkillSavingThrow)).GetInt();
-            SkillSearchFrequency = restoreGameState.GetByKey(nameof(SkillSearchFrequency)).GetInt();
+            SkillPerception = restoreGameState.GetByKey(nameof(SkillPerception)).GetInt();
             SkillSearching = restoreGameState.GetByKey(nameof(SkillSearching)).GetInt();
             SkillStealth = restoreGameState.GetByKey(nameof(SkillStealth)).GetInt();
             SkillThrowing = restoreGameState.GetByKey(nameof(SkillThrowing)).GetInt();
@@ -7198,7 +7198,7 @@ internal partial class Game : IGameSerialize
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateDistancesFlaggedAction)).Set();
         RefreshMap.SetChangedFlag(); // TODO: Needs to convert to dependencies in the MapWidget
         // If we're not actively searching, then have a chance of doing it passively
-        if (SkillSearchFrequency >= 50 || 0 == RandomLessThan(50 - SkillSearchFrequency))
+        if (SkillPerception >= 50 || 0 == RandomLessThan(50 - SkillPerception))
         {
             RunScript(nameof(SearchScript));
         }        

@@ -30,7 +30,7 @@ internal class StayScript : UniversalScript, IGetKey
         Game.EnergyUse = 100;
 
         // Periodically search if we're not actively in search mode
-        if (Game.IsSearching || Game.SkillSearchFrequency >= 50 || Game.RandomLessThan(50 - Game.SkillSearchFrequency) == 0)
+        if (Game.IsSearching || Game.SkillPerception >= 50 || Game.RandomLessThan(50 - Game.SkillPerception) == 0)
         {
             Game.RunScript(nameof(SearchScript));
         }

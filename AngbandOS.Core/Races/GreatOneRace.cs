@@ -15,7 +15,7 @@ internal class GreatOneRace : Race
     public override int SavingThrow => 5;
     public override int Stealth => 2;
     public override int Search => 3;
-    public override int BaseSearchFrequency => 13;
+    public override int BasePerception => 13;
     public override int MeleeToHit => 15;
     public override int RangedToHit => 10;
     public override int HitDieBonus => 10;

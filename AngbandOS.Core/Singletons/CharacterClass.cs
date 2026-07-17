@@ -581,7 +581,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
 
     public abstract int Search { get; }
 
-    public abstract int BaseSearchFrequency { get; }
+    public abstract int BasePerception { get; }
 
     public abstract int Stealth { get; }
 
@@ -598,10 +598,6 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public abstract int RangedAttackBonusPerLevel { get; }
 
     public abstract int SaveBonusPerLevel { get; }
-
-    public abstract int SearchBonusPerLevel { get; }
-
-    public abstract int SearchFrequencyPerLevel { get; }
 
     public abstract int StealthBonusPerLevel { get; }
 

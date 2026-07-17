@@ -15,7 +15,7 @@ internal class ZombieRace : Race
     public override int SavingThrow => 8;
     public override int Stealth => -1;
     public override int Search => -1;
-    public override int BaseSearchFrequency => 5;
+    public override int BasePerception => 5;
     public override int MeleeToHit => 15;
     public override int RangedToHit => 0;
     public override int HitDieBonus => 13;

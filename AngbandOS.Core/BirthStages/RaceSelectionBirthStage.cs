@@ -115,7 +115,7 @@ internal class RaceSelectionBirthStage : BirthStage
             Game.Screen.Print(ColorEnum.Green, bonusInfravision + "0 feet", 38, 45); // TODO: This assumes a 10 foot per unit of infravision conversion that should be configurable.
         }
         Game.Screen.Print(ColorEnum.Black, $"{race.Search + Game.CharacterClass.Search:00}%", 39, 45);
-        Game.Screen.Print(ColorEnum.Black, $"{race.BaseSearchFrequency + Game.CharacterClass.BaseSearchFrequency:00}%", 40, 45);
+        Game.Screen.Print(ColorEnum.Black, $"{race.BasePerception + Game.CharacterClass.BasePerception:00}%", 40, 45);
 
         // Retrieve the description for the race and split the description into lines.
         string[] description = race.Description.Split("\n");

@@ -117,7 +117,7 @@ internal class ClassSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Black, "-", 38, 45);
         buf = $"{characterClass.Search:00}%";
         Game.Screen.Print(ColorEnum.Black, buf, 39, 45);
-        buf = $"{characterClass.BaseSearchFrequency:00}%";
+        buf = $"{characterClass.BasePerception:00}%";
         Game.Screen.Print(ColorEnum.Black, buf, 40, 45);
 
         int y = 30;

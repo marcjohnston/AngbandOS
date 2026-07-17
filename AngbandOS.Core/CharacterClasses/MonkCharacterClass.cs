@@ -18,15 +18,13 @@ internal class MonkCharacterClass : CharacterClass
     public override int SavingThrow => 28;
     public override int Stealth => 5;
     public override int Search => 32;
-    public override int BaseSearchFrequency => 24;
+    public override int BasePerception => 24;
     public override int MeleeToHit => 64;
     public override int RangedToHit => 50;
     public override int DisarmBonusPerLevel => 15;
     public override int DeviceBonusPerLevel => 12;
     public override int SaveBonusPerLevel => 10;
     public override int StealthBonusPerLevel => 0;
-    public override int SearchBonusPerLevel => 0;
-    public override int SearchFrequencyPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 40;
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 6;
