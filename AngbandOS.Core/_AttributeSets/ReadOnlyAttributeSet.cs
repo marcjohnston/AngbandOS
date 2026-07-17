@@ -35,6 +35,14 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
         return value.Value;
     }
 
+    public bool GetBool(string attributeName)
+    {
+        Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+        int index = attribute.Index;
+        BoolReadOnlyAttributeValue value = (BoolReadOnlyAttributeValue)Value[index];
+        return value.Value;
+    }
+
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
