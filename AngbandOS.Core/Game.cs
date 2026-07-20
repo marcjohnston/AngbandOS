@@ -9178,10 +9178,6 @@ internal partial class Game : IGameSerialize
                     k = gameReplayStep.Keystroke;
 
                     // Perform replay verification.
-                    if (gameReplayStep.Seed == 0)
-                    {
-                        throw new ZeroSeedReplayVerificationFailureException();
-                    }
                     if (_mainSequence.CurrentSeed != gameReplayStep.Seed)
                     {
                         throw new InvalidStepSeedReplayVerificationFailureException(_mainSequence.CurrentSeed, gameReplayStep.Seed, gameReplayStep.Keystroke, gameReplayStep.DateTime, ReplayQueue.Count);
