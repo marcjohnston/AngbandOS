@@ -16,6 +16,7 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
         (nameof(ImFireAttribute), "true"),
         (nameof(NoTeleAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResDarkAttribute), "true"),
         (nameof(ResDisenAttribute), "true"),
         (nameof(ShowModsAttribute), "true"),

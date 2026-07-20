@@ -16,6 +16,7 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(ImColdAttribute), "true"),
         (nameof(ImFireAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResDisenAttribute), "true"),
         (nameof(ResNetherAttribute), "true"),
         (nameof(ResNexusAttribute), "true"),

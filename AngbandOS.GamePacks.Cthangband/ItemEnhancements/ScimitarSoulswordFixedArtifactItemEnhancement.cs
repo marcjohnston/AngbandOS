@@ -12,6 +12,7 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResDisenAttribute), "true"),
         (nameof(ResNetherAttribute), "true"),
         (nameof(ResNexusAttribute), "true"),

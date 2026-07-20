@@ -17,6 +17,7 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResBlindAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResColdAttribute), "true"),
         (nameof(ResElecAttribute), "true"),
         (nameof(ResFireAttribute), "true"),

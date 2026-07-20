@@ -13,6 +13,7 @@ public class SmallMetalShieldVitriolFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ImAcidAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResSoundAttribute), "true"),
     };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]

@@ -6,6 +6,7 @@ public class ResistChaosItemEnhancement : ItemEnhancementGameConfiguration
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
     };
     public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

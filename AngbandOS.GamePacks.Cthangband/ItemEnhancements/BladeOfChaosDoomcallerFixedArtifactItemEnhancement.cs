@@ -17,6 +17,7 @@ public class BladeOfChaosDoomcallerFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResAcidAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResColdAttribute), "true"),
         (nameof(ResElecAttribute), "true"),
         (nameof(ResFireAttribute), "true"),

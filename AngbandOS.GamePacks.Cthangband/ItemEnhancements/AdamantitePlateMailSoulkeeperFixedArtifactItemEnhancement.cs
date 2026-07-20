@@ -12,6 +12,7 @@ public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnh
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResAcidAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResColdAttribute), "true"),
         (nameof(ResDarkAttribute), "true"),
         (nameof(ResNetherAttribute), "true"),

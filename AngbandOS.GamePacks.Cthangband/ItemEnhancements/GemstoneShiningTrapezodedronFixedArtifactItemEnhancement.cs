@@ -11,6 +11,7 @@ public class GemstoneShiningTrapezodedronFixedArtifactItemEnhancement : ItemEnha
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.TrapezohedronGemstoneActivation);

@@ -12,6 +12,7 @@ public class PairOfSoftLeatherBootsOfDancingFixedArtifactItemEnhancement : ItemE
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResNetherAttribute), "true"),
         (nameof(SustChaAttribute), "true"),
         (nameof(SustConAttribute), "true"),

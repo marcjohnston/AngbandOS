@@ -8,6 +8,7 @@ public class BladeOfChaosWeaponItemFactoryItemEnhancement : ItemEnhancementGameC
         (nameof(HatesAcidAttribute), "true"),
         (nameof(ChaoticAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ShowModsAttribute), "true"),
         (nameof(CanApplyBlessedArtifactBiasAttribute), "true"),
         (nameof(CanApplySlayingBonusAttribute), "true"),

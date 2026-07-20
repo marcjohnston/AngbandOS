@@ -20,6 +20,7 @@ public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResColdAttribute), "true"),
         (nameof(ResFearAttribute), "true"),
         (nameof(ResNetherAttribute), "true"),

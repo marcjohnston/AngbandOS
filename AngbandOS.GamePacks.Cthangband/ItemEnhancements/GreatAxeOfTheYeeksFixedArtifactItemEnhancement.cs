@@ -13,6 +13,7 @@ public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResAcidAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResDarkAttribute), "true"),
         (nameof(ResFireAttribute), "true"),
         (nameof(ResLightAttribute), "true"),

@@ -11,6 +11,7 @@ public class BalanceDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementG
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResDisenAttribute), "true"),
         (nameof(ResShardsAttribute), "true"),
         (nameof(ResSoundAttribute), "true"),

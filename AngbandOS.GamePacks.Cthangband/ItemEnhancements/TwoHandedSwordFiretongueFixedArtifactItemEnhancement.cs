@@ -14,6 +14,7 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResFireAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
         (nameof(ShowModsAttribute), "true"),

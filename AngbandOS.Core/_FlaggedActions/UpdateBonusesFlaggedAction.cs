@@ -555,10 +555,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.InfravisionRange++;
         }
-        if (Game.HasChaosResistance)
-        {
-            Game.HasConfusionResistance = true;
-        }
         if (Game.HeroismTimer.Value != 0 || Game.SuperheroismTimer.Value != 0)
         {
             Game.HasFearResistance = true;

@@ -11,6 +11,7 @@ public class ChaosDragonScaleMailItemFactoryItemEnhancement : ItemEnhancementGam
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(ResChaosAttribute), "true"),
+        (nameof(ResConfAttribute), "true"),
         (nameof(ResDisenAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.BallOfChaos200r2Every1d300p300DirectionalActivation);
