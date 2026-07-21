@@ -33,4 +33,9 @@ internal abstract class Attribute : IGetKey, IIndexedSingletons, IGameSerialize
             (nameof(Index), new IntValueGameStateBag(Index))
         );
     }
+
+    public override string ToString()
+    {
+        return $"Or: Key: {Key} Index: {Index}";
+    }
 }
