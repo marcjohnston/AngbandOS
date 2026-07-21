@@ -24,7 +24,8 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             (nameof(Flavor), saveGameState.CreateDerivedGameStateBag(Flavor, typeof(IllegibleItemFlavor), typeof(ItemFlavor))),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
             (nameof(_bookIndex), saveGameState.CreateGameStateBag(_bookIndex)),
-            (nameof(_realm), saveGameState.CreateDerivedGameStateBag(_realm, typeof(Realm)))
+            (nameof(_realm), saveGameState.CreateDerivedGameStateBag(_realm, typeof(Realm))),
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet)))
         );
     }
 
@@ -44,7 +45,6 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     public ItemFactory(Game game, ItemFactoryGameConfiguration gameConfiguration) 
     {
         Game = game;
-        EffectiveAttributeSet = new EffectiveAttributeSet(Game);
         Key = gameConfiguration.GetKey;
         ItemEnhancementBindingKey = gameConfiguration.ItemEnhancementBindingKey;
 
@@ -377,22 +377,12 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         EquipmentProcessWorldScript?.ExecuteScriptItem(item);
         ProcessWorld(item);
     }
-    public EffectiveAttributeSet EffectiveAttributeSet { get; }
+    public ReadOnlyAttributeSet AttributeSet { get; private set; }
 
     public void Bind(RestoreGameState? restoreGameState)
     {
         ItemEnhancement itemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
-        EffectiveAttributeSet.MergeAttributeSet(itemEnhancement.GenerateAttributeSet());
 
-        // Cut and paste
-        //string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements\", itemEnhancement.GetKey, "public override ColorEnum");
-        //if (prop1 is null && itemEnhancement.Color is not null)
-        //    throw new Exception();
-        //if (prop1 is not null)
-        //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories", Key, $"    public override ColorEnum Color => ColorEnum.{Enum.GetName<ColorEnum>(itemEnhancement.Color.Value)};");
-        //bool isGood = BonusArmorClass >= 0 && BonusHit >= 0 && BonusDamage >= 0;
-        //if (isGood)
-        //    Game.PasteProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemFactories\", Key, $"    public override bool IsGood => {isGood.ToString().ToLower()};");
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
         FlavorSymbol = Symbol;
@@ -524,6 +514,12 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
             _bookIndex = restoreGameState.GetByKey(nameof(_bookIndex)).GetInt();
             _realm = restoreGameState.GetByKey(nameof(_realm)).GetDerivedReferenceOrDefault<Realm>();
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
+        }
+        else
+        {
+            // This is a new game.  We need to generate a set of attributes for expressions that are not fixed.
+            AttributeSet = itemEnhancement.GenerateAttributeSet();
         }
     }
 
@@ -714,7 +710,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             s += $" ({item.WandChargesRemaining} {Game.Pluralize("charge", item.WandChargesRemaining)})";
         }
 
-        if (EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get() > 0)
+        if (AttributeSet.GetInt(nameof(BurnRateAttribute)) > 0)
         {
             s += $" (with {item.TurnsOfLightRemaining} {Game.Pluralize("turn", item.TurnsOfLightRemaining)} of light)";
         }
@@ -888,7 +884,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     /// <returns></returns>
     public int CalculateTorch(Item item)
     {
-        if (EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get() > 0 && item.TurnsOfLightRemaining <= 0)
+        if (AttributeSet.GetInt(nameof(BurnRateAttribute)) > 0 && item.TurnsOfLightRemaining <= 0)
         {
             return 0;
         }

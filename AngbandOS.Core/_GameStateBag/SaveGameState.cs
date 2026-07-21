@@ -131,7 +131,7 @@ internal partial class SaveGameState
     /// performed.  In debug mode, a validation step is performed to ensure every derived type specified in the <paramref name="derivedTypes"/> has a common super-type of the value.  This help prevent coding errors.
     /// </summary>
     /// <param name="value"></param>
-    /// <param name="type">Provide the type for the object to be serialized.</param>
+    /// <param name="allowConstruction">Specify true to require the object to have already been serialized and require the output to be either null or a <see cref="ReferenceGameStateBag"/>.</param>
     /// <param name="derivedTypes">Provide all of the compatible (derived types).  If none or only one is provided, a null derived code will be generated; otherwise, the derived code will be equal to the position (base-0) of the type specified.</param>
     /// <returns></returns>
     private GameStateBag CreateDerivedGameStateBag2(IGameSerialize? value, bool allowConstruction, params Type[] derivedTypes)

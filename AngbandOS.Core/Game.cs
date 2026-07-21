@@ -376,35 +376,9 @@ internal partial class Game : IGameSerialize
         }
         else
         {
-            // Restore the game.
-            // We need to generate a common dictionary for the object id to reference dictionary that is used to restore a game.
+            // This is a restore.  We need to generate a common dictionary for the object id to reference dictionary that is used to restore a game.
             RestoreGameState restoreGameState = new RestoreGameState(this, gameStateBag);
             SingletonRepository.LoadAndBind(gameConfiguration, restoreGameState.GetByKey(nameof(SingletonRepository)));
-
-            //#if DEBUG
-            //// Check to see if there are any bags unfulfilled in the restore state.  This might occur, if the restore is from a previous version and the object is no longer available.           
-            //foreach (KeyValuePair<string, GameStateBag> singletonKeyAndGameStateBag in singletonRepositoryGameStateBag.Values)
-            //{
-            //    if (singletonKeyAndGameStateBag.Value is ObjectGameStateBag objectGameStateBag)
-            //    {
-            //        if (!restoreGameState.ContainsKey(objectGameStateBag.ObjectId))
-            //        {
-            //            throw new Exception($"The singleton repository game state bag did not create an object for {singletonKeyAndGameStateBag.Key}.");
-            //        }
-            //    }
-            //    else if (singletonKeyAndGameStateBag.Value is ReferenceGameStateBag referenceGameStateBag)
-            //    {
-            //        if (!restoreGameState.ContainsKey(referenceGameStateBag.ObjectId))
-            //        {
-            //            throw new Exception($"The singleton repository game state bag did not create an object for {singletonKeyAndGameStateBag.Key}.");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        throw new Exception($"Cannot verify singleton objects were created because {singletonKeyAndGameStateBag.Key} is not an {nameof(ObjectGameStateBag)} or {nameof(ReferenceGameStateBag)}.");
-            //    }
-            //}
-            //#endif
 
             // Now restore this game object itself.
             (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasAcidImmunity) = restoreGameState.GetByKey("bools1").Get8Bools();
