@@ -5,6 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 using System.Collections;
+using System.Text;
 
 namespace AngbandOS.Core;
 
@@ -58,6 +59,23 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
         return new DictionaryGameStateBag(
             (nameof(_effectiveAttributeValues), saveGameState.CreateDerivedGameStateBag(_effectiveAttributeValues, typeof(ActivationEffectiveAttributeValue), typeof(ArtifactBiasEffectiveAttributeValue), typeof(BoolSetEffectiveAttributeValue), typeof(FriendlyNameEffectiveAttributeValue), typeof(OrEffectiveAttributeValue), typeof(SumEffectiveAttributeValue)))
         );
+    }
+
+    public override string ToString()
+    {
+        Attribute[] cachedAttributes = Game.CachedAttributes;
+        StringBuilder stringBuilder = new StringBuilder();
+        string delimiter = "";
+        foreach (Attribute attribute in cachedAttributes)
+        {
+            ReadOnlyAttributeValue value = _effectiveAttributeValues[attribute.Index].ToReadOnly();
+            if (!value.IsDefault)
+            {
+                stringBuilder.Append($"{delimiter}{attribute.Key.Replace("Attribute", "")}: {value.ToString()}");
+                delimiter = "; ";
+            }
+        }
+        return stringBuilder.ToString();
     }
 
     private Game Game { get; }

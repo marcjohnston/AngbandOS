@@ -8,4 +8,5 @@ namespace AngbandOS.Core;
 
 internal abstract class ReadOnlyAttributeValue : AttributeValue
 {
+    public abstract bool IsDefault { get; }
 }

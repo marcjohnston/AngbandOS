@@ -23,6 +23,12 @@ internal class NullableBoolReadOnlyAttributeValue : ReadOnlyAttributeValue
             (nameof(Value), saveGameState.CreateGameStateBag(Value))
         );
     }
+    public override bool IsDefault => !Value.HasValue;
+
+    public override string ToString()
+    {
+        return !Value.HasValue ? "not set" : (Value.Value ? "true" : "false");
+    }
 }
 
 

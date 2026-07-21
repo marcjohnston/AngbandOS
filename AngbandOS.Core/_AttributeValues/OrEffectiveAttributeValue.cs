@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Text;
+
 namespace AngbandOS.Core;
 
 /// <summary>
@@ -123,5 +125,23 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
         {
             Set();
         }
+    }
+
+    public override string ToString()
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.Append($"{Attribute.Key}: ");
+        string delimiter = "";
+        foreach ((string key, bool modifier) in _attributeModifiers)
+        {
+            stringBuilder.Append(delimiter);
+            delimiter = "; ";
+            if (key != "")
+            {
+                stringBuilder.Append($"{key}: ");
+            }
+            stringBuilder.Append($"{(modifier ? "true" : "false")}");
+        }
+        return stringBuilder.ToString();
     }
 }

@@ -23,4 +23,9 @@ internal class ArtifactBiasReadOnlyAttributeValue : ReadOnlyAttributeValue
             (nameof(Value), saveGameState.CreateGameStateBag(Value))
         );
     }
+    public override bool IsDefault => Value is null;
+    public override string ToString()
+    {
+        return Value is null ? "null" : Value.ToString() ?? "null ToString";
+    }
 }

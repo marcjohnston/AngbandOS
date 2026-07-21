@@ -23,4 +23,9 @@ internal class IntReadOnlyAttributeValue : ReadOnlyAttributeValue
             (nameof(Value), saveGameState.CreateGameStateBag(Value))
         );
     }
+    public override bool IsDefault => Value == 0;
+    public override string ToString()
+    {
+        return Value.ToString();
+    }
 }

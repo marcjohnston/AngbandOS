@@ -23,4 +23,10 @@ internal class ActivationReadOnlyAttributeValue : ReadOnlyAttributeValue
             (nameof(Value), saveGameState.CreateDerivedGameStateBag(Value, typeof(Activation)))
         );
     }
+
+    public override bool IsDefault => Value is null;
+    public override string ToString()
+    {
+        return Value is null ? "null" : Value.ToString() ?? "null ToString";
+    }
 }

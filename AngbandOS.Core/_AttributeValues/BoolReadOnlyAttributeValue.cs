@@ -23,6 +23,11 @@ internal class BoolReadOnlyAttributeValue : ReadOnlyAttributeValue
             (nameof(Value), saveGameState.CreateGameStateBag(Value))
         );
     }
+    public override bool IsDefault => Value == false;
+    public override string ToString()
+    {
+        return Value ? "true" : "false";
+    }
 }
 
 
