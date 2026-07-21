@@ -578,10 +578,10 @@ internal partial class Game : IGameSerialize
         //int randomSeed = IsInReplayMode ? MainSequenceGameStartSeed : MainSequenceCurrentSeed;
         //_mainSequence = new GameRandom(randomSeed);
 
-        ExpressionProviders.Add("Random", _mainSequence);
-        ExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
-        ExpressionProviders.Add("Health", () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
-        ExpressionProviders.Add("ExperienceLevel", () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+        GlobalExpressionProviders.Add("Random", _mainSequence);
+        GlobalExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+        GlobalExpressionProviders.Add("Health", () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+        GlobalExpressionProviders.Add("ExperienceLevel", () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
 
         DownStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsDownStaircase);
         UpStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsUpStaircase);
@@ -1523,19 +1523,20 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the expression providers that are used for game and player expression computations.
     /// </summary>
-    public readonly Dictionary<string, object> ExpressionProviders = new Dictionary<string, object>();
+    private readonly Dictionary<string, object> GlobalExpressionProviders = new Dictionary<string, object>();
 
-    private Dictionary<string, object> MergeExpressionProviders(params (string, object)[]? additionalProviders)
+    public Dictionary<string, object> GetExpressionProviders(params (string, object)[]? additionalProviders)
     {
         Dictionary<string, object> expressionProviders;
         if (additionalProviders is null)
         {
-            expressionProviders = ExpressionProviders;
+            expressionProviders = GlobalExpressionProviders;
         }
         else
         {
             // Clone the providers.
-            expressionProviders = new Dictionary<string, object>(ExpressionProviders);
+            expressionProviders = new Dictionary<string, object>(GlobalExpressionProviders);
+
             // Add the specific providers.
             foreach ((string key, object provider) in additionalProviders)
             {
@@ -1589,12 +1590,12 @@ internal partial class Game : IGameSerialize
     /// <returns></returns>
     public IntegerExpression ComputeIntegerExpression(Expression expression, params (string, object)[]? additionalProviders)
     {
-        Dictionary<string, object> expressionProviders = MergeExpressionProviders(additionalProviders);
+        Dictionary<string, object> expressionProviders = GetExpressionProviders(additionalProviders);
         return expression.Compute<IntegerExpression>(new ExpressionTypeConverter[] { DecimalToIntegerExpressionTypeConverter }, expressionProviders);
     }
     public BooleanExpression ComputeBooleanExpression(Expression expression, params (string, object)[]? additionalProviders)
     {
-        Dictionary<string, object> expressionProviders = MergeExpressionProviders(additionalProviders);
+        Dictionary<string, object> expressionProviders = GetExpressionProviders(additionalProviders);
         return expression.Compute<BooleanExpression>(null, expressionProviders);
     }
 
@@ -1606,7 +1607,7 @@ internal partial class Game : IGameSerialize
     /// <returns></returns>
     public DecimalExpression ComputeDecimalExpression(Expression expression, params (string, object)[]? additionalProviders)
     {
-        Dictionary<string, object> expressionProviders = MergeExpressionProviders(additionalProviders);
+        Dictionary<string, object> expressionProviders = GetExpressionProviders(additionalProviders);
         return expression.Compute<DecimalExpression>(new ExpressionTypeConverter[] { IntegerToDecimalExpressionTypeConverter }, expressionProviders);
     }
 

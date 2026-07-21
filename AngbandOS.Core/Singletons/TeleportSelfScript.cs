@@ -14,7 +14,7 @@ internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
         DistanceExpression = gameConfiguration.DistanceExpression;
     }
 
-    public override string LearnedDetails => $"range {Distance.Minimize(Game.ExpressionProviders).Text}";
+    public override string LearnedDetails => $"range {Distance.Minimize(Game.GetExpressionProviders()).Text}";
 
     public override bool IdentifiesItem => true;
     public override bool UsesItem => true;

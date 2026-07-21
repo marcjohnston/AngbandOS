@@ -15,7 +15,7 @@ internal sealed class DurationLearnedKnowledge : LearnedKnowledge, IGetKey, IToJ
         Key = gameConfiguration.GetKey;
         DurationExpressionText = gameConfiguration.DurationExpressionText;
     }
-    public override string LearnedDetails => $"dur {DurationExpression.Minimize(Game.ExpressionProviders, MinimizeOptions).Text}";
+    public override string LearnedDetails => $"dur {DurationExpression.Minimize(Game.GetExpressionProviders(), MinimizeOptions).Text}";
     public string Key { get; }
 
     public string GetKey => Key;

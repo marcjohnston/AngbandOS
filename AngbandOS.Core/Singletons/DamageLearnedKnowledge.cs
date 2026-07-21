@@ -15,7 +15,7 @@ internal sealed class DamageLearnedKnowledge : LearnedKnowledge, IGetKey, IToJso
         Key = gameConfiguration.GetKey;
         DamageExpressionText = gameConfiguration.DamageExpressionText;
     }
-    public override string LearnedDetails => $"dam {DamageExpression.Minimize(Game.ExpressionProviders, MinimizeOptions).Text}";
+    public override string LearnedDetails => $"dam {DamageExpression.Minimize(Game.GetExpressionProviders(), MinimizeOptions).Text}";
     public string Key { get; }
 
     public string GetKey => Key;

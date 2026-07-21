@@ -15,7 +15,7 @@ internal class RangeLearnedKnowledge : LearnedKnowledge, IGetKey, IToJson, IGame
         Key = gameConfiguration.GetKey;
         RangeExpressionText = gameConfiguration.RangeExpressionText;
     }
-    public override string LearnedDetails => $"range {RangeExpression.Minimize(Game.ExpressionProviders, MinimizeOptions).Text}";
+    public override string LearnedDetails => $"range {RangeExpression.Minimize(Game.GetExpressionProviders(), MinimizeOptions).Text}";
     public string Key { get; }
 
     public string GetKey => Key;

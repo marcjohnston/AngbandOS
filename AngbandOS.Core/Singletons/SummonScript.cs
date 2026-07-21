@@ -65,7 +65,7 @@ internal sealed class SummonScript : IGetKey, IUniversalScript, IToJson, IGameSe
             Game.MsgPrint(PreMessages);
         }
         IntegerExpression levelResult = Game.ComputeIntegerExpression(LevelRoll);
-        BooleanExpression summonGroup = Group.Compute<BooleanExpression>(null, Game.ExpressionProviders);
+        BooleanExpression summonGroup = Group.Compute<BooleanExpression>(null, Game.GetExpressionProviders());
         bool success = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, levelResult.Value, MonsterFilter, summonGroup.Value, Pet);
         if (success && SuccessMessages is not null)
         {

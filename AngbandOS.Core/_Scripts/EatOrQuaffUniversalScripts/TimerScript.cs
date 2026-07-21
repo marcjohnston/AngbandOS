@@ -115,7 +115,7 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
                 }
                 else
                 {
-                    return $"dur {Value.Minimize(Game.ExpressionProviders).Text}";
+                    return $"dur {Value.Minimize(Game.GetExpressionProviders()).Text}";
                 }
             }
             else
