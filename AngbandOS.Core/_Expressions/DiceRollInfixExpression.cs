@@ -49,7 +49,7 @@ internal class DiceRollInfixExpression : InfixExpression
         int sum = 0;
         for (int rollIndex = 0; rollIndex < diceIntegerExpression.Value; rollIndex++)
         {
-            int roll = random.Next(sidesIntegerExpression.Value);
+            int roll = random.Next(sidesIntegerExpression.Value) + 1;
             sum += roll;
         }
         return new IntegerExpression(sum);
