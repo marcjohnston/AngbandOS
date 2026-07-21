@@ -196,8 +196,8 @@ internal sealed class ProjectileMonsterSpell : MonsterSpell
 
     private (string, object)[] GetExpressionProviders(Monster monster) => new (string, object)[] 
     {
-        ("MonsterLevel", Math.Max(monster.Race.Level, 1)),
-        ("MonsterHealth", monster.Health)
+        (nameof(ExpressionProvidersEnum.MonsterLevel), Math.Max(monster.Race.Level, 1)),
+        (nameof(ExpressionProvidersEnum.MonsterHealth), monster.Health)
     };
 
     protected int Damage(Monster monster)

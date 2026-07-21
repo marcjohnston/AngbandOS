@@ -578,10 +578,10 @@ internal partial class Game : IGameSerialize
         //int randomSeed = IsInReplayMode ? MainSequenceGameStartSeed : MainSequenceCurrentSeed;
         //_mainSequence = new GameRandom(randomSeed);
 
-        GlobalExpressionProviders.Add("Random", _mainSequence);
-        GlobalExpressionProviders.Add("Difficulty", () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
-        GlobalExpressionProviders.Add("Health", () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
-        GlobalExpressionProviders.Add("ExperienceLevel", () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.Random), _mainSequence);
+        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetDifficulty), () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetHealth), () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetExperienceLevel), () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
 
         DownStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsDownStaircase);
         UpStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsUpStaircase);

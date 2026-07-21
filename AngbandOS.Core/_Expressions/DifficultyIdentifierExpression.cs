@@ -12,7 +12,7 @@ internal class DifficultyIdentifierExpression : IdentifierExpression
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
     public override Expression Compute(Dictionary<string, object> providers)
     {
-        Func<int> GetDifficulty = (Func<int>)providers["Difficulty"];
-        return new IntegerExpression(GetDifficulty());
+        Func<int> getDifficulty = (Func<int>)providers[nameof(ExpressionProvidersEnum.GetDifficulty)];
+        return new IntegerExpression(getDifficulty());
     }
 }

@@ -12,7 +12,7 @@ internal class ExperienceLevelIdentifierExpression : IdentifierExpression
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
     public override Expression Compute(Dictionary<string, object> providers)
     {
-        Func<int> GetExperienceLevel = (Func<int>)providers["ExperienceLevel"];
+        Func<int> GetExperienceLevel = (Func<int>)providers[nameof(ExpressionProvidersEnum.GetExperienceLevel)];
         return new IntegerExpression(GetExperienceLevel());
     }
 }
