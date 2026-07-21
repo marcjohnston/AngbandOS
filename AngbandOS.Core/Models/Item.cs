@@ -1611,34 +1611,15 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         return "'" + outString.Substring(0, 1).ToUpper() + outString.Substring(1) + "'";
     }
 
+    /// <summary>
+    /// Calculate an expected bonus that increases linearly with dungeon depth, add substantial normally distributed randomness, and make sure the result stays between zero and the maximum.
+    /// </summary>
+    /// <param name="max"></param>
+    /// <param name="level"></param>
+    /// <returns></returns>
     public int GetBonusValue(int max, int level)
     {
-        if (level > Constants.MaxDepth - 1)
-        {
-            level = Constants.MaxDepth - 1;
-        }
-        int bonus = max * level / Constants.MaxDepth;
-        int extra = max * level % Constants.MaxDepth;
-        if (Game.RandomLessThan(Constants.MaxDepth) < extra)
-        {
-            bonus++;
-        }
-        int stand = max / 4;
-        extra = max % 4;
-        if (Game.RandomLessThan(4) < extra)
-        {
-            stand++;
-        }
-        int value = Game.RandomNormal(bonus, stand);
-        if (value < 0)
-        {
-            return 0;
-        }
-        if (value > max)
-        {
-            return max;
-        }
-        return value;
+        return Game.GetBonusValue(Game._mainSequence, max, level, Constants.MaxDepth);
     }
     #endregion
 

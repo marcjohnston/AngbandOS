@@ -1546,6 +1546,42 @@ internal partial class Game : IGameSerialize
     }
 
     /// <summary>
+    /// Calculate an expected bonus that increases linearly with dungeon depth, add substantial normally distributed randomness, and make sure the result stays between zero and the maximum.
+    /// </summary>
+    /// <param name="max"></param>
+    /// <param name="experienceLevel"></param>
+    /// <returns></returns>
+    public static int GetBonusValue(GameRandom random, int max, int experienceLevel, int maxDepth)
+    {
+        if (experienceLevel > maxDepth - 1)
+        {
+            experienceLevel = maxDepth - 1;
+        }
+        int bonus = max * experienceLevel / maxDepth;
+        int extra = max * experienceLevel % maxDepth;
+        if (random.RandomLessThan(maxDepth) < extra)
+        {
+            bonus++;
+        }
+        int stand = max / 4;
+        extra = max % 4;
+        if (random.RandomLessThan(4) < extra)
+        {
+            stand++;
+        }
+        int value = random.RandomNormal(bonus, stand);
+        if (value < 0)
+        {
+            return 0;
+        }
+        if (value > max)
+        {
+            return max;
+        }
+        return value;
+    }
+
+    /// <summary>
     /// Returns an <see cref="IntegerExpression"/> from an expression computation.  A type-conversion from a decimal result to an integer result is performed as needed.  If the result is not
     /// a valid <see cref="IntegerExpression"/> an exception is thrown.
     /// </summary>
