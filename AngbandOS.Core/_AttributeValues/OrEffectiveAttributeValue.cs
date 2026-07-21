@@ -82,7 +82,7 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
         return false;
     }
 
-    public override AttributeValue ToReadOnly() => new BoolReadOnlyAttributeValue(Get());
+    public override ReadOnlyAttributeValue ToReadOnly() => new BoolReadOnlyAttributeValue(Get());
 
     public override void Merge(AttributeValue value)
     {

@@ -48,7 +48,7 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
         return (EffectiveAttributeValue)clone;
     }
     public override string RenderForItemIdentification => Get().ToString();
-    public override AttributeValue ToReadOnly() => new IntReadOnlyAttributeValue(Get());
+    public override ReadOnlyAttributeValue ToReadOnly() => new IntReadOnlyAttributeValue(Get());
 
     public override bool HasKeyedItemEnhancements(string key)
     {

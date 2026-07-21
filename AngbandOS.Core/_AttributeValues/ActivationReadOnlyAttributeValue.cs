@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class ActivationReadOnlyAttributeValue : AttributeValue, IGameSerialize
+internal class ActivationReadOnlyAttributeValue : ReadOnlyAttributeValue
 {
     public readonly Activation? Value;
     public ActivationReadOnlyAttributeValue(Activation? value)

@@ -9,13 +9,13 @@ namespace AngbandOS.Core;
 internal sealed class ReadOnlyAttributeSet : IGameSerialize
 {
     private Game Game { get; }
-    public readonly AttributeValue[] Value;
-    public ReadOnlyAttributeSet(Game game, AttributeValue[] value)
+    public readonly ReadOnlyAttributeValue[] Value;
+    public ReadOnlyAttributeSet(Game game, ReadOnlyAttributeValue[] value)
     {
         Game = game;
         Value = value;
     }
-    public ReadOnlyAttributeSet(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Value)).GetDerivedReferences<AttributeValue>(
+    public ReadOnlyAttributeSet(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Value)).GetDerivedReferences<ReadOnlyAttributeValue>(
         (RestoreGameState restoreGameState) => new ActivationReadOnlyAttributeValue(game, restoreGameState), 
         (RestoreGameState restoreGameState) => new ArtifactBiasReadOnlyAttributeValue(game, restoreGameState), 
         (RestoreGameState restoreGameState) => new BoolReadOnlyAttributeValue(game, restoreGameState), 

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class ArtifactBiasReadOnlyAttributeValue : AttributeValue
+internal class ArtifactBiasReadOnlyAttributeValue : ReadOnlyAttributeValue
 {
     public readonly ArtifactBias? Value;
     public ArtifactBiasReadOnlyAttributeValue(ArtifactBias? value)

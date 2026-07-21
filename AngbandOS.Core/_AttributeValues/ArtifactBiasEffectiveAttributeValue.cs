@@ -30,7 +30,7 @@ internal class ArtifactBiasEffectiveAttributeValue : EffectiveAttributeValue
     }
     #endregion
 
-    public override AttributeValue ToReadOnly() => new ArtifactBiasReadOnlyAttributeValue(Get());
+    public override ReadOnlyAttributeValue ToReadOnly() => new ArtifactBiasReadOnlyAttributeValue(Get());
     public override bool HasKeyedItemEnhancements(string key)
     {
         foreach ((string itemKey, ArtifactBias modifier) in _attributeModifiers)

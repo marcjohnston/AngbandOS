@@ -88,7 +88,7 @@ internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
     }
 
     public override string RenderForItemIdentification => Get()?.Description ?? "nothing";
-    public override AttributeValue ToReadOnly() => new ActivationReadOnlyAttributeValue(Get());
+    public override ReadOnlyAttributeValue ToReadOnly() => new ActivationReadOnlyAttributeValue(Get());
     public override EffectiveAttributeValue Clone()
     {
         ActivationEffectiveAttributeValue clone = new ActivationEffectiveAttributeValue(Game, Attribute);

@@ -90,7 +90,7 @@ internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
         return (EffectiveAttributeValue)clone;
     }
     public override string RenderForItemIdentification => "";
-    public override AttributeValue ToReadOnly() => new NullableStringReadOnlyAttributeValue(Get());
+    public override ReadOnlyAttributeValue ToReadOnly() => new NullableStringReadOnlyAttributeValue(Get());
     public override void Merge(AttributeValue value)
     {
         NullableStringReadOnlyAttributeValue setEffectiveAttributeValue = (NullableStringReadOnlyAttributeValue)value;

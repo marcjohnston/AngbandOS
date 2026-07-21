@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class BoolReadOnlyAttributeValue : AttributeValue
+internal class BoolReadOnlyAttributeValue : ReadOnlyAttributeValue
 {
     public readonly bool Value;
     public BoolReadOnlyAttributeValue(bool value)

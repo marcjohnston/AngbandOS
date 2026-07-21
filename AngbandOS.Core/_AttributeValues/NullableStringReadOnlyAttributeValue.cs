@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class NullableStringReadOnlyAttributeValue : AttributeValue
+internal class NullableStringReadOnlyAttributeValue : ReadOnlyAttributeValue
 {
     public readonly string? Value;
 

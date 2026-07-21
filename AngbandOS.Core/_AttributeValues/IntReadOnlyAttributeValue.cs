@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class IntReadOnlyAttributeValue : AttributeValue
+internal class IntReadOnlyAttributeValue : ReadOnlyAttributeValue
 {
     public readonly int Value;
     public IntReadOnlyAttributeValue(int value)

@@ -57,7 +57,7 @@ internal class BoolSetEffectiveAttributeValue : EffectiveAttributeValue
         );
     }
     public override string RenderForItemIdentification => Get().ToString();
-    public override AttributeValue ToReadOnly() => new NullableBoolReadOnlyAttributeValue(Get());
+    public override ReadOnlyAttributeValue ToReadOnly() => new NullableBoolReadOnlyAttributeValue(Get());
 
     public override bool HasKeyedItemEnhancements(string key)
     {

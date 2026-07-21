@@ -36,7 +36,7 @@ internal abstract class EffectiveAttributeValue : AttributeValue
     public abstract string RenderForItemIdentification { get; }
     public abstract EffectiveAttributeValue Clone();
 
-    public abstract AttributeValue ToReadOnly();
+    public abstract ReadOnlyAttributeValue ToReadOnly();
     public abstract void Merge(AttributeValue value);
     public abstract void Merge(string key, AttributeValue value);
 

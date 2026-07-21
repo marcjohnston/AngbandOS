@@ -101,7 +101,7 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     public ReadOnlyAttributeSet ToReadOnly()
     {
         Attribute[] cachedAttributes = Game.CachedAttributes;
-        AttributeValue[] attributeModifiers = new AttributeValue[cachedAttributes.Length];
+        ReadOnlyAttributeValue[] attributeModifiers = new ReadOnlyAttributeValue[cachedAttributes.Length];
         foreach (Attribute attribute in cachedAttributes)
         {
             attributeModifiers[attribute.Index] = _effectiveAttributeValues[attribute.Index].ToReadOnly();
