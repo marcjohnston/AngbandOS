@@ -363,16 +363,21 @@ internal partial class Game : IGameSerialize
         // Check to see if this is a new game or a game replay.
         if (gameStateBag is null)
         {
-            // This is a new game or this is a game replay.
-            SingletonRepository.LoadAndBind(gameConfiguration, null);
-
             // TODO: Why do we need to initialize more properties.  Something smells.
             // There are a few properties we need to set. 
             IsDead = true;
             Quests = new List<Quest>();
             KeyQueue = new Queue<char>();
-            InitializeAllocationTables(); // This is not performed on a restore.
+
+            // We can initialize the random seed generator at this point; for both new games and game replays.  We make this random generator available to the expression parser so that expressions can use it to generate random numbers.
             _mainSequence = new GameRandom(MainSequenceGameStartSeed);
+            GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.Random), _mainSequence);
+
+            // This is a new game or this is a game replay.
+            SingletonRepository.LoadAndBind(gameConfiguration, null); // TODO: The null might be resolvable with the "NewGame" or "GenerateNewGame" method that is called after the game is constructed.  This should be moved to a new method that every singleton receives after the binding.
+
+            // Now we can initialize the allocation tables.  This step must be performed after the singletons are loaded and bound.
+            InitializeAllocationTables(); // This is not performed on a restore. // TODO: This might be the start of the "NewGame" or "GenerateNewGame" method that is called after the game is constructed.  This should be moved to a new method that every singleton receives after the binding.
         }
         else
         {
@@ -548,11 +553,7 @@ internal partial class Game : IGameSerialize
         #endregion
 
         #region Post-game load non-serialized initialization - Initialization that depends on the loaded data.  All non-serialized fields are initialized here.
-        //// If this game is a replay, we need to initialize the non-fixed random with the same value that was used to construct the game, otherwise, we need to restore the random to the next seed for deterministic game play.
-        //int randomSeed = IsInReplayMode ? MainSequenceGameStartSeed : MainSequenceCurrentSeed;
-        //_mainSequence = new GameRandom(randomSeed);
-
-        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.Random), _mainSequence);
+        // Additional global expressions can now be supported.
         GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetDifficulty), () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
         GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetHealth), () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
         GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetExperienceLevel), () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
