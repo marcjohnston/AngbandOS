@@ -24,8 +24,8 @@ internal class GameExpressionParseLanguage : ParseLanguage
         new ExperienceLevelIdentifierFactorParser(),
         new DifficultyIdentifierFactorParser(),
         new HealthIdentifierFactorParser(),
-        new MonsterLevelFactorParser(),
-        new MonsterHealthFactorParser()
+        new MonsterLevelIdentifierFactorParser(),
+        new MonsterHealthIdentifierFactorParser(),
     };
 
     public override (int, InfixOperator)[]? InfixOperators => new (int, InfixOperator)[]
@@ -35,6 +35,7 @@ internal class GameExpressionParseLanguage : ParseLanguage
         (1, new SubtractionInfixOperator()),
         (2, new MultiplicationInfixOperator()),
         (2, new DivisionInfixOperator()),
-        (3, new DiceRollInfixOperator()) // This is the most significant operation
+        (3, new DiceRollInfixOperator()),
+        (3, new BonusInfixOperator()) // This is the most significant operation
     };
 }
