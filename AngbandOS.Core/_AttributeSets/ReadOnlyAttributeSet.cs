@@ -27,6 +27,15 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
     }
 
     public AttributeValue this[int index] => Value[(int)index];
+
+    public int GetInt(Attribute attribute)
+    {
+        int index = attribute.Index;
+        IntReadOnlyAttributeValue value = (IntReadOnlyAttributeValue)Value[index];
+        return value.Value;
+    }
+
+    [Obsolete("Use GetInt(Attribute attribute) instead.")]
     public int GetInt(string attributeName)
     {
         Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
