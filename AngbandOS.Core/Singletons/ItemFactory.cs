@@ -38,10 +38,6 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     public ColorEnum Color;
 
     #region Constructors
-    //public ItemFactory(Game game, ItemFactoryGameConfiguration gameConfiguration, ObjectGameStateBag gameStateBag) : this(game, gameConfiguration)
-    //{
-    //}
-
     public ItemFactory(Game game, ItemFactoryGameConfiguration gameConfiguration) 
     {
         Game = game;
