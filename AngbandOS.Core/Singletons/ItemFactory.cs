@@ -706,7 +706,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             s += $" ({item.WandChargesRemaining} {Game.Pluralize("charge", item.WandChargesRemaining)})";
         }
 
-        if (AttributeSet.GetInt(nameof(BurnRateAttribute)) > 0)
+        if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get() > 0)
         {
             s += $" (with {item.TurnsOfLightRemaining} {Game.Pluralize("turn", item.TurnsOfLightRemaining)} of light)";
         }
