@@ -559,11 +559,6 @@ internal partial class Game : IGameSerialize
         #endregion
 
         #region Post-game load non-serialized initialization - Initialization that depends on the loaded data.  All non-serialized fields are initialized here.
-        // Additional global expressions can now be supported.
-        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetDifficulty), () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
-        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetHealth), () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
-        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetExperienceLevel), () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
-
         DownStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsDownStaircase);
         UpStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsUpStaircase);
         GrassTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsGrass);
