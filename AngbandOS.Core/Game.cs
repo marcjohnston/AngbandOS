@@ -372,6 +372,9 @@ internal partial class Game : IGameSerialize
             // We can initialize the random seed generator at this point; for both new games and game replays.  We make this random generator available to the expression parser so that expressions can use it to generate random numbers.
             _mainSequence = new GameRandom(MainSequenceGameStartSeed);
             GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.Random), _mainSequence);
+            GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetDifficulty), () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+            GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetHealth), () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+            GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetExperienceLevel), () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
 
             // This is a new game or this is a game replay.
             SingletonRepository.LoadAndBind(gameConfiguration, null); // TODO: The null might be resolvable with the "NewGame" or "GenerateNewGame" method that is called after the game is constructed.  This should be moved to a new method that every singleton receives after the binding.
