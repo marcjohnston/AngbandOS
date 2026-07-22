@@ -66,7 +66,7 @@ namespace AngbandOS.Web.Hubs
 
         #region Connections and Disconnections
         /// <summary>
-        /// Triggered by signal-r when a user connects to the service hub on the home screen.  This message is fowarded to the GameService.
+        /// Triggered by signal-r when a user connects to the service hub on the home screen.  This message is forwarded to the GameService.
         /// </summary>
         /// <returns></returns>
         public override Task OnConnectedAsync()
