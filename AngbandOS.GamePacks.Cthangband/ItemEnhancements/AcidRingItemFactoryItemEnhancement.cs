@@ -14,6 +14,5 @@ public class AcidRingItemFactoryItemEnhancement : ItemEnhancementGameConfigurati
     {
         (nameof(WeightAttribute), "2"),
         (nameof(ValueAttribute), "2000"),
-        (nameof(BonusArmorClassAttribute), "15"),
     };
 }
