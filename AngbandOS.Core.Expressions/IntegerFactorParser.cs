@@ -19,7 +19,7 @@ public class IntegerFactorParser : FactorParser
             string integerText = text.Substring(characterIndex, currentCharacterIndex - characterIndex);
             if (!Int32.TryParse(integerText, out int integerValue))
             {
-                throw new Exception($"Invalid int32 value in expression \"{text}\" at position {characterIndex}.");
+                return null;
             }
             characterIndex = currentCharacterIndex; // Register the consumption of the decimal.
             return new IntegerExpression(integerValue);
