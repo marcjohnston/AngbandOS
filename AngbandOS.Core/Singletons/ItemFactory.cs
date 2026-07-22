@@ -874,20 +874,6 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     }
 
     /// <summary>
-    /// Returns the intensity of light that the object emits.  By default, returns the Radius from the merged characteristics.
-    /// </summary>
-    /// <param name="oPtr"></param>
-    /// <returns></returns>
-    public int CalculateTorch(Item item)
-    {
-        if (AttributeSet.GetInt(nameof(BurnRateAttribute)) > 0 && item.TurnsOfLightRemaining <= 0)
-        {
-            return 0;
-        }
-        return item.EffectiveAttributeSet.Radius;
-    }
-
-    /// <summary>
     /// Returns a description for the item.  Returns a macro processed description, by default.
     /// </summary>
     /// <param name="item"></param>

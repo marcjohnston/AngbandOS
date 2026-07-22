@@ -280,9 +280,18 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     {
         _factory.Refill(this);
     }
+    /// <summary>
+    /// Returns the intensity of light that the object emits.  By default, returns the Radius from the merged characteristics.
+    /// </summary>
+    /// <param name="oPtr"></param>
+    /// <returns></returns>
     public int CalculateTorch()
     {
-        return _factory.CalculateTorch(this);
+        if (EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get() > 0 && TurnsOfLightRemaining <= 0)
+        {
+            return 0;
+        }
+        return EffectiveAttributeSet.Radius;
     }
     public bool IsAmmunitionFor(Item rangedWeapon)
     {
