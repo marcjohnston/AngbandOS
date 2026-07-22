@@ -1646,11 +1646,14 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
 
         Color = factory.Color;
 
-        // Generate the read-only item characteristics from the factory.
+        // Create the effective attribute set for the item.  
         EffectiveAttributeSet = new EffectiveAttributeSet(Game);
 
+        // Generate the read-only item characteristics from the factory.
+        ReadOnlyAttributeSet factoryReadOnlyAttributeSet = factory.ItemEnhancement.GenerateAttributeSet();
+
         // Add it to the item.
-        EffectiveAttributeSet.MergeAttributeSet(Game.FactoryAttributeKey, factory.AttributeSet);
+        EffectiveAttributeSet.MergeAttributeSet(Game.FactoryAttributeKey, factoryReadOnlyAttributeSet);
 
         StackCount = 1;
 

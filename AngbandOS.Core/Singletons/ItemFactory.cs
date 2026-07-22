@@ -24,8 +24,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             (nameof(Flavor), saveGameState.CreateDerivedGameStateBag(Flavor, typeof(IllegibleItemFlavor), typeof(ItemFlavor))),
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
             (nameof(_bookIndex), saveGameState.CreateGameStateBag(_bookIndex)),
-            (nameof(_realm), saveGameState.CreateDerivedGameStateBag(_realm, typeof(Realm))),
-            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet)))
+            (nameof(_realm), saveGameState.CreateDerivedGameStateBag(_realm, typeof(Realm)))
         );
     }
 
@@ -377,7 +376,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
 
     public void Bind(RestoreGameState? restoreGameState)
     {
-        ItemEnhancement itemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
+        ItemEnhancement = Game.SingletonRepository.Get<ItemEnhancement>(ItemEnhancementBindingKey);
 
         Symbol = Game.SingletonRepository.Get<Symbol>(SymbolBindingKey);
         ItemClass = Game.SingletonRepository.Get<ItemClass>(ItemClassBindingKey);
@@ -510,12 +509,6 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
             _bookIndex = restoreGameState.GetByKey(nameof(_bookIndex)).GetInt();
             _realm = restoreGameState.GetByKey(nameof(_realm)).GetDerivedReferenceOrDefault<Realm>();
-            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
-        }
-        else
-        {
-            // This is a new game.  We need to generate a set of attributes for expressions that are not fixed.
-            AttributeSet = itemEnhancement.GenerateAttributeSet();
         }
     }
 
@@ -1590,6 +1583,8 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     /// Returns the symbol to use for rendering.  This property is bound from the <see cref="SymbolBindingKey"/> property during the bind phase.
     /// </summary>
     public Symbol Symbol { get; private set; }
+
+    public ItemEnhancement ItemEnhancement { get; private set; }
 
     /// <summary>
     /// Returns the noticeable script to run when the player uses an item; or null, if the item cannot be used.  This property is bound using the <see cref="UseBindingTuple"/>
