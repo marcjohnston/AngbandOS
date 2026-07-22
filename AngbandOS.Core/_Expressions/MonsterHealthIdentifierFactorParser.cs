@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Expressions;
 
-internal class MonsterHealthFactorParser : IdentifierFactorParser
+internal class MonsterHealthIdentifierFactorParser : IdentifierFactorParser
 {
     public override string Identifier => "mh";
     protected override Expression GenerateExpression(string matchedIdentifier)
