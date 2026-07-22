@@ -7,18 +7,18 @@ public abstract class IdentifierFactorParser : FactorParser
     protected abstract Expression GenerateExpression(string matchedIdentifier);
     public override Expression? TryParse(ExpressionParser parser, string text, ref int characterIndex)
     {
-        int startCharacterIndex = characterIndex;
-        char c = text[characterIndex];
+        int currentCharacterIndex = characterIndex;
 
-        int length = Identifier.Length;
-        if (startCharacterIndex + length > text.Length)
+        // Check to see if there is enough length for a match.
+        if (currentCharacterIndex + Identifier.Length > text.Length)
         {
-            length = text.Length - startCharacterIndex;
+            return null;
         }
-        string matchedIdentifier = text.Substring(startCharacterIndex, Identifier.Length);
+
+        string matchedIdentifier = text.Substring(currentCharacterIndex, Identifier.Length);
         if (CaseSensitive && matchedIdentifier == Identifier || !CaseSensitive && matchedIdentifier.ToLower() == Identifier.ToLower())
         {
-            characterIndex += matchedIdentifier.Length;
+            characterIndex = currentCharacterIndex + matchedIdentifier.Length;
             return GenerateExpression(matchedIdentifier);
         }
 
