@@ -379,6 +379,9 @@ internal partial class Game : IGameSerialize
             // This is a new game or this is a game replay.
             SingletonRepository.LoadAndBind(gameConfiguration, null); // TODO: The null might be resolvable with the "NewGame" or "GenerateNewGame" method that is called after the game is constructed.  This should be moved to a new method that every singleton receives after the binding.
 
+            // We need a game/player level attribute set.
+            EffectiveAttributeSet = new EffectiveAttributeSet(this).ToReadOnly();
+
             // Now we can initialize the allocation tables.  This step must be performed after the singletons are loaded and bound.
             InitializeAllocationTables(); // This is not performed on a restore. // TODO: This might be the start of the "NewGame" or "GenerateNewGame" method that is called after the game is constructed.  This should be moved to a new method that every singleton receives after the binding.
         }
