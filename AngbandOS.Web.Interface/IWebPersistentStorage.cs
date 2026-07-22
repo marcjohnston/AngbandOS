@@ -110,8 +110,7 @@ namespace AngbandOS.Web.Interface
         /// <param name="dateTime"></param>
         /// <param name="keystroke"></param>
         /// <param name="seed"></param>
-        /// <param name="stackTrace"></param>
-        void WriteStep(int gameReplayId, DateTime dateTime, char keystroke, int seed, string? stackTrace);
+        void WriteStep(int gameReplayId, DateTime dateTime, char keystroke, int seed);
 
         /// <summary>
         /// Retrieve the game replay unique identifier for an existing game.

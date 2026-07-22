@@ -395,7 +395,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
             // Retrieve all of the game replay steps, in order and convert them into the interface GameReplayStep objects
             GameReplayStep[] replaySteps = gameReplay.ReplaySteps
                 .OrderBy(_replayStep => _replayStep.Id)
-                .Select(_replayStep => new GameReplayStep(_replayStep.DateTime, _replayStep.Keystroke[0], _replayStep.Seed, _replayStep.StackTrace))
+                .Select(_replayStep => new GameReplayStep(_replayStep.DateTime, _replayStep.Keystroke[0], _replayStep.Seed))
                 .ToArray();
             return (new GameReplayDetails(gameReplay.Seed, replaySteps), gameReplayId);
         }
@@ -419,7 +419,7 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
         }
     }
 
-    public void WriteStep(int gameReplayId, DateTime dateTime, char keystroke, int seed, string? stackTrace)
+    public void WriteStep(int gameReplayId, DateTime dateTime, char keystroke, int seed)
     {
         using (AngbandOSSqlContext context = new AngbandOSSqlContext(ConnectionString))
         {
@@ -429,7 +429,6 @@ public class SqlWebPersistentStorage : IWebPersistentStorage
                 DateTime = dateTime,
                 Keystroke = keystroke.ToString(),
                 Seed = seed,
-                StackTrace = stackTrace
             });
             context.SaveChanges();
         }

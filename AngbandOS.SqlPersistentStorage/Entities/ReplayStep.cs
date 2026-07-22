@@ -15,7 +15,5 @@ public partial class ReplayStep
 
     public int Seed { get; set; }
 
-    public string? StackTrace { get; set; }
-
     public virtual GameRecovery GameReplay { get; set; } = null!;
 }

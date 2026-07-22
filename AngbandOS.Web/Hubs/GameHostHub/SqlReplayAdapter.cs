@@ -12,9 +12,9 @@ namespace AngbandOS.Web.Hubs
             GameReplayId = gameReplayId;
             WebPersistentStorage = webPersistentStorage;
         }
-        public void WriteStep(DateTime dateTime, char keystroke, int seed, string? stackTrace = null)
+        public void WriteStep(DateTime dateTime, char keystroke, int seed)
         {
-            WebPersistentStorage.WriteStep(GameReplayId, dateTime, keystroke, seed, stackTrace);
+            WebPersistentStorage.WriteStep(GameReplayId, dateTime, keystroke, seed);
         }
     }
 }

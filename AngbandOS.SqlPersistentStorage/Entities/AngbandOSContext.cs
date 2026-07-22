@@ -245,7 +245,6 @@ public partial class AngbandOSContext : DbContext
             entity.Property(e => e.Keystroke)
                 .HasMaxLength(1)
                 .IsFixedLength();
-            entity.Property(e => e.StackTrace).IsUnicode(false);
 
             entity.HasOne(d => d.GameReplay).WithMany(p => p.ReplaySteps)
                 .HasForeignKey(d => d.GameReplayId)

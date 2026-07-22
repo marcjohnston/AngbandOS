@@ -9117,7 +9117,7 @@ internal partial class Game : IGameSerialize
     {
         if (ReplayPersistentStorage is not null)
         {
-            ReplayPersistentStorage.WriteStep(DateTime.Now.ToUniversalTime(), keystroke, _mainSequence.CurrentSeed, null);
+            ReplayPersistentStorage.WriteStep(DateTime.Now.ToUniversalTime(), keystroke, _mainSequence.CurrentSeed);
         }
     }
 
