@@ -13,6 +13,7 @@ internal class GetCharismaIdentifierExpression : IdentifierExpression
     public override Expression Compute(Dictionary<string, object> providers)
     {
         Func<int> getCharisma = (Func<int>)providers[nameof(ExpressionProvidersEnum.GetCharisma)];
-        return new IntegerExpression(getCharisma());
+        int charismaValue = getCharisma();
+        return new IntegerExpression(charismaValue);
     }
 }
