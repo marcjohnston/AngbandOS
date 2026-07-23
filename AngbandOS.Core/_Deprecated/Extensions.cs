@@ -143,6 +143,15 @@ internal static class Extensions
     /// </summary>
     /// <param name="val"> The value of the ability score </param>
     /// <returns> The display value </returns>
+    /// <remarks>
+    /// From   To   Display
+    ///    0   18   "     0"
+    ///   19   28   "    19"
+    ///   29   38   "    20"
+    ///  219  228   "    39"
+    ///  229  238   "    40"
+    ///  239        "    40+"  
+    /// </remarks>
     public static string StatToString(this int val)
     {
         // Above 18, scores are measured in tenths of a point
