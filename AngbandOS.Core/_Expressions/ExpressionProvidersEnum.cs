@@ -3,9 +3,9 @@
 internal enum ExpressionProvidersEnum
 {
     /// <summary>
-    /// Returns the current value of the stat.
+    /// Returns the players current charisma value.
     /// </summary>
-    CurrentValue,
+    GetCharisma,
 
     /// <summary>
     /// Returns the random number generator object.
