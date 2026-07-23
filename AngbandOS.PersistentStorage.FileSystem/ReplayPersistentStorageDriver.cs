@@ -33,17 +33,7 @@ public class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDisposab
             // Read the seed.
             int stepSeed = reader.ReadInt32();
 
-            // Read the stack trace.
-            string? stackTrace = null;
-            byte nullStackTrace = reader.ReadByte();
-            if (nullStackTrace == 1)
-            {
-                int length = reader.ReadInt32();
-                byte[] text = reader.ReadBytes(length);
-                stackTrace = Encoding.UTF8.GetString(text);
-            }
-
-            GameReplayStep gameReplayStep = new GameReplayStep(new DateTime(ticks), c, stepSeed, stackTrace);
+            GameReplayStep gameReplayStep = new GameReplayStep(new DateTime(ticks), c, stepSeed);
             steps.Add(gameReplayStep);
         }
 
@@ -101,7 +91,7 @@ public class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDisposab
         await _stream.WriteAsync(bytes);
     }
 
-    public async void WriteStep(DateTime dateTime, char keystroke, int seed, string? stackTrace = null)
+    public async void WriteStep(DateTime dateTime, char keystroke, int seed)
     {
         // If we are appending data to an existing replay, we need to open it now.
         if (_stream is null)
@@ -113,15 +103,6 @@ public class ReplayPersistentStorageDriver : IReplayPersistentStorage, IDisposab
         await WriteDateTimeAsync(dateTime);
         await WriteCharAsync(keystroke);
         await WriteIntAsync(seed);
-        if (stackTrace is null)
-        {
-            await WriteByteAsync(0);
-        }
-        else
-        {
-            await WriteByteAsync(1);
-            await WriteStringAsync(stackTrace);
-        }
         await _stream.FlushAsync();
     }
 
