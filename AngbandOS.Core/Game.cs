@@ -968,8 +968,11 @@ internal partial class Game : IGameSerialize
     public void GainMutation(Mutation mutation)
     {
         MutationsNotPossessed.Remove(mutation);
+
+        // Mutations that belong to a group, can only be possessed one at a time.  If the player gains a mutation that belongs to a group, then all other mutations in that group are lost.
         if (MutationsPossessed.Count > 0 && mutation.Group != MutationGroupEnum.None)
         {
+            // Enumerate all of the mutations to remove others in the same group.
             int i = 0;
             do
             {
@@ -977,6 +980,7 @@ internal partial class Game : IGameSerialize
                 {
                     Mutation other = MutationsPossessed[i];
                     MutationsPossessed.RemoveAt(i);
+                    other.GainedAttributeSet = null;
                     other.OnLose();
                     MsgPrint(other.LoseMessage);
                     MutationsNotPossessed.Add(other);
@@ -987,6 +991,14 @@ internal partial class Game : IGameSerialize
                 }
             } while (i < MutationsPossessed.Count);
         }
+
+        // If there are passive attribute enhancements, then generate the values now during this gain phase.
+        if (mutation.ItemEnhancement is not null)
+        {
+            ReadOnlyAttributeSet attributeSet = mutation.ItemEnhancement.GenerateAttributeSet();
+            mutation.GainedAttributeSet = attributeSet;
+        }
+
         MutationsPossessed.Add(mutation);
         mutation.OnGain();
         MsgPrint(mutation.GainMessage);
@@ -15108,8 +15120,8 @@ internal partial class Game : IGameSerialize
         // Passive Mutations
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AlbinoPassiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ArthritisPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BlankFacPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ElecToucPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BlankFacePassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ElecTouchPassiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(EspPassiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(FearlessPassiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(FireBodyPassiveMutation)));
@@ -15129,7 +15141,7 @@ internal partial class Game : IGameSerialize
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ResTimePassiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ScalesPassiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ShortLegPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SillyVoiPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SillyVoicePassiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SusStatsPassiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(VulnElemPassiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WartSkinPassiveMutation)));

@@ -14,7 +14,7 @@ internal class FearlessPassiveMutation : Mutation
     public override string HaveMessage => "You are completely fearless.";
     public override string LoseMessage => "You begin to feel fear again.";
     public override MutationGroupEnum Group => MutationGroupEnum.Bravery;
-
+    public override string? ItemEnhancementBindingKey => nameof(FearlessPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.ResFear = true;

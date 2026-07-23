@@ -14,6 +14,7 @@ internal class ArthritisPassiveMutation : Mutation
     public override string HaveMessage => "Your joints ache constantly (-3 DEX).";
     public override string LoseMessage => "Your joints stop hurting.";
     public override MutationGroupEnum Group => MutationGroupEnum.Joints;
+    public override string? ItemEnhancementBindingKey => nameof(ArthritisMutationItemEnhancement);
 
     public override void OnGain()
     {

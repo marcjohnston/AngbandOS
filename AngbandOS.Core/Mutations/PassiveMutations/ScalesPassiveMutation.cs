@@ -14,7 +14,7 @@ internal class ScalesPassiveMutation : Mutation
     public override string HaveMessage => "Your skin has turned into scales (-1 CHR, +10 AC).";
     public override string LoseMessage => "Your scales vanish!";
     public override MutationGroupEnum Group => MutationGroupEnum.Skin;
-
+    public override string? ItemEnhancementBindingKey => nameof(ScalesPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.CharismaBonus -= 1;

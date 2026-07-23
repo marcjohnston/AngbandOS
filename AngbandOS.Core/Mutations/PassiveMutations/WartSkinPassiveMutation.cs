@@ -14,7 +14,7 @@ internal class WartSkinPassiveMutation : Mutation
     public override string HaveMessage => "Your skin is covered with warts (-2 CHR, +5 AC).";
     public override string LoseMessage => "Your warts disappear!";
     public override MutationGroupEnum Group => MutationGroupEnum.Skin;
-
+    public override string? ItemEnhancementBindingKey => nameof(WartSkinPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.CharismaBonus -= 2;

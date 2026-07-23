@@ -30,6 +30,14 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         effectiveAttributeSet.MergeAttributeSet(Game.CharacterClass.ReadOnlyAttributeSet);
 
         // Apply all of the mutations that the player has.
+        foreach (Mutation mutation in Game.MutationsPossessed)
+        {
+            // Check to see if there are passive attributes to be merged.
+            if (mutation.GainedAttributeSet is not null)
+            {
+                effectiveAttributeSet.MergeAttributeSet(mutation.GainedAttributeSet);
+            }
+        }
 
         // Apply all of the items that the player is wielding.
         foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>())

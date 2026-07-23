@@ -13,7 +13,7 @@ internal class RegenPassiveMutation : Mutation
     public override string GainMessage => "You start regenerating.";
     public override string HaveMessage => "You are regenerating.";
     public override string LoseMessage => "You stop regenerating.";
-
+    public override string? ItemEnhancementBindingKey => nameof(RegenPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.Regen = true;

@@ -14,7 +14,7 @@ internal class HyperIntPassiveMutation : Mutation
     public override string HaveMessage => "Your brain is a living computer (+4 INT/WIS).";
     public override string LoseMessage => "Your brain reverts to normal.";
     public override MutationGroupEnum Group => MutationGroupEnum.Smarts;
-
+    public override string? ItemEnhancementBindingKey => nameof(HyperIntPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.IntelligenceBonus += 4;

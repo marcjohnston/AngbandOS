@@ -13,7 +13,7 @@ internal class XtraNoisPassiveMutation : Mutation
     public override string GainMessage => "You start making strange noise!";
     public override string HaveMessage => "You make a lot of strange noise (-3 stealth).";
     public override string LoseMessage => "You stop making strange noise!";
-
+    public override string? ItemEnhancementBindingKey => nameof(XtraNoisPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.StealthBonus -= 3;

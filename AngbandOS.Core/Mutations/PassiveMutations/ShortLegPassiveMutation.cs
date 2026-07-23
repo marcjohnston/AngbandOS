@@ -13,7 +13,7 @@ internal class ShortLegPassiveMutation : Mutation
     public override string GainMessage => "Your legs turn into short stubs!";
     public override string HaveMessage => "Your legs are short stubs (-3 speed).";
     public override string LoseMessage => "Your legs lengthen to normal.";
-
+    public override string? ItemEnhancementBindingKey => nameof(ShortLegPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.SpeedBonus -= 3;

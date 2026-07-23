@@ -14,7 +14,7 @@ internal class IronSkinPassiveMutation : Mutation
     public override string HaveMessage => "Your skin is made of steel (-1 DEX, +25 AC).";
     public override string LoseMessage => "Your skin reverts to flesh!";
     public override MutationGroupEnum Group => MutationGroupEnum.Skin;
-
+    public override string? ItemEnhancementBindingKey => nameof(IronSkinPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.DexterityBonus -= 1;

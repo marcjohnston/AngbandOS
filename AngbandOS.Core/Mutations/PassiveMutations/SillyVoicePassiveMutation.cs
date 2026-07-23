@@ -4,23 +4,25 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interfaces;
+
 namespace AngbandOS.Core.Mutations.PassiveMutations;
 
-internal class BlankFacPassiveMutation : Mutation
+internal class SillyVoicePassiveMutation : Mutation
 {
-    private BlankFacPassiveMutation(Game game) : base(game) { }
+    private SillyVoicePassiveMutation(Game game) : base(game) { }
     public override int Frequency => 2;
-    public override string GainMessage => "Your face becomes completely featureless!";
-    public override string HaveMessage => "Your face is featureless (-1 CHR).";
-    public override string LoseMessage => "Your facial features return.";
-
+    public override string GainMessage => "Your voice turns into a ridiculous squeak!";
+    public override string HaveMessage => "Your voice is a silly squeak (-4 CHR).";
+    public override string LoseMessage => "Your voice returns to normal.";
+    public override string? ItemEnhancementBindingKey => nameof(SillyVoicePassiveMutationItemEnhancement);
     public override void OnGain()
     {
-        Game.CharismaBonus -= 1;
+        Game.CharismaBonus -= 4;
     }
 
     public override void OnLose()
     {
-        Game.CharismaBonus += 1;
+        Game.CharismaBonus += 4;
     }
 }

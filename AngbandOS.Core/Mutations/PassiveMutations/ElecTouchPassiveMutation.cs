@@ -6,21 +6,21 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.PassiveMutations;
 
-internal class SillyVoiPassiveMutation : Mutation
+internal class ElecTouchPassiveMutation : Mutation
 {
-    private SillyVoiPassiveMutation(Game game) : base(game) { }
+    private ElecTouchPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 2;
-    public override string GainMessage => "Your voice turns into a ridiculous squeak!";
-    public override string HaveMessage => "Your voice is a silly squeak (-4 CHR).";
-    public override string LoseMessage => "Your voice returns to normal.";
-
+    public override string GainMessage => "Electricity starts running through you!";
+    public override string HaveMessage => "Electricity is running through your veins.";
+    public override string LoseMessage => "Electricity stops running through you.";
+    public override string? ItemEnhancementBindingKey => nameof(ElecTouchMutationItemEnhancement);
     public override void OnGain()
     {
-        Game.CharismaBonus -= 4;
+        Game.ElecHit = true;
     }
 
     public override void OnLose()
     {
-        Game.CharismaBonus += 4;
+        Game.ElecHit = false;
     }
 }

@@ -14,7 +14,7 @@ internal class HyperStrPassiveMutation : Mutation
     public override string HaveMessage => "You are superhumanly strong (+4 STR).";
     public override string LoseMessage => "Your muscles revert to normal.";
     public override MutationGroupEnum Group => MutationGroupEnum.Strength;
-
+    public override string? ItemEnhancementBindingKey => nameof(HyperStrPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.StrengthBonus += 4;

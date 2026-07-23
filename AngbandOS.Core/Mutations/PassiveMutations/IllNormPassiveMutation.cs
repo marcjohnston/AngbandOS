@@ -13,6 +13,7 @@ internal class IllNormPassiveMutation : Mutation
     public override string GainMessage => "You start projecting a reassuring image.";
     public override string HaveMessage => "Your appearance is masked with illusion.";
     public override string LoseMessage => "You stop projecting a reassuring image.";
+    public override string? ItemEnhancementBindingKey => nameof(IllNormPassiveMutationItemEnhancement);
 
     public override void OnGain()
     {

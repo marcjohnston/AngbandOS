@@ -13,7 +13,7 @@ internal class FireBodyPassiveMutation : Mutation
     public override string GainMessage => "Your body is enveloped in flames!";
     public override string HaveMessage => "Your body is enveloped in flames.";
     public override string LoseMessage => "Your body is no longer enveloped in flames.";
-
+    public override string? ItemEnhancementBindingKey => nameof(FireBodyPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.MutationFireHit = true;

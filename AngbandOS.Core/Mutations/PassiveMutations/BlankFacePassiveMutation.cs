@@ -6,21 +6,21 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.PassiveMutations;
 
-internal class ElecToucPassiveMutation : Mutation
+internal class BlankFacePassiveMutation : Mutation
 {
-    private ElecToucPassiveMutation(Game game) : base(game) { }
+    private BlankFacePassiveMutation(Game game) : base(game) { }
     public override int Frequency => 2;
-    public override string GainMessage => "Electricity starts running through you!";
-    public override string HaveMessage => "Electricity is running through your veins.";
-    public override string LoseMessage => "Electricity stops running through you.";
-
+    public override string GainMessage => "Your face becomes completely featureless!";
+    public override string HaveMessage => "Your face is featureless (-1 CHR).";
+    public override string LoseMessage => "Your facial features return.";
+    public override string? ItemEnhancementBindingKey => nameof(BlankFaceMutationItemEnhancement);
     public override void OnGain()
     {
-        Game.ElecHit = true;
+        Game.CharismaBonus -= 1;
     }
 
     public override void OnLose()
     {
-        Game.ElecHit = false;
+        Game.CharismaBonus += 1;
     }
 }

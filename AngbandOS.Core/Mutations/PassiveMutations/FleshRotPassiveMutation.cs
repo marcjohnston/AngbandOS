@@ -14,7 +14,7 @@ internal class FleshRotPassiveMutation : Mutation
     public override string HaveMessage => "Your flesh is rotting (-2 CON, -1 CHR).";
     public override string LoseMessage => "Your flesh is no longer afflicted by a rotting disease!";
     public override MutationGroupEnum Group => MutationGroupEnum.Skin;
-
+    public override string? ItemEnhancementBindingKey => nameof(FleshRotPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.ConstitutionBonus -= 2;

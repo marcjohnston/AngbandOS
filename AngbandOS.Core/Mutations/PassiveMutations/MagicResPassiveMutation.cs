@@ -13,7 +13,7 @@ internal class MagicResPassiveMutation : Mutation
     public override string GainMessage => "You become resistant to magic.";
     public override string HaveMessage => "You are resistant to magic.";
     public override string LoseMessage => "You become susceptible to magic again.";
-
+    public override string? ItemEnhancementBindingKey => nameof(MagicResPassiveMutationItemEnhancement);
     public override void OnGain()
     {
         Game.MagicResistance = true;
