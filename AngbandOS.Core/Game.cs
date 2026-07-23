@@ -2779,10 +2779,11 @@ internal partial class Game : IGameSerialize
             birthStage = birthStage.Render();
         }
 
-        if (Shutdown)
-        {
-            return;
-        }
+        // We cannot skip the rest of the GenerateNewGame process if the replay runs out of keystrokes.  We cannot pick back up where we started.  Not supported
+        //if (Shutdown) 
+        //{
+        //    return;
+        //}
 
         RaceAtBirth = Race;
         InitializeQuests();
