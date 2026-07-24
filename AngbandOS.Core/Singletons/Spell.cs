@@ -175,20 +175,20 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
         // Retrieve records for each of the associated signatures, detecting ambiguity across multiple signatures.
         MappedSpellScript? CheckSignatures(params string[] signatures)
         {
-            MappedSpellScript? authorativeMappedSpellScript = null;
+            MappedSpellScript? authoritativeMappedSpellScript = null;
             foreach (string signature in signatures)
             {
                 MappedSpellScript? mappedSpellScript = GetBySignature(signature);
                 if (mappedSpellScript != null)
                 {
-                    if (authorativeMappedSpellScript != null)
+                    if (authoritativeMappedSpellScript != null)
                     {
-                        throw new Exception("Ambigious matching scripts.");
+                        throw new Exception("Ambiguous matching scripts.");
                     }
-                    authorativeMappedSpellScript = mappedSpellScript;
+                    authoritativeMappedSpellScript = mappedSpellScript;
                 }
             }
-            return authorativeMappedSpellScript;
+            return authoritativeMappedSpellScript;
         }
 
         // Check for highest order of precedence, similar to CSS query selections.
