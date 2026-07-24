@@ -427,44 +427,44 @@ internal abstract class Ability : IGetKey, IGameSerialize
     /// <summary>
     /// Modifies an ability score taking into account that scores above 18 are modified in tenths
     /// </summary>
-    /// <param name="value"> The value of the score before the modification </param>
-    /// <param name="amount"> The amount by which the score is to be modified </param>
+    /// <param name="innate"> The value of the score before the modification </param>
+    /// <param name="bonus"> The amount by which the score is to be modified </param>
     /// <returns> The modified value of the ability score </returns>
-    public int ModifyStatValue(int value, int amount)
+    public int ModifyStatValue(int innate, int bonus)
     {
         int i;
-        if (amount > 0)
+        if (bonus > 0)
         {
-            for (i = 0; i < amount; i++)
+            for (i = 0; i < bonus; i++)
             {
-                if (value < 18) // TODO: This should be a setting
+                if (innate < 18) // TODO: This should be a setting
                 {
-                    value++;
+                    innate++;
                 }
                 else
                 {
-                    value += 10;
+                    innate += 10;
                 }
             }
         }
-        else if (amount < 0)
+        else if (bonus < 0)
         {
-            for (i = 0; i < 0 - amount; i++)
+            for (i = 0; i < 0 - bonus; i++)
             {
-                if (value >= 18 + 10)
+                if (innate >= 18 + 10)
                 {
-                    value -= 10;
+                    innate -= 10;
                 }
-                else if (value > 18)
+                else if (innate > 18)
                 {
-                    value = 18;
+                    innate = 18;
                 }
-                else if (value > 3)
+                else if (innate > 3)
                 {
-                    value--;
+                    innate--;
                 }
             }
         }
-        return value;
+        return innate;
     }
 }
