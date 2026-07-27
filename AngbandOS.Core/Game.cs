@@ -11876,7 +11876,9 @@ internal partial class Game : IGameSerialize
         for (i = 0; i < spells.Length; i++)
         {
             Spell spell = spells[i];
-            Screen.PrintLine($"{i.IndexToLetter()}) {spell.Title()}", y + i + 1, x);
+            char letter = i.IndexToLetter();
+            string title = spell.Title();
+            Screen.PrintLine($"{letter}) {title}", y + i + 1, x);
         }
         Screen.PrintLine("", y + i + 1, x);
     }
