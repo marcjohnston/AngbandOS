@@ -33,7 +33,7 @@ internal static class Extensions
     /// <returns> The letter </returns>
     public static char IndexToLetter(this int x)
     {
-        return (char)('a' + (char)x);
+        return (char)('a' + x);
     }
 
     /// <summary>
