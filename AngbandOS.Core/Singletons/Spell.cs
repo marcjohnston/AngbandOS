@@ -357,7 +357,7 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     /// <returns></returns>
     public override string ToString()
     {
-        return $"{Name} ({CharacterClassSpell.Level}, {CharacterClassSpell.ManaCost}, {CharacterClassSpell.BaseFailure}, {CharacterClassSpell.FirstCastExperience})";
+        return $"{Name} (Lvl: {CharacterClassSpell.Level}, Mana: {CharacterClassSpell.ManaCost}, Fail: {CharacterClassSpell.BaseFailure}, 1st Exp: {CharacterClassSpell.FirstCastExperience})";
     }
 
     /// <summary>
