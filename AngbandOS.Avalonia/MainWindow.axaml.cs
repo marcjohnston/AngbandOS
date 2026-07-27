@@ -104,14 +104,7 @@ public partial class MainWindow : Window, IConsoleAndViewPort
     {
         await Task.Run(() =>
         {
-            try
-            {
-                RunGame();
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.UIThread.Post(() => GameExceptionThrown(ex.Message));
-            }
+            RunGame();
         });
 
         Dispatcher.UIThread.Post(() => this.Close());
