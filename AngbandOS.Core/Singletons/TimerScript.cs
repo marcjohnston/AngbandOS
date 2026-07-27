@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
+internal sealed class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
 {
     public TimerScript(Game game, TimerScriptGameConfiguration gameConfiguration) : base(game)
     {
@@ -23,9 +23,9 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
     /// <summary>
     /// Returns whether or not an item is considered used when this script executes.
     /// </summary>
-    protected virtual bool Used { get; }
+    protected bool Used { get; }
 
-    public virtual string Key { get; }
+    public string Key { get; }
     public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState)
@@ -35,17 +35,17 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
         EnabledBoolPosFunction = Game.SingletonRepository.GetNullable<Conditional>(EnabledBoolPosFunctionBindingKey);
     }
     protected string? ValueExpression { get; }
-    protected virtual string TimerBindingKey { get; }
+    protected string TimerBindingKey { get; }
 
-    protected virtual bool Quiet { get; }
+    protected bool Quiet { get; }
 
     /// <summary>
     /// Returns the function to be used to determine if the script is enabled or null, if the script is always enabled.  If the script is not enabled, the
     /// <see cref="IdentifiedResultEnum"/> return value will always be false.
     /// </summary>
     public Conditional? EnabledBoolPosFunction { get; private set; }
-    public virtual string? PreMessage { get; } = null;
-    protected virtual string? EnabledBoolPosFunctionBindingKey { get; } = null;
+    public string? PreMessage { get; } = null;
+    protected string? EnabledBoolPosFunctionBindingKey { get; } = null;
     protected Timer Timer { get; private set; }
     protected Expression? Value { get; private set; }
     public string ToJson()
@@ -99,28 +99,27 @@ internal class TimerScript : EatOrQuaffUniversalScript, IGetKey, IToJson
     /// <summary>
     /// Returns details to reveal to the player when learned; or null to return a default duration "dur" of the remaining time.
     /// </summary>
-    public virtual string? CustomLearnedDetails { get; } = null;
+    public string? CustomLearnedDetails { get; } = null;
 
-    public sealed override string LearnedDetails
+    public override string LearnedDetails
     {
         get
         {
-            // Check to see if the default learned details should be used.
-            if (LearnedDetails is null)
+            // Check to see if the custom learned details should be used.
+            if (CustomLearnedDetails is not null)
             {
-                // Yes.  Return the default.
-                if (Value is null)
-                {
-                    return "";
-                }
-                else
-                {
-                    return $"dur {Value.Minimize(Game.GetExpressionProviders()).Text}";
-                }
+                // Yes.  Return them.
+                return CustomLearnedDetails;
+            }
+
+            // No.  Return the default.
+            if (Value is null)
+            {
+                return "";
             }
             else
             {
-                return LearnedDetails;
+                return $"dur {Value.Minimize(Game.GetExpressionProviders()).Text}";
             }
         }
     }
