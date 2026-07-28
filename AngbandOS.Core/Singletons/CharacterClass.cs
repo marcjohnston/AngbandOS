@@ -86,7 +86,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// </summary>
     protected void CastSpell()
     {
-        string prayer = Game.CharacterClass.SpellNoun;
+        string prayer = SpellNoun;
         if (!Game.CanCastSpells)
         {
             Game.MsgPrint("You cannot cast spells!");
@@ -114,7 +114,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         Game.HandleStuff();
 
         // Allow the player to select the spell.
-        if (!Game.GetSpell(out Spell? spell, Game.CharacterClass.CastVerb, oPtr, true))
+        if (!Game.GetSpell(out Spell? spell, CastVerb, oPtr, true))
         {
             Game.MsgPrint($"You don't know any {prayer}s in that book.");
             return;

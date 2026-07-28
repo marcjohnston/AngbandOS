@@ -318,7 +318,8 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks, restoreGameState);
         LoadFromConfiguration<AttributeFilter, AttributeFilterGameConfiguration>(gameConfiguration.AttributeFilters, restoreGameState);
         LoadFromConfiguration<Conditional, ConditionalGameConfiguration>(gameConfiguration.ProductOfSumsBoolFunctions, restoreGameState);
-        LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities, restoreGameState); // Composite singleton // Composite singleton
+        LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities, restoreGameState); // Composite singleton
+        LoadFromConfiguration<CharacterClassAndRaceInnateTotals, CharacterClassAndRaceInnateTotalsGameConfiguration>(gameConfiguration.CharacterClassAndRaceInnateTotals, restoreGameState); // Composite singleton
         LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells, restoreGameState);
         LoadFromConfiguration<ChestTrap, ChestTrapGameConfiguration>(gameConfiguration.ChestTraps, restoreGameState);
         LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations, restoreGameState);
