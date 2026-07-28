@@ -17,7 +17,12 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     }
     public virtual string Key => GetType().Name;
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => new DictionaryGameStateBag((nameof(GainedAttributeSet), saveGameState.CreateGameStateBag(GainedAttributeSet)));
+    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(GainedAttributeSet), saveGameState.CreateDerivedGameStateBag(GainedAttributeSet, typeof(ReadOnlyAttributeSet)))
+        );
+    }
 
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState)
@@ -35,8 +40,7 @@ internal abstract class Mutation : IGetKey, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            RestoreGameState attributeSetRestoreGameState = restoreGameState.GetByKey(nameof(GainedAttributeSet));
-            GainedAttributeSet = new ReadOnlyAttributeSet(Game, attributeSetRestoreGameState);
+            GainedAttributeSet = restoreGameState.GetByKey(nameof(GainedAttributeSet)).GetDerivedReferenceOrDefault((restoreGameState => new ReadOnlyAttributeSet(Game, restoreGameState)));
         }
     }
     private (IScript ActivationScript, int MinLevel, Expression Cost, Ability Ability, int Difficulty)? Activation { get; set; }
