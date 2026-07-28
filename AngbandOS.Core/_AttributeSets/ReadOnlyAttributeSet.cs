@@ -17,15 +17,24 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
         Game = game;
         Value = value;
     }
-    public ReadOnlyAttributeSet(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Value)).GetDerivedReferences<ReadOnlyAttributeValue>(
-        (RestoreGameState restoreGameState) => new ActivationReadOnlyAttributeValue(game, restoreGameState), 
-        (RestoreGameState restoreGameState) => new ArtifactBiasReadOnlyAttributeValue(game, restoreGameState), 
-        (RestoreGameState restoreGameState) => new BoolReadOnlyAttributeValue(game, restoreGameState), 
-        (RestoreGameState restoreGameState) => new IntReadOnlyAttributeValue(game, restoreGameState), 
-        (RestoreGameState restoreGameState) => new NullableBoolReadOnlyAttributeValue(game, restoreGameState), 
-        (RestoreGameState restoreGameState) => new NullableStringReadOnlyAttributeValue(game, restoreGameState)
-        ))
+    public ReadOnlyAttributeSet(Game game, RestoreGameState restoreGameState)
     {
+        Game = game;
+        Value = restoreGameState.GetByKey(nameof(Value)).GetDerivedReferences<ReadOnlyAttributeValue>(
+            (RestoreGameState restoreGameState) => new ActivationReadOnlyAttributeValue(game, restoreGameState),
+            (RestoreGameState restoreGameState) => new ArtifactBiasReadOnlyAttributeValue(game, restoreGameState),
+            (RestoreGameState restoreGameState) => new BoolReadOnlyAttributeValue(game, restoreGameState),
+            (RestoreGameState restoreGameState) => new IntReadOnlyAttributeValue(game, restoreGameState),
+            (RestoreGameState restoreGameState) => new NullableBoolReadOnlyAttributeValue(game, restoreGameState),
+            (RestoreGameState restoreGameState) => new NullableStringReadOnlyAttributeValue(game, restoreGameState)
+        );
+    }
+
+    public GameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Value), saveGameState.CreateDerivedGameStateBag(Value, typeof(ActivationReadOnlyAttributeValue), typeof(ArtifactBiasReadOnlyAttributeValue), typeof(BoolReadOnlyAttributeValue), typeof(IntReadOnlyAttributeValue), typeof(NullableBoolReadOnlyAttributeValue), typeof(NullableStringReadOnlyAttributeValue)))
+        );
     }
 
     public AttributeValue this[int index] => Value[(int)index];
@@ -52,13 +61,6 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
         int index = attribute.Index;
         BoolReadOnlyAttributeValue value = (BoolReadOnlyAttributeValue)Value[index];
         return value.Value;
-    }
-
-    public GameStateBag? Serialize(SaveGameState saveGameState)
-    {
-        return new DictionaryGameStateBag(
-            (nameof(Value), saveGameState.CreateDerivedGameStateBag(Value, typeof(ActivationReadOnlyAttributeValue), typeof(ArtifactBiasReadOnlyAttributeValue), typeof(BoolReadOnlyAttributeValue), typeof(IntReadOnlyAttributeValue), typeof(NullableBoolReadOnlyAttributeValue), typeof(NullableStringReadOnlyAttributeValue)))
-        );
     }
 
     public override string ToString()
