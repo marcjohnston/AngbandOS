@@ -773,8 +773,18 @@ internal partial class Game : IGameSerialize
         // Cross product/enumerate the spells and realms.
         (Spell, Realm)[] allRealmsAndSpells = realmAndSpellsList.SelectMany(_realmAndSpells => _realmAndSpells.Spells.Select(_spell => (_spell, _realmAndSpells.Realm))).ToArray();
 
+        // Produce a list of experience levels to enumerate.  To do this we check all of the minimum and maximum experience levels denoted in the lookup table and then
+        // add the minimum level (1) and maximum level (Constants.PyMaxLevel).  Finally, we remove the null values and duplicates. 
+        int[] allExperienceLevels = MappedSpellScriptLookupTable
+            .SelectMany(_mappedSpellScript => new int?[] { _mappedSpellScript.MinimumExperienceLevel, _mappedSpellScript.MaximumExperienceLevel })
+            .Concat(new int?[] { 1, Constants.PyMaxLevel })
+            .Where(_item => _item.HasValue)
+            .Select(_item => _item.GetValueOrDefault())
+            .Distinct()
+            .ToArray();
+
         // Now produce a full test mappings list using the Cartesian product; unfortunately at this point, the spell and realms are still represented as a tuple--we will resolve that in a later step.
-        ((Spell, Realm), CharacterClass, int, bool)[] allMappingsWithEmbeddedTuple = CartesianProduct.Generate(allRealmsAndSpells, SingletonRepository.Get<CharacterClass>(), Enumerable.Range(1, 50).ToArray(), new bool[] { true, false }).ToArray();
+        ((Spell, Realm), CharacterClass, int, bool)[] allMappingsWithEmbeddedTuple = CartesianProduct.Generate(allRealmsAndSpells, SingletonRepository.Get<CharacterClass>(), allExperienceLevels, new bool[] { true, false }).ToArray();
 
         // Now we need to cast the result as a single tuple.
         (Spell, Realm, CharacterClass, int, bool)[] allMappingsAsTuples = allMappingsWithEmbeddedTuple.Select((((Spell spell, Realm realm) spellAndRealm, CharacterClass characterClass, int experienceLevel, bool success) _mapping) => (_mapping.spellAndRealm.spell, _mapping.spellAndRealm.realm, _mapping.characterClass, _mapping.experienceLevel, _mapping.success)).ToArray();
