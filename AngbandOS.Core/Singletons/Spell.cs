@@ -229,26 +229,7 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     /// </summary>
     public void CastSpell()
     {
-        BestMatchSelector<MappedSpellScript, Spell, Realm, CharacterClass, int, bool> bestMatchSelector = new BestMatchSelector<MappedSpellScript, Spell, Realm, CharacterClass, int, bool>(
-            Game.SingletonRepository.Get<MappedSpellScript>().OrderByDescending(_mappedSpellScript => _mappedSpellScript.MinimumExperienceLevel),
-            (_mappedSpellScript, _spell) => _mappedSpellScript.Spell is null || _mappedSpellScript.Spell == _spell,
-            (_mappedSpellScript, _realm) => _mappedSpellScript.Realm is null || _mappedSpellScript.Realm == _realm,
-            (_mappedSpellScript, _characterClass) => _mappedSpellScript.CharacterClass is null || _mappedSpellScript.CharacterClass == _characterClass,
-            (_mappedSpellScript, _experienceLevel) => _mappedSpellScript.MinimumExperienceLevel is null || _mappedSpellScript.MinimumExperienceLevel < _experienceLevel,
-            (_mappedSpellScript, _success) => _mappedSpellScript.Success == _success
-        ); // TODO: Should move to after the load and bind phase of the singleton repository so that this is done once.
-
-        // Only a single non-default mapping is allowed.
-        MappedSpellScript mappedSpellScript = bestMatchSelector.GetSingle(this, SpellBookItemFactory.Realm, Game.CharacterClass, Game.ExperienceLevel.IntValue, true);
-
         ICastSpellScript[]? castSpellScripts = CastSpellScripts;
-
-        // Validate the match.
-        if (mappedSpellScript.CastSpellScripts != castSpellScripts)
-        {
-            throw new Exception("Validation failed.");
-        }
-
         ExecuteSpellScripts(castSpellScripts);
     }
 
@@ -258,7 +239,8 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     /// </summary>
     public void CastFailed()
     {
-        ExecuteSpellScripts(FailedCastSpellScripts);
+        ICastSpellScript[]? castSpellScripts = FailedCastSpellScripts;
+        ExecuteSpellScripts(castSpellScripts);
     }
 
     private void ExecuteSpellScripts(ICastSpellScript[]? spellScripts)
