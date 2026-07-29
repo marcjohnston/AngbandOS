@@ -7,4 +7,5 @@ internal class MageCharacterClassOrbOfEntropySpellDeathRealmSuccessMappedSpellSc
     public override string? RealmBindingKey => nameof(DeathRealm);
     public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.MageCharacterClass);
     public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(MageOrbOfEntropyProjectileScript) };
+    public override int? MaximumExperienceLevel => 29;
 }

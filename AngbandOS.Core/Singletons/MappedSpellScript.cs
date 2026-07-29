@@ -13,6 +13,7 @@ internal sealed class MappedSpellScript : IGetKey, IToJson, IGameSerialize
         CharacterClassBindingKey = gameConfiguration.CharacterClassBindingKey;
         CastSpellScriptBindingKeys = gameConfiguration.CastSpellScriptBindingKeys;
         MinimumExperienceLevel = gameConfiguration.MinimumExperienceLevel;
+        MaximumExperienceLevel = gameConfiguration.MaximumExperienceLevel;
     }
 
     public GameStateBag? Serialize(SaveGameState saveGameState) => null;
@@ -38,11 +39,13 @@ internal sealed class MappedSpellScript : IGetKey, IToJson, IGameSerialize
             CharacterClassBindingKey = CharacterClassBindingKey,
             CastSpellScriptBindingKeys = CastSpellScriptBindingKeys,
             MinimumExperienceLevel = MinimumExperienceLevel,
+            MaximumExperienceLevel = MaximumExperienceLevel,
         };
         return JsonSerializer.Serialize(definition, Game.GetJsonSerializerOptions());
     }
 
     public int? MinimumExperienceLevel { get; }
+    public int? MaximumExperienceLevel { get; }
     public Realm? Realm { get; private set; }
     public CharacterClass? CharacterClass { get; private set; }
     public Spell? Spell { get; private set; }
@@ -63,4 +66,8 @@ internal sealed class MappedSpellScript : IGetKey, IToJson, IGameSerialize
     /// property is used to bind the <see cref="CastSpellScripts"/> property during the bind phase.
     /// </summary>
     private string[]? CastSpellScriptBindingKeys { get; }
+    public override string ToString()
+    {
+        return $"{nameof(MappedSpellScript)} {nameof(Spell)}: {Spell?.Name} {nameof(Realm)}: {Realm?.Name} {nameof(CharacterClass)}: {CharacterClass?.Title} {nameof(MinimumExperienceLevel)}: {(MinimumExperienceLevel.HasValue ? MinimumExperienceLevel.Value : "null")} {nameof(MaximumExperienceLevel)}: {(MaximumExperienceLevel.HasValue ? MaximumExperienceLevel.Value : "null")} Success: {(Success ? "true" : "false")}";
+    }
 }

@@ -123,9 +123,9 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
             (_mappedSpellScript.Spell is null || _mappedSpellScript.Spell == this) &&
             (_mappedSpellScript.Realm is null || _mappedSpellScript.Realm == SpellBookItemFactory.Realm) &&
             (_mappedSpellScript.CharacterClass is null || _mappedSpellScript.CharacterClass == Game.CharacterClass) &&
-            (_mappedSpellScript.MinimumExperienceLevel is null || _mappedSpellScript.MinimumExperienceLevel < Game.ExperienceLevel.IntValue) &&
+            (_mappedSpellScript.MinimumExperienceLevel is null || Game.ExperienceLevel.IntValue >= _mappedSpellScript.MinimumExperienceLevel) &&
+            (_mappedSpellScript.MaximumExperienceLevel is null || Game.ExperienceLevel.IntValue <= _mappedSpellScript.MaximumExperienceLevel) &&
             _mappedSpellScript.Success == successScript)
-            .OrderByDescending(_mappedSpellScript => _mappedSpellScript.MinimumExperienceLevel) // NULL values are treated as the lowest values in LINQ
             .ToArray();
 
         // Organize them into number of matching criteria and the matching signature.  The order of precedence is determined by number of matching criteria, similar to CSS select queries.
@@ -377,7 +377,7 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     /// <returns></returns>
     public override string ToString()
     {
-        return $"{Name} (Lvl: {CharacterClassSpell.Level}, Mana: {CharacterClassSpell.ManaCost}, Fail: {CharacterClassSpell.BaseFailure}, 1st Exp: {CharacterClassSpell.FirstCastExperience})";
+        return $"{nameof(Spell)}: {Name} (Lvl: {CharacterClassSpell.Level}, Mana: {CharacterClassSpell.ManaCost}, Fail: {CharacterClassSpell.BaseFailure}, 1st Exp: {CharacterClassSpell.FirstCastExperience})";
     }
 
     /// <summary>

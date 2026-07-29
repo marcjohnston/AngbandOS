@@ -13,4 +13,5 @@ public class MappedSpellScriptGameConfiguration : NonCompositeSingletonGameConfi
     /// </summary>
     public virtual string[]? CastSpellScriptBindingKeys { get; set; }
     public virtual int? MinimumExperienceLevel { get; set; } = null;
+    public virtual int? MaximumExperienceLevel { get; set; } = null;
 }

@@ -682,4 +682,9 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     }
 
     public virtual bool WorshipsADeity => false; // TODO: Only priests have a godname ... this seems off.
+    public override string ToString()
+    {
+        return $"{nameof(CharacterClass)}: {Title}";
+    }
+
 }

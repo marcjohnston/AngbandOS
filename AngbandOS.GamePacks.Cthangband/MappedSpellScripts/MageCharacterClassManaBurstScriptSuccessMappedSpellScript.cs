@@ -7,4 +7,5 @@ internal class MageCharacterClassManaBurstScriptSuccessMappedSpellScript : Mappe
     public override string? RealmBindingKey => nameof(ChaosRealm);
     public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.MageCharacterClass);
     public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(MageManaBurstProjectileScript) };
+    public override int? MaximumExperienceLevel => 29;
 }

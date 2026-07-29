@@ -7,4 +7,5 @@ internal class HighMageCharacterClassHolyOrbSpellLifeRealmSuccessMappedSpellScri
     public override string? RealmBindingKey => nameof(LifeRealm);
     public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.HighMageCharacterClass);
     public override string[]? CastSpellScriptBindingKeys => new string[] { nameof(MageHolyOrbProjectileScript) };
+    public override int? MaximumExperienceLevel => 29;
 }
