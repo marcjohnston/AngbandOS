@@ -29,7 +29,7 @@ internal sealed class SingletonRepository : IGameSerialize
         foreach (IGetKey singleton in _allSingletonsList)
         {
             string key = singleton.GetKey;
-            GameStateBag singletonGameStateBag = saveGameState.CreateDerivedGameStateBag(singleton);
+            GameStateBag singletonGameStateBag = saveGameState.CreateDerivedGameStateBag(singleton); // TODO: this should be converted to a list of derived types for every singleton
             result.Add(key, singletonGameStateBag);
         }
         return new DictionaryGameStateBag(result, false);
@@ -307,7 +307,7 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes, restoreGameState);
         LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes, restoreGameState);
 
-        // Now we need to cache the attributes, now that they are all loaded.
+        // We need to cache the attributes because other singleton require them to be available during the load phase.
         Game.CachedAttributes = Game.SingletonRepository.Get<Attribute>();
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
