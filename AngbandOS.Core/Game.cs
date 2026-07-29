@@ -9657,6 +9657,46 @@ internal partial class Game : IGameSerialize
 
     public void GetStats()
     {
+        CharacterClassAndRaceInnateTotals applicableCharacterClassAndRaceInnateTotals;
+
+        // Retrieve all of the innate maximums so that we can perform a LINQ Where.
+        CharacterClassAndRaceInnateTotals[] characterClassAndRaceInnateTotals = SingletonRepository.Get<CharacterClassAndRaceInnateTotals>();
+
+        // Now filter for the selected character class and race.
+        CharacterClassAndRaceInnateTotals[] characterClassAndRaceInnateTotalsMatches = characterClassAndRaceInnateTotals.Where(x => x.CharacterClass == CharacterClass && x.Race == Race).ToArray();
+        if (characterClassAndRaceInnateTotalsMatches.Length > 1)
+        {
+            throw new Exception($"{nameof(CharacterClassAndRaceInnateTotals)} matched more than one {CharacterClass.GetKey} and {Race.GetKey}.");
+        }
+
+        // Now filter for the selected character class or race.  Only 1 can match.
+        CharacterClassAndRaceInnateTotals[] characterClassInnateTotalsMatches = characterClassAndRaceInnateTotals.Where(x => x.CharacterClass == CharacterClass).ToArray();
+        CharacterClassAndRaceInnateTotals[] raceInnateTotalsMatches = characterClassAndRaceInnateTotals.Where(x => x.Race == Race).ToArray();
+        if (characterClassInnateTotalsMatches.Length > 0)
+        {
+            if (characterClassInnateTotalsMatches.Length > 1)
+            {
+                throw new Exception($"{nameof(CharacterClassAndRaceInnateTotals)} matched more than one {CharacterClass.GetKey}.");
+            }
+            if (raceInnateTotalsMatches.Length != 0)
+            {
+                throw new Exception($"{nameof(CharacterClassAndRaceInnateTotals)} matched both {CharacterClass.GetKey} and {Race.GetKey}.");
+            }
+            applicableCharacterClassAndRaceInnateTotals = characterClassInnateTotalsMatches[0];
+        }
+        else if (raceInnateTotalsMatches.Length > 0)
+        {
+            if (characterClassInnateTotalsMatches.Length > 1)
+            {
+                throw new Exception($"{nameof(CharacterClassAndRaceInnateTotals)} matched more than one {CharacterClass.GetKey}.");
+            }
+            if (raceInnateTotalsMatches.Length != 0)
+            {
+                throw new Exception($"{nameof(CharacterClassAndRaceInnateTotals)} matched both {CharacterClass.GetKey} and {Race.GetKey}.");
+            }
+            applicableCharacterClassAndRaceInnateTotals = characterClassInnateTotalsMatches[0];
+        }
+
         while (true)
         {
             List<int> maxList = new List<int>() { 17, 16, 14, 12, 11, 10 };
