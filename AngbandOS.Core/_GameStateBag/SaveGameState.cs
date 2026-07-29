@@ -150,7 +150,7 @@ internal partial class SaveGameState
 
         if (!allowConstruction)
         {
-            throw new Exception("Derived type expected.");
+            throw new Exception("Derived type expected.  Cannot serialize reference not previously serialized because construction during deserialization disallowed.");
         }
 
         // We need to register this object to the dictionary before we serialize the object to prevent recursion.
