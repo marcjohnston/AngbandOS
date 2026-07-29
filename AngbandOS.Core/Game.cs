@@ -78,6 +78,35 @@ internal partial class Game : IGameSerialize
     }
     #endregion
 
+    #region Non-State Properties - Properties that are post-load initialized
+    public BestMatchSelector<MappedSpellScript, Spell, Realm, CharacterClass, int, bool> MappedSpellScriptBestMatchSelector { get; }
+    public Timer AcidResistanceTimer { get; }
+    public Timer BleedingTimer { get; }
+    public Timer BlessingTimer { get; }
+    public Timer BlindnessTimer { get; }
+    public Timer ColdResistanceTimer { get; }
+    public Timer ConfusionTimer { get; }
+    public Timer EtherealnessTimer { get; }
+    public Timer FearTimer { get; }
+    public Timer FireResistanceTimer { get; }
+    public Timer HallucinationsTimer { get; }
+    public Timer HasteTimer { get; }
+    public Timer HeroismTimer { get; }
+    public Timer InfravisionTimer { get; }
+    public Timer InvulnerabilityTimer { get; }
+    public Timer LightningResistanceTimer { get; }
+    public Timer ParalysisTimer { get; }
+    public Timer PoisonTimer { get; }
+    public Timer PoisonResistanceTimer { get; }
+    public Timer ProtectionFromEvilTimer { get; }
+    public Timer SeeInvisibilityTimer { get; }
+    public Timer SlowTimer { get; }
+    public Timer StoneskinTimer { get; }
+    public Timer StunTimer { get; }
+    public Timer SuperheroismTimer { get; }
+    public Timer TelepathyTimer { get; }
+    #endregion
+
     #region Game Serialization
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
@@ -1007,7 +1036,7 @@ internal partial class Game : IGameSerialize
     }
     #endregion
 
-    #region Cached Data
+    #region Pre-Load Cached Data - Non-State Properties that are pre-loaded and cached
     /// <summary>
     /// Once all of the Attributes are preloaded during the singleton load phase, we cache them.  This is a time saving cache because the <see cref="EffectiveAttributeSet"/> pulls them a lot.
     /// </summary>

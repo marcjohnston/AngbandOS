@@ -118,31 +118,6 @@ internal partial class Game
     public int WisdomBonus;
     #endregion
 
-    public Timer AcidResistanceTimer { get; }
-    public Timer BleedingTimer { get; }
-    public Timer BlessingTimer { get; }
-    public Timer BlindnessTimer { get; }
-    public Timer ColdResistanceTimer { get; }
-    public Timer ConfusionTimer { get; }
-    public Timer EtherealnessTimer { get; }
-    public Timer FearTimer { get; }
-    public Timer FireResistanceTimer { get; }
-    public Timer HallucinationsTimer { get; }
-    public Timer HasteTimer { get; }
-    public Timer HeroismTimer { get; }
-    public Timer InfravisionTimer { get; }
-    public Timer InvulnerabilityTimer { get; }
-    public Timer LightningResistanceTimer { get; }
-    public Timer ParalysisTimer { get; }
-    public Timer PoisonTimer { get; }
-    public Timer PoisonResistanceTimer { get; }
-    public Timer ProtectionFromEvilTimer { get; }
-    public Timer SeeInvisibilityTimer { get; }
-    public Timer SlowTimer { get; }
-    public Timer StoneskinTimer { get; }
-    public Timer StunTimer { get; }
-    public Timer SuperheroismTimer { get; }
-    public Timer TelepathyTimer { get; }
 
 
     public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable
