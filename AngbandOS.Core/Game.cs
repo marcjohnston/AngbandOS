@@ -705,6 +705,7 @@ internal partial class Game : IGameSerialize
         }
 
         ValidateMappedSpellScriptsLookupTable();
+        ValidateInnateTotalsLookupTable();
         #endregion
 
         View consoleView = SingletonRepository.Get<View>(gameConfiguration.DungeonViewBindingKey);
@@ -712,7 +713,43 @@ internal partial class Game : IGameSerialize
     }
     #endregion
 
-    #region MappedSpellScript
+    #region InnateTotals Lookup Table
+    public InnateTotals GetInnateTotals(CharacterClass characterClass, Race race)
+    {
+        // Retrieve all of the innate totals and sort by rank so that we can perform a LINQ Where.
+        InnateTotals[] innateTotals = SingletonRepository.Get<InnateTotals>()
+            .Where(_innateTotal => 
+                (_innateTotal.CharacterClass is null || _innateTotal.CharacterClass == CharacterClass) && 
+                (_innateTotal.Race is null || _innateTotal.Race == Race))
+            .OrderByDescending(_mappedSpellScript => _mappedSpellScript.Rank)
+            .ToArray();
+
+        if (innateTotals.Length == 0)
+        {
+            throw new Exception($"{nameof(InnateTotals)} did not match for any {characterClass.GetKey} and {race.GetKey}.");
+        }
+        if (innateTotals.Length > 1)
+        {
+            throw new Exception($"{nameof(InnateTotals)} matched more than one {characterClass.GetKey} and {race.GetKey}.");
+        }
+        return innateTotals[0];
+    }
+
+    private void ValidateInnateTotalsLookupTable()
+    {
+        // Generate a cross reference of all character classes and races.
+        (CharacterClass, Race)[] characterClassesAndRaces = CartesianProduct.Generate(SingletonRepository.Get<CharacterClass>(), SingletonRepository.Get<Race>()).ToArray();
+
+        // Test the lookup table for exactly one result for every instance.
+        foreach ((CharacterClass characterClass, Race race) in characterClassesAndRaces)
+        {
+            // We do not need the return value.
+            _ = GetInnateTotals(characterClass, race);
+        }
+    }
+    #endregion
+
+    #region MappedSpellScript Lookup Table
     /// <summary>
     /// Represents the lookup table for the <see cref="MappedSpellScript"/> entities.
     /// </summary>
@@ -9781,49 +9818,11 @@ internal partial class Game : IGameSerialize
 
     public void GetStats()
     {
-        CharacterClassAndRaceInnateTotals applicableCharacterClassAndRaceInnateTotals;
-
-        // Retrieve all of the innate maximums so that we can perform a LINQ Where.
-        CharacterClassAndRaceInnateTotals[] characterClassAndRaceInnateTotals = SingletonRepository.Get<CharacterClassAndRaceInnateTotals>();
-
-        // Now filter for the selected character class and race.
-        CharacterClassAndRaceInnateTotals[] characterClassAndRaceInnateTotalsMatches = characterClassAndRaceInnateTotals.Where(x => x.CharacterClass == CharacterClass && x.Race == Race).ToArray();
-        if (characterClassAndRaceInnateTotalsMatches.Length > 1)
-        {
-            throw new Exception($"{nameof(CharacterClassAndRaceInnateTotals)} matched more than one {CharacterClass.GetKey} and {Race.GetKey}.");
-        }
-
-        // Now filter for the selected character class or race.  Only 1 can match.
-        CharacterClassAndRaceInnateTotals[] characterClassInnateTotalsMatches = characterClassAndRaceInnateTotals.Where(x => x.CharacterClass == CharacterClass).ToArray();
-        CharacterClassAndRaceInnateTotals[] raceInnateTotalsMatches = characterClassAndRaceInnateTotals.Where(x => x.Race == Race).ToArray();
-        if (characterClassInnateTotalsMatches.Length > 0)
-        {
-            if (characterClassInnateTotalsMatches.Length > 1)
-            {
-                throw new Exception($"{nameof(CharacterClassAndRaceInnateTotals)} matched more than one {CharacterClass.GetKey}.");
-            }
-            if (raceInnateTotalsMatches.Length != 0)
-            {
-                throw new Exception($"{nameof(CharacterClassAndRaceInnateTotals)} matched both {CharacterClass.GetKey} and {Race.GetKey}.");
-            }
-            applicableCharacterClassAndRaceInnateTotals = characterClassInnateTotalsMatches[0];
-        }
-        else if (raceInnateTotalsMatches.Length > 0)
-        {
-            if (characterClassInnateTotalsMatches.Length > 1)
-            {
-                throw new Exception($"{nameof(CharacterClassAndRaceInnateTotals)} matched more than one {CharacterClass.GetKey}.");
-            }
-            if (raceInnateTotalsMatches.Length != 0)
-            {
-                throw new Exception($"{nameof(CharacterClassAndRaceInnateTotals)} matched both {CharacterClass.GetKey} and {Race.GetKey}.");
-            }
-            applicableCharacterClassAndRaceInnateTotals = characterClassInnateTotalsMatches[0];
-        }
+        InnateTotals innateTotals = GetInnateTotals(CharacterClass, Race);
 
         while (true)
         {
-            List<int> maxList = new List<int>() { 17, 16, 14, 12, 11, 10 };
+            List<int> maxList = new List<int>(innateTotals.MaxInnates);
             foreach (Ability ability in SingletonRepository.Get<Ability>()) // There are six abilities
             {
                 int maxIndex = RandomLessThan(maxList.Count); // Choose a random max from the maxList

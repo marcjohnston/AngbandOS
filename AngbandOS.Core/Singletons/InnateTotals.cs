@@ -6,10 +6,10 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class CharacterClassAndRaceInnateTotals : IGetKey, IGameSerialize, IToJson
+internal class InnateTotals : IGetKey, IGameSerialize, IToJson
 {
     private Game Game { get; }
-    public CharacterClassAndRaceInnateTotals(Game game, CharacterClassAndRaceInnateTotalsGameConfiguration gameConfiguration)
+    public InnateTotals(Game game, InnateTotalsGameConfiguration gameConfiguration)
     {
         Game = game;   
         Key = gameConfiguration.GetKey;
@@ -24,12 +24,13 @@ internal class CharacterClassAndRaceInnateTotals : IGetKey, IGameSerialize, IToJ
     public string? CharacterClassBindingKey { get; }
     public string? RaceBindingKey { get; }
     public int[] MaxInnates { get; }
-
+    public int Rank { get; private set; }
 
     public void Bind(RestoreGameState? restoreGameState)
     {
         CharacterClass = Game.SingletonRepository.GetNullable<CharacterClass>(CharacterClassBindingKey);
         Race = Game.SingletonRepository.GetNullable<Race>(RaceBindingKey);
+        Rank = (CharacterClass is null ? 0 : 1) + (Race is null ? 0 : 1);
     }
 
     public GameStateBag? Serialize(SaveGameState saveGameState) => null;

@@ -122,7 +122,7 @@ public class GameConfiguration
         gameConfiguration.RangeLearnedKnowledges = LoadFromAssembly<RangeLearnedKnowledgeGameConfiguration>(assembly);
         gameConfiguration.ExperienceLearnedKnowledges = LoadFromAssembly<ExperienceLearnedKnowledgeGameConfiguration>(assembly);
 
-        gameConfiguration.CharacterClassAndRaceInnateTotals = LoadFromAssembly<CharacterClassAndRaceInnateTotalsGameConfiguration>(assembly);
+        gameConfiguration.CharacterClassAndRaceInnateTotals = LoadFromAssembly<InnateTotalsGameConfiguration>(assembly);
         gameConfiguration.Towns = LoadFromAssembly<TownGameConfiguration>(assembly);
         gameConfiguration.Shopkeepers = LoadFromAssembly<ShopkeeperGameConfiguration>(assembly);
         gameConfiguration.GameCommands = LoadFromAssembly<GameCommandGameConfiguration>(assembly);
@@ -382,7 +382,7 @@ public class GameConfiguration
     public virtual RacePowerGameConfiguration[]? RacialPowers { get; set; } = null;
     public virtual ConditionalScriptGameConfiguration[]? ConditionalScripts { get; set; } = null;
     public virtual CharacterClassAbilityGameConfiguration[]? CharacterClassAbilities { get; set; } = null;
-    public virtual CharacterClassAndRaceInnateTotalsGameConfiguration[]? CharacterClassAndRaceInnateTotals { get; set; } = null;
+    public virtual InnateTotalsGameConfiguration[]? CharacterClassAndRaceInnateTotals { get; set; } = null;
     public virtual ActivationGameConfiguration[]? Activations { get; set; } = null;
     public virtual ItemFilterGameConfiguration[]? ItemFilters { get; set; } = null;
     public virtual ConditionalGameConfiguration[]? ProductOfSumsBoolFunctions { get; set; } = null;
