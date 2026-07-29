@@ -27,6 +27,7 @@ internal sealed class MappedSpellScript : IGetKey, IToJson, IGameSerialize
         Realm = Game.SingletonRepository.GetNullable<Realm>(RealmBindingKey);
         CharacterClass = Game.SingletonRepository.GetNullable<CharacterClass>(CharacterClassBindingKey);
         CastSpellScripts = Game.SingletonRepository.GetNullable<ICastSpellScript>(CastSpellScriptBindingKeys);
+        Rank = (Spell is null ? 0 : 1) + (Realm is null ? 0 : 1) + (CharacterClass is null ? 0 : 1) + (MinimumExperienceLevel.HasValue ? 1 : 0) + (MaximumExperienceLevel.HasValue ? 1 : 0);
     }
     public string ToJson()
     {
@@ -50,6 +51,11 @@ internal sealed class MappedSpellScript : IGetKey, IToJson, IGameSerialize
     public CharacterClass? CharacterClass { get; private set; }
     public Spell? Spell { get; private set; }
     public ICastSpellScript[]? CastSpellScripts { get; set; }
+
+    /// <summary>
+    /// Returns the rank for this mapping, based on the number of non-default matches required.  This property is precomputed during binding and is used in the query selection.
+    /// </summary>
+    public int Rank { get; private set; }
 
     private string? RealmBindingKey { get; }
     private string? CharacterClassBindingKey { get; }

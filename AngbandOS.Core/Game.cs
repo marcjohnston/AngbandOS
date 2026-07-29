@@ -79,7 +79,6 @@ internal partial class Game : IGameSerialize
     #endregion
 
     #region Non-State Properties - Properties that are post-load initialized
-    public BestMatchSelector<MappedSpellScript, Spell, Realm, CharacterClass, int, bool> MappedSpellScriptBestMatchSelector { get; }
     public Timer AcidResistanceTimer { get; }
     public Timer BleedingTimer { get; }
     public Timer BlessingTimer { get; }
@@ -693,16 +692,102 @@ internal partial class Game : IGameSerialize
         SuperheroismTimer = (SuperheroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.SuperheroismTimer));
         TelepathyTimer = (TelepathyTimer)SingletonRepository.Get<Timer>(nameof(Timers.TelepathyTimer));
         PackWieldSlot = (PackWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(Core.PackWieldSlot));
+
+        // Retrieve the mapped spell scripts and sort them by rank.
+        MappedSpellScriptLookupTable = SingletonRepository.Get<MappedSpellScript>().OrderByDescending(_mappedSpellScript => _mappedSpellScript.Rank).ToArray();
         #endregion
 
+        #region Validation Stage - Additional verifications of state.
+        // Validate the dungeon view.
         if (String.IsNullOrEmpty(gameConfiguration.DungeonViewBindingKey))
         {
             throw new Exception($"No {nameof(gameConfiguration.DungeonViewBindingKey)} provided.");
         }
+
+        ValidateMappedSpellScriptsLookupTable();
+        #endregion
+
         View consoleView = SingletonRepository.Get<View>(gameConfiguration.DungeonViewBindingKey);
         RenderView(consoleView);
     }
     #endregion
+
+    #region MappedSpellScript
+    /// <summary>
+    /// Represents the lookup table for the <see cref="MappedSpellScript"/> entities.
+    /// </summary>
+    /// <remarks>
+    /// This lookup table is post load and bind initialized-- which means it is not state data or serialized.
+    /// </remarks>
+    private MappedSpellScript[] MappedSpellScriptLookupTable { get; set; }
+    
+    /// <summary>
+    /// Returns the associated <see cref="MappedSpellScript"/> for a cast spell, realm, character class, experience level and success.
+    /// </summary>
+    /// <param name="spell"></param>
+    /// <param name="realm"></param>
+    /// <param name="characterClass"></param>
+    /// <param name="experienceLevel"></param>
+    /// <param name="success"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public MappedSpellScript GetMappedSpellScript(Spell spell, Realm realm, CharacterClass characterClass, int experienceLevel, bool success)
+    {
+        // Retrieve all of the matching records.  Sorting by rank was completed upon building of the lookup table during game construction.
+        MappedSpellScript[]? allMatching = MappedSpellScriptLookupTable.Where(_mappedSpellScript =>
+            (_mappedSpellScript.Spell is null || _mappedSpellScript.Spell == spell) &&
+            (_mappedSpellScript.Realm is null || _mappedSpellScript.Realm == realm) &&
+            (_mappedSpellScript.CharacterClass is null || _mappedSpellScript.CharacterClass == characterClass) &&
+            (_mappedSpellScript.MinimumExperienceLevel is null || experienceLevel >= _mappedSpellScript.MinimumExperienceLevel) &&
+            (_mappedSpellScript.MaximumExperienceLevel is null || experienceLevel <= _mappedSpellScript.MaximumExperienceLevel) &&
+            _mappedSpellScript.Success == success)
+            .ToArray();
+
+        // Now we only take the highest rank and remove matches of a lower rank.  We take all of them to detect ambiguous matches.
+        MappedSpellScript[] highestRankMatching = allMatching.TakeWhile(_mappedSpellScript => _mappedSpellScript.Rank == allMatching.First().Rank).ToArray();
+        if (highestRankMatching.Length != 1)
+        {
+            string exceptionDetail = $"{nameof(Spell)}: {spell.Name} {nameof(Realm)}: {realm.Name} {nameof(CharacterClass)}: {characterClass.Title} ExperienceLevel: {experienceLevel} Success: {(success ? "true" : "false")}";
+            if (highestRankMatching.Length == 0)
+            {
+                throw new Exception($"No matching {nameof(MappedSpellScript)} matches for {exceptionDetail}.");
+            }
+
+            string[] ambiguousMatchedKeys = highestRankMatching.Select(_mappingSpellScript => _mappingSpellScript.GetKey).ToArray();
+            string joinedAmbiguousMatchedKeys = String.Join(", ", ambiguousMatchedKeys);
+            throw new Exception($"Too many {nameof(MappedSpellScript)} matched for {exceptionDetail}. The matched keys were {joinedAmbiguousMatchedKeys}");
+        }
+        return highestRankMatching[0];
+    }
+
+    /// <summary>
+    /// Performs validation of the lookup table for the <see cref="MappedSpellScript"/> entities by performing a cartesian product of spells, their realms, character classes,
+    /// experience levels and a boolean success.
+    /// </summary>
+    /// <exception cref="Exception"></exception>
+    private void ValidateMappedSpellScriptsLookupTable()
+    {
+        // First we need a list of all realms and their spell books because not all spells apply to all realms.
+        (Realm Realm, Spell[] Spells)[] realmAndSpellsList = SingletonRepository.Get<Realm>().Select(_realm => (_realm, _realm.SpellBooks.SelectMany(_spellBook => _spellBook.Spells).ToArray())).ToArray();
+
+        // Cross product/enumerate the spells and realms.
+        (Spell, Realm)[] allRealmsAndSpells = realmAndSpellsList.SelectMany(_realmAndSpells => _realmAndSpells.Spells.Select(_spell => (_spell, _realmAndSpells.Realm))).ToArray();
+
+        // Now produce a full test mappings list using the Cartesian product; unfortunately at this point, the spell and realms are still represented as a tuple--we will resolve that in a later step.
+        ((Spell, Realm), CharacterClass, int, bool)[] allMappingsWithEmbeddedTuple = CartesianProduct.Generate(allRealmsAndSpells, SingletonRepository.Get<CharacterClass>(), Enumerable.Range(1, 50).ToArray(), new bool[] { true, false }).ToArray();
+
+        // Now we need to cast the result as a single tuple.
+        (Spell, Realm, CharacterClass, int, bool)[] allMappingsAsTuples = allMappingsWithEmbeddedTuple.Select((((Spell spell, Realm realm) spellAndRealm, CharacterClass characterClass, int experienceLevel, bool success) _mapping) => (_mapping.spellAndRealm.spell, _mapping.spellAndRealm.realm, _mapping.characterClass, _mapping.experienceLevel, _mapping.success)).ToArray();
+
+        // Now we need to test the mappings.
+        foreach (((Spell spell, Realm realm), CharacterClass characterClass, int experienceLevel, bool success) in allMappingsWithEmbeddedTuple)
+        {
+            // We do not need the return value.
+            _ = GetMappedSpellScript(spell, realm, characterClass, experienceLevel, success);
+        }
+    }
+    #endregion
+
 
     #region Play and Game Loop
     /// <summary>
