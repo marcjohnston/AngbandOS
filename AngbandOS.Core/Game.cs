@@ -2753,8 +2753,8 @@ internal partial class Game : IGameSerialize
                         currentFlavorRepository.RemoveAt(randomIndex);
                     }
 
-                    kPtr.FlavorSymbol = kPtr.Flavor.Symbol;
-                    kPtr.Color = kPtr.Flavor.Color;
+                    kPtr.AssignedSymbol = kPtr.Flavor.Symbol;
+                    kPtr.AssignedColor = kPtr.Flavor.Color;
                 }
             }
         }
@@ -13650,8 +13650,8 @@ internal partial class Game : IGameSerialize
 
     private void ImageObject(out ColorEnum ap, out char cp)
     {
-        cp = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Count<ItemFactory>() - 1)).FlavorSymbol.Character;
-        ap = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Count<ItemFactory>() - 1)).FlavorColor;
+        cp = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Count<ItemFactory>() - 1)).AssignedSymbol.Character;
+        ap = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Count<ItemFactory>() - 1)).AssignedColor;
     }
 
     private void ImageRandom(out ColorEnum ap, out char cp)

@@ -190,7 +190,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     public bool CanBeWeaponOfLaw => _factory.CanBeWeaponOfLaw;
 
     public WieldSlot[] WieldSlots => _factory.WieldSlots;
-    public Symbol FlavorSymbol => _factory.FlavorSymbol; // TODO: Rename to represent current or assigned
+    public Symbol FlavorSymbol => _factory.AssignedSymbol; // TODO: Rename to represent current or assigned
 
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
@@ -1644,7 +1644,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         Game = game;
         _factory = factory;
 
-        Color = factory.Color;
+        Color = factory.AssignedColor;
 
         // Create the effective attribute set for the item.  
         EffectiveAttributeSet = new EffectiveAttributeSet(Game);
