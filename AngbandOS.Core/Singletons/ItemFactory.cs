@@ -13,7 +13,6 @@ namespace AngbandOS.Core;
 internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
 {
     private Game Game { get; }
-    private string ItemEnhancementBindingKey { get; }
 
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
@@ -22,8 +21,8 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             (nameof(AssignedSymbol), saveGameState.CreateDerivedGameStateBag(AssignedSymbol, typeof(Symbol))),
             (nameof(AssignedColor), saveGameState.CreateGameStateBag(AssignedColor)),
             (nameof(Flavor), saveGameState.CreateDerivedGameStateBag(Flavor, typeof(IllegibleItemFlavor), typeof(ItemFlavor))),
-            (nameof(_bookIndex), saveGameState.CreateGameStateBag(_bookIndex)),
-            (nameof(_realm), saveGameState.CreateDerivedGameStateBag(_realm, typeof(Realm))),
+            (nameof(BookIndex), saveGameState.CreateGameStateBag(BookIndex)),
+            (nameof(Realm), saveGameState.CreateDerivedGameStateBag(Realm, typeof(Realm))),
             (nameof(Tried), saveGameState.CreateGameStateBag(Tried))
         );
     }
@@ -186,14 +185,24 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     /// This is state data.
     /// </remarks>
     public bool[] Stompable { get; private set; } = new bool[4];
-    #endregion
 
     /// <summary>
-    /// Returns the the <see cref="ItemFlavor"/> that this item should be assigned.  This assignment overrides the random flavor assignment, when the <see cref="ItemClass"/>
-    /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
-    /// This property is bound using the <see cref="PreassignedItemFlavorBindingKey"/> property during the binding phase.
+    /// Returns the index of the book as it pertains to the realm.
     /// </summary>
-    public Flavor? PreassignedItemFlavor { get; private set; }
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public int BookIndex { get; private set; }
+
+    /// <summary>
+    /// Returns the singleton realm that this book factory belongs to.  This is needed because realms define books--books do not define what realm they belong to.
+    /// For this reason, the Realm the book belongs to is set at run-time.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public Realm? Realm { get; private set; }
+    #endregion
 
     #region Cached Data - Non-binding properties that are set once, considered read-only and used for performance.
     /// <summary>
@@ -209,21 +218,6 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     private string _alternateFlavorSuppressedDescriptionSyntax { get; set; }
     private string _flavorUnknownDescriptionSyntax { get; set; }
     private string _alternateFlavorUnknownDescriptionSyntax { get; set; }
-
-    private int _bookIndex;
-
-    /// <summary>
-    /// Returns the index of the book as it pertains to the realm.
-    /// </summary>
-    public int BookIndex => _bookIndex; // TODO: Can this be done during binding?
-
-    private Realm? _realm = null;
-
-    /// <summary>
-    /// Returns the singleton realm that this book factory belongs to.  This is needed because realms define books--books do not define what realm they belong to.
-    /// For this reason, the Realm the book belongs to is set at run-time.
-    /// </summary>
-    public Realm? Realm => _realm; // TODO: Can this be done during binding?
     #endregion
 
     #region Concrete Methods and Properties (Non-abstract and non-virtual) - API Object Functionality
@@ -354,8 +348,8 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     /// <param name="bookIndex"></param>
     public void SetBookIndex(Realm realm, int bookIndex) // TODO: Can this be done during binding?
     {
-        _bookIndex = bookIndex;
-        _realm = realm;
+        BookIndex = bookIndex;
+        Realm = realm;
     }
 
     /// <summary>
@@ -520,8 +514,8 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             AssignedSymbol = restoreGameState.GetByKey(nameof(AssignedSymbol)).GetDerivedReference<Symbol>();
             AssignedColor = restoreGameState.GetByKey(nameof(AssignedColor)).GetEnum<ColorEnum>();
             Flavor = restoreGameState.GetByKey(nameof(Flavor)).GetDerivedReferenceOrDefault<Flavor>((RestoreGameState restoreGameState) => new IllegibleItemFlavor(Game, restoreGameState));
-            _bookIndex = restoreGameState.GetByKey(nameof(_bookIndex)).GetInt();
-            _realm = restoreGameState.GetByKey(nameof(_realm)).GetDerivedReferenceOrDefault<Realm>();
+            BookIndex = restoreGameState.GetByKey(nameof(BookIndex)).GetInt();
+            Realm = restoreGameState.GetByKey(nameof(Realm)).GetDerivedReferenceOrDefault<Realm>();
             Tried = restoreGameState.GetByKey(nameof(Tried)).GetBool();
         }
         #endregion
@@ -1577,6 +1571,14 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
     #endregion
 
     #region Bound Concrete Properties - API Object Functionality - Set during Bind() - get; private set;
+    private string ItemEnhancementBindingKey { get; }
+
+    /// <summary>
+    /// Returns the the <see cref="ItemFlavor"/> that this item should be assigned.  This assignment overrides the random flavor assignment, when the <see cref="ItemClass"/>
+    /// utilizes item flavors.  Returns null, to allow the <see cref="ItemClass"/> to assign a random <see cref="ItemFlavor"/> or when this factory doesn't produce flavored items.
+    /// This property is bound using the <see cref="PreassignedItemFlavorBindingKey"/> property during the binding phase.
+    /// </summary>
+    public Flavor? PreassignedItemFlavor { get; private set; }
     public FixedArtifact[]? EnhancementFixedArtifactFactories { get; private set; }
     public Expression InitialBonusSearch { get; private set; }
     public Expression InitialBonusStealth { get; private set; }
