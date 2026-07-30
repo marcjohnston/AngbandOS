@@ -115,33 +115,7 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     /// <exception cref="Exception"></exception>
     public MappedSpellScript GetMappedSpellScripts(bool successScript)
     {
-        // Retrieve the entire table.
-        MappedSpellScript[] table = Game.SingletonRepository.Get<MappedSpellScript>(); // TODO: This will be slow because the GenericRepository is type casting every record.
-
-        // Retrieve all of the matching records and sort them by rank.
-        MappedSpellScript[]? allMatching = table.Where(_mappedSpellScript =>
-            (_mappedSpellScript.Spell is null || _mappedSpellScript.Spell == this) &&
-            (_mappedSpellScript.Realm is null || _mappedSpellScript.Realm == SpellBookItemFactory.Realm) &&
-            (_mappedSpellScript.CharacterClass is null || _mappedSpellScript.CharacterClass == Game.CharacterClass) &&
-            (_mappedSpellScript.MinimumExperienceLevel is null || Game.ExperienceLevel.IntValue >= _mappedSpellScript.MinimumExperienceLevel) &&
-            (_mappedSpellScript.MaximumExperienceLevel is null || Game.ExperienceLevel.IntValue <= _mappedSpellScript.MaximumExperienceLevel) &&
-            _mappedSpellScript.Success == successScript)
-            .OrderByDescending(_mappedSpellScript => _mappedSpellScript.Rank)
-            .ToArray();
-
-        // Now we only take the highest rank and remove matches of a lower rank.  We take all of them to detect ambiguous matches.
-        MappedSpellScript[]? highestRankMatching = allMatching.TakeWhile(_mappedSpellScript => _mappedSpellScript.Rank == allMatching.First().Rank).ToArray();
-        if (highestRankMatching.Length != 1)
-        {
-            string exceptionDetail = $"{nameof(MappedSpellScript)} query for {nameof(Spell)}: {Name} {nameof(Realm)}: {SpellBookItemFactory.Realm.Name} {nameof(CharacterClass)}: {Game.CharacterClass.Title} ExperienceLevel: {Game.ExperienceLevel.IntValue}";
-            if (highestRankMatching.Length == 0)
-            {
-                throw new Exception($"No matching records returned for {exceptionDetail}.");
-            }
-            throw new Exception($"Too many records matches for {exceptionDetail}.");
-        }
-
-        return highestRankMatching[0];
+        return Game.GetMappedSpellScript(this, SpellBookItemFactory.Realm, Game.CharacterClass, Game.ExperienceLevel.IntValue, successScript);
     }
 
     /// <summary>

@@ -1,6 +1,6 @@
 ﻿namespace AngbandOS.Core.Interface.Configuration;
 
-public class CharacterClassAndRaceInnateTotalsGameConfiguration : CompositeSingletonGameConfiguration
+public class InnateTotalsGameConfiguration : CompositeSingletonGameConfiguration
 {
     public override string?[] CompositeKeys => new string?[] { CharacterClassBindingKey, RaceBindingKey };
     public virtual string? CharacterClassBindingKey { get; set; } = null;
