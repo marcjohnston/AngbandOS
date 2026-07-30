@@ -1141,7 +1141,7 @@ internal partial class Game : IGameSerialize
                 {
                     Mutation other = MutationsPossessed[i];
                     MutationsPossessed.RemoveAt(i);
-                    other.GainedAttributeSet = null;
+                    other.AttributeSet = null;
                     other.OnLose();
                     MsgPrint(other.LoseMessage);
                     MutationsNotPossessed.Add(other);
@@ -1157,7 +1157,7 @@ internal partial class Game : IGameSerialize
         if (mutation.ItemEnhancement is not null)
         {
             ReadOnlyAttributeSet attributeSet = mutation.ItemEnhancement.GenerateAttributeSet();
-            mutation.GainedAttributeSet = attributeSet;
+            mutation.AttributeSet = attributeSet;
         }
 
         MutationsPossessed.Add(mutation);

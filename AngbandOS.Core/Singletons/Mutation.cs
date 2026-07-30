@@ -20,7 +20,7 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(GainedAttributeSet), saveGameState.CreateDerivedGameStateBag(GainedAttributeSet, typeof(ReadOnlyAttributeSet)))
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet)))
         );
     }
 
@@ -40,7 +40,7 @@ internal abstract class Mutation : IGetKey, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            GainedAttributeSet = restoreGameState.GetByKey(nameof(GainedAttributeSet)).GetDerivedReferenceOrDefault((restoreGameState => new ReadOnlyAttributeSet(Game, restoreGameState)));
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReferenceOrDefault((restoreGameState => new ReadOnlyAttributeSet(Game, restoreGameState)));
         }
     }
     private (IScript ActivationScript, int MinLevel, Expression Cost, Ability Ability, int Difficulty)? Activation { get; set; }
@@ -99,5 +99,5 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     /// <summary>
     /// Returns the attribute set that is merged with the players attribute set when this mutation is gained.  This allows the mutation attributes to remain constant for each call of the update bonuses.
     /// </summary>
-    public ReadOnlyAttributeSet? GainedAttributeSet { get; set; }
+    public ReadOnlyAttributeSet? AttributeSet { get; set; }
 }

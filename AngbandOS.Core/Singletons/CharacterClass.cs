@@ -18,7 +18,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(ReadOnlyAttributeSet), saveGameState.CreateDerivedGameStateBag(ReadOnlyAttributeSet, typeof(ReadOnlyAttributeSet)))
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet)))
         );
     }
     public virtual Bonuses? GetBonusesForMeleeWeapon(Item? oPtr) => null;
@@ -390,7 +390,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public ItemEnhancement Enhancement { get; private set; }
     public void Refresh()
     {
-        ReadOnlyAttributeSet = Enhancement.GenerateAttributeSet();
+        AttributeSet = Enhancement.GenerateAttributeSet();
     }
     public void Bind(RestoreGameState? restoreGameState)
     {
@@ -403,11 +403,11 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            ReadOnlyAttributeSet = restoreGameState.GetByKey(nameof(ReadOnlyAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
         }
     }
 
-    public ReadOnlyAttributeSet ReadOnlyAttributeSet { get; private set; }
+    public ReadOnlyAttributeSet AttributeSet { get; private set; }
 
     /// <summary>
     /// Returns true, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.

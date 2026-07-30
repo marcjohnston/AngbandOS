@@ -16,12 +16,12 @@ internal abstract class Race : IGetKey, IGameSerialize
 
     public void Refresh()
     {
-        EffectiveAttributeSet = Enhancement.GenerateAttributeSet();
+        AttributeSet = Enhancement.GenerateAttributeSet();
     }
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(EffectiveAttributeSet), saveGameState.CreateDerivedGameStateBag(EffectiveAttributeSet, typeof(ReadOnlyAttributeSet)))
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet)))
         );
     }
 
@@ -37,14 +37,14 @@ internal abstract class Race : IGetKey, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
         }
     }
 
     /// <summary>
     /// Represents a set of generated attributes.
     /// </summary>
-    public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
+    public ReadOnlyAttributeSet AttributeSet { get; private set; }
 
     protected abstract string EnhancementBindingKey { get; }
     public ItemEnhancement Enhancement { get; private set; }

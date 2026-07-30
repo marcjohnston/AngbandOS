@@ -24,18 +24,18 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
 
         // Apply the race enhancements.
-        effectiveAttributeSet.MergeAttributeSet(Game.Race.EffectiveAttributeSet);
+        effectiveAttributeSet.MergeAttributeSet(Game.Race.AttributeSet);
 
         // Apply the character class enhancements.
-        effectiveAttributeSet.MergeAttributeSet(Game.CharacterClass.ReadOnlyAttributeSet);
+        effectiveAttributeSet.MergeAttributeSet(Game.CharacterClass.AttributeSet);
 
         // Apply all of the mutations that the player has.
         foreach (Mutation mutation in Game.MutationsPossessed)
         {
             // Check to see if there are passive attributes to be merged.
-            if (mutation.GainedAttributeSet is not null)
+            if (mutation.AttributeSet is not null)
             {
-                effectiveAttributeSet.MergeAttributeSet(mutation.GainedAttributeSet);
+                effectiveAttributeSet.MergeAttributeSet(mutation.AttributeSet);
             }
         }
 
@@ -134,7 +134,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasFireImmunity = false;
         Game.HasColdImmunity = false;
         Game.InfravisionRange = Game.Race.Infravision; // done
-        Game.ComputedDisarmTraps = Game.Race.EffectiveAttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + Game.CharacterClass.ReadOnlyAttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
+        Game.ComputedDisarmTraps = Game.Race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
         Game.SkillUseDevice = Game.Race.UseDevice + Game.CharacterClass.UseDevice; // done
         Game.SkillSavingThrow = Game.Race.SavingThrow + Game.CharacterClass.SavingThrow; // done
         Game.SkillStealth = Game.Race.Stealth + Game.CharacterClass.Stealth; // done .. need to copy
