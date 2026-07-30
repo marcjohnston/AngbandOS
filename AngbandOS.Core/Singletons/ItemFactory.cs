@@ -372,7 +372,6 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         EquipmentProcessWorldScript?.ExecuteScriptItem(item);
         ProcessWorld(item);
     }
-    public ReadOnlyAttributeSet AttributeSet { get; private set; }
 
     public void Bind(RestoreGameState? restoreGameState)
     {
