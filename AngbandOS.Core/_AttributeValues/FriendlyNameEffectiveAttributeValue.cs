@@ -23,8 +23,8 @@ internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
         foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetByKey("Key").GetString();
-            string? modifier = tupleRestoreGameState.GetByKey("Modifier").GetStringOrDefault();
+            string key = tupleRestoreGameState.GetByKey("Item1").GetString();
+            string? modifier = tupleRestoreGameState.GetByKey("Item2").GetStringOrDefault();
             _attributeModifiers.Add((key, modifier));
         }
     }
@@ -69,18 +69,8 @@ internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
     }
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        // Serialize the tuples.
-        GameStateBag[] tupleGameStateBags = _attributeModifiers.Select(_attributeModifier => new DictionaryGameStateBag(
-                (nameof(_attributeModifier.Key), saveGameState.CreateGameStateBag(_attributeModifier.Key)),
-                (nameof(_attributeModifier.Modifier), saveGameState.CreateGameStateBag(_attributeModifier.Modifier))
-        )).ToArray();
-
-        // Put the tuples into a list.
-        GameStateBag listOfTuplesGameStateBag = new ListGameStateBag(tupleGameStateBags);
-
-        // Return the dictionary of the values.
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(_attributeModifiers), listOfTuplesGameStateBag)
+            (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, string?>(_attributeModifiers.ToArray(), _key => saveGameState.CreateGameStateBag(_key), _modifier => saveGameState.CreateGameStateBag(_modifier)))
         );
     }
     public override EffectiveAttributeValue Clone()

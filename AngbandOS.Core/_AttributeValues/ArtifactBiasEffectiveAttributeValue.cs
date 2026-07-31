@@ -23,8 +23,8 @@ internal class ArtifactBiasEffectiveAttributeValue : EffectiveAttributeValue
         foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetByKey("Key").GetString();
-            ArtifactBias? modifier = tupleRestoreGameState.GetByKey("Modifier").GetReferenceOrDefault<ArtifactBias>();
+            string key = tupleRestoreGameState.GetByKey("Item1").GetString();
+            ArtifactBias? modifier = tupleRestoreGameState.GetByKey("Item2").GetReferenceOrDefault<ArtifactBias>();
             _attributeModifiers.Add((key, modifier));
         }
     }
@@ -70,18 +70,8 @@ internal class ArtifactBiasEffectiveAttributeValue : EffectiveAttributeValue
     }
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        // Serialize the tuples.
-        GameStateBag[] tupleGameStateBags = _attributeModifiers.Select(_attributeModifier => new DictionaryGameStateBag(
-                (nameof(_attributeModifier.Key), saveGameState.CreateGameStateBag(_attributeModifier.Key)),
-                (nameof(_attributeModifier.Modifier), saveGameState.CreateGameStateBag(_attributeModifier.Modifier))
-        )).ToArray();
-
-        // Put the tuples into a list.
-        GameStateBag listOfTuplesGameStateBag = new ListGameStateBag(tupleGameStateBags);
-
-        // Return the dictionary of the values.
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(_attributeModifiers), listOfTuplesGameStateBag)
+           (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, ArtifactBias?>(_attributeModifiers.ToArray(), _key => saveGameState.CreateGameStateBag(_key), _modifier => saveGameState.CreateDerivedGameStateBag(_modifier, typeof(ArtifactBias))))
         );
     }
     public override EffectiveAttributeValue Clone()

@@ -23,8 +23,8 @@ internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
         foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
         {
             RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetByKey("Key").GetString();
-            Activation? modifier = tupleRestoreGameState.GetByKey("Modifier").GetDerivedReferenceOrDefault<Activation>();
+            string key = tupleRestoreGameState.GetByKey("Item1").GetString();
+            Activation? modifier = tupleRestoreGameState.GetByKey("Item2").GetDerivedReferenceOrDefault<Activation>();
 
             _attributeModifiers.Add((key, modifier));
         }
