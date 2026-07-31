@@ -72,18 +72,8 @@ internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
 
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
-        // Serialize the tuples.
-        GameStateBag[] tupleGameStateBags = _attributeModifiers.Select(_attributeModifier => new DictionaryGameStateBag(
-                ("Key", saveGameState.CreateGameStateBag(_attributeModifier.Key)),
-                ("Modifier", saveGameState.CreateDerivedGameStateBag(_attributeModifier.Modifier, typeof(Activation)))
-        )).ToArray();
-
-        // Put the tuples into a list.
-        GameStateBag listOfTuplesGameStateBag = new ListGameStateBag(tupleGameStateBags);
-
-        // Return the dictionary of the values.
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(_attributeModifiers), listOfTuplesGameStateBag)
+            (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, Activation?>(_attributeModifiers.ToArray(), _key => saveGameState.CreateGameStateBag(_key), _modifier => saveGameState.CreateDerivedGameStateBag(_modifier, typeof(Activation))))
         );
     }
 

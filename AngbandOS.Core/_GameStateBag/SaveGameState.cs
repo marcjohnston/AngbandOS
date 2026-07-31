@@ -229,6 +229,32 @@ internal partial class SaveGameState
         return new TimeSpanValueGameStateBag(value.Value);
     }
 
+    public GameStateBag CreateTupleGameStateBag(params GameStateBag[] items)
+    {
+        List<(string, GameStateBag)> tupleList = new List<(string, GameStateBag)>();
+        int index = 1;
+        foreach (GameStateBag item in items)
+        {
+            tupleList.Add(($"Item{index}", item));
+            index++;
+        }
+        return new DictionaryGameStateBag(tupleList.ToArray());
+    }
+
+    public GameStateBag CreateTuplesGameStateBag<T1, T2>((T1, T2)[] items, Func<T1, GameStateBag> createGameStateBag1, Func<T2, GameStateBag> createGameStateBag2)
+    {
+        List<GameStateBag> tupleList = new List<GameStateBag>();
+        foreach ((T1 item1, T2 item2) in items)
+        {
+            GameStateBag gameStateBag1 = createGameStateBag1(item1);
+            GameStateBag gameStateBag2 = createGameStateBag2(item2);
+            GameStateBag tupleGameStateBag = CreateTupleGameStateBag(gameStateBag1, gameStateBag2);
+            tupleList.Add(tupleGameStateBag);
+        }
+        return new ListGameStateBag(tupleList.ToArray());
+    }
+
+
     public GameStateBag CreateGameStateBag(string? value)
     {
         if (value is null)
@@ -428,19 +454,6 @@ internal partial class SaveGameState
         foreach (bool[] item in value)
         {
             gameStateBags.Add(CreateGameStateBag(item));
-        }
-        return new ListGameStateBag(gameStateBags.ToArray());
-    }
-
-    public GameStateBag CreateGameStateBag<T1, T2>(Dictionary<T1, T2> dictionary) where T1 : notnull
-    {
-        var gameStateBags = new List<GameStateBag>();
-        foreach ((T1 key, T2 value) in dictionary)
-        {
-            GameStateBag keyGameStateBag = CreateGameStateBag(key);
-            GameStateBag valueGameStateBag = CreateGameStateBag(value);
-            DictionaryGameStateBag dictionaryGameStateBag = new DictionaryGameStateBag(new Dictionary<string, GameStateBag> { { "key", keyGameStateBag }, { "value", valueGameStateBag } });
-            gameStateBags.Add(dictionaryGameStateBag);
         }
         return new ListGameStateBag(gameStateBags.ToArray());
     }
