@@ -13,13 +13,20 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     {
         Game = game;
     }
-    protected abstract string EnhancementBindingKey { get; }
+
+    /// <summary>
+    /// Represents the attribute enhancements that are additive for all that apply.
+    /// </summary>
+    protected virtual (int, bool?, string)[]? MinimumLevelAndEnhancementTupleBindings => null;
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet)))
-        );
+            (nameof(MinimumLevelAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, bool?, ReadOnlyAttributeSet>(MinimumLevelAndEnhancementAttributeSets,
+                _minimumExperienceLevel => saveGameState.CreateGameStateBag(_minimumExperienceLevel),
+                _hasHeavyArmor => saveGameState.CreateGameStateBag(_hasHeavyArmor),
+                _attributeSet => saveGameState.CreateDerivedGameStateBag(_attributeSet, typeof(ReadOnlyAttributeSet))
+        )));
     }
     public virtual Bonuses? GetBonusesForMeleeWeapon(Item? oPtr) => null;
 
@@ -79,6 +86,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// <summary>
     ///  Updates the Game bonuses based on the player character and race.  The ChosenOne character class overrides this method.  Does nothing, by default.
     /// </summary>
+    [Obsolete("Being replaced by the MinimumExperienceHeavyArmorAndItemEnhancement tuple set")]
     public virtual void CalcBonuses() { }
 
     /// <summary>
@@ -387,27 +395,89 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// <returns></returns>
 
     public string GetKey => Key;
-    public ItemEnhancement Enhancement { get; private set; }
-    public void Refresh()
+
+    /// <summary>
+    /// Represents the bound experience levels, martial artists heavy weapon and enhancement tuples.  This property is bound using the <see cref="MinimumLevelAndEnhancementTupleBindings"/> property during the binding phase.
+    /// </summary>
+    public (int, bool?, ItemEnhancement)[]? MinimumLevelAndEnhancementTuples { get; private set; }
+
+    public ReadOnlyAttributeSet AttributeSet { get; private set; }
+
+    /// <summary>
+    /// Refreshed the read-only attribute set.  Performed by the <see cref="UpdateBonusesFlaggedAction"/>.
+    /// </summary>
+    /// <returns></returns>
+    public void RefreshSquashedAttributeSet()
     {
-        AttributeSet = Enhancement.GenerateAttributeSet();
+        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
+        if (MinimumLevelAndEnhancementAttributeSets is not null)
+        {
+            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ReadOnlyAttributeSet attributeSet) in MinimumLevelAndEnhancementAttributeSets)
+            {
+                if (Game.ExperienceLevel.IntValue >= minimumExperienceLevel && (!hasHeavyArmor.HasValue || hasHeavyArmor.Value == Game.MartialArtistHeavyArmor()))
+                {
+                    effectiveAttributeSet.MergeAttributeSet(attributeSet);
+                }
+            }
+        }
+        AttributeSet = effectiveAttributeSet.ToReadOnly();
     }
+
+    /// <summary>
+    /// Generates the <see cref="ReadOnlyAttributeSet"/> for each enhancement.  This process should only be done during birth.  The enhancements may have random
+    /// configuration embedded and this generate fixes those random values to be used throughout the game.
+    /// </summary>
+    public void RegenerateAttributeSets()
+    {
+        if (MinimumLevelAndEnhancementTuples is null)
+        {
+            MinimumLevelAndEnhancementAttributeSets = null;
+        }
+        else
+        {
+            List<(int, bool?, ReadOnlyAttributeSet)> tupleList = new List<(int, bool?, ReadOnlyAttributeSet)>();
+            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ItemEnhancement enhancement) in MinimumLevelAndEnhancementTuples)
+            {
+                tupleList.Add((minimumExperienceLevel, hasHeavyArmor, enhancement.GenerateAttributeSet()));
+            }
+            MinimumLevelAndEnhancementAttributeSets = tupleList.ToArray();
+        }
+        RefreshSquashedAttributeSet();
+    }
+
     public void Bind(RestoreGameState? restoreGameState)
     {
         ItemActions = Game.SingletonRepository.GetNullable<ItemAction>(ItemActionNames);
         MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);
-        Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
         TarotDrawRoll = Game.ParseNumericExpression(TarotDrawRollExpression);
         SpellOfWonderBeamProbabilityRoll = Game.ParseNumericExpression(SpellOfWonderBeamProbabilityRollExpression);
         InvokeSpiritsBeamProbabilityRoll = Game.ParseNumericExpression(InvokeSpiritsBeamProbabilityRollExpression);
 
+        if (MinimumLevelAndEnhancementTupleBindings is null)
+        {
+            MinimumLevelAndEnhancementTuples = null;
+        }
+        else
+        {
+            MinimumLevelAndEnhancementTuples = MinimumLevelAndEnhancementTupleBindings.Select(((int MinimumExperienceLevel, bool? HasHeavyArmor, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, _item.HasHeavyArmor, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
+        }
+
         if (restoreGameState is not null)
         {
-            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
+            MinimumLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, bool?, ReadOnlyAttributeSet>(
+                _restoreGameState => _restoreGameState.GetInt(),
+                _restoreGameState => _restoreGameState.GetBoolOrDefault(),
+                _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
         }
     }
 
-    public ReadOnlyAttributeSet AttributeSet { get; private set; }
+    /// <summary>
+    /// Returns the current read-only set of generated enhancements.  These enhancements are generated at birth via the <see cref="RegenerateAttributeSets"/> method and do not change.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public (int, bool?, ReadOnlyAttributeSet)[]? MinimumLevelAndEnhancementAttributeSets { get; private set; } = null;
 
     /// <summary>
     /// Returns true, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.

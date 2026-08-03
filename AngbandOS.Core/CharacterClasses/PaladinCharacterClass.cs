@@ -9,7 +9,11 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class PaladinCharacterClass : CharacterClass
 {
     private PaladinCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(PaladinCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumLevelAndEnhancementTupleBindings => new (int, bool?, string)[]
+    {
+        (1, null, nameof(PaladinCharacterClassItemEnhancement)),
+        (40, null, nameof(PaladinCharacterClassLevel40ItemEnhancement))
+    };
     public override int ID => 5;
     public override string Title => "Paladin";
     public override int? InstantFearResistanceLevel => 40;

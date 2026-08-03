@@ -119,6 +119,25 @@ internal sealed class SingletonRepository : IGameSerialize
         return (T)singleton;
     }
 
+    //public static (T1, T2, T3)[]? BindTuplesOrDefault<T1, T2, T3>((T1, T2, T3)[]? tuples, Func<(T1 Value1, T2 Value2, T3 Value3), T1> Value1, Func<(T1 Value1, T2 Value2, T3 Value3), T2> Value2, Func<(T1 Value1, T2 Value2, T3 Value3), T3> Value3)
+    //{
+    //    if (tuples is null)
+    //    {
+    //        return null;
+    //    }
+
+    //    List<(T1, T2, T3)> boundTupleList = new List<(T1, T2, T3)>();
+    //    foreach ((T1, T2, T3) tuple in tuples)
+    //    {
+    //        T1 t1Value = Value1(tuple);
+    //        T2 t2Value = Value2(tuple);
+    //        T3 t3Value = Value3(tuple);
+    //        (T1, T2, T3) boundTuple = (t1Value, t2Value, t3Value);
+    //        boundTupleList.Add(boundTuple);
+    //    }
+    //    return boundTupleList.ToArray();
+    //}
+
     /// <summary>
     /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterIndex"/> for more information) of type <typeparamref name="T"/> and throws an exception if it isn't found.
     /// </summary>

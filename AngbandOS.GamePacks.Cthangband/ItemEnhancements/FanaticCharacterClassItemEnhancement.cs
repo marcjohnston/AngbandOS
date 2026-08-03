@@ -1,4 +1,3 @@
-
 namespace AngbandOS.GamePacks.Cthangband;
 
 [Serializable]

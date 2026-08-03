@@ -175,6 +175,6 @@ internal class RaceSelectionBirthStage : BirthStage
 
     private BirthStage? GoBack()
     {
-        return Game.SingletonRepository.Get<BirthStage>(nameof(ClassSelectionBirthStage));
+        return Game.SingletonRepository.Get<BirthStage>(nameof(CharacterClassSelectionBirthStage));
     }
 }

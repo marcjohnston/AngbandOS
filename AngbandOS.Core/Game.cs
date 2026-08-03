@@ -2937,11 +2937,11 @@ internal partial class Game : IGameSerialize
         // Refresh all of the race and character class enhancements.
         foreach (Race race in SingletonRepository.Get<Race>())
         {
-            race.Refresh();
+            race.RegenerateAttributeSets();
         }
         foreach (CharacterClass characterClass in SingletonRepository.Get<CharacterClass>())
         {
-            characterClass.Refresh();
+            characterClass.RegenerateAttributeSets();
         }
 
         Screen.Clear();

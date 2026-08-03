@@ -11,7 +11,12 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class CultistCharacterClass : CharacterClass
 {
     private CultistCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(CultistCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumLevelAndEnhancementTupleBindings => new (int, bool?, string)[]
+    {
+        (1, null, nameof(CultistCharacterClassItemEnhancement)),
+        (20, null, nameof(CultistCharacterClassLevel20ItemEnhancement))
+    };
+
     public override int ID => 12;
     public override string Title => "Cultist";
     public override bool ReceivesLevelRewards => true;

@@ -151,6 +151,6 @@ internal class IntroductionBirthStage : BirthStage
             Game.PrimaryRealm = null; // Wait until the player has selected a primary realm.
             Game.SecondaryRealm = null; // Wait until the player has selected secondary realm.
         }
-        return Game.SingletonRepository.Get<BirthStage>(nameof(ClassSelectionBirthStage));
+        return Game.SingletonRepository.Get<BirthStage>(nameof(CharacterClassSelectionBirthStage));
     }
 }

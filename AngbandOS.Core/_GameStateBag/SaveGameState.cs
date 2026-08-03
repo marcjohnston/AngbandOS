@@ -241,8 +241,13 @@ internal partial class SaveGameState
         return new DictionaryGameStateBag(tupleList.ToArray());
     }
 
-    public GameStateBag CreateTuplesGameStateBag<T1, T2>((T1, T2)[] items, Func<T1, GameStateBag> createGameStateBag1, Func<T2, GameStateBag> createGameStateBag2)
+    public GameStateBag CreateTuplesGameStateBag<T1, T2>((T1, T2)[]? items, Func<T1, GameStateBag> createGameStateBag1, Func<T2, GameStateBag> createGameStateBag2)
     {
+        if (items is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
         List<GameStateBag> tupleList = new List<GameStateBag>();
         foreach ((T1 item1, T2 item2) in items)
         {
@@ -254,6 +259,24 @@ internal partial class SaveGameState
         return new ListGameStateBag(tupleList.ToArray());
     }
 
+    public GameStateBag CreateTuplesGameStateBag<T1, T2, T3>((T1, T2, T3)[]? items, Func<T1, GameStateBag> createGameStateBag1, Func<T2, GameStateBag> createGameStateBag2, Func<T3, GameStateBag> createGameStateBag3)
+    {
+        if (items is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        List<GameStateBag> tupleList = new List<GameStateBag>();
+        foreach ((T1 item1, T2 item2, T3 item3) in items)
+        {
+            GameStateBag gameStateBag1 = createGameStateBag1(item1);
+            GameStateBag gameStateBag2 = createGameStateBag2(item2);
+            GameStateBag gameStateBag3 = createGameStateBag3(item3);
+            GameStateBag tupleGameStateBag = CreateTupleGameStateBag(gameStateBag1, gameStateBag2, gameStateBag3);
+            tupleList.Add(tupleGameStateBag);
+        }
+        return new ListGameStateBag(tupleList.ToArray());
+    }
 
     public GameStateBag CreateGameStateBag(string? value)
     {

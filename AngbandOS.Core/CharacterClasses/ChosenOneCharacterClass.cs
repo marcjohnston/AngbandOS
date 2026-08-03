@@ -9,7 +9,35 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class ChosenOneCharacterClass : CharacterClass
 {
     private ChosenOneCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(ChosenOneCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumLevelAndEnhancementTupleBindings => new (int, bool?, string)[]
+    {
+        (1, null, nameof(ChosenOneCharacterClassItemEnhancement)),
+        (2, null, nameof(ChosenOneCharacterClassLevel2ItemEnhancement)),
+        (4, null, nameof(ChosenOneCharacterClassLevel4ItemEnhancement)),
+        (6, null, nameof(ChosenOneCharacterClassLevel6ItemEnhancement)),
+        (8, null, nameof(ChosenOneCharacterClassLevel8ItemEnhancement)),
+        (10, null, nameof(ChosenOneCharacterClassLevel10ItemEnhancement)),
+        (12, null, nameof(ChosenOneCharacterClassLevel12ItemEnhancement)),
+        (14, null, nameof(ChosenOneCharacterClassLevel14ItemEnhancement)),
+        (16, null, nameof(ChosenOneCharacterClassLevel16ItemEnhancement)),
+        (18, null, nameof(ChosenOneCharacterClassLevel18ItemEnhancement)),
+        (20, null, nameof(ChosenOneCharacterClassLevel20ItemEnhancement)),
+        (22, null, nameof(ChosenOneCharacterClassLevel22ItemEnhancement)),
+        (24, null, nameof(ChosenOneCharacterClassLevel24ItemEnhancement)),
+        (26, null, nameof(ChosenOneCharacterClassLevel26ItemEnhancement)),
+        (28, null, nameof(ChosenOneCharacterClassLevel28ItemEnhancement)),
+        (30, null, nameof(ChosenOneCharacterClassLevel30ItemEnhancement)),
+        (32, null, nameof(ChosenOneCharacterClassLevel32ItemEnhancement)),
+        (34, null, nameof(ChosenOneCharacterClassLevel34ItemEnhancement)),
+        (36, null, nameof(ChosenOneCharacterClassLevel36ItemEnhancement)),
+        (38, null, nameof(ChosenOneCharacterClassLevel38ItemEnhancement)),
+        (40, null, nameof(ChosenOneCharacterClassLevel40ItemEnhancement)),
+        (42, null, nameof(ChosenOneCharacterClassLevel42ItemEnhancement)),
+        (44, null, nameof(ChosenOneCharacterClassLevel44ItemEnhancement)),
+        (46, null, nameof(ChosenOneCharacterClassLevel46ItemEnhancement)),
+        (48, null, nameof(ChosenOneCharacterClassLevel48ItemEnhancement)),
+        (50, null, nameof(ChosenOneCharacterClassLevel50ItemEnhancement)),
+    };
     public override int ID => 14;
     public override string Title => "Chosen One";
     public override int? InstantConfusionResistanceLevel => 2;

@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.BirthStages;
 
-internal class ClassSelectionBirthStage : BirthStage
+internal class CharacterClassSelectionBirthStage : BirthStage
 {
     private int currentSelection = 14;
 
@@ -16,7 +16,7 @@ internal class ClassSelectionBirthStage : BirthStage
             (nameof(currentSelection), saveGameState.CreateGameStateBag(currentSelection))
         );
     }
-    private ClassSelectionBirthStage(Game game) : base(game) { }
+    private CharacterClassSelectionBirthStage(Game game) : base(game) { }
 
     public override BirthStage? Render()
     {
@@ -65,6 +65,7 @@ internal class ClassSelectionBirthStage : BirthStage
             currentSelection = restoreGameState.GetByKey(nameof(currentSelection)).GetInt();
         }
     }
+
     /// <summary>
     /// Renders the details of a Character Class during the Birth selection process.
     /// </summary>

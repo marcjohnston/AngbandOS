@@ -14,10 +14,14 @@ internal abstract class Race : IGetKey, IGameSerialize
         Game = game;
     }
 
-    public void Refresh()
+    /// <summary>
+    /// Generates a new attribute set during the character birth process.
+    /// </summary>
+    public void RegenerateAttributeSets()
     {
         AttributeSet = Enhancement.GenerateAttributeSet();
     }
+
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
