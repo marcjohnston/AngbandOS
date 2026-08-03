@@ -19,7 +19,9 @@ internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
     public FriendlyNameEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
     public FriendlyNameEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
-        (string, string?)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, string?>(_restoreGameState => _restoreGameState.GetString(), (_restoreGameState) => _restoreGameState.GetStringOrDefault());
+        (string, string?)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, string?>(
+            _restoreGameState => _restoreGameState.GetString(), 
+            _restoreGameState => _restoreGameState.GetStringOrDefault());
         _attributeModifiers.AddRange(modifiers);
     }
     #endregion

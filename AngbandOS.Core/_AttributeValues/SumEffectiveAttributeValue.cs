@@ -17,7 +17,9 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
     public SumEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
     public SumEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
-        (string, int)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, int>(_restoreGameState => _restoreGameState.GetString(), (_restoreGameState) => _restoreGameState.GetInt());
+        (string, int)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, int>(
+            _restoreGameState => _restoreGameState.GetString(), 
+            _restoreGameState => _restoreGameState.GetInt());
         _attributeModifiers.AddRange(modifiers);
     }
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)

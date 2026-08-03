@@ -19,7 +19,9 @@ internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
     public ActivationEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
     public ActivationEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
-        (string, Activation?)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, Activation?>(_restoreGameState => _restoreGameState.GetString(), (_restoreGameState) => _restoreGameState.GetDerivedReferenceOrDefault<Activation>());
+        (string, Activation?)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, Activation?>(
+            _restoreGameState => _restoreGameState.GetString(), 
+            _restoreGameState => _restoreGameState.GetDerivedReferenceOrDefault<Activation>());
         _attributeModifiers.AddRange(modifiers);
     }
     #endregion

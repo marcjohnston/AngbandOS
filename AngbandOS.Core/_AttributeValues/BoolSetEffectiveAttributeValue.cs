@@ -22,7 +22,9 @@ internal class BoolSetEffectiveAttributeValue : EffectiveAttributeValue
     public BoolSetEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
         _initialValue = restoreGameState.GetByKey(nameof(_initialValue)).GetBoolOrDefault();
-        (string, bool?)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, bool?>(_restoreGameState => _restoreGameState.GetString(), (_restoreGameState) => _restoreGameState.GetBoolOrDefault());
+        (string, bool?)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, bool?>(
+            _restoreGameState => _restoreGameState.GetString(), 
+            _restoreGameState => _restoreGameState.GetBoolOrDefault());
         _attributeModifiers.AddRange(modifiers);
     }
 
