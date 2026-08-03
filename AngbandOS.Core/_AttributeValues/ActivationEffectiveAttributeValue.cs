@@ -19,15 +19,8 @@ internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
     public ActivationEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
     public ActivationEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
-        RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
-        foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
-        {
-            RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetByKey("Item1").GetString();
-            Activation? modifier = tupleRestoreGameState.GetByKey("Item2").GetDerivedReferenceOrDefault<Activation>();
-
-            _attributeModifiers.Add((key, modifier));
-        }
+        (string, Activation?)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, Activation?>(_restoreGameState => _restoreGameState.GetString(), (_restoreGameState) => _restoreGameState.GetDerivedReferenceOrDefault<Activation>());
+        _attributeModifiers.AddRange(modifiers);
     }
     #endregion
 
@@ -73,7 +66,9 @@ internal class ActivationEffectiveAttributeValue : EffectiveAttributeValue
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(base.Serialize(saveGameState),
-            (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, Activation?>(_attributeModifiers.ToArray(), _key => saveGameState.CreateGameStateBag(_key), _modifier => saveGameState.CreateDerivedGameStateBag(_modifier, typeof(Activation))))
+            (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, Activation?>(_attributeModifiers.ToArray(), 
+                _key => saveGameState.CreateGameStateBag(_key), 
+                _modifier => saveGameState.CreateDerivedGameStateBag(_modifier, typeof(Activation))))
         );
     }
 

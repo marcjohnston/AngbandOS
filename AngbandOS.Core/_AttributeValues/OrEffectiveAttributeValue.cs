@@ -21,15 +21,8 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
     public OrEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
     public OrEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState) 
     {
-        RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
-        foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
-        {
-            RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetByKey("Item1").GetString();
-            bool modifier = tupleRestoreGameState.GetByKey("Item2").GetBool();
-
-            _attributeModifiers.Add((key, modifier));
-        }
+        (string, bool)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, bool>(_restoreGameState => _restoreGameState.GetString(), (_restoreGameState) => _restoreGameState.GetBool());
+        _attributeModifiers.AddRange(modifiers);
     }
     public override string RenderForItemIdentification => Get().ToString();
 

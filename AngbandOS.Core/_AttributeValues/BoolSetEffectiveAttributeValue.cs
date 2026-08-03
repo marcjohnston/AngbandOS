@@ -22,15 +22,8 @@ internal class BoolSetEffectiveAttributeValue : EffectiveAttributeValue
     public BoolSetEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
         _initialValue = restoreGameState.GetByKey(nameof(_initialValue)).GetBoolOrDefault();
-        RestoreGameState listRestoreGameState = restoreGameState.GetByKey(nameof(_attributeModifiers));
-        foreach (GameStateBag tupleGameStateBag in ((ListGameStateBag)listRestoreGameState.GameStateBag).Values)
-        {
-            RestoreGameState tupleRestoreGameState = restoreGameState.New(tupleGameStateBag);
-            string key = tupleRestoreGameState.GetByKey("Item1").GetString();
-            bool? modifier = tupleRestoreGameState.GetByKey("Item2").GetBoolOrDefault();
-
-            _attributeModifiers.Add((key, modifier));
-        }
+        (string, bool?)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, bool?>(_restoreGameState => _restoreGameState.GetString(), (_restoreGameState) => _restoreGameState.GetBoolOrDefault());
+        _attributeModifiers.AddRange(modifiers);
     }
 
     public override EffectiveAttributeValue Clone()

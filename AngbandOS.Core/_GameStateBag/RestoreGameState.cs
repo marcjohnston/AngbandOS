@@ -205,6 +205,29 @@ internal class RestoreGameState
         return ((value & (1 << 0)) != 0, (value & (1 << 1)) != 0, (value & (1 << 2)) != 0, (value & (1 << 3)) != 0, (value & (1 << 4)) != 0, (value & (1 << 5)) != 0, (value & (1 << 6)) != 0, (value & (1 << 7)) != 0);
     }
 
+
+    public (T1, T2) GetTuple<T1, T2>(Func<RestoreGameState, T1> getItem1, Func<RestoreGameState, T2> getItem2)
+    {
+        RestoreGameState item1RestoreGameState = GetByKey("Item1");
+        RestoreGameState item2RestoreGameState = GetByKey("Item2");
+        T1 t1Value = getItem1(item1RestoreGameState);
+        T2 t2Value = getItem2(item2RestoreGameState);
+        return (t1Value, t2Value);
+    }
+
+    public (T1, T2)[] GetTuples<T1, T2>(Func<RestoreGameState, T1> getItem1, Func<RestoreGameState, T2> getItem2)
+    {
+        ListGameStateBag listGameStateBag = (ListGameStateBag)GameStateBag;
+        List<(T1, T2)> tupleList = new List<(T1, T2)>();
+        foreach (GameStateBag tupleGameStateBag in listGameStateBag.Values)
+        {
+            RestoreGameState restoreGameState = New(tupleGameStateBag);
+            (T1, T2) tuple = restoreGameState.GetTuple<T1, T2>(getItem1, getItem2);
+            tupleList.Add(tuple);
+        }
+        return tupleList.ToArray();
+    }
+
     public bool[] GetBools()
     {
         ListGameStateBag listGameStateBag = (ListGameStateBag)GameStateBag;
