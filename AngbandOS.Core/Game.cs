@@ -1503,7 +1503,7 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the current race of the character.  Will be null before the player is birthed.
     /// </summary>
-    public Race? Race = null;
+    public Race Race = null;
 
     /// <summary>
     /// Returns the race the character was first assigned at birth.
