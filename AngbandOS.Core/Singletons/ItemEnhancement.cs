@@ -98,7 +98,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         {
             foreach ((string attributeName, string expression) in SumAttributeAndExpressionBindings)
             {
-                Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+                Attribute attribute = Game.SingletonRepository.Get<SumAttribute>(attributeName);
                 Expression numericExpression = Game.ParseNumericExpression(expression);
                 sumAttributeAndExpressionList.Add(attribute, numericExpression);
             }
@@ -111,7 +111,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         {
             foreach ((string attributeName, string expression) in BoolAttributeAndExpressionBindings)
             {
-                Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+                Attribute attribute = Game.SingletonRepository.Get<BoolAttribute>(attributeName);
                 Expression numericExpression = Game.ParseBooleanExpression(expression);
                 boolAttributeAndExpressionList.Add(attribute, numericExpression);
             }
@@ -124,7 +124,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         {
             foreach ((string attributeName, string expression) in OrAttributeAndExpressionBindings)
             {
-                Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+                Attribute attribute = Game.SingletonRepository.Get<OrAttribute>(attributeName);
                 Expression numericExpression = Game.ParseBooleanExpression(expression);
                 orAttributeAndExpressionList.Add(attribute, numericExpression);
             }

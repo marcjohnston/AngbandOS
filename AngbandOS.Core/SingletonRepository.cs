@@ -254,6 +254,9 @@ internal sealed class SingletonRepository : IGameSerialize
 
         // Base preload the Attributes and then cache them.
         RegisterIndex<Attribute>();
+        RegisterIndex<BoolAttribute>();
+        RegisterIndex<OrAttribute>();
+        RegisterIndex<SumAttribute>();
 
         // Not configurable yet
         RegisterIndex<Ability>();
