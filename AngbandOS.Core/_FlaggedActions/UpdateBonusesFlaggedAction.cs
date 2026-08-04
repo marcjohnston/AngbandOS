@@ -449,7 +449,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
             }
         }
-        if (Game.CharacterClass.IsMartialArtist && !Game.MartialArtistHeavyArmor())
+        if (!Game.ArmorIsHeavy())
         {
             foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())
             {
@@ -550,7 +550,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         {
             Game.Speed.IntValue -= 10;
         }
-        if (Game.CharacterClass.IsMartialArtist && !Game.MartialArtistHeavyArmor())
+        if (!Game.ArmorIsHeavy())
         {
             Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
         }
@@ -647,7 +647,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
 
         // TODO: Legacy code only had 1 possibility for the melee weapon.  Now we are scanning multiple wield slots capable of multiple items.
-        bool MartialArtistArmorAux = false;
+        bool newMartialArtistAndArmorIsHeavy = false;
         foreach (WieldSlot meleeWeaponInventorySlot in Game.SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsMeleeWeapon))
         {
             foreach (int index in meleeWeaponInventorySlot.InventorySlots)
@@ -692,7 +692,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     }
                     Game.SkillDigging += oPtr.EffectiveAttributeSet.Weight / 10;
                 }
-                else if (Game.IsMartialArtistAndNotWieldingAMeleeWeapon())
+                else if (Game.IsUsingMartialArts())
                 {
                     Game.MeleeAttacksPerRound = 0;
                     if (Game.ExperienceLevel.IntValue > 9)
@@ -723,12 +723,12 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.MeleeAttacksPerRound++;
                     }
-                    if (Game.MartialArtistHeavyArmor())
+                    if (Game.ArmorIsHeavy())
                     {
                         Game.MeleeAttacksPerRound /= 2;
                     }
                     Game.MeleeAttacksPerRound += 1 + extraBlows;
-                    if (!Game.MartialArtistHeavyArmor())
+                    if (!Game.ArmorIsHeavy())
                     {
                         attackBonus += Game.ExperienceLevel.IntValue / 3;
                         damageBonus += Game.ExperienceLevel.IntValue / 3;
@@ -761,9 +761,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     bonusesToMerge.Add(characterClassMeleeWeaponBonuses);
                 }
 
-                if (Game.MartialArtistHeavyArmor())
+                if (Game.ArmorIsHeavy())
                 {
-                    MartialArtistArmorAux = true;
+                    newMartialArtistAndArmorIsHeavy = true;
                 }
             }
         }
@@ -872,10 +872,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Game.MsgPrint(Game.CharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Chaos flows freely through you again." : "You feel more comfortable after removing your weapon.");
             }
         }
-        if (Game.CharacterClass.IsMartialArtist && MartialArtistArmorAux != PreviousMartialArtistArmorAux) // TODO: This should be moved to the wield action
+        if (newMartialArtistAndArmorIsHeavy != PreviousMartialArtistArmorAux) // TODO: This should be moved to the wield action
         {
-            Game.MsgPrint(Game.MartialArtistHeavyArmor() ? "The weight of your armor disrupts your balance." : "You regain your balance.");
-            PreviousMartialArtistArmorAux = MartialArtistArmorAux;
+            Game.MsgPrint(Game.ArmorIsHeavy() ? "The weight of your armor disrupts your balance." : "You regain your balance.");
+            PreviousMartialArtistArmorAux = newMartialArtistAndArmorIsHeavy;
         }
     }
 }

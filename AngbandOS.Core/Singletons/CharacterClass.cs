@@ -414,7 +414,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         {
             foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ReadOnlyAttributeSet attributeSet) in MinimumLevelAndEnhancementAttributeSets)
             {
-                if (Game.ExperienceLevel.IntValue >= minimumExperienceLevel && (!hasHeavyArmor.HasValue || hasHeavyArmor.Value == Game.MartialArtistHeavyArmor()))
+                if (Game.ExperienceLevel.IntValue >= minimumExperienceLevel && (!hasHeavyArmor.HasValue || hasHeavyArmor.Value == Game.ArmorIsHeavy()))
                 {
                     effectiveAttributeSet.MergeAttributeSet(attributeSet);
                 }
@@ -452,6 +452,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         TarotDrawRoll = Game.ParseNumericExpression(TarotDrawRollExpression);
         SpellOfWonderBeamProbabilityRoll = Game.ParseNumericExpression(SpellOfWonderBeamProbabilityRollExpression);
         InvokeSpiritsBeamProbabilityRoll = Game.ParseNumericExpression(InvokeSpiritsBeamProbabilityRollExpression);
+        ArmorMaxWeightExpression = Game.ParseNullableNumericExpression(ArmorMaxWeightExpressionText);
 
         if (MinimumLevelAndEnhancementTupleBindings is null)
         {
@@ -480,9 +481,12 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public (int, bool?, ReadOnlyAttributeSet)[]? MinimumLevelAndEnhancementAttributeSets { get; private set; } = null;
 
     /// <summary>
-    /// Returns true, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.
+    /// Returns the maximum weight the character class can carry before the armor is considered to be TooHeavy, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.
     /// The monk and mystic character classes return true.
     /// </summary>
+    protected virtual string? ArmorMaxWeightExpressionText => "100+4*X";
+    public Expression? ArmorMaxWeightExpression { get; private set; }
+
     public virtual bool IsMartialArtist => false;
 
     /// <summary>

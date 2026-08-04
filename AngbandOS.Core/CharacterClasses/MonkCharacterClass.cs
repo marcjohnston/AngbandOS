@@ -35,9 +35,9 @@ internal class MonkCharacterClass : CharacterClass
     public override int ExperienceFactor => 40;
 
     /// <summary>
-    /// Returns true, because characters of this class study martial arts.
+    /// Returns a weight limit, because characters of this class study martial arts.
     /// </summary>
-    public override bool IsMartialArtist => true;
+    protected override string? ArmorMaxWeightExpressionText => "100+4*X";
 
     public override Ability PrimeStat => Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility));
     public override string[] Info => new string[] {
@@ -90,9 +90,11 @@ internal class MonkCharacterClass : CharacterClass
 
     public override void CalcBonuses()
     {
-        if (Game.ExperienceLevel.IntValue > 24 && !Game.MartialArtistHeavyArmor())
+        if (Game.ExperienceLevel.IntValue > 24 && !Game.ArmorIsHeavy())
         {
             Game.HasFreeAction = true;
         }
     }
+
+    public override bool IsMartialArtist => true;
 }

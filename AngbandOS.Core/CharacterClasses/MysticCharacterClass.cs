@@ -17,6 +17,7 @@ internal class MysticCharacterClass : CharacterClass
         (30, false, nameof(MysticCharacterClassLevel30ItemEnhancement)),
         (40, null, nameof(MysticCharacterClassLevel40ItemEnhancement)),
     };
+    public override bool IsMartialArtist => true;
     public override int ID => 15;
     public override string Title => "Mystic";
     public override int? InstantSpeedLevel => 10;
@@ -58,11 +59,10 @@ internal class MysticCharacterClass : CharacterClass
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(55000 / ((level * level) + 40)));
 
-
     /// <summary>
-    /// Returns true, because characters of this class study martial arts.
+    /// Returns a weight limit, because characters of this class study martial arts.
     /// </summary>
-    public override bool IsMartialArtist => true;
+    protected override string? ArmorMaxWeightExpressionText => "100+4*X";
 
     public override void CalcBonuses()
     {
@@ -74,7 +74,7 @@ internal class MysticCharacterClass : CharacterClass
         {
             Game.HasFearResistance = true;
         }
-        if (Game.ExperienceLevel.IntValue > 29 && !Game.MartialArtistHeavyArmor())
+        if (Game.ExperienceLevel.IntValue > 29 && !Game.ArmorIsHeavy())
         {
             Game.HasFreeAction = true;
         }

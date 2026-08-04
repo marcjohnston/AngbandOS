@@ -7632,7 +7632,7 @@ internal partial class Game : IGameSerialize
                 // Tell the player they hit it with the appropriate message
                 if (!(backstab || stabFleeing))
                 {
-                    if (!IsMartialArtistAndNotWieldingAMeleeWeapon())
+                    if (!IsUsingMartialArts())
                     {
                         MsgPrint($"You hit {monsterName}.");
                     }
@@ -7669,7 +7669,7 @@ internal partial class Game : IGameSerialize
                     }
                 }
                 // If we're a martial artist then we have special attacks
-                if (IsMartialArtistAndNotWieldingAMeleeWeapon())
+                if (IsUsingMartialArts())
                 {
                     int times;
                     MartialArtsAttack martialArtsAttack = SingletonRepository.Get<MartialArtsAttack>().Single(_martialArtsAttack => _martialArtsAttack.IsDefault);
@@ -11152,18 +11152,18 @@ internal partial class Game : IGameSerialize
         }
     }
 
-    public bool IsMartialArtistAndNotWieldingAMeleeWeapon()
+    public bool IsUsingMartialArts()
     {
         return CharacterClass.IsMartialArtist && GetInventoryItem(InventorySlotEnum.MeleeWeapon) == null;
     }
 
-    public bool MartialArtistHeavyArmor()
+    public bool ArmorIsHeavy()
     {
-        int martialArtistArmWgt = 0;
-        if (!CharacterClass.IsMartialArtist)
+        if (CharacterClass.ArmorMaxWeightExpression is null)
         {
             return false;
         }
+        int totalArmorWeight = 0;
         foreach (EquipmentWieldSlot inventorySlot in SingletonRepository.Get<EquipmentWieldSlot>())
         {
             if (inventorySlot.IsArmor)
@@ -11173,16 +11173,14 @@ internal partial class Game : IGameSerialize
                     Item? item = GetInventoryItem(index);
                     if (item != null)
                     {
-                        martialArtistArmWgt += item.EffectiveAttributeSet.Weight;
+                        totalArmorWeight += item.EffectiveAttributeSet.Weight;
                     }
-                    //foreach (Item item in inventorySlot)
-                    //{
-                    //    martialArtistArmWgt += item.Weight;
-                    //}
                 }
             }
         }
-        return martialArtistArmWgt > 100 + (ExperienceLevel.IntValue * 4);
+
+        int maxWeight = ComputeIntegerExpression(CharacterClass.ArmorMaxWeightExpression).Value;
+        return totalArmorWeight > maxWeight;
     }
 
     public string RealmNames(Realm? primaryRealm, Realm? secondaryRealm, string defaultTitle = "None")
@@ -11809,11 +11807,11 @@ internal partial class Game : IGameSerialize
         {
             itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
         }
-        if (CharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSpeedLevel && !MartialArtistHeavyArmor())
+        if (CharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSpeedLevel && !ArmorIsHeavy())
         {
             itemCharacteristics.Speed++;
         }
-        if (CharacterClass.InstantFreeActionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFreeActionLevel && !MartialArtistHeavyArmor())
+        if (CharacterClass.InstantFreeActionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFreeActionLevel && !ArmorIsHeavy())
         {
             itemCharacteristics.FreeAct = true;
         }
