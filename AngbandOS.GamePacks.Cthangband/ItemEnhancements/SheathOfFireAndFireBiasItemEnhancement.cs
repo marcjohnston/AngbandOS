@@ -10,5 +10,6 @@ public class SheathOfFireAndFireBiasItemEnhancement : ItemEnhancementGameConfigu
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "5000"),
+        (nameof(RadiusAttribute), "1")
     };
 }

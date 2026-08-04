@@ -5,4 +5,8 @@ namespace AngbandOS.GamePacks.Cthangband;
     {
         (nameof(ShFireAttribute), "true"),
     };
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(RadiusAttribute), "1")
+    };
 }
