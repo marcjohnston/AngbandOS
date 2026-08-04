@@ -17,7 +17,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// <summary>
     /// Represents the attribute enhancements that are additive for all that apply.
     /// </summary>
-    protected virtual (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings => null;
+    protected virtual (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => null;
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
@@ -398,7 +398,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public string GetKey => Key;
 
     /// <summary>
-    /// Represents the bound experience levels, heavy weapon and enhancement tuples.  This property is bound using the <see cref="MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings"/> property during the binding phase.
+    /// Represents the bound experience levels, heavy weapon and enhancement tuples.  This property is bound using the <see cref="MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples"/> property during the binding phase.
     /// </summary>
     public (int, bool?, ItemEnhancement)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples { get; private set; }
 
@@ -455,13 +455,13 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         InvokeSpiritsBeamProbabilityRoll = Game.ParseNumericExpression(InvokeSpiritsBeamProbabilityRollExpression);
         ArmorMaxWeightExpression = Game.ParseNullableNumericExpression(ArmorMaxWeightExpressionText);
 
-        if (MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings is null)
+        if (MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples is null)
         {
             MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples = null;
         }
         else
         {
-            MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples = MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings.Select(((int MinimumExperienceLevel, bool? HasHeavyArmor, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, _item.HasHeavyArmor, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
+            MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples = MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples.Select(((int MinimumExperienceLevel, bool? HasHeavyArmor, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, _item.HasHeavyArmor, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
         }
 
         if (restoreGameState is not null)

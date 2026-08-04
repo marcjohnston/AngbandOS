@@ -9,7 +9,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class FanaticCharacterClass : CharacterClass
 {
     private FanaticCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings => new (int, bool?, string)[]
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
     {
         (1, null, nameof(FanaticCharacterClassItemEnhancement)),
         (30, null, nameof(FanaticCharacterClassLevel30ItemEnhancement)),

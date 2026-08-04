@@ -10,7 +10,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class MindcrafterCharacterClass : CharacterClass
 {
     private MindcrafterCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings => new (int, bool?, string)[]
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
     {
         (1, null, nameof(MindcrafterCharacterClassItemEnhancement)),
         (10, null, nameof(MindcrafterCharacterClassLevel10ItemEnhancement)),
