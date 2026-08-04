@@ -2,7 +2,7 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class NibelungRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(StrengthAttribute), "1"),
         (nameof(CharismaAttribute), "-4"),

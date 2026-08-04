@@ -3,7 +3,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class DaggerCharityFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BrandElecAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -15,7 +15,7 @@ public class DaggerCharityFixedArtifactItemEnhancement : ItemEnhancementGameConf
     };
     public override string? ActivationName => nameof(ActivationsEnum.LightningBolt4d8Every6p1d6DirectionalActivation);
     public override string FriendlyName => "'Charity'";
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "13000"),
         (nameof(TreasureRatingAttribute), "10"),

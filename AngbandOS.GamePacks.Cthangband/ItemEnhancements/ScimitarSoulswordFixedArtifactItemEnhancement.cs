@@ -3,7 +3,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BlessedAttribute), "true"),
         (nameof(HoldLifeAttribute), "true"),
@@ -23,7 +23,7 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(SlayEvilAttribute), "true"),
         (nameof(SlayUndeadAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(AttacksAttribute), "1"),
         (nameof(TreasureRatingAttribute), "20"),

@@ -18,9 +18,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         Game = game;
         Key = gameConfiguration.GetKey;
 
-        SumAttributeAndExpressionBindings = gameConfiguration.SumAttributeAndExpressionBindings;
+        SumAttributeAndExpressionBindings = gameConfiguration.SummationAttributeAndExpressionBindings;
         BoolAttributeAndExpressionBindings = gameConfiguration.BoolAttributeAndExpressionBindings;
-        OrAttributeAndExpressionBindings = gameConfiguration.OrAttributeAndExpressionBindings;
+        OrAttributeAndExpressionBindings = gameConfiguration.BitwiseOrAttributeAndExpressionBindings;
 
         ActivationName = gameConfiguration.ActivationName;
         AdditionalItemEnhancementWeightedRandomBindingKey = gameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
@@ -144,9 +144,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         {
             Key = Key,
 
-            SumAttributeAndExpressionBindings = SumAttributeAndExpressionBindings,
+            SummationAttributeAndExpressionBindings = SumAttributeAndExpressionBindings,
             BoolAttributeAndExpressionBindings = BoolAttributeAndExpressionBindings,
-            OrAttributeAndExpressionBindings = OrAttributeAndExpressionBindings,
+            BitwiseOrAttributeAndExpressionBindings = OrAttributeAndExpressionBindings,
 
             ActivationName = ActivationName,
             AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,

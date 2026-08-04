@@ -3,7 +3,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class BroadSwordLightningFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BrandElecAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -19,7 +19,7 @@ public class BroadSwordLightningFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(SlowDigestAttribute), "true"),
     };
     public override string FriendlyName => "'Lightning'";
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(SlayDragonAttribute), "15"),

@@ -2,7 +2,7 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class HumanRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(StrengthAttribute), "0"),
         (nameof(CharismaAttribute), "0"),

@@ -17,8 +17,8 @@ internal class AttributeFilter : IGetKey, IToJson, IGameSerialize
         ActivationAttributeNonNull = gameConfiguration.ActivationAttributeNonNull;
         ArtifactBiasAttributeNonNull = gameConfiguration.ArtifactBiasAttributeNonNull;
         BoolAttributeFiltersBindings = gameConfiguration.BoolAttributeFilterBindings;
-        OrAttributeFiltersBindings = gameConfiguration.OrAttributeFilterBindings;
-        SumAttributeFilterBindings = gameConfiguration.SumAttributeFilterBindings;
+        OrAttributeFiltersBindings = gameConfiguration.BitwiseOrAttributeFilterBindings;
+        SumAttributeFilterBindings = gameConfiguration.SummationAttributeFilterBindings;
     }
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
@@ -39,8 +39,8 @@ internal class AttributeFilter : IGetKey, IToJson, IGameSerialize
             ActivationAttributeNonNull = ActivationAttributeNonNull,
             ArtifactBiasAttributeNonNull = ArtifactBiasAttributeNonNull,
             BoolAttributeFilterBindings = BoolAttributeFiltersBindings,
-            OrAttributeFilterBindings = OrAttributeFiltersBindings,
-            SumAttributeFilterBindings = SumAttributeFilterBindings,
+            BitwiseOrAttributeFilterBindings = OrAttributeFiltersBindings,
+            SummationAttributeFilterBindings = SumAttributeFilterBindings,
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }

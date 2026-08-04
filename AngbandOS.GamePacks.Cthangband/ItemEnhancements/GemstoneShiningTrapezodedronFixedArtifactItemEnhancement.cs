@@ -3,7 +3,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class GemstoneShiningTrapezodedronFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HoldLifeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -15,7 +15,7 @@ public class GemstoneShiningTrapezodedronFixedArtifactItemEnhancement : ItemEnha
         (nameof(SeeInvisAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.TrapezohedronGemstoneActivation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ValueAttribute), "150000"),
