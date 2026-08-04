@@ -1019,8 +1019,11 @@ internal partial class Game : IGameSerialize
 
     #region Player Effective Attribute Set
     /// <summary>
-    /// Represents the players effective attribute values.
+    /// Represents the players effective attribute values.  This property is updated by the <see cref="UpdateBonusesFlaggedAction"/>.
     /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
     public ReadOnlyAttributeSet AttributeSet;
     public const string FactoryAttributeKey = "factory";
     public const string RandomAttributeKey = "random";
