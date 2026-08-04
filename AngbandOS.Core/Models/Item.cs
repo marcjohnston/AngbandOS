@@ -1194,13 +1194,13 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
 
     public bool IsRare => EffectiveAttributeSet.HasKeyedItemEnhancements(Game.RareAttributeKey);
 
-    public EffectiveAttributeSet ObjectFlagsKnown()
+    public ReadOnlyAttributeSet ObjectFlagsKnown()
     {
         if (!IsKnown())
         {
-            return new EffectiveAttributeSet(Game);
+            return new EffectiveAttributeSet(Game).ToReadOnly();
         }
-        return EffectiveAttributeSet;
+        return EffectiveAttributeSet.ToReadOnly();
     }
 
     /// <summary>

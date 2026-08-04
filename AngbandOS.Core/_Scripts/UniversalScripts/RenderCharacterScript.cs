@@ -231,25 +231,25 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
                 else
                 {
                     // Only extract known bonuses, not full bonuses
-                    EffectiveAttributeSet itemCharacteristics = item.ObjectFlagsKnown();
-                    ShowBonus(itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustStrAttribute)).Get(), itemCharacteristics.Strength > 0, item.EffectiveAttributeSet.Strength, row + 0, col);
-                    ShowBonus(itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustIntAttribute)).Get(), itemCharacteristics.Intelligence > 0, item.EffectiveAttributeSet.Intelligence, row + 1, col);
-                    ShowBonus(itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get(), itemCharacteristics.Wisdom > 0, item.EffectiveAttributeSet.Wisdom, row + 2, col);
-                    ShowBonus(itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustDexAttribute)).Get(), itemCharacteristics.Dexterity > 0, item.EffectiveAttributeSet.Dexterity, row + 3, col);
-                    ShowBonus(itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustConAttribute)).Get(), itemCharacteristics.Constitution > 0, item.EffectiveAttributeSet.Constitution, row + 4, col);
-                    ShowBonus(itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Get(), itemCharacteristics.Charisma > 0, item.EffectiveAttributeSet.Charisma, row + 5, col);
+                    ReadOnlyAttributeSet itemAttributeSet = item.ObjectFlagsKnown();
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustStrAttribute)), itemAttributeSet.GetInt(nameof(StrengthAttribute)) > 0, item.EffectiveAttributeSet.Strength, row + 0, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustIntAttribute)), itemAttributeSet.GetInt(nameof(IntelligenceAttribute)) > 0, item.EffectiveAttributeSet.Intelligence, row + 1, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustWisAttribute)), itemAttributeSet.GetInt(nameof(WisdomAttribute)) > 0, item.EffectiveAttributeSet.Wisdom, row + 2, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustDexAttribute)), itemAttributeSet.GetInt(nameof(DexterityAttribute)) > 0, item.EffectiveAttributeSet.Dexterity, row + 3, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustConAttribute)), itemAttributeSet.GetInt(nameof(ConstitutionAttribute)) > 0, item.EffectiveAttributeSet.Constitution, row + 4, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustChaAttribute)), itemAttributeSet.GetInt(nameof(CharismaAttribute)) > 0, item.EffectiveAttributeSet.Charisma, row + 5, col);
                 }
                 col++;
             }
         }
 
-        EffectiveAttributeSet playerCharacteristics = Game.GetAbilitiesAsItemFlags();
-        DisplayPlayerStatWithModification(playerCharacteristics.Strength, row + 0, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.Intelligence, row + 1, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.Wisdom, row + 2, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.Dexterity, row + 3, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.Constitution, row + 4, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.Charisma, row + 5, col);
+        ReadOnlyAttributeSet playerAttributeSet = Game.GetAbilitiesAsItemFlags();
+        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(StrengthAttribute)), row + 0, col);
+        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(IntelligenceAttribute)), row + 1, col);
+        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(WisdomAttribute)), row + 2, col);
+        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(DexterityAttribute)), row + 3, col);
+        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(ConstitutionAttribute)), row + 4, col);
+        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(CharismaAttribute)), row + 5, col);
     }
 
     private void DisplayPlayerStatWithModification(int extraModifier, int row, int col)

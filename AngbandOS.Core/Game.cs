@@ -11784,7 +11784,7 @@ internal partial class Game : IGameSerialize
         CheckExperience();
     }
 
-    public EffectiveAttributeSet GetAbilitiesAsItemFlags()
+    public ReadOnlyAttributeSet GetAbilitiesAsItemFlags()
     {
         EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet(this);
         if (CharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFearResistanceLevel)
@@ -11954,7 +11954,7 @@ internal partial class Game : IGameSerialize
                 itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
             }
         }
-        return itemCharacteristics;
+        return itemCharacteristics.ToReadOnly();
     }
 
     public int GetScore(Game game)
