@@ -9,7 +9,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class HighMageCharacterClass : CharacterClass
 {
     private HighMageCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumLevelAndEnhancementTupleBindings => new (int, bool?, string)[] { (1, null, nameof(HighMageCharacterClassItemEnhancement)) };
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings => new (int, bool?, string)[] { (1, null, nameof(HighMageCharacterClassItemEnhancement)) };
     public override int ID => 10;
     public override int FriendsUpkeepDivider => 12;
     public override string Title => "High-Mage";

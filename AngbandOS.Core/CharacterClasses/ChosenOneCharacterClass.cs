@@ -9,7 +9,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class ChosenOneCharacterClass : CharacterClass
 {
     private ChosenOneCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumLevelAndEnhancementTupleBindings => new (int, bool?, string)[]
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings => new (int, bool?, string)[]
     {
         (1, null, nameof(ChosenOneCharacterClassItemEnhancement)),
         (2, null, nameof(ChosenOneCharacterClassLevel2ItemEnhancement)),

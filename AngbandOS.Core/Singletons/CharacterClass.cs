@@ -17,13 +17,13 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// <summary>
     /// Represents the attribute enhancements that are additive for all that apply.
     /// </summary>
-    protected virtual (int, bool?, string)[]? MinimumLevelAndEnhancementTupleBindings => null;
+    protected virtual (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings => null;
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
-            (nameof(MinimumExperienceLevelAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, bool?, ReadOnlyAttributeSet>(MinimumExperienceLevelAndEnhancementAttributeSets,
+            (nameof(MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, bool?, ReadOnlyAttributeSet>(MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets,
                 _minimumExperienceLevel => saveGameState.CreateGameStateBag(_minimumExperienceLevel),
                 _hasHeavyArmor => saveGameState.CreateGameStateBag(_hasHeavyArmor),
                 _attributeSet => saveGameState.CreateDerivedGameStateBag(_attributeSet, typeof(ReadOnlyAttributeSet))
@@ -398,9 +398,9 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public string GetKey => Key;
 
     /// <summary>
-    /// Represents the bound experience levels, martial artists heavy weapon and enhancement tuples.  This property is bound using the <see cref="MinimumLevelAndEnhancementTupleBindings"/> property during the binding phase.
+    /// Represents the bound experience levels, martial artists heavy weapon and enhancement tuples.  This property is bound using the <see cref="MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings"/> property during the binding phase.
     /// </summary>
-    public (int, bool?, ItemEnhancement)[]? MinimumLevelAndEnhancementTuples { get; private set; }
+    public (int, bool?, ItemEnhancement)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples { get; private set; }
 
     public ReadOnlyAttributeSet AttributeSet { get; private set; }
 
@@ -411,9 +411,9 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public void RefreshSquashedAttributeSet()
     {
         EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
-        if (MinimumExperienceLevelAndEnhancementAttributeSets is not null)
+        if (MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets is not null)
         {
-            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ReadOnlyAttributeSet attributeSet) in MinimumExperienceLevelAndEnhancementAttributeSets)
+            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ReadOnlyAttributeSet attributeSet) in MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets)
             {
                 if (Game.ExperienceLevel.IntValue >= minimumExperienceLevel && (!hasHeavyArmor.HasValue || hasHeavyArmor.Value == Game.ArmorIsHeavy()))
                 {
@@ -430,18 +430,18 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// </summary>
     public void RegenerateAttributeSets()
     {
-        if (MinimumLevelAndEnhancementTuples is null)
+        if (MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples is null)
         {
-            MinimumExperienceLevelAndEnhancementAttributeSets = null;
+            MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = null;
         }
         else
         {
             List<(int, bool?, ReadOnlyAttributeSet)> tupleList = new List<(int, bool?, ReadOnlyAttributeSet)>();
-            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ItemEnhancement enhancement) in MinimumLevelAndEnhancementTuples)
+            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ItemEnhancement enhancement) in MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples)
             {
                 tupleList.Add((minimumExperienceLevel, hasHeavyArmor, enhancement.GenerateAttributeSet()));
             }
-            MinimumExperienceLevelAndEnhancementAttributeSets = tupleList.ToArray();
+            MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = tupleList.ToArray();
         }
         RefreshSquashedAttributeSet();
     }
@@ -455,19 +455,19 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         InvokeSpiritsBeamProbabilityRoll = Game.ParseNumericExpression(InvokeSpiritsBeamProbabilityRollExpression);
         ArmorMaxWeightExpression = Game.ParseNullableNumericExpression(ArmorMaxWeightExpressionText);
 
-        if (MinimumLevelAndEnhancementTupleBindings is null)
+        if (MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings is null)
         {
-            MinimumLevelAndEnhancementTuples = null;
+            MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples = null;
         }
         else
         {
-            MinimumLevelAndEnhancementTuples = MinimumLevelAndEnhancementTupleBindings.Select(((int MinimumExperienceLevel, bool? HasHeavyArmor, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, _item.HasHeavyArmor, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
+            MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples = MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings.Select(((int MinimumExperienceLevel, bool? HasHeavyArmor, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, _item.HasHeavyArmor, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
         }
 
         if (restoreGameState is not null)
         {
             AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
-            MinimumExperienceLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, bool?, ReadOnlyAttributeSet>(
+            MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets)).GetTuplesOrDefault<int, bool?, ReadOnlyAttributeSet>(
                 _restoreGameState => _restoreGameState.GetInt(),
                 _restoreGameState => _restoreGameState.GetBoolOrDefault(),
                 _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
@@ -480,7 +480,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// <remarks>
     /// This is state data.
     /// </remarks>
-    public (int, bool?, ReadOnlyAttributeSet)[]? MinimumExperienceLevelAndEnhancementAttributeSets { get; private set; } = null;
+    public (int, bool?, ReadOnlyAttributeSet)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets { get; private set; } = null;
 
     /// <summary>
     /// Returns the maximum weight the character class can carry before the armor is considered to be TooHeavy, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.

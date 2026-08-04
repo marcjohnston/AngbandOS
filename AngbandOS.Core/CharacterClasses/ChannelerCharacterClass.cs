@@ -9,7 +9,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class ChannelerCharacterClass : CharacterClass
 {
     private ChannelerCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumLevelAndEnhancementTupleBindings => new (int, bool?, string)[] { (1, null, nameof(ChannelerCharacterClassItemEnhancement)) };
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings => new (int, bool?, string)[] { (1, null, nameof(ChannelerCharacterClassItemEnhancement)) };
     public override int ID => 13;
     public override string Title => "Channeler";
     public override int UseDevice => 40;

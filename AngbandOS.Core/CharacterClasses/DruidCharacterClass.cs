@@ -9,7 +9,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class DruidCharacterClass : CharacterClass
 {
     private DruidCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumLevelAndEnhancementTupleBindings => new (int, bool?, string)[] { (1, null, nameof(DruidCharacterClassItemEnhancement)) };
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings => new (int, bool?, string)[] { (1, null, nameof(DruidCharacterClassItemEnhancement)) };
     public override int ID => 11;
     public override string Title => "Druid";
     public override int UseDevice => 30;

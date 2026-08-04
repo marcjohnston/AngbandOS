@@ -9,7 +9,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class MysticCharacterClass : CharacterClass
 {
     private MysticCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumLevelAndEnhancementTupleBindings => new (int, bool?, string)[]
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings => new (int, bool?, string)[]
     {
         (1, null, nameof(MysticCharacterClassItemEnhancement)),
         (10, null, nameof(MysticCharacterClassLevel10ItemEnhancement)),
