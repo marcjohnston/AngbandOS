@@ -22,7 +22,8 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(MinimumLevelAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, bool?, ReadOnlyAttributeSet>(MinimumLevelAndEnhancementAttributeSets,
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
+            (nameof(MinimumExperienceLevelAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, bool?, ReadOnlyAttributeSet>(MinimumExperienceLevelAndEnhancementAttributeSets,
                 _minimumExperienceLevel => saveGameState.CreateGameStateBag(_minimumExperienceLevel),
                 _hasHeavyArmor => saveGameState.CreateGameStateBag(_hasHeavyArmor),
                 _attributeSet => saveGameState.CreateDerivedGameStateBag(_attributeSet, typeof(ReadOnlyAttributeSet))
@@ -410,9 +411,9 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public void RefreshSquashedAttributeSet()
     {
         EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
-        if (MinimumLevelAndEnhancementAttributeSets is not null)
+        if (MinimumExperienceLevelAndEnhancementAttributeSets is not null)
         {
-            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ReadOnlyAttributeSet attributeSet) in MinimumLevelAndEnhancementAttributeSets)
+            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ReadOnlyAttributeSet attributeSet) in MinimumExperienceLevelAndEnhancementAttributeSets)
             {
                 if (Game.ExperienceLevel.IntValue >= minimumExperienceLevel && (!hasHeavyArmor.HasValue || hasHeavyArmor.Value == Game.ArmorIsHeavy()))
                 {
@@ -431,7 +432,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     {
         if (MinimumLevelAndEnhancementTuples is null)
         {
-            MinimumLevelAndEnhancementAttributeSets = null;
+            MinimumExperienceLevelAndEnhancementAttributeSets = null;
         }
         else
         {
@@ -440,7 +441,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
             {
                 tupleList.Add((minimumExperienceLevel, hasHeavyArmor, enhancement.GenerateAttributeSet()));
             }
-            MinimumLevelAndEnhancementAttributeSets = tupleList.ToArray();
+            MinimumExperienceLevelAndEnhancementAttributeSets = tupleList.ToArray();
         }
         RefreshSquashedAttributeSet();
     }
@@ -465,7 +466,8 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            MinimumLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, bool?, ReadOnlyAttributeSet>(
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
+            MinimumExperienceLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, bool?, ReadOnlyAttributeSet>(
                 _restoreGameState => _restoreGameState.GetInt(),
                 _restoreGameState => _restoreGameState.GetBoolOrDefault(),
                 _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
@@ -478,7 +480,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// <remarks>
     /// This is state data.
     /// </remarks>
-    public (int, bool?, ReadOnlyAttributeSet)[]? MinimumLevelAndEnhancementAttributeSets { get; private set; } = null;
+    public (int, bool?, ReadOnlyAttributeSet)[]? MinimumExperienceLevelAndEnhancementAttributeSets { get; private set; } = null;
 
     /// <summary>
     /// Returns the maximum weight the character class can carry before the armor is considered to be TooHeavy, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.
