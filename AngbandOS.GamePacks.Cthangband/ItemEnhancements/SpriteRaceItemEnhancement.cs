@@ -2,8 +2,15 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class SpriteRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(FeatherAttribute), "true"),
+        (nameof(ResLightAttribute), "true")
+    };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
+        (nameof(RadiusAttribute), "1"),
+        (nameof(SpeedAttribute), "X/10"),
         (nameof(StrengthAttribute), "-4"),
         (nameof(CharismaAttribute), "2"),
         (nameof(ConstitutionAttribute), "-2"),

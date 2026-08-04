@@ -9,7 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class YeekRace : Race
 {
     private YeekRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(YeekRaceItemEnhancement)) };
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(YeekRaceItemEnhancement)),
+        (20, nameof(YeekRaceLevel20ItemEnhancement))
+    };
     public override string Title => "Yeek";
     public override int UseDevice => 4;
     public override int SavingThrow => 10;

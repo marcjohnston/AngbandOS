@@ -1,10 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
-[Serializable]
-public class DarkElfRaceItemEnhancement : ItemEnhancementGameConfiguration
+
+public class DarkElfRaceLevel20ItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
-        (nameof(ResDarkAttribute), "true")
+        (nameof(SeeInvisAttribute), "true")
     };
 
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]

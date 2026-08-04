@@ -2,8 +2,16 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class GolemRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(SlowDigestAttribute), "true"),
+        (nameof(FreeActAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(ResPoisAttribute), "true")
+    };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
+        (nameof(BonusArmorClassAttribute), "20+X/5"),
         (nameof(CharismaAttribute), "-4"),
         (nameof(ConstitutionAttribute), "4"),
         (nameof(WisdomAttribute), "-5"),

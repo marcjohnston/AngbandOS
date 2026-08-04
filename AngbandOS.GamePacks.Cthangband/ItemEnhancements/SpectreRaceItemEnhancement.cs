@@ -2,8 +2,18 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class SpectreRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(FeatherAttribute), "true"),
+        (nameof(ResNetherAttribute), "true"),
+        (nameof(HoldLifeAttribute), "true"),
+        (nameof(SeeInvisAttribute), "true"),
+        (nameof(SlowDigestAttribute), "true"),
+        (nameof(ResColdAttribute), "true")
+    };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
+        (nameof(RadiusAttribute), "1"),
         (nameof(StrengthAttribute), "-5"),
         (nameof(CharismaAttribute), "-6"),
         (nameof(ConstitutionAttribute), "-3"),

@@ -9,7 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class HalfTrollRace : Race
 {
     private HalfTrollRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(HalfTrollRaceItemEnhancement)) };
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(HalfTrollRaceItemEnhancement)),
+        (15, nameof(HalfTrollRaceLevel15ItemEnhancement))
+    };
     public override string Title => "Half Troll";
     public override int UseDevice => -8;
     public override int SavingThrow => -8;

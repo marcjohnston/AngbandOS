@@ -2,8 +2,14 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class KlackonRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(ResConfAttribute), "true"),
+        (nameof(ResAcidAttribute), "true"),
+    };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
+        (nameof(SpeedAttribute), "X/10"),
         (nameof(CharismaAttribute), "-2"),
         (nameof(ConstitutionAttribute), "2"),
         (nameof(WisdomAttribute), "-1"),

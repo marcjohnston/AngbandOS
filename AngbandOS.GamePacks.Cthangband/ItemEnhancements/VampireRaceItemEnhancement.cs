@@ -2,8 +2,17 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class VampireRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(ResNetherAttribute), "true"),
+        (nameof(HoldLifeAttribute), "true"),
+        (nameof(ResDarkAttribute), "true"),
+        (nameof(ResColdAttribute), "true"),
+        (nameof(ResPoisAttribute), "true")
+    };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
+        (nameof(RadiusAttribute), "1"),
         (nameof(StrengthAttribute), "3"),
         (nameof(CharismaAttribute), "2"),
         (nameof(ConstitutionAttribute), "1"),

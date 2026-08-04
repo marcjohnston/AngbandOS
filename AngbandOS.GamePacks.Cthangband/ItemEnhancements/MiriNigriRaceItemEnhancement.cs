@@ -2,6 +2,11 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class MiriNigriRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(ResConfAttribute), "true"),
+        (nameof(ResSoundAttribute), "true")
+    };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(StrengthAttribute), "2"),

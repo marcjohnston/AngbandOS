@@ -2,6 +2,11 @@ namespace AngbandOS.GamePacks.Cthangband;
     [Serializable]
 public class HalfGiantRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(SustStrAttribute), "true"),
+        (nameof(ResShardsAttribute), "true")
+    };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(CharismaAttribute), "-3"),
