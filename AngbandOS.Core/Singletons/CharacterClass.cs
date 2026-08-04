@@ -398,7 +398,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public string GetKey => Key;
 
     /// <summary>
-    /// Represents the bound experience levels, martial artists heavy weapon and enhancement tuples.  This property is bound using the <see cref="MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings"/> property during the binding phase.
+    /// Represents the bound experience levels, heavy weapon and enhancement tuples.  This property is bound using the <see cref="MinimumExperienceLevelHasHeavyArmorAndEnhancementTupleBindings"/> property during the binding phase.
     /// </summary>
     public (int, bool?, ItemEnhancement)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples { get; private set; }
 
@@ -422,7 +422,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
             }
         }
         AttributeSet = effectiveAttributeSet.ToReadOnly();
-    }
+   }
 
     /// <summary>
     /// Generates the <see cref="ReadOnlyAttributeSet"/> for each enhancement.  This process should only be done during birth.  The enhancements may have random
