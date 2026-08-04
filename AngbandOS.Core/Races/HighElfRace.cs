@@ -34,7 +34,7 @@ internal class HighElfRace : Race
     {
         if (level > 19)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);

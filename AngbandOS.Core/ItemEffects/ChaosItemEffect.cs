@@ -20,7 +20,7 @@ internal class ChaosItemEffect : ItemEffect
             plural = true;
         }
         string noteKill = plural ? " are destroyed!" : " is destroyed!";
-        if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Get())
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Get())
         {
             ignore = true;
         }

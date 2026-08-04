@@ -23,7 +23,7 @@ internal class BonusSlowDigest1In3EnchantmentScript : Script, IEnhancementScript
     {
         if (Game.DieRoll(3) == 1)
         {
-            item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
+            item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
         }
     }
 }

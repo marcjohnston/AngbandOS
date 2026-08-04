@@ -122,7 +122,7 @@ internal class AttributeFilter : IGetKey, IToJson, IGameSerialize
 
         foreach ((BitwiseOrAttribute attribute, bool value) in OrAttributeFilters)
         {
-            bool? effectiveAttributeSetValue = effectiveAttributeSet.Get<OrEffectiveAttributeValue>(attribute).Get();
+            bool? effectiveAttributeSetValue = effectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(attribute).Get();
             if (effectiveAttributeSetValue != value)
             {
                 return false;
@@ -131,7 +131,7 @@ internal class AttributeFilter : IGetKey, IToJson, IGameSerialize
 
         foreach ((SummationAttribute attribute, int? startingValue, int? endingValue) in SumAttributeFilters)
         {
-            int effectiveAttributeSetValue = effectiveAttributeSet.Get<SumEffectiveAttributeValue>(attribute).Get();
+            int effectiveAttributeSetValue = effectiveAttributeSet.Get<SummationEffectiveAttributeValue>(attribute).Get();
             if (startingValue.HasValue && effectiveAttributeSetValue < startingValue.Value)
             {
                 return false;

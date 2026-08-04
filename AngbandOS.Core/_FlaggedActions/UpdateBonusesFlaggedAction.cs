@@ -240,47 +240,47 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasQuakeWeapon = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(AntiTheftAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(AntiTheftAttribute)).Get())
                     {
                         Game.HasAntiTheft = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get())
                     {
                         extraShots++;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(AggravateAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(AggravateAttribute)).Get())
                     {
                         Game.HasAggravation = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get())
                     {
                         Game.HasRandomTeleport = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(DrainExpAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(DrainExpAttribute)).Get())
                     {
                         Game.HasExperienceDrain = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get())
                     {
                         Game.HasBlessedBlade = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get())
                     {
                         Game.HasExtraMight = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Get())
                     {
                         Game.HasSlowDigestion = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(RegenAttribute)).Get())
                     {
                         Game.HasRegeneration = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Get())
                     {
                         Game.HasTelepathy = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Get())
                     {
                         Game.HasSeeInvisibility = true;
                     }
@@ -296,7 +296,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasHoldLife = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(WraithAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(WraithAttribute)).Get())
                     {
                         Game.EtherealnessTimer.SetValue(Math.Max(Game.EtherealnessTimer.Value, 20));
                     }
@@ -316,79 +316,79 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasLightningImmunity = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Get())
                     {
                         Game.HasAcidResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResElecAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResElecAttribute)).Get())
                     {
                         Game.HasLightningResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResFireAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResFireAttribute)).Get())
                     {
                         Game.HasFireResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResColdAttribute)).Get())
                     {
                         Game.HasColdResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Get())
                     {
                         Game.HasPoisonResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResFearAttribute)).Get())
                     {
                         Game.HasFearResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResConfAttribute)).Get())
                     {
                         Game.HasConfusionResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Get())
                     {
                         Game.HasSoundResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResLightAttribute)).Get())
                     {
                         Game.HasLightResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Get())
                     {
                         Game.HasDarkResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Get())
                     {
                         Game.HasChaosResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Get())
                     {
                         Game.HasDisenchantResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Get())
                     {
                         Game.HasShardResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Get())
                     {
                         Game.HasNexusResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Get())
                     {
                         Game.HasBlindnessResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Get())
                     {
                         Game.HasNetherResistance = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ReflectAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ReflectAttribute)).Get())
                     {
                         Game.HasReflection = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ShFireAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShFireAttribute)).Get())
                     {
                         Game.HasFireSheath = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ShElecAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShElecAttribute)).Get())
                     {
                         Game.HasElectricitySheath = true;
                     }
@@ -400,27 +400,27 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasAntiTeleport = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustStrAttribute)).Get())
                     {
                         Game.HasSustainStrength = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustIntAttribute)).Get())
                     {
                         Game.HasSustainIntelligence = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get())
                     {
                         Game.HasSustainWisdom = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustDexAttribute)).Get())
                     {
                         Game.HasSustainDexterity = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustConAttribute)).Get())
                     {
                         Game.HasSustainConstitution = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Get())
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Get())
                     {
                         Game.HasSustainCharisma = true;
                     }

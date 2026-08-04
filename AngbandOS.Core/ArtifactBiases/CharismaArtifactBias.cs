@@ -26,9 +26,9 @@ internal class CharismaArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(EffectiveAttributeSet characteristics)
     {
-        if (!characteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Get())
+        if (!characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Get())
         {
-            characteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
+            characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
             if (Game.DieRoll(2) == 1)
             {
                 return true;

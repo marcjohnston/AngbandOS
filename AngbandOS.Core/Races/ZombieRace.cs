@@ -36,14 +36,14 @@ internal class ZombieRace : Race
     public override bool HasRacialPowers => true;
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
+        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
         itemCharacteristics.HoldLife = true;
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
+        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
+        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
+        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
         if (level > 4)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResColdAttribute)).Set();
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);

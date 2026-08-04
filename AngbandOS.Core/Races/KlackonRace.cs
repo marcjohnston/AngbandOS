@@ -40,8 +40,8 @@ internal class KlackonRace : Race
         {
             itemCharacteristics.Speed++;
         }
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Set();
+        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
+        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Set();
     }
     protected override string GenerateNameSyllableSetName => nameof(KlackonSyllableSet);
     public override string[]? SelfKnowledge(int level)

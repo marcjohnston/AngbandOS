@@ -49,15 +49,15 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
             (RestoreGameState restoreGameState) => new ArtifactBiasEffectiveAttributeValue(Game, restoreGameState),
             (RestoreGameState restoreGameState) => new BoolSetEffectiveAttributeValue(Game, restoreGameState),
             (RestoreGameState restoreGameState) => new FriendlyNameEffectiveAttributeValue(Game, restoreGameState),
-            (RestoreGameState restoreGameState) => new OrEffectiveAttributeValue(Game, restoreGameState),
-            (RestoreGameState restoreGameState) => new SumEffectiveAttributeValue(Game, restoreGameState));
+            (RestoreGameState restoreGameState) => new BitwiseOrEffectiveAttributeValue(Game, restoreGameState),
+            (RestoreGameState restoreGameState) => new SummationEffectiveAttributeValue(Game, restoreGameState));
     }
     #endregion
 
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(_effectiveAttributeValues), saveGameState.CreateDerivedGameStateBag(_effectiveAttributeValues, typeof(ActivationEffectiveAttributeValue), typeof(ArtifactBiasEffectiveAttributeValue), typeof(BoolSetEffectiveAttributeValue), typeof(FriendlyNameEffectiveAttributeValue), typeof(OrEffectiveAttributeValue), typeof(SumEffectiveAttributeValue)))
+            (nameof(_effectiveAttributeValues), saveGameState.CreateDerivedGameStateBag(_effectiveAttributeValues, typeof(ActivationEffectiveAttributeValue), typeof(ArtifactBiasEffectiveAttributeValue), typeof(BoolSetEffectiveAttributeValue), typeof(FriendlyNameEffectiveAttributeValue), typeof(BitwiseOrEffectiveAttributeValue), typeof(SummationEffectiveAttributeValue)))
         );
     }
 
@@ -204,176 +204,176 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(MeleeToHitAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(MeleeToHitAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(MeleeToHitAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(MeleeToHitAttribute)).Append(value);
         }
     }
     public int BonusArmorClass
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(BonusArmorClassAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(BonusArmorClassAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(BonusArmorClassAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(BonusArmorClassAttribute)).Append(value);
         }
     }
     public int DisarmTraps
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(DisarmTrapsAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(DisarmTrapsAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(DisarmTrapsAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(DisarmTrapsAttribute)).Append(value);
         }
     }
     public int ToDamage
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(ToDamageAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(ToDamageAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(ToDamageAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(ToDamageAttribute)).Append(value);
         }
     }
     public int Strength
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(StrengthAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(StrengthAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(StrengthAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(StrengthAttribute)).Append(value);
         }
     }
     public int Intelligence
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(IntelligenceAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(IntelligenceAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(IntelligenceAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(IntelligenceAttribute)).Append(value);
         }
     }
     public int Wisdom
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(WisdomAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(WisdomAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(WisdomAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(WisdomAttribute)).Append(value);
         }
     }
     public int Dexterity
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(DexterityAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(DexterityAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(DexterityAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(DexterityAttribute)).Append(value);
         }
     }
     public int Constitution
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(ConstitutionAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(ConstitutionAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(ConstitutionAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(ConstitutionAttribute)).Append(value);
         }
     }
     public int Charisma
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(CharismaAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(CharismaAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(CharismaAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(CharismaAttribute)).Append(value);
         }
     }
     public int Stealth
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(StealthAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(StealthAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(StealthAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(StealthAttribute)).Append(value);
         }
     }
     public int Search
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(SearchAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(SearchAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(SearchAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(SearchAttribute)).Append(value);
         }
     }
     public int Infravision
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(InfravisionAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(InfravisionAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(InfravisionAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(InfravisionAttribute)).Append(value);
         }
     }
     public int Tunnel
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(TunnelAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(TunnelAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(TunnelAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(TunnelAttribute)).Append(value);
         }
     }
     public int Attacks
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(AttacksAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(AttacksAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(AttacksAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(AttacksAttribute)).Append(value);
         }
     }
     public int Speed
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(SpeedAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(SpeedAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(SpeedAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(SpeedAttribute)).Append(value);
         }
     }
     public Activation? Activation
@@ -421,35 +421,35 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(DamageDiceAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(DamageDiceAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(DamageDiceAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(DamageDiceAttribute)).Append(value);
         }
     }
     public int DiceSides
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(DiceSidesAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(DiceSidesAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(DiceSidesAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(DiceSidesAttribute)).Append(value);
         }
     }
     public bool DreadCurse
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(DreadCurseAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(DreadCurseAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(DreadCurseAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(DreadCurseAttribute)).Set();
             }
         }
     }
@@ -457,13 +457,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(EasyKnowAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(EasyKnowAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(EasyKnowAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(EasyKnowAttribute)).Set();
             }
         }
     }
@@ -471,13 +471,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(FeatherAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(FeatherAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(FeatherAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(FeatherAttribute)).Set();
             }
         }
     }
@@ -485,13 +485,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(FreeActAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(FreeActAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(FreeActAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(FreeActAttribute)).Set();
             }
         }
     }
@@ -510,13 +510,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(HatesElectricityAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesElectricityAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(HatesElectricityAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesElectricityAttribute)).Set();
             }
         }
     }
@@ -524,13 +524,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(HatesAcidAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesAcidAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(HatesAcidAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesAcidAttribute)).Set();
             }
         }
     }
@@ -538,13 +538,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(HatesColdAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesColdAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(HatesColdAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesColdAttribute)).Set();
             }
         }
     }
@@ -552,13 +552,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(HatesFireAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesFireAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(HatesFireAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesFireAttribute)).Set();
             }
         }
     }
@@ -585,13 +585,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(HideTypeAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(HideTypeAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(HideTypeAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(HideTypeAttribute)).Set();
             }
         }
     }
@@ -599,13 +599,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(HoldLifeAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(HoldLifeAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(HoldLifeAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(HoldLifeAttribute)).Set();
             }
         }
     }
@@ -613,13 +613,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Set();
             }
         }
     }
@@ -627,13 +627,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(IgnoreColdAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreColdAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(IgnoreColdAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreColdAttribute)).Set();
             }
         }
     }
@@ -641,13 +641,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Set();
             }
         }
     }
@@ -655,13 +655,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Set();
             }
         }
     }
@@ -669,13 +669,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(ImAcidAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(ImAcidAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(ImAcidAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(ImAcidAttribute)).Set();
             }
         }
     }
@@ -683,13 +683,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(ImColdAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(ImColdAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(ImColdAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(ImColdAttribute)).Set();
             }
         }
     }
@@ -697,13 +697,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(ImElecAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(ImElecAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(ImElecAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(ImElecAttribute)).Set();
             }
         }
     }
@@ -711,13 +711,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(ImFireAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(ImFireAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(ImFireAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(ImFireAttribute)).Set();
             }
         }
     }
@@ -725,13 +725,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(ImpactAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(ImpactAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(ImpactAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(ImpactAttribute)).Set();
             }
         }
     }
@@ -739,13 +739,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(NoMagicAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(NoMagicAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(NoMagicAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(NoMagicAttribute)).Set();
             }
         }
     }
@@ -753,13 +753,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(NoTeleAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(NoTeleAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(NoTeleAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(NoTeleAttribute)).Set();
             }
         }
     }
@@ -767,13 +767,13 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Set();
             }
         }
     }
@@ -781,24 +781,24 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(RadiusAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(RadiusAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(RadiusAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(RadiusAttribute)).Append(value);
         }
     }
     public bool Valueless
     {
         get
         {
-            return Get<OrEffectiveAttributeValue>(nameof(ValuelessAttribute)).Get();
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(ValuelessAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<OrEffectiveAttributeValue>(nameof(ValuelessAttribute)).Set();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(ValuelessAttribute)).Set();
             }
         }
     }
@@ -806,22 +806,22 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Set(value);
+            Get<SummationEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Set(value);
         }
     }
     public int Weight
     {
         get
         {
-            return Get<SumEffectiveAttributeValue>(nameof(WeightAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(WeightAttribute)).Get();
         }
         set
         {
-            Get<SumEffectiveAttributeValue>(nameof(WeightAttribute)).Set(value);
+            Get<SummationEffectiveAttributeValue>(nameof(WeightAttribute)).Set(value);
         }
     }
     #endregion

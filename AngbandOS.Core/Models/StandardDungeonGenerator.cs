@@ -1093,7 +1093,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                         {
                             treasureRating += item.LevelNormallyFound - Game.Difficulty;
                         }
-                        treasureRating += item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Get();
+                        treasureRating += item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Get();
                     }
                 }
             }

@@ -37,8 +37,8 @@ internal class NibelungRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
+        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Set();
+        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
     }
     protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);
 

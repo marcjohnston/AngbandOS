@@ -37,7 +37,7 @@ internal class HalfTitanRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set();
+        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set();
     }
     protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
 

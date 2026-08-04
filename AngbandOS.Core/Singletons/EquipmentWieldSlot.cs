@@ -53,7 +53,7 @@ internal abstract class EquipmentWieldSlot : WieldSlot
 
 
                 // Items that teleport.
-                if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get() && Game.RandomLessThan(100) < 1)
+                if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get() && Game.RandomLessThan(100) < 1)
                 {
                     if (oPtr.EffectiveAttributeSet.IsCursed && !Game.HasAntiTeleport)
                     {

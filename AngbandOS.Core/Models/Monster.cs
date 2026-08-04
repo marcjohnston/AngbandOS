@@ -1264,35 +1264,35 @@ internal class Monster : IItemContainer, IGameSerialize
                         bool willHurt = false;
                         string itemName = item.GetFullDescription(true);
                         string monsterName = IndefiniteWhenHiddenName;
-                        if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get() > 1 && Race.Dragon)
+                        if (item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get() > 1 && Race.Dragon)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Get() && Race.Troll)
+                        if (item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Get() && Race.Troll)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Get() && Race.Giant)
+                        if (item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Get() && Race.Giant)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Get() && Race.Orc)
+                        if (item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Get() && Race.Orc)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayDemonAttribute)).Get() && Race.Demon)
+                        if (item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayDemonAttribute)).Get() && Race.Demon)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Get() && Race.Undead)
+                        if (item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Get() && Race.Undead)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Get() && Race.Animal)
+                        if (item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Get() && Race.Animal)
                         {
                             willHurt = true;
                         }
-                        if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Get() && Race.Evil)
+                        if (item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Get() && Race.Evil)
                         {
                             willHurt = true;
                         }

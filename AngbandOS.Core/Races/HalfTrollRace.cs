@@ -37,11 +37,11 @@ internal class HalfTrollRace : Race
 
     public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
     {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
+        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
         if (level > 14)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);

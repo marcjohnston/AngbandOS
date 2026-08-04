@@ -58,7 +58,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         foreach ((Attribute attribute, Expression expression) in SumAttributeAndExpressions)
         {
             int appendValue = Game.ComputeIntegerExpression(expression).Value;
-            itemCharacteristics.Get<SumEffectiveAttributeValue>(attribute).Append(appendValue);
+            itemCharacteristics.Get<SummationEffectiveAttributeValue>(attribute).Append(appendValue);
         }
         foreach ((Attribute attribute, Expression expression) in BoolAttributeAndExpressions)
         {
@@ -68,7 +68,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         foreach ((Attribute attribute, Expression expression) in OrAttributeAndExpressions)
         {
             bool setValue = Game.ComputeBooleanExpression(expression).Value;
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(attribute).Set(setValue);
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(attribute).Set(setValue);
         }
 
         itemCharacteristics.ArtifactBias = ArtifactBiasWeightedRandom?.ChooseOrDefault();

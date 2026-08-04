@@ -6462,7 +6462,7 @@ internal partial class Game : IGameSerialize
         {
             return false;
         }
-        if (oPtr.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() + oPtr.EffectiveAttributeSet.BonusArmorClass <= 0)
+        if (oPtr.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() + oPtr.EffectiveAttributeSet.BonusArmorClass <= 0)
         {
             return false;
         }
@@ -6888,7 +6888,7 @@ internal partial class Game : IGameSerialize
             item.EffectiveAttributeSet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.MeleeToHit = 0;
             item.EffectiveAttributeSet.ToDamage = 0;
-            item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
+            item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
             item.EffectiveAttributeSet.DamageDice = 0;
             item.EffectiveAttributeSet.DiceSides = 0;
             item.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
@@ -6927,7 +6927,7 @@ internal partial class Game : IGameSerialize
             item.EffectiveAttributeSet.MeleeToHit = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.ToDamage = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.BonusArmorClass = 0;
-            item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
+            item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
             item.EffectiveAttributeSet.DamageDice = 0;
             item.EffectiveAttributeSet.DiceSides = 0;
             item.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
@@ -7653,8 +7653,8 @@ internal partial class Game : IGameSerialize
                 if (meleeItem != null)
                 {
                     // Get our weapon's flags to see if we need to do anything special
-                    chaosEffect = meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Get() && DieRoll(2) == 1;
-                    if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get() || (chaosEffect && DieRoll(5) < 3))
+                    chaosEffect = meleeItem.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Get() && DieRoll(2) == 1;
+                    if (meleeItem.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get() || (chaosEffect && DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
@@ -7748,7 +7748,7 @@ internal partial class Game : IGameSerialize
                     {
                         int stepK = totalDamage;
                         string message = meleeItem.EffectiveAttributeSet.Vorpal1InChance == 0 ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
-                        int vorpalExtraAttacks1InChance = meleeItem.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(VorpalExtraAttacks1InChanceAttribute)).Get();
+                        int vorpalExtraAttacks1InChance = meleeItem.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(VorpalExtraAttacks1InChanceAttribute)).Get();
                         MsgPrint(message);
                         do
                         {
@@ -11635,7 +11635,7 @@ internal partial class Game : IGameSerialize
         {
             return;
         }
-        if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get() && DieRoll(888) > chance)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get() && DieRoll(888) > chance)
         {
             string oName = oPtr.GetDescription(false);
             string s = oPtr.StackCount > 1 ? "" : "s";
@@ -11789,23 +11789,23 @@ internal partial class Game : IGameSerialize
         EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet(this);
         if (CharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFearResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
         }
         if (CharacterClass.InstantChaosResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantChaosResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set();
         }
         if (CharacterClass.InstantSustainWisdomLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainWisdomLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
         }
         if (CharacterClass.InstantConfusionResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantConfusionResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
         }
         if (CharacterClass.InstantTelepathyLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantTelepathyLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
         }
         if (CharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSpeedLevel && !ArmorIsHeavy())
         {
@@ -11817,7 +11817,7 @@ internal partial class Game : IGameSerialize
         }
         if (CharacterClass.InstantBlindnessResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantBlindnessResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Set();
         }
         if (CharacterClass.InstantFeatherFallingLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFeatherFallingLevel)
         {
@@ -11825,27 +11825,27 @@ internal partial class Game : IGameSerialize
         }
         if (CharacterClass.InstantSeeInvisibilityLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSeeInvisibilityLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
         }
         if (CharacterClass.InstantSlowDigestionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSlowDigestionLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
         }
         if (CharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainConstitutionLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
         }
         if (CharacterClass.InstantPoisonResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantPoisonResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
         }
         if (CharacterClass.InstantSustainDexterityLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainDexterityLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
         }
         if (CharacterClass.InstantSustainStrengthLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainStrengthLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
         }
         if (CharacterClass.InstantHoldLifeLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantHoldLifeLevel)
         {
@@ -11853,43 +11853,43 @@ internal partial class Game : IGameSerialize
         }
         if (CharacterClass.InstantDarknessResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantDarknessResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
         }
         if (CharacterClass.InstantLightResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantLightResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
         }
         if (CharacterClass.InstantSustainCharismaLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainCharismaLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
         }
         if (CharacterClass.InstantSoundResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSoundResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Set();
         }
         if (CharacterClass.InstantDisenchantmentResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantDisenchantmentResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Set();
         }
         if (CharacterClass.InstantRegenerationLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantRegenerationLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
         }
         if (CharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainIntelligenceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
         }
         if (CharacterClass.InstantNexusResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantNexusResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Set();
         }
         if (CharacterClass.InstantShardsResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantShardsResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Set();
         }
         if (CharacterClass.InstantNetherResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantNetherResistanceLevel)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
         }
         if (CharacterClass.ItemRadiusOverride.HasValue)
         {
@@ -11899,7 +11899,7 @@ internal partial class Game : IGameSerialize
         Race.UpdateRacialAbilities(ExperienceLevel.IntValue, itemCharacteristics);
         if (Regen && !SuppressRegen)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
         }
         if (SpeedBonus != 0)
         {
@@ -11907,11 +11907,11 @@ internal partial class Game : IGameSerialize
         }
         if (ElecHit)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ShElecAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShElecAttribute)).Set();
         }
         if (HasFireSheath)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ShFireAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShFireAttribute)).Set();
             itemCharacteristics.Radius = 2;
         }
         if (FeatherFall)
@@ -11920,11 +11920,11 @@ internal partial class Game : IGameSerialize
         }
         if (ResFear)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
         }
         if (Esp)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
         }
         if (HasFreeAction)
         {
@@ -11932,26 +11932,26 @@ internal partial class Game : IGameSerialize
         }
         if (SustainAll)
         {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
             if (ExperienceLevel.IntValue > 9)
             {
-                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
+                itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
             }
             if (ExperienceLevel.IntValue > 19)
             {
-                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
+                itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
             }
             if (ExperienceLevel.IntValue > 29)
             {
-                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
+                itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
             }
             if (ExperienceLevel.IntValue > 39)
             {
-                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
+                itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
             }
             if (ExperienceLevel.IntValue > 49)
             {
-                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
+                itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
             }
         }
         return itemCharacteristics;

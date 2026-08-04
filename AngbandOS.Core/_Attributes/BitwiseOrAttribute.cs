@@ -12,7 +12,7 @@ internal class BitwiseOrAttribute : Attribute, IToJson
     {
         Key = gameConfiguration.GetKey;
     }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new OrEffectiveAttributeValue(Game, this);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new BitwiseOrEffectiveAttributeValue(Game, this);
     public override string Key { get; }
 
     public string ToJson()

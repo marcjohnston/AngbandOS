@@ -564,7 +564,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         if (IsRangedWeapon)
         {
             int power = MissileDamageMultiplier;
-            if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get())
+            if (item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(XtraMightAttribute)).Get())
             {
                 power++;
             }
@@ -574,10 +574,10 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             {
                 s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
 
-                if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
+                if (item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
+                    s += $" [{item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
                 else if (item.EffectiveAttributeSet.BonusArmorClass != 0)
                 {
@@ -585,9 +585,9 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                     s += $" [{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
             }
-            else if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
+            else if (item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
             {
-                s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()}]";
+                s += $" [{item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()}]";
             }
         }
         else if (IsWeapon)
@@ -598,10 +598,10 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             {
                 s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
 
-                if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
+                if (item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
+                    s += $" [{item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
                 else if (item.EffectiveAttributeSet.BonusArmorClass != 0)
                 {
@@ -609,16 +609,16 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                     s += $" [{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
             }
-            else if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
+            else if (item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
             {
-                s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()}]";
+                s += $" [{item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()}]";
             }
         }
         else if (IsArmor)
         {
             if (item.IsKnown())
             {
-                if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Get() || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
+                if (item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Get() || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
                 {
                     s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
@@ -632,18 +632,18 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                 }
 
                 // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
+                s += $" [{item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
             }
-            else if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
+            else if (item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
             {
-                s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()}]";
+                s += $" [{item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()}]";
             }
         }
         else
         {
             if (item.IsKnown())
             {
-                if (item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Get() || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
+                if (item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Get() || item.EffectiveAttributeSet.MeleeToHit != 0 && item.EffectiveAttributeSet.ToDamage != 0)
                 {
                     s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.MeleeToHit)},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
@@ -656,10 +656,10 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                     s += $" ({StringLibrary.GetSignedValue(item.EffectiveAttributeSet.ToDamage)})";
                 }
 
-                if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
+                if (item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() != 0)
                 {
                     // Add base armor class for all types of armor and when the base armor class is greater than zero.
-                    s += $" [{item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
+                    s += $" [{item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get()},{StringLibrary.GetSignedValue(item.EffectiveAttributeSet.BonusArmorClass)}]";
                 }
                 else if (item.EffectiveAttributeSet.BonusArmorClass != 0)
                 {
@@ -708,7 +708,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             s += $" ({item.WandChargesRemaining} {Game.Pluralize("charge", item.WandChargesRemaining)})";
         }
 
-        if (item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get() > 0)
+        if (item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get() > 0)
         {
             s += $" (with {item.TurnsOfLightRemaining} {Game.Pluralize("turn", item.TurnsOfLightRemaining)} of light)";
         }
@@ -1087,7 +1087,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
 
                 case 22:
                 case 23:
-                    if (characteristics.Get<OrEffectiveAttributeValue>(nameof(CanApplyBlowsBonusAttribute)).Get())
+                    if (characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(CanApplyBlowsBonusAttribute)).Get())
                     {
                         ApplyRandomBonuses(characteristics);
                     }
@@ -1181,15 +1181,15 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             }
             if (Game.DieRoll(2) == 1)
             {
-                characteristics.Get<OrEffectiveAttributeValue>(nameof(AggravateAttribute)).Set();
+                characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(AggravateAttribute)).Set();
             }
             if (Game.DieRoll(3) == 1)
             {
-                characteristics.Get<OrEffectiveAttributeValue>(nameof(DrainExpAttribute)).Set();
+                characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(DrainExpAttribute)).Set();
             }
             if (Game.DieRoll(2) == 1)
             {
-                characteristics.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Set();
+                characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(TeleportAttribute)).Set();
             }
             else if (Game.DieRoll(3) == 1)
             {
@@ -1215,7 +1215,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             switch (Game.DieRoll(31))
             {
                 case 1:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(StrengthArtifactBias));
@@ -1223,7 +1223,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                     break;
 
                 case 2:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(IntelligenceArtifactBias));
@@ -1231,7 +1231,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                     break;
 
                 case 3:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(WisdomArtifactBias));
@@ -1239,7 +1239,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                     break;
 
                 case 4:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(DexterityArtifactBias));
@@ -1247,7 +1247,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                     break;
 
                 case 5:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(ConstitutionArtifactBias));
@@ -1255,7 +1255,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                     break;
 
                 case 6:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
                     if (characteristics.ArtifactBias == null)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(CharismaArtifactBias));
@@ -1293,11 +1293,11 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                 case 15:
                 case 16:
                 case 17:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
                     break;
 
                 case 18:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
                     if (characteristics.ArtifactBias == null && Game.DieRoll(9) == 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
@@ -1306,29 +1306,29 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
 
                 case 19:
                 case 20:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
                     break;
 
                 case 21:
                 case 22:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
                     break;
 
                 case 23:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(TeleportAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(TeleportAttribute)).Set();
                     break;
 
                 case 24:
                 case 25:
                 case 26:
-                    if (!characteristics.Get<OrEffectiveAttributeValue>(nameof(CanApplyBonusArmorClassMiscPowerAttribute)).Get())
+                    if (!characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(CanApplyBonusArmorClassMiscPowerAttribute)).Get())
                     {
                         // This item cannot have misc power, select a different
                         ApplyMiscPowerForRandomArtifactCreation(characteristics);
                     }
                     else
                     {
-                        characteristics.Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Set();
+                        characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Set();
                         characteristics.BonusArmorClass = 4 + Game.DieRoll(11);
                     }
                     break;
@@ -1336,7 +1336,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                 case 27:
                 case 28:
                 case 29:
-                    characteristics.Get<OrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Set();
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShowModsAttribute)).Set();
                     characteristics.MeleeToHit += 4 + Game.DieRoll(11);
                     characteristics.ToDamage += 4 + Game.DieRoll(11);
                     break;
@@ -1439,7 +1439,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         }
         while (powers-- != 0)
         {
-            int maxType = (characteristics.Get<OrEffectiveAttributeValue>(nameof(CanApplySlayingBonusAttribute)).Get() ? 7 : 5);
+            int maxType = (characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(CanApplySlayingBonusAttribute)).Get() ? 7 : 5);
             switch (Game.DieRoll(maxType))
             {
                 case 1:
@@ -1491,17 +1491,17 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
 
                         itemAdditiveBundleWeightedRandom.Add(2 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ResistDisenchantItemEnhancement)));
 
-                        if (characteristics.Get<OrEffectiveAttributeValue>(nameof(CanProvideSheathOfElectricityAttribute)).Get())
+                        if (characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(CanProvideSheathOfElectricityAttribute)).Get())
                         {
                             itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(SheathOfElectricityAndElectricityBiasItemEnhancement)));
                         }
 
-                        if (characteristics.Get<OrEffectiveAttributeValue>(nameof(CanProvideSheathOfFireAttribute)).Get())
+                        if (characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(CanProvideSheathOfFireAttribute)).Get())
                         {
                             itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(SheathOfFireAndFireBiasItemEnhancement)));
                         }
 
-                        if (characteristics.Get<OrEffectiveAttributeValue>(nameof(ReflectAttribute)).Get())
+                        if (characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ReflectAttribute)).Get())
                         {
                             itemAdditiveBundleWeightedRandom.Add(1 * 48 * 12, Game.SingletonRepository.Get<ItemEnhancement>(nameof(ReflectBoltsAndArrowsItemEnhancement)));
                         }
@@ -1545,7 +1545,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         characteristics.IgnoreElec = true;
         characteristics.IgnoreFire = true;
         characteristics.IgnoreCold = true;
-        characteristics.Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Append(40);
+        characteristics.Get<SummationEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Append(40);
 
         if (aCursed)
         {

@@ -8,14 +8,14 @@ using System.Text;
 
 namespace AngbandOS.Core;
 
-internal class SumEffectiveAttributeValue : EffectiveAttributeValue
+internal class SummationEffectiveAttributeValue : EffectiveAttributeValue
 {
     /// <summary>
     /// Represents the modifiers that are combined to create the effective value.
     /// </summary>
     protected readonly List<(string Key, int Modifier)> _attributeModifiers = new List<(string, int)>();
-    public SumEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
-    public SumEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
+    public SummationEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
+    public SummationEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
         (string, int)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, int>(
             _restoreGameState => _restoreGameState.GetString(), 
@@ -30,7 +30,7 @@ internal class SumEffectiveAttributeValue : EffectiveAttributeValue
     }
     public override EffectiveAttributeValue Clone()
     {
-        SumEffectiveAttributeValue clone = new SumEffectiveAttributeValue(Game, Attribute);
+        SummationEffectiveAttributeValue clone = new SummationEffectiveAttributeValue(Game, Attribute);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }

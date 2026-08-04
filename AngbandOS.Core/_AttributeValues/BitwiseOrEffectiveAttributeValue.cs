@@ -11,15 +11,15 @@ namespace AngbandOS.Core;
 /// <summary>
 /// Represents an effective attribute value that combines multiple boolean modifiers using a logical OR operation. The effective value is true if any of the modifiers are true, and false if all modifiers are false.
 /// </summary>
-internal class OrEffectiveAttributeValue : EffectiveAttributeValue
+internal class BitwiseOrEffectiveAttributeValue : EffectiveAttributeValue
 {
     /// <summary>
     /// Represents the modifiers that are combined to create the effective value.
     /// </summary>
     private readonly List<(string Key, bool Modifier)> _attributeModifiers = new List<(string, bool)>();
 
-    public OrEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
-    public OrEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState) 
+    public BitwiseOrEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
+    public BitwiseOrEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState) 
     {
         (string, bool)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, bool>(
             _restoreGameState => _restoreGameState.GetString(), 
@@ -30,7 +30,7 @@ internal class OrEffectiveAttributeValue : EffectiveAttributeValue
 
     public override EffectiveAttributeValue Clone()
     {
-        OrEffectiveAttributeValue clone = new OrEffectiveAttributeValue(Game, Attribute);
+        BitwiseOrEffectiveAttributeValue clone = new BitwiseOrEffectiveAttributeValue(Game, Attribute);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }

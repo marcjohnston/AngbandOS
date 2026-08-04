@@ -12,7 +12,7 @@ internal class SummationAttribute : Attribute, IToJson
     {
         Key = gameConfiguration.GetKey;
     }
-    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new SumEffectiveAttributeValue(Game, this);
+    public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new SummationEffectiveAttributeValue(Game, this);
     public override string Key { get; }
 
     public string ToJson()
