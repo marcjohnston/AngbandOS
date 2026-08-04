@@ -152,7 +152,7 @@ internal partial class Game : IGameSerialize
             (nameof(WisdomBonus), saveGameState.CreateGameStateBag(WisdomBonus)),
             (nameof(replayPreviousKeystrokeDateTime), saveGameState.CreateGameStateBag(replayPreviousKeystrokeDateTime)),
             (nameof(MainSequenceGameStartSeed), saveGameState.CreateGameStateBag(MainSequenceGameStartSeed)),
-            (nameof(EffectiveAttributeSet), saveGameState.CreateDerivedGameStateBag(EffectiveAttributeSet, typeof(ReadOnlyAttributeSet))),
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
             (nameof(CurrentRunDirection), saveGameState.CreateGameStateBag(CurrentRunDirection)),
             (nameof(_previousRunDirection), saveGameState.CreateGameStateBag(_previousRunDirection)),
             (nameof(FollowDistance), saveGameState.CreateGameStateBag(FollowDistance)),
@@ -419,7 +419,7 @@ internal partial class Game : IGameSerialize
             SingletonRepository.LoadAndBind(gameConfiguration, null); // TODO: The null might be resolvable with the "NewGame" or "GenerateNewGame" method that is called after the game is constructed.  This should be moved to a new method that every singleton receives after the binding.
 
             // We need a game/player level attribute set.
-            EffectiveAttributeSet = new EffectiveAttributeSet(this).ToReadOnly();
+            AttributeSet = new EffectiveAttributeSet(this).ToReadOnly();
 
             // Now we can initialize the allocation tables.  This step must be performed after the singletons are loaded and bound.
             InitializeAllocationTables(); // This is not performed on a restore. // TODO: This might be the start of the "NewGame" or "GenerateNewGame" method that is called after the game is constructed.  This should be moved to a new method that every singleton receives after the binding.
@@ -471,7 +471,7 @@ internal partial class Game : IGameSerialize
             WisdomBonus = restoreGameState.GetByKey(nameof(WisdomBonus)).GetInt();
             replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTime();
             MainSequenceGameStartSeed = restoreGameState.GetByKey(nameof(MainSequenceGameStartSeed)).GetInt();
-            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(this, _restoreGameState));
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(this, _restoreGameState));
             CurrentRunDirection = restoreGameState.GetByKey(nameof(CurrentRunDirection)).GetInt();
             _previousRunDirection = restoreGameState.GetByKey(nameof(_previousRunDirection)).GetInt();
             FollowDistance = restoreGameState.GetByKey(nameof(FollowDistance)).GetInt();
@@ -1021,7 +1021,7 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Represents the players effective attribute values.
     /// </summary>
-    public ReadOnlyAttributeSet EffectiveAttributeSet;
+    public ReadOnlyAttributeSet AttributeSet;
     public const string FactoryAttributeKey = "factory";
     public const string RandomAttributeKey = "random";
     public const string RareAttributeKey = "rare";
@@ -1170,7 +1170,7 @@ internal partial class Game : IGameSerialize
 
     #region Pre-Load Cached Data - Non-State Properties that are pre-loaded and cached
     /// <summary>
-    /// Once all of the Attributes are preloaded during the singleton load phase, we cache them.  This is a time saving cache because the <see cref="EffectiveAttributeSet"/> pulls them a lot.
+    /// Once all of the Attributes are preloaded during the singleton load phase, we cache them.  This is a time saving cache because the <see cref="AttributeSet"/> pulls them a lot.
     /// </summary>
     public Attribute[] CachedAttributes;
     #endregion
@@ -8759,7 +8759,7 @@ internal partial class Game : IGameSerialize
             return false;
         }
         // Roll for the attack
-        int armorClass = EffectiveAttributeSet.GetInt(nameof(BaseArmorClassAttribute)) + TotalBonusArmorClass;
+        int armorClass = AttributeSet.GetInt(nameof(BaseArmorClassAttribute)) + TotalBonusArmorClass;
         return DieRoll(attackStrength) > armorClass * 3 / 4;
     }
 

@@ -66,7 +66,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     }
     protected override void Execute()
     {
-        Game.EffectiveAttributeSet = BuildEffectiveAttributeSetForPlayer().ToReadOnly(); // TODO: This isn't being used yet.
+        Game.AttributeSet = BuildEffectiveAttributeSetForPlayer().ToReadOnly(); // TODO: This isn't being used yet.
 
         List<Bonuses> bonusesToMerge = new List<Bonuses>();
         int attackBonus = 0;
