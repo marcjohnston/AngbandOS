@@ -3,13 +3,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(RegenAttribute), "true"),
-    };
-
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(RegenAttribute), "true"),
         (nameof(BrandFireAttribute), "true"),
         (nameof(FreeActAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),

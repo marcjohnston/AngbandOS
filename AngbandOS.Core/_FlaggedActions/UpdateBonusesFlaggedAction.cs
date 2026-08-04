@@ -272,7 +272,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     {
                         Game.HasSlowDigestion = true;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).IsTrue)
+                    if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Get())
                     {
                         Game.HasRegeneration = true;
                     }

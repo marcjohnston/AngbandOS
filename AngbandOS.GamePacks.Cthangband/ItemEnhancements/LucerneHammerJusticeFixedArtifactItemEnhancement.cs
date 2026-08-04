@@ -3,13 +3,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(RegenAttribute), "true"),
-    };
-
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(RegenAttribute), "true"),
         (nameof(BrandColdAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),

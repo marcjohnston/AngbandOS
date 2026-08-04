@@ -3,13 +3,9 @@ namespace AngbandOS.GamePacks.Cthangband;
 [Serializable]
 public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(RegenAttribute), "true"),
-    };
-
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(RegenAttribute), "true"),
         (nameof(BlessedAttribute), "true"),
         (nameof(BrandColdAttribute), "true"),
         (nameof(FreeActAttribute), "true"),

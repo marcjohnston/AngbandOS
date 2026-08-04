@@ -5,6 +5,7 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
 {
     public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(RegenAttribute), "true"),
         (nameof(AggravateAttribute), "true"),
         (nameof(DrainExpAttribute), "true"),
         (nameof(DreadCurseAttribute), "true"),
@@ -33,7 +34,6 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
     };
     public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
-        (nameof(RegenAttribute), "true"),
         (nameof(HeavyCurseAttribute), "true"),
         (nameof(IsCursedAttribute), "true"),
     };

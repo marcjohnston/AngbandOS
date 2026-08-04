@@ -1311,7 +1311,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
 
                 case 21:
                 case 22:
-                    characteristics.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
+                    characteristics.Get<OrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
                     break;
 
                 case 23:
