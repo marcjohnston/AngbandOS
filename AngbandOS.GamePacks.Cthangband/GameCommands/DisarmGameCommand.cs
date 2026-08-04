@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Attempt to disarm a trap on a door or chest
 /// </summary>
-[Serializable]
 public class DisarmGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'D';

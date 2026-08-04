@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class CyclopsRaceWisdomAbility : RaceAbilityGameConfiguration
 {
     public override string RaceBindingKey => nameof(RacesEnum.CyclopsRace);

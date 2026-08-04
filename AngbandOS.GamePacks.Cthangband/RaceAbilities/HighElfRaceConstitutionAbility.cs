@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class HighElfRaceConstitutionAbility : RaceAbilityGameConfiguration
 {
     public override string RaceBindingKey => nameof(RacesEnum.HighElfRace);

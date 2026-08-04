@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class OldHeal6d3ProjectileFriendlyProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => false;

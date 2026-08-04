@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Represents a widget that renders the "DTrap" trap detector in green, when the North, South, East and West map grid coordinates from the player are within the
 /// boundaries of the traps detected area.  This widget is a child of the true branch of the <see cref="TrapDetectionConditionalWidget"/> widget.
 /// </summary>
-[Serializable]
 public class TrapCountRangedWidget : RangedWidgetGameConfiguration
 {
     public override int X => 53;

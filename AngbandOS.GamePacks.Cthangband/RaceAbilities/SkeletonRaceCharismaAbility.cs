@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class SkeletonRaceCharismaAbility : RaceAbilityGameConfiguration
 {
     public override string RaceBindingKey => nameof(RacesEnum.SkeletonRace);

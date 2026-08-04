@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Heal 30 health and remove fear.
 /// </summary>
-[Serializable]
 public class RemoveFearAndHeal30Every10Activation : ActivationGameConfiguration
 {
     

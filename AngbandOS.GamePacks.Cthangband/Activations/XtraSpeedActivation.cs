@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Give us extra haste for a long time.
 /// </summary>
-[Serializable]
 public class XtraSpeedActivation : ActivationGameConfiguration
 {
     

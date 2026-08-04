@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Missile300rm4ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;
@@ -23,7 +22,6 @@ public class Missile300rm4ProjectileScript : ProjectileScriptGameConfiguration
     public override string? PreMessage => "You breathe the elements.";
 }
 
-[Serializable]
 public class Missile300r4ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;

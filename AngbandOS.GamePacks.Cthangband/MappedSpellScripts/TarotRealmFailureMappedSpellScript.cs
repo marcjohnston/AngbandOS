@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class TarotRealmFailureMappedSpellScript : MappedSpellScriptGameConfiguration
 {
     public override bool Success => false;

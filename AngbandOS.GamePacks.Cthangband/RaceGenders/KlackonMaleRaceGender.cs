@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class KlackonMaleRaceGender : RaceGenderGameConfiguration
 {
     public override string RaceBindingKey => nameof(RacesEnum.KlackonRace);

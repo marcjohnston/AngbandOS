@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class HalfOgreRaceRacePower : RacePowerGameConfiguration
 {
     public override string ScriptBindingKey => nameof(HalfOgreRaceRacialPowerConditionalScript);

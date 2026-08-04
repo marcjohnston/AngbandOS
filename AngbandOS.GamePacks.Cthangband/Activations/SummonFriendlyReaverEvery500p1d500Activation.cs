@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Summon animals.
 /// </summary>
-[Serializable]
 public class SummonFriendlyReaverEvery500p1d500Activation : ActivationGameConfiguration
 {
     public override string? PreActivationMessage => "Your {0} flickers black for a moment...";

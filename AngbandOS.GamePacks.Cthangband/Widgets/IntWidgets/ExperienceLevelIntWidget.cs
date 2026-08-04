@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents the widget used to render the experience level of the player when the experience level of the player is at the maximum level that the player has attained.
 /// </summary>
-[Serializable]
 public class ExperienceLevelIntWidget : IntWidgetGameConfiguration
 {
     public override int X => 6;

@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class MindWaveTalentLearnedKnowledge : ExperienceLearnedKnowledgeGameConfiguration
 {
     public override (int?, string)[] ExperienceLearnedKnowledgeBindingTuples => new (int?, string)[]

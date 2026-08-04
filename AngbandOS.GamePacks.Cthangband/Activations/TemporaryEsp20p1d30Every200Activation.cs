@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Give temporary telepathy.
 /// </summary>
-[Serializable]
 public class TemporaryEsp20p1d30Every200Activation : ActivationGameConfiguration
 {
     

@@ -8,7 +8,6 @@
 using AngbandOS.Core.Expressions.IDE;
 namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 internal class ExperienceLevelIdentifierExpression : IdentifierExpression
 {
     private readonly int Value;

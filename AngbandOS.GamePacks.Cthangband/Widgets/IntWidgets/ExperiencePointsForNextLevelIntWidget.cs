@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a widget that renders the experience points that are needed for the player to gain the next level.
 /// </summary>
-[Serializable]
 public class ExperiencePointsForNextLevelIntWidget : IntWidgetGameConfiguration
 {
     public override int X => 4;

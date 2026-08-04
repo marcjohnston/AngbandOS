@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Remove fear and poison.
 /// </summary>
-[Serializable]
 public class RemoveFearAndPoisonEvery5Activation : ActivationGameConfiguration
 {
     

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a widget that displays a friendly status for when the player is tracking a monster and the monster is friendly.
 /// </summary>
-[Serializable]
 public class TrackedMonsterHealthIsFriendlyLabelWidget : LabelWidgetGameConfiguration
 {
     public override int X => 0;

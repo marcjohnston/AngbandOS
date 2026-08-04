@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot an acid bolt that does 5d8 damage.
 /// </summary>
-[Serializable]
 public class AcidBolt5d8Every5p1d5DirectionalActivation : ActivationGameConfiguration
 {
     

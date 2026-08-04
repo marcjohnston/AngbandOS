@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Charm an animal.
 /// </summary>
-[Serializable]
 public class CharmAnimal1xEvery300DirectionalActivation : ActivationGameConfiguration
 {
     

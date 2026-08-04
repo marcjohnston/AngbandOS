@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class FanaticCharacterClassConstitutionAbility : CharacterClassAbilityGameConfiguration
 {
     public override string AbilityBindingKey => nameof(AbilitiesEnum.ConstitutionAbility);

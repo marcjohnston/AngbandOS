@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Carnage a chosen creature type.
 /// </summary>
-[Serializable]
 public class GenocideEvery500Activation : ActivationGameConfiguration
 {
     

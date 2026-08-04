@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for spell books that are in the primary or secondary realms.
 /// </summary>
-[Serializable]
 public class IsUnusableHighLevelSpellBookItemFilter : ItemFilterGameConfiguration
 {
     public override bool? IsUsableSpellBook => false;

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class UltharTown : TownGameConfiguration
 {
     public override string[] StoreFactoryNames => new string[] {

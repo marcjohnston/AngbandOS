@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class RogueCharacterClassWisdomAbility : CharacterClassAbilityGameConfiguration
 {
     public override string AbilityBindingKey => nameof(AbilitiesEnum.WisdomAbility);

@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Represents a conditional widget that renders an unknown health gauge when the player is tracking a monster and the player is hallucinating; otherwise the <see cref="TrackedMonsterHealthIsAfraidConditionalWidget"/> 
 /// widget is rendered.
 /// </summary>
-[Serializable]
 public class PlayerIsHallucinatingTrackedMonsterHealthConditionalWidget : ConditionalWidgetGameConfiguration
 {
     public override string ConditionalKey => nameof(PlayerIsHallucinatingTrackedMonsterHealthConditional);

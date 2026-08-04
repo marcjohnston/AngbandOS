@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Show the game manual
 /// </summary>
-[Serializable]
 public class HelpStoreCommand : StoreCommandGameConfiguration
 {
     public override char KeyChar => 'h';

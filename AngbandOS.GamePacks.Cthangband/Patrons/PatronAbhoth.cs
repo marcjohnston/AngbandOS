@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class PatronAbhoth : PatronGameConfiguration
 {
     public override string ShortName => "Abhoth";

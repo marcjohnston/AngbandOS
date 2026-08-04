@@ -1,7 +1,6 @@
 ﻿
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class AsteriskSymbol : SymbolGameConfiguration
 {
     public override char Character => '*';

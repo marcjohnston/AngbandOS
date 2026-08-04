@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class MysticCharacterClassWisdomAbility : CharacterClassAbilityGameConfiguration
 {
     public override string AbilityBindingKey => nameof(AbilitiesEnum.WisdomAbility);

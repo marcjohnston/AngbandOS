@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Stand still for a turn without picking up any items
 /// </summary>
-[Serializable]
 public class StayGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'g';

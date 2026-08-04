@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Give us temporary invulnerabliity.
 /// </summary>
-[Serializable]
 public class InvulnActivation : ActivationGameConfiguration
 {
     

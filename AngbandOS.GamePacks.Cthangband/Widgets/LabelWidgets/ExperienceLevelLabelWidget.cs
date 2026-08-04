@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a widget that renders the experience level label when the player hasn't lost any experience levels.
 /// </summary>
-[Serializable]
 public class ExperienceLevelLabelWidget : LabelWidgetGameConfiguration
 {
     public override int X => 0;

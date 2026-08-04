@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Aim a line of light in a direction of the player's choice
 /// </summary>
-[Serializable]
 public class SunlightDirectionalActivation : ActivationGameConfiguration
 {
 

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Locate the player on the level and let them scroll the map around
 /// </summary>
-[Serializable]
 public class LocateGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'L';

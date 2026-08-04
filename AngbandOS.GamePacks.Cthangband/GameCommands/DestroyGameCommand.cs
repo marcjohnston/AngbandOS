@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Destroy a single item
 /// </summary>
-[Serializable]
 public class DestroyGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'k';

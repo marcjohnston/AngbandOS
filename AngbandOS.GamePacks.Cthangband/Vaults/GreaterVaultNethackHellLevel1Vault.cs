@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class GreaterVaultNethackHellLevel1Vault : VaultGameConfiguration
 {
     public override string Name => "Greater vault (nethack hell level #1)";

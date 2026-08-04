@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot a lightning storm that does 100 damage with a larger radius.
 /// </summary>
-[Serializable]
 public class BallOfLightning100r3Every500DirectionalActivation : ActivationGameConfiguration
 {
     

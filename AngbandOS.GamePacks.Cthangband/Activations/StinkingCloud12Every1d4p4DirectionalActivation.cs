@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot a 12-damage ball of poison
 /// </summary>
-[Serializable]
 public class StinkingCloud12Every1d4p4DirectionalActivation : ActivationGameConfiguration
 {
     

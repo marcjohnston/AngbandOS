@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Heal 1000 health and remove all bleeding.
 /// </summary>
-[Serializable]
 public class Heal1000Every888Activation : ActivationGameConfiguration
 {
     

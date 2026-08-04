@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class GazeAttack : AttackGameConfiguration
 {
     public override string MonsterAction => "gazes at {0}";

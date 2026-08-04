@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Turn an item to gold.
 /// </summary>
-[Serializable]
 public class GetawayEvery35Activation : ActivationGameConfiguration
 {
 

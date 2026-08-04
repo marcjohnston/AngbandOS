@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class JasperRingItemFlavor : ItemFlavorGameConfiguration
 {
     public override string SymbolName => nameof(EqualSignSymbol);

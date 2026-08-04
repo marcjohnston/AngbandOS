@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class PriestCharacterClassStrengthAbility : CharacterClassAbilityGameConfiguration
 {
     public override string AbilityBindingKey => nameof(AbilitiesEnum.StrengthAbility);

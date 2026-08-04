@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class InertiaBeamAllDirections75ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override string DamageRollExpression => "75";

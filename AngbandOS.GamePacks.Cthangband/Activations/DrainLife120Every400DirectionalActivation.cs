@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Drain up to 120 life from an opponent.
 /// </summary>
-[Serializable]
 public class DrainLife120Every400DirectionalActivation : ActivationGameConfiguration
 {
     

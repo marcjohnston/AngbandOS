@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot a fire bolt that does 9d8 damage.
 /// </summary>
-[Serializable]
 public class FireBolt9d8Every8p1d8DirectionalActivation : ActivationGameConfiguration
 {
     

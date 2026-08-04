@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class YeekRaceRacePower : RacePowerGameConfiguration
 {
     public override string ScriptBindingKey => nameof(YeekRaceRacialPowerConditionalScript);

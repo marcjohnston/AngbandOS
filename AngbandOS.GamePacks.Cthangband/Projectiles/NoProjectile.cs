@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a projectile that has no graphics or effect.  This projectile is used by ProjectileScripts that turn pets into unfriendly monsters.
 /// </summary>
-[Serializable]
 public class NoProjectile : ProjectileGameConfiguration
 {
 }

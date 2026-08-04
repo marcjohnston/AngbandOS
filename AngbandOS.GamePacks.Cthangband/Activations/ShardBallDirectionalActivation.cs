@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot a shard ball for 120 + level damage.
 /// </summary>
-[Serializable]
 public class ShardBallDirectionalActivation : ActivationGameConfiguration
 {
     

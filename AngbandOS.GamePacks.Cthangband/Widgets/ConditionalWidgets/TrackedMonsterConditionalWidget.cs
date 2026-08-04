@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a conditional widget that renders the monster name and status when the player is tracking a monster.
 /// </summary>
-[Serializable]
 public class TrackedMonsterConditionalWidget : ConditionalWidgetGameConfiguration
 {
     public override string ConditionalKey => nameof(TrackedMonsterConditional);

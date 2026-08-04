@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Drop an item
 /// </summary>
-[Serializable]
 public class DropGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'd';

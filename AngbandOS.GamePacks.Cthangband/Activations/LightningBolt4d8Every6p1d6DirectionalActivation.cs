@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot a lightning bolt that does 4d8 damage
 /// </summary>
-[Serializable]
 public class LightningBolt4d8Every6p1d6DirectionalActivation : ActivationGameConfiguration
 {
     

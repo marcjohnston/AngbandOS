@@ -9,7 +9,6 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class PitTile : TileGameConfiguration
 {
     public override string SymbolName => nameof(CaretSymbol);

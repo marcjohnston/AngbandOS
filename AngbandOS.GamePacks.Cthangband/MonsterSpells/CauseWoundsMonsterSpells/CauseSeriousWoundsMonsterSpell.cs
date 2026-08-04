@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class CauseSeriousWoundsMonsterSpell : CauseWoundsMonsterSpellGameConfiguration
 {
     public override (string, string) KnowledgeAction => ("which", "cause serious wounds and cursing");

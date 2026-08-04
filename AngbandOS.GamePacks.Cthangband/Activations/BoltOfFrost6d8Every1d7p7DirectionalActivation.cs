@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BoltOfFrost6d8Every1d7p7DirectionalActivation : ActivationGameConfiguration
 {
 

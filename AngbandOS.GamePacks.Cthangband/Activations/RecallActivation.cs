@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Word of Recall.
 /// </summary>
-[Serializable]
 public class RecallActivation : ActivationGameConfiguration
 {
     

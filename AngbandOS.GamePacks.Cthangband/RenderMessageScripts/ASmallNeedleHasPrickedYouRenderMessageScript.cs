@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ASmallNeedleHasPrickedYouRenderMessageScript : RenderMessageScriptGameConfiguration
 {
     public override string Message => "A small needle has pricked you!";

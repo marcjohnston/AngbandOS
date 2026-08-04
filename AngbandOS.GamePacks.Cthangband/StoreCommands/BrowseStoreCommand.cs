@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Browse a book
 /// </summary>
-[Serializable]
 public class BrowseStoreCommand : StoreCommandGameConfiguration
 {
     public override char KeyChar => 'b';

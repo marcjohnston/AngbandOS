@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband
 {
-    [Serializable]
     public class CharacterClassThatCannotEatOutfitManifestGameConfiguration : OutfitManifestGameConfiguration
     {
         public override (string[], bool)? RaceBindingKey => (new string[] { nameof(RacesEnum.GolemRace), nameof(RacesEnum.SkeletonRace), nameof(RacesEnum.SpectreRace), nameof(RacesEnum.VampireRace), nameof(RacesEnum.ZombieRace) }, true);

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for items that are both known and can be activated, regardless of their value.
 /// </summary>
-[Serializable]
 public class KnownAndActivableItemFilter : ItemFilterGameConfiguration
 {
     public override bool? IsKnown => true;

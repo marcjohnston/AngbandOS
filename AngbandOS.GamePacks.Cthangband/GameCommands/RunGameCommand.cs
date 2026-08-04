@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Start running
 /// </summary>
-[Serializable]
 public class RunGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '.';

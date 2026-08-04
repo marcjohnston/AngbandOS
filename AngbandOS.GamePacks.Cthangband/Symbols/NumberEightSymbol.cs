@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class NumberEightSymbol : SymbolGameConfiguration
 {
     public override char Character => '8';

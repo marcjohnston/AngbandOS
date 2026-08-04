@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Short range teleport to a specific destination.
 /// </summary>
-[Serializable]
 public class DimensionalGateEvery100Activation : ActivationGameConfiguration
 {
     

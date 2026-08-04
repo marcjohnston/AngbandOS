@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Toggle whether we're automatically searching while moving
 /// </summary>
-[Serializable]
 public class ToggleSearchGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'S';

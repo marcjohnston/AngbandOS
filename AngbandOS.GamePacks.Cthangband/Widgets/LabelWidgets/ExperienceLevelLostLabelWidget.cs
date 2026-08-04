@@ -11,7 +11,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Represents a widget that renders the label for the experience level in Pascal case when the player has lost one or more levels from their maximum gained
 /// experience level.
 /// </summary>
-[Serializable]
 public class ExperienceLevelLostLabelWidget : LabelWidgetGameConfiguration
 {
     public override int X => 0;

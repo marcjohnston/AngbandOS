@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class DispelEvilAtLos120ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => false;

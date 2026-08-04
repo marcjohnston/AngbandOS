@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ShriekScriptMonsterSpell : ScriptMonsterSpellGameConfiguration
 {
     public override (string, string) KnowledgeAction => ("may", "shriek for help");

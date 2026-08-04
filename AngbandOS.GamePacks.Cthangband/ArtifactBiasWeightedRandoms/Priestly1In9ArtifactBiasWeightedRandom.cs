@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Priestly1In9ArtifactBiasWeightedRandom : ArtifactBiasWeightedRandomGameConfiguration
 {
     public override (string?, int)[] ArtifactBiasBindingKeyAndWeightTuples => new (string?, int)[]

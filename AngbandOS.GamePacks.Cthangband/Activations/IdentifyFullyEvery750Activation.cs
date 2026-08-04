@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Identify an item fully.
 /// </summary>
-[Serializable]
 public class IdentifyFullyEvery750Activation : ActivationGameConfiguration
 {
     

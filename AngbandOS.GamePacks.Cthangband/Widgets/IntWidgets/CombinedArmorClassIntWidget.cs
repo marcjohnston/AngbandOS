@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class CombinedArmorClassIntWidget : IntWidgetGameConfiguration
 {
     public override int X => 7;

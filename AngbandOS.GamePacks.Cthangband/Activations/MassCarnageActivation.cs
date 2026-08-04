@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Mass carnage creatures near the player.
 /// </summary>
-[Serializable]
 public class MassCarnageActivation : ActivationGameConfiguration
 {
     

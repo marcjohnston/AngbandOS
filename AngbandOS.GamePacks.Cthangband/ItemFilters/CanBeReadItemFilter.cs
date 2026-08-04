@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Returns an item filter for items that can be read, regardless of their value.
 /// </summary>
-[Serializable]
 public class CanBeReadItemFilter : ItemFilterGameConfiguration
 {
 

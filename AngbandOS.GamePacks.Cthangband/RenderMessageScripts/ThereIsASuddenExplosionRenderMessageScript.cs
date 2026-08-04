@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ThereIsASuddenExplosionRenderMessageScript : RenderMessageScriptGameConfiguration
 {
     public override string Message => "There is a sudden explosion!";

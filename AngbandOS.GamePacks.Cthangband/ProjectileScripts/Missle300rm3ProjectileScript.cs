@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Missle300rm3ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;

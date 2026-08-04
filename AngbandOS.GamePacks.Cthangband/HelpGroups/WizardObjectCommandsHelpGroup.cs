@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class WizardObjectCommandsHelpGroup : HelpGroupGameConfiguration
 {
     public override string Title => "Object Commands";

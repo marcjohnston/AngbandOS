@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Explode25d25ProjectileUnfriendlyProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => false;

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot a frost ball that does 48 damage.
 /// </summary>
-[Serializable]
 public class BallOfCold48r2Every5p1d5DirectionalActivation : ActivationGameConfiguration
 {
     

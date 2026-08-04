@@ -7,7 +7,6 @@
 
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BreatheChaosProjectileScript : ProjectileScriptGameConfiguration
 {
     public override string DamageRollExpression => "h";

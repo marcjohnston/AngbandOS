@@ -8,7 +8,6 @@
 using AngbandOS.GamePacks.Cthangband;
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class RerollHitPointsWizardCommand : WizardCommandGameConfiguration
 {
     public override char KeyChar => 'h';

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a widget that displays blank for the tracked monster health.  This widget is rendered when the player is not tracking a monster.
 /// </summary>
-[Serializable]
 public class NoTrackedMonsterHealthLabelWidget : LabelWidgetGameConfiguration
 {
     public override int X => 0;

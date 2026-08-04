@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Map the local area.
 /// </summary>
-[Serializable]
 public class MapLightActivation : ActivationGameConfiguration
 {
     

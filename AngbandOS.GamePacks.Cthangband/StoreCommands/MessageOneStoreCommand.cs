@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Show the previous message
 /// </summary>
-[Serializable]
 public class MessageOneStoreCommand : StoreCommandGameConfiguration
 {
     public override char KeyChar => 'O';

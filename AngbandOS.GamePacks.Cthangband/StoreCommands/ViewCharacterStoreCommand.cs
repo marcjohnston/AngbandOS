@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// View the character sheet
 /// </summary>
-[Serializable]
 public class ViewCharacterStoreCommand : StoreCommandGameConfiguration
 {
     public override char KeyChar => 'C';

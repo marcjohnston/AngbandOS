@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Paralysis5P1d10TimerScript : TimerScriptGameConfiguration
 {
     public override string? PreMessage => "A strange white mist surrounds you!";

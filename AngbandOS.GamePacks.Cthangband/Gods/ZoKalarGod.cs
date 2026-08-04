@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ZoKalarGod : GodGameConfiguration
 {
     public override string LongName => "Zo-Kalar, god of birth and death";

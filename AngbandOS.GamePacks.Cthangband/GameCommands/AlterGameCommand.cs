@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Alter a tile in a 'sensibe' way given the tile type
 /// </summary>
 /// <exception cref="ArgumentOutOfRangeException"> </exception>
-[Serializable]
 public class AlterGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '+';

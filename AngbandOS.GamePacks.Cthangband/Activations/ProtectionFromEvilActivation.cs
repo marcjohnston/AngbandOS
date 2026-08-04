@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Give us protection from evil.
 /// </summary>
-[Serializable]
 public class ProtectionFromEvilActivation : ActivationGameConfiguration
 {
     

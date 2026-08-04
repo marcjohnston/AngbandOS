@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class KickAttack : AttackGameConfiguration
 {
     public override string MonsterAction => "kicks {0}";

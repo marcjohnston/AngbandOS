@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Stand still for a turn and pick up any items
 /// </summary>
-[Serializable]
 public class StayAndPickupGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => ',';

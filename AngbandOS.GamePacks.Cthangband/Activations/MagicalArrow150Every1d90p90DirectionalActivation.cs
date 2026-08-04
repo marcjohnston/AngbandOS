@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class MagicalArrow150Every1d90p90DirectionalActivation : ActivationGameConfiguration
 {
 

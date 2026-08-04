@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband
 {
-    [Serializable]
     public class SorceryRealmOutfitManifestGameConfiguration : OutfitManifestGameConfiguration
     {
         public override (string[], bool)? RealmBindingKey => (new string[] { nameof(SorceryRealm) }, true);

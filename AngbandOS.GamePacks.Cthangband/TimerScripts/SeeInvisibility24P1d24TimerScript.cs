@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class SeeInvisibility24P1d24TimerScript : TimerScriptGameConfiguration
 {
     public override string? ValueExpression => "24+1d24";

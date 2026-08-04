@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Drain up to 50 life from an opponent, and give it to the player.
 /// </summary>
-[Serializable]
 public class Vampire50Every400DirectionalActivation : ActivationGameConfiguration
 {
     

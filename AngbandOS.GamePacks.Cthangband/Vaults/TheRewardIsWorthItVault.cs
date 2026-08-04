@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class TheRewardIsWorthItVault : VaultGameConfiguration
 {
     public override string Name => "The Reward is Worth It";

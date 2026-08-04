@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class NatureRealmHighMageCharacterClass : RealmCharacterClassGameConfiguration
 {
     public override string CharacterClassBindingKey => nameof(CharacterClassesEnum.HighMageCharacterClass);

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Place an ElderSign.
 /// </summary>
-[Serializable]
 public class RuneProtActivation : ActivationGameConfiguration
 {
     

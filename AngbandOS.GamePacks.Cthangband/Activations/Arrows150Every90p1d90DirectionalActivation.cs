@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot an arrow that does 150 damage.
 /// </summary>
-[Serializable]
 public class Arrows150Every90p1d90DirectionalActivation : ActivationGameConfiguration
 {
     

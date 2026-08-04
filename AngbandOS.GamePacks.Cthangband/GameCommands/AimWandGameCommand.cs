@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Aim a wand from your inventory
 /// </summary>
 /// <param name="itemIndex"> The inventory index of the wand, or -999 to select one </param>
-[Serializable]
 public class AimWandGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'a';

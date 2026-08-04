@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LockedDoor1Tile : TileGameConfiguration
 {
     public override string SymbolName => nameof(PlusSignSymbol);

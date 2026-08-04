@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class PurchaseStoreCommand : StoreCommandGameConfiguration
 {
     public override char KeyChar => 'p';

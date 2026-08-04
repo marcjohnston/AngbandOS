@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class WrinkledMushroomItemFlavor : ItemFlavorGameConfiguration
 {
     public override string SymbolName => nameof(CommaSymbol);

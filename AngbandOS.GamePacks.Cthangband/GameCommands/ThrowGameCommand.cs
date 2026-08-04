@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Throw an item
 /// </summary>
-[Serializable]
 public class ThrowGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'v';

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Drain up to 100 life from an opponent.  This particular drain life is unique, in that, if the power doesn't affect a monster, it doesn't need to be recharged.
 /// </summary>
-[Serializable]
 public class DrainLife90Every70DirectionalActivation : ActivationGameConfiguration
 {
     

@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BleedingM10TimerScript : TimerScriptGameConfiguration
 {
     public override string? ValueExpression => "-10";

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Select a target in advance for attacks. Note that this does not cost any in-game time
 /// </summary>
-[Serializable]
 public class TargetGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '*';

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for items that can be recharged, regardless of their value.  Wands, staffs and rods can be recharged.
 /// </summary>
-[Serializable]
 public class CanBeRechargedItemFilter : ItemFilterGameConfiguration
 {
     public override bool? CanBeRecharged => true;

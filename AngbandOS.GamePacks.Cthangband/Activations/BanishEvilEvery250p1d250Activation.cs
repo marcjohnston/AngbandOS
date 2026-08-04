@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Banish evil creatures.
 /// </summary>
-[Serializable]
 public class BanishEvilEvery250p1d250Activation : ActivationGameConfiguration
 {
     

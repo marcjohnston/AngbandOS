@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Give us temporary haste.
 /// </summary>
-[Serializable]
 public class Speed20p1d20Every250Activation : ActivationGameConfiguration
 {
     

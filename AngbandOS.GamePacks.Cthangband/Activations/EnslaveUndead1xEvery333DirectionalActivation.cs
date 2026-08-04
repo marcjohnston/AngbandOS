@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Charm an undead.
 /// </summary>
-[Serializable]
 public class EnslaveUndead1xEvery333DirectionalActivation : ActivationGameConfiguration
 {
     

@@ -1,7 +1,6 @@
 
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ChosenOneCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]

@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class GreatOneRaceTravelPowerRacialPowerTest : RacialPowerTestGameConfiguration
 {
     public override int MinLevel => 30;

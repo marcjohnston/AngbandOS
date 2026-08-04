@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Bless us and make us a superhero.
 /// </summary>
-[Serializable]
 public class Berserk50p1d50Every100p1d100Activation : ActivationGameConfiguration
 {
     

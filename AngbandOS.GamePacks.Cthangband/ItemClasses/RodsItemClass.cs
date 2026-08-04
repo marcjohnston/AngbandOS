@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class RodsItemClass : ItemClassGameConfiguration
 {
     public override string Name => "Rod";

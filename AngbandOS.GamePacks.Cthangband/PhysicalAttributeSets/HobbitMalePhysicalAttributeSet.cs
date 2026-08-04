@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class HobbitMalePhysicalAttributeSet : PhysicalAttributeSetGameConfiguration
 {
     public override int BaseHeight => 36;

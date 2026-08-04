@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Give us temporary etherealness.
 /// </summary>
-[Serializable]
 public class WraithActivation : ActivationGameConfiguration
 {
     

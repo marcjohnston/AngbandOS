@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Summon animals.
 /// </summary>
-[Serializable]
 public class SummonFriendlyAnimalActivation : ActivationGameConfiguration
 {
 

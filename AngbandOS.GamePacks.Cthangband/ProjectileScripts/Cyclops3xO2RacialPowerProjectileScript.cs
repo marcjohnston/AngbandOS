@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Cyclops3xO2RacialPowerProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;

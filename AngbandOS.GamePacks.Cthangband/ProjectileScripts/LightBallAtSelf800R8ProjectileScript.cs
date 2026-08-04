@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LightBallAtSelf800R8ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override string DamageRollExpression => "800";

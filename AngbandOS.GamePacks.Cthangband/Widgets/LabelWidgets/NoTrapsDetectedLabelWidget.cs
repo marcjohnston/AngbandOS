@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a widget that renders the trap detection as blank.  This widget is a child for the false branch of the <see cref="TrapDetectionConditionalWidget"/> widget.
 /// </summary>
-[Serializable]
 public class NoTrapsDetectedLabelWidget : LabelWidgetGameConfiguration
 {
     public override int X => 53;

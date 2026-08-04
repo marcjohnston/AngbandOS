@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class DetectObjectsFolkSpell : SpellGameConfiguration
 {
     public override string Name => "Detect Objects";

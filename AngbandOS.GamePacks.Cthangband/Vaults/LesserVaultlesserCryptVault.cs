@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LesserVaultlesserCryptVault : VaultGameConfiguration
 {
     public override string Name => "Lesser vault (lesser crypt)";

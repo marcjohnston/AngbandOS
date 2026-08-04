@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class TelepathyResetTimerScript : TimerScriptGameConfiguration
 {
     public override string? ValueExpression => null;

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class SummonDemonTarotSpell : SpellGameConfiguration
 {
     public override string Name => "Summon Demon";

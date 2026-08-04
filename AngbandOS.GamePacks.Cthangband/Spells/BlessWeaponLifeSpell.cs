@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class BlessWeaponLifeSpell : SpellGameConfiguration
 {
     public override string Name => "Bless Weapon";

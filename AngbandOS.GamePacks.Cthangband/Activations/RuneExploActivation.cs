@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Place a Yellow Sign.
 /// </summary>
-[Serializable]
 public class RuneExploActivation : ActivationGameConfiguration
 {
     

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Equip an item
 /// </summary>
-[Serializable]
 public class EquipGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'e';

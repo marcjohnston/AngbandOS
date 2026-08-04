@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for wands regardless of their value.
 /// </summary>
-[Serializable]
 public class CanBeAimedItemFilter : ItemFilterGameConfiguration
 {
     public override bool? CanBeAimed => true;
