@@ -227,6 +227,16 @@ internal class RestoreGameState
         return tupleList.ToArray();
     }
 
+    public (T1, T2)[]? GetTuplesOrDefault<T1, T2, T3>(Func<RestoreGameState, T1> getItem1, Func<RestoreGameState, T2> getItem2)
+    {
+        if (GameStateBag is NullValueGameStateBag)
+        {
+            return default;
+        }
+
+        return GetTuples<T1, T2>(getItem1, getItem2);
+    }
+
     public (T1, T2, T3) GetTuple<T1, T2, T3>(Func<RestoreGameState, T1> getItem1, Func<RestoreGameState, T2> getItem2, Func<RestoreGameState, T3> getItem3)
     {
         RestoreGameState item1RestoreGameState = GetByKey("Item1");
