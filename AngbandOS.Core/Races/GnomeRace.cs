@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class GnomeRace : Race
 {
     private GnomeRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(GnomeRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(GnomeRaceItemEnhancement)) };
     public override string Title => "Gnome";
     public override int UseDevice => 12;
     public override int SavingThrow => 12;

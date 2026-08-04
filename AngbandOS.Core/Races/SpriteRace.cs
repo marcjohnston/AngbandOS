@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class SpriteRace : Race
 {
     private SpriteRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(SpriteRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(SpriteRaceItemEnhancement)) };
     public override string Title => "Sprite";
     public override int UseDevice => 10;
     public override int SavingThrow => 10;

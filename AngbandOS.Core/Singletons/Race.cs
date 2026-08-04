@@ -15,18 +15,55 @@ internal abstract class Race : IGetKey, IGameSerialize
     }
 
     /// <summary>
-    /// Generates a new attribute set during the character birth process.
+    /// Refreshed the read-only attribute set.  Performed by the <see cref="UpdateBonusesFlaggedAction"/>.
+    /// </summary>
+    /// <returns></returns>
+    public void RefreshSquashedAttributeSet()
+    {
+        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
+        if (MinimumExperienceLevelAndEnhancementAttributeSets is not null)
+        {
+            foreach ((int minimumExperienceLevel, ReadOnlyAttributeSet attributeSet) in MinimumExperienceLevelAndEnhancementAttributeSets)
+            {
+                if (Game.ExperienceLevel.IntValue >= minimumExperienceLevel)
+                {
+                    effectiveAttributeSet.MergeAttributeSet(attributeSet);
+                }
+            }
+        }
+        AttributeSet = effectiveAttributeSet.ToReadOnly();
+    }
+
+    /// <summary>
+    /// Generates the <see cref="ReadOnlyAttributeSet"/> for each enhancement.  This process should only be done during birth.  The enhancements may have random
+    /// configuration embedded and this generate fixes those random values to be used throughout the game.
     /// </summary>
     public void RegenerateAttributeSets()
     {
-        AttributeSet = Enhancement.GenerateAttributeSet();
+        if (MinimumExperienceLevelAndEnhancementTuples is null)
+        {
+            MinimumExperienceLevelAndEnhancementAttributeSets = null;
+        }
+        else
+        {
+            List<(int, ReadOnlyAttributeSet)> tupleList = new List<(int, ReadOnlyAttributeSet)>();
+            foreach ((int minimumExperienceLevel, ItemEnhancement enhancement) in MinimumExperienceLevelAndEnhancementTuples)
+            {
+                tupleList.Add((minimumExperienceLevel, enhancement.GenerateAttributeSet()));
+            }
+            MinimumExperienceLevelAndEnhancementAttributeSets = tupleList.ToArray();
+        }
+        RefreshSquashedAttributeSet();
     }
 
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet)))
-        );
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
+            (nameof(MinimumExperienceLevelAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, ReadOnlyAttributeSet>(MinimumExperienceLevelAndEnhancementAttributeSets,
+                _minimumExperienceLevel => saveGameState.CreateGameStateBag(_minimumExperienceLevel),
+                _attributeSet => saveGameState.CreateDerivedGameStateBag(_attributeSet, typeof(ReadOnlyAttributeSet))
+        )));
     }
 
     public string Key => GetType().Name;
@@ -36,12 +73,15 @@ internal abstract class Race : IGetKey, IGameSerialize
     {
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
-        Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
         ChanceOfSanityBlastImmunityExpression = Game.ParseNumericExpression(ChanceOfSanityBlastImmunityExpressionText);
+        MinimumExperienceLevelAndEnhancementTuples = MinimumExperienceLevelAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
 
         if (restoreGameState is not null)
         {
-            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
+            MinimumExperienceLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, ReadOnlyAttributeSet>(
+                _restoreGameState => _restoreGameState.GetInt(),
+                _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
         }
     }
 
@@ -50,8 +90,16 @@ internal abstract class Race : IGetKey, IGameSerialize
     /// </summary>
     public ReadOnlyAttributeSet AttributeSet { get; private set; }
 
-    protected abstract string EnhancementBindingKey { get; }
-    public ItemEnhancement Enhancement { get; private set; }
+    protected virtual (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => null;
+    public (int, ItemEnhancement)[]? MinimumExperienceLevelAndEnhancementTuples { get; private set; }
+
+    /// <summary>
+    /// Returns the current read-only set of generated enhancements.  These enhancements are generated at birth via the <see cref="RegenerateAttributeSets"/> method and do not change.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public (int, ReadOnlyAttributeSet)[]? MinimumExperienceLevelAndEnhancementAttributeSets { get; private set; } = null;
 
     public abstract int AgeRange { get; }
     public abstract int BaseAge { get; }

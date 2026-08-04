@@ -21,15 +21,15 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     }
     private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
     {
-        // Squash and refresh the character class attributes.
-        Game.CharacterClass.RefreshSquashedAttributeSet();
 
         EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
 
-        // Apply the race enhancements.
+        // Squash, refresh and apply the race attributes.
+        Game.Race.RefreshSquashedAttributeSet();
         effectiveAttributeSet.MergeAttributeSet(Game.Race.AttributeSet);
 
-        // Apply the character class enhancements.
+        // Squash, refresh and apply the character class attributes.
+        Game.CharacterClass.RefreshSquashedAttributeSet();
         effectiveAttributeSet.MergeAttributeSet(Game.CharacterClass.AttributeSet);
 
         // Apply all of the mutations that the player has.

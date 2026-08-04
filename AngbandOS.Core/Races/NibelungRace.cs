@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class NibelungRace : Race
 {
     private NibelungRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(NibelungRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(NibelungRaceItemEnhancement)) };
     public override string Title => "Nibelung";
     public override int UseDevice => 5;
     public override int SavingThrow => 10;
