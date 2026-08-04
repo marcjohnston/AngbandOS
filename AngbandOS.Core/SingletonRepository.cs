@@ -274,8 +274,8 @@ internal sealed class SingletonRepository : IGameSerialize
         // Base preload the Attributes and then cache them.
         RegisterIndex<Attribute>();
         RegisterIndex<BoolAttribute>();
-        RegisterIndex<OrAttribute>();
-        RegisterIndex<SumAttribute>();
+        RegisterIndex<BitwiseOrAttribute>();
+        RegisterIndex<SummationAttribute>();
 
         // Not configurable yet
         RegisterIndex<Ability>();
@@ -325,8 +325,8 @@ internal sealed class SingletonRepository : IGameSerialize
 #endif
 
         // Preload
-        LoadFromConfiguration<OrAttribute, OrAttributeGameConfiguration>(gameConfiguration.OrAttributes, restoreGameState);
-        LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes, restoreGameState);
+        LoadFromConfiguration<BitwiseOrAttribute, BitwiseOrAttributeGameConfiguration>(gameConfiguration.OrAttributes, restoreGameState);
+        LoadFromConfiguration<SummationAttribute, SummationAttributeGameConfiguration>(gameConfiguration.SumAttributes, restoreGameState);
         LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes, restoreGameState);
 
         // We need to cache the attributes because other singleton require them to be available during the load phase.

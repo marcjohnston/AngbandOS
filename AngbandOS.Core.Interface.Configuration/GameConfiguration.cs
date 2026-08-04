@@ -210,8 +210,8 @@ public class GameConfiguration
         gameConfiguration.ScriptMonsterSpells = LoadFromAssembly<ScriptMonsterSpellGameConfiguration>(assembly);
         gameConfiguration.SummonMonsterSpells = LoadFromAssembly<SummonMonsterSpellGameConfiguration>(assembly);
 
-        gameConfiguration.OrAttributes = LoadFromAssembly<OrAttributeGameConfiguration>(assembly);
-        gameConfiguration.SumAttributes = LoadFromAssembly<SumAttributeGameConfiguration>(assembly);
+        gameConfiguration.OrAttributes = LoadFromAssembly<BitwiseOrAttributeGameConfiguration>(assembly);
+        gameConfiguration.SumAttributes = LoadFromAssembly<SummationAttributeGameConfiguration>(assembly);
         gameConfiguration.ColorEnumAttributes = LoadFromAssembly<ColorEnumAttributeGameConfiguration>(assembly);
         gameConfiguration.BoolAttributes = LoadFromAssembly<BoolAttributeGameConfiguration>(assembly);
         gameConfiguration.ActivationAttributes = LoadFromAssembly<ActivationNullableReferenceAttributeGameConfiguration>(assembly);
@@ -315,8 +315,8 @@ public class GameConfiguration
     public virtual AttackGameConfiguration[]? Attacks { get; set; } = null;
     public virtual AttributeFilterGameConfiguration[]? AttributeFilters { get; set; } = null;
 
-    public virtual OrAttributeGameConfiguration[]? OrAttributes { get; set; } = null;
-    public virtual SumAttributeGameConfiguration[]? SumAttributes { get; set; } = null;
+    public virtual BitwiseOrAttributeGameConfiguration[]? OrAttributes { get; set; } = null;
+    public virtual SummationAttributeGameConfiguration[]? SumAttributes { get; set; } = null;
     public virtual ColorEnumAttributeGameConfiguration[]? ColorEnumAttributes { get; set; } = null;
     public virtual BoolAttributeGameConfiguration[]? BoolAttributes { get; set; } = null;
     public virtual ActivationNullableReferenceAttributeGameConfiguration[]? ActivationAttributes { get; set; } = null;
