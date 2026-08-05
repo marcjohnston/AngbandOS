@@ -117,10 +117,10 @@ internal partial class Game : IGameSerialize
             ("bools3", saveGameState.CreateGameStateBag(HasColdImmunity, HasColdResistance, HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain)),
             ("bools4", saveGameState.CreateGameStateBag(HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife)),
             ("bools5", saveGameState.CreateGameStateBag(HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon)),
-            ("bools6", saveGameState.CreateGameStateBag(HasRandomTeleport, HasReflection, HasRegeneration, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion)),
+            ("bools6", saveGameState.CreateGameStateBag(HasRandomTeleport, HasReflection, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion)),
             ("bools7", saveGameState.CreateGameStateBag(HasSoundResistance, HasSustainCharisma, HasSustainConstitution, HasSustainDexterity, HasSustainIntelligence, HasSustainStrength, HasSustainWisdom, HasTelepathy)),
             ("bools8", saveGameState.CreateGameStateBag(HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance)),
-            ("bools9", saveGameState.CreateGameStateBag(Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, _findBreakLeft, _findBreakRight)),
+            ("bools9", saveGameState.CreateGameStateBag(ResFear, ResTime, SustainAll, Vulnerable, _findBreakLeft, _findBreakRight)),
             ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment)),
             ("bools11", saveGameState.CreateGameStateBag(ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters)),
 
@@ -436,10 +436,10 @@ internal partial class Game : IGameSerialize
             (HasColdImmunity, HasColdResistance, HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain) = restoreGameState.GetByKey("bools3").Get8Bools();
             (HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife) = restoreGameState.GetByKey("bools4").Get8Bools();
             (HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon) = restoreGameState.GetByKey("bools5").Get8Bools();
-            (HasRandomTeleport, HasReflection, HasRegeneration, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion) = restoreGameState.GetByKey("bools6").Get8Bools();
+            (HasRandomTeleport, HasReflection, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion) = restoreGameState.GetByKey("bools6").Get7Bools();
             (HasSoundResistance, HasSustainCharisma, HasSustainConstitution, HasSustainDexterity, HasSustainIntelligence, HasSustainStrength, HasSustainWisdom, HasTelepathy) = restoreGameState.GetByKey("bools7").Get8Bools();
             (HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance) = restoreGameState.GetByKey("bools8").Get8Bools();
-            (Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, _findBreakLeft, _findBreakRight) = restoreGameState.GetByKey("bools9").Get8Bools();
+            (ResFear, ResTime, SustainAll, Vulnerable, _findBreakLeft, _findBreakRight) = restoreGameState.GetByKey("bools9").Get6Bools();
             (_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment) = restoreGameState.GetByKey("bools10").Get8Bools();
             (ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
 

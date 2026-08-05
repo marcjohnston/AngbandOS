@@ -63,7 +63,6 @@ internal class HalfTrollRace : Race
         Game.HasSustainStrength = true;
         if (Game.ExperienceLevel.IntValue > 14)
         {
-            Game.HasRegeneration = true;
             Game.HasSlowDigestion = true;
         }
     }

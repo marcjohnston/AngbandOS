@@ -61,6 +61,5 @@ internal class GreatOneRace : Race
     public override void CalcBonuses()
     {
         Game.HasSustainConstitution = true;
-        Game.HasRegeneration = true;
     }
 }

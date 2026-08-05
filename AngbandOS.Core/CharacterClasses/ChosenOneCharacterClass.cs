@@ -167,10 +167,6 @@ internal class ChosenOneCharacterClass : CharacterClass
         {
             Game.HasDisenchantResistance = true;
         }
-        if (Game.ExperienceLevel.IntValue >= 38)
-        {
-            Game.HasRegeneration = true;
-        }
         if (Game.ExperienceLevel.IntValue >= 40)
         {
             Game.HasSustainIntelligence = true;

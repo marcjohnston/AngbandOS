@@ -90,7 +90,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasSeeInvisibility = false;
         Game.HasFreeAction = false;
         Game.HasSlowDigestion = false;
-        Game.HasRegeneration = false;
         Game.HasFeatherFall = false;
         Game.HasHoldLife = false;
         Game.HasTelepathy = false;
@@ -159,7 +158,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).Bonus += Game.ConstitutionBonus;
         Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Bonus += Game.CharismaBonus;
         Game.Speed.IntValue += Game.SpeedBonus;
-        Game.HasRegeneration |= Game.Regen;
         Game.SkillPerception += Game.SearchBonus;
         Game.SkillSearching += Game.SearchBonus;
         Game.InfravisionRange += Game.MutationInfravisionBonus;
@@ -264,10 +262,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Get())
                     {
                         Game.HasSlowDigestion = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(RegenAttribute)).Get())
-                    {
-                        Game.HasRegeneration = true;
                     }
                     if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Get())
                     {
@@ -452,10 +446,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.BonusArmorClass += bareArmorBonus;
                 }
             }
-        }
-        if (Game.SuppressRegen)
-        {
-            Game.HasRegeneration = false;
         }
         if (Game.HasFireSheath)
         {

@@ -62,7 +62,6 @@ internal partial class Game
     public bool HasQuakeWeapon;
     public bool HasRandomTeleport;
     public bool HasReflection;
-    public bool HasRegeneration;
     public bool HasRestrictingArmor;
     public bool HasRestrictingGloves;
     public bool HasSeeInvisibility;
@@ -105,18 +104,18 @@ internal partial class Game
     public int MutationInfravisionBonus;
     public int IntelligenceBonus;
     public bool MagicResistance;
-    public bool Regen;
     public bool ResFear;
     public bool ResTime;
     public int SearchBonus;
     public int SpeedBonus;
     public int StealthBonus;
     public int StrengthBonus;
-    public bool SuppressRegen;
     public bool SustainAll;
     public bool Vulnerable;
     public int WisdomBonus;
     #endregion
+
+    public bool HasRegeneration => AttributeSet.GetBool(nameof(RegenAttribute)) && !AttributeSet.GetBool(nameof(SuppressRegenAttribute)); // TODO: This can be converted to an expression
 
     public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable
     {

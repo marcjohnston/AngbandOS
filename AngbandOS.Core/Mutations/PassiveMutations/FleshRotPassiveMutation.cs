@@ -19,13 +19,11 @@ internal class FleshRotPassiveMutation : Mutation
     {
         Game.ConstitutionBonus -= 2;
         Game.CharismaBonus -= 1;
-        Game.SuppressRegen = true;
     }
 
     public override void OnLose()
     {
         Game.ConstitutionBonus += 2;
         Game.CharismaBonus += 1;
-        Game.SuppressRegen = false;
     }
 }
