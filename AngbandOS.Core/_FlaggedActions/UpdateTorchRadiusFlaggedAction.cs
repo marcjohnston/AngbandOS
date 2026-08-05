@@ -50,9 +50,9 @@ internal class UpdateTorchRadiusFlaggedAction : FlaggedAction
         }
 
         // Check to see if the player has the ability to glow in the dark.
-        if (Game.LightLevel < Game.GlowInTheDarkRadius)
+        if (Game.LightLevel < Game.GlowRadius)
         {
-            Game.LightLevel = Game.GlowInTheDarkRadius;
+            Game.LightLevel = Game.GlowRadius;
         }
 
         if (OldLightLevel != Game.LightLevel)

@@ -87,7 +87,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasSlowDigestion = false;
         Game.HasHoldLife = false;
         Game.HasTelepathy = false;
-        Game.GlowInTheDarkRadius = 0;
         Game.HasLightningResistance = false;
         Game.HasPoisonResistance = false;
         Game.HasSoundResistance = false;
@@ -133,10 +132,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillSearching += Game.SearchBonus;
         Game.InfravisionRange += Game.MutationInfravisionBonus;
         Game.HasElectricitySheath |= Game.ElecHit;
-        if (Game.GlowInTheDarkRadius == 0 && Game.HasFireSheath)
-        {
-            Game.GlowInTheDarkRadius = 1;
-        }
         Game.BonusArmorClass += Game.GenomeArmorClassBonus;
         Game.HasTimeResistance |= Game.ResTime;
         Game.HasTelepathy |= Game.Esp;
@@ -276,10 +271,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.BonusArmorClass += bareArmorBonus;
                 }
             }
-        }
-        if (Game.HasFireSheath)
-        {
-            Game.GlowInTheDarkRadius = 1;
         }
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {

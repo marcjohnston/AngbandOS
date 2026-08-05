@@ -106,7 +106,6 @@ internal partial class Game : IGameSerialize
             ("bools11", saveGameState.CreateGameStateBag(ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters)),
 
             (nameof(_mainSequence), saveGameState.CreateDerivedGameStateBag(_mainSequence, typeof(GameRandom))),
-            (nameof(GlowInTheDarkRadius), saveGameState.CreateGameStateBag(GlowInTheDarkRadius)),
             (nameof(Height), saveGameState.CreateGameStateBag(Height)),
             (nameof(HitDie), saveGameState.CreateGameStateBag(HitDie)),
             (nameof(InfravisionRange), saveGameState.CreateGameStateBag(InfravisionRange)),
@@ -423,7 +422,6 @@ internal partial class Game : IGameSerialize
             (ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
 
             _mainSequence = restoreGameState.GetByKey(nameof(_mainSequence)).GetDerivedReference<GameRandom>(_restoreGameState => new GameRandom(_restoreGameState));
-            GlowInTheDarkRadius = restoreGameState.GetByKey(nameof(GlowInTheDarkRadius)).GetInt();
             Height = restoreGameState.GetByKey(nameof(Height)).GetInt();
             HitDie = restoreGameState.GetByKey(nameof(HitDie)).GetInt();
             InfravisionRange = restoreGameState.GetByKey(nameof(InfravisionRange)).GetInt();

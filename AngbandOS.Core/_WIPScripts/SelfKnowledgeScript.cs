@@ -180,7 +180,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         {
             info[infoCount++] = "You cannot teleport.";
         }
-        if (Game.GlowInTheDarkRadius > 0)
+        if (Game.CharacterClass.AttributeSet.GetInt(nameof(GlowRadiusAttribute)) > 0 || Game.Race.AttributeSet.GetInt(nameof(GlowRadiusAttribute)) > 0)
         {
             info[infoCount++] = "Your skin glows in the dark.";
         }

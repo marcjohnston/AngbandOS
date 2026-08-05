@@ -24,9 +24,9 @@ internal partial class Game
     public bool HasConfusingTouch;
 
     /// <summary>
-    /// Returns true, if the players race glows in the dark.  Spectres, sprites and vampires glow.
+    /// Returns the radius for which the player glows.  Spectres, sprites and vampires glow.
     /// </summary>
-    public int GlowInTheDarkRadius;
+    public int GlowRadius => AttributeSet.GetInt(nameof(GlowRadiusAttribute)) + (AttributeSet.GetBool(nameof(ShFireAttribute)) ? 1 : 0);
 
     public bool HasHoldLife;
     public bool HasLightningImmunity;

@@ -57,7 +57,6 @@ internal class VampireRace : Race
         Game.HasHoldLife = true;
         Game.HasNetherResistance = true;
         Game.HasPoisonResistance = true;
-        Game.GlowInTheDarkRadius = 1;
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
 

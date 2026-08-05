@@ -94,7 +94,6 @@ internal class ChosenOneCharacterClass : CharacterClass
 
     public override void CalcBonuses()
     {
-        Game.GlowInTheDarkRadius = 1;
         if (Game.ExperienceLevel.IntValue >= 10)
         {
             Game.HasSeeInvisibility = true;
