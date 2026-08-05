@@ -61,6 +61,56 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     {
         Game.AttributeSet = BuildEffectiveAttributeSetForPlayer().ToReadOnly(); // TODO: This isn't being used yet.
 
+        Game.HasAggravation = Game.AttributeSet.GetBool(nameof(AggravateAttribute));
+        Game.HasRegeneration = Game.AttributeSet.GetBool(nameof(RegenAttribute)) && !Game.AttributeSet.GetBool(nameof(SuppressRegenAttribute));
+        Game.HasAcidImmunity = Game.AttributeSet.GetBool(nameof(ImAcidAttribute));
+        Game.GlowRadius = Game.AttributeSet.GetInt(nameof(GlowRadiusAttribute)) + (Game.AttributeSet.GetBool(nameof(ShFireAttribute)) ? 1 : 0);
+        Game.HasAcidResistance = Game.AttributeSet.GetBool(nameof(ResAcidAttribute)) || Game.AcidResistanceTimer.Value > 0;
+        Game.HasAntiMagic = Game.AttributeSet.GetBool(nameof(NoMagicAttribute));
+        Game.HasSustainCharisma = Game.AttributeSet.GetBool(nameof(SustChaAttribute));
+        Game.HasSustainConstitution = Game.AttributeSet.GetBool(nameof(SustConAttribute));
+        Game.HasSustainDexterity = Game.AttributeSet.GetBool(nameof(SustDexAttribute));
+        Game.HasSustainIntelligence = Game.AttributeSet.GetBool(nameof(SustIntAttribute));
+        Game.HasSustainStrength = Game.AttributeSet.GetBool(nameof(SustStrAttribute));
+        Game.HasSustainWisdom = Game.AttributeSet.GetBool(nameof(SustWisAttribute));
+        Game.HasAntiTeleport = Game.AttributeSet.GetBool(nameof(NoTeleAttribute));
+        Game.HasAntiTheft = Game.AttributeSet.GetBool(nameof(AntiTheftAttribute));
+        Game.HasBlessedBlade = Game.AttributeSet.GetBool(nameof(BlessedAttribute));
+        Game.HasBlindnessResistance = Game.AttributeSet.GetBool(nameof(ResBlindAttribute));
+        Game.HasChaosResistance = Game.AttributeSet.GetBool(nameof(ResChaosAttribute));
+        Game.HasColdImmunity = Game.AttributeSet.GetBool(nameof(ImColdAttribute));
+        Game.HasColdResistance = Game.AttributeSet.GetBool(nameof(ResColdAttribute));
+        Game.HasConfusionResistance = Game.AttributeSet.GetBool(nameof(ResConfAttribute));
+        Game.HasDarkResistance = Game.AttributeSet.GetBool(nameof(ResDarkAttribute));
+        Game.HasDisenchantResistance = Game.AttributeSet.GetBool(nameof(ResDisenAttribute));
+        Game.HasElementalVulnerability = Game.AttributeSet.GetBool(nameof(ElementalVulnerabilityAttribute));
+        Game.HasExperienceDrain = Game.AttributeSet.GetBool(nameof(DrainExpAttribute));
+        Game.HasExtraMight = Game.AttributeSet.GetBool(nameof(XtraMightAttribute));
+        Game.HasFearResistance = Game.AttributeSet.GetBool(nameof(ResFearAttribute)) || Game.HeroismTimer.Value > 0 || Game.SuperheroismTimer.Value > 0;
+        Game.HasFeatherFall = Game.AttributeSet.GetBool(nameof(FeatherAttribute));
+        Game.HasFireImmunity = Game.AttributeSet.GetBool(nameof(ImFireAttribute));
+        Game.HasFireResistance = Game.AttributeSet.GetBool(nameof(ResFireAttribute)) || Game.FireResistanceTimer.Value > 0 || Game.HasFireImmunity;
+        Game.HasFireSheath = Game.AttributeSet.GetBool(nameof(ShFireAttribute));
+        Game.HasFreeAction = Game.AttributeSet.GetBool(nameof(FreeActAttribute));
+        Game.HasHoldLife = Game.AttributeSet.GetBool(nameof(HoldLifeAttribute));
+        Game.HasLightningImmunity = Game.AttributeSet.GetBool(nameof(ImElecAttribute));
+        Game.HasLightningResistance = Game.AttributeSet.GetBool(nameof(ResElecAttribute)) || Game.LightningResistanceTimer.Value != 0;
+        Game.HasElectricitySheath = Game.AttributeSet.GetBool(nameof(ShElecAttribute));
+        Game.HasLightResistance = Game.AttributeSet.GetBool(nameof(ResLightAttribute));
+        Game.HasNetherResistance = Game.AttributeSet.GetBool(nameof(ResNetherAttribute));
+        Game.HasNexusResistance = Game.AttributeSet.GetBool(nameof(ResNexusAttribute));
+        Game.HasPoisonResistance = Game.AttributeSet.GetBool(nameof(ResPoisAttribute));
+        Game.HasQuakeWeapon = Game.AttributeSet.GetBool(nameof(QuakeAttribute));
+        Game.HasRandomTeleport = Game.AttributeSet.GetBool(nameof(TeleportAttribute));
+        Game.HasReflection = Game.AttributeSet.GetBool(nameof(ReflectAttribute)) || Game.EtherealnessTimer.Value > 0;
+        Game.HasSeeInvisibility = Game.AttributeSet.GetBool(nameof(SeeInvisAttribute));
+        Game.HasShardResistance = Game.AttributeSet.GetBool(nameof(ResShardsAttribute));
+        Game.HasSlowDigestion = Game.AttributeSet.GetBool(nameof(SlowDigestAttribute));
+        Game.HasSoundResistance = Game.AttributeSet.GetBool(nameof(ResSoundAttribute));
+        Game.HasTelepathy = Game.AttributeSet.GetBool(nameof(TelepathyAttribute));
+        Game.HasTimeResistance = Game.AttributeSet.GetBool(nameof(ResTimeAttribute));
+        Game.InfraVisionRange = Game.AttributeSet.GetInt(nameof(InfraVisionAttribute)) + (Game.InfravisionTimer.Value > 0 ? 1 : 0);
+
         List<Bonuses> bonusesToMerge = new List<Bonuses>();
         int attackBonus = 0;
         int damageBonus = 0;

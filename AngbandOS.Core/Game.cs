@@ -46,7 +46,73 @@ internal partial class Game : IGameSerialize
     public bool IsNewYear;
     #endregion
 
-    #region Non-State Properties - Properties that are post-load initialized and based on the Game.AttributeSet
+    #region Non-State Properties - Cached properties that are post-load initialized and properties that are computed based on the Game.AttributeSet
+    /// <summary>
+    /// Returns true, if the player has aggravation.  Aggravation is a curse that causes monsters near the player to always be aware of the player and always attack the player.
+    /// </summary>
+    public bool HasAggravation;
+
+    /// <summary>
+    /// Returns true, if the player has regeneration.  Regeneration allows the player to heal faster than normal.  If the player has the SuppressRegenAttribute, it overrides and prevents regeneration.
+    /// </summary>
+    public bool HasRegeneration;
+
+    /// <summary>
+    /// Returns true, if the player is immune to acid.
+    /// </summary>
+    public bool HasAcidImmunity;
+
+    /// <summary>
+    /// Returns the radius for which the player glows.  Spectres, sprites and vampires glow.
+    /// </summary>
+    public int GlowRadius;
+
+    public bool HasAcidResistance;
+    public bool HasAntiMagic;
+    public bool HasSustainCharisma;
+    public bool HasSustainConstitution;
+    public bool HasSustainDexterity;
+    public bool HasSustainIntelligence;
+    public bool HasSustainStrength;
+    public bool HasSustainWisdom;
+    public bool HasAntiTeleport;
+    public bool HasAntiTheft;
+    public bool HasBlessedBlade;
+    public bool HasBlindnessResistance;
+    public bool HasChaosResistance;
+    public bool HasColdImmunity;
+    public bool HasColdResistance;
+    public bool HasConfusionResistance;
+    public bool HasDarkResistance;
+    public bool HasDisenchantResistance;
+    public bool HasElementalVulnerability;
+    public bool HasExperienceDrain;
+    public bool HasExtraMight;
+    public bool HasFearResistance;
+    public bool HasFeatherFall;
+    public bool HasFireImmunity;
+    public bool HasFireResistance;
+    public bool HasFireSheath;
+    public bool HasFreeAction;
+    public bool HasHoldLife;
+    public bool HasLightningImmunity;
+    public bool HasLightningResistance;
+    public bool HasElectricitySheath;
+    public bool HasLightResistance;
+    public bool HasNetherResistance;
+    public bool HasNexusResistance;
+    public bool HasPoisonResistance;
+    public bool HasQuakeWeapon;
+    public bool HasRandomTeleport;
+    public bool HasReflection;
+    public bool HasSeeInvisibility;
+    public bool HasShardResistance;
+    public bool HasSlowDigestion;
+    public bool HasSoundResistance;
+    public bool HasTelepathy;
+    public bool HasTimeResistance;
+    public int InfraVisionRange;
+
     /// <summary>
     /// Grants temporary resistance to acid.
     /// </summary>
@@ -83,74 +149,7 @@ internal partial class Game : IGameSerialize
     public Timer StoneskinTimer { get; }
     public Timer StunTimer { get; }
     public Timer TelepathyTimer { get; }
-
-    /// <summary>
-    /// Returns true, if the player has aggravation.  Aggravation is a curse that causes monsters near the player to always be aware of the player and always attack the player.
-    /// </summary>
-    public bool HasAggravation => AttributeSet.GetBool(nameof(AggravateAttribute));
-
-    /// <summary>
-    /// Returns true, if the player has regeneration.  Regeneration allows the player to heal faster than normal.  If the player has the SuppressRegenAttribute, it overrides and prevents regeneration.
-    /// </summary>
-    public bool HasRegeneration => AttributeSet.GetBool(nameof(RegenAttribute)) && !AttributeSet.GetBool(nameof(SuppressRegenAttribute));
-
-    /// <summary>
-    /// Returns true, if the player is immune to acid.
-    /// </summary>
-    public bool HasAcidImmunity => AttributeSet.GetBool(nameof(ImAcidAttribute));
-
-    /// <summary>
-    /// Returns the radius for which the player glows.  Spectres, sprites and vampires glow.
-    /// </summary>
-    public int GlowRadius => AttributeSet.GetInt(nameof(GlowRadiusAttribute)) + (AttributeSet.GetBool(nameof(ShFireAttribute)) ? 1 : 0);
-
-    public bool HasAcidResistance => AttributeSet.GetBool(nameof(ResAcidAttribute)) || AcidResistanceTimer.Value > 0;
-    public bool HasAntiMagic => AttributeSet.GetBool(nameof(NoMagicAttribute));
-    public bool HasSustainCharisma => AttributeSet.GetBool(nameof(SustChaAttribute));
-    public bool HasSustainConstitution => AttributeSet.GetBool(nameof(SustConAttribute));
-    public bool HasSustainDexterity => AttributeSet.GetBool(nameof(SustDexAttribute));
-    public bool HasSustainIntelligence => AttributeSet.GetBool(nameof(SustIntAttribute));
-    public bool HasSustainStrength => AttributeSet.GetBool(nameof(SustStrAttribute));
-    public bool HasSustainWisdom => AttributeSet.GetBool(nameof(SustWisAttribute));
-    public bool HasAntiTeleport => AttributeSet.GetBool(nameof(NoTeleAttribute));
-    public bool HasAntiTheft => AttributeSet.GetBool(nameof(AntiTheftAttribute));
-    public bool HasBlessedBlade => AttributeSet.GetBool(nameof(BlessedAttribute));
-    public bool HasBlindnessResistance => AttributeSet.GetBool(nameof(ResBlindAttribute));
-    public bool HasChaosResistance => AttributeSet.GetBool(nameof(ResChaosAttribute));
-    public bool HasColdImmunity => AttributeSet.GetBool(nameof(ImColdAttribute));
-    public bool HasColdResistance => AttributeSet.GetBool(nameof(ResColdAttribute));
-    public bool HasConfusionResistance => AttributeSet.GetBool(nameof(ResConfAttribute));
-    public bool HasDarkResistance => AttributeSet.GetBool(nameof(ResDarkAttribute));
-    public bool HasDisenchantResistance => AttributeSet.GetBool(nameof(ResDisenAttribute));
-    public bool HasElementalVulnerability => AttributeSet.GetBool(nameof(ElementalVulnerabilityAttribute));
-    public bool HasExperienceDrain => AttributeSet.GetBool(nameof(DrainExpAttribute));
-    public bool HasExtraMight => AttributeSet.GetBool(nameof(XtraMightAttribute));
-    public bool HasFearResistance => AttributeSet.GetBool(nameof(ResFearAttribute)) || HeroismTimer.Value > 0 || SuperheroismTimer.Value > 0;
-    public bool HasFeatherFall => AttributeSet.GetBool(nameof(FeatherAttribute));
-    public bool HasFireImmunity => AttributeSet.GetBool(nameof(ImFireAttribute));
-    public bool HasFireResistance => AttributeSet.GetBool(nameof(ResFireAttribute)) || FireResistanceTimer.Value > 0 || HasFireImmunity;
-    public bool HasFireSheath => AttributeSet.GetBool(nameof(ShFireAttribute));
-    public bool HasFreeAction => AttributeSet.GetBool(nameof(FreeActAttribute));
-    public bool HasHoldLife => AttributeSet.GetBool(nameof(HoldLifeAttribute));
-    public bool HasLightningImmunity => AttributeSet.GetBool(nameof(ImElecAttribute));
-    public bool HasLightningResistance => AttributeSet.GetBool(nameof(ResElecAttribute)) || LightningResistanceTimer.Value != 0;
-    public bool HasElectricitySheath => AttributeSet.GetBool(nameof(ShElecAttribute));
-    public bool HasLightResistance => AttributeSet.GetBool(nameof(ResLightAttribute));
-    public bool HasNetherResistance => AttributeSet.GetBool(nameof(ResNetherAttribute));
-    public bool HasNexusResistance => AttributeSet.GetBool(nameof(ResNexusAttribute));
-    public bool HasPoisonResistance => AttributeSet.GetBool(nameof(ResPoisAttribute));
-    public bool HasQuakeWeapon => AttributeSet.GetBool(nameof(QuakeAttribute));
-    public bool HasRandomTeleport => AttributeSet.GetBool(nameof(TeleportAttribute));
-    public bool HasReflection => AttributeSet.GetBool(nameof(ReflectAttribute)) || EtherealnessTimer.Value > 0;
-    public bool HasSeeInvisibility => AttributeSet.GetBool(nameof(SeeInvisAttribute));
-    public bool HasShardResistance => AttributeSet.GetBool(nameof(ResShardsAttribute));
-    public bool HasSlowDigestion => AttributeSet.GetBool(nameof(SlowDigestAttribute));
-    public bool HasSoundResistance => AttributeSet.GetBool(nameof(ResSoundAttribute));
-    public bool HasTelepathy => AttributeSet.GetBool(nameof(TelepathyAttribute));
-    public bool HasTimeResistance => AttributeSet.GetBool(nameof(ResTimeAttribute));
-    public int InfraVisionRange => AttributeSet.GetInt(nameof(InfraVisionAttribute)) + (InfravisionTimer.Value > 0 ? 1 : 0);
     #endregion
-
 
     /// <summary>
     /// Returns true, if the player successfully avoids theft.  This is based on the player's dexterity and experience level, as well as whether the player has anti-theft protection.
