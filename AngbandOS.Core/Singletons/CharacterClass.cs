@@ -408,7 +408,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// Refreshed the read-only attribute set.  Performed by the <see cref="UpdateBonusesFlaggedAction"/>.
     /// </summary>
     /// <returns></returns>
-    public void RefreshSquashedAttributeSet()
+    public void RefreshAndSquashAttributeSet()
     {
         EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
         if (MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets is not null)
@@ -422,7 +422,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
             }
         }
         AttributeSet = effectiveAttributeSet.ToReadOnly();
-   }
+    }
 
     /// <summary>
     /// Generates the <see cref="ReadOnlyAttributeSet"/> for each enhancement.  This process should only be done during birth.  The enhancements may have random
@@ -443,7 +443,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
             }
             MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = tupleList.ToArray();
         }
-        RefreshSquashedAttributeSet();
+        RefreshAndSquashAttributeSet();
     }
 
     public void Bind(RestoreGameState? restoreGameState)

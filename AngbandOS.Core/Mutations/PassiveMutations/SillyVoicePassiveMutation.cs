@@ -15,7 +15,7 @@ internal class SillyVoicePassiveMutation : Mutation
     public override string GainMessage => "Your voice turns into a ridiculous squeak!";
     public override string HaveMessage => "Your voice is a silly squeak (-4 CHR).";
     public override string LoseMessage => "Your voice returns to normal.";
-    public override string? ItemEnhancementBindingKey => nameof(SillyVoicePassiveMutationItemEnhancement);
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(SillyVoicePassiveMutationItemEnhancement)) };
     public override void OnGain()
     {
         Game.CharismaBonus -= 4;

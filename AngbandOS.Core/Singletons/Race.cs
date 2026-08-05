@@ -18,7 +18,7 @@ internal abstract class Race : IGetKey, IGameSerialize
     /// Refreshed the read-only attribute set.  Performed by the <see cref="UpdateBonusesFlaggedAction"/>.
     /// </summary>
     /// <returns></returns>
-    public void RefreshSquashedAttributeSet()
+    public void RefreshAndSquashAttributeSet()
     {
         EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
         if (MinimumExperienceLevelAndEnhancementAttributeSets is not null)
@@ -53,7 +53,7 @@ internal abstract class Race : IGetKey, IGameSerialize
             }
             MinimumExperienceLevelAndEnhancementAttributeSets = tupleList.ToArray();
         }
-        RefreshSquashedAttributeSet();
+        RefreshAndSquashAttributeSet();
     }
 
     public GameStateBag? Serialize(SaveGameState saveGameState)

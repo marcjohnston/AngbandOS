@@ -1,8 +1,9 @@
 namespace AngbandOS.GamePacks.Cthangband;
-public class SusStatsPassiveMutationItemEnhancement : ItemEnhancementGameConfiguration
+
+public class SusStatsPassiveMutationLevel20ItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
-        (nameof(SustConAttribute), "true"),
+        (nameof(SustDexAttribute), "true"),
     };
 }

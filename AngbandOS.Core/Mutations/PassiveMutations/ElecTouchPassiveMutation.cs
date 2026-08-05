@@ -13,7 +13,7 @@ internal class ElecTouchPassiveMutation : Mutation
     public override string GainMessage => "Electricity starts running through you!";
     public override string HaveMessage => "Electricity is running through your veins.";
     public override string LoseMessage => "Electricity stops running through you.";
-    public override string? ItemEnhancementBindingKey => nameof(ElecTouchMutationItemEnhancement);
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(ElecTouchMutationItemEnhancement)) };
     public override void OnGain()
     {
         Game.ElecHit = true;

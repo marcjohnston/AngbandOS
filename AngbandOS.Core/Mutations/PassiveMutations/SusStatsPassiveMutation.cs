@@ -13,7 +13,14 @@ internal class SusStatsPassiveMutation : Mutation
     public override string GainMessage => "You feel like you can recover from anything.";
     public override string HaveMessage => "Your body resists serious damage.";
     public override string LoseMessage => "You no longer feel like you can recover from anything.";
-    public override string? ItemEnhancementBindingKey => nameof(SusStatsPassiveMutationItemEnhancement);
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(SusStatsPassiveMutationItemEnhancement)),
+        (1, nameof(SusStatsPassiveMutationLevel10ItemEnhancement)),
+        (1, nameof(SusStatsPassiveMutationLevel20ItemEnhancement)),
+        (1, nameof(SusStatsPassiveMutationLevel30ItemEnhancement)),
+        (1, nameof(SusStatsPassiveMutationLevel40ItemEnhancement)),
+        (1, nameof(SusStatsPassiveMutationLevel50ItemEnhancement))
+    };
     public override void OnGain()
     {
         Game.SustainAll = true;

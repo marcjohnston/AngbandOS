@@ -13,7 +13,7 @@ internal class BlankFacePassiveMutation : Mutation
     public override string GainMessage => "Your face becomes completely featureless!";
     public override string HaveMessage => "Your face is featureless (-1 CHR).";
     public override string LoseMessage => "Your facial features return.";
-    public override string? ItemEnhancementBindingKey => nameof(BlankFaceMutationItemEnhancement);
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(BlankFaceMutationItemEnhancement)) };
     public override void OnGain()
     {
         Game.CharismaBonus -= 1;

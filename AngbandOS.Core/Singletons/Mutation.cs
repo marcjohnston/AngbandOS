@@ -20,14 +20,79 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet)))
-        );
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
+            (nameof(MinimumExperienceLevelAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, ReadOnlyAttributeSet>(MinimumExperienceLevelAndEnhancementAttributeSets,
+                _minimumExperienceLevel => saveGameState.CreateGameStateBag(_minimumExperienceLevel),
+                _attributeSet => saveGameState.CreateDerivedGameStateBag(_attributeSet, typeof(ReadOnlyAttributeSet))
+        )));
     }
+
+    /// <summary>
+    /// Returns the attribute set that is merged with the players attribute set when this mutation is gained.  This allows the mutation attributes to remain constant for each call of the update bonuses.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public ReadOnlyAttributeSet? AttributeSet { get; private set; }
+
+    /// <summary>
+    /// Refreshed the read-only attribute set.  Performed by the <see cref="UpdateBonusesFlaggedAction"/>.
+    /// </summary>
+    /// <returns></returns>
+    public void RefreshAndSquashAttributeSet()
+    {
+        if (MinimumExperienceLevelAndEnhancementAttributeSets is null)
+        {
+            AttributeSet = null;
+        }
+        else
+        {
+            EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
+            foreach ((int minimumExperienceLevel, ReadOnlyAttributeSet attributeSet) in MinimumExperienceLevelAndEnhancementAttributeSets)
+            {
+                if (Game.ExperienceLevel.IntValue >= minimumExperienceLevel)
+                {
+                    effectiveAttributeSet.MergeAttributeSet(attributeSet);
+                }
+            }
+            AttributeSet = effectiveAttributeSet.ToReadOnly();
+        }
+    }
+
+    /// <summary>
+    /// Generates the <see cref="ReadOnlyAttributeSet"/> for each enhancement.  This process should only be done during birth.  The enhancements may have random
+    /// configuration embedded and this generate fixes those random values to be used throughout the game.
+    /// </summary>
+    public void RegenerateAttributeSets()
+    {
+        if (MinimumExperienceLevelAndEnhancementTuples is null)
+        {
+            MinimumExperienceLevelAndEnhancementAttributeSets = null;
+        }
+        else
+        {
+            List<(int, ReadOnlyAttributeSet)> tupleList = new List<(int, ReadOnlyAttributeSet)>();
+            foreach ((int minimumExperienceLevel, ItemEnhancement enhancement) in MinimumExperienceLevelAndEnhancementTuples)
+            {
+                tupleList.Add((minimumExperienceLevel, enhancement.GenerateAttributeSet()));
+            }
+            MinimumExperienceLevelAndEnhancementAttributeSets = tupleList.ToArray();
+        }
+        RefreshAndSquashAttributeSet();
+    }
+
+    /// <summary>
+    /// Returns the current read-only set of generated enhancements.  These enhancements are generated at birth via the <see cref="RegenerateAttributeSets"/> method and do not change.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public (int, ReadOnlyAttributeSet)[]? MinimumExperienceLevelAndEnhancementAttributeSets { get; private set; } = null;
 
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState)
     {
-        ItemEnhancement = Game.SingletonRepository.GetNullable<ItemEnhancement>(ItemEnhancementBindingKey);
+        MinimumExperienceLevelAndEnhancementTuples = MinimumExperienceLevelAndEnhancementBindingTuples?.Select(_minimumExperienceLevelAndEnhancementBindingTuples => (_minimumExperienceLevelAndEnhancementBindingTuples.Item1, Game.SingletonRepository.GetNullable<ItemEnhancement>(_minimumExperienceLevelAndEnhancementBindingTuples.Item2))).ToArray();
 
         // Check to see if there is an activation that needs binding.
         if (ActivationBinding is not null)
@@ -40,7 +105,10 @@ internal abstract class Mutation : IGetKey, IGameSerialize
 
         if (restoreGameState is not null)
         {
-            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReferenceOrDefault((restoreGameState => new ReadOnlyAttributeSet(Game, restoreGameState)));
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
+            MinimumExperienceLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, ReadOnlyAttributeSet>(
+                _restoreGameState => _restoreGameState.GetInt(),
+                _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
         }
     }
     private (IScript ActivationScript, int MinLevel, Expression Cost, Ability Ability, int Difficulty)? Activation { get; set; }
@@ -89,15 +157,10 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     /// <summary>
     /// Returns the binding key for the passive attribute enhancements that is associated with this mutation. If there are no associated passive attribute enhancements, this property returns null.  This property is used to bind the <see cref="ItemEnhacement"/> property during the binding phase.
     /// </summary>
-    public virtual string? ItemEnhancementBindingKey => null;
+    public virtual (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => null;
 
     /// <summary>
     /// Returns the attribute enhancement object for the passive attribute enhancements that is associated with this mutation. If there are no associated passive attribute enhancements, this property returns null.  This property is bound using the <see cref="ItemEnhacementBindingKey"/> property during the binding phase.
     /// </summary>
-    public ItemEnhancement? ItemEnhancement { get; private set; }
-
-    /// <summary>
-    /// Returns the attribute set that is merged with the players attribute set when this mutation is gained.  This allows the mutation attributes to remain constant for each call of the update bonuses.
-    /// </summary>
-    public ReadOnlyAttributeSet? AttributeSet { get; set; }
+    public (int, ItemEnhancement)[]? MinimumExperienceLevelAndEnhancementTuples { get; private set; }
 }

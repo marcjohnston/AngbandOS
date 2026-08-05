@@ -835,7 +835,6 @@ internal partial class Game : IGameSerialize
     }
     #endregion
 
-
     #region Play and Game Loop
     /// <summary>
     /// Plays the current game.
@@ -1144,7 +1143,6 @@ internal partial class Game : IGameSerialize
                 {
                     Mutation other = MutationsPossessed[i];
                     MutationsPossessed.RemoveAt(i);
-                    other.AttributeSet = null;
                     other.OnLose();
                     MsgPrint(other.LoseMessage);
                     MutationsNotPossessed.Add(other);
@@ -1154,13 +1152,6 @@ internal partial class Game : IGameSerialize
                     i++;
                 }
             } while (i < MutationsPossessed.Count);
-        }
-
-        // If there are passive attribute enhancements, then generate the values now during this gain phase.
-        if (mutation.ItemEnhancement is not null)
-        {
-            ReadOnlyAttributeSet attributeSet = mutation.ItemEnhancement.GenerateAttributeSet();
-            mutation.AttributeSet = attributeSet;
         }
 
         MutationsPossessed.Add(mutation);
@@ -2937,7 +2928,7 @@ internal partial class Game : IGameSerialize
             _prevGeneration = ExPlayer.Generation;
         }
 
-        // Refresh all of the race and character class enhancements.
+        // Refresh all of the character class, race and mutation enhancements.
         foreach (Race race in SingletonRepository.Get<Race>())
         {
             race.RegenerateAttributeSets();
@@ -2945,6 +2936,10 @@ internal partial class Game : IGameSerialize
         foreach (CharacterClass characterClass in SingletonRepository.Get<CharacterClass>())
         {
             characterClass.RegenerateAttributeSets();
+        }
+        foreach (Mutation mutation in SingletonRepository.Get<Mutation>())
+        {
+            mutation.RegenerateAttributeSets();
         }
 
         Screen.Clear();

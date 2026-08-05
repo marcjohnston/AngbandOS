@@ -13,7 +13,7 @@ internal class AlbinoPassiveMutation : Mutation
     public override string GainMessage => "You turn into an albino! You feel frail...";
     public override string HaveMessage => "You are albino (-4 CON).";
     public override string LoseMessage => "You are no longer an albino!";
-    public override string? ItemEnhancementBindingKey => nameof(AlbinoMutationItemEnhancement);
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(AlbinoMutationItemEnhancement)) };
     public override void OnGain()
     {
         Game.ConstitutionBonus -= 4;
