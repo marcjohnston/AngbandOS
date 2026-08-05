@@ -20,7 +20,7 @@ public class SpectreRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "4"),
         (nameof(DexterityAttribute), "2"),
         (nameof(ValueAttribute), "-300"),
-        (nameof(InfravisionAttribute), "5"),
+        (nameof(InfraVisionAttribute), "5"),
         (nameof(DisarmTrapsAttribute), "10"),
         (nameof(UseDeviceAttribute), "25"),
         (nameof(SavingThrowAttribute), "20"),

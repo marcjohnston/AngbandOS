@@ -13,7 +13,7 @@ public class GnomeRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "2"),
         (nameof(DexterityAttribute), "2"),
         (nameof(ValueAttribute), "3900"),
-        (nameof(InfravisionAttribute), "4"),
+        (nameof(InfraVisionAttribute), "4"),
         (nameof(DisarmTrapsAttribute), "10"),
         (nameof(UseDeviceAttribute), "12"),
         (nameof(SavingThrowAttribute), "12"),

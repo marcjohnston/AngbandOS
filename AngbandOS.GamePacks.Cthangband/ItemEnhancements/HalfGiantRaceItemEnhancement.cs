@@ -14,7 +14,7 @@ public class HalfGiantRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "-2"),
         (nameof(DexterityAttribute), "-2"),
         (nameof(ValueAttribute), "-150"),
-        (nameof(InfravisionAttribute), "3"),
+        (nameof(InfraVisionAttribute), "3"),
         (nameof(DisarmTrapsAttribute), "-6"),
         (nameof(UseDeviceAttribute), "-8"),
         (nameof(SavingThrowAttribute), "-6"),

@@ -23,11 +23,6 @@ internal partial class Game
     /// </summary>
     public bool HasConfusingTouch;
 
-    public bool HasRestrictingArmor;
-    public bool HasRestrictingGloves;
-
-    public int HitDie;
-    public int InfravisionRange;
     public bool IsSearching;
 
     public int SkillDigging;

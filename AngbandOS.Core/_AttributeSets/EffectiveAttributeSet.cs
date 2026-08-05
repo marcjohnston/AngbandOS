@@ -336,11 +336,11 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<SummationEffectiveAttributeValue>(nameof(InfravisionAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(InfraVisionAttribute)).Get();
         }
         set
         {
-            Get<SummationEffectiveAttributeValue>(nameof(InfravisionAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(InfraVisionAttribute)).Append(value);
         }
     }
     public int Tunnel

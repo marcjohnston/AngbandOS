@@ -13,7 +13,7 @@ public class DwarfRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "-2"),
         (nameof(DexterityAttribute), "-2"),
         (nameof(ValueAttribute), "1050"),
-        (nameof(InfravisionAttribute), "5"),
+        (nameof(InfraVisionAttribute), "5"),
         (nameof(DisarmTrapsAttribute), "2"),
         (nameof(UseDeviceAttribute), "9"),
         (nameof(SavingThrowAttribute), "10"),

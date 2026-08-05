@@ -13,7 +13,7 @@ public class HalfOrcRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "-1"),
         (nameof(DexterityAttribute), "0"),
         (nameof(ValueAttribute), "600"),
-        (nameof(InfravisionAttribute), "3"),
+        (nameof(InfraVisionAttribute), "3"),
         (nameof(DisarmTrapsAttribute), "-3"),
         (nameof(UseDeviceAttribute), "-3"),
         (nameof(SavingThrowAttribute), "-3"),

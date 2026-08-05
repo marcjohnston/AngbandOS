@@ -218,7 +218,7 @@ internal class JournalScript : UniversalScript, IGetKey
 
         DisplayStat("Add Stea.", 10, 0, attributeSet => attributeSet.GetInt(nameof(StealthAttribute)) > 0);
         DisplayStat("Add Sear.", 11, 0, attributeSet => attributeSet.GetInt(nameof(SearchAttribute)) > 0);
-        DisplayStat("Add Infra", 12, 0, attributeSet => attributeSet.GetInt(nameof(InfravisionAttribute)) > 0);
+        DisplayStat("Add Infra", 12, 0, attributeSet => attributeSet.GetInt(nameof(InfraVisionAttribute)) > 0);
         DisplayStat("Add Tun..", 13, 0, attributeSet => attributeSet.GetInt(nameof(TunnelAttribute)) > 0);
         DisplayStat("Add Speed", 14, 0, attributeSet => attributeSet.GetInt(nameof(SpeedAttribute)) > 0);
         DisplayStat("Add Blows", 15, 0, attributeSet => attributeSet.GetInt(nameof(AttacksAttribute)) > 0);

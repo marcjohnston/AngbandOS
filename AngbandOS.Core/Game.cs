@@ -16,6 +16,8 @@ internal partial class Game : IGameSerialize
     /// This is state data.
     /// </remarks>
     public int Height;
+
+    public int HitDie;
     #endregion
 
     #region Non-State Properties - Properties that are post-load initialized and based on the Game.AttributeSet
@@ -120,6 +122,7 @@ internal partial class Game : IGameSerialize
     public bool HasSoundResistance => AttributeSet.GetBool(nameof(ResSoundAttribute));
     public bool HasTelepathy => AttributeSet.GetBool(nameof(TelepathyAttribute));
     public bool HasTimeResistance => AttributeSet.GetBool(nameof(ResTimeAttribute));
+    public int InfraVisionRange => AttributeSet.GetInt(nameof(InfraVisionAttribute)) + (InfravisionTimer.Value > 0 ? 1 : 0);
     #endregion
 
     #region Game Serialization
@@ -129,7 +132,6 @@ internal partial class Game : IGameSerialize
             (nameof(SingletonRepository), saveGameState.CreateDerivedGameStateBag(SingletonRepository, typeof(SingletonRepository))),
 
             ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch)),
-            ("bools6", saveGameState.CreateGameStateBag(HasRestrictingArmor, HasRestrictingGloves)),
             ("bools8", saveGameState.CreateGameStateBag(IsSearching, MagicResistance)),
             ("bools9", saveGameState.CreateGameStateBag(_findBreakLeft, _findBreakRight)),
             ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment)),
@@ -138,7 +140,6 @@ internal partial class Game : IGameSerialize
             (nameof(_mainSequence), saveGameState.CreateDerivedGameStateBag(_mainSequence, typeof(GameRandom))),
             (nameof(Height), saveGameState.CreateGameStateBag(Height)),
             (nameof(HitDie), saveGameState.CreateGameStateBag(HitDie)),
-            (nameof(InfravisionRange), saveGameState.CreateGameStateBag(InfravisionRange)),
             (nameof(SkillDigging), saveGameState.CreateGameStateBag(SkillDigging)),
             (nameof(ComputedDisarmTraps), saveGameState.CreateGameStateBag(ComputedDisarmTraps)),
             (nameof(SkillMelee), saveGameState.CreateGameStateBag(SkillMelee)),
@@ -440,7 +441,6 @@ internal partial class Game : IGameSerialize
 
             // Now restore this game object itself.
             (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch) = restoreGameState.GetByKey("bools1").Get8Bools();
-            (HasRestrictingArmor, HasRestrictingGloves) = restoreGameState.GetByKey("bools6").Get2Bools();
             (IsSearching, MagicResistance) = restoreGameState.GetByKey("bools8").Get2Bools();
             (_findBreakLeft, _findBreakRight) = restoreGameState.GetByKey("bools9").Get2Bools();
             (_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment) = restoreGameState.GetByKey("bools10").Get8Bools();
@@ -449,7 +449,6 @@ internal partial class Game : IGameSerialize
             _mainSequence = restoreGameState.GetByKey(nameof(_mainSequence)).GetDerivedReference<GameRandom>(_restoreGameState => new GameRandom(_restoreGameState));
             Height = restoreGameState.GetByKey(nameof(Height)).GetInt();
             HitDie = restoreGameState.GetByKey(nameof(HitDie)).GetInt();
-            InfravisionRange = restoreGameState.GetByKey(nameof(InfravisionRange)).GetInt();
             SkillDigging = restoreGameState.GetByKey(nameof(SkillDigging)).GetInt();
             ComputedDisarmTraps = restoreGameState.GetByKey(nameof(ComputedDisarmTraps)).GetInt();
             SkillMelee = restoreGameState.GetByKey(nameof(SkillMelee)).GetInt();
@@ -14871,7 +14870,7 @@ internal partial class Game : IGameSerialize
             GridTile cPtr = Grid[fy][fx];
             if (cPtr.IsVisible && BlindnessTimer.Value == 0)
             {
-                if (mPtr.DistanceFromPlayer <= InfravisionRange)
+                if (mPtr.DistanceFromPlayer <= InfraVisionRange)
                 {
                     if (rPtr.ColdBlood)
                     {

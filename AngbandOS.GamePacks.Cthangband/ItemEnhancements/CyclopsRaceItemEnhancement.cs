@@ -14,7 +14,7 @@ public class CyclopsRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "-3"),
         (nameof(DexterityAttribute), "-3"),
         (nameof(ValueAttribute), "-3900"),
-        (nameof(InfravisionAttribute), "1"),
+        (nameof(InfraVisionAttribute), "1"),
         (nameof(DisarmTrapsAttribute), "-4"),
         (nameof(UseDeviceAttribute), "-5"),
         (nameof(SavingThrowAttribute), "-5"),

@@ -10,7 +10,7 @@ public class HatOfInfravisionItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "500"),
         (nameof(TreasureRatingAttribute), "11"),
-        (nameof(InfravisionAttribute), "1d5"),
+        (nameof(InfraVisionAttribute), "1d5"),
     };
     public override string? FriendlyName => "of Infravision";
 }

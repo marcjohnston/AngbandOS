@@ -32,7 +32,7 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(VorpalExtraAttacks1InChanceAttribute), "2"),
         (nameof(Vorpal1InChanceAttribute), "6"),
         (nameof(SlayDragonAttribute), "3"),
-        (nameof(InfravisionAttribute), "3"),
+        (nameof(InfraVisionAttribute), "3"),
         (nameof(CharismaAttribute), "3"),
         (nameof(GlowRadiusAttribute), "3"),
     };

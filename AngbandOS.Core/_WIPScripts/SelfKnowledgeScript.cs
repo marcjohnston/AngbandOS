@@ -128,7 +128,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         {
             info[infoCount++] = "You will soon be recalled.";
         }
-        if (Game.InfravisionRange != 0)
+        if (Game.InfraVisionRange != 0)
         {
             info[infoCount++] = "Your eyes are sensitive to infrared light.";
         }

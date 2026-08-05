@@ -105,7 +105,7 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.DisplayAPlusB(67, 41, Game.CharacterClass.RangedToHit + race.RangedToHit, Game.CharacterClass.RangedAttackBonusPerLevel);
         Game.Screen.Print(ColorEnum.Black, race.ExperienceFactor + Game.CharacterClass.ExperienceFactor + "%", 36, 45);
         Game.Screen.Print(ColorEnum.Black, "1d" + (race.HitDieBonus + Game.CharacterClass.HitDieBonus), 37, 45);
-        int bonusInfravision = race.AttributeSet.GetInt(nameof(InfravisionAttribute));
+        int bonusInfravision = race.AttributeSet.GetInt(nameof(InfraVisionAttribute));
         if (bonusInfravision == 0)
         {
             Game.Screen.Print(ColorEnum.Black, "nil", 38, 45);

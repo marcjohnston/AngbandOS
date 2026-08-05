@@ -436,7 +436,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         Game.Screen.Print(ColorEnum.Blue, "Shots/Action:", 38, 55);
         Game.Screen.Print(ColorEnum.Green, $"{Game.MissileAttacksPerRound}", 38, 69);
         Game.Screen.Print(ColorEnum.Blue, "Infra-Vision:", 39, 55);
-        Game.Screen.Print(ColorEnum.Green, $"{Game.InfravisionRange * 10} feet", 39, 69);
+        Game.Screen.Print(ColorEnum.Green, $"{Game.InfraVisionRange * 10} feet", 39, 69);
     }
 
     /// <summary>

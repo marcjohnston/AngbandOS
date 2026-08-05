@@ -81,7 +81,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         Game.BonusArmorClass = 0;
         Game.UnknownBonusArmorClass = 0;
-        Game.InfravisionRange = Game.Race.Infravision; // done
         Game.ComputedDisarmTraps = Game.Race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
         Game.SkillUseDevice = Game.Race.UseDevice + Game.CharacterClass.UseDevice; // done
         Game.SkillSavingThrow = Game.Race.SavingThrow + Game.CharacterClass.SavingThrow; // done
@@ -139,7 +138,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.SkillStealth += oPtr.EffectiveAttributeSet.Stealth;
                     Game.SkillSearching += oPtr.EffectiveAttributeSet.Search * 5;
                     Game.SkillPerception += oPtr.EffectiveAttributeSet.Search * 5;
-                    Game.InfravisionRange += oPtr.EffectiveAttributeSet.Infravision;
                     Game.SkillDigging += oPtr.EffectiveAttributeSet.Tunnel * 20;
                     Game.Speed.IntValue += oPtr.EffectiveAttributeSet.Speed;
                     extraBlows += oPtr.EffectiveAttributeSet.Attacks;
@@ -271,10 +269,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (!Game.ArmorIsHeavy())
         {
             Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
-        }
-        if (Game.InfravisionTimer.Value != 0)
-        {
-            Game.InfravisionRange++;
         }
         if (Game.HasTelepathy != oldTelepathy)
         {

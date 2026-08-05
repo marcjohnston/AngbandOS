@@ -23,7 +23,7 @@ public class SpearGaeBulgFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(ValueAttribute), "30000"),
         (nameof(StealthAttribute), "3"),
         (nameof(SpeedAttribute), "3"),
-        (nameof(InfravisionAttribute), "3"),
+        (nameof(InfraVisionAttribute), "3"),
     };
     public override string FriendlyName => "'Gae Bulg'";
 }

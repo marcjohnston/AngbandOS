@@ -13,7 +13,7 @@ public class HalfElfRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "1"),
         (nameof(DexterityAttribute), "1"),
         (nameof(ValueAttribute), "1650"),
-        (nameof(InfravisionAttribute), "2"),
+        (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "2"),
         (nameof(UseDeviceAttribute), "3"),
         (nameof(SavingThrowAttribute), "3"),

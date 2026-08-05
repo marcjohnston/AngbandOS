@@ -17,7 +17,7 @@ public class GolemRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "-5"),
         (nameof(DexterityAttribute), "0"),
         (nameof(ValueAttribute), "-4200"),
-        (nameof(InfravisionAttribute), "4"),
+        (nameof(InfraVisionAttribute), "4"),
         (nameof(DisarmTrapsAttribute), "-5"),
         (nameof(UseDeviceAttribute), "-5"),
         (nameof(SavingThrowAttribute), "10"),

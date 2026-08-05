@@ -13,7 +13,7 @@ public class ElfRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "2"),
         (nameof(DexterityAttribute), "1"),
         (nameof(ValueAttribute), "3300"),
-        (nameof(InfravisionAttribute), "3"),
+        (nameof(InfraVisionAttribute), "3"),
         (nameof(DisarmTrapsAttribute), "5"),
         (nameof(UseDeviceAttribute), "6"),
         (nameof(SavingThrowAttribute), "6"),

@@ -17,7 +17,7 @@ public class SkeletonRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "-2"),
         (nameof(DexterityAttribute), "0"),
         (nameof(ValueAttribute), "-5400"),
-        (nameof(InfravisionAttribute), "2"),
+        (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "-5"),
         (nameof(UseDeviceAttribute), "-5"),
         (nameof(SavingThrowAttribute), "5"),

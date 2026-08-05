@@ -15,7 +15,7 @@ public class NibelungRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "-1"),
         (nameof(DexterityAttribute), "0"),
         (nameof(ValueAttribute), "3000"),
-        (nameof(InfravisionAttribute), "5"),
+        (nameof(InfraVisionAttribute), "5"),
         (nameof(DisarmTrapsAttribute), "3"),
         (nameof(UseDeviceAttribute), "5"),
         (nameof(SavingThrowAttribute), "10"),

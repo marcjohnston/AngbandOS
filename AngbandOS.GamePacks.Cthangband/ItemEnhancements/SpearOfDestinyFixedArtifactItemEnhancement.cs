@@ -33,7 +33,7 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
         (nameof(SlayDragonAttribute), "3"),
         (nameof(WisdomAttribute), "4"),
         (nameof(IntelligenceAttribute), "4"),
-        (nameof(InfravisionAttribute), "4"),
+        (nameof(InfraVisionAttribute), "4"),
         (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Destiny";

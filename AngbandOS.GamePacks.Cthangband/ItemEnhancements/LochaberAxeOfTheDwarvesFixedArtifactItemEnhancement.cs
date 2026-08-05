@@ -24,7 +24,7 @@ public class LochaberAxeOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(MeleeToHitAttribute), "12"),
         (nameof(ValueAttribute), "80000"),
         (nameof(TunnelAttribute), "10"),
-        (nameof(InfravisionAttribute), "10"),
+        (nameof(InfraVisionAttribute), "10"),
     };
     public override string FriendlyName => "of the Dwarves";
 }

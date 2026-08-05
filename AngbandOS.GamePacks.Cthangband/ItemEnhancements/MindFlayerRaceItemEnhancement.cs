@@ -15,7 +15,7 @@ public class MindFlayerRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "4"),
         (nameof(DexterityAttribute), "0"),
         (nameof(ValueAttribute), "1350"),
-        (nameof(InfravisionAttribute), "4"),
+        (nameof(InfraVisionAttribute), "4"),
         (nameof(DisarmTrapsAttribute), "10"),
         (nameof(UseDeviceAttribute), "25"),
         (nameof(SavingThrowAttribute), "15"),

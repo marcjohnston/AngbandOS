@@ -13,7 +13,7 @@ public class DraconianRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "1"),
         (nameof(DexterityAttribute), "1"),
         (nameof(ValueAttribute), "7050"),
-        (nameof(InfravisionAttribute), "2"),
+        (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "-2"),
         (nameof(UseDeviceAttribute), "5"),
         (nameof(SavingThrowAttribute), "3"),

@@ -13,7 +13,7 @@ public class ImpRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IntelligenceAttribute), "-1"),
         (nameof(DexterityAttribute), "1"),
         (nameof(ValueAttribute), "-1350"),
-        (nameof(InfravisionAttribute), "3"),
+        (nameof(InfraVisionAttribute), "3"),
         (nameof(DisarmTrapsAttribute), "-3"),
         (nameof(UseDeviceAttribute), "2"),
         (nameof(SavingThrowAttribute), "-1"),

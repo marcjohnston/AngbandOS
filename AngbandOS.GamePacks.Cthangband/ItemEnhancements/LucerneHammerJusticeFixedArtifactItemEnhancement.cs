@@ -20,7 +20,7 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
     {
         (nameof(GlowRadiusAttribute), "3"),
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(InfravisionAttribute), "4"),
+        (nameof(InfraVisionAttribute), "4"),
         (nameof(ToDamageAttribute), "6"),
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(AttacksAttribute), "8"),

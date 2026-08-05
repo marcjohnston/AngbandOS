@@ -33,7 +33,7 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ValueAttribute), "10000000"),
         (nameof(WisdomAttribute), "125"),
-        (nameof(InfravisionAttribute), "125"),
+        (nameof(InfraVisionAttribute), "125"),
         (nameof(IntelligenceAttribute), "125"),
         (nameof(DexterityAttribute), "125"),
         (nameof(ConstitutionAttribute), "125"),

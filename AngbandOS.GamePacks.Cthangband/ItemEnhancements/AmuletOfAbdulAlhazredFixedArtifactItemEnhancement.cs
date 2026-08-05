@@ -19,7 +19,7 @@ public class AmuletOfAbdulAlhazredFixedArtifactItemEnhancement : ItemEnhancement
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
-        (nameof(InfravisionAttribute), "3"),
+        (nameof(InfraVisionAttribute), "3"),
         (nameof(ValueAttribute), "90000"),
         (nameof(CharismaAttribute), "3"),
         (nameof(WisdomAttribute), "3"),

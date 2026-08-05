@@ -1,5 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-public class InfravisionAttribute : SummationAttributeGameConfiguration
+public class InfraVisionAttribute : SummationAttributeGameConfiguration
 {
 }
