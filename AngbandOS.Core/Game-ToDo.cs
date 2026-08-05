@@ -26,7 +26,6 @@ internal partial class Game
     public bool HasRestrictingArmor;
     public bool HasRestrictingGloves;
 
-    public int Height;
     public int HitDie;
     public int InfravisionRange;
     public bool IsSearching;

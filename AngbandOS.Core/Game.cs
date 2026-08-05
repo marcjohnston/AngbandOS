@@ -8,6 +8,16 @@ namespace AngbandOS.Core;
 
 internal partial class Game : IGameSerialize
 {
+    #region State Data
+    /// <summary>
+    /// Returns the height of the character.  This is randomly generated at the start of the game and is used to determine the player's weight and other properties.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public int Height;
+    #endregion
+
     #region Non-State Properties - Properties that are post-load initialized and based on the Game.AttributeSet
     /// <summary>
     /// Grants temporary resistance to acid.
