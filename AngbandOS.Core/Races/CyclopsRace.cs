@@ -50,8 +50,4 @@ internal class CyclopsRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        Game.HasSoundResistance = true;
-    }
 }

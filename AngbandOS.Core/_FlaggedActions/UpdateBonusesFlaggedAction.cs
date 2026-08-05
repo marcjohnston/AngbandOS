@@ -81,23 +81,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         Game.BonusArmorClass = 0;
         Game.UnknownBonusArmorClass = 0;
-        Game.HasRandomTeleport = false;
-        Game.HasQuakeWeapon = false;
-        Game.HasSeeInvisibility = false;
-        Game.HasSlowDigestion = false;
-        Game.HasHoldLife = false;
-        Game.HasTelepathy = false;
-        Game.HasLightningResistance = false;
-        Game.HasPoisonResistance = false;
-        Game.HasSoundResistance = false;
-        Game.HasTimeResistance = false;
-        Game.HasLightResistance = false;
-        Game.HasShardResistance = false;
-        Game.HasNexusResistance = false;
-        Game.HasNetherResistance = false;
-        Game.HasReflection = false;
-        Game.HasElectricitySheath = false;
-        Game.HasLightningImmunity = false;
         Game.InfravisionRange = Game.Race.Infravision; // done
         Game.ComputedDisarmTraps = Game.Race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
         Game.SkillUseDevice = Game.Race.UseDevice + Game.CharacterClass.UseDevice; // done
@@ -131,10 +114,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillPerception += Game.SearchBonus;
         Game.SkillSearching += Game.SearchBonus;
         Game.InfravisionRange += Game.MutationInfravisionBonus;
-        Game.HasElectricitySheath |= Game.ElecHit;
         Game.BonusArmorClass += Game.GenomeArmorClassBonus;
-        Game.HasTimeResistance |= Game.ResTime;
-        Game.HasTelepathy |= Game.Esp;
         Game.SkillStealth += Game.StealthBonus;
         if (Game.MagicResistance)
         {
@@ -164,77 +144,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.SkillDigging += oPtr.EffectiveAttributeSet.Tunnel * 20;
                     Game.Speed.IntValue += oPtr.EffectiveAttributeSet.Speed;
                     extraBlows += oPtr.EffectiveAttributeSet.Attacks;
-                    if (oPtr.EffectiveAttributeSet.Impact)
-                    {
-                        Game.HasQuakeWeapon = true;
-                    }
                     if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get())
                     {
                         extraShots++;
                     }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get())
-                    {
-                        Game.HasRandomTeleport = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Get())
-                    {
-                        Game.HasSlowDigestion = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Get())
-                    {
-                        Game.HasTelepathy = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Get())
-                    {
-                        Game.HasSeeInvisibility = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.HoldLife)
-                    {
-                        Game.HasHoldLife = true;
-                    }
                     if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(WraithAttribute)).Get())
                     {
                         Game.EtherealnessTimer.SetValue(Math.Max(Game.EtherealnessTimer.Value, 20));
-                    }
-                    if (oPtr.EffectiveAttributeSet.ImElec)
-                    {
-                        Game.HasLightningImmunity = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResElecAttribute)).Get())
-                    {
-                        Game.HasLightningResistance = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Get())
-                    {
-                        Game.HasPoisonResistance = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Get())
-                    {
-                        Game.HasSoundResistance = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResLightAttribute)).Get())
-                    {
-                        Game.HasLightResistance = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Get())
-                    {
-                        Game.HasShardResistance = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Get())
-                    {
-                        Game.HasNexusResistance = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Get())
-                    {
-                        Game.HasNetherResistance = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ReflectAttribute)).Get())
-                    {
-                        Game.HasReflection = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShElecAttribute)).Get())
-                    {
-                        Game.HasElectricitySheath = true;
                     }
                     if (oPtr.IsKnown())
                     {
@@ -323,7 +239,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (Game.EtherealnessTimer.Value != 0)
         {
             Game.BonusArmorClass += 100;
-            Game.HasReflection = true;
         }
         if (Game.BlessingTimer.Value != 0)
         {
@@ -357,14 +272,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (!Game.ArmorIsHeavy())
         {
             Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
-        }
-        if (Game.TelepathyTimer.Value != 0)
-        {
-            Game.HasTelepathy = true;
-        }
-        if (Game.SeeInvisibilityTimer.Value != 0)
-        {
-            Game.HasSeeInvisibility = true;
         }
         if (Game.InfravisionTimer.Value != 0)
         {

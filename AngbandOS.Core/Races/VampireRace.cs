@@ -52,12 +52,6 @@ internal class VampireRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        Game.HasHoldLife = true;
-        Game.HasNetherResistance = true;
-        Game.HasPoisonResistance = true;
-    }
     public override bool RestsTillDuskInsteadOfDawn => true;
 
     public override bool IsBurnedBySunlight => true;

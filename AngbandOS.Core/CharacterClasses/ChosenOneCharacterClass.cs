@@ -91,48 +91,4 @@ internal class ChosenOneCharacterClass : CharacterClass
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override bool OutfitsWithScrollsOfLight => true;
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue >= 10)
-        {
-            Game.HasSeeInvisibility = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 12)
-        {
-            Game.HasSlowDigestion = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 16)
-        {
-            Game.HasPoisonResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 22)
-        {
-            Game.HasHoldLife = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 26)
-        {
-            Game.HasTelepathy = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 30)
-        {
-            Game.HasLightResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 34)
-        {
-            Game.HasSoundResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 46)
-        {
-            Game.HasNexusResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 48)
-        {
-            Game.HasShardResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 50)
-        {
-            Game.HasNetherResistance = true;
-        }
-    }
 }

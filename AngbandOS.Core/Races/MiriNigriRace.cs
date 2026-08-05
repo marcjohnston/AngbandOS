@@ -37,10 +37,5 @@ internal class MiriNigriRace : Race
         itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
     }
     protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
-    public override void CalcBonuses()
-    {
-        Game.HasSoundResistance = true;
-    }
-
     public override bool AutomaticallyGainsFirstLevelMutationAtBirth => true;
 }

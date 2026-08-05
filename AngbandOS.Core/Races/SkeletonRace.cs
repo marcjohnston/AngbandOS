@@ -56,13 +56,6 @@ internal class SkeletonRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        Game.HasShardResistance = true;
-        Game.HasHoldLife = true;
-        Game.HasSeeInvisibility = true;
-        Game.HasPoisonResistance = true;
-    }
     public override bool RestsTillDuskInsteadOfDawn => true;
 
     // Skeletons get no food sustenance

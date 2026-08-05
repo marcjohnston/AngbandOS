@@ -23,25 +23,9 @@ internal partial class Game
     /// </summary>
     public bool HasConfusingTouch;
 
-    public bool HasHoldLife;
-    public bool HasLightningImmunity;
-    public bool HasLightningResistance;
-    public bool HasElectricitySheath;
-    public bool HasLightResistance;
-    public bool HasNetherResistance;
-    public bool HasNexusResistance;
-    public bool HasPoisonResistance;
-    public bool HasQuakeWeapon;
-    public bool HasRandomTeleport;
-    public bool HasReflection;
     public bool HasRestrictingArmor;
     public bool HasRestrictingGloves;
-    public bool HasSeeInvisibility;
-    public bool HasShardResistance;
-    public bool HasSlowDigestion;
-    public bool HasSoundResistance;
-    public bool HasTelepathy;
-    public bool HasTimeResistance;
+
     public int Height;
     public int HitDie;
     public int InfravisionRange;

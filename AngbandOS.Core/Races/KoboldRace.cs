@@ -48,8 +48,4 @@ internal class KoboldRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        Game.HasPoisonResistance = true;
-    }
 }

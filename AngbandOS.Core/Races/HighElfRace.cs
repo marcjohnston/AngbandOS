@@ -38,8 +38,4 @@ internal class HighElfRace : Race
         }
     }
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
-    public override void CalcBonuses()
-    {
-        Game.HasSeeInvisibility = true;
-    }
 }

@@ -61,13 +61,6 @@ internal class GolemRace : Race
     }
     public override void CalcBonuses()
     {
-        if (Game.ExperienceLevel.IntValue > 34)
-        {
-            Game.HasHoldLife = true;
-        }
-        Game.HasSlowDigestion = true;
-        Game.HasSeeInvisibility = true;
-        Game.HasPoisonResistance = true;
         Game.BonusArmorClass += 20 + (Game.ExperienceLevel.IntValue / 5);
     }
 

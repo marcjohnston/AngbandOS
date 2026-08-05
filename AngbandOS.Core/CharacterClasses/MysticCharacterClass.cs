@@ -63,12 +63,4 @@ internal class MysticCharacterClass : CharacterClass
     /// Returns a weight limit, because characters of this class study martial arts.
     /// </summary>
     protected override string? ArmorMaxWeightExpressionText => "100+4*X";
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 39)
-        {
-            Game.HasTelepathy = true;
-        }
-    }
 }

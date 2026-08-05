@@ -39,6 +39,5 @@ internal class HalfElfRace : Race
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
     public override void CalcBonuses()
     {
-        Game.HasLightResistance = true;
     }
 }

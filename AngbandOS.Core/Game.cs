@@ -93,6 +93,23 @@ internal partial class Game : IGameSerialize
     public bool HasFireResistance => AttributeSet.GetBool(nameof(ResFireAttribute)) || FireResistanceTimer.Value > 0 || HasFireImmunity;
     public bool HasFireSheath => AttributeSet.GetBool(nameof(ShFireAttribute));
     public bool HasFreeAction => AttributeSet.GetBool(nameof(FreeActAttribute));
+    public bool HasHoldLife => AttributeSet.GetBool(nameof(HoldLifeAttribute));
+    public bool HasLightningImmunity => AttributeSet.GetBool(nameof(ImElecAttribute));
+    public bool HasLightningResistance => AttributeSet.GetBool(nameof(ResElecAttribute)) || LightningResistanceTimer.Value != 0;
+    public bool HasElectricitySheath => AttributeSet.GetBool(nameof(ShElecAttribute));
+    public bool HasLightResistance => AttributeSet.GetBool(nameof(ResLightAttribute));
+    public bool HasNetherResistance => AttributeSet.GetBool(nameof(ResNetherAttribute));
+    public bool HasNexusResistance => AttributeSet.GetBool(nameof(ResNexusAttribute));
+    public bool HasPoisonResistance => AttributeSet.GetBool(nameof(ResPoisAttribute));
+    public bool HasQuakeWeapon => AttributeSet.GetBool(nameof(QuakeAttribute));
+    public bool HasRandomTeleport => AttributeSet.GetBool(nameof(TeleportAttribute));
+    public bool HasReflection => AttributeSet.GetBool(nameof(ReflectAttribute)) || EtherealnessTimer.Value > 0;
+    public bool HasSeeInvisibility => AttributeSet.GetBool(nameof(SeeInvisAttribute));
+    public bool HasShardResistance => AttributeSet.GetBool(nameof(ResShardsAttribute));
+    public bool HasSlowDigestion => AttributeSet.GetBool(nameof(SlowDigestAttribute));
+    public bool HasSoundResistance => AttributeSet.GetBool(nameof(ResSoundAttribute));
+    public bool HasTelepathy => AttributeSet.GetBool(nameof(TelepathyAttribute));
+    public bool HasTimeResistance => AttributeSet.GetBool(nameof(ResTimeAttribute));
     #endregion
 
     #region Game Serialization
@@ -101,12 +118,9 @@ internal partial class Game : IGameSerialize
         return new DictionaryGameStateBag(
             (nameof(SingletonRepository), saveGameState.CreateDerivedGameStateBag(SingletonRepository, typeof(SingletonRepository))),
 
-            ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear)),
-            ("bools4", saveGameState.CreateGameStateBag(HasConfusingTouch, HasHoldLife)),
-            ("bools5", saveGameState.CreateGameStateBag(HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon)),
-            ("bools6", saveGameState.CreateGameStateBag(HasRandomTeleport, HasReflection, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion)),
-            ("bools7", saveGameState.CreateGameStateBag(HasSoundResistance, HasTelepathy)),
-            ("bools8", saveGameState.CreateGameStateBag(HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance)),
+            ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch)),
+            ("bools6", saveGameState.CreateGameStateBag(HasRestrictingArmor, HasRestrictingGloves)),
+            ("bools8", saveGameState.CreateGameStateBag(IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance)),
             ("bools9", saveGameState.CreateGameStateBag(ResFear, ResTime, Vulnerable, _findBreakLeft, _findBreakRight)),
             ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment)),
             ("bools11", saveGameState.CreateGameStateBag(ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters)),
@@ -417,12 +431,9 @@ internal partial class Game : IGameSerialize
             SingletonRepository.LoadAndBind(gameConfiguration, restoreGameState.GetByKey(nameof(SingletonRepository)));
 
             // Now restore this game object itself.
-            (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear) = restoreGameState.GetByKey("bools1").Get7Bools();
-            (HasConfusingTouch, HasHoldLife) = restoreGameState.GetByKey("bools4").Get2Bools();
-            (HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon) = restoreGameState.GetByKey("bools5").Get8Bools();
-            (HasRandomTeleport, HasReflection, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion) = restoreGameState.GetByKey("bools6").Get7Bools();
-            (HasSoundResistance, HasTelepathy) = restoreGameState.GetByKey("bools7").Get2Bools();
-            (HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance) = restoreGameState.GetByKey("bools8").Get8Bools();
+            (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch) = restoreGameState.GetByKey("bools1").Get8Bools();
+            (HasRestrictingArmor, HasRestrictingGloves) = restoreGameState.GetByKey("bools6").Get2Bools();
+            (IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance) = restoreGameState.GetByKey("bools8").Get7Bools();
             (ResFear, ResTime, Vulnerable, _findBreakLeft, _findBreakRight) = restoreGameState.GetByKey("bools9").Get5Bools();
             (_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment) = restoreGameState.GetByKey("bools10").Get8Bools();
             (ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
@@ -5872,12 +5883,12 @@ internal partial class Game : IGameSerialize
         {
             dam = (dam + 2) / 3;
         }
-        if (!(LightningResistanceTimer.Value != 0 || HasLightningResistance) && DieRoll(HurtChance) == 1)
+        if (!HasLightningResistance && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(DexterityAbility)));
         }
         TakeHit(dam, kbStr);
-        if (!(LightningResistanceTimer.Value != 0 && HasLightningResistance))
+        if (!HasLightningResistance)
         {
             InvenDamage(SetElecDestroy, inv);
         }
@@ -8864,11 +8875,11 @@ internal partial class Game : IGameSerialize
         {
             auraDamage = DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
             string auraDam = monster.IndefiniteVisibleName;
-            if (LightningResistanceTimer.Value != 0)
+            if (LightningResistanceTimer.Value != 0) // These are additive resistances
             {
                 auraDamage = (auraDamage + 2) / 3;
             }
-            if (HasLightningResistance)
+            if (HasLightningResistance) // Additive
             {
                 auraDamage = (auraDamage + 2) / 3;
             }

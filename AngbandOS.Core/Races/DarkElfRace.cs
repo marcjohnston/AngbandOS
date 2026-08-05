@@ -51,11 +51,4 @@ internal class DarkElfRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasSeeInvisibility = true;
-        }
-    }
 }

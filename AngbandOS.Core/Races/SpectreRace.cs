@@ -60,18 +60,6 @@ internal class SpectreRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        Game.HasNetherResistance = true;
-        Game.HasHoldLife = true;
-        Game.HasSeeInvisibility = true;
-        Game.HasPoisonResistance = true;
-        Game.HasSlowDigestion = true;
-        if (Game.ExperienceLevel.IntValue > 34)
-        {
-            Game.HasTelepathy = true;
-        }
-    }
     public override bool RestsTillDuskInsteadOfDawn => true;
     public override void Eat(Item item)
     {

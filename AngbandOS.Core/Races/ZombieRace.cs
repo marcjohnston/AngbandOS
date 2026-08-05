@@ -59,14 +59,6 @@ internal class ZombieRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        Game.HasNetherResistance = true;
-        Game.HasHoldLife = true;
-        Game.HasSeeInvisibility = true;
-        Game.HasPoisonResistance = true;
-        Game.HasSlowDigestion = true;
-    }
     public override bool RestsTillDuskInsteadOfDawn => true;
     public override void Eat(Item item)
     {

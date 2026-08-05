@@ -56,12 +56,4 @@ internal class MindcrafterCharacterClass : CharacterClass
     public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
     public override ArtifactBias? ArtifactBias => (Game.DieRoll(5) > 2 ? Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias)) : null);
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(55000 / ((level * level) + 40)));
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 39)
-        {
-            Game.HasTelepathy = true;
-        }
-    }
 }

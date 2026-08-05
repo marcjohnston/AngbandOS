@@ -60,6 +60,7 @@ internal class Monster : IItemContainer, IGameSerialize
     /// </summary>
     private bool _isPet;
 
+    #region Sensed Memory Flags - Memory flags that the monster has been able to sense about the player.
     public bool SmImmAcid = false;
     public bool SmImmCold = false;
     public bool SmImmElec = false;
@@ -90,6 +91,7 @@ internal class Monster : IItemContainer, IGameSerialize
     public bool SmResPois = false;
     public bool SmResShard = false;
     public bool SmResSound = false;
+    #endregion
 
     public MonsterRace? Race = null;
 

@@ -57,12 +57,4 @@ internal class HalfTrollRace : Race
         }
         return null;
     }
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 14)
-        {
-            Game.HasSlowDigestion = true;
-        }
-    }
 }

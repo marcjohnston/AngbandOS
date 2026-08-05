@@ -36,9 +36,4 @@ internal class ElfRace : Race
         itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
     }
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
-
-    public override void CalcBonuses()
-    {
-        Game.HasLightResistance = true;
-    }
 }

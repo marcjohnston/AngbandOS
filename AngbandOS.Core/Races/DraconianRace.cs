@@ -71,15 +71,4 @@ internal class DraconianRace : Race
     {
         return new string[] { $"You can breathe, dam. {2 * level} (cost {level})." };
     }
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasLightningResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 34)
-        {
-            Game.HasPoisonResistance = true;
-        }
-    }
 }

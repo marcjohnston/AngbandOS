@@ -61,16 +61,5 @@ internal class MindFlayerRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 14)
-        {
-            Game.HasSeeInvisibility = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 29)
-        {
-            Game.HasTelepathy = true;
-        }
-    }
     public override string ChanceOfSanityBlastImmunityExpressionText => "100";
 }

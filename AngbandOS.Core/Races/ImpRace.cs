@@ -66,12 +66,5 @@ internal class ImpRace : Race
             return null;
         return values.ToArray();
     }
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 9)
-        {
-            Game.HasSeeInvisibility = true;
-        }
-    }
     public override string ChanceOfSanityBlastImmunityExpressionText => "100";
 }
