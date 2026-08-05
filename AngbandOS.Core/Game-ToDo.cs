@@ -118,8 +118,6 @@ internal partial class Game
     public int WisdomBonus;
     #endregion
 
-
-
     public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable
     {
         switch (DieRoll(6))
@@ -138,5 +136,4 @@ internal partial class Game
                 return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre6MonsterRaceFilter));
         }
     }
-
 }
