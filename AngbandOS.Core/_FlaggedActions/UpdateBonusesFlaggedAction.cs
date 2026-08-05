@@ -141,7 +141,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillRanged = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added rangedtohit
         Game.SkillThrowing = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added throwingtohit
         Game.SkillDigging = 0;
-        Game.CharacterClass.CalcBonuses();
         Game.Race.CalcBonuses();
         Game.Speed.IntValue = 110;
         Game.MeleeAttacksPerRound = 1;
