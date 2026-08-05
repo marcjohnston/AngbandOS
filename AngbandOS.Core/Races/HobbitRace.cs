@@ -49,9 +49,4 @@ internal class HobbitRace : Race
         }
         return null;
     }
-
-    public override void CalcBonuses()
-    {
-        Game.HasSustainDexterity = true;
-    }
 }

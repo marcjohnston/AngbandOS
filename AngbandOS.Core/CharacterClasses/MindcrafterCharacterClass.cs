@@ -63,10 +63,6 @@ internal class MindcrafterCharacterClass : CharacterClass
         {
             Game.HasFearResistance = true;
         }
-        if (Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasSustainWisdom = true;
-        }
         if (Game.ExperienceLevel.IntValue > 29)
         {
             Game.HasConfusionResistance = true;

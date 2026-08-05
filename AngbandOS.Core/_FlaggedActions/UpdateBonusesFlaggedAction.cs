@@ -93,12 +93,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasHoldLife = false;
         Game.HasTelepathy = false;
         Game.GlowInTheDarkRadius = 0;
-        Game.HasSustainStrength = false;
-        Game.HasSustainIntelligence = false;
-        Game.HasSustainWisdom = false;
-        Game.HasSustainConstitution = false;
-        Game.HasSustainDexterity = false;
-        Game.HasSustainCharisma = false;
         Game.HasLightningResistance = false;
         Game.HasFireResistance = false;
         Game.HasColdResistance = false;
@@ -178,30 +172,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
             ability.OverrideUpdateBonuses();
-        }
-        if (Game.SustainAll)
-        {
-            Game.HasSustainConstitution = true;
-            if (Game.ExperienceLevel.IntValue > 9)
-            {
-                Game.HasSustainStrength = true;
-            }
-            if (Game.ExperienceLevel.IntValue > 19)
-            {
-                Game.HasSustainDexterity = true;
-            }
-            if (Game.ExperienceLevel.IntValue > 29)
-            {
-                Game.HasSustainWisdom = true;
-            }
-            if (Game.ExperienceLevel.IntValue > 39)
-            {
-                Game.HasSustainIntelligence = true;
-            }
-            if (Game.ExperienceLevel.IntValue > 49)
-            {
-                Game.HasSustainCharisma = true;
-            }
         }
         foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>())
         {
@@ -366,30 +336,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     if (oPtr.EffectiveAttributeSet.NoTele)
                     {
                         Game.HasAntiTeleport = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustStrAttribute)).Get())
-                    {
-                        Game.HasSustainStrength = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustIntAttribute)).Get())
-                    {
-                        Game.HasSustainIntelligence = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get())
-                    {
-                        Game.HasSustainWisdom = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustDexAttribute)).Get())
-                    {
-                        Game.HasSustainDexterity = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustConAttribute)).Get())
-                    {
-                        Game.HasSustainConstitution = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Get())
-                    {
-                        Game.HasSustainCharisma = true;
                     }
                     if (oPtr.IsKnown())
                     {

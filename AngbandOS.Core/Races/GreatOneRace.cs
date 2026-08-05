@@ -57,9 +57,4 @@ internal class GreatOneRace : Race
             return null;
         return values.ToArray();
     }
-
-    public override void CalcBonuses()
-    {
-        Game.HasSustainConstitution = true;
-    }
 }

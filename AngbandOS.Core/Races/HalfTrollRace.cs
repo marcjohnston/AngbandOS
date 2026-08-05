@@ -60,7 +60,6 @@ internal class HalfTrollRace : Race
 
     public override void CalcBonuses()
     {
-        Game.HasSustainStrength = true;
         if (Game.ExperienceLevel.IntValue > 14)
         {
             Game.HasSlowDigestion = true;

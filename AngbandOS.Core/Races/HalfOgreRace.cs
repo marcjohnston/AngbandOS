@@ -54,6 +54,5 @@ internal class HalfOgreRace : Race
     public override void CalcBonuses()
     {
         Game.HasDarkResistance = true;
-        Game.HasSustainStrength = true;
     }
 }

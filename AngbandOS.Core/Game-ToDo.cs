@@ -64,12 +64,6 @@ internal partial class Game
     public bool HasShardResistance;
     public bool HasSlowDigestion;
     public bool HasSoundResistance;
-    public bool HasSustainCharisma;
-    public bool HasSustainConstitution;
-    public bool HasSustainDexterity;
-    public bool HasSustainIntelligence;
-    public bool HasSustainStrength;
-    public bool HasSustainWisdom;
     public bool HasTelepathy;
     public bool HasTimeResistance;
     public int Height;
@@ -106,7 +100,6 @@ internal partial class Game
     public int SpeedBonus;
     public int StealthBonus;
     public int StrengthBonus;
-    public bool SustainAll;
     public bool Vulnerable;
     public int WisdomBonus;
     #endregion
@@ -117,6 +110,12 @@ internal partial class Game
     public bool HasAcidImmunity => AttributeSet.GetBool(nameof(ImAcidAttribute));
     public bool HasAcidResistance => AttributeSet.GetBool(nameof(ResAcidAttribute));
     public bool HasAntiMagic => AttributeSet.GetBool(nameof(NoMagicAttribute));
+    public bool HasSustainCharisma => AttributeSet.GetBool(nameof(SustChaAttribute));
+    public bool HasSustainConstitution => AttributeSet.GetBool(nameof(SustConAttribute));
+    public bool HasSustainDexterity => AttributeSet.GetBool(nameof(SustDexAttribute));
+    public bool HasSustainIntelligence => AttributeSet.GetBool(nameof(SustIntAttribute));
+    public bool HasSustainStrength => AttributeSet.GetBool(nameof(SustStrAttribute));
+    public bool HasSustainWisdom => AttributeSet.GetBool(nameof(SustWisAttribute));
     #endregion
 
     public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable

@@ -63,8 +63,6 @@ internal class MindFlayerRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.HasSustainIntelligence = true;
-        Game.HasSustainWisdom = true;
         if (Game.ExperienceLevel.IntValue > 14)
         {
             Game.HasSeeInvisibility = true;

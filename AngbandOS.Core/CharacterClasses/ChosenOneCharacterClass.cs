@@ -119,21 +119,9 @@ internal class ChosenOneCharacterClass : CharacterClass
         {
             Game.HasSlowDigestion = true;
         }
-        if (Game.ExperienceLevel.IntValue >= 14)
-        {
-            Game.HasSustainConstitution = true;
-        }
         if (Game.ExperienceLevel.IntValue >= 16)
         {
             Game.HasPoisonResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 18)
-        {
-            Game.HasSustainDexterity = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 20)
-        {
-            Game.HasSustainStrength = true;
         }
         if (Game.ExperienceLevel.IntValue >= 22)
         {
@@ -155,10 +143,6 @@ internal class ChosenOneCharacterClass : CharacterClass
         {
             Game.HasLightResistance = true;
         }
-        if (Game.ExperienceLevel.IntValue >= 32)
-        {
-            Game.HasSustainCharisma = true;
-        }
         if (Game.ExperienceLevel.IntValue >= 34)
         {
             Game.HasSoundResistance = true;
@@ -167,17 +151,9 @@ internal class ChosenOneCharacterClass : CharacterClass
         {
             Game.HasDisenchantResistance = true;
         }
-        if (Game.ExperienceLevel.IntValue >= 40)
-        {
-            Game.HasSustainIntelligence = true;
-        }
         if (Game.ExperienceLevel.IntValue >= 42)
         {
             Game.HasChaosResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 44)
-        {
-            Game.HasSustainWisdom = true;
         }
         if (Game.ExperienceLevel.IntValue >= 46)
         {

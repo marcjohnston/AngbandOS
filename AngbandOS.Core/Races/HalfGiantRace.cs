@@ -52,7 +52,6 @@ internal class HalfGiantRace : Race
 
     public override void CalcBonuses()
     {
-        Game.HasSustainStrength = true;
         Game.HasShardResistance = true;
     }
 }
