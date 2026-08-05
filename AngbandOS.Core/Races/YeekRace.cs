@@ -54,8 +54,4 @@ internal class YeekRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        Game.HasAcidResistance = true;
-    }
 }

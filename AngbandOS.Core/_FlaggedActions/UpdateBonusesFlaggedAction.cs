@@ -99,7 +99,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasSustainConstitution = false;
         Game.HasSustainDexterity = false;
         Game.HasSustainCharisma = false;
-        Game.HasAcidResistance = false;
         Game.HasLightningResistance = false;
         Game.HasFireResistance = false;
         Game.HasColdResistance = false;
@@ -292,10 +291,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     if (oPtr.EffectiveAttributeSet.ImElec)
                     {
                         Game.HasLightningImmunity = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Get())
-                    {
-                        Game.HasAcidResistance = true;
                     }
                     if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResElecAttribute)).Get())
                     {
