@@ -9,14 +9,6 @@ namespace AngbandOS.Core;
 internal partial class Game
 {
     #region State Data
-    public bool IsBirthday;
-    public bool IsDawn;
-    public bool IsDusk;
-    public bool IsFeelTime;
-    public bool IsHalloween;
-    public bool IsMidnight;
-    public bool IsNewYear;
-
     public bool IsSearching;
 
     public int SkillDigging;

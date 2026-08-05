@@ -24,6 +24,14 @@ internal partial class Game : IGameSerialize
     /// use property.  A timer won't work because it is turn based and attributes won't work because it is not a permanent property.
     /// </summary>
     public bool HasConfusingTouch;
+
+    public bool IsBirthday;
+    public bool IsDawn;
+    public bool IsDusk;
+    public bool IsFeelTime;
+    public bool IsHalloween;
+    public bool IsMidnight;
+    public bool IsNewYear;
     #endregion
 
     #region Non-State Properties - Properties that are post-load initialized and based on the Game.AttributeSet
