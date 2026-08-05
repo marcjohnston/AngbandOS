@@ -35,7 +35,7 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(WisdomAttribute), "4"),
         (nameof(IntelligenceAttribute), "4"),
         (nameof(CharismaAttribute), "4"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Atal";
 }

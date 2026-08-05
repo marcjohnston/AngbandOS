@@ -45,7 +45,7 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
         (nameof(DiceSidesAttribute), "1"),
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "5000000"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(WisdomAttribute), "5"),
         (nameof(SpeedAttribute), "5"),
         (nameof(IntelligenceAttribute), "5"),

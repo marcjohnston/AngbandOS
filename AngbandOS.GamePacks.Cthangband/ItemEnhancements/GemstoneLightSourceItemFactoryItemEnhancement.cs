@@ -8,7 +8,7 @@ public class GemstoneLightSourceItemFactoryItemEnhancement : ItemEnhancementGame
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(RadiusAttribute), "2"),
+        (nameof(GlowRadiusAttribute), "2"),
         (nameof(WeightAttribute), "5"),
         (nameof(ValueAttribute), "60000"),
         (nameof(DamageDiceAttribute), "1"),

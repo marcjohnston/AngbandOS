@@ -10,7 +10,7 @@ public class HatOfLightItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "500"),
         (nameof(TreasureRatingAttribute), "6"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string? FriendlyName => "of Light";
     }

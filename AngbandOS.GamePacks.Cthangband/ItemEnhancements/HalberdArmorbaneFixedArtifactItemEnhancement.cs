@@ -25,7 +25,7 @@ public class HalberdArmorbaneFixedArtifactItemEnhancement : ItemEnhancementGameC
         (nameof(MeleeToHitAttribute), "6"),
         (nameof(ValueAttribute), "22000"),
         (nameof(CharismaAttribute), "3"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Armorbane'";
 }

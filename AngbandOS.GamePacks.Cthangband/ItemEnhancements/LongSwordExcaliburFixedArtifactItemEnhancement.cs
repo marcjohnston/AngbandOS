@@ -30,7 +30,7 @@ public class LongSwordExcaliburFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(DamageDiceAttribute), "2"),
         (nameof(ValueAttribute), "300000"),
         (nameof(SpeedAttribute), "10"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Excalibur'";
 }

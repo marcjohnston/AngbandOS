@@ -26,7 +26,7 @@ public class SmallSwordStingFixedArtifactItemEnhancement : ItemEnhancementGameCo
         (nameof(ValueAttribute), "100000"),
         (nameof(WeightAttribute), "-5"),
         (nameof(DexterityAttribute), "2"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(StrengthAttribute), "2"),
     };
     public override string FriendlyName => "'Sting'";

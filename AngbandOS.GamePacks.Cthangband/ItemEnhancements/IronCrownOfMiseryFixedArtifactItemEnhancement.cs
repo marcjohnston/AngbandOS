@@ -27,7 +27,7 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(ValueAttribute), "112400"),
         (nameof(AttacksAttribute), "25"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(DexterityAttribute), "-25"),
         (nameof(ConstitutionAttribute), "-25"),
         (nameof(StrengthAttribute), "-25"),

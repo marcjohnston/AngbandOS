@@ -18,7 +18,7 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(InfravisionAttribute), "4"),
         (nameof(ToDamageAttribute), "6"),

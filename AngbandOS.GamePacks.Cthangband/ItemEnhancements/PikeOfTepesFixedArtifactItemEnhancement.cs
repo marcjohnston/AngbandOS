@@ -28,7 +28,7 @@ public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(AttacksAttribute), "10"),
         (nameof(ValueAttribute), "32000"),
         (nameof(IntelligenceAttribute), "2"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Tepes";
 }

@@ -9,6 +9,6 @@ public class SheathOfFireItemEnhancement : ItemEnhancementGameConfiguration
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "5000"),
-        (nameof(RadiusAttribute), "1")
+        (nameof(GlowRadiusAttribute), "1")
     };
 }

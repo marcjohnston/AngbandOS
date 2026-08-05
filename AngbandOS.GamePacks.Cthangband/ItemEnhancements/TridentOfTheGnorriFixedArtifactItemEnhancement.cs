@@ -30,7 +30,7 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(MeleeToHitAttribute), "15"),
         (nameof(DamageDiceAttribute), "3"),
         (nameof(ValueAttribute), "120000"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(SlayDragonAttribute), "3"),
         (nameof(DexterityAttribute), "4"),
     };

@@ -26,7 +26,7 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(Vorpal1InChanceAttribute), "3"),
         (nameof(SpeedAttribute), "2"),
         (nameof(DexterityAttribute), "2"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(StrengthAttribute), "2"),
     };
     public override string FriendlyName => "'Vorpal Blade'";

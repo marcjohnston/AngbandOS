@@ -26,7 +26,7 @@ public class DragonHelmOfPowerFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(WeightAttribute), "25"),
         (nameof(DexterityAttribute), "4"),
         (nameof(ConstitutionAttribute), "4"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(TreasureRatingAttribute), "20"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.Terror40xEvery3xp10Activation);

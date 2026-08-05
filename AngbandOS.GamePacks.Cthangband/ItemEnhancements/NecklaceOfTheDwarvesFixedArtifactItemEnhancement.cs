@@ -17,7 +17,7 @@ public class NecklaceOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhancementG
     {
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(ValueAttribute), "75000"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(StrengthAttribute), "3"),
     };
     public override string FriendlyName => "of the Dwarves";

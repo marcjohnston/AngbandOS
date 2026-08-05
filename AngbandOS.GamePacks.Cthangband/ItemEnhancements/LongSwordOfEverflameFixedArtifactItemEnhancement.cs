@@ -27,7 +27,7 @@ public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(AttacksAttribute), "5"),
         (nameof(ValueAttribute), "80000"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(StrengthAttribute), "4"),
     };
     public override string FriendlyName => "of Everflame";

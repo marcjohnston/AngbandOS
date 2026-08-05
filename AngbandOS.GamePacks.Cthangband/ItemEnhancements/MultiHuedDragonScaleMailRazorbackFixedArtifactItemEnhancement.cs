@@ -26,7 +26,7 @@ public class MultiHuedDragonScaleMailRazorbackFixedArtifactItemEnhancement : Ite
         (nameof(AttacksAttribute), "25"),
         (nameof(ValueAttribute), "400000"),
         (nameof(WeightAttribute), "300"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Razorback'";
 }

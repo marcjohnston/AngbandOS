@@ -31,7 +31,7 @@ public class RingOfElementalPowerStormFixedArtifactItemEnhancement : ItemEnhance
         (nameof(DiceSidesAttribute), "1"),
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "300000"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(WisdomAttribute), "3"),
         (nameof(SpeedAttribute), "3"),
         (nameof(IntelligenceAttribute), "3"),

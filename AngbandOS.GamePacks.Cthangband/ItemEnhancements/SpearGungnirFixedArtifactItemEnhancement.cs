@@ -33,7 +33,7 @@ public class SpearGungnirFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(ValueAttribute), "180000"),
         (nameof(WisdomAttribute), "4"),
         (nameof(IntelligenceAttribute), "4"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Gungnir'";
 }

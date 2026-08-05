@@ -34,7 +34,7 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(WisdomAttribute), "3"),
         (nameof(SpeedAttribute), "3"),
         (nameof(ConstitutionAttribute), "3"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of the Sun";
 }

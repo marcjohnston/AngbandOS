@@ -20,7 +20,7 @@ public class RapierOfMontoyaFixedArtifactItemEnhancement : ItemEnhancementGameCo
         (nameof(ToDamageAttribute), "19"),
         (nameof(MeleeToHitAttribute), "12"),
         (nameof(ValueAttribute), "15000"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Montoya";
 }

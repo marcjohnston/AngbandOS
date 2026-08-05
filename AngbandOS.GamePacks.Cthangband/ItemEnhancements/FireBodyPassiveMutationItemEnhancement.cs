@@ -7,6 +7,6 @@ namespace AngbandOS.GamePacks.Cthangband;
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(RadiusAttribute), "1")
+        (nameof(GlowRadiusAttribute), "1")
     };
 }

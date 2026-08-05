@@ -36,7 +36,7 @@ public class TwoHandedSwordFiretongueFixedArtifactItemEnhancement : ItemEnhancem
         (nameof(VorpalExtraAttacks1InChanceAttribute), "2"),
         (nameof(Vorpal1InChanceAttribute), "6"),
         (nameof(CharismaAttribute), "4"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(SlayDragonAttribute), "5"),
         (nameof(StrengthAttribute), "4"),
     };

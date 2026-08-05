@@ -38,7 +38,7 @@ public class BladeOfChaosDoomcallerFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(AttacksAttribute), "-50"),
         (nameof(MeleeToHitAttribute), "18"),
         (nameof(ToDamageAttribute), "28"),
-        (nameof(RadiusAttribute), "1"),
+        (nameof(GlowRadiusAttribute), "1"),
     };
     public override string FriendlyName => "'Doomcaller'";
 }

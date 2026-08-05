@@ -15,7 +15,7 @@ public class StarEssenceOfXothFixedArtifactItemEnhancement : ItemEnhancementGame
     {
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(ValueAttribute), "32500"),
-        (nameof(RadiusAttribute), "1"),
+        (nameof(GlowRadiusAttribute), "1"),
         (nameof(SpeedAttribute), "1"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.MagicMappingAndIlluminationEvery1d50p50DirectionalActivation);

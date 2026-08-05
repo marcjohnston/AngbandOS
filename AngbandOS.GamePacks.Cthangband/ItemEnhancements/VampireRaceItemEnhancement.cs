@@ -11,7 +11,7 @@ public class VampireRaceItemEnhancement : ItemEnhancementGameConfiguration
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(RadiusAttribute), "1"),
+        (nameof(GlowRadiusAttribute), "1"),
         (nameof(StrengthAttribute), "3"),
         (nameof(CharismaAttribute), "2"),
         (nameof(ConstitutionAttribute), "1"),

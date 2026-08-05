@@ -12,7 +12,7 @@ public class WeaponOfBurningItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "3000"),
         (nameof(TreasureRatingAttribute), "20"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string? FriendlyName => "of Burning";
     }

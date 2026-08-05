@@ -295,7 +295,7 @@ internal class JournalScript : UniversalScript, IGetKey
         DisplayStat("Hide Type", 31, 26, attributeSet => attributeSet.GetBool(nameof(HideTypeAttribute)));
         DisplayStat("Show Mods", 32, 26, attributeSet => attributeSet.GetBool(nameof(ShowModsAttribute)));
         DisplayStat("Levitate", 33, 26, attributeSet => attributeSet.GetBool(nameof(FeatherAttribute)));
-        DisplayStat("Light", 34, 26, attributeSet => attributeSet.GetInt(nameof(RadiusAttribute)) > 0);
+        DisplayStat("Light", 34, 26, attributeSet => attributeSet.GetInt(nameof(GlowRadiusAttribute)) > 0);
         DisplayStat("See Invis", 35, 26, attributeSet => attributeSet.GetBool(nameof(SeeInvisAttribute)));
         DisplayStat("Telepathy", 36, 26, attributeSet => attributeSet.GetBool(nameof(TelepathyAttribute)));
 

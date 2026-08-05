@@ -18,7 +18,7 @@ public class BroadSwordBlackIceFixedArtifactItemEnhancement : ItemEnhancementGam
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(ValueAttribute), "40000"),
         (nameof(StealthAttribute), "3"),
         (nameof(MeleeToHitAttribute), "10"),

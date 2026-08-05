@@ -30,7 +30,7 @@ public class RingOfElementalPowerIceFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(DiceSidesAttribute), "1"),
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "200000"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(WisdomAttribute), "2"),
         (nameof(SpeedAttribute), "2"),
         (nameof(DexterityAttribute), "2"),

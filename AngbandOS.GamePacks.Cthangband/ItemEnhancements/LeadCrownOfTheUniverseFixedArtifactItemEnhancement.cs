@@ -38,7 +38,7 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(DexterityAttribute), "125"),
         (nameof(ConstitutionAttribute), "125"),
         (nameof(CharismaAttribute), "125"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(StrengthAttribute), "125"),
     };
     public override string FriendlyName => "of the Universe";

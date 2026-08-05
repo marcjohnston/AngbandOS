@@ -23,7 +23,7 @@ public class FlailTotilaFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "55000"),
         (nameof(StealthAttribute), "2"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Totila'";
 }

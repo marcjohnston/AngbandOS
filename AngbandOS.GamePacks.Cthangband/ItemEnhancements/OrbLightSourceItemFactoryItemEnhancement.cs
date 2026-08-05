@@ -8,7 +8,7 @@ public class OrbLightSourceItemFactoryItemEnhancement : ItemEnhancementGameConfi
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(RadiusAttribute), "2"),
+        (nameof(GlowRadiusAttribute), "2"),
         (nameof(WeightAttribute), "50"),
         (nameof(ValueAttribute), "1000"),
         (nameof(DamageDiceAttribute), "1"),

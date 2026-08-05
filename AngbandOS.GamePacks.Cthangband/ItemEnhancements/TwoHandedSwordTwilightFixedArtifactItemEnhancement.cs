@@ -32,7 +32,7 @@ public class TwoHandedSwordTwilightFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(ValueAttribute), "40000"),
         (nameof(WeightAttribute), "50"),
         (nameof(SpeedAttribute), "10"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Twilight'";
 }

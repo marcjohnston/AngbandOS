@@ -4,6 +4,6 @@ public class LightsourceRadius3ItemEnhancement : ItemEnhancementGameConfiguratio
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
 }

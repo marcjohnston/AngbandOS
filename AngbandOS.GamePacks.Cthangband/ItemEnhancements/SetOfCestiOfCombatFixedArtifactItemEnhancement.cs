@@ -27,7 +27,7 @@ public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(AttacksAttribute), "20"),
         (nameof(ValueAttribute), "110000"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(DexterityAttribute), "4"),
     };
     public override string FriendlyName => "of Combat";

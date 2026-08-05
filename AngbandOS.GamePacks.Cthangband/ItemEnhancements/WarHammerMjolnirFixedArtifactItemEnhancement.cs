@@ -35,7 +35,7 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
         (nameof(AttacksAttribute), "5"),
         (nameof(DamageDiceAttribute), "6"),
         (nameof(ValueAttribute), "250000"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(WisdomAttribute), "4"),
         (nameof(SlayDragonAttribute), "5"),
     };

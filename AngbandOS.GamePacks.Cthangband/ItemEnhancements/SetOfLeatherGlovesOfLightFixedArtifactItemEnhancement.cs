@@ -17,7 +17,7 @@ public class SetOfLeatherGlovesOfLightFixedArtifactItemEnhancement : ItemEnhance
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(AttacksAttribute), "10"),
         (nameof(ValueAttribute), "30000"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.MagicMissile2d6Every2DirectionalActivation);
     public override string FriendlyName => "of Light";

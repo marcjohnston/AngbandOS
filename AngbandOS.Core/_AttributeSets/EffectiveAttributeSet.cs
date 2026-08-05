@@ -781,11 +781,11 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
     {
         get
         {
-            return Get<SummationEffectiveAttributeValue>(nameof(RadiusAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(GlowRadiusAttribute)).Get();
         }
         set
         {
-            Get<SummationEffectiveAttributeValue>(nameof(RadiusAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(GlowRadiusAttribute)).Append(value);
         }
     }
     public bool Valueless

@@ -21,7 +21,7 @@ public class QuarterstaffFirestaffFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(ValueAttribute), "70000"),
         (nameof(IntelligenceAttribute), "3"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Firestaff'";
 }

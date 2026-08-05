@@ -22,7 +22,7 @@ public class BroadSwordLightningFixedArtifactItemEnhancement : ItemEnhancementGa
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(SlayDragonAttribute), "15"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(ValueAttribute), "95000"),
         (nameof(SearchAttribute), "4"),
         (nameof(MeleeToHitAttribute), "12"),
