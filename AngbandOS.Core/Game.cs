@@ -8,7 +8,30 @@ namespace AngbandOS.Core;
 
 internal partial class Game : IGameSerialize
 {
-    #region State Data
+    #region WIP State Data
+    public int SkillMelee;
+    public int SkillRanged;
+    public int SkillSavingThrow;
+    public int SkillPerception;
+    public int SkillSearching;
+    public int SkillStealth;
+    public int SkillThrowing;
+    public int SkillUseDevice;
+    public int SocialClass;
+
+    public int CharismaBonus;
+    public int ConstitutionBonus;
+    public int DexterityBonus;
+    public int IntelligenceBonus;
+    public int StrengthBonus;
+    public int WisdomBonus;
+    public bool MagicResistance;
+    public int SearchBonus;
+    public int SpeedBonus;
+    public int StealthBonus;
+    #endregion
+
+    #region Confirmed State Data
     /// <summary>
     /// Returns the height of the character.  This is randomly generated at the start of the game and is used to determine the player's weight and other properties.
     /// </summary>
