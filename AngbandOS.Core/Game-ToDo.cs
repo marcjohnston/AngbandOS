@@ -18,7 +18,6 @@ internal partial class Game
     public bool IsNewYear;
     public bool HasAcidImmunity;
     public bool HasAcidResistance;
-    public bool HasAggravation;
     public bool HasAntiMagic;
     public bool HasAntiTeleport;
     public bool HasAntiTheft;
@@ -115,7 +114,10 @@ internal partial class Game
     public int WisdomBonus;
     #endregion
 
-    public bool HasRegeneration => AttributeSet.GetBool(nameof(RegenAttribute)) && !AttributeSet.GetBool(nameof(SuppressRegenAttribute)); // TODO: This can be converted to an expression
+    #region AttributeSet Based Functions 
+    public bool HasAggravation => AttributeSet.GetBool(nameof(AggravateAttribute));
+    public bool HasRegeneration => AttributeSet.GetBool(nameof(RegenAttribute)) && !AttributeSet.GetBool(nameof(SuppressRegenAttribute));
+    #endregion
 
     public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable
     {

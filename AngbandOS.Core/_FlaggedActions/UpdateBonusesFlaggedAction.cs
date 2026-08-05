@@ -81,7 +81,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         Game.BonusArmorClass = 0;
         Game.UnknownBonusArmorClass = 0;
-        Game.HasAggravation = false;
         Game.HasRandomTeleport = false;
         Game.HasExperienceDrain = false;
         Game.HasBlessedBlade = false;
@@ -238,10 +237,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get())
                     {
                         extraShots++;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(AggravateAttribute)).Get())
-                    {
-                        Game.HasAggravation = true;
                     }
                     if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(TeleportAttribute)).Get())
                     {
