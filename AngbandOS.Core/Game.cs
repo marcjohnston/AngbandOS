@@ -60,6 +60,12 @@ internal partial class Game : IGameSerialize
     /// Returns true, if the player is immune to acid.
     /// </summary>
     public bool HasAcidImmunity => AttributeSet.GetBool(nameof(ImAcidAttribute));
+
+    /// <summary>
+    /// Returns the radius for which the player glows.  Spectres, sprites and vampires glow.
+    /// </summary>
+    public int GlowRadius => AttributeSet.GetInt(nameof(GlowRadiusAttribute)) + (AttributeSet.GetBool(nameof(ShFireAttribute)) ? 1 : 0);
+
     public bool HasAcidResistance => AttributeSet.GetBool(nameof(ResAcidAttribute)) || AcidResistanceTimer.Value > 0;
     public bool HasAntiMagic => AttributeSet.GetBool(nameof(NoMagicAttribute));
     public bool HasSustainCharisma => AttributeSet.GetBool(nameof(SustChaAttribute));
@@ -1590,6 +1596,12 @@ internal partial class Game : IGameSerialize
     public IsWinnerBoolProperty IsWinner { get; }
     public IsWizardBoolProperty IsWizard { get; }
 
+    /// <summary>
+    /// Represents the distance that is lit around the player.  The light level is used to determine which grids are lit and which grids are dark.  The light level is also used to determine the maximum distance that the player can see.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
     public int LightLevel;
 
     /// <summary>

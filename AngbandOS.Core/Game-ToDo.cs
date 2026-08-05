@@ -23,11 +23,6 @@ internal partial class Game
     /// </summary>
     public bool HasConfusingTouch;
 
-    /// <summary>
-    /// Returns the radius for which the player glows.  Spectres, sprites and vampires glow.
-    /// </summary>
-    public int GlowRadius => AttributeSet.GetInt(nameof(GlowRadiusAttribute)) + (AttributeSet.GetBool(nameof(ShFireAttribute)) ? 1 : 0);
-
     public bool HasHoldLife;
     public bool HasLightningImmunity;
     public bool HasLightningResistance;
