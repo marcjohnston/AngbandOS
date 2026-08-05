@@ -139,6 +139,12 @@ internal partial class Game : IGameSerialize
     public int InfraVisionRange => AttributeSet.GetInt(nameof(InfraVisionAttribute)) + (InfravisionTimer.Value > 0 ? 1 : 0);
     #endregion
 
+
+    /// <summary>
+    /// Returns true, if the player successfully avoids theft.  This is based on the player's dexterity and experience level, as well as whether the player has anti-theft protection.
+    /// </summary>
+    public bool RollToPreventTheft => (ParalysisTimer.Value == 0 && RandomLessThan(100) < SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexTheftAvoidance + ExperienceLevel.IntValue) || HasAntiTheft;
+
     #region Game Serialization
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {

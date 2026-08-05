@@ -34,11 +34,6 @@ internal partial class Game
     public int SpeedBonus;
     public int StealthBonus;
     #endregion
-
-    /// <summary>
-    /// Returns true, if the player successfully avoids theft.  This is based on the player's dexterity and experience level, as well as whether the player has anti-theft protection.
-    /// </summary>
-    public bool RollToPreventTheft => (ParalysisTimer.Value == 0 && RandomLessThan(100) < SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexTheftAvoidance + ExperienceLevel.IntValue) || HasAntiTheft;
     public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable
     {
         switch (DieRoll(6))
