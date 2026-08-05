@@ -329,8 +329,8 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<SummationAttribute, SummationAttributeGameConfiguration>(gameConfiguration.SumAttributes, restoreGameState);
         LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes, restoreGameState);
 
-        // We need to cache the attributes because other singleton require them to be available during the load phase.
-        Game.CachedAttributes = Game.SingletonRepository.Get<Attribute>();
+        // We need to cache the attributes because other singleton require them to be available during the load phase.  We also sort them so that we can debug them easier.
+        Game.CachedAttributes = Game.SingletonRepository.Get<Attribute>().OrderBy(_attribute => _attribute.Key).ToArray();
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
         LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts, restoreGameState);

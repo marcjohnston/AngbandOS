@@ -15,11 +15,11 @@ internal class SusStatsPassiveMutation : Mutation
     public override string LoseMessage => "You no longer feel like you can recover from anything.";
     public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(SusStatsPassiveMutationItemEnhancement)),
-        (1, nameof(SusStatsPassiveMutationLevel10ItemEnhancement)),
-        (1, nameof(SusStatsPassiveMutationLevel20ItemEnhancement)),
-        (1, nameof(SusStatsPassiveMutationLevel30ItemEnhancement)),
-        (1, nameof(SusStatsPassiveMutationLevel40ItemEnhancement)),
-        (1, nameof(SusStatsPassiveMutationLevel50ItemEnhancement))
+        (10, nameof(SusStatsPassiveMutationLevel10ItemEnhancement)),
+        (20, nameof(SusStatsPassiveMutationLevel20ItemEnhancement)),
+        (30, nameof(SusStatsPassiveMutationLevel30ItemEnhancement)),
+        (40, nameof(SusStatsPassiveMutationLevel40ItemEnhancement)),
+        (50, nameof(SusStatsPassiveMutationLevel50ItemEnhancement))
     };
     public override void OnGain()
     {

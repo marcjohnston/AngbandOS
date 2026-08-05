@@ -158,8 +158,7 @@ internal class JournalScript : UniversalScript, IGetKey
             }
         }
 
-        ReadOnlyAttributeSet playerCharacteristics = Game.GetAbilitiesAsItemFlags(); // TODO: This is done once for every call.
-        if (getStat(playerCharacteristics))
+        if (getStat(Game.AttributeSet))
         {
             Game.Screen.Print(baseColor, "+", row, col + 10 + 26); // col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);
         }

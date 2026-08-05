@@ -11779,177 +11779,20 @@ internal partial class Game : IGameSerialize
         CheckExperience();
     }
 
-    public ReadOnlyAttributeSet GetAbilitiesAsItemFlags()
+    public ReadOnlyAttributeSet GetMutationsAttributeSet()
     {
-        EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet(this);
-        if (CharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFearResistanceLevel)
+        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(this);
+        foreach (Mutation mutation in MutationsPossessed)
         {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
-        }
-        if (CharacterClass.InstantChaosResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantChaosResistanceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainWisdomLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainWisdomLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
-        }
-        if (CharacterClass.InstantConfusionResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantConfusionResistanceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
-        }
-        if (CharacterClass.InstantTelepathyLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantTelepathyLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
-        }
-        if (CharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSpeedLevel && !ArmorIsHeavy())
-        {
-            itemCharacteristics.Speed++;
-        }
-        if (CharacterClass.InstantFreeActionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFreeActionLevel && !ArmorIsHeavy())
-        {
-            itemCharacteristics.FreeAct = true;
-        }
-        if (CharacterClass.InstantBlindnessResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantBlindnessResistanceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Set();
-        }
-        if (CharacterClass.InstantFeatherFallingLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFeatherFallingLevel)
-        {
-            itemCharacteristics.Feather = true;
-        }
-        if (CharacterClass.InstantSeeInvisibilityLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSeeInvisibilityLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-        }
-        if (CharacterClass.InstantSlowDigestionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSlowDigestionLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainConstitutionLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
-        }
-        if (CharacterClass.InstantPoisonResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantPoisonResistanceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainDexterityLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainDexterityLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainStrengthLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainStrengthLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
-        }
-        if (CharacterClass.InstantHoldLifeLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantHoldLifeLevel)
-        {
-            itemCharacteristics.HoldLife = true;
-        }
-        if (CharacterClass.InstantDarknessResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantDarknessResistanceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
-        }
-        if (CharacterClass.InstantLightResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantLightResistanceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainCharismaLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainCharismaLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
-        }
-        if (CharacterClass.InstantSoundResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSoundResistanceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Set();
-        }
-        if (CharacterClass.InstantDisenchantmentResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantDisenchantmentResistanceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Set();
-        }
-        if (CharacterClass.InstantRegenerationLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantRegenerationLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainIntelligenceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
-        }
-        if (CharacterClass.InstantNexusResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantNexusResistanceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Set();
-        }
-        if (CharacterClass.InstantShardsResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantShardsResistanceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Set();
-        }
-        if (CharacterClass.InstantNetherResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantNetherResistanceLevel)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
-        }
-        if (CharacterClass.ItemRadiusOverride.HasValue)
-        {
-            itemCharacteristics.Radius = CharacterClass.ItemRadiusOverride.Value;
-        }
+            mutation.RefreshAndSquashAttributeSet();
 
-        Race.UpdateRacialAbilities(ExperienceLevel.IntValue, itemCharacteristics);
-        if (Regen && !SuppressRegen)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
-        }
-        if (SpeedBonus != 0)
-        {
-            itemCharacteristics.Speed++;
-        }
-        if (ElecHit)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShElecAttribute)).Set();
-        }
-        if (HasFireSheath)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShFireAttribute)).Set();
-            itemCharacteristics.Radius = 2;
-        }
-        if (FeatherFall)
-        {
-            itemCharacteristics.Feather = true;
-        }
-        if (ResFear)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
-        }
-        if (Esp)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
-        }
-        if (HasFreeAction)
-        {
-            itemCharacteristics.FreeAct = true;
-        }
-        if (SustainAll)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
-            if (ExperienceLevel.IntValue > 9)
+            // Check to see if there are passive attributes to be merged.
+            if (mutation.AttributeSet is not null)
             {
-                itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
-            }
-            if (ExperienceLevel.IntValue > 19)
-            {
-                itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
-            }
-            if (ExperienceLevel.IntValue > 29)
-            {
-                itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
-            }
-            if (ExperienceLevel.IntValue > 39)
-            {
-                itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
-            }
-            if (ExperienceLevel.IntValue > 49)
-            {
-                itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
+                effectiveAttributeSet.MergeAttributeSet(mutation.AttributeSet);
             }
         }
-        return itemCharacteristics.ToReadOnly();
+        return effectiveAttributeSet.ToReadOnly();
     }
 
     public int GetScore(Game game)

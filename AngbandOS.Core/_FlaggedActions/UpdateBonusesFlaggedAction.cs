@@ -32,15 +32,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.CharacterClass.RefreshAndSquashAttributeSet();
         effectiveAttributeSet.MergeAttributeSet(Game.CharacterClass.AttributeSet);
 
-        // Apply all of the mutations that the player has.
-        foreach (Mutation mutation in Game.MutationsPossessed)
-        {
-            // Check to see if there are passive attributes to be merged.
-            if (mutation.AttributeSet is not null)
-            {
-                effectiveAttributeSet.MergeAttributeSet(mutation.AttributeSet);
-            }
-        }
+        // Apply all of the mutations that the player has.        
+        ReadOnlyAttributeSet mutationsAttributeSet = Game.GetMutationsAttributeSet();
+        effectiveAttributeSet.MergeAttributeSet(mutationsAttributeSet);
 
         // Apply all of the items that the player is wielding.
         foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>())

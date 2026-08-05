@@ -232,55 +232,54 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
                 {
                     // Only extract known bonuses, not full bonuses
                     ReadOnlyAttributeSet itemAttributeSet = item.ObjectFlagsKnown();
-                    ShowBonus(itemAttributeSet.GetBool(nameof(SustStrAttribute)), itemAttributeSet.GetInt(nameof(StrengthAttribute)) > 0, item.EffectiveAttributeSet.Strength, row + 0, col);
-                    ShowBonus(itemAttributeSet.GetBool(nameof(SustIntAttribute)), itemAttributeSet.GetInt(nameof(IntelligenceAttribute)) > 0, item.EffectiveAttributeSet.Intelligence, row + 1, col);
-                    ShowBonus(itemAttributeSet.GetBool(nameof(SustWisAttribute)), itemAttributeSet.GetInt(nameof(WisdomAttribute)) > 0, item.EffectiveAttributeSet.Wisdom, row + 2, col);
-                    ShowBonus(itemAttributeSet.GetBool(nameof(SustDexAttribute)), itemAttributeSet.GetInt(nameof(DexterityAttribute)) > 0, item.EffectiveAttributeSet.Dexterity, row + 3, col);
-                    ShowBonus(itemAttributeSet.GetBool(nameof(SustConAttribute)), itemAttributeSet.GetInt(nameof(ConstitutionAttribute)) > 0, item.EffectiveAttributeSet.Constitution, row + 4, col);
-                    ShowBonus(itemAttributeSet.GetBool(nameof(SustChaAttribute)), itemAttributeSet.GetInt(nameof(CharismaAttribute)) > 0, item.EffectiveAttributeSet.Charisma, row + 5, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustChaAttribute)), itemAttributeSet.GetInt(nameof(CharismaAttribute)) > 0, item.EffectiveAttributeSet.Charisma, row + 0, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustConAttribute)), itemAttributeSet.GetInt(nameof(ConstitutionAttribute)) > 0, item.EffectiveAttributeSet.Constitution, row + 1, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustDexAttribute)), itemAttributeSet.GetInt(nameof(DexterityAttribute)) > 0, item.EffectiveAttributeSet.Dexterity, row + 2, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustIntAttribute)), itemAttributeSet.GetInt(nameof(IntelligenceAttribute)) > 0, item.EffectiveAttributeSet.Intelligence, row + 3, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustStrAttribute)), itemAttributeSet.GetInt(nameof(StrengthAttribute)) > 0, item.EffectiveAttributeSet.Strength, row + 4, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustWisAttribute)), itemAttributeSet.GetInt(nameof(WisdomAttribute)) > 0, item.EffectiveAttributeSet.Wisdom, row + 5, col);
                 }
                 col++;
             }
         }
 
-        ReadOnlyAttributeSet playerAttributeSet = Game.GetAbilitiesAsItemFlags();
-        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(StrengthAttribute)), row + 0, col);
-        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(IntelligenceAttribute)), row + 1, col);
-        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(WisdomAttribute)), row + 2, col);
-        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(DexterityAttribute)), row + 3, col);
-        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(ConstitutionAttribute)), row + 4, col);
-        DisplayPlayerStatWithModification(playerAttributeSet.GetInt(nameof(CharismaAttribute)), row + 5, col);
+        ReadOnlyAttributeSet mutationsAttributeSet = Game.GetMutationsAttributeSet();
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(CharismaAttribute)), mutationsAttributeSet.GetBool(nameof(SustChaAttribute)), row + 0, col);
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(ConstitutionAttribute)), mutationsAttributeSet.GetBool(nameof(SustConAttribute)), row + 1, col);
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(DexterityAttribute)), mutationsAttributeSet.GetBool(nameof(SustDexAttribute)), row + 2, col);
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(IntelligenceAttribute)), mutationsAttributeSet.GetBool(nameof(SustIntAttribute)), row + 3, col);
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(StrengthAttribute)), mutationsAttributeSet.GetBool(nameof(SustStrAttribute)), row + 4, col);
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(WisdomAttribute)), mutationsAttributeSet.GetBool(nameof(SustWisAttribute)), row + 5, col);
     }
 
-    private void DisplayPlayerStatWithModification(int extraModifier, int row, int col)
+    private void DisplayPlayerStatWithModification(int bonusValue, bool hasSustain, int row, int col)
     {
-        bool isSet = extraModifier > 0;
         ColorEnum a = ColorEnum.Grey;
         char c = '.';
-        if (extraModifier != 0)
-        {
-            c = '*';
-            if (extraModifier > 0)
-            {
-                a = ColorEnum.Green;
-                if (extraModifier < 10)
-                {
-                    c = (char)('0' + (char)extraModifier);
-                }
-            }
-            if (extraModifier < 0)
-            {
-                a = ColorEnum.Red;
-                if (extraModifier < 10)
-                {
-                    c = (char)('0' - (char)extraModifier);
-                }
-            }
-        }
-        if (isSet)
+        if (hasSustain)
         {
             a = ColorEnum.Green;
             c = 's';
+        }
+        else if (bonusValue != 0)
+        {
+            c = '*';
+            if (bonusValue > 0)
+            {
+                a = ColorEnum.Green;
+                if (bonusValue < 10)
+                {
+                    c = (char)('0' + (char)bonusValue);
+                }
+            }
+            if (bonusValue < 0)
+            {
+                a = ColorEnum.Red;
+                if (bonusValue < 10)
+                {
+                    c = (char)('0' - (char)bonusValue);
+                }
+            }
         }
         Game.Screen.Print(a, c, row, col);
     }
