@@ -14,13 +14,4 @@ internal class WingsPassiveMutation : Mutation
     public override string HaveMessage => "You have wings.";
     public override string LoseMessage => "Your wings fall off.";
     public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(WingsPassiveMutationItemEnhancement)) };
-    public override void OnGain()
-    {
-        Game.FeatherFall = true;
-    }
-
-    public override void OnLose()
-    {
-        Game.FeatherFall = false;
-    }
 }

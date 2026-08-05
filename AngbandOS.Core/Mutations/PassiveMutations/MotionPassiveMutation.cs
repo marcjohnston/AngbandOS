@@ -14,15 +14,4 @@ internal class MotionPassiveMutation : Mutation
     public override string HaveMessage => "Your movements are precise and forceful (+1 STL).";
     public override string LoseMessage => "You move with less assurance.";
     public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(MotionPassiveMutationItemEnhancement)) };
-    public override void OnGain()
-    {
-        Game.StealthBonus += 1;
-        Game.MutationFreeAction = true;
-    }
-
-    public override void OnLose()
-    {
-        Game.StealthBonus -= 1;
-        Game.MutationFreeAction = false;
-    }
 }

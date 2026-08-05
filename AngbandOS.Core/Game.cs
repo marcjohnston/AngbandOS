@@ -120,8 +120,8 @@ internal partial class Game : IGameSerialize
 
             ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch)),
             ("bools6", saveGameState.CreateGameStateBag(HasRestrictingArmor, HasRestrictingGloves)),
-            ("bools8", saveGameState.CreateGameStateBag(IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance)),
-            ("bools9", saveGameState.CreateGameStateBag(ResFear, ResTime, Vulnerable, _findBreakLeft, _findBreakRight)),
+            ("bools8", saveGameState.CreateGameStateBag(IsSearching, MagicResistance)),
+            ("bools9", saveGameState.CreateGameStateBag(_findBreakLeft, _findBreakRight)),
             ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment)),
             ("bools11", saveGameState.CreateGameStateBag(ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters)),
 
@@ -143,8 +143,6 @@ internal partial class Game : IGameSerialize
             (nameof(CharismaBonus), saveGameState.CreateGameStateBag(CharismaBonus)),
             (nameof(ConstitutionBonus), saveGameState.CreateGameStateBag(ConstitutionBonus)),
             (nameof(DexterityBonus), saveGameState.CreateGameStateBag(DexterityBonus)),
-            (nameof(MutationInfravisionBonus), saveGameState.CreateGameStateBag(MutationInfravisionBonus)),
-            (nameof(IntelligenceBonus), saveGameState.CreateGameStateBag(IntelligenceBonus)),
             (nameof(SearchBonus), saveGameState.CreateGameStateBag(SearchBonus)),
             (nameof(SpeedBonus), saveGameState.CreateGameStateBag(SpeedBonus)),
             (nameof(StealthBonus), saveGameState.CreateGameStateBag(StealthBonus)),
@@ -433,8 +431,8 @@ internal partial class Game : IGameSerialize
             // Now restore this game object itself.
             (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch) = restoreGameState.GetByKey("bools1").Get8Bools();
             (HasRestrictingArmor, HasRestrictingGloves) = restoreGameState.GetByKey("bools6").Get2Bools();
-            (IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance) = restoreGameState.GetByKey("bools8").Get7Bools();
-            (ResFear, ResTime, Vulnerable, _findBreakLeft, _findBreakRight) = restoreGameState.GetByKey("bools9").Get5Bools();
+            (IsSearching, MagicResistance) = restoreGameState.GetByKey("bools8").Get2Bools();
+            (_findBreakLeft, _findBreakRight) = restoreGameState.GetByKey("bools9").Get2Bools();
             (_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment) = restoreGameState.GetByKey("bools10").Get8Bools();
             (ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
 
@@ -456,8 +454,6 @@ internal partial class Game : IGameSerialize
             CharismaBonus = restoreGameState.GetByKey(nameof(CharismaBonus)).GetInt();
             ConstitutionBonus = restoreGameState.GetByKey(nameof(ConstitutionBonus)).GetInt();
             DexterityBonus = restoreGameState.GetByKey(nameof(DexterityBonus)).GetInt();
-            MutationInfravisionBonus = restoreGameState.GetByKey(nameof(MutationInfravisionBonus)).GetInt();
-            IntelligenceBonus = restoreGameState.GetByKey(nameof(IntelligenceBonus)).GetInt();
             SearchBonus = restoreGameState.GetByKey(nameof(SearchBonus)).GetInt();
             SpeedBonus = restoreGameState.GetByKey(nameof(SpeedBonus)).GetInt();
             StealthBonus = restoreGameState.GetByKey(nameof(StealthBonus)).GetInt();

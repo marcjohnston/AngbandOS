@@ -113,7 +113,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.Speed.IntValue += Game.SpeedBonus;
         Game.SkillPerception += Game.SearchBonus;
         Game.SkillSearching += Game.SearchBonus;
-        Game.InfravisionRange += Game.MutationInfravisionBonus;
         Game.BonusArmorClass += Game.GenomeArmorClassBonus;
         Game.SkillStealth += Game.StealthBonus;
         if (Game.MagicResistance)

@@ -46,22 +46,13 @@ internal partial class Game
     public int CharismaBonus;
     public int ConstitutionBonus;
     public int DexterityBonus;
-    public bool ElecHit;
-    public bool Esp;
-    public bool FeatherFall;
-    public bool MutationFireHit;
-    public bool MutationFreeAction;
-    public int MutationInfravisionBonus;
     public int IntelligenceBonus;
+    public int StrengthBonus;
+    public int WisdomBonus;
     public bool MagicResistance;
-    public bool ResFear;
-    public bool ResTime;
     public int SearchBonus;
     public int SpeedBonus;
     public int StealthBonus;
-    public int StrengthBonus;
-    public bool Vulnerable;
-    public int WisdomBonus;
     #endregion
 
     /// <summary>

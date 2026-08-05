@@ -14,13 +14,4 @@ internal class ResTimePassiveMutation : Mutation
     public override string HaveMessage => "You are protected from the ravages of time.";
     public override string LoseMessage => "You feel all too mortal.";
     public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(ResTimePassiveMutationItemEnhancement)) };
-    public override void OnGain()
-    {
-        Game.ResTime = true;
-    }
-
-    public override void OnLose()
-    {
-        Game.ResTime = false;
-    }
 }

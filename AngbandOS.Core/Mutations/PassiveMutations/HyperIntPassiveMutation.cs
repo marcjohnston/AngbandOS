@@ -15,15 +15,4 @@ internal class HyperIntPassiveMutation : Mutation
     public override string LoseMessage => "Your brain reverts to normal.";
     public override MutationGroupEnum Group => MutationGroupEnum.Smarts;
     public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(HyperIntPassiveMutationItemEnhancement)) };
-    public override void OnGain()
-    {
-        Game.IntelligenceBonus += 4;
-        Game.WisdomBonus += 4;
-    }
-
-    public override void OnLose()
-    {
-        Game.IntelligenceBonus -= 4;
-        Game.WisdomBonus -= 4;
-    }
 }
