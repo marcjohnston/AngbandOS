@@ -145,6 +145,25 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public bool RollToPreventTheft => (ParalysisTimer.Value == 0 && RandomLessThan(100) < SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexTheftAvoidance + ExperienceLevel.IntValue) || HasAntiTheft;
 
+    public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable
+    {
+        switch (DieRoll(6))
+        {
+            case 1:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre1MonsterRaceFilter));
+            case 2:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre2MonsterRaceFilter));
+            case 3:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre3MonsterRaceFilter));
+            case 4:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre4MonsterRaceFilter));
+            case 5:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre5MonsterRaceFilter));
+            default:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre6MonsterRaceFilter));
+        }
+    }
+
     #region Game Serialization
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
