@@ -9,10 +9,6 @@ namespace AngbandOS.Core;
 internal partial class Game
 {
     #region State Data
-    public bool IsSearching;
-
-    public int SkillDigging;
-    public int ComputedDisarmTraps;
     public int SkillMelee;
     public int SkillRanged;
     public int SkillSavingThrow;

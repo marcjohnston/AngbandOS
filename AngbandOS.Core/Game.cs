@@ -25,6 +25,18 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public bool HasConfusingTouch;
 
+    /// <summary>
+    /// Returns true, if the user is currently searching.
+    /// </summary>
+    public bool IsSearching;
+
+    /// <summary>
+    /// Returns the current digging skill of the player. This is used to determine if the player can dig through walls or not.
+    /// </summary>
+    public int SkillDigging;
+
+    public int ComputedDisarmTraps;
+
     public bool IsBirthday;
     public bool IsDawn;
     public bool IsDusk;
