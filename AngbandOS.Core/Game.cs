@@ -8,7 +8,7 @@ namespace AngbandOS.Core;
 
 internal partial class Game : IGameSerialize
 {
-    #region Non-State Properties - Properties that are post-load initialized
+    #region Non-State Properties - Properties that are post-load initialized and based on the Game.AttributeSet
     /// <summary>
     /// Grants temporary resistance to acid.
     /// </summary>
@@ -45,6 +45,48 @@ internal partial class Game : IGameSerialize
     public Timer StoneskinTimer { get; }
     public Timer StunTimer { get; }
     public Timer TelepathyTimer { get; }
+
+    /// <summary>
+    /// Returns true, if the player has aggravation.  Aggravation is a curse that causes monsters near the player to always be aware of the player and always attack the player.
+    /// </summary>
+    public bool HasAggravation => AttributeSet.GetBool(nameof(AggravateAttribute));
+
+    /// <summary>
+    /// Returns true, if the player has regeneration.  Regeneration allows the player to heal faster than normal.  If the player has the SuppressRegenAttribute, it overrides and prevents regeneration.
+    /// </summary>
+    public bool HasRegeneration => AttributeSet.GetBool(nameof(RegenAttribute)) && !AttributeSet.GetBool(nameof(SuppressRegenAttribute));
+
+    /// <summary>
+    /// Returns true, if the player is immune to acid.
+    /// </summary>
+    public bool HasAcidImmunity => AttributeSet.GetBool(nameof(ImAcidAttribute));
+    public bool HasAcidResistance => AttributeSet.GetBool(nameof(ResAcidAttribute)) || AcidResistanceTimer.Value > 0;
+    public bool HasAntiMagic => AttributeSet.GetBool(nameof(NoMagicAttribute));
+    public bool HasSustainCharisma => AttributeSet.GetBool(nameof(SustChaAttribute));
+    public bool HasSustainConstitution => AttributeSet.GetBool(nameof(SustConAttribute));
+    public bool HasSustainDexterity => AttributeSet.GetBool(nameof(SustDexAttribute));
+    public bool HasSustainIntelligence => AttributeSet.GetBool(nameof(SustIntAttribute));
+    public bool HasSustainStrength => AttributeSet.GetBool(nameof(SustStrAttribute));
+    public bool HasSustainWisdom => AttributeSet.GetBool(nameof(SustWisAttribute));
+    public bool HasAntiTeleport => AttributeSet.GetBool(nameof(NoTeleAttribute));
+    public bool HasAntiTheft => AttributeSet.GetBool(nameof(AntiTheftAttribute));
+    public bool HasBlessedBlade => AttributeSet.GetBool(nameof(BlessedAttribute));
+    public bool HasBlindnessResistance => AttributeSet.GetBool(nameof(ResBlindAttribute));
+    public bool HasChaosResistance => AttributeSet.GetBool(nameof(ResChaosAttribute));
+    public bool HasColdImmunity => AttributeSet.GetBool(nameof(ImColdAttribute));
+    public bool HasColdResistance => AttributeSet.GetBool(nameof(ResColdAttribute));
+    public bool HasConfusionResistance => AttributeSet.GetBool(nameof(ResConfAttribute));
+    public bool HasDarkResistance => AttributeSet.GetBool(nameof(ResDarkAttribute));
+    public bool HasDisenchantResistance => AttributeSet.GetBool(nameof(ResDisenAttribute));
+    public bool HasElementalVulnerability => AttributeSet.GetBool(nameof(ElementalVulnerabilityAttribute));
+    public bool HasExperienceDrain => AttributeSet.GetBool(nameof(DrainExpAttribute));
+    public bool HasExtraMight => AttributeSet.GetBool(nameof(XtraMightAttribute));
+    public bool HasFearResistance => AttributeSet.GetBool(nameof(ResFearAttribute)) || HeroismTimer.Value > 0 || SuperheroismTimer.Value > 0;
+    public bool HasFeatherFall => AttributeSet.GetBool(nameof(FeatherAttribute));
+    public bool HasFireImmunity => AttributeSet.GetBool(nameof(ImFireAttribute));
+    public bool HasFireResistance => AttributeSet.GetBool(nameof(ResFireAttribute)) || FireResistanceTimer.Value > 0 || HasFireImmunity;
+    public bool HasFireSheath => AttributeSet.GetBool(nameof(ShFireAttribute));
+    public bool HasFreeAction => AttributeSet.GetBool(nameof(FreeActAttribute));
     #endregion
 
     #region Game Serialization
