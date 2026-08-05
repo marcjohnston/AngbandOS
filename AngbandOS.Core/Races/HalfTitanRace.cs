@@ -49,8 +49,4 @@ internal class HalfTitanRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        Game.HasChaosResistance = true;
-    }
 }

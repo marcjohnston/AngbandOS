@@ -43,12 +43,11 @@ internal partial class Game : IGameSerialize
             (nameof(SingletonRepository), saveGameState.CreateDerivedGameStateBag(SingletonRepository, typeof(SingletonRepository))),
 
             ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear)),
-            ("bools2", saveGameState.CreateGameStateBag(HasAcidResistance, HasAntiMagic, HasAntiTeleport, HasAntiTheft, HasBlessedBlade, HasBlindnessResistance, HasChaosResistance)),
-            ("bools3", saveGameState.CreateGameStateBag(HasColdImmunity, HasColdResistance, HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain)),
+            ("bools3", saveGameState.CreateGameStateBag(HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain)),
             ("bools4", saveGameState.CreateGameStateBag(HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife)),
             ("bools5", saveGameState.CreateGameStateBag(HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon)),
             ("bools6", saveGameState.CreateGameStateBag(HasRandomTeleport, HasReflection, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion)),
-            ("bools7", saveGameState.CreateGameStateBag(HasSoundResistance, HasSustainCharisma, HasSustainConstitution, HasSustainDexterity, HasSustainIntelligence, HasSustainStrength, HasSustainWisdom, HasTelepathy)),
+            ("bools7", saveGameState.CreateGameStateBag(HasSoundResistance, HasTelepathy)),
             ("bools8", saveGameState.CreateGameStateBag(HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance)),
             ("bools9", saveGameState.CreateGameStateBag(ResFear, ResTime, Vulnerable, _findBreakLeft, _findBreakRight)),
             ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment)),
@@ -362,8 +361,7 @@ internal partial class Game : IGameSerialize
 
             // Now restore this game object itself.
             (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear) = restoreGameState.GetByKey("bools1").Get7Bools();
-            (HasAntiTeleport, HasAntiTheft, HasBlessedBlade, HasBlindnessResistance, HasChaosResistance) = restoreGameState.GetByKey("bools2").Get5Bools();
-            (HasColdImmunity, HasColdResistance, HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain) = restoreGameState.GetByKey("bools3").Get8Bools();
+            (HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain) = restoreGameState.GetByKey("bools3").Get6Bools();
             (HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife) = restoreGameState.GetByKey("bools4").Get8Bools();
             (HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon) = restoreGameState.GetByKey("bools5").Get8Bools();
             (HasRandomTeleport, HasReflection, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion) = restoreGameState.GetByKey("bools6").Get7Bools();

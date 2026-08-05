@@ -86,10 +86,6 @@ internal class FanaticCharacterClass : CharacterClass
 
     public override void CalcBonuses()
     {
-        if (Game.ExperienceLevel.IntValue > 29)
-        {
-            Game.HasChaosResistance = true;
-        }
         if (Game.ExperienceLevel.IntValue > 39)
         {
             Game.HasFearResistance = true;

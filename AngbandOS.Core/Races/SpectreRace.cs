@@ -68,7 +68,6 @@ internal class SpectreRace : Race
         Game.HasSeeInvisibility = true;
         Game.HasPoisonResistance = true;
         Game.HasSlowDigestion = true;
-        Game.HasColdResistance = true;
         Game.GlowInTheDarkRadius = 1;
         if (Game.ExperienceLevel.IntValue > 34)
         {

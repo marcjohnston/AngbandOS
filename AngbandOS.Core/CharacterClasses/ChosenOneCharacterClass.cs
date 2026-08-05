@@ -103,10 +103,6 @@ internal class ChosenOneCharacterClass : CharacterClass
         {
             Game.HasFearResistance = true;
         }
-        if (Game.ExperienceLevel.IntValue >= 6)
-        {
-            Game.HasBlindnessResistance = true;
-        }
         if (Game.ExperienceLevel.IntValue >= 8)
         {
             Game.HasFeatherFall = true;
@@ -150,10 +146,6 @@ internal class ChosenOneCharacterClass : CharacterClass
         if (Game.ExperienceLevel.IntValue >= 36)
         {
             Game.HasDisenchantResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 42)
-        {
-            Game.HasChaosResistance = true;
         }
         if (Game.ExperienceLevel.IntValue >= 46)
         {

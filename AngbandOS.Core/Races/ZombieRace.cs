@@ -66,10 +66,6 @@ internal class ZombieRace : Race
         Game.HasSeeInvisibility = true;
         Game.HasPoisonResistance = true;
         Game.HasSlowDigestion = true;
-        if (Game.ExperienceLevel.IntValue > 4)
-        {
-            Game.HasColdResistance = true;
-        }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
     public override void Eat(Item item)

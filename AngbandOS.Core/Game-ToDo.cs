@@ -16,31 +16,6 @@ internal partial class Game
     public bool IsHalloween;
     public bool IsMidnight;
     public bool IsNewYear;
-    public bool HasAntiTeleport;
-    public bool HasAntiTheft;
-    public bool HasBlessedBlade;
-    public bool HasBlindnessResistance;
-    public bool HasChaosResistance;
-    public bool HasColdImmunity;
-    public bool HasColdResistance;
-
-    /// <summary>
-    /// Returns true, if the players automatically instills confusion in monsters when the player touches the monster.
-    /// </summary>
-    public bool HasConfusingTouch;
-
-    public bool HasConfusionResistance;
-    public bool HasDarkResistance;
-    public bool HasDisenchantResistance;
-    public bool HasElementalVulnerability;
-    public bool HasExperienceDrain;
-    public bool HasExtraMight;
-    public bool HasFearResistance;
-    public bool HasFeatherFall;
-    public bool HasFireImmunity;
-    public bool HasFireResistance;
-    public bool HasFireSheath;
-    public bool HasFreeAction;
 
     /// <summary>
     /// Returns true, if the players race glows in the dark.  Spectres, sprites and vampires glow.
@@ -105,8 +80,19 @@ internal partial class Game
     #endregion
 
     #region AttributeSet Based Functions 
+    /// <summary>
+    /// Returns true, if the player has aggravation.  Aggravation is a curse that causes monsters near the player to always be aware of the player and always attack the player.
+    /// </summary>
     public bool HasAggravation => AttributeSet.GetBool(nameof(AggravateAttribute));
+
+    /// <summary>
+    /// Returns true, if the player has regeneration.  Regeneration allows the player to heal faster than normal.  If the player has the SuppressRegenAttribute, it overrides and prevents regeneration.
+    /// </summary>
     public bool HasRegeneration => AttributeSet.GetBool(nameof(RegenAttribute)) && !AttributeSet.GetBool(nameof(SuppressRegenAttribute));
+
+    /// <summary>
+    /// Returns true, if the player is immune to acid.
+    /// </summary>
     public bool HasAcidImmunity => AttributeSet.GetBool(nameof(ImAcidAttribute));
     public bool HasAcidResistance => AttributeSet.GetBool(nameof(ResAcidAttribute));
     public bool HasAntiMagic => AttributeSet.GetBool(nameof(NoMagicAttribute));
@@ -116,8 +102,38 @@ internal partial class Game
     public bool HasSustainIntelligence => AttributeSet.GetBool(nameof(SustIntAttribute));
     public bool HasSustainStrength => AttributeSet.GetBool(nameof(SustStrAttribute));
     public bool HasSustainWisdom => AttributeSet.GetBool(nameof(SustWisAttribute));
+    public bool HasAntiTeleport => AttributeSet.GetBool(nameof(NoTeleAttribute));
+    public bool HasAntiTheft => AttributeSet.GetBool(nameof(AntiTheftAttribute));
+    public bool HasBlessedBlade => AttributeSet.GetBool(nameof(BlessedAttribute));
+    public bool HasBlindnessResistance => AttributeSet.GetBool(nameof(ResBlindAttribute));
+    public bool HasChaosResistance => AttributeSet.GetBool(nameof(ResChaosAttribute));
+    public bool HasColdImmunity => AttributeSet.GetBool(nameof(ImColdAttribute));
+    public bool HasColdResistance => AttributeSet.GetBool(nameof(ResColdAttribute));
+
+    /// <summary>
+    /// Returns true, if the players automatically instills confusion in monsters when the player touches the monster.
+    /// </summary>
+    public bool HasConfusingTouch;
+
+    public bool HasConfusionResistance;
+    public bool HasDarkResistance;
+    public bool HasDisenchantResistance;
+    public bool HasElementalVulnerability;
+    public bool HasExperienceDrain;
+    public bool HasExtraMight;
+    public bool HasFearResistance;
+    public bool HasFeatherFall;
+    public bool HasFireImmunity;
+    public bool HasFireResistance;
+    public bool HasFireSheath;
+    public bool HasFreeAction;
+
     #endregion
 
+    /// <summary>
+    /// Returns true, if the player successfully avoids theft.  This is based on the player's dexterity and experience level, as well as whether the player has anti-theft protection.
+    /// </summary>
+    public bool RollToPreventTheft => (ParalysisTimer.Value == 0 && RandomLessThan(100) < SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexTheftAvoidance + ExperienceLevel.IntValue) || HasAntiTheft;
     public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable
     {
         switch (DieRoll(6))

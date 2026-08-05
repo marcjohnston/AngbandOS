@@ -78,10 +78,6 @@ internal class DraconianRace : Race
         {
             Game.HasFireResistance = true;
         }
-        if (Game.ExperienceLevel.IntValue > 9)
-        {
-            Game.HasColdResistance = true;
-        }
         if (Game.ExperienceLevel.IntValue > 19)
         {
             Game.HasLightningResistance = true;

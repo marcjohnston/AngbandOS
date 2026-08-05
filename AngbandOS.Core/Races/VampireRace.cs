@@ -57,7 +57,6 @@ internal class VampireRace : Race
         Game.HasDarkResistance = true;
         Game.HasHoldLife = true;
         Game.HasNetherResistance = true;
-        Game.HasColdResistance = true;
         Game.HasPoisonResistance = true;
         Game.GlowInTheDarkRadius = 1;
     }

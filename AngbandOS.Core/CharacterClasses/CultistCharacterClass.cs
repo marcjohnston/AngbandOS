@@ -102,12 +102,4 @@ internal class CultistCharacterClass : CharacterClass
         }
         return null;
     }
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasChaosResistance = true;
-        }
-    }
 }

@@ -47,9 +47,4 @@ internal class DwarfRace : Race
         }
         return null;
     }
-
-    public override void CalcBonuses()
-    {
-        Game.HasBlindnessResistance = true;
-    }
 }
