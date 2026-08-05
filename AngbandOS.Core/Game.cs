@@ -432,7 +432,7 @@ internal partial class Game : IGameSerialize
 
             // Now restore this game object itself.
             (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear) = restoreGameState.GetByKey("bools1").Get7Bools();
-            (HasAntiMagic, HasAntiTeleport, HasAntiTheft, HasBlessedBlade, HasBlindnessResistance, HasChaosResistance) = restoreGameState.GetByKey("bools2").Get6Bools();
+            (HasAntiTeleport, HasAntiTheft, HasBlessedBlade, HasBlindnessResistance, HasChaosResistance) = restoreGameState.GetByKey("bools2").Get5Bools();
             (HasColdImmunity, HasColdResistance, HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain) = restoreGameState.GetByKey("bools3").Get8Bools();
             (HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife) = restoreGameState.GetByKey("bools4").Get8Bools();
             (HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon) = restoreGameState.GetByKey("bools5").Get8Bools();

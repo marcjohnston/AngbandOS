@@ -119,7 +119,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasReflection = false;
         Game.HasFireSheath = false;
         Game.HasElectricitySheath = false;
-        Game.HasAntiMagic = false;
         Game.HasAntiTeleport = false;
         Game.HasAntiTheft = false;
         Game.HasLightningImmunity = false;
@@ -363,10 +362,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ShElecAttribute)).Get())
                     {
                         Game.HasElectricitySheath = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.NoMagic)
-                    {
-                        Game.HasAntiMagic = true;
                     }
                     if (oPtr.EffectiveAttributeSet.NoTele)
                     {

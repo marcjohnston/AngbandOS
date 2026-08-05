@@ -16,7 +16,6 @@ internal partial class Game
     public bool IsHalloween;
     public bool IsMidnight;
     public bool IsNewYear;
-    public bool HasAntiMagic;
     public bool HasAntiTeleport;
     public bool HasAntiTheft;
     public bool HasBlessedBlade;
@@ -117,6 +116,7 @@ internal partial class Game
     public bool HasRegeneration => AttributeSet.GetBool(nameof(RegenAttribute)) && !AttributeSet.GetBool(nameof(SuppressRegenAttribute));
     public bool HasAcidImmunity => AttributeSet.GetBool(nameof(ImAcidAttribute));
     public bool HasAcidResistance => AttributeSet.GetBool(nameof(ResAcidAttribute));
+    public bool HasAntiMagic => AttributeSet.GetBool(nameof(NoMagicAttribute));
     #endregion
 
     public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable
