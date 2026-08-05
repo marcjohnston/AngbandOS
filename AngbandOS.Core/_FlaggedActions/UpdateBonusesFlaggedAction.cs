@@ -123,7 +123,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasAntiMagic = false;
         Game.HasAntiTeleport = false;
         Game.HasAntiTheft = false;
-        Game.HasAcidImmunity = false;
         Game.HasLightningImmunity = false;
         Game.HasFireImmunity = false;
         Game.HasColdImmunity = false;
@@ -285,10 +284,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     if (oPtr.EffectiveAttributeSet.ImFire)
                     {
                         Game.HasFireImmunity = true;
-                    }
-                    if (oPtr.EffectiveAttributeSet.ImAcid)
-                    {
-                        Game.HasAcidImmunity = true;
                     }
                     if (oPtr.EffectiveAttributeSet.ImCold)
                     {

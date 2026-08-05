@@ -112,7 +112,7 @@ internal partial class Game : IGameSerialize
         return new DictionaryGameStateBag(
             (nameof(SingletonRepository), saveGameState.CreateDerivedGameStateBag(SingletonRepository, typeof(SingletonRepository))),
 
-            ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasAcidImmunity)),
+            ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear)),
             ("bools2", saveGameState.CreateGameStateBag(HasAcidResistance, HasAntiMagic, HasAntiTeleport, HasAntiTheft, HasBlessedBlade, HasBlindnessResistance, HasChaosResistance)),
             ("bools3", saveGameState.CreateGameStateBag(HasColdImmunity, HasColdResistance, HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain)),
             ("bools4", saveGameState.CreateGameStateBag(HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife)),
@@ -431,7 +431,7 @@ internal partial class Game : IGameSerialize
             SingletonRepository.LoadAndBind(gameConfiguration, restoreGameState.GetByKey(nameof(SingletonRepository)));
 
             // Now restore this game object itself.
-            (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasAcidImmunity) = restoreGameState.GetByKey("bools1").Get8Bools();
+            (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear) = restoreGameState.GetByKey("bools1").Get7Bools();
             (HasAcidResistance, HasAntiMagic, HasAntiTeleport, HasAntiTheft, HasBlessedBlade, HasBlindnessResistance, HasChaosResistance) = restoreGameState.GetByKey("bools2").Get7Bools();
             (HasColdImmunity, HasColdResistance, HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain) = restoreGameState.GetByKey("bools3").Get8Bools();
             (HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife) = restoreGameState.GetByKey("bools4").Get8Bools();
