@@ -18,6 +18,12 @@ internal partial class Game : IGameSerialize
     public int Height;
 
     public int HitDie;
+
+    /// <summary>
+    /// Returns true, if the players automatically instills confusion in monsters when the player touches the monster.  This is a special property because it is a one-time
+    /// use property.  A timer won't work because it is turn based and attributes won't work because it is not a permanent property.
+    /// </summary>
+    public bool HasConfusingTouch;
     #endregion
 
     #region Non-State Properties - Properties that are post-load initialized and based on the Game.AttributeSet
