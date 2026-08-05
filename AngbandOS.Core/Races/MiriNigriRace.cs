@@ -39,7 +39,6 @@ internal class MiriNigriRace : Race
     protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
     public override void CalcBonuses()
     {
-        Game.HasConfusionResistance = true;
         Game.HasSoundResistance = true;
     }
 

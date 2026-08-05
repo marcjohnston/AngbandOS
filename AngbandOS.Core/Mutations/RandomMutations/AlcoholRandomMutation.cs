@@ -20,7 +20,7 @@ internal class AlcoholRandomMutation : Mutation
         {
             return;
         }
-        if (Game.HasChaosResistance && Game.HasConfusionResistance)
+        if (Game.HasChaosResistance)
         {
             return;
         }

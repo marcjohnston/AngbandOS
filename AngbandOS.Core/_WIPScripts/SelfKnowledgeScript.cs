@@ -216,7 +216,7 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
         {
             info[infoCount++] = "You resist fire exceptionally well.";
         }
-        else if (Game.HasFireResistance || Game.FireResistanceTimer.Value != 0)
+        else if (Game.HasFireResistance)
         {
             info[infoCount++] = "You are resistant to fire.";
         }

@@ -49,9 +49,4 @@ internal class HalfOrcRace : Race
         }
         return null;
     }
-
-    public override void CalcBonuses()
-    {
-        Game.HasDarkResistance = true;
-    }
 }

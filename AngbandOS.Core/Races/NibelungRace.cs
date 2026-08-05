@@ -50,10 +50,4 @@ internal class NibelungRace : Race
         }
         return null;
     }
-
-    public override void CalcBonuses()
-    {
-        Game.HasDisenchantResistance = true;
-        Game.HasDarkResistance = true;
-    }
 }

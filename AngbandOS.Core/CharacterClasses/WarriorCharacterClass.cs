@@ -48,14 +48,6 @@ internal class WarriorCharacterClass : CharacterClass
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 29)
-        {
-            Game.HasFearResistance = true;
-        }
-    }
     protected override string[]? ItemActionNames => new string[]
     {
         nameof(GainExperienceForHighLevelSpellBookDestroyedItemAction)

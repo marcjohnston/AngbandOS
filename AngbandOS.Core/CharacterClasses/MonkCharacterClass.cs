@@ -87,14 +87,5 @@ internal class MonkCharacterClass : CharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
         Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
     };
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 24 && !Game.ArmorIsHeavy())
-        {
-            Game.HasFreeAction = true;
-        }
-    }
-
     public override bool IsMartialArtist => true;
 }

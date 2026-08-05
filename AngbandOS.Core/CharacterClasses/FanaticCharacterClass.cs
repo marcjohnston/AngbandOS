@@ -83,12 +83,4 @@ internal class FanaticCharacterClass : CharacterClass
     public override Realm[] AvailablePrimaryRealms => new Realm[] {
         Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm))
     };
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 39)
-        {
-            Game.HasFearResistance = true;
-        }
-    }
 }

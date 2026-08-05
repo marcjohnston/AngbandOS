@@ -54,14 +54,6 @@ internal class PaladinCharacterClass : CharacterClass
         Game.SingletonRepository.Get<Realm>(nameof(LifeRealm)),
         Game.SingletonRepository.Get<Realm>(nameof(DeathRealm))
     };
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 39)
-        {
-            Game.HasFearResistance = true;
-        }
-    }
     protected override string[]? ItemActionNames => new string[]
     {
         nameof(GainExperienceForUnusableHighLevelSpellBookDestroyedItemAction)

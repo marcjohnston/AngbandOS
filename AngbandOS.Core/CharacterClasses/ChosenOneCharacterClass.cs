@@ -95,18 +95,6 @@ internal class ChosenOneCharacterClass : CharacterClass
     public override void CalcBonuses()
     {
         Game.GlowInTheDarkRadius = 1;
-        if (Game.ExperienceLevel.IntValue >= 2)
-        {
-            Game.HasConfusionResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 4)
-        {
-            Game.HasFearResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 8)
-        {
-            Game.HasFeatherFall = true;
-        }
         if (Game.ExperienceLevel.IntValue >= 10)
         {
             Game.HasSeeInvisibility = true;
@@ -123,17 +111,9 @@ internal class ChosenOneCharacterClass : CharacterClass
         {
             Game.HasHoldLife = true;
         }
-        if (Game.ExperienceLevel.IntValue >= 24)
-        {
-            Game.HasFreeAction = true;
-        }
         if (Game.ExperienceLevel.IntValue >= 26)
         {
             Game.HasTelepathy = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 28)
-        {
-            Game.HasDarkResistance = true;
         }
         if (Game.ExperienceLevel.IntValue >= 30)
         {
@@ -142,10 +122,6 @@ internal class ChosenOneCharacterClass : CharacterClass
         if (Game.ExperienceLevel.IntValue >= 34)
         {
             Game.HasSoundResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 36)
-        {
-            Game.HasDisenchantResistance = true;
         }
         if (Game.ExperienceLevel.IntValue >= 46)
         {

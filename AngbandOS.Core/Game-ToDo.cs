@@ -18,6 +18,12 @@ internal partial class Game
     public bool IsNewYear;
 
     /// <summary>
+    /// Returns true, if the players automatically instills confusion in monsters when the player touches the monster.  This is a special property because it is a one-time
+    /// use property.  A timer won't work because it is turn based and attributes won't work because it is not a permanent property.
+    /// </summary>
+    public bool HasConfusingTouch;
+
+    /// <summary>
     /// Returns true, if the players race glows in the dark.  Spectres, sprites and vampires glow.
     /// </summary>
     public int GlowInTheDarkRadius;
@@ -94,7 +100,7 @@ internal partial class Game
     /// Returns true, if the player is immune to acid.
     /// </summary>
     public bool HasAcidImmunity => AttributeSet.GetBool(nameof(ImAcidAttribute));
-    public bool HasAcidResistance => AttributeSet.GetBool(nameof(ResAcidAttribute));
+    public bool HasAcidResistance => AttributeSet.GetBool(nameof(ResAcidAttribute)) || AcidResistanceTimer.Value > 0;
     public bool HasAntiMagic => AttributeSet.GetBool(nameof(NoMagicAttribute));
     public bool HasSustainCharisma => AttributeSet.GetBool(nameof(SustChaAttribute));
     public bool HasSustainConstitution => AttributeSet.GetBool(nameof(SustConAttribute));
@@ -109,25 +115,18 @@ internal partial class Game
     public bool HasChaosResistance => AttributeSet.GetBool(nameof(ResChaosAttribute));
     public bool HasColdImmunity => AttributeSet.GetBool(nameof(ImColdAttribute));
     public bool HasColdResistance => AttributeSet.GetBool(nameof(ResColdAttribute));
-
-    /// <summary>
-    /// Returns true, if the players automatically instills confusion in monsters when the player touches the monster.
-    /// </summary>
-    public bool HasConfusingTouch;
-
-    public bool HasConfusionResistance;
-    public bool HasDarkResistance;
-    public bool HasDisenchantResistance;
-    public bool HasElementalVulnerability;
-    public bool HasExperienceDrain;
-    public bool HasExtraMight;
-    public bool HasFearResistance;
-    public bool HasFeatherFall;
-    public bool HasFireImmunity;
-    public bool HasFireResistance;
-    public bool HasFireSheath;
-    public bool HasFreeAction;
-
+    public bool HasConfusionResistance => AttributeSet.GetBool(nameof(ResConfAttribute));
+    public bool HasDarkResistance => AttributeSet.GetBool(nameof(ResDarkAttribute));
+    public bool HasDisenchantResistance => AttributeSet.GetBool(nameof(ResDisenAttribute));
+    public bool HasElementalVulnerability => AttributeSet.GetBool(nameof(ElementalVulnerabilityAttribute));
+    public bool HasExperienceDrain => AttributeSet.GetBool(nameof(DrainExpAttribute));
+    public bool HasExtraMight => AttributeSet.GetBool(nameof(XtraMightAttribute));
+    public bool HasFearResistance => AttributeSet.GetBool(nameof(ResFearAttribute)) || HeroismTimer.Value > 0 || SuperheroismTimer.Value > 0;
+    public bool HasFeatherFall => AttributeSet.GetBool(nameof(FeatherAttribute));
+    public bool HasFireImmunity => AttributeSet.GetBool(nameof(ImFireAttribute));
+    public bool HasFireResistance => AttributeSet.GetBool(nameof(ResFireAttribute)) || FireResistanceTimer.Value > 0 || HasFireImmunity;
+    public bool HasFireSheath => AttributeSet.GetBool(nameof(ShFireAttribute));
+    public bool HasFreeAction => AttributeSet.GetBool(nameof(FreeActAttribute));
     #endregion
 
     /// <summary>

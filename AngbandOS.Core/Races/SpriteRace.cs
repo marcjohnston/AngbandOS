@@ -55,7 +55,6 @@ internal class SpriteRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.HasFeatherFall = true;
         Game.GlowInTheDarkRadius = 1;
         Game.HasLightResistance = true;
         Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;

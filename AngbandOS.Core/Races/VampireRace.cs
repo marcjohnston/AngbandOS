@@ -54,7 +54,6 @@ internal class VampireRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.HasDarkResistance = true;
         Game.HasHoldLife = true;
         Game.HasNetherResistance = true;
         Game.HasPoisonResistance = true;

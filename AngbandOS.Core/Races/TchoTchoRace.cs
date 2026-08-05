@@ -48,8 +48,4 @@ internal class TchoTchoRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        Game.HasFearResistance = true;
-    }
 }

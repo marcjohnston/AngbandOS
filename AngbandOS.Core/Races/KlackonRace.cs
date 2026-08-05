@@ -54,7 +54,6 @@ internal class KlackonRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.HasConfusionResistance = true;
         Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
     }
 }

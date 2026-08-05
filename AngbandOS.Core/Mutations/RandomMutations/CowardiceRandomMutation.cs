@@ -21,7 +21,7 @@ internal class CowardiceRandomMutation : Mutation
         {
             return;
         }
-        if (Game.HasFearResistance || Game.HeroismTimer.Value != 0 || Game.SuperheroismTimer.Value != 0)
+        if (Game.HasFearResistance)
         {
             return;
         }

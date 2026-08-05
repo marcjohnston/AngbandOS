@@ -49,9 +49,4 @@ internal class GnomeRace : Race
         }
         return null;
     }
-
-    public override void CalcBonuses()
-    {
-        Game.HasFreeAction = true;
-    }
 }

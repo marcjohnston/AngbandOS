@@ -53,7 +53,6 @@ internal class DarkElfRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.HasDarkResistance = true;
         if (Game.ExperienceLevel.IntValue > 19)
         {
             Game.HasSeeInvisibility = true;

@@ -73,11 +73,6 @@ internal class DraconianRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.HasFeatherFall = true;
-        if (Game.ExperienceLevel.IntValue > 4)
-        {
-            Game.HasFireResistance = true;
-        }
         if (Game.ExperienceLevel.IntValue > 19)
         {
             Game.HasLightningResistance = true;

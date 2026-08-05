@@ -62,7 +62,6 @@ internal class SpectreRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.HasFeatherFall = true;
         Game.HasNetherResistance = true;
         Game.HasHoldLife = true;
         Game.HasSeeInvisibility = true;

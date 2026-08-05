@@ -68,14 +68,9 @@ internal class ImpRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.HasFireResistance = true;
         if (Game.ExperienceLevel.IntValue > 9)
         {
             Game.HasSeeInvisibility = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasFireImmunity = true;
         }
     }
     public override string ChanceOfSanityBlastImmunityExpressionText => "100";

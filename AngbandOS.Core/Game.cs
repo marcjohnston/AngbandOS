@@ -9,7 +9,20 @@ namespace AngbandOS.Core;
 internal partial class Game : IGameSerialize
 {
     #region Non-State Properties - Properties that are post-load initialized
+    /// <summary>
+    /// Grants temporary resistance to acid.
+    /// </summary>
     public Timer AcidResistanceTimer { get; }
+
+    /// <summary>
+    /// Temporarily prevents the player from being scared.
+    /// </summary>
+    public Timer HeroismTimer { get; }
+
+    /// <summary>
+    /// Temporarily prevents the player from being scared.
+    /// </summary>
+    public Timer SuperheroismTimer { get; }
     public Timer BleedingTimer { get; }
     public Timer BlessingTimer { get; }
     public Timer BlindnessTimer { get; }
@@ -20,7 +33,6 @@ internal partial class Game : IGameSerialize
     public Timer FireResistanceTimer { get; }
     public Timer HallucinationsTimer { get; }
     public Timer HasteTimer { get; }
-    public Timer HeroismTimer { get; }
     public Timer InfravisionTimer { get; }
     public Timer InvulnerabilityTimer { get; }
     public Timer LightningResistanceTimer { get; }
@@ -32,7 +44,6 @@ internal partial class Game : IGameSerialize
     public Timer SlowTimer { get; }
     public Timer StoneskinTimer { get; }
     public Timer StunTimer { get; }
-    public Timer SuperheroismTimer { get; }
     public Timer TelepathyTimer { get; }
     #endregion
 
@@ -43,8 +54,7 @@ internal partial class Game : IGameSerialize
             (nameof(SingletonRepository), saveGameState.CreateDerivedGameStateBag(SingletonRepository, typeof(SingletonRepository))),
 
             ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear)),
-            ("bools3", saveGameState.CreateGameStateBag(HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain)),
-            ("bools4", saveGameState.CreateGameStateBag(HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife)),
+            ("bools4", saveGameState.CreateGameStateBag(HasConfusingTouch, HasHoldLife)),
             ("bools5", saveGameState.CreateGameStateBag(HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon)),
             ("bools6", saveGameState.CreateGameStateBag(HasRandomTeleport, HasReflection, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion)),
             ("bools7", saveGameState.CreateGameStateBag(HasSoundResistance, HasTelepathy)),
@@ -361,8 +371,7 @@ internal partial class Game : IGameSerialize
 
             // Now restore this game object itself.
             (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear) = restoreGameState.GetByKey("bools1").Get7Bools();
-            (HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain) = restoreGameState.GetByKey("bools3").Get6Bools();
-            (HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife) = restoreGameState.GetByKey("bools4").Get8Bools();
+            (HasConfusingTouch, HasHoldLife) = restoreGameState.GetByKey("bools4").Get2Bools();
             (HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon) = restoreGameState.GetByKey("bools5").Get8Bools();
             (HasRandomTeleport, HasReflection, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion) = restoreGameState.GetByKey("bools6").Get7Bools();
             (HasSoundResistance, HasTelepathy) = restoreGameState.GetByKey("bools7").Get2Bools();
@@ -6006,12 +6015,12 @@ internal partial class Game : IGameSerialize
         {
             dam = (dam + 2) / 3;
         }
-        if (!(FireResistanceTimer.Value != 0 || HasFireResistance) && DieRoll(HurtChance) == 1)
+        if (!HasFireResistance && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(StrengthAbility)));
         }
         TakeHit(dam, killedByIndefiniteVisibleName);
-        if (!(HasFireResistance && FireResistanceTimer.Value != 0))
+        if (!HasFireResistance)
         {
             InvenDamage(SetFireDestroy, inv);
         }
