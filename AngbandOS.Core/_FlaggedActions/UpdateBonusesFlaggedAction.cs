@@ -21,7 +21,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
     }
     private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
     {
-
         EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
 
         // Squash, refresh and apply the race attributes.
