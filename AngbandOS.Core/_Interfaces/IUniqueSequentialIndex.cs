@@ -6,7 +6,10 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Interfaces;
 
-internal interface IIndexedSingletons
+/// <summary>
+/// Represents an interface for singletons to implement, when they need a unique sequential index assigned to them by the <see cref="SingletonRepository"/>.
+/// </summary>
+internal interface IUniqueSequentialIndex
 {
     /// <summary>
     /// Returns a unique sequential index of the singleton.  This process is handled by the <see cref="SingletonRepository"/> during the <see cref="SingletonRepository.LoadAndBind(GameConfiguration)"/> process.

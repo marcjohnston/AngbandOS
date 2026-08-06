@@ -12,13 +12,16 @@ namespace AngbandOS.Core;
 /// </summary>
 internal class GenericRepository // TODO: Rename this as simply Repository
 {
-    public GenericRepository(bool enablePersistance)
+    public GenericRepository()
     {
-        EnablePersistance = enablePersistance;
     }
-    public bool EnablePersistance { get; }
     public Dictionary<string, object> Dictionary = new Dictionary<string, object>(); // TODO: Make this private
     public List<object> List = new List<object>(); // TODO: Make this private
+    public void Sort<T, TKey>(Func<T, TKey> keySelector)
+    {
+        List.Sort((x, y) => Comparer<TKey>.Default.Compare(keySelector((T)x), keySelector((T)y)));
+    }
+
     public void Add(string key, object singleton)
     {
         Dictionary.Add(key, singleton);

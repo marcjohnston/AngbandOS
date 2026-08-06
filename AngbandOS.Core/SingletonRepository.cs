@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -271,12 +272,6 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<IUsedScript>();
         RegisterIndex<IZapRodScript>();
 
-        // Base preload the Attributes and then cache them.
-        RegisterIndex<Attribute>();
-        RegisterIndex<BoolAttribute>();
-        RegisterIndex<BitwiseOrAttribute>();
-        RegisterIndex<SummationAttribute>();
-
         // Not configurable yet
         RegisterIndex<Ability>();
         RegisterIndex<ActivationWeightedRandom>();
@@ -284,6 +279,7 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<AlterAction>();
         RegisterIndex<ArtifactBias>();
         RegisterIndex<AttackEffect>();
+        RegisterIndex<Attribute>();
         RegisterIndex<CharacterClass>();
         RegisterIndex<BirthStage>();
         RegisterIndex<FixedArtifact>();
@@ -298,7 +294,6 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<MartialArtsEffect>();
         RegisterIndex<MonsterEffect>();
         RegisterIndex<MonsterFilter>();
-        RegisterIndex<MonsterRace>(); 
         RegisterIndex<MonsterRaceFilter>();
         RegisterIndex<MonsterSelector>();
         RegisterIndex<MonsterSpell>();
@@ -310,7 +305,7 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<Reward>();
         RegisterIndex<RoomLayout>();
         RegisterIndex<SpellResistantDetection>();
-        RegisterIndex<Talent>();
+//        RegisterIndex<Talent>();
         RegisterIndex<Timer>();
         RegisterIndex<WieldSlot>();
         RegisterIndex<EquipmentWieldSlot>();
@@ -420,6 +415,13 @@ internal sealed class SingletonRepository : IGameSerialize
         //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
         //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
 
+        SortIndex<Attribute>(_attribute => _attribute.Key);
+        SortIndex<MonsterRace>(_monsterRace => _monsterRace.LevelFound);
+
+        // Register the unique sequential indexes.  These are the singletons that will be indexed by their index property.  These require an additional registration.
+        RegisterUniqueSequentialIndex<Attribute>();
+        RegisterUniqueSequentialIndex<MonsterRace>();
+
         // Monsters must be sorted by the LevelFound property; otherwise, the game doesn't work properly.
         MonsterRace[] monsterRaces = Get<MonsterRace>();
         MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
@@ -443,6 +445,13 @@ internal sealed class SingletonRepository : IGameSerialize
             // Allow the singleton to bind now.  Provide the restore game state, if we are restoring.
             singleton.Bind(singletonRestoreGameState);
         }
+    }
+
+    private void SortIndex<T>(Func<T, object> keySelector) where T : class
+    {
+        string typeName = typeof(T).Name;
+        GenericRepository repository = _allGenericRepositoriesDictionary[typeName];
+        repository.Sort(keySelector);
     }
 
     private void ValidateSystemScriptsEnum()
@@ -478,22 +487,11 @@ internal sealed class SingletonRepository : IGameSerialize
     #region Privates
     private Game Game { get; }
     private Dictionary<string, GenericRepository> _allGenericRepositoriesDictionary { get; } = new Dictionary<string, GenericRepository>();
-    private List<GenericRepository> _indexedRepositories { get; } = new List<GenericRepository>();
-
 
     /// <summary>
     /// Returns a list of all singletons.  This is used to track all of the loaded singletons so that they can be bound quickly and only once.
     /// </summary>
     private List<IGetKey> _allSingletonsList = new List<IGetKey>();
-
-    /// <summary>
-    /// Registers an additional index for singleton entities by an interface.  Persistence for the index is not enabled.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    private void RegisterIndex<T>()
-    {
-        RegisterIndex<T>(false);
-    }
 
     private bool IsDirectlyAssignableFrom<TInterface>(Type type)
     {
@@ -507,19 +505,41 @@ internal sealed class SingletonRepository : IGameSerialize
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <exception cref="Exception"></exception>
-    private void RegisterIndex<T>(bool enablePersistance = true)
+    private void RegisterIndex<T>()
+    {
+        string typeName = typeof(T).Name;
+        if (_allGenericRepositoriesDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+        {
+            throw new Exception($"The {typeName} repository has already been registered.");
+        }
+        else
+        {
+            genericRepository = new GenericRepository();
+            _allGenericRepositoriesDictionary.Add(typeName, genericRepository);
+        }
+    }
+
+    /// <summary>
+    /// Registers a <see cref="IUniqueSequentialIndex"/> repository.  The repository is added to the list of indexed repositories and the index is registered for the <typeparamref name="T"/> type parameter.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="repository"></param>
+    private void RegisterUniqueSequentialIndex<T>() where T : IUniqueSequentialIndex
     {
         string typeName = typeof(T).Name;
         if (!_allGenericRepositoriesDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
-            genericRepository = new GenericRepository(enablePersistance);
-
-            // Check to see if the singletons implements the IIndexedSingletons interface.  If it does, we need to add the repository to the list of indexed repositories so that the singletons can be indexed after they are loaded.
-            if (IsDirectlyAssignableFrom<IIndexedSingletons>(typeof(T)))
+            throw new Exception($"The {typeName} repository was not registered.");
+        }
+        T[] indexedSingletons = genericRepository.Get<T>();
+        for (int index = 0; index < indexedSingletons.Length; index++)
+        {
+            IUniqueSequentialIndex indexedSingleton = indexedSingletons[index];
+            if (indexedSingleton.Index != -1)
             {
-                _indexedRepositories.Add(genericRepository);
+                throw new Exception($"{nameof(IndexSingleton)} has detected an index overwrite condition.");
             }
-            _allGenericRepositoriesDictionary.Add(typeName, genericRepository);
+            indexedSingleton.Index = index;
         }
     }
 
@@ -572,17 +592,6 @@ internal sealed class SingletonRepository : IGameSerialize
                     throw new Exception($"The singleton key {key} has already been registered in the {typeName} repository and is conflicting with {existing.GetType().Name}.");
                 }
                 genericRepository.Add(key, singleton);
-
-                // Now that the singleton is added, we need to check to see if the singleton needs to be indexed.
-                if (IsDirectlyAssignableFrom<IIndexedSingletons>(interfaceType))
-                {
-                    IIndexedSingletons indexedSingleton = (IIndexedSingletons)singleton;
-                    if (indexedSingleton.Index != -1)
-                    {
-                        throw new Exception($"{nameof(IndexSingleton)} has detected an index overwrite condition.");
-                    }
-                    indexedSingleton.Index = genericRepository.GetIndex(singleton);
-                }
             }
         }
     }
