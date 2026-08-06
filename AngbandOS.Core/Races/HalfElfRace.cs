@@ -37,7 +37,4 @@ internal class HalfElfRace : Race
         itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
     }
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
-    public override void CalcBonuses()
-    {
-    }
 }
