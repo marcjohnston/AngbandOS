@@ -415,18 +415,13 @@ internal sealed class SingletonRepository : IGameSerialize
         //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
         //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
 
+        // Sort any applicable repositories.
         SortIndex<Attribute>(_attribute => _attribute.Key);
         SortIndex<MonsterRace>(_monsterRace => _monsterRace.LevelFound);
 
         // Register the unique sequential indexes.  These are the singletons that will be indexed by their index property.  These require an additional registration.
         RegisterUniqueSequentialIndex<Attribute>();
         RegisterUniqueSequentialIndex<MonsterRace>();
-
-        // Monsters must be sorted by the LevelFound property; otherwise, the game doesn't work properly.
-        MonsterRace[] monsterRaces = Get<MonsterRace>();
-        MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
-        _allGenericRepositoriesDictionary["MonsterRace"].List.Clear();
-        _allGenericRepositoriesDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
 
         // Bind all of the singletons now.
         foreach (IGetKey singleton in _allSingletonsList)
