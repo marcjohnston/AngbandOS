@@ -1281,7 +1281,7 @@ internal partial class Game : IGameSerialize
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SwapPosActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(TelekinesActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(VampirismActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(VteleportActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(TeleportationAtWillActiveMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WeighMagActiveMutation)));
         // Passive Mutations
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AlbinoPassiveMutation)));
@@ -1338,7 +1338,7 @@ internal partial class Game : IGameSerialize
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PolyWoundRandomMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ProdManaRandomMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RawChaosRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RteleportRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RandomTeleportationRandomMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ScorTailRandomMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SpeedFluxRandomMutation)));
         MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SpToHpRandomMutation)));
