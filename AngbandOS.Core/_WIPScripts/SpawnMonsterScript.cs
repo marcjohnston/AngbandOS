@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.GamePacks.Cthangband;
+
 namespace AngbandOS.Core.Scripts;
 
 internal class SpawnMonsterScript : Script, IScript, ICastSpellScript
@@ -33,15 +35,12 @@ internal class SpawnMonsterScript : Script, IScript, ICastSpellScript
 
         try
         {
-            ConsoleTable table = new ConsoleTable("Name", "Character", "Level");
             MonsterRace[] monsterRaces = Game.SingletonRepository.Get<MonsterRace>().OrderBy(_monsterRace => _monsterRace.FriendlyName).ToArray();
-            foreach (MonsterRace monsterRace in monsterRaces)
-            {
-                ConsoleTableRow tableRow = table.AddRow();
-                tableRow["Name"] = new ConsoleString(ColorEnum.White, monsterRace.FriendlyName);
-                tableRow["Character"] = new ConsoleString(ColorEnum.White, monsterRace.Symbol.Character.ToString());
-                tableRow["Level"] = new ConsoleString(ColorEnum.White, monsterRace.LevelFound.ToString());
-            }
+            ConsoleTable table = ConsoleTable.Build<MonsterRace>(monsterRaces, new (string, Func<MonsterRace, ConsoleString>)[] {
+                ("Name", _monsterRace => new ConsoleString(ColorEnum.White, _monsterRace.FriendlyName)),
+                ("Character", _monsterRace => new ConsoleString(ColorEnum.White, _monsterRace.Symbol.Character.ToString())),
+                ("Level", _monsterRace => new ConsoleString(ColorEnum.White, _monsterRace.LevelFound.ToString())) 
+            });
 
             ConsoleWindow consoleWindow = new ConsoleWindow(0, 1, 79, 42);
             int selectedIndex = 0;
