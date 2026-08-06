@@ -29,85 +29,25 @@ internal class SpawnMonsterScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = Game.Screen.Clone();
-        Game.SetBackground(BackgroundImageEnum.Normal);
-        Game.Screen.Clear();
-
-        try
+        MonsterRace[] monsterRaces = Game.SingletonRepository.Get<MonsterRace>().OrderBy(_monsterRace => _monsterRace.FriendlyName).ToArray();
+        ConsoleTableWithRowHighlighting<MonsterRace> table = new ConsoleTableWithRowHighlighting<MonsterRace>(monsterRaces, new (string, Func<MonsterRace, string>)[] {
+            ("Name", _monsterRace => _monsterRace.FriendlyName),
+            ("Character", _monsterRace => _monsterRace.Symbol.Character.ToString()),
+            ("Level", _monsterRace => _monsterRace.LevelFound.ToString()) 
+        });
+        MonsterRace? selectedMonsterRace = Game.SelectFromConsoleTable<MonsterRace>(table, "Spawn Which Monster?");
+        if (selectedMonsterRace is not null)
         {
-            MonsterRace[] monsterRaces = Game.SingletonRepository.Get<MonsterRace>().OrderBy(_monsterRace => _monsterRace.FriendlyName).ToArray();
-            ConsoleTableWithRowHighlighting<MonsterRace> table = new ConsoleTableWithRowHighlighting<MonsterRace>(monsterRaces, new (string, Func<MonsterRace, string>)[] {
-                ("Name", _monsterRace => _monsterRace.FriendlyName),
-                ("Character", _monsterRace => _monsterRace.Symbol.Character.ToString()),
-                ("Level", _monsterRace => _monsterRace.LevelFound.ToString()) 
-            });
-
-            ConsoleWindow consoleWindow = new ConsoleWindow(0, 1, 79, 42);
-            int selectedIndex = 0;
-            while (true)
+            (int y, int x) = Game.Scatter(Game.MapY.IntValue, Game.MapX.IntValue, 1);
+            bool placed = Game.PlaceMonsterAux(y, x, selectedMonsterRace, false, false, false);
+            if (!placed)
             {
-                if (selectedIndex < 0)
-                {
-                    selectedIndex = 0;
-                }
-                else if (selectedIndex >= table.Rows.Length)
-                {
-                    selectedIndex = table.Rows.Length - 1;
-                }
-
-                if (selectedIndex < table.TopRow)
-                {
-                    table.TopRow = selectedIndex;
-                }
-                else if (selectedIndex > table.TopRow + consoleWindow.Height)
-                {
-                    table.TopRow = selectedIndex - consoleWindow.Height;
-                }
-
-                table.HighlightRow(selectedIndex);
-                table.Render(Game, consoleWindow, new ConsoleTopLeftAlignment());
-
-                if (!Game.GetCom("Spawn Which Monster? ", out char ch))
-                {
-                    return;
-                }
-
-                switch (ch)
-                {
-                    case '9':
-                        selectedIndex -= consoleWindow.Height;
-                        break;
-                    case '3':
-                        selectedIndex += consoleWindow.Height;
-                        break;
-                    case '8':
-                        selectedIndex -= 1;
-                        break;
-                    case '2':
-                        selectedIndex += 1;
-                        break;
-                    case '\r':
-                        MonsterRace monsterRace = monsterRaces[selectedIndex];
-                        (int y, int x) = Game.Scatter(Game.MapY.IntValue, Game.MapX.IntValue, 1);
-                        bool placed = Game.PlaceMonsterAux(y, x, monsterRace, false, false, false);
-                        if (!placed)
-                        {
-                            Game.MsgPrint("Failed to place monster.");
-                        }
-                        else
-                        {
-                            Game.RefreshMap.SetChangedFlag();
-                        }
-                        return;
-                }
+                Game.MsgPrint("Failed to place monster.");
             }
-        }
-        finally
-        {
-            Game.Screen.Restore(savedScreen);
-            Game.FullScreenOverlay = false;
-            Game.SetBackground(BackgroundImageEnum.Overhead);
+            else
+            {
+                Game.RefreshMap.SetChangedFlag();
+            }
         }
     }
 }

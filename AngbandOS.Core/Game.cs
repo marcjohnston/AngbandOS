@@ -9711,6 +9711,85 @@ internal partial class Game : IGameSerialize
         return (ch, false, fromReplay);
     }
 
+    /// <summary>
+    /// Renders a table of items on the screen using a <see cref="ConsoleTableWithRowHighlighting"/>, allows the player to scroll and select an item; returning
+    /// the selected item or null, if the selection process is cancelled.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="table"></param>
+    /// <param name="prompt"></param>
+    /// <returns></returns>
+    public T? SelectFromConsoleTable<T>(ConsoleTableWithRowHighlighting<T> table, string prompt)
+    {
+        FullScreenOverlay = true;
+        ScreenBuffer savedScreen = Screen.Clone();
+        SetBackground(BackgroundImageEnum.Normal);
+        Screen.Clear();
+
+        if (!prompt.EndsWith(" "))
+        {
+            prompt = $"{prompt} ";
+        }
+
+        try
+        {
+            ConsoleWindow consoleWindow = new ConsoleWindow(0, 1, 79, 42);
+            int selectedIndex = 0;
+            while (true)
+            {
+                if (selectedIndex < 0)
+                {
+                    selectedIndex = 0;
+                }
+                else if (selectedIndex >= table.Rows.Length)
+                {
+                    selectedIndex = table.Rows.Length - 1;
+                }
+
+                if (selectedIndex < table.TopRow)
+                {
+                    table.TopRow = selectedIndex;
+                }
+                else if (selectedIndex > table.TopRow + consoleWindow.Height)
+                {
+                    table.TopRow = selectedIndex - consoleWindow.Height;
+                }
+
+                table.HighlightRow(selectedIndex);
+                table.Render(this, consoleWindow, new ConsoleTopLeftAlignment());
+
+                if (!GetCom(prompt, out char ch))
+                {
+                    return default;
+                }
+
+                switch (ch)
+                {
+                    case '9':
+                        selectedIndex -= consoleWindow.Height;
+                        break;
+                    case '3':
+                        selectedIndex += consoleWindow.Height;
+                        break;
+                    case '8':
+                        selectedIndex -= 1;
+                        break;
+                    case '2':
+                        selectedIndex += 1;
+                        break;
+                    case '\r':
+                        return table.CurrentRow;
+                }
+            }
+        }
+        finally
+        {
+            Screen.Restore(savedScreen);
+            FullScreenOverlay = false;
+            SetBackground(BackgroundImageEnum.Overhead);
+        }
+    }
+
     private void MapMovementKeys()
     {
         _keymapAct = new string[Constants.KeymapModes][];
