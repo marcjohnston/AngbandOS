@@ -580,6 +580,7 @@
         WinnerScript,
         WizardBoltScript,
         WizardGainExperienceScript,
+        WizardLoseAllMutationsScript,
         WizardGainMutationScript,
         WizardHelpScript,
         WordOfDestructionScript,
