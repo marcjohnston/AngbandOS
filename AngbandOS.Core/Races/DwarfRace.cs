@@ -9,7 +9,9 @@ namespace AngbandOS.Core.Races;
 internal class DwarfRace : Race
 {
     private DwarfRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(DwarfRaceItemEnhancement)) };
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(DwarfRaceItemEnhancement)) 
+    };
     public override string Title => "Dwarf";
     public override int UseDevice => 9;
     public override int SavingThrow => 10;

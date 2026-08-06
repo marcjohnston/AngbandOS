@@ -9,7 +9,9 @@ namespace AngbandOS.Core.Races;
 internal class KlackonRace : Race
 {
     private KlackonRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(KlackonRaceItemEnhancement)) };
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(KlackonRaceItemEnhancement)) 
+    };
     public override string Title => "Klackon";
     public override int UseDevice => 5;
     public override int SavingThrow => 5;
@@ -54,6 +56,6 @@ internal class KlackonRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
+        Game.Speed += Game.ExperienceLevel.IntValue / 10;
     }
 }

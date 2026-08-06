@@ -9,7 +9,9 @@ namespace AngbandOS.Core.Races;
 internal class HumanRace : Race
 {
     private HumanRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(HumanRaceItemEnhancement)) };
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(HumanRaceItemEnhancement)) 
+    };
     public override string Title => "Human";
     public override int UseDevice => 0;
     public override int SavingThrow => 0;

@@ -9,7 +9,9 @@ namespace AngbandOS.Core.Races;
 internal class SpriteRace : Race
 {
     private SpriteRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(SpriteRaceItemEnhancement)) };
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(SpriteRaceItemEnhancement)) 
+    };
     public override string Title => "Sprite";
     public override int UseDevice => 10;
     public override int SavingThrow => 10;
@@ -55,6 +57,6 @@ internal class SpriteRace : Race
     }
     public override void CalcBonuses()
     {
-        Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
+        Game.Speed += Game.ExperienceLevel.IntValue / 10;
     }
 }
