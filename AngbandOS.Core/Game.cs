@@ -137,6 +137,21 @@ internal partial class Game : IGameSerialize
     public int InfraVisionRange;
 
     /// <summary>
+    /// Represents the players known bonus armor class.  This is the bonus armor class that the player knows about.  The player may have other bonuses that are unknown to the player.
+    /// </summary>
+    public int BaseArmorClass;
+
+    /// <summary>
+    /// Represents the players known bonus armor class.  This is the bonus armor class that the player knows about.  The player may have other bonuses that are unknown to the player.
+    /// </summary>
+    public int KnownBonusArmorClass;
+
+    /// <summary>
+    /// Represents the total bonus armor class which is the summation of the known and unknown bonus armor classes.
+    /// </summary>
+    public int TotalBonusArmorClass;
+
+    /// <summary>
     /// Grants temporary resistance to acid.
     /// </summary>
     public Timer AcidResistanceTimer { get; }
@@ -241,7 +256,6 @@ internal partial class Game : IGameSerialize
             (nameof(DecayRate), saveGameState.CreateGameStateBag(DecayRate)),
             (nameof(God), saveGameState.CreateDerivedGameStateBag(God, typeof(God))),
             (nameof(NaturalAttacks), saveGameState.CreateGameStateBag(NaturalAttacks)),
-            (nameof(GenomeArmorClassBonus), saveGameState.CreateGameStateBag(GenomeArmorClassBonus)),
             (nameof(MutationsNotPossessed), saveGameState.CreateGameStateBag(MutationsNotPossessed)),
             (nameof(MutationsPossessed), saveGameState.CreateGameStateBag(MutationsPossessed)),
             (nameof(TreasureFeeling), saveGameState.CreateGameStateBag(TreasureFeeling)),
@@ -294,8 +308,6 @@ internal partial class Game : IGameSerialize
             (nameof(FractionalMana), saveGameState.CreateGameStateBag(FractionalMana)),
             (nameof(Gender), saveGameState.CreateDerivedGameStateBag(Gender, typeof(Gender))),
             (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
-            (nameof(BonusArmorClass), saveGameState.CreateGameStateBag(BonusArmorClass)),
-            (nameof(UnknownBonusArmorClass), saveGameState.CreateGameStateBag(UnknownBonusArmorClass)),
             (nameof(GooPatron), saveGameState.CreateDerivedGameStateBag(GooPatron, typeof(Patron))),
             (nameof(LightLevel), saveGameState.CreateGameStateBag(LightLevel)),
             (nameof(MaxLevelGained), saveGameState.CreateGameStateBag(MaxLevelGained)),
@@ -550,7 +562,6 @@ internal partial class Game : IGameSerialize
             DecayRate = restoreGameState.GetByKey(nameof(DecayRate)).GetInt();
             God = restoreGameState.GetByKey(nameof(God)).GetDerivedReferenceOrDefault<God>();
             NaturalAttacks = restoreGameState.GetByKey(nameof(NaturalAttacks)).GetReferences<Mutation>().ToList();
-            GenomeArmorClassBonus = restoreGameState.GetByKey(nameof(GenomeArmorClassBonus)).GetInt();
             MutationsNotPossessed = restoreGameState.GetByKey(nameof(MutationsNotPossessed)).GetReferences<Mutation>().ToList();
             MutationsPossessed = restoreGameState.GetByKey(nameof(MutationsPossessed)).GetReferences<Mutation>().ToList();
             TreasureFeeling = restoreGameState.GetByKey(nameof(TreasureFeeling)).GetInt();
@@ -603,8 +614,6 @@ internal partial class Game : IGameSerialize
             FractionalMana = restoreGameState.GetByKey(nameof(FractionalMana)).GetInt();
             Gender = restoreGameState.GetByKey(nameof(Gender)).GetDerivedReferenceOrDefault<Gender>();
             Generation = restoreGameState.GetByKey(nameof(Generation)).GetInt();
-            BonusArmorClass = restoreGameState.GetByKey(nameof(BonusArmorClass)).GetInt();
-            UnknownBonusArmorClass = restoreGameState.GetByKey(nameof(UnknownBonusArmorClass)).GetInt();
             GooPatron = restoreGameState.GetByKey(nameof(GooPatron)).GetDerivedReference<Patron>();
             LightLevel = restoreGameState.GetByKey(nameof(LightLevel)).GetInt();
             MaxLevelGained = restoreGameState.GetByKey(nameof(MaxLevelGained)).GetInt();
@@ -1428,8 +1437,6 @@ internal partial class Game : IGameSerialize
 
     public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
 
-    public int GenomeArmorClassBonus;
-
     public bool ChaosGift;
 
     public readonly List<Mutation> MutationsNotPossessed = new List<Mutation>();
@@ -1634,19 +1641,6 @@ internal partial class Game : IGameSerialize
     public ManaIntProperty Mana { get; }
     public MaxManaIntProperty MaxMana { get; }
     public ExperiencePointsIntProperty ExperiencePoints { get; }
-
-    /// <summary>
-    /// Represents the players known bonus armor class.  This is the bonus armor class that the player knows about.  The player may have other bonuses that are unknown to the player.
-    /// </summary>
-    public int BonusArmorClass;
-
-    /// <summary>
-    /// Represents the player unknown bonus armor class.  This is the bonus armor class that the player does not know about.  Items that are unknown will increment this value.  This is a 
-    /// computed field that is updated by the UpdateBonusesFlaggedAction.
-    /// </summary>
-    public int UnknownBonusArmorClass;
-
-    public int TotalBonusArmorClass => BonusArmorClass + UnknownBonusArmorClass;
 
     public StringProperty PlayerName { get; }
 
@@ -8987,7 +8981,7 @@ internal partial class Game : IGameSerialize
             return false;
         }
         // Roll for the attack
-        int armorClass = AttributeSet.GetInt(nameof(BaseArmorClassAttribute)) + TotalBonusArmorClass;
+        int armorClass = BaseArmorClass + TotalBonusArmorClass;
         return DieRoll(attackStrength) > armorClass * 3 / 4;
     }
 

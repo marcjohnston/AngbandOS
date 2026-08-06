@@ -3466,7 +3466,7 @@ internal class Monster : IItemContainer, IGameSerialize
         }
         // Otherwise, compare the power and level to the player's armor class
         int i = attackPower + (Level * 3);
-        int ac = Game.AttributeSet.GetInt(nameof(BaseArmorClassAttribute)) + Game.TotalBonusArmorClass;
+        int ac = Game.BaseArmorClass + Game.TotalBonusArmorClass;
         return i > 0 && this.Game.DieRoll(i) > ac * 3 / 4;
     }
 

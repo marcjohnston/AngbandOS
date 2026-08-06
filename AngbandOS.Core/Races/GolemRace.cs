@@ -59,10 +59,6 @@ internal class GolemRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        Game.BonusArmorClass += 20 + (Game.ExperienceLevel.IntValue / 5);
-    }
 
     public override void Eat(Item item)
     {
