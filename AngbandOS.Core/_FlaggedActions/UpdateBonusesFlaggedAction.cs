@@ -197,7 +197,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillRanged = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added rangedtohit
         Game.SkillThrowing = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added throwingtohit
         Game.SkillDigging = 0;
-        Game.Race.CalcBonuses();
         Game.MeleeAttacksPerRound = 1;
         Game.MissileAttacksPerRound = 1;
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())

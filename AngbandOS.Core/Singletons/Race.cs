@@ -161,8 +161,6 @@ internal abstract class Race : IGetKey, IGameSerialize
     /// <returns></returns>
     public virtual string[]? SelfKnowledge(int level) => null;
 
-    public virtual void CalcBonuses() { }
-
     /// <summary>
     /// Returns true, if the race rests until dusk instead of dawn.  Vampires, zombies, spectres and skeletons return true.  Returns false, by default.
     /// </summary>
