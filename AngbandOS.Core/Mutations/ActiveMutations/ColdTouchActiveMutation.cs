@@ -17,6 +17,7 @@ internal class ColdTouchActiveMutation : Mutation
     {
         return lvl < 2 ? "cold touch       (unusable until level 2)" : "cold touch       (cost 2, CON based)";
     }
+    public override string Title => "Cold Touch (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "Your hands get very cold.";

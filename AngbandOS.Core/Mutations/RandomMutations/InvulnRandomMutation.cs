@@ -13,6 +13,7 @@ internal class InvulnRandomMutation : Mutation
     public override string GainMessage => "You are blessed with fits of invulnerability.";
     public override string HaveMessage => "You occasionally feel invincible.";
     public override string LoseMessage => "You are no longer blessed with fits of invulnerability.";
+    public override string Title => "Invulnerability (R)";
 
     public override void ProcessWorld()
     {

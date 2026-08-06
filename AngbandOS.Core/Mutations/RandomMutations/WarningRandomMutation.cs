@@ -13,6 +13,7 @@ internal class WarningRandomMutation : Mutation
     public override string GainMessage => "You suddenly feel paranoid.";
     public override string HaveMessage => "You receive warnings about your foes.";
     public override string LoseMessage => "You no longer feel paranoid.";
+    public override string Title => "Warnings (R)";
 
     public override void ProcessWorld()
     {

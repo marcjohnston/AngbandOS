@@ -15,6 +15,7 @@ internal class SmellMonActiveMutation : Mutation
     {
         return lvl < 5 ? "smell monsters   (unusable until level 5)" : "smell monsters   (cost 4, INT based)";
     }
+    public override string Title => "Smell Monsters (A)";
 
     public override int Frequency => 4;
     public override string GainMessage => "You smell filthy monsters.";

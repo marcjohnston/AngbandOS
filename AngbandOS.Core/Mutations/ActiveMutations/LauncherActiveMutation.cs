@@ -15,6 +15,7 @@ internal class LauncherActiveMutation : Mutation
     {
         return "throw object     (cost lev, STR based)";
     }
+    public override string Title => "Launcher (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "Your throwing arm feels much stronger.";

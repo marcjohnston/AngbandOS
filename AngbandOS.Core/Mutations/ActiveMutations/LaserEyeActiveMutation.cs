@@ -17,6 +17,7 @@ internal class LaserEyeActiveMutation : Mutation
     {
         return lvl < 7 ? "laser eyes        (unusable until level 7)" : "laser eyes        (cost 10, WIS based)";
     }
+    public override string Title => "Laser Eyes (A)";
 
     public override int Frequency => 3;
     public override string GainMessage => "Your eyes burn for a moment.";

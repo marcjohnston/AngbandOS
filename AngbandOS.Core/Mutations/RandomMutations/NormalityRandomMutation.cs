@@ -13,6 +13,7 @@ internal class NormalityRandomMutation : Mutation
     public override string GainMessage => "You feel strangely normal.";
     public override string HaveMessage => "You may be chaotic, but you're recovering.";
     public override string LoseMessage => "You feel normally strange.";
+    public override string Title => "Normality (R)";
 
     public override void ProcessWorld()
     {

@@ -19,6 +19,7 @@ internal class RadiationActiveMutation : Mutation
             ? "produce radiation   (unusable until level 15)"
             : "produce radiation   (cost 15, CON based)";
     }
+    public override string Title => "Radiation (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "You start emitting hard radiation.";

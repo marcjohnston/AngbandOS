@@ -14,7 +14,10 @@ internal class MoronicPassiveMutation : Mutation
     public override string HaveMessage => "You are moronic (-4 INT/WIS).";
     public override string LoseMessage => "Your brain reverts to normal";
     public override MutationGroupEnum Group => MutationGroupEnum.Smarts;
-    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(MoronicPassiveMutationItemEnhancement)) };
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(MoronicPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Moronic (P)";
     public override void OnGain()
     {
         Game.IntelligenceBonus -= 4;

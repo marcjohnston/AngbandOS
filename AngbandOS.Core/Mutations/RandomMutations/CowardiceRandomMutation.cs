@@ -14,6 +14,7 @@ internal class CowardiceRandomMutation : Mutation
     public override string HaveMessage => "You are subject to cowardice.";
     public override string LoseMessage => "You are no longer an incredible coward!";
     public override MutationGroupEnum Group => MutationGroupEnum.Bravery;
+    public override string Title => "Cowardice (R)";
 
     public override void ProcessWorld()
     {

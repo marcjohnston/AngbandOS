@@ -15,6 +15,7 @@ internal class EarthquakeActiveMutation : Mutation
     {
         return lvl < 12 ? "earthquake       (unusable until level 12)" : "earthquake       (cost 12, STR based)";
     }
+    public override string Title => "Earthquake(A)";
 
     public override int Frequency => 3;
     public override string GainMessage => "You gain the ability to wreck the dungeon.";

@@ -13,6 +13,7 @@ internal class EatLightRandomMutation : Mutation
     public override string GainMessage => "You feel a strange kinship with Nyogtha.";
     public override string HaveMessage => "You sometimes feed off of the light around you.";
     public override string LoseMessage => "You feel the world's a brighter place.";
+    public override string Title => "Eat Light (R)";
 
     public override void ProcessWorld()
     {

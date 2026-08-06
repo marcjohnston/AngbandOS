@@ -15,6 +15,7 @@ internal class DazzleActiveMutation : Mutation
     {
         return lvl < 7 ? "dazzle           (unusable until level 7)" : "dazzle           (cost 15, CHA based)";
     }
+    public override string Title => "Dazzle (A)";
 
     public override int Frequency => 3;
     public override string GainMessage => "You gain the ability to emit dazzling lights.";

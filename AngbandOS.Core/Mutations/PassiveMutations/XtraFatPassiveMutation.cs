@@ -13,7 +13,11 @@ internal class XtraFatPassiveMutation : Mutation
     public override string GainMessage => "You become sickeningly fat!";
     public override string HaveMessage => "You are extremely fat (+2 CON, -2 speed).";
     public override string LoseMessage => "You benefit from a miracle diet!";
-    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(XtraFatPassiveMutationItemEnhancement)) };
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(XtraFatPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Extreme Obesity (P)";
+
     public override void OnGain()
     {
         Game.ConstitutionBonus += 2;

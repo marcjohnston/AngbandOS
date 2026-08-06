@@ -17,6 +17,7 @@ internal class ShriekActiveMutation : Mutation
     {
         return lvl < 4 ? "shriek           (unusable until level 4)" : "shriek           (cost 4, CON based)";
     }
+    public override string Title => "Shriek Attack (A)";
 
     public override int Frequency => 3;
     public override string GainMessage => "Your vocal cords get much tougher.";

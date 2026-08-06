@@ -13,6 +13,7 @@ internal class BanishAllRandomMutation : Mutation
     public override string GainMessage => "You feel a terrifying power lurking behind you.";
     public override string HaveMessage => "You sometimes cause nearby creatures to vanish.";
     public override string LoseMessage => "You no longer feel a terrifying power lurking behind you.";
+    public override string Title => "Banish Creatures (R)";
 
     public override void ProcessWorld()
     {

@@ -15,6 +15,7 @@ internal class MindBlastActiveMutation : Mutation
     {
         return lvl < 5 ? "mind blast       (unusable until level 5)" : "mind blast       (cost 3, WIS based)";
     }
+    public override string Title => "Mind Blast (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "You gain the power of Mind Blast.";

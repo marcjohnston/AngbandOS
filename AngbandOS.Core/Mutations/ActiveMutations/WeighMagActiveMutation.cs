@@ -15,6 +15,7 @@ internal class WeighMagActiveMutation : Mutation
     {
         return lvl < 6 ? "weigh magic      (unusable until level 6)" : "weigh magic      (cost 6, INT based)";
     }
+    public override string Title => "Weigh Magic (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "You feel you can better understand the magic around you.";

@@ -13,5 +13,8 @@ internal class RegenPassiveMutation : Mutation
     public override string GainMessage => "You start regenerating.";
     public override string HaveMessage => "You are regenerating.";
     public override string LoseMessage => "You stop regenerating.";
-    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(RegenPassiveMutationItemEnhancement)) };
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(RegenPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Regeneration (P)";
 }

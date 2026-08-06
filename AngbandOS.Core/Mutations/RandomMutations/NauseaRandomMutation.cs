@@ -13,6 +13,7 @@ internal class NauseaRandomMutation : Mutation
     public override string GainMessage => "Your stomach starts to roil nauseously.";
     public override string HaveMessage => "You have a seriously upset stomach.";
     public override string LoseMessage => "Your stomach stops roiling.";
+    public override string Title => "Nausea (R)";
 
     public override void ProcessWorld()
     {

@@ -15,6 +15,7 @@ internal class PolymorphActiveMutation : Mutation
     {
         return lvl < 18 ? "polymorph        (unusable until level 18)" : "polymorph        (cost 20, CON based)";
     }
+    public override string Title => "Polymorph (A)";
 
     public override int Frequency => 1;
     public override string GainMessage => "Your body seems mutable.";

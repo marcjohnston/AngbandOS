@@ -15,6 +15,7 @@ internal class PanicHitActiveMutation : Mutation
     {
         return lvl < 10 ? "panic hit        (unusable until level 10)" : "panic hit        (cost 12, DEX based)";
     }
+    public override string Title => "Panic Hit (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "You suddenly understand how thieves feel.";

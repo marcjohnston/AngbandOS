@@ -13,6 +13,7 @@ internal class WeirdMindRandomMutation : Mutation
     public override string GainMessage => "Your thoughts suddenly take off in strange directions.";
     public override string HaveMessage => "Your mind randomly expands and contracts.";
     public override string LoseMessage => "Your thoughts return to boring paths.";
+    public override string Title => "Weird Mind (R)";
 
     public override void ProcessWorld()
     {

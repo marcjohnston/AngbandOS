@@ -15,4 +15,5 @@ internal class HyperIntPassiveMutation : Mutation
     public override string LoseMessage => "Your brain reverts to normal.";
     public override MutationGroupEnum Group => MutationGroupEnum.Smarts;
     public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(HyperIntPassiveMutationItemEnhancement)) };
+    public override string Title => "Hyper Intelligence (P)";
 }

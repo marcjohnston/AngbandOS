@@ -21,4 +21,5 @@ internal class SusStatsPassiveMutation : Mutation
         (40, nameof(SusStatsPassiveMutationLevel40ItemEnhancement)),
         (50, nameof(SusStatsPassiveMutationLevel50ItemEnhancement))
     };
+    public override string Title => "Sustain All Stats (P)";
 }

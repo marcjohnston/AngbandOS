@@ -13,6 +13,7 @@ internal class PolyWoundRandomMutation : Mutation
     public override string GainMessage => "You feel forces of chaos entering your old scars.";
     public override string HaveMessage => "Your health is subject to chaotic forces.";
     public override string LoseMessage => "You feel forces of chaos departing your old scars.";
+    public override string Title => "Chaotic Wounds (R)";
 
     public override void ProcessWorld()
     {

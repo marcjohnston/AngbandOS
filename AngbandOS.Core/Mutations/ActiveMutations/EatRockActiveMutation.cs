@@ -15,6 +15,7 @@ internal class EatRockActiveMutation : Mutation
     {
         return lvl < 8 ? "eat rock         (unusable until level 8)" : "eat rock         (cost 12, CON based)";
     }
+    public override string Title => "Eat Rock (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "The walls look delicious.";

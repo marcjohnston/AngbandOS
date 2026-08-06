@@ -15,6 +15,7 @@ internal class DetCurseActiveMutation : Mutation
     {
         return lvl < 7 ? "detect curses    (unusable until level 7)" : "detect curses    (cost 14, WIS based)";
     }
+    public override string Title => "Detect Curses (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "You can feel evil magics.";

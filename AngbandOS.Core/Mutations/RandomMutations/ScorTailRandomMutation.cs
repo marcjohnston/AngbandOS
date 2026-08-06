@@ -18,6 +18,7 @@ internal class ScorTailRandomMutation : Mutation
     public override int EquivalentWeaponWeight => 5;
     public override string AttackDescription => "tail";
     public override MutationAttackTypeEnum MutationAttackType => MutationAttackTypeEnum.Poison;
+    public override string Title => "Scorpion Tail (R)";
 
     public override void OnGain()
     {

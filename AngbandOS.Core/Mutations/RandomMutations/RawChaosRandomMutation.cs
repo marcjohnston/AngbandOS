@@ -15,6 +15,7 @@ internal class RawChaosRandomMutation : Mutation
     public override string GainMessage => "You feel the universe is less stable around you.";
     public override string HaveMessage => "You occasionally are surrounded with raw chaos.";
     public override string LoseMessage => "You feel the universe is more stable around you.";
+    public override string Title => "Raw Chaos (R)";
 
     public override void ProcessWorld()
     {

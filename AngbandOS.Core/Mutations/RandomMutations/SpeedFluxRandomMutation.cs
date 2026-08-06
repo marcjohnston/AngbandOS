@@ -13,6 +13,7 @@ internal class SpeedFluxRandomMutation : Mutation
     public override string GainMessage => "You have become unstuck in time.";
     public override string HaveMessage => "You move faster or slower randomly.";
     public override string LoseMessage => "You are firmly anchored in time.";
+    public override string Title => "Random Speed (R)";
 
     public override void ProcessWorld()
     {

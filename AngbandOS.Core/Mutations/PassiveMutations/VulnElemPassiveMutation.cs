@@ -14,4 +14,5 @@ internal class VulnElemPassiveMutation : Mutation
     public override string HaveMessage => "You are susceptible to damage from the elements.";
     public override string LoseMessage => "You feel less exposed.";
     public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(VulnElemPassiveMutationItemEnhancement)) };
+    public override string Title => "Elemental Vulnerability (P)";
 }

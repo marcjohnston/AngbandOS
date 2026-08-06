@@ -15,6 +15,7 @@ internal class BlinkActiveMutation : Mutation
     {
         return lvl < 3 ? "blink            (unusable until level 3)" : "blink            (cost 3, WIS based)";
     }
+    public override string Title => "Blink (A)";
 
     public override int Frequency => 3;
     public override string GainMessage => "You gain the power of minor teleportation.";

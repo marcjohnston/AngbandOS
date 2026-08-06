@@ -15,6 +15,7 @@ internal class SwapPosActiveMutation : Mutation
     {
         return lvl < 15 ? "swap position    (unusable until level 15)" : "swap position    (cost 12, DEX based)";
     }
+    public override string Title => "Swap Position (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "You feel like walking a mile in someone else's shoes.";

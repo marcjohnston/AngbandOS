@@ -6,13 +6,14 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.RandomMutations;
 
-internal class RteleportRandomMutation : Mutation
+internal class RandomTeleportationRandomMutation : Mutation
 {
-    private RteleportRandomMutation(Game game) : base(game) { }
+    private RandomTeleportationRandomMutation(Game game) : base(game) { }
     public override int Frequency => 1;
     public override string GainMessage => "Your position seems very uncertain...";
     public override string HaveMessage => "You are teleporting randomly.";
     public override string LoseMessage => "Your position seems more certain.";
+    public override string Title => "Random Teleporation (R)";
 
     public override void ProcessWorld()
     {

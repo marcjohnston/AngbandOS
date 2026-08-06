@@ -18,6 +18,7 @@ internal class BeakRandomMutation : Mutation
     public override int DamageDiceNumber => 4;
     public override int EquivalentWeaponWeight => 5;
     public override string AttackDescription => "beak";
+    public override string Title => "Beak (R)";
 
     public override void OnGain()
     {

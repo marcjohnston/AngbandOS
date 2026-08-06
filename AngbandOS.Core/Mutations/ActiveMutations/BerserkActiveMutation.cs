@@ -20,4 +20,5 @@ internal class BerserkActiveMutation : Mutation
     public override string GainMessage => "You feel a controlled rage.";
     public override string HaveMessage => "You can drive yourself into a berserk frenzy.";
     public override string LoseMessage => "You no longer feel a controlled rage.";
+    public override string Title => "Berserk (A)";
 }

@@ -13,6 +13,7 @@ internal class DisarmRandomMutation : Mutation
     public override string GainMessage => "Your feet grow to four times their former size.";
     public override string HaveMessage => "You occasionally stumble and drop things.";
     public override string LoseMessage => "Your feet shrink to their former size.";
+    public override string Title => "Disarm (R)";
 
     public override void ProcessWorld()
     {

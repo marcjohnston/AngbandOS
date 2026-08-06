@@ -13,6 +13,7 @@ internal class SpToHpRandomMutation : Mutation
     public override string GainMessage => "You are subject to fits of magical healing.";
     public override string HaveMessage => "Your blood sometimes rushes to your muscles.";
     public override string LoseMessage => "You are no longer subject to fits of magical healing.";
+    public override string Title => "Magical Healing (R)";
 
     public override void ProcessWorld()
     {

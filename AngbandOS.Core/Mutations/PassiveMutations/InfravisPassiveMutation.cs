@@ -13,5 +13,8 @@ internal class InfravisPassiveMutation : Mutation
     public override string GainMessage => "Your infra-vision is improved.";
     public override string HaveMessage => "You have remarkable infra-vision (+3).";
     public override string LoseMessage => "Your infra-vision is degraded.";
-    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(InfravisPassiveMutationItemEnhancement)) };
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(InfravisPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Infra-vision (P)";
 }

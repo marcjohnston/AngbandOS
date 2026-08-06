@@ -17,6 +17,7 @@ internal class VampirismActiveMutation : Mutation
             ? "vampiric drain   (unusable until level 13)"
             : $"vampiric drain   (cost {lvl}, CON based)";
     }
+    public override string Title => "Vampiric Drain (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "You become vampiric.";

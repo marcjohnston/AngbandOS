@@ -15,6 +15,7 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     {
         Game = game;
     }
+    public abstract string Title { get; }
     public virtual string Key => GetType().Name;
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)

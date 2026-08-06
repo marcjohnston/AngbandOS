@@ -13,6 +13,7 @@ internal class AttDragonRandomMutation : Mutation
     public override string GainMessage => "You start attracting dragons.";
     public override string HaveMessage => "You attract dragons.";
     public override string LoseMessage => "You stop attracting dragons.";
+    public override string Title => "Dragon Attraction (R)";
 
     public override void ProcessWorld()
     {

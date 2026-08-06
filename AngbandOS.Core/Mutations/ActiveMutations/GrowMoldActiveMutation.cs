@@ -15,6 +15,7 @@ internal class GrowMoldActiveMutation : Mutation
     {
         return lvl < 1 ? "grow mold        (unusable until level 1)" : "grow mold        (cost 6, CON based)";
     }
+    public override string Title => "Grow Mold (A)";
 
     public override int Frequency => 1;
     public override string GainMessage => "You feel a sudden affinity for mold.";

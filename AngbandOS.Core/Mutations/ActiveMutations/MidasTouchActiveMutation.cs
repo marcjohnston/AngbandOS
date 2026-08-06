@@ -15,6 +15,7 @@ internal class MidasTouchActiveMutation : Mutation
     {
         return lvl < 10 ? "midas touch      (unusable until level 10)" : "midas touch      (cost 5, INT based)";
     }
+    public override string Title => "Midas Touch (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "You gain the Midas touch.";

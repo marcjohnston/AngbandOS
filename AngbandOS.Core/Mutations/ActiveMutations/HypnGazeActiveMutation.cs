@@ -15,6 +15,7 @@ internal class HypnGazeActiveMutation : Mutation
     {
         return lvl < 20 ? "hypnotic gaze    (unusable until level 12)" : "hypnotic gaze    (cost 12, CHA based)";
     }
+    public override string Title => "Hypnotic Gaze (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "Your eyes look mesmerizing...";

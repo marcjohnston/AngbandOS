@@ -13,6 +13,7 @@ internal class AlcoholRandomMutation : Mutation
     public override string GainMessage => "Your body starts producing alcohol!";
     public override string HaveMessage => "Your body produces alcohol.";
     public override string LoseMessage => "Your body stops producing alcohol!";
+    public override string Title => "Alcohol (R)";
 
     public override void ProcessWorld()
     {

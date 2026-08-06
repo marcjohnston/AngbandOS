@@ -15,6 +15,7 @@ internal class RecallActiveMutation : Mutation
     {
         return lvl < 17 ? "recall           (unusable until level 17)" : "recall           (cost 50, INT based)";
     }
+    public override string Title => "Recall (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "You feel briefly homesick, but it passes.";

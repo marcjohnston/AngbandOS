@@ -19,6 +19,7 @@ internal class SpitAcidActiveMutation : Mutation
             ? "spit acid        (unusable until level 9)"
             : $"spit acid        (cost 9, dam {lvl}, DEX based)";
     }
+    public override string Title => "Spit Acid (A)";
 
     public override int Frequency => 4;
     public override string GainMessage => "You gain the ability to spit acid.";

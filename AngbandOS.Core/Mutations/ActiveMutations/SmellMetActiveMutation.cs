@@ -15,6 +15,7 @@ internal class SmellMetActiveMutation : Mutation
     {
         return lvl < 3 ? "smell metal      (unusable until level 3)" : "smell metal      (cost 2, INT based)";
     }
+    public override string Title => "Smell Metal (A)";
 
     public override int Frequency => 3;
     public override string GainMessage => "You smell a metallic odor.";

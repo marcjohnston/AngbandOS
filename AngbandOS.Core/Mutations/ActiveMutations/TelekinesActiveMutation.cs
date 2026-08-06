@@ -15,6 +15,7 @@ internal class TelekinesActiveMutation : Mutation
     {
         return lvl < 9 ? "telekinesis      (unusable until level 9)" : "telekinesis      (cost 9, WIS based)";
     }
+    public override string Title => "Telekinesis (A)";
 
     public override int Frequency => 2;
     public override string GainMessage => "You gain the ability to move objects telekinetically.";

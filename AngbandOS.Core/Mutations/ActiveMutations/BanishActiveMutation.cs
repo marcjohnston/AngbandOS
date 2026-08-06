@@ -20,4 +20,5 @@ internal class BanishActiveMutation : Mutation
     public override string GainMessage => "You feel a holy wrath fill you.";
     public override string HaveMessage => "You can send evil creatures directly to Hell.";
     public override string LoseMessage => "You no longer feel a holy wrath.";
+    public override string Title => "Banish (A)";
 }

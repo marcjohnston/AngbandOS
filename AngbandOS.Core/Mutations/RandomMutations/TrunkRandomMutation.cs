@@ -18,6 +18,7 @@ internal class TrunkRandomMutation : Mutation
     public override int DamageDiceNumber => 4;
     public override int EquivalentWeaponWeight => 35;
     public override string AttackDescription => "trunk";
+    public override string Title => "Elephant Trunk (R)";
 
     public override void OnGain()
     {

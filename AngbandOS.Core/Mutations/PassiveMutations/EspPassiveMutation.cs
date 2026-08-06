@@ -13,5 +13,8 @@ internal class EspPassiveMutation : Mutation
     public override string GainMessage => "You develop a telepathic ability!";
     public override string HaveMessage => "You are telepathic.";
     public override string LoseMessage => "You lose your telepathic ability!";
-    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(EspPassiveMutationItemEnhancement)) };
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(EspPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Telepathy (P)";
 }

@@ -15,6 +15,7 @@ internal class SterilityActiveMutation : Mutation
     {
         return lvl < 20 ? "sterilize        (unusable until level 20)" : "sterilize        (cost 40, CHA based)";
     }
+    public override string Title => "Sterility (A)";
 
     public override int Frequency => 1;
     public override string GainMessage => "You can give everything around you a headache.";

@@ -14,16 +14,17 @@ internal class WartSkinPassiveMutation : Mutation
     public override string HaveMessage => "Your skin is covered with warts (-2 CHR, +5 AC).";
     public override string LoseMessage => "Your warts disappear!";
     public override MutationGroupEnum Group => MutationGroupEnum.Skin;
-    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(WartSkinPassiveMutationItemEnhancement)) };
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(WartSkinPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Wart Skin (P)";
     public override void OnGain()
     {
         Game.CharismaBonus -= 2;
-        Game.GenomeArmorClassBonus += 5;
     }
 
     public override void OnLose()
     {
         Game.CharismaBonus += 2;
-        Game.GenomeArmorClassBonus -= 5;
     }
 }

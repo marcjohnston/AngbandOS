@@ -15,6 +15,7 @@ internal class FlatulentRandomMutation : Mutation
     public override string GainMessage => "You become subject to uncontrollable flatulence.";
     public override string HaveMessage => "You are subject to uncontrollable flatulence.";
     public override string LoseMessage => "You are no longer subject to uncontrollable flatulence.";
+    public override string Title => "Flatulence (R)";
 
     public override void ProcessWorld()
     {

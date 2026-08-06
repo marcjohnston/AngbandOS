@@ -13,6 +13,7 @@ internal class WalkShadRandomMutation : Mutation
     public override string GainMessage => "You feel like reality is as thin as paper.";
     public override string HaveMessage => "You occasionally stumble into other shadows.";
     public override string LoseMessage => "You feel like you're trapped in reality.";
+    public override string Title => "Shadows (R)";
 
     public override void ProcessWorld()
     {

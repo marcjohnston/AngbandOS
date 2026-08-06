@@ -15,6 +15,7 @@ internal class IllumineActiveMutation : Mutation
     {
         return lvl < 3 ? "illuminate       (unusable until level 3)" : "illuminate       (cost 2, INT based)";
     }
+    public override string Title => "Illuminate (A)";
 
     public override int Frequency => 3;
     public override string GainMessage => "You can light up rooms with your presence.";

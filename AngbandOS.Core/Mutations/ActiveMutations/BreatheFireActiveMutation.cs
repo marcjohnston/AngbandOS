@@ -17,6 +17,7 @@ internal class BreatheFireActiveMutation : Mutation
             ? "fire breath      (unusable until level 20)"
             : $"fire breath      (cost {lvl}, dam {lvl * 2}, CON based)";
     }
+    public override string Title => "Breathe Fire (A)";
 
     public override int Frequency => 3;
     public override string GainMessage => "You gain the ability to breathe fire.";

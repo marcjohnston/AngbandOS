@@ -15,6 +15,7 @@ internal class EatMagicActiveMutation : Mutation
     {
         return lvl < 17 ? "eat magic        (unusable until level 17)" : "eat magic        (cost 1, WIS based)";
     }
+    public override string Title => "Eat Magic (A)";
 
     public override int Frequency => 1;
     public override string GainMessage => "Your magic items look delicious.";

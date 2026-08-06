@@ -15,6 +15,7 @@ internal class ProdManaRandomMutation : Mutation
     public override string GainMessage => "You start producing magical energy uncontrollably.";
     public override string HaveMessage => "You are producing magical energy uncontrollably.";
     public override string LoseMessage => "You stop producing magical energy uncontrollably.";
+    public override string Title => "Random Magic (R)";
 
     public override void ProcessWorld()
     {
