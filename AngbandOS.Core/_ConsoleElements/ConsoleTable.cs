@@ -4,9 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-using System.Data.Common;
-
 namespace AngbandOS.Core.ConsoleElements;
 
 internal class ConsoleTable : ConsoleElement
@@ -85,6 +82,11 @@ internal class ConsoleTable : ConsoleElement
 
     public int TopRow = 0;
 
+    public void AddColumn(string columnName)
+    {
+        columns.Add(columnName, new ConsoleTableColumn(columnName));
+    }
+
     public override void Render(Game game, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
     {
         ConsoleAlignment alignment = Alignment ?? parentAlignment;
@@ -135,21 +137,7 @@ internal class ConsoleTable : ConsoleElement
     {
         foreach (string columnName in columnNames)
         {
-            columns.Add(columnName, new ConsoleTableColumn(columnName));
+            AddColumn(columnName);
         }
-    }
-
-    public static ConsoleTable Build<T>(T[] rowSource, params (string Name, Func<T, ConsoleString> GetRowValue)[] columns)
-    {
-        ConsoleTable table = new ConsoleTable(columns.Select(_column => _column.Name).ToArray());
-        foreach (T row in rowSource)
-        {
-            ConsoleTableRow tableRow = table.AddRow();
-            foreach ((string Name, Func<T, ConsoleString> GetRowValue) column in columns)
-            {
-                tableRow[column.Name] = column.GetRowValue(row);
-            }
-        }
-        return table;
     }
 }

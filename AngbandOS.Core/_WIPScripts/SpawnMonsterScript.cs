@@ -4,6 +4,7 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using AngbandOS.Core.ConsoleElements;
 using AngbandOS.GamePacks.Cthangband;
 
 namespace AngbandOS.Core.Scripts;
@@ -36,10 +37,10 @@ internal class SpawnMonsterScript : Script, IScript, ICastSpellScript
         try
         {
             MonsterRace[] monsterRaces = Game.SingletonRepository.Get<MonsterRace>().OrderBy(_monsterRace => _monsterRace.FriendlyName).ToArray();
-            ConsoleTable table = ConsoleTable.Build<MonsterRace>(monsterRaces, new (string, Func<MonsterRace, ConsoleString>)[] {
-                ("Name", _monsterRace => new ConsoleString(ColorEnum.White, _monsterRace.FriendlyName)),
-                ("Character", _monsterRace => new ConsoleString(ColorEnum.White, _monsterRace.Symbol.Character.ToString())),
-                ("Level", _monsterRace => new ConsoleString(ColorEnum.White, _monsterRace.LevelFound.ToString())) 
+            ConsoleTableWithRowHighlighting<MonsterRace> table = new ConsoleTableWithRowHighlighting<MonsterRace>(monsterRaces, new (string, Func<MonsterRace, string>)[] {
+                ("Name", _monsterRace => _monsterRace.FriendlyName),
+                ("Character", _monsterRace => _monsterRace.Symbol.Character.ToString()),
+                ("Level", _monsterRace => _monsterRace.LevelFound.ToString()) 
             });
 
             ConsoleWindow consoleWindow = new ConsoleWindow(0, 1, 79, 42);
@@ -63,12 +64,8 @@ internal class SpawnMonsterScript : Script, IScript, ICastSpellScript
                 {
                     table.TopRow = selectedIndex - consoleWindow.Height;
                 }
-                ConsoleString s = (ConsoleString)table.Rows[selectedIndex]["Name"];
-                foreach (ConsoleChar c in s)
-                {
-                    c.Color = ColorEnum.Red;
-                }
 
+                table.HighlightRow(selectedIndex);
                 table.Render(Game, consoleWindow, new ConsoleTopLeftAlignment());
 
                 if (!Game.GetCom("Spawn Which Monster? ", out char ch))
@@ -76,10 +73,6 @@ internal class SpawnMonsterScript : Script, IScript, ICastSpellScript
                     return;
                 }
 
-                foreach (ConsoleChar c in s)
-                {
-                    c.Color = ColorEnum.White;
-                }
                 switch (ch)
                 {
                     case '9':

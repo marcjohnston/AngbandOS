@@ -15,6 +15,18 @@ internal class ConsoleString : ConsoleElement, IEnumerable<ConsoleChar>
 {
     private List<ConsoleChar> characters = new List<ConsoleChar>();
 
+    /// <summary>
+    /// Updates the color for each character in the string.  This method is used to highlight the string in the <see cref="ConsoleTable"/>.
+    /// </summary>
+    /// <param name="color"></param>
+    public void SetColor(ColorEnum color)
+    {
+        foreach (ConsoleChar c in characters)
+        {
+            c.Color = color;
+        }
+    }
+
     public ConsoleString(ColorEnum color, string text)
     {
         foreach (char c in text)
