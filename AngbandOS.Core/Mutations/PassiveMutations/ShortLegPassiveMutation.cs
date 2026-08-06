@@ -17,14 +17,4 @@ internal class ShortLegPassiveMutation : Mutation
         (1, nameof(ShortLegPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Short Legs (P)";
-
-    public override void OnGain()
-    {
-        Game.SpeedBonus -= 3;
-    }
-
-    public override void OnLose()
-    {
-        Game.SpeedBonus += 3;
-    }
 }

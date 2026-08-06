@@ -110,6 +110,31 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasTelepathy = Game.AttributeSet.GetBool(nameof(TelepathyAttribute));
         Game.HasTimeResistance = Game.AttributeSet.GetBool(nameof(ResTimeAttribute));
         Game.InfraVisionRange = Game.AttributeSet.GetInt(nameof(InfraVisionAttribute)) + (Game.InfravisionTimer.Value > 0 ? 1 : 0);
+
+        #region Speed
+        int oldVisibleOnlySpeed = Game.Speed - Game.SpeedHidden; // The speed flag is only for visible speed
+
+        // Compute the weight limit.
+        int weightCarried = Game.WeightCarried;
+        int carryingWeightLimit = Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrCarryingCapacity * 100;
+        Game.SpeedHidden = Game.AttributeSet.GetInt(nameof(SpeedHiddenAttribute)) +
+            (Game.IsSearching ? -10 : 0);
+        Game.Speed = 110 + Game.SpeedHidden +
+            Game.AttributeSet.GetInt(nameof(SpeedAttribute)) +
+            (Game.Food.IntValue >= Constants.PyFoodMax ? -10 : 0) +
+            (weightCarried > carryingWeightLimit / 2 ? -(weightCarried - (carryingWeightLimit / 2)) / (carryingWeightLimit / 10) : 0) +
+            (Game.HasteTimer.Value > 0 ? 10 : 0) +
+            (Game.SlowTimer.Value > 0 ? -10 : 0) +
+            (!Game.ArmorIsHeavy() ? Game.ExperienceLevel.IntValue / 10 : 0);
+
+        int newVisibleOnlySpeed = Game.Speed - Game.SpeedHidden;
+        if (newVisibleOnlySpeed != oldVisibleOnlySpeed)
+        {
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();
+        }
+        #endregion
+
+        #region Base, Known Bonus and Total Bonus Armor Class
         Game.BaseArmorClass = Game.AttributeSet.GetInt(nameof(BaseArmorClassAttribute));
         Game.TotalBonusArmorClass = Game.AttributeSet.GetInt(nameof(BonusArmorClassAttribute)) +
             Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexArmorClassBonus +
@@ -141,6 +166,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 }
             }
         }
+        #endregion
 
         /// Old Compute
 
@@ -154,7 +180,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         bool hasHeavyWeapon = false;
 
         int extraShots;
-        int oldSpeed = Game.Speed.IntValue;
         bool oldTelepathy = Game.HasTelepathy;
         bool oldSeeInv = Game.HasSeeInvisibility;
         int extraBlows = extraShots = 0;
@@ -173,7 +198,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillThrowing = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added throwingtohit
         Game.SkillDigging = 0;
         Game.Race.CalcBonuses();
-        Game.Speed.IntValue = 110;
         Game.MeleeAttacksPerRound = 1;
         Game.MissileAttacksPerRound = 1;
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
@@ -189,7 +213,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).Bonus += Game.DexterityBonus;
         Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).Bonus += Game.ConstitutionBonus;
         Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Bonus += Game.CharismaBonus;
-        Game.Speed.IntValue += Game.SpeedBonus;
         Game.SkillPerception += Game.SearchBonus;
         Game.SkillSearching += Game.SearchBonus;
         Game.SkillStealth += Game.StealthBonus;
@@ -218,7 +241,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     Game.SkillSearching += oPtr.EffectiveAttributeSet.Search * 5;
                     Game.SkillPerception += oPtr.EffectiveAttributeSet.Search * 5;
                     Game.SkillDigging += oPtr.EffectiveAttributeSet.Tunnel * 20;
-                    Game.Speed.IntValue += oPtr.EffectiveAttributeSet.Speed;
                     extraBlows += oPtr.EffectiveAttributeSet.Attacks;
                     if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get())
                     {
@@ -304,18 +326,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             attackBonus += 24;
             displayedAttackBonus += 24;
         }
-        if (Game.HasteTimer.Value != 0)
-        {
-            Game.Speed.IntValue += 10;
-        }
-        if (Game.SlowTimer.Value != 0)
-        {
-            Game.Speed.IntValue -= 10;
-        }
-        if (!Game.ArmorIsHeavy())
-        {
-            Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
-        }
         if (Game.HasTelepathy != oldTelepathy)
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
@@ -323,27 +333,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (Game.HasSeeInvisibility != oldSeeInv)
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
-        }
-        int j = Game.WeightCarried;
-
-        // Compute the weight limit.
-        int ii = Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrCarryingCapacity * 100;
-
-        if (j > ii / 2)
-        {
-            Game.Speed.IntValue -= (j - (ii / 2)) / (ii / 10);
-        }
-        if (Game.Food.IntValue >= Constants.PyFoodMax)
-        {
-            Game.Speed.IntValue -= 10;
-        }
-        if (Game.IsSearching)
-        {
-            Game.Speed.IntValue -= 10;
-        }
-        if (Game.Speed.IntValue != oldSpeed)
-        {
-            Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();
         }
         displayedDamageBonus += Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDamageBonus;
         displayedAttackBonus += Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexAttackBonus;

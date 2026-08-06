@@ -35,7 +35,6 @@ public enum PropertiesEnum
     Property,
     RefreshMapProperty,
     SpareSpellSlotsIntProperty,
-    SpeedIntProperty,
     StringProperty,
     TrackedMonsterChangedProperty,
     TrackedMonsterNullableMonsterProperty,

@@ -55,8 +55,4 @@ internal class SpriteRace : Race
         }
         return null;
     }
-    public override void CalcBonuses()
-    {
-        Game.Speed += Game.ExperienceLevel.IntValue / 10;
-    }
 }

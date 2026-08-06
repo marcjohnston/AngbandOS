@@ -27,7 +27,6 @@ internal partial class Game : IGameSerialize
     public int WisdomBonus;
     public bool MagicResistance;
     public int SearchBonus;
-    public int SpeedBonus;
     public int StealthBonus;
     #endregion
 
@@ -152,6 +151,13 @@ internal partial class Game : IGameSerialize
     public int TotalBonusArmorClass;
 
     /// <summary>
+    /// Represents the current speed of the player.  The speed is a value between 0 and 199 and is used as an index into the <see cref="Game.ExtractEnergy"/> table.
+    /// </summary>
+    public int Speed;
+
+    public int SpeedHidden;
+
+    /// <summary>
     /// Grants temporary resistance to acid.
     /// </summary>
     public Timer AcidResistanceTimer { get; }
@@ -243,7 +249,6 @@ internal partial class Game : IGameSerialize
             (nameof(ConstitutionBonus), saveGameState.CreateGameStateBag(ConstitutionBonus)),
             (nameof(DexterityBonus), saveGameState.CreateGameStateBag(DexterityBonus)),
             (nameof(SearchBonus), saveGameState.CreateGameStateBag(SearchBonus)),
-            (nameof(SpeedBonus), saveGameState.CreateGameStateBag(SpeedBonus)),
             (nameof(StealthBonus), saveGameState.CreateGameStateBag(StealthBonus)),
             (nameof(StrengthBonus), saveGameState.CreateGameStateBag(StrengthBonus)),
             (nameof(WisdomBonus), saveGameState.CreateGameStateBag(WisdomBonus)),
@@ -549,7 +554,6 @@ internal partial class Game : IGameSerialize
             ConstitutionBonus = restoreGameState.GetByKey(nameof(ConstitutionBonus)).GetInt();
             DexterityBonus = restoreGameState.GetByKey(nameof(DexterityBonus)).GetInt();
             SearchBonus = restoreGameState.GetByKey(nameof(SearchBonus)).GetInt();
-            SpeedBonus = restoreGameState.GetByKey(nameof(SpeedBonus)).GetInt();
             StealthBonus = restoreGameState.GetByKey(nameof(StealthBonus)).GetInt();
             StrengthBonus = restoreGameState.GetByKey(nameof(StrengthBonus)).GetInt();
             WisdomBonus = restoreGameState.GetByKey(nameof(WisdomBonus)).GetInt();
@@ -731,7 +735,6 @@ internal partial class Game : IGameSerialize
         ExperiencePoints = (ExperiencePointsIntProperty)SingletonRepository.Get<Property>(nameof(ExperiencePointsIntProperty));
         Food = (FoodIntProperty)SingletonRepository.Get<Property>(nameof(FoodIntProperty));
         Health = (HealthPointsIntProperty)SingletonRepository.Get<Property>(nameof(HealthPointsIntProperty));
-        Speed = (SpeedIntProperty)SingletonRepository.Get<Property>(nameof(SpeedIntProperty));
         MaxHealth = (MaxHealthPointsIntProperty)SingletonRepository.Get<Property>(nameof(MaxHealthPointsIntProperty));
         SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Get<Property>(nameof(SpareSpellSlotsIntProperty));
         ExperienceLevel = (ExperienceLevelIntProperty)SingletonRepository.Get<Property>(nameof(ExperienceLevelIntProperty));
@@ -1643,12 +1646,6 @@ internal partial class Game : IGameSerialize
     public ExperiencePointsIntProperty ExperiencePoints { get; }
 
     public StringProperty PlayerName { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>state->speed</remarks>
-    public SpeedIntProperty Speed { get; }
 
     public SpareSpellSlotsIntProperty SpareSpellSlots { get; }
 
@@ -4599,7 +4596,7 @@ internal partial class Game : IGameSerialize
         // We cannot give the player energy for restoring the game.
         if (!GameRestored)
         {
-            Energy += ExtractEnergy[Speed.IntValue]; // TODO: This causes a runtime error for out of bounds
+            Energy += ExtractEnergy[Speed]; // TODO: This causes a runtime error for out of bounds
         }
         if (Energy < 100)
         {
@@ -4909,7 +4906,7 @@ internal partial class Game : IGameSerialize
         {
             if (IsTurnHundred)
             {
-                int additionalEnergy = ExtractEnergy[Speed.IntValue] * 2;
+                int additionalEnergy = ExtractEnergy[Speed] * 2;
                 if (HasRegeneration)
                 {
                     additionalEnergy += 30;

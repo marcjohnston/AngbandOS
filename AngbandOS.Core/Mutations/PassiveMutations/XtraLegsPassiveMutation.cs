@@ -17,14 +17,4 @@ internal class XtraLegsPassiveMutation : Mutation
         (1, nameof(XtraLegsPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Extra Legs (P)";
-
-    public override void OnGain()
-    {
-        Game.SpeedBonus += 3;
-    }
-
-    public override void OnLose()
-    {
-        Game.SpeedBonus -= 3;
-    }
 }

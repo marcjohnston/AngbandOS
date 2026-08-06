@@ -21,12 +21,9 @@ internal class XtraFatPassiveMutation : Mutation
     public override void OnGain()
     {
         Game.ConstitutionBonus += 2;
-        Game.SpeedBonus -= 2;
     }
-
     public override void OnLose()
     {
         Game.ConstitutionBonus -= 2;
-        Game.SpeedBonus += 2;
     }
 }
