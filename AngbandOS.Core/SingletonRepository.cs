@@ -445,6 +445,13 @@ internal sealed class SingletonRepository : IGameSerialize
             // Allow the singleton to bind now.  Provide the restore game state, if we are restoring.
             singleton.Bind(singletonRestoreGameState);
         }
+
+        // Validate wizard commands are not duplicated.
+        char[] duplicateKeyChars = Get<WizardCommand>().GroupBy(_wizardCommand => _wizardCommand.KeyChar).Where(_group => _group.Count() > 1).Select(_group => _group.Key).ToArray();
+        if (duplicateKeyChars.Length > 0)
+        {
+            throw new Exception($"Duplicate key characters detected for multiple wizard commands: keystroke '{String.Join("', '", duplicateKeyChars)}'.");
+        }
     }
 
     private void SortIndex<T>(Func<T, object> keySelector) where T : class
