@@ -35,8 +35,7 @@ internal class HalfOgreRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 25 ? "Yellow Sign     (racial, unusable until level 25)" : "Yellow Sign     (racial, cost 35, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(OrcishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {

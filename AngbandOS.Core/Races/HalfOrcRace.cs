@@ -35,8 +35,7 @@ internal class HalfOrcRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 3 ? "remove fear        (racial, unusable until level 3)" : "remove fear        (racial, cost 5, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(OrcishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {

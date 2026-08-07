@@ -35,8 +35,7 @@ internal class CyclopsRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 20 ? "throw boulder      (racial, unusable until level 20)" : "throw boulder      (racial, cost 15, dam 3*lvl, STR based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(DwarvenSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 19)

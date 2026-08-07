@@ -35,8 +35,7 @@ internal class TchoTchoRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 8 ? "berserk            (racial, unusable until level 8)" : "berserk            (racial, cost 10, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(CthuloidSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 7)

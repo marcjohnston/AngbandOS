@@ -40,8 +40,7 @@ internal class DraconianRace : Race
 
     public override string RacialPowersDescription(int lvl) => "breath weapon      (racial, cost lvl, dam 2*lvl, CON based)";
     protected override string? RacialPowerScriptBindingKey => nameof(DraconianRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    protected override string GenerateNameSyllableSetName => nameof(GnomishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(GnomishSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         return new string[] { $"You can breathe, dam. {2 * level} (cost {level})." };

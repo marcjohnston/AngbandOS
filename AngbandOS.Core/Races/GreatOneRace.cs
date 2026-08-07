@@ -35,8 +35,7 @@ internal class GreatOneRace : Race
 
     public override string RacialPowersDescription(int lvl) => "dream powers    (unusable until level 30/40)";
     protected override string? RacialPowerScriptBindingKey => nameof(GreatOneRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(HumanSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {

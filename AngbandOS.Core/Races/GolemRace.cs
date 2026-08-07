@@ -36,8 +36,7 @@ internal class GolemRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 20 ? "stone skin         (racial, unusable until level 20)" : "stone skin         (racial, cost 15, dur 30+d20, CON based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(DwarvenSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {

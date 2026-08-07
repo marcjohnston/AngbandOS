@@ -36,8 +36,7 @@ internal class DarkElfRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 2 ? "magic missile      (racial, unusable until level 2)" : "magic missile      (racial, cost 2, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(ElvishSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 1)

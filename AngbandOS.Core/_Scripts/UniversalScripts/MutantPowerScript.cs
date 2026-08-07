@@ -48,7 +48,7 @@ internal class MutantPowerScript : UniversalScript, IGetKey
         int petCtr;
         bool allPets = false;
         Monster monster;
-        bool hasRacial = Game.Race.HasRacialPowers;
+        bool hasRacialPowers = Game.Race.RacialPowerScript is not null;
         string racialPowersDescription = Game.Race.RacialPowersDescription(Game.ExperienceLevel.IntValue);
         for (num = 0; num < 36; num++)
         {
@@ -71,13 +71,13 @@ internal class MutantPowerScript : UniversalScript, IGetKey
             }
         }
         List<Mutation> activeMutations = ActivatableMutations();
-        if (!hasRacial && activeMutations.Count == 0 && pets == 0)
+        if (!hasRacialPowers && activeMutations.Count == 0 && pets == 0)
         {
             Game.MsgPrint("You have no powers to activate.");
             Game.EnergyUse = 0;
             return;
         }
-        if (hasRacial)
+        if (hasRacialPowers)
         {
             powers[0] = int.MaxValue;
             powerDesc[0] = racialPowersDescription;

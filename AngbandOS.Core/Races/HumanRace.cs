@@ -32,5 +32,5 @@ internal class HumanRace : Race
     /// Human 1->2->3->50->51->52->53->End
     /// </summary>
     public override int Chart => 1;
-    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(HumanSyllableSet);
 }

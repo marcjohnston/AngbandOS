@@ -32,6 +32,6 @@ internal class MiriNigriRace : Race
     /// Miri-Nigri 129->130->131->132->133->End
     /// </summary>
     public override int Chart => 129;
-    protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(CthuloidSyllableSet);
     public override bool AutomaticallyGainsFirstLevelMutationAtBirth => true;
 }

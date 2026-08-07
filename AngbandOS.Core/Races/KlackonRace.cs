@@ -35,8 +35,7 @@ internal class KlackonRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 9 ? "spit acid          (racial, unusable until level 9)" : "spit acid          (racial, cost 9, dam lvl, DEX based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    protected override string GenerateNameSyllableSetName => nameof(KlackonSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(KlackonSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 8)

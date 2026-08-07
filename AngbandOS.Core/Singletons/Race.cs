@@ -71,7 +71,7 @@ internal abstract class Race : IGetKey, IGameSerialize
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState)
     {
-        GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
+        GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetBindingKey);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
         ChanceOfSanityBlastImmunityExpression = Game.ParseNumericExpression(ChanceOfSanityBlastImmunityExpressionText);
         MinimumExperienceLevelAndEnhancementTuples = MinimumExperienceLevelAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
@@ -133,12 +133,7 @@ internal abstract class Race : IGetKey, IGameSerialize
     /// <param name="lvl"></param>
     /// <returns></returns>
     public virtual string RacialPowersDescription(int lvl) => "(none)";
-
-    /// <summary>
-    /// Returns true, if the race has mutant powers.  Returns false, by default.
-    /// </summary>
-    public virtual bool HasRacialPowers => false;
-    protected abstract string GenerateNameSyllableSetName { get; }
+    protected abstract string GenerateNameSyllableSetBindingKey { get; }
     public SyllableSet GenerateNameSyllableSet { get; private set; }
 
     /// <summary>

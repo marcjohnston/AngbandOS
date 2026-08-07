@@ -32,5 +32,5 @@ internal class ElfRace : Race
     /// Elf 7->8->9->54->55->56->End 
     /// </summary>
     public override int Chart => 7;
-    protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(ElvishSyllableSet);
 }
