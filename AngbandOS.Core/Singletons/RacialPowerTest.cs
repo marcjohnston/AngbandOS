@@ -46,12 +46,19 @@ internal sealed class RacialPowerTest : IGetKey, IBoolValue, IToJson, IGameSeria
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
 
+    /// <summary>
+    /// Represents the ability for which the difficulty test is performed against.  The innate rating for the ability is used.
+    /// </summary>
     public Ability UseAbility { get; private set; }
     public IScript Script { get; private set; }
     public int MinLevel { get; }
     public string CostExpression { get; }
     public Expression Cost { get; private set; }
     public string UseAbilityBindingKey { get; }
+
+    /// <summary>
+    /// Represents the difficulty rating for which the random test is performed using and against the <see cref="UseAbility"/> ability innate rating.
+    /// </summary>
     public int Difficulty { get; }
 
     public bool BoolValue
