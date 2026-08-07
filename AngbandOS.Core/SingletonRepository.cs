@@ -454,7 +454,6 @@ internal sealed class SingletonRepository : IGameSerialize
         #endregion
     }
 
-
     /// <summary>
     /// Performs validation of the lookup table for the <see cref="MappedSpellScript"/> entities by performing a cartesian product of spells, their realms, character classes,
     /// experience levels and a boolean success.
