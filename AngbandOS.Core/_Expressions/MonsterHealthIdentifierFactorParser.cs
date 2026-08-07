@@ -9,8 +9,8 @@ namespace AngbandOS.Core.Expressions;
 internal class MonsterHealthIdentifierFactorParser : IdentifierFactorParser
 {
     public override string Identifier => "mh";
-    protected override Expression GenerateExpression(string matchedIdentifier)
+    protected override Expression GenerateExpression(string matchedIdentifier, bool? sign = null)
     {
-        return new MonsterHealthExpression(Identifier);
+        return new MonsterHealthExpression(Identifier, sign);
     }
 }

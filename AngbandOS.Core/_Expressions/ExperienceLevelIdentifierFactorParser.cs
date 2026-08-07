@@ -9,8 +9,8 @@ namespace AngbandOS.Core.Expressions;
 internal class ExperienceLevelIdentifierFactorParser : IdentifierFactorParser
 {
     public override string Identifier => "x";
-    protected override Expression GenerateExpression(string matchedIdentifier)
+    protected override Expression GenerateExpression(string matchedIdentifier, bool? sign = null)
     {
-        return new ExperienceLevelIdentifierExpression(Identifier);
+        return new ExperienceLevelIdentifierExpression(Identifier, sign);
     }
 }

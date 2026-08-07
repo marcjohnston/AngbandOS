@@ -8,9 +8,9 @@ namespace AngbandOS.Core.Expressions;
 
 internal class GetCharismaIdentifierExpression : IdentifierExpression
 {
-    public GetCharismaIdentifierExpression(string matchedIdentifier) : base(matchedIdentifier) { }
+    public GetCharismaIdentifierExpression(string matchedIdentifier, bool? sign = null) : base(matchedIdentifier, sign) { }
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute(Dictionary<string, object> providers)
+    protected override Expression ComputeIdentifier(Dictionary<string, object> providers)
     {
         Func<int> getCharisma = (Func<int>)providers[nameof(ExpressionProvidersEnum.GetCharisma)];
         int charismaValue = getCharisma();

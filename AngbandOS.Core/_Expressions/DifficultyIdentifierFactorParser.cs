@@ -9,8 +9,8 @@ namespace AngbandOS.Core.Expressions;
 internal class DifficultyIdentifierFactorParser : IdentifierFactorParser
 {
     public override string Identifier => "f";
-    protected override Expression GenerateExpression(string matchedIdentifier)
+    protected override Expression GenerateExpression(string matchedIdentifier, bool? sign = null)
     {
-        return new DifficultyIdentifierExpression(Identifier);
+        return new DifficultyIdentifierExpression(Identifier, sign);
     }
 }

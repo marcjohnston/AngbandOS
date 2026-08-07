@@ -121,7 +121,7 @@ public class ExpressionParser
             return expression;
         }
     }
-    private void IgnoreWhitespace(string text, ref int characterIndex)
+    public void IgnoreWhitespace(string text, ref int characterIndex)
     {
         while (characterIndex < text.Length && ParseLanguage.WhitespaceCharacters.Contains(text[characterIndex]))
         {

@@ -8,9 +8,9 @@ namespace AngbandOS.Core.Expressions;
 
 internal class MonsterLevelExpression : IdentifierExpression
 {
-    public MonsterLevelExpression(string matchedIdentifier) : base(matchedIdentifier) { }
+    public MonsterLevelExpression(string matchedIdentifier, bool? sign = null) : base(matchedIdentifier, sign) { }
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute(Dictionary<string, object> providers)
+    protected override Expression ComputeIdentifier(Dictionary<string, object> providers)
     {
         int monsterLevel = (int)providers[nameof(ExpressionProvidersEnum.MonsterLevel)];
         return new IntegerExpression(monsterLevel);
