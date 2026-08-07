@@ -10065,32 +10065,6 @@ internal partial class Game : IGameSerialize
         Gold.IntValue = gold;
     }
 
-    public void GetStats()
-    {
-        InnateTotals innateTotals = GetInnateTotals(CharacterClass, Race);
-
-        while (true)
-        {
-            List<int> maxList = new List<int>(innateTotals.MaxInnates);
-            foreach (Ability ability in SingletonRepository.Get<Ability>()) // There are six abilities
-            {
-                int maxIndex = RandomLessThan(maxList.Count); // Choose a random max from the maxList
-                int max = maxList[maxIndex];
-                maxList.RemoveAt(maxIndex);
-                ability.InnateMax = max;
-                RaceAbility raceAbility = SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Race, ability));
-                CharacterClassAbility characterClassAbility = SingletonRepository.Get<CharacterClassAbility>(CharacterClassAbility.GetCompositeKey(CharacterClass, ability));
-                int bonus = raceAbility.Bonus + characterClassAbility.Bonus;
-                ability.Innate = ability.InnateMax;
-                ability.Adjusted = ability.ModifyStatValue(ability.InnateMax, bonus);
-            }
-            if (CharacterClass.PrimeStat.InnateMax > 13)
-            {
-                break;
-            }
-        }
-    }
-
     public void MenuDisplay(int current, string[] menuItems)
     {
         Screen.Clear(30);

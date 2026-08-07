@@ -10,9 +10,35 @@ internal class ConfirmationBirthStage : BirthStage
 {
     private ConfirmationBirthStage(Game game) : base(game) { }
 
+    private void GetStats()
+    {
+        InnateTotals innateTotals = Game.GetInnateTotals(Game.CharacterClass, Game.Race);
+
+        while (true)
+        {
+            List<int> maxList = new List<int>(innateTotals.MaxInnates);
+            foreach (Ability ability in Game.SingletonRepository.Get<Ability>()) // There are six abilities
+            {
+                int maxIndex = Game.RandomLessThan(maxList.Count); // Choose a random max from the maxList
+                int max = maxList[maxIndex];
+                maxList.RemoveAt(maxIndex);
+                ability.InnateMax = max;
+                RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Game.Race, ability));
+                CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(CharacterClassAbility.GetCompositeKey(Game.CharacterClass, ability));
+                int bonus = raceAbility.Bonus + characterClassAbility.Bonus;
+                ability.Innate = ability.InnateMax;
+                ability.Adjusted = ability.ModifyStatValue(ability.InnateMax, bonus);
+            }
+            if (Game.CharacterClass.PrimeStat.InnateMax > 13)
+            {
+                break;
+            }
+        }
+    }
+
     public override BirthStage? Render()
     {
-        Game.GetStats();
+        GetStats();
         Game.GetExtra();
         Game.GetAhw();
         Game.GetHistory();
