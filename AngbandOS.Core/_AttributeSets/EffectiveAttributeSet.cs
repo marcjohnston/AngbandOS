@@ -628,34 +628,6 @@ internal class EffectiveAttributeSet : IGameSerialize
             }
         }
     }
-    public bool ImAcid
-    {
-        get
-        {
-            return Get<BitwiseOrEffectiveAttributeValue>(nameof(ImAcidAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<BitwiseOrEffectiveAttributeValue>(nameof(ImAcidAttribute)).Set();
-            }
-        }
-    }
-    public bool ImFire
-    {
-        get
-        {
-            return Get<BitwiseOrEffectiveAttributeValue>(nameof(ImFireAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<BitwiseOrEffectiveAttributeValue>(nameof(ImFireAttribute)).Set();
-            }
-        }
-    }
     public bool Impact
     {
         get
