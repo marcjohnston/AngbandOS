@@ -25,7 +25,7 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(AttacksAttribute), "8"),
         (nameof(ValueAttribute), "30000"),
-        (nameof(WisdomAttribute), "4"),
+        (nameof(BonusWisdomAttribute), "4"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.DrainLife90Every70DirectionalActivation);
     public override string FriendlyName => "'Justice'";

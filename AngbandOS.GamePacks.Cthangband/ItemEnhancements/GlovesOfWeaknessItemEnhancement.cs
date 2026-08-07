@@ -8,7 +8,7 @@ public class GlovesOfWeaknessItemEnhancement : ItemEnhancementGameConfiguration
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
   {
-        (nameof(StrengthAttribute), "1d10")
+        (nameof(BonusStrengthAttribute), "1d10")
   };
     public override string? FriendlyName => "of Weakness";
 }

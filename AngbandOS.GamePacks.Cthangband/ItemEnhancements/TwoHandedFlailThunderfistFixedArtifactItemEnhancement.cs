@@ -27,7 +27,7 @@ public class TwoHandedFlailThunderfistFixedArtifactItemEnhancement : ItemEnhance
         (nameof(ValueAttribute), "160000"),
         (nameof(WeightAttribute), "20"),
         (nameof(GlowRadiusAttribute), "3"),
-        (nameof(StrengthAttribute), "4"),
+        (nameof(BonusStrengthAttribute), "4"),
     };
     public override string FriendlyName => "'Thunderfist'";
 }

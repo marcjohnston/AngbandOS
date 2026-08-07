@@ -28,9 +28,9 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(ValueAttribute), "112400"),
         (nameof(AttacksAttribute), "25"),
         (nameof(GlowRadiusAttribute), "3"),
-        (nameof(DexterityAttribute), "-25"),
-        (nameof(ConstitutionAttribute), "-25"),
-        (nameof(StrengthAttribute), "-25"),
+        (nameof(BonusDexterityAttribute), "-25"),
+        (nameof(BonusConstitutionAttribute), "-25"),
+        (nameof(BonusStrengthAttribute), "-25"),
     };
     public override string FriendlyName => "of Misery";
 }

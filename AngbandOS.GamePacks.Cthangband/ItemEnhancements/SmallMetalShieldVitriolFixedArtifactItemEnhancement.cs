@@ -20,8 +20,8 @@ public class SmallMetalShieldVitriolFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(AttacksAttribute), "25"),
         (nameof(ValueAttribute), "60000"),
-        (nameof(ConstitutionAttribute), "4"),
-        (nameof(StrengthAttribute), "4"),
+        (nameof(BonusConstitutionAttribute), "4"),
+        (nameof(BonusStrengthAttribute), "4"),
     };
     public override string FriendlyName => "'Vitriol'";
 }

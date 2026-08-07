@@ -5,15 +5,15 @@ public class HighMageCharacterClassItemEnhancement : ItemEnhancementGameConfigur
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(CharismaAttribute), "1"),
-        (nameof(ConstitutionAttribute), "-2"),
-        (nameof(WisdomAttribute), "0"),
-        (nameof(IntelligenceAttribute), "4"),
-        (nameof(DexterityAttribute), "0"),
+        (nameof(BonusCharismaAttribute), "1"),
+        (nameof(BonusConstitutionAttribute), "-2"),
+        (nameof(BonusWisdomAttribute), "0"),
+        (nameof(BonusIntelligenceAttribute), "4"),
+        (nameof(BonusDexterityAttribute), "0"),
         (nameof(ValueAttribute), "-3150"),
         (nameof(DisarmTrapsAttribute), "30"),
         (nameof(UseDeviceAttribute), "38"),
         (nameof(SavingThrowAttribute), "30"),
-        (nameof(StrengthAttribute), "-5")
+        (nameof(BonusStrengthAttribute), "-5")
     };
 }

@@ -25,13 +25,13 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
     public override string FriendlyName => "'Terror Mask'";
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(IntelligenceAttribute), "-1"),
+        (nameof(BonusIntelligenceAttribute), "-1"),
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(SearchAttribute), "-1"),
         (nameof(ToDamageAttribute), "25"),
         (nameof(MeleeToHitAttribute), "25"),
         (nameof(AttacksAttribute), "10"),
         (nameof(ValueAttribute), "40000"),
-        (nameof(WisdomAttribute), "-1"),
+        (nameof(BonusWisdomAttribute), "-1"),
     };
 }

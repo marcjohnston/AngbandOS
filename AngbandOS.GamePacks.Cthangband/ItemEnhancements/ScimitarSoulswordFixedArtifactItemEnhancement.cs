@@ -30,8 +30,8 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(MeleeToHitAttribute), "9"),
         (nameof(ValueAttribute), "111111"),
         (nameof(SlayDragonAttribute), "3"),
-        (nameof(WisdomAttribute), "2"),
-        (nameof(IntelligenceAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "2"),
+        (nameof(BonusIntelligenceAttribute), "2"),
     };
     public override string FriendlyName => "'Soulsword'";
 }

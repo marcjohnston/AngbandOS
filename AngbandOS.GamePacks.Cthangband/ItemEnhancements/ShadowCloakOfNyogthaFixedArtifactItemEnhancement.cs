@@ -18,11 +18,11 @@ public class ShadowCloakOfNyogthaFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(AttacksAttribute), "20"),
         (nameof(ValueAttribute), "55000"),
-        (nameof(WisdomAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "2"),
         (nameof(StealthAttribute), "2"),
         (nameof(SpeedAttribute), "2"),
-        (nameof(IntelligenceAttribute), "2"),
-        (nameof(CharismaAttribute), "2"),
+        (nameof(BonusIntelligenceAttribute), "2"),
+        (nameof(BonusCharismaAttribute), "2"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.RestoreLifeLevelsEvery450DirectionalActivation);
     public override string FriendlyName => "of Nyogtha";

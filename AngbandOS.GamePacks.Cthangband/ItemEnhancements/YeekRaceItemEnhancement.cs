@@ -8,12 +8,12 @@ public class YeekRaceItemEnhancement : ItemEnhancementGameConfiguration
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "-2"),
-        (nameof(CharismaAttribute), "-7"),
-        (nameof(ConstitutionAttribute), "-2"),
-        (nameof(WisdomAttribute), "1"),
-        (nameof(IntelligenceAttribute), "1"),
-        (nameof(DexterityAttribute), "1"),
+        (nameof(BonusStrengthAttribute), "-2"),
+        (nameof(BonusCharismaAttribute), "-7"),
+        (nameof(BonusConstitutionAttribute), "-2"),
+        (nameof(BonusWisdomAttribute), "1"),
+        (nameof(BonusIntelligenceAttribute), "1"),
+        (nameof(BonusDexterityAttribute), "1"),
         (nameof(ValueAttribute), "-4350"),
         (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "2"),

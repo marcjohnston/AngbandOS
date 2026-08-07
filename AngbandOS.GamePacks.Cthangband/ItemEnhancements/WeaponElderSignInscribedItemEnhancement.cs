@@ -19,7 +19,7 @@ public class WeaponElderSignInscribedItemEnhancement : ItemEnhancementGameConfig
         (nameof(MeleeToHitAttribute), "1d6"),
         (nameof(ToDamageAttribute), "1d6"),
         (nameof(BonusArmorClassAttribute), "1d4"),
-        (nameof(WisdomAttribute), "1d4"),
+        (nameof(BonusWisdomAttribute), "1d4"),
     };
     public override string? FriendlyName => "(Elder Sign Inscribed)";
 }

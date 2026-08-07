@@ -168,104 +168,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         }
         #endregion
 
-        /// Old Compute
+        Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).Bonus = Game.AttributeSet.GetInt(nameof(BonusStrengthAttribute));
+        Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).Bonus = Game.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute));
+        Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)).Bonus = Game.AttributeSet.GetInt(nameof(BonusWisdomAttribute));
+        Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).Bonus = Game.AttributeSet.GetInt(nameof(BonusDexterityAttribute));
+        Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).Bonus = Game.AttributeSet.GetInt(nameof(BonusConstitutionAttribute));
+        Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Bonus = Game.AttributeSet.GetInt(nameof(BonusCharismaAttribute));
 
-        List<Bonuses> bonusesToMerge = new List<Bonuses>();
-        int attackBonus = 0;
-        int damageBonus = 0;
-        int displayedAttackBonus = 0;
-        int displayedDamageBonus = 0;
-        bool hasUnpriestlyWeapon = false;
-        bool hasHeavyBow = false;
-        bool hasHeavyWeapon = false;
-
-        int extraShots;
-        bool oldTelepathy = Game.HasTelepathy;
-        bool oldSeeInv = Game.HasSeeInvisibility;
-        int extraBlows = extraShots = 0;
-        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
-        {
-            ability.Bonus = 0;
-        }
-        Game.ComputedDisarmTraps = Game.Race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
-        Game.SkillUseDevice = Game.Race.UseDevice + Game.CharacterClass.UseDevice; // done
-        Game.SkillSavingThrow = Game.Race.SavingThrow + Game.CharacterClass.SavingThrow; // done
-        Game.SkillStealth = Game.Race.Stealth + Game.CharacterClass.Stealth; // done .. need to copy
-        Game.SkillSearching = Game.Race.Search + Game.CharacterClass.Search; // done .. need to copy
-        Game.SkillPerception = Game.Race.BasePerception + Game.CharacterClass.BasePerception; // added to attributes
-        Game.SkillMelee = Game.Race.MeleeToHit + Game.CharacterClass.MeleeToHit; // this appears to be tohit
-        Game.SkillRanged = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added rangedtohit
-        Game.SkillThrowing = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added throwingtohit
-        Game.SkillDigging = 0;
-        Game.MeleeAttacksPerRound = 1;
-        Game.MissileAttacksPerRound = 1;
-        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
-        {
-            RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Game.Race, ability));
-            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.CharacterClass, ability);
-            CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
-            ability.Bonus += raceAbility.Bonus + characterClassAbility.Bonus;
-        }
-        Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).Bonus += Game.StrengthBonus;
-        Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).Bonus += Game.IntelligenceBonus;
-        Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)).Bonus += Game.WisdomBonus;
-        Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).Bonus += Game.DexterityBonus;
-        Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).Bonus += Game.ConstitutionBonus;
-        Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Bonus += Game.CharismaBonus;
-        Game.SkillPerception += Game.SearchBonus;
-        Game.SkillSearching += Game.SearchBonus;
-        Game.SkillStealth += Game.StealthBonus;
-        if (Game.MagicResistance)
-        {
-            Game.SkillSavingThrow += 15 + (Game.ExperienceLevel.IntValue / 5);
-        }
-        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
-        {
-            ability.OverrideUpdateBonuses();
-        }
-        foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>())
-        {
-            foreach (int i in equipmentWieldSlot.InventorySlots)
-            {
-                Item? oPtr = Game.GetInventoryItem(i);
-                if (oPtr != null)
-                {
-                    Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).Bonus += oPtr.EffectiveAttributeSet.Strength;
-                    Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).Bonus += oPtr.EffectiveAttributeSet.Intelligence;
-                    Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)).Bonus += oPtr.EffectiveAttributeSet.Wisdom;
-                    Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).Bonus += oPtr.EffectiveAttributeSet.Dexterity;
-                    Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).Bonus += oPtr.EffectiveAttributeSet.Constitution;
-                    Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Bonus += oPtr.EffectiveAttributeSet.Charisma;
-                    Game.SkillStealth += oPtr.EffectiveAttributeSet.Stealth;
-                    Game.SkillSearching += oPtr.EffectiveAttributeSet.Search * 5;
-                    Game.SkillPerception += oPtr.EffectiveAttributeSet.Search * 5;
-                    Game.SkillDigging += oPtr.EffectiveAttributeSet.Tunnel * 20;
-                    extraBlows += oPtr.EffectiveAttributeSet.Attacks;
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get())
-                    {
-                        extraShots++;
-                    }
-                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(WraithAttribute)).Get())
-                    {
-                        Game.EtherealnessTimer.SetValue(Math.Max(Game.EtherealnessTimer.Value, 20));
-                    }
-                    if (equipmentWieldSlot.IsWeapon)
-                    {
-                        continue;
-                    }
-                    attackBonus += oPtr.EffectiveAttributeSet.MeleeToHit;
-                    damageBonus += oPtr.EffectiveAttributeSet.ToDamage;
-                    if (oPtr.IsKnown())
-                    {
-                        displayedAttackBonus += oPtr.EffectiveAttributeSet.MeleeToHit;
-                    }
-                    if (oPtr.IsKnown())
-                    {
-                        displayedDamageBonus += oPtr.EffectiveAttributeSet.ToDamage;
-                    }
-                }
-            }
-        }
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
             int top = ability.ModifyStatValue(ability.InnateMax, ability.Bonus);
@@ -294,6 +203,82 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
             {
                 ability.TableIndex = abilityTableIndex;
                 ability.FlagActions();
+            }
+        }
+
+        /// Old Compute
+
+        List<Bonuses> bonusesToMerge = new List<Bonuses>();
+        int attackBonus = 0;
+        int damageBonus = 0;
+        int displayedAttackBonus = 0;
+        int displayedDamageBonus = 0;
+        bool hasUnpriestlyWeapon = false;
+        bool hasHeavyBow = false;
+        bool hasHeavyWeapon = false;
+
+        int extraShots;
+        bool oldTelepathy = Game.HasTelepathy;
+        bool oldSeeInv = Game.HasSeeInvisibility;
+        int extraBlows = extraShots = 0;
+        Game.ComputedDisarmTraps = Game.Race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
+        Game.SkillUseDevice = Game.Race.UseDevice + Game.CharacterClass.UseDevice; // done
+        Game.SkillSavingThrow = Game.Race.SavingThrow + Game.CharacterClass.SavingThrow; // done
+        Game.SkillStealth = Game.Race.Stealth + Game.CharacterClass.Stealth; // done .. need to copy
+        Game.SkillSearching = Game.Race.Search + Game.CharacterClass.Search; // done .. need to copy
+        Game.SkillPerception = Game.Race.BasePerception + Game.CharacterClass.BasePerception; // added to attributes
+        Game.SkillMelee = Game.Race.MeleeToHit + Game.CharacterClass.MeleeToHit; // this appears to be tohit
+        Game.SkillRanged = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added rangedtohit
+        Game.SkillThrowing = Game.Race.RangedToHit + Game.CharacterClass.RangedToHit; // added throwingtohit
+        Game.SkillDigging = 0;
+        Game.MeleeAttacksPerRound = 1;
+        Game.MissileAttacksPerRound = 1;
+        Game.SkillPerception += Game.SearchBonus;
+        Game.SkillSearching += Game.SearchBonus;
+        Game.SkillStealth += Game.StealthBonus;
+        if (Game.MagicResistance)
+        {
+            Game.SkillSavingThrow += 15 + (Game.ExperienceLevel.IntValue / 5);
+        }
+        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
+        {
+            ability.OverrideUpdateBonuses();
+        }
+        foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>())
+        {
+            foreach (int i in equipmentWieldSlot.InventorySlots)
+            {
+                Item? oPtr = Game.GetInventoryItem(i);
+                if (oPtr != null)
+                {
+                    Game.SkillStealth += oPtr.EffectiveAttributeSet.Stealth;
+                    Game.SkillSearching += oPtr.EffectiveAttributeSet.Search * 5;
+                    Game.SkillPerception += oPtr.EffectiveAttributeSet.Search * 5;
+                    Game.SkillDigging += oPtr.EffectiveAttributeSet.Tunnel * 20;
+                    extraBlows += oPtr.EffectiveAttributeSet.Attacks;
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get())
+                    {
+                        extraShots++;
+                    }
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(WraithAttribute)).Get())
+                    {
+                        Game.EtherealnessTimer.SetValue(Math.Max(Game.EtherealnessTimer.Value, 20));
+                    }
+                    if (equipmentWieldSlot.IsWeapon)
+                    {
+                        continue;
+                    }
+                    attackBonus += oPtr.EffectiveAttributeSet.MeleeToHit;
+                    damageBonus += oPtr.EffectiveAttributeSet.ToDamage;
+                    if (oPtr.IsKnown())
+                    {
+                        displayedAttackBonus += oPtr.EffectiveAttributeSet.MeleeToHit;
+                    }
+                    if (oPtr.IsKnown())
+                    {
+                        displayedDamageBonus += oPtr.EffectiveAttributeSet.ToDamage;
+                    }
+                }
             }
         }
         if (Game.StunTimer.Value > 50)

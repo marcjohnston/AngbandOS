@@ -18,13 +18,4 @@ internal class ScalesPassiveMutation : Mutation
         (1, nameof(ScalesPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Scales (P)";
-    public override void OnGain()
-    {
-        Game.CharismaBonus -= 1;
-    }
-
-    public override void OnLose()
-    {
-        Game.CharismaBonus += 1;
-    }
 }

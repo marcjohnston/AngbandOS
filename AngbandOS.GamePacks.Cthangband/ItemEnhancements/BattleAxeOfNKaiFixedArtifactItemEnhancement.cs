@@ -25,8 +25,8 @@ public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameCo
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "3"),
-        (nameof(ConstitutionAttribute), "3"),
+        (nameof(BonusStrengthAttribute), "3"),
+        (nameof(BonusConstitutionAttribute), "3"),
         (nameof(StealthAttribute), "3"),
         (nameof(ValueAttribute), "90000"),
         (nameof(DamageDiceAttribute), "1"),

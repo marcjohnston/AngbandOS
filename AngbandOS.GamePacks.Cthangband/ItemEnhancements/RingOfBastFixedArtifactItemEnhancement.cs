@@ -16,9 +16,9 @@ public class RingOfBastFixedArtifactItemEnhancement : ItemEnhancementGameConfigu
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ValueAttribute), "175000"),
         (nameof(SpeedAttribute), "4"),
-        (nameof(DexterityAttribute), "4"),
-        (nameof(ConstitutionAttribute), "4"),
-        (nameof(StrengthAttribute), "4"),
+        (nameof(BonusDexterityAttribute), "4"),
+        (nameof(BonusConstitutionAttribute), "4"),
+        (nameof(BonusStrengthAttribute), "4"),
     };
     public override string FriendlyName => "of Bast";
 }

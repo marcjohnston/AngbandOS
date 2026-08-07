@@ -20,7 +20,7 @@ public class DaggerIcicleFixedArtifactItemEnhancement : ItemEnhancementGameConfi
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(DexterityAttribute), "2"),
+        (nameof(BonusDexterityAttribute), "2"),
         (nameof(AttacksAttribute), "2"),
         (nameof(SpeedAttribute), "2"),
         (nameof(ValueAttribute), "50000"),

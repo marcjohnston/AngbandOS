@@ -26,9 +26,9 @@ public class MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement : It
         (nameof(MeleeToHitAttribute), "-1"),
         (nameof(AttacksAttribute), "20"),
         (nameof(ValueAttribute), "135000"),
-        (nameof(WisdomAttribute), "4"),
+        (nameof(BonusWisdomAttribute), "4"),
         (nameof(StealthAttribute), "4"),
-        (nameof(IntelligenceAttribute), "4"),
+        (nameof(BonusIntelligenceAttribute), "4"),
     };
     public override string FriendlyName => "of the Vampire Hunter";
 }

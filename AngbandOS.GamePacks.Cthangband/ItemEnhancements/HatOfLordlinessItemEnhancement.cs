@@ -11,8 +11,8 @@ public class HatOfLordlinessItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "2000"),
         (nameof(TreasureRatingAttribute), "17"),
-        (nameof(WisdomAttribute), "1d3"),
-        (nameof(CharismaAttribute), "1d3"),
+        (nameof(BonusWisdomAttribute), "1d3"),
+        (nameof(BonusCharismaAttribute), "1d3"),
     };
     public override string? FriendlyName => "of Lordliness";
 }

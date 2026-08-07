@@ -13,7 +13,7 @@ public class GlovesOfPowerItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(TreasureRatingAttribute), "22"),
         (nameof(MeleeToHitAttribute), "1d5"),
         (nameof(ToDamageAttribute), "1d5"),
-        (nameof(StrengthAttribute), "1d5")
+        (nameof(BonusStrengthAttribute), "1d5")
     };
     public override string? FriendlyName => "of Power";
 }

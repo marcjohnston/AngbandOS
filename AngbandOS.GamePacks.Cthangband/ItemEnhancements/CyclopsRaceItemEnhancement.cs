@@ -8,11 +8,11 @@ public class CyclopsRaceItemEnhancement : ItemEnhancementGameConfiguration
 
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(CharismaAttribute), "-6"),
-        (nameof(ConstitutionAttribute), "4"),
-        (nameof(WisdomAttribute), "-3"),
-        (nameof(IntelligenceAttribute), "-3"),
-        (nameof(DexterityAttribute), "-3"),
+        (nameof(BonusCharismaAttribute), "-6"),
+        (nameof(BonusConstitutionAttribute), "4"),
+        (nameof(BonusWisdomAttribute), "-3"),
+        (nameof(BonusIntelligenceAttribute), "-3"),
+        (nameof(BonusDexterityAttribute), "-3"),
         (nameof(ValueAttribute), "-3900"),
         (nameof(InfraVisionAttribute), "1"),
         (nameof(DisarmTrapsAttribute), "-4"),
@@ -20,6 +20,6 @@ public class CyclopsRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "-5"),
         (nameof(StealthAttribute), "-2"),
         (nameof(SearchAttribute), "-2"),
-        (nameof(StrengthAttribute), "4")
+        (nameof(BonusStrengthAttribute), "4")
     };
 }

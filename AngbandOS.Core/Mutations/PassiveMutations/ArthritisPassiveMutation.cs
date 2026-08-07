@@ -19,13 +19,4 @@ internal class ArthritisPassiveMutation : Mutation
     };
 
     public override string Title => "Arthritis (P)";
-    public override void OnGain()
-    {
-        Game.DexterityBonus -= 3;
-    }
-
-    public override void OnLose()
-    {
-        Game.DexterityBonus += 3;
-    }
 }

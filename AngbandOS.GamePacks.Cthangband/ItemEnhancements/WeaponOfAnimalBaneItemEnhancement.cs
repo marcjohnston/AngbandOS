@@ -11,7 +11,7 @@ public class WeaponOfAnimalBaneItemEnhancement : ItemEnhancementGameConfiguratio
     {
         (nameof(ValueAttribute), "6000"),
         (nameof(TreasureRatingAttribute), "20"),
-        (nameof(IntelligenceAttribute), "1d2"),
+        (nameof(BonusIntelligenceAttribute), "1d2"),
     };
     public override string? FriendlyName => "of Animal Bane";
  }

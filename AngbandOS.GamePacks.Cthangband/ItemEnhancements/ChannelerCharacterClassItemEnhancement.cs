@@ -5,12 +5,12 @@ public class ChannelerCharacterClassItemEnhancement : ItemEnhancementGameConfigu
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "-1"),
-        (nameof(CharismaAttribute), "3"),
-        (nameof(ConstitutionAttribute), "-1"),
-        (nameof(WisdomAttribute), "2"),
-        (nameof(IntelligenceAttribute), "0"),
-        (nameof(DexterityAttribute), "-1"),
+        (nameof(BonusStrengthAttribute), "-1"),
+        (nameof(BonusCharismaAttribute), "3"),
+        (nameof(BonusConstitutionAttribute), "-1"),
+        (nameof(BonusWisdomAttribute), "2"),
+        (nameof(BonusIntelligenceAttribute), "0"),
+        (nameof(BonusDexterityAttribute), "-1"),
         (nameof(ValueAttribute), "150"),
         (nameof(DisarmTrapsAttribute), "40"),
         (nameof(UseDeviceAttribute), "40"),

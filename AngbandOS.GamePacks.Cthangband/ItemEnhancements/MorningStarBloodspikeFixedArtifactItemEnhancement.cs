@@ -22,7 +22,7 @@ public class MorningStarBloodspikeFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(ToDamageAttribute), "22"),
         (nameof(MeleeToHitAttribute), "8"),
         (nameof(ValueAttribute), "30000"),
-        (nameof(StrengthAttribute), "4"),
+        (nameof(BonusStrengthAttribute), "4"),
     };
     public override string FriendlyName => "'Bloodspike'";
 }

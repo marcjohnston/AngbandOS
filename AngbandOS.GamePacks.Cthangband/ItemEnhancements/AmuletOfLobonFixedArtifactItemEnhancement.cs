@@ -16,7 +16,7 @@ public class AmuletOfLobonFixedArtifactItemEnhancement : ItemEnhancementGameConf
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ValueAttribute), "60000"),
-        (nameof(ConstitutionAttribute), "2"),
+        (nameof(BonusConstitutionAttribute), "2"),
     };
     public override string FriendlyName => "of Lobon";
 }

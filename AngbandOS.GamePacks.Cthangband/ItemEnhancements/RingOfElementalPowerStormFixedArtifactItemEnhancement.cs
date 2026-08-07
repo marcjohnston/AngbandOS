@@ -32,13 +32,13 @@ public class RingOfElementalPowerStormFixedArtifactItemEnhancement : ItemEnhance
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "300000"),
         (nameof(GlowRadiusAttribute), "3"),
-        (nameof(WisdomAttribute), "3"),
+        (nameof(BonusWisdomAttribute), "3"),
         (nameof(SpeedAttribute), "3"),
-        (nameof(IntelligenceAttribute), "3"),
-        (nameof(DexterityAttribute), "3"),
-        (nameof(ConstitutionAttribute), "3"),
-        (nameof(CharismaAttribute), "3"),
-        (nameof(StrengthAttribute), "3"),
+        (nameof(BonusIntelligenceAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
+        (nameof(BonusConstitutionAttribute), "3"),
+        (nameof(BonusCharismaAttribute), "3"),
+        (nameof(BonusStrengthAttribute), "3"),
     };
     public override string FriendlyName => "of Elemental Power (Storm)";
 }

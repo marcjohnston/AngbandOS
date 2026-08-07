@@ -17,7 +17,7 @@ public class SteelHelmOfHammerhandFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(AttacksAttribute), "20"),
         (nameof(ValueAttribute), "45000"),
-        (nameof(DexterityAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
     };
     public override string FriendlyName => "of Hammerhand";
 }

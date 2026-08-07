@@ -19,8 +19,8 @@ public class PairOfSoftLeatherBootsOfDancingFixedArtifactItemEnhancement : ItemE
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(CharismaAttribute), "5"),
-        (nameof(DexterityAttribute), "5"),
+        (nameof(BonusCharismaAttribute), "5"),
+        (nameof(BonusDexterityAttribute), "5"),
         (nameof(ValueAttribute), "40000"),
         (nameof(AttacksAttribute), "15"),
     };

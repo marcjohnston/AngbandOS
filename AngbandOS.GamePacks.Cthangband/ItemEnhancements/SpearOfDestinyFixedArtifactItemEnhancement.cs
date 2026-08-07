@@ -31,8 +31,8 @@ public class SpearOfDestinyFixedArtifactItemEnhancement : ItemEnhancementGameCon
         (nameof(MeleeToHitAttribute), "15"),
         (nameof(ValueAttribute), "77777"),
         (nameof(SlayDragonAttribute), "3"),
-        (nameof(WisdomAttribute), "4"),
-        (nameof(IntelligenceAttribute), "4"),
+        (nameof(BonusWisdomAttribute), "4"),
+        (nameof(BonusIntelligenceAttribute), "4"),
         (nameof(InfraVisionAttribute), "4"),
         (nameof(GlowRadiusAttribute), "3"),
     };

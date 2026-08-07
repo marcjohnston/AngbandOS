@@ -9,6 +9,6 @@ public class GlovesOfClumsinessItemEnhancement : ItemEnhancementGameConfiguratio
     public override string? FriendlyName => "of Clumsiness";
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-       (nameof(DexterityAttribute), "1d10"),
+       (nameof(BonusDexterityAttribute), "1d10"),
     };
 }

@@ -18,13 +18,4 @@ internal class WartSkinPassiveMutation : Mutation
         (1, nameof(WartSkinPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Wart Skin (P)";
-    public override void OnGain()
-    {
-        Game.CharismaBonus -= 2;
-    }
-
-    public override void OnLose()
-    {
-        Game.CharismaBonus += 2;
-    }
 }

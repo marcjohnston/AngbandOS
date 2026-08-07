@@ -5,12 +5,12 @@ public class PaladinCharacterClassItemEnhancement : ItemEnhancementGameConfigura
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "3"),
-        (nameof(CharismaAttribute), "2"),
-        (nameof(ConstitutionAttribute), "2"),
-        (nameof(WisdomAttribute), "1"),
-        (nameof(IntelligenceAttribute), "-3"),
-        (nameof(DexterityAttribute), "0"),
+        (nameof(BonusStrengthAttribute), "3"),
+        (nameof(BonusCharismaAttribute), "2"),
+        (nameof(BonusConstitutionAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "1"),
+        (nameof(BonusIntelligenceAttribute), "-3"),
+        (nameof(BonusDexterityAttribute), "0"),
         (nameof(ValueAttribute), "4500"),
         (nameof(DisarmTrapsAttribute), "20"),
         (nameof(UseDeviceAttribute), "24"),

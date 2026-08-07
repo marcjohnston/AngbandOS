@@ -8,11 +8,11 @@ public class HighElfRaceItemEnhancement : ItemEnhancementGameConfiguration
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(CharismaAttribute), "5"),
-        (nameof(ConstitutionAttribute), "1"),
-        (nameof(WisdomAttribute), "2"),
-        (nameof(IntelligenceAttribute), "3"),
-        (nameof(DexterityAttribute), "3"),
+        (nameof(BonusCharismaAttribute), "5"),
+        (nameof(BonusConstitutionAttribute), "1"),
+        (nameof(BonusWisdomAttribute), "2"),
+        (nameof(BonusIntelligenceAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
         (nameof(ValueAttribute), "14250"),
         (nameof(InfraVisionAttribute), "4"),
         (nameof(DisarmTrapsAttribute), "4"),
@@ -20,6 +20,6 @@ public class HighElfRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "20"),
         (nameof(StealthAttribute), "4"),
         (nameof(SearchAttribute), "3"),
-        (nameof(StrengthAttribute), "1")
+        (nameof(BonusStrengthAttribute), "1")
     };
 }

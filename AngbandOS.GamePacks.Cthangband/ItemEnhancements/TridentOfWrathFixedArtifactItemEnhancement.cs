@@ -26,8 +26,8 @@ public class TridentOfWrathFixedArtifactItemEnhancement : ItemEnhancementGameCon
         (nameof(DamageDiceAttribute), "2"),
         (nameof(ValueAttribute), "90000"),
         (nameof(WeightAttribute), "230"),
-        (nameof(DexterityAttribute), "2"),
-        (nameof(StrengthAttribute), "2"),
+        (nameof(BonusDexterityAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "2"),
     };
     public override string FriendlyName => "of Wrath";
 }

@@ -25,8 +25,8 @@ public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(AttacksAttribute), "40"),
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "150000"),
-        (nameof(CharismaAttribute), "4"),
-        (nameof(StrengthAttribute), "4"),
+        (nameof(BonusCharismaAttribute), "4"),
+        (nameof(BonusStrengthAttribute), "4"),
     };
     public override string FriendlyName => "of the Orcs";
 }

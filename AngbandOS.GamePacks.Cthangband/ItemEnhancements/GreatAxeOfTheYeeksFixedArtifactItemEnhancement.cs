@@ -28,7 +28,7 @@ public class GreatAxeOfTheYeeksFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(AttacksAttribute), "15"),
         (nameof(ValueAttribute), "150000"),
-        (nameof(ConstitutionAttribute), "3"),
+        (nameof(BonusConstitutionAttribute), "3"),
         (nameof(SlayDragonAttribute), "5"),
     };
     public override string FriendlyName => "of the Yeeks";

@@ -29,7 +29,7 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(DamageDiceAttribute), "9"),
         (nameof(MeleeToHitAttribute), "-30"),
         (nameof(ToDamageAttribute), "7"),
-        (nameof(DexterityAttribute), "2"),
-        (nameof(CharismaAttribute), "2"),
+        (nameof(BonusDexterityAttribute), "2"),
+        (nameof(BonusCharismaAttribute), "2"),
     };
 }

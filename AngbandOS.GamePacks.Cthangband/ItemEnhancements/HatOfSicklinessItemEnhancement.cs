@@ -9,8 +9,8 @@ public class HatOfSicklinessItemEnhancement : ItemEnhancementGameConfiguration
     public override string? FriendlyName => "of Sickliness";
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "1d5"),
-        (nameof(DexterityAttribute), "1d5"),
+        (nameof(BonusStrengthAttribute), "1d5"),
+        (nameof(BonusDexterityAttribute), "1d5"),
         (nameof(ValueAttribute), "4800"),
     };
 }

@@ -17,14 +17,4 @@ internal class AlbinoPassiveMutation : Mutation
         (1, nameof(AlbinoMutationItemEnhancement)) 
     };
     public override string Title => "Albino (P)";
-    public override void OnGain()
-    {
-        Game.ConstitutionBonus -= 4;
-    }
-
-    public override void OnLose()
-    {
-        Game.ConstitutionBonus += 4;
-    }
-
 }

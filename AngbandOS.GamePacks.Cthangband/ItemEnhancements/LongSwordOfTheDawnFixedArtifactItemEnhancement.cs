@@ -33,7 +33,7 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(Vorpal1InChanceAttribute), "6"),
         (nameof(SlayDragonAttribute), "3"),
         (nameof(InfraVisionAttribute), "3"),
-        (nameof(CharismaAttribute), "3"),
+        (nameof(BonusCharismaAttribute), "3"),
         (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of the Dawn";

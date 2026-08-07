@@ -18,13 +18,4 @@ internal class HyperStrPassiveMutation : Mutation
         (1, nameof(HyperStrPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Hyper Strength (P)";
-    public override void OnGain()
-    {
-        Game.StrengthBonus += 4;
-    }
-
-    public override void OnLose()
-    {
-        Game.StrengthBonus -= 4;
-    }
 }

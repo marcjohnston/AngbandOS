@@ -11,6 +11,6 @@ public class StrengthRingItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     {
         (nameof(WeightAttribute), "2"),
         (nameof(ValueAttribute), "500"),
-        (nameof(StrengthAttribute), "1")
+        (nameof(BonusStrengthAttribute), "1")
     };
 }

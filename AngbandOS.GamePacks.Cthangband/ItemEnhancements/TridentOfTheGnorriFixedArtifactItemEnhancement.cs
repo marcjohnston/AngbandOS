@@ -32,7 +32,7 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(ValueAttribute), "120000"),
         (nameof(GlowRadiusAttribute), "3"),
         (nameof(SlayDragonAttribute), "3"),
-        (nameof(DexterityAttribute), "4"),
+        (nameof(BonusDexterityAttribute), "4"),
     };
     public override string FriendlyName => "of the Gnorri";
 }

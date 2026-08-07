@@ -17,13 +17,4 @@ internal class BlankFacePassiveMutation : Mutation
         (1, nameof(BlankFaceMutationItemEnhancement)) 
     };
     public override string Title => "Blank Face (P)";
-    public override void OnGain()
-    {
-        Game.CharismaBonus -= 1;
-    }
-
-    public override void OnLose()
-    {
-        Game.CharismaBonus += 1;
-    }
 }

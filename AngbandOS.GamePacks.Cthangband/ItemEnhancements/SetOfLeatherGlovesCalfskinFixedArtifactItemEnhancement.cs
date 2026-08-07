@@ -19,8 +19,8 @@ public class SetOfLeatherGlovesCalfskinFixedArtifactItemEnhancement : ItemEnhanc
         (nameof(MeleeToHitAttribute), "8"),
         (nameof(AttacksAttribute), "15"),
         (nameof(ValueAttribute), "36000"),
-        (nameof(StrengthAttribute), "2"),
-        (nameof(ConstitutionAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "2"),
+        (nameof(BonusConstitutionAttribute), "2"),
     };
     public override string FriendlyName => "'Calfskin'";
 }

@@ -10,7 +10,7 @@ public class GlovesOfAgilityItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "1000"),
         (nameof(TreasureRatingAttribute), "14"),
-        (nameof(DexterityAttribute), "1d5"),
+        (nameof(BonusDexterityAttribute), "1d5"),
     };
     public override string? FriendlyName => "of Agility";
 }

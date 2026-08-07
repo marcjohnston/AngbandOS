@@ -13,12 +13,12 @@ public class SpectreRaceItemEnhancement : ItemEnhancementGameConfiguration
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(GlowRadiusAttribute), "1"),
-        (nameof(StrengthAttribute), "-5"),
-        (nameof(CharismaAttribute), "-6"),
-        (nameof(ConstitutionAttribute), "-3"),
-        (nameof(WisdomAttribute), "4"),
-        (nameof(IntelligenceAttribute), "4"),
-        (nameof(DexterityAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "-5"),
+        (nameof(BonusCharismaAttribute), "-6"),
+        (nameof(BonusConstitutionAttribute), "-3"),
+        (nameof(BonusWisdomAttribute), "4"),
+        (nameof(BonusIntelligenceAttribute), "4"),
+        (nameof(BonusDexterityAttribute), "2"),
         (nameof(ValueAttribute), "-300"),
         (nameof(InfraVisionAttribute), "5"),
         (nameof(DisarmTrapsAttribute), "10"),

@@ -18,8 +18,8 @@ public class IronHelmSkullkeeperFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(AttacksAttribute), "10"),
         (nameof(ValueAttribute), "100000"),
-        (nameof(WisdomAttribute), "2"),
-        (nameof(IntelligenceAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "2"),
+        (nameof(BonusIntelligenceAttribute), "2"),
     };
     public override string FriendlyName => "'Skullkeeper'";
 }

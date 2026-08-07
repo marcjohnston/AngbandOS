@@ -36,9 +36,9 @@ public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "125000"),
         (nameof(SlayDragonAttribute), "3"),
-        (nameof(DexterityAttribute), "4"),
-        (nameof(ConstitutionAttribute), "4"),
-        (nameof(StrengthAttribute), "4"),
+        (nameof(BonusDexterityAttribute), "4"),
+        (nameof(BonusConstitutionAttribute), "4"),
+        (nameof(BonusStrengthAttribute), "4"),
     };
     public override string FriendlyName => "of Xura";
 }

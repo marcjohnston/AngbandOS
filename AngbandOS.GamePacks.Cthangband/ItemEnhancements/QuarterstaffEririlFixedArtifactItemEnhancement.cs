@@ -21,8 +21,8 @@ public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(ToDamageAttribute), "5"),
         (nameof(MeleeToHitAttribute), "3"),
         (nameof(ValueAttribute), "20000"),
-        (nameof(WisdomAttribute), "4"),
-        (nameof(IntelligenceAttribute), "4"),
+        (nameof(BonusWisdomAttribute), "4"),
+        (nameof(BonusIntelligenceAttribute), "4"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.IdentifyEvery10Activation);
     public override string FriendlyName => "'Eriril'";

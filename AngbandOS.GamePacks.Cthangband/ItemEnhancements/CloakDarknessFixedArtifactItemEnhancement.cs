@@ -19,8 +19,8 @@ public class CloakDarknessFixedArtifactItemEnhancement : ItemEnhancementGameConf
         (nameof(StealthAttribute), "2"),
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(ValueAttribute), "13000"),
-        (nameof(IntelligenceAttribute), "2"),
-        (nameof(WisdomAttribute), "2"),
+        (nameof(BonusIntelligenceAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "2"),
         (nameof(AttacksAttribute), "4"),
     };
 }

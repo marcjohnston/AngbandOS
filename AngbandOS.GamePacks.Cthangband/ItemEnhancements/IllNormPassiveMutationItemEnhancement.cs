@@ -4,6 +4,6 @@ public class IllNormPassiveMutationItemEnhancement : ItemEnhancementGameConfigur
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(CharismaAttribute), "0-CHA+8+2*X"),
+        (nameof(BonusCharismaAttribute), "0-CHA+8+2*X"),
     };
 }

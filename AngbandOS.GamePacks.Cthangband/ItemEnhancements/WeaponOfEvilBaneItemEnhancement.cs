@@ -11,7 +11,7 @@ public class WeaponOfEvilBaneItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "5000"),
         (nameof(TreasureRatingAttribute), "20"),
-        (nameof(WisdomAttribute), "1d2"),
+        (nameof(BonusWisdomAttribute), "1d2"),
     };
     public override string? FriendlyName => "of Evil Bane";
 }

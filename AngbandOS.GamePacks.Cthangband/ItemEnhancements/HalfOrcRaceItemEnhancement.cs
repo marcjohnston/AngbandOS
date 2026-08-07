@@ -7,11 +7,11 @@ public class HalfOrcRaceItemEnhancement : ItemEnhancementGameConfiguration
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(CharismaAttribute), "-4"),
-        (nameof(ConstitutionAttribute), "1"),
-        (nameof(WisdomAttribute), "0"),
-        (nameof(IntelligenceAttribute), "-1"),
-        (nameof(DexterityAttribute), "0"),
+        (nameof(BonusCharismaAttribute), "-4"),
+        (nameof(BonusConstitutionAttribute), "1"),
+        (nameof(BonusWisdomAttribute), "0"),
+        (nameof(BonusIntelligenceAttribute), "-1"),
+        (nameof(BonusDexterityAttribute), "0"),
         (nameof(ValueAttribute), "600"),
         (nameof(InfraVisionAttribute), "3"),
         (nameof(DisarmTrapsAttribute), "-3"),
@@ -19,6 +19,6 @@ public class HalfOrcRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "-3"),
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "0"),
-        (nameof(StrengthAttribute), "2")
+        (nameof(BonusStrengthAttribute), "2")
     };
 }

@@ -20,7 +20,7 @@ public class LongBowSureshotFixedArtifactItemEnhancement : ItemEnhancementGameCo
         (nameof(MeleeToHitAttribute), "20"),
         (nameof(ValueAttribute), "35000"),
         (nameof(StealthAttribute), "3"),
-        (nameof(DexterityAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
     };
     public override string FriendlyName => "'Sureshot'";
 }

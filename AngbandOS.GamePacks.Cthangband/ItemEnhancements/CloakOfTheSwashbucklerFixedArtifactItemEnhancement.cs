@@ -17,8 +17,8 @@ public class CloakOfTheSwashbucklerFixedArtifactItemEnhancement : ItemEnhancemen
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(CharismaAttribute), "3"),
-        (nameof(DexterityAttribute), "3"),
+        (nameof(BonusCharismaAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
         (nameof(ValueAttribute), "35000"),
         (nameof(AttacksAttribute), "18"),
     };

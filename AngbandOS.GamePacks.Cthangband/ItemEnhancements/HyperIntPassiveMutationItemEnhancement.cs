@@ -3,7 +3,7 @@ namespace AngbandOS.GamePacks.Cthangband;
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(IntelligenceAttribute), "4"),
-        (nameof(WisdomAttribute), "4"),
+        (nameof(BonusIntelligenceAttribute), "4"),
+        (nameof(BonusWisdomAttribute), "4"),
     };
 }

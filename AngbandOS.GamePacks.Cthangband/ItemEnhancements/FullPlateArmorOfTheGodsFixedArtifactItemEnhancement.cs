@@ -22,7 +22,7 @@ public class FullPlateArmorOfTheGodsFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(AttacksAttribute), "25"),
         (nameof(ValueAttribute), "50000"),
         (nameof(WeightAttribute), "-80"),
-        (nameof(ConstitutionAttribute), "1"),
+        (nameof(BonusConstitutionAttribute), "1"),
     };
     public override string FriendlyName => "of the Gods";
 }

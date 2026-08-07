@@ -16,9 +16,9 @@ public class WeaponOfKadathItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(MeleeToHitAttribute), "1d5"),
         (nameof(ToDamageAttribute), "1d5"),
-        (nameof(DexterityAttribute), "1d2"),
-        (nameof(ConstitutionAttribute), "1d2"),
-        (nameof(StrengthAttribute), "1d2"),
+        (nameof(BonusDexterityAttribute), "1d2"),
+        (nameof(BonusConstitutionAttribute), "1d2"),
+        (nameof(BonusStrengthAttribute), "1d2"),
     };
     public override string? FriendlyName => "of Kadath";
 }

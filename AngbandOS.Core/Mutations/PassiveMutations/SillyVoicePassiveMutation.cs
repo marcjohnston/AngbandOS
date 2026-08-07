@@ -19,14 +19,4 @@ internal class SillyVoicePassiveMutation : Mutation
         (1, nameof(SillyVoicePassiveMutationItemEnhancement)) 
     };
     public override string Title => "Silly Voice (P)";
-
-    public override void OnGain()
-    {
-        Game.CharismaBonus -= 4;
-    }
-
-    public override void OnLose()
-    {
-        Game.CharismaBonus += 4;
-    }
 }

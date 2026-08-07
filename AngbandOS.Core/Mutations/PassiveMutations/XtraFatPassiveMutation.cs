@@ -17,13 +17,4 @@ internal class XtraFatPassiveMutation : Mutation
         (1, nameof(XtraFatPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Extreme Obesity (P)";
-
-    public override void OnGain()
-    {
-        Game.ConstitutionBonus += 2;
-    }
-    public override void OnLose()
-    {
-        Game.ConstitutionBonus -= 2;
-    }
 }

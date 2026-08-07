@@ -19,7 +19,7 @@ public class LeatherScaleMailWyvernscaleFixedArtifactItemEnhancement : ItemEnhan
         (nameof(AttacksAttribute), "25"),
         (nameof(ValueAttribute), "25000"),
         (nameof(WeightAttribute), "-80"),
-        (nameof(DexterityAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
     };
     public override string FriendlyName => "'Wyvernscale'";
 }

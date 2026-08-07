@@ -18,15 +18,4 @@ internal class MoronicPassiveMutation : Mutation
         (1, nameof(MoronicPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Moronic (P)";
-    public override void OnGain()
-    {
-        Game.IntelligenceBonus -= 4;
-        Game.WisdomBonus -= 4;
-    }
-
-    public override void OnLose()
-    {
-        Game.IntelligenceBonus += 4;
-        Game.WisdomBonus += 4;
-    }
 }

@@ -14,7 +14,7 @@ public class WeaknessRingItemFactoryItemEnhancement : ItemEnhancementGameConfigu
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "-5"),
+        (nameof(BonusStrengthAttribute), "-5"),
         (nameof(WeightAttribute), "2"),
         (nameof(ValueAttribute), "-11000"),
     };

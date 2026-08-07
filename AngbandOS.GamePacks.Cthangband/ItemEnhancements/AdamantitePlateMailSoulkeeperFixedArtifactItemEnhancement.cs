@@ -24,7 +24,7 @@ public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnh
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ValueAttribute), "280000"),        (nameof(AttacksAttribute), "20"),
         (nameof(MeleeToHitAttribute), "-4"),
-        (nameof(ConstitutionAttribute), "2"),
+        (nameof(BonusConstitutionAttribute), "2"),
     };
     public override string FriendlyName => "'Soulkeeper'";
 }

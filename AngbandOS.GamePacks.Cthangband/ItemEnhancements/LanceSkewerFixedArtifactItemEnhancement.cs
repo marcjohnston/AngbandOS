@@ -23,7 +23,7 @@ public class LanceSkewerFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "55000"),
         (nameof(WeightAttribute), "60"),
-        (nameof(DexterityAttribute), "2"),
+        (nameof(BonusDexterityAttribute), "2"),
     };
     public override string FriendlyName => "'Skewer'";
 }

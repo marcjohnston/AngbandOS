@@ -22,7 +22,7 @@ public class DaggerOfAssassinFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
-        (nameof(DexterityAttribute), "4"),
+        (nameof(BonusDexterityAttribute), "4"),
         (nameof(SearchAttribute), "4"),
         (nameof(StealthAttribute), "4"),
         (nameof(ValueAttribute), "125000"),

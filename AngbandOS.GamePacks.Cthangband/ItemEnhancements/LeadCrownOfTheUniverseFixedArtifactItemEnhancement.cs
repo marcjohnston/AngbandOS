@@ -32,14 +32,14 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ValueAttribute), "10000000"),
-        (nameof(WisdomAttribute), "125"),
+        (nameof(BonusWisdomAttribute), "125"),
         (nameof(InfraVisionAttribute), "125"),
-        (nameof(IntelligenceAttribute), "125"),
-        (nameof(DexterityAttribute), "125"),
-        (nameof(ConstitutionAttribute), "125"),
-        (nameof(CharismaAttribute), "125"),
+        (nameof(BonusIntelligenceAttribute), "125"),
+        (nameof(BonusDexterityAttribute), "125"),
+        (nameof(BonusConstitutionAttribute), "125"),
+        (nameof(BonusCharismaAttribute), "125"),
         (nameof(GlowRadiusAttribute), "3"),
-        (nameof(StrengthAttribute), "125"),
+        (nameof(BonusStrengthAttribute), "125"),
     };
     public override string FriendlyName => "of the Universe";
 }

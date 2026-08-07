@@ -239,66 +239,66 @@ internal class EffectiveAttributeSet : IGameSerialize
     {
         get
         {
-            return Get<SummationEffectiveAttributeValue>(nameof(StrengthAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(BonusStrengthAttribute)).Get();
         }
         set
         {
-            Get<SummationEffectiveAttributeValue>(nameof(StrengthAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(BonusStrengthAttribute)).Append(value);
         }
     }
     public int Intelligence
     {
         get
         {
-            return Get<SummationEffectiveAttributeValue>(nameof(IntelligenceAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(BonusIntelligenceAttribute)).Get();
         }
         set
         {
-            Get<SummationEffectiveAttributeValue>(nameof(IntelligenceAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(BonusIntelligenceAttribute)).Append(value);
         }
     }
     public int Wisdom
     {
         get
         {
-            return Get<SummationEffectiveAttributeValue>(nameof(WisdomAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(BonusWisdomAttribute)).Get();
         }
         set
         {
-            Get<SummationEffectiveAttributeValue>(nameof(WisdomAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(BonusWisdomAttribute)).Append(value);
         }
     }
     public int Dexterity
     {
         get
         {
-            return Get<SummationEffectiveAttributeValue>(nameof(DexterityAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(BonusDexterityAttribute)).Get();
         }
         set
         {
-            Get<SummationEffectiveAttributeValue>(nameof(DexterityAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(BonusDexterityAttribute)).Append(value);
         }
     }
     public int Constitution
     {
         get
         {
-            return Get<SummationEffectiveAttributeValue>(nameof(ConstitutionAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(BonusConstitutionAttribute)).Get();
         }
         set
         {
-            Get<SummationEffectiveAttributeValue>(nameof(ConstitutionAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(BonusConstitutionAttribute)).Append(value);
         }
     }
     public int Charisma
     {
         get
         {
-            return Get<SummationEffectiveAttributeValue>(nameof(CharismaAttribute)).Get();
+            return Get<SummationEffectiveAttributeValue>(nameof(BonusCharismaAttribute)).Get();
         }
         set
         {
-            Get<SummationEffectiveAttributeValue>(nameof(CharismaAttribute)).Append(value);
+            Get<SummationEffectiveAttributeValue>(nameof(BonusCharismaAttribute)).Append(value);
         }
     }
     public int Stealth

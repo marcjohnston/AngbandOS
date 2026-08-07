@@ -5,12 +5,12 @@ public class ChosenOneCharacterClassItemEnhancement : ItemEnhancementGameConfigu
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "3"),
-        (nameof(CharismaAttribute), "-1"),
-        (nameof(ConstitutionAttribute), "2"),
-        (nameof(WisdomAttribute), "-2"),
-        (nameof(IntelligenceAttribute), "-2"),
-        (nameof(DexterityAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "3"),
+        (nameof(BonusCharismaAttribute), "-1"),
+        (nameof(BonusConstitutionAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "-2"),
+        (nameof(BonusIntelligenceAttribute), "-2"),
+        (nameof(BonusDexterityAttribute), "2"),
         (nameof(ValueAttribute), "3150"),
         (nameof(DisarmTrapsAttribute), "25"),
         (nameof(UseDeviceAttribute), "18"),

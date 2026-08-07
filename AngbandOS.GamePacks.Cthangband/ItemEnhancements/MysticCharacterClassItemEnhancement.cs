@@ -5,12 +5,12 @@ public class MysticCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "2"),
-        (nameof(CharismaAttribute), "0"),
-        (nameof(ConstitutionAttribute), "2"),
-        (nameof(WisdomAttribute), "2"),
-        (nameof(IntelligenceAttribute), "-1"),
-        (nameof(DexterityAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "2"),
+        (nameof(BonusCharismaAttribute), "0"),
+        (nameof(BonusConstitutionAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "2"),
+        (nameof(BonusIntelligenceAttribute), "-1"),
+        (nameof(BonusDexterityAttribute), "2"),
         (nameof(ValueAttribute), "8400"),
         (nameof(DisarmTrapsAttribute), "40"),
         (nameof(UseDeviceAttribute), "30"),

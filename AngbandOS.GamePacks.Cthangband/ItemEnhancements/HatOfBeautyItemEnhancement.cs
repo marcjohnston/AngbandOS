@@ -10,7 +10,7 @@ public class HatOfBeautyItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "1000"),
         (nameof(TreasureRatingAttribute), "8"),
-        (nameof(CharismaAttribute), "1d4"),
+        (nameof(BonusCharismaAttribute), "1d4"),
     };
     public override string? FriendlyName => "of Beauty";
 }

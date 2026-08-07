@@ -36,7 +36,7 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
         (nameof(SlayDragonAttribute), "3"),
         (nameof(TunnelAttribute), "6"),
         (nameof(GlowRadiusAttribute), "3"),
-        (nameof(StrengthAttribute), "6"),
+        (nameof(BonusStrengthAttribute), "6"),
     };
     public override string FriendlyName => "'Deathwreaker'";
 }

@@ -11,7 +11,7 @@ public class WeaponBlessedItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "5000"),
         (nameof(TreasureRatingAttribute), "20"),
-        (nameof(WisdomAttribute), "1d3"),
+        (nameof(BonusWisdomAttribute), "1d3"),
     };
     public override string? FriendlyName => "(Blessed)";
 }

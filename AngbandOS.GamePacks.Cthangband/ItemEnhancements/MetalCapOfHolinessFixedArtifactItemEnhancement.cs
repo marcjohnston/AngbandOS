@@ -15,8 +15,8 @@ public class MetalCapOfHolinessFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(AttacksAttribute), "12"),
         (nameof(ValueAttribute), "22000"),
-        (nameof(WisdomAttribute), "3"),
-        (nameof(CharismaAttribute), "3"),
+        (nameof(BonusWisdomAttribute), "3"),
+        (nameof(BonusCharismaAttribute), "3"),
     };
     public override string FriendlyName => "of Holiness";
 }

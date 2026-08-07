@@ -25,8 +25,8 @@ public class ScytheOfGharneFixedArtifactItemEnhancement : ItemEnhancementGameCon
         (nameof(MeleeToHitAttribute), "8"),
         (nameof(AttacksAttribute), "10"),
         (nameof(ValueAttribute), "18000"),
-        (nameof(DexterityAttribute), "3"),
-        (nameof(CharismaAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
+        (nameof(BonusCharismaAttribute), "3"),
         (nameof(GlowRadiusAttribute), "3"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.WordOfRecallEvery200DirectionalActivation);

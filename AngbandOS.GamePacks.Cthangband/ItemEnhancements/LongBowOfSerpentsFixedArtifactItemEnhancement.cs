@@ -19,7 +19,7 @@ public class LongBowOfSerpentsFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(ToDamageAttribute), "19"),
         (nameof(MeleeToHitAttribute), "17"),
         (nameof(ValueAttribute), "20000"),
-        (nameof(DexterityAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
     };
     public override string FriendlyName => "of Serpents";
 }

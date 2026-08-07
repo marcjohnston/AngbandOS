@@ -209,12 +209,12 @@ internal class JournalScript : UniversalScript, IGetKey
 
         Game.DisplayPlayerEquippy(0, 0 + 11);
         Game.Screen.Print(ColorEnum.Blue, "abcdefghijklm@", 1, 0 + 11);
-        DisplayStat("Add Str", 2, 0, attributeSet => attributeSet.GetInt(nameof(StrengthAttribute)) > 0);
-        DisplayStat("Add Int", 3, 0, attributeSet => attributeSet.GetInt(nameof(IntelligenceAttribute)) > 0);
-        DisplayStat("Add Wis", 4, 0, attributeSet => attributeSet.GetInt(nameof(WisdomAttribute)) > 0);
-        DisplayStat("Add Dex", 5, 0, attributeSet => attributeSet.GetInt(nameof(DexterityAttribute)) > 0);
-        DisplayStat("Add Con", 6, 0, attributeSet => attributeSet.GetInt(nameof(ConstitutionAttribute)) > 0);
-        DisplayStat("Add Cha", 7, 0, attributeSet => attributeSet.GetInt(nameof(CharismaAttribute)) > 0);
+        DisplayStat("Add Str", 2, 0, attributeSet => attributeSet.GetInt(nameof(BonusStrengthAttribute)) > 0);
+        DisplayStat("Add Int", 3, 0, attributeSet => attributeSet.GetInt(nameof(BonusIntelligenceAttribute)) > 0);
+        DisplayStat("Add Wis", 4, 0, attributeSet => attributeSet.GetInt(nameof(BonusWisdomAttribute)) > 0);
+        DisplayStat("Add Dex", 5, 0, attributeSet => attributeSet.GetInt(nameof(BonusDexterityAttribute)) > 0);
+        DisplayStat("Add Con", 6, 0, attributeSet => attributeSet.GetInt(nameof(BonusConstitutionAttribute)) > 0);
+        DisplayStat("Add Cha", 7, 0, attributeSet => attributeSet.GetInt(nameof(BonusCharismaAttribute)) > 0);
 
 
         DisplayStat("Add Stea.", 10, 0, attributeSet => attributeSet.GetInt(nameof(StealthAttribute)) > 0);

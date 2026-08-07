@@ -36,7 +36,7 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
         (nameof(DamageDiceAttribute), "6"),
         (nameof(ValueAttribute), "250000"),
         (nameof(GlowRadiusAttribute), "3"),
-        (nameof(WisdomAttribute), "4"),
+        (nameof(BonusWisdomAttribute), "4"),
         (nameof(SlayDragonAttribute), "5"),
     };
     public override string FriendlyName => "'Mjolnir'";

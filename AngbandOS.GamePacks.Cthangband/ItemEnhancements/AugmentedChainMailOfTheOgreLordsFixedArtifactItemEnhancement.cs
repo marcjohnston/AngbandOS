@@ -16,12 +16,12 @@ public class AugmentedChainMailOfTheOgreLordsFixedArtifactItemEnhancement : Item
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(ConstitutionAttribute), "3"),
+        (nameof(BonusConstitutionAttribute), "3"),
         (nameof(AttacksAttribute), "20"),
         (nameof(MeleeToHitAttribute), "-2"),
         (nameof(ValueAttribute), "40000"),
-        (nameof(IntelligenceAttribute), "3"),
-        (nameof(WisdomAttribute), "3"),
+        (nameof(BonusIntelligenceAttribute), "3"),
+        (nameof(BonusWisdomAttribute), "3"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.DestroyDoorsEvery10Activation);
     public override string FriendlyName => "of the Ogre Lords";

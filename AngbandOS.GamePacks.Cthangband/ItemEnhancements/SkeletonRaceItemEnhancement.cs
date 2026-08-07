@@ -10,12 +10,12 @@ public class SkeletonRaceItemEnhancement : ItemEnhancementGameConfiguration
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "0"),
-        (nameof(CharismaAttribute), "-4"),
-        (nameof(ConstitutionAttribute), "1"),
-        (nameof(WisdomAttribute), "-2"),
-        (nameof(IntelligenceAttribute), "-2"),
-        (nameof(DexterityAttribute), "0"),
+        (nameof(BonusStrengthAttribute), "0"),
+        (nameof(BonusCharismaAttribute), "-4"),
+        (nameof(BonusConstitutionAttribute), "1"),
+        (nameof(BonusWisdomAttribute), "-2"),
+        (nameof(BonusIntelligenceAttribute), "-2"),
+        (nameof(BonusDexterityAttribute), "0"),
         (nameof(ValueAttribute), "-5400"),
         (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "-5"),

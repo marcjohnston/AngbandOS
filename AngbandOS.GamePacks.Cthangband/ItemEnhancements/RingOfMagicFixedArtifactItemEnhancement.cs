@@ -17,14 +17,14 @@ public class RingOfMagicFixedArtifactItemEnhancement : ItemEnhancementGameConfig
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ValueAttribute), "75000"),
-        (nameof(WisdomAttribute), "1"),
+        (nameof(BonusWisdomAttribute), "1"),
         (nameof(StealthAttribute), "1"),
         (nameof(SearchAttribute), "1"),
-        (nameof(IntelligenceAttribute), "1"),
-        (nameof(DexterityAttribute), "1"),
-        (nameof(ConstitutionAttribute), "1"),
-        (nameof(CharismaAttribute), "1"),
-        (nameof(StrengthAttribute), "1"),
+        (nameof(BonusIntelligenceAttribute), "1"),
+        (nameof(BonusDexterityAttribute), "1"),
+        (nameof(BonusConstitutionAttribute), "1"),
+        (nameof(BonusCharismaAttribute), "1"),
+        (nameof(BonusStrengthAttribute), "1"),
     };
     public override string FriendlyName => "of Magic";
 }

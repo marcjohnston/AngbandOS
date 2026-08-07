@@ -16,8 +16,8 @@ public class WeaponOfLawItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(TreasureRatingAttribute), "26"),
         (nameof(MeleeToHitAttribute), "1d6"),
         (nameof(ToDamageAttribute), "1d6"),
-        (nameof(ConstitutionAttribute), "1d2"),
-        (nameof(StrengthAttribute), "1d2"),
+        (nameof(BonusConstitutionAttribute), "1d2"),
+        (nameof(BonusStrengthAttribute), "1d2"),
     };
     public override string? FriendlyName => "(Weapon of Law)";
 }

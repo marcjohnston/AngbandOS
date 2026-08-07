@@ -19,7 +19,7 @@ public class BroadAxeOfNodensFixedArtifactItemEnhancement : ItemEnhancementGameC
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(ConstitutionAttribute), "3"),
+        (nameof(BonusConstitutionAttribute), "3"),
         (nameof(ValueAttribute), "50000"),
         (nameof(MeleeToHitAttribute), "13"),
         (nameof(ToDamageAttribute), "19"),

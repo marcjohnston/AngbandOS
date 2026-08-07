@@ -19,8 +19,8 @@ public class BeakedAxeOfTheodenFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(ToDamageAttribute), "10"),
         (nameof(SlayDragonAttribute), "3"),
         (nameof(ValueAttribute), "40000"),
-        (nameof(ConstitutionAttribute), "3"),
-        (nameof(WisdomAttribute), "3"),
+        (nameof(BonusConstitutionAttribute), "3"),
+        (nameof(BonusWisdomAttribute), "3"),
         (nameof(TreasureRatingAttribute), "10"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.DrainLife120Every400DirectionalActivation);

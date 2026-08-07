@@ -18,13 +18,4 @@ internal class LimberPassiveMutation : Mutation
         (1, nameof(LimberPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Limber (P)";
-    public override void OnGain()
-    {
-        Game.DexterityBonus += 3;
-    }
-
-    public override void OnLose()
-    {
-        Game.DexterityBonus -= 3;
-    }
 }

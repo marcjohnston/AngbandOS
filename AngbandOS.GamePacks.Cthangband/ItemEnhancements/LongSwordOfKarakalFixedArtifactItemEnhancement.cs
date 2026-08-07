@@ -36,10 +36,10 @@ public class LongSwordOfKarakalFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(MeleeToHitAttribute), "8"),
         (nameof(ValueAttribute), "150000"),
         (nameof(SpeedAttribute), "2"),
-        (nameof(ConstitutionAttribute), "2"),
+        (nameof(BonusConstitutionAttribute), "2"),
         (nameof(AttacksAttribute), "2"),
         (nameof(GlowRadiusAttribute), "3"),
-        (nameof(StrengthAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "2"),
     };
     public override string FriendlyName => "of Karakal";
 }

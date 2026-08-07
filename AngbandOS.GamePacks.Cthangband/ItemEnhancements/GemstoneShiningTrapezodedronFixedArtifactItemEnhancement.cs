@@ -18,9 +18,9 @@ public class GemstoneShiningTrapezodedronFixedArtifactItemEnhancement : ItemEnha
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ValueAttribute), "150000"),
-        (nameof(WisdomAttribute), "3"),
+        (nameof(BonusWisdomAttribute), "3"),
         (nameof(SpeedAttribute), "3"),
-        (nameof(IntelligenceAttribute), "3"),
+        (nameof(BonusIntelligenceAttribute), "3"),
     };
     public override string FriendlyName => "'Shining Trapezodedron'";
 }

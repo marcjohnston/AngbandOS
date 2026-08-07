@@ -23,8 +23,8 @@ public class MainGaucheOfDefenceFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "22500"),
         (nameof(SpeedAttribute), "3"),
-        (nameof(IntelligenceAttribute), "3"),
-        (nameof(DexterityAttribute), "3"),
+        (nameof(BonusIntelligenceAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
     };
     public override string FriendlyName => "of Defence";
 }

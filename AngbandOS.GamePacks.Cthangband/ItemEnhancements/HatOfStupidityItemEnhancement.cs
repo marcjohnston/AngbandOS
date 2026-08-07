@@ -9,7 +9,7 @@ public class HatOfStupidityItemEnhancement : ItemEnhancementGameConfiguration
     public override string? FriendlyName => "of Stupidity";
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(IntelligenceAttribute), "1d5"),
+        (nameof(BonusIntelligenceAttribute), "1d5"),
         (nameof(ValueAttribute), "3600"),
     };
 }

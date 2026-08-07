@@ -25,7 +25,7 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
     {
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(SlayDragonAttribute), "5"),
-        (nameof(ConstitutionAttribute), "5"),
+        (nameof(BonusConstitutionAttribute), "5"),
         (nameof(ValueAttribute), "100000"),
         (nameof(DamageDiceAttribute), "2"),
         (nameof(MeleeToHitAttribute), "-20"),

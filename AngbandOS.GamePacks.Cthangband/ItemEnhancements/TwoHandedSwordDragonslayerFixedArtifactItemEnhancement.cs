@@ -22,7 +22,7 @@ public class TwoHandedSwordDragonslayerFixedArtifactItemEnhancement : ItemEnhanc
         (nameof(MeleeToHitAttribute), "13"),
         (nameof(ValueAttribute), "100000"),
         (nameof(SlayDragonAttribute), "5"),
-        (nameof(StrengthAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "2"),
     };
     public override string FriendlyName => "'Dragonslayer'";
 }

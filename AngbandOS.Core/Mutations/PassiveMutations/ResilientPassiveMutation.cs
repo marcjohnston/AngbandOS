@@ -17,13 +17,4 @@ internal class ResilientPassiveMutation : Mutation
         (1, nameof(ResilientPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Resilient (P)";
-    public override void OnGain()
-    {
-        Game.ConstitutionBonus += 4;
-    }
-
-    public override void OnLose()
-    {
-        Game.ConstitutionBonus -= 4;
-    }
 }

@@ -22,8 +22,8 @@ public class MetalBrigandineArmorOfSerpentsFixedArtifactItemEnhancement : ItemEn
         (nameof(AttacksAttribute), "15"),
         (nameof(ValueAttribute), "30000"),
         (nameof(WeightAttribute), "-90"),
-        (nameof(DexterityAttribute), "2"),
-        (nameof(StrengthAttribute), "2"),
+        (nameof(BonusDexterityAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "2"),
     };
     public override string FriendlyName => "of Serpents";
 }

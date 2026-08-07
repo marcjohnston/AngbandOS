@@ -7,11 +7,11 @@ public class HalfTrollRaceItemEnhancement : ItemEnhancementGameConfiguration
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(CharismaAttribute), "-6"),
-        (nameof(ConstitutionAttribute), "3"),
-        (nameof(WisdomAttribute), "2"),
-        (nameof(IntelligenceAttribute), "-4"),
-        (nameof(DexterityAttribute), "-4"),
+        (nameof(BonusCharismaAttribute), "-6"),
+        (nameof(BonusConstitutionAttribute), "3"),
+        (nameof(BonusWisdomAttribute), "2"),
+        (nameof(BonusIntelligenceAttribute), "-4"),
+        (nameof(BonusDexterityAttribute), "-4"),
         (nameof(ValueAttribute), "-1500"),
         (nameof(InfraVisionAttribute), "3"),
         (nameof(DisarmTrapsAttribute), "-5"),
@@ -19,6 +19,6 @@ public class HalfTrollRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "-8"),
         (nameof(StealthAttribute), "-2"),
         (nameof(SearchAttribute), "-1"),
-        (nameof(StrengthAttribute), "4")
+        (nameof(BonusStrengthAttribute), "4")
     };
 }

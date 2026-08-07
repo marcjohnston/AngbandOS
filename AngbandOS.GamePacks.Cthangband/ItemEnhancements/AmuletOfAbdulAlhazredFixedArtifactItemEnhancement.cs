@@ -21,8 +21,8 @@ public class AmuletOfAbdulAlhazredFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(InfraVisionAttribute), "3"),
         (nameof(ValueAttribute), "90000"),
-        (nameof(CharismaAttribute), "3"),
-        (nameof(WisdomAttribute), "3"),
+        (nameof(BonusCharismaAttribute), "3"),
+        (nameof(BonusWisdomAttribute), "3"),
     };
     public override string FriendlyName => "of Abdul Alhazred";
 }

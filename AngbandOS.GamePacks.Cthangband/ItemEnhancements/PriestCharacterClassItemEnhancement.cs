@@ -5,12 +5,12 @@ public class PriestCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "-1"),
-        (nameof(CharismaAttribute), "2"),
-        (nameof(ConstitutionAttribute), "0"),
-        (nameof(WisdomAttribute), "3"),
-        (nameof(IntelligenceAttribute), "-3"),
-        (nameof(DexterityAttribute), "-1"),
+        (nameof(BonusStrengthAttribute), "-1"),
+        (nameof(BonusCharismaAttribute), "2"),
+        (nameof(BonusConstitutionAttribute), "0"),
+        (nameof(BonusWisdomAttribute), "3"),
+        (nameof(BonusIntelligenceAttribute), "-3"),
+        (nameof(BonusDexterityAttribute), "-1"),
         (nameof(ValueAttribute), "-1500"),
         (nameof(DisarmTrapsAttribute), "25"),
         (nameof(UseDeviceAttribute), "30"),

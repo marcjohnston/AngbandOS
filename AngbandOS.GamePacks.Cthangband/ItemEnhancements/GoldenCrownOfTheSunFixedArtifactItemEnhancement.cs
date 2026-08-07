@@ -27,13 +27,13 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
     public override string? ActivationName => nameof(ActivationsEnum.Heal700Every25Activation);
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "3"),
+        (nameof(BonusStrengthAttribute), "3"),
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(AttacksAttribute), "15"),
         (nameof(ValueAttribute), "125000"),
-        (nameof(WisdomAttribute), "3"),
+        (nameof(BonusWisdomAttribute), "3"),
         (nameof(SpeedAttribute), "3"),
-        (nameof(ConstitutionAttribute), "3"),
+        (nameof(BonusConstitutionAttribute), "3"),
         (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of the Sun";

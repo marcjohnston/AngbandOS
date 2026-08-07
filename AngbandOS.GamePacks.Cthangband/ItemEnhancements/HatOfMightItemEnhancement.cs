@@ -13,8 +13,8 @@ public class HatOfMightItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "2000"),
         (nameof(TreasureRatingAttribute), "19"),
-        (nameof(WisdomAttribute), "1d3"),
-        (nameof(StrengthAttribute), "1d3")
+        (nameof(BonusWisdomAttribute), "1d3"),
+        (nameof(BonusStrengthAttribute), "1d3")
     };
     public override string? FriendlyName => "of Might";
 }

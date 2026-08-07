@@ -32,9 +32,9 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "140000"),
-        (nameof(WisdomAttribute), "4"),
-        (nameof(IntelligenceAttribute), "4"),
-        (nameof(CharismaAttribute), "4"),
+        (nameof(BonusWisdomAttribute), "4"),
+        (nameof(BonusIntelligenceAttribute), "4"),
+        (nameof(BonusCharismaAttribute), "4"),
         (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Atal";

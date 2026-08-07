@@ -21,7 +21,7 @@ public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(VorpalExtraAttacks1InChanceAttribute), "2"),
         (nameof(Vorpal1InChanceAttribute), "6"),
         (nameof(SpeedAttribute), "3"),
-        (nameof(DexterityAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
         (nameof(AttacksAttribute), "3"),
     };
     public override string FriendlyName => "of Groo";

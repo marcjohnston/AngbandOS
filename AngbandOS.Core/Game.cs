@@ -18,13 +18,6 @@ internal partial class Game : IGameSerialize
     public int SkillThrowing;
     public int SkillUseDevice;
     public int SocialClass;
-
-    public int CharismaBonus;
-    public int ConstitutionBonus;
-    public int DexterityBonus;
-    public int IntelligenceBonus;
-    public int StrengthBonus;
-    public int WisdomBonus;
     public bool MagicResistance;
     public int SearchBonus;
     public int StealthBonus;
@@ -245,13 +238,8 @@ internal partial class Game : IGameSerialize
             (nameof(SkillThrowing), saveGameState.CreateGameStateBag(SkillThrowing)),
             (nameof(SkillUseDevice), saveGameState.CreateGameStateBag(SkillUseDevice)),
             (nameof(SocialClass), saveGameState.CreateGameStateBag(SocialClass)),
-            (nameof(CharismaBonus), saveGameState.CreateGameStateBag(CharismaBonus)),
-            (nameof(ConstitutionBonus), saveGameState.CreateGameStateBag(ConstitutionBonus)),
-            (nameof(DexterityBonus), saveGameState.CreateGameStateBag(DexterityBonus)),
             (nameof(SearchBonus), saveGameState.CreateGameStateBag(SearchBonus)),
             (nameof(StealthBonus), saveGameState.CreateGameStateBag(StealthBonus)),
-            (nameof(StrengthBonus), saveGameState.CreateGameStateBag(StrengthBonus)),
-            (nameof(WisdomBonus), saveGameState.CreateGameStateBag(WisdomBonus)),
             (nameof(replayPreviousKeystrokeDateTime), saveGameState.CreateGameStateBag(replayPreviousKeystrokeDateTime)),
             (nameof(MainSequenceGameStartSeed), saveGameState.CreateGameStateBag(MainSequenceGameStartSeed)),
             (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
@@ -550,13 +538,8 @@ internal partial class Game : IGameSerialize
             SkillThrowing = restoreGameState.GetByKey(nameof(SkillThrowing)).GetInt();
             SkillUseDevice = restoreGameState.GetByKey(nameof(SkillUseDevice)).GetInt();
             SocialClass = restoreGameState.GetByKey(nameof(SocialClass)).GetInt();
-            CharismaBonus = restoreGameState.GetByKey(nameof(CharismaBonus)).GetInt();
-            ConstitutionBonus = restoreGameState.GetByKey(nameof(ConstitutionBonus)).GetInt();
-            DexterityBonus = restoreGameState.GetByKey(nameof(DexterityBonus)).GetInt();
             SearchBonus = restoreGameState.GetByKey(nameof(SearchBonus)).GetInt();
             StealthBonus = restoreGameState.GetByKey(nameof(StealthBonus)).GetInt();
-            StrengthBonus = restoreGameState.GetByKey(nameof(StrengthBonus)).GetInt();
-            WisdomBonus = restoreGameState.GetByKey(nameof(WisdomBonus)).GetInt();
             replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTime();
             MainSequenceGameStartSeed = restoreGameState.GetByKey(nameof(MainSequenceGameStartSeed)).GetInt();
             AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(this, _restoreGameState));

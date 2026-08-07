@@ -11,7 +11,7 @@ public class WeaponOfUndeadBaneItemEnhancement : ItemEnhancementGameConfiguratio
     {
         (nameof(ValueAttribute), "8000"),
         (nameof(TreasureRatingAttribute), "24"),
-        (nameof(WisdomAttribute), "1d2"),
+        (nameof(BonusWisdomAttribute), "1d2"),
     };
     public override string? FriendlyName => "of Undead Bane";
 }

@@ -18,15 +18,4 @@ internal class FleshRotPassiveMutation : Mutation
         (1, nameof(FleshRotPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Rotting Flesh (P)";
-    public override void OnGain()
-    {
-        Game.ConstitutionBonus -= 2;
-        Game.CharismaBonus -= 1;
-    }
-
-    public override void OnLose()
-    {
-        Game.ConstitutionBonus += 2;
-        Game.CharismaBonus += 1;
-    }
 }

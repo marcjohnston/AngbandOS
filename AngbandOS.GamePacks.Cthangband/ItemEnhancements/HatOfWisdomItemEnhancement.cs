@@ -10,7 +10,7 @@ public class HatOfWisdomItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "500"),
         (nameof(TreasureRatingAttribute), "13"),
-        (nameof(WisdomAttribute), "1d2"),
+        (nameof(BonusWisdomAttribute), "1d2"),
     };
     public override string? FriendlyName => "of Wisdom";
 }

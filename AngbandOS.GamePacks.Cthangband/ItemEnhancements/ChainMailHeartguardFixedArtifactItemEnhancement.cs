@@ -19,8 +19,8 @@ public class ChainMailHeartguardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(CharismaAttribute), "2"),
-        (nameof(StrengthAttribute), "2"),
+        (nameof(BonusCharismaAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "2"),
         (nameof(ValueAttribute), "32000"),
         (nameof(AttacksAttribute), "15"),
         (nameof(MeleeToHitAttribute), "-2"),

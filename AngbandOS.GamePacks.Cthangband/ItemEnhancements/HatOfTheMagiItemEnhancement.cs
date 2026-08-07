@@ -19,7 +19,7 @@ public class HatOfTheMagiItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "7500"),
         (nameof(TreasureRatingAttribute), "15"),
-        (nameof(IntelligenceAttribute), "1d3"),
+        (nameof(BonusIntelligenceAttribute), "1d3"),
     };
     public override string? FriendlyName => "of the Magi";
 }

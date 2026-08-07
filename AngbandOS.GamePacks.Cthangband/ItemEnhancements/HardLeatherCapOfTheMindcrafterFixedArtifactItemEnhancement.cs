@@ -17,8 +17,8 @@ public class HardLeatherCapOfTheMindcrafterFixedArtifactItemEnhancement : ItemEn
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(AttacksAttribute), "10"),
         (nameof(ValueAttribute), "50000"),
-        (nameof(WisdomAttribute), "2"),
-        (nameof(IntelligenceAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "2"),
+        (nameof(BonusIntelligenceAttribute), "2"),
     };
     public override string FriendlyName => "of the Mindcrafter";
 }

@@ -21,7 +21,7 @@ public class CutlassOfBlackbeardFixedArtifactItemEnhancement : ItemEnhancementGa
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(DexterityAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
         (nameof(StealthAttribute), "3"),
         (nameof(ValueAttribute), "28000"),
         (nameof(MeleeToHitAttribute), "10"),

@@ -18,13 +18,4 @@ internal class PunyPassiveMutation : Mutation
         (1, nameof(PunyPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Puny (P)";
-    public override void OnGain()
-    {
-        Game.StrengthBonus -= 4;
-    }
-
-    public override void OnLose()
-    {
-        Game.StrengthBonus += 4;
-    }
 }

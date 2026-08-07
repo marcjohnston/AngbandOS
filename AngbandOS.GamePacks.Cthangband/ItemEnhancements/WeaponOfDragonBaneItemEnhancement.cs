@@ -6,7 +6,7 @@ public class WeaponOfDragonBaneItemEnhancement : ItemEnhancementGameConfiguratio
     {
         (nameof(ValueAttribute), "6000"),
         (nameof(TreasureRatingAttribute), "24"),
-        (nameof(ConstitutionAttribute), "1d1"),
+        (nameof(BonusConstitutionAttribute), "1d1"),
         (nameof(SlayDragonAttribute), "5"),
     };
     public override string? FriendlyName => "of Dragon Bane";

@@ -18,13 +18,4 @@ internal class IronSkinPassiveMutation : Mutation
         (1, nameof(IronSkinPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Iron Skin (P)";
-    public override void OnGain()
-    {
-        Game.DexterityBonus -= 1;
-    }
-
-    public override void OnLose()
-    {
-        Game.DexterityBonus += 1;
-    }
 }

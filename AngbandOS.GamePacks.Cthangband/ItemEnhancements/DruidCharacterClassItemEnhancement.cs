@@ -5,15 +5,15 @@ public class DruidCharacterClassItemEnhancement : ItemEnhancementGameConfigurati
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(CharismaAttribute), "3"),
-        (nameof(ConstitutionAttribute), "0"),
-        (nameof(WisdomAttribute), "4"),
-        (nameof(IntelligenceAttribute), "-3"),
-        (nameof(DexterityAttribute), "-2"),
+        (nameof(BonusCharismaAttribute), "3"),
+        (nameof(BonusConstitutionAttribute), "0"),
+        (nameof(BonusWisdomAttribute), "4"),
+        (nameof(BonusIntelligenceAttribute), "-3"),
+        (nameof(BonusDexterityAttribute), "-2"),
         (nameof(ValueAttribute), "-1050"),
         (nameof(DisarmTrapsAttribute), "30"),
         (nameof(UseDeviceAttribute), "30"),
         (nameof(SavingThrowAttribute), "32"),
-        (nameof(StrengthAttribute), "-1")
+        (nameof(BonusStrengthAttribute), "-1")
     };
 }
