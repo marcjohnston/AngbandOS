@@ -38,20 +38,6 @@ internal class MindFlayerRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 15 ? "mind blast         (racial, unusable until level 15)" : "mind blast         (racial, cost 12, dam lvl, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
-        if (level > 14)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-        }
-        if (level > 29)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
-        }
-    }
     protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {

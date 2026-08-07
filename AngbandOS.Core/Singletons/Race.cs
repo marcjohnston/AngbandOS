@@ -138,14 +138,6 @@ internal abstract class Race : IGetKey, IGameSerialize
     /// Returns true, if the race has mutant powers.  Returns false, by default.
     /// </summary>
     public virtual bool HasRacialPowers => false;
-
-    /// <summary>
-    /// Applies additional characteristics to a player based on the player level.  No characteristics are applied, by default.  Only humans, have no modifications.
-    /// </summary>
-    /// <param name="level"></param>
-    /// <param name="itemCharacteristics"></param>
-    public virtual void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics) { }
-
     protected abstract string GenerateNameSyllableSetName { get; }
     public SyllableSet GenerateNameSyllableSet { get; private set; }
 

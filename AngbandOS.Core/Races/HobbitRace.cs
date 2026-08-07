@@ -36,11 +36,6 @@ internal class HobbitRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 15 ? "create food        (racial, unusable until level 15)" : "create food        (racial, cost 10, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
-    }
     protected override string GenerateNameSyllableSetName => nameof(HobbitSyllableSet);
 
     public override string[]? SelfKnowledge(int level)

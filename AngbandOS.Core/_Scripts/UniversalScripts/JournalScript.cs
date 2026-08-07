@@ -158,6 +158,7 @@ internal class JournalScript : UniversalScript, IGetKey
             }
         }
 
+        // Now render the player stat, not the item stat.
         if (getStat(Game.AttributeSet))
         {
             Game.Screen.Print(baseColor, "+", row, col + 10 + 26); // col + 10 + InventorySlot.Total - InventorySlot.MeleeWeapon + 1);

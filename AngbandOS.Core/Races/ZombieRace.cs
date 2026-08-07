@@ -37,20 +37,7 @@ internal class ZombieRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 30 ? "restore life       (racial, unusable until level 30)" : "restore life       (racial, cost 30, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-        itemCharacteristics.HoldLife = true;
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
-        if (level > 4)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResColdAttribute)).Set();
-        }
-    }
     protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
-
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 29)

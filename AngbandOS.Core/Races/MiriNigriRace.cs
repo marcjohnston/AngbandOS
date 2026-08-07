@@ -32,12 +32,6 @@ internal class MiriNigriRace : Race
     /// Miri-Nigri 129->130->131->132->133->End
     /// </summary>
     public override int Chart => 129;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Set();
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
-    }
     protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
     public override bool AutomaticallyGainsFirstLevelMutationAtBirth => true;
 }

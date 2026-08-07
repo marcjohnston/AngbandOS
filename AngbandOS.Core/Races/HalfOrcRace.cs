@@ -36,11 +36,6 @@ internal class HalfOrcRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 3 ? "remove fear        (racial, unusable until level 3)" : "remove fear        (racial, cost 5, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
-    }
     protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)

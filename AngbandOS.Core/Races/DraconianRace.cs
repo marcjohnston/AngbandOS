@@ -41,31 +41,6 @@ internal class DraconianRace : Race
     public override string RacialPowersDescription(int lvl) => "breath weapon      (racial, cost lvl, dam 2*lvl, CON based)";
     protected override string? RacialPowerScriptBindingKey => nameof(DraconianRacialPowerScript);
     public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Feather = true;
-        if (level > 4)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResFireAttribute)).Set();
-        }
-        if (level > 9)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResColdAttribute)).Set();
-        }
-        if (level > 14)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Set();
-        }
-        if (level > 19)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResElecAttribute)).Set();
-        }
-        if (level > 34)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-        }
-    }
     protected override string GenerateNameSyllableSetName => nameof(GnomishSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {

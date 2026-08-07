@@ -36,11 +36,6 @@ internal class GnomeRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 5 ? "teleport           (racial, unusable until level 5)" : "teleport           (racial, cost 5 + lvl/5, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.FreeAct = true;
-    }
     protected override string GenerateNameSyllableSetName => nameof(GnomishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)

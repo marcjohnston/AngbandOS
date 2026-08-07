@@ -37,14 +37,6 @@ internal class YeekRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 15 ? "scare monster      (racial, unusable until level 15)" : "scare monster      (racial, cost 15, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Set();
-        if (level > 19)
-        {
-            itemCharacteristics.ImAcid = true;
-        }
-    }
     protected override string GenerateNameSyllableSetName => nameof(YeekishSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {

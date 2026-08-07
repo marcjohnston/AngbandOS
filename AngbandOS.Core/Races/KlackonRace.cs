@@ -36,15 +36,6 @@ internal class KlackonRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 9 ? "spit acid          (racial, unusable until level 9)" : "spit acid          (racial, cost 9, dam lvl, DEX based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        if (level > 9)
-        {
-            itemCharacteristics.Speed++;
-        }
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Set();
-    }
     protected override string GenerateNameSyllableSetName => nameof(KlackonSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {

@@ -36,11 +36,6 @@ internal class KoboldRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 12 ? "poison dart        (racial, unusable until level 12)" : "poison dart        (racial, cost 8, dam lvl, DEX based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-    }
     protected override string GenerateNameSyllableSetName => nameof(HobbitSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {

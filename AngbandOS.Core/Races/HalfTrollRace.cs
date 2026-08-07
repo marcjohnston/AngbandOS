@@ -37,16 +37,6 @@ internal class HalfTrollRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 10 ? "berserk            (racial, unusable until level 10)" : "berserk            (racial, cost 12, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
-        if (level > 14)
-        {
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
-            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
-        }
-    }
     protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)

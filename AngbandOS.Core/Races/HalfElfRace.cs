@@ -32,11 +32,5 @@ internal class HalfElfRace : Race
     /// Half-Elf 4->1->2->3->50->51->52->53->End
     /// </summary>
     public override int Chart => 4;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-    }
     protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
 }

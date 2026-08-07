@@ -36,11 +36,6 @@ internal class HalfTitanRace : Race
     public override string RacialPowersDescription(int lvl) => lvl < 35 ? "probing            (racial, unusable until level 35)" : "probing            (racial, cost 20, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
     public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set();
-    }
     protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
