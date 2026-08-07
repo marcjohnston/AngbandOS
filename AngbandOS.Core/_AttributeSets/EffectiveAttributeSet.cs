@@ -9,7 +9,7 @@ using System.Text;
 
 namespace AngbandOS.Core;
 
-internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGameSerialize
+internal class EffectiveAttributeSet : IGameSerialize
 {
     #region State Data
     private readonly EffectiveAttributeValue[] _effectiveAttributeValues;
@@ -61,6 +61,10 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
         );
     }
 
+    /// <summary>
+    /// Returns a readable representation for debugging purposes.
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
         Attribute[] cachedAttributes = Game.CachedAttributes;
@@ -143,6 +147,14 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
         }
         return false;
     }
+    public bool GetBool(string attributeName)
+    {
+        return Get<BitwiseOrEffectiveAttributeValue>(attributeName).Get();
+    }
+    public int GetSum(string attributeName)
+    {
+        return Get<SummationEffectiveAttributeValue>(attributeName).Get();
+    }
 
     /// <summary>
     /// Retrieves the effective attribute value associated with the specified attribute and casts it to the specified type T.
@@ -189,16 +201,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
         return clone;
     }
 
-    public IEnumerator<EffectiveAttributeValue> GetEnumerator()
-    {
-        return _effectiveAttributeValues.AsEnumerable<EffectiveAttributeValue>().GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
     #region Properties
     public int MeleeToHit
     {
@@ -220,17 +222,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
         set
         {
             Get<SummationEffectiveAttributeValue>(nameof(BonusArmorClassAttribute)).Append(value);
-        }
-    }
-    public int DisarmTraps
-    {
-        get
-        {
-            return Get<SummationEffectiveAttributeValue>(nameof(DisarmTrapsAttribute)).Get();
-        }
-        set
-        {
-            Get<SummationEffectiveAttributeValue>(nameof(DisarmTrapsAttribute)).Append(value);
         }
     }
     public int ToDamage
@@ -453,20 +444,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
             }
         }
     }
-    public bool EasyKnow
-    {
-        get
-        {
-            return Get<BitwiseOrEffectiveAttributeValue>(nameof(EasyKnowAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<BitwiseOrEffectiveAttributeValue>(nameof(EasyKnowAttribute)).Set();
-            }
-        }
-    }
     public bool Feather
     {
         get
@@ -581,20 +558,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
             }
         }
     }
-    public bool HideType
-    {
-        get
-        {
-            return Get<BitwiseOrEffectiveAttributeValue>(nameof(HideTypeAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<BitwiseOrEffectiveAttributeValue>(nameof(HideTypeAttribute)).Set();
-            }
-        }
-    }
     public bool HoldLife
     {
         get
@@ -676,34 +639,6 @@ internal class EffectiveAttributeSet : IEnumerable<EffectiveAttributeValue>, IGa
             if (value)
             {
                 Get<BitwiseOrEffectiveAttributeValue>(nameof(ImAcidAttribute)).Set();
-            }
-        }
-    }
-    public bool ImCold
-    {
-        get
-        {
-            return Get<BitwiseOrEffectiveAttributeValue>(nameof(ImColdAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<BitwiseOrEffectiveAttributeValue>(nameof(ImColdAttribute)).Set();
-            }
-        }
-    }
-    public bool ImElec
-    {
-        get
-        {
-            return Get<BitwiseOrEffectiveAttributeValue>(nameof(ImElecAttribute)).Get();
-        }
-        set
-        {
-            if (value)
-            {
-                Get<BitwiseOrEffectiveAttributeValue>(nameof(ImElecAttribute)).Set();
             }
         }
     }

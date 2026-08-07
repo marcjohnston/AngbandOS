@@ -1185,7 +1185,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         {
             return true;
         }
-        if (EffectiveAttributeSet.EasyKnow && IsFlavorAware)
+        if (EffectiveAttributeSet.GetBool(nameof(EasyKnowAttribute)) && IsFlavorAware)
         {
             return true;
         }

@@ -719,7 +719,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             if (commonBonusValue.HasValue && commonBonusValue.Value.bonusValue != 0)
             {
                 s += $" ({StringLibrary.GetSignedValue(commonBonusValue.Value.bonusValue)}";
-                if (!item.EffectiveAttributeSet.HideType && commonBonusValue.Value.priorityBonusName != "")
+                if (!item.EffectiveAttributeSet.GetBool(nameof(HideTypeAttribute)) && commonBonusValue.Value.priorityBonusName != "")
                 {
                     s += $" {commonBonusValue.Value.priorityBonusName}";
                 }
