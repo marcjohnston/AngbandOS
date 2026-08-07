@@ -40,6 +40,13 @@ internal class MutantPowerScript : UniversalScript, IGetKey
     /// <returns></returns>
     public override void ExecuteScript()
     {
+        if (Game.ConfusionTimer.Value != 0)
+        {
+            Game.MsgPrint("You are too confused to use any powers!");
+            Game.EnergyUse = 0;
+            return;
+        }
+
         int i = 0;
         int num;
         int[] powers = new int[36];
@@ -56,12 +63,6 @@ internal class MutantPowerScript : UniversalScript, IGetKey
             powerDesc[num] = "";
         }
         num = 0;
-        if (Game.ConfusionTimer.Value != 0)
-        {
-            Game.MsgPrint("You are too confused to use any powers!");
-            Game.EnergyUse = 0;
-            return;
-        }
         for (petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
         {
             monster = Game.Monsters[petCtr];
