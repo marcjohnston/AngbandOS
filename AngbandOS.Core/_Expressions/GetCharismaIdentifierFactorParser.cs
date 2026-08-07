@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Expressions;
 internal class GetCharismaIdentifierFactorParser : IdentifierFactorParser
 {
     public override string Identifier => "cha";
-    protected override Expression GenerateExpression(string matchedIdentifier, bool? sign = null)
+    protected override Expression GenerateExpression(string matchedIdentifier, bool? sign)
     {
         return new GetCharismaIdentifierExpression(Identifier, sign);
     }

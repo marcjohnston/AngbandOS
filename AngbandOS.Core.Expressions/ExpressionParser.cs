@@ -121,6 +121,11 @@ public class ExpressionParser
             return expression;
         }
     }
+    /// <summary>
+    /// Ignores whitespace characters in the <paramref name="text"/> starting at the position indicated by <paramref name="characterIndex"/>.
+    /// </summary>
+    /// <param name="text">The text to parse.</param>
+    /// <param name="characterIndex">The current position in the text.</param>
     public void IgnoreWhitespace(string text, ref int characterIndex)
     {
         while (characterIndex < text.Length && ParseLanguage.WhitespaceCharacters.Contains(text[characterIndex]))

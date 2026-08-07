@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Expressions;
 internal class HealthIdentifierFactorParser : IdentifierFactorParser
 {
     public override string Identifier => "h";
-    protected override Expression GenerateExpression(string matchedIdentifier, bool? sign = null)
+    protected override Expression GenerateExpression(string matchedIdentifier, bool? sign)
     {
         return new HealthIdentifierExpression(Identifier, sign);
     }
