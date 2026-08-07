@@ -494,7 +494,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                     bonusesToMerge.Add(characterClassMeleeWeaponBonuses);
                 }
 
-                if (Game.ArmorIsHeavy())
+                if (Game.CharacterClass.IsMartialArtist && Game.ArmorIsHeavy())
                 {
                     newMartialArtistAndArmorIsHeavy = true;
                 }
