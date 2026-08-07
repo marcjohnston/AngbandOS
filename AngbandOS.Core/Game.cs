@@ -776,20 +776,14 @@ internal partial class Game : IGameSerialize
         SuperheroismTimer = (SuperheroismTimer)SingletonRepository.Get<Timer>(nameof(Timers.SuperheroismTimer));
         TelepathyTimer = (TelepathyTimer)SingletonRepository.Get<Timer>(nameof(Timers.TelepathyTimer));
         PackWieldSlot = (PackWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(Core.PackWieldSlot));
-
-        // Retrieve the mapped spell scripts and sort them by rank.
-        MappedSpellScriptLookupTable = SingletonRepository.Get<MappedSpellScript>().OrderByDescending(_mappedSpellScript => _mappedSpellScript.Rank).ToArray();
         #endregion
 
-        #region Validation Stage - Additional verifications of state.
+        #region Validation Stage - Additional verifications of game state (not configuration [that is done in the SingletonRepository]).
         // Validate the dungeon view.
         if (String.IsNullOrEmpty(gameConfiguration.DungeonViewBindingKey))
         {
             throw new Exception($"No {nameof(gameConfiguration.DungeonViewBindingKey)} provided.");
         }
-
-        ValidateMappedSpellScriptsLookupTable();
-        ValidateInnateTotalsLookupTable();
         #endregion
 
         View consoleView = SingletonRepository.Get<View>(gameConfiguration.DungeonViewBindingKey);
@@ -818,19 +812,6 @@ internal partial class Game : IGameSerialize
         }
         return innateTotals[0];
     }
-
-    private void ValidateInnateTotalsLookupTable()
-    {
-        // Generate a cross reference of all character classes and races.
-        (CharacterClass, Race)[] characterClassesAndRaces = CartesianProduct.Generate(SingletonRepository.Get<CharacterClass>(), SingletonRepository.Get<Race>()).ToArray();
-
-        // Test the lookup table for exactly one result for every instance.
-        foreach ((CharacterClass characterClass, Race race) in characterClassesAndRaces)
-        {
-            // We do not need the return value.
-            _ = GetInnateTotals(characterClass, race);
-        }
-    }
     #endregion
 
     #region MappedSpellScript Lookup Table
@@ -838,9 +819,9 @@ internal partial class Game : IGameSerialize
     /// Represents the lookup table for the <see cref="MappedSpellScript"/> entities.
     /// </summary>
     /// <remarks>
-    /// This lookup table is post load and bind initialized-- which means it is not state data or serialized.
+    /// This lookup table is cached as post load and bind initialized-- which means it is not state data or serialized.
     /// </remarks>
-    private MappedSpellScript[] MappedSpellScriptLookupTable { get; set; }
+    private MappedSpellScript[]? MappedSpellScriptLookupTable { get; set; } = null;
     
     /// <summary>
     /// Returns the associated <see cref="MappedSpellScript"/> for a cast spell, realm, character class, experience level and success.
@@ -854,6 +835,13 @@ internal partial class Game : IGameSerialize
     /// <exception cref="Exception"></exception>
     public MappedSpellScript GetMappedSpellScript(Spell spell, Realm realm, CharacterClass characterClass, int experienceLevel, bool success)
     {
+        // Check to see if the lookup table has been cached yes.
+        if (MappedSpellScriptLookupTable is null)
+        {
+            // Retrieve the mapped spell scripts and sort them by rank.
+            MappedSpellScriptLookupTable = SingletonRepository.Get<MappedSpellScript>().OrderByDescending(_mappedSpellScript => _mappedSpellScript.Rank).ToArray();
+        }
+
         // Retrieve all of the matching records.  Sorting by rank was completed upon building of the lookup table during game construction.
         MappedSpellScript[]? allMatching = MappedSpellScriptLookupTable.Where(_mappedSpellScript =>
             (_mappedSpellScript.Spell is null || _mappedSpellScript.Spell == spell) &&
@@ -879,43 +867,6 @@ internal partial class Game : IGameSerialize
             throw new Exception($"Too many {nameof(MappedSpellScript)} matched for {exceptionDetail}. The matched keys were {joinedAmbiguousMatchedKeys}");
         }
         return highestRankMatching[0];
-    }
-
-    /// <summary>
-    /// Performs validation of the lookup table for the <see cref="MappedSpellScript"/> entities by performing a cartesian product of spells, their realms, character classes,
-    /// experience levels and a boolean success.
-    /// </summary>
-    /// <exception cref="Exception"></exception>
-    private void ValidateMappedSpellScriptsLookupTable()
-    {
-        // First we need a list of all realms and their spell books because not all spells apply to all realms.
-        (Realm Realm, Spell[] Spells)[] realmAndSpellsList = SingletonRepository.Get<Realm>().Select(_realm => (_realm, _realm.SpellBooks.SelectMany(_spellBook => _spellBook.Spells).ToArray())).ToArray();
-
-        // Cross product/enumerate the spells and realms.
-        (Spell, Realm)[] allRealmsAndSpells = realmAndSpellsList.SelectMany(_realmAndSpells => _realmAndSpells.Spells.Select(_spell => (_spell, _realmAndSpells.Realm))).ToArray();
-
-        // Produce a list of experience levels to enumerate.  To do this we check all of the minimum and maximum experience levels denoted in the lookup table and then
-        // add the minimum level (1) and maximum level (Constants.PyMaxLevel).  Finally, we remove the null values and duplicates. 
-        int[] allExperienceLevels = MappedSpellScriptLookupTable
-            .SelectMany(_mappedSpellScript => new int?[] { _mappedSpellScript.MinimumExperienceLevel, _mappedSpellScript.MaximumExperienceLevel })
-            .Concat(new int?[] { 1, Constants.PyMaxLevel })
-            .Where(_item => _item.HasValue)
-            .Select(_item => _item.GetValueOrDefault())
-            .Distinct()
-            .ToArray();
-
-        // Now produce a full test mappings list using the Cartesian product; unfortunately at this point, the spell and realms are still represented as a tuple--we will resolve that in a later step.
-        ((Spell, Realm), CharacterClass, int, bool)[] allMappingsWithEmbeddedTuple = CartesianProduct.Generate(allRealmsAndSpells, SingletonRepository.Get<CharacterClass>(), allExperienceLevels, new bool[] { true, false }).ToArray();
-
-        // Now we need to cast the result as a single tuple.
-        (Spell, Realm, CharacterClass, int, bool)[] allMappingsAsTuples = allMappingsWithEmbeddedTuple.Select((((Spell spell, Realm realm) spellAndRealm, CharacterClass characterClass, int experienceLevel, bool success) _mapping) => (_mapping.spellAndRealm.spell, _mapping.spellAndRealm.realm, _mapping.characterClass, _mapping.experienceLevel, _mapping.success)).ToArray();
-
-        // Now we need to test the mappings.
-        foreach (((Spell spell, Realm realm), CharacterClass characterClass, int experienceLevel, bool success) in allMappingsWithEmbeddedTuple)
-        {
-            // We do not need the return value.
-            _ = GetMappedSpellScript(spell, realm, characterClass, experienceLevel, success);
-        }
     }
     #endregion
 

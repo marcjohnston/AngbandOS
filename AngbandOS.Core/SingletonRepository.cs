@@ -305,7 +305,6 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<Reward>();
         RegisterIndex<RoomLayout>();
         RegisterIndex<SpellResistantDetection>();
-//        RegisterIndex<Talent>();
         RegisterIndex<Timer>();
         RegisterIndex<WieldSlot>();
         RegisterIndex<EquipmentWieldSlot>();
@@ -412,10 +411,7 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<View, ViewGameConfiguration>(gameConfiguration.Views, restoreGameState);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration>(gameConfiguration.WizardCommands, restoreGameState);
 
-        //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
-        //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
-
-        // Sort any applicable repositories.
+        // Sort the attribute and monster race repositories.
         SortIndex<Attribute>(_attribute => _attribute.Key);
         SortIndex<MonsterRace>(_monsterRace => _monsterRace.LevelFound);
 
@@ -423,6 +419,7 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterUniqueSequentialIndex<Attribute>();
         RegisterUniqueSequentialIndex<MonsterRace>();
 
+        #region Binding Phase
         // Bind all of the singletons now.
         foreach (IGetKey singleton in _allSingletonsList)
         {
@@ -440,12 +437,71 @@ internal sealed class SingletonRepository : IGameSerialize
             // Allow the singleton to bind now.  Provide the restore game state, if we are restoring.
             singleton.Bind(singletonRestoreGameState);
         }
+        #endregion
 
+        #region Validation Phase
         // Validate wizard commands are not duplicated.
         char[] duplicateKeyChars = Get<WizardCommand>().GroupBy(_wizardCommand => _wizardCommand.KeyChar).Where(_group => _group.Count() > 1).Select(_group => _group.Key).ToArray();
         if (duplicateKeyChars.Length > 0)
         {
             throw new Exception($"Duplicate key characters detected for multiple wizard commands: keystroke '{String.Join("', '", duplicateKeyChars)}'.");
+        }
+
+        ValidateMappedSpellScriptsLookupTable();
+        ValidateInnateTotalsLookupTable();
+        //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
+        //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
+        #endregion
+    }
+
+
+    /// <summary>
+    /// Performs validation of the lookup table for the <see cref="MappedSpellScript"/> entities by performing a cartesian product of spells, their realms, character classes,
+    /// experience levels and a boolean success.
+    /// </summary>
+    /// <exception cref="Exception"></exception>
+    private void ValidateMappedSpellScriptsLookupTable()
+    {
+        // First we need a list of all realms and their spell books because not all spells apply to all realms.
+        (Realm Realm, Spell[] Spells)[] realmAndSpellsList = Game.SingletonRepository.Get<Realm>().Select(_realm => (_realm, _realm.SpellBooks.SelectMany(_spellBook => _spellBook.Spells).ToArray())).ToArray();
+
+        // Cross product/enumerate the spells and realms.
+        (Spell, Realm)[] allRealmsAndSpells = realmAndSpellsList.SelectMany(_realmAndSpells => _realmAndSpells.Spells.Select(_spell => (_spell, _realmAndSpells.Realm))).ToArray();
+
+        // Produce a list of experience levels to enumerate.  To do this we check all of the minimum and maximum experience levels denoted in the lookup table and then
+        // add the minimum level (1) and maximum level (Constants.PyMaxLevel).  Finally, we remove the null values and duplicates. 
+        int[] allExperienceLevels = Game.SingletonRepository.Get<MappedSpellScript>().OrderByDescending(_mappedSpellScript => _mappedSpellScript.Rank).ToArray()
+            .SelectMany(_mappedSpellScript => new int?[] { _mappedSpellScript.MinimumExperienceLevel, _mappedSpellScript.MaximumExperienceLevel })
+            .Concat(new int?[] { 1, Constants.PyMaxLevel })
+            .Where(_item => _item.HasValue)
+            .Select(_item => _item.GetValueOrDefault())
+            .Distinct()
+            .ToArray();
+
+        // Now produce a full test mappings list using the Cartesian product; unfortunately at this point, the spell and realms are still represented as a tuple--we will resolve that in a later step.
+        ((Spell, Realm), CharacterClass, int, bool)[] allMappingsWithEmbeddedTuple = CartesianProduct.Generate(allRealmsAndSpells, Game.SingletonRepository.Get<CharacterClass>(), allExperienceLevels, new bool[] { true, false }).ToArray();
+
+        // Now we need to cast the result as a single tuple.
+        (Spell, Realm, CharacterClass, int, bool)[] allMappingsAsTuples = allMappingsWithEmbeddedTuple.Select((((Spell spell, Realm realm) spellAndRealm, CharacterClass characterClass, int experienceLevel, bool success) _mapping) => (_mapping.spellAndRealm.spell, _mapping.spellAndRealm.realm, _mapping.characterClass, _mapping.experienceLevel, _mapping.success)).ToArray();
+
+        // Now we need to test the mappings.
+        foreach (((Spell spell, Realm realm), CharacterClass characterClass, int experienceLevel, bool success) in allMappingsWithEmbeddedTuple)
+        {
+            // We do not need the return value.
+            _ = Game.GetMappedSpellScript(spell, realm, characterClass, experienceLevel, success);
+        }
+    }
+
+    private void ValidateInnateTotalsLookupTable()
+    {
+        // Generate a cross reference of all character classes and races.
+        (CharacterClass, Race)[] characterClassesAndRaces = CartesianProduct.Generate(Game.SingletonRepository.Get<CharacterClass>(), Game.SingletonRepository.Get<Race>()).ToArray();
+
+        // Test the lookup table for exactly one result for every instance.
+        foreach ((CharacterClass characterClass, Race race) in characterClassesAndRaces)
+        {
+            // We do not need the return value.  The method call throws, if the innate totals were not found.
+            _ = Game.GetInnateTotals(characterClass, race);
         }
     }
 
@@ -494,13 +550,6 @@ internal sealed class SingletonRepository : IGameSerialize
     /// Returns a list of all singletons.  This is used to track all of the loaded singletons so that they can be bound quickly and only once.
     /// </summary>
     private List<IGetKey> _allSingletonsList = new List<IGetKey>();
-
-    private bool IsDirectlyAssignableFrom<TInterface>(Type type)
-    {
-        return type.GetInterfaces()
-            .Except(type.BaseType?.GetInterfaces() ?? Type.EmptyTypes)
-            .Contains(typeof(TInterface));
-    }
 
     /// <summary>
     /// Registers a repository to build an index for a specific type of singletons specified by the <typeparamref name="T"/> type parameter.
