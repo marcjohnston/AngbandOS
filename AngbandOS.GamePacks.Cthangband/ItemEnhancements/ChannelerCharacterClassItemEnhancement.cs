@@ -15,5 +15,6 @@ public class ChannelerCharacterClassItemEnhancement : ItemEnhancementGameConfigu
         (nameof(DisarmTrapsAttribute), "40"),
         (nameof(UseDeviceAttribute), "40"),
         (nameof(SavingThrowAttribute), "30"),
+        (nameof(SavingThrowPerLevelAttribute), "9")
     };
 }

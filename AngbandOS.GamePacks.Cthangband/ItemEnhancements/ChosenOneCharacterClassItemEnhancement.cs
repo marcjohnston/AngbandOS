@@ -15,5 +15,6 @@ public class ChosenOneCharacterClassItemEnhancement : ItemEnhancementGameConfigu
         (nameof(DisarmTrapsAttribute), "25"),
         (nameof(UseDeviceAttribute), "18"),
         (nameof(SavingThrowAttribute), "20"),
+        (nameof(SavingThrowPerLevelAttribute), "10"),
     };
 }

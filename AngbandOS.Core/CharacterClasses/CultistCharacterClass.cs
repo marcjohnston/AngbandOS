@@ -26,7 +26,6 @@ internal class CultistCharacterClass : CharacterClass
     public override bool HasPatron => true;
     public override int UseDevice => 36;
     public override int? SpellMinFailChance => 5;
-    public override int SavingThrow => 32;
     public override int Stealth => 1;
     public override int Search => 16;
     public override int BasePerception => 18;
@@ -34,7 +33,6 @@ internal class CultistCharacterClass : CharacterClass
     public override int RangedToHit => 20;
     public override int DisarmBonusPerLevel => 7;
     public override int DeviceBonusPerLevel => 13;
-    public override int SaveBonusPerLevel => 10;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 15;
     public override int RangedAttackBonusPerLevel => 15;

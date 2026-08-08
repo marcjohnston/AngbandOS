@@ -18,7 +18,6 @@ internal partial class Game : IGameSerialize
     public int SkillThrowing;
     public int SkillUseDevice;
     public int SocialClass;
-    public bool MagicResistance;
     public int SearchBonus;
     public int StealthBonus;
     #endregion
@@ -219,8 +218,7 @@ internal partial class Game : IGameSerialize
             (nameof(SingletonRepository), saveGameState.CreateDerivedGameStateBag(SingletonRepository, typeof(SingletonRepository))),
 
             ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch)),
-            ("bools8", saveGameState.CreateGameStateBag(IsSearching, MagicResistance)),
-            ("bools9", saveGameState.CreateGameStateBag(_findBreakLeft, _findBreakRight)),
+            ("bools9", saveGameState.CreateGameStateBag(_findBreakLeft, _findBreakRight, IsSearching)),
             ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment)),
             ("bools11", saveGameState.CreateGameStateBag(ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters)),
 
@@ -231,7 +229,6 @@ internal partial class Game : IGameSerialize
             (nameof(ComputedDisarmTraps), saveGameState.CreateGameStateBag(ComputedDisarmTraps)),
             (nameof(SkillMelee), saveGameState.CreateGameStateBag(SkillMelee)),
             (nameof(SkillRanged), saveGameState.CreateGameStateBag(SkillRanged)),
-            (nameof(SkillSavingThrow), saveGameState.CreateGameStateBag(SkillSavingThrow)),
             (nameof(SkillPerception), saveGameState.CreateGameStateBag(SkillPerception)),
             (nameof(SkillSearching), saveGameState.CreateGameStateBag(SkillSearching)),
             (nameof(SkillStealth), saveGameState.CreateGameStateBag(SkillStealth)),
@@ -519,8 +516,7 @@ internal partial class Game : IGameSerialize
 
             // Now restore this game object itself.
             (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch) = restoreGameState.GetByKey("bools1").Get8Bools();
-            (IsSearching, MagicResistance) = restoreGameState.GetByKey("bools8").Get2Bools();
-            (_findBreakLeft, _findBreakRight) = restoreGameState.GetByKey("bools9").Get2Bools();
+            (_findBreakLeft, _findBreakRight, IsSearching) = restoreGameState.GetByKey("bools9").Get3Bools();
             (_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment) = restoreGameState.GetByKey("bools10").Get8Bools();
             (ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
 
@@ -531,7 +527,6 @@ internal partial class Game : IGameSerialize
             ComputedDisarmTraps = restoreGameState.GetByKey(nameof(ComputedDisarmTraps)).GetInt();
             SkillMelee = restoreGameState.GetByKey(nameof(SkillMelee)).GetInt();
             SkillRanged = restoreGameState.GetByKey(nameof(SkillRanged)).GetInt();
-            SkillSavingThrow = restoreGameState.GetByKey(nameof(SkillSavingThrow)).GetInt();
             SkillPerception = restoreGameState.GetByKey(nameof(SkillPerception)).GetInt();
             SkillSearching = restoreGameState.GetByKey(nameof(SkillSearching)).GetInt();
             SkillStealth = restoreGameState.GetByKey(nameof(SkillStealth)).GetInt();

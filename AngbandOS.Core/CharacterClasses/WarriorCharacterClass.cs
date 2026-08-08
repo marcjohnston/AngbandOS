@@ -19,7 +19,6 @@ internal class WarriorCharacterClass : CharacterClass
     public override string Title => "Warrior";
     public override int? InstantFearResistanceLevel => 30;
     public override int UseDevice => 18;
-    public override int SavingThrow => 18;
     public override int? AttackAndDamageBonusPerExperienceLevelDivisor => 5;
     public override int Stealth => 1;
     public override int Search => 14;
@@ -29,7 +28,6 @@ internal class WarriorCharacterClass : CharacterClass
     public override int DisarmBonusPerLevel => 12;
     public override int NonMagicRandomArtifact1InChance => 0;
     public override int DeviceBonusPerLevel => 7;
-    public override int SaveBonusPerLevel => 10;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 45;
     public override int RangedAttackBonusPerLevel => 45;

@@ -9,12 +9,13 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class HighMageCharacterClass : CharacterClass
 {
     private HighMageCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { (1, null, nameof(HighMageCharacterClassItemEnhancement)) };
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
+        (1, null, nameof(HighMageCharacterClassItemEnhancement)) 
+    };
     public override int ID => 10;
     public override int FriendsUpkeepDivider => 12;
     public override string Title => "High-Mage";
     public override int UseDevice => 38;
-    public override int SavingThrow => 30;
     public override int Stealth => 2;
     public override string InvokeSpiritsBeamProbabilityRollExpression => "X+10";
     public override string SpellOfWonderBeamProbabilityRollExpression => "X+10";
@@ -27,7 +28,6 @@ internal class HighMageCharacterClass : CharacterClass
     public override int RangedToHit => 20;
     public override int DisarmBonusPerLevel => 7;
     public override int DeviceBonusPerLevel => 13;
-    public override int SaveBonusPerLevel => 9;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 15;
     public override int RangedAttackBonusPerLevel => 15;

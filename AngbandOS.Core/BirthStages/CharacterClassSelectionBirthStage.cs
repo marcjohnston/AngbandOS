@@ -76,6 +76,7 @@ internal class CharacterClassSelectionBirthStage : BirthStage
         CharacterClass[] classes = Game.SingletonRepository.Get<CharacterClass>()
             .OrderBy(_characterClass => _characterClass.Title)
             .ToArray();
+        Array.ForEach(classes, _characterClass => _characterClass.RefreshAndSquashAttributeSet());
 
         CharacterClass characterClass = classes[index];
         Game.Screen.Print(ColorEnum.Purple, "STR:", 36, 21);
@@ -107,7 +108,7 @@ internal class CharacterClassSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
         Game.DisplayAPlusB(67, 36, characterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)), characterClass.DisarmBonusPerLevel);
         Game.DisplayAPlusB(67, 37, characterClass.UseDevice, characterClass.DeviceBonusPerLevel);
-        Game.DisplayAPlusB(67, 38, characterClass.SavingThrow, characterClass.SaveBonusPerLevel);
+        Game.DisplayAPlusB(67, 38, Game.AttributeSet.GetInt(nameof(SavingThrowAttribute)), characterClass.AttributeSet.GetInt(nameof(SavingThrowPerLevelAttribute)));
         Game.DisplayAPlusB(67, 39, characterClass.Stealth * 4, characterClass.StealthBonusPerLevel * 4);
         Game.DisplayAPlusB(67, 40, characterClass.MeleeToHit, characterClass.MeleeAttackBonusPerLevel);
         Game.DisplayAPlusB(67, 41, characterClass.RangedToHit, characterClass.RangedAttackBonusPerLevel);

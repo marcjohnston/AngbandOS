@@ -15,5 +15,6 @@ public class WarriorCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(DisarmTrapsAttribute), "25"),
         (nameof(UseDeviceAttribute), "18"),
         (nameof(SavingThrowAttribute), "18"),
+        (nameof(SavingThrowPerLevelAttribute), "10"),
     };
 }

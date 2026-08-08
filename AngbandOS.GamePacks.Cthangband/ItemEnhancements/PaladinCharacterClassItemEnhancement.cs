@@ -15,5 +15,6 @@ public class PaladinCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(DisarmTrapsAttribute), "20"),
         (nameof(UseDeviceAttribute), "24"),
         (nameof(SavingThrowAttribute), "26"),
+        (nameof(SavingThrowPerLevelAttribute), "11"),
     };
 }

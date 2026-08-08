@@ -9,11 +9,12 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class RangerCharacterClass : CharacterClass
 {
     private RangerCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { (1, null, nameof(RangerCharacterClassItemEnhancement)) };
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
+        (1, null, nameof(RangerCharacterClassItemEnhancement)) 
+    };
     public override int ID => 4;
     public override string Title => "Ranger";
     public override int UseDevice => 32;
-    public override int SavingThrow => 28;
     public override int Stealth => 3;
     public override int Search => 24;
     public override int BasePerception => 16;
@@ -21,7 +22,6 @@ internal class RangerCharacterClass : CharacterClass
     public override int RangedToHit => 72;
     public override int DisarmBonusPerLevel => 8;
     public override int DeviceBonusPerLevel => 10;
-    public override int SaveBonusPerLevel => 10;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 30;
     public override int RangedAttackBonusPerLevel => 45;

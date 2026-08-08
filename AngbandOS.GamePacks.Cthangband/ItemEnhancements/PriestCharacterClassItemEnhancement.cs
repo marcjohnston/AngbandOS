@@ -15,5 +15,6 @@ public class PriestCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
         (nameof(DisarmTrapsAttribute), "25"),
         (nameof(UseDeviceAttribute), "30"),
         (nameof(SavingThrowAttribute), "32"),
+        (nameof(SavingThrowPerLevelAttribute), "12"),
     };
 }

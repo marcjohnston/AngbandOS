@@ -10,10 +10,11 @@ public class DruidCharacterClassItemEnhancement : ItemEnhancementGameConfigurati
         (nameof(BonusWisdomAttribute), "4"),
         (nameof(BonusIntelligenceAttribute), "-3"),
         (nameof(BonusDexterityAttribute), "-2"),
+        (nameof(BonusStrengthAttribute), "-1"),
         (nameof(ValueAttribute), "-1050"),
         (nameof(DisarmTrapsAttribute), "30"),
         (nameof(UseDeviceAttribute), "30"),
         (nameof(SavingThrowAttribute), "32"),
-        (nameof(BonusStrengthAttribute), "-1")
+        (nameof(SavingThrowPerLevelAttribute), "12"),
     };
 }

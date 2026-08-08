@@ -9,11 +9,12 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class WarriorMageCharacterClass : CharacterClass
 {
     private WarriorMageCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { (1, null, nameof(WarriorMageCharacterClassItemEnhancement)) };
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
+        (1, null, nameof(WarriorMageCharacterClassItemEnhancement)) 
+    };
     public override int ID => 6;
     public override string Title => "Warrior-Mage";
     public override int UseDevice => 30;
-    public override int SavingThrow => 28;
     public override int Stealth => 2;
     public override int Search => 18;
     public override int BasePerception => 16;
@@ -21,7 +22,6 @@ internal class WarriorMageCharacterClass : CharacterClass
     public override int RangedToHit => 26;
     public override int DisarmBonusPerLevel => 7;
     public override int DeviceBonusPerLevel => 10;
-    public override int SaveBonusPerLevel => 9;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 20;
     public override int RangedAttackBonusPerLevel => 20;

@@ -27,7 +27,6 @@ internal class MysticCharacterClass : CharacterClass
     public override bool RenderSpellsPerLevel => false;
     public override int? InstantConfusionResistanceLevel => 10;
     public override int UseDevice => 30;
-    public override int SavingThrow => 30;
     public override int Stealth => 5;
     public override int Search => 32;
     public override int BasePerception => 24;
@@ -35,7 +34,6 @@ internal class MysticCharacterClass : CharacterClass
     public override int RangedToHit => 50;
     public override int DisarmBonusPerLevel => 14;
     public override int DeviceBonusPerLevel => 11;
-    public override int SaveBonusPerLevel => 11;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 40;
     public override int RangedAttackBonusPerLevel => 30;

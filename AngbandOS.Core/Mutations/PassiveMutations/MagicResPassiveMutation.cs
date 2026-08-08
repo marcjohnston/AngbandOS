@@ -17,13 +17,4 @@ internal class MagicResPassiveMutation : Mutation
     { (1, nameof(MagicResPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Resist Magic (P)";
-    public override void OnGain()
-    {
-        Game.MagicResistance = true;
-    }
-
-    public override void OnLose()
-    {
-        Game.MagicResistance = false;
-    }
 }

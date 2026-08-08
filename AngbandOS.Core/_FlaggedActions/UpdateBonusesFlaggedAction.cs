@@ -110,6 +110,10 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.HasTelepathy = Game.AttributeSet.GetBool(nameof(TelepathyAttribute));
         Game.HasTimeResistance = Game.AttributeSet.GetBool(nameof(ResTimeAttribute));
         Game.InfraVisionRange = Game.AttributeSet.GetInt(nameof(InfraVisionAttribute)) + (Game.InfravisionTimer.Value > 0 ? 1 : 0);
+        Game.SkillSavingThrow = Game.AttributeSet.GetInt(nameof(SavingThrowAttribute)) +
+            Game.AttributeSet.GetInt(nameof(SavingThrowPerLevelAttribute)) * Game.ExperienceLevel.IntValue +
+            (Game.HasAntiMagic && Game.SkillSavingThrow < 95 ? 95 : 0) +
+            Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)).WisSavingThrowBonus;
 
         #region Speed
         int oldVisibleOnlySpeed = Game.Speed - Game.SpeedHidden; // The speed flag is only for visible speed
@@ -223,7 +227,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         int extraBlows = extraShots = 0;
         Game.ComputedDisarmTraps = Game.Race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
         Game.SkillUseDevice = Game.Race.UseDevice + Game.CharacterClass.UseDevice; // done
-        Game.SkillSavingThrow = Game.Race.SavingThrow + Game.CharacterClass.SavingThrow; // done
         Game.SkillStealth = Game.Race.Stealth + Game.CharacterClass.Stealth; // done .. need to copy
         Game.SkillSearching = Game.Race.Search + Game.CharacterClass.Search; // done .. need to copy
         Game.SkillPerception = Game.Race.BasePerception + Game.CharacterClass.BasePerception; // added to attributes
@@ -236,10 +239,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.SkillPerception += Game.SearchBonus;
         Game.SkillSearching += Game.SearchBonus;
         Game.SkillStealth += Game.StealthBonus;
-        if (Game.MagicResistance)
-        {
-            Game.SkillSavingThrow += 15 + (Game.ExperienceLevel.IntValue / 5);
-        }
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
             ability.OverrideUpdateBonuses();
@@ -490,11 +489,9 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         Game.ComputedDisarmTraps += Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexDisarmBonus;
         Game.ComputedDisarmTraps += Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntDisarmBonus;
         Game.SkillUseDevice += Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntUseDeviceBonus;
-        Game.SkillSavingThrow += Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)).WisSavingThrowBonus;
         Game.SkillDigging += Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDiggingBonus;
         Game.ComputedDisarmTraps += (Game.CharacterClass.DisarmBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillUseDevice += (Game.CharacterClass.DeviceBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
-        Game.SkillSavingThrow += (Game.CharacterClass.SaveBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillStealth += (Game.CharacterClass.StealthBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillMelee += (Game.CharacterClass.MeleeAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
         Game.SkillRanged += (Game.CharacterClass.RangedAttackBonusPerLevel * Game.ExperienceLevel.IntValue) / 10;
@@ -510,10 +507,6 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         if (Game.SkillDigging < 1)
         {
             Game.SkillDigging = 1;
-        }
-        if (Game.HasAntiMagic && Game.SkillSavingThrow < 95)
-        {
-            Game.SkillSavingThrow = 95;
         }
 
         // Create a new bonuses that we will use to merge with all of the additionals.

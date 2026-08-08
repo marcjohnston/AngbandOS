@@ -15,5 +15,6 @@ public class RogueCharacterClassItemEnhancement : ItemEnhancementGameConfigurati
         (nameof(DisarmTrapsAttribute), "45"),
         (nameof(UseDeviceAttribute), "32"),
         (nameof(SavingThrowAttribute), "28"),
+        (nameof(SavingThrowPerLevelAttribute), "10"),
     };
 }

@@ -9,10 +9,11 @@ public class FanaticCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(BonusWisdomAttribute), "0"),
         (nameof(BonusIntelligenceAttribute), "1"),
         (nameof(BonusDexterityAttribute), "1"),
+        (nameof(BonusStrengthAttribute), "2"),
         (nameof(ValueAttribute), "6300"),
         (nameof(DisarmTrapsAttribute), "20"),
         (nameof(UseDeviceAttribute), "24"),
         (nameof(SavingThrowAttribute), "30"),
-        (nameof(BonusStrengthAttribute), "2")
+        (nameof(SavingThrowPerLevelAttribute), "10"),
     };
 }

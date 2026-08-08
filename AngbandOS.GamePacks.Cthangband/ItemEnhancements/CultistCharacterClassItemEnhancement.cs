@@ -10,10 +10,11 @@ public class CultistCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(BonusWisdomAttribute), "0"),
         (nameof(BonusIntelligenceAttribute), "4"),
         (nameof(BonusDexterityAttribute), "1"),
+        (nameof(BonusStrengthAttribute), "-5"),
         (nameof(ValueAttribute), "-3300"),
         (nameof(DisarmTrapsAttribute), "30"),
         (nameof(UseDeviceAttribute), "36"),
         (nameof(SavingThrowAttribute), "32"),
-        (nameof(BonusStrengthAttribute), "-5")
+        (nameof(SavingThrowPerLevelAttribute), "10"),
     };
 }

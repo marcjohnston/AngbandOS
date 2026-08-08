@@ -23,7 +23,6 @@ internal class FanaticCharacterClass : CharacterClass
     public override bool ReceivesLevelRewards => true;
     public override bool HasPatron => true;
     public override int UseDevice => 24;
-    public override int SavingThrow => 30;
     public override int Stealth => 1;
     public override int Search => 14;
     public override int BasePerception => 12;
@@ -31,7 +30,6 @@ internal class FanaticCharacterClass : CharacterClass
     public override int RangedToHit => 40;
     public override int DisarmBonusPerLevel => 7;
     public override int DeviceBonusPerLevel => 11;
-    public override int SaveBonusPerLevel => 10;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 35;
     public override int RangedAttackBonusPerLevel => 30;
