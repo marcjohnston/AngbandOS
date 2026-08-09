@@ -85,16 +85,12 @@ internal class CharacterClassSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "DEX:", 39, 21);
         Game.Screen.Print(ColorEnum.Purple, "CON:", 40, 21);
         Game.Screen.Print(ColorEnum.Purple, "CHA:", 41, 21);
-        int i = 0;
-        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
-        {
-            string compositeKey = CharacterClassAbility.GetCompositeKey(characterClass, ability);
-            CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
-
-            int bonus = characterClassAbility.Bonus;
-            Game.DisplayStatBonus(26, 36 + i, bonus);
-            i++;
-        }
+        Game.DisplayStatBonus(26, 36, characterClass.AttributeSet.GetInt(nameof(BonusStrengthAttribute)));
+        Game.DisplayStatBonus(26, 37, characterClass.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)));
+        Game.DisplayStatBonus(26, 38, characterClass.AttributeSet.GetInt(nameof(BonusWisdomAttribute)));
+        Game.DisplayStatBonus(26, 39, characterClass.AttributeSet.GetInt(nameof(BonusDexterityAttribute)));
+        Game.DisplayStatBonus(26, 40, characterClass.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)));
+        Game.DisplayStatBonus(26, 41, characterClass.AttributeSet.GetInt(nameof(BonusCharismaAttribute)));
         Game.Screen.Print(ColorEnum.Purple, "Disarming   :", 36, 53);
         Game.Screen.Print(ColorEnum.Purple, "Magic Device:", 37, 53);
         Game.Screen.Print(ColorEnum.Purple, "Saving Throw:", 38, 53);
@@ -108,7 +104,7 @@ internal class CharacterClassSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
         Game.DisplayAPlusB(67, 36, characterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)), characterClass.DisarmBonusPerLevel);
         Game.DisplayAPlusB(67, 37, characterClass.UseDevice, characterClass.DeviceBonusPerLevel);
-        Game.DisplayAPlusB(67, 38, Game.AttributeSet.GetInt(nameof(SavingThrowAttribute)), characterClass.AttributeSet.GetInt(nameof(SavingThrowPerLevelAttribute)));
+        Game.DisplayAPlusB(67, 38, characterClass.AttributeSet.GetInt(nameof(SavingThrowAttribute)), characterClass.AttributeSet.GetInt(nameof(SavingThrowPerLevelAttribute)));
         Game.DisplayAPlusB(67, 39, characterClass.Stealth * 4, characterClass.StealthBonusPerLevel * 4);
         Game.DisplayAPlusB(67, 40, characterClass.MeleeToHit, characterClass.MeleeAttackBonusPerLevel);
         Game.DisplayAPlusB(67, 41, characterClass.RangedToHit, characterClass.RangedAttackBonusPerLevel);

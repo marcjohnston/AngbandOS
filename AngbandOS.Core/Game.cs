@@ -1644,6 +1644,8 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public CharacterClass CharacterClass;
 
+    public ReadOnlyAttributeSet EquipmentAttributeSet;
+
     /// <summary>
     /// Returns the current race of the character.  Will be null before the player is birthed.
     /// </summary>
@@ -3056,6 +3058,7 @@ internal partial class Game : IGameSerialize
         TownWithHouse = null;
 
         Generation = 1;
+        ExperienceLevel.IntValue = 1;
 
         if (ExPlayer == null)
         {

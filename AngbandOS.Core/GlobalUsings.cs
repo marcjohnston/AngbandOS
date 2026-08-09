@@ -9,7 +9,6 @@ global using AngbandOS.Core.ActivationWeightRandoms;
 global using AngbandOS.Core.ArtifactBiases;
 global using AngbandOS.Core.BirthStages;
 global using AngbandOS.Core.CharacterClasses;
-global using AngbandOS.Core.CharacterClassAbilities;
 global using AngbandOS.Core.ConsoleElements;
 global using AngbandOS.Core.Expressions;
 global using AngbandOS.Core.MonsterSelectors;

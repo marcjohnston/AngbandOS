@@ -68,6 +68,7 @@ internal class RaceSelectionBirthStage : BirthStage
         Race[] races = Game.SingletonRepository.Get<Race>()
             .OrderBy((Race race) => race.Title)
             .ToArray();
+        Array.ForEach(races, _race => _race.RefreshAndSquashAttributeSet());
         Race race = races[index];
 
         Game.Screen.Print(ColorEnum.Purple, "STR:", 36, 21);
@@ -76,16 +77,12 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "DEX:", 39, 21);
         Game.Screen.Print(ColorEnum.Purple, "CON:", 40, 21);
         Game.Screen.Print(ColorEnum.Purple, "CHA:", 41, 21);
-        int i = 0;
-        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
-        {
-            RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(race, ability));
-            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.CharacterClass, ability);
-            CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
-            int bonus = raceAbility.Bonus + characterClassAbility.Bonus;
-            Game.DisplayStatBonus(26, 36 + i, bonus);
-            i++;
-        }
+        Game.DisplayStatBonus(26, 36, race.AttributeSet.GetInt(nameof(BonusStrengthAttribute)));
+        Game.DisplayStatBonus(26, 37, race.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)));
+        Game.DisplayStatBonus(26, 38, race.AttributeSet.GetInt(nameof(BonusWisdomAttribute)));
+        Game.DisplayStatBonus(26, 39, race.AttributeSet.GetInt(nameof(BonusDexterityAttribute)));
+        Game.DisplayStatBonus(26, 40, race.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)));
+        Game.DisplayStatBonus(26, 41, race.AttributeSet.GetInt(nameof(BonusCharismaAttribute)));
         Game.Screen.Print(ColorEnum.Purple, "Disarming   :", 36, 53);
         Game.Screen.Print(ColorEnum.Purple, "Magic Device:", 37, 53);
         Game.Screen.Print(ColorEnum.Purple, "Saving Throw:", 38, 53);

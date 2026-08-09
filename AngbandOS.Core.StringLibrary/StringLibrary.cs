@@ -140,7 +140,7 @@ namespace AngbandOS.Core
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetSignedValue(int value)
+        public static string GetSignedValue(int value) // TODO: This should be refactored for the callers to use the .ToString("+0;-0;+0") (positive;negative;zero) format
         {
             if (value >= 0)
             {

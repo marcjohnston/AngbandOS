@@ -36,6 +36,7 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
         effectiveAttributeSet.MergeAttributeSet(mutationsAttributeSet);
 
         // Apply all of the items that the player is wielding.
+        EffectiveAttributeSet equipmentEffectiveAttributeSet = new EffectiveAttributeSet(Game);
         foreach (EquipmentWieldSlot equipmentWieldSlot in Game.SingletonRepository.Get<EquipmentWieldSlot>())
         {
             foreach (int i in equipmentWieldSlot.InventorySlots)
@@ -43,11 +44,13 @@ internal class UpdateBonusesFlaggedAction : FlaggedAction
                 Item? oPtr = Game.GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    effectiveAttributeSet.MergeAttributeSet(oPtr.EffectiveAttributeSet.ToReadOnly());
+                    equipmentEffectiveAttributeSet.MergeAttributeSet(oPtr.EffectiveAttributeSet.ToReadOnly());
                 }
             }
         }
 
+        Game.EquipmentAttributeSet = equipmentEffectiveAttributeSet.ToReadOnly();
+        effectiveAttributeSet.MergeAttributeSet(Game.EquipmentAttributeSet);
         return effectiveAttributeSet;
     }
 

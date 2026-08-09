@@ -150,6 +150,21 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         }
     }
 
+    private void RenderAbilityInnateAndBonus(Ability ability, int raceBonus, int characterClassBonus, int equipmentBonus, int x, int y)
+    {
+        // Print each of the scores and bonuses
+        Game.Screen.Print(ColorEnum.Blue, ability.Name, y, x);
+        Game.Screen.Print(ColorEnum.Purple, ability.InnateMax.StatToString(), y, x + 4);
+        Game.Screen.Print(ColorEnum.Brown, raceBonus.ToString("+0;-0;+0").PadLeft(3), y, x + 13);
+        Game.Screen.Print(ColorEnum.Brown, characterClassBonus.ToString("+0;-0;+0").PadLeft(3), y, x + 19);
+        Game.Screen.Print(ColorEnum.Brown, equipmentBonus.ToString("+0;-0;+0").PadLeft(3), y, x + 24);
+        Game.Screen.Print(ColorEnum.Green, ability.AdjustedMax.StatToString(), y, x + 27);
+        if (ability.Adjusted < ability.AdjustedMax)
+        {
+            Game.Screen.Print(ColorEnum.Red, ability.Adjusted.StatToString(), y, x + 35);
+        }
+    }
+
     /// <summary>
     /// Display the ability scores including details of any modifiers to them
     /// </summary>
@@ -162,53 +177,43 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         Game.Screen.Print(ColorEnum.Green, "Actual", row - 1, statCol + 29);
         Game.Screen.Print(ColorEnum.Red, "Reduced", row - 1, statCol + 36);
 
-        // Loop through the scores
-        int i = 0;
-        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
-        {
-            // Reverse engineer our equipment bonuses from our score
-            int equipmentBonuses = 0;
-            if (ability.InnateMax > 18 && ability.AdjustedMax > 18)
-            {
-                equipmentBonuses = (ability.AdjustedMax - ability.InnateMax) / 10;
-            }
-            if (ability.InnateMax <= 18 && ability.AdjustedMax <= 18)
-            {
-                equipmentBonuses = ability.AdjustedMax - ability.InnateMax;
-            }
-            if (ability.InnateMax <= 18 && ability.AdjustedMax > 18)
-            {
-                equipmentBonuses = ((ability.AdjustedMax - 18) / 10) - ability.InnateMax + 18;
-            }
-            if (ability.InnateMax > 18 && ability.AdjustedMax <= 18)
-            {
-                equipmentBonuses = ability.AdjustedMax - ((ability.InnateMax - 18) / 10) - 19;
-            }
-            // Take out the bonuses we got for our our race and profession
-            RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Game.Race, ability));
-            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.CharacterClass, ability);
-            CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
-            equipmentBonuses -= raceAbility.Bonus;
-            equipmentBonuses -= characterClassAbility.Bonus;
-            // Print each of the scores and bonuses
-            Game.Screen.Print(ColorEnum.Blue, ability.Name, row + i, statCol);
-            string buf = ability.InnateMax.StatToString();
-            Game.Screen.Print(ColorEnum.Purple, buf, row + i, statCol + 4);
-            buf = raceAbility.Bonus.ToString("+0;-0;+0").PadLeft(3);
-            Game.Screen.Print(ColorEnum.Brown, buf, row + i, statCol + 13);
-            buf = characterClassAbility.Bonus.ToString("+0;-0;+0").PadLeft(3);
-            Game.Screen.Print(ColorEnum.Brown, buf, row + i, statCol + 19);
-            buf = equipmentBonuses.ToString("+0;-0;+0").PadLeft(3);
-            Game.Screen.Print(ColorEnum.Brown, buf, row + i, statCol + 24);
-            buf = ability.AdjustedMax.StatToString();
-            Game.Screen.Print(ColorEnum.Green, buf, row + i, statCol + 27);
-            if (ability.Adjusted < ability.AdjustedMax)
-            {
-                buf = ability.Adjusted.StatToString();
-                Game.Screen.Print(ColorEnum.Red, buf, row + i, statCol + 35);
-            }
-            i++;
-        }
+        // Render the ability scores
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)), 
+            Game.Race.AttributeSet.GetInt(nameof(BonusCharismaAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusCharismaAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusCharismaAttribute)),
+            row + 0, statCol);
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)),
+            Game.Race.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusConstitutionAttribute)),
+            row + 1, statCol);
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)),
+            Game.Race.AttributeSet.GetInt(nameof(BonusDexterityAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusDexterityAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusDexterityAttribute)),
+            row + 2, statCol);
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)),
+            Game.Race.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusIntelligenceAttribute)),
+            row + 3, statCol);
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)),
+            Game.Race.AttributeSet.GetInt(nameof(BonusStrengthAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusStrengthAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusStrengthAttribute)),
+            row + 4, statCol);
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)),
+            Game.Race.AttributeSet.GetInt(nameof(BonusWisdomAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusWisdomAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusWisdomAttribute)),
+            row + 5, statCol);
 
         // Print the bonuses for each score and each item we have
         int col = statCol + 44;
