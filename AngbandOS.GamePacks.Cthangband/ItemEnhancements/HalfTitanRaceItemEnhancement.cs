@@ -15,7 +15,6 @@ public class HalfTitanRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(BonusDexterityAttribute), "-2"),
         (nameof(ValueAttribute), "10050"),
         (nameof(DisarmTrapsAttribute), "-5"),
-        (nameof(UseDeviceAttribute), "5"),
         (nameof(SavingThrowAttribute), "2"),
         (nameof(StealthAttribute), "-2"),
         (nameof(SearchAttribute), "1"),

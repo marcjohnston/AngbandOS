@@ -16,7 +16,6 @@ public class DarkElfRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "5250"),
         (nameof(InfraVisionAttribute), "5"),
         (nameof(DisarmTrapsAttribute), "5"),
-        (nameof(UseDeviceAttribute), "15"),
         (nameof(SavingThrowAttribute), "20"),
         (nameof(StealthAttribute), "3"),
         (nameof(SearchAttribute), "8"),

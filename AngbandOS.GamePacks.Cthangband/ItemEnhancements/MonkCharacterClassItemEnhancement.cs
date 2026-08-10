@@ -13,7 +13,6 @@ public class MonkCharacterClassItemEnhancement : ItemEnhancementGameConfiguratio
         (nameof(BonusDexterityAttribute), "3"),
         (nameof(ValueAttribute), "8850"),
         (nameof(DisarmTrapsAttribute), "45"),
-        (nameof(UseDeviceAttribute), "32"),
         (nameof(SavingThrowAttribute), "28"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "32"),

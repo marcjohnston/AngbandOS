@@ -13,7 +13,6 @@ public class PriestCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
         (nameof(BonusDexterityAttribute), "-1"),
         (nameof(ValueAttribute), "-1500"),
         (nameof(DisarmTrapsAttribute), "25"),
-        (nameof(UseDeviceAttribute), "30"),
         (nameof(SavingThrowAttribute), "32"),
         (nameof(SavingThrowBonusPerLevelAttribute), "12"),
         (nameof(UseDeviceAttribute), "30"),

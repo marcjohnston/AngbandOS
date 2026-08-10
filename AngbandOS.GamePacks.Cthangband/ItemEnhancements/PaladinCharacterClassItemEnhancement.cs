@@ -13,7 +13,6 @@ public class PaladinCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(BonusDexterityAttribute), "0"),
         (nameof(ValueAttribute), "4500"),
         (nameof(DisarmTrapsAttribute), "20"),
-        (nameof(UseDeviceAttribute), "24"),
         (nameof(SavingThrowAttribute), "26"),
         (nameof(SavingThrowBonusPerLevelAttribute), "11"),
         (nameof(UseDeviceAttribute), "24"),

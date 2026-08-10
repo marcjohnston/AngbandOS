@@ -15,7 +15,6 @@ public class DwarfRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "1050"),
         (nameof(InfraVisionAttribute), "5"),
         (nameof(DisarmTrapsAttribute), "2"),
-        (nameof(UseDeviceAttribute), "9"),
         (nameof(SavingThrowAttribute), "10"),
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "7"),

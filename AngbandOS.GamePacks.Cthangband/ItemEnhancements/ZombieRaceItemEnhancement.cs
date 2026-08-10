@@ -20,7 +20,6 @@ public class ZombieRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "-8250"),
         (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "-5"),
-        (nameof(UseDeviceAttribute), "-5"),
         (nameof(SavingThrowAttribute), "8"),
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "-1"),

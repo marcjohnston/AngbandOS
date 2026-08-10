@@ -15,7 +15,6 @@ public class HobbitRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "7650"),
         (nameof(InfraVisionAttribute), "4"),
         (nameof(DisarmTrapsAttribute), "15"),
-        (nameof(UseDeviceAttribute), "18"),
         (nameof(SavingThrowAttribute), "18"),
         (nameof(StealthAttribute), "5"),
         (nameof(SearchAttribute), "12"),

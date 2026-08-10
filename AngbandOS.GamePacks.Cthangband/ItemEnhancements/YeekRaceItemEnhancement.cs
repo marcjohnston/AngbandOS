@@ -17,7 +17,6 @@ public class YeekRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "-4350"),
         (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "2"),
-        (nameof(UseDeviceAttribute), "4"),
         (nameof(SavingThrowAttribute), "10"),
         (nameof(StealthAttribute), "3"),
         (nameof(SearchAttribute), "5"),

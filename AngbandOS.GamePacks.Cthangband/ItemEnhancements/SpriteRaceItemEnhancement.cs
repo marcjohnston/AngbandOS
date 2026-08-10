@@ -19,7 +19,6 @@ public class SpriteRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "4500"),
         (nameof(InfraVisionAttribute), "4"),
         (nameof(DisarmTrapsAttribute), "10"),
-        (nameof(UseDeviceAttribute), "10"),
         (nameof(SavingThrowAttribute), "10"),
         (nameof(StealthAttribute), "4"),
         (nameof(SearchAttribute), "10"),

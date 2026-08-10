@@ -21,7 +21,6 @@ public class VampireRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "6900"),
         (nameof(InfraVisionAttribute), "5"),
         (nameof(DisarmTrapsAttribute), "4"),
-        (nameof(UseDeviceAttribute), "10"),
         (nameof(SavingThrowAttribute), "10"),
         (nameof(StealthAttribute), "4"),
         (nameof(SearchAttribute), "1"),

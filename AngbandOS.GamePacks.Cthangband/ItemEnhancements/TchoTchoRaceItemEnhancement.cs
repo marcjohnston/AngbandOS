@@ -15,7 +15,6 @@ public class TchoTchoRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(BonusDexterityAttribute), "1"),
         (nameof(ValueAttribute), "2700"),
         (nameof(DisarmTrapsAttribute), "-2"),
-        (nameof(UseDeviceAttribute), "-10"),
         (nameof(SavingThrowAttribute), "2"),
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "1"),

@@ -10,7 +10,6 @@ public class HumanRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(BonusIntelligenceAttribute), "0"),
         (nameof(BonusDexterityAttribute), "0"),
         (nameof(DisarmTrapsAttribute), "0"),
-        (nameof(UseDeviceAttribute), "0"),
         (nameof(SavingThrowAttribute), "0"),
         (nameof(StealthAttribute), "0"),
         (nameof(SearchAttribute), "0"),

@@ -13,7 +13,6 @@ public class WarriorMageCharacterClassItemEnhancement : ItemEnhancementGameConfi
         (nameof(BonusDexterityAttribute), "1"),
         (nameof(ValueAttribute), "6450"),
         (nameof(DisarmTrapsAttribute), "30"),
-        (nameof(UseDeviceAttribute), "30"),
         (nameof(SavingThrowAttribute), "28"),
         (nameof(SavingThrowBonusPerLevelAttribute), "9"),
         (nameof(UseDeviceAttribute), "30"),

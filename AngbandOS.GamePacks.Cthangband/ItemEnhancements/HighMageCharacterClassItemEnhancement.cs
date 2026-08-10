@@ -13,7 +13,6 @@ public class HighMageCharacterClassItemEnhancement : ItemEnhancementGameConfigur
         (nameof(BonusStrengthAttribute), "-5"),
         (nameof(ValueAttribute), "-3150"),
         (nameof(DisarmTrapsAttribute), "30"),
-        (nameof(UseDeviceAttribute), "38"),
         (nameof(SavingThrowAttribute), "30"),
         (nameof(SavingThrowBonusPerLevelAttribute), "9"),
         (nameof(UseDeviceAttribute), "38"),

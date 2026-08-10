@@ -16,7 +16,6 @@ public class MiriNigriRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(BonusDexterityAttribute), "-1"),
         (nameof(ValueAttribute), "-1800"),
         (nameof(DisarmTrapsAttribute), "-5"),
-        (nameof(UseDeviceAttribute), "-2"),
         (nameof(SavingThrowAttribute), "-1"),
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "-1"),

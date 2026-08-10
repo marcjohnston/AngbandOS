@@ -15,7 +15,6 @@ public class HalfTrollRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "-1500"),
         (nameof(InfraVisionAttribute), "3"),
         (nameof(DisarmTrapsAttribute), "-5"),
-        (nameof(UseDeviceAttribute), "-8"),
         (nameof(SavingThrowAttribute), "-8"),
         (nameof(StealthAttribute), "-2"),
         (nameof(SearchAttribute), "-1"),

@@ -15,7 +15,6 @@ public class ImpRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "-1350"),
         (nameof(InfraVisionAttribute), "3"),
         (nameof(DisarmTrapsAttribute), "-3"),
-        (nameof(UseDeviceAttribute), "2"),
         (nameof(SavingThrowAttribute), "-1"),
         (nameof(StealthAttribute), "1"),
         (nameof(SearchAttribute), "-1"),

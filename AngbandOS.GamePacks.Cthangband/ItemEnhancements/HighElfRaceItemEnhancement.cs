@@ -16,7 +16,6 @@ public class HighElfRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "14250"),
         (nameof(InfraVisionAttribute), "4"),
         (nameof(DisarmTrapsAttribute), "4"),
-        (nameof(UseDeviceAttribute), "20"),
         (nameof(SavingThrowAttribute), "20"),
         (nameof(StealthAttribute), "4"),
         (nameof(SearchAttribute), "3"),

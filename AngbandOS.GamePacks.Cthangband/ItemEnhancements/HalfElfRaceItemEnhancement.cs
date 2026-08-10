@@ -15,7 +15,6 @@ public class HalfElfRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "1650"),
         (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "2"),
-        (nameof(UseDeviceAttribute), "3"),
         (nameof(SavingThrowAttribute), "3"),
         (nameof(StealthAttribute), "1"),
         (nameof(SearchAttribute), "6"),

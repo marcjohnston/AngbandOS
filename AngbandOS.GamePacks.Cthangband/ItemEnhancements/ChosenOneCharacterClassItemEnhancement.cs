@@ -13,7 +13,6 @@ public class ChosenOneCharacterClassItemEnhancement : ItemEnhancementGameConfigu
         (nameof(BonusDexterityAttribute), "2"),
         (nameof(ValueAttribute), "3150"),
         (nameof(DisarmTrapsAttribute), "25"),
-        (nameof(UseDeviceAttribute), "18"),
         (nameof(SavingThrowAttribute), "20"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "18"),

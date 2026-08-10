@@ -15,7 +15,6 @@ public class KoboldRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "-600"),
         (nameof(InfraVisionAttribute), "3"),
         (nameof(DisarmTrapsAttribute), "-2"),
-        (nameof(UseDeviceAttribute), "-3"),
         (nameof(SavingThrowAttribute), "-2"),
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "1"),

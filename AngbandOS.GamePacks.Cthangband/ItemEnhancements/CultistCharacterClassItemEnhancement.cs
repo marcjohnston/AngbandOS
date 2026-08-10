@@ -13,7 +13,6 @@ public class CultistCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(BonusStrengthAttribute), "-5"),
         (nameof(ValueAttribute), "-3300"),
         (nameof(DisarmTrapsAttribute), "30"),
-        (nameof(UseDeviceAttribute), "36"),
         (nameof(SavingThrowAttribute), "32"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "36"),

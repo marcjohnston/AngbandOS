@@ -13,7 +13,6 @@ public class WarriorCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(BonusDexterityAttribute), "2"),
         (nameof(ValueAttribute), "5550"),
         (nameof(DisarmTrapsAttribute), "25"),
-        (nameof(UseDeviceAttribute), "18"),
         (nameof(SavingThrowAttribute), "18"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "18"),

@@ -17,7 +17,6 @@ public class KlackonRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "2700"),
         (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "10"),
-        (nameof(UseDeviceAttribute), "5"),
         (nameof(SavingThrowAttribute), "5"),
         (nameof(StealthAttribute), "0"),
         (nameof(SearchAttribute), "-1"),

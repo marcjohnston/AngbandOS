@@ -13,7 +13,6 @@ public class ChannelerCharacterClassItemEnhancement : ItemEnhancementGameConfigu
         (nameof(BonusDexterityAttribute), "-1"),
         (nameof(ValueAttribute), "150"),
         (nameof(DisarmTrapsAttribute), "40"),
-        (nameof(UseDeviceAttribute), "40"),
         (nameof(SavingThrowAttribute), "30"),
         (nameof(SavingThrowBonusPerLevelAttribute), "9"),
         (nameof(UseDeviceAttribute), "40"),

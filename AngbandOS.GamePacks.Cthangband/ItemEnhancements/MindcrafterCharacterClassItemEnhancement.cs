@@ -13,7 +13,6 @@ public class MindcrafterCharacterClassItemEnhancement : ItemEnhancementGameConfi
         (nameof(BonusStrengthAttribute), "-1"),
         (nameof(ValueAttribute), "900"),
         (nameof(DisarmTrapsAttribute), "30"),
-        (nameof(UseDeviceAttribute), "30"),
         (nameof(SavingThrowAttribute), "30"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "30"),

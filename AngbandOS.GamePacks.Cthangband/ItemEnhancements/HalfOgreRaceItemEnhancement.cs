@@ -16,7 +16,6 @@ public class HalfOgreRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "2250"),
         (nameof(InfraVisionAttribute), "3"),
         (nameof(DisarmTrapsAttribute), "-3"),
-        (nameof(UseDeviceAttribute), "-5"),
         (nameof(SavingThrowAttribute), "-5"),
         (nameof(StealthAttribute), "-2"),
         (nameof(SearchAttribute), "-1"),

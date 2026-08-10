@@ -15,7 +15,6 @@ public class DraconianRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(ValueAttribute), "7050"),
         (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "-2"),
-        (nameof(UseDeviceAttribute), "5"),
         (nameof(SavingThrowAttribute), "3"),
         (nameof(StealthAttribute), "0"),
         (nameof(SearchAttribute), "1"),

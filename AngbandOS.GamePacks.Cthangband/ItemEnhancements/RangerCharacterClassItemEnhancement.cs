@@ -13,7 +13,6 @@ public class RangerCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
         (nameof(BonusDexterityAttribute), "1"),
         (nameof(ValueAttribute), "7650"),
         (nameof(DisarmTrapsAttribute), "30"),
-        (nameof(UseDeviceAttribute), "32"),
         (nameof(SavingThrowAttribute), "28"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "32"),
