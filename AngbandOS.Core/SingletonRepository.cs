@@ -376,7 +376,6 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<ProjectileMonsterSpell, ProjectileMonsterSpellGameConfiguration>(gameConfiguration.ProjectileMonsterSpells, restoreGameState);
         LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration>(gameConfiguration.ProjectileScripts, restoreGameState);
         LoadFromConfiguration<ProjectileScriptWeightedRandom, ProjectileScriptWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts, restoreGameState);
-        LoadFromConfiguration<RaceAbility, RaceAbilityGameConfiguration>(gameConfiguration.RaceAbilities, restoreGameState); // Composite singleton
         LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration>(gameConfiguration.RaceGenders, restoreGameState); // Composite singleton
         LoadFromConfiguration<RacePower, RacePowerGameConfiguration>(gameConfiguration.RacialPowers, restoreGameState); // Composite singleton
         LoadFromConfiguration<RacialPowerTest, RacialPowerTestGameConfiguration>(gameConfiguration.RacialPowerTests, restoreGameState);
