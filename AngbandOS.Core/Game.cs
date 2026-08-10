@@ -44,6 +44,8 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public bool IsSearching;
 
+    private bool PreviousMartialArtistArmorAux;
+
     /// <summary>
     /// Returns the current digging skill of the player. This is used to determine if the player can dig through walls or not.
     /// </summary>
@@ -218,7 +220,7 @@ internal partial class Game : IGameSerialize
             (nameof(SingletonRepository), saveGameState.CreateDerivedGameStateBag(SingletonRepository, typeof(SingletonRepository))),
 
             ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch)),
-            ("bools9", saveGameState.CreateGameStateBag(_findBreakLeft, _findBreakRight, IsSearching)),
+            ("bools9", saveGameState.CreateGameStateBag(_findBreakLeft, _findBreakRight, IsSearching, PreviousMartialArtistArmorAux)),
             ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment)),
             ("bools11", saveGameState.CreateGameStateBag(ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters)),
 
@@ -516,7 +518,7 @@ internal partial class Game : IGameSerialize
 
             // Now restore this game object itself.
             (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch) = restoreGameState.GetByKey("bools1").Get8Bools();
-            (_findBreakLeft, _findBreakRight, IsSearching) = restoreGameState.GetByKey("bools9").Get3Bools();
+            (_findBreakLeft, _findBreakRight, IsSearching, PreviousMartialArtistArmorAux) = restoreGameState.GetByKey("bools9").Get4Bools();
             (_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment) = restoreGameState.GetByKey("bools10").Get8Bools();
             (ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
 
@@ -2781,6 +2783,583 @@ internal partial class Game : IGameSerialize
             itemFactory.Stompable[StompableTypeEnum.Average] = itemFactory.InitialAverageStomp;
             itemFactory.Stompable[StompableTypeEnum.Good] = itemFactory.InitialGoodStomp;
             itemFactory.Stompable[StompableTypeEnum.Excellent] = itemFactory.InitialExcellentStomp;
+        }
+    }
+
+    private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
+    {
+        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(this);
+
+        // Squash, refresh and apply the character class attributes.  The character class selection may not have been performed at 
+        if (CharacterClass is not null)
+        {
+            CharacterClass.RefreshAndSquashAttributeSet();
+            effectiveAttributeSet.MergeAttributeSet(CharacterClass.AttributeSet);
+        }
+
+        if (Race is not null)
+        {
+            // Squash, refresh and apply the race attributes.
+            Race.RefreshAndSquashAttributeSet();
+            effectiveAttributeSet.MergeAttributeSet(Race.AttributeSet);
+        }
+
+        // Apply all of the mutations that the player has.        
+        ReadOnlyAttributeSet mutationsAttributeSet = GetMutationsAttributeSet();
+        effectiveAttributeSet.MergeAttributeSet(mutationsAttributeSet);
+
+        // Apply all of the items that the player is wielding.
+        EffectiveAttributeSet equipmentEffectiveAttributeSet = new EffectiveAttributeSet(this);
+        foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>())
+        {
+            foreach (int i in equipmentWieldSlot.InventorySlots)
+            {
+                Item? oPtr = GetInventoryItem(i);
+                if (oPtr != null)
+                {
+                    equipmentEffectiveAttributeSet.MergeAttributeSet(oPtr.EffectiveAttributeSet.ToReadOnly());
+                }
+            }
+        }
+
+        EquipmentAttributeSet = equipmentEffectiveAttributeSet.ToReadOnly();
+        effectiveAttributeSet.MergeAttributeSet(EquipmentAttributeSet);
+        return effectiveAttributeSet;
+    }
+
+    public void UpdateBonuses()
+    {
+        AttributeSet = BuildEffectiveAttributeSetForPlayer().ToReadOnly(); // TODO: This isn't being used yet.
+
+        HasAggravation = AttributeSet.GetBool(nameof(AggravateAttribute));
+        HasRegeneration = AttributeSet.GetBool(nameof(RegenAttribute)) && !AttributeSet.GetBool(nameof(SuppressRegenAttribute));
+        HasAcidImmunity = AttributeSet.GetBool(nameof(ImAcidAttribute));
+        GlowRadius = AttributeSet.GetInt(nameof(GlowRadiusAttribute)) + (AttributeSet.GetBool(nameof(ShFireAttribute)) ? 1 : 0);
+        HasAcidResistance = AttributeSet.GetBool(nameof(ResAcidAttribute)) || AcidResistanceTimer.Value > 0;
+        HasAntiMagic = AttributeSet.GetBool(nameof(NoMagicAttribute));
+        HasSustainCharisma = AttributeSet.GetBool(nameof(SustChaAttribute));
+        HasSustainConstitution = AttributeSet.GetBool(nameof(SustConAttribute));
+        HasSustainDexterity = AttributeSet.GetBool(nameof(SustDexAttribute));
+        HasSustainIntelligence = AttributeSet.GetBool(nameof(SustIntAttribute));
+        HasSustainStrength = AttributeSet.GetBool(nameof(SustStrAttribute));
+        HasSustainWisdom = AttributeSet.GetBool(nameof(SustWisAttribute));
+        HasAntiTeleport = AttributeSet.GetBool(nameof(NoTeleAttribute));
+        HasAntiTheft = AttributeSet.GetBool(nameof(AntiTheftAttribute));
+        HasBlessedBlade = AttributeSet.GetBool(nameof(BlessedAttribute));
+        HasBlindnessResistance = AttributeSet.GetBool(nameof(ResBlindAttribute));
+        HasChaosResistance = AttributeSet.GetBool(nameof(ResChaosAttribute));
+        HasColdImmunity = AttributeSet.GetBool(nameof(ImColdAttribute));
+        HasColdResistance = AttributeSet.GetBool(nameof(ResColdAttribute));
+        HasConfusionResistance = AttributeSet.GetBool(nameof(ResConfAttribute));
+        HasDarkResistance = AttributeSet.GetBool(nameof(ResDarkAttribute));
+        HasDisenchantResistance = AttributeSet.GetBool(nameof(ResDisenAttribute));
+        HasElementalVulnerability = AttributeSet.GetBool(nameof(ElementalVulnerabilityAttribute));
+        HasExperienceDrain = AttributeSet.GetBool(nameof(DrainExpAttribute));
+        HasExtraMight = AttributeSet.GetBool(nameof(XtraMightAttribute));
+        HasFearResistance = AttributeSet.GetBool(nameof(ResFearAttribute)) || HeroismTimer.Value > 0 || SuperheroismTimer.Value > 0;
+        HasFeatherFall = AttributeSet.GetBool(nameof(FeatherAttribute));
+        HasFireImmunity = AttributeSet.GetBool(nameof(ImFireAttribute));
+        HasFireResistance = AttributeSet.GetBool(nameof(ResFireAttribute)) || FireResistanceTimer.Value > 0 || HasFireImmunity;
+        HasFireSheath = AttributeSet.GetBool(nameof(ShFireAttribute));
+        HasFreeAction = AttributeSet.GetBool(nameof(FreeActAttribute));
+        HasHoldLife = AttributeSet.GetBool(nameof(HoldLifeAttribute));
+        HasLightningImmunity = AttributeSet.GetBool(nameof(ImElecAttribute));
+        HasLightningResistance = AttributeSet.GetBool(nameof(ResElecAttribute)) || LightningResistanceTimer.Value != 0;
+        HasElectricitySheath = AttributeSet.GetBool(nameof(ShElecAttribute));
+        HasLightResistance = AttributeSet.GetBool(nameof(ResLightAttribute));
+        HasNetherResistance = AttributeSet.GetBool(nameof(ResNetherAttribute));
+        HasNexusResistance = AttributeSet.GetBool(nameof(ResNexusAttribute));
+        HasPoisonResistance = AttributeSet.GetBool(nameof(ResPoisAttribute));
+        HasQuakeWeapon = AttributeSet.GetBool(nameof(QuakeAttribute));
+        HasRandomTeleport = AttributeSet.GetBool(nameof(TeleportAttribute));
+        HasReflection = AttributeSet.GetBool(nameof(ReflectAttribute)) || EtherealnessTimer.Value > 0;
+        HasSeeInvisibility = AttributeSet.GetBool(nameof(SeeInvisAttribute));
+        HasShardResistance = AttributeSet.GetBool(nameof(ResShardsAttribute));
+        HasSlowDigestion = AttributeSet.GetBool(nameof(SlowDigestAttribute));
+        HasSoundResistance = AttributeSet.GetBool(nameof(ResSoundAttribute));
+        HasTelepathy = AttributeSet.GetBool(nameof(TelepathyAttribute));
+        HasTimeResistance = AttributeSet.GetBool(nameof(ResTimeAttribute));
+        InfraVisionRange = AttributeSet.GetInt(nameof(InfraVisionAttribute)) + (InfravisionTimer.Value > 0 ? 1 : 0);
+        SkillSavingThrow = AttributeSet.GetInt(nameof(SavingThrowAttribute)) +
+            AttributeSet.GetInt(nameof(SavingThrowPerLevelAttribute)) * ExperienceLevel.IntValue +
+            (HasAntiMagic && SkillSavingThrow < 95 ? 95 : 0) +
+            SingletonRepository.Get<Ability>(nameof(WisdomAbility)).WisSavingThrowBonus;
+
+        #region Speed
+        int oldVisibleOnlySpeed = Speed - SpeedHidden; // The speed flag is only for visible speed
+
+        // Compute the weight limit.
+        int weightCarried = WeightCarried;
+        int carryingWeightLimit = SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrCarryingCapacity * 100;
+        SpeedHidden = AttributeSet.GetInt(nameof(SpeedHiddenAttribute)) +
+            (IsSearching ? -10 : 0);
+        Speed = 110 + SpeedHidden +
+            AttributeSet.GetInt(nameof(SpeedAttribute)) +
+            (Food.IntValue >= Constants.PyFoodMax ? -10 : 0) +
+            (weightCarried > carryingWeightLimit / 2 ? -(weightCarried - (carryingWeightLimit / 2)) / (carryingWeightLimit / 10) : 0) +
+            (HasteTimer.Value > 0 ? 10 : 0) +
+            (SlowTimer.Value > 0 ? -10 : 0) +
+            (!ArmorIsHeavy() ? ExperienceLevel.IntValue / 10 : 0);
+
+        int newVisibleOnlySpeed = Speed - SpeedHidden;
+        if (newVisibleOnlySpeed != oldVisibleOnlySpeed)
+        {
+            SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();
+        }
+        #endregion
+
+        #region Base, Known Bonus and Total Bonus Armor Class
+        BaseArmorClass = AttributeSet.GetInt(nameof(BaseArmorClassAttribute));
+        TotalBonusArmorClass = AttributeSet.GetInt(nameof(BonusArmorClassAttribute)) +
+            SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexArmorClassBonus +
+            (SuperheroismTimer.Value > 0 ? -10 : 0) +
+            (BlessingTimer.Value > 0 ? 5 : 0) +
+            (StoneskinTimer.Value > 0 ? 50 : 0) +
+            (InvulnerabilityTimer.Value > 0 ? 100 : 0) +
+            (EtherealnessTimer.Value > 0 ? 100 : 0);
+        if (!ArmorIsHeavy())
+        {
+            foreach (WieldSlot inventorySlot in SingletonRepository.Get<WieldSlot>())
+            {
+                if (inventorySlot.Count == 0)
+                {
+                    int bareArmorBonus = inventorySlot.BareArmorClassBonus;
+                    TotalBonusArmorClass += bareArmorBonus;
+                }
+            }
+        }
+        KnownBonusArmorClass = TotalBonusArmorClass;
+        foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>())
+        {
+            foreach (int i in equipmentWieldSlot.InventorySlots)
+            {
+                Item? oPtr = GetInventoryItem(i);
+                if (oPtr is not null && !oPtr.IsKnown())
+                {
+                    KnownBonusArmorClass -= oPtr.EffectiveAttributeSet.BonusArmorClass;
+                }
+            }
+        }
+        #endregion
+
+        SingletonRepository.Get<Ability>(nameof(StrengthAbility)).Bonus = AttributeSet.GetInt(nameof(BonusStrengthAttribute));
+        SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).Bonus = AttributeSet.GetInt(nameof(BonusIntelligenceAttribute));
+        SingletonRepository.Get<Ability>(nameof(WisdomAbility)).Bonus = AttributeSet.GetInt(nameof(BonusWisdomAttribute));
+        SingletonRepository.Get<Ability>(nameof(DexterityAbility)).Bonus = AttributeSet.GetInt(nameof(BonusDexterityAttribute));
+        SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).Bonus = AttributeSet.GetInt(nameof(BonusConstitutionAttribute));
+        SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Bonus = AttributeSet.GetInt(nameof(BonusCharismaAttribute));
+
+        foreach (Ability ability in SingletonRepository.Get<Ability>())
+        {
+            int top = ability.ModifyStatValue(ability.InnateMax, ability.Bonus);
+            if (ability.AdjustedMax != top)
+            {
+                ability.AdjustedMax = top;
+                SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Set();
+            }
+            int use = ability.ModifyStatValue(ability.Innate, ability.Bonus);
+            use = ability.OverrideUse(use);
+            if (ability.Adjusted != use)
+            {
+                ability.Adjusted = use;
+                SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Set();
+            }
+            int abilityTableIndex = 37; // The range for this value is 0-37.
+            if (use <= 18) // TODO: This should be a setting
+            {
+                abilityTableIndex = use - 3; // TODO: This should be a setting
+            }
+            else if (use <= 18 + 219)
+            {
+                abilityTableIndex = 15 + ((use - 18) / 10);
+            }
+            if (ability.TableIndex != abilityTableIndex)
+            {
+                ability.TableIndex = abilityTableIndex;
+                ability.FlagActions();
+            }
+        }
+
+        /// Old Compute
+
+        List<Bonuses> bonusesToMerge = new List<Bonuses>();
+        int attackBonus = 0;
+        int damageBonus = 0;
+        int displayedAttackBonus = 0;
+        int displayedDamageBonus = 0;
+        bool hasUnpriestlyWeapon = false;
+        bool hasHeavyBow = false;
+        bool hasHeavyWeapon = false;
+
+        int extraShots;
+        bool oldTelepathy = HasTelepathy;
+        bool oldSeeInv = HasSeeInvisibility;
+        int extraBlows = extraShots = 0;
+        if (Race is not null)
+        {
+            ComputedDisarmTraps = Race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + CharacterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
+            SkillUseDevice = Race.UseDevice + CharacterClass.UseDevice; // done
+            SkillStealth = Race.Stealth + CharacterClass.Stealth; // done .. need to copy
+            SkillSearching = Race.Search + CharacterClass.Search; // done .. need to copy
+            SkillPerception = Race.BasePerception + CharacterClass.BasePerception; // added to attributes
+            SkillMelee = Race.MeleeToHit + CharacterClass.MeleeToHit; // this appears to be tohit
+            SkillRanged = Race.RangedToHit + CharacterClass.RangedToHit; // added rangedtohit
+            SkillThrowing = Race.RangedToHit + CharacterClass.RangedToHit; // added throwingtohit
+        }
+        SkillDigging = 0;
+        MeleeAttacksPerRound = 1;
+        MissileAttacksPerRound = 1;
+        SkillPerception += SearchBonus;
+        SkillSearching += SearchBonus;
+        SkillStealth += StealthBonus;
+        foreach (Ability ability in SingletonRepository.Get<Ability>())
+        {
+            ability.OverrideUpdateBonuses();
+        }
+        foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>())
+        {
+            foreach (int i in equipmentWieldSlot.InventorySlots)
+            {
+                Item? oPtr = GetInventoryItem(i);
+                if (oPtr != null)
+                {
+                    SkillStealth += oPtr.EffectiveAttributeSet.Stealth;
+                    SkillSearching += oPtr.EffectiveAttributeSet.Search * 5;
+                    SkillPerception += oPtr.EffectiveAttributeSet.Search * 5;
+                    SkillDigging += oPtr.EffectiveAttributeSet.Tunnel * 20;
+                    extraBlows += oPtr.EffectiveAttributeSet.Attacks;
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get())
+                    {
+                        extraShots++;
+                    }
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(WraithAttribute)).Get())
+                    {
+                        EtherealnessTimer.SetValue(Math.Max(EtherealnessTimer.Value, 20));
+                    }
+                    if (equipmentWieldSlot.IsWeapon)
+                    {
+                        continue;
+                    }
+                    attackBonus += oPtr.EffectiveAttributeSet.MeleeToHit;
+                    damageBonus += oPtr.EffectiveAttributeSet.ToDamage;
+                    if (oPtr.IsKnown())
+                    {
+                        displayedAttackBonus += oPtr.EffectiveAttributeSet.MeleeToHit;
+                    }
+                    if (oPtr.IsKnown())
+                    {
+                        displayedDamageBonus += oPtr.EffectiveAttributeSet.ToDamage;
+                    }
+                }
+            }
+        }
+        if (StunTimer.Value > 50)
+        {
+            attackBonus -= 20;
+            displayedAttackBonus -= 20;
+            damageBonus -= 20;
+            displayedDamageBonus -= 20;
+        }
+        else if (StunTimer.Value != 0)
+        {
+            attackBonus -= 5;
+            displayedAttackBonus -= 5;
+            damageBonus -= 5;
+            displayedDamageBonus -= 5;
+        }
+        if (BlessingTimer.Value != 0)
+        {
+            attackBonus += 10;
+            displayedAttackBonus += 10;
+        }
+        if (HeroismTimer.Value != 0)
+        {
+            attackBonus += 12;
+            displayedAttackBonus += 12;
+        }
+        if (SuperheroismTimer.Value != 0)
+        {
+            attackBonus += 24;
+            displayedAttackBonus += 24;
+        }
+        if (HasTelepathy != oldTelepathy)
+        {
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+        }
+        if (HasSeeInvisibility != oldSeeInv)
+        {
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+        }
+        displayedDamageBonus += SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDamageBonus;
+        displayedAttackBonus += SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexAttackBonus;
+        displayedAttackBonus += SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrAttackBonus;
+        int hold = SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrMaxWeaponWeight;
+
+        // Enumerate all of the ranged weapon slots.
+        foreach (WieldSlot rangedWeaponInventorySlot in SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
+        {
+            // Enumerate all of the items in the slow.
+            foreach (int index in rangedWeaponInventorySlot.InventorySlots)
+            {
+                // Retrieve the item.
+                Item? oPtr = GetInventoryItem(index);
+                if (oPtr != null)
+                {
+                    // Determine if the ranged weapon is too heavy.
+                    if (hold < oPtr.EffectiveAttributeSet.Weight / 10)
+                    {
+                        attackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
+                        displayedAttackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
+                        hasHeavyBow = true;
+                    }
+                    else
+                    {
+                        RangedWeaponBonus[] table = SingletonRepository.Get<RangedWeaponBonus>(); // TODO: This will be slow because the GenericRepository is type casting every record.
+
+                        // Retrieve all of the records that apply.
+                        RangedWeaponBonus[] matchingBonuses = table.Where(_rangedWeaponBonus =>
+                            (_rangedWeaponBonus.CharacterClassBindingKey is null || _rangedWeaponBonus.CharacterClassBindingKey == CharacterClass.GetKey) &&
+                            (_rangedWeaponBonus.ItemClassBindingKey is null || _rangedWeaponBonus.ItemClassBindingKey == oPtr.ItemClass.GetKey) &&
+                            (_rangedWeaponBonus.ExperienceLevel is null || _rangedWeaponBonus.ExperienceLevel.Value <= ExperienceLevel.IntValue)).ToArray();
+
+                        foreach (RangedWeaponBonus rangedWeaponBonus in matchingBonuses)
+                        {
+                            MissileAttacksPerRound += rangedWeaponBonus.BonusMissileAttacksPerRound;
+                        }
+                        MissileAttacksPerRound += extraShots;
+                        if (MissileAttacksPerRound < 1)
+                        {
+                            MissileAttacksPerRound = 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        // TODO: Legacy code only had 1 possibility for the melee weapon.  Now we are scanning multiple wield slots capable of multiple items.
+        bool newMartialArtistAndArmorIsHeavy = false;
+        foreach (WieldSlot meleeWeaponInventorySlot in SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsMeleeWeapon))
+        {
+            foreach (int index in meleeWeaponInventorySlot.InventorySlots)
+            {
+                Item? oPtr = GetInventoryItem(index);
+                if (oPtr != null && hold < oPtr.EffectiveAttributeSet.Weight / 10)
+                {
+                    attackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
+                    displayedAttackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
+                    hasHeavyWeapon = true;
+                }
+                if (oPtr != null && !hasHeavyWeapon)
+                {
+                    int num = CharacterClass.MaximumMeleeAttacksPerRound(ExperienceLevel.IntValue);
+                    int wgt = CharacterClass.MaximumWeight;
+                    int mul = CharacterClass.AttackSpeedMultiplier;
+                    int div = oPtr.EffectiveAttributeSet.Weight < wgt ? wgt : oPtr.EffectiveAttributeSet.Weight;
+                    int strIndex = SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrAttackSpeedComponent * mul / div;
+                    if (strIndex > 11)
+                    {
+                        strIndex = 11;
+                    }
+                    int dexIndex = SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexAttackSpeedComponent;
+                    if (dexIndex > 11)
+                    {
+                        dexIndex = 11;
+                    }
+                    MeleeAttacksPerRound = BlowsTable[strIndex][dexIndex];
+                    if (MeleeAttacksPerRound > num)
+                    {
+                        MeleeAttacksPerRound = num;
+                    }
+                    MeleeAttacksPerRound += extraBlows;
+                    if (CharacterClass.MeleeAttacksPerRoundBonus is not null)
+                    {
+                        int meleeAttacksPerRound = ComputeIntegerExpression(CharacterClass.MeleeAttacksPerRoundBonus).Value;
+                        MeleeAttacksPerRound += meleeAttacksPerRound;
+                    }
+                    if (MeleeAttacksPerRound < 1)
+                    {
+                        MeleeAttacksPerRound = 1;
+                    }
+                    SkillDigging += oPtr.EffectiveAttributeSet.Weight / 10;
+                }
+                else if (IsUsingMartialArts())
+                {
+                    MeleeAttacksPerRound = 0;
+                    if (ExperienceLevel.IntValue > 9)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 19)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 29)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 34)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 39)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 44)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 49)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ArmorIsHeavy())
+                    {
+                        MeleeAttacksPerRound /= 2;
+                    }
+                    MeleeAttacksPerRound += 1 + extraBlows;
+                    if (!ArmorIsHeavy())
+                    {
+                        attackBonus += ExperienceLevel.IntValue / 3;
+                        damageBonus += ExperienceLevel.IntValue / 3;
+                        displayedAttackBonus += ExperienceLevel.IntValue / 3;
+                        displayedDamageBonus += ExperienceLevel.IntValue / 3;
+                    }
+                }
+
+                if (CharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor is not null)
+                {
+                    int divisor = CharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor.Value;
+                    attackBonus += ExperienceLevel.IntValue / divisor;
+                    damageBonus += ExperienceLevel.IntValue / divisor;
+                    displayedAttackBonus += ExperienceLevel.IntValue / divisor;
+                    displayedDamageBonus += ExperienceLevel.IntValue / divisor;
+                }
+
+                if (CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon is not null && !HasBlessedBlade && oPtr != null && (oPtr.ItemClass == SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) || oPtr.ItemClass == SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass))))
+                {
+                    attackBonus += CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    damageBonus += CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    displayedAttackBonus += CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    displayedDamageBonus += CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    hasUnpriestlyWeapon = true;
+                }
+
+                Bonuses? characterClassMeleeWeaponBonuses = CharacterClass.GetBonusesForMeleeWeapon(oPtr);
+                if (characterClassMeleeWeaponBonuses is not null)
+                {
+                    bonusesToMerge.Add(characterClassMeleeWeaponBonuses);
+                }
+
+                if (CharacterClass.IsMartialArtist && ArmorIsHeavy())
+                {
+                    newMartialArtistAndArmorIsHeavy = true;
+                }
+            }
+        }
+
+        SkillStealth++;
+        ComputedDisarmTraps += SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexDisarmBonus;
+        ComputedDisarmTraps += SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntDisarmBonus;
+        SkillUseDevice += SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntUseDeviceBonus;
+        SkillDigging += SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDiggingBonus;
+        ComputedDisarmTraps += (CharacterClass.DisarmBonusPerLevel * ExperienceLevel.IntValue) / 10;
+        SkillUseDevice += (CharacterClass.DeviceBonusPerLevel * ExperienceLevel.IntValue) / 10;
+        SkillStealth += (CharacterClass.StealthBonusPerLevel * ExperienceLevel.IntValue) / 10;
+        SkillMelee += (CharacterClass.MeleeAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;
+        SkillRanged += (CharacterClass.RangedAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;
+        SkillThrowing += (CharacterClass.RangedAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;
+        if (SkillStealth > 30)
+        {
+            SkillStealth = 30;
+        }
+        if (SkillStealth < 0)
+        {
+            SkillStealth = 0;
+        }
+        if (SkillDigging < 1)
+        {
+            SkillDigging = 1;
+        }
+
+        // Create a new bonuses that we will use to merge with all of the additionals.
+        Bonuses newBonuses = new Bonuses
+        {
+            AttackBonus = attackBonus,
+            DamageBonus = damageBonus,
+            DisplayedAttackBonus = displayedAttackBonus,
+            DisplayedDamageBonus = displayedDamageBonus,
+            HasUnpriestlyWeapon = hasUnpriestlyWeapon,
+            HasHeavyBow = hasHeavyBow,
+            HasHeavyWeapon = hasHeavyWeapon,
+        };
+
+        // Merge the additional bonuses.
+        foreach (Bonuses bonuses in bonusesToMerge)
+        {
+            newBonuses = newBonuses.Merge(bonuses);
+        }
+        // Grab a copy of the previous/old bonuses for us to render messages.
+        Bonuses previousBonuses = Bonuses;
+
+        // Set the game bonuses with the new immutable object.
+        Bonuses = newBonuses;
+
+        if (CharacterXtra)
+        {
+            return;
+        }
+
+        if (previousBonuses.HasHeavyBow != newBonuses.HasHeavyBow) // TODO: This should be moved to the wield action
+        {
+            if (newBonuses.HasHeavyBow)
+            {
+                MsgPrint("You have trouble wielding such a heavy bow.");
+            }
+            else if (SingletonRepository.Get<WieldSlot>(nameof(RangedWeaponWieldSlot)).Count > 0)
+            {
+                MsgPrint("You have no trouble wielding your bow.");
+            }
+            else
+            {
+                MsgPrint("You feel relieved to put down your heavy bow.");
+            }
+        }
+
+        if (previousBonuses.HasHeavyWeapon != newBonuses.HasHeavyWeapon) // TODO: This should be moved to the wield action
+        {
+            if (newBonuses.HasHeavyWeapon)
+            {
+                MsgPrint("You have trouble wielding such a heavy weapon.");
+            }
+            else if (SingletonRepository.Get<WieldSlot>(nameof(MeleeWeaponWieldSlot)).Count > 0)
+            {
+                MsgPrint("You have no trouble wielding your weapon.");
+            }
+            else
+            {
+                MsgPrint("You feel relieved to put down your heavy weapon.");
+            }
+        }
+        if (previousBonuses.HasUnpriestlyWeapon != newBonuses.HasUnpriestlyWeapon) // TODO: This should be moved to the wield action
+        {
+            if (newBonuses.HasUnpriestlyWeapon)
+            {
+                MsgPrint(CharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Your weapon restricts the flow of chaos through you." : "You do not feel comfortable with your weapon.");
+            }
+            else if (GetInventoryItem(InventorySlotEnum.MeleeWeapon) != null)
+            {
+                MsgPrint("You feel comfortable with your weapon.");
+            }
+            else
+            {
+                MsgPrint(CharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Chaos flows freely through you again." : "You feel more comfortable after removing your weapon.");
+            }
+        }
+        if (newMartialArtistAndArmorIsHeavy != PreviousMartialArtistArmorAux) // TODO: This should be moved to the wield action
+        {
+            MsgPrint(ArmorIsHeavy() ? "The weight of your armor disrupts your balance." : "You regain your balance.");
+            PreviousMartialArtistArmorAux = newMartialArtistAndArmorIsHeavy;
         }
     }
 
