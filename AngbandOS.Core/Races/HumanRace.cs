@@ -13,7 +13,6 @@ internal class HumanRace : Race
         (1, nameof(HumanRaceItemEnhancement)) 
     };
     public override string Title => "Human";
-    public override int UseDevice => 0;
     public override int SavingThrow => 0;
     public override int Stealth => 0;
     public override int Search => 0;

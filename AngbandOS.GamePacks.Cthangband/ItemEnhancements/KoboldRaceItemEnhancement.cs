@@ -20,5 +20,6 @@ public class KoboldRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "1"),
         (nameof(BonusStrengthAttribute), "1"),
+        (nameof(UseDeviceAttribute), "-3"),
     };
 }

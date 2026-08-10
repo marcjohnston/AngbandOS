@@ -20,6 +20,7 @@ public class DarkElfRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "20"),
         (nameof(StealthAttribute), "3"),
         (nameof(SearchAttribute), "8"),
-        (nameof(BonusStrengthAttribute), "-1")
+        (nameof(BonusStrengthAttribute), "-1"),
+        (nameof(UseDeviceAttribute), "15"),
     };
 }

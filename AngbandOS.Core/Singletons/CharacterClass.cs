@@ -633,8 +633,6 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// </summary>
     public virtual bool OutfitsWithScrollsOfLight => false;
 
-    public abstract int UseDevice { get; }
-
     public abstract int MeleeToHit { get; }
 
     public abstract int RangedToHit { get; }
@@ -644,8 +642,6 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public abstract int BasePerception { get; }
 
     public abstract int Stealth { get; }
-
-    public abstract int DeviceBonusPerLevel { get; }
 
     public abstract int DisarmBonusPerLevel { get; }
 

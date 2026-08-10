@@ -15,6 +15,8 @@ public class DruidCharacterClassItemEnhancement : ItemEnhancementGameConfigurati
         (nameof(DisarmTrapsAttribute), "30"),
         (nameof(UseDeviceAttribute), "30"),
         (nameof(SavingThrowAttribute), "32"),
-        (nameof(SavingThrowPerLevelAttribute), "12"),
+        (nameof(SavingThrowBonusPerLevelAttribute), "12"),
+        (nameof(UseDeviceAttribute), "30"),
+        (nameof(UseDeviceBonusPerLevelAttribute), "10")
     };
 }

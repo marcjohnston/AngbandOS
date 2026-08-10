@@ -19,5 +19,6 @@ public class TchoTchoRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "2"),
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "1"),
+        (nameof(UseDeviceAttribute), "-10"),
     };
 }

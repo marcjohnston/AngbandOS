@@ -14,5 +14,6 @@ public class HumanRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "0"),
         (nameof(StealthAttribute), "0"),
         (nameof(SearchAttribute), "0"),
+        (nameof(UseDeviceAttribute), "0"),
     };
 }

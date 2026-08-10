@@ -20,6 +20,7 @@ public class HalfOgreRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "-5"),
         (nameof(StealthAttribute), "-2"),
         (nameof(SearchAttribute), "-1"),
-        (nameof(BonusStrengthAttribute), "3")
+        (nameof(BonusStrengthAttribute), "3"),
+        (nameof(UseDeviceAttribute), "-5"),
     };
 }

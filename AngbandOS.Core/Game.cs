@@ -16,7 +16,6 @@ internal partial class Game : IGameSerialize
     public int SkillSearching;
     public int SkillStealth;
     public int SkillThrowing;
-    public int SkillUseDevice;
     public int SocialClass;
     public int SearchBonus;
     public int StealthBonus;
@@ -152,6 +151,11 @@ internal partial class Game : IGameSerialize
     public int SpeedHidden;
 
     /// <summary>
+    /// Returns the current skill level for using devices.  This is used to determine if the player can use a device or not.
+    /// </summary>
+    public int UseDevice;
+
+    /// <summary>
     /// Grants temporary resistance to acid.
     /// </summary>
     public Timer AcidResistanceTimer { get; }
@@ -235,7 +239,6 @@ internal partial class Game : IGameSerialize
             (nameof(SkillSearching), saveGameState.CreateGameStateBag(SkillSearching)),
             (nameof(SkillStealth), saveGameState.CreateGameStateBag(SkillStealth)),
             (nameof(SkillThrowing), saveGameState.CreateGameStateBag(SkillThrowing)),
-            (nameof(SkillUseDevice), saveGameState.CreateGameStateBag(SkillUseDevice)),
             (nameof(SocialClass), saveGameState.CreateGameStateBag(SocialClass)),
             (nameof(SearchBonus), saveGameState.CreateGameStateBag(SearchBonus)),
             (nameof(StealthBonus), saveGameState.CreateGameStateBag(StealthBonus)),
@@ -533,7 +536,6 @@ internal partial class Game : IGameSerialize
             SkillSearching = restoreGameState.GetByKey(nameof(SkillSearching)).GetInt();
             SkillStealth = restoreGameState.GetByKey(nameof(SkillStealth)).GetInt();
             SkillThrowing = restoreGameState.GetByKey(nameof(SkillThrowing)).GetInt();
-            SkillUseDevice = restoreGameState.GetByKey(nameof(SkillUseDevice)).GetInt();
             SocialClass = restoreGameState.GetByKey(nameof(SocialClass)).GetInt();
             SearchBonus = restoreGameState.GetByKey(nameof(SearchBonus)).GetInt();
             StealthBonus = restoreGameState.GetByKey(nameof(StealthBonus)).GetInt();
@@ -2881,9 +2883,12 @@ internal partial class Game : IGameSerialize
         HasTimeResistance = AttributeSet.GetBool(nameof(ResTimeAttribute));
         InfraVisionRange = AttributeSet.GetInt(nameof(InfraVisionAttribute)) + (InfravisionTimer.Value > 0 ? 1 : 0);
         SkillSavingThrow = AttributeSet.GetInt(nameof(SavingThrowAttribute)) +
-            AttributeSet.GetInt(nameof(SavingThrowPerLevelAttribute)) * ExperienceLevel.IntValue +
             (HasAntiMagic && SkillSavingThrow < 95 ? 95 : 0) +
+            AttributeSet.GetInt(nameof(SavingThrowBonusPerLevelAttribute)) * ExperienceLevel.IntValue +
             SingletonRepository.Get<Ability>(nameof(WisdomAbility)).WisSavingThrowBonus;
+        UseDevice = AttributeSet.GetInt(nameof(UseDeviceAttribute)) +
+            (AttributeSet.GetInt(nameof(UseDeviceBonusPerLevelAttribute)) * ExperienceLevel.IntValue) / 10 +
+            SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntUseDeviceBonus;
 
         #region Speed
         int oldVisibleOnlySpeed = Speed - SpeedHidden; // The speed flag is only for visible speed
@@ -2998,7 +3003,6 @@ internal partial class Game : IGameSerialize
         if (Race is not null)
         {
             ComputedDisarmTraps = Race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + CharacterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
-            SkillUseDevice = Race.UseDevice + CharacterClass.UseDevice; // done
             SkillStealth = Race.Stealth + CharacterClass.Stealth; // done .. need to copy
             SkillSearching = Race.Search + CharacterClass.Search; // done .. need to copy
             SkillPerception = Race.BasePerception + CharacterClass.BasePerception; // added to attributes
@@ -3261,10 +3265,8 @@ internal partial class Game : IGameSerialize
         SkillStealth++;
         ComputedDisarmTraps += SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexDisarmBonus;
         ComputedDisarmTraps += SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntDisarmBonus;
-        SkillUseDevice += SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntUseDeviceBonus;
         SkillDigging += SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDiggingBonus;
         ComputedDisarmTraps += (CharacterClass.DisarmBonusPerLevel * ExperienceLevel.IntValue) / 10;
-        SkillUseDevice += (CharacterClass.DeviceBonusPerLevel * ExperienceLevel.IntValue) / 10;
         SkillStealth += (CharacterClass.StealthBonusPerLevel * ExperienceLevel.IntValue) / 10;
         SkillMelee += (CharacterClass.MeleeAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;
         SkillRanged += (CharacterClass.RangedAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;

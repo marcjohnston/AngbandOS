@@ -14,7 +14,6 @@ internal class HalfTrollRace : Race
         (15, nameof(HalfTrollRaceLevel15ItemEnhancement))
     };
     public override string Title => "Half Troll";
-    public override int UseDevice => -8;
     public override int SavingThrow => -8;
     public override int Stealth => -2;
     public override int Search => -1;

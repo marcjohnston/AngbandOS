@@ -15,6 +15,8 @@ public class MysticCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
         (nameof(DisarmTrapsAttribute), "40"),
         (nameof(UseDeviceAttribute), "30"),
         (nameof(SavingThrowAttribute), "30"),
-        (nameof(SavingThrowPerLevelAttribute), "11"),
+        (nameof(SavingThrowBonusPerLevelAttribute), "11"),
+        (nameof(UseDeviceAttribute), "30"),
+        (nameof(UseDeviceBonusPerLevelAttribute), "11")
     };
 }

@@ -15,7 +15,6 @@ internal class HighMageCharacterClass : CharacterClass
     public override int ID => 10;
     public override int FriendsUpkeepDivider => 12;
     public override string Title => "High-Mage";
-    public override int UseDevice => 38;
     public override int Stealth => 2;
     public override string InvokeSpiritsBeamProbabilityRollExpression => "X+10";
     public override string SpellOfWonderBeamProbabilityRollExpression => "X+10";
@@ -27,7 +26,6 @@ internal class HighMageCharacterClass : CharacterClass
     public override int MeleeToHit => 34;
     public override int RangedToHit => 20;
     public override int DisarmBonusPerLevel => 7;
-    public override int DeviceBonusPerLevel => 13;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 15;
     public override int RangedAttackBonusPerLevel => 15;

@@ -19,6 +19,7 @@ public class HalfOrcRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "-3"),
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "0"),
-        (nameof(BonusStrengthAttribute), "2")
+        (nameof(BonusStrengthAttribute), "2"),
+        (nameof(UseDeviceAttribute), "-3"),
     };
 }

@@ -13,7 +13,6 @@ internal class VampireRace : Race
         (1, nameof(VampireRaceItemEnhancement)) 
     };
     public override string Title => "Vampire";
-    public override int UseDevice => 10;
     public override int SavingThrow => 10;
     public override int Stealth => 4;
     public override int Search => 1;

@@ -23,6 +23,7 @@ public class GolemRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "10"),
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "-1"),
-        (nameof(BonusStrengthAttribute), "4")
+        (nameof(BonusStrengthAttribute), "4"),
+        (nameof(UseDeviceAttribute), "15"),
     };
 }

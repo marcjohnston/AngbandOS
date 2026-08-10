@@ -18,14 +18,12 @@ internal class MonkCharacterClass : CharacterClass
     public override string Title => "Monk";
     public override int? InstantSpeedLevel => 10;
     public override int? InstantFreeActionLevel => 25;
-    public override int UseDevice => 32;
     public override int Stealth => 5;
     public override int Search => 32;
     public override int BasePerception => 24;
     public override int MeleeToHit => 64;
     public override int RangedToHit => 50;
     public override int DisarmBonusPerLevel => 15;
-    public override int DeviceBonusPerLevel => 12;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 40;
     public override int RangedAttackBonusPerLevel => 30;

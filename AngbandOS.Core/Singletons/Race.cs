@@ -103,7 +103,6 @@ internal abstract class Race : IGetKey, IGameSerialize
 
     public abstract int AgeRange { get; }
     public abstract int BaseAge { get; }
-    public abstract int UseDevice { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
     public abstract int MeleeToHit { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
     public abstract int RangedToHit { get; }
     public abstract int SavingThrow { get; }

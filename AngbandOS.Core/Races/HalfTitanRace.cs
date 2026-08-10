@@ -13,7 +13,6 @@ internal class HalfTitanRace : Race
         (1, nameof(HalfTitanRaceItemEnhancement)) 
     };
     public override string Title => "Half Titan";
-    public override int UseDevice => 5;
     public override int SavingThrow => 2;
     public override int Stealth => -2;
     public override int Search => 1;

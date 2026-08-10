@@ -13,7 +13,6 @@ internal class MiriNigriRace : Race
         (1, nameof(MiriNigriRaceItemEnhancement)) 
     };
     public override string Title => "Miri Nigri";
-    public override int UseDevice => -2;
     public override int SavingThrow => -1;
     public override int Stealth => -1;
     public override int Search => -1;

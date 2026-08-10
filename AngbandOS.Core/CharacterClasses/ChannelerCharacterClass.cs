@@ -14,7 +14,6 @@ internal class ChannelerCharacterClass : CharacterClass
     };
     public override int ID => 13;
     public override string Title => "Channeler";
-    public override int UseDevice => 40;
     public override int Stealth => 2;
     public override int Search => 16;
     public override int BasePerception => 20;
@@ -23,7 +22,6 @@ internal class ChannelerCharacterClass : CharacterClass
     public override int MeleeToHit => 40;
     public override int RangedToHit => 30;
     public override int DisarmBonusPerLevel => 12;
-    public override int DeviceBonusPerLevel => 13;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 15;
     public override int RangedAttackBonusPerLevel => 15;

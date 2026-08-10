@@ -19,6 +19,7 @@ public class DraconianRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "3"),
         (nameof(StealthAttribute), "0"),
         (nameof(SearchAttribute), "1"),
-        (nameof(BonusStrengthAttribute), "2")
+        (nameof(BonusStrengthAttribute), "2"),
+        (nameof(UseDeviceAttribute), "5"),
     };
 }

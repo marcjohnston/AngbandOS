@@ -13,7 +13,6 @@ internal class KlackonRace : Race
         (1, nameof(KlackonRaceItemEnhancement)) 
     };
     public override string Title => "Klackon";
-    public override int UseDevice => 5;
     public override int SavingThrow => 5;
     public override int Stealth => 0;
     public override int Search => -1;

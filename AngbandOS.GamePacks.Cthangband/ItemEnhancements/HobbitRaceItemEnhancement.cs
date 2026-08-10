@@ -19,6 +19,7 @@ public class HobbitRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "18"),
         (nameof(StealthAttribute), "5"),
         (nameof(SearchAttribute), "12"),
-        (nameof(BonusStrengthAttribute), "-2")
+        (nameof(BonusStrengthAttribute), "-2"),
+        (nameof(UseDeviceAttribute), "18"),
     };
 }

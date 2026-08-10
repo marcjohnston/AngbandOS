@@ -14,7 +14,6 @@ internal class GolemRace : Race
         (35, nameof(GolemRaceLevel35ItemEnhancement))
     };
     public override string Title => "Golem";
-    public override int UseDevice => -5;
     public override int SavingThrow => 10;
     public override int Stealth => -1;
     public override int Search => -1;

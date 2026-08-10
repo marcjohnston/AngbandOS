@@ -57,7 +57,7 @@ internal class AimWandScript : UniversalScript, IGetKey
         int itemLevel = item.LevelNormallyFound;
         // Chance of success is your skill - item level, with item level capped at 50 and your
         // skill halved if you're confused
-        int chance = Game.SkillUseDevice;
+        int chance = Game.UseDevice;
         if (Game.ConfusionTimer.Value != 0)
         {
             chance /= 2;

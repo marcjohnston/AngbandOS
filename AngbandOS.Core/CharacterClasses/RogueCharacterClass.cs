@@ -16,7 +16,6 @@ internal class RogueCharacterClass : CharacterClass
     public override int ID => 3;
     public override bool CanBackstab => true;
     public override string Title => "Rogue";
-    public override int UseDevice => 32;
     public override int Stealth => 5;
     public override int Search => 32;
     public override int BasePerception => 24;
@@ -24,7 +23,6 @@ internal class RogueCharacterClass : CharacterClass
     public override int MeleeToHit => 60;
     public override int RangedToHit => 66;
     public override int DisarmBonusPerLevel => 15;
-    public override int DeviceBonusPerLevel => 10;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 40;
     public override int RangedAttackBonusPerLevel => 10;

@@ -13,7 +13,6 @@ internal class HalfOrcRace : Race
         (1, nameof(HalfOrcRaceItemEnhancement)) 
     };
     public override string Title => "Half Orc";
-    public override int UseDevice => -3;
     public override int SavingThrow => -3;
     public override int Stealth => -1;
     public override int Search => 0;

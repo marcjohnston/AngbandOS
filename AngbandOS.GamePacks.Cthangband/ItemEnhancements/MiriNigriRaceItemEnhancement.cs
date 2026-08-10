@@ -20,5 +20,6 @@ public class MiriNigriRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "-1"),
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "-1"),
+        (nameof(UseDeviceAttribute), "-2"),
     };
 }

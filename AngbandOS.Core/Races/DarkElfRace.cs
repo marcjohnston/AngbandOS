@@ -14,7 +14,6 @@ internal class DarkElfRace : Race
         (20, nameof(DarkElfRaceLevel20ItemEnhancement))
     };
     public override string Title => "Dark Elf";
-    public override int UseDevice => 15;
     public override int SavingThrow => 20;
     public override int Stealth => 3;
     public override int Search => 8;

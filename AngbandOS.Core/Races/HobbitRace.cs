@@ -13,7 +13,6 @@ internal class HobbitRace : Race
         (1, nameof(HobbitRaceItemEnhancement)) 
     };
     public override string Title => "Hobbit";
-    public override int UseDevice => 18;
     public override int SavingThrow => 18;
     public override int Stealth => 5;
     public override int Search => 12;

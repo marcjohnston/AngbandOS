@@ -13,7 +13,6 @@ internal class TchoTchoRace : Race
         (1, nameof(TchoTchoRaceItemEnhancement)) 
     };
     public override string Title => "Tcho-Tcho";
-    public override int UseDevice => -10;
     public override int SavingThrow => 2;
     public override int Stealth => -1;
     public override int Search => 1;

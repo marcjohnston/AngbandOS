@@ -13,7 +13,6 @@ internal class SpriteRace : Race
         (1, nameof(SpriteRaceItemEnhancement)) 
     };
     public override string Title => "Sprite";
-    public override int UseDevice => 10;
     public override int SavingThrow => 10;
     public override int Stealth => 4;
     public override int Search => 10;

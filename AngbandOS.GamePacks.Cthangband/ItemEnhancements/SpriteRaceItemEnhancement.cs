@@ -23,5 +23,6 @@ public class SpriteRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "10"),
         (nameof(StealthAttribute), "4"),
         (nameof(SearchAttribute), "10"),
+        (nameof(UseDeviceAttribute), "10"),
     };
 }

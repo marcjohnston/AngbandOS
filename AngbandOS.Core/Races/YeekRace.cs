@@ -14,7 +14,6 @@ internal class YeekRace : Race
         (20, nameof(YeekRaceLevel20ItemEnhancement))
     };
     public override string Title => "Yeek";
-    public override int UseDevice => 4;
     public override int SavingThrow => 10;
     public override int Stealth => 3;
     public override int Search => 5;

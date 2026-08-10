@@ -13,7 +13,6 @@ internal class HalfGiantRace : Race
         (1, nameof(HalfGiantRaceItemEnhancement)) 
     };
     public override string Title => "Half Giant";
-    public override int UseDevice => -8;
     public override int SavingThrow => -6;
     public override int Stealth => -2;
     public override int Search => -1;

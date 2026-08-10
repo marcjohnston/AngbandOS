@@ -13,7 +13,6 @@ internal class GnomeRace : Race
         (1, nameof(GnomeRaceItemEnhancement)) 
     };
     public override string Title => "Gnome";
-    public override int UseDevice => 12;
     public override int SavingThrow => 12;
     public override int Stealth => 3;
     public override int Search => 6;

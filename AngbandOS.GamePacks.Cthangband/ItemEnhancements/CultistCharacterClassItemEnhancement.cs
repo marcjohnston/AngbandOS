@@ -15,6 +15,8 @@ public class CultistCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(DisarmTrapsAttribute), "30"),
         (nameof(UseDeviceAttribute), "36"),
         (nameof(SavingThrowAttribute), "32"),
-        (nameof(SavingThrowPerLevelAttribute), "10"),
+        (nameof(SavingThrowBonusPerLevelAttribute), "10"),
+        (nameof(UseDeviceAttribute), "36"),
+        (nameof(UseDeviceBonusPerLevelAttribute), "13")
     };
 }

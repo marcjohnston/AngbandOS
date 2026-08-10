@@ -19,6 +19,7 @@ public class GnomeRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "12"),
         (nameof(StealthAttribute), "3"),
         (nameof(SearchAttribute), "6"),
-        (nameof(BonusStrengthAttribute), "-1")
+        (nameof(BonusStrengthAttribute), "-1"),
+        (nameof(UseDeviceAttribute), "12"),
     };
 }

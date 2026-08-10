@@ -22,5 +22,6 @@ public class KlackonRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(StealthAttribute), "0"),
         (nameof(SearchAttribute), "-1"),
         (nameof(BonusStrengthAttribute), "2"),
+        (nameof(UseDeviceAttribute), "5"),
     };
 }

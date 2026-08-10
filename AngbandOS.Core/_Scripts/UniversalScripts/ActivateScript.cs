@@ -52,7 +52,7 @@ internal class ActivateScript : UniversalScript, IGetKey
 
         // Work out the chance of using the item successfully based on its level and the
         // player's skill
-        int chance = Game.SkillUseDevice;
+        int chance = Game.UseDevice;
         if (Game.ConfusionTimer.Value != 0)
         {
             chance /= 2;

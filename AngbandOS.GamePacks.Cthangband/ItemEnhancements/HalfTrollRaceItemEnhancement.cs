@@ -19,6 +19,7 @@ public class HalfTrollRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "-8"),
         (nameof(StealthAttribute), "-2"),
         (nameof(SearchAttribute), "-1"),
-        (nameof(BonusStrengthAttribute), "4")
+        (nameof(BonusStrengthAttribute), "4"),
+        (nameof(UseDeviceAttribute), "-8"),
     };
 }

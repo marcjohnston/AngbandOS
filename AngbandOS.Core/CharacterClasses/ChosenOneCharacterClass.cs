@@ -66,14 +66,12 @@ internal class ChosenOneCharacterClass : CharacterClass
     public override int? InstantShardsResistanceLevel => 48;
     public override int? InstantNetherResistanceLevel => 50;
     public override int? ItemRadiusOverride => 2;
-    public override int UseDevice => 18;
     public override int Stealth => 1;
     public override int Search => 16;
     public override int BasePerception => 4;
     public override int MeleeToHit => 50;
     public override int RangedToHit => 32;
     public override int DisarmBonusPerLevel => 12;
-    public override int DeviceBonusPerLevel => 7;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 20;
     public override int RangedAttackBonusPerLevel => 20;

@@ -19,6 +19,7 @@ public class DwarfRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "10"),
         (nameof(StealthAttribute), "-1"),
         (nameof(SearchAttribute), "7"),
-        (nameof(BonusStrengthAttribute), "2")
+        (nameof(BonusStrengthAttribute), "2"),
+        (nameof(UseDeviceAttribute), "9"),
     };
 }

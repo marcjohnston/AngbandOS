@@ -17,14 +17,12 @@ internal class PaladinCharacterClass : CharacterClass
     public override int ID => 5;
     public override string Title => "Paladin";
     public override int? InstantFearResistanceLevel => 40;
-    public override int UseDevice => 24;
     public override int Stealth => 1;
     public override int Search => 12;
     public override int BasePerception => 2;
     public override int MeleeToHit => 68;
     public override int RangedToHit => 40;
     public override int DisarmBonusPerLevel => 7;
-    public override int DeviceBonusPerLevel => 10;
     public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 35;
     public override int RangedAttackBonusPerLevel => 30;

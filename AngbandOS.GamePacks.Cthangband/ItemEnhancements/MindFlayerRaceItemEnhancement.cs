@@ -21,5 +21,6 @@ public class MindFlayerRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "15"),
         (nameof(StealthAttribute), "2"),
         (nameof(SearchAttribute), "5"),
+        (nameof(UseDeviceAttribute), "25"),
     };
 }

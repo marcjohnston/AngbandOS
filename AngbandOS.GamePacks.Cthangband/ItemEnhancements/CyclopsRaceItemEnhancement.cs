@@ -20,6 +20,7 @@ public class CyclopsRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "-5"),
         (nameof(StealthAttribute), "-2"),
         (nameof(SearchAttribute), "-2"),
-        (nameof(BonusStrengthAttribute), "4")
+        (nameof(BonusStrengthAttribute), "4"),
+        (nameof(UseDeviceAttribute), "-5"),
     };
 }

@@ -53,7 +53,7 @@ internal class UseStaffScript : UniversalScript, IGetKey
         int itemLevel = item.LevelNormallyFound;
         // We have a chance of the device working equal to skill (halved if confused) - item
         // level (capped at 50)
-        int chance = Game.SkillUseDevice;
+        int chance = Game.UseDevice;
         if (Game.ConfusionTimer.Value != 0)
         {
             chance /= 2;

@@ -14,7 +14,6 @@ internal class SpectreRace : Race
         (35, nameof(SpectreRaceLevel35ItemEnhancement))
     };
     public override string Title => "Spectre";
-    public override int UseDevice => 25;
     public override int SavingThrow => 20;
     public override int Stealth => 5;
     public override int Search => 5;

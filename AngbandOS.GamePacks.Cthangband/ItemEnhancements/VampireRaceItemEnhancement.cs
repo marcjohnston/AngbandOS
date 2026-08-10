@@ -25,5 +25,6 @@ public class VampireRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(SavingThrowAttribute), "10"),
         (nameof(StealthAttribute), "4"),
         (nameof(SearchAttribute), "1"),
+        (nameof(UseDeviceAttribute), "10"),
     };
 }
