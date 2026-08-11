@@ -20,7 +20,7 @@ internal class IceItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectiveAttributeSet.HatesCold)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesColdAttribute)).Get())
         {
             noteKill = plural ? " shatter!" : " shatters!";
             doKill = true;

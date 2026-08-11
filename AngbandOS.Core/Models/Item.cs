@@ -305,7 +305,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         {
             return 0;
         }
-        return EffectiveAttributeSet.Radius;
+        return EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(GlowRadiusAttribute)).Get();
     }
     public bool IsAmmunitionFor(Item rangedWeapon)
     {
@@ -997,9 +997,9 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
             {
                 basenm = FixedArtifact.Name;
             }
-            else if (EffectiveAttributeSet.FriendlyName != null)
+            else if (EffectiveAttributeSet.Get<FriendlyNameEffectiveAttributeValue>(nameof(FriendlyNameAttribute)).Get() != null)
             {
-                basenm = $"{basenm} {EffectiveAttributeSet.FriendlyName}";
+                basenm = $"{basenm} {EffectiveAttributeSet.Get<FriendlyNameEffectiveAttributeValue>(nameof(FriendlyNameAttribute)).Get()}";
             }
         }
         return basenm;

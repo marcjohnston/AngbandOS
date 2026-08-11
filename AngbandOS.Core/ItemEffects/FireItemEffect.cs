@@ -21,11 +21,11 @@ internal class FireItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectiveAttributeSet.HatesFire)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesFireAttribute)).Get())
         {
             doKill = true;
             noteKill = plural ? " burn up!" : " burns up!";
-            if (oPtr.EffectiveAttributeSet.IgnoreFire)
+            if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Get())
             {
                 ignore = true;
             }

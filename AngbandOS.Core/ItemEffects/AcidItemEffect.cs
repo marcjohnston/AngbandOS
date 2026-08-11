@@ -21,11 +21,11 @@ internal class AcidItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectiveAttributeSet.HatesAcid)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesAcidAttribute)).Get())
         {
             doKill = true;
             noteKill = oPtr.StackCount > 1 ? " melt!" : " melts!";
-            if (oPtr.EffectiveAttributeSet.IgnoreAcid)
+            if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Get())
             {
                 ignore = true;
             }

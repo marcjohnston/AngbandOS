@@ -41,15 +41,15 @@ internal class GreatOrbOfLightEnchantmentScript : Script, IEnhancementScript
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Set());
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.FreeAct = true);
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.HoldLife = true);
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(FreeActAttribute)).Set());
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HoldLifeAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustConAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set());
-            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Feather = true);
+            weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(FeatherAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set());
             weightedRandomAction.Add(1, () => item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set());

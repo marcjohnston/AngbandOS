@@ -170,7 +170,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 }
                 if (item.CapableOfVorpalSlaying && Game.DieRoll(3) == 1)
                 {
-                    item.EffectiveAttributeSet.Vorpal1InChance = 2;
+                    item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Set(2);
                 }
                 break;
             case 38:
@@ -186,7 +186,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponOfLawItemEnhancement)));
                 if (Game.DieRoll(3) == 1)
                 {
-                    item.EffectiveAttributeSet.HoldLife = true;
+                    item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HoldLifeAttribute)).Set();
                 }
                 if (Game.DieRoll(3) == 1)
                 {

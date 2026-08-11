@@ -4,6 +4,6 @@ internal class HeavyCurseBooleanGetItemProperty : GetItemProperty<bool>
     public HeavyCurseBooleanGetItemProperty(Game game) : base(game) { }
     public override bool Get(Item item)
     {
-        return item.EffectiveAttributeSet.HeavyCurse;
+        return item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Get();
     }
 }

@@ -21,11 +21,11 @@ internal class ElectricityItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectiveAttributeSet.HatesElectricity)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesElectricityAttribute)).Get())
         {
             doKill = true;
             noteKill = plural ? " are destroyed!" : " is destroyed!";
-            if (oPtr.EffectiveAttributeSet.IgnoreElec)
+            if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Get())
             {
                 ignore = true;
             }

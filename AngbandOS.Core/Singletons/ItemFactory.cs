@@ -1169,15 +1169,15 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             {
                 characteristics.ToDamage = 0 - (characteristics.ToDamage + Game.DieRoll(4));
             }
-            characteristics.HeavyCurse = true;
+            characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Set();
             characteristics.IsCursed = true;
             if (Game.DieRoll(4) == 1)
             {
-                characteristics.PermaCurse = true;
+                characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Set();
             }
             if (Game.DieRoll(3) == 1)
             {
-                characteristics.DreadCurse = true;
+                characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(DreadCurseAttribute)).Set();
             }
             if (Game.DieRoll(2) == 1)
             {
@@ -1193,13 +1193,13 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             }
             else if (Game.DieRoll(3) == 1)
             {
-                characteristics.NoTele = true;
+                characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(NoTeleAttribute)).Set();
             }
             if (Game.CharacterClass.NonMagicRandomArtifact1InChance > 0)
             {
                 if (Game.DieRoll(Game.CharacterClass.NonMagicRandomArtifact1InChance) == 1)
                 {
-                    characteristics.NoMagic = true;
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(NoMagicAttribute)).Set();
                 }
             }
 
@@ -1265,11 +1265,11 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                 case 7:
                 case 8:
                 case 14:
-                    characteristics.FreeAct = true;
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(FreeActAttribute)).Set();
                     break;
 
                 case 9:
-                    characteristics.HoldLife = true;
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(HoldLifeAttribute)).Set();
                     if (characteristics.ArtifactBias == null && Game.DieRoll(5) == 1)
                     {
                         characteristics.ArtifactBias = Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
@@ -1282,12 +1282,12 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
 
                 case 10:
                 case 11:
-                    characteristics.Radius = 3;
+                    characteristics.Get<SummationEffectiveAttributeValue>(nameof(GlowRadiusAttribute)).Append(3);
                     break;
 
                 case 12:
                 case 13:
-                    characteristics.Feather = true;
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(FeatherAttribute)).Set();
                     break;
 
                 case 15:
@@ -1342,11 +1342,11 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
                     break;
 
                 case 30:
-                    characteristics.NoMagic = true;
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(NoMagicAttribute)).Set();
                     break;
 
                 case 31:
-                    characteristics.NoTele = true;
+                    characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(NoTeleAttribute)).Set();
                     break;
             }
         }
@@ -1541,10 +1541,10 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
             characteristics.ToDamage += Game.DieRoll(characteristics.ToDamage > RandomArtifactBonusDamageCeiling.Value ? 1 : RandomArtifactBonusDamageCeiling.Value + 1 - characteristics.BonusArmorClass);
         }
 
-        characteristics.IgnoreAcid = true;
-        characteristics.IgnoreElec = true;
-        characteristics.IgnoreFire = true;
-        characteristics.IgnoreCold = true;
+        characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Set();
+        characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Set();
+        characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Set();
+        characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreColdAttribute)).Set();
         characteristics.Get<SummationEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Append(40);
 
         if (aCursed)

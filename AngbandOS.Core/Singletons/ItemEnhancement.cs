@@ -72,7 +72,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         {
             itemCharacteristics.Activation = Activation;
         }
-        itemCharacteristics.FriendlyName = FriendlyName;
+        itemCharacteristics.Get<FriendlyNameEffectiveAttributeValue>(nameof(FriendlyNameAttribute)).Set(FriendlyName);
         return itemCharacteristics.ToReadOnly();
     }
 

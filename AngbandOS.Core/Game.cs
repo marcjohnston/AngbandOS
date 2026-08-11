@@ -6534,7 +6534,7 @@ internal partial class Game : IGameSerialize
                 {
                     oPtr.EffectiveAttributeSet.MeleeToHit++;
                     res = true;
-                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.PermaCurse && oPtr.EffectiveAttributeSet.MeleeToHit >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get() && oPtr.EffectiveAttributeSet.MeleeToHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.RemoveCurse();
@@ -6559,7 +6559,7 @@ internal partial class Game : IGameSerialize
                 {
                     oPtr.EffectiveAttributeSet.ToDamage++;
                     res = true;
-                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.PermaCurse && oPtr.EffectiveAttributeSet.ToDamage >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get() && oPtr.EffectiveAttributeSet.ToDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
                         oPtr.RemoveCurse();
@@ -6584,7 +6584,7 @@ internal partial class Game : IGameSerialize
                 {
                     oPtr.EffectiveAttributeSet.BonusArmorClass++;
                     res = true;
-                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.PermaCurse && oPtr.EffectiveAttributeSet.BonusArmorClass >= 0 &&
+                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get() && oPtr.EffectiveAttributeSet.BonusArmorClass >= 0 &&
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
@@ -6832,11 +6832,11 @@ internal partial class Game : IGameSerialize
 
     public bool SetAcidDestroy(Item oPtr)
     {
-        if (!oPtr.EffectiveAttributeSet.HatesAcid)
+        if (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesAcidAttribute)).Get())
         {
             return false;
         }
-        if (oPtr.EffectiveAttributeSet.IgnoreAcid)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Get())
         {
             return false;
         }
@@ -6845,11 +6845,11 @@ internal partial class Game : IGameSerialize
 
     public bool SetColdDestroy(Item oPtr)
     {
-        if (!oPtr.EffectiveAttributeSet.HatesCold)
+        if (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesColdAttribute)).Get())
         {
             return false;
         }
-        if (oPtr.EffectiveAttributeSet.IgnoreCold)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreColdAttribute)).Get())
         {
             return false;
         }
@@ -6858,11 +6858,11 @@ internal partial class Game : IGameSerialize
 
     public bool SetElecDestroy(Item oPtr)
     {
-        if (!oPtr.EffectiveAttributeSet.HatesElectricity)
+        if (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesElectricityAttribute)).Get())
         {
             return false;
         }
-        if (oPtr.EffectiveAttributeSet.IgnoreElec)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Get())
         {
             return false;
         }
@@ -6871,11 +6871,11 @@ internal partial class Game : IGameSerialize
 
     public bool SetFireDestroy(Item oPtr)
     {
-        if (!oPtr.EffectiveAttributeSet.HatesFire)
+        if (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesFireAttribute)).Get())
         {
             return false;
         }
-        if (oPtr.EffectiveAttributeSet.IgnoreFire)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Get())
         {
             return false;
         }
@@ -7212,7 +7212,7 @@ internal partial class Game : IGameSerialize
             return false;
         }
         string oName = oPtr.GetDescription(false);
-        if (oPtr.EffectiveAttributeSet.IgnoreAcid)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Get())
         {
             MsgPrint($"Your {oName} is unaffected!");
             return true;
@@ -7263,7 +7263,7 @@ internal partial class Game : IGameSerialize
                 Item? oPtr = GetInventoryItem(i);
 
                 // Items that are cursed, or heavy cursed (with true alsoRemoveHeavyCurse) and not perma-cursed will be uncursed.
-                if (oPtr is not null && oPtr.EffectiveAttributeSet.IsCursed && (!oPtr.EffectiveAttributeSet.HeavyCurse || alsoRemoveHeavyCurse) && !oPtr.EffectiveAttributeSet.PermaCurse)
+                if (oPtr is not null && oPtr.EffectiveAttributeSet.IsCursed && (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Get() || alsoRemoveHeavyCurse) && !oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get())
                 {
                     if (oPtr.RemoveCurse())
                     {
@@ -8468,13 +8468,13 @@ internal partial class Game : IGameSerialize
                     totalDamage = PlayerCriticalMelee(meleeItem.EffectiveAttributeSet.Weight, meleeItem.EffectiveAttributeSet.MeleeToHit, totalDamage);
 
                     // Vorpal weapons have a chance of a deep cut.
-                    bool vorpalCut = DieRoll(meleeItem.EffectiveAttributeSet.Vorpal1InChance) == 1;
+                    bool vorpalCut = DieRoll(meleeItem.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Get()) == 1;
 
                     // If we did a vorpal cut, do extra damage
                     if (vorpalCut)
                     {
                         int stepK = totalDamage;
-                        string message = meleeItem.EffectiveAttributeSet.Vorpal1InChance == 0 ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
+                        string message = meleeItem.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Get() == 0 ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
                         int vorpalExtraAttacks1InChance = meleeItem.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(VorpalExtraAttacks1InChanceAttribute)).Get();
                         MsgPrint(message);
                         do
@@ -12424,7 +12424,7 @@ internal partial class Game : IGameSerialize
         }
         if (DieRoll(100) <= heavyChance && (oPtr.IsArtifact || oPtr.IsRare))
         {
-            if (!oPtr.EffectiveAttributeSet.HeavyCurse)
+            if (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Get())
             {
                 changed = true;
             }

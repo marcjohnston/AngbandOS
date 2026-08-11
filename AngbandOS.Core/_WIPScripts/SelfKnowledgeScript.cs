@@ -370,11 +370,11 @@ internal class SelfKnowledgeScript : Script, IScript, ICastSpellScript, IEatOrQu
             {
                 info[infoCount++] = "Your weapon is branded with the Yellow Sign.";
             }
-            if (meleeItem.EffectiveAttributeSet.Impact)
+            if (meleeItem.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ImpactAttribute)).Get())
             {
                 info[infoCount++] = "The impact of your weapon can cause earthquakes.";
             }
-            if (meleeItem.EffectiveAttributeSet.Vorpal1InChance > 0)
+            if (meleeItem.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Get() > 0)
             {
                 info[infoCount++] = "Your weapon is very sharp.";
             }

@@ -34,7 +34,7 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
         string oName = oPtr.GetDescription(false);
         if (oPtr.EffectiveAttributeSet.IsCursed)
         {
-            if ((oPtr.EffectiveAttributeSet.HeavyCurse && Game.DieRoll(100) < 33) || oPtr.EffectiveAttributeSet.PermaCurse)
+            if ((oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Get() && Game.DieRoll(100) < 33) || oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get())
             {
                 Game.MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
                 return;

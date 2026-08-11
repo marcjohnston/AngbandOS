@@ -21,11 +21,11 @@ internal class ColdItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectiveAttributeSet.HatesCold)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesColdAttribute)).Get())
         {
             noteKill = plural ? " shatter!" : " shatters!";
             doKill = true;
-            if (oPtr.EffectiveAttributeSet.IgnoreCold)
+            if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreColdAttribute)).Get())
             {
                 ignore = true;
             }

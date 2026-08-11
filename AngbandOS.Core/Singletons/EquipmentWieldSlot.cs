@@ -46,7 +46,7 @@ internal abstract class EquipmentWieldSlot : WieldSlot
             if (oPtr != null)
             {
                 // Perform some universal actions for items that are worn.
-                if (oPtr.EffectiveAttributeSet.DreadCurse && Game.DieRoll(100) == 1)
+                if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(DreadCurseAttribute)).Get() && Game.DieRoll(100) == 1)
                 {
                     Game.ActivateDreadCurse();
                 }

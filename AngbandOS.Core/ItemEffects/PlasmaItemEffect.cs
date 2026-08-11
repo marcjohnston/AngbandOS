@@ -21,21 +21,21 @@ internal class PlasmaItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectiveAttributeSet.HatesFire)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesFireAttribute)).Get())
         {
             doKill = true;
             noteKill = plural ? " burn up!" : " burns up!";
-            if (oPtr.EffectiveAttributeSet.IgnoreFire)
+            if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Get())
             {
                 ignore = true;
             }
         }
-        if (oPtr.EffectiveAttributeSet.HatesElectricity)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesElectricityAttribute)).Get())
         {
             ignore = false;
             doKill = true;
             noteKill = plural ? " are destroyed!" : " is destroyed!";
-            if (oPtr.EffectiveAttributeSet.IgnoreElec)
+            if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Get())
             {
                 ignore = true;
             }
