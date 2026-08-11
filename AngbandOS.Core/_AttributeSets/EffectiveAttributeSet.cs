@@ -4,7 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Collections;
 using System.Text;
 
 namespace AngbandOS.Core;
@@ -86,8 +85,10 @@ internal class EffectiveAttributeSet : IGameSerialize
 
     public void RemoveKeyedEnhancements(string key)
     {
-        foreach (EffectiveAttributeValue attributeLedger in _effectiveAttributeValues)
-            attributeLedger.RemoveModifiers(key);
+        foreach (EffectiveAttributeValue effectiveAttributeValue in _effectiveAttributeValues)
+        {
+            effectiveAttributeValue.RemoveModifiers(key);
+        }
     }
 
     /// <summary>
