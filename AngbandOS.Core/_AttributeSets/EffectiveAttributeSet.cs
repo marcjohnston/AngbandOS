@@ -445,10 +445,6 @@ internal class EffectiveAttributeSet : IGameSerialize
         {
             return Get<SummationEffectiveAttributeValue>(nameof(WeightAttribute)).Get();
         }
-        set
-        {
-            Get<SummationEffectiveAttributeValue>(nameof(WeightAttribute)).Set(value);
-        }
     }
     #endregion
 }

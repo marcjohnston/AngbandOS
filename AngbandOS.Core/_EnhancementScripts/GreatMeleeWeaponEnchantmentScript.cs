@@ -170,7 +170,7 @@ internal class GreatMeleeWeaponEnchantmentScript : Script, IEnhancementScript
                 }
                 if (item.CapableOfVorpalSlaying && Game.DieRoll(3) == 1)
                 {
-                    item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Set(2);
+                    item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Append(2);
                 }
                 break;
             case 38:
