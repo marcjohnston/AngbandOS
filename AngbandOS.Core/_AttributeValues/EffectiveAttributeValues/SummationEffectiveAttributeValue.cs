@@ -107,12 +107,12 @@ internal class SummationEffectiveAttributeValue : EffectiveAttributeValue
     }
 
     /// <summary>
-    /// Computes a value to append to the modifiers so that the effective value equals the specified value.
+    /// Removes all of the modifiers from the effective value, effectively resetting it to 0.
     /// </summary>
     /// <param name="value"></param>
-    public void Set(int value)
+    public void Reset()
     {
-        _attributeModifiers.Add(("", Get() - value));
+        _attributeModifiers.Clear();
     }
 
     public override string ToString()

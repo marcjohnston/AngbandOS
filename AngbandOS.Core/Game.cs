@@ -7615,7 +7615,7 @@ internal partial class Game : IGameSerialize
             item.EffectiveAttributeSet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.MeleeToHit = 0;
             item.EffectiveAttributeSet.ToDamage = 0;
-            item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
+            item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Reset();
             item.EffectiveAttributeSet.DamageDice = 0;
             item.EffectiveAttributeSet.DiceSides = 0;
             item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
@@ -7654,7 +7654,7 @@ internal partial class Game : IGameSerialize
             item.EffectiveAttributeSet.MeleeToHit = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.ToDamage = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.BonusArmorClass = 0;
-            item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
+            item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Reset();
             item.EffectiveAttributeSet.DamageDice = 0;
             item.EffectiveAttributeSet.DiceSides = 0;
             item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
