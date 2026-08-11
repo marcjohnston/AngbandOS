@@ -151,7 +151,7 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the current digging skill of the player. This is used to determine if the player can dig through walls or not.
     /// </summary>
-    public int SkillDigging;
+    public int Tunnel;
 
     public int ComputedDisarmTraps;
 
@@ -256,7 +256,7 @@ internal partial class Game : IGameSerialize
             (nameof(_mainSequence), saveGameState.CreateDerivedGameStateBag(_mainSequence, typeof(GameRandom))),
             (nameof(Height), saveGameState.CreateGameStateBag(Height)),
             (nameof(HitDie), saveGameState.CreateGameStateBag(HitDie)),
-            (nameof(SkillDigging), saveGameState.CreateGameStateBag(SkillDigging)),
+            (nameof(Tunnel), saveGameState.CreateGameStateBag(Tunnel)),
             (nameof(ComputedDisarmTraps), saveGameState.CreateGameStateBag(ComputedDisarmTraps)),
             (nameof(SkillMelee), saveGameState.CreateGameStateBag(SkillMelee)),
             (nameof(SkillRanged), saveGameState.CreateGameStateBag(SkillRanged)),
@@ -553,7 +553,7 @@ internal partial class Game : IGameSerialize
             _mainSequence = restoreGameState.GetByKey(nameof(_mainSequence)).GetDerivedReference<GameRandom>(_restoreGameState => new GameRandom(_restoreGameState));
             Height = restoreGameState.GetByKey(nameof(Height)).GetInt();
             HitDie = restoreGameState.GetByKey(nameof(HitDie)).GetInt();
-            SkillDigging = restoreGameState.GetByKey(nameof(SkillDigging)).GetInt();
+            Tunnel = restoreGameState.GetByKey(nameof(Tunnel)).GetInt();
             ComputedDisarmTraps = restoreGameState.GetByKey(nameof(ComputedDisarmTraps)).GetInt();
             SkillMelee = restoreGameState.GetByKey(nameof(SkillMelee)).GetInt();
             SkillRanged = restoreGameState.GetByKey(nameof(SkillRanged)).GetInt();
@@ -3035,7 +3035,7 @@ internal partial class Game : IGameSerialize
             SkillRanged = Race.RangedToHit + CharacterClass.RangedToHit; // added rangedtohit
             SkillThrowing = Race.RangedToHit + CharacterClass.RangedToHit; // added throwingtohit
         }
-        SkillDigging = 0;
+        Tunnel = 0;
         MeleeAttacksPerRound = 1;
         MissileAttacksPerRound = 1;
         SkillPerception += SearchBonus;
@@ -3055,7 +3055,7 @@ internal partial class Game : IGameSerialize
                     SkillStealth += oPtr.EffectiveAttributeSet.Stealth;
                     SkillSearching += oPtr.EffectiveAttributeSet.Search * 5;
                     SkillPerception += oPtr.EffectiveAttributeSet.Search * 5;
-                    SkillDigging += oPtr.EffectiveAttributeSet.Tunnel * 20;
+                    Tunnel += oPtr.EffectiveAttributeSet.Tunnel * 20;
                     extraBlows += oPtr.EffectiveAttributeSet.Attacks;
                     if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get())
                     {
@@ -3209,7 +3209,7 @@ internal partial class Game : IGameSerialize
                     {
                         MeleeAttacksPerRound = 1;
                     }
-                    SkillDigging += oPtr.EffectiveAttributeSet.Weight / 10;
+                    Tunnel += oPtr.EffectiveAttributeSet.Weight / 10;
                 }
                 else if (IsUsingMartialArts())
                 {
@@ -3290,7 +3290,7 @@ internal partial class Game : IGameSerialize
         SkillStealth++;
         ComputedDisarmTraps += SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexDisarmBonus;
         ComputedDisarmTraps += SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntDisarmBonus;
-        SkillDigging += SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDiggingBonus;
+        Tunnel += SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDiggingBonus;
         ComputedDisarmTraps += (CharacterClass.DisarmBonusPerLevel * ExperienceLevel.IntValue) / 10;
         SkillStealth += (CharacterClass.StealthBonusPerLevel * ExperienceLevel.IntValue) / 10;
         SkillMelee += (CharacterClass.MeleeAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;
@@ -3304,9 +3304,9 @@ internal partial class Game : IGameSerialize
         {
             SkillStealth = 0;
         }
-        if (SkillDigging < 1)
+        if (Tunnel < 1)
         {
-            SkillDigging = 1;
+            Tunnel = 1;
         }
 
         // Create a new bonuses that we will use to merge with all of the additionals.
@@ -9113,7 +9113,7 @@ internal partial class Game : IGameSerialize
         // Trees are easy to chop down
         if (tile.FeatureType.IsTree)
         {
-            if (SkillDigging > 40 + RandomLessThan(100) && RemoveTileViaTunnelling(y, x))
+            if (Tunnel > 40 + RandomLessThan(100) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint($"You have chopped down the {tile.FeatureType.Description}.");
             }
@@ -9126,7 +9126,7 @@ internal partial class Game : IGameSerialize
         // Pillars are a bit easier than walls
         else if (tile.FeatureType.IsPillar)
         {
-            if (SkillDigging > 40 + RandomLessThan(300) && RemoveTileViaTunnelling(y, x))
+            if (Tunnel > 40 + RandomLessThan(300) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint("You have broken down the pillar.");
             }
@@ -9149,7 +9149,7 @@ internal partial class Game : IGameSerialize
         // It's a wall, so we tunnel normally
         else if (tile.FeatureType.IsWall)
         {
-            if (SkillDigging > 40 + RandomLessThan(1600) && RemoveTileViaTunnelling(y, x))
+            if (Tunnel > 40 + RandomLessThan(1600) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint("You have finished the tunnel.");
             }
@@ -9176,11 +9176,11 @@ internal partial class Game : IGameSerialize
             // Magma needs a higher tunneling skill than quartz
             if (isMagma)
             {
-                okay = SkillDigging > 20 + RandomLessThan(800);
+                okay = Tunnel > 20 + RandomLessThan(800);
             }
             else
             {
-                okay = SkillDigging > 10 + RandomLessThan(400);
+                okay = Tunnel > 10 + RandomLessThan(400);
             }
             // Do the actual tunnelling
             if (okay && RemoveTileViaTunnelling(y, x))
@@ -9210,7 +9210,7 @@ internal partial class Game : IGameSerialize
         // Rubble is easy to tunnel through
         else if (tile.FeatureType.IsRubble)
         {
-            if (SkillDigging > RandomLessThan(200) && RemoveTileViaTunnelling(y, x))
+            if (Tunnel > RandomLessThan(200) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint("You have removed the rubble.");
                 // 10% chance of finding something
