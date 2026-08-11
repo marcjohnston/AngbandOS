@@ -58,95 +58,95 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns true, if the player has aggravation.  Aggravation is a curse that causes monsters near the player to always be aware of the player and always attack the player.
     /// </summary>
-    public bool HasAggravation;
+    public bool HasAggravation { get; private set; }
 
     /// <summary>
     /// Returns true, if the player has regeneration.  Regeneration allows the player to heal faster than normal.  If the player has the SuppressRegenAttribute, it overrides and prevents regeneration.
     /// </summary>
-    public bool HasRegeneration;
+    public bool HasRegeneration { get; private set; }
 
     /// <summary>
     /// Returns true, if the player is immune to acid.
     /// </summary>
-    public bool HasAcidImmunity;
+    public bool HasAcidImmunity { get; private set; }
 
     /// <summary>
     /// Returns the radius for which the player glows.  Spectres, sprites and vampires glow.
     /// </summary>
-    public int GlowRadius;
+    public int GlowRadius { get; private set; }
 
-    public bool HasAcidResistance;
-    public bool HasAntiMagic;
-    public bool HasSustainCharisma;
-    public bool HasSustainConstitution;
-    public bool HasSustainDexterity;
-    public bool HasSustainIntelligence;
-    public bool HasSustainStrength;
-    public bool HasSustainWisdom;
-    public bool HasAntiTeleport;
-    public bool HasAntiTheft;
-    public bool HasBlessedBlade;
-    public bool HasBlindnessResistance;
-    public bool HasChaosResistance;
-    public bool HasColdImmunity;
-    public bool HasColdResistance;
-    public bool HasConfusionResistance;
-    public bool HasDarkResistance;
-    public bool HasDisenchantResistance;
-    public bool HasElementalVulnerability;
-    public bool HasExperienceDrain;
-    public bool HasExtraMight;
-    public bool HasFearResistance;
-    public bool HasFeatherFall;
-    public bool HasFireImmunity;
-    public bool HasFireResistance;
-    public bool HasFireSheath;
-    public bool HasFreeAction;
-    public bool HasHoldLife;
-    public bool HasLightningImmunity;
-    public bool HasLightningResistance;
-    public bool HasElectricitySheath;
-    public bool HasLightResistance;
-    public bool HasNetherResistance;
-    public bool HasNexusResistance;
-    public bool HasPoisonResistance;
-    public bool HasQuakeWeapon;
-    public bool HasRandomTeleport;
-    public bool HasReflection;
-    public bool HasSeeInvisibility;
-    public bool HasShardResistance;
-    public bool HasSlowDigestion;
-    public bool HasSoundResistance;
-    public bool HasTelepathy;
-    public bool HasTimeResistance;
-    public int InfraVisionRange;
-
-    /// <summary>
-    /// Represents the players known bonus armor class.  This is the bonus armor class that the player knows about.  The player may have other bonuses that are unknown to the player.
-    /// </summary>
-    public int BaseArmorClass;
+    public bool HasAcidResistance { get; private set; }
+    public bool HasAntiMagic { get; private set; }
+    public bool HasSustainCharisma { get; private set; }
+    public bool HasSustainConstitution { get; private set; }
+    public bool HasSustainDexterity { get; private set; }
+    public bool HasSustainIntelligence { get; private set; }
+    public bool HasSustainStrength { get; private set; }
+    public bool HasSustainWisdom { get; private set; }
+    public bool HasAntiTeleport { get; private set; }
+    public bool HasAntiTheft { get; private set; }
+    public bool HasBlessedBlade { get; private set; }
+    public bool HasBlindnessResistance { get; private set; }
+    public bool HasChaosResistance { get; private set; }
+    public bool HasColdImmunity { get; private set; }
+    public bool HasColdResistance { get; private set; }
+    public bool HasConfusionResistance { get; private set; }
+    public bool HasDarkResistance { get; private set; }
+    public bool HasDisenchantResistance { get; private set; }
+    public bool HasElementalVulnerability { get; private set; }
+    public bool HasExperienceDrain { get; private set; }
+    public bool HasExtraMight { get; private set; }
+    public bool HasFearResistance { get; private set; }
+    public bool HasFeatherFall { get; private set; }
+    public bool HasFireImmunity { get; private set; }
+    public bool HasFireResistance { get; private set; }
+    public bool HasFireSheath { get; private set; }
+    public bool HasFreeAction { get; private set; }
+    public bool HasHoldLife { get; private set; }
+    public bool HasLightningImmunity { get; private set; }
+    public bool HasLightningResistance { get; private set; }
+    public bool HasElectricitySheath { get; private set; }
+    public bool HasLightResistance { get; private set; }
+    public bool HasNetherResistance { get; private set; }
+    public bool HasNexusResistance { get; private set; }
+    public bool HasPoisonResistance { get; private set; }
+    public bool HasQuakeWeapon { get; private set; }
+    public bool HasRandomTeleport { get; private set; }
+    public bool HasReflection { get; private set; }
+    public bool HasSeeInvisibility { get; private set; }
+    public bool HasShardResistance { get; private set; }
+    public bool HasSlowDigestion { get; private set; }
+    public bool HasSoundResistance { get; private set; }
+    public bool HasTelepathy { get; private set; }
+    public bool HasTimeResistance { get; private set; }
+    public int InfraVisionRange { get; private set; }
 
     /// <summary>
     /// Represents the players known bonus armor class.  This is the bonus armor class that the player knows about.  The player may have other bonuses that are unknown to the player.
     /// </summary>
-    public int KnownBonusArmorClass;
+    public int BaseArmorClass { get; private set; }
+
+    /// <summary>
+    /// Represents the players known bonus armor class.  This is the bonus armor class that the player knows about.  The player may have other bonuses that are unknown to the player.
+    /// </summary>
+    public int KnownBonusArmorClass { get; private set; }
 
     /// <summary>
     /// Represents the total bonus armor class which is the summation of the known and unknown bonus armor classes.
     /// </summary>
-    public int TotalBonusArmorClass;
+    public int TotalBonusArmorClass { get; private set; }
 
     /// <summary>
     /// Represents the current speed of the player.  The speed is a value between 0 and 199 and is used as an index into the <see cref="Game.ExtractEnergy"/> table.
     /// </summary>
-    public int Speed;
+    public int Speed { get; private set; }
 
-    public int SpeedHidden;
+    public int SpeedHidden { get; private set; }
 
     /// <summary>
     /// Returns the current skill level for using devices.  This is used to determine if the player can use a device or not.
     /// </summary>
-    public int UseDevice;
+    public int UseDevice { get; private set; }
 
     /// <summary>
     /// Returns the current digging skill of the player. This is used to determine if the player can dig through walls or not.
@@ -158,39 +158,39 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Grants temporary resistance to acid.
     /// </summary>
-    public Timer AcidResistanceTimer { get; }
+    public Timer AcidResistanceTimer { get; private set; }
 
     /// <summary>
     /// Temporarily prevents the player from being scared.
     /// </summary>
-    public Timer HeroismTimer { get; }
+    public Timer HeroismTimer { get; private set; }
 
     /// <summary>
     /// Temporarily prevents the player from being scared.
     /// </summary>
-    public Timer SuperheroismTimer { get; }
-    public Timer BleedingTimer { get; }
-    public Timer BlessingTimer { get; }
-    public Timer BlindnessTimer { get; }
-    public Timer ColdResistanceTimer { get; }
-    public Timer ConfusionTimer { get; }
-    public Timer EtherealnessTimer { get; }
-    public Timer FearTimer { get; }
-    public Timer FireResistanceTimer { get; }
-    public Timer HallucinationsTimer { get; }
-    public Timer HasteTimer { get; }
-    public Timer InfravisionTimer { get; }
-    public Timer InvulnerabilityTimer { get; }
-    public Timer LightningResistanceTimer { get; }
-    public Timer ParalysisTimer { get; }
-    public Timer PoisonTimer { get; }
-    public Timer PoisonResistanceTimer { get; }
-    public Timer ProtectionFromEvilTimer { get; }
-    public Timer SeeInvisibilityTimer { get; }
-    public Timer SlowTimer { get; }
-    public Timer StoneskinTimer { get; }
-    public Timer StunTimer { get; }
-    public Timer TelepathyTimer { get; }
+    public Timer SuperheroismTimer { get; private set; }
+    public Timer BleedingTimer { get; private set; }
+    public Timer BlessingTimer { get; private set; }
+    public Timer BlindnessTimer { get; private set; }
+    public Timer ColdResistanceTimer { get; private set; }
+    public Timer ConfusionTimer { get; private set; }
+    public Timer EtherealnessTimer { get; private set; }
+    public Timer FearTimer { get; private set; }
+    public Timer FireResistanceTimer { get; private set; }
+    public Timer HallucinationsTimer { get; private set; }
+    public Timer HasteTimer { get; private set; }
+    public Timer InfravisionTimer { get; private set; }
+    public Timer InvulnerabilityTimer { get; private set; }
+    public Timer LightningResistanceTimer { get; private set; }
+    public Timer ParalysisTimer { get; private set; }
+    public Timer PoisonTimer { get; private set; }
+    public Timer PoisonResistanceTimer { get; private set; }
+    public Timer ProtectionFromEvilTimer { get; private set; }
+    public Timer SeeInvisibilityTimer { get; private set; }
+    public Timer SlowTimer { get; private set; }
+    public Timer StoneskinTimer { get; private set; }
+    public Timer StunTimer { get; private set; }
+    public Timer TelepathyTimer { get; private set; }
     #endregion
 
     /// <summary>
