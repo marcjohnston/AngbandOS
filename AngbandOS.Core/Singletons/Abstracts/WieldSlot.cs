@@ -167,11 +167,6 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey, I
     public virtual bool CanBeCursed => false;
 
     /// <summary>
-    /// Returns true, if the inventory slot is a weapon; false, otherwise.  Melee and ranged inventory slots return true.
-    /// </summary>
-    public bool IsWeapon => IsRangedWeapon || IsMeleeWeapon;
-
-    /// <summary>
     /// Returns true, if the inventory slot is a ranged weapon; false, otherwise.  The ranged inventory slots returns true.
     /// </summary>
     /// <value><c>true</c> if this instance is ranged weapon; otherwise, <c>false</c>.</value>
@@ -182,12 +177,6 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey, I
     /// </summary>
     /// <value><c>true</c> if this instance is ranged weapon; otherwise, <c>false</c>.</value>
     public virtual bool IsMeleeWeapon => false;
-
-    /// <summary>
-    /// Returns true, if the item in the inventory slot can be disenchanted; false, otherwise.  All armor (Body, head, cloak, arms, hands and feet) and
-    /// melee (melee and ranged) positions, return true.
-    /// </summary>
-    public virtual bool CanBeDisenchanted => IsArmor || IsWeapon;
 
     /// <summary>
     /// Returns true, if the inventory slot is considered armor that the player is wearing.  Body, head, cloak, arms, hands and feet

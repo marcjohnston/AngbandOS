@@ -20,8 +20,8 @@ internal class ApplyDisenchantScript : EatOrQuaffUniversalScript, IGetKey
     /// <returns></returns>
     public override IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
-        // Select an inventory slot where items can be disenchanted.
-        WieldSlot? inventorySlot = Game.SingletonRepository.ToWeightedRandom<WieldSlot>(_inventorySlot => _inventorySlot.CanBeDisenchanted).ChooseOrDefault();
+        // Select an inventory slot where items can be disenchanted.  All armor (Body, head, cloak, arms, hands and feet), melee and ranged wield slots are eligible.
+        WieldSlot? inventorySlot = Game.SingletonRepository.ToWeightedRandom<WieldSlot>(_inventorySlot => _inventorySlot.IsArmor || _inventorySlot.IsMeleeWeapon || _inventorySlot.IsRangedWeapon).ChooseOrDefault();
         if (inventorySlot == null)
         {
             // There are no inventory slots capable of being disenchanted.

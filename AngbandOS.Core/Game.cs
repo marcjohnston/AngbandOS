@@ -3065,7 +3065,7 @@ internal partial class Game : IGameSerialize
                     {
                         EtherealnessTimer.SetValue(Math.Max(EtherealnessTimer.Value, 20));
                     }
-                    if (equipmentWieldSlot.IsWeapon)
+                    if (equipmentWieldSlot.IsMeleeWeapon || equipmentWieldSlot.IsRangedWeapon)
                     {
                         continue;
                     }
