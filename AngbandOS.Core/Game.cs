@@ -217,6 +217,31 @@ internal partial class Game : IGameSerialize
         }
     }
 
+    // Chance of success is your skill - item level, with item level capped at 50 and your
+    // skill halved if you're confused
+    public bool UseDeviceItemTest(int itemLevel)
+    {
+        int chance = UseDevice;
+        if (ConfusionTimer.Value != 0)
+        {
+            chance /= 2;
+        }
+        chance -= itemLevel > 50 ? 50 : itemLevel;
+
+        // There's always a small chance of success
+        if (chance < Constants.UseDevice && RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+        {
+            chance = Constants.UseDevice;
+        }
+
+        // Do the actual check
+        if (chance < Constants.UseDevice || DieRoll(chance) < Constants.UseDevice)
+        {
+            return false;
+        }
+        return true;
+    }
+
     #region Game Serialization
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {

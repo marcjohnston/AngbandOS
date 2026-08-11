@@ -51,21 +51,9 @@ internal class UseStaffScript : UniversalScript, IGetKey
         // Using a staff costs a full turn
         Game.EnergyUse = 100;
         int itemLevel = item.LevelNormallyFound;
-        // We have a chance of the device working equal to skill (halved if confused) - item
-        // level (capped at 50)
-        int chance = Game.UseDevice;
-        if (Game.ConfusionTimer.Value != 0)
-        {
-            chance /= 2;
-        }
-        chance -= itemLevel > 50 ? 50 : itemLevel;
-        // Always a small chance of it working
-        if (chance < Constants.UseDevice && Game.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
-        {
-            chance = Constants.UseDevice;
-        }
+
         // Check to see if we use it properly
-        if (chance < Constants.UseDevice || Game.DieRoll(chance) < Constants.UseDevice)
+        if (!Game.UseDeviceItemTest(itemLevel))
         {
             Game.MsgPrint("You failed to use the staff properly.");
             return;

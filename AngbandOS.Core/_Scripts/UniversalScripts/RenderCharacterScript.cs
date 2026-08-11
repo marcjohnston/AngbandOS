@@ -401,7 +401,6 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
 
         int attacksPerRound = Game.MeleeAttacksPerRound;
         int disarmTraps = Game.ComputedDisarmTraps;
-        int useDevice = Game.UseDevice;
         int savingThrow = Game.SkillSavingThrow;
         int stealth = Game.SkillStealth;
         int searching = Game.SkillSearching;
@@ -421,7 +420,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         Game.Screen.Print(ColorEnum.Blue, "Disarming   :", 38, 28);
         PrintCategorisedNumber(disarmTraps, 8, 38, 42);
         Game.Screen.Print(ColorEnum.Blue, "Magic Device:", 39, 28);
-        PrintCategorisedNumber(useDevice, 6, 39, 42);
+        PrintCategorisedNumber(Game.UseDevice, 6, 39, 42);
         Game.Screen.Print(ColorEnum.Blue, "Blows/Action:", 36, 55);
         Game.Screen.Print(ColorEnum.Green, $"{Game.MeleeAttacksPerRound}", 36, 69);
         Game.Screen.Print(ColorEnum.Blue, "Tot.Dmg./Act:", 37, 55);
