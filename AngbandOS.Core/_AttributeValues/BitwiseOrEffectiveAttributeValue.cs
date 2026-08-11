@@ -28,6 +28,13 @@ internal class BitwiseOrEffectiveAttributeValue : EffectiveAttributeValue
     }
     public override string RenderForItemIdentification => Get().ToString();
 
+    public bool Reset()
+    {
+        bool wasSet = Get() == true;
+        _attributeModifiers.Clear();
+        return wasSet;
+    }
+
     public override EffectiveAttributeValue Clone()
     {
         BitwiseOrEffectiveAttributeValue clone = new BitwiseOrEffectiveAttributeValue(Game, Attribute);

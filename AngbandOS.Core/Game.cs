@@ -6537,10 +6537,7 @@ internal partial class Game : IGameSerialize
                     if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.PermaCurse && oPtr.EffectiveAttributeSet.MeleeToHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
-                        oPtr.IdentSense = true;
-                        oPtr.Inscription = "uncursed";
+                        oPtr.RemoveCurse();
                     }
                 }
             }
@@ -6565,10 +6562,7 @@ internal partial class Game : IGameSerialize
                     if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.PermaCurse && oPtr.EffectiveAttributeSet.ToDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
-                        oPtr.IdentSense = true;
-                        oPtr.Inscription = "uncursed";
+                        oPtr.RemoveCurse();
                     }
                 }
             }
@@ -6594,10 +6588,7 @@ internal partial class Game : IGameSerialize
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
-                        oPtr.IdentSense = true;
-                        oPtr.Inscription = "uncursed";
+                        oPtr.RemoveCurse();
                     }
                 }
             }
@@ -7264,42 +7255,24 @@ internal partial class Game : IGameSerialize
 
     public bool RemoveCurseAux(bool alsoRemoveHeavyCurse)
     {
-        int cnt = 0;
-        for (int i = InventorySlotEnum.MeleeWeapon; i < InventorySlotEnum.Total; i++)
+        bool curseRemoved = false;
+        foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>())
         {
-            Item? oPtr = GetInventoryItem(i);
-
-            // Ensure there is an item.
-            if (oPtr == null)
+            foreach (int i in equipmentWieldSlot.InventorySlots)
             {
-                continue;
-            }
+                Item? oPtr = GetInventoryItem(i);
 
-            // If it is not cursed, skip it.
-            if (!oPtr.EffectiveAttributeSet.IsCursed)
-            {
-                continue;
+                // Items that are cursed, or heavy cursed (with true alsoRemoveHeavyCurse) and not perma-cursed will be uncursed.
+                if (oPtr is not null && oPtr.EffectiveAttributeSet.IsCursed && (!oPtr.EffectiveAttributeSet.HeavyCurse || alsoRemoveHeavyCurse) && !oPtr.EffectiveAttributeSet.PermaCurse)
+                {
+                    if (oPtr.RemoveCurse())
+                    {
+                        curseRemoved = true;
+                    }
+                }
             }
-
-            // If it is heavy cursed, and we did not ask to remove the heavy curse, skip it.
-            if (!alsoRemoveHeavyCurse && oPtr.EffectiveAttributeSet.HeavyCurse)
-            {
-                continue;
-            }
-
-            // Permacurse cannot be removed.
-            if (oPtr.EffectiveAttributeSet.PermaCurse)
-            {
-                continue;
-            }
-            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
-            oPtr.IdentSense = true;
-            oPtr.Inscription = "uncursed";
-            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-            cnt++;
         }
-        return cnt > 0;
+        return curseRemoved;
     }
 
     /// <summary>
@@ -7645,7 +7618,7 @@ internal partial class Game : IGameSerialize
             item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
             item.EffectiveAttributeSet.DamageDice = 0;
             item.EffectiveAttributeSet.DiceSides = 0;
-            item.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
             item.EffectiveAttributeSet.Valueless = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -7684,7 +7657,7 @@ internal partial class Game : IGameSerialize
             item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
             item.EffectiveAttributeSet.DamageDice = 0;
             item.EffectiveAttributeSet.DiceSides = 0;
-            item.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
             item.EffectiveAttributeSet.Valueless = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -12455,8 +12428,8 @@ internal partial class Game : IGameSerialize
             {
                 changed = true;
             }
-            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
-            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Set();
+            oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Set();
         }
         else
         {
@@ -12464,7 +12437,7 @@ internal partial class Game : IGameSerialize
             {
                 changed = true;
             }
-            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
         }
         if (changed)
         {

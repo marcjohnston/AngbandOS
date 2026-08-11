@@ -4,13 +4,10 @@ public class StupidityRingItemFactoryItemEnhancement : ItemEnhancementGameConfig
 {
     public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(IsCursedAttribute), "true"),
         (nameof(HatesElectricityAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
         (nameof(ValuelessAttribute), "true"),
-    };
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(IsCursedAttribute), "true"),
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

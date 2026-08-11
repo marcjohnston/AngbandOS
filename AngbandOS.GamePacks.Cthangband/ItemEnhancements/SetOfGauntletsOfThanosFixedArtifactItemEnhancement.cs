@@ -4,6 +4,8 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
 {
     public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
         (nameof(AggravateAttribute), "true"),
         (nameof(DreadCurseAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
@@ -22,11 +24,6 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(ResPoisAttribute), "true"),
         (nameof(ShowModsAttribute), "true"),
         (nameof(TeleportAttribute), "true"),
-    };
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(HeavyCurseAttribute), "true"),
-        (nameof(IsCursedAttribute), "true"),
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

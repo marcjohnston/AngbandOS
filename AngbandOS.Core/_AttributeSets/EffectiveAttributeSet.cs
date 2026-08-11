@@ -394,18 +394,13 @@ internal class EffectiveAttributeSet : IGameSerialize
     {
         get
         {
-            bool? isCursed = Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Get();
-            return isCursed.HasValue && isCursed.Value;
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
-            }
-            else if (!value)
-            {
-                Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
             }
         }
     }
@@ -544,18 +539,13 @@ internal class EffectiveAttributeSet : IGameSerialize
     {
         get
         {
-            bool? heavyCurse = Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Get();
-            return heavyCurse.HasValue && heavyCurse.Value;
+            return Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Get();
         }
         set
         {
             if (value)
             {
-                Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
-            }
-            else if (!value)
-            {
-                Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
+                Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Set();
             }
         }
     }

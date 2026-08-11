@@ -1,5 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-public class HeavyCurseAttribute : BoolAttributeGameConfiguration
+public class HeavyCurseAttribute : BitwiseOrAttributeGameConfiguration
 {
 }

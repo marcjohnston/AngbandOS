@@ -4,14 +4,11 @@ public class AggravateMonsterRingItemFactoryItemEnhancement : ItemEnhancementGam
 {
     public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(IsCursedAttribute), "true"),
         (nameof(HatesElectricityAttribute), "true"),
         (nameof(AggravateAttribute), "true"),
         (nameof(EasyKnowAttribute), "true"),
         (nameof(ValuelessAttribute), "true"),
-    };
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(IsCursedAttribute), "true"),
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

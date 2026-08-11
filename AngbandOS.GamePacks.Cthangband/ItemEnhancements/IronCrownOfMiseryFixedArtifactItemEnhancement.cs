@@ -4,6 +4,7 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
 {
     public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(IsCursedAttribute), "true"),
         (nameof(RegenAttribute), "true"),
         (nameof(ValuelessAttribute), "true"),
         (nameof(FreeActAttribute), "true"),
@@ -17,10 +18,6 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(FeatherAttribute), "true"),
         (nameof(HoldLifeAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
-    };
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(IsCursedAttribute), "true"),
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

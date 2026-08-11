@@ -4,6 +4,8 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
 {
     public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
         (nameof(IgnoreColdAttribute), "true"),
@@ -22,11 +24,6 @@ public class LeadCrownOfTheUniverseFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(ResPoisAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
         (nameof(TelepathyAttribute), "true"),
-    };
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(HeavyCurseAttribute), "true"),
-        (nameof(IsCursedAttribute), "true"),
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

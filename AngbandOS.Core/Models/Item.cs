@@ -175,6 +175,20 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     public string? RandomArtifactName = null;
     #endregion
 
+    public bool RemoveCurse()
+    {
+        bool curseRemoved = EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
+        bool heavyCurseRemoved = EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
+        if (curseRemoved || heavyCurseRemoved)
+        {
+            IdentSense = true;
+            Inscription = "uncursed";
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+            return true;
+        }
+        return false;
+    }
+
     private Game Game { get; }
 
     #region API Methods

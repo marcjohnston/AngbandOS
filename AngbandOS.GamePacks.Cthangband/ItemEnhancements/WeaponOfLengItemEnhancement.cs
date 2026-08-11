@@ -4,14 +4,11 @@ public class WeaponOfLengItemEnhancement : ItemEnhancementGameConfiguration
 {
     public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
         (nameof(AggravateAttribute), "true"),
         (nameof(ValuelessAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
-    };
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(HeavyCurseAttribute), "true"),
-        (nameof(IsCursedAttribute), "true"),
     };
     public override string? FriendlyName => "of Leng";
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]

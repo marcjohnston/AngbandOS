@@ -4,6 +4,8 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
 {
     public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(IsCursedAttribute), "true"),
+        (nameof(HeavyCurseAttribute), "true"),
         (nameof(AggravateAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -15,11 +17,6 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(SlayDemonAttribute), "true"),
         (nameof(SlayEvilAttribute), "true"),
         (nameof(SlayTrollAttribute), "true"),
-    };
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(HeavyCurseAttribute), "true"),
-        (nameof(IsCursedAttribute), "true"),
     };
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {

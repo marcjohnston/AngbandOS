@@ -4,6 +4,8 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
 {
     public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
         (nameof(RegenAttribute), "true"),
         (nameof(AggravateAttribute), "true"),
         (nameof(DrainExpAttribute), "true"),
@@ -30,11 +32,6 @@ public class RingOfSetFixedArtifactItemEnhancement : ItemEnhancementGameConfigur
         (nameof(HoldLifeAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
         (nameof(TelepathyAttribute), "true"),
-    };
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(HeavyCurseAttribute), "true"),
-        (nameof(IsCursedAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.BizarreThingsEvery1d450p450DirectionalActivation);
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
