@@ -54,7 +54,7 @@ internal partial class Game : IGameSerialize
     public bool IsNewYear;
     #endregion
 
-    #region Non-State Properties - Cached properties that are post-load initialized and properties that are computed based on the Game.AttributeSet
+    #region UpdateBonuses Non-State Properties - Cached properties that are post-load initialized and properties that are computed based on the Game.AttributeSet
     /// <summary>
     /// Returns true, if the player has aggravation.  Aggravation is a curse that causes monsters near the player to always be aware of the player and always attack the player.
     /// </summary>
