@@ -60,11 +60,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
             int appendValue = Game.ComputeIntegerExpression(expression).Value;
             itemCharacteristics.Get<SummationEffectiveAttributeValue>(attribute).Append(appendValue);
         }
-        foreach ((Attribute attribute, Expression expression) in BoolAttributeAndExpressions)
-        {
-            bool setValue = Game.ComputeBooleanExpression(expression).Value;
-            itemCharacteristics.Get<BoolSetEffectiveAttributeValue>(attribute).Set(setValue);
-        }
         foreach ((Attribute attribute, Expression expression) in OrAttributeAndExpressions)
         {
             bool setValue = Game.ComputeBooleanExpression(expression).Value;
@@ -104,19 +99,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
             }
         }
         SumAttributeAndExpressions = sumAttributeAndExpressionList.Select(_attributeAndExpression => (_attributeAndExpression.Key, _attributeAndExpression.Value)).ToArray();
-
-        // We are using a dictionary because we do not want to support duplicate attributes.
-        Dictionary<Attribute, Expression> boolAttributeAndExpressionList = new Dictionary<Attribute, Expression>();
-        if (BoolAttributeAndExpressionBindings is not null)
-        {
-            foreach ((string attributeName, string expression) in BoolAttributeAndExpressionBindings)
-            {
-                Attribute attribute = Game.SingletonRepository.Get<BoolAttribute>(attributeName);
-                Expression numericExpression = Game.ParseBooleanExpression(expression);
-                boolAttributeAndExpressionList.Add(attribute, numericExpression);
-            }
-        }
-        BoolAttributeAndExpressions = boolAttributeAndExpressionList.Select(_attributeAndExpression => (_attributeAndExpression.Key, _attributeAndExpression.Value)).ToArray();
 
         // We are using a dictionary because we do not want to support duplicate attributes.
         Dictionary<Attribute, Expression> orAttributeAndExpressionList = new Dictionary<Attribute, Expression>();

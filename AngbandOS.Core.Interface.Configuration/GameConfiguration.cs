@@ -213,7 +213,6 @@ public class GameConfiguration
         gameConfiguration.OrAttributes = LoadFromAssembly<BitwiseOrAttributeGameConfiguration>(assembly);
         gameConfiguration.SumAttributes = LoadFromAssembly<SummationAttributeGameConfiguration>(assembly);
         gameConfiguration.ColorEnumAttributes = LoadFromAssembly<ColorEnumAttributeGameConfiguration>(assembly);
-        gameConfiguration.BoolAttributes = LoadFromAssembly<BoolAttributeGameConfiguration>(assembly);
         gameConfiguration.ActivationAttributes = LoadFromAssembly<ActivationNullableReferenceAttributeGameConfiguration>(assembly);
         gameConfiguration.ArtifactBiasAttributes = LoadFromAssembly<ArtifactBiasNullableReferenceAttributeGameConfiguration>(assembly);
         gameConfiguration.StringAttributes = LoadFromAssembly<StringNullableReferenceAttributeGameConfiguration>(assembly);
@@ -318,7 +317,6 @@ public class GameConfiguration
     public virtual BitwiseOrAttributeGameConfiguration[]? OrAttributes { get; set; } = null;
     public virtual SummationAttributeGameConfiguration[]? SumAttributes { get; set; } = null;
     public virtual ColorEnumAttributeGameConfiguration[]? ColorEnumAttributes { get; set; } = null;
-    public virtual BoolAttributeGameConfiguration[]? BoolAttributes { get; set; } = null;
     public virtual ActivationNullableReferenceAttributeGameConfiguration[]? ActivationAttributes { get; set; } = null;
     public virtual ArtifactBiasNullableReferenceAttributeGameConfiguration[]? ArtifactBiasAttributes { get; set; } = null;
     public virtual StringNullableReferenceAttributeGameConfiguration[]? StringAttributes { get; set; } = null;

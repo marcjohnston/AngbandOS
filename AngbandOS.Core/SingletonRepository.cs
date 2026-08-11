@@ -321,7 +321,6 @@ internal sealed class SingletonRepository : IGameSerialize
         // Preload
         LoadFromConfiguration<BitwiseOrAttribute, BitwiseOrAttributeGameConfiguration>(gameConfiguration.OrAttributes, restoreGameState);
         LoadFromConfiguration<SummationAttribute, SummationAttributeGameConfiguration>(gameConfiguration.SumAttributes, restoreGameState);
-        LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes, restoreGameState);
 
         // We need to cache the attributes because other singleton require them to be available during the load phase.  We also sort them so that we can debug them easier.
         Game.CachedAttributes = Game.SingletonRepository.Get<Attribute>().OrderBy(_attribute => _attribute.Key).ToArray();

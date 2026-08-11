@@ -46,7 +46,6 @@ internal class EffectiveAttributeSet : IGameSerialize
         _effectiveAttributeValues = restoreGameState.GetByKey(nameof(_effectiveAttributeValues)).GetDerivedReferences<EffectiveAttributeValue>(
             (RestoreGameState restoreGameState) => new ActivationEffectiveAttributeValue(Game, restoreGameState),
             (RestoreGameState restoreGameState) => new ArtifactBiasEffectiveAttributeValue(Game, restoreGameState),
-            (RestoreGameState restoreGameState) => new BoolSetEffectiveAttributeValue(Game, restoreGameState),
             (RestoreGameState restoreGameState) => new FriendlyNameEffectiveAttributeValue(Game, restoreGameState),
             (RestoreGameState restoreGameState) => new BitwiseOrEffectiveAttributeValue(Game, restoreGameState),
             (RestoreGameState restoreGameState) => new SummationEffectiveAttributeValue(Game, restoreGameState));
@@ -56,7 +55,7 @@ internal class EffectiveAttributeSet : IGameSerialize
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(_effectiveAttributeValues), saveGameState.CreateDerivedGameStateBag(_effectiveAttributeValues, typeof(ActivationEffectiveAttributeValue), typeof(ArtifactBiasEffectiveAttributeValue), typeof(BoolSetEffectiveAttributeValue), typeof(FriendlyNameEffectiveAttributeValue), typeof(BitwiseOrEffectiveAttributeValue), typeof(SummationEffectiveAttributeValue)))
+            (nameof(_effectiveAttributeValues), saveGameState.CreateDerivedGameStateBag(_effectiveAttributeValues, typeof(ActivationEffectiveAttributeValue), typeof(ArtifactBiasEffectiveAttributeValue), typeof(FriendlyNameEffectiveAttributeValue), typeof(BitwiseOrEffectiveAttributeValue), typeof(SummationEffectiveAttributeValue)))
         );
     }
 
