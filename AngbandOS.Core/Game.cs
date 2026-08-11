@@ -45,13 +45,6 @@ internal partial class Game : IGameSerialize
 
     private bool PreviousMartialArtistArmorAux;
 
-    /// <summary>
-    /// Returns the current digging skill of the player. This is used to determine if the player can dig through walls or not.
-    /// </summary>
-    public int SkillDigging;
-
-    public int ComputedDisarmTraps;
-
     public bool IsBirthday;
     public bool IsDawn;
     public bool IsDusk;
@@ -154,6 +147,13 @@ internal partial class Game : IGameSerialize
     /// Returns the current skill level for using devices.  This is used to determine if the player can use a device or not.
     /// </summary>
     public int UseDevice;
+
+    /// <summary>
+    /// Returns the current digging skill of the player. This is used to determine if the player can dig through walls or not.
+    /// </summary>
+    public int SkillDigging;
+
+    public int ComputedDisarmTraps;
 
     /// <summary>
     /// Grants temporary resistance to acid.
