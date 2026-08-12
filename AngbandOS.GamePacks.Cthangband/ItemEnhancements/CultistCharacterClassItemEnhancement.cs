@@ -3,6 +3,11 @@ namespace AngbandOS.GamePacks.Cthangband;
 
 public class CultistCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    {
+        (nameof(ReceivesLevelRewardsAttribute), "true")
+    };
+
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(BonusCharismaAttribute), "-2"),

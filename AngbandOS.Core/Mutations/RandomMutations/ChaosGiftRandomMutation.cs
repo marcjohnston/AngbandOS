@@ -9,19 +9,13 @@ namespace AngbandOS.Core.Mutations.RandomMutations;
 internal class ChaosGiftRandomMutation : Mutation
 {
     private ChaosGiftRandomMutation(Game game) : base(game) { }
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] 
+    { 
+        (1, nameof(ChaosGiftRandomMutationItemEnhancement)) 
+    };
     public override int Frequency => 2;
     public override string GainMessage => "You attract the notice of a chaos deity!";
     public override string HaveMessage => "Chaos deities give you gifts.";
     public override string LoseMessage => "You lose the attention of the chaos deities.";
     public override string Title => "Chaos Gift (R)";
-
-    public override void OnGain()
-    {
-        Game.ChaosGift = true;
-    }
-
-    public override void OnLose()
-    {
-        Game.ChaosGift = false;
-    }
 }

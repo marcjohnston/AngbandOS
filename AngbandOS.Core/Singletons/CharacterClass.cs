@@ -619,11 +619,6 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public virtual int? InstantFearResistanceLevel => null;
 
     /// <summary>
-    /// Returns true, if the character class receives level rewards.  Returns false, by default.  Fanatics and cultists return true.
-    /// </summary>
-    public virtual bool ReceivesLevelRewards => false;
-
-    /// <summary>
     /// Returns whether or not the character can backstab.  Returns false, by default.  Rogues return true.
     /// </summary>
     public virtual bool CanBackstab => false;

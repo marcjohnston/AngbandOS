@@ -56,7 +56,12 @@ internal partial class Game : IGameSerialize
     public int GlowRadius { get; private set; }
     public int SkillSearching { get; private set; }
     public int SkillStealth { get; private set; }
-    public int SkillSavingThrow {get; private set; }
+    public int SkillSavingThrow { get; private set; }
+
+    /// <summary>
+    /// Returns true, if the character class receives level rewards.  Returns false, by default.  Fanatics and cultists return true.
+    /// </summary>
+    public bool ReceivesLevelRewards { get; private set; }
 
     /// <summary>
     /// Returns true, if the player has aggravation.  Aggravation is a curse that causes monsters near the player to always be aware of the player and always attack the player.
@@ -249,7 +254,7 @@ internal partial class Game : IGameSerialize
             ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch)),
             ("bools9", saveGameState.CreateGameStateBag(_findBreakLeft, _findBreakRight, IsSearching, PreviousMartialArtistArmorAux)),
             ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment)),
-            ("bools11", saveGameState.CreateGameStateBag(ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters)),
+            ("bools11", saveGameState.CreateGameStateBag(ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ReceivesLevelRewards, SpecialDanger, RepairMonsters, ShimmerMonsters)),
 
             (nameof(_mainSequence), saveGameState.CreateDerivedGameStateBag(_mainSequence, typeof(GameRandom))),
             (nameof(Height), saveGameState.CreateGameStateBag(Height)),
@@ -410,18 +415,6 @@ internal partial class Game : IGameSerialize
     /// Returns the random seed to start the game that is applied to the non-fixed random generator.
     /// </summary>
     public readonly int MainSequenceGameStartSeed;
-
-    ///// <summary>
-    ///// Returns the value of the non-fixed random seed to use to restore the non-fixed random generator.  This seed is needed because the Random object cannot be serialized and we need to restore
-    ///// the non-fixed random generator when a saved game is restored.
-    ///// </summary>
-    //public int MainSequenceCurrentSeed;
-
-    /// <summary>
-    /// Returns true, when the game is processing the popup menu.  This value is used to determine when the game is entering and existing the popup menu mode.  Keystrokes that are used during, to render or
-    /// to exit the popup menu are not recorded--in actuality, those keystrokes are removed from the queue.
-    /// </summary>
-    //public bool PreviousInPopupMenu = false;
     #endregion
 
     #region New and Existing Game Construction    
@@ -542,7 +535,7 @@ internal partial class Game : IGameSerialize
             (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch) = restoreGameState.GetByKey("bools1").Get8Bools();
             (_findBreakLeft, _findBreakRight, IsSearching, PreviousMartialArtistArmorAux) = restoreGameState.GetByKey("bools9").Get4Bools();
             (_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment) = restoreGameState.GetByKey("bools10").Get8Bools();
-            (ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
+            (ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ReceivesLevelRewards, SpecialDanger, RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
 
             _mainSequence = restoreGameState.GetByKey(nameof(_mainSequence)).GetDerivedReference<GameRandom>(_restoreGameState => new GameRandom(_restoreGameState));
             Height = restoreGameState.GetByKey(nameof(Height)).GetInt();
@@ -1388,8 +1381,6 @@ internal partial class Game : IGameSerialize
     public God? God;
 
     public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
-
-    public bool ChaosGift;
 
     public readonly List<Mutation> MutationsNotPossessed = new List<Mutation>();
 
@@ -2915,6 +2906,7 @@ internal partial class Game : IGameSerialize
         {
             SkillStealth = 0;
         }
+        ReceivesLevelRewards = AttributeSet.GetBool(nameof(ReceivesLevelRewardsAttribute));
 
         #region Speed
         int oldVisibleOnlySpeed = Speed - SpeedHidden; // The speed flag is only for visible speed
@@ -12306,7 +12298,7 @@ internal partial class Game : IGameSerialize
 
     public void CheckExperience()
     {
-        bool levelReward = false;
+        bool levelReward = false; 
         bool levelMutation = false;
         if (ExperiencePoints.IntValue < 0)
         {
@@ -12346,11 +12338,7 @@ internal partial class Game : IGameSerialize
             if (ExperienceLevel.IntValue > MaxLevelGained)
             {
                 MaxLevelGained = ExperienceLevel.IntValue;
-                if (CharacterClass.ReceivesLevelRewards)
-                {
-                    levelReward = true;
-                }
-                if (ChaosGift)
+                if (ReceivesLevelRewards)
                 {
                     levelReward = true;
                 }
