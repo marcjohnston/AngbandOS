@@ -150,7 +150,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         }
     }
 
-    private void RenderAbilityInnateAndBonus(Ability ability, int raceBonus, int characterClassBonus, int equipmentBonus, int x, int y)
+    private void RenderAbilityInnateAndBonus(Ability ability, int raceBonus, int characterClassBonus, int equipmentBonus, int y, int x)
     {
         // Print each of the scores and bonuses
         Game.Screen.Print(ColorEnum.Blue, ability.Name, y, x);
@@ -403,7 +403,6 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         int disarmTraps = Game.ComputedDisarmTraps;
         int savingThrow = Game.SkillSavingThrow;
         int stealth = Game.SkillStealth;
-        int searching = Game.SkillSearching;
         int perception = Game.SkillPerception;
         Game.Screen.Print(ColorEnum.Blue, "Fighting    :", 36, 1);
         PrintCategorisedNumber(fighting, 12, 36, 15);
@@ -416,7 +415,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         Game.Screen.Print(ColorEnum.Blue, "Perception  :", 36, 28);
         PrintCategorisedNumber(perception, 6, 36, 42);
         Game.Screen.Print(ColorEnum.Blue, "Searching   :", 37, 28);
-        PrintCategorisedNumber(searching, 6, 37, 42);
+        PrintCategorisedNumber(Game.SkillSearching, 6, 37, 42);
         Game.Screen.Print(ColorEnum.Blue, "Disarming   :", 38, 28);
         PrintCategorisedNumber(disarmTraps, 8, 38, 42);
         Game.Screen.Print(ColorEnum.Blue, "Magic Device:", 39, 28);
