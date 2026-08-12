@@ -2989,7 +2989,6 @@ internal partial class Game : IGameSerialize
                 SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Set();
             }
             int use = ability.ModifyStatValue(ability.Innate, ability.Bonus);
-            use = ability.OverrideUse(use);
             if (ability.Adjusted != use)
             {
                 ability.Adjusted = use;
@@ -3042,10 +3041,6 @@ internal partial class Game : IGameSerialize
         SkillPerception += SearchBonus;
         SkillSearching += SearchBonus;
         SkillStealth += StealthBonus;
-        foreach (Ability ability in SingletonRepository.Get<Ability>())
-        {
-            ability.OverrideUpdateBonuses();
-        }
         foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>())
         {
             foreach (int i in equipmentWieldSlot.InventorySlots)

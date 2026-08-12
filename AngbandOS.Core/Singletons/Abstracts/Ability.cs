@@ -26,7 +26,6 @@ internal abstract class Ability : IGetKey, IGameSerialize
             Bonus = restoreGameState.GetByKey(nameof(Bonus)).GetInt();
             Innate = restoreGameState.GetByKey(nameof(Innate)).GetInt();
             InnateMax = restoreGameState.GetByKey(nameof(InnateMax)).GetInt();
-            Override = restoreGameState.GetByKey(nameof(Override)).GetBool();
             TableIndex = restoreGameState.GetByKey(nameof(TableIndex)).GetInt();
         }
     }
@@ -39,7 +38,6 @@ internal abstract class Ability : IGetKey, IGameSerialize
             (nameof(Bonus), saveGameState.CreateGameStateBag(Bonus)),
             (nameof(Innate), saveGameState.CreateGameStateBag(Innate)),
             (nameof(InnateMax), saveGameState.CreateGameStateBag(InnateMax)),
-            (nameof(Override), saveGameState.CreateGameStateBag(Override)),
             (nameof(TableIndex), saveGameState.CreateGameStateBag(TableIndex))
         );
     }
@@ -70,8 +68,6 @@ internal abstract class Ability : IGetKey, IGameSerialize
     /// </summary>
     public int InnateMax;
 
-    public bool Override;
-
     /// <summary>
     /// The index for the various tables from which ability bonuses are derived
     /// </summary>
@@ -86,27 +82,9 @@ internal abstract class Ability : IGetKey, IGameSerialize
     /// </summary>
     /// <param name="use"></param>
     /// <returns></returns>
-    public int OverrideUse(int use)
-    {
-        if (Override)
-        {
-            if (use < 8 + (2 * Game.ExperienceLevel.IntValue))
-            {
-                use = 8 + (2 * Game.ExperienceLevel.IntValue);
-            }
-        }
-        return use;
-    }
 
     public virtual void FlagActions() { }
 
-    public void OverrideUpdateBonuses()
-    {
-        if (Override)
-        {
-            Bonus = 0;
-        }
-    }
 
     public abstract bool HasSustain { get; }
     public abstract string DescStatNeg { get; }
