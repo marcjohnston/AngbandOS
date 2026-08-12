@@ -51,6 +51,14 @@ internal partial class Game : IGameSerialize
 
     #region UpdateBonuses Non-State Properties - Cached properties that are post-load initialized and properties that are computed based on the Game.AttributeSet
     /// <summary>
+    /// Returns the radius for which the player glows.  Spectres, sprites and vampires glow.
+    /// </summary>
+    public int GlowRadius { get; private set; }
+    public int SkillSearching { get; private set; }
+    public int SkillStealth { get; private set; }
+    public int SkillSavingThrow {get; private set; }
+
+    /// <summary>
     /// Returns true, if the player has aggravation.  Aggravation is a curse that causes monsters near the player to always be aware of the player and always attack the player.
     /// </summary>
     public bool HasAggravation { get; private set; }
@@ -64,14 +72,6 @@ internal partial class Game : IGameSerialize
     /// Returns true, if the player is immune to acid.
     /// </summary>
     public bool HasAcidImmunity { get; private set; }
-
-    /// <summary>
-    /// Returns the radius for which the player glows.  Spectres, sprites and vampires glow.
-    /// </summary>
-    public int GlowRadius { get; private set; }
-    public int SkillSearching { get; private set; }
-    public int SkillStealth { get; private set; }
-    public int SkillSavingThrow {get; private set; }
 
     public bool HasAcidResistance { get; private set; }
     public bool HasAntiMagic { get; private set; }
