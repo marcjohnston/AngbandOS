@@ -1197,6 +1197,7 @@ internal partial class Game : IGameSerialize
         }
 
         MutationsPossessed.Add(mutation);
+        mutation.RegenerateAttributeSets();
         mutation.OnGain();
         MsgPrint(mutation.GainMessage);
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();

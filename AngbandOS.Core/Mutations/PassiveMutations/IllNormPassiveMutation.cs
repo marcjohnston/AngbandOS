@@ -17,6 +17,7 @@ internal class IllNormPassiveMutation : Mutation
         (1, nameof(IllNormPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Masked Illusion (P)";
+    public override bool RegenerateOnlyOnGain => false;
 
     public override void OnGain()
     {

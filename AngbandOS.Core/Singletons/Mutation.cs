@@ -16,9 +16,9 @@ internal abstract class Mutation : IGetKey, IGameSerialize
         Game = game;
     }
     public abstract string Title { get; }
-    public virtual string Key => GetType().Name;
+    public string Key => GetType().Name;
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
@@ -59,6 +59,7 @@ internal abstract class Mutation : IGetKey, IGameSerialize
             AttributeSet = effectiveAttributeSet.ToReadOnly();
         }
     }
+    public virtual bool RegenerateOnlyOnGain => true;
 
     /// <summary>
     /// Generates the <see cref="ReadOnlyAttributeSet"/> for each enhancement.  This process should only be done during birth.  The enhancements may have random
