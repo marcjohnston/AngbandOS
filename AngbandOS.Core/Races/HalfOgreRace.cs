@@ -13,9 +13,6 @@ internal class HalfOgreRace : Race
         (1, nameof(HalfOgreRaceItemEnhancement)) 
     };
     public override string Title => "Half Ogre";
-    public override int SavingThrow => -5;
-    public override int Stealth => -2;
-    public override int Search => -1;
     public override int BasePerception => 5;
     public override int MeleeToHit => 20;
     public override int RangedToHit => 0;

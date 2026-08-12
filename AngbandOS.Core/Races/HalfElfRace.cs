@@ -13,9 +13,6 @@ internal class HalfElfRace : Race
         (1, nameof(HalfElfRaceItemEnhancement)) 
     };
     public override string Title => "Half Elf";
-    public override int SavingThrow => 3;
-    public override int Stealth => 1;
-    public override int Search => 6;
     public override int BasePerception => 11;
     public override int MeleeToHit => -1;
     public override int RangedToHit => 5;

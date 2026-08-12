@@ -14,15 +14,12 @@ internal class PriestCharacterClass : CharacterClass
     };
     public override int ID => 2;
     public override string Title => "Priest";
-    public override int Stealth => 2;
-    public override int Search => 16;
     public override int BasePerception => 8;
     public override int UnpriestlyWeaponAdditionalFailureChance => 25;
     public override int? AttackAndDamageBonusForUnpriestlyWeapon => -2;
     public override int MeleeToHit => 48;
     public override int RangedToHit => 36;
     public override int DisarmBonusPerLevel => 7;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 20;
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 2;

@@ -13,9 +13,6 @@ internal class HighElfRace : Race
         (1, nameof(HighElfRaceItemEnhancement)) 
     };
     public override string Title => "High Elf";
-    public override int SavingThrow => 20;
-    public override int Stealth => 4;
-    public override int Search => 3;
     public override int BasePerception => 14;
     public override int MeleeToHit => 10;
     public override int RangedToHit => 25;

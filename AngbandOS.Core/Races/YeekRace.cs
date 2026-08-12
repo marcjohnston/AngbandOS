@@ -14,9 +14,6 @@ internal class YeekRace : Race
         (20, nameof(YeekRaceLevel20ItemEnhancement))
     };
     public override string Title => "Yeek";
-    public override int SavingThrow => 10;
-    public override int Stealth => 3;
-    public override int Search => 5;
     public override int BasePerception => 15;
     public override int MeleeToHit => -5;
     public override int RangedToHit => -5;

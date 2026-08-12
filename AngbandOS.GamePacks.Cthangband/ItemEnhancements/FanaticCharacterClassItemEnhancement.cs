@@ -15,6 +15,8 @@ public class FanaticCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(SavingThrowAttribute), "30"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "24"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "11")
+        (nameof(UseDeviceBonusPerLevelAttribute), "11"),
+        (nameof(SearchAttribute), "14"),
+        (nameof(StealthAttribute), "2")
     };
 }

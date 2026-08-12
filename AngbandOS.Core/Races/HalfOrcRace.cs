@@ -13,9 +13,6 @@ internal class HalfOrcRace : Race
         (1, nameof(HalfOrcRaceItemEnhancement)) 
     };
     public override string Title => "Half Orc";
-    public override int SavingThrow => -3;
-    public override int Stealth => -1;
-    public override int Search => 0;
     public override int BasePerception => 7;
     public override int MeleeToHit => 12;
     public override int RangedToHit => -5;

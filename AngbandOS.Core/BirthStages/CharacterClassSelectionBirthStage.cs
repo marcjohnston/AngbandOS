@@ -99,13 +99,13 @@ internal class CharacterClassSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "Shooting    :", 41, 53);
         Game.Screen.Print(ColorEnum.Purple, "Experience  :", 36, 31);
         Game.Screen.Print(ColorEnum.Purple, "Hit Dice    :", 37, 31);
-        Game.Screen.Print(ColorEnum.Purple, "Infravision :", 38, 31);
+        Game.Screen.Print(ColorEnum.Purple, "Infra-Vision:", 38, 31);
         Game.Screen.Print(ColorEnum.Purple, "Searching   :", 39, 31);
         Game.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
         Game.DisplayAPlusB(67, 36, characterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)), characterClass.DisarmBonusPerLevel);
         Game.DisplayAPlusB(67, 37, characterClass.AttributeSet.GetInt(nameof(UseDeviceAttribute)), characterClass.AttributeSet.GetInt(nameof(UseDeviceBonusPerLevelAttribute)));
         Game.DisplayAPlusB(67, 38, characterClass.AttributeSet.GetInt(nameof(SavingThrowAttribute)), characterClass.AttributeSet.GetInt(nameof(SavingThrowBonusPerLevelAttribute)));
-        Game.DisplayAPlusB(67, 39, characterClass.Stealth * 4, characterClass.StealthBonusPerLevel * 4);
+        Game.DisplayAPlusB(67, 39, characterClass.AttributeSet.GetInt(nameof(StealthAttribute)), characterClass.AttributeSet.GetInt(nameof(StealthBonusPerLevelAttribute)));
         Game.DisplayAPlusB(67, 40, characterClass.MeleeToHit, characterClass.MeleeAttackBonusPerLevel);
         Game.DisplayAPlusB(67, 41, characterClass.RangedToHit, characterClass.RangedAttackBonusPerLevel);
         string buf = "+" + characterClass.ExperienceFactor + "%";
@@ -113,7 +113,7 @@ internal class CharacterClassSelectionBirthStage : BirthStage
         buf = "1d" + characterClass.HitDieBonus;
         Game.Screen.Print(ColorEnum.Black, buf, 37, 45);
         Game.Screen.Print(ColorEnum.Black, "-", 38, 45);
-        buf = $"{characterClass.Search:00}%";
+        buf = $"{characterClass.AttributeSet.GetInt(nameof(SearchAttribute)):00}%";
         Game.Screen.Print(ColorEnum.Black, buf, 39, 45);
         buf = $"{characterClass.BasePerception:00}%";
         Game.Screen.Print(ColorEnum.Black, buf, 40, 45);

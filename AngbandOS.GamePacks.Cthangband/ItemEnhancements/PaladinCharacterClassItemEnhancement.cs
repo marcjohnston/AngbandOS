@@ -16,6 +16,8 @@ public class PaladinCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(SavingThrowAttribute), "26"),
         (nameof(SavingThrowBonusPerLevelAttribute), "11"),
         (nameof(UseDeviceAttribute), "24"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "10")
+        (nameof(UseDeviceBonusPerLevelAttribute), "10"),
+        (nameof(SearchAttribute), "12"),
+        (nameof(StealthAttribute), "2")
     };
 }

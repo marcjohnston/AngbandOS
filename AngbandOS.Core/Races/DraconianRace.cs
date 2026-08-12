@@ -18,9 +18,6 @@ internal class DraconianRace : Race
         (35, nameof(DraconianRaceLevel35ItemEnhancement))
     };
     public override string Title => "Draconian";
-    public override int SavingThrow => 3;
-    public override int Stealth => 0;
-    public override int Search => 1;
     public override int BasePerception => 10;
     public override int MeleeToHit => 5;
     public override int RangedToHit => 5;

@@ -25,13 +25,10 @@ internal class CultistCharacterClass : CharacterClass
     public override int UnpriestlyWeaponAdditionalFailureChance => 25;
     public override bool HasPatron => true;
     public override int? SpellMinFailChance => 5;
-    public override int Stealth => 1;
-    public override int Search => 16;
     public override int BasePerception => 18;
     public override int MeleeToHit => 30;
     public override int RangedToHit => 20;
     public override int DisarmBonusPerLevel => 7;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 15;
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 0;

@@ -13,9 +13,6 @@ internal class GnomeRace : Race
         (1, nameof(GnomeRaceItemEnhancement)) 
     };
     public override string Title => "Gnome";
-    public override int SavingThrow => 12;
-    public override int Stealth => 3;
-    public override int Search => 6;
     public override int BasePerception => 13;
     public override int MeleeToHit => -8;
     public override int RangedToHit => 12;

@@ -16,6 +16,8 @@ public class RogueCharacterClassItemEnhancement : ItemEnhancementGameConfigurati
         (nameof(SavingThrowAttribute), "28"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "32"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "10")
+        (nameof(UseDeviceBonusPerLevelAttribute), "10"),
+        (nameof(SearchAttribute), "32"),
+        (nameof(StealthAttribute), "6")
     };
 }

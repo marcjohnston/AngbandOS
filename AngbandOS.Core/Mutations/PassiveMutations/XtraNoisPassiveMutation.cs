@@ -17,14 +17,4 @@ internal class XtraNoisPassiveMutation : Mutation
         (1, nameof(XtraNoisPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Noisy (P)";
-
-    public override void OnGain()
-    {
-        Game.StealthBonus -= 3;
-    }
-
-    public override void OnLose()
-    {
-        Game.StealthBonus += 3;
-    }
 }

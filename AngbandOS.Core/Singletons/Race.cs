@@ -105,10 +105,7 @@ internal abstract class Race : IGetKey, IGameSerialize
     public abstract int BaseAge { get; }
     public abstract int MeleeToHit { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
     public abstract int RangedToHit { get; }
-    public abstract int SavingThrow { get; }
-    public abstract int Search { get; }
     public abstract int BasePerception { get; }
-    public abstract int Stealth { get; }
     public abstract uint Choice { get; }
     public abstract int ExperienceFactor { get; }
     public abstract int HitDieBonus { get; }

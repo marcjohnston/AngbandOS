@@ -13,9 +13,6 @@ internal class VampireRace : Race
         (1, nameof(VampireRaceItemEnhancement)) 
     };
     public override string Title => "Vampire";
-    public override int SavingThrow => 10;
-    public override int Stealth => 4;
-    public override int Search => 1;
     public override int BasePerception => 8;
     public override int MeleeToHit => 5;
     public override int RangedToHit => 0;

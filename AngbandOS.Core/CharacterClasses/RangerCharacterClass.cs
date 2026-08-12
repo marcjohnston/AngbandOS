@@ -14,13 +14,10 @@ internal class RangerCharacterClass : CharacterClass
     };
     public override int ID => 4;
     public override string Title => "Ranger";
-    public override int Stealth => 3;
-    public override int Search => 24;
     public override int BasePerception => 16;
     public override int MeleeToHit => 56;
     public override int RangedToHit => 72;
     public override int DisarmBonusPerLevel => 8;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 30;
     public override int RangedAttackBonusPerLevel => 45;
     public override int HitDieBonus => 4;

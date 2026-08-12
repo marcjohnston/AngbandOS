@@ -15,9 +15,6 @@ internal class ImpRace : Race
         (20, nameof(ImpRaceLevel20ItemEnhancement))
     };
     public override string Title => "Imp";
-    public override int SavingThrow => -1;
-    public override int Stealth => 1;
-    public override int Search => -1;
     public override int BasePerception => 10;
     public override int MeleeToHit => 5;
     public override int RangedToHit => -5;

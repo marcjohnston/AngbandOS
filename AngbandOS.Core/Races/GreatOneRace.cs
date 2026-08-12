@@ -13,9 +13,6 @@ internal class GreatOneRace : Race
         (1, nameof(GreatOneRaceItemEnhancement)) 
     };
     public override string Title => "Great One";
-    public override int SavingThrow => 5;
-    public override int Stealth => 2;
-    public override int Search => 3;
     public override int BasePerception => 13;
     public override int MeleeToHit => 15;
     public override int RangedToHit => 10;

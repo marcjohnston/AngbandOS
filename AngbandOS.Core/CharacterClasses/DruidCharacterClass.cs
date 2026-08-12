@@ -14,17 +14,14 @@ internal class DruidCharacterClass : CharacterClass
     };
     public override int ID => 11;
     public override string Title => "Druid";
-    public override int Stealth => 3;
     public override int UnpriestlyWeaponAdditionalFailureChance => 25;
     public override int? AttackAndDamageBonusForUnpriestlyWeapon => -2;
 
-    public override int Search => 20;
     public override int? SpellMinFailChance => 5;
     public override int BasePerception => 8;
     public override int MeleeToHit => 48;
     public override int RangedToHit => 36;
     public override int DisarmBonusPerLevel => 8;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 20;
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 3;

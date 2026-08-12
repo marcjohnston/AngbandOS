@@ -16,6 +16,8 @@ public class ChosenOneCharacterClassItemEnhancement : ItemEnhancementGameConfigu
         (nameof(SavingThrowAttribute), "20"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "18"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "13")
+        (nameof(UseDeviceBonusPerLevelAttribute), "13"),
+        (nameof(SearchAttribute), "16"),
+        (nameof(StealthAttribute), "2")
     };
 }

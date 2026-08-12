@@ -13,9 +13,6 @@ internal class CyclopsRace : Race
         (1, nameof(CyclopsRaceItemEnhancement)) 
     };
     public override string Title => "Cyclops";
-    public override int SavingThrow => -5;
-    public override int Stealth => -2;
-    public override int Search => -2;
     public override int BasePerception => 5;
     public override int MeleeToHit => 20;
     public override int RangedToHit => 12;

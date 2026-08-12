@@ -16,6 +16,8 @@ public class PriestCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
         (nameof(SavingThrowAttribute), "32"),
         (nameof(SavingThrowBonusPerLevelAttribute), "12"),
         (nameof(UseDeviceAttribute), "30"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "10")
+        (nameof(UseDeviceBonusPerLevelAttribute), "10"),
+        (nameof(SearchAttribute), "16"),
+        (nameof(StealthAttribute), "3")
     };
 }

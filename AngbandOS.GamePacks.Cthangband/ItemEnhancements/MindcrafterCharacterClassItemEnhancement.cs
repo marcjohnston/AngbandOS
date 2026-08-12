@@ -16,6 +16,8 @@ public class MindcrafterCharacterClassItemEnhancement : ItemEnhancementGameConfi
         (nameof(SavingThrowAttribute), "30"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "30"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "10")
+        (nameof(UseDeviceBonusPerLevelAttribute), "10"),
+        (nameof(SearchAttribute), "22"),
+        (nameof(StealthAttribute), "4")
     };
 }

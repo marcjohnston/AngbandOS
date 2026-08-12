@@ -14,13 +14,10 @@ internal class WarriorMageCharacterClass : CharacterClass
     };
     public override int ID => 6;
     public override string Title => "Warrior-Mage";
-    public override int Stealth => 2;
-    public override int Search => 18;
     public override int BasePerception => 16;
     public override int MeleeToHit => 50;
     public override int RangedToHit => 26;
     public override int DisarmBonusPerLevel => 7;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 20;
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 4;

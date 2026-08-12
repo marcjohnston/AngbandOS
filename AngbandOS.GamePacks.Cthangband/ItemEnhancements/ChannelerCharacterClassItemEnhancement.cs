@@ -16,6 +16,8 @@ public class ChannelerCharacterClassItemEnhancement : ItemEnhancementGameConfigu
         (nameof(SavingThrowAttribute), "30"),
         (nameof(SavingThrowBonusPerLevelAttribute), "9"),
         (nameof(UseDeviceAttribute), "40"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "13")
+        (nameof(UseDeviceBonusPerLevelAttribute), "13"),
+        (nameof(SearchAttribute), "16"),
+        (nameof(StealthAttribute), "3")
     };
 }

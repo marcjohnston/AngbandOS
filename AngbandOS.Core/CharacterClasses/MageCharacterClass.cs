@@ -15,8 +15,6 @@ internal class MageCharacterClass : CharacterClass
     public override int ID => 1;
     public override int FriendsUpkeepDivider => 15;
     public override string Title => "Mage";
-    public override int Stealth => 2;
-    public override int Search => 16;
     public override int? SpellMinFailChance => 5;
     public override int BasePerception => 20;
     public override string InvokeSpiritsBeamProbabilityRollExpression => "X";
@@ -24,7 +22,6 @@ internal class MageCharacterClass : CharacterClass
     public override int MeleeToHit => 34;
     public override int RangedToHit => 20;
     public override int DisarmBonusPerLevel => 7;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 15;
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 0;

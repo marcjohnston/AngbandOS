@@ -16,6 +16,8 @@ public class MonkCharacterClassItemEnhancement : ItemEnhancementGameConfiguratio
         (nameof(SavingThrowAttribute), "28"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "32"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "12")
+        (nameof(UseDeviceBonusPerLevelAttribute), "12"),
+        (nameof(SearchAttribute), "32"),
+        (nameof(StealthAttribute), "6")
     };
 }

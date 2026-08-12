@@ -16,6 +16,8 @@ public class RangerCharacterClassItemEnhancement : ItemEnhancementGameConfigurat
         (nameof(SavingThrowAttribute), "28"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "32"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "10")
+        (nameof(UseDeviceBonusPerLevelAttribute), "10"),
+        (nameof(SearchAttribute), "24"),
+        (nameof(StealthAttribute), "4")
     };
 }

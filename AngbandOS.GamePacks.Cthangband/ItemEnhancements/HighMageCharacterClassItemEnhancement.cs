@@ -16,6 +16,8 @@ public class HighMageCharacterClassItemEnhancement : ItemEnhancementGameConfigur
         (nameof(SavingThrowAttribute), "30"),
         (nameof(SavingThrowBonusPerLevelAttribute), "9"),
         (nameof(UseDeviceAttribute), "38"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "13")
+        (nameof(UseDeviceBonusPerLevelAttribute), "13"),
+        (nameof(SearchAttribute), "16"),
+        (nameof(StealthAttribute), "3")
     };
 }

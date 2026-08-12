@@ -13,9 +13,6 @@ internal class NibelungRace : Race
         (1, nameof(NibelungRaceItemEnhancement)) 
     };
     public override string Title => "Nibelung";
-    public override int SavingThrow => 10;
-    public override int Stealth => 1;
-    public override int Search => 5;
     public override int BasePerception => 10;
     public override int MeleeToHit => 9;
     public override int RangedToHit => 0;

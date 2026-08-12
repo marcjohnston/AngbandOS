@@ -14,9 +14,6 @@ internal class SkeletonRace : Race
         (10, nameof(SkeletonRaceLevel10ItemEnhancement))
     };
     public override string Title => "Skeleton";
-    public override int SavingThrow => 5;
-    public override int Stealth => -1;
-    public override int Search => -1;
     public override int BasePerception => 8;
     public override int MeleeToHit => 10;
     public override int RangedToHit => 0;

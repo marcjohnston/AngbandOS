@@ -13,9 +13,6 @@ internal class ElfRace : Race
         (1, nameof(ElfRaceItemEnhancement)) 
     };
     public override string Title => "Elf";
-    public override int SavingThrow => 6;
-    public override int Stealth => 2;
-    public override int Search => 8;
     public override int BasePerception => 12;
     public override int MeleeToHit => -5;
     public override int RangedToHit => 15;

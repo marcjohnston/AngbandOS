@@ -13,9 +13,6 @@ internal class SpriteRace : Race
         (1, nameof(SpriteRaceItemEnhancement)) 
     };
     public override string Title => "Sprite";
-    public override int SavingThrow => 10;
-    public override int Stealth => 4;
-    public override int Search => 10;
     public override int BasePerception => 10;
     public override int MeleeToHit => -12;
     public override int RangedToHit => 0;

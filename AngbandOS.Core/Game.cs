@@ -11,12 +11,9 @@ internal partial class Game : IGameSerialize
     #region WIP State Data
     public int SkillMelee;
     public int SkillRanged;
-    public int SkillSavingThrow;
     public int SkillPerception;
-    public int SkillStealth;
-    public int SkillThrowing;
     public int SocialClass;
-    public int StealthBonus;
+    public int SkillThrowing;
     #endregion
 
     #region Confirmed State Data
@@ -73,6 +70,8 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public int GlowRadius { get; private set; }
     public int SkillSearching { get; private set; }
+    public int SkillStealth { get; private set; }
+    public int SkillSavingThrow {get; private set; }
 
     public bool HasAcidResistance { get; private set; }
     public bool HasAntiMagic { get; private set; }
@@ -260,10 +259,8 @@ internal partial class Game : IGameSerialize
             (nameof(SkillMelee), saveGameState.CreateGameStateBag(SkillMelee)),
             (nameof(SkillRanged), saveGameState.CreateGameStateBag(SkillRanged)),
             (nameof(SkillPerception), saveGameState.CreateGameStateBag(SkillPerception)),
-            (nameof(SkillStealth), saveGameState.CreateGameStateBag(SkillStealth)),
             (nameof(SkillThrowing), saveGameState.CreateGameStateBag(SkillThrowing)),
             (nameof(SocialClass), saveGameState.CreateGameStateBag(SocialClass)),
-            (nameof(StealthBonus), saveGameState.CreateGameStateBag(StealthBonus)),
             (nameof(replayPreviousKeystrokeDateTime), saveGameState.CreateGameStateBag(replayPreviousKeystrokeDateTime)),
             (nameof(MainSequenceGameStartSeed), saveGameState.CreateGameStateBag(MainSequenceGameStartSeed)),
             (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
@@ -555,10 +552,8 @@ internal partial class Game : IGameSerialize
             SkillMelee = restoreGameState.GetByKey(nameof(SkillMelee)).GetInt();
             SkillRanged = restoreGameState.GetByKey(nameof(SkillRanged)).GetInt();
             SkillPerception = restoreGameState.GetByKey(nameof(SkillPerception)).GetInt();
-            SkillStealth = restoreGameState.GetByKey(nameof(SkillStealth)).GetInt();
             SkillThrowing = restoreGameState.GetByKey(nameof(SkillThrowing)).GetInt();
             SocialClass = restoreGameState.GetByKey(nameof(SocialClass)).GetInt();
-            StealthBonus = restoreGameState.GetByKey(nameof(StealthBonus)).GetInt();
             replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTime();
             MainSequenceGameStartSeed = restoreGameState.GetByKey(nameof(MainSequenceGameStartSeed)).GetInt();
             AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(this, _restoreGameState));
@@ -2910,7 +2905,16 @@ internal partial class Game : IGameSerialize
         UseDevice = AttributeSet.GetInt(nameof(UseDeviceAttribute)) +
             (AttributeSet.GetInt(nameof(UseDeviceBonusPerLevelAttribute)) * ExperienceLevel.IntValue) / 10 +
             SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntUseDeviceBonus;
-        SkillSearching = AttributeSet.GetInt(nameof(SearchAttribute)); 
+        SkillSearching = AttributeSet.GetInt(nameof(SearchAttribute));
+        SkillStealth = AttributeSet.GetInt(nameof(StealthAttribute));
+        if (SkillStealth > 30)
+        {
+            SkillStealth = 30;
+        }
+        if (SkillStealth < 0)
+        {
+            SkillStealth = 0;
+        }
 
         #region Speed
         int oldVisibleOnlySpeed = Speed - SpeedHidden; // The speed flag is only for visible speed
@@ -3024,7 +3028,6 @@ internal partial class Game : IGameSerialize
         if (Race is not null)
         {
             ComputedDisarmTraps = Race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + CharacterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
-            SkillStealth = Race.Stealth + CharacterClass.Stealth; // done .. need to copy
             SkillPerception = Race.BasePerception + CharacterClass.BasePerception; // added to attributes
             SkillMelee = Race.MeleeToHit + CharacterClass.MeleeToHit; // this appears to be tohit
             SkillRanged = Race.RangedToHit + CharacterClass.RangedToHit; // added rangedtohit
@@ -3034,7 +3037,6 @@ internal partial class Game : IGameSerialize
         MeleeAttacksPerRound = 1;
         MissileAttacksPerRound = 1;
         SkillPerception += SkillSearching;
-        SkillStealth += StealthBonus;
         foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>())
         {
             foreach (int i in equipmentWieldSlot.InventorySlots)
@@ -3042,7 +3044,6 @@ internal partial class Game : IGameSerialize
                 Item? oPtr = GetInventoryItem(i);
                 if (oPtr != null)
                 {
-                    SkillStealth += oPtr.EffectiveAttributeSet.Stealth;
                     SkillPerception += oPtr.EffectiveAttributeSet.Search * 5;
                     Tunnel += oPtr.EffectiveAttributeSet.Tunnel * 20;
                     extraBlows += oPtr.EffectiveAttributeSet.Attacks;
@@ -3276,23 +3277,13 @@ internal partial class Game : IGameSerialize
             }
         }
 
-        SkillStealth++;
         ComputedDisarmTraps += SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexDisarmBonus;
         ComputedDisarmTraps += SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntDisarmBonus;
         Tunnel += SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDiggingBonus;
         ComputedDisarmTraps += (CharacterClass.DisarmBonusPerLevel * ExperienceLevel.IntValue) / 10;
-        SkillStealth += (CharacterClass.StealthBonusPerLevel * ExperienceLevel.IntValue) / 10;
         SkillMelee += (CharacterClass.MeleeAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;
         SkillRanged += (CharacterClass.RangedAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;
         SkillThrowing += (CharacterClass.RangedAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;
-        if (SkillStealth > 30)
-        {
-            SkillStealth = 30;
-        }
-        if (SkillStealth < 0)
-        {
-            SkillStealth = 0;
-        }
         if (Tunnel < 1)
         {
             Tunnel = 1;

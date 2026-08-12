@@ -16,6 +16,8 @@ public class WarriorCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(SavingThrowAttribute), "18"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "18"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "7")
+        (nameof(UseDeviceBonusPerLevelAttribute), "7"),
+        (nameof(SearchAttribute), "14"),
+        (nameof(StealthAttribute), "2")
     };
 }

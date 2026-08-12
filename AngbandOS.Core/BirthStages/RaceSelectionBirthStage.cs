@@ -77,12 +77,12 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "DEX:", 39, 21);
         Game.Screen.Print(ColorEnum.Purple, "CON:", 40, 21);
         Game.Screen.Print(ColorEnum.Purple, "CHA:", 41, 21);
-        Game.DisplayStatBonus(26, 36, race.AttributeSet.GetInt(nameof(BonusStrengthAttribute)));
-        Game.DisplayStatBonus(26, 37, race.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)));
-        Game.DisplayStatBonus(26, 38, race.AttributeSet.GetInt(nameof(BonusWisdomAttribute)));
-        Game.DisplayStatBonus(26, 39, race.AttributeSet.GetInt(nameof(BonusDexterityAttribute)));
-        Game.DisplayStatBonus(26, 40, race.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)));
-        Game.DisplayStatBonus(26, 41, race.AttributeSet.GetInt(nameof(BonusCharismaAttribute)));
+        Game.DisplayStatBonus(26, 36, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusStrengthAttribute)) + race.AttributeSet.GetInt(nameof(BonusStrengthAttribute)));
+        Game.DisplayStatBonus(26, 37, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)) + race.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)));
+        Game.DisplayStatBonus(26, 38, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusWisdomAttribute)) + race.AttributeSet.GetInt(nameof(BonusWisdomAttribute)));
+        Game.DisplayStatBonus(26, 39, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusDexterityAttribute)) + race.AttributeSet.GetInt(nameof(BonusDexterityAttribute)));
+        Game.DisplayStatBonus(26, 40, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)) + race.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)));
+        Game.DisplayStatBonus(26, 41, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusCharismaAttribute)) + race.AttributeSet.GetInt(nameof(BonusCharismaAttribute)));
         Game.Screen.Print(ColorEnum.Purple, "Disarming   :", 36, 53);
         Game.Screen.Print(ColorEnum.Purple, "Magic Device:", 37, 53);
         Game.Screen.Print(ColorEnum.Purple, "Saving Throw:", 38, 53);
@@ -91,13 +91,13 @@ internal class RaceSelectionBirthStage : BirthStage
         Game.Screen.Print(ColorEnum.Purple, "Shooting    :", 41, 53);
         Game.Screen.Print(ColorEnum.Purple, "Experience  :", 36, 31);
         Game.Screen.Print(ColorEnum.Purple, "Hit Dice    :", 37, 31);
-        Game.Screen.Print(ColorEnum.Purple, "Infravision :", 38, 31);
+        Game.Screen.Print(ColorEnum.Purple, "Infra-Vision:", 38, 31);
         Game.Screen.Print(ColorEnum.Purple, "Searching   :", 39, 31);
         Game.Screen.Print(ColorEnum.Purple, "Perception  :", 40, 31);
         Game.DisplayAPlusB(67, 36, Game.CharacterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)), Game.CharacterClass.DisarmBonusPerLevel);
-        Game.DisplayAPlusB(67, 37, Game.CharacterClass.AttributeSet.GetInt(nameof(UseDeviceAttribute)) + race.AttributeSet.GetInt(nameof(UseDeviceAttribute)), Game.CharacterClass.AttributeSet.GetInt(nameof(UseDeviceBonusPerLevelAttribute)));
-        Game.DisplayAPlusB(67, 38, Game.AttributeSet.GetInt(nameof(SavingThrowAttribute)), Game.AttributeSet.GetInt(nameof(SavingThrowBonusPerLevelAttribute)));
-        Game.DisplayAPlusB(67, 39, (Game.CharacterClass.Stealth * 4) + (race.Stealth * 4), Game.CharacterClass.StealthBonusPerLevel * 4);
+        Game.DisplayAPlusB(67, 37, Game.CharacterClass.AttributeSet.GetInt(nameof(UseDeviceAttribute)) + race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)), Game.CharacterClass.AttributeSet.GetInt(nameof(UseDeviceBonusPerLevelAttribute)));
+        Game.DisplayAPlusB(67, 38, Game.CharacterClass.AttributeSet.GetInt(nameof(SavingThrowAttribute)) + race.AttributeSet.GetInt(nameof(SavingThrowAttribute)), Game.CharacterClass.AttributeSet.GetInt(nameof(SavingThrowBonusPerLevelAttribute)));
+        Game.DisplayAPlusB(67, 39, Game.CharacterClass.AttributeSet.GetInt(nameof(StealthAttribute)) + race.AttributeSet.GetInt(nameof(StealthAttribute)), Game.AttributeSet.GetInt(nameof(StealthBonusPerLevelAttribute)));
         Game.DisplayAPlusB(67, 40, Game.CharacterClass.MeleeToHit + race.MeleeToHit, Game.CharacterClass.MeleeAttackBonusPerLevel);
         Game.DisplayAPlusB(67, 41, Game.CharacterClass.RangedToHit + race.RangedToHit, Game.CharacterClass.RangedAttackBonusPerLevel);
         Game.Screen.Print(ColorEnum.Black, race.ExperienceFactor + Game.CharacterClass.ExperienceFactor + "%", 36, 45);
@@ -111,7 +111,7 @@ internal class RaceSelectionBirthStage : BirthStage
         {
             Game.Screen.Print(ColorEnum.Green, bonusInfravision + "0 feet", 38, 45); // TODO: This assumes a 10 foot per unit of infravision conversion that should be configurable.
         }
-        Game.Screen.Print(ColorEnum.Black, $"{race.Search + Game.CharacterClass.Search:00}%", 39, 45);
+        Game.Screen.Print(ColorEnum.Black, $"{Game.CharacterClass.AttributeSet.GetInt(nameof(SearchAttribute)) + race.AttributeSet.GetInt(nameof(SearchAttribute)):00}%", 39, 45);
         Game.Screen.Print(ColorEnum.Black, $"{race.BasePerception + Game.CharacterClass.BasePerception:00}%", 40, 45);
 
         // Retrieve the description for the race and split the description into lines.

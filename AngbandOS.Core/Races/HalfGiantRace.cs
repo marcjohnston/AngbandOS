@@ -13,9 +13,6 @@ internal class HalfGiantRace : Race
         (1, nameof(HalfGiantRaceItemEnhancement)) 
     };
     public override string Title => "Half Giant";
-    public override int SavingThrow => -6;
-    public override int Stealth => -2;
-    public override int Search => -1;
     public override int BasePerception => 5;
     public override int MeleeToHit => 25;
     public override int RangedToHit => 5;

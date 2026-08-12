@@ -16,6 +16,8 @@ public class WarriorMageCharacterClassItemEnhancement : ItemEnhancementGameConfi
         (nameof(SavingThrowAttribute), "28"),
         (nameof(SavingThrowBonusPerLevelAttribute), "9"),
         (nameof(UseDeviceAttribute), "30"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "10")
+        (nameof(UseDeviceBonusPerLevelAttribute), "10"),
+        (nameof(SearchAttribute), "18"),
+        (nameof(StealthAttribute), "3")
     };
 }

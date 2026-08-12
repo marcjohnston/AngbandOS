@@ -16,6 +16,8 @@ public class CultistCharacterClassItemEnhancement : ItemEnhancementGameConfigura
         (nameof(SavingThrowAttribute), "32"),
         (nameof(SavingThrowBonusPerLevelAttribute), "10"),
         (nameof(UseDeviceAttribute), "36"),
-        (nameof(UseDeviceBonusPerLevelAttribute), "13")
+        (nameof(UseDeviceBonusPerLevelAttribute), "13"),
+        (nameof(SearchAttribute), "16"),
+        (nameof(StealthAttribute), "2")
     };
 }
