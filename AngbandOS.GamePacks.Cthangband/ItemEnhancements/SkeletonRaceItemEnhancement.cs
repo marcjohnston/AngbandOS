@@ -21,7 +21,7 @@ public class SkeletonRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(DisarmTrapsAttribute), "-5"),
         (nameof(SavingThrowAttribute), "5"),
         (nameof(StealthAttribute), "-1"),
-        (nameof(SearchAttribute), "-1"),
+        (nameof(SearchAttribute), "-5"),
         (nameof(UseDeviceAttribute), "-5"),
     };
 }

@@ -21,7 +21,7 @@ public class BroadSwordBrightbladeFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(GlowRadiusAttribute), "3"),
         (nameof(ValueAttribute), "40000"),
-        (nameof(SearchAttribute), "1"),
+        (nameof(SearchAttribute), "5"),
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(ToDamageAttribute), "15"),
     };

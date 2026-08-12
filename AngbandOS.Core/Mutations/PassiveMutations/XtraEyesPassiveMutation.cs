@@ -17,13 +17,4 @@ internal class XtraEyesPassiveMutation : Mutation
         (1, nameof(XtraEyesPassiveMutationItemEnhancement)) 
     };
     public override string Title => "Extra Eyes (P)";
-    public override void OnGain()
-    {
-        Game.SearchBonus += 15;
-    }
-
-    public override void OnLose()
-    {
-        Game.SearchBonus -= 15;
-    }
 }

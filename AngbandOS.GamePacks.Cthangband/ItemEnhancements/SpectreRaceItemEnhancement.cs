@@ -24,7 +24,7 @@ public class SpectreRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(DisarmTrapsAttribute), "10"),
         (nameof(SavingThrowAttribute), "20"),
         (nameof(StealthAttribute), "5"),
-        (nameof(SearchAttribute), "5"),
+        (nameof(SearchAttribute), "25"),
         (nameof(UseDeviceAttribute), "25"),
     };
 }

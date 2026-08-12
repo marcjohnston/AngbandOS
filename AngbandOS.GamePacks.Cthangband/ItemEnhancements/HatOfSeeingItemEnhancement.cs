@@ -11,7 +11,7 @@ public class HatOfSeeingItemEnhancement : ItemEnhancementGameConfiguration
     {
         (nameof(ValueAttribute), "1000"),
         (nameof(TreasureRatingAttribute), "8"),
-        (nameof(SearchAttribute), "1d5"),
+        (nameof(SearchAttribute), "1d5*5"),
     };
     public override string? FriendlyName => "of Seeing";
 }

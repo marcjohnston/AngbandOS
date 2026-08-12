@@ -19,7 +19,7 @@ public class KlackonRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(DisarmTrapsAttribute), "10"),
         (nameof(SavingThrowAttribute), "5"),
         (nameof(StealthAttribute), "0"),
-        (nameof(SearchAttribute), "-1"),
+        (nameof(SearchAttribute), "-5"),
         (nameof(BonusStrengthAttribute), "2"),
         (nameof(UseDeviceAttribute), "5"),
     };

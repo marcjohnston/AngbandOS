@@ -3,6 +3,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 {
     public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(SearchAttribute), "15"),
+        (nameof(SearchAttribute), "75"),
     };
 }

@@ -19,7 +19,7 @@ public class YeekRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(DisarmTrapsAttribute), "2"),
         (nameof(SavingThrowAttribute), "10"),
         (nameof(StealthAttribute), "3"),
-        (nameof(SearchAttribute), "5"),
+        (nameof(SearchAttribute), "25"),
         (nameof(UseDeviceAttribute), "4"),
     };
 }

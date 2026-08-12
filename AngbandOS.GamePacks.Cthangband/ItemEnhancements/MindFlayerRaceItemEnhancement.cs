@@ -19,7 +19,7 @@ public class MindFlayerRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(DisarmTrapsAttribute), "10"),
         (nameof(SavingThrowAttribute), "15"),
         (nameof(StealthAttribute), "2"),
-        (nameof(SearchAttribute), "5"),
+        (nameof(SearchAttribute), "25"),
         (nameof(UseDeviceAttribute), "25"),
     };
 }

@@ -14,7 +14,7 @@ public class StarEssenceOfPolarisFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(ValueAttribute), "10000"),
         (nameof(GlowRadiusAttribute), "1"),
-        (nameof(SearchAttribute), "1"),
+        (nameof(SearchAttribute), "5"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.IlluminationEvery1d10p10DirectionalActivation);
     public override string FriendlyName => "of Polaris";

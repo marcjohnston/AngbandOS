@@ -17,7 +17,7 @@ public class ImpRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(DisarmTrapsAttribute), "-3"),
         (nameof(SavingThrowAttribute), "-1"),
         (nameof(StealthAttribute), "1"),
-        (nameof(SearchAttribute), "-1"),
+        (nameof(SearchAttribute), "-5"),
         (nameof(BonusStrengthAttribute), "-1"),
         (nameof(UseDeviceAttribute), "2"),
     };

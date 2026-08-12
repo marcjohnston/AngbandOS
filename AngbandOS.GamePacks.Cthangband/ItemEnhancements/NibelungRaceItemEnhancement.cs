@@ -19,7 +19,7 @@ public class NibelungRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(DisarmTrapsAttribute), "3"),
         (nameof(SavingThrowAttribute), "10"),
         (nameof(StealthAttribute), "1"),
-        (nameof(SearchAttribute), "5"),
+        (nameof(SearchAttribute), "25"),
         (nameof(UseDeviceAttribute), "5"),
     };
 }

@@ -19,7 +19,7 @@ public class RingOfMagicFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(ValueAttribute), "75000"),
         (nameof(BonusWisdomAttribute), "1"),
         (nameof(StealthAttribute), "1"),
-        (nameof(SearchAttribute), "1"),
+        (nameof(SearchAttribute), "5"),
         (nameof(BonusIntelligenceAttribute), "1"),
         (nameof(BonusDexterityAttribute), "1"),
         (nameof(BonusConstitutionAttribute), "1"),

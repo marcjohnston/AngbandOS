@@ -19,7 +19,7 @@ public class WeaponPlanarWeaponItemEnhancement : ItemEnhancementGameConfiguratio
         (nameof(TreasureRatingAttribute), "22"),
         (nameof(MeleeToHitAttribute), "1d4"),
         (nameof(ToDamageAttribute), "1d4"),
-        (nameof(SearchAttribute), "1d2"),
+        (nameof(SearchAttribute), "1d2*5"),
     };
     public override string? FriendlyName => "(Planar Weapon)";
 }

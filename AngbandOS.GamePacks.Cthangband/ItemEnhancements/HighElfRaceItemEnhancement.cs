@@ -18,7 +18,7 @@ public class HighElfRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(DisarmTrapsAttribute), "4"),
         (nameof(SavingThrowAttribute), "20"),
         (nameof(StealthAttribute), "4"),
-        (nameof(SearchAttribute), "3"),
+        (nameof(SearchAttribute), "15"),
         (nameof(BonusStrengthAttribute), "1"),
         (nameof(UseDeviceAttribute), "20"),
     };

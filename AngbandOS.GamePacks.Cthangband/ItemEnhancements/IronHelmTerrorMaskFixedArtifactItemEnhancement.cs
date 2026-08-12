@@ -27,7 +27,7 @@ public class IronHelmTerrorMaskFixedArtifactItemEnhancement : ItemEnhancementGam
     {
         (nameof(BonusIntelligenceAttribute), "-1"),
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(SearchAttribute), "-1"),
+        (nameof(SearchAttribute), "-5"),
         (nameof(ToDamageAttribute), "25"),
         (nameof(MeleeToHitAttribute), "25"),
         (nameof(AttacksAttribute), "10"),

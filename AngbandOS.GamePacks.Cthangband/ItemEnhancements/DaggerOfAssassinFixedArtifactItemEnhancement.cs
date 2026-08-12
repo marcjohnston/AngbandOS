@@ -23,7 +23,7 @@ public class DaggerOfAssassinFixedArtifactItemEnhancement : ItemEnhancementGameC
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(BonusDexterityAttribute), "4"),
-        (nameof(SearchAttribute), "4"),
+        (nameof(SearchAttribute), "20"),
         (nameof(StealthAttribute), "4"),
         (nameof(ValueAttribute), "125000"),
         (nameof(DamageDiceAttribute), "1"),

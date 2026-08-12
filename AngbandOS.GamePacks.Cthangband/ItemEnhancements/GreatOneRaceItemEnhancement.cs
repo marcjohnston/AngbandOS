@@ -17,7 +17,7 @@ public class GreatOneRaceItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(DisarmTrapsAttribute), "4"),
         (nameof(SavingThrowAttribute), "5"),
         (nameof(StealthAttribute), "2"),
-        (nameof(SearchAttribute), "3"),
+        (nameof(SearchAttribute), "15"),
         (nameof(BonusStrengthAttribute), "1"),
         (nameof(UseDeviceAttribute), "5"),
     };
