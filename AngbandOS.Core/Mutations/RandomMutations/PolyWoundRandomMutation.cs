@@ -17,9 +17,6 @@ internal class PolyWoundRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        if (base.Game.DieRoll(3000) == 1)
-        {
-            Game.RunScript(nameof(PolymorphWoundsScript));
-        }
+        Game.RunScript(nameof(PolyWoundRandomMutationMutationScript));
     }
 }

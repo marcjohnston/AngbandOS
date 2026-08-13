@@ -17,17 +17,6 @@ internal class RandomTeleportationRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        if (base.Game.DieRoll(5000) != 88)
-        {
-            return;
-        }
-        if (Game.HasNexusResistance || Game.HasAntiTeleport)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.MsgPrint("Your position suddenly seems very uncertain...");
-        Game.MsgPrint(string.Empty);
-        Game.RunScript(nameof(TeleportSelf40TeleportSelfScript));
+        Game.RunScript(nameof(RandomTeleportationRandomMutationMutationScript));
     }
 }

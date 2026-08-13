@@ -703,6 +703,7 @@ internal partial class Game : IGameSerialize
         }
         GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression ?? "1/20");
 
+        GameTickEvents = SingletonRepository.GetNullable<IScript>(gameConfiguration.GameTickEventBindingKeys);
         RequiredExperiencePerLevel = gameConfiguration.RequiredExperiencePerLevel;
         ExtractEnergy = gameConfiguration.ExtractEnergy;
         BlowsTable = gameConfiguration.BlowsTable;
@@ -1844,6 +1845,8 @@ internal partial class Game : IGameSerialize
     /// Returns the expression providers that are used for game and player expression computations.
     /// </summary>
     private readonly Dictionary<string, object> GlobalExpressionProviders = new Dictionary<string, object>();
+
+    public IScript[]? GameTickEvents { get; } = null;
 
     public Dictionary<string, object> GetExpressionProviders(params (string, object)[]? additionalProviders)
     {

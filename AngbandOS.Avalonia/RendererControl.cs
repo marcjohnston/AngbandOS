@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 namespace AngbandOS.Avalonia
 {
     // Single-control renderer (fast). It owns its buffers and draws in Render.
-    internal class RendererControl : Control
+internal class RendererControl : Control
     {
         private readonly object _sync = new();
 

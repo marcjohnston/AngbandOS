@@ -5,7 +5,7 @@ using AngbandOS.Web.Interface;
 
 namespace AngbandOS.Web.Hubs
 {
-    internal class PlayNewGameRunContext : RunContext
+internal class PlayNewGameRunContext : RunContext
     {
         private readonly string UserId;
         private readonly GameConfiguration GameConfiguration;

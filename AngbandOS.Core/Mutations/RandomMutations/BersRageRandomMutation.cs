@@ -17,13 +17,6 @@ internal class BersRageRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        if (base.Game.DieRoll(3000) != 1)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.MsgPrint("RAAAAGHH!");
-        Game.MsgPrint("You feel a fit of rage coming over you!");
-        Game.SuperheroismTimer.AddTimer(10 + base.Game.DieRoll(Game.ExperienceLevel.IntValue));
+        Game.RunScript(nameof(BersRageRandomMutationMutationScript));
     }
 }

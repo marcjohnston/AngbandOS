@@ -1646,7 +1646,6 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     }
     #endregion
 
-
     #region Constructors
     /// <summary>
     /// Create a new item with a stackcount of 1.  Items must be associated with a factory.  No enhancements are applied.

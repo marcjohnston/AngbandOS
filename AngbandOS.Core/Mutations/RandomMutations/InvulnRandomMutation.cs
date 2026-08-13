@@ -17,12 +17,6 @@ internal class InvulnRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        if (!Game.HasAntiMagic && base.Game.DieRoll(5000) == 1)
-        {
-            Game.Disturb(false);
-            Game.MsgPrint("You feel invincible!");
-            Game.MsgPrint(string.Empty);
-            Game.InvulnerabilityTimer.AddTimer(base.Game.DieRoll(8) + 8);
-        }
+        Game.RunScript(nameof(InvulnRandomMutationMutationScript));
     }
 }

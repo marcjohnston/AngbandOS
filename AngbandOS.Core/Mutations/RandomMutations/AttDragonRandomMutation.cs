@@ -17,24 +17,6 @@ internal class AttDragonRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        if (Game.HasAntiMagic || base.Game.DieRoll(3000) != 13)
-        {
-            return;
-        }
-        bool dSummon;
-        if (base.Game.DieRoll(5) == 1)
-        {
-            dSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(DragonMonsterRaceFilter)), true, true);
-        }
-        else
-        {
-            dSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(DragonMonsterRaceFilter)), true, false);
-        }
-        if (!dSummon)
-        {
-            return;
-        }
-        Game.MsgPrint("You have attracted a dragon!");
-        Game.Disturb(false);
+        Game.RunScript(nameof(AttDragonRandomMutationMutationScript));
     }
 }

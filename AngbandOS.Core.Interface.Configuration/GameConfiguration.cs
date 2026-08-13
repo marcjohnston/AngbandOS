@@ -218,6 +218,8 @@ public class GameConfiguration
         gameConfiguration.StringAttributes = LoadFromAssembly<StringNullableReferenceAttributeGameConfiguration>(assembly);
     }
 
+    public virtual string[]? GameTickEventBindingKeys { get; set; } = null;
+
     /// <summary>
     /// Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.
     /// </summary>    

@@ -3,7 +3,7 @@ using AngbandOS.Web.Interface;
 
 namespace AngbandOS.Web.Hubs
 {
-    internal class SqlReplayAdapter : IReplayPersistentStorage
+internal class SqlReplayAdapter : IReplayPersistentStorage
     {
         private readonly int GameReplayId;
         private readonly IWebPersistentStorage WebPersistentStorage;

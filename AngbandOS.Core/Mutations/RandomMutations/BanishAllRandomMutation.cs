@@ -17,13 +17,6 @@ internal class BanishAllRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        if (base.Game.DieRoll(9000) != 1)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.MsgPrint("You suddenly feel almost lonely.");
-        Game.RunScript(nameof(TeleportAwayAll100ProjectileScript));
-        Game.MsgPrint(string.Empty);
+        Game.RunScript(nameof(BanishAllRandomMutationMutationScript));
     }
 }

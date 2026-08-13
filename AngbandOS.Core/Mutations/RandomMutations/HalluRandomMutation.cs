@@ -17,16 +17,6 @@ internal class HalluRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        if (base.Game.DieRoll(6400) != 42)
-        {
-            return;
-        }
-        if (Game.HasChaosResistance)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
-        Game.HallucinationsTimer.AddTimer(base.Game.RandomLessThan(50) + 20);
+        Game.RunScript(nameof(HalluRandomMutationMutationScript));
     }
 }

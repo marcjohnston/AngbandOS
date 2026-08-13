@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Mail;
 namespace AngbandOS.Web
 {
-    internal class EmailSender : IEmailSender
+internal class EmailSender : IEmailSender
     {
         private string SmtpAccount;
         private string SmtpPassword;

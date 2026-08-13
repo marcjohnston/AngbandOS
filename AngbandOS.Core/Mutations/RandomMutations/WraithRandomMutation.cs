@@ -17,13 +17,6 @@ internal class WraithRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        if (Game.HasAntiMagic || Game.DieRoll(3000) != 13)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.MsgPrint("You feel insubstantial!");
-        Game.MsgPrint(string.Empty);
-        Game.EtherealnessTimer.AddTimer(Game.DieRoll(Game.ExperienceLevel.IntValue / 2) + Game.ExperienceLevel.IntValue / 2);
+        Game.RunScript(nameof(WraithRandomMutationMutationScript));
     }
 }

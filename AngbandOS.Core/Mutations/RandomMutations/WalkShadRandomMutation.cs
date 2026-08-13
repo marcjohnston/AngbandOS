@@ -17,9 +17,6 @@ internal class WalkShadRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        if (!Game.HasAntiMagic && base.Game.DieRoll(12000) == 1)
-        {
-            Game.AlterReality();
-        }
+        Game.RunScript(nameof(WalkShadRandomMutationMutationScript));
     }
 }
