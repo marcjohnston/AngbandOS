@@ -33,7 +33,7 @@ internal abstract class EffectiveAttributeValue : AttributeValue
         Attribute = restoreGameState.GetByKey(nameof(Attribute)).GetDerivedReference<Attribute>();
     }
 
-    public abstract string RenderForItemIdentification { get; }
+    public abstract string[] RenderForItemIdentification { get; }
     public abstract EffectiveAttributeValue Clone();
 
     public abstract ReadOnlyAttributeValue ToReadOnly();

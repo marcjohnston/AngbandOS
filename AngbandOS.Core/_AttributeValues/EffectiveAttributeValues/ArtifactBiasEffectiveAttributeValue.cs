@@ -76,7 +76,7 @@ internal class ArtifactBiasEffectiveAttributeValue : EffectiveAttributeValue
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }
-    public override string RenderForItemIdentification => Get()?.AffinityName.ToLower() ?? "nothing";
+    public override string[] RenderForItemIdentification => new string[] { Get()?.AffinityName.ToLower() ?? "nothing" };
     public override void Merge(AttributeValue value)
     {
         ArtifactBiasReadOnlyAttributeValue setEffectiveAttributeValue = (ArtifactBiasReadOnlyAttributeValue)value;

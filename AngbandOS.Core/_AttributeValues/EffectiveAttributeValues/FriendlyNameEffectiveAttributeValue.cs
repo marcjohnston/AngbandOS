@@ -75,7 +75,7 @@ internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }
-    public override string RenderForItemIdentification => "";
+    public override string[] RenderForItemIdentification => new string[] { "" };
     public override ReadOnlyAttributeValue ToReadOnly() => new NullableStringReadOnlyAttributeValue(Get());
     public override void Merge(AttributeValue value)
     {

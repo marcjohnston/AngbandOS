@@ -26,7 +26,7 @@ internal class BitwiseOrEffectiveAttributeValue : EffectiveAttributeValue
             _restoreGameState => _restoreGameState.GetBool());
         _attributeModifiers.AddRange(modifiers);
     }
-    public override string RenderForItemIdentification => Get().ToString();
+    public override string[] RenderForItemIdentification => new string[] { Get().ToString() };
 
     public bool Reset()
     {
