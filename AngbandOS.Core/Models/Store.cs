@@ -643,6 +643,7 @@ internal class Store : IGameSerialize
             Game.Screen.Print("You may: ", 41, 0);
             Game.RequestCommand(false);
             ProcessCommand();
+            Game.ConsoleView.RefreshWidget<GameMessageWidget>();
             Game.FullScreenOverlay = true;
             Game.NoticeStuff();
             Game.HandleStuff();

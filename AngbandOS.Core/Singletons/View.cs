@@ -43,7 +43,17 @@ internal sealed class View : IGetKey, IToJson, IGameSerialize
             widget.Update();
         }
     }
-
+    /// <summary>
+    /// updates only widgets of type T without touching any others. 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public void RefreshWidget<T>() where T : Widget
+    {
+        foreach (T widget in Widgets.OfType<T>())
+        {
+            widget.Update();
+        }
+    }
     public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState)
