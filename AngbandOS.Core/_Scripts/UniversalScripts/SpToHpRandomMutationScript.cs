@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class SpToHpRandomMutationMutationScript : UniversalScript, IGetKey
+internal class SpToHpRandomMutationScript : UniversalScript, IGetKey
 {
-    private SpToHpRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private SpToHpRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

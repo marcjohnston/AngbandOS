@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class DisarmRandomMutationMutationScript : UniversalScript, IGetKey
+internal class DisarmRandomMutationScript : UniversalScript, IGetKey
 {
-    private DisarmRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private DisarmRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

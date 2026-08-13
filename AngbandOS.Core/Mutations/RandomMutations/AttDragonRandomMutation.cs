@@ -17,6 +17,6 @@ internal class AttDragonRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(AttDragonRandomMutationMutationScript));
+        Game.RunScript(nameof(AttDragonRandomMutationScript));
     }
 }

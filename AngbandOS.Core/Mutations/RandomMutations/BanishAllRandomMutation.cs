@@ -17,6 +17,6 @@ internal class BanishAllRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(BanishAllRandomMutationMutationScript));
+        Game.RunScript(nameof(BanishAllRandomMutationScript));
     }
 }

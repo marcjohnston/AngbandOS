@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class RandomTeleportationRandomMutationMutationScript : UniversalScript, IGetKey
+internal class RandomTeleportationRandomMutationScript : UniversalScript, IGetKey
 {
-    private RandomTeleportationRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private RandomTeleportationRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

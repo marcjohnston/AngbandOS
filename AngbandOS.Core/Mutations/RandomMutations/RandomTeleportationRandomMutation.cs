@@ -17,6 +17,6 @@ internal class RandomTeleportationRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(RandomTeleportationRandomMutationMutationScript));
+        Game.RunScript(nameof(RandomTeleportationRandomMutationScript));
     }
 }

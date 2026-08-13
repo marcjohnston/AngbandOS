@@ -17,6 +17,6 @@ internal class WastingRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(WastingRandomMutationMutationScript));
+        Game.RunScript(nameof(WastingRandomMutationScript));
     }
 }

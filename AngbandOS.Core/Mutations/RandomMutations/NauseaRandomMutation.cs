@@ -17,6 +17,6 @@ internal class NauseaRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(NauseaRandomMutationMutationScript));
+        Game.RunScript(nameof(NauseaRandomMutationScript));
     }
 }

@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class WalkShadRandomMutationMutationScript : UniversalScript, IGetKey
+internal class WalkShadRandomMutationScript : UniversalScript, IGetKey
 {
-    private WalkShadRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private WalkShadRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

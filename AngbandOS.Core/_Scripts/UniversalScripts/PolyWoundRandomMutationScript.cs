@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class PolyWoundRandomMutationMutationScript : UniversalScript, IGetKey
+internal class PolyWoundRandomMutationScript : UniversalScript, IGetKey
 {
-    private PolyWoundRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private PolyWoundRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

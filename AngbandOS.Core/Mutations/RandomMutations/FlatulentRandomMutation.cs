@@ -19,6 +19,6 @@ internal class FlatulentRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(FlatulentRandomMutationMutationScript));
+        Game.RunScript(nameof(FlatulentRandomMutationScript));
     }
 }

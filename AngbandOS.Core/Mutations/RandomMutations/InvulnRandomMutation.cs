@@ -17,6 +17,6 @@ internal class InvulnRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(InvulnRandomMutationMutationScript));
+        Game.RunScript(nameof(InvulnRandomMutationScript));
     }
 }

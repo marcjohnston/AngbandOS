@@ -17,6 +17,6 @@ internal class AttAnimalRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(AttAnimalRandomMutationMutationScript));
+        Game.RunScript(nameof(AttAnimalRandomMutationScript));
     }
 }

@@ -17,6 +17,6 @@ internal class HalluRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(HalluRandomMutationMutationScript));
+        Game.RunScript(nameof(HalluRandomMutationScript));
     }
 }

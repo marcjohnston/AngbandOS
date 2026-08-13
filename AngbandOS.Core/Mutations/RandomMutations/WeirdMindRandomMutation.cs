@@ -17,6 +17,6 @@ internal class WeirdMindRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(WeirdMindRandomMutationMutationScript));
+        Game.RunScript(nameof(WeirdMindRandomMutationScript));
     }
 }

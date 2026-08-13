@@ -17,6 +17,6 @@ internal class DisarmRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(DisarmRandomMutationMutationScript));
+        Game.RunScript(nameof(DisarmRandomMutationScript));
     }
 }

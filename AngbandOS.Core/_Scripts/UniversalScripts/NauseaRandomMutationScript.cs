@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class NauseaRandomMutationMutationScript : UniversalScript, IGetKey
+internal class NauseaRandomMutationScript : UniversalScript, IGetKey
 {
-    private NauseaRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private NauseaRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

@@ -17,6 +17,6 @@ internal class WraithRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(WraithRandomMutationMutationScript));
+        Game.RunScript(nameof(WraithRandomMutationScript));
     }
 }

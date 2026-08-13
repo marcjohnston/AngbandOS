@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class AlcoholRandomMutationMutationScript : UniversalScript, IGetKey
+internal class AlcoholRandomMutationScript : UniversalScript, IGetKey
 {
-    private AlcoholRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private AlcoholRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

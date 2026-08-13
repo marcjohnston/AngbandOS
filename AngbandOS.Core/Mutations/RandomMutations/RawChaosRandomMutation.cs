@@ -19,6 +19,6 @@ internal class RawChaosRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(RawChaosRandomMutationMutationScript));
+        Game.RunScript(nameof(RawChaosRandomMutationScript));
     }
 }

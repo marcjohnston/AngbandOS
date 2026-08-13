@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class SpeedFluxRandomMutationMutationScript : UniversalScript, IGetKey
+internal class SpeedFluxRandomMutationScript : UniversalScript, IGetKey
 {
-    private SpeedFluxRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private SpeedFluxRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class EatLightRandomMutationMutationScript : UniversalScript, IGetKey
+internal class EatLightRandomMutationScript : UniversalScript, IGetKey
 {
-    private EatLightRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private EatLightRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

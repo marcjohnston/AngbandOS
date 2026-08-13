@@ -18,6 +18,6 @@ internal class CowardiceRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(CowardiceRandomMutationMutationScript));
+        Game.RunScript(nameof(CowardiceRandomMutationScript));
     }
 }

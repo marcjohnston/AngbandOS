@@ -17,6 +17,6 @@ internal class AlcoholRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(AlcoholRandomMutationMutationScript));
+        Game.RunScript(nameof(AlcoholRandomMutationScript));
     }
 }

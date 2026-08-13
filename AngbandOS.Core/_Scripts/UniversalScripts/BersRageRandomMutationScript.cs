@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class BersRageRandomMutationMutationScript : UniversalScript, IGetKey
+internal class BersRageRandomMutationScript : UniversalScript, IGetKey
 {
-    private BersRageRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private BersRageRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

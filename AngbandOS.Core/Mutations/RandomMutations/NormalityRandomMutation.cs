@@ -17,6 +17,6 @@ internal class NormalityRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(NormalityRandomMutationMutationScript));
+        Game.RunScript(nameof(NormalityRandomMutationScript));
     }
 }

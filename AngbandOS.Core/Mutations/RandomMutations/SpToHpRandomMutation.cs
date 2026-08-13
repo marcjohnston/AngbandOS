@@ -17,6 +17,6 @@ internal class SpToHpRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(SpToHpRandomMutationMutationScript));
+        Game.RunScript(nameof(SpToHpRandomMutationScript));
     }
 }

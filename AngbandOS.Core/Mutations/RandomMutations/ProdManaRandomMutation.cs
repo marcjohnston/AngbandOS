@@ -19,6 +19,6 @@ internal class ProdManaRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(ProdManaRandomMutationMutationScript));
+        Game.RunScript(nameof(ProdManaRandomMutationScript));
     }
 }

@@ -17,6 +17,6 @@ internal class EatLightRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(EatLightRandomMutationMutationScript));
+        Game.RunScript(nameof(EatLightRandomMutationScript));
     }
 }

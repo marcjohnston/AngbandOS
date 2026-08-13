@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class WraithRandomMutationMutationScript : UniversalScript, IGetKey
+internal class WraithRandomMutationScript : UniversalScript, IGetKey
 {
-    private WraithRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private WraithRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

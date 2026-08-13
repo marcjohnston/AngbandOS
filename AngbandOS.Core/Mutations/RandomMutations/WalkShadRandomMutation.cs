@@ -17,6 +17,6 @@ internal class WalkShadRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(WalkShadRandomMutationMutationScript));
+        Game.RunScript(nameof(WalkShadRandomMutationScript));
     }
 }

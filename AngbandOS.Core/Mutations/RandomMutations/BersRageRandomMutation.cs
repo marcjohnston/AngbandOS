@@ -17,6 +17,6 @@ internal class BersRageRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(BersRageRandomMutationMutationScript));
+        Game.RunScript(nameof(BersRageRandomMutationScript));
     }
 }

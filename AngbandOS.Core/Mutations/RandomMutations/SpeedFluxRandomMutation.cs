@@ -17,6 +17,6 @@ internal class SpeedFluxRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(SpeedFluxRandomMutationMutationScript));
+        Game.RunScript(nameof(SpeedFluxRandomMutationScript));
     }
 }

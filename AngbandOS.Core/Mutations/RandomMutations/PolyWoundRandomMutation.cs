@@ -17,6 +17,6 @@ internal class PolyWoundRandomMutation : Mutation
 
     public override void ProcessWorld()
     {
-        Game.RunScript(nameof(PolyWoundRandomMutationMutationScript));
+        Game.RunScript(nameof(PolyWoundRandomMutationScript));
     }
 }

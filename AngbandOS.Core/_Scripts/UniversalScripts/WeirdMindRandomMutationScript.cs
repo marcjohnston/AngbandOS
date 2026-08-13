@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class WeirdMindRandomMutationMutationScript : UniversalScript, IGetKey
+internal class WeirdMindRandomMutationScript : UniversalScript, IGetKey
 {
-    private WeirdMindRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private WeirdMindRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 

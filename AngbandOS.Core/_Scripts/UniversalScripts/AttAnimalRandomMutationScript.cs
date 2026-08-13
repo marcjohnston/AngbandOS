@@ -1,8 +1,10 @@
 namespace AngbandOS.Core.Scripts;
-internal class AttAnimalRandomMutationMutationScript : UniversalScript, IGetKey
+internal class AttAnimalRandomMutationScript : UniversalScript, IGetKey
 {
-    private AttAnimalRandomMutationMutationScript(Game game) : base(game) { }
-    public string GetKey => throw new NotImplementedException();
+    private AttAnimalRandomMutationScript(Game game) : base(game) { }
+    public virtual string Key => GetType().Name;
+
+    public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState) { }
 
