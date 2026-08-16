@@ -26,24 +26,23 @@ internal class CreateFixedArtifactScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        int aIdx = Game.CommandArgument;
-        Game.CommandArgument = 0;
-        if (aIdx < 0 || aIdx >= Game.SingletonRepository.Count<FixedArtifact>())
+        FixedArtifact[] fixedArtifacts = Game.SingletonRepository.Get<FixedArtifact>().OrderBy(_fixedArtifact => _fixedArtifact.Name).ToArray();
+        ConsoleTableWithRowHighlighting<FixedArtifact> table = new ConsoleTableWithRowHighlighting<FixedArtifact>(fixedArtifacts, new (string, Func<FixedArtifact, string>)[] {
+            ("Name", _fixedArtifact => _fixedArtifact.Name),            
+            ("Level", _fixedArtifact => _fixedArtifact.Level.ToString())
+        });
+        FixedArtifact? selectedFixedArtifact = Game.SelectFromConsoleTable<FixedArtifact>(table, "Spawn Which Fixed Artifact?");
+        if (selectedFixedArtifact is not null)
         {
-            return;
+            // Create a compatible item.
+            Item qPtr = new Item(Game, selectedFixedArtifact.BaseItemFactory);
+            // Apply the fixed artifact.
+            if (qPtr.ApplyFixedArtifact(selectedFixedArtifact))
+            {
+                Game.DropNear(qPtr, null, Game.MapY.IntValue, Game.MapX.IntValue);
+                Game.MsgPrint("Allocated.");
+            }
         }
 
-        // Retrieve the fixed artifact.
-        FixedArtifact aPtr = Game.SingletonRepository.Get<FixedArtifact>(aIdx);
-
-        // Create a compatible item.
-        Item qPtr = new Item(Game, aPtr.BaseItemFactory);
-
-        // Apply the fixed artifact.
-        if (qPtr.ApplyFixedArtifact(aPtr))
-        {
-            Game.DropNear(qPtr, null, Game.MapY.IntValue, Game.MapX.IntValue);
-            Game.MsgPrint("Allocated.");
-        }
     }
 }
