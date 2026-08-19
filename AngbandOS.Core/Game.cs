@@ -688,19 +688,8 @@ internal partial class Game : IGameSerialize
         {
             MaxMessageLogLength = gameConfiguration.MaxMessageLogLength.Value;
         }
-        if (gameConfiguration.StartupTownName != null)
-        {
-            StartupTownName = gameConfiguration.StartupTownName;
-        }
-        if (gameConfiguration.GoldFactoriesBindingKeys != null)
-        {
-            List<ItemFactory> goldFactoryList = new List<ItemFactory>();
-            foreach (string goldFactoryBindingKey in gameConfiguration.GoldFactoriesBindingKeys)
-            {
-                goldFactoryList.Add(SingletonRepository.Get<ItemFactory>(goldFactoryBindingKey));
-            }
-            GoldFactories = goldFactoryList.ToArray();
-        }
+        StartupTown = SingletonRepository.GetNullable<Town>(gameConfiguration.StartupTownName);
+        GoldFactories = SingletonRepository.GetNullable<ItemFactory>(gameConfiguration.GoldFactoriesBindingKeys);
         GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression ?? "1/20");
 
         GameTickEvents = SingletonRepository.GetNullable<IScript>(gameConfiguration.GameTickEventBindingKeys);
