@@ -65,6 +65,11 @@ internal abstract class ListEffectiveAttributeValue<T> : EffectiveAttributeValue
         PrivateMerge("", value);
     }
 
+    public void Add(T[] scripts)
+    {
+        _attributeModifiers.Add(("", scripts));
+    }
+
     private void PrivateMerge(string key, AttributeValue value)
     {
         ListReadOnlyAttributeValue<T> setEffectiveAttributeValue = (ListReadOnlyAttributeValue<T>)value;

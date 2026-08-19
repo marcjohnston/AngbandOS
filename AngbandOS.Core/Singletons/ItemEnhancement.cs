@@ -41,13 +41,13 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
 
     private (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings { get; }
     public (Attribute Attribute, Expression Expression)[] SumAttributeAndExpressions { get; private set; }
-    private (string AttributeName, string ScriptName)[]? ScriptsAttributeAndScriptBindings { get; }
-    public (Attribute Attribute, UniversalScript Script)[]? ScriptsAttributeAndScripts { get; private set; }
+    private (string AttributeName, string[] ScriptNames)[]? ScriptsAttributeAndScriptBindings { get; }
+    public (ScriptsAttribute Attribute, UniversalScript[] Scripts)[]? ScriptsAttributeAndScripts { get; private set; }
     private (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings { get; }
     public (Attribute Attribute, Expression BooleanExpression)[] OrAttributeAndExpressions { get; private set; }
 
     /// <summary>
-    /// Returns an immutable and fixed value set of item characteristics specified by this <see cref="ItemEnhancement"/> by computing fixed values from the expressions defined in these enhancements.
+    /// Returns an immutable and fixed value set of item characteristics by computing fixed values from the expressions defined in these enhancements.
     /// </summary>
     /// <returns></returns>
     public ReadOnlyAttributeSet GenerateAttributeSet()
@@ -63,6 +63,14 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         {
             bool setValue = Game.ComputeBooleanExpression(expression).Value;
             itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(attribute).Set(setValue);
+        }
+
+        if (ScriptsAttributeAndScripts is not null)
+        {
+            foreach ((ScriptsAttribute scriptsAttribute, UniversalScript[] scripts) in ScriptsAttributeAndScripts)
+            {
+                itemCharacteristics.Get<ScriptsListEffectiveAttributeValue>(scriptsAttribute).Add(scripts);
+            }
         }
 
         itemCharacteristics.ArtifactBias = ArtifactBiasWeightedRandom?.ChooseOrDefault();
@@ -111,9 +119,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
             }
         }
         OrAttributeAndExpressions = orAttributeAndExpressionList.Select(_attributeAndExpression => (_attributeAndExpression.Key, _attributeAndExpression.Value)).ToArray();
-        ScriptsAttributeAndScripts = ScriptsAttributeAndScriptBindings?.Select(_attributeNameAndScriptName => 
-            ((Attribute)Game.SingletonRepository.Get<ScriptsAttribute>(_attributeNameAndScriptName.AttributeName), 
-            Game.SingletonRepository.Get<UniversalScript>(_attributeNameAndScriptName.ScriptName))).ToArray();
+        ScriptsAttributeAndScripts = ScriptsAttributeAndScriptBindings?.Select(_attributeNameAndScriptNames => (Game.SingletonRepository.Get<ScriptsAttribute>(_attributeNameAndScriptNames.AttributeName), Game.SingletonRepository.Get<UniversalScript>(_attributeNameAndScriptNames.ScriptNames))).ToArray();
         Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
 
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);

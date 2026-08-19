@@ -14,7 +14,7 @@ public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfigu
 {
     public virtual (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings { get; set; } = null;
     public virtual (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings { get; set; } = null;
-    public virtual (string AttributeName, string ScriptName)[]? ScriptsAttributeAndScriptBindings { get; set; } = null;
+    public virtual (string AttributeName, string[] ScriptNames)[]? ScriptsAttributeAndScriptBindings { get; set; } = null;
 
     /// <summary>
     /// Returns the <see cref="ItemFactory"/> objects that this <see cref="ItemEnhancement"/> applies to; or null, if this <see cref="ItemEnhancement"/> can
