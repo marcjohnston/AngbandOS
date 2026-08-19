@@ -18,10 +18,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         Game = game;
         Key = gameConfiguration.GetKey;
 
-        SumAttributeAndExpressionBindings = gameConfiguration.SummationAttributeAndExpressionBindings;
-        BoolAttributeAndExpressionBindings = gameConfiguration.BoolAttributeAndExpressionBindings;
-        OrAttributeAndExpressionBindings = gameConfiguration.BitwiseOrAttributeAndExpressionBindings;
-
+        SummationAttributeAndExpressionBindings = gameConfiguration.SummationAttributeAndExpressionBindings;
+        BitwiseOrAttributeAndExpressionBindings = gameConfiguration.BitwiseOrAttributeAndExpressionBindings;
         ActivationName = gameConfiguration.ActivationName;
         AdditionalItemEnhancementWeightedRandomBindingKey = gameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
         ApplicableItemFactoryBindingKeys = gameConfiguration.ApplicableItemFactoryBindingKeys;
@@ -40,11 +38,11 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
     /// <returns></returns>
     public ItemEnhancement? GetItemEnhancement() => this;
 
-    private (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings { get; }
+    private (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings { get; }
     public (Attribute Attribute, Expression Expression)[] SumAttributeAndExpressions { get; private set; }
     private (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings { get; }
     public (Attribute Attribute, Expression BooleanExpression)[] BoolAttributeAndExpressions { get; private set; }
-    private (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings { get; }
+    private (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings { get; }
     public (Attribute Attribute, Expression BooleanExpression)[] OrAttributeAndExpressions { get; private set; }
 
     /// <summary>
@@ -89,9 +87,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
     {
         // We are using a dictionary because we do not want to support duplicate attributes.
         Dictionary<Attribute, Expression> sumAttributeAndExpressionList = new Dictionary<Attribute, Expression>();
-        if (SumAttributeAndExpressionBindings is not null)
+        if (SummationAttributeAndExpressionBindings is not null)
         {
-            foreach ((string attributeName, string expression) in SumAttributeAndExpressionBindings)
+            foreach ((string attributeName, string expression) in SummationAttributeAndExpressionBindings)
             {
                 Attribute attribute = Game.SingletonRepository.Get<SummationAttribute>(attributeName);
                 Expression numericExpression = Game.ParseNumericExpression(expression);
@@ -102,9 +100,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
 
         // We are using a dictionary because we do not want to support duplicate attributes.
         Dictionary<Attribute, Expression> orAttributeAndExpressionList = new Dictionary<Attribute, Expression>();
-        if (OrAttributeAndExpressionBindings is not null)
+        if (BitwiseOrAttributeAndExpressionBindings is not null)
         {
-            foreach ((string attributeName, string expression) in OrAttributeAndExpressionBindings)
+            foreach ((string attributeName, string expression) in BitwiseOrAttributeAndExpressionBindings)
             {
                 Attribute attribute = Game.SingletonRepository.Get<BitwiseOrAttribute>(attributeName);
                 Expression numericExpression = Game.ParseBooleanExpression(expression);
@@ -126,9 +124,8 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         {
             Key = Key,
 
-            SummationAttributeAndExpressionBindings = SumAttributeAndExpressionBindings,
-            BoolAttributeAndExpressionBindings = BoolAttributeAndExpressionBindings,
-            BitwiseOrAttributeAndExpressionBindings = OrAttributeAndExpressionBindings,
+            SummationAttributeAndExpressionBindings = SummationAttributeAndExpressionBindings,
+            BitwiseOrAttributeAndExpressionBindings = BitwiseOrAttributeAndExpressionBindings,
 
             ActivationName = ActivationName,
             AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,

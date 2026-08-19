@@ -13,7 +13,6 @@ namespace AngbandOS.Core.Interface.Configuration;
 public class ItemEnhancementGameConfiguration : NonCompositeSingletonGameConfiguration
 {
     public virtual (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings { get; set; } = null;
-    public virtual (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings { get; set; } = null;
     public virtual (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings { get; set; } = null;
 
     /// <summary>
