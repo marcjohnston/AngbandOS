@@ -120,6 +120,15 @@ internal partial class SaveGameState
     {
         return PrivateCreateDerivedGameStateBag(value, allowConstruction);
     }
+    public GameStateBag CreateDerivedGameStateBag(IGameSerialize[]? values, bool allowConstruction)
+    {
+        if (values is null)
+        {
+            return new NullValueGameStateBag();
+        }
+        GameStateBag[] gameStateBags = values.Select(_value => PrivateCreateDerivedGameStateBag(_value, allowConstruction)).ToArray();
+        return new ListGameStateBag(gameStateBags);
+    }
     public GameStateBag CreateDerivedGameStateBag(IGameSerialize? value, params Type[] derivedTypes)
     {
         return PrivateCreateDerivedGameStateBag(value, true, derivedTypes);
