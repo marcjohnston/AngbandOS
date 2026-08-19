@@ -684,7 +684,7 @@ internal partial class Game : IGameSerialize
 
         DungeonGenerator = new StandardDungeonGenerator(this);
 
-        if (gameConfiguration.MaxMessageLogLength != null)
+        if (gameConfiguration.MaxMessageLogLength is not null)
         {
             MaxMessageLogLength = gameConfiguration.MaxMessageLogLength.Value;
         }
