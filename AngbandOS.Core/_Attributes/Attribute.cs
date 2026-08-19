@@ -36,6 +36,6 @@ internal abstract class Attribute : IGetKey, IUniqueSequentialIndex, IGameSerial
 
     public override string ToString()
     {
-        return $"Or: Key: {Key} Index: {Index}";
+        return $"Key: {Key} Index: {Index}";
     }
 }

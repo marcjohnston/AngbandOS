@@ -23,4 +23,9 @@ internal class BitwiseOrAttribute : Attribute, IToJson
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
+
+    public override string ToString()
+    {
+        return $"Or: {base.ToString()}";
+    }
 }

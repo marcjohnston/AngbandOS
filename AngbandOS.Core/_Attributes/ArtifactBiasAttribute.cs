@@ -11,4 +11,8 @@ internal class ArtifactBiasAttribute : Attribute
     private ArtifactBiasAttribute(Game game) : base(game) { }
     public override string Key => GetType().Name;
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ArtifactBiasEffectiveAttributeValue(Game, this);
+    public override string ToString()
+    {
+        return $"Bias: {base.ToString()}";
+    }
 }

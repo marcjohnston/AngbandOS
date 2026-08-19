@@ -11,4 +11,8 @@ internal class ActivationAttribute : Attribute
     private ActivationAttribute(Game game) : base(game) { }
     public override string Key => GetType().Name;
     public override EffectiveAttributeValue CreateEffectiveAttributeValue() => new ActivationEffectiveAttributeValue(Game, this);
+    public override string ToString()
+    {
+        return $"Activation: {base.ToString()}";
+    }
 }

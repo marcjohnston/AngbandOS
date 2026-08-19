@@ -23,4 +23,8 @@ internal class SummationAttribute : Attribute, IToJson
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
+    public override string ToString()
+    {
+        return $"Sum: {base.ToString()}";
+    }
 }

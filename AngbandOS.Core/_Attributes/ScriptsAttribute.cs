@@ -23,4 +23,9 @@ internal class ScriptsAttribute : Attribute, IToJson
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
+
+    public override string ToString()
+    {
+        return $"Scripts: {base.ToString()}";
+    }
 }
