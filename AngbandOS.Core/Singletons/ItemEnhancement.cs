@@ -40,8 +40,6 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
 
     private (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings { get; }
     public (Attribute Attribute, Expression Expression)[] SumAttributeAndExpressions { get; private set; }
-    private (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings { get; }
-    public (Attribute Attribute, Expression BooleanExpression)[] BoolAttributeAndExpressions { get; private set; }
     private (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings { get; }
     public (Attribute Attribute, Expression BooleanExpression)[] OrAttributeAndExpressions { get; private set; }
 
