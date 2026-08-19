@@ -371,7 +371,6 @@ internal partial class Game : IGameSerialize
             (nameof(NumRepro), saveGameState.CreateGameStateBag(NumRepro)),
             (nameof(Monsters), saveGameState.CreateDerivedGameStateBag(Monsters, typeof(Monster))),
             (nameof(_hackMIdxIi), saveGameState.CreateGameStateBag(_hackMIdxIi)),
-            (nameof(StartupTownName), saveGameState.CreateGameStateBag(StartupTownName)),
             (nameof(MessageLog), saveGameState.CreateDerivedGameStateBag(MessageLog, typeof(GameMessage))),
             (nameof(RecentMessages), saveGameState.CreateDerivedGameStateBag(RecentMessages, typeof(GameMessage))),
             (nameof(PreviousMessages), saveGameState.CreateDerivedGameStateBag(PreviousMessages, typeof(GameMessage))),
@@ -652,7 +651,6 @@ internal partial class Game : IGameSerialize
             NumRepro = restoreGameState.GetByKey(nameof(NumRepro)).GetInt();
             Monsters = restoreGameState.GetByKey(nameof(Monsters)).GetDerivedReferences<Monster>(_restoreGameState => new Monster(this, _restoreGameState)).ToArray();
             _hackMIdxIi = restoreGameState.GetByKey(nameof(_hackMIdxIi)).GetInt();
-            StartupTownName = restoreGameState.GetByKey(nameof(StartupTownName)).GetStringOrDefault();
             MessageLog = restoreGameState.GetByKey(nameof(MessageLog)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToList();
             RecentMessages = restoreGameState.GetByKey(nameof(RecentMessages)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToList();
             PreviousMessages = restoreGameState.GetByKey(nameof(PreviousMessages)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToArray();
@@ -1818,7 +1816,7 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the name of the town that the player will start in; or null, for a random eligible town to be selected.  Returns null, by default.
     /// </summary>
-    public readonly string? StartupTownName = null;
+    public readonly Town? StartupTown = null;
 
     /// <summary>
     /// Returns the item factories to be used to generate gold.  If there are no item factories defined, gold will not be generated.
@@ -3696,14 +3694,9 @@ internal partial class Game : IGameSerialize
         }
         ResetStompability();
         CurrentDepth = 0;
-        if (StartupTownName != null)
+        if (StartupTown is not null)
         {
-            Town? startupTown = SingletonRepository.Get<Town>(StartupTownName);
-            if (startupTown == null)
-            {
-                throw new Exception("The configured startup town does not exist.");
-            }
-            CurTown = startupTown;
+            CurTown = StartupTown;
         }
         else
         {
@@ -3714,7 +3707,7 @@ internal partial class Game : IGameSerialize
             }
             WeightedRandom<Town> weightedRandomOfTownsAllowedToStartup = new WeightedRandom<Town>(this, townsAllowedToStartup);
             Town? town = weightedRandomOfTownsAllowedToStartup.ChooseOrDefault();
-            if (town == null)
+            if (town is null)
             {
                 throw new Exception("No startup town.");
             }
