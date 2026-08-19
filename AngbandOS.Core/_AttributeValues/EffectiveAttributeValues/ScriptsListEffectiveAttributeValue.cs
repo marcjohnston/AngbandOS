@@ -6,12 +6,12 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class UniversalScriptListEffectiveAttributeValue : ListEffectiveAttributeValue<UniversalScript>
+internal class ScriptsListEffectiveAttributeValue : ListEffectiveAttributeValue<UniversalScript>
 {
-    public UniversalScriptListEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute)
+    public ScriptsListEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute)
     {
     }
-    public UniversalScriptListEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
+    public ScriptsListEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
     {
         (string, UniversalScript[])[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, UniversalScript[]>(
             _restoreGameState => _restoreGameState.GetString(), // This is the key
@@ -23,7 +23,7 @@ internal class UniversalScriptListEffectiveAttributeValue : ListEffectiveAttribu
     {
         return value.GetType().Name;
     }
-    public override ReadOnlyAttributeValue ToReadOnly() => new UniversalScriptListReadOnlyAttributeValue(Get());
+    public override ReadOnlyAttributeValue ToReadOnly() => new ScriptsListReadOnlyAttributeValue(Get());
 
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
@@ -36,7 +36,7 @@ internal class UniversalScriptListEffectiveAttributeValue : ListEffectiveAttribu
 
     public override EffectiveAttributeValue Clone()
     {
-        UniversalScriptListEffectiveAttributeValue clone = new UniversalScriptListEffectiveAttributeValue(Game, Attribute);
+        ScriptsListEffectiveAttributeValue clone = new ScriptsListEffectiveAttributeValue(Game, Attribute);
         clone._attributeModifiers.AddRange(_attributeModifiers);
         return (EffectiveAttributeValue)clone;
     }

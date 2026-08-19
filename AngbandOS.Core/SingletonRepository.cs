@@ -282,6 +282,7 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<Attribute>();
         RegisterIndex<CharacterClass>();
         RegisterIndex<BirthStage>();
+        RegisterIndex<EquipmentWieldSlot>();
         RegisterIndex<FixedArtifact>();
         RegisterIndex<FlaggedAction>();
         RegisterIndex<GridTileScript>();
@@ -306,8 +307,8 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<RoomLayout>();
         RegisterIndex<SpellResistantDetection>();
         RegisterIndex<Timer>();
+        RegisterIndex<UniversalScript>();
         RegisterIndex<WieldSlot>();
-        RegisterIndex<EquipmentWieldSlot>();
         RegisterIndex<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
 
         // Load system singletons.
@@ -321,6 +322,7 @@ internal sealed class SingletonRepository : IGameSerialize
         // Preload
         LoadFromConfiguration<BitwiseOrAttribute, BitwiseOrAttributeGameConfiguration>(gameConfiguration.OrAttributes, restoreGameState);
         LoadFromConfiguration<SummationAttribute, SummationAttributeGameConfiguration>(gameConfiguration.SumAttributes, restoreGameState);
+        LoadFromConfiguration<ScriptsAttribute, ScriptsAttributeGameConfiguration>(gameConfiguration.ScriptsAttributes, restoreGameState);
 
         // We need to cache the attributes because other singleton require them to be available during the load phase.  We also sort them so that we can debug them easier.
         Game.CachedAttributes = Game.SingletonRepository.Get<Attribute>().OrderBy(_attribute => _attribute.Key).ToArray();

@@ -6,11 +6,11 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal class UniversalScriptListReadOnlyAttributeValue : ListReadOnlyAttributeValue<UniversalScript>
+internal class ScriptsListReadOnlyAttributeValue : ListReadOnlyAttributeValue<UniversalScript>
 {
-    public UniversalScriptListReadOnlyAttributeValue(UniversalScript[]? value) : base(value) { }
+    public ScriptsListReadOnlyAttributeValue(UniversalScript[]? value) : base(value) { }
 
-    public UniversalScriptListReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : base(restoreGameState.GetByKey(nameof(Value)).GetDerivedReferencesOrDefault<UniversalScript>())
+    public ScriptsListReadOnlyAttributeValue(Game game, RestoreGameState restoreGameState) : base(restoreGameState.GetByKey(nameof(Value)).GetDerivedReferencesOrDefault<UniversalScript>())
     {
     }
 
