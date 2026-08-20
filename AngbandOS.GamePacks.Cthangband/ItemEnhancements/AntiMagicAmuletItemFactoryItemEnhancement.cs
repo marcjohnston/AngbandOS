@@ -16,4 +16,3 @@ public class AntiMagicAmuletItemFactoryItemEnhancement : ItemEnhancementGameConf
         (nameof(ValueAttribute), "30000"),
     };
 }
-
