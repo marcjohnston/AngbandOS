@@ -192,10 +192,9 @@ internal abstract class WieldSlot : IEnumerable<int>, IItemContainer, IGetKey, I
 
     /// <summary>
     /// Returns true, if an identity sense chance test passes so that the item is identified; false, if the
-    /// the item should not identified.  Returns true, by default.  Wielded items always return true.   Items in the
-    /// pack return a random positive result so that the item is identitied much less frequently.
+    /// the item should not identified.  Returns 20%, by default.  The melee wield slot always return true.
     /// </summary>
-    public virtual bool IdentitySenseChanceTest => true;
+    public virtual bool IdentitySenseChanceTest => Game.RandomLessThan(5) == 0;
 
     /// <summary>
     /// Returns a string that describes how an item in the inventory slot is being used.

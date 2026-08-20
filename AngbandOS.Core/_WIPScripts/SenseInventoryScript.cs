@@ -48,8 +48,7 @@ internal class SenseInventoryScript : Script, IScript, ICastSpellScript
                 {
                     continue;
                 }
-                bool okay = item.IdentityCanBeSensed;
-                if (!okay)
+                if (!item.GetFactory.IdentityCanBeSensed)
                 {
                     continue;
                 }

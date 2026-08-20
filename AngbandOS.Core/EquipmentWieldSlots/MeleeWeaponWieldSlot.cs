@@ -17,6 +17,11 @@ internal class MeleeWeaponWieldSlot : EquipmentWieldSlot
     public override bool IsMeleeWeapon => true;
     public override string WieldPhrase => "You are wielding";
     public override string TakeOffMessage(Item oPtr) => "You were wielding";
+
+    /// <summary>
+    /// Returns true, because the melee weapon slot is the only slot that get 100% sense chance.
+    /// </summary>
+    public override bool IdentitySenseChanceTest => true;
     public override void AddItem(Item item)
     {
         Game.SetInventoryItem(InventorySlotEnum.MeleeWeapon, item);

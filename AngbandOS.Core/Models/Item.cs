@@ -243,7 +243,6 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     public bool IsArmor => _factory.IsArmor;
     public bool IsContainer => _factory.IsContainer;
     public int ExperienceGainDivisorForDestroying => _factory.ExperienceGainDivisorForDestroying;
-    public bool IdentityCanBeSensed => _factory.IdentityCanBeSensed;
     public bool IsConsumedWhenEaten => _factory.IsConsumedWhenEaten;
     public IEatOrQuaffScript? EatScript => _factory.EatScript;
     private bool GetsDamageMultiplier => _factory.GetsDamageMultiplier;
