@@ -8,9 +8,9 @@ namespace AngbandOS.Core.Expressions;
 
 internal class ExperienceLevelIdentifierExpression : IdentifierExpression
 {
-    public ExperienceLevelIdentifierExpression(string matchedIdentifier) : base(matchedIdentifier) { }
+    public ExperienceLevelIdentifierExpression(string matchedIdentifier, bool? sign = null) : base(matchedIdentifier, sign) { }
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute(Dictionary<string, object> providers)
+    protected override Expression ComputeIdentifier(Dictionary<string, object> providers)
     {
         Func<int> GetExperienceLevel = (Func<int>)providers[nameof(ExpressionProvidersEnum.GetExperienceLevel)];
         return new IntegerExpression(GetExperienceLevel());

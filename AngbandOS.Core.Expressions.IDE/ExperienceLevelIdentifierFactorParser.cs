@@ -14,8 +14,8 @@ internal class ExperienceLevelIdentifierFactorParser : IdentifierFactorParser
         Value = value;
     }
     public override string Identifier => "x";
-    protected override Expression GenerateExpression(string matchedIdentifier)
+    protected override Expression GenerateExpression(string matchedIdentifier, bool? sign)
     {
-        return new ExperienceLevelIdentifierExpression(Value, Identifier);
+        return new ExperienceLevelIdentifierExpression(Value, Identifier, sign);
     }
 }

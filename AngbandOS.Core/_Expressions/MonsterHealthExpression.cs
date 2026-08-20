@@ -8,9 +8,9 @@ namespace AngbandOS.Core.Expressions;
 
 internal class MonsterHealthExpression : IdentifierExpression
 {
-    public MonsterHealthExpression(string matchedIdentifier) : base(matchedIdentifier) { }
+    public MonsterHealthExpression(string matchedIdentifier, bool? sign = null) : base(matchedIdentifier, sign) { }
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute(Dictionary<string, object> providers)
+    protected override Expression ComputeIdentifier(Dictionary<string, object> providers)
     {
         int monsterHealth = (int)providers[nameof(ExpressionProvidersEnum.MonsterHealth)];
         return new IntegerExpression(monsterHealth);
