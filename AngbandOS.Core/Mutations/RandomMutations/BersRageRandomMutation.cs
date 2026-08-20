@@ -14,9 +14,8 @@ internal class BersRageRandomMutation : Mutation
     public override string HaveMessage => "You are subject to berserker fits.";
     public override string LoseMessage => "You are no longer subject to fits of berserk rage!";
     public override string Title => "Berserk Rage (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(BersRageRandomMutationScript));
-    }
+        (1, nameof(BersRageRandomMutationItemEnhancement))
+    };
 }

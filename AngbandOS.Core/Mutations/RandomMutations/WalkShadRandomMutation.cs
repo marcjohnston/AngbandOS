@@ -14,9 +14,8 @@ internal class WalkShadRandomMutation : Mutation
     public override string HaveMessage => "You occasionally stumble into other shadows.";
     public override string LoseMessage => "You feel like you're trapped in reality.";
     public override string Title => "Shadows (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(WalkShadRandomMutationScript));
-    }
+        (1, nameof(WalkShadRandomMutationItemEnhancement))
+    };
 }

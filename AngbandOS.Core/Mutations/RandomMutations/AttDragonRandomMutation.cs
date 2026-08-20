@@ -14,9 +14,8 @@ internal class AttDragonRandomMutation : Mutation
     public override string HaveMessage => "You attract dragons.";
     public override string LoseMessage => "You stop attracting dragons.";
     public override string Title => "Dragon Attraction (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(AttDragonRandomMutationScript));
-    }
+        (1, nameof(AttDragonRandomMutationItemEnhancement))
+    };
 }

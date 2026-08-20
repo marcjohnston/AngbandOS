@@ -14,9 +14,8 @@ internal class WastingRandomMutation : Mutation
     public override string HaveMessage => "You have a horrible wasting disease.";
     public override string LoseMessage => "You are cured of the horrible wasting disease!";
     public override string Title => "Wasting Disease (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(WastingRandomMutationScript));
-    }
+        (1, nameof(WastingRandomMutationItemEnhancement))
+    };
 }

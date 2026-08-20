@@ -153,9 +153,6 @@ internal abstract class Mutation : IGetKey, IGameSerialize
 
     public virtual void OnLose() { }
 
-    public virtual void ProcessWorld() { }
-
-
     /// <summary>
     /// Returns the binding key for the passive attribute enhancements that is associated with this mutation. If there are no associated passive attribute enhancements, this property returns null.  This property is used to bind the <see cref="ItemEnhacement"/> property during the binding phase.
     /// </summary>

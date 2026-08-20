@@ -5529,10 +5529,13 @@ internal partial class Game : IGameSerialize
             }
         }
 
-        // Mutations get to proces the world turn.
-        foreach (Mutation mutation in MutationsPossessed.ToArray()) // The list may be modified.  Use the ToArray to prevent an issue.
+        UniversalScript[]? processWorldScripts = AttributeSet.GetScripts(nameof(ProcessWorldScriptsAttribute));
+        if (processWorldScripts is not null)
         {
-            mutation.ProcessWorld();
+            foreach (UniversalScript script in processWorldScripts)
+            {
+                script.ExecuteScript();
+            }
         }
 
         RunScript(nameof(SenseInventoryScript));

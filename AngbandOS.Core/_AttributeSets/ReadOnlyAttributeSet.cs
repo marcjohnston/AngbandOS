@@ -69,6 +69,14 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
         return value.Value;
     }
 
+    public UniversalScript[]? GetScripts(string attributeName)
+    {
+        Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+        int index = attribute.Index;
+        ScriptsListReadOnlyAttributeValue value = (ScriptsListReadOnlyAttributeValue)Value[index];
+        return value.Value;
+    }
+
     public override string ToString()
     {
         Attribute[] cachedAttributes = Game.CachedAttributes;

@@ -14,9 +14,8 @@ internal class NauseaRandomMutation : Mutation
     public override string HaveMessage => "You have a seriously upset stomach.";
     public override string LoseMessage => "Your stomach stops roiling.";
     public override string Title => "Nausea (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(NauseaRandomMutationScript));
-    }
+        (1, nameof(NauseaRandomMutationItemEnhancement))
+    };
 }

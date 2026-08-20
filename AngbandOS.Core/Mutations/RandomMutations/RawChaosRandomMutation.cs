@@ -16,9 +16,8 @@ internal class RawChaosRandomMutation : Mutation
     public override string HaveMessage => "You occasionally are surrounded with raw chaos.";
     public override string LoseMessage => "You feel the universe is more stable around you.";
     public override string Title => "Raw Chaos (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(RawChaosRandomMutationScript));
-    }
+        (1, nameof(RawChaosRandomMutationItemEnhancement))
+    };
 }

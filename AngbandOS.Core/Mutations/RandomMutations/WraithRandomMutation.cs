@@ -14,9 +14,8 @@ internal class WraithRandomMutation : Mutation
     public override string HaveMessage => "You fade in and out of physical reality.";
     public override string LoseMessage => "You are firmly in the physical world.";
     public override string Title => "Wraith (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(WraithRandomMutationScript));
-    }
+        (1, nameof(WraithRandomMutationItemEnhancement))
+    };
 }

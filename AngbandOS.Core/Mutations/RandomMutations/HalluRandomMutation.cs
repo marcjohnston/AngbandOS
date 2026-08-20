@@ -14,9 +14,8 @@ internal class HalluRandomMutation : Mutation
     public override string HaveMessage => "You have a hallucinatory insanity.";
     public override string LoseMessage => "You are no longer afflicted by a hallucinatory insanity!";
     public override string Title => "Hallucinations (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(HalluRandomMutationScript));
-    }
+        (1, nameof(HalluRandomMutationItemEnhancement))
+    };
 }

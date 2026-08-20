@@ -14,9 +14,8 @@ internal class NormalityRandomMutation : Mutation
     public override string HaveMessage => "You may be chaotic, but you're recovering.";
     public override string LoseMessage => "You feel normally strange.";
     public override string Title => "Normality (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(NormalityRandomMutationScript));
-    }
+        (1, nameof(NormalityRandomMutationItemEnhancement))
+    };
 }

@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-
 namespace AngbandOS.Core.Mutations.RandomMutations;
 
 internal class FlatulentRandomMutation : Mutation
@@ -16,9 +14,8 @@ internal class FlatulentRandomMutation : Mutation
     public override string HaveMessage => "You are subject to uncontrollable flatulence.";
     public override string LoseMessage => "You are no longer subject to uncontrollable flatulence.";
     public override string Title => "Flatulence (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(FlatulentRandomMutationScript));
-    }
+        (1, nameof(FlatulentRandomMutationItemEnhancement))
+    };
 }

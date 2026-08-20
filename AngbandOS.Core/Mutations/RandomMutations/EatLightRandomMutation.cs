@@ -14,9 +14,8 @@ internal class EatLightRandomMutation : Mutation
     public override string HaveMessage => "You sometimes feed off of the light around you.";
     public override string LoseMessage => "You feel the world's a brighter place.";
     public override string Title => "Eat Light (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(EatLightRandomMutationScript));
-    }
+        (1, nameof(EatLightRandomMutationItemEnhancement))
+    };
 }

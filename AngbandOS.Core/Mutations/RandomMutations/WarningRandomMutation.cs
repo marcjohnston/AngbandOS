@@ -14,9 +14,8 @@ internal class WarningRandomMutation : Mutation
     public override string HaveMessage => "You receive warnings about your foes.";
     public override string LoseMessage => "You no longer feel paranoid.";
     public override string Title => "Warnings (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(WarningRandomMutationScript));
-    }
+        (1, nameof(WarningRandomMutationItemEnhancement))
+    };
 }

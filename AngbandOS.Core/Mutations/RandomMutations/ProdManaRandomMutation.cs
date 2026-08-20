@@ -16,9 +16,8 @@ internal class ProdManaRandomMutation : Mutation
     public override string HaveMessage => "You are producing magical energy uncontrollably.";
     public override string LoseMessage => "You stop producing magical energy uncontrollably.";
     public override string Title => "Random Magic (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(ProdManaRandomMutationScript));
-    }
+        (1, nameof(ProdManaRandomMutationItemEnhancement))
+    };
 }

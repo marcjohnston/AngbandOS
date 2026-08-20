@@ -14,9 +14,8 @@ internal class WeirdMindRandomMutation : Mutation
     public override string HaveMessage => "Your mind randomly expands and contracts.";
     public override string LoseMessage => "Your thoughts return to boring paths.";
     public override string Title => "Weird Mind (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(WeirdMindRandomMutationScript));
-    }
+        (1, nameof(WeirdMindRandomMutationItemEnhancement))
+    };
 }

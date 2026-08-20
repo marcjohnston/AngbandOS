@@ -14,9 +14,8 @@ internal class AlcoholRandomMutation : Mutation
     public override string HaveMessage => "Your body produces alcohol.";
     public override string LoseMessage => "Your body stops producing alcohol!";
     public override string Title => "Alcohol (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] 
     {
-        Game.RunScript(nameof(AlcoholRandomMutationScript));
-    }
+        (1, nameof(AlcoholRandomMutationItemEnhancement))
+    };
 }

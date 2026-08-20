@@ -14,9 +14,8 @@ internal class AttAnimalRandomMutation : Mutation
     public override string HaveMessage => "You attract animals.";
     public override string LoseMessage => "You stop attracting animals.";
     public override string Title => "Animal Attraction (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(AttAnimalRandomMutationScript));
-    }
+        (1, nameof(AttAnimalRandomMutationItemEnhancement))
+    };
 }

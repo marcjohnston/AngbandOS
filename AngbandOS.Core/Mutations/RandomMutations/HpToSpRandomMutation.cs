@@ -14,9 +14,8 @@ internal class HpToSpRandomMutation : Mutation
     public override string HaveMessage => "Your blood sometimes rushes to your head.";
     public override string LoseMessage => "You are no longer subject to fits of painful clarity.";
     public override string Title => "Clarity (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(HpToSpRandomMutationScript));
-    }
+        (1, nameof(HpToSpRandomMutationItemEnhancement))
+    };
 }

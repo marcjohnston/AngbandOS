@@ -14,9 +14,8 @@ internal class DisarmRandomMutation : Mutation
     public override string HaveMessage => "You occasionally stumble and drop things.";
     public override string LoseMessage => "Your feet shrink to their former size.";
     public override string Title => "Disarm (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(DisarmRandomMutationScript));
-    }
+        (1, nameof(DisarmRandomMutationItemEnhancement))
+    };
 }

@@ -14,9 +14,8 @@ internal class RandomTeleportationRandomMutation : Mutation
     public override string HaveMessage => "You are teleporting randomly.";
     public override string LoseMessage => "Your position seems more certain.";
     public override string Title => "Random Teleporation (R)";
-
-    public override void ProcessWorld()
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        Game.RunScript(nameof(RandomTeleportationRandomMutationScript));
-    }
+        (1, nameof(RandomTeleportationRandomMutationItemEnhancement))
+    };
 }
