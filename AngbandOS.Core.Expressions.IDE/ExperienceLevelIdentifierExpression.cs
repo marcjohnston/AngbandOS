@@ -11,12 +11,12 @@ namespace AngbandOS.Core.Expressions;
 internal class ExperienceLevelIdentifierExpression : IdentifierExpression
 {
     private readonly int Value;
-    public ExperienceLevelIdentifierExpression(int value, string matchedIdentifier) : base(matchedIdentifier)
+    public ExperienceLevelIdentifierExpression(int value, string matchedIdentifier, bool? sign = null) : base(matchedIdentifier, sign)
     {
         Value = value;
     }
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute(Dictionary<string, object> variables)
+    protected override Expression ComputeIdentifier(Dictionary<string, object> providers)
     {
         return new IntegerExpression(Value);
     }

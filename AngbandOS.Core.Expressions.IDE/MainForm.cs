@@ -36,7 +36,9 @@ public partial class MainForm : Form
                 newNode = rootNode.Nodes.Add($"Integer {integerExpression.Value}");
                 break;
             case IdentifierExpression identifierExpression:
-                newNode = rootNode.Nodes.Add($"Identifier {identifierExpression.Identifier}");
+                string idSign = !identifierExpression.Sign.HasValue ? ""
+                              : identifierExpression.Sign.Value ? " + " : " - ";
+                newNode = rootNode.Nodes.Add($"Identifier {idSign}{identifierExpression.Identifier}");
                 break;
             case MultiplicationInfixExpression multiplicationExpression:
                 newNode = rootNode.Nodes.Add($"Multiply");

@@ -8,9 +8,9 @@ namespace AngbandOS.Core.Expressions;
 
 internal class DifficultyIdentifierExpression : IdentifierExpression
 {
-    public DifficultyIdentifierExpression(string matchedIdentifier) : base(matchedIdentifier) { }
+    public DifficultyIdentifierExpression(string matchedIdentifier, bool? sign = null) : base(matchedIdentifier, sign) { }
     public override Type[] ResultTypes => new Type[] { typeof(IntegerExpression) };
-    public override Expression Compute(Dictionary<string, object> providers)
+    protected override Expression ComputeIdentifier(Dictionary<string, object> providers)
     {
         Func<int> getDifficulty = (Func<int>)providers[nameof(ExpressionProvidersEnum.GetDifficulty)];
         return new IntegerExpression(getDifficulty());
