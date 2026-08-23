@@ -229,6 +229,12 @@ internal sealed class SingletonRepository : IGameSerialize
         }
     }
 
+    /// <summary>
+    /// Returns the singleton at a specific zero-based index.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="index"></param>
+    /// <returns></returns>
     public T Get<T>(int index) where T : class // TODO: WHY CANT THIS BE where T: IGETKEY
     {
         string typeName = typeof(T).Name;
