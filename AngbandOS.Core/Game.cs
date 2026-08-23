@@ -8540,7 +8540,7 @@ internal partial class Game : IGameSerialize
                             MsgPrint($"{monsterName} changes!");
                             DeleteMonsterByIndex(tile.Monster.GetMonsterIndex(), true);
                             MonsterRace newRace = SingletonRepository.Get<MonsterRace>(newRaceIndex);
-                            PlaceMonsterAux(y, x, newRace, false, false, false);
+                            PlaceMonsterAux(y, x, newRace, false, false, false, false);
                             monster = tile.Monster;
                             monsterName = monster.Name;
                             fear = false;
@@ -11940,7 +11940,7 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            if (PlaceMonsterAux(y, x, rPtr, slp, true, false))
+            if (PlaceMonsterAux(y, x, rPtr, slp, true, false, false))
             {
                 break;
             }
@@ -11963,7 +11963,7 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            if (PlaceMonsterAux(y, x, rPtr, slp, true, true))
+            if (PlaceMonsterAux(y, x, rPtr, slp, true, true, false))
             {
                 break;
             }
@@ -14478,7 +14478,7 @@ internal partial class Game : IGameSerialize
         attempts = 1000;
         while (--attempts == 0)
         {
-            if (PlaceMonsterAux(y, x, rPtr, false, false, false))
+            if (PlaceMonsterAux(y, x, rPtr, false, false, false, false))
             {
                 break;
             }
@@ -15051,7 +15051,7 @@ internal partial class Game : IGameSerialize
         {
             return false;
         }
-        if (PlaceMonsterAux(y, x, rPtr, slp, grp, false))
+        if (PlaceMonsterAux(y, x, rPtr, slp, grp, false, false))
         {
             return true;
         }
@@ -15258,9 +15258,9 @@ internal partial class Game : IGameSerialize
         return mPtr;
     }
 
-    public bool PlaceMonsterAux(int y, int x, MonsterRace rPtr, bool slp, bool grp, bool pet, bool newlySpawnedSkipFirstTurn = false)
+    public bool PlaceMonsterAux(int y, int x, MonsterRace rPtr, bool slp, bool grp, bool pet, bool skipFirstTurn)
     {
-        Monster? monsterPlaced = PlaceMonsterOne(y, x, rPtr, slp, pet, newlySpawnedSkipFirstTurn);
+        Monster? monsterPlaced = PlaceMonsterOne(y, x, rPtr, slp, pet, skipFirstTurn);
         if (monsterPlaced is null)
         {
             return false;
@@ -15280,7 +15280,7 @@ internal partial class Game : IGameSerialize
                 {
                     break;
                 }
-                PlaceMonsterOne(ny, nx, monsterRace, slp, pet, newlySpawnedSkipFirstTurn);
+                PlaceMonsterOne(ny, nx, monsterRace, slp, pet, skipFirstTurn);
                 if (monsterRace.Friends ||
                     rPtr.EscortsGroup)
                 {
@@ -15297,12 +15297,6 @@ internal partial class Game : IGameSerialize
             PlaceMonsterGroup(y, x, rPtr.Index, slp, pet);
         }
         return true;
-    }
-
-    [Obsolete("Use PlaceMonsterAux")]
-    public bool PlaceMonsterByIndex(int y, int x, int monsterRaceIndex, bool slp, bool grp, bool charm)
-    {
-        return PlaceMonsterAux(y, x, SingletonRepository.Get<MonsterRace>(monsterRaceIndex), slp, grp, charm);
     }
 
     public void ReplacePet(int y1, int x1, Monster monster)
@@ -15389,7 +15383,7 @@ internal partial class Game : IGameSerialize
         {
             return false;
         }
-        if (!PlaceMonsterAux(y, x, monsterRace, false, groupOk, pet))
+        if (!PlaceMonsterAux(y, x, monsterRace, false, groupOk, pet, false))
         {
             return false;
         }
