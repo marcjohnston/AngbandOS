@@ -136,12 +136,12 @@ internal class Type5RoomLayout : RoomLayout
         }
         for (int i = 0; i < 64; i++)
         {
-            int? monsterRace = Game.GetMonsterRaceIndex(Game.Difficulty + 10, getMonNumHook);
-            if (!monsterRace.HasValue)
+            MonsterRace? monsterRace = Game.GetMonsterRace(Game.Difficulty + 10, getMonNumHook);
+            if (monsterRace is null)
             {
                 return;
             }
-            monsterRaceIndexes[i] = monsterRace.Value;
+            monsterRaceIndexes[i] = monsterRace.Index;
         }
         Game.DangerRating += 10;
         if (Game.Difficulty <= 40 && Game.DieRoll((Game.Difficulty * Game.Difficulty) + 50) < 300)

@@ -164,12 +164,12 @@ internal class Type6RoomLayout : RoomLayout
         int[] monsterRaceIndexes = new int[16];
         for (i = 0; i < 16; i++)
         {
-            int? monsterRace = Game.GetMonsterRaceIndex(Game.Difficulty + 10, monsterRaceFilter);
-            if (!monsterRace.HasValue)
+            MonsterRace? monsterRace = Game.GetMonsterRace(Game.Difficulty + 10, monsterRaceFilter);
+            if (monsterRace is null)
             {
                 return;
             }
-            monsterRaceIndexes[i] = monsterRace.Value;
+            monsterRaceIndexes[i] = monsterRace.Index;
         }
         for (i = 0; i < 16 - 1; i++)
         {

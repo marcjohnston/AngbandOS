@@ -6702,12 +6702,12 @@ internal partial class Game : IGameSerialize
         int lev2 = rPtr.Level + (DieRoll(20) / DieRoll(9)) + 1;
         for (int i = 0; i < 1000; i++)
         {
-            int? r = GetMonsterRaceIndex(((Difficulty + rPtr.Level) / 2) + 5, null);
-            if (!r.HasValue)
+            MonsterRace? newMonsterRace = GetMonsterRace(((Difficulty + rPtr.Level) / 2) + 5, null);
+            if (newMonsterRace is null)
             {
                 break;
             }
-            rPtr = SingletonRepository.Get<MonsterRace>(r.Value);
+            rPtr = newMonsterRace;
             if (rPtr.Unique)
             {
                 continue;
@@ -6716,7 +6716,7 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            index = r.Value;
+            index = newMonsterRace.Index;
             break;
         }
         return index;
@@ -14468,18 +14468,17 @@ internal partial class Game : IGameSerialize
         int attempts = 1000;
         while (--attempts != 0)
         {
-            int? rIdx = GetMonsterRaceIndex(MonsterLevel, null);
-            if (!rIdx.HasValue)
+            rPtr = GetMonsterRace(MonsterLevel, null);
+            if (rPtr is null)
             {
                 return false;
             }
-            rPtr = SingletonRepository.Get<MonsterRace>(rIdx.Value);
             if (!rPtr.Unique && !rPtr.EscortsGroup)
             {
                 break;
             }
         }
-        if (attempts < 1)
+        if (rPtr is null)
         {
             return false;
         }
@@ -14775,7 +14774,7 @@ internal partial class Game : IGameSerialize
     /// <param name="level"></param>
     /// <param name="monsterFilter"></param>
     /// <returns></returns>
-    public int? GetMonsterRaceIndex(int level, MonsterRaceFilter? monsterFilter)
+    public MonsterRace? GetMonsterRace(int level, MonsterRaceFilter? monsterFilter)
     {
         int i, j;
         AllocationEntry[] table = AllocRaceTable;
@@ -14872,7 +14871,9 @@ internal partial class Game : IGameSerialize
                 i = j;
             }
         }
-        return table[i].Index;
+
+        MonsterRace monsterRace = SingletonRepository.Get<MonsterRace>(table[i].Index);
+        return monsterRace;
     }
 
     public List<Monster> GetPets()
@@ -15052,12 +15053,11 @@ internal partial class Game : IGameSerialize
 
     public bool PlaceMonster(int y, int x, bool slp, bool grp)
     {
-        int? rIdx = GetMonsterRaceIndex(MonsterLevel, null);
-        if (!rIdx.HasValue)
+        MonsterRace? rPtr = GetMonsterRace(MonsterLevel, null);
+        if (rPtr is null)
         {
             return false;
         }
-        MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(rIdx.Value);
         if (PlaceMonsterAux(y, x, rPtr, slp, grp, false))
         {
             return true;
@@ -15282,17 +15282,16 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                int? z = GetMonsterRaceIndex(rPtr.Level, new PlaceOkaySystemMonsterRaceFilter(this, rPtr.Index));
-                if (!z.HasValue)
+                MonsterRace? monsterRace = GetMonsterRace(rPtr.Level, new PlaceOkaySystemMonsterRaceFilter(this, rPtr.Index));
+                if (monsterRace is null)
                 {
                     break;
                 }
-                MonsterRace race = SingletonRepository.Get<MonsterRace>(z.Value);
-                PlaceMonsterOne(ny, nx, race, slp, pet);
-                if (race.Friends ||
+                PlaceMonsterOne(ny, nx, monsterRace, slp, pet);
+                if (monsterRace.Friends ||
                     rPtr.EscortsGroup)
                 {
-                    PlaceMonsterGroup(ny, nx, z.Value, slp, pet);
+                    PlaceMonsterGroup(ny, nx, monsterRace.Index, slp, pet);
                 }
             }
         }
@@ -15391,13 +15390,12 @@ internal partial class Game : IGameSerialize
         {
             return false;
         }
-        int? rIdx = GetMonsterRaceIndex(((Difficulty + lev) / 2) + 5, monsterFilter);
-        if (!rIdx.HasValue)
+        MonsterRace? monsterRace = GetMonsterRace(((Difficulty + lev) / 2) + 5, monsterFilter);
+        if (monsterRace is null)
         {
             return false;
         }
-        MonsterRace race = SingletonRepository.Get<MonsterRace>(rIdx.Value);
-        if (!PlaceMonsterAux(y, x, race, false, groupOk, pet))
+        if (!PlaceMonsterAux(y, x, monsterRace, false, groupOk, pet))
         {
             return false;
         }
