@@ -34,7 +34,12 @@ internal static class Constants
     public const int MaxSight = 20;
     public const int MaxStackSize = 100;
     public const int MaxUchar = 255;
+
+    /// <summary>
+    /// Monsters that have just been spawned don't act in their first turn.
+    /// </summary>
     public const int MflagBorn = 0x10;
+
     public const int MflagMark = 0x80;
     public const int MflagNice = 0x20;
     public const int MflagShow = 0x40;
