@@ -507,9 +507,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void PutQuestMonster(int rIdx)
     {
-        if (Game.SingletonRepository.Get<MonsterRace>(rIdx).MaxNum == 0)
+        MonsterRace rPtr = Game.SingletonRepository.Get<MonsterRace>(rIdx);
+        if (rPtr.MaxNum == 0)
         {
-            Game.SingletonRepository.Get<MonsterRace>(rIdx).MaxNum++;
+            rPtr.MaxNum++;
             Game.MsgPrint("Resurrecting guardian.");
         }
 
@@ -537,7 +538,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     break;
                 }
             }
-        } while (!Game.PlaceMonsterByIndex(y, x, rIdx, false, false, false));
+        } while (!Game.PlaceMonsterAux(y, x, rPtr, false, false, false));
     }
 
     private void PlaceRubble(int y, int x)
