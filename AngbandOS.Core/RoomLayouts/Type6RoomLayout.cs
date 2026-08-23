@@ -18,7 +18,6 @@ internal class Type6RoomLayout : RoomLayout
     public override void Build(int objectLevel, int yval, int xval)
     {
         int i, y, x;
-        bool empty = false;
         GridTile cPtr;
         int y1 = yval - 4;
         int y2 = yval + 4;
@@ -168,14 +167,9 @@ internal class Type6RoomLayout : RoomLayout
             int? monsterRace = Game.GetMonsterRaceIndex(Game.Difficulty + 10, monsterRaceFilter);
             if (!monsterRace.HasValue)
             {
-                empty = true;
-                break;
+                return;
             }
             monsterRaceIndexes[i] = monsterRace.Value;
-        }
-        if (empty)
-        {
-            return;
         }
         for (i = 0; i < 16 - 1; i++)
         {

@@ -20,7 +20,6 @@ internal class Type5RoomLayout : RoomLayout
         int y, x;
         int[] monsterRaceIndexes = new int[64];
         GridTile cPtr;
-        bool empty = false;
         int y1 = yval - 4;
         int y2 = yval + 4;
         int x1 = xval - 11;
@@ -140,14 +139,9 @@ internal class Type5RoomLayout : RoomLayout
             int? monsterRace = Game.GetMonsterRaceIndex(Game.Difficulty + 10, getMonNumHook);
             if (!monsterRace.HasValue)
             {
-                empty = true;
-                break;
+                return;
             }
             monsterRaceIndexes[i] = monsterRace.Value;
-        }
-        if (empty)
-        {
-            return;
         }
         Game.DangerRating += 10;
         if (Game.Difficulty <= 40 && Game.DieRoll((Game.Difficulty * Game.Difficulty) + 50) < 300)
