@@ -9476,10 +9476,10 @@ internal partial class Game : IGameSerialize
                 TotalFriends++;
                 TotalFriendLevels += monster.Race.Level;
             }
-            // Monsters that have just been spawned don't act in their first turn
-            if ((monster.IndividualMonsterFlags & Constants.MflagBorn) != 0)
+            // Monsters that have just been spawned don't act in their first turn.            
+            if (monster.NewlySpawned)
             {
-                monster.IndividualMonsterFlags &= ~Constants.MflagBorn;
+                monster.NewlySpawned = false;
                 continue;
             }
             // Check the monster's speed to see if it should get a turn
@@ -15251,7 +15251,7 @@ internal partial class Game : IGameSerialize
         }
         if (cPtr.MonsterIndex < CurrentlyActingMonster)
         {
-            mPtr.IndividualMonsterFlags |= Constants.MflagBorn;
+            mPtr.NewlySpawned = true;
         }
         UpdateMonsterVisibility(Monsters[cPtr.MonsterIndex], true);
         rPtr.CurNum++;

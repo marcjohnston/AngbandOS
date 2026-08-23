@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Drawing;
-
 namespace AngbandOS.Core;
 
 internal class Monster : IItemContainer, IGameSerialize
@@ -105,6 +103,11 @@ internal class Monster : IItemContainer, IGameSerialize
     public int StunLevel;
     public int IndividualMonsterFlags;
 
+    /// <summary>
+    /// True, when the monster is born; false, after the first turn.
+    /// </summary>
+    public bool NewlySpawned;
+
     #endregion
 
     public GameStateBag? Serialize(SaveGameState saveGameState)
@@ -114,7 +117,7 @@ internal class Monster : IItemContainer, IGameSerialize
             ("bools2", saveGameState.CreateGameStateBag(SmImmMana, SmImmReflect, SmImmXxx5, SmOppAcid, SmOppCold, SmOppElec, SmOppFire, SmOppPois)),
             ("bools3", saveGameState.CreateGameStateBag(SmOppXXx1, SmResAcid, SmResBlind, SmResChaos, SmResCold, SmResConf, SmResDark, SmResDisen)),
             ("bools4", saveGameState.CreateGameStateBag(SmResElec, SmResFear, SmResFire, SmResLight, SmResNeth, SmResNexus, SmResPois, SmResShard)),
-            (nameof(SmResSound), saveGameState.CreateGameStateBag(SmResSound)),
+            ("bools5", saveGameState.CreateGameStateBag(SmResSound, NewlySpawned)),
 
             (nameof(ConfusionLevel), saveGameState.CreateGameStateBag(ConfusionLevel)),
             (nameof(DistanceFromPlayer), saveGameState.CreateGameStateBag(DistanceFromPlayer)),
@@ -262,7 +265,7 @@ internal class Monster : IItemContainer, IGameSerialize
         (SmImmMana, SmImmReflect, SmImmXxx5, SmOppAcid, SmOppCold, SmOppElec, SmOppFire, SmOppPois) = restoreGameState.GetByKey("bools2").Get8Bools();
         (SmOppXXx1, SmResAcid, SmResBlind, SmResChaos, SmResCold, SmResConf, SmResDark, SmResDisen) = restoreGameState.GetByKey("bools3").Get8Bools();
         (SmResElec, SmResFear, SmResFire, SmResLight, SmResNeth, SmResNexus, SmResPois, SmResShard) = restoreGameState.GetByKey("bools4").Get8Bools();
-        SmResSound = restoreGameState.GetByKey(nameof(SmResSound)).GetBool();
+        (SmResSound, NewlySpawned) = restoreGameState.GetByKey("bools5").Get2Bools();
 
         ConfusionLevel = restoreGameState.GetByKey(nameof(ConfusionLevel)).GetInt();
         DistanceFromPlayer = restoreGameState.GetByKey(nameof(DistanceFromPlayer)).GetInt();
