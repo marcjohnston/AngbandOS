@@ -19,7 +19,7 @@ internal class MonsterTarget : Target
     public override GridCoordinate? GetTargetLocation()
     {
         // Ensure we can still target the monster.
-        if (!Game.TargetAble(_monster))
+        if (!Game.Targetable(_monster))
         {
             return null;
         }

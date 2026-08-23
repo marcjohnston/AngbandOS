@@ -11420,7 +11420,7 @@ internal partial class Game : IGameSerialize
         {
             GridTile cPtr = Grid[y][x];
             string info = "l,*";
-            if (TargetAble(cPtr.MonsterIndex))
+            if (Targetable(Monsters[cPtr.MonsterIndex]))
             {
                 info = $"t,{info}";
             }
@@ -11434,7 +11434,7 @@ internal partial class Game : IGameSerialize
                     }
                 case 't':
                     {
-                        if (TargetAble(cPtr.MonsterIndex))
+                        if (Targetable(Monsters[cPtr.MonsterIndex]))
                         {
                             HealthTrack(cPtr.MonsterIndex);
                             TargetWho = new MonsterTarget(this, Monsters[cPtr.MonsterIndex]);
@@ -11605,14 +11605,7 @@ internal partial class Game : IGameSerialize
     /// </summary>
     /// <param name="mIdx"></param>
     /// <returns></returns>
-    [Obsolete("Use TargetAble(Monster)")]
-    private bool TargetAble(int mIdx)
-    {
-        Monster mPtr = Monsters[mIdx];
-        return TargetAble(mPtr);
-    }
-
-    public bool TargetAble(Monster mPtr)
+    public bool Targetable(Monster mPtr)
     {
         if (mPtr.Race == null)
         {
@@ -11869,7 +11862,7 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                if ((mode & Constants.TargetKill) != 0 && !TargetAble(cPtr.MonsterIndex))
+                if ((mode & Constants.TargetKill) != 0 && !Targetable(Monsters[cPtr.MonsterIndex]))
                 {
                     continue;
                 }
