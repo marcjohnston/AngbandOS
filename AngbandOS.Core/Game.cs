@@ -11938,6 +11938,7 @@ internal partial class Game : IGameSerialize
         {
             return;
         }
+        MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
         for (int i = 0; i < 10; i++)
         {
             const int d = 1;
@@ -11946,7 +11947,7 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            if (PlaceMonsterByIndex(y, x, rIdx, slp, true, false))
+            if (PlaceMonsterAux(y, x, rPtr, slp, true, false))
             {
                 break;
             }
@@ -15304,6 +15305,7 @@ internal partial class Game : IGameSerialize
         return true;
     }
 
+    [Obsolete("Use PlaceMonsterAux")]
     public bool PlaceMonsterByIndex(int y, int x, int index, bool slp, bool grp, bool charm)
     {
         return PlaceMonsterAux(y, x, SingletonRepository.Get<MonsterRace>(index), slp, grp, charm);
