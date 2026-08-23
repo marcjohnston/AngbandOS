@@ -6702,7 +6702,7 @@ internal partial class Game : IGameSerialize
         int lev2 = rPtr.Level + (DieRoll(20) / DieRoll(9)) + 1;
         for (int i = 0; i < 1000; i++)
         {
-            int r = GetMonNum(((Difficulty + rPtr.Level) / 2) + 5, null);
+            int r = GetMonsterRaceIndex(((Difficulty + rPtr.Level) / 2) + 5, null);
             if (r == 0)
             {
                 break;
@@ -14468,7 +14468,7 @@ internal partial class Game : IGameSerialize
         int attempts = 1000;
         while (--attempts != 0)
         {
-            int rIdx = GetMonNum(MonsterLevel, null);
+            int rIdx = GetMonsterRaceIndex(MonsterLevel, null);
             if (rIdx == 0)
             {
                 return false;
@@ -14770,12 +14770,12 @@ internal partial class Game : IGameSerialize
     }
 
     /// <summary>
-    /// Returns the index of a monster.
+    /// Returns the index of a monster race.
     /// </summary>
     /// <param name="level"></param>
     /// <param name="monsterFilter"></param>
     /// <returns></returns>
-    public int GetMonNum(int level, MonsterRaceFilter? monsterFilter)
+    public int GetMonsterRaceIndex(int level, MonsterRaceFilter? monsterFilter)
     {
         int i, j;
         AllocationEntry[] table = AllocRaceTable;
@@ -15052,7 +15052,7 @@ internal partial class Game : IGameSerialize
 
     public bool PlaceMonster(int y, int x, bool slp, bool grp)
     {
-        int rIdx = GetMonNum(MonsterLevel, null);
+        int rIdx = GetMonsterRaceIndex(MonsterLevel, null);
         if (rIdx == 0)
         {
             return false;
@@ -15282,7 +15282,7 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                int z = GetMonNum(rPtr.Level, new PlaceOkaySystemMonsterRaceFilter(this, rPtr.Index));
+                int z = GetMonsterRaceIndex(rPtr.Level, new PlaceOkaySystemMonsterRaceFilter(this, rPtr.Index));
                 if (z == 0)
                 {
                     break;
@@ -15308,9 +15308,9 @@ internal partial class Game : IGameSerialize
     }
 
     [Obsolete("Use PlaceMonsterAux")]
-    public bool PlaceMonsterByIndex(int y, int x, int index, bool slp, bool grp, bool charm)
+    public bool PlaceMonsterByIndex(int y, int x, int monsterRaceIndex, bool slp, bool grp, bool charm)
     {
-        return PlaceMonsterAux(y, x, SingletonRepository.Get<MonsterRace>(index), slp, grp, charm);
+        return PlaceMonsterAux(y, x, SingletonRepository.Get<MonsterRace>(monsterRaceIndex), slp, grp, charm);
     }
 
     public void ReplacePet(int y1, int x1, Monster monster)
@@ -15391,7 +15391,7 @@ internal partial class Game : IGameSerialize
         {
             return false;
         }
-        int rIdx = GetMonNum(((Difficulty + lev) / 2) + 5, monsterFilter);
+        int rIdx = GetMonsterRaceIndex(((Difficulty + lev) / 2) + 5, monsterFilter);
         if (rIdx == 0)
         {
             return false;

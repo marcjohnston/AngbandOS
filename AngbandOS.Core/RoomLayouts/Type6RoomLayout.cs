@@ -17,7 +17,6 @@ internal class Type6RoomLayout : RoomLayout
     public override int Level => 5;
     public override void Build(int objectLevel, int yval, int xval)
     {
-        int[] what = new int[16];
         int i, y, x;
         bool empty = false;
         GridTile cPtr;
@@ -163,10 +162,11 @@ internal class Type6RoomLayout : RoomLayout
         {
             getMonNumHook = new SymbolSystemMonsterRaceFilter(Game, 'U');
         }
+        int[] monsterRaceIndex = new int[16];
         for (i = 0; i < 16; i++)
         {
-            what[i] = Game.GetMonNum(Game.Difficulty + 10, getMonNumHook);
-            if (what[i] == 0)
+            monsterRaceIndex[i] = Game.GetMonsterRaceIndex(Game.Difficulty + 10, getMonNumHook);
+            if (monsterRaceIndex[i] == 0)
             {
                 empty = true;
             }
@@ -181,19 +181,19 @@ internal class Type6RoomLayout : RoomLayout
             {
                 int i1 = j;
                 int i2 = j + 1;
-                int p1 = Game.SingletonRepository.Get<MonsterRace>(what[i1]).Level;
-                int p2 = Game.SingletonRepository.Get<MonsterRace>(what[i2]).Level;
+                int p1 = Game.SingletonRepository.Get<MonsterRace>(monsterRaceIndex[i1]).Level;
+                int p2 = Game.SingletonRepository.Get<MonsterRace>(monsterRaceIndex[i2]).Level;
                 if (p1 > p2)
                 {
-                    tmp = what[i1];
-                    what[i1] = what[i2];
-                    what[i2] = tmp;
+                    tmp = monsterRaceIndex[i1];
+                    monsterRaceIndex[i1] = monsterRaceIndex[i2];
+                    monsterRaceIndex[i2] = tmp;
                 }
             }
         }
         for (i = 0; i < 8; i++)
         {
-            what[i] = what[i * 2];
+            monsterRaceIndex[i] = monsterRaceIndex[i * 2];
         }
         Game.DangerRating += 10;
         if (Game.Difficulty <= 40 &&
@@ -203,35 +203,35 @@ internal class Type6RoomLayout : RoomLayout
         }
         for (x = xval - 9; x <= xval + 9; x++)
         {
-            Game.PlaceMonsterByIndex(yval - 2, x, what[0], false, false, false);
-            Game.PlaceMonsterByIndex(yval + 2, x, what[0], false, false, false);
+            Game.PlaceMonsterByIndex(yval - 2, x, monsterRaceIndex[0], false, false, false);
+            Game.PlaceMonsterByIndex(yval + 2, x, monsterRaceIndex[0], false, false, false);
         }
         for (y = yval - 1; y <= yval + 1; y++)
         {
-            Game.PlaceMonsterByIndex(y, xval - 9, what[0], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval + 9, what[0], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval - 8, what[1], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval + 8, what[1], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval - 7, what[1], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval + 7, what[1], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval - 6, what[2], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval + 6, what[2], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval - 5, what[2], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval + 5, what[2], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval - 4, what[3], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval + 4, what[3], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval - 3, what[3], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval + 3, what[3], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval - 2, what[4], false, false, false);
-            Game.PlaceMonsterByIndex(y, xval + 2, what[4], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval - 9, monsterRaceIndex[0], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval + 9, monsterRaceIndex[0], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval - 8, monsterRaceIndex[1], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval + 8, monsterRaceIndex[1], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval - 7, monsterRaceIndex[1], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval + 7, monsterRaceIndex[1], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval - 6, monsterRaceIndex[2], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval + 6, monsterRaceIndex[2], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval - 5, monsterRaceIndex[2], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval + 5, monsterRaceIndex[2], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval - 4, monsterRaceIndex[3], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval + 4, monsterRaceIndex[3], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval - 3, monsterRaceIndex[3], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval + 3, monsterRaceIndex[3], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval - 2, monsterRaceIndex[4], false, false, false);
+            Game.PlaceMonsterByIndex(y, xval + 2, monsterRaceIndex[4], false, false, false);
         }
         for (x = xval - 1; x <= xval + 1; x++)
         {
-            Game.PlaceMonsterByIndex(yval + 1, x, what[5], false, false, false);
-            Game.PlaceMonsterByIndex(yval - 1, x, what[5], false, false, false);
+            Game.PlaceMonsterByIndex(yval + 1, x, monsterRaceIndex[5], false, false, false);
+            Game.PlaceMonsterByIndex(yval - 1, x, monsterRaceIndex[5], false, false, false);
         }
-        Game.PlaceMonsterByIndex(yval, xval + 1, what[6], false, false, false);
-        Game.PlaceMonsterByIndex(yval, xval - 1, what[6], false, false, false);
-        Game.PlaceMonsterByIndex(yval, xval, what[7], false, false, false);
+        Game.PlaceMonsterByIndex(yval, xval + 1, monsterRaceIndex[6], false, false, false);
+        Game.PlaceMonsterByIndex(yval, xval - 1, monsterRaceIndex[6], false, false, false);
+        Game.PlaceMonsterByIndex(yval, xval, monsterRaceIndex[7], false, false, false);
     }
 }

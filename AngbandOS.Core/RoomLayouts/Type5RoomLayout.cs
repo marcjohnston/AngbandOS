@@ -137,7 +137,7 @@ internal class Type5RoomLayout : RoomLayout
         }
         for (int i = 0; i < 64; i++)
         {
-            what[i] = Game.GetMonNum(Game.Difficulty + 10, getMonNumHook);
+            what[i] = Game.GetMonsterRaceIndex(Game.Difficulty + 10, getMonNumHook);
             if (what[i] == 0)
             {
                 empty = true;
