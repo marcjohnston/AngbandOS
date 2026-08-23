@@ -11558,9 +11558,8 @@ internal partial class Game : IGameSerialize
         return success;
     }
 
-    private string LookMonDesc(int mIdx)
+    private string LookMonDesc(Monster mPtr)
     {
-        Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         bool living = !rPtr.Undead;
         if (rPtr.Demon)
@@ -11719,7 +11718,7 @@ internal partial class Game : IGameSerialize
                         {
                             string c = mPtr.SmCloned ? " (clone)" : "";
                             string a = mPtr.IsPet ? " (allied) " : " ";
-                            outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
+                            outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(Monsters[cPtr.MonsterIndex])}){c}{a}[r,{info}]";
                             Screen.PrintLine(outVal, 0, 0);
                             ConsoleView.MoveCursorTo(y, x);
                             query = GetAndRecordKeystroke();
