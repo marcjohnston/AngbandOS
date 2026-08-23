@@ -366,7 +366,6 @@ internal partial class Game : IGameSerialize
             (nameof(TempN), saveGameState.CreateGameStateBag(TempN)),
             (nameof(Light), saveGameState.CreateDerivedGameStateBag(Light, typeof(GridCoordinate))),
             (nameof(View), saveGameState.CreateDerivedGameStateBag(View, typeof(GridCoordinate))),
-            (nameof(CurrentlyActingMonster), saveGameState.CreateGameStateBag(CurrentlyActingMonster)),
             (nameof(DunBias), saveGameState.CreateGameStateBag(DunBias)),
             (nameof(NumRepro), saveGameState.CreateGameStateBag(NumRepro)),
             (nameof(Monsters), saveGameState.CreateDerivedGameStateBag(Monsters, typeof(Monster))),
@@ -646,7 +645,6 @@ internal partial class Game : IGameSerialize
             TempN = restoreGameState.GetByKey(nameof(TempN)).GetInt();
             Light = restoreGameState.GetByKey(nameof(Light)).GetDerivedReferences<GridCoordinate>(_restoreGameState => new GridCoordinate(this, _restoreGameState)).ToList();
             View = restoreGameState.GetByKey(nameof(View)).GetDerivedReferences<GridCoordinate>(_restoreGameState => new GridCoordinate(this, _restoreGameState)).ToList();
-            CurrentlyActingMonster = restoreGameState.GetByKey(nameof(CurrentlyActingMonster)).GetInt();
             DunBias = restoreGameState.GetByKey(nameof(DunBias)).GetReferenceOrDefault<MonsterRaceFilter>();
             NumRepro = restoreGameState.GetByKey(nameof(NumRepro)).GetInt();
             Monsters = restoreGameState.GetByKey(nameof(Monsters)).GetDerivedReferences<Monster>(_restoreGameState => new Monster(this, _restoreGameState)).ToArray();
@@ -1792,7 +1790,6 @@ internal partial class Game : IGameSerialize
 
     public readonly List<GridCoordinate> Light = new List<GridCoordinate>(); // TODO: This belongs to UpdateLightFlaggedActions and should be private.
     public readonly List<GridCoordinate> View = new List<GridCoordinate>(); // TODO: This belongs to UpdateViewFlaggedActions and should be private.
-    public int CurrentlyActingMonster;
     public MonsterRaceFilter? DunBias = null; // The dungeon does not have a bias for monsters.
     public int NumRepro;
     public bool RepairMonsters;
@@ -9477,9 +9474,9 @@ internal partial class Game : IGameSerialize
                 TotalFriendLevels += monster.Race.Level;
             }
             // Monsters that have just been spawned don't act in their first turn.            
-            if (monster.NewlySpawned)
+            if (monster.SkipFirstTurn)
             {
-                monster.NewlySpawned = false;
+                monster.SkipFirstTurn = false;
                 continue;
             }
             // Check the monster's speed to see if it should get a turn
@@ -9522,7 +9519,6 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            CurrentlyActingMonster = i;
             // Process the individual monster
             monster.ProcessMonster(noise);
             // If the monster killed the player or sent us to a new level, then stop processing
@@ -9531,7 +9527,6 @@ internal partial class Game : IGameSerialize
                 break;
             }
         }
-        CurrentlyActingMonster = 0;
     }
 
     /// <summary>
@@ -15028,7 +15023,7 @@ internal partial class Game : IGameSerialize
         }
     }
 
-    public bool MultiplyMonster(Monster mPtr, bool charm, bool clone)
+    public bool MultiplyMonster(Monster mPtr, bool charm, bool clone, bool newlySpawnedSkipFirstTurn)
     {
         bool result = false;
         for (int i = 0; i < 18; i++)
@@ -15039,7 +15034,7 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            result = PlaceMonsterAux(y, x, mPtr.Race, false, false, charm);
+            result = PlaceMonsterAux(y, x, mPtr.Race, false, false, charm, newlySpawnedSkipFirstTurn);
             break;
         }
         if (clone && result)
@@ -15111,7 +15106,7 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                if (PlaceMonsterOne(my, mx, rPtr, slp, charm))
+                if (PlaceMonsterOne(my, mx, rPtr, slp, charm, false))
                 {
                     hackY[hackN] = my;
                     hackX[hackN] = mx;
@@ -15131,7 +15126,7 @@ internal partial class Game : IGameSerialize
     /// <param name="slp"></param>
     /// <param name="pet"></param>
     /// <returns></returns>
-    private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool pet)
+    private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool pet, bool newlySpawnedSkipFirstTurn)
     {
         // Monster must be provided.
         if (rPtr == null)
@@ -15249,10 +15244,8 @@ internal partial class Game : IGameSerialize
             mPtr.IndividualMonsterFlags |= Constants.MflagNice;
             RepairMonsters = true;
         }
-        if (cPtr.MonsterIndex < CurrentlyActingMonster)
-        {
-            mPtr.NewlySpawned = true;
-        }
+        
+        mPtr.SkipFirstTurn = newlySpawnedSkipFirstTurn;
         UpdateMonsterVisibility(Monsters[cPtr.MonsterIndex], true);
         rPtr.CurNum++;
         if (rPtr.Multiply)
@@ -15266,9 +15259,9 @@ internal partial class Game : IGameSerialize
         return true;
     }
 
-    public bool PlaceMonsterAux(int y, int x, MonsterRace rPtr, bool slp, bool grp, bool pet)
+    public bool PlaceMonsterAux(int y, int x, MonsterRace rPtr, bool slp, bool grp, bool pet, bool newlySpawnedSkipFirstTurn = false)
     {
-        if (!PlaceMonsterOne(y, x, rPtr, slp, pet))
+        if (!PlaceMonsterOne(y, x, rPtr, slp, pet, newlySpawnedSkipFirstTurn))
         {
             return false;
         }
@@ -15287,7 +15280,7 @@ internal partial class Game : IGameSerialize
                 {
                     break;
                 }
-                PlaceMonsterOne(ny, nx, monsterRace, slp, pet);
+                PlaceMonsterOne(ny, nx, monsterRace, slp, pet, newlySpawnedSkipFirstTurn);
                 if (monsterRace.Friends ||
                     rPtr.EscortsGroup)
                 {

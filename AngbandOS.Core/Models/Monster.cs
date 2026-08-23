@@ -106,7 +106,7 @@ internal class Monster : IItemContainer, IGameSerialize
     /// <summary>
     /// True, when the monster is born; false, after the first turn.
     /// </summary>
-    public bool NewlySpawned;
+    public bool SkipFirstTurn = false;
 
     #endregion
 
@@ -117,7 +117,7 @@ internal class Monster : IItemContainer, IGameSerialize
             ("bools2", saveGameState.CreateGameStateBag(SmImmMana, SmImmReflect, SmImmXxx5, SmOppAcid, SmOppCold, SmOppElec, SmOppFire, SmOppPois)),
             ("bools3", saveGameState.CreateGameStateBag(SmOppXXx1, SmResAcid, SmResBlind, SmResChaos, SmResCold, SmResConf, SmResDark, SmResDisen)),
             ("bools4", saveGameState.CreateGameStateBag(SmResElec, SmResFear, SmResFire, SmResLight, SmResNeth, SmResNexus, SmResPois, SmResShard)),
-            ("bools5", saveGameState.CreateGameStateBag(SmResSound, NewlySpawned)),
+            ("bools5", saveGameState.CreateGameStateBag(SmResSound, SkipFirstTurn)),
 
             (nameof(ConfusionLevel), saveGameState.CreateGameStateBag(ConfusionLevel)),
             (nameof(DistanceFromPlayer), saveGameState.CreateGameStateBag(DistanceFromPlayer)),
@@ -265,7 +265,7 @@ internal class Monster : IItemContainer, IGameSerialize
         (SmImmMana, SmImmReflect, SmImmXxx5, SmOppAcid, SmOppCold, SmOppElec, SmOppFire, SmOppPois) = restoreGameState.GetByKey("bools2").Get8Bools();
         (SmOppXXx1, SmResAcid, SmResBlind, SmResChaos, SmResCold, SmResConf, SmResDark, SmResDisen) = restoreGameState.GetByKey("bools3").Get8Bools();
         (SmResElec, SmResFear, SmResFire, SmResLight, SmResNeth, SmResNexus, SmResPois, SmResShard) = restoreGameState.GetByKey("bools4").Get8Bools();
-        (SmResSound, NewlySpawned) = restoreGameState.GetByKey("bools5").Get2Bools();
+        (SmResSound, SkipFirstTurn) = restoreGameState.GetByKey("bools5").Get2Bools();
 
         ConfusionLevel = restoreGameState.GetByKey(nameof(ConfusionLevel)).GetInt();
         DistanceFromPlayer = restoreGameState.GetByKey(nameof(DistanceFromPlayer)).GetInt();
@@ -884,7 +884,7 @@ internal class Monster : IItemContainer, IGameSerialize
             // If there's lots of space, then pop out a baby
             if (k < 4 && (k == 0 || Game.RandomLessThan(k * Constants.MonMultAdj) == 0))
             {
-                if (Game.MultiplyMonster(this, isFriend, false))
+                if (Game.MultiplyMonster(this, isFriend, false, true))
                 {
                     // If the player saw this, they now know we can multiply
                     if (IsVisible)
