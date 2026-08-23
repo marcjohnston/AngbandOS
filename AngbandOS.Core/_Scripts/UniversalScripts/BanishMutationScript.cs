@@ -15,16 +15,16 @@ internal class BanishMutationScript : UniversalScript, IGetKey
         int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
         int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         GridTile cPtr = Game.Grid[y][x];
-        if (cPtr.MonsterIndex == 0)
+        if (cPtr.Monster is null)
         {
             Game.MsgPrint("You sense no evil there!");
             return;
         }
-        Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
+        Monster mPtr = cPtr.Monster;
         MonsterRace rPtr = mPtr.Race;
         if (rPtr.Evil)
         {
-            Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+            Game.DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex(), true);
             Game.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
         }
         else

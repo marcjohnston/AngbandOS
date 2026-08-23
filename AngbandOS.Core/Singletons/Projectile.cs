@@ -105,7 +105,7 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
     }
 
     /// <summary>
-    /// Returns true, if the projectile actally hits and affects a monster, an item, a grid tile or the player in a manner that the player notices.
+    /// Returns true, if the projectile actually hits and affects a monster, an item, a grid tile or the player in a manner that the player notices.
     /// </summary>
     /// <param name="who"></param>
     /// <param name="rad"></param>
@@ -201,7 +201,7 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
             {
                 break;
             }
-            if (cPtr.MonsterIndex != 0 && dist != 0 && stop)
+            if (cPtr.Monster is not null && dist != 0 && stop)
             {
                 break;
             }
@@ -464,11 +464,11 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                 }
                 else
                 {
-                    if (cPtr.MonsterIndex == 0)
+                    if (cPtr.Monster is null)
                     {
                         continue;
                     }
-                    MonsterRace refPtr = Game.Monsters[cPtr.MonsterIndex].Race;
+                    MonsterRace refPtr = cPtr.Monster.Race;
                     if (refPtr.Reflecting && Game.DieRoll(10) != 1 && distHack > 1 && GetType().Name != "ProjectWizardBolt")
                     {
                         int tY, tX;
@@ -484,12 +484,12 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                             tY = ySaver;
                             tX = xSaver;
                         }
-                        if (Game.Monsters[cPtr.MonsterIndex].IsVisible)
+                        if (cPtr.Monster.IsVisible)
                         {
                             Game.MsgPrint("The attack bounces!");
                             refPtr.Knowledge.Characteristics.Reflecting = true;
                         }
-                        Fire(cPtr.MonsterIndex, 0, tY, tX, dam, jump: jump, beam: beam, thru: thru, hide: hide, grid: grid, item: item, kill: kill, stop: stop);
+                        Fire(cPtr.Monster.GetMonsterIndex(), 0, tY, tX, dam, jump: jump, beam: beam, thru: thru, hide: hide, grid: grid, item: item, kill: kill, stop: stop);
                     }
                     else
                     {
@@ -505,9 +505,9 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                 x = projectMx;
                 y = projectMy;
                 cPtr = Game.Grid[y][x];
-                if (cPtr.MonsterIndex != 0)
+                if (cPtr.Monster is not null)
                 {
-                    Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
+                    Monster mPtr = cPtr.Monster;
                     if (mPtr.IsVisible)
                     {
                         Game.TrackMonsterHealth(mPtr);

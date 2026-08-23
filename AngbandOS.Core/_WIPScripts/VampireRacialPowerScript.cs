@@ -11,7 +11,7 @@ internal class VampireRacialPowerScript : Script, IScript
             int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[direction];
             int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[direction];
             GridTile tile = Game.Grid[y][x];
-            if (tile.MonsterIndex == 0)
+            if (tile.Monster is null)
             {
                 Game.MsgPrint("You bite into thin air!");
             }

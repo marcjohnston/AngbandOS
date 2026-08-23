@@ -72,7 +72,7 @@ internal class CloseScript : GameCommandUniversalScript, IGetKey
                 Game.MsgPrint("You see nothing there to close.");
             }
             // Can't close if there's a monster in the way
-            else if (tile.MonsterIndex != 0)
+            else if (tile.Monster is not null)
             {
                 Game.EnergyUse = 100;
                 Game.MsgPrint("There is a monster in the way!");

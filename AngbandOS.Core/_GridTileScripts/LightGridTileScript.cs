@@ -20,9 +20,9 @@ internal class LightGridTileScript : GridTileScript
         {
             isNoticed = IsNoticedEnum.True;
         }
-        if (cPtr.MonsterIndex != 0)
+        if (cPtr.Monster is not null)
         {
-            Game.UpdateMonsterVisibility(Game.Monsters[cPtr.MonsterIndex], false);
+            Game.UpdateMonsterVisibility(cPtr.Monster, false);
         }
         return (isNoticed, DestroysContentsEnum.False);
     }

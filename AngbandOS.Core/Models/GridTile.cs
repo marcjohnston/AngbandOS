@@ -40,7 +40,7 @@ internal class GridTile : IItemContainer, IGameSerialize
             ("bools", saveGameState.CreateGameStateBag(EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag)),
             (nameof(_trapsDetected), saveGameState.CreateGameStateBag(_trapsDetected)),
             (nameof(Items), saveGameState.CreateDerivedGameStateBag(Items, typeof(Item))),
-            (nameof(MonsterIndex), saveGameState.CreateGameStateBag(MonsterIndex)),
+            (nameof(Monster), saveGameState.CreateDerivedGameStateBag(Monster)),
             (nameof(ScentAge), saveGameState.CreateGameStateBag(ScentAge)),
             (nameof(ScentStrength), saveGameState.CreateGameStateBag(ScentStrength)),
             (nameof(_backgroundFeature), saveGameState.CreateDerivedGameStateBag(_backgroundFeature, typeof(Tile))),
@@ -52,8 +52,8 @@ internal class GridTile : IItemContainer, IGameSerialize
     {
         (EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag) = restoreGameState.GetByKey(nameof(TempFlag)).Get8Bools();
         _trapsDetected = restoreGameState.GetByKey(nameof(_trapsDetected)).GetBool();
-        Items = restoreGameState.GetByKey(nameof(Items)).GetDerivedReferences<Item>((RestoreGameState restoreGameState) => new Item(game, restoreGameState)).ToList();
-        MonsterIndex = restoreGameState.GetByKey(nameof(MonsterIndex)).GetInt();
+        Items = restoreGameState.GetByKey(nameof(Items)).GetDerivedReferences<Item>(_restoreGameState => new Item(game, _restoreGameState)).ToList();
+        Monster = restoreGameState.GetByKey(nameof(Monster)).GetDerivedReference<Monster>(_restoreGameState => new Monster(Game, _restoreGameState));
         ScentAge = restoreGameState.GetByKey(nameof(ScentAge)).GetInt();
         ScentStrength = restoreGameState.GetByKey(nameof(ScentStrength)).GetInt();
         _backgroundFeature = restoreGameState.GetByKey(nameof(_backgroundFeature)).GetDerivedReference<Tile>();
@@ -109,9 +109,9 @@ internal class GridTile : IItemContainer, IGameSerialize
     public List<Item> Items = new List<Item>(); // TODO: Publically, this needs to be an array
 
     /// <summary>
-    /// The index of the monster that is in this grid tile
+    /// The monster that is in this grid tile or null if there is none.
     /// </summary>
-    public int MonsterIndex; // TODO: This should be a nullable reference to a monster.
+    public Monster? Monster;
 
     /// <summary>
     /// The time since the player's scent in the tile was calculated

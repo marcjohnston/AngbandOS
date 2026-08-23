@@ -79,7 +79,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
             {
                 bool sad = mPtr.IsPet && !mPtr.IsVisible;
                 Game.MonsterDeath(mPtr);
-                Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                Game.DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex(), true);
                 if (string.IsNullOrEmpty(note) == false)
                 {
                     Game.MsgPrint($"{mName}{note}");
@@ -103,7 +103,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
         }
         else
         {
-            if (Game.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
+            if (Game.DamageMonster(cPtr.Monster.GetMonsterIndex(), dam, out bool fear, noteDies))
             {
             }
             else
@@ -131,19 +131,19 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
         GridTile cPtr = Game.Grid[y][x];
 
         // Check to see if there is a monster at this location.
-        if (cPtr.MonsterIndex == 0)
+        if (cPtr.Monster is null)
         {
             return IdentifiedResultEnum.False;
         }
 
         // Check to see if the monster/player is the monster/player performing the action.
-        if (who != 0 && cPtr.MonsterIndex == who)
+        if (who != 0 && cPtr.Monster.GetMonsterIndex() == who)
         {
             return IdentifiedResultEnum.False;
         }
 
         // Get a reference to the monster in question.
-        Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
+        Monster mPtr = cPtr.Monster;
 
         // Modify the damage based on the distance from the attacker.
         dam = (dam + r) / (r + 1);
@@ -160,7 +160,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
         IdentifiedResultEnum notice = Apply(who, mPtr, dam, r);
 
         GridTile newGridTile = Game.Grid[mPtr.MapY][mPtr.MapX];
-        Game.UpdateMonsterVisibility(Game.Monsters[newGridTile.MonsterIndex], false);
+        Game.UpdateMonsterVisibility(newGridTile.Monster, false);
         Game.ConsoleView.RefreshMapLocation(y, x);
         projectMn++;
         projectMx = mPtr.MapX;

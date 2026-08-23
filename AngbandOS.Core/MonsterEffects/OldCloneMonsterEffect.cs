@@ -36,7 +36,7 @@ internal class OldCloneMonsterEffect : MonsterEffect
         {
             mPtr.Speed += 10;
         }
-        Monster targetMonster = Game.Monsters[cPtr.MonsterIndex];
+        Monster targetMonster = cPtr.Monster;
         if (Game.MultiplyMonster(targetMonster, isFriend, true, false))
         {
             note = " spawns!";

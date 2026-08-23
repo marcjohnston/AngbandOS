@@ -132,10 +132,10 @@ internal class FireItemScript : UniversalScript, IGetKey
                 Game.Pause(msec);
             }
             // Check if we might hit a monster (not necessarily the one we were aiming at)
-            if (Game.Grid[y][x].MonsterIndex != 0)
+            if (Game.Grid[y][x].Monster is not null)
             {
                 GridTile tile = Game.Grid[y][x];
-                Monster monster = Game.Monsters[tile.MonsterIndex];
+                Monster monster = tile.Monster;
                 MonsterRace race = monster.Race;
                 bool visible = monster.IsVisible;
                 hitBody = true;
@@ -174,7 +174,7 @@ internal class FireItemScript : UniversalScript, IGetKey
                     {
                         shotDamage = 0;
                     }
-                    if (Game.DamageMonster(tile.MonsterIndex, shotDamage, out bool fear, noteDies))
+                    if (Game.DamageMonster(tile.Monster.GetMonsterIndex(), shotDamage, out bool fear, noteDies))
                     {
                         // The monster is dead, so don't add further statuses or messages
                     }

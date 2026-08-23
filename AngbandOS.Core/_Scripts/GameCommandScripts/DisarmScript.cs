@@ -48,7 +48,7 @@ internal class DisarmScript : GameCommandUniversalScript, IGetKey
                 Game.MsgPrint("You see nothing there to disarm.");
             }
             // Can't disarm with a monster in the way
-            else if (tile.MonsterIndex != 0)
+            else if (tile.Monster is not null)
             {
                 Game.MsgPrint("There is a monster in the way!");
                 Game.PlayerAttackMonster(y, x);

@@ -873,7 +873,7 @@ internal class Monster : IItemContainer, IGameSerialize
             {
                 for (int x = oldX - 1; x <= oldX + 1; x++)
                 {
-                    if (Game.Grid[y][x].MonsterIndex != 0)
+                    if (Game.Grid[y][x].Monster is not null)
                     {
                         k++;
                     }
@@ -1016,7 +1016,7 @@ internal class Monster : IItemContainer, IGameSerialize
             int newY = oldY + Game.KeypadDirectionYOffset[d];
             int newX = oldX + Game.KeypadDirectionXOffset[d];
             GridTile tile = Game.Grid[newY][newX];
-            Monster monsterInTargetTile = Game.Monsters[tile.MonsterIndex];
+            Monster monsterInTargetTile = tile.Monster;
             // If we can simply move there, then we will do so
             if (Game.GridPassable(newY, newX))
             {
@@ -1033,7 +1033,7 @@ internal class Monster : IItemContainer, IGameSerialize
                 doMove = true;
             }
             // We can always attack another monster, even if the move would otherwise not be allowed
-            else if (tile.MonsterIndex != -0)
+            else if (tile.Monster is not null)
             {
                 doMove = true;
             }
@@ -1184,7 +1184,7 @@ internal class Monster : IItemContainer, IGameSerialize
                 doTurn = true;
             }
             // If we're trying to move onto another monster
-            if (doMove && tile.MonsterIndex != 0)
+            if (doMove && tile.Monster is not null)
             {
                 MonsterRace targetMonsterRace = monsterInTargetTile.Race;
                 // Assume for the moment we're not doing the move
@@ -1197,7 +1197,7 @@ internal class Monster : IItemContainer, IGameSerialize
                     doMove = true;
                     didKillBody = true;
                     Game.DeleteMonsterAtGridLocation(newY, newX);
-                    monsterInTargetTile = Game.Monsters[tile.MonsterIndex];
+                    monsterInTargetTile = tile.Monster;
                 }
                 // If we're not on the same team as the other monster or we're confused
                 else if (IsPet != monsterInTargetTile.IsPet || ConfusionLevel != 0)
@@ -1206,7 +1206,7 @@ internal class Monster : IItemContainer, IGameSerialize
                     // Attack the monster in the target tile
                     if (monsterInTargetTile.Race != null && monsterInTargetTile.Health >= 0)
                     {
-                        if (AttackAnotherMonster(tile.MonsterIndex))
+                        if (AttackAnotherMonster(tile.Monster))
                         {
                             return;
                         }
@@ -1230,18 +1230,18 @@ internal class Monster : IItemContainer, IGameSerialize
             {
                 doTurn = true;
                 // Swap positions with the monster that is in the tile we're aiming for
-                Game.Grid[oldY][oldX].MonsterIndex = tile.MonsterIndex;
+                Game.Grid[oldY][oldX].Monster = tile.Monster;
                 // If it was actually a monster then update it accordingly
-                if (tile.MonsterIndex != 0)
+                if (tile.Monster is not null)
                 {
                     monsterInTargetTile.MapY = oldY;
                     monsterInTargetTile.MapX = oldX;
-                    Game.UpdateMonsterVisibility(Game.Monsters[tile.MonsterIndex], true);
+                    Game.UpdateMonsterVisibility(tile.Monster, true);
                     // Pushing past something wakes it up
-                    Game.Monsters[tile.MonsterIndex].SleepLevel = 0;
+                    tile.Monster.SleepLevel = 0;
                 }
                 // Update our position
-                tile.MonsterIndex = GetMonsterIndex();
+                tile.Monster = this;
                 MapY = newY;
                 MapX = newX;
                 Game.UpdateMonsterVisibility(this, true);
@@ -1418,9 +1418,8 @@ internal class Monster : IItemContainer, IGameSerialize
     /// <param name="monsterIndex"> The index of the monster making the attack </param>
     /// <param name="targetIndex"> The index of the target monster </param>
     /// <returns> True if the attack happened, false if not </returns>
-    private bool AttackAnotherMonster(int targetIndex)
+    private bool AttackAnotherMonster(Monster target)
     {
-        Monster target = Game.Monsters[targetIndex];
         MonsterRace targetRace = target.Race;
         int ySaver = target.MapY;
         int xSaver = target.MapX;
@@ -1519,7 +1518,7 @@ internal class Monster : IItemContainer, IGameSerialize
                                 }
                             }
                             Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile));
-                            projectile.Fire(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
+                            projectile.Fire(target.GetMonsterIndex(), 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
                         }
                         if (targetRace.LightningAura && !Race.ImmuneLightning)
                         {
@@ -1535,7 +1534,7 @@ internal class Monster : IItemContainer, IGameSerialize
                                 }
                             }
                             Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile));
-                            projectile.Fire(targetIndex, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
+                            projectile.Fire(target.GetMonsterIndex(), 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
                         }
                     }
                 }
@@ -3152,8 +3151,8 @@ internal class Monster : IItemContainer, IGameSerialize
             min /= 2;
         }
         Game.PlaySound(SoundEffectEnum.Teleport);
-        Game.Grid[ny][nx].MonsterIndex = GetMonsterIndex();
-        Game.Grid[oy][ox].MonsterIndex = 0;
+        Game.Grid[ny][nx].Monster = this;
+        Game.Grid[oy][ox].Monster = null;
         MapY = ny;
         MapX = nx;
         Game.UpdateMonsterVisibility(this, true);
@@ -3192,9 +3191,9 @@ internal class Monster : IItemContainer, IGameSerialize
             // Check if we're in bounds and have a monster
             if (Game.InBounds(y, x))
             {
-                if (Game.Grid[y][x].MonsterIndex != 0)
+                if (Game.Grid[y][x].Monster is not null)
                 {
-                    Monster enemy = Game.Monsters[Game.Grid[y][x].MonsterIndex];
+                    Monster enemy = Game.Grid[y][x].Monster;
                     // Only go for monsters who are awake and on the opposing side
                     if (enemy.IsPet != IsPet && enemy.SleepLevel == 0)
                     {

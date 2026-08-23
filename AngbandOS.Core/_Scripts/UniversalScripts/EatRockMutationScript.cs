@@ -25,7 +25,7 @@ internal class EatRockMutationScript : UniversalScript, IGetKey
             Game.MsgPrint("Ouch!  This wall is harder than your teeth!");
             return;
         }
-        if (cPtr.MonsterIndex != 0)
+        if (cPtr.Monster is not null)
         {
             Game.MsgPrint("There's something in the way!");
             return;

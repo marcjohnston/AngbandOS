@@ -38,7 +38,7 @@ internal class BashScript : GameCommandUniversalScript, IGetKey
             {
                 Game.MsgPrint("You see nothing there to bash.");
             }
-            else if (tile.MonsterIndex != 0)
+            else if (tile.Monster is not null)
             {
                 // Oops - a monster got in the way
                 Game.EnergyUse = 100;

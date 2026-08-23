@@ -2345,10 +2345,9 @@ internal partial class Game : IGameSerialize
             col = MapX.IntValue + KeypadDirectionXOffset[newDirection];
             tile = Grid[row][col];
             // If there's a monster there we must stop moving
-            if (tile.MonsterIndex != 0)
+            if (tile.Monster is not null)
             {
-                Monster monster = Monsters[tile.MonsterIndex];
-                if (monster.IsVisible)
+                if (tile.Monster.IsVisible)
                 {
                     return true;
                 }
@@ -6320,9 +6319,9 @@ internal partial class Game : IGameSerialize
                     continue;
                 }
                 cPtr = Grid[yy][xx];
-                if (cPtr.MonsterIndex != 0)
+                if (cPtr.Monster is not null)
                 {
-                    Monster mPtr = Monsters[cPtr.MonsterIndex];
+                    Monster mPtr = cPtr.Monster;
                     MonsterRace rPtr = mPtr.Race;
                     if (!rPtr.KillWall && !rPtr.PassWall)
                     {
@@ -6367,9 +6366,8 @@ internal partial class Game : IGameSerialize
                         }
                         if (sn != 0)
                         {
-                            int mIdx = Grid[yy][xx].MonsterIndex;
-                            Grid[sy][sx].MonsterIndex = mIdx;
-                            Grid[yy][xx].MonsterIndex = 0;
+                            Grid[sy][sx].Monster = Grid[yy][xx].Monster;
+                            Grid[yy][xx].Monster = null;
                             mPtr.MapY = sy;
                             mPtr.MapX = sx;
                             UpdateMonsterVisibility(mPtr, true);
@@ -6909,13 +6907,13 @@ internal partial class Game : IGameSerialize
         }
 
         GridTile cPtr = Grid[ty][tx];
-        if (cPtr.MonsterIndex == 0)
+        Monster? mPtr = cPtr.Monster;
+        if (mPtr is null)
         {
             MsgPrint("You can't trade places with that!");
         }
         else
         {
-            Monster mPtr = Monsters[cPtr.MonsterIndex];
             MonsterRace rPtr = mPtr.Race;
             if (rPtr.ResistTeleport)
             {
@@ -6924,15 +6922,15 @@ internal partial class Game : IGameSerialize
             else
             {
                 PlaySound(SoundEffectEnum.Teleport);
-                Grid[MapY.IntValue][MapX.IntValue].MonsterIndex = cPtr.MonsterIndex;
-                cPtr.MonsterIndex = 0;
+                Grid[MapY.IntValue][MapX.IntValue].Monster = mPtr;
+                cPtr.Monster = null;
                 mPtr.MapY = MapY.IntValue;
                 mPtr.MapX = MapX.IntValue;
                 MapX.IntValue = tx;
                 MapY.IntValue = ty;
                 tx = mPtr.MapX;
                 ty = mPtr.MapY;
-                UpdateMonsterVisibility(Monsters[Grid[ty][tx].MonsterIndex], true);
+                UpdateMonsterVisibility(Grid[ty][tx].Monster, true);
                 ConsoleView.RefreshMapLocation(ty, tx);
                 ConsoleView.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
                 RecenterScreenAroundPlayer();
@@ -7037,10 +7035,10 @@ internal partial class Game : IGameSerialize
             GridTile cPtr = Grid[y][x];
             cPtr.TempFlag = false;
             cPtr.SelfLit = true;
-            if (cPtr.MonsterIndex != 0)
+            if (cPtr.Monster is not null)
             {
                 int chance = 25;
-                Monster mPtr = Monsters[cPtr.MonsterIndex];
+                Monster mPtr = cPtr.Monster;
                 MonsterRace rPtr = mPtr.Race;
                 UpdateMonsterVisibility(mPtr, false);
                 if (rPtr.Stupid)
@@ -7081,9 +7079,9 @@ internal partial class Game : IGameSerialize
                 cPtr.PlayerMemorized = false;
                 NoteSpot(y, x);
             }
-            if (cPtr.MonsterIndex != 0)
+            if (cPtr.Monster is not null)
             {
-                UpdateMonsterVisibility(Monsters[cPtr.MonsterIndex], false);
+                UpdateMonsterVisibility(cPtr.Monster, false);
             }
             ConsoleView.RefreshMapLocation(y, x);
         }
@@ -7817,7 +7815,7 @@ internal partial class Game : IGameSerialize
     { 
         bool canPassWalls = false;
         GridTile tile = Grid[newY][newX];
-        Monster monster = Monsters[tile.MonsterIndex];
+        Monster monster = tile.Monster;
         // Check if we can pass through walls
         if (EtherealnessTimer.Value != 0 || Race.IsEthereal)
         {
@@ -7830,7 +7828,7 @@ internal partial class Game : IGameSerialize
         }
         // If there's a monster we can see or an invisible monster on a tile we can move to,
         // deal with it
-        if (tile.MonsterIndex != 0 && (monster.IsVisible || GridPassable(newY, newX) || canPassWalls))
+        if (tile.Monster is not null && (monster.IsVisible || GridPassable(newY, newX) || canPassWalls))
         {
             // Check if it's a friend, and if we are in a fit state to distinguish friend from foe
             if (monster.IsPet && !(ConfusionTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible || StunTimer.Value != 0) && (GridPassable(newY, newX) || canPassWalls))
@@ -7849,9 +7847,9 @@ internal partial class Game : IGameSerialize
                     MsgPrint($"You push past {monsterName}.");
                     monster.MapY = MapY.IntValue;
                     monster.MapX = MapX.IntValue;
-                    Grid[MapY.IntValue][MapX.IntValue].MonsterIndex = tile.MonsterIndex;
-                    tile.MonsterIndex = 0;
-                    UpdateMonsterVisibility(Monsters[Grid[MapY.IntValue][MapX.IntValue].MonsterIndex], true);
+                    Grid[MapY.IntValue][MapX.IntValue].Monster = tile.Monster;
+                    tile.Monster = null;
+                    UpdateMonsterVisibility(Grid[MapY.IntValue][MapX.IntValue].Monster, true);
                 }
                 // If we couldn't push past it, tell us it was in the way
                 else
@@ -8250,7 +8248,7 @@ internal partial class Game : IGameSerialize
         }
 
         GridTile tile = Grid[y][x];
-        Monster monster = Monsters[tile.MonsterIndex];
+        Monster monster = tile.Monster;
         MonsterRace race = monster.Race;
         bool fear = false;
         bool backstab = false;
@@ -8450,7 +8448,7 @@ internal partial class Game : IGameSerialize
                     totalDamage = 0;
                 }
                 // Apply damage to the monster
-                if (DamageMonster(tile.MonsterIndex, totalDamage, out fear, ""))
+                if (DamageMonster(tile.Monster.GetMonsterIndex(), totalDamage, out fear, ""))
                 {
                     // Can't have any more attacks because the monster's dead
                     noExtra = true;
@@ -8540,10 +8538,10 @@ internal partial class Game : IGameSerialize
                         if (newRaceIndex != monster.Race.Index)
                         {
                             MsgPrint($"{monsterName} changes!");
-                            DeleteMonsterByIndex(tile.MonsterIndex, true);
+                            DeleteMonsterByIndex(tile.Monster.GetMonsterIndex(), true);
                             MonsterRace newRace = SingletonRepository.Get<MonsterRace>(newRaceIndex);
                             PlaceMonsterAux(y, x, newRace, false, false, false);
-                            monster = Monsters[tile.MonsterIndex];
+                            monster = tile.Monster;
                             monsterName = monster.Name;
                             fear = false;
                         }
@@ -8565,9 +8563,9 @@ internal partial class Game : IGameSerialize
         // Only make extra attacks if the monster is still there
         foreach (Mutation naturalAttack in NaturalAttacks)
         {
-            if (!noExtra && tile.MonsterIndex != 0)
+            if (!noExtra && tile.Monster is not null)
             {
-                PlayerNaturalAttackOnMonster(tile.MonsterIndex, naturalAttack, out fear, out noExtra);
+                PlayerNaturalAttackOnMonster(tile.Monster.GetMonsterIndex(), naturalAttack, out fear, out noExtra);
             }
         }
         if (fear && monster.IsVisible && !noExtra)
@@ -8856,10 +8854,10 @@ internal partial class Game : IGameSerialize
             }
             // If there's a monster in the way, we might hit it regardless of whether or not it
             // is our intended target
-            if (Grid[y][x].MonsterIndex != 0)
+            if (Grid[y][x].Monster is not null)
             {
                 GridTile tile = Grid[y][x];
-                Monster monster = Monsters[tile.MonsterIndex];
+                Monster monster = tile.Monster;
                 MonsterRace race = monster.Race;
                 bool visible = monster.IsVisible;
                 hitBody = true;
@@ -8894,7 +8892,7 @@ internal partial class Game : IGameSerialize
                     {
                         damage = 0;
                     }
-                    if (DamageMonster(tile.MonsterIndex, damage, out bool fear, noteDies))
+                    if (DamageMonster(tile.Monster.GetMonsterIndex(), damage, out bool fear, noteDies))
                     {
                         // The monster is dead, so don't add further statuses or messages
                     }
@@ -8930,11 +8928,11 @@ internal partial class Game : IGameSerialize
                 MsgPrint($"The {missileName} shatters!");
                 if (missile.Smash(1, y, x))
                 {
-                    if (Grid[y][x].MonsterIndex != 0 && Monsters[Grid[y][x].MonsterIndex].IsPet)
+                    if (Grid[y][x].Monster is not null && Grid[y][x].Monster.IsPet)
                     {
-                        string mName = Monsters[Grid[y][x].MonsterIndex].Name;
+                        string mName = Grid[y][x].Monster.Name;
                         MsgPrint($"{mName} gets angry!");
-                        Monsters[Grid[y][x].MonsterIndex].IsPet = false;
+                        Grid[y][x].Monster.IsPet = false;
                     }
                 }
                 return;
@@ -9551,9 +9549,9 @@ internal partial class Game : IGameSerialize
                 break;
             }
             // If there's another monster in the way and it is friendly, give up
-            if (distance != 0 && Grid[y][x].MonsterIndex > 0)
+            if (distance != 0 && Grid[y][x].Monster is not null)
             {
-                if (!Monsters[Grid[y][x].MonsterIndex].IsPet)
+                if (!Grid[y][x].Monster.IsPet)
                 {
                     break;
                 }
@@ -11415,7 +11413,7 @@ internal partial class Game : IGameSerialize
         {
             GridTile cPtr = Grid[y][x];
             string info = "l,*";
-            if (Targetable(Monsters[cPtr.MonsterIndex]))
+            if (Targetable(cPtr.Monster))
             {
                 info = $"t,{info}";
             }
@@ -11429,10 +11427,10 @@ internal partial class Game : IGameSerialize
                     }
                 case 't':
                     {
-                        if (Targetable(Monsters[cPtr.MonsterIndex]))
+                        if (Targetable(cPtr.Monster))
                         {
-                            TrackMonsterHealth(Monsters[cPtr.MonsterIndex]);
-                            TargetWho = new MonsterTarget(this, Monsters[cPtr.MonsterIndex]);
+                            TrackMonsterHealth(cPtr.Monster);
+                            TargetWho = new MonsterTarget(this, cPtr.Monster);
                             done = true;
                         }
                         break;
@@ -11631,9 +11629,9 @@ internal partial class Game : IGameSerialize
             return false;
         }
         GridTile cPtr = Grid[y][x];
-        if (cPtr.MonsterIndex != 0)
+        if (cPtr.Monster is not null)
         {
-            Monster mPtr = Monsters[cPtr.MonsterIndex];
+            Monster mPtr = cPtr.Monster;
             if (mPtr.IsVisible)
             {
                 return true;
@@ -11688,9 +11686,9 @@ internal partial class Game : IGameSerialize
                 }
                 continue;
             }
-            if (cPtr.MonsterIndex != 0)
+            if (cPtr.Monster is not null)
             {
-                Monster mPtr = Monsters[cPtr.MonsterIndex];
+                Monster mPtr = cPtr.Monster;
                 MonsterRace rPtr = mPtr.Race;
                 if (mPtr.IsVisible)
                 {
@@ -11713,7 +11711,7 @@ internal partial class Game : IGameSerialize
                         {
                             string c = mPtr.SmCloned ? " (clone)" : "";
                             string a = mPtr.IsPet ? " (allied) " : " ";
-                            outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(Monsters[cPtr.MonsterIndex])}){c}{a}[r,{info}]";
+                            outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.Monster)}){c}{a}[r,{info}]";
                             Screen.PrintLine(outVal, 0, 0);
                             ConsoleView.MoveCursorTo(y, x);
                             query = GetAndRecordKeystroke();
@@ -11856,7 +11854,7 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                if ((mode & Constants.TargetKill) != 0 && !Targetable(Monsters[cPtr.MonsterIndex]))
+                if ((mode & Constants.TargetKill) != 0 && !Targetable(cPtr.Monster))
                 {
                     continue;
                 }
@@ -13424,9 +13422,9 @@ internal partial class Game : IGameSerialize
             return;
         }
         GridTile cPtr = Grid[y][x];
-        if (cPtr.MonsterIndex != 0)
+        if (cPtr.Monster is not null)
         {
-            DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+            DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex(), true);
         }
     }
 
@@ -13619,7 +13617,7 @@ internal partial class Game : IGameSerialize
 
     public bool GridOpenNoItemOrCreature(int y, int x)
     {
-        return Grid[y][x].FeatureType.IsOpenFloor && Grid[y][x].Items.Count == 0 && Grid[y][x].MonsterIndex == 0 && !(y == MapY.IntValue && x == MapX.IntValue);
+        return Grid[y][x].FeatureType.IsOpenFloor && Grid[y][x].Items.Count == 0 && Grid[y][x].Monster is null && !(y == MapY.IntValue && x == MapX.IntValue);
     }
 
     public bool GridPassable(int y, int x)
@@ -13629,7 +13627,7 @@ internal partial class Game : IGameSerialize
 
     public bool GridPassableNoCreature(int y, int x)
     {
-        return GridPassable(y, x) && Grid[y][x].MonsterIndex == 0 && !(y == MapY.IntValue && x == MapX.IntValue);
+        return GridPassable(y, x) && Grid[y][x].Monster is null && !(y == MapY.IntValue && x == MapX.IntValue);
     }
 
     // TODO: Convert to zero based
@@ -14367,9 +14365,9 @@ internal partial class Game : IGameSerialize
                 break;
             }
         }
-        if (cPtr.MonsterIndex != 0)
+        if (cPtr.Monster is not null)
         {
-            Monster mPtr = Monsters[cPtr.MonsterIndex];
+            Monster mPtr = cPtr.Monster;
             if (mPtr.IsVisible)
             {
                 MonsterRace rPtr = mPtr.Race;
@@ -14753,7 +14751,7 @@ internal partial class Game : IGameSerialize
         {
             TrackMonsterHealth(null);
         }
-        Grid[y][x].MonsterIndex = 0;
+        Grid[y][x].Monster = null;
         mPtr.Items.Clear();
         Monsters[i] = new Monster(this);
         MCnt--;
@@ -15200,13 +15198,13 @@ internal partial class Game : IGameSerialize
             }
         }
         GridTile cPtr = Grid[y][x];
-        cPtr.MonsterIndex = MPop();
-        _hackMIdxIi = cPtr.MonsterIndex;
-        if (cPtr.MonsterIndex == 0)
+        _hackMIdxIi = MPop(); 
+        cPtr.Monster = Monsters[_hackMIdxIi];
+        if (cPtr.Monster is null)
         {
             return false;
         }
-        Monster mPtr = Monsters[cPtr.MonsterIndex];
+        Monster mPtr = cPtr.Monster;
         mPtr.Race = rPtr;
         mPtr.MapY = y;
         mPtr.MapX = x;
@@ -15246,7 +15244,7 @@ internal partial class Game : IGameSerialize
         }
         
         mPtr.SkipFirstTurn = newlySpawnedSkipFirstTurn;
-        UpdateMonsterVisibility(Monsters[cPtr.MonsterIndex], true);
+        UpdateMonsterVisibility(cPtr.Monster, true);
         rPtr.CurNum++;
         if (rPtr.Multiply)
         {
@@ -15330,13 +15328,14 @@ internal partial class Game : IGameSerialize
             return;
         }
         GridTile cPtr = Grid[y][x];
-        cPtr.MonsterIndex = MPop();
-        if (cPtr.MonsterIndex == 0)
+        int monsterIndex = MPop();
+        cPtr.Monster = Monsters[monsterIndex];
+        if (cPtr.Monster is null)
         {
             MsgPrint($"You lose sight of {monster.Name}.");
             return;
         }
-        Monsters[cPtr.MonsterIndex] = monster;
+        Monsters[monsterIndex] = monster;
         monster.MapY = y;
         monster.MapX = x;
         MonsterRace rPtr = monster.Race;
@@ -15601,7 +15600,7 @@ internal partial class Game : IGameSerialize
                 continue;
             }
             rPtr.CurNum--;
-            Grid[mPtr.MapY][mPtr.MapX].MonsterIndex = 0;
+            Grid[mPtr.MapY][mPtr.MapX].Monster = null;
             Monsters[i] = new Monster(this);
         }
         MonsterMax = 1;
@@ -15621,7 +15620,7 @@ internal partial class Game : IGameSerialize
         int y = mPtr.MapY;
         int x = mPtr.MapX;
         GridTile cPtr = Grid[y][x];
-        cPtr.MonsterIndex = i2;
+        cPtr.Monster = Monsters[i2];
         Monster mPtr2 = Monsters[i2];
         mPtr2.Items.AddRange(mPtr.Items);
         if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
@@ -15774,7 +15773,7 @@ internal partial class Game : IGameSerialize
     /// Returns a random number with a flat distribution around center and within width of it
     /// </summary>
     /// <param name="centre"> The central value </param>
-    /// <param name="width"> The maximum distance (inclusive) from the centre </param>
+    /// <param name="width"> The maximum distance (inclusive) from the center </param>
     /// <returns> A random number </returns>
     public int RandomSpread(int centre, int width)
     {
