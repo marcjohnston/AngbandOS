@@ -14495,7 +14495,7 @@ internal partial class Game : IGameSerialize
         return true;
     }
 
-    public void AllocMonster(int dis, bool slp)
+    public void AllocMonster(int distance, bool spawnAsleep)
     {
         int y = 0;
         int x = 0;
@@ -14508,7 +14508,7 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            if (Distance(y, x, MapY.IntValue, MapX.IntValue) > dis)
+            if (Distance(y, x, MapY.IntValue, MapX.IntValue) > distance)
             {
                 break;
             }
@@ -14534,7 +14534,7 @@ internal partial class Game : IGameSerialize
             }
             else
             {
-                if (PlaceLevelMonster(y, x, slp))
+                if (PlaceLevelMonster(y, x, spawnAsleep))
                 {
                 }
             }
