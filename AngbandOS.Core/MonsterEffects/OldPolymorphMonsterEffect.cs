@@ -53,7 +53,7 @@ internal class OldPolymorphMonsterEffect : MonsterEffect
                 dam = 0;
                 Game.DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex(), true);
                 MonsterRace race = Game.SingletonRepository.Get<MonsterRace>(tmp);
-                Game.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm, false);
+                Game.PlaceMonsterByRace(mPtr.MapY, mPtr.MapX, race, false, false, charm, false);
                 mPtr = cPtr.Monster;
             }
         }

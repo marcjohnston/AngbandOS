@@ -133,21 +133,21 @@ internal abstract class RoomLayout : IGetKey, IGameSerialize
                     case '&':
                         {
                             Game.MonsterLevel = Game.Difficulty + 5;
-                            Game.PlaceMonster(y, x, true, true);
+                            Game.PlaceLevelMonster(y, x, true, true);
                             Game.MonsterLevel = Game.Difficulty;
                             break;
                         }
                     case '@':
                         {
                             Game.MonsterLevel = Game.Difficulty + 11;
-                            Game.PlaceMonster(y, x, true, true);
+                            Game.PlaceLevelMonster(y, x, true, true);
                             Game.MonsterLevel = Game.Difficulty;
                             break;
                         }
                     case '9':
                         {
                             Game.MonsterLevel = Game.Difficulty + 9;
-                            Game.PlaceMonster(y, x, true, true);
+                            Game.PlaceLevelMonster(y, x, true, true);
                             Game.MonsterLevel = Game.Difficulty;
                             Game.PlaceObject(Game.Difficulty + 7, y, x, true, false);
                             break;
@@ -155,7 +155,7 @@ internal abstract class RoomLayout : IGetKey, IGameSerialize
                     case '8':
                         {
                             Game.MonsterLevel = Game.Difficulty + 40;
-                            Game.PlaceMonster(y, x, true, true);
+                            Game.PlaceLevelMonster(y, x, true, true);
                             Game.MonsterLevel = Game.Difficulty;
                             Game.PlaceObject(Game.Difficulty + 20, y, x, true, true);
                             break;
@@ -165,7 +165,7 @@ internal abstract class RoomLayout : IGetKey, IGameSerialize
                             if (Game.RandomLessThan(100) < 50)
                             {
                                 Game.MonsterLevel = Game.Difficulty + 3;
-                                Game.PlaceMonster(y, x, true, true);
+                                Game.PlaceLevelMonster(y, x, true, true);
                                 Game.MonsterLevel = Game.Difficulty;
                             }
                             if (Game.RandomLessThan(100) < 50)
@@ -231,7 +231,7 @@ internal abstract class RoomLayout : IGetKey, IGameSerialize
                     continue;
                 }
                 Game.MonsterLevel = Game.Difficulty + 2;
-                Game.PlaceMonster(y, x, true, true);
+                Game.PlaceLevelMonster(y, x, true, true);
                 Game.MonsterLevel = Game.Difficulty;
             }
         }

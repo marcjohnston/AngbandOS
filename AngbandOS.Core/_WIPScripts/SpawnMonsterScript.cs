@@ -39,7 +39,7 @@ internal class SpawnMonsterScript : Script, IScript, ICastSpellScript
         if (selectedMonsterRace is not null)
         {
             (int y, int x) = Game.Scatter(Game.MapY.IntValue, Game.MapX.IntValue, 1);
-            bool placed = Game.PlaceMonsterAux(y, x, selectedMonsterRace, false, false, false, false);
+            bool placed = Game.PlaceMonsterByRace(y, x, selectedMonsterRace, false, false, false, false);
             if (!placed)
             {
                 Game.MsgPrint("Failed to place monster.");
