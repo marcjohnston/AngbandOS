@@ -14534,7 +14534,7 @@ internal partial class Game : IGameSerialize
             }
             else
             {
-                if (PlaceLevelMonster(y, x, slp, true))
+                if (PlaceLevelMonster(y, x, slp))
                 {
                 }
             }
@@ -15044,14 +15044,14 @@ internal partial class Game : IGameSerialize
         return result;
     }
 
-    public bool PlaceLevelMonster(int y, int x, bool spawnAsleep, bool grp)
+    public bool PlaceLevelMonster(int y, int x, bool spawnAsleep)
     {
         MonsterRace? rPtr = GetMonsterRace(MonsterLevel, null);
         if (rPtr is null)
         {
             return false;
         }
-        if (PlaceMonsterByRace(y, x, rPtr, spawnAsleep, grp, false, false))
+        if (PlaceMonsterByRace(y, x, rPtr, spawnAsleep, true, false, false))
         {
             return true;
         }
