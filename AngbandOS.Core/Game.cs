@@ -998,7 +998,7 @@ internal partial class Game : IGameSerialize
             UpdateStuff();
             RedrawStuff();
             TargetWho = null;
-            HealthTrack(null);
+            TrackMonsterHealth(null);
             SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Check(true);
             SingletonRepository.Get<FlaggedAction>(nameof(RemoveViewFlaggedAction)).Check(true);
             if (Shutdown && !IsDead)
@@ -4312,9 +4312,9 @@ internal partial class Game : IGameSerialize
         RedrawStuff();
     }
 
-    public void HealthTrack(int? mIdx)
+    public void TrackMonsterHealth(Monster? mPtr)
     {
-        TrackedMonster.Value = mIdx == null ? null : Monsters[mIdx.Value];
+        TrackedMonster.Value = mPtr;
     }
 
     public void MonsterDeath(Monster mPtr)
@@ -4810,7 +4810,7 @@ internal partial class Game : IGameSerialize
         CommandArgument = 0;
         CommandDirection = 0;
         TargetWho = null;
-        HealthTrack(null);
+        TrackMonsterHealth(null);
         ShimmerMonsters = true;
         RepairMonsters = true;
         Disturb(true);
@@ -7844,7 +7844,7 @@ internal partial class Game : IGameSerialize
                 // If we can see it, no need to mention it
                 if (monster.IsVisible)
                 {
-                    HealthTrack(tile.MonsterIndex);
+                    TrackMonsterHealth(monster);
                 }
                 // If we can't see it then let us push past it and tell us what happened
                 else if (GridPassable(MapY.IntValue, MapX.IntValue) || monster.Race.PassWall)
@@ -8283,7 +8283,7 @@ internal partial class Game : IGameSerialize
         // If we can see the monster, track its health
         if (monster.IsVisible)
         {
-            HealthTrack(tile.MonsterIndex);
+            TrackMonsterHealth(monster);
         }
         // if the monster is our friend and we're not confused, we can avoid hitting it
         if (monster.IsPet && !(StunTimer.Value != 0 || ConfusionTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible))
@@ -8887,7 +8887,7 @@ internal partial class Game : IGameSerialize
                         MsgPrint($"The {missileName} hits {mName}.");
                         if (monster.IsVisible)
                         {
-                            HealthTrack(tile.MonsterIndex);
+                            TrackMonsterHealth(monster);
                         }
                     }
                     // Adjust the damage for the particular monster type
@@ -11436,7 +11436,7 @@ internal partial class Game : IGameSerialize
                     {
                         if (Targetable(Monsters[cPtr.MonsterIndex]))
                         {
-                            HealthTrack(cPtr.MonsterIndex);
+                            TrackMonsterHealth(Monsters[cPtr.MonsterIndex]);
                             TargetWho = new MonsterTarget(this, Monsters[cPtr.MonsterIndex]);
                             done = true;
                         }
@@ -11703,7 +11703,7 @@ internal partial class Game : IGameSerialize
                     bool recall = false;
                     boring = false;
                     string mName = mPtr.IndefiniteNameWhenVisible;
-                    HealthTrack(cPtr.MonsterIndex);
+                    TrackMonsterHealth(mPtr);
                     HandleStuff();
                     while (!Shutdown)
                     {
@@ -14756,7 +14756,7 @@ internal partial class Game : IGameSerialize
         }
         if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
         {
-            HealthTrack(null);
+            TrackMonsterHealth(null);
         }
         Grid[y][x].MonsterIndex = 0;
         mPtr.Items.Clear();
@@ -15615,7 +15615,7 @@ internal partial class Game : IGameSerialize
         MCnt = 0;
         NumRepro = 0;
         TargetWho = null;
-        HealthTrack(null);
+        TrackMonsterHealth(null);
     }
 
     private void CompactMonstersAux(int i1, int i2)
@@ -15637,7 +15637,7 @@ internal partial class Game : IGameSerialize
         }
         if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
         {
-            HealthTrack(i2);
+            TrackMonsterHealth(mPtr2);
         }
         Monsters[i2] = Monsters[i1];
         Monsters[i1] = new Monster(this);

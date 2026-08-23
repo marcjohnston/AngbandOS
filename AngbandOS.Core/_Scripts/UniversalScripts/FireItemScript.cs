@@ -157,7 +157,7 @@ internal class FireItemScript : UniversalScript, IGetKey
                         Game.MsgPrint($"The {missileName} hits {monsterName}.");
                         if (monster.IsVisible)
                         {
-                            Game.HealthTrack(tile.MonsterIndex);
+                            Game.TrackMonsterHealth(monster);
                         }
                         // Note that pets only get angry if they see us and we see them
                         if (monster.IsPet)

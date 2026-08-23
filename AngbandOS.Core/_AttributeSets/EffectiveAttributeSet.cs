@@ -48,15 +48,23 @@ internal class EffectiveAttributeSet : IGameSerialize
             (RestoreGameState restoreGameState) => new ArtifactBiasEffectiveAttributeValue(Game, restoreGameState),
             (RestoreGameState restoreGameState) => new FriendlyNameEffectiveAttributeValue(Game, restoreGameState),
             (RestoreGameState restoreGameState) => new BitwiseOrEffectiveAttributeValue(Game, restoreGameState),
-            (RestoreGameState restoreGameState) => new SummationEffectiveAttributeValue(Game, restoreGameState));
+            (RestoreGameState restoreGameState) => new SummationEffectiveAttributeValue(Game, restoreGameState),
+            (RestoreGameState restoreGameState) => new ScriptsListEffectiveAttributeValue(Game, restoreGameState)
+        );
     }
     #endregion
 
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(_effectiveAttributeValues), saveGameState.CreateDerivedGameStateBag(_effectiveAttributeValues, typeof(ActivationEffectiveAttributeValue), typeof(ArtifactBiasEffectiveAttributeValue), typeof(FriendlyNameEffectiveAttributeValue), typeof(BitwiseOrEffectiveAttributeValue), typeof(SummationEffectiveAttributeValue)))
-        );
+            (nameof(_effectiveAttributeValues), saveGameState.CreateDerivedGameStateBag(_effectiveAttributeValues, 
+            typeof(ActivationEffectiveAttributeValue), 
+            typeof(ArtifactBiasEffectiveAttributeValue),
+            typeof(FriendlyNameEffectiveAttributeValue), 
+            typeof(BitwiseOrEffectiveAttributeValue), 
+            typeof(SummationEffectiveAttributeValue),
+            typeof(ScriptsListEffectiveAttributeValue)
+        )));
     }
 
     /// <summary>

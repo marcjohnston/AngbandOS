@@ -25,15 +25,22 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
             (RestoreGameState restoreGameState) => new ArtifactBiasReadOnlyAttributeValue(game, restoreGameState),
             (RestoreGameState restoreGameState) => new BoolReadOnlyAttributeValue(game, restoreGameState),
             (RestoreGameState restoreGameState) => new IntReadOnlyAttributeValue(game, restoreGameState),
-            (RestoreGameState restoreGameState) => new NullableStringReadOnlyAttributeValue(game, restoreGameState)
+            (RestoreGameState restoreGameState) => new NullableStringReadOnlyAttributeValue(game, restoreGameState),
+            (RestoreGameState restoreGameState) => new ScriptsListReadOnlyAttributeValue(game, restoreGameState)
         );
     }
 
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Value), saveGameState.CreateDerivedGameStateBag(Value, typeof(ActivationReadOnlyAttributeValue), typeof(ArtifactBiasReadOnlyAttributeValue), typeof(BoolReadOnlyAttributeValue), typeof(IntReadOnlyAttributeValue), typeof(NullableStringReadOnlyAttributeValue)))
-        );
+            (nameof(Value), saveGameState.CreateDerivedGameStateBag(Value, 
+            typeof(ActivationReadOnlyAttributeValue), 
+            typeof(ArtifactBiasReadOnlyAttributeValue), 
+            typeof(BoolReadOnlyAttributeValue), 
+            typeof(IntReadOnlyAttributeValue), 
+            typeof(NullableStringReadOnlyAttributeValue),
+            typeof(ScriptsListReadOnlyAttributeValue)
+        )));
     }
 
     public AttributeValue this[int index] => Value[(int)index];

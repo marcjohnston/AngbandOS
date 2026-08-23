@@ -510,7 +510,7 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                     Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
                     if (mPtr.IsVisible)
                     {
-                        Game.HealthTrack(cPtr.MonsterIndex);
+                        Game.TrackMonsterHealth(mPtr);
                     }
                 }
             }
