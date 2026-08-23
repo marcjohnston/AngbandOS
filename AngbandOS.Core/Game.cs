@@ -15104,7 +15104,8 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                if (PlaceMonsterOne(my, mx, rPtr, slp, charm, false))
+                Monster? monsterPlaced = PlaceMonsterOne(my, mx, rPtr, slp, charm, false);
+                if (monsterPlaced is not null)
                 {
                     hackY[hackN] = my;
                     hackX[hackN] = mx;
@@ -15124,49 +15125,49 @@ internal partial class Game : IGameSerialize
     /// <param name="slp"></param>
     /// <param name="pet"></param>
     /// <returns></returns>
-    private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool pet, bool newlySpawnedSkipFirstTurn)
+    private Monster? PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool pet, bool newlySpawnedSkipFirstTurn)
     {
         // Monster must be provided.
         if (rPtr == null)
         {
-            return false;
+            return null;
         }
 
         // Monster cannot be the player.
         if (rPtr.FriendlyName.StartsWith("Player"))
         {
-            return false;
+            return null;
         }
 
         // Ensure the placement is within the bounds of the level.
         if (!InBounds(y, x))
         {
-            return false;
+            return null;
         }
 
         // Ensure the grid level is open.
         if (!GridPassableNoCreature(y, x))
         {
-            return false;
+            return null;
         }
 
         // Do not place monster on a sigil.
         if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
         {
-            return false;
+            return null;
         }
 
         // Ensure the monster name is not empty or null.
         string name = rPtr.FriendlyName;
         if (string.IsNullOrEmpty(rPtr.FriendlyName))
         {
-            return false;
+            return null;
         }
 
         // Do not place more than one if the monster is unique and already allocated.
         if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
         {
-            return false;
+            return null;
         }
 
         // Check to see if this is a quest guardian.
@@ -15175,15 +15176,15 @@ internal partial class Game : IGameSerialize
             int qIdx = GetQuestNumber();
             if (qIdx < 0)
             {
-                return false;
+                return null;
             }
             if (rPtr.Index != Quests[qIdx].RIdx)
             {
-                return false;
+                return null;
             }
             if (rPtr.CurNum >= Quests[qIdx].ToKill - Quests[qIdx].Killed)
             {
-                return false;
+                return null;
             }
         }
         if (rPtr.Level > Difficulty)
@@ -15202,7 +15203,7 @@ internal partial class Game : IGameSerialize
         cPtr.Monster = Monsters[_hackMIdxIi];
         if (cPtr.Monster is null)
         {
-            return false;
+            return null;
         }
         Monster mPtr = cPtr.Monster;
         mPtr.Race = rPtr;
@@ -15254,12 +15255,13 @@ internal partial class Game : IGameSerialize
         {
             ShimmerMonsters = true;
         }
-        return true;
+        return mPtr;
     }
 
     public bool PlaceMonsterAux(int y, int x, MonsterRace rPtr, bool slp, bool grp, bool pet, bool newlySpawnedSkipFirstTurn = false)
     {
-        if (!PlaceMonsterOne(y, x, rPtr, slp, pet, newlySpawnedSkipFirstTurn))
+        Monster? monsterPlaced = PlaceMonsterOne(y, x, rPtr, slp, pet, newlySpawnedSkipFirstTurn);
+        if (monsterPlaced is null)
         {
             return false;
         }
