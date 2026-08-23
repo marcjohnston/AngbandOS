@@ -214,7 +214,7 @@ internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
         Game.Grid[oy][ox].MonsterIndex = 0;
         mPtr.MapY = ny;
         mPtr.MapX = nx;
-        Game.UpdateMonsterVisibility(mIdx, true);
+        Game.UpdateMonsterVisibility(mPtr, true);
         Game.ConsoleView.RefreshMapLocation(oy, ox);
         Game.ConsoleView.RefreshMapLocation(ny, nx);
     }

@@ -18,7 +18,7 @@ internal class UpdateMonstersFlaggedAction : FlaggedAction
             {
                 continue;
             }
-            Game.UpdateMonsterVisibility(i, false);
+            Game.UpdateMonsterVisibility(mPtr, false);
         }
     }
 }

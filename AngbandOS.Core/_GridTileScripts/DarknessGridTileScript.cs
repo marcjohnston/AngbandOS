@@ -22,7 +22,7 @@ internal class DarknessGridTileScript : GridTileScript
         Game.ConsoleView.RefreshMapLocation(y, x);
         if (cPtr.MonsterIndex != 0)
         {
-            Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+            Game.UpdateMonsterVisibility(Game.Monsters[cPtr.MonsterIndex], false);
         }
         return (isNoticed, DestroysContentsEnum.False);
     }

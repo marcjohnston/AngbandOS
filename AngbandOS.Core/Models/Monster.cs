@@ -1233,7 +1233,7 @@ internal class Monster : IItemContainer, IGameSerialize
                 {
                     monsterInTargetTile.MapY = oldY;
                     monsterInTargetTile.MapX = oldX;
-                    Game.UpdateMonsterVisibility(tile.MonsterIndex, true);
+                    Game.UpdateMonsterVisibility(Game.Monsters[tile.MonsterIndex], true);
                     // Pushing past something wakes it up
                     Game.Monsters[tile.MonsterIndex].SleepLevel = 0;
                 }
@@ -1241,7 +1241,7 @@ internal class Monster : IItemContainer, IGameSerialize
                 tile.MonsterIndex = GetMonsterIndex();
                 MapY = newY;
                 MapX = newX;
-                Game.UpdateMonsterVisibility(GetMonsterIndex(), true);
+                Game.UpdateMonsterVisibility(this, true);
                 Game.ConsoleView.RefreshMapLocation(oldY, oldX);
                 Game.ConsoleView.RefreshMapLocation(newY, newX);
                 // If we are hostile and the player saw us move, then game.Disturb them
@@ -3153,7 +3153,7 @@ internal class Monster : IItemContainer, IGameSerialize
         Game.Grid[oy][ox].MonsterIndex = 0;
         MapY = ny;
         MapX = nx;
-        Game.UpdateMonsterVisibility(GetMonsterIndex(), true);
+        Game.UpdateMonsterVisibility(this, true);
         Game.ConsoleView.RefreshMapLocation(oy, ox);
         Game.ConsoleView.RefreshMapLocation(ny, nx);
     }

@@ -5235,7 +5235,7 @@ internal partial class Game : IGameSerialize
                             {
                                 mPtr.IndividualMonsterFlags &= ~Constants.MflagMark;
                                 mPtr.IsVisible = false;
-                                UpdateMonsterVisibility(i, false);
+                                UpdateMonsterVisibility(mPtr, false);
                                 ConsoleView.RefreshMapLocation(mPtr.MapY, mPtr.MapX);
                             }
                         }
@@ -6375,7 +6375,7 @@ internal partial class Game : IGameSerialize
                             Grid[yy][xx].MonsterIndex = 0;
                             mPtr.MapY = sy;
                             mPtr.MapX = sx;
-                            UpdateMonsterVisibility(mIdx, true);
+                            UpdateMonsterVisibility(mPtr, true);
                             ConsoleView.RefreshMapLocation(yy, xx);
                             ConsoleView.RefreshMapLocation(sy, sx);
                         }
@@ -6935,7 +6935,7 @@ internal partial class Game : IGameSerialize
                 MapY.IntValue = ty;
                 tx = mPtr.MapX;
                 ty = mPtr.MapY;
-                UpdateMonsterVisibility(Grid[ty][tx].MonsterIndex, true);
+                UpdateMonsterVisibility(Monsters[Grid[ty][tx].MonsterIndex], true);
                 ConsoleView.RefreshMapLocation(ty, tx);
                 ConsoleView.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
                 RecenterScreenAroundPlayer();
@@ -7045,7 +7045,7 @@ internal partial class Game : IGameSerialize
                 int chance = 25;
                 Monster mPtr = Monsters[cPtr.MonsterIndex];
                 MonsterRace rPtr = mPtr.Race;
-                UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+                UpdateMonsterVisibility(mPtr, false);
                 if (rPtr.Stupid)
                 {
                     chance = 10;
@@ -7086,7 +7086,7 @@ internal partial class Game : IGameSerialize
             }
             if (cPtr.MonsterIndex != 0)
             {
-                UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+                UpdateMonsterVisibility(Monsters[cPtr.MonsterIndex], false);
             }
             ConsoleView.RefreshMapLocation(y, x);
         }
@@ -7854,7 +7854,7 @@ internal partial class Game : IGameSerialize
                     monster.MapX = MapX.IntValue;
                     Grid[MapY.IntValue][MapX.IntValue].MonsterIndex = tile.MonsterIndex;
                     tile.MonsterIndex = 0;
-                    UpdateMonsterVisibility(Grid[MapY.IntValue][MapX.IntValue].MonsterIndex, true);
+                    UpdateMonsterVisibility(Monsters[Grid[MapY.IntValue][MapX.IntValue].MonsterIndex], true);
                 }
                 // If we couldn't push past it, tell us it was in the way
                 else
@@ -15261,7 +15261,7 @@ internal partial class Game : IGameSerialize
             {
                 mPtr.IndividualMonsterFlags |= Constants.MflagBorn;
             }
-            UpdateMonsterVisibility(cPtr.MonsterIndex, true);
+            UpdateMonsterVisibility(Monsters[cPtr.MonsterIndex], true);
             rPtr.CurNum++;
             if (rPtr.Multiply)
             {
@@ -15409,9 +15409,8 @@ internal partial class Game : IGameSerialize
         return true;
     }
 
-    public void UpdateMonsterVisibility(int mIdx, bool full)
+    public void UpdateMonsterVisibility(Monster mPtr, bool full)
     {
-        Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         if (rPtr == null)
         {

@@ -18,7 +18,7 @@ internal class UpdateDistancesFlaggedAction : FlaggedAction
             {
                 continue;
             }
-            Game.UpdateMonsterVisibility(i, true);
+            Game.UpdateMonsterVisibility(mPtr, true);
         }
     }
 }
