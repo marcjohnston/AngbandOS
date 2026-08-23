@@ -15062,210 +15062,209 @@ internal partial class Game : IGameSerialize
         return false;
     }
 
+    private void PlaceMonsterGroup(int y, int x, int rIdx, bool slp, bool charm)
+    {
+        MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
+        int extra = 0;
+        int[] hackY = new int[Constants.GroupMax];
+        int[] hackX = new int[Constants.GroupMax];
+        int total = DieRoll(13);
+        if (rPtr.Level > Difficulty)
+        {
+            extra = rPtr.Level - Difficulty;
+            extra = 0 - DieRoll(extra);
+        }
+        else if (rPtr.Level < Difficulty)
+        {
+            extra = Difficulty - rPtr.Level;
+            extra = DieRoll(extra);
+        }
+        if (extra > 12)
+        {
+            extra = 12;
+        }
+        total += extra;
+        if (total < 1)
+        {
+            total = 1;
+        }
+        if (total > Constants.GroupMax)
+        {
+            total = Constants.GroupMax;
+        }
+        int old = DangerRating;
+        int hackN = 1;
+        hackX[0] = x;
+        hackY[0] = y;
+        for (int n = 0; n < hackN && hackN < total; n++)
+        {
+            int hx = hackX[n];
+            int hy = hackY[n];
+            for (int i = 0; i < 8 && hackN < total; i++)
+            {
+                int mx = hx + OrderedDirectionXOffset[i];
+                int my = hy + OrderedDirectionYOffset[i];
+                if (!GridPassableNoCreature(my, mx))
+                {
+                    continue;
+                }
+                if (PlaceMonsterOne(my, mx, rPtr, slp, charm))
+                {
+                    hackY[hackN] = my;
+                    hackX[hackN] = mx;
+                    hackN++;
+                }
+            }
+        }
+        DangerRating = old;
+    }
+
+    /// <summary>
+    /// Places a monster and all kinds of validation and checks are done.
+    /// </summary>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    /// <param name="rPtr"></param>
+    /// <param name="slp"></param>
+    /// <param name="pet"></param>
+    /// <returns></returns>
+    private bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool pet)
+    {
+        // Monster must be provided.
+        if (rPtr == null)
+        {
+            return false;
+        }
+
+        // Monster cannot be the player.
+        if (rPtr.FriendlyName.StartsWith("Player"))
+        {
+            return false;
+        }
+
+        // Ensure the placement is within the bounds of the level.
+        if (!InBounds(y, x))
+        {
+            return false;
+        }
+
+        // Ensure the grid level is open.
+        if (!GridPassableNoCreature(y, x))
+        {
+            return false;
+        }
+
+        // Do not place monster on a sigil.
+        if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
+        {
+            return false;
+        }
+
+        // Ensure the monster name is not empty or null.
+        string name = rPtr.FriendlyName;
+        if (string.IsNullOrEmpty(rPtr.FriendlyName))
+        {
+            return false;
+        }
+
+        // Do not place more than one if the monster is unique and already allocated.
+        if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
+        {
+            return false;
+        }
+
+        // Check to see if this is a quest guardian.
+        if (rPtr.OnlyGuardian || rPtr.Guardian)
+        {
+            int qIdx = GetQuestNumber();
+            if (qIdx < 0)
+            {
+                return false;
+            }
+            if (rPtr.Index != Quests[qIdx].RIdx)
+            {
+                return false;
+            }
+            if (rPtr.CurNum >= Quests[qIdx].ToKill - Quests[qIdx].Killed)
+            {
+                return false;
+            }
+        }
+        if (rPtr.Level > Difficulty)
+        {
+            if (rPtr.Unique)
+            {
+                DangerRating += (rPtr.Level - Difficulty) * 2;
+            }
+            else
+            {
+                DangerRating += rPtr.Level - Difficulty;
+            }
+        }
+        GridTile cPtr = Grid[y][x];
+        cPtr.MonsterIndex = MPop();
+        _hackMIdxIi = cPtr.MonsterIndex;
+        if (cPtr.MonsterIndex == 0)
+        {
+            return false;
+        }
+        Monster mPtr = Monsters[cPtr.MonsterIndex];
+        mPtr.Race = rPtr;
+        mPtr.MapY = y;
+        mPtr.MapX = x;
+        mPtr.Generation = 1;
+        mPtr.StunLevel = 0;
+        mPtr.ConfusionLevel = 0;
+        mPtr.FearLevel = 0;
+        if (pet)
+        {
+            mPtr.IsPet = true;
+        }
+        mPtr.SleepLevel = 0;
+        if (slp && rPtr.Sleep != 0)
+        {
+            int val = rPtr.Sleep;
+            mPtr.SleepLevel = (val * 2) + DieRoll(val * 10);
+        }
+        mPtr.DistanceFromPlayer = 0;
+        mPtr.IndividualMonsterFlags = 0;
+        mPtr.IsVisible = false;
+        mPtr.MaxHealth = rPtr.ForceMaxHp ? rPtr.Hdice * rPtr.Hside : DiceRoll(rPtr.Hdice, rPtr.Hside);
+        mPtr.Health = mPtr.MaxHealth;
+        mPtr.Speed = rPtr.Speed;
+        if (!rPtr.Unique)
+        {
+            int i = ExtractEnergy[rPtr.Speed] / 10;
+            if (i != 0)
+            {
+                mPtr.Speed += RandomSpread(0, i);
+            }
+        }
+        mPtr.Energy = RandomLessThan(100);
+        if (rPtr.ForceSleep)
+        {
+            mPtr.IndividualMonsterFlags |= Constants.MflagNice;
+            RepairMonsters = true;
+        }
+        if (cPtr.MonsterIndex < CurrentlyActingMonster)
+        {
+            mPtr.IndividualMonsterFlags |= Constants.MflagBorn;
+        }
+        UpdateMonsterVisibility(Monsters[cPtr.MonsterIndex], true);
+        rPtr.CurNum++;
+        if (rPtr.Multiply)
+        {
+            NumRepro++;
+        }
+        if (rPtr.AttrMulti)
+        {
+            ShimmerMonsters = true;
+        }
+        return true;
+    }
 
     public bool PlaceMonsterAux(int y, int x, MonsterRace rPtr, bool slp, bool grp, bool pet)
     {
-        void PlaceMonsterGroup(int y, int x, int rIdx, bool slp, bool charm)
-        {
-            MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
-            int extra = 0;
-            int[] hackY = new int[Constants.GroupMax];
-            int[] hackX = new int[Constants.GroupMax];
-            int total = DieRoll(13);
-            if (rPtr.Level > Difficulty)
-            {
-                extra = rPtr.Level - Difficulty;
-                extra = 0 - DieRoll(extra);
-            }
-            else if (rPtr.Level < Difficulty)
-            {
-                extra = Difficulty - rPtr.Level;
-                extra = DieRoll(extra);
-            }
-            if (extra > 12)
-            {
-                extra = 12;
-            }
-            total += extra;
-            if (total < 1)
-            {
-                total = 1;
-            }
-            if (total > Constants.GroupMax)
-            {
-                total = Constants.GroupMax;
-            }
-            int old = DangerRating;
-            int hackN = 1;
-            hackX[0] = x;
-            hackY[0] = y;
-            for (int n = 0; n < hackN && hackN < total; n++)
-            {
-                int hx = hackX[n];
-                int hy = hackY[n];
-                for (int i = 0; i < 8 && hackN < total; i++)
-                {
-                    int mx = hx + OrderedDirectionXOffset[i];
-                    int my = hy + OrderedDirectionYOffset[i];
-                    if (!GridPassableNoCreature(my, mx))
-                    {
-                        continue;
-                    }
-                    if (PlaceMonsterOne(my, mx, rPtr, slp, charm))
-                    {
-                        hackY[hackN] = my;
-                        hackX[hackN] = mx;
-                        hackN++;
-                    }
-                }
-            }
-            DangerRating = old;
-        }
-
-        /// <summary>
-        /// Places a monster and all kinds of validation and checks are done.
-        /// </summary>
-        /// <param name="y"></param>
-        /// <param name="x"></param>
-        /// <param name="rPtr"></param>
-        /// <param name="slp"></param>
-        /// <param name="pet"></param>
-        /// <returns></returns>
-        bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool pet)
-        {
-            // Monster must be provided.
-            if (rPtr == null)
-            {
-                return false;
-            }
-
-            // Monster cannot be the player.
-            if (rPtr.FriendlyName.StartsWith("Player"))
-            {
-                return false;
-            }
-
-            // Ensure the placement is within the bounds of the level.
-            if (!InBounds(y, x))
-            {
-                return false;
-            }
-
-            // Ensure the grid level is open.
-            if (!GridPassableNoCreature(y, x))
-            {
-                return false;
-            }
-
-            // Do not place monster on a sigil.
-            if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
-            {
-                return false;
-            }
-
-            // Ensure the monster name is not empty or null.
-            string name = rPtr.FriendlyName;
-            if (string.IsNullOrEmpty(rPtr.FriendlyName))
-            {
-                return false;
-            }
-
-            // Do not place more than one if the monster is unique and already allocated.
-            if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
-            {
-                return false;
-            }
-
-            // Check to see if this is a quest guardian.
-            if (rPtr.OnlyGuardian || rPtr.Guardian)
-            {
-                int qIdx = GetQuestNumber();
-                if (qIdx < 0)
-                {
-                    return false;
-                }
-                if (rPtr.Index != Quests[qIdx].RIdx)
-                {
-                    return false;
-                }
-                if (rPtr.CurNum >= Quests[qIdx].ToKill - Quests[qIdx].Killed)
-                {
-                    return false;
-                }
-            }
-            if (rPtr.Level > Difficulty)
-            {
-                if (rPtr.Unique)
-                {
-                    DangerRating += (rPtr.Level - Difficulty) * 2;
-                }
-                else
-                {
-                    DangerRating += rPtr.Level - Difficulty;
-                }
-            }
-            GridTile cPtr = Grid[y][x];
-            cPtr.MonsterIndex = MPop();
-            _hackMIdxIi = cPtr.MonsterIndex;
-            if (cPtr.MonsterIndex == 0)
-            {
-                return false;
-            }
-            Monster mPtr = Monsters[cPtr.MonsterIndex];
-            mPtr.Race = rPtr;
-            mPtr.MapY = y;
-            mPtr.MapX = x;
-            mPtr.Generation = 1;
-            mPtr.StunLevel = 0;
-            mPtr.ConfusionLevel = 0;
-            mPtr.FearLevel = 0;
-            if (pet)
-            {
-                mPtr.IsPet = true;
-            }
-            mPtr.SleepLevel = 0;
-            if (slp && rPtr.Sleep != 0)
-            {
-                int val = rPtr.Sleep;
-                mPtr.SleepLevel = (val * 2) + DieRoll(val * 10);
-            }
-            mPtr.DistanceFromPlayer = 0;
-            mPtr.IndividualMonsterFlags = 0;
-            mPtr.IsVisible = false;
-            mPtr.MaxHealth = rPtr.ForceMaxHp ? rPtr.Hdice * rPtr.Hside : DiceRoll(rPtr.Hdice, rPtr.Hside);
-            mPtr.Health = mPtr.MaxHealth;
-            mPtr.Speed = rPtr.Speed;
-            if (!rPtr.Unique)
-            {
-                int i = ExtractEnergy[rPtr.Speed] / 10;
-                if (i != 0)
-                {
-                    mPtr.Speed += RandomSpread(0, i);
-                }
-            }
-            mPtr.Energy = RandomLessThan(100);
-            if (rPtr.ForceSleep)
-            {
-                mPtr.IndividualMonsterFlags |= Constants.MflagNice;
-                RepairMonsters = true;
-            }
-            if (cPtr.MonsterIndex < CurrentlyActingMonster)
-            {
-                mPtr.IndividualMonsterFlags |= Constants.MflagBorn;
-            }
-            UpdateMonsterVisibility(Monsters[cPtr.MonsterIndex], true);
-            rPtr.CurNum++;
-            if (rPtr.Multiply)
-            {
-                NumRepro++;
-            }
-            if (rPtr.AttrMulti)
-            {
-                ShimmerMonsters = true;
-            }
-            return true;
-        }
-
         if (!PlaceMonsterOne(y, x, rPtr, slp, pet))
         {
             return false;
