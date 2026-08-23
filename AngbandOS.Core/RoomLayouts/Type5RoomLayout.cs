@@ -18,7 +18,7 @@ internal class Type5RoomLayout : RoomLayout
     public override void Build(int objectLevel, int yval, int xval)
     {
         int y, x;
-        int[] what = new int[64];
+        int[] monsterRaceIndexes = new int[64];
         GridTile cPtr;
         bool empty = false;
         int y1 = yval - 4;
@@ -137,11 +137,13 @@ internal class Type5RoomLayout : RoomLayout
         }
         for (int i = 0; i < 64; i++)
         {
-            what[i] = Game.GetMonsterRaceIndex(Game.Difficulty + 10, getMonNumHook);
-            if (what[i] == 0)
+            int? monsterRace = Game.GetMonsterRaceIndex(Game.Difficulty + 10, getMonNumHook);
+            if (!monsterRace.HasValue)
             {
                 empty = true;
+                break;
             }
+            monsterRaceIndexes[i] = monsterRace.Value;
         }
         if (empty)
         {
@@ -156,7 +158,7 @@ internal class Type5RoomLayout : RoomLayout
         {
             for (x = xval - 9; x <= xval + 9; x++)
             {
-                int rIdx = what[Game.RandomLessThan(64)];
+                int rIdx = monsterRaceIndexes[Game.RandomLessThan(64)];
                 MonsterRace race = Game.SingletonRepository.Get<MonsterRace>(rIdx);
                 Game.PlaceMonsterAux(y, x, race, false, false, false);
             }
