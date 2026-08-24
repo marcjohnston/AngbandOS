@@ -1326,7 +1326,7 @@ internal class Monster : IItemContainer, IGameSerialize
                             item.WasNoticed = false;
                             item.Y = 0;
                             item.X = 0;
-                            item.HoldingMonsterIndex = GetMonsterIndex();
+                            item.HoldingMonster = this;
                             Items.Add(item);
                         }
                         else

@@ -24,7 +24,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
             (nameof(StackCount), saveGameState.CreateGameStateBag(StackCount)),
             (nameof(Discount), saveGameState.CreateGameStateBag(Discount)),
-            (nameof(HoldingMonsterIndex), saveGameState.CreateGameStateBag(HoldingMonsterIndex)),
+            (nameof(HoldingMonster), saveGameState.CreateDerivedGameStateBag(HoldingMonster, typeof(Monster))),
             (nameof(Inscription), saveGameState.CreateGameStateBag(Inscription)),
             (nameof(ActivationRechargeTimeRemaining), saveGameState.CreateGameStateBag(ActivationRechargeTimeRemaining)),
             (nameof(ContainerTraps), saveGameState.CreateDerivedGameStateBag(ContainerTraps, typeof(ChestTrap))),
@@ -46,13 +46,13 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         (IdentSense, IdentFixed, IdentEmpty, IdentityIsKnown, IdentityIsStoreBought, IdentMental, WasNoticed, ContainerIsOpen) = restoreGameState.GetByKey(nameof(IdentSense)).Get8Bools();
 
         FixedArtifact = restoreGameState.GetByKey(nameof(FixedArtifact)).GetDerivedReferenceOrDefault<FixedArtifact>();
-        EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<EffectiveAttributeSet>((RestoreGameState restoreGameState) => new EffectiveAttributeSet(game, restoreGameState));
+        EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<EffectiveAttributeSet>(_restoreGameState => new EffectiveAttributeSet(game, _restoreGameState));
         _factory = restoreGameState.GetByKey(nameof(_factory)).GetDerivedReference<ItemFactory>();
         NutritionalValue = restoreGameState.GetByKey(nameof(NutritionalValue)).GetInt();
         Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
         StackCount = restoreGameState.GetByKey(nameof(StackCount)).GetInt();
         Discount = restoreGameState.GetByKey(nameof(Discount)).GetInt();
-        HoldingMonsterIndex = restoreGameState.GetByKey(nameof(HoldingMonsterIndex)).GetInt();
+        HoldingMonster = restoreGameState.GetByKey(nameof(HoldingMonster)).GetDerivedReferenceOrDefault<Monster>(_restoreGameState => new Monster(Game, _restoreGameState));
         Inscription = restoreGameState.GetByKey(nameof(Inscription)).GetString();
         ActivationRechargeTimeRemaining = restoreGameState.GetByKey(nameof(ActivationRechargeTimeRemaining)).GetInt();
         ContainerTraps = restoreGameState.GetByKey(nameof(ContainerTraps)).GetDerivedReferencesOrDefault<ChestTrap>();
@@ -125,7 +125,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     public int StackCount;
 
     public int Discount;
-    public int HoldingMonsterIndex;
+    public Monster? HoldingMonster;
     public string Inscription = "";
 
      /// <summary>
@@ -349,9 +349,9 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         }
 
         // Check to see if a monster is holding the item.
-        if (HoldingMonsterIndex != 0)
+        if (HoldingMonster is not null)
         {
-            return Game.Monsters[HoldingMonsterIndex];
+            return HoldingMonster;
         }
 
         // Check to see if the item in on the floor.
@@ -1713,7 +1713,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         IdentMental = cloneFrom.IdentMental;
         FixedArtifact = cloneFrom.FixedArtifact;
         Discount = cloneFrom.Discount;
-        HoldingMonsterIndex = cloneFrom.HoldingMonsterIndex;
+        HoldingMonster = cloneFrom.HoldingMonster;
         Inscription = cloneFrom.Inscription;
         WasNoticed = cloneFrom.WasNoticed;
         ActivationRechargeTimeRemaining = cloneFrom.ActivationRechargeTimeRemaining;

@@ -2314,7 +2314,7 @@ internal partial class Game : IGameSerialize
 
     public bool AddItemToMonster(Item item, Monster monster)
     {
-        item.HoldingMonsterIndex = monster.GetMonsterIndex();
+        item.HoldingMonster = monster;
         monster.Items.Add(item);
         return true;
     }
@@ -2324,7 +2324,7 @@ internal partial class Game : IGameSerialize
         GridTile tile = Grid[y][x];
         item.Y = y;
         item.X = x;
-        item.HoldingMonsterIndex = 0;
+        item.HoldingMonster = null;
         tile.Items.Add(item);
         return true;
     }
@@ -4462,7 +4462,7 @@ internal partial class Game : IGameSerialize
         }
         foreach (Item oPtr in mPtr.Items)
         {
-            oPtr.HoldingMonsterIndex = 0;
+            oPtr.HoldingMonster = null;
             DropNear(oPtr, null, y, x);
         }
         if (mPtr.StolenGold > 0)
@@ -13199,7 +13199,7 @@ internal partial class Game : IGameSerialize
         SetInventoryItem(i, oPtr);
         oPtr.Y = 0;
         oPtr.X = 0;
-        oPtr.HoldingMonsterIndex = 0;
+        oPtr.HoldingMonster = null;
         WeightCarried += oPtr.StackCount * oPtr.EffectiveAttributeSet.Weight;
         _invenCnt++;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -13532,7 +13532,7 @@ internal partial class Game : IGameSerialize
     public void DeleteObject(Item jPtr)
     {
         ExciseObject(jPtr);
-        if (jPtr.HoldingMonsterIndex == 0)
+        if (jPtr.HoldingMonster is null)
         {
             int y = jPtr.Y;
             int x = jPtr.X;
@@ -13694,10 +13694,10 @@ internal partial class Game : IGameSerialize
     public void ExciseObject(Item jPtr)
     {
         // Check to see if the object is being held by a monster.
-        if (jPtr.HoldingMonsterIndex != 0)
+        if (jPtr.HoldingMonster is not null)
         {
             // It is.  Get the monster.
-            Monster mPtr = Monsters[jPtr.HoldingMonsterIndex];
+            Monster mPtr = jPtr.HoldingMonster;
 
             mPtr.Items.Remove(jPtr);
         }
