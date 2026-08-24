@@ -1745,8 +1745,6 @@ internal partial class Game : IGameSerialize
     public int DangerRating;
     public int MaxPanelCols;
     public int MaxPanelRows;
-    public int MCnt;
-    public int MonsterMax = 1; // This is the current number of monsters.  Monster[0] is the player.
     public int MonsterLevel;
 
     /// <summary>
@@ -1797,6 +1795,8 @@ internal partial class Game : IGameSerialize
     /// Returns a fixed array of monsters.  All items in the array are pre-instantiates instances of the Monster class.  A dead or no-monster is when Monster.Race==null.
     /// </summary>
     public Monster[] Monsters; // TODO: make this a list
+    public int MCnt;
+    public int MonsterMax = 1; // This is the current number of monsters.  Monster[0] is the player.
 
     private const int _maxQuests = 50;
 
