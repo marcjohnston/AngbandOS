@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal partial class Game : IGameSerialize
+internal class Game : IGameSerialize
 {
     #region WIP State Data
     public int SkillMelee;
@@ -204,55 +204,6 @@ internal partial class Game : IGameSerialize
 
     public Tile WaterTile { get; private set; }
     #endregion
-
-    /// <summary>
-    /// Returns true, if the player successfully avoids theft.  This is based on the player's dexterity and experience level, as well as whether the player has anti-theft protection.
-    /// </summary>
-    public bool RollToPreventTheft => (ParalysisTimer.Value == 0 && RandomLessThan(100) < SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexTheftAvoidance + ExperienceLevel.IntValue) || HasAntiTheft;
-
-    public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable
-    {
-        switch (DieRoll(6))
-        {
-            case 1:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre1MonsterRaceFilter));
-            case 2:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre2MonsterRaceFilter));
-            case 3:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre3MonsterRaceFilter));
-            case 4:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre4MonsterRaceFilter));
-            case 5:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre5MonsterRaceFilter));
-            default:
-                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre6MonsterRaceFilter));
-        }
-    }
-
-    // Chance of success is your skill - item level, with item level capped at 50 and your
-    // skill halved if you're confused
-    public bool UseDeviceItemTest(int itemLevel)
-    {
-        int chance = UseDevice;
-        if (ConfusionTimer.Value != 0)
-        {
-            chance /= 2;
-        }
-        chance -= itemLevel > 50 ? 50 : itemLevel;
-
-        // There's always a small chance of success
-        if (chance < Constants.UseDevice && RandomLessThan(Constants.UseDevice - chance + 1) == 0)
-        {
-            chance = Constants.UseDevice;
-        }
-
-        // Do the actual check
-        if (chance < Constants.UseDevice || DieRoll(chance) < Constants.UseDevice)
-        {
-            return false;
-        }
-        return true;
-    }
 
     #region Game Serialization
     public GameStateBag? Serialize(SaveGameState saveGameState)
@@ -1392,6 +1343,55 @@ internal partial class Game : IGameSerialize
     #endregion
 
     #region WIP Methods Not Yet Categorized
+    /// <summary>
+    /// Returns true, if the player successfully avoids theft.  This is based on the player's dexterity and experience level, as well as whether the player has anti-theft protection.
+    /// </summary>
+    public bool RollToPreventTheft => (ParalysisTimer.Value == 0 && RandomLessThan(100) < SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexTheftAvoidance + ExperienceLevel.IntValue) || HasAntiTheft;
+
+    public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable
+    {
+        switch (DieRoll(6))
+        {
+            case 1:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre1MonsterRaceFilter));
+            case 2:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre2MonsterRaceFilter));
+            case 3:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre3MonsterRaceFilter));
+            case 4:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre4MonsterRaceFilter));
+            case 5:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre5MonsterRaceFilter));
+            default:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre6MonsterRaceFilter));
+        }
+    }
+
+    // Chance of success is your skill - item level, with item level capped at 50 and your
+    // skill halved if you're confused
+    public bool UseDeviceItemTest(int itemLevel)
+    {
+        int chance = UseDevice;
+        if (ConfusionTimer.Value != 0)
+        {
+            chance /= 2;
+        }
+        chance -= itemLevel > 50 ? 50 : itemLevel;
+
+        // There's always a small chance of success
+        if (chance < Constants.UseDevice && RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+        {
+            chance = Constants.UseDevice;
+        }
+
+        // Do the actual check
+        if (chance < Constants.UseDevice || DieRoll(chance) < Constants.UseDevice)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public int EnchantBonus(int bonus)
     {
         do
