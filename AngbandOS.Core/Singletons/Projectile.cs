@@ -534,8 +534,9 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                     // Check to see if the projectile attack bounces off the player.
                     if (!CheckBounceOffPlayer(monster, dam, rad))
                     {
+                        Monster mPtr = Game.Monsters[who];
                         // Allow the projectile to perform any effects on the player.
-                        if (PlayerEffect.ApplyEffect(who, dist, y, x, dam, rad) == IdentifiedResultEnum.True)
+                        if (PlayerEffect.ApplyEffect(mPtr, dist, y, x, dam, rad) == IdentifiedResultEnum.True)
                         {
                             // Disturb the player.
                             Game.Disturb(true);
