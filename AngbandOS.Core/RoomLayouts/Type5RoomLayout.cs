@@ -153,7 +153,7 @@ internal class Type5RoomLayout : RoomLayout
             for (x = xval - 9; x <= xval + 9; x++)
             {
                 MonsterRace monsterRace = monsterRaces[Game.RandomLessThan(64)];
-                Game.PlaceMonsterByRace(y, x, monsterRace, false, false, false);
+                Game.PlaceOneMonsterByRace(y, x, monsterRace, false, false, false);
             }
         }
     }

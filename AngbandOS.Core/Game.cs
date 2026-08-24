@@ -8540,7 +8540,7 @@ internal partial class Game : IGameSerialize
                             MsgPrint($"{monsterName} changes!");
                             DeleteMonsterByIndex(tile.Monster.GetMonsterIndex(), true);
                             MonsterRace newRace = SingletonRepository.Get<MonsterRace>(newRaceIndex);
-                            PlaceMonsterByRace(y, x, newRace, false, false, false);
+                            PlaceOneMonsterByRace(y, x, newRace, false, false, false);
                             monster = tile.Monster;
                             monsterName = monster.Name;
                             fear = false;
@@ -14478,7 +14478,7 @@ internal partial class Game : IGameSerialize
         attempts = 1000;
         while (--attempts == 0)
         {
-            if (PlaceMonsterByRace(y, x, rPtr, false, false, false))
+            if (PlaceOneMonsterByRace(y, x, rPtr, false, false, false))
             {
                 break;
             }
@@ -15032,7 +15032,7 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            result = PlaceMonsterByRace(y, x, mPtr.Race, false, makePet, newlySpawnedSkipFirstTurn);
+            result = PlaceOneMonsterByRace(y, x, mPtr.Race, false, makePet, newlySpawnedSkipFirstTurn);
             break;
         }
         if (clone && result)
@@ -15059,7 +15059,7 @@ internal partial class Game : IGameSerialize
     }
     public bool PlaceGroupOfMonstersByRace(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool skipFirstTurn)
     {
-        if (!PlaceMonsterByRace(y, x, rPtr, spawnAsleep, makePet, skipFirstTurn))
+        if (!PlaceOneMonsterByRace(y, x, rPtr, spawnAsleep, makePet, skipFirstTurn))
         {
             return false;
         }
@@ -15071,7 +15071,7 @@ internal partial class Game : IGameSerialize
         return true;
     }
 
-    public bool PlaceMonsterByRace(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool skipFirstTurn)
+    public bool PlaceOneMonsterByRace(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool skipFirstTurn)
     {
         Monster? monsterPlaced = PlaceOneMonster(y, x, rPtr, spawnAsleep, makePet, skipFirstTurn);
         if (monsterPlaced is null)
@@ -15396,7 +15396,7 @@ internal partial class Game : IGameSerialize
         }
         else
         {
-            if (!PlaceMonsterByRace(y, x, monsterRace, false, pet, false))
+            if (!PlaceOneMonsterByRace(y, x, monsterRace, false, pet, false))
             {
                 return false;
             }

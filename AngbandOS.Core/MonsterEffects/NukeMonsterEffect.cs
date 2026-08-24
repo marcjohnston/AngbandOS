@@ -55,7 +55,7 @@ internal class NukeMonsterEffect : MonsterEffect
                 dam = 0;
                 Game.DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex(), true);
                 MonsterRace race = Game.SingletonRepository.Get<MonsterRace>(tmp);
-                Game.PlaceMonsterByRace(mPtr.MapY, mPtr.MapX, race, false, charm, false);
+                Game.PlaceOneMonsterByRace(mPtr.MapY, mPtr.MapX, race, false, charm, false);
                 mPtr = cPtr.Monster;
             }
         }
