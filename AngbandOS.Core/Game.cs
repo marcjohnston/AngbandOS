@@ -12638,7 +12638,7 @@ internal partial class Game : IGameSerialize
         Screen.PrintLine("", y + i + 1, x);
     }
 
-    public void RegenerateHealth(int percent)
+    private void RegenerateHealth(int percent)
     {
         int oldHealth = Health.IntValue;
         int newHealth = (MaxHealth.IntValue * percent) + Constants.PyRegenHpbase;
