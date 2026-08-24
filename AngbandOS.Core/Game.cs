@@ -15095,7 +15095,7 @@ internal partial class Game : IGameSerialize
 
     public Monster? PlaceOneMonsterByRace(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool skipFirstTurn)
     {
-        Monster? monsterPlaced = PlaceOneMonster(y, x, rPtr, spawnAsleep, makePet, skipFirstTurn);
+        Monster? monsterPlaced = SpawnOneMonster(y, x, rPtr, spawnAsleep, makePet, skipFirstTurn);
         if (monsterPlaced is null)
         {
             return null;
@@ -15115,7 +15115,7 @@ internal partial class Game : IGameSerialize
                 {
                     break;
                 }
-                PlaceOneMonster(ny, nx, monsterRace, spawnAsleep, makePet, skipFirstTurn);
+                SpawnOneMonster(ny, nx, monsterRace, spawnAsleep, makePet, skipFirstTurn);
                 if (monsterRace.Friends ||
                     rPtr.EscortsGroup)
                 {
@@ -15171,7 +15171,7 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                Monster? monsterPlaced = PlaceOneMonster(my, mx, rPtr, spawnAsleep, makePet, false);
+                Monster? monsterPlaced = SpawnOneMonster(my, mx, rPtr, spawnAsleep, makePet, false);
                 if (monsterPlaced is not null)
                 {
                     hackY[hackN] = my;
@@ -15192,7 +15192,7 @@ internal partial class Game : IGameSerialize
     /// <param name="spawnAsleep"></param>
     /// <param name="makePet"></param>
     /// <returns></returns>
-    private Monster? PlaceOneMonster(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool newlySpawnedSkipFirstTurn)
+    private Monster? SpawnOneMonster(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool newlySpawnedSkipFirstTurn)
     {
         // Monster must be provided.
         if (rPtr == null)
