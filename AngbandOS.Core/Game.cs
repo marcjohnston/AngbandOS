@@ -14637,6 +14637,31 @@ internal partial class Game : IGameSerialize
 
     public void CompactMonsters(int size)
     {
+        void CompactMonstersAux(int i1, int i2)
+        {
+            if (i1 == i2)
+            {
+                return;
+            }
+            Monster mPtr = Monsters[i1];
+            int y = mPtr.MapY;
+            int x = mPtr.MapX;
+            GridTile cPtr = Grid[y][x];
+            cPtr.Monster = Monsters[i2];
+            Monster mPtr2 = Monsters[i2];
+            mPtr2.Items.AddRange(mPtr.Items);
+            if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
+            {
+                TargetWho = new MonsterTarget(this, mPtr2);
+            }
+            if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
+            {
+                TrackMonsterHealth(mPtr2);
+            }
+            Monsters[i2] = Monsters[i1];
+            Monsters[i1] = new Monster(this);
+        }
+
         int i, num, cnt;
         if (size != 0)
         {
@@ -15635,31 +15660,6 @@ internal partial class Game : IGameSerialize
         NumRepro = 0;
         TargetWho = null;
         TrackMonsterHealth(null);
-    }
-
-    private void CompactMonstersAux(int i1, int i2)
-    {
-        if (i1 == i2)
-        {
-            return;
-        }
-        Monster mPtr = Monsters[i1];
-        int y = mPtr.MapY;
-        int x = mPtr.MapX;
-        GridTile cPtr = Grid[y][x];
-        cPtr.Monster = Monsters[i2];
-        Monster mPtr2 = Monsters[i2];
-        mPtr2.Items.AddRange(mPtr.Items);
-        if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
-        {
-            TargetWho = new MonsterTarget(this, mPtr2);
-        }
-        if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
-        {
-            TrackMonsterHealth(mPtr2);
-        }
-        Monsters[i2] = Monsters[i1];
-        Monsters[i1] = new Monster(this);
     }
 
     public static bool ValidateTupleSorting<T>(T[] items, Func<T, T, bool> testPredicate)
