@@ -15,7 +15,7 @@ internal class OldPolymorphMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => nameof(Any1In8MonsterFilter);
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
@@ -51,13 +51,13 @@ internal class OldPolymorphMonsterEffect : MonsterEffect
             {
                 note = " changes!";
                 dam = 0;
-                Game.DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex());
+                Game.DeleteMonster(cPtr.Monster);
                 MonsterRace race = Game.SingletonRepository.Get<MonsterRace>(tmp);
                 Game.PlaceOneMonsterByRace(mPtr.MapY, mPtr.MapX, race, false, charm, false);
                 mPtr = cPtr.Monster;
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
+        ApplyProjectileDamageToMonster(mPtr, dam, note, null, 0);
         return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

@@ -47,7 +47,7 @@ internal class MeteorStormScript : Script, IScript, ICastSpellScript
             }
             count = 0;
             Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(MeteorProjectile));
-            projectile.Fire(0, 2, y, x, Game.ExperienceLevel.IntValue * 3 / 2, kill: true, item: true, jump: true, beam: false, thru: false, hide: false, grid: false, stop: false);
+            projectile.Fire(null, 2, y, x, Game.ExperienceLevel.IntValue * 3 / 2, kill: true, item: true, jump: true, beam: false, thru: false, hide: false, grid: false, stop: false);
         }
     }
     public string LearnedDetails => $"dam {3 * Game.ExperienceLevel.IntValue / 2} each";

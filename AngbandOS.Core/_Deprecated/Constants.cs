@@ -24,10 +24,6 @@ internal static class Constants
     public const int MaxDepth = 128;
     public const int MaxMAllocChance = 160;
 
-    /// <summary>
-    /// Returns the maximum number of monsters.
-    /// </summary>
-    public const int MaxMIdx = 512;
     public const int MaxRange = 18;
     public const int MaxRepro = 100;
     public const int MaxShort = 32767;

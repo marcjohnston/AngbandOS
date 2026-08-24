@@ -18,6 +18,6 @@ internal class TelekineticWaveTalentScript : UniversalScript, IGetKey
     {
         Game.MsgPrint("A wave of pure physical force radiates out from your body!");
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(TelekinesisProjectile));
-        projectile.Fire(0, 3 + (Game.ExperienceLevel.IntValue / 10), Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * (Game.ExperienceLevel.IntValue > 39 ? 4 : 3), item: true, kill: true, grid: true, jump: false, beam: false, thru: false, hide: false, stop: false);
+        projectile.Fire(null, 3 + (Game.ExperienceLevel.IntValue / 10), Game.MapY.IntValue, Game.MapX.IntValue, Game.ExperienceLevel.IntValue * (Game.ExperienceLevel.IntValue > 39 ? 4 : 3), item: true, kill: true, grid: true, jump: false, beam: false, thru: false, hide: false, stop: false);
     }
 }

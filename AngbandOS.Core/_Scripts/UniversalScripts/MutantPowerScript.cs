@@ -63,10 +63,9 @@ internal class MutantPowerScript : UniversalScript, IGetKey
             powerDesc[num] = "";
         }
         num = 0;
-        for (petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
+        foreach (Monster mPtr in Game.MonsterList)
         {
-            monster = Game.Monsters[petCtr];
-            if (monster.IsPet)
+            if (mPtr.IsPet)
             {
                 pets++;
             }
@@ -168,10 +167,9 @@ internal class MutantPowerScript : UniversalScript, IGetKey
             {
                 allPets = true;
             }
-            for (petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
+            foreach (Monster mPtr in Game.MonsterList)
             {
-                monster = Game.Monsters[petCtr];
-                if (monster.IsPet)
+                if (mPtr.IsPet)
                 {
                     bool deleteThis = false;
                     if (allPets)
@@ -180,7 +178,7 @@ internal class MutantPowerScript : UniversalScript, IGetKey
                     }
                     else
                     {
-                        string friendName = monster.VisibleName;
+                        string friendName = mPtr.VisibleName;
                         string checkFriend = $"Dismiss {friendName}? ";
                         if (Game.GetCheck(checkFriend))
                         {
@@ -189,7 +187,7 @@ internal class MutantPowerScript : UniversalScript, IGetKey
                     }
                     if (deleteThis)
                     {
-                        Game.DeleteMonsterByIndex(petCtr);
+                        Game.DeleteMonster(mPtr);
                         dismissed++;
                     }
                 }

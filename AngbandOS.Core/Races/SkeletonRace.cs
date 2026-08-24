@@ -65,7 +65,7 @@ internal class SkeletonRace : Race
         if (Game.DieRoll(12) == 1)
         {
             Game.MsgPrint("Some of the fluid falls through your jaws!");
-            item.Smash(0, Game.MapY.IntValue, Game.MapX.IntValue);
+            item.Smash(null, Game.MapY.IntValue, Game.MapX.IntValue);
         }
     }
     public override int? ImmuneToBleedingAtLevel => 1;

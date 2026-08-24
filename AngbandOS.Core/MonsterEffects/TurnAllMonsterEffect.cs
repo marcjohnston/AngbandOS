@@ -10,7 +10,7 @@ internal class TurnAllMonsterEffect : MonsterEffect
 {
     private TurnAllMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -28,7 +28,7 @@ internal class TurnAllMonsterEffect : MonsterEffect
             doFear = 0;
         }
         dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, doFear);
+        ApplyProjectileDamageToMonster(mPtr, dam, note, null, doFear);
         return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

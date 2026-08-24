@@ -259,7 +259,7 @@ internal sealed class ProjectileMonsterSpell : MonsterSpell
     /// <returns></returns>
     private IsNoticedEnum Project(Monster monster, int rad, int y, int x, int dam, Projectile projectile, bool grid, bool stop, bool item, bool kill)
     {
-        return projectile.Fire(monster.GetMonsterIndex(), rad, Game.MapY.IntValue, Game.MapX.IntValue, dam, grid: grid, stop: stop, item: item, kill: kill, jump: false, beam: false, thru: false, hide: false);
+        return projectile.Fire(monster, rad, Game.MapY.IntValue, Game.MapX.IntValue, dam, grid: grid, stop: stop, item: item, kill: kill, jump: false, beam: false, thru: false, hide: false);
     }
 
     public string? PreExecuteOnPlayerScriptBindingKey { get; }

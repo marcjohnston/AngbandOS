@@ -15,7 +15,7 @@ internal class TurnUndeadMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => nameof(UndeadMonsterFilter);
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
@@ -51,7 +51,7 @@ internal class TurnUndeadMonsterEffect : MonsterEffect
         {
             return IdentifiedResultEnum.False;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, doFear);
+        ApplyProjectileDamageToMonster(mPtr, dam, note, null, doFear);
         return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

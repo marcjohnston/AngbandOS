@@ -10,7 +10,7 @@ internal class ArrowMonsterEffect : MonsterEffect
 {
     private ArrowMonsterEffect(Game game) : base(game) {  } // This object is a singleton.
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         bool seen = mPtr.IsVisible;
         bool obvious = false;
@@ -18,7 +18,7 @@ internal class ArrowMonsterEffect : MonsterEffect
         {
             obvious = true;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, null, null, 0);
+        ApplyProjectileDamageToMonster(mPtr, dam, null, null, 0);
         return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

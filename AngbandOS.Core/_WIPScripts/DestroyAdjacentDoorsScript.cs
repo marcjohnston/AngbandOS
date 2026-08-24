@@ -32,7 +32,7 @@ internal class DestroyAdjacentDoorsScript : Script, IScript, ICastSpellScript, I
     public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(DestroyTrapOrDoorProjectile));
-        IsNoticedEnum isNoticed = projectile.Fire(0, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, grid: true, item: true, hide: true, jump: false, beam: false, thru: false, kill: false, stop: false);
+        IsNoticedEnum isNoticed = projectile.Fire(null, 1, Game.MapY.IntValue, Game.MapX.IntValue, 0, grid: true, item: true, hide: true, jump: false, beam: false, thru: false, kill: false, stop: false);
         return isNoticed == IsNoticedEnum.True ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 

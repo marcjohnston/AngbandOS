@@ -221,6 +221,10 @@ public class GameConfiguration
 
     public virtual string[]? GameTickEventBindingKeys { get; set; } = null;
 
+    public virtual int MaxMonsterCount { get; set; } = 512;
+    public virtual int CompactMonsterCutIn { get; set; } = 32;
+    public virtual int CompactMonsterCutOutTarget { get; set; } = 64;
+
     /// <summary>
     /// Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.
     /// </summary>    

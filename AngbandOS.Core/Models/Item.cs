@@ -260,7 +260,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     /// <param name="who"></param>
     /// <param name="y"></param>
     /// <param name="x"></param>
-    public bool Smash(int who, int y, int x) 
+    public bool Smash(Monster? monster, int y, int x) 
     {
         if (QuaffTuple == null)
         {
@@ -271,7 +271,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         {
             return false;
         }
-        return smashUnfriendlyScript.ExecuteUnfriendlyScript(who, y, x);
+        return smashUnfriendlyScript.ExecuteUnfriendlyScript(monster, y, x);
     }
 
     public bool IsFlavorAware

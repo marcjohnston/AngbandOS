@@ -10,7 +10,7 @@ internal class StasisMonsterEffect : MonsterEffect
 {
     private StasisMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -33,7 +33,7 @@ internal class StasisMonsterEffect : MonsterEffect
             doSleep = 500;
         }
         dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
+        ApplyProjectileDamageToMonster(mPtr, dam, note, null, 0);
         // Put the monster to sleep, if not dead.
         if (mPtr.Health >= 0 && doSleep != 0)
         {

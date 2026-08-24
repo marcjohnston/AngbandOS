@@ -27,14 +27,9 @@ internal class AnnihilationScript : UniversalScript, IGetKey
     public override void ExecuteScript()
     {
         Game.Mana.IntValue -= 100;
-        for (int i = 1; i < Game.MonsterMax; i++)
+        foreach (Monster mPtr in Game.MonsterList)
         {
-            Monster mPtr = Game.Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             if (rPtr.Unique)
             {
                 continue;
@@ -43,7 +38,7 @@ internal class AnnihilationScript : UniversalScript, IGetKey
             {
                 continue;
             }
-            Game.DeleteMonsterByIndex(i);
+            Game.DeleteMonster(mPtr);
             Game.TakeHit(Game.DieRoll(4), "the strain of casting Annihilation");
             Game.Mana.IntValue++;
             Game.ConsoleView.MoveCursorTo(Game.MapY.IntValue, Game.MapX.IntValue);

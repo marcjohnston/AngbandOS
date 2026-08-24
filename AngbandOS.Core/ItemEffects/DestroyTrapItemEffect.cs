@@ -10,7 +10,7 @@ internal class DestroyTrapItemEffect : ItemEffect
 {
     private DestroyTrapItemEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ApplyItem(Item oPtr, int who, int x, int y)
+    protected override bool ApplyItem(Item oPtr, Monster? monster, int x, int y)
     {
         bool obvious = false;
         if (oPtr.IsContainer)

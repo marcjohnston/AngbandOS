@@ -10,7 +10,7 @@ internal class DispelGoodMonsterEffect : MonsterEffect
 {
     private DispelGoodMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -36,7 +36,7 @@ internal class DispelGoodMonsterEffect : MonsterEffect
         {
             return IdentifiedResultEnum.False;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, 0);
+        ApplyProjectileDamageToMonster(mPtr, dam, note, noteDies, 0);
         return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

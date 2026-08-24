@@ -742,9 +742,8 @@ internal class JournalScript : UniversalScript, IGetKey
     {
         List<string> petNames = new List<string>();
         int pets = 0;
-        for (int petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
+        foreach (Monster mPtr in Game.MonsterList)
         {
-            Monster mPtr = Game.Monsters[petCtr];
             if (!mPtr.IsPet)
             {
                 continue;

@@ -353,8 +353,6 @@ internal partial class Game : IGameSerialize
             (nameof(DangerRating), saveGameState.CreateGameStateBag(DangerRating)),
             (nameof(MaxPanelCols), saveGameState.CreateGameStateBag(MaxPanelCols)),
             (nameof(MaxPanelRows), saveGameState.CreateGameStateBag(MaxPanelRows)),
-            (nameof(MCnt), saveGameState.CreateGameStateBag(MCnt)),
-            (nameof(MonsterMax), saveGameState.CreateGameStateBag(MonsterMax)),
             (nameof(MonsterLevel), saveGameState.CreateGameStateBag(MonsterLevel)),
             (nameof(PanelCol), saveGameState.CreateGameStateBag(PanelCol)),
             (nameof(PanelRow), saveGameState.CreateGameStateBag(PanelRow)),
@@ -367,7 +365,7 @@ internal partial class Game : IGameSerialize
             (nameof(View), saveGameState.CreateDerivedGameStateBag(View, typeof(GridCoordinate))),
             (nameof(DunBias), saveGameState.CreateGameStateBag(DunBias)),
             (nameof(NumRepro), saveGameState.CreateGameStateBag(NumRepro)),
-            (nameof(Monsters), saveGameState.CreateDerivedGameStateBag(Monsters, typeof(Monster))),
+            (nameof(MonsterList), saveGameState.CreateDerivedGameStateBag(MonsterList, typeof(Monster))),
             (nameof(MessageLog), saveGameState.CreateDerivedGameStateBag(MessageLog, typeof(GameMessage))),
             (nameof(RecentMessages), saveGameState.CreateDerivedGameStateBag(RecentMessages, typeof(GameMessage))),
             (nameof(PreviousMessages), saveGameState.CreateDerivedGameStateBag(PreviousMessages, typeof(GameMessage))),
@@ -630,8 +628,6 @@ internal partial class Game : IGameSerialize
             DangerRating = restoreGameState.GetByKey(nameof(DangerRating)).GetInt();
             MaxPanelCols = restoreGameState.GetByKey(nameof(MaxPanelCols)).GetInt();
             MaxPanelRows = restoreGameState.GetByKey(nameof(MaxPanelRows)).GetInt();
-            MCnt = restoreGameState.GetByKey(nameof(MCnt)).GetInt();
-            MonsterMax = restoreGameState.GetByKey(nameof(MonsterMax)).GetInt();
             MonsterLevel = restoreGameState.GetByKey(nameof(MonsterLevel)).GetInt();
             PanelCol = restoreGameState.GetByKey(nameof(PanelCol)).GetInt();
             PanelRow = restoreGameState.GetByKey(nameof(PanelRow)).GetInt();
@@ -644,7 +640,7 @@ internal partial class Game : IGameSerialize
             View = restoreGameState.GetByKey(nameof(View)).GetDerivedReferences<GridCoordinate>(_restoreGameState => new GridCoordinate(this, _restoreGameState)).ToList();
             DunBias = restoreGameState.GetByKey(nameof(DunBias)).GetReferenceOrDefault<MonsterRaceFilter>();
             NumRepro = restoreGameState.GetByKey(nameof(NumRepro)).GetInt();
-            Monsters = restoreGameState.GetByKey(nameof(Monsters)).GetDerivedReferences<Monster>(_restoreGameState => new Monster(this, _restoreGameState)).ToArray();
+            MonsterList.AddRange(restoreGameState.GetByKey(nameof(MonsterList)).GetDerivedReferences<Monster>(_restoreGameState => new Monster(this, _restoreGameState)));
             MessageLog = restoreGameState.GetByKey(nameof(MessageLog)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToList();
             RecentMessages = restoreGameState.GetByKey(nameof(RecentMessages)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToList();
             PreviousMessages = restoreGameState.GetByKey(nameof(PreviousMessages)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToArray();
@@ -691,6 +687,9 @@ internal partial class Game : IGameSerialize
         FollowDistance = gameConfiguration.FollowDistance;
         DecayRate = gameConfiguration.DecayRate;
         PatronRestingFavor = gameConfiguration.PatronRestingFavour;
+        MaxMonsterCount = gameConfiguration.MaxMonsterCount;
+        CompactMonsterCutIn = gameConfiguration.CompactMonsterCutIn;
+        CompactMonsterCutOutTarget = gameConfiguration.CompactMonsterCutOutTarget;
 
         ElvishTexts = gameConfiguration.ElvishTexts ?? new string[] { };
         HorrificDescriptions = gameConfiguration.HorrificDescriptions ?? new string[] { };
@@ -965,9 +964,8 @@ internal partial class Game : IGameSerialize
                     return;
                 }
                 GridTile cPtr = Grid[y][x];
-                int monsterIndex = MPop();
-                Monsters[monsterIndex] = monster;
-                cPtr.Monster = Monsters[monsterIndex];
+                MonsterList.Add(monster);
+                cPtr.Monster = monster;
                 monster.MapY = y;
                 monster.MapX = x;
                 MonsterRace rPtr = monster.Race;
@@ -981,13 +979,8 @@ internal partial class Game : IGameSerialize
                 }
             }
 
-            for (int i = 1; i < MonsterMax; i++)
+            foreach (Monster mPtr in MonsterList)
             {
-                Monster mPtr = Monsters[i];
-                if (mPtr.Race is null)
-                {
-                    continue;
-                }
                 if (!mPtr.IsPet)
                 {
                     continue;
@@ -1057,7 +1050,7 @@ internal partial class Game : IGameSerialize
             {
                 break;
             }
-            WipeMList();
+            WipeMonsterList();
             MsgPrint(string.Empty);
             if (IsDead)
             {
@@ -1850,36 +1843,25 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns a fixed array of monsters.  All items in the array are pre-instantiates instances of the Monster class.  A dead or no-monster is when Monster.Race==null.
     /// </summary>
-    public Monster[] Monsters; // TODO: make this a list
-    public int MCnt;
-    public int MonsterMax = 1; // This is the current number of monsters.  Monster[0] is the player.
-    private int MPop()
-    {
-        int i;
-        if (MonsterMax < Constants.MaxMIdx)
-        {
-            i = MonsterMax;
-            MonsterMax++;
-            MCnt++;
-            return i;
-        }
-        for (i = 1; i < MonsterMax; i++)
-        {
-            Monster mPtr = Monsters[i];
-            if (mPtr.Race != null)
-            {
-                continue;
-            }
-            MCnt++;
-            return i;
-        }
-        MsgPrint("Too many monsters!");
-        return 0;
-    }
+    public List<Monster> MonsterList = new List<Monster>();
 
-    public void DeleteMonsterByIndex(int i)
+    /// <summary>
+    /// Returns the maximum number of monsters.  The game will keep the monster list count below this value.
+    /// </summary>
+    public int MaxMonsterCount = 512;
+
+    /// <summary>
+    /// Returns the target number of monsters for the compact to reach before it stops compacting.
+    /// </summary>
+    public int CompactMonsterCutOutTarget = 64;
+
+    /// <summary>
+    /// Returns the number of monsters below the maximum when compacting should start.
+    /// </summary>
+    public int CompactMonsterCutIn = 32;
+
+    public void DeleteMonster(Monster mPtr)
     {
-        Monster mPtr = Monsters[i];
         MonsterRace rPtr = mPtr.Race;
         if (rPtr == null)
         {
@@ -1904,8 +1886,7 @@ internal partial class Game : IGameSerialize
         }
         Grid[y][x].Monster = null;
         mPtr.Items.Clear();
-        Monsters[i] = new Monster(this);
-        MCnt--;
+        MonsterList.Remove(mPtr);
         ConsoleView.RefreshMapLocation(y, x);
     }
 
@@ -5022,14 +5003,14 @@ internal partial class Game : IGameSerialize
         }
         while (!Shutdown)
         {
-            if (MCnt + 32 > Constants.MaxMIdx)
+            if (MonsterList.Count + CompactMonsterCutIn > MaxMonsterCount)
             {
-                CompactMonsters(64);
+                CompactMonsters(CompactMonsterCutOutTarget);
             }
-            if (MCnt + 32 < MonsterMax)
-            {
-                CompactMonsters(0);
-            }
+            //if (MonsterList.Count + 32 < MonsterMax)
+            //{
+            //    CompactMonsters(0);
+            //}
             ProcessPlayer();
             if (Shutdown)
             {
@@ -5298,13 +5279,8 @@ internal partial class Game : IGameSerialize
                 if (ShimmerMonsters)
                 {
                     ShimmerMonsters = false;
-                    for (i = 1; i < MonsterMax; i++)
+                    foreach (Monster mPtr in MonsterList)
                     {
-                        Monster mPtr = Monsters[i];
-                        if (mPtr.Race == null)
-                        {
-                            continue;
-                        }
                         MonsterRace rPtr = mPtr.Race;
                         if (!rPtr.AttrMulti)
                         {
@@ -5317,13 +5293,8 @@ internal partial class Game : IGameSerialize
                 if (RepairMonsters)
                 {
                     RepairMonsters = false;
-                    for (i = 1; i < MonsterMax; i++)
+                    foreach (Monster mPtr in MonsterList)
                     {
-                        Monster mPtr = Monsters[i];
-                        if (mPtr.Race == null)
-                        {
-                            continue;
-                        }
                         if ((mPtr.IndividualMonsterFlags & Constants.MflagNice) != 0)
                         {
                             mPtr.IndividualMonsterFlags &= ~Constants.MflagNice;
@@ -5655,7 +5626,7 @@ internal partial class Game : IGameSerialize
         }
 
         // Every monster gets to process the world event.
-        foreach (Monster monster in Monsters)
+        foreach (Monster monster in MonsterList)
         {
             monster.ProcessWorld();
         }
@@ -5734,14 +5705,9 @@ internal partial class Game : IGameSerialize
 
     private void RegenMonsters()
     {
-        for (int i = 1; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             if (mPtr.Health < mPtr.MaxHealth)
             {
                 int frac = mPtr.MaxHealth / 100;
@@ -5887,14 +5853,9 @@ internal partial class Game : IGameSerialize
     {
         bool sleep = false;
         bool speed = false;
-        for (int i = 0; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             if (excludeMonster != null && mPtr == excludeMonster)
             {
                 continue;
@@ -6120,14 +6081,9 @@ internal partial class Game : IGameSerialize
     public bool DetectInvisibleMonsters()
     {
         bool flag = false;
-        for (int i = 1; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
             if (!PanelContains(y, x))
@@ -6757,7 +6713,7 @@ internal partial class Game : IGameSerialize
             MsgPrint("You are surrounded by a white light.");
         }
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
-        projectile.Fire(0, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
+        projectile.Fire(null, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
         LightRoom(MapY.IntValue, MapX.IntValue);
         return true;
     }
@@ -6863,13 +6819,8 @@ internal partial class Game : IGameSerialize
         }
 
         bool probe = false;
-        for (int i = 1; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             if (!GridTileIsVisible(mPtr.MapY, mPtr.MapX))
             {
                 continue;
@@ -7057,7 +7008,7 @@ internal partial class Game : IGameSerialize
             MsgPrint("Darkness surrounds you.");
         }
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DarknessWeakProjectile));
-        projectile.Fire(0, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
+        projectile.Fire(null, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
         UnlightRoom(MapY.IntValue, MapX.IntValue);
         return true;
     }
@@ -7198,14 +7149,9 @@ internal partial class Game : IGameSerialize
     public bool DetectMonstersString(string match)
     {
         bool flag = false;
-        for (int i = 1; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
             if (!PanelContains(y, x))
@@ -7294,20 +7240,15 @@ internal partial class Game : IGameSerialize
     public IsNoticedEnum ProjectAtAllInLos(Projectile projectile, int dam)
     {
         IsNoticedEnum isNoticed = IsNoticedEnum.False;
-        for (int i = 1; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
-            if (mPtr.Race == null) // TODO: This should never be.
-            {
-                continue;
-            }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
             if (!GridTileIsVisible(y, x))
             {
                 continue;
             }
-            if (projectile.Fire(0, 0, y, x, dam, kill: true, jump: true, hide: true, beam: false, thru: false, grid: false, item: false, stop: false) == IsNoticedEnum.True)
+            if (projectile.Fire(null, 0, y, x, dam, kill: true, jump: true, hide: true, beam: false, thru: false, grid: false, item: false, stop: false) == IsNoticedEnum.True)
             {
                 isNoticed = IsNoticedEnum.True;
             }
@@ -8329,17 +8270,17 @@ internal partial class Game : IGameSerialize
                 switch (mutation.MutationAttackType)
                 {
                     case MutationAttackTypeEnum.Physical:
-                        monsterDies = DamageMonster(monster.GetMonsterIndex(), damage, out fear, "");
+                        monsterDies = DamageMonster(monster, damage, out fear, "");
                         break;
 
                     case MutationAttackTypeEnum.Poison:
                         Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
-                        poisonProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
+                        poisonProjectile.Fire(null, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
                         break;
 
                     case MutationAttackTypeEnum.Hellfire:
                         Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
-                        hellFireProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
+                        hellFireProjectile.Fire(null, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
                         break;
                 }
                 // The monster might hurt when we touch it
@@ -8554,7 +8495,7 @@ internal partial class Game : IGameSerialize
                     totalDamage = 0;
                 }
                 // Apply damage to the monster
-                if (DamageMonster(tile.Monster.GetMonsterIndex(), totalDamage, out fear, ""))
+                if (DamageMonster(tile.Monster, totalDamage, out fear, ""))
                 {
                     // Can't have any more attacks because the monster's dead
                     noExtra = true;
@@ -8644,7 +8585,7 @@ internal partial class Game : IGameSerialize
                         if (newRaceIndex != monster.Race.Index)
                         {
                             MsgPrint($"{monsterName} changes!");
-                            DeleteMonsterByIndex(tile.Monster.GetMonsterIndex());
+                            DeleteMonster(tile.Monster);
                             MonsterRace newRace = SingletonRepository.Get<MonsterRace>(newRaceIndex);
                             PlaceOneMonsterByRace(y, x, newRace, false, false, false);
                             monster = tile.Monster;
@@ -8998,7 +8939,7 @@ internal partial class Game : IGameSerialize
                     {
                         damage = 0;
                     }
-                    if (DamageMonster(tile.Monster.GetMonsterIndex(), damage, out bool fear, noteDies))
+                    if (DamageMonster(tile.Monster, damage, out bool fear, noteDies))
                     {
                         // The monster is dead, so don't add further statuses or messages
                     }
@@ -9032,7 +8973,7 @@ internal partial class Game : IGameSerialize
             if (hitBody || !GridPassable(newY, newX) || chanceToBreak.Test())
             {
                 MsgPrint($"The {missileName} shatters!");
-                if (missile.Smash(1, y, x))
+                if (missile.Smash(null, y, x))
                 {
                     if (Grid[y][x].Monster is not null && Grid[y][x].Monster.IsPet)
                     {
@@ -9563,14 +9504,8 @@ internal partial class Game : IGameSerialize
         // The noise the player is making is based on their stealth score
         uint noise = 1u << (30 - SkillStealth);
         // Go through all the monster slots on the level
-        for (int i = MonsterMax - 1; i >= 1; i--)
+        foreach (Monster monster in MonsterList)
         {
-            Monster monster = Monsters[i];
-            // If the monster slot is empty, skip it
-            if (monster.Race == null)
-            {
-                continue;
-            }
             // Keep count of how many are our friends
             if (monster.IsPet)
             {
@@ -11703,9 +11638,9 @@ internal partial class Game : IGameSerialize
     /// </summary>
     /// <param name="mIdx"></param>
     /// <returns></returns>
-    public bool Targetable(Monster mPtr)
+    public bool Targetable(Monster? mPtr)
     {
-        if (mPtr.Race == null)
+        if (mPtr is null)
         {
             return false;
         }
@@ -13237,7 +13172,7 @@ internal partial class Game : IGameSerialize
                     MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                     if (oPtr.QuaffTuple != null)
                     {
-                        oPtr.Smash(0, MapY.IntValue, MapX.IntValue);
+                        oPtr.Smash(null, MapY.IntValue, MapX.IntValue);
                     }
                     oPtr.ModifyStackCount(-amt);
                     InvenItemOptimize(i);
@@ -13530,7 +13465,7 @@ internal partial class Game : IGameSerialize
         GridTile cPtr = Grid[y][x];
         if (cPtr.Monster is not null)
         {
-            DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex());
+            DeleteMonster(cPtr.Monster);
         }
     }
 
@@ -14642,30 +14577,28 @@ internal partial class Game : IGameSerialize
 
     public void CompactMonsters(int size)
     {
-        void CompactMonstersAux(int i1, int i2)
-        {
-            if (i1 == i2)
-            {
-                return;
-            }
-            Monster mPtr = Monsters[i1];
-            int y = mPtr.MapY;
-            int x = mPtr.MapX;
-            GridTile cPtr = Grid[y][x];
-            cPtr.Monster = Monsters[i2];
-            Monster mPtr2 = Monsters[i2];
-            mPtr2.Items.AddRange(mPtr.Items);
-            if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
-            {
-                TargetWho = new MonsterTarget(this, mPtr2);
-            }
-            if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
-            {
-                TrackMonsterHealth(mPtr2);
-            }
-            Monsters[i2] = Monsters[i1];
-            Monsters[i1] = new Monster(this);
-        }
+        //void CompactMonstersAux(Monster mPtr, Monster mPtr2)
+        //{
+        //    if (mPtr == mPtr2)
+        //    {
+        //        return;
+        //    }
+        //    int y = mPtr.MapY;
+        //    int x = mPtr.MapX;
+        //    GridTile cPtr = Grid[y][x];
+        //    cPtr.Monster = mPtr2;
+        //    mPtr2.Items.AddRange(mPtr.Items);
+        //    if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
+        //    {
+        //        TargetWho = new MonsterTarget(this, mPtr2);
+        //    }
+        //    if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
+        //    {
+        //        TrackMonsterHealth(mPtr2);
+        //    }
+        //    mPtr2 = mPtr;
+        //    DeleteMonster(mPtr);
+        //}
 
         int i, num, cnt;
         if (size != 0)
@@ -14676,14 +14609,9 @@ internal partial class Game : IGameSerialize
         {
             int curLev = 5 * cnt;
             int curDis = 5 * (20 - cnt);
-            for (i = 1; i < MonsterMax; i++)
+            foreach (Monster mPtr in MonsterList)
             {
-                Monster mPtr = Monsters[i];
                 MonsterRace rPtr = mPtr.Race;
-                if (mPtr.Race == null)
-                {
-                    continue;
-                }
                 if (rPtr.Level > curLev)
                 {
                     continue;
@@ -14705,20 +14633,14 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                DeleteMonsterByIndex(i);
+                DeleteMonster(mPtr);
                 num++;
             }
         }
-        for (i = MonsterMax - 1; i >= 1; i--)
-        {
-            Monster mPtr = Monsters[i];
-            if (mPtr.Race != null)
-            {
-                continue;
-            }
-            CompactMonstersAux(MonsterMax - 1, i);
-            MonsterMax--;
-        }
+        //foreach (Monster mPtr in MonsterList)
+        //{
+        //    CompactMonstersAux(MonsterList[MonsterList.Count - 1], mPtr);
+        //}
     }
 
     /// <summary>
@@ -14729,10 +14651,9 @@ internal partial class Game : IGameSerialize
     /// <param name="fear"></param>
     /// <param name="note"></param>
     /// <returns>True, if the monster dies; false, otherwise.</returns>
-    public bool DamageMonster(int mIdx, int dam, out bool fear, string note)
+    public bool DamageMonster(Monster mPtr, int dam, out bool fear, string note)
     {
         fear = false;
-        Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         mPtr.SleepLevel = 0;
         mPtr.Health -= dam;
@@ -14762,9 +14683,7 @@ internal partial class Game : IGameSerialize
             {
                 MsgPrint($"You have killed {mName}.");
             }
-            else if (rPtr.Demon || rPtr.Undead ||
-                     rPtr.Cthuloid || rPtr.Stupid ||
-                     rPtr.Nonliving || "Evg".Contains(rPtr.Symbol.Character.ToString()))
+            else if (rPtr.Demon || rPtr.Undead || rPtr.Cthuloid || rPtr.Stupid || rPtr.Nonliving || "Evg".Contains(rPtr.Symbol.Character.ToString()))
             {
                 MsgPrint($"You have destroyed {mName}.");
             }
@@ -14821,7 +14740,7 @@ internal partial class Game : IGameSerialize
                     rPtr.Knowledge.RTkills++;
                 }
             }
-            DeleteMonsterByIndex(mIdx);
+            DeleteMonster(mPtr);
             fear = false;
             return true;
         }
@@ -14961,7 +14880,7 @@ internal partial class Game : IGameSerialize
     public Monster[] GetPets()
     {
         List<Monster> list = new List<Monster>();
-        foreach (Monster monster in Monsters)
+        foreach (Monster monster in MonsterList)
         {
             if (monster.IsPet)
             {
@@ -15337,12 +15256,9 @@ internal partial class Game : IGameSerialize
             }
         }
         GridTile cPtr = Grid[y][x];
-        cPtr.Monster = Monsters[MPop()];
-        if (cPtr.Monster is null)
-        {
-            return null;
-        }
-        Monster mPtr = cPtr.Monster;
+        Monster mPtr = new Monster(this);
+        MonsterList.Add(mPtr);
+        cPtr.Monster = mPtr;
         mPtr.Race = rPtr;
         mPtr.MapY = y;
         mPtr.MapX = x;
@@ -15603,7 +15519,11 @@ internal partial class Game : IGameSerialize
             {
                 if (rPtr.EldritchHorror)
                 {
-                    mPtr.SanityBlast(false);
+                    int? sanityBlastPower = mPtr.GetSanityBlastPower();
+                    if (sanityBlastPower.HasValue)
+                    {
+                        SanityBlast(sanityBlastPower.Value);
+                    }
                 }
             }
             if ((mPtr.IndividualMonsterFlags & Constants.MflagView) == 0)
@@ -15627,6 +15547,80 @@ internal partial class Game : IGameSerialize
             }
         }
     }
+    public void SanityBlast(int power)
+    {
+        if (DieRoll(power) < SkillSavingThrow)
+        {
+            if (!HasConfusionResistance)
+            {
+                ConfusionTimer.AddTimer(RandomLessThan(4) + 4);
+            }
+            if (!HasChaosResistance && DieRoll(3) == 1)
+            {
+                HallucinationsTimer.AddTimer(RandomLessThan(250) + 150);
+            }
+            return;
+        }
+        if (DieRoll(power) < SkillSavingThrow)
+        {
+            TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
+            TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
+            return;
+        }
+        if (DieRoll(power) < SkillSavingThrow)
+        {
+            if (!HasConfusionResistance)
+            {
+                ConfusionTimer.AddTimer(RandomLessThan(4) + 4);
+            }
+            if (!HasFreeAction)
+            {
+                ParalysisTimer.AddTimer(RandomLessThan(4) + 4);
+            }
+            while (RandomLessThan(100) > SkillSavingThrow)
+            {
+                TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
+            }
+            while (RandomLessThan(100) > SkillSavingThrow)
+            {
+                TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
+            }
+            if (!HasChaosResistance)
+            {
+                HallucinationsTimer.AddTimer(RandomLessThan(250) + 150);
+            }
+            return;
+        }
+        bool happened = false;
+        if (DieRoll(power) < SkillSavingThrow)
+        {
+            if (DecreaseAbilityScore(SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)), 10, true))
+            {
+                happened = true;
+            }
+            if (DecreaseAbilityScore(SingletonRepository.Get<Ability>(nameof(WisdomAbility)), 10, true))
+            {
+                happened = true;
+            }
+            if (happened)
+            {
+                MsgPrint("You feel much less sane than before.");
+            }
+            return;
+        }
+        if (DieRoll(power) < SkillSavingThrow)
+        {
+            if (LoseAllInfo())
+            {
+                MsgPrint("You forget everything in your utmost terror!");
+            }
+            return;
+        }
+        MsgPrint("The exposure to eldritch forces warps you.");
+        RunScript(nameof(GainMutationScript));
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        HandleStuff();
+    }
 
     public void UpdateSmartLearn(Monster monster, SpellResistantDetection what)
     {
@@ -15646,22 +15640,16 @@ internal partial class Game : IGameSerialize
         what.Learn(monster);
     }
 
-    public void WipeMList()
+    public void WipeMonsterList()
     {
-        for (int i = MonsterMax - 1; i >= 1; i--)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             rPtr.CurNum--;
             Grid[mPtr.MapY][mPtr.MapX].Monster = null;
-            Monsters[i] = new Monster(this);
         }
-        MonsterMax = 1;
-        MCnt = 0;
+
+        MonsterList = new List<Monster>();
         NumRepro = 0;
         TargetWho = null;
         TrackMonsterHealth(null);

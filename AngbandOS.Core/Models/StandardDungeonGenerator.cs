@@ -2777,11 +2777,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
 
         // Reset all of the monsters.
-        Game.Monsters = new Monster[Constants.MaxMIdx];
-        for (int j = 0; j < Constants.MaxMIdx; j++)
-        {
-            Game.Monsters[j] = new Monster(Game);
-        }
+        Game.WipeMonsterList();
 
         // Loop until we are able to build the level and keep track of the number of attempts.
         for (int generateAttemptNumber = 0; ; generateAttemptNumber++)
@@ -2914,7 +2910,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 Game.DangerFeeling = 0;
             }
             Game.TreasureFeeling = ComputeTreasureFeelingIndex();
-            if (Game.MonsterMax >= Constants.MaxMIdx)
+            if (Game.MonsterList.Count > Game.MaxMonsterCount)
             {
                 okay = false;
             }
@@ -2932,7 +2928,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
             }
 
             // Reset the level so that we can attempt again.
-            Game.WipeMList();
+            Game.WipeMonsterList();
         }
         Game.MarkLevelEntry();
     }

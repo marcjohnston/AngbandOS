@@ -572,141 +572,63 @@ internal class Monster : IItemContainer, IGameSerialize
         return desc;
     }
 
-    public void SanityBlast(bool necro)
+    public int? GetSanityBlastPower()
     {
-        bool happened = false;
         int power = 100;
-        if (necro)
+        power = Race.Level + 10;
+        string mName = Name;
+        if (Race.Unique)
         {
-            this.Game.MsgPrint("Your sanity is shaken by reading the Necronomicon!");
+            power *= 2;
         }
         else
         {
-            power = Race.Level + 10;
-            string mName = Name;
-            if (Race.Unique)
+            if (Race.Friends)
             {
-                power *= 2;
+                power /= 2;
             }
-            else
+        }
+        if (!this.Game.HackMind)
+        {
+            return null;
+        }
+        if (!IsVisible)
+        {
+            return null;
+        }
+        if (!Race.EldritchHorror)
+        {
+            return null;
+        }
+        if (IsPet && Game.DieRoll(8) != 1)
+        {
+            return null;
+        }
+        if (Game.DieRoll(power) < Game.SkillSavingThrow)
+        {
+            return null;
+        }
+        if (Game.HallucinationsTimer.Value != 0)
+        {
+            Game.MsgPrint($"You behold the {new WeightedRandom<string>(Game, Game.FunnyDescriptions).ChooseOrDefault()} visage of {mName}!");
+            if (Game.DieRoll(3) == 1)
             {
-                if (Race.Friends)
-                {
-                    power /= 2;
-                }
+                this.Game.MsgPrint(new WeightedRandom<string>(Game, Game.FunnyComments).ChooseOrDefault());
+                Game.HallucinationsTimer.AddTimer(Game.DieRoll(Race.Level));
             }
-            if (!this.Game.HackMind)
-            {
-                return;
-            }
-            if (!IsVisible)
-            {
-                return;
-            }
-            if (!Race.EldritchHorror)
-            {
-                return;
-            }
-            if (IsPet && Game.DieRoll(8) != 1)
-            {
-                return;
-            }
-            if (Game.DieRoll(power) < Game.SkillSavingThrow)
-            {
-                return;
-            }
-            if (Game.HallucinationsTimer.Value != 0)
-            {
-                this.Game.MsgPrint($"You behold the {new WeightedRandom<string>(Game, Game.FunnyDescriptions).ChooseOrDefault()} visage of {mName}!");
-                if (Game.DieRoll(3) == 1)
-                {
-                    this.Game.MsgPrint(new WeightedRandom<string>(Game, Game.FunnyComments).ChooseOrDefault());
-                    Game.HallucinationsTimer.AddTimer(Game.DieRoll(Race.Level));
-                }
-                return;
-            }
-            this.Game.MsgPrint($"You behold the {new WeightedRandom<string>(Game, Game.HorrificDescriptions).ChooseOrDefault()} visage of {mName}!");
-            Race.Knowledge.Characteristics.EldritchHorror = true;
+            return null;
+        }
+        this.Game.MsgPrint($"You behold the {new WeightedRandom<string>(Game, Game.HorrificDescriptions).ChooseOrDefault()} visage of {mName}!");
+        Race.Knowledge.Characteristics.EldritchHorror = true;
 
-            // Allow the race to resist.
-            int chanceOfSanityBlastImmunity = Game.ComputeIntegerExpression(Game.Race.ChanceOfSanityBlastImmunityExpression).Value;
-            if (Game.DieRoll(100) < chanceOfSanityBlastImmunity)
-            {
-                return;
-            }
-        }
-        if (Game.DieRoll(power) < Game.SkillSavingThrow)
+        // Allow the race to resist.
+        int chanceOfSanityBlastImmunity = Game.ComputeIntegerExpression(Game.Race.ChanceOfSanityBlastImmunityExpression).Value;
+        if (Game.DieRoll(100) < chanceOfSanityBlastImmunity)
         {
-            if (!Game.HasConfusionResistance)
-            {
-                Game.ConfusionTimer.AddTimer(Game.RandomLessThan(4) + 4);
-            }
-            if (!Game.HasChaosResistance && Game.DieRoll(3) == 1)
-            {
-                Game.HallucinationsTimer.AddTimer(Game.RandomLessThan(250) + 150);
-            }
-            return;
+            return null;
         }
-        if (Game.DieRoll(power) < Game.SkillSavingThrow)
-        {
-            Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
-            Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
-            return;
-        }
-        if (Game.DieRoll(power) < Game.SkillSavingThrow)
-        {
-            if (!Game.HasConfusionResistance)
-            {
-                Game.ConfusionTimer.AddTimer(Game.RandomLessThan(4) + 4);
-            }
-            if (!Game.HasFreeAction)
-            {
-                Game.ParalysisTimer.AddTimer(Game.RandomLessThan(4) + 4);
-            }
-            while (Game.RandomLessThan(100) > Game.SkillSavingThrow)
-            {
-                Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
-            }
-            while (Game.RandomLessThan(100) > Game.SkillSavingThrow)
-            {
-                Game.TryDecreasingAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
-            }
-            if (!Game.HasChaosResistance)
-            {
-                Game.HallucinationsTimer.AddTimer(Game.RandomLessThan(250) + 150);
-            }
-            return;
-        }
-        if (Game.DieRoll(power) < Game.SkillSavingThrow)
-        {
-            if (Game.DecreaseAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)), 10, true))
-            {
-                happened = true;
-            }
-            if (Game.DecreaseAbilityScore(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)), 10, true))
-            {
-                happened = true;
-            }
-            if (happened)
-            {
-                this.Game.MsgPrint("You feel much less sane than before.");
-            }
-            return;
-        }
-        if (Game.DieRoll(power) < Game.SkillSavingThrow)
-        {
-            if (this.Game.LoseAllInfo())
-            {
-                this.Game.MsgPrint("You forget everything in your utmost terror!");
-            }
-            return;
-        }
-        this.Game.MsgPrint("The exposure to eldritch forces warps you.");
-        Game.RunScript(nameof(GainMutationScript));
-        this.Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-        this.Game.HandleStuff();
+        return power;
     }
-
     /// <summary>
     /// Have an individual monster take its turn
     /// </summary>
@@ -1500,7 +1422,7 @@ internal class Monster : IItemContainer, IGameSerialize
                 // Implement the attack as a projectile
                 if (pt != null)
                 {
-                    pt.Fire(GetMonsterIndex(), 0, target.MapY, target.MapX, damage, kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
+                    pt.Fire(this, 0, target.MapY, target.MapX, damage, kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
                     // If we touched the target we might get burned or zapped
                     if (method.AttackTouchesTarget)
                     {
@@ -1518,7 +1440,7 @@ internal class Monster : IItemContainer, IGameSerialize
                                 }
                             }
                             Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(FireProjectile));
-                            projectile.Fire(target.GetMonsterIndex(), 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
+                            projectile.Fire(target, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
                         }
                         if (targetRace.LightningAura && !Race.ImmuneLightning)
                         {
@@ -1534,7 +1456,7 @@ internal class Monster : IItemContainer, IGameSerialize
                                 }
                             }
                             Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ElectricityProjectile));
-                            projectile.Fire(target.GetMonsterIndex(), 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
+                            projectile.Fire(target, 0, MapY, MapX, this.Game.DiceRoll(1 + (targetRace.Level / 26), 1 + (targetRace.Level / 17)), kill: true, stop: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
                         }
                     }
                 }
@@ -1803,38 +1725,30 @@ internal class Monster : IItemContainer, IGameSerialize
         List<MonsterSpell> monsterSpells = Race.Spells.ToList();
 
         // Look through the monster list to find a potential target
-        for (int i = 1; i < Game.MonsterMax; i++)
+        foreach (Monster mPtr in Game.MonsterList)
         {
-            int targetIndex = i;
-            Monster target = Game.Monsters[targetIndex];
-            MonsterRace targetRace = target.Race;
+            MonsterRace rPtr = mPtr.Race;
 
-            // Can't cast spells on ourself
-            if (target == this)
-            {
-                continue;
-            }
-
-            // Can't cast spells on empty monster slots
-            if (target.Race == null)
+            // Can't cast spells on ourselves.
+            if (mPtr == this)
             {
                 continue;
             }
 
             // Don't cast spells on monsters from the same team
-            if (IsPet == target.IsPet)
+            if (IsPet == mPtr.IsPet)
             {
                 continue;
             }
 
             // If the target is too far away from the player, don't cast a spell
-            if (target.DistanceFromPlayer > Constants.MaxRange)
+            if (mPtr.DistanceFromPlayer > Constants.MaxRange)
             {
                 continue;
             }
 
             // If we don't have line of sight to the target, don't cast a spell
-            if (!Game.Projectable(MapY, MapX, target.MapY, target.MapX))
+            if (!Game.Projectable(MapY, MapX, mPtr.MapY, mPtr.MapX))
             {
                 continue;
             }
@@ -1854,7 +1768,7 @@ internal class Monster : IItemContainer, IGameSerialize
 
             // If there's nowhere around the target to put a summoned creature, then remove
             // summoning spells
-            if (monsterSpells.Any(_monsterSpell => _monsterSpell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(target.MapY, target.MapX))
+            if (monsterSpells.Any(_monsterSpell => _monsterSpell.SummonsHelp) && !Race.Stupid && !Game.SummonPossible(mPtr.MapY, mPtr.MapX))
             {
                 monsterSpells.RemoveAll(_monsterSpell => _monsterSpell.SummonsHelp);
             }
@@ -1879,7 +1793,7 @@ internal class Monster : IItemContainer, IGameSerialize
             }
 
             bool blind = Game.BlindnessTimer.Value != 0;
-            bool seeTarget = !blind && target.IsVisible;
+            bool seeTarget = !blind && mPtr.IsVisible;
             bool seen = !blind && IsVisible;
             bool seeEither = seen || seeTarget;
 
@@ -1902,19 +1816,19 @@ internal class Monster : IItemContainer, IGameSerialize
             if (message != null)
             {
                 string kinName = Race.Unique ? "minions" : "kin";
-                string targetMonsterName = target.Name;
-                string targetPossessive = target.Name != "it" ? "s" : "'s";
+                string targetMonsterName = mPtr.Name;
+                string targetPossessive = mPtr.Name != "it" ? "s" : "'s";
                 message = String.Format(message, Name, PossessiveName, kinName, targetMonsterName, $"{targetMonsterName}{targetPossessive}");
                 Game.MsgPrint(message);
             }
 
             // Execute the action on the monster.
-            thrownSpell.ExecuteOnMonster(this, target);
+            thrownSpell.ExecuteOnMonster(this, mPtr);
 
             // Spells will wake up the target if it's asleep
             if (thrownSpell.WakesSleepingMonsters)
             {
-                target.SleepLevel = 0;
+                mPtr.SleepLevel = 0;
             }
 
             // If the player saw us cast the spell, let them learn we can do that
@@ -1999,7 +1913,7 @@ internal class Monster : IItemContainer, IGameSerialize
                 // Let the save game know we've died
                 Game.MonsterDeath(this);
                 // Delete us from the monster list
-                Game.DeleteMonsterByIndex(GetMonsterIndex());
+                Game.DeleteMonster(this);
                 fear = false;
                 return;
             }
@@ -2320,14 +2234,13 @@ internal class Monster : IItemContainer, IGameSerialize
                     }
                 }
             }
-            // If we're not done and we have friends make our movement slightly depend on our
-            // index so we spread out and don't block each other
+            // If we're not done and we have friends make our movement slightly random so we spread out and don't block each other
             if (!done && Race.Friends)
             {
+                int random = Game.RandomLessThan(8);
                 for (int i = 0; i < 8; i++)
                 {
-                    int monsterIndex = GetMonsterIndex();
-                    targetLocation = new GridCoordinate(Game.MapX.IntValue + Game.OrderedDirectionXOffset[(monsterIndex + i) & 7], Game.MapY.IntValue + Game.OrderedDirectionYOffset[(monsterIndex + i) & 7]);
+                    targetLocation = new GridCoordinate(Game.MapX.IntValue + Game.OrderedDirectionXOffset[(random + i) & 7], Game.MapY.IntValue + Game.OrderedDirectionYOffset[(random + i) & 7]);
                     // We might have got a '5' meaning stay where we are, so replace that with
                     // moving towards the player
                     if (MapY == targetLocation.Y && MapX == targetLocation.X)
@@ -2781,7 +2694,7 @@ internal class Monster : IItemContainer, IGameSerialize
             return false;
         }
         int playerLevel = Game.ExperienceLevel.IntValue;
-        int monsterLevel = Race.Level + (GetMonsterIndex() & 0x08) + 25;
+        int monsterLevel = Race.Level + Game.RandomLessThan(8) + 25;
         // If we're tougher than the player, don't move away
         if (monsterLevel > playerLevel + 4)
         {
@@ -2800,19 +2713,6 @@ internal class Monster : IItemContainer, IGameSerialize
         int playerHealthFactor = (playerLevel * playerMaxHealth) + (playerHealth << 2);
         int monsterHealthFactor = (monsterLevel * monsterMaxHealth) + (monsterHealth << 2);
         return playerHealthFactor * monsterMaxHealth > monsterHealthFactor * playerMaxHealth;
-    }
-
-    /// <summary>
-    /// Returns the index of this monster in the monster list.  This method is provided for backwards compatability and should NOT be used.  Will be deleted when no longer needed.
-    /// </summary>
-    public int GetMonsterIndex() // TODO: Needs to be removed.
-    {
-        for (int i = 0; i < Game.Monsters.Length; i++)
-        {
-            if (Game.Monsters[i] == this)
-                return i;
-        }
-        throw new Exception("Internal error monster not found for get monster index.");
     }
 
     /// <summary>
@@ -3020,7 +2920,7 @@ internal class Monster : IItemContainer, IGameSerialize
                         if (!Race.ImmuneFire)
                         {
                             Game.MsgPrint($"{monsterName} is suddenly very hot!");
-                            if (Game.DamageMonster(GetMonsterIndex(), this.Game.DiceRoll(2, 6), out fear, " turns into a pile of ash."))
+                            if (Game.DamageMonster(this, Game.DiceRoll(2, 6), out fear, " turns into a pile of ash."))
                             {
                                 blinked = false;
                                 alive = false;
@@ -3040,7 +2940,7 @@ internal class Monster : IItemContainer, IGameSerialize
                         if (!Race.ImmuneLightning)
                         {
                             Game.MsgPrint($"{monsterName} gets zapped!");
-                            if (Game.DamageMonster(GetMonsterIndex(), this.Game.DiceRoll(2, 6), out fear, " turns into a pile of cinder."))
+                            if (Game.DamageMonster(this, Game.DiceRoll(2, 6), out fear, " turns into a pile of cinder."))
                             {
                                 blinked = false;
                                 alive = false;

@@ -10,7 +10,7 @@ internal class WizardBoltItemEffect : ItemEffect
 {
     private WizardBoltItemEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ApplyItem(Item oPtr, int who, int x, int y)
+    protected override bool ApplyItem(Item oPtr, Monster? monster, int x, int y)
     {
         bool obvious = false;
         bool plural = false;
@@ -43,19 +43,10 @@ internal class WizardBoltItemEffect : ItemEffect
             Game.DeleteObject(oPtr);
             if (isPotion)
             {
-                oPtr.Smash(who, y, x);
+                oPtr.Smash(monster, y, x);
             }
             Game.ConsoleView.RefreshMapLocation(y, x);
         }
         return obvious;
     }
 }
-
-//internal class ItemEffect : ItemEffect
-//{
-//    private ItemEffect(Game game) : base(game) { } // This object is a singleton.
-
-//    public override bool Apply(int who, int y, int x)
-//    {
-//    }
-//}

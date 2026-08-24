@@ -15,14 +15,9 @@ internal class WarningRandomMutationScript : UniversalScript, IGetKey
             return;
         }
         int dangerAmount = 0;
-        for (int monster = 0; monster < Game.MonsterMax; monster++)
+        foreach (Monster mPtr in Game.MonsterList)
         {
-            Monster mPtr = Game.Monsters[monster];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             if (rPtr.Level >= Game.ExperienceLevel.IntValue)
             {
                 dangerAmount += rPtr.Level - Game.ExperienceLevel.IntValue + 1;

@@ -174,7 +174,7 @@ internal class FireItemScript : UniversalScript, IGetKey
                     {
                         shotDamage = 0;
                     }
-                    if (Game.DamageMonster(tile.Monster.GetMonsterIndex(), shotDamage, out bool fear, noteDies))
+                    if (Game.DamageMonster(tile.Monster, shotDamage, out bool fear, noteDies))
                     {
                         // The monster is dead, so don't add further statuses or messages
                     }
