@@ -24,7 +24,7 @@ internal class BanishMutationScript : UniversalScript, IGetKey
         MonsterRace rPtr = mPtr.Race;
         if (rPtr.Evil)
         {
-            Game.DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex(), true);
+            Game.DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex());
             Game.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
         }
         else

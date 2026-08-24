@@ -79,7 +79,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
             {
                 bool sad = mPtr.IsPet && !mPtr.IsVisible;
                 Game.MonsterDeath(mPtr);
-                Game.DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex(), true);
+                Game.DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex());
                 if (string.IsNullOrEmpty(note) == false)
                 {
                     Game.MsgPrint($"{mName}{note}");

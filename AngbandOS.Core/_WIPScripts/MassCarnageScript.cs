@@ -42,7 +42,7 @@ internal class MassCarnageScript : Script, IScriptBool, IScript, ICastSpellScrip
             {
                 continue;
             }
-            Game.DeleteMonsterByIndex(i, true);
+            Game.DeleteMonsterByIndex(i);
             if (playerCast)
             {
                 Game.TakeHit(Game.DieRoll(3), "the strain of casting Mass Carnage");

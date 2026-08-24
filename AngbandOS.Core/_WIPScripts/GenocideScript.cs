@@ -39,7 +39,7 @@ internal class GenocideScript : Script, IScript, ICastSpellScript, IScriptBool, 
             {
                 continue;
             }
-            Game.DeleteMonsterByIndex(i, true);
+            Game.DeleteMonsterByIndex(i);
             if (playerCast) // TODO: Move this to the caller
             {
                 Game.TakeHit(Game.DieRoll(4), "the strain of casting Carnage");

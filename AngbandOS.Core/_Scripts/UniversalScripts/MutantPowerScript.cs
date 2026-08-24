@@ -189,7 +189,7 @@ internal class MutantPowerScript : UniversalScript, IGetKey
                     }
                     if (deleteThis)
                     {
-                        Game.DeleteMonsterByIndex(petCtr, true);
+                        Game.DeleteMonsterByIndex(petCtr);
                         dismissed++;
                     }
                 }

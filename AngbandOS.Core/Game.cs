@@ -1797,6 +1797,61 @@ internal partial class Game : IGameSerialize
     public Monster[] Monsters; // TODO: make this a list
     public int MCnt;
     public int MonsterMax = 1; // This is the current number of monsters.  Monster[0] is the player.
+    private int MPop()
+    {
+        int i;
+        if (MonsterMax < Constants.MaxMIdx)
+        {
+            i = MonsterMax;
+            MonsterMax++;
+            MCnt++;
+            return i;
+        }
+        for (i = 1; i < MonsterMax; i++)
+        {
+            Monster mPtr = Monsters[i];
+            if (mPtr.Race != null)
+            {
+                continue;
+            }
+            MCnt++;
+            return i;
+        }
+        MsgPrint("Too many monsters!");
+        return 0;
+    }
+
+    public void DeleteMonsterByIndex(int i)
+    {
+        Monster mPtr = Monsters[i];
+        MonsterRace rPtr = mPtr.Race;
+        if (rPtr == null)
+        {
+            return;
+        }
+        int y = mPtr.MapY;
+        int x = mPtr.MapX;
+        rPtr.CurNum--;
+        if (rPtr.Multiply)
+        {
+            NumRepro--;
+        }
+
+        // Check to see if this is the monster the player is tracking so that we can stop tracking the monster.
+        if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
+        {
+            TargetWho = null;
+        }
+        if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
+        {
+            TrackMonsterHealth(null);
+        }
+        Grid[y][x].Monster = null;
+        mPtr.Items.Clear();
+        Monsters[i] = new Monster(this);
+        MCnt--;
+        ConsoleView.RefreshMapLocation(y, x);
+    }
 
     private const int _maxQuests = 50;
 
@@ -8535,7 +8590,7 @@ internal partial class Game : IGameSerialize
                         if (newRaceIndex != monster.Race.Index)
                         {
                             MsgPrint($"{monsterName} changes!");
-                            DeleteMonsterByIndex(tile.Monster.GetMonsterIndex(), true);
+                            DeleteMonsterByIndex(tile.Monster.GetMonsterIndex());
                             MonsterRace newRace = SingletonRepository.Get<MonsterRace>(newRaceIndex);
                             PlaceOneMonsterByRace(y, x, newRace, false, false, false);
                             monster = tile.Monster;
@@ -13421,7 +13476,7 @@ internal partial class Game : IGameSerialize
         GridTile cPtr = Grid[y][x];
         if (cPtr.Monster is not null)
         {
-            DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex(), true);
+            DeleteMonsterByIndex(cPtr.Monster.GetMonsterIndex());
         }
     }
 
@@ -14579,7 +14634,7 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                DeleteMonsterByIndex(i, true);
+                DeleteMonsterByIndex(i);
                 num++;
             }
         }
@@ -14695,7 +14750,7 @@ internal partial class Game : IGameSerialize
                     rPtr.Knowledge.RTkills++;
                 }
             }
-            DeleteMonsterByIndex(mIdx, true);
+            DeleteMonsterByIndex(mIdx);
             fear = false;
             return true;
         }
@@ -14722,41 +14777,6 @@ internal partial class Game : IGameSerialize
             }
         }
         return false;
-    }
-
-    public void DeleteMonsterByIndex(int i, bool visibly)
-    {
-        Monster mPtr = Monsters[i];
-        MonsterRace rPtr = mPtr.Race;
-        if (rPtr == null)
-        {
-            return;
-        }
-        int y = mPtr.MapY;
-        int x = mPtr.MapX;
-        rPtr.CurNum--;
-        if (rPtr.Multiply)
-        {
-            NumRepro--;
-        }
-
-        // Check to see if this is the monster the player is tracking so that we can stop tracking the monster.
-        if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
-        {
-            TargetWho = null;
-        }
-        if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
-        {
-            TrackMonsterHealth(null);
-        }
-        Grid[y][x].Monster = null;
-        mPtr.Items.Clear();
-        Monsters[i] = new Monster(this);
-        MCnt--;
-        if (visibly)
-        {
-            ConsoleView.RefreshMapLocation(y, x);
-        }
     }
 
     /// <summary>
@@ -15645,30 +15665,6 @@ internal partial class Game : IGameSerialize
         }
         Monsters[i2] = Monsters[i1];
         Monsters[i1] = new Monster(this);
-    }
-
-    private int MPop()
-    {
-        int i;
-        if (MonsterMax < Constants.MaxMIdx)
-        {
-            i = MonsterMax;
-            MonsterMax++;
-            MCnt++;
-            return i;
-        }
-        for (i = 1; i < MonsterMax; i++)
-        {
-            Monster mPtr = Monsters[i];
-            if (mPtr.Race != null)
-            {
-                continue;
-            }
-            MCnt++;
-            return i;
-        }
-        MsgPrint("Too many monsters!");
-        return 0;
     }
 
     public static bool ValidateTupleSorting<T>(T[] items, Func<T, T, bool> testPredicate)

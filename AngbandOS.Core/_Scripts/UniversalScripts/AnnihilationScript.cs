@@ -43,7 +43,7 @@ internal class AnnihilationScript : UniversalScript, IGetKey
             {
                 continue;
             }
-            Game.DeleteMonsterByIndex(i, true);
+            Game.DeleteMonsterByIndex(i);
             Game.TakeHit(Game.DieRoll(4), "the strain of casting Annihilation");
             Game.Mana.IntValue++;
             Game.ConsoleView.MoveCursorTo(Game.MapY.IntValue, Game.MapX.IntValue);

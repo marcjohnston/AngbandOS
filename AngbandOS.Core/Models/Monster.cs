@@ -1999,7 +1999,7 @@ internal class Monster : IItemContainer, IGameSerialize
                 // Let the save game know we've died
                 Game.MonsterDeath(this);
                 // Delete us from the monster list
-                Game.DeleteMonsterByIndex(GetMonsterIndex(), true);
+                Game.DeleteMonsterByIndex(GetMonsterIndex());
                 fear = false;
                 return;
             }

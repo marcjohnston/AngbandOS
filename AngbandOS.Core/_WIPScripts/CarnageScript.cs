@@ -35,7 +35,7 @@ internal class CarnageScript : Script, IScript, ICastSpellScript
             }
             if (mPtr.DistanceFromPlayer <= Constants.MaxSight)
             {
-                Game.DeleteMonsterByIndex(i, true);
+                Game.DeleteMonsterByIndex(i);
             }
         }
     }
