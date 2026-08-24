@@ -530,8 +530,9 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                 // Check to see if the projectile can affect the player.
                 if (x == Game.MapX.IntValue && y == Game.MapY.IntValue && who != 0)
                 {
+                    Monster monster = Game.Monsters[who];
                     // Check to see if the projectile attack bounces off the player.
-                    if (!CheckBounceOffPlayer(who, dam, rad))
+                    if (!CheckBounceOffPlayer(monster, dam, rad))
                     {
                         // Allow the projectile to perform any effects on the player.
                         if (PlayerEffect.ApplyEffect(who, dist, y, x, dam, rad) == IdentifiedResultEnum.True)
@@ -554,11 +555,11 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
     /// <summary>
     /// Performs a reflection test of the projectile on the player and returns true, if the projectile is reflected.
     /// </summary>
-    /// <param name="who"></param>
+    /// <param name="monsterIndex"></param>
     /// <param name="dam"></param>
     /// <param name="aRad"></param>
     /// <returns></returns>
-    private bool CheckBounceOffPlayer(int who, int dam, int aRad)
+    private bool CheckBounceOffPlayer(Monster monster, int dam, int aRad)
     {
         if (Game.HasReflection && aRad == 0 && Game.DieRoll(10) != 1)
         {
@@ -570,14 +571,14 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
             int maxAttempts = 10;
             do
             {
-                tY = Game.Monsters[who].MapY - 1 + Game.DieRoll(3);
-                tX = Game.Monsters[who].MapX - 1 + Game.DieRoll(3);
+                tY = monster.MapY - 1 + Game.DieRoll(3);
+                tX = monster.MapX - 1 + Game.DieRoll(3);
                 maxAttempts--;
             } while (maxAttempts > 0 && Game.InBounds2(tY, tX) && !Game.GridTileIsVisible(tY, tX));
             if (maxAttempts < 1)
             {
-                tY = Game.Monsters[who].MapY;
-                tX = Game.Monsters[who].MapX;
+                tY = monster.MapY;
+                tX = monster.MapX;
             }
             Fire(0, 0, tY, tX, dam, stop: true, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
             Game.Disturb(true);
