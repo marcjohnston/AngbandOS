@@ -13210,17 +13210,6 @@ internal partial class Game : IGameSerialize
         oPtr.ItemOptimize();
     }
 
-    [Obsolete("Use InvenDrop(Item, int)")]
-    public void InvenDrop(int item, int amt)
-    {
-        Item? oPtr = GetInventoryItem(item);
-        if (oPtr == null)
-        {
-            return;
-        }
-        InvenDrop(oPtr, amt);
-    }
-
     public void InvenItemDescribe(int item)
     {
         Item? oPtr = GetInventoryItem(item);

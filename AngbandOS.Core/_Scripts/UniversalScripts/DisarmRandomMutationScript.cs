@@ -23,7 +23,11 @@ internal class DisarmRandomMutationScript : UniversalScript, IGetKey
         {
             return;
         }
-        Game.MsgPrint("You drop your weapon!");
-        Game.InvenDrop(InventorySlotEnum.MeleeWeapon, 1);
+        Item? item = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
+        if (item is not null)
+        {
+            Game.MsgPrint("You drop your weapon!");
+            Game.InvenDrop(item, 1);
+        }
     }
 }
