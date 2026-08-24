@@ -91,7 +91,7 @@ internal class Monster : IItemContainer, IGameSerialize
     public bool SmResSound = false;
     #endregion
 
-    public MonsterRace? Race = null;
+    public MonsterRace Race = null;
 
     /// <summary>
     /// Returns the how deep a monster is sleeping.
