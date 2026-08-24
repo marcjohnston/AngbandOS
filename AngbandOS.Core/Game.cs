@@ -939,6 +939,55 @@ internal partial class Game : IGameSerialize
                 UpdateScreen();
             }
         }
+        
+        void ReplacePets(int y, int x, List<Monster> petList)
+        {
+            void ReplacePet(int y1, int x1, Monster monster)
+            {
+                int i;
+                int x = x1;
+                int y = y1;
+                for (i = 0; i < 20; ++i)
+                {
+                    int d = (i / 15) + 1;
+                    (y, x) = Scatter(y1, x1, d);
+                    if (!GridPassableNoCreature(y, x))
+                    {
+                        continue;
+                    }
+                    if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
+                    {
+                        continue;
+                    }
+                    break;
+                }
+                if (i == 20)
+                {
+                    MsgPrint($"You lose sight of {monster.Name}.");
+                    return;
+                }
+                GridTile cPtr = Grid[y][x];
+                int monsterIndex = MPop();
+                Monsters[monsterIndex] = monster;
+                cPtr.Monster = Monsters[monsterIndex];
+                monster.MapY = y;
+                monster.MapX = x;
+                MonsterRace rPtr = monster.Race;
+                if (rPtr.Multiply)
+                {
+                    NumRepro++;
+                }
+                if (rPtr.AttrMulti)
+                {
+                    ShimmerMonsters = true;
+                }
+            }
+
+            foreach (Monster monster in petList)
+            {
+                ReplacePet(y, x, monster);
+            }
+        }
 
         ConsoleViewPort = consoleViewPort;
         Shutdown = false;
@@ -1013,6 +1062,8 @@ internal partial class Game : IGameSerialize
                 break;
             }
             DungeonGenerator.GenerateNewLevel();
+
+            // Place our pets into the monster list.
             ReplacePets(MapY.IntValue, MapX.IntValue, _petList);
         }
 
@@ -14124,14 +14175,6 @@ internal partial class Game : IGameSerialize
         return false;
     }
 
-    public void ReplacePets(int y, int x, List<Monster> petList)
-    {
-        foreach (Monster monster in petList)
-        {
-            ReplacePet(y, x, monster);
-        }
-    }
-
     public void ReplaceSecretDoor(int y, int x)
     {
         WeightedRandom<Tile> doorTiles = new WeightedRandom<Tile>(this);
@@ -15322,52 +15365,6 @@ internal partial class Game : IGameSerialize
             ShimmerMonsters = true;
         }
         return mPtr;
-    }
-
-    public void ReplacePet(int y1, int x1, Monster monster)
-    {
-        int i;
-        int x = x1;
-        int y = y1;
-        for (i = 0; i < 20; ++i)
-        {
-            int d = (i / 15) + 1;
-            (y, x) = Scatter(y1, x1, d);
-            if (!GridPassableNoCreature(y, x))
-            {
-                continue;
-            }
-            if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
-            {
-                continue;
-            }
-            break;
-        }
-        if (i == 20)
-        {
-            MsgPrint($"You lose sight of {monster.Name}.");
-            return;
-        }
-        GridTile cPtr = Grid[y][x];
-        int monsterIndex = MPop();
-        cPtr.Monster = Monsters[monsterIndex];
-        if (cPtr.Monster is null)
-        {
-            MsgPrint($"You lose sight of {monster.Name}.");
-            return;
-        }
-        Monsters[monsterIndex] = monster;
-        monster.MapY = y;
-        monster.MapX = x;
-        MonsterRace rPtr = monster.Race;
-        if (rPtr.Multiply)
-        {
-            NumRepro++;
-        }
-        if (rPtr.AttrMulti)
-        {
-            ShimmerMonsters = true;
-        }
     }
 
     /// <summary>
