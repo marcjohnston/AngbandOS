@@ -6822,9 +6822,8 @@ internal partial class Game : IGameSerialize
 
     public void Probing()
     {
-        void LoreDoProbe(int mIdx)
+        void LoreDoProbe(Monster mPtr)
         {
-            Monster mPtr = Monsters[mIdx];
             MonsterRace rPtr = mPtr.Race;
             var knowledge = rPtr.Knowledge;
             for (var m = 0; m < rPtr.Attacks.Length; m++)
@@ -6878,7 +6877,7 @@ internal partial class Game : IGameSerialize
                 }
                 string mName = mPtr.IndefiniteWhenHiddenName;
                 MsgPrint($"{mName} has {mPtr.Health} hit points.");
-                LoreDoProbe(i);
+                LoreDoProbe(mPtr);
                 probe = true;
             }
         }
