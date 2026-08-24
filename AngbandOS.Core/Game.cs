@@ -8287,11 +8287,10 @@ internal partial class Game : IGameSerialize
         /// <param name="mutation"> The mutation being used to attack </param>
         /// <param name="fear"> Whether or not the monster is scared by the attack </param>
         /// <param name="monsterDies"> Whether or not the monster is killed by the attack </param>
-        void PlayerNaturalAttackOnMonster(int monsterIndex, Mutation mutation, out bool fear, out bool monsterDies)
+        void PlayerNaturalAttackOnMonster(Monster monster, Mutation mutation, out bool fear, out bool monsterDies)
         {
             fear = false;
             monsterDies = false;
-            Monster monster = Monsters[monsterIndex];
             MonsterRace race = monster.Race;
             int damageSides = mutation.DamageDiceSize;
             int damageDice = mutation.DamageDiceNumber;
@@ -8325,7 +8324,7 @@ internal partial class Game : IGameSerialize
                 switch (mutation.MutationAttackType)
                 {
                     case MutationAttackTypeEnum.Physical:
-                        monsterDies = DamageMonster(monsterIndex, damage, out fear, "");
+                        monsterDies = DamageMonster(monster.GetMonsterIndex(), damage, out fear, "");
                         break;
 
                     case MutationAttackTypeEnum.Poison:
@@ -8667,7 +8666,7 @@ internal partial class Game : IGameSerialize
         {
             if (!noExtra && tile.Monster is not null)
             {
-                PlayerNaturalAttackOnMonster(tile.Monster.GetMonsterIndex(), naturalAttack, out fear, out noExtra);
+                PlayerNaturalAttackOnMonster(tile.Monster, naturalAttack, out fear, out noExtra);
             }
         }
         if (fear && monster.IsVisible && !noExtra)
