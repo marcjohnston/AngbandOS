@@ -194,6 +194,15 @@ internal partial class Game : IGameSerialize
     public Timer StoneskinTimer { get; private set; }
     public Timer StunTimer { get; private set; }
     public Timer TelepathyTimer { get; private set; }
+    public Tile DownStaircaseTile { get; private set; }
+
+    public Tile UpStaircaseTile { get; private set; }
+
+    public Tile GrassTile { get; private set; }
+
+    public Tile RockTile { get; private set; }
+
+    public Tile WaterTile { get; private set; }
     #endregion
 
     /// <summary>
@@ -11252,16 +11261,6 @@ internal partial class Game : IGameSerialize
             s = s.Substring(n).Trim();
         }
     }
-
-    public Tile DownStaircaseTile { get; }
-
-    public Tile UpStaircaseTile { get; }
-
-    public Tile GrassTile { get; }
-
-    public Tile RockTile { get; }
-
-    public Tile WaterTile { get; }
 
     public void PlaceRandomDoor(int y, int x)
     {
