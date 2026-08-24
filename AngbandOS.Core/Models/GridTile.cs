@@ -40,7 +40,7 @@ internal class GridTile : IItemContainer, IGameSerialize
             ("bools", saveGameState.CreateGameStateBag(EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag)),
             (nameof(_trapsDetected), saveGameState.CreateGameStateBag(_trapsDetected)),
             (nameof(Items), saveGameState.CreateDerivedGameStateBag(Items, typeof(Item))),
-            (nameof(Monster), saveGameState.CreateDerivedGameStateBag(Monster)),
+            (nameof(Monster), saveGameState.CreateDerivedGameStateBag(Monster, typeof(Monster))),
             (nameof(ScentAge), saveGameState.CreateGameStateBag(ScentAge)),
             (nameof(ScentStrength), saveGameState.CreateGameStateBag(ScentStrength)),
             (nameof(_backgroundFeature), saveGameState.CreateDerivedGameStateBag(_backgroundFeature, typeof(Tile))),
@@ -53,7 +53,7 @@ internal class GridTile : IItemContainer, IGameSerialize
         (EasyVisibility, InRoom, InVault, IsVisible, PlayerLit, PlayerMemorized, SelfLit, TempFlag) = restoreGameState.GetByKey(nameof(TempFlag)).Get8Bools();
         _trapsDetected = restoreGameState.GetByKey(nameof(_trapsDetected)).GetBool();
         Items = restoreGameState.GetByKey(nameof(Items)).GetDerivedReferences<Item>(_restoreGameState => new Item(game, _restoreGameState)).ToList();
-        Monster = restoreGameState.GetByKey(nameof(Monster)).GetDerivedReference<Monster>(_restoreGameState => new Monster(Game, _restoreGameState));
+        Monster = restoreGameState.GetByKey(nameof(Monster)).GetDerivedReferenceOrDefault<Monster>(_restoreGameState => new Monster(Game, _restoreGameState));
         ScentAge = restoreGameState.GetByKey(nameof(ScentAge)).GetInt();
         ScentStrength = restoreGameState.GetByKey(nameof(ScentStrength)).GetInt();
         _backgroundFeature = restoreGameState.GetByKey(nameof(_backgroundFeature)).GetDerivedReference<Tile>();
