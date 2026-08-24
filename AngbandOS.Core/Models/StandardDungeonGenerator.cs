@@ -538,7 +538,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     break;
                 }
             }
-        } while (!Game.PlaceOneMonsterByRace(y, x, rPtr, false, false, false));
+        } while (Game.PlaceOneMonsterByRace(y, x, rPtr, false, false, false) is null);
     }
 
     private void PlaceRubble(int y, int x)

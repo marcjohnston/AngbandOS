@@ -369,7 +369,6 @@ internal partial class Game : IGameSerialize
             (nameof(DunBias), saveGameState.CreateGameStateBag(DunBias)),
             (nameof(NumRepro), saveGameState.CreateGameStateBag(NumRepro)),
             (nameof(Monsters), saveGameState.CreateDerivedGameStateBag(Monsters, typeof(Monster))),
-            (nameof(_hackMIdxIi), saveGameState.CreateGameStateBag(_hackMIdxIi)),
             (nameof(MessageLog), saveGameState.CreateDerivedGameStateBag(MessageLog, typeof(GameMessage))),
             (nameof(RecentMessages), saveGameState.CreateDerivedGameStateBag(RecentMessages, typeof(GameMessage))),
             (nameof(PreviousMessages), saveGameState.CreateDerivedGameStateBag(PreviousMessages, typeof(GameMessage))),
@@ -648,7 +647,6 @@ internal partial class Game : IGameSerialize
             DunBias = restoreGameState.GetByKey(nameof(DunBias)).GetReferenceOrDefault<MonsterRaceFilter>();
             NumRepro = restoreGameState.GetByKey(nameof(NumRepro)).GetInt();
             Monsters = restoreGameState.GetByKey(nameof(Monsters)).GetDerivedReferences<Monster>(_restoreGameState => new Monster(this, _restoreGameState)).ToArray();
-            _hackMIdxIi = restoreGameState.GetByKey(nameof(_hackMIdxIi)).GetInt();
             MessageLog = restoreGameState.GetByKey(nameof(MessageLog)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToList();
             RecentMessages = restoreGameState.GetByKey(nameof(RecentMessages)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToList();
             PreviousMessages = restoreGameState.GetByKey(nameof(PreviousMessages)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToArray();
@@ -14476,18 +14474,19 @@ internal partial class Game : IGameSerialize
             return false;
         }
         attempts = 1000;
+        Monster? mPtr = null;
         while (--attempts == 0)
         {
-            if (PlaceOneMonsterByRace(y, x, rPtr, false, false, false))
+            mPtr = PlaceOneMonsterByRace(y, x, rPtr, false, false, false);
+            if (mPtr is not null)
             {
                 break;
             }
         }
-        if (attempts < 1)
+        if (mPtr is null)
         {
             return false;
         }
-        Monster mPtr = Monsters[_hackMIdxIi];
         for (attempts = DieRoll(10) + 5; attempts != 0; attempts--)
         {
             SummonSpecific(mPtr.MapY, mPtr.MapX, Difficulty, new KinSystemMonsterRaceFilter(this, rPtr.Symbol.Character), true, false);
@@ -15023,7 +15022,7 @@ internal partial class Game : IGameSerialize
 
     public bool MultiplyMonster(Monster mPtr, bool makePet, bool clone, bool newlySpawnedSkipFirstTurn)
     {
-        bool result = false;
+        Monster? monster = null;
         for (int i = 0; i < 18; i++)
         {
             int d = 1;
@@ -15032,16 +15031,19 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            result = PlaceOneMonsterByRace(y, x, mPtr.Race, false, makePet, newlySpawnedSkipFirstTurn);
+            monster = PlaceOneMonsterByRace(y, x, mPtr.Race, false, makePet, newlySpawnedSkipFirstTurn);
             break;
         }
-        if (clone && result)
+        if (monster is null)
         {
-            Monsters[_hackMIdxIi].SmCloned = true;
+            return false;
+        }
+        if (clone && monster is not null)
+        {
+            monster.SmCloned = true;
         }
         mPtr.Generation++;
-        Monsters[_hackMIdxIi].Generation = mPtr.Generation; // TODO: This should be needed ... it is a self assignment
-        return result;
+        return true;
     }
 
     public bool PlaceLevelMonster(int y, int x, bool spawnAsleep)
@@ -15059,7 +15061,8 @@ internal partial class Game : IGameSerialize
     }
     public bool PlaceGroupOfMonstersByRace(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool skipFirstTurn)
     {
-        if (!PlaceOneMonsterByRace(y, x, rPtr, spawnAsleep, makePet, skipFirstTurn))
+        Monster? monster = PlaceOneMonsterByRace(y, x, rPtr, spawnAsleep, makePet, skipFirstTurn);
+        if (monster is null)
         {
             return false;
         }
@@ -15071,12 +15074,12 @@ internal partial class Game : IGameSerialize
         return true;
     }
 
-    public bool PlaceOneMonsterByRace(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool skipFirstTurn)
+    public Monster? PlaceOneMonsterByRace(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool skipFirstTurn)
     {
         Monster? monsterPlaced = PlaceOneMonster(y, x, rPtr, spawnAsleep, makePet, skipFirstTurn);
         if (monsterPlaced is null)
         {
-            return false;
+            return null;
         }
         if (rPtr.Escorted)
         {
@@ -15101,7 +15104,7 @@ internal partial class Game : IGameSerialize
                 }
             }
         }
-        return true;
+        return monsterPlaced;
     }
 
     private void PlaceGroupOfMonstersByRace(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet)
@@ -15244,8 +15247,7 @@ internal partial class Game : IGameSerialize
             }
         }
         GridTile cPtr = Grid[y][x];
-        _hackMIdxIi = MPop(); 
-        cPtr.Monster = Monsters[_hackMIdxIi];
+        cPtr.Monster = Monsters[MPop()];
         if (cPtr.Monster is null)
         {
             return null;
@@ -15396,7 +15398,8 @@ internal partial class Game : IGameSerialize
         }
         else
         {
-            if (!PlaceOneMonsterByRace(y, x, monsterRace, false, pet, false))
+            Monster? monster = PlaceOneMonsterByRace(y, x, monsterRace, false, pet, false);
+            if (monster is null)
             {
                 return false;
             }
