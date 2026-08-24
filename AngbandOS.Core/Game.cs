@@ -14877,19 +14877,6 @@ internal partial class Game : IGameSerialize
         return monsterRace;
     }
 
-    public Monster[] GetPets()
-    {
-        List<Monster> list = new List<Monster>();
-        foreach (Monster monster in MonsterList)
-        {
-            if (monster.IsPet)
-            {
-                list.Add(monster);
-            }
-        }
-        return list.ToArray();
-    }
-
     public void MessagePain(Monster mPtr, int dam)
     {
         MonsterRace rPtr = mPtr.Race;
