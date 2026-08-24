@@ -1797,7 +1797,6 @@ internal partial class Game : IGameSerialize
     /// Returns a fixed array of monsters.  All items in the array are pre-instantiates instances of the Monster class.  A dead or no-monster is when Monster.Race==null.
     /// </summary>
     public Monster[] Monsters; // TODO: make this a list
-    private int _hackMIdxIi;
 
     private const int _maxQuests = 50;
 
