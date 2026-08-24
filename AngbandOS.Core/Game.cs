@@ -305,7 +305,6 @@ internal partial class Game : IGameSerialize
             (nameof(TargetWho), saveGameState.CreateDerivedGameStateBag(TargetWho, typeof(Target))),
             (nameof(TotalFriendLevels), saveGameState.CreateGameStateBag(TotalFriendLevels)),
             (nameof(TotalFriends), saveGameState.CreateGameStateBag(TotalFriends)),
-            (nameof(_petList ), saveGameState.CreateDerivedGameStateBag(_petList, typeof(Monster))),
             (nameof(_seedFlavor), saveGameState.CreateGameStateBag(_seedFlavor)),
             (nameof(ExPlayer), saveGameState.CreateDerivedGameStateBag(ExPlayer, typeof(ExPlayer))),
             (nameof(LevelOfFirstSpell), saveGameState.CreateGameStateBag(LevelOfFirstSpell)),
@@ -583,7 +582,6 @@ internal partial class Game : IGameSerialize
             TargetWho = restoreGameState.GetByKey(nameof(TargetWho)).GetDerivedReferenceOrDefault<Target>();
             TotalFriendLevels = restoreGameState.GetByKey(nameof(TotalFriendLevels)).GetInt();
             TotalFriends = restoreGameState.GetByKey(nameof(TotalFriends)).GetInt();
-            _petList = restoreGameState.GetByKey(nameof(_petList)).GetDerivedReferences<Monster>(_restoreGameState => new Monster(this, _restoreGameState)).ToList();
             _seedFlavor = restoreGameState.GetByKey(nameof(_seedFlavor)).GetInt();
             ExPlayer = restoreGameState.GetByKey(nameof(ExPlayer)).GetDerivedReferenceOrDefault<ExPlayer>(_restoreGameState => new ExPlayer(this, _restoreGameState));
             LevelOfFirstSpell = restoreGameState.GetByKey(nameof(LevelOfFirstSpell)).GetNullableInt();
@@ -667,12 +665,6 @@ internal partial class Game : IGameSerialize
         #endregion
 
         #region Post-game load non-serialized initialization - Initialization that depends on the loaded data.  All non-serialized fields are initialized here.
-        DownStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsDownStaircase);
-        UpStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsUpStaircase);
-        GrassTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsGrass);
-        RockTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsRock);
-        WaterTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsWater);
-
         // We can now add all of the global expression providers for runtime.
         BuildGlobalExpressionProviders();
 
@@ -685,6 +677,12 @@ internal partial class Game : IGameSerialize
         StartupTown = SingletonRepository.GetNullable<Town>(gameConfiguration.StartupTownName);
         GoldFactories = SingletonRepository.GetNullable<ItemFactory>(gameConfiguration.GoldFactoriesBindingKeys);
         GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression ?? "1/20");
+
+        DownStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsDownStaircase);
+        UpStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsUpStaircase);
+        GrassTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsGrass);
+        RockTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsRock);
+        WaterTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsWater);
 
         GameTickEvents = SingletonRepository.GetNullable<IScript>(gameConfiguration.GameTickEventBindingKeys);
         RequiredExperiencePerLevel = gameConfiguration.RequiredExperiencePerLevel;
@@ -940,7 +938,7 @@ internal partial class Game : IGameSerialize
             }
         }
         
-        void ReplacePets(int y, int x, List<Monster> petList)
+        void ReplacePets(int y, int x)
         {
             void ReplacePet(int y1, int x1, Monster monster)
             {
@@ -983,9 +981,18 @@ internal partial class Game : IGameSerialize
                 }
             }
 
-            foreach (Monster monster in petList)
+            for (int i = 1; i < MonsterMax; i++)
             {
-                ReplacePet(y, x, monster);
+                Monster mPtr = Monsters[i];
+                if (mPtr.Race is null)
+                {
+                    continue;
+                }
+                if (!mPtr.IsPet)
+                {
+                    continue;
+                }
+                ReplacePet(y, x, mPtr);
             }
         }
 
@@ -1050,7 +1057,6 @@ internal partial class Game : IGameSerialize
             {
                 break;
             }
-            _petList = GetPets();
             WipeMList();
             MsgPrint(string.Empty);
             if (IsDead)
@@ -1064,7 +1070,7 @@ internal partial class Game : IGameSerialize
             DungeonGenerator.GenerateNewLevel();
 
             // Place our pets into the monster list.
-            ReplacePets(MapY.IntValue, MapX.IntValue, _petList);
+            ReplacePets(MapY.IntValue, MapX.IntValue);
         }
 
         ConsoleViewPort.GameStopped();
@@ -1523,7 +1529,6 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public bool ViewingItemList;
 
-    private List<Monster> _petList = new List<Monster>();
     private int _seedFlavor;
     public const int HurtChance = 16;
 
@@ -14953,7 +14958,7 @@ internal partial class Game : IGameSerialize
         return monsterRace;
     }
 
-    public List<Monster> GetPets()
+    public Monster[] GetPets()
     {
         List<Monster> list = new List<Monster>();
         foreach (Monster monster in Monsters)
@@ -14963,7 +14968,7 @@ internal partial class Game : IGameSerialize
                 list.Add(monster);
             }
         }
-        return list;
+        return list.ToArray();
     }
 
     public void MessagePain(Monster mPtr, int dam)
