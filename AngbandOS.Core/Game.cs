@@ -1152,7 +1152,7 @@ internal class Game : IGameSerialize
         MutationsNotPossessed.Remove(mutation);
 
         // Mutations that belong to a group, can only be possessed one at a time.  If the player gains a mutation that belongs to a group, then all other mutations in that group are lost.
-        if (MutationsPossessed.Count > 0 && mutation.Group != MutationGroupEnum.None)
+        if (MutationsPossessed.Count > 0 && mutation.Group is not null)
         {
             // Enumerate all of the mutations to remove others in the same group.
             int i = 0;

@@ -122,9 +122,9 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     public abstract string GainMessage { get; }
 
     /// <summary>
-    /// Returns the mutation group that this mutation belongs to.  This property is used to determine which mutations can be gained together.  Mutations that belong to the same group cannot be gained together.  If a mutation does not belong to any group, this property returns <see cref="MutationGroupEnum.None"/>.
+    /// Returns the mutation group that this mutation belongs to.  This property is used to group mutations into mutually exclusive groups.  Only one-mutation per group is allowed.  Returns, null; if the mutation doesn't belong to a group and can be gained independently.
     /// </summary>
-    public virtual MutationGroupEnum Group => MutationGroupEnum.None;
+    public virtual string? Group => null;
 
     public abstract string HaveMessage { get; }
     public abstract string LoseMessage { get; }

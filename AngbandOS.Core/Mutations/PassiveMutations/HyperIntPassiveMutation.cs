@@ -13,7 +13,7 @@ internal class HyperIntPassiveMutation : Mutation
     public override string GainMessage => "Your brain evolves into a living computer!";
     public override string HaveMessage => "Your brain is a living computer (+4 INT/WIS).";
     public override string LoseMessage => "Your brain reverts to normal.";
-    public override MutationGroupEnum Group => MutationGroupEnum.Smarts;
+    public override string Group => "Smarts";
     public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(HyperIntPassiveMutationItemEnhancement)) };
     public override string Title => "Hyper Intelligence (P)";
 }

@@ -13,7 +13,7 @@ internal class FearlessPassiveMutation : Mutation
     public override string GainMessage => "You become completely fearless.";
     public override string HaveMessage => "You are completely fearless.";
     public override string LoseMessage => "You begin to feel fear again.";
-    public override MutationGroupEnum Group => MutationGroupEnum.Bravery;
+    public override string Group => "Bravery";
     public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(FearlessPassiveMutationItemEnhancement)) 
     };
