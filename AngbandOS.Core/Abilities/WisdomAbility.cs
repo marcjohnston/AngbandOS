@@ -14,7 +14,7 @@ internal class WisdomAbility : Ability
     public override string DescStatNeg => "naive";
     public override string DescStatPos => "wise";
     public override string Act => "wise";
-    public override string Name => "WIS: ";
+    public override string Abbreviation => "WIS";
     public override void FlagActions()
     {
         if (Game.CharacterClass.SpellStat == this)

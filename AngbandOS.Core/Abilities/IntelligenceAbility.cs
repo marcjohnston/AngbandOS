@@ -14,7 +14,7 @@ internal class IntelligenceAbility : Ability
     public override string DescStatNeg => "stupid";
     public override string DescStatPos => "smart";
     public override string Act => "bright";
-    public override string Name => "INT: ";
+    public override string Abbreviation => "INT";
     public override void FlagActions()
     {
         if (Game.CharacterClass.SpellStat == this)

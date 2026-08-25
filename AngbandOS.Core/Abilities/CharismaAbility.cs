@@ -14,7 +14,7 @@ internal class CharismaAbility : Ability
     public override string DescStatNeg => "ugly";
     public override string DescStatPos => "cute";
     public override string Act => "beautiful";
-    public override string Name => "CHA: ";
+    public override string Abbreviation => "CHA";
     public override void FlagActions()
     {
         if (Game.CharacterClass.SpellStat == this)

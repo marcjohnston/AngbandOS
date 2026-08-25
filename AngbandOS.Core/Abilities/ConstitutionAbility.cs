@@ -14,7 +14,7 @@ internal class ConstitutionAbility : Ability
     public override string DescStatNeg => "sickly";
     public override string DescStatPos => "healthy";
     public override string Act => "hale";
-    public override string Name => "CON: ";
+    public override string Abbreviation => "CON";
     public override void FlagActions()
     {
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateHealthFlaggedAction)).Set();
