@@ -6,17 +6,11 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-internal class ResistActiveMutation : Mutation
+internal class ResistElementsActiveMutation : Mutation
 {
-    private ResistActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(ResistMutationScript), 10, "12", nameof(ConstitutionAbility), 12);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 10 ? "resist elements  (unusable until level 10)" : "resist elements  (cost 12, CON based)";
-    }
+    private ResistElementsActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(ResistElementsMutationScript), 10, "12", nameof(ConstitutionAbility), 12);
     public override string Title => "Resist Elements (A)";
-
     public override int Frequency => 3;
     public override string GainMessage => "You feel like you can protect yourself.";
     public override string HaveMessage => "You can harden yourself to the ravages of the elements.";

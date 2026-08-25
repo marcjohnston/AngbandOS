@@ -6,17 +6,11 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-internal class HypnGazeActiveMutation : Mutation
+internal class HypnoticGazeActiveMutation : Mutation
 {
-    private HypnGazeActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(HypnGazeMutationScript), 12, "12", nameof(CharismaAbility), 18);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 20 ? "hypnotic gaze    (unusable until level 12)" : "hypnotic gaze    (cost 12, CHA based)";
-    }
+    private HypnoticGazeActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(HypnoticGazeMutationScript), 12, "12", nameof(CharismaAbility), 18);
     public override string Title => "Hypnotic Gaze (A)";
-
     public override int Frequency => 2;
     public override string GainMessage => "Your eyes look mesmerizing...";
     public override string HaveMessage => "Your gaze is hypnotic.";

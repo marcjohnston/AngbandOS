@@ -10,13 +10,7 @@ internal class EarthquakeActiveMutation : Mutation
 {
     private EarthquakeActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(EarthquakeMutationScript), 12, "12", nameof(StrengthAbility), 16);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 12 ? "earthquake       (unusable until level 12)" : "earthquake       (cost 12, STR based)";
-    }
-    public override string Title => "Earthquake(A)";
-
+    public override string Title => "Earthquake (A)";
     public override int Frequency => 3;
     public override string GainMessage => "You gain the ability to wreck the dungeon.";
     public override string HaveMessage => "You can bring down the dungeon around your ears.";

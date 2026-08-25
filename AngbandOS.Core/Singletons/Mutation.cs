@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Runtime.CompilerServices;
-
 namespace AngbandOS.Core;
 
 internal abstract class Mutation : IGetKey, IGameSerialize
@@ -99,7 +97,7 @@ internal abstract class Mutation : IGetKey, IGameSerialize
         // Check to see if there is an activation that needs binding.
         if (ActivationBinding is not null)
         {
-            IScript activationScript = Game.SingletonRepository.Get<IScript>(ActivationBinding.Value.ActivationScriptBindingKey);
+            ActiveMutationScript activationScript = Game.SingletonRepository.Get<ActiveMutationScript>(ActivationBinding.Value.ActivationScriptBindingKey);
             Ability ability = Game.SingletonRepository.Get<Ability>(ActivationBinding.Value.AbilityBindingKey);
             Expression costExpression = Game.ParseNumericExpression(ActivationBinding.Value.CostExpression);
             Activation = (activationScript, ActivationBinding.Value.MinLevel, costExpression, ability, ActivationBinding.Value.Difficulty);
@@ -113,7 +111,7 @@ internal abstract class Mutation : IGetKey, IGameSerialize
                 _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
         }
     }
-    private (IScript ActivationScript, int MinLevel, Expression Cost, Ability Ability, int Difficulty)? Activation { get; set; }
+    private (ActiveMutationScript ActivationScript, int MinLevel, Expression Cost, Ability Ability, int Difficulty)? Activation { get; set; }
     protected virtual (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding { get; } = null;
 
     public virtual string AttackDescription => "";
@@ -144,10 +142,34 @@ internal abstract class Mutation : IGetKey, IGameSerialize
         }
     }
 
-    public virtual string ActivationSummary(int lvl)
+    public string ActivationSummary(int lvl)
     {
-        return string.Empty;
+        // Default implementation generates the summary from the bound Activation tuple.
+        if (Activation is null)
+        {
+            return string.Empty;
+        }
+
+        // Get script display name. The Script base class will have a `Name` property added (per your note).
+        string paddedName = Activation.Value.ActivationScript.Name.ToLower().PadRight(17);
+        int minLevel = Activation.Value.MinLevel;
+
+        if (lvl < minLevel)
+        {
+            return $"{paddedName}(unusable until level {minLevel})";
+        }
+
+        string damageText = string.Empty;
+        if (Activation.Value.ActivationScript.DamageExpression is not null)
+        {
+            int damage = Game.ComputeIntegerExpression(Activation.Value.ActivationScript.DamageExpression).Value;
+            damageText = $"dam {damage}, ";
+        }
+        int cost = Game.ComputeIntegerExpression(Activation.Value.Cost).Value;
+        string abilityAbbreviation = Activation.Value.Ability.Abbreviation;
+        return $"{paddedName}(cost {cost}, {damageText}{abilityAbbreviation} based)";
     }
+
 
     public virtual void OnGain() { }
 

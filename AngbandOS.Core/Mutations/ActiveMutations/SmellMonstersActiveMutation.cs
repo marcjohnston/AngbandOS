@@ -6,17 +6,11 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-internal class SmellMonActiveMutation : Mutation
+internal class SmellMonstersActiveMutation : Mutation
 {
-    private SmellMonActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(DetectNormalMonstersScript), 5, "4", nameof(IntelligenceAbility), 15);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 5 ? "smell monsters   (unusable until level 5)" : "smell monsters   (cost 4, INT based)";
-    }
+    private SmellMonstersActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(SmellMonstersMutationScript), 5, "4", nameof(IntelligenceAbility), 15);
     public override string Title => "Smell Monsters (A)";
-
     public override int Frequency => 4;
     public override string GainMessage => "You smell filthy monsters.";
     public override string HaveMessage => "You can smell nearby monsters.";

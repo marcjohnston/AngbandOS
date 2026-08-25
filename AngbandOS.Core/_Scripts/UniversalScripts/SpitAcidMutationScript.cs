@@ -1,11 +1,9 @@
 namespace AngbandOS.Core.Scripts;
-internal class SpitAcidMutationScript : UniversalScript, IGetKey
+internal class SpitAcidMutationScript : ActiveMutationScript
 {
     private SpitAcidMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "spit acid";
+    protected override string? DamageExpressionText => "X";
     public override void ExecuteScript()
     {
         Game.MsgPrint("You spit acid...");

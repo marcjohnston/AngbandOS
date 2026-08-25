@@ -4,21 +4,13 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-internal class LaserEyeActiveMutation : Mutation
+internal class LaserEyesActiveMutation : Mutation
 {
-    private LaserEyeActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(LaserEyeMutationScript), 7, "10", nameof(WisdomAbility), 9);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 7 ? "laser eyes        (unusable until level 7)" : "laser eyes        (cost 10, WIS based)";
-    }
+    private LaserEyesActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(LaserEyesMutationScript), 7, "10", nameof(WisdomAbility), 9);
     public override string Title => "Laser Eyes (A)";
-
     public override int Frequency => 3;
     public override string GainMessage => "Your eyes burn for a moment.";
     public override string HaveMessage => "Your eyes can fire laser beams.";

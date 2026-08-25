@@ -9,14 +9,8 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class TeleportationAtWillActiveMutation : Mutation
 {
     private TeleportationAtWillActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(VteleportMutationScript), 7, "7", nameof(WisdomAbility), 15);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 7 ? "teleport         (unusable until level 7)" : "teleport         (cost 7, WIS based)";
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(TeleportAtWillMutationScript), 7, "7", nameof(WisdomAbility), 15);
     public override string Title => "Teleportation at Will (A)";
-
     public override int Frequency => 3;
     public override string GainMessage => "You gain the power of teleportation at will.";
     public override string HaveMessage => "You can teleport at will.";

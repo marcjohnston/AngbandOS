@@ -10,15 +10,7 @@ internal class VampirismActiveMutation : Mutation
 {
     private VampirismActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(VampirismMutationScript), 13, "X", nameof(ConstitutionAbility), 14);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 13
-            ? "vampiric drain   (unusable until level 13)"
-            : $"vampiric drain   (cost {lvl}, CON based)";
-    }
     public override string Title => "Vampiric Drain (A)";
-
     public override int Frequency => 2;
     public override string GainMessage => "You become vampiric.";
     public override string HaveMessage => "You can drain life from a foe like a vampire.";

@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class PanicHitMutationScript : UniversalScript, IGetKey
+internal class PanicHitMutationScript : ActiveMutationScript
 {
     private PanicHitMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "panic hit";
     public override void ExecuteScript()
     {
         if (!Game.GetDirectionNoAim(out int dir))

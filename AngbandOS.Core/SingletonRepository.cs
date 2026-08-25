@@ -4,7 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System;
 using System.Reflection;
 namespace AngbandOS.Core;
 
@@ -281,6 +280,7 @@ internal sealed class SingletonRepository : IGameSerialize
         // Not configurable yet
         RegisterIndex<Ability>();
         RegisterIndex<ActivationWeightedRandom>();
+        RegisterIndex<ActiveMutationScript>();
         RegisterIndex<Alignment>();
         RegisterIndex<AlterAction>();
         RegisterIndex<ArtifactBias>();
@@ -529,7 +529,7 @@ internal sealed class SingletonRepository : IGameSerialize
         }
         if (missing.Count > 0)
         {
-            throw new Exception($"There is no corresponding system script for the {String.Join("\t", missing)} enum.  A system script that implements the {nameof(IGetKey)} is required to be loaded.");
+            throw new Exception($"There is no corresponding system script for the {String.Join(", ", missing)} enum(s).  A system script that implements the {nameof(IGetKey)} is required to be loaded.");
         }
     }
     private void ValidateJointTable<T, T1, T2>(Func<T1, T2, string> GetCompositeKey) where T : class where T1 : class where T2 : class // TODO: WHY CANT THIS BE where T: IGETKEY

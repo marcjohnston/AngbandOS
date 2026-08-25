@@ -6,17 +6,11 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-internal class SwapPosActiveMutation : Mutation
+internal class SwapPositionActiveMutation : Mutation
 {
-    private SwapPosActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(SwapPosMutationScript), 15, "12", nameof(DexterityAbility), 16);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 15 ? "swap position    (unusable until level 15)" : "swap position    (cost 12, DEX based)";
-    }
+    private SwapPositionActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(SwapPositionMutationScript), 15, "12", nameof(DexterityAbility), 16);
     public override string Title => "Swap Position (A)";
-
     public override int Frequency => 2;
     public override string GainMessage => "You feel like walking a mile in someone else's shoes.";
     public override string HaveMessage => "You can switch locations with another being.";

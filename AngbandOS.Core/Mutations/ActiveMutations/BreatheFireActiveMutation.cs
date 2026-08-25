@@ -10,15 +10,7 @@ internal class BreatheFireActiveMutation : Mutation
 {
     private BreatheFireActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(BrFireMutationScript), 20, "X", nameof(ConstitutionAbility), 18);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 20
-            ? "fire breath      (unusable until level 20)"
-            : $"fire breath      (cost {lvl}, dam {lvl * 2}, CON based)";
-    }
     public override string Title => "Breathe Fire (A)";
-
     public override int Frequency => 3;
     public override string GainMessage => "You gain the ability to breathe fire.";
     public override string HaveMessage => "You can breathe fire (dam lvl * 2).";

@@ -9,14 +9,8 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class BlinkActiveMutation : Mutation
 {
     private BlinkActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(TeleportSelf10TeleportSelfScript), 3, "3", nameof(WisdomAbility), 12);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 3 ? "blink            (unusable until level 3)" : "blink            (cost 3, WIS based)";
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(BlinkMutationScript), 3, "3", nameof(WisdomAbility), 12);
     public override string Title => "Blink (A)";
-
     public override int Frequency => 3;
     public override string GainMessage => "You gain the power of minor teleportation.";
     public override string HaveMessage => "You can teleport yourself short distances.";

@@ -6,17 +6,11 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-internal class WeighMagActiveMutation : Mutation
+internal class WeighMagicActiveMutation : Mutation
 {
-    private WeighMagActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(ReportMagicsScript), 6, "6", nameof(IntelligenceAbility), 10);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 6 ? "weigh magic      (unusable until level 6)" : "weigh magic      (cost 6, INT based)";
-    }
+    private WeighMagicActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(WeighMagicMutationScript), 6, "6", nameof(IntelligenceAbility), 10);
     public override string Title => "Weigh Magic (A)";
-
     public override int Frequency => 2;
     public override string GainMessage => "You feel you can better understand the magic around you.";
     public override string HaveMessage => "You can feel the strength of the magics affecting you.";

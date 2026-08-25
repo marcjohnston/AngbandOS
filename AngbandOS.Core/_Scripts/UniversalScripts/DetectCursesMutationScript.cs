@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class DetCurseMutationScript : UniversalScript, IGetKey
+internal class DetectCursesMutationScript : ActiveMutationScript
 {
-    private DetCurseMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    private DetectCursesMutationScript(Game game) : base(game) { }
+    public override string Name => "detect curses";
     public override void ExecuteScript()
     {
         foreach (WieldSlot inventorySlot in Game.SingletonRepository.Get<WieldSlot>())

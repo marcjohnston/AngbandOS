@@ -6,17 +6,11 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-internal class SmellMetActiveMutation : Mutation
+internal class SmellMetalActiveMutation : Mutation
 {
-    private SmellMetActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(SmellMetMutationScript), 3, "2", nameof(IntelligenceAbility), 12);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 3 ? "smell metal      (unusable until level 3)" : "smell metal      (cost 2, INT based)";
-    }
+    private SmellMetalActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(SmellMetalMutationScript), 3, "2", nameof(IntelligenceAbility), 12);
     public override string Title => "Smell Metal (A)";
-
     public override int Frequency => 3;
     public override string GainMessage => "You smell a metallic odor.";
     public override string HaveMessage => "You can smell nearby precious metal.";

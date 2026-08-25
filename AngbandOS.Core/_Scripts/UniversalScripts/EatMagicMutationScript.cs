@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class EatMagicMutationScript : UniversalScript, IGetKey
+internal class EatMagicMutationScript : ActiveMutationScript
 {
     private EatMagicMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "eat magic";
     public override void ExecuteScript()
     {
         if (!Game.SelectItem(out Item? oPtr, "Drain which item? ", false, true, true, Game.SingletonRepository.Get<ItemFilter>(nameof(CanBeRechargedItemFilter))))

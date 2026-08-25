@@ -9,14 +9,8 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class RecallActiveMutation : Mutation
 {
     private RecallActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(ToggleRecallScript), 17, "50", nameof(IntelligenceAbility), 16);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 17 ? "recall           (unusable until level 17)" : "recall           (cost 50, INT based)";
-    }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(RecallMutationScript), 17, "50", nameof(IntelligenceAbility), 16);
     public override string Title => "Recall (A)";
-
     public override int Frequency => 2;
     public override string GainMessage => "You feel briefly homesick, but it passes.";
     public override string HaveMessage => "You can travel between town and the depths.";

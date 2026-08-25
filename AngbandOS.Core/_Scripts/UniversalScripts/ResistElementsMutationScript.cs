@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class ResistMutationScript : UniversalScript, IGetKey
+internal class ResistElementsMutationScript : ActiveMutationScript
 {
-    private ResistMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    private ResistElementsMutationScript(Game game) : base(game) { }
+    public override string Name => "resist elements";
     public override void ExecuteScript()
     {
         int num = Game.ExperienceLevel.IntValue / 10;

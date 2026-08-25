@@ -1,11 +1,9 @@
+
 namespace AngbandOS.Core.Scripts;
-internal class BanishMutationScript : UniversalScript, IGetKey
+internal class BanishMutationScript : ActiveMutationScript
 {
     private BanishMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "banish evil";
     public override void ExecuteScript()
     {
         if (!Game.GetDirectionNoAim(out int dir))

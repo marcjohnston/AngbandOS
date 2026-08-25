@@ -10,13 +10,7 @@ internal class PanicHitActiveMutation : Mutation
 {
     private PanicHitActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(PanicHitMutationScript), 10, "12", nameof(DexterityAbility), 14);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 10 ? "panic hit        (unusable until level 10)" : "panic hit        (cost 12, DEX based)";
-    }
     public override string Title => "Panic Hit (A)";
-
     public override int Frequency => 2;
     public override string GainMessage => "You suddenly understand how thieves feel.";
     public override string HaveMessage => "You can run for your life after hitting something.";

@@ -10,13 +10,7 @@ internal class TelekinesActiveMutation : Mutation
 {
     private TelekinesActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(TelekinesMutationScript), 9, "9", nameof(WisdomAbility), 14);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 9 ? "telekinesis      (unusable until level 9)" : "telekinesis      (cost 9, WIS based)";
-    }
     public override string Title => "Telekinesis (A)";
-
     public override int Frequency => 2;
     public override string GainMessage => "You gain the ability to move objects telekinetically.";
     public override string HaveMessage => "You are telekinetic.";

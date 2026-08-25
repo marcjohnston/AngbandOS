@@ -10,13 +10,7 @@ internal class MindBlastActiveMutation : Mutation
 {
     private MindBlastActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(MindBlastMutationScript), 5, "3", nameof(WisdomAbility), 15);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 5 ? "mind blast       (unusable until level 5)" : "mind blast       (cost 3, WIS based)";
-    }
     public override string Title => "Mind Blast (A)";
-
     public override int Frequency => 2;
     public override string GainMessage => "You gain the power of Mind Blast.";
     public override string HaveMessage => "You can Mind Blast your enemies.";

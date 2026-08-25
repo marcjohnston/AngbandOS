@@ -6,17 +6,11 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-internal class DetCurseActiveMutation : Mutation
+internal class DetectCursesActiveMutation : Mutation
 {
-    private DetCurseActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(DetCurseMutationScript), 7, "14", nameof(WisdomAbility), 14);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 7 ? "detect curses    (unusable until level 7)" : "detect curses    (cost 14, WIS based)";
-    }
+    private DetectCursesActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(DetectCursesMutationScript), 7, "14", nameof(WisdomAbility), 14);
     public override string Title => "Detect Curses (A)";
-
     public override int Frequency => 2;
     public override string GainMessage => "You can feel evil magics.";
     public override string HaveMessage => "You can feel the danger of evil magic.";

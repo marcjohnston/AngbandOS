@@ -10,13 +10,7 @@ internal class EatRockActiveMutation : Mutation
 {
     private EatRockActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(EatRockMutationScript), 8, "12", nameof(ConstitutionAbility), 18);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 8 ? "eat rock         (unusable until level 8)" : "eat rock         (cost 12, CON based)";
-    }
     public override string Title => "Eat Rock (A)";
-
     public override int Frequency => 2;
     public override string GainMessage => "The walls look delicious.";
     public override string HaveMessage => "You can consume solid rock.";

@@ -6,17 +6,11 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-internal class PolymorphActiveMutation : Mutation
+internal class PolymorphSelfActiveMutation : Mutation
 {
-    private PolymorphActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(PolymorphSelfScript), 18, "20", nameof(ConstitutionAbility), 18);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 18 ? "polymorph        (unusable until level 18)" : "polymorph        (cost 20, CON based)";
-    }
+    private PolymorphSelfActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(PolymorphSelfMutationScript), 18, "20", nameof(ConstitutionAbility), 18);
     public override string Title => "Polymorph (A)";
-
     public override int Frequency => 1;
     public override string GainMessage => "Your body seems mutable.";
     public override string HaveMessage => "You can polymorph yourself at will.";

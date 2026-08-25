@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class LaserEyeMutationScript : UniversalScript, IGetKey
+internal class LaserEyesMutationScript : ActiveMutationScript
 {
-    private LaserEyeMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    private LaserEyesMutationScript(Game game) : base(game) { }
+    public override string Name => "laser eyes";
     public override void ExecuteScript()
     {
         if (!Game.GetDirectionWithAim(out int dir))

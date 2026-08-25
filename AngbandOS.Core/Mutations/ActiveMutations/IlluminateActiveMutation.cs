@@ -6,17 +6,11 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
-internal class IllumineActiveMutation : Mutation
+internal class IlluminateActiveMutation : Mutation
 {
-    private IllumineActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(IllumineMutationScript), 3, "2", nameof(IntelligenceAbility), 10);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 3 ? "illuminate       (unusable until level 3)" : "illuminate       (cost 2, INT based)";
-    }
+    private IlluminateActiveMutation(Game game) : base(game) { }
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(IlluminateMutationScript), 3, "2", nameof(IntelligenceAbility), 10);
     public override string Title => "Illuminate (A)";
-
     public override int Frequency => 3;
     public override string GainMessage => "You can light up rooms with your presence.";
     public override string HaveMessage => "You can emit bright light.";

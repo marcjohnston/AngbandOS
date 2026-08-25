@@ -1,11 +1,9 @@
+
 namespace AngbandOS.Core.Scripts;
-internal class BerserkMutationScript : UniversalScript, IGetKey
+internal class BerserkMutationScript : ActiveMutationScript
 {
     private BerserkMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "berserk";
     public override void ExecuteScript()
     {
         Game.SuperheroismTimer.AddTimer(base.Game.DieRoll(25) + 25);

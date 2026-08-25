@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class SterilityMutationScript : UniversalScript, IGetKey
+internal class SterilityMutationScript : ActiveMutationScript
 {
     private SterilityMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "sterilize";
     public override void ExecuteScript()
     {
         Game.MsgPrint("You suddenly have a headache!");

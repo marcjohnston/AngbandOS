@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class LauncherMutationScript : UniversalScript, IGetKey
+internal class LauncherMutationScript : ActiveMutationScript
 {
     private LauncherMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "throw object";
     public override void ExecuteScript()
     {
         Game.DoCmdThrow(2 + (Game.ExperienceLevel.IntValue / 16));

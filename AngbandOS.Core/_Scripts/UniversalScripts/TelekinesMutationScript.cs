@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class TelekinesMutationScript : UniversalScript, IGetKey
+internal class TelekinesMutationScript : ActiveMutationScript
 {
     private TelekinesMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "telekinesis";
     public override void ExecuteScript()
     {
         Game.MsgPrint("You concentrate...");

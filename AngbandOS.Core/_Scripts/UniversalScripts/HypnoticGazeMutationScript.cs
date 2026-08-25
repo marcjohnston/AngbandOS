@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class HypnGazeMutationScript : UniversalScript, IGetKey
+internal class HypnoticGazeMutationScript : ActiveMutationScript
 {
-    private HypnGazeMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    private HypnoticGazeMutationScript(Game game) : base(game) { }
+    public override string Name => "hypnotic gaze";
     public override void ExecuteScript()
     {
         Game.MsgPrint("Your eyes look mesmerizing...");

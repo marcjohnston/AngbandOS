@@ -4,23 +4,13 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
 internal class SpitAcidActiveMutation : Mutation
 {
     private SpitAcidActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(SpitAcidMutationScript), 9, "9", nameof(DexterityAbility), 15);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 9
-            ? "spit acid        (unusable until level 9)"
-            : $"spit acid        (cost 9, dam {lvl}, DEX based)";
-    }
     public override string Title => "Spit Acid (A)";
-
     public override int Frequency => 4;
     public override string GainMessage => "You gain the ability to spit acid.";
     public override string HaveMessage => "You can spit acid (dam lvl).";
