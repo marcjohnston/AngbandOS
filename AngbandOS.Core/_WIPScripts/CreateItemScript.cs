@@ -29,13 +29,12 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = Game.Screen.Clone();
-        Game.SetBackground(BackgroundImageEnum.Normal);
-        ItemFactory? itemFactory = WizardSelectItemFactory();
-        Game.Screen.Restore(savedScreen);
-        Game.FullScreenOverlay = false;
-        Game.SetBackground(BackgroundImageEnum.Overhead);
+        ItemClass? itemClass = WizardSelectItemClass();
+        if (itemClass == null)
+        {
+            return;
+        }
+        ItemFactory? itemFactory = WizardSelectItemFactory(itemClass);
         if (itemFactory == null)
         {
             return;
@@ -83,13 +82,24 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
         return;
     }
 
-    private ItemFactory? WizardSelectItemFactory()
+    private ItemClass? WizardSelectItemClass()
     {
-        ItemFactory[] itemFactories = Game.SingletonRepository.Get<ItemFactory>().OrderBy(_itemFactory => _itemFactory.Name).ToArray();
+        ItemClass[] itemClasses = Game.SingletonRepository.Get<ItemClass>().OrderBy(_itemClass => _itemClass.Name).ToArray();
+        ConsoleTableWithRowHighlighting<ItemClass> table = new ConsoleTableWithRowHighlighting<ItemClass>(itemClasses, new (string, Func<ItemClass, string>)[]
+        {
+            ("Item Class", _itemClass => Game.Pluralize(_itemClass.Name)),
+            ("Items", _itemClass => Game.SingletonRepository.Get<ItemFactory>().Count(_itemFactory => _itemFactory.ItemClass == _itemClass).ToString())
+        });
+        ItemClass? selectedItemClass = Game.SelectFromConsoleTable<ItemClass>(table, "Select Item Class:");
+        return selectedItemClass;
+    }
+
+    private ItemFactory? WizardSelectItemFactory(ItemClass itemClass)
+    {
+        ItemFactory[] itemFactories = Game.SingletonRepository.Get<ItemFactory>().Where(_itemFactory => _itemFactory.ItemClass == itemClass).OrderBy(_itemFactory => _itemFactory.Name).ToArray();
         ConsoleTableWithRowHighlighting<ItemFactory> table = new ConsoleTableWithRowHighlighting<ItemFactory>(itemFactories, new (string, Func<ItemFactory, string>)[]
         {
             ("Name", _itemFactory => _itemFactory.Name),
-            ("Type", _itemFactory => _itemFactory.Symbol.Name.ToString()),
             ("Character", _itemFactory => _itemFactory.Symbol.Character.ToString())
         });
         ItemFactory? selectedItemFactory = Game.SelectFromConsoleTable<ItemFactory>(table, "Select Item:");
