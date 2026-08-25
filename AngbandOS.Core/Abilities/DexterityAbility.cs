@@ -15,7 +15,6 @@ internal class DexterityAbility : Ability
     public override string DescStatPos => "dextrous";
     public override string Act => "agile";
     public override string Name => "DEX: ";
-    public override string NameReduced => "dex: ";
     public override (string bonus1, string bonus2, string bonus3, string bonus4, string bonus5) GetBonuses()
     {
         int toHit = DexAttackBonus;

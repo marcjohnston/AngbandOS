@@ -16,7 +16,6 @@ internal class StrengthAbility : Ability
     public override string DescStatPos => "strong";
     public override string Act => "strong";
     public override string Name => "STR: ";
-    public override string NameReduced => "str: ";
     public override (string bonus1, string bonus2, string bonus3, string bonus4, string bonus5) GetBonuses()
     {
         int toHit = StrAttackBonus;

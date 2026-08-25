@@ -93,7 +93,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
             // If they've been drained, make them visually distinct
             if (ability.Innate < ability.InnateMax)
             {
-                Game.Screen.Print(ColorEnum.Blue, ability.NameReduced, 14 + i, 1);
+                Game.Screen.Print(ColorEnum.Blue, ability.Name.ToLower(), 14 + i, 1);
                 int value = ability.Adjusted;
                 buf = value.StatToString();
                 Game.Screen.Print(ColorEnum.Grey, buf, 14 + i, 6);
@@ -491,7 +491,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
             string buf;
             if (ability.Innate < ability.InnateMax)
             {
-                Game.Screen.Print(ColorEnum.Blue, ability.NameReduced, 2 + i, 61);
+                Game.Screen.Print(ColorEnum.Blue, ability.Name.ToLower(), 2 + i, 61);
                 int value = ability.Adjusted;
                 buf = value.StatToString();
                 Game.Screen.Print(ColorEnum.Red, buf, 2 + i, 66);

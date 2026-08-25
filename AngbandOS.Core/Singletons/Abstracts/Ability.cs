@@ -91,7 +91,6 @@ internal abstract class Ability : IGetKey, IGameSerialize
     public abstract string DescStatPos { get; }
     public abstract string Act { get; }
     public abstract string Name { get; }
-    public abstract string NameReduced { get; }
     public abstract (string bonus1, string bonus2, string bonus3, string bonus4, string bonus5) GetBonuses();
 
     /// <summary>
