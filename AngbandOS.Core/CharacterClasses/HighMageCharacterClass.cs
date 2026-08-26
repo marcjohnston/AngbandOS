@@ -57,14 +57,14 @@ internal class HighMageCharacterClass : CharacterClass
     public override int AttackSpeedMultiplier => 2;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(240000 / (level + 5)));
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(LifeRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(SorceryRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(NatureRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(FolkRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(LifeRealm),
+        nameof(SorceryRealm),
+        nameof(NatureRealm),
+        nameof(ChaosRealm),
+        nameof(DeathRealm),
+        nameof(TarotRealm),
+        nameof(FolkRealm),
+        nameof(CorporealRealm)
     };
 }

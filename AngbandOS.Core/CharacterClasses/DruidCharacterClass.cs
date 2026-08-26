@@ -65,7 +65,7 @@ internal class DruidCharacterClass : CharacterClass
     public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(10000 / ((level * level) + 40)));
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(NatureRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(NatureRealm)
     };
 }

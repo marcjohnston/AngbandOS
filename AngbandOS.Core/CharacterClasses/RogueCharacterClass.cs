@@ -55,10 +55,10 @@ internal class RogueCharacterClass : CharacterClass
     public override int FromScrollWarriorArtifactBiasPercentageChance => 25;
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(20000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(SorceryRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(FolkRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(SorceryRealm),
+        nameof(DeathRealm),
+        nameof(TarotRealm),
+        nameof(FolkRealm)
     };
 }

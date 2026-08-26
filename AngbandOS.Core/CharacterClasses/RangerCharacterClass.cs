@@ -64,15 +64,15 @@ internal class RangerCharacterClass : CharacterClass
     public override int FromScrollWarriorArtifactBiasPercentageChance => 30;
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(95000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(NatureRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(NatureRealm)
     };
-    public override Realm[] AvailableSecondaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(FolkRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
+    protected override string[] AvailableSecondaryRealmBindingKeys => new string[] {
+        nameof(ChaosRealm),
+        nameof(DeathRealm),
+        nameof(TarotRealm),
+        nameof(FolkRealm),
+        nameof(CorporealRealm)
     };
     public override bool WorshipsADeity => true;
 }

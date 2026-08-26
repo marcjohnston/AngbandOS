@@ -64,16 +64,16 @@ internal class PriestCharacterClass : CharacterClass
     public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(10000 / ((level * level) + 40)));
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(LifeRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(LifeRealm),
+        nameof(DeathRealm)
     };
-    public override Realm[] AvailableSecondaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(NatureRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(FolkRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
+    protected override string[] AvailableSecondaryRealmBindingKeys => new string[] {
+        nameof(NatureRealm),
+        nameof(ChaosRealm),
+        nameof(TarotRealm),
+        nameof(FolkRealm),
+        nameof(CorporealRealm)
     };
     public override bool WorshipsADeity => true;
 }

@@ -75,10 +75,10 @@ internal class MonkCharacterClass : CharacterClass
     public override int AttackSpeedMultiplier => 4;
     public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(20000 / ((level * level) + 40)));
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(ChaosRealm),
+        nameof(TarotRealm),
+        nameof(CorporealRealm)
     };
     public override bool IsMartialArtist => true;
 }

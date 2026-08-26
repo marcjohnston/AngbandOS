@@ -72,7 +72,7 @@ internal class FanaticCharacterClass : CharacterClass
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(80000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(ChaosRealm)
     };
 }

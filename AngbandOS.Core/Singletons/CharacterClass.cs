@@ -384,10 +384,6 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
 
     public virtual string Key => GetType().Name;
 
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
 
     public string GetKey => Key;
 
@@ -449,6 +445,8 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         InvokeSpiritsBeamProbabilityRoll = Game.ParseNumericExpression(InvokeSpiritsBeamProbabilityRollExpression);
         ArmorMaxWeightExpression = Game.ParseNullableNumericExpression(ArmorMaxWeightExpressionText);
         MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples = MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, bool? HasHeavyArmor, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, _item.HasHeavyArmor, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
+        AvailablePrimaryRealms = Game.SingletonRepository.Get<Realm>(AvailablePrimaryRealmBindingKeys);
+        AvailableSecondaryRealms = Game.SingletonRepository.Get<Realm>(AvailableSecondaryRealmBindingKeys);
 
         if (restoreGameState is not null)
         {
@@ -707,17 +705,19 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public virtual bool SenseInventoryTest(int level) => false;
     public virtual bool DetailedSenseInventory => false;
 
+    protected virtual string[] AvailablePrimaryRealmBindingKeys => new string[] { };
+    protected virtual string[] AvailableSecondaryRealmBindingKeys => new string[] {};
     /// <summary>
     /// Represents realms that are available to the character class.  Returns an empty array, if the character class cannot cast spells.
     /// </summary>
     /// <value>The available realms.</value>
-    public virtual Realm[] AvailablePrimaryRealms => new Realm[] { };
+    public Realm[] AvailablePrimaryRealms { get; private set; }
 
     /// <summary>
     /// Represents realms that are available to the character class.  Returns an empty array, if the character class cannot cast spells.
     /// </summary>
     /// <value>The available realms.</value>
-    public virtual Realm[] AvailableSecondaryRealms => new Realm[] { };
+    public Realm[] AvailableSecondaryRealms { get; private set; }
 
     public Realm[] RemainingAvailableSecondaryRealms()
     {
