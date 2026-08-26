@@ -26,11 +26,11 @@ internal class CreateFixedArtifactScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        FixedArtifact[] fixedArtifacts = Game.SingletonRepository.Get<FixedArtifact>().OrderBy(_fixedArtifact => _fixedArtifact.Name).ToArray();
-        ConsoleTableWithRowHighlighting<FixedArtifact> table = new ConsoleTableWithRowHighlighting<FixedArtifact>(fixedArtifacts, new (string, Func<FixedArtifact, string>)[] {
+        FixedArtifact[] fixedArtifacts = Game.SingletonRepository.Get<FixedArtifact>().OrderBy(_fixedArtifact => _fixedArtifact.Name).ToArray();        
+        ConsoleTableWithRowHighlighting<FixedArtifact> table = new ConsoleTableWithRowHighlighting<FixedArtifact>(fixedArtifacts, 
             ("Name", _fixedArtifact => _fixedArtifact.Name),            
             ("Level", _fixedArtifact => _fixedArtifact.Level.ToString())
-        });
+        );
         FixedArtifact? selectedFixedArtifact = Game.SelectFromConsoleTable<FixedArtifact>(table, "Spawn Which Fixed Artifact?");
         if (selectedFixedArtifact is not null)
         {

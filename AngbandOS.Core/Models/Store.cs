@@ -642,8 +642,7 @@ internal class Store : IGameSerialize
             RenderAdvertisedCommand(StoreFactory.AdvertisedStoreCommand4, 43, 56);
             Game.Screen.Print("You may: ", 41, 0);
             Game.RequestCommand(false);
-            ProcessCommand();
-            Game.ConsoleView.Widgets.OfType<GameMessageWidget>().First().Update();
+            ProcessCommand();            
             Game.FullScreenOverlay = true;
             Game.NoticeStuff();
             Game.HandleStuff();
