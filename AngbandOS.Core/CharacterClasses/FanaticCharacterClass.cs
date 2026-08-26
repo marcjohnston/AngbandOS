@@ -65,7 +65,7 @@ internal class FanaticCharacterClass : CharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
+    protected override string SpellAbilityBindingKey => nameof(IntelligenceAbility);
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
     protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(ChaosArtifactBias), 1) };

@@ -37,7 +37,7 @@ internal class UpdateManaFlaggedAction : FlaggedAction
         {
             return;
         }
-        int msp = Game.CharacterClass.SpellStat.ManaBonus * Game.HalfLevelsOfSpellcraft() / 2;
+        int msp = Game.CharacterClass.SpellAbility.ManaBonus * Game.HalfLevelsOfSpellcraft() / 2;
         if (msp != 0)
         {
             msp++;

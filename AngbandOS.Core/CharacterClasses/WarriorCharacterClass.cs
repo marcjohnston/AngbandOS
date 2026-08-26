@@ -45,4 +45,5 @@ internal class WarriorCharacterClass : CharacterClass
     {
         nameof(GainExperienceForHighLevelSpellBookDestroyedItemAction)
     };
+    protected override string SpellAbilityBindingKey => nameof(StrengthAbility);
 }

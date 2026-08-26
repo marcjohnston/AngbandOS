@@ -36,7 +36,7 @@ internal class PaladinCharacterClass : CharacterClass
     };
     public override int SpellWeight => 400;
     public override void Cast() => CastMentalism();
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
+    protected override string SpellAbilityBindingKey => nameof(WisdomAbility);
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
     protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(PriestlyArtifactBias), 1) };

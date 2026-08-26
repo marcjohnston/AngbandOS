@@ -17,7 +17,7 @@ internal class CharismaAbility : Ability
     public override string Abbreviation => "CHA";
     public override void FlagActions()
     {
-        if (Game.CharacterClass.SpellStat == this)
+        if (Game.CharacterClass.SpellAbility == this)
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();

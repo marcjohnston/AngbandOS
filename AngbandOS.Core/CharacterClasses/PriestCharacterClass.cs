@@ -61,7 +61,7 @@ internal class PriestCharacterClass : CharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
+    protected override string SpellAbilityBindingKey => nameof(WisdomAbility);
     protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(PriestlyArtifactBias), 1) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(10000 / ((level * level) + 40)));
     protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {

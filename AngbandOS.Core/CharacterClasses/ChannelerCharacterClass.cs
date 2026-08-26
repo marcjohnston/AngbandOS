@@ -37,8 +37,7 @@ internal class ChannelerCharacterClass : CharacterClass
     /// Returns true, because channeling casting allows the player to use mana instead of consuming the item.
     /// </summary>
     public override bool CanUseManaInsteadOfConsumingItem => true;
-
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility));
+    protected override string SpellAbilityBindingKey => nameof(CharismaAbility);
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;

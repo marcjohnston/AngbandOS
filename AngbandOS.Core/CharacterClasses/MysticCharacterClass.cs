@@ -45,7 +45,7 @@ internal class MysticCharacterClass : CharacterClass
     public override string MagicType => "psychic talents";
     public override int SpellWeight => 300;
     public override void Cast() => CastMentalism();
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
+    protected override string SpellAbilityBindingKey => nameof(WisdomAbility);
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;

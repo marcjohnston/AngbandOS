@@ -447,6 +447,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples = MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, bool? HasHeavyArmor, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, _item.HasHeavyArmor, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
         AvailablePrimaryRealms = Game.SingletonRepository.Get<Realm>(AvailablePrimaryRealmBindingKeys);
         AvailableSecondaryRealms = Game.SingletonRepository.Get<Realm>(AvailableSecondaryRealmBindingKeys);
+        SpellAbility = Game.SingletonRepository.Get<Ability>(SpellAbilityBindingKey);
 
         if (ArtifactBiasAndWeightBindingKeys is null)
         {
@@ -705,7 +706,8 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// <value>The spell weight.</value>
     public virtual int SpellWeight => 0;
 
-    public virtual Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility));
+    protected abstract string SpellAbilityBindingKey { get; }
+    public Ability SpellAbility { get; private set; }
     public virtual int MaximumMeleeAttacksPerRound(int level) => 5;
     public virtual int MaximumWeight => 35;
     public virtual int AttackSpeedMultiplier => 3;

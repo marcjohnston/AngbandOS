@@ -163,12 +163,12 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
         }
         int chance = CharacterClassSpell.BaseFailure;
         chance -= 3 * (Game.ExperienceLevel.IntValue - CharacterClassSpell.Level);
-        chance -= 3 * (Game.CharacterClass.SpellStat.SpellFailureReduction - 1);
+        chance -= 3 * (Game.CharacterClass.SpellAbility.SpellFailureReduction - 1);
         if (CharacterClassSpell.ManaCost > Game.Mana.IntValue)
         {
             chance += 5 * (CharacterClassSpell.ManaCost - Game.Mana.IntValue);
         }
-        int minfail = Game.CharacterClass.SpellStat.SpellMinFailChance;
+        int minfail = Game.CharacterClass.SpellAbility.SpellMinFailChance;
         int characterClassMinimumSpellFailureChance = Game.CharacterClass.SpellMinFailChance ?? 0;
         if (minfail < characterClassMinimumSpellFailureChance)
         {

@@ -84,4 +84,5 @@ internal class ChosenOneCharacterClass : CharacterClass
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override bool OutfitsWithScrollsOfLight => true;
+    protected override string SpellAbilityBindingKey => nameof(StrengthAbility);
 }
