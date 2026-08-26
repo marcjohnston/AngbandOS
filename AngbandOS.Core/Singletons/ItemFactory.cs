@@ -1414,7 +1414,7 @@ internal sealed class ItemFactory : IGetKey, IToJson, IGameSerialize
         int warriorArtifactBias = 0;
         if (fromScroll && Game.DieRoll(4) == 1)
         {
-            characteristics.ArtifactBias = Game.CharacterClass.ArtifactBias;
+            characteristics.ArtifactBias = Game.CharacterClass.ArtifactBiasWeightedRandom?.Choose();
             warriorArtifactBias = Game.CharacterClass.FromScrollWarriorArtifactBiasPercentageChance;
         }
         if (Game.DieRoll(100) <= warriorArtifactBias && fromScroll)

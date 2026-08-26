@@ -448,6 +448,15 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         AvailablePrimaryRealms = Game.SingletonRepository.Get<Realm>(AvailablePrimaryRealmBindingKeys);
         AvailableSecondaryRealms = Game.SingletonRepository.Get<Realm>(AvailableSecondaryRealmBindingKeys);
 
+        if (ArtifactBiasAndWeightBindingKeys is null)
+        {
+            ArtifactBiasWeightedRandom = null;
+        }
+        else
+        {
+            ArtifactBiasWeightedRandom = new WeightedRandom<ArtifactBias?>(Game, ArtifactBiasAndWeightBindingKeys.Select(_artifactBiasAndWeight => (Game.SingletonRepository.GetNullable<ArtifactBias>(_artifactBiasAndWeight.ArtifactBiasBindingKey), _artifactBiasAndWeight.Weight)));
+        }
+
         if (restoreGameState is not null)
         {
             AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
@@ -700,7 +709,8 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public virtual int MaximumMeleeAttacksPerRound(int level) => 5;
     public virtual int MaximumWeight => 35;
     public virtual int AttackSpeedMultiplier => 3;
-    public virtual ArtifactBias? ArtifactBias => null;
+    protected virtual (string? ArtifactBiasBindingKey, int Weight)[]? ArtifactBiasAndWeightBindingKeys => null;
+    public WeightedRandom<ArtifactBias?>? ArtifactBiasWeightedRandom { get; private set; }
     public virtual int FromScrollWarriorArtifactBiasPercentageChance => 0;
     public virtual bool SenseInventoryTest(int level) => false;
     public virtual bool DetailedSenseInventory => false;

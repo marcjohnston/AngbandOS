@@ -38,7 +38,7 @@ internal class WarriorCharacterClass : CharacterClass
     public override int MaximumMeleeAttacksPerRound(int level) => 6;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 5;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(WarriorArtifactBias), 1) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     protected override string[]? ItemActionNames => new string[]

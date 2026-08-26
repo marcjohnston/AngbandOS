@@ -47,6 +47,6 @@ internal class MindcrafterCharacterClass : CharacterClass
     public override void Cast() => CastMentalism();
 
     public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
-    public override ArtifactBias? ArtifactBias => (Game.DieRoll(5) > 2 ? Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias)) : null);
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(PriestlyArtifactBias), 3), (null, 2) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(55000 / ((level * level) + 40)));
 }

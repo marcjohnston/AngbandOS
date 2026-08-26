@@ -60,7 +60,7 @@ internal class RangerCharacterClass : CharacterClass
 
     public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
     public override int AttackSpeedMultiplier => 4;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(RangerArtifactBias), 1) };
     public override int FromScrollWarriorArtifactBiasPercentageChance => 30;
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(95000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
