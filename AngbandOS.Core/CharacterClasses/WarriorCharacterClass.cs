@@ -17,7 +17,6 @@ internal class WarriorCharacterClass : CharacterClass
     protected override string? MeleeAttacksPerRoundBonusExpression => "X/15";
     public override int ID => 0;
     public override string Title => "Warrior";
-    public override int? InstantFearResistanceLevel => 30;
     public override int? AttackAndDamageBonusPerExperienceLevelDivisor => 5;
     public override int BasePerception => 2;
     public override int MeleeToHit => 70;

@@ -18,8 +18,6 @@ internal class FanaticCharacterClass : CharacterClass
 
     public override int ID => 7;
     public override string Title => "Fanatic";
-    public override int? InstantFearResistanceLevel => 40;
-    public override int? InstantChaosResistanceLevel => 30;
     public override bool HasPatron => true;
     public override int BasePerception => 12;
     public override int MeleeToHit => 66;

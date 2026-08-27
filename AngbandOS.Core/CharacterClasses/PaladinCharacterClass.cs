@@ -16,7 +16,6 @@ internal class PaladinCharacterClass : CharacterClass
     };
     public override int ID => 5;
     public override string Title => "Paladin";
-    public override int? InstantFearResistanceLevel => 40;
     public override int BasePerception => 2;
     public override int MeleeToHit => 68;
     public override int RangedToHit => 40;
