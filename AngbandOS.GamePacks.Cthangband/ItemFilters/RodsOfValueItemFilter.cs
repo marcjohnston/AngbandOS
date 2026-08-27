@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for rods that have value.
 /// </summary>
-[Serializable]
 public class RodsOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]

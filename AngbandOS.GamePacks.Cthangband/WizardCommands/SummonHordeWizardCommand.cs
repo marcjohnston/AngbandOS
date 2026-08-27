@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class SummonHordeWizardCommand : WizardCommandGameConfiguration
 {
     public override char KeyChar => 'H';

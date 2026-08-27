@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(FreeActAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -25,15 +20,15 @@ public class SetOfCestiOfCombatFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(TelepathyAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.MagicalArrow150Every1d90p90DirectionalActivation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "10"),
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(AttacksAttribute), "20"),
         (nameof(ValueAttribute), "110000"),
-        (nameof(RadiusAttribute), "3"),
-        (nameof(DexterityAttribute), "4"),
+        (nameof(GlowRadiusAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "4"),
     };
     public override string FriendlyName => "of Combat";
 }

@@ -9,12 +9,11 @@ namespace AngbandOS.Core.Races;
 internal class DarkElfRace : Race
 {
     private DarkElfRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(DarkElfRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(DarkElfRaceItemEnhancement)),
+        (20, nameof(DarkElfRaceLevel20ItemEnhancement))
+    };
     public override string Title => "Dark Elf";
-    public override int UseDevice => 15;
-    public override int SavingThrow => 20;
-    public override int Stealth => 3;
-    public override int Search => 8;
     public override int BasePerception => 12;
     public override int MeleeToHit => -5;
     public override int RangedToHit => 10;
@@ -33,13 +32,7 @@ internal class DarkElfRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 2 ? "magic missile      (racial, unusable until level 2)" : "magic missile      (racial, cost 2, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
-
+    protected override string GenerateNameSyllableSetBindingKey => nameof(ElvishSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 1)
@@ -47,13 +40,5 @@ internal class DarkElfRace : Race
             return new string[] { $"You can cast a Magic Missile, dam {3 + ((level - 1) / 5)} (cost 2)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasDarkResistance = true;
-        if (Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasSeeInvisibility = true;
-        }
     }
 }

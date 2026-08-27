@@ -13,14 +13,6 @@ internal class VulnElemPassiveMutation : Mutation
     public override string GainMessage => "You feel strangely exposed.";
     public override string HaveMessage => "You are susceptible to damage from the elements.";
     public override string LoseMessage => "You feel less exposed.";
-
-    public override void OnGain()
-    {
-        Game.Vulnerable = true;
-    }
-
-    public override void OnLose()
-    {
-        Game.Vulnerable = false;
-    }
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { (1, nameof(VulnElemPassiveMutationItemEnhancement)) };
+    public override string Title => "Elemental Vulnerability (P)";
 }

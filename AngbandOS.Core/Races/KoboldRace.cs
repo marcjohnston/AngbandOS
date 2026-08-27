@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class KoboldRace : Race
 {
     private KoboldRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(KoboldRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(KoboldRaceItemEnhancement)) 
+    };
     public override string Title => "Kobold";
-    public override int UseDevice => -3;
-    public override int SavingThrow => -2;
-    public override int Stealth => -1;
-    public override int Search => 1;
     public override int BasePerception => 8;
     public override int MeleeToHit => 10;
     public override int RangedToHit => -8;
@@ -33,13 +31,7 @@ internal class KoboldRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 12 ? "poison dart        (racial, unusable until level 12)" : "poison dart        (racial, cost 8, dam lvl, DEX based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(HobbitSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(HobbitSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 11)
@@ -47,9 +39,5 @@ internal class KoboldRace : Race
             return new string[] { $"You can throw a dart of poison, dam. {level} (cost 8)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasPoisonResistance = true;
     }
 }

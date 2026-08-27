@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(FreeActAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
         (nameof(IgnoreColdAttribute), "true"),
@@ -19,7 +14,7 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(SlayEvilAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "32"),
@@ -30,9 +25,9 @@ public class LongSwordVorpalBladeFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(VorpalExtraAttacks1InChanceAttribute), "2"),
         (nameof(Vorpal1InChanceAttribute), "3"),
         (nameof(SpeedAttribute), "2"),
-        (nameof(DexterityAttribute), "2"),
-        (nameof(RadiusAttribute), "3"),
-        (nameof(StrengthAttribute), "2"),
+        (nameof(BonusDexterityAttribute), "2"),
+        (nameof(GlowRadiusAttribute), "3"),
+        (nameof(BonusStrengthAttribute), "2"),
     };
     public override string FriendlyName => "'Vorpal Blade'";
 }

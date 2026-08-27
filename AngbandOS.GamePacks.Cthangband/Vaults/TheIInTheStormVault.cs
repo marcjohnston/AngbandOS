@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class TheIInTheStormVault : VaultGameConfiguration
 {
     public override string Name => "The I in the Storm";

@@ -10,12 +10,7 @@ internal class LauncherActiveMutation : Mutation
 {
     private LauncherActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(LauncherMutationScript), 1, "X", nameof(StrengthAbility), 6);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return "throw object     (cost lev, STR based)";
-    }
-
+    public override string Title => "Launcher (A)";
     public override int Frequency => 2;
     public override string GainMessage => "Your throwing arm feels much stronger.";
     public override string HaveMessage => "You can hurl objects with great force.";

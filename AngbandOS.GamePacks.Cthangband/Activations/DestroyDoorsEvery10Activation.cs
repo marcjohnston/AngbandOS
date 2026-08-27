@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Destroy nearby doors.
 /// </summary>
-[Serializable]
 public class DestroyDoorsEvery10Activation : ActivationGameConfiguration
 {
     

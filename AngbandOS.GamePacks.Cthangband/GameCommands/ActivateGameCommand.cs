@@ -12,7 +12,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <param name="itemIndex">
 /// The inventory index of the item to be activated, or -999 to select item
 /// </param>
-[Serializable]
 public class ActivateGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'A';

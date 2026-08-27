@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot a 'magic missile' cone that does 300 damage.
 /// </summary>
-[Serializable]
 public class ElementalBreath300r4Every500DirectionalActivation : ActivationGameConfiguration
 {
     

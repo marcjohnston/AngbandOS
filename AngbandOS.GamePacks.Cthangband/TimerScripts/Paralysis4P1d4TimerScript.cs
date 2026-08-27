@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Paralysis4P1d4TimerScript : TimerScriptGameConfiguration
 {
     public override string? ValueExpression => "4+1d4";

@@ -1,20 +1,23 @@
 
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class HighMageCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(CharismaAttribute), "1"),
-        (nameof(ConstitutionAttribute), "-2"),
-        (nameof(WisdomAttribute), "0"),
-        (nameof(IntelligenceAttribute), "4"),
-        (nameof(DexterityAttribute), "0"),
+        (nameof(BonusCharismaAttribute), "1"),
+        (nameof(BonusConstitutionAttribute), "-2"),
+        (nameof(BonusWisdomAttribute), "0"),
+        (nameof(BonusIntelligenceAttribute), "4"),
+        (nameof(BonusDexterityAttribute), "0"),
+        (nameof(BonusStrengthAttribute), "-5"),
         (nameof(ValueAttribute), "-3150"),
         (nameof(DisarmTrapsAttribute), "30"),
-        (nameof(UseDeviceAttribute), "38"),
         (nameof(SavingThrowAttribute), "30"),
-        (nameof(StrengthAttribute), "-5")
+        (nameof(SavingThrowBonusPerLevelAttribute), "9"),
+        (nameof(UseDeviceAttribute), "38"),
+        (nameof(UseDeviceBonusPerLevelAttribute), "13"),
+        (nameof(SearchAttribute), "16"),
+        (nameof(StealthAttribute), "3")
     };
 }

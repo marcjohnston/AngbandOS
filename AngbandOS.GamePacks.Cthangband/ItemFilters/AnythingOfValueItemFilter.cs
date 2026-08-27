@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for all items of value.
 /// </summary>
-[Serializable]
 public class AnythingOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override bool? IsOfValue => true;

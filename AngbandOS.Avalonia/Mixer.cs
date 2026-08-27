@@ -2,7 +2,7 @@ using AngbandOS.Core.Interface;
 
 namespace AngbandOS.Avalonia
 {
-    internal class Mixer
+internal class Mixer
     {
         public float MusicVolume = 1;
         public float SoundVolume = 1;

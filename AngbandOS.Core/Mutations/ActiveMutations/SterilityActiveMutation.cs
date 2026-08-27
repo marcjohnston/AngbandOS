@@ -10,12 +10,7 @@ internal class SterilityActiveMutation : Mutation
 {
     private SterilityActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(SterilityMutationScript), 20, "40", nameof(CharismaAbility), 18);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 20 ? "sterilize        (unusable until level 20)" : "sterilize        (cost 40, CHA based)";
-    }
-
+    public override string Title => "Sterility (A)";
     public override int Frequency => 1;
     public override string GainMessage => "You can give everything around you a headache.";
     public override string HaveMessage => "You can cause mass impotence.";

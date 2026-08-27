@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Returns an item filter for all bolts.
 /// </summary>
-[Serializable]
 public class BoltsItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot a frost bolt that does 6d8 damage.
 /// </summary>
-[Serializable]
 public class FrostBolt6d8Every7p1d7DirectionalActivation : ActivationGameConfiguration
 {
     

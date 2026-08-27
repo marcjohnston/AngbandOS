@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.ChestTraps;
 
-[Serializable]
 public class LoseStrChestTrap : ChestTrapGameConfiguration
 {
     public override string ActivationGridTileScriptBindingKey => nameof(GridTileScriptsEnum.LoseStrGridTileScript);

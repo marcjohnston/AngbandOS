@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Light the area.
 /// </summary>
-[Serializable]
 public class LightActivation : ActivationGameConfiguration
 {
     

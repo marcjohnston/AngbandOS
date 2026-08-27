@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LesserVaultderElBahriSanctuaryVault : VaultGameConfiguration
 {
     public override string Name => "Lesser vault (der el bahri sanctuary)";

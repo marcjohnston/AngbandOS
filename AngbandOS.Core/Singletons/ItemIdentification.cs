@@ -63,7 +63,7 @@ internal class ItemIdentification : IGetKey, IToJson, IGameSerialize
             foreach (Attribute attribute in InterpolationExpressionAttributes)
             {
                 EffectiveAttributeValue effectiveAttributeValue = effectiveAttributeSet.Get(attribute);
-                interpolationExpressions.Add(effectiveAttributeValue.RenderForItemIdentification);
+                interpolationExpressions.AddRange(effectiveAttributeValue.RenderForItemIdentification);
             }
         }
 

@@ -50,7 +50,7 @@ internal class SpikeClosedDoorScript : UniversalScript, IGetKey
                     Game.MsgPrint("There are no spikes here.");
                 }
                 // Can't close a door if there's someone in the way
-                else if (tile.MonsterIndex != 0)
+                else if (tile.Monster is not null)
                 {
                     // Attempting costs a turn anyway
                     Game.EnergyUse = 100;

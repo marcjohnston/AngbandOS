@@ -9,7 +9,35 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class ChosenOneCharacterClass : CharacterClass
 {
     private ChosenOneCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(ChosenOneCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
+    {
+        (1, null, nameof(ChosenOneCharacterClassItemEnhancement)),
+        (2, null, nameof(ChosenOneCharacterClassLevel2ItemEnhancement)),
+        (4, null, nameof(ChosenOneCharacterClassLevel4ItemEnhancement)),
+        (6, null, nameof(ChosenOneCharacterClassLevel6ItemEnhancement)),
+        (8, null, nameof(ChosenOneCharacterClassLevel8ItemEnhancement)),
+        (10, null, nameof(ChosenOneCharacterClassLevel10ItemEnhancement)),
+        (12, null, nameof(ChosenOneCharacterClassLevel12ItemEnhancement)),
+        (14, null, nameof(ChosenOneCharacterClassLevel14ItemEnhancement)),
+        (16, null, nameof(ChosenOneCharacterClassLevel16ItemEnhancement)),
+        (18, null, nameof(ChosenOneCharacterClassLevel18ItemEnhancement)),
+        (20, null, nameof(ChosenOneCharacterClassLevel20ItemEnhancement)),
+        (22, null, nameof(ChosenOneCharacterClassLevel22ItemEnhancement)),
+        (24, null, nameof(ChosenOneCharacterClassLevel24ItemEnhancement)),
+        (26, null, nameof(ChosenOneCharacterClassLevel26ItemEnhancement)),
+        (28, null, nameof(ChosenOneCharacterClassLevel28ItemEnhancement)),
+        (30, null, nameof(ChosenOneCharacterClassLevel30ItemEnhancement)),
+        (32, null, nameof(ChosenOneCharacterClassLevel32ItemEnhancement)),
+        (34, null, nameof(ChosenOneCharacterClassLevel34ItemEnhancement)),
+        (36, null, nameof(ChosenOneCharacterClassLevel36ItemEnhancement)),
+        (38, null, nameof(ChosenOneCharacterClassLevel38ItemEnhancement)),
+        (40, null, nameof(ChosenOneCharacterClassLevel40ItemEnhancement)),
+        (42, null, nameof(ChosenOneCharacterClassLevel42ItemEnhancement)),
+        (44, null, nameof(ChosenOneCharacterClassLevel44ItemEnhancement)),
+        (46, null, nameof(ChosenOneCharacterClassLevel46ItemEnhancement)),
+        (48, null, nameof(ChosenOneCharacterClassLevel48ItemEnhancement)),
+        (50, null, nameof(ChosenOneCharacterClassLevel50ItemEnhancement)),
+    };
     public override int ID => 14;
     public override string Title => "Chosen One";
     public override int? InstantConfusionResistanceLevel => 2;
@@ -38,17 +66,10 @@ internal class ChosenOneCharacterClass : CharacterClass
     public override int? InstantShardsResistanceLevel => 48;
     public override int? InstantNetherResistanceLevel => 50;
     public override int? ItemRadiusOverride => 2;
-    public override int UseDevice => 18;
-    public override int SavingThrow => 20;
-    public override int Stealth => 1;
-    public override int Search => 16;
     public override int BasePerception => 4;
     public override int MeleeToHit => 50;
     public override int RangedToHit => 32;
     public override int DisarmBonusPerLevel => 12;
-    public override int DeviceBonusPerLevel => 7;
-    public override int SaveBonusPerLevel => 10;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 20;
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 4;
@@ -59,113 +80,9 @@ internal class ChosenOneCharacterClass : CharacterClass
         "gain a large number of passive magical abilities (too long",
         "to list here) as they increase in level."
     };
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(WarriorArtifactBias), 1) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
     public override bool OutfitsWithScrollsOfLight => true;
-
-    public override void CalcBonuses()
-    {
-        Game.GlowInTheDarkRadius = 1;
-        if (Game.ExperienceLevel.IntValue >= 2)
-        {
-            Game.HasConfusionResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 4)
-        {
-            Game.HasFearResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 6)
-        {
-            Game.HasBlindnessResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 8)
-        {
-            Game.HasFeatherFall = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 10)
-        {
-            Game.HasSeeInvisibility = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 12)
-        {
-            Game.HasSlowDigestion = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 14)
-        {
-            Game.HasSustainConstitution = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 16)
-        {
-            Game.HasPoisonResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 18)
-        {
-            Game.HasSustainDexterity = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 20)
-        {
-            Game.HasSustainStrength = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 22)
-        {
-            Game.HasHoldLife = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 24)
-        {
-            Game.HasFreeAction = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 26)
-        {
-            Game.HasTelepathy = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 28)
-        {
-            Game.HasDarkResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 30)
-        {
-            Game.HasLightResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 32)
-        {
-            Game.HasSustainCharisma = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 34)
-        {
-            Game.HasSoundResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 36)
-        {
-            Game.HasDisenchantResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 38)
-        {
-            Game.HasRegeneration = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 40)
-        {
-            Game.HasSustainIntelligence = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 42)
-        {
-            Game.HasChaosResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 44)
-        {
-            Game.HasSustainWisdom = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 46)
-        {
-            Game.HasNexusResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 48)
-        {
-            Game.HasShardResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue >= 50)
-        {
-            Game.HasNetherResistance = true;
-        }
-    }
+    protected override string SpellAbilityBindingKey => nameof(StrengthAbility);
 }

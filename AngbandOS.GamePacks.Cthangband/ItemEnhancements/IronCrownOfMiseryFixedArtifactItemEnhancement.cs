@@ -1,10 +1,11 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(IsCursedAttribute), "true"),
+        (nameof(RegenAttribute), "true"),
         (nameof(ValuelessAttribute), "true"),
         (nameof(FreeActAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
@@ -18,20 +19,15 @@ public class IronCrownOfMiseryFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(HoldLifeAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
     };
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(RegenAttribute), "true"),
-        (nameof(IsCursedAttribute), "true"),
-    };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(ValueAttribute), "112400"),
         (nameof(AttacksAttribute), "25"),
-        (nameof(RadiusAttribute), "3"),
-        (nameof(DexterityAttribute), "-25"),
-        (nameof(ConstitutionAttribute), "-25"),
-        (nameof(StrengthAttribute), "-25"),
+        (nameof(GlowRadiusAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "-25"),
+        (nameof(BonusConstitutionAttribute), "-25"),
+        (nameof(BonusStrengthAttribute), "-25"),
     };
     public override string FriendlyName => "of Misery";
 }

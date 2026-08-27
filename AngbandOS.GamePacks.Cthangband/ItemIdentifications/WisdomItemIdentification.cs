@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband
 {
-    [Serializable]
     public class WisdomItemIdentification : ItemIdentificationGameConfiguration
 {
         public override string AttributeFilterBindingKey => nameof(WisdomItemIdentificationAttributeFilter);

@@ -9,22 +9,17 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class PriestCharacterClass : CharacterClass
 {
     private PriestCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(PriestCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
+        (1, null, nameof(PriestCharacterClassItemEnhancement)) 
+    };
     public override int ID => 2;
     public override string Title => "Priest";
-    public override int UseDevice => 30;
-    public override int SavingThrow => 32;
-    public override int Stealth => 2;
-    public override int Search => 16;
     public override int BasePerception => 8;
     public override int UnpriestlyWeaponAdditionalFailureChance => 25;
     public override int? AttackAndDamageBonusForUnpriestlyWeapon => -2;
     public override int MeleeToHit => 48;
     public override int RangedToHit => 36;
     public override int DisarmBonusPerLevel => 7;
-    public override int DeviceBonusPerLevel => 10;
-    public override int SaveBonusPerLevel => 12;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 20;
     public override int RangedAttackBonusPerLevel => 20;
     public override int HitDieBonus => 2;
@@ -66,19 +61,19 @@ internal class PriestCharacterClass : CharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+    protected override string SpellAbilityBindingKey => nameof(WisdomAbility);
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(PriestlyArtifactBias), 1) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(10000 / ((level * level) + 40)));
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(LifeRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(LifeRealm),
+        nameof(DeathRealm)
     };
-    public override Realm[] AvailableSecondaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(NatureRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(FolkRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
+    protected override string[] AvailableSecondaryRealmBindingKeys => new string[] {
+        nameof(NatureRealm),
+        nameof(ChaosRealm),
+        nameof(TarotRealm),
+        nameof(FolkRealm),
+        nameof(CorporealRealm)
     };
     public override bool WorshipsADeity => true;
 }

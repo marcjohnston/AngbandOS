@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Shardl1d50p75r2ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;

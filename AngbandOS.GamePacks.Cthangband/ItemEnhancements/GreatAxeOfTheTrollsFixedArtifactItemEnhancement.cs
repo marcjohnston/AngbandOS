@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class GreatAxeOfTheTrollsFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BlessedAttribute), "true"),
         (nameof(BrandColdAttribute), "true"),
@@ -21,19 +20,19 @@ public class GreatAxeOfTheTrollsFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(SlayUndeadAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.MassCarnageActivation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "18"),
         (nameof(MeleeToHitAttribute), "15"),
         (nameof(AttacksAttribute), "8"),
         (nameof(ValueAttribute), "200000"),
-        (nameof(WisdomAttribute), "2"),
-        (nameof(IntelligenceAttribute), "2"),
-        (nameof(DexterityAttribute), "2"),
-        (nameof(ConstitutionAttribute), "2"),
-        (nameof(CharismaAttribute), "2"),
-        (nameof(StrengthAttribute), "2")
+        (nameof(BonusWisdomAttribute), "2"),
+        (nameof(BonusIntelligenceAttribute), "2"),
+        (nameof(BonusDexterityAttribute), "2"),
+        (nameof(BonusConstitutionAttribute), "2"),
+        (nameof(BonusCharismaAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "2")
     };
     public override string FriendlyName => "of the Trolls";
 }

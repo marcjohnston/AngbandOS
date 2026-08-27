@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ColdBallProjectileMonsterSpell : ProjectileMonsterSpellGameConfiguration
 {
     public override (string, string) KnowledgeAction => ("which", "produce frost balls");

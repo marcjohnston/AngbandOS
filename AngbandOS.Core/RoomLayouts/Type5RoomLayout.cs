@@ -18,14 +18,12 @@ internal class Type5RoomLayout : RoomLayout
     public override void Build(int objectLevel, int yval, int xval)
     {
         int y, x;
-        int[] what = new int[64];
         GridTile cPtr;
-        bool empty = false;
         int y1 = yval - 4;
         int y2 = yval + 4;
         int x1 = xval - 11;
         int x2 = xval + 11;
-        MonsterRaceFilter getMonNumHook;
+        MonsterRaceFilter monsterRaceFilter;
         for (y = y1 - 1; y <= y2 + 1; y++)
         {
             for (x = x1 - 1; x <= x2 + 1; x++)
@@ -98,54 +96,52 @@ internal class Type5RoomLayout : RoomLayout
             } while (Game.SingletonRepository.Get<MonsterRace>(_templateRace).Unique || Game.SingletonRepository.Get<MonsterRace>(_templateRace).Level + Game.DieRoll(5) > Game.Difficulty + Game.DieRoll(5));
             if (Game.DieRoll(2) != 1 && Game.Difficulty >= 25 + Game.DieRoll(15))
             {
-                getMonNumHook = new SymbolSystemMonsterRaceFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace).Symbol.Character);
+                monsterRaceFilter = new SymbolSystemMonsterRaceFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace).Symbol.Character);
             }
             else
             {
-                getMonNumHook = new CloneSystemMonsterRaceFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace));
+                monsterRaceFilter = new CloneSystemMonsterRaceFilter(Game, Game.SingletonRepository.Get<MonsterRace>(_templateRace));
             }
         }
         else if (tmp < 25)
         {
-            getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(JellyMonsterRaceFilter));
+            monsterRaceFilter = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(JellyMonsterRaceFilter));
         }
         else if (tmp < 50)
         {
-            getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(TreasureMonsterRaceFilter));
+            monsterRaceFilter = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(TreasureMonsterRaceFilter));
         }
         else if (tmp < 65)
         {
             if (Game.DieRoll(3) == 1)
             {
-                getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(KennelMonsterRaceFilter));
+                monsterRaceFilter = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(KennelMonsterRaceFilter));
             }
             else
             {
-                getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(AnimalMonsterRaceFilter));
+                monsterRaceFilter = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(AnimalMonsterRaceFilter));
             }
         }
         else
         {
             if (Game.DieRoll(3) == 1)
             {
-                getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(ChapelMonsterRaceFilter));
+                monsterRaceFilter = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(ChapelMonsterRaceFilter));
             }
             else
             {
-                getMonNumHook = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(UndeadMonsterRaceFilter));
+                monsterRaceFilter = Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(UndeadMonsterRaceFilter));
             }
         }
+        MonsterRace[] monsterRaces = new MonsterRace[64];
         for (int i = 0; i < 64; i++)
         {
-            what[i] = Game.GetMonNum(Game.Difficulty + 10, getMonNumHook);
-            if (what[i] == 0)
+            MonsterRace? monsterRace = Game.GetMonsterRace(Game.Difficulty + 10, monsterRaceFilter);
+            if (monsterRace is null)
             {
-                empty = true;
+                return;
             }
-        }
-        if (empty)
-        {
-            return;
+            monsterRaces[i] = monsterRace;
         }
         Game.DangerRating += 10;
         if (Game.Difficulty <= 40 && Game.DieRoll((Game.Difficulty * Game.Difficulty) + 50) < 300)
@@ -156,9 +152,8 @@ internal class Type5RoomLayout : RoomLayout
         {
             for (x = xval - 9; x <= xval + 9; x++)
             {
-                int rIdx = what[Game.RandomLessThan(64)];
-                MonsterRace race = Game.SingletonRepository.Get<MonsterRace>(rIdx);
-                Game.PlaceMonsterAux(y, x, race, false, false, false);
+                MonsterRace monsterRace = monsterRaces[Game.RandomLessThan(64)];
+                Game.PlaceOneMonsterByRace(y, x, monsterRace, false, false, false);
             }
         }
     }

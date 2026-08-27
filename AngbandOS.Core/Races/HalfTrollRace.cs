@@ -9,12 +9,11 @@ namespace AngbandOS.Core.Races;
 internal class HalfTrollRace : Race
 {
     private HalfTrollRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(HalfTrollRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(HalfTrollRaceItemEnhancement)),
+        (15, nameof(HalfTrollRaceLevel15ItemEnhancement))
+    };
     public override string Title => "Half Troll";
-    public override int UseDevice => -8;
-    public override int SavingThrow => -8;
-    public override int Stealth => -2;
-    public override int Search => -1;
     public override int BasePerception => 5;
     public override int MeleeToHit => 20;
     public override int RangedToHit => -10;
@@ -33,18 +32,7 @@ internal class HalfTrollRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 10 ? "berserk            (racial, unusable until level 10)" : "berserk            (racial, cost 12, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
-        if (level > 14)
-        {
-            itemCharacteristics.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
-        }
-    }
-    protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(OrcishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -53,15 +41,5 @@ internal class HalfTrollRace : Race
             return new string[] { "You enter berserk fury (cost 12)." };
         }
         return null;
-    }
-
-    public override void CalcBonuses()
-    {
-        Game.HasSustainStrength = true;
-        if (Game.ExperienceLevel.IntValue > 14)
-        {
-            Game.HasRegeneration = true;
-            Game.HasSlowDigestion = true;
-        }
     }
 }

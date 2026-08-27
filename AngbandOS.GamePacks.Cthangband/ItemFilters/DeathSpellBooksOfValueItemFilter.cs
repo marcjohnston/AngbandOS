@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for death books that have value.
 /// </summary>
-[Serializable]
 public class DeathSpellBooksOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]

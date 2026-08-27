@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class GreatAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HatesAcidAttribute), "true"),
         (nameof(HatesFireAttribute), "true"),
@@ -12,7 +11,7 @@ public class GreatAxePolearmWeaponItemFactoryItemEnhancement : ItemEnhancementGa
         (nameof(CanApplySlayingBonusAttribute), "true"),
         (nameof(CanApplyBonusArmorClassMiscPowerAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "230"),
         (nameof(ValueAttribute), "500"),

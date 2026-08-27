@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class YouAreSplashedWithAcidRenderMessageScript : RenderMessageScriptGameConfiguration
 {
     public override string Message => "You are splashed with acid!";

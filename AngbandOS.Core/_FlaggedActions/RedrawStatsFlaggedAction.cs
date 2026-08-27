@@ -15,7 +15,7 @@ internal class RedrawStatsFlaggedAction : FlaggedAction
     {
         if (stat.Innate < stat.InnateMax)
         {
-            Game.Screen.Print(stat.NameReduced, RowStat + rowOffset, 0);
+            Game.Screen.Print(stat.Name.ToLower(), RowStat + rowOffset, 0);
             string tmp = stat.Adjusted.StatToString();
             Game.Screen.Print(ColorEnum.Yellow, tmp, RowStat + rowOffset, ColStat);
         }

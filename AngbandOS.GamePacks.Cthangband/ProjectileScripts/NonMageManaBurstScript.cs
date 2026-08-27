@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class NonMageManaBurstScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;
@@ -31,7 +30,6 @@ public class NonMageManaBurstScript : ProjectileScriptGameConfiguration
     public override string DamageRollExpression => "3d5+X+X/4";
 }
 
-[Serializable]
 public class NonMageLevel30ManaBurstScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;

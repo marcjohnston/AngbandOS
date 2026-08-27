@@ -5,7 +5,7 @@
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
-    internal class ReferenceGameStateBag : GameStateBag
+internal class ReferenceGameStateBag : GameStateBag
 {
     public int ObjectId { get; }
     public ReferenceGameStateBag(int objectId)

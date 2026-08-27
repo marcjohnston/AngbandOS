@@ -9,21 +9,18 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class PaladinCharacterClass : CharacterClass
 {
     private PaladinCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(PaladinCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
+    {
+        (1, null, nameof(PaladinCharacterClassItemEnhancement)),
+        (40, null, nameof(PaladinCharacterClassLevel40ItemEnhancement))
+    };
     public override int ID => 5;
     public override string Title => "Paladin";
     public override int? InstantFearResistanceLevel => 40;
-    public override int UseDevice => 24;
-    public override int SavingThrow => 26;
-    public override int Stealth => 1;
-    public override int Search => 12;
     public override int BasePerception => 2;
     public override int MeleeToHit => 68;
     public override int RangedToHit => 40;
     public override int DisarmBonusPerLevel => 7;
-    public override int DeviceBonusPerLevel => 10;
-    public override int SaveBonusPerLevel => 11;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 35;
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 6;
@@ -39,25 +36,17 @@ internal class PaladinCharacterClass : CharacterClass
     };
     public override int SpellWeight => 400;
     public override void Cast() => CastMentalism();
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
+    protected override string SpellAbilityBindingKey => nameof(WisdomAbility);
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(PriestlyArtifactBias), 1) };
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(77777 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(LifeRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(LifeRealm),
+        nameof(DeathRealm)
     };
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 39)
-        {
-            Game.HasFearResistance = true;
-        }
-    }
     protected override string[]? ItemActionNames => new string[]
     {
         nameof(GainExperienceForUnusableHighLevelSpellBookDestroyedItemAction)

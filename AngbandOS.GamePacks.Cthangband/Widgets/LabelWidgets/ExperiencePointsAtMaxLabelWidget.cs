@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a text widget that renders asterisks when the player has attained the maximum number of experience points.
 /// </summary>
-[Serializable]
 public class ExperiencePointsAtMaxLabelWidget : LabelWidgetGameConfiguration
 {
     public override int X => 4;

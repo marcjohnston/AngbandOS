@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Detect everything and do probing and identify an item fully.
 /// </summary>
-[Serializable]
 public class ProbingDetectionAndFullIdEvery1000Activation : ActivationGameConfiguration
 {
     

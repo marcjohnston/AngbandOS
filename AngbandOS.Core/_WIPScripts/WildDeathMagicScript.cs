@@ -21,7 +21,8 @@ internal class WildDeathMagicScript : Script, ICastSpellScript
         int spellIndex= spell.SpellIndex;
         if (bookIndex == 3 && Game.DieRoll(2) == 1)
         {
-            Game.Monsters[0].SanityBlast(true);
+            Game.MsgPrint("Your sanity is shaken by reading the Necronomicon!");
+            Game.SanityBlast(100);
         }
         else
         {

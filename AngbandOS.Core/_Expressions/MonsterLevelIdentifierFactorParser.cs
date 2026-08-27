@@ -9,8 +9,8 @@ namespace AngbandOS.Core.Expressions;
 internal class MonsterLevelIdentifierFactorParser : IdentifierFactorParser
 {
     public override string Identifier => "ml";
-    protected override Expression GenerateExpression(string matchedIdentifier)
+    protected override Expression GenerateExpression(string matchedIdentifier, bool? sign)
     {
-        return new MonsterLevelExpression(Identifier);
+        return new MonsterLevelExpression(Identifier, sign);
     }
 }

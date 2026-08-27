@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class PhlogistonSpellFolkRealmSuccessMappedSpellScript : MappedSpellScriptGameConfiguration
 {
     public override string SpellBindingKey => nameof(PhlogistonFolkSpell);

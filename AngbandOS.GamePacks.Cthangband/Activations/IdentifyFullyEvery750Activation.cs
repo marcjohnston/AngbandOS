@@ -9,10 +9,8 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Identify an item fully.
 /// </summary>
-[Serializable]
 public class IdentifyFullyEvery750Activation : ActivationGameConfiguration
-{
-    
+{   
     public override string? PreActivationMessage => "Your {0} glows yellow...";
 
     public override string ActivationCancellableScriptItemBindingKey => nameof(SystemScriptsEnum.IdentifyItemFullyScript);
@@ -22,5 +20,4 @@ public class IdentifyFullyEvery750Activation : ActivationGameConfiguration
     public override int Value => 10000;
 
     public override string Name => "Identify true";
-
 }

@@ -10,7 +10,7 @@ internal class AcidItemEffect : ItemEffect
 {
     private AcidItemEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ApplyItem(Item oPtr, int who, int x, int y)
+    protected override bool ApplyItem(Item oPtr, Monster? monster, int x, int y)
     {
         bool obvious = false;
         bool ignore = false;
@@ -21,11 +21,11 @@ internal class AcidItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectiveAttributeSet.HatesAcid)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesAcidAttribute)).Get())
         {
             doKill = true;
             noteKill = oPtr.StackCount > 1 ? " melt!" : " melts!";
-            if (oPtr.EffectiveAttributeSet.IgnoreAcid)
+            if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Get())
             {
                 ignore = true;
             }
@@ -56,7 +56,7 @@ internal class AcidItemEffect : ItemEffect
                 Game.DeleteObject(oPtr);
                 if (isPotion)
                 {
-                    oPtr.Smash(who, y, x);
+                    oPtr.Smash(monster, y, x);
                 }
                 Game.ConsoleView.RefreshMapLocation(y, x);
             }

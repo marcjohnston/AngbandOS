@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(BlessedAttribute), "true"),
         (nameof(FreeActAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
@@ -28,16 +23,16 @@ public class TridentOfTheGnorriFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(TelepathyAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.TeleportAwayEvery150DirectionalActivation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "19"),
         (nameof(MeleeToHitAttribute), "15"),
         (nameof(DamageDiceAttribute), "3"),
         (nameof(ValueAttribute), "120000"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(SlayDragonAttribute), "3"),
-        (nameof(DexterityAttribute), "4"),
+        (nameof(BonusDexterityAttribute), "4"),
     };
     public override string FriendlyName => "of the Gnorri";
 }

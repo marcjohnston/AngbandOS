@@ -13,27 +13,9 @@ internal class AttDragonRandomMutation : Mutation
     public override string GainMessage => "You start attracting dragons.";
     public override string HaveMessage => "You attract dragons.";
     public override string LoseMessage => "You stop attracting dragons.";
-
-    public override void ProcessWorld()
+    public override string Title => "Dragon Attraction (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (Game.HasAntiMagic || base.Game.DieRoll(3000) != 13)
-        {
-            return;
-        }
-        bool dSummon;
-        if (base.Game.DieRoll(5) == 1)
-        {
-            dSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(DragonMonsterRaceFilter)), true, true);
-        }
-        else
-        {
-            dSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(DragonMonsterRaceFilter)), true, false);
-        }
-        if (!dSummon)
-        {
-            return;
-        }
-        Game.MsgPrint("You have attracted a dragon!");
-        Game.Disturb(false);
-    }
+        (1, nameof(AttDragonRandomMutationItemEnhancement))
+    };
 }

@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class NibelungRace : Race
 {
     private NibelungRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(NibelungRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(NibelungRaceItemEnhancement)) 
+    };
     public override string Title => "Nibelung";
-    public override int UseDevice => 5;
-    public override int SavingThrow => 10;
-    public override int Stealth => 1;
-    public override int Search => 5;
     public override int BasePerception => 10;
     public override int MeleeToHit => 9;
     public override int RangedToHit => 0;
@@ -33,14 +31,7 @@ internal class NibelungRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 5 ? "detect doors+traps (racial, WIS based, unusable until level 5)" : "detect doors+traps (racial, cost 5, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(DwarvenSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -49,11 +40,5 @@ internal class NibelungRace : Race
             return new string[] { "You can find traps, doors and stairs (cost 5)." };
         }
         return null;
-    }
-
-    public override void CalcBonuses()
-    {
-        Game.HasDisenchantResistance = true;
-        Game.HasDarkResistance = true;
     }
 }

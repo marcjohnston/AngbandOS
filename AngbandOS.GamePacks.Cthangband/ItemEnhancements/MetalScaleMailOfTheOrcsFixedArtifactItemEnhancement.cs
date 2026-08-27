@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -18,7 +17,7 @@ public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(ResFireAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.GenocideEvery500Activation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(BonusArmorClassAttribute), "2"),
         (nameof(TreasureRatingAttribute), "20"),
@@ -26,8 +25,8 @@ public class MetalScaleMailOfTheOrcsFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(AttacksAttribute), "40"),
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "150000"),
-        (nameof(CharismaAttribute), "4"),
-        (nameof(StrengthAttribute), "4"),
+        (nameof(BonusCharismaAttribute), "4"),
+        (nameof(BonusStrengthAttribute), "4"),
     };
     public override string FriendlyName => "of the Orcs";
 }

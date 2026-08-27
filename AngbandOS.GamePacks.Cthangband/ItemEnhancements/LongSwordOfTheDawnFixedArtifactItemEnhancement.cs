@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(BrandFireAttribute), "true"),
         (nameof(FreeActAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -27,7 +22,7 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(SustChaAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.SummonFriendlyReaverEvery500p1d500Activation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "20"),
@@ -37,9 +32,9 @@ public class LongSwordOfTheDawnFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(VorpalExtraAttacks1InChanceAttribute), "2"),
         (nameof(Vorpal1InChanceAttribute), "6"),
         (nameof(SlayDragonAttribute), "3"),
-        (nameof(InfravisionAttribute), "3"),
-        (nameof(CharismaAttribute), "3"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(InfraVisionAttribute), "3"),
+        (nameof(BonusCharismaAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of the Dawn";
 }

@@ -13,15 +13,9 @@ internal class LimberPassiveMutation : Mutation
     public override string GainMessage => "Your muscles become limber.";
     public override string HaveMessage => "Your body is very limber (+3 DEX).";
     public override string LoseMessage => "Your muscles stiffen.";
-    public override MutationGroupEnum Group => MutationGroupEnum.Joints;
-
-    public override void OnGain()
-    {
-        Game.DexterityBonus += 3;
-    }
-
-    public override void OnLose()
-    {
-        Game.DexterityBonus -= 3;
-    }
+    public override string Group => "Joints";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(LimberPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Limber (P)";
 }

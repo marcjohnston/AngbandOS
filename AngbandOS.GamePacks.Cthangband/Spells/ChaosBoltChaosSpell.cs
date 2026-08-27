@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class ChaosBoltChaosSpell : SpellGameConfiguration
 {
     public override string Name => "Chaos Bolt";

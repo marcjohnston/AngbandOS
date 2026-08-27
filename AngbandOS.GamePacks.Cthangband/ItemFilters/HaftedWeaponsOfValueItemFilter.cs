@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for hafted weapons that have value.
 /// </summary>
-[Serializable]
 public class HaftedWeaponsOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]

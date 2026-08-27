@@ -13,20 +13,10 @@ internal class CowardiceRandomMutation : Mutation
     public override string GainMessage => "You become an incredible coward!";
     public override string HaveMessage => "You are subject to cowardice.";
     public override string LoseMessage => "You are no longer an incredible coward!";
-    public override MutationGroupEnum Group => MutationGroupEnum.Bravery;
-
-    public override void ProcessWorld()
+    public override string Group => "Bravery";
+    public override string Title => "Cowardice (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (base.Game.DieRoll(3000) != 13)
-        {
-            return;
-        }
-        if (Game.HasFearResistance || Game.HeroismTimer.Value != 0 || Game.SuperheroismTimer.Value != 0)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.MsgPrint("It's so dark... so scary!");
-        Game.FearTimer.AddTimer(13 + base.Game.DieRoll(26));
-    }
+        (1, nameof(CowardiceRandomMutationItemEnhancement))
+    };
 }

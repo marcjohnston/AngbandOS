@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Enter a store
 /// </summary>
-[Serializable]
 public class EnterStoreGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '_';

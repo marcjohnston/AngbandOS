@@ -13,14 +13,8 @@ internal class XtraLegsPassiveMutation : Mutation
     public override string GainMessage => "You grow an extra pair of legs!";
     public override string HaveMessage => "You have an extra pair of legs (+3 speed).";
     public override string LoseMessage => "Your extra legs disappear!";
-
-    public override void OnGain()
-    {
-        Game.SpeedBonus += 3;
-    }
-
-    public override void OnLose()
-    {
-        Game.SpeedBonus -= 3;
-    }
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(XtraLegsPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Extra Legs (P)";
 }

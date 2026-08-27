@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class DaggerWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.DaggerCharityFixedArtifact), nameof(FixedArtifactsEnum.DaggerFaithFixedArtifact), nameof(FixedArtifactsEnum.DaggerHopeFixedArtifact), nameof(FixedArtifactsEnum.DaggerIcicleFixedArtifact), nameof(FixedArtifactsEnum.DaggerOfAssassinFixedArtifact), nameof(FixedArtifactsEnum.DaggerOfThothFixedArtifact) };

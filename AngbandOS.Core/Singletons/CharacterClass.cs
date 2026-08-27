@@ -13,13 +13,21 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     {
         Game = game;
     }
-    protected abstract string EnhancementBindingKey { get; }
+
+    /// <summary>
+    /// Represents the attribute enhancements that are additive for all that apply.
+    /// </summary>
+    protected virtual (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => null;
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(ReadOnlyAttributeSet), saveGameState.CreateDerivedGameStateBag(ReadOnlyAttributeSet, typeof(ReadOnlyAttributeSet)))
-        );
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
+            (nameof(MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, bool?, ReadOnlyAttributeSet>(MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets,
+                _minimumExperienceLevel => saveGameState.CreateGameStateBag(_minimumExperienceLevel),
+                _hasHeavyArmor => saveGameState.CreateGameStateBag(_hasHeavyArmor),
+                _attributeSet => saveGameState.CreateDerivedGameStateBag(_attributeSet, typeof(ReadOnlyAttributeSet))
+        )));
     }
     public virtual Bonuses? GetBonusesForMeleeWeapon(Item? oPtr) => null;
 
@@ -77,16 +85,11 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public virtual void Cast() => CastSpell();
 
     /// <summary>
-    ///  Updates the Game bonuses based on the player character and race.  The ChosenOne character class overrides this method.  Does nothing, by default.
-    /// </summary>
-    public virtual void CalcBonuses() { }
-
-    /// <summary>
     /// Cast a spell.  Game.DoCast is called by default.  Mentalism casting type calls Game.DoMentalism.
     /// </summary>
     protected void CastSpell()
     {
-        string prayer = Game.CharacterClass.SpellNoun;
+        string prayer = SpellNoun;
         if (!Game.CanCastSpells)
         {
             Game.MsgPrint("You cannot cast spells!");
@@ -114,7 +117,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         Game.HandleStuff();
 
         // Allow the player to select the spell.
-        if (!Game.GetSpell(out Spell? spell, Game.CharacterClass.CastVerb, oPtr, true))
+        if (!Game.GetSpell(out Spell? spell, CastVerb, oPtr, true))
         {
             Game.MsgPrint($"You don't know any {prayer}s in that book.");
             return;
@@ -228,7 +231,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
                 {
                     Game.MsgPrint("Your mind unleashes its power in an uncontrollable storm!");
                     Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile));
-                    projectile.Fire(1, 2 + (plev / 10), Game.MapY.IntValue, Game.MapX.IntValue, plev * 2, kill: true, grid: true, item: true, jump: true, beam: false, thru: false, hide: false, stop: false);
+                    projectile.Fire(null, 2 + (plev / 10), Game.MapY.IntValue, Game.MapX.IntValue, plev * 2, kill: true, grid: true, item: true, jump: true, beam: false, thru: false, hide: false, stop: false);
                     Game.Mana.IntValue = Math.Max(0, Game.Mana.IntValue - (plev * Math.Max(1, plev / 10)));
                 }
             }
@@ -381,38 +384,105 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
 
     public virtual string Key => GetType().Name;
 
-    /// <summary>
-    /// Returns the entity serialized into a Json string.
-    /// </summary>
-    /// <returns></returns>
 
     public string GetKey => Key;
-    public ItemEnhancement Enhancement { get; private set; }
-    public void Refresh()
+
+    /// <summary>
+    /// Represents the bound experience levels, heavy weapon and enhancement tuples.  This property is bound using the <see cref="MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples"/> property during the binding phase.
+    /// </summary>
+    public (int, bool?, ItemEnhancement)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples { get; private set; }
+
+    public ReadOnlyAttributeSet AttributeSet { get; private set; }
+
+    /// <summary>
+    /// Refreshed the read-only attribute set.  Performed by the <see cref="UpdateBonusesFlaggedAction"/>.
+    /// </summary>
+    /// <returns></returns>
+    public void RefreshAndSquashAttributeSet()
     {
-        ReadOnlyAttributeSet = Enhancement.GenerateAttributeSet();
+        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
+        if (MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets is not null)
+        {
+            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ReadOnlyAttributeSet attributeSet) in MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets)
+            {
+                if (Game.ExperienceLevel.IntValue >= minimumExperienceLevel && (!hasHeavyArmor.HasValue || hasHeavyArmor.Value == Game.ArmorIsHeavy()))
+                {
+                    effectiveAttributeSet.MergeAttributeSet(attributeSet);
+                }
+            }
+        }
+        AttributeSet = effectiveAttributeSet.ToReadOnly();
     }
+
+    /// <summary>
+    /// Generates the <see cref="ReadOnlyAttributeSet"/> for each enhancement.  This process should only be done during birth.  The enhancements may have random
+    /// configuration embedded and this generate fixes those random values to be used throughout the game.
+    /// </summary>
+    public void RegenerateAttributeSets()
+    {
+        if (MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples is null)
+        {
+            MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = null;
+        }
+        else
+        {
+            List<(int, bool?, ReadOnlyAttributeSet)> tupleList = new List<(int, bool?, ReadOnlyAttributeSet)>();
+            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ItemEnhancement enhancement) in MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples)
+            {
+                tupleList.Add((minimumExperienceLevel, hasHeavyArmor, enhancement.GenerateAttributeSet()));
+            }
+            MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = tupleList.ToArray();
+        }
+        RefreshAndSquashAttributeSet();
+    }
+
     public void Bind(RestoreGameState? restoreGameState)
     {
         ItemActions = Game.SingletonRepository.GetNullable<ItemAction>(ItemActionNames);
         MeleeAttacksPerRoundBonus = Game.ParseNullableNumericExpression(MeleeAttacksPerRoundBonusExpression);
-        Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
         TarotDrawRoll = Game.ParseNumericExpression(TarotDrawRollExpression);
         SpellOfWonderBeamProbabilityRoll = Game.ParseNumericExpression(SpellOfWonderBeamProbabilityRollExpression);
         InvokeSpiritsBeamProbabilityRoll = Game.ParseNumericExpression(InvokeSpiritsBeamProbabilityRollExpression);
+        ArmorMaxWeightExpression = Game.ParseNullableNumericExpression(ArmorMaxWeightExpressionText);
+        MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples = MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, bool? HasHeavyArmor, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, _item.HasHeavyArmor, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
+        AvailablePrimaryRealms = Game.SingletonRepository.Get<Realm>(AvailablePrimaryRealmBindingKeys);
+        AvailableSecondaryRealms = Game.SingletonRepository.Get<Realm>(AvailableSecondaryRealmBindingKeys);
+        SpellAbility = Game.SingletonRepository.Get<Ability>(SpellAbilityBindingKey);
+
+        if (ArtifactBiasAndWeightBindingKeys is null)
+        {
+            ArtifactBiasWeightedRandom = null;
+        }
+        else
+        {
+            ArtifactBiasWeightedRandom = new WeightedRandom<ArtifactBias?>(Game, ArtifactBiasAndWeightBindingKeys.Select(_artifactBiasAndWeight => (Game.SingletonRepository.GetNullable<ArtifactBias>(_artifactBiasAndWeight.ArtifactBiasBindingKey), _artifactBiasAndWeight.Weight)));
+        }
 
         if (restoreGameState is not null)
         {
-            ReadOnlyAttributeSet = restoreGameState.GetByKey(nameof(ReadOnlyAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
+            MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets)).GetTuplesOrDefault<int, bool?, ReadOnlyAttributeSet>(
+                _restoreGameState => _restoreGameState.GetInt(),
+                _restoreGameState => _restoreGameState.GetBoolOrDefault(),
+                _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
         }
     }
 
-    public ReadOnlyAttributeSet ReadOnlyAttributeSet { get; private set; }
+    /// <summary>
+    /// Returns the current read-only set of generated enhancements.  These enhancements are generated at birth via the <see cref="RegenerateAttributeSets"/> method and do not change.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public (int, bool?, ReadOnlyAttributeSet)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets { get; private set; } = null;
 
     /// <summary>
-    /// Returns true, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.
+    /// Returns the maximum weight the character class can carry before the armor is considered to be TooHeavy, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.
     /// The monk and mystic character classes return true.
     /// </summary>
+    protected virtual string? ArmorMaxWeightExpressionText => "100+4*X";
+    public Expression? ArmorMaxWeightExpression { get; private set; }
+
     public virtual bool IsMartialArtist => false;
 
     /// <summary>
@@ -557,11 +627,6 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public virtual int? InstantFearResistanceLevel => null;
 
     /// <summary>
-    /// Returns true, if the character class receives level rewards.  Returns false, by default.  Fanatics and cultists return true.
-    /// </summary>
-    public virtual bool ReceivesLevelRewards => false;
-
-    /// <summary>
     /// Returns whether or not the character can backstab.  Returns false, by default.  Rogues return true.
     /// </summary>
     public virtual bool CanBackstab => false;
@@ -571,21 +636,11 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// </summary>
     public virtual bool OutfitsWithScrollsOfLight => false;
 
-    public abstract int UseDevice { get; }
-
     public abstract int MeleeToHit { get; }
 
     public abstract int RangedToHit { get; }
 
-    public abstract int SavingThrow { get; }
-
-    public abstract int Search { get; }
-
     public abstract int BasePerception { get; }
-
-    public abstract int Stealth { get; }
-
-    public abstract int DeviceBonusPerLevel { get; }
 
     public abstract int DisarmBonusPerLevel { get; }
 
@@ -596,10 +651,6 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public abstract int MeleeAttackBonusPerLevel { get; }
 
     public abstract int RangedAttackBonusPerLevel { get; }
-
-    public abstract int SaveBonusPerLevel { get; }
-
-    public abstract int StealthBonusPerLevel { get; }
 
     public abstract string Title { get; }
 
@@ -655,26 +706,30 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// <value>The spell weight.</value>
     public virtual int SpellWeight => 0;
 
-    public virtual Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility));
+    protected abstract string SpellAbilityBindingKey { get; }
+    public Ability SpellAbility { get; private set; }
     public virtual int MaximumMeleeAttacksPerRound(int level) => 5;
     public virtual int MaximumWeight => 35;
     public virtual int AttackSpeedMultiplier => 3;
-    public virtual ArtifactBias? ArtifactBias => null;
+    protected virtual (string? ArtifactBiasBindingKey, int Weight)[]? ArtifactBiasAndWeightBindingKeys => null;
+    public WeightedRandom<ArtifactBias?>? ArtifactBiasWeightedRandom { get; private set; }
     public virtual int FromScrollWarriorArtifactBiasPercentageChance => 0;
     public virtual bool SenseInventoryTest(int level) => false;
     public virtual bool DetailedSenseInventory => false;
 
+    protected virtual string[] AvailablePrimaryRealmBindingKeys => new string[] { };
+    protected virtual string[] AvailableSecondaryRealmBindingKeys => new string[] {};
     /// <summary>
     /// Represents realms that are available to the character class.  Returns an empty array, if the character class cannot cast spells.
     /// </summary>
     /// <value>The available realms.</value>
-    public virtual Realm[] AvailablePrimaryRealms => new Realm[] { };
+    public Realm[] AvailablePrimaryRealms { get; private set; }
 
     /// <summary>
     /// Represents realms that are available to the character class.  Returns an empty array, if the character class cannot cast spells.
     /// </summary>
     /// <value>The available realms.</value>
-    public virtual Realm[] AvailableSecondaryRealms => new Realm[] { };
+    public Realm[] AvailableSecondaryRealms { get; private set; }
 
     public Realm[] RemainingAvailableSecondaryRealms()
     {
@@ -682,4 +737,9 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     }
 
     public virtual bool WorshipsADeity => false; // TODO: Only priests have a godname ... this seems off.
+    public override string ToString()
+    {
+        return $"{nameof(CharacterClass)}: {Title}";
+    }
+
 }

@@ -32,7 +32,7 @@ internal class RustProofScript : Script, IScript, ICastSpellScript
         }
         string itenName = item.GetDescription(false);
         // Set the ignore acid flag
-        item.EffectiveAttributeSet.IgnoreAcid = true;
+        item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Set();
         // Make sure the grammar of the message is correct
         string your = item.IsInInventory ? "Your" : "The";
         string s;

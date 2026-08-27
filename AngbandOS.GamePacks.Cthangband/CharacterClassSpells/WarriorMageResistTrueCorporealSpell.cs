@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class WarriorMageResistTrueCorporealSpell : CharacterClassSpellGameConfiguration
 {
     public override string SpellName => nameof(SpellsEnum.ResistTrueCorporealSpell);

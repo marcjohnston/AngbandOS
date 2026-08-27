@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, IIndexedSingletons, IGameSerialize
+internal sealed class MonsterRace : IMonsterCharacteristics, IGetKey, IToJson, IUniqueSequentialIndex, IGameSerialize
 {
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {

@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -13,7 +12,7 @@ public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(ShowModsAttribute), "true"),
         (nameof(SustDexAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(DamageDiceAttribute), "5"),
@@ -22,7 +21,7 @@ public class KatanaOfGrooFixedArtifactItemEnhancement : ItemEnhancementGameConfi
         (nameof(VorpalExtraAttacks1InChanceAttribute), "2"),
         (nameof(Vorpal1InChanceAttribute), "6"),
         (nameof(SpeedAttribute), "3"),
-        (nameof(DexterityAttribute), "3"),
+        (nameof(BonusDexterityAttribute), "3"),
         (nameof(AttacksAttribute), "3"),
     };
     public override string FriendlyName => "of Groo";

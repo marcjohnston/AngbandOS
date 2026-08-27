@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class HalfTitanRace : Race
 {
     private HalfTitanRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(HalfTitanRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(HalfTitanRaceItemEnhancement)) 
+    };
     public override string Title => "Half Titan";
-    public override int UseDevice => 5;
-    public override int SavingThrow => 2;
-    public override int Stealth => -2;
-    public override int Search => 1;
     public override int BasePerception => 8;
     public override int MeleeToHit => 25;
     public override int RangedToHit => 0;
@@ -33,13 +31,7 @@ internal class HalfTitanRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 35 ? "probing            (racial, unusable until level 35)" : "probing            (racial, cost 20, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(HumanSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -48,9 +40,5 @@ internal class HalfTitanRace : Race
             return new string[] { "You can probe monsters (cost 20)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasChaosResistance = true;
     }
 }

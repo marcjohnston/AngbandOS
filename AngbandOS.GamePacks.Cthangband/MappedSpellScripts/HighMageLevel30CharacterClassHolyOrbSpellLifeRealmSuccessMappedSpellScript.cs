@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class HighMageLevel30CharacterClassHolyOrbSpellLifeRealmSuccessMappedSpellScript : MappedSpellScriptGameConfiguration
 {
     public override string SpellBindingKey => nameof(HolyOrbLifeSpell);

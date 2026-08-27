@@ -26,16 +26,11 @@ internal class CarnageScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        for (int i = 1; i < Game.MonsterMax; i++)
+        foreach (Monster mPtr in Game.MonsterList)
         {
-            Monster mPtr = Game.Monsters[i];
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             if (mPtr.DistanceFromPlayer <= Constants.MaxSight)
             {
-                Game.DeleteMonsterByIndex(i, true);
+                Game.DeleteMonster(mPtr);
             }
         }
     }

@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Reflection.PortableExecutable;
-
 namespace AngbandOS.Core.Scripts;
 
 internal class GreatCrownEnchantmentScript : Script, IEnhancementScript
@@ -51,7 +49,7 @@ internal class GreatCrownEnchantmentScript : Script, IEnhancementScript
                     item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(HatOfSeeingItemEnhancement)));
                     if (Game.DieRoll(3) == 1)
                     {
-                        item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
+                        item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
                     }
                     break;
             }

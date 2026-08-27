@@ -9,31 +9,28 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class MonkCharacterClass : CharacterClass
 {
     private MonkCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(MonkCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
+    {
+        (1, null, nameof(MonkCharacterClassItemEnhancement)),
+        (25, false, nameof(MonkCharacterClassLevel25ItemEnhancement))
+    };
     public override int ID => 8;
     public override string Title => "Monk";
     public override int? InstantSpeedLevel => 10;
     public override int? InstantFreeActionLevel => 25;
-    public override int UseDevice => 32;
-    public override int SavingThrow => 28;
-    public override int Stealth => 5;
-    public override int Search => 32;
     public override int BasePerception => 24;
     public override int MeleeToHit => 64;
     public override int RangedToHit => 50;
     public override int DisarmBonusPerLevel => 15;
-    public override int DeviceBonusPerLevel => 12;
-    public override int SaveBonusPerLevel => 10;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 40;
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 6;
     public override int ExperienceFactor => 40;
 
     /// <summary>
-    /// Returns true, because characters of this class study martial arts.
+    /// Returns a weight limit, because characters of this class study martial arts.
     /// </summary>
-    public override bool IsMartialArtist => true;
+    protected override string? ArmorMaxWeightExpressionText => "100+4*X";
 
     public override Ability PrimeStat => Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility));
     public override string[] Info => new string[] {
@@ -72,23 +69,16 @@ internal class MonkCharacterClass : CharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
+    protected override string SpellAbilityBindingKey => nameof(WisdomAbility);
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(PriestlyArtifactBias), 1) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(20000 / ((level * level) + 40)));
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(ChaosRealm),
+        nameof(TarotRealm),
+        nameof(CorporealRealm)
     };
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 24 && !Game.MartialArtistHeavyArmor())
-        {
-            Game.HasFreeAction = true;
-        }
-    }
+    public override bool IsMartialArtist => true;
 }

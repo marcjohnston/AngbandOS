@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class HighMageMindBlastSpellTarotRealmSuccessMappedSpellScript : MappedSpellScriptGameConfiguration
 {
     public override string SpellBindingKey => nameof(MindBlastTarotSpell);

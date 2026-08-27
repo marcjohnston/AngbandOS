@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class TchoTchoRace : Race
 {
     private TchoTchoRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(TchoTchoRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(TchoTchoRaceItemEnhancement)) 
+    };
     public override string Title => "Tcho-Tcho";
-    public override int UseDevice => -10;
-    public override int SavingThrow => 2;
-    public override int Stealth => -1;
-    public override int Search => 1;
     public override int BasePerception => 7;
     public override int MeleeToHit => 12;
     public override int RangedToHit => 10;
@@ -33,13 +31,7 @@ internal class TchoTchoRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 8 ? "berserk            (racial, unusable until level 8)" : "berserk            (racial, cost 10, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(CthuloidSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 7)
@@ -47,9 +39,5 @@ internal class TchoTchoRace : Race
             return new string[] { "You can enter berserk fury (cost 10)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasFearResistance = true;
     }
 }

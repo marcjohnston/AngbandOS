@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class SpriteRace : Race
 {
     private SpriteRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(SpriteRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(SpriteRaceItemEnhancement)) 
+    };
     public override string Title => "Sprite";
-    public override int UseDevice => 10;
-    public override int SavingThrow => 10;
-    public override int Stealth => 4;
-    public override int Search => 10;
     public override int BasePerception => 10;
     public override int MeleeToHit => -12;
     public override int RangedToHit => 0;
@@ -33,17 +31,7 @@ internal class SpriteRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 12 ? "sleeping dust      (racial, unusable until level 12)" : "sleeping dust      (racial, cost 12, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
-        itemCharacteristics.Feather = true;
-        if (level > 9)
-        {
-            itemCharacteristics.Speed++;
-        }
-    }
-    protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(ElvishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -52,12 +40,5 @@ internal class SpriteRace : Race
             return new string[] { "You can throw magic dust which induces sleep (cost 12)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasFeatherFall = true;
-        Game.GlowInTheDarkRadius = 1;
-        Game.HasLightResistance = true;
-        Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
     }
 }

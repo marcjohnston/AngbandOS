@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for items that are considered fuel for lanterns regardless of their value.
 /// </summary>
-[Serializable]
 public class LanternFuelItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemFactoryNames => new string[] { nameof(BrassLanternLightSourceItemFactory), nameof(FlaskOfOilItemFactory) };

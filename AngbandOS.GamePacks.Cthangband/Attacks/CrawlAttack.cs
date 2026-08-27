@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class CrawlAttack : AttackGameConfiguration
 {
     public override string MonsterAction => "crawls on {0}";

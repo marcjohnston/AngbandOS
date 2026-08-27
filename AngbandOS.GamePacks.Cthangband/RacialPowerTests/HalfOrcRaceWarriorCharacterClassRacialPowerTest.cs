@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class HalfOrcRaceWarriorCharacterClassRacialPowerTest : RacialPowerTestGameConfiguration
 {
     public override int MinLevel => 3;

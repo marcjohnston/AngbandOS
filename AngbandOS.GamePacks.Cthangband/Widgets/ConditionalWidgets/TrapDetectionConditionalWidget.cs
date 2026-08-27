@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a widget that renders the traps detection.
 /// </summary>
-[Serializable]
 public class TrapDetectionConditionalWidget : ConditionalWidgetGameConfiguration
 {
     public override string ConditionalKey => nameof(TrapDetectionConditional);

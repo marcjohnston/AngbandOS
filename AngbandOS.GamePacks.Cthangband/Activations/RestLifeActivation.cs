@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Restore lost experience.
 /// </summary>
-[Serializable]
 public class RestLifeActivation : ActivationGameConfiguration
 {
     

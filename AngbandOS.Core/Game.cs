@@ -4,78 +4,205 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using System.Reflection;
 namespace AngbandOS.Core;
 
-internal partial class Game : IGameSerialize
+internal class Game : IGameSerialize
 {
-    #region Code Altering Property Management for Development Purposes Only
-    public string Find(string folder, string filenameWithoutExtension)
-    {
-        string path = Path.Combine(folder, $"{filenameWithoutExtension}.cs");
-        if (File.Exists(path))
-            return path;
-        foreach (string subfolder in Directory.GetDirectories(folder))
-        {
-            path = Path.Combine(subfolder, $"{filenameWithoutExtension}.cs");
-            if (File.Exists(path))
-                return path;
-        }
-        throw new Exception("");
-    }
-    public string? CutProperty(string folder, string filename, string text)
-    {
-        string path = Find(folder, filename);
-        List<string> lines = File.ReadAllLines(path).ToList();
-        foreach (string line in lines)
-        {
-            if (line.Contains(text))
-            {
-                lines.Remove(line);
-                File.WriteAllLines(path, lines);
-                return line;
-            }
-        }
-        return null;
-    }
-    public string? GetProperty(string folder, string filename, string text)
-    {
-        string path = Find(folder, filename);
-        List<string> lines = File.ReadAllLines(path).ToList();
-        foreach (string line in lines)
-        {
-            if (line.Contains(text))
-            {
-                lines.Remove(line);
-                return line;
-            }
-        }
-        return null;
-    }
-    public void PasteProperty(string folder, string filenameWithoutExtension, string text, string? newProperty = null)
-    {
-        string path = Find(folder, filenameWithoutExtension);
-        if (!File.Exists(path))
-        {
-            if (newProperty is null)
-                throw new Exception($"{path} file doesnt exist with no newProperty specified.");
-            File.WriteAllText(path, newProperty);
-        }
-        List<string> lines = File.ReadAllLines(path).ToList();
-        if (!lines.Any(_l => _l.Contains($"class {filenameWithoutExtension}")))
-            throw new Exception("");
-        for (int i = lines.Count - 1; i >= 0; i--)
-        {
-            string line = lines[i];
-            if (line.Contains("}"))
-            {
-                lines.Insert(i, text);
-                File.WriteAllLines(path, lines);
-                return;
-            }
-        }
-        throw new Exception("");
-    }
+    #region WIP State Data
+    public int SkillMelee;
+    public int SkillRanged;
+    public int SkillPerception;
+    public int SocialClass;
+    public int SkillThrowing;
+    #endregion
+
+    #region Confirmed State Data
+    /// <summary>
+    /// Returns the height of the character.  This is randomly generated at the start of the game and is used to determine the player's weight and other properties.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public int Height;
+
+    public int HitDie;
+
+    /// <summary>
+    /// Returns true, if the players automatically instills confusion in monsters when the player touches the monster.  This is a special property because it is a one-time
+    /// use property.  A timer won't work because it is turn based and attributes won't work because it is not a permanent property.
+    /// </summary>
+    public bool HasConfusingTouch;
+
+    /// <summary>
+    /// Returns true, if the user is currently searching.
+    /// </summary>
+    public bool IsSearching;
+
+    private bool PreviousMartialArtistArmorAux;
+
+    public bool IsBirthday;
+    public bool IsDawn;
+    public bool IsDusk;
+    public bool IsFeelTime;
+    public bool IsHalloween;
+    public bool IsMidnight;
+    public bool IsNewYear;
+    #endregion
+
+    #region UpdateBonuses Non-State Properties - Cached properties that are post-load initialized and properties that are computed based on the Game.AttributeSet
+    /// <summary>
+    /// Returns the radius for which the player glows.  Spectres, sprites and vampires glow.
+    /// </summary>
+    public int GlowRadius { get; private set; }
+    public int SkillSearching { get; private set; }
+    public int SkillStealth { get; private set; }
+    public int SkillSavingThrow { get; private set; }
+
+    /// <summary>
+    /// Returns true, if the character class receives level rewards.  Returns false, by default.  Fanatics and cultists return true.
+    /// </summary>
+    public bool ReceivesLevelRewards { get; private set; }
+
+    /// <summary>
+    /// Returns true, if the player has aggravation.  Aggravation is a curse that causes monsters near the player to always be aware of the player and always attack the player.
+    /// </summary>
+    public bool HasAggravation { get; private set; }
+
+    /// <summary>
+    /// Returns true, if the player has regeneration.  Regeneration allows the player to heal faster than normal.  If the player has the SuppressRegenAttribute, it overrides and prevents regeneration.
+    /// </summary>
+    public bool HasRegeneration { get; private set; }
+
+    /// <summary>
+    /// Returns true, if the player is immune to acid.
+    /// </summary>
+    public bool HasAcidImmunity { get; private set; }
+
+    public bool HasAcidResistance { get; private set; }
+    public bool HasAntiMagic { get; private set; }
+    public bool HasSustainCharisma { get; private set; }
+    public bool HasSustainConstitution { get; private set; }
+    public bool HasSustainDexterity { get; private set; }
+    public bool HasSustainIntelligence { get; private set; }
+    public bool HasSustainStrength { get; private set; }
+    public bool HasSustainWisdom { get; private set; }
+    public bool HasAntiTeleport { get; private set; }
+    public bool HasAntiTheft { get; private set; }
+    public bool HasBlessedBlade { get; private set; }
+    public bool HasBlindnessResistance { get; private set; }
+    public bool HasChaosResistance { get; private set; }
+    public bool HasColdImmunity { get; private set; }
+    public bool HasColdResistance { get; private set; }
+    public bool HasConfusionResistance { get; private set; }
+    public bool HasDarkResistance { get; private set; }
+    public bool HasDisenchantResistance { get; private set; }
+    public bool HasElementalVulnerability { get; private set; }
+    public bool HasExperienceDrain { get; private set; }
+    public bool HasExtraMight { get; private set; }
+    public bool HasFearResistance { get; private set; }
+    public bool HasFeatherFall { get; private set; }
+    public bool HasFireImmunity { get; private set; }
+    public bool HasFireResistance { get; private set; }
+    public bool HasFireSheath { get; private set; }
+    public bool HasFreeAction { get; private set; }
+    public bool HasHoldLife { get; private set; }
+    public bool HasLightningImmunity { get; private set; }
+    public bool HasLightningResistance { get; private set; }
+    public bool HasElectricitySheath { get; private set; }
+    public bool HasLightResistance { get; private set; }
+    public bool HasNetherResistance { get; private set; }
+    public bool HasNexusResistance { get; private set; }
+    public bool HasPoisonResistance { get; private set; }
+    public bool HasQuakeWeapon { get; private set; }
+    public bool HasRandomTeleport { get; private set; }
+    public bool HasReflection { get; private set; }
+    public bool HasSeeInvisibility { get; private set; }
+    public bool HasShardResistance { get; private set; }
+    public bool HasSlowDigestion { get; private set; }
+    public bool HasSoundResistance { get; private set; }
+    public bool HasTelepathy { get; private set; }
+    public bool HasTimeResistance { get; private set; }
+    public int InfraVisionRange { get; private set; }
+
+    /// <summary>
+    /// Represents the players known bonus armor class.  This is the bonus armor class that the player knows about.  The player may have other bonuses that are unknown to the player.
+    /// </summary>
+    public int BaseArmorClass { get; private set; }
+
+    /// <summary>
+    /// Represents the players known bonus armor class.  This is the bonus armor class that the player knows about.  The player may have other bonuses that are unknown to the player.
+    /// </summary>
+    public int KnownBonusArmorClass { get; private set; }
+
+    /// <summary>
+    /// Represents the total bonus armor class which is the summation of the known and unknown bonus armor classes.
+    /// </summary>
+    public int TotalBonusArmorClass { get; private set; }
+
+    /// <summary>
+    /// Represents the current speed of the player.  The speed is a value between 0 and 199 and is used as an index into the <see cref="Game.ExtractEnergy"/> table.
+    /// </summary>
+    public int Speed { get; private set; }
+
+    public int SpeedHidden { get; private set; }
+
+    /// <summary>
+    /// Returns the current skill level for using devices.  This is used to determine if the player can use a device or not.
+    /// </summary>
+    public int UseDevice { get; private set; }
+
+    /// <summary>
+    /// Returns the current digging skill of the player. This is used to determine if the player can dig through walls or not.
+    /// </summary>
+    public int Tunnel;
+
+    public int ComputedDisarmTraps;
+
+    /// <summary>
+    /// Grants temporary resistance to acid.
+    /// </summary>
+    public Timer AcidResistanceTimer { get; private set; }
+
+    /// <summary>
+    /// Temporarily prevents the player from being scared.
+    /// </summary>
+    public Timer HeroismTimer { get; private set; }
+
+    /// <summary>
+    /// Temporarily prevents the player from being scared.
+    /// </summary>
+    public Timer SuperheroismTimer { get; private set; }
+    public Timer BleedingTimer { get; private set; }
+    public Timer BlessingTimer { get; private set; }
+    public Timer BlindnessTimer { get; private set; }
+    public Timer ColdResistanceTimer { get; private set; }
+    public Timer ConfusionTimer { get; private set; }
+    public Timer EtherealnessTimer { get; private set; }
+    public Timer FearTimer { get; private set; }
+    public Timer FireResistanceTimer { get; private set; }
+    public Timer HallucinationsTimer { get; private set; }
+    public Timer HasteTimer { get; private set; }
+    public Timer InfravisionTimer { get; private set; }
+    public Timer InvulnerabilityTimer { get; private set; }
+    public Timer LightningResistanceTimer { get; private set; }
+    public Timer ParalysisTimer { get; private set; }
+    public Timer PoisonTimer { get; private set; }
+    public Timer PoisonResistanceTimer { get; private set; }
+    public Timer ProtectionFromEvilTimer { get; private set; }
+    public Timer SeeInvisibilityTimer { get; private set; }
+    public Timer SlowTimer { get; private set; }
+    public Timer StoneskinTimer { get; private set; }
+    public Timer StunTimer { get; private set; }
+    public Timer TelepathyTimer { get; private set; }
+    public Tile DownStaircaseTile { get; private set; }
+
+    public Tile UpStaircaseTile { get; private set; }
+
+    public Tile GrassTile { get; private set; }
+
+    public Tile RockTile { get; private set; }
+
+    public Tile WaterTile { get; private set; }
     #endregion
 
     #region Game Serialization
@@ -84,54 +211,30 @@ internal partial class Game : IGameSerialize
         return new DictionaryGameStateBag(
             (nameof(SingletonRepository), saveGameState.CreateDerivedGameStateBag(SingletonRepository, typeof(SingletonRepository))),
 
-            ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasAcidImmunity)),
-            ("bools2", saveGameState.CreateGameStateBag(HasAcidResistance, HasAggravation, HasAntiMagic, HasAntiTeleport, HasAntiTheft, HasBlessedBlade, HasBlindnessResistance, HasChaosResistance)),
-            ("bools3", saveGameState.CreateGameStateBag(HasColdImmunity, HasColdResistance, HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain)),
-            ("bools4", saveGameState.CreateGameStateBag(HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife)),
-            ("bools5", saveGameState.CreateGameStateBag(HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon)),
-            ("bools6", saveGameState.CreateGameStateBag(HasRandomTeleport, HasReflection, HasRegeneration, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion)),
-            ("bools7", saveGameState.CreateGameStateBag(HasSoundResistance, HasSustainCharisma, HasSustainConstitution, HasSustainDexterity, HasSustainIntelligence, HasSustainStrength, HasSustainWisdom, HasTelepathy)),
-            ("bools8", saveGameState.CreateGameStateBag(HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance)),
-            ("bools9", saveGameState.CreateGameStateBag(Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, _findBreakLeft, _findBreakRight)),
+            ("bools1", saveGameState.CreateGameStateBag(IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch)),
+            ("bools9", saveGameState.CreateGameStateBag(_findBreakLeft, _findBreakRight, IsSearching, PreviousMartialArtistArmorAux)),
             ("bools10", saveGameState.CreateGameStateBag(_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment)),
-            ("bools11", saveGameState.CreateGameStateBag(ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters)),
+            ("bools11", saveGameState.CreateGameStateBag(ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ReceivesLevelRewards, SpecialDanger, RepairMonsters, ShimmerMonsters)),
 
             (nameof(_mainSequence), saveGameState.CreateDerivedGameStateBag(_mainSequence, typeof(GameRandom))),
-            (nameof(GlowInTheDarkRadius), saveGameState.CreateGameStateBag(GlowInTheDarkRadius)),
             (nameof(Height), saveGameState.CreateGameStateBag(Height)),
             (nameof(HitDie), saveGameState.CreateGameStateBag(HitDie)),
-            (nameof(InfravisionRange), saveGameState.CreateGameStateBag(InfravisionRange)),
-            (nameof(SkillDigging), saveGameState.CreateGameStateBag(SkillDigging)),
+            (nameof(Tunnel), saveGameState.CreateGameStateBag(Tunnel)),
             (nameof(ComputedDisarmTraps), saveGameState.CreateGameStateBag(ComputedDisarmTraps)),
             (nameof(SkillMelee), saveGameState.CreateGameStateBag(SkillMelee)),
             (nameof(SkillRanged), saveGameState.CreateGameStateBag(SkillRanged)),
-            (nameof(SkillSavingThrow), saveGameState.CreateGameStateBag(SkillSavingThrow)),
             (nameof(SkillPerception), saveGameState.CreateGameStateBag(SkillPerception)),
-            (nameof(SkillSearching), saveGameState.CreateGameStateBag(SkillSearching)),
-            (nameof(SkillStealth), saveGameState.CreateGameStateBag(SkillStealth)),
             (nameof(SkillThrowing), saveGameState.CreateGameStateBag(SkillThrowing)),
-            (nameof(SkillUseDevice), saveGameState.CreateGameStateBag(SkillUseDevice)),
             (nameof(SocialClass), saveGameState.CreateGameStateBag(SocialClass)),
-            (nameof(CharismaBonus), saveGameState.CreateGameStateBag(CharismaBonus)),
-            (nameof(ConstitutionBonus), saveGameState.CreateGameStateBag(ConstitutionBonus)),
-            (nameof(DexterityBonus), saveGameState.CreateGameStateBag(DexterityBonus)),
-            (nameof(MutationInfravisionBonus), saveGameState.CreateGameStateBag(MutationInfravisionBonus)),
-            (nameof(IntelligenceBonus), saveGameState.CreateGameStateBag(IntelligenceBonus)),
-            (nameof(SearchBonus), saveGameState.CreateGameStateBag(SearchBonus)),
-            (nameof(SpeedBonus), saveGameState.CreateGameStateBag(SpeedBonus)),
-            (nameof(StealthBonus), saveGameState.CreateGameStateBag(StealthBonus)),
-            (nameof(StrengthBonus), saveGameState.CreateGameStateBag(StrengthBonus)),
-            (nameof(WisdomBonus), saveGameState.CreateGameStateBag(WisdomBonus)),
             (nameof(replayPreviousKeystrokeDateTime), saveGameState.CreateGameStateBag(replayPreviousKeystrokeDateTime)),
             (nameof(MainSequenceGameStartSeed), saveGameState.CreateGameStateBag(MainSequenceGameStartSeed)),
-            (nameof(EffectiveAttributeSet), saveGameState.CreateDerivedGameStateBag(EffectiveAttributeSet, typeof(ReadOnlyAttributeSet))),
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
             (nameof(CurrentRunDirection), saveGameState.CreateGameStateBag(CurrentRunDirection)),
             (nameof(_previousRunDirection), saveGameState.CreateGameStateBag(_previousRunDirection)),
             (nameof(FollowDistance), saveGameState.CreateGameStateBag(FollowDistance)),
             (nameof(DecayRate), saveGameState.CreateGameStateBag(DecayRate)),
             (nameof(God), saveGameState.CreateDerivedGameStateBag(God, typeof(God))),
             (nameof(NaturalAttacks), saveGameState.CreateGameStateBag(NaturalAttacks)),
-            (nameof(GenomeArmorClassBonus), saveGameState.CreateGameStateBag(GenomeArmorClassBonus)),
             (nameof(MutationsNotPossessed), saveGameState.CreateGameStateBag(MutationsNotPossessed)),
             (nameof(MutationsPossessed), saveGameState.CreateGameStateBag(MutationsPossessed)),
             (nameof(TreasureFeeling), saveGameState.CreateGameStateBag(TreasureFeeling)),
@@ -162,7 +265,6 @@ internal partial class Game : IGameSerialize
             (nameof(TargetWho), saveGameState.CreateDerivedGameStateBag(TargetWho, typeof(Target))),
             (nameof(TotalFriendLevels), saveGameState.CreateGameStateBag(TotalFriendLevels)),
             (nameof(TotalFriends), saveGameState.CreateGameStateBag(TotalFriends)),
-            (nameof(_petList ), saveGameState.CreateDerivedGameStateBag(_petList, typeof(Monster))),
             (nameof(_seedFlavor), saveGameState.CreateGameStateBag(_seedFlavor)),
             (nameof(ExPlayer), saveGameState.CreateDerivedGameStateBag(ExPlayer, typeof(ExPlayer))),
             (nameof(LevelOfFirstSpell), saveGameState.CreateGameStateBag(LevelOfFirstSpell)),
@@ -184,8 +286,6 @@ internal partial class Game : IGameSerialize
             (nameof(FractionalMana), saveGameState.CreateGameStateBag(FractionalMana)),
             (nameof(Gender), saveGameState.CreateDerivedGameStateBag(Gender, typeof(Gender))),
             (nameof(Generation), saveGameState.CreateGameStateBag(Generation)),
-            (nameof(BonusArmorClass), saveGameState.CreateGameStateBag(BonusArmorClass)),
-            (nameof(UnknownBonusArmorClass), saveGameState.CreateGameStateBag(UnknownBonusArmorClass)),
             (nameof(GooPatron), saveGameState.CreateDerivedGameStateBag(GooPatron, typeof(Patron))),
             (nameof(LightLevel), saveGameState.CreateGameStateBag(LightLevel)),
             (nameof(MaxLevelGained), saveGameState.CreateGameStateBag(MaxLevelGained)),
@@ -213,8 +313,6 @@ internal partial class Game : IGameSerialize
             (nameof(DangerRating), saveGameState.CreateGameStateBag(DangerRating)),
             (nameof(MaxPanelCols), saveGameState.CreateGameStateBag(MaxPanelCols)),
             (nameof(MaxPanelRows), saveGameState.CreateGameStateBag(MaxPanelRows)),
-            (nameof(MCnt), saveGameState.CreateGameStateBag(MCnt)),
-            (nameof(MonsterMax), saveGameState.CreateGameStateBag(MonsterMax)),
             (nameof(MonsterLevel), saveGameState.CreateGameStateBag(MonsterLevel)),
             (nameof(PanelCol), saveGameState.CreateGameStateBag(PanelCol)),
             (nameof(PanelRow), saveGameState.CreateGameStateBag(PanelRow)),
@@ -225,12 +323,9 @@ internal partial class Game : IGameSerialize
             (nameof(TempN), saveGameState.CreateGameStateBag(TempN)),
             (nameof(Light), saveGameState.CreateDerivedGameStateBag(Light, typeof(GridCoordinate))),
             (nameof(View), saveGameState.CreateDerivedGameStateBag(View, typeof(GridCoordinate))),
-            (nameof(CurrentlyActingMonster), saveGameState.CreateGameStateBag(CurrentlyActingMonster)),
             (nameof(DunBias), saveGameState.CreateGameStateBag(DunBias)),
             (nameof(NumRepro), saveGameState.CreateGameStateBag(NumRepro)),
-            (nameof(Monsters), saveGameState.CreateDerivedGameStateBag(Monsters, typeof(Monster))),
-            (nameof(_hackMIdxIi), saveGameState.CreateGameStateBag(_hackMIdxIi)),
-            (nameof(StartupTownName), saveGameState.CreateGameStateBag(StartupTownName)),
+            (nameof(MonsterList), saveGameState.CreateDerivedGameStateBag(MonsterList, typeof(Monster))),
             (nameof(MessageLog), saveGameState.CreateDerivedGameStateBag(MessageLog, typeof(GameMessage))),
             (nameof(RecentMessages), saveGameState.CreateDerivedGameStateBag(RecentMessages, typeof(GameMessage))),
             (nameof(PreviousMessages), saveGameState.CreateDerivedGameStateBag(PreviousMessages, typeof(GameMessage))),
@@ -274,18 +369,6 @@ internal partial class Game : IGameSerialize
     /// Returns the random seed to start the game that is applied to the non-fixed random generator.
     /// </summary>
     public readonly int MainSequenceGameStartSeed;
-
-    ///// <summary>
-    ///// Returns the value of the non-fixed random seed to use to restore the non-fixed random generator.  This seed is needed because the Random object cannot be serialized and we need to restore
-    ///// the non-fixed random generator when a saved game is restored.
-    ///// </summary>
-    //public int MainSequenceCurrentSeed;
-
-    /// <summary>
-    /// Returns true, when the game is processing the popup menu.  This value is used to determine when the game is entering and existing the popup menu mode.  Keystrokes that are used during, to render or
-    /// to exit the popup menu are not recorded--in actuality, those keystrokes are removed from the queue.
-    /// </summary>
-    //public bool PreviousInPopupMenu = false;
     #endregion
 
     #region New and Existing Game Construction    
@@ -310,6 +393,21 @@ internal partial class Game : IGameSerialize
     /// <param name="gameReplay"></param>
     public Game(GameConfiguration gameConfiguration, GameReplayDetails gameReplay, bool closeAfterReplay) : this(gameConfiguration, (gameReplay, closeAfterReplay), null) 
     {
+    }
+
+    /// <summary>
+    /// Adds all of the global expression providers to the private dictionary for the GetExpressionProviders method.
+    /// </summary>
+    private void BuildGlobalExpressionProviders()
+    {
+        // Retrieve the charisma ability singleton.
+        Ability charismaAbility = SingletonRepository.Get<Ability>(nameof(CharismaAbility));
+
+        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.Random), _mainSequence);
+        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetDifficulty), () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetCharisma), () => charismaAbility.Adjusted); // Provide a function to retrieve the current charisma.
+        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetHealth), () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
+        GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetExperienceLevel), () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
     }
 
     /// <summary>
@@ -371,16 +469,12 @@ internal partial class Game : IGameSerialize
 
             // We can initialize the random seed generator at this point; for both new games and game replays.  We make this random generator available to the expression parser so that expressions can use it to generate random numbers.
             _mainSequence = new GameRandom(MainSequenceGameStartSeed);
-            GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.Random), _mainSequence);
-            GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetDifficulty), () => Difficulty); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
-            GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetHealth), () => Health.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
-            GlobalExpressionProviders.Add(nameof(ExpressionProvidersEnum.GetExperienceLevel), () => ExperienceLevel.IntValue); // Provide a function to retrieve the difficulty level.  If this isn't a function, then the difficulty level will not be updated during the game and will always be whatever it was when the game was created.
 
             // This is a new game or this is a game replay.
             SingletonRepository.LoadAndBind(gameConfiguration, null); // TODO: The null might be resolvable with the "NewGame" or "GenerateNewGame" method that is called after the game is constructed.  This should be moved to a new method that every singleton receives after the binding.
 
             // We need a game/player level attribute set.
-            EffectiveAttributeSet = new EffectiveAttributeSet(this).ToReadOnly();
+            AttributeSet = new EffectiveAttributeSet(this).ToReadOnly();
 
             // Now we can initialize the allocation tables.  This step must be performed after the singletons are loaded and bound.
             InitializeAllocationTables(); // This is not performed on a restore. // TODO: This might be the start of the "NewGame" or "GenerateNewGame" method that is called after the game is constructed.  This should be moved to a new method that every singleton receives after the binding.
@@ -392,54 +486,30 @@ internal partial class Game : IGameSerialize
             SingletonRepository.LoadAndBind(gameConfiguration, restoreGameState.GetByKey(nameof(SingletonRepository)));
 
             // Now restore this game object itself.
-            (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasAcidImmunity) = restoreGameState.GetByKey("bools1").Get8Bools();
-            (HasAcidResistance, HasAggravation, HasAntiMagic, HasAntiTeleport, HasAntiTheft, HasBlessedBlade, HasBlindnessResistance, HasChaosResistance) = restoreGameState.GetByKey("bools2").Get8Bools();
-            (HasColdImmunity, HasColdResistance, HasConfusingTouch, HasConfusionResistance, HasDarkResistance, HasDisenchantResistance, HasElementalVulnerability, HasExperienceDrain) = restoreGameState.GetByKey("bools3").Get8Bools();
-            (HasExtraMight, HasFearResistance, HasFeatherFall, HasFireImmunity, HasFireResistance, HasFireSheath, HasFreeAction, HasHoldLife) = restoreGameState.GetByKey("bools4").Get8Bools();
-            (HasLightningImmunity, HasLightningResistance, HasElectricitySheath, HasLightResistance, HasNetherResistance, HasNexusResistance, HasPoisonResistance, HasQuakeWeapon) = restoreGameState.GetByKey("bools5").Get8Bools();
-            (HasRandomTeleport, HasReflection, HasRegeneration, HasRestrictingArmor, HasRestrictingGloves, HasSeeInvisibility, HasShardResistance, HasSlowDigestion) = restoreGameState.GetByKey("bools6").Get8Bools();
-            (HasSoundResistance, HasSustainCharisma, HasSustainConstitution, HasSustainDexterity, HasSustainIntelligence, HasSustainStrength, HasSustainWisdom, HasTelepathy) = restoreGameState.GetByKey("bools7").Get8Bools();
-            (HasTimeResistance, IsSearching, ElecHit, Esp, FeatherFall, MutationFireHit, MutationFreeAction, MagicResistance) = restoreGameState.GetByKey("bools8").Get8Bools();
-            (Regen, ResFear, ResTime, SuppressRegen, SustainAll, Vulnerable, _findBreakLeft, _findBreakRight) = restoreGameState.GetByKey("bools9").Get8Bools();
+            (IsBirthday, IsDawn, IsDusk, IsFeelTime, IsHalloween, IsMidnight, IsNewYear, HasConfusingTouch) = restoreGameState.GetByKey("bools1").Get8Bools();
+            (_findBreakLeft, _findBreakRight, IsSearching, PreviousMartialArtistArmorAux) = restoreGameState.GetByKey("bools9").Get4Bools();
             (_findOpenArea, IsDead, CharacterXtra, CreateDownStair, CreateUpStair, HackMind, NewLevelFlag, ViewingEquipment) = restoreGameState.GetByKey("bools10").Get8Bools();
-            (ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ChaosGift, SpecialDanger, RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
+            (ViewingItemList, FullScreenOverlay, HideCursorOnFullScreenInkey, GetFirstLevelMutation, ReceivesLevelRewards, SpecialDanger, RepairMonsters, ShimmerMonsters) = restoreGameState.GetByKey("bools11").Get8Bools();
 
             _mainSequence = restoreGameState.GetByKey(nameof(_mainSequence)).GetDerivedReference<GameRandom>(_restoreGameState => new GameRandom(_restoreGameState));
-            GlowInTheDarkRadius = restoreGameState.GetByKey(nameof(GlowInTheDarkRadius)).GetInt();
             Height = restoreGameState.GetByKey(nameof(Height)).GetInt();
             HitDie = restoreGameState.GetByKey(nameof(HitDie)).GetInt();
-            InfravisionRange = restoreGameState.GetByKey(nameof(InfravisionRange)).GetInt();
-            SkillDigging = restoreGameState.GetByKey(nameof(SkillDigging)).GetInt();
+            Tunnel = restoreGameState.GetByKey(nameof(Tunnel)).GetInt();
             ComputedDisarmTraps = restoreGameState.GetByKey(nameof(ComputedDisarmTraps)).GetInt();
             SkillMelee = restoreGameState.GetByKey(nameof(SkillMelee)).GetInt();
             SkillRanged = restoreGameState.GetByKey(nameof(SkillRanged)).GetInt();
-            SkillSavingThrow = restoreGameState.GetByKey(nameof(SkillSavingThrow)).GetInt();
             SkillPerception = restoreGameState.GetByKey(nameof(SkillPerception)).GetInt();
-            SkillSearching = restoreGameState.GetByKey(nameof(SkillSearching)).GetInt();
-            SkillStealth = restoreGameState.GetByKey(nameof(SkillStealth)).GetInt();
             SkillThrowing = restoreGameState.GetByKey(nameof(SkillThrowing)).GetInt();
-            SkillUseDevice = restoreGameState.GetByKey(nameof(SkillUseDevice)).GetInt();
             SocialClass = restoreGameState.GetByKey(nameof(SocialClass)).GetInt();
-            CharismaBonus = restoreGameState.GetByKey(nameof(CharismaBonus)).GetInt();
-            ConstitutionBonus = restoreGameState.GetByKey(nameof(ConstitutionBonus)).GetInt();
-            DexterityBonus = restoreGameState.GetByKey(nameof(DexterityBonus)).GetInt();
-            MutationInfravisionBonus = restoreGameState.GetByKey(nameof(MutationInfravisionBonus)).GetInt();
-            IntelligenceBonus = restoreGameState.GetByKey(nameof(IntelligenceBonus)).GetInt();
-            SearchBonus = restoreGameState.GetByKey(nameof(SearchBonus)).GetInt();
-            SpeedBonus = restoreGameState.GetByKey(nameof(SpeedBonus)).GetInt();
-            StealthBonus = restoreGameState.GetByKey(nameof(StealthBonus)).GetInt();
-            StrengthBonus = restoreGameState.GetByKey(nameof(StrengthBonus)).GetInt();
-            WisdomBonus = restoreGameState.GetByKey(nameof(WisdomBonus)).GetInt();
             replayPreviousKeystrokeDateTime = restoreGameState.GetByKey(nameof(replayPreviousKeystrokeDateTime)).GetNullableDateTime();
             MainSequenceGameStartSeed = restoreGameState.GetByKey(nameof(MainSequenceGameStartSeed)).GetInt();
-            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(this, _restoreGameState));
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(this, _restoreGameState));
             CurrentRunDirection = restoreGameState.GetByKey(nameof(CurrentRunDirection)).GetInt();
             _previousRunDirection = restoreGameState.GetByKey(nameof(_previousRunDirection)).GetInt();
             FollowDistance = restoreGameState.GetByKey(nameof(FollowDistance)).GetInt();
             DecayRate = restoreGameState.GetByKey(nameof(DecayRate)).GetInt();
             God = restoreGameState.GetByKey(nameof(God)).GetDerivedReferenceOrDefault<God>();
             NaturalAttacks = restoreGameState.GetByKey(nameof(NaturalAttacks)).GetReferences<Mutation>().ToList();
-            GenomeArmorClassBonus = restoreGameState.GetByKey(nameof(GenomeArmorClassBonus)).GetInt();
             MutationsNotPossessed = restoreGameState.GetByKey(nameof(MutationsNotPossessed)).GetReferences<Mutation>().ToList();
             MutationsPossessed = restoreGameState.GetByKey(nameof(MutationsPossessed)).GetReferences<Mutation>().ToList();
             TreasureFeeling = restoreGameState.GetByKey(nameof(TreasureFeeling)).GetInt();
@@ -470,7 +540,6 @@ internal partial class Game : IGameSerialize
             TargetWho = restoreGameState.GetByKey(nameof(TargetWho)).GetDerivedReferenceOrDefault<Target>();
             TotalFriendLevels = restoreGameState.GetByKey(nameof(TotalFriendLevels)).GetInt();
             TotalFriends = restoreGameState.GetByKey(nameof(TotalFriends)).GetInt();
-            _petList = restoreGameState.GetByKey(nameof(_petList)).GetDerivedReferences<Monster>(_restoreGameState => new Monster(this, _restoreGameState)).ToList();
             _seedFlavor = restoreGameState.GetByKey(nameof(_seedFlavor)).GetInt();
             ExPlayer = restoreGameState.GetByKey(nameof(ExPlayer)).GetDerivedReferenceOrDefault<ExPlayer>(_restoreGameState => new ExPlayer(this, _restoreGameState));
             LevelOfFirstSpell = restoreGameState.GetByKey(nameof(LevelOfFirstSpell)).GetNullableInt();
@@ -492,8 +561,6 @@ internal partial class Game : IGameSerialize
             FractionalMana = restoreGameState.GetByKey(nameof(FractionalMana)).GetInt();
             Gender = restoreGameState.GetByKey(nameof(Gender)).GetDerivedReferenceOrDefault<Gender>();
             Generation = restoreGameState.GetByKey(nameof(Generation)).GetInt();
-            BonusArmorClass = restoreGameState.GetByKey(nameof(BonusArmorClass)).GetInt();
-            UnknownBonusArmorClass = restoreGameState.GetByKey(nameof(UnknownBonusArmorClass)).GetInt();
             GooPatron = restoreGameState.GetByKey(nameof(GooPatron)).GetDerivedReference<Patron>();
             LightLevel = restoreGameState.GetByKey(nameof(LightLevel)).GetInt();
             MaxLevelGained = restoreGameState.GetByKey(nameof(MaxLevelGained)).GetInt();
@@ -521,8 +588,6 @@ internal partial class Game : IGameSerialize
             DangerRating = restoreGameState.GetByKey(nameof(DangerRating)).GetInt();
             MaxPanelCols = restoreGameState.GetByKey(nameof(MaxPanelCols)).GetInt();
             MaxPanelRows = restoreGameState.GetByKey(nameof(MaxPanelRows)).GetInt();
-            MCnt = restoreGameState.GetByKey(nameof(MCnt)).GetInt();
-            MonsterMax = restoreGameState.GetByKey(nameof(MonsterMax)).GetInt();
             MonsterLevel = restoreGameState.GetByKey(nameof(MonsterLevel)).GetInt();
             PanelCol = restoreGameState.GetByKey(nameof(PanelCol)).GetInt();
             PanelRow = restoreGameState.GetByKey(nameof(PanelRow)).GetInt();
@@ -533,12 +598,9 @@ internal partial class Game : IGameSerialize
             TempN = restoreGameState.GetByKey(nameof(TempN)).GetInt();
             Light = restoreGameState.GetByKey(nameof(Light)).GetDerivedReferences<GridCoordinate>(_restoreGameState => new GridCoordinate(this, _restoreGameState)).ToList();
             View = restoreGameState.GetByKey(nameof(View)).GetDerivedReferences<GridCoordinate>(_restoreGameState => new GridCoordinate(this, _restoreGameState)).ToList();
-            CurrentlyActingMonster = restoreGameState.GetByKey(nameof(CurrentlyActingMonster)).GetInt();
             DunBias = restoreGameState.GetByKey(nameof(DunBias)).GetReferenceOrDefault<MonsterRaceFilter>();
             NumRepro = restoreGameState.GetByKey(nameof(NumRepro)).GetInt();
-            Monsters = restoreGameState.GetByKey(nameof(Monsters)).GetDerivedReferences<Monster>(_restoreGameState => new Monster(this, _restoreGameState)).ToArray();
-            _hackMIdxIi = restoreGameState.GetByKey(nameof(_hackMIdxIi)).GetInt();
-            StartupTownName = restoreGameState.GetByKey(nameof(StartupTownName)).GetStringOrDefault();
+            MonsterList.AddRange(restoreGameState.GetByKey(nameof(MonsterList)).GetDerivedReferences<Monster>(_restoreGameState => new Monster(this, _restoreGameState)));
             MessageLog = restoreGameState.GetByKey(nameof(MessageLog)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToList();
             RecentMessages = restoreGameState.GetByKey(nameof(RecentMessages)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToList();
             PreviousMessages = restoreGameState.GetByKey(nameof(PreviousMessages)).GetDerivedReferences<GameMessage>(_restoreGameState => new GameMessage(this, _restoreGameState)).ToArray();
@@ -559,39 +621,35 @@ internal partial class Game : IGameSerialize
         #endregion
 
         #region Post-game load non-serialized initialization - Initialization that depends on the loaded data.  All non-serialized fields are initialized here.
+        // We can now add all of the global expression providers for runtime.
+        BuildGlobalExpressionProviders();
+
+        DungeonGenerator = new StandardDungeonGenerator(this);
+
+        if (gameConfiguration.MaxMessageLogLength is not null)
+        {
+            MaxMessageLogLength = gameConfiguration.MaxMessageLogLength.Value;
+        }
+        StartupTown = SingletonRepository.GetNullable<Town>(gameConfiguration.StartupTownName);
+        GoldFactories = SingletonRepository.GetNullable<ItemFactory>(gameConfiguration.GoldFactoriesBindingKeys);
+        GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression ?? "1/20");
+
         DownStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsDownStaircase);
         UpStaircaseTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsUpStaircase);
         GrassTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsGrass);
         RockTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsRock);
         WaterTile = SingletonRepository.Get<Tile>().Single(_tile => _tile.IsWater);
 
-        DungeonGenerator = new StandardDungeonGenerator(this);
-
-        if (gameConfiguration.MaxMessageLogLength != null)
-        {
-            MaxMessageLogLength = gameConfiguration.MaxMessageLogLength.Value;
-        }
-        if (gameConfiguration.StartupTownName != null)
-        {
-            StartupTownName = gameConfiguration.StartupTownName;
-        }
-        if (gameConfiguration.GoldFactoriesBindingKeys != null)
-        {
-            List<ItemFactory> goldFactoryList = new List<ItemFactory>();
-            foreach (string goldFactoryBindingKey in gameConfiguration.GoldFactoriesBindingKeys)
-            {
-                goldFactoryList.Add(SingletonRepository.Get<ItemFactory>(goldFactoryBindingKey));
-            }
-            GoldFactories = goldFactoryList.ToArray();
-        }
-        GoldItemIsGreatProbability = ParseProbabilityExpression(gameConfiguration.GoldItemIsGreatProbabilityExpression ?? "1/20");
-
+        GameTickEvents = SingletonRepository.GetNullable<IScript>(gameConfiguration.GameTickEventBindingKeys);
         RequiredExperiencePerLevel = gameConfiguration.RequiredExperiencePerLevel;
         ExtractEnergy = gameConfiguration.ExtractEnergy;
         BlowsTable = gameConfiguration.BlowsTable;
         FollowDistance = gameConfiguration.FollowDistance;
         DecayRate = gameConfiguration.DecayRate;
         PatronRestingFavor = gameConfiguration.PatronRestingFavour;
+        MaxMonsterCount = gameConfiguration.MaxMonsterCount;
+        CompactMonsterCutIn = gameConfiguration.CompactMonsterCutIn;
+        CompactMonsterCutOutTarget = gameConfiguration.CompactMonsterCutOutTarget;
 
         ElvishTexts = gameConfiguration.ElvishTexts ?? new string[] { };
         HorrificDescriptions = gameConfiguration.HorrificDescriptions ?? new string[] { };
@@ -608,7 +666,6 @@ internal partial class Game : IGameSerialize
         ExperiencePoints = (ExperiencePointsIntProperty)SingletonRepository.Get<Property>(nameof(ExperiencePointsIntProperty));
         Food = (FoodIntProperty)SingletonRepository.Get<Property>(nameof(FoodIntProperty));
         Health = (HealthPointsIntProperty)SingletonRepository.Get<Property>(nameof(HealthPointsIntProperty));
-        Speed = (SpeedIntProperty)SingletonRepository.Get<Property>(nameof(SpeedIntProperty));
         MaxHealth = (MaxHealthPointsIntProperty)SingletonRepository.Get<Property>(nameof(MaxHealthPointsIntProperty));
         SpareSpellSlots = (SpareSpellSlotsIntProperty)SingletonRepository.Get<Property>(nameof(SpareSpellSlotsIntProperty));
         ExperienceLevel = (ExperienceLevelIntProperty)SingletonRepository.Get<Property>(nameof(ExperienceLevelIntProperty));
@@ -652,12 +709,95 @@ internal partial class Game : IGameSerialize
         PackWieldSlot = (PackWieldSlot)SingletonRepository.Get<WieldSlot>(nameof(Core.PackWieldSlot));
         #endregion
 
+        #region Validation Stage - Additional verifications of game state (not configuration [that is done in the SingletonRepository]).
+        // Validate the dungeon view.
         if (String.IsNullOrEmpty(gameConfiguration.DungeonViewBindingKey))
         {
             throw new Exception($"No {nameof(gameConfiguration.DungeonViewBindingKey)} provided.");
         }
+        #endregion
+
         View consoleView = SingletonRepository.Get<View>(gameConfiguration.DungeonViewBindingKey);
         RenderView(consoleView);
+    }
+    #endregion
+
+    #region InnateTotals Lookup Table
+    public InnateTotals GetInnateTotals(CharacterClass characterClass, Race race)
+    {
+        // Retrieve all of the innate totals and sort by rank so that we can perform a LINQ Where.
+        InnateTotals[] innateTotals = SingletonRepository.Get<InnateTotals>()
+            .Where(_innateTotal => 
+                (_innateTotal.CharacterClass is null || _innateTotal.CharacterClass == CharacterClass) && 
+                (_innateTotal.Race is null || _innateTotal.Race == Race))
+            .OrderByDescending(_mappedSpellScript => _mappedSpellScript.Rank)
+            .ToArray();
+
+        if (innateTotals.Length == 0)
+        {
+            throw new Exception($"{nameof(InnateTotals)} did not match for any {characterClass.GetKey} and {race.GetKey}.");
+        }
+        if (innateTotals.Length > 1)
+        {
+            throw new Exception($"{nameof(InnateTotals)} matched more than one {characterClass.GetKey} and {race.GetKey}.");
+        }
+        return innateTotals[0];
+    }
+    #endregion
+
+    #region MappedSpellScript Lookup Table
+    /// <summary>
+    /// Represents the lookup table for the <see cref="MappedSpellScript"/> entities.
+    /// </summary>
+    /// <remarks>
+    /// This lookup table is cached as post load and bind initialized-- which means it is not state data or serialized.
+    /// </remarks>
+    private MappedSpellScript[]? MappedSpellScriptLookupTable { get; set; } = null;
+    
+    /// <summary>
+    /// Returns the associated <see cref="MappedSpellScript"/> for a cast spell, realm, character class, experience level and success.
+    /// </summary>
+    /// <param name="spell"></param>
+    /// <param name="realm"></param>
+    /// <param name="characterClass"></param>
+    /// <param name="experienceLevel"></param>
+    /// <param name="success"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public MappedSpellScript GetMappedSpellScript(Spell spell, Realm realm, CharacterClass characterClass, int experienceLevel, bool success)
+    {
+        // Check to see if the lookup table has been cached yes.
+        if (MappedSpellScriptLookupTable is null)
+        {
+            // Retrieve the mapped spell scripts and sort them by rank.
+            MappedSpellScriptLookupTable = SingletonRepository.Get<MappedSpellScript>().OrderByDescending(_mappedSpellScript => _mappedSpellScript.Rank).ToArray();
+        }
+
+        // Retrieve all of the matching records.  Sorting by rank was completed upon building of the lookup table during game construction.
+        MappedSpellScript[]? allMatching = MappedSpellScriptLookupTable.Where(_mappedSpellScript =>
+            (_mappedSpellScript.Spell is null || _mappedSpellScript.Spell == spell) &&
+            (_mappedSpellScript.Realm is null || _mappedSpellScript.Realm == realm) &&
+            (_mappedSpellScript.CharacterClass is null || _mappedSpellScript.CharacterClass == characterClass) &&
+            (_mappedSpellScript.MinimumExperienceLevel is null || experienceLevel >= _mappedSpellScript.MinimumExperienceLevel) &&
+            (_mappedSpellScript.MaximumExperienceLevel is null || experienceLevel <= _mappedSpellScript.MaximumExperienceLevel) &&
+            _mappedSpellScript.Success == success)
+            .ToArray();
+
+        // Now we only take the highest rank and remove matches of a lower rank.  We take all of them to detect ambiguous matches.
+        MappedSpellScript[] highestRankMatching = allMatching.TakeWhile(_mappedSpellScript => _mappedSpellScript.Rank == allMatching.First().Rank).ToArray();
+        if (highestRankMatching.Length != 1)
+        {
+            string exceptionDetail = $"{nameof(Spell)}: {spell.Name} {nameof(Realm)}: {realm.Name} {nameof(CharacterClass)}: {characterClass.Title} ExperienceLevel: {experienceLevel} Success: {(success ? "true" : "false")}";
+            if (highestRankMatching.Length == 0)
+            {
+                throw new Exception($"No matching {nameof(MappedSpellScript)} matches for {exceptionDetail}.");
+            }
+
+            string[] ambiguousMatchedKeys = highestRankMatching.Select(_mappingSpellScript => _mappingSpellScript.GetKey).ToArray();
+            string joinedAmbiguousMatchedKeys = String.Join(", ", ambiguousMatchedKeys);
+            throw new Exception($"Too many {nameof(MappedSpellScript)} matched for {exceptionDetail}. The matched keys were {joinedAmbiguousMatchedKeys}");
+        }
+        return highestRankMatching[0];
     }
     #endregion
 
@@ -756,6 +896,58 @@ internal partial class Game : IGameSerialize
                 UpdateScreen();
             }
         }
+        
+        void ReplacePets(int y, int x)
+        {
+            void ReplacePet(int y1, int x1, Monster monster)
+            {
+                int i;
+                int x = x1;
+                int y = y1;
+                for (i = 0; i < 20; ++i)
+                {
+                    int d = (i / 15) + 1;
+                    (y, x) = Scatter(y1, x1, d);
+                    if (!GridPassableNoCreature(y, x))
+                    {
+                        continue;
+                    }
+                    if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
+                    {
+                        continue;
+                    }
+                    break;
+                }
+                if (i == 20)
+                {
+                    MsgPrint($"You lose sight of {monster.Name}.");
+                    return;
+                }
+                GridTile cPtr = Grid[y][x];
+                MonsterList.Add(monster);
+                cPtr.Monster = monster;
+                monster.MapY = y;
+                monster.MapX = x;
+                MonsterRace rPtr = monster.Race;
+                if (rPtr.Multiply)
+                {
+                    NumRepro++;
+                }
+                if (rPtr.AttrMulti)
+                {
+                    ShimmerMonsters = true;
+                }
+            }
+
+            foreach (Monster mPtr in MonsterList)
+            {
+                if (!mPtr.IsPet)
+                {
+                    continue;
+                }
+                ReplacePet(y, x, mPtr);
+            }
+        }
 
         ConsoleViewPort = consoleViewPort;
         Shutdown = false;
@@ -811,15 +1003,14 @@ internal partial class Game : IGameSerialize
             UpdateStuff();
             RedrawStuff();
             TargetWho = null;
-            HealthTrack(null);
+            TrackMonsterHealth(null);
             SingletonRepository.Get<FlaggedAction>(nameof(RemoveLightFlaggedAction)).Check(true);
             SingletonRepository.Get<FlaggedAction>(nameof(RemoveViewFlaggedAction)).Check(true);
             if (Shutdown && !IsDead)
             {
                 break;
             }
-            _petList = GetPets();
-            WipeMList();
+            WipeMonsterList();
             MsgPrint(string.Empty);
             if (IsDead)
             {
@@ -830,7 +1021,9 @@ internal partial class Game : IGameSerialize
                 break;
             }
             DungeonGenerator.GenerateNewLevel();
-            ReplacePets(MapY.IntValue, MapX.IntValue, _petList);
+
+            // Place our pets into the monster list.
+            ReplacePets(MapY.IntValue, MapX.IntValue);
         }
 
         ConsoleViewPort.GameStopped();
@@ -844,9 +1037,12 @@ internal partial class Game : IGameSerialize
 
     #region Player Effective Attribute Set
     /// <summary>
-    /// Represents the players effective attribute values.
+    /// Represents the players effective attribute values.  This property is updated by the <see cref="UpdateBonusesFlaggedAction"/>.
     /// </summary>
-    public ReadOnlyAttributeSet EffectiveAttributeSet;
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public ReadOnlyAttributeSet AttributeSet;
     public const string FactoryAttributeKey = "factory";
     public const string RandomAttributeKey = "random";
     public const string RareAttributeKey = "rare";
@@ -954,8 +1150,11 @@ internal partial class Game : IGameSerialize
     public void GainMutation(Mutation mutation)
     {
         MutationsNotPossessed.Remove(mutation);
-        if (MutationsPossessed.Count > 0 && mutation.Group != MutationGroupEnum.None)
+
+        // Mutations that belong to a group, can only be possessed one at a time.  If the player gains a mutation that belongs to a group, then all other mutations in that group are lost.
+        if (MutationsPossessed.Count > 0 && mutation.Group is not null)
         {
+            // Enumerate all of the mutations to remove others in the same group.
             int i = 0;
             do
             {
@@ -973,22 +1172,225 @@ internal partial class Game : IGameSerialize
                 }
             } while (i < MutationsPossessed.Count);
         }
+
         MutationsPossessed.Add(mutation);
+        mutation.RegenerateAttributeSets();
         mutation.OnGain();
         MsgPrint(mutation.GainMessage);
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         HandleStuff();
     }
+    public ReadOnlyAttributeSet GetMutationsAttributeSet()
+    {
+        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(this);
+        foreach (Mutation mutation in MutationsPossessed)
+        {
+            mutation.RefreshAndSquashAttributeSet();
+
+            // Check to see if there are passive attributes to be merged.
+            if (mutation.AttributeSet is not null)
+            {
+                effectiveAttributeSet.MergeAttributeSet(mutation.AttributeSet);
+            }
+        }
+        return effectiveAttributeSet.ToReadOnly();
+    }
+    public void InitializeMutations()
+    {
+        MutationsPossessed.Clear();
+        // Active Mutations
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BanishActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BerserkActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BlinkActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BreatheFireActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ColdTouchActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(DazzleActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(DetectCursesActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(EarthquakeActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(EatMagicActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(EatRockActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(GrowMoldActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HypnoticGazeActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(IlluminateActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(LaserEyesActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(LauncherActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MidasTouchActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MindBlastActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PanicHitActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PolymorphSelfActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RadiationActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RecallActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ResistElementsActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ShriekActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SmellMetalActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SmellMonstersActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SpitAcidActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SterilityActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SwapPositionActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(TelekinesActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(VampirismActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(TeleportationAtWillActiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WeighMagicActiveMutation)));
+        // Passive Mutations
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AlbinoPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ArthritisPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BlankFacePassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ElecTouchPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(EspPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(FearlessPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(FireBodyPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(FleshRotPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HyperIntPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HyperStrPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(IllNormPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(InfravisPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(IronSkinPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(LimberPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MagicResPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MoronicPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MotionPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PunyPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RegenPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ResilientPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ResTimePassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ScalesPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ShortLegPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SillyVoicePassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SusStatsPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(VulnElemPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WartSkinPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WingsPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(XtraEyesPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(XtraFatPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(XtraLegsPassiveMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(XtraNoisPassiveMutation)));
+        // Random Mutations
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AlcoholRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AttAnimalRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AttDemonRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AttDragonRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BanishAllRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BeakRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BersRageRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ChaosGiftRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(CowardiceRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(DisarmRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(EatLightRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(FlatulentRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HalluRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HornsRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HpToSpRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(InvulnRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(NauseaRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(NormalityRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PolyWoundRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ProdManaRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RawChaosRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RandomTeleportationRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ScorTailRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SpeedFluxRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SpToHpRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(TentaclesRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(TrunkRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WalkShadRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WarningRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WastingRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WeirdMindRandomMutation)));
+        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WraithRandomMutation)));
+    }
+
+    public bool HasMutations => MutationsPossessed.Count > 0;
+
+    public string[] GetMutationList()
+    {
+        if (MutationsPossessed.Count == 0)
+        {
+            return new string[0];
+        }
+        string[] list = new string[MutationsPossessed.Count];
+        for (int i = 0; i < MutationsPossessed.Count; i++)
+        {
+            list[i] = MutationsPossessed[i].HaveMessage;
+        }
+        return list;
+    }
+
+    public void LoseAllMutations()
+    {
+        if (MutationsPossessed.Count == 0)
+        {
+            return;
+        }
+        MsgPrint("You change...");
+        do
+        {
+            Mutation mutation = MutationsPossessed[0];
+            MutationsPossessed.RemoveAt(0);
+            mutation.OnLose();
+            MutationsNotPossessed.Add(mutation);
+            MsgPrint(mutation.LoseMessage);
+        } while (MutationsPossessed.Count > 0);
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        HandleStuff();
+    }
     #endregion
 
-    #region Cached Data
+    #region Pre-Load Cached Data - Non-State Properties that are pre-loaded and cached
     /// <summary>
-    /// Once all of the Attributes are preloaded during the singleton load phase, we cache them.  This is a time saving cache because the <see cref="EffectiveAttributeSet"/> pulls them a lot.
+    /// Once all of the Attributes are preloaded during the singleton load phase, we cache them.  This is a time saving cache because the <see cref="AttributeSet"/> pulls them a lot.
     /// </summary>
     public Attribute[] CachedAttributes;
     #endregion
 
     #region WIP Methods Not Yet Categorized
+    /// <summary>
+    /// Returns true, if the player successfully avoids theft.  This is based on the player's dexterity and experience level, as well as whether the player has anti-theft protection.
+    /// </summary>
+    public bool RollToPreventTheft => (ParalysisTimer.Value == 0 && RandomLessThan(100) < SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexTheftAvoidance + ExperienceLevel.IntValue) || HasAntiTheft;
+
+    public MonsterRaceFilter GetRandomBizarreMonsterSelector() // TODO: Make configurable
+    {
+        switch (DieRoll(6))
+        {
+            case 1:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre1MonsterRaceFilter));
+            case 2:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre2MonsterRaceFilter));
+            case 3:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre3MonsterRaceFilter));
+            case 4:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre4MonsterRaceFilter));
+            case 5:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre5MonsterRaceFilter));
+            default:
+                return SingletonRepository.Get<MonsterRaceFilter>(nameof(Bizarre6MonsterRaceFilter));
+        }
+    }
+
+    // Chance of success is your skill - item level, with item level capped at 50 and your
+    // skill halved if you're confused
+    public bool UseDeviceItemTest(int itemLevel)
+    {
+        int chance = UseDevice;
+        if (ConfusionTimer.Value != 0)
+        {
+            chance /= 2;
+        }
+        chance -= itemLevel > 50 ? 50 : itemLevel;
+
+        // There's always a small chance of success
+        if (chance < Constants.UseDevice && RandomLessThan(Constants.UseDevice - chance + 1) == 0)
+        {
+            chance = Constants.UseDevice;
+        }
+
+        // Do the actual check
+        if (chance < Constants.UseDevice || DieRoll(chance) < Constants.UseDevice)
+        {
+            return false;
+        }
+        return true;
+    }
 
     public int EnchantBonus(int bonus)
     {
@@ -1022,10 +1424,6 @@ internal partial class Game : IGameSerialize
     public God? God;
 
     public readonly List<Mutation> NaturalAttacks = new List<Mutation>();
-
-    public int GenomeArmorClassBonus;
-
-    public bool ChaosGift;
 
     public readonly List<Mutation> MutationsNotPossessed = new List<Mutation>();
 
@@ -1133,7 +1531,6 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public bool ViewingItemList;
 
-    private List<Monster> _petList = new List<Monster>();
     private int _seedFlavor;
     public const int HurtChance = 16;
 
@@ -1230,26 +1627,7 @@ internal partial class Game : IGameSerialize
     public MaxManaIntProperty MaxMana { get; }
     public ExperiencePointsIntProperty ExperiencePoints { get; }
 
-    /// <summary>
-    /// Represents the players known bonus armor class.  This is the bonus armor class that the player knows about.  The player may have other bonuses that are unknown to the player.
-    /// </summary>
-    public int BonusArmorClass;
-
-    /// <summary>
-    /// Represents the player unknown bonus armor class.  This is the bonus armor class that the player does not know about.  Items that are unknown will increment this value.  This is a 
-    /// computed field that is updated by the UpdateBonusesFlaggedAction.
-    /// </summary>
-    public int UnknownBonusArmorClass;
-
-    public int TotalBonusArmorClass => BonusArmorClass + UnknownBonusArmorClass;
-
     public StringProperty PlayerName { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>state->speed</remarks>
-    public SpeedIntProperty Speed { get; }
 
     public SpareSpellSlotsIntProperty SpareSpellSlots { get; }
 
@@ -1280,6 +1658,12 @@ internal partial class Game : IGameSerialize
     public IsWinnerBoolProperty IsWinner { get; }
     public IsWizardBoolProperty IsWizard { get; }
 
+    /// <summary>
+    /// Represents the distance that is lit around the player.  The light level is used to determine which grids are lit and which grids are dark.  The light level is also used to determine the maximum distance that the player can see.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
     public int LightLevel;
 
     /// <summary>
@@ -1313,10 +1697,12 @@ internal partial class Game : IGameSerialize
     /// </summary>
     public CharacterClass CharacterClass;
 
+    public ReadOnlyAttributeSet EquipmentAttributeSet;
+
     /// <summary>
     /// Returns the current race of the character.  Will be null before the player is birthed.
     /// </summary>
-    public Race? Race = null;
+    public Race Race = null;
 
     /// <summary>
     /// Returns the race the character was first assigned at birth.
@@ -1417,8 +1803,6 @@ internal partial class Game : IGameSerialize
     public int DangerRating;
     public int MaxPanelCols;
     public int MaxPanelRows;
-    public int MCnt;
-    public int MonsterMax = 1; // This is the current number of monsters.  Monster[0] is the player.
     public int MonsterLevel;
 
     /// <summary>
@@ -1460,7 +1844,6 @@ internal partial class Game : IGameSerialize
 
     public readonly List<GridCoordinate> Light = new List<GridCoordinate>(); // TODO: This belongs to UpdateLightFlaggedActions and should be private.
     public readonly List<GridCoordinate> View = new List<GridCoordinate>(); // TODO: This belongs to UpdateViewFlaggedActions and should be private.
-    public int CurrentlyActingMonster;
     public MonsterRaceFilter? DunBias = null; // The dungeon does not have a bias for monsters.
     public int NumRepro;
     public bool RepairMonsters;
@@ -1469,8 +1852,52 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns a fixed array of monsters.  All items in the array are pre-instantiates instances of the Monster class.  A dead or no-monster is when Monster.Race==null.
     /// </summary>
-    public Monster[] Monsters; // TODO: make this a list
-    private int _hackMIdxIi;
+    public List<Monster> MonsterList = new List<Monster>();
+
+    /// <summary>
+    /// Returns the maximum number of monsters.  The game will keep the monster list count below this value.
+    /// </summary>
+    public int MaxMonsterCount = 512;
+
+    /// <summary>
+    /// Returns the target number of monsters for the compact to reach before it stops compacting.
+    /// </summary>
+    public int CompactMonsterCutOutTarget = 64;
+
+    /// <summary>
+    /// Returns the number of monsters below the maximum when compacting should start.
+    /// </summary>
+    public int CompactMonsterCutIn = 32;
+
+    public void DeleteMonster(Monster mPtr)
+    {
+        MonsterRace rPtr = mPtr.Race;
+        if (rPtr == null)
+        {
+            return;
+        }
+        int y = mPtr.MapY;
+        int x = mPtr.MapX;
+        rPtr.CurNum--;
+        if (rPtr.Multiply)
+        {
+            NumRepro--;
+        }
+
+        // Check to see if this is the monster the player is tracking so that we can stop tracking the monster.
+        if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
+        {
+            TargetWho = null;
+        }
+        if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
+        {
+            TrackMonsterHealth(null);
+        }
+        Grid[y][x].Monster = null;
+        mPtr.Items.Clear();
+        MonsterList.Remove(mPtr);
+        ConsoleView.RefreshMapLocation(y, x);
+    }
 
     private const int _maxQuests = 50;
 
@@ -1484,7 +1911,7 @@ internal partial class Game : IGameSerialize
     /// <summary>
     /// Returns the name of the town that the player will start in; or null, for a random eligible town to be selected.  Returns null, by default.
     /// </summary>
-    public readonly string? StartupTownName = null;
+    public readonly Town? StartupTown = null;
 
     /// <summary>
     /// Returns the item factories to be used to generate gold.  If there are no item factories defined, gold will not be generated.
@@ -1500,6 +1927,8 @@ internal partial class Game : IGameSerialize
     /// Returns the expression providers that are used for game and player expression computations.
     /// </summary>
     private readonly Dictionary<string, object> GlobalExpressionProviders = new Dictionary<string, object>();
+
+    public IScript[]? GameTickEvents { get; } = null;
 
     public Dictionary<string, object> GetExpressionProviders(params (string, object)[]? additionalProviders)
     {
@@ -1880,7 +2309,7 @@ internal partial class Game : IGameSerialize
 
     public bool AddItemToMonster(Item item, Monster monster)
     {
-        item.HoldingMonsterIndex = monster.GetMonsterIndex();
+        item.HoldingMonster = monster;
         monster.Items.Add(item);
         return true;
     }
@@ -1890,7 +2319,7 @@ internal partial class Game : IGameSerialize
         GridTile tile = Grid[y][x];
         item.Y = y;
         item.X = x;
-        item.HoldingMonsterIndex = 0;
+        item.HoldingMonster = null;
         tile.Items.Add(item);
         return true;
     }
@@ -2014,10 +2443,9 @@ internal partial class Game : IGameSerialize
             col = MapX.IntValue + KeypadDirectionXOffset[newDirection];
             tile = Grid[row][col];
             // If there's a monster there we must stop moving
-            if (tile.MonsterIndex != 0)
+            if (tile.Monster is not null)
             {
-                Monster monster = Monsters[tile.MonsterIndex];
-                if (monster.IsVisible)
+                if (tile.Monster.IsVisible)
                 {
                     return true;
                 }
@@ -2451,6 +2879,573 @@ internal partial class Game : IGameSerialize
         }
     }
 
+    private EffectiveAttributeSet BuildEffectiveAttributeSetForPlayer()
+    {
+        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(this);
+
+        // Squash, refresh and apply the character class attributes.  The character class selection may not have been performed at 
+        if (CharacterClass is not null)
+        {
+            CharacterClass.RefreshAndSquashAttributeSet();
+            effectiveAttributeSet.MergeAttributeSet(CharacterClass.AttributeSet);
+        }
+
+        if (Race is not null)
+        {
+            // Squash, refresh and apply the race attributes.
+            Race.RefreshAndSquashAttributeSet();
+            effectiveAttributeSet.MergeAttributeSet(Race.AttributeSet);
+        }
+
+        // Apply all of the mutations that the player has.        
+        ReadOnlyAttributeSet mutationsAttributeSet = GetMutationsAttributeSet();
+        effectiveAttributeSet.MergeAttributeSet(mutationsAttributeSet);
+
+        // Apply all of the items that the player is wielding.
+        EffectiveAttributeSet equipmentEffectiveAttributeSet = new EffectiveAttributeSet(this);
+        foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>())
+        {
+            foreach (int i in equipmentWieldSlot.InventorySlots)
+            {
+                Item? oPtr = GetInventoryItem(i);
+                if (oPtr != null)
+                {
+                    equipmentEffectiveAttributeSet.MergeAttributeSet(oPtr.EffectiveAttributeSet.ToReadOnly());
+                }
+            }
+        }
+
+        EquipmentAttributeSet = equipmentEffectiveAttributeSet.ToReadOnly();
+        effectiveAttributeSet.MergeAttributeSet(EquipmentAttributeSet);
+        return effectiveAttributeSet;
+    }
+
+    public void UpdateBonuses()
+    {
+        AttributeSet = BuildEffectiveAttributeSetForPlayer().ToReadOnly(); // TODO: This isn't being used yet.
+
+        HasAggravation = AttributeSet.GetBool(nameof(AggravateAttribute));
+        HasRegeneration = AttributeSet.GetBool(nameof(RegenAttribute)) && !AttributeSet.GetBool(nameof(SuppressRegenAttribute));
+        HasAcidImmunity = AttributeSet.GetBool(nameof(ImAcidAttribute));
+        GlowRadius = AttributeSet.GetInt(nameof(GlowRadiusAttribute)) + (AttributeSet.GetBool(nameof(ShFireAttribute)) ? 1 : 0);
+        HasAcidResistance = AttributeSet.GetBool(nameof(ResAcidAttribute)) || AcidResistanceTimer.Value > 0;
+        HasAntiMagic = AttributeSet.GetBool(nameof(NoMagicAttribute));
+        HasSustainCharisma = AttributeSet.GetBool(nameof(SustChaAttribute));
+        HasSustainConstitution = AttributeSet.GetBool(nameof(SustConAttribute));
+        HasSustainDexterity = AttributeSet.GetBool(nameof(SustDexAttribute));
+        HasSustainIntelligence = AttributeSet.GetBool(nameof(SustIntAttribute));
+        HasSustainStrength = AttributeSet.GetBool(nameof(SustStrAttribute));
+        HasSustainWisdom = AttributeSet.GetBool(nameof(SustWisAttribute));
+        HasAntiTeleport = AttributeSet.GetBool(nameof(NoTeleAttribute));
+        HasAntiTheft = AttributeSet.GetBool(nameof(AntiTheftAttribute));
+        HasBlessedBlade = AttributeSet.GetBool(nameof(BlessedAttribute));
+        HasBlindnessResistance = AttributeSet.GetBool(nameof(ResBlindAttribute));
+        HasChaosResistance = AttributeSet.GetBool(nameof(ResChaosAttribute));
+        HasColdImmunity = AttributeSet.GetBool(nameof(ImColdAttribute));
+        HasColdResistance = AttributeSet.GetBool(nameof(ResColdAttribute));
+        HasConfusionResistance = AttributeSet.GetBool(nameof(ResConfAttribute));
+        HasDarkResistance = AttributeSet.GetBool(nameof(ResDarkAttribute));
+        HasDisenchantResistance = AttributeSet.GetBool(nameof(ResDisenAttribute));
+        HasElementalVulnerability = AttributeSet.GetBool(nameof(ElementalVulnerabilityAttribute));
+        HasExperienceDrain = AttributeSet.GetBool(nameof(DrainExpAttribute));
+        HasExtraMight = AttributeSet.GetBool(nameof(XtraMightAttribute));
+        HasFearResistance = AttributeSet.GetBool(nameof(ResFearAttribute)) || HeroismTimer.Value > 0 || SuperheroismTimer.Value > 0;
+        HasFeatherFall = AttributeSet.GetBool(nameof(FeatherAttribute));
+        HasFireImmunity = AttributeSet.GetBool(nameof(ImFireAttribute));
+        HasFireResistance = AttributeSet.GetBool(nameof(ResFireAttribute)) || FireResistanceTimer.Value > 0 || HasFireImmunity;
+        HasFireSheath = AttributeSet.GetBool(nameof(ShFireAttribute));
+        HasFreeAction = AttributeSet.GetBool(nameof(FreeActAttribute));
+        HasHoldLife = AttributeSet.GetBool(nameof(HoldLifeAttribute));
+        HasLightningImmunity = AttributeSet.GetBool(nameof(ImElecAttribute));
+        HasLightningResistance = AttributeSet.GetBool(nameof(ResElecAttribute)) || LightningResistanceTimer.Value != 0;
+        HasElectricitySheath = AttributeSet.GetBool(nameof(ShElecAttribute));
+        HasLightResistance = AttributeSet.GetBool(nameof(ResLightAttribute));
+        HasNetherResistance = AttributeSet.GetBool(nameof(ResNetherAttribute));
+        HasNexusResistance = AttributeSet.GetBool(nameof(ResNexusAttribute));
+        HasPoisonResistance = AttributeSet.GetBool(nameof(ResPoisAttribute));
+        HasQuakeWeapon = AttributeSet.GetBool(nameof(QuakeAttribute));
+        HasRandomTeleport = AttributeSet.GetBool(nameof(TeleportAttribute));
+        HasReflection = AttributeSet.GetBool(nameof(ReflectAttribute)) || EtherealnessTimer.Value > 0;
+        HasSeeInvisibility = AttributeSet.GetBool(nameof(SeeInvisAttribute));
+        HasShardResistance = AttributeSet.GetBool(nameof(ResShardsAttribute));
+        HasSlowDigestion = AttributeSet.GetBool(nameof(SlowDigestAttribute));
+        HasSoundResistance = AttributeSet.GetBool(nameof(ResSoundAttribute));
+        HasTelepathy = AttributeSet.GetBool(nameof(TelepathyAttribute));
+        HasTimeResistance = AttributeSet.GetBool(nameof(ResTimeAttribute));
+        InfraVisionRange = AttributeSet.GetInt(nameof(InfraVisionAttribute)) + (InfravisionTimer.Value > 0 ? 1 : 0);
+        SkillSavingThrow = AttributeSet.GetInt(nameof(SavingThrowAttribute)) +
+            (HasAntiMagic && SkillSavingThrow < 95 ? 95 : 0) +
+            AttributeSet.GetInt(nameof(SavingThrowBonusPerLevelAttribute)) * ExperienceLevel.IntValue +
+            SingletonRepository.Get<Ability>(nameof(WisdomAbility)).WisSavingThrowBonus;
+        UseDevice = AttributeSet.GetInt(nameof(UseDeviceAttribute)) +
+            (AttributeSet.GetInt(nameof(UseDeviceBonusPerLevelAttribute)) * ExperienceLevel.IntValue) / 10 +
+            SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntUseDeviceBonus;
+        SkillSearching = AttributeSet.GetInt(nameof(SearchAttribute));
+        SkillStealth = AttributeSet.GetInt(nameof(StealthAttribute));
+        if (SkillStealth > 30)
+        {
+            SkillStealth = 30;
+        }
+        if (SkillStealth < 0)
+        {
+            SkillStealth = 0;
+        }
+        ReceivesLevelRewards = AttributeSet.GetBool(nameof(ReceivesLevelRewardsAttribute));
+
+        #region Speed
+        int oldVisibleOnlySpeed = Speed - SpeedHidden; // The speed flag is only for visible speed
+
+        // Compute the weight limit.
+        int weightCarried = WeightCarried;
+        int carryingWeightLimit = SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrCarryingCapacity * 100;
+        SpeedHidden = AttributeSet.GetInt(nameof(SpeedHiddenAttribute)) +
+            (IsSearching ? -10 : 0);
+        Speed = 110 + SpeedHidden +
+            AttributeSet.GetInt(nameof(SpeedAttribute)) +
+            (Food.IntValue >= Constants.PyFoodMax ? -10 : 0) +
+            (weightCarried > carryingWeightLimit / 2 ? -(weightCarried - (carryingWeightLimit / 2)) / (carryingWeightLimit / 10) : 0) +
+            (HasteTimer.Value > 0 ? 10 : 0) +
+            (SlowTimer.Value > 0 ? -10 : 0) +
+            (!ArmorIsHeavy() ? ExperienceLevel.IntValue / 10 : 0);
+
+        int newVisibleOnlySpeed = Speed - SpeedHidden;
+        if (newVisibleOnlySpeed != oldVisibleOnlySpeed)
+        {
+            SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();
+        }
+        #endregion
+
+        #region Base, Known Bonus and Total Bonus Armor Class
+        BaseArmorClass = AttributeSet.GetInt(nameof(BaseArmorClassAttribute));
+        TotalBonusArmorClass = AttributeSet.GetInt(nameof(BonusArmorClassAttribute)) +
+            SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexArmorClassBonus +
+            (SuperheroismTimer.Value > 0 ? -10 : 0) +
+            (BlessingTimer.Value > 0 ? 5 : 0) +
+            (StoneskinTimer.Value > 0 ? 50 : 0) +
+            (InvulnerabilityTimer.Value > 0 ? 100 : 0) +
+            (EtherealnessTimer.Value > 0 ? 100 : 0);
+        if (!ArmorIsHeavy())
+        {
+            foreach (WieldSlot inventorySlot in SingletonRepository.Get<WieldSlot>())
+            {
+                if (inventorySlot.Count == 0)
+                {
+                    int bareArmorBonus = inventorySlot.BareArmorClassBonus;
+                    TotalBonusArmorClass += bareArmorBonus;
+                }
+            }
+        }
+        KnownBonusArmorClass = TotalBonusArmorClass;
+        foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>())
+        {
+            foreach (int i in equipmentWieldSlot.InventorySlots)
+            {
+                Item? oPtr = GetInventoryItem(i);
+                if (oPtr is not null && !oPtr.IsKnown())
+                {
+                    KnownBonusArmorClass -= oPtr.EffectiveAttributeSet.BonusArmorClass;
+                }
+            }
+        }
+        #endregion
+
+        SingletonRepository.Get<Ability>(nameof(StrengthAbility)).Bonus = AttributeSet.GetInt(nameof(BonusStrengthAttribute));
+        SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).Bonus = AttributeSet.GetInt(nameof(BonusIntelligenceAttribute));
+        SingletonRepository.Get<Ability>(nameof(WisdomAbility)).Bonus = AttributeSet.GetInt(nameof(BonusWisdomAttribute));
+        SingletonRepository.Get<Ability>(nameof(DexterityAbility)).Bonus = AttributeSet.GetInt(nameof(BonusDexterityAttribute));
+        SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)).Bonus = AttributeSet.GetInt(nameof(BonusConstitutionAttribute));
+        SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Bonus = AttributeSet.GetInt(nameof(BonusCharismaAttribute));
+
+        foreach (Ability ability in SingletonRepository.Get<Ability>())
+        {
+            int top = ability.ModifyStatValue(ability.InnateMax, ability.Bonus);
+            if (ability.AdjustedMax != top)
+            {
+                ability.AdjustedMax = top;
+                SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Set();
+            }
+            int use = ability.ModifyStatValue(ability.Innate, ability.Bonus);
+            if (ability.Adjusted != use)
+            {
+                ability.Adjusted = use;
+                SingletonRepository.Get<FlaggedAction>(nameof(RedrawStatsFlaggedAction)).Set();
+            }
+            int abilityTableIndex = 37; // The range for this value is 0-37.
+            if (use <= 18) // TODO: This should be a setting
+            {
+                abilityTableIndex = use - 3; // TODO: This should be a setting
+            }
+            else if (use <= 18 + 219)
+            {
+                abilityTableIndex = 15 + ((use - 18) / 10);
+            }
+            if (ability.TableIndex != abilityTableIndex)
+            {
+                ability.TableIndex = abilityTableIndex;
+                ability.FlagActions();
+            }
+        }
+
+        /// Old Compute
+
+        List<Bonuses> bonusesToMerge = new List<Bonuses>();
+        int attackBonus = 0;
+        int damageBonus = 0;
+        int displayedAttackBonus = 0;
+        int displayedDamageBonus = 0;
+        bool hasUnpriestlyWeapon = false;
+        bool hasHeavyBow = false;
+        bool hasHeavyWeapon = false;
+
+        int extraShots;
+        bool oldTelepathy = HasTelepathy;
+        bool oldSeeInv = HasSeeInvisibility;
+        int extraBlows = extraShots = 0;
+        if (Race is not null)
+        {
+            ComputedDisarmTraps = Race.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)) + CharacterClass.AttributeSet.GetInt(nameof(DisarmTrapsAttribute)); // done
+            SkillPerception = Race.BasePerception + CharacterClass.BasePerception; // added to attributes
+            SkillMelee = Race.MeleeToHit + CharacterClass.MeleeToHit; // this appears to be tohit
+            SkillRanged = Race.RangedToHit + CharacterClass.RangedToHit; // added rangedtohit
+            SkillThrowing = Race.RangedToHit + CharacterClass.RangedToHit; // added throwingtohit
+        }
+        Tunnel = 0;
+        MeleeAttacksPerRound = 1;
+        MissileAttacksPerRound = 1;
+        SkillPerception += SkillSearching;
+        foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>())
+        {
+            foreach (int i in equipmentWieldSlot.InventorySlots)
+            {
+                Item? oPtr = GetInventoryItem(i);
+                if (oPtr != null)
+                {
+                    SkillPerception += oPtr.EffectiveAttributeSet.Search * 5;
+                    Tunnel += oPtr.EffectiveAttributeSet.Tunnel * 20;
+                    extraBlows += oPtr.EffectiveAttributeSet.Attacks;
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(XtraShotsAttribute)).Get())
+                    {
+                        extraShots++;
+                    }
+                    if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(WraithAttribute)).Get())
+                    {
+                        EtherealnessTimer.SetValue(Math.Max(EtherealnessTimer.Value, 20));
+                    }
+                    if (equipmentWieldSlot.IsMeleeWeapon || equipmentWieldSlot.IsRangedWeapon)
+                    {
+                        continue;
+                    }
+                    attackBonus += oPtr.EffectiveAttributeSet.MeleeToHit;
+                    damageBonus += oPtr.EffectiveAttributeSet.ToDamage;
+                    if (oPtr.IsKnown())
+                    {
+                        displayedAttackBonus += oPtr.EffectiveAttributeSet.MeleeToHit;
+                    }
+                    if (oPtr.IsKnown())
+                    {
+                        displayedDamageBonus += oPtr.EffectiveAttributeSet.ToDamage;
+                    }
+                }
+            }
+        }
+        if (StunTimer.Value > 50)
+        {
+            attackBonus -= 20;
+            displayedAttackBonus -= 20;
+            damageBonus -= 20;
+            displayedDamageBonus -= 20;
+        }
+        else if (StunTimer.Value != 0)
+        {
+            attackBonus -= 5;
+            displayedAttackBonus -= 5;
+            damageBonus -= 5;
+            displayedDamageBonus -= 5;
+        }
+        if (BlessingTimer.Value != 0)
+        {
+            attackBonus += 10;
+            displayedAttackBonus += 10;
+        }
+        if (HeroismTimer.Value != 0)
+        {
+            attackBonus += 12;
+            displayedAttackBonus += 12;
+        }
+        if (SuperheroismTimer.Value != 0)
+        {
+            attackBonus += 24;
+            displayedAttackBonus += 24;
+        }
+        if (HasTelepathy != oldTelepathy)
+        {
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+        }
+        if (HasSeeInvisibility != oldSeeInv)
+        {
+            SingletonRepository.Get<FlaggedAction>(nameof(UpdateMonstersFlaggedAction)).Set();
+        }
+        displayedDamageBonus += SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDamageBonus;
+        displayedAttackBonus += SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexAttackBonus;
+        displayedAttackBonus += SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrAttackBonus;
+        int hold = SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrMaxWeaponWeight;
+
+        // Enumerate all of the ranged weapon slots.
+        foreach (WieldSlot rangedWeaponInventorySlot in SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsRangedWeapon))
+        {
+            // Enumerate all of the items in the slow.
+            foreach (int index in rangedWeaponInventorySlot.InventorySlots)
+            {
+                // Retrieve the item.
+                Item? oPtr = GetInventoryItem(index);
+                if (oPtr != null)
+                {
+                    // Determine if the ranged weapon is too heavy.
+                    if (hold < oPtr.EffectiveAttributeSet.Weight / 10)
+                    {
+                        attackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
+                        displayedAttackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
+                        hasHeavyBow = true;
+                    }
+                    else
+                    {
+                        RangedWeaponBonus[] table = SingletonRepository.Get<RangedWeaponBonus>(); // TODO: This will be slow because the GenericRepository is type casting every record.
+
+                        // Retrieve all of the records that apply.
+                        RangedWeaponBonus[] matchingBonuses = table.Where(_rangedWeaponBonus =>
+                            (_rangedWeaponBonus.CharacterClassBindingKey is null || _rangedWeaponBonus.CharacterClassBindingKey == CharacterClass.GetKey) &&
+                            (_rangedWeaponBonus.ItemClassBindingKey is null || _rangedWeaponBonus.ItemClassBindingKey == oPtr.ItemClass.GetKey) &&
+                            (_rangedWeaponBonus.ExperienceLevel is null || _rangedWeaponBonus.ExperienceLevel.Value <= ExperienceLevel.IntValue)).ToArray();
+
+                        foreach (RangedWeaponBonus rangedWeaponBonus in matchingBonuses)
+                        {
+                            MissileAttacksPerRound += rangedWeaponBonus.BonusMissileAttacksPerRound;
+                        }
+                        MissileAttacksPerRound += extraShots;
+                        if (MissileAttacksPerRound < 1)
+                        {
+                            MissileAttacksPerRound = 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        // TODO: Legacy code only had 1 possibility for the melee weapon.  Now we are scanning multiple wield slots capable of multiple items.
+        bool newMartialArtistAndArmorIsHeavy = false;
+        foreach (WieldSlot meleeWeaponInventorySlot in SingletonRepository.Get<WieldSlot>().Where(_inventorySlot => _inventorySlot.IsMeleeWeapon))
+        {
+            foreach (int index in meleeWeaponInventorySlot.InventorySlots)
+            {
+                Item? oPtr = GetInventoryItem(index);
+                if (oPtr != null && hold < oPtr.EffectiveAttributeSet.Weight / 10)
+                {
+                    attackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
+                    displayedAttackBonus += 2 * (hold - (oPtr.EffectiveAttributeSet.Weight / 10));
+                    hasHeavyWeapon = true;
+                }
+                if (oPtr != null && !hasHeavyWeapon)
+                {
+                    int num = CharacterClass.MaximumMeleeAttacksPerRound(ExperienceLevel.IntValue);
+                    int wgt = CharacterClass.MaximumWeight;
+                    int mul = CharacterClass.AttackSpeedMultiplier;
+                    int div = oPtr.EffectiveAttributeSet.Weight < wgt ? wgt : oPtr.EffectiveAttributeSet.Weight;
+                    int strIndex = SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrAttackSpeedComponent * mul / div;
+                    if (strIndex > 11)
+                    {
+                        strIndex = 11;
+                    }
+                    int dexIndex = SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexAttackSpeedComponent;
+                    if (dexIndex > 11)
+                    {
+                        dexIndex = 11;
+                    }
+                    MeleeAttacksPerRound = BlowsTable[strIndex][dexIndex];
+                    if (MeleeAttacksPerRound > num)
+                    {
+                        MeleeAttacksPerRound = num;
+                    }
+                    MeleeAttacksPerRound += extraBlows;
+                    if (CharacterClass.MeleeAttacksPerRoundBonus is not null)
+                    {
+                        int meleeAttacksPerRound = ComputeIntegerExpression(CharacterClass.MeleeAttacksPerRoundBonus).Value;
+                        MeleeAttacksPerRound += meleeAttacksPerRound;
+                    }
+                    if (MeleeAttacksPerRound < 1)
+                    {
+                        MeleeAttacksPerRound = 1;
+                    }
+                    Tunnel += oPtr.EffectiveAttributeSet.Weight / 10;
+                }
+                else if (IsUsingMartialArts())
+                {
+                    MeleeAttacksPerRound = 0;
+                    if (ExperienceLevel.IntValue > 9)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 19)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 29)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 34)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 39)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 44)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ExperienceLevel.IntValue > 49)
+                    {
+                        MeleeAttacksPerRound++;
+                    }
+                    if (ArmorIsHeavy())
+                    {
+                        MeleeAttacksPerRound /= 2;
+                    }
+                    MeleeAttacksPerRound += 1 + extraBlows;
+                    if (!ArmorIsHeavy())
+                    {
+                        attackBonus += ExperienceLevel.IntValue / 3;
+                        damageBonus += ExperienceLevel.IntValue / 3;
+                        displayedAttackBonus += ExperienceLevel.IntValue / 3;
+                        displayedDamageBonus += ExperienceLevel.IntValue / 3;
+                    }
+                }
+
+                if (CharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor is not null)
+                {
+                    int divisor = CharacterClass.AttackAndDamageBonusPerExperienceLevelDivisor.Value;
+                    attackBonus += ExperienceLevel.IntValue / divisor;
+                    damageBonus += ExperienceLevel.IntValue / divisor;
+                    displayedAttackBonus += ExperienceLevel.IntValue / divisor;
+                    displayedDamageBonus += ExperienceLevel.IntValue / divisor;
+                }
+
+                if (CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon is not null && !HasBlessedBlade && oPtr != null && (oPtr.ItemClass == SingletonRepository.Get<ItemClass>(nameof(SwordsItemClass)) || oPtr.ItemClass == SingletonRepository.Get<ItemClass>(nameof(PolearmsItemClass))))
+                {
+                    attackBonus += CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    damageBonus += CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    displayedAttackBonus += CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    displayedDamageBonus += CharacterClass.AttackAndDamageBonusForUnpriestlyWeapon.Value;
+                    hasUnpriestlyWeapon = true;
+                }
+
+                Bonuses? characterClassMeleeWeaponBonuses = CharacterClass.GetBonusesForMeleeWeapon(oPtr);
+                if (characterClassMeleeWeaponBonuses is not null)
+                {
+                    bonusesToMerge.Add(characterClassMeleeWeaponBonuses);
+                }
+
+                if (CharacterClass.IsMartialArtist && ArmorIsHeavy())
+                {
+                    newMartialArtistAndArmorIsHeavy = true;
+                }
+            }
+        }
+
+        ComputedDisarmTraps += SingletonRepository.Get<Ability>(nameof(DexterityAbility)).DexDisarmBonus;
+        ComputedDisarmTraps += SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)).IntDisarmBonus;
+        Tunnel += SingletonRepository.Get<Ability>(nameof(StrengthAbility)).StrDiggingBonus;
+        ComputedDisarmTraps += (CharacterClass.DisarmBonusPerLevel * ExperienceLevel.IntValue) / 10;
+        SkillMelee += (CharacterClass.MeleeAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;
+        SkillRanged += (CharacterClass.RangedAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;
+        SkillThrowing += (CharacterClass.RangedAttackBonusPerLevel * ExperienceLevel.IntValue) / 10;
+        if (Tunnel < 1)
+        {
+            Tunnel = 1;
+        }
+
+        // Create a new bonuses that we will use to merge with all of the additionals.
+        Bonuses newBonuses = new Bonuses
+        {
+            AttackBonus = attackBonus,
+            DamageBonus = damageBonus,
+            DisplayedAttackBonus = displayedAttackBonus,
+            DisplayedDamageBonus = displayedDamageBonus,
+            HasUnpriestlyWeapon = hasUnpriestlyWeapon,
+            HasHeavyBow = hasHeavyBow,
+            HasHeavyWeapon = hasHeavyWeapon,
+        };
+
+        // Merge the additional bonuses.
+        foreach (Bonuses bonuses in bonusesToMerge)
+        {
+            newBonuses = newBonuses.Merge(bonuses);
+        }
+        // Grab a copy of the previous/old bonuses for us to render messages.
+        Bonuses previousBonuses = Bonuses;
+
+        // Set the game bonuses with the new immutable object.
+        Bonuses = newBonuses;
+
+        if (CharacterXtra)
+        {
+            return;
+        }
+
+        if (previousBonuses.HasHeavyBow != newBonuses.HasHeavyBow) // TODO: This should be moved to the wield action
+        {
+            if (newBonuses.HasHeavyBow)
+            {
+                MsgPrint("You have trouble wielding such a heavy bow.");
+            }
+            else if (SingletonRepository.Get<WieldSlot>(nameof(RangedWeaponWieldSlot)).Count > 0)
+            {
+                MsgPrint("You have no trouble wielding your bow.");
+            }
+            else
+            {
+                MsgPrint("You feel relieved to put down your heavy bow.");
+            }
+        }
+
+        if (previousBonuses.HasHeavyWeapon != newBonuses.HasHeavyWeapon) // TODO: This should be moved to the wield action
+        {
+            if (newBonuses.HasHeavyWeapon)
+            {
+                MsgPrint("You have trouble wielding such a heavy weapon.");
+            }
+            else if (SingletonRepository.Get<WieldSlot>(nameof(MeleeWeaponWieldSlot)).Count > 0)
+            {
+                MsgPrint("You have no trouble wielding your weapon.");
+            }
+            else
+            {
+                MsgPrint("You feel relieved to put down your heavy weapon.");
+            }
+        }
+        if (previousBonuses.HasUnpriestlyWeapon != newBonuses.HasUnpriestlyWeapon) // TODO: This should be moved to the wield action
+        {
+            if (newBonuses.HasUnpriestlyWeapon)
+            {
+                MsgPrint(CharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Your weapon restricts the flow of chaos through you." : "You do not feel comfortable with your weapon.");
+            }
+            else if (GetInventoryItem(InventorySlotEnum.MeleeWeapon) != null)
+            {
+                MsgPrint("You feel comfortable with your weapon.");
+            }
+            else
+            {
+                MsgPrint(CharacterClass.RenderChaosMessageForWieldingUnpriestlyWeapon ? "Chaos flows freely through you again." : "You feel more comfortable after removing your weapon.");
+            }
+        }
+        if (newMartialArtistAndArmorIsHeavy != PreviousMartialArtistArmorAux) // TODO: This should be moved to the wield action
+        {
+            MsgPrint(ArmorIsHeavy() ? "The weight of your armor disrupts your balance." : "You regain your balance.");
+            PreviousMartialArtistArmorAux = newMartialArtistAndArmorIsHeavy;
+        }
+    }
+
     /// <summary>
     /// Initializes everything for a new game.  This method is called when starting a new game and when the player dies and a new game is started.  This method does not allocate
     /// memory for a game, that is done in the Game constructor.  This method resets all of the value.
@@ -2566,8 +3561,8 @@ internal partial class Game : IGameSerialize
                         currentFlavorRepository.RemoveAt(randomIndex);
                     }
 
-                    kPtr.FlavorSymbol = kPtr.Flavor.Symbol;
-                    kPtr.Color = kPtr.Flavor.Color;
+                    kPtr.AssignedSymbol = kPtr.Flavor.Symbol;
+                    kPtr.AssignedColor = kPtr.Flavor.Color;
                 }
             }
         }
@@ -2725,6 +3720,7 @@ internal partial class Game : IGameSerialize
         TownWithHouse = null;
 
         Generation = 1;
+        ExperienceLevel.IntValue = 1;
 
         if (ExPlayer == null)
         {
@@ -2747,14 +3743,18 @@ internal partial class Game : IGameSerialize
             _prevGeneration = ExPlayer.Generation;
         }
 
-        // Refresh all of the race and character class enhancements.
+        // Refresh all of the character class, race and mutation enhancements.
         foreach (Race race in SingletonRepository.Get<Race>())
         {
-            race.Refresh();
+            race.RegenerateAttributeSets();
         }
         foreach (CharacterClass characterClass in SingletonRepository.Get<CharacterClass>())
         {
-            characterClass.Refresh();
+            characterClass.RegenerateAttributeSets();
+        }
+        foreach (Mutation mutation in SingletonRepository.Get<Mutation>())
+        {
+            mutation.RegenerateAttributeSets();
         }
 
         Screen.Clear();
@@ -2765,10 +3765,11 @@ internal partial class Game : IGameSerialize
             birthStage = birthStage.Render();
         }
 
-        if (Shutdown)
-        {
-            return;
-        }
+        // We cannot skip the rest of the GenerateNewGame process if the replay runs out of keystrokes.  We cannot pick back up where we started.  Not supported
+        //if (Shutdown) 
+        //{
+        //    return;
+        //}
 
         RaceAtBirth = Race;
         InitializeQuests();
@@ -2787,14 +3788,9 @@ internal partial class Game : IGameSerialize
         }
         ResetStompability();
         CurrentDepth = 0;
-        if (StartupTownName != null)
+        if (StartupTown is not null)
         {
-            Town? startupTown = SingletonRepository.Get<Town>(StartupTownName);
-            if (startupTown == null)
-            {
-                throw new Exception("The configured startup town does not exist.");
-            }
-            CurTown = startupTown;
+            CurTown = StartupTown;
         }
         else
         {
@@ -2805,7 +3801,7 @@ internal partial class Game : IGameSerialize
             }
             WeightedRandom<Town> weightedRandomOfTownsAllowedToStartup = new WeightedRandom<Town>(this, townsAllowedToStartup);
             Town? town = weightedRandomOfTownsAllowedToStartup.ChooseOrDefault();
-            if (town == null)
+            if (town is null)
             {
                 throw new Exception("No startup town.");
             }
@@ -3410,9 +4406,9 @@ internal partial class Game : IGameSerialize
         RedrawStuff();
     }
 
-    public void HealthTrack(int? mIdx)
+    public void TrackMonsterHealth(Monster? mPtr)
     {
-        TrackedMonster.Value = mIdx == null ? null : Monsters[mIdx.Value];
+        TrackedMonster.Value = mPtr;
     }
 
     public void MonsterDeath(Monster mPtr)
@@ -3461,7 +4457,7 @@ internal partial class Game : IGameSerialize
         }
         foreach (Item oPtr in mPtr.Items)
         {
-            oPtr.HoldingMonsterIndex = 0;
+            oPtr.HoldingMonster = null;
             DropNear(oPtr, null, y, x);
         }
         if (mPtr.StolenGold > 0)
@@ -3908,7 +4904,7 @@ internal partial class Game : IGameSerialize
         CommandArgument = 0;
         CommandDirection = 0;
         TargetWho = null;
-        HealthTrack(null);
+        TrackMonsterHealth(null);
         ShimmerMonsters = true;
         RepairMonsters = true;
         Disturb(true);
@@ -4016,14 +5012,14 @@ internal partial class Game : IGameSerialize
         }
         while (!Shutdown)
         {
-            if (MCnt + 32 > Constants.MaxMIdx)
+            if (MonsterList.Count + CompactMonsterCutIn > MaxMonsterCount)
             {
-                CompactMonsters(64);
+                CompactMonsters(CompactMonsterCutOutTarget);
             }
-            if (MCnt + 32 < MonsterMax)
-            {
-                CompactMonsters(0);
-            }
+            //if (MonsterList.Count + 32 < MonsterMax)
+            //{
+            //    CompactMonsters(0);
+            //}
             ProcessPlayer();
             if (Shutdown)
             {
@@ -4189,7 +5185,7 @@ internal partial class Game : IGameSerialize
         // We cannot give the player energy for restoring the game.
         if (!GameRestored)
         {
-            Energy += ExtractEnergy[Speed.IntValue]; // TODO: This causes a runtime error for out of bounds
+            Energy += ExtractEnergy[Speed]; // TODO: This causes a runtime error for out of bounds
         }
         if (Energy < 100)
         {
@@ -4292,13 +5288,8 @@ internal partial class Game : IGameSerialize
                 if (ShimmerMonsters)
                 {
                     ShimmerMonsters = false;
-                    for (i = 1; i < MonsterMax; i++)
+                    foreach (Monster mPtr in MonsterList)
                     {
-                        Monster mPtr = Monsters[i];
-                        if (mPtr.Race == null)
-                        {
-                            continue;
-                        }
                         MonsterRace rPtr = mPtr.Race;
                         if (!rPtr.AttrMulti)
                         {
@@ -4311,13 +5302,8 @@ internal partial class Game : IGameSerialize
                 if (RepairMonsters)
                 {
                     RepairMonsters = false;
-                    for (i = 1; i < MonsterMax; i++)
+                    foreach (Monster mPtr in MonsterList)
                     {
-                        Monster mPtr = Monsters[i];
-                        if (mPtr.Race == null)
-                        {
-                            continue;
-                        }
                         if ((mPtr.IndividualMonsterFlags & Constants.MflagNice) != 0)
                         {
                             mPtr.IndividualMonsterFlags &= ~Constants.MflagNice;
@@ -4333,7 +5319,7 @@ internal partial class Game : IGameSerialize
                             {
                                 mPtr.IndividualMonsterFlags &= ~Constants.MflagMark;
                                 mPtr.IsVisible = false;
-                                UpdateMonsterVisibility(i, false);
+                                UpdateMonsterVisibility(mPtr, false);
                                 ConsoleView.RefreshMapLocation(mPtr.MapY, mPtr.MapX);
                             }
                         }
@@ -4499,7 +5485,7 @@ internal partial class Game : IGameSerialize
         {
             if (IsTurnHundred)
             {
-                int additionalEnergy = ExtractEnergy[Speed.IntValue] * 2;
+                int additionalEnergy = ExtractEnergy[Speed] * 2;
                 if (HasRegeneration)
                 {
                     additionalEnergy += 30;
@@ -4627,10 +5613,13 @@ internal partial class Game : IGameSerialize
             }
         }
 
-        // Mutations get to proces the world turn.
-        foreach (Mutation mutation in MutationsPossessed.ToArray()) // The list may be modified.  Use the ToArray to prevent an issue.
+        UniversalScript[]? processWorldScripts = AttributeSet.GetScripts(nameof(ProcessWorldScriptsAttribute));
+        if (processWorldScripts is not null)
         {
-            mutation.ProcessWorld();
+            foreach (UniversalScript script in processWorldScripts)
+            {
+                script.ExecuteScript();
+            }
         }
 
         RunScript(nameof(SenseInventoryScript));
@@ -4646,7 +5635,7 @@ internal partial class Game : IGameSerialize
         }
 
         // Every monster gets to process the world event.
-        foreach (Monster monster in Monsters)
+        foreach (Monster monster in MonsterList)
         {
             monster.ProcessWorld();
         }
@@ -4725,14 +5714,9 @@ internal partial class Game : IGameSerialize
 
     private void RegenMonsters()
     {
-        for (int i = 1; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             if (mPtr.Health < mPtr.MaxHealth)
             {
                 int frac = mPtr.MaxHealth / 100;
@@ -4878,14 +5862,9 @@ internal partial class Game : IGameSerialize
     {
         bool sleep = false;
         bool speed = false;
-        for (int i = 0; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             if (excludeMonster != null && mPtr == excludeMonster)
             {
                 continue;
@@ -5111,14 +6090,9 @@ internal partial class Game : IGameSerialize
     public bool DetectInvisibleMonsters()
     {
         bool flag = false;
-        for (int i = 1; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
             if (!PanelContains(y, x))
@@ -5418,9 +6392,9 @@ internal partial class Game : IGameSerialize
                     continue;
                 }
                 cPtr = Grid[yy][xx];
-                if (cPtr.MonsterIndex != 0)
+                if (cPtr.Monster is not null)
                 {
-                    Monster mPtr = Monsters[cPtr.MonsterIndex];
+                    Monster mPtr = cPtr.Monster;
                     MonsterRace rPtr = mPtr.Race;
                     if (!rPtr.KillWall && !rPtr.PassWall)
                     {
@@ -5465,12 +6439,11 @@ internal partial class Game : IGameSerialize
                         }
                         if (sn != 0)
                         {
-                            int mIdx = Grid[yy][xx].MonsterIndex;
-                            Grid[sy][sx].MonsterIndex = mIdx;
-                            Grid[yy][xx].MonsterIndex = 0;
+                            Grid[sy][sx].Monster = Grid[yy][xx].Monster;
+                            Grid[yy][xx].Monster = null;
                             mPtr.MapY = sy;
                             mPtr.MapX = sx;
-                            UpdateMonsterVisibility(mIdx, true);
+                            UpdateMonsterVisibility(mPtr, true);
                             ConsoleView.RefreshMapLocation(yy, xx);
                             ConsoleView.RefreshMapLocation(sy, sx);
                         }
@@ -5545,12 +6518,12 @@ internal partial class Game : IGameSerialize
         {
             dam = (dam + 2) / 3;
         }
-        if (!(LightningResistanceTimer.Value != 0 || HasLightningResistance) && DieRoll(HurtChance) == 1)
+        if (!HasLightningResistance && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(DexterityAbility)));
         }
         TakeHit(dam, kbStr);
-        if (!(LightningResistanceTimer.Value != 0 && HasLightningResistance))
+        if (!HasLightningResistance)
         {
             InvenDamage(SetElecDestroy, inv);
         }
@@ -5589,13 +6562,10 @@ internal partial class Game : IGameSerialize
                 {
                     oPtr.EffectiveAttributeSet.MeleeToHit++;
                     res = true;
-                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.PermaCurse && oPtr.EffectiveAttributeSet.MeleeToHit >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get() && oPtr.EffectiveAttributeSet.MeleeToHit >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
-                        oPtr.IdentSense = true;
-                        oPtr.Inscription = "uncursed";
+                        oPtr.RemoveCurse();
                     }
                 }
             }
@@ -5617,13 +6587,10 @@ internal partial class Game : IGameSerialize
                 {
                     oPtr.EffectiveAttributeSet.ToDamage++;
                     res = true;
-                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.PermaCurse && oPtr.EffectiveAttributeSet.ToDamage >= 0 && RandomLessThan(100) < 25)
+                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get() && oPtr.EffectiveAttributeSet.ToDamage >= 0 && RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
-                        oPtr.IdentSense = true;
-                        oPtr.Inscription = "uncursed";
+                        oPtr.RemoveCurse();
                     }
                 }
             }
@@ -5645,14 +6612,11 @@ internal partial class Game : IGameSerialize
                 {
                     oPtr.EffectiveAttributeSet.BonusArmorClass++;
                     res = true;
-                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.PermaCurse && oPtr.EffectiveAttributeSet.BonusArmorClass >= 0 &&
+                    if (oPtr.EffectiveAttributeSet.IsCursed && !oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get() && oPtr.EffectiveAttributeSet.BonusArmorClass >= 0 &&
                         RandomLessThan(100) < 25)
                     {
                         MsgPrint("The curse is broken!");
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-                        oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
-                        oPtr.IdentSense = true;
-                        oPtr.Inscription = "uncursed";
+                        oPtr.RemoveCurse();
                     }
                 }
             }
@@ -5740,12 +6704,12 @@ internal partial class Game : IGameSerialize
         {
             dam = (dam + 2) / 3;
         }
-        if (!(FireResistanceTimer.Value != 0 || HasFireResistance) && DieRoll(HurtChance) == 1)
+        if (!HasFireResistance && DieRoll(HurtChance) == 1)
         {
             TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(StrengthAbility)));
         }
         TakeHit(dam, killedByIndefiniteVisibleName);
-        if (!(HasFireResistance && FireResistanceTimer.Value != 0))
+        if (!HasFireResistance)
         {
             InvenDamage(SetFireDestroy, inv);
         }
@@ -5758,7 +6722,7 @@ internal partial class Game : IGameSerialize
             MsgPrint("You are surrounded by a white light.");
         }
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(LightWeakProjectile));
-        projectile.Fire(0, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
+        projectile.Fire(null, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
         LightRoom(MapY.IntValue, MapX.IntValue);
         return true;
     }
@@ -5806,12 +6770,12 @@ internal partial class Game : IGameSerialize
         int lev2 = rPtr.Level + (DieRoll(20) / DieRoll(9)) + 1;
         for (int i = 0; i < 1000; i++)
         {
-            int r = GetMonNum(((Difficulty + rPtr.Level) / 2) + 5, null);
-            if (r == 0)
+            MonsterRace? newMonsterRace = GetMonsterRace(((Difficulty + rPtr.Level) / 2) + 5, null);
+            if (newMonsterRace is null)
             {
                 break;
             }
-            rPtr = SingletonRepository.Get<MonsterRace>(r);
+            rPtr = newMonsterRace;
             if (rPtr.Unique)
             {
                 continue;
@@ -5820,7 +6784,7 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            index = r;
+            index = newMonsterRace.Index;
             break;
         }
         return index;
@@ -5828,9 +6792,8 @@ internal partial class Game : IGameSerialize
 
     public void Probing()
     {
-        void LoreDoProbe(int mIdx)
+        void LoreDoProbe(Monster mPtr)
         {
-            Monster mPtr = Monsters[mIdx];
             MonsterRace rPtr = mPtr.Race;
             var knowledge = rPtr.Knowledge;
             for (var m = 0; m < rPtr.Attacks.Length; m++)
@@ -5865,13 +6828,8 @@ internal partial class Game : IGameSerialize
         }
 
         bool probe = false;
-        for (int i = 1; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             if (!GridTileIsVisible(mPtr.MapY, mPtr.MapX))
             {
                 continue;
@@ -5884,7 +6842,7 @@ internal partial class Game : IGameSerialize
                 }
                 string mName = mPtr.IndefiniteWhenHiddenName;
                 MsgPrint($"{mName} has {mPtr.Health} hit points.");
-                LoreDoProbe(i);
+                LoreDoProbe(mPtr);
                 probe = true;
             }
         }
@@ -5896,11 +6854,11 @@ internal partial class Game : IGameSerialize
 
     public bool SetAcidDestroy(Item oPtr)
     {
-        if (!oPtr.EffectiveAttributeSet.HatesAcid)
+        if (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesAcidAttribute)).Get())
         {
             return false;
         }
-        if (oPtr.EffectiveAttributeSet.IgnoreAcid)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Get())
         {
             return false;
         }
@@ -5909,11 +6867,11 @@ internal partial class Game : IGameSerialize
 
     public bool SetColdDestroy(Item oPtr)
     {
-        if (!oPtr.EffectiveAttributeSet.HatesCold)
+        if (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesColdAttribute)).Get())
         {
             return false;
         }
-        if (oPtr.EffectiveAttributeSet.IgnoreCold)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreColdAttribute)).Get())
         {
             return false;
         }
@@ -5922,11 +6880,11 @@ internal partial class Game : IGameSerialize
 
     public bool SetElecDestroy(Item oPtr)
     {
-        if (!oPtr.EffectiveAttributeSet.HatesElectricity)
+        if (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesElectricityAttribute)).Get())
         {
             return false;
         }
-        if (oPtr.EffectiveAttributeSet.IgnoreElec)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Get())
         {
             return false;
         }
@@ -5935,11 +6893,11 @@ internal partial class Game : IGameSerialize
 
     public bool SetFireDestroy(Item oPtr)
     {
-        if (!oPtr.EffectiveAttributeSet.HatesFire)
+        if (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesFireAttribute)).Get())
         {
             return false;
         }
-        if (oPtr.EffectiveAttributeSet.IgnoreFire)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Get())
         {
             return false;
         }
@@ -6016,13 +6974,13 @@ internal partial class Game : IGameSerialize
         }
 
         GridTile cPtr = Grid[ty][tx];
-        if (cPtr.MonsterIndex == 0)
+        Monster? mPtr = cPtr.Monster;
+        if (mPtr is null)
         {
             MsgPrint("You can't trade places with that!");
         }
         else
         {
-            Monster mPtr = Monsters[cPtr.MonsterIndex];
             MonsterRace rPtr = mPtr.Race;
             if (rPtr.ResistTeleport)
             {
@@ -6031,15 +6989,15 @@ internal partial class Game : IGameSerialize
             else
             {
                 PlaySound(SoundEffectEnum.Teleport);
-                Grid[MapY.IntValue][MapX.IntValue].MonsterIndex = cPtr.MonsterIndex;
-                cPtr.MonsterIndex = 0;
+                Grid[MapY.IntValue][MapX.IntValue].Monster = mPtr;
+                cPtr.Monster = null;
                 mPtr.MapY = MapY.IntValue;
                 mPtr.MapX = MapX.IntValue;
                 MapX.IntValue = tx;
                 MapY.IntValue = ty;
                 tx = mPtr.MapX;
                 ty = mPtr.MapY;
-                UpdateMonsterVisibility(Grid[ty][tx].MonsterIndex, true);
+                UpdateMonsterVisibility(Grid[ty][tx].Monster, true);
                 ConsoleView.RefreshMapLocation(ty, tx);
                 ConsoleView.RefreshMapLocation(MapY.IntValue, MapX.IntValue);
                 RecenterScreenAroundPlayer();
@@ -6059,7 +7017,7 @@ internal partial class Game : IGameSerialize
             MsgPrint("Darkness surrounds you.");
         }
         Projectile projectile = SingletonRepository.Get<Projectile>(nameof(DarknessWeakProjectile));
-        projectile.Fire(0, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
+        projectile.Fire(null, rad, MapY.IntValue, MapX.IntValue, dam, grid: true, kill: true, jump: false, beam: false, thru: false, hide: false, item: false, stop: false);
         UnlightRoom(MapY.IntValue, MapX.IntValue);
         return true;
     }
@@ -6144,12 +7102,12 @@ internal partial class Game : IGameSerialize
             GridTile cPtr = Grid[y][x];
             cPtr.TempFlag = false;
             cPtr.SelfLit = true;
-            if (cPtr.MonsterIndex != 0)
+            if (cPtr.Monster is not null)
             {
                 int chance = 25;
-                Monster mPtr = Monsters[cPtr.MonsterIndex];
+                Monster mPtr = cPtr.Monster;
                 MonsterRace rPtr = mPtr.Race;
-                UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+                UpdateMonsterVisibility(mPtr, false);
                 if (rPtr.Stupid)
                 {
                     chance = 10;
@@ -6188,9 +7146,9 @@ internal partial class Game : IGameSerialize
                 cPtr.PlayerMemorized = false;
                 NoteSpot(y, x);
             }
-            if (cPtr.MonsterIndex != 0)
+            if (cPtr.Monster is not null)
             {
-                UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+                UpdateMonsterVisibility(cPtr.Monster, false);
             }
             ConsoleView.RefreshMapLocation(y, x);
         }
@@ -6200,14 +7158,9 @@ internal partial class Game : IGameSerialize
     public bool DetectMonstersString(string match)
     {
         bool flag = false;
-        for (int i = 1; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
             if (!PanelContains(y, x))
@@ -6271,12 +7224,12 @@ internal partial class Game : IGameSerialize
         {
             return false;
         }
-        if (oPtr.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() + oPtr.EffectiveAttributeSet.BonusArmorClass <= 0)
+        if (oPtr.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Get() + oPtr.EffectiveAttributeSet.BonusArmorClass <= 0)
         {
             return false;
         }
         string oName = oPtr.GetDescription(false);
-        if (oPtr.EffectiveAttributeSet.IgnoreAcid)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreAcidAttribute)).Get())
         {
             MsgPrint($"Your {oName} is unaffected!");
             return true;
@@ -6296,20 +7249,15 @@ internal partial class Game : IGameSerialize
     public IsNoticedEnum ProjectAtAllInLos(Projectile projectile, int dam)
     {
         IsNoticedEnum isNoticed = IsNoticedEnum.False;
-        for (int i = 1; i < MonsterMax; i++)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
-            if (mPtr.Race == null) // TODO: This should never be.
-            {
-                continue;
-            }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
             if (!GridTileIsVisible(y, x))
             {
                 continue;
             }
-            if (projectile.Fire(0, 0, y, x, dam, kill: true, jump: true, hide: true, beam: false, thru: false, grid: false, item: false, stop: false) == IsNoticedEnum.True)
+            if (projectile.Fire(null, 0, y, x, dam, kill: true, jump: true, hide: true, beam: false, thru: false, grid: false, item: false, stop: false) == IsNoticedEnum.True)
             {
                 isNoticed = IsNoticedEnum.True;
             }
@@ -6319,42 +7267,24 @@ internal partial class Game : IGameSerialize
 
     public bool RemoveCurseAux(bool alsoRemoveHeavyCurse)
     {
-        int cnt = 0;
-        for (int i = InventorySlotEnum.MeleeWeapon; i < InventorySlotEnum.Total; i++)
+        bool curseRemoved = false;
+        foreach (EquipmentWieldSlot equipmentWieldSlot in SingletonRepository.Get<EquipmentWieldSlot>())
         {
-            Item? oPtr = GetInventoryItem(i);
-
-            // Ensure there is an item.
-            if (oPtr == null)
+            foreach (int i in equipmentWieldSlot.InventorySlots)
             {
-                continue;
-            }
+                Item? oPtr = GetInventoryItem(i);
 
-            // If it is not cursed, skip it.
-            if (!oPtr.EffectiveAttributeSet.IsCursed)
-            {
-                continue;
+                // Items that are cursed, or heavy cursed (with true alsoRemoveHeavyCurse) and not perma-cursed will be uncursed.
+                if (oPtr is not null && oPtr.EffectiveAttributeSet.IsCursed && (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Get() || alsoRemoveHeavyCurse) && !oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get())
+                {
+                    if (oPtr.RemoveCurse())
+                    {
+                        curseRemoved = true;
+                    }
+                }
             }
-
-            // If it is heavy cursed, and we did not ask to remove the heavy curse, skip it.
-            if (!alsoRemoveHeavyCurse && oPtr.EffectiveAttributeSet.HeavyCurse)
-            {
-                continue;
-            }
-
-            // Permacurse cannot be removed.
-            if (oPtr.EffectiveAttributeSet.PermaCurse)
-            {
-                continue;
-            }
-            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
-            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
-            oPtr.IdentSense = true;
-            oPtr.Inscription = "uncursed";
-            SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-            cnt++;
         }
-        return cnt > 0;
+        return curseRemoved;
     }
 
     /// <summary>
@@ -6697,10 +7627,10 @@ internal partial class Game : IGameSerialize
             item.EffectiveAttributeSet.BonusArmorClass = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.MeleeToHit = 0;
             item.EffectiveAttributeSet.ToDamage = 0;
-            item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
+            item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Reset();
             item.EffectiveAttributeSet.DamageDice = 0;
             item.EffectiveAttributeSet.DiceSides = 0;
-            item.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
             item.EffectiveAttributeSet.Valueless = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -6736,10 +7666,10 @@ internal partial class Game : IGameSerialize
             item.EffectiveAttributeSet.MeleeToHit = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.ToDamage = 0 - DieRoll(5) - DieRoll(5);
             item.EffectiveAttributeSet.BonusArmorClass = 0;
-            item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Set(0);
+            item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BaseArmorClassAttribute)).Reset();
             item.EffectiveAttributeSet.DamageDice = 0;
             item.EffectiveAttributeSet.DiceSides = 0;
-            item.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
             item.EffectiveAttributeSet.Valueless = true;
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
             SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
@@ -6942,7 +7872,7 @@ internal partial class Game : IGameSerialize
     { 
         bool canPassWalls = false;
         GridTile tile = Grid[newY][newX];
-        Monster monster = Monsters[tile.MonsterIndex];
+        Monster monster = tile.Monster;
         // Check if we can pass through walls
         if (EtherealnessTimer.Value != 0 || Race.IsEthereal)
         {
@@ -6955,7 +7885,7 @@ internal partial class Game : IGameSerialize
         }
         // If there's a monster we can see or an invisible monster on a tile we can move to,
         // deal with it
-        if (tile.MonsterIndex != 0 && (monster.IsVisible || GridPassable(newY, newX) || canPassWalls))
+        if (tile.Monster is not null && (monster.IsVisible || GridPassable(newY, newX) || canPassWalls))
         {
             // Check if it's a friend, and if we are in a fit state to distinguish friend from foe
             if (monster.IsPet && !(ConfusionTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible || StunTimer.Value != 0) && (GridPassable(newY, newX) || canPassWalls))
@@ -6966,7 +7896,7 @@ internal partial class Game : IGameSerialize
                 // If we can see it, no need to mention it
                 if (monster.IsVisible)
                 {
-                    HealthTrack(tile.MonsterIndex);
+                    TrackMonsterHealth(monster);
                 }
                 // If we can't see it then let us push past it and tell us what happened
                 else if (GridPassable(MapY.IntValue, MapX.IntValue) || monster.Race.PassWall)
@@ -6974,9 +7904,9 @@ internal partial class Game : IGameSerialize
                     MsgPrint($"You push past {monsterName}.");
                     monster.MapY = MapY.IntValue;
                     monster.MapX = MapX.IntValue;
-                    Grid[MapY.IntValue][MapX.IntValue].MonsterIndex = tile.MonsterIndex;
-                    tile.MonsterIndex = 0;
-                    UpdateMonsterVisibility(Grid[MapY.IntValue][MapX.IntValue].MonsterIndex, true);
+                    Grid[MapY.IntValue][MapX.IntValue].Monster = tile.Monster;
+                    tile.Monster = null;
+                    UpdateMonsterVisibility(Grid[MapY.IntValue][MapX.IntValue].Monster, true);
                 }
                 // If we couldn't push past it, tell us it was in the way
                 else
@@ -7312,11 +8242,10 @@ internal partial class Game : IGameSerialize
         /// <param name="mutation"> The mutation being used to attack </param>
         /// <param name="fear"> Whether or not the monster is scared by the attack </param>
         /// <param name="monsterDies"> Whether or not the monster is killed by the attack </param>
-        void PlayerNaturalAttackOnMonster(int monsterIndex, Mutation mutation, out bool fear, out bool monsterDies)
+        void PlayerNaturalAttackOnMonster(Monster monster, Mutation mutation, out bool fear, out bool monsterDies)
         {
             fear = false;
             monsterDies = false;
-            Monster monster = Monsters[monsterIndex];
             MonsterRace race = monster.Race;
             int damageSides = mutation.DamageDiceSize;
             int damageDice = mutation.DamageDiceNumber;
@@ -7350,17 +8279,17 @@ internal partial class Game : IGameSerialize
                 switch (mutation.MutationAttackType)
                 {
                     case MutationAttackTypeEnum.Physical:
-                        monsterDies = DamageMonster(monsterIndex, damage, out fear, "");
+                        monsterDies = DamageMonster(monster, damage, out fear, "");
                         break;
 
                     case MutationAttackTypeEnum.Poison:
                         Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
-                        poisonProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
+                        poisonProjectile.Fire(null, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
                         break;
 
                     case MutationAttackTypeEnum.Hellfire:
                         Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
-                        hellFireProjectile.Fire(0, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
+                        hellFireProjectile.Fire(null, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
                         break;
                 }
                 // The monster might hurt when we touch it
@@ -7375,7 +8304,7 @@ internal partial class Game : IGameSerialize
         }
 
         GridTile tile = Grid[y][x];
-        Monster monster = Monsters[tile.MonsterIndex];
+        Monster monster = tile.Monster;
         MonsterRace race = monster.Race;
         bool fear = false;
         bool backstab = false;
@@ -7405,7 +8334,7 @@ internal partial class Game : IGameSerialize
         // If we can see the monster, track its health
         if (monster.IsVisible)
         {
-            HealthTrack(tile.MonsterIndex);
+            TrackMonsterHealth(monster);
         }
         // if the monster is our friend and we're not confused, we can avoid hitting it
         if (monster.IsPet && !(StunTimer.Value != 0 || ConfusionTimer.Value != 0 || HallucinationsTimer.Value != 0 || !monster.IsVisible))
@@ -7441,7 +8370,7 @@ internal partial class Game : IGameSerialize
                 // Tell the player they hit it with the appropriate message
                 if (!(backstab || stabFleeing))
                 {
-                    if (!IsMartialArtistAndNotWieldingAMeleeWeapon())
+                    if (!IsUsingMartialArts())
                     {
                         MsgPrint($"You hit {monsterName}.");
                     }
@@ -7462,8 +8391,8 @@ internal partial class Game : IGameSerialize
                 if (meleeItem != null)
                 {
                     // Get our weapon's flags to see if we need to do anything special
-                    chaosEffect = meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Get() && DieRoll(2) == 1;
-                    if (meleeItem.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get() || (chaosEffect && DieRoll(5) < 3))
+                    chaosEffect = meleeItem.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Get() && DieRoll(2) == 1;
+                    if (meleeItem.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(VampiricAttribute)).Get() || (chaosEffect && DieRoll(5) < 3))
                     {
                         // Vampiric overrides chaotic
                         chaosEffect = false;
@@ -7478,7 +8407,7 @@ internal partial class Game : IGameSerialize
                     }
                 }
                 // If we're a martial artist then we have special attacks
-                if (IsMartialArtistAndNotWieldingAMeleeWeapon())
+                if (IsUsingMartialArts())
                 {
                     int times;
                     MartialArtsAttack martialArtsAttack = SingletonRepository.Get<MartialArtsAttack>().Single(_martialArtsAttack => _martialArtsAttack.IsDefault);
@@ -7550,14 +8479,14 @@ internal partial class Game : IGameSerialize
                     totalDamage = PlayerCriticalMelee(meleeItem.EffectiveAttributeSet.Weight, meleeItem.EffectiveAttributeSet.MeleeToHit, totalDamage);
 
                     // Vorpal weapons have a chance of a deep cut.
-                    bool vorpalCut = DieRoll(meleeItem.EffectiveAttributeSet.Vorpal1InChance) == 1;
+                    bool vorpalCut = DieRoll(meleeItem.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Get()) == 1;
 
                     // If we did a vorpal cut, do extra damage
                     if (vorpalCut)
                     {
                         int stepK = totalDamage;
-                        string message = meleeItem.EffectiveAttributeSet.Vorpal1InChance == 0 ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
-                        int vorpalExtraAttacks1InChance = meleeItem.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(VorpalExtraAttacks1InChanceAttribute)).Get();
+                        string message = meleeItem.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(Vorpal1InChanceAttribute)).Get() == 0 ? $"Your weapon cuts deep into {monsterName}!" : "Your Vorpal Blade goes snicker-snack!";
+                        int vorpalExtraAttacks1InChance = meleeItem.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(VorpalExtraAttacks1InChanceAttribute)).Get();
                         MsgPrint(message);
                         do
                         {
@@ -7575,7 +8504,7 @@ internal partial class Game : IGameSerialize
                     totalDamage = 0;
                 }
                 // Apply damage to the monster
-                if (DamageMonster(tile.MonsterIndex, totalDamage, out fear, ""))
+                if (DamageMonster(tile.Monster, totalDamage, out fear, ""))
                 {
                     // Can't have any more attacks because the monster's dead
                     noExtra = true;
@@ -7665,10 +8594,10 @@ internal partial class Game : IGameSerialize
                         if (newRaceIndex != monster.Race.Index)
                         {
                             MsgPrint($"{monsterName} changes!");
-                            DeleteMonsterByIndex(tile.MonsterIndex, true);
+                            DeleteMonster(tile.Monster);
                             MonsterRace newRace = SingletonRepository.Get<MonsterRace>(newRaceIndex);
-                            PlaceMonsterAux(y, x, newRace, false, false, false);
-                            monster = Monsters[tile.MonsterIndex];
+                            PlaceOneMonsterByRace(y, x, newRace, false, false, false);
+                            monster = tile.Monster;
                             monsterName = monster.Name;
                             fear = false;
                         }
@@ -7690,9 +8619,9 @@ internal partial class Game : IGameSerialize
         // Only make extra attacks if the monster is still there
         foreach (Mutation naturalAttack in NaturalAttacks)
         {
-            if (!noExtra && tile.MonsterIndex != 0)
+            if (!noExtra && tile.Monster is not null)
             {
-                PlayerNaturalAttackOnMonster(tile.MonsterIndex, naturalAttack, out fear, out noExtra);
+                PlayerNaturalAttackOnMonster(tile.Monster, naturalAttack, out fear, out noExtra);
             }
         }
         if (fear && monster.IsVisible && !noExtra)
@@ -7981,10 +8910,10 @@ internal partial class Game : IGameSerialize
             }
             // If there's a monster in the way, we might hit it regardless of whether or not it
             // is our intended target
-            if (Grid[y][x].MonsterIndex != 0)
+            if (Grid[y][x].Monster is not null)
             {
                 GridTile tile = Grid[y][x];
-                Monster monster = Monsters[tile.MonsterIndex];
+                Monster monster = tile.Monster;
                 MonsterRace race = monster.Race;
                 bool visible = monster.IsVisible;
                 hitBody = true;
@@ -8009,7 +8938,7 @@ internal partial class Game : IGameSerialize
                         MsgPrint($"The {missileName} hits {mName}.");
                         if (monster.IsVisible)
                         {
-                            HealthTrack(tile.MonsterIndex);
+                            TrackMonsterHealth(monster);
                         }
                     }
                     // Adjust the damage for the particular monster type
@@ -8019,7 +8948,7 @@ internal partial class Game : IGameSerialize
                     {
                         damage = 0;
                     }
-                    if (DamageMonster(tile.MonsterIndex, damage, out bool fear, noteDies))
+                    if (DamageMonster(tile.Monster, damage, out bool fear, noteDies))
                     {
                         // The monster is dead, so don't add further statuses or messages
                     }
@@ -8053,13 +8982,13 @@ internal partial class Game : IGameSerialize
             if (hitBody || !GridPassable(newY, newX) || chanceToBreak.Test())
             {
                 MsgPrint($"The {missileName} shatters!");
-                if (missile.Smash(1, y, x))
+                if (missile.Smash(null, y, x))
                 {
-                    if (Grid[y][x].MonsterIndex != 0 && Monsters[Grid[y][x].MonsterIndex].IsPet)
+                    if (Grid[y][x].Monster is not null && Grid[y][x].Monster.IsPet)
                     {
-                        string mName = Monsters[Grid[y][x].MonsterIndex].Name;
+                        string mName = Grid[y][x].Monster.Name;
                         MsgPrint($"{mName} gets angry!");
-                        Monsters[Grid[y][x].MonsterIndex].IsPet = false;
+                        Grid[y][x].Monster.IsPet = false;
                     }
                 }
                 return;
@@ -8195,7 +9124,7 @@ internal partial class Game : IGameSerialize
         // Trees are easy to chop down
         if (tile.FeatureType.IsTree)
         {
-            if (SkillDigging > 40 + RandomLessThan(100) && RemoveTileViaTunnelling(y, x))
+            if (Tunnel > 40 + RandomLessThan(100) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint($"You have chopped down the {tile.FeatureType.Description}.");
             }
@@ -8208,7 +9137,7 @@ internal partial class Game : IGameSerialize
         // Pillars are a bit easier than walls
         else if (tile.FeatureType.IsPillar)
         {
-            if (SkillDigging > 40 + RandomLessThan(300) && RemoveTileViaTunnelling(y, x))
+            if (Tunnel > 40 + RandomLessThan(300) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint("You have broken down the pillar.");
             }
@@ -8231,7 +9160,7 @@ internal partial class Game : IGameSerialize
         // It's a wall, so we tunnel normally
         else if (tile.FeatureType.IsWall)
         {
-            if (SkillDigging > 40 + RandomLessThan(1600) && RemoveTileViaTunnelling(y, x))
+            if (Tunnel > 40 + RandomLessThan(1600) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint("You have finished the tunnel.");
             }
@@ -8258,11 +9187,11 @@ internal partial class Game : IGameSerialize
             // Magma needs a higher tunneling skill than quartz
             if (isMagma)
             {
-                okay = SkillDigging > 20 + RandomLessThan(800);
+                okay = Tunnel > 20 + RandomLessThan(800);
             }
             else
             {
-                okay = SkillDigging > 10 + RandomLessThan(400);
+                okay = Tunnel > 10 + RandomLessThan(400);
             }
             // Do the actual tunnelling
             if (okay && RemoveTileViaTunnelling(y, x))
@@ -8292,7 +9221,7 @@ internal partial class Game : IGameSerialize
         // Rubble is easy to tunnel through
         else if (tile.FeatureType.IsRubble)
         {
-            if (SkillDigging > RandomLessThan(200) && RemoveTileViaTunnelling(y, x))
+            if (Tunnel > RandomLessThan(200) && RemoveTileViaTunnelling(y, x))
             {
                 MsgPrint("You have removed the rubble.");
                 // 10% chance of finding something
@@ -8537,11 +9466,11 @@ internal partial class Game : IGameSerialize
         {
             auraDamage = DiceRoll(1 + (race.Level / 26), 1 + (race.Level / 17));
             string auraDam = monster.IndefiniteVisibleName;
-            if (LightningResistanceTimer.Value != 0)
+            if (LightningResistanceTimer.Value != 0) // These are additive resistances
             {
                 auraDamage = (auraDamage + 2) / 3;
             }
-            if (HasLightningResistance)
+            if (HasLightningResistance) // Additive
             {
                 auraDamage = (auraDamage + 2) / 3;
             }
@@ -8571,7 +9500,7 @@ internal partial class Game : IGameSerialize
             return false;
         }
         // Roll for the attack
-        int armorClass = EffectiveAttributeSet.GetInt(nameof(BaseArmorClassAttribute)) + TotalBonusArmorClass;
+        int armorClass = BaseArmorClass + TotalBonusArmorClass;
         return DieRoll(attackStrength) > armorClass * 3 / 4;
     }
 
@@ -8584,24 +9513,18 @@ internal partial class Game : IGameSerialize
         // The noise the player is making is based on their stealth score
         uint noise = 1u << (30 - SkillStealth);
         // Go through all the monster slots on the level
-        for (int i = MonsterMax - 1; i >= 1; i--)
+        foreach (Monster monster in MonsterList)
         {
-            Monster monster = Monsters[i];
-            // If the monster slot is empty, skip it
-            if (monster.Race == null)
-            {
-                continue;
-            }
             // Keep count of how many are our friends
             if (monster.IsPet)
             {
                 TotalFriends++;
                 TotalFriendLevels += monster.Race.Level;
             }
-            // Monsters that have just been spawned don't act in their first turn
-            if ((monster.IndividualMonsterFlags & Constants.MflagBorn) != 0)
+            // Monsters that have just been spawned don't act in their first turn.            
+            if (monster.SkipFirstTurn)
             {
-                monster.IndividualMonsterFlags &= ~Constants.MflagBorn;
+                monster.SkipFirstTurn = false;
                 continue;
             }
             // Check the monster's speed to see if it should get a turn
@@ -8644,7 +9567,6 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            CurrentlyActingMonster = i;
             // Process the individual monster
             monster.ProcessMonster(noise);
             // If the monster killed the player or sent us to a new level, then stop processing
@@ -8653,7 +9575,6 @@ internal partial class Game : IGameSerialize
                 break;
             }
         }
-        CurrentlyActingMonster = 0;
     }
 
     /// <summary>
@@ -8678,9 +9599,9 @@ internal partial class Game : IGameSerialize
                 break;
             }
             // If there's another monster in the way and it is friendly, give up
-            if (distance != 0 && Grid[y][x].MonsterIndex > 0)
+            if (distance != 0 && Grid[y][x].Monster is not null)
             {
-                if (!Monsters[Grid[y][x].MonsterIndex].IsPet)
+                if (!Grid[y][x].Monster.IsPet)
                 {
                     break;
                 }
@@ -9295,6 +10216,85 @@ internal partial class Game : IGameSerialize
         return (ch, false, fromReplay);
     }
 
+    /// <summary>
+    /// Renders a table of items on the screen using a <see cref="ConsoleTableWithRowHighlighting"/>, allows the player to scroll and select an item; returning
+    /// the selected item or null, if the selection process is cancelled.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="table"></param>
+    /// <param name="prompt"></param>
+    /// <returns></returns>
+    public T? SelectFromConsoleTable<T>(ConsoleTableWithRowHighlighting<T> table, string prompt)
+    {
+        FullScreenOverlay = true;
+        ScreenBuffer savedScreen = Screen.Clone();
+        SetBackground(BackgroundImageEnum.Normal);
+        Screen.Clear();
+
+        if (!prompt.EndsWith(" "))
+        {
+            prompt = $"{prompt} ";
+        }
+
+        try
+        {
+            ConsoleWindow consoleWindow = new ConsoleWindow(0, 1, 79, 42);
+            int selectedIndex = 0;
+            while (true)
+            {
+                if (selectedIndex < 0)
+                {
+                    selectedIndex = 0;
+                }
+                else if (selectedIndex >= table.Rows.Length)
+                {
+                    selectedIndex = table.Rows.Length - 1;
+                }
+
+                if (selectedIndex < table.TopRow)
+                {
+                    table.TopRow = selectedIndex;
+                }
+                else if (selectedIndex > table.TopRow + consoleWindow.Height)
+                {
+                    table.TopRow = selectedIndex - consoleWindow.Height;
+                }
+
+                table.HighlightRow(selectedIndex);
+                table.Render(this, consoleWindow, new ConsoleTopLeftAlignment());
+
+                if (!GetCom(prompt, out char ch))
+                {
+                    return default;
+                }
+
+                switch (ch)
+                {
+                    case '9':
+                        selectedIndex -= consoleWindow.Height;
+                        break;
+                    case '3':
+                        selectedIndex += consoleWindow.Height;
+                        break;
+                    case '8':
+                        selectedIndex -= 1;
+                        break;
+                    case '2':
+                        selectedIndex += 1;
+                        break;
+                    case '\r':
+                        return table.CurrentRow;
+                }
+            }
+        }
+        finally
+        {
+            Screen.Restore(savedScreen);
+            FullScreenOverlay = false;
+            SetBackground(BackgroundImageEnum.Overhead);
+        }
+    }
+
     private void MapMovementKeys()
     {
         _keymapAct = new string[Constants.KeymapModes][];
@@ -9626,30 +10626,6 @@ internal partial class Game : IGameSerialize
             gold = 100;
         }
         Gold.IntValue = gold;
-    }
-
-    public void GetStats()
-    {
-        while (true)
-        {
-            List<int> maxList = new List<int>() { 17, 16, 14, 12, 11, 10 };
-            foreach (Ability ability in SingletonRepository.Get<Ability>()) // There are six abilities
-            {
-                int maxIndex = RandomLessThan(maxList.Count); // Choose a random max from the maxList
-                int max = maxList[maxIndex];
-                maxList.RemoveAt(maxIndex);
-                ability.InnateMax = max;
-                RaceAbility raceAbility = SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Race, ability));
-                CharacterClassAbility characterClassAbility = SingletonRepository.Get<CharacterClassAbility>(CharacterClassAbility.GetCompositeKey(CharacterClass, ability));
-                int bonus = raceAbility.Bonus + characterClassAbility.Bonus;
-                ability.Innate = ability.InnateMax;
-                ability.Adjusted = ability.ModifyStatValue(ability.InnateMax, bonus);
-            }
-            if (CharacterClass.PrimeStat.InnateMax > 13)
-            {
-                break;
-            }
-        }
     }
 
     public void MenuDisplay(int current, string[] menuItems)
@@ -10286,16 +11262,6 @@ internal partial class Game : IGameSerialize
         }
     }
 
-    public Tile DownStaircaseTile { get; }
-
-    public Tile UpStaircaseTile { get; }
-
-    public Tile GrassTile { get; }
-
-    public Tile RockTile { get; }
-
-    public Tile WaterTile { get; }
-
     public void PlaceRandomDoor(int y, int x)
     {
         GridTile cPtr = Grid[y][x];
@@ -10487,7 +11453,7 @@ internal partial class Game : IGameSerialize
         {
             GridTile cPtr = Grid[y][x];
             string info = "l,*";
-            if (TargetAble(cPtr.MonsterIndex))
+            if (Targetable(cPtr.Monster))
             {
                 info = $"t,{info}";
             }
@@ -10501,10 +11467,10 @@ internal partial class Game : IGameSerialize
                     }
                 case 't':
                     {
-                        if (TargetAble(cPtr.MonsterIndex))
+                        if (Targetable(cPtr.Monster))
                         {
-                            HealthTrack(cPtr.MonsterIndex);
-                            TargetWho = new MonsterTarget(this, Monsters[cPtr.MonsterIndex]);
+                            TrackMonsterHealth(cPtr.Monster);
+                            TargetWho = new MonsterTarget(this, cPtr.Monster);
                             done = true;
                         }
                         break;
@@ -10625,9 +11591,8 @@ internal partial class Game : IGameSerialize
         return success;
     }
 
-    private string LookMonDesc(int mIdx)
+    private string LookMonDesc(Monster mPtr)
     {
-        Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         bool living = !rPtr.Undead;
         if (rPtr.Demon)
@@ -10672,16 +11637,9 @@ internal partial class Game : IGameSerialize
     /// </summary>
     /// <param name="mIdx"></param>
     /// <returns></returns>
-    [Obsolete("Use TargetAble(Monster)")]
-    private bool TargetAble(int mIdx)
+    public bool Targetable(Monster? mPtr)
     {
-        Monster mPtr = Monsters[mIdx];
-        return TargetAble(mPtr);
-    }
-
-    public bool TargetAble(Monster mPtr)
-    {
-        if (mPtr.Race == null)
+        if (mPtr is null)
         {
             return false;
         }
@@ -10711,9 +11669,9 @@ internal partial class Game : IGameSerialize
             return false;
         }
         GridTile cPtr = Grid[y][x];
-        if (cPtr.MonsterIndex != 0)
+        if (cPtr.Monster is not null)
         {
-            Monster mPtr = Monsters[cPtr.MonsterIndex];
+            Monster mPtr = cPtr.Monster;
             if (mPtr.IsVisible)
             {
                 return true;
@@ -10768,16 +11726,16 @@ internal partial class Game : IGameSerialize
                 }
                 continue;
             }
-            if (cPtr.MonsterIndex != 0)
+            if (cPtr.Monster is not null)
             {
-                Monster mPtr = Monsters[cPtr.MonsterIndex];
+                Monster mPtr = cPtr.Monster;
                 MonsterRace rPtr = mPtr.Race;
                 if (mPtr.IsVisible)
                 {
                     bool recall = false;
                     boring = false;
                     string mName = mPtr.IndefiniteNameWhenVisible;
-                    HealthTrack(cPtr.MonsterIndex);
+                    TrackMonsterHealth(mPtr);
                     HandleStuff();
                     while (!Shutdown)
                     {
@@ -10793,7 +11751,7 @@ internal partial class Game : IGameSerialize
                         {
                             string c = mPtr.SmCloned ? " (clone)" : "";
                             string a = mPtr.IsPet ? " (allied) " : " ";
-                            outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.MonsterIndex)}){c}{a}[r,{info}]";
+                            outVal = $"{s1}{s2}{s3}{mName} ({LookMonDesc(cPtr.Monster)}){c}{a}[r,{info}]";
                             Screen.PrintLine(outVal, 0, 0);
                             ConsoleView.MoveCursorTo(y, x);
                             query = GetAndRecordKeystroke();
@@ -10936,7 +11894,7 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                if ((mode & Constants.TargetKill) != 0 && !TargetAble(cPtr.MonsterIndex))
+                if ((mode & Constants.TargetKill) != 0 && !Targetable(cPtr.Monster))
                 {
                     continue;
                 }
@@ -10959,18 +11917,18 @@ internal partial class Game : IGameSerialize
         }
     }
 
-    public bool IsMartialArtistAndNotWieldingAMeleeWeapon()
+    public bool IsUsingMartialArts()
     {
         return CharacterClass.IsMartialArtist && GetInventoryItem(InventorySlotEnum.MeleeWeapon) == null;
     }
 
-    public bool MartialArtistHeavyArmor()
+    public bool ArmorIsHeavy()
     {
-        int martialArtistArmWgt = 0;
-        if (!CharacterClass.IsMartialArtist)
+        if (CharacterClass.ArmorMaxWeightExpression is null)
         {
             return false;
         }
+        int totalArmorWeight = 0;
         foreach (EquipmentWieldSlot inventorySlot in SingletonRepository.Get<EquipmentWieldSlot>())
         {
             if (inventorySlot.IsArmor)
@@ -10980,16 +11938,14 @@ internal partial class Game : IGameSerialize
                     Item? item = GetInventoryItem(index);
                     if (item != null)
                     {
-                        martialArtistArmWgt += item.EffectiveAttributeSet.Weight;
+                        totalArmorWeight += item.EffectiveAttributeSet.Weight;
                     }
-                    //foreach (Item item in inventorySlot)
-                    //{
-                    //    martialArtistArmWgt += item.Weight;
-                    //}
                 }
             }
         }
-        return martialArtistArmWgt > 100 + (ExperienceLevel.IntValue * 4);
+
+        int maxWeight = ComputeIntegerExpression(CharacterClass.ArmorMaxWeightExpression).Value;
+        return totalArmorWeight > maxWeight;
     }
 
     public string RealmNames(Realm? primaryRealm, Realm? secondaryRealm, string defaultTitle = "None")
@@ -11008,13 +11964,14 @@ internal partial class Game : IGameSerialize
         }
     }
 
-    public void SummonNamedMonster(bool slp)
+    public void SummonNamedMonster(bool spawnAsleep)
     {
         int rIdx = CommandArgument;
         if (rIdx >= SingletonRepository.Count<MonsterRace>() - 1)
         {
             return;
         }
+        MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
         for (int i = 0; i < 10; i++)
         {
             const int d = 1;
@@ -11023,20 +11980,21 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            if (PlaceMonsterByIndex(y, x, rIdx, slp, true, false))
+            if (PlaceGroupOfMonstersByRace(y, x, rPtr, spawnAsleep, false, false))
             {
                 break;
             }
         }
     }
 
-    public void DoCmdWizNamedFriendly(bool slp)
+    public void DoCmdWizNamedFriendly(bool spawnAsleep)
     {
         int rIdx = CommandArgument;
         if (rIdx >= SingletonRepository.Count<MonsterRace>() - 1)
         {
             return;
         }
+        MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
         for (int i = 0; i < 10; i++)
         {
             const int d = 1;
@@ -11045,7 +12003,7 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            if (PlaceMonsterByIndex(y, x, rIdx, slp, true, true))
+            if (PlaceGroupOfMonstersByRace(y, x, rPtr, spawnAsleep, true, false))
             {
                 break;
             }
@@ -11355,7 +12313,7 @@ internal partial class Game : IGameSerialize
 
     public void CheckExperience()
     {
-        bool levelReward = false;
+        bool levelReward = false; 
         bool levelMutation = false;
         if (ExperiencePoints.IntValue < 0)
         {
@@ -11395,11 +12353,7 @@ internal partial class Game : IGameSerialize
             if (ExperienceLevel.IntValue > MaxLevelGained)
             {
                 MaxLevelGained = ExperienceLevel.IntValue;
-                if (CharacterClass.ReceivesLevelRewards)
-                {
-                    levelReward = true;
-                }
-                if (ChaosGift)
+                if (ReceivesLevelRewards)
                 {
                     levelReward = true;
                 }
@@ -11444,7 +12398,7 @@ internal partial class Game : IGameSerialize
         {
             return;
         }
-        if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get() && DieRoll(888) > chance)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get() && DieRoll(888) > chance)
         {
             string oName = oPtr.GetDescription(false);
             string s = oPtr.StackCount > 1 ? "" : "s";
@@ -11453,12 +12407,12 @@ internal partial class Game : IGameSerialize
         }
         if (DieRoll(100) <= heavyChance && (oPtr.IsArtifact || oPtr.IsRare))
         {
-            if (!oPtr.EffectiveAttributeSet.HeavyCurse)
+            if (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Get())
             {
                 changed = true;
             }
-            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
-            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Set();
+            oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Set();
         }
         else
         {
@@ -11466,7 +12420,7 @@ internal partial class Game : IGameSerialize
             {
                 changed = true;
             }
-            oPtr.EffectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
+            oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Set();
         }
         if (changed)
         {
@@ -11593,179 +12547,6 @@ internal partial class Game : IGameSerialize
         CheckExperience();
     }
 
-    public EffectiveAttributeSet GetAbilitiesAsItemFlags()
-    {
-        EffectiveAttributeSet itemCharacteristics = new EffectiveAttributeSet(this);
-        if (CharacterClass.InstantFearResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFearResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
-        }
-        if (CharacterClass.InstantChaosResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantChaosResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResChaosAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainWisdomLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainWisdomLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
-        }
-        if (CharacterClass.InstantConfusionResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantConfusionResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
-        }
-        if (CharacterClass.InstantTelepathyLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantTelepathyLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
-        }
-        if (CharacterClass.InstantSpeedLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSpeedLevel && !MartialArtistHeavyArmor())
-        {
-            itemCharacteristics.Speed++;
-        }
-        if (CharacterClass.InstantFreeActionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFreeActionLevel && !MartialArtistHeavyArmor())
-        {
-            itemCharacteristics.FreeAct = true;
-        }
-        if (CharacterClass.InstantBlindnessResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantBlindnessResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Set();
-        }
-        if (CharacterClass.InstantFeatherFallingLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantFeatherFallingLevel)
-        {
-            itemCharacteristics.Feather = true;
-        }
-        if (CharacterClass.InstantSeeInvisibilityLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSeeInvisibilityLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-        }
-        if (CharacterClass.InstantSlowDigestionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSlowDigestionLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainConstitutionLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainConstitutionLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
-        }
-        if (CharacterClass.InstantPoisonResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantPoisonResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainDexterityLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainDexterityLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainStrengthLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainStrengthLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
-        }
-        if (CharacterClass.InstantHoldLifeLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantHoldLifeLevel)
-        {
-            itemCharacteristics.HoldLife = true;
-        }
-        if (CharacterClass.InstantDarknessResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantDarknessResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
-        }
-        if (CharacterClass.InstantLightResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantLightResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainCharismaLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainCharismaLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
-        }
-        if (CharacterClass.InstantSoundResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSoundResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Set();
-        }
-        if (CharacterClass.InstantDisenchantmentResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantDisenchantmentResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDisenAttribute)).Set();
-        }
-        if (CharacterClass.InstantRegenerationLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantRegenerationLevel)
-        {
-            itemCharacteristics.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
-        }
-        if (CharacterClass.InstantSustainIntelligenceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantSustainIntelligenceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
-        }
-        if (CharacterClass.InstantNexusResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantNexusResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNexusAttribute)).Set();
-        }
-        if (CharacterClass.InstantShardsResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantShardsResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Set();
-        }
-        if (CharacterClass.InstantNetherResistanceLevel.HasValue && ExperienceLevel.IntValue >= CharacterClass.InstantNetherResistanceLevel)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
-        }
-        if (CharacterClass.ItemRadiusOverride.HasValue)
-        {
-            itemCharacteristics.Radius = CharacterClass.ItemRadiusOverride.Value;
-        }
-
-        Race.UpdateRacialAbilities(ExperienceLevel.IntValue, itemCharacteristics);
-        if (Regen && !SuppressRegen)
-        {
-            itemCharacteristics.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
-        }
-        if (SpeedBonus != 0)
-        {
-            itemCharacteristics.Speed++;
-        }
-        if (ElecHit)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ShElecAttribute)).Set();
-        }
-        if (HasFireSheath)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ShFireAttribute)).Set();
-            itemCharacteristics.Radius = 2;
-        }
-        if (FeatherFall)
-        {
-            itemCharacteristics.Feather = true;
-        }
-        if (ResFear)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResFearAttribute)).Set();
-        }
-        if (Esp)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
-        }
-        if (HasFreeAction)
-        {
-            itemCharacteristics.FreeAct = true;
-        }
-        if (SustainAll)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
-            if (ExperienceLevel.IntValue > 9)
-            {
-                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
-            }
-            if (ExperienceLevel.IntValue > 19)
-            {
-                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
-            }
-            if (ExperienceLevel.IntValue > 29)
-            {
-                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Set();
-            }
-            if (ExperienceLevel.IntValue > 39)
-            {
-                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Set();
-            }
-            if (ExperienceLevel.IntValue > 49)
-            {
-                itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Set();
-            }
-        }
-        return itemCharacteristics;
-    }
-
     public int GetScore(Game game)
     {
         int score = (MaxLevelGained - 1) * 100;
@@ -11849,12 +12630,14 @@ internal partial class Game : IGameSerialize
         for (i = 0; i < spells.Length; i++)
         {
             Spell spell = spells[i];
-            Screen.PrintLine($"{i.IndexToLetter()}) {spell.Title()}", y + i + 1, x);
+            char letter = i.IndexToLetter();
+            string title = spell.Title();
+            Screen.PrintLine($"{letter}) {title}", y + i + 1, x);
         }
         Screen.PrintLine("", y + i + 1, x);
     }
 
-    public void RegenerateHealth(int percent)
+    private void RegenerateHealth(int percent)
     {
         int oldHealth = Health.IntValue;
         int newHealth = (MaxHealth.IntValue * percent) + Constants.PyRegenHpbase;
@@ -12355,7 +13138,7 @@ internal partial class Game : IGameSerialize
         SetInventoryItem(i, oPtr);
         oPtr.Y = 0;
         oPtr.X = 0;
-        oPtr.HoldingMonsterIndex = 0;
+        oPtr.HoldingMonster = null;
         WeightCarried += oPtr.StackCount * oPtr.EffectiveAttributeSet.Weight;
         _invenCnt++;
         SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
@@ -12388,7 +13171,7 @@ internal partial class Game : IGameSerialize
                     MsgPrint($"{y}our {oName} ({i.IndexToLabel()}) {w} destroyed!");
                     if (oPtr.QuaffTuple != null)
                     {
-                        oPtr.Smash(0, MapY.IntValue, MapX.IntValue);
+                        oPtr.Smash(null, MapY.IntValue, MapX.IntValue);
                     }
                     oPtr.ModifyStackCount(-amt);
                     InvenItemOptimize(i);
@@ -12424,17 +13207,6 @@ internal partial class Game : IGameSerialize
         DropNear(qPtr, null, MapY.IntValue, MapX.IntValue);
         oPtr.ItemDescribe();
         oPtr.ItemOptimize();
-    }
-
-    [Obsolete("Use InvenDrop(Item, int)")]
-    public void InvenDrop(int item, int amt)
-    {
-        Item? oPtr = GetInventoryItem(item);
-        if (oPtr == null)
-        {
-            return;
-        }
-        InvenDrop(oPtr, amt);
     }
 
     public void InvenItemDescribe(int item)
@@ -12679,16 +13451,16 @@ internal partial class Game : IGameSerialize
             return;
         }
         GridTile cPtr = Grid[y][x];
-        if (cPtr.MonsterIndex != 0)
+        if (cPtr.Monster is not null)
         {
-            DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+            DeleteMonster(cPtr.Monster);
         }
     }
 
     public void DeleteObject(Item jPtr)
     {
         ExciseObject(jPtr);
-        if (jPtr.HoldingMonsterIndex == 0)
+        if (jPtr.HoldingMonster is null)
         {
             int y = jPtr.Y;
             int x = jPtr.X;
@@ -12850,10 +13622,10 @@ internal partial class Game : IGameSerialize
     public void ExciseObject(Item jPtr)
     {
         // Check to see if the object is being held by a monster.
-        if (jPtr.HoldingMonsterIndex != 0)
+        if (jPtr.HoldingMonster is not null)
         {
             // It is.  Get the monster.
-            Monster mPtr = Monsters[jPtr.HoldingMonsterIndex];
+            Monster mPtr = jPtr.HoldingMonster;
 
             mPtr.Items.Remove(jPtr);
         }
@@ -12874,7 +13646,7 @@ internal partial class Game : IGameSerialize
 
     public bool GridOpenNoItemOrCreature(int y, int x)
     {
-        return Grid[y][x].FeatureType.IsOpenFloor && Grid[y][x].Items.Count == 0 && Grid[y][x].MonsterIndex == 0 && !(y == MapY.IntValue && x == MapX.IntValue);
+        return Grid[y][x].FeatureType.IsOpenFloor && Grid[y][x].Items.Count == 0 && Grid[y][x].Monster is null && !(y == MapY.IntValue && x == MapX.IntValue);
     }
 
     public bool GridPassable(int y, int x)
@@ -12884,7 +13656,7 @@ internal partial class Game : IGameSerialize
 
     public bool GridPassableNoCreature(int y, int x)
     {
-        return GridPassable(y, x) && Grid[y][x].MonsterIndex == 0 && !(y == MapY.IntValue && x == MapX.IntValue);
+        return GridPassable(y, x) && Grid[y][x].Monster is null && !(y == MapY.IntValue && x == MapX.IntValue);
     }
 
     // TODO: Convert to zero based
@@ -13329,14 +14101,6 @@ internal partial class Game : IGameSerialize
         return false;
     }
 
-    public void ReplacePets(int y, int x, List<Monster> petList)
-    {
-        foreach (Monster monster in petList)
-        {
-            ReplacePet(y, x, monster);
-        }
-    }
-
     public void ReplaceSecretDoor(int y, int x)
     {
         WeightedRandom<Tile> doorTiles = new WeightedRandom<Tile>(this);
@@ -13458,8 +14222,8 @@ internal partial class Game : IGameSerialize
 
     private void ImageObject(out ColorEnum ap, out char cp)
     {
-        cp = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Count<ItemFactory>() - 1)).FlavorSymbol.Character;
-        ap = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Count<ItemFactory>() - 1)).FlavorColor;
+        cp = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Count<ItemFactory>() - 1)).AssignedSymbol.Character;
+        ap = SingletonRepository.Get<ItemFactory>(DieRoll(SingletonRepository.Count<ItemFactory>() - 1)).AssignedColor;
     }
 
     private void ImageRandom(out ColorEnum ap, out char cp)
@@ -13622,9 +14386,9 @@ internal partial class Game : IGameSerialize
                 break;
             }
         }
-        if (cPtr.MonsterIndex != 0)
+        if (cPtr.Monster is not null)
         {
-            Monster mPtr = Monsters[cPtr.MonsterIndex];
+            Monster mPtr = cPtr.Monster;
             if (mPtr.IsVisible)
             {
                 MonsterRace rPtr = mPtr.Race;
@@ -13718,34 +14482,34 @@ internal partial class Game : IGameSerialize
         int attempts = 1000;
         while (--attempts != 0)
         {
-            int rIdx = GetMonNum(MonsterLevel, null);
-            if (rIdx == 0)
+            rPtr = GetMonsterRace(MonsterLevel, null);
+            if (rPtr is null)
             {
                 return false;
             }
-            rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
             if (!rPtr.Unique && !rPtr.EscortsGroup)
             {
                 break;
             }
         }
-        if (attempts < 1)
+        if (rPtr is null)
         {
             return false;
         }
         attempts = 1000;
+        Monster? mPtr = null;
         while (--attempts == 0)
         {
-            if (PlaceMonsterAux(y, x, rPtr, false, false, false))
+            mPtr = PlaceOneMonsterByRace(y, x, rPtr, false, false, false);
+            if (mPtr is not null)
             {
                 break;
             }
         }
-        if (attempts < 1)
+        if (mPtr is null)
         {
             return false;
         }
-        Monster mPtr = Monsters[_hackMIdxIi];
         for (attempts = DieRoll(10) + 5; attempts != 0; attempts--)
         {
             SummonSpecific(mPtr.MapY, mPtr.MapX, Difficulty, new KinSystemMonsterRaceFilter(this, rPtr.Symbol.Character), true, false);
@@ -13753,7 +14517,7 @@ internal partial class Game : IGameSerialize
         return true;
     }
 
-    public void AllocMonster(int dis, bool slp)
+    public void AllocMonster(int distance, bool spawnAsleep)
     {
         int y = 0;
         int x = 0;
@@ -13766,7 +14530,7 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            if (Distance(y, x, MapY.IntValue, MapX.IntValue) > dis)
+            if (Distance(y, x, MapY.IntValue, MapX.IntValue) > distance)
             {
                 break;
             }
@@ -13792,7 +14556,7 @@ internal partial class Game : IGameSerialize
             }
             else
             {
-                if (PlaceMonster(y, x, slp, true))
+                if (PlaceLevelMonster(y, x, spawnAsleep))
                 {
                 }
             }
@@ -13801,6 +14565,29 @@ internal partial class Game : IGameSerialize
 
     public void CompactMonsters(int size)
     {
+        //void CompactMonstersAux(Monster mPtr, Monster mPtr2)
+        //{
+        //    if (mPtr == mPtr2)
+        //    {
+        //        return;
+        //    }
+        //    int y = mPtr.MapY;
+        //    int x = mPtr.MapX;
+        //    GridTile cPtr = Grid[y][x];
+        //    cPtr.Monster = mPtr2;
+        //    mPtr2.Items.AddRange(mPtr.Items);
+        //    if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
+        //    {
+        //        TargetWho = new MonsterTarget(this, mPtr2);
+        //    }
+        //    if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
+        //    {
+        //        TrackMonsterHealth(mPtr2);
+        //    }
+        //    mPtr2 = mPtr;
+        //    DeleteMonster(mPtr);
+        //}
+
         int i, num, cnt;
         if (size != 0)
         {
@@ -13810,14 +14597,9 @@ internal partial class Game : IGameSerialize
         {
             int curLev = 5 * cnt;
             int curDis = 5 * (20 - cnt);
-            for (i = 1; i < MonsterMax; i++)
+            foreach (Monster mPtr in MonsterList)
             {
-                Monster mPtr = Monsters[i];
                 MonsterRace rPtr = mPtr.Race;
-                if (mPtr.Race == null)
-                {
-                    continue;
-                }
                 if (rPtr.Level > curLev)
                 {
                     continue;
@@ -13839,20 +14621,14 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                DeleteMonsterByIndex(i, true);
+                DeleteMonster(mPtr);
                 num++;
             }
         }
-        for (i = MonsterMax - 1; i >= 1; i--)
-        {
-            Monster mPtr = Monsters[i];
-            if (mPtr.Race != null)
-            {
-                continue;
-            }
-            CompactMonstersAux(MonsterMax - 1, i);
-            MonsterMax--;
-        }
+        //foreach (Monster mPtr in MonsterList)
+        //{
+        //    CompactMonstersAux(MonsterList[MonsterList.Count - 1], mPtr);
+        //}
     }
 
     /// <summary>
@@ -13863,10 +14639,9 @@ internal partial class Game : IGameSerialize
     /// <param name="fear"></param>
     /// <param name="note"></param>
     /// <returns>True, if the monster dies; false, otherwise.</returns>
-    public bool DamageMonster(int mIdx, int dam, out bool fear, string note)
+    public bool DamageMonster(Monster mPtr, int dam, out bool fear, string note)
     {
         fear = false;
-        Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         mPtr.SleepLevel = 0;
         mPtr.Health -= dam;
@@ -13896,9 +14671,7 @@ internal partial class Game : IGameSerialize
             {
                 MsgPrint($"You have killed {mName}.");
             }
-            else if (rPtr.Demon || rPtr.Undead ||
-                     rPtr.Cthuloid || rPtr.Stupid ||
-                     rPtr.Nonliving || "Evg".Contains(rPtr.Symbol.Character.ToString()))
+            else if (rPtr.Demon || rPtr.Undead || rPtr.Cthuloid || rPtr.Stupid || rPtr.Nonliving || "Evg".Contains(rPtr.Symbol.Character.ToString()))
             {
                 MsgPrint($"You have destroyed {mName}.");
             }
@@ -13955,7 +14728,7 @@ internal partial class Game : IGameSerialize
                     rPtr.Knowledge.RTkills++;
                 }
             }
-            DeleteMonsterByIndex(mIdx, true);
+            DeleteMonster(mPtr);
             fear = false;
             return true;
         }
@@ -13984,48 +14757,13 @@ internal partial class Game : IGameSerialize
         return false;
     }
 
-    public void DeleteMonsterByIndex(int i, bool visibly)
-    {
-        Monster mPtr = Monsters[i];
-        MonsterRace rPtr = mPtr.Race;
-        if (rPtr == null)
-        {
-            return;
-        }
-        int y = mPtr.MapY;
-        int x = mPtr.MapX;
-        rPtr.CurNum--;
-        if (rPtr.Multiply)
-        {
-            NumRepro--;
-        }
-
-        // Check to see if this is the monster the player is tracking so that we can stop tracking the monster.
-        if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
-        {
-            TargetWho = null;
-        }
-        if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
-        {
-            HealthTrack(null);
-        }
-        Grid[y][x].MonsterIndex = 0;
-        mPtr.Items.Clear();
-        Monsters[i] = new Monster(this);
-        MCnt--;
-        if (visibly)
-        {
-            ConsoleView.RefreshMapLocation(y, x);
-        }
-    }
-
     /// <summary>
-    /// Returns the index of a monster.
+    /// Returns the index of a monster race or null, if no monster race matches.
     /// </summary>
     /// <param name="level"></param>
     /// <param name="monsterFilter"></param>
     /// <returns></returns>
-    public int GetMonNum(int level, MonsterRaceFilter? monsterFilter)
+    public MonsterRace? GetMonsterRace(int level, MonsterRaceFilter? monsterFilter)
     {
         int i, j;
         AllocationEntry[] table = AllocRaceTable;
@@ -14042,7 +14780,7 @@ internal partial class Game : IGameSerialize
                 level += d < 5 ? d : 5;
             }
         }
-        int total = 0;
+        int sumOfFinalProbabilities = 0;
         for (i = 0; i < AllocRaceSize; i++)
         {
             if (table[i].Level > level)
@@ -14072,13 +14810,13 @@ internal partial class Game : IGameSerialize
                 table[i].FinalProbability = 0;
             }
 
-            total += table[i].FinalProbability;
+            sumOfFinalProbabilities += table[i].FinalProbability;
         }
-        if (total <= 0)
+        if (sumOfFinalProbabilities == 0)
         {
-            return 0;
+            return null;
         }
-        long value = RandomLessThan(total);
+        long value = RandomLessThan(sumOfFinalProbabilities);
         for (i = 0; i < AllocRaceSize; i++)
         {
             if (value < table[i].FinalProbability)
@@ -14091,7 +14829,7 @@ internal partial class Game : IGameSerialize
         if (p < 60)
         {
             j = i;
-            value = RandomLessThan(total);
+            value = RandomLessThan(sumOfFinalProbabilities);
             for (i = 0; i < AllocRaceSize; i++)
             {
                 if (value < table[i].FinalProbability)
@@ -14108,7 +14846,7 @@ internal partial class Game : IGameSerialize
         if (p < 10)
         {
             j = i;
-            value = RandomLessThan(total);
+            value = RandomLessThan(sumOfFinalProbabilities);
             for (i = 0; i < AllocRaceSize; i++)
             {
                 if (value < table[i].FinalProbability)
@@ -14122,20 +14860,9 @@ internal partial class Game : IGameSerialize
                 i = j;
             }
         }
-        return table[i].Index;
-    }
 
-    public List<Monster> GetPets()
-    {
-        List<Monster> list = new List<Monster>();
-        foreach (Monster monster in Monsters)
-        {
-            if (monster.IsPet)
-            {
-                list.Add(monster);
-            }
-        }
-        return list;
+        MonsterRace monsterRace = SingletonRepository.Get<MonsterRace>(table[i].Index);
+        return monsterRace;
     }
 
     public void MessagePain(Monster mPtr, int dam)
@@ -14277,9 +15004,9 @@ internal partial class Game : IGameSerialize
         }
     }
 
-    public bool MultiplyMonster(Monster mPtr, bool charm, bool clone)
+    public bool MultiplyMonster(Monster mPtr, bool makePet, bool clone, bool newlySpawnedSkipFirstTurn)
     {
-        bool result = false;
+        Monster? monster = null;
         for (int i = 0; i < 18; i++)
         {
             int d = 1;
@@ -14288,239 +15015,55 @@ internal partial class Game : IGameSerialize
             {
                 continue;
             }
-            result = PlaceMonsterAux(y, x, mPtr.Race, false, false, charm);
+            monster = PlaceOneMonsterByRace(y, x, mPtr.Race, false, makePet, newlySpawnedSkipFirstTurn);
             break;
         }
-        if (clone && result)
-        {
-            Monsters[_hackMIdxIi].SmCloned = true;
-        }
-        mPtr.Generation++;
-        Monsters[_hackMIdxIi].Generation = mPtr.Generation; // TODO: This should be needed ... it is a self assignment
-        return result;
-    }
-
-    public bool PlaceMonster(int y, int x, bool slp, bool grp)
-    {
-        int rIdx = GetMonNum(MonsterLevel, null);
-        if (rIdx == 0)
+        if (monster is null)
         {
             return false;
         }
-        if (PlaceMonsterByIndex(y, x, rIdx, slp, grp, false))
+        if (clone && monster is not null)
+        {
+            monster.SmCloned = true;
+        }
+        mPtr.Generation++;
+        return true;
+    }
+
+    public bool PlaceLevelMonster(int y, int x, bool spawnAsleep)
+    {
+        MonsterRace? rPtr = GetMonsterRace(MonsterLevel, null);
+        if (rPtr is null)
+        {
+            return false;
+        }
+        if (PlaceGroupOfMonstersByRace(y, x, rPtr, spawnAsleep, false, false))
         {
             return true;
         }
         return false;
     }
-
-
-    public bool PlaceMonsterAux(int y, int x, MonsterRace rPtr, bool slp, bool grp, bool pet)
+    public bool PlaceGroupOfMonstersByRace(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool skipFirstTurn)
     {
-        void PlaceMonsterGroup(int y, int x, int rIdx, bool slp, bool charm)
-        {
-            MonsterRace rPtr = SingletonRepository.Get<MonsterRace>(rIdx);
-            int extra = 0;
-            int[] hackY = new int[Constants.GroupMax];
-            int[] hackX = new int[Constants.GroupMax];
-            int total = DieRoll(13);
-            if (rPtr.Level > Difficulty)
-            {
-                extra = rPtr.Level - Difficulty;
-                extra = 0 - DieRoll(extra);
-            }
-            else if (rPtr.Level < Difficulty)
-            {
-                extra = Difficulty - rPtr.Level;
-                extra = DieRoll(extra);
-            }
-            if (extra > 12)
-            {
-                extra = 12;
-            }
-            total += extra;
-            if (total < 1)
-            {
-                total = 1;
-            }
-            if (total > Constants.GroupMax)
-            {
-                total = Constants.GroupMax;
-            }
-            int old = DangerRating;
-            int hackN = 1;
-            hackX[0] = x;
-            hackY[0] = y;
-            for (int n = 0; n < hackN && hackN < total; n++)
-            {
-                int hx = hackX[n];
-                int hy = hackY[n];
-                for (int i = 0; i < 8 && hackN < total; i++)
-                {
-                    int mx = hx + OrderedDirectionXOffset[i];
-                    int my = hy + OrderedDirectionYOffset[i];
-                    if (!GridPassableNoCreature(my, mx))
-                    {
-                        continue;
-                    }
-                    if (PlaceMonsterOne(my, mx, rPtr, slp, charm))
-                    {
-                        hackY[hackN] = my;
-                        hackX[hackN] = mx;
-                        hackN++;
-                    }
-                }
-            }
-            DangerRating = old;
-        }
-
-        /// <summary>
-        /// Places a monster and all kinds of validation and checks are done.
-        /// </summary>
-        /// <param name="y"></param>
-        /// <param name="x"></param>
-        /// <param name="rPtr"></param>
-        /// <param name="slp"></param>
-        /// <param name="pet"></param>
-        /// <returns></returns>
-        bool PlaceMonsterOne(int y, int x, MonsterRace rPtr, bool slp, bool pet)
-        {
-            // Monster must be provided.
-            if (rPtr == null)
-            {
-                return false;
-            }
-
-            // Monster cannot be the player.
-            if (rPtr.FriendlyName.StartsWith("Player"))
-            {
-                return false;
-            }
-
-            // Ensure the placement is within the bounds of the level.
-            if (!InBounds(y, x))
-            {
-                return false;
-            }
-
-            // Ensure the grid level is open.
-            if (!GridPassableNoCreature(y, x))
-            {
-                return false;
-            }
-
-            // Do not place monster on a sigil.
-            if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
-            {
-                return false;
-            }
-
-            // Ensure the monster name is not empty or null.
-            string name = rPtr.FriendlyName;
-            if (string.IsNullOrEmpty(rPtr.FriendlyName))
-            {
-                return false;
-            }
-
-            // Do not place more than one if the monster is unique and already allocated.
-            if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
-            {
-                return false;
-            }
-
-            // Check to see if this is a quest guardian.
-            if (rPtr.OnlyGuardian || rPtr.Guardian)
-            {
-                int qIdx = GetQuestNumber();
-                if (qIdx < 0)
-                {
-                    return false;
-                }
-                if (rPtr.Index != Quests[qIdx].RIdx)
-                {
-                    return false;
-                }
-                if (rPtr.CurNum >= Quests[qIdx].ToKill - Quests[qIdx].Killed)
-                {
-                    return false;
-                }
-            }
-            if (rPtr.Level > Difficulty)
-            {
-                if (rPtr.Unique)
-                {
-                    DangerRating += (rPtr.Level - Difficulty) * 2;
-                }
-                else
-                {
-                    DangerRating += rPtr.Level - Difficulty;
-                }
-            }
-            GridTile cPtr = Grid[y][x];
-            cPtr.MonsterIndex = MPop();
-            _hackMIdxIi = cPtr.MonsterIndex;
-            if (cPtr.MonsterIndex == 0)
-            {
-                return false;
-            }
-            Monster mPtr = Monsters[cPtr.MonsterIndex];
-            mPtr.Race = rPtr;
-            mPtr.MapY = y;
-            mPtr.MapX = x;
-            mPtr.Generation = 1;
-            mPtr.StunLevel = 0;
-            mPtr.ConfusionLevel = 0;
-            mPtr.FearLevel = 0;
-            if (pet)
-            {
-                mPtr.IsPet = true;
-            }
-            mPtr.SleepLevel = 0;
-            if (slp && rPtr.Sleep != 0)
-            {
-                int val = rPtr.Sleep;
-                mPtr.SleepLevel = (val * 2) + DieRoll(val * 10);
-            }
-            mPtr.DistanceFromPlayer = 0;
-            mPtr.IndividualMonsterFlags = 0;
-            mPtr.IsVisible = false;
-            mPtr.MaxHealth = rPtr.ForceMaxHp ? rPtr.Hdice * rPtr.Hside : DiceRoll(rPtr.Hdice, rPtr.Hside);
-            mPtr.Health = mPtr.MaxHealth;
-            mPtr.Speed = rPtr.Speed;
-            if (!rPtr.Unique)
-            {
-                int i = ExtractEnergy[rPtr.Speed] / 10;
-                if (i != 0)
-                {
-                    mPtr.Speed += RandomSpread(0, i);
-                }
-            }
-            mPtr.Energy = RandomLessThan(100);
-            if (rPtr.ForceSleep)
-            {
-                mPtr.IndividualMonsterFlags |= Constants.MflagNice;
-                RepairMonsters = true;
-            }
-            if (cPtr.MonsterIndex < CurrentlyActingMonster)
-            {
-                mPtr.IndividualMonsterFlags |= Constants.MflagBorn;
-            }
-            UpdateMonsterVisibility(cPtr.MonsterIndex, true);
-            rPtr.CurNum++;
-            if (rPtr.Multiply)
-            {
-                NumRepro++;
-            }
-            if (rPtr.AttrMulti)
-            {
-                ShimmerMonsters = true;
-            }
-            return true;
-        }
-
-        if (!PlaceMonsterOne(y, x, rPtr, slp, pet))
+        Monster? monster = PlaceOneMonsterByRace(y, x, rPtr, spawnAsleep, makePet, skipFirstTurn);
+        if (monster is null)
         {
             return false;
+        }
+
+        if (rPtr.Friends)
+        {
+            PlaceGroupOfMonstersByRace(y, x, rPtr, spawnAsleep, makePet);
+        }
+        return true;
+    }
+
+    public Monster? PlaceOneMonsterByRace(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool skipFirstTurn)
+    {
+        Monster? monsterPlaced = SpawnOneMonster(y, x, rPtr, spawnAsleep, makePet, skipFirstTurn);
+        if (monsterPlaced is null)
+        {
+            return null;
         }
         if (rPtr.Escorted)
         {
@@ -14532,71 +15075,206 @@ internal partial class Game : IGameSerialize
                 {
                     continue;
                 }
-                int z = GetMonNum(rPtr.Level, new PlaceOkaySystemMonsterRaceFilter(this, rPtr.Index));
-                if (z == 0)
+                MonsterRace? monsterRace = GetMonsterRace(rPtr.Level, new PlaceOkaySystemMonsterRaceFilter(this, rPtr.Index));
+                if (monsterRace is null)
                 {
                     break;
                 }
-                MonsterRace race = SingletonRepository.Get<MonsterRace>(z);
-                PlaceMonsterOne(ny, nx, race, slp, pet);
-                if (race.Friends ||
+                SpawnOneMonster(ny, nx, monsterRace, spawnAsleep, makePet, skipFirstTurn);
+                if (monsterRace.Friends ||
                     rPtr.EscortsGroup)
                 {
-                    PlaceMonsterGroup(ny, nx, z, slp, pet);
+                    PlaceGroupOfMonstersByRace(ny, nx, monsterRace, spawnAsleep, makePet);
                 }
             }
         }
-        if (!grp)
-        {
-            return true;
-        }
-        if (rPtr.Friends)
-        {
-            PlaceMonsterGroup(y, x, rPtr.Index, slp, pet);
-        }
-        return true;
+        return monsterPlaced;
     }
 
-    public bool PlaceMonsterByIndex(int y, int x, int index, bool slp, bool grp, bool charm)
+    private void PlaceGroupOfMonstersByRace(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet)
     {
-        return PlaceMonsterAux(y, x, SingletonRepository.Get<MonsterRace>(index), slp, grp, charm);
+        int extra = 0;
+        int[] hackY = new int[Constants.GroupMax];
+        int[] hackX = new int[Constants.GroupMax];
+        int total = DieRoll(13);
+        if (rPtr.Level > Difficulty)
+        {
+            extra = rPtr.Level - Difficulty;
+            extra = 0 - DieRoll(extra);
+        }
+        else if (rPtr.Level < Difficulty)
+        {
+            extra = Difficulty - rPtr.Level;
+            extra = DieRoll(extra);
+        }
+        if (extra > 12)
+        {
+            extra = 12;
+        }
+        total += extra;
+        if (total < 1)
+        {
+            total = 1;
+        }
+        if (total > Constants.GroupMax)
+        {
+            total = Constants.GroupMax;
+        }
+        int old = DangerRating;
+        int hackN = 1;
+        hackX[0] = x;
+        hackY[0] = y;
+        for (int n = 0; n < hackN && hackN < total; n++)
+        {
+            int hx = hackX[n];
+            int hy = hackY[n];
+            for (int i = 0; i < 8 && hackN < total; i++)
+            {
+                int mx = hx + OrderedDirectionXOffset[i];
+                int my = hy + OrderedDirectionYOffset[i];
+                if (!GridPassableNoCreature(my, mx))
+                {
+                    continue;
+                }
+                Monster? monsterPlaced = SpawnOneMonster(my, mx, rPtr, spawnAsleep, makePet, false);
+                if (monsterPlaced is not null)
+                {
+                    hackY[hackN] = my;
+                    hackX[hackN] = mx;
+                    hackN++;
+                }
+            }
+        }
+        DangerRating = old;
     }
 
-    public void ReplacePet(int y1, int x1, Monster monster)
+    /// <summary>
+    /// Places a monster and all kinds of validation and checks are done.
+    /// </summary>
+    /// <param name="y"></param>
+    /// <param name="x"></param>
+    /// <param name="rPtr"></param>
+    /// <param name="spawnAsleep"></param>
+    /// <param name="makePet"></param>
+    /// <returns></returns>
+    private Monster? SpawnOneMonster(int y, int x, MonsterRace rPtr, bool spawnAsleep, bool makePet, bool newlySpawnedSkipFirstTurn)
     {
-        int i;
-        int x = x1;
-        int y = y1;
-        for (i = 0; i < 20; ++i)
+        // Monster must be provided.
+        if (rPtr == null)
         {
-            int d = (i / 15) + 1;
-            (y, x) = Scatter(y1, x1, d);
-            if (!GridPassableNoCreature(y, x))
-            {
-                continue;
-            }
-            if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
-            {
-                continue;
-            }
-            break;
+            return null;
         }
-        if (i == 20)
+
+        // Monster cannot be the player.
+        if (rPtr.FriendlyName.StartsWith("Player"))
         {
-            MsgPrint($"You lose sight of {monster.Name}.");
-            return;
+            return null;
+        }
+
+        // Ensure the placement is within the bounds of the level.
+        if (!InBounds(y, x))
+        {
+            return null;
+        }
+
+        // Ensure the grid level is open.
+        if (!GridPassableNoCreature(y, x))
+        {
+            return null;
+        }
+
+        // Do not place monster on a sigil.
+        if (!Grid[y][x].FeatureType.AllowMonsterToOccupy)
+        {
+            return null;
+        }
+
+        // Ensure the monster name is not empty or null.
+        string name = rPtr.FriendlyName;
+        if (string.IsNullOrEmpty(rPtr.FriendlyName))
+        {
+            return null;
+        }
+
+        // Do not place more than one if the monster is unique and already allocated.
+        if (rPtr.Unique && rPtr.CurNum >= rPtr.MaxNum)
+        {
+            return null;
+        }
+
+        // Check to see if this is a quest guardian.
+        if (rPtr.OnlyGuardian || rPtr.Guardian)
+        {
+            int qIdx = GetQuestNumber();
+            if (qIdx < 0)
+            {
+                return null;
+            }
+            if (rPtr.Index != Quests[qIdx].RIdx)
+            {
+                return null;
+            }
+            if (rPtr.CurNum >= Quests[qIdx].ToKill - Quests[qIdx].Killed)
+            {
+                return null;
+            }
+        }
+        if (rPtr.Level > Difficulty)
+        {
+            if (rPtr.Unique)
+            {
+                DangerRating += (rPtr.Level - Difficulty) * 2;
+            }
+            else
+            {
+                DangerRating += rPtr.Level - Difficulty;
+            }
         }
         GridTile cPtr = Grid[y][x];
-        cPtr.MonsterIndex = MPop();
-        if (cPtr.MonsterIndex == 0)
+        Monster mPtr = new Monster(this);
+        MonsterList.Add(mPtr);
+        cPtr.Monster = mPtr;
+        mPtr.Race = rPtr;
+        mPtr.MapY = y;
+        mPtr.MapX = x;
+        mPtr.Generation = 1;
+        mPtr.StunLevel = 0;
+        mPtr.ConfusionLevel = 0;
+        mPtr.FearLevel = 0;
+        if (makePet)
         {
-            MsgPrint($"You lose sight of {monster.Name}.");
-            return;
+            mPtr.IsPet = true;
         }
-        Monsters[cPtr.MonsterIndex] = monster;
-        monster.MapY = y;
-        monster.MapX = x;
-        MonsterRace rPtr = monster.Race;
+        mPtr.SleepLevel = 0;
+        if (spawnAsleep && rPtr.Sleep != 0)
+        {
+            int val = rPtr.Sleep;
+            mPtr.SleepLevel = (val * 2) + DieRoll(val * 10);
+        }
+        mPtr.DistanceFromPlayer = 0;
+        mPtr.IndividualMonsterFlags = 0;
+        mPtr.IsVisible = false;
+        mPtr.MaxHealth = rPtr.ForceMaxHp ? rPtr.Hdice * rPtr.Hside : DiceRoll(rPtr.Hdice, rPtr.Hside);
+        mPtr.Health = mPtr.MaxHealth;
+        mPtr.Speed = rPtr.Speed;
+        if (!rPtr.Unique)
+        {
+            int i = ExtractEnergy[rPtr.Speed] / 10;
+            if (i != 0)
+            {
+                mPtr.Speed += RandomSpread(0, i);
+            }
+        }
+        mPtr.Energy = RandomLessThan(100);
+        if (rPtr.ForceSleep)
+        {
+            mPtr.IndividualMonsterFlags |= Constants.MflagNice;
+            RepairMonsters = true;
+        }
+        
+        mPtr.SkipFirstTurn = newlySpawnedSkipFirstTurn;
+        UpdateMonsterVisibility(cPtr.Monster, true);
+        rPtr.CurNum++;
         if (rPtr.Multiply)
         {
             NumRepro++;
@@ -14605,6 +15283,7 @@ internal partial class Game : IGameSerialize
         {
             ShimmerMonsters = true;
         }
+        return mPtr;
     }
 
     /// <summary>
@@ -14640,22 +15319,31 @@ internal partial class Game : IGameSerialize
         {
             return false;
         }
-        int rIdx = GetMonNum(((Difficulty + lev) / 2) + 5, monsterFilter);
-        if (rIdx == 0)
+        MonsterRace? monsterRace = GetMonsterRace(((Difficulty + lev) / 2) + 5, monsterFilter);
+        if (monsterRace is null)
         {
             return false;
         }
-        MonsterRace race = SingletonRepository.Get<MonsterRace>(rIdx);
-        if (!PlaceMonsterAux(y, x, race, false, groupOk, pet))
+        if (groupOk)
         {
-            return false;
+            if (!PlaceGroupOfMonstersByRace(y, x, monsterRace, false, pet, false))
+            {
+                return false;
+            }
+        }
+        else
+        {
+            Monster? monster = PlaceOneMonsterByRace(y, x, monsterRace, false, pet, false);
+            if (monster is null)
+            {
+                return false;
+            }
         }
         return true;
     }
 
-    public void UpdateMonsterVisibility(int mIdx, bool full)
+    public void UpdateMonsterVisibility(Monster mPtr, bool full)
     {
-        Monster mPtr = Monsters[mIdx];
         MonsterRace rPtr = mPtr.Race;
         if (rPtr == null)
         {
@@ -14698,7 +15386,7 @@ internal partial class Game : IGameSerialize
             GridTile cPtr = Grid[fy][fx];
             if (cPtr.IsVisible && BlindnessTimer.Value == 0)
             {
-                if (mPtr.DistanceFromPlayer <= InfravisionRange)
+                if (mPtr.DistanceFromPlayer <= InfraVisionRange)
                 {
                     if (rPtr.ColdBlood)
                     {
@@ -14806,7 +15494,11 @@ internal partial class Game : IGameSerialize
             {
                 if (rPtr.EldritchHorror)
                 {
-                    mPtr.SanityBlast(false);
+                    int? sanityBlastPower = mPtr.GetSanityBlastPower();
+                    if (sanityBlastPower.HasValue)
+                    {
+                        SanityBlast(sanityBlastPower.Value);
+                    }
                 }
             }
             if ((mPtr.IndividualMonsterFlags & Constants.MflagView) == 0)
@@ -14830,6 +15522,80 @@ internal partial class Game : IGameSerialize
             }
         }
     }
+    public void SanityBlast(int power)
+    {
+        if (DieRoll(power) < SkillSavingThrow)
+        {
+            if (!HasConfusionResistance)
+            {
+                ConfusionTimer.AddTimer(RandomLessThan(4) + 4);
+            }
+            if (!HasChaosResistance && DieRoll(3) == 1)
+            {
+                HallucinationsTimer.AddTimer(RandomLessThan(250) + 150);
+            }
+            return;
+        }
+        if (DieRoll(power) < SkillSavingThrow)
+        {
+            TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
+            TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
+            return;
+        }
+        if (DieRoll(power) < SkillSavingThrow)
+        {
+            if (!HasConfusionResistance)
+            {
+                ConfusionTimer.AddTimer(RandomLessThan(4) + 4);
+            }
+            if (!HasFreeAction)
+            {
+                ParalysisTimer.AddTimer(RandomLessThan(4) + 4);
+            }
+            while (RandomLessThan(100) > SkillSavingThrow)
+            {
+                TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)));
+            }
+            while (RandomLessThan(100) > SkillSavingThrow)
+            {
+                TryDecreasingAbilityScore(SingletonRepository.Get<Ability>(nameof(WisdomAbility)));
+            }
+            if (!HasChaosResistance)
+            {
+                HallucinationsTimer.AddTimer(RandomLessThan(250) + 150);
+            }
+            return;
+        }
+        bool happened = false;
+        if (DieRoll(power) < SkillSavingThrow)
+        {
+            if (DecreaseAbilityScore(SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)), 10, true))
+            {
+                happened = true;
+            }
+            if (DecreaseAbilityScore(SingletonRepository.Get<Ability>(nameof(WisdomAbility)), 10, true))
+            {
+                happened = true;
+            }
+            if (happened)
+            {
+                MsgPrint("You feel much less sane than before.");
+            }
+            return;
+        }
+        if (DieRoll(power) < SkillSavingThrow)
+        {
+            if (LoseAllInfo())
+            {
+                MsgPrint("You forget everything in your utmost terror!");
+            }
+            return;
+        }
+        MsgPrint("The exposure to eldritch forces warps you.");
+        RunScript(nameof(GainMutationScript));
+        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+        HandleStuff();
+    }
 
     public void UpdateSmartLearn(Monster monster, SpellResistantDetection what)
     {
@@ -14849,74 +15615,19 @@ internal partial class Game : IGameSerialize
         what.Learn(monster);
     }
 
-    public void WipeMList()
+    public void WipeMonsterList()
     {
-        for (int i = MonsterMax - 1; i >= 1; i--)
+        foreach (Monster mPtr in MonsterList)
         {
-            Monster mPtr = Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             rPtr.CurNum--;
-            Grid[mPtr.MapY][mPtr.MapX].MonsterIndex = 0;
-            Monsters[i] = new Monster(this);
+            Grid[mPtr.MapY][mPtr.MapX].Monster = null;
         }
-        MonsterMax = 1;
-        MCnt = 0;
+
+        MonsterList = new List<Monster>();
         NumRepro = 0;
         TargetWho = null;
-        HealthTrack(null);
-    }
-
-    private void CompactMonstersAux(int i1, int i2)
-    {
-        if (i1 == i2)
-        {
-            return;
-        }
-        Monster mPtr = Monsters[i1];
-        int y = mPtr.MapY;
-        int x = mPtr.MapX;
-        GridTile cPtr = Grid[y][x];
-        cPtr.MonsterIndex = i2;
-        Monster mPtr2 = Monsters[i2];
-        mPtr2.Items.AddRange(mPtr.Items);
-        if (TargetWho != null && TargetWho.TargetedMonster == mPtr)
-        {
-            TargetWho = new MonsterTarget(this, mPtr2);
-        }
-        if (TrackedMonster.Value != null && TrackedMonster.Value == mPtr)
-        {
-            HealthTrack(i2);
-        }
-        Monsters[i2] = Monsters[i1];
-        Monsters[i1] = new Monster(this);
-    }
-
-    private int MPop()
-    {
-        int i;
-        if (MonsterMax < Constants.MaxMIdx)
-        {
-            i = MonsterMax;
-            MonsterMax++;
-            MCnt++;
-            return i;
-        }
-        for (i = 1; i < MonsterMax; i++)
-        {
-            Monster mPtr = Monsters[i];
-            if (mPtr.Race != null)
-            {
-                continue;
-            }
-            MCnt++;
-            return i;
-        }
-        MsgPrint("Too many monsters!");
-        return 0;
+        TrackMonsterHealth(null);
     }
 
     public static bool ValidateTupleSorting<T>(T[] items, Func<T, T, bool> testPredicate)
@@ -15033,7 +15744,7 @@ internal partial class Game : IGameSerialize
     /// Returns a random number with a flat distribution around center and within width of it
     /// </summary>
     /// <param name="centre"> The central value </param>
-    /// <param name="width"> The maximum distance (inclusive) from the centre </param>
+    /// <param name="width"> The maximum distance (inclusive) from the center </param>
     /// <returns> A random number </returns>
     public int RandomSpread(int centre, int width)
     {
@@ -15052,145 +15763,6 @@ internal partial class Game : IGameSerialize
             return 0; // TODO: This defies the stated purpose
         }
         return _mainSequence.Next(max);
-    }
-
-    public void InitializeMutations()
-    {
-        MutationsPossessed.Clear();
-        // Active Mutations
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BanishActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BerserkActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BlinkActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BreatheFireActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ColdTouchActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(DazzleActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(DetCurseActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(EarthquakeActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(EatMagicActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(EatRockActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(GrowMoldActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HypnGazeActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(IllumineActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(LaserEyeActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(LauncherActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MidasTouchActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MindBlastActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PanicHitActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PolymorphActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RadiationActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RecallActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ResistActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ShriekActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SmellMetActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SmellMonActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SpitAcidActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SterilityActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SwapPosActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(TelekinesActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(VampirismActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(VteleportActiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WeighMagActiveMutation)));
-        // Passive Mutations
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AlbinoPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ArthritisPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BlankFacPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ElecToucPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(EspPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(FearlessPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(FireBodyPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(FleshRotPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HyperIntPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HyperStrPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(IllNormPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(InfravisPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(IronSkinPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(LimberPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MagicResPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MoronicPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(MotionPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PunyPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RegenPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ResilientPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ResTimePassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ScalesPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ShortLegPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SillyVoiPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SusStatsPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(VulnElemPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WartSkinPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WingsPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(XtraEyesPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(XtraFatPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(XtraLegsPassiveMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(XtraNoisPassiveMutation)));
-        // Random Mutations
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AlcoholRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AttAnimalRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AttDemonRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(AttDragonRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BanishAllRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BeakRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(BersRageRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ChaosGiftRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(CowardiceRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(DisarmRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(EatLightRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(FlatulentRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HalluRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HornsRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(HpToSpRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(InvulnRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(NauseaRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(NormalityRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(PolyWoundRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ProdManaRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RawChaosRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(RteleportRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(ScorTailRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SpeedFluxRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(SpToHpRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(TentaclesRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(TrunkRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WalkShadRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WarningRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WastingRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WeirdMindRandomMutation)));
-        MutationsNotPossessed.Add(SingletonRepository.Get<Mutation>(nameof(WraithRandomMutation)));
-    }
-
-    public bool HasMutations => MutationsPossessed.Count > 0;
-
-    public string[] GetMutationList()
-    {
-        if (MutationsPossessed.Count == 0)
-        {
-            return new string[0];
-        }
-        string[] list = new string[MutationsPossessed.Count];
-        for (int i = 0; i < MutationsPossessed.Count; i++)
-        {
-            list[i] = MutationsPossessed[i].HaveMessage;
-        }
-        return list;
-    }
-
-    public void LoseAllMutations()
-    {
-        if (MutationsPossessed.Count == 0)
-        {
-            return;
-        }
-        MsgPrint("You change...");
-        do
-        {
-            Mutation mutation = MutationsPossessed[0];
-            MutationsPossessed.RemoveAt(0);
-            mutation.OnLose();
-            MutationsNotPossessed.Add(mutation);
-            MsgPrint(mutation.LoseMessage);
-        } while (MutationsPossessed.Count > 0);
-        SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
-        HandleStuff();
     }
 
     public string Pluralize(string singular)

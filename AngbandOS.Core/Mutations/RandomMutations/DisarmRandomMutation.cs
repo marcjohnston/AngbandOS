@@ -13,23 +13,9 @@ internal class DisarmRandomMutation : Mutation
     public override string GainMessage => "Your feet grow to four times their former size.";
     public override string HaveMessage => "You occasionally stumble and drop things.";
     public override string LoseMessage => "Your feet shrink to their former size.";
-
-    public override void ProcessWorld()
+    public override string Title => "Disarm (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (base.Game.DieRoll(10000) != 1)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.MsgPrint("You trip over your own feet!");
-        Game.TakeHit(base.Game.DieRoll(Game.Weight / 6), "tripping");
-        Game.MsgPrint(string.Empty);
-        Item? oPtr = Game.GetInventoryItem(InventorySlotEnum.MeleeWeapon);
-        if (oPtr == null)
-        {
-            return;
-        }
-        Game.MsgPrint("You drop your weapon!");
-        Game.InvenDrop(InventorySlotEnum.MeleeWeapon, 1);
-    }
+        (1, nameof(DisarmRandomMutationItemEnhancement))
+    };
 }

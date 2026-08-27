@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a widget that renders an afraid status of the player.
 /// </summary>
-[Serializable]
 public class AfraidRangedWidget : RangedWidgetGameConfiguration
 {
     public override int X => 25;

@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Represents a widget that displays a sleeping status for when the player is tracking a monster and the monster is sleeping.
 /// player is hallucinating.
 /// </summary>
-[Serializable]
 public class TrackedMonsterHealthIsSleepingLabelWidget : LabelWidgetGameConfiguration
 {
     public override int X => 0;

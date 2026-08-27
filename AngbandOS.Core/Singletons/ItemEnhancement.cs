@@ -18,10 +18,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         Game = game;
         Key = gameConfiguration.GetKey;
 
-        SumAttributeAndExpressionBindings = gameConfiguration.SumAttributeAndExpressionBindings;
-        BoolAttributeAndExpressionBindings = gameConfiguration.BoolAttributeAndExpressionBindings;
-        OrAttributeAndExpressionBindings = gameConfiguration.OrAttributeAndExpressionBindings;
-
+        SummationAttributeAndExpressionBindings = gameConfiguration.SummationAttributeAndExpressionBindings;
+        BitwiseOrAttributeAndExpressionBindings = gameConfiguration.BitwiseOrAttributeAndExpressionBindings;
+        ScriptsAttributeAndScriptBindings = gameConfiguration.ScriptsAttributeAndScriptBindings;
         ActivationName = gameConfiguration.ActivationName;
         AdditionalItemEnhancementWeightedRandomBindingKey = gameConfiguration.AdditionalItemEnhancementWeightedRandomBindingKey;
         ApplicableItemFactoryBindingKeys = gameConfiguration.ApplicableItemFactoryBindingKeys;
@@ -40,15 +39,15 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
     /// <returns></returns>
     public ItemEnhancement? GetItemEnhancement() => this;
 
-    private (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings { get; }
+    private (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings { get; }
     public (Attribute Attribute, Expression Expression)[] SumAttributeAndExpressions { get; private set; }
-    private (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings { get; }
-    public (Attribute Attribute, Expression BooleanExpression)[] BoolAttributeAndExpressions { get; private set; }
-    private (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings { get; }
+    private (string AttributeName, string[] ScriptNames)[]? ScriptsAttributeAndScriptBindings { get; }
+    public (ScriptsAttribute Attribute, UniversalScript[] Scripts)[]? ScriptsAttributeAndScripts { get; private set; }
+    private (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings { get; }
     public (Attribute Attribute, Expression BooleanExpression)[] OrAttributeAndExpressions { get; private set; }
 
     /// <summary>
-    /// Returns an immutable and fixed value set of item characteristics specified by this <see cref="ItemEnhancement"/> by computing fixed values from the expressions defined in these enhancements.
+    /// Returns an immutable and fixed value set of item characteristics by computing fixed values from the expressions defined in these enhancements.
     /// </summary>
     /// <returns></returns>
     public ReadOnlyAttributeSet GenerateAttributeSet()
@@ -58,17 +57,20 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         foreach ((Attribute attribute, Expression expression) in SumAttributeAndExpressions)
         {
             int appendValue = Game.ComputeIntegerExpression(expression).Value;
-            itemCharacteristics.Get<SumEffectiveAttributeValue>(attribute).Append(appendValue);
-        }
-        foreach ((Attribute attribute, Expression expression) in BoolAttributeAndExpressions)
-        {
-            bool setValue = Game.ComputeBooleanExpression(expression).Value;
-            itemCharacteristics.Get<BoolSetEffectiveAttributeValue>(attribute).Set(setValue);
+            itemCharacteristics.Get<SummationEffectiveAttributeValue>(attribute).Append(appendValue);
         }
         foreach ((Attribute attribute, Expression expression) in OrAttributeAndExpressions)
         {
             bool setValue = Game.ComputeBooleanExpression(expression).Value;
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(attribute).Set(setValue);
+            itemCharacteristics.Get<BitwiseOrEffectiveAttributeValue>(attribute).Set(setValue);
+        }
+
+        if (ScriptsAttributeAndScripts is not null)
+        {
+            foreach ((ScriptsAttribute scriptsAttribute, UniversalScript[] scripts) in ScriptsAttributeAndScripts)
+            {
+                itemCharacteristics.Get<ScriptsListEffectiveAttributeValue>(scriptsAttribute).Add(scripts);
+            }
         }
 
         itemCharacteristics.ArtifactBias = ArtifactBiasWeightedRandom?.ChooseOrDefault();
@@ -77,7 +79,7 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         {
             itemCharacteristics.Activation = Activation;
         }
-        itemCharacteristics.FriendlyName = FriendlyName;
+        itemCharacteristics.Get<FriendlyNameEffectiveAttributeValue>(nameof(FriendlyNameAttribute)).Set(FriendlyName);
         return itemCharacteristics.ToReadOnly();
     }
 
@@ -94,11 +96,11 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
     {
         // We are using a dictionary because we do not want to support duplicate attributes.
         Dictionary<Attribute, Expression> sumAttributeAndExpressionList = new Dictionary<Attribute, Expression>();
-        if (SumAttributeAndExpressionBindings is not null)
+        if (SummationAttributeAndExpressionBindings is not null)
         {
-            foreach ((string attributeName, string expression) in SumAttributeAndExpressionBindings)
+            foreach ((string attributeName, string expression) in SummationAttributeAndExpressionBindings)
             {
-                Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+                Attribute attribute = Game.SingletonRepository.Get<SummationAttribute>(attributeName);
                 Expression numericExpression = Game.ParseNumericExpression(expression);
                 sumAttributeAndExpressionList.Add(attribute, numericExpression);
             }
@@ -106,31 +108,18 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         SumAttributeAndExpressions = sumAttributeAndExpressionList.Select(_attributeAndExpression => (_attributeAndExpression.Key, _attributeAndExpression.Value)).ToArray();
 
         // We are using a dictionary because we do not want to support duplicate attributes.
-        Dictionary<Attribute, Expression> boolAttributeAndExpressionList = new Dictionary<Attribute, Expression>();
-        if (BoolAttributeAndExpressionBindings is not null)
-        {
-            foreach ((string attributeName, string expression) in BoolAttributeAndExpressionBindings)
-            {
-                Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
-                Expression numericExpression = Game.ParseBooleanExpression(expression);
-                boolAttributeAndExpressionList.Add(attribute, numericExpression);
-            }
-        }
-        BoolAttributeAndExpressions = boolAttributeAndExpressionList.Select(_attributeAndExpression => (_attributeAndExpression.Key, _attributeAndExpression.Value)).ToArray();
-
-        // We are using a dictionary because we do not want to support duplicate attributes.
         Dictionary<Attribute, Expression> orAttributeAndExpressionList = new Dictionary<Attribute, Expression>();
-        if (OrAttributeAndExpressionBindings is not null)
+        if (BitwiseOrAttributeAndExpressionBindings is not null)
         {
-            foreach ((string attributeName, string expression) in OrAttributeAndExpressionBindings)
+            foreach ((string attributeName, string expression) in BitwiseOrAttributeAndExpressionBindings)
             {
-                Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+                Attribute attribute = Game.SingletonRepository.Get<BitwiseOrAttribute>(attributeName);
                 Expression numericExpression = Game.ParseBooleanExpression(expression);
                 orAttributeAndExpressionList.Add(attribute, numericExpression);
             }
         }
         OrAttributeAndExpressions = orAttributeAndExpressionList.Select(_attributeAndExpression => (_attributeAndExpression.Key, _attributeAndExpression.Value)).ToArray();
-
+        ScriptsAttributeAndScripts = ScriptsAttributeAndScriptBindings?.Select(_attributeNameAndScriptNames => (Game.SingletonRepository.Get<ScriptsAttribute>(_attributeNameAndScriptNames.AttributeName), Game.SingletonRepository.Get<UniversalScript>(_attributeNameAndScriptNames.ScriptNames))).ToArray();
         Activation = Game.SingletonRepository.GetNullable<Activation>(ActivationName);
 
         AdditionalItemEnhancementWeightedRandom = Game.SingletonRepository.GetNullable<ItemEnhancementWeightedRandom>(AdditionalItemEnhancementWeightedRandomBindingKey);
@@ -144,9 +133,9 @@ internal sealed class ItemEnhancement : IGetKey, IToJson, IItemEnhancement, IGam
         {
             Key = Key,
 
-            SumAttributeAndExpressionBindings = SumAttributeAndExpressionBindings,
-            BoolAttributeAndExpressionBindings = BoolAttributeAndExpressionBindings,
-            OrAttributeAndExpressionBindings = OrAttributeAndExpressionBindings,
+            SummationAttributeAndExpressionBindings = SummationAttributeAndExpressionBindings,
+            BitwiseOrAttributeAndExpressionBindings = BitwiseOrAttributeAndExpressionBindings,
+            ScriptsAttributeAndScriptBindings = ScriptsAttributeAndScriptBindings,
 
             ActivationName = ActivationName,
             AdditionalItemEnhancementWeightedRandomBindingKey = AdditionalItemEnhancementWeightedRandomBindingKey,

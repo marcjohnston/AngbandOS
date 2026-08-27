@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class RingOfSetFixedArtifactMappedItemEnhancement : MappedItemEnhancementGameConfiguration
 {
     public override string[]? FixedArtifactBindingKeys => new string[] { nameof(FixedArtifactsEnum.RingOfSetFixedArtifact) };

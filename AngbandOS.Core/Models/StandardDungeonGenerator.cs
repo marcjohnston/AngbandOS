@@ -507,9 +507,10 @@ internal class StandardDungeonGenerator : DungeonGenerator
 
     private void PutQuestMonster(int rIdx)
     {
-        if (Game.SingletonRepository.Get<MonsterRace>(rIdx).MaxNum == 0)
+        MonsterRace rPtr = Game.SingletonRepository.Get<MonsterRace>(rIdx);
+        if (rPtr.MaxNum == 0)
         {
-            Game.SingletonRepository.Get<MonsterRace>(rIdx).MaxNum++;
+            rPtr.MaxNum++;
             Game.MsgPrint("Resurrecting guardian.");
         }
 
@@ -537,7 +538,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                     break;
                 }
             }
-        } while (!Game.PlaceMonsterByIndex(y, x, rIdx, false, false, false));
+        } while (Game.PlaceOneMonsterByRace(y, x, rPtr, false, false, false) is null);
     }
 
     private void PlaceRubble(int y, int x)
@@ -1093,7 +1094,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                         {
                             treasureRating += item.LevelNormallyFound - Game.Difficulty;
                         }
-                        treasureRating += item.EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Get();
+                        treasureRating += item.EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(TreasureRatingAttribute)).Get();
                     }
                 }
             }
@@ -2776,11 +2777,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
         }
 
         // Reset all of the monsters.
-        Game.Monsters = new Monster[Constants.MaxMIdx];
-        for (int j = 0; j < Constants.MaxMIdx; j++)
-        {
-            Game.Monsters[j] = new Monster(Game);
-        }
+        Game.WipeMonsterList();
 
         // Loop until we are able to build the level and keep track of the number of attempts.
         for (int generateAttemptNumber = 0; ; generateAttemptNumber++)
@@ -2913,7 +2910,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
                 Game.DangerFeeling = 0;
             }
             Game.TreasureFeeling = ComputeTreasureFeelingIndex();
-            if (Game.MonsterMax >= Constants.MaxMIdx)
+            if (Game.MonsterList.Count > Game.MaxMonsterCount)
             {
                 okay = false;
             }
@@ -2931,7 +2928,7 @@ internal class StandardDungeonGenerator : DungeonGenerator
             }
 
             // Reset the level so that we can attempt again.
-            Game.WipeMList();
+            Game.WipeMonsterList();
         }
         Game.MarkLevelEntry();
     }

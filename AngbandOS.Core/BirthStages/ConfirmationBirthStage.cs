@@ -10,9 +10,48 @@ internal class ConfirmationBirthStage : BirthStage
 {
     private ConfirmationBirthStage(Game game) : base(game) { }
 
+    private void AdjustAbility(Ability ability, int bonus)
+    {
+        ability.Adjusted = ability.ModifyStatValue(ability.InnateMax, bonus);
+    }
+    private void GetStats()
+    {
+        InnateTotals innateTotals = Game.GetInnateTotals(Game.CharacterClass, Game.Race);
+
+        while (true)
+        {
+            // Assign the innate max stats to each of the abilities. The max stats are randomly assigned to each ability, but the total of the max stats is always the same.
+            List<int> maxList = new List<int>(innateTotals.MaxInnates);
+            foreach (Ability ability in Game.SingletonRepository.Get<Ability>()) // There are six abilities
+            {
+                int maxIndex = Game.RandomLessThan(maxList.Count); // Choose a random max from the maxList
+                int max = maxList[maxIndex];
+                maxList.RemoveAt(maxIndex);
+                ability.InnateMax = max;
+
+                // Assign the current innate value to the max value.
+                ability.Innate = ability.InnateMax;
+            }
+
+            // Adjust each ability with the race and character class bonuses. The bonuses are applied to the innate max value to get the adjusted value.
+            AdjustAbility(Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)), Game.Race.AttributeSet.GetInt(nameof(BonusCharismaAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(BonusCharismaAttribute)) + Game.Race.AttributeSet.GetInt(nameof(BonusCharismaAttribute)));
+            AdjustAbility(Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)), Game.Race.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)) + Game.Race.AttributeSet.GetInt(nameof(BonusCharismaAttribute)));
+            AdjustAbility(Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)), Game.Race.AttributeSet.GetInt(nameof(BonusDexterityAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(BonusDexterityAttribute)) + Game.Race.AttributeSet.GetInt(nameof(BonusCharismaAttribute)));
+            AdjustAbility(Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)), Game.Race.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)) + Game.Race.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)));
+            AdjustAbility(Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)), Game.Race.AttributeSet.GetInt(nameof(BonusStrengthAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(BonusStrengthAttribute)) + Game.Race.AttributeSet.GetInt(nameof(BonusStrengthAttribute)));
+            AdjustAbility(Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)), Game.Race.AttributeSet.GetInt(nameof(BonusWisdomAttribute)) + Game.CharacterClass.AttributeSet.GetInt(nameof(BonusWisdomAttribute)) + Game.Race.AttributeSet.GetInt(nameof(BonusWisdomAttribute)));
+
+            // The prime stat must be least 14, otherwise we need to reroll the stats. This is a requirement for the game to be playable.
+            if (Game.CharacterClass.PrimeStat.InnateMax >= 14)
+            {
+                break;
+            }
+        }
+    }
+
     public override BirthStage? Render()
     {
-        Game.GetStats();
+        GetStats();
         Game.GetExtra();
         Game.GetAhw();
         Game.GetHistory();

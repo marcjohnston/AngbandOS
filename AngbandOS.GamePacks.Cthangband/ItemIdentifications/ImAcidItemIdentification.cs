@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband
 {
-    [Serializable]
     public class ImAcidItemIdentification : ItemIdentificationGameConfiguration
 {
         public override string AttributeFilterBindingKey => nameof(ImAcidItemIdentificationAttributeFilter);

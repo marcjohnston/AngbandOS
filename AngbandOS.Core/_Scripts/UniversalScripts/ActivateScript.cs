@@ -51,23 +51,8 @@ internal class ActivateScript : UniversalScript, IGetKey
         }
 
         // Work out the chance of using the item successfully based on its level and the
-        // player's skill
-        int chance = Game.SkillUseDevice;
-        if (Game.ConfusionTimer.Value != 0)
-        {
-            chance /= 2;
-        }
-
-        chance -= itemLevel > 50 ? 50 : itemLevel;
-
-        // Always give a slight chance of success
-        if (chance < Constants.UseDevice && Game.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
-        {
-            chance = Constants.UseDevice;
-        }
-
-        // If we fail our use item roll just tell us and quit
-        if (chance < Constants.UseDevice || Game.DieRoll(chance) < Constants.UseDevice)
+        // player's skill.  If we fail our use item roll just tell us and quit
+        if (!Game.UseDeviceItemTest(itemLevel))
         {
             Game.MsgPrint("You failed to activate it properly.");
             return;

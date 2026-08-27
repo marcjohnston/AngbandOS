@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class MushroomItemClass : ItemClassGameConfiguration
 {
     public override string Name => "Mushroom";

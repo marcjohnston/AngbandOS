@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BallOfFire50r2AndResistFire1d20p20DirectionalActivation : ActivationGameConfiguration
 {
 

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class HeavyCrossbowRangedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string? SlayingRandomArtifactItemEnhancementWeightedRandomBindingKey => nameof(SlayingRangedWeaponItemEnhancementWeightedRandom);

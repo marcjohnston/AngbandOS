@@ -21,23 +21,25 @@ internal class BrandWeaponAsVampiricScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        WieldSlot meleeWeaponWieldSlot = Game.SingletonRepository.Get<WieldSlot>().Single(_wieldSlot => _wieldSlot.IsMeleeWeapon);
-        foreach (int inventorySlot in meleeWeaponWieldSlot.InventorySlots)
+        foreach (WieldSlot meleeWeaponWieldSlot in Game.SingletonRepository.Get<WieldSlot>().Where(_wieldSlot => _wieldSlot.IsMeleeWeapon))
         {
-            Item? item = Game.GetInventoryItem(inventorySlot);
-
-            // We must have a non-rare, non-artifact weapon that isn't cursed
-            if (item is not null && !item.IsArtifact && !item.IsRare && !item.EffectiveAttributeSet.IsCursed)
+            foreach (int inventorySlot in meleeWeaponWieldSlot.InventorySlots)
             {
-                string itemName = item.GetDescription(false);
+                Item? item = Game.GetInventoryItem(inventorySlot);
 
-                // Make it a vampiric weapon
-                item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponVampiricItemEnhancement)));
+                // We must have a non-rare, non-artifact weapon that isn't cursed
+                if (item is not null && !item.IsArtifact && !item.IsRare && !item.EffectiveAttributeSet.IsCursed)
+                {
+                    string itemName = item.GetDescription(false);
 
-                // Let the player know what happened
-                Game.MsgPrint($"Your {itemName} thirsts for blood!");
-                Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
-                return;
+                    // Make it a vampiric weapon
+                    item.SetRareItem(Game.SingletonRepository.Get<ItemEnhancement>(nameof(WeaponVampiricItemEnhancement)));
+
+                    // Let the player know what happened
+                    Game.MsgPrint($"Your {itemName} thirsts for blood!");
+                    Game.Enchant(item, Game.RandomLessThan(3) + 4, Constants.EnchTohit | Constants.EnchTodam);
+                    return;
+                }
             }
         }
         Game.MsgPrint("The Branding failed.");

@@ -13,12 +13,9 @@ internal class PolyWoundRandomMutation : Mutation
     public override string GainMessage => "You feel forces of chaos entering your old scars.";
     public override string HaveMessage => "Your health is subject to chaotic forces.";
     public override string LoseMessage => "You feel forces of chaos departing your old scars.";
-
-    public override void ProcessWorld()
+    public override string Title => "Chaotic Wounds (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (base.Game.DieRoll(3000) == 1)
-        {
-            Game.RunScript(nameof(PolymorphWoundsScript));
-        }
-    }
+        (1, nameof(PolyWoundRandomMutationItemEnhancement))
+    };
 }

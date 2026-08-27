@@ -1,22 +1,25 @@
 namespace AngbandOS.GamePacks.Cthangband;
     
-[Serializable]
 public class YeekRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
-        (nameof(StrengthAttribute), "-2"),
-        (nameof(CharismaAttribute), "-7"),
-        (nameof(ConstitutionAttribute), "-2"),
-        (nameof(WisdomAttribute), "1"),
-        (nameof(IntelligenceAttribute), "1"),
-        (nameof(DexterityAttribute), "1"),
+        (nameof(ResAcidAttribute), "true")
+    };
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(BonusStrengthAttribute), "-2"),
+        (nameof(BonusCharismaAttribute), "-7"),
+        (nameof(BonusConstitutionAttribute), "-2"),
+        (nameof(BonusWisdomAttribute), "1"),
+        (nameof(BonusIntelligenceAttribute), "1"),
+        (nameof(BonusDexterityAttribute), "1"),
         (nameof(ValueAttribute), "-4350"),
-        (nameof(InfravisionAttribute), "2"),
+        (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "2"),
-        (nameof(UseDeviceAttribute), "4"),
         (nameof(SavingThrowAttribute), "10"),
         (nameof(StealthAttribute), "3"),
-        (nameof(SearchAttribute), "5"),
+        (nameof(SearchAttribute), "25"),
+        (nameof(UseDeviceAttribute), "4"),
     };
 }

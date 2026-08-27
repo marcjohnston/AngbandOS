@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class MiriNigriRace : Race
 {
     private MiriNigriRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(MiriNigriRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(MiriNigriRaceItemEnhancement)) 
+    };
     public override string Title => "Miri Nigri";
-    public override int UseDevice => -2;
-    public override int SavingThrow => -1;
-    public override int Stealth => -1;
-    public override int Search => -1;
     public override int BasePerception => 5;
     public override int MeleeToHit => 12;
     public override int RangedToHit => 5;
@@ -30,18 +28,6 @@ internal class MiriNigriRace : Race
     /// Miri-Nigri 129->130->131->132->133->End
     /// </summary>
     public override int Chart => 129;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(CthuloidSyllableSet);
-    public override void CalcBonuses()
-    {
-        Game.HasConfusionResistance = true;
-        Game.HasSoundResistance = true;
-    }
-
+    protected override string GenerateNameSyllableSetBindingKey => nameof(CthuloidSyllableSet);
     public override bool AutomaticallyGainsFirstLevelMutationAtBirth => true;
 }

@@ -10,7 +10,7 @@ internal class ColdItemEffect : ItemEffect
 {
     private ColdItemEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ApplyItem(Item oPtr, int who, int x, int y)
+    protected override bool ApplyItem(Item oPtr, Monster? monster, int x, int y)
     {
         bool obvious = false;
         bool ignore = false;
@@ -21,11 +21,11 @@ internal class ColdItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectiveAttributeSet.HatesCold)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesColdAttribute)).Get())
         {
             noteKill = plural ? " shatter!" : " shatters!";
             doKill = true;
-            if (oPtr.EffectiveAttributeSet.IgnoreCold)
+            if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreColdAttribute)).Get())
             {
                 ignore = true;
             }
@@ -56,7 +56,7 @@ internal class ColdItemEffect : ItemEffect
                 Game.DeleteObject(oPtr);
                 if (isPotion)
                 {
-                    oPtr.Smash(who, y, x);
+                    oPtr.Smash(monster, y, x);
                 }
                 Game.ConsoleView.RefreshMapLocation(y, x);
             }

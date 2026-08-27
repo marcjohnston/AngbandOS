@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for flasks that have value.
 /// </summary>
-[Serializable]
 public class FlasksOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[]

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot a frost ball that does 200 damage with a larger radius.
 /// </summary>
-[Serializable]
 public class LargeFrostBall200Every325p1d325DirectionalActivation : ActivationGameConfiguration
 {
     

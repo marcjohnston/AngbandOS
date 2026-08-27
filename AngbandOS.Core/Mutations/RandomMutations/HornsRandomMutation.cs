@@ -19,6 +19,7 @@ internal class HornsRandomMutation : Mutation
     public override int DamageDiceNumber => 6;
     public override int EquivalentWeaponWeight => 15;
     public override string AttackDescription => "horns";
+    public override string Title => "Horns (R)";
 
     public override void OnGain()
     {

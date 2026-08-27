@@ -23,7 +23,7 @@ internal class BoozeScript : EatOrQuaffUniversalScript, IGetKey
         bool isIdentified = false;
 
         // Confusion makes you confused and possibly other effects
-        if (!(Game.HasConfusionResistance || Game.HasChaosResistance))
+        if (!Game.HasConfusionResistance && !Game.HasChaosResistance)
         {
             if (Game.ConfusionTimer.AddTimer(Game.RandomLessThan(20) + 15))
             {

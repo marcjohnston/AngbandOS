@@ -16,20 +16,17 @@ internal class AttributeFilter : IGetKey, IToJson, IGameSerialize
         Key = gameConfiguration.GetKey;
         ActivationAttributeNonNull = gameConfiguration.ActivationAttributeNonNull;
         ArtifactBiasAttributeNonNull = gameConfiguration.ArtifactBiasAttributeNonNull;
-        BoolAttributeFiltersBindings = gameConfiguration.BoolAttributeFilterBindings;
-        OrAttributeFiltersBindings = gameConfiguration.OrAttributeFilterBindings;
-        SumAttributeFilterBindings = gameConfiguration.SumAttributeFilterBindings;
+        OrAttributeFiltersBindings = gameConfiguration.BitwiseOrAttributeFilterBindings;
+        SumAttributeFilterBindings = gameConfiguration.SummationAttributeFilterBindings;
     }
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
     public bool? ActivationAttributeNonNull { get; }
     public bool? ArtifactBiasAttributeNonNull { get; }
-    private (string AttributeKey, bool?[] Value)[]? BoolAttributeFiltersBindings { get; }
-    public (BoolAttribute Attribute, bool?[] Value)[] BoolAttributeFilters { get; private set; }
     private (string AttributeKey, bool Value)[]? OrAttributeFiltersBindings { get; }
-    public (OrAttribute Attribute, bool Value)[] OrAttributeFilters { get; private set; }
+    public (BitwiseOrAttribute Attribute, bool Value)[] OrAttributeFilters { get; private set; }
     private (string AttributeKey, int? StartingValue, int? EndingValue)[]? SumAttributeFilterBindings { get; }
-    public (SumAttribute Attribute, int? StartingValue, int? EndingValue)[] SumAttributeFilters { get; private set; }
+    public (SummationAttribute Attribute, int? StartingValue, int? EndingValue)[] SumAttributeFilters { get; private set; }
 
     public string ToJson()
     {
@@ -38,9 +35,8 @@ internal class AttributeFilter : IGetKey, IToJson, IGameSerialize
             Key = Key,
             ActivationAttributeNonNull = ActivationAttributeNonNull,
             ArtifactBiasAttributeNonNull = ArtifactBiasAttributeNonNull,
-            BoolAttributeFilterBindings = BoolAttributeFiltersBindings,
-            OrAttributeFilterBindings = OrAttributeFiltersBindings,
-            SumAttributeFilterBindings = SumAttributeFilterBindings,
+            BitwiseOrAttributeFilterBindings = OrAttributeFiltersBindings,
+            SummationAttributeFilterBindings = SumAttributeFilterBindings,
         };
         return JsonSerializer.Serialize(gameConfiguration, Game.GetJsonSerializerOptions());
     }
@@ -50,34 +46,23 @@ internal class AttributeFilter : IGetKey, IToJson, IGameSerialize
 
     public void Bind(RestoreGameState? restoreGameState)
     {
-        List<(BoolAttribute, bool?[])> boolAttributeList = new List<(BoolAttribute, bool?[])>();
-        if (BoolAttributeFiltersBindings is not null)
-        {
-            foreach ((string attributeKey, bool?[] values) in BoolAttributeFiltersBindings)
-            {
-                BoolAttribute attribute = Game.SingletonRepository.Get<BoolAttribute>(attributeKey);
-                boolAttributeList.Add((attribute, values));
-            }
-        }
-        BoolAttributeFilters = boolAttributeList.ToArray();
-
-        List<(OrAttribute, bool)> orAttributeList = new List<(OrAttribute, bool)>();
+        List<(BitwiseOrAttribute, bool)> orAttributeList = new List<(BitwiseOrAttribute, bool)>();
         if (OrAttributeFiltersBindings is not null)
         {
             foreach ((string attributeKey, bool value) in OrAttributeFiltersBindings)
             {
-                OrAttribute attribute = Game.SingletonRepository.Get<OrAttribute>(attributeKey);
+                BitwiseOrAttribute attribute = Game.SingletonRepository.Get<BitwiseOrAttribute>(attributeKey);
                 orAttributeList.Add((attribute, value));
             }
         }
         OrAttributeFilters = orAttributeList.ToArray();
 
-        List<(SumAttribute, int?, int?)> sumAttributeList = new List<(SumAttribute, int?, int?)>();
+        List<(SummationAttribute, int?, int?)> sumAttributeList = new List<(SummationAttribute, int?, int?)>();
         if (SumAttributeFilterBindings is not null)
         {
             foreach ((string attributeKey, int? startingValue, int? endingValue) in SumAttributeFilterBindings)
             {
-                SumAttribute attribute = Game.SingletonRepository.Get<SumAttribute>(attributeKey);
+                SummationAttribute attribute = Game.SingletonRepository.Get<SummationAttribute>(attributeKey);
                 sumAttributeList.Add((attribute, startingValue, endingValue));
             }
         }
@@ -111,27 +96,18 @@ internal class AttributeFilter : IGetKey, IToJson, IGameSerialize
             }
         }
 
-        foreach ((BoolAttribute attribute, bool?[] values) in BoolAttributeFilters)
+        foreach ((BitwiseOrAttribute attribute, bool value) in OrAttributeFilters)
         {
-            bool? effectiveAttributeSetValue = effectiveAttributeSet.Get<BoolSetEffectiveAttributeValue>(attribute).Get();
-            if (!values.Any(_value => _value == effectiveAttributeSetValue))
-            {
-                return false;
-            }
-        }
-
-        foreach ((OrAttribute attribute, bool value) in OrAttributeFilters)
-        {
-            bool? effectiveAttributeSetValue = effectiveAttributeSet.Get<OrEffectiveAttributeValue>(attribute).Get();
+            bool? effectiveAttributeSetValue = effectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(attribute).Get();
             if (effectiveAttributeSetValue != value)
             {
                 return false;
             }
         }
 
-        foreach ((SumAttribute attribute, int? startingValue, int? endingValue) in SumAttributeFilters)
+        foreach ((SummationAttribute attribute, int? startingValue, int? endingValue) in SumAttributeFilters)
         {
-            int effectiveAttributeSetValue = effectiveAttributeSet.Get<SumEffectiveAttributeValue>(attribute).Get();
+            int effectiveAttributeSetValue = effectiveAttributeSet.Get<SummationEffectiveAttributeValue>(attribute).Get();
             if (startingValue.HasValue && effectiveAttributeSetValue < startingValue.Value)
             {
                 return false;

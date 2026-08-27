@@ -1,0 +1,95 @@
+﻿// AngbandOS: 2022 Marc Johnston
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+namespace AngbandOS.Core;
+
+internal class FriendlyNameEffectiveAttributeValue : EffectiveAttributeValue
+{
+    #region State Data
+    /// <summary>
+    /// Represents the modifiers that are combined to create the effective value.
+    /// </summary>
+    protected readonly List<(string Key, string? Modifier)> _attributeModifiers = new List<(string, string?)>();
+    #endregion
+
+    #region Constructors
+    public FriendlyNameEffectiveAttributeValue(Game game, Attribute attribute) : base(game, attribute) { }
+    public FriendlyNameEffectiveAttributeValue(Game game, RestoreGameState restoreGameState) : base(game, restoreGameState)
+    {
+        (string, string?)[] modifiers = restoreGameState.GetByKey(nameof(_attributeModifiers)).GetTuples<string, string?>(
+            _restoreGameState => _restoreGameState.GetString(), 
+            _restoreGameState => _restoreGameState.GetStringOrDefault());
+        _attributeModifiers.AddRange(modifiers);
+    }
+    #endregion
+
+    public override bool HasKeyedItemEnhancements(string key)
+    {
+        foreach ((string itemKey, string modifier) in _attributeModifiers)
+        {
+            if (itemKey == key)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Computes a value to append to the modifiers so that the effective value equals the specified value.
+    /// </summary>
+    /// <param name="value"></param>
+    public void Set(string? value)
+    {
+        _attributeModifiers.Add(("", value));
+    }
+    public string? Get()
+    {
+        if (_attributeModifiers.Count == 0)
+        {
+            return null;
+        }
+        return _attributeModifiers[_attributeModifiers.Count - 1].Modifier;
+    }
+
+    public override void RemoveModifiers(string key)
+    {
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new Exception($"Cannot specify a blank or null key for {nameof(RemoveModifiers)}");
+        }
+        _attributeModifiers.RemoveAll((item) => item.Key == key);
+    }
+    public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(base.Serialize(saveGameState),
+            (nameof(_attributeModifiers), saveGameState.CreateTuplesGameStateBag<string, string?>(_attributeModifiers.ToArray(), _key => saveGameState.CreateGameStateBag(_key), _modifier => saveGameState.CreateGameStateBag(_modifier)))
+        );
+    }
+    public override EffectiveAttributeValue Clone()
+    {
+        FriendlyNameEffectiveAttributeValue clone = new FriendlyNameEffectiveAttributeValue(Game, Attribute);
+        clone._attributeModifiers.AddRange(_attributeModifiers);
+        return (EffectiveAttributeValue)clone;
+    }
+    public override string[] RenderForItemIdentification => new string[] { "" };
+    public override ReadOnlyAttributeValue ToReadOnly() => new NullableStringReadOnlyAttributeValue(Get());
+    public override void Merge(AttributeValue value)
+    {
+        NullableStringReadOnlyAttributeValue setEffectiveAttributeValue = (NullableStringReadOnlyAttributeValue)value;
+        _attributeModifiers.Add(("", setEffectiveAttributeValue.Value));
+    }
+
+    public override void Merge(string key, AttributeValue value)
+    {
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new ArgumentException("Invalid key specified for enhancements.");
+        }
+        NullableStringReadOnlyAttributeValue setEffectiveAttributeValue = (NullableStringReadOnlyAttributeValue)value;
+        _attributeModifiers.Add((key, setEffectiveAttributeValue.Value));
+    }
+}

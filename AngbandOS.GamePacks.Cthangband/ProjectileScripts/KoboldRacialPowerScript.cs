@@ -1,7 +1,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 // Kobolds can throw poison darts
-[Serializable]
 public class KoboldRacialPowerScript : ProjectileScriptGameConfiguration
 {
     public override string? PreMessage => "You throw a dart of poison.";

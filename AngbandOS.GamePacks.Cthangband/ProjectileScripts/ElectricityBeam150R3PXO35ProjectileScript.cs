@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ElectricityBeam150R3PXO35ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override string DamageRollExpression => "150";

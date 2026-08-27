@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a widget that renders the current mana integer value in varying color based on the percentage of mana the player has to their maximum.
 /// </summary>
-[Serializable]
 public class ManaMaxRangedWidget : MaxRangedWidgetGameConfiguration
 {
     public override int X => 7;

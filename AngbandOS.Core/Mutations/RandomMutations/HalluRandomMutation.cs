@@ -13,19 +13,9 @@ internal class HalluRandomMutation : Mutation
     public override string GainMessage => "You are afflicted by a hallucinatory insanity!";
     public override string HaveMessage => "You have a hallucinatory insanity.";
     public override string LoseMessage => "You are no longer afflicted by a hallucinatory insanity!";
-
-    public override void ProcessWorld()
+    public override string Title => "Hallucinations (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (base.Game.DieRoll(6400) != 42)
-        {
-            return;
-        }
-        if (Game.HasChaosResistance)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(PrExtraRedrawActionGroupSetFlaggedAction)).Set();
-        Game.HallucinationsTimer.AddTimer(base.Game.RandomLessThan(50) + 20);
-    }
+        (1, nameof(HalluRandomMutationItemEnhancement))
+    };
 }

@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class ShriekMutationScript : UniversalScript, IGetKey
+internal class ShriekMutationScript : ActiveMutationScript
 {
     private ShriekMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "shriek";
     public override void ExecuteScript()
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(SoundProjectile));

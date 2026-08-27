@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband
 {
-    [Serializable]
     public class MageCharacterClassOutfitManifestGameConfiguration : OutfitManifestGameConfiguration
     {
         public override (string[], bool)? CharacterClassBindingKey => (new string[] { nameof(CharacterClassesEnum.MageCharacterClass) }, true);

@@ -113,123 +113,19 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     /// <param name="namespaceKey"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    private ICastSpellScript[]? GetMappedSpellScripts(bool successScript)
+    public MappedSpellScript GetMappedSpellScripts(bool successScript)
     {
-        // Retrieve the entire table.
-        MappedSpellScript[] table = Game.SingletonRepository.Get<MappedSpellScript>(); // TODO: This will be slow because the GenericRepository is type casting every record.
-
-        // Retrieve all of the matching records.
-        MappedSpellScript[]? matching = table.Where(_mappedSpellScript =>
-            (_mappedSpellScript.Spell is null || _mappedSpellScript.Spell == this) &&
-            (_mappedSpellScript.Realm is null || _mappedSpellScript.Realm == SpellBookItemFactory.Realm) &&
-            (_mappedSpellScript.CharacterClass is null || _mappedSpellScript.CharacterClass == Game.CharacterClass) &&
-            (_mappedSpellScript.MinimumExperienceLevel is null || _mappedSpellScript.MinimumExperienceLevel < Game.ExperienceLevel.IntValue) &&
-            _mappedSpellScript.Success == successScript)
-            .OrderByDescending(_mappedSpellScript => _mappedSpellScript.MinimumExperienceLevel) // NULL values are treated as the lowest values in LINQ
-            .ToArray();
-
-        // Organize them into number of matching criteria and the matching signature.  The order of precedence is determined by number of matching criteria, similar to CSS select queries.
-        // a -> Spell
-        // b -> Realm
-        // c -> Character Class
-        // d -> Minimum Experience Level
-        Dictionary<string, List<MappedSpellScript>> matchingDictionaryBySignature = new Dictionary<string, List<MappedSpellScript>>();
-        foreach (MappedSpellScript mappedSpellScript in matching)
-        {
-            string signature = "";
-            if (mappedSpellScript.Spell is not null)
-            {
-                signature = $"{signature}a";
-            }
-            if (mappedSpellScript.Realm is not null)
-            {
-                signature = $"{signature}b";
-            }
-            if (mappedSpellScript.CharacterClass is not null)
-            {
-                signature = $"{signature}c";
-            }
-            if (mappedSpellScript.MinimumExperienceLevel is not null)
-            {
-                signature = $"{signature}d";
-            }
-            if (!matchingDictionaryBySignature.TryGetValue(signature, out List<MappedSpellScript>? matchList))
-            {
-                matchList = new List<MappedSpellScript>();
-                matchingDictionaryBySignature.Add(signature, matchList);
-            }
-            matchList.Add(mappedSpellScript);
-        }
-
-        // Retrieves the records based on a signature and returns the highest minimum experience.
-        MappedSpellScript? GetBySignature(string signature)
-        {
-            if (matchingDictionaryBySignature.TryGetValue(signature, out List<MappedSpellScript>? list))
-            {
-                // The only variation can be minimum experience level.  We take the one with the highest minimum required experience.
-                return list.OrderByDescending(_mappedSpellScript => _mappedSpellScript.MinimumExperienceLevel).First();
-            }
-            return null;
-        }
-
-        // Retrieve records for each of the associated signatures, detecting ambiguity across multiple signatures.
-        MappedSpellScript? CheckSignatures(params string[] signatures)
-        {
-            MappedSpellScript? authorativeMappedSpellScript = null;
-            foreach (string signature in signatures)
-            {
-                MappedSpellScript? mappedSpellScript = GetBySignature(signature);
-                if (mappedSpellScript != null)
-                {
-                    if (authorativeMappedSpellScript != null)
-                    {
-                        throw new Exception("Ambigious matching scripts.");
-                    }
-                    authorativeMappedSpellScript = mappedSpellScript;
-                }
-            }
-            return authorativeMappedSpellScript;
-        }
-
-        // Check for highest order of precedence, similar to CSS query selections.
-        MappedSpellScript? fourMatching = CheckSignatures("abcd");
-        if (fourMatching != null)
-        {
-            return fourMatching.CastSpellScripts;
-        }
-        MappedSpellScript? threeMatching = CheckSignatures("abc", "abd", "acd", "bcd");
-        if (threeMatching != null)
-        {
-            return threeMatching.CastSpellScripts;
-        }
-        MappedSpellScript? twoMatching = CheckSignatures("ab", "ac", "ad", "bc", "bd", "cd");
-        if (twoMatching != null)
-        {
-            return twoMatching.CastSpellScripts;
-        }
-        MappedSpellScript? oneMatching = CheckSignatures("a", "b", "c", "d");
-        if (oneMatching != null)
-        {
-            return oneMatching.CastSpellScripts;
-        }
-        MappedSpellScript? zeroMatching = CheckSignatures("");
-        if (zeroMatching != null)
-        {
-            return zeroMatching.CastSpellScripts;
-        }
-        throw new Exception($"No {(successScript ? "success" : "failure")} mapping found for {SpellBookItemFactory.Realm.GetKey}, {this.GetKey}, {Game.CharacterClass.GetKey}.");
+        return Game.GetMappedSpellScript(this, SpellBookItemFactory.Realm, Game.CharacterClass, Game.ExperienceLevel.IntValue, successScript);
     }
-
-    private ICastSpellScript[]? CastSpellScripts => GetMappedSpellScripts(true);
-
-    private ICastSpellScript[]? FailedCastSpellScripts => GetMappedSpellScripts(false);
 
     /// <summary>
     /// Performs the spell.
     /// </summary>
     public void CastSpell()
     {
-        ExecuteSpellScripts(CastSpellScripts);
+        MappedSpellScript mappedSpellScript = GetMappedSpellScripts(true);
+        ICastSpellScript[]? castSpellScripts = mappedSpellScript.CastSpellScripts;
+        ExecuteSpellScripts(castSpellScripts);
     }
 
     /// <summary>
@@ -238,7 +134,9 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     /// </summary>
     public void CastFailed()
     {
-        ExecuteSpellScripts(FailedCastSpellScripts);
+        MappedSpellScript mappedSpellScript = GetMappedSpellScripts(false);
+        ICastSpellScript[]? castSpellScripts = mappedSpellScript.CastSpellScripts;
+        ExecuteSpellScripts(castSpellScripts);
     }
 
     private void ExecuteSpellScripts(ICastSpellScript[]? spellScripts)
@@ -265,12 +163,12 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
         }
         int chance = CharacterClassSpell.BaseFailure;
         chance -= 3 * (Game.ExperienceLevel.IntValue - CharacterClassSpell.Level);
-        chance -= 3 * (Game.CharacterClass.SpellStat.SpellFailureReduction - 1);
+        chance -= 3 * (Game.CharacterClass.SpellAbility.SpellFailureReduction - 1);
         if (CharacterClassSpell.ManaCost > Game.Mana.IntValue)
         {
             chance += 5 * (CharacterClassSpell.ManaCost - Game.Mana.IntValue);
         }
-        int minfail = Game.CharacterClass.SpellStat.SpellMinFailChance;
+        int minfail = Game.CharacterClass.SpellAbility.SpellMinFailChance;
         int characterClassMinimumSpellFailureChance = Game.CharacterClass.SpellMinFailChance ?? 0;
         if (minfail < characterClassMinimumSpellFailureChance)
         {
@@ -304,8 +202,6 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
         _characterClassSpell = Game.SingletonRepository.Get<CharacterClassSpell>(CharacterClassSpell.GetCompositeKey(Game.CharacterClass, this));
         _spellIndex = spellIndex;
         _spellBookItemFactory = itemFactory;
-        //CastSpellScripts = GetMappedSpellScripts(true);
-        //FailedCastSpellScripts = GetMappedSpellScripts(false);
     }
 
     public string Title()
@@ -329,11 +225,13 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
             {
                 // We will default the details to blank, if there are no scripts.
                 learnedDetails = "";
-                if (CastSpellScripts is not null)
+                MappedSpellScript mappedSpellScript = GetMappedSpellScripts(true);
+                ICastSpellScript[]? castSpellScripts = mappedSpellScript.CastSpellScripts;
+                if (castSpellScripts is not null)
                 {
                     // A null value for learned details for a spell, means to use the associated scripts.
                     List<string> learnedDetailsList = new List<string>();
-                    foreach (ICastSpellScript castSpellScript in CastSpellScripts)
+                    foreach (ICastSpellScript castSpellScript in castSpellScripts)
                     {
                         string castSpellScriptLearnedDetails = castSpellScript.LearnedDetails;
                         if (!learnedDetailsList.Contains(castSpellScriptLearnedDetails))
@@ -357,7 +255,7 @@ internal sealed class Spell : IGetKey, IToJson, IGameSerialize
     /// <returns></returns>
     public override string ToString()
     {
-        return $"{Name} ({CharacterClassSpell.Level}, {CharacterClassSpell.ManaCost}, {CharacterClassSpell.BaseFailure}, {CharacterClassSpell.FirstCastExperience})";
+        return $"{nameof(Spell)}: {Name} (Lvl: {CharacterClassSpell.Level}, Mana: {CharacterClassSpell.ManaCost}, Fail: {CharacterClassSpell.BaseFailure}, 1st Exp: {CharacterClassSpell.FirstCastExperience})";
     }
 
     /// <summary>

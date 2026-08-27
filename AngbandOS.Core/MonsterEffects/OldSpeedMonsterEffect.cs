@@ -15,7 +15,7 @@ internal class OldSpeedMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => null;
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -30,7 +30,7 @@ internal class OldSpeedMonsterEffect : MonsterEffect
         }
         string? note = " starts moving faster.";
         dam = 0;
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
+        ApplyProjectileDamageToMonster(mPtr, dam, note, null, 0);
         return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

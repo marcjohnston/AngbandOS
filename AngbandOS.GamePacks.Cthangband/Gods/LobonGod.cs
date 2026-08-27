@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LobonGod : GodGameConfiguration
 {
     public override string LongName => "Lobon, god of youth";

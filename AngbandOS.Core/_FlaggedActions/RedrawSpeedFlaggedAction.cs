@@ -13,20 +13,16 @@ internal class RedrawSpeedFlaggedAction : FlaggedAction
     private RedrawSpeedFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        int i = Game.Speed.IntValue;
+        int currentSpeed = Game.Speed - Game.SpeedHidden;
         ColorEnum attr = ColorEnum.White;
         string buf = "";
-        if (Game.IsSearching)
-        {
-            i += 10;
-        }
-        int energy = Game.ExtractEnergy[i]; // TODO: This causes a runtime error for out of bounds
-        if (i > 110)
+        int energy = Game.ExtractEnergy[currentSpeed]; // TODO: This causes a runtime error for out of bounds
+        if (currentSpeed > 110)
         {
             attr = ColorEnum.BrightGreen;
             buf = $"Fast {energy / 10.0}";
         }
-        else if (i < 110)
+        else if (currentSpeed < 110)
         {
             attr = ColorEnum.BrightBrown;
             buf = $"Slow {energy / 10.0}";

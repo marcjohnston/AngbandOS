@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class HobbitRace : Race
 {
     private HobbitRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(HobbitRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(HobbitRaceItemEnhancement)) 
+    };
     public override string Title => "Hobbit";
-    public override int UseDevice => 18;
-    public override int SavingThrow => 18;
-    public override int Stealth => 5;
-    public override int Search => 12;
     public override int BasePerception => 15;
     public override int MeleeToHit => -10;
     public override int RangedToHit => 20;
@@ -33,13 +31,7 @@ internal class HobbitRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 15 ? "create food        (racial, unusable until level 15)" : "create food        (racial, cost 10, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(HobbitSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(HobbitSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -48,10 +40,5 @@ internal class HobbitRace : Race
             return new string[] { "You can produce food (cost 10)." };
         }
         return null;
-    }
-
-    public override void CalcBonuses()
-    {
-        Game.HasSustainDexterity = true;
     }
 }

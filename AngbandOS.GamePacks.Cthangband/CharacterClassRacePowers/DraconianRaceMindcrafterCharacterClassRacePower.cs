@@ -1,0 +1,8 @@
+namespace AngbandOS.GamePacks.Cthangband;
+
+public class DraconianRaceMindcrafterCharacterClassRacePower : RacePowerGameConfiguration
+{
+    public override string ScriptBindingKey => nameof(DraconianRaceConfusionOrPsiCharacterClassRacialPowerConditionalScript);
+    public override string RaceBindingKey => nameof(RacesEnum.DraconianRace);
+    public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.MindcrafterCharacterClass);
+}

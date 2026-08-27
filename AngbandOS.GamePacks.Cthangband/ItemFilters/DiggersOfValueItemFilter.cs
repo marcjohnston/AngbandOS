@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for items that can be used for digging and have value.
 /// </summary>
-[Serializable]
 public class DiggersOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemClassNames => new string[] { nameof(DiggersItemClass) };

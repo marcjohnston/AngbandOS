@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class GreatOneRace : Race
 {
     private GreatOneRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(GreatOneRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(GreatOneRaceItemEnhancement)) 
+    };
     public override string Title => "Great One";
-    public override int UseDevice => 5;
-    public override int SavingThrow => 5;
-    public override int Stealth => 2;
-    public override int Search => 3;
     public override int BasePerception => 13;
     public override int MeleeToHit => 15;
     public override int RangedToHit => 10;
@@ -33,14 +31,7 @@ internal class GreatOneRace : Race
 
     public override string RacialPowersDescription(int lvl) => "dream powers    (unusable until level 30/40)";
     protected override string? RacialPowerScriptBindingKey => nameof(GreatOneRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
-        itemCharacteristics.Get<BoolSetEffectiveAttributeValue>(nameof(RegenAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(HumanSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -56,11 +47,5 @@ internal class GreatOneRace : Race
         if (values.Count == 0)
             return null;
         return values.ToArray();
-    }
-
-    public override void CalcBonuses()
-    {
-        Game.HasSustainConstitution = true;
-        Game.HasRegeneration = true;
     }
 }

@@ -14,15 +14,56 @@ internal abstract class Race : IGetKey, IGameSerialize
         Game = game;
     }
 
-    public void Refresh()
+    /// <summary>
+    /// Refreshed the read-only attribute set.  Performed by the <see cref="UpdateBonusesFlaggedAction"/>.
+    /// </summary>
+    /// <returns></returns>
+    public void RefreshAndSquashAttributeSet()
     {
-        EffectiveAttributeSet = Enhancement.GenerateAttributeSet();
+        EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
+        if (MinimumExperienceLevelAndEnhancementAttributeSets is not null)
+        {
+            foreach ((int minimumExperienceLevel, ReadOnlyAttributeSet attributeSet) in MinimumExperienceLevelAndEnhancementAttributeSets)
+            {
+                if (Game.ExperienceLevel.IntValue >= minimumExperienceLevel)
+                {
+                    effectiveAttributeSet.MergeAttributeSet(attributeSet);
+                }
+            }
+        }
+        AttributeSet = effectiveAttributeSet.ToReadOnly();
     }
+
+    /// <summary>
+    /// Generates the <see cref="ReadOnlyAttributeSet"/> for each enhancement.  This process should only be done during birth.  The enhancements may have random
+    /// configuration embedded and this generate fixes those random values to be used throughout the game.
+    /// </summary>
+    public void RegenerateAttributeSets()
+    {
+        if (MinimumExperienceLevelAndEnhancementTuples is null)
+        {
+            MinimumExperienceLevelAndEnhancementAttributeSets = null;
+        }
+        else
+        {
+            List<(int, ReadOnlyAttributeSet)> tupleList = new List<(int, ReadOnlyAttributeSet)>();
+            foreach ((int minimumExperienceLevel, ItemEnhancement enhancement) in MinimumExperienceLevelAndEnhancementTuples)
+            {
+                tupleList.Add((minimumExperienceLevel, enhancement.GenerateAttributeSet()));
+            }
+            MinimumExperienceLevelAndEnhancementAttributeSets = tupleList.ToArray();
+        }
+        RefreshAndSquashAttributeSet();
+    }
+
     public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(EffectiveAttributeSet), saveGameState.CreateDerivedGameStateBag(EffectiveAttributeSet, typeof(ReadOnlyAttributeSet)))
-        );
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
+            (nameof(MinimumExperienceLevelAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, ReadOnlyAttributeSet>(MinimumExperienceLevelAndEnhancementAttributeSets,
+                _minimumExperienceLevel => saveGameState.CreateGameStateBag(_minimumExperienceLevel),
+                _attributeSet => saveGameState.CreateDerivedGameStateBag(_attributeSet, typeof(ReadOnlyAttributeSet))
+        )));
     }
 
     public string Key => GetType().Name;
@@ -30,34 +71,41 @@ internal abstract class Race : IGetKey, IGameSerialize
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState)
     {
-        GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetName);
+        GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetBindingKey);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
-        Enhancement = Game.SingletonRepository.Get<ItemEnhancement>(EnhancementBindingKey);
         ChanceOfSanityBlastImmunityExpression = Game.ParseNumericExpression(ChanceOfSanityBlastImmunityExpressionText);
+        MinimumExperienceLevelAndEnhancementTuples = MinimumExperienceLevelAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
 
         if (restoreGameState is not null)
         {
-            EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>((RestoreGameState restoreGameState) => new ReadOnlyAttributeSet(Game, restoreGameState));
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
+            MinimumExperienceLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, ReadOnlyAttributeSet>(
+                _restoreGameState => _restoreGameState.GetInt(),
+                _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
         }
     }
 
     /// <summary>
     /// Represents a set of generated attributes.
     /// </summary>
-    public ReadOnlyAttributeSet EffectiveAttributeSet { get; private set; }
+    public ReadOnlyAttributeSet AttributeSet { get; private set; }
 
-    protected abstract string EnhancementBindingKey { get; }
-    public ItemEnhancement Enhancement { get; private set; }
+    protected virtual (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => null;
+    public (int, ItemEnhancement)[]? MinimumExperienceLevelAndEnhancementTuples { get; private set; }
+
+    /// <summary>
+    /// Returns the current read-only set of generated enhancements.  These enhancements are generated at birth via the <see cref="RegenerateAttributeSets"/> method and do not change.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public (int, ReadOnlyAttributeSet)[]? MinimumExperienceLevelAndEnhancementAttributeSets { get; private set; } = null;
 
     public abstract int AgeRange { get; }
     public abstract int BaseAge { get; }
-    public abstract int UseDevice { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
     public abstract int MeleeToHit { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
     public abstract int RangedToHit { get; }
-    public abstract int SavingThrow { get; }
-    public abstract int Search { get; }
     public abstract int BasePerception { get; }
-    public abstract int Stealth { get; }
     public abstract uint Choice { get; }
     public abstract int ExperienceFactor { get; }
     public abstract int HitDieBonus { get; }
@@ -81,20 +129,7 @@ internal abstract class Race : IGetKey, IGameSerialize
     /// <param name="lvl"></param>
     /// <returns></returns>
     public virtual string RacialPowersDescription(int lvl) => "(none)";
-
-    /// <summary>
-    /// Returns true, if the race has mutant powers.  Returns false, by default.
-    /// </summary>
-    public virtual bool HasRacialPowers => false;
-
-    /// <summary>
-    /// Applies additional characteristics to a player based on the player level.  No characteristics are applied, by default.  Only humans, have no modifications.
-    /// </summary>
-    /// <param name="level"></param>
-    /// <param name="itemCharacteristics"></param>
-    public virtual void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics) { }
-
-    protected abstract string GenerateNameSyllableSetName { get; }
+    protected abstract string GenerateNameSyllableSetBindingKey { get; }
     public SyllableSet GenerateNameSyllableSet { get; private set; }
 
     /// <summary>
@@ -108,8 +143,6 @@ internal abstract class Race : IGetKey, IGameSerialize
     /// <param name="level"></param>
     /// <returns></returns>
     public virtual string[]? SelfKnowledge(int level) => null;
-
-    public virtual void CalcBonuses() { }
 
     /// <summary>
     /// Returns true, if the race rests until dusk instead of dawn.  Vampires, zombies, spectres and skeletons return true.  Returns false, by default.

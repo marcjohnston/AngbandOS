@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class RayOfSunlightNatureSpell : SpellGameConfiguration
 {
     public override string Name => "Ray of Sunlight";

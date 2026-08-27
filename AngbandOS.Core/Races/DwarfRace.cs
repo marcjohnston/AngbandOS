@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class DwarfRace : Race
 {
     private DwarfRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(DwarfRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(DwarfRaceItemEnhancement)) 
+    };
     public override string Title => "Dwarf";
-    public override int UseDevice => 9;
-    public override int SavingThrow => 10;
-    public override int Stealth => -1;
-    public override int Search => 7;
     public override int BasePerception => 10;
     public override int MeleeToHit => 15;
     public override int RangedToHit => 0;
@@ -32,13 +30,7 @@ internal class DwarfRace : Race
     public override int Chart => 16;
     public override string RacialPowersDescription(int lvl) => lvl < 5 ? "detect doors+traps (racial, unusable until level 5)" : "detect doors+traps (racial, cost 5, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResBlindAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(DwarvenSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 4)
@@ -46,10 +38,5 @@ internal class DwarfRace : Race
             return new string[] { "You can find traps, doors and stairs (cost 5)." };
         }
         return null;
-    }
-
-    public override void CalcBonuses()
-    {
-        Game.HasBlindnessResistance = true;
     }
 }

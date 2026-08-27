@@ -24,7 +24,7 @@ internal class FireArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(EffectiveAttributeSet characteristics)
     {
-        characteristics.Radius = 3;
+        characteristics.Get<SummationEffectiveAttributeValue>(nameof(GlowRadiusAttribute)).Append(3);
         return false;
     }
 

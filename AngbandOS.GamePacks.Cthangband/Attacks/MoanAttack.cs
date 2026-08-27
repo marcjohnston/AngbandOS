@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class MoanAttack : AttackGameConfiguration
 {
     public override string MonsterAction => "moans at {0}";

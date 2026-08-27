@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(BrandElecAttribute), "true"),
         (nameof(FreeActAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
@@ -32,7 +27,7 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
         (nameof(SlowDigestAttribute), "true"),
         (nameof(TelepathyAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "21"),
@@ -40,8 +35,8 @@ public class WarHammerMjolnirFixedArtifactItemEnhancement : ItemEnhancementGameC
         (nameof(AttacksAttribute), "5"),
         (nameof(DamageDiceAttribute), "6"),
         (nameof(ValueAttribute), "250000"),
-        (nameof(RadiusAttribute), "3"),
-        (nameof(WisdomAttribute), "4"),
+        (nameof(GlowRadiusAttribute), "3"),
+        (nameof(BonusWisdomAttribute), "4"),
         (nameof(SlayDragonAttribute), "5"),
     };
     public override string FriendlyName => "'Mjolnir'";

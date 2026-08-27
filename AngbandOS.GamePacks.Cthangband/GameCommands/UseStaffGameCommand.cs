@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Use a staff from the inventory or floor
 /// </summary>
 /// <param name="itemIndex"> The inventory index of the item to use </param>
-[Serializable]
 public class UseStaffGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'u';

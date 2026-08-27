@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LordlyResistanceItemEnhancementWeightedRandom : ItemEnhancementWeightedRandomGameConfiguration
 {
     public override (string?, int)[] NameAndWeightBindings => new (string?, int)[]

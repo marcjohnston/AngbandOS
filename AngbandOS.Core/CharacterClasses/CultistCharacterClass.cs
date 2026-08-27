@@ -11,26 +11,23 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class CultistCharacterClass : CharacterClass
 {
     private CultistCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(CultistCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
+    {
+        (1, null, nameof(CultistCharacterClassItemEnhancement)),
+        (20, null, nameof(CultistCharacterClassLevel20ItemEnhancement))
+    };
+
     public override int ID => 12;
     public override string Title => "Cultist";
-    public override bool ReceivesLevelRewards => true;
     public override int? InstantChaosResistanceLevel => 20;
     public override bool RenderChaosMessageForWieldingUnpriestlyWeapon => true;
     public override int UnpriestlyWeaponAdditionalFailureChance => 25;
     public override bool HasPatron => true;
-    public override int UseDevice => 36;
     public override int? SpellMinFailChance => 5;
-    public override int SavingThrow => 32;
-    public override int Stealth => 1;
-    public override int Search => 16;
     public override int BasePerception => 18;
     public override int MeleeToHit => 30;
     public override int RangedToHit => 20;
     public override int DisarmBonusPerLevel => 7;
-    public override int DeviceBonusPerLevel => 13;
-    public override int SaveBonusPerLevel => 10;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 15;
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 0;
@@ -58,23 +55,23 @@ internal class CultistCharacterClass : CharacterClass
 
 
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
+    protected override string SpellAbilityBindingKey => nameof(IntelligenceAbility);
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(MageArtifactBias), 1) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(240000 / (level + 5)));
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(ChaosRealm)
     };
-    public override Realm[] AvailableSecondaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(LifeRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(SorceryRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(NatureRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(FolkRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
+    protected override string[] AvailableSecondaryRealmBindingKeys => new string[] {
+        nameof(LifeRealm),
+        nameof(SorceryRealm),
+        nameof(NatureRealm),
+        nameof(DeathRealm),
+        nameof(TarotRealm),
+        nameof(FolkRealm),
+        nameof(CorporealRealm)
     };
     public override bool WorshipsADeity => true;
 
@@ -83,7 +80,7 @@ internal class CultistCharacterClass : CharacterClass
         // Cultists that are NOT wielding the a blade of chaos lose bonuses for being an unpriestly weapon.
         if (oPtr != null)
         {
-            if (!oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Get())
+            if (!oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ChaoticAttribute)).Get())
             {
                 return new Bonuses()
                 {
@@ -96,13 +93,5 @@ internal class CultistCharacterClass : CharacterClass
             }
         }
         return null;
-    }
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasChaosResistance = true;
-        }
     }
 }

@@ -1,10 +1,11 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(IsCursedAttribute), "true"),
+        (nameof(HeavyCurseAttribute), "true"),
         (nameof(AggravateAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -17,16 +18,11 @@ public class BastardSwordSelfSlayerFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(SlayEvilAttribute), "true"),
         (nameof(SlayTrollAttribute), "true"),
     };
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(HeavyCurseAttribute), "true"),
-        (nameof(IsCursedAttribute), "true"),
-    };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(SlayDragonAttribute), "5"),
-        (nameof(ConstitutionAttribute), "5"),
+        (nameof(BonusConstitutionAttribute), "5"),
         (nameof(ValueAttribute), "100000"),
         (nameof(DamageDiceAttribute), "2"),
         (nameof(MeleeToHitAttribute), "-20"),

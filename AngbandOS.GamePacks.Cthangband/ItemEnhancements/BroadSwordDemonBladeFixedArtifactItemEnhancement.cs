@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(AggravateAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
@@ -17,7 +16,7 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(SlayTrollAttribute), "true"),
     };
     public override string FriendlyName => "'Demon Blade'";
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(AttacksAttribute), "2"),
@@ -30,7 +29,7 @@ public class BroadSwordDemonBladeFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(DamageDiceAttribute), "9"),
         (nameof(MeleeToHitAttribute), "-30"),
         (nameof(ToDamageAttribute), "7"),
-        (nameof(DexterityAttribute), "2"),
-        (nameof(CharismaAttribute), "2"),
+        (nameof(BonusDexterityAttribute), "2"),
+        (nameof(BonusCharismaAttribute), "2"),
     };
 }

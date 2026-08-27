@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class ElfRace : Race
 {
     private ElfRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(ElfRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(ElfRaceItemEnhancement)) 
+    };
     public override string Title => "Elf";
-    public override int UseDevice => 6;
-    public override int SavingThrow => 6;
-    public override int Stealth => 2;
-    public override int Search => 8;
     public override int BasePerception => 12;
     public override int MeleeToHit => -5;
     public override int RangedToHit => 15;
@@ -30,15 +28,5 @@ internal class ElfRace : Race
     /// Elf 7->8->9->54->55->56->End 
     /// </summary>
     public override int Chart => 7;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
-
-    public override void CalcBonuses()
-    {
-        Game.HasLightResistance = true;
-    }
+    protected override string GenerateNameSyllableSetBindingKey => nameof(ElvishSyllableSet);
 }

@@ -1,11 +1,9 @@
+
 namespace AngbandOS.Core.Scripts;
-internal class BanishMutationScript : UniversalScript, IGetKey
+internal class BanishMutationScript : ActiveMutationScript
 {
     private BanishMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "banish evil";
     public override void ExecuteScript()
     {
         if (!Game.GetDirectionNoAim(out int dir))
@@ -15,16 +13,16 @@ internal class BanishMutationScript : UniversalScript, IGetKey
         int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
         int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         GridTile cPtr = Game.Grid[y][x];
-        if (cPtr.MonsterIndex == 0)
+        if (cPtr.Monster is null)
         {
             Game.MsgPrint("You sense no evil there!");
             return;
         }
-        Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
+        Monster mPtr = cPtr.Monster;
         MonsterRace rPtr = mPtr.Race;
         if (rPtr.Evil)
         {
-            Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+            Game.DeleteMonster(cPtr.Monster);
             Game.MsgPrint("The evil creature vanishes in a puff of sulfurous smoke!");
         }
         else

@@ -29,7 +29,7 @@ internal sealed class SingletonRepository : IGameSerialize
         foreach (IGetKey singleton in _allSingletonsList)
         {
             string key = singleton.GetKey;
-            GameStateBag singletonGameStateBag = saveGameState.CreateDerivedGameStateBag(singleton);
+            GameStateBag singletonGameStateBag = saveGameState.CreateDerivedGameStateBag(singleton); // TODO: this should be converted to a list of derived types for every singleton
             result.Add(key, singletonGameStateBag);
         }
         return new DictionaryGameStateBag(result, false);
@@ -118,6 +118,25 @@ internal sealed class SingletonRepository : IGameSerialize
         }
         return (T)singleton;
     }
+
+    //public static (T1, T2, T3)[]? BindTuplesOrDefault<T1, T2, T3>((T1, T2, T3)[]? tuples, Func<(T1 Value1, T2 Value2, T3 Value3), T1> Value1, Func<(T1 Value1, T2 Value2, T3 Value3), T2> Value2, Func<(T1 Value1, T2 Value2, T3 Value3), T3> Value3)
+    //{
+    //    if (tuples is null)
+    //    {
+    //        return null;
+    //    }
+
+    //    List<(T1, T2, T3)> boundTupleList = new List<(T1, T2, T3)>();
+    //    foreach ((T1, T2, T3) tuple in tuples)
+    //    {
+    //        T1 t1Value = Value1(tuple);
+    //        T2 t2Value = Value2(tuple);
+    //        T3 t3Value = Value3(tuple);
+    //        (T1, T2, T3) boundTuple = (t1Value, t2Value, t3Value);
+    //        boundTupleList.Add(boundTuple);
+    //    }
+    //    return boundTupleList.ToArray();
+    //}
 
     /// <summary>
     /// Retrieves an API Object by its <paramref name="key"/> from the registered repository (see <see cref="RegisterIndex"/> for more information) of type <typeparamref name="T"/> and throws an exception if it isn't found.
@@ -209,6 +228,12 @@ internal sealed class SingletonRepository : IGameSerialize
         }
     }
 
+    /// <summary>
+    /// Returns the singleton at a specific zero-based index.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="index"></param>
+    /// <returns></returns>
     public T Get<T>(int index) where T : class // TODO: WHY CANT THIS BE where T: IGETKEY
     {
         string typeName = typeof(T).Name;
@@ -252,18 +277,18 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<IUsedScript>();
         RegisterIndex<IZapRodScript>();
 
-        // Base preload the Attributes and then cache them.
-        RegisterIndex<Attribute>();
-
         // Not configurable yet
         RegisterIndex<Ability>();
         RegisterIndex<ActivationWeightedRandom>();
+        RegisterIndex<ActiveMutationScript>();
         RegisterIndex<Alignment>();
         RegisterIndex<AlterAction>();
         RegisterIndex<ArtifactBias>();
         RegisterIndex<AttackEffect>();
+        RegisterIndex<Attribute>();
         RegisterIndex<CharacterClass>();
         RegisterIndex<BirthStage>();
+        RegisterIndex<EquipmentWieldSlot>();
         RegisterIndex<FixedArtifact>();
         RegisterIndex<FlaggedAction>();
         RegisterIndex<GridTileScript>();
@@ -276,7 +301,6 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<MartialArtsEffect>();
         RegisterIndex<MonsterEffect>();
         RegisterIndex<MonsterFilter>();
-        RegisterIndex<MonsterRace>(); 
         RegisterIndex<MonsterRaceFilter>();
         RegisterIndex<MonsterSelector>();
         RegisterIndex<MonsterSpell>();
@@ -288,10 +312,9 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<Reward>();
         RegisterIndex<RoomLayout>();
         RegisterIndex<SpellResistantDetection>();
-        RegisterIndex<Talent>();
         RegisterIndex<Timer>();
+        RegisterIndex<UniversalScript>();
         RegisterIndex<WieldSlot>();
-        RegisterIndex<EquipmentWieldSlot>();
         RegisterIndex<Widget>(); // View will be loading different types of widgets, so we need them registered to retrieval.
 
         // Load system singletons.
@@ -303,12 +326,12 @@ internal sealed class SingletonRepository : IGameSerialize
 #endif
 
         // Preload
-        LoadFromConfiguration<OrAttribute, OrAttributeGameConfiguration>(gameConfiguration.OrAttributes, restoreGameState);
-        LoadFromConfiguration<SumAttribute, SumAttributeGameConfiguration>(gameConfiguration.SumAttributes, restoreGameState);
-        LoadFromConfiguration<BoolAttribute, BoolAttributeGameConfiguration>(gameConfiguration.BoolAttributes, restoreGameState);
+        LoadFromConfiguration<BitwiseOrAttribute, BitwiseOrAttributeGameConfiguration>(gameConfiguration.OrAttributes, restoreGameState);
+        LoadFromConfiguration<SummationAttribute, SummationAttributeGameConfiguration>(gameConfiguration.SumAttributes, restoreGameState);
+        LoadFromConfiguration<ScriptsAttribute, ScriptsAttributeGameConfiguration>(gameConfiguration.ScriptsAttributes, restoreGameState);
 
-        // Now we need to cache the attributes, now that they are all loaded.
-        Game.CachedAttributes = Game.SingletonRepository.Get<Attribute>();
+        // We need to cache the attributes because other singleton require them to be available during the load phase.  We also sort them so that we can debug them easier.
+        Game.CachedAttributes = Game.SingletonRepository.Get<Attribute>().OrderBy(_attribute => _attribute.Key).ToArray();
 
         // Now load the user-configured singletons.  These singletons have been exported to the GamePack.
         LoadFromConfiguration<AbilityScoreScript, AbilityScoreScriptGameConfiguration>(gameConfiguration.AbilityScoreScripts, restoreGameState);
@@ -318,7 +341,7 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<Attack, AttackGameConfiguration>(gameConfiguration.Attacks, restoreGameState);
         LoadFromConfiguration<AttributeFilter, AttributeFilterGameConfiguration>(gameConfiguration.AttributeFilters, restoreGameState);
         LoadFromConfiguration<Conditional, ConditionalGameConfiguration>(gameConfiguration.ProductOfSumsBoolFunctions, restoreGameState);
-        LoadFromConfiguration<CharacterClassAbility, CharacterClassAbilityGameConfiguration>(gameConfiguration.CharacterClassAbilities, restoreGameState); // Composite singleton // Composite singleton
+        LoadFromConfiguration<InnateTotals, InnateTotalsGameConfiguration>(gameConfiguration.CharacterClassAndRaceInnateTotals, restoreGameState); // Composite singleton
         LoadFromConfiguration<CharacterClassSpell, CharacterClassSpellGameConfiguration>(gameConfiguration.ClassSpells, restoreGameState);
         LoadFromConfiguration<ChestTrap, ChestTrapGameConfiguration>(gameConfiguration.ChestTraps, restoreGameState);
         LoadFromConfiguration<ChestTrapCombination, ChestTrapCombinationGameConfiguration>(gameConfiguration.ChestTrapCombinations, restoreGameState);
@@ -360,7 +383,6 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<ProjectileMonsterSpell, ProjectileMonsterSpellGameConfiguration>(gameConfiguration.ProjectileMonsterSpells, restoreGameState);
         LoadFromConfiguration<ProjectileScript, ProjectileScriptGameConfiguration>(gameConfiguration.ProjectileScripts, restoreGameState);
         LoadFromConfiguration<ProjectileScriptWeightedRandom, ProjectileScriptWeightedRandomGameConfiguration>(gameConfiguration.ProjectileWeightedRandomScripts, restoreGameState);
-        LoadFromConfiguration<RaceAbility, RaceAbilityGameConfiguration>(gameConfiguration.RaceAbilities, restoreGameState); // Composite singleton
         LoadFromConfiguration<RaceGender, RaceGenderGameConfiguration>(gameConfiguration.RaceGenders, restoreGameState); // Composite singleton
         LoadFromConfiguration<RacePower, RacePowerGameConfiguration>(gameConfiguration.RacialPowers, restoreGameState); // Composite singleton
         LoadFromConfiguration<RacialPowerTest, RacialPowerTestGameConfiguration>(gameConfiguration.RacialPowerTests, restoreGameState);
@@ -394,15 +416,15 @@ internal sealed class SingletonRepository : IGameSerialize
         LoadFromConfiguration<View, ViewGameConfiguration>(gameConfiguration.Views, restoreGameState);
         LoadFromConfiguration<WizardCommand, WizardCommandGameConfiguration>(gameConfiguration.WizardCommands, restoreGameState);
 
-        //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
-        //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
+        // Sort the attribute and monster race repositories.
+        SortIndex<Attribute>(_attribute => _attribute.Key);
+        SortIndex<MonsterRace>(_monsterRace => _monsterRace.LevelFound);
 
-        // Monsters must be sorted by the LevelFound property; otherwise, the game doesn't work properly.
-        MonsterRace[] monsterRaces = Get<MonsterRace>();
-        MonsterRace[] sortedMonsterRaces = monsterRaces.OrderBy(_monsterRace => _monsterRace.LevelFound).ToArray();
-        _allGenericRepositoriesDictionary["MonsterRace"].List.Clear();
-        _allGenericRepositoriesDictionary["MonsterRace"].List.AddRange(sortedMonsterRaces);
+        // Register the unique sequential indexes.  These are the singletons that will be indexed by their index property.  These require an additional registration.
+        RegisterUniqueSequentialIndex<Attribute>();
+        RegisterUniqueSequentialIndex<MonsterRace>();
 
+        #region Binding Phase
         // Bind all of the singletons now.
         foreach (IGetKey singleton in _allSingletonsList)
         {
@@ -419,58 +441,80 @@ internal sealed class SingletonRepository : IGameSerialize
 
             // Allow the singleton to bind now.  Provide the restore game state, if we are restoring.
             singleton.Bind(singletonRestoreGameState);
+        }
+        #endregion
 
-            //// If we are restoring, perform a verification process.
-            //if (singletonRestoreGameState is not null)
-            //{
-            //    VerifyRestore(singletonRestoreGameState, singleton);
-            //}
+        #region Validation Phase
+        // Validate wizard commands are not duplicated.
+        char[] duplicateKeyChars = Get<WizardCommand>().GroupBy(_wizardCommand => _wizardCommand.KeyChar).Where(_group => _group.Count() > 1).Select(_group => _group.Key).ToArray();
+        if (duplicateKeyChars.Length > 0)
+        {
+            throw new Exception($"Duplicate key characters detected for multiple wizard commands: keystroke '{String.Join("', '", duplicateKeyChars)}'.");
         }
 
-        //foreach (FixedArtifact fixedArtifact in Get<FixedArtifact>())
-        //{
-        //    MappedItemEnhancement[] allMappedItemEnhancements = Game.SingletonRepository.Get<MappedItemEnhancement>(); // TODO: This is slow
-        //    MappedItemEnhancement[]? mappedItemEnhancements = allMappedItemEnhancements.Where(_mappedItemEnhancement => (_mappedItemEnhancement.FixedArtifactBindingKeys is not null && _mappedItemEnhancement.FixedArtifactBindingKeys.Contains(fixedArtifact.Key))).ToArray();
-        //    if (mappedItemEnhancements is not null)
-        //    {
-        //        bool done = false;
-        //        foreach (MappedItemEnhancement mappedItemEnhancement in mappedItemEnhancements)
-        //        {
-        //            if (mappedItemEnhancement.ItemEnhancements is not null)
-        //            {
-        //                foreach (IItemEnhancement iitemEnhancement in mappedItemEnhancement.ItemEnhancements)
-        //                {
-        //                    ItemEnhancement itemEnhancement = iitemEnhancement.GetItemEnhancement();
-        //                    if (iitemEnhancement.GetItemEnhancement().Color is not null)
-        //                    {
-        //                        string? prop1 = Game.CutProperty(@"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements\", itemEnhancement.GetKey, "public override ColorEnum");
-        //                        if (prop1 is null && itemEnhancement.Color is not null)
-        //                            throw new Exception();
-        //                        if (prop1 is not null)
-        //                            Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", fixedArtifact.Key, $"    public override ColorEnum Color => ColorEnum.{Enum.GetName<ColorEnum>(itemEnhancement.Color.Value)};");
-        //                        done = true;
-        //                        break;
-        //                    }
-        //                }
-        //            }
-        //            if (done)
-        //                break;
-
-        //        }
-        //    }
-        //}
+        ValidateMappedSpellScriptsLookupTable();
+        ValidateInnateTotalsLookupTable();
+        //ValidateJointTable<RaceAbility, Race, Ability>((Race t1, Ability t2) => RaceAbility.GetCompositeKey(t1, t2)); 
+        //ValidateJointTable<CharacterClassAbility, BaseCharacterClass, Ability>((BaseCharacterClass t1, Ability t2) => CharacterClassAbility.GetCompositeKey(t1, t2));
+        #endregion
     }
 
-    //private void VerifyRestore(RestoreGameState restoreGameState, object? singleton)
-    //{
-    //    string singletonTypeName = singleton?.GetType().Name ?? "null";
+    /// <summary>
+    /// Performs validation of the lookup table for the <see cref="MappedSpellScript"/> entities by performing a cartesian product of spells, their realms, character classes,
+    /// experience levels and a boolean success.
+    /// </summary>
+    /// <exception cref="Exception"></exception>
+    private void ValidateMappedSpellScriptsLookupTable()
+    {
+        // First we need a list of all realms and their spell books because not all spells apply to all realms.
+        (Realm Realm, Spell[] Spells)[] realmAndSpellsList = Game.SingletonRepository.Get<Realm>().Select(_realm => (_realm, _realm.SpellBooks.SelectMany(_spellBook => _spellBook.Spells).ToArray())).ToArray();
 
-    //    // Perform a verification of the restore process.
-    //    if (!restoreGameState.Verify(singleton))
-    //    {
-    //        throw new Exception($"During restore verification, the {singletonTypeName} singleton did not verify.");
-    //    }
-    //}
+        // Cross product/enumerate the spells and realms.
+        (Spell, Realm)[] allRealmsAndSpells = realmAndSpellsList.SelectMany(_realmAndSpells => _realmAndSpells.Spells.Select(_spell => (_spell, _realmAndSpells.Realm))).ToArray();
+
+        // Produce a list of experience levels to enumerate.  To do this we check all of the minimum and maximum experience levels denoted in the lookup table and then
+        // add the minimum level (1) and maximum level (Constants.PyMaxLevel).  Finally, we remove the null values and duplicates. 
+        int[] allExperienceLevels = Game.SingletonRepository.Get<MappedSpellScript>().OrderByDescending(_mappedSpellScript => _mappedSpellScript.Rank).ToArray()
+            .SelectMany(_mappedSpellScript => new int?[] { _mappedSpellScript.MinimumExperienceLevel, _mappedSpellScript.MaximumExperienceLevel })
+            .Concat(new int?[] { 1, Constants.PyMaxLevel })
+            .Where(_item => _item.HasValue)
+            .Select(_item => _item.GetValueOrDefault())
+            .Distinct()
+            .ToArray();
+
+        // Now produce a full test mappings list using the Cartesian product; unfortunately at this point, the spell and realms are still represented as a tuple--we will resolve that in a later step.
+        ((Spell, Realm), CharacterClass, int, bool)[] allMappingsWithEmbeddedTuple = CartesianProduct.Generate(allRealmsAndSpells, Game.SingletonRepository.Get<CharacterClass>(), allExperienceLevels, new bool[] { true, false }).ToArray();
+
+        // Now we need to cast the result as a single tuple.
+        (Spell, Realm, CharacterClass, int, bool)[] allMappingsAsTuples = allMappingsWithEmbeddedTuple.Select((((Spell spell, Realm realm) spellAndRealm, CharacterClass characterClass, int experienceLevel, bool success) _mapping) => (_mapping.spellAndRealm.spell, _mapping.spellAndRealm.realm, _mapping.characterClass, _mapping.experienceLevel, _mapping.success)).ToArray();
+
+        // Now we need to test the mappings.
+        foreach (((Spell spell, Realm realm), CharacterClass characterClass, int experienceLevel, bool success) in allMappingsWithEmbeddedTuple)
+        {
+            // We do not need the return value.
+            _ = Game.GetMappedSpellScript(spell, realm, characterClass, experienceLevel, success);
+        }
+    }
+
+    private void ValidateInnateTotalsLookupTable()
+    {
+        // Generate a cross reference of all character classes and races.
+        (CharacterClass, Race)[] characterClassesAndRaces = CartesianProduct.Generate(Game.SingletonRepository.Get<CharacterClass>(), Game.SingletonRepository.Get<Race>()).ToArray();
+
+        // Test the lookup table for exactly one result for every instance.
+        foreach ((CharacterClass characterClass, Race race) in characterClassesAndRaces)
+        {
+            // We do not need the return value.  The method call throws, if the innate totals were not found.
+            _ = Game.GetInnateTotals(characterClass, race);
+        }
+    }
+
+    private void SortIndex<T>(Func<T, object> keySelector) where T : class
+    {
+        string typeName = typeof(T).Name;
+        GenericRepository repository = _allGenericRepositoriesDictionary[typeName];
+        repository.Sort(keySelector);
+    }
 
     private void ValidateSystemScriptsEnum()
     {
@@ -485,7 +529,7 @@ internal sealed class SingletonRepository : IGameSerialize
         }
         if (missing.Count > 0)
         {
-            throw new Exception($"There is no corresponding system script for the {String.Join("\t", missing)} enum.  A system script that implements the {nameof(IGetKey)} is required to be loaded.");
+            throw new Exception($"There is no corresponding system script for the {String.Join(", ", missing)} enum(s).  A system script that implements the {nameof(IGetKey)} is required to be loaded.");
         }
     }
     private void ValidateJointTable<T, T1, T2>(Func<T1, T2, string> GetCompositeKey) where T : class where T1 : class where T2 : class // TODO: WHY CANT THIS BE where T: IGETKEY
@@ -505,8 +549,6 @@ internal sealed class SingletonRepository : IGameSerialize
     #region Privates
     private Game Game { get; }
     private Dictionary<string, GenericRepository> _allGenericRepositoriesDictionary { get; } = new Dictionary<string, GenericRepository>();
-    private List<GenericRepository> _indexedRepositories { get; } = new List<GenericRepository>();
-
 
     /// <summary>
     /// Returns a list of all singletons.  This is used to track all of the loaded singletons so that they can be bound quickly and only once.
@@ -514,39 +556,45 @@ internal sealed class SingletonRepository : IGameSerialize
     private List<IGetKey> _allSingletonsList = new List<IGetKey>();
 
     /// <summary>
-    /// Registers an additional index for singleton entities by an interface.  Persistence for the index is not enabled.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    private void RegisterIndex<T>()
-    {
-        RegisterIndex<T>(false);
-    }
-
-    private bool IsDirectlyAssignableFrom<TInterface>(Type type)
-    {
-        return type.GetInterfaces()
-            .Except(type.BaseType?.GetInterfaces() ?? Type.EmptyTypes)
-            .Contains(typeof(TInterface));
-    }
-
-    /// <summary>
     /// Registers a repository to build an index for a specific type of singletons specified by the <typeparamref name="T"/> type parameter.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <exception cref="Exception"></exception>
-    private void RegisterIndex<T>(bool enablePersistance = true)
+    private void RegisterIndex<T>()
+    {
+        string typeName = typeof(T).Name;
+        if (_allGenericRepositoriesDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
+        {
+            throw new Exception($"The {typeName} repository has already been registered.");
+        }
+        else
+        {
+            genericRepository = new GenericRepository();
+            _allGenericRepositoriesDictionary.Add(typeName, genericRepository);
+        }
+    }
+
+    /// <summary>
+    /// Registers a <see cref="IUniqueSequentialIndex"/> repository.  The repository is added to the list of indexed repositories and the index is registered for the <typeparamref name="T"/> type parameter.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="repository"></param>
+    private void RegisterUniqueSequentialIndex<T>() where T : IUniqueSequentialIndex
     {
         string typeName = typeof(T).Name;
         if (!_allGenericRepositoriesDictionary.TryGetValue(typeName, out GenericRepository? genericRepository))
         {
-            genericRepository = new GenericRepository(enablePersistance);
-
-            // Check to see if the singletons implements the IIndexedSingletons interface.  If it does, we need to add the repository to the list of indexed repositories so that the singletons can be indexed after they are loaded.
-            if (IsDirectlyAssignableFrom<IIndexedSingletons>(typeof(T)))
+            throw new Exception($"The {typeName} repository was not registered.");
+        }
+        T[] indexedSingletons = genericRepository.Get<T>();
+        for (int index = 0; index < indexedSingletons.Length; index++)
+        {
+            IUniqueSequentialIndex indexedSingleton = indexedSingletons[index];
+            if (indexedSingleton.Index != -1)
             {
-                _indexedRepositories.Add(genericRepository);
+                throw new Exception($"{nameof(IndexSingleton)} has detected an index overwrite condition.");
             }
-            _allGenericRepositoriesDictionary.Add(typeName, genericRepository);
+            indexedSingleton.Index = index;
         }
     }
 
@@ -599,17 +647,6 @@ internal sealed class SingletonRepository : IGameSerialize
                     throw new Exception($"The singleton key {key} has already been registered in the {typeName} repository and is conflicting with {existing.GetType().Name}.");
                 }
                 genericRepository.Add(key, singleton);
-
-                // Now that the singleton is added, we need to check to see if the singleton needs to be indexed.
-                if (IsDirectlyAssignableFrom<IIndexedSingletons>(interfaceType))
-                {
-                    IIndexedSingletons indexedSingleton = (IIndexedSingletons)singleton;
-                    if (indexedSingleton.Index != -1)
-                    {
-                        throw new Exception($"{nameof(IndexSingleton)} has detected an index overwrite condition.");
-                    }
-                    indexedSingleton.Index = genericRepository.GetIndex(singleton);
-                }
             }
         }
     }

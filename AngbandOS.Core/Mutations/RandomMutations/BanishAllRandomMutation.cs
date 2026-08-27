@@ -13,16 +13,9 @@ internal class BanishAllRandomMutation : Mutation
     public override string GainMessage => "You feel a terrifying power lurking behind you.";
     public override string HaveMessage => "You sometimes cause nearby creatures to vanish.";
     public override string LoseMessage => "You no longer feel a terrifying power lurking behind you.";
-
-    public override void ProcessWorld()
+    public override string Title => "Banish Creatures (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (base.Game.DieRoll(9000) != 1)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.MsgPrint("You suddenly feel almost lonely.");
-        Game.RunScript(nameof(TeleportAwayAll100ProjectileScript));
-        Game.MsgPrint(string.Empty);
-    }
+        (1, nameof(BanishAllRandomMutationItemEnhancement))
+    };
 }

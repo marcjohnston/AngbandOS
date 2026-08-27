@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Make a physical attack against each adjacent monster.
 /// </summary>
-[Serializable]
 public class WhirlwindActivation : ActivationGameConfiguration
 {
     

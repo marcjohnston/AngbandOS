@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Scare monsters with a 40+level strength.
 /// </summary>
-[Serializable]
 public class Terror40xEvery3xp10Activation : ActivationGameConfiguration
 {
 

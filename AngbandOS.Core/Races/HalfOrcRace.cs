@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class HalfOrcRace : Race
 {
     private HalfOrcRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(HalfOrcRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(HalfOrcRaceItemEnhancement)) 
+    };
     public override string Title => "Half Orc";
-    public override int UseDevice => -3;
-    public override int SavingThrow => -3;
-    public override int Stealth => -1;
-    public override int Search => 0;
     public override int BasePerception => 7;
     public override int MeleeToHit => 12;
     public override int RangedToHit => -5;
@@ -33,13 +31,7 @@ internal class HalfOrcRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 3 ? "remove fear        (racial, unusable until level 3)" : "remove fear        (racial, cost 5, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(OrcishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -48,10 +40,5 @@ internal class HalfOrcRace : Race
             return new string[] { "You can remove fear (cost 5)." };
         }
         return null;
-    }
-
-    public override void CalcBonuses()
-    {
-        Game.HasDarkResistance = true;
     }
 }

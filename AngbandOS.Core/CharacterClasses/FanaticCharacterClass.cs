@@ -9,24 +9,22 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class FanaticCharacterClass : CharacterClass
 {
     private FanaticCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(FanaticCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
+    {
+        (1, null, nameof(FanaticCharacterClassItemEnhancement)),
+        (30, null, nameof(FanaticCharacterClassLevel30ItemEnhancement)),
+        (40, null, nameof(FanaticCharacterClassLevel40ItemEnhancement)),
+    };
+
     public override int ID => 7;
     public override string Title => "Fanatic";
     public override int? InstantFearResistanceLevel => 40;
     public override int? InstantChaosResistanceLevel => 30;
-    public override bool ReceivesLevelRewards => true;
     public override bool HasPatron => true;
-    public override int UseDevice => 24;
-    public override int SavingThrow => 30;
-    public override int Stealth => 1;
-    public override int Search => 14;
     public override int BasePerception => 12;
     public override int MeleeToHit => 66;
     public override int RangedToHit => 40;
     public override int DisarmBonusPerLevel => 7;
-    public override int DeviceBonusPerLevel => 11;
-    public override int SaveBonusPerLevel => 10;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 35;
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 6;
@@ -67,26 +65,14 @@ internal class FanaticCharacterClass : CharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
+    protected override string SpellAbilityBindingKey => nameof(IntelligenceAbility);
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 4;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(ChaosArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(ChaosArtifactBias), 1) };
     public override int FromScrollWarriorArtifactBiasPercentageChance => 40;
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(80000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(ChaosRealm)
     };
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 29)
-        {
-            Game.HasChaosResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 39)
-        {
-            Game.HasFearResistance = true;
-        }
-    }
 }

@@ -17,8 +17,8 @@ internal class WhirlwindScript : Script, IActivateItemScript
             int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[direction];
             int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[direction];
             GridTile cPtr = Game.Grid[y][x];
-            Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
-            if (cPtr.MonsterIndex != 0 && (mPtr.IsVisible || Game.GridPassable(y, x)))
+            Monster mPtr = cPtr.Monster;
+            if (mPtr is not null && (mPtr.IsVisible || Game.GridPassable(y, x)))
             {
                 Game.PlayerAttackMonster(y, x);
             }

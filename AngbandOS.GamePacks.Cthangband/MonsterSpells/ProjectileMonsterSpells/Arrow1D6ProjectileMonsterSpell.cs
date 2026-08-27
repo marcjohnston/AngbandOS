@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Arrow1D6ProjectileMonsterSpell : ProjectileMonsterSpellGameConfiguration
 {
     public override (string, string) KnowledgeAction => ("may", "fire an arrow");

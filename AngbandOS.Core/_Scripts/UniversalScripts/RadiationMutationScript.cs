@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class RadiationMutationScript : UniversalScript, IGetKey
+internal class RadiationMutationScript : ActiveMutationScript
 {
     private RadiationMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "produce radiation";
     public override void ExecuteScript()
     {
         Game.MsgPrint("Radiation flows from your body!");

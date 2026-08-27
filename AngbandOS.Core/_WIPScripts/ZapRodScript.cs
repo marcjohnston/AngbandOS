@@ -76,22 +76,8 @@ internal class ZapRodScript : Script, IScript, ICastSpellScript, IGameCommandScr
         // Using a rod takes a whole turn
         Game.EnergyUse = 100;
         int itemLevel = item.LevelNormallyFound;
-        // Chance to successfully use it is skill (halved if confused) - rod level (capped at 50)
-        int chance = Game.SkillUseDevice;
-        if (Game.ConfusionTimer.Value != 0)
-        {
-            chance /= 2;
-        }
-        chance -= itemLevel > 50 ? 50 : itemLevel;
 
-        // There's always a small chance of success
-        if (chance < Constants.UseDevice && Game.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
-        {
-            chance = Constants.UseDevice;
-        }
-
-        // Do the actual check
-        if (chance < Constants.UseDevice || Game.DieRoll(chance) < Constants.UseDevice)
+        if (!Game.UseDeviceItemTest(itemLevel))
         {
             Game.MsgPrint("You failed to use the rod properly.");
             return;

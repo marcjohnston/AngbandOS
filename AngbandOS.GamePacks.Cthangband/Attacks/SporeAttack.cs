@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class SporeAttack : AttackGameConfiguration
 {
     public override string MonsterAction => "releases spores at {0}";

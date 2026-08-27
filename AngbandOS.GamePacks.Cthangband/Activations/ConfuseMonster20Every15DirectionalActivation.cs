@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Confuse an opponent.
 /// </summary>
-[Serializable]
 public class ConfuseMonster20Every15DirectionalActivation : ActivationGameConfiguration
 {
     

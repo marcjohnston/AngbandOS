@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class EatRockMutationScript : UniversalScript, IGetKey
+internal class EatRockMutationScript : ActiveMutationScript
 {
     private EatRockMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "eat rock";
     public override void ExecuteScript()
     {
         if (!Game.GetDirectionNoAim(out int dir))
@@ -25,7 +22,7 @@ internal class EatRockMutationScript : UniversalScript, IGetKey
             Game.MsgPrint("Ouch!  This wall is harder than your teeth!");
             return;
         }
-        if (cPtr.MonsterIndex != 0)
+        if (cPtr.Monster is not null)
         {
             Game.MsgPrint("There's something in the way!");
             return;

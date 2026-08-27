@@ -82,27 +82,21 @@ internal abstract class BirthStage : IGetKey, IGameSerialize
         Game.Screen.Print(ColorEnum.Blue, "Modifications", 28, 45);
         if (Game.CharacterClass is not null)
         {
-            int i = 0;
-            foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
-            {
-                string compositeKey = CharacterClassAbility.GetCompositeKey(Game.CharacterClass, ability);
-                CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
-                string characterClassAbilityBonus = characterClassAbility.Bonus.ToString("+0;-0;+0").PadLeft(3) ?? "   ";
-                Game.Screen.Print(ColorEnum.Brown, characterClassAbilityBonus, 22 + i, 20);
-                i++;
-            }
+            Game.Screen.Print(ColorEnum.Brown, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusStrengthAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 0, 20);
+            Game.Screen.Print(ColorEnum.Brown, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 1, 20);
+            Game.Screen.Print(ColorEnum.Brown, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusWisdomAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 2, 20);
+            Game.Screen.Print(ColorEnum.Brown, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusDexterityAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 3, 20);
+            Game.Screen.Print(ColorEnum.Brown, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 4, 20);
+            Game.Screen.Print(ColorEnum.Brown, Game.CharacterClass.AttributeSet.GetInt(nameof(BonusCharismaAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 5, 20);
         }
         if (Game.Race is not null)
         {
-            int i = 0;
-            foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
-            {
-                RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Game.Race, ability));
-                string raceAbilityBonus = raceAbility.Bonus.ToString("+0;-0;+0").PadLeft(3) ?? "   ";
-                Game.Screen.Print(ColorEnum.Brown, raceAbilityBonus, 22 + i, 14);
-                i++;
-            }
+            Game.Screen.Print(ColorEnum.Brown, Game.Race.AttributeSet.GetInt(nameof(BonusStrengthAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 0, 14);
+            Game.Screen.Print(ColorEnum.Brown, Game.Race.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 1, 14);
+            Game.Screen.Print(ColorEnum.Brown, Game.Race.AttributeSet.GetInt(nameof(BonusWisdomAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 2, 14);
+            Game.Screen.Print(ColorEnum.Brown, Game.Race.AttributeSet.GetInt(nameof(BonusDexterityAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 3, 14);
+            Game.Screen.Print(ColorEnum.Brown, Game.Race.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 4, 14);
+            Game.Screen.Print(ColorEnum.Brown, Game.Race.AttributeSet.GetInt(nameof(BonusCharismaAttribute)).ToString("+0;-0;+0").PadLeft(3), 22 + 5, 14);
          }
     }
-
 }

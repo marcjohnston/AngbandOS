@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Fire9d8ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override bool Stop => true;

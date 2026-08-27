@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband
 {
-    [Serializable]
     public class PaladinCharacterClassOutfitManifestGameConfiguration : OutfitManifestGameConfiguration
     {
         public override (string[], bool)? CharacterClassBindingKey => (new string[] { nameof(CharacterClassesEnum.PaladinCharacterClass) }, true);

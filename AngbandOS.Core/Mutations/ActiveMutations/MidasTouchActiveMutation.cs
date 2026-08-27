@@ -9,13 +9,8 @@ namespace AngbandOS.Core.Mutations.ActiveMutations;
 internal class MidasTouchActiveMutation : Mutation
 {
     private MidasTouchActiveMutation(Game game) : base(game) { }
-    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(AlchemyScript), 10, "5", nameof(IntelligenceAbility), 12);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 10 ? "midas touch      (unusable until level 10)" : "midas touch      (cost 5, INT based)";
-    }
-
+    protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(MidasTouchMutationScript), 10, "5", nameof(IntelligenceAbility), 12);
+    public override string Title => "Midas Touch (A)";
     public override int Frequency => 2;
     public override string GainMessage => "You gain the Midas touch.";
     public override string HaveMessage => "You can turn ordinary items to gold.";

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class PartialPlateHardArmorItemFactory : ItemFactoryGameConfiguration
 {
     public override (int, string)[]? MassProduceBindingTuples => new (int, string)[]

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class PoisonGasProjectile : ProjectileGameConfiguration
 {
     public override string? BoltProjectileGraphicBindingKey => nameof(GreenBulletProjectileGraphic);

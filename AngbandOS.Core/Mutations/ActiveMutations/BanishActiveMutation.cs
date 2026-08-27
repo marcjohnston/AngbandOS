@@ -10,14 +10,9 @@ internal class BanishActiveMutation : Mutation
 {
     private BanishActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(BanishMutationScript), 25, "25", nameof(WisdomAbility), 18);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 25 ? "banish evil      (unusable until level 25)" : "banish evil      (cost 25, WIS based)";
-    }
-
     public override int Frequency => 1;
     public override string GainMessage => "You feel a holy wrath fill you.";
     public override string HaveMessage => "You can send evil creatures directly to Hell.";
     public override string LoseMessage => "You no longer feel a holy wrath.";
+    public override string Title => "Banish (A)";
 }

@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class QuarterstaffFirestaffFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BrandFireAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
@@ -15,14 +14,14 @@ public class QuarterstaffFirestaffFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(ShowModsAttribute), "true"),
         (nameof(SlayAnimalAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "20"),
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(ValueAttribute), "70000"),
-        (nameof(IntelligenceAttribute), "3"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(BonusIntelligenceAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "'Firestaff'";
 }

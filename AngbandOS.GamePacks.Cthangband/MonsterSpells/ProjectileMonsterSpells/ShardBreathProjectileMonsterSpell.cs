@@ -7,7 +7,6 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
 
-[Serializable]
 public class ShardBreathProjectileMonsterSpell : ProjectileMonsterSpellGameConfiguration
 {
     public override (string, string) KnowledgeAction => ("may breathe", "produce shard balls");

@@ -1,21 +1,26 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
 public class KlackonRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
-        (nameof(CharismaAttribute), "-2"),
-        (nameof(ConstitutionAttribute), "2"),
-        (nameof(WisdomAttribute), "-1"),
-        (nameof(IntelligenceAttribute), "-1"),
-        (nameof(DexterityAttribute), "1"),
+        (nameof(ResConfAttribute), "true"),
+        (nameof(ResAcidAttribute), "true"),
+    };
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(SpeedAttribute), "X/10"),
+        (nameof(BonusCharismaAttribute), "-2"),
+        (nameof(BonusConstitutionAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "-1"),
+        (nameof(BonusIntelligenceAttribute), "-1"),
+        (nameof(BonusDexterityAttribute), "1"),
         (nameof(ValueAttribute), "2700"),
-        (nameof(InfravisionAttribute), "2"),
+        (nameof(InfraVisionAttribute), "2"),
         (nameof(DisarmTrapsAttribute), "10"),
-        (nameof(UseDeviceAttribute), "5"),
         (nameof(SavingThrowAttribute), "5"),
         (nameof(StealthAttribute), "0"),
-        (nameof(SearchAttribute), "-1"),
-        (nameof(StrengthAttribute), "2"),
+        (nameof(SearchAttribute), "-5"),
+        (nameof(BonusStrengthAttribute), "2"),
+        (nameof(UseDeviceAttribute), "5"),
     };
 }

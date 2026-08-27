@@ -12,7 +12,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Represents a widget that renders the experience points that are needed for the player to gain the next level in a highlight color because they are higher than 
 /// the experience points that the player has gained.
 /// </summary>
-[Serializable]
 public class ExperiencePointsForNextLevelLostIntWidget : IntWidgetGameConfiguration
 {
     public override int X => 4;

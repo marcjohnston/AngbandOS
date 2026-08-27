@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class PlusSignSymbol : SymbolGameConfiguration
 {
     public override char Character => '+';

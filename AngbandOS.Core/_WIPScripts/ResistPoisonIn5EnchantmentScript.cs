@@ -23,7 +23,7 @@ internal class ResistPoisonIn5EnchantmentScript : Script, IEnhancementScript
     {
         if (Game.DieRoll(5) == 1)
         {
-            item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
+            item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
         }
     }
 }

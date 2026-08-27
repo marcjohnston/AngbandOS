@@ -10,7 +10,7 @@ internal class WaterMonsterEffect : MonsterEffect
 {
     private WaterMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         bool obvious = false;
         string? note = null;
@@ -36,7 +36,7 @@ internal class WaterMonsterEffect : MonsterEffect
                 rPtr.Knowledge.Characteristics.ResistWater = true;
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
+        ApplyProjectileDamageToMonster(mPtr, dam, note, null, 0);
         return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

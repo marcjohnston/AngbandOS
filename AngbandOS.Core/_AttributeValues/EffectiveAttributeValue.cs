@@ -19,7 +19,7 @@ internal abstract class EffectiveAttributeValue : AttributeValue
     public override DictionaryGameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
-            (nameof(Attribute), saveGameState.CreateDerivedGameStateBag(Attribute, false)) //, typeof(ActivationAttribute), typeof(ArtifactBiasAttribute), typeof(FriendlyNameAttribute), typeof(BoolAttribute), typeof(OrAttribute), typeof(SumAttribute)))
+            (nameof(Attribute), saveGameState.CreateDerivedGameStateBag(Attribute, false)) // Attributes must already exist, they cannot be constructed.
         );
     }
     public EffectiveAttributeValue(Game game, Attribute attribute)
@@ -33,7 +33,7 @@ internal abstract class EffectiveAttributeValue : AttributeValue
         Attribute = restoreGameState.GetByKey(nameof(Attribute)).GetDerivedReference<Attribute>();
     }
 
-    public abstract string RenderForItemIdentification { get; }
+    public abstract string[] RenderForItemIdentification { get; }
     public abstract EffectiveAttributeValue Clone();
 
     public abstract ReadOnlyAttributeValue ToReadOnly();

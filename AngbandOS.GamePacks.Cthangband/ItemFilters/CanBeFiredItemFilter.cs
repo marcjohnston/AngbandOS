@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for items that can be fired, regardless of their value.
 /// </summary>
-[Serializable]
 public class CanBeFiredItemFilter : ItemFilterGameConfiguration
 {
 

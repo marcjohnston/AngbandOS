@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class GolemRaceRacialPowerConditionalScript : ConditionalScriptGameConfiguration
 {
     public override string ConditionalKey => nameof(GolemRaceRacialPowerConditional);

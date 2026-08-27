@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class PoisonResetTimerScript : TimerScriptGameConfiguration
 {
     public override string TimerBindingKey => nameof(TimersEnum.PoisoningTimer);

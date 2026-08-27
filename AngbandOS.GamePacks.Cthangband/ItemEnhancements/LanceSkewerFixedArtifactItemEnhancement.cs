@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LanceSkewerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -16,7 +15,7 @@ public class LanceSkewerFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(SlayOrcAttribute), "true"),
         (nameof(SlayTrollAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "21"),
@@ -24,7 +23,7 @@ public class LanceSkewerFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "55000"),
         (nameof(WeightAttribute), "60"),
-        (nameof(DexterityAttribute), "2"),
+        (nameof(BonusDexterityAttribute), "2"),
     };
     public override string FriendlyName => "'Skewer'";
 }

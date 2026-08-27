@@ -7,7 +7,7 @@
 
 //namespace AngbandOS
 //{
-//    internal class HighScoreTable // TODO: Reconnect back to the splash screen
+//internal class HighScoreTable // TODO: Reconnect back to the splash screen
 //    {
 //        public int ClassFilter = -1;
 //        public int RaceFilter = -1;

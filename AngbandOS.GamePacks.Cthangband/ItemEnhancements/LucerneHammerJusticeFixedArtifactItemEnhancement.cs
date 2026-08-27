@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(BrandColdAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -21,16 +16,16 @@ public class LucerneHammerJusticeFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(ShowModsAttribute), "true"),
         (nameof(SlayOrcAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(InfravisionAttribute), "4"),
+        (nameof(InfraVisionAttribute), "4"),
         (nameof(ToDamageAttribute), "6"),
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(AttacksAttribute), "8"),
         (nameof(ValueAttribute), "30000"),
-        (nameof(WisdomAttribute), "4"),
+        (nameof(BonusWisdomAttribute), "4"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.DrainLife90Every70DirectionalActivation);
     public override string FriendlyName => "'Justice'";

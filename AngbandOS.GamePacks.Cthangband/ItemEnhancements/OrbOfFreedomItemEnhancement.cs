@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class OrbOfFreedomItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(FreeActAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -11,7 +10,7 @@ public class OrbOfFreedomItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "1000"),
     };

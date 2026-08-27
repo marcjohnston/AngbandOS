@@ -11,14 +11,9 @@ internal class UpdateMonstersFlaggedAction : FlaggedAction
     private UpdateMonstersFlaggedAction(Game game) : base(game) { }
     protected override void Execute()
     {
-        for (int i = 1; i < Game.MonsterMax; i++)
+        foreach (Monster mPtr in Game.MonsterList)
         {
-            Monster mPtr = Game.Monsters[i];
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
-            Game.UpdateMonsterVisibility(i, false);
+            Game.UpdateMonsterVisibility(mPtr, false);
         }
     }
 }

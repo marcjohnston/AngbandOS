@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(BlessedAttribute), "true"),
         (nameof(BrandColdAttribute), "true"),
         (nameof(FreeActAttribute), "true"),
@@ -33,7 +28,7 @@ public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(SustConAttribute), "true"),
         (nameof(SustStrAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "12"),
@@ -41,9 +36,9 @@ public class SabreOfXuraFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "125000"),
         (nameof(SlayDragonAttribute), "3"),
-        (nameof(DexterityAttribute), "4"),
-        (nameof(ConstitutionAttribute), "4"),
-        (nameof(StrengthAttribute), "4"),
+        (nameof(BonusDexterityAttribute), "4"),
+        (nameof(BonusConstitutionAttribute), "4"),
+        (nameof(BonusStrengthAttribute), "4"),
     };
     public override string FriendlyName => "of Xura";
 }

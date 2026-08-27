@@ -4,20 +4,13 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-
 namespace AngbandOS.Core.Mutations.ActiveMutations;
 
 internal class ColdTouchActiveMutation : Mutation
 {
     private ColdTouchActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(ColdTouchMutationScript), 2, "2", nameof(ConstitutionAbility), 11);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 2 ? "cold touch       (unusable until level 2)" : "cold touch       (cost 2, CON based)";
-    }
-
+    public override string Title => "Cold Touch (A)";
     public override int Frequency => 2;
     public override string GainMessage => "Your hands get very cold.";
     public override string HaveMessage => "You can freeze things with a touch.";

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Activate sleep on touch.
 /// </summary>
-[Serializable]
 public class SleepActivation : ActivationGameConfiguration
 {
     

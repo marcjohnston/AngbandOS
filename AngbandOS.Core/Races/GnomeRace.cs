@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class GnomeRace : Race
 {
     private GnomeRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(GnomeRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(GnomeRaceItemEnhancement)) 
+    };
     public override string Title => "Gnome";
-    public override int UseDevice => 12;
-    public override int SavingThrow => 12;
-    public override int Stealth => 3;
-    public override int Search => 6;
     public override int BasePerception => 13;
     public override int MeleeToHit => -8;
     public override int RangedToHit => 12;
@@ -33,13 +31,7 @@ internal class GnomeRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 5 ? "teleport           (racial, unusable until level 5)" : "teleport           (racial, cost 5 + lvl/5, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.FreeAct = true;
-    }
-    protected override string GenerateNameSyllableSetName => nameof(GnomishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(GnomishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -48,10 +40,5 @@ internal class GnomeRace : Race
             return new string[] { $"You can teleport, range {1 + level} (cost {5 + (level / 5)})." };
         }
         return null;
-    }
-
-    public override void CalcBonuses()
-    {
-        Game.HasFreeAction = true;
     }
 }

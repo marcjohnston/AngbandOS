@@ -13,14 +13,8 @@ internal class ResilientPassiveMutation : Mutation
     public override string GainMessage => "You become extraordinarily resilient.";
     public override string HaveMessage => "You are very resilient (+4 CON).";
     public override string LoseMessage => "You become ordinarily resilient again.";
-
-    public override void OnGain()
-    {
-        Game.ConstitutionBonus += 4;
-    }
-
-    public override void OnLose()
-    {
-        Game.ConstitutionBonus -= 4;
-    }
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(ResilientPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Resilient (P)";
 }

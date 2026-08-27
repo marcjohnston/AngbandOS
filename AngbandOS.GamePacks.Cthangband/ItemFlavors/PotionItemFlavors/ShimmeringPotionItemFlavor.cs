@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ShimmeringPotionItemFlavor : ItemFlavorGameConfiguration
 {
     public override string SymbolName => nameof(ExclamationPointSymbol);

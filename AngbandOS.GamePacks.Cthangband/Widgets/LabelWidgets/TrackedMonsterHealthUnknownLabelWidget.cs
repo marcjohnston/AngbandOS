@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Represents a widget that displays an unknown status for the tracked monster health.  This widget is rendered when the tracked monster is invisible or dead or when the
 /// player is hallucinating.
 /// </summary>
-[Serializable]
 public class TrackedMonsterHealthUnknownLabelWidget : LabelWidgetGameConfiguration
 {
     public override int X => 0;

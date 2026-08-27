@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class DraconianRaceMissileOrExpolodeCharacterClassRacialPowerConditionalScript : ConditionalScriptGameConfiguration
 {
     public override string ConditionalKey => nameof(DraconianRaceMissileOrExpolodeCharacterClassRacialPowerConditional);

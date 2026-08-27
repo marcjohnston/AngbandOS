@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class GoldenStaffItemFlavor : ItemFlavorGameConfiguration
 {
     public override string SymbolName => nameof(UnderscoreSymbol);

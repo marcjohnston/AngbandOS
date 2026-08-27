@@ -10,12 +10,7 @@ internal class GrowMoldActiveMutation : Mutation
 {
     private GrowMoldActiveMutation(Game game) : base(game) { }
     protected override (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding => (nameof(GrowMoldMutationScript), 1, "6", nameof(ConstitutionAbility), 14);
-
-    public override string ActivationSummary(int lvl)
-    {
-        return lvl < 1 ? "grow mold        (unusable until level 1)" : "grow mold        (cost 6, CON based)";
-    }
-
+    public override string Title => "Grow Mold (A)";
     public override int Frequency => 1;
     public override string GainMessage => "You feel a sudden affinity for mold.";
     public override string HaveMessage => "You can cause mold to grow near you.";

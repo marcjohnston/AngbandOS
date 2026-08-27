@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class DazzleMutationScript : UniversalScript, IGetKey
+internal class DazzleMutationScript : ActiveMutationScript
 {
     private DazzleMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "dazzle";
     public override void ExecuteScript()
     {
         Game.RunScript(nameof(StunAtLos1xProjectileScript));

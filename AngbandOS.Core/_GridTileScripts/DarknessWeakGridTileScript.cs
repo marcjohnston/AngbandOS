@@ -20,9 +20,9 @@ internal class DarknessWeakGridTileScript : GridTileScript
             Game.NoteSpot(y, x);
         }
         Game.ConsoleView.RefreshMapLocation(y, x);
-        if (cPtr.MonsterIndex != 0)
+        if (cPtr.Monster is not null)
         {
-            Game.UpdateMonsterVisibility(cPtr.MonsterIndex, false);
+            Game.UpdateMonsterVisibility(cPtr.Monster, false);
         }
         return (isNoticed, DestroysContentsEnum.False);
     }

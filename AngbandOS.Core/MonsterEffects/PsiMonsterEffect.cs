@@ -15,7 +15,7 @@ internal class PsiMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => nameof(EmptyMindMonsterFilter);
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         int tmp;
         MonsterRace rPtr = mPtr.Race;
@@ -140,7 +140,7 @@ internal class PsiMonsterEffect : MonsterEffect
             }
             mPtr.ConfusionLevel = tmp < 200 ? tmp : 200;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, doFear);
+        ApplyProjectileDamageToMonster(mPtr, dam, note, noteDies, doFear);
 
         // Put the monster to sleep, if not dead.
         if (mPtr.Health >= 0 && doSleep != 0)

@@ -1,10 +1,11 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
+        (nameof(HeavyCurseAttribute), "true"),
+        (nameof(IsCursedAttribute), "true"),
         (nameof(AggravateAttribute), "true"),
         (nameof(DreadCurseAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
@@ -24,19 +25,14 @@ public class SetOfGauntletsOfThanosFixedArtifactItemEnhancement : ItemEnhancemen
         (nameof(ShowModsAttribute), "true"),
         (nameof(TeleportAttribute), "true"),
     };
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
-        (nameof(HeavyCurseAttribute), "true"),
-        (nameof(IsCursedAttribute), "true"),
-    };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(ToDamageAttribute), "-12"),
         (nameof(MeleeToHitAttribute), "-11"),
         (nameof(ValueAttribute), "40000"),
-        (nameof(DexterityAttribute), "2"),
-        (nameof(StrengthAttribute), "2"),
+        (nameof(BonusDexterityAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "2"),
     };
     public override string FriendlyName => "of Thanos";
 }

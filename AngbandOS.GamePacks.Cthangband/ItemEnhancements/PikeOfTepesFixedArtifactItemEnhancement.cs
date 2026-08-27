@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BrandColdAttribute), "true"),
         (nameof(BrandFireAttribute), "true"),
@@ -21,15 +20,15 @@ public class PikeOfTepesFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(SlowDigestAttribute), "true"),
         (nameof(SustIntAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(ToDamageAttribute), "12"),
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(AttacksAttribute), "10"),
         (nameof(ValueAttribute), "32000"),
-        (nameof(IntelligenceAttribute), "2"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(BonusIntelligenceAttribute), "2"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Tepes";
 }

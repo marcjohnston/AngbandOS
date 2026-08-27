@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class IronHelmItemFactory : ItemFactoryGameConfiguration
 {
     public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.IronHelmSkullkeeperFixedArtifact), nameof(FixedArtifactsEnum.IronHelmTerrorMaskFixedArtifact) };

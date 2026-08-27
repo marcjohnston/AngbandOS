@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HoldLifeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -21,15 +20,15 @@ public class MithrilChainMailOfTheVampireHunterFixedArtifactItemEnhancement : It
         (nameof(SeeInvisAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.Heal777CuringAndHeroism25pd25Every300Activation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(MeleeToHitAttribute), "-1"),
         (nameof(AttacksAttribute), "20"),
         (nameof(ValueAttribute), "135000"),
-        (nameof(WisdomAttribute), "4"),
+        (nameof(BonusWisdomAttribute), "4"),
         (nameof(StealthAttribute), "4"),
-        (nameof(IntelligenceAttribute), "4"),
+        (nameof(BonusIntelligenceAttribute), "4"),
     };
     public override string FriendlyName => "of the Vampire Hunter";
 }

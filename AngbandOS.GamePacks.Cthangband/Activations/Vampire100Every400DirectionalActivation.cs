@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Drain 100 health from an opponent, and give it to the player.
 /// </summary>
-[Serializable]
 public class Vampire100Every400DirectionalActivation : ActivationGameConfiguration
 {
     

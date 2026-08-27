@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class HumanRace : Race
 {
     private HumanRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(HumanRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(HumanRaceItemEnhancement)) 
+    };
     public override string Title => "Human";
-    public override int UseDevice => 0;
-    public override int SavingThrow => 0;
-    public override int Stealth => 0;
-    public override int Search => 0;
     public override int BasePerception => 10;
     public override int MeleeToHit => 0;
     public override int RangedToHit => 0;
@@ -30,5 +28,5 @@ internal class HumanRace : Race
     /// Human 1->2->3->50->51->52->53->End
     /// </summary>
     public override int Chart => 1;
-    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(HumanSyllableSet);
 }

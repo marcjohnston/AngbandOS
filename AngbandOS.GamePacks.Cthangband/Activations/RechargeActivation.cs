@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Recharge an item.
 /// </summary>
-[Serializable]
 public class RechargeActivation : ActivationGameConfiguration
 {
     

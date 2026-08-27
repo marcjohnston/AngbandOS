@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot a magic missile that does 2d6 damage
 /// </summary>
-[Serializable]
 public class MagicMissile2d6Every2DirectionalActivation : ActivationGameConfiguration
 {
     

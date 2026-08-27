@@ -48,7 +48,7 @@ internal class OpenScript : GameCommandUniversalScript, IGetKey
                 Game.MsgPrint("You see nothing there to open.");
             }
             // Can't open something if there's a monster in the way
-            else if (tile.MonsterIndex != 0)
+            else if (tile.Monster is not null)
             {
                 Game.EnergyUse = 100;
                 Game.MsgPrint("There is a monster in the way!");

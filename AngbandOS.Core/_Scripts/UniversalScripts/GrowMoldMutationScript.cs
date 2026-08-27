@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class GrowMoldMutationScript : UniversalScript, IGetKey
+internal class GrowMoldMutationScript : ActiveMutationScript
 {
     private GrowMoldMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "grow mold";
     public override void ExecuteScript()
     {
         for (int i = 0; i < 8; i++)

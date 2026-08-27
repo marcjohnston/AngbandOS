@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Take off an item
 /// </summary>
-[Serializable]
 public class TakeOffStoreCommand : StoreCommandGameConfiguration
 {
     public override char KeyChar => 't';

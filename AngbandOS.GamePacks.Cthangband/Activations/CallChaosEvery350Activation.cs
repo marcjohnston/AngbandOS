@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Activate the Call Chaos spell.
 /// </summary>
-[Serializable]
 public class CallChaosEvery350Activation : ActivationGameConfiguration
 {
     

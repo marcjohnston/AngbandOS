@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class FireBall75PXR2ProjectileScript : ProjectileScriptGameConfiguration
 {
     public override string DamageRollExpression => "75+X";

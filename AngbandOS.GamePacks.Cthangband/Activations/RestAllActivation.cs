@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Restore all ability drain and lost experience.
 /// </summary>
-[Serializable]
 public class RestAllActivation : ActivationGameConfiguration
 {
     

@@ -10,7 +10,7 @@ internal class ChaosMonsterEffect : MonsterEffect
 {
     private ChaosMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         GridTile cPtr = Game.Grid[mPtr.MapY][mPtr.MapX];
         MonsterRace rPtr = mPtr.Race;
@@ -48,10 +48,10 @@ internal class ChaosMonsterEffect : MonsterEffect
             {
                 note = " changes!";
                 dam = 0;
-                Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                Game.DeleteMonster(cPtr.Monster);
                 MonsterRace race = Game.SingletonRepository.Get<MonsterRace>(tmp);
-                Game.PlaceMonsterAux(mPtr.MapY, mPtr.MapX, race, false, false, charm);
-                mPtr = Game.Monsters[cPtr.MonsterIndex];
+                Game.PlaceOneMonsterByRace(mPtr.MapY, mPtr.MapX, race, false, charm, false);
+                mPtr = cPtr.Monster;
             }
         }
         else if (doConf != 0 && !rPtr.ImmuneConfusion && !rPtr.CanBreatheConfusion && !rPtr.CanBreatheChaos)
@@ -69,7 +69,7 @@ internal class ChaosMonsterEffect : MonsterEffect
             }
             mPtr.ConfusionLevel = tmp < 200 ? tmp : 200;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
+        ApplyProjectileDamageToMonster(mPtr, dam, note, null, 0);
         return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

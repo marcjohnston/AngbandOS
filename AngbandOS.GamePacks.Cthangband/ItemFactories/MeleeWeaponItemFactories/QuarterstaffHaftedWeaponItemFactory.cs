@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class QuarterstaffHaftedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.QuarterstaffEririlFixedArtifact), nameof(FixedArtifactsEnum.QuarterstaffFirestaffFixedArtifact), nameof(FixedArtifactsEnum.QuarterstaffOfAtalFixedArtifact) };

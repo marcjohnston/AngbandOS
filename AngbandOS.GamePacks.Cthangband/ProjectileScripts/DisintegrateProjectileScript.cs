@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class DisintegrateProjectileScript : ProjectileScriptGameConfiguration
 {
     public override string RadiusRollExpression => "3+X/40";

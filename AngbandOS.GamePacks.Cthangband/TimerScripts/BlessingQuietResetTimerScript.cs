@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BlessingQuietResetTimerScript : TimerScriptGameConfiguration
 {
     public override string? ValueExpression => null;

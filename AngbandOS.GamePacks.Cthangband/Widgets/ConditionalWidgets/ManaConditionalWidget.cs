@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Represents a widget that renders the mana label, the current max ranged value widget, the max mana label and the max mana value widgets, if the player has chosen a 
 /// character that uses mana.
 /// </summary>
-[Serializable]
 public class ManaConditionalWidget : ConditionalWidgetGameConfiguration
 {
     public override string ConditionalKey => nameof(ManaConditional);

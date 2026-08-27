@@ -10,17 +10,11 @@ internal class InfravisPassiveMutation : Mutation
 {
     private InfravisPassiveMutation(Game game) : base(game) { }
     public override int Frequency => 3;
-    public override string GainMessage => "Your infravision is improved.";
-    public override string HaveMessage => "You have remarkable infravision (+3).";
-    public override string LoseMessage => "Your infravision is degraded.";
-
-    public override void OnGain()
-    {
-        Game.MutationInfravisionBonus += 3;
-    }
-
-    public override void OnLose()
-    {
-        Game.MutationInfravisionBonus -= 3;
-    }
+    public override string GainMessage => "Your infra-vision is improved.";
+    public override string HaveMessage => "You have remarkable infra-vision (+3).";
+    public override string LoseMessage => "Your infra-vision is degraded.";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(InfravisPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Infra-vision (P)";
 }

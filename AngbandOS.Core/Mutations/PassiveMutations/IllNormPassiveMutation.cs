@@ -13,14 +13,10 @@ internal class IllNormPassiveMutation : Mutation
     public override string GainMessage => "You start projecting a reassuring image.";
     public override string HaveMessage => "Your appearance is masked with illusion.";
     public override string LoseMessage => "You stop projecting a reassuring image.";
-
-    public override void OnGain()
-    {
-        Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Override = true;
-    }
-
-    public override void OnLose()
-    {
-        Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)).Override = false;
-    }
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] 
+    { 
+        (1, nameof(IllNormPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Masked Illusion (P)";
+    public override bool RegenerateOnlyOnGain => false;
 }

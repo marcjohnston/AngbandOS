@@ -82,6 +82,11 @@ internal class ConsoleTable : ConsoleElement
 
     public int TopRow = 0;
 
+    public void AddColumn(string columnName)
+    {
+        columns.Add(columnName, new ConsoleTableColumn(columnName));
+    }
+
     public override void Render(Game game, ConsoleWindow containerWindow, ConsoleAlignment parentAlignment)
     {
         ConsoleAlignment alignment = Alignment ?? parentAlignment;
@@ -132,7 +137,7 @@ internal class ConsoleTable : ConsoleElement
     {
         foreach (string columnName in columnNames)
         {
-            columns.Add(columnName, new ConsoleTableColumn(columnName));
+            AddColumn(columnName);
         }
     }
 }

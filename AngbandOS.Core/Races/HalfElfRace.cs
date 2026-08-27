@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class HalfElfRace : Race
 {
     private HalfElfRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(HalfElfRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(HalfElfRaceItemEnhancement)) 
+    };
     public override string Title => "Half Elf";
-    public override int UseDevice => 3;
-    public override int SavingThrow => 3;
-    public override int Stealth => 1;
-    public override int Search => 6;
     public override int BasePerception => 11;
     public override int MeleeToHit => -1;
     public override int RangedToHit => 5;
@@ -30,15 +28,5 @@ internal class HalfElfRace : Race
     /// Half-Elf 4->1->2->3->50->51->52->53->End
     /// </summary>
     public override int Chart => 4;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResLightAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
-    public override void CalcBonuses()
-    {
-        Game.HasLightResistance = true;
-    }
+    protected override string GenerateNameSyllableSetBindingKey => nameof(ElvishSyllableSet);
 }

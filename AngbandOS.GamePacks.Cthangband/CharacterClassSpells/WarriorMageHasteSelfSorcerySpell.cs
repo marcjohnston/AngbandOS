@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class WarriorMageHasteSelfSorcerySpell : CharacterClassSpellGameConfiguration
 {
     public override string SpellName => nameof(SpellsEnum.HasteSelfSorcerySpell);

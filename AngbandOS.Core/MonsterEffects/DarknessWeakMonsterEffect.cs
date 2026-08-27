@@ -10,9 +10,9 @@ internal class DarknessWeakMonsterEffect : MonsterEffect
 {
     private DarknessWeakMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
-        ApplyProjectileDamageToMonster(who, mPtr, dam, null, null, 0);
+        ApplyProjectileDamageToMonster(mPtr, dam, null, null, 0);
         return IdentifiedResultEnum.False;
     }
 }

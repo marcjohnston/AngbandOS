@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class NumberTwoSymbol : SymbolGameConfiguration
 {
     public override char Character => '2';

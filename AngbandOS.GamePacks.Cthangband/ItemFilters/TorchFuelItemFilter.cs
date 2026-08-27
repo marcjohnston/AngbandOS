@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for items that can be used as fuel for torches, regardless of their value.
 /// </summary>
-[Serializable]
 public class TorchFuelItemFilter : ItemFilterGameConfiguration
 {
     public override string[]? AnyMatchingItemFactoryNames => new string[] { nameof(WoodenTorchLightSourceItemFactory) };

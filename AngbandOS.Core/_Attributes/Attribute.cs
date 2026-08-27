@@ -6,7 +6,7 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal abstract class Attribute : IGetKey, IIndexedSingletons, IGameSerialize
+internal abstract class Attribute : IGetKey, IUniqueSequentialIndex, IGameSerialize
 {
     protected Attribute(Game game) // This object is a singleton
     {
@@ -36,6 +36,6 @@ internal abstract class Attribute : IGetKey, IIndexedSingletons, IGameSerialize
 
     public override string ToString()
     {
-        return $"Or: Key: {Key} Index: {Index}";
+        return $"Key: {Key} Index: {Index}";
     }
 }

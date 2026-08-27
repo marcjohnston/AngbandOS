@@ -13,12 +13,9 @@ internal class WalkShadRandomMutation : Mutation
     public override string GainMessage => "You feel like reality is as thin as paper.";
     public override string HaveMessage => "You occasionally stumble into other shadows.";
     public override string LoseMessage => "You feel like you're trapped in reality.";
-
-    public override void ProcessWorld()
+    public override string Title => "Shadows (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (!Game.HasAntiMagic && base.Game.DieRoll(12000) == 1)
-        {
-            Game.AlterReality();
-        }
-    }
+        (1, nameof(WalkShadRandomMutationItemEnhancement))
+    };
 }

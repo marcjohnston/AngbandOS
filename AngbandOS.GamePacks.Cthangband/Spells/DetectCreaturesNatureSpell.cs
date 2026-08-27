@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class DetectCreaturesNatureSpell : SpellGameConfiguration
 {
     public override string Name => "Detect Creatures";

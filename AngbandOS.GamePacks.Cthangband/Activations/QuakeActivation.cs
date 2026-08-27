@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Cause an earthquake around the player.
 /// </summary>
-[Serializable]
 public class QuakeActivation : ActivationGameConfiguration
 {
     

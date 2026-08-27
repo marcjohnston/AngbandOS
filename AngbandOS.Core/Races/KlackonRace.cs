@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class KlackonRace : Race
 {
     private KlackonRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(KlackonRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(KlackonRaceItemEnhancement)) 
+    };
     public override string Title => "Klackon";
-    public override int UseDevice => 5;
-    public override int SavingThrow => 5;
-    public override int Stealth => 0;
-    public override int Search => -1;
     public override int BasePerception => 10;
     public override int MeleeToHit => 5;
     public override int RangedToHit => 5;
@@ -33,17 +31,7 @@ internal class KlackonRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 9 ? "spit acid          (racial, unusable until level 9)" : "spit acid          (racial, cost 9, dam lvl, DEX based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        if (level > 9)
-        {
-            itemCharacteristics.Speed++;
-        }
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResConfAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(KlackonSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(KlackonSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 8)
@@ -51,11 +39,5 @@ internal class KlackonRace : Race
             return new string[] { $"You can spit acid, dam. {level} (cost 9)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasConfusionResistance = true;
-        Game.HasAcidResistance = true;
-        Game.Speed.IntValue += Game.ExperienceLevel.IntValue / 10;
     }
 }

@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a widget that renders the players maximum mana value.
 /// </summary>
-[Serializable]
 public class MaxManaIntWidget : IntWidgetGameConfiguration
 {
     public override int X => 7;

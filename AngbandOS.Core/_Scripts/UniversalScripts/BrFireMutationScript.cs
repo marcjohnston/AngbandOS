@@ -1,11 +1,9 @@
 namespace AngbandOS.Core.Scripts;
-internal class BrFireMutationScript : UniversalScript, IGetKey
+internal class BrFireMutationScript : ActiveMutationScript
 {
     private BrFireMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "fire breath";
+    protected override string? DamageExpressionText => "2*X";
     public override void ExecuteScript()
     {
         Game.MsgPrint("You breathe fire...");

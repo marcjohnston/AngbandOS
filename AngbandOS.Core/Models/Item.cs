@@ -24,7 +24,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
             (nameof(Color), saveGameState.CreateGameStateBag(Color)),
             (nameof(StackCount), saveGameState.CreateGameStateBag(StackCount)),
             (nameof(Discount), saveGameState.CreateGameStateBag(Discount)),
-            (nameof(HoldingMonsterIndex), saveGameState.CreateGameStateBag(HoldingMonsterIndex)),
+            (nameof(HoldingMonster), saveGameState.CreateDerivedGameStateBag(HoldingMonster, typeof(Monster))),
             (nameof(Inscription), saveGameState.CreateGameStateBag(Inscription)),
             (nameof(ActivationRechargeTimeRemaining), saveGameState.CreateGameStateBag(ActivationRechargeTimeRemaining)),
             (nameof(ContainerTraps), saveGameState.CreateDerivedGameStateBag(ContainerTraps, typeof(ChestTrap))),
@@ -46,13 +46,13 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         (IdentSense, IdentFixed, IdentEmpty, IdentityIsKnown, IdentityIsStoreBought, IdentMental, WasNoticed, ContainerIsOpen) = restoreGameState.GetByKey(nameof(IdentSense)).Get8Bools();
 
         FixedArtifact = restoreGameState.GetByKey(nameof(FixedArtifact)).GetDerivedReferenceOrDefault<FixedArtifact>();
-        EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<EffectiveAttributeSet>((RestoreGameState restoreGameState) => new EffectiveAttributeSet(game, restoreGameState));
+        EffectiveAttributeSet = restoreGameState.GetByKey(nameof(EffectiveAttributeSet)).GetDerivedReference<EffectiveAttributeSet>(_restoreGameState => new EffectiveAttributeSet(game, _restoreGameState));
         _factory = restoreGameState.GetByKey(nameof(_factory)).GetDerivedReference<ItemFactory>();
         NutritionalValue = restoreGameState.GetByKey(nameof(NutritionalValue)).GetInt();
         Color = restoreGameState.GetByKey(nameof(Color)).GetEnum<ColorEnum>();
         StackCount = restoreGameState.GetByKey(nameof(StackCount)).GetInt();
         Discount = restoreGameState.GetByKey(nameof(Discount)).GetInt();
-        HoldingMonsterIndex = restoreGameState.GetByKey(nameof(HoldingMonsterIndex)).GetInt();
+        HoldingMonster = restoreGameState.GetByKey(nameof(HoldingMonster)).GetDerivedReferenceOrDefault<Monster>(_restoreGameState => new Monster(Game, _restoreGameState));
         Inscription = restoreGameState.GetByKey(nameof(Inscription)).GetString();
         ActivationRechargeTimeRemaining = restoreGameState.GetByKey(nameof(ActivationRechargeTimeRemaining)).GetInt();
         ContainerTraps = restoreGameState.GetByKey(nameof(ContainerTraps)).GetDerivedReferencesOrDefault<ChestTrap>();
@@ -125,7 +125,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     public int StackCount;
 
     public int Discount;
-    public int HoldingMonsterIndex;
+    public Monster? HoldingMonster;
     public string Inscription = "";
 
      /// <summary>
@@ -175,6 +175,20 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     public string? RandomArtifactName = null;
     #endregion
 
+    public bool RemoveCurse()
+    {
+        bool curseRemoved = EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IsCursedAttribute)).Reset();
+        bool heavyCurseRemoved = EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Reset();
+        if (curseRemoved || heavyCurseRemoved)
+        {
+            IdentSense = true;
+            Inscription = "uncursed";
+            Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
+            return true;
+        }
+        return false;
+    }
+
     private Game Game { get; }
 
     #region API Methods
@@ -190,7 +204,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     public bool CanBeWeaponOfLaw => _factory.CanBeWeaponOfLaw;
 
     public WieldSlot[] WieldSlots => _factory.WieldSlots;
-    public Symbol FlavorSymbol => _factory.FlavorSymbol; // TODO: Rename to represent current or assigned
+    public Symbol FlavorSymbol => _factory.AssignedSymbol; // TODO: Rename to represent current or assigned
 
     /// <summary>
     /// Returns a sort order index for sorting items in a pack.  Lower numbers show before higher numbers.
@@ -229,7 +243,6 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     public bool IsArmor => _factory.IsArmor;
     public bool IsContainer => _factory.IsContainer;
     public int ExperienceGainDivisorForDestroying => _factory.ExperienceGainDivisorForDestroying;
-    public bool IdentityCanBeSensed => _factory.IdentityCanBeSensed;
     public bool IsConsumedWhenEaten => _factory.IsConsumedWhenEaten;
     public IEatOrQuaffScript? EatScript => _factory.EatScript;
     private bool GetsDamageMultiplier => _factory.GetsDamageMultiplier;
@@ -247,7 +260,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     /// <param name="who"></param>
     /// <param name="y"></param>
     /// <param name="x"></param>
-    public bool Smash(int who, int y, int x) 
+    public bool Smash(Monster? monster, int y, int x) 
     {
         if (QuaffTuple == null)
         {
@@ -258,7 +271,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         {
             return false;
         }
-        return smashUnfriendlyScript.ExecuteUnfriendlyScript(who, y, x);
+        return smashUnfriendlyScript.ExecuteUnfriendlyScript(monster, y, x);
     }
 
     public bool IsFlavorAware
@@ -287,11 +300,11 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     /// <returns></returns>
     public int CalculateTorch()
     {
-        if (EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get() > 0 && TurnsOfLightRemaining <= 0)
+        if (EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(BurnRateAttribute)).Get() > 0 && TurnsOfLightRemaining <= 0)
         {
             return 0;
         }
-        return EffectiveAttributeSet.Radius;
+        return EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(GlowRadiusAttribute)).Get();
     }
     public bool IsAmmunitionFor(Item rangedWeapon)
     {
@@ -336,9 +349,9 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         }
 
         // Check to see if a monster is holding the item.
-        if (HoldingMonsterIndex != 0)
+        if (HoldingMonster is not null)
         {
-            return Game.Monsters[HoldingMonsterIndex];
+            return HoldingMonster;
         }
 
         // Check to see if the item in on the floor.
@@ -679,7 +692,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         MonsterRace rPtr = mPtr.Race;
         if (GetsDamageMultiplier)
         {
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Get() && rPtr.Animal)
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayAnimalAttribute)).Get() && rPtr.Animal)
             {
                 if (mPtr.IsVisible)
                 {
@@ -690,7 +703,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
                     mult = 2;
                 }
             }
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Get() && rPtr.Evil)
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayEvilAttribute)).Get() && rPtr.Evil)
             {
                 if (mPtr.IsVisible)
                 {
@@ -701,7 +714,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
                     mult = 2;
                 }
             }
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Get() && rPtr.Undead)
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayUndeadAttribute)).Get() && rPtr.Undead)
             {
                 if (mPtr.IsVisible)
                 {
@@ -712,7 +725,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
                     mult = 3;
                 }
             }
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayDemonAttribute)).Get() && rPtr.Demon)
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayDemonAttribute)).Get() && rPtr.Demon)
             {
                 if (mPtr.IsVisible)
                 {
@@ -723,7 +736,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
                     mult = 3;
                 }
             }
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Get() && rPtr.Orc)
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayOrcAttribute)).Get() && rPtr.Orc)
             {
                 if (mPtr.IsVisible)
                 {
@@ -734,7 +747,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
                     mult = 3;
                 }
             }
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Get() && rPtr.Troll)
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayTrollAttribute)).Get() && rPtr.Troll)
             {
                 if (mPtr.IsVisible)
                 {
@@ -745,7 +758,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
                     mult = 3;
                 }
             }
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Get() && rPtr.Giant)
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(SlayGiantAttribute)).Get() && rPtr.Giant)
             {
                 if (mPtr.IsVisible)
                 {
@@ -762,12 +775,12 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
                 {
                     rPtr.Knowledge.Characteristics.Dragon = true;
                 }
-                if (mult < EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get())
+                if (mult < EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get())
                 {
-                    mult = EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get();
+                    mult = EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(SlayDragonAttribute)).Get();
                 }
             }
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandAcidAttribute)).Get())
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(BrandAcidAttribute)).Get())
             {
                 if (rPtr.ImmuneAcid)
                 {
@@ -784,7 +797,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
                     }
                 }
             }
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandElecAttribute)).Get())
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(BrandElecAttribute)).Get())
             {
                 if (rPtr.ImmuneLightning)
                 {
@@ -801,7 +814,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
                     }
                 }
             }
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandFireAttribute)).Get())
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(BrandFireAttribute)).Get())
             {
                 if (rPtr.ImmuneFire)
                 {
@@ -818,7 +831,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
                     }
                 }
             }
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandColdAttribute)).Get())
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(BrandColdAttribute)).Get())
             {
                 if (rPtr.ImmuneCold)
                 {
@@ -835,7 +848,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
                     }
                 }
             }
-            if (EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BrandPoisAttribute)).Get())
+            if (EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(BrandPoisAttribute)).Get())
             {
                 if (rPtr.ImmunePoison)
                 {
@@ -983,9 +996,9 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
             {
                 basenm = FixedArtifact.Name;
             }
-            else if (EffectiveAttributeSet.FriendlyName != null)
+            else if (EffectiveAttributeSet.Get<FriendlyNameEffectiveAttributeValue>(nameof(FriendlyNameAttribute)).Get() != null)
             {
-                basenm = $"{basenm} {EffectiveAttributeSet.FriendlyName}";
+                basenm = $"{basenm} {EffectiveAttributeSet.Get<FriendlyNameEffectiveAttributeValue>(nameof(FriendlyNameAttribute)).Get()}";
             }
         }
         return basenm;
@@ -1185,7 +1198,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         {
             return true;
         }
-        if (EffectiveAttributeSet.EasyKnow && IsFlavorAware)
+        if (EffectiveAttributeSet.GetBool(nameof(EasyKnowAttribute)) && IsFlavorAware)
         {
             return true;
         }
@@ -1194,13 +1207,13 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
 
     public bool IsRare => EffectiveAttributeSet.HasKeyedItemEnhancements(Game.RareAttributeKey);
 
-    public EffectiveAttributeSet ObjectFlagsKnown()
+    public ReadOnlyAttributeSet ObjectFlagsKnown()
     {
         if (!IsKnown())
         {
-            return new EffectiveAttributeSet(Game);
+            return new EffectiveAttributeSet(Game).ToReadOnly();
         }
-        return EffectiveAttributeSet;
+        return EffectiveAttributeSet.ToReadOnly();
     }
 
     /// <summary>
@@ -1224,7 +1237,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
             return 0;
         }
 
-        int value = EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(ValueAttribute)).Get();
+        int value = EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(ValueAttribute)).Get();
 
         return value;
     }
@@ -1341,7 +1354,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
             if (IsFlavorAware)
             {
                 // Return the value of the item factory.
-                return EffectiveAttributeSet.Get<SumEffectiveAttributeValue>(nameof(ValueAttribute)).Get(Game.FactoryAttributeKey);
+                return EffectiveAttributeSet.Get<SummationEffectiveAttributeValue>(nameof(ValueAttribute)).Get(Game.FactoryAttributeKey);
             }
 
             // We do not know what the item is, so return the base value of the factory.
@@ -1632,7 +1645,6 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
     }
     #endregion
 
-
     #region Constructors
     /// <summary>
     /// Create a new item with a stackcount of 1.  Items must be associated with a factory.  No enhancements are applied.
@@ -1644,7 +1656,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         Game = game;
         _factory = factory;
 
-        Color = factory.Color;
+        Color = factory.AssignedColor;
 
         // Create the effective attribute set for the item.  
         EffectiveAttributeSet = new EffectiveAttributeSet(Game);
@@ -1701,7 +1713,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         IdentMental = cloneFrom.IdentMental;
         FixedArtifact = cloneFrom.FixedArtifact;
         Discount = cloneFrom.Discount;
-        HoldingMonsterIndex = cloneFrom.HoldingMonsterIndex;
+        HoldingMonster = cloneFrom.HoldingMonster;
         Inscription = cloneFrom.Inscription;
         WasNoticed = cloneFrom.WasNoticed;
         ActivationRechargeTimeRemaining = cloneFrom.ActivationRechargeTimeRemaining;

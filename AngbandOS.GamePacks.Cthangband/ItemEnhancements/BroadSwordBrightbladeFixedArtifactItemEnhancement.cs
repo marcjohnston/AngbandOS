@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BroadSwordBrightbladeFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BrandFireAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -17,12 +16,12 @@ public class BroadSwordBrightbladeFixedArtifactItemEnhancement : ItemEnhancement
         (nameof(SlayOrcAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(ValueAttribute), "40000"),
-        (nameof(SearchAttribute), "1"),
+        (nameof(SearchAttribute), "5"),
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(ToDamageAttribute), "15"),
     };

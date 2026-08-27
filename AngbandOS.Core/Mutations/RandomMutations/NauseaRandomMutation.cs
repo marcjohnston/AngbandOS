@@ -13,16 +13,9 @@ internal class NauseaRandomMutation : Mutation
     public override string GainMessage => "Your stomach starts to roil nauseously.";
     public override string HaveMessage => "You have a seriously upset stomach.";
     public override string LoseMessage => "Your stomach stops roiling.";
-
-    public override void ProcessWorld()
+    public override string Title => "Nausea (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (Game.HasSlowDigestion || base.Game.DieRoll(9000) != 1)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.MsgPrint("Your stomach roils, and you lose your lunch!");
-        Game.MsgPrint(string.Empty);
-        Game.SetFood(Constants.PyFoodWeak);
-    }
+        (1, nameof(NauseaRandomMutationItemEnhancement))
+    };
 }

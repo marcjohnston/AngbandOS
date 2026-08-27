@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Represents a widget that displays an afraid status for when the player is tracking a monster and the monster is afraid.
 /// player is hallucinating.
 /// </summary>
-[Serializable]
 public class TrackedMonsterHealthIsAfraidLabelWidget : LabelWidgetGameConfiguration
 {
     public override int X => 0;

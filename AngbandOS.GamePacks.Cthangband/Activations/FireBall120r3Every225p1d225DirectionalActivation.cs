@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Shoot a fire ball that does 120 damage with a larger radius.
 /// </summary>
-[Serializable]
 public class FireBall120r3Every225p1d225DirectionalActivation : ActivationGameConfiguration
 {
     

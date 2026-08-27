@@ -13,11 +13,12 @@ internal class TrunkRandomMutation : Mutation
     public override string GainMessage => "Your nose grows into an elephant-like trunk.";
     public override string HaveMessage => "You have an elephantine trunk (dam 1d4).";
     public override string LoseMessage => "Your nose returns to a normal length.";
-    public override MutationGroupEnum Group => MutationGroupEnum.Mouth;
+    public override string Group => "Mouth";
     public override int DamageDiceSize => 1;
     public override int DamageDiceNumber => 4;
     public override int EquivalentWeaponWeight => 35;
     public override string AttackDescription => "trunk";
+    public override string Title => "Elephant Trunk (R)";
 
     public override void OnGain()
     {

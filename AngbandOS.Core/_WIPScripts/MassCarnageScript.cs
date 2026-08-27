@@ -22,14 +22,9 @@ internal class MassCarnageScript : Script, IScriptBool, IScript, ICastSpellScrip
     public void ExecuteScriptBool(bool playerCast)
     {
         int msec = Constants.DelayFactorInMilliseconds;
-        for (int i = 1; i < Game.MonsterMax; i++)
+        foreach (Monster mPtr in Game.MonsterList)
         {
-            Monster mPtr = Game.Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             if (rPtr.Unique)
             {
                 continue;
@@ -42,7 +37,7 @@ internal class MassCarnageScript : Script, IScriptBool, IScript, ICastSpellScrip
             {
                 continue;
             }
-            Game.DeleteMonsterByIndex(i, true);
+            Game.DeleteMonster(mPtr);
             if (playerCast)
             {
                 Game.TakeHit(Game.DieRoll(3), "the strain of casting Mass Carnage");

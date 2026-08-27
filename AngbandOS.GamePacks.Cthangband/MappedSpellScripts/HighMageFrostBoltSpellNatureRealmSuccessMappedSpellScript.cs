@@ -1,5 +1,4 @@
 namespace AngbandOS.GamePacks.Cthangband;
-[Serializable]
 internal class HighMageFrostBoltSpellNatureRealmSuccessMappedSpellScript : MappedSpellScriptGameConfiguration
 {
     public override string SpellBindingKey => nameof(FrostBoltNatureSpell);

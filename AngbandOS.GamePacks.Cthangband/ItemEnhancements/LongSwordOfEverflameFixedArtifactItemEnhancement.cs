@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BrandFireAttribute), "true"),
         (nameof(FreeActAttribute), "true"),
@@ -21,15 +20,15 @@ public class LongSwordOfEverflameFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(SustDexAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.BallOfFire72r2Every400DirectionalActivation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "15"),
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(AttacksAttribute), "5"),
         (nameof(ValueAttribute), "80000"),
-        (nameof(RadiusAttribute), "3"),
-        (nameof(StrengthAttribute), "4"),
+        (nameof(GlowRadiusAttribute), "3"),
+        (nameof(BonusStrengthAttribute), "4"),
     };
     public override string FriendlyName => "of Everflame";
 }

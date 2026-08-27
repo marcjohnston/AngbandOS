@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class FootsoreTheLuckyShopkeeper : ShopkeeperGameConfiguration
 {
     public override string Name => "Footsore the Lucky";

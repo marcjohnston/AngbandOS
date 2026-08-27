@@ -13,23 +13,105 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     {
         Game = game;
     }
-    public virtual string Key => GetType().Name;
+    public abstract string Title { get; }
+    public string Key => GetType().Name;
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState) => null;
+    public GameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
+            (nameof(MinimumExperienceLevelAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, ReadOnlyAttributeSet>(MinimumExperienceLevelAndEnhancementAttributeSets,
+                _minimumExperienceLevel => saveGameState.CreateGameStateBag(_minimumExperienceLevel),
+                _attributeSet => saveGameState.CreateDerivedGameStateBag(_attributeSet, typeof(ReadOnlyAttributeSet))
+        )));
+    }
+
+    /// <summary>
+    /// Returns the attribute set that is merged with the players attribute set when this mutation is gained.  This allows the mutation attributes to remain constant for each call of the update bonuses.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public ReadOnlyAttributeSet? AttributeSet { get; private set; }
+
+    /// <summary>
+    /// Refreshed the read-only attribute set.  Performed by the <see cref="UpdateBonusesFlaggedAction"/>.
+    /// </summary>
+    /// <returns></returns>
+    public void RefreshAndSquashAttributeSet()
+    {
+        if (MinimumExperienceLevelAndEnhancementAttributeSets is null)
+        {
+            AttributeSet = null;
+        }
+        else
+        {
+            EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
+            foreach ((int minimumExperienceLevel, ReadOnlyAttributeSet attributeSet) in MinimumExperienceLevelAndEnhancementAttributeSets)
+            {
+                if (Game.ExperienceLevel.IntValue >= minimumExperienceLevel)
+                {
+                    effectiveAttributeSet.MergeAttributeSet(attributeSet);
+                }
+            }
+            AttributeSet = effectiveAttributeSet.ToReadOnly();
+        }
+    }
+    public virtual bool RegenerateOnlyOnGain => true;
+
+    /// <summary>
+    /// Generates the <see cref="ReadOnlyAttributeSet"/> for each enhancement.  This process should only be done during birth.  The enhancements may have random
+    /// configuration embedded and this generate fixes those random values to be used throughout the game.
+    /// </summary>
+    public void RegenerateAttributeSets()
+    {
+        if (MinimumExperienceLevelAndEnhancementTuples is null)
+        {
+            MinimumExperienceLevelAndEnhancementAttributeSets = null;
+        }
+        else
+        {
+            List<(int, ReadOnlyAttributeSet)> tupleList = new List<(int, ReadOnlyAttributeSet)>();
+            foreach ((int minimumExperienceLevel, ItemEnhancement enhancement) in MinimumExperienceLevelAndEnhancementTuples)
+            {
+                tupleList.Add((minimumExperienceLevel, enhancement.GenerateAttributeSet()));
+            }
+            MinimumExperienceLevelAndEnhancementAttributeSets = tupleList.ToArray();
+        }
+        RefreshAndSquashAttributeSet();
+    }
+
+    /// <summary>
+    /// Returns the current read-only set of generated enhancements.  These enhancements are generated at birth via the <see cref="RegenerateAttributeSets"/> method and do not change.
+    /// </summary>
+    /// <remarks>
+    /// This is state data.
+    /// </remarks>
+    public (int, ReadOnlyAttributeSet)[]? MinimumExperienceLevelAndEnhancementAttributeSets { get; private set; } = null;
 
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState)
     {
+        MinimumExperienceLevelAndEnhancementTuples = MinimumExperienceLevelAndEnhancementBindingTuples?.Select(_minimumExperienceLevelAndEnhancementBindingTuples => (_minimumExperienceLevelAndEnhancementBindingTuples.Item1, Game.SingletonRepository.GetNullable<ItemEnhancement>(_minimumExperienceLevelAndEnhancementBindingTuples.Item2))).ToArray();
+
         // Check to see if there is an activation that needs binding.
         if (ActivationBinding is not null)
         {
-            IScript activationScript = Game.SingletonRepository.Get<IScript>(ActivationBinding.Value.ActivationScriptBindingKey);
+            ActiveMutationScript activationScript = Game.SingletonRepository.Get<ActiveMutationScript>(ActivationBinding.Value.ActivationScriptBindingKey);
             Ability ability = Game.SingletonRepository.Get<Ability>(ActivationBinding.Value.AbilityBindingKey);
             Expression costExpression = Game.ParseNumericExpression(ActivationBinding.Value.CostExpression);
             Activation = (activationScript, ActivationBinding.Value.MinLevel, costExpression, ability, ActivationBinding.Value.Difficulty);
         }
+
+        if (restoreGameState is not null)
+        {
+            AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReferenceOrDefault<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
+            MinimumExperienceLevelAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelAndEnhancementAttributeSets)).GetTuplesOrDefault<int, ReadOnlyAttributeSet>(
+                _restoreGameState => _restoreGameState.GetInt(),
+                _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
+        }
     }
-    private (IScript ActivationScript, int MinLevel, Expression Cost, Ability Ability, int Difficulty)? Activation { get; set; }
+    private (ActiveMutationScript ActivationScript, int MinLevel, Expression Cost, Ability Ability, int Difficulty)? Activation { get; set; }
     protected virtual (string ActivationScriptBindingKey, int MinLevel, string CostExpression, string AbilityBindingKey, int Difficulty)? ActivationBinding { get; } = null;
 
     public virtual string AttackDescription => "";
@@ -38,7 +120,12 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     public virtual int EquivalentWeaponWeight => 0;
     public abstract int Frequency { get; }
     public abstract string GainMessage { get; }
-    public virtual MutationGroupEnum Group => MutationGroupEnum.None;
+
+    /// <summary>
+    /// Returns the mutation group that this mutation belongs to.  This property is used to group mutations into mutually exclusive groups.  Only one-mutation per group is allowed.  Returns, null; if the mutation doesn't belong to a group and can be gained independently.
+    /// </summary>
+    public virtual string? Group => null;
+
     public abstract string HaveMessage { get; }
     public abstract string LoseMessage { get; }
     public virtual MutationAttackTypeEnum MutationAttackType => MutationAttackTypeEnum.Physical;
@@ -55,14 +142,46 @@ internal abstract class Mutation : IGetKey, IGameSerialize
         }
     }
 
-    public virtual string ActivationSummary(int lvl)
+    public string ActivationSummary(int lvl)
     {
-        return string.Empty;
+        // Default implementation generates the summary from the bound Activation tuple.
+        if (Activation is null)
+        {
+            return string.Empty;
+        }
+
+        // Get script display name. The Script base class will have a `Name` property added (per your note).
+        string paddedName = Activation.Value.ActivationScript.Name.ToLower().PadRight(17);
+        int minLevel = Activation.Value.MinLevel;
+
+        if (lvl < minLevel)
+        {
+            return $"{paddedName}(unusable until level {minLevel})";
+        }
+
+        string damageText = string.Empty;
+        if (Activation.Value.ActivationScript.DamageExpression is not null)
+        {
+            int damage = Game.ComputeIntegerExpression(Activation.Value.ActivationScript.DamageExpression).Value;
+            damageText = $"dam {damage}, ";
+        }
+        int cost = Game.ComputeIntegerExpression(Activation.Value.Cost).Value;
+        string abilityAbbreviation = Activation.Value.Ability.Abbreviation;
+        return $"{paddedName}(cost {cost}, {damageText}{abilityAbbreviation} based)";
     }
+
 
     public virtual void OnGain() { }
 
     public virtual void OnLose() { }
 
-    public virtual void ProcessWorld() { }
+    /// <summary>
+    /// Returns the binding key for the passive attribute enhancements that is associated with this mutation. If there are no associated passive attribute enhancements, this property returns null.  This property is used to bind the <see cref="ItemEnhacement"/> property during the binding phase.
+    /// </summary>
+    public virtual (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => null;
+
+    /// <summary>
+    /// Returns the attribute enhancement object for the passive attribute enhancements that is associated with this mutation. If there are no associated passive attribute enhancements, this property returns null.  This property is bound using the <see cref="ItemEnhacementBindingKey"/> property during the binding phase.
+    /// </summary>
+    public (int, ItemEnhancement)[]? MinimumExperienceLevelAndEnhancementTuples { get; private set; }
 }

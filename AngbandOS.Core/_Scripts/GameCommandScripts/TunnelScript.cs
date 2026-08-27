@@ -39,7 +39,7 @@ internal class TunnelScript : GameCommandUniversalScript, IGetKey
                 Game.MsgPrint("You cannot tunnel through doors.");
             }
             // Can't tunnel if there's a monster there - so attack the monster instead
-            else if (tile.MonsterIndex != 0)
+            else if (tile.Monster is not null)
             {
                 Game.EnergyUse = 100;
                 Game.MsgPrint("There is a monster in the way!");

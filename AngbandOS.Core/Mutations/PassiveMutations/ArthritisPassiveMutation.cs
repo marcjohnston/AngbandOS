@@ -13,15 +13,10 @@ internal class ArthritisPassiveMutation : Mutation
     public override string GainMessage => "Your joints suddenly hurt.";
     public override string HaveMessage => "Your joints ache constantly (-3 DEX).";
     public override string LoseMessage => "Your joints stop hurting.";
-    public override MutationGroupEnum Group => MutationGroupEnum.Joints;
+    public override string Group => "Joints";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(ArthritisMutationItemEnhancement)) 
+    };
 
-    public override void OnGain()
-    {
-        Game.DexterityBonus -= 3;
-    }
-
-    public override void OnLose()
-    {
-        Game.DexterityBonus += 3;
-    }
+    public override string Title => "Arthritis (P)";
 }

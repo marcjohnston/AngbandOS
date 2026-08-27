@@ -1,21 +1,24 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
 public class ImpRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
-        (nameof(CharismaAttribute), "-3"),
-        (nameof(ConstitutionAttribute), "2"),
-        (nameof(WisdomAttribute), "-1"),
-        (nameof(IntelligenceAttribute), "-1"),
-        (nameof(DexterityAttribute), "1"),
+        (nameof(ResFireAttribute), "true")
+    };
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(BonusCharismaAttribute), "-3"),
+        (nameof(BonusConstitutionAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "-1"),
+        (nameof(BonusIntelligenceAttribute), "-1"),
+        (nameof(BonusDexterityAttribute), "1"),
         (nameof(ValueAttribute), "-1350"),
-        (nameof(InfravisionAttribute), "3"),
+        (nameof(InfraVisionAttribute), "3"),
         (nameof(DisarmTrapsAttribute), "-3"),
-        (nameof(UseDeviceAttribute), "2"),
         (nameof(SavingThrowAttribute), "-1"),
         (nameof(StealthAttribute), "1"),
-        (nameof(SearchAttribute), "-1"),
-        (nameof(StrengthAttribute), "-1"),
+        (nameof(SearchAttribute), "-5"),
+        (nameof(BonusStrengthAttribute), "-1"),
+        (nameof(UseDeviceAttribute), "2"),
     };
 }

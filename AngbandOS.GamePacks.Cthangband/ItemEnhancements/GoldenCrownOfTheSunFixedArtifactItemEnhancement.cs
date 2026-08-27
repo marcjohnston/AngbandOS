@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
         (nameof(IgnoreColdAttribute), "true"),
@@ -30,16 +25,16 @@ public class GoldenCrownOfTheSunFixedArtifactItemEnhancement : ItemEnhancementGa
         (nameof(TelepathyAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.Heal700Every25Activation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "3"),
+        (nameof(BonusStrengthAttribute), "3"),
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(AttacksAttribute), "15"),
         (nameof(ValueAttribute), "125000"),
-        (nameof(WisdomAttribute), "3"),
+        (nameof(BonusWisdomAttribute), "3"),
         (nameof(SpeedAttribute), "3"),
-        (nameof(ConstitutionAttribute), "3"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(BonusConstitutionAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of the Sun";
 }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class FireColdElectricityPoisonGasOrAcid220rm2ProjectileScriptWeightedRandom : ProjectileScriptWeightedRandomGameConfiguration
 {
     public override (string, int)[] NameAndWeightBindings => new (string, int)[]

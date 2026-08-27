@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class NecklaceOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(FreeActAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -18,12 +13,12 @@ public class NecklaceOfTheDwarvesFixedArtifactItemEnhancement : ItemEnhancementG
         (nameof(IgnoreFireAttribute), "true"),
         (nameof(SeeInvisAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(ValueAttribute), "75000"),
-        (nameof(RadiusAttribute), "3"),
-        (nameof(StrengthAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
+        (nameof(BonusStrengthAttribute), "3"),
     };
     public override string FriendlyName => "of the Dwarves";
 }

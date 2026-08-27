@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class VecnaTheEmperorLichDungeonGuardian : DungeonGuardianGameConfiguration
 {
     public override string MonsterRaceName => nameof(VecnaTheEmperorLichMonsterRace);

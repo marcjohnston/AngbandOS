@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class DungeonGameMessageWidget : GameMessageWidgetGameConfiguration
 {
     public override int X => 0;

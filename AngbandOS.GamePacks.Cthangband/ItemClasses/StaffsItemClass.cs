@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class StaffsItemClass : ItemClassGameConfiguration
 {
     public override string Name => "Staff";

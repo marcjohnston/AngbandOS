@@ -9,12 +9,15 @@ namespace AngbandOS.Core.Races;
 internal class DraconianRace : Race
 {
     private DraconianRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(DraconianRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(DraconianRaceItemEnhancement)),
+        (5, nameof(DraconianRaceLevel5ItemEnhancement)),
+        (10, nameof(DraconianRaceLevel10ItemEnhancement)),
+        (15, nameof(DraconianRaceLevel15ItemEnhancement)),
+        (20, nameof(DraconianRaceLevel20ItemEnhancement)),
+        (35, nameof(DraconianRaceLevel35ItemEnhancement))
+    };
     public override string Title => "Draconian";
-    public override int UseDevice => 5;
-    public override int SavingThrow => 3;
-    public override int Stealth => 0;
-    public override int Search => 1;
     public override int BasePerception => 10;
     public override int MeleeToHit => 5;
     public override int RangedToHit => 5;
@@ -33,59 +36,9 @@ internal class DraconianRace : Race
 
     public override string RacialPowersDescription(int lvl) => "breath weapon      (racial, cost lvl, dam 2*lvl, CON based)";
     protected override string? RacialPowerScriptBindingKey => nameof(DraconianRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Feather = true;
-        if (level > 4)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResFireAttribute)).Set();
-        }
-        if (level > 9)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Set();
-        }
-        if (level > 14)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Set();
-        }
-        if (level > 19)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResElecAttribute)).Set();
-        }
-        if (level > 34)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-        }
-    }
-    protected override string GenerateNameSyllableSetName => nameof(GnomishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(GnomishSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         return new string[] { $"You can breathe, dam. {2 * level} (cost {level})." };
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasFeatherFall = true;
-        if (Game.ExperienceLevel.IntValue > 4)
-        {
-            Game.HasFireResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 9)
-        {
-            Game.HasColdResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 14)
-        {
-            Game.HasAcidResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasLightningResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 34)
-        {
-            Game.HasPoisonResistance = true;
-        }
     }
 }

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LeatherGlovesItemFactory : ItemFactoryGameConfiguration
 {
     public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.SetOfLeatherGlovesCalfskinFixedArtifact), nameof(FixedArtifactsEnum.SetOfLeatherGlovesOfLightFixedArtifact) };

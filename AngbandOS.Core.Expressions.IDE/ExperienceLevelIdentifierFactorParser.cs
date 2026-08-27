@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Expressions;
 
-[Serializable]
 internal class ExperienceLevelIdentifierFactorParser : IdentifierFactorParser
 {
     private readonly int Value;
@@ -15,8 +14,8 @@ internal class ExperienceLevelIdentifierFactorParser : IdentifierFactorParser
         Value = value;
     }
     public override string Identifier => "x";
-    protected override Expression GenerateExpression(string matchedIdentifier)
+    protected override Expression GenerateExpression(string matchedIdentifier, bool? sign)
     {
-        return new ExperienceLevelIdentifierExpression(Value, Identifier);
+        return new ExperienceLevelIdentifierExpression(Value, Identifier, sign);
     }
 }

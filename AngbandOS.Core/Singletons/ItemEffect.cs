@@ -23,18 +23,18 @@ internal abstract class ItemEffect : IGetKey, IGameSerialize
         Game = game;
     }
 
-    protected virtual bool ApplyItem(Item item, int who, int x, int y)
+    protected virtual bool ApplyItem(Item item, Monster? monster, int x, int y)
     {
         return false;
     }
 
-    public virtual bool Apply(int who, int y, int x)
+    public virtual bool Apply(Monster? monster, int y, int x)
     {
         GridTile cPtr = Game.Grid[y][x];
         bool obvious = false;
         foreach (Item oPtr in cPtr.Items.ToArray()) // Prevent collection modified error
         {
-            if (ApplyItem(oPtr, who, x, y))
+            if (ApplyItem(oPtr, monster, x, y))
             {
                 obvious = true;
             }

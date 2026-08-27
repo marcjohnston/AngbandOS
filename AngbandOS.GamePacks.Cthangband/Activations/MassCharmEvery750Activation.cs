@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Charm multiple monsters.
 /// </summary>
-[Serializable]
 public class MassCharmEvery750Activation : ActivationGameConfiguration
 {
     

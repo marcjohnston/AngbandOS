@@ -122,6 +122,7 @@ public class GameConfiguration
         gameConfiguration.RangeLearnedKnowledges = LoadFromAssembly<RangeLearnedKnowledgeGameConfiguration>(assembly);
         gameConfiguration.ExperienceLearnedKnowledges = LoadFromAssembly<ExperienceLearnedKnowledgeGameConfiguration>(assembly);
 
+        gameConfiguration.CharacterClassAndRaceInnateTotals = LoadFromAssembly<InnateTotalsGameConfiguration>(assembly);
         gameConfiguration.Towns = LoadFromAssembly<TownGameConfiguration>(assembly);
         gameConfiguration.Shopkeepers = LoadFromAssembly<ShopkeeperGameConfiguration>(assembly);
         gameConfiguration.GameCommands = LoadFromAssembly<GameCommandGameConfiguration>(assembly);
@@ -209,14 +210,20 @@ public class GameConfiguration
         gameConfiguration.ScriptMonsterSpells = LoadFromAssembly<ScriptMonsterSpellGameConfiguration>(assembly);
         gameConfiguration.SummonMonsterSpells = LoadFromAssembly<SummonMonsterSpellGameConfiguration>(assembly);
 
-        gameConfiguration.OrAttributes = LoadFromAssembly<OrAttributeGameConfiguration>(assembly);
-        gameConfiguration.SumAttributes = LoadFromAssembly<SumAttributeGameConfiguration>(assembly);
+        gameConfiguration.OrAttributes = LoadFromAssembly<BitwiseOrAttributeGameConfiguration>(assembly);
+        gameConfiguration.SumAttributes = LoadFromAssembly<SummationAttributeGameConfiguration>(assembly);
+        gameConfiguration.ScriptsAttributes = LoadFromAssembly<ScriptsAttributeGameConfiguration>(assembly);
         gameConfiguration.ColorEnumAttributes = LoadFromAssembly<ColorEnumAttributeGameConfiguration>(assembly);
-        gameConfiguration.BoolAttributes = LoadFromAssembly<BoolAttributeGameConfiguration>(assembly);
         gameConfiguration.ActivationAttributes = LoadFromAssembly<ActivationNullableReferenceAttributeGameConfiguration>(assembly);
         gameConfiguration.ArtifactBiasAttributes = LoadFromAssembly<ArtifactBiasNullableReferenceAttributeGameConfiguration>(assembly);
         gameConfiguration.StringAttributes = LoadFromAssembly<StringNullableReferenceAttributeGameConfiguration>(assembly);
     }
+
+    public virtual string[]? GameTickEventBindingKeys { get; set; } = null;
+
+    public virtual int MaxMonsterCount { get; set; } = 512;
+    public virtual int CompactMonsterCutIn { get; set; } = 32;
+    public virtual int CompactMonsterCutOutTarget { get; set; } = 64;
 
     /// <summary>
     /// Returns the number of log items that the message history is allowed to store.  A null value indicates that there is no limit.  The default value is 2048.
@@ -314,10 +321,10 @@ public class GameConfiguration
     public virtual AttackGameConfiguration[]? Attacks { get; set; } = null;
     public virtual AttributeFilterGameConfiguration[]? AttributeFilters { get; set; } = null;
 
-    public virtual OrAttributeGameConfiguration[]? OrAttributes { get; set; } = null;
-    public virtual SumAttributeGameConfiguration[]? SumAttributes { get; set; } = null;
+    public virtual BitwiseOrAttributeGameConfiguration[]? OrAttributes { get; set; } = null;
+    public virtual SummationAttributeGameConfiguration[]? SumAttributes { get; set; } = null;
+    public virtual ScriptsAttributeGameConfiguration[]? ScriptsAttributes { get; set; } = null;
     public virtual ColorEnumAttributeGameConfiguration[]? ColorEnumAttributes { get; set; } = null;
-    public virtual BoolAttributeGameConfiguration[]? BoolAttributes { get; set; } = null;
     public virtual ActivationNullableReferenceAttributeGameConfiguration[]? ActivationAttributes { get; set; } = null;
     public virtual ArtifactBiasNullableReferenceAttributeGameConfiguration[]? ArtifactBiasAttributes { get; set; } = null;
     public virtual StringNullableReferenceAttributeGameConfiguration[]? StringAttributes { get; set; } = null;
@@ -381,6 +388,7 @@ public class GameConfiguration
     public virtual RacePowerGameConfiguration[]? RacialPowers { get; set; } = null;
     public virtual ConditionalScriptGameConfiguration[]? ConditionalScripts { get; set; } = null;
     public virtual CharacterClassAbilityGameConfiguration[]? CharacterClassAbilities { get; set; } = null;
+    public virtual InnateTotalsGameConfiguration[]? CharacterClassAndRaceInnateTotals { get; set; } = null;
     public virtual ActivationGameConfiguration[]? Activations { get; set; } = null;
     public virtual ItemFilterGameConfiguration[]? ItemFilters { get; set; } = null;
     public virtual ConditionalGameConfiguration[]? ProductOfSumsBoolFunctions { get; set; } = null;
@@ -400,26 +408,26 @@ public class GameConfiguration
 
     public virtual int[] ExtractEnergy => new int[] // TODO: Need defaults removed.
     {
-	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
-	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
-	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
-	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
-	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
-	/* Slow */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
-	/* S-50 */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
-	/* S-40 */     2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
-	/* S-30 */     2,  2,  2,  2,  2,  2,  2,  3,  3,  3,
-	/* S-20 */     3,  3,  3,  3,  3,  4,  4,  4,  4,  4,
-	/* S-10 */     5,  5,  5,  5,  6,  6,  7,  7,  8,  9,
-	/* Norm */    10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-	/* F+10 */    20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-	/* F+20 */    30, 31, 32, 33, 34, 35, 36, 36, 37, 37,
-	/* F+30 */    38, 38, 39, 39, 40, 40, 40, 41, 41, 41,
-	/* F+40 */    42, 42, 42, 43, 43, 43, 44, 44, 44, 44,
-	/* F+50 */    45, 45, 45, 45, 45, 46, 46, 46, 46, 46,
-	/* F+60 */    47, 47, 47, 47, 47, 48, 48, 48, 48, 48,
-	/* F+70 */    49, 49, 49, 49, 49, 49, 49, 49, 49, 49,
-	/* Fast */    49, 49, 49, 49, 49, 49, 49, 49, 49, 49
+	/* Slow 0-9 */       1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* Slow 10-19 */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* Slow 20-29 */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* Slow 30-49 */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* Slow 40-59 */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* Slow 50-69 */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* S-50 60-79 */     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+	/* S-40 70-89 */     2,  2,  2,  2,  2,  2,  2,  2,  2,  2,
+	/* S-30 80-89 */     2,  2,  2,  2,  2,  2,  2,  3,  3,  3,
+	/* S-20 90-99 */     3,  3,  3,  3,  3,  4,  4,  4,  4,  4,
+	/* S-10 100-109 */   5,  5,  5,  5,  6,  6,  7,  7,  8,  9,
+	/* Norm 110-129 */  10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+	/* F+10 120-139 */  20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+	/* F+20 130-139 */  30, 31, 32, 33, 34, 35, 36, 36, 37, 37,
+	/* F+30 140-149 */  38, 38, 39, 39, 40, 40, 40, 41, 41, 41,
+	/* F+40 150-159 */  42, 42, 42, 43, 43, 43, 44, 44, 44, 44,
+	/* F+50 160-169 */  45, 45, 45, 45, 45, 46, 46, 46, 46, 46,
+	/* F+60 170-179 */  47, 47, 47, 47, 47, 48, 48, 48, 48, 48,
+	/* F+70 180-189 */  49, 49, 49, 49, 49, 49, 49, 49, 49, 49,
+	/* Fast 190-199 */  49, 49, 49, 49, 49, 49, 49, 49, 49, 49
     };
 
     public virtual int[][] BlowsTable => new int[][]

@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class DaggerFaithFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BrandFireAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -13,10 +12,10 @@ public class DaggerFaithFixedArtifactItemEnhancement : ItemEnhancementGameConfig
         (nameof(ResFireAttribute), "true"),
         (nameof(ShowModsAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(ValueAttribute), "12000"),
         (nameof(MeleeToHitAttribute), "4"),
         (nameof(ToDamageAttribute), "6"),

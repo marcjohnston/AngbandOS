@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LongBowRangedWeaponItemFactory : ItemFactoryGameConfiguration
 {
     public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.LongBowOfSerpentsFixedArtifact), nameof(FixedArtifactsEnum.LongBowSureshotFixedArtifact) };

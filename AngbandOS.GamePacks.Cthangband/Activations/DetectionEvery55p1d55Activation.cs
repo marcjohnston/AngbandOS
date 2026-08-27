@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Detect everything.
 /// </summary>
-[Serializable]
 public class DetectionEvery55p1d55Activation : ActivationGameConfiguration
 {
     

@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ScrollsItemClass : ItemClassGameConfiguration
 {
     public override string Name => "Scroll";

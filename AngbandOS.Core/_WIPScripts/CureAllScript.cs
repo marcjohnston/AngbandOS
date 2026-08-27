@@ -46,6 +46,8 @@ internal class CureAllScript : Script, IScript, ICastSpellScript
         Game.RunScript(nameof(BleedingResetTimerScript));
         Game.SlowTimer.ResetTimer();
         Game.SetFood(Constants.PyFoodMax - 1);
+        Game.MsgPrint(null);
         Game.RunScript(nameof(RedrawScript));
+        Game.MsgPrint("You feel much better!");
     }
 }

@@ -9,22 +9,17 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class ChannelerCharacterClass : CharacterClass
 {
     private ChannelerCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(ChannelerCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
+        (1, null, nameof(ChannelerCharacterClassItemEnhancement)) 
+    };
     public override int ID => 13;
     public override string Title => "Channeler";
-    public override int UseDevice => 40;
-    public override int SavingThrow => 30;
-    public override int Stealth => 2;
-    public override int Search => 16;
     public override int BasePerception => 20;
     public override bool RenderMinFail => false;
     public override bool RenderSpellsPerLevel => false;
     public override int MeleeToHit => 40;
     public override int RangedToHit => 30;
     public override int DisarmBonusPerLevel => 12;
-    public override int DeviceBonusPerLevel => 13;
-    public override int SaveBonusPerLevel => 9;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 15;
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 1;
@@ -42,12 +37,11 @@ internal class ChannelerCharacterClass : CharacterClass
     /// Returns true, because channeling casting allows the player to use mana instead of consuming the item.
     /// </summary>
     public override bool CanUseManaInsteadOfConsumingItem => true;
-
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility));
+    protected override string SpellAbilityBindingKey => nameof(CharismaAbility);
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(MageArtifactBias), 1) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
 }

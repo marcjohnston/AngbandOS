@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Give us temporary resistance to the basic elements.
 /// </summary>
-[Serializable]
 public class ResistAll40p1d40Activation : ActivationGameConfiguration
 {
     

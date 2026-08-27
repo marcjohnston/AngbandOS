@@ -1,20 +1,23 @@
 
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class MonkCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "2"),
-        (nameof(CharismaAttribute), "1"),
-        (nameof(ConstitutionAttribute), "2"),
-        (nameof(WisdomAttribute), "1"),
-        (nameof(IntelligenceAttribute), "-1"),
-        (nameof(DexterityAttribute), "3"),
+        (nameof(BonusStrengthAttribute), "2"),
+        (nameof(BonusCharismaAttribute), "1"),
+        (nameof(BonusConstitutionAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "1"),
+        (nameof(BonusIntelligenceAttribute), "-1"),
+        (nameof(BonusDexterityAttribute), "3"),
         (nameof(ValueAttribute), "8850"),
         (nameof(DisarmTrapsAttribute), "45"),
-        (nameof(UseDeviceAttribute), "32"),
         (nameof(SavingThrowAttribute), "28"),
+        (nameof(SavingThrowBonusPerLevelAttribute), "10"),
+        (nameof(UseDeviceAttribute), "32"),
+        (nameof(UseDeviceBonusPerLevelAttribute), "12"),
+        (nameof(SearchAttribute), "32"),
+        (nameof(StealthAttribute), "6")
     };
 }

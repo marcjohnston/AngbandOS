@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class MageLevel30HolyOrbProjectileScript : ProjectileScriptGameConfiguration
 {
     public override string ProjectileBindingKey => nameof(HolyFireProjectile);

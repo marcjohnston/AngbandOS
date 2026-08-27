@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(AggravateAttribute), "true"),
         (nameof(BrandFireAttribute), "true"),
@@ -25,7 +24,7 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
         (nameof(SlayUndeadAttribute), "true"),
         (nameof(VampiricAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "18"),
@@ -36,8 +35,8 @@ public class MaceOfDisruptionDeathwreakerFixedArtifactItemEnhancement : ItemEnha
         (nameof(WeightAttribute), "280"),
         (nameof(SlayDragonAttribute), "3"),
         (nameof(TunnelAttribute), "6"),
-        (nameof(RadiusAttribute), "3"),
-        (nameof(StrengthAttribute), "6"),
+        (nameof(GlowRadiusAttribute), "3"),
+        (nameof(BonusStrengthAttribute), "6"),
     };
     public override string FriendlyName => "'Deathwreaker'";
 }

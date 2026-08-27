@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-
-using System.Reflection.PortableExecutable;
 namespace AngbandOS.Core.ArtifactBiases;
 
 internal class RangerArtifactBias : ArtifactBias
@@ -50,9 +48,9 @@ internal class RangerArtifactBias : ArtifactBias
 
     public override bool ApplyMiscPowers(EffectiveAttributeSet characteristics)
     {
-        if (!characteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Get())
+        if (!characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustConAttribute)).Get())
         {
-            characteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
+            characteristics.Get<BitwiseOrEffectiveAttributeValue>(nameof(SustConAttribute)).Set();
             if (Game.DieRoll(2) == 1)
             {
                 return true;

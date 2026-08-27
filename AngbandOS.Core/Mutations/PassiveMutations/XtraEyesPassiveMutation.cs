@@ -13,14 +13,8 @@ internal class XtraEyesPassiveMutation : Mutation
     public override string GainMessage => "You grow an extra pair of eyes!";
     public override string HaveMessage => "You have an extra pair of eyes (+15 search).";
     public override string LoseMessage => "Your extra eyes vanish!";
-
-    public override void OnGain()
-    {
-        Game.SearchBonus += 15;
-    }
-
-    public override void OnLose()
-    {
-        Game.SearchBonus -= 15;
-    }
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(XtraEyesPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Extra Eyes (P)";
 }

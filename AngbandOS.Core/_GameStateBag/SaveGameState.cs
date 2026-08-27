@@ -118,11 +118,20 @@ internal partial class SaveGameState
     private static bool IsCompatible(Type actualType, Type derivedType) => actualType.IsAssignableFrom(derivedType) || (actualType.BaseType != null && IsCompatible(actualType.BaseType, derivedType));
     public GameStateBag CreateDerivedGameStateBag(IGameSerialize? value, bool allowConstruction)
     {
-        return CreateDerivedGameStateBag2(value, allowConstruction);
+        return PrivateCreateDerivedGameStateBag(value, allowConstruction);
+    }
+    public GameStateBag CreateDerivedGameStateBag(IGameSerialize[]? values, bool allowConstruction)
+    {
+        if (values is null)
+        {
+            return new NullValueGameStateBag();
+        }
+        GameStateBag[] gameStateBags = values.Select(_value => PrivateCreateDerivedGameStateBag(_value, allowConstruction)).ToArray();
+        return new ListGameStateBag(gameStateBags);
     }
     public GameStateBag CreateDerivedGameStateBag(IGameSerialize? value, params Type[] derivedTypes)
     {
-        return CreateDerivedGameStateBag2(value, true, derivedTypes);
+        return PrivateCreateDerivedGameStateBag(value, true, derivedTypes);
     }
 
     /// <summary>
@@ -134,7 +143,7 @@ internal partial class SaveGameState
     /// <param name="allowConstruction">Specify true to require the object to have already been serialized and require the output to be either null or a <see cref="ReferenceGameStateBag"/>.</param>
     /// <param name="derivedTypes">Provide all of the compatible (derived types).  If none or only one is provided, a null derived code will be generated; otherwise, the derived code will be equal to the position (base-0) of the type specified.</param>
     /// <returns></returns>
-    private GameStateBag CreateDerivedGameStateBag2(IGameSerialize? value, bool allowConstruction, params Type[] derivedTypes)
+    private GameStateBag PrivateCreateDerivedGameStateBag(IGameSerialize? value, bool allowConstruction, params Type[] derivedTypes)
     {
         // Check if the object is null, we return a null object.
         if (value is null)
@@ -150,7 +159,7 @@ internal partial class SaveGameState
 
         if (!allowConstruction)
         {
-            throw new Exception("Derived type expected.");
+            throw new Exception("Derived type expected.  Cannot serialize reference not previously serialized because construction during deserialization disallowed.");
         }
 
         // We need to register this object to the dictionary before we serialize the object to prevent recursion.
@@ -227,6 +236,55 @@ internal partial class SaveGameState
         }
 
         return new TimeSpanValueGameStateBag(value.Value);
+    }
+
+    public GameStateBag CreateTupleGameStateBag(params GameStateBag[] items)
+    {
+        List<(string, GameStateBag)> tupleList = new List<(string, GameStateBag)>();
+        int index = 1;
+        foreach (GameStateBag item in items)
+        {
+            tupleList.Add(($"Item{index}", item));
+            index++;
+        }
+        return new DictionaryGameStateBag(tupleList.ToArray());
+    }
+
+    public GameStateBag CreateTuplesGameStateBag<T1, T2>((T1, T2)[]? items, Func<T1, GameStateBag> createGameStateBag1, Func<T2, GameStateBag> createGameStateBag2)
+    {
+        if (items is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        List<GameStateBag> tupleList = new List<GameStateBag>();
+        foreach ((T1 item1, T2 item2) in items)
+        {
+            GameStateBag gameStateBag1 = createGameStateBag1(item1);
+            GameStateBag gameStateBag2 = createGameStateBag2(item2);
+            GameStateBag tupleGameStateBag = CreateTupleGameStateBag(gameStateBag1, gameStateBag2);
+            tupleList.Add(tupleGameStateBag);
+        }
+        return new ListGameStateBag(tupleList.ToArray());
+    }
+
+    public GameStateBag CreateTuplesGameStateBag<T1, T2, T3>((T1, T2, T3)[]? items, Func<T1, GameStateBag> createGameStateBag1, Func<T2, GameStateBag> createGameStateBag2, Func<T3, GameStateBag> createGameStateBag3)
+    {
+        if (items is null)
+        {
+            return new NullValueGameStateBag();
+        }
+
+        List<GameStateBag> tupleList = new List<GameStateBag>();
+        foreach ((T1 item1, T2 item2, T3 item3) in items)
+        {
+            GameStateBag gameStateBag1 = createGameStateBag1(item1);
+            GameStateBag gameStateBag2 = createGameStateBag2(item2);
+            GameStateBag gameStateBag3 = createGameStateBag3(item3);
+            GameStateBag tupleGameStateBag = CreateTupleGameStateBag(gameStateBag1, gameStateBag2, gameStateBag3);
+            tupleList.Add(tupleGameStateBag);
+        }
+        return new ListGameStateBag(tupleList.ToArray());
     }
 
     public GameStateBag CreateGameStateBag(string? value)
@@ -428,19 +486,6 @@ internal partial class SaveGameState
         foreach (bool[] item in value)
         {
             gameStateBags.Add(CreateGameStateBag(item));
-        }
-        return new ListGameStateBag(gameStateBags.ToArray());
-    }
-
-    public GameStateBag CreateGameStateBag<T1, T2>(Dictionary<T1, T2> dictionary) where T1 : notnull
-    {
-        var gameStateBags = new List<GameStateBag>();
-        foreach ((T1 key, T2 value) in dictionary)
-        {
-            GameStateBag keyGameStateBag = CreateGameStateBag(key);
-            GameStateBag valueGameStateBag = CreateGameStateBag(value);
-            DictionaryGameStateBag dictionaryGameStateBag = new DictionaryGameStateBag(new Dictionary<string, GameStateBag> { { "key", keyGameStateBag }, { "value", valueGameStateBag } });
-            gameStateBags.Add(dictionaryGameStateBag);
         }
         return new ListGameStateBag(gameStateBags.ToArray());
     }

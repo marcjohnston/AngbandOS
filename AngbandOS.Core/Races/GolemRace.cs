@@ -9,12 +9,11 @@ namespace AngbandOS.Core.Races;
 internal class GolemRace : Race
 {
     private GolemRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(GolemRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(GolemRaceItemEnhancement)),
+        (35, nameof(GolemRaceLevel35ItemEnhancement))
+    };
     public override string Title => "Golem";
-    public override int UseDevice => -5;
-    public override int SavingThrow => 10;
-    public override int Stealth => -1;
-    public override int Search => -1;
     public override int BasePerception => 8;
     public override int MeleeToHit => 20;
     public override int RangedToHit => 0;
@@ -33,20 +32,7 @@ internal class GolemRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 20 ? "stone skin         (racial, unusable until level 20)" : "stone skin         (racial, cost 15, dur 30+d20, CON based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-        itemCharacteristics.FreeAct = true;
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
-        if (level > 34)
-        {
-            itemCharacteristics.HoldLife = true;
-        }
-    }
-    protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(DwarvenSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -55,18 +41,6 @@ internal class GolemRace : Race
             return new string[] { "You can turn your skin to stone, dur d20+30 (cost 15)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 34)
-        {
-            Game.HasHoldLife = true;
-        }
-        Game.HasSlowDigestion = true;
-        Game.HasFreeAction = true;
-        Game.HasSeeInvisibility = true;
-        Game.HasPoisonResistance = true;
-        Game.BonusArmorClass += 20 + (Game.ExperienceLevel.IntValue / 5);
     }
 
     public override void Eat(Item item)

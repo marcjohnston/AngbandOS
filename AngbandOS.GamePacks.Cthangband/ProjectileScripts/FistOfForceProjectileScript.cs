@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class FistOfForceProjectileScript : ProjectileScriptGameConfiguration
 {
     public override string DamageRollExpression => "8+((X-5)/4)d8";

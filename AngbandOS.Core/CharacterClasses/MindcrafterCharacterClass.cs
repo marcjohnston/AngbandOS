@@ -10,7 +10,14 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class MindcrafterCharacterClass : CharacterClass
 {
     private MindcrafterCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(MindcrafterCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
+    {
+        (1, null, nameof(MindcrafterCharacterClassItemEnhancement)),
+        (10, null, nameof(MindcrafterCharacterClassLevel10ItemEnhancement)),
+        (20, null, nameof(MindcrafterCharacterClassLevel20ItemEnhancement)),
+        (30, null, nameof(MindcrafterCharacterClassLevel30ItemEnhancement)),
+        (40, null, nameof(MindcrafterCharacterClassLevel40ItemEnhancement)),
+    };
     public override int ID => 9;
     public override string Title => "Mindcrafter";
     public override int? InstantFearResistanceLevel => 10;
@@ -18,17 +25,10 @@ internal class MindcrafterCharacterClass : CharacterClass
     public override bool RenderSpellsPerLevel => false;
     public override int? InstantConfusionResistanceLevel => 30;
     public override int? InstantTelepathyLevel => 40;
-    public override int UseDevice => 30;
-    public override int SavingThrow => 30;
-    public override int Stealth => 3;
-    public override int Search => 22;
     public override int BasePerception => 16;
     public override int MeleeToHit => 50;
     public override int RangedToHit => 40;
     public override int DisarmBonusPerLevel => 10;
-    public override int DeviceBonusPerLevel => 10;
-    public override int SaveBonusPerLevel => 10;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 20;
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 2;
@@ -46,27 +46,7 @@ internal class MindcrafterCharacterClass : CharacterClass
 
     public override void Cast() => CastMentalism();
 
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
-    public override ArtifactBias? ArtifactBias => (Game.DieRoll(5) > 2 ? Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias)) : null);
+    protected override string SpellAbilityBindingKey => nameof(WisdomAbility);
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(PriestlyArtifactBias), 3), (null, 2) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(55000 / ((level * level) + 40)));
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 9)
-        {
-            Game.HasFearResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasSustainWisdom = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 29)
-        {
-            Game.HasConfusionResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 39)
-        {
-            Game.HasTelepathy = true;
-        }
-    }
 }

@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(BlessedAttribute), "true"),
         (nameof(HoldLifeAttribute), "true"),
@@ -23,7 +22,7 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(SlayEvilAttribute), "true"),
         (nameof(SlayUndeadAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(AttacksAttribute), "1"),
         (nameof(TreasureRatingAttribute), "20"),
@@ -31,8 +30,8 @@ public class ScimitarSoulswordFixedArtifactItemEnhancement : ItemEnhancementGame
         (nameof(MeleeToHitAttribute), "9"),
         (nameof(ValueAttribute), "111111"),
         (nameof(SlayDragonAttribute), "3"),
-        (nameof(WisdomAttribute), "2"),
-        (nameof(IntelligenceAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "2"),
+        (nameof(BonusIntelligenceAttribute), "2"),
     };
     public override string FriendlyName => "'Soulsword'";
 }

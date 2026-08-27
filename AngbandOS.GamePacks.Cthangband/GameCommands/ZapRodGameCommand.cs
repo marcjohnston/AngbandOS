@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Use a rod from the inventory or ground
 /// </summary>
 /// <param name="itemIndex"> The inventory index of the item to be used </param>
-[Serializable]
 public class ZapRodGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'z';

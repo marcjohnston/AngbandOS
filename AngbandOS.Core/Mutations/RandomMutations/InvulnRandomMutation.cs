@@ -13,15 +13,9 @@ internal class InvulnRandomMutation : Mutation
     public override string GainMessage => "You are blessed with fits of invulnerability.";
     public override string HaveMessage => "You occasionally feel invincible.";
     public override string LoseMessage => "You are no longer blessed with fits of invulnerability.";
-
-    public override void ProcessWorld()
+    public override string Title => "Invulnerability (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (!Game.HasAntiMagic && base.Game.DieRoll(5000) == 1)
-        {
-            Game.Disturb(false);
-            Game.MsgPrint("You feel invincible!");
-            Game.MsgPrint(string.Empty);
-            Game.InvulnerabilityTimer.AddTimer(base.Game.DieRoll(8) + 8);
-        }
-    }
+        (1, nameof(InvulnRandomMutationItemEnhancement))
+    };
 }

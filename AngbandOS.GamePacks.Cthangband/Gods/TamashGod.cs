@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class TamashGod : GodGameConfiguration
 {
     public override string LongName => "Tamash, god of illusion and magic";

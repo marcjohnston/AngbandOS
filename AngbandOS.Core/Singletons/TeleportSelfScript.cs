@@ -120,15 +120,15 @@ internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
                 else
                 {
                     // Check to see if there is a monster here.
-                    if (Game.Grid[oy + yy][ox + xx].MonsterIndex != 0)
+                    if (Game.Grid[oy + yy][ox + xx].Monster is not null)
                     {
                         // There is.  Check to see if the monster is capable of self teleportation, is not resistant to teleportation and is not sleeping.
-                        if (Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.CanTeleportSelf && !Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].Race.ResistTeleport)
+                        if (Game.Grid[oy + yy][ox + xx].Monster.Race.CanTeleportSelf && !Game.Grid[oy + yy][ox + xx].Monster.Race.ResistTeleport)
                         {
-                            if (Game.Monsters[Game.Grid[oy + yy][ox + xx].MonsterIndex].SleepLevel == 0)
+                            if (Game.Grid[oy + yy][ox + xx].Monster.SleepLevel == 0)
                             {
                                 // Teleport the monster to the player (which doesn't make sense yet).
-                                TeleportToPlayer(Game.Grid[oy + yy][ox + xx].MonsterIndex);
+                                TeleportToPlayer(Game.Grid[oy + yy][ox + xx].Monster);
                             }
                         }
                     }
@@ -146,13 +146,12 @@ internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
         Game.HandleStuff();
     }
 
-    private void TeleportToPlayer(int mIdx)
+    private void TeleportToPlayer(Monster mPtr)
     {
         int ny = Game.MapY.IntValue;
         int nx = Game.MapX.IntValue;
         int dis = 2;
         bool look = true;
-        Monster mPtr = Game.Monsters[mIdx];
         int attempts = 500;
         if (mPtr.Race == null)
         {
@@ -210,11 +209,11 @@ internal sealed class TeleportSelfScript : UniversalScript, IGetKey, IToJson
             return;
         }
         Game.PlaySound(SoundEffectEnum.Teleport);
-        Game.Grid[ny][nx].MonsterIndex = mIdx;
-        Game.Grid[oy][ox].MonsterIndex = 0;
+        Game.Grid[ny][nx].Monster = mPtr;
+        Game.Grid[oy][ox].Monster = null;
         mPtr.MapY = ny;
         mPtr.MapX = nx;
-        Game.UpdateMonsterVisibility(mIdx, true);
+        Game.UpdateMonsterVisibility(mPtr, true);
         Game.ConsoleView.RefreshMapLocation(oy, ox);
         Game.ConsoleView.RefreshMapLocation(ny, nx);
     }

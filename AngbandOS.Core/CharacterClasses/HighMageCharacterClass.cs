@@ -9,26 +9,21 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class HighMageCharacterClass : CharacterClass
 {
     private HighMageCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(HighMageCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
+        (1, null, nameof(HighMageCharacterClassItemEnhancement)) 
+    };
     public override int ID => 10;
     public override int FriendsUpkeepDivider => 12;
     public override string Title => "High-Mage";
-    public override int UseDevice => 38;
-    public override int SavingThrow => 30;
-    public override int Stealth => 2;
     public override string InvokeSpiritsBeamProbabilityRollExpression => "X+10";
     public override string SpellOfWonderBeamProbabilityRollExpression => "X+10";
     public override string TarotDrawRollExpression => "1d110+X/5";
     public override double ManaFactor => 1.25;
     public override int? SpellMinFailChance => 5;
-    public override int Search => 16;
     public override int BasePerception => 20;
     public override int MeleeToHit => 34;
     public override int RangedToHit => 20;
     public override int DisarmBonusPerLevel => 7;
-    public override int DeviceBonusPerLevel => 13;
-    public override int SaveBonusPerLevel => 9;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 15;
     public override int RangedAttackBonusPerLevel => 15;
     public override int HitDieBonus => 0;
@@ -56,20 +51,20 @@ internal class HighMageCharacterClass : CharacterClass
 
 
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
+    protected override string SpellAbilityBindingKey => nameof(IntelligenceAbility);
     public override int MaximumMeleeAttacksPerRound(int level) => 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 2;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(MageArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(MageArtifactBias), 1) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(240000 / (level + 5)));
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(LifeRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(SorceryRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(NatureRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(FolkRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(LifeRealm),
+        nameof(SorceryRealm),
+        nameof(NatureRealm),
+        nameof(ChaosRealm),
+        nameof(DeathRealm),
+        nameof(TarotRealm),
+        nameof(FolkRealm),
+        nameof(CorporealRealm)
     };
 }

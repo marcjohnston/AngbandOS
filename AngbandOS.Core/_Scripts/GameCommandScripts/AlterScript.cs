@@ -33,7 +33,7 @@ internal class AlterScript : GameCommandUniversalScript, IGetKey, IGameSerialize
             // Altering a tile will take a turn
             Game.EnergyUse = 100;
             // We 'alter' a tile by attacking it
-            if (tile.MonsterIndex != 0)
+            if (tile.Monster is not null)
             {
                 Game.PlayerAttackMonster(y, x);
             }

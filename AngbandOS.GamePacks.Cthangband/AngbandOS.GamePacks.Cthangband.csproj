@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CharacterClassRacePowers\ZombieRaceRacePower.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AngbandOS.Core.Interface.Configuration\AngbandOS.Core.Interface.Configuration.csproj" />
   </ItemGroup>
 

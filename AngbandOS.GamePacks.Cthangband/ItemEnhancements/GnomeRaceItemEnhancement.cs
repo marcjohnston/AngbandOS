@@ -1,21 +1,24 @@
 namespace AngbandOS.GamePacks.Cthangband;
-    [Serializable]
 public class GnomeRaceItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
-        (nameof(CharismaAttribute), "-2"),
-        (nameof(ConstitutionAttribute), "1"),
-        (nameof(WisdomAttribute), "0"),
-        (nameof(IntelligenceAttribute), "2"),
-        (nameof(DexterityAttribute), "2"),
+        (nameof(FreeActAttribute), "true")
+    };
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(BonusCharismaAttribute), "-2"),
+        (nameof(BonusConstitutionAttribute), "1"),
+        (nameof(BonusWisdomAttribute), "0"),
+        (nameof(BonusIntelligenceAttribute), "2"),
+        (nameof(BonusDexterityAttribute), "2"),
         (nameof(ValueAttribute), "3900"),
-        (nameof(InfravisionAttribute), "4"),
+        (nameof(InfraVisionAttribute), "4"),
         (nameof(DisarmTrapsAttribute), "10"),
-        (nameof(UseDeviceAttribute), "12"),
         (nameof(SavingThrowAttribute), "12"),
         (nameof(StealthAttribute), "3"),
-        (nameof(SearchAttribute), "6"),
-        (nameof(StrengthAttribute), "-1")
+        (nameof(SearchAttribute), "30"),
+        (nameof(BonusStrengthAttribute), "-1"),
+        (nameof(UseDeviceAttribute), "12"),
     };
 }

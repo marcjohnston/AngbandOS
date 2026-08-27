@@ -14,11 +14,10 @@ internal class CharismaAbility : Ability
     public override string DescStatNeg => "ugly";
     public override string DescStatPos => "cute";
     public override string Act => "beautiful";
-    public override string Name => "CHA: ";
-    public override string NameReduced => "cha: ";
+    public override string Abbreviation => "CHA";
     public override void FlagActions()
     {
-        if (Game.CharacterClass.SpellStat == this)
+        if (Game.CharacterClass.SpellAbility == this)
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();

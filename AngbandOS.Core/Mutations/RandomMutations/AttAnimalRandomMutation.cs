@@ -13,27 +13,9 @@ internal class AttAnimalRandomMutation : Mutation
     public override string GainMessage => "You start attracting animals.";
     public override string HaveMessage => "You attract animals.";
     public override string LoseMessage => "You stop attracting animals.";
-
-    public override void ProcessWorld()
+    public override string Title => "Animal Attraction (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (Game.HasAntiMagic || base.Game.DieRoll(7000) != 1)
-        {
-            return;
-        }
-        bool aSummon;
-        if (base.Game.DieRoll(3) == 1)
-        {
-            aSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(AnimalMonsterRaceFilter)), true, true);
-        }
-        else
-        {
-            aSummon = Game.SummonSpecific(Game.MapY.IntValue, Game.MapX.IntValue, Game.Difficulty, Game.SingletonRepository.Get<MonsterRaceFilter>(nameof(AnimalMonsterRaceFilter)), true, false);
-        }
-        if (!aSummon)
-        {
-            return;
-        }
-        Game.MsgPrint("You have attracted an animal!");
-        Game.Disturb(false);
-    }
+        (1, nameof(AttAnimalRandomMutationItemEnhancement))
+    };
 }

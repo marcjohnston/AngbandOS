@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Rock to mud.
 /// </summary>
-[Serializable]
 public class StoneToMudDirectionalActivation : ActivationGameConfiguration
 {
     

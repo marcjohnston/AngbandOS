@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class DominationProjectile : ProjectileGameConfiguration
 {
     public override string? EffectAnimationBindingKey => nameof(WhiteControlAnimation);

@@ -23,10 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		Documents\AngbandOS.xlsx = Documents\AngbandOS.xlsx
 		Documents\Cthangband.xlsx = Documents\Cthangband.xlsx
-		Documents\Game State Bag.pptx = Documents\Game State Bag.pptx
 		Documents\Generate SQL Database.pptx = Documents\Generate SQL Database.pptx
 		Documents\Object Property Design and Binding.pptx = Documents\Object Property Design and Binding.pptx
 		Documents\Persistence Provider Setup.pptx = Documents\Persistence Provider Setup.pptx
+		Documents\Singletons Design.pptx = Documents\Singletons Design.pptx
+		Documents\Serialization and Deserialization with the Game State Bag.pptx = Documents\Serialization and Deserialization with the Game State Bag.pptx
 		Documents\Web Front-End Test Cases.pptx = Documents\Web Front-End Test Cases.pptx
 	EndProjectSection
 EndProject

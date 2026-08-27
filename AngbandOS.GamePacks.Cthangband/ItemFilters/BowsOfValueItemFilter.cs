@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for bows that have value.
 /// </summary>
-[Serializable]
 public class BowsOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override bool? CanProjectArrows => true;

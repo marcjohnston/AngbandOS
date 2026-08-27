@@ -1,5 +1,4 @@
 namespace AngbandOS.GamePacks.Cthangband;
-[Serializable]
 internal class HighMageFireBoltSpellChaosRealmSuccessMappedSpellScript : MappedSpellScriptGameConfiguration
 {
     public override string SpellBindingKey => nameof(FireBoltChaosSpell);

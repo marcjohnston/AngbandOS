@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class DraconianRaceConfusionOrPsiCharacterClassRacialPowerConditionalScript : ConditionalScriptGameConfiguration
 {
     public override string ConditionalKey => nameof(DraconianRaceConfusionOrPsiCharacterClassRacialPowerConditional);

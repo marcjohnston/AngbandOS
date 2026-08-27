@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class CyclopsRace : Race
 {
     private CyclopsRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(CyclopsRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(CyclopsRaceItemEnhancement)) 
+    };
     public override string Title => "Cyclops";
-    public override int UseDevice => -5;
-    public override int SavingThrow => -5;
-    public override int Stealth => -2;
-    public override int Search => -2;
     public override int BasePerception => 5;
     public override int MeleeToHit => 20;
     public override int RangedToHit => 12;
@@ -33,15 +31,7 @@ internal class CyclopsRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 20 ? "throw boulder      (racial, unusable until level 20)" : "throw boulder      (racial, cost 15, dam 3*lvl, STR based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResSoundAttribute)).Set();
-    }
-
-    protected override string GenerateNameSyllableSetName => nameof(DwarvenSyllableSet);
-
+    protected override string GenerateNameSyllableSetBindingKey => nameof(DwarvenSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 19)
@@ -49,9 +39,5 @@ internal class CyclopsRace : Race
             return new string[] { $"You can throw a boulder, dam. {3 * level} (cost 15)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasSoundResistance = true;
     }
 }

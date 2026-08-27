@@ -5,6 +5,6 @@ internal class ArtifactBiasCanSlayBooleanGetItemProperty : GetItemProperty<bool>
 
     public override bool Get(Item item)
     {
-        return item.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(ArtifactBiasCanSlayAttribute)).Get();
+        return item.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(ArtifactBiasCanSlayAttribute)).Get();
     }
 }

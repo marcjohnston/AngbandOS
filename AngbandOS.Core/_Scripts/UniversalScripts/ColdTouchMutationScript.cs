@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class ColdTouchMutationScript : UniversalScript, IGetKey
+internal class ColdTouchMutationScript : ActiveMutationScript
 {
     private ColdTouchMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "cold touch";
     public override void ExecuteScript()
     {
         if (!Game.GetDirectionNoAim(out int dir))
@@ -15,7 +12,7 @@ internal class ColdTouchMutationScript : UniversalScript, IGetKey
         int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
         int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
         GridTile cPtr = Game.Grid[y][x];
-        if (cPtr.MonsterIndex == 0)
+        if (cPtr.Monster is null)
         {
             Game.MsgPrint("You wave your hands in the air.");
             return;

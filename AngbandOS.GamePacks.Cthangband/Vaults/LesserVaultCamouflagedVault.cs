@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class LesserVaultCamouflagedVault : VaultGameConfiguration
 {
     public override string Name => "Lesser Vault (Camouflaged)";

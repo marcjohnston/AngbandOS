@@ -13,24 +13,9 @@ internal class HpToSpRandomMutation : Mutation
     public override string GainMessage => "You are subject to fits of painful clarity.";
     public override string HaveMessage => "Your blood sometimes rushes to your head.";
     public override string LoseMessage => "You are no longer subject to fits of painful clarity.";
-
-    public override void ProcessWorld()
+    public override string Title => "Clarity (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (Game.HasAntiMagic || base.Game.DieRoll(4000) != 1)
-        {
-            return;
-        }
-        int wounds = Game.MaxMana.IntValue - Game.Mana.IntValue;
-        if (wounds <= 0)
-        {
-            return;
-        }
-        int healing = Game.Health.IntValue;
-        if (healing > wounds)
-        {
-            healing = wounds;
-        }
-        Game.Mana.IntValue += healing;
-        Game.TakeHit(healing, "blood rushing to the head");
-    }
+        (1, nameof(HpToSpRandomMutationItemEnhancement))
+    };
 }

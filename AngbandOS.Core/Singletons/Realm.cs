@@ -128,4 +128,9 @@ internal sealed class Realm : IGetKey, IToJson, IGameSerialize
 
     public string ClassSubname { get; }
     #endregion
+
+    public override string ToString()
+    {
+        return $"{nameof(Realm)}: {Name}";
+    }
 }

@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(BrandFireAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
         (nameof(HoldLifeAttribute), "true"),
@@ -30,17 +25,17 @@ public class QuarterstaffOfAtalFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(TelepathyAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.ProbingDetectionAndFullIdEvery1000Activation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "13"),
         (nameof(MeleeToHitAttribute), "10"),
         (nameof(DamageDiceAttribute), "1"),
         (nameof(ValueAttribute), "140000"),
-        (nameof(WisdomAttribute), "4"),
-        (nameof(IntelligenceAttribute), "4"),
-        (nameof(CharismaAttribute), "4"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(BonusWisdomAttribute), "4"),
+        (nameof(BonusIntelligenceAttribute), "4"),
+        (nameof(BonusCharismaAttribute), "4"),
+        (nameof(GlowRadiusAttribute), "3"),
     };
     public override string FriendlyName => "of Atal";
 }

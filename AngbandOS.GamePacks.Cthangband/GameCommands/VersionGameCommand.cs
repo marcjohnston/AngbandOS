@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Print the version number and build info of the game
 /// </summary>
-[Serializable]
 public class VersionGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'V';

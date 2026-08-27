@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Fill us up.
 /// </summary>
-[Serializable]
 public class SatiateActivation : ActivationGameConfiguration
 {
 

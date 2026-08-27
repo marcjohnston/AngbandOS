@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents an item filter for all amulets of value.
 /// </summary>
-[Serializable]
 public class AmuletsOfValueItemFilter : ItemFilterGameConfiguration
 {
     public override bool? IsOfValue => true;

@@ -1,20 +1,27 @@
-
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class FanaticCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
-        (nameof(CharismaAttribute), "-2"),
-        (nameof(ConstitutionAttribute), "2"),
-        (nameof(WisdomAttribute), "0"),
-        (nameof(IntelligenceAttribute), "1"),
-        (nameof(DexterityAttribute), "1"),
+        (nameof(ReceivesLevelRewardsAttribute), "true")
+    };
+
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    {
+        (nameof(BonusCharismaAttribute), "-2"),
+        (nameof(BonusConstitutionAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "0"),
+        (nameof(BonusIntelligenceAttribute), "1"),
+        (nameof(BonusDexterityAttribute), "1"),
+        (nameof(BonusStrengthAttribute), "2"),
         (nameof(ValueAttribute), "6300"),
         (nameof(DisarmTrapsAttribute), "20"),
-        (nameof(UseDeviceAttribute), "24"),
         (nameof(SavingThrowAttribute), "30"),
-        (nameof(StrengthAttribute), "2")
+        (nameof(SavingThrowBonusPerLevelAttribute), "10"),
+        (nameof(UseDeviceAttribute), "24"),
+        (nameof(UseDeviceBonusPerLevelAttribute), "11"),
+        (nameof(SearchAttribute), "14"),
+        (nameof(StealthAttribute), "2")
     };
 }

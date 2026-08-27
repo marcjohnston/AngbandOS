@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class GauntletGlovesItemFactory : ItemFactoryGameConfiguration
 {
     public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.SetOfGauntletsIronfistFixedArtifact), nameof(FixedArtifactsEnum.SetOfGauntletsOfGhoulsFixedArtifact), nameof(FixedArtifactsEnum.SetOfGauntletsOfThanosFixedArtifact), nameof(FixedArtifactsEnum.SetOfGauntletsOfTheDeadFixedArtifact), nameof(FixedArtifactsEnum.SetOfGauntletsWhiteSparkFixedArtifact) };

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Poison1In3OrNecromantic1In6OrRogue1ArtifactBiasWeightedRandom : ArtifactBiasWeightedRandomGameConfiguration
 {
     public override (string?, int)[] ArtifactBiasBindingKeyAndWeightTuples => new (string?, int)[]

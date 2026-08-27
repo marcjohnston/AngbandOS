@@ -13,16 +13,9 @@ internal class BersRageRandomMutation : Mutation
     public override string GainMessage => "You become subject to fits of berserk rage!";
     public override string HaveMessage => "You are subject to berserker fits.";
     public override string LoseMessage => "You are no longer subject to fits of berserk rage!";
-
-    public override void ProcessWorld()
+    public override string Title => "Berserk Rage (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (base.Game.DieRoll(3000) != 1)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.MsgPrint("RAAAAGHH!");
-        Game.MsgPrint("You feel a fit of rage coming over you!");
-        Game.SuperheroismTimer.AddTimer(10 + base.Game.DieRoll(Game.ExperienceLevel.IntValue));
-    }
+        (1, nameof(BersRageRandomMutationItemEnhancement))
+    };
 }

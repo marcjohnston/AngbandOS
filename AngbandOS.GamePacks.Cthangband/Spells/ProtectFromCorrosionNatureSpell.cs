@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 internal class ProtectFromCorrosionNatureSpell : SpellGameConfiguration
 {
     public override string Name => "Protection from Corrosion";

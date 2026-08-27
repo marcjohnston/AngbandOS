@@ -15,20 +15,9 @@ internal class ProdManaRandomMutation : Mutation
     public override string GainMessage => "You start producing magical energy uncontrollably.";
     public override string HaveMessage => "You are producing magical energy uncontrollably.";
     public override string LoseMessage => "You stop producing magical energy uncontrollably.";
-
-    public override void ProcessWorld()
+    public override string Title => "Random Magic (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (Game.HasAntiMagic || base.Game.DieRoll(9000) != 1)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.MsgPrint("Magical energy flows through you! You must release it!");
-        Game.MsgPrint(string.Empty);
-
-        // Get a direction.  We do not care if the player cancels the direction, we will release the energy anyway.
-        Game.GetDirectionWithAim(out int direction);
-        Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(ManaProjectile));
-        projectile.TargetedFire(direction, Game.ExperienceLevel.IntValue * 2, 3, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
-    }
+        (1, nameof(ProdManaRandomMutationItemEnhancement))
+    };
 }

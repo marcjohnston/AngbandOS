@@ -14,11 +14,10 @@ internal class WisdomAbility : Ability
     public override string DescStatNeg => "naive";
     public override string DescStatPos => "wise";
     public override string Act => "wise";
-    public override string Name => "WIS: ";
-    public override string NameReduced => "wis: ";
+    public override string Abbreviation => "WIS";
     public override void FlagActions()
     {
-        if (Game.CharacterClass.SpellStat == this)
+        if (Game.CharacterClass.SpellAbility == this)
         {
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateManaFlaggedAction)).Set();
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateSpellsFlaggedAction)).Set();

@@ -19,14 +19,9 @@ internal class GenocideScript : Script, IScript, ICastSpellScript, IScriptBool, 
     {
         int msec = Constants.DelayFactorInMilliseconds;
         Game.GetCom("Choose a monster race (by symbol) to carnage: ", out char typ);
-        for (int i = 1; i < Game.MonsterMax; i++)
+        foreach (Monster mPtr in Game.MonsterList)
         {
-            Monster mPtr = Game.Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             if (rPtr.Unique)
             {
                 continue;
@@ -39,7 +34,7 @@ internal class GenocideScript : Script, IScript, ICastSpellScript, IScriptBool, 
             {
                 continue;
             }
-            Game.DeleteMonsterByIndex(i, true);
+            Game.DeleteMonster(mPtr);
             if (playerCast) // TODO: Move this to the caller
             {
                 Game.TakeHit(Game.DieRoll(4), "the strain of casting Carnage");

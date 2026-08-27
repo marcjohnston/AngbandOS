@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Dispel evil with a strength of x5.
 /// </summary>
-[Serializable]
 public class DispelEvil5xEvery300p1d300Activation : ActivationGameConfiguration
 {
     

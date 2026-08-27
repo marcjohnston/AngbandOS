@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Spike a door closed
 /// </summary>
-[Serializable]
 public class SpikeGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'j';

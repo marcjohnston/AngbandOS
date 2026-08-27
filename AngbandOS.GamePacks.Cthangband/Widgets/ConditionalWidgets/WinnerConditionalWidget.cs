@@ -7,7 +7,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class WinnerConditionalWidget : ConditionalWidgetGameConfiguration
 {
     public override string ConditionalKey => nameof(WinnerConditional);

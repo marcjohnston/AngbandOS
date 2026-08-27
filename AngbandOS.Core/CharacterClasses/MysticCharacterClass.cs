@@ -9,7 +9,15 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class MysticCharacterClass : CharacterClass
 {
     private MysticCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(MysticCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
+    {
+        (1, null, nameof(MysticCharacterClassItemEnhancement)),
+        (10, null, nameof(MysticCharacterClassLevel10ItemEnhancement)),
+        (25, null, nameof(MysticCharacterClassLevel25ItemEnhancement)),
+        (30, false, nameof(MysticCharacterClassLevel30ItemEnhancement)),
+        (40, null, nameof(MysticCharacterClassLevel40ItemEnhancement)),
+    };
+    public override bool IsMartialArtist => true;
     public override int ID => 15;
     public override string Title => "Mystic";
     public override int? InstantSpeedLevel => 10;
@@ -18,17 +26,10 @@ internal class MysticCharacterClass : CharacterClass
     public override int? InstantFreeActionLevel => 30;
     public override bool RenderSpellsPerLevel => false;
     public override int? InstantConfusionResistanceLevel => 10;
-    public override int UseDevice => 30;
-    public override int SavingThrow => 30;
-    public override int Stealth => 5;
-    public override int Search => 32;
     public override int BasePerception => 24;
     public override int MeleeToHit => 64;
     public override int RangedToHit => 50;
     public override int DisarmBonusPerLevel => 14;
-    public override int DeviceBonusPerLevel => 11;
-    public override int SaveBonusPerLevel => 11;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 40;
     public override int RangedAttackBonusPerLevel => 30;
     public override int HitDieBonus => 6;
@@ -44,36 +45,15 @@ internal class MysticCharacterClass : CharacterClass
     public override string MagicType => "psychic talents";
     public override int SpellWeight => 300;
     public override void Cast() => CastMentalism();
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility));
+    protected override string SpellAbilityBindingKey => nameof(WisdomAbility);
     public override int MaximumMeleeAttacksPerRound(int level) => level < 40 ? 3 : 4;
     public override int MaximumWeight => 40;
     public override int AttackSpeedMultiplier => 4;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(PriestlyArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(PriestlyArtifactBias), 1) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(55000 / ((level * level) + 40)));
 
-
     /// <summary>
-    /// Returns true, because characters of this class study martial arts.
+    /// Returns a weight limit, because characters of this class study martial arts.
     /// </summary>
-    public override bool IsMartialArtist => true;
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 9)
-        {
-            Game.HasConfusionResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 24)
-        {
-            Game.HasFearResistance = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 29 && !Game.MartialArtistHeavyArmor())
-        {
-            Game.HasFreeAction = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 39)
-        {
-            Game.HasTelepathy = true;
-        }
-    }
+    protected override string? ArmorMaxWeightExpressionText => "100+4*X";
 }

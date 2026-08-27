@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Summon phantom warriors or beasts.
 /// </summary>
-[Serializable]
 public class SummonFriendlyPhantomActivation : ActivationGameConfiguration
 {
     

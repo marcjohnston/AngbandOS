@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class CycloneVault : VaultGameConfiguration
 {
     public override string Name => "Cyclone";

@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ChestTrapCombination14 : ChestTrapCombinationGameConfiguration
 {
     public override string[] ChestTrapBindingKeys => new string[] { nameof(ChestTrapsEnum.LoseStrChestTrap), nameof(ChestTrapsEnum.LoseConChestTrap) };

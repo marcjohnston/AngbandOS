@@ -9,12 +9,11 @@ namespace AngbandOS.Core.Races;
 internal class YeekRace : Race
 {
     private YeekRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(YeekRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(YeekRaceItemEnhancement)),
+        (20, nameof(YeekRaceLevel20ItemEnhancement))
+    };
     public override string Title => "Yeek";
-    public override int UseDevice => 4;
-    public override int SavingThrow => 10;
-    public override int Stealth => 3;
-    public override int Search => 5;
     public override int BasePerception => 15;
     public override int MeleeToHit => -5;
     public override int RangedToHit => -5;
@@ -33,16 +32,7 @@ internal class YeekRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 15 ? "scare monster      (racial, unusable until level 15)" : "scare monster      (racial, cost 15, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResAcidAttribute)).Set();
-        if (level > 19)
-        {
-            itemCharacteristics.ImAcid = true;
-        }
-    }
-    protected override string GenerateNameSyllableSetName => nameof(YeekishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(YeekishSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 14)
@@ -50,13 +40,5 @@ internal class YeekRace : Race
             return new string[] { "You can make a terrifying scream (cost 15)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasAcidResistance = true;
-        if (Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasAcidImmunity = true;
-        }
     }
 }

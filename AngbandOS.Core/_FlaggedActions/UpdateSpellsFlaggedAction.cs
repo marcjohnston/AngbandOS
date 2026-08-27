@@ -36,7 +36,7 @@ internal class UpdateSpellsFlaggedAction : FlaggedAction
         {
             return;
         }
-        int numAllowed = Game.CharacterClass.SpellStat.HalfSpellsPerLevel * Game.HalfLevelsOfSpellcraft() / 2;
+        int numAllowed = Game.CharacterClass.SpellAbility.HalfSpellsPerLevel * Game.HalfLevelsOfSpellcraft() / 2;
 
         // Count the number of spells that were learned.
         int numKnown = 0;

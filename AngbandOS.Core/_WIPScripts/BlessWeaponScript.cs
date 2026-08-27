@@ -34,7 +34,7 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
         string oName = oPtr.GetDescription(false);
         if (oPtr.EffectiveAttributeSet.IsCursed)
         {
-            if ((oPtr.EffectiveAttributeSet.HeavyCurse && Game.DieRoll(100) < 33) || oPtr.EffectiveAttributeSet.PermaCurse)
+            if ((oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HeavyCurseAttribute)).Get() && Game.DieRoll(100) < 33) || oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(PermaCurseAttribute)).Get())
             {
                 Game.MsgPrint($"The black aura on {your} {oName} disrupts the blessing!");
                 return;
@@ -45,7 +45,7 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
             oPtr.Inscription = "uncursed";
             Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         }
-        if (oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get())
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(BlessedAttribute)).Get())
         {
             string s = oPtr.StackCount > 1 ? "were" : "was";
             Game.MsgPrint($"{your} {oName} {s} blessed already.");
@@ -55,7 +55,7 @@ internal class BlessWeaponScript : Script, IScript, ICastSpellScript
         {
             string s = oPtr.StackCount > 1 ? "" : "s";
             Game.MsgPrint($"{your} {oName} shine{s}!");
-            oPtr.EffectiveAttributeSet.Get<OrEffectiveAttributeValue>(nameof(BlessedAttribute)).Set();
+            oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(BlessedAttribute)).Set();
         }
         else
         {

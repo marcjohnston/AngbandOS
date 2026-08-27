@@ -13,14 +13,8 @@ internal class FireBodyPassiveMutation : Mutation
     public override string GainMessage => "Your body is enveloped in flames!";
     public override string HaveMessage => "Your body is enveloped in flames.";
     public override string LoseMessage => "Your body is no longer enveloped in flames.";
-
-    public override void OnGain()
-    {
-        Game.MutationFireHit = true;
-    }
-
-    public override void OnLose()
-    {
-        Game.MutationFireHit = false;
-    }
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(FireBodyPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Sheath of Fire (P)";
 }

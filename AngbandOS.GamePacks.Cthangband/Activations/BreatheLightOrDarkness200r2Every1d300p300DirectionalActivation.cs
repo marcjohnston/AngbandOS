@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BreatheLightOrDarkness200r2Every1d300p300DirectionalActivation : ActivationGameConfiguration
 {
 

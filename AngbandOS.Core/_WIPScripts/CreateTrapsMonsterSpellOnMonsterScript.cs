@@ -12,6 +12,6 @@ internal class CreateTrapsMonsterSpellOnMonsterScript : Script, IScriptMonsterMo
     public void ExecuteScriptMonsterMonster(Monster monster, Monster target)
     {
         Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(MakeTrapProjectile));
-        projectile.Fire(0, 1, target.MapY, target.MapX, 0, grid: true, item: true, hide: true, jump: false, beam: false, thru: false, kill: false, stop: false);
+        projectile.Fire(null, 1, target.MapY, target.MapX, 0, grid: true, item: true, hide: true, jump: false, beam: false, thru: false, kill: false, stop: false);
     }
 }

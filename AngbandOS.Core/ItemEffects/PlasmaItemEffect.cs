@@ -10,7 +10,7 @@ internal class PlasmaItemEffect : ItemEffect
 {
     private PlasmaItemEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override bool ApplyItem(Item oPtr, int who, int x, int y)
+    protected override bool ApplyItem(Item oPtr, Monster? monster, int x, int y)
     {
         bool obvious = false;
         bool ignore = false;
@@ -21,21 +21,21 @@ internal class PlasmaItemEffect : ItemEffect
         {
             plural = true;
         }
-        if (oPtr.EffectiveAttributeSet.HatesFire)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesFireAttribute)).Get())
         {
             doKill = true;
             noteKill = plural ? " burn up!" : " burns up!";
-            if (oPtr.EffectiveAttributeSet.IgnoreFire)
+            if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreFireAttribute)).Get())
             {
                 ignore = true;
             }
         }
-        if (oPtr.EffectiveAttributeSet.HatesElectricity)
+        if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(HatesElectricityAttribute)).Get())
         {
             ignore = false;
             doKill = true;
             noteKill = plural ? " are destroyed!" : " is destroyed!";
-            if (oPtr.EffectiveAttributeSet.IgnoreElec)
+            if (oPtr.EffectiveAttributeSet.Get<BitwiseOrEffectiveAttributeValue>(nameof(IgnoreElecAttribute)).Get())
             {
                 ignore = true;
             }
@@ -66,7 +66,7 @@ internal class PlasmaItemEffect : ItemEffect
                 Game.DeleteObject(oPtr);
                 if (isPotion)
                 {
-                    oPtr.Smash(who, y, x);
+                    oPtr.Smash(monster, y, x);
                 }
                 Game.ConsoleView.RefreshMapLocation(y, x);
             }

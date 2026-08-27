@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Open a door or chest
 /// </summary>
-[Serializable]
 public class OpenGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'o';

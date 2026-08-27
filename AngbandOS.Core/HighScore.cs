@@ -7,7 +7,7 @@
 
 //namespace AngbandOS
 //{
-//    internal class HighScore
+//internal class HighScore
 //    {
 //        public readonly string How;
 //        public readonly int Pclass;

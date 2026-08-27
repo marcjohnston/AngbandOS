@@ -9,12 +9,11 @@ namespace AngbandOS.Core.Races;
 internal class SkeletonRace : Race
 {
     private SkeletonRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(SkeletonRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(SkeletonRaceItemEnhancement)),
+        (10, nameof(SkeletonRaceLevel10ItemEnhancement))
+    };
     public override string Title => "Skeleton";
-    public override int UseDevice => -5;
-    public override int SavingThrow => 5;
-    public override int Stealth => -1;
-    public override int Search => -1;
     public override int BasePerception => 8;
     public override int MeleeToHit => 10;
     public override int RangedToHit => 0;
@@ -32,19 +31,7 @@ internal class SkeletonRace : Race
     public override int Chart => 102;
     public override string RacialPowersDescription(int lvl) => lvl < 30 ? "restore life       (racial, unusable until level 30)" : "restore life       (racial, cost 30, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResShardsAttribute)).Set();
-        itemCharacteristics.HoldLife = true;
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-        if (level > 9)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Set();
-        }
-    }
-    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(HumanSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 29)
@@ -52,17 +39,6 @@ internal class SkeletonRace : Race
             return new string[] { "You can restore lost life forces (cost 30)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasShardResistance = true;
-        Game.HasHoldLife = true;
-        Game.HasSeeInvisibility = true;
-        Game.HasPoisonResistance = true;
-        if (Game.ExperienceLevel.IntValue > 9)
-        {
-            Game.HasColdResistance = true;
-        }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
 
@@ -89,7 +65,7 @@ internal class SkeletonRace : Race
         if (Game.DieRoll(12) == 1)
         {
             Game.MsgPrint("Some of the fluid falls through your jaws!");
-            item.Smash(0, Game.MapY.IntValue, Game.MapX.IntValue);
+            item.Smash(null, Game.MapY.IntValue, Game.MapX.IntValue);
         }
     }
     public override int? ImmuneToBleedingAtLevel => 1;

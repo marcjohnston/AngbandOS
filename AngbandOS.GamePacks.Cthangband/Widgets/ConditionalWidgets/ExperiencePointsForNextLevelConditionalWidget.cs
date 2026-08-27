@@ -11,7 +11,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// experience points needed, the <see cref="ExperiencePointsForNextLevelLostIntWidget"/> widget is rendered; otherwise the <see cref="ExperiencePointsForNextLevelIntWidget"/>
 /// widget is rendered.
 /// </summary>
-[Serializable]
 public class ExperiencePointsForNextLevelConditionalWidget : ConditionalWidgetGameConfiguration
 {
     public override string ConditionalKey => nameof(ExperiencePointsForNextLevelConditional);

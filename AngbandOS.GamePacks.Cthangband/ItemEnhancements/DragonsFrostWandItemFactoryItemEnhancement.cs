@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class DragonsFrostWandItemFactoryItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HatesElectricityAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -11,7 +10,7 @@ public class DragonsFrostWandItemFactoryItemEnhancement : ItemEnhancementGameCon
         (nameof(IgnoreElecAttribute), "true"),
         (nameof(IgnoreFireAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(WeightAttribute), "10"),
         (nameof(ValueAttribute), "2400"),

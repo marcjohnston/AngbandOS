@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class EqualSignSymbol : SymbolGameConfiguration
 {
     public override char Character => '=';

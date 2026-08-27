@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class APuffOfGreenGasSurroundsYouRenderMessageScript : RenderMessageScriptGameConfiguration
 {
     public override string Message => "A puff of green gas surrounds you!";

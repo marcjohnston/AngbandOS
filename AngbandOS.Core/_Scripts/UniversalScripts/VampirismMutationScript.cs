@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class VampirismMutationScript : UniversalScript, IGetKey
+internal class VampirismMutationScript : ActiveMutationScript
 {
     private VampirismMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "vampiric drain";
     public override void ExecuteScript()
     {
         if (!Game.GetDirectionWithAim(out int dir))

@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -15,15 +14,15 @@ public class QuarterstaffEririlFixedArtifactItemEnhancement : ItemEnhancementGam
         (nameof(ShowModsAttribute), "true"),
         (nameof(SlayEvilAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
-        (nameof(RadiusAttribute), "3"),
+        (nameof(GlowRadiusAttribute), "3"),
         (nameof(ToDamageAttribute), "5"),
         (nameof(MeleeToHitAttribute), "3"),
         (nameof(ValueAttribute), "20000"),
-        (nameof(WisdomAttribute), "4"),
-        (nameof(IntelligenceAttribute), "4"),
+        (nameof(BonusWisdomAttribute), "4"),
+        (nameof(BonusIntelligenceAttribute), "4"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.IdentifyEvery10Activation);
     public override string FriendlyName => "'Eriril'";

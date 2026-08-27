@@ -4,8 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.GamePacks.Cthangband;
-
 namespace AngbandOS.Core.Mutations.RandomMutations;
 
 internal class FlatulentRandomMutation : Mutation
@@ -15,16 +13,9 @@ internal class FlatulentRandomMutation : Mutation
     public override string GainMessage => "You become subject to uncontrollable flatulence.";
     public override string HaveMessage => "You are subject to uncontrollable flatulence.";
     public override string LoseMessage => "You are no longer subject to uncontrollable flatulence.";
-
-    public override void ProcessWorld()
+    public override string Title => "Flatulence (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (base.Game.DieRoll(3000) == 13)
-        {
-            Game.Disturb(false);
-            Game.MsgPrint("BRRAAAP! Oops.");
-            Game.MsgPrint(string.Empty);
-            Projectile projectile = Game.SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
-            projectile.TargetedFire(0, Game.ExperienceLevel.IntValue, 3, grid: true, item: true, kill: true, jump: false, beam: false, thru: true, hide: false, stop: true);
-        }
-    }
+        (1, nameof(FlatulentRandomMutationItemEnhancement))
+    };
 }

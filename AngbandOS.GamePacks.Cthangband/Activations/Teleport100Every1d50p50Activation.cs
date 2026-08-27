@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class Teleport100Every1d50p50Activation : ActivationGameConfiguration
 {
 

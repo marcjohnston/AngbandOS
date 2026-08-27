@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class TeleportSelfScriptMonsterSpell : ScriptMonsterSpellGameConfiguration
 {
     public override (string, string) KnowledgeAction => ("which", "teleport-self");

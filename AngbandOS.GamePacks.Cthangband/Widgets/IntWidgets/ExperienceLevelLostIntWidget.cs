@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents the widget used to render the experience level of the player when the player has lost one or more levels of expereience.
 /// </summary>
-[Serializable]
 public class ExperienceLevelLostIntWidget : IntWidgetGameConfiguration
 {
     public override int X => 6;

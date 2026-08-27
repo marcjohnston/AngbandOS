@@ -22,14 +22,9 @@ internal class DetectNormalMonstersScript : Script, IScript, ICastSpellScript, I
     public IdentifiedResultEnum ExecuteEatOrQuaffScript()
     {
         bool isIdentified = false;
-        for (int i = 1; i < Game.MonsterMax; i++)
+        foreach (Monster mPtr in Game.MonsterList)
         {
-            Monster mPtr = Game.Monsters[i];
             MonsterRace rPtr = mPtr.Race;
-            if (mPtr.Race == null)
-            {
-                continue;
-            }
             int y = mPtr.MapY;
             int x = mPtr.MapX;
             if (!Game.PanelContains(y, x))

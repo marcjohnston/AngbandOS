@@ -1,11 +1,8 @@
 namespace AngbandOS.Core.Scripts;
-internal class PanicHitMutationScript : UniversalScript, IGetKey
+internal class PanicHitMutationScript : ActiveMutationScript
 {
     private PanicHitMutationScript(Game game) : base(game) { }
-    public virtual string Key => GetType().Name;
-
-    public string GetKey => Key;
-    public void Bind(RestoreGameState? restoreGameState) { }
+    public override string Name => "panic hit";
     public override void ExecuteScript()
     {
         if (!Game.GetDirectionNoAim(out int dir))
@@ -14,7 +11,7 @@ internal class PanicHitMutationScript : UniversalScript, IGetKey
         }
         int y = Game.MapY.IntValue + Game.KeypadDirectionYOffset[dir];
         int x = Game.MapX.IntValue + Game.KeypadDirectionXOffset[dir];
-        if (Game.Grid[y][x].MonsterIndex != 0)
+        if (Game.Grid[y][x].Monster is not null)
         {
             Game.PlayerAttackMonster(y, x);
             Game.RunScript(nameof(TeleportSelf30TeleportSelfScript));

@@ -10,7 +10,7 @@ internal class InertiaMonsterEffect : MonsterEffect
 {
     private InertiaMonsterEffect(Game game) : base(game) { } // This object is a singleton.
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -42,7 +42,7 @@ internal class InertiaMonsterEffect : MonsterEffect
                 note = " starts moving slower.";
             }
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, null, 0);
+        ApplyProjectileDamageToMonster(mPtr, dam, note, null, 0);
         return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

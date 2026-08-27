@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class OrbOfInstabilityItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(ValuelessAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -13,7 +12,7 @@ public class OrbOfInstabilityItemEnhancement : ItemEnhancementGameConfiguration
         (nameof(TeleportAttribute), "true"),
     };
     public override string? FriendlyName => "of Instability";
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(ValueAttribute), "650"),
     };

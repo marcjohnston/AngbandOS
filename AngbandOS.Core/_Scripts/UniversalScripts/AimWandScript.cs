@@ -55,23 +55,11 @@ internal class AimWandScript : UniversalScript, IGetKey
         // Using a wand takes 100 energy
         Game.EnergyUse = 100;
         int itemLevel = item.LevelNormallyFound;
-        // Chance of success is your skill - item level, with item level capped at 50 and your
-        // skill halved if you're confused
-        int chance = Game.SkillUseDevice;
-        if (Game.ConfusionTimer.Value != 0)
-        {
-            chance /= 2;
-        }
-        chance -= itemLevel > 50 ? 50 : itemLevel;
-        // Always a small chance of success
-        if (chance < Constants.UseDevice && Game.RandomLessThan(Constants.UseDevice - chance + 1) == 0)
-        {
-            chance = Constants.UseDevice;
-        }
-        if (chance < Constants.UseDevice || Game.DieRoll(chance) < Constants.UseDevice)
+
+        if (!Game.UseDeviceItemTest(itemLevel))
         {
             Game.MsgPrint("You failed to use the wand properly.");
-            return; // TODO: This is success = false, and cancel = false.  This should be a cancelable script.
+            return; 
         }
         // Make sure we have charges
         if (item.WandChargesRemaining <= 0)

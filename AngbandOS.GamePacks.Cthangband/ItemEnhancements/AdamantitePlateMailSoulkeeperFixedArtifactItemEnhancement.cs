@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(HoldLifeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -20,12 +19,12 @@ public class AdamantitePlateMailSoulkeeperFixedArtifactItemEnhancement : ItemEnh
         (nameof(SustConAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.Heal1000Every888Activation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ValueAttribute), "280000"),        (nameof(AttacksAttribute), "20"),
         (nameof(MeleeToHitAttribute), "-4"),
-        (nameof(ConstitutionAttribute), "2"),
+        (nameof(BonusConstitutionAttribute), "2"),
     };
     public override string FriendlyName => "'Soulkeeper'";
 }

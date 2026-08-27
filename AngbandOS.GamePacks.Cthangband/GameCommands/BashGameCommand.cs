@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Bash a door to open it
 /// </summary>
-[Serializable]
 public class BashGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => 'B';

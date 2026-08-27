@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class HighElfRace : Race
 {
     private HighElfRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(HighElfRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(HighElfRaceItemEnhancement)) 
+    };
     public override string Title => "High Elf";
-    public override int UseDevice => 20;
-    public override int SavingThrow => 20;
-    public override int Stealth => 4;
-    public override int Search => 3;
     public override int BasePerception => 14;
     public override int MeleeToHit => 10;
     public override int RangedToHit => 25;
@@ -30,16 +28,5 @@ internal class HighElfRace : Race
     /// High-Elf 7->8->9->54->55->56->End 
     /// </summary>
     public override int Chart => 7;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        if (level > 19)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-        }
-    }
-    protected override string GenerateNameSyllableSetName => nameof(ElvishSyllableSet);
-    public override void CalcBonuses()
-    {
-        Game.HasSeeInvisibility = true;
-    }
+    protected override string GenerateNameSyllableSetBindingKey => nameof(ElvishSyllableSet);
 }

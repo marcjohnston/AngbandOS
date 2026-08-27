@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class FullPlateArmorOfTheGodsFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(IgnoreAcidAttribute), "true"),
         (nameof(IgnoreColdAttribute), "true"),
@@ -17,13 +16,13 @@ public class FullPlateArmorOfTheGodsFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(ResNexusAttribute), "true"),
         (nameof(ResSoundAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "10"),
         (nameof(AttacksAttribute), "25"),
         (nameof(ValueAttribute), "50000"),
         (nameof(WeightAttribute), "-80"),
-        (nameof(ConstitutionAttribute), "1"),
+        (nameof(BonusConstitutionAttribute), "1"),
     };
     public override string FriendlyName => "of the Gods";
 }

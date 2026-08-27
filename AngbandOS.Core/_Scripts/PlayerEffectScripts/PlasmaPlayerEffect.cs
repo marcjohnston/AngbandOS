@@ -19,7 +19,7 @@ internal class PlasmaPlayerEffect : PlayerEffectUniversalScript
             int kk = Game.DieRoll(dam > 40 ? 35 : (dam * 3 / 4) + 5);
             Game.StunTimer.AddTimer(kk);
         }
-        if (!(Game.HasFireResistance || Game.FireResistanceTimer.Value != 0 || Game.HasFireImmunity))
+        if (!Game.HasFireResistance && !Game.HasFireImmunity)
         {
             Game.InvenDamage(Game.SetAcidDestroy, 3);
         }

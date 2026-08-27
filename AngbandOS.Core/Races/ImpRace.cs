@@ -9,12 +9,12 @@ namespace AngbandOS.Core.Races;
 internal class ImpRace : Race
 {
     private ImpRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(ImpRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(ImpRaceItemEnhancement)),
+        (10, nameof(ImpRaceLevel10ItemEnhancement)),
+        (20, nameof(ImpRaceLevel20ItemEnhancement))
+    };
     public override string Title => "Imp";
-    public override int UseDevice => 2;
-    public override int SavingThrow => -1;
-    public override int Stealth => 1;
-    public override int Search => -1;
     public override int BasePerception => 10;
     public override int MeleeToHit => 5;
     public override int RangedToHit => -5;
@@ -33,20 +33,7 @@ internal class ImpRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 9 ? "fire bolt/ball     (racial, unusable until level 9/30)" : "fire bolt/ball(30) (racial, cost 15, dam lvl, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResFireAttribute)).Set();
-        if (level > 9)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-        }
-        if (level > 19)
-        {
-            itemCharacteristics.ImFire = true;
-        }
-    }
-    protected override string GenerateNameSyllableSetName => nameof(AngelicSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(AngelicSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         List<string> values = new List<string>();
@@ -61,18 +48,6 @@ internal class ImpRace : Race
         if (values.Count == 0)
             return null;
         return values.ToArray();
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasFireResistance = true;
-        if (Game.ExperienceLevel.IntValue > 9)
-        {
-            Game.HasSeeInvisibility = true;
-        }
-        if (Game.ExperienceLevel.IntValue > 19)
-        {
-            Game.HasFireImmunity = true;
-        }
     }
     public override string ChanceOfSanityBlastImmunityExpressionText => "100";
 }

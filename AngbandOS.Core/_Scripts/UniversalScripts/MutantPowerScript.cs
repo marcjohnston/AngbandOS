@@ -40,6 +40,13 @@ internal class MutantPowerScript : UniversalScript, IGetKey
     /// <returns></returns>
     public override void ExecuteScript()
     {
+        if (Game.ConfusionTimer.Value != 0)
+        {
+            Game.MsgPrint("You are too confused to use any powers!");
+            Game.EnergyUse = 0;
+            return;
+        }
+
         int i = 0;
         int num;
         int[] powers = new int[36];
@@ -48,7 +55,7 @@ internal class MutantPowerScript : UniversalScript, IGetKey
         int petCtr;
         bool allPets = false;
         Monster monster;
-        bool hasRacial = Game.Race.HasRacialPowers;
+        bool hasRacialPowers = Game.Race.RacialPowerScript is not null;
         string racialPowersDescription = Game.Race.RacialPowersDescription(Game.ExperienceLevel.IntValue);
         for (num = 0; num < 36; num++)
         {
@@ -56,28 +63,21 @@ internal class MutantPowerScript : UniversalScript, IGetKey
             powerDesc[num] = "";
         }
         num = 0;
-        if (Game.ConfusionTimer.Value != 0)
+        foreach (Monster mPtr in Game.MonsterList)
         {
-            Game.MsgPrint("You are too confused to use any powers!");
-            Game.EnergyUse = 0;
-            return;
-        }
-        for (petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
-        {
-            monster = Game.Monsters[petCtr];
-            if (monster.IsPet)
+            if (mPtr.IsPet)
             {
                 pets++;
             }
         }
         List<Mutation> activeMutations = ActivatableMutations();
-        if (!hasRacial && activeMutations.Count == 0 && pets == 0)
+        if (!hasRacialPowers && activeMutations.Count == 0 && pets == 0)
         {
             Game.MsgPrint("You have no powers to activate.");
             Game.EnergyUse = 0;
             return;
         }
-        if (hasRacial)
+        if (hasRacialPowers)
         {
             powers[0] = int.MaxValue;
             powerDesc[0] = racialPowersDescription;
@@ -167,10 +167,9 @@ internal class MutantPowerScript : UniversalScript, IGetKey
             {
                 allPets = true;
             }
-            for (petCtr = Game.MonsterMax - 1; petCtr >= 1; petCtr--)
+            foreach (Monster mPtr in Game.MonsterList)
             {
-                monster = Game.Monsters[petCtr];
-                if (monster.IsPet)
+                if (mPtr.IsPet)
                 {
                     bool deleteThis = false;
                     if (allPets)
@@ -179,7 +178,7 @@ internal class MutantPowerScript : UniversalScript, IGetKey
                     }
                     else
                     {
-                        string friendName = monster.VisibleName;
+                        string friendName = mPtr.VisibleName;
                         string checkFriend = $"Dismiss {friendName}? ";
                         if (Game.GetCheck(checkFriend))
                         {
@@ -188,7 +187,7 @@ internal class MutantPowerScript : UniversalScript, IGetKey
                     }
                     if (deleteThis)
                     {
-                        Game.DeleteMonsterByIndex(petCtr, true);
+                        Game.DeleteMonster(mPtr);
                         dismissed++;
                     }
                 }

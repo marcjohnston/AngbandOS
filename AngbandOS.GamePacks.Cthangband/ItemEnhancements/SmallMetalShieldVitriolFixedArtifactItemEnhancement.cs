@@ -1,9 +1,8 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class SmallMetalShieldVitriolFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(FreeActAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
@@ -16,13 +15,13 @@ public class SmallMetalShieldVitriolFixedArtifactItemEnhancement : ItemEnhanceme
         (nameof(ResConfAttribute), "true"),
         (nameof(ResSoundAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(AttacksAttribute), "25"),
         (nameof(ValueAttribute), "60000"),
-        (nameof(ConstitutionAttribute), "4"),
-        (nameof(StrengthAttribute), "4"),
+        (nameof(BonusConstitutionAttribute), "4"),
+        (nameof(BonusStrengthAttribute), "4"),
     };
     public override string FriendlyName => "'Vitriol'";
 }

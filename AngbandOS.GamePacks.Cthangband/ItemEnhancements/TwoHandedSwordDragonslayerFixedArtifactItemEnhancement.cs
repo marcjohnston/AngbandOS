@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class TwoHandedSwordDragonslayerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(FreeActAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -20,14 +15,14 @@ public class TwoHandedSwordDragonslayerFixedArtifactItemEnhancement : ItemEnhanc
         (nameof(SlayTrollAttribute), "true"),
         (nameof(SlowDigestAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(ToDamageAttribute), "17"),
         (nameof(MeleeToHitAttribute), "13"),
         (nameof(ValueAttribute), "100000"),
         (nameof(SlayDragonAttribute), "5"),
-        (nameof(StrengthAttribute), "2"),
+        (nameof(BonusStrengthAttribute), "2"),
     };
     public override string FriendlyName => "'Dragonslayer'";
 }

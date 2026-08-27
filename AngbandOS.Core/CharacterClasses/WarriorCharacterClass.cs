@@ -9,24 +9,21 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class WarriorCharacterClass : CharacterClass
 {
     private WarriorCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(WarriorCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
+    {
+        (1, null, nameof(WarriorCharacterClassItemEnhancement)),
+        (30, null, nameof(WarriorCharacterClassLevel30ItemEnhancement))
+    };
     protected override string? MeleeAttacksPerRoundBonusExpression => "X/15";
     public override int ID => 0;
     public override string Title => "Warrior";
     public override int? InstantFearResistanceLevel => 30;
-    public override int UseDevice => 18;
-    public override int SavingThrow => 18;
     public override int? AttackAndDamageBonusPerExperienceLevelDivisor => 5;
-    public override int Stealth => 1;
-    public override int Search => 14;
     public override int BasePerception => 2;
     public override int MeleeToHit => 70;
     public override int RangedToHit => 60;
     public override int DisarmBonusPerLevel => 12;
     public override int NonMagicRandomArtifact1InChance => 0;
-    public override int DeviceBonusPerLevel => 7;
-    public override int SaveBonusPerLevel => 10;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 45;
     public override int RangedAttackBonusPerLevel => 45;
     public override int HitDieBonus => 9;
@@ -41,19 +38,12 @@ internal class WarriorCharacterClass : CharacterClass
     public override int MaximumMeleeAttacksPerRound(int level) => 6;
     public override int MaximumWeight => 30;
     public override int AttackSpeedMultiplier => 5;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(WarriorArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(WarriorArtifactBias), 1) };
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(9000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
-
-    public override void CalcBonuses()
-    {
-        if (Game.ExperienceLevel.IntValue > 29)
-        {
-            Game.HasFearResistance = true;
-        }
-    }
     protected override string[]? ItemActionNames => new string[]
     {
         nameof(GainExperienceForHighLevelSpellBookDestroyedItemAction)
     };
+    protected override string SpellAbilityBindingKey => nameof(StrengthAbility);
 }

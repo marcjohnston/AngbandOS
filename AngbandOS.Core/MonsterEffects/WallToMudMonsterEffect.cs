@@ -15,7 +15,7 @@ internal class WallToMudMonsterEffect : MonsterEffect
     /// </summary>
     protected override string? UnfriendPetMonsterFilterBindingKey => nameof(Any1In8MonsterFilter);
 
-    protected override IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r)
+    protected override IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r)
     {
         MonsterRace rPtr = mPtr.Race;
         bool seen = mPtr.IsVisible;
@@ -39,7 +39,7 @@ internal class WallToMudMonsterEffect : MonsterEffect
         {
             dam = 0;
         }
-        ApplyProjectileDamageToMonster(who, mPtr, dam, note, noteDies, 0);
+        ApplyProjectileDamageToMonster(mPtr, dam, note, noteDies, 0);
         return obvious ? IdentifiedResultEnum.True : IdentifiedResultEnum.False;
     }
 }

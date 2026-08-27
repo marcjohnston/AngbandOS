@@ -13,15 +13,9 @@ internal class PunyPassiveMutation : Mutation
     public override string GainMessage => "Your muscles wither away...";
     public override string HaveMessage => "You are puny (-4 STR).";
     public override string LoseMessage => "Your muscles revert to normal.";
-    public override MutationGroupEnum Group => MutationGroupEnum.Strength;
-
-    public override void OnGain()
-    {
-        Game.StrengthBonus -= 4;
-    }
-
-    public override void OnLose()
-    {
-        Game.StrengthBonus += 4;
-    }
+    public override string Group => "Strength";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(PunyPassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Puny (P)";
 }

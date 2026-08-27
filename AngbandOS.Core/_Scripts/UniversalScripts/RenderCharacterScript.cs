@@ -47,7 +47,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         (string bonus1, string bonus2, string bonus3, string bonus4, string bonus5) = ability.GetBonuses();
 
         // Add the bonus text for spell casting abilities
-        if (Game.CharacterClass.SpellStat == ability && ability != Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)))
+        if (Game.CharacterClass.SpellAbility == ability && ability != Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)))
         {
             int mana = ability.ManaBonus;
             // Casting abilities only have one or two inherent bonuses, so it's safe to start at three
@@ -93,7 +93,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
             // If they've been drained, make them visually distinct
             if (ability.Innate < ability.InnateMax)
             {
-                Game.Screen.Print(ColorEnum.Blue, ability.NameReduced, 14 + i, 1);
+                Game.Screen.Print(ColorEnum.Blue, ability.Name.ToLower(), 14 + i, 1);
                 int value = ability.Adjusted;
                 buf = value.StatToString();
                 Game.Screen.Print(ColorEnum.Grey, buf, 14 + i, 6);
@@ -150,6 +150,21 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         }
     }
 
+    private void RenderAbilityInnateAndBonus(Ability ability, int raceBonus, int characterClassBonus, int equipmentBonus, int y, int x)
+    {
+        // Print each of the scores and bonuses
+        Game.Screen.Print(ColorEnum.Blue, ability.Name, y, x);
+        Game.Screen.Print(ColorEnum.Purple, ability.InnateMax.StatToString(), y, x + 4);
+        Game.Screen.Print(ColorEnum.Brown, raceBonus.ToString("+0;-0;+0").PadLeft(3), y, x + 13);
+        Game.Screen.Print(ColorEnum.Brown, characterClassBonus.ToString("+0;-0;+0").PadLeft(3), y, x + 19);
+        Game.Screen.Print(ColorEnum.Brown, equipmentBonus.ToString("+0;-0;+0").PadLeft(3), y, x + 24);
+        Game.Screen.Print(ColorEnum.Green, ability.AdjustedMax.StatToString(), y, x + 27);
+        if (ability.Adjusted < ability.AdjustedMax)
+        {
+            Game.Screen.Print(ColorEnum.Red, ability.Adjusted.StatToString(), y, x + 35);
+        }
+    }
+
     /// <summary>
     /// Display the ability scores including details of any modifiers to them
     /// </summary>
@@ -162,53 +177,43 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         Game.Screen.Print(ColorEnum.Green, "Actual", row - 1, statCol + 29);
         Game.Screen.Print(ColorEnum.Red, "Reduced", row - 1, statCol + 36);
 
-        // Loop through the scores
-        int i = 0;
-        foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
-        {
-            // Reverse engineer our equipment bonuses from our score
-            int equipmentBonuses = 0;
-            if (ability.InnateMax > 18 && ability.AdjustedMax > 18)
-            {
-                equipmentBonuses = (ability.AdjustedMax - ability.InnateMax) / 10;
-            }
-            if (ability.InnateMax <= 18 && ability.AdjustedMax <= 18)
-            {
-                equipmentBonuses = ability.AdjustedMax - ability.InnateMax;
-            }
-            if (ability.InnateMax <= 18 && ability.AdjustedMax > 18)
-            {
-                equipmentBonuses = ((ability.AdjustedMax - 18) / 10) - ability.InnateMax + 18;
-            }
-            if (ability.InnateMax > 18 && ability.AdjustedMax <= 18)
-            {
-                equipmentBonuses = ability.AdjustedMax - ((ability.InnateMax - 18) / 10) - 19;
-            }
-            // Take out the bonuses we got for our our race and profession
-            RaceAbility raceAbility = Game.SingletonRepository.Get<RaceAbility>(RaceAbility.GetCompositeKey(Game.Race, ability));
-            string compositeKey = CharacterClassAbility.GetCompositeKey(Game.CharacterClass, ability);
-            CharacterClassAbility characterClassAbility = Game.SingletonRepository.Get<CharacterClassAbility>(compositeKey);
-            equipmentBonuses -= raceAbility.Bonus;
-            equipmentBonuses -= characterClassAbility.Bonus;
-            // Print each of the scores and bonuses
-            Game.Screen.Print(ColorEnum.Blue, ability.Name, row + i, statCol);
-            string buf = ability.InnateMax.StatToString();
-            Game.Screen.Print(ColorEnum.Purple, buf, row + i, statCol + 4);
-            buf = raceAbility.Bonus.ToString("+0;-0;+0").PadLeft(3);
-            Game.Screen.Print(ColorEnum.Brown, buf, row + i, statCol + 13);
-            buf = characterClassAbility.Bonus.ToString("+0;-0;+0").PadLeft(3);
-            Game.Screen.Print(ColorEnum.Brown, buf, row + i, statCol + 19);
-            buf = equipmentBonuses.ToString("+0;-0;+0").PadLeft(3);
-            Game.Screen.Print(ColorEnum.Brown, buf, row + i, statCol + 24);
-            buf = ability.AdjustedMax.StatToString();
-            Game.Screen.Print(ColorEnum.Green, buf, row + i, statCol + 27);
-            if (ability.Adjusted < ability.AdjustedMax)
-            {
-                buf = ability.Adjusted.StatToString();
-                Game.Screen.Print(ColorEnum.Red, buf, row + i, statCol + 35);
-            }
-            i++;
-        }
+        // Render the ability scores
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(CharismaAbility)), 
+            Game.Race.AttributeSet.GetInt(nameof(BonusCharismaAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusCharismaAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusCharismaAttribute)),
+            row + 0, statCol);
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(ConstitutionAbility)),
+            Game.Race.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusConstitutionAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusConstitutionAttribute)),
+            row + 1, statCol);
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(DexterityAbility)),
+            Game.Race.AttributeSet.GetInt(nameof(BonusDexterityAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusDexterityAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusDexterityAttribute)),
+            row + 2, statCol);
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility)),
+            Game.Race.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusIntelligenceAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusIntelligenceAttribute)),
+            row + 3, statCol);
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(StrengthAbility)),
+            Game.Race.AttributeSet.GetInt(nameof(BonusStrengthAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusStrengthAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusStrengthAttribute)),
+            row + 4, statCol);
+        RenderAbilityInnateAndBonus(
+            Game.SingletonRepository.Get<Ability>(nameof(WisdomAbility)),
+            Game.Race.AttributeSet.GetInt(nameof(BonusWisdomAttribute)),
+            Game.CharacterClass.AttributeSet.GetInt(nameof(BonusWisdomAttribute)),
+            Game.EquipmentAttributeSet.GetInt(nameof(BonusWisdomAttribute)),
+            row + 5, statCol);
 
         // Print the bonuses for each score and each item we have
         int col = statCol + 44;
@@ -231,56 +236,55 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
                 else
                 {
                     // Only extract known bonuses, not full bonuses
-                    EffectiveAttributeSet itemCharacteristics = item.ObjectFlagsKnown();
-                    ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Get(), itemCharacteristics.Strength > 0, item.EffectiveAttributeSet.Strength, row + 0, col);
-                    ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustIntAttribute)).Get(), itemCharacteristics.Intelligence > 0, item.EffectiveAttributeSet.Intelligence, row + 1, col);
-                    ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustWisAttribute)).Get(), itemCharacteristics.Wisdom > 0, item.EffectiveAttributeSet.Wisdom, row + 2, col);
-                    ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustDexAttribute)).Get(), itemCharacteristics.Dexterity > 0, item.EffectiveAttributeSet.Dexterity, row + 3, col);
-                    ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustConAttribute)).Get(), itemCharacteristics.Constitution > 0, item.EffectiveAttributeSet.Constitution, row + 4, col);
-                    ShowBonus(itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustChaAttribute)).Get(), itemCharacteristics.Charisma > 0, item.EffectiveAttributeSet.Charisma, row + 5, col);
+                    ReadOnlyAttributeSet itemAttributeSet = item.ObjectFlagsKnown();
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustChaAttribute)), itemAttributeSet.GetInt(nameof(BonusCharismaAttribute)) > 0, item.EffectiveAttributeSet.Charisma, row + 0, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustConAttribute)), itemAttributeSet.GetInt(nameof(BonusConstitutionAttribute)) > 0, item.EffectiveAttributeSet.Constitution, row + 1, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustDexAttribute)), itemAttributeSet.GetInt(nameof(BonusDexterityAttribute)) > 0, item.EffectiveAttributeSet.Dexterity, row + 2, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustIntAttribute)), itemAttributeSet.GetInt(nameof(BonusIntelligenceAttribute)) > 0, item.EffectiveAttributeSet.Intelligence, row + 3, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustStrAttribute)), itemAttributeSet.GetInt(nameof(BonusStrengthAttribute)) > 0, item.EffectiveAttributeSet.Strength, row + 4, col);
+                    ShowBonus(itemAttributeSet.GetBool(nameof(SustWisAttribute)), itemAttributeSet.GetInt(nameof(BonusWisdomAttribute)) > 0, item.EffectiveAttributeSet.Wisdom, row + 5, col);
                 }
                 col++;
             }
         }
 
-        EffectiveAttributeSet playerCharacteristics = Game.GetAbilitiesAsItemFlags();
-        DisplayPlayerStatWithModification(playerCharacteristics.Strength, row + 0, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.Intelligence, row + 1, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.Wisdom, row + 2, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.Dexterity, row + 3, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.Constitution, row + 4, col);
-        DisplayPlayerStatWithModification(playerCharacteristics.Charisma, row + 5, col);
+        ReadOnlyAttributeSet mutationsAttributeSet = Game.GetMutationsAttributeSet();
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(BonusCharismaAttribute)), mutationsAttributeSet.GetBool(nameof(SustChaAttribute)), row + 0, col);
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(BonusConstitutionAttribute)), mutationsAttributeSet.GetBool(nameof(SustConAttribute)), row + 1, col);
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(BonusDexterityAttribute)), mutationsAttributeSet.GetBool(nameof(SustDexAttribute)), row + 2, col);
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(BonusIntelligenceAttribute)), mutationsAttributeSet.GetBool(nameof(SustIntAttribute)), row + 3, col);
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(BonusStrengthAttribute)), mutationsAttributeSet.GetBool(nameof(SustStrAttribute)), row + 4, col);
+        DisplayPlayerStatWithModification(mutationsAttributeSet.GetInt(nameof(BonusWisdomAttribute)), mutationsAttributeSet.GetBool(nameof(SustWisAttribute)), row + 5, col);
     }
 
-    private void DisplayPlayerStatWithModification(int extraModifier, int row, int col)
+    private void DisplayPlayerStatWithModification(int bonusValue, bool hasSustain, int row, int col)
     {
-        bool isSet = extraModifier > 0;
         ColorEnum a = ColorEnum.Grey;
         char c = '.';
-        if (extraModifier != 0)
-        {
-            c = '*';
-            if (extraModifier > 0)
-            {
-                a = ColorEnum.Green;
-                if (extraModifier < 10)
-                {
-                    c = (char)('0' + (char)extraModifier);
-                }
-            }
-            if (extraModifier < 0)
-            {
-                a = ColorEnum.Red;
-                if (extraModifier < 10)
-                {
-                    c = (char)('0' - (char)extraModifier);
-                }
-            }
-        }
-        if (isSet)
+        if (hasSustain)
         {
             a = ColorEnum.Green;
             c = 's';
+        }
+        else if (bonusValue != 0)
+        {
+            c = '*';
+            if (bonusValue > 0)
+            {
+                a = ColorEnum.Green;
+                if (bonusValue < 10)
+                {
+                    c = (char)('0' + (char)bonusValue);
+                }
+            }
+            if (bonusValue < 0)
+            {
+                a = ColorEnum.Red;
+                if (bonusValue < 10)
+                {
+                    c = (char)('0' - (char)bonusValue);
+                }
+            }
         }
         Game.Screen.Print(a, c, row, col);
     }
@@ -303,8 +307,8 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         // Print some basics
         PrintBonus("+ To Hit    ", showTohit, 30, 1, ColorEnum.Brown);
         PrintBonus("+ To Damage ", showTodam, 31, 1, ColorEnum.Brown);
-        PrintBonus("+ To AC     ", Game.BonusArmorClass, 32, 1, ColorEnum.Brown);
-        PrintShortScore("  Base AC   ", Game.EffectiveAttributeSet.GetInt(nameof(BaseArmorClassAttribute)), 33, 1, ColorEnum.Brown);
+        PrintBonus("+ To AC     ", Game.KnownBonusArmorClass, 32, 1, ColorEnum.Brown);
+        PrintShortScore("  Base AC   ", Game.AttributeSet.GetInt(nameof(BaseArmorClassAttribute)), 33, 1, ColorEnum.Brown);
         PrintShortScore("Level      ", Game.ExperienceLevel.IntValue, 30, 28, ColorEnum.Green);
         PrintLongScore("Experience ", Game.ExperiencePoints.IntValue, 31, 28,
             Game.ExperiencePoints.IntValue >= Game.MaxExperienceGained.IntValue ? ColorEnum.Green : ColorEnum.Red);
@@ -397,10 +401,8 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
 
         int attacksPerRound = Game.MeleeAttacksPerRound;
         int disarmTraps = Game.ComputedDisarmTraps;
-        int useDevice = Game.SkillUseDevice;
         int savingThrow = Game.SkillSavingThrow;
         int stealth = Game.SkillStealth;
-        int searching = Game.SkillSearching;
         int perception = Game.SkillPerception;
         Game.Screen.Print(ColorEnum.Blue, "Fighting    :", 36, 1);
         PrintCategorisedNumber(fighting, 12, 36, 15);
@@ -413,11 +415,11 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         Game.Screen.Print(ColorEnum.Blue, "Perception  :", 36, 28);
         PrintCategorisedNumber(perception, 6, 36, 42);
         Game.Screen.Print(ColorEnum.Blue, "Searching   :", 37, 28);
-        PrintCategorisedNumber(searching, 6, 37, 42);
+        PrintCategorisedNumber(Game.SkillSearching, 6, 37, 42);
         Game.Screen.Print(ColorEnum.Blue, "Disarming   :", 38, 28);
         PrintCategorisedNumber(disarmTraps, 8, 38, 42);
         Game.Screen.Print(ColorEnum.Blue, "Magic Device:", 39, 28);
-        PrintCategorisedNumber(useDevice, 6, 39, 42);
+        PrintCategorisedNumber(Game.UseDevice, 6, 39, 42);
         Game.Screen.Print(ColorEnum.Blue, "Blows/Action:", 36, 55);
         Game.Screen.Print(ColorEnum.Green, $"{Game.MeleeAttacksPerRound}", 36, 69);
         Game.Screen.Print(ColorEnum.Blue, "Tot.Dmg./Act:", 37, 55);
@@ -437,7 +439,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
         Game.Screen.Print(ColorEnum.Blue, "Shots/Action:", 38, 55);
         Game.Screen.Print(ColorEnum.Green, $"{Game.MissileAttacksPerRound}", 38, 69);
         Game.Screen.Print(ColorEnum.Blue, "Infra-Vision:", 39, 55);
-        Game.Screen.Print(ColorEnum.Green, $"{Game.InfravisionRange * 10} feet", 39, 69);
+        Game.Screen.Print(ColorEnum.Green, $"{Game.InfraVisionRange * 10} feet", 39, 69);
     }
 
     /// <summary>
@@ -489,7 +491,7 @@ internal class RenderCharacterScript : UniversalScript, IGetKey
             string buf;
             if (ability.Innate < ability.InnateMax)
             {
-                Game.Screen.Print(ColorEnum.Blue, ability.NameReduced, 2 + i, 61);
+                Game.Screen.Print(ColorEnum.Blue, ability.Name.ToLower(), 2 + i, 61);
                 int value = ability.Adjusted;
                 buf = value.StatToString();
                 Game.Screen.Print(ColorEnum.Red, buf, 2 + i, 66);

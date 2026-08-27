@@ -72,7 +72,7 @@ public partial class MainWindow : Window, IConsoleAndViewPort
                 }
                 else
                 {
-                    // We cannot append to a non-existant replay file.
+                    // We cannot append to a non-existent replay file.
                     gameResults = gameServer.PlayGame(this, null);
                 }
             }
@@ -104,14 +104,7 @@ public partial class MainWindow : Window, IConsoleAndViewPort
     {
         await Task.Run(() =>
         {
-            try
-            {
-                RunGame();
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.UIThread.Post(() => GameExceptionThrown(ex.Message));
-            }
+            RunGame();
         });
 
         Dispatcher.UIThread.Post(() => this.Close());

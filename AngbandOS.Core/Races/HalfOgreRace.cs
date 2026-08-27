@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class HalfOgreRace : Race
 {
     private HalfOgreRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(HalfOgreRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(HalfOgreRaceItemEnhancement)) 
+    };
     public override string Title => "Half Ogre";
-    public override int UseDevice => -5;
-    public override int SavingThrow => -5;
-    public override int Stealth => -2;
-    public override int Search => -1;
     public override int BasePerception => 5;
     public override int MeleeToHit => 20;
     public override int RangedToHit => 0;
@@ -33,14 +31,7 @@ internal class HalfOgreRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 25 ? "Yellow Sign     (racial, unusable until level 25)" : "Yellow Sign     (racial, cost 35, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SustStrAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(OrcishSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(OrcishSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -49,11 +40,5 @@ internal class HalfOgreRace : Race
             return new string[] { "You can set a Yellow Sign (cost 35)." };
         }
         return null;
-    }
-
-    public override void CalcBonuses()
-    {
-        Game.HasDarkResistance = true;
-        Game.HasSustainStrength = true;
     }
 }

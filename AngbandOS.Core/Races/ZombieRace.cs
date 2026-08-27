@@ -9,12 +9,11 @@ namespace AngbandOS.Core.Races;
 internal class ZombieRace : Race
 {
     private ZombieRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(ZombieRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(ZombieRaceItemEnhancement)),
+        (5, nameof(ZombieRaceLevel5ItemEnhancement))
+    };
     public override string Title => "Zombie";
-    public override int UseDevice => -5;
-    public override int SavingThrow => 8;
-    public override int Stealth => -1;
-    public override int Search => -1;
     public override int BasePerception => 5;
     public override int MeleeToHit => 15;
     public override int RangedToHit => 0;
@@ -33,21 +32,7 @@ internal class ZombieRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 30 ? "restore life       (racial, unusable until level 30)" : "restore life       (racial, cost 30, WIS based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-        itemCharacteristics.HoldLife = true;
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
-        if (level > 4)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Set();
-        }
-    }
-    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
-
+    protected override string GenerateNameSyllableSetBindingKey => nameof(HumanSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 29)
@@ -55,18 +40,6 @@ internal class ZombieRace : Race
             return new string[] { "You can restore lost life forces (cost 30)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasNetherResistance = true;
-        Game.HasHoldLife = true;
-        Game.HasSeeInvisibility = true;
-        Game.HasPoisonResistance = true;
-        Game.HasSlowDigestion = true;
-        if (Game.ExperienceLevel.IntValue > 4)
-        {
-            Game.HasColdResistance = true;
-        }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
     public override void Eat(Item item)

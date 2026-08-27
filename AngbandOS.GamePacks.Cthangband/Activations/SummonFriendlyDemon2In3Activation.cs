@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Summon a demon, with a 1-in-3 chance of it being hostile.
 /// </summary>
-[Serializable]
 public class SummonFriendlyDemon2In3Activation : ActivationGameConfiguration
 {
 

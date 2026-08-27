@@ -24,14 +24,13 @@ internal abstract class PlayerEffectUniversalScript : IPlayerEffectScript, IGetK
     public virtual int MaximumDamageAllowed => 1600;
     public virtual string? BlindPreMessage => null;
 
-    public IdentifiedResultEnum ApplyEffect(int who, int r, int y, int x, int dam, int aRad)
+    public IdentifiedResultEnum ApplyEffect(Monster mPtr, int r, int y, int x, int dam, int aRad)
     {
         if (dam > MaximumDamageAllowed)
         {
             dam = MaximumDamageAllowed;
         }
         dam = (dam + r) / (r + 1);
-        Monster mPtr = Game.Monsters[who];
         if (BlindPreMessage is not null && Game.BlindnessTimer.Value != 0)
         {
             Game.MsgPrint(BlindPreMessage);

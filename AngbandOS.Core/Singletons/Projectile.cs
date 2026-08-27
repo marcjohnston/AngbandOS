@@ -101,11 +101,11 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                 ty = target.Y;
             }
         }
-        return Fire(0, rad, ty, tx, dam, jump: jump, beam: beam, thru: thru, stop: stop, kill: kill, grid: grid, item: item, hide: hide);
+        return Fire(null, rad, ty, tx, dam, jump: jump, beam: beam, thru: thru, stop: stop, kill: kill, grid: grid, item: item, hide: hide);
     }
 
     /// <summary>
-    /// Returns true, if the projectile actally hits and affects a monster, an item, a grid tile or the player in a manner that the player notices.
+    /// Returns true, if the projectile actually hits and affects a monster, an item, a grid tile or the player in a manner that the player notices.
     /// </summary>
     /// <param name="who"></param>
     /// <param name="rad"></param>
@@ -121,7 +121,7 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
     /// <param name="kill">Permits the projectile or spell to affect monsters or entities in its path, enabling damage or other targeted effects.</param>
     /// <param name="stop">Causes a projectile or spell to stop when it hits an obstacle, halting further movement or effects along its path.</param>
     /// <returns></returns>
-    public IsNoticedEnum Fire(int who, int rad, int y, int x, int dam, bool jump, bool beam, bool thru, bool hide, bool grid, bool item, bool kill, bool stop)
+    public IsNoticedEnum Fire(Monster? monster, int rad, int y, int x, int dam, bool jump, bool beam, bool thru, bool hide, bool grid, bool item, bool kill, bool stop)
     {
         int i, dist;
         int y1, x1;
@@ -142,15 +142,15 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
             x1 = x;
             y1 = y;
         }
-        else if (who == 0)
+        else if (monster is null)
         {
             x1 = Game.MapX.IntValue;
             y1 = Game.MapY.IntValue;
         }
         else
         {
-            x1 = Game.Monsters[who].MapX;
-            y1 = Game.Monsters[who].MapY;
+            x1 = monster.MapX;
+            y1 = monster.MapY;
         }
         int ySaver = y1;
         int xSaver = x1;
@@ -201,7 +201,7 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
             {
                 break;
             }
-            if (cPtr.MonsterIndex != 0 && dist != 0 && stop)
+            if (cPtr.Monster is not null && dist != 0 && stop)
             {
                 break;
             }
@@ -435,7 +435,7 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                 }
                 y = gy[i];
                 x = gx[i];
-                if (ItemEffect.Apply(who, y, x))
+                if (ItemEffect.Apply(monster, y, x))
                 {
                     isNoticed = IsNoticedEnum.True;
                 }
@@ -457,18 +457,18 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                 x = gx[i];
                 if (grids > 1)
                 {
-                    if (MonsterEffect.Apply(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy) == IdentifiedResultEnum.True)
+                    if (MonsterEffect.Apply(monster, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy) == IdentifiedResultEnum.True)
                     {
                         isNoticed = IsNoticedEnum.True;
                     }
                 }
                 else
                 {
-                    if (cPtr.MonsterIndex == 0)
+                    if (cPtr.Monster is null)
                     {
                         continue;
                     }
-                    MonsterRace refPtr = Game.Monsters[cPtr.MonsterIndex].Race;
+                    MonsterRace refPtr = cPtr.Monster.Race;
                     if (refPtr.Reflecting && Game.DieRoll(10) != 1 && distHack > 1 && GetType().Name != "ProjectWizardBolt")
                     {
                         int tY, tX;
@@ -484,33 +484,33 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                             tY = ySaver;
                             tX = xSaver;
                         }
-                        if (Game.Monsters[cPtr.MonsterIndex].IsVisible)
+                        if (cPtr.Monster.IsVisible)
                         {
                             Game.MsgPrint("The attack bounces!");
                             refPtr.Knowledge.Characteristics.Reflecting = true;
                         }
-                        Fire(cPtr.MonsterIndex, 0, tY, tX, dam, jump: jump, beam: beam, thru: thru, hide: hide, grid: grid, item: item, kill: kill, stop: stop);
+                        Fire(cPtr.Monster, 0, tY, tX, dam, jump: jump, beam: beam, thru: thru, hide: hide, grid: grid, item: item, kill: kill, stop: stop);
                     }
                     else
                     {
-                        if (MonsterEffect.Apply(who, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy) == IdentifiedResultEnum.True)
+                        if (MonsterEffect.Apply(monster, dist, y, x, dam, ref projectMn, ref projectMx, ref projectMy) == IdentifiedResultEnum.True)
                         {
                             isNoticed = IsNoticedEnum.True;
                         }
                     }
                 }
             }
-            if (who == 0 && projectMn == 1 && !jump)
+            if (monster is null && projectMn == 1 && !jump)
             {
                 x = projectMx;
                 y = projectMy;
                 cPtr = Game.Grid[y][x];
-                if (cPtr.MonsterIndex != 0)
+                if (cPtr.Monster is not null)
                 {
-                    Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
+                    Monster mPtr = cPtr.Monster;
                     if (mPtr.IsVisible)
                     {
-                        Game.HealthTrack(cPtr.MonsterIndex);
+                        Game.TrackMonsterHealth(mPtr);
                     }
                 }
             }
@@ -528,13 +528,13 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
                 x = gx[i];
 
                 // Check to see if the projectile can affect the player.
-                if (x == Game.MapX.IntValue && y == Game.MapY.IntValue && who != 0)
+                if (x == Game.MapX.IntValue && y == Game.MapY.IntValue && monster is not null)
                 {
                     // Check to see if the projectile attack bounces off the player.
-                    if (!CheckBounceOffPlayer(who, dam, rad))
+                    if (!CheckBounceOffPlayer(monster, dam, rad))
                     {
                         // Allow the projectile to perform any effects on the player.
-                        if (PlayerEffect.ApplyEffect(who, dist, y, x, dam, rad) == IdentifiedResultEnum.True)
+                        if (PlayerEffect.ApplyEffect(monster, dist, y, x, dam, rad) == IdentifiedResultEnum.True)
                         {
                             // Disturb the player.
                             Game.Disturb(true);
@@ -554,11 +554,11 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
     /// <summary>
     /// Performs a reflection test of the projectile on the player and returns true, if the projectile is reflected.
     /// </summary>
-    /// <param name="who"></param>
+    /// <param name="monsterIndex"></param>
     /// <param name="dam"></param>
     /// <param name="aRad"></param>
     /// <returns></returns>
-    private bool CheckBounceOffPlayer(int who, int dam, int aRad)
+    private bool CheckBounceOffPlayer(Monster monster, int dam, int aRad)
     {
         if (Game.HasReflection && aRad == 0 && Game.DieRoll(10) != 1)
         {
@@ -570,16 +570,16 @@ internal sealed class Projectile : IGetKey, IToJson, IGameSerialize
             int maxAttempts = 10;
             do
             {
-                tY = Game.Monsters[who].MapY - 1 + Game.DieRoll(3);
-                tX = Game.Monsters[who].MapX - 1 + Game.DieRoll(3);
+                tY = monster.MapY - 1 + Game.DieRoll(3);
+                tX = monster.MapX - 1 + Game.DieRoll(3);
                 maxAttempts--;
             } while (maxAttempts > 0 && Game.InBounds2(tY, tX) && !Game.GridTileIsVisible(tY, tX));
             if (maxAttempts < 1)
             {
-                tY = Game.Monsters[who].MapY;
-                tX = Game.Monsters[who].MapX;
+                tY = monster.MapY;
+                tX = monster.MapX;
             }
-            Fire(0, 0, tY, tX, dam, stop: true, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
+            Fire(null, 0, tY, tX, dam, stop: true, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false);
             Game.Disturb(true);
             return true;
         }

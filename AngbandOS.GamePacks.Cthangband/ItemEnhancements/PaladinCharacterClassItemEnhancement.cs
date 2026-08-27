@@ -1,20 +1,23 @@
 
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class PaladinCharacterClassItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "3"),
-        (nameof(CharismaAttribute), "2"),
-        (nameof(ConstitutionAttribute), "2"),
-        (nameof(WisdomAttribute), "1"),
-        (nameof(IntelligenceAttribute), "-3"),
-        (nameof(DexterityAttribute), "0"),
+        (nameof(BonusStrengthAttribute), "3"),
+        (nameof(BonusCharismaAttribute), "2"),
+        (nameof(BonusConstitutionAttribute), "2"),
+        (nameof(BonusWisdomAttribute), "1"),
+        (nameof(BonusIntelligenceAttribute), "-3"),
+        (nameof(BonusDexterityAttribute), "0"),
         (nameof(ValueAttribute), "4500"),
         (nameof(DisarmTrapsAttribute), "20"),
-        (nameof(UseDeviceAttribute), "24"),
         (nameof(SavingThrowAttribute), "26"),
+        (nameof(SavingThrowBonusPerLevelAttribute), "11"),
+        (nameof(UseDeviceAttribute), "24"),
+        (nameof(UseDeviceBonusPerLevelAttribute), "10"),
+        (nameof(SearchAttribute), "12"),
+        (nameof(StealthAttribute), "2")
     };
 }

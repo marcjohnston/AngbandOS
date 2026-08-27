@@ -9,12 +9,11 @@ namespace AngbandOS.Core.Races;
 internal class SpectreRace : Race
 {
     private SpectreRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(SpectreRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(SpectreRaceItemEnhancement)),
+        (35, nameof(SpectreRaceLevel35ItemEnhancement))
+    };
     public override string Title => "Spectre";
-    public override int UseDevice => 25;
-    public override int SavingThrow => 20;
-    public override int Stealth => 5;
-    public override int Search => 5;
     public override int BasePerception => 14;
     public override int MeleeToHit => -15;
     public override int RangedToHit => -5;
@@ -33,21 +32,7 @@ internal class SpectreRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 4 ? "scare monster      (racial, unusable until level 4)" : "scare monster      (racial, cost 3, INT based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SeeInvisAttribute)).Set();
-        itemCharacteristics.HoldLife = true;
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(SlowDigestAttribute)).Set();
-        if (level > 34)
-        {
-            itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(TelepathyAttribute)).Set();
-        }
-    }
-    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
+    protected override string GenerateNameSyllableSetBindingKey => nameof(HumanSyllableSet);
 
     public override string[]? SelfKnowledge(int level)
     {
@@ -56,21 +41,6 @@ internal class SpectreRace : Race
             return new string[] { "You can wail to terrify your enemies (cost 3)." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasFeatherFall = true;
-        Game.HasNetherResistance = true;
-        Game.HasHoldLife = true;
-        Game.HasSeeInvisibility = true;
-        Game.HasPoisonResistance = true;
-        Game.HasSlowDigestion = true;
-        Game.HasColdResistance = true;
-        Game.GlowInTheDarkRadius = 1;
-        if (Game.ExperienceLevel.IntValue > 34)
-        {
-            Game.HasTelepathy = true;
-        }
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
     public override void Eat(Item item)

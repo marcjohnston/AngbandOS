@@ -27,7 +27,6 @@ internal class ToggleSearchScript : UniversalScript, IGetKey
     public override void ExecuteScript()
     {
         Game.IsSearching = !Game.IsSearching;
-        Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawSpeedFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(UpdateBonusesFlaggedAction)).Set();
         Game.SingletonRepository.Get<FlaggedAction>(nameof(RedrawStateFlaggedAction)).Set();
     }

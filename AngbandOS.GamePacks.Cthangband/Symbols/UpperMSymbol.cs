@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class UpperMSymbol : SymbolGameConfiguration
 {
     public override char Character => 'M';

@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Text;
+
 namespace AngbandOS.Core;
 
 internal sealed class ReadOnlyAttributeSet : IGameSerialize
@@ -15,18 +17,40 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
         Game = game;
         Value = value;
     }
-    public ReadOnlyAttributeSet(Game game, RestoreGameState restoreGameState) : this(game, restoreGameState.GetByKey(nameof(Value)).GetDerivedReferences<ReadOnlyAttributeValue>(
-        (RestoreGameState restoreGameState) => new ActivationReadOnlyAttributeValue(game, restoreGameState), 
-        (RestoreGameState restoreGameState) => new ArtifactBiasReadOnlyAttributeValue(game, restoreGameState), 
-        (RestoreGameState restoreGameState) => new BoolReadOnlyAttributeValue(game, restoreGameState), 
-        (RestoreGameState restoreGameState) => new IntReadOnlyAttributeValue(game, restoreGameState), 
-        (RestoreGameState restoreGameState) => new NullableBoolReadOnlyAttributeValue(game, restoreGameState), 
-        (RestoreGameState restoreGameState) => new NullableStringReadOnlyAttributeValue(game, restoreGameState)
-        ))
+    public ReadOnlyAttributeSet(Game game, RestoreGameState restoreGameState)
     {
+        Game = game;
+        Value = restoreGameState.GetByKey(nameof(Value)).GetDerivedReferences<ReadOnlyAttributeValue>(
+            (RestoreGameState restoreGameState) => new ActivationReadOnlyAttributeValue(game, restoreGameState),
+            (RestoreGameState restoreGameState) => new ArtifactBiasReadOnlyAttributeValue(game, restoreGameState),
+            (RestoreGameState restoreGameState) => new BoolReadOnlyAttributeValue(game, restoreGameState),
+            (RestoreGameState restoreGameState) => new IntReadOnlyAttributeValue(game, restoreGameState),
+            (RestoreGameState restoreGameState) => new NullableStringReadOnlyAttributeValue(game, restoreGameState),
+            (RestoreGameState restoreGameState) => new ScriptsListReadOnlyAttributeValue(game, restoreGameState)
+        );
+    }
+
+    public GameStateBag? Serialize(SaveGameState saveGameState)
+    {
+        return new DictionaryGameStateBag(
+            (nameof(Value), saveGameState.CreateDerivedGameStateBag(Value, 
+            typeof(ActivationReadOnlyAttributeValue), 
+            typeof(ArtifactBiasReadOnlyAttributeValue), 
+            typeof(BoolReadOnlyAttributeValue), 
+            typeof(IntReadOnlyAttributeValue), 
+            typeof(NullableStringReadOnlyAttributeValue),
+            typeof(ScriptsListReadOnlyAttributeValue)
+        )));
     }
 
     public AttributeValue this[int index] => Value[(int)index];
+
+    public T Get<T>(string attributeName) where T : ReadOnlyAttributeValue
+    {
+        Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+        int index = attribute.Index;
+        return (T)Value[index];
+    }
 
     public int GetInt(Attribute attribute)
     {
@@ -52,10 +76,28 @@ internal sealed class ReadOnlyAttributeSet : IGameSerialize
         return value.Value;
     }
 
-    public GameStateBag? Serialize(SaveGameState saveGameState)
+    public UniversalScript[]? GetScripts(string attributeName)
     {
-        return new DictionaryGameStateBag(
-            (nameof(Value), saveGameState.CreateDerivedGameStateBag(Value, typeof(ActivationReadOnlyAttributeValue), typeof(ArtifactBiasReadOnlyAttributeValue), typeof(BoolReadOnlyAttributeValue), typeof(IntReadOnlyAttributeValue), typeof(NullableBoolReadOnlyAttributeValue), typeof(NullableStringReadOnlyAttributeValue)))
-        );
+        Attribute attribute = Game.SingletonRepository.Get<Attribute>(attributeName);
+        int index = attribute.Index;
+        ScriptsListReadOnlyAttributeValue value = (ScriptsListReadOnlyAttributeValue)Value[index];
+        return value.Value;
+    }
+
+    public override string ToString()
+    {
+        Attribute[] cachedAttributes = Game.CachedAttributes;
+        StringBuilder stringBuilder = new StringBuilder();
+        string delimiter = "";
+        foreach (Attribute attribute in cachedAttributes)
+        {
+            ReadOnlyAttributeValue value = Value[attribute.Index];
+            if (!value.IsDefault)
+            {
+                stringBuilder.Append($"{delimiter}{attribute.Key.Replace("Attribute", "")}: {value.ToString()}");
+                delimiter = "; ";
+            }
+        }
+        return stringBuilder.ToString();
     }
 }

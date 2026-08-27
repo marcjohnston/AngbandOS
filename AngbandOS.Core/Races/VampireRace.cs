@@ -9,12 +9,10 @@ namespace AngbandOS.Core.Races;
 internal class VampireRace : Race
 {
     private VampireRace(Game game) : base(game) { }
-    protected override string EnhancementBindingKey => nameof(VampireRaceItemEnhancement);
+    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(VampireRaceItemEnhancement)) 
+    };
     public override string Title => "Vampire";
-    public override int UseDevice => 10;
-    public override int SavingThrow => 10;
-    public override int Stealth => 4;
-    public override int Search => 1;
     public override int BasePerception => 8;
     public override int MeleeToHit => 5;
     public override int RangedToHit => 0;
@@ -33,17 +31,7 @@ internal class VampireRace : Race
 
     public override string RacialPowersDescription(int lvl) => lvl < 2 ? "drain life         (racial, unusable until level 2)" : "drain life         (racial, cost 1 + lvl/3, based)";
     protected override string? RacialPowerScriptBindingKey => nameof(UseRacialPowerScript);
-    public override bool HasRacialPowers => true;
-    public override void UpdateRacialAbilities(int level, EffectiveAttributeSet itemCharacteristics)
-    {
-        itemCharacteristics.HoldLife = true;
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResDarkAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResNetherAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResPoisAttribute)).Set();
-        itemCharacteristics.Get<OrEffectiveAttributeValue>(nameof(ResColdAttribute)).Set();
-    }
-    protected override string GenerateNameSyllableSetName => nameof(HumanSyllableSet);
-
+    protected override string GenerateNameSyllableSetBindingKey => nameof(HumanSyllableSet);
     public override string[]? SelfKnowledge(int level)
     {
         if (level > 1)
@@ -51,15 +39,6 @@ internal class VampireRace : Race
             return new string[] { $"You can steal life from a foe, dam. {level + Math.Max(1, level / 10)}-{level + (level * Math.Max(1, level / 10))} (cost {1 + (level / 3)})." };
         }
         return null;
-    }
-    public override void CalcBonuses()
-    {
-        Game.HasDarkResistance = true;
-        Game.HasHoldLife = true;
-        Game.HasNetherResistance = true;
-        Game.HasColdResistance = true;
-        Game.HasPoisonResistance = true;
-        Game.GlowInTheDarkRadius = 1;
     }
     public override bool RestsTillDuskInsteadOfDawn => true;
 

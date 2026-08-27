@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class NonMageLevel30HolyOrbProjectileScript : ProjectileScriptGameConfiguration
 {
     public override string DamageRollExpression => "3d6+X+X/4";

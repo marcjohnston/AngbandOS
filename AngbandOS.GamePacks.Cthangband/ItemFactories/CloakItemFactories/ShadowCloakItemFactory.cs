@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class ShadowCloakItemFactory : ItemFactoryGameConfiguration
 {
     public override string[]? EnhancementFixedArtifactFactoriesBindingKeys => new string[] { nameof(FixedArtifactsEnum.ShadowCloakOfNyogthaFixedArtifact), nameof(FixedArtifactsEnum.ShadowCloakOfTheShoggothFixedArtifact) };

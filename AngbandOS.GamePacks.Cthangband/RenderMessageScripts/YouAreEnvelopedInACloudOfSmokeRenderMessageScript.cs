@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class YouAreEnvelopedInACloudOfSmokeRenderMessageScript : RenderMessageScriptGameConfiguration
 {
     public override string Message => "You are enveloped in a cloud of smoke!";

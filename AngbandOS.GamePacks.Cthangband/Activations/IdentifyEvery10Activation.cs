@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Identify an item.
 /// </summary>
-[Serializable]
 public class IdentifyEvery10Activation : ActivationGameConfiguration
 {
     

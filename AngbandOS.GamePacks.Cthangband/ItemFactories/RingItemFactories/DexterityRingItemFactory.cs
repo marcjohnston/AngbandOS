@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.�
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class DexterityRingItemFactory : ItemFactoryGameConfiguration
 {
     public override bool NegativeBonusArmorClassRepresentsBroken => true;

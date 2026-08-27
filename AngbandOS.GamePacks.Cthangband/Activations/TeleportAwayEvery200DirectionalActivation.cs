@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Teleport away an opponent.
 /// </summary>
-[Serializable]
 public class TeleportAwayEvery200DirectionalActivation : ActivationGameConfiguration
 {
     

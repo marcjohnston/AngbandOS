@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Display a list of all the keyboard commands
 /// </summary>
-[Serializable]
 public class CommandListGameCommand : GameCommandGameConfiguration
 {
     public override char KeyChar => '?';

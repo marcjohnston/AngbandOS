@@ -1,6 +1,5 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class GreatAxeOfTheYeeksFixedArtifactMappedItemEnhancement : MappedItemEnhancementGameConfiguration
 {
     public override string[]? FixedArtifactBindingKeys => new string[] { nameof(FixedArtifactsEnum.GreatAxeOfTheYeeksFixedArtifact) };

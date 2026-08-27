@@ -13,22 +13,9 @@ internal class WeirdMindRandomMutation : Mutation
     public override string GainMessage => "Your thoughts suddenly take off in strange directions.";
     public override string HaveMessage => "Your mind randomly expands and contracts.";
     public override string LoseMessage => "Your thoughts return to boring paths.";
-
-    public override void ProcessWorld()
+    public override string Title => "Weird Mind (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (Game.HasAntiMagic || base.Game.DieRoll(3000) != 1)
-        {
-            return;
-        }
-        if (Game.TelepathyTimer.Value > 0)
-        {
-            Game.MsgPrint("Your mind feels cloudy!");
-            Game.RunScript(nameof(TelepathyResetTimerScript));
-        }
-        else
-        {
-            Game.MsgPrint("Your mind expands!");
-            Game.RunScript(nameof(Telepathy1xTimerScript));
-        }
-    }
+        (1, nameof(WeirdMindRandomMutationItemEnhancement))
+    };
 }

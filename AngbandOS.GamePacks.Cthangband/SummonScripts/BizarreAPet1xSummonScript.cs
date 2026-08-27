@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BizarreAPet1xSummonScript : SummonScriptGameConfiguration
 {
     public override string MonsterFilterBindingKey => nameof(MonsterRaceFiltersEnum.Bizarre1MonsterRaceFilter);

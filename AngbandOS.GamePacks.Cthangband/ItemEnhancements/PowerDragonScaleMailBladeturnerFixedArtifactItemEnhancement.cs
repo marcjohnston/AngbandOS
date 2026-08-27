@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class PowerDragonScaleMailBladeturnerFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(FeatherAttribute), "true"),
         (nameof(HoldLifeAttribute), "true"),
         (nameof(IgnoreAcidAttribute), "true"),
@@ -34,7 +29,7 @@ public class PowerDragonScaleMailBladeturnerFixedArtifactItemEnhancement : ItemE
         (nameof(HideTypeAttribute), "true"),
     };
     public override string? ActivationName => nameof(ActivationsEnum.PowerDragonEvery400DirectionalActivation);
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
         (nameof(TreasureRatingAttribute), "20"),
         (nameof(MeleeToHitAttribute), "-8"),

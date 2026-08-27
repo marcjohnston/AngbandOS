@@ -1,6 +1,5 @@
 ﻿namespace AngbandOS.GamePacks.Cthangband.RangedWeaponBonuses
 {
-    [Serializable]
     public class RangerBowLevel40RangedWeaponBonus : RangedWeaponBonusGameConfiguration
     {
         public override string? CharacterClassBindingKey => nameof(CharacterClassesEnum.RangerCharacterClass);

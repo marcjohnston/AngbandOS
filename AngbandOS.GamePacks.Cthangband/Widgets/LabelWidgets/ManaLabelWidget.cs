@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Represents a widget that renders the Mana label.
 /// </summary>
-[Serializable]
 public class ManaLabelWidget : LabelWidgetGameConfiguration
 {
     public override int X => 0;

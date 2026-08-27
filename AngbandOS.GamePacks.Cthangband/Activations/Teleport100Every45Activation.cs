@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Long range teleport.
 /// </summary>
-[Serializable]
 public class Teleport100Every45Activation : ActivationGameConfiguration
 {
     

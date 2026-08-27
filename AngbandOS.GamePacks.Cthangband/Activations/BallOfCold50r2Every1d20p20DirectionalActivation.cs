@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BallOfCold50r2Every1d20p20DirectionalActivation : ActivationGameConfiguration
 {
 

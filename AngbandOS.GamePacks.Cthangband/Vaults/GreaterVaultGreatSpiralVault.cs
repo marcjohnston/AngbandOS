@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class GreaterVaultGreatSpiralVault : VaultGameConfiguration
 {
     public override string Name => "Greater vault (great spiral)";

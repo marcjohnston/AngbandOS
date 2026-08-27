@@ -9,22 +9,18 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class RogueCharacterClass : CharacterClass
 {
     private RogueCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(RogueCharacterClassItemEnhancement);
+
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
+        (1, null, nameof(RogueCharacterClassItemEnhancement)) 
+    };
     public override int ID => 3;
     public override bool CanBackstab => true;
     public override string Title => "Rogue";
-    public override int UseDevice => 32;
-    public override int SavingThrow => 28;
-    public override int Stealth => 5;
-    public override int Search => 32;
     public override int BasePerception => 24;
     public override string TarotDrawRollExpression => "1d110+X/5";
     public override int MeleeToHit => 60;
     public override int RangedToHit => 66;
     public override int DisarmBonusPerLevel => 15;
-    public override int DeviceBonusPerLevel => 10;
-    public override int SaveBonusPerLevel => 10;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 40;
     public override int RangedAttackBonusPerLevel => 10;
     public override int HitDieBonus => 6;
@@ -53,16 +49,16 @@ internal class RogueCharacterClass : CharacterClass
 
 
     public override bool DoesNotGainSpellLevelsUntilFirstSpellLevel => true;
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
+    protected override string SpellAbilityBindingKey => nameof(IntelligenceAbility);
     public override int MaximumWeight => 30;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(RogueArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(RogueArtifactBias), 1) };
     public override int FromScrollWarriorArtifactBiasPercentageChance => 25;
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(20000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(SorceryRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(FolkRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(SorceryRealm),
+        nameof(DeathRealm),
+        nameof(TarotRealm),
+        nameof(FolkRealm)
     };
 }

@@ -10,7 +10,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// Represents a conditional widget that renders a friendly status when the player is tracking a monster and the monster is afraid; otherwise the <see cref="TrackedMonsterHealthIsSleepingConditionalWidget"/> 
 /// widget is rendered.
 /// </summary>
-[Serializable]
 public class TrackedMonsterHealthIsAfraidConditionalWidget : ConditionalWidgetGameConfiguration
 {
     public override string ConditionalKey => nameof(TrackedMonsterHealthIsAfraidConditional);

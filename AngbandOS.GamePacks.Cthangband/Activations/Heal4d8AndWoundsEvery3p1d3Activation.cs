@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Heal 4d8 health and reduce bleeding.
 /// </summary>
-[Serializable]
 public class Heal4d8AndWoundsEvery3p1d3Activation : ActivationGameConfiguration
 {
     

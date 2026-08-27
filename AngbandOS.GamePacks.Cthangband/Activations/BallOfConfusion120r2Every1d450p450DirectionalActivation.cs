@@ -6,7 +6,6 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BallOfConfusion120r2Every1d450p450DirectionalActivation : ActivationGameConfiguration
 {
 

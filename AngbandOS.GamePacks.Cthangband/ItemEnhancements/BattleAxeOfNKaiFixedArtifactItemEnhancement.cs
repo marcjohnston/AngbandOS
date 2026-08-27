@@ -1,15 +1,10 @@
 namespace AngbandOS.GamePacks.Cthangband;
 
-[Serializable]
 public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameConfiguration
 {
-    public override (string AttributeName, string BooleanExpression)[]? BoolAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
+    public override (string AttributeName, string BooleanExpression)[]? BitwiseOrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
     {
         (nameof(RegenAttribute), "true"),
-    };
-
-    public override (string AttributeName, string BooleanExpression)[]? OrAttributeAndExpressionBindings => new (string AttributeName, string BooleanExpression)[]
-    {
         (nameof(FeatherAttribute), "true"),
         (nameof(FreeActAttribute), "true"),
         (nameof(HideTypeAttribute), "true"),
@@ -28,10 +23,10 @@ public class BattleAxeOfNKaiFixedArtifactItemEnhancement : ItemEnhancementGameCo
         (nameof(SlayOrcAttribute), "true"),
         (nameof(SlayTrollAttribute), "true"),
     };
-    public override (string AttributeName, string Expression)[]? SumAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
+    public override (string AttributeName, string Expression)[]? SummationAttributeAndExpressionBindings => new (string AttributeName, string Expression)[]
     {
-        (nameof(StrengthAttribute), "3"),
-        (nameof(ConstitutionAttribute), "3"),
+        (nameof(BonusStrengthAttribute), "3"),
+        (nameof(BonusConstitutionAttribute), "3"),
         (nameof(StealthAttribute), "3"),
         (nameof(ValueAttribute), "90000"),
         (nameof(DamageDiceAttribute), "1"),

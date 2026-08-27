@@ -46,7 +46,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
     /// <param name="note"></param>
     /// <param name="noteDies">The note to render if the monster dies or null, to render the <see cref="MonsterRace.DeathNote"/> applicable to the monsters' race.</param>
     /// <param name="addFear"></param>
-    protected void ApplyProjectileDamageToMonster(int who, Monster mPtr, int dam, string? note, string? noteDies, int addFear)
+    protected void ApplyProjectileDamageToMonster(Monster? mPtr, int dam, string? note, string? noteDies, int addFear)
     {
         if (addFear != 0)
         {
@@ -63,7 +63,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
         {
             noteDies = rPtr.DeathNote();
         }
-        if (rPtr.Guardian && who != 0 && dam > mPtr.Health)
+        if (rPtr.Guardian && mPtr is not null && dam > mPtr.Health)
         {
             dam = mPtr.Health;
         }
@@ -71,7 +71,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
         {
             note = noteDies;
         }
-        if (who != 0)
+        if (mPtr is not null)
         {
             mPtr.SleepLevel = 0;
             mPtr.Health -= dam;
@@ -79,7 +79,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
             {
                 bool sad = mPtr.IsPet && !mPtr.IsVisible;
                 Game.MonsterDeath(mPtr);
-                Game.DeleteMonsterByIndex(cPtr.MonsterIndex, true);
+                Game.DeleteMonster(cPtr.Monster);
                 if (string.IsNullOrEmpty(note) == false)
                 {
                     Game.MsgPrint($"{mName}{note}");
@@ -103,10 +103,7 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
         }
         else
         {
-            if (Game.DamageMonster(cPtr.MonsterIndex, dam, out bool fear, noteDies))
-            {
-            }
-            else
+            if (!Game.DamageMonster(cPtr.Monster, dam, out bool fear, noteDies))
             {
                 if (string.IsNullOrEmpty(note) == false && mPtr.IsVisible)
                 {
@@ -125,42 +122,42 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
         }
     }
 
-    public IdentifiedResultEnum Apply(int who, int r, int y, int x, int dam, ref int projectMn, ref int projectMx, ref int projectMy)
+    public IdentifiedResultEnum Apply(Monster? monster, int r, int y, int x, int dam, ref int projectMn, ref int projectMx, ref int projectMy)
     {
         // Get the grid tile for the location in question.
         GridTile cPtr = Game.Grid[y][x];
 
         // Check to see if there is a monster at this location.
-        if (cPtr.MonsterIndex == 0)
+        if (cPtr.Monster is null)
         {
             return IdentifiedResultEnum.False;
         }
 
         // Check to see if the monster/player is the monster/player performing the action.
-        if (who != 0 && cPtr.MonsterIndex == who)
+        if (monster is not null && cPtr.Monster == monster)
         {
             return IdentifiedResultEnum.False;
         }
 
         // Get a reference to the monster in question.
-        Monster mPtr = Game.Monsters[cPtr.MonsterIndex];
+        Monster mPtr = cPtr.Monster;
 
         // Modify the damage based on the distance from the attacker.
         dam = (dam + r) / (r + 1);
 
         // Attempt to turn friendly monsters against their owner, if the owner attacks them.
         bool isFriendly = mPtr.IsPet;
-        if (who == 0 && isFriendly && UnfriendPetMonsterFilter != null && UnfriendPetMonsterFilter.Matches(mPtr))
+        if (monster is null && isFriendly && UnfriendPetMonsterFilter != null && UnfriendPetMonsterFilter.Matches(mPtr))
         {
             string mName = mPtr.Name;
             Game.MsgPrint($"{mName} gets angry!");
             mPtr.IsPet = false;
         }
 
-        IdentifiedResultEnum notice = Apply(who, mPtr, dam, r);
+        IdentifiedResultEnum notice = Apply(mPtr, dam, r);
 
         GridTile newGridTile = Game.Grid[mPtr.MapY][mPtr.MapX];
-        Game.UpdateMonsterVisibility(newGridTile.MonsterIndex, false);
+        Game.UpdateMonsterVisibility(newGridTile.Monster, false);
         Game.ConsoleView.RefreshMapLocation(y, x);
         projectMn++;
         projectMx = mPtr.MapX;
@@ -169,5 +166,5 @@ internal abstract class MonsterEffect : IGetKey, IGameSerialize
         return notice;
     }
 
-    protected abstract IdentifiedResultEnum Apply(int who, Monster mPtr, int dam, int r);
+    protected abstract IdentifiedResultEnum Apply(Monster? mPtr, int dam, int r);
 }

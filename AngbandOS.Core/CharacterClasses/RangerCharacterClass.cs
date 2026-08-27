@@ -9,20 +9,15 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class RangerCharacterClass : CharacterClass
 {
     private RangerCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override string EnhancementBindingKey => nameof(RangerCharacterClassItemEnhancement);
+    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
+        (1, null, nameof(RangerCharacterClassItemEnhancement)) 
+    };
     public override int ID => 4;
     public override string Title => "Ranger";
-    public override int UseDevice => 32;
-    public override int SavingThrow => 28;
-    public override int Stealth => 3;
-    public override int Search => 24;
     public override int BasePerception => 16;
     public override int MeleeToHit => 56;
     public override int RangedToHit => 72;
     public override int DisarmBonusPerLevel => 8;
-    public override int DeviceBonusPerLevel => 10;
-    public override int SaveBonusPerLevel => 10;
-    public override int StealthBonusPerLevel => 0;
     public override int MeleeAttackBonusPerLevel => 30;
     public override int RangedAttackBonusPerLevel => 45;
     public override int HitDieBonus => 4;
@@ -63,21 +58,21 @@ internal class RangerCharacterClass : CharacterClass
     /// </summary>
     public override bool UseAlternateItemNames => true;
 
-    public override Ability SpellStat => Game.SingletonRepository.Get<Ability>(nameof(IntelligenceAbility));
+    protected override string SpellAbilityBindingKey => nameof(IntelligenceAbility);
     public override int AttackSpeedMultiplier => 4;
-    public override ArtifactBias? ArtifactBias => Game.SingletonRepository.Get<ArtifactBias>(nameof(RangerArtifactBias));
+    protected override (string?, int)[]? ArtifactBiasAndWeightBindingKeys => new (string?, int)[] { (nameof(RangerArtifactBias), 1) };
     public override int FromScrollWarriorArtifactBiasPercentageChance => 30;
     public override bool SenseInventoryTest(int level) => (0 != Game.RandomLessThan(95000 / ((level * level) + 40)));
     public override bool DetailedSenseInventory => true;
-    public override Realm[] AvailablePrimaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(NatureRealm))
+    protected override string[] AvailablePrimaryRealmBindingKeys => new string[] {
+        nameof(NatureRealm)
     };
-    public override Realm[] AvailableSecondaryRealms => new Realm[] {
-        Game.SingletonRepository.Get<Realm>(nameof(ChaosRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(DeathRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(TarotRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(FolkRealm)),
-        Game.SingletonRepository.Get<Realm>(nameof(CorporealRealm))
+    protected override string[] AvailableSecondaryRealmBindingKeys => new string[] {
+        nameof(ChaosRealm),
+        nameof(DeathRealm),
+        nameof(TarotRealm),
+        nameof(FolkRealm),
+        nameof(CorporealRealm)
     };
     public override bool WorshipsADeity => true;
 }

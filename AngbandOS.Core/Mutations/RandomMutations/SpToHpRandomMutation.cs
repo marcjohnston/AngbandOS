@@ -13,24 +13,9 @@ internal class SpToHpRandomMutation : Mutation
     public override string GainMessage => "You are subject to fits of magical healing.";
     public override string HaveMessage => "Your blood sometimes rushes to your muscles.";
     public override string LoseMessage => "You are no longer subject to fits of magical healing.";
-
-    public override void ProcessWorld()
+    public override string Title => "Magical Healing (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (base.Game.DieRoll(2000) != 1)
-        {
-            return;
-        }
-        int wounds = Game.MaxHealth.IntValue - Game.Health.IntValue;
-        if (wounds <= 0)
-        {
-            return;
-        }
-        int healing = Game.Mana.IntValue;
-        if (healing > wounds)
-        {
-            healing = wounds;
-        }
-        Game.RestoreHealth(healing);
-        Game.Mana.IntValue -= healing;
-    }
+        (1, nameof(SpToHpRandomMutationItemEnhancement))
+    };
 }

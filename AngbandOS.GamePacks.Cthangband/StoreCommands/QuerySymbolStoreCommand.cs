@@ -9,7 +9,6 @@ namespace AngbandOS.GamePacks.Cthangband;
 /// <summary>
 /// Show the player what a particular symbol represents
 /// </summary>
-[Serializable]
 public class QuerySymbolStoreCommand : StoreCommandGameConfiguration
 {
     public override char KeyChar => '/';

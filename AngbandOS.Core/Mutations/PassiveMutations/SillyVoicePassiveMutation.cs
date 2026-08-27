@@ -1,0 +1,22 @@
+﻿// AngbandOS: 2022 Marc Johnston
+//
+// This game is released under the “Angband License”, defined as: “© 1997 Ben Harrison, James E.
+// Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
+// and not for profit purposes provided that this copyright and statement are included in all such
+// copies. Other copyrights may also apply.”
+using AngbandOS.Core.Interfaces;
+
+namespace AngbandOS.Core.Mutations.PassiveMutations;
+
+internal class SillyVoicePassiveMutation : Mutation
+{
+    private SillyVoicePassiveMutation(Game game) : base(game) { }
+    public override int Frequency => 2;
+    public override string GainMessage => "Your voice turns into a ridiculous squeak!";
+    public override string HaveMessage => "Your voice is a silly squeak (-4 CHR).";
+    public override string LoseMessage => "Your voice returns to normal.";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+        (1, nameof(SillyVoicePassiveMutationItemEnhancement)) 
+    };
+    public override string Title => "Silly Voice (P)";
+}

@@ -13,16 +13,9 @@ internal class WraithRandomMutation : Mutation
     public override string GainMessage => "You start to fade in and out of the physical world.";
     public override string HaveMessage => "You fade in and out of physical reality.";
     public override string LoseMessage => "You are firmly in the physical world.";
-
-    public override void ProcessWorld()
+    public override string Title => "Wraith (R)";
+    public override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[]
     {
-        if (Game.HasAntiMagic || Game.DieRoll(3000) != 13)
-        {
-            return;
-        }
-        Game.Disturb(false);
-        Game.MsgPrint("You feel insubstantial!");
-        Game.MsgPrint(string.Empty);
-        Game.EtherealnessTimer.AddTimer(Game.DieRoll(Game.ExperienceLevel.IntValue / 2) + Game.ExperienceLevel.IntValue / 2);
-    }
+        (1, nameof(WraithRandomMutationItemEnhancement))
+    };
 }
