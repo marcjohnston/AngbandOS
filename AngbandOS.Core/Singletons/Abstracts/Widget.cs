@@ -30,6 +30,7 @@ internal abstract class Widget
     /// </summary>
     /// <param name="row"></param>
     /// <param name="col"></param>
+    /// 
     public virtual void MoveCursorTo(int row, int col) { }
 
     public virtual void Poke(ColorEnum attr, char ch, int row, int col) {}

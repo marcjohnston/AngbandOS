@@ -43,7 +43,6 @@ internal sealed class View : IGetKey, IToJson, IGameSerialize
             widget.Update();
         }
     }
-
     public string GetKey => Key;
 
     public void Bind(RestoreGameState? restoreGameState)
