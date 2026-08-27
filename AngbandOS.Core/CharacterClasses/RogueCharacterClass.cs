@@ -10,7 +10,7 @@ internal class RogueCharacterClass : CharacterClass
 {
     private RogueCharacterClass(Game savedGame) : base(savedGame) { }
 
-    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
+    protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
         (1, null, nameof(RogueCharacterClassItemEnhancement)) 
     };
     public override int ID => 3;
