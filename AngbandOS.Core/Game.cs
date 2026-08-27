@@ -840,7 +840,7 @@ internal class Game : IGameSerialize
             Gold.IntValue += 10000000;
             SetBackground(BackgroundImageEnum.Crown);
             Screen.Clear();
-            AnyKey(44);
+            RenderPressAnyKeyToContinueAndGetRecordedKeystroke(44);
         }
 
         void PrintTomb()
@@ -881,7 +881,7 @@ internal class Game : IGameSerialize
                 Screen.Print(tmp, 40, 34);
                 tmp = $"on {ct:dd MMM yyyy h.mm tt}".PadLeft(45);
                 Screen.Print(tmp, 41, 34);
-                AnyKey(44);
+                RenderPressAnyKeyToContinueAndGetRecordedKeystroke(44);
             }
         }
 
@@ -1361,6 +1361,159 @@ internal class Game : IGameSerialize
     #endregion
 
     #region Console Keystroke Retrieval and Artificial Keystroke Buffer
+    /// GUI
+    /// <summary>
+    /// Prints a 'press any key' message and waits for a key press
+    /// </summary>
+    /// <param name="row"> The row on which to print the message </param>
+    public void RenderPressAnyKeyToContinueAndGetRecordedKeystroke(int row)
+    {
+        Screen.PrintLine("", row, 0);
+        Screen.Print(ColorEnum.Orange, "[Press any key to continue]", row, 27);
+        GetAndRecordKeystroke();
+        Screen.PrintLine("", row, 0);
+    }
+
+    public string? AskForAux(string initial, int len)
+    {
+        string buf = initial;
+        char i = '\0';
+        int k = 0;
+        bool done = false;
+        GridCoordinate cursorPosition = Screen.CursorPosition;
+        if (len < 1)
+        {
+            len = 1;
+        }
+        if (cursorPosition.X < 0 || cursorPosition.X >= Screen.Width)
+        {
+            cursorPosition = new GridCoordinate(0, cursorPosition.Y);
+        }
+        if (cursorPosition.X + len > Screen.Width)
+        {
+            len = Screen.Width - cursorPosition.X;
+        }
+        Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
+        Screen.Print(ColorEnum.Grey, buf, cursorPosition.Y, cursorPosition.X);
+        while (!done && !Shutdown)
+        {
+            Screen.Goto(cursorPosition.Y, cursorPosition.X + k);
+            Screen.UpdateScreen();
+            i = GetAndRecordKeystroke();
+            switch (i)
+            {
+                case '\x1b':
+                    k = 0;
+                    done = true;
+                    break;
+
+                case '\n':
+                case '\r':
+                    k = buf.Length;
+                    done = true;
+                    break;
+
+                case (char)8:
+                    if (k > 0)
+                    {
+                        k--;
+                    }
+                    buf = buf.Substring(0, k);
+                    break;
+
+                default:
+                    if (k < len && (char.IsLetterOrDigit(i) || i == ' ' || char.IsPunctuation(i)))
+                    {
+                        buf = buf.Substring(0, k) + i;
+                        k++;
+                    }
+                    break;
+            }
+            Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
+            Screen.Print(ColorEnum.Black, buf, cursorPosition.Y, cursorPosition.X);
+        }
+        if (i == '\x1b')
+        {
+            return null;
+        }
+        return buf;
+    }
+
+    public bool RenderPromptAndGetRecordedString(string prompt, out string buf, string initial, int len)
+    {
+        MsgPrint(string.Empty);
+        Screen.PrintLine(prompt, 0, 0);
+        string? buffer = AskForAux(initial, len);
+        buf = buffer;
+        MsgPrint(null);
+        if (buffer == null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Gets a keystroke and returns false, if the keystroke is Escape; true, otherwise.  
+    /// </summary>
+    /// <param name="prompt"></param>
+    /// <param name="value">Returns true, if the keystroke is "1"; false, if the keystroke is "0"</param>
+    /// <param name="defaultValue"></param>
+    /// <returns></returns>
+    public bool GetBool(string prompt, out bool value, bool defaultValue = false)
+    {
+        value = false;
+        char text = defaultValue ? '1' : '0';
+        if (!RenderPromptAndGetRecordedKeystroke(prompt, out text))
+        {
+            return false;
+        }
+        if (text == '0')
+        {
+            value = false;
+            return true;
+        }
+        if (text == '1')
+        {
+            value = true;
+            return true;
+        }
+        value = defaultValue;
+        return true;
+    }
+    public bool GetInt(string prompt, int defaultValue, out int? value)
+    {
+        return GetInt(prompt, defaultValue, 9, out value);
+    }
+
+    public bool GetInt(string prompt, int defaultValue, int maxLength, out int? value)
+    {
+        value = null;
+        if (!RenderPromptAndGetRecordedString(prompt, out string tmpVal, $"{defaultValue}", maxLength))
+        {
+            return false;
+        }
+        if (!int.TryParse(tmpVal, out int tmpInt))
+        {
+            return false;
+        }
+        value = tmpInt;
+        return true;
+    }
+
+    public bool RenderPromptAndGetRecordedKeystroke(string prompt, out char command)
+    {
+        MsgPrint(string.Empty);
+        if (prompt.Length > 1)
+        {
+            prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
+        }
+        Screen.PrintLine(prompt, 0, 0);
+        command = GetAndRecordKeystroke();
+        MsgPrint(null);
+        return command != '\x1b';
+    }
+
     /// <summary>
     /// Returns the queue of keystrokes as provided by the console.  Artificial keystrokes are not inserted into this queue.  Artificial keystrokes take precedence over the keystrokes from the console.
     /// </summary>
@@ -2235,45 +2388,6 @@ internal class Game : IGameSerialize
     public static JsonSerializerOptions GetJsonSerializerOptions()
     {
         return new JsonSerializerOptions() { IncludeFields = true };
-    }
-
-    public bool GetBool(string prompt, out bool value)
-    {
-        value = false;
-        if (!GetCom(prompt, out char text))
-        {
-            return false;
-        }
-        if (text == '0')
-        {
-            value = false;
-            return true;
-        }
-        if (text == '1')
-        {
-            value = true;
-            return true;
-        }
-        return false;
-    }
-    public bool GetInt(string prompt, int defaultValue, out int? value)
-    {
-        return GetInt(prompt, defaultValue, 9, out value);
-    }
-
-    public bool GetInt(string prompt, int defaultValue, int maxLength, out int? value)
-    {
-        value = null;
-        if (!GetString(prompt, out string tmpVal, $"{defaultValue}", maxLength))
-        {
-            return false;
-        }
-        if (!int.TryParse(tmpVal, out int tmpInt))
-        {
-            return false;
-        }
-        value = tmpInt;
-        return true;
     }
 
     public void StorePrtGold()
@@ -8970,7 +9084,7 @@ internal class Game : IGameSerialize
         string spellNoun = CharacterClass.SpellNoun;
         ScreenBuffer? savedScreen = null;
         string outVal = $"({spellNoun}s {0.IndexToLetter()}-{(okaySpells.Length - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {spellNoun}? ";
-        while (selectedSpell == null && GetCom(outVal, out char choice) && !Shutdown)
+        while (selectedSpell == null && RenderPromptAndGetRecordedKeystroke(outVal, out char choice) && !Shutdown)
         {
             if (choice == ' ' || choice == '*' || choice == '?')
             {
@@ -9867,84 +9981,6 @@ internal class Game : IGameSerialize
         return false;
     }
 
-    /// GUI
-    /// <summary>
-    /// Prints a 'press any key' message and waits for a key press
-    /// </summary>
-    /// <param name="row"> The row on which to print the message </param>
-    public void AnyKey(int row)
-    {
-        Screen.PrintLine("", row, 0);
-        Screen.Print(ColorEnum.Orange, "[Press any key to continue]", row, 27);
-        GetAndRecordKeystroke();
-        Screen.PrintLine("", row, 0);
-    }
-
-    public string? AskforAux(string initial, int len)
-    {
-        string buf = initial;
-        char i = '\0';
-        int k = 0;
-        bool done = false;
-        GridCoordinate cursorPosition = Screen.CursorPosition;
-        if (len < 1)
-        {
-            len = 1;
-        }
-        if (cursorPosition.X < 0 || cursorPosition.X >= Screen.Width)
-        {
-            cursorPosition = new GridCoordinate(0, cursorPosition.Y);
-        }
-        if (cursorPosition.X + len > Screen.Width)
-        {
-            len = Screen.Width - cursorPosition.X;
-        }
-        Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
-        Screen.Print(ColorEnum.Grey, buf, cursorPosition.Y, cursorPosition.X);
-        while (!done && !Shutdown)
-        {
-            Screen.Goto(cursorPosition.Y, cursorPosition.X + k);
-            Screen.UpdateScreen();
-            i = GetAndRecordKeystroke();
-            switch (i)
-            {
-                case '\x1b':
-                    k = 0;
-                    done = true;
-                    break;
-
-                case '\n':
-                case '\r':
-                    k = buf.Length;
-                    done = true;
-                    break;
-
-                case (char)8:
-                    if (k > 0)
-                    {
-                        k--;
-                    }
-                    buf = buf.Substring(0, k);
-                    break;
-
-                default:
-                    if (k < len && (char.IsLetterOrDigit(i) || i == ' ' || char.IsPunctuation(i)))
-                    {
-                        buf = buf.Substring(0, k) + i;
-                        k++;
-                    }
-                    break;
-            }
-            Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
-            Screen.Print(ColorEnum.Black, buf, cursorPosition.Y, cursorPosition.X);
-        }
-        if (i == '\x1b')
-        {
-            return null;
-        }
-        return buf;
-    }
-
     public bool GetCheck(string prompt)
     {
         int i = 0;
@@ -9971,19 +10007,6 @@ internal class Game : IGameSerialize
         }
         MsgPrint(null);
         return i == 'Y' || i == 'y' || i == 13;
-    }
-
-    public bool GetCom(string prompt, out char command)
-    {
-        MsgPrint(string.Empty);
-        if (prompt.Length > 1)
-        {
-            prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
-        }
-        Screen.PrintLine(prompt, 0, 0);
-        command = GetAndRecordKeystroke();
-        MsgPrint(null);
-        return command != '\x1b';
     }
 
     public int GetKeymapDir(char ch)
@@ -10032,7 +10055,7 @@ internal class Game : IGameSerialize
             amt = max;
         }
         string def = amt.ToString();
-        if (!GetString($"Quantity (1-{max}): ", out string buf, def, 6))
+        if (!RenderPromptAndGetRecordedString($"Quantity (1-{max}): ", out string buf, def, 6))
         {
             return 0;
         }
@@ -10057,20 +10080,6 @@ internal class Game : IGameSerialize
             amt = 0;
         }
         return amt;
-    }
-
-    public bool GetString(string prompt, out string buf, string initial, int len)
-    {
-        MsgPrint(string.Empty);
-        Screen.PrintLine(prompt, 0, 0);
-        string? buffer = AskforAux(initial, len);
-        buf = buffer;
-        MsgPrint(null);
-        if (buffer == null)
-        {
-            return false;
-        }
-        return true;
     }
 
     /// <summary>
@@ -10192,7 +10201,7 @@ internal class Game : IGameSerialize
                     }
                     if (cmd == ' ' || cmd == '\n' || cmd == '\r')
                     {
-                        if (!GetCom("Command: ", out cmd))
+                        if (!RenderPromptAndGetRecordedKeystroke("Command: ", out cmd))
                         {
                             CommandArgument = 0;
                             continue;
@@ -10201,7 +10210,7 @@ internal class Game : IGameSerialize
                 }
                 else if (cmd == '\\')
                 {
-                    GetCom("Command: ", out cmd);
+                    RenderPromptAndGetRecordedKeystroke("Command: ", out cmd);
                 }
             }
             string act = _keymapAct[mode][cmd];
@@ -10276,7 +10285,7 @@ internal class Game : IGameSerialize
                 table.HighlightRow(selectedIndex);
                 table.Render(this, consoleWindow, new ConsoleTopLeftAlignment());
 
-                if (!GetCom(prompt, out char ch))
+                if (!RenderPromptAndGetRecordedKeystroke(prompt, out char ch))
                 {
                     return default;
                 }
@@ -11357,7 +11366,7 @@ internal class Game : IGameSerialize
         int dir = CommandDirection;
         while (dir == 0)
         {
-            if (!GetCom("Direction (Escape to cancel)? ", out char ch))
+            if (!RenderPromptAndGetRecordedKeystroke("Direction (Escape to cancel)? ", out char ch))
             {
                 break;
             }
@@ -11398,7 +11407,7 @@ internal class Game : IGameSerialize
             {
                 p = "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
             }
-            if (!GetCom(p, out char command))
+            if (!RenderPromptAndGetRecordedKeystroke(p, out char command))
             {
                 break;
             }
@@ -12605,7 +12614,7 @@ internal class Game : IGameSerialize
         while (!Shutdown)
         {
             Screen.Goto(2, col);
-            string? newName = AskforAux(PlayerName.StringValue, 12);
+            string? newName = AskForAux(PlayerName.StringValue, 12);
             if (newName != null)
             {
                 PlayerName.StringValue = newName;
@@ -15979,7 +15988,7 @@ internal class Game : IGameSerialize
                 Screen.Print(ColorEnum.White, $" {keys[i].ToString().ToLower()}) {towns[keys[i]].Name}".PadRight(60), i + 1, 20);
             }
             Screen.Print(ColorEnum.White, "".PadRight(60), keys.Count + 1, 20);
-            while (GetCom(outVal, out char choice))
+            while (RenderPromptAndGetRecordedKeystroke(outVal, out char choice))
             {
                 choice = choice.ToString().ToUpper()[0];
                 foreach (var c in keys)

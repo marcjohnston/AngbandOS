@@ -52,7 +52,7 @@ internal class LocateScript : UniversalScript, IGetKey
             int dir = 0;
             while (dir == 0)
             {
-                if (!Game.GetCom(message, out char command))
+                if (!Game.RenderPromptAndGetRecordedKeystroke(message, out char command))
                 {
                     break;
                 }

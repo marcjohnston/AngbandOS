@@ -280,7 +280,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
             }
         }
         string outVal = $"({p}s {0.IndexToLetter()}-{(talentList.Count - 1).IndexToLetter()}, *=List, ESC=exit) Use which {p}? ";
-        while (!flag && Game.GetCom(outVal, out char choice))
+        while (!flag && Game.RenderPromptAndGetRecordedKeystroke(outVal, out char choice))
         {
             if (choice == ' ' || choice == '*' || choice == '?')
             {

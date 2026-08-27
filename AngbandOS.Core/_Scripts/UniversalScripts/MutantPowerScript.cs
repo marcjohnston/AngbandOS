@@ -97,7 +97,7 @@ internal class MutantPowerScript : UniversalScript, IGetKey
         bool flag = false;
         ScreenBuffer? savedScreen = null;
         string outVal = $"(Powers {0.IndexToLetter()}-{(num - 1).IndexToLetter()}, *=List, ESC=exit) Use which power? ";
-        while (!flag && Game.GetCom(outVal, out char choice))
+        while (!flag && Game.RenderPromptAndGetRecordedKeystroke(outVal, out char choice))
         {
             if (choice == ' ' || choice == '*' || choice == '?')
             {

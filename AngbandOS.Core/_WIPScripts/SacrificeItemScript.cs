@@ -112,7 +112,7 @@ internal class SacrificeItemScript : Script, IStoreCommandScript
                 Game.Screen.Print(ColorEnum.White, $" {keys[i].ToString().ToLower()}) {names[i]}".PadRight(60), i + 1, 20);
             }
             Game.Screen.Print(ColorEnum.White, "".PadRight(60), keys.Count + 1, 20);
-            while (Game.GetCom(outVal, out char choice))
+            while (Game.RenderPromptAndGetRecordedKeystroke(outVal, out char choice))
             {
                 choice = choice.ToString().ToUpper()[0];
                 foreach (var c in keys)

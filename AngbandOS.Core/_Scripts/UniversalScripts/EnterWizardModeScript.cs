@@ -28,7 +28,7 @@ internal class EnterWizardModeScript : UniversalScript, IGetKey
     {
         if (Game.IsWizard.BoolValue)
         {
-            Game.GetCom("Wizard Command: ", out char cmd);
+            Game.RenderPromptAndGetRecordedKeystroke("Wizard Command: ", out char cmd);
             foreach (WizardCommand wizardCommand in Game.SingletonRepository.Get<WizardCommand>())
             {
                 if (wizardCommand.IsEnabled && wizardCommand.KeyChar == cmd)
@@ -45,7 +45,7 @@ internal class EnterWizardModeScript : UniversalScript, IGetKey
         else
         {
             Game.Screen.PrintLine("Enter Wizard Code: ", 0, 0);
-            string? tmp = Game.AskforAux("", 31);
+            string? tmp = Game.AskForAux("", 31);
             Game.Screen.Erase(0, 0);
             if (tmp == "Dumbledore")
             {

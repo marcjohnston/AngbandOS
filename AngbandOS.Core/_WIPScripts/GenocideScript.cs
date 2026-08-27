@@ -18,7 +18,7 @@ internal class GenocideScript : Script, IScript, ICastSpellScript, IScriptBool, 
     public void ExecuteScriptBool(bool playerCast) // TODO: This needs to be cancellable and remove the playerCast parameter
     {
         int msec = Constants.DelayFactorInMilliseconds;
-        Game.GetCom("Choose a monster race (by symbol) to carnage: ", out char typ);
+        Game.RenderPromptAndGetRecordedKeystroke("Choose a monster race (by symbol) to carnage: ", out char typ);
         foreach (Monster mPtr in Game.MonsterList)
         {
             MonsterRace rPtr = mPtr.Race;

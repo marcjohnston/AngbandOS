@@ -33,7 +33,7 @@ internal class EditItemScript : Script, IScript, ICastSpellScript
         }
         do
         {
-            if (!Game.GetString("Rare Item Index: ", out string tmpVal, "", 9))
+            if (!Game.RenderPromptAndGetRecordedString("Rare Item Index: ", out string tmpVal, "", 9))
             {
                 return;
             }

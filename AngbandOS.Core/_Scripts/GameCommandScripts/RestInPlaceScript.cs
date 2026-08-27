@@ -24,7 +24,7 @@ internal class RestInPlaceScript : GameCommandUniversalScript, IGetKey
         if (Game.CommandArgument <= 0)
         {
             const string prompt = "Rest (0-9999, '*' for HP/SP, '&' as needed): ";
-            if (!Game.GetString(prompt, out string choice, "&", 4))
+            if (!Game.RenderPromptAndGetRecordedString(prompt, out string choice, "&", 4))
             {
                 return RepeatableResultEnum.False; // We are not returning by chance.  The user opted out.
             }

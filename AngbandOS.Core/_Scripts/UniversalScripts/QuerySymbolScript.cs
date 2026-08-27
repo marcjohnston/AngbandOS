@@ -27,7 +27,7 @@ internal class QuerySymbolScript : UniversalScript, IGetKey
     public override void ExecuteScript()
     {
         // Query the user for the symbol to identify.
-        if (!Game.GetCom("Enter character to be identified: ", out char querySymbol))
+        if (!Game.RenderPromptAndGetRecordedKeystroke("Enter character to be identified: ", out char querySymbol))
         {
             return;
         }
