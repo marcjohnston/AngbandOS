@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class ImpRace : Race
 {
     private ImpRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(ImpRaceItemEnhancement)),
         (10, nameof(ImpRaceLevel10ItemEnhancement)),
         (20, nameof(ImpRaceLevel20ItemEnhancement))

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class MindFlayerRace : Race
 {
     private MindFlayerRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(MindFlayerRaceItemEnhancement)),
         (15, nameof(MindFlayerRaceLevel15ItemEnhancement)),
         (30, nameof(MindFlayerRaceLevel30ItemEnhancement))

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class ZombieRace : Race
 {
     private ZombieRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(ZombieRaceItemEnhancement)),
         (5, nameof(ZombieRaceLevel5ItemEnhancement))
     };

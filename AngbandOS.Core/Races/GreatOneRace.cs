@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class GreatOneRace : Race
 {
     private GreatOneRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(GreatOneRaceItemEnhancement)) 
     };
     public override string Title => "Great One";

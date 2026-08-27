@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class SkeletonRace : Race
 {
     private SkeletonRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(SkeletonRaceItemEnhancement)),
         (10, nameof(SkeletonRaceLevel10ItemEnhancement))
     };

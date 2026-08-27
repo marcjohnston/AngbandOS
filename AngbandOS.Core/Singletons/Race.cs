@@ -40,14 +40,14 @@ internal abstract class Race : IGetKey, IGameSerialize
     /// </summary>
     public void RegenerateAttributeSets()
     {
-        if (MinimumExperienceLevelAndEnhancementTuples is null)
+        if (ExperienceLevelAndEnhancementTuples is null)
         {
             MinimumExperienceLevelAndEnhancementAttributeSets = null;
         }
         else
         {
             List<(int, ReadOnlyAttributeSet)> tupleList = new List<(int, ReadOnlyAttributeSet)>();
-            foreach ((int minimumExperienceLevel, ItemEnhancement enhancement) in MinimumExperienceLevelAndEnhancementTuples)
+            foreach ((int minimumExperienceLevel, ItemEnhancement enhancement) in ExperienceLevelAndEnhancementTuples)
             {
                 tupleList.Add((minimumExperienceLevel, enhancement.GenerateAttributeSet()));
             }
@@ -74,7 +74,7 @@ internal abstract class Race : IGetKey, IGameSerialize
         GenerateNameSyllableSet = Game.SingletonRepository.Get<SyllableSet>(GenerateNameSyllableSetBindingKey);
         RacialPowerScript = Game.SingletonRepository.GetNullable<IScript>(RacialPowerScriptBindingKey);
         ChanceOfSanityBlastImmunityExpression = Game.ParseNumericExpression(ChanceOfSanityBlastImmunityExpressionText);
-        MinimumExperienceLevelAndEnhancementTuples = MinimumExperienceLevelAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
+        ExperienceLevelAndEnhancementTuples = ExperienceLevelAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
 
         if (restoreGameState is not null)
         {
@@ -90,8 +90,8 @@ internal abstract class Race : IGetKey, IGameSerialize
     /// </summary>
     public ReadOnlyAttributeSet AttributeSet { get; private set; }
 
-    protected virtual (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => null;
-    public (int, ItemEnhancement)[]? MinimumExperienceLevelAndEnhancementTuples { get; private set; }
+    protected virtual (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => null;
+    public (int, ItemEnhancement)[]? ExperienceLevelAndEnhancementTuples { get; private set; }
 
     /// <summary>
     /// Returns the current read-only set of generated enhancements.  These enhancements are generated at birth via the <see cref="RegenerateAttributeSets"/> method and do not change.
