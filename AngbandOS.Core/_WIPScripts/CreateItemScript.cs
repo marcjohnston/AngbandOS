@@ -4,6 +4,8 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
+using System.Xml.Linq;
+
 namespace AngbandOS.Core.Scripts;
 
 
@@ -27,13 +29,12 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        Game.FullScreenOverlay = true;
-        ScreenBuffer savedScreen = Game.Screen.Clone();
-        Game.SetBackground(BackgroundImageEnum.Normal);
-        ItemFactory? itemFactory = WizardSelectItemFactory();
-        Game.Screen.Restore(savedScreen);
-        Game.FullScreenOverlay = false;
-        Game.SetBackground(BackgroundImageEnum.Overhead);
+        ItemClass? itemClass = WizardSelectItemClass();
+        if (itemClass == null)
+        {
+            return;
+        }
+        ItemFactory? itemFactory = WizardSelectItemFactory(itemClass);
         if (itemFactory == null)
         {
             return;
@@ -81,84 +82,27 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
         return;
     }
 
-    private ItemFactory? WizardSelectItemFactory()
+    private ItemClass? WizardSelectItemClass()
     {
-        char[] _head = { 'a', 'A', '0' };
-        int num;
-        int col, row;
-        char ch;
-        int[] choice = new int[60];
-        Game.Screen.Clear();
-        for (num = 0; num < 60 && num < Game.SingletonRepository.Count<ItemClass>(); num++)
+        ItemClass[] itemClasses = Game.SingletonRepository.Get<ItemClass>().OrderBy(_itemClass => _itemClass.Name).ToArray();
+        ConsoleTableWithRowHighlighting<ItemClass> table = new ConsoleTableWithRowHighlighting<ItemClass>(itemClasses, new (string, Func<ItemClass, string>)[]
         {
-            ItemClass itemClass = Game.SingletonRepository.Get<ItemClass>(num);
-            row = 2 + (num % 20);
-            col = 30 * (num / 20);
-            ch = (char)(_head[num / 20] + (char)(num % 20));
-            Game.Screen.PrintLine($"[{ch}] {Game.Pluralize(itemClass.Name)}", row, col);
-        }
-        int maxNum = num;
-        if (!Game.GetCom("Get what type of object? ", out ch))
-        {
-            return null;
-        }
-        num = -1;
-        if (ch >= _head[0] && ch < _head[0] + 20)
-        {
-            num = ch - _head[0];
-        }
-        if (ch >= _head[1] && ch < _head[1] + 20)
-        {
-            num = ch - _head[1] + 20;
-        }
-        if (ch >= _head[2] && ch < _head[2] + 10)
-        {
-            num = ch - _head[2] + 40;
-        }
-        if (num < 0 || num >= maxNum)
-        {
-            return null;
-        }
-        ItemClass selectedItemClass = Game.SingletonRepository.Get<ItemClass>(num);
-        string tvalDesc = Game.Pluralize(selectedItemClass.Name);
-        Game.Screen.Clear();
-        const int maxLetters = 26;
-        const int maxNumbers = 10;
-        const int maxCount = maxLetters * 2 + maxNumbers; // 26 lower case, 26 uppercase, 10 numbers
-        ItemFactory[] itemFactories = Game.SingletonRepository.Get<ItemFactory>().Where(_itemFactory => _itemFactory.ItemClass == selectedItemClass).OrderBy(_itemFactory => _itemFactory.BookIndex).ToArray();
-        for (num = 0; num < maxCount && num < itemFactories.Length; num++)
-        {
-            ItemFactory kPtr = itemFactories[num];
-            row = 2 + (num % maxLetters);
-            col = 30 * (num / maxLetters);
-            ch = (char)(_head[num / maxLetters] + (char)(num % maxLetters));
-            string itemName = kPtr.Name;
+            ("Item Class", _itemClass => Game.Pluralize(_itemClass.Name)),
+            ("Items", _itemClass => Game.SingletonRepository.Get<ItemFactory>().Count(_itemFactory => _itemFactory.ItemClass == _itemClass).ToString())
+        });
+        ItemClass? selectedItemClass = Game.SelectFromConsoleTable<ItemClass>(table, "Select Item Class:");
+        return selectedItemClass;
+    }
 
-            Game.Screen.PrintLine($"[{ch}] {itemName}", row, col);
-            choice[num] = num;
-        }
-        maxNum = num;
-        if (!Game.GetCom($"What Kind of {tvalDesc}? ", out ch))
+    private ItemFactory? WizardSelectItemFactory(ItemClass itemClass)
+    {
+        ItemFactory[] itemFactories = Game.SingletonRepository.Get<ItemFactory>().Where(_itemFactory => _itemFactory.ItemClass == itemClass).OrderBy(_itemFactory => _itemFactory.Name).ToArray();
+        ConsoleTableWithRowHighlighting<ItemFactory> table = new ConsoleTableWithRowHighlighting<ItemFactory>(itemFactories, new (string, Func<ItemFactory, string>)[]
         {
-            return null;
-        }
-        num = -1;
-        if (ch >= _head[0] && ch < _head[0] + maxLetters)
-        {
-            num = ch - _head[0];
-        }
-        if (ch >= _head[1] && ch < _head[1] + maxLetters)
-        {
-            num = ch - _head[1] + maxLetters;
-        }
-        if (ch >= _head[2] && ch < _head[2] + maxNumbers)
-        {
-            num = ch - _head[2] + maxLetters * 2;
-        }
-        if (num < 0 || num >= maxNum)
-        {
-            return null;
-        }
-        return itemFactories[num];
+            ("Name", _itemFactory => _itemFactory.Name),
+            ("Character", _itemFactory => _itemFactory.Symbol.Character.ToString())
+        });
+        ItemFactory? selectedItemFactory = Game.SelectFromConsoleTable<ItemFactory>(table, "Select Item:");
+        return selectedItemFactory;
     }
 }
