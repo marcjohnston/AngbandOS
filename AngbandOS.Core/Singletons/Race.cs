@@ -109,7 +109,7 @@ internal abstract class Race : IGetKey, IGameSerialize
     public abstract uint Choice { get; }
     public abstract int ExperienceFactor { get; }
     public abstract int HitDieBonus { get; }
-    public abstract int Infravision { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
+    public abstract int InfraVision { get; } // THIS HAS BEEN COPIED TO ENHANCEMENT
     public abstract string Title { get; }
 
     /// <summary>
