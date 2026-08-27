@@ -274,7 +274,7 @@ internal class Game : IGameSerialize
             (nameof(CurrentCommand), saveGameState.CreateGameStateBag(CurrentCommand)),
             (nameof(KeyQueue), saveGameState.CreateGameStateBag(KeyQueue.ToArray())),
             (nameof(Screen), saveGameState.CreateDerivedGameStateBag(Screen, typeof(Window))),
-            (nameof(_artificialKeyBuffer), saveGameState.CreateGameStateBag(_artificialKeyBuffer)),
+            (nameof(ArtificialKeystrokeBuffer), saveGameState.CreateGameStateBag(ArtificialKeystrokeBuffer)),
             (nameof(_keymapAct), saveGameState.CreateGameStateBag(_keymapAct)),
             (nameof(History), saveGameState.CreateGameStateBag(History)),
             (nameof(PlayerHp), saveGameState.CreateGameStateBag(PlayerHp)),
@@ -549,7 +549,7 @@ internal class Game : IGameSerialize
             CurrentCommand = restoreGameState.GetByKey(nameof(CurrentCommand)).GetChar();
             KeyQueue = new Queue<char>(restoreGameState.GetByKey(nameof(KeyQueue)).GetChars());
             Screen = restoreGameState.GetByKey(nameof(Screen)).GetDerivedReference<Window>(_restoreGameState => new Window(this, _restoreGameState));
-            _artificialKeyBuffer = restoreGameState.GetByKey(nameof(_artificialKeyBuffer)).GetString();
+            ArtificialKeystrokeBuffer = restoreGameState.GetByKey(nameof(ArtificialKeystrokeBuffer)).GetString();
             _keymapAct = restoreGameState.GetByKey(nameof(_keymapAct)).GetArrayOfStrings();
             History = restoreGameState.GetByKey(nameof(History)).GetStrings();
             PlayerHp = restoreGameState.GetByKey(nameof(PlayerHp)).GetInts();
@@ -1342,6 +1342,23 @@ internal class Game : IGameSerialize
     public Attribute[] CachedAttributes;
     #endregion
 
+    #region Artificial Keystroke Buffer
+    /// <summary>
+    /// A buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.  These artifical keypresses are used only for conversion of 
+    /// </summary>
+    private string ArtificialKeystrokeBuffer = "";
+
+    /// <summary>
+    /// Appends a keystroke to the end of the artificial keystroke buffer.
+    /// </summary>
+    /// <param name="c"></param>
+    public void EnqueueArtificialKeystroke(char c)
+    {
+        ArtificialKeystrokeBuffer += c;
+    }
+
+    #endregion
+
     #region WIP Methods Not Yet Categorized
     /// <summary>
     /// Returns true, if the player successfully avoids theft.  This is based on the player's dexterity and experience level, as well as whether the player has anti-theft protection.
@@ -1591,11 +1608,6 @@ internal class Game : IGameSerialize
     /// is supplied at the play game stage.
     /// </remarks>
     public Window? Screen = null;
-
-    /// <summary>
-    /// A buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.  These artifical keypresses are used only for conversion of 
-    /// </summary>
-    public string _artificialKeyBuffer = "";
 
     private string[][] _keymapAct { get; set; }
 
@@ -8155,7 +8167,7 @@ internal class Game : IGameSerialize
         if (tile.FeatureType.IsShop)
         {
             Disturb(false);
-            _artificialKeyBuffer += SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar;
+            ArtificialKeystrokeBuffer += SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar;
         }
         // If we've just stepped on an unknown trap then activate it
         else if (tile.FeatureType.IsInvisibleTrap)
@@ -10004,7 +10016,7 @@ internal class Game : IGameSerialize
             if (!string.IsNullOrEmpty(act))
             {
                 cmd = act[0];
-                _artificialKeyBuffer = act.Substring(1);
+                ArtificialKeystrokeBuffer = act.Substring(1);
             }
             if (cmd == 0)
             {
@@ -10170,10 +10182,10 @@ internal class Game : IGameSerialize
         bool fromReplay = IsInReplayMode;
 
         char ch = '\0';
-        if (!disableArtificialKeyBuffer && _artificialKeyBuffer.Length > 0)
+        if (!disableArtificialKeyBuffer && ArtificialKeystrokeBuffer.Length > 0)
         {
-            ch = _artificialKeyBuffer[0];
-            _artificialKeyBuffer = _artificialKeyBuffer.Remove(0, 1);
+            ch = ArtificialKeystrokeBuffer[0];
+            ArtificialKeystrokeBuffer = ArtificialKeystrokeBuffer.Remove(0, 1);
             HideCursorOnFullScreenInkey = false;
             return (ch, true, fromReplay);
         }

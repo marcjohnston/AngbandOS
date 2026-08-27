@@ -43,7 +43,7 @@ internal class StayAndPickupScript : UniversalScript, IGetKey
         if (tile.FeatureType.IsShop)
         {
             Game.Disturb(false);
-            Game._artificialKeyBuffer += Game.SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar;
+            Game.EnqueueArtificialKeystroke(Game.SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar);
         }
     }
 }
