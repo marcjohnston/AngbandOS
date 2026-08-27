@@ -4,9 +4,6 @@
 // Wilson, Robert A. Koeneke This software may be copied and distributed for educational, research,
 // and not for profit purposes provided that this copyright and statement are included in all such
 // copies. Other copyrights may also apply.”
-using AngbandOS.Core.Interfaces;
-using AngbandOS.GamePacks.Cthangband;
-
 namespace AngbandOS.Core;
 
 internal abstract class FixedArtifact : IGetKey, IToJson, IGameSerialize
@@ -17,7 +14,7 @@ internal abstract class FixedArtifact : IGetKey, IToJson, IGameSerialize
         Game = game;
     }
 
-    public virtual GameStateBag? Serialize(SaveGameState saveGameState)
+    public GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(CurNum), new IntValueGameStateBag(CurNum))
@@ -31,32 +28,12 @@ internal abstract class FixedArtifact : IGetKey, IToJson, IGameSerialize
         {
             CurNum = restoreGameState.GetByKey(nameof(CurNum)).GetInt();
         }
-        //// Cut and paste
-        //string? property = Game.CutProperty(@$"D:\Programming\AngbandOS\AngbandOS.Core\FixedArtifacts", Key, "public override ColorEnum Color => ");
-        ////if (property is null)
-        ////    throw new Exception("");
-
-
-        //if (mappedItemEnhancements.Length == 0)
-        //    throw new Exception("");
-        //foreach (MappedItemEnhancement mappedItemEnhancement in mappedItemEnhancements)
-        //{
-        //    mappedItemEnhancement.Bind();
-        //    BaseItemFactory.Bind();
-        //    ItemEnhancement itemEnhancement = mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement();
-        //    //if ((BaseItemFactory.ItemEnhancement?.BonusDamageRollExpression == null ? 0 : Int32.Parse(BaseItemFactory.ItemEnhancement.BonusDamageRollExpression)) != ToD)
-        //    //    Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, $"    public override string BonusDamageRollExpression => \"{ToD - (BaseItemFactory.ItemEnhancement?.BonusDamageRollExpression is null ? 0 : Int32.Parse(BaseItemFactory.ItemEnhancement.BonusDamageRollExpression))}\";");
-        //    //Debug.Print($"{itemEnhancement.GetKey} public override int DamageSides => {itemEnhancement.DiceSides - BaseItemFactory.ItemEnhancement.DiceSides};");
-        //    if (property is not null)
-        //        Game.PasteProperty(@$"D:\Programming\AngbandOS\AngbandOS.GamePacks.Cthangband\ItemEnhancements", mappedItemEnhancement.ItemEnhancements[0].GetItemEnhancement()!.GetKey, property);
-        //}
     }
 
     public string ToJson()
     {
         return "";
     }
-
 
     /// <summary>
     /// Returns the color that items of this type should be rendered with.  This color will be initially used to set the <see cref="FlavorColor"/> and item categories
