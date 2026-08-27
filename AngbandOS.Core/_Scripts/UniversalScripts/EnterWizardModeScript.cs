@@ -45,7 +45,7 @@ internal class EnterWizardModeScript : UniversalScript, IGetKey
         else
         {
             Game.Screen.PrintLine("Enter Wizard Code: ", 0, 0);
-            string? tmp = Game.AskForAux("", 31);
+            string? tmp = Game.RenderPromptAndGetRecordedString("", 31);
             Game.Screen.Erase(0, 0);
             if (tmp == "Dumbledore")
             {

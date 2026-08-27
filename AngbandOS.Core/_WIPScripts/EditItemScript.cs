@@ -39,15 +39,15 @@ internal class EditItemScript : Script, IScript, ICastSpellScript
             }
             if (int.TryParse(tmpVal, out int val))
             {
-                if (!Game.GetBool($"Allow Fixed Artifact Item (0=False, 1=True)? ", out bool allowFixedArtifact))
+                if (!Game.RenderPromptAndGetRecordedBoolean($"Allow Fixed Artifact Item (0=False, 1=True)? ", out bool allowFixedArtifact))
                 {
                     return;
                 }
-                if (!Game.GetBool($"Good Item (0=False, 1=True)? ", out bool good))
+                if (!Game.RenderPromptAndGetRecordedBoolean($"Good Item (0=False, 1=True)? ", out bool good))
                 {
                     return;
                 }
-                if (!Game.GetBool($"Great Item (0=False, 1=True)? ", out bool great))
+                if (!Game.RenderPromptAndGetRecordedBoolean($"Great Item (0=False, 1=True)? ", out bool great))
                 {
                     return;
                 }

@@ -1374,7 +1374,7 @@ internal class Game : IGameSerialize
         Screen.PrintLine("", row, 0);
     }
 
-    public string? AskForAux(string initial, int len)
+    public string? RenderPromptAndGetRecordedString(string initial, int len)
     {
         string buf = initial;
         char i = '\0';
@@ -1443,7 +1443,7 @@ internal class Game : IGameSerialize
     {
         MsgPrint(string.Empty);
         Screen.PrintLine(prompt, 0, 0);
-        string? buffer = AskForAux(initial, len);
+        string? buffer = RenderPromptAndGetRecordedString(initial, len);
         buf = buffer;
         MsgPrint(null);
         if (buffer == null)
@@ -1460,7 +1460,7 @@ internal class Game : IGameSerialize
     /// <param name="value">Returns true, if the keystroke is "1"; false, if the keystroke is "0"</param>
     /// <param name="defaultValue"></param>
     /// <returns></returns>
-    public bool GetBool(string prompt, out bool value, bool defaultValue = false)
+    public bool RenderPromptAndGetRecordedBoolean(string prompt, out bool value, bool defaultValue = false)
     {
         value = false;
         char text = defaultValue ? '1' : '0';
@@ -1481,12 +1481,12 @@ internal class Game : IGameSerialize
         value = defaultValue;
         return true;
     }
-    public bool GetInt(string prompt, int defaultValue, out int? value)
+    public bool RenderPromptAndGetRecordedInteger(string prompt, int defaultValue, out int? value)
     {
-        return GetInt(prompt, defaultValue, 9, out value);
+        return RenderPromptAndGetRecordedInteger(prompt, defaultValue, 9, out value);
     }
 
-    public bool GetInt(string prompt, int defaultValue, int maxLength, out int? value)
+    public bool RenderPromptAndGetRecordedInteger(string prompt, int defaultValue, int maxLength, out int? value)
     {
         value = null;
         if (!RenderPromptAndGetRecordedString(prompt, out string tmpVal, $"{defaultValue}", maxLength))
@@ -1517,7 +1517,7 @@ internal class Game : IGameSerialize
     /// <summary>
     /// Returns the queue of keystrokes as provided by the console.  Artificial keystrokes are not inserted into this queue.  Artificial keystrokes take precedence over the keystrokes from the console.
     /// </summary>
-    public Queue<char> KeyQueue;
+    private Queue<char> KeyQueue;
 
     /// <summary>
     /// Returns the buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.  These artifical keypresses are used only for conversion of 
@@ -12614,7 +12614,7 @@ internal class Game : IGameSerialize
         while (!Shutdown)
         {
             Screen.Goto(2, col);
-            string? newName = AskForAux(PlayerName.StringValue, 12);
+            string? newName = RenderPromptAndGetRecordedString(PlayerName.StringValue, 12);
             if (newName != null)
             {
                 PlayerName.StringValue = newName;
