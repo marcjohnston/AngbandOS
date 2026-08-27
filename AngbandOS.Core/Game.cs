@@ -346,6 +346,24 @@ internal class Game : IGameSerialize
     #region Game Replay
     private bool GameRestored = false;
     private IReplayPersistentStorage? ReplayPersistentStorage = null;
+    private bool IsInReplayMode => ReplayQueue.Count > 0;
+
+    /// <summary>
+    /// Returns the maximum elapsed time to submit a replay keystroke or null, to impose no limit.
+    /// </summary>
+    public TimeSpan? MaxKeystrokeReplayElapsedTime { get; } = new TimeSpan(0, 0, 0, 0, 0);
+
+    /// <summary>
+    /// Records a keystroke to the replay log, along with the current date and time and, in debug builds, the current random seed for the sequence for replay verification.  This information is used to replay the keystrokes with the same timing and random seed in order to reproduce a play session for debugging purposes.
+    /// </summary>
+    /// <param name="keystroke"></param>
+    private void RecordReplayStep(char keystroke)
+    {
+        if (ReplayPersistentStorage is not null)
+        {
+            ReplayPersistentStorage.WriteStep(DateTime.Now.ToUniversalTime(), keystroke, _mainSequence.CurrentSeed);
+        }
+    }
 
     /// <summary>
     /// Returns whether the game should close after replay is complete; false, for all non-replay operating modes.
@@ -1342,11 +1360,190 @@ internal class Game : IGameSerialize
     public Attribute[] CachedAttributes;
     #endregion
 
-    #region Artificial Keystroke Buffer
+    #region Console Keystroke Retrieval and Artificial Keystroke Buffer
     /// <summary>
-    /// A buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.  These artifical keypresses are used only for conversion of 
+    /// Returns the queue of keystrokes as provided by the console.  Artificial keystrokes are not inserted into this queue.  Artificial keystrokes take precedence over the keystrokes from the console.
+    /// </summary>
+    public Queue<char> KeyQueue;
+
+    /// <summary>
+    /// Returns the buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.  These artifical keypresses are used only for conversion of 
     /// </summary>
     private string ArtificialKeystrokeBuffer = "";
+
+    public char GetAndRecordKeystroke(bool disableArtificialKeyBuffer = false, bool nonBlocking = false)
+    {
+        (char keystroke, bool fromConsole) = GetKeystroke(disableArtificialKeyBuffer, nonBlocking);
+        if (fromConsole)
+        {
+            RecordReplayStep(keystroke);
+        }
+        return keystroke;
+    }
+
+    /// <summary>
+    /// Returns the next keystroke from either the artificial keystroke buffer, or the <see cref="ConsoleViewPort"/>.  The artificial keystroke buffer will always be processed before the <see cref="ConsoleViewPort"/>
+    /// keystrokes are retrieved.
+    /// </summary>
+    /// <returns>The next key pressed.</returns>
+    public (char keystroke, bool fromConsole) GetKeystroke(bool disableArtificialKeyBuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
+    {
+        /// <summary>
+        /// Attempts to gets a keypress from the <see cref="ConsoleViewport"/> queue.  Returns true, if a keypress was returned.  Returns false, if the <paramref name="wait"/> is true and the <see cref="ConsoleViewPort"/>
+        /// queue is empty.
+        /// </summary>
+        /// <param name="ch"> The next key from the queue </param>
+        /// <param name="wait"> Whether to wait for a key if one isn't already available </param>
+        /// <param name="take"> Whether to take the keypress out of the queue </param>
+        /// <returns> True if a keypress was available, false otherwise </returns>
+        bool GetKeypress(out char ch, bool nonBlocking)
+        {
+            /// <summary>
+            /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort"/> and updates the <see cref="LastInputReceived"/> property./>
+            /// </summary>
+            /// <param name="k"> The keypress to add </param>
+            void TryEnqueueKey()
+            {
+                char? k = null;
+
+                // Check to see if we are in playback mode.
+                if (IsInReplayMode)
+                {
+                    // Yes, we are in replay mode.  Retrieve the replay step that needs to be replayed.  This is a non-destructive (non-dequeue) peek.  We only increment the replay index pointer.
+                    GameReplayStep gameReplayStep = ReplayQueue.Dequeue();
+
+                    // Compute how much elapsed time occurred since the last keystroke.
+                    TimeSpan keystrokeElapsedTime = (replayPreviousKeystrokeDateTime is null) ? TimeSpan.Zero : gameReplayStep.DateTime - replayPreviousKeystrokeDateTime.Value;
+                    replayPreviousKeystrokeDateTime = gameReplayStep.DateTime;
+
+                    // Retrieve the current date and time for the computations.
+                    DateTime now = DateTime.Now.ToUniversalTime();
+
+                    // Determine when the next keystroke should be submitted.
+                    DateTime nextKeystrokeSubmitTime = replayPreviousKeystrokeDateTime.Value + keystrokeElapsedTime;
+
+                    // Compute how much time we need to wait and wait that time out.
+                    TimeSpan waitTime = nextKeystrokeSubmitTime - now;
+
+                    // Enforce a maximum elapsed keystroke wait time.
+                    if (MaxKeystrokeReplayElapsedTime.HasValue && waitTime > MaxKeystrokeReplayElapsedTime)
+                    {
+                        waitTime = MaxKeystrokeReplayElapsedTime.Value;
+                    }
+
+                    // Force a thread sleep.
+                    if (waitTime > TimeSpan.Zero)
+                    {
+                        Pause(waitTime);
+                    }
+
+                    // Deliver the keystroke.
+                    k = gameReplayStep.Keystroke;
+
+                    // Perform replay verification.
+                    if (_mainSequence.CurrentSeed != gameReplayStep.Seed)
+                    {
+                        throw new InvalidStepSeedReplayVerificationFailureException(_mainSequence.CurrentSeed, gameReplayStep.Seed, gameReplayStep.Keystroke, gameReplayStep.DateTime, ReplayQueue.Count);
+                    }
+
+                    // Update the running keystroke submit time.  If the wait time was shortened due to exceeding the maximum elapsed time, we set the time to the target time.
+                    replayPreviousKeystrokeDateTime = nextKeystrokeSubmitTime;
+
+                    // Check the replay mode, if replay is over.
+                    if (ReplayQueue.Count == 0 && CloseAfterReplay)
+                    {
+                        Shutdown = true;
+                    }
+                }
+                else
+                {
+                    // Wait for a keystroke from the console and record it and the current date and time for replay.
+                    k = ConsoleViewPort.GetKey();
+                }
+
+                // Do we have anything to enqueue?
+                if (k.HasValue)
+                {
+                    KeyQueue.Enqueue(k.Value);
+                    LastInputReceived = DateTime.Now.ToUniversalTime();
+                    ConsoleViewPort.InputReceived();
+                }
+            }
+
+            ch = '\0';
+
+            if (!nonBlocking)
+            {
+                UpdateScreen();
+            }
+
+            // If this key queue is empty, attempt to fill it at least once.
+            if (KeyQueue.Count == 0)
+            {
+                TryEnqueueKey();
+            }
+
+            // Check for blocking mode.
+            while (KeyQueue.Count == 0 && !nonBlocking && !Shutdown)
+            {
+                Thread.Sleep(5);
+                TryEnqueueKey();
+            }
+
+            // Take the next keystroke out of the queue and return it.
+            return KeyQueue.TryDequeue(out ch);
+        }
+
+        // Retrieve the IsInReplayMode value at the beginning.  The retrieval process will turn off the replay mode for the last keystroke.  This prevents the last keystroke
+        // from being recorded.
+        bool fromReplay = IsInReplayMode;
+
+        char ch = '\0';
+        if (!disableArtificialKeyBuffer && ArtificialKeystrokeBuffer.Length > 0)
+        {
+            ch = ArtificialKeystrokeBuffer[0];
+            ArtificialKeystrokeBuffer = ArtificialKeystrokeBuffer.Remove(0, 1);
+            HideCursorOnFullScreenInkey = false;
+            return (ch, false);
+        }
+        bool previousCursorVisible = Screen.CursorVisible;
+        if (!nonBlocking && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
+        {
+            Screen.CursorVisible = true;
+        }
+        while (ch == '\0' && !Shutdown)
+        {
+            if (nonBlocking)
+            {
+                if (GetKeypress(out char kk, true))
+                {
+                    // If a key was retrieved, use it.
+                    ch = kk;
+                }
+                break;
+            }
+            GetKeypress(out ch, false);
+            if (ch == 29)
+            {
+                ch = '\0';
+                continue;
+            }
+            if (ch == '`')
+            {
+                ch = '\x1b';
+            }
+            if (ch == 30)
+            {
+                ch = '\0';
+            }
+        }
+
+        // Restore the cursor visibility.
+        Screen.CursorVisible = previousCursorVisible;
+
+        HideCursorOnFullScreenInkey = false;
+        return (ch, !fromReplay);
+    }
 
     /// <summary>
     /// Appends a keystroke to the end of the artificial keystroke buffer.
@@ -1356,7 +1553,6 @@ internal class Game : IGameSerialize
     {
         ArtificialKeystrokeBuffer += c;
     }
-
     #endregion
 
     #region WIP Methods Not Yet Categorized
@@ -1597,8 +1793,6 @@ internal class Game : IGameSerialize
     /// full screen overlay
     /// </summary>
     public bool HideCursorOnFullScreenInkey;
-
-    public Queue<char> KeyQueue;
 
     /// <summary>
     /// The current contents of the game screen.
@@ -3828,8 +4022,6 @@ internal class Game : IGameSerialize
         CameFrom = LevelStartEnum.StartRandom;
         DungeonGenerator.GenerateNewLevel();
     }
-
-    public bool IsInReplayMode => ReplayQueue.Count > 0;
     public Store? FindHomeStore(Town town) => Array.Find(town.Stores, store => store.GetType() == typeof(HomeStoreFactory));
 
     public void MoveHouse(Town oldTown, Town newTown)
@@ -9945,7 +10137,7 @@ internal class Game : IGameSerialize
         while (!Shutdown)
         {
             HideCursorOnFullScreenInkey = true;
-            (char cmd, bool isArtificial, bool fromReplay) = GetKeystroke();
+            (char cmd, bool fromConsole) = GetKeystroke();
             MsgPrint(null);
             if (enablePopup && cmd == '\x1b')
             {
@@ -9954,7 +10146,7 @@ internal class Game : IGameSerialize
             }
             else
             {
-                if (!isArtificial && !fromReplay)
+                if (fromConsole)
                 {
                     RecordReplayStep(cmd);
                 }
@@ -10035,197 +10227,6 @@ internal class Game : IGameSerialize
     internal void SetBackground(BackgroundImageEnum image)
     {
         ConsoleViewPort.SetBackground(image);
-    }
-
-    /// <summary>
-    /// Returns the maximum elapsed time to submit a replay keystroke or null, to impose no limit.
-    /// </summary>
-    public TimeSpan? MaxKeystrokeReplayElapsedTime { get; } = new TimeSpan(0, 0, 0, 0, 0);
-
-    /// <summary>
-    /// Records a keystroke to the replay log, along with the current date and time and, in debug builds, the current random seed for the sequence for replay verification.  This information is used to replay the keystrokes with the same timing and random seed in order to reproduce a play session for debugging purposes.
-    /// </summary>
-    /// <param name="keystroke"></param>
-    private void RecordReplayStep(char keystroke)
-    {
-        if (ReplayPersistentStorage is not null)
-        {
-            ReplayPersistentStorage.WriteStep(DateTime.Now.ToUniversalTime(), keystroke, _mainSequence.CurrentSeed);
-        }
-    }
-
-    public char GetAndRecordKeystroke(bool disableArtificialKeyBuffer = false, bool nonBlocking = false)
-    {
-        (char keystroke, bool isArtificial, bool fromReplay) = GetKeystroke(disableArtificialKeyBuffer, nonBlocking);
-        if (!isArtificial && !fromReplay)
-        {
-            RecordReplayStep(keystroke);
-        }
-        return keystroke;
-    }
-
-    /// <summary>
-    /// Returns the next keystroke from either the artificial keystroke buffer, or the <see cref="ConsoleViewPort"/>.  The artificial keystroke buffer will always be processed before the <see cref="ConsoleViewPort"/>
-    /// keystrokes are retrieved.
-    /// </summary>
-    /// <returns>The next key pressed.</returns>
-    public (char keystroke, bool isArtificial, bool fromReplay) GetKeystroke(bool disableArtificialKeyBuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
-    {
-        /// <summary>
-        /// Attempts to gets a keypress from the <see cref="ConsoleViewport"/> queue.  Returns true, if a keypress was returned.  Returns false, if the <paramref name="wait"/> is true and the <see cref="ConsoleViewPort"/>
-        /// queue is empty.
-        /// </summary>
-        /// <param name="ch"> The next key from the queue </param>
-        /// <param name="wait"> Whether to wait for a key if one isn't already available </param>
-        /// <param name="take"> Whether to take the keypress out of the queue </param>
-        /// <returns> True if a keypress was available, false otherwise </returns>
-        bool GetKeypress(out char ch, bool nonBlocking)
-        {
-            /// <summary>
-            /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort"/> and updates the <see cref="LastInputReceived"/> property./>
-            /// </summary>
-            /// <param name="k"> The keypress to add </param>
-            void TryEnqueueKey()
-            {
-                char? k = null;
-
-                // Check to see if we are in playback mode.
-                if (IsInReplayMode)
-                {
-                    // Yes, we are in replay mode.  Retrieve the replay step that needs to be replayed.  This is a non-destructive (non-dequeue) peek.  We only increment the replay index pointer.
-                    GameReplayStep gameReplayStep = ReplayQueue.Dequeue();
-
-                    // Compute how much elapsed time occurred since the last keystroke.
-                    TimeSpan keystrokeElapsedTime = (replayPreviousKeystrokeDateTime is null) ? TimeSpan.Zero : gameReplayStep.DateTime - replayPreviousKeystrokeDateTime.Value;
-                    replayPreviousKeystrokeDateTime = gameReplayStep.DateTime;
-
-                    // Retrieve the current date and time for the computations.
-                    DateTime now = DateTime.Now.ToUniversalTime();
-
-                    // Determine when the next keystroke should be submitted.
-                    DateTime nextKeystrokeSubmitTime = replayPreviousKeystrokeDateTime.Value + keystrokeElapsedTime;
-
-                    // Compute how much time we need to wait and wait that time out.
-                    TimeSpan waitTime = nextKeystrokeSubmitTime - now;
-
-                    // Enforce a maximum elapsed keystroke wait time.
-                    if (MaxKeystrokeReplayElapsedTime.HasValue && waitTime > MaxKeystrokeReplayElapsedTime)
-                    {
-                        waitTime = MaxKeystrokeReplayElapsedTime.Value;
-                    }
-
-                    // Force a thread sleep.
-                    if (waitTime > TimeSpan.Zero)
-                    {
-                        Pause(waitTime);
-                    }
-
-                    // Deliver the keystroke.
-                    k = gameReplayStep.Keystroke;
-
-                    // Perform replay verification.
-                    if (_mainSequence.CurrentSeed != gameReplayStep.Seed)
-                    {
-                        throw new InvalidStepSeedReplayVerificationFailureException(_mainSequence.CurrentSeed, gameReplayStep.Seed, gameReplayStep.Keystroke, gameReplayStep.DateTime, ReplayQueue.Count);
-                    }
-
-                    // Update the running keystroke submit time.  If the wait time was shortened due to exceeding the maximum elapsed time, we set the time to the target time.
-                    replayPreviousKeystrokeDateTime = nextKeystrokeSubmitTime;
-
-                    // Check the replay mode, if replay is over.
-                    if (ReplayQueue.Count == 0 && CloseAfterReplay)
-                    {
-                        Shutdown = true;
-                    }
-                }
-                else
-                {
-                    // Wait for a keystroke from the console and record it and the current date and time for replay.
-                    k = ConsoleViewPort.GetKey();
-                }
-
-                // Do we have anything to enqueue?
-                if (k.HasValue) 
-                {
-                    KeyQueue.Enqueue(k.Value);
-                    LastInputReceived = DateTime.Now.ToUniversalTime();
-                    ConsoleViewPort.InputReceived();
-                }
-            }
-
-            ch = '\0';
-
-            if (!nonBlocking)
-            {
-                UpdateScreen();
-            }
-
-            // If this key queue is empty, attempt to fill it at least once.
-            if (KeyQueue.Count == 0)
-            {
-                TryEnqueueKey();
-            }
-
-            // Check for blocking mode.
-            while (KeyQueue.Count == 0 && !nonBlocking && !Shutdown)
-            {
-                Thread.Sleep(5);
-                TryEnqueueKey();
-            }
-
-            // Take the next keystroke out of the queue and return it.
-            return KeyQueue.TryDequeue(out ch);
-        }
-
-        // Retrieve the IsInReplayMode value at the beginning.  The retrieval process will turn off the replay mode for the last keystroke.  This prevents the last keystroke
-        // from being recorded.
-        bool fromReplay = IsInReplayMode;
-
-        char ch = '\0';
-        if (!disableArtificialKeyBuffer && ArtificialKeystrokeBuffer.Length > 0)
-        {
-            ch = ArtificialKeystrokeBuffer[0];
-            ArtificialKeystrokeBuffer = ArtificialKeystrokeBuffer.Remove(0, 1);
-            HideCursorOnFullScreenInkey = false;
-            return (ch, true, fromReplay);
-        }
-        bool previousCursorVisible = Screen.CursorVisible;
-        if (!nonBlocking && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
-        {
-            Screen.CursorVisible = true;
-        }
-        while (ch == '\0' && !Shutdown)
-        {
-            if (nonBlocking)
-            {
-                if (GetKeypress(out char kk, true))
-                {
-                    // If a key was retrieved, use it.
-                    ch = kk;
-                }
-                break;
-            }
-            GetKeypress(out ch, false);
-            if (ch == 29)
-            {
-                ch = '\0';
-                continue;
-            }
-            if (ch == '`')
-            {
-                ch = '\x1b';
-            }
-            if (ch == 30)
-            {
-                ch = '\0';
-            }
-        }
-
-        // Restore the cursor visibility.
-        Screen.CursorVisible = previousCursorVisible;
-
-        HideCursorOnFullScreenInkey = false;
-        return (ch, false, fromReplay);
     }
 
     /// <summary>
