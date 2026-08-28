@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a class that contains metadata description for class.  The properties of this class use public modifiers on the properties to enable standard Json serialization and a protected 
 /// set modifier to prevent the property values from being set by anything but the derived classes.  This arrangement allows the Games controller to return an array of PropertyMetadata without
-/// needing polymorphic serialiation.
+/// needing polymorphic serialization.
 /// </summary>
 public abstract class PropertyMetadata
 {
