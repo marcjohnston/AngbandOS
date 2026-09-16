@@ -92,6 +92,9 @@ internal abstract class Mutation : IGetKey, IGameSerialize
     public string GetKey => Key;
     public void Bind(RestoreGameState? restoreGameState)
     {
+        
+        MutationAttackType = Game.SingletonRepository.Get<MutationAttackType>(MutationAttackTypeBindingKey);
+
         MinimumExperienceLevelAndEnhancementTuples = MinimumExperienceLevelAndEnhancementBindingTuples?.Select(_minimumExperienceLevelAndEnhancementBindingTuples => (_minimumExperienceLevelAndEnhancementBindingTuples.Item1, Game.SingletonRepository.GetNullable<ItemEnhancement>(_minimumExperienceLevelAndEnhancementBindingTuples.Item2))).ToArray();
 
         // Check to see if there is an activation that needs binding.
@@ -128,7 +131,9 @@ internal abstract class Mutation : IGetKey, IGameSerialize
 
     public abstract string HaveMessage { get; }
     public abstract string LoseMessage { get; }
-    public virtual MutationAttackTypeEnum MutationAttackType => MutationAttackTypeEnum.Physical;
+    protected virtual string MutationAttackTypeBindingKey => nameof(PhysicalMutationAttackType);
+
+    public MutationAttackType MutationAttackType { get; private set; } = null!;
 
     public void Activate()
     {
