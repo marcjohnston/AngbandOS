@@ -8594,22 +8594,8 @@ internal class Game : IGameSerialize
                     monster.IsPet = false;
                 }
                 // Apply damage of the correct type to the monster
-                switch (mutation.MutationAttackType)
-                {
-                    case MutationAttackTypeEnum.Physical:
-                        monsterDies = DamageMonster(monster, damage, out fear, "");
-                        break;
+                mutation.MutationAttackType.ApplyToMonster(monster, damage, out fear, out monsterDies);
 
-                    case MutationAttackTypeEnum.Poison:
-                        Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
-                        poisonProjectile.Fire(null, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
-                        break;
-
-                    case MutationAttackTypeEnum.Hellfire:
-                        Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
-                        hellFireProjectile.Fire(null, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
-                        break;
-                }
                 // The monster might hurt when we touch it
                 TouchZapPlayer(monster);
             }
