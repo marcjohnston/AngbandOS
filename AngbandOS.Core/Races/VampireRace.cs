@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class VampireRace : Race
 {
     private VampireRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(VampireRaceItemEnhancement)) 
     };
     public override string Title => "Vampire";
@@ -20,7 +20,7 @@ internal class VampireRace : Race
     public override int ExperienceFactor => 200;
     public override int BaseAge => 100;
     public override int AgeRange => 30;
-    public override int Infravision => 5;
+    public override int InfraVision => 5;
     public override uint Choice => 0xFFFF;
     public override string Description => "Vampires are powerful undead. They resist darkness, nether,\ncold, poison, and having their life force drained. Vampires\nproduce their own ethereal light in the dark, but are hurt\nby direct sunlight. They can learn to drain the life force\nfrom their foes (at lvl 2).";
 

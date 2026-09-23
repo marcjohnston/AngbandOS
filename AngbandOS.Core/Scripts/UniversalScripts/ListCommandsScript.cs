@@ -97,7 +97,7 @@ internal class ListCommandsScript : UniversalScript, IGetKey
         {
             Game.Screen.Print("W = Wizard command", 25, 52);
         }
-        Game.AnyKey(44);
+        Game.RenderPressAnyKeyToContinueAndGetRecordedKeystroke(44);
         Game.Screen.Restore(savedScreen);
         Game.SetBackground(BackgroundImageEnum.Overhead);
         Game.FullScreenOverlay = false;

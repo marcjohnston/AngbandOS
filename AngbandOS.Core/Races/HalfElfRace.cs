@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class HalfElfRace : Race
 {
     private HalfElfRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(HalfElfRaceItemEnhancement)) 
     };
     public override string Title => "Half Elf";
@@ -20,7 +20,7 @@ internal class HalfElfRace : Race
     public override int ExperienceFactor => 110;
     public override int BaseAge => 24;
     public override int AgeRange => 16;
-    public override int Infravision => 2;
+    public override int InfraVision => 2;
     public override uint Choice => 0xFFFF;
     public override string Description => "Half-Elves inherit better ability scores and skills from\ntheir elven parent, but none of that parent's special\nabilities. However, a half elf will advance in level more\nquickly than a full elf.";
 

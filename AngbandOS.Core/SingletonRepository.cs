@@ -305,6 +305,7 @@ internal sealed class SingletonRepository : IGameSerialize
         RegisterIndex<MonsterSelector>();
         RegisterIndex<MonsterSpell>();
         RegisterIndex<Mutation>();
+        RegisterIndex<MutationAttackType>();
         RegisterIndex<PlayerEffectUniversalScript>();
         RegisterIndex<ProbabilityExpression>();
         RegisterIndex<Property>();

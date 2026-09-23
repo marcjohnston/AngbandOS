@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class DarkElfRace : Race
 {
     private DarkElfRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(DarkElfRaceItemEnhancement)),
         (20, nameof(DarkElfRaceLevel20ItemEnhancement))
     };
@@ -21,7 +21,7 @@ internal class DarkElfRace : Race
     public override int ExperienceFactor => 150;
     public override int BaseAge => 75;
     public override int AgeRange => 75;
-    public override int Infravision => 5;
+    public override int InfraVision => 5;
     public override uint Choice => 0xBFDF;
     public override string Description => "Dark elves are underground elves who have a kinship with\nfungi the way that surface elves have a kinship with trees.\nThe innately magical nature of dark elves lets them learn\nto fire magical missiles at their opponents (at lvl 2).\nThey also resist dark-based attacks and can learn to see\ninvisible creatures (at lvl 20).";
 

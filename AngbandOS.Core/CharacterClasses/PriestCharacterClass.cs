@@ -9,7 +9,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class PriestCharacterClass : CharacterClass
 {
     private PriestCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
+    protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
         (1, null, nameof(PriestCharacterClassItemEnhancement)) 
     };
     public override int ID => 2;

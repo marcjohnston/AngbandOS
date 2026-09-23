@@ -17,13 +17,13 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// <summary>
     /// Represents the attribute enhancements that are additive for all that apply.
     /// </summary>
-    protected virtual (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => null;
+    protected virtual (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => null;
 
     public virtual GameStateBag? Serialize(SaveGameState saveGameState)
     {
         return new DictionaryGameStateBag(
             (nameof(AttributeSet), saveGameState.CreateDerivedGameStateBag(AttributeSet, typeof(ReadOnlyAttributeSet))),
-            (nameof(MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, bool?, ReadOnlyAttributeSet>(MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets,
+            (nameof(ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets), saveGameState.CreateTuplesGameStateBag<int, bool?, ReadOnlyAttributeSet>(ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets,
                 _minimumExperienceLevel => saveGameState.CreateGameStateBag(_minimumExperienceLevel),
                 _hasHeavyArmor => saveGameState.CreateGameStateBag(_hasHeavyArmor),
                 _attributeSet => saveGameState.CreateDerivedGameStateBag(_attributeSet, typeof(ReadOnlyAttributeSet))
@@ -280,7 +280,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
             }
         }
         string outVal = $"({p}s {0.IndexToLetter()}-{(talentList.Count - 1).IndexToLetter()}, *=List, ESC=exit) Use which {p}? ";
-        while (!flag && Game.GetCom(outVal, out char choice))
+        while (!flag && Game.RenderPromptAndGetRecordedKeystroke(outVal, out char choice))
         {
             if (choice == ' ' || choice == '*' || choice == '?')
             {
@@ -388,9 +388,9 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public string GetKey => Key;
 
     /// <summary>
-    /// Represents the bound experience levels, heavy weapon and enhancement tuples.  This property is bound using the <see cref="MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples"/> property during the binding phase.
+    /// Represents the bound experience levels, heavy weapon and enhancement tuples.  This property is bound using the <see cref="ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples"/> property during the binding phase.
     /// </summary>
-    public (int, bool?, ItemEnhancement)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples { get; private set; }
+    public (int, bool?, ItemEnhancement)[]? ExperienceLevelHasHeavyArmorAndEnhancementTuples { get; private set; }
 
     public ReadOnlyAttributeSet AttributeSet { get; private set; }
 
@@ -401,9 +401,9 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     public void RefreshAndSquashAttributeSet()
     {
         EffectiveAttributeSet effectiveAttributeSet = new EffectiveAttributeSet(Game);
-        if (MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets is not null)
+        if (ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets is not null)
         {
-            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ReadOnlyAttributeSet attributeSet) in MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets)
+            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ReadOnlyAttributeSet attributeSet) in ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets)
             {
                 if (Game.ExperienceLevel.IntValue >= minimumExperienceLevel && (!hasHeavyArmor.HasValue || hasHeavyArmor.Value == Game.ArmorIsHeavy()))
                 {
@@ -420,18 +420,18 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// </summary>
     public void RegenerateAttributeSets()
     {
-        if (MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples is null)
+        if (ExperienceLevelHasHeavyArmorAndEnhancementTuples is null)
         {
-            MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = null;
+            ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = null;
         }
         else
         {
             List<(int, bool?, ReadOnlyAttributeSet)> tupleList = new List<(int, bool?, ReadOnlyAttributeSet)>();
-            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ItemEnhancement enhancement) in MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples)
+            foreach ((int minimumExperienceLevel, bool? hasHeavyArmor, ItemEnhancement enhancement) in ExperienceLevelHasHeavyArmorAndEnhancementTuples)
             {
                 tupleList.Add((minimumExperienceLevel, hasHeavyArmor, enhancement.GenerateAttributeSet()));
             }
-            MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = tupleList.ToArray();
+            ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = tupleList.ToArray();
         }
         RefreshAndSquashAttributeSet();
     }
@@ -444,7 +444,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         SpellOfWonderBeamProbabilityRoll = Game.ParseNumericExpression(SpellOfWonderBeamProbabilityRollExpression);
         InvokeSpiritsBeamProbabilityRoll = Game.ParseNumericExpression(InvokeSpiritsBeamProbabilityRollExpression);
         ArmorMaxWeightExpression = Game.ParseNullableNumericExpression(ArmorMaxWeightExpressionText);
-        MinimumExperienceLevelHasHeavyArmorAndEnhancementTuples = MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, bool? HasHeavyArmor, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, _item.HasHeavyArmor, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
+        ExperienceLevelHasHeavyArmorAndEnhancementTuples = ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples?.Select(((int MinimumExperienceLevel, bool? HasHeavyArmor, string ItemEnhancementBindingKey) _item) => (_item.MinimumExperienceLevel, _item.HasHeavyArmor, Game.SingletonRepository.Get<ItemEnhancement>(_item.ItemEnhancementBindingKey))).ToArray();
         AvailablePrimaryRealms = Game.SingletonRepository.Get<Realm>(AvailablePrimaryRealmBindingKeys);
         AvailableSecondaryRealms = Game.SingletonRepository.Get<Realm>(AvailableSecondaryRealmBindingKeys);
         SpellAbility = Game.SingletonRepository.Get<Ability>(SpellAbilityBindingKey);
@@ -461,7 +461,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
         if (restoreGameState is not null)
         {
             AttributeSet = restoreGameState.GetByKey(nameof(AttributeSet)).GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState));
-            MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets)).GetTuplesOrDefault<int, bool?, ReadOnlyAttributeSet>(
+            ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets = restoreGameState.GetByKey(nameof(ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets)).GetTuplesOrDefault<int, bool?, ReadOnlyAttributeSet>(
                 _restoreGameState => _restoreGameState.GetInt(),
                 _restoreGameState => _restoreGameState.GetBoolOrDefault(),
                 _restoreGameState => _restoreGameState.GetDerivedReference<ReadOnlyAttributeSet>(_restoreGameState => new ReadOnlyAttributeSet(Game, _restoreGameState)));
@@ -474,7 +474,7 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// <remarks>
     /// This is state data.
     /// </remarks>
-    public (int, bool?, ReadOnlyAttributeSet)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementAttributeSets { get; private set; } = null;
+    public (int, bool?, ReadOnlyAttributeSet)[]? ExperienceLevelHasHeavyArmorAndEnhancementAttributeSets { get; private set; } = null;
 
     /// <summary>
     /// Returns the maximum weight the character class can carry before the armor is considered to be TooHeavy, if characters of this class are study the martial arts and have additional attacks when they are not wielding any weapons.  Returns false, by default.
@@ -490,141 +490,6 @@ internal abstract class CharacterClass : IGetKey, IGameSerialize
     /// </summary>
     /// <value>The identifier.</value>
     public abstract int ID { get; } // TODO: Need to delete
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to chaos; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantChaosResistanceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to darkness; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantDarknessResistanceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to light; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantLightResistanceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to nether; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantNetherResistanceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to shards; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantShardsResistanceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to nexus; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantNexusResistanceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive regeneration; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantRegenerationLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to disenchantment; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantDisenchantmentResistanceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to sound; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantSoundResistanceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to poison; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantPoisonResistanceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive hold life; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantHoldLifeLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive sustain intelligence; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantSustainIntelligenceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive sustain charisma; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantSustainCharismaLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive sustain constitution; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantSustainConstitutionLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive sustain strength; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantSustainStrengthLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive sustain dexterity; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantSustainDexterityLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive sustain wisdom; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantSustainWisdomLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive free action; or null, if never.  Free action is only granted when not heavy armor.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantFreeActionLevel => null;
-
-    /// <summary>
-    /// Returns a radius applied to all items for the character; or null, if no change.  Returns null, by default.
-    /// </summary>
-    public virtual int? ItemRadiusOverride => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to blindness; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantBlindnessResistanceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive slow digestion; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantSlowDigestionLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive feather falling; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantFeatherFallingLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive see invisibility; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantSeeInvisibilityLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to confusion; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantConfusionResistanceLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive telepathy; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantTelepathyLevel => null;
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive speed; or null, if never.  Speed is only granted when not heavy armor.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantSpeedLevel => null; // TODO: This won't work because speed was converted to an expression, not a flag
-
-    /// <summary>
-    /// Returns the level at which the character will automatically receive resistance to fear; or null, if never.  Returns null, by default.
-    /// </summary>
-    public virtual int? InstantFearResistanceLevel => null;
 
     /// <summary>
     /// Returns whether or not the character can backstab.  Returns false, by default.  Rogues return true.

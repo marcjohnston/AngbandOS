@@ -404,7 +404,7 @@ internal class Store : IGameSerialize
         Game.MsgPrint(string.Empty);
         comVal = -1;
         string outVal = $"(Items {i.IndexToLetter()}-{j.IndexToLetter()}, ESC to exit) {pmt}";
-        while (Game.GetCom(outVal, out command))
+        while (Game.RenderPromptAndGetRecordedKeystroke(outVal, out command))
         {
             int k = char.IsLower(command) ? command.LetterToNumber() : -1;
             if (k >= i && k <= j)

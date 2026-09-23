@@ -6,9 +6,12 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core;
 
-internal enum MutationAttackTypeEnum
+internal class PhysicalMutationAttackType : MutationAttackType
 {
-    Physical,
-    Poison,
-    Hellfire
+    private PhysicalMutationAttackType(Game game) : base(game) { }
+    public override string Title => "Physical";
+    public override void ApplyToMonster(Monster monster, int damage, out bool fear, out bool monsterDies)
+    {
+        monsterDies = Game.DamageMonster(monster, damage, out fear, "");
+    }
 }

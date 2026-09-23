@@ -43,7 +43,7 @@ internal class EquipScript : UniversalScript, IGetKey
         // Display details if the player wants
         if (c != '\x1b')
         {
-            Game._artificialKeyBuffer += c;
+            Game.EnqueueArtificialKeystroke(c);
         }
         else
         {

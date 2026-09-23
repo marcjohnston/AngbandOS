@@ -104,14 +104,14 @@ internal sealed class Patron : IGetKey, IToJson, IGameSerialize
             type = 20;
         }
         type--;
-        Reward effect = Rewards[type];
+        Reward reward = Rewards[type];
         if (Game.DieRoll(6) == 1)
         {
             Game.MsgPrint($"{ShortName} rewards you with a mutation!");
             Game.RunScript(nameof(GainMutationScript));
             return;
         }
-        effect.GetReward(this);
+        reward.GetReward(this);
     }
 
     public override string ToString()

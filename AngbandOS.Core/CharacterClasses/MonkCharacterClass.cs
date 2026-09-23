@@ -9,15 +9,14 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class MonkCharacterClass : CharacterClass
 {
     private MonkCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
+    protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[]
     {
         (1, null, nameof(MonkCharacterClassItemEnhancement)),
+        (10, false, nameof(MonkCharacterClassLevel10ItemEnhancement)),
         (25, false, nameof(MonkCharacterClassLevel25ItemEnhancement))
     };
     public override int ID => 8;
     public override string Title => "Monk";
-    public override int? InstantSpeedLevel => 10;
-    public override int? InstantFreeActionLevel => 25;
     public override int BasePerception => 24;
     public override int MeleeToHit => 64;
     public override int RangedToHit => 50;

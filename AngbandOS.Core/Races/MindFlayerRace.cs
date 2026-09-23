@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class MindFlayerRace : Race
 {
     private MindFlayerRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(MindFlayerRaceItemEnhancement)),
         (15, nameof(MindFlayerRaceLevel15ItemEnhancement)),
         (30, nameof(MindFlayerRaceLevel30ItemEnhancement))
@@ -22,7 +22,7 @@ internal class MindFlayerRace : Race
     public override int ExperienceFactor => 140;
     public override int BaseAge => 100;
     public override int AgeRange => 25;
-    public override int Infravision => 4;
+    public override int InfraVision => 4;
     public override uint Choice => 0xD746;
     public override string Description => "Mind-Flayers are slimy humanoids with squid-like tentacles\naround their mouths. They are all psychic, and neither\ntheir intelligence nor their wisdom can be reduced. They\ncan learn to see invisible (at lvl 15), blast people's\nminds (at lvl 15), and gain telepathy (at lvl 30).";
 

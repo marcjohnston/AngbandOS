@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class HalfTitanRace : Race
 {
     private HalfTitanRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(HalfTitanRaceItemEnhancement)) 
     };
     public override string Title => "Half Titan";
@@ -20,7 +20,7 @@ internal class HalfTitanRace : Race
     public override int ExperienceFactor => 255;
     public override int BaseAge => 100;
     public override int AgeRange => 30;
-    public override int Infravision => 0;
+    public override int InfraVision => 0;
     public override uint Choice => 0x1F27;
     public override string Description => "Half-Titans are massively strong, being descended from the\npredecessors of the gods that grew from primal chaos. This\nlegacy lets them resist damage from chaos, and half-titans\ncan learn to magically probe their foes to find out their\nstrengths and weaknesses (at lvl 35).";
 

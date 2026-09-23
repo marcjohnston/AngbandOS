@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class DraconianRace : Race
 {
     private DraconianRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(DraconianRaceItemEnhancement)),
         (5, nameof(DraconianRaceLevel5ItemEnhancement)),
         (10, nameof(DraconianRaceLevel10ItemEnhancement)),
@@ -25,7 +25,7 @@ internal class DraconianRace : Race
     public override int ExperienceFactor => 250;
     public override int BaseAge => 75;
     public override int AgeRange => 33;
-    public override int Infravision => 2;
+    public override int InfraVision => 2;
     public override uint Choice => 0xDF57;
     public override string Description => "Draconians are related to dragons and this shows both in\ntheir physical superiority and their legendary arrogance.\nAs well as having a breath weapon, their wings let them\navoid falling damage, and they can learn to resist fire\n(at lvl 5), cold (at lvl 10), acid (at lvl 15), lightning\n(at lvl 20), and poison (at lvl 35).";
 

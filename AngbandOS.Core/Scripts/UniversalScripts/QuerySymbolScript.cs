@@ -6,9 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class StayScript : UniversalScript, IGetKey
+internal class QuerySymbolScript : UniversalScript, IGetKey
 {
-    private StayScript(Game game) : base(game) { }
+    private QuerySymbolScript(Game game) : base(game) { }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.  Returns an empty string by default.
@@ -21,29 +21,32 @@ internal class StayScript : UniversalScript, IGetKey
     public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
-    /// Executes the stay script.
+    /// Executes the query symbol script.
     /// </summary>
     /// <returns></returns>
     public override void ExecuteScript()
     {
-        // Standing still takes a turn
-        Game.EnergyUse = 100;
-
-        // Periodically search if we're not actively in search mode
-        if (Game.IsSearching || Game.SkillPerception >= 50 || Game.RandomLessThan(50 - Game.SkillPerception) == 0)
+        // Query the user for the symbol to identify.
+        if (!Game.RenderPromptAndGetRecordedKeystroke("Enter character to be identified: ", out char querySymbol))
         {
-            Game.RunScript(nameof(SearchScript));
+            return;
         }
 
-        // Pick up items if we should
-        Game.StepOnGrid(false);
-
-        // If we're in a shop doorway, enter the shop
-        GridTile tile = Game.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
-        if (tile.FeatureType.IsShop)
+        // Run through the identification array till we find the symbol.
+        bool found = false;
+        foreach (Symbol symbol in Game.SingletonRepository.Get<Symbol>())
         {
-            Game.Disturb(false);
-            Game._artificialKeyBuffer += Game.SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar;
+            if (querySymbol == symbol.Character || querySymbol == symbol.QueryCharacter)
+            {
+                Game.MsgPrint($"{querySymbol} - {symbol.Name}");
+                found = true;
+            }
+        }
+
+        if (!found)
+        {
+            // Display the symbol and its identification.
+            Game.MsgPrint($"{querySymbol} - Unknown Symbol");
         }
     }
 }

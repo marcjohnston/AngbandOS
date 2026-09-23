@@ -42,7 +42,7 @@ internal class RunRandomActivationScript : Script, IScript, ICastSpellScript
                 Game.Screen.PrintLine($"{index + 1}. {activation.Name}", row, col);
                 index++;
             }
-            if (!Game.GetString("Activation power?", out selection, "", 3))
+            if (!Game.RenderPromptAndGetRecordedString("Activation power?", out selection, "", 3))
             {
                 return;
             }

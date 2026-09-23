@@ -30,7 +30,7 @@ internal class EditStatsScript : Script, IScript, ICastSpellScript
         int tmpInt;
         foreach (Ability ability in Game.SingletonRepository.Get<Ability>())
         {
-            if (Game.GetInt($"{ability.Name} (3-118): ", ability.InnateMax, 3, out int? abilityValue)) {
+            if (Game.RenderPromptAndGetRecordedInteger($"{ability.Name} (3-118): ", ability.InnateMax, 3, out int? abilityValue)) {
                 if (abilityValue > 18 + 100)
                 {
                     abilityValue = 18 + 100;
@@ -43,7 +43,7 @@ internal class EditStatsScript : Script, IScript, ICastSpellScript
                 ability.InnateMax = abilityValue.Value;
             }
         }
-        if (Game.GetInt("Gold: ", Game.Gold.IntValue, out int? goldValue))
+        if (Game.RenderPromptAndGetRecordedInteger("Gold: ", Game.Gold.IntValue, out int? goldValue))
         {
             if (goldValue < 0)
             {
@@ -51,7 +51,7 @@ internal class EditStatsScript : Script, IScript, ICastSpellScript
             }
             Game.Gold.IntValue = goldValue.Value;
         }
-        if (Game.GetInt("Mana: ", Game.Mana.IntValue, out int? manaValue))
+        if (Game.RenderPromptAndGetRecordedInteger("Mana: ", Game.Mana.IntValue, out int? manaValue))
         {
             if (manaValue < 0)
             {
@@ -59,7 +59,7 @@ internal class EditStatsScript : Script, IScript, ICastSpellScript
             }
             Game.Mana.IntValue = manaValue.Value;
         }
-        if (Game.GetInt("Experience: ", Game.MaxExperienceGained.IntValue, out int? experienceValue))
+        if (Game.RenderPromptAndGetRecordedInteger("Experience: ", Game.MaxExperienceGained.IntValue, out int? experienceValue))
         {
             if (experienceValue < 0)
             {

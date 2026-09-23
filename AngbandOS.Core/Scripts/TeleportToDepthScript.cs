@@ -30,7 +30,7 @@ internal class TeleportToDepthScript : Script, IScript, ICastSpellScript
         {
             string ppp = $"Teleport to Depth (0-{Game.CurDungeon.MaxLevel}): ";
             string def = $"{Game.CurrentDepth}";
-            if (!Game.GetString(ppp, out string tmpVal, def, 10))
+            if (!Game.RenderPromptAndGetRecordedString(ppp, out string tmpVal, def, 10))
             {
                 return;
             }

@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class TchoTchoRace : Race
 {
     private TchoTchoRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(TchoTchoRaceItemEnhancement)) 
     };
     public override string Title => "Tcho-Tcho";
@@ -20,7 +20,7 @@ internal class TchoTchoRace : Race
     public override int ExperienceFactor => 120;
     public override int BaseAge => 14;
     public override int AgeRange => 8;
-    public override int Infravision => 0;
+    public override int InfraVision => 0;
     public override uint Choice => 0xC89D;
     public override string Description => "Tcho-Tchos are hairless cannibalistic near-humans who dwell\nin isolated parts of the world away from more civilised\nplaces where their dark rituals and sacrifices go unseen.\nTcho-Tchos are immune to fear, and can also learn to create\nThe Yellow Sign (at lvl 35).";
 

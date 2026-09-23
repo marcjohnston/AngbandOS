@@ -37,7 +37,7 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
             return;
         }
         Item qPtr = new Item(Game, itemFactory);
-        if (!Game.GetBool($"Random Artifact (0=False, 1=True)? ", out bool randomArtifact))
+        if (!Game.RenderPromptAndGetRecordedBoolean($"Random Artifact (0=False, 1=True)? ", out bool randomArtifact))
         {
             return;
         }
@@ -47,25 +47,25 @@ internal class CreateItemScript : Script, IScript, ICastSpellScript
         }
         else
         {
-            if (!Game.GetBool($"Allow Fixed Artifact (0=False, 1=True)? ", out bool allowFixedArtifact))
+            if (!Game.RenderPromptAndGetRecordedBoolean($"Allow Fixed Artifact (0=False, 1=True)? ", out bool allowFixedArtifact))
             {
                 return;
             }
-            if (!Game.GetBool($"Good Item (0=False, 1=True)? ", out bool good))
+            if (!Game.RenderPromptAndGetRecordedBoolean($"Good Item (0=False, 1=True)? ", out bool good))
             {
                 return;
             }
-            if (!Game.GetBool($"Great Item (0=False, 1=True)? ", out bool great))
+            if (!Game.RenderPromptAndGetRecordedBoolean($"Great Item (0=False, 1=True)? ", out bool great))
             {
                 return;
             }
-            if (!Game.GetBool($"Store Stock (0=False, 1=True)? ", out bool storeStock))
+            if (!Game.RenderPromptAndGetRecordedBoolean($"Store Stock (0=False, 1=True)? ", out bool storeStock))
             {
                 return;
             }
 
             int initialStackCount = Game.CommandArgument == 0 ? 1 : Game.CommandArgument;
-            if (!Game.GetInt($"Stack count? ", initialStackCount, out int? stackCount) || !stackCount.HasValue)
+            if (!Game.RenderPromptAndGetRecordedInteger($"Stack count? ", initialStackCount, out int? stackCount) || !stackCount.HasValue)
             {
                 return;
             }

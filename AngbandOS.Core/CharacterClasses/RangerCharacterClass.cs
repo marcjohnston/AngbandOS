@@ -9,7 +9,7 @@ namespace AngbandOS.Core.CharacterClasses;
 internal class RangerCharacterClass : CharacterClass
 {
     private RangerCharacterClass(Game savedGame) : base(savedGame) { }
-    protected override (int, bool?, string)[]? MinimumExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
+    protected override (int, bool?, string)[]? ExperienceLevelHasHeavyArmorAndEnhancementBindingTuples => new (int, bool?, string)[] { 
         (1, null, nameof(RangerCharacterClassItemEnhancement)) 
     };
     public override int ID => 4;

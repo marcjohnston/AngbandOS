@@ -23,7 +23,7 @@ internal class ResetRecallScript : Script, IScript, ICastSpellScript
     {
         string ppp = $"Reset to which level (1-{Game.CurDungeon.RecallLevel}): ";
         string def = $"{Math.Max(Game.CurrentDepth, 1)}";
-        if (!Game.GetString(ppp, out string tmpVal, def, 10))
+        if (!Game.RenderPromptAndGetRecordedString(ppp, out string tmpVal, def, 10))
         {
             return;
         }

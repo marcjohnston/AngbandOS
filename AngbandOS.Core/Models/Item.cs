@@ -1591,7 +1591,7 @@ internal sealed class Item : IComparable<Item>, IGameSerialize
         {
             IdentifyFully();
             IdentityIsStoreBought = true;
-            if (!Game.GetString("What do you want to call the artifact? ", out string dummyName, "(a DIY artifact)", 80))
+            if (!Game.RenderPromptAndGetRecordedString("What do you want to call the artifact? ", out string dummyName, "(a DIY artifact)", 80))
             {
                 newName = "(a DIY artifact)";
             }

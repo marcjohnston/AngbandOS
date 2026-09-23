@@ -9,7 +9,7 @@ namespace AngbandOS.Core.Races;
 internal class HalfTrollRace : Race
 {
     private HalfTrollRace(Game game) : base(game) { }
-    protected override (int, string)[]? MinimumExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
+    protected override (int, string)[]? ExperienceLevelAndEnhancementBindingTuples => new (int, string)[] { 
         (1, nameof(HalfTrollRaceItemEnhancement)),
         (15, nameof(HalfTrollRaceLevel15ItemEnhancement))
     };
@@ -21,7 +21,7 @@ internal class HalfTrollRace : Race
     public override int ExperienceFactor => 137;
     public override int BaseAge => 20;
     public override int AgeRange => 10;
-    public override int Infravision => 3;
+    public override int InfraVision => 3;
     public override uint Choice => 0x0805;
     public override string Description => "Half-Trolls make up for their stupidity by being almost\npure muscle, as strong as creatures much larger than they.\nThey can't have their strength reduced, and as they grow\nstronger they can go into a berserk rage (at lvl 10),\nregenerate wounds (at lvl 15), and survive on less food\n(at lvl 15).";
 

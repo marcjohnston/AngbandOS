@@ -12,7 +12,7 @@ internal class GreatOneRacialPowerScript : Script, IScript
         int dreamPower;
         while (true)
         {
-            if (!Game.GetCom("Use Dream [T]ravel or [D]reaming? ", out char ch))
+            if (!Game.RenderPromptAndGetRecordedKeystroke("Use Dream [T]ravel or [D]reaming? ", out char ch))
             {
                 dreamPower = 0;
                 break;

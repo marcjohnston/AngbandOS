@@ -274,7 +274,7 @@ internal class Game : IGameSerialize
             (nameof(CurrentCommand), saveGameState.CreateGameStateBag(CurrentCommand)),
             (nameof(KeyQueue), saveGameState.CreateGameStateBag(KeyQueue.ToArray())),
             (nameof(Screen), saveGameState.CreateDerivedGameStateBag(Screen, typeof(Window))),
-            (nameof(_artificialKeyBuffer), saveGameState.CreateGameStateBag(_artificialKeyBuffer)),
+            (nameof(ArtificialKeystrokeBuffer), saveGameState.CreateGameStateBag(ArtificialKeystrokeBuffer)),
             (nameof(_keymapAct), saveGameState.CreateGameStateBag(_keymapAct)),
             (nameof(History), saveGameState.CreateGameStateBag(History)),
             (nameof(PlayerHp), saveGameState.CreateGameStateBag(PlayerHp)),
@@ -346,6 +346,24 @@ internal class Game : IGameSerialize
     #region Game Replay
     private bool GameRestored = false;
     private IReplayPersistentStorage? ReplayPersistentStorage = null;
+    private bool IsInReplayMode => ReplayQueue.Count > 0;
+
+    /// <summary>
+    /// Returns the maximum elapsed time to submit a replay keystroke or null, to impose no limit.
+    /// </summary>
+    public TimeSpan? MaxKeystrokeReplayElapsedTime { get; } = new TimeSpan(0, 0, 0, 0, 0);
+
+    /// <summary>
+    /// Records a keystroke to the replay log, along with the current date and time and, in debug builds, the current random seed for the sequence for replay verification.  This information is used to replay the keystrokes with the same timing and random seed in order to reproduce a play session for debugging purposes.
+    /// </summary>
+    /// <param name="keystroke"></param>
+    private void RecordReplayStep(char keystroke)
+    {
+        if (ReplayPersistentStorage is not null)
+        {
+            ReplayPersistentStorage.WriteStep(DateTime.Now.ToUniversalTime(), keystroke, _mainSequence.CurrentSeed);
+        }
+    }
 
     /// <summary>
     /// Returns whether the game should close after replay is complete; false, for all non-replay operating modes.
@@ -549,7 +567,7 @@ internal class Game : IGameSerialize
             CurrentCommand = restoreGameState.GetByKey(nameof(CurrentCommand)).GetChar();
             KeyQueue = new Queue<char>(restoreGameState.GetByKey(nameof(KeyQueue)).GetChars());
             Screen = restoreGameState.GetByKey(nameof(Screen)).GetDerivedReference<Window>(_restoreGameState => new Window(this, _restoreGameState));
-            _artificialKeyBuffer = restoreGameState.GetByKey(nameof(_artificialKeyBuffer)).GetString();
+            ArtificialKeystrokeBuffer = restoreGameState.GetByKey(nameof(ArtificialKeystrokeBuffer)).GetString();
             _keymapAct = restoreGameState.GetByKey(nameof(_keymapAct)).GetArrayOfStrings();
             History = restoreGameState.GetByKey(nameof(History)).GetStrings();
             PlayerHp = restoreGameState.GetByKey(nameof(PlayerHp)).GetInts();
@@ -822,7 +840,7 @@ internal class Game : IGameSerialize
             Gold.IntValue += 10000000;
             SetBackground(BackgroundImageEnum.Crown);
             Screen.Clear();
-            AnyKey(44);
+            RenderPressAnyKeyToContinueAndGetRecordedKeystroke(44);
         }
 
         void PrintTomb()
@@ -863,7 +881,7 @@ internal class Game : IGameSerialize
                 Screen.Print(tmp, 40, 34);
                 tmp = $"on {ct:dd MMM yyyy h.mm tt}".PadLeft(45);
                 Screen.Print(tmp, 41, 34);
-                AnyKey(44);
+                RenderPressAnyKeyToContinueAndGetRecordedKeystroke(44);
             }
         }
 
@@ -1342,6 +1360,354 @@ internal class Game : IGameSerialize
     public Attribute[] CachedAttributes;
     #endregion
 
+    #region Console Keystroke Retrieval and Artificial Keystroke Buffer
+    /// GUI
+    /// <summary>
+    /// Prints a 'press any key' message and waits for a key press
+    /// </summary>
+    /// <param name="row"> The row on which to print the message </param>
+    public void RenderPressAnyKeyToContinueAndGetRecordedKeystroke(int row)
+    {
+        Screen.PrintLine("", row, 0);
+        Screen.Print(ColorEnum.Orange, "[Press any key to continue]", row, 27);
+        GetAndRecordKeystroke();
+        Screen.PrintLine("", row, 0);
+    }
+
+    public string? RenderPromptAndGetRecordedString(string initial, int len)
+    {
+        string buf = initial;
+        char i = '\0';
+        int k = 0;
+        bool done = false;
+        GridCoordinate cursorPosition = Screen.CursorPosition;
+        if (len < 1)
+        {
+            len = 1;
+        }
+        if (cursorPosition.X < 0 || cursorPosition.X >= Screen.Width)
+        {
+            cursorPosition = new GridCoordinate(0, cursorPosition.Y);
+        }
+        if (cursorPosition.X + len > Screen.Width)
+        {
+            len = Screen.Width - cursorPosition.X;
+        }
+        Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
+        Screen.Print(ColorEnum.Grey, buf, cursorPosition.Y, cursorPosition.X);
+        while (!done && !Shutdown)
+        {
+            Screen.Goto(cursorPosition.Y, cursorPosition.X + k);
+            Screen.UpdateScreen();
+            i = GetAndRecordKeystroke();
+            switch (i)
+            {
+                case '\x1b':
+                    k = 0;
+                    done = true;
+                    break;
+
+                case '\n':
+                case '\r':
+                    k = buf.Length;
+                    done = true;
+                    break;
+
+                case (char)8:
+                    if (k > 0)
+                    {
+                        k--;
+                    }
+                    buf = buf.Substring(0, k);
+                    break;
+
+                default:
+                    if (k < len && (char.IsLetterOrDigit(i) || i == ' ' || char.IsPunctuation(i)))
+                    {
+                        buf = buf.Substring(0, k) + i;
+                        k++;
+                    }
+                    break;
+            }
+            Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
+            Screen.Print(ColorEnum.Black, buf, cursorPosition.Y, cursorPosition.X);
+        }
+        if (i == '\x1b')
+        {
+            return null;
+        }
+        return buf;
+    }
+
+    public bool RenderPromptAndGetRecordedString(string prompt, out string buf, string initial, int len)
+    {
+        MsgPrint(string.Empty);
+        Screen.PrintLine(prompt, 0, 0);
+        string? buffer = RenderPromptAndGetRecordedString(initial, len);
+        buf = buffer;
+        MsgPrint(null);
+        if (buffer == null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Gets a keystroke and returns false, if the keystroke is Escape; true, otherwise.  
+    /// </summary>
+    /// <param name="prompt"></param>
+    /// <param name="value">Returns true, if the keystroke is "1"; false, if the keystroke is "0"</param>
+    /// <param name="defaultValue"></param>
+    /// <returns></returns>
+    public bool RenderPromptAndGetRecordedBoolean(string prompt, out bool value, bool defaultValue = false)
+    {
+        value = false;
+        char text = defaultValue ? '1' : '0';
+        if (!RenderPromptAndGetRecordedKeystroke(prompt, out text))
+        {
+            return false;
+        }
+        if (text == '0')
+        {
+            value = false;
+            return true;
+        }
+        if (text == '1')
+        {
+            value = true;
+            return true;
+        }
+        value = defaultValue;
+        return true;
+    }
+    public bool RenderPromptAndGetRecordedInteger(string prompt, int defaultValue, out int? value)
+    {
+        return RenderPromptAndGetRecordedInteger(prompt, defaultValue, 9, out value);
+    }
+
+    public bool RenderPromptAndGetRecordedInteger(string prompt, int defaultValue, int maxLength, out int? value)
+    {
+        value = null;
+        if (!RenderPromptAndGetRecordedString(prompt, out string tmpVal, $"{defaultValue}", maxLength))
+        {
+            return false;
+        }
+        if (!int.TryParse(tmpVal, out int tmpInt))
+        {
+            return false;
+        }
+        value = tmpInt;
+        return true;
+    }
+
+    public bool RenderPromptAndGetRecordedKeystroke(string prompt, out char command)
+    {
+        MsgPrint(string.Empty);
+        if (prompt.Length > 1)
+        {
+            prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
+        }
+        Screen.PrintLine(prompt, 0, 0);
+        command = GetAndRecordKeystroke();
+        MsgPrint(null);
+        return command != '\x1b';
+    }
+
+    /// <summary>
+    /// Returns the queue of keystrokes as provided by the console.  Artificial keystrokes are not inserted into this queue.  Artificial keystrokes take precedence over the keystrokes from the console.
+    /// </summary>
+    private Queue<char> KeyQueue;
+
+    /// <summary>
+    /// Returns the buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.  These artifical keypresses are used only for conversion of 
+    /// </summary>
+    private string ArtificialKeystrokeBuffer = "";
+
+    public char GetAndRecordKeystroke(bool disableArtificialKeyBuffer = false, bool nonBlocking = false)
+    {
+        (char keystroke, bool fromConsole) = GetKeystroke(disableArtificialKeyBuffer, nonBlocking);
+        if (fromConsole)
+        {
+            RecordReplayStep(keystroke);
+        }
+        return keystroke;
+    }
+
+    /// <summary>
+    /// Returns the next keystroke from either the artificial keystroke buffer, or the <see cref="ConsoleViewPort"/>.  The artificial keystroke buffer will always be processed before the <see cref="ConsoleViewPort"/>
+    /// keystrokes are retrieved.
+    /// </summary>
+    /// <returns>The next key pressed.</returns>
+    public (char keystroke, bool fromConsole) GetKeystroke(bool disableArtificialKeyBuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
+    {
+        /// <summary>
+        /// Attempts to gets a keypress from the <see cref="ConsoleViewport"/> queue.  Returns true, if a keypress was returned.  Returns false, if the <paramref name="wait"/> is true and the <see cref="ConsoleViewPort"/>
+        /// queue is empty.
+        /// </summary>
+        /// <param name="ch"> The next key from the queue </param>
+        /// <param name="wait"> Whether to wait for a key if one isn't already available </param>
+        /// <param name="take"> Whether to take the keypress out of the queue </param>
+        /// <returns> True if a keypress was available, false otherwise </returns>
+        bool GetKeypress(out char ch, bool nonBlocking)
+        {
+            /// <summary>
+            /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort"/> and updates the <see cref="LastInputReceived"/> property./>
+            /// </summary>
+            /// <param name="k"> The keypress to add </param>
+            void TryEnqueueKey()
+            {
+                char? k = null;
+
+                // Check to see if we are in playback mode.
+                if (IsInReplayMode)
+                {
+                    // Yes, we are in replay mode.  Retrieve the replay step that needs to be replayed.  This is a non-destructive (non-dequeue) peek.  We only increment the replay index pointer.
+                    GameReplayStep gameReplayStep = ReplayQueue.Dequeue();
+
+                    // Compute how much elapsed time occurred since the last keystroke.
+                    TimeSpan keystrokeElapsedTime = (replayPreviousKeystrokeDateTime is null) ? TimeSpan.Zero : gameReplayStep.DateTime - replayPreviousKeystrokeDateTime.Value;
+                    replayPreviousKeystrokeDateTime = gameReplayStep.DateTime;
+
+                    // Retrieve the current date and time for the computations.
+                    DateTime now = DateTime.Now.ToUniversalTime();
+
+                    // Determine when the next keystroke should be submitted.
+                    DateTime nextKeystrokeSubmitTime = replayPreviousKeystrokeDateTime.Value + keystrokeElapsedTime;
+
+                    // Compute how much time we need to wait and wait that time out.
+                    TimeSpan waitTime = nextKeystrokeSubmitTime - now;
+
+                    // Enforce a maximum elapsed keystroke wait time.
+                    if (MaxKeystrokeReplayElapsedTime.HasValue && waitTime > MaxKeystrokeReplayElapsedTime)
+                    {
+                        waitTime = MaxKeystrokeReplayElapsedTime.Value;
+                    }
+
+                    // Force a thread sleep.
+                    if (waitTime > TimeSpan.Zero)
+                    {
+                        Pause(waitTime);
+                    }
+
+                    // Deliver the keystroke.
+                    k = gameReplayStep.Keystroke;
+
+                    // Perform replay verification.
+                    if (_mainSequence.CurrentSeed != gameReplayStep.Seed)
+                    {
+                        throw new InvalidStepSeedReplayVerificationFailureException(_mainSequence.CurrentSeed, gameReplayStep.Seed, gameReplayStep.Keystroke, gameReplayStep.DateTime, ReplayQueue.Count);
+                    }
+
+                    // Update the running keystroke submit time.  If the wait time was shortened due to exceeding the maximum elapsed time, we set the time to the target time.
+                    replayPreviousKeystrokeDateTime = nextKeystrokeSubmitTime;
+
+                    // Check the replay mode, if replay is over.
+                    if (ReplayQueue.Count == 0 && CloseAfterReplay)
+                    {
+                        Shutdown = true;
+                    }
+                }
+                else
+                {
+                    // Wait for a keystroke from the console and record it and the current date and time for replay.
+                    k = ConsoleViewPort.GetKey();
+                }
+
+                // Do we have anything to enqueue?
+                if (k.HasValue)
+                {
+                    KeyQueue.Enqueue(k.Value);
+                    LastInputReceived = DateTime.Now.ToUniversalTime();
+                    ConsoleViewPort.InputReceived();
+                }
+            }
+
+            ch = '\0';
+
+            if (!nonBlocking)
+            {
+                UpdateScreen();
+            }
+
+            // If this key queue is empty, attempt to fill it at least once.
+            if (KeyQueue.Count == 0)
+            {
+                TryEnqueueKey();
+            }
+
+            // Check for blocking mode.
+            while (KeyQueue.Count == 0 && !nonBlocking && !Shutdown)
+            {
+                Thread.Sleep(5);
+                TryEnqueueKey();
+            }
+
+            // Take the next keystroke out of the queue and return it.
+            return KeyQueue.TryDequeue(out ch);
+        }
+
+        // Retrieve the IsInReplayMode value at the beginning.  The retrieval process will turn off the replay mode for the last keystroke.  This prevents the last keystroke
+        // from being recorded.
+        bool fromReplay = IsInReplayMode;
+
+        char ch = '\0';
+        if (!disableArtificialKeyBuffer && ArtificialKeystrokeBuffer.Length > 0)
+        {
+            ch = ArtificialKeystrokeBuffer[0];
+            ArtificialKeystrokeBuffer = ArtificialKeystrokeBuffer.Remove(0, 1);
+            HideCursorOnFullScreenInkey = false;
+            return (ch, false);
+        }
+        bool previousCursorVisible = Screen.CursorVisible;
+        if (!nonBlocking && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
+        {
+            Screen.CursorVisible = true;
+        }
+        while (ch == '\0' && !Shutdown)
+        {
+            if (nonBlocking)
+            {
+                if (GetKeypress(out char kk, true))
+                {
+                    // If a key was retrieved, use it.
+                    ch = kk;
+                }
+                break;
+            }
+            GetKeypress(out ch, false);
+            if (ch == 29)
+            {
+                ch = '\0';
+                continue;
+            }
+            if (ch == '`')
+            {
+                ch = '\x1b';
+            }
+            if (ch == 30)
+            {
+                ch = '\0';
+            }
+        }
+
+        // Restore the cursor visibility.
+        Screen.CursorVisible = previousCursorVisible;
+
+        HideCursorOnFullScreenInkey = false;
+        return (ch, !fromReplay);
+    }
+
+    /// <summary>
+    /// Appends a keystroke to the end of the artificial keystroke buffer.
+    /// </summary>
+    /// <param name="c"></param>
+    public void EnqueueArtificialKeystroke(char c)
+    {
+        ArtificialKeystrokeBuffer += c;
+    }
+    #endregion
+
     #region WIP Methods Not Yet Categorized
     /// <summary>
     /// Returns true, if the player successfully avoids theft.  This is based on the player's dexterity and experience level, as well as whether the player has anti-theft protection.
@@ -1581,8 +1947,6 @@ internal class Game : IGameSerialize
     /// </summary>
     public bool HideCursorOnFullScreenInkey;
 
-    public Queue<char> KeyQueue;
-
     /// <summary>
     /// The current contents of the game screen.
     /// </summary>
@@ -1591,11 +1955,6 @@ internal class Game : IGameSerialize
     /// is supplied at the play game stage.
     /// </remarks>
     public Window? Screen = null;
-
-    /// <summary>
-    /// A buffer of artificial keypresses.  Keys in this buffer will be read from by the Inkey method before the keyboard queue is read.  These artifical keypresses are used only for conversion of 
-    /// </summary>
-    public string _artificialKeyBuffer = "";
 
     private string[][] _keymapAct { get; set; }
 
@@ -2029,45 +2388,6 @@ internal class Game : IGameSerialize
     public static JsonSerializerOptions GetJsonSerializerOptions()
     {
         return new JsonSerializerOptions() { IncludeFields = true };
-    }
-
-    public bool GetBool(string prompt, out bool value)
-    {
-        value = false;
-        if (!GetCom(prompt, out char text))
-        {
-            return false;
-        }
-        if (text == '0')
-        {
-            value = false;
-            return true;
-        }
-        if (text == '1')
-        {
-            value = true;
-            return true;
-        }
-        return false;
-    }
-    public bool GetInt(string prompt, int defaultValue, out int? value)
-    {
-        return GetInt(prompt, defaultValue, 9, out value);
-    }
-
-    public bool GetInt(string prompt, int defaultValue, int maxLength, out int? value)
-    {
-        value = null;
-        if (!GetString(prompt, out string tmpVal, $"{defaultValue}", maxLength))
-        {
-            return false;
-        }
-        if (!int.TryParse(tmpVal, out int tmpInt))
-        {
-            return false;
-        }
-        value = tmpInt;
-        return true;
     }
 
     public void StorePrtGold()
@@ -3816,8 +4136,6 @@ internal class Game : IGameSerialize
         CameFrom = LevelStartEnum.StartRandom;
         DungeonGenerator.GenerateNewLevel();
     }
-
-    public bool IsInReplayMode => ReplayQueue.Count > 0;
     public Store? FindHomeStore(Town town) => Array.Find(town.Stores, store => store.GetType() == typeof(HomeStoreFactory));
 
     public void MoveHouse(Town oldTown, Town newTown)
@@ -8155,7 +8473,7 @@ internal class Game : IGameSerialize
         if (tile.FeatureType.IsShop)
         {
             Disturb(false);
-            _artificialKeyBuffer += SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar;
+            ArtificialKeystrokeBuffer += SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar;
         }
         // If we've just stepped on an unknown trap then activate it
         else if (tile.FeatureType.IsInvisibleTrap)
@@ -8276,22 +8594,8 @@ internal class Game : IGameSerialize
                     monster.IsPet = false;
                 }
                 // Apply damage of the correct type to the monster
-                switch (mutation.MutationAttackType)
-                {
-                    case MutationAttackTypeEnum.Physical:
-                        monsterDies = DamageMonster(monster, damage, out fear, "");
-                        break;
+                mutation.MutationAttackType.ApplyToMonster(monster, damage, out fear, out monsterDies);
 
-                    case MutationAttackTypeEnum.Poison:
-                        Projectile poisonProjectile = SingletonRepository.Get<Projectile>(nameof(PoisonGasProjectile));
-                        poisonProjectile.Fire(null, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
-                        break;
-
-                    case MutationAttackTypeEnum.Hellfire:
-                        Projectile hellFireProjectile = SingletonRepository.Get<Projectile>(nameof(HellfireProjectile));
-                        hellFireProjectile.Fire(null, 0, monster.MapY, monster.MapX, damage, kill: true, jump: false, beam: false, thru: false, hide: false, grid: false, item: false, stop: false);
-                        break;
-                }
                 // The monster might hurt when we touch it
                 TouchZapPlayer(monster);
             }
@@ -8766,7 +9070,7 @@ internal class Game : IGameSerialize
         string spellNoun = CharacterClass.SpellNoun;
         ScreenBuffer? savedScreen = null;
         string outVal = $"({spellNoun}s {0.IndexToLetter()}-{(okaySpells.Length - 1).IndexToLetter()}, *=List, ESC=exit) {prompt} which {spellNoun}? ";
-        while (selectedSpell == null && GetCom(outVal, out char choice) && !Shutdown)
+        while (selectedSpell == null && RenderPromptAndGetRecordedKeystroke(outVal, out char choice) && !Shutdown)
         {
             if (choice == ' ' || choice == '*' || choice == '?')
             {
@@ -9663,84 +9967,6 @@ internal class Game : IGameSerialize
         return false;
     }
 
-    /// GUI
-    /// <summary>
-    /// Prints a 'press any key' message and waits for a key press
-    /// </summary>
-    /// <param name="row"> The row on which to print the message </param>
-    public void AnyKey(int row)
-    {
-        Screen.PrintLine("", row, 0);
-        Screen.Print(ColorEnum.Orange, "[Press any key to continue]", row, 27);
-        GetAndRecordKeystroke();
-        Screen.PrintLine("", row, 0);
-    }
-
-    public string? AskforAux(string initial, int len)
-    {
-        string buf = initial;
-        char i = '\0';
-        int k = 0;
-        bool done = false;
-        GridCoordinate cursorPosition = Screen.CursorPosition;
-        if (len < 1)
-        {
-            len = 1;
-        }
-        if (cursorPosition.X < 0 || cursorPosition.X >= Screen.Width)
-        {
-            cursorPosition = new GridCoordinate(0, cursorPosition.Y);
-        }
-        if (cursorPosition.X + len > Screen.Width)
-        {
-            len = Screen.Width - cursorPosition.X;
-        }
-        Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
-        Screen.Print(ColorEnum.Grey, buf, cursorPosition.Y, cursorPosition.X);
-        while (!done && !Shutdown)
-        {
-            Screen.Goto(cursorPosition.Y, cursorPosition.X + k);
-            Screen.UpdateScreen();
-            i = GetAndRecordKeystroke();
-            switch (i)
-            {
-                case '\x1b':
-                    k = 0;
-                    done = true;
-                    break;
-
-                case '\n':
-                case '\r':
-                    k = buf.Length;
-                    done = true;
-                    break;
-
-                case (char)8:
-                    if (k > 0)
-                    {
-                        k--;
-                    }
-                    buf = buf.Substring(0, k);
-                    break;
-
-                default:
-                    if (k < len && (char.IsLetterOrDigit(i) || i == ' ' || char.IsPunctuation(i)))
-                    {
-                        buf = buf.Substring(0, k) + i;
-                        k++;
-                    }
-                    break;
-            }
-            Screen.Erase(cursorPosition.Y, cursorPosition.X, len);
-            Screen.Print(ColorEnum.Black, buf, cursorPosition.Y, cursorPosition.X);
-        }
-        if (i == '\x1b')
-        {
-            return null;
-        }
-        return buf;
-    }
-
     public bool GetCheck(string prompt)
     {
         int i = 0;
@@ -9767,19 +9993,6 @@ internal class Game : IGameSerialize
         }
         MsgPrint(null);
         return i == 'Y' || i == 'y' || i == 13;
-    }
-
-    public bool GetCom(string prompt, out char command)
-    {
-        MsgPrint(string.Empty);
-        if (prompt.Length > 1)
-        {
-            prompt = char.ToUpper(prompt[0]) + prompt.Substring(1);
-        }
-        Screen.PrintLine(prompt, 0, 0);
-        command = GetAndRecordKeystroke();
-        MsgPrint(null);
-        return command != '\x1b';
     }
 
     public int GetKeymapDir(char ch)
@@ -9828,7 +10041,7 @@ internal class Game : IGameSerialize
             amt = max;
         }
         string def = amt.ToString();
-        if (!GetString($"Quantity (1-{max}): ", out string buf, def, 6))
+        if (!RenderPromptAndGetRecordedString($"Quantity (1-{max}): ", out string buf, def, 6))
         {
             return 0;
         }
@@ -9853,20 +10066,6 @@ internal class Game : IGameSerialize
             amt = 0;
         }
         return amt;
-    }
-
-    public bool GetString(string prompt, out string buf, string initial, int len)
-    {
-        MsgPrint(string.Empty);
-        Screen.PrintLine(prompt, 0, 0);
-        string? buffer = AskforAux(initial, len);
-        buf = buffer;
-        MsgPrint(null);
-        if (buffer == null)
-        {
-            return false;
-        }
-        return true;
     }
 
     /// <summary>
@@ -9933,7 +10132,7 @@ internal class Game : IGameSerialize
         while (!Shutdown)
         {
             HideCursorOnFullScreenInkey = true;
-            (char cmd, bool isArtificial, bool fromReplay) = GetKeystroke();
+            (char cmd, bool fromConsole) = GetKeystroke();
             MsgPrint(null);
             if (enablePopup && cmd == '\x1b')
             {
@@ -9942,7 +10141,7 @@ internal class Game : IGameSerialize
             }
             else
             {
-                if (!isArtificial && !fromReplay)
+                if (fromConsole)
                 {
                     RecordReplayStep(cmd);
                 }
@@ -9988,7 +10187,7 @@ internal class Game : IGameSerialize
                     }
                     if (cmd == ' ' || cmd == '\n' || cmd == '\r')
                     {
-                        if (!GetCom("Command: ", out cmd))
+                        if (!RenderPromptAndGetRecordedKeystroke("Command: ", out cmd))
                         {
                             CommandArgument = 0;
                             continue;
@@ -9997,14 +10196,14 @@ internal class Game : IGameSerialize
                 }
                 else if (cmd == '\\')
                 {
-                    GetCom("Command: ", out cmd);
+                    RenderPromptAndGetRecordedKeystroke("Command: ", out cmd);
                 }
             }
             string act = _keymapAct[mode][cmd];
             if (!string.IsNullOrEmpty(act))
             {
                 cmd = act[0];
-                _artificialKeyBuffer = act.Substring(1);
+                ArtificialKeystrokeBuffer = act.Substring(1);
             }
             if (cmd == 0)
             {
@@ -10023,197 +10222,6 @@ internal class Game : IGameSerialize
     internal void SetBackground(BackgroundImageEnum image)
     {
         ConsoleViewPort.SetBackground(image);
-    }
-
-    /// <summary>
-    /// Returns the maximum elapsed time to submit a replay keystroke or null, to impose no limit.
-    /// </summary>
-    public TimeSpan? MaxKeystrokeReplayElapsedTime { get; } = new TimeSpan(0, 0, 0, 0, 0);
-
-    /// <summary>
-    /// Records a keystroke to the replay log, along with the current date and time and, in debug builds, the current random seed for the sequence for replay verification.  This information is used to replay the keystrokes with the same timing and random seed in order to reproduce a play session for debugging purposes.
-    /// </summary>
-    /// <param name="keystroke"></param>
-    private void RecordReplayStep(char keystroke)
-    {
-        if (ReplayPersistentStorage is not null)
-        {
-            ReplayPersistentStorage.WriteStep(DateTime.Now.ToUniversalTime(), keystroke, _mainSequence.CurrentSeed);
-        }
-    }
-
-    public char GetAndRecordKeystroke(bool disableArtificialKeyBuffer = false, bool nonBlocking = false)
-    {
-        (char keystroke, bool isArtificial, bool fromReplay) = GetKeystroke(disableArtificialKeyBuffer, nonBlocking);
-        if (!isArtificial && !fromReplay)
-        {
-            RecordReplayStep(keystroke);
-        }
-        return keystroke;
-    }
-
-    /// <summary>
-    /// Returns the next keystroke from either the artificial keystroke buffer, or the <see cref="ConsoleViewPort"/>.  The artificial keystroke buffer will always be processed before the <see cref="ConsoleViewPort"/>
-    /// keystrokes are retrieved.
-    /// </summary>
-    /// <returns>The next key pressed.</returns>
-    public (char keystroke, bool isArtificial, bool fromReplay) GetKeystroke(bool disableArtificialKeyBuffer = false, bool nonBlocking = false) // TODO: Change the signature to return null when Shutdown == true
-    {
-        /// <summary>
-        /// Attempts to gets a keypress from the <see cref="ConsoleViewport"/> queue.  Returns true, if a keypress was returned.  Returns false, if the <paramref name="wait"/> is true and the <see cref="ConsoleViewPort"/>
-        /// queue is empty.
-        /// </summary>
-        /// <param name="ch"> The next key from the queue </param>
-        /// <param name="wait"> Whether to wait for a key if one isn't already available </param>
-        /// <param name="take"> Whether to take the keypress out of the queue </param>
-        /// <returns> True if a keypress was available, false otherwise </returns>
-        bool GetKeypress(out char ch, bool nonBlocking)
-        {
-            /// <summary>
-            /// Adds a keypress to the internal queue, sends a notification to the <see cref="ConsoleViewPort"/> and updates the <see cref="LastInputReceived"/> property./>
-            /// </summary>
-            /// <param name="k"> The keypress to add </param>
-            void TryEnqueueKey()
-            {
-                char? k = null;
-
-                // Check to see if we are in playback mode.
-                if (IsInReplayMode)
-                {
-                    // Yes, we are in replay mode.  Retrieve the replay step that needs to be replayed.  This is a non-destructive (non-dequeue) peek.  We only increment the replay index pointer.
-                    GameReplayStep gameReplayStep = ReplayQueue.Dequeue();
-
-                    // Compute how much elapsed time occurred since the last keystroke.
-                    TimeSpan keystrokeElapsedTime = (replayPreviousKeystrokeDateTime is null) ? TimeSpan.Zero : gameReplayStep.DateTime - replayPreviousKeystrokeDateTime.Value;
-                    replayPreviousKeystrokeDateTime = gameReplayStep.DateTime;
-
-                    // Retrieve the current date and time for the computations.
-                    DateTime now = DateTime.Now.ToUniversalTime();
-
-                    // Determine when the next keystroke should be submitted.
-                    DateTime nextKeystrokeSubmitTime = replayPreviousKeystrokeDateTime.Value + keystrokeElapsedTime;
-
-                    // Compute how much time we need to wait and wait that time out.
-                    TimeSpan waitTime = nextKeystrokeSubmitTime - now;
-
-                    // Enforce a maximum elapsed keystroke wait time.
-                    if (MaxKeystrokeReplayElapsedTime.HasValue && waitTime > MaxKeystrokeReplayElapsedTime)
-                    {
-                        waitTime = MaxKeystrokeReplayElapsedTime.Value;
-                    }
-
-                    // Force a thread sleep.
-                    if (waitTime > TimeSpan.Zero)
-                    {
-                        Pause(waitTime);
-                    }
-
-                    // Deliver the keystroke.
-                    k = gameReplayStep.Keystroke;
-
-                    // Perform replay verification.
-                    if (_mainSequence.CurrentSeed != gameReplayStep.Seed)
-                    {
-                        throw new InvalidStepSeedReplayVerificationFailureException(_mainSequence.CurrentSeed, gameReplayStep.Seed, gameReplayStep.Keystroke, gameReplayStep.DateTime, ReplayQueue.Count);
-                    }
-
-                    // Update the running keystroke submit time.  If the wait time was shortened due to exceeding the maximum elapsed time, we set the time to the target time.
-                    replayPreviousKeystrokeDateTime = nextKeystrokeSubmitTime;
-
-                    // Check the replay mode, if replay is over.
-                    if (ReplayQueue.Count == 0 && CloseAfterReplay)
-                    {
-                        Shutdown = true;
-                    }
-                }
-                else
-                {
-                    // Wait for a keystroke from the console and record it and the current date and time for replay.
-                    k = ConsoleViewPort.GetKey();
-                }
-
-                // Do we have anything to enqueue?
-                if (k.HasValue) 
-                {
-                    KeyQueue.Enqueue(k.Value);
-                    LastInputReceived = DateTime.Now.ToUniversalTime();
-                    ConsoleViewPort.InputReceived();
-                }
-            }
-
-            ch = '\0';
-
-            if (!nonBlocking)
-            {
-                UpdateScreen();
-            }
-
-            // If this key queue is empty, attempt to fill it at least once.
-            if (KeyQueue.Count == 0)
-            {
-                TryEnqueueKey();
-            }
-
-            // Check for blocking mode.
-            while (KeyQueue.Count == 0 && !nonBlocking && !Shutdown)
-            {
-                Thread.Sleep(5);
-                TryEnqueueKey();
-            }
-
-            // Take the next keystroke out of the queue and return it.
-            return KeyQueue.TryDequeue(out ch);
-        }
-
-        // Retrieve the IsInReplayMode value at the beginning.  The retrieval process will turn off the replay mode for the last keystroke.  This prevents the last keystroke
-        // from being recorded.
-        bool fromReplay = IsInReplayMode;
-
-        char ch = '\0';
-        if (!disableArtificialKeyBuffer && _artificialKeyBuffer.Length > 0)
-        {
-            ch = _artificialKeyBuffer[0];
-            _artificialKeyBuffer = _artificialKeyBuffer.Remove(0, 1);
-            HideCursorOnFullScreenInkey = false;
-            return (ch, true, fromReplay);
-        }
-        bool previousCursorVisible = Screen.CursorVisible;
-        if (!nonBlocking && (!HideCursorOnFullScreenInkey || FullScreenOverlay))
-        {
-            Screen.CursorVisible = true;
-        }
-        while (ch == '\0' && !Shutdown)
-        {
-            if (nonBlocking)
-            {
-                if (GetKeypress(out char kk, true))
-                {
-                    // If a key was retrieved, use it.
-                    ch = kk;
-                }
-                break;
-            }
-            GetKeypress(out ch, false);
-            if (ch == 29)
-            {
-                ch = '\0';
-                continue;
-            }
-            if (ch == '`')
-            {
-                ch = '\x1b';
-            }
-            if (ch == 30)
-            {
-                ch = '\0';
-            }
-        }
-
-        // Restore the cursor visibility.
-        Screen.CursorVisible = previousCursorVisible;
-
-        HideCursorOnFullScreenInkey = false;
-        return (ch, false, fromReplay);
     }
 
     /// <summary>
@@ -10263,7 +10271,7 @@ internal class Game : IGameSerialize
                 table.HighlightRow(selectedIndex);
                 table.Render(this, consoleWindow, new ConsoleTopLeftAlignment());
 
-                if (!GetCom(prompt, out char ch))
+                if (!RenderPromptAndGetRecordedKeystroke(prompt, out char ch))
                 {
                     return default;
                 }
@@ -11344,7 +11352,7 @@ internal class Game : IGameSerialize
         int dir = CommandDirection;
         while (dir == 0)
         {
-            if (!GetCom("Direction (Escape to cancel)? ", out char ch))
+            if (!RenderPromptAndGetRecordedKeystroke("Direction (Escape to cancel)? ", out char ch))
             {
                 break;
             }
@@ -11385,7 +11393,7 @@ internal class Game : IGameSerialize
             {
                 p = "Direction ('5' for target, '*' to re-target, Escape to cancel)? ";
             }
-            if (!GetCom(p, out char command))
+            if (!RenderPromptAndGetRecordedKeystroke(p, out char command))
             {
                 break;
             }
@@ -12592,7 +12600,7 @@ internal class Game : IGameSerialize
         while (!Shutdown)
         {
             Screen.Goto(2, col);
-            string? newName = AskforAux(PlayerName.StringValue, 12);
+            string? newName = RenderPromptAndGetRecordedString(PlayerName.StringValue, 12);
             if (newName != null)
             {
                 PlayerName.StringValue = newName;
@@ -15966,7 +15974,7 @@ internal class Game : IGameSerialize
                 Screen.Print(ColorEnum.White, $" {keys[i].ToString().ToLower()}) {towns[keys[i]].Name}".PadRight(60), i + 1, 20);
             }
             Screen.Print(ColorEnum.White, "".PadRight(60), keys.Count + 1, 20);
-            while (GetCom(outVal, out char choice))
+            while (RenderPromptAndGetRecordedKeystroke(outVal, out char choice))
             {
                 choice = choice.ToString().ToUpper()[0];
                 foreach (var c in keys)

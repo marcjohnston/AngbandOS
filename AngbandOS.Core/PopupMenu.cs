@@ -64,7 +64,7 @@ internal class PopupMenu
                 }
             }
             game.HideCursorOnFullScreenInkey = true;
-            (char k, bool _, bool _) = game.GetKeystroke(true);
+            (char k, bool _) = game.GetKeystroke(true);
 
             switch (k)
             {

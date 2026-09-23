@@ -6,9 +6,9 @@
 // copies. Other copyrights may also apply.”
 namespace AngbandOS.Core.Scripts;
 
-internal class StayAndPickupScript : UniversalScript, IGetKey
+internal class StayScript : UniversalScript, IGetKey
 {
-    private StayAndPickupScript(Game game) : base(game) { }
+    private StayScript(Game game) : base(game) { }
 
     /// <summary>
     /// Returns the entity serialized into a Json string.  Returns an empty string by default.
@@ -21,7 +21,7 @@ internal class StayAndPickupScript : UniversalScript, IGetKey
     public void Bind(RestoreGameState? restoreGameState) { }
 
     /// <summary>
-    /// Executes the stay and pickup script.
+    /// Executes the stay script.
     /// </summary>
     /// <returns></returns>
     public override void ExecuteScript()
@@ -36,14 +36,14 @@ internal class StayAndPickupScript : UniversalScript, IGetKey
         }
 
         // Pick up items if we should
-        Game.StepOnGrid(true);
+        Game.StepOnGrid(false);
 
         // If we're in a shop doorway, enter the shop
         GridTile tile = Game.Grid[Game.MapY.IntValue][Game.MapX.IntValue];
         if (tile.FeatureType.IsShop)
         {
             Game.Disturb(false);
-            Game._artificialKeyBuffer += Game.SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar;
+            Game.EnqueueArtificialKeystroke(Game.SingletonRepository.Get<GameCommand>(nameof(EnterStoreGameCommand)).KeyChar);
         }
     }
 }
