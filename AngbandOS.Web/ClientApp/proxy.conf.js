@@ -4,7 +4,7 @@ const https = require('https'); // load Node's `https` module (used below to cre
 
 // If ASPNETCORE_HTTPS_PORT set, target HTTPS localhost with that port else if ASPNETCORE_URLS set, use its first URL; otherwise fallback to this default
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
-  env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:7091';
+  env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:7028';
 
 // Create agents with no artificial socket limit so many concurrent websocket connections are allowed.
 const httpAgent = new http.Agent({ keepAlive: true, maxSockets: Infinity });

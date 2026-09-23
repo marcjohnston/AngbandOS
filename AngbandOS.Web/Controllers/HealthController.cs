@@ -1,5 +1,4 @@
-﻿
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Text.Json;
 using AngbandOS.Core.Interface;
 using AngbandOS.Core.Interface.Configuration;
@@ -18,39 +17,32 @@ namespace AngbandOS.Web.Controllers
     [Route("apiv1")]
     [ApiController]
     [Produces("application/json")]
-
-    public class DbPingController : ControllerBase
+    public class HealthController : ControllerBase
     {
         private readonly ApplicationDbContext DbContext;
 
-        public DbPingController(ApplicationDbContext dbContext)
+        public HealthController(ApplicationDbContext dbContext)
         {
             DbContext = dbContext;
         }
 
         [HttpGet]
-        [Route("db-ping")]
+        [Route("ping")]
         [Produces("application/json")]
         [AllowAnonymous]
-
-        public async Task<ActionResult<string>> DbPing()
+        public async Task<ActionResult<string>> Health()
         {
+            bool dbOk;
             try
             {
-                bool canConnect = await DbContext.Database.CanConnectAsync();
-                if (canConnect)
-                {
-                    return StatusCode(200, "pk");
-                }
-                else
-                {
-                    return StatusCode(503, "unavailable");
-                }
+                dbOk = await DbContext.Database.CanConnectAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(503, "unavailable");
+                Console.WriteLine($"Database health check failed: {ex}");
+                dbOk = false;
             }
+            return dbOk ? Ok("ok") : StatusCode(503, "unavailable");
         }
     }
 }
