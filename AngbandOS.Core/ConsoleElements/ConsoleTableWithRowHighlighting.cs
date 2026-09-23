@@ -44,7 +44,7 @@ internal class ConsoleTableWithRowHighlighting<T> : ConsoleTable
         }
     }
 
-    public ConsoleTableWithRowHighlighting(T[] rowSource, params (string Name, Func<T, string> GetRowValue)[] columns) : this(rowSource, ColorEnum.White, ColorEnum.BrightRed, columns) { }
+    public ConsoleTableWithRowHighlighting(T[] rowSource,  params (string Name, Func<T, string> GetRowValue)[] columns) : this(rowSource, ColorEnum.White, ColorEnum.BrightRed, columns) { }
 
     public ConsoleTableWithRowHighlighting(T[] rowSource, ColorEnum defaultRowColor, ColorEnum highlightRowColor, params (string Name, Func<T, string> GetRowValue)[] columns)
     {
