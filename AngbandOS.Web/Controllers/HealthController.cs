@@ -1,16 +1,6 @@
-﻿using System.Security.Claims;
-using System.Text.Json;
-using AngbandOS.Core.Interface;
-using AngbandOS.Core.Interface.Configuration;
-using AngbandOS.Core.Interface.Metadata;
-using AngbandOS.PersistentStorage;
-using AngbandOS.Web.Data;
-using AngbandOS.Web.Interface;
-using AngbandOS.Web.Services;
+﻿using AngbandOS.Web.Data;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace AngbandOS.Web.Controllers
 {
@@ -28,20 +18,10 @@ namespace AngbandOS.Web.Controllers
 
         [HttpGet]
         [Route("ping")]
-        [Produces("application/json")]
         [AllowAnonymous]
         public async Task<ActionResult<string>> Health()
         {
-            bool dbOk;
-            try
-            {
-                dbOk = await DbContext.Database.CanConnectAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Database health check failed: {ex}");
-                dbOk = false;
-            }
+            bool dbOk = await DbContext.Database.CanConnectAsync(HttpContext.RequestAborted);
             return dbOk ? Ok("ok") : StatusCode(503, "unavailable");
         }
     }

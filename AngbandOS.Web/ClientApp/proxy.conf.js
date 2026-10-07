@@ -30,7 +30,8 @@ const PROXY_CONFIG = [
       "/apiv1/spectators-hub",
       "/apiv1/game-messages-hub",
       "/apiv1/service-hub",
-      "/apiv1/chat-hub"
+      "/apiv1/chat-hub",
+      "/apiv1/ping"
     ],
     target: target, // forward matching requests to the `target` URL computed above
     secure: false, // disable strict SSL verification for the target (useful for local self-signed certs)
