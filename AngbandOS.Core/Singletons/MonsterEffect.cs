@@ -159,7 +159,11 @@ internal abstract class MonsterEffect : IGetKey, ISaveGameState
         IdentifiedResultEnum notice = Apply(mPtr, dam, r);
 
         GridTile newGridTile = Game.Grid[mPtr.MapY][mPtr.MapX];
-        Game.UpdateMonsterVisibility(newGridTile.Monster, false);
+        Monster? tileMonster = newGridTile.Monster;
+        if (tileMonster is not null)
+        {
+            Game.UpdateMonsterVisibility(tileMonster, false);
+        }
         Game.ConsoleView.RefreshMapLocation(y, x);
         projectMn++;
         projectMx = mPtr.MapX;

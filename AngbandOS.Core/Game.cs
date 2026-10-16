@@ -2240,11 +2240,8 @@ internal class Game : ISaveGameState
 
     public void DeleteMonster(Monster mPtr)
     {
+        mPtr.IsDead = true;
         MonsterRace rPtr = mPtr.Race;
-        if (rPtr == null)
-        {
-            return;
-        }
         int y = mPtr.MapY;
         int x = mPtr.MapX;
         rPtr.CurNum--;
@@ -4767,10 +4764,6 @@ internal class Game : ISaveGameState
         int qIdx = 0;
         bool quest = false;
         MonsterRace rPtr = mPtr.Race;
-        if (rPtr == null)
-        {
-            return;
-        }
         bool visible = mPtr.IsVisible || rPtr.Unique;
         bool good = rPtr.DropGood;
         bool great = rPtr.DropGreat;
@@ -9826,9 +9819,17 @@ internal class Game : ISaveGameState
     {
         // The noise the player is making is based on their stealth score
         uint noise = 1u << (30 - SkillStealth);
-        // Go through all the monster slots on the level
-        foreach (Monster monster in MonsterList)
+
+        // Go through all the monster slots on the level.  We need to prevent the monster list from being modified while we're processing it, so we make a copy of the list to iterate through.
+        Monster[] monsterList = MonsterList.ToArray();
+        foreach (Monster monster in monsterList)
         {
+            // Do not process dead monsters.
+            if (monster.IsDead)
+            {
+                continue;
+            }
+
             // Keep count of how many are our friends
             if (monster.IsPet)
             {

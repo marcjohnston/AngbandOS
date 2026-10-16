@@ -19,6 +19,12 @@ internal class Monster : IItemContainer, ISaveGameState
     public int Energy;
 
     /// <summary>
+    /// Returns true, if the monster is dead; false, otherwise.  This property is set to true so that the <see cref="Game.ProcessAllMonsters"/> can 
+    /// skip processing dead monsters.
+    /// </summary>
+    public bool IsDead = false;
+
+    /// <summary>
     /// Returns the remaining health points for the monster.  A negative value (<0) means the monster is dead.
     /// </summary>
     private int _fearLevel;

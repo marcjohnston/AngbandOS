@@ -26,8 +26,13 @@ internal class CarnageScript : Script, IScript, ICastSpellScript
     /// <returns></returns>
     public void ExecuteScript()
     {
-        foreach (Monster mPtr in Game.MonsterList)
+        Monster[] monsterList = Game.MonsterList.ToArray();
+        foreach (Monster mPtr in monsterList)
         {
+            if (mPtr.IsDead)
+            {
+                continue;
+            }
             if (mPtr.DistanceFromPlayer <= Constants.MaxSight)
             {
                 Game.DeleteMonster(mPtr);
